@@ -57,7 +57,6 @@ public class RemoveGradeCommandTest {
 
         assertFalse(updatedPerson.getAssignment().containsKey(assignmentToRemove));
         assertEquals(originalPerson.getName(), updatedPerson.getName());
-        assertEquals(originalPerson.getPhone(), updatedPerson.getPhone());
         assertEquals(originalPerson.getEmail(), updatedPerson.getEmail());
         assertEquals(originalPerson.getTelegram(), updatedPerson.getTelegram());
         assertEquals(originalPerson.getGithub(), updatedPerson.getGithub());

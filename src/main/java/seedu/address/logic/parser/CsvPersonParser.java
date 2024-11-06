@@ -11,7 +11,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
@@ -32,18 +31,17 @@ public class CsvPersonParser {
 
             // Use parse fields using ParserUtil.
             Name name = ParserUtil.parseName(fields[0]);
-            Phone phone = ParserUtil.parsePhone(fields[1]);
-            Email email = ParserUtil.parseEmail(fields[2]);
-            Telegram telegram = ParserUtil.parseTelegram(fields[3]);
-            Github github = ParserUtil.parseGithub(fields[5]);
+            Email email = ParserUtil.parseEmail(fields[1]);
+            Telegram telegram = ParserUtil.parseTelegram(fields[2]);
+            Github github = ParserUtil.parseGithub(fields[4]);
 
             // Parse tags, assignments and week present.
-            Set<Tag> tags = CsvTagParser.parseTags(fields[4]);
-            Map<String, Assignment> assignment = CsvAssignmentParser.parseAssignment(fields[6], model);
-            Set<Integer> weeksPresent = CsvAttendanceParser.parseWeeksPresent(fields[7]);
+            Set<Tag> tags = CsvTagParser.parseTags(fields[3]);
+            Map<String, Assignment> assignment = CsvAssignmentParser.parseAssignment(fields[5], model);
+            Set<Integer> weeksPresent = CsvAttendanceParser.parseWeeksPresent(fields[6]);
 
             // Return person with given information from a row of data.
-            return new Person(name, phone, email, telegram, github, assignment, weeksPresent, tags);
+            return new Person(name, email, telegram, github, assignment, weeksPresent, tags);
 
         } catch (IllegalArgumentException | ParseException e) {
             throw new CommandException(e.getMessage());
