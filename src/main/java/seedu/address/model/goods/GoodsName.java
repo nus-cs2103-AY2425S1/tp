@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class GoodsName {
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Goods names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /**
      * The first character of the address must not be a whitespace,
@@ -20,9 +20,7 @@ public class GoodsName {
     private String name;
 
     /**
-     * Constructs a {@code Name}.
-     *
-     * @param name A valid name.
+     * Constructs a {@code GoodsName}.
      */
     public GoodsName(String goodsName) {
         requireNonNull(goodsName);
@@ -31,7 +29,7 @@ public class GoodsName {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid goods name.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);

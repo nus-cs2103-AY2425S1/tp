@@ -3,13 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -18,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -26,67 +23,61 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ReceiptLog;
+import seedu.address.model.goods.Goods;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalGoods;
+import seedu.address.testutil.TypicalGoodsReceipts;
 
-public class AddCommandTest {
+/**
+ * Contains unit tests for the {@code AddGoodsCommand}.
+ */
+public class AddGoodsCommandTest {
+    private static final Goods GOODS_TYPICAL = TypicalGoods.APPLE;
+    private static final GoodsReceipt GOODSRECEIPT_ALICE = TypicalGoodsReceipts.ALICE_RECEIPT;
+    private static final GoodsReceipt GOODSRECEIPT_BOB = TypicalGoodsReceipts.BOB_RECEIPT;
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddGoodsCommand(null, null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_goodsAccepted_success() throws CommandException {
+        ModelStubAcceptingGoodsAdded successModelStub = new ModelStubAcceptingGoodsAdded();
+        CommandResult result = new AddGoodsCommand(GOODS_TYPICAL, GOODSRECEIPT_ALICE).execute(successModelStub);
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertEquals(String.format(AddGoodsCommand.MESSAGE_SUCCESS, GOODS_TYPICAL),
+                result.getFeedbackToUser());
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddGoodsCommand addGoodsAliceCommand = new AddGoodsCommand(GOODS_TYPICAL, GOODSRECEIPT_ALICE);
+        AddGoodsCommand addGoodsBobCommand = new AddGoodsCommand(GOODS_TYPICAL, GOODSRECEIPT_BOB);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addGoodsAliceCommand.equals(addGoodsAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddGoodsCommand addGoodsAliceCommandCopy = new AddGoodsCommand(GOODS_TYPICAL, GOODSRECEIPT_ALICE);
+        assertTrue(addGoodsAliceCommand.equals(addGoodsAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addGoodsAliceCommand.equals(1.00));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addGoodsAliceCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different supplier -> returns false
+        assertFalse(addGoodsAliceCommand.equals(addGoodsBobCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        AddGoodsCommand addGoodsCommand = new AddGoodsCommand(GOODS_TYPICAL, GOODSRECEIPT_ALICE);
+        String expected = AddGoodsCommand.class.getCanonicalName() + "{toAdd=" + GOODS_TYPICAL + "}";
+        assertEquals(expected, addGoodsCommand.toString());
     }
 
     /**
@@ -174,11 +165,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -205,7 +191,7 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyReceiptLog getGoodsFiltered() {
-            throw new AssertionError("This method should not be called.");
+            return null;
         }
 
         @Override
@@ -215,11 +201,6 @@ public class AddCommandTest {
 
         @Override
         public void deleteGoods(GoodsReceipt goodsReceipt) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -243,45 +224,32 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public double getFilteredGoodsCostStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded() {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that always accepts the goods added.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
+    private class ModelStubAcceptingGoodsAdded extends ModelStub {
+        final ArrayList<GoodsReceipt> goodsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addGoods(GoodsReceipt goodsReceipt) {
+            requireNonNull(goodsReceipt);
+            goodsAdded.add(goodsReceipt);
         }
 
         @Override
@@ -289,5 +257,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }

@@ -37,6 +37,7 @@ LogicManager -> ClearCommand : execute(m)
 activate ClearCommand
 
 ClearCommand -> Model : setAddressBook(new AddressBook())
+ClearCommand -> Model : setGoods(new ReceiptLog())
 activate Model
 
 

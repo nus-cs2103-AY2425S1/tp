@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 
@@ -98,6 +97,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered person list with Goods Categories Tags Added **/
+    ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -115,13 +117,11 @@ public interface Model {
     List<Person> getPersonList();
 
     /**
-     * TODO: Add ReadOnly Feature to the parameter
      * Replaces goods data with the data in {@code goodsReceipt}.
      */
     void setGoods(ReadOnlyReceiptLog goodsReceipts);
 
     /**
-     * TODO: Add ReadOnly Feature to the parameter
      * Returns the goods list.
      */
     ReadOnlyReceiptLog getGoods();
@@ -138,10 +138,14 @@ public interface Model {
     void addGoods(GoodsReceipt goodsReceipt);
 
     /**
-     * Deletes all the goods which match the GoodsName given.
-     * @param goodsName The GoodsName indicating the goods to be deleted.
+     * Deletes the given good receipt.
      */
-    void deleteGoods(GoodsName goodsName);
+    void deleteGoods(GoodsReceipt goodsReceipt);
+
+    /**
+     * Finds a goods that satisfies the predicate.
+     */
+    Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate);
 
     /** Returns an unmodifiable view of the filtered goodsReceipt list */
     ObservableList<GoodsReceipt> getFilteredReceiptsList();

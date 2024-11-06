@@ -8,14 +8,15 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Name;
 
 /**
- *
+ * A utility class to help with building {@code GoodsReceipt} objects.
  */
 public class GoodsReceiptBuilder {
     public static final double DEFAULT_PRICE = 10.00;
     public static final int DEFAULT_QUANTITY = 1;
     public static final boolean DEFAULT_IS_DELIVERED = false;
-    public static final Name DEFAULT_SUPPLIER_NAME = new Name("Supplier");
+    public static final Name DEFAULT_SUPPLIER_NAME = new Name(PersonBuilder.DEFAULT_NAME);
     public static final GoodsName DEFAULT_GOODS_NAME = new GoodsName("Apple");
+    public static final GoodsCategories DEFAULT_GOODS_CATEGORY = GoodsCategories.CONSUMABLES;
     public static final Date DEFAULT_PROCUREMENT_DATE = new Date("2021-01-01 00:00");
     public static final Date DEFAULT_ARRIVAL_DATE = new Date("2021-01-01 00:00");
 

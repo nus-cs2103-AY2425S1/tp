@@ -8,6 +8,7 @@ import static seedu.address.storage.CsvConverters.GoodsDateConverter;
 import static seedu.address.storage.CsvConverters.PersonNameConverter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
@@ -77,6 +78,8 @@ public class GoodsReceipt {
                         boolean isDelivered, int quantity, double price) {
         requireAllNonNull(goods, quantity, procurementDate, arrivalDate, isDelivered);
         checkArgument(isValidProcurementDate(procurementDate));
+        checkArgument(isValidQuantity(quantity));
+        checkArgument(isValidPrice(price));
         this.supplierName = supplierName;
         this.goods = goods;
         this.procurementDate = procurementDate;
@@ -84,7 +87,29 @@ public class GoodsReceipt {
         this.isDelivered = isDelivered;
         this.quantity = quantity;
         this.price = price;
+
     }
+
+    /**
+     * Returns True if the quantity is valid.
+     *
+     * @param quantity The price of the goods.
+     * @return True if the quantity is valid.
+     */
+    public static boolean isValidQuantity(double quantity) {
+        return 0 <= quantity;
+    }
+
+    /**
+     * Returns True if the price is valid.
+     *
+     * @param price The price of the goods.
+     * @return True if the price is valid.
+     */
+    public static boolean isValidPrice(double price) {
+        return 0 <= price;
+    }
+
 
     /**
      * Returns True if the procurement date is valid.
@@ -172,9 +197,15 @@ public class GoodsReceipt {
      * Checks if receipt is the same (Logic may be different from hashcode)
      * E.g. delivered variable is not checked here
      */
-    public boolean isSameReceipt(GoodsReceipt otherReceipt) {
-        if (otherReceipt == this) {
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
             return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GoodsReceipt otherReceipt)) {
+            return false;
         }
 
         return this.goods.equals(otherReceipt.goods)
@@ -189,4 +220,11 @@ public class GoodsReceipt {
                 &&
                 this.price == otherReceipt.price;
     }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(goods, supplierName, arrivalDate, procurementDate, quantity, price);
+    }
+
 }
