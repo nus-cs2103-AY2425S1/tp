@@ -154,92 +154,55 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Sort feature
 The sort command is reliant on the `SortOrder` enumeration. Each constant in `SortOrder` contains 2 additional values: the `keyword`, and the `stringRep` (which is the string representation of the order).
-The command itself is encapsulated by the `SortCommand` class, which extends the abstract class `Command`, overriding its execution method. 
+The command itself is encapsulated by the `SortCommand` class, which extends the abstract class `Command`, overriding its execution method.
 On execution, the `SortCommand#execute()` method calls the `updateSortedPersonListComparator` method of the `model`, and passes in the relevant comparator, depending on which order the user selects.
 
-### \[Proposed\] Undo/redo feature
+### Mark/Unmark feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+This command's implementation is based on the new field `attendance` of `Person` object which stores the list of attendances
+if the person is a member.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Given below is the class diagram of `MarkAttendanceCommand` and relative classes it uses to execute.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+![MarkAttendanceCommandClassDiagram](images/MarkAttendanceCommandClassDiagram.png)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+**Find Targeted Member**
 
-![UndoRedoState0](images/UndoRedoState0.png)
+The command will call `Model::getFilteredPersonList` to get current contacts in addressbook,
+then it filters the list by user input telegram handles, get a list of people by there telegrams to mark their attendance.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+**Update Member Attendance**
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The command will create a new `Person` object according to the `Person` referred by each of the input telegram handle,
+add `attendance` to it, check if it is a member,
+and call `Model::setPerson` to update the specified person in the `addressbook` of the `model`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+The following activity diagram summarizes what happens when a user executes a mark command:
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<img src="images/MarkAttendanceActivityDiagram.png" width="250" />
 
-</div>
+The following sequence diagram shows how a mark operation goes through the `Logic` component:
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+![MarkAttendanceSequenceDiagram-Logic](images/MarkAttendanceSequenceDiagram-Logic.png)
 
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAttendanceCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+![MarkAttendanceSequenceDiagram-Model](images/MarkAttendanceSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `unmark` command does the opposite with the similar flow between `Logic` and `Model` component.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
@@ -272,8 +235,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: The program aims to assist CCA leaders in NUS in managing and collating relevant CCA personnel’s contact details. 
-This is done via a clean user interface with a focus on the CLI, with fast access to the contact information of relevant CCA personnel, 
+**Value proposition**: The program aims to assist CCA leaders in NUS in managing and collating relevant CCA personnel’s contact details.
+This is done via a clean user interface with a focus on the CLI, with fast access to the contact information of relevant CCA personnel,
 providing users a one-stop solution to help manage CCA manpower related considerations.
 
 
@@ -292,8 +255,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current           |
 | `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation |
 | `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                   |
-| `* *`    | user          | role contacts to a group/role name                                            | group individuals into relevant sections for better clarity          |
-| `* *`    | user          | search for multiple contacts by querying its role                            | get the information of all the contacts related to the relevant role  |
+| `* *`    | user          | role contacts to a group/role name                                          | group individuals into relevant sections for better clarity          |
+| `* *`    | user          | search for multiple contacts by querying its role                           | get the information of all the contacts related to the relevant role |
 | `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                |
 | `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                     |
 | `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine         |
@@ -301,6 +264,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user          | add notes to any contact                                                    | remember important details about them                                |
 | `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others            |
 | `* *`    | user          | export my contacts to an external file                                      | send the contacts to another user or filter externally               |
+| `* *`    | user          | see all members in a separate view                                          | check members and mark their attendance more easily                  |
+| `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities       |
+| `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities       |
 | `*`      | user          | start a temporary session that does not persist between sessions            | experiment with and play around with the environment                 |
 | `*`      | user          | sort the contacts by popularity (how often I query the contact)             | quickly access frequently queried contacts                           |
 | `*`      | user          | switch profiles to another profile, containing a separate list of contacts  | separate contacts of individuals in different organisations          |
@@ -327,8 +293,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 **MSS**
 
-1. User enters appropriate ‘view’ command to search for John Doe’s contact information.
-2. System displays page with John Doe’s contact information.
+1. User enters appropriate ‘view’ command to search for ‘John Doe’s contact information.
+2. System opens up new page with John Doe’s contact information.
 
 Use Case ends.
 
@@ -354,7 +320,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
   * Use case ends.
 
 * 3a. User inputs an invalid index.
@@ -383,13 +349,12 @@ Use case ends.
     * Use case ends.
 
 <br>
-
 **Use case: UC04 - Search for a contact**
 **Actor: User**
 **MSS**
 
 1. User searches the list of contacts with a query relating to a contact’s name.
-2. System displays the subset of contacts with the same name as the query 
+2. System displays the subset of contacts with the same name as the query
 
 Use case ends.
 
@@ -401,9 +366,8 @@ Use case ends.
 * 2a. System fails to find any contacts related to the query.
     * 2a1. System displays an empty list to the user.
     * Use case ends.
-   
-<br>
 
+<br>
 **Use case: UC05 - List all contacts**
 **Actor: User**
 **MSS**
@@ -430,31 +394,71 @@ Use Case ends.
 2. CCAConnect displays all valid commands.
 
 Use case ends.
-
 <br>
 
-**Use case: UC07 - Edit a Contact**
+<br>
+**Use case: UC07 - View all members**
 **Actor: User**
 **MSS**
 
+1. User requests to see all members in the contacts.
+2. CCAConnect displays all members.
+
+Use case ends.
 <br>
 
-**Use case: UC08 - Mark attendance for a Member**
+<br>
+**Use case: UC08 - Mark attendance of members**
 **Actor: User**
 **MSS**
 
+1. User requests to mark the attendance of members.
+2. User provides the details of the session (date) to mark attendance, and list of telegrams of members to be marked.
+3. System marks the attendance of the list of members on the specified date.
+
+Use case ends.
+
+**Extensions**
+* 1a. System detects that user did not enter all the required fields.
+    * 1a1. System shows user an error message.
+    * Use case ends.
+
+* 1b. System detects that user entered an invalid field.
+    * 1b1. System shows user an appropriate error message.
+    * Use case ends.
+
+* 1c. System detects that user tried to mark the attendance of non-member contact.
+    * 1c1. System shows user an appropriate error message.
+    * Use case ends.
 <br>
 
-**Use case: UC09 - Unmark attendance for a Member**
+<br>
+**Use case: UC09 - Unmark attendance of members**
 **Actor: User**
 **MSS**
 
+1. User requests to unmark the attendance of members.
+2. User provides the details of the session (date) to unmark attendance, and list of telegrams of members to be unmarked.
+3. System unmarks the attendance of the list of members on the specified date.
+
+Use case ends.
+
+**Extensions**
+* 1a. System detects that user did not enter all the required fields.
+    * 1a1. System shows user an error message.
+    * Use case ends.
+
+* 1b. System detects that user entered an invalid field.
+    * 1b1. System shows user an appropriate error message.
+    * Use case ends.
+
+* 1c. System detects that user tried to unmark the attendance of non-member contact.
+    * 1c1. System shows user an appropriate error message.
+    * Use case ends.
 <br>
 
-**Use case: UC10 - Switch profiles**
-**Actor: User**
-**MSS**
 
+*{More to be added}*
 <br>
 
 ### Non-Functional Requirements
@@ -477,13 +481,14 @@ Use case ends.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Contact**: A contact comprises of a name, a phone number, an email, a telegram username and a role
+* **Contact**: A contact comprises of a name, a phone number, an email, a telegram username and a role, represented as `Person` in the model
 * **CLI**: Command Line Interface. This represents the interface where the user uses commands to communicate with the system
 * **GUI**: Graphical User Interface. This represents the graphical interface that the user can interact with
 * **User**: The individual using the app
 * **System**: The CCAConnect application
 * **Flag**: A specifier to indicate the start of an argument after a command. E.g. `n/` represents a name flag
 * **Regex**: A regular expression, which is a sequence of characters that specifies a match pattern
+* **Member**: A member is a special type of contact that has the role `Member` in its `roles`
 
 *{More to be added}*
 

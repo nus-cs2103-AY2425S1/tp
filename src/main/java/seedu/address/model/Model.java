@@ -58,6 +58,8 @@ public interface Model {
      */
     void addToProfiles(Profile profileName);
 
+    void removeFromProfiles(Profile profileName);
+
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */

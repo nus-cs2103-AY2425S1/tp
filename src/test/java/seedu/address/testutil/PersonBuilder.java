@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -100,6 +101,25 @@ public class PersonBuilder {
     }
 
     /**
+     * Add or remove role {@code Member} to the {@code Role} of the {@code Person} based on input {@code b}.
+     */
+    public PersonBuilder isMember(boolean b) {
+        this.roles.remove(new Member());
+        if (b) {
+            this.roles.add(new Member());
+        }
+        return this;
+    }
+
+    /**
+     * Add {@code attendance} to the {@code Attendance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAttendance(Attendance attendance) {
+        this.attendance.add(attendance);
+        return this;
+    }
+
+    /**
      * Sets the {@code FavouriteStatus} of the {@code Person} that we are building.
      */
     public PersonBuilder withFavourite() {
@@ -110,5 +130,4 @@ public class PersonBuilder {
     public Person build() {
         return new Person(name, phone, email, telegram, roles, attendance, favouriteStatus);
     }
-
 }

@@ -19,8 +19,8 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 
 public class JsonAdaptedPersonTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_NAME = "Rachel1";
+    private static final String INVALID_PHONE = "651234";
     private static final String INVALID_TELEGRAM = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROLE = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";

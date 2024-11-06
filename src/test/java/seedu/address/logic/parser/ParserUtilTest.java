@@ -22,14 +22,14 @@ import seedu.address.model.person.Telegram;
 import seedu.address.model.role.Role;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_NAME = "Rachel1";
+    private static final String INVALID_PHONE = "41234567";
     private static final String INVALID_TELEGRAM = "test test";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROLE = "";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "12345678";
+    private static final String VALID_PHONE = "91234567";
     private static final String VALID_TELEGRAM = "rachelWalker";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ROLE_1 = "friend";

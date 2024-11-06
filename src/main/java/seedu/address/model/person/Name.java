@@ -8,15 +8,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain non-numeric characters and spaces, and it should not be blank";
 
-    /*
-     * The first character of the address must not be a whitespace,
+    /**
+     * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[^\\d\\s][^\\d]*$";
+
+    /**
+     * System should check if the name has multiple consecutive whitespaces, and warn the user
+     */
+    private static final String WHITESPACE_REGEX = "^(?!.* {2})[ \\S]*$";
 
     public final String fullName;
 
@@ -38,6 +42,12 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string has consecutive whitespaces somewhere within it
+     */
+    public boolean hasConsecutiveWhitespaces() {
+        return !this.fullName.matches(WHITESPACE_REGEX);
+    }
 
     @Override
     public String toString() {
