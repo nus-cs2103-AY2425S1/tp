@@ -15,11 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.PersonIsRolePredicate;
-import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
+import seedu.address.model.person.predicates.*;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
 
@@ -106,5 +102,18 @@ public class SearchModeSearchCommandParserTest {
     public void parse_emptyEmailFlagField_throwsParseException() {
         assertParseFailure(parser, " e/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SearchModeSearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyAddressFlagField_throwsParseException() {
+        assertParseFailure(parser, " a/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SearchModeSearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_telegFlagField_success() {
+        SearchModeSearchCommand expectedCommand = new SearchModeSearchCommand(
+                new TelegramContainsKeywordsPredicate(Collections.singletonList("Amy123")));
+        assertParseSuccess(parser, " t/Amy123", expectedCommand);
     }
 }
