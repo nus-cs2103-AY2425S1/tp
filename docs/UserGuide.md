@@ -285,7 +285,7 @@ the subject(s) tagged must be valid for the previously assigned level.
 
 **Examples:**
 * `tag n/John Doe l/S3 NA s/ENGLISH`
-* `tag n/Jane Smith s/MATH` only works if `Jane Smith` has a `level` assigned previously
+* `tag n/Jane Smith s/MATH` only works if `Jane Smith` has a `level` assigned previously.
 * `tag n/Alex Yeoh l/S4 IP s/A_MATH s/ E_MATH`
 
 ***
