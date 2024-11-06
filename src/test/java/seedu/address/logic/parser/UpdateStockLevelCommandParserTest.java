@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STOCK_LEVEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.SetThresholdCommandParser.MESSAGE_MISSING_THRESHOLD;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,6 +65,10 @@ public class UpdateStockLevelCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+
+        //stock level missing
+        assertParseFailure(parser, " pr/Product stk/", "Stock Level not provided!");
+
         // invalid product name
         assertParseFailure(parser, " pr/Product#1 stk/1000",
                 "Names should only contain alphanumeric characters and spaces, and it should not be blank");
@@ -104,6 +109,15 @@ public class UpdateStockLevelCommandParserTest {
     public void parse_negativeValues_failure() {
         // negative stock level
         assertParseFailure(parser, " pr/Product1 stk/-1000", MESSAGE_INVALID_STOCK_LEVEL);
+    }
+
+    @Test
+    public void parse_missingThresholds_failure() {
+        // missing both min/ and max/
+        assertParseFailure(parser, " pr/Product", "Missing required prefixes. "
+                + "\nupdate_stock: Edits the details of the products identified by the product name used in the "
+                + "displayed product list. Existing values will be overwritten by the input values."
+        + "\nParameters:  pr/PRODUCT_NAME stk/STOCK_LEVEL Example: update_stock pr/Sweaters stk/25000 ");
     }
 
     @Test
