@@ -12,41 +12,31 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
     }
 
     /**
-     * Compares two delivery object by status, returning the order of PENDING -> DELIVERED -> CANCELLED
-     * If the status is the same for two delivery objects, it is compared by time instead
-     * @return
+     * Compares two delivery object by status, returning the order of CANCELLED -> DELIVERED -> PENDING
      */
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
         Status delivery1Status = delivery1.getDeliveryStatus();
         Status delivery2Status = delivery2.getDeliveryStatus();
         if (super.getIsSortByAscending()) {
-            int statusComparison = Integer.compare(getStatusOrder(delivery1Status), getStatusOrder(delivery2Status));
-            if (statusComparison == 0) {
-                return new DeliverySortDateTimeComparator(super.getSortOrder()).compare(delivery1, delivery2);
-            }
-            return statusComparison;
+            return Integer.compare(getStatusOrder(delivery1Status), getStatusOrder(delivery2Status));
         } else {
-            int statusComparison = Integer.compare(getStatusOrder(delivery2Status), getStatusOrder(delivery1Status));
-            if (statusComparison == 0) {
-                return new DeliverySortDateTimeComparator(super.getSortOrder()).compare(delivery2, delivery1);
-            }
-            return statusComparison;
+            return Integer.compare(getStatusOrder(delivery2Status), getStatusOrder(delivery1Status));
         }
     }
 
     /**
-     * Returns the order of the status in the order of PENDING -> DELIVERED -> CANCELLED.
+     * Returns the order of the status in the order of CANCELLED -> DELIVERED -> PENDING (Alphabetical).
      * The integer returned increases in the order.
      */
     private int getStatusOrder(Status status) {
         switch (status) {
-        case PENDING:
+        case CANCELLED:
             return 0;
+        case PENDING:
+            return 2;
         case DELIVERED:
             return 1;
-        case CANCELLED:
-            return 2;
         default:
             throw new IllegalArgumentException("Unknown status: " + status);
         }
@@ -69,6 +59,6 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
 
     @Override
     public String toSortByString() {
-        return "status, followed by date time";
+        return "status";
     }
 }

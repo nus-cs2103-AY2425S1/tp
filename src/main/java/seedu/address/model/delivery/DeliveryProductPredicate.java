@@ -21,7 +21,7 @@ public class DeliveryProductPredicate implements Predicate<Delivery> {
     @Override
     public boolean test(Delivery delivery) {
         Product deliveryProduct = delivery.getDeliveryProduct();
-        return deliveryProduct.equals(targetProduct);
+        return deliveryProduct.toString().toLowerCase().contains(targetProduct.toString().toLowerCase());
     }
 
     @Override

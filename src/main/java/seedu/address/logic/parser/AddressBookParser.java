@@ -18,7 +18,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeliveryCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindDeliveryCommand;
@@ -28,6 +27,7 @@ import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListDeliveryCommand;
 import seedu.address.logic.commands.ListSupplierCommand;
+import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortCommand;
@@ -80,9 +80,6 @@ public class AddressBookParser {
                         AddSupplierCommand.MESSAGE_USAGE + "\nOR\n" + AddDeliveryCommand.MESSAGE_USAGE));
             }
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
         case DeleteCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
                 return new DeleteSupplierCommandParser().parse(arguments.trim());
@@ -117,7 +114,7 @@ public class AddressBookParser {
                 throw new ParseException(MESSAGE_INVALID_LIST_COMMAND_FORMAT);
             }
 
-        case MarkDeliveryCommand.COMMAND_WORD:
+        case MarkCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
                 return new MarkSupplierCommandParser().parse(arguments.trim());
             } else if (arguments.trim().startsWith("-d")) {
