@@ -95,7 +95,7 @@ public class UnlinkCommand extends Command {
         Email email = person.getEmail();
         Address address = person.getAddress();
         Set<Tag> tags = person.getTags();
-        boolean isPinned = person.getPinned();
+        boolean isPinned = person.isPinned();
         boolean isArchived = person.isArchived();
 
         if (person instanceof Student student) {

@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Unpins a person identified using its displayed index.
+ * Pins a person identified using its displayed index.
  */
 public class PinCommand extends Command {
 

@@ -81,7 +81,7 @@ public abstract class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public boolean getPinned() {
+    public boolean isPinned() {
         return isPinned;
     }
 
