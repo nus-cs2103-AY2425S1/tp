@@ -70,7 +70,7 @@ public class AddToGroupCommand extends Command {
         } catch (DuplicateGroupException e) {
             throw new CommandException(e.getMessage());
         }
-        return new CommandResult(formatSuccessCommandResultMessage());
+        return new CommandResult(formatSuccessCommandResultMessage(), true);
     }
 
     /**
