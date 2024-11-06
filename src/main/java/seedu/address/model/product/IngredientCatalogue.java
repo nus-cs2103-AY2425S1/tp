@@ -2,6 +2,7 @@ package seedu.address.model.product;
 
 import seedu.address.model.util.SampleDataUtil;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -20,14 +21,25 @@ public class IngredientCatalogue extends Catalogue {
      */
     // New constructor to initialize with a given Map of ingredients
     public IngredientCatalogue(Map<Integer, Ingredient> ingredients) {
+        super();  // Call to initialize productCatalogue in the parent class
         for (Ingredient ingredient : ingredients.values()) {
             addIngredient(ingredient);
         }
+        setNextProductId(); // Initialize nextProductId based on highest ID
     }
 
     // Existing no-arg constructor remains for default initialization
     private IngredientCatalogue() {
         this(SampleDataUtil.getDefaultIngredients());
+    }
+
+    /**
+     * Sets nextProductId to the highest ID in productCatalogue + 1.
+     */
+    private void setNextProductId() {
+        if (!productCatalogue.isEmpty()) {
+            nextProductId = Collections.max(productCatalogue.keySet()) + 1;
+        }
     }
     /**
      * Returns the singleton instance of IngredientCatalogue.
@@ -37,7 +49,7 @@ public class IngredientCatalogue extends Catalogue {
     public static IngredientCatalogue getInstance() {
         if (instance == null) {
             instance = new IngredientCatalogue();
-            instance.initializeWithDefaultIngredients();
+            instance.setNextProductId(); // Ensure nextProductId is set after initialization
         }
         return instance;
     }
@@ -59,7 +71,9 @@ public class IngredientCatalogue extends Catalogue {
     public void addIngredient(Ingredient ingredient) {
         productCatalogue.put(ingredient.getProductId(), ingredient);
         ingredientByName.put(ingredient.getName().toLowerCase(), ingredient);
-        nextProductId++;
+        if (ingredient.getProductId() >= nextProductId) {
+            nextProductId = ingredient.getProductId() + 1;
+        }
     }
 
     /**

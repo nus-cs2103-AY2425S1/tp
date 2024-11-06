@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.IngredientCatalogue;
 
@@ -24,15 +25,20 @@ public class CheckPastryStockCommandTest {
 
     private Model model;
 
+    // Ingredients
+    private Ingredient flour = IngredientCatalogue.getInstance().getIngredientByName("flour");
+    private Ingredient sugar = IngredientCatalogue.getInstance().getIngredientByName("sugar");
+    private Ingredient chocolate = IngredientCatalogue.getInstance().getIngredientByName("chocolate");
+
     @BeforeEach
     public void setUp() {
         // Initialize the model and add necessary stock before each test
         model = new ModelManager();
 
         // Prepare stock levels for ingredients
-        model.getInventory().addStock(IngredientCatalogue.FLOUR.getProductId(), 10);
-        model.getInventory().addStock(IngredientCatalogue.SUGAR.getProductId(), 10);
-        model.getInventory().addStock(IngredientCatalogue.CHOCOLATE.getProductId(), 5);
+        model.getInventory().addStock(flour.getProductId(), 10);
+        model.getInventory().addStock(sugar.getProductId(), 10);
+        model.getInventory().addStock(chocolate.getProductId(), 5);
     }
 
     @Test
@@ -57,10 +63,10 @@ public class CheckPastryStockCommandTest {
         model.getInventory().displayStockLevels();
 
         // Remove all chocolate stock to simulate insufficient stock
-        model.getInventory().removeStock(IngredientCatalogue.CHOCOLATE.getProductId(), 5);
+        model.getInventory().removeStock(chocolate.getProductId(), 5);
 
         // Verify that the stock was reduced to 0
-        assertEquals(0, model.getInventory().getStockLevel(IngredientCatalogue.CHOCOLATE.getProductId()),
+        assertEquals(0, model.getInventory().getStockLevel(chocolate.getProductId()),
                 "Chocolate stock should be 0 after removal.");
 
         // Create the CheckPastryStockCommand

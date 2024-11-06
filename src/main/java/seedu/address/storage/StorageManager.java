@@ -43,6 +43,16 @@ public class StorageManager implements Storage {
         this.supplyOrderListStorage = supplyOrderListStorage;
     }
 
+    // Default constructor with properly initialized parameters
+    public StorageManager() {
+        this(new JsonAddressBookStorage(Path.of("data", "addressbook.json")),
+                new JsonUserPrefsStorage(Path.of("data", "userprefs.json")),
+                new JsonIngredientCatalogueStorage(Path.of("data", "ingredientcatalogue.json")),
+                new JsonPastryCatalogueStorage(Path.of("data", "pastrycatalogue.json")),
+                new JsonCustomerOrderListStorage(Path.of("data", "customerorders.json")),
+                new JsonSupplyOrderListStorage(Path.of("data", "supplyorders.json")));
+    }
+
     // ================ UserPrefs methods ==============================
 
     @Override

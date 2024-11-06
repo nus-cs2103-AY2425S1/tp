@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
 
@@ -26,14 +27,16 @@ public class RemovePastryCommandTest {
     private Model model;
     private ArrayList<seedu.address.model.product.Ingredient> ingredients;
 
+    // Ingredients
+    private Ingredient flour = IngredientCatalogue.getInstance().getIngredientByName("flour");
+    private Ingredient sugar = IngredientCatalogue.getInstance().getIngredientByName("sugar");
+    private Ingredient chocolate = IngredientCatalogue.getInstance().getIngredientByName("chocolate");
+
     @BeforeEach
     public void setUp() {
         // Initialize the model before each test
         model = new ModelManager();
-        ingredients = new ArrayList<>(List.of(
-                IngredientCatalogue.FLOUR,
-                IngredientCatalogue.SUGAR
-        ));
+        ingredients = new ArrayList<>(List.of(flour, sugar));
     }
 
     @Test

@@ -59,7 +59,7 @@ public class Customer extends Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder(super.toString());
-        builder.append(" Information: ").append(getInformation());
+        builder.append("\nInformation: ").append(getInformation());
         return builder.toString();
     }
 }

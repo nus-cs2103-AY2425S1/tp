@@ -42,7 +42,7 @@ public class DeleteCustomerOrderCommand extends Command {
 
         Order order = customerOrderList.getOrder(targetIndex - 1);
 
-        Person person = order.getPerson();
+        Person person = order.getOriginalPerson();
         person.removeOrder(order);
 
         customerOrderList.removeOrder(targetIndex - 1);

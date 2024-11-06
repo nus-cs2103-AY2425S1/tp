@@ -16,15 +16,20 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.util.Remark;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.StorageManager;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code AddSupplierCommand}.
@@ -35,13 +40,14 @@ public class AddSupplierCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(new AddressBook(), new UserPrefs());
+        model = new ModelManager(new AddressBook(), new UserPrefs(),
+                IngredientCatalogue.getInstance(), new PastryCatalogue(),
+                new StorageManager(), new CustomerOrderList(), new SupplyOrderList());
 
         // Initialize sample ingredients list with ingredient IDs
         Ingredients ingredientsSupplied = new Ingredients(List.of(
                 new Ingredient(1, "Flour", 1.50),
-                new Ingredient(2, "Sugar", 0.80),
-                new Ingredient(3, "Butter", 2.00)
+                new Ingredient(2, "Sugar", 0.80)
         ));
 
         // Add a sample Supplier to the model to ensure it's in the filtered list
@@ -61,7 +67,7 @@ public class AddSupplierCommandTest {
     public void execute_newSupplier_success() {
         // Prepare a new supplier with unique details to avoid duplication
         Ingredients ingredientsSupplied = new Ingredients(List.of(
-                new Ingredient(4, "Milk", 1.00),
+                new Ingredient(4, "Chocolate", 1.00),
                 new Ingredient(5, "Cheese", 3.00)
         ));
 
@@ -79,7 +85,9 @@ public class AddSupplierCommandTest {
         AddSupplierCommand command = new AddSupplierCommand(validSupplier);
 
         // Expected model state after adding the supplier
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new UserPrefs(), IngredientCatalogue.getInstance(),
+                new PastryCatalogue(), new StorageManager(), new CustomerOrderList(), new SupplyOrderList());
         expectedModel.addPerson(validSupplier);
 
         // Expected success message

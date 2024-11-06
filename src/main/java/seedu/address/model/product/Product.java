@@ -86,7 +86,7 @@ public abstract class Product {
      */
     @Override
     public String toString() {
-        return String.format("Product ID: %d\n     Name: %s\n     Cost: $%.2f", productId, name, cost);
+        return String.format("Product ID: %d\n     Name: %s\n     Cost: $%.2f\n", productId, name, cost);
     }
 
     /**

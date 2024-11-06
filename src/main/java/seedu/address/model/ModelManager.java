@@ -17,12 +17,10 @@ import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
-import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Inventory;
-import seedu.address.model.product.Pastry;
-import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.*;
 import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.model.product.Catalogue;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -41,7 +39,6 @@ public class ModelManager implements Model {
     private final ObservableList<CustomerOrder> customerOrderObservableList;
     private final Inventory inventory;
     private final Storage storage;  // Add Storage as a field
-
 
     // Constructor that accepts IngredientCatalogue, PastryCatalogue, and Storage
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
@@ -74,7 +71,7 @@ public class ModelManager implements Model {
     // Default constructor with properly initialized parameters
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), IngredientCatalogue.getInstance(),
-                new PastryCatalogue(), null, new CustomerOrderList(), new SupplyOrderList());
+                new PastryCatalogue(), new StorageManager(), new CustomerOrderList(), new SupplyOrderList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -150,12 +147,18 @@ public class ModelManager implements Model {
     public void associateOrdersWithPersons() {
         for (CustomerOrder customerOrder : customerOrderList.getOrders()) {
             addressBook.findPersonByPhone(customerOrder.getPerson().getPhone())
-                    .ifPresent(person -> person.addOrder(customerOrder));
+                    .ifPresent(person -> {
+                        customerOrder.setOriginalPerson(person);
+                        person.addOrder(customerOrder);
+                    });
         }
 
         for (SupplyOrder supplyOrder : supplyOrderList.getOrders()) {
             addressBook.findPersonByPhone(supplyOrder.getPerson().getPhone())
-                    .ifPresent(person -> person.addOrder(supplyOrder));
+                    .ifPresent(person -> {
+                        supplyOrder.setOriginalPerson(person);
+                        person.addOrder(supplyOrder);
+                    });
         }
     }
 

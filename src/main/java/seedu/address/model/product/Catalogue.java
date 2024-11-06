@@ -12,7 +12,6 @@ public abstract class Catalogue {
     protected final Map<Integer, Product> productCatalogue = new HashMap<>();
     protected int nextProductId = 1;
 
-
     /**
      * Retrieves a product by its unique ID.
      *
@@ -25,7 +24,6 @@ public abstract class Catalogue {
 
     /**
      * Returns the entire catalogue of products.
-     *
      * @return A map of product IDs to products.
      */
     public Map<Integer, Product> getCatalogue() {
@@ -34,7 +32,6 @@ public abstract class Catalogue {
 
     /**
      * Returns the next available product ID.
-     *
      * @return The next product ID as an integer.
      */
     public int getNextProductId() {

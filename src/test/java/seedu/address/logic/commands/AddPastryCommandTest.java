@@ -28,16 +28,18 @@ public class AddPastryCommandTest {
     private Model model;
     private ArrayList<Ingredient> ingredients;
 
+    // Ingredients
+    private Ingredient flour = IngredientCatalogue.getInstance().getIngredientByName("flour");
+    private Ingredient sugar = IngredientCatalogue.getInstance().getIngredientByName("sugar");
+    private Ingredient chocolate = IngredientCatalogue.getInstance().getIngredientByName("chocolate");
+
     @BeforeEach
     public void setUp() {
         // Initialize the model before each test
         model = new ModelManager();
 
         // Prepare ingredients
-        ingredients = new ArrayList<>(List.of(
-                IngredientCatalogue.FLOUR,
-                IngredientCatalogue.SUGAR
-        ));
+        ingredients = new ArrayList<>(List.of(flour, sugar));
     }
 
     @Test
@@ -82,7 +84,7 @@ public class AddPastryCommandTest {
         AddPastryCommand command2 = new AddPastryCommand(PASTRY_NAME, PASTRY_COST, ingredients);
 
         // Create a different command with different pastry details
-        ArrayList<Ingredient> differentIngredients = new ArrayList<>(List.of(IngredientCatalogue.CHOCOLATE));
+        ArrayList<Ingredient> differentIngredients = new ArrayList<>(List.of(chocolate));
         AddPastryCommand differentCommand = new AddPastryCommand("Chocolate Donut", 4.00, differentIngredients);
 
         // Verify the equals() behavior

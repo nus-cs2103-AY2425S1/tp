@@ -27,7 +27,8 @@ mistake that may not align with the standard code practice.
 [[github](https://github.com/ryenl)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Testing
+* Role: Backend Developer 
+* Responsibilities: NA
 
 ### Lucas Sam
 
@@ -43,8 +44,7 @@ mistake that may not align with the standard code practice.
 
 [[github](http://github.com/bbryant824)] [[portfolio](team/bowen.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Backend Developer
 
 ### Samuel Then Shi Jie
 
@@ -54,4 +54,4 @@ mistake that may not align with the standard code practice.
 [[portfolio](members/samuelthen.md)]
 
 * Role: Developer
-* Responsibilities: Backend
+* Responsibilities: Frontend & UI

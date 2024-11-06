@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Customer;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Supplier;
 
 /**
  * Container for user visible messages.
@@ -36,15 +38,31 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
+        builder.append("\n")
+                .append("Name: ")
+                .append(person.getName()).append("\n")
+                .append("Phone: ")
+                .append(person.getPhone()).append("\n")
+                .append("Email: ")
+                .append(person.getEmail()).append("\n")
+                .append("Address: ")
+                .append(person.getAddress()).append("\n")
+                .append("Tags: ")
+                .append("\n");
         person.getTags().forEach(builder::append);
+        // Check if the person is a Customer and append the information
+        if (person instanceof Customer) {
+            Customer customer = (Customer) person;
+            builder.append("\n").append("Information: ").append(customer.getInformation()).append("\n");
+        }
+
+        // Check if the person is a Supplier and append the ingredients supplied
+        if (person instanceof Supplier) {
+            Supplier supplier = (Supplier) person;
+            builder.append("\n").append("Ingredients Supplied: ")
+                    .append("\n")
+                    .append(supplier.getIngredientsSupplied()).append("\n");
+        }
         return builder.toString();
     }
 
