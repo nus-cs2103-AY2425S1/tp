@@ -51,7 +51,8 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com").withAddress("10th street, 123456").withHours("4")
             .withSubjects("Math").build();
     public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave, 878777").withHours("5").withSubjects("English").build();
+            .withEmail("werner@example.com").withAddress("michegan ave, 878777").withHours("5")
+            .withSubjects("English").build();
     public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo, 123456").withHours("6").build();
     public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
