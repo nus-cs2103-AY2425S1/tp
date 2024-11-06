@@ -205,6 +205,7 @@ and more detailed implementation on model changes have been omitted.
 
 </box>
 --------------------------------------------------------------------------------------------------------------------
+
 ### Delete Student Feature
 
 The `Delete Student` feature allows users to delete an existing student in the address book given a student's student number `sno`.
