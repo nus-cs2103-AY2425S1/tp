@@ -34,4 +34,8 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.getChildren().add(text);
     }
 
+    TextArea getResultTextArea() {
+        return resultDisplay;
+    }
+
 }

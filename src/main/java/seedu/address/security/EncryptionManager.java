@@ -1,16 +1,12 @@
 package seedu.address.security;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Base64;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.security.KeyStore;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
 /**
  * EncryptionManager is a utility class that handles encryption and decryption of data using the AES algorithm.
@@ -21,7 +17,10 @@ public class EncryptionManager {
     private static final String ALGORITHM = "AES";
 
     // File path to where the key is stored
-    private static final String FILE_PATH = "key.txt";
+    private static final String FILE_PATH = "vbook.jks";
+    private static final String KEYSTORE_ALIAS = "vbook-encryption";
+    private static final String KEYSTORE_ALGORITHM = "JCEKS";
+    private static final String KEYSTORE_PASSWORD = "changeit";
 
     /**
      * Encrypts the given data using the AES algorithm with a pre-generated secret key.
@@ -68,16 +67,31 @@ public class EncryptionManager {
         if (keyPath == null) {
             keyPath = FILE_PATH;
         }
+
+        // 1. Create or get keystore
+        KeyStore ks = KeyStore.getInstance(KEYSTORE_ALGORITHM);
+        char[] pwdArray = KEYSTORE_PASSWORD.toCharArray();
+
+        // 2. Load keystore
+        ks.load(null, pwdArray);
+
+        // 3. Check if alias exists
+        if (ks.containsAlias(KEYSTORE_ALIAS)) {
+            System.out.println("Alias already exists. Not saving keystore.");
+            return;
+        }
+
+        // 4. Save key into keystore
         KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
         keyGen.init(128);
         SecretKey secretKey = keyGen.generateKey();
-        String encodedKey = Base64.getEncoder().encodeToString(secretKey.getEncoded());
+        KeyStore.SecretKeyEntry secret = new KeyStore.SecretKeyEntry(secretKey);
+        KeyStore.ProtectionParameter password = new KeyStore.PasswordProtection(pwdArray);
+        ks.setEntry(KEYSTORE_ALIAS, secret, password);
 
-        File file = new File(keyPath);
-        file.createNewFile();
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write(encodedKey);
+        // 5. Save keystore
+        try (FileOutputStream fos = new FileOutputStream(keyPath)) {
+            ks.store(fos, pwdArray);
         }
     }
 
@@ -85,17 +99,21 @@ public class EncryptionManager {
         if (keyPath == null) {
             keyPath = FILE_PATH;
         }
+
         File file = new File(keyPath);
         if (!file.exists()) {
             generateKey(keyPath);
         }
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            byte[] decodedKey = Base64.getDecoder().decode(reader.readLine());
-            SecretKey originalKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
-            return originalKey;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+
+        // 1. Get keystore
+        KeyStore ks = KeyStore.getInstance(KEYSTORE_ALGORITHM);
+        char[] pwdArray = KEYSTORE_PASSWORD.toCharArray();
+
+        // 2. Load keystore
+        ks.load(new FileInputStream(keyPath), pwdArray);
+        SecretKey encryptionKey = (SecretKey) ks.getKey(KEYSTORE_ALIAS, pwdArray);
+
+        return encryptionKey;
+
     }
 }
