@@ -412,8 +412,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends
 
-*{More to be added}*
-
 **Use case: Find a person**
 
 **MSS**
