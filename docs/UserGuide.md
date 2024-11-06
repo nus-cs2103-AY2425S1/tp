@@ -220,6 +220,39 @@ Examples:
 * `list` followed by `delete S1234567Z` deletes the patient that has NRIC of 'S1234567Z' in the list.
 * `find Betsy` followed by `delete S2345678E` deletes the person with 'S2345678E' in the results of the `find` command.
 
+Format: `delete Index`
+
+* Deletes the person at the specified `Index`.
+* The Index refers to the person's position in the displayed person list.
+* The Index **must be a positive whole number greater than one and no larger than the size of the list.**
+
+Examples:
+
+* `list` followed by `delete 1` deletes the first patient in the list.
+* `find Betsy` followed by `delete 1` deletes the first person in the results of the `find` command.
+
+### Deleting an appointment : `deleteappt`
+
+Deletes the specified person from the address book.
+
+Format: `deleteappt NRIC /d dd-mm-yyyy HH:mm`
+
+* Removes the appointment scheduled at the specified date and time for the person identified by the given `NRIC`.
+* The NRIC refers to the unique identifier displayed in the current person list.
+* The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
+
+Example:
+* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the person identified by the NRIC s1234567z.
+
+Format: `deleteappt Index /d dd-mm-yyyy HH:mm` 
+
+* Removes the appointment scheduled at the specified date and time for the person at the given Index.
+* The Index refers to the person’s position in the displayed list.
+* The Index **must be a positive whole number greater than one and no larger than the size of the list.**
+
+Example:
+* `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the person at index 1 of the displayed list.
+
 ### Finding all persons with appointments on a specific date : `bookings`
 
 Finds all persons with appointments on the specified date.
