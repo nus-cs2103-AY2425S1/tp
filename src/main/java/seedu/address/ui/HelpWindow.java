@@ -74,12 +74,12 @@ public class HelpWindow extends UiPart<Stage> {
                 createFeature(
                         "Listing Clients: list",
                         "View all clients in your database.",
-                        "list                                                                                       ",
+                        "list                                                                                  ",
                         null
                 ),
                 createFeature(
                         "Finding Clients: find",
-                        "Search for clients by name using keywords.                                                          ",
+                        "Search for clients by name using keywords.                                         ",
                         "find KEYWORD [MORE_KEYWORDS]",
                         "find Acme Corp"
                 ),
@@ -104,13 +104,13 @@ public class HelpWindow extends UiPart<Stage> {
                 ),
                 createFeature(
                         "Advanced Filtering: advfilter",
-                        "Organize your client list based on custom priority metrics.",
+                        "Organize your client list based on custom priority metrics.                       ",
                         "advfilter t\\tag [OPERATOR] [VALUE]",
                         "advfilter t\\age <= 50 "
                 ),
                 createFeature(
                         "Sorting by tags: sort",
-                        "Sort your client list based on tag values",
+                        "Sort your client list based on tag values                                          ",
                         "sort t\\tag asc/desc",
                         "sort t\\age asc "
                 ),
