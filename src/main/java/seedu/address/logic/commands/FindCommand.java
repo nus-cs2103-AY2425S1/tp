@@ -3,14 +3,17 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.HasCategoryPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -23,51 +26,41 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive), and displays them as a list with index numbers.\n"
             + "Searching by goods categories is optional.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "[" + PREFIX_CATEGORY + "CATEGORY]\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]... "
+            + "[" + PREFIX_CATEGORY + "CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie "
-            + PREFIX_CATEGORY + "Consumables";
+            + PREFIX_CATEGORY + "CONSUMABLES";
 
-    private final Predicate<Person> predicate;
-
-    private final GoodsCategories goodsCategory;
+    private final List<String> keywords;
+    private final Set<GoodsCategories> categoriesSet;
 
     /**
-     * Constructs a find command with a person predicate only.
+     * Constructs a find command with a list of keywords and categories to search for.
      */
-    public FindCommand(Predicate<Person> predicate) {
-        this.predicate = predicate;
-        this.goodsCategory = null;
+    public FindCommand(List<String> keywords) {
+        this.keywords = keywords;
+        this.categoriesSet = new HashSet<>();
     }
 
     /**
-     * Constructs a find command with a specified goods category.
+     * Constructs a find command with a list of keywords and categories to search for.
      */
-    public FindCommand(Predicate<Person> predicate, GoodsCategories goodsCategory) {
-        requireNonNull(predicate);
-        this.predicate = predicate;
-        this.goodsCategory = goodsCategory;
+    public FindCommand(List<String> keywords, Set<GoodsCategories> categoriesSet) {
+        this.keywords = keywords;
+        this.categoriesSet = categoriesSet;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        if (goodsCategory == null) {
-            model.updateFilteredPersonList(predicate);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(keywords);
 
-        } else {
-            Predicate<Person> hasCategory = person -> model
-                    .getGoods()
-                    .getReceiptList()
-                    .stream()
-                    .filter(goodsReceipt -> goodsReceipt.isFromSupplier(person.getName()))
-                    .anyMatch(goodsReceipt -> goodsReceipt
-                            .getGoods()
-                            .getCategory()
-                            .equals(goodsCategory));
-            model.updateFilteredPersonList(person -> predicate.test(person) || hasCategory.test(person));
-        }
+        HasCategoryPredicate hasCategoryPredicate =
+                new HasCategoryPredicate(model, categoriesSet);
+
+        model.updateFilteredPersonList(nameContainsKeywordsPredicate.or(hasCategoryPredicate));
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
@@ -80,20 +73,19 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindCommand otherFindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate)
-                && Objects.equals(goodsCategory, otherFindCommand.goodsCategory);
+        return Objects.equals(keywords, otherFindCommand.keywords)
+                && Objects.equals(categoriesSet, otherFindCommand.categoriesSet);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .add("goodsCategory", goodsCategory)
+                .add("keywords", keywords)
+                .add("categoriesSet", categoriesSet)
                 .toString();
     }
 }

@@ -18,6 +18,7 @@ import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReceiptLog;
+import seedu.address.model.goods.Goods;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.Date;
@@ -56,22 +57,14 @@ public class CsvGoodsStorage implements GoodsStorage {
         CsvToBeanFilter filter = new CsvToBeanFilter() {
             private final HashSet<String> seenReceipts = new HashSet<>();
 
-            @Override
-            public boolean allowLine(String[] line) {
-                String[] trimmedLine = Arrays.stream(line).map(String::trim).toArray(String[]::new);
-                boolean isDuplicate = !seenReceipts.add(Arrays.toString(trimmedLine));
-                boolean hasMissingFields = trimmedLine.length != 7;
-                if (hasMissingFields || isDuplicate) {
-                    return false;
-                }
-
+            private boolean isValidRecord(String[] trimmedLine) {
                 String[] goodDetails = trimmedLine[1].split(",", 2);
+
                 if (goodDetails.length != 2) {
                     return false;
                 }
 
                 try {
-                    // TODO: Improve error handling
                     Date arrivalDate = new Date(trimmedLine[0].replace("T", " "));
                     GoodsName name = new GoodsName(goodDetails[0]);
                     GoodsCategories goodsCategory = GoodsCategories.valueOf(goodDetails[1]);
@@ -81,11 +74,28 @@ public class CsvGoodsStorage implements GoodsStorage {
                     int quantity = Integer.parseInt(trimmedLine[5]);
                     Name supplier = new Name(trimmedLine[6]);
 
-                    return true;
-                } catch (RuntimeException e) {
+                    new GoodsReceipt(new Goods(name, goodsCategory), supplier, procurementDate, arrivalDate,
+                            isDelivered, quantity, price);
+
+                } catch (IllegalArgumentException e) {
                     logger.warning("Error parsing line: " + e.getMessage());
                     return false;
                 }
+
+                return true;
+            }
+
+            @Override
+            public boolean allowLine(String[] line) {
+                String[] trimmedLine = Arrays.stream(line).map(String::trim).toArray(String[]::new);
+                boolean isDuplicate = !seenReceipts.add(Arrays.toString(trimmedLine));
+                boolean hasMissingFields = trimmedLine.length != 7;
+
+                if (hasMissingFields || isDuplicate) {
+                    return false;
+                }
+
+                return isValidRecord(trimmedLine);
             }
         };
         Optional<List<GoodsReceipt>> goodsReceiptList = CsvUtil.readCsvFile(filePath, GoodsReceipt.class, filter);
