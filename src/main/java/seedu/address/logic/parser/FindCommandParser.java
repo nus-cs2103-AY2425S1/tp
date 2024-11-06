@@ -44,6 +44,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     public static final String TASK_CANNOT_BE_EMPTY = "Task cannot be empty!";
 
+    public static final String PARSE_FAILURE_MULTIPLE_PREFIXES = "You can only specify one prefix at a time.";
+
 
 
 
@@ -76,16 +78,30 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasTaskPrefix = argMultimap.getValue(PREFIX_TASK).isPresent();
 
         int prefixCount = 0;
-        if (hasNamePrefix) prefixCount++;
-        if (hasPhonePrefix) prefixCount++;
-        if (hasEmailPrefix) prefixCount++;
-        if (hasAddressPrefix) prefixCount++;
-        if (hasTagPrefix) prefixCount++;
-        if (hasWeddingPrefix) prefixCount++;
-        if (hasTaskPrefix) prefixCount++;
+        if (hasNamePrefix) {
+            prefixCount++;
+        }
+        if (hasPhonePrefix) {
+            prefixCount++;
+        }
+        if (hasEmailPrefix) {
+            prefixCount++;
+        }
+        if (hasAddressPrefix) {
+            prefixCount++;
+        }
+        if (hasTagPrefix) {
+            prefixCount++;
+        }
+        if (hasWeddingPrefix) {
+            prefixCount++;
+        }
+        if (hasTaskPrefix) {
+            prefixCount++;
+        }
 
         if (prefixCount > 1) {
-            throw new ParseException("You can only specify one prefix at a time.");
+            throw new ParseException(PARSE_FAILURE_MULTIPLE_PREFIXES);
         }
 
         if (hasNamePrefix) {

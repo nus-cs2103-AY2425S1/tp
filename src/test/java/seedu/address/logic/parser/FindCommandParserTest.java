@@ -36,6 +36,7 @@ public class FindCommandParserTest {
     public static final String TAG_CANNOT_BE_EMPTY = "Tag cannot be empty!";
     public static final String WEDDING_CANNOT_BE_EMPTY = "Wedding cannot be empty!";
     public static final String TASK_CANNOT_BE_EMPTY = "Task cannot be empty!";
+    public static final String PARSE_FAILURE_MULTIPLE_PREFIXES = "You can only specify one prefix at a time.";
 
     private FindCommandParser parser = new FindCommandParser();
 
@@ -317,6 +318,26 @@ public class FindCommandParserTest {
         });
 
         assertEquals(TASK_CANNOT_BE_EMPTY, thrown.getMessage());
+    }
+
+    @Test
+    public void parse_multiplePrefixes_throwsParseException() {
+        String input = "find tk/H a/";
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        assertEquals(PARSE_FAILURE_MULTIPLE_PREFIXES, thrown.getMessage());
+    }
+
+    @Test
+    public void parse_multiplePrefixes2_throwsParseException() {
+        String input = "find p/ a/"; // nothing after first prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        assertEquals(PARSE_FAILURE_MULTIPLE_PREFIXES, thrown.getMessage());
     }
 
 }
