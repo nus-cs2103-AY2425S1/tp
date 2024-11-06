@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -33,7 +34,7 @@ public class EditScheduleCommand extends Command {
             + "Parameters: INDEX c/CONTACT_INDEX [n/NAME] [d/DATE] [t/TIME]\n" // Update the usage message
             + "Example: " + COMMAND_WORD + " 1 c/1 n/Team Meeting d/11-10-2024 t/1500";
 
-    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited Event: %1$s on %2$s %3$s";
+    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_INVALID_SCHEDULE_INDEX = "The schedule index provided is invalid.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
@@ -91,7 +92,7 @@ public class EditScheduleCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_SCHEDULE_SUCCESS,
-                updatedName, updatedDate.toString(), updatedTime.toString()));
+                Messages.formatMeetings(updatedMeeting)));
     }
 
     private static List<UUID> getUpdatedContactUids(Meeting meetingToEdit, List<UUID> newContactUids) {
