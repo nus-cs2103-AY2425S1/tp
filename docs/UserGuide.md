@@ -181,7 +181,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 Expected output:
-![Screenshot 2024-10-25 at 11.39.25 PM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fn7%2F0qj1t2d13dx1rpt4rkxqw6l00000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_MgpP52%2FScreenshot%202024-10-25%20at%2011.39.25%E2%80%AFPM.png)
+![helpMessage](images/helpMessage.png)
 
 ### Adding a person: `add`
 
