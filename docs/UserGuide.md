@@ -182,11 +182,10 @@ Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
 * Hence, we can only add one social media handle to each contact.
 * Handles must be non-empty, have a limit of 30 characters,and consist only of alphanumeric characters, or `-`, `_` and `.`.
 * If multiple handles are entered, only the last handle will be accepted. <br>
+  e.g., `socialMedia 1 ig/first cs/second` will only add the handle `[cs-second]` to the user.
 
 </div>
 
-Examples
-* `socialMedia 1 ig/first cs/second` will only add the handle `[cs-second]` to the user.
 
 Examples:
 *  Adds the handle `[ig-charlotteo]` to the third contact Charlotte. <br>
