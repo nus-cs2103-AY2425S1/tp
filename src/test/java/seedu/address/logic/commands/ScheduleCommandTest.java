@@ -159,7 +159,7 @@ public class ScheduleCommandTest {
         }
 
         @Override
-        public void notifyUddersListCleared(){
+        public void notifyUddersListCleared() {
             throw new AssertionError("This method should not be called.");
         }
 
