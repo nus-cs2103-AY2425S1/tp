@@ -111,7 +111,13 @@ public interface Model {
      * Adds the given log to the person.
      * {@code target} must exist in the address book.
      */
-    void addLog(Person target, Log log);
+    void addLog(Person target, Log log) throws CommandException;
+
+    /**
+     * Checks if the person has the given log.
+     * {@code target} must exist in the address book.
+     */
+    boolean hasLog(Person target, Log log);
 
     /** Returns an unmodifiable view of the full person list */
     ObservableList<Person> getPersonList();
