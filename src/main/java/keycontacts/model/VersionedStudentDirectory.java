@@ -35,9 +35,6 @@ public class VersionedStudentDirectory extends StudentDirectory {
 
         currentPointer = currentPointer + 1;
         super.setStudents(studentDirectoryStateList.get(currentPointer));
-
-        System.out.println("Pointer: " + currentPointer);
-        System.out.println("List: " + studentDirectoryStateList);
     }
 
     /**
