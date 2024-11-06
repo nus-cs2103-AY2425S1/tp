@@ -45,16 +45,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Button attendance;
 
-    @FXML
-    private void onClickHandler(ActionEvent event) {
-        event.consume();
-        if (!attendanceWindow.isShowing()) {
-            attendanceWindow.show();
-        } else {
-            attendanceWindow.focus();
-        }
-    }
-
     /**
      * Creates a {@code PersonCard} with the given {@code Person}, {@code Logic} and index to display.
      *
@@ -83,6 +73,16 @@ public class PersonCard extends UiPart<Region> {
             Label courseLabel = new Label(sca.getCourse().courseCode.toString());
             courseLabel.getStyleClass().add("course-tag"); // Add this style class for course tags
             tags.getChildren().add(courseLabel);
+        }
+    }
+
+    @FXML
+    private void onClickHandler(ActionEvent event) {
+        event.consume();
+        if (!attendanceWindow.isShowing()) {
+            attendanceWindow.show();
+        } else {
+            attendanceWindow.focus();
         }
     }
 }

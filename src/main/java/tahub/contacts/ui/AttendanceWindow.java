@@ -81,10 +81,20 @@ public class AttendanceWindow extends UiPart<Stage> {
     public AttendanceWindow(Person person, Logic logic, Stage root) {
         super(FXML, root);
         this.logic = logic;
-        this.person = person;
+            this.person = person;
 
         attendanceListView.setCellFactory(listView -> new AttendanceListCell());
         setupCourseComboBox();
+    }
+
+    /**
+     * Creates a new AttendanceWindow with a new Stage.
+     *
+     * @param logic The logic component to handle backend operations
+     * @param person The student whose attendance is being displayed
+     */
+    public AttendanceWindow(Person person, Logic logic) {
+        this(person, logic, new Stage());
     }
 
     /**
@@ -211,15 +221,6 @@ public class AttendanceWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Creates a new AttendanceWindow with a new Stage.
-     *
-     * @param logic The logic component to handle backend operations
-     * @param person The student whose attendance is being displayed
-     */
-    public AttendanceWindow(Person person, Logic logic) {
-        this(person, logic, new Stage());
-    }
 
     /**
      * Shows the attendance window and centers it on the screen.
