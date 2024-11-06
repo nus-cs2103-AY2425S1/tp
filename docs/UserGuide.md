@@ -283,7 +283,8 @@ Format: gift
 
 ## Revenue
 
-Calculates the total amount of money earned from student who has paid/not paid
+* Calculates the total amount of money earned from student who has paid/not paid
+* Filters the list of students based on their payment status.
 
 Format: `revenue [paid/unpaid]`
 
@@ -292,7 +293,9 @@ Example
 * `revenue unpaid`
 
 If the command is successful, the total amount of money will be displayed in this format: `Total revenue S is $X`, 
-where S is `paid` or `unpaid` and X is the money earned
+where S is `paid` or `unpaid` and X is the money earned. 
+If `revenue paid` is used, only students who have paid will be shown in the list.
+If `revenue unpaid` is used, only students who have not paid will be shown in the list.
 
 ## Data Files
 
