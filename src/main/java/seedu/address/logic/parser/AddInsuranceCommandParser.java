@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddInsuranceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.insurance.InsurancePlanFactory;
 
 /**
  * Parses input arguments and creates a new {@code AddInsurance} object
@@ -33,7 +34,7 @@ public class AddInsuranceCommandParser implements Parser<AddInsuranceCommand> {
             }
             insuranceId = ParserUtil.parseInsurancePlan(argMultimap.getValue(PREFIX_INSURANCE_ID).get());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInsuranceCommand.MESSAGE_USAGE),
+            throw new ParseException(InsurancePlanFactory.INVALID_PLAN_ID_MESSAGE,
                     ive);
         }
         return new AddInsuranceCommand(index, insuranceId);
