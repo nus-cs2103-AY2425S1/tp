@@ -27,7 +27,8 @@ import seedu.address.model.person.Priority;
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_NRIC = "S123456";
-    private static final String INVALID_DATE_OF_BIRTH_FORMAT = "2000-01-0";
+    private static final String INVALID_DATE_OF_BIRTH_INVALID_DATE = "2023-02-29";
+    private static final String INVALID_DATE_OF_BIRTH_FORMAT = "2000-01/0";
     private static final String INVALID_DATE_OF_BIRTH_FUTURE_DATE = LocalDate.now().plusDays(2)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     private static final String INVALID_GENDER = "X";
@@ -153,6 +154,16 @@ public class JsonAdaptedPersonTest {
                         INVALID_DATE_OF_BIRTH_FUTURE_DATE, VALID_GENDER, VALID_NRIC, VALID_ALLERGIES, VALID_PRIORITY,
                         VALID_APPOINTMENTS, VALID_MEDCON);
         String expectedMessage = DateOfBirth.MESSAGE_CONSTRAINTS_FUTURE_DATE;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDateOfBirthInvalidDate_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        INVALID_DATE_OF_BIRTH_INVALID_DATE, VALID_GENDER, VALID_NRIC, VALID_ALLERGIES, VALID_PRIORITY,
+                        VALID_APPOINTMENTS, VALID_MEDCON);
+        String expectedMessage = DateOfBirth.MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
