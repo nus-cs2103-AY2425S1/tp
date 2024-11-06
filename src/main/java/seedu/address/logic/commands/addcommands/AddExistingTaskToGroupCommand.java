@@ -6,8 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -41,15 +42,16 @@ public class AddExistingTaskToGroupCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Added task (%1$s) to the following groups:\n%2$s";
     public static final String GROUP_HAS_TASK = "%1$s already has the task.";
     public static final String GROUP_NOT_FOUND = "Group with name %1$s does not exist.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group(s) entered, only 1 will be added:";
 
     private final Index targetIndex;
-    private final Set<GroupName> groupNames;
+    private final List<GroupName> groupNames;
 
     /**
      * Creates an AddExistingTaskToGroupCommand to add the specified {@code Task} at the given {@code Index}
      * to the specified set of {@code Group}s.
      */
-    public AddExistingTaskToGroupCommand(Index targetIndex, Set<GroupName> groupNames) {
+    public AddExistingTaskToGroupCommand(Index targetIndex, List<GroupName> groupNames) {
         requireNonNull(targetIndex);
         requireNonNull(groupNames);
         this.targetIndex = targetIndex;
@@ -66,13 +68,21 @@ public class AddExistingTaskToGroupCommand extends Command {
         }
         Task taskToAdd = lastShownList.get(targetIndex.getZeroBased());
         StringBuilder groupsAdded = new StringBuilder();
-        for (GroupName groupName : groupNames) {
+        Stream<GroupName> checkForDuplicates =
+            groupNames.stream().filter(x -> Collections.frequency(groupNames, x) > 1).distinct();
+        long numDuplicates =
+            groupNames.stream().filter(x -> Collections.frequency(groupNames, x) > 1).distinct().count();
+        String duplicateMessage = checkForDuplicates.map(GroupName::getGroupName).reduce(
+            MESSAGE_DUPLICATE_GROUP, (x, y) -> x + "\n" + y
+        );
+        List<GroupName> noDuplicateGroupNameList = groupNames.stream().distinct().toList();
+        for (GroupName groupName : noDuplicateGroupNameList) {
             Group groupToAdd = model.getGroupByName(groupName);
             // check that group exists
             if (groupToAdd == null) {
                 throw new CommandException(String.format(GROUP_NOT_FOUND, groupName));
             }
-            //
+            // check that group doesn't have task
             if (model.hasTaskInGroup(taskToAdd, groupToAdd)) {
                 throw new CommandException(String.format(GROUP_HAS_TASK, groupName));
             }
@@ -81,6 +91,11 @@ public class AddExistingTaskToGroupCommand extends Command {
             groupsAdded.append(groupToAdd.getGroupName()).append("\n");
         }
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        if (numDuplicates > 0) {
+            return new CommandResult(duplicateMessage + "\n"
+                + String.format(MESSAGE_SUCCESS, taskToAdd.getTaskName().getTaskName(), groupsAdded)
+                , LIST_GROUP_MARKER);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAdd.getTaskName().getTaskName(),
             groupsAdded), LIST_GROUP_MARKER);
     }

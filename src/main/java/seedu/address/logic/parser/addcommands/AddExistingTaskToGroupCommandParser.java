@@ -4,7 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -40,12 +42,12 @@ public class AddExistingTaskToGroupCommandParser implements Parser<AddExistingTa
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-        Set<GroupName> groupNameSet = new LinkedHashSet<>(); // preserve insertion order
+        List<GroupName> groupNameList = new ArrayList<>();
         for (String s : argMultimap.getAllValues(PREFIX_GROUP_NAME)) {
-            groupNameSet.add(ParserUtil.parseGroupName(s));
+            groupNameList.add(ParserUtil.parseGroupName(s));
         }
 
-        return new AddExistingTaskToGroupCommand(index, groupNameSet);
+        return new AddExistingTaskToGroupCommand(index, groupNameList);
 
     }
 
