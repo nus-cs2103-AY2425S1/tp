@@ -189,7 +189,7 @@ Otherwise, the command will not be executed and display an error message in Resu
 | **EMERGENCY_CONTACT_NUMBER** | Phone number of emergency contact | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.                                                                                                                                                                                                            | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x:`9123 4567`   |
 | **EMAIL**   | Email of patient        | *Format must be in `LOCAL-PART@DOMAIN`.<br/> *No space allowed.<br/> * `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> * `LOCAL-PART` local-part may not start or end with any special character.<br/> * `DOMAIN` must be at least 2 characters long, start and end with alphanumeric characters. | :white_check_mark: `thomasho@gmail.com`<br/>:x: `$thomas@gmail.com`(`LOCAL-PART` error) |
 | **ADDRESS** | Address of patient      | * Address should not be blank.<br/> * Address can take any values                                                                                                                                                                                                                                                                                                     | :white_check_mark: `123, Clementi Rd, 1234665`<br/>                                     |
-| **TAG**     | Tag of patient          | * Tags should not have space.<br/> * Tags take alphanumeric                                                                                                                                                                                                                                                                                                           | :white_check_mark: `highBloodPressure`<br/>:x:`high blood pressure`                     |
+| **TAG**     | Tag of patient          | * Tags take alphanumeric and spaces                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `high blood pressure`<br/>:x:`low income $`                          |
 | **INDEX**   | Index of patient on GUI | * Index should be a positive integer.<br/> * Index should not be blank.]                                                                                                                                                                                                                                                                                              | :white_check_mark: `1`<br/>:x: `0`                                                      |
 | **DESCRIPTION** | Description of task | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                            | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                        |
 |**PRIORITY_LEVEL** | Priority level of patient | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `1`<br/>:x: `4`                                                      |
@@ -205,8 +205,8 @@ Adds a patient details to the system.
 
 **Note:**
 * Upon adding a patient the default priority is set to *3*. 
-  * Users can change the priority level using the [`priority` command](#adding-priority-level--priority).
-* To update emergency contact details, use the [`emergency` command](#adding-emergency-contact--emergency).
+  * Users can change the priority level using the [`priority` command](#adding-priority-level-priority).
+* To update emergency contact details, use the [`emergency` command](#adding-emergency-contact-emergency).
 * A person will not be added if the name and phone number is already in the system.
 * Refer to [Parameter Information](#parameter-information) for the limitations of each parameter.
 </box>
@@ -324,7 +324,6 @@ Deletes an emergency contact and its details from a patient in the system.
 
 Examples:
 * `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
-
 
 
 ### Adding priority level : `priority`
@@ -445,15 +444,14 @@ List all incomplete tasks for all patients in the system.
 Shows a message explaning how to access the help page.
 
 Format: `help`
-
-<box type="info" seamless>
+<box type="Note" seamless>
 
 **Note:**
 * Due to the amount of commands, the Help Window is made such that it will still be displayed at foreground despite clicking back to NovaCare.
 * The hide it, click the `minimize button` on the top right hand corner of the Help Window as shown below.
 * To close it, click the `close button` on the top right hand corner of the Help Window as shown below.
 </box>
-![Help Message](images/helpMessage.png)
+![helpMessage](images/helpMessage.png)
 
 ### Clearing all entries : `clear`
 
@@ -464,7 +462,7 @@ Clears all patient and tasks entry from NovaCare.
 <box type="warning" seamless>
 
 **Warning:**
-Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.<br>
+Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare. 
 **This action is irreversible!**
 </box>
 
