@@ -35,7 +35,8 @@ public class TuteeTest {
         // same name, all other attributes different -> returns true
         Tutee editedClara = new TuteeBuilder(CLARA).withPhone(VALID_PHONE_DEACON).withEmail(VALID_EMAIL_DEACON)
                 .withAddress(VALID_ADDRESS_DEACON).build();
-        assertTrue(CLARA.isSamePerson(editedClara));
+        assertFalse(CLARA.isSamePerson(editedClara));
+
 
         // different name, all other attributes same -> returns false
         editedClara = new TuteeBuilder(CLARA).withName(VALID_NAME_DEACON).build();
@@ -43,7 +44,7 @@ public class TuteeTest {
 
         // name differs in case, all other attributes same -> returns false
         Tutee editedBob = new TuteeBuilder(DEACON).withName(VALID_NAME_DEACON.toLowerCase()).build();
-        assertFalse(DEACON.isSamePerson(editedBob));
+        assertTrue(DEACON.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_DEACON + " ";

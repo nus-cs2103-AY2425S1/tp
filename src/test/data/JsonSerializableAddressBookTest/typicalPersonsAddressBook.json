@@ -6,7 +6,6 @@
     "email" : "alice@example.com",
     "address" : "jurong, 123456",
     "hours" : "1",
-    "tags" : [ "friends" ],
     "role" : "Tutor",
     "subjects" : [ "math" ]
   }, {
@@ -15,7 +14,6 @@
     "email" : "johnd@example.com",
     "address" : "Clementi, 345212",
     "hours" : "2",
-    "tags" : [ "owesMoney", "friends" ],
     "subjects" : [ "english" ],
     "role" : "Tutor"
   }, {
@@ -24,7 +22,6 @@
     "email" : "heinz@example.com",
     "address" : "wall street, 987543",
     "hours" : "3",
-    "tags" : [ ],
     "role" : "Tutor"
   }, {
     "name" : "Daniel Meier",
@@ -32,7 +29,6 @@
     "email" : "cornelia@example.com",
     "address" : "10th street, 123456",
     "hours" : "4",
-    "tags" : [ "friends" ],
     "role" : "Tutee",
     "subjects" : [ "Math" ]
   }, {
@@ -41,7 +37,6 @@
     "email" : "werner@example.com",
     "address" : "michegan ave, 878777",
     "hours" : "5",
-    "tags" : [ ],
     "role" : "Tutee",
     "subjects" : [ "English" ]
   }, {
@@ -50,7 +45,6 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo, 123456",
     "hours" : "6",
-    "tags" : [ ],
     "role" : "Tutee"
   }, {
     "name" : "George Best",
@@ -58,7 +52,6 @@
     "email" : "anna@example.com",
     "address" : "4th street, 897978",
     "hours" : "7",
-    "tags" : [ ],
     "role" : "Tutee"
   } ]
 }
