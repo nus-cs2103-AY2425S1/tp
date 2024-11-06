@@ -132,7 +132,9 @@ public class EditEventCommand extends EditCommand {
 
         EventName updatedEventName = editEventDescriptor.getName().orElse(eventToEdit.getName());
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
-        Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue().orElse(null));
+        Venue updatedVenue = editEventDescriptor.isVenueEdited()
+                ? editEventDescriptor.getVenue().orElse(null)
+                : eventToEdit.getVenue().orElse(null);
         Person updatedCelebrity = editEventDescriptor.getCelebrity().orElse(eventToEdit.getCelebrity());
         Set<Person> updatedContacts = editEventDescriptor.getContacts().orElse(eventToEdit.getContacts());
 
@@ -174,6 +176,7 @@ public class EditEventCommand extends EditCommand {
         private EventName name;
         private Time time;
         private Venue venue;
+        private boolean isVenueEdited;
         private String celebrityName;
         private Person celebrity;
         private Set<String> contactsNames;
@@ -193,14 +196,15 @@ public class EditEventCommand extends EditCommand {
             setCelebrity(toCopy.celebrity);
             setContactsNames(toCopy.contactsNames);
             setContacts(toCopy.contacts);
-
+            setVenueEdited(toCopy.isVenueEdited);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, time, venue, celebrity, celebrityName, contactsNames);
+            return CollectionUtil.isAnyNonNull(name, time, venue, celebrity, celebrityName, contactsNames)
+                    || isVenueEdited;
         }
 
         public void setEventName(EventName name) {
@@ -225,6 +229,13 @@ public class EditEventCommand extends EditCommand {
 
         public Optional<Venue> getVenue() {
             return Optional.ofNullable(venue);
+        }
+        public boolean isVenueEdited() {
+            return isVenueEdited;
+        }
+
+        public void setVenueEdited(boolean isVenueEdited) {
+            this.isVenueEdited = isVenueEdited;
         }
 
         public void setCelebrity(Person celebrity) {

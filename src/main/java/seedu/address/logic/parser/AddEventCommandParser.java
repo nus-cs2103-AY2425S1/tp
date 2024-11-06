@@ -45,6 +45,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_EVENT_TIME).get());
         Venue venue = argMultimap.getValue(PREFIX_EVENT_VENUE).isPresent()
+                && !argMultimap.getValue(PREFIX_EVENT_VENUE).get().isEmpty()
                 ? ParserUtil.parseVenue((argMultimap.getValue(PREFIX_EVENT_VENUE)).get())
                 : null;
         String celebrity = ParserUtil.parseEventCelebrity(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get());
