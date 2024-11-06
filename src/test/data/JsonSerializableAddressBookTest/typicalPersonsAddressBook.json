@@ -40,7 +40,7 @@
   }, {
     "name" : "Elle Meyer",
     "identityNumber" : "S5602975C",
-    "phone" : "9482224",
+    "phone" : "94822241",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "status": "LOW",
@@ -48,7 +48,7 @@
   }, {
     "name" : "Fiona Kunz",
     "identity number" : "S7761327G",
-    "phone" : "9482427",
+    "phone" : "94824272",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "status": "HIGH",
@@ -56,7 +56,7 @@
   }, {
     "name" : "George Best",
     "identityNumber" : "S7468515C",
-    "phone" : "9482442",
+    "phone" : "94824425",
     "email" : "anna@example.com",
     "address" : "4th street",
     "status": "HIGH",

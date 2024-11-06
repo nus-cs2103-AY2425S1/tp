@@ -25,6 +25,9 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX(must be a positive integer) or i/NRIC (must be 9 characters)\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " " + PREFIX_IDENTITY_NUMBER + "S1234567A";
 
+    public static final String MESSAGE_INDEX_AND_IDENTITY_NUMBER = "Please provide either an index "
+            + "or an identity number.";
+
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final IdentityNumber identityNumber;

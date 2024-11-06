@@ -62,7 +62,7 @@ public class LogicManagerTest {
     // TODO: Uncomment once message constraints are updated
     //    @Test
     //    public void execute_commandExecutionError_throwsCommandException() {
-    //        String deleteCommand = "delete i/S1234567A";
+    //        String deleteCommand = "delete i/S1234567D";
     //        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     //    }
 

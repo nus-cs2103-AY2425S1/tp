@@ -22,21 +22,33 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         // Use the identity number prefix to tokenize the arguments
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_IDENTITY_NUMBER);
 
-        if (argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isPresent()) {
-            // Use IdentityNumber class to parse the identity number
+        boolean hasIdentityNumber = argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isPresent();
+        boolean hasIndex = !argMultimap.getPreamble().isEmpty();
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IDENTITY_NUMBER);
+
+        if (hasIndex && hasIdentityNumber) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_INDEX_AND_IDENTITY_NUMBER));
+        }
+
+        if (!hasIndex && !hasIdentityNumber) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        if (hasIdentityNumber) {
             IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
                     argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
-
             return new DeleteCommand(identityNumber);
-        } else {
-            try {
-                // Use Index class to parse the index
-                Index index = ParserUtil.parseIndex(args);
-                return new DeleteCommand(index);
-            } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
-            }
+        }
+
+        try {
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            return new DeleteCommand(index);
+        } catch (ParseException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
         }
     }
 }

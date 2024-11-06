@@ -28,7 +28,7 @@ public class ListLogsParserTest {
                 ListLogsCommand.MESSAGE_USAGE));
 
         // Missing prefix
-        assertParseFailure(parser, "S1234567A", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "S1234567D", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ListLogsCommand.MESSAGE_USAGE));
     }
 
