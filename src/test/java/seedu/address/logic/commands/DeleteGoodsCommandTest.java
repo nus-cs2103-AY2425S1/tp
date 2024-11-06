@@ -1,0 +1,113 @@
+package seedu.address.logic.commands;
+
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.DeleteGoodsCommand.MESSAGE_SUCCESS;
+import static seedu.address.testutil.TypicalGoods.getTypicalGoodsReceipts;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.goods.Goods;
+import seedu.address.model.goods.GoodsCategories;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.GoodsBuilder;
+import seedu.address.testutil.GoodsReceiptBuilder;
+
+public class DeleteGoodsCommandTest {
+
+    private Model getDefaultModel() {
+        return new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
+    }
+
+//    @Test
+//    public void execute_existingName_success() {
+//        for (Person person : getDefaultModel().getPersonList()) {
+//            Name name = person.getName();
+//            DeleteCommand cmd = new DeleteCommand(name);
+//            Model expectedModel = getDefaultModel();
+//            expectedModel.deletePerson(person);
+//            String expectedMessage = String.format("Deleted Person: %s", person.getName());
+//            assertCommandSuccess(cmd, getDefaultModel(), expectedMessage, expectedModel);
+//        }
+//    }
+//
+//    @Test
+//    public void execute_nonExistingName_throwsCommandException() {
+//        Name name = new Name("Apple");
+//        DeleteCommand cmd = new DeleteCommand(name);
+//        assertCommandFailure(cmd, getDefaultModel(), Messages.MESSAGE_PERSON_NOT_FOUND);
+//    }
+
+    @Test
+    public void execute_nonExistingSupplierNameAndExistingGoodsName_failure() {
+        Model model = new ModelManager();
+        model.addPerson(ALICE);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        model.addGoods(appleReceipt);
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(BOB.getName(), apple.getGoodsName());
+        assertCommandFailure(cmd, model, Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_existingSupplierNameAndNonExistingGoodsName_failure() {
+        Model model = new ModelManager();
+        model.addPerson(ALICE);
+        model.addPerson(BOB);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        Goods banana = new GoodsBuilder()
+                .withName("Banana")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        GoodsReceipt bananaReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(BOB.getName())
+                .withGoods(banana)
+                .build();
+        model.addGoods(appleReceipt);
+        model.addGoods(bananaReceipt);
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), banana.getGoodsName());
+        assertCommandFailure(cmd, model, Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_existingSupplierNameAndExistingGoodsName_success() {
+        ModelManager model = new ModelManager();
+        model.addPerson(ALICE);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        model.addGoods(appleReceipt);
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), apple.getGoodsName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS, apple.getGoodsName());
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(ALICE);
+        assertCommandSuccess(cmd, model, expectedMessage, expectedModel);
+    }
+}
