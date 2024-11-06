@@ -3,7 +3,6 @@ package seedu.internbuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.internbuddy.testutil.TypicalApplications.SWE_APPLICATION;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 
