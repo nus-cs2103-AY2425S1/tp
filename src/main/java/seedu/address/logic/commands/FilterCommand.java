@@ -49,6 +49,11 @@ public class FilterCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(FilterCommand.class);
     private final PersonPredicate predicate;
 
+    /**
+     * Constructs a {@code FilterCommand} with the specified {@code predicate}.
+     * This command will filter and display all persons that match the given criteria.
+     * @param predicate The filtering criteria to apply for person objects in the address book.
+     */
     public FilterCommand(PersonPredicate predicate) {
         assert predicate != null;
         this.predicate = predicate;
