@@ -18,6 +18,7 @@ import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableException;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
 import seedu.address.model.volunteer.VolunteerIsAvailableForEventPredicate;
@@ -198,7 +199,12 @@ public class ModelManager implements Model {
      */
     @Override
     public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException,
-            OverlappingAssignException {
+            OverlappingAssignException, VolunteerNotAvailableException {
+        VolunteerIsAvailableForEventPredicate volIsAvail = new VolunteerIsAvailableForEventPredicate(event,
+                addressBook);
+        if (!volIsAvail.test(volunteer)) {
+            throw new VolunteerNotAvailableException(event.getName().toString());
+        }
         addressBook.assignVolunteerToEvent(volunteer, event);
     }
 
