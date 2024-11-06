@@ -1,10 +1,8 @@
 ---
 layout: default.md
-title: "User Guide"
+title: "NovaCare User Guide"
 pageNav: 3
 ---
-# NovaCare User Guide
-
 NovaCare is a **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
 --------------------------------------------------------------------------------------------------------------------
@@ -12,9 +10,9 @@ If you can type fast, NovaCare can get your patient management tasks done faster
 ## Table of Contents
 - [How to use NovaCare](#how-to-use-novacare)
   - [Glossary](#glossary)
+  - [Annotations box](#annotations-box)
 - [Quick start](#quick-start)
   - [Installation](#step-1-ensure-you-have-java-17-or-above-installed-in-your-computer-you-can-download-java-from-here)
-  - Overview of features, target audience with friendly tone, have glossary to make sure they understand stuffs.
   - [How to run NovaCare](#step-3-run-the-application)
   - [Overview of GUI](#overview-of-gui)
   - [Get started with NovaCare](#get-started-with-novacare)
@@ -34,7 +32,7 @@ This user guide is tailored for new and existing users of NovaCare.
 
 If you are new to NovaCare, we recommend you to start with the [Quick Start](#quick-start) section.
 
-If you are an existing user looking for a specific feature, you can jump to the [Features](#features) section or [Command Summary](#Command Summary) section.
+If you are an existing user looking for a specific feature, you can jump to the [Features](#features) section or [Command Summary](#command-summary) section.
 
 ### Glossary
 As you read through the user guide, you may come across some terms that are unfamiliar to you. Here is a glossary of terms that you may encounter:
@@ -54,13 +52,13 @@ As you read through the user guide, you may come across some terms that are unfa
 ### Annotations box
 The following are annotations throughout this user guide that provide additional information to help you understand the NovaCare features better.
 
-> [!NOTE]
+> :information_source: **Note:** <br>
 > Additional information that help you understand more about Commands.
 
-> [!TIP]
+> :bulb: **Tip:** <br>
 > Provide tips to help users understand the command usage better.
 
-> [!WARNING]
+> :warning: **Warning:** <br>
 > Warns you about potential errors that you may face when using the NovaCare.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -99,7 +97,7 @@ Upon successful execution, you should see the GUI of NovaCare covered in the nex
 ## Overview of GUI
 
 The GUI is broken down into different **sections** as shown in the image below:
-![GUI Overview](images/GUIOverview.png)
+![GUI Overview](images/GUIOverview.jpg)
 1. Command Box: This is where you can type your commands to interact with the application.
 2. Result Display Box: Displays the result of commands.
 3. Patient List: Displays all the patients in the application.
