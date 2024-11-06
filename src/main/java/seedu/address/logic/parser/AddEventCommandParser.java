@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.role.athlete.SportString;
 
 /**
- * Parses input arguments and creates a new AddEventCommand object
+ * Parses input arguments and creates a new AddEventCommand object.
  */
 public class AddEventCommandParser implements Parser<AddEventCommand> {
     /**
@@ -40,7 +40,6 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         SportString sport = ParserUtil.parseSportString(argMultimap.getValue(PREFIX_SPORT).get());
         Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
         Set<Person> participants = ParserUtil.parseParticipants(argMultimap.getAllValues(PREFIX_PARTICIPANTS));
-        System.out.println(participants);
 
         Event event = new Event(eventName, sport, venue, participants);
 

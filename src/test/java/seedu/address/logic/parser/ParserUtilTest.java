@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.role.Faculty;
 import seedu.address.model.person.role.Role;
+import seedu.address.model.person.role.athlete.Athlete;
 import seedu.address.model.person.role.athlete.Sport;
 import seedu.address.model.person.role.committee.Branch;
 import seedu.address.model.person.role.committee.Position;
@@ -33,7 +35,7 @@ public class ParserUtilTest {
     private static final String INVALID_ROLE = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "1234567";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_EVENT_NAME = "IFG";
     private static final String VALID_ROLE_1 = "friend";
@@ -296,5 +298,11 @@ public class ParserUtilTest {
         Set<Role> expectedRoleSet = new HashSet<Role>(Arrays.asList(new Role(VALID_ROLE_1), new Role(VALID_ROLE_2)));
 
         assertEquals(expectedRoleSet, actualRoleSet);
+    }
+
+    @Test
+    public void parseRole_noHyphen_success() {
+        assertEquals(new Athlete(Faculty.COM, List.of(Sport.VOLLEYBALL_W)),
+                ParserUtil.parseRole("Athlete-COM-Volleyball Women"));
     }
 }

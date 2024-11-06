@@ -5,10 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.role.athlete.SportString;
-
 
 /**
  * Represents an {@code Event} in the address book.
@@ -84,8 +82,6 @@ public class Event {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .toString();
+        return name.toString();
     }
 }
