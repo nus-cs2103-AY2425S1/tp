@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.beans.property.BooleanProperty;
@@ -127,5 +128,22 @@ public interface Model {
      */
     ObservableList<Person> getAllPersons();
 
+    /**
+     * Returns the search mode property.
+     */
     BooleanProperty searchModeProperty();
+
+    /**
+     * Returns the set of persons that are excluded from the search.
+     */
+    Set<Person> getExcludedPersons();
+
+    /**
+     * Excludes a Person from the search.
+     */
+    void excludePerson(Person person);
+
+    void clearExcludedPersons();
+
+    void updateFilteredListWithExclusions(Predicate<Person> predicate);
 }

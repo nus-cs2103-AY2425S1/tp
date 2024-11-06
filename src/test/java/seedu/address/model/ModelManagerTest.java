@@ -11,12 +11,14 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -183,5 +185,32 @@ public class ModelManagerTest {
         // different eventManager -> returns false
         ModelManager differentEventManagerModel = new ModelManager(addressBook, differentEventManager, userPrefs);
         assertFalse(modelManager.equals(differentEventManagerModel));
+    }
+
+    @Test
+    public void getExcludedPersons_empty() {
+        assertEquals(modelManager.getExcludedPersons(), new HashSet<>());
+    }
+
+    @Test
+    public void getExcludedPersons_notEmpty() {
+        modelManager.addPerson(ALICE);
+        modelManager.excludePerson(ALICE);
+        assertEquals(modelManager.getExcludedPersons(), new HashSet<>(Arrays.asList(ALICE)));
+    }
+    @Test
+    public void excludePerson_personInAddressBook() {
+        modelManager.addPerson(ALICE);
+        try {
+            modelManager.excludePerson(ALICE);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    @Test
+    public void excludePerson_personNotInAddressBook() {
+        assertThrows(PersonNotFoundException.class, () -> modelManager.excludePerson(ALICE));
     }
 }
