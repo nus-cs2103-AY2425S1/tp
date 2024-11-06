@@ -1,29 +1,19 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedVolunteer.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalVolunteers.ALICE;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Date;
-import seedu.address.model.event.Description;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.event.Location;
-import seedu.address.model.event.Time;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.VolunteerDates;
-
-import static seedu.address.storage.JsonAdaptedVolunteer.MISSING_FIELD_MESSAGE_FORMAT;
-
-import java.util.LinkedList;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertDoesNotThrow;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalVolunteers.ALICE;
 
 public class JsonAdaptedVolunteerTest {
 
@@ -72,7 +62,7 @@ public class JsonAdaptedVolunteerTest {
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedVolunteer volunteer =
                 new JsonAdaptedVolunteer(VALID_NAME, null, VALID_EMAIL, VALID_DATE, VALID_INVOLVED_IN);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, volunteer::toModelType);
     }
 
@@ -88,7 +78,7 @@ public class JsonAdaptedVolunteerTest {
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedVolunteer volunteer =
                 new JsonAdaptedVolunteer(VALID_NAME, VALID_PHONE, null, VALID_DATE, VALID_INVOLVED_IN);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, volunteer::toModelType);
     }
 
@@ -104,7 +94,7 @@ public class JsonAdaptedVolunteerTest {
     public void toModelType_nullDate_throwsIllegalValueException() {
         JsonAdaptedVolunteer volunteer =
                 new JsonAdaptedVolunteer(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_INVOLVED_IN);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, VolunteerDates.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, volunteer::toModelType);
     }
 

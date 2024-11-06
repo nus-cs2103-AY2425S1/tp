@@ -44,6 +44,20 @@ public class EventManager {
     }
 
     /**
+     * Returns true if an event with the name {@code eventName} exists in the address book.
+     *
+     * @param eventName Name of event to search for.
+     */
+    public boolean hasEvent(String eventName) {
+        for (Event e : events) {
+            if (e.getName().toString().equals(eventName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Assigns a volunteer to an event.
      * @param volunteer Volunteer to be assigned.
      * @param event Event to be assigned to.
@@ -78,22 +92,6 @@ public class EventManager {
         }
         throw new EventNotFoundException();
     }
-
-    /**
-     * Returns true if an event with the same identity as {@code eventName} exists in the address book.
-     * Used as a more lightweight version of getEventFromName to check if an event exists.
-     *
-     * @param eventName Name of event to search for.
-     */
-    public boolean hasEvent(String eventName) {
-        for (Event e : events) {
-            if (e.getName().toString().equals(eventName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     /**
      * Returns a list of event objects using a provided list of event names.

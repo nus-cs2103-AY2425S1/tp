@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
@@ -54,7 +53,9 @@ public class VolunteerManager {
     }
 
     /**
-     * Returns true if a volunteer with the same name as {@code volunteerName} exists in the volunteer book.
+     * Returns true if a volunteer with the name {@code volunteerName} exists in the volunteer book.
+     *
+     * @param volunteerName Name of volunteer to search for.
      */
     public boolean hasVolunteer(String volunteerName) {
         for (Volunteer volunteer : volunteers) {
