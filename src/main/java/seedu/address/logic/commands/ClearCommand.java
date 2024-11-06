@@ -22,9 +22,11 @@ public class ClearCommand extends Command {
             + "Parameters: /TAG KEYWORD [/MORE_TAGS MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " /name John";
 
-    public static final String MESSAGE_SUCCESS = "EduConnect has been cleared of specified tags!";
+    public static final String MESSAGE_SUCCESS = "EduConnect has been cleared of %d matching entries!";
 
-    public static final String MESSAGE_NO_ACTION = "No matching entries in EduConnect to clear!";
+    public static final String MESSAGE_CLEAR_ALL = "EduConnect has been cleared of all entries!";
+
+    public static final String MESSAGE_NO_ACTION = "No possible entries in EduConnect to clear!";
 
     private final PersonContainsKeywordsPredicate predicate;
 
@@ -47,10 +49,14 @@ public class ClearCommand extends Command {
             throw new CommandException(MESSAGE_NO_ACTION);
         }
 
+        if (newSize == 0) {
+            return new CommandResult(MESSAGE_CLEAR_ALL);
+        }
+
         AddressBook newAddressBook = new AddressBook();
         newAddressBook.setPersons(remainingPersons);
 
         model.setAddressBook(newAddressBook);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, originalSize - newSize));
     }
 }
