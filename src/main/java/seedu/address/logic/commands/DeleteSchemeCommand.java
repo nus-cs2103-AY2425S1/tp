@@ -36,8 +36,8 @@ import seedu.address.model.tag.Tag;
 public class DeleteSchemeCommand extends Command {
     public static final String COMMAND_WORD = "deletescheme";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a scheme from the family identified by the "
-            + "index number used in the displayed family list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a scheme from the person identified by the "
+            + "index number used in the displayed person list.\n"
             + "This command can only be used after Scheme command.\n"
             + "Parameters: PERSON_INDEX SCHEME_INDEX (both must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 i/1";

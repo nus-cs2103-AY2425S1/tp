@@ -35,11 +35,11 @@ public class Messages {
             "Times should be in HH:mm format and represent a valid time";
     public static final String MESSAGE_CONFLICTING_APPOINTMENTS = "Conflicting appointments found:\n%s";
 
-    public static final String MESSAGE_NO_SCHEMES_AVAILABLE = "There are no schemes available for this family";
+    public static final String MESSAGE_NO_SCHEMES_AVAILABLE = "There are no schemes available for this person";
 
     public static final String MESSAGE_INVALID_SCHEMES_DISPLAYED_INDEX = "The scheme index provided is invalid";
 
-    public static final String MESSAGE_DUPLICATE_SCHEME = "This scheme already exists in the family";
+    public static final String MESSAGE_DUPLICATE_SCHEME = "This scheme already exists in the person";
 
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 

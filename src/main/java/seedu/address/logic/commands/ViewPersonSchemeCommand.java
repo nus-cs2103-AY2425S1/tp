@@ -21,8 +21,8 @@ public class ViewPersonSchemeCommand extends Command {
     public static final String COMMAND_WORD = "viewscheme";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the schemes the family is subscribed to identified by the "
-            + "index number used in the displayed family list.\n"
+            + ": Displays the schemes the person is subscribed to identified by the "
+            + "index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -39,8 +39,8 @@ public class ViewPersonSchemeCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Person targetFamily = lastShownList.get(targetIndex.getZeroBased());
-        SchemeRetrieval schemeRetrieval = new SchemeRetrieval(targetFamily);
+        Person targetPerson = lastShownList.get(targetIndex.getZeroBased());
+        SchemeRetrieval schemeRetrieval = new SchemeRetrieval(targetPerson);
         ArrayList<Scheme> schemes = schemeRetrieval.getSubscribedSchemes();
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < schemes.size(); i++) {
@@ -49,7 +49,7 @@ public class ViewPersonSchemeCommand extends Command {
         if (result.toString().equals("")) {
             result = new StringBuilder("No schemes available for this family.");
         }
-        result.insert(0, "Schemes available for family: " + targetFamily.getName() + "\n");
+        result.insert(0, "Schemes available for family: " + targetPerson.getName() + "\n");
         return new CommandResult(result.toString());
     }
 

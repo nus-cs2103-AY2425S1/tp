@@ -14,7 +14,7 @@ import seedu.address.model.scheme.Scheme;
 import seedu.address.model.scheme.SchemeRetrieval;
 
 /**
- * Displays the scheme available to family identified using the displayed index from the address book.
+ * Displays the scheme available to person identified using the displayed index from the address book.
  */
 public class SchemeCommand extends Command {
 
@@ -51,17 +51,17 @@ public class SchemeCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Person targetFamily = lastShownList.get(targetIndex.getZeroBased());
-        SchemeRetrieval schemeRetrieval = new SchemeRetrieval(targetFamily);
+        Person targetPerson = lastShownList.get(targetIndex.getZeroBased());
+        SchemeRetrieval schemeRetrieval = new SchemeRetrieval(targetPerson);
         ArrayList<Scheme> schemes = schemeRetrieval.getSchemes();
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < schemes.size(); i++) {
             result.append((i + 1 + ". ")).append(schemes.get(i).getSchemeName()).append("\n");
         }
         if (result.toString().equals("")) {
-            result = new StringBuilder("No schemes available for this family.");
+            result = new StringBuilder("No schemes available for this person.");
         }
-        result.insert(0, "Schemes available for family: " + targetFamily.getName() + "\n");
+        result.insert(0, "Schemes available for: " + targetPerson.getName() + "\n");
         return new CommandResult(result.toString());
     }
 

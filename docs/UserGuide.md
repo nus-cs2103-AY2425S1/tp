@@ -216,13 +216,13 @@ Format: `scheme INDEXES`
 Examples:
 * `scheme 1` shows scheme that the 1st person in the address book is eligible for.
 
-### Adding a scheme to a family : `addscheme`
+### Adding a scheme to a person : `addscheme`
 
-Adds a scheme to the specified family in the address book.
+Adds a scheme to the specified person in the address book.
 
 Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
 
-* Adds the scheme at the specified `SCHEME_INDEX` to the family at the specified `PERSON_INDEX`.
+* Adds the scheme at the specified `SCHEME_INDEX` to the person at the specified `PERSON_INDEX`.
 * The person index refers to the index number shown in the displayed person list.
 * The scheme index refers to the index number shown in the displayed scheme list with scheme command.
 * The indexes **must be a positive integer** 1, 2, 3, …​
@@ -231,12 +231,12 @@ Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
 Examples:
 * `addscheme 1 i/1` adds the 1st scheme to the 1st person in the address book.
 
-### Viewing schemes attached to a family : `viewscheme`
+### Viewing schemes attached to a person : `viewscheme`
 
-Displays the schemes that the specified family in the address book is attached to.
+Displays the schemes that the specified person in the address book is attached to.
 
 Format: `viewscheme INDEX`
-* Displays the schemes that the family at the specified `INDEX` is attached to.
+* Displays the schemes that the person at the specified `INDEX` is attached to.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Only 1 index can be inputted at a time.
@@ -245,13 +245,13 @@ Format: `viewscheme INDEX`
 Examples:
 * `viewscheme 1` shows the schemes that the 1st person in the address book is attached to.
 
-### Delete a scheme from a family : `deletescheme`
+### Delete a scheme from a person : `deletescheme`
 
-Deletes the specified scheme from the specified family in the address book.
+Deletes the specified scheme from the specified person in the address book.
 
 Format: `deletescheme PERSON_INDEX i/SCHEME_INDEXS`
 
-* Deletes the schemes at the specified `SCHEME_INDEXES` from the family at the specified `PERSON_INDEX`.
+* Deletes the schemes at the specified `SCHEME_INDEXES` from the person at the specified `PERSON_INDEX`.
 * The person index refers to the index number shown in the displayed person list.
 * The scheme index refers to the index number shown in the displayed scheme list with viewscheme command.
 * The indexes **must be a positive integer** 1, 2, 3, …​
