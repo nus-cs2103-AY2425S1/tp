@@ -225,9 +225,8 @@ Deletes a student from its assigned group.
 ##### Notes
 
 1. This feature only removes a student from a group, not from T_Assistant.
-2. The student and group must exist in T_Assistant.
-3. The student must be in that group.
-4. For information on the constraints for each parameter used in this command, go
+2. The student must exist in T_Assistant and be in a group.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -235,9 +234,9 @@ Deletes a student from its assigned group.
 ###### Scenario #1: Deleting `James Ho` from `CS2103-F11-1`
 
 1. You can begin this command on any panel.
-2. Type and execute: `del_s_g gn/CS2103-F11-1 sno/A0123456A`
+2. Type and execute: `del_s_g sno/A0123456A`
 
-This screenshot shows the result of executing `del_s_g gn/CS2103-F11-1 sno/A0123456A`.
+This screenshot shows the result of executing `del_s_g sno/A0123456A`.
 
 ![del_s_g](images/screenshots/del_s_g.png)
 
