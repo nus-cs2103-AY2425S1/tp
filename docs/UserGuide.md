@@ -6,7 +6,13 @@
 
 # MindMap User Guide
 
-MindMap is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+MindMap is a **desktop app that helps you manage your contacts efficiently, combining the speed of typing commands with the ease of a visual interface.**
+
+It’s designed for professionals like psychologists who work with many contacts and prefer a fast, straightforward tool.
+
+With MindMap, you can accomplish tasks quickly by typing simple commands, and you still get a clear, user-friendly screen to view and organize your contacts.
+
+If you’re comfortable typing, MindMap can help you get contact management tasks done much faster than traditional apps that rely heavily on point-and-click with a mouse.
 
 <!-- * Table of Contents -->
 <page-nav-print />
