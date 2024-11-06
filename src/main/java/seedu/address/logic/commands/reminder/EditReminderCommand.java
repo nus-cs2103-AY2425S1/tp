@@ -31,7 +31,9 @@ public class EditReminderCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT
             + ": Edits a reminder in Client Hub identified "
             + "by the index number displayed in the reminder list.\n"
-            + "Parameters: INDEX, " + PREFIX_DATE_TIME + "DATE_AND_TIME, " + PREFIX_DESCRIPTION + "DESCRIPTION\n"
+            + "Parameters: INDEX "
+            + "[" + PREFIX_DATE_TIME + "DATE_TIME] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Examples:\n"
             + COMMAND_WORD + " 1 " + PREFIX_DATE_TIME + "2022-01-01 00:00 "
             + PREFIX_DESCRIPTION + "New Year's\n"
