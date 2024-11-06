@@ -23,7 +23,7 @@ public class StatisticsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the general statistics regarding the current people list in SocialBook.\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_DISPLAY_STATISTICS_SUCCESS = "Here are all the statistics:\n%s";
+    public static final String MESSAGE_DISPLAY_STATISTICS_SUCCESS = "Here are the statistics for the current list:\n%s";
     public static final String MESSAGE_DISPLAY_TOTAL_PEOPLE = "Total Number Of People: %s";
     public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
     public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
