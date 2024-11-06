@@ -10,7 +10,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.person.TelegramHandleContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -27,6 +29,16 @@ public class FindCommandParserTest {
     public void parse_emptyArgTelegramHandle_throwsParseException() {
         assertParseFailure(parser, "h/     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidName_throwsParseException() {
+        assertParseFailure(parser, "123", Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidTelegramHandle_throwsParseException() {
+        assertParseFailure(parser, "h/amy123", TelegramHandle.MESSAGE_CONSTRAINTS);
     }
 
     @Test
