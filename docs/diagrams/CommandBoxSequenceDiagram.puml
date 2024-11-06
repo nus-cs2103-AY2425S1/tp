@@ -20,17 +20,12 @@ deactivate TextField
 alt commandText is empty
     CommandBox --> CommandBox: return
 else else
-    alt CommandException or ParseException
-        CommandExecutor --> CommandBox: throw exception
-        CommandBox -> CommandBox: setStyleToIndicateCommandFailure()
-    else else
     CommandBox -> CommandExecutor: execute(commandText)
     activate CommandExecutor
     CommandExecutor --> CommandBox: return CommandResult
     deactivate CommandExecutor
     CommandBox -> CommandHistory: add(commandText)
     CommandBox -> TextField: setText("")
-    end
 end
 [<--CommandBox
 deactivate CommandBox
