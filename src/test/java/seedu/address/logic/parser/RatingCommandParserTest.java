@@ -2,11 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RatingCommand;
 import seedu.address.model.restaurant.Rating;
 
@@ -22,10 +20,10 @@ public class RatingCommandParserTest {
         assertParseFailure(parser, "r/5", MESSAGE_INVALID_FORMAT);
 
         // no rating specified
-         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no rating specified
-         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
