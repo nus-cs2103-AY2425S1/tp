@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.AddressBookBuilder;
 
+//@@author estellelim-reused
+//Reused from https://github.com/se-edu/addressbook-level4.git
 public class VersionedAddressBookTest {
 
     private final ReadOnlyAddressBook addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
@@ -296,3 +298,4 @@ public class VersionedAddressBookTest {
         }
     }
 }
+//@@author
