@@ -150,7 +150,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String ecName} into a {@code EmergencyContactName}.
+     * Parses a {@code String ecName} into a {@code EcName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code ecName} is invalid.

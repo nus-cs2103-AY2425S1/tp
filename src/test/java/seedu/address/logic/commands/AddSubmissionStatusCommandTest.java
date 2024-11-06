@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBMISSION_ASSI
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBMISSION_ASSIGNMENT_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBMISSION_STATUS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBMISSION_STATUS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBMISSION_TUTORIAL_1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -59,6 +60,14 @@ public class AddSubmissionStatusCommandTest {
                 new Submission(VALID_SUBMISSION_ASSIGNMENT_2), VALID_SUBMISSION_STATUS_AMY);
         assertThrows(CommandException.class, AddSubmissionStatusCommand.MESSAGE_SUBMISSION_NOT_FOUND, (
                 ) -> addSubmissionStatusCommand.execute(model));
+    }
+
+    @Test
+    public void execute_submissionStatusNotEdited_throwsCommandException() {
+        AddSubmissionStatusCommand addSubmissionStatusCommand = new AddSubmissionStatusCommand(INDEX_FIRST_PERSON,
+                new Submission(VALID_SUBMISSION_TUTORIAL_1), "NIL");
+        assertThrows(CommandException.class, AddSubmissionStatusCommand.MESSAGE_SUBMISSIONSTATUS_NOT_EDITED, ()
+                -> addSubmissionStatusCommand.execute(model));
     }
 
     @Test

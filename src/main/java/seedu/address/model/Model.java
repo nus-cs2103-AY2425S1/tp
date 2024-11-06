@@ -91,6 +91,7 @@ public interface Model {
 
     /**
      * Sorts the filteredPersonList using the comparator.
+     *
      * @param comparator to sort the list.
      */
     void sortFilteredPersonList(Comparator<Person> comparator);

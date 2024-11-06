@@ -31,6 +31,7 @@ public class AddSubmissionStatusCommand extends Command {
             + "Submission: %2$s\n"
             + "Status: %3$s";
     public static final String MESSAGE_SUBMISSION_NOT_FOUND = "This submission does not exist.";
+    public static final String MESSAGE_SUBMISSIONSTATUS_NOT_EDITED = "The submission status was not changed!.";
 
     private final Index index;
     private final Submission submission;
@@ -57,6 +58,12 @@ public class AddSubmissionStatusCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Submission> updatedSubmissions = personToEdit.getSubmissions();
+        // throw an error if the input submission status is the same as in the system
+        for (Submission submissionInSet : updatedSubmissions) {
+            if (submissionInSet.equals(submission) && submissionInSet.submissionStatus.equals(submissionStatus)) {
+                throw new CommandException(MESSAGE_SUBMISSIONSTATUS_NOT_EDITED);
+            }
+        }
         Submission updatedSubmission = new Submission(submission.submissionName, submissionStatus);
         if (!updatedSubmissions.remove(submission)) {
             throw new CommandException(MESSAGE_SUBMISSION_NOT_FOUND);

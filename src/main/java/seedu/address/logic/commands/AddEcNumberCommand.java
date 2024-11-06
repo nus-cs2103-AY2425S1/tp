@@ -22,19 +22,18 @@ public class AddEcNumberCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an emergency contact number to the student "
             + "identified by the index.\n"
-            + "Parameters: [INDEX] ep/[EMERGENCY_NUMBER]\n"
+            + "Parameters: [INDEX] ep/[EMERGENCY_CONTACT_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 ep/91234567";
-
-    public static final String MESSAGE_ADD_ECNUMBER_SUCCESS = "Added emergency contact number for Person: %1$s\n";
-
-    public static final String MESSAGE_DELETE_ECNUMBER_SUCCESS = "Removed emergency contact number for Person: %1$s\n";
+    public static final String MESSAGE_ADD_ECNUMBER_SUCCESS = "Added emergency contact number for %1$s\n"
+            + "New Emergency Contact Number: %2$s";
+    public static final String MESSAGE_DELETE_ECNUMBER_SUCCESS = "Removed emergency contact number for: %1$s\n%2$s";
 
     private final Index index;
     private final EcNumber ecNumber;
 
     /**
-     * @param index index of the person in the filtered person list to edit the emergency contact phone
-     * @param ecNumber emergency contact number of the person to be updated to
+     * @param index index of the person in the filtered person list to edit the emergency contact phone.
+     * @param ecNumber emergency contact number of the person to be updated to.
      */
     public AddEcNumberCommand(Index index, EcNumber ecNumber) {
         requireAllNonNull(index, ecNumber);
@@ -69,8 +68,10 @@ public class AddEcNumberCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
+        assert personToEdit != null;
+
         String message = !ecNumber.value.isEmpty() ? MESSAGE_ADD_ECNUMBER_SUCCESS : MESSAGE_DELETE_ECNUMBER_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(message, personToEdit.getName(), personToEdit.getEcNumber());
     }
 
     @Override
@@ -83,8 +84,8 @@ public class AddEcNumberCommand extends Command {
             return false;
         }
 
-        AddEcNumberCommand e = (AddEcNumberCommand) other;
-        return index.equals(e.index)
-                && ecNumber.equals(e.ecNumber);
+        AddEcNumberCommand otherAddEcNumberCommand = (AddEcNumberCommand) other;
+        return index.equals(otherAddEcNumberCommand.index)
+                && ecNumber.equals(otherAddEcNumberCommand.ecNumber);
     }
 }
