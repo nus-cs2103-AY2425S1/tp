@@ -112,7 +112,7 @@ public class EditGameCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
