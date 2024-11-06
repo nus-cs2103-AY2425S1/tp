@@ -111,7 +111,7 @@ public abstract class Contact implements Displayable {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name or phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameContact(Contact otherContact) {
@@ -120,7 +120,8 @@ public abstract class Contact implements Displayable {
         }
 
         return otherContact != null
-                && otherContact.getName().equals(getName());
+                && (otherContact.getName().isSameName(name)
+                || otherContact.getPhone().equals(phone));
     }
 
     /**

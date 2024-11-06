@@ -5,16 +5,17 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
+import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.model.common.Name;
@@ -59,12 +60,16 @@ public class EditContactCommand extends EditCommand {
 
         Contact contactToEdit = null;
         if (index != null) {
-            List<Contact> lastShownList = model.getFilteredContactList();
+            ObservableList<Displayable> lastShownList = model.getDisplayedList();
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
             }
-
-            contactToEdit = lastShownList.get(index.getZeroBased());
+            Displayable firstItem = lastShownList.get(index.getZeroBased());
+            if (!(firstItem instanceof Contact)) {
+                throw new CommandException(Messages.MESSAGE_NOT_DISPLAYING_CONTACTS);
+            }
+            assert firstItem instanceof Contact;
+            contactToEdit = (Contact) firstItem;
         } else {
             Id targetContactId = editContactDescriptor.getId().get();
             assert targetContactId != null;

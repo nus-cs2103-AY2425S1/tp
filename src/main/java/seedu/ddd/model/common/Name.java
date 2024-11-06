@@ -29,7 +29,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         AppUtil.checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = name.trim();
     }
 
     /**
@@ -39,7 +39,12 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
-
+    /**
+     * Returns true if a given {@code Name} is the same as the current Name object.
+     */
+    public boolean isSameName(Name name) {
+        return fullName.equalsIgnoreCase(name.fullName);
+    }
     @Override
     public String toString() {
         return fullName;
@@ -64,5 +69,4 @@ public class Name {
     public int hashCode() {
         return fullName.hashCode();
     }
-
 }

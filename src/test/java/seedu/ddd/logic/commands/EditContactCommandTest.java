@@ -291,6 +291,15 @@ public class EditContactCommandTest {
     }
 
     @Test
+    public void execute_invalidDisplay_failure() {
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder().build();
+        model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        EditCommand editCommand = new EditContactCommand(INDEX_FIRST_EVENT, descriptor);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_NOT_DISPLAYING_CONTACTS);
+    }
+
+
+    @Test
     public void execute_validClient_shouldUpdateEvents() {
         // first contact should be ALICE
         Index targetIndex = INDEX_FIRST_CONTACT;
