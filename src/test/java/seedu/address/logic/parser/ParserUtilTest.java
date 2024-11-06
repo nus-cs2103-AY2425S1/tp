@@ -283,7 +283,7 @@ public class ParserUtilTest {
         assertEquals(expected, ParserUtil.parseNameKeywords(keywords));
     }
 
-    // EP: Alphabetical keywords
+    // EP: Numerical keywords
     @Test
     public void parseNameKeywords_numbersOnlyKeywords_success() throws Exception {
         List<String> keywords = new ArrayList<>();
