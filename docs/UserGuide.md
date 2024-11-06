@@ -18,15 +18,15 @@ Action | Format (with examples)
 --------|------------------
 [**Help**](#viewing-help-help) | `help`
 [**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br><br> e.g. `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
-[**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br><br> e.g. `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1987 g/M`
-[**Add Appointment**](#adding-an-appointment-add-appt) | `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME` <br><br> e.g. `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`
+[**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br><br> e.g. `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1950 g/M t/elderly`
+[**Add Appointment**](#adding-an-appointment-add-appt) | `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME` <br><br> e.g. `add-appt pn/John Doe dn/Jane Doe d/23-04-2024 t/1100`
 [**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1355`
 [**List**](#listing-all-persons-list) | `list`
 [**List Doctors**](#listing-all-doctors-list-doctor) | `list-doctor`
 [**List Patients**](#listing-all-patients-list-patient) | `list-patient`
 [**Find**](#finding-persons-by-name-find) | `find KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find James Jake`
-[**Find Doctor**](#finding-doctors-by-name-find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-doctor James Jake`
-[**Find Patient**](#finding-patients-by-name-find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-patient James Jake`
+[**Find Doctor**](#finding-doctors-by-name-find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-doctor Jane Doe`
+[**Find Patient**](#finding-patients-by-name-find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-patient John Doe`
 [**Delete**](#deleting-a-person-delete) | `delete INDEX` <br><br> e.g. `delete 3`
 [**Clear**](#clearing-all-entries-clear) | `clear`
 [**Exit**](#exiting-the-program-exit) | `exit`
