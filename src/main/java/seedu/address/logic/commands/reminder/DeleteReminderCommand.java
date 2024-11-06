@@ -68,7 +68,7 @@ public class DeleteReminderCommand extends Command {
         model.deleteReminder(reminderToDelete);
 
         // Parse input using the NameContainsKeywordsPredicate
-        String fullName = reminderToDelete.getPersonName() + "/";
+        String fullName = reminderToDelete.getPersonName() + "$";
         String[] nameKeywords = fullName.split("\\s+");
         NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(
                 List.of(nameKeywords));

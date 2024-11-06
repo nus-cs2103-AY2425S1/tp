@@ -44,8 +44,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This name already exists in Client Hub. If the "
-            + "newly added client has the same name, Please add use () to add more information after the name "
-            + "to differentiate the names.";
+            + "newly added client has the same name, please use parenthesis to add more information after the name "
+            + "to differentiate the clients.";
 
     private final Person toAdd;
 

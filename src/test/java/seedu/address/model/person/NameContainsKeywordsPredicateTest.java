@@ -110,7 +110,7 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.isExact(new PersonBuilder().withName("Alice Bob").build()));
 
         // Slash character ignored in matching
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob/"));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob$"));
         assertTrue(predicate.isExact(new PersonBuilder().withName("Alice Bob").build()));
 
         // No match due to leading or trailing spaces
@@ -130,7 +130,7 @@ public class NameContainsKeywordsPredicateTest {
         assertTrue(predicate.isExact(new PersonBuilder().withName("Alice    Bob").build()));
 
         // Multiple keywords without space between words
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("AliceBob/"));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("AliceBob$"));
         assertTrue(predicate.isExact(new PersonBuilder().withName("Alice Bob").build()));
 
         // Different casing in keywords and person name

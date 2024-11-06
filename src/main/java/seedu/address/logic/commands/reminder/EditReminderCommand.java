@@ -77,7 +77,7 @@ public class EditReminderCommand extends Command {
         }
 
         // Parse input using the NameContainsKeywordsPredicate
-        String fullName = reminderToEdit.getPersonName() + "/";
+        String fullName = reminderToEdit.getPersonName() + "$";
         String[] nameKeywords = fullName.split("\\s+");
         NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(
                 List.of(nameKeywords));
