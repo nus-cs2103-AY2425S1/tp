@@ -35,7 +35,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_TAG);
-      
         Index studentIndex;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX) || !argMultimap.getPreamble().isEmpty()) {

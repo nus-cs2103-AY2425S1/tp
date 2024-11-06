@@ -581,7 +581,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to mark an assignment as submitted for a student by index.
-2. TAchy modifies the assignment submission status in the student's assignment list. 
+2. TAchy modifies the assignment submission status in the student's assignment list.
 
    Use case ends.
 
@@ -598,8 +598,8 @@ unless specified otherwise)
       Use case ends.
 
 * 1c. The assignment has already been marked as submitted.
-    * 1c1. TAchy shows an error message. 
-  
+    * 1c1. TAchy shows an error message.
+
       Use case ends.
 ---
 
