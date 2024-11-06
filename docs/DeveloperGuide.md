@@ -305,8 +305,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | basic user        | clear all contacts from the app                                     | quickly reset my app to an empty state                                        |
 | `* * *`  | basic user        | exit the app                                                        | close the app when I am done using it                                         |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `InSUREance` and the **Actor** is the `user`, unless specified otherwise)
