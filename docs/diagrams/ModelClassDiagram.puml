@@ -60,9 +60,9 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
-Volunteer -left-|> Person
-Donor -left-|> Person
-Partner -left-|> Person
+Volunteer -up-|> Person
+Donor -up-|> Person
+Partner -up-|> Person
 Person -[hidden]right- Group
 Volunteer *-->Hours
 Donor *--> DonatedAmount
@@ -71,8 +71,13 @@ Partner *--> Date
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
+Volunteer -[hidden]left-> Donor
+Donor -[hidden]left-> Partner
+
+Hours -[hidden]right-> Name
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> Tag
 
 @enduml
