@@ -82,9 +82,7 @@ public class AddAttendanceCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
-    private String generateSuccessMessage(Person personToEdit) throws CommandException {
-        String message = !absentReason.absentReason.isEmpty()
-                ? MESSAGE_ADD_ATTENDANCE_SUCCESS : MESSAGE_DELETE_ATTENDANCE_SUCCESS;
+    private String generateSuccessMessage(Person personToEdit) {
         if (absentReason.absentReason.isEmpty()) {
             return String.format(MESSAGE_DELETE_ATTENDANCE_SUCCESS, personToEdit.getName());
         } else {
