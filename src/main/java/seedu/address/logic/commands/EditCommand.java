@@ -37,7 +37,10 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String COMMAND_WORD_SHORT_FORM = "e";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
+            + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -47,6 +50,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
             + "[" + PREFIX_GITHUB + "GitHub] \n"
             + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_GITHUB + "john123 "
+            + PREFIX_TELEGRAM + "@johnDoe\n"
+            + "Example: " + COMMAND_WORD_SHORT_FORM + " 1 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_GITHUB + "john123 "
             + PREFIX_TELEGRAM + "@johnDoe";
