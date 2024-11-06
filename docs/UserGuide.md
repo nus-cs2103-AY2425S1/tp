@@ -14,7 +14,6 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 
 <br>
 <!-- * Table of Contents -->
-<page-nav-print />
 
 1. [Quick start](#quick-start)
 2. [Features](#features)
@@ -32,9 +31,9 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 4. [Known issues](#known-issues)
 5. [Command summary](#command-summary)
 
----
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -100,6 +99,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -135,6 +135,7 @@ help
 Alternatively, you can click the button on the top right hand corner as indicated here:
 ![alternative_help](images/alternativeHelp.png)
 
+<br>
 
 ### Adding a person: `add`
 
@@ -151,6 +152,8 @@ Examples:
 * `add 71271222 n/Benson Boon p/89229191 e/benson@example.com a/Blk 12 Benson Street c/Economics t/Student`
   ![result for 'add command result'](images/addCommandResult.png)
 
+<br>
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in EduContacts.
@@ -160,6 +163,8 @@ Format:
 list
 ```
 ![result for 'list command result'](images/listCommandResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -180,6 +185,8 @@ Examples:
 *  To edit the course of a student with ID 12121212 to Computer Science type `edit 12121212 c/Computer Science`
    ![result for 'edit command result'](images/editCommandResult.png)
 
+<br>
+
 ### Adding a grade : `grade`
 
 Adds a grade to a person's module
@@ -195,6 +202,8 @@ grade ID m/MODULE g/GRADE
 
 Examples:
 * `grade 23876767 m/CS2103T g/A` will assign an A grade to the CS2103T module of a Person whose ID is 23876767
+
+<br>
 
 ### Listing students by certain attributes : `filter`
 
@@ -240,6 +249,8 @@ Examples:
 
   ![result for 'find alex david'](images/filterAlexDavidResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a module to a student: `module`
 
 Adds a module to a specific student using their ID.
@@ -252,6 +263,8 @@ module ID m/MODULE
 Examples:
 * `module 12345678 m/CS2103T`
   ![result for 'add module result'](images/addModule.png)
+
+<br>
 
 ### Deleting a person : `delete`
 
@@ -268,6 +281,8 @@ Examples:
 * `delete 71271222` will delete student contact with `ID: 71271222`.
   ![result for 'delete_71271222'](images/filterAlexDavidResult.png)
 
+<br>
+
 ### Finding a person : `find`
 
 Finds the specified person from EduContacts and displays their details.
@@ -278,6 +293,8 @@ Format: `find ID`
 
 Examples:
 * `find 12345678` will find student contact with `ID: 12345678` and display their details.
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -295,6 +312,8 @@ The `clear` command will erase all contacts from the system. Please ensure that 
 
 </box>
 
+<br>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -310,9 +329,13 @@ exit
 Use the UP and DOWN arrow keys to scroll through previous commands in the Command Box. This feature helps you reuse recent commands without retyping, making it faster to correct or repeat commands.
 </box>
 
+<br>
+
 ### Saving the data
 
 EduContacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+<br>
 
 ### Editing the data file
 
@@ -325,11 +348,14 @@ If your changes to the data file makes its format invalid, EduContacts will disc
 Furthermore, certain edits can cause the EduContacts to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+<br>
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -353,6 +379,7 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
