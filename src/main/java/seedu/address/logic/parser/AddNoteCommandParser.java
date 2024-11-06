@@ -31,6 +31,8 @@ public class AddNoteCommandParser implements Parser<AddNoteCommand> {
                 AddNoteCommand.MESSAGE_USAGE));
         }
 
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NOTE);
+
         Nric nric = ParserUtil.parseNric(argumentMultimap.getValue(PREFIX_NRIC).get());
         Note note = ParserUtil.parseNote(argumentMultimap.getValue(PREFIX_NOTE).get());
         return new AddNoteCommand(nric, note);
