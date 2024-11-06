@@ -109,7 +109,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateStudentUnfilteredList_failure() {
-        // EP: editing a student to a duplicate in an unfiltered list
+        // EP: edit a student to a duplicate in an unfiltered list
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_STUDENT, descriptor);
@@ -122,7 +122,7 @@ public class EditCommandTest {
 
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        // EP: editing a student to a duplicate in the ugteach data file
+        // EP: edit student in filtered list into a duplicate in the ugteach data file
         Student studentInList = model.getAddressBook().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
                 new EditStudentDescriptorBuilder(studentInList).build());
