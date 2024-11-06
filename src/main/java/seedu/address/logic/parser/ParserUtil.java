@@ -94,9 +94,12 @@ public class ParserUtil {
      */
     public static JobCode parseJobCode(String jobCode) throws ParseException {
         requireNonNull(jobCode);
-        String trimmedJobCode = jobCode.trim();
+        String trimmedJobCode = jobCode.trim().replaceAll("\\s", "");
         if (!JobCode.isValidJobCode(trimmedJobCode)) {
             throw new ParseException(JobCode.MESSAGE_CONSTRAINTS);
+        }
+        if (!JobCode.isValidLengthJobCode(trimmedJobCode)) {
+            throw new ParseException(JobCode.MESSAGE_LENGTH_CONSTRAINTS);
         }
         return new JobCode(trimmedJobCode);
     }
@@ -142,7 +145,7 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.trim().replaceAll("\\s", "");
         if (!Tag.isValidTagCode(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
