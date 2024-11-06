@@ -43,6 +43,7 @@ public class ViewCommandParserTest {
         assertParseSuccess(parser, " \n Alice \n \t Bob(NUS)  \t", expectedFindCommand);
     }
 
+
     @Test
     public void parse_invalidArgsWithSpecialCharacters_throwsParseException() {
         // Special characters
@@ -70,5 +71,11 @@ public class ViewCommandParserTest {
                 ViewCommand.MESSAGE_USAGE));
     }
 
-
+    @Test
+    public void parse_validArgsWithMixedCaseKeywords_returnsViewCommand() {
+        // Mixed case keywords
+        ViewCommand expectedFindCommand =
+                new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "BOB", "ChArlie")));
+        assertParseSuccess(parser, "Alice BOB ChArlie", expectedFindCommand);
+    }
 }
