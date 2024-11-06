@@ -91,7 +91,8 @@ public class Supplier {
         }
 
         return otherSupplier != null
-                && otherSupplier.getName().equals(getName());
+                && otherSupplier.getName().equals(getName())
+                && otherSupplier.getCompany().equals(getCompany());
     }
 
     /**
