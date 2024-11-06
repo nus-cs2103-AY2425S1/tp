@@ -23,8 +23,8 @@ public class ExportCommand extends Command {
     public static final String LONG_COMMAND_WORD = ":export";
     public static final String MESSAGE_SUCCESS = "Address book has been exported!";
     public static final String COMMAND_SUMMARY_ACTION = "Export";
-    public static final String COMMAND_SUMMARY_FORMAT = ":export";
-    public static final String COMMAND_SUMMARY_EXAMPLES = ":export";
+    public static final String COMMAND_SUMMARY_FORMAT = LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
+    public static final String COMMAND_SUMMARY_EXAMPLES = LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
     public static final String NO_DESTINATION_MESSAGE = "No destination selected. Export cancelled.";
     private File destinationFile;
     private File sourceFile;

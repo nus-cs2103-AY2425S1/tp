@@ -22,10 +22,8 @@ public class ListCommand extends Command {
     public static final List<String> INVALID_VARIANTS = Arrays.asList("list", "ls", "show", ":show");
 
     public static final String COMMAND_SUMMARY_ACTION = "List";
-    public static final String COMMAND_SUMMARY_FORMAT =
-            ":list\n:ls";
-    public static final String COMMAND_SUMMARY_EXAMPLES =
-            ":list\n:ls";
+    public static final String COMMAND_SUMMARY_FORMAT = LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
+    public static final String COMMAND_SUMMARY_EXAMPLES = LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
 
 
     @Override

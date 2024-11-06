@@ -92,8 +92,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.LONG_COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.LONG_COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
@@ -157,7 +157,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_invalidHelpCommandVariant_throwsParseException() {
         String parseExceptionMessage = HelpCommand.generateInvalidVariantMessage(HelpCommand.INVALID_VARIANTS.get(0),
-                HelpCommand.COMMAND_WORD);
+                HelpCommand.LONG_COMMAND_WORD);
         assertThrows(ParseException.class, parseExceptionMessage, () ->
                 parser.parseCommand(HelpCommand.INVALID_VARIANTS.get(0)));
     }

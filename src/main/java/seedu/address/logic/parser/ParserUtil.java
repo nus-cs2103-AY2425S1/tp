@@ -220,7 +220,7 @@ public class ParserUtil {
                     FindCommand.LONG_COMMAND_WORD));
         } else if (HelpCommand.INVALID_VARIANTS.contains(commandWord)) {
             throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                    HelpCommand.COMMAND_WORD));
+                    HelpCommand.LONG_COMMAND_WORD));
         } else if (ListCommand.INVALID_VARIANTS.contains(commandWord)) {
             throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
                     ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD));

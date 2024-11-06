@@ -95,7 +95,7 @@ public class AddressBookParser {
         case QuitCommand.SHORT_COMMAND_WORD, QuitCommand.LONG_COMMAND_WORD:
             return new QuitCommand();
 
-        case HelpCommand.SHORT_COMMAND_WORD, HelpCommand.COMMAND_WORD:
+        case HelpCommand.SHORT_COMMAND_WORD, HelpCommand.LONG_COMMAND_WORD:
             return new HelpCommand();
 
         case ExportCommand.SHORT_COMMAND_WORD, ExportCommand.LONG_COMMAND_WORD:

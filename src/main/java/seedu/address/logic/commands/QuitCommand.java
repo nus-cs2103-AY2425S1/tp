@@ -17,9 +17,9 @@ public class QuitCommand extends Command {
     public static final String MESSAGE_QUIT_ACKNOWLEDGEMENT = "Quitting VBook!";
     public static final String COMMAND_SUMMARY_ACTION = "Quit";
     public static final String COMMAND_SUMMARY_FORMAT =
-            ":quit";
+            LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
     public static final String COMMAND_SUMMARY_EXAMPLES =
-            ":quit";
+            LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
 
 
 
