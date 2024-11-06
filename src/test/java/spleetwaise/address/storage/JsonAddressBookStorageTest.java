@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -48,19 +49,24 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
-        Assert.assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() throws Exception {
+        Optional<ReadOnlyAddressBook> optionalAb = readAddressBook("invalidPersonAddressBook" + ".json");
+        assert optionalAb.isPresent();
+        assertEquals(0, optionalAb.get().getPersonList().size());
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
-        Assert.assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() throws Exception {
+        Optional<ReadOnlyAddressBook> optionalAb = readAddressBook("invalidAndValidPersonAddressBook.json");
+        assert optionalAb.isPresent();
+        assertEquals(1, optionalAb.get().getPersonList().size());
     }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        AddressBook original = TypicalPersons.getTypicalAddressBook();
+        AddressBook original = new AddressBook();
+        original.addPerson(TypicalPersons.ALICE);
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back

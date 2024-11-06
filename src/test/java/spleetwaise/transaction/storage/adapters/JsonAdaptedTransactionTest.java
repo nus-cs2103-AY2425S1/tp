@@ -78,8 +78,21 @@ public class JsonAdaptedTransactionTest {
     }
 
     @Test
-    public void testConstructor_invalidId() {
+    public void testConstructor_nullId() {
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(null, TypicalPersons.BENSON.getId(), VALID_AMT,
+                VALID_DESCRIPTION,
+                DateUtil.VALID_DATE,
+                VALID_STAT,
+                VALID_CATS
+        );
+        assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
+    }
+
+    @Test
+    public void testConstructor_invalidIdFormat() {
+        // Test an invalid ID format scenario
+        JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction("invalid-id", TypicalPersons.BENSON.getId(),
+                VALID_AMT,
                 VALID_DESCRIPTION,
                 DateUtil.VALID_DATE,
                 VALID_STAT,

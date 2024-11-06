@@ -27,35 +27,35 @@ import spleetwaise.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withId("29705d8f-6a2b-4de3-8b86-e8efb3f2215f")
+    public static final Person ALICE = new PersonBuilder().withId("5db6c966-11cf-4f7a-82bb-535d6e6a1e4a")
             .withName("Alice Pauline").withPhone("94351253").withEmail("alice@example.com")
             .withAddress("123, Jurong West Ave 6, #08-111").withRemark("alice is poor").withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withId("3929a136-823a-4806-af62-e96b241167b5")
+    public static final Person BENSON = new PersonBuilder().withId("5db6c966-11cf-4f7a-82bb-535d6e6a1e4b")
             .withName("Benson Meier").withPhone("98765432").withEmail("johnd@example.com")
             .withAddress("311, Clementi Ave 2, #02-25").withRemark("benson is rich").withTags("owesMoney", "friends")
             .build();
-    public static final Person CARL = new PersonBuilder().withId("60196500-3d01-4e6c-81de-44ab6fc9e7e5")
+    public static final Person CARL = new PersonBuilder().withId("5db6c966-11cf-4f7a-82bb-535d6e6a1e4c")
             .withName("Carl Kurz").withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
             .build();
-    public static final Person DANIEL = new PersonBuilder().withId("b89d7c94-9823-4b6a-ae46-b7c55ee41727")
+    public static final Person DANIEL = new PersonBuilder().withId("5db6c966-11cf-4f7a-82bb-535d6e6a1e4d")
             .withName("Daniel Meier").withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street")
             .withRemark("DANIEL IS IN DEBT").withTags("friends")
             .build();
-    public static final Person ELLE = new PersonBuilder().withId("42984eac-421f-4966-994d-6f360d7d2882")
+    public static final Person ELLE = new PersonBuilder().withId("5db6c966-11cf-4f7a-82bb-535d6e6a1e4e")
             .withName("Elle Meyer").withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave")
             .build();
-    public static final Person FIONA = new PersonBuilder().withId("c5a93d37-44fd-4f4d-964b-6f85c715d6e3")
+    public static final Person FIONA = new PersonBuilder().withId("5db6c966-11cf-4f7a-82bb-535d6e6a1e4f")
             .withName("Fiona Kunz").withPhone("9482427").withEmail("lydia@example.com").withAddress("little tokyo")
             .build();
-    public static final Person GEORGE = new PersonBuilder().withId("c5a93d37-44fd-4f4d-964b-6f85c715djf93")
+    public static final Person GEORGE = new PersonBuilder().withId("6b76c348-7794-4ae9-be28-74e4820bb224")
             .withName("George Best").withPhone("9482442").withEmail("anna@example.com").withAddress("4th street")
             .build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withId("c5a93d37-44fd-4f4d-964b-6f85c715djqw3")
+    public static final Person HOON = new PersonBuilder().withId("ee56885b-eca4-4c35-8587-d5d10161bade")
             .withName("Hoon Meier").withPhone("8482424").withEmail("stefan@example.com").withAddress("little india")
             .build();
-    public static final Person IDA = new PersonBuilder().withId("c5a93d37-44fd-4f4d-964b-6f85c715djgr5")
+    public static final Person IDA = new PersonBuilder().withId("ae56885b-eca4-4c35-8587-d5d10161bade")
             .withName("Ida Mueller").withPhone("8482131").withEmail("hans@example.com").withAddress("chicago ave")
             .build();
 

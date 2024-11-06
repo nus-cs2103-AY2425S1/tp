@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
+Package "TransactionBook Model" as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyTransactionBook" as ReadOnlyTransactionBook
 Class "<<interface>>\nTransactionBookModel" as TransactionBookModel
 Class TransactionBook

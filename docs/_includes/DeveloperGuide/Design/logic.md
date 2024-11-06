@@ -18,7 +18,7 @@ How the `Logic` component works:
 
    1.1. **It is first passed to an `AddressBookParser` object which will attempt to parse it.** If there is a matching command, it creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 
-   1.2. **If there is no matching command, `Logic` will try to parse it with a  `TransactionBookParser`.** If  there is a matching command, a similar thing happens as with `AddressBookParser`. The partial sequence diagram below illustrates this case clearly:
+   1.2. **If there is no matching command, `Logic` will try to parse it with a  `TransactionParser`.** If  there is a matching command, a similar thing happens as with `AddressBookParser`. The partial sequence diagram below illustrates this case clearly:
 
    ![Partial sequence diagram for transaction command](images/LogicSequenceDiagram.png)
 
@@ -36,6 +36,6 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `AddressBookParser` or `TransactionBookParser` class creates a respective `AbCommandParser` (`Ab` is a placeholder for some specific address book command name e.g., `AddCommandParser`), which uses the other classes shown above to parse the user command and create a `AbCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object. Likewise for `TransactionBookParser` and `TbCommand`s.
+- When called upon to parse a user command, the `AddressBookParser` or `TransactionParser` class creates a respective `AbCommandParser` (`Ab` is a placeholder for some specific address book command name e.g., `AddCommandParser`), which uses the other classes shown above to parse the user command and create a `AbCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object. Likewise for `TransactionParser` and `TbCommand`s.
 
 - All `AbCommandParser` and `TbCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from a common `Parser` interface so that they can be treated similarly where possible e.g, during testing.

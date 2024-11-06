@@ -2,7 +2,7 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons": [
     {
-      "id": "29705d8f-6a2b-4de3-8b86-e8efb3f2215f",
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4a",
       "name": "Alice Pauline",
       "phone": "94351253",
       "email": "alice@example.com",
@@ -13,7 +13,7 @@
       ]
     },
     {
-      "id": "3929a136-823a-4806-af62-e96b241167b5",
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4b",
       "name": "Benson Meier",
       "phone": "98765432",
       "email": "johnd@example.com",
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "id": "60196500-3d01-4e6c-81de-44ab6fc9e7e5",
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4c",
       "name": "Carl Kurz",
       "phone": "95352563",
       "email": "heinz@example.com",
@@ -34,7 +34,7 @@
       "tags": []
     },
     {
-      "id": "b89d7c94-9823-4b6a-ae46-b7c55ee41727",
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4d",
       "name": "Daniel Meier",
       "phone": "87652533",
       "email": "cornelia@example.com",
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "id": "42984eac-421f-4966-994d-6f360d7d2882",
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4e",
       "name": "Elle Meyer",
       "phone": "9482224",
       "email": "werner@example.com",
@@ -54,7 +54,7 @@
       "tags": []
     },
     {
-      "id": "c5a93d37-44fd-4f4d-964b-6f85c715d6e3",
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4f",
       "name": "Fiona Kunz",
       "phone": "9482427",
       "email": "lydia@example.com",
@@ -63,7 +63,7 @@
       "tags": []
     },
     {
-      "id": "c5a93d37-44fd-4f4d-964b-6f85c715djf93",
+      "id": "6b76c348-7794-4ae9-be28-74e4820bb224",
       "name": "George Best",
       "phone": "9482442",
       "email": "anna@example.com",

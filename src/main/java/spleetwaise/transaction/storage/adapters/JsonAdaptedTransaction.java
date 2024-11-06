@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.exceptions.IllegalValueException;
+import spleetwaise.commons.util.IdUtil;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
@@ -169,6 +170,11 @@ public class JsonAdaptedTransaction {
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
         }
+
+        if (!IdUtil.isValidId(id)) {
+            throw new IllegalValueException(IdUtil.MESSAGE_CONSTRAINTS);
+        }
+
         if (personId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "personId"));
         }
@@ -204,6 +210,6 @@ public class JsonAdaptedTransaction {
         s = new Status(isDone);
         Set<Category> mc = new HashSet<>(txnCategories);
 
-        return new Transaction(id, p, a, d, dt, mc, s);
+        return new Transaction(id.trim(), p, a, d, dt, mc, s);
     }
 }
