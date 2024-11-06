@@ -8,24 +8,24 @@ Health Connect is an application designed to **streamline client management** fo
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 1. [Quick Start](#quick-start)
-   1. [For Windows Users](#for-windows-users)
-   2. [For Mac Users](#for-mac-users)
+    1. [For Windows Users](#for-windows-users)
+    2. [For Mac Users](#for-mac-users)
 2. [Features](#features)
-   1. [Command Format](#command-format)
-   2. [Viewing Help: `help`](#viewing-help-help)
-   3. [Adding a Person: `add`](#adding-a-patient-add)
-   4. [Viewing All Patients `view`](#viewing-all-patients-view)
-   5. [Editing a Patient: `edit`](#editing-a-patient--edit)
-   6. [Locating Patients by Name: `find`](#locating-patients-by-name-find)
-   7. [Locating Patients by Features: `filter`](#locating-patients-by-different-parameters-filter)
-   8. [Deleting a Patient: `delete`](#deleting-a-patient--delete)
-   9. [Adding Or Updating Appointment Date and Time to Patient: `date`](#adding-or-updating-an-appointment-date-and-time-to-a-person--date)
-   10. [Seeing the Schedule for the Day: `schedule`](#seeing-the-schedule-for-the-day-schedule)
-   11. [Clearing All Entries: `clear`](#clearing-all-entries--clear)
-   12. [Exiting the Program: `exit`](#exiting-the-program--exit)
+    1. [Command Format](#command-format)
+    2. [Viewing Help: `help`](#viewing-help-help)
+    3. [Adding a Person: `add`](#adding-a-patient-add)
+    4. [Viewing All Patients `view`](#viewing-all-patients-view)
+    5. [Editing a Patient: `edit`](#editing-a-patient--edit)
+    6. [Locating Patients by Name: `find`](#locating-patients-by-name-find)
+    7. [Locating Patients by Features: `filter`](#locating-patients-by-different-parameters-filter)
+    8. [Deleting a Patient: `delete`](#deleting-a-patient--delete)
+    9. [Adding Or Updating Appointment Date and Time to Patient: `date`](#adding-or-updating-an-appointment-date-and-time-to-a-person--date)
+    10. [Seeing the Schedule for the Day: `schedule`](#seeing-the-schedule-for-the-day-schedule)
+    11. [Clearing All Entries: `clear`](#clearing-all-entries--clear)
+    12. [Exiting the Program: `exit`](#exiting-the-program--exit)
 3. [Data](#data)
-   1. [Saving the Data File](#saving-the-data)
-   2. [Editing the Data File](#editing-the-data-file)
+    1. [Saving the Data File](#saving-the-data)
+    2. [Editing the Data File](#editing-the-data-file)
 4. [FAQ](#faq)
 5. [Known Issues](#known-issues)
 6. [Command Summary](#command-summary)
@@ -64,7 +64,7 @@ Health Connect is an application designed to **streamline client management** fo
        ![Entering JAR Command on Windows](./images/QuickStartWindowsEnteringJarCommand.png)
     5. A GUI similar to the below should appear in a few seconds.
        ![Ui](images/Ui.png)
-   <br></br>
+       <br></br>
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     * `view` : Displays all contacts.
@@ -73,41 +73,41 @@ Health Connect is an application designed to **streamline client management** fo
     * `filter t/High Risk` : Displays all entries which are tagged High Risk.
     * `clear` : Deletes all contacts.
     * `exit` : Exits the app.
-   <br></br>
+      <br></br>
 7. Refer to the [Features](#features) below for details of each command.
 
 ### For Mac Users:
 1. Ensure you have Java `17` or above installed in your Computer.
-   1. Open Terminal. You can do this by searching for it using Spotlight Search. To do so, press `Command + Space` and search "Terminal".
-      ![Opening Terminal on Mac](./images/QuickStartMacOpenTerminal.png)
-   2. Once Terminal is open, type: `java -version` and click `Enter`.
-      ![Checking Java Version on Mac - Command](./images/QuickStartMacCheckVersionCommand.png)
-   3. If Java `17` or higher is displayed, you are good to go! Proceed to **step 3**.
-      ![Checking Java Version on Mac - Display](./images/QuickStartMacCheckVersionDisplay.png)
-   4. Otherwise, proceed to step 2.
-   <br></br>
+    1. Open Terminal. You can do this by searching for it using Spotlight Search. To do so, press `Command + Space` and search "Terminal".
+       ![Opening Terminal on Mac](./images/QuickStartMacOpenTerminal.png)
+    2. Once Terminal is open, type: `java -version` and click `Enter`.
+       ![Checking Java Version on Mac - Command](./images/QuickStartMacCheckVersionCommand.png)
+    3. If Java `17` or higher is displayed, you are good to go! Proceed to **step 3**.
+       ![Checking Java Version on Mac - Display](./images/QuickStartMacCheckVersionDisplay.png)
+    4. Otherwise, proceed to step 2.
+       <br></br>
 2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
-   1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
-   2. Download the appropriate installer for Mac.
-   3. After installation, follow the instructions in **Step 1**.
-   <br></br>
+    1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+    2. Download the appropriate installer for Mac.
+    3. After installation, follow the instructions in **Step 1**.
+       <br></br>
 3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
    <br></br>
 4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
    <br></br>
 5. Use Terminal to open the JAR file.
-   1. Find the file path of the file you just copied. To do so, right-click on the file in Finder and press `Get Info`.
-      ![Finding File Path on Mac](./images/QuickStartMacFindFilePath.png)
-   2. Check the File Path by noting the path after your username under **Where**.
-      ![Converting File Path on Mac](./images/QuickStartMacCheckFilePath.png)
-   For example, in this case, the required `FILEPATH` will be `Documents/CS2103T/AddressBook`
-   3. In Terminal, enter `cd FILEPATH`, replacing `FILEPATH` with your own path obtained. Following the previous example, you should enter `cd Documents/CS2103T/AddressBook` as follows:
-      ![Entering File Path on Mac](./images/QuickStartMacNavigateFilePath.png)
-   4. In Terminal, enter `java -jar healthconnect.jar`.
-      ![Entering JAR Command on Mac](./images/QuickStartMacEnterJarCommand.png)
-   5. A GUI similar to the below should appear in a few seconds.
-      ![Ui](images/Ui.png)
-   <br></br>
+    1. Find the file path of the file you just copied. To do so, right-click on the file in Finder and press `Get Info`.
+       ![Finding File Path on Mac](./images/QuickStartMacFindFilePath.png)
+    2. Check the File Path by noting the path after your username under **Where**.
+       ![Converting File Path on Mac](./images/QuickStartMacCheckFilePath.png)
+       For example, in this case, the required `FILEPATH` will be `Documents/CS2103T/AddressBook`
+    3. In Terminal, enter `cd FILEPATH`, replacing `FILEPATH` with your own path obtained. Following the previous example, you should enter `cd Documents/CS2103T/AddressBook` as follows:
+       ![Entering File Path on Mac](./images/QuickStartMacNavigateFilePath.png)
+    4. In Terminal, enter `java -jar healthconnect.jar`.
+       ![Entering JAR Command on Mac](./images/QuickStartMacEnterJarCommand.png)
+    5. A GUI similar to the below should appear in a few seconds.
+       ![Ui](images/Ui.png)
+       <br></br>
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     * `view` : Displays all contacts.
@@ -116,9 +116,9 @@ Health Connect is an application designed to **streamline client management** fo
     * `filter t/High Risk` : Displays all entries which are tagged High Risk.
     * `clear` : Deletes all contacts.
     * `exit` : Exits the app.
-   <br></br>
+      <br></br>
 7. Refer to the [Features](#features) below for details of each command.
-   
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,25 +156,25 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY`
 
 Constraints:
 * **NAME**
-  - Only alphabets and spaces are allowed
+    - Alphanumeric string of any length. Special characters allowed are ' ', '/' and '-'.
 * **PHONE NUMBER**
-  - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
-  - Only numeric characters are allowed
+    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
+    - Only numeric characters are allowed
 * **EMAIL**
-  - Must follow a valid email format and include a domain e.g. `name@example.com`
-  - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
+    - Must follow a valid email format and include a domain e.g. `name@example.com`
+    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
 * **TAG**
-  - A patient must have one of the following priority tags:
-    1. `High Risk`
-    2. `Medium Risk`
-    3. `Low Risk`
-* **ALLERGY** 
-  - Only include alphanumeric characters, spaces, and commas.
-  - Must not be empty or contain special characters other than commas and spaces.
+    - A patient must have one of the following priority tags:
+        1. `High Risk`
+        2. `Medium Risk`
+        3. `Low Risk`
+* **ALLERGY**
+    - Only include alphanumeric characters, spaces, and commas.
+    - Must not be empty or contain special characters other than commas and spaces.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin`
-  ![Example of Add Command 1](./images/FeatureAddExample1.png) 
+  ![Example of Add Command 1](./images/FeatureAddExample1.png)
 
   <br></br>
 * `add n/Betsy-Crowe p/81239873 e/betsycrowe@example.com a/01 Clementi Road #04-03 Singapore 4374538 t/Low Risk m/None`
@@ -224,12 +224,12 @@ Constraints:
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com`
-    ![Example of Edit Command 1](./images/FeatureEditExample1.png)
-    Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-    <br></br> 
-* `edit 2 n/Betsy Crower` 
-   ![Example of Edit Command 2](./images/FeatureEditExample2.png)
-   Edits the name of the 2nd person to be `Betsy Crower`.
+   ![Example of Edit Command 1](./images/FeatureEditExample1.png)
+   Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+   <br></br>
+* `edit 2 n/Betsy Crower`
+  ![Example of Edit Command 2](./images/FeatureEditExample2.png)
+  Edits the name of the 2nd person to be `Betsy Crower`.
 
 ### Locating patients by name: `find`
 
@@ -246,13 +246,13 @@ Additional Details:
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` 
-   ![Example of Find Command 1](./images/FeatureFindExample1.png)
-   Returns `John` and `John Doe`
-   <br></br>
-* `find craig adam` 
-   ![Example of Find Command 2](./images/FeatureFindExample2.png)
-   Returns `Craig` and `Adam`
+* `find John`
+  ![Example of Find Command 1](./images/FeatureFindExample1.png)
+  Returns `John` and `John Doe`
+  <br></br>
+* `find craig adam`
+  ![Example of Find Command 2](./images/FeatureFindExample2.png)
+  Returns `Craig` and `Adam`
 
 ### Locating patients by different parameters: `filter`
 
@@ -270,13 +270,13 @@ Additional Details:
 * Filter requires at least one feature to filter by (e.g. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
   e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
 
-  
+
 Examples:
-* `filter a/Residential College 4` 
+* `filter a/Residential College 4`
   ![Example of Filter Command 1](./images/FeatureFilterExample1.png)
   returns all patients who have address Residential College 4
   <br></br>
-* `filter m/Penicillin t/High Risk` 
+* `filter m/Penicillin t/High Risk`
   ![Example of Filter Command 2](./images/FeatureFilterExample2.png)
   returns all patients who have an allergy to penicillin AND an allergy to penicillin
   <br></br>
@@ -302,7 +302,7 @@ Constraints:
     - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
 
 Examples:
-* `delete n/john` 
+* `delete n/john`
   ![Example of Delete Command 1](./images/FeatureDeleteExample1.png)
   Deletes `John` assuming that there is only 1 `John` in the address book.
   <br></br>
@@ -359,7 +359,7 @@ Filters the list to return patients who have an appointment of the given day. <b
 Format: `schedule d/[DATE_ONLY]`
 
 Additional Details:
-* Date in the `schedule` feature differs from the date in the `date` feature. 
+* Date in the `schedule` feature differs from the date in the `date` feature.
 * Date in the `schedule` feature does not accept a time.
 * All patients with an appointment date on that given day will be listed regardless of what their appointment time is.
 
@@ -408,10 +408,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer by following the instructions in [Quick Start](#quick-start) and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 1. Find the `data` folder created by the application
-![FAQ 1 Step 1](./images/FAQ1Step1.png)
-<br></br>
+   ![FAQ 1 Step 1](./images/FAQ1Step1.png)
+   <br></br>
 2. Transfer the `.json` file in the `data folder
-![FAQ 1 Step 2](./images/FAQ1Step2.png)
+   ![FAQ 1 Step 2](./images/FAQ1Step2.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
@@ -420,7 +420,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Remedy:** Delete the `preferences.json` file created by the application **in the same folder** before running the application again.
 ![Remedy for Known Issue 1](./images/KnownIssuesRemedy1.png)
 <br></br>
-**Issue 2:** **If you minimize the Help Window** and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear.<br> 
+**Issue 2:** **If you minimize the Help Window** and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear.<br>
 **Remedy:** Manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
