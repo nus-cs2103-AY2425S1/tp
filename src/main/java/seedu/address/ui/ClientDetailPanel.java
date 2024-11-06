@@ -130,7 +130,8 @@ public class ClientDetailPanel extends UiPart<Region> {
     private void setTier(String tier) {
         tierPane.getChildren().clear();
         Label tierLabel = new Label(tier.toUpperCase());
-        tierLabel.getStyleClass().addAll("label", "detail-tier-label", tier.toLowerCase() + "-tier");
+        tierLabel.getStyleClass().add("label");
+        tierLabel.getStyleClass().add(tier.toLowerCase() + "-tier");
         tierPane.getChildren().add(tierLabel);
     }
 

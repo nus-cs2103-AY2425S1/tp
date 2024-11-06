@@ -21,6 +21,7 @@
     <Scene>
       <stylesheets>
         <URL value="@css/DarkTheme.css" />
+        <URL value="@css/ClientListCard.css" />
         <URL value="@css/Extensions.css" />
       </stylesheets>
 

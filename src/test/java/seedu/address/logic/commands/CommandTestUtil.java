@@ -68,8 +68,8 @@ public class CommandTestUtil {
     public static final String NEW_REMARK_DESC_BOB = " " + PREFIX_NEW_REMARK + VALID_REMARK_BOB;
     public static final String APPEND_REMARK_DESC_BOB = " " + PREFIX_APPEND_REMARK + VALID_REMARK_BOB;
     public static final String VALID_STATUS_NON_URGENT = "non_urgent";
-    public static final String VALID_STATUS_NONE = "none";
-    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_NONE;
+    public static final String VALID_STATUS_NA = "na";
+    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_NA;
     public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_NON_URGENT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

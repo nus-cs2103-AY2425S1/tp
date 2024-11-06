@@ -1,0 +1,26 @@
+.cell_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #a0a0a0;
+}
+
+.cell_big_label {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+}
+
+.name-label {
+    -fx-font-weight: bold;
+}
+
+.detail-tier -label {
+    -fx-padding: 3 6 4 6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+}
+
+
+/** ADD THE COLOUR LOGIC HERE FOR CLEINT DETAIL PANEL!!! **/

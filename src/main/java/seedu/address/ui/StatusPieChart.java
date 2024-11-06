@@ -62,25 +62,25 @@ public class StatusPieChart extends UiPart<Region> {
     /**
      * Updates the pie chart with new status counts.
      *
-     * @param noneCount Number of clients with NONE status
+     * @param naCount Number of clients with NA status
      * @param nonUrgentCount Number of clients with NON_URGENT status
      * @param urgentCount Number of clients with URGENT status
      */
-    public void updateChartData(int noneCount, int nonUrgentCount, int urgentCount) {
+    public void updateChartData(int naCount, int nonUrgentCount, int urgentCount) {
         Platform.runLater(() -> {
             statusChart.getData().clear();
 
-            PieChart.Data noneData = new PieChart.Data("None (" + noneCount + ")", noneCount);
+            PieChart.Data naData = new PieChart.Data("N.A. (" + naCount + ")", naCount);
             PieChart.Data nonUrgentData = new PieChart.Data("Non-Urgent (" + nonUrgentCount + ")", nonUrgentCount);
             PieChart.Data urgentData = new PieChart.Data("Urgent (" + urgentCount + ")", urgentCount);
 
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                    noneData, nonUrgentData, urgentData
+                    naData, nonUrgentData, urgentData
             );
 
             statusChart.setData(pieChartData);
 
-            noneData.getNode().getStyleClass().add("data0");
+            naData.getNode().getStyleClass().add("data0");
             nonUrgentData.getNode().getStyleClass().add("data1");
             urgentData.getNode().getStyleClass().add("data2");
 

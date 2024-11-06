@@ -19,7 +19,7 @@ public class ClientCardField extends HBox {
     public static final String ICON_LITERAL_EMAIL = "fas-envelope";
     public static final String ICON_LITERAL_JOB = "fas-briefcase";
     public static final String ICON_LITERAL_INCOME = "fas-dollar-sign";
-    public static final String ICON_LITERAL_REMARK = "far-comment-dots";
+    public static final String ICON_LITERAL_REMARK = "fas-comment-dots";
 
     private FontIcon icon;
     private Label value;
