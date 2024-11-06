@@ -452,6 +452,10 @@ Invalid usages
 </div>
 {% endraw %}
 
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+You can click anywhere in the attendance box to show other weeks' attendance for that tutorial.
+</div>
+
 #### **5.5 Marking attendance of a tutorial**
 *Marks the attendance of all students enrolled in the tutorial for the specified date*
 
@@ -495,7 +499,7 @@ Invalid usages
 </div>
 {% endraw %}
 
-#### **5.6 Unmarking attendance of student**
+#### **5.6 Unmarking attendance of a student**
 
 Command: `umas`
 
