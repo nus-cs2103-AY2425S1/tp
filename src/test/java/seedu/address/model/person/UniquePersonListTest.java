@@ -22,9 +22,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.WeddingBuilder;
 
 public class UniquePersonListTest {
+
+    private static final Wedding WEDDING_A = new WeddingBuilder().withName("Wedding A").withDate("2020-02-20").build();
+    private static final Wedding WEDDING_B = new WeddingBuilder().withName("Wedding B").build();
+    private static final Wedding WEDDING_C = new WeddingBuilder().withName("Wedding C").build();
 
     private final UniquePersonList uniquePersonList = new UniquePersonList();
 
@@ -144,6 +150,58 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+    }
+
+    @Test
+    public void updatePersonInvolveInEditedWedding_targetWeddingNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList
+                .updatePersonInvolveInEditedWedding(null, WEDDING_B));
+    }
+
+    @Test
+    public void updatePersonInvolveInEditedWedding_editedWeddingNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList
+                .updatePersonInvolveInEditedWedding(WEDDING_A, null));
+    }
+
+    @Test
+    public void updatePersonInvolveInEditedWedding_personWithTargetWedding_updatesOwnWedding() {
+        Person alice = new Person(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
+                ALICE.getRole(), null);
+        alice.setOwnWedding(WEDDING_A);
+        uniquePersonList.add(alice);
+
+        uniquePersonList.updatePersonInvolveInEditedWedding(WEDDING_A, WEDDING_B);
+
+        Person updatedAlice = uniquePersonList.asUnmodifiableObservableList().get(0);
+        assertEquals(WEDDING_B, updatedAlice.getOwnWedding());
+    }
+
+    @Test
+    public void updatePersonInvolveInEditedWedding_personWithTargetWeddingInJobList_updatesJobList() {
+        Person bob = new Person(BOB.getName(), BOB.getPhone(), BOB.getEmail(), BOB.getAddress(),
+                BOB.getRole(), null);
+        bob.getWeddingJobs().add(WEDDING_A);
+        uniquePersonList.add(bob);
+
+        uniquePersonList.updatePersonInvolveInEditedWedding(WEDDING_A, WEDDING_B);
+
+        Person updatedBob = uniquePersonList.asUnmodifiableObservableList().get(0);
+        assertEquals(1, updatedBob.getWeddingJobs().size());
+        assertEquals(WEDDING_B, updatedBob.getWeddingJobs().iterator().next());
+    }
+
+    @Test
+    public void updatePersonInvolveInEditedWedding_personNotInvolvedInWedding_noChange() {
+        Person alice = new Person(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
+                ALICE.getRole(), null);
+        alice.setOwnWedding(WEDDING_C);
+        uniquePersonList.add(alice);
+
+        uniquePersonList.updatePersonInvolveInEditedWedding(WEDDING_A, WEDDING_B);
+
+        Person updatedAlice = uniquePersonList.asUnmodifiableObservableList().get(0);
+        assertEquals(WEDDING_C, updatedAlice.getOwnWedding());
     }
 
     @Test

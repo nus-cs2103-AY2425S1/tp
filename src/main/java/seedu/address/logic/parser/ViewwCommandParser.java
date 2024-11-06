@@ -7,6 +7,7 @@ import java.util.Arrays;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewwCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 
 /**
@@ -31,27 +32,21 @@ public class ViewwCommandParser implements Parser<ViewwCommand> {
             if (isNumeric(trimmedArgs)) {
                 Index index = ParserUtil.parseIndex(trimmedArgs);
                 return new ViewwCommand(index, null);
-            } else if (isAlphabeticalWithWhitespace(trimmedArgs)) {
-                String[] nameKeywords = trimmedArgs.split("\\s+");
+            } else {
+                Name weddingName = new Name(trimmedArgs);
+                String[] nameKeywords = weddingName.fullName.split("\\s+");
                 NameMatchesWeddingPredicate predicate = new NameMatchesWeddingPredicate(
                         Arrays.asList(nameKeywords));
 
                 return new ViewwCommand(null, predicate);
-            } else {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewwCommand.MESSAGE_USAGE));
             }
-        } catch (ParseException pe) {
+        } catch (ParseException | IllegalArgumentException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewwCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewwCommand.MESSAGE_USAGE), e);
         }
     }
 
     private boolean isNumeric(String str) {
         return str != null && str.matches("-?\\d+");
-    }
-    private boolean isAlphabeticalWithWhitespace(String str) {
-        // \s+ matches any whitespace characters (spaces, tabs, newlines)
-        return str != null && str.matches("^[a-zA-Z\\s]+$");
     }
 }

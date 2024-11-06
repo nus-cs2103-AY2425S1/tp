@@ -44,6 +44,5 @@ public class WeddingCard extends UiPart<Region> {
         weddingName.setText(wedding.getName().fullName);
         date.setText(wedding.getDate() == null ? null : wedding.getDate().toString());
         venue.setText(wedding.getVenue() == null ? null : wedding.getVenue().toString());
-
     }
 }

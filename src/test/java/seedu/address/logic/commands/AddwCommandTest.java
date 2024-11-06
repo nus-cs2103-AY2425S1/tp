@@ -42,11 +42,13 @@ public class AddwCommandTest {
                 new AddwCommandTest.ModelStubAcceptingWeddingAdded();
         Wedding weddingToAdd = new WeddingBuilder().build();
         Person tobeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        tobeClient.resetOwnWedding();
+        tobeClient.resetOwnWedding(tobeClient.getOwnWedding());
 
         AddwCommand addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
         CommandResult commandResult = addwCommand.execute(modelStub);
 
+        tobeClient.resetOwnWedding(tobeClient.getOwnWedding());
+        tobeClient.setOwnWedding(weddingToAdd);
         weddingToAdd.setClient(tobeClient);
 
         assertEquals(String.format(AddwCommand.MESSAGE_SUCCESS, Messages.format(weddingToAdd)),
@@ -54,7 +56,7 @@ public class AddwCommandTest {
         assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
 
         // null date and null venue
-        tobeClient.resetOwnWedding();
+        tobeClient.resetOwnWedding(tobeClient.getOwnWedding());
         modelStub =
                 new AddwCommandTest.ModelStubAcceptingWeddingAdded();
         weddingToAdd = new WeddingBuilder().withDate(null).withVenue(null).build();
@@ -62,6 +64,7 @@ public class AddwCommandTest {
         addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
         commandResult = addwCommand.execute(modelStub);
 
+        tobeClient.setOwnWedding(weddingToAdd);
         weddingToAdd.setClient(tobeClient);
 
         assertEquals(String.format(AddwCommand.MESSAGE_SUCCESS, Messages.format(weddingToAdd)),
@@ -93,14 +96,17 @@ public class AddwCommandTest {
     //        assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
     //    }
 
+
+    //duplicate wedding check name, client, date and venue
     @Test
     public void execute_duplicateWedding_throwsCommandException() {
+        Person tobeClient = getTypicalAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Wedding weddingToAdd = new WeddingBuilder().build();
-        AddwCommandTest.ModelStub modelStub = new AddwCommandTest.ModelStubWithWedding(weddingToAdd);
-        Person tobeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        tobeClient.resetOwnWedding();
-
+        tobeClient.setOwnWedding(weddingToAdd);
         weddingToAdd.setClient(tobeClient);
+        AddwCommandTest.ModelStub modelStub = new AddwCommandTest.ModelStubWithWedding(weddingToAdd);
+
+        tobeClient.resetOwnWedding(tobeClient.getOwnWedding()); //turns ownWedding to null
 
         AddwCommand addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
 
@@ -114,7 +120,7 @@ public class AddwCommandTest {
         Wedding weddingToAdd = new WeddingBuilder().build();
         AddwCommandTest.ModelStub modelStub = new AddwCommandTest.ModelStubWithWedding(weddingToAdd);
         Person toBeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        toBeClient.resetOwnWedding();
+        toBeClient.resetOwnWedding(null);
 
         toBeClient.setOwnWedding(createdWedding);
 
@@ -193,6 +199,11 @@ public class AddwCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePersonEditedWedding(Wedding target, Wedding editedWedding) {
             throw new AssertionError("This method should not be called.");
         }
 
