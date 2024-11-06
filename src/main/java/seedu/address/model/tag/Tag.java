@@ -8,8 +8,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
-<<<<<<< flag-invalid-inputs-for-edit
     public static final String MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC = "Tag names should be alphanumeric";
     public static final String MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY = "Tag names cannot be empty.";
     public static final String MESSAGE_TAG_NAME_OR_VALUE_MISSING = "Tag name or value is missing";
