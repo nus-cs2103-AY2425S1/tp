@@ -243,6 +243,10 @@ If your changes to the data file makes its format invalid, PawPatrol will <b>dis
 Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+### Automatic backup data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -256,6 +260,7 @@ Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g
 
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 2. **Accidental clearing of data** using the `clear` command may lead to data being lost. [Backups of the data file](#saving-a-backup-data-file) should be made frequently by copying out the JSON file to another location on your computer.
+3. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again. This file can be found in `[JAR file location]/data/preferences.json` similar to [other data files](#saving-the-data).
 
 --------------------------------------------------------------------------------------------------------------------
 
