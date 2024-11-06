@@ -205,10 +205,10 @@ Examples:
 * `addorder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd customer in the address book.
 * `addo 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first customer in the address book.
 * `findcustomer Betsy` followed by `addorder 1 i/Bottles d/12-12-2002 q/1` adds an order under the 1st customer in the results of the `find` command.
+<a id="order-constraints"></a>
 
 <box type="important">
 
-<a id="order-constraints"></a>
 ##### Constraints
 
 * Add an order under the customer at the specified `CUSTOMER_INDEX`, with a default `pending` status.
