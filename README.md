@@ -28,8 +28,7 @@ title: "Knotty Planner - Your Ultimate Wedding Planning Companion"
 - **Community-Driven**: Join our community of users and developers to share tips and get support.
 
 ## Get Started Today! 🎉
-* If you are interested in using Knotty Planner, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing Knotty Planner, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using Knotty Planner, head over to the user guide on the **[KnottyPlanners Product Website](https://ay2425s1-cs2103t-w13-4.github.io/tp/UserGuide.html)**.
 * We value your feedback! Reach out to us with any suggestions or issues.
 
 ## Acknowledgements 🙏
@@ -40,7 +39,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 ## Contributors 🌟
 
-* Check out our [**About Us page**](AboutUs.html) to learn more about the developers behind Knotty Planner.
+* Check out our [**About Us page**](https://ay2425s1-cs2103t-w13-4.github.io/tp/AboutUs.html) to learn more about the developers behind Knotty Planner.
 
 ## Join Our Community! 🌐
 
