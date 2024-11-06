@@ -46,6 +46,10 @@ public class Messages {
                 .append(company.getCareerPageUrl())
                 .append("; Bookmark: ")
                 .append(company.getIsBookmark())
+                .append("; Remark: ")
+                .append(company.getRemark())
+                .append("; Application Status: ")
+                .append(company.getApplicationStatus())
                 .append("; Tags: ");
         company.getTags().forEach(builder::append);
         return builder.toString();
