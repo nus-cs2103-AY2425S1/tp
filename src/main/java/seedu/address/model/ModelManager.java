@@ -165,6 +165,14 @@ public class ModelManager implements Model {
     //=========== Filtered Buyer List Accessors =============================================================
 
     /**
+     * Returns an unmodifiable unfiltered view of the list of {@code Buyer}
+     */
+    @Override
+    public ObservableList<Buyer> getUnfilteredBuyerList() {
+        return buyerList.getBuyerList();
+    }
+
+    /**
      * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
      * {@code versionedBuyerList}
      */
@@ -218,6 +226,14 @@ public class ModelManager implements Model {
     //=========== Filtered MeetUp List Accessors =============================================================
 
     /**
+     * Returns an unmodifiable unfiltered view of the list of {@code MeetUp}
+     */
+    @Override
+    public ObservableList<MeetUp> getUnfilteredMeetUpList() {
+        return meetUpList.getMeetUpList();
+    }
+
+    /**
      * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
      * {@code versionedBuyerList}
      */
@@ -267,6 +283,14 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Property List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable unfiltered view of the list of {@code Property}
+     */
+    @Override
+    public ObservableList<Property> getUnfilteredPropertyList() {
+        return propertyList.getPropertyList();
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of

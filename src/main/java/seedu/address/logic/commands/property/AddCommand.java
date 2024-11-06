@@ -52,12 +52,14 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(toAdd);
 
         if (model.hasProperty(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
 
         model.addProperty(toAdd);
+        assert(model.hasProperty(toAdd)); // verify property successfully added
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

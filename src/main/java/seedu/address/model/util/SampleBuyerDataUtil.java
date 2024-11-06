@@ -18,25 +18,25 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleBuyerDataUtil {
     public static Buyer[] getSampleBuyers() {
-        return new Buyer[] {
+        return new Buyer[]{
             new Buyer(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Budget("50,000"),
-                getTagSet("friends")),
+                    new Budget("50,000"),
+                    getTagSet("urgent", "friend")),
             new Buyer(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Budget("10000"),
-                getTagSet("colleagues", "friends")),
+                    new Budget("10000"),
+                    getTagSet("relocating", "referred")),
             new Buyer(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Budget("35,000"),
-                getTagSet("neighbours")),
+                    new Budget("35,000"),
+                    getTagSet("upgrading")),
             new Buyer(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Budget("6000000"),
-                getTagSet("family")),
+                    new Budget("6000000"),
+                    getTagSet("relative")),
             new Buyer(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Budget("800000"),
-                getTagSet("classmates")),
+                    new Budget("800000"),
+                    getTagSet("first-time")),
             new Buyer(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Budget("9123994"),
-                getTagSet("colleagues"))
+                    new Budget("9123994"),
+                    getTagSet("downsizing"))
         };
     }
 

@@ -100,7 +100,8 @@ public class EditCommand extends Command {
      */
     private static MeetUp createEditedMeetUp(MeetUp meetUpToEdit,
                                              EditMeetUpDescriptor editMeetUpDescriptor) {
-        assert meetUpToEdit != null;
+        requireNonNull(meetUpToEdit);
+        requireNonNull(editMeetUpDescriptor);
 
         Subject updatedSubject = editMeetUpDescriptor.getSubject().orElse(meetUpToEdit.getSubject());
         Info updatedInfo = editMeetUpDescriptor.getInfo().orElse(meetUpToEdit.getInfo());

@@ -3,8 +3,10 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.UniqueBuyerList;
@@ -15,6 +17,7 @@ import seedu.address.model.meetup.MeetUp;
  * Duplicates are not allowed (by .isSameBuyer comparison)
  */
 public class BuyerList implements ReadOnlyBuyerList {
+    private static final Logger logger = LogsCenter.getLogger(BuyerList.class);
 
     private final UniqueBuyerList buyers;
 
@@ -29,7 +32,8 @@ public class BuyerList implements ReadOnlyBuyerList {
         buyers = new UniqueBuyerList();
     }
 
-    public BuyerList() {}
+    public BuyerList() {
+    }
 
     /**
      * Creates an BuyerList using the Buyers in the {@code toBeCopied}
@@ -73,6 +77,7 @@ public class BuyerList implements ReadOnlyBuyerList {
      * The buyer must not already exist in the buyer list.
      */
     public void addBuyer(Buyer b) {
+        logger.info(String.format("Adding [%s] to buyer list", b.getName()));
         buyers.add(b);
     }
 
@@ -83,6 +88,7 @@ public class BuyerList implements ReadOnlyBuyerList {
      */
     public void setBuyer(Buyer target, Buyer editedBuyer) {
         requireNonNull(editedBuyer);
+        logger.info(String.format("Replacing buyer with its edited form in buyer list"));
         buyers.setBuyer(target, editedBuyer);
     }
 
@@ -91,6 +97,7 @@ public class BuyerList implements ReadOnlyBuyerList {
      * {@code key} must exist in the buyer list.
      */
     public void removeBuyer(Buyer key) {
+        logger.info(String.format("Removing [%s] from buyer list", key.getName()));
         buyers.remove(key);
     }
 

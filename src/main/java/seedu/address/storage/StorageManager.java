@@ -38,6 +38,14 @@ public class StorageManager implements Storage {
         this.propertyListStorage = propertyListStorage;
     }
 
+    @Override
+    public void saveAddressBook(ReadOnlyBuyerList buyerList, ReadOnlyMeetUpList meetUpList,
+                         ReadOnlyPropertyList propertyList) throws IOException {
+        this.saveBuyerList(buyerList);
+        this.saveMeetUpList(meetUpList);
+        this.savePropertyList(propertyList);
+    }
+
     // ================ UserPrefs methods ==============================
 
     @Override
