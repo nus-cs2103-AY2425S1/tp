@@ -37,6 +37,6 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) other;
-        return prefix.equals(otherPrefix.prefix);
+        return prefix.equals(otherPrefix.prefix.toLowerCase());
     }
 }
