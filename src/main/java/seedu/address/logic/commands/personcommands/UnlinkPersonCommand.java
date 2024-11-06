@@ -22,12 +22,15 @@ import seedu.address.model.types.person.Person;
 public class UnlinkPersonCommand extends Command {
     public static final String COMMAND_WORD = "unlink";
 
-    public static final String MESSAGE_USAGE = "Use \"link\" to unlink identified person from"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unlink identified person from"
             + " an event in the address book.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_EVENT + "EVENT\n"
+            + "Parameters: INDEX_OF_PERSON (must be a positive integer) "
+            + PREFIX_EVENT + "EVENT_NAME\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EVENT + "Company Meeting";
+
+    public static final String MESSAGE_HINT = "Use \"unlink\" to unlink identified person from"
+            + " an event in the address book.";
 
     public static final String MESSAGE_LINK_SUCCESS = "Person unlinked from event: %1$s";
     public static final String MESSAGE_NOT_LINKED = "This person is not linked to the event";

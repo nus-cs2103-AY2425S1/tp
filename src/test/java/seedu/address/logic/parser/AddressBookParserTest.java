@@ -39,6 +39,7 @@ import seedu.address.logic.commands.personcommands.EditPersonCommand.EditPersonD
 import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.commands.personcommands.LinkPersonCommand;
 import seedu.address.logic.commands.personcommands.SearchPersonCommand;
+import seedu.address.logic.commands.personcommands.UnlinkPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.types.common.DateTime;
 import seedu.address.model.types.common.EventInSchedulePredicate;
@@ -188,6 +189,11 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_unlink() throws Exception {
+        // TODO
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -247,6 +253,11 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void getHint_unlinkCommandHint() {
+        assertEquals(UnlinkPersonCommand.MESSAGE_USAGE, parser.getHint("u"));
+    }
+
+    @Test
     public void getHint_clearCommandHint() {
         assertEquals(ClearPersonCommand.MESSAGE_USAGE, parser.getHint("clear p"));
         assertEquals(ClearEventCommand.MESSAGE_USAGE, parser.getHint("clear e"));
@@ -260,6 +271,6 @@ public class AddressBookParserTest {
 
     @Test
     public void getHint_unrecognizedCommandHint() {
-        assertEquals(HelpCommand.MESSAGE_USAGE, parser.getHint("unknown"));
+        assertEquals(HelpCommand.MESSAGE_USAGE, parser.getHint("123"));
     }
 }
