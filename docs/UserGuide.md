@@ -174,11 +174,11 @@ Edits the details of a student.
 ##### Notes
 
 1. `edit_s` edits the student identified by the index. It only accepts a valid index
-   based on the list when list_s is called.
+   based on the list when `list_s` is called.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
 ###### Scenario #1: Editing `Bernice Yu`'s Name
 
