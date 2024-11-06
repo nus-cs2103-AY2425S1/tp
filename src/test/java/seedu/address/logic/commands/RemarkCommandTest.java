@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showNameAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -67,7 +67,7 @@ public class RemarkCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showNameAtIndex(model, INDEX_FIRST_PERSON);
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
@@ -97,7 +97,7 @@ public class RemarkCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showNameAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
