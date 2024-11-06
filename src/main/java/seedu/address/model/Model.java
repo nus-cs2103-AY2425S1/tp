@@ -94,7 +94,7 @@ public interface Model {
      * Updates the filter of the filtered client list to filter by the given {@code predicates}.
      * @throws NullPointerException if {@code predicates} is null.
      */
-    void updateFilteredClientList(Predicate<Client> predicate);
+    void updateFilteredClientList(Predicate<? super Client> predicate);
 
     /**
      * Selected client in the filtered client list.
@@ -112,4 +112,9 @@ public interface Model {
      * Sets the selected client in the filtered client list.
      */
     void setSelectedClient(Client client);
+
+    /**
+     * @return The current applied filter of the filtered client list
+     */
+    Predicate<? super Client> getCurrentClientFilter();
 }

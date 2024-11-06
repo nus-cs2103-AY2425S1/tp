@@ -165,7 +165,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredClientList(Predicate<Client> predicate) {
+        public void updateFilteredClientList(Predicate<? super Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -182,6 +182,15 @@ public class AddCommandTest {
         @Override
         public void setSelectedClient(Client client) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * A stub implementation of {@code getCurrentClientFilter}.
+         * @return {@code AssertionError} as this method should not be called.
+         */
+        @Override
+        public Predicate<? super Client> getCurrentClientFilter() {
+            throw new AssertionError("This method should not be called here.");
         }
     }
 
