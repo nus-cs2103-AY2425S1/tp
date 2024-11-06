@@ -21,31 +21,31 @@ import seedu.address.model.event.Event;
 
 
 
-public class ViewEventCommandTest {
+public class FindEventCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
 
     @Test
     public void execute_nullEventManager_throwsNullPointerException() {
-        ViewEventCommand viewEventCommand = new ViewEventCommand(INDEX_FIRST_EVENT);
-        assertThrows(NullPointerException.class, () -> viewEventCommand.execute(model, null));
+        FindEventCommand findEventCommand = new FindEventCommand(INDEX_FIRST_EVENT);
+        assertThrows(NullPointerException.class, () -> findEventCommand.execute(model, null));
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        ViewEventCommand viewEventCommand = new ViewEventCommand(Index.fromOneBased(4));
-        assertCommandFailure(viewEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        FindEventCommand findEventCommand = new FindEventCommand(Index.fromOneBased(4));
+        assertCommandFailure(findEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        ViewEventCommand viewFirstCommand = new ViewEventCommand(INDEX_FIRST_PERSON);
-        ViewEventCommand viewSecondCommand = new ViewEventCommand(Index.fromOneBased(2));
+        FindEventCommand viewFirstCommand = new FindEventCommand(INDEX_FIRST_PERSON);
+        FindEventCommand viewSecondCommand = new FindEventCommand(Index.fromOneBased(2));
 
         // same object -> returns true
         assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewEventCommand viewFirstCommandCopy = new ViewEventCommand(INDEX_FIRST_PERSON);
+        FindEventCommand viewFirstCommandCopy = new FindEventCommand(INDEX_FIRST_PERSON);
         assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false
@@ -61,10 +61,10 @@ public class ViewEventCommandTest {
     @Test
     public void toString_returnsCorrectString() {
         Event eventToView = model.getEventManager().getEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        ViewEventCommand viewEventCommand = new ViewEventCommand(INDEX_FIRST_EVENT);
+        FindEventCommand findEventCommand = new FindEventCommand(INDEX_FIRST_EVENT);
 
-        String expected = ViewEventCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_EVENT + "}";
-        assertEquals(expected, viewEventCommand.toString());
+        String expected = FindEventCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_EVENT + "}";
+        assertEquals(expected, findEventCommand.toString());
         System.out.println(eventToView.toString());
     }
 }
