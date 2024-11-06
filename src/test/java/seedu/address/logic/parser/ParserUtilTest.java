@@ -244,7 +244,8 @@ public class ParserUtilTest {
         String tag1 = "priority:high";
         String tag2 = "status:open";
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(tag1, tag2));
-        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag("priority", "high"), new Tag("status", "open")));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag("priority", "high"),
+                new Tag("status", "open")));
         assertEquals(expectedTagSet, actualTagSet);
     }
 
@@ -255,5 +256,12 @@ public class ParserUtilTest {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(tag1, tag2));
         Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag("friend"), new Tag("colleague")));
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTag_decimalValue() throws Exception {
+        String tagWithDecimalValue = "grade:8.5";
+        Tag expectedTag = new Tag("grade", "8.5");
+        assertEquals(expectedTag, ParserUtil.parseTag(tagWithDecimalValue));
     }
 }
