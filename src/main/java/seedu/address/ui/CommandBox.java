@@ -20,6 +20,8 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
     private CommandBuffer commandBuffer;
 
+    private boolean isCurrentViewingHistory = false;
+
     @FXML
     private TextField commandTextField;
 
@@ -60,6 +62,7 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
         } finally {
             commandTextField.setText("");
+            isCurrentViewingHistory = false;
         }
     }
 
@@ -67,8 +70,9 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Up Arrow button pressed event.
      */
     private void handleUpKey() {
-        String legacyCommand = commandBuffer.handleUpInput();
+        String legacyCommand = commandBuffer.handleUpInput(isCurrentViewingHistory);
         commandTextField.setText(legacyCommand);
+        isCurrentViewingHistory = true;
     }
 
     /**

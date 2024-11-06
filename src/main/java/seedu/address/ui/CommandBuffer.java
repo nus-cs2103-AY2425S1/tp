@@ -47,14 +47,16 @@ public class CommandBuffer {
     /**
      * Handle Up input
      */
-    public String handleUpInput() {
+    public String handleUpInput(boolean isCurrentViewingHistory) {
         if (commandHistory.isEmpty()) {
             return "";
         }
         if (commandPointer == 0) {
             return commandHistory.get(0);
         }
-        commandPointer -= 1;
+        if (isCurrentViewingHistory) {
+            commandPointer -= 1;
+        }
         return commandHistory.get(commandPointer);
     }
 }
