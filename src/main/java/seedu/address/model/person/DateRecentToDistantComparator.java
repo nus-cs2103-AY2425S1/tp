@@ -9,14 +9,20 @@ public class DateRecentToDistantComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person o1, Person o2) {
-        int comparisonResult = o2.getLastSeen().compareTo(o1.getLastSeen());
+        int lastSeenResult = o2.getLastSeen().compareTo(o1.getLastSeen());
 
-        if (comparisonResult != 0) {
-            return comparisonResult;
+        if (lastSeenResult != 0) {
+            return lastSeenResult;
         }
 
         // If same priority, compare by name for tie-breaker
-        return o1.getName().compareTo(o2.getName());
+        int nameResult = o1.getName().compareTo(o2.getName());
+
+        if (nameResult != 0) {
+            return nameResult;
+        }
+
+        return o1.getEmail().compareTo(o2.getEmail());
     }
 
     @Override

@@ -231,6 +231,7 @@ Format: `remind INDEX d/DATE des/DESCRIPTION`
 * Creates a reminder for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Expired reminders will display negative days
 
 Examples:
 * `remind 1 d/21-11-2024 des/Meet up for lunch` will create a reminder with the date 21-11-2024, about meeting the
@@ -247,6 +248,7 @@ Format: `delete_reminder INDEX` or `dr INDEX`
 * Deletes the reminder at the specified `INDEX`.
 * The index refers to the index number shown in the displayed reminder list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* **Expired reminders will display as negative days.** Be sure to delete expired reminders to keep your list up to date.
 
 Examples:
 * `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list

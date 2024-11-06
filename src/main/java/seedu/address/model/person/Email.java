@@ -76,4 +76,8 @@ public class Email {
         return value.hashCode();
     }
 
+    public int compareTo(Email other) {
+        return this.value.compareTo(other.value);
+    }
+
 }

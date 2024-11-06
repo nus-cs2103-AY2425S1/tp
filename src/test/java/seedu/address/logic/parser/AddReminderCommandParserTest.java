@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.model.person.Reminder.formatter;
+import static seedu.address.model.person.Reminder.FORMATTER;
 
 import java.time.LocalDate;
 
@@ -55,29 +55,15 @@ public class AddReminderCommandParserTest {
     public void parse_invalidDate_failure() {
         // date is in the past
         assertParseFailure(parser, "1 d/01-01-2024" + DESCRIPTION_DESC,
-                "Reminder date must be in the future" );
+                "Reminder date must be in the future");
     }
 
     @Test
     public void parse_success() {
         // today's date
-        String today = LocalDate.now().format(formatter);
+        String today = LocalDate.now().format(FORMATTER);
         AddReminderCommand expectedCommand = new AddReminderCommand(Index.fromOneBased(1), today, VALID_DESCRIPTION);
 
         assertParseSuccess(parser, "1 d/" + today + DESCRIPTION_DESC, expectedCommand);
     }
-
-    /*
-    This test is currently not working as the hashcodes for the results are different
-    @Test
-    public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = "1" + DATE_DESC + DESCRIPTION_DESC;
-
-        AddReminderCommand expectedCommand = new AddReminderCommand(targetIndex, VALID_DATE,
-                VALID_DESCRIPTION);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-    */
 }

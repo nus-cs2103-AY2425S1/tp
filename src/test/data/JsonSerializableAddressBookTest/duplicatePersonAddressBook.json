@@ -9,9 +9,9 @@
     "priority" : "low",
     "remark" : "likes apple"
   }, {
-    "name": "Alice Pauline",
+    "name": "Joe Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com",
+    "email": "alice@example.com",
     "organisation": "National University of Singapore",
     "lastSeen" : "02-09-2024",
     "priority" : "low",
