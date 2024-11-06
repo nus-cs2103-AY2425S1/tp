@@ -217,6 +217,36 @@ Examples:
 #### Here's how it would look like in the app:
 ![delete delivery command](images/deleteDeliveryCommand.png)
 
+### Sort deliveries: `sort -d`
+
+The `sort -d` command is used to sort deliveries in VendorVault.
+This helps you to view the deliveries in a different order, based on the delivery cost, date or status.
+
+Format: `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`
+
+Parameters:
+
+- SORT_ORDER: Must be either 'a' for ascending or 'd' for descending, and must not be blank.
+- SORT_BY_FIELD: Must be either 'c' for cost, 'd' for date or 's' for status, and must not be blank.
+
+<box type="tip" seamless>
+
+**Warnings**:
+- All prefixes and parameters must be given
+- No duplicate prefix can be used
+- Parameters used are **case-sensitive**
+
+</box>
+
+#### Example
+
+To sort deliveries by cost in ascending order:
+
+    sort -d so/a sb/c
+
+#### Here's how it would look like in the app:
+![find command](images/sortDeliveryCommand.png)
+
 ---
 
 ### Exiting the program : `exit`
