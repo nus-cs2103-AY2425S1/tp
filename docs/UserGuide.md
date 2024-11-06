@@ -151,11 +151,11 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding Notes to an existing contact: `addnotes`
+### Adding Notes to an existing contact: `addnote`
 
 Adds a note to a person in the address book.
 
-Format: `addnotes INDEX n/[NOTES]`
+Format: `addnote INDEX n/[NOTE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of notes (including 0)
@@ -167,14 +167,14 @@ A person can have any number of notes (including 0)
 
 Examples:
 
-- `addnotes 1 n/Supplier 1`
-- `addnotes 2 n/Supplier 2`
+- `addnote 1 n/Supplier 1`
+- `addnote 2 n/Supplier 2`
 
-### Edit a Note of an existing contact: `editnotes`
+### Edit a Note of an existing contact: `editnote`
 
 Edits a note of a person in the address book.
 
-Format: `editnotes INDEX i/NOTE_INDEX n/[NOTES]`
+Format: `editnote INDEX i/NOTE_INDEX n/[NOTE]`
 
 - Edits the note at the specified `NOTE_INDEX` of the person at the specified `INDEX`.
   -The index refers to the index number shown in the displayed person list.
@@ -183,24 +183,24 @@ Format: `editnotes INDEX i/NOTE_INDEX n/[NOTES]`
 
 Examples:
 
-- `editnotes 1 i/1 n/Customer 1`
-- `editnotes 2 i/1 n/Customer 2`
+- `editnote 1 i/1 n/Customer 1`
+- `editnote 2 i/1 n/Customer 2`
 
-### Deleting a note from an existing contact: `deletenotes`
+### Deleting a note from an existing contact: `deletenote`
 
 Deletes a note from a person in the address book.
 
-Format: `deletnotes INDEX n/[NOTE_INDEX]`
+Format: `deletnote INDEX n/[NOTE_INDEX]`
 
 - Delete note from the person at the specified `INDEX` and specified `NOTE_INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The note index refers to the index number shown in the notes list of the contact details of the displayed person.
-- The index and notes index **must be a positive integer** 1, 2, 3, …​
+- The index and note index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-- `deletenotes 1 i/1`
-- `deletenotes 2 i/2`
+- `deletenote 1 i/1`
+- `deletenote 2 i/2`
 
 ### Viewing an existing contact's details : `view`
 

@@ -6,13 +6,13 @@ import static java.util.Objects.requireNonNull;
 
 import bizbook.commons.core.index.Index;
 import bizbook.commons.exceptions.IllegalValueException;
-import bizbook.logic.commands.DeleteNotesCommand;
+import bizbook.logic.commands.DeleteNoteCommand;
 import bizbook.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeleteNotesCommand object
  */
-public class DeleteNotesCommandParser implements Parser<DeleteNotesCommand> {
+public class DeleteNotesCommandParser implements Parser<DeleteNoteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteNotesCommand
@@ -20,7 +20,7 @@ public class DeleteNotesCommandParser implements Parser<DeleteNotesCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteNotesCommand parse(String args) throws ParseException {
+    public DeleteNoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NOTES_INDEX);
@@ -35,9 +35,9 @@ public class DeleteNotesCommandParser implements Parser<DeleteNotesCommand> {
 
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteNotesCommand.MESSAGE_USAGE), ive);
+                    DeleteNoteCommand.MESSAGE_USAGE), ive);
         }
 
-        return new DeleteNotesCommand(index, noteIndex);
+        return new DeleteNoteCommand(index, noteIndex);
     }
 }

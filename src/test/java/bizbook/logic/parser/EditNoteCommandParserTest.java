@@ -11,12 +11,13 @@ import static bizbook.testutil.TypicalNotes.VALID_NOTE;
 
 import org.junit.jupiter.api.Test;
 
-import bizbook.logic.commands.EditNotesCommand;
+import bizbook.logic.commands.EditNoteCommand;
 
-public class EditNotesCommandParserTest {
+
+public class EditNoteCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            EditNotesCommand.MESSAGE_USAGE);
+                    EditNoteCommand.MESSAGE_USAGE);
 
     private EditNotesCommandParser parser = new EditNotesCommandParser();
 
@@ -37,7 +38,7 @@ public class EditNotesCommandParserTest {
         String userInput = INDEX_SECOND_PERSON.getOneBased() + " " + PREFIX_NOTES_INDEX + INDEX_FIRST_NOTE.getOneBased()
                 + " " + PREFIX_NOTES + VALID_NOTE.getNote();
 
-        EditNotesCommand expectedCommand = new EditNotesCommand(INDEX_SECOND_PERSON, INDEX_FIRST_NOTE, VALID_NOTE);
+        EditNoteCommand expectedCommand = new EditNoteCommand(INDEX_SECOND_PERSON, INDEX_FIRST_NOTE, VALID_NOTE);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

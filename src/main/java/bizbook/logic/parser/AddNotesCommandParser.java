@@ -6,14 +6,14 @@ import static java.util.Objects.requireNonNull;
 
 import bizbook.commons.core.index.Index;
 import bizbook.commons.exceptions.IllegalValueException;
-import bizbook.logic.commands.AddNotesCommand;
+import bizbook.logic.commands.AddNoteCommand;
 import bizbook.logic.parser.exceptions.ParseException;
 import bizbook.model.person.Note;
 
 /**
  * Parses input arguments and creates a new AddNotesCommand object
  */
-public class AddNotesCommandParser implements Parser<AddNotesCommand> {
+public class AddNotesCommandParser implements Parser<AddNoteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddNotesCommand
@@ -21,7 +21,7 @@ public class AddNotesCommandParser implements Parser<AddNotesCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddNotesCommand parse(String args) throws ParseException {
+    public AddNoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NOTES);
@@ -35,9 +35,9 @@ public class AddNotesCommandParser implements Parser<AddNotesCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddNotesCommand.MESSAGE_USAGE), ive);
+                    AddNoteCommand.MESSAGE_USAGE), ive);
         }
 
-        return new AddNotesCommand(index, note);
+        return new AddNoteCommand(index, note);
     }
 }
