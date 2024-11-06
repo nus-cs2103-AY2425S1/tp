@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderByIndex;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderListByIndex;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
@@ -20,30 +22,33 @@ import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.order.Status;
+import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
 import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class MarkOrderCommandTest {
 
     private Model model;
+    private Person personToMarkOrderUnder;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        Person personToMarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+        personToMarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
         model.updateSelectedPerson(personToMarkOrderUnder);
     }
 
     @Test
-    public void execute_validIndexOrderList_success() {
+    public void execute_validIndexUnfilteredOrderList_success() {
         MarkOrderCommand markOrderCommand = new MarkOrderCommand(INDEX_FIRST_ORDER);
 
         Model expectedModel = model.createCopy();
-        Order orderToBeMarked = expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased())
-                .getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
-        Order markedOrder = MarkOrderCommand.createMarkedOrder(orderToBeMarked);
+        Order orderToBeMarkedInUnfilteredList = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
+        OrderBuilder orderBuilder = new OrderBuilder(orderToBeMarkedInUnfilteredList);
+        Order markedOrder = orderBuilder.withStatus(Status.COMPLETED).build();
 
-        expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased()).getOrderList()
-                .setOrder(orderToBeMarked, markedOrder);
+        getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON).setOrder(orderToBeMarkedInUnfilteredList, markedOrder);
         String expectedMessage = String.format(MarkOrderCommand.MESSAGE_MARK_ORDER_SUCCESS,
                 Messages.format(markedOrder));
 
@@ -51,10 +56,38 @@ public class MarkOrderCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexOrderList_throwsCommandException() {
-        Person person = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-        model.updateSelectedPerson(person);
-        Index outOfBoundIndex = Index.fromOneBased(person.getOrderList().size() + 1);
+    public void execute_validIndexFilteredOrderList_success() {
+        personToMarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        MarkOrderCommand markOrderCommand = new MarkOrderCommand(INDEX_FIRST_ORDER);
+
+        Model expectedModel = model.createCopy();
+        Order orderToBeMarkedInFilteredList = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
+        OrderBuilder orderBuilder = new OrderBuilder(orderToBeMarkedInFilteredList);
+        Order markedOrder = orderBuilder.withStatus(Status.COMPLETED).build();
+
+        getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON).setOrder(orderToBeMarkedInFilteredList, markedOrder);
+        String expectedMessage = String.format(MarkOrderCommand.MESSAGE_MARK_ORDER_SUCCESS,
+                Messages.format(markedOrder));
+
+        assertCommandSuccess(markOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredOrderList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        MarkOrderCommand markOrderCommand = new MarkOrderCommand(outOfBoundIndex);
+
+        assertCommandFailure(markOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredOrderList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
+
+        personToMarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+
+        assertTrue(outOfBoundIndex.getZeroBased() >= model.getFilteredOrderList().size());
+
         MarkOrderCommand markOrderCommand = new MarkOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(markOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
@@ -76,7 +109,9 @@ public class MarkOrderCommandTest {
         // mark the first order
         OrderList orderList = model.getSelectedOrderList();
         Order order = orderList.get(targetIndex.getZeroBased());
-        orderList.setOrder(order, MarkOrderCommand.createMarkedOrder(order));
+        OrderBuilder orderBuilder = new OrderBuilder(order);
+        Order markedOrder = orderBuilder.withStatus(Status.COMPLETED).build();
+        orderList.setOrder(order, markedOrder);
 
         assertCommandFailure(markOrderCommand, model, MarkOrderCommand.MESSAGE_ORDER_ALREADY_MARKED);
     }

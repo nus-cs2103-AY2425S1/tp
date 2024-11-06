@@ -61,7 +61,7 @@ public class UnmarkOrderCommand extends Command {
         }
 
         Order orderToUnmark = filteredOrderList.get(index.getZeroBased());
-        if (orderToUnmark.getStatus() == Status.PENDING) {
+        if (!orderToUnmark.isCompleted()) {
             throw new CommandException(MESSAGE_ORDER_ALREADY_UNMARKED);
         }
 

@@ -25,6 +25,16 @@ public class OrderUtil {
     }
 
     /**
+     * Returns an add order command string for adding {@code order}
+     * under person in index {@code index} using the command alias.
+     */
+    public static String getAddOrderCommandAlias(Index index, Order order) {
+        return AddOrderCommand.COMMAND_WORD + " "
+                + getIndexDetails(index)
+                + getOrderDetails(order);
+    }
+
+    /**
      * Returns the part of command string for the given {@code order}'s details.
      */
     public static String getOrderDetails(Order order) {

@@ -22,11 +22,11 @@ public class FilterOrderCommand extends Command {
     public static final String COMMAND_WORD = "filterorder";
     public static final String COMMAND_ALIAS = "filtero";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the displayed order list by"
-            + " order status (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the displayed order list for order(s) with "
+            + "matching order status (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: ORDER_STATUS (" + Status.MESSAGE_CONSTRAINTS + ")\n"
             + "Example: " + COMMAND_WORD + " Completed";
-    public static final String MESSAGE_FILTER_ORDERS_SUCCESS = "%1$d %2$s orders listed!";
+    public static final String MESSAGE_FILTER_ORDERS_SUCCESS = "%1$d %2$s order(s) listed!";
 
     private final StatusEqualsKeywordPredicate predicate;
 
