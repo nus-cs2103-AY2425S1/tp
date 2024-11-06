@@ -589,6 +589,9 @@ Success action: Details of edited contact shown in the status message, person in
 
 
 #### Editing by NAME
+
+1. Editing a person
+
    1. Test case: `edit Alice n/Alice Teo`<br>
        Expected (No duplicated Alice): Person with name field containing Alice has name field edited to Alice Teo. Success action will be carried out.<br>
        Expected (Duplicated Alice): No person edited. Person list is filtered to show only contacts with name field containing Alice. Status message shows message to input person by indexing.<br>
