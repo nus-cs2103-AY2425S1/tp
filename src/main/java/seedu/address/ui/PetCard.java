@@ -81,14 +81,6 @@ public class PetCard extends UiPart<Region> {
      * @return a formatted string of linked pet names
      */
     private String formatLinkedOwner(LinkedOwnerList linkedOwner) {
-        StringBuilder formattedOwner = new StringBuilder();
-
-        formattedOwner.append("Owner: ");
-
-        for (Owner owner : linkedOwner) {
-            formattedOwner.append(owner.getName());
-        }
-
-        return formattedOwner.toString();
+        return linkedOwner.getAsField();
     }
 }

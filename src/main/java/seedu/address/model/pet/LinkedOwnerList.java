@@ -155,6 +155,25 @@ public class LinkedOwnerList implements Iterable<Owner> {
         return internalList.equals(otherUniqueOwnerList.internalList);
     }
 
+    public String getAsField() throws InvalidOwnerNumberException {
+        StringBuilder formattedOwner = new StringBuilder();
+
+        formattedOwner.append("Owner: ");
+
+        if (internalList.size() == 0) {
+            formattedOwner.append("warning! this pet is not linked to any owner");
+            return formattedOwner.toString();
+        } else if (internalList.size() > 1) {
+            throw new InvalidOwnerNumberException();
+        }
+
+        for (Owner owner : internalList) {
+            formattedOwner.append(owner.getName());
+        }
+
+        return formattedOwner.toString();
+    }
+
     @Override
     public int hashCode() {
         return internalList.hashCode();

@@ -73,17 +73,6 @@ public class OwnerCard extends UiPart<Region> {
      * @return a formatted string of linked pet names
      */
     private String formatLinkedPets(LinkedPetList linkedPets) {
-        StringBuilder formattedPets = new StringBuilder();
-
-        formattedPets.append("Pets: ");
-
-        for (Pet pet : linkedPets) {
-            if (formattedPets.length() > 6) { // Account for "Pets: "
-                formattedPets.append(" | ");
-            }
-            formattedPets.append(pet.getName());
-        }
-
-        return formattedPets.toString();
+        return linkedPets.getAsField();
     }
 }

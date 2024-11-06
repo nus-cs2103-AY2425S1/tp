@@ -151,6 +151,30 @@ public class LinkedPetList implements Iterable<Pet> {
         return internalList.equals(otherUniquePetList.internalList);
     }
 
+    /**
+     * formats the list of pets linked to an owner for display as a field in the owner card
+     * @returns a string to be displayed
+     */
+    public String getAsField() {
+        StringBuilder formattedPets = new StringBuilder();
+
+        formattedPets.append("Pets: ");
+
+        if (internalList.size() == 0) {
+            formattedPets.append("warning! this owner is not linked to any pets");
+            return formattedPets.toString();
+        }
+
+        for (Pet pet : internalList) {
+            if (formattedPets.length() > 6) { // Account for "Pets: "
+                formattedPets.append(" | ");
+            }
+            formattedPets.append(pet.getName());
+        }
+
+        return formattedPets.toString();
+    }
+
     @Override
     public int hashCode() {
         return internalList.hashCode();
