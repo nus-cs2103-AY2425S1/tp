@@ -7,7 +7,6 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL_ID;
 
 import java.util.stream.Stream;
 
-import tahub.contacts.logic.commands.EnrollCommand;
 import tahub.contacts.logic.commands.UnenrollCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.CourseCode;

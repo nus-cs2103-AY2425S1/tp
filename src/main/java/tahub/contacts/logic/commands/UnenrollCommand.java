@@ -109,6 +109,8 @@ public class UnenrollCommand extends Command {
                     tutorialIdToRemove,
                     courseCodeToRemove.courseCode));
         } else {
+            // Note: The temporary sca object created here is identical to the one stored in the sca list,
+            // as primary key is defined as the combination of matric number, course code, and tutorial id
             model.deleteSca(scaToRemove);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(scaToRemove)));
