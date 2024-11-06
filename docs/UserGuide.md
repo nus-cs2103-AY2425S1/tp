@@ -57,15 +57,15 @@ The image below shows the different components of HiredFiredPro.
 
 Parameter     | Notes
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**`NAME`**   | restrictions
-**`JOB`**    | restrictions
-**`PHONE_NUMBER`**   | restrictions
-**`EMAIL`** | restrictions
-**`SKILL`**   | restrictions
-**`INTERVIEW_SCORE`**   | restrictions
-**`TAG`**   | restrictions
-**`INDEX`**   | restrictions
-**`ORDER`**   | restrictions
+**`NAME`**   | should contain only English alphabets
+**`JOB`**    | should be alphanumeric
+**`PHONE_NUMBER`**   | should only contain digits `0-9`, and it should be at least 3 digits long
+**`EMAIL`** | should be of the format `local-part@domain`
+**`SKILL`**   | should be alphanumeric
+**`INTERVIEW_SCORE`**   | should be a number ranging from 0.0 to 10.0 with a maximum of a single decimal place
+**`TAG`**   | should be alphanumeric and should not contain any spaces
+**`INDEX`**   | refers to the index number shown in the displayed candidate list and **must be a positive integer**, i.e. 1, 2, 3, ...
+**`ORDER`**   | should be either 'a' (ascending) or 'd' (descending)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,22 +103,22 @@ Parameter     | Notes
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a table summarising the commands in HiredFiredPro and a link to the user guide.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 <br><br>
 
-### Adding a person: `add`
+### Adding a candidate: `add`
 
-Adds a person to HiredFiredPro.
+Adds a candidate to HiredFiredPro.
 
 Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE  [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags and skills (including 0)
+**Tip:** A candidate can have any number of tags and skills (including 0)
 </box>
 
 Examples:
@@ -126,42 +126,42 @@ Examples:
 * `add n/Betsy Crowe j/Software Tester t/friend e/betsycrowe@example.com  p/1234567 i/7 s/Python s/Java`
 <br><br>
 
-### Listing all persons : `list`
+### Listing all candidates: `list`
 
-Shows a list of all persons in HiredFiredPro.
+Shows a list of all candidates in HiredFiredPro.
 
 Format: `list`
 <br><br>
 
-### Editing a person : `edit`
+### Editing a candidate: `edit`
 
-Edits an existing person in HiredFiredPro.
+Edits an existing candidate in HiredFiredPro.
 
 Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVIEW_SCORE] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the candidate will be removed i.e. adding of tags is not cumulative.
+* You can remove all the candidate’s tags by typing `t/` without
     specifying any tags after it.
-* When editing skills, the existing skills of the person will be removed i.e. adding of skills is not cumulative.
-* You can remove all the person’s skills by typing `s/` without
+* When editing skills, the existing skills of the candidate will be removed i.e. adding of skills is not cumulative.
+* You can remove all the candidate’s skills by typing `s/` without
   specifying any skills after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st candidate to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd candidate to be `Betsy Crower` and clears all existing tags.
 <br><br>
 
-### Hiring a person by name and job: `hire`
+### Hiring a candidate by name and job: `hire`
 
-Changes an existing person's status to "Hired" in HiredFiredPro.
+Changes an existing candidate's status to "Hired" in HiredFiredPro.
 
 Format: `hire n/NAME j/JOB`
 
-* Changes the person's status to `Hired`.
-* Both the name of the person and the job that he/she is applying for must be provided.
+* Changes the candidate's status to `Hired`.
+* Both the name of the candidate and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Hired` status.
 * The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
   `Software Engineer`.
@@ -169,14 +169,14 @@ Format: `hire n/NAME j/JOB`
   `Software Engineer`.
 <br><br>
 
-### Rejecting a person by name and job: `reject`
+### Rejecting a candidate by name and job: `reject`
 
-Changes an existing person's status to "Rejected" in HiredFiredPro.
+Changes an existing candidate's status to "Rejected" in HiredFiredPro.
 
 Format: `reject n/NAME j/JOB`
 
-* Changes the person's status to `Rejected`.
-* Both the name of the person and the job that he/she is applying for must be provided.
+* Changes the candidate's status to `Rejected`.
+* Both the name of the candidate and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Rejected` status.
 * The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
   `Software Engineer`.
@@ -184,19 +184,19 @@ Format: `reject n/NAME j/JOB`
   `Software Engineer`.
 <br><br>
 
-### View a person's status by name and job: `view`
+### View a candidate's status by name and job: `view`
 
-Shows a person's status in HiredFiredPro.
+Shows a candidate's status in HiredFiredPro.
 
 Format: `view n/NAME j/JOB`
 
-* Views the person's status (Hired / Rejected / Pending).
-* Both the name of the person and the job that he/she is applying for must be provided.
+* Views the candidate's status (Hired / Rejected / Pending).
+* Both the name of the candidate and the job that he/she is applying for must be provided.
 * The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
   `Software Engineer`.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
   `Software Engineer`.
-* Details of the person being viewed will be displayed in the display panel.
+* Details of the candidate being viewed will be displayed in the display panel.
 
 Examples:
 * `view n/Alex Yeoh j/Software Engineer` displays the details of candidate Alex Yeoh in the display panel.
@@ -204,9 +204,9 @@ Examples:
 ![display-panel](images/Display-Panel.png)
 <br><br>
 
-### Locating persons by name: `find`
+### Locating candidates by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds candidates whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -214,7 +214,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* candidates matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
@@ -225,22 +225,27 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 <br><br>
 
-### Deleting a person : `delete`
+### Deleting a candidate : `delete`
 
-Deletes the specified person from HiredFiredPro.
+Deletes the specified candidate from HiredFiredPro.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+<box type="warning">
+
+**Warning:** This action is irreversible! Only enter this command if you are sure that the candidate is not needed.
+</box>
+
+* Deletes the candidate at the specified `INDEX`.
+* The index refers to the index number shown in the displayed candidate list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in HiredFiredPro.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd candidate in HiredFiredPro.
+* `find Betsy` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
 <br><br>
 
-### Sorting persons by interview scores : `sort`
+### Sorting candidates by interview scores : `sort`
 
 Sorts the list of candidates in ascending or descending order based on their interview scores.
 
@@ -253,11 +258,16 @@ Examples:
 * `find Alice Betsy Charlie` followed by `sort d` sorts the resulting candidate list of the `find` command in descending order based on their interview scores.
 <br><br>
 
-### Clearing all entries : `clear`
+### Clearing all candidates : `clear`
 
-Clears all entries from HiredFiredPro.
+Clears all candidates from HiredFiredPro.
 
 Format: `clear`
+
+<box type="warning">
+
+**Warning:** This action is irreversible! Only enter this command if you are sure that all existing candidates are not needed.
+</box>
 <br><br>
 
 ### Exiting the program : `exit`
