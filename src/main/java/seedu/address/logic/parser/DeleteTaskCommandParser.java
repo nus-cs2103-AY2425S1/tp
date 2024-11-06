@@ -18,11 +18,11 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
      */
     public DeleteTaskCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
+            Index index = Index.zeroBasedNoConstraints(Integer.parseInt(args.trim()));
             return new DeleteTaskCommand(index);
-        } catch (ParseException pe) {
+        } catch (NumberFormatException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE), pe);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE), e);
         }
     }
 

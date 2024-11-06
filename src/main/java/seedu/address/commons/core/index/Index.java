@@ -14,14 +14,14 @@ public class Index {
     private int zeroBasedIndex;
 
     /**
-     * Index can only be created by calling {@link Index#fromZeroBased(int)} or
-     * {@link Index#fromOneBased(int)}.
+     * Index can only be created by calling {@link Index#fromZeroBased(int)},
+     * {@link Index#fromOneBased(int)}, or {@link Index#zeroBasedNoConstraints(int)}
      */
-    private Index(int zeroBasedIndex) {
-        if (zeroBasedIndex < 0) {
+
+    private Index(int zeroBasedIndex, boolean check) {
+        if (check && zeroBasedIndex < 0) {
             throw new IndexOutOfBoundsException();
         }
-
         this.zeroBasedIndex = zeroBasedIndex;
     }
 
@@ -37,14 +37,21 @@ public class Index {
      * Creates a new {@code Index} using a zero-based index.
      */
     public static Index fromZeroBased(int zeroBasedIndex) {
-        return new Index(zeroBasedIndex);
+        return new Index(zeroBasedIndex, true);
     }
 
     /**
      * Creates a new {@code Index} using a one-based index.
      */
     public static Index fromOneBased(int oneBasedIndex) {
-        return new Index(oneBasedIndex - 1);
+        return new Index(oneBasedIndex - 1, true);
+    }
+
+    /**
+     * Creates a new {@code Index} using a zero-based index, bypassing non-positive checks (only used for delete-task).
+     */
+    public static Index zeroBasedNoConstraints(int index) {
+        return new Index(index, false);
     }
 
     @Override
@@ -54,11 +61,10 @@ public class Index {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Index)) {
+        if (!(other instanceof Index otherIndex)) {
             return false;
         }
 
-        Index otherIndex = (Index) other;
         return zeroBasedIndex == otherIndex.zeroBasedIndex;
     }
 
