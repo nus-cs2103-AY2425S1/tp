@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.addcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.ListMarkers.LIST_GROUP_TASK_MARKER;
+import static seedu.address.logic.ListMarkers.LIST_TASK_MARKER;
 import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
@@ -46,7 +46,7 @@ public class AddTaskToGroupCommand extends Command {
         + PREFIX_TASK_DEADLINE + "2024-01-01 1300 "
         + PREFIX_GROUP_NAME + "Team 1";
 
-    public static final String MESSAGE_SUCCESS = "Added task (%1$s) to the following groups:\n%2$s";
+    public static final String MESSAGE_SUCCESS = "Added task (%1$s) to the following group(s):%2$s";
 
     public static final String MESSAGE_OVERDUE_WARNING = "WARNING: Task will be marked as overdue";
 
@@ -59,12 +59,12 @@ public class AddTaskToGroupCommand extends Command {
 
     private final Deadline deadline;
 
-    private final Set<GroupName> toAddInto;
+    private final List<GroupName> toAddInto;
 
     /**
      * Creates an AddStudentToGroupCommand to add the specified {@code Task} to the specified {@code Group}.
      */
-    public AddTaskToGroupCommand(TaskName taskName, Deadline deadline, Set<GroupName> groupNames) {
+    public AddTaskToGroupCommand(TaskName taskName, Deadline deadline, List<GroupName> groupNames) {
         requireNonNull(taskName);
         requireNonNull(groupNames);
         this.taskName = taskName;
@@ -112,6 +112,7 @@ public class AddTaskToGroupCommand extends Command {
             if (!model.containsGroupName(groupName)) {
                 countModelDoesNotContainGroup++;
                 modelDoesNotContainGroup += "\n" + groupName.getGroupName();
+                toAddInto.removeAll(List.of(groupName));
                 continue;
             }
             Group group = model.getGroupByName(groupName);
@@ -127,14 +128,14 @@ public class AddTaskToGroupCommand extends Command {
         if (countModelDoesNotContainGroup == noDuplicateGroupList.size()) {
             throw new CommandException(modelDoesNotContainGroup);
         }
-        model.setMostRecentGroupTaskDisplay(groups.get(lastIndex).getGroupName());
-        model.updateFilteredGroupList(x -> x.getGroupName().equals(groups.get(lastIndex)));
-        model.setStateGroupTask();
+        model.setMostRecentTaskDisplay(task);
+        model.updateFilteredTaskList(x -> x.equals(task));
+        model.setStateTasks();
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
         String finalOutput = "";
         if (numDuplicates > 0) {
-            finalOutput = duplicateMessage + String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(),
+            finalOutput = duplicateMessage + "\n" + String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(),
                 resultMessage);
         } else {
             finalOutput = String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(), resultMessage);
@@ -143,9 +144,9 @@ public class AddTaskToGroupCommand extends Command {
             finalOutput += modelDoesNotContainGroup + "\n";
         }
         if (deadline.getTime().isBefore(currentTime)) {
-            return new CommandResult(finalOutput + MESSAGE_OVERDUE_WARNING, LIST_GROUP_TASK_MARKER);
+            return new CommandResult(finalOutput + MESSAGE_OVERDUE_WARNING, LIST_TASK_MARKER);
         }
-        return new CommandResult(finalOutput, LIST_GROUP_TASK_MARKER);
+        return new CommandResult(finalOutput, LIST_TASK_MARKER);
     }
 
     @Override
