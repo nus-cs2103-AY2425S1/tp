@@ -1,28 +1,13 @@
 ---
 layout: default.md
 title: "NovaCare User Guide"
-pageNav: 3
 ---
 NovaCare is a **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
---------------------------------------------------------------------------------------------------------------------
 
-## Table of Contents
-- [How to use NovaCare](#how-to-use-novacare)
-  - [Glossary](#glossary)
-  - [Annotations box](#annotations-box)
-- [Quick start](#quick-start)
-  - [Installation](#step-1-ensure-you-have-java-17-or-above-installed-in-your-computer-you-can-download-java-from-here)
-  - [How to run NovaCare](#step-3-run-the-application)
-  - [Overview of GUI](#overview-of-gui)
-  - [Get started with NovaCare](#get-started-with-novacare)
-- [Features](#features)
-- [FAQ](#faq)
-- [Known issues](#known-issues)
-- [Command summary](#command-summary)
-  - [Patient-related commands](#patient-related-commands)
-  - [Task-related commands](#task-related-commands)
-  - [Other commands](#other-commands)
+* Table of Contents
+  {:toc}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to use NovaCare
