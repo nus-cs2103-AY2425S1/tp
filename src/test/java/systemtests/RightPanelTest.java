@@ -112,16 +112,14 @@ public class RightPanelTest {
         // Verify the predicate passed to updateFilteredTransactionList
         verify(mockCommonModel, times(1)).updateFilteredTransactionList(argThat(predicate -> {
             Transaction mockTxnDone = mock(Transaction.class);
-            Status mockStatusDone = mock(Status.class);
-            when(mockTxnDone.getStatus()).thenReturn(mockStatusDone);
-            when(mockTxnDone.getStatus().isDone()).thenReturn(true);
+            Status doneStatus = new Status(true);
+            when(mockTxnDone.getStatus()).thenReturn(doneStatus);
 
             Transaction mockTxnUndone = mock(Transaction.class);
-            Status mockStatusUndone = mock(Status.class);
-            when(mockTxnUndone.getStatus()).thenReturn(mockStatusUndone);
-            when(mockTxnUndone.getStatus().isDone()).thenReturn(false);
+            Status undoneStatus = new Status(false);
+            when(mockTxnUndone.getStatus()).thenReturn(undoneStatus);
 
-            return predicate.test(mockTxnUndone) && !predicate.test(mockTxnDone);
+            return !predicate.test(mockTxnUndone) && predicate.test(mockTxnDone);
         }));
     }
 }

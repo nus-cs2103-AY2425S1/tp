@@ -1,9 +1,12 @@
 package spleetwaise.transaction.ui;
 
-import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate.NEGATIVE_SIGN;
+import static spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate.POSITIVE_SIGN;
+import static spleetwaise.transaction.model.transaction.Status.DONE_STATUS;
+import static spleetwaise.transaction.model.transaction.Status.NOT_DONE_STATUS;
 
 import java.math.BigDecimal;
 import java.util.function.Predicate;
@@ -25,7 +28,10 @@ import spleetwaise.commons.ui.CommandBox;
 import spleetwaise.commons.ui.UiPart;
 import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.StatusFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -34,8 +40,8 @@ import spleetwaise.transaction.model.transaction.Transaction;
 public class RightPanel extends UiPart<Region> {
     private static final String FXML = "RightPanel.fxml";
 
-    private static boolean amountFilter = false;
-    private static boolean doneFilter = false;
+    private static String amountSignForFilter = POSITIVE_SIGN;
+    private static String statusForFilter = DONE_STATUS;
 
     private TransactionListPanel transactionListPanel;
     private CommandBox commandBox;
@@ -64,10 +70,8 @@ public class RightPanel extends UiPart<Region> {
         transactionListPanel = new TransactionListPanel(txns);
         transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
 
-        StringBinding iconColorBinding = Bindings.createStringBinding(() -> {
-            return commonModel.getCurrentPredicate().get() == TransactionBookModel.PREDICATE_SHOW_ALL_TXNS ? "gray"
-                    : "blue";
-        }, commonModel.getCurrentPredicate());
+        StringBinding iconColorBinding = Bindings.createStringBinding(() -> commonModel.getCurrentPredicate().get()
+                == TransactionBookModel.PREDICATE_SHOW_ALL_TXNS ? "gray" : "blue", commonModel.getCurrentPredicate());
 
         filterBtn.styleProperty().bind(Bindings.concat("-icon-paint: ", iconColorBinding, ";"));
         filterBtn.setPickOnBounds(true);
@@ -79,21 +83,23 @@ public class RightPanel extends UiPart<Region> {
      */
     public void updateBalances() {
         ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
-        youOwnLabel.setText("You Owe $" + calculateBalance(txns, Amount::isNegative).toString());
-        ownYouLabel.setText("You are Owed $" + calculateBalance(txns, amt -> !amt.isNegative()).toString());
+        youOwnLabel.setText(
+                "You Owe $" + calculateBalance(txns, new AmountSignFilterPredicate(NEGATIVE_SIGN)).toString());
+        ownYouLabel.setText(
+                "You are Owed $" + calculateBalance(txns, new AmountSignFilterPredicate(POSITIVE_SIGN)).toString());
     }
 
     /**
      * General method to calculate balance based on a filtering condition.
      *
      * @param txns   The list of transactions to filter and sum.
-     * @param filter The predicate to filter the amounts (e.g., isNegative or !isNegative).
+     * @param filter The predicate to filter transaction with either positive or negative amounts.
      * @return The sum of amounts that match the filter condition.
      */
-    private BigDecimal calculateBalance(ObservableList<Transaction> txns, Predicate<Amount> filter) {
+    private BigDecimal calculateBalance(ObservableList<Transaction> txns, Predicate<Transaction> filter) {
         return txns.stream()
-                .map(Transaction::getAmount)
                 .filter(filter)
+                .map(Transaction::getAmount)
                 .map(Amount::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
@@ -117,7 +123,7 @@ public class RightPanel extends UiPart<Region> {
 
         MenuItem filterByContact = new MenuItem("Filter by Contact");
         filterByContact.setOnAction(
-                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_PHONE));
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " "));
 
         MenuItem filterByAmount = new MenuItem("Filter by Amount");
         filterByAmount.setOnAction(
@@ -139,16 +145,16 @@ public class RightPanel extends UiPart<Region> {
 
     private void filterTransactionsByAmount() {
         // toggle between positive or negative amounts only
-        amountFilter = !amountFilter;
         resetFilter();
-        CommonModel.getInstance().updateFilteredTransactionList(txn -> amountFilter != txn.getAmount().isNegative());
+        CommonModel.getInstance().updateFilteredTransactionList(new AmountSignFilterPredicate(amountSignForFilter));
+        amountSignForFilter = amountSignForFilter.equals(POSITIVE_SIGN) ? NEGATIVE_SIGN : POSITIVE_SIGN;
     }
 
     private void filterTransactionsByDoneStatus() {
         // toggle between undone or done transactions only
-        doneFilter = !doneFilter;
         resetFilter();
-        CommonModel.getInstance().updateFilteredTransactionList(txn -> doneFilter != txn.getStatus().isDone());
+        CommonModel.getInstance().updateFilteredTransactionList(new StatusFilterPredicate(new Status(statusForFilter)));
+        statusForFilter = statusForFilter.equals(DONE_STATUS) ? NOT_DONE_STATUS : DONE_STATUS;
     }
 
     /**
