@@ -19,6 +19,26 @@ the process of accessing and updating resident student details. What's more, Dor
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Viewing help : `help`](#viewing-help--help)
+  - [Adding a person : `add`](#adding-a-person-add)
+  - [Listing all persons : `list`](#listing-all-persons--list)
+  - [Editing a person : `edit`](#editing-a-person--edit)
+  - [Finding a person : `find`](#locating-persons-by-name-phone_number-room_number-or-tag-find)
+  - [Deleting a person : `delete`](#deleting-a-person--delete)
+  - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+  - [Cleaning graduated students : `exit`](#cleaning-graduated-students--clean)
+  - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Manual saving : `export`](#manual-saving-export)
+  - [Manual data restoration : `import`](#manual-data-restoration-import)
+- [FAQ](#FAQ)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
@@ -133,7 +153,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name, phone_number, room_number or tag: `find`
+### Finding a person: `find`
 
 Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tags’’
 
