@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.commons.util.StringUtil;
+
 
 /**
  * Represents a Person's name in the address book.
@@ -29,7 +31,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = capitaliseName(name);
+        fullName = StringUtil.capitaliseString(name);
     }
 
     /**
@@ -63,23 +65,5 @@ public class Name {
     @Override
     public int hashCode() {
         return fullName.hashCode();
-    }
-
-    /**
-     * Capitalises the first letter of each word in a given full name.
-     * Converts the rest of each word to lowercase and returns the formatted string.
-     *
-     * @param name full name as a string
-     * @return a string of full name with each word capitalised
-     */
-    public String capitaliseName(String name) {
-        String capitalisedName = "";
-        String[] words = name.toLowerCase().split(" ");
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                capitalisedName += Character.toUpperCase(word.charAt(0)) + word.substring(1) + " ";
-            }
-        }
-        return capitalisedName.trim();
     }
 }
