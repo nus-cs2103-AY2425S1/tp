@@ -211,30 +211,31 @@ and more detailed implementation on model changes have been omitted.
 
 The `Delete Group` feature allows users to delete an existing group in the address book given a group's name.
 
-Below, we provide an example usage scenario and description of how the delete group code works at each step.
+The following shows the activity diagram when the user executes the `del_g` command:
+<puml src="diagrams/DeleteGroupActivityDiagram.puml" alt="DeleteGroupCommandAD" />
 
 #### Usage 
 
-**Syntax:** `del_g/dg gn/GROUP_NAME`
+**Syntax:** `del_g/dg gn/GROUP_NAME [gn/GROUP_NAME]...`
 
 **Example:** `dg gn/CS2103-F12-2`
 
 #### Implementation details
 
 1. User has the application launched with at least 1 group added.
-2. User executes `lg` to view all groups. For this example, the user wishes to delete `Group 1`.
-3. The user executes `dg gn/Group 1` to delete the group with a group name `Group 1`. The command is parsed in the
+2. User executes `lg` to view all groups. For this example, the user wishes to delete `CS2103-F12-2`.
+3. The user executes `dg gn/CS2103-F12-2` to delete the group with a group name `CS2103-F12-2`. The command is parsed in the
    `AddressBookParser`.
 4. `DeleteGroupCommandParser` is created and gets the group name of the group to be deleted. The group name is used to
    construct a `DeleteGroupCommand` object.
 5. The `DeleteGroupCommand` object then calls `deleteGroup(group)` in the `ModelManager` with the specified group to be
    deleted. This method deletes the specified `Group` in the model.
-6. Finally, the `DeleteGroupCommand` returns the `CommandResult`.
+7. Finally, the `DeleteGroupCommand` returns the `CommandResult`.
 
 ##### Note
 
 This feature will also remove `Students` in the `Group` and reset their `Group`, and delete all `Tasks` related to the
-`Group`.
+`Group`, but the details are omitted.
 
 #### Sequence diagram
 
@@ -253,7 +254,7 @@ PlantUML, the lifeline continues till the end of diagram.
 **Aspect 1:** Usage of GroupName as identifer
 
 1. **Design #1: Use GroupName**
-* Pro: More deliberate and since GroupNames are more complex, the user will be more aware
+* Pro: More deliberate and since GroupNames are more complex, the user will be more aware of their decision
 * Con: Must type a lot
 
 2. **Design #2:** Use Index
