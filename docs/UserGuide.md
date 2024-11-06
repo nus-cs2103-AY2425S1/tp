@@ -6,7 +6,7 @@
 
 # Dream Day Designer User Guide
 
-Are you a freelance **wedding planner**? Then DDD is just the right tool for you! Managing hundreds of clients and vendors can be troublesome, and Dream Day Designer (DDD) is our answer to your problems.
+Are you a freelance **wedding planner**? Then DDD is just the right tool for you! Managing hundreds of clients and vendors can be troublesome, and **Dream Day Designer (DDD)** is our **answer** to your problems!
 
 DDD is a desktop app for **wedding planners** to keep track of their **clients**, **vendors** and **events**, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
@@ -53,7 +53,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 ## Introduction
 
-Before diving deeper into DDD's features, it will be helpful to explain a bit more about what DDD is trying to achieve. In short, DDD offers a comprehensive way of managing your contacts. As an extension, contacts can be also be tied to events.
+Before diving deeper into DDD's features, let's run you through what DDD can do for you! In short, DDD offers a comprehensive system for managing your contacts. Contacts can be also be tagged or tied to events to streamline your workflows!
 
 ### Contacts
 
