@@ -119,24 +119,24 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`, `TagCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`, `TagCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+The class diagram below provides an overview of Command.
+
+<img src="images/CommandClassDiagram.png"/>
+
+Commands that extends the UndoableCommand class have a concrete implementation of `undo`, which is called during the execution of an UndoCommand. During the execution of an `UndoableCommand`, the changes to the addressbook are stored, and will be used for `undo`.
+
 ### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the current list of tags as an `ObservableList<Tag>`. This allows `AddessBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage Component
@@ -164,7 +164,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-Currently, the undo feature facilitated by the class `UndoCommand` and is implemented by having an undo method under each command, which implements an `UndoableCommand` interface. It does not utilise saved states of the address book.
+Currently, the undo feature facilitated by the class `UndoCommand`. It is implemented by having an abstract class `UndoableCommand`, which the command extends, proving a concrete implementation of `UndoableCommand#undo()`. and is implemented by having an undo method under each command, which implements an `UndoableCommand` interface. It does not utilise saved states of the address book.
 
 The proposed augmented undo and new redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -550,8 +550,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Filter**: Only show guests that contains the text input by the user
 * **New Tag**: Creates a new tag and adds it to the tag list
 * **Delete Tag**: Removes a tag from the tag list and all instances of it on all guests in the address book
-* **Remove Tag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
-* **Undo**: Returns the list to the previous state before the last command was run
+* **Untag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
+* **Undo**: Undoes the previous executed command
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
