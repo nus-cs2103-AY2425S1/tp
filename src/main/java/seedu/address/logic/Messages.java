@@ -60,6 +60,7 @@ public class Messages {
         if (person instanceof Supplier) {
             Supplier supplier = (Supplier) person;
             builder.append("\n").append("Ingredients Supplied: ")
+                    .append("\n")
                     .append(supplier.getIngredientsSupplied()).append("\n");
         }
         return builder.toString();
