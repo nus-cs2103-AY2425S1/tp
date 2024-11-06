@@ -291,7 +291,6 @@ Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to ha
 | Essential | Teacher | manage student phone number                                  | I know who to contact and how to contact                                   |
 | Essential | Teacher | manage student email                                         | I am able to send email attachments                                        |
 | Essential | Teacher | tag students based on how much help they need                | give each student the appropriate amount of help                           |
-| Essential | Teacher | track class schedules                                        | schedule students                                                          |
 | Essential | Teacher | mark all students who has paid                               | so that I can quickly mark all my students who has paid                    |
 | Essential | Teacher | unmark all students, so that they are listed as has not paid | so that I can quickly mark students as unpaid, when the new month comes in |
 | Essential | Teacher | manage how much each student pays in tuition fees            | so that I can remember how much to bill my student every month             |
