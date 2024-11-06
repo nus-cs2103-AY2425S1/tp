@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Enter edit student command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([invalid command format])
+    :Receive error message;
+else ([valid command format])
+    :Parse command parameters;
+    :Create editPersonDescriptor object;
+    if() then ([invalid index])
+        :Receive error message;
+    else ([invalid index])
+        if() then ([duplicate person])
+            :Receive error message;
+        else ([unique person])
+            :Add person to address book;
+            :Receive success message;
+        endif
+    endif
+endif
+stop
+@enduml
