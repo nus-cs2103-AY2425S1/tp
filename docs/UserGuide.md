@@ -248,7 +248,92 @@ checkPastryStock Croissant
 This command checks the inventory to confirm if enough pastries are available,
 helping ensure customer order fulfillment.
 
+### **Delete Contact Command**
+Deletes the contact details of specified person from the address book.
+
+```bash
+deleteContact INDEX
+```
+- **Parameters:**
+    - `INDEX`: The index number shown in the displayed Contact List. Must be a positive integer.
+
+**Example:**
+```bash
+deleteContact 1
+```
+![screenshot](images/ss deletecontact.png)
+
+### **Delete Customer Order Command**
+Deletes a customer order from the customer order list at the specified index.
+
+```bash
+deleteCustomerOrder INDEX
+```
+- **Parameters:**
+    - `INDEX`: The index of the order to delete, as displayed in the Customer Order List. Must be a positive integer.
+
+**Example:**
+```bash
+deleteCustomerOrder 2
+```
+![screenshot](images/ss deletecustomerorder.png)
+### **Delete Supply Order Command**
+Deletes a supply order from the supply order list at the specified index.
+
+```bash
+deleteSupplyOrder INDEX
+```
+- **Parameters:**
+    - `INDEX`: The index of the order to delete, as displayed in the Supply Order List. Must be a positive integer.
+
+**Example:**
+```bash
+deleteSupplyOrder 1
+```
+![screenshot](images/ss deletesupplyorder.png)
+### **Edit Contact Command**
+Update the contact details of an existing contact in the address book, including persons, customers, and suppliers. 
+
+```bash
+editContact INDEX [FIELDS...]
+```
+- **[FIELDS...]:**
+    - `n/NAME`: (optional) The person's name.
+    - `p/PHONE_NUMBER`: (optional) The person's phone number.
+    - `e/EMAIL`: (Optional) The person's email address.
+    - `a/ADDRESS`: (Optional) The person's address.
+    - `i/INFORMATION`: (Optional, for customers only) Additional information of the customer such as dietary preference.
+    - `s/INGREDIENTS SUPPLIED`: (Optional, for suppliers only) Ingredients supplied of a supplier.
+    - `t/TAG`: (Optional) Tags for additional customer information.
+
+**Example:**
+```bash
+editContact 1 p/91150335
+```
+![screenshot](images/ss editcontact.png)    
+
+### **Filter Contact Command**
+Filter and list contacts in the address book based on specified tags.
+
+```bash
+filterContact t/TAG [MORE_TAGS...]
+```
+- **Parameters:**
+   - `t/TAG`: A tag to filter contacts by. Multiple tags can be specified by repeating the "t/" prefix with different tag values.
+
+**Example:**
+```bash
+filterContact t/Customer
+```
+![screenshot](images/ss filter.png)
 ### Clearing all entries : `clear`
 Clears all entries from the address book.
 
 Format: `clear`
+
+### **Exit Command**
+Exits the program.
+
+```bash
+exit
+```
