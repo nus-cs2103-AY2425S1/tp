@@ -713,5 +713,3 @@ testers are expected to do more *exploratory* testing.
 
    2. **Test case:** Test case: `edit 10 n/John Doe p/98765432`<br>
       **Expected:** No client is edited. Error details shown in the status message.
-
-   
