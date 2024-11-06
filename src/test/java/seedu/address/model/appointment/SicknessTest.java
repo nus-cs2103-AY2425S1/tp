@@ -33,7 +33,7 @@ public class SicknessTest {
         // EP: leading/trailing whitespaces
         assertFalse(Sickness.isValidSickness(" Headache"));
         assertFalse(Sickness.isValidSickness(" 1"));
-      
+
         // EP: invalid characters
         assertFalse(Sickness.isValidSickness("1"));
         assertFalse(Sickness.isValidSickness("!"));
@@ -56,7 +56,7 @@ public class SicknessTest {
         // EP: leading/trailing whitespaces
         assertThrows(IllegalArgumentException.class, () -> new Sickness(" Cough"));
         assertThrows(IllegalArgumentException.class, () -> new Sickness(" 1"));
-      
+
         // EP: invalid characters
         assertThrows(IllegalArgumentException.class, () -> new Sickness("1"));
         assertThrows(IllegalArgumentException.class, () -> new Sickness("!"));
