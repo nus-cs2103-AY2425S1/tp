@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Maximum of 50 alphanumeric characters, spaces, parenthesis,"
+    public static final String MESSAGE_CONSTRAINTS = "Maximum of 50 alphanumeric characters, spaces, parenthesis, "
             + "and apostrophes per tag.\n";
     public static final String VALIDATION_REGEX = "[\\p{Alnum} '()]+";
     public static final int MAX_CHARACTER_LENGTH = 50;

@@ -63,9 +63,12 @@ public class RenameTagCommandParserTest {
      */
     @Test
     public void parse_newNameInvalidCharacters_throwsParseException() {
-        assertParseFailure(parser, " t/" + VALID_TAG_BRIDES_SIDE+ " t/;%<>}{", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-        assertParseFailure(parser, " t/" + VALID_TAG_BRIDES_SIDE + "t/¡£™", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-        assertParseFailure(parser, " t/" + VALID_TAG_BRIDES_SIDE + " t/¶¢", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/" + VALID_TAG_BRIDES_SIDE + " t/;%<>}{",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/" + VALID_TAG_BRIDES_SIDE + "t/¡£™",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/" + VALID_TAG_BRIDES_SIDE + " t/¶¢",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     /**
@@ -73,9 +76,12 @@ public class RenameTagCommandParserTest {
      */
     @Test
     public void parse_existingTagInvalidCharacters_throwsParseException() {
-        assertParseFailure(parser, " t/;%<>}{ t/" + VALID_TAG_BRIDES_SIDE, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-        assertParseFailure(parser, " t/¡£™ t/" + VALID_TAG_BRIDES_SIDE, String.format(MESSAGE_INVALID_COMMAND_FORMAT,MESSAGE_USAGE));
-        assertParseFailure(parser, " t/¶¢ t/" + VALID_TAG_BRIDES_SIDE, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/;%<>}{ t/" + VALID_TAG_BRIDES_SIDE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/¡£™ t/" + VALID_TAG_BRIDES_SIDE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,MESSAGE_USAGE));
+        assertParseFailure(parser, " t/¶¢ t/" + VALID_TAG_BRIDES_SIDE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     /**
