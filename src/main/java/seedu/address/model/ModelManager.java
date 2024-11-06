@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -16,7 +15,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
 import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
@@ -246,8 +244,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteGoods(GoodsName goodsName) {
-        goodsList.removeIf(receipt -> Objects.equals(receipt.getGoods().getGoodsName(), goodsName));
+    public void deleteGoods(GoodsReceipt goodsReceipt) {
+        requireNonNull(goodsReceipt);
+        goodsList.deleteReceipt(goodsReceipt);
+    }
+
+    @Override
+    public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
+        return goodsList.getReceiptList().stream().filter(predicate).findAny();
     }
 
     @Override

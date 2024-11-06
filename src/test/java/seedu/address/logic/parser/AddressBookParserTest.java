@@ -101,7 +101,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteGoods() throws Exception {
-        assertTrue(parser.parseCommand(DeleteGoodsCommand.COMMAND_WORD + " gn/3") instanceof DeleteGoodsCommand);
+        assertTrue(parser.parseCommand(
+                DeleteGoodsCommand.COMMAND_WORD + " n/Doe gn/3") instanceof DeleteGoodsCommand);
     }
 
     @Test
