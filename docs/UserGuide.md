@@ -68,7 +68,7 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 <p>
 
-* Items with `...` after them can be used multiple times, including zero times.<br>
+* Items with `…` after them can be used multiple times, including zero times.<br>
   e.g. `[t/TAG]…​` can be used as:
   * ` ` (i.e. 0 times);
   * `t/big-event`;
@@ -221,25 +221,29 @@ Therefore, edit the data file only if you are confident that you can update it c
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EventTory home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action       | Format, Examples                                                                                                                                                                                                                                  |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Create**   | -`create v/ n/VENDOR_NAME p/PHONE_NUMBER d/DESCRIPTION [t/TAG]…​` or,<br> -`create e/ n/EVENT_NAME on/DATE [t/TAG]…​`<br><br>e.g., `create e/ n/Graduation Party on/2025-12-10 t/smu`                                                             |
+| **Assign**   | `assign INDEX` <br> e.g. `assign 1`                                                                                                                                                                                                               |
+| **Unassign** | `unassign INDEX` <br> e.g. `unassign 1`                                                                                                                                                                                                           |
+| **List**     | `list [v/] [e/]` <br> e.g. `list v/`, `list v/ e/`                                                                                                                                                                                                |
+| **View**     | `view v/INDEX` or `view e/INDEX`<br> e.g. `view v/1`                                                                                                                                                                                              |
+| **Delete**   | `delete v/INDEX` or `delete e/INDEX` <br> e.g., `delete v/3`, `delete e/2`                                                                                                                                                                        |
+| **Edit**     | -`edit v/INDEX [n/VENDOR_NAME] [p/PHONE_NUMBER] [d/DESCRIPTION] [t/TAG]…​` or,<br> -`edit e/INDEX [n/EVENT_NAME] [on/DATE] [t/TAG]…​` <br><br> e.g., `edit v/2 n/PC Parts Trading d/Sells PC Parts` or, <br> `edit e/3 n/Hackathon on/2024-10-12` |
+| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find e/ wedding banquet`                                                                                                                            |
+| **Clear**    | `clear`                                                                                                                                                                                                                                           |
+| **Help**     | `help`                                                                                                                                                                                                                                            |
+| **Exit**     | `exit`                                                                                                                                                                                                                                            |
