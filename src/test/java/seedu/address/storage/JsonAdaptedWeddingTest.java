@@ -78,12 +78,17 @@ public class JsonAdaptedWeddingTest {
     }
 
     @Test
-    public void toModelType_nullDate_throwsIllegalValueException() {
+    public void toModelType_nullDate_throwsIllegalValueException() throws IllegalValueException {
         JsonAdaptedWedding wedding = new JsonAdaptedWedding(
                 VALID_NAME, VALID_CLIENT, null, VALID_VENUE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () ->
-                wedding.toModelType(VALID_WEDDING_LIST));
+
+        Wedding expectedWedding =
+                new Wedding(
+                        new Name(VALID_NAME),
+                        new Client(VALID_CLIENT.toModelType(VALID_WEDDING_LIST)),
+                        null,
+                        new Venue(VALID_VENUE));
+        assertEquals(expectedWedding, wedding.toModelType(VALID_WEDDING_LIST));
     }
 
     @Test
@@ -96,12 +101,16 @@ public class JsonAdaptedWeddingTest {
     }
 
     @Test
-    public void toModelType_nullVenue_throwsIllegalValueException() {
+    public void toModelType_nullVenue_throwsIllegalValueException() throws IllegalValueException {
         JsonAdaptedWedding wedding = new JsonAdaptedWedding(
                 VALID_NAME, VALID_CLIENT, VALID_DATE, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () ->
-                wedding.toModelType(VALID_WEDDING_LIST));
+        Wedding expectedWedding =
+                new Wedding(
+                        new Name(VALID_NAME),
+                        new Client(VALID_CLIENT.toModelType(VALID_WEDDING_LIST)),
+                        new Date(VALID_DATE),
+                        null);
+        assertEquals(expectedWedding, wedding.toModelType(VALID_WEDDING_LIST));
     }
 
     @Test
