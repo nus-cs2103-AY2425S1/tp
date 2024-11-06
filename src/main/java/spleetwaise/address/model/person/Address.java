@@ -27,15 +27,16 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        AppUtil.checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+        String trimmedAddress = address.trim();
+        AppUtil.checkArgument(isValidAddress(trimmedAddress), MESSAGE_CONSTRAINTS);
+        value = trimmedAddress;
     }
 
     /**
      * Returns true if a given string is a valid address
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
     @Override
