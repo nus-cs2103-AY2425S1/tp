@@ -132,9 +132,11 @@ public class AddSchemeCommand extends Command {
         Income updatedIncome = person.getIncome();
         FamilySize updatedFamilySize = person.getFamilySize();
         Set<Tag> updatedTags = person.getTags();
+        boolean isArchived = person.isArchived();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(), newSchemes);
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, newSchemes, UpdatedAt.now(),
+                isArchived);
     }
 
     @Override

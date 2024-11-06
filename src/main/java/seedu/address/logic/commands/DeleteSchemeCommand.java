@@ -113,9 +113,11 @@ public class DeleteSchemeCommand extends Command {
         Income updatedIncome = targetFamily.getIncome();
         FamilySize updatedFamilySize = targetFamily.getFamilySize();
         Set<Tag> updatedTags = targetFamily.getTags();
+        boolean isArchived = targetFamily.isArchived();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(), newSchemes);
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, newSchemes, UpdatedAt.now(),
+                isArchived);
     }
 
     public String getCommandWord() {

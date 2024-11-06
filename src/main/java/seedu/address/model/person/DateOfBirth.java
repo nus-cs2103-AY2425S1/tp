@@ -7,38 +7,60 @@ import java.time.LocalDate;
 
 /**
  * A class to represent a person's date of birth in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(LocalDate)}
  */
-public class DateOfBirth extends Date {
+public class DateOfBirth {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            String.format("%s. Date of birth must not be a future date.", Date.MESSAGE_CONSTRAINTS);
+    public static final String MESSAGE_CONSTRAINTS = "Date of birth must not be a future date.";
+
+    private final LocalDate value;
 
     /**
      * Constructs a {@code DateOfBirth}.
      *
-     * @param date A valid date string
+     * @param date A valid {@link LocalDate}
      */
-    public DateOfBirth(String date) {
-        super(date);
+    public DateOfBirth(LocalDate date) {
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        value = date;
     }
 
-    /**
-     * Returns true if a given string is a valid date.
-     *
-     * @param test A string to be tested
-     * @return {@code true} if the string is valid, {@code false} otherwise
-     */
-    public static boolean isValidDate(String test) {
-        requireNonNull(test);
+    public LocalDate getValue() {
+        return value;
+    }
 
-        if (!Date.isValidDate(test)) {
+    @Override
+    public String toString() {
+        return value.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // also checks for null
+        if (!(other instanceof DateOfBirth otherDateOfBirth)) {
             return false;
         }
 
-        LocalDate localDate = Date.parseLocalDate(test);
-        LocalDate now = LocalDate.now();
-        return localDate.isBefore(now) || localDate.isEqual(now);
+        return value.equals(otherDateOfBirth.value);
+    }
+
+    /**
+     * Returns true if a given date is a valid date of birth.
+     *
+     * @param test a {@link LocalDate} to be tested
+     * @return {@code true} if the date is valid, {@code false} otherwise
+     */
+    public static boolean isValidDate(LocalDate test) {
+        requireNonNull(test);
+        return !test.isAfter(LocalDate.now());
     }
 }
