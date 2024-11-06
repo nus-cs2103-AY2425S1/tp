@@ -179,5 +179,6 @@ public class ClientWindow extends UiPart<Stage> implements Initializable {
         clientSchedulePaymentStatus.setCellValueFactory(new PropertyValueFactory<Schedule, String>("isPaid"));
         scheduleList = FXCollections.observableArrayList();
         clientScheduleTable.setItems(scheduleList);
+        clientScheduleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 }
