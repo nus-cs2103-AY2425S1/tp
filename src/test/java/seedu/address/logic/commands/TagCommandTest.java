@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -134,16 +132,16 @@ public class TagCommandTest {
         assertTrue(command1.equals(command1));
 
         // different objects, same fields -> returns true
-        assertEquals(command1, command2);
+        assertTrue(command1.equals(command2));
 
         // different tags -> returns false
-        assertNotEquals(command1, command3);
+        assertFalse(command1.equals(command3));
 
         // different index -> returns false
-        assertNotEquals(command1, command4);
+        assertFalse(command1.equals(command4));
 
         // null -> returns false
-        assertNotEquals(null, command1);
+        assertFalse(command1.equals(null));
 
         // different type -> returns false
         assertFalse(command1.equals("friend"));
