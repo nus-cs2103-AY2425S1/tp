@@ -8,7 +8,7 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F13-4/tp/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 
-![Ui](images/listResult.png)
+![Ui](images/Ui.png)
 
 **Clientell is a desktop application for managing your clients' finances.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 We provide an easy and fast way for you to store your client's information, be it contact details or transactions. In addition, Clientell allows you to better analyse your clients' balances through advanced commands like `summary`.
