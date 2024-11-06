@@ -107,6 +107,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Person getPersonToDisplay() {
+        return model.getPersonToDisplay();
+    }
+
+    @Override
     public String getPreviousCommandTextFromHistory() {
         return model.getPreviousCommandTextFromHistory();
     }

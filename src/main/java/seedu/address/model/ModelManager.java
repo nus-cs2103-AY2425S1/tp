@@ -30,6 +30,7 @@ public class ModelManager implements Model {
     private final ObservableList<ContactRecord> displayedCallHistory;
     private final CommandTextHistory commandTextHistory;
     private boolean historyView = false;
+    private Person targetPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -170,6 +171,7 @@ public class ModelManager implements Model {
     @Override
     public ContactRecordList getCallHistory(Person target) {
         requireNonNull(target);
+        this.targetPerson = target;
         return target.getContactRecords();
     }
 
@@ -191,6 +193,11 @@ public class ModelManager implements Model {
     @Override
     public void setHistoryView(boolean historyView) {
         this.historyView = historyView;
+    }
+
+    @Override
+    public Person getPersonToDisplay() {
+        return targetPerson;
     }
 
     /**
