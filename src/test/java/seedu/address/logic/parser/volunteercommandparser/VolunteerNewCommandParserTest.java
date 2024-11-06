@@ -204,8 +204,8 @@ public class VolunteerNewCommandParserTest {
         // Duplicate dates in list
         String duplicateDatesDesc = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE + "2024-10-21, 2024-10-21";
         assertParseFailure(parser, VOLUNTEER_NAME_DESC_ALICE + VOLUNTEER_PHONE_DESC_ALICE
-                        + VOLUNTEER_EMAIL_DESC_ALICE + duplicateDatesDesc,
-                (new VolunteerDuplicateDateException("2024-10-21")).getMessage());
+                        + VOLUNTEER_EMAIL_DESC_ALICE + duplicateDatesDesc, (
+                                new VolunteerDuplicateDateException("2024-10-21")).getMessage());
 
         // Extra commas
         String extraCommasDesc = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE + "2024-10-21,, 2024-10-22";
