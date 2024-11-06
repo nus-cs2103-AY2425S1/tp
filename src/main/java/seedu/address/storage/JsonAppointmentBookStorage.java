@@ -38,7 +38,7 @@ public class JsonAppointmentBookStorage implements AppointmentBookStorage {
     }
 
     /**
-     * Similar to {@link #readAppointmentBook(Path)}.
+     * Similar to {@link #readAppointmentBook(ReadOnlyAddressBook)}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
