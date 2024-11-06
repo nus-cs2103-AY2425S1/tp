@@ -37,7 +37,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 Upon running ResearchRoster, a GUI similar to below should be displayed.
 
-[screenshot of GUI]
+<img src="images/Ui_annotated.png" width="600px">
 
 1. **Tabs**: Provides access to file options and help.
 2. **Participant List**: Shows a contact list of participants.
