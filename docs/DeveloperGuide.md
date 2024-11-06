@@ -155,15 +155,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+`Students` are named as `Persons` due to Legacy code.
+</div>
+
 * stores the address book data i.e.,
     * all `Person` objects (which are contained in a `UniquePersonList` object).
     * all Tutorial objects (contained in a UniqueTutorialList object)
-    * all Participation objects (contained in a UniqueParticipationList object)![][image1]
-* Participation is an association class and contains the relationship between Person and Tutorial, as well as an List\<Attendance\> object
+    * all Participation objects (contained in a UniqueParticipationList object)
+* Participation is an association class and contains the relationship between Person and Tutorial, as well as a List\<Attendance\> object
 
 <img src="images/ParticipationAsAssociationDiagram.png" width="400" />
 
-### Storage implementation
+### Storage feature
+
+#### Storage format
 Eduvault stores data in JSON file using the Jackson library.
 
 Eduvault stores four types of objects:
@@ -236,6 +242,24 @@ Each `Participation` must have a `Student` with matching `Name` and `Phone`, and
 There may be no duplicate `Participations`.
 Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same
 
+#### Storage 
+
+
+
+### Find Command Implementation
+
+The following sequence diagram shows how a find operation goes through the `Logic` component
+![FindSequenceDiagram-Logic](images/FindSequenceDiagram-Logic.png)
+
+`FindCommandParser` parses the find string into `argMultimap` to pass to `Predicate Factory`, which produces the
+predicates to create a `FindCommand` object.
+![FindCommandParseSequence](images/FindCommandParseSequence.png))
+
+`personPredicates` is of type `Predicate<Person>`
+
+`participationPredicates` is of type `Predicate<Participation>`
+
+`Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` before being reduced to a single `Predicate<Person>`
 
 
 ### \[Proposed\] Undo/redo feature
