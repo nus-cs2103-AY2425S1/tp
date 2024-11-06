@@ -246,12 +246,12 @@ specifying any tags after it. </div>
 
 Deletes the contact(s) at the specified indices from AdmiNUS
 
-Format: `delete INDEX [MORE_INDEX]`
+Format 1: `delete INDEX [MORE_INDEX]`
 
-| Parameter Name	    | Description                                                          |	Required|
-|--------------------|----------------------------------------------------------------------|------------|
-| `INDEX`            | Index number of the contact to delete                                |Compulsory|	
-| `MORE_INDEX`       | 	Additional index numbers of contacts to delete (separate by spaces) |	Optional|
+| Parameter Name	    | Description                                                                         |	Required|
+|--------------------|-------------------------------------------------------------------------------------|------------|
+| `INDEX`            | Index number of the contact to delete or `all` to delete all contacts from the list |Compulsory|	
+| `MORE_INDEX`       | 	Additional index numbers of contacts to delete (separate by spaces)                |	Optional|
 
 <div markdown="block" class="alert alert-info">
 
@@ -261,13 +261,20 @@ Format: `delete INDEX [MORE_INDEX]`
 
 * The index refers to the index number shown in the displayed person list. 
 
-* The index must be a positive integer (1, 2, 3, ...). 
+* The index must be a positive integer (1, 2, 3, ...).
+
+* `delete all` deletes all contacts currently shown in the list, not all contacts in the database.
 
 </div>
 
+<div markdown="span" class="alert alert-primary">💡 **Tip**:
+
+To delete all students with the `oneYearMembership` tag, simply use `filtertag t/oneYearMembership` followed by `delete all`
+ </div>
+
 **Examples**:
 * `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `delete all` deletes all contacts in the results of the `find` command.
 
 ---
 ### Advanced Commands
@@ -432,22 +439,22 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action            | Format                                                                                             | Example                                                                                                            |
-|-------------------|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| **Add a student** | `student n/NAME s/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho s/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                             | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`     |
-| **Clear**         | `clear`                                                                                            | `clear`                                                                                                            |
-| **Delete**        | `delete INDEX [MORE_INDEX]`                                                                        | `delete 3` or `delete 2 4`                                                                                         |
-| **Edit**          | `edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                        |
-| **Filtertag**     | `filtertag KEYWORD`                                                                                | `filtertag bestie`                                                                                                 |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                                                                                                  |
-| **List**          | `list`                                                                                             | `list`                                                                                                             |
-| **Help**          | `help`                                                                                             | `help`                                                                                                             |
-| **Help Window**   | `helpwindow`                                                                                       | `helpwindow`                                                                                                       |
-| **Track**         | `track CATEGORY`                                                                                   | `track student`                                                                                                    |
-| **View**          | `view INDEX`                                                                                       | `view 1`                                                                                                           |
-| **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]`                                                                     | `tag 1 t/year2 t/computerScience`                                                                                  |
-| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                               | `deletetag 1 t/senior t/Y2`                                                                                        |
-| **Import CSV**    | `import /path/to/data/File.csv`                                                                    | `import /home/user/data/hackers_2022.csv`                                                                          |
-| **Export CSV**    | `export /path/to/data/File.csv`                                                                    | `export /home/user/data/output_data.csv`                                                                           |
-| **Exit**          | `exit`                                                                                             | `exit`                                                                                                             |
+| Action            | Format                                                                                              | Example                                                                                                             |
+|-------------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Add a student** | `student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`      |
+| **Clear**         | `clear`                                                                                             | `clear`                                                                                                             |
+| **Delete**        | `delete INDEX [MORE_INDEX]`                                                                         | `delete 3` or `delete 2 4`                                                                                          |
+| **Edit**          | `edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
+| **Filtertag**     | `filtertag KEYWORD`                                                                                 | `filtertag bestie`                                                                                                  |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                      | `find James Jake`                                                                                                   |
+| **List**          | `list`                                                                                              | `list`                                                                                                              |
+| **Help**          | `help`                                                                                              | `help`                                                                                                              |
+| **Help Window**   | `helpwindow`                                                                                        | `helpwindow`                                                                                                        |
+| **Track**         | `track CATEGORY`                                                                                    | `track student`                                                                                                     |
+| **View**          | `view INDEX`                                                                                        | `view 1`                                                                                                            |
+| **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]`                                                                      | `tag 1 t/year2 t/computerScience`                                                                                   |
+| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                                | `deletetag 1 t/senior t/Y2`                                                                                         |
+| **Import CSV**    | `import /path/to/data/File.csv`                                                                     | `import /home/user/data/hackers_2022.csv`                                                                           |
+| **Export CSV**    | `export /path/to/data/File.csv`                                                                     | `export /home/user/data/output_data.csv`                                                                            |
+| **Exit**          | `exit`                                                                                              | `exit`                                                                                                              |
