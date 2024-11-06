@@ -200,7 +200,7 @@ This section describes some noteworthy details on how certain features are imple
 
 <box type="info">
 
-**Note:** For simplicity, certain details such as conditional checks, parsing 
+**Note:** For simplicity, certain details such as conditional checks, parsing
 and more detailed implementation on model changes have been omitted.
 
 </box>
@@ -214,7 +214,7 @@ The `Delete Group` feature allows users to delete an existing group in the addre
 The following shows the activity diagram when the user executes the `del_g` command:
 <puml src="diagrams/DeleteGroupActivityDiagram.puml" alt="DeleteGroupCommandAD" />
 
-#### Usage 
+#### Usage
 
 **Syntax:** `del_g/dg gn/GROUP_NAME [gn/GROUP_NAME]...`
 
@@ -224,7 +224,8 @@ The following shows the activity diagram when the user executes the `del_g` comm
 
 1. User has the application launched with at least 1 group added.
 2. User executes `lg` to view all groups. For this example, the user wishes to delete `CS2103-F12-2`.
-3. The user executes `dg gn/CS2103-F12-2` to delete the group with a group name `CS2103-F12-2`. The command is parsed in the
+3. The user executes `dg gn/CS2103-F12-2` to delete the group with a group name `CS2103-F12-2`. The command is parsed in
+   the
    `AddressBookParser`.
 4. `DeleteGroupCommandParser` is created and gets the group name of the group to be deleted. The group name is used to
    construct a `DeleteGroupCommand` object.
@@ -248,16 +249,17 @@ The following sequence diagram shows how the above steps for delete group works:
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-
-#### Design considerations 
+#### Design considerations
 
 **Aspect 1:** Usage of GroupName as identifer
 
 1. **Design #1: Use GroupName**
+
 * Pro: More deliberate and since GroupNames are more complex, the user will be more aware of their decision
 * Con: Must type a lot
 
 2. **Design #2:** Use Index
+
 * Pro: Easy and quick
 * Con: Possible for user to mistype the wrong number
 
@@ -267,12 +269,12 @@ PlantUML, the lifeline continues till the end of diagram.
 
 The undo/redo mechanism is facilitated by `VersionHistory`. It stores an ArrayList `versions` of ReadOnlyAddressBook.
 
-
 Whenever there are changes made to the AddressBook, a defensive copy of the AddressBook is created and stored in the
-ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook. 
+ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook.
 
 If newly initialized, this pointer is set to -1. We have set a maximum number of versions to be able to stored at 100.
-Once this limit is reached, the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new version can be stored.
+Once this limit is reached, the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new
+version can be stored.
 Additionally, it implements the following operations:
 
 * `VersionHistory#addVersion(Model model)`— Saves the current state to its history.
