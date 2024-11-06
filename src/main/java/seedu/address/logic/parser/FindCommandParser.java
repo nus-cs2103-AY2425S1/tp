@@ -31,6 +31,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasSearchTelArg = trimmedArgs.contains("p/");
         if (hasSearchTelArg) {
             String searchTel = trimmedArgs.replace("p/", "");
+            boolean hasInvalidNumberOfInput = searchTel.contains(" ");
+            if (hasInvalidNumberOfInput) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.ARG_USAGE));
+            }
             boolean isNumeric = searchTel.chars().allMatch(Character::isDigit);
             if (searchTel.isEmpty() || !isNumeric) {
                 throw new ParseException(

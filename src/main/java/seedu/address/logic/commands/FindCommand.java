@@ -25,6 +25,10 @@ public class FindCommand extends Command {
     public static final String NUM_USAGE = COMMAND_WORD + " p/ [PHONE] \n"
             + "Phone number requires a non-empty number input\n"
             + "Example: " + COMMAND_WORD + " p/12345678";
+    public static final String ARG_USAGE = COMMAND_WORD + " [KEYWORD] [MORE_KEYWORDS] [p/ PHONE] \n"
+            + "Only one argument should be present (i.e. either keyword or phone number) \n"
+            + "Example: " + COMMAND_WORD + " p/12345678\n"
+            + "Example: " + COMMAND_WORD + " john";
     private final NameContainsKeywordsPredicate namePredicate;
     private final TelContainsNumberPredicate numberPredicate;
 
