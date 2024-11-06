@@ -48,7 +48,7 @@ public class Name {
     }
 
     /**
-     * Returns true if the name is similar to other given name.
+     * Returns true if the name is similar to {@code otherName}.
      * Two names are considered similar if they are the same without considering space and casing.
      */
     public boolean isSimilarTo(Name otherName) {
