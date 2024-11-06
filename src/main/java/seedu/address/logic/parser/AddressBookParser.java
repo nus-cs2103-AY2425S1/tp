@@ -23,7 +23,6 @@ import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
 import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
-
 import seedu.address.logic.commands.searchmode.CheckExcludedCommand;
 import seedu.address.logic.commands.searchmode.ClearExcludedCommand;
 import seedu.address.logic.commands.searchmode.ExcludePersonCommand;
