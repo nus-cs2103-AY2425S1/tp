@@ -108,6 +108,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
+* Persons in PhysioPal can share the same phone number, email and address
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/acl tear e/betsycrowe@example.com a/Newgate Prison p/1234567 t/ankle sprain`<br>
