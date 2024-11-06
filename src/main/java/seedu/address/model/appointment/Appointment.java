@@ -17,6 +17,9 @@ import seedu.address.model.shared.Date;
  */
 public class Appointment {
 
+    // Maximum random ID that can be generated
+    private static int MAX_ID = 10_000;
+
     // Hashtable of ID => appointment
     private static Hashtable<Integer, Appointment> appointmentById = new Hashtable<>();
 
@@ -66,8 +69,8 @@ public class Appointment {
         Random r = new Random();
         int newId;
         do {
-            newId = r.nextInt();
-        } while (appointmentById.containsKey(newId) || newId <= 0);
+            newId = r.nextInt(MAX_ID);
+        } while (appointmentById.containsKey(newId));
 
         return newId;
     }
