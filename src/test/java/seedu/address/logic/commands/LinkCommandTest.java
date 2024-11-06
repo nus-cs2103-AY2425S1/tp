@@ -49,10 +49,17 @@ public class LinkCommandTest {
     }
 
     @Test
-    public void execute_nullPerson() {
+    public void execute_nullPatient() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         LinkCommand linkCommand = new LinkCommand(new Nric(VALID_NRIC_UNIQUE), ALICE.getNric());
-        assertCommandFailure(linkCommand, model, LinkCommand.PERSON_NOT_FOUND);
+        assertCommandFailure(linkCommand, model, LinkCommand.PATIENT_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_nullCaregiver() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        LinkCommand linkCommand = new LinkCommand(BENSON.getNric(), new Nric(VALID_NRIC_UNIQUE));
+        assertCommandFailure(linkCommand, model, LinkCommand.CAREGIVER_NOT_FOUND);
     }
 
     @Test

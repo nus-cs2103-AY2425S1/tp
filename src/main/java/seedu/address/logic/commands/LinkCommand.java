@@ -32,7 +32,11 @@ public class LinkCommand extends Command {
 
     public static final String SAME_PERSON = "Cannot link same people";
 
-    public static final String PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
+    public static final String PERSON_NOT_FOUND = "Incorrect NRIC. Caregiver and Patient not found";
+
+    public static final String PATIENT_NOT_FOUND = "Incorrect NRIC. Patient not found";
+
+    public static final String CAREGIVER_NOT_FOUND = "Incorrect NRIC. Caregiver not found";
 
     public static final String ROLE_NOT_MATCH = "Incorrect roles. The patient NRIC must correspond to a patient, "
             + "and the caregiver NRIC must correspond to a caregiver.";
@@ -58,8 +62,16 @@ public class LinkCommand extends Command {
 
         Person patient = model.getPerson(patientNric);
         Person caregiver = model.getPerson(caregiverNric);
-        if (patient == null || caregiver == null) {
+        if (patient == null && caregiver == null) {
             throw new CommandException(PERSON_NOT_FOUND);
+        }
+
+        if (patient == null) {
+            throw new CommandException(PATIENT_NOT_FOUND);
+        }
+
+        if (caregiver == null) {
+            throw new CommandException(CAREGIVER_NOT_FOUND);
         }
 
         if (!patient.getRoles().contains(Role.PATIENT)
