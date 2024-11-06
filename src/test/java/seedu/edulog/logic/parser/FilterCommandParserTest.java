@@ -3,11 +3,8 @@ package seedu.edulog.logic.parser;
 import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.edulog.logic.commands.FilterCommand;
-import seedu.edulog.logic.commands.FindCommand;
 import seedu.edulog.model.student.StudentHasPaidPredicate;
 
 public class FilterCommandParserTest {
@@ -16,12 +13,12 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArg_throwsParseException() {
-        assertParseFailure(parser, "v", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "v", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
