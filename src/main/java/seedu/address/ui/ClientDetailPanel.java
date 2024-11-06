@@ -71,7 +71,7 @@ public class ClientDetailPanel extends UiPart<Region> {
     /**
      * Setting up group of tag(s) for alignment setup
      */
-    private void tagsSetting(){
+    private void tagsSetting() {
         if (tagsGroup == null) {
             tagsGroup = new HBox();
             tagsGroup.setSpacing(10);
@@ -175,9 +175,9 @@ public class ClientDetailPanel extends UiPart<Region> {
         if (status.status != Status.StatusEnum.NA) {
             Label statusLabel = new Label(status.toParsableString());
             String styleClass = switch (status.status) {
-                case URGENT -> "urgent-status";
-                case NON_URGENT -> "nonUrgent-status";
-                default -> "";
+            case URGENT -> "urgent-status";
+            case NON_URGENT -> "nonUrgent-status";
+            default -> "";
             };
             statusLabel.getStyleClass().addAll("label", styleClass);
             tagsGroup.getChildren().add(statusLabel);
