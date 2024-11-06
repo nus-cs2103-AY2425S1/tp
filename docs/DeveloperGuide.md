@@ -652,7 +652,7 @@ testers are expected to do more *exploratory* testing.
        Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
     6. Test case: `promote`<br>
-      Expected: There are missing parameters. A guide on how to use the commandD will be shown in the status message.
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
     7. Test case: `promote 0 20-12-2024`<br>
       Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
