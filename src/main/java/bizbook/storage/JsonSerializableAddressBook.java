@@ -21,7 +21,13 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
+    // used to ensure that manually edited data file do not contain unknown person
+    public static final String MESSAGE_DUPLICATE_PIN_PERSON = "Pinned persons list contains duplicate person(s).";
+    public static final String MESSAGE_UNKNOWN_PERSON = "Pinned persons list contains unknown person(s).";
+
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+
+    private final List<JsonAdaptedPerson> pinnedPersons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
@@ -38,6 +44,8 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        pinnedPersons.addAll(source.getPinnedPersonList().stream()
+                .map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +61,16 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        for (JsonAdaptedPerson jsonAdaptedPerson : pinnedPersons) {
+            Person person = jsonAdaptedPerson.toModelType();
+            if (!addressBook.hasPerson(person)) {
+                throw new IllegalValueException(MESSAGE_UNKNOWN_PERSON);
+            }
+            if (addressBook.isPinned(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PIN_PERSON);
+            }
+            addressBook.addPinnedPerson(person);
         }
         return addressBook;
     }

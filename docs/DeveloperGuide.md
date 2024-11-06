@@ -520,7 +520,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 _Similar to UC10 except without extension 2b._
 
-**Use case: UC12 - Export contact list**
+**Use case: UC12 - Undo a command**
+
+**MSS**
+
+1.  Actor performs a command that updates the addressbook.
+2.  System executes the command.
+3.  Actor requests to undo the recently executed command.
+4.  System reverts changes made by the actor.
+
+    Use case ends.
+
+**Extensions**
+
+- 3a. There is no version to revert to.
+
+    - 3a1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC13 - Export contact list**
 
 **MSS**
 
