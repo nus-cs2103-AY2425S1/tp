@@ -36,7 +36,6 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
-    private GroupsWindow groupsWindow;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -71,7 +70,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        groupsWindow = new GroupsWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -170,27 +168,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
-        groupsWindow.hide();
         primaryStage.hide();
-    }
-
-    /**
-     * Opens the group window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleGroups() {
-
-        groupsWindow.fillInnerParts();
-        if (!groupsWindow.isShowing()) {
-            groupsWindow.show();
-        } else {
-            groupsWindow.focus();
-        }
-    }
-
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**
@@ -212,9 +190,6 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isShowGroups()) {
-                handleGroups();
-            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {
