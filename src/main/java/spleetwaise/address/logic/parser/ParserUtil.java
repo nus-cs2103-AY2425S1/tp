@@ -28,10 +28,7 @@ public class ParserUtil extends BaseParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
 
-        // Replace escaped delimiters (\/)
-        String processedName = trimmedName.replace("\\/", "/");
-
-        if (!Name.isValidName(processedName)) {
+        if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
@@ -88,13 +85,10 @@ public class ParserUtil extends BaseParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
 
-        // Replace escaped delimiters (\/)
-        String processedRemark = trimmedRemark.replace("\\/", "/");
-
-        if (!Remark.isValidRemark(processedRemark)) {
+        if (!Remark.isValidRemark(trimmedRemark)) {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
-        return new Remark(processedRemark);
+        return new Remark(trimmedRemark);
     }
 
     /**
