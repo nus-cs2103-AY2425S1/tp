@@ -10,18 +10,14 @@ import seedu.address.model.Model;
 public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
-    private static String MESSAGE_USAGE = COMMAND_WORD
-      + ": Deletes the owner or pet identified by the index number used in the displayed list.\n"
-      + "To delete owner: " + COMMAND_WORD + " oOWNER_INDEX\n"
-      + "To delete pet: " + COMMAND_WORD + " pPET_INDEX\n"
-      + "Example: " + COMMAND_WORD + " o1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+        + ": Deletes the owner or pet identified by the index number used in the displayed list.\n"
+        + "To delete owner: " + COMMAND_WORD + " oOWNER_INDEX\n"
+        + "To delete pet: " + COMMAND_WORD + " pPET_INDEX\n"
+        + "Example: " + COMMAND_WORD + " o1";
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
-
-    public static String getMessageUsage() {
-        return MESSAGE_USAGE;
-    }
 
     @Override
     public abstract boolean equals(Object other);
