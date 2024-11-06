@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_SCORE;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddExamScoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exam.Exam;
@@ -30,9 +31,17 @@ public class AddExamScoreCommandParser implements Parser<AddExamScoreCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXAM, PREFIX_EXAM_SCORE);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        Exam exam = ParserUtil.parseExam(argMultimap.getValue(PREFIX_EXAM).get());
-        String examScore = ParserUtil.parseExamScore(argMultimap.getValue(PREFIX_EXAM_SCORE).get());
+        Index index;
+        Exam exam;
+        String examScore;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            exam = ParserUtil.parseExam(argMultimap.getValue(PREFIX_EXAM).get());
+            examScore = ParserUtil.parseExamScore(argMultimap.getValue(PREFIX_EXAM_SCORE).get());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
         return new AddExamScoreCommand(index, exam, examScore);
     }
 }
