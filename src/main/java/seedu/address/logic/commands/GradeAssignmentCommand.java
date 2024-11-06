@@ -37,6 +37,8 @@ public class GradeAssignmentCommand extends Command {
 
     public static final String MESSAGE_GRADE_SUCCESS = "Graded Assignment: %1$s belonging "
             + "to Student: %2$s, with score: %3$s";
+    public static final String MESSAGE_GRADE_OVERWRITE = "NOTE: There was already a previous assigned Grade. This will"
+            + " be overwritten\n" + MESSAGE_GRADE_SUCCESS;
     private final Index studentIndex;
     private final Index assignmentIndex;
     private final int score;
@@ -77,13 +79,22 @@ public class GradeAssignmentCommand extends Command {
         if (score < 0) {
             throw new CommandException(Messages.MESSAGE_NEGATIVE_SCORE);
         }
+        boolean isPreviouslyGraded = assignmentToGrade.getIsGraded();
         assignmentToGrade.setScore(score);
         assignmentToGrade.setHasSubmitted(true);
         assignmentToGrade.setIsGraded(true);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, assignmentToGrade.getName(),
-                studentToGrade.getName().fullName, assignmentToGrade.getScore()),
-                studentToGrade, studentIndex.getZeroBased());
+        CommandResult commandResult;
+        if (isPreviouslyGraded) {
+            commandResult = new CommandResult(String.format(MESSAGE_GRADE_OVERWRITE, assignmentToGrade.getName(),
+                    studentToGrade.getName().fullName, assignmentToGrade.getScore()),
+                    studentToGrade, studentIndex.getZeroBased());
+        } else {
+            commandResult = new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, assignmentToGrade.getName(),
+                    studentToGrade.getName().fullName, assignmentToGrade.getScore()),
+                    studentToGrade, studentIndex.getZeroBased());
+        }
+        return commandResult;
     }
     @Override
     public boolean equals(Object other) {

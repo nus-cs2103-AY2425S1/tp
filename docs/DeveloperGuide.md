@@ -581,7 +581,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to mark an assignment as submitted for a student by index.
-2. TAchy modifies the assignment submission status in the student's assignment list.
+2. TAchy modifies the assignment submission status in the student's assignment list. 
 
    Use case ends.
 
@@ -597,6 +597,10 @@ unless specified otherwise)
 
       Use case ends.
 
+* 1c. The assignment has already been marked as submitted.
+    * 1c1. TAchy shows an error message. 
+  
+      Use case ends.
 ---
 
 
@@ -605,7 +609,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to mark an assignment as not submitted for a student by index.
-2. TAchy modifies the assignment submission status in the student's assignment list.
+2. TAchy modifies the assignment submission status in the student's assignment list and resets the score to 0.
 
    Use case ends.
 
@@ -618,6 +622,11 @@ unless specified otherwise)
 
 * 1b. The assignment index is invalid.
     * 1b1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1c. The assignment has already been unmarked, or has not yet been submitted.
+    * 1c1. TAchy shows an error message.
 
       Use case ends.
 
@@ -628,7 +637,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to add a grade for a student’s assignment by index.
-2. TAchy records the grade for the student’s assignment.
+2. TAchy records the grade for the student’s assignment and sets the assignment submission status as 'submitted'.
 
    Use case ends.
 
@@ -651,9 +660,6 @@ unless specified otherwise)
 
 * 1d. The student has already been graded for the assignment.
     * 1d1. TAchy shows a warning message.
-    * 1d2. TAchy asks if the Teacher wants to overwrite the grade.
-    * 1d3. Teacher confirms the overwrite.
-    * 1d4. TAchy records the new grade.
 
       Use case resumes at step 2.
 
@@ -683,7 +689,6 @@ unless specified otherwise)
 
       Use case resumes at step 2.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -733,7 +738,6 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
 
 ### Deleting a student
 
@@ -749,11 +753,3 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete_student`, `delete_student x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
