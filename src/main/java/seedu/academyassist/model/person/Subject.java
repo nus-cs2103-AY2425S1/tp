@@ -10,7 +10,7 @@ import seedu.academyassist.commons.util.AppUtil;
 public class Subject {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Subjects should only be one of the following: English, Math, Chinese, Science";
+            "Subjects should only be one of the following: " + SubjectEnum.getSubjectNames();
 
     private final SubjectEnum subjectEnum;
 
