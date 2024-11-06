@@ -388,8 +388,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff calls the elderly at the top of the list.  
-3. Staff marks the elderly as called and takes notes of the call with mark command. 
-   * Command is only allowed in `personList` view.
+3. Staff marks the elderly as called and takes notes of the call with mark command.
 4. ContactMate updates the elderly as marked and displays a success message.
 
     Use case ends.
