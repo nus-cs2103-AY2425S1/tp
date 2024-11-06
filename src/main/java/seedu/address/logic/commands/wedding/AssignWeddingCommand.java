@@ -34,9 +34,10 @@ public class AssignWeddingCommand extends Command {
             + "by the index number used in the last person listing.\n"
             + "Wedding names are case sensitive.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_WEDDING + "WEDDING... (can specify multiple weddings)\n"
+            + PREFIX_WEDDING + "WEDDING [p1/] [p2/] + ... "
+            + PREFIX_WEDDING + "WEDDING [p1/] [p2/] (can specify multiple weddings)\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_WEDDING + "Craig's Wedding " + PREFIX_WEDDING + "Wedding April 2025.";
+            + PREFIX_WEDDING + "Craig's Wedding " + PREFIX_WEDDING + "Wedding April 2025 p1/.";
 
     private final Index index;
     private final Map<Wedding, String> weddingsToAdd;
