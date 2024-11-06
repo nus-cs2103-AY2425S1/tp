@@ -81,8 +81,7 @@ public class AttendanceWindow extends UiPart<Stage> {
     public AttendanceWindow(Person person, Logic logic, Stage root) {
         super(FXML, root);
         this.logic = logic;
-            this.person = person;
-
+        this.person = person;
         attendanceListView.setCellFactory(listView -> new AttendanceListCell());
         setupCourseComboBox();
     }
