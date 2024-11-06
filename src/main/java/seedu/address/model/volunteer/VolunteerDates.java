@@ -22,7 +22,7 @@ public class VolunteerDates {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Dates should follow the format yyyy-mm-dd, and it should not be blank. Multiple dates in a list should"
-                    + "separated by a comma and a space E.g 2022-01-15, 2033-02-17";
+                    + "separated by a comma (space is optional) E.g 2022-01-15, 2033-02-17";
     private final ArrayList<LocalDate> dates = new ArrayList<>();
     private final StringProperty datesListAsObservableString = new SimpleStringProperty();
 
@@ -32,8 +32,8 @@ public class VolunteerDates {
      * @param listOfDates A valid list of dates.
      */
     public VolunteerDates(String listOfDates) throws DateTimeParseException, VolunteerDuplicateDateException {
-        listOfDates = listOfDates.replaceAll("\\s+", "");
-        String[] dates = listOfDates.split(",");
+        String trimmedDate = listOfDates.replaceAll("\\s+", "").trim();
+        String[] dates = trimmedDate.split(",");
         this.addStringOfDatesToAvailList(dates);
     }
 
@@ -67,6 +67,7 @@ public class VolunteerDates {
 
     public void removeStringOfDatesFromAvailList(String... dates) throws VolunteerDeleteMissingDateException {
         for (String date : dates) {
+            date.replaceAll("\\s+", "");
             requireNonNull(date);
             checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
             this.removeDateFromAvailList(LocalDate.parse(date));
@@ -79,6 +80,7 @@ public class VolunteerDates {
             throw new VolunteerDuplicateDateException(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         } else {
             this.dates.add(date);
+            this.datesListAsObservableString.set(this.toString());
         }
     }
 
@@ -87,6 +89,7 @@ public class VolunteerDates {
             throw new VolunteerDeleteMissingDateException(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         } else {
             this.dates.remove(date);
+            this.datesListAsObservableString.set(this.toString());
         }
     }
 
