@@ -10,6 +10,7 @@ public class SettleAmount extends Fee {
     public static final String MESSAGE_CONSTRAINTS = "Amount "
             + Fee.MESSAGE_CONSTRAINTS
             + "2. is greater than $0.00 and less than or equal to $" + MAX_VALUE;
+
     public SettleAmount(String amount) {
         super(amount);
     }
