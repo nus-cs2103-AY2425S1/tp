@@ -23,27 +23,27 @@ public class NameOrJobContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         boolean matchesName = nameKeywords.stream()
                 .anyMatch(keyword -> {
-                    ArrayList<String> nameWords = new ArrayList<>();
                     String personName = person.getName().fullName.toLowerCase().toString();
-                    nameWords.add(personName);
-                    String[] splitPersonName = personName.split("\\s+");
-                    for (String name : splitPersonName) {
-                        nameWords.add(name);
-                    }
+                    ArrayList<String> nameWords = getWords(personName, keyword, person);
                     return nameWords.contains(keyword.toLowerCase());
                 });
         boolean matchesJob = jobKeywords.stream()
                 .anyMatch(keyword -> {
-                    ArrayList<String> jobWords = new ArrayList<>();
                     String jobName = person.getJob().value.toLowerCase().toString();
-                    jobWords.add(jobName);
-                    String[] splitPersonJob = jobName.split("\\s+");
-                    for (String job : splitPersonJob) {
-                        jobWords.add(job);
-                    }
+                    ArrayList<String> jobWords = getWords(jobName, keyword, person);
                     return jobWords.contains(keyword.toLowerCase());
                 });
         return matchesName || matchesJob;
+    }
+
+    private ArrayList<String> getWords(String str, String keyword, Person person) {
+        ArrayList<String> words = new ArrayList<>();
+        words.add(str);
+        String[] splitStr = str.split("\\s+");
+        for (String s : splitStr) {
+            words.add(s);
+        }
+        return words;
     }
 
     @Override
