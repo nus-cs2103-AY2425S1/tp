@@ -86,11 +86,10 @@ public class CreateTaskCommand extends Command {
         }
 
         // null case handled by instanceof
-        if (!(obj instanceof CreateTaskCommand)) {
+        if (!(obj instanceof CreateTaskCommand otherCreateTaskCommand)) {
             return false;
         }
 
-        CreateTaskCommand otherCreateTaskCommand = (CreateTaskCommand) obj;
         return tasksToAdd.equals(otherCreateTaskCommand.tasksToAdd);
     }
 
