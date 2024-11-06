@@ -22,7 +22,6 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 
-addressbook.json
 password.txt
 key.txt
 /test/*
