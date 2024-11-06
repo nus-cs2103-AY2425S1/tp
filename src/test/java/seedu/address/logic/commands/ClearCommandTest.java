@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.testutil.TypicalAssignments;
 import seedu.address.testutil.TypicalEmployees;
 
@@ -23,8 +22,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(TypicalEmployees.getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(TypicalEmployees.getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(TypicalEmployees.getTypicalAddressBook());
+        Model expectedModel = new ModelManager(TypicalEmployees.getTypicalAddressBook());
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
@@ -33,8 +32,8 @@ public class ClearCommandTest {
     @Test
     public void execute_nonEmptyAddressBookWithAssignments_success() {
         // Deleting all employees should also delete all assignments
-        Model model = new ModelManager(TypicalAssignments.getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(TypicalAssignments.getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(TypicalAssignments.getTypicalAddressBook());
+        Model expectedModel = new ModelManager(TypicalAssignments.getTypicalAddressBook());
         expectedModel.setAddressBookEmployee(new AddressBook());
         expectedModel.setAddressBookAssignments(new AddressBook());
 
