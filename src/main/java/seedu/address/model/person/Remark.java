@@ -39,7 +39,14 @@ public class Remark {
      * Returns value if nonempty, otherwise returns "Remark unspecified".
      */
     public String getDisplayableRemark() {
-        return value.isEmpty() ? "Remark unspecified" : value;
+        return value.isEmpty() ? "-" : value;
+    }
+
+    /**
+     * Returns true if value is empty, otherwise returns false.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
     }
 
     @Override

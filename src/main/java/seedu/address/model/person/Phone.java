@@ -38,9 +38,16 @@ public class Phone {
      * Returns value if nonempty, otherwise returns "Phone unspecified".
      */
     public String getDisplayablePhone() {
-        return value.isEmpty() ? "Phone unspecified" : value;
+        return value.isEmpty() ? "-" : value;
     }
 
+
+    /**
+     * Returns true if value is empty, otherwise returns false.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
 
     @Override
     public String toString() {
