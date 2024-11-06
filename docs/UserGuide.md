@@ -82,7 +82,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add /name NAME /class CLASS /phone PHONE_NUMBER [t/TAG]…​`
+Format: `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -107,7 +107,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [/name NAME] [/phone PHONE] [/class STUDENT CLASS] [t/TAG]…​`
+Format: `edit INDEX [n/ NAME] [p/ PHONE] [c/ STUDENT CLASS] [t/TAG]…​`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
@@ -120,7 +120,7 @@ Format: `edit INDEX [/name NAME] [/phone PHONE] [/class STUDENT CLASS] [t/TAG]�
 
 Examples:
 
-- `edit 1 /class 4L` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+- `edit 1 c/ 4L` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
 ### Grouping students together: `group`
 
