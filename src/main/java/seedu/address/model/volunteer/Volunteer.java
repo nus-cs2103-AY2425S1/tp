@@ -22,7 +22,7 @@ public class Volunteer {
     private final Email email;
 
     // Data fields
-    private final Date availableDate;
+    private final VolunteerDates availableDates;
     private final ObservableList<String> involvedIn;
 
     /**
@@ -34,21 +34,21 @@ public class Volunteer {
      * @param availableDate The date the volunteer is available.
      * @param involvedIn The list of events the volunteer has.
      */
-    public Volunteer(Name name, Phone phone, Email email, Date availableDate, List<String> involvedIn) {
+    public Volunteer(Name name, Phone phone, Email email, VolunteerDates availableDate, List<String> involvedIn) {
         requireAllNonNull(name, phone, email, availableDate);
 
         this.id = nextId++;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.availableDate = availableDate;
+        this.availableDates = availableDate;
         this.involvedIn = FXCollections.observableArrayList(involvedIn);
     }
 
     /**
      * Constructs an {@code Volunteer} without events.
      */
-    public Volunteer(Name name, Phone phone, Email email, Date availableDate) {
+    public Volunteer(Name name, Phone phone, Email email, VolunteerDates availableDate) {
         this(name, phone, email, availableDate, FXCollections.observableArrayList());
     }
 
@@ -72,8 +72,8 @@ public class Volunteer {
         return email;
     }
 
-    public Date getAvailableDate() {
-        return availableDate;
+    public VolunteerDates getAvailableDates() {
+        return availableDates;
     }
 
     public ObservableList<String> getInvolvedIn() {
@@ -113,7 +113,7 @@ public class Volunteer {
         return name.equals(otherVolunteer.name)
                 && phone.equals(otherVolunteer.phone)
                 && email.equals(otherVolunteer.email)
-                && availableDate.equals(otherVolunteer.availableDate);
+                && availableDates.equals(otherVolunteer.availableDates);
     }
 
     /**
@@ -135,6 +135,24 @@ public class Volunteer {
     }
 
     /**
+     * Adds a given string list of dates to the volunteer's available dates
+     * @param dateList
+     */
+    public void addAvailableDates(String dateList) {
+        String[] dates = dateList.split(",");
+        this.availableDates.addStringOfDatesToAvailList(dates);
+    }
+
+    /**
+     * Removes a given string list of dates from the volunteer's available dates
+     * @param dateList
+     */
+    public void removeAvailableDates(String dateList) {
+        String[] dates = dateList.split(",");
+        this.availableDates.removeStringOfDatesFromAvailList(dates);
+    }
+
+    /**
      * Returns the list of events the volunteer is involved in as an unmodifiable list.
      *
      * @return An unmodifiable ObservableList of events.
@@ -145,7 +163,7 @@ public class Volunteer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, availableDate);
+        return Objects.hash(name, phone, email, availableDates);
     }
 
     @Override
@@ -153,6 +171,7 @@ public class Volunteer {
         return "Volunteer{name=" + name
                 + ", phone=" + phone
                 + ", email=" + email
-                + ", availableDate=" + availableDate + "}";
+                + ", availableDate=" + availableDates + "}";
     }
+
 }
