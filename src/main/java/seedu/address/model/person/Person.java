@@ -107,8 +107,12 @@ public class Person implements Appointmentable {
         return remark;
     }
 
-    public void addNotes(String notes) {
-        this.remark.addNotes(notes);
+    /**
+     * Adds additional remarks to a person
+     */
+    public Remark addRemarks(String remarks) {
+        remark.addRemarks(remarks);
+        return remark;
     }
 
     public int getId() {
@@ -159,8 +163,15 @@ public class Person implements Appointmentable {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
+                && normalizeName(otherPerson.getName()).equals(normalizeName(getName()))
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+    }
+
+    /**
+     * Normalizes a name by converting it to lowercase and removing all spaces.
+     */
+    private String normalizeName(Name name) {
+        return name.toString().toLowerCase().replaceAll("\\s+", "");
     }
 
     /**

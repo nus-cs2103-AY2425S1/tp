@@ -126,6 +126,10 @@ public class MarkAppointmentCommandTest {
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public String getPersonRole(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void deletePerson(Person target) {

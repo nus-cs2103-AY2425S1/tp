@@ -33,6 +33,8 @@ public class CreateDoctorCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully created a new doctor Doctor#%d : %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This doctor already exists";
+    public static final String MESSAGE_OVERLAPPING_PATIENT = "This person already exists as a patient\n"
+            + "Please check the details you have entered!";
 
     private final Person toAdd;
 
@@ -49,7 +51,12 @@ public class CreateDoctorCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            if (model.getPersonRole(toAdd).equals("DOCTOR")) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+            if (model.getPersonRole(toAdd).equals("PATIENT")) {
+                throw new CommandException(MESSAGE_OVERLAPPING_PATIENT);
+            }
         }
 
         model.addPerson(toAdd);

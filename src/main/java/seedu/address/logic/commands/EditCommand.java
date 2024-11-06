@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -49,6 +50,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_REMARK + "REMARKS]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1 "
             + PREFIX_PHONE + "91234567 "
@@ -145,6 +147,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Remark remarks;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -158,6 +161,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRemark(toCopy.remarks);
             setTags(toCopy.tags);
         }
 
@@ -204,6 +208,13 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+        public void setRemark(Remark remarks) {
+            this.remarks = remarks;
+        }
+
+        public Optional<Remark> getRemarks() {
+            return Optional.ofNullable(remarks);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -238,6 +249,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(remarks, otherEditPersonDescriptor.remarks)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -248,6 +260,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("remarks", remarks)
                     .add("tags", tags)
                     .toString();
         }

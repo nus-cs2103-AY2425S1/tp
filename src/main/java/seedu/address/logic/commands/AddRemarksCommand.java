@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
+import seedu.address.model.person.Remark;
 
 
 /**
@@ -20,7 +20,7 @@ public class AddRemarksCommand extends Command {
 
     public static final String COMMAND_WORD = "addR";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds remarks to the patient."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds remarks to the patient. "
             + "Existing remarks will be concatenated by the input.\n"
             + COMMAND_WORD + " "
             + PREFIX_ID + "[PATIENT_ID] "
@@ -30,22 +30,23 @@ public class AddRemarksCommand extends Command {
             + PREFIX_REMARK + "Much better than previous appointment.";
 
     public static final String MESSAGE_ADD_REMARKS_SUCCESS = "Successfully "
-            + "added remarks: %s to patient of ID: %d.";
-    public static final String MESSAGE_ADD_NOTES_FAILURE = "Unable to "
+            + "added remarks: '%s' to patient of ID: %d.";
+    public static final String MESSAGE_ADD_REMARKS_FAILURE = "Unable to "
             + "add remarks! Check the id entered!";
+    public static final String MESSAGE_WRONG_ROLE = "Unable to add remarks for a doctor.\n"
+            + " Please check the id of the person you are adding remarks to!";
     private final int patientId;
-    private final String additionalNotes;
+    private final Remark additionalRemarks;
 
     /**
      * Adds notes to a Patient's remarks
      * @param patientId patient id
-     * @param additionalNotes notes to be added
+     * @param remarks additional remarks to be added
      */
-    public AddRemarksCommand(int patientId, String additionalNotes) {
-        requireAllNonNull(patientId, additionalNotes);
-
+    public AddRemarksCommand(int patientId, Remark remarks) {
+        requireAllNonNull(remarks);
         this.patientId = patientId;
-        this.additionalNotes = additionalNotes;
+        this.additionalRemarks = remarks;
     }
 
     @Override
@@ -53,15 +54,24 @@ public class AddRemarksCommand extends Command {
 
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
-        Person patientToAddNotes = model.getFilteredPatientById(allPersons, patientId);
-        if (patientToAddNotes == null) {
-            throw new CommandException(MESSAGE_ADD_NOTES_FAILURE);
+        Person patientToAddRemarks = model.getFilteredPatientById(allPersons, patientId);
+        if (patientToAddRemarks == null) {
+            throw new CommandException(MESSAGE_ADD_REMARKS_FAILURE);
         }
-        patientToAddNotes.addNotes(additionalNotes);
+        if (patientToAddRemarks.getRole().equals("DOCTOR")) {
+            throw new CommandException(MESSAGE_WRONG_ROLE);
+        }
+        Person editedPatient = new Person(patientToAddRemarks.getName(),
+                patientToAddRemarks.getId(), patientToAddRemarks.getRole(), patientToAddRemarks.getPhone(),
+                patientToAddRemarks.getEmail(), patientToAddRemarks.getAddress(),
+                patientToAddRemarks.addRemarks(additionalRemarks.getValue()),
+                patientToAddRemarks.getAppointments(), patientToAddRemarks.getTags());
 
+        model.setPerson(patientToAddRemarks, editedPatient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_ADD_REMARKS_SUCCESS, additionalNotes, patientId
+        return new CommandResult(String.format(MESSAGE_ADD_REMARKS_SUCCESS,
+                additionalRemarks, patientId
         ));
     }
     @Override
@@ -80,6 +90,6 @@ public class AddRemarksCommand extends Command {
 
         // Compare patientId and additionalNotes
         return patientId == otherCommand.patientId
-                && additionalNotes.equals(otherCommand.additionalNotes);
+                && additionalRemarks.equals(otherCommand.additionalRemarks);
     }
 }

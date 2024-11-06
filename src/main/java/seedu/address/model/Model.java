@@ -58,6 +58,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns the role of a person (patient or doctor)
+     */
+    String getPersonRole(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
