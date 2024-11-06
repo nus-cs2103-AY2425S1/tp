@@ -619,6 +619,9 @@ Priorities:
 11. The system should be customised for operations by a single user and need not handle multiple user-access.
 12. Configuration and data files should use standard formats to ensure compatibility with text editors and other applications.
 13. The system should validate all user inputs to prevent errors when saving the information.
+14. The system’s architecture should support potential future upgrades that might include expanded user capacity, without significant reworking of core components.
+15.  User data should persist across sessions, stored in a reliable format (e.g., JSON or XML) that can be easily backed up and restored.
+16.  The application should be designed in a way that allows new features to be added with minimal disruption to existing functionality.
 
 ### Glossary
 
