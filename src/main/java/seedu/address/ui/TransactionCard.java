@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.lang.Math.abs;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -45,10 +47,11 @@ public class TransactionCard extends UiPart<Region> {
         this.transaction = transaction;
         id.setText(displayedIndex + ". ");
         description.setText(transaction.getDescription());
+        String paddedAmount = String.format("%.2f", abs(transaction.getAmount()));
         if (transaction.getAmount() < 0) {
-            amount.setText("Amount: -$" + transaction.getAmount() * -1);
+            amount.setText("Amount: -$" + paddedAmount);
         } else {
-            amount.setText("Amount: $" + transaction.getAmount());
+            amount.setText("Amount: $" + paddedAmount);
         }
         otherParty.setText("Other Party: " + transaction.getOtherParty());
         date.setText("Date: " + transaction.getDate().format(DateTimeUtil.DEFAULT_DATE_FORMATTER));
