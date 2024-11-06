@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSONS_DISPLAYED_INDEX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,18 +42,57 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        for (Index index: this.indexes) {
+        List<Index> invalidIndexes = new ArrayList<>();
+
+        for (Index index : this.indexes) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSONS_DISPLAYED_INDEX);
+                invalidIndexes.add(index);
+            } else {
+                persons.add(lastShownList.get(index.getZeroBased()));
             }
-            persons.add(lastShownList.get(index.getZeroBased()));
+        }
+        // If there are invalid indexes, throw a CommandException with details
+        if (!invalidIndexes.isEmpty()) {
+            String invalidIndexesMessage = formatIndexes(invalidIndexes);
+
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_PERSONS_DISPLAYED_INDEX, invalidIndexesMessage));
         }
 
+        String selectedPersons = formatSelectedPersons(persons);
         selectPredicate = new SelectPredicate(persons);
         model.updateFilteredPersonList(selectPredicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_SELECT_PERSON_SUCCESS, selectedPersons));
     }
+
+    /**
+     * Formats a list of indexes into a comma-separated string for display.
+     *
+     * @param indexes The list of indexes to be formatted.
+     * @return A comma-separated string of index numbers, or an empty string if the list is empty.
+     */
+    private static String formatIndexes(List<Index> indexes) {
+        return indexes.stream()
+                .map(Index::getOneBased)
+                .map(String::valueOf)
+                .reduce((s1, s2) -> s1 + ", " + s2)
+                .orElse("");
+    }
+
+    /**
+     * Formats a list of selected persons' names into a comma-separated string for display.
+     *
+     * @param persons The list of selected persons.
+     * @return A comma-separated string of selected persons' names, or "none" if the list is empty.
+     */
+    private static String formatSelectedPersons(List<Person> persons) {
+        return persons.stream()
+                .map(person -> person.getName().toString()) // Convert Name object to String
+                .reduce((s1, s2) -> s1 + ", " + s2)
+                .orElse("none"); // Fallback if no persons are selected
+    }
+
 
     @Override
     public boolean equals(Object other) {
