@@ -10,7 +10,7 @@ import hallpointer.address.model.member.UniqueMemberList;
 import javafx.collections.ObservableList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the hall-pointer level
  * Duplicates are not allowed (by .isSameMember comparison)
  */
 @SuppressWarnings("checkstyle:Regexp")
