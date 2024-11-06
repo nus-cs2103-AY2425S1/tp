@@ -62,8 +62,6 @@ public class VersionedStudentDirectory extends StudentDirectory {
     }
 
     private void changeState(int index) {
-        assert index >= 0 && index < studentDirectoryStateList.size() : "There is no state with that index";
-
         currentStatePointer = index;
         super.resetData(studentDirectoryStateList.get(index));
     }
