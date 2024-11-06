@@ -22,14 +22,15 @@ public class CreatePatientCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_ADDRESS + "ADDRESS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
-    public static final String MESSAGE_SUCCESS = "Successfully created a new patient Patient#%d : %1$s";
+    public static final String MESSAGE_SUCCESS = "Successfully created a new patient of id: #%d : \n"
+            + "%2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists";
     public static final String MESSAGE_OVERLAPPING_DOCTOR = "This person already exists as a doctor!\n"
             + "Please check the details you have entered!";
