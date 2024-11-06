@@ -344,6 +344,17 @@ Explanation of what command does.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
+<box type="warning" seamless>
+
+**Caution:**
+The command will stop running the moment it hits an error.
+
+For example `add_g gn/CS2103-F11-2 gn/CS2103-F12-2 gn/CS2103-F13-1`
+
+If the group `CS2103-F12-2` already exists in T_Assistant. The command will only still add `CS2103-F11-2` but not `CS2103-F13-1`.
+
+</box>
+
 ##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
@@ -495,6 +506,18 @@ Explanation of what command does.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
+<box type="warning" seamless>
+
+**Caution:**
+The command will stop running the moment it hits an error.
+
+For example `insert your own example`
+
+If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
+`CS2103-F13-1`.
+
+</box>
+
 ##### Usage Scenario (for commands that can be overloaded)
 
 Add more scenarios if necessary
@@ -517,6 +540,18 @@ Explanation of what command does.
    remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
+
+<box type="warning" seamless>
+
+**Caution:**
+The command will stop running the moment it hits an error.
+
+For example `insert your own example`
+
+If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
+`CS2103-F13-1`.
+
+</box>
 
 ##### Usage Scenario (for commands that can be overloaded)
 
