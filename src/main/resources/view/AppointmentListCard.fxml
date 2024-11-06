@@ -13,7 +13,7 @@
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <HBox alignment="CENTER">
+            <HBox alignment="BASELINE_LEFT">
                 <Label fx:id="date" styleClass="appointment-date" text="\$date" />
                 <Label fx:id="timePeriod" styleClass="appointment-time" text="\$timePeriod" />
             </HBox>

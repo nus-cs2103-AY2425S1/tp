@@ -61,60 +61,60 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
+        switch (commandWord.toLowerCase()) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD_INSENSITIVE:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD_INSENSITIVE:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD_INSENSITIVE:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_WORD_INSENSITIVE:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_WORD_INSENSITIVE:
             return new FindCommandParser().parse(arguments);
 
-        case FindNricCommand.COMMAND_WORD:
+        case FindNricCommand.COMMAND_WORD_INSENSITIVE:
             return new FindNricCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD_INSENSITIVE:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD_INSENSITIVE:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD_INSENSITIVE:
             return new HelpCommand();
 
-        case SetPriorityCommand.COMMAND_WORD:
+        case SetPriorityCommand.COMMAND_WORD_INSENSITIVE:
             return new SetPriorityCommandParser().parse(arguments);
 
-        case AddApptCommand.COMMAND_WORD:
+        case AddApptCommand.COMMAND_WORD_INSENSITIVE:
             return new AddApptCommandParser().parse(arguments);
 
-        case DeleteApptCommand.COMMAND_WORD:
+        case DeleteApptCommand.COMMAND_WORD_INSENSITIVE:
             return new DeleteApptCommandParser().parse(arguments);
 
-        case AddMedConCommand.COMMAND_WORD:
+        case AddMedConCommand.COMMAND_WORD_INSENSITIVE:
             return new AddMedConCommandParser().parse(arguments);
 
-        case DelMedConCommand.COMMAND_WORD:
+        case DelMedConCommand.COMMAND_WORD_INSENSITIVE:
             return new DelMedConCommandParser().parse(arguments);
 
-        case FindMedConCommand.COMMAND_WORD:
+        case FindMedConCommand.COMMAND_WORD_INSENSITIVE:
             return new FindMedConCommandParser().parse(arguments);
 
-        case AddAllergyCommand.COMMAND_WORD:
+        case AddAllergyCommand.COMMAND_WORD_INSENSITIVE:
             return new AddAllergyCommandParser().parse(arguments);
 
-        case DelAllergyCommand.COMMAND_WORD:
+        case DelAllergyCommand.COMMAND_WORD_INSENSITIVE:
             return new DelAllergyCommandParser().parse(arguments);
 
-        case ListPrioCommand.COMMAND_WORD:
+        case ListPrioCommand.COMMAND_WORD_INSENSITIVE:
             return new ListPrioCommandParser().parse(arguments);
 
         default:

@@ -132,6 +132,20 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     /**
+     * Checks if the given date and time period String is <b>equal</b> to this appointment's date and time period.
+     *
+     * @param date String of the date to check.
+     * @param timePeriod String of the time Period to check.
+     * @return true if there is a match.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
+     */
+    public boolean isSameDateTime(String date, String timePeriod) throws IllegalValueException {
+        requireNonNull(date);
+        requireNonNull(timePeriod);
+        return date.equals(this.appointmentDate) && timePeriod.equals(this.appointmentTimePeriod);
+    }
+
+    /**
      * Returns true if a given string is a valid appointment name.
      */
     public static boolean isValidAppointmentName(String test) {
@@ -151,7 +165,8 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     private static Boolean isValidAppointmentTimePeriodFormat(String test) {
-        return test.matches(TIME_VALIDATION_REGEX);
+        // format: HHMM-HHMM
+        return test.length() == 9 && test.matches(TIME_VALIDATION_REGEX);
     }
 
     private static Boolean isValidAppointmentTimePeriodOrder(String test) {
