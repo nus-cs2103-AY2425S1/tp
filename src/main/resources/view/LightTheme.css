@@ -253,7 +253,7 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #1a73e8; /* High-contrast blue for tags */
+    -fx-background-color: #1b5a7d; /* High-contrast blue for tags */
     -fx-padding: 2 8 2 8;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
