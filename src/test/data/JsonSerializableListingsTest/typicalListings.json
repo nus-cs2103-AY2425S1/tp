@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file containing typical persons from TypicalPersons#getTypicalAddressBook()",
+  "_comment": "Listings save file containing typical listings from TypicalListings#getTypicalListings(). Used ChatGPT",
   "listings": [
     {
       "name": "Pasir Ris Condo",
