@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIND_KEYWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -61,25 +63,31 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidArg_throwsParseException() {
-        // 1
+        // Missing search keywords
         assertParseFailure(parser, "     ",
                 Messages.getErrorMessageWithUsage(FindCommandParser.MESSAGE_MISSING_SEARCH_KEYWORD,
                         FindCommand.MESSAGE_USAGE));
-        // 2
+        // Unexpected preamble(name)
         assertParseFailure(parser, "Alice " + PREFIX_MODULE + "CS2103T",
                 Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));
-        // 3
+        // Unexpected preamble(module)
         assertParseFailure(parser, "CS2103T " + PREFIX_NAME + "Alice",
                 Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));
-        // 4
+        // Unexpected preamble(tag)
+        assertParseFailure(parser, "CS2103T " + PREFIX_TAG + "Alice",
+            Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));
+        // Unexpected preamble(random input)
         assertParseFailure(parser, "random string " + PREFIX_NAME + "Alice",
                 Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));
-        // 5
+        // Blank keywords for name
         assertParseFailure(parser, " " + PREFIX_NAME + " ",
                 Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD, FindCommand.MESSAGE_USAGE));
-        // 6
+        // Blank keywords for module
         assertParseFailure(parser, " " + PREFIX_MODULE + " ",
                 Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD, FindCommand.MESSAGE_USAGE));
+        // Blank keywords for tag
+        assertParseFailure(parser, " " + PREFIX_TAG + " ",
+            Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -134,7 +142,8 @@ public class FindCommandParserTest {
                 + "CS2101 " + PREFIX_MODULE + "CS2103T-TA", expectedFindCommand);
     }
 
-    @Test void parse_chained_returnsFindCommand() throws ParseException {
+    @Test
+    public void parse_chained_returnsFindCommand() throws ParseException {
         // Test with chained keyword
         FindCommand expectedFindCommand =
                 new FindCommand(List.of(
@@ -152,5 +161,60 @@ public class FindCommandParserTest {
                 expectedFindCommand);
     }
 
+    @Test
+    public void parse_validTag_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+            new FindCommand(List.of(new TagContainsKeywordsPredicate(List.of("school"))),
+                true);
+        assertParseSuccess(parser, " " + PREFIX_TAG + "school", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validTags_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+            new FindCommand(List.of(new TagContainsKeywordsPredicate(List.of("school", "office", "finance"))),
+                true);
+        assertParseSuccess(parser, " " + PREFIX_TAG + "school "
+            + PREFIX_TAG + "office " + PREFIX_TAG + "finance", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validNameAndTags_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+            new FindCommand(List.of(
+                new NameContainsKeywordsPredicate(List.of("Alice")),
+                new TagContainsKeywordsPredicate(List.of("school", "office", "finance"))),
+                false);
+        assertParseSuccess(parser, " " + PREFIX_NAME + "Alice " + PREFIX_TAG + "school "
+            + PREFIX_TAG + "office " + PREFIX_TAG + "finance", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validModuleRoleArgsAndTags_returnsFindCommand() throws ParseException {
+        FindCommand expectedFindCommand =
+            new FindCommand(List.of(
+                new TagContainsKeywordsPredicate(List.of("school", "office", "finance")),
+                new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
+                    List.of("CS2103T")))
+            ));
+        assertParseSuccess(parser, " " + PREFIX_MODULE + "CS2103T "
+            + PREFIX_TAG + "school " + PREFIX_TAG + "office " + PREFIX_TAG + "finance",
+            expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindCommand() throws ParseException {
+        FindCommand expectedFindCommand =
+            new FindCommand(List.of(
+                new NameContainsKeywordsPredicate(List.of("Alice")),
+                new TagContainsKeywordsPredicate(List.of("school", "office", "finance")),
+                new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
+                    List.of("CS2103T")))
+            ));
+        assertParseSuccess(parser, " " + PREFIX_NAME + "Alice "
+                + PREFIX_MODULE + "CS2103T "
+                + PREFIX_TAG + "school " + PREFIX_TAG + "office " + PREFIX_TAG + "finance",
+            expectedFindCommand);
+    }
 }
 

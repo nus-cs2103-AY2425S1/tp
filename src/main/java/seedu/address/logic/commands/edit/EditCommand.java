@@ -110,7 +110,7 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
-        assert personToEdit != null;
+        assert personToEdit != null : "PersonToEdit should not be null";
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().or(personToEdit :: getPhone).orElse(null);
