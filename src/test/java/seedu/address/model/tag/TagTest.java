@@ -35,12 +35,12 @@ public class TagTest {
         // invalid tag names
         assertFalse(Tag.isValidTagName("")); // empty string
         assertFalse(Tag.isValidTagName("High")); // partial match
-        assertFalse(Tag.isValidTagName("high risk")); // lowercase
 
         // valid tag names
         assertTrue(Tag.isValidTagName("High Risk"));
         assertTrue(Tag.isValidTagName("Medium Risk"));
         assertTrue(Tag.isValidTagName("Low Risk"));
+        assertTrue(Tag.isValidTagName("high risk")); // lowercase
     }
     @Test
     public void equals() {
