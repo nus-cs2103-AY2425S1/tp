@@ -45,17 +45,9 @@ public class AttendanceContainer extends UiPart<Region> {
         super(FXML);
         this.participationList = participationList;
 
-        //listener to trigger UI update when participationList changes
-        participationList.addListener((ListChangeListener<Participation>) change -> {
-            logger.info("Change observed in participation list: " + change);
-            while (change.next()) {
-                if (change.wasAdded() || change.wasRemoved()) {
-                    setAttendanceList();
-                }
-            }
-        });
         setAttendanceList();
         setWeeklyDateRange();
+        addListener();
         logger.info("Successfully created attendance container");
     }
 
@@ -103,6 +95,20 @@ public class AttendanceContainer extends UiPart<Region> {
 
         attendanceList.getChildren().clear();
         attendanceList.getChildren().add(emptyState);
+    }
+
+    /**
+     * Adds listener to participationList to update attendanceList whenever participation is added or removed
+     */
+    private void addListener() {
+        participationList.addListener((ListChangeListener<Participation>) change -> {
+            logger.info("Change observed in participation list: " + change);
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved()) {
+                    setAttendanceList();
+                }
+            }
+        });
     }
 
 }

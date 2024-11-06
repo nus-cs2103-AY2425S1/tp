@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
 import java.util.List;
@@ -66,7 +66,8 @@ public class MarkPaidCommand extends Command {
                 .filtered(participation -> participation.getStudent().equals(personToMarkPayment)).stream().toList();
 
         if (participationsToDelete.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToMarkPayment.getName()));
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT,
+                    personToMarkPayment.getName()));
         }
 
         for (Participation participation : participationsToDelete) {
