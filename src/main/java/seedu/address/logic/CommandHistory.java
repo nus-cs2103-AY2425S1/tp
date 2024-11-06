@@ -51,6 +51,11 @@ public class CommandHistory {
         if (currentIndex > 0) {
             currentIndex--;
         }
+
+        if (userInputHistory.isEmpty()) { // fails silently when no previous command is available
+            return "";
+        }
+
         return userInputHistory.get(currentIndex);
     }
 
