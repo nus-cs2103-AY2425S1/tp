@@ -19,8 +19,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.buyer.ClearCommand;
 import seedu.address.logic.commands.meetup.EditCommand.EditMeetUpDescriptor;
 import seedu.address.model.BuyerList;
 import seedu.address.model.MeetUpList;
