@@ -384,7 +384,7 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 **Aspect: How to parse the commands:**
 <br>
-Context: The commands (other than the general) have the command format: `add... ENTITY_TYPE ENTITY_ARGS`
+Context: The commands (other than the general) have the command format: `COMMAND ENTITY_TYPE ENTITY_ARGS`
 <br>
 * **Alternative 1 (current choice):** Parse `ENTITY_TYPE` and `ENTITY_ARGS` separately.
     * Pros:
@@ -400,7 +400,7 @@ Context: The commands (other than the general) have the command format: `add... 
 
 <br>
 
-**Aspect: Command format (with prefixes/not with prefixes):**
+**Aspect: Command format (with or without prefixes):**
 <br>
 * **Alternative 1 (current choice):** Use prefixes
     * Pros:
