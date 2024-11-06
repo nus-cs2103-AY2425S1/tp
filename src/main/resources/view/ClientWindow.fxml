@@ -127,8 +127,8 @@
                       </Label>
                       <TableView fx:id="clientScheduleTable" prefHeight="161.0" prefWidth="507.0" stylesheets="@ViewWindow.css" VBox.vgrow="ALWAYS">
                           <columns>
-                              <TableColumn fx:id="clientScheduleDate" prefWidth="120.0" text="Date" />
-                              <TableColumn fx:id="clientScheduleDetails" prefWidth="265.0" text="Details" />
+                              <TableColumn fx:id="clientScheduleDate" minWidth="20.0" prefWidth="146.0" text="Date" />
+                              <TableColumn fx:id="clientScheduleDetails" prefWidth="239.0" text="Details" />
                               <TableColumn fx:id="clientSchedulePaymentStatus" prefWidth="120.0" text="Paid" />
                           </columns>
                           <VBox.margin>
