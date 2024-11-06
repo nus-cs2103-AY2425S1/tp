@@ -146,7 +146,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A CommonModel stub that contains a single person.
+     * A Model stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
 
