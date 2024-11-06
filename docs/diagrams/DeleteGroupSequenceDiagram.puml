@@ -61,9 +61,11 @@ activate CommandResult
 
 CommandResult --> DeleteGroupCommand
 deactivate CommandResult
+destroy CommandResult
 
 DeleteGroupCommand --> LogicManager : r
 deactivate DeleteGroupCommand
+destroy DeleteGroupCommand
 
 [<--LogicManager
 deactivate LogicManager
