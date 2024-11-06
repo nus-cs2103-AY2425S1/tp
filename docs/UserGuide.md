@@ -63,13 +63,13 @@ For example, if the jar file was stored in the `Downloads` folder, the command w
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are **optional**.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items in angular brackets means **at least one** of the items must be provided.<br>
-  e.g `<p/PHONE_NUMER a/ADDRESS>` can be used as `p/91234567`, `a/My Street`, or `p/91234567 a/My Street`, but not ` `.
+  e.g. `<p/PHONE_NUMER a/ADDRESS>` can be used as `p/91234567`, `a/My Street`, or `p/91234567 a/My Street`, but not ` `.
 
 * Items together in curly square brackets means **one and only one** of them must be given as input.<br>
-  e.g `{n/NAME t/TAG}` can be used as `n/John Doe` or as `t/friends`.
+  e.g. `{n/NAME t/TAG}` can be used as `n/John Doe` or as `t/friends`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -144,7 +144,7 @@ View our [Viewing and Searching](#viewing-and-searching) section for more inform
 The index **must be a positive integer** 1, 2, 3, …​.
 * **At least one** of the fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -153,7 +153,7 @@ The index **must be a positive integer** 1, 2, 3, …​.
 
 :exclamation: **Caution:**
 You **cannot** edit `schedule` and `socialMedia` information using the `edit` command.
-Please use the [`schedule`](#scheduling-contacts-schedule) and [`socialMedia`](#adding-social-media--socialmedia) commands instead.
+Please use the [`schedule`](#scheduling-contacts--schedule) and [`socialMedia`](#adding-social-media--socialmedia) commands instead.
 
 </div>
 
@@ -180,7 +180,7 @@ Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
 * `ig`,`fb`, and `cs` is used to represent Instagram, Facebook, and Carousell handles respectively.
 * If the contact already has an existing social media handle, their handle will be updated.
 * Hence, we can only add one social media handle to each contact.
-* Handles must be non empty, have a limit of 30 characters,and consist only of alphanumeric characters, or `-`, `_` and `.`.
+* Handles must be non-empty, have a limit of 30 characters,and consist only of alphanumeric characters, or `-`, `_` and `.`.
 * If multiple handles are entered, only the last handle will be accepted. <br>
 
 </div>
@@ -356,7 +356,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 **:information_source: Notes about the `find` command:**<br>
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -388,7 +388,7 @@ Format: `search [b/START_TIME] [en/END_TIME]`
 * If `[en/END_TIME]` is not provided, it will search for all schedules that is after `[b/START_TIME]`
 * Persons with no schedule given will not appear in the search results
 * Persons with only a date as a schedule but not time will be searched under the assumption that time is 00:00
-* Search result will be inclusive of the begin and end time
+* Search result will be inclusive of the beginning time and end time
 * If no matching result, an empty list will be provided.
 
 </div>
@@ -470,15 +470,15 @@ Format: `exit`
 
 #### Saving the data
 
-BiltzBiz data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+BlitzBiz data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### Editing the data file
 
-BiltzBiz data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+BlitzBiz data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, BlitzBiz will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause BlitzBiz to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 #### Archiving data files `[coming in v2.0]`
