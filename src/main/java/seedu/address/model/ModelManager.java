@@ -208,6 +208,7 @@ public class ModelManager implements Model {
     public void setGoods(ReadOnlyReceiptLog goodsReceipts) {
         requireNonNull(goodsReceipts);
         goodsList.resetData(goodsReceipts);
+        updateFilteredReceiptsList(x -> false); //No goodsReceipt will satisfy this condition
     }
 
     @Override
