@@ -3,14 +3,41 @@ layout: page
 title: Developer Guide
 ---
 
-- Table of Contents
-  {:toc}
+## Table of Contents
+
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#Setting-up-getting-started)
+- [Design](#Design)
+  - [Architecture](#Architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+- [Implementation](#implementation)
+  - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+    - [Proposed Implementation](#proposed-implementation)
+    - [Design considerations:](#design-considerations)
+  - [\[Proposed\] Data archiving](#proposed-data-archiving)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Deleting a person](#deleting-a-person)
+  - [Saving data](#saving-data)
 
 ---
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Adapted from: [AB3](https://se-education.org/addressbook-level3/)
+- Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson),
+  [JUnit5](https://github.com/junit-team/junit5)
 
 ---
 
@@ -279,7 +306,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                      | I want to …​                                                                       | So that I can…​                                                                    |
-| -------- |----------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| -------- | -------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `* * *`  | new user                                     | see usage instructions                                                             | refer to instructions when I forget how to use the App                             |
 | `* * *`  | user                                         | add new contacts                                                                   | manage contact information quickly                                                 |
 | `* * *`  | user                                         | view all contacts                                                                  | see all my contacts saved in one screen                                            |
@@ -323,13 +350,13 @@ _{More to be added}_
 - 2a. The given arguments are invalid.
 
   - 2a1. AdmiNUS shows an error message for the specific invalid field.
-  
+
     Use case resumes at step 2.
 
 - 3a. Contact with the same phone number already exists.
 
   - 3a1. AdmiNUS shows an error message about duplicate contact.
-  
+
     Use case resumes at step 2.
 
 **Use case 2: Delete a contact**
@@ -365,7 +392,7 @@ _{More to be added}_
 4. User enters updated contact information.
 5. AdmiNUS updates the contact and displays a success message.
 
-    Use case ends.
+   Use case ends.
 
 **Use case 4: Filter contacts by category or tag**
 
@@ -377,10 +404,13 @@ _{More to be added}_
    Use case ends.
 
 **Extensions**
+
 - 2a. No contacts match the specified category.
+
   - 2a1. AdmiNUS displays an error message and an empty list.
-  
+
     Use case ends.
+
 ---
 
 ### Non-Functional Requirements
