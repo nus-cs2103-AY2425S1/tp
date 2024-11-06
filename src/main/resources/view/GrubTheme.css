@@ -158,7 +158,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Verdana";
-    -fx-font-size: 13pt;
+    -fx-font-size: 10pt;
     -fx-text-fill: black;
 }
 

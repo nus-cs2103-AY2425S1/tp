@@ -11,10 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Restaurant}'s {@code Name} matches any of the keywords given.
  */
-public class TagContainsKeywordsPredicate implements Predicate<Restaurant> {
+public class PriceContainsKeywordsPredicate implements Predicate<Restaurant> {
     private final List<String> keywords;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) {
+    public PriceContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -29,7 +29,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Restaurant> {
         String filterBy = keywords.get(0);
 
         return keywords.stream()
-                    .anyMatch(keyword -> restaurant.getTagsWithoutPrice().stream()
+                    .anyMatch(keyword -> restaurant.getPriceTags().stream()
                            .anyMatch(tag -> {
                                String cleanTag = tag.toString().replaceAll("[\\[\\]]", "");
                                return StringUtil.containsWordIgnoreCase(cleanTag, keyword);
@@ -43,16 +43,16 @@ public class TagContainsKeywordsPredicate implements Predicate<Restaurant> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagContainsKeywordsPredicate)) {
+        if (!(other instanceof PriceContainsKeywordsPredicate)) {
             return false;
         }
 
-        TagContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (TagContainsKeywordsPredicate) other;
+        PriceContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (PriceContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add("price labels", keywords).toString();
     }
 }
