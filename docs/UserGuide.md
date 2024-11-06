@@ -12,7 +12,9 @@ designed to allow easy and efficient management of dormitory resident details wi
 Created for busy university dorm managers looking to increase their efficiency, DorManagerPro provides unique features to streamline
 the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
 
-**Note:** If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
+
+> [!Tip]
+> If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
 
 
 <!-- * Table of Contents -->
@@ -24,20 +26,22 @@ the process of accessing and updating resident student details. What's more, Dor
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-4/tp/releases/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Locate the `.jar` file in your computer. Typically, this will be in the `Downloads` folder. 
+> [!Tip]
+> You may wish to copy the `.jar` file to the folder you want to use as the _home folder_ for DorManagerPro. All the files needed to run DorManagerPro will be created within the home folder.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/TemplateUi.png)
+4. Double click the `.jar` file to run it. Alternatively, open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
+and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following UI.<br>
+![Ui](images/TemplateUi.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -45,7 +49,7 @@ the process of accessing and updating resident student details. What's more, Dor
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
