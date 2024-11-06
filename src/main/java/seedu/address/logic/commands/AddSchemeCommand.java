@@ -49,6 +49,8 @@ public class AddSchemeCommand extends Command {
 
     private final ArrayList<Scheme> newSchemes = new ArrayList<>();
 
+    private Scheme schemeToBeAdded;
+
     private Person personToEdit;
     private Person editedPerson;
 
@@ -120,6 +122,7 @@ public class AddSchemeCommand extends Command {
         if (currentSchemes.contains(scheme)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_SCHEME);
         }
+        schemeToBeAdded = scheme;
         newSchemes.addAll(currentSchemes);
         newSchemes.add(scheme);
         Name updatedName = person.getName();
@@ -173,6 +176,8 @@ public class AddSchemeCommand extends Command {
         Person afterEdit = this.getEditedPerson();
         model.setPerson(afterEdit, beforeEdit);
         pastCommands.remove();
-        return String.format(MESSAGE_UNDO_ADD_SCHEME, beforeEdit.getName());
+        StringBuilder schemeNames = new StringBuilder(MESSAGE_UNDO_ADD_SCHEME);
+        schemeNames.append(schemeToBeAdded.getSchemeName()).append("\n");
+        return String.format(schemeNames.toString(), beforeEdit.getName());
     }
 }

@@ -138,6 +138,10 @@ public class DeleteSchemeCommand extends Command {
         Person afterEdit = this.getEditedPerson();
         model.setPerson(afterEdit, beforeEdit);
         pastCommands.remove();
-        return String.format(MESSAGE_UNDO_DELETE_SCHEME, beforeEdit.getName());
+        StringBuilder schemeNames = new StringBuilder(MESSAGE_UNDO_DELETE_SCHEME);
+        for (int i = 0; i < schemesToBeDeleted.size(); i++) {
+            schemeNames.append((i + 1 + ". ")).append(schemesToBeDeleted.get(i).getSchemeName()).append("\n");
+        }
+        return String.format(schemeNames.toString(), beforeEdit.getName());
     }
 }

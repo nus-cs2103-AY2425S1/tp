@@ -35,9 +35,9 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_ADD_APPOINTMENT =
             "Appointment for %s has been removed from appointments";
 
-    public static final String MESSAGE_UNDO_ADD_SCHEME = "Scheme for %s has been removed";
+    public static final String MESSAGE_UNDO_ADD_SCHEME = "The following scheme for %s has been removed\n";
 
-    public static final String MESSAGE_UNDO_DELETE_SCHEME = "Scheme for %s has been added back";
+    public static final String MESSAGE_UNDO_DELETE_SCHEME = "The following schemes for %s has been added back\n";
     private final CommandHistory pastCommands;
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
