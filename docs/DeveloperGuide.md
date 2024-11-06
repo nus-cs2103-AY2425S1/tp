@@ -310,6 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | forgetful individual                      | add tags which explain what service the person needs                       | remember and be able to meet the needs of beneficiaries                                                |
 | `* *`    | holder of sensitive information           | lock the SocialBook behind a password                                     | avoid having unsolicited sharing of personal information                                               |
 | `* *`    | max/expert user                           | add the medicinal information of beneficiaries                             | to know when to follow up on critical medicines                                                        |
+| `* *` | new user | see a sample of the product features on display | so that I know how a feature can be used to maximise the value |
 | `*`      | has rotating beneficiaries                | remove several contacts at once, when beneficiaries no longer require care | so that I can make space for new benficiaries and not keep track of old ones                           |
 | `*`      | max/expert user                           | know the households I need to visit on a certain day                       | so that I can schedule my day and not forget to visit any households                                   |
 | `*`      | user short on time                        | visit households that are geographically close in the same day/visit       | minimise the travelling time for myself                                                                |
@@ -324,7 +325,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | experienced social worker                 | locate a link where I can share my views and suggestions on the app        | help the app be more user centered and helpful over time                                               |
 | `*`      | efficient person                          | create visit paths based on proximity of beneficiaries                     | to be able to serve the most beneficiaries a day                                                       |
 | `*`      | social person                             | add notes of on conversations with beneficiaries                           | develop stronger relationships by building rapport                                                     |
-| `**` | new user | see a sample of the product features on display | so that I know how a feature can be used to maximise the value |
 
 
 *{More to be added}*
@@ -534,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Hard disk**: data storage device in laptops and computers.
 * **.JSON file**: JavaScript Object Notation, stores and transports data using a human-readable text format.
 * **SocialBook**: SocialBook is an address book hence SocialBook and AddressBook are interchangable. SocialBook is used to reference the product while AddressBook refers to the Class object in source code.
-* **Social worker**: Social work refers to full-time employees of the [Ministry of Social and Family Developement (MSF) or its subsidaries](https://www.msf.gov.sg)
+* **Social worker**: refers to full-time employees of the [Ministry of Social and Family Developement (MSF) or its subsidaries](https://www.msf.gov.sg)
 
 --------------------------------------------------------------------------------------------------------------------
 
