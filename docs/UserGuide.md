@@ -86,16 +86,29 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
-<box type="tip" seamless>
+> [!Note]
+> * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
+> * A person can have up to 10 tags.
+> * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
+> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `EMAIL` should be of the format local-part@domain
+> * Refer to (TO BE IMPLEMENTED?) for more details on accepted values for each field.
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+> [!Warning]
+> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
+> (TO BE DECIDED WHETHER TO ALLOW DUPLICATE NAMES AND EMAILS)
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/Resident Assistant e/betsycrowe@example.com a/Newgate Street p/1234567 t/Floor 1`
+
+Examples of usage:
+
+Execute `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+
+![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
 
 ### Listing all persons : `list`
 
