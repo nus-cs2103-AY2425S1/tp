@@ -68,7 +68,8 @@ public class UnmatchCommandTest {
 
         // Format the expected success message
         String expectedMessage = String.format(UnmatchCommand.MESSAGE_UNMATCH_SUCCESS,
-                Messages.format(unmatchedContact), Messages.format(expectedModel.getFilteredJobList().get(jobIndex.getZeroBased())));
+                Messages.format(unmatchedContact), Messages.format(expectedModel
+                        .getFilteredJobList().get(jobIndex.getZeroBased())));
 
         // Verify the command execution and resulting state
         assertCommandSuccess(unmatchCommand, model, expectedMessage, expectedModel);
