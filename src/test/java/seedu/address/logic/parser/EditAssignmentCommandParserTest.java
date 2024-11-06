@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.model.assignment.Assignment.MAX_SCORE_MESSAGE_CONSTRAINTS;
 import static seedu.address.model.assignment.AssignmentName.MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
@@ -34,7 +35,7 @@ import seedu.address.testutil.EditAssignmentDescriptorBuilder;
 public class EditAssignmentCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAssignmentCommand.MESSAGE_USAGE);
-    private EditAssignmentCommandParser parser = new EditAssignmentCommandParser();
+    private final EditAssignmentCommandParser parser = new EditAssignmentCommandParser();
 
     @Test
     public void parse_missingStudentIndex_throwsParseException() {
@@ -61,7 +62,7 @@ public class EditAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_NAME + VALID_ASSIGNMENT_NAME_MATH
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + VALID_MAX_SCORE_MATH;
 
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -71,7 +72,7 @@ public class EditAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_NAME + VALID_ASSIGNMENT_NAME_MATH
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + VALID_MAX_SCORE_MATH;
 
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -204,5 +205,13 @@ public class EditAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + INVALID_SCORE;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ASSIGNMENT_NAME,
                 PREFIX_ASSIGNMENT_MAX_SCORE));
+    }
+
+    @Test
+    public void parse_noFieldsEdited_throwsParseException() {
+        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_SECOND_STUDENT.getOneBased()
+                + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT.getOneBased();
+
+        assertParseFailure(parser, userInput, EditAssignmentCommand.MESSAGE_NOT_EDITED);
     }
 }

@@ -23,8 +23,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer"
-            + " and should not be blank.";
+    public static final String MESSAGE_INVALID_INDEX = "Index should be a non-zero unsigned integer"
+            + " and cannot be blank.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -136,23 +136,11 @@ public class ParserUtil {
         requireNonNull(score);
         String trimmedScore = score.trim();
         if (!StringUtil.isUnsignedInteger(trimmedScore)) {
-            throw new ParseException("The score must be an integer!");
+            throw new ParseException(Assignment.SCORE_MESSAGE_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedScore);
     }
-    /**
-     * Parses a {@code String studentIndex} into a {@code int}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code studentIndex} is invalid.
-     */
-    public static int parseStudentIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Integer.parseInt(trimmedIndex);
-    }
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -174,10 +162,10 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
-        if (!Remark.isValidRemarkName(remark)) {
+        if (!Remark.isValidRemarkName(trimmedRemark)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Remark(remark);
+        return new Remark(trimmedRemark);
     }
 
     /**

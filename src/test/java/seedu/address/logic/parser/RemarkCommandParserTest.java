@@ -54,17 +54,17 @@ public class RemarkCommandParserTest {
 
     @Test
     public void parse_missingPrefixes_throwsParseException() {
-        // Missing both prefixes
+        // EP: Missing both prefixes
         String userInput = "1 " + VALID_REMARK_MATH;
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemarkCommand.MESSAGE_USAGE));
 
-        // Missing student prefix
+        // EP: Missing student prefix
         userInput = "1 " + PREFIX_REMARK + VALID_REMARK_MATH;
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemarkCommand.MESSAGE_USAGE));
 
-        // Missing remark prefix
+        // EP: Missing remark prefix
         userInput = PREFIX_STUDENT_INDEX + "1";
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemarkCommand.MESSAGE_USAGE));
@@ -72,13 +72,13 @@ public class RemarkCommandParserTest {
 
     @Test
     public void parse_duplicatePrefixes_throwsParseException() {
-        // Duplicate student prefix
+        // EP: Duplicate student prefix
         String duplicateStudentInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " "
                 + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_REMARK + VALID_REMARK_MATH;
         assertParseFailure(parser, duplicateStudentInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_INDEX));
 
-        // Duplicate remark prefix
+        // EP: Duplicate remark prefix
         String duplicateRemarkInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " "
                 + PREFIX_REMARK + VALID_REMARK_MATH + " " + PREFIX_REMARK + VALID_REMARK_MATH;
         assertParseFailure(parser, duplicateRemarkInput,
@@ -94,7 +94,7 @@ public class RemarkCommandParserTest {
 
     @Test
     public void parse_emptyInput_throwsParseException() {
-        // Empty input
+        // EP: Empty input
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemarkCommand.MESSAGE_USAGE));
     }
