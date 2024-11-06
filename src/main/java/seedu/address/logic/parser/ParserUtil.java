@@ -185,4 +185,27 @@ public class ParserUtil {
         }
         return new Grade(trimmedGrade);
     }
+
+    public static String makeCapitalise(String input) {
+        String[] words = input.split(" ");
+        StringBuilder capitalised = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                capitalised.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1).toLowerCase())
+                        .append(" ");
+            }
+        }
+
+        return capitalised.toString().trim();
+    }
+
+    public static String makeUppercase(String input) {
+        return input.toUpperCase();
+    }
+
+    public static String makeLowercase(String input) {
+        return input.toLowerCase();
+    }
 }

@@ -96,8 +96,6 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        System.out.println(model.getPersonToDisplay());
-        System.out.println(personToEdit);
 
         if (personToEdit.isSamePerson(model.getPersonToDisplay())) {
             model.setPersonToDisplay(editedPerson);
