@@ -122,7 +122,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
 <box type="tip" seamless>
 
@@ -130,8 +130,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe i/S7783844I p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW`
+* `add n/Betsy Crowe i/S2202473F e/betsycrowe@example.com a/Newgate Prison p/1234567 s/HIGH`
 
 ### Listing all persons : `list`
 
@@ -143,7 +143,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -154,7 +154,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
 ### Locating persons by name: `find`
 
@@ -178,14 +178,15 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` or `delete [i/IDENTITY_NUMBER]`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person at the specified `INDEX` or with the specified `IDENTITY_NUMBER`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * **After using `delete`, type `confirm` to complete the deletion**. You can also use `cancel` if you change your mind.
 
 Examples:
+* `delete i/SS2202473F` deletes the person with NRIC SS2202473F in the address book.
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
