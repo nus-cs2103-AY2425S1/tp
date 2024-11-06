@@ -185,32 +185,36 @@ Examples:
 
 Clears all entries from EventTory.
 
-Format: `clear`
+#### Format: `clear`
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+#### Format: `exit`
 
-### Saving the data
+### Saving Data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EventTory data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
-### Editing the data file
+### Editing the Data File
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+EventTory data is saved automatically as a JSON file `[JAR file location]/data/eventTory.json`.
+<br>Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If changes to the data file causes its format to become invalid, EventTory will discard **all data** and start with an **empty** data file at the next run.
+
+<p>
+Hence, it is recommended to make a backup of the file before attempting to edit it.
+Furthermore, certain edits can cause the EventTory to behave in unexpected ways (e.g., if a value entered is outside the acceptable range).<br>
+Therefore, edit the data file only if you are confident that you can update it correctly.
+</p>
+
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
