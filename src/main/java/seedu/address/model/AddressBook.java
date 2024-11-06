@@ -99,6 +99,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void sortByAppointments() {
         persons.sortByAppointment();
     }
+
+    public void sortByName() {
+        persons.sort();
+    }
     /**
      * Returns true if a person with the same name as {@code person} exists in the address book.
      */
