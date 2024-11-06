@@ -71,9 +71,7 @@ public class AddPastryCommand extends Command {
                 .filter(product -> product instanceof Pastry)
                 .map(product -> (Pastry) product)
                 .anyMatch(existingPastry ->
-                        existingPastry.getName().equalsIgnoreCase(newPastry.getName())
-                                && Double.compare(existingPastry.getCost(), newPastry.getCost()) == 0
-                                && existingPastry.getIngredients().equals(newPastry.getIngredients()));
+                        existingPastry.getName().equalsIgnoreCase(newPastry.getName()));
     }
 
     @Override
