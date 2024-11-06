@@ -25,8 +25,8 @@ public class RemarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a remark to an existing student "
             + "identified by the index number used in the displayed student list. "
             + "\nParameters: "
-            + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
-            + "[" + PREFIX_REMARK + "REMARK] "
+            + PREFIX_STUDENT_INDEX + "INDEX "
+            + PREFIX_REMARK + "REMARK "
             + "\nExample: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_REMARK + "Weak in Math";
 
