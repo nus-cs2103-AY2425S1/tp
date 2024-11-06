@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ViewCommand.MESSAGE_FIELD_MISSING;
-import static seedu.address.logic.commands.ViewCommand.MESSAGE_INDEX_NOT_FOUND;
-import static seedu.address.logic.commands.ViewCommand.MESSAGE_NAME_NOT_FOUND;
 import static seedu.address.logic.commands.ViewCommand.MESSAGE_VIEW_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -15,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -84,7 +83,7 @@ public class ViewCommandTest {
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         ViewCommand command = new ViewCommand(invalidIndex);
 
-        assertCommandFailure(command, model, MESSAGE_INDEX_NOT_FOUND);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
     }
 
@@ -93,7 +92,7 @@ public class ViewCommandTest {
         Name invalidName = new Name("Nonexistent Name");
         ViewCommand command = new ViewCommand(invalidName);
 
-        assertCommandFailure(command, model, MESSAGE_NAME_NOT_FOUND);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
     }
 
     @Test

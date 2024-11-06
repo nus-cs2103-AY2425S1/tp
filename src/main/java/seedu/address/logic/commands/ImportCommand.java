@@ -26,8 +26,6 @@ public class ImportCommand extends Command {
             + "the correct format";
     public static final String MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL = "Invalid file format: '%1$s' should be an "
             + "array or null";
-    public static final String MESSAGE_FILE_FORMAT_FAIL_INVALID_NOTE = "Invalid file format: 'note' should be an "
-            + "object or null";
     private final String fileContent;
 
     public ImportCommand(String fileContent) {

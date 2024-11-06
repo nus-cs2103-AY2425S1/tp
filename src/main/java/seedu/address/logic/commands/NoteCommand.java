@@ -33,14 +33,15 @@ public class NoteCommand extends Command {
 
     public static final String COMMAND_WORD = "note";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the person identified\n"
-                                               + "Parameters required: NAME (must be an exact match) "
-                                               + "[" + PREFIX_APPOINTMENT + "PREVIOUS APPOINTMENT] "
-                                               + "[" + PREFIX_REMARK + "REMARK] "
-                                               + "[" + PREFIX_MEDICATION + "MEDICATION]...\n"
-                                               + "Example: " + COMMAND_WORD + " John Doe "
-                                               + PREFIX_APPOINTMENT + "01/01/2025 1200 "
-                                               + PREFIX_REMARK + "Allergic to Ibuprofen ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the person identified "
+                + "by the name in the address book.\n"
+               + "Parameters required: NAME (must be an exact match) "
+               + "[" + PREFIX_APPOINTMENT + "PREVIOUS APPOINTMENT] "
+               + "[" + PREFIX_REMARK + "REMARK] "
+               + "[" + PREFIX_MEDICATION + "MEDICATION]...\n"
+               + "Example: " + COMMAND_WORD + " John Doe "
+               + PREFIX_APPOINTMENT + "01/01/2025 1200 "
+               + PREFIX_REMARK + "Allergic to Ibuprofen ";
 
     public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edited %1$s's Note: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
