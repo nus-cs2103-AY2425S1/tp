@@ -38,10 +38,9 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    @Disabled
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Company editedCompany = new CompanyBuilder().build();
-        EditCommand.EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedCompany).build();
+        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedCompany).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,

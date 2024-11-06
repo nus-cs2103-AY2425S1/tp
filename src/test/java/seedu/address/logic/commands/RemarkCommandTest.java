@@ -47,7 +47,6 @@ public class RemarkCommandTest {
     }
 
     @Test
-    @Disabled
     public void execute_removeRemarkUnfilteredList_success() throws Exception {
         Company companyToEdit = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
         Remark emptyRemark = new Remark(""); // Removing remark
