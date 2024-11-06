@@ -9,9 +9,11 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSchemeCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteSchemeCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -19,6 +21,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListAppointmentCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SchemeCommand;
 import seedu.address.logic.commands.StatisticsCommand;
@@ -68,9 +71,14 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String HELP_COMMAND = HelpCommand.COMMAND_WORD + "\n";
 
+    private static final String LIST_APPOINTMENT_COMMAND = ListAppointmentCommand.COMMAND_WORD + "\n";
+    private static final String ADD_APPOINTMENT_COMMAND = AddAppointmentCommand.COMMAND_WORD + "\n";
+    private static final String DELETE_APPOINTMENT_COMMAND = DeleteAppointmentCommand.COMMAND_WORD + "\n";
+
     private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
         FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEME_COMMAND,
-        SCHEME_VIEW_COMMAND, SCHEME_ADD_COMMAND, SCHEME_DELETE_COMMAND, UNDO_COMMAND, HELP_COMMAND, EXIT_COMMAND};
+        SCHEME_VIEW_COMMAND, SCHEME_ADD_COMMAND, SCHEME_DELETE_COMMAND, LIST_APPOINTMENT_COMMAND,
+        ADD_APPOINTMENT_COMMAND, DELETE_APPOINTMENT_COMMAND, HELP_COMMAND, EXIT_COMMAND};
 
     @FXML
     private Button copyButton;
