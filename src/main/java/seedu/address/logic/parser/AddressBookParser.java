@@ -94,7 +94,7 @@ public class AddressBookParser {
 
         case ListAttendanceCommand.COMMAND_WORD:
         case ListAttendanceCommand.COMMAND_ALIAS:
-            return new ListAttendanceCommandParser().parse(arguments);
+            return new ListAttendanceCommand();
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
