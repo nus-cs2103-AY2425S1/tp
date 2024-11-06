@@ -9,10 +9,48 @@
 ![](images/doctrack.png)
 # User Guide
 
-> DocTrack is a desktop application for **general practitioners (GPs)** to quickly access patient contact 
+<box type="info" light theme="primary">
+<b>DocTrack</b> is a desktop application for <b>general practitioners (GPs)</b> to quickly access patient contact 
 details, appointments, and treatment records.
+</box>
 
-_If you type fast, this application can serve as an excellent substitute for your large medical files._
+With DocTrack, you can take the first step towards digitalisation of your practice!
+DocTrack aims to simplify your patient and appointment tracking process, by allowing you to
+- easily add and update patient and appointment records
+- delete records for regulation purposes
+- search for records based on important criteria such as dates and names
+with an intuitive and user-friendly interface!
+
+To get started, you can read the introduction below, which shows all the different sections
+in this user guide.
+
+---
+
+## Introduction
+
+[Quick start](#quick-start):
+Navigate to this section to quickly get started with DocTrack.
+
+[Interacting with DocTrack](#interacting-with-doctrack):
+Navigate here for more information on how DocTrack works.
+
+[Command Overview](#command-overview):
+Navigate here for information on how the commands work.
+- [Summary of Commands](#summary-of-commands):
+  - for a general summary of all the commands
+- [Person Commands](#person-commands):
+  - for more information on the person commands
+- [Appointment Commands](#appointment-commands):
+  - for more information on the appointment commands
+- [General Commands](#general-commands):
+  - for more information on general commands
+
+[FAQ](#faq): 
+Navigate here for answers to common questions asked by users.
+
+[Known issues](#known-issues):
+Navigate here for common issues that may arise during use of DocTrack.
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -160,9 +198,10 @@ Adds a person to the address book.
 
 **Format**: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="tip" theme="primary">
 
 **Tip:** A person can have any number of tags (including 0). For example, `t/friend t/likes coding` has 2 tags and it is valid. 
+
 </box>
 
 **Examples**:
