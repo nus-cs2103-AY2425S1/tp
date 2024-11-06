@@ -14,7 +14,7 @@ It is optimized for CLI users so that frequent tasks can be done faster by typin
 - View full list of orders under each customer.
 
 ## Site Map
-- To be updated.
+- Access SellSavvy's [site map](ay2425s1-cs2103t-f14a-2.github.io/tp/).
 
 ## Credits & Acknowledgement
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
