@@ -12,9 +12,7 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
     }
 
     /**
-     * Compares two delivery object by status, returning the order of PENDING -> DELIVERED -> CANCELLED
-     * If the status is the same for two delivery objects, it is compared by time instead
-     * @return
+     * Compares two delivery object by status, returning the order of CANCELLED -> DELIVERED -> PENDING
      */
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
@@ -28,17 +26,17 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
     }
 
     /**
-     * Returns the order of the status in the order of PENDING -> DELIVERED -> CANCELLED.
+     * Returns the order of the status in the order of CANCELLED -> DELIVERED -> PENDING (Alphabetical).
      * The integer returned increases in the order.
      */
     private int getStatusOrder(Status status) {
         switch (status) {
-        case PENDING:
+        case CANCELLED:
             return 0;
+        case PENDING:
+            return 2;
         case DELIVERED:
             return 1;
-        case CANCELLED:
-            return 2;
         default:
             throw new IllegalArgumentException("Unknown status: " + status);
         }
@@ -61,6 +59,6 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
 
     @Override
     public String toSortByString() {
-        return "status, followed by date time";
+        return "status";
     }
 }
