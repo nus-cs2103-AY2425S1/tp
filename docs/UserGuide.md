@@ -528,9 +528,11 @@ Example usages
 <div markdown="1" class="smaller-text">
 
 Invalid usages
+* Marking attendance of a tutorial that does not exist
+    * *Error message: No tutorial class with the name TUTORIAL is found*
 * Marking attendance of a tutorial with no students enrolled
     * *Error message: No students are enrolled in TUTORIAL tutorial*
-* Marking attendance of a tutorial where all students already has attendance marked for the corresponding week
+* Marking attendance of a tutorial where **all students** already has attendance marked for the corresponding week
     * *Error message: All students in TUTORIAL tutorial has attendance marked 
     for the corresponding week of date ATTENDANCE*
 * Format errors, check [here](#12-format-errors)
