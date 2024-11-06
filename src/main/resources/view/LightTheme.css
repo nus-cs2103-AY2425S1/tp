@@ -73,7 +73,7 @@
 
 .list-cell {
     -fx-background-color: #e3f2fd;
-    -fx-background-radius: 8;
+    -fx-background-radius: 8 0 0 8;
     -fx-text-fill: #2f2f2f;
 }
 
@@ -113,8 +113,6 @@
 .pane-with-border {
     -fx-background-color: #e3f2fd;
     -fx-border-color: #a3c1d9;
-    /*-fx-background-radius: 8;*/
-    /*fx-border-radius: 8;*/
 }
 
 .status-bar {
@@ -123,20 +121,21 @@
 }
 
 .result-display {
-    -fx-background-color: #cce4f0;
+    -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: #34495e;
 }
 
 .result-display .label {
-    -fx-background-color: #cce4f0;
+    -fx-text-fill: black !important;
 }
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: #4a4a4a;
     -fx-padding: 4px;
+    -fx-pref-height: 30px;
 }
 
 .grid-pane {
@@ -213,12 +212,12 @@
 }
 
 .scroll-bar {
-    -fx-background-color: #cce4f0;
-    -fx-background-radius: 8;
+    -fx-background-color: #a3c1d9;
+    -fx-background-radius: 0 8 8 0;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #a3c1d9;
+    -fx-background-color: #cce4f0;
     -fx-background-radius: 5;
 }
 
@@ -233,7 +232,7 @@
 
 #commandTextField {
     -fx-background-color: #dfefff;
-    -fx-border-color: #a3c1d9;
+    -fx-border-color: #a3c1d9 #a3c1d9 #2c3e50 #a3c1d9;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: #2c3e50;
