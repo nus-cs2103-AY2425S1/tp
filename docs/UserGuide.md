@@ -150,24 +150,13 @@ Format for adding **contact**:
 add {-c | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]
 ```
 
-Parameters:
-* `-c`: flag to create a client (only 1 of -c, -v or -e should be specified)
-* `-v`: flag to create a vendor (only 1 of -c, -v or -e should be specified)
-* `s/SERVICE`: service provided by vendor (must be specified if `-v` is specified)
-* `n/NAME`: name of contact
-* `p/PHONE`: phone number of contact
-* `e/EMAIL`: email address of contact
-* `a/ADDRESS`: address of contact
-* `t/TAG`: tag(s) associated with the contact
-
-> **Tip:** A contact can have any number of tags (including 0)
-
 Examples:
 * `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`
 * `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget`
 
 Note:
 * Contacts' name and phone number pair need to be unique.
+* A contact can have any number of tags (including 0)
 
 ___
 Format for adding **event**:
