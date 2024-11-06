@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import java.net.URL?>
+
+<?import javafx.scene.control.ScrollPane?>
+<fx:root type="javafx.stage.Stage" title="Today's Appointments" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" resizable="false" minWidth="500" minHeight="400">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@DarkTheme.css" />
+                <URL value="@AppointmentPopup.css" />
+            </stylesheets>
+
+            <VBox spacing="10" styleClass="pane-with-border">
+                <HBox alignment="CENTER_LEFT" styleClass="pane-with-border" spacing="5" VBox.vgrow="NEVER">
+                    <padding>
+                        <Insets top="10" right="10" bottom="5" left="10" />
+                    </padding>
+                    <Label text="Today's Appointments" style="-fx-font-size: 16px; -fx-text-fill: white;" styleClass="label-header"/>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="appointmentListContainer" spacing="8" VBox.vgrow="ALWAYS" styleClass="pane-with-border">
+                        <padding>
+                            <Insets top="5" right="10" bottom="10" left="10" />
+                        </padding>
+                    </VBox>
+                </ScrollPane>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>
