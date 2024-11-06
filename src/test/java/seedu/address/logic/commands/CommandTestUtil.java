@@ -232,7 +232,8 @@ public class CommandTestUtil {
 
         Volunteer volunteer = model.getFilteredVolunteerList().get(targetIndex.getZeroBased());
         final String[] splitVolunteerName = volunteer.getName().fullName.split("\\s+");
-        model.updateFilteredVolunteerList(new VolunteerNameContainsKeywordsPredicate(Arrays.asList(splitVolunteerName[0])));
+        model.updateFilteredVolunteerList(
+                new VolunteerNameContainsKeywordsPredicate(Arrays.asList(splitVolunteerName[0])));
 
         assertEquals(1, model.getFilteredVolunteerList().size());
     }
