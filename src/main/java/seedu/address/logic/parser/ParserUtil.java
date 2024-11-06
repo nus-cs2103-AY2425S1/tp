@@ -143,7 +143,7 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.trim().replaceAll(" +", " ");
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -158,6 +158,9 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
+        }
+        if (tagSet.size() > 10) {
+            throw new ParseException(Tag.MAX_TAGS_CONSTRAINTS);
         }
         return tagSet;
     }

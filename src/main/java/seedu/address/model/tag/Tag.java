@@ -10,8 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and can have spaces, but "
-            + "cannot be empty";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum}\\p{Zs}]*";
+            + "cannot be empty or exceed 100 characters";
+    public static final String MAX_TAGS_CONSTRAINTS = "A person should only have up to 10 tags.";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum}\\p{Zs}]{0,99}";
 
     public final String tagName;
 
