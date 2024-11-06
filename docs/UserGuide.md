@@ -422,15 +422,20 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME i/ID w/WARD d/DIAGNOSIS m/MEDICATION`<br> e.g., `add i/P23456 n/Donald Duck w/B5 d/Diabetes m/Insulin`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [w/WARD] [d/DIAGNOSIS] [m/MEDICATION]`<br> e.g.,`edit 2 n/Betsy Crower m/Paracetamol`
-**Find**   | `find FIELD/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
-**List**   | `list`
-**Make_appt** | `make_appt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_TIME`<br> e.g.,`make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00`
-**Schedule_all**| `schedule_all`<br>
-**Schedule_date**| `schedule_date DATE`<br> e.g.,`schedule_date 01-01-2020`
 **Help**   | `help`
+**Clear**  | `clear`
+**Exit**   | `exit`
+**Add**    | `add n/NAME i/ID w/WARD d/DIAGNOSIS m/MEDICATION`<br> e.g., `add i/P23456 n/Donald Duck w/B5 d/Diabetes m/Insulin`
+**Edit**   | `edit INDEX [n/NAME] [w/WARD] [d/DIAGNOSIS] [m/MEDICATION]`<br> e.g.,`edit 2 n/Betsy Crower m/Paracetamol`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**List**   | `list`
+**Find**   | `find FIELD/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
+**View**   | `view INDEX`<br> e.g., `view 1`
+**Add Notes**   | `addnotes INDEX pn/NOTES`<br> e.g., `addnotes 1 pn/Patient is prone to falling` 
+**Delete Notes**   | `delnotes INDEX`<br> e.g., `delnotes 1` 
+**Add appointment** | `makeappt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_TIME`<br> e.g.,`make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00`
+**Delete appointment**   | `delappt INDEX`<br> e.g., `delappt 1` 
+**Schedule all appointments**| `scheduleall`<br>
+**Schedule appointments by date**| `scheduledate DATE`<br> e.g.,`scheduledate 01-01-2020`
 
 [Back to Table of Contents](#table-of-contents)
