@@ -57,7 +57,15 @@ public class ListingCard extends UiPart<Region> {
     }
 
     private void initializeName() {
-        name.setText(listing.getName().fullName);
+        String actualName = listing.getName().fullName;
+
+        // Check if the listing name length is greater than 55
+        if (actualName.length() > 55) {
+            // Truncate the listing name to 55 characters and add "..."
+            name.setText(actualName.substring(0, 55) + "...");
+        } else {
+            name.setText(actualName);
+        }
     }
 
     private void initializeUnderline() {
@@ -66,11 +74,27 @@ public class ListingCard extends UiPart<Region> {
     }
 
     private void initializePrice() {
-        price.setText(String.format("$%s", listing.getPrice().toString()));
+        String actualPrice = listing.getPrice().toString();
+
+        // Check if the price length is greater than 15
+        if (actualPrice.length() > 15) {
+            // Truncate the price to 15 characters and add "..."
+            actualPrice = actualPrice.substring(0, 15) + "...";
+        }
+
+        price.setText(String.format("$%s", actualPrice));
     }
 
     private void initializeArea() {
-        area.setText(String.format("%s m²", listing.getArea().toString()));
+        String actualArea = listing.getArea().toString();
+
+        // Check if the area length is greater than 15
+        if (actualArea.length() > 15) {
+            // Truncate the area to 15 characters and add "..."
+            actualArea = actualArea.substring(0, 15) + "...";
+        }
+
+        area.setText(String.format("%s m²", actualArea));
     }
 
     private void initializeRegion() {
@@ -82,11 +106,27 @@ public class ListingCard extends UiPart<Region> {
     }
 
     private void initializeAddress() {
-        address.setText(listing.getAddress().toString());
+        String actualAddress = listing.getAddress().toString();
+
+        // Check if the address length is greater than 55
+        if (actualAddress.length() > 55) {
+            // Truncate the address to 55 characters and add "..."
+            address.setText(actualAddress.substring(0, 55) + "...");
+        } else {
+            address.setText(actualAddress);
+        }
     }
 
     private void initializeSeller() {
-        seller.setText(listing.getSeller().getName().fullName);
+        String actualSeller = listing.getSeller().getName().fullName;
+
+        // Check if the seller name length is greater than 55
+        if (actualSeller.length() > 55) {
+            // Truncate the seller name to 55 characters and add "..."
+            actualSeller = actualSeller.substring(0, 55) + "...";
+        }
+
+        seller.setText(actualSeller);
     }
 
     private void initializeBuyers() {
@@ -96,7 +136,15 @@ public class ListingCard extends UiPart<Region> {
         listing.getBuyers().stream()
                 .sorted(Comparator.comparing(buyer -> buyer.getName().fullName))
                 .forEach(buyer -> {
-                    Label buyerLabel = new Label(buyer.getName().fullName);
+                    String actualName = buyer.getName().fullName;
+
+                    // Check if the buyer name length is greater than 55
+                    if (actualName.length() > 55) {
+                        // Truncate the buyer name to 55 characters and add "..."
+                        actualName = actualName.substring(0, 55) + "...";
+                    }
+
+                    Label buyerLabel = new Label(actualName);
                     buyers.getChildren().add(buyerLabel);
                 });
     }

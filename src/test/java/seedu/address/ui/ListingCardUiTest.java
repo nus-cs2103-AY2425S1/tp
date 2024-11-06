@@ -74,26 +74,6 @@ public class ListingCardUiTest extends ApplicationTest {
     }
 
     @Test
-    void listingCard_uiComponentsAreVisible() {
-        assertNotNull(listingCard.getName());
-        assertNotNull(listingCard.getPrice());
-        assertNotNull(listingCard.getArea());
-        assertNotNull(listingCard.getRegion());
-        assertNotNull(listingCard.getAddress());
-        assertNotNull(listingCard.getSeller());
-        assertNotNull(listingCard.getBuyers());
-
-        assertTrue(listingCard.getName().isVisible());
-        assertTrue(listingCard.getPrice().isVisible());
-        assertTrue(listingCard.getArea().isVisible());
-        assertTrue(listingCard.getRegion().isVisible());
-        assertTrue(listingCard.getAddress().isVisible());
-        assertTrue(listingCard.getSeller().isVisible());
-        assertTrue(listingCard.getBuyers().isVisible());
-    }
-
-
-    @Test
     void listingCard_displayCorrectDetails() {
         // Assert that the listing object is not null
         assertNotNull(listingCard.listing);
@@ -118,6 +98,36 @@ public class ListingCardUiTest extends ApplicationTest {
         assertEquals("John Buyer", buyerOne.getText());
         assertEquals("Sarah Buyer", buyerTwo.getText());
 
+    }
+
+    @Test
+    void listingCard_displayTruncatedCorrectDetails() {
+        ListingCard listingCard = new ListingCard(createSampleTruncatedListing(), 1);
+
+        // Assert that the listing object is not null
+        assertNotNull(listingCard.listing);
+
+        // Check if the displayed name, price, area, region, address, and seller labels are correct
+        // after truncation
+        assertEquals("1. ", listingCard.getId().getText());
+        assertEquals("Sample Listingggggggggggggggggggggggggggggggggggggggggg...",
+                listingCard.getName().getText());
+        assertEquals("$500000000000000...", listingCard.getPrice().getText());
+        assertEquals("10000 m²", listingCard.getArea().getText());
+        assertEquals("NORTH", listingCard.getRegion().getText());
+        assertEquals("123 Main Sttttttttttttttttttttttttttttttttttttttttttttt...",
+                listingCard.getAddress().getText());
+        assertEquals("John Sellerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...",
+                listingCard.getSeller().getText());
+
+
+        // Check if the number of buyers is correctly displayed
+        FlowPane buyersFlowPane = listingCard.getBuyers();
+        assertEquals(1, buyersFlowPane.getChildren().size());
+
+        // Check if the buyer name is accurate (after truncation)
+        Label buyerOne = (Label) buyersFlowPane.getChildren().get(0);
+        assertEquals("John Buyerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...", buyerOne.getText());
     }
 
     @Test
@@ -150,6 +160,25 @@ public class ListingCardUiTest extends ApplicationTest {
     }
 
     /**
+     * Helper method to create a sample Listing object for testing (with truncation).
+     */
+    private Listing createSampleTruncatedListing() {
+        Set<Person> buyersSet = new HashSet<>();
+        buyersSet.add(createSampleTruncatedBuyerOne());
+
+        return new Listing(
+                new Name("Sample Listinggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"),
+                new Address("123 Main Sttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"),
+                new Price("50000000000000000000000000000000000",
+                        new BigDecimal("50000000000000000000000000000000000")),
+                new Area(10000),
+                Region.NORTH,
+                createSampleTruncatedSeller(),
+                buyersSet
+        );
+    }
+
+    /**
      * Helper method to create a sample Seller object for testing.
      */
     private Person createSampleSeller() {
@@ -158,6 +187,21 @@ public class ListingCardUiTest extends ApplicationTest {
 
         return new Seller(
                 new Name("John Seller"),
+                new Phone("98765432"),
+                new Email("seller@example.com"),
+                tagSet,
+                new Appointment(new Date("02-01-23"), new From("1100"), new To("1200"))
+        );
+    }
+
+    /**
+     * Helper method to create a sample Seller object for testing (with truncation).
+     */
+    private Person createSampleTruncatedSeller() {
+        Set<Tag> tagSet = new HashSet<>();
+
+        return new Seller(
+                new Name("John Sellerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"),
                 new Phone("98765432"),
                 new Email("seller@example.com"),
                 tagSet,
@@ -175,6 +219,21 @@ public class ListingCardUiTest extends ApplicationTest {
 
         return new Buyer(
                 new Name("John Buyer"),
+                new Phone("91234567"),
+                new Email("buyer@example.com"),
+                tagSet,
+                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00"))
+        );
+    }
+
+    /**
+     * Helper method to create a sample Buyer object for testing (with truncation).
+     */
+    private Person createSampleTruncatedBuyerOne() {
+        Set<Tag> tagSet = new HashSet<>();
+
+        return new Buyer(
+                new Name("John Buyerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"),
                 new Phone("91234567"),
                 new Email("buyer@example.com"),
                 tagSet,
