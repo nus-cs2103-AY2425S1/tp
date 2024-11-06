@@ -36,6 +36,7 @@
     * [3.3 Data Management]({{ baseUrl }}/UserGuide.html#33-data-management)
     * [3.4 Navigation]({{ baseUrl }}/UserGuide.html#34-navigation)
   * [4. FAQ]({{ baseUrl }}/UserGuide.html#4-faq)
+  * [5. Known Issues]({{ baseUrl }}/UserGuide.html#5-known-issues)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
