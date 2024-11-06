@@ -23,6 +23,11 @@ public class DeleteAppointmentCommand extends DeleteCommand {
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment: %1$s";
 
+    /**
+     * Creates a {@code DeleteAppointmentCommand} with the specified target index.
+     *
+     * @param targetIndex Index of appointment to be deleted.
+     */
     public DeleteAppointmentCommand(Index targetIndex) {
         super(targetIndex);
     }
@@ -43,8 +48,6 @@ public class DeleteAppointmentCommand extends DeleteCommand {
      *
      * @param model The model to delete the appointment from.
      * @param entity The appointment entity to be deleted.
-     * @throws NullPointerException if the specified entity is null.
-     * @throws AssertionError if the entity is not an instance of Appointment.
      */
     @Override
     protected void deleteEntity(Model model, Object entity) {

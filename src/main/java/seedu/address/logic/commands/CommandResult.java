@@ -21,6 +21,7 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     *
      */
     public CommandResult(String feedbackToUser, boolean isHelpSelected, boolean isExitSelected) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -55,14 +56,15 @@ public class CommandResult {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CommandResult)) {
+        if (!(other instanceof CommandResult otherCommandResult)) {
             return false;
         }
 
-        CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && isHelpSelected == otherCommandResult.isHelpSelected
-                && isExitSelected == otherCommandResult.isExitSelected;
+        boolean isSameFeedbackToUser = feedbackToUser.equals(otherCommandResult.feedbackToUser);
+        boolean isSameIsHelpSelected = isHelpSelected == otherCommandResult.isHelpSelected;
+        boolean isSameIsExitSelected = isExitSelected == otherCommandResult.isExitSelected;
+
+        return isSameFeedbackToUser && isSameIsHelpSelected && isSameIsExitSelected;
     }
 
     @Override
