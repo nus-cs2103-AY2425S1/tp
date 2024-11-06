@@ -215,8 +215,125 @@ This command provides a quick way to delete all existing records in one go, allo
 address book fully. It is helpful when bakery owners want a fresh start or data needs to be purged for any reason.
 This command ensures the address book is empty and ready for new entries.
 
+### **Find persons by name**
+Finds persons whose names contain any of the given keywords.
 
-------------------------------------------------------------------------------------------------------------------------
+```bash
+find KEYWORD [MORE_KEYWORDS]
+```
+- **Parameters:**
+    - `KEYWORD`: The keyword to search for.
+    - `[MORE_KEYWORDS]`: Additional keywords to search for.
+    - 
+* Use the list command to return to the full contact listlist
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+**Example:**
+```bash
+find Charlotte Bernice
+```
+![findcommand.png](images/findcommand.png)
+
+### **List Command**
+Lists all contacts in the bakery's address book.
+
+***Example:***
+```bash
+list
+````
+![listcommandui.png](images/listcommandui.png)
+
+### **Help Command**
+Displays a link to our user guide that provides detailed information on how to use the application.
+
+***Example:***
+```bash
+help
+````
+![helpcommandui.png](images/helpcommandui.png)
+
+### **Mark Customer Order Command**
+Mark the customer order status as done.
+
+```bash
+markCustomerOrder INDEX
+```
+- **Parameters:**
+    - `INDEX`: The index number for the CustomerOrder displayed in the list.
+
+**Example:**
+```bash
+markCustomerOrder 1
+```
+![markcustomerorderui.png](images/markcustomerorderui.png)
+
+### **Mark Supply Order Command**
+Mark the supplier order status as done.
+
+```bash
+markSupplyOrder INDEX
+```
+- **Parameters:**
+    - `INDEX`: The index for theSupplyOrder displayed in the list.
+
+**Example:**
+```bash
+markSupplyOrder 1
+```
+![marksupplyorderui.png](images/marksupplyorderui.png)
+
+### **Unmark Customer Order Command**
+Unmark the customer order status as pending.
+
+```bash
+unmarkCustomerOrder INDEX
+```
+- **Parameters:**
+    - `INDEX`: The index number for the CustomerOrder displayed in the list.
+
+**Example:**
+```bash
+unmarkCustomerOrder 1
+```
+![unmarkcustomerorderui.png](images/unmarkcustomerorderui.png)
+
+### **Unmark Supply Order Command**
+Unmark the supply order status as pending.
+
+```bash
+unmarkSupplyOrder INDEX
+```
+- **Parameters:**
+    - `INDEX`: The index for theSupplyOrder displayed in the list.
+
+**Example:**
+```bash
+umarkSupplyOrder 1
+```
+![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
+
+### ***Remark Command***
+Edits the remark of the person identified by the index number used in the last person listing. 
+The existing remark will be overwritten.
+
+```bash
+remark INDEX r/REMARK
+```
+
+- **Parameters:**
+    - `INDEX`: The index number of the person in the last listing.
+    - `r/REMARK`: The new remark to be updated.
+
+**Example:**
+```bash
+remark 1 r/Regular customer
+```
+![remarkcommandui.png](images/remarkcommandui.png)
 
 ### **Remove Ingredient Command**
 Removes an existing ingredient from the bakery's ingredient catalogue.
