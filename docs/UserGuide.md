@@ -559,7 +559,7 @@ relative path given)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <i class="fa-solid fa-clock-rotate-left"></i> Accessing command history <kbd>↑</kbd> and <kbd>↓</kbd>
+### <i class="fa-solid fa-clock-rotate-left"></i> Accessing command history: <kbd>↑</kbd> and <kbd>↓</kbd>
 
 KonTActs automatically saves every (valid or invalid) command entered which can then be retrieved later by using the <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys.
 
@@ -587,7 +587,7 @@ KonTActs automatically saves every (valid or invalid) command entered which can 
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
-### Adding grades to a contact `addGrade`
+### Adding grades to a contact: `addGrade`
 
 Add an assignment and its grades to a contact.
 
@@ -640,7 +640,7 @@ Calling `addGrade` without any fields will show the list of assignments in `assi
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Removing grades from a contact `removeGrade`
+### Removing grades from a contact: `removeGrade`
 
 Removes an assignment and its grades from a contact.
 
