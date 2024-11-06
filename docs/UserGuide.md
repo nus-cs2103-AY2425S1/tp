@@ -741,8 +741,8 @@
   `CONTRACT_END_DATE`: The contract end date of the employee in the format of yyyy-MM-dd.
 
   Examples:
-  * `list p` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
-  * `find p n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
+  * `list ph` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
+  * `find ph n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
 
   <div class="box box-warn" type="warning" seamless>
 
