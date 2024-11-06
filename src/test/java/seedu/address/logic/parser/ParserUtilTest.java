@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -27,6 +29,11 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_AMOUNT_1 = "100.005";
+    private static final String INVALID_AMOUNT_2 = "1,000";
+    private static final String INVALID_DATE_1 = "2024-10-32";
+    private static final String INVALID_DATE_2 = "2024-13-12";
+    private static final String INVALID_DATE_3 = "2024-1-12";
     private static final String INVALID_YEAR_MONTH = "2020-13";
     private static final String INVALID_YEAR_MONTH_2 = "11-2020";
 
@@ -36,6 +43,10 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_AMOUNT_1 = "100";
+    private static final String VALID_AMOUNT_2 = "100.5";
+    private static final String VALID_AMOUNT_3 = "100.55";
+    private static final String VALID_DATE = "2024-10-30";
     private static final String VALID_YEAR_MONTH = "2020-12";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -197,6 +208,52 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount(null));
+    }
+    @Test
+    public void parseAmount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_2));
+    }
+
+    @Test
+    public void parseAmount_validValueWithoutWhitespace_returnsDouble() throws ParseException {
+        assertEquals(Double.parseDouble(VALID_AMOUNT_1), ParserUtil.parseAmount(VALID_AMOUNT_1));
+        assertEquals(Double.parseDouble(VALID_AMOUNT_2), ParserUtil.parseAmount(VALID_AMOUNT_2));
+        assertEquals(Double.parseDouble(VALID_AMOUNT_3), ParserUtil.parseAmount(VALID_AMOUNT_3));
+    }
+
+    @Test
+    public void parseAmount_validValueWithWhitespace_returnsDouble() throws Exception {
+        String amountWithWhitespace = WHITESPACE + VALID_AMOUNT_1 + WHITESPACE;
+        assertEquals(Double.parseDouble(VALID_AMOUNT_1), ParserUtil.parseAmount(amountWithWhitespace));
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
+    }
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_3));
+    }
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsLocalDate() throws ParseException {
+        assertEquals(LocalDate.parse(VALID_DATE, DateTimeUtil.DEFAULT_DATE_PARSER),
+                ParserUtil.parseDate(VALID_DATE));
+    }
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsLocalDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        assertEquals(LocalDate.parse(VALID_DATE, DateTimeUtil.DEFAULT_DATE_PARSER),
+                ParserUtil.parseDate(dateWithWhitespace));
+    }
+
     @Test
     public void parseYearMonth_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseYearMonth(null));

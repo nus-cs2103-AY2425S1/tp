@@ -89,6 +89,7 @@ public class CommandTestUtil {
     public static final LocalDate VALID_DATE = LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER);
 
     public static final String VALID_DESCRIPTION_INPUT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION;
+    public static final String INVALID_AMOUNT_INPUT = " " + PREFIX_AMOUNT + "100.001";
     public static final String VALID_AMOUNT_INPUT = " " + PREFIX_AMOUNT + VALID_AMOUNT;
     public static final String VALID_OTHER_PARTY_INPUT = " " + PREFIX_OTHER_PARTY + VALID_OTHER_PARTY;
     public static final String VALID_DATE_INPUT = " " + PREFIX_DATE + VALID_DATE;
