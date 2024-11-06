@@ -28,7 +28,7 @@ public class EditWeddingCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditWeddingCommand.MESSAGE_USAGE);
 
-    private EditWeddingCommandParser parser = new EditWeddingCommandParser();
+    private final EditWeddingCommandParser parser = new EditWeddingCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -72,10 +72,10 @@ public class EditWeddingCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND;
-        String userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY + WEDDING_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY + WEDDING_DESC_AMY + " d/2024-11-07";
 
         EditWeddingDescriptor descriptor = new EditWeddingDescriptorBuilder().withName(VALID_WEDDING_AMY)
-                .withAddress(VALID_ADDRESS_AMY).build();
+                .withAddress(VALID_ADDRESS_AMY).withDate("2024-11-07").build();
         EditWeddingCommand expectedCommand = new EditWeddingCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
