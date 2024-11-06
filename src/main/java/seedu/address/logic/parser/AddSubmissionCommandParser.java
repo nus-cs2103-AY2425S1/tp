@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddSubmissionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.submission.Submission;
@@ -28,7 +29,14 @@ public class AddSubmissionCommandParser implements Parser<AddSubmissionCommand> 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBMISSION);
 
-        Submission submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
+        Submission submission;
+
+        try {
+            submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+
         return new AddSubmissionCommand(submission);
     }
 }

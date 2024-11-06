@@ -29,6 +29,8 @@ public class AddEcNameCommandParser implements Parser<AddEcNameCommand> {
                     AddEcNameCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ECNAME);
+
         Index index;
         EcName ecName;
 

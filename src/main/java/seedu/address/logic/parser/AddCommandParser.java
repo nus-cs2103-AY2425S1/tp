@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exam.Exam;
@@ -60,24 +61,37 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_REGISTER_NUMBER, PREFIX_SEX, PREFIX_STUDENT_CLASS);
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        RegisterNumber registerNumber = ParserUtil.parseRegisterNumber(argMultimap.getValue(PREFIX_REGISTER_NUMBER)
-                .get());
-        Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
-        StudentClass studentClass = ParserUtil.parseStudentClass(argMultimap.getValue(PREFIX_STUDENT_CLASS).get());
-        EcName ecName = new EcName(""); // Adding a student does not allow EcName to be added right away
-        EcNumber ecNumber = new EcNumber(""); // Adding a student does not allow EcNumber to be added right away
         Set<Exam> examList = Collections.emptySet();
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
         Set<Submission> submissionList = Collections.emptySet();
+        EcName ecName = new EcName(""); // Adding a student does not allow EcName to be added right away
+        EcNumber ecNumber = new EcNumber(""); // Adding a student does not allow EcNumber to be added right away
+
+        Name name;
+        Phone phone;
+        Email email;
+        Address address;
+        RegisterNumber registerNumber;
+        Sex sex;
+        StudentClass studentClass;
+        Set<Tag> tagList;
+
+        try {
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+            registerNumber = ParserUtil.parseRegisterNumber(argMultimap.getValue(PREFIX_REGISTER_NUMBER)
+                    .get());
+            sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
+            studentClass = ParserUtil.parseStudentClass(argMultimap.getValue(PREFIX_STUDENT_CLASS).get());
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
 
         Person person = new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName,
                 ecNumber, examList, tagList, attendances, submissionList);
-
         return new AddCommand(person);
     }
 

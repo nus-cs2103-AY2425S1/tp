@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION_STATUS;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddSubmissionStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.submission.Submission;
@@ -32,10 +33,19 @@ public class AddSubmissionStatusCommandParser implements Parser<AddSubmissionSta
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBMISSION, PREFIX_SUBMISSION_STATUS);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        Submission submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
-        String submissionStatus = ParserUtil
-                .parseSubmissionStatus(argMultimap.getValue(PREFIX_SUBMISSION_STATUS).get());
+        Index index;
+        Submission submission;
+        String submissionStatus;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
+            submissionStatus = ParserUtil
+                    .parseSubmissionStatus(argMultimap.getValue(PREFIX_SUBMISSION_STATUS).get());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+
         return new AddSubmissionStatusCommand(index, submission, submissionStatus);
     }
 }

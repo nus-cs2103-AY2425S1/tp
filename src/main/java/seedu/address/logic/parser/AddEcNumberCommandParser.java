@@ -35,6 +35,8 @@ public class AddEcNumberCommandParser implements Parser<AddEcNumberCommand> {
                     AddEcNumberCommand.MESSAGE_USAGE));
         }
 
+        argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_ECNUMBER);
+
         Index index;
         EcNumber ecNumber;
 
