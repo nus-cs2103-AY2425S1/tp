@@ -271,6 +271,7 @@ The following activity diagram summarises what happens when a user executes a ne
 
 Wedding planners who
 * needs to manage a significant number (50-100) of wedding guests
+* only have guests with Singapore phone numbers
 * only needs to plan 1 wedding at a time
 * prefer desktop applications over other types (e.g. Web-based)
 * can type fast
@@ -285,26 +286,27 @@ Reduce the time taken to add, tag and filter guests, allowing planners to focus 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                   | I want to …​                                      | So that I can…​                                                                           |
-|----------|-----------------------------------------------------------|---------------------------------------------------|-------------------------------------------------------------------------------------------|
-| `* * *`  | wedding planner new to the app                            | see usage instructions and examples               | refer to instructions when I forget how to use the App                                    |
-| `* * *`  | wedding planner                                           | add a new person to the guest list                | track the person using the guest list                                                     |
-| `* * *`  | wedding planner                                           | delete a person                                   | remove someone that has been uninvited                                                    |
-| `* * *`  | wedding planner                                           | view the entire guest list                        | get an view all the guests in my guest list                                               |
-| `* * *`  | wedding planner                                           | find a guest by name                              | locate specific guests without having to go through the entire list                       |
-| `* * *`  | wedding planner                                           | add customisable tags to guests                   | categorise my guests easily                                                               |
-| `* * *`  | wedding planner                                           | delete tags associated with guests                | re-categorise my guests if needed                                                         |
-| `* * *`  | wedding planner                                           | view the RSVP status of each guest                | see if each guest is attending, not attending or have not RSVP'ed to the wedding          |
-| `* *`    | wedding planner                                           | filter guests according to their RSVP status      | view guests that are attending, not attending or have not RSVP'ed to the wedding only     |
-| `* *`    | wedding planner managing different groups of guests       | filter guests according to their tags             | view specific groups of guests without having to go through the entire list               |
-| `* *`    | wedding planner managing many guests                      | tag and untag multiple guests at once             | quickly tag or untag large groups of guests in the guest list                             |
-| `* *`    | wedding planner managing many tags                        | tag and untag multiple tags on each guest at once | quickly tag or untag multiple tags onto each guest when required                          |
-| `* *`    | wedding planner requiring many tags                       | create and delete multiple tags at once           | quickly create or delete multiple tags used in the guest list                             |
-| `*`      | wedding planner flexible to changes                       | edit tags that were already created               | change the description of tags without altering any association to the guests in the list |
-| `*`      | wedding planner                                           | apply multiple filters to the list                | view only a specific group of guests                                                      |
-| `*`      | wedding planner                                           | have colour coded tags and fields                 | distinguish tags and different fields easily                                              |
-| `*`      | wedding planner                                           | see the list of tags already created              | easily tag guests without checking if the tag has been already created                    |
-| `*`      | wedding planner handling multiple guests and tags at once | undo my last command                              | do not need to retype multiple indexes and tags                                           |
+| Priority | As a …​                                                   | I want to …​                                                 | So that I can…​                                                                             |
+|----------|-----------------------------------------------------------|--------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`  | wedding planner new to the app                            | see usage instructions and examples                          | refer to instructions when I forget how to use the App                                      |
+| `* * *`  | wedding planner                                           | add a new person to the guest list                           | track the person using the guest list                                                       |
+| `* * *`  | wedding planner                                           | delete a person                                              | remove someone that has been uninvited                                                      |
+| `* * *`  | wedding planner                                           | view the entire guest list                                   | get an view all the guests in my guest list                                                 |
+| `* * *`  | wedding planner                                           | find a guest by name                                         | locate specific guests without having to go through the entire list                         |
+| `* * *`  | wedding planner                                           | create customisable tags which can be applied to guests      | have a personalised way to identify each group of guests                                    |
+| `* * *`  | wedding planner managing distinct groups of guests        | apply customisable tags to guests                            | categorise my guests easily                                                                 |
+| `* * *`  | wedding planner managing distinct groups of guests        | delete tags associated with guests                           | re-categorise my guests if needed                                                           |
+| `* * *`  | wedding planner                                           | view the RSVP status of each guest                           | see if each guest is attending, not attending or have not RSVP'ed to the wedding            |
+| `* *`    | wedding planner                                           | filter guests according to their RSVP status                 | view guests that are attending, not attending or have not RSVP'ed to the wedding only       |
+| `* *`    | wedding planner managing distinct groups of guests        | filter guests according to their tags                        | view specific groups of guests without having to go through the entire list                 |
+| `* *`    | wedding planner managing many guests                      | apply or remove existing tags on multiple guests at once     | quickly tag or untag large groups of guests in the guest list at once                       |
+| `* *`    | wedding planner managing many tags                        | apply or remove multiple existing tags at once on each guest | quickly tag or untag multiple tags onto each guest at once                                  |
+| `* *`    | wedding planner managing many distinct groups of guests   | create and delete multiple predefined tags at once           | quickly create or delete multiple predefined tags at once                                   |
+| `*`      | wedding planner with frequent guest category changes      | rename predefined tags that were already created             | change the description of tags without altering their association to the guests in the list |
+| `*`      | wedding planner                                           | apply multiple filters to the list                           | view only a specific group of guests                                                        |
+| `*`      | wedding planner                                           | have colour coded tags and fields                            | distinguish tags and different fields easily                                                |
+| `*`      | wedding planner                                           | see the list of tags already created                         | easily tag guests without checking if the tag has been already created                      |
+| `*`      | wedding planner handling multiple guests and tags at once | undo my last command                                         | avoid retyping long commands or having to recall my mistakes                                |
 
 ### Use Cases
 
@@ -372,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User enters the command to set RSVP status.
 2.  The system prompts for the guest and RSVP status.
-3.  User enters the guest and  RSVP status.
+3.  User enters the guest and RSVP status.
 4.  The system verifies the input.
 5.  The system updates the RSVP status of the guest in the list and shows confirmation message.
 
@@ -384,40 +386,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System displays error message and prompt for indexes.
     * Use case resumes at step 3.
 
-**Use Case 5 (UC5)**: Create Tag<br>
+**Use Case 5 (UC5)**: Create Tag(s)<br>
 **MSS**:
 
-1.  User enters the command to create a tag.
-2.  The system prompts for the description of the tag.
-3.  User enters the description of the tag.
+1.  User enters the command to create tag(s).
+2.  The system prompts for the description of the tag(s).
+3.  User enters the description of the tag(s).
 4.  The system verifies the input.
 5.  The system updates the tag list to show the created tag and shows confirmation message.
-
+    
     Use case ends.
 
 **Extensions**:
 
-* 3a. User enters an invalid description.
-    * 3a1. System displays error message and prompt for the corrected tag description.
-    * Use case resumes at step 3.
-
-* 3b. User enters a duplicate tag description.
-    * 3b1. System displays a message indicating the tag already exists.
+* 3a. User enters at least one invalid description (e.g. containing non-ASCII characters, or is too long)
+    * 2a1. System displays error message and the correct usage.
     * Use case ends.
 
-* 5a. Tag list limit has been reached
-    * 5a1. System displays a message indicating the tag list limit has been reached.
+* 4a. Adding the new tag(s) would exceed the limit on the number of predefined tags allowed.
+    * 3a1. System displays a message indicating the limit will be reached.
     * Use case ends.
 
-**Use Case 6 (UC6)**: Delete Tag<br>
-**Preconditions**: Tag is not on any guest in the entire list.<br>
+* 4b. User enters at least one duplicate tag description (i.e. tag already exists in the tag list)
+    * 3b1. System continues to update the tag list for non-offending tag descriptions (if any).
+    * 3b2. System displays a message indicating the tag(s) that already exist(s).
+    * Use case ends.
+
+**Use Case 6 (UC6)**: Delete Tag(s)<br>
+**Preconditions**: Tag(s) is/are not on any guest in the entire list, or the command has to have the --force flag.<br>
 **MSS**:
 
-1.  User enters the command to delete tag.
-2.  The system prompts for the description of the tag.
-3.  User enters the description of the tag.
+1.  User enters the command to delete tag(s).
+2.  The system prompts for the description of the tag(s).
+3.  User enters the description of the tag(s).
 4.  The system verifies the input.
-5.  The system updates the tag list to show that the tag no longer exist and shows confirmation message.
+5.  The system updates the tag list to remove the deleted tag(s) and shows confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. User enters at least one invalid description (e.g. containing non-ASCII characters, or is too long)
+  * 2a1. System displays error message and the correct usage.
+  * Use case ends.
+
+* 4a. User enters at least one tag description that does not match any of the predefined tags.
+    * 4a1. System continues to update the tag list for non-offending tag descriptions (if any).
+    * 4a2. System displays a message indicating the tag(s) that already exist(s).
+    * Use case ends.
+
+**Use Case 7 (UC7)**: Rename Tag<br>
+**Preconditions**: The new tag name is not in use yet, and the tag to be renamed exists in the tag list.<br>
+**MSS**
+
+1.  User enters the command to rename tag.
+2.  The system prompts for the description of the tag.
+3.  User enters the description of the tag to be renamed, and the new description.
+4.  The system verifies the input.
+5.  The system updates the tag description and shows confirmation message.
 
     Use case ends.
 
@@ -425,13 +451,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User enters an invalid description.
     * 3a1. System displays error message and prompt tag description.
-    * Use case resumes at step 3.
+    * Use case ends.
 
 * 3b. User enters a description not matching any existing tags.
     * 3b1. System displays a message indicating the tag does not exist.
     * Use case ends.
 
-**Use Case 7 (UC7)**: Tag Guest<br>
+**Use Case 8 (UC8)**: Tag Guest<br>
 **MSS**:
 
 1.  User enters the command to tag guest.
@@ -457,8 +483,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a2. User <u>creates a new tag (UC5)</u>.
     * Use case ends.
 
-
-**Use Case 8 (UC8)**: Untag Guest<br>
+**Use Case 9 (UC9)**: Untag Guest<br>
 **MSS**:
 
 1.  User enters the command to untag guest.
@@ -478,10 +503,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 5a. Tag not on guest
     * 5a1. System displays a message indicating the tag does not exist on the guest.
     * Use case ends.
-
-
-**Use Case 9 (UC9)**: Filter by Tag or RSVP Status<br>
+    
+**Use Case 10 (UC10)**: Filter by Tag or RSVP Status<br>
 **MSS**:
+>>>>>>> upstream/master
 
 1.  User enters the command to filter guest list.
 2.  The system prompts for the desired predicate.
