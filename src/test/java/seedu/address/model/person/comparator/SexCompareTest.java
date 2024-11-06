@@ -16,7 +16,7 @@ public class SexCompareTest {
 
     @Test
     public void compare_equal() {
-        // EP: Sexs are equal
+        // EP: Sexes are equal
         assertTrue(comparator.compare(p1, p1) == 0);
         assertTrue(comparator.compare(p2, p2) == 0);
     }
