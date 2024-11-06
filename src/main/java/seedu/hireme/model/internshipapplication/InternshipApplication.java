@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.hireme.commons.util.ToStringBuilder;
 
 /**
- * Represents an InternshipApplication in the system.
+ * Represents an InternshipApplication.
  * Guarantees: details are present and not null, field values are validated, and the object is immutable.
  */
 public class InternshipApplication {

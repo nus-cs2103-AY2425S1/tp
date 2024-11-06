@@ -7,28 +7,28 @@ start
 
 switch ()
 case ([User enters the command "/accept i"])
-    if (Is index valid?) then (No)
-        :User receives an error message;
-        stop
-    else (Yes)
+    if ( ) then ([Index is valid])
         :Update the internship application status to
         **ACCEPTED**;
+    else ([else])
+        :User receives an error message;
+        stop
     endif
 case ([User enters the command "/reject i"])
-    if (Is index valid?) then (No)
-        :User receives an error message;
-        stop
-    else (Yes)
+    if ( ) then ([Index is valid])
         :Update the internship application status to
         **REJECTED**;
-    endif
-case ([User enters the command "/pending i"])
-    if (Is index valid?) then (No)
+    else ([else])
         :User receives an error message;
         stop
-    else (Yes)
+    endif
+case ([User enters the command "/pending i"])
+    if ( ) then ([Index is valid])
         :Update the internship application status to
         **PENDING**;
+    else ([else])
+        :User receives an error message;
+        stop
     endif
 endswitch
 

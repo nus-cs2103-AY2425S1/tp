@@ -11,12 +11,17 @@ import static seedu.hireme.testutil.TypicalInternshipApplications.YAHOO;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.hireme.commons.core.GuiSettings;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 import seedu.hireme.testutil.AddressBookBuilder;
+import seedu.hireme.testutil.TypicalInternshipApplications;
 
 public class ModelManagerTest {
 
@@ -130,4 +135,34 @@ public class ModelManagerTest {
         differentUserPrefs.setHireMeFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void updateDisplayedApplicationList_filterBySingleKeyword_correctlyFiltered() {
+
+        modelManager.addItem(TypicalInternshipApplications.GOOGLE);
+
+        modelManager.updateFilteredList(new NameContainsKeywordsPredicate(List.of("Google")));
+
+        List<InternshipApplication> expectedApplications = List.of(TypicalInternshipApplications.GOOGLE);
+        ObservableList<InternshipApplication> expectedList = FXCollections.observableList(expectedApplications);
+
+        assertEquals(expectedList, modelManager.getFilteredList(),
+                "Filtered list does not match expected list with keyword 'Google'");
+    }
+
+    @Test
+    public void updateDisplayedApplicationList_filterByMultipleKeywords_correctlyFiltered() {
+        modelManager.addItem(TypicalInternshipApplications.GOOGLE);
+        modelManager.addItem(TypicalInternshipApplications.YAHOO);
+
+        modelManager.updateFilteredList(new NameContainsKeywordsPredicate(List.of("Google", "Yahoo")));
+
+        List<InternshipApplication> expectedApplications =
+                List.of(TypicalInternshipApplications.GOOGLE, TypicalInternshipApplications.YAHOO);
+        ObservableList<InternshipApplication> expectedList = FXCollections.observableList(expectedApplications);
+
+        assertEquals(expectedList, modelManager.getFilteredList(),
+                "Filtered list does not match expected list with keywords 'Google' and 'Yahoo'");
+    }
+
 }

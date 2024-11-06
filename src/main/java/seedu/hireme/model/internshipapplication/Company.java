@@ -7,7 +7,7 @@ import seedu.hireme.logic.validator.EmailValidator;
 import seedu.hireme.logic.validator.NameValidator;
 
 /**
- * Represents a Company in the internship book.
+ * Represents a Company.
  * Guarantees: immutable; the email and name are valid as declared in their respective validation methods.
  */
 public class Company {

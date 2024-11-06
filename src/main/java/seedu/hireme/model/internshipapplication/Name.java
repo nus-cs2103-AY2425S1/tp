@@ -6,7 +6,7 @@ import static seedu.hireme.commons.util.AppUtil.checkArgument;
 import seedu.hireme.logic.validator.NameValidator;
 
 /**
- * Represents a Company's name in the internship book.
+ * Represents a Company's name.
  */
 public class Name {
 

@@ -9,7 +9,7 @@ import seedu.hireme.commons.util.AppUtil;
 import seedu.hireme.logic.validator.DateValidator;
 
 /**
- * Represents a Date in the internship book.
+ * Represents a Date.
  * Guarantees: immutable; the date is valid as declared in the constructor.
  */
 public class Date implements Comparable<Date> {
