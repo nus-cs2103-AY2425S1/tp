@@ -8,6 +8,7 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -39,14 +40,13 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the student id. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: \n"
-            + "Student ID (S followed by a 5-digit number between 00001 and 99999) \n"
-            + "[" + PREFIX_NAME + "NAME] \n"
-            + "[" + PREFIX_PHONE + "PHONE] \n"
-            + "[" + PREFIX_EMAIL + "EMAIL] \n"
-            + "[" + PREFIX_ADDRESS + "ADDRESS] \n"
-            + "[" + PREFIX_IC + "IC] \n"
-            + "[" + PREFIX_IC + "YEARGROUP] \n"
+            + "Parameters: Student ID (S followed by a 5-digit number between 00001 and 99999) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_IC + "IC] "
+            + "[" + PREFIX_YEARGROUP + "YEARGROUP] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]... \n"
             + "Example: " + COMMAND_WORD + " S12345 "
             + PREFIX_PHONE + "91234567 "

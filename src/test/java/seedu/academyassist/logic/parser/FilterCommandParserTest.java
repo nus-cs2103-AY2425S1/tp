@@ -50,8 +50,8 @@ public class FilterCommandParserTest {
     @Test
     public void parse_invalidSubject_failure() {
         // Invalid subjects
-        assertParseFailure(parser, "filter s/history", MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "filter s/biology", MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "filter s/art", MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "filter s/music", MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "filter s/eng", MESSAGE_CONSTRAINTS);
     }
 
