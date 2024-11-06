@@ -255,7 +255,7 @@ Examples:
 <box type="info" seamless>
 
 **Chained Find:**
-To search from the previously displayed results, use `find chained`.<br>
+To further filter the previous search results, use `find chained`.<br>
 Example: `find n/John` followed by `find chained n/Doe` will return all persons whose name contains `John` and `Doe`.
 
 </box>
