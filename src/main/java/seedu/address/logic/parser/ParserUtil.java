@@ -123,7 +123,8 @@ public class ParserUtil {
             throw new ParseException(AssignmentName.MESSAGE_CONSTRAINTS);
         }
         if (trimmedAssignmentName.length() > AssignmentName.MAXIMUM_NAME_LENGTH) {
-            throw new ParseException(String.format(AssignmentName.MESSAGE_NAME_TOO_LONG, AssignmentName.MAXIMUM_NAME_LENGTH));
+            throw new ParseException(String.format(AssignmentName.MESSAGE_NAME_TOO_LONG,
+                    AssignmentName.MAXIMUM_NAME_LENGTH));
         }
         return new AssignmentName(assignmentName);
     }
