@@ -123,7 +123,13 @@ public class ParserUtil {
         if (tagKeyValue.length == 0) {
             throw new ParseException(Tag.MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY);
         }
+        if (tagKeyValue.length == 1) {
+            throw new ParseException(Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING);
+        }
         if (!Tag.isValidTagName(tagKeyValue[0])) {
+            if (tagKeyValue[0].isEmpty()) {
+                throw new ParseException(Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING);
+            }
             throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
         }
         if (!Tag.isValidTagName(tagKeyValue[1])) {

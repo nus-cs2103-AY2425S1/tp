@@ -11,6 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC = "Tag names should be alphanumeric";
     public static final String MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY = "Tag names cannot be empty.";
+    public static final String MESSAGE_TAG_NAME_OR_VALUE_MISSING = "Tag name or value is missing";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}]+";
 
     public final String tagName;
