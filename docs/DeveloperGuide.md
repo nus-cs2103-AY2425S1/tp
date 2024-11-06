@@ -492,7 +492,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file  
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -501,29 +502,450 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Launch with missing/corrupted data file
 
-### Deleting a person
+    1. Open the data/addressbook.json file and intentionally introduce invalid JSON syntax. 
+    1. Launch the application.  
+   Expected: The app should detect the corrupted data file and display an error message, prompting the user to either reset the data or attempt to recover it. The application should not crash.
+
+1. Abrupt shutdown and recovery
+
+    1. Open the application and make several modifications to doctors and patients list (e.g., add a few entries).
+    1. Forcefully close the application (e.g., by using Task Manager on Windows or `kill`<br> command on Mac/Linux).
+    1. Re-launch the application.  
+   Expected: The app should handle the previous abrupt shutdown gracefully. No data corruption should occur and the app should start normally.
+
+### Deleting a person (patient or doctor)
 
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `deletePatient 1`<br>
+    1. Test case: `deleteP 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `deletePatient 0`<br>
+    1. Test case: `deleteP 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deleteP`, `deleteP x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person when the list is empty
+
+    1. Prerequisites: Clear the list using the `clear` command.
+
+    1. Test case: `deleteP x` for any x<br>
+       Expected: No person is deleted. Error message is shown indicating that there are no persons to delete. Status bar remains unchanged.
+
+1. Deleting multiple persons consecutively
+
+    1. Prerequisites: List all persons using the `list` command. Ensure there are at least three persons in the list.
+
+    1. Test case: `deleteP 1`, `deleteP 1`, `deleteP 1`  
+       Expected: The first three persons in the list are deleted consecutively. After each deletion, the status message displays details of the deleted person, and the timestamp in the status bar is updated.
+
+1. Deleting with mixed case command
+
+    1. Test case: `DELETEP 1`  
+       Expected: Command is not recognized due to incorrect capitalization. Error message is displayed indicating an unrecognized command. Status bar remains unchanged.
+
+1. Deleting a person by name instead of index
+
+    1. Test case: `deleteP John`  
+    Expected: No person is deleted. Error message is shown, indicating that the delete command expects an index, not a name. Status bar remains unchanged.
+
+
+
+### Deleting an appointment
+
+1. Deleting an existing appointment
+
+   1. Test case: `deleteA d/2024-12-31 15:23 id/1234 id/5679`  
+   Expected: The appointment between the doctor with ID 5679 and patient with ID 1234 scheduled on 2024-12-31 15:23 is deleted successfully. A confirmation message "Successfully deleted appointment to a patient" is displayed.
+
+   2. Test case: `deleteA d/2024-12-31 15:23 id/9999 id/5679` (non-existent patient ID)  
+   Expected: No appointment is deleted. An error message "The appointment doesn't exist!" is displayed, as there is no patient with ID 9999.
+
+   3. Test case: `deleteA d/2024-12-31 15:23 id/1234 id/9998` (non-existent doctor ID)  
+   Expected: No appointment is deleted. An error message "The appointment doesn't exist!" is displayed, as there is no doctor with ID 9998.
+
+1. Attempting to delete an appointment that does not exist
+
+   1. Prerequisites: Ensure there is no appointment scheduled between the specified doctor and patient at the specified date and time.
+
+   2. Test cases: `deleteA d/2024-12-31 16:00 id/1234 id/5679`  
+   Expected: No appointment is deleted. An error message "The appointment doesn't exist!" is displayed, as there is no appointment scheduled at 2024-12-31 16:00 between the specified doctor and patient.
+
+1. Deleting an appointment with incorrect date format
+
+   1. Test case: `deleteA d/31-12-2024 15:23 id/1234 id/5679`  
+   Expected: No appointment is deleted. An error message is displayed, indicating that the date format is incorrect. The command should specify the correct format (e.g., YYYY-MM-DD HH:MM).
+   
+   2. Test case: `deleteA d/2024/12/31 15:23 id/1234 id/5679`  
+   Expected: No appointment is deleted. An error message is displayed, indicating the invalid date format.
+   
+1. Deleting an appointment without providing required IDs
+
+   1. Test case: `deleteA d/2024-12-31 15:23` (missing patient and doctor IDs)  
+   Expected: No appointment is deleted. An error message is displayed, indicating that both patient and doctor IDs are required.
+   
+   2. Test case: `deleteA d/2024-12-31 15:23 id/1234` (missing doctor ID)  
+   Expected: No appointment is deleted. An error message is displayed, indicating that both patient and doctor IDs are required.
+   
+1. Deleting an appointment with non-numeric IDs
+
+   1. Test case: `deleteA d/2024-12-31 15:23 id/abc id/5679`  
+   Expected: No appointment is deleted. An error message is displayed, indicating that the patient ID must be a numeric value.
+   2. Test case: `deleteA d/2024-12-31 15:23 id/1234 id/xyz`  
+   Expected: No appointment is deleted. An error message is displayed, indicating that the doctor ID must be a numeric value.
+
+      
+### Creating a patient
+
+1. Creating a new patient with valid details
+   1. Prerequisites: Ensure the patient's name, phone, email, and address are unique (not already in the system).
+
+   2. Test cases: `createP n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`  
+   Expected: A new patient profile is created with the specified details. A confirmation message "Successfully created a new patient Patient#<ID> : John Doe" is displayed, where <ID> is the unique ID assigned to the new patient.
+
+1. Attempting to create a duplicate patient
+   1. Prerequisites: Ensure a patient profile with the same name, phone, email, and address already exists in the system.
+
+   2. Test cases: `createP n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`  
+   Expected: No new patient is created. An error message "This patient already exists" is displayed, indicating a duplicate profile.
+
+1. Creating a patient with missing required fields
+   1. Test case: `createP p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` (missing name)  
+   Expected: No patient is created. An error message is displayed, indicating that the name field is required.
+   
+   2. Test case: `createP n/John Doe e/johnd@example.com a/311, Clementi Ave 2, #02-25` (missing phone)  
+   Expected: No patient is created. An error message is displayed, indicating that the phone field is required.
+   
+   3. Test case: `createP n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25` (missing email)  
+   Expected: No patient is created. An error message is displayed, indicating that the email field is required.
+   
+   4. Test case: `createP n/John Doe p/98765432 e/johnd@example.com` (missing address)  
+   Expected: No patient is created. An error message is displayed, indicating that the address field is required.
+   
+1. Creating multiple patients consecutively 
+   1. Test case: `createP n/Patient A p/91234567 e/patientA@example.com a/123, Baker Street` Followed by: `createP n/Patient B p/81234567 e/patientB@example.com a/456, River Valley Road`  
+   Expected: Both patients are created successfully, each with a unique ID. Confirmation messages are displayed for each creation, indicating successful creation of "Patient#<ID> : Patient A" and "Patient#<ID> : Patient B".
+
+### Creating a doctor
+
+1. Creating a new doctor with valid details
+   1. Prerequisites: Ensure the doctor's name, phone, email, and address are unique (not already in the system).
+
+   2. Test case: `createD n/Dr. John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`  
+   Expected: A new doctor profile is created with the specified details. A confirmation message "Successfully created a new doctor Doctor#<ID> : Dr. John Doe" is displayed, where <ID> is the unique ID assigned to the new doctor.
+
+1. Attempting to create a duplicate doctor
+   1. Prerequisites: Ensure a doctor profile with the same name, phone, email, and address already exists in the system.
+
+   2. Test case: `createD n/Dr. John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`  
+   Expected: No new doctor is created. An error message "This doctor already exists" is displayed, indicating a duplicate profile.
+
+1. Creating a doctor with missing required fields
+
+   1. Test case: `createD p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` (missing name)  
+   Expected: No doctor is created. An error message is displayed, indicating that the name field is required.
+      
+   2. Test case: `createD n/Dr. John Doe e/johnd@example.com a/311, Clementi Ave 2, #02-25` (missing phone)  
+   Expected: No doctor is created. An error message is displayed, indicating that the phone field is required.
+   
+   3. Test case: `createD n/Dr. John Doe p/98765432 a/311, Clementi Ave 2, #02-25` (missing email)  
+   Expected: No doctor is created. An error message is displayed, indicating that the email field is required.
+   
+   4. Test case: `createD n/Dr. John Doe p/98765432 e/johnd@example.com` (missing address)  
+   Expected: No doctor is created. An error message is displayed, indicating that the address field is required.
+      
+1. Creating multiple doctors consecutively
+
+   1. Test case: `createD n/Dr. A p/91234567 e/drA@example.com a/123, Baker Street`
+   Followed by: `createD n/Dr. B p/81234567 e/drB@example.com a/456, River Valley Road`   
+   Expected: Both doctors are created successfully, each with a unique ID. Confirmation messages are displayed for each creation, indicating successful creation of "Doctor#<ID> : Dr. A" and "Doctor#<ID> : Dr. B".
+
+### Adding an appointment
+
+1. Adding a new appointment with valid details
+
+   1. Prerequisites: Ensure that both the patient and doctor IDs exist in the system and are available at the specified appointment time.
+   2. Test case: `addA d/2024-12-31 15:23 id/1234 id/5679 r/physiotherapy session`   
+   Expected: A new appointment is created successfully for the specified patient and doctor at the specified time. A confirmation message "Successfully added appointment to a patient" is displayed.
+
+1. Adding an appointment with unavailable time slot
+
+   1. Prerequisites: Ensure that either the patient or doctor already has an appointment at the specified time.
+
+   2. `Test case: addA d/2024-12-31 15:23 id/1234 id/5679 r/follow-up`   
+   Expected: No appointment is added. An error message "The patient or doctor already has another appointment!" is displayed, indicating that the slot is unavailable.
+
+1. Adding an appointment with invalid IDs
+
+   1. Prerequisites: Use non-existent patient or doctor IDs.
+
+   2. Test case: `addA d/2024-12-31 15:23 id/9999 id/5679 r/consultation` (non-existent patient ID)  
+   Expected: No appointment is added. An error message "The doctor or the patient id that you have entered doesn't exist. Please enter again!" is displayed.
+
+   3. Test case: `addA d/2024-12-31 15:23 id/1234 id/9998 r/consultation` (non-existent doctor ID)  
+   Expected: No appointment is added. The same error message as above is displayed.
+
+1. Adding an appointment with missing required fields
+
+   1. Test case: `addA id/1234 id/5679 r/check-up` (missing date)  
+   Expected: No appointment is added. An error message is displayed indicating that the date field is required.
+   
+   2. Test case: `addA d/2024-12-31 15:23 id/1234 r/check-up` (missing doctor ID)  
+   Expected: No appointment is added. An error message is displayed indicating that the doctor ID field is required.
+   
+1. Adding an appointment with invalid date format
+
+   1. Test case: `addA d/31-12-2024 15:23 id/1234 id/5679 r/check-up` (incorrect date format)  
+   Expected: No appointment is added. An error message is displayed indicating the date format should be yyyy-MM-dd HH:mm.
+   
+1. Adding multiple appointments consecutively
+
+   1. Test case: `addA d/2024-12-31 14:00 id/1234 id/5679 r/check-up`
+   Followed by: `addA d/2024-12-31 16:00 id/1234 id/5679 r/follow-up`   
+   Expected: Both appointments are added successfully, each at the specified time. A confirmation message is displayed for each appointment, indicating successful addition.
+
+
+
+### Adding a remark
+
+1. Adding remarks with valid patient ID
+
+   1. Prerequisites: Ensure that the patient with the specified ID exists in the system.
+
+   2. Test case: `addR id/1234 r/Much better than previous appointment.`  
+   Expected: The remark is successfully added to the patient with ID 1234. A confirmation message is displayed: "Successfully added remarks: Much better than previous appointment to patient of ID: 1234."
+
+1. Adding multiple remarks to the same patient consecutively
+
+   1. Prerequisites: Ensure that the patient with the specified ID exists in the system.
+
+   2. Test case: `addR id/1234 r/Needs more rest.` followed by `addR id/1234 r/Monitor blood pressure.`  
+   Expected: Both remarks are added to the patient with ID 1234, with each remark appended to the existing ones. A confirmation message is displayed for each addition.
+
+1. Adding remarks with non-existent patient ID
+
+   1. Test case: `addR id/9999 r/Condition improving.` (where patient ID 9999 does not exist)  
+   Expected: No remarks are added. An error message "Unable to add remarks! Check the id entered!" is displayed, indicating that the patient ID is invalid.
+   
+1. Adding empty remarks
+
+   1. Prerequisites: Ensure that the patient with the specified ID exists in the system.
+
+   2. Test case: `addR id/1234 r/` (no text or only spaces after the remarks prefix)  
+   Expected: No remarks are added. An error message is displayed, indicating that remarks cannot be empty.
+
+1. Adding remarks with a very long text 
+
+   1. Prerequisites: Ensure that the patient with the specified ID exists in the system.
+
+   2. Test case: `addR id/1234 r/Patient's condition improved dramatically after treatment. Long-term prognosis looks positive.` (long remark)  
+   Expected: The entire text of the remark is successfully added to the patient with ID 1234. A confirmation message is displayed with the full added remark.
+
+
+### Checking an appointment
+
+1. Check appointments with valid doctor ID and date
+
+   1. Prerequisites: Ensure that the doctor with the specified ID exists in the system and has appointments scheduled on the specified date.
+
+   2. `Test case: checkA id/01 day/2023-09-25`  
+   Expected: The list of appointments for Doctor with ID 01 on 2023-09-25 is displayed. If appointments are present, details of each appointment are shown.
+
+1. Check appointments for a doctor with no appointments on the specified date
+
+   1. Prerequisites: Ensure that the doctor with the specified ID exists in the system but has no appointments on the specified date.
+
+   2. Test case: `checkA id/01 day/2023-11-15`  
+   Expected: No appointments are found for Doctor with ID 01 on 2023-11-15. A message "No appointment found for Doctor: [Doctor Name]" is displayed.
+
+1. Check appointments with a non-existent doctor ID
+
+   1. Test case: `checkA id/999 day/2023-09-25` (where Doctor ID 999 does not exist in the system)  
+   Expected: No appointments are found. An error message is displayed.
+   
+1. Check appointments with a missing date parameter
+
+   1. Prerequisites: Ensure that the doctor with the specified ID exists in the system.
+
+   2. Test case: `checkA id/01` (no date specified)  
+   Expected: An error message "No date time is given for Doctor appointment: [Doctor Name]" is displayed, indicating that the date parameter is missing.
+
+1. Check appointments with a doctor having multiple patients on the same day
+
+   1. Prerequisites: Ensure that the doctor with the specified ID exists and has multiple appointments scheduled with different patients on the same date.
+
+   2. Test case: `checkA id/02 day/2023-10-20`  
+   Expected: A list of all appointments for Doctor with ID 02 on 2023-10-20 is displayed. Each appointment includes details of the patient, appointment time, and any remarks.
+
+1. Check appointments with an invalid date format
+
+   1. Test case: `checkA id/01 day/25-09-2023 (incorrect date format)  `  
+   Expected: An error message is displayed, indicating that the date format is invalid. The command should prompt the user to enter the date in the correct format (YYYY-MM-DD).
+  
+1. Check appointments with future date (no appointments yet)
+
+   1. Prerequisites: Ensure that the doctor has no appointments scheduled for a future date.
+
+   2. Test case: `checkA id/01 day/2030-01-01`  
+   Expected: No appointments are found. A message "No appointment found for Doctor: [Doctor Name]" is displayed.
+
+
+### Marking an appointment
+
+1. Mark an existing appointment as complete with valid doctor and patient IDs
+
+   1. Prerequisites: Ensure that an appointment exists between the specified doctor and patient at the specified time.
+
+   2. Test case: `mark date/2024-12-31 15:23 id/1234 id/5679`  
+   Expected: The appointment between Patient with ID 1234 and Doctor with ID 5678 on 2024-12-31 at 15:23 is marked as complete. A message "Successfully marked appointment as complete" is displayed.
+
+1. Mark a non-existent appointment as complete
+
+   1. Prerequisites: Ensure that no appointment exists between the specified doctor and patient at the specified time.
+
+   2. Test case: `mark date/2025-01-01 10:00 id/1234 id/5679`  
+   Expected: An error message "The appointment doesn't exist!" is displayed, as there is no appointment to mark as complete.
+
+1. Mark an appointment with a non-existent ID
+
+   1. Test case: `mark date/2024-12-31 15:23 id/1234 id/9999` (where Doctor ID 9999 does not exist)  
+   Expected: An error message is displayed, indicating that the doctor ID is invalid.
+
+   2. Test case: `mark date/2024-12-31 15:23 id/9999 id/5679` (where Patient ID 9999 does not exist)  
+   Expected: An error message is displayed, indicating that the patient ID is invalid.
+
+1. Mark an appointment with a missing appointment time parameter
+
+   1. Prerequisites: Ensure that the doctor and patient IDs are valid and that there is an existing appointment.
+
+   2. Test case: `mark id/1234 id/5679` (no date specified)  
+   Expected: An error message indicating that the date/time parameter is missing and required for marking an appointment as complete.
+
+1. Mark an appointment with an invalid date format 
+   1. Test case: `mark date/31-12-2024 15:23 id/1234 id/5679` (incorrect date format)  
+   Expected: An error message indicating that the date format is invalid. The command should prompt the user to enter the date in the correct format (YYYY-MM-DD HH
+   ).
+   
+1. Mark an appointment for a doctor and patient with an appointment in the past
+
+   1. Prerequisites: Ensure that an appointment exists in the past between the doctor and patient.
+
+   2. Test case: `mark date/2023-01-01 10:00 id/1234 id/5679`  
+   Expected: The appointment is marked as complete if it exists. If marked, a success message is shown. If the appointment does not exist, an error message is displayed.
+
+### Getting id of a person
+
+1. Get ID with an exact match of the name
+   1. Prerequisites: Ensure a person with the name "John Philips" exists in the address book.
+
+   2. Test case: `get John Philips`  
+   Expected: The ID of "John Philips" is returned. A message like "ID: [ID]" is displayed.
+
+1. Get ID with a partial match of the name
+
+   1. Prerequisites: Ensure a person with the name "John Philips" exists in the address book. 
+   
+   2. Test case: `get John`   
+   Expected: The ID of "John Philips" is returned if there is only one match. If there are multiple matches, the ID of the first match is returned.
+
+1. Get ID when the name does not exist
+
+   1. Test case: `get Nhoj Eod`  
+   Expected: An error message  is displayed, as there is no match for "Nhoj Eod".
+
+1. Get ID when there is no input provided
+
+   1. Test case: `get`  
+   Expected: An error message prompting for input. Command should not execute without keywords.
+   
+1. Get ID with numeric characters in the name
+
+   1. Prerequisites: Ensure a person with the name "John123" exists in the address book.
+
+   2. Test case: `get John123`  
+   Expected: The ID of "John123" is returned.
+
+### Viewing a person's history
+
+1. View full history of a patient by ID
+
+   1. Prerequisites: Ensure the patient with ID 2 has a recorded medical history.
+
+   2. Test case: `view --id 2`  
+   Expected: All recorded history for patient ID 2 is displayed.
+
+1. View history on a specific date and time
+
+   1. Prerequisites: Ensure the patient with ID 2 has a recorded appointment on 2023-09-25 10:15.
+
+   2. Test case: `view --id 2 --date 2023-09-25 10:15`  
+   Expected: Only the history of the specific appointment on 2023-09-25 10:15 for patient ID 2 is displayed.
+
+1. View history for a date and time with no records
+
+   1. Prerequisites: Ensure the patient with ID 2 does not have an appointment on 2024-01-01 12:00.
+
+   2. Test case: `view --id 2 --date 2024-01-01 12:00 `  
+   Expected: An error message is displayed, as there is no history for that date and time.
+
+1. View history for a non-existent patient ID
+
+   1. Test case: `view --id 9999`
+   Expected: An error  is displayed, as there is no patient with ID 9999.
+   
+1. View history with invalid date format
+   1. Test case: `view --id 2 --date 2023/09/25 10:15` (incorrect date format)  
+   Expected: An error message is shown indicating invalid date format. Command should not execute due to improper input.
+   
+1. View history when there are multiple history entries on the same date but different times
+
+   1. Prerequisites: Ensure patient ID 2 has multiple history entries on 2023-09-25 at different times (e.g., 10:15 and 14:30).
+
+   2. Test case: `view --id 2 --date 2023-09-25 10:15`  
+   Expected: Only the history of the specific appointment at 10:15 on 2023-09-25 is displayed.
+
+   3. Test case: `view --id 2 --date 2023-09-25`  
+   Expected: If the command is adjusted to accept dates without time, it should display all history entries for 2023-09-25.
+
+1. View history for a patient with no history at all
+
+   1. Prerequisites: Ensure the patient with ID 2 has no recorded history.
+
+   2. Test case: `view --id 2`  
+   Expected: An error message  is displayed, indicating no history entries for patient ID 2.
+
+1. View history by specifying both patient ID and invalid date-time combination
+
+   1. Prerequisites: Ensure the patient with ID 2 does not have an appointment at the provided date-time. 
+   2. `Test case: view --id 2 --date 2024-12-31 15:23`  
+   Expected: An error message is displayed, as no appointment or history exists for this date-time combination.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Have a valid `addressbook.json` data file in the expected location. 
+    2. Test case: Delete or rename the `addressbook.json` file and then launch the application.  
+    Expected: The application should detect the missing data file and create a new, empty `addressbook.json` file upon startup. The user should see a message indicating that the data file was missing and a new one has been created. 
+    3. Test case: Corrupt the `addressbook.json` file by introducing invalid JSON syntax (e.g., remove a closing bracket or add an extra comma). Then, launch the application.  
+    Expected: The application should detect the corrupted data file and display an error message. 
+    4. Test case: Replace `addressbook.json` with a non-JSON file (e.g., rename a text file to `addressbook.json`) and then launch the application.  
+    Expected: The application should detect the invalid format and notify the user of the issue. The application should not crash and may prompt the user to reset or repair the data file.
 
-1. _{ more test cases …​ }_
+1. Restoring from backup when data file is missing
+
+    1. Prerequisites: Delete the `addressbook.json` file. Ensure a backup file is present in the backup folder. 
+    2. Test case: Launch the application.  
+    Expected: The application should detect the missing data file and offer to restore from the most recent backup. If the user agrees, the backup file is copied to `addressbook.json`, and the application starts with the restored data.
+
+
+
+
+
+
+
