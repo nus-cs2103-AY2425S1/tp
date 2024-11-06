@@ -77,6 +77,18 @@ public class AddGradeCommand extends Command {
         return showAssignmentDefault;
     }
 
+    /**
+     * Creates a new {@code Person} object with an updated assignment and score added to the existing person's record.
+     *
+     * This method updates the assignments of the given person by adding a new assignment with the specified name and
+     * score.
+     * A new {@code Person} object is returned with the updated assignments.
+     *
+     * @param person The original {@code Person} object to which the grade will be added.
+     * @param assignmentName The name of the assignment to be added.
+     * @param score The score for the assignment to be added.
+     * @return A new {@code Person} object with the updated assignment and score.
+     */
     private static Person createGradeToAddToPerson(Person person, String assignmentName, float score) {
         assert person != null;
         Name name = person.getName();
@@ -105,8 +117,9 @@ public class AddGradeCommand extends Command {
             throw new CommandException("Invalid assignment name: " + assignmentName + "\n" + HELP_MESSAGE);
         }
 
-        if (score > model.maxScore(assignmentName) || score < 0) {
-            throw new CommandException("Score must be between 0.0 and " + model.maxScore(assignmentName));
+        // check if score is valid
+        if (score > model.getMaxScore(assignmentName) || score < 0) {
+            throw new CommandException("Score must be between 0.0 and " + model.getMaxScore(assignmentName));
         }
 
         Person person = model.getPerson(personName)

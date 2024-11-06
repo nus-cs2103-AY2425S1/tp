@@ -66,8 +66,8 @@ public class CsvAssignmentParser {
         }
 
         // Throws Command exception if score is invalid (not parser exception because this happens during execution)
-        if (asgnScore > model.maxScore(asgnName) || asgnScore < 0) {
-            throw new CommandException("Score must be between 0.0 and " + model.maxScore(asgnName));
+        if (asgnScore > model.getMaxScore(asgnName) || asgnScore < 0) {
+            throw new CommandException("Score must be between 0.0 and " + model.getMaxScore(asgnName));
         }
 
         assignments.put(asgnName, new Assignment(asgnName, asgnScore));
