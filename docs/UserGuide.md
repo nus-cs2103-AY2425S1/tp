@@ -4,11 +4,11 @@
   pageNav: 3
 ---
 
-# Talency User Guide
+# Talentcy User Guide
 
-Talency is a **desktop app for managing job applicant contacts and monitoring their interview stages, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Talency can get your contact management tasks done faster than traditional GUI apps.
+Talentcy is a **desktop app for managing job applicant contacts and monitoring their interview stages, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Talentcy can get your contact management tasks done faster than traditional GUI apps.
 
-The codebase of Talency originates from AddressBook Level 3 (AB3) developed by CS2103 team.
+The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by CS2103 team.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -205,13 +205,13 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-Talency data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Talentcy data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Talency will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the Talency to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Talentcy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the Talentcy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in the future]`
@@ -263,7 +263,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Talency home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Talentcy home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

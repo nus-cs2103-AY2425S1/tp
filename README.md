@@ -2,7 +2,7 @@
 
 [![CI Status](https://github.com/AY2425S1-CS2103-F09-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103-F09-3/tp/actions)
 
-# Talency
+# Talentcy
 
 
 ![Ui](docs/images/Ui.png)
@@ -22,5 +22,5 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
   * Viewing a whole list of talent contacts.
 * This project is targeted for employees of talent recruitment departments of companies who want to manage applicant
   contacts.
-* For more detailed documentation, please visit [Talency Project Website](https://ay2425s1-cs2103-f09-3.github.io/tp/)
+* For more detailed documentation, please visit [Talentcy Project Website](https://ay2425s1-cs2103-f09-3.github.io/tp/)
 * This project is based on AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
