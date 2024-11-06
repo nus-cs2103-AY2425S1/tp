@@ -31,11 +31,10 @@ public class ImportCommand extends Command {
     public static final String CORRECT_HEADER_USAGE =
         "Header of CSV file should be Name, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
             + " (Case insensitive, Order sensitive)";
+    public static final String MESSAGE_READING_ERROR = "Error reading from the CSV file path: ";
     private static final String MESSAGE_INVALID_CSV = "Invalid CSV format, ensure that all necessary data are present.";
     private static final String MESSAGE_MISSING_PERSON_DATA = "There is no person data present.";
     private static final String MESSAGE_NULL_FIELDS = "Please ensure that there is no null fields";
-    public static final String MESSAGE_READING_ERROR = "Error reading from the CSV file path: ";
-
     private final String csvFilePath;
 
     /**
