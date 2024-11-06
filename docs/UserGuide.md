@@ -38,7 +38,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
    * `list -c` : Lists all clients.
 
    * `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 d/2024-12-15 t/budget t/pets` : Adds a client named `Jane Doe` to DDD.
-   
+
    * `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget` : Adds a vendor named `ABC Catering` to DDD.
 
    * `delete 2` : Deletes the 2nd contact shown in the current list.
@@ -104,7 +104,7 @@ Here's how you might use our app:
 
 **Notes about the command format:**<br>
 
-Documentation style conventions are based on [Google's guide](https://developers.google.com/style/code-syntax). 
+Documentation style conventions are based on [Google's guide](https://developers.google.com/style/code-syntax).
 
 * Words in `UPPER_CASE` are the parameters that must be supplied by the user.<br>
   e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
@@ -202,7 +202,7 @@ Example:
 
 Notes:
 * If no arguments are specified, `list` will list all contacts (clients and vendors).
-* The `-c`, `-v` and `-e` flags can be used to decide what type of data to list. 
+* The `-c`, `-v` and `-e` flags can be used to decide what type of data to list.
 * `s/SERVICE` should only be specified if `v` is specified.
 * `d/DATE` should only be specified if `-e` is specified.
 * `des/DESCRIPTION` should only be specified if `-e` is specified.
@@ -474,7 +474,7 @@ In case you need more information on the command parameters, here's a more compr
 Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
 
 * `-c`: flag to specify client related commmands
-* `-v`: flag to specify vendor related commands 
+* `-v`: flag to specify vendor related commands
 * `-e`: flag to specify event related commands
 
 ### Parameters
