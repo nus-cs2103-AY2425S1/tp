@@ -21,6 +21,7 @@ Class Phone
 Class Tag
 Class Birthday
 Class Age
+Class Frequency
 
 Class I #FFFFFF
 }
@@ -46,6 +47,7 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> Birthday
 Person *--> Age
+Person *--> Frequency
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
