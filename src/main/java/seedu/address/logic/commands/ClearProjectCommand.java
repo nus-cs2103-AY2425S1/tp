@@ -18,6 +18,10 @@ public class ClearProjectCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
+        // Clear all assignments
+        model.setAddressBookAssignments(new AddressBook());
+
         model.setAddressBookProject(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS, DisplayType.PROJECT_LIST);
     }

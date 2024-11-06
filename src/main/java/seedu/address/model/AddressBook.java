@@ -93,6 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         resetEmployeeData(newData);
         resetProjectData(newData);
+        resetAssignmentData(newData);
     }
 
     /**
@@ -113,6 +114,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setProjects(newData.getProjectList());
+    }
+
+    /**
+     * Resets the existing assignments data of this {@code AddressBook} with
+     * {@code newData}.
+     */
+    public void resetAssignmentData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+
+        setAssignments(newData.getAssignmentList());
     }
 
     //// employee-level operations
@@ -275,6 +286,29 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireAllNonNull(employeeId);
         assignments.remove(projectId, employeeId);
     }
+
+    /**
+     * Removes all {@code Assignment} from this {@code AddressBook}
+     * with matching {@code EmployeeId}.
+     *
+     * @return true if assignments were deleted, false otherwise
+     */
+    public boolean removeAllAssignments(EmployeeId employeeId) {
+        requireNonNull(employeeId);
+        return assignments.removeAll(employeeId);
+    }
+
+    /**
+     * Removes all {@code Assignment} from this {@code AddressBook}
+     * with matching {@code ProjectId}.
+     *
+     * @return true if assignments were deleted, false otherwise
+     */
+    public boolean removeAllAssignments(ProjectId projectId) {
+        requireNonNull(projectId);
+        return assignments.removeAll(projectId);
+    }
+
     //// util methods
 
     @Override

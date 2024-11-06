@@ -66,6 +66,11 @@ public interface Model {
      */
     void setAddressBookProject(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces address book assignments data with the data in {@code addressBook}.
+     */
+    void setAddressBookAssignments(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
@@ -180,6 +185,18 @@ public interface Model {
      * The assignment must exist in the address book.
      */
     void deleteAssignment(ProjectId targetProjectId, EmployeeId targetEmployeeId);
+
+    /**
+     * Deletes the all assignments with matching {@code EmployeeId}
+     *
+     * @return true if at least
+     */
+    boolean deleteAllAssignments(EmployeeId targetEmployeeId);
+
+    /**
+     * Deletes the all assignments with matching {@code ProjectId}
+     */
+    boolean deleteAllAssignments(ProjectId targetProjectId);
 
     /**
      * Adds the given assignment.

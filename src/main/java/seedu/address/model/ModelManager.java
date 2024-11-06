@@ -103,6 +103,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setAddressBookAssignments(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetAssignmentData(addressBook);
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
@@ -209,6 +214,16 @@ public class ModelManager implements Model {
     @Override
     public void deleteAssignment(ProjectId targetProjectId, EmployeeId targetEmployeeId) {
         addressBook.removeAssignment(targetProjectId, targetEmployeeId);
+    }
+
+    @Override
+    public boolean deleteAllAssignments(EmployeeId targetEmployeeId) {
+        return addressBook.removeAllAssignments(targetEmployeeId);
+    }
+
+    @Override
+    public boolean deleteAllAssignments(ProjectId targetProjectId) {
+        return addressBook.removeAllAssignments(targetProjectId);
     }
 
     @Override
