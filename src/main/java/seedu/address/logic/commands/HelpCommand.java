@@ -10,18 +10,16 @@ import seedu.address.model.Model;
  */
 public class HelpCommand extends Command {
 
-    public static final String COMMAND_WORD = ":help";
+    public static final String SHORT_COMMAND_WORD = ":h";
+    public static final String LONG_COMMAND_WORD = ":help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = LONG_COMMAND_WORD + ": Shows program usage instructions.\n"
+            + "Example: " + LONG_COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened command cheatsheet.";
     public static final String COMMAND_SUMMARY_ACTION = "Help";
-    public static final String COMMAND_SUMMARY_FORMAT =
-            ":help";
-    public static final String COMMAND_SUMMARY_EXAMPLES =
-            ":help";
-
+    public static final String COMMAND_SUMMARY_FORMAT = LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
+    public static final String COMMAND_SUMMARY_EXAMPLES = LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
 
 
     public static final List<String> INVALID_VARIANTS = Arrays.asList("help", ":h", "h");

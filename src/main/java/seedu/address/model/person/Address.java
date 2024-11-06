@@ -44,6 +44,13 @@ public class Address {
         return value.isEmpty() ? "-" : value;
     }
 
+    /**
+     * Returns true if value is empty, otherwise returns false.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
     @Override
     public String toString() {
         return value;
