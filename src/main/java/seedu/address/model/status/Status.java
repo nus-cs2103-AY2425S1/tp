@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Status {
 
-    public static final String MESSAGE_CONSTRAINTS = "The Statuses are None, Non_Urgent and Urgent. Please use "
+    public static final String MESSAGE_CONSTRAINTS = "The Statuses are none, non_urgent and urgent. Please use "
             + "one of them.";
 
     public final StatusEnum status;
