@@ -26,7 +26,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Vendor> filteredVendors;
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Wedding> filteredWeddings;
 
@@ -43,7 +42,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredVendors = new FilteredList<>(this.addressBook.getVendorList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
@@ -109,9 +107,6 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
-        if (addressBook.hasVendor(target)) {
-            addressBook.removeVendor(target);
-        }
     }
 
     @Override
@@ -232,11 +227,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
-    }
-
-    @Override
-    public ObservableList<Vendor> getFilteredVendorList() {
-        return filteredVendors;
     }
 
     @Override

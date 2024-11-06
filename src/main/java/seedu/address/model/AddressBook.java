@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniqueVendorList;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -25,7 +24,6 @@ import seedu.address.model.wedding.Wedding;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueVendorList vendors;
     private final UniqueTagList tags;
     private final UniqueTaskList tasks;
     private final UniqueWeddingList weddings;
@@ -39,7 +37,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        vendors = new UniqueVendorList();
         tags = new UniqueTagList();
         tasks = new UniqueTaskList();
         weddings = new UniqueWeddingList();
@@ -67,7 +64,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setVendors(newData.getVendorList());
         setTags(newData.getTagList());
         setWeddings(newData.getWeddingList());
         setTasks(newData.getTaskList());
@@ -79,14 +75,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
-    }
-
-    /**
-     * Replaces the contents of the vendor list with {@code vendors}.
-     * {@code vendors} must not contain duplicate vendors.
-     */
-    public void setVendors(List<Vendor> vendors) {
-        this.vendors.setVendors(vendors);
     }
 
     /**
@@ -147,7 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasVendor(Person person) {
         requireNonNull(person);
-        return vendors.contains(person);
+        return persons.containsVendor(person);
     }
 
     /**
@@ -155,7 +143,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the vendor list.
      */
     public void addVendor(Person p) {
-        vendors.add(p);
+        setPerson(p, new Vendor(p));
     }
 
     /**
@@ -163,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeVendor(Person key) {
-        vendors.remove(key);
+        setPerson(key, new Person(key));
     }
 
     //// tag-level operations
@@ -357,17 +345,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("tags", tags)
+                .add("tasks", tasks)
+                .add("weddings", weddings)
                 .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Vendor> getVendorList() {
-        return vendors.asUnmodifiableObservableList();
     }
 
     @Override
@@ -397,7 +383,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && tags.equals(otherAddressBook.tags)
+                && tasks.equals(otherAddressBook.tasks)
+                && weddings.equals(otherAddressBook.weddings);
     }
 
     @Override

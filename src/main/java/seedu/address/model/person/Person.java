@@ -17,7 +17,6 @@ import seedu.address.model.wedding.Wedding;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -42,6 +41,27 @@ public class Person {
         this.tags.addAll(tags);
         this.weddings.addAll(weddings);
         this.tasks.addAll(tasks);
+    }
+
+    /**
+     * Create new person with the same details as an existing person
+     */
+    public Person(Person person) {
+        this.name = person.getName();
+        this.phone = person.getPhone();
+        this.email = person.getEmail();
+        this.address = person.getAddress();
+        this.tags.addAll(person.getTags());
+        this.weddings.addAll(person.getWeddings());
+        this.tasks.addAll(person.getTasks());
+    }
+
+    /**
+     * Creates a Person with only a name and all other fields blank
+     */
+    public static Person makePersonWithName(Name name) {
+        return new Person(name, new Phone(""), new Email(""), new Address(""),
+                new HashSet<>(), new HashSet<>(), new HashSet<>());
     }
 
     public Name getName() {
@@ -119,6 +139,10 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public boolean isVendor() {
+        return false;
     }
 
     /**

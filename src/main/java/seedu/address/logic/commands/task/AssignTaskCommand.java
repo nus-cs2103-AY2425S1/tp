@@ -80,14 +80,7 @@ public class AssignTaskCommand extends Command {
 
         Person personToEdit = lastShownPersonList.get(personIndex.getZeroBased());
 
-        boolean isVendor = false;
-        for (Vendor vendor : model.getFilteredVendorList()) {
-            if (personToEdit.getName().equals(vendor.getName())) {
-                isVendor = true;
-                break;
-            }
-        }
-        if (!isVendor) {
+        if (!personToEdit.isVendor()) {
             throw new CommandException(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK);
         }
 
