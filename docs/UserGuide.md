@@ -143,7 +143,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all Supplier as well as goods entries from the application
 
 Format: `clear`
 
@@ -175,7 +175,11 @@ To be added.
 
 ### Export Goods Data to CSV: `export`
 
-To be added.
+Saves filtered goods to filteredGoods.csv
+- This command will save any goods displayed in the screen
+- This command is dependant on the 'viewgoods' command
+
+Format ```export```
 
 ### Saving the data
 
