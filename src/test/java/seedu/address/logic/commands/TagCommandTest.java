@@ -19,13 +19,11 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -171,28 +169,20 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_invalidLevelForStudentSubjects_failure() throws CommandException {
-        Name studentInList = model.getAddressBook()
+    public void execute_invalidLevelForStudentSubjects_failure() {
+        Student studentInList = model.getAddressBook()
                 .getStudentList()
                 .get(INDEX_SECOND_STUDENT
-                        .getZeroBased())
-                .getName();
+                        .getZeroBased());
 
         //Ensures Student first has a Valid Level and Subject before making it invalid
-
-        UpdateStudentDescriptor test =
-                new UpdateStudentDescriptorBuilder()
-                        .withLevel("S2 NA")
-                        .withSubjects("Math")
-                        .build();
-        new TagCommand(studentInList, test).execute(model);
+        Student replacement = new StudentBuilder(studentInList).withLevel("S2 NA").withSubjects("Math").build();
+        model.setStudent(studentInList, replacement);
 
         UpdateStudentDescriptor descriptor =
                 new UpdateStudentDescriptorBuilder()
                         .withLevel("S3 Express")
                         .build();
-
-        TagCommand tagCommand = new TagCommand(studentInList, descriptor);
 
         String expectedMessage = "Subject is not valid for given level. "
                 + "Valid subjects for S3 EXPRESS: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
@@ -200,10 +190,52 @@ public class TagCommandTest {
                 + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
                 + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
 
-        CommandException thrown = Assertions.assertThrows(CommandException.class, () -> {
-            tagCommand.execute(model);
-        });
-        assertEquals(expectedMessage, thrown.getMessage());
+        TagCommand tagCommand = new TagCommand(replacement.getName(), descriptor);
+        assertCommandFailure(tagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_clearSubjectsWhenOnlyLevelNoneNoneProvided() {
+        Student studentInList = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+
+        //Ensures Student first has a Valid Level and Subject before clearing it
+        Student replacement = new StudentBuilder(studentInList).withLevel("S2 NA").withSubjects("Math").build();
+        model.setStudent(studentInList, replacement);
+
+        UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder()
+                        .withLevel("NONE NONE")
+                        .build();
+        TagCommand tagCommand = new TagCommand(studentInList.getName(), descriptor);
+        Student finalStudent = new StudentBuilder(studentInList).withLevel("NONE NONE").withSubjects().build();
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_STUDENT_SUCCESS,
+                Messages.format(finalStudent));
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, model);
+    }
+
+    @Test
+    public void execute_doesNotClearSubjectsWhenLevelNoneNoneAndSubjectsProvided() {
+        Student studentInList = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+
+        //Ensures Student first has a Valid Level and Subject before clearing it
+        Student replacement = new StudentBuilder(studentInList).withLevel("S2 NA").withSubjects("Math").build();
+        model.setStudent(studentInList, replacement);
+
+        UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder()
+                        .withLevel("NONE NONE")
+                        .withSubjects("MATH")
+                        .build();
+        TagCommand tagCommand = new TagCommand(studentInList.getName(), descriptor);
+
+        assertCommandFailure(tagCommand, model, "Tag a student with a level first or in the same command");
     }
 
     @Test
