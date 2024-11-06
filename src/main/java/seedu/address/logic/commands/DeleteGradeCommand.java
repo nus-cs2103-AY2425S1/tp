@@ -60,7 +60,7 @@ public class DeleteGradeCommand extends Command {
         }
 
         final Person editedPerson = personToEdit.removeGrade(testName);
-        model.setPerson(personToEdit, editedPerson);        
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(model.getCurrentPersonFilter());
 
         return new CommandResult(

@@ -130,6 +130,9 @@ public class ModelManager implements Model {
 
     @Override
     public Predicate<? super Person> getCurrentPersonFilter() {
+        if (filteredPersons.getPredicate() == null) {
+            return PREDICATE_SHOW_ALL_PERSONS;
+        }
         return filteredPersons.getPredicate();
     }
 
