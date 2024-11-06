@@ -29,7 +29,7 @@ public class GetAttendanceByTgCommand extends Command {
     public static final String MESSAGE_NO_STUDENTS = "No students found in tutorial group %1$s.";
 
     private final TutorialGroup tutorialGroup;
-    private AttendanceWindow window;
+    private static AttendanceWindow currentWindow;
 
 
     /**
@@ -39,7 +39,6 @@ public class GetAttendanceByTgCommand extends Command {
      */
     public GetAttendanceByTgCommand(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
-        window = new AttendanceWindow(tutorialGroup);
     }
 
     @Override
@@ -50,7 +49,11 @@ public class GetAttendanceByTgCommand extends Command {
         if (students.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_NO_STUDENTS, tutorialGroup));
         }
-        window.show(model);
+        if (currentWindow != null) {
+            currentWindow.close();
+        }
+        currentWindow = new AttendanceWindow(tutorialGroup);
+        currentWindow.show(model);
         return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }
 
@@ -73,6 +76,15 @@ public class GetAttendanceByTgCommand extends Command {
     }
 
     public void setAttendanceWindow(AttendanceWindow window) {
-        this.window = window;
+        this.currentWindow = window;
+    }
+
+    public static boolean closeCurrentWindow() {
+        if (currentWindow != null) {
+            currentWindow.close();
+            currentWindow = null;
+            return true;
+        }
+        return false;
     }
 }

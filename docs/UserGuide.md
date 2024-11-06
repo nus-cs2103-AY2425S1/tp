@@ -201,6 +201,9 @@ Format: `exit`
 
 * Format: `getattg tg/TUTORIAL_GROUP d/DATE`
 
+### Closing Attendance Window : `closeat`
+* Closes the attendance window if any is currently open.
+
 
 ### Saving the data
 

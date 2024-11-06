@@ -68,6 +68,13 @@ public class AttendanceWindow {
         });
     }
 
+    public void close() {
+        Platform.runLater(() -> {
+            Stage stage = (Stage) table.getScene().getWindow();
+            stage.close();
+        });
+    }
+
     private void initializeTable(Model model) {
         table = new TableView<>();
         TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
