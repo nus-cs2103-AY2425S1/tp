@@ -24,7 +24,6 @@ import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ReceiptLog;
 import seedu.address.model.goods.Goods;
-import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalGoods;
@@ -50,12 +49,6 @@ public class AddGoodsCommandTest {
 
         assertEquals(String.format(AddGoodsCommand.MESSAGE_SUCCESS, GOODS_TYPICAL),
                 result.getFeedbackToUser());
-    }
-
-    @Test
-    public void execute_duplicateGoods_throwsCommandException() {
-        // TODO: Update this test case
-        assertTrue(true);
     }
 
     @Test
@@ -187,7 +180,7 @@ public class AddGoodsCommandTest {
         }
 
         @Override
-        public void deleteGoods(GoodsName goodsName) {
+        public void deleteGoods(GoodsReceipt goodsReceipt) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -211,26 +204,19 @@ public class AddGoodsCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public double getFilteredGoodsCostStatistics() {
             throw new AssertionError("This method should not be called.");
         }
-    }
 
-    /**
-     * A Model stub that contains a single goods receipt.
-     */
-    private class ModelStubWithGoods extends ModelStub {
-        private final GoodsReceipt goodsReceipt;
-
-        ModelStubWithGoods(GoodsReceipt goodsReceipt) {
-            requireNonNull(goodsReceipt);
-            this.goodsReceipt = goodsReceipt;
+        @Override
+        public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
+            throw new AssertionError("This method should not be called.");
         }
 
-        // TODO: This should be changed to override an existing function.
-        public boolean hasExistingGoods(GoodsReceipt goodsReceipt) {
-            requireNonNull(goodsReceipt);
-            return this.goodsReceipt.isSameReceipt(goodsReceipt);
+        @Override
+        public ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

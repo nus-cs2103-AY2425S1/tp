@@ -28,7 +28,6 @@ public class DeleteGoodsCommand extends Command {
             + PREFIX_GOODS_NAME + "Gardenia Milk Bread";
 
     public static final String MESSAGE_SUCCESS = "%1$s has been deleted.";
-    public static final String MESSAGE_FAILURE = "%s does not currently exist.";
 
     private final Name supplierName;
     private final GoodsName goodsName;
