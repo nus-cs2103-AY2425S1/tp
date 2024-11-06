@@ -170,6 +170,33 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-wrap-text: true;
+    -fx-pref-width: 800px;
+    -fx-min-height: 60px;
+}
+
+.result-display .content {
+    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-radius: 0;
+    -fx-padding: 10px;
+}
+
+.result-display .viewport {
+    -fx-background-color: transparent;
+}
+
+.result-display:focused {
+    -fx-background-color: transparent;
+}
+
+.text-area {
+    -fx-background-color: transparent;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+    -fx-wrap-text: true;
+    -fx-alignment: top-left;
 }
 
 .result-display .label {
