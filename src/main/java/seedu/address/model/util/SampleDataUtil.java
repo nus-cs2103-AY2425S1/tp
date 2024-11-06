@@ -26,7 +26,7 @@ public class SampleDataUtil {
                             new RentalInformation("Blk 321 Ang Mo Kio Ave 3, #09-123", "01/04/2018",
                                 "31/12/2024", "15", "2500", "7500", "Jackson;Yummi"),
                             new RentalInformation("Blk 112 Bishan Ave 5, #15-521", "01/01/2019",
-                                "31/12/2026", "15", "2700", "8100", "Jackson;Yummi")
+                                "31/12/2026", "15", "2700", "8100", "Ryan Low;Matthew")
                 ))
             ),
             new Client(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),

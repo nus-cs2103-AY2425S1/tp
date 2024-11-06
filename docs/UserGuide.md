@@ -92,7 +92,8 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
   E.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+
+</box>
 
 ## Command Summary
 <box type="info" seamless>
@@ -142,15 +143,18 @@ Format: `help`
 Adds a client to TrueRental.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
+
 <box type="important" seamless>
 
 **Constraints:** A client must have at least **either** **one phone number** or **one email address**.
+
 </box>
 
 <box type="tip" seamless>
 
 <!--TODO: CLARIFY IF SHOULD WE CAP IN THE APP ITSELF? OR SHOULD WE LET IT BE "INFINITE" -->
 **Tip:** A client can have any number of tags, ranging from 0 to infinity.
+
 </box>
 
 <box type="info" light>
@@ -159,6 +163,7 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 1. `cadd n/John Doe p/98765432 e/johnd@example.com`
 2. `cadd n/Clarice Long e/claricelong@example.com`
 3. `cadd n/Betsy Crowe e/betsycrowe@example.com t/North t/Friend`
+
 </box>
 
 <box type="success" light>
@@ -167,6 +172,7 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 1. `New client added: John Doe; Phone: 98765432; Email: johnd@example.com`
 2. `New client added: Clarice Long; Email: claricelong@example.com`
 3. `New client added: Betsy Crowe; Email: betsycrowe@example.com; Tags: [Friend] [North]`
+
 </box>
 
 ![caddUi](images/caddUi.png)
@@ -182,18 +188,31 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 Adds a rental information for the specific client to TrueRental.
 
 Format: `radd CLIENT_INDEX a/ADDRESS [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
+
+<box type="important" seamless>
+
+**Constraints:**
+* The `CLIENT_INDEX` refers to the index number shown in the displayed client list and must be a positive integer starting from 1.
+* The value of **address** for the rental information cannot be empty.
+
+</box>
+
 <box type="info" light>
 
 **Example inputs**:
-1. `radd 1 a/65 Anderson Road m/3000 d/0`
-2. `radd 1 a/65 Berkeley Road e/2024-10-31`
-3. `radd 3 a/65 Den Road s/2024-09-01 e/2025-08-30 cl/Steven Lim dd/20 m/2750`
+1. `radd 1 a/140 Robinson Road, #03-05, Chow House m/3200 dd/10 d/0`
+2. `radd 1 a/Blk 26 Defu Lane 10 #01-190 e/31/10/2024 m/2350 dd/15`
+3. `radd 3 a/25 Jalan Sempadan #02-06 s/01/09/2024 e/31/08/2025 cl/Steven Lim dd/20 m/2750 d/8250`
+
 </box>
 
 <box type="success" light>
 
 **Example outputs**:
-<!--TODO: @Song Lin -->
+1. `New rental information is added to the client: Address: 140 Robinson Road, #03-05, Chow House; Rental Start Date: —; Rental End Date: —; Rent Due Date: 10; Monthly Rent: $3200.00; Deposit: $0.00; Customer List: —`
+2. `New rental information is added to the client: Address: Blk 26 Defu Lane 10 #01-190; Rental Start Date: —; Rental End Date: 31 Oct 2024; Rent Due Date: 15; Monthly Rent: $2350.00; Deposit: —; Customer List: —`
+3. `New rental information is added to the client: Address: 25 Jalan Sempadan #02-06; Rental Start Date: 01 Sep 2024; Rental End Date: 31 Aug 2025; Rent Due Date: 20; Monthly Rent: $2750.00; Deposit: $8250.00; Customer List: Steven Lim`
+
 </box>
 
 <div style="text-align: right;">
@@ -224,11 +243,13 @@ Format: `rview CLIENT_INDEX`
 <box type="info" seamless>
 
 **Note:** Displays all rental information related to the client at the specified `CLIENT_INDEX`.
+
 </box>
 
 <box type="important" seamless>
 
 **Constraints:** The `CLIENT_INDEX` refers to the index number shown in the displayed client list and must be a positive integer starting from 1.
+
 </box>
 
 <box type="info" light>
@@ -236,6 +257,7 @@ Format: `rview CLIENT_INDEX`
 **Example inputs**:
 1. `rview 1` <br>
 2. `rview 2` <br>
+
 </box>
 
 <box type="success" light>
@@ -243,6 +265,7 @@ Format: `rview CLIENT_INDEX`
 **Example outputs**:
 1. `4 rentals listed!`
 2. `1 rental listed`
+
 </box>
 
 ![rviewUi](images/rviewUi.png)
@@ -274,6 +297,7 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 **Tip:** 
 * You can **remove** a client's existing phone number or email address by providing an empty input after `p/` or `e/` respectively.
 * You can **remove** a client's existing tags by providing an empty input after `t/`.
+
 </box>
 
 <box type="info" light>
@@ -282,6 +306,7 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 1. `cedit 1 p/91234567 e/jasonlee@example.com` 
 2. `cedit 2 n/Betsy Crower t/Twin` 
 3. `cedit 3 p/`
+
 </box>
 
 <box type="success" light>
@@ -290,6 +315,7 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 1. `Edited Client: Jason Lee; Phone: 91234567; Email: jasonlee@example.com; Tags: [Rich]`
 2. `Edited Client: Betsy Crower; Phone: 91231231; Email: alice@outlook.com; Tags: [Twin]`
 3. `Edited Client: Brandon Tan; Email: brandontan@example.com`
+
 </box>
 
 ![ceditUi](images/ceditUi.png)
@@ -304,16 +330,41 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 Edits a specific client's rental information in the address book.
 
-Format: `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
+Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
 
-Note:
-* To edit a client's rental information, it must have at least **one** of the optional fields.
-* Edits the client's rental information at the specified `CLIENT_INDEX` and `RENTAL_INDEX`. The `CLIENT_INDEX` refers to the client index number shown in the displayed client list and the `RENTAL_INDEX` refers to the client's rental index number shown in the displayed rental information list. All indexes **must be a positive integer** 1, 2, 3, …​
-* Existing values will be updated to the input values.
+<box type="important" seamless>
 
-Examples:
-*  `redit c/1 r/1 a/65 Anderson Road m/3000 d/0` Edits the first client, first rental information, address, monthly rent, and deposit amount to `Anderson Road` and `3000` respectively.
-*  `redit c/1 r/2 e/2024-10-31` Edits the first client, second rental information, rental end date to `2024-10-31`.
+**Constraints:**
+* The `CLIENT_INDEX` refers to the index number shown in the displayed client list and must be a positive integer starting from 1.
+* The `RENTAL_INDEX` refers to the client's rental index number shown in the displayed rental information list (run `rview CLIENT_INDEX` to display the rental information list) and must be a positive integer starting from 1.
+* The value of **address** for the rental information cannot be empty (if a/ is specified in the input).
+
+</box>
+
+<box type="tip" seamless>
+
+**Tip:**
+* You can **remove** the value of existing rental start date, rental end date, rent due date, monthly rent, deposit or customer list of the specified rental information by providing an empty value after `s/`, `e/`, `dd/`, `m/`, `d/` or `cl/` respectively.
+
+</box>
+
+<box type="info" light>
+
+**Example inputs**:
+1. `redit 1 r/1 a/10 North Bridge Rd #02-5125 m/3000 d/0`
+2. `redit 1 r/2 e/31/12/2024 dd/1`
+3. `redit 3 r/1 s/01/01/2025 e/ d/12000 cl/Tan Eng Heng`
+
+</box>
+
+<box type="success" light>
+
+**Example outputs**:
+1. `Edited Client's Rental Information: Address: 10 North Bridge Rd #02-5125; Rental Start Date: 01 Apr 2018; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $3000.00; Deposit: $0.00; Customer List: Jackson;Yummi`
+2. `Edited Client's Rental Information: Address: Blk 112 Bishan Ave 5, #15-521; Rental Start Date: 01 Jan 2019; Rental End Date: 31 Dec 2024; Rent Due Date: 1; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Ryan Low;Matthew`
+3. `Edited Client's Rental Information: Address: Blk 8 Hougang Ave 10, #11-2411; Rental Start Date: 01 Jan 2025; Rental End Date: —; Rent Due Date: 15; Monthly Rent: $1500.00; Deposit: $12000.00; Customer List: Tan Eng Heng`
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -330,11 +381,13 @@ Format: `find [k/KEYWORD]... [n/NAME]... [p/PHONE]... [e/EMAIL]... [t/TAG]...`
 <box type="important" seamless>
 
 **Constraints**: Must contain at least one of the optional fields.
+
 </box>
 
 <box type="info" seamless>
 
 **Note:** Utilising the **keyword** will perform a search for all clients for the matching keyword throughout all attributes, including rental information.
+
 </box>
 
 <box type="tip" seamless>
@@ -344,6 +397,7 @@ Format: `find [k/KEYWORD]... [n/NAME]... [p/PHONE]... [e/EMAIL]... [t/TAG]...`
 * Substrings will be matched e.g. `Han` will match <code><b>Han</b>s</code>
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `k/Hans k/Bo` will return `Hans Gruber`, `Bo Yang`
+
 </box>
 
 <box type="info" light>
@@ -352,6 +406,7 @@ Example inputs:
 1. `find n/Jason`
 2. `find k/912`
 3. `find n/Jason Lee p/91231231`
+
 </box>
 
 <box type="success" light>
@@ -360,6 +415,7 @@ Example outputs:
 1. `3 persons listed!`. It will return every client with the name called `jason`.
 2. `3 persons listed!`. It will return every client with the keyword `912` within all its attributes.
 3. `3 persons listed!`. It will return every client with the name `Jason Lee` and phone number `91231231`.
+
 </box>
 
 ![findUi](images/findUi.png)
@@ -381,6 +437,7 @@ Format: `cdelete CLIENT_INDEX`
 <box type="info" seamless>
 
 **Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+
 </box>
 
 * Deletes the client at the specified `CLIENT_INDEX` and all related rental information.
@@ -409,6 +466,7 @@ Format: `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`
 <box type="info" seamless>
 
 **Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+
 </box>
 
 * Deletes the rental information at the specified `RENTAL_INDEX` from the client at the specified `CLIENT_INDEX`.
@@ -444,6 +502,7 @@ Format: `clear`
 <box type="info" seamless>
 
 **Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+
 </box>
 
 <div style="text-align: right;">
@@ -464,12 +523,14 @@ Navigates through all previously entered commands.
 **Constraints:** 
 * If there are no more previous commands, it will display the last command within the command history in the command box.
 * If there are no more next commands, it will display an empty command in the command box.
+
 </box>
 
 <box type="info" seamless>
 
 **Note:** 
 * All commands within the command history will be cleared upon exiting the TrueRental application.
+
 </box>
 
 <box type="info" light>
@@ -481,6 +542,7 @@ Navigates through all previously entered commands.
 4. `rview 1`
 5. `list`
 6. `cdelete 2`
+
 </box>
 
 <box type="success" light>
@@ -515,7 +577,8 @@ Navigates through all previously entered commands.
     Expected: `cdelete 3` is shown in the command box.
 13. Step 13: Press down-arrow key on the keyboard.<br>
     Expected: : Nothing is shown in the command box.
- </box>
+
+</box>
 
 ### Exporting data: `export`
 
@@ -554,6 +617,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`
