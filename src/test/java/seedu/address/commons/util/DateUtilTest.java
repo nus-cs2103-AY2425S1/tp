@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -46,9 +47,18 @@ public class DateUtilTest {
     }
 
     @Test
-    public void formatDateTimeForDisplay_validDateTime_returnsFormattedString() {
+    public void formatter_validDateTime_returnsFormattedString() {
         LocalDateTime dateTime = LocalDateTime.of(2023, 10, 1, 12, 30);
         String expected = "October 01, 2023, 12:30 PM";
         assertEquals(expected, DateUtil.FORMATTER.format(dateTime));
     }
+
+    @Test
+    public void formatter_validDateTime_returnsFormattedStringCorrectly() {
+        LocalDateTime dateTime = LocalDateTime.of(2023, 1, 1, 12, 30);
+        // pm is invalid. It should be PM
+        String invalid = "January 01, 2023, 12:30 pm";
+        assertNotEquals(invalid, DateUtil.FORMATTER.format(dateTime));
+    }
+
 }

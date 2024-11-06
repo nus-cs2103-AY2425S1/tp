@@ -1,7 +1,6 @@
 package seedu.address.commons.util;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DateUtil {
 
     /**
-     * The date time formatter for displaying dates.
+     * The date time formatter for displaying dates and times.
      */
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a")
             .withLocale(Locale.US);
