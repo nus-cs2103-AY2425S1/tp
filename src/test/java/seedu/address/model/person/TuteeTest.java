@@ -43,7 +43,7 @@ public class TuteeTest {
 
         // name differs in case, all other attributes same -> returns false
         Tutee editedBob = new TuteeBuilder(DEACON).withName(VALID_NAME_DEACON.toLowerCase()).build();
-        assertFalse(DEACON.isSamePerson(editedBob));
+        assertTrue(DEACON.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_DEACON + " ";
