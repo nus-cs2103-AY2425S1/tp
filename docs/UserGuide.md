@@ -121,7 +121,7 @@ By following these sections, you can quickly find the information you need and m
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -168,7 +168,20 @@ Adds Betsy Crowe as a patient with her son Bob Builder as her emergency contact 
 
 Shows a list of every patient in the address book.
 
-Format: `list`
+Format: `list [SORT_ORDER]`
+
+<div markdown="block" class="alert alert-info">
+
+Valid inputs for sort order parameter: `timeadded`, `timeadded asc`, `timeadded desc`, `name`, `name asc`, `name desc`
+
+* `SORT_ORDER` parameter is **optional**. If parameter is not provided, the patients listed will be sorted in the order they were added. The patient who was added the most recently will be at the bottom of the list.
+* `timeadded`, `timeadded asc` and `timeadded desc` will sort the patient list according to the time they were added to Medconnect.
+* `timeadded` and `timeadded asc` will sort the patient list from least to most recently added. `timeadded desc` will sort the patient list from most to least recently added.
+<br><br>
+* `name`, `name asc` and `name desc` will sort the patient list according to their name in alphabetical order.
+* `name` and `name asc` will sort by the patients' names from A to Z. `name desc` will sort by the patients' names from Z to A.
+
+</div>
 
 [↑ Back to top](#table-of-contents)
 
@@ -420,7 +433,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`|
 | **Find Doctor** | `finddoc KEYWORD [MORE_KEYWORDS]` <br> e.g., `find Tan Sheeran`|
 | **Help**   |`help`|
-| **List**   |`list`|
+| **List**   |`list [SORT_ORDER]` <br> e.g., `list timeadded desc`|
 | **List Archive Files** | `listArchives`|
 | **Load Archive File** | `loadArchive FILE_NAME` <br> e.g., `loadArchive addressbook-20241106_010856.json`|
 | **Redo**   |`redo`|
