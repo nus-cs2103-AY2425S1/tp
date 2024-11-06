@@ -2,10 +2,7 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 
@@ -27,14 +24,6 @@ public class ResultDisplay extends UiPart<Region> {
     public ResultDisplay() {
         super(FXML);
 
-    }
-
-    private void disableScrollbarButtons() {
-        for (Node node : resultDisplay.lookupAll(".scroll-bar")) {
-            if (node instanceof ScrollBar scrollBar) {
-                scrollBar.setDisable(true);
-            }
-        }
     }
 
     public void setFeedbackToUser(String feedbackToUser) {
