@@ -151,9 +151,10 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
         return internalList
                 .stream()
                 .filter(sca ->
-                        sca.getStudent().getMatricNumber().equals(compMatricNumber)
-                        && sca.getCourse().isConflictCourse(compCourse) && sca.getTutorial().equals(compTutorial)
-                )
+                                sca.getStudent().getMatricNumber().equals(compMatricNumber)
+                                        && sca.getCourse().isConflictCourse(compCourse) && sca.getTutorial()
+                                        .equals(compTutorial)
+                       )
                 .findFirst()
                 .orElseThrow(() -> new ScaNotFoundException(notFoundErrorMessage));
     }

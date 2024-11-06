@@ -49,9 +49,11 @@ public class StudentCourseAssociationListTest {
         tags.add(new Tag("tag1"));
 
         student1 = new Person(new MatriculationNumber("A1234567X"), new Name("Alice"),
-                new Phone("12345678"), new Email("student1@example.com"), new Address("123 Street"), tags);
+                              new Phone("12345678"), new Email("student1@example.com"), new Address("123 Street"),
+                              tags);
         student2 = new Person(new MatriculationNumber("A7654321X"), new Name("Amy"),
-                new Phone("87654321"), new Email("student2@example.com"), new Address("456 Avenue"), tags);
+                              new Phone("87654321"), new Email("student2@example.com"), new Address("456 Avenue"),
+                              tags);
         course1 = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         course2 = new Course(new CourseCode("CS2020"), new CourseName("Data Structures"));
         tutorial1 = new Tutorial("T01", course1);

@@ -131,9 +131,9 @@ z.background {
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1f1f2e, 20%);
-     -fx-border-color: derive(#20202e, 10%);
-     -fx-border-top-width: 1px;
+    -fx-background-color: derive(#1f1f2e, 20%);
+    -fx-border-color: derive(#20202e, 10%);
+    -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -213,8 +213,8 @@ z.background {
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {

@@ -29,7 +29,7 @@ class JsonSerializableStudentCourseAssociationList {
      */
     @JsonCreator
     public JsonSerializableStudentCourseAssociationList(@JsonProperty("scas")
-                                                            List<JsonAdaptedStudentCourseAssociation> scas) {
+                                                        List<JsonAdaptedStudentCourseAssociation> scas) {
         this.scas = (scas != null) ? scas : new ArrayList<>();
     }
 
