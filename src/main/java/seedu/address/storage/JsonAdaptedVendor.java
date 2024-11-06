@@ -17,6 +17,7 @@ import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 class JsonAdaptedVendor extends JsonAdaptedPerson {
 
@@ -60,7 +61,7 @@ class JsonAdaptedVendor extends JsonAdaptedPerson {
 
         for (JsonAdaptedWedding wedding : getWeddings()) {
             if (!Wedding.isValidWeddingName(wedding.getWeddingName())) {
-                throw new IllegalValueException(Wedding.MESSAGE_CONSTRAINTS);
+                throw new IllegalValueException(WeddingName.MESSAGE_CONSTRAINTS);
             }
             vendorWeddings.add(wedding.toModelType());
         }
