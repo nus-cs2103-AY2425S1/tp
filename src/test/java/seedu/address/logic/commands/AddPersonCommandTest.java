@@ -200,6 +200,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Optional<Person> findPerson(int personId) {
             throw new AssertionError("This method should not be called.");
         }

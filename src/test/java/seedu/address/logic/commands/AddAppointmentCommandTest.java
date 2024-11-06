@@ -3,9 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.AddAppointmentCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON_P;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -53,7 +55,8 @@ public class AddAppointmentCommandTest {
     public void execute_duplicatePerson_throwsCommandException() {
         AppointmentDescriptor validAppointmentDescriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
         Appointment validAppointment = new AppointmentBuilder().build();
-        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(validAppointmentDescriptor, 1);
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(validAppointmentDescriptor,
+            validAppointment.getPersonId());
         AddAppointmentCommandTest.ModelStub modelStub = new AddAppointmentCommandTest
                 .ModelStubWithAppointment(validAppointment);
 
@@ -209,8 +212,13 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
+        public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Optional<Person> findPerson(int personId) {
-            return Optional.of(BENSON_P);
+            return Optional.of(BOB);
         }
 
         @Override
@@ -258,6 +266,13 @@ public class AddAppointmentCommandTest {
             requireNonNull(appointmentDescriptor);
             return this.appointment.isSameAppointment(appointmentDescriptor);
         }
+
+        @Override
+        public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor, Person person) {
+            requireNonNull(appointmentDescriptor);
+            return this.appointment.isSameAppointment(appointmentDescriptor)
+                && this.appointment.getPerson().equals(person);
+        }
     }
 
     private class ModelStubAcceptingAppointmentAdded extends AddAppointmentCommandTest.ModelStub {
@@ -272,6 +287,12 @@ public class AddAppointmentCommandTest {
         @Override
         public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor) {
             requireNonNull(appointmentDescriptor);
+            return appointmentsAdded.stream().anyMatch(appointmentDescriptor::isSameAppointment);
+        }
+
+        @Override
+        public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor, Person person) {
+            requireAllNonNull(appointmentDescriptor, person);
             return appointmentsAdded.stream().anyMatch(appointmentDescriptor::isSameAppointment);
         }
 

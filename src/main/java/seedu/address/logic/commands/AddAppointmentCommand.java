@@ -62,7 +62,11 @@ public class AddAppointmentCommand extends AddCommand {
      */
     @Override
     protected boolean alreadyExists(Model model) {
-        return model.hasAppointment(appointmentDescriptor);
+        Optional<Person> personOptional = model.findPerson(personId);
+        if (personOptional.isEmpty()) {
+            return false;
+        }
+        return model.hasAppointment(appointmentDescriptor, personOptional.get());
     }
 
     /**
