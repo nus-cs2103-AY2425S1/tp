@@ -91,6 +91,16 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
     }
 
     /**
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the appointment book,
+     * and is assigned to the same person.
+     */
+    public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor, Person person) {
+        requireAllNonNull(appointmentDescriptor, person);
+        return appointments.containsAppointment(appointmentDescriptor, person);
+    }
+
+
+    /**
      * Adds an appointment to the appointment book.
      * The appointment must not already exist in the appointment book.
      */

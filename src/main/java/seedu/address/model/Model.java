@@ -133,6 +133,12 @@ public interface Model {
     boolean hasAppointment(AppointmentDescriptor appointmentDescriptor);
 
     /**
+     * Returns true if an appointment descriptor with the same identity as {@code appointment} exists in the appt book,
+     * and that appointment is assigned to the same person.
+     */
+    boolean hasAppointment(AppointmentDescriptor appointmentDescriptor, Person person);
+
+    /**
      * Deletes the given appointment.
      * The appointment must exist in the appointment book.
      */

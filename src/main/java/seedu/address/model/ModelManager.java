@@ -197,6 +197,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor, Person person) {
+        requireNonNull(appointmentDescriptor);
+        return appointmentBook.hasAppointment(appointmentDescriptor, person);
+    }
+
+    @Override
     public void deleteAppointment(Appointment target) {
         appointmentBook.removeAppointment(target);
     }

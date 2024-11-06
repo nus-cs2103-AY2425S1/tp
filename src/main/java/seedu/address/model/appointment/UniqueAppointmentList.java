@@ -48,6 +48,16 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
+     * Returns true if the list contains an equivalent appointment as the given argument.
+     */
+    public boolean containsAppointment(AppointmentDescriptor appointmentDescriptorToCheck, Person personToCheck) {
+        requireAllNonNull(appointmentDescriptorToCheck, personToCheck);
+        return internalList.stream()
+            .filter(appointmentDescriptorToCheck::isSameAppointment)
+            .anyMatch(appointment -> appointment.getPerson().equals(personToCheck));
+    }
+
+    /**
      * Adds an appointment to the list.
      * The appointment must not already exist in the list.
      */
