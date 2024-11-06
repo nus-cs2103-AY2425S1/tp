@@ -33,7 +33,7 @@ public class TagDeleteCommand extends Command {
             + "t/Jane Lim & Tom Koh";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed existing Tag(s): '%1$s' from Contact: '%2$s'."
-            + "\n" + "Contact: '%3$s' has been removed from Wedding(s): '%4$s'.";
+            + "\n" + "Contact: '%2$s' has been removed from Wedding(s): '%1$s'.";
     public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: '%1$s' does not exist in the address book.";
     public static final String MESSAGE_TAG_DOESNT_EXIST = "Given Tag(s): '%1$s' do not exist for Contact: '%2$s'.";
 
@@ -141,7 +141,6 @@ public class TagDeleteCommand extends Command {
 
         model.deletePersonInWedding(editedPerson, tagsToDelete);
         return String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsToDelete),
-                Messages.getName(editedPerson), Messages.getName(editedPerson),
-                Messages.tagSetToString(tagsToDelete));
+                Messages.getName(editedPerson));
     }
 }

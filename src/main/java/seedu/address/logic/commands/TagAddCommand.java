@@ -39,7 +39,7 @@ public class TagAddCommand extends Command {
             + PREFIX_TAG + "Jane Lim & Tom Koh";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tag(s) '%1$s' to Contact: '%2$s'." + "\n"
-            + "Contact: '%3$s' has been added to Wedding(s): '%4$s'.";
+            + "Contact: '%2$s' has been added to Wedding(s): '%1$s'.";
     public static final String MESSAGE_DUPLICATE_TAGS = "Contact '%1$s' already has the Tag(s) '%2$s'.";
     public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: '%1$s' does not exist in the address book.";
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet."
@@ -132,8 +132,7 @@ public class TagAddCommand extends Command {
             if (tagsInBoth.isEmpty() && !tagsToAdd.isEmpty()) {
                 // if there are no duplicates, this is a clean addition
                 return String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.tagSetToString(tagsToAdd),
-                        Messages.getName(editedPerson), Messages.getName(editedPerson),
-                        Messages.tagSetToString(tagsToAdd));
+                        Messages.getName(editedPerson));
             } else { // if there are some duplicates
                 // gets the tags that we actually want to add
                 String nonDuplicateTagsExist = String.format(MESSAGE_ADD_TAG_SUCCESS + "\n",
