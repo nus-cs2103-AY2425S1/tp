@@ -55,7 +55,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedCompany jsonAdaptedCompany : companies) {
             Company company = jsonAdaptedCompany.toModelType();
             if (addressBook.hasCompany(company)) {
-                logger.warning(JsonSerializableAddressBook.class + " contains duplicate companies.");
+                logger.info("Duplicate companies detected.");
                 throw new IllegalValueException(MESSAGE_DUPLICATE_COMPANY);
             }
             addressBook.addCompany(company);

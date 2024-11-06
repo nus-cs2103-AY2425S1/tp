@@ -49,35 +49,37 @@ public class JsonAdaptedApplication {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Application
      */
     public Application toModelType() throws IllegalValueException {
+        logger.info("Attempting to convert to " + Application.class + "...");
+
         if (name == null) {
-            logger.warning("Missing `name` field.");
+            logger.info("Missing `name` field.");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
-            logger.warning("`name` has invalid format.");
+            logger.info("`name` has invalid format.");
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
 
         if (description == null) {
-            logger.warning("Missing `description` field.");
+            logger.info("Missing `description` field.");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
-            logger.warning("`description` has invalid format.");
+            logger.info("`description` has invalid format.");
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
 
         if (appStatus == null) {
-            logger.warning("Missing `appStatus` field.");
+            logger.info("Missing `appStatus` field.");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AppStatus.class.getSimpleName()));
         }
         if (!AppStatus.isValidStatus(appStatus)) {
-            logger.warning("`appStatus` has invalid format.");
+            logger.info("`appStatus` has invalid format.");
             throw new IllegalValueException(AppStatus.MESSAGE_CONSTRAINTS);
         }
         final AppStatus modelAppStatus = new AppStatus(appStatus);

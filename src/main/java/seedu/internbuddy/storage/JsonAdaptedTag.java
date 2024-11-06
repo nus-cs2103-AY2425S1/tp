@@ -44,8 +44,9 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
+        logger.info("Attempting to convert to " + Tag.class + "...");
         if (!Tag.isValidTagName(tagName)) {
-            logger.warning("`tag` has invalid format.");
+            logger.info("`tag` has invalid format.");
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(tagName);
