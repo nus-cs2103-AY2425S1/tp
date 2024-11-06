@@ -32,7 +32,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.TrackCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.CategoryContainsKeywordsPredicate;
+import seedu.address.model.person.CategoryContainsKeywordPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.company.Company;
@@ -100,7 +100,7 @@ public class AddressBookParserTest {
     public void parseCommand_track() throws Exception {
         String keyword = "student";
         TrackCommand command = (TrackCommand) parser.parseCommand(TrackCommand.COMMAND_WORD + " " + keyword);
-        assertEquals(new TrackCommand(new CategoryContainsKeywordsPredicate(keyword)), command);
+        assertEquals(new TrackCommand(new CategoryContainsKeywordPredicate(keyword)), command);
     }
 
     @Test

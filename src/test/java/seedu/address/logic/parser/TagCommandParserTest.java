@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NON_POSITIVE_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -30,17 +31,26 @@ public class TagCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        String userInput = "1 invalidTag";
+        // Missing tags or index should throw format error
+        String missingTagInput = "1";
+        String missingIndexInput = "t/friend";
+        String emptyInput = "";
 
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, missingTagInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, missingIndexInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, emptyInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_emptyTags_returnsOptionalEmpty() {
-        // No tags provided after t/
-        String userInput = "1";
+    public void parse_invalidIndex_throwsParseException() {
+        // Index is 0 or signed or non-integer
+        assertParseFailure(parser, "0 t/friend", MESSAGE_NON_POSITIVE_INDEX);
+        assertParseFailure(parser, "-1 t/friend", MESSAGE_NON_POSITIVE_INDEX);
+        assertParseFailure(parser, "e t/friend", MESSAGE_NON_POSITIVE_INDEX);
 
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
     }
 
     @Test

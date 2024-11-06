@@ -4,3 +4,4 @@ coverage:
     - "src/main/java/seedu/address/ui/ContactDisplay.java"
     - "src/main/java/seedu/address/ui/MainWindow.java"
     - "src/main/java/seedu/address/ui/PersonListPanel.java"
+    - "src/main/java/seedu/address/ui/PersonCard.java"

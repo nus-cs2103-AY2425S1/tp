@@ -18,15 +18,17 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
+      <HBox spacing="10" alignment="CENTER_LEFT">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="nameLabel" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="categoryLabel" text="\$category" styleClass="cell_cat_label" />
       </HBox>
+      <Label fx:id="phoneLabel" text="\$phone" styleClass="cell_small_label" />
     </VBox>
   </GridPane>
 </HBox>
