@@ -1,11 +1,5 @@
 package seedu.address.commons.util;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Event;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Todo;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -13,6 +7,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.HashSet;
+
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 
 /**
  * Helper functions for handling strings.

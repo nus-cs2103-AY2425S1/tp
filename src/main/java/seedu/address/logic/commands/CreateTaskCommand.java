@@ -10,10 +10,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.Todo;
 
 /**
  * Adds a Task to the address book.
