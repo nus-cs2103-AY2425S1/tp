@@ -1079,7 +1079,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `addEcName 1 en/John Doe`<br>
        Expected: First student's emergency contact name will be updated to "John Doe". Name and emergency contact name will be shown in the status message.
 
-    5. Other incorrect addEcName commands to try: `addEcName`, `addEcName hhhh en/Jack` <br>
+    5. Other incorrect addEcName commands to try: `addEcName`, `addEcName hhhh en/Jack`<br>
        Expected: An error message is shown which includes the correct format of the addEcName command to follow. 
    
 2. _{ more test cases …​ }_
