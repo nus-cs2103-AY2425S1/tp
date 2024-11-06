@@ -35,7 +35,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        if (isDeletionConfirmed()) {
+        if (isClearConfirmed()) {
             model.setAddressBook(new AddressBook());
             return new CommandResult(String.format(MESSAGE_SUCCESS));
         }
@@ -48,7 +48,7 @@ public class ClearCommand extends Command {
      *
      * @return true if the user confirms clear, false otherwise.
      */
-    private boolean isDeletionConfirmed() {
+    private boolean isClearConfirmed() {
         return confirmationController.isConfirmed("Confirm Clear", String.format(MESSAGE_CONFIRMATION));
     }
 }

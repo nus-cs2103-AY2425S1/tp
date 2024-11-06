@@ -53,7 +53,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Ui : showAlertDialogAndWait()
+DeleteCommand -> Ui : isDeletionConfirmed()
 activate Ui
 
 Ui --> DeleteCommand
