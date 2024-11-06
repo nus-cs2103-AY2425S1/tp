@@ -123,7 +123,11 @@ Navigate here for common issues that may arise during use of DocTrack.
 
 ## Interacting with DocTrack
 
-All interactions with the DocTrack platform are done through a series of **commands** entered by the user. These commands allow you to perform various **tasks**, such as adding, editing, listing, and managing persons/appointments. The commands are designed to be flexible and user-friendly, allowing **data fields** in any order, handling multiple entries for specific fields.
+All interactions with the DocTrack platform are done through a series of **commands** entered by the user. 
+These commands allow you to perform various **tasks**, such as adding, editing, listing, deleting, finding,
+and clearing persons/appointments. The commands are designed to be flexible and user-friendly, allowing **data fields** in any order, handling multiple entries for specific fields.
+
+<box type="tip" light>
 
 Here are some **key points** to keep in mind when using commands:
 
@@ -143,17 +147,13 @@ Here are some **key points** to keep in mind when using commands:
 - You can add fields in **any order**. <br>
   _**Example:** If the command specifies `n/NAME p/PHONE_NUMBER`, then `p/PHONE_NUMBER n/NAME` is also acceptable._
 
-- Format of `DATE_TIME` is `YYYY:MM:DD hh:mm:ss`. <br>
-  _**Example:** `2024-12-01 09:30:00`._
-
-- Format of `DATE` is `YYYY-MM-DD`. <br>
-  _**Example:** `2024-12-01`._
-
 - If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, 
   `list appt`, `exit` and `clear`), they will be ignored. <br>
  _**Example:** If the command specifies `help 123`, then it will be interpreted as `help`._
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is because some space characters surrounding line-breaks may be omitted when copied over.
+
+</box>
 
 <br>
 
@@ -269,7 +269,7 @@ Deletes the specified person from the address book.
 
 - Deletes the person at the specified `INDEX`.
 
-<box type="warning" light seamless>
+<box type="warning" light>
 
 **Warning:** This action is irreversible. Ensure you have selected the correct person before deleting.
 
@@ -288,7 +288,7 @@ Deletes all entries from the address book.
 
 **Format**: `clear person`
 
-<box type="warning" light seamless>
+<box type="warning" light>
 
 **Warning:** This action is irreversible. Ensure you have a backup of the patient data before clearing. 
 
@@ -351,6 +351,7 @@ Edits an existing appointment in DocTrack.
 - Edits the appointment at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
+- The format of `DATE_TIME` is `YYYY/MM/DD HH:mm:ss`. For example, `29/03/2025 10:30:00`.
 
 **Examples**:
 
@@ -383,7 +384,7 @@ Deletes the specified appointment from DocTrack.
 
 - Deletes the appointment at the specified `INDEX`.
 
-<box type="warning" light seamless>
+<box type="warning" light>
 
 **Warning:** This action is irreversible. Ensure you have selected the correct appointment before deleting.
 
@@ -401,7 +402,7 @@ Deletes all entries from the appointment book.
 
 **Format**: `clear appt`
 
-<box type="warning" light seamless>
+<box type="warning" light>
 
 **Warning:**
 This action is irreversible. Ensure you have a backup of the appointment data before clearing.
@@ -453,7 +454,7 @@ AddressBook and AppointmentBook data are saved in the hard disk automatically af
 
 For advanced users, feel free to update patient and appointment data directly by editing the [data files](#faq) in the `data` folder.
 
-<box type="warning" light seamless>
+<box type="warning" light>
 
 **Caution:**
 
