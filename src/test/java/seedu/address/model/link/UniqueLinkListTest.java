@@ -8,10 +8,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalOwners.ALICE;
 import static seedu.address.testutil.TypicalOwners.AMY;
 import static seedu.address.testutil.TypicalOwners.CARL;
-import static seedu.address.testutil.TypicalOwners.DANIEL;
 import static seedu.address.testutil.TypicalPets.BELLA;
 import static seedu.address.testutil.TypicalPets.DAISY;
-import static seedu.address.testutil.TypicalPets.MAX;
 import static seedu.address.testutil.TypicalPets.FLUFFY;
 import static seedu.address.testutil.TypicalPets.RUBY;
 
