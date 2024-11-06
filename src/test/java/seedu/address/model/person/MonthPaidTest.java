@@ -24,4 +24,26 @@ public class MonthPaidTest {
             }
         }
     }
+
+    @Test
+    public void equalsMethod() {
+        MonthPaid monthPaid1 = new MonthPaid("2022-12");
+        MonthPaid monthPaid2 = new MonthPaid("2022-12");
+        MonthPaid monthPaid3 = new MonthPaid("2022-11");
+
+        // same object -> returns true
+        assertTrue(monthPaid1.equals(monthPaid1));
+
+        // same values -> returns true
+        assertTrue(monthPaid1.equals(monthPaid2));
+
+        // different values -> returns false
+        assertFalse(monthPaid1.equals(monthPaid3));
+
+        // null -> returns false
+        assertFalse(monthPaid1.equals(null));
+
+        // different type -> returns false
+        assertFalse(monthPaid1.equals("2022-12"));
+    }
 }

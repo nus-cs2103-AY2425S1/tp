@@ -169,6 +169,19 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void equalsMethod() {
+        UniquePersonList uniquePersonList2 = new UniquePersonList();
+        UniquePersonList uniquePersonList3 = new UniquePersonList();
+        uniquePersonList2.add(ALICE);
+        uniquePersonList.add(ALICE);
+        uniquePersonList3.add(BOB);
+        assertEquals(uniquePersonList, uniquePersonList2);
+        assertFalse(uniquePersonList.equals(uniquePersonList3));
+        assertTrue(uniquePersonList.equals(uniquePersonList));
+        assertFalse(uniquePersonList.equals(null));
+    }
+
+    @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
