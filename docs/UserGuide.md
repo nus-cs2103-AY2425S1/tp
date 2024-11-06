@@ -297,8 +297,8 @@ the constraints of each parameter when used in a command.
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 > e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 >
-> * The command name and prefixes are case-sensitive.
-> e.g. `add` is not the same as `Add`, `c/` is not the same as `C/`.
+> * The command name and prefixes are case-insensitive.
+> e.g. `add` is the same as `ADD`, `c/` is the same as `C/`.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
