@@ -48,11 +48,14 @@ public class JobTest {
         // same object -> returns true
         assertTrue(job.isSameJob(job));
 
-        // same values case insensitive -> returns true
+        // same values, different case -> returns true
         assertTrue(job.isSameJob(new Job("SOFTWARE ENGINEER")));
 
-        // same values case insensitive -> returns true
+        // same values, different case -> returns true
         assertTrue(job.isSameJob(new Job("software engineer")));
+
+        // same values, multiple spaces between words -> returns true
+        assertTrue(job.isSameJob(new Job("Software  Engineer")));
 
         // null -> returns false
         assertFalse(job.isSameJob(null));

@@ -47,7 +47,15 @@ public class Name {
         }
 
         return otherName != null
-                && this.fullName.equalsIgnoreCase(otherName.fullName);
+                && removeExtraSpaces(this.fullName)
+                    .equalsIgnoreCase(removeExtraSpaces(otherName.fullName));
+    }
+
+    /**
+     * Reduces multiple spaces between words to a single space.
+     */
+    private String removeExtraSpaces(String name) {
+        return name.trim().replaceAll("\\s+", " ");
     }
 
     @Override

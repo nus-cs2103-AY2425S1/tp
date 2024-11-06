@@ -48,7 +48,15 @@ public class Job {
         }
 
         return otherJob != null
-                && this.jobName.equalsIgnoreCase(otherJob.jobName);
+                && removeExtraSpaces(this.jobName)
+                    .equalsIgnoreCase(removeExtraSpaces(otherJob.jobName));
+    }
+
+    /**
+     * Reduces multiple spaces between words to a single space.
+     */
+    private String removeExtraSpaces(String name) {
+        return name.trim().replaceAll("\\s+", " ");
     }
 
 
