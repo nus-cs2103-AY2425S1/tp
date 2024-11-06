@@ -2,6 +2,11 @@
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 
+> **Disclaimer:** Our team has decided to add the `spleetwaise.commons` package as a common package for classes 
+> that are used by multiple components, in our case, `address` and `transaction`. This is an enhancement for 
+> modularity on top of the original design of the AddressBook-Level3 project, which only have a `seedu.address` 
+> package. The refactoring is almost 90% complete, and we are working on the remaining 10%.
+
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
