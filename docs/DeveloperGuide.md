@@ -685,13 +685,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
-* **Appointment**: A scheduled meeting between a patient and a medical professional, encompassing a specific date, time period and description.
+* **Appointment**: A scheduled meeting between a patient and a doctor, encompassing a specific date, time period and description.
 
 * **Appointment List**: A list of appointments of all patients, displayed chronologically on the right hand side of the application.
 
-* **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
+* **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient. It should start with a letter (S, T, G, F or M), followed by 7 digits, and end with a letter.
 
-* **Priority**: Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
+* **Priority**: Indicates the urgency of a patient’s condition, with values like none, low, medium, or high to assist doctors in managing urgent cases.
 
 * **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
 

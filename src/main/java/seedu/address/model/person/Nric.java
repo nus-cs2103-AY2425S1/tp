@@ -8,10 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)} )}
  */
 public class Nric {
-    public static final String MESSAGE_CONSTRAINTS = "NRIC should start with S, T, F or G, "
-            + "followed by 7 digits, and end with a letter.";
+    public static final String MESSAGE_CONSTRAINTS = "NRIC should start with a letter (S, T, G, F or M) "
+            + "followed by 7 digits, and end with a letter. It should not be blank.";
     //Regex accounts for both uppercase and lowercase NRIC and FIN formats
-    public static final String VALIDATION_REGEX = "(?i)^[STFG]\\d{7}[A-Z]$";
+    public static final String VALIDATION_REGEX = "(?i)^[STFGM]\\d{7}[A-Z]$";
 
     public final String value;
 
