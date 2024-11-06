@@ -44,7 +44,7 @@ public class AddPersonCommand extends Command {
             + "This customer has 2 or more similar tags, "
             + "verify if this is a mistake.\n";
     public static final String MESSAGE_SIMILAR_NAME_WARNING = "Note: "
-            + "A person with similar name already exists in the address book., "
+            + "A person with similar name already exists in the address book, "
             + "verify if this is a mistake.\n";
 
     private final Person toAdd;
