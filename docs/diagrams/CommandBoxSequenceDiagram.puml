@@ -11,21 +11,27 @@ end box
 
 
 [-> CommandBox: handleCommandEntered()
+activate CommandBox
 CommandBox -> TextField: getText()
+activate TextField
 TextField --> CommandBox: commandText
+deactivate TextField
 
 alt commandText is empty
     CommandBox --> CommandBox: return
-else commandText not empty
+else else
+    alt CommandException or ParseException
+        CommandExecutor --> CommandBox: throw exception
+        CommandBox -> CommandBox: setStyleToIndicateCommandFailure()
+    else else
     CommandBox -> CommandExecutor: execute(commandText)
+    activate CommandExecutor
     CommandExecutor --> CommandBox: return CommandResult
+    deactivate CommandExecutor
     CommandBox -> CommandHistory: add(commandText)
     CommandBox -> TextField: setText("")
+    end
 end
-
-alt CommandException or ParseException
-    CommandExecutor -> CommandBox: throw exception
-    CommandBox -> CommandBox: setStyleToIndicateCommandFailure()
-    CommandBox -> TextField: getStyleClass().add(ERROR_STYLE_CLASS)
-end
+[<--CommandBox
+deactivate CommandBox
 @enduml
