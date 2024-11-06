@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents an observer in the observer design pattern.
  * <p>
@@ -19,4 +21,5 @@ public interface Observer {
      * </p>
      */
     public void update();
+    public void update(Person person);
 }

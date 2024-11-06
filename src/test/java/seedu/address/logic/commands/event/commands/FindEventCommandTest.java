@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.event.commands.FindEventCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.TECH_CONFERENCE;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -18,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-
+import seedu.address.model.person.PersonInEventPredicate;
 
 
 public class FindEventCommandTest {
@@ -66,5 +69,14 @@ public class FindEventCommandTest {
         String expected = FindEventCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_EVENT + "}";
         assertEquals(expected, findEventCommand.toString());
         System.out.println(eventToView.toString());
+    }
+
+    @Test
+    public void execute_validIndex_success() {
+        FindEventCommand findEventCommand = new FindEventCommand(Index.fromOneBased(1));
+        String expectedMsg = String.format(MESSAGE_SUCCESS, TECH_CONFERENCE.getName());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(new PersonInEventPredicate(new Event(TECH_CONFERENCE)));
+        assertCommandSuccess(findEventCommand, model, expectedMsg, expectedModel);
     }
 }

@@ -16,7 +16,7 @@ import seedu.address.model.role.Role;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class PersonCard extends UiPart<Region> implements Observer {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -96,5 +96,18 @@ public class PersonCard extends UiPart<Region> {
         if (teleUsername != null) {
             telegramUsername.setText("@" + teleUsername);
         }
+    }
+
+    @Override
+    public void update(Person person) {
+        roles.getChildren().clear();
+        person.getRoles().stream()
+                .sorted(Comparator.comparing(Role::getRoleName))
+                .forEach(this::addLabel);
+    }
+
+    @Override
+    public void update() {
+
     }
 }

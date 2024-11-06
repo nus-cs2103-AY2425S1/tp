@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -69,5 +70,10 @@ public class EventCard extends UiPart<Region> implements Observer {
         sponsors.setText("Sponsors: " + event.getSponsors().size());
         volunteers.setText("Volunteers: " + event.getVolunteers().size());
         total.setText("Total: " + event.getTotalNumberOfDistinctContacts());
+    }
+
+    @Override
+    public void update(Person person) {
+
     }
 }
