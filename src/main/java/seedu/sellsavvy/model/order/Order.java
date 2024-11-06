@@ -115,4 +115,8 @@ public class Order {
         Status status = getStatus();
         return new Order(item, quantity, date, status);
     }
+
+    public Boolean isCompleted() {
+        return this.status == Status.COMPLETED;
+    }
 }

@@ -60,7 +60,7 @@ public class MarkOrderCommand extends Command {
         }
 
         Order orderToMark = filteredOrderList.get(index.getZeroBased());
-        if (orderToMark.getStatus() == Status.COMPLETED) {
+        if (orderToMark.isCompleted()) {
             throw new CommandException(MESSAGE_ORDER_ALREADY_MARKED);
         }
 
