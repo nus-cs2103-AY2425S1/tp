@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_NO_CHANGE_DETECTED;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_FIRST_PERSON;
@@ -194,6 +195,14 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(model.getFilteredPersonList().get(0).getName(), descriptor);
         assertCommandFailure(editCommand, model, MESSAGE_NOT_EDITED);
 
+    }
+
+    @Test
+    public void execute_noChangesDescriptor_failure() {
+        Name name = model.getFilteredPersonList().get(0).getName();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(name.toString()).build();
+        EditCommand editCommand = new EditCommand(model.getFilteredPersonList().get(0).getName(), descriptor);
+        assertCommandFailure(editCommand, model, MESSAGE_NO_CHANGE_DETECTED);
     }
 
     @Test
