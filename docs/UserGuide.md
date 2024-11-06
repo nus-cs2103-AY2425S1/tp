@@ -276,13 +276,13 @@ Simply use the same format as `asort`, but replace `asort` with `dsort`.
 ### Deleting a contact or delivery : `delete`
 **<ins>When in the main window**
 
-Deletes the specified contact from the contacts list.
+Deletes the specified contact(s) from the contacts list.
 
 Format: `delete [INDEXES]...`
 
 * Deletes the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
 
 Examples:
 * `list` followed by `delete 2 3` deletes the 2nd and 3rd contact in the contacts list.
@@ -290,7 +290,8 @@ Examples:
 
 **<ins>When in the inspect window**
 
-Deletes the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Deletes the specified delivery or deliveries from the delivery list of a contact.
+* The same rules apply as in the main window section.
 
 Examples:
 * `delete 2` deletes the 2nd delivery in the delivery list of the inspected contact.
