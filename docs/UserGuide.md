@@ -296,8 +296,14 @@
 * Words in `UPPER_CASE` are the compulsory parameters to be supplied by the user.
   e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
   <br>
+* Items in round brackets are compulsory.
+  e.g. `list (e/ph/all)` must be used as `list e` or `list ph` or `list all`.
+  <br>
 * Items in square brackets are optional.
   e.g. `edit INDEX [n/NAME] [e/EMAIL]` can be used as `edit 1 n/John Doe e/johndoe@gmail.com` or `edit 1 n/John Doe`.
+  <br>
+* Items in curly brackets are requirements for the format.
+  e.g. `demote INDEX {must be a positive integer}` means that index must be a positive integer.
   <br>
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -506,7 +512,14 @@
 
   <div class="box" type="tip" seamless>
 
-  **Tip:** All fields are mandatory
+  **Tips:** 
+  * All fields are mandatory
+  * Names should only contain alphanumeric characters and spaces, and it should not be blank
+  * Phone numbers should only contain numbers, and it should be at least 3 digits long
+  * Emails should be of the format local-part@domain
+  * Addresses can take any values, and it should not be blank
+  * Department can take any values, and it should not be blank
+  * Role can take any values, and it should not be blank
   </div>
 
   Examples:
@@ -690,7 +703,14 @@ Example: "find ph n/John".
 
   <div class="box" type="tip" seamless>
 
-  **Tip:** All fields are mandatory
+  **Tips:**
+  * All fields are mandatory
+  * Names should only contain alphanumeric characters and spaces, and it should not be blank
+  * Phone numbers should only contain numbers, and it should be at least 3 digits long
+  * Emails should be of the format local-part@domain
+  * Addresses can take any values, and it should not be blank
+  * Department can take any values, and it should not be blank
+  * Role can take any values, and it should not be blank
   </div>
 
   Examples:
