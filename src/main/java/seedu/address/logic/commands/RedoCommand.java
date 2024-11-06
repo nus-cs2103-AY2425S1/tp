@@ -8,12 +8,14 @@ import seedu.address.model.Model;
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
+    public static final String MESSAGE_SUCCESS = "Successfully redone the latest undone change to contact data!";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Redoes the latest undo by the user, if any.\n"
         + "Example: redo";
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult("This is the redo command");
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
