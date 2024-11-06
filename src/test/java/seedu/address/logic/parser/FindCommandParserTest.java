@@ -25,7 +25,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArgTelegramHandle_throwsParseException() {
-        assertParseFailure(parser, "/h     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "h/     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE));
     }
 
@@ -47,7 +47,7 @@ public class FindCommandParserTest {
             new FindCommand(new TelegramHandleContainsKeywordsPredicate(List.of("@amy123")));
 
         // Test with the correct input format
-        assertParseSuccess(parser, "/h @amy123", expectedFindCommand);
+        assertParseSuccess(parser, "h/@amy123", expectedFindCommand);
     }
 
     @Test
@@ -57,9 +57,9 @@ public class FindCommandParserTest {
             new FindCommand(new TelegramHandleContainsKeywordsPredicate(Arrays.asList("@amy123", "@bob321")));
 
         // Test with the correct input format
-        assertParseSuccess(parser, "/h @amy123 @bob321", expectedFindCommand);
+        assertParseSuccess(parser, "h/@amy123 @bob321", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "/h \n @amy123 \n \t @bob321  \t", expectedFindCommand);
+        assertParseSuccess(parser, "h/ \n @amy123 \n \t @bob321  \t", expectedFindCommand);
     }
 }

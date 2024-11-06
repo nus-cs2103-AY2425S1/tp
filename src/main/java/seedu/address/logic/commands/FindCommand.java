@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEHANDLE;
 
 import java.util.function.Predicate;
 
@@ -20,7 +21,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or Telegram handles "
         + "contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
         + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " alice or " + COMMAND_WORD + " /h @alice";
+        + "Example: " + COMMAND_WORD + " alice or " + COMMAND_WORD + " " + PREFIX_TELEHANDLE + "@alice";
 
     // Use a generic Predicate<Person> to allow both name and handle filtering
     private final Predicate<Person> predicate;
