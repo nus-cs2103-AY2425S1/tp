@@ -34,7 +34,7 @@ The image below shows the different components of HiredFiredPro.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -108,7 +108,7 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
+<br><br>
 
 ### Adding a person: `add`
 
@@ -124,12 +124,14 @@ Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE 
 Examples:
 * `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com i/5.0`
 * `add n/Betsy Crowe j/Software Tester t/friend e/betsycrowe@example.com  p/1234567 i/7 s/Python s/Java`
+<br><br>
 
 ### Listing all persons : `list`
 
 Shows a list of all persons in HiredFiredPro.
 
 Format: `list`
+<br><br>
 
 ### Editing a person : `edit`
 
@@ -150,6 +152,7 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+<br><br>
 
 ### Hiring a person by name and job: `hire`
 
@@ -164,7 +167,7 @@ Format: `hire n/NAME j/JOB`
   `Software Engineer`.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
   `Software Engineer`.
-
+<br><br>
 
 ### Rejecting a person by name and job: `reject`
 
@@ -179,6 +182,7 @@ Format: `reject n/NAME j/JOB`
   `Software Engineer`.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
   `Software Engineer`.
+<br><br>
 
 ### View a person's status by name and job: `view`
 
@@ -197,8 +201,8 @@ Format: `view n/NAME j/JOB`
 Examples:
 * `view n/Alex Yeoh j/Software Engineer` displays the details of candidate Alex Yeoh in the display panel.
 
-
-* ![display-panel](images/Display-Panel.png)
+![display-panel](images/Display-Panel.png)
+<br><br>
 
 ### Locating persons by name: `find`
 
@@ -215,8 +219,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns `Alex Yeoh`, `David Li`
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+<br><br>
 
 ### Deleting a person : `delete`
 
@@ -231,6 +238,7 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in HiredFiredPro.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+<br><br>
 
 ### Sorting persons by interview scores : `sort`
 
@@ -243,22 +251,26 @@ Format: `sort ORDER`
 Examples:
 * `list` followed by `sort a` sorts the entire list of candidates in ascending order based on their interview scores.
 * `find Alice Betsy Charlie` followed by `sort d` sorts the resulting candidate list of the `find` command in descending order based on their interview scores.
+<br><br>
 
 ### Clearing all entries : `clear`
 
 Clears all entries from HiredFiredPro.
 
 Format: `clear`
+<br><br>
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+<br><br>
 
 ### Saving the data
 
 HiredFiredPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<br><br>
 
 ### Editing the data file
 
