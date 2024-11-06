@@ -91,7 +91,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different hours -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_HOURS_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withHours(VALID_HOURS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different subjects -> everything else same (should be user error and should be the same person)

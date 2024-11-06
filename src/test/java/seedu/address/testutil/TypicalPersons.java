@@ -38,30 +38,31 @@ import seedu.address.model.person.Tutor;
 public class TypicalPersons {
 
     public static final Tutor ALICE = new TutorBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withAddress("jurong, 123456").withEmail("alice@example.com")
             .withPhone("94351253").withHours("1")
             .withSubjects("Math").build();
     public static final Tutor BENSON = new TutorBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
+            .withAddress("Clementi, 345212")
             .withEmail("johnd@example.com").withPhone("98765432").withHours("2")
             .withSubjects("english").build();
     public static final Tutor CARL = new TutorBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").withHours("3").build();
+            .withEmail("heinz@example.com").withAddress("wall street, 987543").withHours("3").build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withHours("4")
+            .withEmail("cornelia@example.com").withAddress("10th street, 123456").withHours("4")
             .withSubjects("Math").build();
     public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").withHours("5").withSubjects("English").build();
+            .withEmail("werner@example.com").withAddress("michegan ave, 878777").withHours("5")
+            .withSubjects("English").build();
     public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").withHours("6").build();
+            .withEmail("lydia@example.com").withAddress("little tokyo, 123456").withHours("6").build();
     public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").withHours("7").build();
+            .withEmail("anna@example.com").withAddress("4th street, 897978").withHours("7").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
+            .withEmail("stefan@example.com").withAddress("little india, 123211").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
+            .withEmail("hans@example.com").withAddress("chicago ave, 898888").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Tutor AMY = new TutorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

@@ -88,7 +88,7 @@ public class TutorTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different hours -> returns false
-        editedAlice = new TutorBuilder(ALICE).withAddress(VALID_HOURS_BOB).build();
+        editedAlice = new TutorBuilder(ALICE).withHours(VALID_HOURS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
