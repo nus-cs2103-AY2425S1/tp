@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 

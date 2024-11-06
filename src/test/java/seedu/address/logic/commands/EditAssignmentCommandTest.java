@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalAssignments.GRADE_NULL;
 import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
 import static seedu.address.testutil.TypicalAssignments.STATUS_N;
 import static seedu.address.testutil.TypicalAssignments.STATUS_Y;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 
@@ -15,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -34,7 +34,7 @@ class EditAssignmentCommandTest {
     @BeforeEach
     void setUp() {
         // Create a valid student with an assignment
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(new AddressBook(), new UserPrefs());
         validStudent = new StudentBuilder(HUGH).build();
         originalAssignment = MATH_ASSIGNMENT_SUBMITTED;
         validStudent.addAssignment(originalAssignment);

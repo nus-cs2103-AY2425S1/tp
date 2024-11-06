@@ -30,7 +30,7 @@ import seedu.address.logic.commands.MarkPresentAllCommand;
 import seedu.address.logic.commands.UnmarkPresentAllCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.TutorialGroup;
 
 public class AddressBookParserTest {
