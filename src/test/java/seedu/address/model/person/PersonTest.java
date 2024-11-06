@@ -111,7 +111,7 @@ public class PersonTest {
                 "Updated person should differ from the original person after adding a grade");
 
         // Verify the new grade is present in the updated person but not in the original
-        assertEquals(newGrade, updatedPerson.getGradeList().getGrade(newGrade.getTestName()),
+        assertEquals(newGrade, updatedPerson.getGradeList().getGrade(newGrade.getTestName().toLowerCase()),
                 "Updated person should contain the newly added grade");
         assertNull(originalPerson.getGradeList().getGrade(newGrade.getTestName()),
                 "Original person should not contain the newly added grade");

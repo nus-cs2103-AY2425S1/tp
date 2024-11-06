@@ -32,6 +32,7 @@ public class UnmarkAttendanceCommand extends Command {
             + COMMAND_WORD + " 1" + PREFIX_DATE + "31/01/2024 12:00 \n";
 
     public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Removed attendance for %1$s on %2$s";
+    public static final String MESSAGE_ATTENDANCE_NOT_FOUND = "No attendance record on '%1$s'.";
 
     private final Index targetIndex;
     private final LocalDateTime classDate;
@@ -52,17 +53,21 @@ public class UnmarkAttendanceCommand extends Command {
         requireNonNull(model);
 
         List<Person> lastShownList = model.getFilteredPersonList();
+        String dateString = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT).format(classDate);
 
         if (targetIndex.getZeroBased() < 0 || targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person studentToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        Person studentUnmarked = studentToUnmark.removeAttendance(classDate);
 
+        if (!studentToUnmark.hasAttendance(classDate)) {
+            throw new CommandException(String.format(MESSAGE_ATTENDANCE_NOT_FOUND, dateString));
+        }
+
+        Person studentUnmarked = studentToUnmark.removeAttendance(classDate);
         model.setPerson(studentToUnmark, studentUnmarked);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        String dateString = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT).format(classDate);
         return new CommandResult(
                 String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, studentUnmarked.getName(), dateString));
     }

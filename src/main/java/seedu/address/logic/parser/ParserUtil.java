@@ -8,7 +8,10 @@ import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +30,8 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *Parser
+ * classes.
  */
 public class ParserUtil {
 
@@ -35,10 +39,12 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_FLOAT = "Value is not a valid float.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
+     * and trailing whitespaces will be
      * trimmed.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified index is invalid (not non-zero
+     *                        unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -144,7 +150,11 @@ public class ParserUtil {
     public static LocalDateTime parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT);
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern(AttendanceList.DATE_TIME_FORMAT)
+                .parseDefaulting(ChronoField.ERA, 1)
+                .toFormatter()
+                .withResolverStyle(ResolverStyle.STRICT);
         try {
             return LocalDateTime.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
@@ -200,10 +210,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String value} into a valid score  float
+     * Parses {@code String value} into a valid score float
      * Leading and trailing whitespaces will be trimmed.
+     * The score must be between 0 and 100 (inclusive) with a maximum of 2 decimal places.
      *
-     * @throws ParseException if value is invalid or out of bounds
+     * @param value The string value to be parsed.
+     * @return The parsed score as a float.
+     * @throws ParseException if the value is not a valid number, out of bounds, or has more than 2 decimal places.
      */
     public static float parseScore(String value) throws ParseException {
         requireNonNull(value);
@@ -214,6 +227,12 @@ public class ParserUtil {
             if (res < 0 || res > 100) {
                 throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
             }
+
+            // Check for a maximum of 2 decimal places
+            if (trimmedValue.contains(".") && trimmedValue.split("\\.")[1].length() > 2) {
+                throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
+            }
+
             return res;
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
@@ -221,11 +240,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String value} into a valid weightage float
+     * Parses {@code String value} into a valid weightage float.
      * Leading and trailing whitespaces will be trimmed.
+     * The weightage must be greater than 0 and up to 100, with a maximum of 2 decimal places.
      *
-     * @throws ParseException if value is invalid or out of bounds
+     * @param value The string value to be parsed.
+     * @return The parsed weightage as a float.
+     * @throws ParseException if the value is not a valid number, out of bounds, or has more than 2 decimal places.
      */
+
     public static float parseWeightage(String value) throws ParseException {
         requireNonNull(value);
         String trimmedValue = value.trim();
@@ -235,6 +258,12 @@ public class ParserUtil {
             if (res < 0 || res > 100) {
                 throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
             }
+
+            // Check for a maximum of 2 decimal places
+            if (trimmedValue.contains(".") && trimmedValue.split("\\.")[1].length() > 2) {
+                throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
+            }
+
             return res;
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);

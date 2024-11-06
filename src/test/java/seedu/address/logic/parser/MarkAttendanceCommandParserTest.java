@@ -77,6 +77,9 @@ public class MarkAttendanceCommandParserTest {
 
         // missing hour and minute
         assertParseFailure(parser, "3 d/01/01/2024 m/Attended", MESSAGE_DATE_CONSTRAINTS);
+
+        // invalid day of month
+        assertParseFailure(parser, "3 d/30/02/2024 m/Attended", MESSAGE_DATE_CONSTRAINTS);
     }
 
     @Test
