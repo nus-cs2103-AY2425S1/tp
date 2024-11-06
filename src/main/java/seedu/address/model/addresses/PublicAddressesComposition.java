@@ -25,6 +25,9 @@ public class PublicAddressesComposition {
     public static final String MESSAGE_EDIT_CONSTRAINTS =
             "Public address label does not exists within the same network.";
 
+    public static final String MESSAGE_DUPLICATE_LABEL =
+            "Label %1$s under the network %2$s already exists.";
+
     private final Map<Network, Set<PublicAddress>> publicAddresses;
 
     /**
@@ -222,22 +225,20 @@ public class PublicAddressesComposition {
                         publicAddresses.entrySet().stream(),
                         other.getPublicAddresses().entrySet().stream()
                 )
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (set1, set2) -> {
-                            Set<PublicAddress> combinedSet = new HashSet<>(set1);
-                            set2.stream()
-                                    .filter(addr -> {
-                                        if (combinedSet.stream().anyMatch(existing ->
-                                                existing.getLabel().equalsIgnoreCase(addr.getLabel()))) {
-                                            throw new IllegalArgumentException("F");
-                                        }
-                                        return true;
-                                    })
-                                    .forEach(combinedSet::add);
-                            return combinedSet;
-                        }
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (set1, set2) -> {
+                        Set<PublicAddress> combinedSet = new HashSet<>(set1);
+                        set2.stream()
+                                .filter(addr -> {
+                                    if (combinedSet.stream().anyMatch(existing ->
+                                            existing.getLabel().equalsIgnoreCase(addr.getLabel()))) {
+                                        throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_LABEL,
+                                                addr.getLabel(), addr.getNetwork()));
+                                    }
+                                    return true;
+                                })
+                                .forEach(combinedSet::add);
+                        return combinedSet;
+                    }
                 ));
 
         return new PublicAddressesComposition(combinedAddresses);

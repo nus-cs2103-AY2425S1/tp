@@ -35,8 +35,7 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         + "wallet1 " + PREFIX_PUBLIC_ADDRESS + "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
 
     public static final String MESSAGE_ADDPA_SUCCESS = "Added Person's Public Address: %1$s";
-    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS =
-        "Invalid: person %1$s already has label %2$s under the network %3$s!\n"
+    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: %1$s\n"
             + "You may either:\n"
             + "1. Use another label for the new public address\n"
             + "2. Edit the existing public address for the current label"
@@ -65,10 +64,15 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         PublicAddressesComposition currentPublicAddresses = personToEdit.getPublicAddressesComposition();
         PublicAddressesComposition addedPublicAddresses =
             editPersonDescriptor.getPublicAddresses().orElse(new PublicAddressesComposition());
-        PublicAddressesComposition combinedPublicAddresses = currentPublicAddresses.combineWith(addedPublicAddresses);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, combinedPublicAddresses,
-                updatedTags);
+        try {
+            PublicAddressesComposition combinedPublicAddresses =
+                    currentPublicAddresses.combineWith(addedPublicAddresses);
+            return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, combinedPublicAddresses,
+                    updatedTags);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS, e.getMessage()));
+        }
     }
 
     @Override

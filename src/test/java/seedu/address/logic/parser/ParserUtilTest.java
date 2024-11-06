@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -281,11 +282,14 @@ public class ParserUtilTest {
             VALID_NETWORK + ">" + VALID_BTC_ADDRESS_2
         );
 
-        PublicAddressesComposition expected = new PublicAddressesComposition();
-        Set<PublicAddress> btcAddresses = new HashSet<>();
-        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL));
-        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL));
-        expected.addPublicAddressesToNetwork(Network.BTC, btcAddresses);
+        PublicAddressesComposition expected = new PublicAddressesComposition(
+                Map.of(
+                        Network.BTC, Set.of(
+                                new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL),
+                                new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL)
+                        )
+                )
+        );
 
         assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
     }
@@ -297,11 +301,14 @@ public class ParserUtilTest {
             " " + VALID_NETWORK + " > " + VALID_BTC_ADDRESS_2 + " "
         );
 
-        PublicAddressesComposition expected = new PublicAddressesComposition();
-        Set<PublicAddress> btcAddresses = new HashSet<>();
-        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL));
-        btcAddresses.add(new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL));
-        expected.addPublicAddressesToNetwork(Network.BTC, btcAddresses);
+        PublicAddressesComposition expected = new PublicAddressesComposition(
+                Map.of(
+                        Network.BTC, Set.of(
+                                new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL),
+                                new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL)
+                        )
+                )
+        );
 
         assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
     }
