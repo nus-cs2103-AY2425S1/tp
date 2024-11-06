@@ -22,6 +22,7 @@ public class AppParametersTest {
 
     @Test
     public void parse_validConfigPath_success() {
+        // EP: parse valid config path
         parametersStub.namedParameters.put("config", "config.json");
         expected.setConfigPath(Paths.get("config.json"));
         assertEquals(expected, AppParameters.parse(parametersStub));
@@ -29,12 +30,14 @@ public class AppParametersTest {
 
     @Test
     public void parse_nullConfigPath_success() {
+        // EP: parse null config path
         parametersStub.namedParameters.put("config", null);
         assertEquals(expected, AppParameters.parse(parametersStub));
     }
 
     @Test
     public void parse_invalidConfigPath_success() {
+        // EP: parse invalid config path
         parametersStub.namedParameters.put("config", "a\0");
         expected.setConfigPath(null);
         assertEquals(expected, AppParameters.parse(parametersStub));
@@ -51,19 +54,19 @@ public class AppParametersTest {
     public void equals() {
         AppParameters appParameters = new AppParameters();
 
-        // same values -> returns true
+        // EP: same values -> returns true
         assertTrue(appParameters.equals(new AppParameters()));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(appParameters.equals(appParameters));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(appParameters.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(appParameters.equals(5.0f));
 
-        // different config path -> returns false
+        // EP: different config path -> returns false
         AppParameters otherAppParameters = new AppParameters();
         otherAppParameters.setConfigPath(Paths.get("configPath"));
         assertFalse(appParameters.equals(otherAppParameters));
@@ -71,7 +74,7 @@ public class AppParametersTest {
 
     @Test
     public void hashCodeTest() {
-        // same values -> returns same hashcode
+        // EP: same values -> returns same hashcode
         AppParameters appParameters = new AppParameters();
         AppParameters sameAppParameters = new AppParameters();
 
@@ -101,6 +104,5 @@ public class AppParametersTest {
             return Collections.unmodifiableMap(namedParameters);
         }
     }
-
 
 }
