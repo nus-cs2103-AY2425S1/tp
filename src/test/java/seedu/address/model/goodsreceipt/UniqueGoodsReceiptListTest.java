@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalGoodsReceipts.ALICE_RECEIPT;
 import static seedu.address.testutil.TypicalGoodsReceipts.BOB_RECEIPT;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
