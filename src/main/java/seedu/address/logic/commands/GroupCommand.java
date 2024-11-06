@@ -30,6 +30,7 @@ public class GroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Group %s created with %d student(s)";
     public static final String MESSAGE_DUPLICATE_GROUP = "Group name already taken!!";
+    public static final String EMPTY_STUDENT = "Please do not enter an empty string for student name!";
     public static final String DUPLICATE_STUDENT_FOUND = "Duplicate student found in input: %s";
     public static final String STUDENTS_NOT_FOUND = "The following students could not be found: %s";
     private final String groupName;
@@ -64,6 +65,9 @@ public class GroupCommand extends Command {
 
         Set<String> uniqueStudents = new HashSet<>();
         for (String studentName : students) {
+            if (studentName.equals("")) {
+                throw new CommandException(EMPTY_STUDENT);
+            }
             if (!uniqueStudents.add(studentName)) {
                 throw new CommandException(String.format(DUPLICATE_STUDENT_FOUND, studentName));
             }
