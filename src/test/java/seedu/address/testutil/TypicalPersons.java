@@ -41,19 +41,20 @@ public class TypicalPersons {
             .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street").withStatus("DISCHARGED")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withIdentityNumber("S5602975C")
-            .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave").withStatus("LOW").build();
+            .withPhone("94822241").withEmail("werner@example.com").withAddress("michegan ave").withStatus("LOW")
+            .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withIdentityNumber("S7761327G")
-            .withPhone("9482427").withEmail("lydia@example.com").withAddress("little tokyo").withStatus("HIGH")
+            .withPhone("94824272").withEmail("lydia@example.com").withAddress("little tokyo").withStatus("HIGH")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withIdentityNumber("S7468515C")
-            .withPhone("9482442").withEmail("anna@example.com").withAddress("4th street").withStatus("HIGH").build();
+            .withPhone("94824425").withEmail("anna@example.com").withAddress("4th street").withStatus("HIGH").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withIdentityNumber("S7717720E")
-            .withPhone("8482424").withEmail("stefan@example.com").withAddress("little india").withStatus("HIGH")
+            .withPhone("84824246").withEmail("stefan@example.com").withAddress("little india").withStatus("HIGH")
             .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withIdentityNumber("S8013760E")
-            .withPhone("8482131").withEmail("hans@example.com").withAddress("chicago ave").withStatus("LOW").build();
+            .withPhone("84821317").withEmail("hans@example.com").withAddress("chicago ave").withStatus("LOW").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
