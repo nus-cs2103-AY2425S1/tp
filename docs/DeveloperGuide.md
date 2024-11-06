@@ -522,9 +522,41 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## Saving sort preference
+### Saving sort preference
+1. **Saving valid sort preferences**
+   1. **Prerequisites**: Ensure multiple persons are listed using the `list` command.
+   1. **Test case**: `save_sort high`
+      **Expected**: The list of persons is sorted by priority with high_priority contacts at the top, and this preference is 
+      saved. Upon restarting the application, the contact list should reflect this order.
+   1. **Test case**: `svp distant`
+      **Expected**: The list is sorted by `last seen` dates from most distant to most recent. After restarting the application, 
+      this sorting preference is retained and automatically applied to the contacts list.
+   1. **Other commands to try**:
+      1. **Test case**: `save_sort default`
+         **Expected**: The list sorts contacts by the order they were added, with older entries displayed first. When the 
+         application restarts, contacts are presented in this order.
+      1. **Test case**: `svp recent`
+         **Expected**: The list is sorted with the most recently seen contacts at the top, and this preference is saved,
+         upon restarting, the list will retain this order.
+1. **Invalid preferences and error handling**
+   1. **Test case**: `save_sort name`
+      **Expected**: An error message is shown, indicating the correct usage for the command `save_sort`.
+   1. **Test case**: `svp`
+      **Expected**: The same error message in i will appear.
+   1. **Other incorrect commands to try**: `save_sort`, `svp z` (where `x` and `z` are not valid preferences such as `high`
+      `low`, etc.)
+      **Expected**: Error messages similar to the previous cases, and the saved preference remains unchanged.
+1. **Verifying persistence of saved preferences**
+   1. **Prerequisites**: Have already save a sort preference (e.g, `save_sort recent` or `svp high`).
+   1. **Test case**: Close the application and re-launch it.
+      **Expected**: The contacts list should automatically display according to the saved preference
 
 ## **Appendix: Effort**
+1. Unlike AB3, which deals primarily with single entity type (Person), our project involves multiple entity types, such as
+   entity types such as Persons, and Reminders, each with their own attributes and functionality. This added complexity required 
+   us to design different classes and interfaces to handle each entity type effectively, as well as implementing additional
+   features to support interactions between them. Hence, this increased the overall difficulty and effort required, as it 
+   demanded additional design consideration and testing.
 
 ## **Appendix: Planned Enhancements**
 Team Size: 5
