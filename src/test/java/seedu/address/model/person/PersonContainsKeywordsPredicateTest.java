@@ -3,9 +3,11 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
@@ -66,6 +68,20 @@ public class PersonContainsKeywordsPredicateTest {
                 .asList(PREFIX_TAG.getPrefix(), "colleagues"));
         assertFalse(predicateWithTag.equals(predicateWithDifferentTag));
 
+        // Different values (subjects) -> returns false
+        PersonContainsKeywordsPredicate predicateWithSubject = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_SUBJECT.getPrefix(), "Physics"));
+        PersonContainsKeywordsPredicate predicateWithDifferentSubject = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_SUBJECT.getPrefix(), "English"));
+        assertFalse(predicateWithSubject.equals(predicateWithDifferentSubject));
+
+        // Different values (classes) -> returns false
+        PersonContainsKeywordsPredicate predicateWithClass = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_CLASSES.getPrefix(), "ML403"));
+        PersonContainsKeywordsPredicate predicateWithDifferentClass = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_CLASSES.getPrefix(), "LE202"));
+        assertFalse(predicateWithClass.equals(predicateWithDifferentClass));
+
         // Different fields (name and email) -> returns false
         PersonContainsKeywordsPredicate predicateWithNameAndEmail = new PersonContainsKeywordsPredicate(Arrays
                 .asList(PREFIX_NAME.getPrefix(), "John", PREFIX_EMAIL.getPrefix(), "john@example.com"));
@@ -108,6 +124,14 @@ public class PersonContainsKeywordsPredicateTest {
         // Tags
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList(PREFIX_TAG.getPrefix(), "test"));
         assertTrue(predicate.test(new PersonBuilder().withTags("test").build()));
+
+        // Subjects
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList(PREFIX_SUBJECT.getPrefix(), "Physics"));
+        assertTrue(predicate.test(new PersonBuilder().withSubject("Physics").build()));
+
+        // Classes
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList(PREFIX_CLASSES.getPrefix(), "7A"));
+        assertTrue(predicate.test(new PersonBuilder().withClasses("7A").build()));
 
         // Multiple keywords in one category
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList(PREFIX_NAME.getPrefix(), "John", "Adam"));
@@ -156,5 +180,13 @@ public class PersonContainsKeywordsPredicateTest {
         // Tags
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList(PREFIX_TAG.getPrefix(), "test"));
         assertFalse(predicate.test(new PersonBuilder().withTags("noMatchingTags").build()));
+
+        // Subjects
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList(PREFIX_SUBJECT.getPrefix(), "Physics"));
+        assertFalse(predicate.test(new PersonBuilder().withSubject("English").build()));
+
+        // Classes
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList(PREFIX_CLASSES.getPrefix(), "7A"));
+        assertFalse(predicate.test(new PersonBuilder().withClasses("8B").build()));
     }
 }
