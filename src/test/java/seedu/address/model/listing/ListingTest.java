@@ -3,7 +3,6 @@ package seedu.address.model.listing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.TAMPINES;
 
@@ -22,27 +21,19 @@ public class ListingTest {
         // null -> returns false
         assertFalse(PASIR_RIS.isSameListing(null));
 
-        // same name, address, seller all other attributes different -> returns true
+        // same name and address all other attributes different -> returns true
         Listing editedListing = new ListingBuilder(PASIR_RIS).withArea(TAMPINES.getArea())
-                .withPrice(TAMPINES.getPrice()).build();
+                .withPrice(TAMPINES.getPrice()).withRegion(TAMPINES.getRegion())
+                .withSeller(TAMPINES.getSeller()).build();
         assertTrue(PASIR_RIS.isSameListing(editedListing));
 
-        // different name, all other attributes same -> returns false
+        // different name, all other attributes same -> returns true (address is the same)
         editedListing = new ListingBuilder(PASIR_RIS).withName(TAMPINES.getName()).build();
-        assertFalse(PASIR_RIS.isSameListing(editedListing));
+        assertTrue(PASIR_RIS.isSameListing(editedListing));
 
-        // different address, all other attributes same -> returns false
+        // different address, all other attributes same -> returns true (name is the same)
         editedListing = new ListingBuilder(PASIR_RIS).withAddress(TAMPINES.getAddress()).build();
-        assertFalse(PASIR_RIS.isSameListing(editedListing));
-
-        // different seller, all other attributes same -> returns false
-        editedListing = new ListingBuilder(PASIR_RIS).withSeller(TAMPINES.getSeller()).build();
-        assertFalse(PASIR_RIS.isSameListing(editedListing));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_PASIR_RIS + " ";
-        editedListing = new ListingBuilder(PASIR_RIS).withName(nameWithTrailingSpaces).build();
-        assertFalse(PASIR_RIS.isSameListing(editedListing));
+        assertTrue(PASIR_RIS.isSameListing(editedListing));
     }
 
     @Test

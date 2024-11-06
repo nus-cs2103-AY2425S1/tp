@@ -190,6 +190,20 @@ public class ModelManager implements Model {
                 .anyMatch(listing -> listing.getName().equals(name));
     }
 
+    /**
+     * Determines if a listing can be edited without causing duplicate identifiers within the system.
+     * Checks if the edited listing's name or address matches any existing listing (excluding the original).
+     */
+    @Override
+    public boolean canEditListing(Listing toEdit, Listing editedListing) {
+        requireAllNonNull(toEdit, editedListing);
+        return this.getFilteredListingList()
+                .stream()
+                .filter(listing -> !listing.equals(toEdit))
+                .anyMatch(currentListing -> editedListing.getName().equals(currentListing.getName())
+                    || editedListing.getAddress().equals(currentListing.getAddress()));
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

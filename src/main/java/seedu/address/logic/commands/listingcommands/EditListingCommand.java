@@ -97,7 +97,7 @@ public class EditListingCommand extends Command {
                 seller.orElse(listingToEdit.getSeller())
         );
 
-        if (!listingToEdit.isSameListing(editedListing) && model.hasListing(editedListing)) {
+        if (isIdentifierChanged(listingToEdit, editedListing) && model.canEditListing(listingToEdit, editedListing)) {
             throw new CommandException(MESSAGE_DUPLICATE_LISTING);
         }
 
@@ -122,6 +122,21 @@ public class EditListingCommand extends Command {
 
         return new Listing(updatedName, updatedAddress, updatedPrice, updatedArea, updatedRegion,
                 updatedSeller, listingToEdit.getBuyers());
+    }
+
+    /**
+     * Checks if the unique identifiers of a listing, specifically the name or address,
+     * have been modified in the edited version.
+     *
+     * @param listingToEdit The original listing before edits.
+     * @param editedListing The listing with potential edits.
+     * @return {@code true} if either the name or address of {@code editedListing} differs
+     *         from {@code listingToEdit}, indicating that the identifiers have changed.
+     *         Returns {@code false} otherwise.
+     */
+    private static boolean isIdentifierChanged(Listing listingToEdit, Listing editedListing) {
+        return !listingToEdit.getAddress().equals(editedListing.getAddress())
+                || !listingToEdit.getName().equals(editedListing.getName());
     }
 
     @Override
