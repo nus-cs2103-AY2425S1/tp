@@ -15,24 +15,24 @@ import java.util.Map;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tag must be one of the following codes: N, " +
-            "BP, BC, TP, TC, A, R\n" +
-            "N   = New \n" +
-            "BP  = Behavioral Interview in Progress\n" +
-            "BC  = Behavioral Interview Confirmed\n" +
-            "TP  = Technical Interview in Progress\n" +
-            "TC  = Technical Interview Confirmed\n" +
-            "A   = Accepted \n" +
-            "R   = Rejected \n";
-    public static final String MESSAGE_CONSTRAINTS_FIND = "Tag must be one of the following codes: " +
-            "N, BP, BC, TP, TC, A, R, B, C, P, T\n" +
-            "N   = New \n" +
-            "BP  = Behavioral Interview in Progress\n" +
-            "BC  = Behavioral Interview Confirmed\n" +
-            "TP  = Technical Interview in Progress\n" +
-            "TC  = Technical Interview Confirmed\n" +
-            "A   = Accepted \n" +
-            "R   = Rejected \n";
+    public static final String MESSAGE_CONSTRAINTS = "Tag must be one of the following codes: N, "
+            + "BP, BC, TP, TC, A, R\n"
+            + "N   = New \n"
+            + "BP  = Behavioral Interview in Progress\n"
+            + "BC  = Behavioral Interview Confirmed\n"
+            + "TP  = Technical Interview in Progress\n"
+            + "TC  = Technical Interview Confirmed\n"
+            + "A   = Accepted \n"
+            + "R   = Rejected \n";
+    public static final String MESSAGE_CONSTRAINTS_FIND = "Tag must be one of the following codes: N, "
+            + "BP, BC, TP, TC, A, R\n"
+            + "N   = New \n"
+            + "BP  = Behavioral Interview in Progress\n"
+            + "BC  = Behavioral Interview Confirmed\n"
+            + "TP  = Technical Interview in Progress\n"
+            + "TC  = Technical Interview Confirmed\n"
+            + "A   = Accepted \n"
+            + "R   = Rejected \n";
     public static final Map<String, String> TAG_OPTIONS = new HashMap<>() {
         {
             put("N", "New");
