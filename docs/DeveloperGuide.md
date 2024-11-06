@@ -216,10 +216,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClientGrid` and the **Actor** is the `real estate agent`, unless specified otherwise)
 
-**Use case: UC1 - List existing buyers, sellers, clients (i.e., buyers and sellers), properties, and meetings in ClientGrid**
+**Use case: UC1 - List existing buyers, sellers, clients (i.e., buyers and sellers combined), properties, or meetings in ClientGrid**
 
 MSS:
-1. Real estate agent requests to view a list of clients (i.e., buyers and/or sellers), properties, or meetings.
+1. Real estate agent requests to view a list of buyers, sellers, clients (i.e., buyers and sellers combined), properties, or meetings.
 2. ClientGrid displays the corresponding list.
    Use case ends.
 
