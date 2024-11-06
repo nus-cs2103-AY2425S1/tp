@@ -339,11 +339,12 @@ Examples:
 * `filterorder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected customer being displayed.
 * `listorder 1` followed by `filtero completed` displays the list of all completed orders under the 1st customer in the address book.
   ![result for filtering completed order'](images/filterCompletedOrders.png)
-* 
-* <box type="important">
+
+<box type="important">
 
 ##### Constraints
-A customer's order list must first be displayed before filtering their order list.
+
+* A customer's order list must first be displayed before filtering their order list.
 * Filters the selected customer's order list for orders that match the `ORDER_STATUS`.
 * The order status **must be a valid status**. e.g. Completed, Pending.
 * `ORDER_STATUS` is case-insensitive. e.g. `completed` is the same as `Completed`.
