@@ -35,7 +35,7 @@ import seedu.address.testutil.EditAssignmentDescriptorBuilder;
 public class EditAssignmentCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAssignmentCommand.MESSAGE_USAGE);
-    private EditAssignmentCommandParser parser = new EditAssignmentCommandParser();
+    private final EditAssignmentCommandParser parser = new EditAssignmentCommandParser();
 
     @Test
     public void parse_missingStudentIndex_throwsParseException() {
@@ -205,5 +205,13 @@ public class EditAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + INVALID_SCORE;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ASSIGNMENT_NAME,
                 PREFIX_ASSIGNMENT_MAX_SCORE));
+    }
+
+    @Test
+    public void parse_noFieldsEdited_throwsParseException() {
+        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_SECOND_STUDENT.getOneBased()
+                + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT.getOneBased();
+
+        assertParseFailure(parser, userInput, EditAssignmentCommand.MESSAGE_NOT_EDITED);
     }
 }
