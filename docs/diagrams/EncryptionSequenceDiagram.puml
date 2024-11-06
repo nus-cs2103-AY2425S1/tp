@@ -1,0 +1,66 @@
+@startuml
+participant User
+participant EncryptionManager
+participant KeyStore
+participant Cipher
+
+User -> EncryptionManager: encrypt(plaintext, keyPath)
+activate EncryptionManager
+
+EncryptionManager -> KeyStore: getKey(keyPath)
+activate KeyStore
+
+KeyStore --> EncryptionManager: SecretKey
+deactivate KeyStore
+
+EncryptionManager -> Cipher: getInstance("AES")
+activate Cipher
+
+Cipher -> Cipher: init(ENCRYPT_MODE, SecretKey)
+activate Cipher
+deactivate Cipher
+
+Cipher -> Cipher: doFinal(plaintext.getBytes())
+activate Cipher
+Cipher --> Cipher : cipherText
+deactivate
+Cipher --> EncryptionManager: encryptedData
+
+deactivate
+Cipher --[hidden]->EncryptionManager
+destroy Cipher
+
+
+EncryptionManager --> User: encryptedData
+deactivate EncryptionManager
+
+User -> EncryptionManager: decrypt(encryptedData, keyPath)
+activate EncryptionManager
+
+EncryptionManager -> KeyStore: getKey(keyPath)
+activate KeyStore
+
+KeyStore --> EncryptionManager: SecretKey
+deactivate KeyStore
+
+EncryptionManager -> Cipher: getInstance("AES")
+activate Cipher
+
+Cipher -> Cipher: init(DECRYPT_MODE, SecretKey)
+activate Cipher
+deactivate Cipher
+
+Cipher -> Cipher: doFinal(encryptedData)
+activate Cipher
+Cipher --> Cipher : plainText
+deactivate
+
+Cipher --> EncryptionManager: decryptedData
+deactivate
+Cipher --[hidden]->EncryptionManager
+destroy Cipher
+
+EncryptionManager --> User: decryptedData (as String)
+deactivate EncryptionManager
+
+@enduml

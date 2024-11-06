@@ -8,14 +8,14 @@ import seedu.address.model.Model;
  * Represents a command to redo the last undone command in the address book.
  */
 public class RedoCommand extends Command {
-    public static final String COMMAND_WORD = ":redo";
+
+    public static final String SHORT_COMMAND_WORD = ":r";
+    public static final String LONG_COMMAND_WORD = ":redo";
     public static final String MESSAGE_SUCCESS = "Redo successful!";
     public static final String MESSAGE_FAILURE = "No more commands to redo!";
     public static final String COMMAND_SUMMARY_ACTION = "Redo";
-    public static final String COMMAND_SUMMARY_FORMAT =
-            ":redo";
-    public static final String COMMAND_SUMMARY_EXAMPLES =
-            ":redo";
+    public static final String COMMAND_SUMMARY_FORMAT = LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
+    public static final String COMMAND_SUMMARY_EXAMPLES = LONG_COMMAND_WORD + "\n" + SHORT_COMMAND_WORD;
 
     @Override
     public CommandResult execute(Model model) {

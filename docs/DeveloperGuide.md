@@ -337,28 +337,25 @@ The `ExportCommand` class facilitates this export functionality and manages file
 
 Constructor Variants:
 
-- `ExportCommand()`: The default constructor for regular use, opening a file chooser dialog to select the export 
-destination.
-- `ExportCommand(File destinationFile, File sourceFile, String keyPath)`: An overloaded constructor that allows 
-  specifying a destination file and encryption key path directly, which is particularly useful for testing.
+- `ExportCommand()`: The default constructor for regular use, opening a file chooser dialog to select the export destination.
+- `ExportCommand(File destinationFile, File sourceFile, String keyPath)`: An overloaded constructor that allows specifying a destination file and encryption key path directly, which is particularly useful for testing.
 
 Attributes:
 
 - `destinationFile`: The file chosen or set as the target for the export.
 - `sourceFile`: A temporary file that holds the JSON data to be exported.
 - `keyPath`: The path to the decryption key required for decrypting the address book data.
-  
 
 Given below is an example usage scenario and how the export process behaves at each step.
 
-Step 1. The user initiates an export by executing `:export`. The `ExportCommand` will attempt to decrypt the data 
+Step 1. The user initiates an export by executing `:export`. The `ExportCommand` will attempt to decrypt the data
 before exporting it.
 
-Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with 
+Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with
 `EncryptionManager.decrypt()` using the provided `keyPath`. The decrypted data is written to a temporary file `addressbook.json`.
 
-Step 3. If `destinationFile` is not set, `ExportCommand` invokes `chooseExportLocation(Stage stage)`, which displays 
-a file chooser dialog for the user to select an export location. If the user cancels this dialog, the export process 
+Step 3. If `destinationFile` is not set, `ExportCommand` invokes `chooseExportLocation(Stage stage)`, which displays
+a file chooser dialog for the user to select an export location. If the user cancels this dialog, the export process
 is aborted with an error message.
 
 Step 4. The `performExport(File sourceFile, File destinationFile)` method copies the decrypted data to the specified `destinationFile`, using `Files.copy()` with `StandardCopyOption.REPLACE_EXISTING` to overwrite any existing file. The temporary file is then deleted.
@@ -384,6 +381,172 @@ The following sequence diagram explains how the export operation works:
 - Pros: Streamlined and faster for frequent exports.
 - Cons: Less flexible, as it may overwrite existing files without warning.
 
+
+### Encryption Feature
+
+#### Implementation
+
+The encryption mechanism is managed by the `EncryptionManager` class. This component is responsible for securely encrypting and decrypting sensitive data using the AES (Advanced Encryption Standard) algorithm. The `EncryptionManager` performs encryption and decryption with a secret key, which is securely loaded and stored using Java's Key Store API. The implementation details are as follows:
+
+#### Methods Overview
+
+1. **`encrypt(String data, String keyPath)`**:
+    - Encrypts plain text data using the AES algorithm.
+    - Takes the path to the key store as an argument (defaulting to `vbook.jks` if not provided).
+    - Returns a byte array containing the encrypted data.
+
+2. **`decrypt(byte[] data, String keyPath)`**:
+    - Decrypts the given encrypted byte array back into plain text.
+    - Also takes the path to the key store as an argument (defaulting to `vbook.jks` if not provided).
+    - Returns the decrypted string.
+
+3. **`generateKey(String keyPath)`**:
+    - Generates a new AES secret key and stores it in a local key store file.
+    - If the key store already exists, it does not overwrite it but notifies that the alias already exists.
+    - Saves the generated key under the alias `vbook-encryption`.
+
+4. **`getKey(String keyPath)`**:
+    - Retrieves the AES secret key from the specified key store.
+    - If the key store does not exist, it calls `generateKey()` to create one.
+    - Returns the retrieved secret key.
+
+#### Usage in Application
+
+- The `EncryptionManager` is used in the `ExportCommand` to decrypt data before exporting it and in `JsonAddressBookStorage` to encrypt data before writing it to a file.
+
+#### Usage
+
+```java
+// Encryption
+String jsonData = JsonUtil.toJsonString(new JsonSerializableAddressBook(addressBook));
+byte[] encryptedData = EncryptionManager.encrypt(jsonData, this.keyPath);
+
+// Decryption
+jsonData = EncryptionManager.decrypt(encryptedData, this.keyPath);
+```
+#### Example Usage Scenario
+
+Step 1. The user initially adds a new contact in the address book. The `EncryptionManager` uses the AES algorithm and the secret key to encrypt the information before saving it.
+
+Step 2. The encrypted data is stored securely. When needed, the user can request to decrypt the information.
+
+Step 3. The `EncryptionManager` decrypts the data using the same AES algorithm and the secret key, ensuring that the information is securely handled at all times.
+
+<box type="info" seamless>
+
+**Note:** If an error occurs during encryption or decryption (e.g., if the secret key is invalid or corrupted), the `EncryptionManager` will handle the error gracefully and return an appropriate error message.
+
+</box>
+
+The following sequence diagram shows how the encryption process works:
+
+<puml src="diagrams/EncryptionSequenceDiagram.puml" alt="EncryptionSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The sequence diagram simplifies the encryption and decryption processes to focus on the main interactions between components.
+
+</box>
+
+#### Design Considerations for Encryption Feature
+
+##### Core Limitation
+
+1. **Risk of Local KeyStore Exposure**:
+    - If a hacker gains access to the JKS file containing the encryption keys, they could decrypt sensitive data. This represents a fundamental limitation of local storage, as the security of the keys relies on the local file system's security.
+
+2. **Alternative Storage Locations**:
+   - Storing the JKS file in the `JAVA_HOME/lib/security/cacerts` directory is an option, but this depends on the user’s configuration and permissions. Users might not have their `JAVA_HOME` path set correctly, which can lead to access issues.
+
+3. **Security Through Obscurity**:
+    - While relying on obscurity—such as using less common paths for the JKS file—can add a layer of security, it should not be the sole defense mechanism. Obscurity alone does not adequately protect against determined attacks.
+
+##### Compromise Between Security and User Experience
+- **User Experience Considerations**:
+    - As a local application, VBook prioritizes convenience, which may lead users to prefer simpler access to their data over maximum security. Finding a balance between security and usability is crucial.
+    - Given that VBook handles contact data, adequate security measures must be in place while ensuring users are not overwhelmed by complex key management.
+
+### Password Management Feature
+
+#### Implementation
+
+The password management mechanism is handled by the `PasswordManager` class. This component is responsible for securely hashing and verifying user passwords using the **PBKDF2** (Password-Based Key Derivation Function 2) algorithm with **HMAC-SHA1**. The `PasswordManager` ensures that passwords are safely stored in a local text file, employing a salting strategy to enhance security. The implementation details are as follows:
+
+#### Methods Overview
+
+1. **`readPassword(String path)`**:
+    - Reads the stored hashed password from the specified file (defaulting to `password.txt`).
+    - Returns the hashed password as a string or `null` if the file does not exist.
+
+2. **`savePassword(String password, String path)`**:
+    - Accepts a plaintext password, generates a salt, hashes the password using **PBKDF2**, and saves the resulting hash and salt to the specified file (default: `password.txt`).
+    - Creates the file if it does not already exist.
+
+3. **`isPasswordCorrect(String inputPassword, String path)`**:
+    - Compares the input plaintext password against the stored hashed password.
+    - Reads the stored hash and salt, hashes the input password, and returns `true` if they match or `false` otherwise.
+
+4. **`hashPassword(String password, byte[] salt)`**:
+    - Hashes the provided password using the specified salt with **PBKDF2** and returns a string containing both the salt and hash encoded in Base64.
+
+5. **`generateSalt()`**:
+    - Generates a secure random salt using `SecureRandom` for use in password hashing.
+
+#### Usage in Application
+
+- The `PasswordManager` is invoked during application startup to check for an existing password file.
+    - If the file is absent, the user is prompted to create a new password.
+    - On subsequent starts, the user must input their original password for verification before proceeding.
+
+#### Usage
+
+```java
+// Saving a new password on initial startup
+if (PasswordManager.readPassword(null) == null) {
+    String newPassword = scanner.nextLine();
+    PasswordManager.savePassword(newPassword, null);
+}
+
+// Verifying the password on subsequent starts
+String inputPassword = scanner.nextLine();
+if (PasswordManager.isPasswordCorrect(inputPassword, null)) {
+    // Handle correct password
+} else {
+   // Handle wrong password
+}
+```
+
+#### Example Usage Scenario
+
+Step 1. On the initial startup of the application, the `PasswordManager` checks for the existence of the `password.txt` file. If the file is not found, the user is prompted to enter a new password.
+
+Step 2. The entered password is hashed and saved securely, along with a generated salt.
+
+Step 3. On subsequent startups, the user is prompted to input their original password. The `PasswordManager` verifies the input against the stored hash and salt, granting access if the password matches.
+
+<box type="info" seamless>
+
+**Note:** If an error occurs during password hashing or verification (e.g., if the stored format is incorrect), the `PasswordManager` will handle the error gracefully and provide an appropriate error message.
+
+</box>
+
+The following sequence diagram illustrates how the password management process operates:
+
+<puml src="diagrams/PasswordManagementActivityDiagram.puml" alt="PasswordManagementActivityDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The activity diagram simplifies the password management processes to highlight the flow for user authentication.
+
+</box>
+
+### Design Considerations for Password Management Feature
+
+#### Core Limitations
+
+- **Risk of Local File Exposure**:
+    - If an attacker gains access to the `password.txt` file, they could potentially compromise user accounts. This poses a fundamental risk of local file storage, as the security of the password relies on the protection of the local file system.
+    - For future implementation, we may consider setting a retry limit.
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 

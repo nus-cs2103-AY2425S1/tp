@@ -60,7 +60,7 @@ Refer to the [Features](#features) below for details of each command.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `:help`, `:list`, `:exit` and `:clear`)
+* Extraneous parameters for commands that do not take in parameters (such as `:help`, `:list`, `:quit` and `:clear`)
   will
   be ignored.<br>
   e.g. if the command specifies `:help 123`, it will be interpreted as `:help`.
@@ -73,7 +73,8 @@ Refer to the [Features](#features) below for details of each command.
 
 > Shows a command cheatsheet, as well as a link to access the user guide.
 
-**Command:** `:help`
+**Short command:** `:h`\
+**Long command:** `:help`
 
 ### Add Person
 
@@ -125,7 +126,9 @@ Refer to the [Features](#features) below for details of each command.
 
 > Finds persons whose names contain any of the given keywords.
 
-**Command:** `:find [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]…​`
+**Short command:** `:f [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`\
+**Long command:** `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
+
 
 * The search is case-insensitive. \
   e.g. `hans` will match `Hans`
@@ -165,7 +168,8 @@ Refer to the [Features](#features) below for details of each command.
 > User can undo up to **10 changes**.\
 > Can undo commands that change the address book data, such as `:add`, `:remove`, `:edit`.
 
-**Command:** `:undo`
+**Short command:** `:u`\
+**Long command:** `:undo`
 
 **Examples:**
 
@@ -178,7 +182,8 @@ Refer to the [Features](#features) below for details of each command.
 > Reapplies the last undone change to the address book.\
 > User can redo up to 10 undo changes.
 
-**Command:** `:redo`
+**Short command:** `:r`\
+**Long command:** `:redo`
 
 **Examples:**
 
@@ -196,13 +201,15 @@ Refer to the [Features](#features) below for details of each command.
 
 > Clears all entries from the address book.
 
-**Command:** `:clear`
+**Short command:** `:cl`\
+**Long command:** `:clear`
 
-### Exit Program
+### Quit Program
 
 > Exits the program.
 
-**Command:** `:exit`
+**Short command:** `:q`\
+**Long command:** `:quit`
 
 ### Save Data
 

@@ -58,11 +58,11 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String COMMAND_SUMMARY_ACTION = "Edit";
     public static final String COMMAND_SUMMARY_FORMAT =
-            ":edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…\u200B\n"
-            + ":ed INDEX [-n NAME]...";
+            ":edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…\n"
+                    + ":ed INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…";
     public static final String COMMAND_SUMMARY_EXAMPLES =
             ":edit 2 -n James Lee -e jameslee@example.com\n"
-            + ":ed 2 -n Joshua...";
+                    + ":ed 2 -n James Lee -e jameslee@example.com";
 
     public static final List<String> INVALID_VARIANTS = Arrays.asList("edit", "change", "update", ":update",
             ":change");
