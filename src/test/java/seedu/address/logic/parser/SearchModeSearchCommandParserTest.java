@@ -15,7 +15,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.*;
+import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
+import seedu.address.model.person.predicates.TelegramContainsKeywordsPredicate;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
 
