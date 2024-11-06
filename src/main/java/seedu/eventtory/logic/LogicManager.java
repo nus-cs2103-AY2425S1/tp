@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
 import seedu.eventtory.commons.core.LogsCenter;
+import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.commands.Command;
 import seedu.eventtory.logic.commands.CommandResult;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
@@ -119,6 +120,16 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Association> getAssociationList() {
         return model.getAssociationList();
+    }
+
+    @Override
+    public Index getRelativeIndexOfVendor(Vendor vendor) {
+        return model.getRelativeIndexOfVendor(vendor);
+    }
+
+    @Override
+    public Index getRelativeIndexOfEvent(Event event) {
+        return model.getRelativeIndexOfEvent(event);
     }
 
     @Override

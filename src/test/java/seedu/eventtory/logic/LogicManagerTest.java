@@ -273,6 +273,28 @@ public class LogicManagerTest {
         assertEquals(initialIndex + 1, observedState.get());
     }
 
+    @Test
+    public void getRelativeIndexOfViewedEvent() {
+        Event indexOneEvent = new EventBuilder().withName("Event 1").build();
+        Event indexTwoEvent = new EventBuilder().withName("Event 2").build();
+        model.addEvent(indexOneEvent);
+        model.addEvent(indexTwoEvent);
+
+        assertEquals(0, this.logic.getRelativeIndexOfEvent(indexOneEvent).getZeroBased());
+        assertEquals(1, this.logic.getRelativeIndexOfEvent(indexTwoEvent).getZeroBased());
+    }
+
+    @Test
+    public void getRelativeIndexOfViewedVendor() {
+        Vendor indexOneVendor = new VendorBuilder().withName("Vendor 1").build();
+        Vendor indexTwoVendor = new VendorBuilder().withName("Vendor 2").build();
+        model.addVendor(indexOneVendor);
+        model.addVendor(indexTwoVendor);
+
+        assertEquals(0, this.logic.getRelativeIndexOfVendor(indexOneVendor).getZeroBased());
+        assertEquals(1, this.logic.getRelativeIndexOfVendor(indexTwoVendor).getZeroBased());
+    }
+
     /**
      * Executes the command and confirms that - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
