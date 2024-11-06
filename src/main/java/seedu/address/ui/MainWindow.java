@@ -3,7 +3,9 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -275,26 +277,46 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Handles commands that need to preserve filter state
+     */
+    private CommandResult handleFilterPreservingCommand(String commandText) throws CommandException, ParseException {
+        // Store the current filtered list
+        ObservableList<Client> preFilteredList = FXCollections.observableArrayList(logic.getFilteredClientList());
+
+        CommandResult commandResult = logic.execute(commandText);
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+        return commandResult;
+    }
+
+    /**
      * Executes the command and returns the result.
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            CommandResult commandResult;
+            String trimmedCommand = commandText.trim().toLowerCase();
 
+            // Handle special commands
+            if (trimmedCommand.startsWith("edit")) {
+                commandResult = handleFilterPreservingCommand(commandText);
+            } else {
+                commandResult = logic.execute(commandText);
+                logger.info("Result: " + commandResult.getFeedbackToUser());
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            }
+
+            // Handle UI updates based on command result
             if (commandResult.isShowClient()) {
                 handleViewCommand(commandResult);
-            } else if (commandText.trim().toLowerCase().equals("close")) {
+            } else if (trimmedCommand.equals("close")) {
                 handleCloseCommand();
             } else if (commandResult.isConfirmedDeletion() && currentlyViewedClient != null
                     && currentlyViewedClient.equals(commandResult.getDeletedClient())) {
-                // Only close if this is a confirmed deletion of the viewed client
                 handleCloseCommand();
-            } else if (currentlyViewedClient != null) {
-                updateDetailPanelIfNeeded();
             }
 
+            // Handle other UI states
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
