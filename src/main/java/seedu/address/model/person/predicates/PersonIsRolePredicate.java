@@ -2,6 +2,7 @@ package seedu.address.model.person.predicates;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -36,6 +37,12 @@ public class PersonIsRolePredicate implements Predicate<Person> {
 
         PersonIsRolePredicate otherPersonIsRolePredicate = (PersonIsRolePredicate) other;
         return roles.equals(otherPersonIsRolePredicate.roles);
+    }
+
+    public String getRolesAsString() {
+        return roles.stream()
+                .map(Role::toString)
+                .collect(Collectors.joining(" "));
     }
 
     @Override
