@@ -185,7 +185,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_gradualChangesToDuplicatePerson_failure() throws CommandException {
+    public void execute_gradualChangesToDuplicatePersonPhoneNumber_failure() throws CommandException {
         // Step 1: Add a specific person to the model as the target for duplication (Person A)
         Person personA = new PersonBuilder().withName("John Doe")
                 .withPhone("91234567")
@@ -227,6 +227,50 @@ public class EditCommandTest {
         // Expect failure due to duplicate name and phone
         assertCommandFailure(duplicateCommandByNameAndPhone, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
+    }
+
+    @Test
+    public void execute_gradualChangesToDuplicatePersonEmail_failure() throws CommandException {
+        // Step 1: Add a specific person to the model as the target for duplication (Person A)
+        Person personA = new PersonBuilder().withName("John Doe")
+                .withPhone("91234567")
+                .withEmail("john@example.com")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withTag("Low Risk")
+                .withAllergy("Peanuts")
+                .build();
+        model.addPerson(personA);
+
+        // Step 2: Assume the model has an existing person; retrieve and prepare to edit them
+        Person personToEdit = model.getFilteredPersonList().get(0);
+
+        // Step 3: First edit only the name to match Person A's name
+        EditPersonDescriptor descriptorWithDuplicateName =
+                new EditPersonDescriptorBuilder().withName("John Doe").build();
+        EditCommand editNameCommand =
+                new EditCommand(Index.fromZeroBased(0), descriptorWithDuplicateName);
+
+        // Define the expected state after editing only the name
+        Person editedPersonWithDuplicateName =
+                new PersonBuilder(personToEdit).withName("John Doe").build();
+        Model expectedModelAfterNameChange =
+                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModelAfterNameChange.setPerson(personToEdit, editedPersonWithDuplicateName);
+
+        // Validate that the name edit succeeds without duplicates
+        assertCommandSuccess(editNameCommand, model,
+                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                        Messages.format(editedPersonWithDuplicateName)),
+                expectedModelAfterNameChange);
+
+        // Step 4: Now change the email to match Person A's, creating a duplicate based on name and email
+        EditPersonDescriptor descriptorWithDuplicateEmail =
+                new EditPersonDescriptorBuilder().withEmail("john@example.com").build();
+        EditCommand duplicateCommandByNameAndEmail =
+                new EditCommand(Index.fromZeroBased(0), descriptorWithDuplicateEmail);
+
+        // Expect failure due to duplicate name and email
+        assertCommandFailure(duplicateCommandByNameAndEmail, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

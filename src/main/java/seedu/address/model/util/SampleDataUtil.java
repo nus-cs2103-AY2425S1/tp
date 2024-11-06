@@ -30,7 +30,7 @@ public class SampleDataUtil {
                     new Address("Blk 30 Geylang Street 29, #06-40"),
                     new Tag("High Risk"),
                     new Allergy("None"),
-                    new Date(LocalDateTime.of(2024,12,31,14,30))),
+                    new Date(LocalDateTime.of(2024, 12, 31, 14, 30))),
             new Person(
                     new Name("Bernice Yu"),
                     new Phone("99272758"),
@@ -46,7 +46,7 @@ public class SampleDataUtil {
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new Tag("High Risk"),
                     new Allergy("Penicillin, Wheat"),
-                    new Date(LocalDateTime.of(2025,3,4,19,50))),
+                    new Date(LocalDateTime.of(2025, 3, 4, 19, 50))),
             new Person(
                     new Name("David Li"),
                     new Phone("91031282"),
@@ -54,7 +54,7 @@ public class SampleDataUtil {
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     new Tag("Medium Risk"),
                     new Allergy("Gluten"),
-                    new Date(LocalDateTime.of(2024,1,28,16,30))),
+                    new Date(LocalDateTime.of(2024, 1, 28, 16, 30))),
             new Person(
                     new Name("Irfan Ibrahim"),
                     new Phone("92492021"),
@@ -70,7 +70,7 @@ public class SampleDataUtil {
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
                     new Tag("Low Risk"),
                     new Allergy("Pollen, Egg"),
-                    new Date(LocalDateTime.of(2026,1,15,8,15)))
+                    new Date(LocalDateTime.of(2026, 1, 15, 8, 15)))
         };
     }
 
