@@ -3,8 +3,11 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandTextHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -16,6 +19,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private final CommandTextHistory commandTextHistory = new CommandTextHistory();
     private final CommandExecutor commandExecutor;
 
     @FXML
@@ -29,6 +33,15 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.UP) {
+                handleUpKey();
+                event.consume();
+            } else if (event.getCode() == KeyCode.DOWN) {
+                handleDownKey();
+                event.consume();
+            }
+        });
     }
 
     /**
@@ -43,6 +56,7 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            commandTextHistory.addCommandText(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
@@ -67,6 +81,18 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    private void handleUpKey() {
+        // Update the command text field with the previous command
+        String commandText = commandTextHistory.getPreviousCommandString();
+        commandTextField.setText(commandText);
+    }
+
+    private void handleDownKey() {
+        // Update the command text field with the next command
+        String commandText = commandTextHistory.getNextCommandString();
+        commandTextField.setText(commandText);
     }
 
     /**
