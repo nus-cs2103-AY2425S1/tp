@@ -100,7 +100,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
     - `X Æ A-12` (non-Latin characters like `Æ` or Arabic `عبد العزيز`)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person with an Indian name containing "d/o" denoting "daughter of" can be added as `add n/Genevieve d/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
