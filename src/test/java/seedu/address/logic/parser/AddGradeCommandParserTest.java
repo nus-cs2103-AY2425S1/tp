@@ -31,7 +31,7 @@ public class AddGradeCommandParserTest {
         assertParseSuccess(parser, "  15 n/Midterm s/95 w/35", command);
 
         // Float input (2dp)
-        assertParseSuccess(parser, "15 n/Midterm s/95 w/35.00", command);
+        assertParseSuccess(parser, "15 n/Midterm s/95.00 w/35.00", command);
     }
 
     @Test
