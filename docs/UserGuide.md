@@ -70,29 +70,29 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Listing address book records: `list`
+### Listing ClientGrid records: `list`
 
-Shows a list of all existing clients (i.e. buyers and sellers), properties, and meetings in the address book.
+Shows a list of all existing buyers, sellers, clients (i.e., buyers and sellers), properties, and meetings in ClientGrid.
 
 Format: `list k/KEY`
 
 * The `list` command displays records based on the specified `KEY`.
-* The `KEY` must be one of the following: `buyers`, `sellers`, `clients`, `meetings` or `properties`.
-  * `buyers`: Lists all buyers in the database.
-  * `sellers`: Lists all sellers in the database.
-  * `clients`: Lists all buyers and sellers (i.e. clients) combined.
-  * `properties`: Lists all properties in the database.
-  * `meetings`: Lists all meetings in the database.
+* The `KEY` must be one of the following: `buyers`, `sellers`, `clients`, `meetings`, or `properties`.
+    * `buyers`: Lists all buyers in the client book.
+    * `sellers`: Lists all sellers in the client book.
+    * `clients`: Lists all clients (i.e. buyers and sellers combined) in the client book.
+    * `properties`: Lists all properties in the property book.
+    * `meetings`: Lists all meetings in the meeting book.
 
 * If an invalid `KEY` is provided, an error message will be displayed.
 
 Key Considerations:
-* Only accepts "buyers", "sellers", "clients", "properties" and "meetings" (case-insensitive) as valid inputs for k/KEY.
-* The `KEY` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `KEY` also ignores UPPER/lower case. All names will be converted to lower case and checked against the list of valid keys.
+* Only accepts "buyers", "sellers", "clients", "properties", and "meetings" (case-insensitive) as valid inputs for `k/KEY`.
+* The `KEY` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed, and the input will be converted into an array of words. The `KEY` also ignores UPPER/lower case. All names will be converted to lower case and checked against the list of valid keys.
 * If the user provides an invalid key, the system will respond with an error message indicating that only the valid keys are accepted.
 
 Examples:
-* `list k/buyers` displays a list of all existing buyers in the address book.
+* `list k/buyers` displays a list of all existing buyers in ClientGrid.
 
   ![result for 'list k/sellers'](images/list.png)
 
