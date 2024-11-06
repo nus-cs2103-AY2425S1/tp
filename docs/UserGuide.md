@@ -140,7 +140,7 @@ Format: `list`
 
 Edits an existing student in the app.
 
-Format: `edit_student INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit_student si/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -150,9 +150,9 @@ Format: `edit_student INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-   ![result for 'edit_student 1 p/91234567 e/johndoe@example.com'](images/editStudent.png) 
-* `edit_student 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+*  `edit_student si/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+   ![result for 'edit_student si/1 p/91234567 e/johndoe@example.com'](images/editStudent.png) 
+* `edit_student si/2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 ### Locating students by name: `find`
 
@@ -191,9 +191,9 @@ Examples:
 
 Adds an Assignment to the app.
 
-Format: `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
+Format: `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
-* Adds an assignment to the student at the specified `STUDENT_INDEX`. The index refers to the index number shown in the 
+* Adds an assignment to the student at the specified `INDEX`. The index refers to the index number shown in the 
   displayed student list.
 * The max score must be a positive integer.
 
@@ -364,11 +364,11 @@ Action            | Format, Examples
 **View Student**  | `view_student INDEX`<br> e.g., `view_student 3`
 **Clear**         | `clear`
 **Delete Student**| `delete_student INDEX`<br> e.g., `delete_student 3`
-**Edit Student**  | `edit_student INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [r/REMARK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Student**  | `edit_student si/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [r/REMARK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**          | `list`
 **Help**          | `help`
-**Add Assignment**| `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
+**Add Assignment**| `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
 **Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`
 **Edit Assignment** | `edit_assignment si/INDEX ai/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80`
 **Mark Assignment** | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`
