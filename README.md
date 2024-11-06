@@ -12,3 +12,4 @@
 * For the detailed documentation of this project, see the **[BizBook Website](https://ay2425s1-cs2103-f10-3.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * This projects icon was created using [canva](https://www.canva.com).
+
