@@ -135,7 +135,7 @@ Examples:
 
 Finds all persons whose specified field contains any of the specified keywords and displays them as a list.
 
-Format: `search by/FIELD KEYWORD [MORE_KEYWORDS]`
+Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Only the specified field is searched.
@@ -144,10 +144,11 @@ Format: `search by/FIELD KEYWORD [MORE_KEYWORDS]`
   e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `search by/Name alice bob charlie`
-* `search by/Tag friend colleague`
-* `search by/Address street avenue`
-* `search by/Phone 98765432 12345678`
+* `search a/street avenue`
+* `search e/gmail exampleEmail`
+* `search n/alice bob charlie`
+* `search p/98765432 12345678`
+* `search t/friend colleague`
 
 ### Deleting a person : `delete`
 
