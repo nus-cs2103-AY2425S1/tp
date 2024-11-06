@@ -14,7 +14,7 @@ public abstract class ListCommand extends Command {
             + "index numbers.\n"
             + "To list owners: list owners\n"
             + "To list pets: list pets\n"
-            + "To find both: list both\n";
+            + "To find both: list\n";
 
 
     @Override

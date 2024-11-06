@@ -32,7 +32,7 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsListCombinedCommand() {
-        assertParseSuccess(parser, "both", new ListBothCommand());
+        assertParseSuccess(parser, "", new ListBothCommand());
     }
 
     @Test

@@ -164,14 +164,14 @@ public class PawPatrolParserTest {
     public void parseCommand_listOwners() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " owners") instanceof ListOwnerCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(ListCommand.COMMAND_WORD));
+                -> parser.parseCommand(ListCommand.COMMAND_WORD + " owner"));
     }
 
     @Test
     public void parseCommand_listPets() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " pets") instanceof ListPetCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(ListCommand.COMMAND_WORD));
+                -> parser.parseCommand(ListCommand.COMMAND_WORD + " pet"));
     }
 
     @Test
