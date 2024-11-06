@@ -23,7 +23,7 @@ public class MarkAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an existing assignment belonging to an existing "
             + "student based on the student's index number used in the displayed student list, and the assignment's "
-            + "index belonging to the student as submitted. The assignment status will be changed to 'Submitted'."
+            + "index belonging to the student as submitted. The assignment status will be changed to 'Submitted'. "
             + "\nParameters: "
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
             + "[" + PREFIX_ASSIGNMENT_INDEX + "INDEX] "
