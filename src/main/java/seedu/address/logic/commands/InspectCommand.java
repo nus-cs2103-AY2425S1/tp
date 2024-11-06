@@ -53,7 +53,7 @@ public class InspectCommand extends Command {
         }
 
         Person personToInspect = lastShownList.get(index.getZeroBased());
-
+        model.setFilteredDeliveryList(personToInspect.getDeliveryList());
         return new CommandResult(generateSuccessMessage(personToInspect), personToInspect, false,
                 false, true);
     }
