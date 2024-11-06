@@ -20,39 +20,42 @@ public class ExportCommandTest {
 
     private Model model = new ModelManager(TypicalContacts.getTypicalAddressBook(), new UserPrefs());
 
+    /**
+     * Tests successful export to a valid CSV file path.
+     */
     @Test
     public void execute_validFilePath_exportSuccess() throws Exception {
-        // Create a temporary file with platform-independent path handling
         Path tempFile = Paths.get(System.getProperty("user.dir"), "test-export-valid.csv");
         ExportCommand exportCommand = new ExportCommand(tempFile.toString());
 
-        // Execute the command and check the result
         CommandResult result = exportCommand.execute(model);
         assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, tempFile.toString()), result.getFeedbackToUser());
 
-        // Verify the file content
         try (BufferedReader reader = Files.newBufferedReader(tempFile)) {
             String header = reader.readLine();
             assertEquals("name,category,studentId/industry,phone,email,address,tags", header);
 
-            // Check if content was written for one of the typical contacts (example: Alex Yeoh)
             String firstLine = reader.readLine();
             assertEquals("Alice Pauline,student,A1234567X,94351253,alice@example.com,"
                     + "\"123, Jurong West Ave 6, #08-111\",friends", firstLine);
         }
 
-        // Clean up the temporary file after the test
         Files.deleteIfExists(tempFile);
     }
 
+    /**
+     * Tests that an invalid file path with restricted characters throws an IllegalArgumentException.
+     */
     @Test
     public void execute_invalidFilePath_throwsIllegalArgumentException() {
-        String invalidFilePath = "invalid:path?.csv"; // Example with invalid characters
+        String invalidFilePath = "invalid:path?.csv";
 
         assertThrows(IllegalArgumentException.class, () -> new ExportCommand(invalidFilePath));
     }
 
-
+    /**
+     * Tests equality between two ExportCommand objects with the same file path.
+     */
     @Test
     public void equals_sameFilePath_returnsTrue() {
         ExportCommand exportCommand1 = new ExportCommand("/valid/path/to/export1.csv");
@@ -61,64 +64,62 @@ public class ExportCommandTest {
         assertEquals(exportCommand1, exportCommand2);
     }
 
+    /**
+     * Tests that ExportCommand objects with different file paths are not equal.
+     */
     @Test
     public void equals_differentFilePath_returnsFalse() {
         ExportCommand exportCommand1 = new ExportCommand("/valid/path/to/export1.csv");
         ExportCommand exportCommand2 = new ExportCommand("/valid/path/to/export2.csv");
 
-        assertThrows(AssertionError.class, () -> assertEquals(exportCommand1, exportCommand2));
+        assertTrue(!exportCommand1.equals(exportCommand2));
     }
 
+    /**
+     * Tests successful export to an absolute file path.
+     */
     @Test
     public void execute_absoluteFilePath_exportSuccess() throws Exception {
-        // Create a temporary directory and resolve the absolute path for export file
         Path tempDir = Files.createTempDirectory("exportTest");
         Path absolutePath = tempDir.resolve("export.csv").toAbsolutePath();
 
         ExportCommand exportCommand = new ExportCommand(absolutePath.toString());
 
-        // Execute the command and check the result
         CommandResult result = exportCommand.execute(model);
         assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, absolutePath.toString()), result.getFeedbackToUser());
 
-        // Verify the file content if necessary (as in previous test)
-
-        // Clean up
         Files.deleteIfExists(absolutePath);
         Files.deleteIfExists(tempDir);
     }
 
+    /**
+     * Tests successful export to a relative file path, verifying file creation in expected location.
+     */
     @Test
     public void execute_relativeFilePath_exportSuccess() throws Exception {
-        // Define a relative path from the project root or from the current working directory
         String relativeFilePath = "exportTestRelative.csv";
         ExportCommand exportCommand = new ExportCommand(relativeFilePath);
 
         try {
-            // Execute the command
             CommandResult result = exportCommand.execute(model);
 
-            // Construct the absolute path to check if the file was created in the expected location
             Path expectedFilePath = Path.of(relativeFilePath).toAbsolutePath();
-
-            // Assert the feedback message matches the expected output
             assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, expectedFilePath.toString()),
                     result.getFeedbackToUser());
 
-            // Verify file existence as a side check for successful execution
             assertTrue(Files.exists(expectedFilePath));
         } finally {
-            // Clean up after the test
             Files.deleteIfExists(Path.of(relativeFilePath));
         }
     }
 
+    /**
+     * Tests that fields with special characters are correctly escaped for CSV format.
+     */
     @Test
     public void escapeCsv_fieldWithSpecialCharacters_correctlyEscaped() {
-        // Placeholder for context if escapeCsv is non-static
-        ExportCommand exportCommand = new ExportCommand("dummy/path");
+        ExportCommand exportCommand = new ExportCommand("dummy/path.csv");
 
-        // Define test cases with expected escaped output
         assertEquals("\"123, Main St\"", exportCommand.escapeCsv("123, Main St"),
                 "Address with comma should be enclosed in quotes");
         assertEquals("\"He said, \"\"Hello!\"\"\"", exportCommand.escapeCsv("He said, \"Hello!\""),
@@ -129,4 +130,15 @@ public class ExportCommandTest {
                 "Text without special characters should remain unchanged");
     }
 
+    /**
+     * Tests that file extension validation is enforced, throwing an IllegalArgumentException for non-CSV paths.
+     */
+    @Test
+    public void execute_nonCsvFileExtension_throwsIllegalArgumentException() {
+        String nonCsvFilePath = "exportTestInvalid.txt";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, (
+                ) -> new ExportCommand(nonCsvFilePath));
+        assertEquals(ExportCommand.MESSAGE_INVALID_FILE_EXT, exception.getMessage());
+    }
 }

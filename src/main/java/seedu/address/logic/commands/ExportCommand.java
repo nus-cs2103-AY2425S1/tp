@@ -25,17 +25,21 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_SUCCESS = "Contacts exported successfully to: %1$s";
-    public static final String MESSAGE_FAILURE = "Failed to export contacts to: %1$s";
-    public static final String MESSAGE_USAGE = "Error: Invalid file path format!\n\n"
-            + "To specify the file path for export, use one of the following formats:\n\n"
-            + "- Absolute Path: The complete path starting from the root directory. Examples:\n"
-            + "  - Windows: C:\\Users\\username\\Documents\\project\\data\\file.csv\n"
-            + "  - macOS/Linux: /home/username/project/data/file.csv\n\n"
-            + "- Relative Path: A path relative to the current working directory of the application. "
-            + "For example, if the application is running in /home/username/project:\n"
-            + "  - data/file.csv will refer to /home/username/project/data/file.csv.\n\n"
-            + "Please ensure the file path format matches one of the above styles.";
+    public static final String MESSAGE_FAILURE = "Error: Failed to export contacts. Please check the file path:\n\n"
+            + "- Use an absolute path (e.g., C:\\Users\\username\\Documents\\file.csv or "
+            + "/home/username/file.csv) or a relative path.\n"
+            + "- Ensure the path ends with '.csv' and has write permissions.\n"
+            + "- Avoid restricted characters in the path.\n\n"
+            + "Correct the file path and try again.";
 
+    public static final String MESSAGE_USAGE = "Invalid file path provided: %1$s\n"
+            + "Ensure the file path:\n"
+            + "- Is a valid absolute or relative path.\n"
+            + "- Ends with '.csv'.\n"
+            + "- Does not contain restricted characters.";
+    // Message for invalid file extensions
+    public static final String MESSAGE_INVALID_FILE_EXT = "The file path must end with '.csv' to ensure a proper export"
+            + "format.";
 
     private final Path filePath;
 
@@ -46,47 +50,64 @@ public class ExportCommand extends Command {
      */
     public ExportCommand(String filePath) {
         requireNonNull(filePath);
-
-        // Check for universally invalid characters for file paths
-        if (filePath.matches(".*[<>\"\\|?*].*")) {
-            throw new IllegalArgumentException("Invalid file path provided: " + filePath);
-        }
-        // Attempt to validate the file path and convert to an absolute path if necessary
-        try {
-            Path path = Paths.get(filePath);
-            if (!path.isAbsolute()) {
-                path = Paths.get(System.getProperty("user.dir"), filePath);
-            }
-            this.filePath = path;
-        } catch (InvalidPathException e) {
-            throw new IllegalArgumentException("Invalid file path provided: " + filePath);
-        }
+        this.filePath = validateFilePath(filePath);
     }
 
+    /**
+     * Validates the file path to ensure it conforms to expected constraints.
+     * Converts the file path to an absolute path if necessary.
+     *
+     * @param filePath The file path to validate.
+     * @return A valid Path object representing the specified file path.
+     * @throws IllegalArgumentException if the file path is invalid.
+     */
+    private Path validateFilePath(String filePath) {
+        if (!filePath.toLowerCase().endsWith(".csv")) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_FILE_EXT);
+        }
+        if (filePath.matches(".*[<>\"\\|?*].*")) {
+            throw new IllegalArgumentException(String.format(MESSAGE_USAGE, filePath));
+        }
 
+        Path path;
+        try {
+            path = Paths.get(filePath);
+            if (!path.isAbsolute()) {
+                path = Paths.get(System.getProperty("user.dir")).resolve(filePath);
+            }
+        } catch (InvalidPathException e) {
+            throw new IllegalArgumentException(String.format(MESSAGE_USAGE, filePath));
+        }
+        return path;
+    }
 
     /**
      * Executes the ExportCommand by writing all contacts to a CSV file.
      *
      * @param model The model which contains the list of contacts.
      * @return A CommandResult indicating the success or failure of the export operation.
-     * @throws CommandException If an I/O error occurs during the export process.
+     * @throws CommandException If an error occurs during the export process.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
-            // Write the header row for the CSV file
-            writer.write("name,category,studentId/industry,phone,email,address,tags\n");
+        try {
+            // Validate file path in execution to catch any issues
+            validateFilePath(filePath.toString());
 
-            // Write each contact to the CSV file
-            for (Person person : model.getAddressBook().getPersonList()) {
-                writer.write(serializePerson(person));
-                writer.newLine();
+            try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
+                writer.write("name,category,studentId/industry,phone,email,address,tags\n");
+
+                for (Person person : model.getAddressBook().getPersonList()) {
+                    writer.write(serializePerson(person));
+                    writer.newLine();
+                }
+
+                return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
             }
-
-            return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(String.format(MESSAGE_USAGE, filePath));
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_FAILURE, filePath));
         }
