@@ -1,11 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CHILD;
 
-import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,7 +17,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.exceptions.IllegalPersonTypeException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
@@ -31,62 +29,61 @@ public class UnlinkCommand extends Command {
     public static final String COMMAND_WORD = "unlink";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": removes any links to and from the contact identified"
-            + "by the index number used in the displayed contact list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": removes any links involving the Student provided.\n"
+            + "Parameters: " + PREFIX_CHILD + "CHILD_NAME\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_CHILD + "John Doe";
 
     public static final String MESSAGE_UNLINK_CONTACT_SUCCESS = "Successfully unlinked %1$s from %2$s";
-    public static final String MESSAGE_CONTACT_HAS_NO_LINKS = "Contact: %1$s has no links";
+    public static final String MESSAGE_CONTACT_HAS_NO_LINKS = "Student: %1$s has no links";
+    public static final String MESSAGE_CHILD_NOT_FOUND = "Student: %1$s does not exist in Address Book";
+    public static final String MESSAGE_PARENT_NOT_FOUND = "Student's Parent: %1$s does not exist in Address Book";
 
-    private final Index index;
+    private final Name name;
 
     /**
      * Creates an UnlinkCommand to unlink the person at the specified {@code Index}.
      */
-    public UnlinkCommand(Index index) {
-        requireNonNull(index);
-        this.index = index;
+    public UnlinkCommand(Name name) {
+        requireNonNull(name);
+        this.name = name;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Name counterPartName;
-
-        if (personToEdit instanceof Student studentToEdit) {
-            counterPartName = studentToEdit.getParentName();
-        } else if (personToEdit instanceof Parent parentToEdit) {
-            counterPartName = parentToEdit.getChildName();
-        } else {
-            throw new IllegalPersonTypeException(personToEdit);
-        }
-
-        if (counterPartName == null) {
-            throw new CommandException(String.format(MESSAGE_CONTACT_HAS_NO_LINKS, Messages.format(personToEdit)));
-        }
-
-        Person counterPart;
+        Person child;
         try {
-            counterPart = model.personFromName(counterPartName);
+            child = model.personFromName(name);
+            if (!(child instanceof Student)) {
+                throw new CommandException(generateChildNotFoundMessage());
+            }
         } catch (IllegalValueException e) {
-            throw new PersonNotFoundException();
+            throw new CommandException(generateChildNotFoundMessage());
         }
 
-        Person unlinkedPerson = unlink(personToEdit);
-        Person unlinkedCounterPart = unlink(counterPart);
+        Student castedChild = (Student) child;
+        Name parentName = castedChild.getParentName();
+        if (parentName == null) {
+            throw new CommandException(String.format(MESSAGE_CONTACT_HAS_NO_LINKS, Messages.format(castedChild)));
+        }
 
-        model.setPerson(personToEdit, unlinkedPerson);
-        model.setPerson(counterPart, unlinkedCounterPart);
+        Person parent;
+        try {
+            parent = model.personFromName(parentName);
+            if (!(parent instanceof Parent)) {
+                throw new CommandException(generateParentNotFoundMessage(parentName));
+            }
+        } catch (IllegalValueException e) {
+            throw new CommandException(generateParentNotFoundMessage(parentName));
+        }
+
+        Person unlinkedStudent = unlink(child);
+        Person unlinkedParent = unlink(parent);
+
+        model.setPerson(child, unlinkedStudent);
+        model.setPerson(parent, unlinkedParent);
 
         return new CommandResult(String.format(MESSAGE_UNLINK_CONTACT_SUCCESS,
-                Messages.format(personToEdit), Messages.format(counterPart)));
+                Messages.format(child), Messages.format(parent)));
     }
 
     private Person unlink(Person person) {
@@ -110,5 +107,13 @@ public class UnlinkCommand extends Command {
         }
 
         throw new IllegalPersonTypeException(person);
+    }
+
+    private String generateChildNotFoundMessage() {
+        return String.format(MESSAGE_CHILD_NOT_FOUND, name.fullName);
+    }
+
+    private String generateParentNotFoundMessage(Name name) {
+        return String.format(MESSAGE_PARENT_NOT_FOUND, name.fullName);
     }
 }
