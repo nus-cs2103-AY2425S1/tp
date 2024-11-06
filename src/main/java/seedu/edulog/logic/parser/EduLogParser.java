@@ -2,9 +2,11 @@ package seedu.edulog.logic.parser;
 
 import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulog.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import seedu.edulog.commons.core.LogsCenter;
 import seedu.edulog.logic.commands.AddCommand;
 import seedu.edulog.logic.commands.AddLessonCommand;
