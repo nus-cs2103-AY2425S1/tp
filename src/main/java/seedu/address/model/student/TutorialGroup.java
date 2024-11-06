@@ -29,7 +29,7 @@ public class TutorialGroup {
     public TutorialGroup(String tutorialGroup) {
         requireNonNull(tutorialGroup);
         checkArgument(isValidTutorialGroup(tutorialGroup), MESSAGE_CONSTRAINTS);
-        this.value = tutorialGroup;
+        this.value = tutorialGroup.toUpperCase();
     }
 
 
