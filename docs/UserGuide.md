@@ -191,6 +191,31 @@ Examples:
 * `delete_assignment si/1 ai/1`
   ![result for 'delete_assignment si/1 ai/1'](images/deleteAssignment.png)
 
+### Editing an assignment: `edit_assignment`
+
+Edits an assignment belonging to a student based on the student's index number and the assignment's index.
+
+Format: `edit_assignment si/INDEX ai/INDEX`
+
+* Edits the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
+  list and the assignment list on the student detail panel respectively.
+  The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+* `view_student 1` followed by `edit_assignment si/1 ai/1 an/Assignment 1 ms/100` edits the 1st assignment of the 1st 
+  student in the results of the `find` command to the new name and new max score specified.
+* `edit_assignment si/1 ai/1 an/Assignment 1` will only change the name of the selected assignment.
+* `edit_assignment si/1 ai/1 ms/100` will only change the max score of the selected assignment.
+* `edit_assignment si/1 ai/2 an/Math Assignment ms/100` will change the 2nd assignment of the 1st student to be with 
+  a new name `Math Assignment` and a new max score `100`.
+
+  Before execution:
+  ![result for `edit_assignment si/1 ai/2 an/Math Assignment ms/100`](images/editAssignment1.png)
+  After execution:
+  ![result for `edit_assignment si/1 ai/2 an/Math Assignment ms/100`](images/editAssignment2.png)
+
 ### Marking an assignment as submitted: `mark`
 
 Marks an existing assignment belonging to a student as submitted, based on the student's index and the assignment's index.
@@ -212,12 +237,20 @@ Examples:
 
 ### Grading an assignment: `grade`
 
-Edits the s of an assignment belonging to a student and marks it as submitted.
+Edits the score of an assignment belonging to a student and marks it as submitted.
 
 Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
 
+* The score must be a positive integer that is in bounds of the minimum and maximum scores of the assignment.
+* The index refers to the index number shown in the displayed student list and the assignment list on the student detail 
+  panel respectively.
+* The score can be regraded multiple times by using the `grade` command again.
+
 Examples:
-* `grade si/1 ai/1 s/100`
+* `view_student 1` followed by `grade si/1 ai/1 s/80` grades the 1st assignment of the 1st
+    student in the results of the `find` command with a score of 80.
+* `grade si/1 ai/1 s/80`
+  ![result for `grade si/1 ai/1 s/80`](images/gradeAssignment.png)
 
 ### Adding a remark to a student: `remark`
 Adds a remark to a existing student in the displayed list.
@@ -290,6 +323,7 @@ Action            | Format, Examples
 **Help**          | `help`
 **Add Assignment**| `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
 **Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`
+**Edit Assignment** | `edit_assignment si/INDEX ai/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80`
 **Mark Assignment** | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`
 **Unmark Assignment** | `unmark si/INDEX ai/INDEX`<br> e.g., `unmark si/1 ai/1`
 **Grade Assignment** | `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`<br> e.g., `grade si/1 ai/1 s/100`
