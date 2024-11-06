@@ -105,7 +105,7 @@ public class TagAddCommandTest {
 
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
-        String nonDuplicateMessage = String.format(TagAddCommand.MESSAGE_WEDDING_DOESNT_EXIST + "\n",
+        String nonDuplicateMessage = String.format(TagAddCommand.MESSAGE_WEDDING_DOESNT_EXIST,
                 VALID_TAG_WEDDING2, VALID_TAG_WEDDING2);
         String duplicatesMessage = String.format(TagAddCommand.MESSAGE_DUPLICATE_TAGS,
                 Messages.getName(editedPerson), VALID_TAG_WEDDING1);
