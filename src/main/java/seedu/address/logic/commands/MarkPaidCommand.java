@@ -66,7 +66,8 @@ public class MarkPaidCommand extends Command {
                 .filtered(participation -> participation.getStudent().equals(personToMarkPayment)).stream().toList();
 
         if (participationsToDelete.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT, personToMarkPayment.getName()));
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT,
+                    personToMarkPayment.getName()));
         }
 
         for (Participation participation : participationsToDelete) {
