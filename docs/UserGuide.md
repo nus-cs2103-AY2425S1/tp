@@ -174,14 +174,14 @@ Format: `list [SORT_ORDER]`
 
 Valid inputs for sort order parameter: `timeadded`, `timeadded asc`, `timeadded desc`, `name`, `name asc`, `name desc`
 
+</div>
+
 * `SORT_ORDER` parameter is **optional**. If parameter is not provided, the patients listed will be sorted in the order they were added. The patient who was added the most recently will be at the bottom of the list.
 * `timeadded`, `timeadded asc` and `timeadded desc` will sort the patient list according to the time they were added to Medconnect.
 * `timeadded` and `timeadded asc` will sort the patient list from least to most recently added. `timeadded desc` will sort the patient list from most to least recently added.
 <br><br>
 * `name`, `name asc` and `name desc` will sort the patient list according to their name in alphabetical order.
 * `name` and `name asc` will sort by the patients' names from A to Z. `name desc` will sort by the patients' names from Z to A.
-
-</div>
 
 [↑ Back to top](#table-of-contents)
 
