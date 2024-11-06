@@ -160,40 +160,35 @@ public class ParserUtilTest {
     public void parseTag_emptyKeyAndValue_throwsParseException() {
         String tagWithoutKeyAndValue = ":";
         assertThrows(ParseException.class,
-                Tag.MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY,
-                () -> ParserUtil.parseTag(tagWithoutKeyAndValue));
+                Tag.MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY, () -> ParserUtil.parseTag(tagWithoutKeyAndValue));
     }
 
     @Test
     public void parseTag_emptyKey_throwsParseException() {
         String tagWithEmptyKey = ":value";
         assertThrows(ParseException.class,
-                Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING,
-                () -> ParserUtil.parseTag(tagWithEmptyKey));
+                Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING, () -> ParserUtil.parseTag(tagWithEmptyKey));
     }
 
     @Test
     public void parseTag_invalidKey_throwsParseException() {
         String tagWithInvalidKey = "$key:value";
         assertThrows(ParseException.class,
-                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC,
-                () -> ParserUtil.parseTag(tagWithInvalidKey));
+                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC, () -> ParserUtil.parseTag(tagWithInvalidKey));
     }
 
     @Test
     public void parseTag_emptyValue_throwsParseException() {
         String tagWithEmptyValue = "key:";
         assertThrows(ParseException.class,
-                Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING,
-                () -> ParserUtil.parseTag(tagWithEmptyValue));
+                Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING, () -> ParserUtil.parseTag(tagWithEmptyValue));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
         String tagWithInvalidValue = "key:$value";
         assertThrows(ParseException.class,
-                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC,
-                () -> ParserUtil.parseTag(tagWithInvalidValue));
+                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC, () -> ParserUtil.parseTag(tagWithInvalidValue));
     }
 
     @Test
