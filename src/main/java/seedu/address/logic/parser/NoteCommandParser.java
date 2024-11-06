@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.ParserUtil.parseNote;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Note;
 
 /**
  * Parses input arguments and creates a new {@code NoteCommand} object

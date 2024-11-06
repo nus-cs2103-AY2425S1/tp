@@ -70,7 +70,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_tag() throws Exception {
         String userInput = TagCommand.COMMAND_WORD + NAME_DESC_AMY + LEVEL_DESC_S1_NA;
-        TagCommand command =(TagCommand) parser.parseCommand(userInput);
+        TagCommand command = (TagCommand) parser.parseCommand(userInput);
         UpdateStudentDescriptor editStudentTags = new UpdateStudentDescriptor();
         editStudentTags.setLevel(parseLevel(VALID_LEVEL_S1_NA));
         assertEquals(new TagCommand(new Name(VALID_NAME_AMY), editStudentTags), command);
