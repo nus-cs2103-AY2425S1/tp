@@ -82,15 +82,17 @@ public class TutorialList {
      * @param tutorial The tutorial to be deleted.
      * @throws TutNoFoundException if the tutorial does not exist in the list.
      */
-    public void deleteTutorial(Tutorial tutorial) {
+    public String deleteTutorial(Tutorial tutorial) {
         if (!hasTutorial(tutorial)) {
             throw new TutNoFoundException();
         }
+        Tutorial tut = getTutorial(tutorial);
         tutorials.stream()
                 .filter(x -> x.equals(tutorial))
                 .forEach(t -> t.getStudents().stream()
                         .forEach(student -> assignStudent(student, TutorialId.none())));
         this.tutorials.remove(tutorial);
+        return tut.toString();
     }
 
     /**
@@ -143,6 +145,20 @@ public class TutorialList {
         requireNonNull(newData);
         this.tutorials.clear();
         this.tutorials.addAll(newData.tutorials);
+    }
+
+    /**
+     * Retrieves the specified tutorial from the list of tutorials.
+     *
+     * @param tutorial The tutorial to be retrieved.
+     * @return The matching tutorial from the list.
+     * @throws TutNoFoundException if the specified tutorial does not exist in the list.
+     */
+    private Tutorial getTutorial(Tutorial tutorial) {
+        return tutorials.stream()
+                .filter(tutorial::equals)
+                .findFirst()
+                .orElseThrow(TutNoFoundException::new);
     }
 
     @Override

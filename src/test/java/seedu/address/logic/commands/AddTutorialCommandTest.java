@@ -231,7 +231,7 @@ public class AddTutorialCommandTest {
         }
 
         @Override
-        public void deleteTutorial(Tutorial tutorial) {
+        public String deleteTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 
