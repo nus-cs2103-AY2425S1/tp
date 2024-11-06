@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.company.Company;
 
-
 /**
  * An UI component that displays information of a {@code Company}.
  */
@@ -49,7 +48,7 @@ public class CompanyCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Company} and index to
+     * Creates a {@code CompanyCode} with the given {@code Company} and index to
      * display.
      */
     public CompanyCard(Company company, int displayedIndex) {
