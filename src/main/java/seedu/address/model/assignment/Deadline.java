@@ -35,7 +35,7 @@ public class Deadline {
      */
     public static boolean isValidDeadline(String deadline) {
         try {
-            DATE_TIME_FORMATTER.parse(deadline);
+            LocalDate.parse(deadline, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             return false;
         }
