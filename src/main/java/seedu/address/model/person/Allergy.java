@@ -31,7 +31,7 @@ public class Allergy {
      * Returns true if a given string is a valid allergy.
      */
     public static boolean isValidAllergy(String test) {
-        return !test.isEmpty() && test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
