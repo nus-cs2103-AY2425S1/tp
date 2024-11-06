@@ -50,8 +50,8 @@ class JsonAdaptedWedding {
         } else {
             client = new JsonAdaptedPerson(source.getClient().getPerson());
         }
-        date = source.getDate() == null ? "" : source.getDate().toString();
-        venue = source.getVenue() == null ? "" : source.getVenue().toString();
+        date = source.getDate() == null ? null : source.getDate().toString();
+        venue = source.getVenue() == null ? null : source.getVenue().toString();
     }
 
     /**
@@ -74,21 +74,21 @@ class JsonAdaptedWedding {
 
         Client finalClient = new Client(client.toModelType(weddingList));
 
-        if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        Date modelDate = null;
+        if (date != null) {
+            if (!Date.isValidDate(date)) {
+                throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+            }
+            modelDate = new Date(date);
         }
-        if (!Date.isValidDate(date)) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
-        }
-        final Date modelDate = new Date(date);
 
-        if (venue == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));
+        Venue modelVenue = null;
+        if (venue != null) {
+            if (!Venue.isValidVenue(venue)) {
+                throw new IllegalValueException(Venue.MESSAGE_CONSTRAINTS);
+            }
+            modelVenue = new Venue(venue);
         }
-        if (!Venue.isValidVenue(venue)) {
-            throw new IllegalValueException(Venue.MESSAGE_CONSTRAINTS);
-        }
-        final Venue modelVenue = new Venue(venue);
 
         return new Wedding(modelName, finalClient, modelDate, modelVenue);
     }
