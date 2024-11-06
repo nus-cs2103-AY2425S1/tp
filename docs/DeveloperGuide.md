@@ -310,81 +310,131 @@ Priorities:
 
 (For all use cases below, the **System** is *Bridal Boss* and the **Actor** is the *Wedding Organizer*.)
 
-#### **Use Case: Delete a Contact**
-1. Wedding Organizer displays person list containing the contact they wish to delete.
-2. Wedding Organizer deletes a contact using the delete command.
-
-**Extensions:**
-
-- **2a.** Person name/index is not in the displayed list
-    - **2a1.** Error message displayed in result display.
-        - Use case ends.
-- **2b.** Duplicate contacts with name containing inputted name
-    - **2b1.** Bridal Boss filters the person list to show contacts containing inputted name.
-    - **2b2.** Use case resumes from step 2.
-- **2c.** Person is a client of a wedding
-    - **2c1.** Error message is displayed in result display.
-        - Use case ends.
-
-#### **Use Case: Filter Contacts by Tags**
+#### **Use Case: Add a Contact**
 
 **MSS:**
 
-1. Wedding Organizer requests to filter contacts by specific tag(s).
-2. Bridal Boss prompts for the tag(s) to filter by.
-3. Wedding Organizer enters the desired tag(s), prefixed with t/ (e.g., "t/Florist", "t/Wedding A").
-4. Bridal Boss displays a list of contacts that match the specified tag(s).
-
+1. Wedding Organizer adds a contact using the add command.
    Use case ends.
 
 **Extensions:**
 
-- **1a.** Wedding Organizer provides multiple tags to filter by.
-    - Bridal Boss will display contacts that match all specified tags.
-        - Use case resumes from step 4.
+- **1a.** Name, phone, email, address prefixes not inputed
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Name is blank, contains invalid symbol or beyond 70 characters
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Phone is not 8 digits, and does not begin with '8' or '9'
+    - **1c1.** Error message displayed in result display.
+        - Use case ends.
+- **1d.** Email is blank, or does not contain '@'
+    - **1d1.** Error message displayed in result display.
+        - Use case ends.
+- **1e.** Address is blank
+    - **1e1.** Error message displayed in result display.
+        - Use case ends.
+- **1f.** Role is blank when prefix is inputted, or is not one word
+    - **1f1.** Error message is displayed in result display.  
+- **1g.** Wedding is blank when prefix is inputted, or is not one word
+    - **1g1.** Error message is displayed in result display.
+- **1h.** Wedding field is not an index.
+    - **1h1.** Error message is displayed in result display.
+- **1i.** Wedding index inputted is not in the list.
+    - **1i1.** Error message is displayed in result display.
 
-- **3a.** No contacts match the specified tag(s).
-    - **3a1.** Bridal Boss displays a message indicating that no contacts were found.
+#### **Use Case: View a Contact**
+1. Wedding Organizer views a contact using the view command.
+
+**Extensions:**
+
+- **1a.** No prefixes inputted.
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Person name does not exist in the address book
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Person index is not in the displayed list
+    - **1c1.** Error message displayed in result display.
+        - Use case ends.
+- **1d.** Duplicate contacts with name containing inputted name
+    - **1d1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **1d2.** Person list filtered to contain contacts with names containing inputted name.
+    - **1d3.** Error message is displayed in result display.
+        - Use case ends.
+- **1e.** Person is a client of a wedding
+    - **1e1.** Error message is displayed in result display.
         - Use case ends.
 
-- **3b.** Wedding Organizer enters an invalid or nonexistent tag.
-    - **3b1.** Bridal Boss displays an error message indicating the tag is invalid.
-    - **3b2.** Wedding Organizer re-enters the tag(s).
-        - Steps 3b1-3b2 are repeated until valid tag(s) are entered.
-        - Use case resumes from step 4.
+#### **Use Case: Filter Contacts**
+1. Wedding Organizer filters contacts using the filter command.
+
+**Extensions:**
+
+- **1a.** No prefixes inputted.
+    - **1a1.** Error message displayed in result display.
+        - Use case ends
+
+#### **Use Case: Delete a Contact**
+1. Wedding Organizer deletes a contact using the delete command.
+
+**Extensions:**
+
+- **1a.** Person name does not exist in the address book
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Person index is not in the displayed list
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Duplicate contacts with name containing inputted name
+    - **1c1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **1c2.** Use case resumes from step 1.
+- **1d.** Person is a client of a wedding
+    - **1d1.** Error message is displayed in result display.
+        - Use case ends.
 
 #### **Use Case: Add a Wedding**
 
 **MSS:**
 
-1. Wedding Organizer displays person list containing contacts that they wish to set as client for wedding.
-2. Wedding Organizer adds a wedding using the addw command.
+1. Wedding Organizer adds a wedding using the addw command.
    Use case ends.
 
 **Extensions:**
 
-- **2a.** Person/Wedding name/index is not in the displayed list.
-    - **2a1.** Error message displayed in result display.
+- **1a.** Contact name does not exist in the address book
+    - **1a1.** Error message displayed in result display.
         - Use case ends.
-- **2b.** Duplicate client name
-    - **2b1.** Bridal Boss filters the person list to show contacts containing inputted name.
-    - **2b2.** Use case resumes from step 2.
+- **1b.** Contact/Wedding index is not in the displayed list
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Duplicate contacts with name containing inputted name
+    - **1c1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **1c2.** Use case resumes from step 1.
+  - **1d.** Contact is already a client of another wedding
+    - **1d1.** Error message displayed in result display.
+        - Use case ends.
 
 #### **Use Case: Assign a contact to a Wedding**
 
 **MSS:**
 
-1. Wedding Organizer displays person and wedding list containing contact and wedding that they need.
-2. Wedding Organizer assigns the person (by name or index) to the wedding (by index) using the assign command.
+1Wedding Organizer assigns the person (by name or index) to the wedding (by index) using the assign command.
    Use case ends.
 
 **Extensions:**
-- **2a.** Person/Wedding name/index is not in the displayed list.
-    - **2a1.** Error message displayed in result display.
+- **1a.** Contact name does not exist in the address book
+    - **1a1.** Error message displayed in result display.
         - Use case ends.
-- **2b.** Duplicate name
-    - **2b1.** Bridal Boss filters the person list to show contacts containing inputted name.
-    - **2b2.** Use case resumes from step 2.
+- **1b.** Contact/Wedding index is not in the displayed list
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Duplicate contacts with name containing inputted name
+    - **1c1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **1c2.** Use case resumes from step 1.
+- **1d.** Contact is already assigned to the wedding
+    - **1d1.** Error message displayed in result display.
+        - Use case ends.
 
 ### Non-Functional Requirements
 
