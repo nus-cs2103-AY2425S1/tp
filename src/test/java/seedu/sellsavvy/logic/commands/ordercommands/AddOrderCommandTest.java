@@ -2,7 +2,9 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 import static seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand.MESSAGE_DUPLICATE_ORDER_WARNING;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
@@ -23,6 +25,7 @@ import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.Person;
@@ -72,6 +75,28 @@ public class AddOrderCommandTest {
         expectedModel.updateSelectedPerson(personToAddUnder);
         String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
                 + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(ABACUS));
+
+        assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_similarPendingOrder_warningGiven() {
+        // add something similar(but not identical) to the first order to the person's order list
+        String editedItemString = normalise(ABACUS.getItem().fullDescription);
+        Order toAdd = new OrderBuilder(ABACUS).withItem(editedItemString).build();
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, toAdd);
+
+        //ensures it is not equal to ABACUS
+        assertNotEquals(toAdd, ABACUS);
+
+        model.getFilteredPersonList().get(0).getOrderList().add(toAdd.createCopy());
+
+        Model expectedModel = model.createCopy();
+        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
+        personToAddUnder.getOrderList().add(toAdd);
+        expectedModel.updateSelectedPerson(personToAddUnder);
+        String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
+                + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(toAdd));
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }

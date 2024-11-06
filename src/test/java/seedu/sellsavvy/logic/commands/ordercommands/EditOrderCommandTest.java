@@ -219,7 +219,7 @@ public class EditOrderCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Edits filtered list where index is larger than size of filtered order list,
      * but smaller than size of unfiltered order list
      */
     @Test
