@@ -8,39 +8,35 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
-<HBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" HBox.hgrow="SOMETIMES" minWidth="200" prefWidth="200">
-    <padding>
-        <Insets top="5" right="5" bottom="5" left="15"/>
-    </padding>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" minWidth="200" prefWidth="300">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints hgrow="NEVER"/>
+        </columnConstraints>
+        <padding>
+            <Insets top="5" right="5" bottom="5" left="15"/>
+        </padding>
+        <VBox alignment="CENTER" spacing="5" minWidth="50" maxWidth="50" GridPane.columnIndex="0">
+            <Label fx:id="month" styleClass="transaction-month"/>
+            <Label fx:id="day" styleClass="transaction-day"/>
+        </VBox>
 
-    <VBox alignment="CENTER" spacing="5" minWidth="50" maxWidth="50">
-        <Label fx:id="month" styleClass="transaction-month"/>
-        <Label fx:id="day" styleClass="transaction-day"/>
-    </VBox>
+        <VBox alignment="CENTER_LEFT" minWidth="80" GridPane.columnIndex="1">
+            <HBox spacing="5">
+                <Label fx:id="name" styleClass="transaction-name" wrapText="true"/>
+                <ImageView fx:id="done"/>
+            </HBox>
+            <FlowPane fx:id="categories"/>
+            <Label fx:id="description" styleClass="transaction-description" wrapText="true"/>
+        </VBox>
 
-    <VBox alignment="CENTER_LEFT" minWidth="80" HBox.hgrow="SOMETIMES">
-        <HBox spacing="5">
-            <Label fx:id="name" styleClass="transaction-name">
-                <minWidth>
-                    <!-- Ensures that the label text is never truncated -->
-                    <Region fx:constant="USE_PREF_SIZE"/>
-                </minWidth>
-            </Label>
-            <ImageView fx:id="done"/>
-        </HBox>
-        <FlowPane fx:id="categories"/>
-        <Label fx:id="description" styleClass="transaction-description">
-            <minWidth>
-                <!-- Ensures that the label text is never truncated -->
-                <Region fx:constant="USE_PREF_SIZE"/>
-            </minWidth>
-        </Label>
-    </VBox>
-
-    <Region HBox.hgrow="ALWAYS"/>
-
-    <VBox alignment="CENTER_RIGHT" spacing="10" minWidth="70" maxWidth="70">
-        <Label fx:id="status" styleClass="amount"/>
-        <Label fx:id="amount" styleClass="amount"/>
-    </VBox>
+        <VBox alignment="CENTER_RIGHT" spacing="10" minWidth="70" maxWidth="70" GridPane.columnIndex="2">
+            <Label fx:id="status" styleClass="amount"/>
+            <Label fx:id="amount" styleClass="amount"/>
+        </VBox>
+    </GridPane>
 </HBox>
