@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_NON_POSITIVE_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -35,6 +34,13 @@ public class DeleteTagCommandParserTest {
     }
 
     @Test
+    public void parse_validArgsWithDeleteFromAll_returnsDeleteTagCommand() {
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("test"));
+        assertParseSuccess(parser, "all t/test", new DeleteTagCommand("all", tags));
+    }
+
+    @Test
     public void parse_missingTags_throwsParseException() {
         assertParseFailure(parser, "1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
@@ -55,6 +61,11 @@ public class DeleteTagCommandParserTest {
     @Test
     public void parse_indexError_throwsParseException() {
         assertParseFailure(parser, "-1 t/hi",
-                String.format(MESSAGE_NON_POSITIVE_INDEX, DeleteTagCommand.MESSAGE_USAGE));
+                String.format(DeleteTagCommand.INVALID_INDEX_OR_STRING, DeleteTagCommand.MESSAGE_USAGE));
+    }
+    @Test
+    public void parse_stringError_throwsParseException() {
+        assertParseFailure(parser, "al t/hi",
+                String.format(DeleteTagCommand.INVALID_INDEX_OR_STRING, DeleteTagCommand.MESSAGE_USAGE));
     }
 }
