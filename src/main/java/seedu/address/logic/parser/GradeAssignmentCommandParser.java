@@ -42,8 +42,7 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
             assignmentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_ASSIGNMENT_INDEX).get());
             score = ParserUtil.parseScore(argumentMultimap.getValue(PREFIX_ASSIGNMENT_SCORE).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    GradeAssignmentCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
         return new GradeAssignmentCommand(studentIndex, assignmentIndex, score);
     }

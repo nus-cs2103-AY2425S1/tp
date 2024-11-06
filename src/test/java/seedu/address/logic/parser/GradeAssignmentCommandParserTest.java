@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
@@ -17,6 +18,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.GradeAssignmentCommand;
+import seedu.address.model.assignment.Assignment;
 
 public class GradeAssignmentCommandParserTest {
 
@@ -53,8 +55,7 @@ public class GradeAssignmentCommandParserTest {
         String userInput = " " + PREFIX_STUDENT_INDEX + INVALID_INDEX
                 + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_SCORE + VALID_SCORE;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                GradeAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -62,8 +63,7 @@ public class GradeAssignmentCommandParserTest {
         String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_SECOND_STUDENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_INDEX + INVALID_INDEX
                 + " " + PREFIX_ASSIGNMENT_SCORE + VALID_SCORE;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                GradeAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -71,8 +71,7 @@ public class GradeAssignmentCommandParserTest {
         String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_SECOND_STUDENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_SCORE + INVALID_SCORE;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                GradeAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, Assignment.SCORE_MESSAGE_CONSTRAINTS);
     }
 
     @Test

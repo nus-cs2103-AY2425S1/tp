@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.model.assignment.Assignment.MAX_SCORE_MESSAGE_CONSTRAINTS;
 import static seedu.address.model.assignment.AssignmentName.MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
@@ -61,7 +62,7 @@ public class EditAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_NAME + VALID_ASSIGNMENT_NAME_MATH
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + VALID_MAX_SCORE_MATH;
 
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -71,7 +72,7 @@ public class EditAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_NAME + VALID_ASSIGNMENT_NAME_MATH
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + VALID_MAX_SCORE_MATH;
 
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
     }
 
     @Test
