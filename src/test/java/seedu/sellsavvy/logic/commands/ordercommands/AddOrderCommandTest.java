@@ -25,7 +25,6 @@ import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
-import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.Person;

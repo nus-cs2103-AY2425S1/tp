@@ -7,8 +7,6 @@ import static seedu.sellsavvy.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
 
-import javax.print.DocFlavor;
-
 import org.junit.jupiter.api.Test;
 
 public class StringUtilTest {
