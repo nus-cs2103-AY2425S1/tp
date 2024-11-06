@@ -62,7 +62,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     private String[] validateAndSplitArgs(String args) throws ParseException {
         String[] splitArgs = args.trim().split("\\s+");
 
-        if (splitArgs.length < MINIMUM_ARGS_LENGTH) {
+        if (splitArgs.length < 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
