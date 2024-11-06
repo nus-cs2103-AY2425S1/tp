@@ -293,17 +293,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​  | I want to …​                                                                         | So that I can…​                                                        |
 |----------|----------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user | see usage instructions                                                               | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user | easily access usage instructions                                                     | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user     | add new contacts with their details (eg. name, phone number, email, telegram handle) | keep track of my contacts in the app                                   |
 | `* * *`  | user     | delete a contact                                                                     | remove entries that I no longer need                                   |
 | `* * *`  | user     | find a person by name or telegram handle                                             | locate details of persons without having to go through the entire list |
 | `* * *`  | user     | edit contact details (e.g. phone number, email)                                      | so that I can keep the information up to date                          |
 | `* *`    | student  | add a new contact with multiple tags (e.g., CCA, classmate)                          | categorise them based on different associations                        |
 | `* *`    | student  | categorise contacts into different contact types (eg. work, personal)                | organise people according to my needs                                  |
+| '* *'.   | student  | be able to filter my contacts based off different contact types                      | find my contacts faster                                                |
 | `* *`    | student  | tag contacts with multiple categories                                                | find them easily in different contexts                                 |
 | `*`      | student  | receive reminders to reach out to contacts I haven’t communicated with in a while    | maintain my connections                                                |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -450,6 +450,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 3.
 
   Use case ends.
+
+**Use case: UC007 - Filter contacts by contact type**
+
+**MSS**
+
+1. User requests to filter contacts by contact type
+2. User enters the contact type to be filtered
+3. UniLink shows a list of persons with the contact type
+    
+    Use case ends.
+
+**Extensions**
+* 3a. The list is empty.
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
