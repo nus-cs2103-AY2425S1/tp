@@ -17,9 +17,12 @@ public abstract class Command {
     public static Set<String> getPersonActionCommands() {
         if (personActionCommands == null) {
             personActionCommands = Set.of(
-                    AddCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
-                    EditCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD
-            );
+                AddCommand.COMMAND_WORD,
+                EditCommand.COMMAND_WORD,
+                DeleteCommand.COMMAND_WORD,
+                ClearCommand.COMMAND_WORD,
+                ArchiveCommand.COMMAND_WORD_ARCHIVE,
+                ArchiveCommand.COMMAND_WORD_UNARCHIVE);
         }
         return personActionCommands;
     }
@@ -27,9 +30,9 @@ public abstract class Command {
     public static Set<String> getAppointmentActionCommands() {
         if (appointmentActionCommands == null) {
             appointmentActionCommands = Set.of(
-                    AddAppointmentCommand.COMMAND_WORD, DeleteAppointmentCommand.COMMAND_WORD,
-                    EditAppointmentCommand.COMMAND_WORD
-            );
+                AddAppointmentCommand.COMMAND_WORD,
+                EditAppointmentCommand.COMMAND_WORD,
+                DeleteAppointmentCommand.COMMAND_WORD);
         }
         return appointmentActionCommands;
     }
