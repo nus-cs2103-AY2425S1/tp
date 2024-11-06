@@ -62,7 +62,7 @@ public class ParserUtilTest {
     private static final String VALID_ABSENT_DATE = "20-10-2024";
     private static final String VALID_ABSENT_REASON = "Sick";
     private static final String VALID_EXAM = "Midterm";
-    private static final String VALID_EXAMSCORE = "101.0";
+    private static final String VALID_EXAMSCORE = "70.0";
     private static final String VALID_SORT_ATTRIBUTE = "register number";
 
     private static final String WHITESPACE = " \t\r\n";
