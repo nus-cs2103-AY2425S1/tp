@@ -293,6 +293,18 @@ Furthermore, certain edits can cause the app to behave in unexpected ways (e.g.,
 
 _Details coming soon ..._
 
+### Marking appointments: `mark` `[coming in v2.0]`
+
+_Details coming soon ..._
+
+### Unmarking appointments: `unmark` `[coming in v2.0]`
+
+_Details coming soon ..._
+
+### Listing appointments: `list-appt` `[coming in v2.0]`
+
+_Details coming soon ..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
