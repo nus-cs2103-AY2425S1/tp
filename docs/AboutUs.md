@@ -15,7 +15,6 @@ You can reach us at the email `cs2103t-w13-3@outlook.com`
 
 <img src="images/t-leongchuan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/t-leongchuan)]
 [[portfolio](team/johndoe.md)]
 
