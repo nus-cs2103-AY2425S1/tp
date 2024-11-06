@@ -81,7 +81,7 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Opens a new window that displays a list of all available commands along with their usage instructions.
 
 ![help message](images/helpMessage.png)
 #### Format
@@ -144,7 +144,7 @@ Edits an existing person in the address book.
 
 #### Format
 ```
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 ```
 
 #### Alias
@@ -173,35 +173,57 @@ You can remove all the person’s roles by typing `r/` without specifying any ro
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
-Finds persons whose names contain any of the given keywords.
+Search for contact(s) whose contact details satisfy either of the following:
+1. Name contains any of the given name keyword(s)
+2. Has a role stated by any of the role keyword(s)
+3. Telegram handle which matches exactly with any of the given telegram keyword(s)
+4. Is a favourite contact
 
 #### Format
 ```
-find [n/NAMEKEYWORD] [r/ROLEKEYWORD] [t/TELEGRAMKEYWORD] [f/] 
+find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/] 
 ```
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-When using `find`, at least one of the optional parameters must be included
+When using `find`, at least **one** of the optional parameters must be included.
 </div>
 
 #### Alias
 `f` can be used in place of `find`.
 
 #### Parameters
-|Parameter|Prefix|Compulsory?| Remarks                                                                                    |
-|---------|------|-----------|--------------------------------------------------------------------------------------------|
-|`NAMEKEYWORD`|`n/`|No| Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name |
-|`ROLEKEYWORD`|`r/`|No| Represents the role to be searched.<br/> `ROLEKEYWORD` has to match exactly with the role |
-|`TELEGRAMKEYWORD`|`t/`|No| Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle|
+|Parameter|Prefix|Compulsory?| Remarks                                                                                                                                                                    |
+|---------|------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`NAMEKEYWORD`|`n/`|No| Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name                                                                                 |
+|`ROLEKEYWORD`|`r/`|No| Represents the role to be searched.<br/> `ROLEKEYWORD` has to match exactly with the role. <br/> Contacts with roles matching at least one `ROLEKEYWORD` will be returned. |
+|`TELEGRAMKEYWORD`|`t/`|No| Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle                                                        |
+|                |`f/`|No| Represents finding all contacts that have been favourited                                                                                                                  |
 
 * The search is case-insensitive for all parameters. E.g `hans` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
 
 #### Example
-* `find n/john` returns contacts with the name `john` and `John Doe`
-* `find n/jane t/johnDoe` returns contacts with the name `jane` and a contact with the telegram handle `johnDoe`<br>
+##### Usage: Find by name
+* `find n/john` returns `John Doe`, `John`, `Bob Johnson`<br>
+  ![result for 'find n/john'](images/findJohnDoeJohnBobJohnson.png)
+
+##### Usage: Find by role
+* `find r/exco` returns `Michael` who has the role `exco`<br>
+  ![result for 'find r/exco'](images/findExcoResult.png)
+
+##### Usage: Find by telegram
+* `find t/eveadams` returns `Eve Adams` who has a telegram handle `eveadams`<br>
+  ![result for 'find t/eveadams'](images/findeveadamsResult.png)
+
+##### Usage: Find by favourite
+* `find f/` returns all 4 favourite contacts<br>
+  ![result for 'find f/'](images/findFavouriteResult.png)
+
+##### Usage: Find composition
+Composing all 4 types of search will give an `OR` search, a contact that has at least one matching criteria will be returned.
+* `find n/john f/` returns all contacts with a name that partially matches `john`, **OR** are favourited contacts
 
 ### Sorting the contacts: `sort`
 
@@ -245,7 +267,7 @@ delete INDEX
 
 * The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`
 
-Examples:
+#### Examples
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
@@ -346,6 +368,60 @@ Exits the program.
 exit
 ```
 
+### Switching a profile : `switch`
+The `switch` command allows you to change the current session to a specified profile.
+- If a valid profile name is provided, the session will switch to that profile.
+  - If the profile already exists, it will switch to the existing profile.
+  - If the profile does not exist, a new profile with that name will be created.
+
+
+- If no profile name is provided (empty input) and multiple profiles exist, the command will display a list of
+available profiles to switch to.
+- Attempting to switch to the currently active profile will not perform a switch.
+
+#### Format
+```
+switch PROFILE
+```
+
+#### Alias
+`sw` can be used in place of `switch`
+
+#### Parameters
+| Parameter  |Prefix|Compulsory?| Remarks                                                                                                                                                                                                                                                                                        |
+|------------|------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`PROFILE` |       |Yes         | `PROFILE` specifies the profile that `switch` will attempt to switch to.<br/> `PROFILE` must be between 1 and 30 characters, and can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).<br/> `PROFILE` names are **case-insensitive** and treated as lowercase. |
+
+#### Example
+  - `switch john-doe` switches to a profile named 'john-doe'
+  - `sw ALICE` switches to a profile named 'alice'
+  - `switch` lists all available profiles that you can switch to, if they exist.
+
+### Deleting a profile: `deleteProfile`
+
+The `deleteProfile` command removes an existing profile from the system.
+  
+#### Format
+```
+deleteProfile PROFILE
+```
+
+#### Alias
+`delp` can be used in place of `deleteProfile`
+
+#### Parameters
+| Parameter  |Prefix|Compulsory?| Remarks                                                                                                                                                                                                                                                            |
+|------------|------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`PROFILE` |       |Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all requirements from the `switch` command, and should be an existing profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile. |
+
+
+#### Example
+Assuming your current profile is `addressbook`, then:
+* `deleteProfile addressbook` is not allowed because `addressbook` is the active profile.
+* `sw alice` switches the current profile to `alice`
+* `delp addressbook` deletes the `addressbook` profile after switching to 'alice'
+
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -378,15 +454,18 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-**Attendance** | `attendance` or `atd`
-**Mark Attendance** | `mark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` or `m t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` <br> e.g., `mark t/berniceYu t/alexYeoh d/2024-11-02`
-**Unmark Attendance** | `unmark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` or `um t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+Action | Format                                                                  | Example Usage|
+--------|-------------------------------------------------------------------------|-------------|
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​`                |`add n/James Ho p/82224444 e/jamesho@example.com t/jamesho r/logistics`
+**Clear** | `clear`                                                                 |`clear`
+**Delete** | `delete INDEX`                                                          | `delete 3`
+**Delete Profile** | `deleteProfile PROFILE`                                                 |`deleteProfile alice`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​` |`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`   | `find n/James Jake`
+**Sort** | `sort ORDER`                                                            |`sort ASC`
+**Switch** | `switch PROFILE`                                                        |`switch alice`
+**List** | `list`                                                                  |`list`
+**Help** | `help`                                                                  |`help`
+**Attendance** | `attendance`                                                            |`attendance`
+**Mark Attendance** | `mark t/TELEGRAM…​ d/DATE`                                              |`mark t/berniceYu t/alexYeoh d/2024-11-02`
+**Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                            |`unmark t/berniceYu d/2024-11-02`

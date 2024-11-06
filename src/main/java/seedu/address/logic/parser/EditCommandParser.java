@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FAVOURITE_LABEL;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NOT_FAVOURITE_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -51,7 +53,18 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM);
+        if (argMultimap.getValue(PREFIX_FAVOURITE).isPresent()
+                && !argMultimap.getAllValues(PREFIX_FAVOURITE).get(0).isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_FAVOURITE_LABEL);
+        }
+
+        if (argMultimap.getValue(PREFIX_NONFAVOURITE).isPresent()
+                && !argMultimap.getAllValues(PREFIX_NONFAVOURITE).get(0).isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_NOT_FAVOURITE_LABEL);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
+                PREFIX_FAVOURITE, PREFIX_NONFAVOURITE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
