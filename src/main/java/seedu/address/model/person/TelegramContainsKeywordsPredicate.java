@@ -18,7 +18,7 @@ public class TelegramContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getTelegram().equals(new Telegram(keyword)));
+                .anyMatch(keyword -> person.getTelegram().value.equalsIgnoreCase(keyword));
     }
 
     @Override
