@@ -248,7 +248,7 @@ The activity diagram below illustrates the sequence of actions users will follow
 
 <img src="images/EditPersonActivityDiagram.png" width="600"/>
 
-### Planned Enhancements
+## Planned Enhancements
 ### \[Proposed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -316,6 +316,56 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+### \[Proposed\] Adding an End Time to the Date Feature with Duplicate/Overlap Prevention
+
+To support effective scheduling, we propose adding an `end time` to the Date feature, along with functionality to prevent overlapping time slots. This will prevent double-booking, ensuring the doctor avoids conflicting appointments and maintains organized time management.
+#### Features Architecture Design
+
+1. **Data Model Update**
+    - Update the `Date` class to include an `endTime` field alongside `startTime`, using `LocalDate` for the date and `LocalTime` for `startTime` and `endTime` to distinguish between date and time clearly.
+      - Introduce an overlap-checking method `isOverlappingDate` within the `Date` class to determine if one `Date` object conflicts with another based on `startTime` and `endTime`.
+
+2. **Command Parsing and Validation**
+    - Modify `AddDateCommandParser` to handle an additional `endTime` parameter, ensuring both `startTime` and `endTime` are correctly formatted.
+    - Validation rules:
+        - Confirm that `endTime` follows the correct format and is after `startTime`.
+        - **Overlap Check:** Ensure that any new date entry does not overlap with existing dates in `ModelManager`. If an overlap is detected, reject the command and provide the user with an error message indicating a scheduling conflict.
+
+3. **ModelManager Update**
+    - Add an `hasOverlappingDate(Date newDate)` method to `ModelManager` to verify against existing entries, ensuring no overlaps occur between appointments. This check maintains scheduling integrity across the application.
+
+4. **Command Class Modification**
+    - Update the `AddDateCommand` class to accommodate the `endTime` parameter. Before adding a new date, validate against `ModelManager` to ensure it does not conflict with current schedules.
+
+5. **User Interface Update**
+    - Adjust the UI to enable users to specify both `startTime` and `endTime` fields.
+    - Display an error message when scheduling conflicts arise, instructing users to select an alternate time slot for their appointment.
+
+6. **Storage Update**
+    - Modify the storage schema to include the `endTime` field, ensuring proper serialization and deserialization so that time data remains consistent when loading and saving appointments.
+
+
+The following class diagram shows the interaction between the classes given the new update
+
+<img src="images/BetterDateClassDiagram.png" width="650" />
+
+The following activity diagram summarizes what happens when a user executes the date command with the new end time improvement.
+
+<img src="images/BetterDateActivityDiagram.png" width="650" />
+
+
+#### Considerations
+
+- **Edge Cases:** Handle cases where `endTime` is equal to or before `startTime`, and verify that appointments on different dates do not incorrectly trigger overlaps.
+- **Testing:** Add unit tests to validate the following scenarios:
+    - Non-overlapping time slots are added successfully.
+    - Overlapping time slots are correctly identified, resulting in command rejection.
+    - Edge cases with adjacent `startTime` and `endTime` that do not overlap are handled as expected.
+
+
+## **Implementation**
+This section describes some noteworthy details on how certain features are implemented.
+
 ### Email Feature
 
 The email feature allows users to add, edit, and view email addresses for each person in the address book.
@@ -339,6 +389,7 @@ The tag feature allows users to add, edit, and view tags for each person in the 
 ### Implementation
 
 A tag is represented by the 'Tag' class and 'JsonAdaptedTag' is used for JSON serialization and deserialization.
+In this version a person can only have 3 possible tags: High Risk, Low Risk and Medium Risk
 
 ### Date Feature
 

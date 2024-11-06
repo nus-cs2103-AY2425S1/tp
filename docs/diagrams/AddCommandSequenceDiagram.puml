@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute("add n/Nayana p/88502457 e/nayanamahesh7@gmail.com a/Address t/Low Risk m/None")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add n/Nayana p/88502457 e/nayanamahesh7@gmail.com a/Address t/Low Risk m/None")
+LogicManager -> AddressBookParser : parseCommand("add n/Nayana p...")
 activate AddressBookParser
 
 create AddCommandParser
@@ -27,7 +27,7 @@ activate AddCommandParser
 AddCommandParser --> AddressBookParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse("add n/Nayana p/88502457 e/nayanamahesh7@gmail.com a/Address t/Low Risk m/None")
+AddressBookParser -> AddCommandParser : parse("add n/Nayana p...")
 activate AddCommandParser
 
 create AddCommand
