@@ -46,4 +46,8 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    ListView<Person> getPersonListView() {
+        return this.personListView;
+    }
+
 }

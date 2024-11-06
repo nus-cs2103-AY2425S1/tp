@@ -26,3 +26,6 @@ password.txt
 key.txt
 /test/*
 docs/_markbind/logs/
+
+*.jks
+/docs/_markbind/logs/
