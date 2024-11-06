@@ -66,7 +66,7 @@ public class Person implements Comparable<Person> {
      * Every field with field must be present and not null with isArchived
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  PostalCode postalCode, Set<Tag> tags, Boolean isArchived) {
+                  PostalCode postalCode, Set<Tag> tags, OrderTracker orderTracker, Boolean isArchived) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -74,7 +74,7 @@ public class Person implements Comparable<Person> {
         this.address = address;
         this.tags.addAll(tags);
         this.postalCode = postalCode;
-        this.tracker = new OrderTracker();
+        this.tracker = orderTracker;
         this.isArchived = isArchived;
     }
 
@@ -159,12 +159,7 @@ public class Person implements Comparable<Person> {
      */
     @Override
     public int compareTo(Person rhs) {
-        if (this.getTotalOrderFrequencyCount() < rhs.getTotalOrderFrequencyCount()) {
-            return 1;
-        } else if (this.getTotalOrderFrequencyCount() > rhs.getTotalOrderFrequencyCount()) {
-            return -1;
-        }
-        return 0;
+        return rhs.getTotalOrderFrequencyCount() - this.getTotalOrderFrequencyCount();
     }
 
     /**
@@ -190,7 +185,7 @@ public class Person implements Comparable<Person> {
                 && tags.equals(otherPerson.tags)
                 && postalCode.equals(otherPerson.postalCode)
                 && tracker.equals(otherPerson.tracker)
-                && isArchived == otherPerson.isArchived;
+                && isArchived.equals(otherPerson.isArchived);
     }
 
     @Override

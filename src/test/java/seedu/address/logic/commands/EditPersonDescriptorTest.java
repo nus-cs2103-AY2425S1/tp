@@ -67,6 +67,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", postalCode="
                 + editPersonDescriptor.getPostalCode().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
+
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
