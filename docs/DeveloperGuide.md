@@ -45,8 +45,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -86,7 +86,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -97,9 +97,9 @@ visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -152,7 +152,7 @@ How the parsing works:
 ### Model component
 
 **API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -344,14 +344,14 @@ such as contact information, address and other basic personal data.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​              | I want to …​                       | So that I can…​                                                                                                   |
-|----------|----------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | user                 | add a new patient                  | I can create new patient records                                                                                  |
-| `* * *`  | user                 | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
-| `* * *`  | user                 | delete a patient's record          | remove entries that I no longer need                                                                              |
-| `* * *`  | user                 | search for a patient by name or ID | I can quickly access their information when needed                                                                |
-| `* * *`  | user                 | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
-| `* * `   | first-time user      | get help within the application    | I can understand how to use the commands                                                                          |
-| `* * `   | user who is careless | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
+|--------|----------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `* * *` | user                 | add a new patient                  | I can create new patient records                                                                                  |
+| `* * *` | user                 | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
+| `* * *` | user                 | delete a patient's record          | remove entries that I no longer need                                                                              |
+| `* * *` | user                 | search for a patient by name or ID | I can quickly access their information when needed                                                                |
+| `* * *` | user                 | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
+| `* * ` | first-time user      | get help within the application    | I can understand how to use the commands                                                                          |
+| `* `   | user who is careless | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
 
 ### Use cases
 
