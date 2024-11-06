@@ -41,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private PropertyListPanel propertyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -154,7 +155,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getBuyerListFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getBuyerListFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -210,6 +211,8 @@ public class MainWindow extends UiPart<Stage> {
         buyerListPane.setVisible(true);
         propertyListPane.setVisible(false);
 
+        statusBarFooter.updateText(logic.getBuyerListFilePath());
+
         modeLabel.setText("Viewing: Buyers");
     }
 
@@ -227,6 +230,8 @@ public class MainWindow extends UiPart<Stage> {
         buyerListPane.setVisible(false);
         propertyListPane.setVisible(false);
 
+        statusBarFooter.updateText(logic.getMeetUpListFilePath());
+
         modeLabel.setText("Viewing: Meet Ups");
     }
 
@@ -238,6 +243,8 @@ public class MainWindow extends UiPart<Stage> {
         meetUpListPane.setVisible(false);
         buyerListPane.setVisible(false);
         propertyListPane.setVisible(true);
+
+        statusBarFooter.updateText(logic.getPropertyListFilePath());
 
         modeLabel.setText("Viewing: Properties");
     }
