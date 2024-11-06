@@ -12,11 +12,12 @@ import seedu.address.model.person.Person;
  */
 public class Messages {
 
-    public static final String DEFAULT_OVERVIEW = """
+    public static final String MESSAGE_DEFAULT_OVERVIEW = """
             Hmm, did you mean to type any of these instead?:
             Add: add n/NAME id/STUDENT_ID [nid/NUS_NET_ID] [m/MAJOR] [y/YEAR] [g/GROUP]
             Edit: edit INDEX [n/NAME] [id/STUDENT_ID] [nid/NUS_NET_ID][[m/MAJOR] [y/YEAR] [g/GROUP]
-            Comment: comment INDEX c/COMMENTFind: find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]
+            Comment: comment INDEX c/COMMENT
+            Find: find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]
             Show group: show GROUP_INDEX
             Delete: delete INDEX
             List: list INDEX
@@ -36,6 +37,7 @@ public class Messages {
     public static final String MESSAGE_DELETE_UPPERBOUND_ERROR = "Sorry but the index was too large "
                 + "compared to your list size!";
     public static final String MESSAGE_DELETE_EMPTY_ERROR = "Sorry but you cannot delete from an empty list.";
+    public static final String MESSAGE_EDIT_EMPTY_ERROR = "Sorry but you cannot edit from an empty list.";
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_NUMBER_OF_ARGS = "There should be at least one argument";
@@ -49,7 +51,7 @@ public class Messages {
     public static final String MESSAGE_NO_STUDENTS_FOUND = "No students found matching the criteria.";
     public static final String MESSAGE_EVENT_NOT_FOUND = "Attendance event '%1$s' not found.";
     public static final String MESSAGE_DUPLICATE_GROUPS = "There are duplicate groups. "
-            + "Group names are treated as case insensitive ";
+            + "Group names are treated as case insensitive and with multiple spaces considered equivalent.";
     public static final String MESSAGE_INVALID_PREFIX = "If you are trying to use a prefix (eg. '/n'), ensure there "
             + "is a space before the prefix and that it is in this list."
             + "\nSupported prefixes: %1$s";
