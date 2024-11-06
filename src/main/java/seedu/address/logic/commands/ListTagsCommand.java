@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 
 
 /**
- * Lists all tasks in the address book to the user.
+ * Lists all tags in the address book to the user.
  */
 public class ListTagsCommand extends Command {
 
