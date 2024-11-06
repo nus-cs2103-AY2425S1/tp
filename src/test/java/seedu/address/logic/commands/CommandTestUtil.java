@@ -142,7 +142,7 @@ public class CommandTestUtil {
         AgentAssist expectedAgentAssist = new AgentAssist(actualModel.getAgentAssist());
         List<Client> expectedFilteredList = new ArrayList<>(actualModel.getFilteredClientList());
 
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel, false));
         assertEquals(expectedAgentAssist, actualModel.getAgentAssist());
         assertEquals(expectedFilteredList, actualModel.getFilteredClientList());
     }

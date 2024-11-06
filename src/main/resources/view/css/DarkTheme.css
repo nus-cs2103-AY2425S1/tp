@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #383838;
 }
 
 .label {
@@ -257,6 +257,26 @@
 
 #clientDetailsPanelPlaceholder {
   -fx-background-color: #383838;
+}
+
+.top-split-pane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: transparent;
+}
+
+.top-split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: derive(#1d1d1d, 40%);
+    -fx-padding: 0 1 0 1;
+}
+
+#cardPane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #1C1C1C;
 }
 
 .scroll-pane {
