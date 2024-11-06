@@ -12,7 +12,8 @@ public abstract class Command {
     public static final String[] ACTION_COMMANDS = {
         AddCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
         EditCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD,
-        AddAppointmentCommand.COMMAND_WORD, DeleteAppointmentCommand.COMMAND_WORD
+        AddAppointmentCommand.COMMAND_WORD, DeleteAppointmentCommand.COMMAND_WORD,
+        AddSchemeCommand.COMMAND_WORD, DeleteSchemeCommand.COMMAND_WORD,
     };
 
     /**
