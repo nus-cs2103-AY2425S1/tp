@@ -45,6 +45,10 @@ public class AddIngredientCommandParser implements Parser<AddIngredientCommand> 
             throw new ParseException("The cost must be a valid number.");
         }
 
+        if (cost <= 0) {
+            throw new ParseException("The cost must be a positive number.");
+        }
+
         // Return a new AddIngredientCommand with the parsed name and cost
         return new AddIngredientCommand(name, cost);
     }
