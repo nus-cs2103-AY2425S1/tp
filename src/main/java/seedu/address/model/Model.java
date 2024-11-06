@@ -8,6 +8,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
+import seedu.address.ui.DetailPanel;
+import seedu.address.ui.ModelClearObserver;
 
 /**
  * The API of the Model component.
@@ -88,6 +90,18 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Registers an observer to be notified of changes made to udders list.
+     * @param observer The {@code ModelClearObserver} object that wants to receive updates about changes.
+     *      This observer should implement the {@code ModelClearObserver} interface to handle notifications.
+     */
+    void addObserver(ModelClearObserver observer);
+
+    /**
+     * Notifies observer that the list of Udders have been cleared.
+     */
+    void notifyUddersListCleared();
+
+    /**
      * Adds the given meeting with a person.
      */
     void addMeeting(Person target, Meeting meeting) throws CommandException;
@@ -119,4 +133,6 @@ public interface Model {
     int getMeetingSize();
 
     String listMeetings();
+
+
 }

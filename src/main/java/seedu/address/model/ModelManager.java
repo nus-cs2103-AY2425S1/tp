@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
+import seedu.address.ui.ModelClearObserver;
 
 
 /**
@@ -24,6 +25,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ModelClearObserver observer;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -82,6 +85,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        notifyUddersListCleared();
     }
 
     @Override
@@ -174,7 +178,22 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Observer Logic ===============================================================================
 
+    @Override
+    public void addObserver(ModelClearObserver observer) {
+        if (observer == null) {
+            throw new NullPointerException("Observer cannot be null");
+        }
+        this.observer = observer;
+    }
+
+    @Override
+    public void notifyUddersListCleared() {
+        observer.uddersCleared();
+    }
+
+    //================================================================================================================
 
     @Override
     public boolean equals(Object other) {
