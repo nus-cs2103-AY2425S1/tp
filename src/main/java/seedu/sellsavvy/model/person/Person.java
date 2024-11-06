@@ -97,7 +97,7 @@ public class Person {
      * Two customers' names are considered similar if they are the same without considering space and casing.
      */
     public boolean isSimilarTo(Person otherPerson) {
-        return normalise(this.name.fullName).equals(normalise(otherPerson.name.fullName));
+        return this.name.isSimilarTo(otherPerson.name);
     }
 
     /**
