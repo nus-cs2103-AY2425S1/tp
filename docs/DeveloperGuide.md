@@ -258,6 +258,26 @@ The sequence diagram shows how an entity command is executed:
 
 <br>
 
+**Aspect: What constitutes duplicate person that should not be added or edited into the address book**
+- **Alternative 1 (Current choice):** Duplicate person is one that has same name (case-insensitive) and same phone number as an existing person
+  - Pros: Name and phone numbers are identifiers that are commonly recognized by users
+  - Cons: Extra logic required to determine equality of different people
+- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g., by name only)
+  - Pros: Less logic required to determine equality of different people
+  - Cons: Different people could have the same name, but cannot be added into the address book
+
+<br>
+
+**Aspect: What constitutes duplicate appointment that should not be added or edited into the appointment book**
+- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time of an existing appointment
+  - Pros: Provides a rule to avoid scheduling conflicts of same person
+  - Cons: Extra logic required to determine equality of different appointments
+- **Alternative 2:** Define duplicates with only the date and time
+  - Pros: Less logic required to determine equality of different appointments
+  - Cons: Different appointments with different persons could have the same date time, but cannot be added into the appointment book
+
+<br>
+
 ### Command-Specific Design Considerations
 
 #### Delete/Clear Person feature
@@ -307,7 +327,8 @@ The sequence diagram shows how an entity command is executed:
 <box type="tip" theme="success" seamless>
 
 **Tip:**
-For future developers wanting to add new predicates, you can ..laskdjflaksjdfaklsdfjalsdf
+To add a new predicate, navigate the corresponding entity folder in the model package. There, you can create a new class that implements `Predicate<Entity>`. Ensure that this method has a test method which defines the specific condition for a predicate.
+
 </box>
 
 ---
