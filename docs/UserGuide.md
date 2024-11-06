@@ -258,6 +258,14 @@ addIngredient Syrup 3.50
 ### **Add Customer Order Command**
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
 
+<div class="alert alert-info">
+⚠️ **Important Information**  
+To view the new order in the customer's contact details:
+1. Add the customer order using the command above
+2. Click the refresh button in the UI
+3. The order will now appear under the customer's contact information
+</div>
+
 ```bash
 addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REMARK]
 ```
@@ -330,6 +338,14 @@ of supplier contacts and ingredient sources, helping bakery owners efficiently m
 
 ### **Add Supply Order Command**
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
+
+<div class="alert alert-info">
+⚠️ **Important Information**  
+To view the new order in the supplier's contact details:
+1. Add the supplier order using the command above
+2. Click the refresh button in the UI
+3. The order will now appear under the supplier's contact information
+</div>
 
 ```bash
 addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
