@@ -71,7 +71,7 @@ public class EditContactCommand extends ContactCommand {
      *
      * @param index The index of the person in the filtered person list.
      * @param editPersonDescriptor A descriptor containing the details to update the person with.
-     * @throws NullPointerException if {@code index} or {@code editPersonDescriptor} is null.
+     * @throws NullPointerException If {@code index} or {@code editPersonDescriptor} is null.
      */
     public EditContactCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
