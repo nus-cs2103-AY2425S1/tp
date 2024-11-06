@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
 import java.util.Objects;

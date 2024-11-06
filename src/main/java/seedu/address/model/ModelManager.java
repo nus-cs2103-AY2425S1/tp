@@ -197,8 +197,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     *
-     * @return The current applied filter if there is any, otherwise, show all clients
+     * Returns the current applied filter if there is any, otherwise, show all clients.
+     * @return The current applied filter or all applied filters.
      */
     @Override
     public Predicate<? super Client> getCurrentClientFilter() {

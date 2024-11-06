@@ -185,7 +185,7 @@ public class AddCommandTest {
         }
 
         /**
-         *
+         * A stub implementation of {@code getCurrentClientFilter}.
          * @return {@code AssertionError} as this method should not be called.
          */
         @Override
