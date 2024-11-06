@@ -140,13 +140,11 @@ public class ModelManager implements Model {
     @Override
     public void addOwner(Owner owner) {
         pawPatrol.addOwner(owner);
-        updateFilteredOwnerList(PREDICATE_SHOW_ALL_OWNERS);
     }
 
     @Override
     public void addPet(Pet pet) {
         pawPatrol.addPet(pet);
-        updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
     }
 
     @Override
@@ -196,11 +194,33 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns current owner predicate
+     */
+    @Override
+    public Predicate<? super Owner> getCurrentOwnerPredicate() {
+        if (filteredOwners.getPredicate() == null) {
+            return PREDICATE_SHOW_ALL_OWNERS;
+        }
+        return filteredOwners.getPredicate();
+    }
+
+    /**
+     * Returns current pet predicate
+     */
+    @Override
+    public Predicate<? super Pet> getCurrentPetPredicate() {
+        if (filteredPets.getPredicate() == null) {
+            return PREDICATE_SHOW_ALL_PETS;
+        }
+        return filteredPets.getPredicate();
+    }
+
+    /**
      * Returns an unmodifiable view of the list of {@code Owner} backed by the internal list of
      * {@code versionedPawPatrol}
      */
     @Override
-    public void updateFilteredOwnerList(Predicate<Owner> predicate) {
+    public void updateFilteredOwnerList(Predicate<? super Owner> predicate) {
         requireNonNull(predicate);
         filteredOwners.setPredicate(predicate);
     }
@@ -210,7 +230,7 @@ public class ModelManager implements Model {
      * {@code versionedPawPatrol}
      */
     @Override
-    public void updateFilteredPetList(Predicate<Pet> predicate) {
+    public void updateFilteredPetList(Predicate<? super Pet> predicate) {
         requireNonNull(predicate);
         filteredPets.setPredicate(predicate);
     }

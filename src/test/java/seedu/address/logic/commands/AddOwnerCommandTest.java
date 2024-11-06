@@ -217,12 +217,21 @@ public class AddOwnerCommandTest {
         }
 
         @Override
-        public void updateFilteredOwnerList(Predicate<Owner> predicate) {
+        public void updateFilteredOwnerList(Predicate<? super Owner> predicate) {
+        }
+
+        @Override
+        public void updateFilteredPetList(Predicate<? super Pet> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPetList(Predicate<Pet> predicate) {
+        public Predicate<? super Owner> getCurrentOwnerPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Pet> getCurrentPetPredicate() {
             throw new AssertionError("This method should not be called.");
         }
     }

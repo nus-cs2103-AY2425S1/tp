@@ -144,17 +144,23 @@ public interface Model {
     ObservableList<Pet> getFilteredPetList();
 
     /** Returns an unmodifiable view of the filtered link list */
-    public ObservableList<Link> getFilteredLinkList();
+    ObservableList<Link> getFilteredLinkList();
+
+    /** Returns current owner predicate */
+    Predicate<? super Owner> getCurrentOwnerPredicate();
+
+    /** Returns current pet predicate */
+    Predicate<? super Pet> getCurrentPetPredicate();
 
     /**
      * Updates the filter of the filtered owner list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredOwnerList(Predicate<Owner> predicate);
+    void updateFilteredOwnerList(Predicate<? super Owner> predicate);
 
     /**
      * Updates the filter of the filtered pet list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPetList(Predicate<Pet> predicate);
+    void updateFilteredPetList(Predicate<? super Pet> predicate);
 }
