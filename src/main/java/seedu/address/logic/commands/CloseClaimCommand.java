@@ -28,7 +28,7 @@ public class CloseClaimCommand extends Command {
             + ": Marks a claim tagged to an insurance plan of a client as [closed] \n"
             + "Parameters: INDEX (must be a positive integer) "
             + " INSURANCE_PLAN_ID (must be a valid ID), "
-            + " ClAIM_ID (must be a valid ID) \n"
+            + " CLAIM_ID (must be a valid ID) \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INSURANCE_ID + " 0 "
             + PREFIX_CLAIM_ID + " B1234";
