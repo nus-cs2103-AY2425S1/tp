@@ -78,12 +78,13 @@ If you can type fast and you need to manage celebrities and their schedules, **T
 
 ### Adding a person: `add person`
 
-Adds a person to the address book.
+Adds a person to TalentHub.
 
-Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags or none at all!
+The address and email address fields are also optional!
 </div>
 
 Examples:
