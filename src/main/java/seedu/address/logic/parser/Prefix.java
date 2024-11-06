@@ -10,6 +10,9 @@ public class Prefix {
     private final String prefix;
     private final String shortPrefix;
 
+    /**
+     * Creates a {@code Prefix} object with prefix and shortPrefix specified by the arguments.
+     */
     public Prefix(String prefix, String shortPrefix) {
         requireNonNull(prefix, shortPrefix);
         this.prefix = prefix;
