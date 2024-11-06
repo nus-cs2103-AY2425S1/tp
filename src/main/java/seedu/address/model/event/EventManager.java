@@ -164,4 +164,14 @@ public class EventManager implements ReadOnlyEventManager {
             event.updateUi();
         }
     }
+
+    /**
+     * Clears all contact lists from every event in the event list.
+     * This includes attendees, volunteers, vendors, and sponsors in each event.
+     */
+    public void clearAllContactsFromAllEvents() {
+        for (Event event : this.eventList) {
+            event.clearAllContacts();
+        }
+    }
 }

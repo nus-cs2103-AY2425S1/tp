@@ -21,6 +21,8 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model, EventManager eventManager) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
+        eventManager.clearAllContactsFromAllEvents();
+        eventManager.updateEvents();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
