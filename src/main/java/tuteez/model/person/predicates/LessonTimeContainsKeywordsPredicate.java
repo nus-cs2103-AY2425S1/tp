@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
 import tuteez.model.person.Person;
-import tuteez.model.person.lesson.Day;
 import tuteez.model.person.lesson.Lesson;
 
 /**
@@ -53,7 +52,8 @@ public class LessonTimeContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        LessonTimeContainsKeywordsPredicate otherLessonTimeContainsKeywordsPredicate = (LessonTimeContainsKeywordsPredicate) other;
+        LessonTimeContainsKeywordsPredicate otherLessonTimeContainsKeywordsPredicate =
+                (LessonTimeContainsKeywordsPredicate) other;
         return keywords.equals(otherLessonTimeContainsKeywordsPredicate.keywords);
     }
 }

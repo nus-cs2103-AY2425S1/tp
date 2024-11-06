@@ -4,7 +4,6 @@ import static tuteez.logic.Messages.MESSAGE_EMPTY_KEYWORD;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_PREFIX_FOR_FIND;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
@@ -20,12 +19,10 @@ import java.util.function.Predicate;
 import tuteez.logic.commands.FindCommand;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.Person;
-import tuteez.model.person.lesson.Day;
-import tuteez.model.person.lesson.Lesson;
 import tuteez.model.person.predicates.AddressContainsKeywordsPredicate;
 import tuteez.model.person.predicates.CombinedPredicate;
-import tuteez.model.person.predicates.LessonTimeContainsKeywordsPredicate;
 import tuteez.model.person.predicates.LessonDayContainsKeywordsPredicate;
+import tuteez.model.person.predicates.LessonTimeContainsKeywordsPredicate;
 import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.person.predicates.TagContainsKeywordsPredicate;
 
@@ -49,7 +46,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_TAG, PREFIX_LESSON_DAY, PREFIX_LESSON_TIME);
 
         boolean hasAtLeastOnePrefix = ArgumentTokenizer.checkHasAtLeastOnePrefix(argMultimap, PREFIX_NAME,
-                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_LESSON, PREFIX_LESSON_DAY, PREFIX_LESSON_TIME);
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_LESSON_DAY, PREFIX_LESSON_TIME);
         if (!hasAtLeastOnePrefix) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PREFIX_FOR_FIND));
         }

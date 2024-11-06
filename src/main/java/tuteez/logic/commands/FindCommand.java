@@ -83,4 +83,9 @@ public class FindCommand extends Command {
                 .add("predicate", combinedPredicate)
                 .toString();
     }
+
+    @Override
+    public int hashCode() {
+        return combinedPredicate.hashCode();
+    }
 }
