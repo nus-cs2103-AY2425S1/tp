@@ -1,9 +1,9 @@
 #copyButton, #helpMessage {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: lightgray;
 }
 
 #copyButton:hover {
@@ -15,6 +15,11 @@
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-padding: 10; /* Adds padding of 10 to all sides */
+    -fx-background-color: derive(#E5E5E4, 20%);
+    -fx-padding: 10;
+}
+
+#commandSummary {
+    -fx-background-color: derive(#E5E5E4, 20%);
+    -fx-padding: 10;
 }
