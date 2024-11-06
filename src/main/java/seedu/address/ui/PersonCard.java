@@ -23,7 +23,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
     private static final double EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT = 90;
-    private static final double EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE = 2;
+    private static final double EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE = 1.5;
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
