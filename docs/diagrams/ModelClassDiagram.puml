@@ -16,7 +16,6 @@ Class ReminderAddressBook
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
@@ -25,6 +24,8 @@ Class Priority
 Class LastSeen
 Class Reminder
 Class UniqueReminderList
+Class Organisation
+Class Remark
 
 Class I #FFFFFF
 }
@@ -52,17 +53,16 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
 Person *--> "*" Tag
 Person *--> "1" Priority
 Person *--> "1" LastSeen
+Person *--> "1" Organisation
+Person *--> "1" Remark
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 @enduml
