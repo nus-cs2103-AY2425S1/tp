@@ -60,6 +60,10 @@ public class Name {
         return fullName;
     }
 
+    public boolean isSameName(Name otherName) {
+        return this.fullName.equalsIgnoreCase(otherName.fullName);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
