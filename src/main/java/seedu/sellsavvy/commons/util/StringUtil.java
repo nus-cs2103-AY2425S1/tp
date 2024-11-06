@@ -65,4 +65,11 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Normalises the tag name by removing spaces and converting to lowercase.
+     */
+    public static String normalise(String tagName) {
+        return tagName.replaceAll(" ", "").toLowerCase();
+    }
 }

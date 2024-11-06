@@ -2,6 +2,7 @@ package seedu.sellsavvy.model.tag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 
 /**
  * Represents a Tag in the address book.
@@ -38,13 +39,6 @@ public class Tag {
      */
     public boolean isSimilarTo(Tag otherTag) {
         return normalise(this.tagName).equals(normalise(otherTag.tagName));
-    }
-
-    /**
-     * Normalises the tag name by removing spaces and converting to lowercase.
-     */
-    private String normalise(String tagName) {
-        return tagName.replaceAll(" ", "").toLowerCase();
     }
 
     @Override
