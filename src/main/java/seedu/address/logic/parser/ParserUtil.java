@@ -23,8 +23,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer"
-            + " and should not be blank.";
+    public static final String MESSAGE_INVALID_INDEX = "Index should be a non-zero unsigned integer"
+            + " and cannot be blank.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -136,7 +136,7 @@ public class ParserUtil {
         requireNonNull(score);
         String trimmedScore = score.trim();
         if (!StringUtil.isUnsignedInteger(trimmedScore)) {
-            throw new ParseException("The score must be an integer!");
+            throw new ParseException(Assignment.SCORE_MESSAGE_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedScore);
     }
