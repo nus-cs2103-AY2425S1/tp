@@ -108,14 +108,14 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("dg gn/CS2103-F12-2")` API
 call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `dg gn/CS2103-F12-2` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifeline for `DeleteGroupCommandParser`, `DeleteGroupCommand` and `CommandResult` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
@@ -137,10 +137,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a
+  placeholder for the specific command name e.g., `AddStudentCommandParser`) which uses the other classes shown above to parse
+  the user command and create a `XYZCommand` object (e.g., `AddStudentCommand`) which the `AddressBookParser` returns back as a
   `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+* All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
