@@ -39,6 +39,13 @@ public class Name {
     }
 
     /**
+     * Returns true if value is empty, otherwise returns false.
+     */
+    public boolean isEmpty() {
+        return fullName.isEmpty();
+    }
+
+    /**
      * Returns value of name.
      */
     public String getDisplayableName() {

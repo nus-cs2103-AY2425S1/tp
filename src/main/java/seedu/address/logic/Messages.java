@@ -37,15 +37,32 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        builder.append("Name: ").append(person.getName());
+        if (!person.getPhone().isEmpty()) {
+            builder.append("; Phone: ")
+                    .append(person.getPhone());
+        }
+
+        if (!person.getEmail().isEmpty()) {
+            builder.append("; Email: ")
+                    .append(person.getEmail());
+        }
+
+        if (!person.getAddress().isEmpty()) {
+            builder.append("; Location: ")
+                    .append(person.getAddress());
+        }
+
+        if (!person.getRemark().isEmpty()) {
+            builder.append("; Remark: ")
+                    .append(person.getRemark());
+        }
+
+        if (!person.getTags().isEmpty()) {
+            builder.append("; Tags: ");
+            person.getTags().forEach(builder::append);
+        }
+
         return builder.toString();
     }
 
