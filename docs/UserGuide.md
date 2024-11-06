@@ -377,8 +377,8 @@
   * `INDEX` **must be within the size of the list** shown.
 
   Examples:
-  * `list` followed by `delete ph 2` deletes the 2nd person in the potential hire list.
-  * `find e Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
+  * `list ph` followed by `delete ph 2` deletes the 2nd person in the potential hire list.
+  * `find e n/Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
 
   <div class="box box-warn" type="warning" seamless>
 
@@ -421,7 +421,7 @@
 
   Examples:
   * `list e` followed by `demote 2` demotes the 2nd person in the employee list.
-  * `find e Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
+  * `find e n/Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
 
   <div class="box box-warn" type="warning" seamless>
 
