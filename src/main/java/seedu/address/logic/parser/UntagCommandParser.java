@@ -48,7 +48,6 @@ public class UntagCommandParser implements Parser<UntagCommand> {
             throw new ParseException("Error: " + Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".");
         }
 
-        // Handle the case where the user inputs "all" to remove all tags where null set signifies removing all tags
         if (argMultimap.getAllValues(PREFIX_TAG).size() == 1
                 && argMultimap.getAllValues(PREFIX_TAG).get(0).equalsIgnoreCase("all")) {
 

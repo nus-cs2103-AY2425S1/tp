@@ -34,7 +34,6 @@ public class UnassignContactFromWeddingCommandTest {
         model.addWedding(WEDDING_ONE);
         model.addWedding(WEDDING_TWO);
 
-        // Add some test persons to the model
         Person person1 = new Person(new PersonId(), new Name("Alice"), new Phone("123456"),
                 new Email("alice@example.com"),
                 new Address("123 Wonderland"), Set.of());
@@ -44,7 +43,6 @@ public class UnassignContactFromWeddingCommandTest {
         model.addPerson(person1);
         model.addPerson(person2);
 
-        // Assign Alice and Bob to WEDDING_ONE to later unassign them
         WEDDING_ONE.getAssignees().add(person1.getId());
         WEDDING_ONE.getAssignees().add(person2.getId());
 

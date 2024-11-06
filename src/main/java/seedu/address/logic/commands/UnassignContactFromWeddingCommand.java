@@ -63,7 +63,6 @@ public class UnassignContactFromWeddingCommand extends Command {
             throw new CommandException("You need to be viewing a wedding to unassign contacts.");
         }
 
-        // trialing not referencing index in unassign command
         Wedding weddingToModify = new Wedding(null, null);
         List<PersonId> existingPersonsInWedding = new ArrayList<>();
         for (Wedding w : lastShownWeddingList) {
