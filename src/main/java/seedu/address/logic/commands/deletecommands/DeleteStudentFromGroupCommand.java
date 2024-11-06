@@ -25,11 +25,11 @@ public class DeleteStudentFromGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "dsg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Deletes the student identified from the target group by the student number used.\n"
+        + ": Deletes the student identified by the student number used from its assigned group.\n"
         + "Parameters: "
         + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
+        + PREFIX_STUDENT_NUMBER + "A02345678J";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s from %2$s";
     public static final String MESSAGE_STUDENT_NOT_IN_GROUP = "The student doesn't belong to any group";

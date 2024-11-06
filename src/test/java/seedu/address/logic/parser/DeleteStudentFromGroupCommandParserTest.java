@@ -27,13 +27,6 @@ public class DeleteStudentFromGroupCommandParserTest {
         assertEquals(expectedCommand.toString(), command.toString());
     }
 
-
-    @Test
-    public void parse_missingGroupName_throwsParseException() {
-        String input = " " + PREFIX_STUDENT_NUMBER + "A0123456Z";
-        assertThrows(ParseException.class, () -> parser.parse(input));
-    }
-
     @Test
     public void parse_missingStudentNumber_throwsParseException() {
         String input = " " + PREFIX_GROUP_NAME + "CS2103-F12-4";

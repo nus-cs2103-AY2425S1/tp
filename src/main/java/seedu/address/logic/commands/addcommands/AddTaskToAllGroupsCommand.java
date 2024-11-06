@@ -32,10 +32,10 @@ public class AddTaskToAllGroupsCommand extends Command {
         + ": Adds a task to all groups.\n"
         + "Parameters: "
         + PREFIX_TASK_NAME + "TASK_NAME "
-        + PREFIX_TASK_DEADLINE + "TASK_DATE "
+        + PREFIX_TASK_DEADLINE + "TASK_DATE\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_TASK_NAME + "Complete this task "
-        + PREFIX_TASK_DEADLINE + "2024-01-01 1300 ";
+        + PREFIX_TASK_DEADLINE + "2025-01-01 1300";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s";
     public static final String MESSAGE_OVERDUE_WARNING = "WARNING: Task will be marked as overdue";

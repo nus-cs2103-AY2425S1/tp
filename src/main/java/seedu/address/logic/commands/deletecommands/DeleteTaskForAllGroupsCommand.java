@@ -28,11 +28,11 @@ public class DeleteTaskForAllGroupsCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "dt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Deletes a task from all groups.\n"
+        + ": Deletes a task from all groups based on the index when listing all tasks.\n"
         + "Parameters: "
         + PREFIX_INDEX + "INDEX\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_INDEX + "2";
+        + PREFIX_INDEX + "1";
 
     public static final String MESSAGE_SUCCESS = "Deleted task: %1$s from:\n %2$s";
 
