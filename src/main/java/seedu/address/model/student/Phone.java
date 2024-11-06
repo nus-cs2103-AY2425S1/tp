@@ -9,6 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
+    public static final int MAXIMUM_LENGTH = 16;
+
+    public static final String MESSAGE_PHONE_TOO_LONG = "A student's phone number cannot exceed "
+            + "the maximum length of %d numbers";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";

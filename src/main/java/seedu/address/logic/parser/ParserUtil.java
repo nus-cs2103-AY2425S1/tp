@@ -51,6 +51,9 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+        if (name.length() > Name.MAXIMUM_NAME_LENGTH) {
+            throw new ParseException(String.format(Name.MESSAGE_NAME_TOO_LONG, Name.MAXIMUM_NAME_LENGTH));
+        }
         return new Name(trimmedName);
     }
 
@@ -65,6 +68,9 @@ public class ParserUtil {
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedPhone.length() > Phone.MAXIMUM_LENGTH) {
+            throw new ParseException(String.format(Phone.MESSAGE_PHONE_TOO_LONG, Phone.MAXIMUM_LENGTH));
         }
         return new Phone(trimmedPhone);
     }
@@ -81,6 +87,9 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
+        if (trimmedEmail.length() > Email.MAXIMUM_EMAIL_LENGTH) {
+            throw new ParseException(String.format(Email.MESSAGE_EMAIL_TOO_LONG, Email.MAXIMUM_EMAIL_LENGTH));
+        }
         return new Email(trimmedEmail);
     }
 
@@ -96,6 +105,9 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (trimmedTag.length() > Tag.MAXIMUM_NAME_LENGTH) {
+            throw new ParseException(String.format(Tag.MESSAGE_NAME_TOO_LONG, Tag.MAXIMUM_NAME_LENGTH));
+        }
         return new Tag(trimmedTag);
     }
     /**
@@ -109,6 +121,9 @@ public class ParserUtil {
         String trimmedAssignmentName = assignmentName.trim();
         if (!Name.isValidName(trimmedAssignmentName)) {
             throw new ParseException(AssignmentName.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedAssignmentName.length() > AssignmentName.MAXIMUM_NAME_LENGTH) {
+            throw new ParseException(String.format(AssignmentName.MESSAGE_NAME_TOO_LONG, AssignmentName.MAXIMUM_NAME_LENGTH));
         }
         return new AssignmentName(assignmentName);
     }
@@ -148,9 +163,6 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            if (tagName.length() > Tag.MAXIMUM_NAME_LENGTH) {
-                throw new ParseException(String.format(Tag.MESSAGE_NAME_TOO_LONG, Tag.MAXIMUM_NAME_LENGTH));
-            }
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
@@ -164,6 +176,9 @@ public class ParserUtil {
         String trimmedRemark = remark.trim();
         if (!Remark.isValidRemarkName(trimmedRemark)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedRemark.length() > Remark.MAXIMUM_REMARK_LENGTH) {
+            throw new ParseException(String.format(Remark.MESSAGE_REMARK_TOO_LONG, Remark.MAXIMUM_REMARK_LENGTH));
         }
         return new Remark(trimmedRemark);
     }

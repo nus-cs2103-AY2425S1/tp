@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Remark;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -30,6 +31,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_REMARK = "Did well for midterms";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -64,6 +66,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseName_invalidValueTooLong_throwsParseException() {
+        String nameExceedingMaxLength = VALID_NAME.repeat(Name.MAXIMUM_NAME_LENGTH);
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(nameExceedingMaxLength));
+    }
+
+    @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
@@ -84,6 +92,12 @@ public class ParserUtilTest {
     @Test
     public void parsePhone_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
+    }
+
+    @Test
+    public void parsePhone_invalidValueTooLong_throwsParseException() {
+        String phoneExceedingMaxLength = VALID_PHONE.repeat(Phone.MAXIMUM_LENGTH);
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(phoneExceedingMaxLength));
     }
 
     @Test
@@ -110,6 +124,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseEmail_invalidValueTooLong_throwsParseException() {
+        String emailExceedingMaxLength = VALID_EMAIL.repeat(Email.MAXIMUM_EMAIL_LENGTH);
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(emailExceedingMaxLength));
+    }
+
+    @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
@@ -130,6 +150,12 @@ public class ParserUtilTest {
     @Test
     public void parseTag_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    }
+
+    @Test
+    public void parseTag_invalidValueTooLong_throwsParseException() {
+        String tagExceedingMaxLength = VALID_TAG_1.repeat(Tag.MAXIMUM_NAME_LENGTH);
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(tagExceedingMaxLength));
     }
 
     @Test
@@ -166,5 +192,29 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseRemark_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRemark((String) null));
+    }
+
+    @Test
+    public void parseRemark_invalidValueTooLong_throwsParseException() {
+        String remarkExceedingMaxLength = VALID_REMARK.repeat(Remark.MAXIMUM_REMARK_LENGTH);
+        assertThrows(ParseException.class, () -> ParserUtil.parseRemark(remarkExceedingMaxLength));
+    }
+
+    @Test
+    public void parseRemark_validValueWithoutWhitespace_returnsName() throws Exception {
+        Remark expectedRemark = new Remark(VALID_REMARK);
+        assertEquals(expectedRemark, ParserUtil.parseRemark(VALID_REMARK));
+    }
+
+    @Test
+    public void parseRemark_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String remarkWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
+        Remark expectedRemark = new Remark(VALID_REMARK);
+        assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
     }
 }

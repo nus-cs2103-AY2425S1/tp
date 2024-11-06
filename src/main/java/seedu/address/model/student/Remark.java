@@ -9,6 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
 
+    public static final int MAXIMUM_REMARK_LENGTH = 256;
+
+    public static final String MESSAGE_REMARK_TOO_LONG = "A remark cannot exceed "
+            + "the maximum length of %d characters";
+
     public static final String MESSAGE_CONSTRAINTS = "Remarks names should be ";
     public static final String VALIDATION_REGEX = "\\p{Print}*";
 
