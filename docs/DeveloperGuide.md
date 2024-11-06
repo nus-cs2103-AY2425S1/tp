@@ -205,7 +205,7 @@ Two `Students` are considered to be duplicates if they have matching `NAME` and 
 [
     {
         "subject" : "Mathematics"
-    }, 
+    },
   ...
 ]
 ```
@@ -618,55 +618,55 @@ testers are expected to do more *exploratory* testing.
 
 **Effort Report for Project**
 
-**Difficulty Level**:  
+**Difficulty Level**:
 The project was moderately challenging due to the integration of additional entities and the complexity of building and maintaining relationships between them.
 
 **Challenges Faced**:
 
-* **Entity Expansion**: Unlike AB3, which manages a single entity type (Person), our project introduces a new entity, 
+* **Entity Expansion**: Unlike AB3, which manages a single entity type (Person), our project introduces a new entity,
 *Tutorial*, and connects it with the existing *Person* entity through an intermediary *Participation* entity.
 This additional entity required designing and implementing a relationship model that could effectively manage student
 enrollment and attendance across multiple tutorials.
-* **Feature Development**: To fully support the new *Tutorial* entity, we had to build several new core features, such 
+* **Feature Development**: To fully support the new *Tutorial* entity, we had to build several new core features, such
 as *enrollment*, *payment*, and *attendance tracking*. Additionally, we enhanced existing features, including the *find*
 functionality, to work seamlessly across both *Person* and *Tutorial* entities.
-* **Data Storage**: The introduction of *Tutorial* and *Participation* entities required an update to the JSON storage 
-architecture. We modified the storage layer to accommodate both the *tutorial list* and *participation list* 
+* **Data Storage**: The introduction of *Tutorial* and *Participation* entities required an update to the JSON storage
+architecture. We modified the storage layer to accommodate both the *tutorial list* and *participation list*
 while ensuring data consistency and easy retrieval.
 * **User Interface Enhancements**: To make the system more intuitive and user-friendly, we upgraded the GUI,
 introducing new elements for tutorial management and enhancing the overall design.
 
-**Effort Required**:  
-We estimate that the project required more than double the expected effort due to the additional entities and feature 
-expansions. We prioritized extensive testing and compliance with coding standards to ensure the robustness and 
+**Effort Required**:
+We estimate that the project required more than double the expected effort due to the additional entities and feature
+expansions. We prioritized extensive testing and compliance with coding standards to ensure the robustness and
 maintainability of our code. We went the extra mile for passion and our own learning.
 
 ---------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 
 1. **Automatic AddFees Command Based on Tutorial Enrollment**: Currently, fees must be manually added for each student.
-We plan to automate this process based on time period so that fees will be added automatically for students based on 
+We plan to automate this process based on time period so that fees will be added automatically for students based on
 their tutorial enrollments. This feature will reduce manual effort for administrators.
-2. **Fee Limit Warning**: Currently, there is no cap on the total fees that can be added for a student. To enhance user 
-awareness, we plan to introduce a warning message if a student’s total fees exceed $1,000, allowing the user to confirm 
+2. **Fee Limit Warning**: Currently, there is no cap on the total fees that can be added for a student. To enhance user
+awareness, we plan to introduce a warning message if a student’s total fees exceed $1,000, allowing the user to confirm
 before proceeding. This will help prevent unintentional overcharging or overpaying.
-3. **Integrate Tutorial Fees with Payment**: Currently, tutorial fees are not directly connected to a student’s payment 
-status. We aim to integrate tutorial fees with the payment system, so any fees associated with a tutorial will 
+3. **Integrate Tutorial Fees with Payment**: Currently, tutorial fees are not directly connected to a student’s payment
+status. We aim to integrate tutorial fees with the payment system, so any fees associated with a tutorial will
 automatically update a student’s overdue amount through enhancement 1, simplifying the tracking process for administrators.
-4. **Add Timing for Tutorials**: Tutorials currently lack a time attribute, making scheduling difficult. We plan to add 
+4. **Add Timing for Tutorials**: Tutorials currently lack a time attribute, making scheduling difficult. We plan to add
 a “Timing” attribute to tutorials, enabling administrators to view and manage class schedules more effectively.
-5. **Support for Education Levels in Tutorials**: Tutorials currently do not distinguish between education levels. To 
-improve categorization and management, we plan to add an “Education Level” (eg, Secondary 1-Math, Junior College 
+5. **Support for Education Levels in Tutorials**: Tutorials currently do not distinguish between education levels. To
+improve categorization and management, we plan to add an “Education Level” (eg, Secondary 1-Math, Junior College
 2-Chemistry), allowing administrators to group tutorials by levels such as primary, secondary, or advanced.
 6. **Improve UI for Screen Resizing**: The current UI can experience errors when resizing the screen. We plan to enhance
 UI responsiveness, particularly in handling smaller or larger window sizes, to improve usability across various screen configurations.
-7. **Batch Enroll/Unenroll for Multiple Students**: The current system allows enrolling or unenrolling one student at a 
+7. **Batch Enroll/Unenroll for Multiple Students**: The current system allows enrolling or unenrolling one student at a
 time. We plan to add functionality for batch enrollments and unenrollments, allowing administrators to enroll or unenroll
 multiple students from a tutorial at once.
-8. **Batch Enroll/Unenroll for Multiple Tutorials**: Currently, students can only be enrolled or unenrolled from one 
-tutorial at a time. We plan to add functionality to support enrolling or unenrolling a student from multiple tutorials 
+8. **Batch Enroll/Unenroll for Multiple Tutorials**: Currently, students can only be enrolled or unenrolled from one
+tutorial at a time. We plan to add functionality to support enrolling or unenrolling a student from multiple tutorials
 simultaneously, improving efficiency.
-9. **Prevent Duplicate Attendance Records**: Currently, attendance can be added multiple times even if it’s within the 
+9. **Prevent Duplicate Attendance Records**: Currently, attendance can be added multiple times even if it’s within the
 same week for the same tutorial participation. We plan to add a check to prevent duplicate attendance within the same week, ensuring accurate attendance tracking.
-10. **Enhance Find Command with OR Logic for Tags**: The current “Find” command uses AND logic to combine multiple 
+10. **Enhance Find Command with OR Logic for Tags**: The current “Find” command uses AND logic to combine multiple
 conditions, which can limit search results when looking for contacts with any one of multiple tags. We plan to enhance the command by allowing OR logic, which would broaden the search results when users search for contacts with multiple tags, making it more flexible.
