@@ -1,6 +1,7 @@
 package seedu.address.model.tag;
 
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Acts like a builder class where it will output
@@ -9,7 +10,7 @@ import java.util.Locale;
  */
 public class TagBuilder {
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a TagBuilder.
      */
     public TagBuilder() {
     }
@@ -21,6 +22,9 @@ public class TagBuilder {
      * @return A corresponding Tag type (e.g., DifficultyTag, SalaryTag, CustomTag).
      */
     public Tag build(String userInput) throws IllegalArgumentException {
+        if (Objects.equals(userInput, "")) {
+            throw new IllegalArgumentException("Tag fields cannot be empty!");
+        }
         // Split the string using the underscore as the delimiter
         String[] parts = userInput.split("_");
         // Check the first word
@@ -41,7 +45,7 @@ public class TagBuilder {
                 return new Tag(userInput);
             }
         }
-        // If no specific type, return a CustomTag
+        // If no specific type, return a Normal Tag
         return new Tag(userInput);
     }
 
