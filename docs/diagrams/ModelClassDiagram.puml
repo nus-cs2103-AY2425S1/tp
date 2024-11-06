@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
+Package "AddressBook Model" as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nAddressBookModel" as Model
 Class AddressBook

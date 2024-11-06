@@ -395,25 +395,27 @@ _Details coming soon ..._
 
 ## Command Summary for Address Book
 
-| Action     | Format, Examples                                                                                                                                                                                                           |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/James is poor af, do not loan him money t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                                                    |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                        |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                     |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                 |
-| **List**   | `list`                                                                                                                                                                                                                     |
-| **REMARK** | `remark INDEX r/REMARK`                                                                                                                                                                                                    |
-| **Help**   | `help`                                                                                                                                                                                                                     |
+| Action     | Format, Examples                                                                                                                                                                                                              |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/James is poor af, do not loan him money t/friend t/colleague`    |
+| **Clear**  | `clear`                                                                                                                                                                                                                       |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                           |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                        |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                    |
+| **List**   | `list`                                                                                                                                                                                                                        |
+| **Remark** | `remark INDEX r/REMARK`                                                                                                                                                                                                       |
+| **Help**   | `help`                                                                                                                                                                                                                        |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary for Transactions
 
-| Action     | Format, Examples                                                                                                                                                                                                             |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [cat/CATEGORY]` <br> e.g., `addTxn 1 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 status/Done cat/LOAN`       |
-| **Edit**   | `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]` <br> e.g., `editTxn 1 p/99999999 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN` |
-| **List**   | `listTxn`                                                                                                                                                                                                                    |
-| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]` <br> e.g. `filterTxn 1`                                                                                                |
-| **Clear**  | `clearTxn`                                                                                                                                                                                                                   |
+| Action          | Format, Examples                                                                                                                                                                                                             |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [cat/CATEGORY]` <br> e.g., `addTxn 1 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 status/Done cat/LOAN`       |
+| **Edit**        | `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]` <br> e.g., `editTxn 1 p/99999999 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN` |
+| **List**        | `listTxn`                                                                                                                                                                                                                    |
+| **Filter**      | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]` <br> e.g. `filterTxn 1`                                                                                                |
+| **Clear**       | `clearTxn`                                                                                                                                                                                                                   |
+| **Mark Done**   | `markDone INDEX` <br> e.g. `markDone 1`                                                                                                                                                                                      |
+| **Mark Undone** | `markUndone INDEX` <br> e.g. `markUndone 1`                                                                                                                                                                                  |

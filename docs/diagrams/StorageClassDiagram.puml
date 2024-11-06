@@ -12,7 +12,7 @@ Class HiddenModel #FFFFFF
 package Storage as StoragePackage {
 
 Class "<<interface>>\nStorage" as Storage
-Class StorageManager
+Class "<<facade>>\nStorageManager" as StorageManager
 
 package "TransactionBook Storage" #F4F6F6{
 Class "<<interface>>\nTransactionBookStorage" as TransactionBookStorage

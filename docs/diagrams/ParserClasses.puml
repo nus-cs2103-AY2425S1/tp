@@ -11,7 +11,7 @@ Class TbCommand
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
 Class AddressBookParser
-Class TransactionBookParser
+Class TransactionParser
 Class AbCommandParser
 Class TbCommandParser
 Class CliSyntax
@@ -19,34 +19,40 @@ Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
 Class Prefix
+Class Pattern
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> AddressBookParser
+HiddenOutside --> AddressBookParser
+HiddenOutside --> TransactionParser
 
-AddressBookParser .down.> AbCommandParser: <<create>>
-
-AbCommandParser ..> AbCommand : <<create>>
-AddressBookParser ..> Command : <<use>>
-AbCommandParser .up.|> Parser
-AbCommandParser ..> ArgumentMultimap
-AbCommandParser ..> ArgumentTokenizer
 ArgumentTokenizer .left.> ArgumentMultimap
-AbCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
 AbCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 AbCommand -up-|> Command
 
-TransactionBookParser .down.> TbCommandParser: <<create>>
+AddressBookParser -left-> Pattern
+AddressBookParser .down.> AbCommandParser: <<create>>
+AbCommandParser ..> AbCommand : <<create>>
+AddressBookParser .left.> Command : <<use>>
+AbCommandParser .up.|> Parser
+AbCommandParser ..> ArgumentMultimap
+AbCommandParser ..> ArgumentTokenizer
+AbCommandParser ..> CliSyntax
 
-TbCommandParser .up.> TbCommand : <<create>>
-TransactionBookParser ..> Command : <<use>>
+TransactionParser -right-> Pattern
+TransactionParser .down.> TbCommandParser: <<create>>
+TbCommandParser ..> TbCommand : <<create>>
+TransactionParser .right.> Command : <<use>>
 TbCommandParser .up.|> Parser
-TbCommandParser .up.> ArgumentMultimap
-TbCommandParser .up.> ArgumentTokenizer
-TbCommandParser .up.> CliSyntax
-TbCommandParser .up.> ParserUtil
+TbCommandParser ..> ArgumentMultimap
+TbCommandParser ..> ArgumentTokenizer
+TbCommandParser ..> CliSyntax
+TbCommandParser ..> ParserUtil
 TbCommand -up-|> Command
+
+'For formatting purposes:
+Pattern -down[hidden]- Parser
 @enduml
