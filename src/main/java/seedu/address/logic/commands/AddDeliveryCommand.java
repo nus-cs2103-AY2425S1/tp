@@ -18,6 +18,7 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.SupplierStatus;
 
 /**
  * Adds a delivery to the address book.
@@ -42,6 +43,7 @@ public class AddDeliveryCommand extends Command {
             + PREFIX_COST + "25.50 ";
     public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "Delivery is already added!!!";
+    public static final String MESSAGE_INACTIVE_SUPPLIER = "Supplier is currently inactive!!!";
     private final DeliveryWrapper deliveryWrapper;
     /**
      * Creates an AddDeliveryCommand to add the specified {@code deliveryToAdd}
@@ -53,9 +55,10 @@ public class AddDeliveryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        //Need to update when list changes name
         Supplier sender = this.getSupplierBasedOnIndex(model);
-        System.out.println("sender not null");
+        if (sender.getStatus().equals(new SupplierStatus("inactive"))) {
+            throw new CommandException(MESSAGE_INACTIVE_SUPPLIER);
+        }
         deliveryWrapper.setDeliverySupplier(sender);
         Delivery deliveryToAdd = deliveryWrapper.getDelivery();
         if (model.hasDelivery(deliveryToAdd)) {

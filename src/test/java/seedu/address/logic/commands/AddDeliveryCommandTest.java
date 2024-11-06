@@ -54,10 +54,21 @@ public class AddDeliveryCommandTest {
 
     @Test
     public void execute_duplicateDelivery_throwsCommandException() {
-        DeliveryWrapper deliveryWrapper = TypicalDeliveryWrappers.getNullWrapper();
+        DeliveryWrapper deliveryWrapper = TypicalDeliveryWrappers.BREAD_WRAPPER;
         AddDeliveryCommand addDeliveryCommand = new AddDeliveryCommand(deliveryWrapper);
-        ModelStub modelStub = new ModelStubWithDelivery(TypicalDeliveries.APPLE);
+        ModelStub modelStub = new ModelStubWithDelivery(TypicalDeliveries.BREAD);
         assertThrows(CommandException.class, AddDeliveryCommand.MESSAGE_DUPLICATE_DELIVERY, () ->
+                addDeliveryCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_inactiveSupplier_throwsCommandException() {
+        Supplier validSupplier = new SupplierBuilder().withStatus("inactive").build();
+        ModelStubAcceptingDeliveryAdded modelStub = new ModelStubAcceptingDeliveryAdded(validSupplier);
+        Delivery deliveryWithNullSender = new DeliveryBuilder().buildWithNullSender();
+        DeliveryWrapper wrapper = new DeliveryWrapper(deliveryWithNullSender, new SupplierIndex("1"));
+        AddDeliveryCommand addDeliveryCommand = new AddDeliveryCommand(wrapper);
+        assertThrows(CommandException.class, AddDeliveryCommand.MESSAGE_INACTIVE_SUPPLIER, () ->
                 addDeliveryCommand.execute(modelStub));
     }
 
@@ -224,7 +235,7 @@ public class AddDeliveryCommandTest {
      */
     private class ModelStubWithDelivery extends ModelStub {
         private final Delivery delivery;
-        private final Supplier supplier = TypicalSuppliers.ALICE;
+        private final Supplier supplier = TypicalSuppliers.BENSON;
         private final UniqueSupplierList uniqueSupplierList = new UniqueSupplierList();
         ModelStubWithDelivery(Delivery delivery) {
             requireNonNull(delivery);

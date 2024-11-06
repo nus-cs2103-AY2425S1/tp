@@ -31,8 +31,6 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeliveryCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditSupplierDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -57,7 +55,6 @@ import seedu.address.model.supplier.SupplierStatus;
 import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
 import seedu.address.testutil.DeliveryUtil;
-import seedu.address.testutil.EditSupplierDescriptorBuilder;
 import seedu.address.testutil.SupplierBuilder;
 import seedu.address.testutil.SupplierUtil;
 import seedu.address.testutil.TypicalDeliveryWrappers;
@@ -139,15 +136,6 @@ public class AddressBookParserTest {
         MarkSupplierCommand command = (MarkSupplierCommand) parser.parseCommand(
                 MarkSupplierCommand.COMMAND_WORD + " -s " + INDEX_FIRST_SUPPLIER.getOneBased() + status);
         assertEquals(new MarkSupplierCommand(INDEX_FIRST_SUPPLIER, new SupplierStatus(status)), command);
-    }
-
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Supplier supplier = new SupplierBuilder().build();
-        EditSupplierDescriptor descriptor = new EditSupplierDescriptorBuilder(supplier).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_SUPPLIER.getOneBased() + " " + SupplierUtil.getEditSupplierDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_SUPPLIER, descriptor), command);
     }
 
     @Test

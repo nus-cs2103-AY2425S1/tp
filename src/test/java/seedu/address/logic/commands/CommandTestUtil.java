@@ -25,7 +25,6 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliverySupplierPredicate;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
-import seedu.address.testutil.EditSupplierDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -109,18 +108,6 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final EditCommand.EditSupplierDescriptor DESC_AMY;
-    public static final EditCommand.EditSupplierDescriptor DESC_BOB;
-
-    static {
-        DESC_AMY = new EditSupplierDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withCompany(VALID_COMPANY_AMY)
-                .withTags(VALID_TAG_FRIEND).withProducts(VALID_PRODUCT_BREAD, VALID_PRODUCT_RICE).build();
-        DESC_BOB = new EditSupplierDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withCompany(VALID_COMPANY_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withProducts(VALID_PRODUCT_BREAD).build();
-    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
