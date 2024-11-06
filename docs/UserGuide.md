@@ -168,14 +168,29 @@ Refer to the [Features](#features) below for details of each command.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+## General Commands
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+### Clearing all entries : `clear`
+
+Clears all patient and tasks entry from NovaCare.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+## Patient-Related Commands
 
 ### Adding a patient: `add`
 
@@ -192,47 +207,6 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all patients : `list`
-
-Shows a list of all patients in the address book.
-
-:pencil: Format: `list`
-
-### Editing a patient : `edit`
-
-Edits an existing patient in the address book.
-
-:pencil: Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
-* You can remove all the patient’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
-
-### Locating patients by name: `find`
-
-Finds patients whose names contain any of the given keywords.
-
-:pencil: Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Patients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting a patient : `delete`
 
 Deletes the specified patient and tasks associated to that patient from the address book.
@@ -246,6 +220,102 @@ Deletes the specified patient and tasks associated to that patient from the addr
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the address book.
 * `find john doe` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+
+### Editing a patient : `edit`
+
+Edits an existing patient in the address book.
+
+:pencil: Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+
+### Adding emergency contact : `emergency`
+
+Adds an emergency contact and details to a patient in the address book.
+
+:pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
+
+* Adds an emergency contact and details at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
+
+### Deleting emergency contact : `delemergency`
+
+Deletes an emergency contact and its details from a patient in the address book.
+
+:pencil: Format: `delemergency INDEX
+
+* Deletes an emergency contact and its details at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
+
+### Adding priority level : `priority`
+
+Adds a priority level to a patient in the address book.
+
+:pencil: Format: `priority /id INDEX /level PRIORITY_LEVEL`
+
+* Adds a priority level at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The priority level **must be a positive integer** and only from **1, 2, 3**
+
+Examples:
+* `priority /id 1 /level 2` adds priority level `2` to 1st index in patient list.
+
+### Deleting priority level : `deletelevel`
+
+Delete a priority level to a patient in the address book, resetting it to the default value **3**.
+
+:pencil: Format: `deletelevel INDEX`
+
+* Delete the current priority level at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
+
+### Listing all patients : `list`
+
+Shows a list of all patients in the address book.
+
+Format: `list`
+
+### Locating patients by name: `find`
+
+Finds patients whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Patients matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+## Task-Related Commands
 
 ### Adding a task : `addtask`
 
@@ -276,58 +346,21 @@ Deletes a task for a patient in the address book.
 Examples:
 * `deletetask 1` deletes the 1st task in the task list.
 
-### Adding emergency contact : `emergency`
+### Locating tasks by patient: `findtask`
 
-Adds an emergency contact and details to a patient in the address book.
+Finds all tasks whose patient matches specified patient id
 
-:pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
-
-* Adds an emergency contact and details at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
+:pencil: Format: `findtask INDEX`
 
 Examples:
-* `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
+* `findtask 1` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-### Deleting emergency contact : `delemergency`
+### Listing all tasks : `listtask`
 
-Deletes an emergency contact and its details from a patient in the address book.
+Shows a list of all tasks.
 
-:pencil: Format: `delemergency INDEX
-
-* Deletes an emergency contact and its details at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
-
-### Adding priority level : `priority`
-
-Adds an priority level to a patient in the address book.
-
-:pencil: Format: `priority /id INDEX /level PRIORITY_LEVEL`
-
-* Adds a priority level at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The priority level **must be a positive integer** and only from **1, 2, 3**
-
-Examples:
-* `priority /id 1 /level 2` adds priority level `2` to 1st index in patient list.
-
-### Deleting priority level : `deletelevel`
-
-Delete a priority level to a patient in the address book, resetting it to the default value **3**.
-
-:pencil: Format: `deletelevel INDEX`
-
-* Delete the current priority level at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
+:pencil: Format: `listtask`
 
 ### Mark Task : `marktask`
 
@@ -342,31 +375,27 @@ Marks a task at a specific index.
 Examples:
 * `marktask 1` marks a task of the 1st index in task list.
 
-### Clearing all entries : `clear`
+### Listing all incomplete tasks : `listincomplete`
 
-Clears all patient and tasks entry from NovaCare.
+Shows a list of all incomplete tasks.
 
-:pencil: Format: `clear`
+Format: `listincomplete`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-:pencil: Format: `exit`
+--------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+NovaCare data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+NovaCare data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -398,16 +427,14 @@ _Details coming soon ..._
 | Action                    | Format Examples                                                                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ` <br> e.g., `add n/James Ho p/94391857 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/diabetes` |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Edit**                  | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g., `edit 1 p/91234567 e/john13432@gmail.com`                                       |
-| **Change Priority**       | `priority INDEX l/PRIORITY_LEVEL` <br> e.g., `priority 1 l/2`                                                                                            |
-| **Delete Priority**       | `priority INDEX l/reset` <br> e.g., `priority 2 l/reset`                                                                                                      |
 | **Add Emergency Contact** | `emergency INDEX n/EMERGENCY CONTACT NAME p/EMERGENCY CONTACT NUMBER` <br> e.g., `emergency 1 n/tom tan p/91237171`                                      |
 | **Delete Emergency Contact** | `delemergency INDEX` <br> e.g., `delemergency 1`                                                                                                         |
+| **Change Priority**       | `priority INDEX l/PRIORITY_LEVEL` <br> e.g., `priority 1 l/2`                                                                                            |
+| **Delete Priority**       | `priority INDEX l/reset` <br> e.g., `priority 2 l/reset`                                                                                                      |
 | **List**                  | `list`                                                                                                                                                   |
-| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
-| **Clear**                 | `clear`                                                                                                                                                  |
-
 
 ### Task-Related Commands:
 | Action              | Format, Examples                                                                   |
@@ -418,8 +445,10 @@ _Details coming soon ..._
 | **List Task**       | `listtask`                                                                         |
 | **Mark Task**       | `marktask INDEX`<br> e.g., `marktask 1`                                            |
 | **List Incomplete** | `listincomplete`                                                                   |
-### Other Commands:
-| Action                | Format, Examples       |
-|-----------------------|------------------------|
-|**Help**               | `help`                 |
-|**Exit**               | `exit`                 |
+
+### Other commands:
+| Action    | Format, Examples |
+|-----------|------------------|
+| **Help**  | `help`           |
+| **Clear** | `clear`          |
+| **Exit**  | `exit`           |
