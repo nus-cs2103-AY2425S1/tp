@@ -369,6 +369,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+#### UC8: Export Csv
+- Precondition:
+- Postcondition: csv is generated based on goods displayed to the user
+- Actors: User
+
+MSS
+1. User chooses to export 
+2. System generates a csv based on goods displayed to the user
+3. Use case ends 
+
+#### UC9: Clear suppliers and goods
+
+MSS
+1. User chooses to clear 
+2. System clear all supplier contacts as well as goods
+3. Use case ends
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.

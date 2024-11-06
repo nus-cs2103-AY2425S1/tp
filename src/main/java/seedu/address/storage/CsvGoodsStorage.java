@@ -33,14 +33,24 @@ public class CsvGoodsStorage implements GoodsStorage {
     private static final Logger logger = LogsCenter.getLogger(CsvGoodsStorage.class);
 
     private Path filePath;
+    private Path exportFilePath;
 
-    public CsvGoodsStorage(Path filePath) {
+    /**
+     * A class to access Goods data stored as a csv file on the hard disk.
+     */
+    public CsvGoodsStorage(Path filePath, Path exportFilePath) {
         this.filePath = filePath;
+        this.exportFilePath = exportFilePath;
     }
 
     @Override
     public Path getGoodsFilePath() {
         return filePath;
+    }
+
+    @Override
+    public Path getExportGoodsFilePath() {
+        return exportFilePath;
     }
 
     @Override
@@ -99,6 +109,11 @@ public class CsvGoodsStorage implements GoodsStorage {
             }
         };
         Optional<List<GoodsReceipt>> goodsReceiptList = CsvUtil.readCsvFile(filePath, GoodsReceipt.class, filter);
+
+        if (goodsReceiptList.isEmpty()) {
+            return Optional.empty();
+        }
+
         goodsReceiptList.ifPresent(receiptLog::setReceipts);
         return Optional.of(receiptLog);
     }

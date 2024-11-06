@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.goodsreceipt.DeliveredPredicate;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
 import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
@@ -47,8 +48,10 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.goodsList = new ReceiptLog(goodsList);
+        DeliveredPredicate deliveredPredicate = new DeliveredPredicate(false);
         filterIllegalSupplierNames();
         filteredReceipts = new FilteredList<>(this.goodsList.getReceiptList());
+        filteredReceipts.setPredicate(deliveredPredicate);
     }
 
     public ModelManager() {
@@ -77,6 +80,21 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Boolean getExportFilterGoodsStatus() {
+        return userPrefs.getExportFilterGoods();
+    }
+
+    @Override
+    public void setExportFilterGoodsToTrue() {
+        userPrefs.setExportFilterGoodsToTrue();
+    }
+
+    @Override
+    public void setExportFilterGoodsToFalse() {
+        userPrefs.setExportFilterGoodsToFalse();
     }
 
     @Override
@@ -187,6 +205,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
@@ -208,11 +227,19 @@ public class ModelManager implements Model {
     public void setGoods(ReadOnlyReceiptLog goodsReceipts) {
         requireNonNull(goodsReceipts);
         goodsList.resetData(goodsReceipts);
+        updateFilteredReceiptsList(x -> false); //No goodsReceipt will satisfy this condition
     }
 
     @Override
     public ReadOnlyReceiptLog getGoods() {
         return goodsList;
+    }
+
+    @Override
+    public ReadOnlyReceiptLog getGoodsFiltered() {
+        ReceiptLog receipts = new ReceiptLog();
+        receipts.setReceipts(this.getFilteredReceiptsList().stream().toList());
+        return receipts;
     }
 
     @Override
