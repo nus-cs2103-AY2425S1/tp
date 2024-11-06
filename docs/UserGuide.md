@@ -69,6 +69,12 @@ tasks done faster than traditional GUI apps.
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Prefixes is not case-sensitive. <br>
+  e.g. if command specifies `n/NAME p/PHONE_NUMBER`, `N/NAME p/PHONE_NUMBER` is also acceptable.
+
+* Commands is not case-sensitive. <br>
+  e.g. if command is `contact add`, `CONTact ADd` is also acceptable.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -77,34 +83,51 @@ tasks done faster than traditional GUI apps.
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/help_message.png)
 
 Format: `help`
 
 ### Adding a person: `contact add`
 
-Adds a person to Address Book.
+Adds a person to the TutorEase Address Book.
 
 Format: `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​`
 
-* Duplicated names is strictly not allowed. Please include a unique identifier like "Ryan Tan Sec 1".
-* Names with symbols like "s/o" and "d/o" will not be allowed. Please write without these symbols.
-* Names with additional white spaces in between terms will be taken as it is.
-* Duplicated phone numbers and email is strictly not allowed too.
-* Phone number can start from any number with at least 3 digits.
-* Address with non-alphanumeric characters are accepted like "😁".
-
-<box type="tip" seamless>
-
-**Tip 1:** A person can have any number of tags (including 0)
-
-**Tip 2:** Role can only be Student or Guardian
-</box>
+Remarks:
+* Add a contact with the specified details.
+* `NAME` should only contain alphanumeric characters, spaces and round brackets.
+* Duplicated names is strictly not allowed. Please include a unique identifier like "Ryan Tan (Sec 1)".
+* `NAME` with symbols like "s/o" and "d/o" will not be allowed. Please write without these symbols.
+* `NAME` with additional white spaces in between terms will be taken as it is.
+* `PHONE_NUMBER` can must be a non-negative integers
+* `PHONE_NUMBER` can start with any number.
+* `PHONE_NUMBER` must have a length of at least 3.
+* `PHONE_NUMBER` does not have a limit on length. 
+* Duplicated phone numbers is strictly not allowed.
+* `EMAIL` should be of format `local-part@domain` with the following constraints
+  * `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+-._).
+  * `local-part` may not start or end with any special characters.
+  * `domain` is made up of domain labels separated by periods.
+  * `domain` must:
+    * end with a `domain` label at least 2 characters long
+    * have each `domain` label start and end with alphanumeric characters
+    * have each `domain` label consist of alphanumeric characters, separated only by hyphens, if any.
+* `ADDRESS` can be in any form with any amount of characters.
+* `ADDRESS` with non-alphanumeric characters are accepted like "😁" too.
+* `ROLE` can only be Student or Guardian.
+* `ROLE` need not be case-sensitive. e.g. `ROLE` can be `stUDent` or `GuaRDIAN`.
+* `TAGS` have no limits on quantity.
+* `TAGS` can only have alphanumeric characters with no spacing.
 
 Examples:
 
-* `contact add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Student`
+* `contact add n/Norbeast p/987654322131 e/norbeast@example.com a/John street, block 123, #01-01 r/Student`
+
+![contact-add-student](images/contact-add-Student.png)
+
 * `contact add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Guardian a/Newgate Prison p/1234567 t/criminal`
+
+![contact-add-guardian](images/contact-add-Guardian.png)
 
 ### Listing all persons : `contact list`
 
@@ -118,14 +141,17 @@ Edits an existing person in the address book.
 
 Format: `contact edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
+Remarks:
+
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
+* `INDEX` must be within the range of the displayed list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `/t` without
-  specifying any tags after it.
-* Role is not editable!
+* You can remove all the person’s tags by typing `/t` without specifying any tags after it.
+* `ROLE` is not editable!
+* All constraints from `contact add` command still stands with `contact edit` command.
 
 Examples:
 
@@ -138,6 +164,8 @@ Examples:
 Finds persons whose names contain any of the given keywords.
 
 Format: `contact find KEYWORD [MORE_KEYWORDS]`
+
+Remarks:
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -158,9 +186,12 @@ Deletes the specified person from the address book.
 
 Format: `contact delete INDEX`
 
+Remarks:
+
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* `INDEX` must be within the range of the displayed list.
 
 Examples:
 
