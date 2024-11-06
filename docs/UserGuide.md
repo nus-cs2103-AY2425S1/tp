@@ -49,6 +49,9 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
   - [Additional Features](#additional-features)
     - [Command history: Up and Down arrow keys](#command-history-up-and-down-arrow-keys)
     - [Highlighting of command errors](#highlighting-of-command-errors)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -558,16 +561,29 @@ _Details coming soon ..._
 ## Command summary
 
 Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
+**Statistics**   | `stats`
+**Clear**  | `clear`
+**Exit**  | `exit`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add Property** | `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
 **Add Property** | `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
-**Clear**  | `clear`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Property** | `delSell INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delSell 3 2`
 **Delete Property** | `delBuy INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delBuy 3 2`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find Name**   | `findn KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn James Jake`
-**Find Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn 98272758 85495438`
+**Find using Name**   | `findn KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn James Jak`
+**Find using Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn 98272758 85495438`
+**Find using Tag**   | `findtc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtc friend owes`
+**Find using Property**   | `findBuy KEYWORD [MORE_KEYWORDS]`<br> e.g., `findBuy condo 02-21`
+**Find using Property**   | `findSell KEYWORD [MORE_KEYWORDS]`<br> e.g., `findSell hdb 21345`
 **List**   | `list`
-**Help**   | `help`
+**Sort Person**   | `sort f/FIELD o/ORDER`<br> e.g., `sort f/Name o/L`
+**Sort Property**   | `sorti INDEX f/FIELD o/ORDER`<br> e.g., `sorti 1 f/Price o/L`
+**Mark Property**   | `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL PRICE`<br> e.g., `bought 1 2 ap/1250000`
+**Mark Property**   | `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL PRICE`<br> e.g., `sold 2 2 ap/1050000`
+**Pin** | `pin INDEX`<br> e.g., `pin 3`
+**Unpin** | `unpin INDEX`<br> e.g., `unpin 1`
+
+
