@@ -70,7 +70,7 @@ Action     | Format, Examples
 **[Delete](#deleting-a-supplier--delete--s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
 **[List](#listing-all-suppliers-list--s)**   | `list -s`
 **[Mark](#mark-a-supplier-with-a-status--mark--s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
-**[Find](#find-a-supplier-find--s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
+**[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
 
 
 ### Delivery Commands
@@ -285,6 +285,40 @@ Examples:
 
 #### Here's how it would look like in the app:
 ![delete delivery command](images/deleteDeliveryCommand.png)
+
+
+### Find a delivery: `find -d`
+
+The `find -d` command is used to find a delivery in VendorVault.
+This helps you find deliveries based on attributes of the delivery, like the delivery date, delivery status, supplier and product.
+
+Format: `find -d on/<DELIVERY_DATE_TIME> stat/<DELIVERY_STATUS> s/<SUPPLIER_INDEX> pro/<PRODUCT_TO_BE_DELIVERED>`
+
+Parameters:
+
+- <DELIVERY_DATE_TIME> : Must be in dd-MM-yyyy HH:mm format and must not be blank.
+- <DELIVERY_STATUS> : Must be one of the following: PENDING, DELIVERED, CANCELLED
+- <SUPPLIER_INDEX> : Index of the supplier as seen in the supplier list
+- <PRODUCT_TO_BE_DELIVERED> : Name of product that will be delivered
+
+<box type="tip" seamless>
+
+**Warnings**:
+- At least one prefix and parameter must be given
+- No duplicate prefix can be used
+- Find result(s) will contain/satisfy all the given parameters
+- Parameters used are case-insensitive
+  </box>
+
+
+#### Example
+To find deliveries of product "milk" on "28-06-2025 17:00" :
+
+    find -d on/ 28-06-2025 17:00 pro/ milk
+
+
+#### Here's how it would look like in the app:
+![find command](images/findDeliveryCommand.png)
 
 ---
 
