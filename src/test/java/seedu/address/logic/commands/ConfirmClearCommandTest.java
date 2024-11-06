@@ -24,7 +24,8 @@ public class ConfirmClearCommandTest {
         Model expectedModel = new ModelManager();
         ClearCommand.setIsClear(true);
 
-        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
+        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FULL_CLEAR,
+                expectedModel);
     }
 
     @Test
@@ -34,7 +35,8 @@ public class ConfirmClearCommandTest {
         expectedModel.setAddressBook(new AddressBook());
         ClearCommand.setIsClear(true);
 
-        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
+        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FULL_CLEAR,
+                expectedModel);
     }
 
     @Test
@@ -50,7 +52,8 @@ public class ConfirmClearCommandTest {
             expectedModel.deletePerson(personToDelete);
         }
 
-        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FILTERED_CLEAR, expectedModel);
+        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FILTERED_CLEAR,
+                expectedModel);
     }
 
     @Test
