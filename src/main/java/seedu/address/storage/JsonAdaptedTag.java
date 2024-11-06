@@ -77,7 +77,7 @@ class JsonAdaptedTag {
     public Tag toModelType() throws IllegalValueException {
         Entry<String, String> entry = map.entrySet().iterator().next();
         if (!Tag.isValidTagName(entry.getKey())) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
         }
         if (entry.getValue() != null && Tag.isValidTagName(entry.getValue())) {
             return new Tag(entry.getKey(), entry.getValue());

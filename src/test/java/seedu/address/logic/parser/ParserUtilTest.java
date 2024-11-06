@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -46,7 +47,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -156,8 +157,38 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTag_emptyKeyAndValue_throwsParseException() {
+        String tagWithoutKeyAndValue = ":";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY, () -> ParserUtil.parseTag(tagWithoutKeyAndValue));
+    }
+
+    @Test
+    public void parseTag_emptyKey_throwsParseException() {
+        String tagWithEmptyKey = ":value";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING, () -> ParserUtil.parseTag(tagWithEmptyKey));
+    }
+
+    @Test
+    public void parseTag_invalidKey_throwsParseException() {
+        String tagWithInvalidKey = "$key:value";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC, () -> ParserUtil.parseTag(tagWithInvalidKey));
+    }
+
+    @Test
+    public void parseTag_emptyValue_throwsParseException() {
+        String tagWithEmptyValue = "key:";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING, () -> ParserUtil.parseTag(tagWithEmptyValue));
+    }
+
+    @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        String tagWithInvalidValue = "key:$value";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC, () -> ParserUtil.parseTag(tagWithInvalidValue));
     }
 
     @Test
@@ -259,9 +290,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_decimalValue() throws Exception {
-        String tagWithDecimalValue = "grade:8.5";
-        Tag expectedTag = new Tag("grade", "8.5");
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithDecimalValue));
+    public void parseIndex_zero_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseIndex("0"));
+    }
+
+    @Test
+    public void parseIndex_negativeNumber_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseIndex("-1"));
+    }
+
+    @Test
+    public void parseIndex_maxIntegerValue() throws Exception {
+        Index maxIndex = Index.fromOneBased(Integer.MAX_VALUE);
+        assertEquals(maxIndex, ParserUtil.parseIndex(Integer.toString(Integer.MAX_VALUE)));
     }
 }
