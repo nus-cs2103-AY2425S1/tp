@@ -118,6 +118,16 @@ public class Listing {
     }
 
     /**
+     * Checks if this listing has the specified buyer.
+     *
+     * @param buyer The buyer to check.
+     * @return True if the listing has the buyer, false otherwise.
+     */
+    public boolean hasBuyer(Person buyer) {
+        return buyers.contains(buyer);
+    }
+
+    /**
      * Returns a new Listing with a different seller
      * @param sellerToAdd The new buyer to add to the listing.
      * @return Listing with a modified seller.
