@@ -665,7 +665,7 @@ testers are expected to do more *exploratory* testing.
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to delete exists.
 
-   1. **Test case:** Test case: `del-client 1`<br>
+   1. **Test case:** `del-client 1`<br>
       **Expected:** First client is deleted from the list. Details of the deleted client are shown in the status message.
 
    1. **Test case:** `del-client 0`<br>
@@ -680,7 +680,7 @@ testers are expected to do more *exploratory* testing.
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to check exists and **has a car**.
 
-   1. **Test case:** Test case: `check 1`<br>
+   1. **Test case:** `check 1`<br>
       **Expected:** First client is checked in/ out from the list. Details of the checked client are shown in the status message. If client is checked-in, display `Checked-In` icon in the list, else if client is checked-out, hide the `Checked-In` icon.
 
    1. **Test case:** `check 0`<br>
@@ -695,21 +695,21 @@ testers are expected to do more *exploratory* testing.
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit exists. Ensure that the values to edit are different from the current values and they do not violate any constraints such as duplicate clients or cars.
 
-   1. **Test case:** Test case: `edit 1 n/John Doe p/98765432`<br>
+   1. **Test case:** `edit 1 n/John Doe p/98765432`<br>
       **Expected:** First client's name and phone number are edited. Details of the edited client are shown in the status message. 
-   2. **Test case:** Test case: `edit 2 n/John Doe p/98765432`<br>
+   2. **Test case:** `edit 2 n/John Doe p/98765432`<br>
       **Expected:** No client is added. Error message displayed indicating that the client already exists.
 
 2. **Editing a client's car details**
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit exists and **has a car**. Ensure that the values to edit are different from the current values and they do not violate any constraints such as duplicate clients or cars.
 
-   1. **Test case:** Test case: `edit 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
+   1. **Test case:** `edit 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
       **Expected:** First client's car vrn and vin are edited. Details of the edited car are shown in the status message.
-   2. **Test case:** Test case: `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
+   2. **Test case:** `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
       **Expected:** No car is added. Error message displayed indicating that the car already exists.
 3. **Editing a non-existent client's details**
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit does not exist.
 
-   2. **Test case:** Test case: `edit 10 n/John Doe p/98765432`<br>
+   2. **Test case:** `edit 10 n/John Doe p/98765432`<br>
       **Expected:** No client is edited. Error details shown in the status message.
