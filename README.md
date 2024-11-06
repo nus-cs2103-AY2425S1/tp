@@ -16,7 +16,7 @@ Optimized for command-line-interface usage
 - Able to save changes made in the application instantaneously as well as export filters
 
 ### Codebase and Documentation
-* Written with Functional Programming & Object Oriented Programming 
+* Written with Functional Programming & Object-Oriented Programming 
 * Written with test cases to ensure no uneventful mishaps
 * Documentation up to date with the latest changes 
 
