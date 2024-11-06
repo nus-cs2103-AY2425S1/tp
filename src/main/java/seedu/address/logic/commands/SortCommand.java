@@ -25,7 +25,7 @@ public class SortCommand extends Command {
     public enum SortField {
         NAME("Name"),
         STUDENT_ID("Student ID"),
-        TUTORIAL_ATTENDANCE("Tutorial Attendance");
+        TUTORIAL_ATTENDANCE("Tutorial");
 
         private final String displayName;
 
@@ -136,7 +136,7 @@ public class SortCommand extends Command {
         assert sortField != null : "sortField should never be null";
 
         return String.format("Sorted by %s%s in %s order.",
-                sortField, this.tutorial.map(t-> " " + t).orElse(""), order);
+                sortField, this.tutorial.map(t-> " " + t.getTutorialNumber()).orElse(""), order);
     }
 
     @Override
