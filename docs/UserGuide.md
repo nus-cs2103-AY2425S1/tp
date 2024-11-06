@@ -28,29 +28,28 @@ in this user guide.
 
 ## Introduction
 
-[Quick start](#quick-start):
-Navigate to this section to quickly get started with DocTrack.
+- [Quick start](#quick-start):
+  - Quickly get started with DocTrack.
 
-[Interacting with DocTrack](#interacting-with-doctrack):
-Navigate here for more information on how DocTrack works.
+- [Interacting with DocTrack](#interacting-with-doctrack):
+  - Learn how you can interact with DocTrack.
 
-[Command Overview](#command-overview):
-Navigate here for information on how the commands work.
-- [Summary of Commands](#summary-of-commands):
-  - for a general summary of all the commands
-- [Person Commands](#person-commands):
-  - for more information on the person commands
-- [Appointment Commands](#appointment-commands):
-  - for more information on the appointment commands
-- [General Commands](#general-commands):
-  - for more information on general commands
+- [Command Overview](#command-overview):
+  - Navigate here for information on how the commands work.
+  - [Summary of Commands](#summary-of-commands):
+    - for a general summary of all commands.
+  - [Person Commands](#person-commands):
+    - for more information on person commands.
+  - [Appointment Commands](#appointment-commands):
+    - for more information on appointment commands.
+  - [General Commands](#general-commands):
+    - for more information on general commands.
 
-[FAQ](#faq): 
-Navigate here for answers to common questions asked by users.
+- [FAQ](#faq):
+  - Find answers to common questions you might have.
 
-[Known issues](#known-issues):
-Navigate here for common issues that may arise during use of DocTrack.
-
+- [Known issues](#known-issues):
+  - Discover common issues that may arise while you are using DocTrack.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -70,7 +69,8 @@ Navigate here for common issues that may arise during use of DocTrack.
 
 <br>
 
-2. Download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It is a `.jar` file. For more information, see this: 
+2. You can download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It 
+   is a `.jar` file. For more information, you can refer to: 
    - [What is a JAR file?](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html)
    - [How to run a JAR file](https://stackoverflow.com/questions/5774970/run-jar-file-in-command-prompt).
 
@@ -113,7 +113,7 @@ Navigate here for common issues that may arise during use of DocTrack.
 
 <br>
 
-7. Refer to the [Command Overview](#command-overview) below for details of each command.
+7. You can refer to the [Command Overview](#command-overview) below for details of each command. 
 
 <br>
 
@@ -123,13 +123,16 @@ Navigate here for common issues that may arise during use of DocTrack.
 
 ## Interacting with DocTrack
 
-All interactions with the DocTrack platform are done through a series of **commands** entered by the user. 
-These commands allow you to perform various **tasks**, such as adding, editing, listing, deleting, finding,
-and clearing persons/appointments. The commands are designed to be flexible and user-friendly, allowing **data fields** in any order, handling multiple entries for specific fields.
+All interactions with the DocTrack platform are done through a series of **commands** entered by you. 
+- These commands allow you to perform various **tasks**, such as adding, editing, listing, deleting, finding,
+and clearing persons/appointments. 
+- The commands are designed to be flexible and user-friendly. 
+  - You can add fields in any order.
+  - You can add multiple entries for specific fields.
 
 <box type="tip" light>
 
-Here are some **key points** to keep in mind when using commands:
+Here are some **key points** to keep in mind when using the commands:
 
 - You should supply **all** the fields (words in **`UPPER_CASE`**) that are needed for a command.<br>
   _**Example:** In `add person n/NAME`, **`NAME`** is a field which can be used as `add person n/John Doe`._
@@ -176,15 +179,15 @@ The following sections describe the various commands available in the DocTrack p
 A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and 
 optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. 
 DocTrack allows you to interact with patient information through different commands, which can be seen below.
-=======
-| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
-|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
-| **[List all persons](#listing-all-persons-list-person)**                 | `list person`                                             <br/>                                                           | `list person`                                                                                                           |
-| **[Edit person](#editing-a-person-edit-person)**                         | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​`                                 | `edit person 2 n/James Lee e/jameslee@example.com`                                                                      |
-| **[Find person](#finding-persons-by-name-find-person)**                  | `find person KEYWORD [MORE_KEYWORDS]`                                                                                     | `find person n/James Jake`                                                                                              |
-| **[Delete person](#deleting-a-person-delete-person)**                    | `delete person INDEX`                                                                                                     | `delete person 3`                                                                                                       |
-| **[Clear all persons](#clearing-all-persons-clear-person)**              | `clear person`                                                                                                            | `clear person`                                                                                                          |
+
+| Action                                                      | Format                                                                                    | Examples                                                                                                       |
+|-------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **[Add person](#adding-a-person-add-person)**               | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
+| **[List all persons](#listing-all-persons-list-person)**    | `list person`                                             <br/>                           | `list person`                                                                                                  |
+| **[Edit person](#editing-a-person-edit-person)**            | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​` | `edit person 2 n/James Lee e/jameslee@example.com`                                                             |
+| **[Find person](#finding-persons-by-name-find-person)**     | `find person KEYWORD [MORE_KEYWORDS]`                                                     | `find person n/James Jake`                                                                                     |
+| **[Delete person](#deleting-a-person-delete-person)**       | `delete person INDEX`                                                                     | `delete person 3`                                                                                              |
+| **[Clear all persons](#clearing-all-persons-clear-person)** | `clear person`                                                                            | `clear person`                                                                                                 |
 
 <br>
 
