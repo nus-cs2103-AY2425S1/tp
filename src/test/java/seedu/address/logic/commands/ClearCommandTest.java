@@ -41,7 +41,7 @@ public class ClearCommandTest {
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(new PersonContainsKeywordsPredicate(List.of(""))),
-                model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+                model, ClearCommand.MESSAGE_CLEAR_ALL, expectedModel);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ClearCommandTest {
         expectedModel.deletePerson(TEACHER_ALICE);
 
         assertCommandSuccess(new ClearCommand(new PersonContainsKeywordsPredicate(Arrays.asList("/name", "Alice"))),
-                model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+                model, String.format(ClearCommand.MESSAGE_SUCCESS, 1), expectedModel);
     }
 
 }

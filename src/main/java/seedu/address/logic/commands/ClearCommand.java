@@ -49,14 +49,15 @@ public class ClearCommand extends Command {
             throw new CommandException(MESSAGE_NO_ACTION);
         }
 
-        if (newSize == 0) {
-            return new CommandResult(MESSAGE_CLEAR_ALL);
-        }
-
         AddressBook newAddressBook = new AddressBook();
         newAddressBook.setPersons(remainingPersons);
 
         model.setAddressBook(newAddressBook);
+
+        if (newSize == 0) {
+            return new CommandResult(MESSAGE_CLEAR_ALL);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, originalSize - newSize));
     }
 }
