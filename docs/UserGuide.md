@@ -193,13 +193,13 @@ This screenshot shows the result of executing `edit_s i/2 sn/Bernice Yu Ting Kan
 
 #### Adding a Student to a Group: `add_s_g`, `asg`
 
-Adds a student to a group.
+Adds student(s) to a group.
 
-**Format**: `add_s_g sno/STUDENT_NUMBER gn/GROUP_NAME`
+**Format**: `add_s_g sno/STUDENT_NUMBER [sno/STUDENT_NUMBER]... gn/GROUP_NAME`
 
 ##### Notes
 
-1. The group with the `Group Name` and student with the `Student Number` must both exist in T_Assistant.
+1. The group with the `Group Name` and student(s) with the `Student Number`(s) must both exist in T_Assistant.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
