@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,9 +20,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -165,12 +170,32 @@ public class ModelManagerTest {
 
     @Test
     public void addGoods_nullGoods_throwsNullPointerException() {
-        // TODO: Implement this
+        assertThrows(NullPointerException.class, () -> modelManager.addGoods(null));
     }
 
     @Test
+    public void addGoods_illegalSupplierName_throwsIllegalSupplierName() {
+        Person person = new PersonBuilder().build();
+        modelManager.addPerson(person);
+        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(new Name("Invalid Name"))
+                .build();
+
+        assertFalse(person.getName().equals(goodsReceipt.getSupplierName()));
+        assertThrows(IllegalSupplierNameException.class, () -> modelManager.addGoods(goodsReceipt));
+    }
+
+
+    @Test
     public void addGoods_validGoods_addsGoods() {
-        // TODO: Implement this
+        Person person = new PersonBuilder().build();
+        modelManager.addPerson(person);
+        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(person.getName())
+                .build();
+
+        assertTrue(person.getName().equals(goodsReceipt.getSupplierName()));
+        assertDoesNotThrow(() -> modelManager.addGoods(goodsReceipt));
     }
 
     @Test
