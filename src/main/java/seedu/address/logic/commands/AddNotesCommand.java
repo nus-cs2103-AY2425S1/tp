@@ -57,7 +57,7 @@ public class AddNotesCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getId(), personToEdit.getWard(),
-                personToEdit.getDiagnosis(), personToEdit.getMedication(), notes);
+                personToEdit.getDiagnosis(), personToEdit.getMedication(), notes, personToEdit.getAppointment());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
