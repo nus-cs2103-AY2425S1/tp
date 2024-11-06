@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static seedu.address.logic.Messages.styleCommand;
+
+import seedu.address.model.Model;
 
 /**
  * Terminates the program.

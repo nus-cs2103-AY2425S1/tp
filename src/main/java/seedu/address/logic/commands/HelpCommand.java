@@ -1,68 +1,80 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-
 import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
 import static seedu.address.logic.Messages.LINE_BREAK;
 import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.Messages.styleCommand;
 
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.contact.Role;
+import seedu.address.model.contact.StudentStatus;
+
+import java.util.Arrays;
+
 /**
  * Format full help instructions for every command for display.
  */
 public class HelpCommand extends Command {
-    private static final String USERGUIDE_URL = "https://ay2425s1-cs2103-f09-1.github.io/tp/UserGuide.html";
-    // make use of magic numbers needed
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103-f09-1.github.io/tp/UserGuide.html";
     public static final String COMMAND_WORD = "help";
     public static final String COMMAND_FORMAT_DETAIL = "help [COMMAND_WORD]";
-    public static final String MESSAGE_REFER_USERGUIDE = "%s visit " + USERGUIDE_URL + WHITESPACE + "for " +
-        "complete user" + " guide";
 
-
-    public static final String MESSAGE_USAGE = "See " + styleCommand(COMMAND_WORD) + ": Shows program " +
-            "usage instructions." + LINE_BREAK + COMMAND_FORMAT_PREAMBLE + WHITESPACE + COMMAND_WORD;
+    public static final String DETAIL_PREAMBLE_START = "For more details,";
+    public static final String MESSAGE_REFER_USERGUIDE = "%s visit " + USERGUIDE_URL + WHITESPACE
+            + "for complete user guide";
+    public static final String MESSAGE_REFER_USERGUIDE_GENERAL_HELP =
+            String.format(MESSAGE_REFER_USERGUIDE, "Alternatively,");
+    public static final String MESSAGE_REFER_USERGUIDE_DETAIL_HELP =
+            String.format(MESSAGE_REFER_USERGUIDE, DETAIL_PREAMBLE_START);
+    
+    public static final String MESSAGE_USAGE = "See " + styleCommand(COMMAND_WORD) + ": Shows program "
+            + "usage instructions." + LINE_BREAK + COMMAND_FORMAT_PREAMBLE + WHITESPACE + styleCommand(COMMAND_WORD);
     public static final String SHOWING_HELP_MESSAGE = "List of other commands: "
             + Messages.MESSAGE_COMMAND_LIST.replace("help, ", "") + LINE_BREAK
-            + "For more details, type " + styleCommand(COMMAND_FORMAT_DETAIL) + WHITESPACE + "with the " +
-            "words found in the command list above."
-            + LINE_BREAK + String.format(MESSAGE_REFER_USERGUIDE, "Alternatively,");
-           // + "\nAlternatively, visit our complete user guide on the popup screen";
+            + DETAIL_PREAMBLE_START + WHITESPACE + "type " + styleCommand(COMMAND_FORMAT_DETAIL) + WHITESPACE
+            + "with the words found in the command list above." + LINE_BREAK 
+            + MESSAGE_REFER_USERGUIDE_GENERAL_HELP;
+    // + "\nAlternatively, visit our complete user guide on the popup screen";
 
     // studentStatus and Role can magic number
     public static final String HELP_ADD = AddCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + AddCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
-            + AddCommand.MESSAGE_COMMAND_EXAMPLE + "\n"
-            + "For Student Status, the accepted ones are: Undergraduate 1 to 6, Masters or PhD\n"
-            + "For Role, the accepted ones are: President, Vice President, Admin, Marketing, Events (Internal),"
-            + " Events (External), or External Relations\n"
+            + AddCommand.MESSAGE_COMMAND_EXAMPLE + LINE_BREAK
+            + formatAcceptedString("Student Status",
+            new String[] { StudentStatus.UNDERGRADUATE_OFFICAL_CASE + WHITESPACE
+                    + StudentStatus.UNDERGRADUATE_START_YEAR + WHITESPACE + "to"
+                    + WHITESPACE + StudentStatus.UNDERGRADUATE_END_YEAR,
+                    StudentStatus.MASTERS_OFFICIAL_CASE, StudentStatus.PHD_OFFICIAL_CASE }) + LINE_BREAK
+            + formatAcceptedString("Role", Role.AVAILABLE_ROLES) + LINE_BREAK
             + "Multiple roles are allowed and only Nicknames are optional" + LINE_BREAK
-            + String.format(MESSAGE_REFER_USERGUIDE, "For more details,");
+            + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;
     public static final String HELP_DELETE = DeleteCommand.MESSAGE_FUNCTION + LINE_BREAK
-            + COMMAND_FORMAT_PREAMBLE.replace(":", " -") + WHITESPACE + DeleteCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
-            + DeleteCommand.MESSAGE_COMMAND_EXAMPLE
-            + "\nUsers can delete by full name of contact via `delete n/<FULL_NAME_TO_DELETE>` OR `delete " +
-            "<FULL_NAME_TO_DELETE>`" + LINE_BREAK
-            + String.format(MESSAGE_REFER_USERGUIDE, "For more details,");
+            + COMMAND_FORMAT_PREAMBLE.replace(":", " -") + WHITESPACE
+            + DeleteCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK + DeleteCommand.MESSAGE_COMMAND_EXAMPLE
+            + "\nUsers can delete by full name of contact via `delete n/<FULL_NAME_TO_DELETE>` OR `delete "
+            + "<FULL_NAME_TO_DELETE>`" + LINE_BREAK
+            + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;
     public static final String HELP_EDIT = EditCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + EditCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
             + EditCommand.MESSAGE_COMMAND_EXAMPLE + LINE_BREAK
-            + String.format(MESSAGE_REFER_USERGUIDE, "For more details,");
+            + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;
     public static final String HELP_FIND = FindCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + FindCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
             + FindCommand.MESSAGE_COMMAND_EXAMPLE + LINE_BREAK
-            + String.format(MESSAGE_REFER_USERGUIDE, "For more details,");;
+            + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;;
     public static final String HELP_LIST = ListCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
             + "No other fields is required for the command but alternatives are allowed as follows:\n"
             + "Alternative One: `list all`\n"
             + "Alternative Two: `list contacts`\n"
             + "Alternative Three: `list all contacts`" + LINE_BREAK
-            + String.format(MESSAGE_REFER_USERGUIDE, "For more details,");
+            + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;
     public static final String HELP_CLEAR = ClearCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + ClearCommand.MESSAGE_COMMAND_FORMAT;
     public static final String HELP_EXIT = ExitCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + ExitCommand.MESSAGE_COMMAND_FORMAT;
+
 
     private final String message;
     private final boolean isHelp;
@@ -115,5 +127,14 @@ public class HelpCommand extends Command {
         } else {
             return this.message.equals(otherHelpCommand.message);
         }
+    }
+
+    private static String formatAcceptedString(String fieldName, String[] strings) {
+        int stringArraySize = strings.length;
+        String toReturn = String.format("For %s, the accepted ones are:", fieldName);
+        String partialListedString = Arrays.stream(strings).limit(stringArraySize -1)
+                .reduce("", (listedString, string) -> listedString + string + "," + WHITESPACE);
+        toReturn += WHITESPACE + partialListedString + "or" + WHITESPACE + strings[stringArraySize - 1];
+        return toReturn;
     }
 }

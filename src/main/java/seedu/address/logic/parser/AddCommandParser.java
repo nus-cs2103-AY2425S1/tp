@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
 import static seedu.address.logic.Messages.LINE_BREAK;
 import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
 import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -57,8 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!arePrefixesPresent(argMultimap, compulsoryPrefixes)) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, stringifyAllAbsentPrefix(argMultimap,
-                            compulsoryPrefixes) + " mandatory prefix(es) is/are missing." + LINE_BREAK +
-                    MESSAGE_END_PART));
+                            compulsoryPrefixes) + " mandatory prefix(es) is/are missing." + LINE_BREAK
+                            + MESSAGE_END_PART));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
@@ -90,5 +90,4 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .reduce("", (allPrefixes, prefixString) -> allPrefixes + prefixString + "  ")
                 .trim();
     }
-
 }

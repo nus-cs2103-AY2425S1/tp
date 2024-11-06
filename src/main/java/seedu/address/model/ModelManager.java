@@ -21,8 +21,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Contact> filteredContacts;
     private final ObservableList<Contact> allContacts;
+    private final FilteredList<Contact> filteredContacts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,8 +34,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredContacts = new FilteredList<>(this.addressBook.getContactList());
         allContacts = this.addressBook.getContactList();
+        filteredContacts = new FilteredList<>(allContacts);
     }
 
     public ModelManager() {
@@ -131,13 +131,13 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Contact> getFilteredContactList() {
-        return filteredContacts;
+    public ObservableList<Contact> getAllContactList() {
+        return allContacts;
     }
 
     @Override
-    public ObservableList<Contact> getAllContactList() {
-        return allContacts;
+    public ObservableList<Contact> getFilteredContactList() {
+        return filteredContacts;
     }
 
     @Override

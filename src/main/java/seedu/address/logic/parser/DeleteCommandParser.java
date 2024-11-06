@@ -57,7 +57,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (trimmedArgs.isEmpty()) { // String.format()
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Missing index or full name. " + LINE_BREAK +MESSAGE_END_PART));
+                    "Missing index or full name. " + LINE_BREAK + MESSAGE_END_PART));
         }
 
         if (trimmedArgs.matches("^[0-9]+$")) { // should not throw exception

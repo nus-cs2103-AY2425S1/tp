@@ -199,7 +199,7 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_CONTACT, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_CONTACT);
     }
 
     @Test
@@ -211,7 +211,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT,
                 new EditContactDescriptorBuilder(contactInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_CONTACT);
     }
 
     @Test

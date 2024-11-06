@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS_CONTACT;
 import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.Messages.styleCommand;
@@ -24,8 +23,8 @@ import seedu.address.model.contact.Contact;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_FUNCTION = COMMAND_WORD + ": Adds a contact to the " +
-        "address book. ";
+    public static final String MESSAGE_FUNCTION = COMMAND_WORD
+            + ": Adds a contact to the address book. ";
     public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD + WHITESPACE// "Fields: "
             + PREFIX_NAME + "NAME "
             + PREFIX_TELEGRAM_HANDLE + "TELEGRAM "
@@ -62,13 +61,13 @@ public class AddCommand extends Command {
 
         if (model.hasContact(toAdd)) {
             throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "Contact to add",
-                    "the contact to add" ));
+                    "the contact to add"));
         }
 
         if (model.hasDuplicateFields(toAdd)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_FIELDS_CONTACT,
-                    "If the details of the contact for adding is correct, please rectify the existing " +
-                            "contacts details before adding the new contact."));
+                    "If the details of the contact for adding is correct, please rectify the existing "
+                            + "contacts details before adding the new contact."));
         }
 
         model.addContact(toAdd);

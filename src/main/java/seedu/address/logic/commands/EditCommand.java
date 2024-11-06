@@ -40,8 +40,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_FUNCTION = COMMAND_WORD + ": Edits the details of the contact "
             + "identified by the full name or the numerical displayed index. "
             + "Existing values will be overwritten by the input values.";
-    public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD + WHITESPACE + "[INDEX " +
-            "OR FULL_NAME_OF_CONTACT_TO_EDIT]" + WHITESPACE + "[PREFIX] [new description]");
+    public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD + WHITESPACE
+            + "[INDEX OR FULL_NAME_OF_CONTACT_TO_EDIT]" + WHITESPACE + "[PREFIX] [new description]");
     public static final String MESSAGE_COMMAND_EXAMPLE = "Example One: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEGRAM_HANDLE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
@@ -108,8 +108,8 @@ public class EditCommand extends Command {
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
-            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "This will result" +
-                    " in a contact that", "edits to make" ));
+            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_CONTACT,
+                    "This will result in a contact that", "edits to make"));
         }
 
         if (contactToEdit.isSameContact(editedContact)
@@ -151,10 +151,6 @@ public class EditCommand extends Command {
         StudentStatus updatedStudentStatus =
                 editContactDescriptor.getStudentStatus().orElse(contactToEdit.getStudentStatus());
         Set<Role> updatedRoles = editContactDescriptor.getRoles().orElse(contactToEdit.getRoles());
-        //Stream<Role> checkpoint = placeholderRoles.stream()
-          //      .sorted(Comparator.comparing(role -> role.getRoleIndex()));
-
-        //List<Role> updatedRoles = checkpoint.toList();
         Nickname updatedNickname = editContactDescriptor.getNickname().orElse(contactToEdit.getNickname());
         return new Contact(updatedName, updatedTelegramHandle, updatedEmail, updatedStudentStatus, updatedRoles,
                 updatedNickname);
@@ -187,7 +183,7 @@ public class EditCommand extends Command {
                 && editContactDescriptor.equals(otherEditCommand.editContactDescriptor);
     }
 
-    /*
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -195,7 +191,7 @@ public class EditCommand extends Command {
                 .add("editContactDescriptor", editContactDescriptor)
                 .toString();
     }
-    */
+
 
     // DRY not adhered (compare to delete)
     private void screenDuplicate(List<Contact> lastShownList) throws CommandException {

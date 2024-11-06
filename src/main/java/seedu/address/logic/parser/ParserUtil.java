@@ -142,7 +142,7 @@ public class ParserUtil {
      * Parses a {@code String nickname} into a {@code Nickname}.
      * Leading and trailing whitespaces will be trimmed.*
      */
-    public static Nickname parseNickname(String nickname) throws ParseException {
+    public static Nickname parseNickname(String nickname) { // Parse Exception was never thrown
         requireNonNull(nickname);
         String trimmedNickname = nickname.trim();
         return new Nickname(trimmedNickname);

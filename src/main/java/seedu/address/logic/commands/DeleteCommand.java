@@ -27,11 +27,14 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_FUNCTION = COMMAND_WORD
             + ": Deletes the contact identified by the displayed index number or "
             + "by Full name.";
+
+
+
     public static final String MESSAGE_COMMAND_FORMAT = "3 possible formats as follow:" + LINE_BREAK
             + "1. " + styleCommand(COMMAND_WORD + WHITESPACE + "INDEX (positive integer)") + LINE_BREAK
             + "2. " + styleCommand(COMMAND_WORD + WHITESPACE + "FULL_NAME_OF_CONTACT_TO_DELETE") + LINE_BREAK
-            + "3. " + styleCommand (COMMAND_WORD + WHITESPACE + PREFIX_NAME +
-            "FULL_NAME_OF_CONTACT_TO_DELETE");
+            + "3. " + styleCommand(COMMAND_WORD + WHITESPACE + PREFIX_NAME
+            + "FULL_NAME_OF_CONTACT_TO_DELETE");
     public static final String MESSAGE_COMMAND_EXAMPLE = "Example One:" + WHITESPACE
             + COMMAND_WORD + WHITESPACE + "1" + LINE_BREAK
             + "Example Two: " + COMMAND_WORD + WHITESPACE + "John Doe" + LINE_BREAK

@@ -2,9 +2,7 @@ package seedu.address.ui;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -54,14 +52,13 @@ public class ContactCard extends UiPart<Region> {
     public ContactCard(Contact contact, int displayedIndex) {
         super(FXML);
         this.contact = contact;
+
         final String nicknamePrelabel = "aka ";
         final String telegramPrelabel = "@";
-        id.setText(displayedIndex + ". ");
-
-        final ReadOnlyDoubleProperty idWidth = id.widthProperty(); // try not to change this
         final int margin = 20; // try not to change this
-        final int minWidth = 450; // correspond to fxml file
 
+        // setting text
+        id.setText(displayedIndex + ". ");
         name.setText(contact.getName().fullName);
         telegramHandle.setText(telegramPrelabel + contact.getTelegramHandle().value);
         studentStatus.setText(contact.getStudentStatus().value);
@@ -77,15 +74,14 @@ public class ContactCard extends UiPart<Region> {
             nickname.getChildren().add(nicknameLabel);
         }
 
+        // event listener (code from somewhere)
         final Label nicknameConfirm = nicknameLabel; // in order to be streamed in the event listener
-
-        // code from chatGPT, need to find a non-AI equivalent reference
         cardPane.widthProperty().addListener(new ChangeListener<Number>() {
-            Label[] labels = new Label[]{name, nicknameConfirm, email};
+            private Label[] labels = new Label[]{name, nicknameConfirm, email};
 
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                double cardPaneWidth = newValue.doubleValue();  // Get the new width of the card pane
+                double cardPaneWidth = newValue.doubleValue(); // Get the new width of the card pane
                 Arrays.stream(labels).filter(label -> label != null).forEach(label -> {
                     double labelWidth = label.getWidth();
                     if (labelWidth > cardPaneWidth || labelWidth < cardPaneWidth) {
@@ -96,19 +92,6 @@ public class ContactCard extends UiPart<Region> {
             }
         });
     }
-
-    /*
-    //margin?
-    private void setSize(double cardPaneWidth, Label...labels) {
-        Arrays.stream(labels).filter(label -> label != null).forEach(
-                label -> {
-                    label.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
-                    label.setPrefWidth(450);
-                }
-                );
-                //label -> label.prefWidthProperty().bind(
-                       // cardPane.widthProperty().subtract(margin)));
-    }*/
 
     /**
      * Gets role label with id that corresponds to its role name.

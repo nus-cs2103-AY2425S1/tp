@@ -14,7 +14,7 @@ public class StudentStatus {
     public static final String UNDERGRADUATE_LOWERCASE = "undergraduate";
     public static final String UNDERGRADUATE_OFFICAL_CASE = toOfficialCase(UNDERGRADUATE_LOWERCASE);
     public static final String UNDERGRADUATE_START_YEAR = "1";
-    public static final String UNDERGRADUATE_END_YEAR = "6"; // why 6?
+    public static final String UNDERGRADUATE_END_YEAR = "6"; // 6 - maximum candidature for medicine students
     public static final String MASTERS_LOWERCASE = "masters";
     public static final String MASTERS_OFFICIAL_CASE = toOfficialCase(MASTERS_LOWERCASE);
     public static final String PHD_LOWERCASE = "phd";

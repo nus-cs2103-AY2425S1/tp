@@ -1,14 +1,5 @@
 package seedu.address.ui;
 
-import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
