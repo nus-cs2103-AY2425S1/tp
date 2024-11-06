@@ -22,8 +22,6 @@ import seedu.address.model.person.Frequency;
 import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Person;
 
-import java.time.LocalDate;
-
 public class UnpaidCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
