@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import keycontacts.logic.commands.RedoCommand;
+import keycontacts.logic.commands.UndoCommand;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.index.Index;
@@ -149,6 +151,18 @@ public class KeyContactsParserTest {
     public void parseCommand_view() throws Exception {
         ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + VALID_DATE_DESC);
         assertEquals(new ViewCommand(new Date(VALID_DATE)), command);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        UndoCommand command = (UndoCommand) parser.parseCommand(UndoCommand.COMMAND_WORD);
+        assertEquals(new UndoCommand(), command);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        RedoCommand command = (RedoCommand) parser.parseCommand(RedoCommand.COMMAND_WORD);
+        assertEquals(new RedoCommand(), command);
     }
 
     @Test
