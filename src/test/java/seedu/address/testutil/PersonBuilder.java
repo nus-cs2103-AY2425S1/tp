@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LogList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -35,6 +37,7 @@ public class PersonBuilder {
     private Remark remark;
     private Set<Tag> tags;
     private Appointment appointment;
+    private LogList logEntries;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,6 +51,7 @@ public class PersonBuilder {
         remark = new Remark(DEFAULT_REMARK);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
+        logEntries = new LogList();
     }
 
     /**
@@ -62,6 +66,7 @@ public class PersonBuilder {
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
         appointment = personToCopy.getAppointment();
+        logEntries = personToCopy.getLogEntries();
     }
 
     /**
@@ -128,8 +133,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code LogList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLogEntries(String ... logEntries) {
+        this.logEntries = new LogList(List.of(logEntries));
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, nric, address, remark, tags, null);
+        return new Person(name, phone, email, nric, address, remark, tags, null, logEntries);
     }
 
 }

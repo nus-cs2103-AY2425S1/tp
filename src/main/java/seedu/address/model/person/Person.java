@@ -40,7 +40,8 @@ public class Person {
             Address address,
             Remark remark,
             Set<Tag> tags,
-            Appointment appointment) {
+            Appointment appointment,
+            LogList logEntries) {
         requireAllNonNull(name, phone, email, nric, address, tags);
         this.name = name;
         this.phone = phone;
@@ -50,7 +51,7 @@ public class Person {
         this.remark = remark;
         this.tags.addAll(tags);
         this.appointment = appointment; // Appointment field initialized
-        this.logEntries = new LogList();
+        this.logEntries = logEntries;
     }
 
     public Name getName() {
@@ -97,10 +98,6 @@ public class Person {
         return logEntries;
     }
 
-    public void addLogEntry(Log log) {
-        logEntries.addLog(log);
-    }
-
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -136,8 +133,7 @@ public class Person {
                 && nric.equals(otherPerson.nric)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && Objects.equals(appointment, otherPerson.appointment) // Include appointment in equality check
-                && logEntries.equals(otherPerson.logEntries);
+                && Objects.equals(appointment, otherPerson.appointment); // Include appointment in equality check
     }
 
     @Override

@@ -1,12 +1,24 @@
----
-layout: page
-title: User Guide
----
+Murphy's List is a **desktop app for managing patient contact info for institutes providing palliative care, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, Murphy's List can get your healthcare administrative tasks done faster than other traditional GUI apps.
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## Table of Contents
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+    1. [Viewing Help](#viewing-help--help)
+    2. [Adding a Patient Profile](#adding-a-patient-profile--add)
+    3. [Adding a Remark](#adding-a-remark--remark)
+    4. [Adding an Appointment](#adding-an-appointment--appointment)
+    5. [Listing all profiles](#listing-all-patient-profiles--list)
+    6. [Editing a patient profile](#editing-a-patient-profile--edit)
+    7. [Locating patients by name](#locating-patients-by-name-find)
+    8. [Deleting patient profile](#deleting-a-patient-profile--delete)
+    9. [Clear all entries](#clearing-all-entries--clear)
+   10. [Exiting the program](#exiting-the-program--exit)
+3. [Command Summary](#command-summary)
+4. [FAQ](#faq)
+5. [Known Issues](#known-issues)
+6. [Command Summary](#command-summary)
 
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -27,11 +39,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com i/S1234567A a/John street, block 123, #01-01` : Adds a patient profile of a patient named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete S1231231D` : Deletes the patient profile of the patient with `NRIC S1231231D`.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all patient profiles in the database.
 
    * `exit` : Exits the app.
 
@@ -43,7 +55,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -65,53 +77,69 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Displays a list of accepted commands.
 
-![help message](images/helpMessage.png)
+![help page](images/HelpPage.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a patient profile : `add`
 
-Adds a person to the address book.
+Adds a patient profile to the database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A patient profile can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com i/S1234567A a/John street, block 123, #01-01`
+* `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/criminal t/friend`
 
-### Listing all persons : `list`
+### Adding a remark to a patient profile : `remark`
 
-Shows a list of all persons in the address book.
+Adds a remark to a specified patient profile.
+
+Format: `remark NRIC r/REMARK`
+
+Examples: 
+* `remark S1234567A r/allergic to dogs`
+* `remark T1231231D r/keep away from flashing lights`
+
+### Adding an appointment : `appointment`
+
+Adds the appointment date of a patient to the patient profile. Note that appointment date must be in the format DD-MM-YYYY HH:MM.
+
+Format: `appointment NRIC app/APPOINTMENT`
+
+### Listing all patient profiles : `list`
+
+Shows a list of all patient profiles in the database.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a patient profile : `edit`
 
-Edits an existing person in the address book.
+Edits the details of the patient identified by the index number used in the displayed patient profile list. **Existing information will be overwritten by the input values**
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX(must be positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the patient profile at the specified `INDEX`. The index refers to the index number shown in the displayed patient profile list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient profile displayed to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating patients by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -119,31 +147,29 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Profiles matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/searchResult.png)
 
-### Deleting a person : `delete`
+### Deleting a patient profile : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified patient profile from the database.
 
-Format: `delete INDEX`
+Format: `delete NRIC`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the patient with the specified `NRIC`.
+* The `NRIC` refers to the NRIC of the patient.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete S1234567A` deletes the patient profile of the patient with `NRIC S1234567A`.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the database.
 
 Format: `clear`
 
@@ -155,11 +181,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Murphy's List data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Murphy's List data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -175,7 +201,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Murphy's List home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,10 +216,13 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/criminal t/friend`
+**Add Remark** | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`
+**Add Appointment** | `appointment NRIC app/appointment` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete NRIC`<br> e.g., `delete S1234567A`
+**Edit** | `edit INDEX(must be positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`

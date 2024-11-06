@@ -3,6 +3,8 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -31,15 +33,23 @@
                     <padding>
                         <Insets top="10" right="10" bottom="10" left="10" />
                     </padding>
-                        <VBox>
-                            <Label fx:id="name" styleClass="label-bright" text="\$first"/>
-                            <FlowPane fx:id="tags" />
-                            <Label fx:id="phone" styleClass="label-bright" text="\$phone" />
-                            <Label fx:id="address" styleClass="label-bright" text="\$address" />
-                            <Label fx:id="email" styleClass="label-bright" text="\$email" />
-                            <Label fx:id="remark" styleClass="label-bright" text="\$remark" />
-                            <Label fx:id="nric" styleClass="label-bright" text="\$nric"  />
-                        </VBox>
+                    <VBox>
+                        <Label fx:id="name" styleClass="label-bright" text="\$first"/>
+                        <FlowPane fx:id="tags" />
+                        <Label fx:id="phone" styleClass="label-bright" text="\$phone" />
+                        <Label fx:id="address" styleClass="label-bright" text="\$address" />
+                        <Label fx:id="email" styleClass="label-bright" text="\$email" />
+                        <Label fx:id="remark" styleClass="label-bright" text="\$remark" />
+                        <Label fx:id="nric" styleClass="label-bright" text="\$nric"  />
+                    </VBox>
+                </VBox>
+                <VBox styleClass="pane-with-border">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                    <ScrollPane styleClass="dialog-pane" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
+                        <ListView fx:id="logListView" />
+                    </ScrollPane>
                 </VBox>
             </VBox>
         </Scene>

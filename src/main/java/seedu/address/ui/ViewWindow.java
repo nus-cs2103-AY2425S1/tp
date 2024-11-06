@@ -3,12 +3,16 @@ package seedu.address.ui;
 import java.util.Comparator;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,6 +41,8 @@ public class ViewWindow extends UiPart<Stage> {
     private Label nric;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ListView<Log> logListView;
 
     private ViewWindow(Stage root, String feedbackDisplayText, Person person) {
         super(FXML, root);
@@ -51,6 +57,8 @@ public class ViewWindow extends UiPart<Stage> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        logListView.setItems(FXCollections.observableArrayList(person.getLogEntries().getLogs()));
+        logListView.setCellFactory(listView -> new LogListViewCell());
     }
 
     /**
@@ -83,5 +91,19 @@ public class ViewWindow extends UiPart<Stage> {
      */
     public void hide() {
         getRoot().hide();
+    }
+
+    static class LogListViewCell extends ListCell<Log> {
+        @Override
+        protected void updateItem(Log log, boolean empty) {
+            super.updateItem(log, empty);
+
+            if (empty || log == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new Label(log.toString()));
+            }
+        }
     }
 }

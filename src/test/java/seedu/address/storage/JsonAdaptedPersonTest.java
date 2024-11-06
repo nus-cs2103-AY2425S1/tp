@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
@@ -35,6 +36,9 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+    private static final List<String> VALID_LOG_ENTRIES = BENSON.getLogEntries().getLogs().stream()
+            .map(Log::toString)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -46,7 +50,8 @@ public class JsonAdaptedPersonTest {
             BENSON.getAddress().toString(),
             BENSON.getRemark().toString(),
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         assertEquals(BENSON, person.toModelType());
     }
@@ -61,7 +66,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -77,7 +83,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -93,7 +100,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -109,7 +117,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -125,7 +134,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -141,7 +151,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -157,7 +168,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = Nric.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -173,7 +185,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -189,7 +202,8 @@ public class JsonAdaptedPersonTest {
             INVALID_ADDRESS,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -205,7 +219,8 @@ public class JsonAdaptedPersonTest {
             null,
             VALID_REMARK,
             VALID_TAGS,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -223,7 +238,8 @@ public class JsonAdaptedPersonTest {
             VALID_ADDRESS,
             VALID_REMARK,
             invalidTags,
-            null
+            null,
+            VALID_LOG_ENTRIES
         );
         assertThrows(IllegalValueException.class, person::toModelType);
     }
