@@ -216,7 +216,7 @@ public class AddressBookParserTest {
     public void getHint_editCommandHint() {
         assertEquals(EditPersonCommand.MESSAGE_USAGE, parser.getHint("edit p"));
         assertEquals(EditEventCommand.MESSAGE_USAGE, parser.getHint("edit e"));
-        assertEquals(EditCommand.MESSAGE_USAGE, parser.getHint("e"));
+        assertEquals(EditCommand.MESSAGE_USAGE + "\n" + ExitCommand.MESSAGE_USAGE, parser.getHint("e"));
     }
 
     @Test
@@ -242,7 +242,7 @@ public class AddressBookParserTest {
     public void getHint_listAndLinkCommandHint() {
         assertEquals(ListCommand.MESSAGE_USAGE, parser.getHint("lis"));
         assertEquals(LinkPersonCommand.MESSAGE_USAGE, parser.getHint("lin"));
-        assertEquals(ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_USAGE,
+        assertEquals(ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_HINT,
                 parser.getHint("l"));
     }
 
@@ -260,6 +260,6 @@ public class AddressBookParserTest {
 
     @Test
     public void getHint_unrecognizedCommandHint() {
-        assertEquals("", parser.getHint("unknown"));
+        assertEquals(HelpCommand.MESSAGE_USAGE, parser.getHint("unknown"));
     }
 }
