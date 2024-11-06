@@ -20,9 +20,9 @@ public class GroupsWindow extends UiPart<Stage> {
     @FXML
     private StackPane groupListPanelPlaceholder;
     /**
-     * Creates a new HelpWindow.
+     * Creates a new GroupWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the GroupWindow.
      */
     public GroupsWindow(Stage root, Logic logic) {
         super(FXML, root);
@@ -30,7 +30,7 @@ public class GroupsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new GroupsWindow.
      */
     public GroupsWindow(Logic logic) {
         this(new Stage(), logic);
@@ -66,21 +66,21 @@ public class GroupsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the groups window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the groups window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the grpups window.
      */
     public void focus() {
         getRoot().requestFocus();

@@ -27,6 +27,7 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+      <Label fx:id="studentName" styleClass="cell_small_label"/>
       <FlowPane fx:id="members" />
     </VBox>
   </GridPane>
