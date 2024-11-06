@@ -87,6 +87,7 @@ public class CommandTestUtil {
     public static final String INVALID_EVENT_FROM_DATE = "2024-10-01";
     public static final String INVALID_EVENT_TO_DATE = "2024-09-01"; // end date is before start date
     public static final String INVALID_EVENT_DATE_FORMAT = "20231001";
+    public static final String INVALID_EVENT_DATE = "2024-02-30";
 
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_EVENT_NAME + INVALID_EVENT_NAME;
     public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + PREFIX_EVENT_DESCRIPTION
@@ -95,6 +96,8 @@ public class CommandTestUtil {
             + " " + PREFIX_EVENT_END_DATE + INVALID_EVENT_TO_DATE;
     public static final String INVALID_EVENT_DATE_FORMAT_DESC = " " + PREFIX_EVENT_START_DATE
             + INVALID_EVENT_DATE_FORMAT + " " + PREFIX_EVENT_END_DATE + VALID_EVENT_TO_DATE_1;
+    public static final String INVALID_EVENT_DATE_DESC = " " + PREFIX_EVENT_START_DATE + INVALID_EVENT_DATE
+            + " " + PREFIX_EVENT_END_DATE + VALID_EVENT_TO_DATE_1;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_MEET
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_WORKSHOP;
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_WORKSHOP;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DURATION_DESC;
@@ -81,6 +82,10 @@ public class AddEventCommandParserTest {
 
         // invalid date format
         assertParseFailure(parser, NAME_DESC_MEETING + DESCRIPTION_DESC_MEETING + INVALID_EVENT_DATE_FORMAT_DESC,
+                EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING);
+
+        // invalid date
+        assertParseFailure(parser, NAME_DESC_MEETING + DESCRIPTION_DESC_MEETING + INVALID_EVENT_DATE_DESC,
                 EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING);
 
         // invalid duration
