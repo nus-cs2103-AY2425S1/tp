@@ -24,14 +24,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook());
     }
 
     @Test
     public void execute_newEmployee_success() {
         Employee validEmployee = new EmployeeBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getCommandTextHistory(), new UserPrefs());
         expectedModel.addEmployee(validEmployee);
 
         assertCommandSuccess(new AddCommand(validEmployee), model,

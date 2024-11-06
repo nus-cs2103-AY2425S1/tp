@@ -7,6 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.CommandTextHistory;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.employee.Employee;
@@ -31,6 +32,13 @@ public interface Logic {
      * @see seedu.address.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Returns the {@code CommandTextHistory}.
+     *
+     * @see seedu.address.model.Model#getCommandTextHistory()
+     */
+    CommandTextHistory getCommandTextHistory();
 
     /** Returns an unmodifiable view of the filtered list of employees */
     ObservableList<Employee> getFilteredEmployeeList();

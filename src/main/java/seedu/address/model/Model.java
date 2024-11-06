@@ -75,6 +75,24 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the user prefs' command text history file path.
+     */
+    Path getCommandTextHistoryFilePath();
+
+    /**
+     * Sets the user prefs' command text history file path.
+     */
+    void setCommandTextHistoryFilePath(Path commandTextHistoryFilePath);
+
+    /**
+     * Replaces all command text history data with the data in {@code commandTextHistory}.
+     */
+    void setCommandTextHistory(CommandTextHistory commandTextHistory);
+
+    /** Returns the CommandTextHistory */
+    CommandTextHistory getCommandTextHistory();
+
+    /**
      * Returns true if an employee with the same identity as {@code employee} exists
      * in the address book.
      */

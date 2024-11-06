@@ -21,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.model.AddressBook;
+import seedu.address.model.CommandTextHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -34,7 +35,7 @@ import seedu.address.testutil.EmployeeBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -45,7 +46,9 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
                 Messages.format(editedEmployee));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new CommandTextHistory(model.getCommandTextHistory()), new UserPrefs());
+
         expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), editedEmployee);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -67,7 +70,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
                 Messages.format(editedEmployee));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new CommandTextHistory(model.getCommandTextHistory()), new UserPrefs());
         expectedModel.setEmployee(lastEmployee, editedEmployee);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -81,7 +85,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
                 Messages.format(editedEmployee));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new CommandTextHistory(model.getCommandTextHistory()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -90,7 +95,8 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
 
-        Employee employeeInFilteredList = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
+        Employee employeeInFilteredList = model.getFilteredEmployeeList()
+                .get(INDEX_FIRST_EMPLOYEE.getZeroBased());
         Employee editedEmployee = new EmployeeBuilder(employeeInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_EMPLOYEE,
                 new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -98,7 +104,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS,
                 Messages.format(editedEmployee));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new CommandTextHistory(model.getCommandTextHistory()), new UserPrefs());
         expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), editedEmployee);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -111,7 +118,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_SECOND_EMPLOYEE, descriptor);
 
         // Create the expected model
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new CommandTextHistory(model.getCommandTextHistory()), new UserPrefs());
         Employee secondEmployee = model.getFilteredEmployeeList().get(INDEX_SECOND_EMPLOYEE.getZeroBased());
         Employee editedSecondEmployee = new EmployeeBuilder(firstEmployee)
                 .withEmployeeId(secondEmployee.getEmployeeId().toString()).build();
@@ -128,12 +136,14 @@ public class EditCommandTest {
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
 
         // edit employee in filtered list into a duplicate in address book
-        Employee employeeInList = model.getAddressBook().getEmployeeList().get(INDEX_SECOND_EMPLOYEE.getZeroBased());
+        Employee employeeInList = model.getAddressBook().getEmployeeList()
+                .get(INDEX_SECOND_EMPLOYEE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_EMPLOYEE,
                 new EditEmployeeDescriptorBuilder(employeeInList).build());
 
         // Create the expected model
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new CommandTextHistory(model.getCommandTextHistory()), new UserPrefs());
         Employee firstEmployee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
         Employee editedFirstEmployee = new EmployeeBuilder(employeeInList)
                 .withEmployeeId(firstEmployee.getEmployeeId().toString()).build();
@@ -148,7 +158,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidEmployeeIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEmployeeList().size() + 1);
-        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
+                .build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_INDEX);

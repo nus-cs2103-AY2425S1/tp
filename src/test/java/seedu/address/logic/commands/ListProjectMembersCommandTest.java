@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.listcommands.ListProjectMembersCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentProjectPredicate;
 import seedu.address.model.employee.Employee;
@@ -27,8 +26,8 @@ import seedu.address.model.employee.Employee;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class ListProjectMembersCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook());
 
     @Test
     public void equals() {

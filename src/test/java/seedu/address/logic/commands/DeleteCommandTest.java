@@ -15,7 +15,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
 import seedu.address.testutil.TypicalAssignments;
 import seedu.address.testutil.TypicalEmployees;
@@ -26,7 +25,7 @@ import seedu.address.testutil.TypicalEmployees;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalEmployees.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalEmployees.getTypicalAddressBook());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,7 +35,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(employeeToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook());
         expectedModel.deleteEmployee(employeeToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -60,7 +59,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(employeeToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook());
         expectedModel.deleteEmployee(employeeToDelete);
         showNoEmployee(expectedModel);
 
@@ -82,7 +81,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredListWithAssignment_success() {
-        Model modelWithAssignments = new ModelManager(TypicalAssignments.getTypicalAddressBook(), new UserPrefs());
+        Model modelWithAssignments = new ModelManager(TypicalAssignments.getTypicalAddressBook());
 
         Employee employeeToDelete = modelWithAssignments.getFilteredEmployeeList()
                 .get(INDEX_FIRST_EMPLOYEE.getZeroBased());
@@ -91,7 +90,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(employeeToDelete));
 
-        ModelManager expectedModel = new ModelManager(modelWithAssignments.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(modelWithAssignments.getAddressBook());
         expectedModel.deleteEmployee(employeeToDelete);
 
         assertCommandSuccess(deleteCommand, modelWithAssignments, expectedMessage, expectedModel);
@@ -99,7 +98,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredListWithAssignment_success() {
-        Model modelWithAssignments = new ModelManager(TypicalAssignments.getTypicalAddressBook(), new UserPrefs());
+        Model modelWithAssignments = new ModelManager(TypicalAssignments.getTypicalAddressBook());
 
         showEmployeeAtIndex(modelWithAssignments, INDEX_FIRST_EMPLOYEE);
 
@@ -110,7 +109,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(employeeToDelete));
 
-        Model expectedModel = new ModelManager(modelWithAssignments.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(modelWithAssignments.getAddressBook());
         expectedModel.deleteEmployee(employeeToDelete);
         showNoEmployee(expectedModel);
 
