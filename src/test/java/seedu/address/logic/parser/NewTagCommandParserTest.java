@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.NewtagCommand.MESSAGE_USAGE;
+import static seedu.address.logic.commands.NewTagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.model.tag.Tag.MAX_CHARACTER_LENGTH;
@@ -11,13 +11,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.NewtagCommand;
+import seedu.address.logic.commands.NewTagCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalTags;
 
-public class NewtagCommandParserTest {
+public class NewTagCommandParserTest {
 
-    private NewtagCommandParser parser = new NewtagCommandParser();
+    private NewTagCommandParser parser = new NewTagCommandParser();
 
     /**
      * EP: Single valid lowercase argument.
@@ -26,7 +26,7 @@ public class NewtagCommandParserTest {
     public void parse_validArgs_returnsNewtagCommand() {
         Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = List.of(expectedTag);
-        assertParseSuccess(parser, " t/bride's side", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's side", new NewTagCommand(expectedTags));
     }
 
     /**
@@ -37,7 +37,7 @@ public class NewtagCommandParserTest {
         String maxName = "a".repeat(MAX_CHARACTER_LENGTH);
         Tag maxTag = new Tag(maxName);
         List<Tag> expectedTags = List.of(maxTag);
-        assertParseSuccess(parser, " t/" + maxName, new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/" + maxName, new NewTagCommand(expectedTags));
     }
 
     /**
@@ -47,7 +47,7 @@ public class NewtagCommandParserTest {
     public void parse_leadingAndTrailingSpaces_returnsNewtagCommand() {
         Tag expectedTag = TypicalTags.BRIDES_SIDE;
         List<Tag> expectedTags = List.of(expectedTag);
-        assertParseSuccess(parser, " t/   bride's side   ", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/   bride's side   ", new NewTagCommand(expectedTags));
     }
 
     /**
@@ -60,7 +60,7 @@ public class NewtagCommandParserTest {
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(tagBridesFriend);
         expectedTags.add(tagColleagues);
-        assertParseSuccess(parser, " t/bride's side t/colleagues", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's side t/colleagues", new NewTagCommand(expectedTags));
     }
 
     /**
@@ -74,7 +74,7 @@ public class NewtagCommandParserTest {
         Tag maxTagB = new Tag(maxNameB);
         List<Tag> expectedTags = List.of(maxTagA, maxTagB);
         assertParseSuccess(parser, " t/" + maxNameA + " t/" + maxNameB,
-                new NewtagCommand(expectedTags));
+                new NewTagCommand(expectedTags));
     }
 
     /**
@@ -102,13 +102,13 @@ public class NewtagCommandParserTest {
     @Test
     public void parse_multipleArgsOneInvalidChars_throwsParseException() {
         assertParseFailure(parser, " t/bride's side t/^@%",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_multipleArgsOneExceedsMaxLength_throwsParseException() {
         assertParseFailure(parser, " t/bride's side t/" + "a".repeat(MAX_CHARACTER_LENGTH + 1),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewTagCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -119,7 +119,7 @@ public class NewtagCommandParserTest {
         Tag expectedTag = new Tag("friend");
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, " t/FRIEND", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/FRIEND", new NewTagCommand(expectedTags));
     }
 
     /**

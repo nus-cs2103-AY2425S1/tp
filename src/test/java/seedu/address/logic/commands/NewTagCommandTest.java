@@ -18,7 +18,7 @@ import seedu.address.testutil.TypicalTags;
 /**
  * Contains tests for NewtagCommand.
  */
-public class NewtagCommandTest {
+public class NewTagCommandTest {
 
     private Model model = new ModelManager();
 
@@ -30,12 +30,12 @@ public class NewtagCommandTest {
         Tag newTag = TypicalTags.BRIDES_SIDE;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(newTag);
-        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+        NewTagCommand newTagCommand = new NewTagCommand(newTags);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTag(newTag);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
+        String expectedMessage = NewTagCommand.MESSAGE_SUCCESS;
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
@@ -47,13 +47,13 @@ public class NewtagCommandTest {
         List<Tag> newTags = new ArrayList<>();
         newTags.add(tagBridesFriend);
         newTags.add(tagColleagues);
-        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+        NewTagCommand newTagCommand = new NewTagCommand(newTags);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTag(tagBridesFriend);
         expectedModel.addTag(tagColleagues);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
+        String expectedMessage = NewTagCommand.MESSAGE_SUCCESS;
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
@@ -68,8 +68,8 @@ public class NewtagCommandTest {
         duplicateTags.add(duplicateTag);
         model.addTags(duplicateTags);
 
-        NewtagCommand newTagCommand = new NewtagCommand(duplicateTags);
-        String expectedMessage = NewtagCommand.MESSAGE_ALL_DUPLICATE + duplicateTags;
+        NewTagCommand newTagCommand = new NewTagCommand(duplicateTags);
+        String expectedMessage = NewTagCommand.MESSAGE_ALL_DUPLICATE + duplicateTags;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTags(duplicateTags);
@@ -86,8 +86,8 @@ public class NewtagCommandTest {
         List<Tag> mixedTags = List.of(newFriendsTag, duplicateTag, newColleaguesTag);
         model.addTag(duplicateTag);
 
-        NewtagCommand newTagCommand = new NewtagCommand(mixedTags);
-        String expectedMessage = NewtagCommand.MESSAGE_SOME_DUPLICATE + List.of(duplicateTag);
+        NewTagCommand newTagCommand = new NewTagCommand(mixedTags);
+        String expectedMessage = NewTagCommand.MESSAGE_SOME_DUPLICATE + List.of(duplicateTag);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTags(mixedTags);
@@ -113,9 +113,9 @@ public class NewtagCommandTest {
             expectedModel.addTag(new Tag(String.valueOf(i)));
         }
 
-        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+        NewTagCommand newTagCommand = new NewTagCommand(newTags);
         expectedModel.addTag(newTag);
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
+        String expectedMessage = NewTagCommand.MESSAGE_SUCCESS;
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
     }
@@ -134,8 +134,8 @@ public class NewtagCommandTest {
             model.addTag(new Tag(String.valueOf(i)));
         }
 
-        NewtagCommand newTagCommand = new NewtagCommand(newTags);
-        String expectedMessage = NewtagCommand.MESSAGE_TOO_MANY_TAGS;
+        NewTagCommand newTagCommand = new NewTagCommand(newTags);
+        String expectedMessage = NewTagCommand.MESSAGE_TOO_MANY_TAGS;
 
         assertCommandFailure(newTagCommand, model, expectedMessage);
     }
@@ -146,12 +146,12 @@ public class NewtagCommandTest {
         Tag newTag = TypicalTags.BRIDES_SIDE;
         List<Tag> newTags = new ArrayList<>();
         newTags.add(newTag);
-        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+        NewTagCommand newTagCommand = new NewTagCommand(newTags);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTag(newTag);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
+        String expectedMessage = NewTagCommand.MESSAGE_SUCCESS;
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
 

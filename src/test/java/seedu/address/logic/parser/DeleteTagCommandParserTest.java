@@ -13,7 +13,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.NewtagCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalTags;
 
