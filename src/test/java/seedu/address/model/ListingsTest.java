@@ -28,7 +28,8 @@ public class ListingsTest {
         assertTrue(listings.equals(sameListings));
 
         Listings differentListings = new Listings();
-        differentListings.addListing(new ListingBuilder().withName("Different Listing").build());
+        differentListings.addListing(new ListingBuilder().withName("Different Listing")
+                .withAddress("Different Address").build());
         assertFalse(listings.equals(differentListings));
     }
 
