@@ -29,11 +29,13 @@ public class YearGroupTest {
         assertFalse(YearGroup.isValidYearGroup(" ")); // spaces only
         assertFalse(YearGroup.isValidYearGroup("0")); // less than 1
         assertFalse(YearGroup.isValidYearGroup("-4")); // negative number
-        assertFalse(YearGroup.isValidYearGroup("40")); // more than 13
+        assertFalse(YearGroup.isValidYearGroup("14")); // more than 13
+        assertFalse(YearGroup.isValidYearGroup("p")); // not a number
+        assertFalse(YearGroup.isValidYearGroup("#")); // not a number
 
         // valid year groups
-        assertTrue(YearGroup.isValidYearGroup("1"));
-        assertTrue(YearGroup.isValidYearGroup("13"));
+        assertTrue(YearGroup.isValidYearGroup("1")); // edge case
+        assertTrue(YearGroup.isValidYearGroup("13")); // edge case
         assertTrue(YearGroup.isValidYearGroup("5"));
     }
 
