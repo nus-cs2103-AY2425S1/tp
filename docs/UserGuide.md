@@ -83,10 +83,10 @@ Format: `help`
 
 Adds an owner to PawPatrol.
 
-Format: `owner n/NAME p/PHONE e/EMAIL a/ADDRESS`
+Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
 Examples:
-* `owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+* `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
 
 #### <u>Adding a pet</u>
 
