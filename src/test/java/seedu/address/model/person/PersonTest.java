@@ -27,6 +27,19 @@ public class PersonTest {
     }
 
     @Test
+    public void personName_invalidNames_throwsIllegalArgumentException() {
+        // EP: blank name
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName(""));
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName(" "));
+
+        // EP: valid characters for rest of name as first character in name
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName("[Name"));
+
+        // EP: invalid character in name with other valid characters
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName("Anne, Marie"));
+    }
+
+    @Test
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));

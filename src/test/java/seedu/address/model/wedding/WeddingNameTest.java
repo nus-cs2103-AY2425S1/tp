@@ -35,6 +35,7 @@ public class WeddingNameTest {
         assertTrue(WeddingName.isValidName("123"));
         assertTrue(WeddingName.isValidName("friend 123"));
         assertTrue(WeddingName.isValidName("Family Time")); // Spaces and alphabets
+        assertTrue(WeddingName.isValidName("Name /.,'&:()"));
     }
 
     @Test
