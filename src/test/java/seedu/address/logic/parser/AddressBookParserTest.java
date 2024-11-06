@@ -108,7 +108,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         ViewCommand command = (ViewCommand) parser.parseCommand(
                 ViewCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new ViewCommand(new NameMatchesKeywordPredicate(keywords)), command);
+        assertEquals(new ViewCommand(null, new NameMatchesKeywordPredicate(keywords)), command);
     }
 
     @Test

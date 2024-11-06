@@ -17,14 +17,15 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         ViewCommand expectedFindCommand =
-                new ViewCommand(new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob")));
+                new ViewCommand(null, new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         assertParseSuccess(parser, " \n Alice Bob  \t", expectedFindCommand);
