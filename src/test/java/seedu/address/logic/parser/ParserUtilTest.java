@@ -303,7 +303,8 @@ public class ParserUtilTest {
     public void parseIndex_maxIntegerValue() throws Exception {
         Index maxIndex = Index.fromOneBased(Integer.MAX_VALUE);
         assertEquals(maxIndex, ParserUtil.parseIndex(Integer.toString(Integer.MAX_VALUE)));
-
+    }
+    
     @Test
     public void parseTag_decimalValue() throws Exception {
         String tagWithDecimalValue = "grade:8.5";
