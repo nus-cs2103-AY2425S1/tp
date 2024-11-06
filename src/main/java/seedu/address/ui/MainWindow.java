@@ -164,11 +164,11 @@ public class MainWindow extends UiPart<Stage> {
      * Updates the status pie chart with current data
      */
     private void updateStatusChart() {
-        final int[] counts = new int[3]; // [none, nonUrgent, urgent]
+        final int[] counts = new int[3]; // [na, nonUrgent, urgent]
 
         for (Client client : logic.getFilteredClientList()) {
             switch (client.getStatus().status) {
-            case NONE -> counts[0]++;
+            case NA -> counts[0]++;
             case NON_URGENT -> counts[1]++;
             case URGENT -> counts[2]++;
             default -> {
@@ -181,7 +181,7 @@ public class MainWindow extends UiPart<Stage> {
             statusPieChart.updateChartData(counts[0], counts[1], counts[2]);
 
             int total = counts[0] + counts[1] + counts[2];
-            logger.info(String.format("Chart updated - None: %d, Non-Urgent: %d, Urgent: %d (Total: %d)",
+            logger.info(String.format("Chart updated - NA: %d, Non-Urgent: %d, Urgent: %d (Total: %d)",
                     counts[0], counts[1], counts[2], total));
         });
     }
