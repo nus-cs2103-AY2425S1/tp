@@ -16,11 +16,19 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons in the address book.\n"
+            + "Parameters: [sortOrder]\n"
+            + "Sort order can be one of the following:\n"
+            + "timeAdded asc, timeAdded desc, name asc, name desc\n"
+            + "Note: If no sort order is specified, the default is by time added (timeAdded) and ascending (asc).\n"
+            + "Example: " + COMMAND_WORD + " name asc";
+
     public static final String MESSAGE_SUCCESS = "Listed all persons";
     private final Comparator<Person> comparator;
 
     public ListCommand() {
-        this.comparator = PersonComparators.BY_ORDER_ADDED;
+        // Default comparator is BY_ORDER_ADDED_REVERSED
+        this.comparator = PersonComparators.BY_ORDER_ADDED_REVERSED;
     }
 
     public ListCommand(Comparator<Person> comparator) {
@@ -30,7 +38,6 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.sortFilteredPersonList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }
