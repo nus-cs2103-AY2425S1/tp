@@ -40,7 +40,7 @@
           </Button>
         </children>
 
-        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#closeWindow" text="Exit">
+        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#closeWindow" text="Close Help">
           <HBox.margin>
             <Insets left="5.0" />
           </HBox.margin>
