@@ -200,6 +200,7 @@ Format: `view INDEX`
 
 * This command permits the user to `view` multiple contacts at once. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
 * Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
+* View is intended for short term ad-hoc usage, and the view states of contact cards will not persist between sessions.
 
 Examples:
 * `view 2` will expand the contact card for the second person in the contact list. <br>
