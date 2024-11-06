@@ -17,6 +17,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class TutorBuilder {
 
+    public static final int DEFAULT_ID = 0;
     public static final String DEFAULT_NAME = "James Yeo";
     public static final String DEFAULT_PHONE = "91112222";
     public static final String DEFAULT_EMAIL = "james@gmail.com";
@@ -25,6 +26,7 @@ public class TutorBuilder {
     public static final String DEFAULT_SUBJECT = "english";
 
 
+    private int id;
     private Name name;
     private Phone phone;
     private Email email;
@@ -37,6 +39,7 @@ public class TutorBuilder {
      * Creates a {@code TutorBuilder} with the default details.
      */
     public TutorBuilder() {
+        id = DEFAULT_ID;
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -50,6 +53,7 @@ public class TutorBuilder {
      * Initializes the TutorBuilder with the data of {@code tutorToCopy}.
      */
     public TutorBuilder(Tutor tutorToCopy) {
+        id = tutorToCopy.getId();
         name = tutorToCopy.getName();
         phone = tutorToCopy.getPhone();
         email = tutorToCopy.getEmail();
@@ -57,6 +61,14 @@ public class TutorBuilder {
         hours = tutorToCopy.getHours();
         subjects = new HashSet<>(tutorToCopy.getSubjects());
 
+    }
+
+    /**
+     * Sets the {@code Id} of the {@code Tutor} that we are building.
+     */
+    public TutorBuilder withId(int id) {
+        this.id = id;
+        return this;
     }
 
     /**
@@ -108,7 +120,7 @@ public class TutorBuilder {
     }
 
     public Tutor build() {
-        return new Tutor(name, phone, email, address, hours, subjects);
+        return new Tutor(id, name, phone, email, address, hours, subjects);
     }
 
 }
