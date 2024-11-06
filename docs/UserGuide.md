@@ -89,7 +89,7 @@ Adds a new contact with details such as name, phone number, physical address, bi
 - `r/` Remark (optional)
 - `t/` Tag (optional)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">💡 <strong>Tip:</strong> 
 A person can have any number of tags (including 0)
 </div>
 
@@ -301,7 +301,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>

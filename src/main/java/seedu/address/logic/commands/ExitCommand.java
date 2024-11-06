@@ -13,6 +13,9 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        if (ViewCommand.getCurrentStage() != null) {
+            ViewCommand.closeCurrentWindow();
+        }
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
     }
 

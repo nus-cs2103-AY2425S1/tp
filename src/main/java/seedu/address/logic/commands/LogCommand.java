@@ -27,9 +27,9 @@ public class LogCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "[date]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_LOG + "Met for price negotiation."
+            + PREFIX_LOG + "Met for price negotiation.\n"
             + "Example: " + COMMAND_WORD + " 2 "
-            + PREFIX_DATE + LocalDate.now().toString() + "Offered discount";
+            + PREFIX_DATE + LocalDate.now() + " " + PREFIX_LOG + " Offered discount";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Log command not implemented yet";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Date: %2$s, Message: %3$s";
     public static final String MESSAGE_ADD_HISTORY_SUCCESS = "Added history to Person: %1$s";
@@ -69,18 +69,23 @@ public class LogCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        History editedHistory = History.addActivity(personToEdit.getHistory(), date, message);
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
-                personToEdit.getTags(),
-                personToEdit.getDateOfCreation(),
-                editedHistory,
-                personToEdit.getPropertyList());
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_HISTORY_SUCCESS,
-                Messages.format(editedPerson)));
+        try {
+            History editedHistory = History.addActivity(personToEdit.getHistory(), date, message);
+            Person editedPerson = new Person(
+                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                    personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
+                    personToEdit.getTags(),
+                    personToEdit.getDateOfCreation(),
+                    editedHistory,
+                    personToEdit.getPropertyList());
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            ViewCommand.updateDisplay(personToEdit, editedPerson);
+            return new CommandResult(String.format(MESSAGE_ADD_HISTORY_SUCCESS,
+                    Messages.format(editedPerson)));
+        } catch (IllegalArgumentException ie) {
+            throw new CommandException(ie.getMessage());
+        }
     }
 
     @Override

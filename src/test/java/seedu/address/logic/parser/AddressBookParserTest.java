@@ -100,6 +100,8 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
+
+
     @Test
     public void parseCommand_sortAsc() throws Exception {
         SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " asc");
@@ -143,5 +145,17 @@ public class AddressBookParserTest {
         FavouriteCommand command = (FavouriteCommand) parser.parseCommand(FavouriteCommand.COMMAND_WORD
                 + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new FavouriteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_notCaseSensitive() throws Exception {
+        assertTrue(parser.parseCommand("List") instanceof ListCommand);
+        assertTrue(parser.parseCommand("LIST") instanceof ListCommand);
+        assertTrue(parser.parseCommand("liST") instanceof ListCommand);
+        assertTrue(parser.parseCommand("list") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD.toUpperCase())
+                instanceof ExitCommand);
+
+
     }
 }

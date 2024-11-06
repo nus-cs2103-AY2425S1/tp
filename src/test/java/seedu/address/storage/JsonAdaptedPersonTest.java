@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.DateOfCreation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -25,6 +27,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_BIRTHDAY = "not a date";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE_OF_CREATION = LocalDate.now().plusDays(100).toString();
+    private static final String VALID_LOG_MESSAGE = "message";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -129,4 +132,73 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
+
+    @Test
+    public void toModelType_nullDateOfCreation_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_REMARK, VALID_BIRTHDAY, VALID_TAGS,
+                null, VALID_HISTORY, VALID_PROPERTIES);
+
+        String expectedMessage = String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
+                DateOfCreation.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+
+    @Test
+    public void toModelType_historyWithFutureDate_throwsIllegalValueException() {
+        // Set up a future date entry in history
+        List<JsonAdaptedHistoryEntry> historyWithFutureDate = List.of(
+                new JsonAdaptedHistoryEntry(LocalDate.now().plusDays(1), List.of(VALID_LOG_MESSAGE))
+        );
+
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK,
+                VALID_BIRTHDAY, VALID_TAGS, VALID_DATE_OF_CREATION, historyWithFutureDate, VALID_PROPERTIES);
+
+        String expectedMessage = JsonAdaptedPerson.INVALID_HISTORY_DATE_IN_FUTURE;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_historyWithDateBeforeCreation_throwsIllegalValueException() {
+        // Set up a history entry with a date before the date of creation
+        List<JsonAdaptedHistoryEntry> historyWithEarlyDate = List.of(
+                new JsonAdaptedHistoryEntry(LocalDate.parse(VALID_DATE_OF_CREATION)
+                        .minusDays(1), List.of(VALID_LOG_MESSAGE))
+        );
+
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK,
+                VALID_BIRTHDAY, VALID_TAGS, VALID_DATE_OF_CREATION, historyWithEarlyDate, VALID_PROPERTIES);
+
+        String expectedMessage = JsonAdaptedPerson.INVALID_HISTORY_DATE_BEFORE_CREATION;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullBirthday_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_REMARK, null, VALID_TAGS,
+                VALID_DATE_OF_CREATION, VALID_HISTORY, VALID_PROPERTIES);
+
+        String expectedMessage = String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
+                Birthday.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidBirthday_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_REMARK, INVALID_BIRTHDAY, VALID_TAGS,
+                VALID_DATE_OF_CREATION, VALID_HISTORY, VALID_PROPERTIES);
+
+        String expectedMessage = Birthday.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+
 }

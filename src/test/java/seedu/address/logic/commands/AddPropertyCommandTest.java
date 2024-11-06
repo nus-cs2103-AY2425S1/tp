@@ -43,12 +43,14 @@ public class AddPropertyCommandTest {
         PropertyList updatedPropertyList = PropertyList.addProperty(personToEdit.getPropertyList(), newProperty);
         Person editedPerson = new PersonBuilder(personToEdit).withPropertyList(updatedPropertyList).build();
 
-        String expectedMessage = String.format(Messages.format(editedPerson));
+        String expectedMessage = String.format("Added property to Person: %s\n%s",
+                editedPerson.getFullName(), editedPerson.getPropertyList());
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
-
 
     @Test
     public void execute_addPropertyFilteredList_success() {
@@ -66,11 +68,31 @@ public class AddPropertyCommandTest {
                 newProperty);
         Person editedPerson = new PersonBuilder(personInFilteredList).withPropertyList(updatedPropertyList).build();
 
-        String expectedMessage = String.format(Messages.format(editedPerson));
+        String expectedMessage = String.format("Added property to Person: %s\n%s",
+                editedPerson.getFullName(), editedPerson.getPropertyList());
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personInFilteredList, editedPerson);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addDuplicateProperty_failure() {
+        Property existingProperty = Property.of(
+                "123 Main St", "Central", "Condo",
+                85.0, 2, 2, 500000.0);
+
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personWithProperty = new PersonBuilder(personToEdit)
+                .withPropertyList(new PropertyList(existingProperty))
+                .build();
+        model.setPerson(personToEdit, personWithProperty);
+
+        AddPropertyCommand command = new AddPropertyCommand(
+                INDEX_FIRST_PERSON, existingProperty);
+
+        assertCommandFailure(command, model, Messages.MESSAGE_DUPLICATE_PROPERTIES);
     }
 
     @Test
