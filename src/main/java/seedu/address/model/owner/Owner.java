@@ -22,6 +22,7 @@ public class Owner implements Linkable {
     private final Phone phone;
     private final Email email;
     private final Address address;
+    private final LinkedPetList linkedPets;
 
     /**
      * Every field must be present and not null.
@@ -33,6 +34,7 @@ public class Owner implements Linkable {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.linkedPets = new LinkedPetList();
     }
 
     public IdentificationCardNumber getIdentificationNumber() {
@@ -53,6 +55,20 @@ public class Owner implements Linkable {
 
     public Address getAddress() {
         return address;
+    }
+
+    public LinkedPetList getLinkedPets() {
+        return linkedPets;
+    }
+
+    @Override
+    public void addLinkedEntity(Linkable pet) {
+        linkedPets.add(pet);
+    }
+
+    @Override
+    public void removeLinkedEntity(Linkable pet) {
+        linkedPets.remove(pet);
     }
 
     /**
@@ -100,6 +116,11 @@ public class Owner implements Linkable {
     @Override
     public String getUniqueID() {
         return identificationNumber.value;
+    }
+
+    @Override
+    public String getInfo() {
+        return getName().toString();
     }
 
     @Override

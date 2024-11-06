@@ -3,6 +3,7 @@ package seedu.address.model.link;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -48,6 +49,10 @@ public class UniqueLinkList implements Iterable<Link> {
             throw new DuplicateLinkException();
         }
         internalList.add(toAdd);
+
+        toAdd.getFrom().addLinkedEntity(toAdd.getTo());
+        toAdd.getTo().addLinkedEntity(toAdd.getFrom());
+
     }
 
     /**
@@ -59,6 +64,8 @@ public class UniqueLinkList implements Iterable<Link> {
         if (!internalList.remove(toRemove)) {
             throw new LinkNotFoundException();
         }
+        toRemove.getFrom().removeLinkedEntity(toRemove.getTo());
+        toRemove.getTo().removeLinkedEntity(toRemove.getFrom());
     }
 
     public void setLinks(UniqueLinkList replacement) {
@@ -80,10 +87,68 @@ public class UniqueLinkList implements Iterable<Link> {
     }
 
     /**
+     * replaces the old pet in every link in the list that contains the old pet with the edited pet
+     * requires the link.getTo() to always return a pet
+     * @param original
+     * @param updated
+     */
+    public void updateLinkWithNewPet(Linkable original, Linkable updated) {
+        // Collect links to be updated
+        List<Link> linksToUpdate = new ArrayList<>();
+        for (Link link : internalList) {
+            if (link.getTo().equals(original)) {
+                linksToUpdate.add(link);
+            }
+        }
+
+        for (Link link : linksToUpdate) {
+            Link l = new Link(link.getFrom(), updated);
+            this.remove(link);
+            this.add(l);
+        }
+    }
+
+    /**
+     * replaces the old owner in every link in the list that contains the old owner with the edited owner
+     * requires the link.getFrom() to always return an owner
+     * @param original
+     * @param updated
+     */
+    public void updateLinkWithNewOwner(Linkable original, Linkable updated) {
+        // Collect links to be updated
+        List<Link> linksToUpdate = new ArrayList<>();
+        for (Link link : internalList) {
+            //Owner o = (Owner) link.getFrom();
+            if (link.getFrom().equals(original)) {
+                linksToUpdate.add(link);
+            }
+        }
+
+        // update each link in the original list
+        for (Link link : linksToUpdate) {
+            Link l = new Link(updated, link.getTo());
+            this.remove(link); // Calls the specific remove method
+            this.add(l); // Calls the specific add method
+        }
+    }
+
+    /**
      * Removes all links from list involving an ID.
      */
     public void deleteLinksWithId(String id) {
-        internalList.removeIf(link -> link.getFrom().getUniqueID().equals(id) || link.getTo().getUniqueID().equals(id));
+        List<Link> linksToRemove = new ArrayList<>();
+
+        // Collect links to be removed
+        for (Link link : internalList) {
+            if (link.getFrom().getUniqueID().equals(id) || link.getTo().getUniqueID().equals(id)) {
+                linksToRemove.add(link);
+            }
+        }
+
+        // Remove each link, allowing specific remove behavior in Link class if needed
+        for (Link link : linksToRemove) {
+            this.remove(link);
+        }
     }
 
     /**

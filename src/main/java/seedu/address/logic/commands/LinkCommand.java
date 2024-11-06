@@ -94,6 +94,7 @@ public class LinkCommand extends Command {
             }
 
             Link link = new Link(owner, petList.get(petIndex.getZeroBased()));
+
             if (model.hasLink(link)) {
                 throw new CommandException(MESSAGE_DUPLICATE_LINK);
             }

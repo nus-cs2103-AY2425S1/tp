@@ -27,6 +27,8 @@ public class Pet implements Linkable {
     private final Age age;
     private final Sex sex;
 
+    private final LinkedOwnerList linkedOwner;
+
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
@@ -42,6 +44,7 @@ public class Pet implements Linkable {
         this.age = age;
         this.sex = sex;
         this.tags.addAll(tags);
+        this.linkedOwner = new LinkedOwnerList();
     }
 
     /**
@@ -56,6 +59,7 @@ public class Pet implements Linkable {
         this.age = age;
         this.sex = sex;
         this.tags.addAll(tags);
+        this.linkedOwner = new LinkedOwnerList();
     }
 
     public Name getName() {
@@ -84,6 +88,20 @@ public class Pet implements Linkable {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public LinkedOwnerList getLinkedOwner() {
+        return linkedOwner;
+    }
+
+    @Override
+    public void addLinkedEntity(Linkable owner) {
+        linkedOwner.add(owner);
+    }
+
+    @Override
+    public void removeLinkedEntity(Linkable owner) {
+        linkedOwner.remove(owner);
     }
 
     /**
@@ -130,6 +148,11 @@ public class Pet implements Linkable {
     @Override
     public String getUniqueID() {
         return uniqueId;
+    }
+
+    @Override
+    public String getInfo() {
+        return getName().toString();
     }
 
     @Override

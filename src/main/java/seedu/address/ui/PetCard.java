@@ -1,9 +1,13 @@
 package seedu.address.ui;
 
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.owner.Owner;
+import seedu.address.model.pet.LinkedOwnerList;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -37,6 +41,10 @@ public class PetCard extends UiPart<Region> {
     private Label age;
     @FXML
     private Label sex;
+    @FXML
+    private Label linkedOwner; // Label to display linked pets
+
+    private ObservableList<Owner> ownerList;
 
     /**
      * Creates a {@code PetCode} with the given {@code Pet} and index to display.
@@ -50,5 +58,29 @@ public class PetCard extends UiPart<Region> {
         breed.setText(pet.getBreed().value);
         age.setText(pet.getAge().value);
         sex.setText(pet.getSex().toString()); // toString() method will convert the single char sex value to a full word
+        // Set the linked pets using the toString() of each pet
+        linkedOwner.setText(formatLinkedOwner(pet.getLinkedOwner()));
+
+        this.ownerList = pet.getLinkedOwner().getList();
+
+        // Add a listener to dynamically update the linked pets when they change
+        ownerList.addListener((ListChangeListener<Owner>) change -> updateLinkedOwnerDisplay());
+    }
+
+    /**
+     * Updates the displayed linked owner when the list changes.
+     */
+    private void updateLinkedOwnerDisplay() {
+        linkedOwner.setText(formatLinkedOwner(pet.getLinkedOwner()));
+    }
+
+    /**
+     * Formats the list of linked pets as a single line separated by vertical bars.
+     *
+     * @param linkedOwner the list of linked pets to format
+     * @return a formatted string of linked pet names
+     */
+    private String formatLinkedOwner(LinkedOwnerList linkedOwner) {
+        return linkedOwner.getAsField();
     }
 }

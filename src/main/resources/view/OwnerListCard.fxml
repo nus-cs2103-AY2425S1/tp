@@ -30,6 +30,8 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <!-- New label for linked pets with vertical bars as separators -->
+      <Label fx:id="linkedPets" styleClass="cell_small_label" text="Pets: None" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>

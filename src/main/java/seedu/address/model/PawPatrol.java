@@ -77,6 +77,10 @@ public class PawPatrol implements ReadOnlyPawPatrol {
         this.links.setLinks(links);
     }
 
+    public void updateLinksWithNewPet(Pet original, Pet edited) {
+
+    }
+
     /**
      * Resets the existing data of this {@code PawPatrol} with {@code newData}.
      */
@@ -117,6 +121,8 @@ public class PawPatrol implements ReadOnlyPawPatrol {
         requireNonNull(editedOwner);
 
         owners.setOwner(target, editedOwner);
+
+        links.updateLinkWithNewOwner(target, editedOwner);
     }
 
     /**
@@ -155,6 +161,8 @@ public class PawPatrol implements ReadOnlyPawPatrol {
         requireNonNull(editedPet);
 
         pets.setPet(target, editedPet);
+
+        links.updateLinkWithNewPet(target, editedPet);
     }
 
     /**

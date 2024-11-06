@@ -58,6 +58,7 @@ public class UnlinkCommandTest {
         ModelStubAcceptingUnlinks modelStub = new ModelStubAcceptingUnlinks(validOwner, validPet);
 
         Set<Index> unlinkIndexes = new HashSet<>(Arrays.asList(INDEX_FIRST_PET));
+        //System.out.println(unlinkIndexes.size());
         CommandResult commandResult = new UnlinkCommand(INDEX_FIRST_OWNER, unlinkIndexes).execute(modelStub);
 
         assertEquals(String.format(UnlinkCommand.MESSAGE_SUCCESS, unlinkIndexes.size(), Messages.format(validOwner)),

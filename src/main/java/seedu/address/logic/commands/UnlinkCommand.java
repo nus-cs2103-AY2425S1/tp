@@ -93,9 +93,11 @@ public class UnlinkCommand extends Command {
             }
 
             Link link = new Link(owner, petList.get(petIndex.getZeroBased()));
+
             if (!model.hasLink(link)) {
                 throw new CommandException(MESSAGE_LINK_NOT_FOUND);
             }
+
             links.add(link);
         }
         return links;
