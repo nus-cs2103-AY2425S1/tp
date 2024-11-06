@@ -152,8 +152,16 @@ public interface Model {
      */
     void deleteTag(Tag toDelete);
 
+    /**
+     * Marks the given task as done.
+     * The task must exist in the Wedlinker.
+     */
     void markTask(Task task);
 
+    /**
+     * Unmarks the given task to become not undone.
+     * The task must exist in the Wedlinker.
+     */
     void unmarkTask(Task task);
 
     /**

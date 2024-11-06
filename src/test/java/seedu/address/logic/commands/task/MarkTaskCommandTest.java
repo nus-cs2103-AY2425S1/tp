@@ -61,8 +61,8 @@ public class MarkTaskCommandTest {
         MarkTaskCommand command = new MarkTaskCommand(Set.of(outOfBoundIndex));
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX
-                        + ": " + (model.getFilteredTaskList().size() + 1),
-                () -> command.execute(model));
+                        + ": " + (model.getFilteredTaskList().size() + 1), ()
+                -> command.execute(model));
     }
 
     @Test

@@ -58,8 +58,8 @@ public class TaskStatusModifierTest {
 
         Set<Task> modifiedTasks = modifier.modifyTasks(model);
 
-        assertEquals(Set.of(taskToUnmark), modifiedTasks
-                , "The modified tasks should contain only the unmarked task.");
+        assertEquals(Set.of(taskToUnmark), modifiedTasks,
+                "The modified tasks should contain only the unmarked task.");
         assertFalse(taskToUnmark.getIsDone(), "The task should be unmarked as not done.");
     }
 
@@ -69,8 +69,8 @@ public class TaskStatusModifierTest {
         TaskStatusModifier modifier = new TaskStatusModifier(Set.of(outOfBoundIndex), true);
 
         assertThrows(CommandException.class, MESSAGE_INVALID_TASK_DISPLAYED_INDEX
-                        + ": " + outOfBoundIndex.getOneBased(),
-                () -> modifier.modifyTasks(model));
+                        + ": " + outOfBoundIndex.getOneBased(), ()
+                -> modifier.modifyTasks(model));
     }
 
     @Test
@@ -81,8 +81,8 @@ public class TaskStatusModifierTest {
 
         for (Person person : model.getFilteredPersonList()) {
             if (person.hasTask(taskToMark)) {
-                assertTrue(person.getTask(taskToMark).getIsDone()
-                        , "Person should have the task marked as done.");
+                assertTrue(person.getTask(taskToMark).getIsDone(),
+                        "Person should have the task marked as done.");
             }
         }
     }
@@ -96,8 +96,8 @@ public class TaskStatusModifierTest {
 
         for (Person person : model.getFilteredPersonList()) {
             if (person.hasTask(taskToUnmark)) {
-                assertFalse(person.getTask(taskToUnmark).getIsDone()
-                        , "Person should have the task unmarked as not done.");
+                assertFalse(person.getTask(taskToUnmark).getIsDone(),
+                        "Person should have the task unmarked as not done.");
             }
         }
     }

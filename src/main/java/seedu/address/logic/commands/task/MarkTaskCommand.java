@@ -50,12 +50,8 @@ public class MarkTaskCommand extends Command {
             return false;
         }
         MarkTaskCommand otherMarkTaskCommand = (MarkTaskCommand) other;
-        System.out.println(this.taskStatusModifier.getTargetIndexes());
-        System.out.println(otherMarkTaskCommand.taskStatusModifier.getTargetIndexes());
-        System.out.println(this.taskStatusModifier.getTargetIndexes().
-                equals(otherMarkTaskCommand.taskStatusModifier.getTargetIndexes()));
-        return this.taskStatusModifier.getTargetIndexes().
-                equals(otherMarkTaskCommand.taskStatusModifier.getTargetIndexes());
+        return this.taskStatusModifier.getTargetIndexes()
+                .equals(otherMarkTaskCommand.taskStatusModifier.getTargetIndexes());
     }
 
 
