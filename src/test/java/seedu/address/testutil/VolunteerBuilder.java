@@ -17,8 +17,6 @@ public class VolunteerBuilder {
     public static final String DEFAULT_PHONE = "12345678";
     public static final String DEFAULT_EMAIL = "johndoe@example.com";
     public static final String DEFAULT_DATE = "2024-10-21";
-    public static final String DEFAULT_START_TIME = "09:00";
-    public static final String DEFAULT_END_TIME = "17:00";
 
     private Name name;
     private Phone phone;

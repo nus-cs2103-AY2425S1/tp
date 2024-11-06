@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.volunteercommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class VolunteerDeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the volunteer identified by the index number used in the displayed volunteer list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " 1";
 
     private static final String MESSAGE_DELETE_VOLUNTEER_SUCCESS = "Deleted volunteer successfully!";
 
