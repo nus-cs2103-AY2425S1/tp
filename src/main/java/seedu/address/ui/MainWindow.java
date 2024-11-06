@@ -178,6 +178,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void handleUiState(CommandResult commandResult) {
         UiState uiState = commandResult.getUiState();
+        if (uiState == UiState.NO_CHANGE) {
+            return;
+        }
         if (uiState == UiState.SPECIFIC_DETAILS) {
             mainSplitPane.setDividerPosition(0, 0.5);
             DetailsDisplay detailsDisplay = new DetailsDisplay(commandResult.getStudentToView());
