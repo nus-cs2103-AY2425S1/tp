@@ -255,6 +255,19 @@ public class ModelManager implements Model {
     //=========== Person, Wedding and Tag related accessors ============================================================
 
     @Override
+    public void setPersonInWedding(Person editedPerson, Person personToEdit) {
+        List<Wedding> weddingList = getWeddingFromTags(editedPerson.getTags());
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            set.remove(personToEdit);
+            set.add(editedPerson);
+        }
+    }
+
+    @Override
     public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
         List<Wedding> weddingList = getFilteredWeddingList();
 
@@ -309,5 +322,4 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return editedPerson;
     }
-
 }

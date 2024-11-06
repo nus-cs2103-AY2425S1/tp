@@ -158,6 +158,14 @@ public interface Model {
     void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate);
 
     /**
+     * Sets the person being tagged as a participant in the wedding that matches the tag.
+     *
+     * @param editedPerson Person whose tags have been added to them.
+     * @param personToEdit Person who has tags currently being added to them.
+     */
+    void setPersonInWedding(Person editedPerson, Person personToEdit);
+
+    /**
      * Updates the rest of the list of weddings with the editedPerson.
      *
      * @param personToEdit Person whose details are currently being edited.

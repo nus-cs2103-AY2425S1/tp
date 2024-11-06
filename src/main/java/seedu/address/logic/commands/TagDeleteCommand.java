@@ -32,8 +32,8 @@ public class TagDeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/Li Sirui "
             + "t/Jane Lim & Tom Koh";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed existing Tag(s): '%1$s' from Contact: %2$s." + "\n"
-            + "Contact: '%3$s' has been removed from Wedding(s): '%4$s'.";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed existing Tag(s): '%1$s' from Contact: '%2$s'."
+            + "\n" + "Contact: '%3$s' has been removed from Wedding(s): '%4$s'.";
     public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: '%1$s' does not exist in the address book.";
     public static final String MESSAGE_TAG_DOESNT_EXIST = "Given Tag(s): '%1$s' do not exist for Contact: '%2$s'.";
 
@@ -124,15 +124,15 @@ public class TagDeleteCommand extends Command {
 
             if (tagsInBoth.isEmpty()) {
                 return String.format(MESSAGE_TAG_DOESNT_EXIST, Messages.tagSetToString(tagsToDelete),
-                        Messages.format(editedPerson));
+                        Messages.getName(editedPerson));
             } else {
                 model.deletePersonInWedding(editedPerson, tagsInBoth);
 
                 String tagsNotExist = String.format(MESSAGE_TAG_DOESNT_EXIST + "\n",
-                        Messages.tagSetToString(tagsInNeither), Messages.format(personToEdit));
+                        Messages.tagSetToString(tagsInNeither), Messages.getName(personToEdit));
 
                 String tagsExist = String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsInBoth),
-                        Messages.format(editedPerson), Messages.format(editedPerson),
+                        Messages.getName(editedPerson), Messages.getName(editedPerson),
                         Messages.tagSetToString(tagsInBoth));
 
                 return tagsNotExist + tagsExist;
@@ -141,7 +141,7 @@ public class TagDeleteCommand extends Command {
 
         model.deletePersonInWedding(editedPerson, tagsToDelete);
         return String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsToDelete),
-                Messages.format(editedPerson), Messages.format(editedPerson),
+                Messages.getName(editedPerson), Messages.getName(editedPerson),
                 Messages.tagSetToString(tagsToDelete));
     }
 }

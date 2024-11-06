@@ -59,7 +59,7 @@ public class TagAddCommandTest {
         stubTagList.add(new Tag(VALID_TAG_WEDDING1));
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
-        String expectedMessage = String.format("\n" + TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
+        String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
                 Messages.tagSetToString(stubTagList), Messages.getName(editedPerson),
                 Messages.getName(editedPerson), Messages.tagSetToString(stubTagList));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
@@ -82,7 +82,7 @@ public class TagAddCommandTest {
 
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
-        String expectedMessage = String.format("\n" + TagAddCommand.MESSAGE_DUPLICATE_TAGS,
+        String expectedMessage = String.format(TagAddCommand.MESSAGE_DUPLICATE_TAGS,
                 Messages.getName(editedPerson), tagSetToString(stubTagList));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
@@ -133,7 +133,7 @@ public class TagAddCommandTest {
         stubTagList.add(new Tag(VALID_TAG_WEDDING1));
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
-        String expectedMessage = String.format("\n" + TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
+        String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
                 Messages.tagSetToString(stubTagList), Messages.getName(editedPerson), Messages.getName(editedPerson),
                 Messages.tagSetToString(stubTagList));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
