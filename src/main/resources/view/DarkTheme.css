@@ -126,6 +126,18 @@
     -fx-text-fill: #010504;
 }
 
+.cell_big_label_warning {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #f9c80e;
+}
+
+.cell_big_label_success {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #51cb20;
+}
+
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
