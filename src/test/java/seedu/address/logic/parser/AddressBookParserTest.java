@@ -85,7 +85,7 @@ public class AddressBookParserTest {
         String descriptor = ECNAME_DESC_AMY + ECPHONE_DESC_AMY + ECRS_DESC_AMY;
         AddEmergencyContactCommand command = (AddEmergencyContactCommand) parser.parseCommand(
                 AddEmergencyContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + descriptor);
+                        + INDEX_FIRST_PERSON.getOneBased() + descriptor);
         assertEquals(new AddEmergencyContactCommand(INDEX_FIRST_PERSON, person.getFirstEmergencyContact()), command);
     }
 
@@ -124,7 +124,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listArchiveFiles() throws Exception {
         assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD) instanceof ListArchiveFilesCommand);
-        assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD + " 3") instanceof ListArchiveFilesCommand);
+        assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD + " 3")
+                instanceof ListArchiveFilesCommand);
     }
 
     @Test

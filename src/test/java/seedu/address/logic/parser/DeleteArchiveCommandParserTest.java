@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.filename.Filename;
 import seedu.address.logic.commands.DeleteArchiveCommand;
-import seedu.address.logic.commands.LoadArchiveCommand;
 
 public class DeleteArchiveCommandParserTest {
 
