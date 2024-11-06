@@ -1,5 +1,7 @@
 package seedu.address.model.company;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 
 /**
@@ -16,10 +18,6 @@ public class Bookmark {
      */
     public Bookmark(boolean value) {
         this.isBookmark = value;
-    }
-
-    public Bookmark() {
-        this.isBookmark = false;
     }
 
     public boolean getIsBookmarkValue() {
