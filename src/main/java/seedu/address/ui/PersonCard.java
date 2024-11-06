@@ -22,7 +22,8 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-
+    private static final double EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT = 90;
+    private static final double EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE = 2;
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -32,8 +33,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-    private final double EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT = 90;
-    private final double EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE = 2;
     @FXML
     private HBox cardPane;
     private EmergencyContactListPanel emergencyContactListPanel;
@@ -95,8 +94,8 @@ public class PersonCard extends UiPart<Region> {
         emergencyContactListPanel.getEmergencyContactListView().getSelectionModel()
                 .selectedItemProperty().addListener(emergencyContactSelectionListener());
         emergencyContactListPanelPlaceholder.getChildren().add(emergencyContactListPanel.getRoot());
-        emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT *
-                numEmergencyContacts);
+        emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT
+                * numEmergencyContacts);
         emergencyContactListPanelPlaceholder.setMaxHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT * 2);
     }
 
@@ -106,13 +105,13 @@ public class PersonCard extends UiPart<Region> {
                 EmergencyContact currentSelection) -> {
             int updatedNumEmergencyContacts = person.getEmergencyContacts().size();
             if (currentSelection != null) {
-                emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT *
-                        updatedNumEmergencyContacts + EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE * 2);
-                emergencyContactListPanelPlaceholder.setMaxHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT *
-                        2 + EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE * 2);
+                emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT
+                        * updatedNumEmergencyContacts + EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE * 2);
+                emergencyContactListPanelPlaceholder.setMaxHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT
+                        * 2 + EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE * 2);
             } else {
-                emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT *
-                        updatedNumEmergencyContacts);
+                emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT
+                        * updatedNumEmergencyContacts);
                 emergencyContactListPanelPlaceholder.setMaxHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT * 2);
             }
         };
