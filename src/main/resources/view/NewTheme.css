@@ -269,6 +269,26 @@ table-view .column-header .label {
     -fx-background-radius: 4px;
 }
 
+.cell_small_text {
+    -fx-font-size: 12pt;
+     -fx-font-family: "PT Serif";
+    -fx-fill: white
+}
+
+.cell_detail {
+    -fx-font-size: 11pt;
+    -fx-font-family: "PT Serif";
+    -fx-font-weight: bold;
+    -fx-fill: white
+}
+
+.label_name {
+    -fx-font-size: 14pt;
+    -fx-font-family: "PT Serif";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
 .scroll-bar {
     -fx-pref-width: 1px;
 }
