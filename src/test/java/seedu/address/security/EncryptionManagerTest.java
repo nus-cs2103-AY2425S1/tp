@@ -8,79 +8,75 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class EncryptionManagerTest {
 
     private static final String TEST_DATA = "This is a secret message";
-    private static final String KEY_FILE_PATH = "test/key.txt";
+    private static final String KEY_FILE_PATH = "test-key.jks";
+
+    // This is to prevent FileSystemException in Windows due to concurrency issues
+    private static int tmpFileCount = 0;
     private File keyFile;
+
+
 
     @BeforeEach
     public void setUp() {
-        try {
-            Files.createDirectory(Path.of("test"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        keyFile = new File(KEY_FILE_PATH);
-        // Delete the key file if it exists before each test
-        if (keyFile.exists()) {
-            keyFile.delete();
-        }
+        keyFile = new File(tmpFileCount + KEY_FILE_PATH);
+        tmpFileCount++;
     }
 
-    @AfterEach
-    public void cleanUp() {
+    @AfterAll
+    public static void cleanUp() {
         try {
-            Files.deleteIfExists(Path.of(KEY_FILE_PATH));
-            Files.delete(Path.of("test"));
+            for (int i = 0; i <= tmpFileCount; i++) {
+                Files.deleteIfExists(Path.of(i + KEY_FILE_PATH));
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            if (System.getProperty("os.name").startsWith("Windows")) {
+                // known issue where Windows is unable to delete files
+                return;
+            } else {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     @Test
     public void testGenerateKey() throws Exception {
         assertFalse(keyFile.exists(), "Key file should not exist before generating a key");
-
-        EncryptionManager.generateKey(KEY_FILE_PATH);
+        EncryptionManager.generateKey(keyFile.getPath());
         assertTrue(keyFile.exists(), "Key file should be created after generating a key");
-
-        // Check that the key file contains a Base64 encoded string
-        String encodedKey = Files.readString(keyFile.toPath(), StandardCharsets.UTF_8);
-        assertNotNull(encodedKey, "Key file should contain a Base64 encoded key");
-        assertTrue(encodedKey.length() > 0, "Encoded key should not be empty");
     }
 
     @Test
     public void testGetKey() throws Exception {
         assertFalse(keyFile.exists(), "Key file should not exist before retrieving a key");
-        SecretKey key = EncryptionManager.getKey(KEY_FILE_PATH);
+        SecretKey key = EncryptionManager.getKey(keyFile.getPath());
         assertNotNull(key, "SecretKey should not be null");
         assertTrue(keyFile.exists(), "Key file should be created if it didn't exist");
 
         // Fetch the key again and ensure it’s the same
-        SecretKey sameKey = EncryptionManager.getKey(KEY_FILE_PATH);
+        SecretKey sameKey = EncryptionManager.getKey(keyFile.getPath());
         assertEquals(key, sameKey, "The retrieved key should be the same");
     }
 
     @Test
     public void testEncryptAndDecrypt() throws Exception {
-        byte[] encryptedData = EncryptionManager.encrypt(TEST_DATA, KEY_FILE_PATH);
+        byte[] encryptedData = EncryptionManager.encrypt(TEST_DATA, keyFile.getPath());
         assertNotNull(encryptedData, "Encrypted data should not be null");
         assertTrue(encryptedData.length > 0, "Encrypted data should not be empty");
 
         // Decrypt the data
-        String decryptedData = EncryptionManager.decrypt(encryptedData, KEY_FILE_PATH);
+        String decryptedData = EncryptionManager.decrypt(encryptedData, keyFile.getPath());
 
         // Ensure the decrypted data matches the original plain text
         assertEquals(TEST_DATA, decryptedData, "Decrypted data should match the original text");
@@ -88,11 +84,12 @@ public class EncryptionManagerTest {
 
     @Test
     public void testDecryptWithWrongKey() throws Exception {
-        byte[] encryptedData = EncryptionManager.encrypt(TEST_DATA, KEY_FILE_PATH);
+        byte[] encryptedData = EncryptionManager.encrypt(TEST_DATA, keyFile.getPath());
 
         // Manually generate a new key to simulate using the wrong key for decryption
-        EncryptionManager.generateKey(KEY_FILE_PATH);
-        SecretKey wrongKey = EncryptionManager.getKey(KEY_FILE_PATH);
+        String wrongPath = "wrong-path.jks";
+        EncryptionManager.generateKey(wrongPath);
+        SecretKey wrongKey = EncryptionManager.getKey(wrongPath);
 
         // Attempt to decrypt the encrypted data with the wrong key should fail
         assertThrows(Exception.class, () -> {
