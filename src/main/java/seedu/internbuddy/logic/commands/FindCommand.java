@@ -20,7 +20,7 @@ public class FindCommand extends Command {
             + "application details contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " google software devop";
 
     private final NameContainsKeywordsPredicate predicate;
 
