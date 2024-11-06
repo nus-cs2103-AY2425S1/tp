@@ -1,4 +1,4 @@
-@import url("TagColors.css");
+@import url("LabelColors.css");
 
 /** Container containing all the cards **/
 #cardPane {
@@ -57,7 +57,7 @@
 }
 
 /** Styling for Tier Tag/Label **/
-#assignedTier .label {
+#assignedTier .label, #assignedStatus .label {
     -fx-text-fillx: white;
     -fx-padding: 3 6 4 6;
     -fx-border-radius: 4;
@@ -65,14 +65,3 @@
     -fx-font-size: 11;
     -fx-font-weight: bold;
 }
-
-/** Styling for Status Tag/Label **/
-#assignedStatus .label {
-    -fx-text-fillx: white;
-    -fx-padding: 3 6 4 6;
-    -fx-border-radius: 4;
-    -fx-background-radius: 4;
-    -fx-font-size: 11;
-    -fx-font-weight: bold;
-}
-
