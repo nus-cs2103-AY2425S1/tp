@@ -3,6 +3,9 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,8 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
@@ -24,7 +27,13 @@ import seedu.address.model.person.Person;
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
+
+    // Save the instance of the scrollListener
+    // So that it can be removed and re-added
+    private ChangeListener<Number> scrollListener;
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+
+    private final DoubleProperty maxContentWidth = new SimpleDoubleProperty(0);
 
     @FXML
     private ListView<Person> personListView;
@@ -43,6 +52,9 @@ public class PersonListPanel extends UiPart<Region> {
 
     @FXML
     private VBox personListContainer;
+
+    @FXML
+    private ScrollBar horizontalSb;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -66,7 +78,6 @@ public class PersonListPanel extends UiPart<Region> {
             togglePlaceholder(personList.isEmpty());
         });
 
-
         // Wait for the personListView to be initialized
         Platform.runLater(() -> {
             assert(personListView != null);
@@ -79,8 +90,56 @@ public class PersonListPanel extends UiPart<Region> {
                 personListView.getSelectionModel().select(0);
             }
 
+            // Horizontal scroll mechanism
+            registerMaxContentWidthListener();
+            registerResizeListener();
+
+            // Disable buttons for vertical scroll bar
             disableScrollbarButtons();
         });
+    }
+
+
+    private void registerMaxContentWidthListener() {
+        maxContentWidth.addListener((observable, oldValue, newValue) -> {
+            updateScrollTranslation();
+        });
+    }
+
+    private void updateScrollTranslation() {
+        // If the listener is already set, remove it first
+        if (scrollListener != null) {
+            horizontalSb.valueProperty().removeListener(scrollListener);
+        }
+
+        // Create the new listener
+        scrollListener = (observable, oldValue, newValue) -> {
+            // The new value of the scrollbar, which ranges from 0 to 100
+            // Convert down to a 0 to 1 range
+            double scrollValue = newValue.doubleValue() / 100.0;
+
+            for (Node node : personListView.lookupAll(".list-cell")) {
+                if (node instanceof ListCell<?>) {
+                    ListCell<?> cell = (ListCell<?>) node;
+                    ScrollPane contentContainer = (ScrollPane) cell.lookup("#contentContainer");
+                    if (contentContainer != null) {
+                        // Get the visible area
+                        // If total area (represented by max content width) exceeds visible area
+                        // Then perform the scroll mechanism
+                        double containerWidth = contentContainer.getViewportBounds().getWidth();
+                        if (maxContentWidth.get() > containerWidth) {
+                            double translation = -scrollValue * (maxContentWidth.get() - containerWidth);
+                            contentContainer.getContent().setTranslateX(translation);
+                        }
+                    }
+                }
+            }
+        };
+        // TODO: Enhancement: Make the visible area value more accurate,
+        //  then conditionally render the scrollbar only when needed
+
+        // Add the new listener to the ScrollBar's valueProperty
+        horizontalSb.valueProperty().addListener(scrollListener);
     }
 
     /**
@@ -98,12 +157,54 @@ public class PersonListPanel extends UiPart<Region> {
             if (empty || person == null) {
                 setGraphic(null);
                 cachedPersonCard = null;
+                return;
+            }
 
-            } else if (cachedPersonCard == null || !cachedPersonCard.person.equals(person)) {
+            if (cachedPersonCard == null || !cachedPersonCard.person.equals(person)) {
                 cachedPersonCard = new PersonListCard(person, getIndex() + 1, personListView);
                 setGraphic(cachedPersonCard.getRoot());
             }
+
+            // After every update, recalculate the max content width (includes non-visible area)
+            // Based on the cells that are filled (ie: cells that have a person entry in it!)
+            Platform.runLater(PersonListPanel.this::recalculateMaxContentWidth);
         }
+    }
+
+    private void recalculateMaxContentWidth() {
+        Platform.runLater(() -> {
+            double currentMaxWidth = 0;
+
+            for (Node node : personListView.lookupAll(".list-cell")) {
+                if (node instanceof ListCell<?>) {
+                    ListCell<?> cell = (ListCell<?>) node;
+                    ScrollPane contentContainer = (ScrollPane) cell.lookup("#contentContainer");
+                    if (contentContainer != null) {
+                        double containerWidth = contentContainer.getContent().getBoundsInParent().getWidth();
+                        currentMaxWidth = Math.max(currentMaxWidth, containerWidth);
+                    }
+                }
+            }
+            // Recalculate and set
+            // This in turn triggers the registered listener on maxContentWidth
+            maxContentWidth.set(currentMaxWidth);
+        });
+    }
+
+    private void registerResizeListener() {
+        // On resize, reset both the translation and the horizontal scroll bar value
+        personListView.widthProperty().addListener((observable, oldValue, newValue) -> {
+            for (Node node : personListView.lookupAll(".list-cell")) {
+                if (node instanceof ListCell<?>) {
+                    ListCell<?> cell = (ListCell<?>) node;
+                    ScrollPane contentContainer = (ScrollPane) cell.lookup("#contentContainer");
+                    if (contentContainer != null) {
+                        contentContainer.getContent().setTranslateX(0);
+                    }
+                }
+            }
+            horizontalSb.setValue(0);
+        });
     }
 
     private void setupAutoScroll(ObservableList<Person> personList) {
