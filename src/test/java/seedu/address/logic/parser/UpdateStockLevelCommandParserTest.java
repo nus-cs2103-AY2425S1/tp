@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_STOCK_LEVEL;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_REQUIRED_PREFIXES;
 import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
