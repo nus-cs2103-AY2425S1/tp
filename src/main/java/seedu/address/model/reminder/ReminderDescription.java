@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #VALIDATION_REGEX}
  */
 public class ReminderDescription {
-    public static final String MESSAGE_CONSTRAINTS = "Reminder Descriptions can take any values but not more than 300 "
-            + "characters";
+    public static final String MESSAGE_CONSTRAINTS = "Reminder description cannot be empty or be more than "
+            + "300 characters";
 
     // Allow printable characters excluding control characters
     public static final String VALIDATION_REGEX = "^[\\p{Print}&&[^\\p{Cntrl}]]*$";

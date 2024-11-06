@@ -48,7 +48,6 @@
 }
 
 .headerLabel {
-/*-fx-font-family: "Segoe UI Semibold";*/
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 20px;
     -fx-text-fill: #000000;
@@ -59,6 +58,13 @@
     -fx-font-family: "Andale Mono";
     -fx-font-size: 15px;
     -fx-text-fill: black;
+}
+
+.orLabel {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
 }
 
 .commandWrapper {
