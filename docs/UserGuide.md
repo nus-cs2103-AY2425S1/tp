@@ -142,10 +142,9 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 * Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the candidate will be removed i.e. adding of tags is not cumulative.
+* When editing tags/skills, the existing tags/skills of the candidate will be removed i.e. adding of tags/skills is not cumulative.
 * You can remove all the candidate’s tags by typing `t/` without
     specifying any tags after it.
-* When editing skills, the existing skills of the candidate will be removed i.e. adding of skills is not cumulative.
 * You can remove all the candidate’s skills by typing `s/` without
   specifying any skills after it.
 
@@ -154,7 +153,7 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd candidate to be `Betsy Crower` and clears all existing tags.
 <br><br>
 
-### Hiring a candidate by name and job: `hire`
+### Hiring a candidate: `hire`
 
 Changes an existing candidate's status to "Hired" in HiredFiredPro.
 
@@ -169,7 +168,7 @@ Format: `hire n/NAME j/JOB`
   `Software Engineer`.
 <br><br>
 
-### Rejecting a candidate by name and job: `reject`
+### Rejecting a candidate: `reject`
 
 Changes an existing candidate's status to "Rejected" in HiredFiredPro.
 
@@ -184,7 +183,7 @@ Format: `reject n/NAME j/JOB`
   `Software Engineer`.
 <br><br>
 
-### View a candidate's status by name and job: `view`
+### View a candidate's status: `view`
 
 Shows a candidate's status in HiredFiredPro.
 
@@ -224,7 +223,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 <br><br>
 
-### Deleting a candidate : `delete`
+### Deleting a candidate: `delete`
 
 Deletes the specified candidate from HiredFiredPro.
 
@@ -244,7 +243,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
 <br><br>
 
-### Sorting candidates by interview scores : `sort`
+### Sorting candidates by interview scores: `sort`
 
 Sorts the list of candidates in ascending or descending order based on their interview scores.
 
@@ -257,7 +256,7 @@ Examples:
 * `find Alice Betsy Charlie` followed by `sort d` sorts the resulting candidate list of the `find` command in descending order based on their interview scores.
 <br><br>
 
-### Clearing all candidates : `clear`
+### Clearing all candidates: `clear`
 
 Clears all candidates from HiredFiredPro.
 
@@ -269,7 +268,7 @@ Format: `clear`
 </box>
 <br><br>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
