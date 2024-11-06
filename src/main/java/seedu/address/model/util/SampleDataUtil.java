@@ -44,24 +44,28 @@ public class SampleDataUtil {
 
     public static Pet[] getSamplePets() {
         return new Pet[] {
-            new Pet(new seedu.address.model.pet.Name("Fluffy"), new Species("Cat"), new Breed("Siamese"), new Age("3"), new Sex("M"), new HashSet<>()),
-            new Pet(new seedu.address.model.pet.Name("Honey"), new Species("Dog"), new Breed("Golden Retriever"), new Age("5"), new Sex("M"), new HashSet<>()),
-            new Pet(new seedu.address.model.pet.Name("Bison"), new Species("Cat"), new Breed("Bengal"), new Age("2"), new Sex("F"), new HashSet<>()),
-            new Pet(new seedu.address.model.pet.Name("Daisy"), new Species("Dog"), new Breed("Poodle"), new Age("4"), new Sex("M"), new HashSet<>())
+            new Pet(new seedu.address.model.pet.Name("Fluffy"), new Species("Cat"), new Breed("Siamese"),
+                new Age("3"), new Sex("M"), new HashSet<>()),
+            new Pet(new seedu.address.model.pet.Name("Honey"), new Species("Dog"), new Breed("Golden Retriever"),
+                new Age("5"), new Sex("M"), new HashSet<>()),
+            new Pet(new seedu.address.model.pet.Name("Bison"), new Species("Cat"), new Breed("Bengal"),
+                new Age("2"), new Sex("F"), new HashSet<>()),
+            new Pet(new seedu.address.model.pet.Name("Daisy"), new Species("Dog"), new Breed("Poodle"),
+                new Age("4"), new Sex("M"), new HashSet<>())
         };
-      }
+    }
 
     public static ReadOnlyPawPatrol getSamplePawPatrol() {
         PawPatrol sampleAb = new PawPatrol();
         Owner[] owners = getSampleOwners();
-        Pet[] pets =  getSamplePets();
+        Pet[] pets = getSamplePets();
         for (Owner sampleOwner : owners) {
             sampleAb.addOwner(sampleOwner);
         }
         for (Pet samplePet : pets) {
             sampleAb.addPet(samplePet);
         }
-        for (int i=0;i < owners.length && i < pets.length; i++) {
+        for (int i = 0; i < owners.length && i < pets.length; i++) {
             sampleAb.addLink(new Link(owners[i], pets[i]));
         }
         return sampleAb;
