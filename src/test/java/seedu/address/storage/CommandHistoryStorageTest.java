@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileWriter;
@@ -131,5 +132,28 @@ public class CommandHistoryStorageTest {
 
         assertEquals(2, lineCount);
         clearFile();
+    }
+
+    @Test
+    void testEquals_sameInstance() {
+        assertTrue(commandHistoryStorage.equals(commandHistoryStorage), "An instance should be equal to itself");
+    }
+
+    @Test
+    void testEquals_null() {
+        assertFalse(commandHistoryStorage.equals(null), "An instance should not be equal to null");
+    }
+
+    @Test
+    void testEquals_differentClass() {
+        assertFalse(commandHistoryStorage.equals("some string"), "An instance should not be equal to an object of a different class");
+    }
+
+    @Test
+    void testEquals_identicalFields() {
+        CommandHistoryStorage anotherInstance = new CommandHistoryStorage();
+        anotherInstance.setCommandHistoryFilePath(testFilePath);
+
+        assertTrue(commandHistoryStorage.equals(anotherInstance), "Instances with identical fields should be equal");
     }
 }
