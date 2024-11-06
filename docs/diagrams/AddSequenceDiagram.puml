@@ -49,8 +49,6 @@ deactivate AddressBookParser
 LogicManager -> AddCommand : execute(m)
 activate AddCommand
 
-
-
 AddCommand -> Model : addPerson(John)
 activate Model
 
