@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.goodsreceipt.DeliveredPredicate;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
 import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
@@ -47,8 +48,10 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.goodsList = new ReceiptLog(goodsList);
+        DeliveredPredicate deliveredPredicate = new DeliveredPredicate(false);
         filterIllegalSupplierNames();
         filteredReceipts = new FilteredList<>(this.goodsList.getReceiptList());
+        filteredReceipts.setPredicate(deliveredPredicate);
     }
 
     public ModelManager() {
