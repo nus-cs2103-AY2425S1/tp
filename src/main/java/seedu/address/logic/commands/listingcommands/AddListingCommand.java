@@ -29,6 +29,7 @@ import seedu.address.model.listing.Region;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * Adds a listing to the address book.
@@ -58,6 +59,7 @@ public class AddListingCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New listing added: %1$s";
     public static final String MESSAGE_NOT_SELLER = "The seller specified is not a seller";
+    public static final String MESSAGE_NOT_BUYER = "The buyer(s) specified is not a buyer";
     public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in EZSTATE";
     private final Name listingName;
     private final Price price;
@@ -97,7 +99,7 @@ public class AddListingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
         }
 
-        if (seller instanceof Buyer) {
+        if (!(seller instanceof Seller)) {
             throw new CommandException(MESSAGE_NOT_SELLER);
         }
 
@@ -108,6 +110,9 @@ public class AddListingCommand extends Command {
                 Person buyer = model.getPersonByName(b);
                 if (!lastShownList.contains(buyer)) {
                     throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+                }
+                if (!(buyer instanceof Buyer)) {
+                    throw new CommandException(MESSAGE_NOT_BUYER);
                 }
 
                 personBuyers.add(buyer);

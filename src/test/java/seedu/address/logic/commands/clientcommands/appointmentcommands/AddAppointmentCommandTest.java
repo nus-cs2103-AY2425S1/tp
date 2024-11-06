@@ -80,7 +80,7 @@ public class AddAppointmentCommandTest {
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
                 .buildBuyer();
         assertEquals(String.format(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
-                        Messages.format(editedPerson)),
+                        editedPerson.getName(), validAppointment),
                 result.getFeedbackToUser());
     }
 
@@ -99,7 +99,7 @@ public class AddAppointmentCommandTest {
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
                 .buildBuyer();
         assertEquals(String.format(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
-                        Messages.format(editedPerson)),
+                        editedPerson.getName(), validAppointment),
                 result.getFeedbackToUser());
     }
 

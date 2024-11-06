@@ -50,7 +50,7 @@ public class EditListingCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Listing editedListing = new ListingBuilder(SENGKANG).withArea(50).withSeller(ALICE).build();
+        Listing editedListing = new ListingBuilder(SENGKANG).withArea("50").withSeller(ALICE).build();
         EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing).build();
         EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(), descriptor);
 
@@ -92,8 +92,9 @@ public class EditListingCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 new Listings(model.getListings()));
         showListingWithName(expectedModel, PASIR_RIS.getName());
-        expectedModel.setListing(PASIR_RIS, editedListing);
 
+        expectedModel.setListing(PASIR_RIS, editedListing);
+        expectedModel.updateFilteredListingList(listings -> true);
         assertCommandSuccess(editListingCommand, model, expectedMessage, expectedModel);
     }
 

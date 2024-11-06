@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,8 +13,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.listing.Listing;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -202,6 +205,36 @@ public class ModelManager implements Model {
                 .filter(listing -> !listing.equals(toEdit))
                 .anyMatch(currentListing -> editedListing.getName().equals(currentListing.getName())
                     || editedListing.getAddress().equals(currentListing.getAddress()));
+    }
+
+    /**
+     * Updates listings associated with a client after the client's details have been edited.
+     * If the edited person is a buyer, it replaces the buyer in all relevant listings.
+     * If the edited person is a seller, it replaces all listings associated with that seller.
+     *
+     * @param personToEdit The original person to be edited.
+     * @param editedPerson The edited person with updated details.
+     */
+    @Override
+    public void updateListingsAfterClientEdit(Person personToEdit, Person editedPerson) {
+        if (this.hasListingsForSeller(personToEdit) || this.hasListingsForBuyer(personToEdit)) {
+            if (personToEdit instanceof Buyer buyerToEdit) {
+
+                this.getListings().getListingList()
+                        .forEach(listing -> listing.replaceBuyer(buyerToEdit, editedPerson));
+
+            } else if (personToEdit instanceof Seller sellerToEdit) {
+
+                List<Listing> listingsToDelete = this.getListings().getListingList().stream()
+                        .filter(listing -> listing.getSeller().equals(sellerToEdit))
+                        .toList();
+
+                for (Listing listing : listingsToDelete) {
+                    this.deleteListing(listing);
+                    this.addListing(listing.modifyListingWithSeller(editedPerson));
+                }
+            }
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================

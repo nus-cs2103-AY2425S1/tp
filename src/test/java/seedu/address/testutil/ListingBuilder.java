@@ -21,7 +21,7 @@ public class ListingBuilder {
 
     public static final String DEFAULT_NAME = "Geylang HDB";
     public static final String DEFAULT_ADDRESS = "123 Geylang Lor 21";
-    public static final int DEFAULT_AREA = 90;
+    public static final String DEFAULT_AREA = "90";
     public static final String DEFAULT_FORMATTED_PRICE = "300000";
     public static final BigDecimal DEFAULT_RAW_PRICE = new BigDecimal(DEFAULT_FORMATTED_PRICE);
     public static final Region DEFAULT_REGION = Region.CENTRAL;
@@ -111,7 +111,7 @@ public class ListingBuilder {
      * @param area The area to set (in square meters).
      * @return The current {@code ListingBuilder} object.
      */
-    public ListingBuilder withArea(int area) {
+    public ListingBuilder withArea(String area) {
         this.area = new Area(area);
         return this;
     }
