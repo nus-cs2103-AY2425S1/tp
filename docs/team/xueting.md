@@ -34,18 +34,18 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `filter` (Pull request [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files))
+        * Added documentation for the features `filter` and `list` (Pull request [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files))
         * Improved introduction section and added table of contents (Pull request [\#200](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/200))
+        * 
     
     * Developer Guide:
         * Added implementation details and sequence diagram of the `filter` feature [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files)
         * Tweak sequence diagram to storage [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files)
         * Added table of contents to introduction section [\#200](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/200)
+        * Added use cases for exit
+        * Added index to glossary
     
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
+    * PRs reviewed (with non-trivial review comments): [\#103](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/103), [\#115](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/115), [\#135](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/135), [\#181](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/181)
 
