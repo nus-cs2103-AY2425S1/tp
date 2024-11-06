@@ -7,6 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  *
  */
 public class Filename {
+    public static final String MESSAGE_CONSTRAINTS_BLANK = "Filename should not be blank";
     public static final String MESSAGE_CONSTRAINTS = "Invalid filename. Filenames should not contain any of the "
             + "following characters: < > : \" / \\ | ? *";
 
@@ -30,6 +31,7 @@ public class Filename {
      */
     public Filename(String filename) {
         requireNonNull(filename);
+        checkArgument(!filename.isBlank(), MESSAGE_CONSTRAINTS_BLANK);
         checkArgument(isValidFilename(filename), MESSAGE_CONSTRAINTS);
         this.filename = filename;
     }
