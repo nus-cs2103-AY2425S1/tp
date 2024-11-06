@@ -12,8 +12,8 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class Appointment {
-    public static final String MESSAGE_CONSTRAINTS = "Appointment description cannot be empty and has a "
-            + "character limit of 40";
+    public static final String MESSAGE_CONSTRAINTS = "Appointment description must contain at least 1 alphabetic"
+            + " character, and has a limit of 80 characters.";
     public static final String VALIDATION_REGEX = "^(?!\\s*$)(?=.*[a-zA-Z]).{1,80}$";
     private final String description;
     private final LocalDateTime start;
