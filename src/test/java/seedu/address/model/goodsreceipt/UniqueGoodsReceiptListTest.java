@@ -81,6 +81,7 @@ public class UniqueGoodsReceiptListTest {
         assertThrows(NullPointerException.class, () ->
                 uniqueGoodsReceiptList.setReceipts((UniqueGoodsReceiptList) null));
     }
+
     @Test
     public void setPersons_uniqueReceiptList_replacesOwnListWithProvidedUniquePersonList() {
         uniqueGoodsReceiptList.add(ALICE_RECEIPT);
