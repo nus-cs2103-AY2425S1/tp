@@ -1019,10 +1019,13 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/L c/2A`<br>
        Expected: No student is added. Error detail regarding sex is shown in the status message. Status bar remains the same.
 
-    3. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/A`<br>
+    3. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/41 s/M c/2A`<br>
+       Expected: No student is added. Error detail regarding register number is shown in the status message. Status bar remains the same.
+
+    4. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/A`<br>
        Expected: No student is added. Error detail regarding class is shown in the status message. Status bar remains the same.
 
-    4. Other incorrect add commands to try: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`, `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/`<br>
+    5. Other incorrect add commands to try: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`, `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/ s/M c/2A`, `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1111,6 +1114,57 @@ testers are expected to do more *exploratory* testing.
        Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
 
     4. Other incorrect addAttendance commands to try: `addAttendance 1 ad/24-09-2024`, `addAttendance 1 ad/2024-12-12 ar/`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Adding exam for students
+
+1. Adding exam for all students currently in the list
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `addExam ex/Midterm`<br>
+       Expected: Exam with exam name Midterm is added to all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `addExam ex/Midterm#`<br>
+       Expected: No exam is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect addExam commands to try: `addExam`, `addExam ex/`, `addExam ex/#@*`<br>
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Adding exam score for a student
+
+1. Adding exam score for a student in the list
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding exam should be done first as the student must have an existing exam to add an exam score to.
+
+    2. Test case: `addExamScore 1 ex/Midterm sc/70.0`<br>
+       Expected: Exam with exam name Midterm is updated with a exam score of 70.0 for the first student. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `addExamScore 1 ex/Midterm sc/101.0`<br>
+       Expected: No exam score is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect addExamScore commands to try: `addExamScore 1 ex/Midterm`, `addExamScore 1 ex/Midterm sc/`, `addExamScore x ex/Midterm sc/70.0` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Deleting exam for students
+
+1. Deleting exam for all students currently in the list
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding exam should be done first as the students must have an existing exam to be deleted.
+
+    2. Test case: `deleteExam ex/Midterm`<br>
+       Expected: Exam with exam name Midterm is deleted from all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `deleteExam ex/Midterm#`<br>
+       Expected: No exam is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect deleteExam commands to try: `deleteExam`, `deleteExam ex/`, `deleteExam ex/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_

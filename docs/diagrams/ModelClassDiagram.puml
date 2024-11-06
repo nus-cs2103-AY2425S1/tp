@@ -26,6 +26,7 @@ Class EcName
 Class EcNumber
 Class AbsentDate
 Class AbsentReason
+Class Exam
 Class Submission
 
 Class I #FFFFFF
@@ -57,6 +58,7 @@ Person *--> EcName
 Person *--> EcNumber
 Person *--> "*" AbsentReason
 Person *--> "*" AbsentDate
+Person *--> "*" Exam
 Person *--> "*" Submission
 
 Person -[hidden]up--> I
