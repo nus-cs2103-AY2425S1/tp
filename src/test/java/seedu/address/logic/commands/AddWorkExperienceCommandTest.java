@@ -39,7 +39,7 @@ public class AddWorkExperienceCommandTest {
 
         // Execute command and verify output
         CommandResult result = command.execute(model);
-        assertEquals(String.format(AddWorkExperienceCommand.MESSAGE_SUCCESS, personToEdit.getName(), VALID_WORK_EXP),
+        assertEquals(String.format(AddWorkExperienceCommand.MESSAGE_REPLACED, personToEdit.getName(), VALID_WORK_EXP),
                 result.getFeedbackToUser());
 
         // Verify that the person in the model has been updated

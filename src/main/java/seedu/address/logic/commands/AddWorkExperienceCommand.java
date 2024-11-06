@@ -28,7 +28,9 @@ public class AddWorkExperienceCommand extends Command {
             + PREFIX_INDEX + "1 "
             + PREFIX_WORKEXP + "Intern,Google,2024";
 
-    public static final String MESSAGE_SUCCESS = "New work experience added to %1$s: %2$s";
+    public static final String MESSAGE_ADDED = "New work experience added to %1$s: %2$s";
+
+    public static final String MESSAGE_REPLACED = "%1$s work experience replaced to: %2$s";
     public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid.";
 
     private final Index index;
@@ -81,7 +83,12 @@ public class AddWorkExperienceCommand extends Command {
         // Assert that the person was successfully updated
         assert model.getFilteredPersonList().contains(editedPerson) : "Edited person should be in the updated list";
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit.getName(), workExp));
+        if (personToEdit.getWorkExp() != null) {
+            return new CommandResult(String.format(MESSAGE_REPLACED, personToEdit.getName(), workExp));
+        }
+        else {
+            return new CommandResult(String.format(MESSAGE_ADDED, personToEdit.getName(), workExp));
+        }
     }
 
     /**
