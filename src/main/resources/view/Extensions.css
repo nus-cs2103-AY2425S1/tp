@@ -8,6 +8,11 @@
     -fx-background: #1d1d1d;
 }
 
+.list-cell:empty:hover {
+    -fx-background-color: transparent;
+}
+
+
 .tag-selector {
     -fx-border-width: 1;
     -fx-border-color: white;
