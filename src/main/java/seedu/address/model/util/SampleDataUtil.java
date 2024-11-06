@@ -28,31 +28,135 @@ import seedu.address.model.role.exceptions.InvalidRoleException;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                 new TelegramUsername("alexyeoh"),
-                getRoleSet("attendee")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                 new TelegramUsername("berniceyu"),
-                getRoleSet("volunteer", "vendor")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                new TelegramUsername("charlotte"),
-                getRoleSet("sponsor")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                new TelegramUsername("davidli"),
-                getRoleSet("attendee", "sponsor", "vendor")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                new TelegramUsername("irfan23"),
-                getRoleSet("attendee")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                 new TelegramUsername("roy02"),
-                getRoleSet("sponsor"))
+            new Person(new Name("Agency for Science Technology and Really Cool Stuff A STAR"), new Phone("62112211"),
+                    new Email("sponsorships@astar.com"), new Address("1 Fusionopolis Way, #20-10"),
+                    new TelegramUsername("astar_support"),
+                    getRoleSet("sponsor")),
 
+            new Person(new Name("Boogle Singapore"), new Phone("64338807"),
+                    new Email("sponsorships@boogle.com"), new Address("70 Pasir Panjang Road, #05-10"),
+                    new TelegramUsername("boogle_sponsor"),
+                    getRoleSet("sponsor")),
+
+            new Person(new Name("Code a Cola Singapore"), new Phone("67771122"),
+                    new Email("support@codeacola.sg"), new Address("15 Cantonment Road, #03-20"),
+                    new TelegramUsername("codeacola"),
+                    getRoleSet("sponsor", "vendor")),
+
+            new Person(new Name("Deliveroo Delight"), new Phone("81112233"),
+                    new Email("contact@deliveroodelight.com"), new Address("2 Anson Road, #04-02"),
+                    new TelegramUsername("delightdeliv"),
+                    getRoleSet("sponsor", "vendor")),
+
+            new Person(new Name("Everest Bank"), new Phone("61234567"),
+                    new Email("sponsors@everestbank.com"), new Address("8 Marina Boulevard, #20-10"),
+                    new TelegramUsername("everest_support"),
+                    getRoleSet("sponsor")),
+
+            new Person(new Name("FizzCo Singapore"), new Phone("67334455"),
+                    new Email("events@fizzco.com"), new Address("3 Changi Business Park Crescent, #04-12"),
+                    new TelegramUsername("fizzco_sponsor"),
+                    getRoleSet("sponsor", "vendor")),
+
+            new Person(new Name("Glab"), new Phone("62334488"),
+                    new Email("sponsorships@glab.com"), new Address("28 Ghim Moh Link, #10-01"),
+                    new TelegramUsername("glab_support"),
+                    getRoleSet("sponsor")),
+
+            new Person(new Name("Haiwei"), new Phone("61119955"),
+                    new Email("events@haiwei.com"), new Address("1 Kallang Avenue, #09-02"),
+                    new TelegramUsername("haiwei_support"),
+                    getRoleSet("sponsor")),
+
+            new Person(new Name("Ikan Bilis Tech"), new Phone("67776655"),
+                    new Email("partnerships@ikantech.com"), new Address("20 Jurong West Street 62, #08-15"),
+                    new TelegramUsername("ikanbilistech"),
+                    getRoleSet("sponsor", "vendor")),
+
+            new Person(new Name("John Street"), new Phone("63334422"),
+                    new Email("sponsorships@johnstreet.com"), new Address("5 Robinson Road, #12-09"),
+                    new TelegramUsername("johnstreet"),
+                    getRoleSet("sponsor")),
+
+            new Person(new Name("KokoKrunch"), new Phone("66221144"),
+                    new Email("events@kokokrunch.com"), new Address("10 Geylang Road, #06-10"),
+                    new TelegramUsername("kokokrunch"),
+                    getRoleSet("sponsor", "vendor")),
+
+            new Person(new Name("Lee Harry"), new Phone("95651965"),
+                    new Email("leeharry@example.com"), new Address("9 Chun Tin Road, #06-10"),
+                    new TelegramUsername("leeharry"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Microhard"), new Phone("68887777"),
+                    new Email("events@microhard.com"), new Address("12 Science Park Drive, #04-08"),
+                    new TelegramUsername("microhard"),
+                    getRoleSet("sponsor")),
+
+            new Person(new Name("Nina Lim"), new Phone("98887127"),
+                    new Email("ninalim@example.com"), new Address("46 Beach Road, #04-08"),
+                    new TelegramUsername("ninalim"),
+                    getRoleSet("volunteer")),
+
+            new Person(new Name("Olivia Ong"), new Phone("81123456"),
+                    new Email("olivia@example.com"), new Address("14 Alexandra Road, #04-09"),
+                    new TelegramUsername("olivia_startup"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Peter Chua"), new Phone("88332211"),
+                    new Email("peter@example.com"), new Address("22 Tanjong Pagar Road, #06-03"),
+                    new TelegramUsername("peter_tech"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Quincy Tan"), new Phone("94448899"),
+                    new Email("quincy@example.com"), new Address("13 Bukit Timah Road, #10-11"),
+                    new TelegramUsername("quincy_network"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Rina Lim"), new Phone("91223344"),
+                    new Email("rina@example.com"), new Address("8 Farrer Park Road, #03-02"),
+                    new TelegramUsername("rina_biz"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Samuel Tan"), new Phone("97335566"),
+                    new Email("samuel@example.com"), new Address("5 Geylang East Avenue, #02-04"),
+                    new TelegramUsername("samueltan"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("TickTock"), new Phone("62224466"),
+                    new Email("partners@ticktock.com"), new Address("1 Harbourfront Ave, #06-08"),
+                    new TelegramUsername("ticktock"),
+                    getRoleSet("sponsor")),
+
+            new Person(new Name("Ursula Lim"), new Phone("97776655"),
+                    new Email("ursula@example.com"), new Address("9 Changi Business Park, #04-05"),
+                    new TelegramUsername("ursasa"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Victor Lee"), new Phone("94334477"),
+                    new Email("victor@example.com"), new Address("6 Bayfront Avenue, #05-02"),
+                    new TelegramUsername("victor_l"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Wendy Tan"), new Phone("84987799"),
+                    new Email("wendy@example.com"), new Address("3 Marina Boulevard, #02-04"),
+                    new TelegramUsername("wendyyy"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Xander Tan"), new Phone("87338855"),
+                    new Email("xander@example.com"), new Address("18 Orchard Road, #10-03"),
+                    new TelegramUsername("xander_data"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Yvonne Lim"), new Phone("93312299"),
+                    new Email("yvonne@example.com"), new Address("10 Raffles Quay, #06-09"),
+                    new TelegramUsername("yvonnee"),
+                    getRoleSet("attendee", "volunteer")),
+
+            new Person(new Name("Zachary Tan"), new Phone("89921122"),
+                    new Email("zachary@example.com"), new Address("17 Sentosa Gateway, #02-07"),
+                    new TelegramUsername("zachtan"),
+                    getRoleSet("attendee", "volunteer"))
         };
     }
 
@@ -72,16 +176,16 @@ public class SampleDataUtil {
 
         return new Event[] {
             new Event("NUS Student Life Fair 2024",
+                    getPersonSet(samplePersons[20]),
                     getPersonSet(samplePersons[0]),
-                    getPersonSet(samplePersons[1]),
-                    getPersonSet(samplePersons[2]),
-                    getPersonSet(samplePersons[1])
-            ),
-            new Event("NUS Open House 2024",
-                    getPersonSet(samplePersons[3], samplePersons[4]),
-                    getPersonSet(samplePersons[3]),
                     getPersonSet(samplePersons[5]),
-                    getPersonSet(samplePersons[1])
+                    getPersonSet(samplePersons[22])
+            ),
+            new Event("NUS Hackathon 2024",
+                    getPersonSet(samplePersons[11], samplePersons[14]),
+                    getPersonSet(samplePersons[2]),
+                    getPersonSet(samplePersons[9], samplePersons[19]),
+                    getPersonSet(samplePersons[11])
             )
         };
     }
