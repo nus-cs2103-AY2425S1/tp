@@ -61,12 +61,11 @@ public class RestaurantCard extends UiPart<Region> {
         address.setText(restaurant.getAddress().value);
         email.setText(restaurant.getEmail().value);
         rating.setText(restaurant.getRating().getStringValue());
-        restaurant.getTagsWithoutPrice().stream()
+        restaurant.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        restaurant.getPriceTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> prices.getChildren().add(new Label(tag.tagName)));
+
+        prices.getChildren().add(new Label(restaurant.getPrice().toString()));
 
         if (restaurant.isFavourite()) {
             cardPane.getStyleClass().add("favourite");

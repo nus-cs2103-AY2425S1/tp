@@ -70,9 +70,11 @@ public class EditRestaurantDescriptorTest {
                 + editRestaurantDescriptor.getName().orElse(null) + ", phone="
                 + editRestaurantDescriptor.getPhone().orElse(null) + ", email="
                 + editRestaurantDescriptor.getEmail().orElse(null) + ", address="
-                + editRestaurantDescriptor.getRating().orElse(null) + ", rating="
-                + editRestaurantDescriptor.getAddress().orElse(null) + ", tags="
+                + editRestaurantDescriptor.getAddress().orElse(null) + ", rating="
+                + editRestaurantDescriptor.getRating().orElse(null) + ", price="
+                + editRestaurantDescriptor.getPrice().orElse(null) + ", tags="
                 + editRestaurantDescriptor.getTags().orElse(null) + "}";
+
         assertEquals(expected, editRestaurantDescriptor.toString());
     }
 }

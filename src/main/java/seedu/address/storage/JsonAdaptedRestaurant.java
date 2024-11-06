@@ -14,6 +14,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.Price;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.tag.Tag;
@@ -30,6 +31,8 @@ class JsonAdaptedRestaurant {
     private final String email;
     private final String address;
     private final Integer rating;
+    private final String price;
+    private final boolean isFavourite;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -39,12 +42,16 @@ class JsonAdaptedRestaurant {
     public JsonAdaptedRestaurant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                  @JsonProperty("email") String email, @JsonProperty("address") String address,
                                  @JsonProperty("rating") Integer rating,
-                                 @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                                 @JsonProperty("price") String price,
+                                 @JsonProperty("favourite") boolean isFavourite) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.rating = rating;
+        this.price = price;
+        this.isFavourite = isFavourite;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -60,6 +67,8 @@ class JsonAdaptedRestaurant {
         email = source.getEmail().value;
         address = source.getAddress().value;
         rating = source.getRating().value;
+        price = source.getPrice().toString();
+        isFavourite = source.isFavourite();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -101,7 +110,8 @@ class JsonAdaptedRestaurant {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -115,8 +125,18 @@ class JsonAdaptedRestaurant {
         }
         final Rating modelRating = new Rating(rating);
 
+        if (price == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Price.class.getSimpleName()));
+        }
+        if (!Price.isValidPrice(price)) {
+            throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
+        }
+        final Price modelPrice = new Price(price);
+
         final Set<Tag> modelTags = new HashSet<>(restaurantTags);
-        return new Restaurant(modelName, modelPhone, modelEmail, modelAddress, modelRating, modelTags);
+        return new Restaurant(modelName, modelPhone, modelEmail, modelAddress, modelRating, modelTags,
+                modelPrice, isFavourite);
     }
 
 }

@@ -3,15 +3,14 @@ package seedu.address.model.restaurant;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
-
-
 /**
- * Tests that a {@code Restaurant}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Restaurant}'s {@code Name} matches any of the keywords
+ * given.
  */
 public class PriceContainsKeywordsPredicate implements Predicate<Restaurant> {
+
     private final List<String> keywords;
 
     public PriceContainsKeywordsPredicate(List<String> keywords) {
@@ -20,20 +19,15 @@ public class PriceContainsKeywordsPredicate implements Predicate<Restaurant> {
 
     @Override
     public boolean test(Restaurant restaurant) {
-
-
         if (keywords == null || keywords.isEmpty()) {
             return false;
         }
 
-        String filterBy = keywords.get(0);
-
         return keywords.stream()
-                    .anyMatch(keyword -> restaurant.getPriceTags().stream()
-                           .anyMatch(tag -> {
-                               String cleanTag = tag.toString().replaceAll("[\\[\\]]", "");
-                               return StringUtil.containsWordIgnoreCase(cleanTag, keyword);
-                           }));
+                .anyMatch(keyword -> {
+                    Price price = restaurant.getPrice();
+                    return price.isRepresentedBy(keyword);
+                });
     }
 
     @Override

@@ -20,16 +20,12 @@ public class TagContainsKeywordsPredicate implements Predicate<Restaurant> {
 
     @Override
     public boolean test(Restaurant restaurant) {
-
-
         if (keywords == null || keywords.isEmpty()) {
             return false;
         }
 
-        String filterBy = keywords.get(0);
-
         return keywords.stream()
-                    .anyMatch(keyword -> restaurant.getTagsWithoutPrice().stream()
+                    .anyMatch(keyword -> restaurant.getTags().stream()
                            .anyMatch(tag -> {
                                String cleanTag = tag.toString().replaceAll("[\\[\\]]", "");
                                return StringUtil.containsWordIgnoreCase(cleanTag, keyword);

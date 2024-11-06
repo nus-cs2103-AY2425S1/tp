@@ -465,17 +465,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Vendor**:  
   A shop, typically a restaurant, that is listed on the app.
 
-* **Affordable Price Label ($)**:  
+* **Affordable Price Label (`$`)**:  
   Expected price per meal per restaurant to be \( x <= \$10 \). This is a subjective estimate based on human input.
 
-* **Moderate Price Label ($$)**:  
+* **Moderate Price Label (`$$`)**:  
   Expected price per meal per restaurant to be \( \$10 < x <= \$20 \). This is a subjective estimate based on human input.
 
-* **Premium Price Label ($$$)**:  
+* **Premium Price Label (`$$$`)**:  
   Expected price per meal per restaurant to be \( \$20 < x <= \$50 \). This is a subjective estimate based on human input.
 
-  * **Very Premium Price Label ($$$$)**:  
-  Expected price per meal per restaurant to be \( x > \$50 \). This is a subjective estimate based on human input.
+* **Very Premium Price Label (`$$$$`)**:  
+Expected price per meal per restaurant to be \( x > \$50 \). This is a subjective estimate based on human input.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -26,6 +26,8 @@ public class FavouriteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Restaurant added to favourite: %1$s";
 
+    public static final String MESSAGE_ALREADY_FAVOURITE = "This restaurant is already marked as a favourite.";
+
     private final Index targetIndex;
 
     public FavouriteCommand(Index targetIndex) {
@@ -42,6 +44,11 @@ public class FavouriteCommand extends Command {
         }
 
         Restaurant restaurantToFavourite = lastShownList.get(targetIndex.getZeroBased());
+
+        if (restaurantToFavourite.isFavourite()) {
+            throw new CommandException(MESSAGE_ALREADY_FAVOURITE);
+        }
+
         model.favouriteRestaurant(restaurantToFavourite);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(restaurantToFavourite)));
     }
