@@ -30,13 +30,13 @@ public class AddTutorCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
 
             + PREFIX_HOURS + "HOURS "
-            + PREFIX_SUBJECT + "SUbJECT \n"
+            + PREFIX_SUBJECT + "SUBJECT \n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_ADDRESS + "Clementi, 123456 "
             + PREFIX_HOURS + "6 "
             + PREFIX_SUBJECT + "Math";
 
