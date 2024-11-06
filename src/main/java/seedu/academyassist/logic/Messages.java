@@ -45,18 +45,13 @@ public class Messages {
         builder.append(person.getName())
                 .append("\nStudent ID: ")
                 .append(person.getStudentId())
-                .append("\nPhone: ")
-                .append(person.getPhone())
-                .append("\nEmail: ")
-                .append(person.getEmail())
-                .append("\nAddress: ")
-                .append(person.getAddress())
                 .append("\nNRIC: ")
                 .append(person.getIc())
                 .append("\nYear group: ")
                 .append(person.getYearGroup())
-                .append("\nSubjects: ");
+                .append("\nSubject(s) taken: ");
         person.getSubjects().forEach(s -> builder.append(s + " "));
+        builder.append("\nUse the command `detail " + person.getStudentId() + "` to view more details");
         return builder.toString();
     }
 

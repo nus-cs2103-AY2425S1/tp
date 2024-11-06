@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + "Parameters: \n"
             + PREFIX_NAME + "NAME  e.g. John Smith\n"
             + PREFIX_PHONE + "PHONE  e.g. 98382673\n"
-            + PREFIX_IC + "IC  e.g. S9238263A\n"
+            + PREFIX_IC + "NRIC  e.g. S9238263A\n"
             + PREFIX_YEARGROUP + "YEARGROUP  e.g. 1\n"
             + PREFIX_EMAIL + "EMAIL  e.g. john.smith@example.com\n"
             + PREFIX_ADDRESS + "ADDRESS  e.g. 311, Clementi Ave 2, #02-25\n"
