@@ -8,8 +8,8 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.company.Company;
@@ -88,7 +88,8 @@ public class DeleteTagCommand extends Command {
             Person editedPerson = deleteTagsFromPerson(personToEdit, tagsToDelete);
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagsToDelete, Messages.format(editedPerson)));
+            return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS,
+                    tagsToDelete, Messages.format(editedPerson)));
         }
     }
 
