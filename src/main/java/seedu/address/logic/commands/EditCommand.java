@@ -239,12 +239,10 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null) ? Optional.of(tags) : Optional.empty();
         }
 
         public void setHasPaid(Boolean hasPaid) { // needed for EditPersonDescriptorTest.java
