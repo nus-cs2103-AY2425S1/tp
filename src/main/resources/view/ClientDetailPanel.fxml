@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
@@ -13,48 +12,53 @@
         <URL value="@css/ClientDetailPanel.css" />
     </stylesheets>
 
-    <VBox spacing="10" alignment="TOP_CENTER">
+    <VBox spacing="15" alignment="TOP_CENTER">
         <padding>
             <Insets top="20" right="20" bottom="20" left="20" />
         </padding>
 
-        <ImageView fx:id="clientImage" fitWidth="150" fitHeight="150" preserveRatio="true">
-            <Image url="@/images/agent_assist_logo.png"/>
-        </ImageView>
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <ImageView fx:id="clientImage" fitWidth="100" fitHeight="100" preserveRatio="true">
+                <Image url="@/images/agent_assist_logo.png"/>
+            </ImageView>
 
-        <Label fx:id="nameLabel" styleClass="cell_big_label, name-label" alignment="CENTER" maxWidth="Infinity" />
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                <Label fx:id="nameLabel" styleClass="name-label"/>
+                <HBox fx:id="tagsContainer" alignment="CENTER_LEFT">
+                    <HBox fx:id="tagsGroup" spacing="10" />
+                </HBox>
+            </VBox>
+        </HBox>
 
-        <FlowPane fx:id="tierPane" alignment="CENTER" />
-
-        <VBox spacing="5">
+        <VBox spacing="10">
             <HBox spacing="10">
-                <Label text="Phone:" styleClass="cell_small_label" minWidth="100" />
-                <Label fx:id="phoneLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label text="Phone:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="phoneLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
             </HBox>
 
             <HBox spacing="10">
-                <Label text="Address:" styleClass="cell_small_label" minWidth="100" />
-                <Label fx:id="addressLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label text="Address:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="addressLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
             </HBox>
 
             <HBox spacing="10">
-                <Label text="Email:" styleClass="cell_small_label" minWidth="100" />
-                <Label fx:id="emailLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label text="Email:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="emailLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
             </HBox>
 
             <HBox spacing="10">
-                <Label text="Job:" styleClass="cell_small_label" minWidth="100" />
-                <Label fx:id="jobLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label text="Job:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="jobLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
             </HBox>
 
             <HBox spacing="10">
-                <Label text="Income:" styleClass="cell_small_label" minWidth="100" />
-                <Label fx:id="incomeLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label text="Income:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="incomeLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
             </HBox>
 
             <HBox spacing="10" alignment="TOP_LEFT">
-                <Label text="Remark:" styleClass="cell_small_label" minWidth="100" />
-                <Label fx:id="remarkLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label text="Remark:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="remarkLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
             </HBox>
         </VBox>
     </VBox>
