@@ -97,6 +97,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.requestFocus();
     }
 
+
     TextField getCommandTextField() {
         return this.commandTextField;
     }

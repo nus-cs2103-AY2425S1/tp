@@ -6,11 +6,11 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.QuitCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 
@@ -34,8 +34,8 @@ public class CommandSummaryUtil {
                              DeleteCommand.COMMAND_SUMMARY_EXAMPLES},
                 new String[]{EditCommand.COMMAND_SUMMARY_ACTION, EditCommand.COMMAND_SUMMARY_FORMAT,
                              EditCommand.COMMAND_SUMMARY_EXAMPLES},
-                new String[]{ExitCommand.COMMAND_SUMMARY_ACTION, ExitCommand.COMMAND_SUMMARY_FORMAT,
-                             ExitCommand.COMMAND_SUMMARY_EXAMPLES},
+                new String[]{QuitCommand.COMMAND_SUMMARY_ACTION, QuitCommand.COMMAND_SUMMARY_FORMAT,
+                             QuitCommand.COMMAND_SUMMARY_EXAMPLES},
                 new String[]{ExportCommand.COMMAND_SUMMARY_ACTION, ExportCommand.COMMAND_SUMMARY_FORMAT,
                              ExportCommand.COMMAND_SUMMARY_EXAMPLES},
                 new String[]{FindCommand.COMMAND_SUMMARY_ACTION, FindCommand.COMMAND_SUMMARY_FORMAT,
