@@ -89,6 +89,7 @@ public class AssignWeddingCommand extends Command {
                             MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
             }
+            wedding.increasePeopleCount();
             Wedding editedWedding = wedding.clone();
             String type = entry.getValue();
             switch (type) {
@@ -97,7 +98,6 @@ public class AssignWeddingCommand extends Command {
             case "g" -> editedWedding.addToGuestList(personToEdit);
             default -> { }
             }
-            wedding.increasePeopleCount();
             model.setWedding(wedding, editedWedding);
         }
 
@@ -115,7 +115,6 @@ public class AssignWeddingCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredWeddingList(Model.PREDICATE_SHOW_ALL_WEDDINGS);
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
