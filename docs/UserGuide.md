@@ -41,7 +41,7 @@ AgentConnect will help you manage your contacts faster than traditional apps.
        - [Undo a Command](#undo-a-command--undo)
        - [Redo a Command](#redo-a-command--redo)
        - [Clearing All Entries](#clearing-all-entries--clear)
-4. [Frequently Asked Questions (FAQ)](#frequently-asked-questions--faq-)
+4. [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
 5. [Known Issues](#known-issues)
 6. [Command Summary](#command-summary)
 
@@ -101,7 +101,7 @@ AgentConnect will help you manage your contacts faster than traditional apps.
 
 ---
 
-### Viewing Help: `help`
+### Viewing Help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -163,7 +163,7 @@ Examples:
 
 ### Deleting a client : `delete`
 
-Deletes the specified client from the application. There is a confirmation message before the deletion is executed. Type `y` to confirm deletion.
+Deletes the specified client from the application. There is a confirmation message before the deletion is executed. Type `y` and press enter to confirm deletion.
 
 Format: `delete <INDEX>` or `delete <NAME>`
 - **Parameters**:
@@ -174,7 +174,7 @@ Format: `delete <INDEX>` or `delete <NAME>`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the address book.
-* `find Betsy` followed by `delete 3` deletes the 3rd client in the results of the `find` command.
+* `find Denon` followed by `delete 3` deletes the 3rd client in the results of the `find` command.
   ![result for 'delete david li'](images/deleteUI.png)
   * This command deletes an existing client from the client list with the following information:
       * Client index: 3
@@ -435,7 +435,7 @@ Examples:
 
 ---
 
-### Marking a policy payment installment as paid: `paid`
+### Marking a policy payment installment as paid : `paid`
 
 Marks a policy payment installment as paid for a client.
 
@@ -464,7 +464,7 @@ Examples:
 ## Advanced Features
 
 ### Undo a command : `undo`
-Undo the last delete. Works for add, edit, delete client and clear commands.
+Undo the last command. Works for add, edit, delete client and clear commands.
 
 Format: `undo` 
 
