@@ -24,6 +24,9 @@ import seedu.address.logic.commands.event.commands.DeleteEventCommand;
 import seedu.address.logic.commands.event.commands.EventAddAllCommand;
 import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
+import seedu.address.logic.commands.searchmode.CheckExcludedCommand;
+import seedu.address.logic.commands.searchmode.ClearExcludedCommand;
+import seedu.address.logic.commands.searchmode.ExcludePersonCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.InitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
@@ -134,7 +137,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseFindRoleCommand(String userInput) throws ParseException {
+    public Command parseSearchModeCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             logger.warning("This user input caused a ParseException: " + userInput);
@@ -155,6 +158,14 @@ public class AddressBookParser {
             return new ExitSearchModeCommand();
         case SearchModeSearchCommand.COMMAND_WORD:
             return new SearchModeSearchCommandParser().parse(arguments);
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+        case ExcludePersonCommand.COMMAND_WORD:
+            return new ExcludePersonCommandParser().parse(arguments);
+        case ClearExcludedCommand.COMMAND_WORD:
+            return new ClearExcludedCommand();
+        case CheckExcludedCommand.COMMAND_WORD:
+            return new CheckExcludedCommand();
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case EventAddAllCommand.COMMAND_WORD:

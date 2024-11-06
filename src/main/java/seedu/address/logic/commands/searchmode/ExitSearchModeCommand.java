@@ -27,6 +27,7 @@ public class ExitSearchModeCommand extends Command {
         requireNonNull(model);
         model.setSearchMode(false);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.clearExcludedPersons();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.EventManager;
 import seedu.address.model.event.ReadOnlyEventManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,6 +30,11 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final EventManager eventManager;
     private final FilteredList<Person> filteredPersons;
+
+    /**
+     * The set of persons that are excluded from the search. Reset upon exiting searchmode or clear command
+     */
+    private final Set<Person> excludedPersons = new HashSet<>();
 
     private BooleanProperty searchMode = new SimpleBooleanProperty(false);
     private Predicate<Person> lastPredicate = PREDICATE_SHOW_ALL_PERSONS;
@@ -210,4 +218,45 @@ public class ModelManager implements Model {
     public ObservableList<Person> getAllPersons() {
         return addressBook.getPersonList();
     }
+
+
+    /**
+     * Gets the set of persons that are excluded from the search.
+     * @return copy of excludedPersons
+     */
+    @Override
+    public Set<Person> getExcludedPersons() {
+        return new HashSet<>(excludedPersons);
+    }
+
+    /**
+     * Excludes a Person from the search.
+     * @param person to be excluded
+     */
+    @Override
+    public void excludePerson(Person person) throws PersonNotFoundException {
+        if (!addressBook.hasPerson(person)) {
+            throw new PersonNotFoundException();
+        }
+        excludedPersons.add(person);
+    }
+
+    @Override
+    public void clearExcludedPersons() {
+        excludedPersons.clear();
+    }
+
+    /**
+     * Updates the filtered list of persons with the excluded persons.
+     */
+    @Override
+    public void updateFilteredListWithExclusions(Predicate<Person> predicate) {
+
+        Predicate<Person> excludeRemovedPersons = person -> !excludedPersons.contains(person);
+        if (predicate != null) {
+            lastPredicate = lastPredicate.or(predicate);
+        }
+        updateFilteredPersonList(excludeRemovedPersons.and(lastPredicate));
+    }
+
 }
