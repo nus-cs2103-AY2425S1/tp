@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.event.EventName;
 
 public class NameTest {
     @Test
@@ -29,7 +28,7 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("alice*")); // contains non-alphanumeric characters
-        assertFalse(EventName.isValidName("a".repeat(101))); // 101 characters
+        assertFalse(Name.isValidName("a".repeat(101))); // 101 characters
 
         // valid name
         assertTrue(Name.isValidName("alice wong")); // alphabets only
