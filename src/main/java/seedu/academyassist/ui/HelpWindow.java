@@ -26,11 +26,11 @@ public class HelpWindow extends UiPart<Stage> {
             + "2. view: Shows a list of all students\n"
             + "   Format: view\n\n"
             + "3. edit: Edits an existing student's details\n"
-            + "   Format: edit STUDENT_ID FIELD/NEW_VALUE\n\n"
+            + "   Format: edit STUDENT_ID PREFIX/NEW_VALUE [PREFIXES/NEW_VALUES]\n\n"
             + "4. find: Find students whose names contain any of the given keywords\n"
             + "   Format: find NAMES [MORE_NAMES]\n\n"
-            + "5. addsubject: Adds new classes to an existing student's record\n"
-            + "   Format: addsubject STUDENT_ID s/SUBJECT\n\n"
+            + "5. addsubject: Adds a subject to an existing student's record\n"
+            + "   Format: addsubject STUDENT_ID s/SUBJECT [s/MORE_SUBJECTS]\n\n"
             + "6. delete: Deletes the specified student\n"
             + "   Format: delete STUDENT_ID\n\n"
             + "7. sort: Arranges the list of students based on a specified field\n"
@@ -40,7 +40,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "9. tracksubject: Displays how many students are taking each subject\n"
             + "   Format: tracksubject\n\n"
             + "10. filter: Filters contacts based on specified field\n"
-            + "   Format: filter f/FIELD [field]\n\n"
+            + "   Format: filter FIELD/VALUE\n\n"
             + "11. clear: Clears all entries from the management system\n"
             + "   Format: clear\n"
             + "   [IMPORTANT: Student records cleared are not recoverable!]\n\n"
@@ -50,7 +50,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "   Format: help\n\n"
             + "For more detailed information, click the buttons below to open:\n"
             + "- User Guide\n"
-            + "- README";
+            + "- Product Website";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
