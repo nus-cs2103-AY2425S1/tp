@@ -191,7 +191,7 @@ public class MainApp extends Application {
                 if (month.equals(checkMonth) && date == 1 && !person.getLastPaidDate().equals(today)) {
                     Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                             person.getAddress(), person.getBirthday(), person.getTags(), false,
-                            person.getLastPaidDate(), new Frequency("0"));
+                            person.getLastPaidDate(), new Frequency("0"), person.getProfilePicFilePath());
                     model.setPerson(person, updatedPerson);
                     break;
                 }

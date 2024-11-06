@@ -93,7 +93,7 @@ public class UploadCommand extends Command {
                 Person editedPerson = new Person(
                         personToUpload.getName(), personToUpload.getPhone(), personToUpload.getEmail(),
                         personToUpload.getAddress(), personToUpload.getBirthday(), personToUpload.getTags(),
-                        personToUpload.getHasPaid(), personToUpload.getFrequency(),
+                        personToUpload.getHasPaid(), personToUpload.getLastPaidDate(), personToUpload.getFrequency(),
                         newPath);
 
                 model.setPerson(personToUpload, editedPerson);
