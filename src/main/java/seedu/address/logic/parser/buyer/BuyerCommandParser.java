@@ -44,7 +44,7 @@ public class BuyerCommandParser extends CommandParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();
-        
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
