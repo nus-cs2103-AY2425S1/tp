@@ -175,4 +175,14 @@ public class Person {
     public boolean hasNonEmptyDescription() {
         return description.filter(value -> !value.isBlank()).isPresent();
     }
+
+    /**
+     * Returns the description of the person as a string. If the description is blank, returns a default string.
+     */
+    public String getDescriptionString() {
+        return description
+                .filter(value -> !value.isBlank())
+                .map(Objects::toString)
+                .orElse("<no description>");
+    }
 }
