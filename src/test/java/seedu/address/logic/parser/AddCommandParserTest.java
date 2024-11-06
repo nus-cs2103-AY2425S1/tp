@@ -23,7 +23,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HIGH_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LOW_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY1_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY2_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -58,7 +57,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_LOW_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TAG_DESC_LOW_RISK + ALLERGY_DESC1_BOB
+                + ALLERGY_DESC2_BOB, new AddCommand(expectedPerson));
     }
 
     @Test

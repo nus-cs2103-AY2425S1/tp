@@ -11,7 +11,7 @@ public class Allergy {
     public static final String MESSAGE_CONSTRAINTS = "ERROR: Invalid allergies format. "
             + "Allergies should be a non-empty alphanumeric string, and may include "
             + "commas, spaces, hyphens, or periods.";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}.-]+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum},\\s.-]+";
     public static final String MESSAGE_FIELD_MISSING_FORMAT = "Person's Allergy field is missing!";
     public final String allergyName;
 
@@ -57,7 +57,7 @@ public class Allergy {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + allergyName + ']';
+        return allergyName;
     }
 }
 
