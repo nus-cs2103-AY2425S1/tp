@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
@@ -171,7 +170,7 @@ public class ModelManagerTest {
 
     @Test
     public void addGoods_nullGoods_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () -> modelManager.addGoods(null));
+        assertThrows(NullPointerException.class, () -> modelManager.addGoods(null));
     }
 
     @Test
@@ -183,7 +182,7 @@ public class ModelManagerTest {
                 .build();
 
         assertFalse(person.getName().equals(goodsReceipt.getSupplierName()));
-        Assertions.assertThrows(IllegalSupplierNameException.class, () -> modelManager.addGoods(goodsReceipt));
+        assertThrows(IllegalSupplierNameException.class, () -> modelManager.addGoods(goodsReceipt));
     }
 
 
