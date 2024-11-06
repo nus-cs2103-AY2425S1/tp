@@ -73,7 +73,7 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Li
 
 Shows a table of commands with their respective descriptions and a link to the user guide.
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessage.png =700x)
 
 Format: `help`
 
@@ -106,23 +106,6 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
-
-### Viewing a person : `view`
-
-Toggles the contact card on the specified person, switching between more and less information. <br>
-The default view for all contact cards will display less information to avoid visually overwhelming users, but users may decide to toggle the `view` for all information on one or more persons.
-
-Format: `view INDEX`
-
-* This command permits the user to `view` multiple contacts at once. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
-* Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
-
-Examples:
-* `view 2` will expand the contact card for the second person in the contact list. <br>
- ![result of `view 2`](images/viewTwoResult.png)
-* Using `view 2` again will collapse the contact card back down to its default view. <br>
- ![result of second `view 2`](images/secondViewTwoResult.png)
-
 
 ### Editing a person : `edit`
 
@@ -158,6 +141,12 @@ Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * If more than one fields are specified, contacts will be matched by multiple fields (i.e. `AND` search).
+
+<box type="tip" seamless>
+
+**Take Note:** using an `edit` command on a contact after a `find` operation may remove them from the displayed list, if the contact is edited to no longer match the `find` requirements. Use the `list` command to return to the view of all contacts, or `find` them again with new parameters.
+
+</box>
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -207,6 +196,31 @@ Format: `sort parameter/order`
 Examples:
 * `sort n/` sorts by name in ascending order.
 * `sort d/desc` sorts by date of last visit in descending order.
+
+### Viewing a person : `view`
+
+Toggles the contact card on the specified person, switching between more and less information. <br>
+The default view for all contact cards will display less information to avoid visually overwhelming users, but users may decide to toggle the `view` for all information on one or more persons.
+
+Format: `view INDEX`
+
+* This command permits the user to `view` multiple contacts at once. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
+* Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
+* View is intended for short term ad-hoc usage, and the view states of contact cards will not persist between sessions.
+
+Examples:
+* `view 2` will expand the contact card for the second person in the contact list. <br>
+  ![result of `view 2`](images/viewTwoResult.png =600x)
+* Using `view 2` again will collapse the contact card back down to its default view. <br>
+  ![result of second `view 2`](images/secondViewTwoResult.png =600x)
+
+<box type="tip" seamless>
+
+**Take Note:** Viewing is executed based on the currently displayed list. 
+Executing any commands that alter the displayed list (such as `delete`, `sort`, or `find`) may change the person being viewed.
+For this reason, it is recommended to execute `view` commands after the displayed list has been modified as intended. 
+
+</box>
 
 ### Clearing all entries : `clear`
 
@@ -305,6 +319,9 @@ _Details coming soon ..._
 * Remarks are optional for contacts, and are denoted by the `r/` prefix.
 * It is recommended that long-form notes about a particular contact should be saved in remarks.
 * Remarks can contain any characters, as they allow long-form writing with multiple sentences.<br>
+* **IMPORTANT:** Only one `r/` prefix can be used when adding remarks. 
+  * Adding another `r/` prefix will cause the first part of the `r/` prefix to be lost.
+  * If needed to add the prefix `r/` to remark, enclose the prefix with " ". e.g. `remark 1 r/ use "r/" to add remark`
 
 <box type="tip" seamless>
 
