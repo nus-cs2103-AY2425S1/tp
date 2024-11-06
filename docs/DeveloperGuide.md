@@ -23,8 +23,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
 ### Architecture
 
@@ -91,19 +89,14 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
-
-![Interactions Inside the Logic Component for the `delete n/ Jason p/ 88502457` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
-
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("date n/Alex Yeoh d/31/10/2024")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `date n/Alex Yeoh d/31/10/2024` Command](images/DateSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DateCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> The lifeline for <code>DateCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
 </div>
+
 
 
 How the `Logic` component works:
@@ -136,7 +129,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> An alternative (arguably, a more OOP) model is given below. It includes a <code>Allergy</code> list in the <code>AddressBook</code>, which <code>Person</code> references. This allows <code>AddressBook</code> to store only one <code>Allergy</code> object per unique tag, rather than each <code>Person</code> needing their own <code>Allergy</code> objects.<br>
+</div>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -161,12 +156,100 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
-
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add Feature
+Users can seamlessly add patients to their Health Connect application. 
+Patients must have a name, phone number, address, email, tag, and allergy assigned to them.
+#### Features Architechture Design
+1. Parsing handled by AddCommandParser: The logic for parsing is contained within the AddCommandParser to ensure the arguments are consistently handled before passing the 
+relevant parameters to the AddCommand class.
 
-#### Proposed Implementation
+    * Benefit: This structure simplifies the command classes, follows the Single responsibility principle. 
+   * Challenge: The AddCommandParser needs to handle the parsing extremely carefully and ensure correctness since the parser is the crucial later between the user input and 
+the excecution of the command
+2. Avoiding duplicates: The AddCommand checks the person being added and ensures that duplicates are caught early in the ModelManager. This provides immediate feedback
+and prevents incorrect and impossible states in the data model(eg. 2 people with same name, number and email).
+
+    * Benefit: The model is validated every time a new person is added. Hence, this ensures that the date in the Model and in Storage is always correct. This ensures the integrity of data.
+    * Challenge: This requires checks across classes in other components in the architecture. E.g. need to have a isDuplicate method in the person class and access it in the 
+AddCommandParser class to check if the person being added already exists in the Health Connect address book.
+
+
+Note:
+Tags must be one of the following: High Risk, Medium Risk or Low Risk. This is to ensure that the doctor can classify each patient and attend to their needs accordingly.
+
+A person must have at least one allergy tag. If the person has no allergies the None allergy tag can be added to them. This is to ensure that the doctor is fully certain of the allergies that each patient has. 
+
+The activity diagram below illustrates the sequence of actions users will follow to add a new patient profile into the Health Connect application.
+
+<img src="images/AddPersonActivityDiagram.png" width="450"/>
+
+The sequence diagram below demonstrates the interaction among carious classes to add a new Person into the Health Connect Application.
+
+<img src="images/AddCommandSequenceDiagram.png" width="600"/>
+
+
+### Delete Feature
+Users can easily delete patients from their Health Connect application. To remove a patient, users must specify the patient's unique identifier, such as their name, phone number, or email.
+The Delete feature allows for the removal of outdated or incorrect records, helping to maintain the integrity and relevance of the data within the application.
+
+#### Features Architecture Design
+1. Parsing handled by DeleteCommandParser: The logic for parsing is contained within the DeleteCommandParser to ensure that arguments are consistently handled before passing the relevant parameters to the DeleteCommand class.
+
+    * Benefit: This structure keeps the DeleteCommand class focused on executing the delete operation, following the Single Responsibility Principle.
+    * Challenge: The DeleteCommandParser must ensure the accuracy of input parsing, as it acts as the crucial layer between user input and command execution. Incorrect parsing could result in unintended deletions.
+
+2. Preventing erroneous deletions: The DeleteCommand checks the specified patient against the existing records in the ModelManager to confirm their existence before deletion. This provides immediate feedback if the patient is not found and prevents accidental deletions.
+
+    * Benefit: Validating the existence of the patient before deletion preserves data integrity, ensuring that only valid deletions occur and preventing unintended modifications.
+    * Challenge: This requires checks across classes within the architecture. For example, a method like `matches` in the Delete class could be used by the DeleteCommand to verify the presence of the specified patient in Model's filtered list.
+
+This method would have dependencies on the Model class and the Person class. The class diagram of a delete person command is given
+to demonstrate the interactions among classes.
+
+<img src="images/DeleteClassDiagram.png" width="600"/>
+
+The sequence diagram below illustrates the interactions within the `Logic` component, when executing the delete command in Heath Connect. Take `execute("delete n/Jason p/88502457")` API call as an example.
+
+![Interactions Inside the Logic Component for the `delete n/ Jason p/ 88502457` Command](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
+</div>
+
+### Edit Feature
+Users can easily edit patient information within the Health Connect application. To update a patient's details, users must specify the patient's index in the list, along with the fields to be updated. The Edit feature ensures that patient records remain accurate and up-to-date, maintaining the relevance and integrity of data within the application.
+
+#### Features Architecture Design
+1. Parsing handled by EditCommandParser: The logic for parsing is contained within the EditCommandParser to ensure that arguments, including the specified index and fields to be updated, are consistently handled before passing the relevant parameters to the EditCommand class.
+
+    * **Benefit:** This structure keeps the EditCommand class focused on executing the update operation, adhering to the Single Responsibility Principle.
+    * **Challenge:** The EditCommandParser must ensure precise parsing of input, as it acts as the essential intermediary between user input and command execution. Incorrect parsing could lead to unintended modifications of patient records.
+
+2. Validating index and fields during edits: The EditCommand checks the specified index to confirm the patient’s presence in the ModelManager before proceeding with the updates. This prevents errors and provides immediate feedback if the index is invalid.
+
+    * **Benefit:** Confirming the patient’s existence before editing preserves data integrity, ensuring updates are applied only to valid records.
+    * **Challenge:** This requires coordination across classes within the architecture. In the `execute` method, the index is checked with the `Model`'s filteredPersonList. This is to ensure validity within the Model's current list before applying changes.
+
+3. Checking for duplicate patients: After parsing and validating, the EditCommand verifies that the edited details do not create a duplicate patient entry within the list. If the update would cause the patient to match an existing record, the command will reject the changes and notify the user.
+
+    * **Benefit:** This check prevents duplicate records from being introduced into the system, ensuring data integrity and avoiding redundancy in the patient list.
+    * **Challenge:** This requires cross-checking the modified patient data with existing records in the ModelManager. The method like `isSamePerson` is implemented in the person class, accessible by the EditCommand, to detect and prevent any updates that would result in duplicate patient entries.
+    
+The sequence diagram below illustrates the interactions within the `Logic` component, when executing the edit command in Heath Connect. Take `execute("edit 1 p/88991123")` API call as an example.
+
+<img src="images/EditSequenceDiagram.png" width="600"/>
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> The lifeline for <code>EditCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
+</div>
+
+The activity diagram below illustrates the sequence of actions users will follow to edit a patient profile into the Health Connect application.
+
+<img src="images/EditPersonActivityDiagram.png" width="600"/>
+
+### Planned Enhancements
+### \[Proposed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
