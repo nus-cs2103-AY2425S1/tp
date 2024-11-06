@@ -17,8 +17,6 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 4. [Features](#features)
     - **General Commands**
       - [Viewing help](#viewing-help-help)
-      - [Saving the data](#saving-the-data)
-      - [Editing the data file](#editing-the-data-file)
       - [Clearing all entries](#clearing-all-entries-clear)
       - [Exiting the program](#exiting-the-program-exit)
     - **Patient Management**
@@ -164,7 +162,22 @@ Shows a pop-up message explaining how to access the help page.
 
 Format: `help`
 
-[View Parameters Guide](#input-parameters)<br>
+[Back to Table of Contents](#table-of-contents)
+
+### Clearing all entries : `clear`
+
+Clears all patients and appointments information from WardWatch.
+
+Format: `clear`
+
+[Back to Table of Contents](#table-of-contents)
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding a patient: `add`
@@ -192,17 +205,6 @@ Examples:
 [View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Listing all patients : `list`
-
-![list all patients result'](images/list.png)
-
-Shows a list of all patients in WardWatch.
-
-Format: `list`
-
-[View Parameters Guide](#input-parameters)<br>
-[Back to Table of Contents](#table-of-contents)
-
 ### Editing a patient : `edit`
 
 ![edit patient result](images/edit.png)
@@ -222,50 +224,33 @@ Examples:
 [View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Adding notes to a patient : `addnotes`
+### Deleting a patient : `delete`
 
-Adds notes to an existing person in the address book.
+![delete patient result'](images/delete.png)
 
-Format: `addnotes INDEX pn/NOTES`
+Deletes the specified person from the address book.
 
-* Adds notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-*  `addnotes 1 pn/Patient is prone to falling`
-*  `addnotes 2 pn/Patient requires frequent checkups`
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 [View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting notes from a patient : `delnotes`
+### Listing all patients : `list`
 
-Deletes notes from an existing person in the address book.
+![list all patients result'](images/list.png)
 
-Format: `delnotes INDEX`
+Shows a list of all patients in WardWatch.
 
-* Deletes notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ 
-* The person specified must have notes for this command to work.
+Format: `list`
 
-Examples:
-*  `delnotes 1`
-
-[View Parameters Guide](#input-parameters)<br>
-[Back to Table of Contents](#table-of-contents)
-
-### Viewing a patient's details: `view`
-
-Displays more details about a specific patient listed.
-
-Format: `view INDEX`
-
-* Shows the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* Displays additional information such as a patient's `diagnosis`, `medication`, `notes` and `appointments`.
-
-Examples:
-* `view 2` to view the 2nd patient's details.
-![result for 'view 2'](images/viewResult.png)
-
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Searching patients by field: `find`
@@ -299,21 +284,48 @@ Examples:
 [View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting a patient : `delete`
+### Viewing a patient's details: `view`
 
-![delete patient result'](images/delete.png)
+Displays more details about a specific patient listed.
 
-Deletes the specified person from the address book.
+Format: `view INDEX`
 
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Shows the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Displays additional information such as a patient's `diagnosis`, `medication`, `notes` and `appointments`.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `view 2` to view the 2nd patient's details.
+![result for 'view 2'](images/viewResult.png)
+
+[View Parameters Guide](#input-parameters)<br>
+[Back to Table of Contents](#table-of-contents)
+
+### Adding notes to a patient : `addnotes`
+
+Adds notes to an existing person in the address book.
+
+Format: `addnotes INDEX pn/NOTES`
+
+* Adds notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*  `addnotes 1 pn/Patient is prone to falling`
+*  `addnotes 2 pn/Patient requires frequent checkups`
+
+[View Parameters Guide](#input-parameters)<br>
+[Back to Table of Contents](#table-of-contents)
+
+### Deleting notes from a patient : `delnotes`
+
+Deletes notes from an existing person in the address book.
+
+Format: `delnotes INDEX`
+
+* Deletes notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ 
+* The person specified must have notes for this command to work.
+
+Examples:
+*  `delnotes 1`
 
 [View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
@@ -379,22 +391,6 @@ Examples:
 Lists all the appointments assigned to every patient.
 
 Format: `scheduleall`
-
-[Back to Table of Contents](#table-of-contents)
-
-### Clearing all entries : `clear`
-
-Clears all patients and appointments information from WardWatch.
-
-Format: `clear`
-
-[Back to Table of Contents](#table-of-contents)
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 [Back to Table of Contents](#table-of-contents)
 
