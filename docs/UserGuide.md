@@ -3,7 +3,7 @@ layout: default.md
 title: "NovaCare User Guide"
 pageNav: 3
 ---
-<h1 style="color: #FF6347;">NovaCare</h1>
+<h2 style="color: #FF6347;">NovaCare</h2>
 
 A **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
@@ -377,6 +377,13 @@ Examples:
 Shows a message explaning how to access the help page.
 
 Format: `help`
+<box type="Note" seamless>
+
+**Note:**
+* Due to the amount of commands, the Help Window is made such that it will still be displayed at foreground despite clicking back to NovaCare.
+* The hide it, click the `minimize button` on the top right hand corner of the Help Window as shown below.
+* To close it, click the `close button` on the top right hand corner of the Help Window as shown below.
+</box>
 ![helpMessage](images/helpMessage.png)
 
 ### Clearing all entries : `clear`
