@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * Utilized JavaFX for creating interactive and visual components such as charts (e.g., bar charts, pie charts).
-* Any adapted code, concepts, or third-party libraries should be properly cited here.
+* Use of ChatGPT and Co-pilot to improve code quality
 
 --------------------------------------------------------------------------------------------------------------------
 
