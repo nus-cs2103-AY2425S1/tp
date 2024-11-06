@@ -23,7 +23,8 @@ public class SearchModeSearchCommand extends Command {
             + "Parameters: [Flag] [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/Amy Bob Charlie";
 
-    public static final String MESSAGE_SUCCESS = "Added all Persons who fit search parameter";
+    public static final String MESSAGE_SUCCESS = "Added Contacts %1$s who fit search parameter.";
+    public static final String MESSAGE_NO_PERSONS_FOUND = "No Contacts found with the search parameter.";
 
     //maintains a set of predicates, reducing them to get the final predicate in execute
     private final Set<Predicate<Person>> predicates = new HashSet<>();
@@ -40,13 +41,18 @@ public class SearchModeSearchCommand extends Command {
     public CommandResult execute(Model model, EventManager eventManager) {
         // combine the new predicates with the old ones
         Predicate<Person> currPredicate = model.getLastPredicate();
+        int originalSize = model.getFilteredPersonList().size();
         Predicate<Person> predicate = predicates.stream().reduce(Predicate::and).orElse(x -> true);
         Predicate<Person> newPredicate = currPredicate.or(predicate);
 
 
 
         model.updateFilteredListWithExclusions(newPredicate);
-        return new CommandResult(MESSAGE_SUCCESS);
+        int updatedSize = model.getFilteredPersonList().size();
+        if (updatedSize == originalSize) {
+            return new CommandResult(MESSAGE_NO_PERSONS_FOUND);
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, updatedSize - originalSize));
 
     }
 

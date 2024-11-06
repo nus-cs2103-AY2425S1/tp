@@ -49,6 +49,7 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         Set<Predicate<Person>> predicates = new HashSet<>();
         // if a field is present, AND with the predicate for that field
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+
             Predicate<Person> namePred = createPersonPredicate(argMultimap);
             predicates.add(namePred);
         }
@@ -93,33 +94,50 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         return rolePred;
     }
 
-    private static Predicate<Person> createTelegramPredicate(ArgumentMultimap argMultimap) {
+    private static Predicate<Person> createTelegramPredicate(ArgumentMultimap argMultimap) throws ParseException {
+
         String telegram = argMultimap.getValue(PREFIX_TELEGRAM).get().trim();
+        if (telegram.isBlank()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    SearchModeSearchCommand.MESSAGE_USAGE));
+        }
         String[] telegramKeywords = telegram.split("\\s+");
         Predicate<Person> telegramPred = new TelegramContainsKeywordsPredicate(
                 Arrays.stream(telegramKeywords).toList());
         return telegramPred;
     }
 
-    private static Predicate<Person> createAddressPredicate(ArgumentMultimap argMultimap) {
+    private static Predicate<Person> createAddressPredicate(ArgumentMultimap argMultimap) throws ParseException {
         String address = argMultimap.getValue(PREFIX_ADDRESS).get().trim();
         String[] addressKeywords = address.split("\\s+");
+        if (address.isBlank()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    SearchModeSearchCommand.MESSAGE_USAGE));
+        }
         Predicate<Person> addressPred = new AddressContainsKeywordsPredicate(
                 Arrays.stream(addressKeywords).toList());
         return addressPred;
     }
 
-    private static Predicate<Person> createEmailPredicate(ArgumentMultimap argMultimap) {
+    private static Predicate<Person> createEmailPredicate(ArgumentMultimap argMultimap) throws ParseException {
         String email = argMultimap.getValue(PREFIX_EMAIL).get().trim();
         String[] emailKeywords = email.split("\\s+");
-
+        if (email.isBlank()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    SearchModeSearchCommand.MESSAGE_USAGE));
+        }
         Predicate<Person> emailPred = new EmailContainsKeywordsPredicate(
                 Arrays.stream(emailKeywords).toList());
         return emailPred;
     }
 
-    private static Predicate<Person> createPhonePredicate(ArgumentMultimap argMultimap) {
+    private static Predicate<Person> createPhonePredicate(ArgumentMultimap argMultimap) throws ParseException {
+
         String phone = argMultimap.getValue(PREFIX_PHONE).get().trim();
+        if (phone.isBlank()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    SearchModeSearchCommand.MESSAGE_USAGE));
+        }
         String[] phoneKeywords = phone.split("\\s+");
 
         Predicate<Person> phonePred = new PhoneNumberContainsKeywordPredicate(
@@ -127,8 +145,12 @@ public class SearchModeSearchCommandParser implements Parser<SearchModeSearchCom
         return phonePred;
     }
 
-    private static Predicate<Person> createPersonPredicate(ArgumentMultimap argMultimap) {
+    private static Predicate<Person> createPersonPredicate(ArgumentMultimap argMultimap) throws ParseException {
         String name = argMultimap.getValue(PREFIX_NAME).get().trim();
+        if (name.isBlank()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    SearchModeSearchCommand.MESSAGE_USAGE));
+        }
 
         String[] nameKeywords = name.split("\\s+");
 

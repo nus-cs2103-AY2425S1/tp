@@ -20,6 +20,7 @@ import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
+import seedu.address.model.person.predicates.TelegramContainsKeywordsPredicate;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
 
@@ -77,5 +78,47 @@ public class SearchModeSearchCommandParserTest {
 
         assertParseSuccess(parser, " n/Amy p/1234567 e/test@gmail.com"
                 + " r/attendee a/123 Road", expectedCommand);
+    }
+
+    @Test
+    public void parse_emptyTeleFlagField_throwsParseException() {
+        assertParseFailure(parser, " t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SearchModeSearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyRoleFlagField_throwsParseException() {
+        assertParseFailure(parser, " r/", String.format(RoleHandler.MESSAGE_CONSTRAINTS));
+    }
+
+    @Test
+    public void parse_emptyNameFlagField_throwsParseException() {
+        assertParseFailure(parser, " n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SearchModeSearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyPhoneFlagField_throwsParseException() {
+        assertParseFailure(parser, " p/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SearchModeSearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyEmailFlagField_throwsParseException() {
+        assertParseFailure(parser, " e/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SearchModeSearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyAddressFlagField_throwsParseException() {
+        assertParseFailure(parser, " a/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SearchModeSearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_telegFlagField_success() {
+        SearchModeSearchCommand expectedCommand = new SearchModeSearchCommand(
+                new TelegramContainsKeywordsPredicate(Collections.singletonList("Amy123")));
+        assertParseSuccess(parser, " t/Amy123", expectedCommand);
     }
 }
