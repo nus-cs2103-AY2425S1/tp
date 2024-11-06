@@ -14,7 +14,6 @@ import seedu.address.model.product.ProductName;
 public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCommand> {
 
     public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a non-negative integer.";
-    public static final String MESSAGE_INVALID_STOCK_FORMAT = "Stock Level should be a valid non-negative integer.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the UpdateStockLevelCommand
@@ -32,6 +31,7 @@ public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCom
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PRODUCT_NAME, PREFIX_STOCK_LEVEL);
 
         ProductName productName = ParserUtil.parseProductName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
+
         UpdateStockLevelCommand resultCurrentStock;
         resultCurrentStock = parseCurrentStockLevelCommand(argMultimap, productName);
 
@@ -42,6 +42,11 @@ public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCom
             throws ParseException {
         try {
             String stockLevelString = argMap.getValue(PREFIX_STOCK_LEVEL).get().trim();
+
+            if (stockLevelString.isEmpty()) {
+                throw new ParseException("Stock Level not provided!");
+            }
+
             int currentStockLevel = Integer.parseInt(stockLevelString);
 
             if (currentStockLevel < 0) {
@@ -50,7 +55,7 @@ public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCom
 
             return new UpdateStockLevelCommand(productName, currentStockLevel);
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_STOCK_LEVEL);
+            throw new ParseException("Value for stock level is Invalid" + "\nKindly enter a valid number");
         }
     }
 
