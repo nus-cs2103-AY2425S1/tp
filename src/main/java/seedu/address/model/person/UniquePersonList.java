@@ -117,7 +117,8 @@ public class UniquePersonList implements Iterable<Person> {
         if (toSortBySchedule) {
             comparator = sortBySchedule(order);
         } else {
-            comparator = Comparator.comparing(person -> person.getName().fullName);
+            comparator = Comparator.comparing(person -> person.getName().fullName,
+                    String.CASE_INSENSITIVE_ORDER);
             if (order.equals(DESCENDING)) {
                 comparator = comparator.reversed();
             }

@@ -11,6 +11,7 @@ import static seedu.address.model.person.SocialMedia.Platform.INSTAGRAM;
 import static seedu.address.model.person.SocialMedia.isValidHandleName;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.SocialMediaCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.SocialMedia;
@@ -26,13 +27,21 @@ public class SocialMediaCommandParser implements Parser<SocialMediaCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_IG, PREFIX_FB, PREFIX_CS);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IG, PREFIX_FB, PREFIX_CS);
+
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SocialMediaCommand.MESSAGE_USAGE), pe);
+            String message = pe.getMessage();
+            if (message.equals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
+                throw pe;
+            }
+            else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SocialMediaCommand.MESSAGE_USAGE), pe);
+            }
         }
 
         String handle = " ";

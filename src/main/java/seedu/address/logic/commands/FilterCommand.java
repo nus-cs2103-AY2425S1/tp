@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
@@ -20,18 +19,19 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters contacts for a given tag.\n"
-            + "The given tag must be an exact match with the intended tag to find.\n"
-            + "If there is no contact with the given tag, "
+            + ": Filters contacts for given tag(s).\n"
+            + "The given tag(s) must be an exact match with the intended tag(s) to find.\n"
+            + "If there is no contact with the given tag(s), "
             + "an empty list of contacts will be displayed.\n"
-            + "Ensure that tag only contains alphanumeric characters. \n"
+            + "Ensure that the tag(s) only contains alphanumeric characters. \n"
             + "Parameters: " + PREFIX_TAG + "TAG...\n"
-            + "Example: " + COMMAND_WORD + " t/supplier";
+            + "Examples:\n"
+            + COMMAND_WORD + " t/supplier\n"
+            + COMMAND_WORD + " t/supplier" + " t/partner";
 
     public static final String MESSAGE_SUCCESS = "Filtered for tag(s): %s";
-    public static final String MESSAGE_FAILURE =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE)
-            + "\nListing all contacts instead.";
+    public static final String MESSAGE_NOT_FOUND =
+            "No users found with the tag(s): %s";
 
     private final Set<Tag> tags = new HashSet<>();
 
@@ -53,7 +53,10 @@ public class FilterCommand extends Command {
         String filteredTags = tags.stream()
                 .map(Tag::getTagName)
                 .collect(Collectors.joining(", "));
-
+        //if no contacts matches the tag
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_NOT_FOUND, filteredTags));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, filteredTags));
     }
 

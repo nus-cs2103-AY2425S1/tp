@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -36,16 +37,17 @@ public class Person {
             Email email,
             Address address,
             Schedule schedule,
+            SocialMedia socialMedia,
             Set<Tag> tags
     ) {
-        requireAllNonNull(name, phone, email, address, schedule, tags);
+        requireAllNonNull(name, phone, email, address, schedule, socialMedia, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
         this.tags.addAll(tags);
-        this.socialMedia = new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
+        this.socialMedia = socialMedia;
     }
 
     public Name getName() {
@@ -102,6 +104,21 @@ public class Person {
     }
 
     /**
+     * Returns true if person already has a tag with the same name.
+     */
+    public boolean hasTag(String other) {
+        Iterator<Tag> iterator = tags.iterator();
+        boolean hasTag = false;
+        while (iterator.hasNext()) {
+            Tag tag = iterator.next();
+            if (tag.getTagName().equals(other)) {
+                hasTag = true;
+            }
+        }
+        return hasTag;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -121,7 +138,6 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
                 && socialMedia.equals(otherPerson.socialMedia)
                 && schedule.equals(otherPerson.schedule)
                 && tags.equals(otherPerson.tags);

@@ -8,8 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SocialMedia {
 
-    public static final String MESSAGE_CONSTRAINTS = "Social media handles should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Social media handles should be non empty and can include "
+            + "alphanumeric characters, full stops, hyphens, and underscores. length should not exceed 30 characters";
+    public static final String VALIDATION_REGEX = "[-_.a-zA-Z0-9]{1,30}";
     private String handle;
     private Platform platform;
 
@@ -38,6 +39,9 @@ public class SocialMedia {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidHandleName(String test) {
+        /*if (test.equals(" ")) {
+            return false;
+        }*/
         return test.matches(VALIDATION_REGEX);
     }
 
