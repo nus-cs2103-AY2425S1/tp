@@ -47,6 +47,13 @@ public class LinkedPetList implements Iterable<Pet> {
     }
 
     /**
+     * clears the list
+     */
+    public void resetList() {
+        this.internalList.clear();
+    }
+
+    /**
      * Adds a pet to the list.
      * The pet must not already exist in the list.
      */

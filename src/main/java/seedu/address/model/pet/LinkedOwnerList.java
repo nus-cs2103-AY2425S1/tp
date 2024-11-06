@@ -20,7 +20,7 @@ import seedu.address.model.pet.exceptions.InvalidOwnerNumberException;
  * A Owner is considered unique by comparing using {@code Owner#isSameOwner(Owner)}. As such, adding and updating of
  * Owners uses Owner#isSameOwner(Owner) for equality so as to ensure that the Owner being added or updated is
  * unique in terms of identity in the UniqueOwnerList. However, the removal of a Owner uses Owner#equals(Object) so
- * as to ensure that the Owner with exactly the same fields will be removed.
+ * as to ensure that the Owner with exactly the same fields will be removed. This list should only contain 1 owner
  * <p>
  * Supports a minimal set of list operations.
  *
@@ -45,6 +45,13 @@ public class LinkedOwnerList implements Iterable<Owner> {
      */
     public ObservableList<Owner> getList() {
         return this.internalList;
+    }
+
+    /**
+     * clears the list
+     */
+    public void resetList() {
+        this.internalList.clear();
     }
 
     /**
