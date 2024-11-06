@@ -27,6 +27,7 @@ Package Model as ModelPackage <<Rectangle>>{
   Class Date
   Class Time
   Class Description
+  Class List
 
   Class I #FFFFFF
 }
@@ -58,6 +59,7 @@ Event *--> "1" Location
 Event *--> "1" Date
 Event *--> "2" Time
 Event *--> "1" Description
+Event *--> "1" List
 
 Volunteer -[hidden]up--> I
 Event -[hidden]up--> I

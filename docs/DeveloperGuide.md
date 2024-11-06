@@ -112,8 +112,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="668"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `{Command Name}CommandParser` which uses the other classes shown above to parse the user command and create a `{Command Name}Command` object (e.g., `AssignCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `{Command Name}CommandParser` classes (e.g., `AssignCommandParser`, `EventNewCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -210,11 +210,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-# UML Use Cases: Contact Management Application for Volunteer Organizations
 <br/>
 For the following use cases, the `Actors` are defined as the Management Staff of Volunteer Organisations, and the `System` is defined as VolunSync, unless specified otherwise.
 
-### UC01. Create Event
+#### UC01. Create Event
 
 **Description**: Create a new event in the system.
 
@@ -234,10 +233,10 @@ For the following use cases, the `Actors` are defined as the Management Staff of
   - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
     Use Case Ends.
 
-**Postconditions**:
-- New event is stored in the system.
+**Guarantees**:
+- New event is stored in the system if all required information is present and valid.
 
-### UC02. Create Volunteer
+#### UC02. Create Volunteer
 
 **Description**: Create a new Volunteer in the system.
 
@@ -258,10 +257,10 @@ For the following use cases, the `Actors` are defined as the Management Staff of
    - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
      Use Case Ends.
 
-**Postconditions**:
-- New volunteer is stored in the system.
+**Guarantees**:
+- New volunteer is stored in the system if all required information is present and valid.
 
-### UC03. Assign Volunteer to Event
+#### UC03. Assign Volunteer to Event
 
 **Description**: Assign a volunteer to a specific event.
 
@@ -274,26 +273,44 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 2. System displays list of all volunteers and events.
 3. User selects the desired volunteer and event to assign the volunteer to.
 4. User submits the information to the system.
-5. System adds the volunteer to the event and confirms addition.
+5. System adds the volunteer to the event and confirms addition.<br/>
    Use Case Ends.
 
 **Extensions**:
 - 2a. No volunteers and/or events are found.
-  - 2ai. System notifies user and prompts user to create a new volunteer ([UC02 - Create Volunteer](#uc02-create-volunteer)) and / or event ([UC01 - Create Event](#uc01-create-event)).
-   Use Case Ends.
+  - 2ai. System notifies user and prompts user to create a new volunteer ([UC02 - Create Volunteer](#uc02-create-volunteer)) and / or event ([UC01 - Create Event](#uc01-create-event)).<br/>
+   Use Case Ends.<br/><br/>
 - 5a. Volunteer is already assigned to the event.
   - 5ai. System notifies user.
-  - 5aii. Volunteer remains assigned to the event.
-    Use Case Ends.
--5b. Volunteer is assigned to another event occurring at the same time.
+  - 5aii. Volunteer remains assigned to the event.<br/>
+    Use Case Ends.<br/><br/>
+- 5b. Volunteer is assigned to another event occurring at the same time.
   - 5bi. System notifies user.
-  - 5bii. Volunteer is not assigned to the event.
+  - 5bii. Volunteer is not assigned to the event.<br/>
     Use Case Ends.
 
 **Guarantees**:
 - Volunteer is associated with the event in the system if the volunteer is not assigned to another event occurring at the same time.
 
-### UC04. Find Volunteer by Name
+#### UC04. Find Event by Name
+
+**Description**: Search for an event by their name.
+
+**Preconditions**: NA
+
+**MSS**:
+1. User enters a keyword to search for.
+2. System looks up all events with names containing the keyword.
+3. System notifies the number of matches found and displays the list of events whose names contains the keyword.<br/>
+   Use Case Ends.
+
+**Extensions**:
+- 2a. No events with names containing the keyword are found.
+    - 2ai. System notifies user and displays all events.<br/>
+      Use Case Ends.
+
+
+#### UC05. Find Volunteer by Name
 
 **Description**: Search for a volunteer by their name.
 
@@ -302,15 +319,15 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **MSS**:
 1. User enters a keyword to search for.
 2. System looks up all volunteers whose names contain the keyword.
-3. System notifies the number of matches found and displays the list of volunteers whose names contains the keyword.
+3. System notifies the number of matches found and displays the list of volunteers whose names contains the keyword.<br/>
    Use Case Ends.
 
 **Extensions**:
 - 2a. No volunteers whose names contains the keyword are found.
-  - 2ai. System notifies user and displays all volunteers.
+  - 2ai. System notifies user and displays all volunteers.<br/>
     Use Case Ends.
 
-## UML Use Case Diagram
+#### UML Use Case Diagram
 
 ```mermaid
 graph TD
@@ -515,7 +532,7 @@ testers are expected to do more *exploratory* testing.
 1. Test case: `list`<br>
    Expected: All events and volunteers are shown in the list. The status message should reflect the successful listing of all events and volunteers.
 
-## Appendix: Effort
+## **Appendix: Effort**
 
 ### Project Scope and Difficulty
 This project was significantly more challenging than the Address Book 3 (AB3) reference project due to its broader scope and the complexity of managing multiple entity types. While AB3 focuses on a single entity type (Persons), our project, **VolunSync**, had to manage and integrate multiple entities such as **Volunteers** and **Events**. This increased the difficulty of implementing features such as assignment, scheduling, and cross-entity dependencies, requiring a robust data model and additional logic.
@@ -550,7 +567,7 @@ For example, the **storage module** leverages Jackson for JSON parsing. Our work
 ### Conclusion
 The project demonstrated a high level of effort and collaboration, resulting in a feature-rich and robust application that addresses the real-world challenges faced by nonprofit organizations. It serves as a testament to the team’s ability to deliver a product that is both scalable and user-focused.
 
-## Appendix: Planned Enhancements
+## **Appendix: Planned Enhancements**
 
 **Team size: 5**
 
