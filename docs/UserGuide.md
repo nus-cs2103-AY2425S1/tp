@@ -310,7 +310,7 @@ Format: `tag-add n/NAME t/TAG...`
         <div>Before</div>
     </div>
     <div style="text-align: center; width: 50%;">
-        <img src="images/tagAddMsg2.png" alt="tag-add message after" style="width: 50%;">
+        <img src="images/tagAddMsg2.png" alt="tag-add message after" style="width: 100%;">
         <div>After</div>
     </div>
 </div>
