@@ -72,9 +72,11 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/Help.png)
+
+
 
 ### Adding a person: `add`
 
@@ -85,6 +87,8 @@ Format: `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
+
+![Add](images/Add.png)
 
 Examples:
 
@@ -97,11 +101,13 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+![List](images/List.png)
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/ NAME] [p/ PHONE] [c/ STUDENT CLASS] [t/TAG]…​`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
@@ -110,9 +116,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
+![Edit](images/Edit.png)
+
 Examples:
 
-- `edit 1 p/91234567` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+- `edit 1 c/ 4L` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
 ### Grouping students together: `group`
 
@@ -123,6 +131,8 @@ Format: `group [g/GROUPNAME] [s/STUDENTNAME]…​`
 - Only exact name matches will be added
 - Only the name is searched.
 - Only one student is added at a time.
+
+![Group](images/Group.png)
 
 Examples:
 
@@ -143,11 +153,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+![Find](images/Find.png)
+
 Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Locating groups by name: `findGroup`
 
@@ -162,6 +173,10 @@ Format: `findGroup KEYWORD [MORE_KEYWORDS]`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `class` will return `class A`, `class B`
 
+![FindGroup](images/FindGroup.png)
+
+Examples:
+
 - `findGroup 19S13` returns `19S13`
 - `findGroup GroupA GroupB` returns `GroupA`, `GroupB<br>
 
@@ -174,6 +189,8 @@ Format: `tag INDEX t/TAG`
 - Ability to add more than one tag at once by doing another `t/TAG` after.
 - The index **must be a positive integer** 1, 2, 3, …​
 
+![Tag](images/Tag.png)
+
 ### Deleting a tag : `untag`
 
 Deletes a tag of a specified person.
@@ -183,6 +200,7 @@ Format: `untag INDEX t/TAG`
 - Removes specified tag from that person.
 - The index **must be a positive integer** 1, 2, 3, …​
 
+![UnTag](images/UnTag.png)
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -193,6 +211,7 @@ Format: `delete INDEX`
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
+![Delete](images/Delete.png)
 Examples:
 
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -207,6 +226,7 @@ Format: `deleteGroup GROUPNAME`
 - Deletes the group given the specific `GROUPNAME`.
 - The group name refers to the name shown in the group list.
 
+![DeleteGroup](images/DeleteGroup.png)
 Examples:
 
 - `groups` followed by `deleteGroup StudyGroup 1` deletes StudyGroup1
@@ -225,6 +245,8 @@ Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
 - Will show user data corrupted error if parse or data is not formatted right.
 - Will show user cannot find error if no or invalid file location is given.
 
+![Import](images/Import.png)
+
 Examples:
 `import /users/shaun/desktop/tp/test_students.csv`
 
@@ -237,11 +259,16 @@ Format: `export`
 - Exports all students to fixed location as exported_data.csv
 - Location can be found at `[JAR FILE LOCATION]/exported_data.csv`
 
+![Export](images/Export.png)
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+![Clear](images/Clear.png)
 
 ### Exiting the program : `exit`
 
