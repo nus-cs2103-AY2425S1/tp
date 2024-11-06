@@ -186,7 +186,8 @@ public class InternshipApplicationTest {
         assertEquals(APPLE.hashCode(), appleCopy.hashCode());
 
         // Different company name -> different hashCode
-        InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).withName(VALID_COMPANY_NAME_BOFA).build();
+        InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE)
+                .withName(VALID_COMPANY_NAME_BOFA).build();
         assertNotEquals(APPLE.hashCode(), editedApple.hashCode());
 
         // Different role -> different hashCode
