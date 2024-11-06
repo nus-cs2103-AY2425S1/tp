@@ -33,7 +33,7 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
    * `list` : Lists all events and vendors.
 
-   * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew` : Creates a vendor named `Hong Lim Trading Pte. Ltd.` and saves it to EventTory.
+   * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew` : Creates a vendor named `Hong Lim Trading Pte. Ltd.` and saves in the application.
 
    * `assign v/1 e/2` : Assigns the 1st vendor in the vendor list to the 2nd event in the event list.
    
@@ -45,7 +45,7 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
    * `exit` : Exits the application.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -53,22 +53,43 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command formats:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. `create v/ n/VENDOR_NAME`, `VENDOR_NAME` is a parameter which is specified by the user:
+  * `create v/ n/Kimberly's Flowers`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+<p>
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items in square brackets are **optional**.<br>
+  e.g. `e/ n/EVENT_NAME [t/TAG]` can be used as:
+  * `e/ n/Stagecraft Solutions t/backstage-crew` or as;
+  * `n/Stagecraft Solutions`.
+
+<p>
+
+* Items with `...` after them can be used multiple times, including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as:
+  * ` ` (i.e. 0 times);
+  * `t/big-event`;
+  * `t/big-event t/coastal`, etc.
+
+<p>
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+<p>
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+<p>
+
+* If additional parameters are supplied for commands that do not use said parameters, they will be ignored as well. 
+  * e.g. if the command specifies `list v/ e/ n/NAME`, where the `NAME` parameter is not used for the `list` command, it will be interpreted as `list v/ e/`.
+
+<p>
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
