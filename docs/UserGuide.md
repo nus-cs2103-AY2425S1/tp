@@ -52,13 +52,12 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/exco`, `r/member r/exco` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -76,15 +75,25 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]`
+
+Alias: `a` can be used in place of `add`
+
+Parameters:
+- `NAME`: should contain non-numeric characters and spaces, and should not be blank
+- `PHONE_NUMBER`: should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9)
+- `EMAIL`: should be a valid email address (follow the restrictions provided in the error message)
+- `TELEGRAM`: should be alphanumeric characters, and be between 5-32 characters long
+- `ROLE`: should be between 1-20 characters long, if it exists
+- `f/`: this indicates if the contact should be a favourite contact
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of roles (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe12`
+* `a n/Betsy Crowe r/chairperson e/betsycrowe@example.com t/betsyC p/81234567 r/member f/`
 
 ### Listing all persons : `list`
 
@@ -181,6 +190,70 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Listing all members for attendance : `attendance`
+
+Lists all contacts that have the role “Member” in the address book, making it easier to check and mark attendance for them directly.
+
+Format: `attendance` or `atd` (alias)
+
+* The command must be in lowercase. Variations (e.g., capitalized or mixed-case) will not be recognized.
+* This command does not take any additional parameters. If any extra input is provided, an error message will be displayed.
+
+
+![result for 'attendance'](images/ListAttendanceResult.png)
+
+### Marking attendance : `mark`
+
+Marks attendance for **members** with specified Telegram handles on a specific date.
+
+
+Format: `mark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+
+Alternative Format: `m t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+
+* Each Telegram handle must begin with t/, followed by an alphanumeric or _ string with no spaces, e.g., t/berniceyu123.
+* The command is not case-sensitive (e.g., t/alexyeoh is the same as t/ALEXYEOH) except command keyword `mark` itself.
+* The command does not allow spaces between the prefix t/ or d/ and the argument.
+
+Command Parameters:
+- Telegram Handles (`t/telegram`):
+  * Accepts multiple handles separated by spaces, each beginning with t/.
+  * Handles must be alphanumeric or include _ (e.g., t/alex_yeoh123).
+  * Invalid input: Spaces within or after the prefix (e.g., t/ alexyeoh) result in an error.
+  * Telegram handle should belong to a contact with `Member` role.
+
+- Date (`d/date`)
+  * Takes in one string value with format d/YYYY-MM-DD (eg. d/2024-01-22 not d/2024/1/22)
+  * Only accept one date, if multiple dates are input, only the last one will be recorded as the attendance date.
+  * Date must not be later than current date (eg. 2090-11-02 is an invalid datetime)
+
+Examples:
+
+* `mark t/toom t/maary d/2024-11-02`
+
+  ![result of command `mark t/toom t/maary d/2024-11-02`](images/MarkCommandResult.png)
+
+* Mark attendance of contact with telegram `toom` first, then input command `mark t/toom t/maary d/2024-11-02`
+
+  ![img_3.png](images/RepeatedMarkCommandResult.png)  
+
+* Mark attendance of a non-member contact `mark t/jerry d/2024-11-02`
+
+  ![result of command `mark t/jerry d/2024-11-02`](images/MarkNonMemberCommandResult.png)
+
+
+### Unmarking attendance : `unmark`
+
+Unmarks attendance for **members** with specified Telegram handles on a specific date.
+
+
+Format: `unmark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+
+Alternative Format: `um t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` 
+
+* All parameter constraints and error messages are the same as `mark` command, except `mark` is replaced by `unmark`
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -237,3 +310,6 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Attendance** | `attendance` or `atd`
+**Mark Attendance** | `mark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` or `m t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` <br> e.g., `mark t/berniceYu t/alexYeoh d/2024-11-02`
+**Unmark Attendance** | `unmark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` or `um t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`

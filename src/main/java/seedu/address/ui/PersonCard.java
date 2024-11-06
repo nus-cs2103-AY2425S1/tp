@@ -14,6 +14,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Person;
+import seedu.address.model.role.Member;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -75,6 +76,10 @@ public class PersonCard extends UiPart<Region> {
         person.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.roleName))
                 .forEach(role -> roles.getChildren().add(new Label(role.roleName)));
+        roles.getChildren().stream().forEach(label -> label.setId("role"));
+        roles.getChildren().stream().map(node -> (Label) node)
+                .filter(label -> label.getText().equals(Member.MEMBER_ROLE))
+                .forEach(label -> label.setId("memberRole"));
     }
 
     /**

@@ -21,6 +21,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.profile.exceptions.IllegalProfileNameException;
+import seedu.address.model.profile.exceptions.IllegalProfilePathException;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -182,5 +184,21 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IllegalProfilePathException | IllegalProfileNameException e) {
+            logger.severe("Contacts could not be saved due to: " + e.getMessage());
+            return;
+        } catch (IOException e) {
+            logger.severe("Failed to save contacts " + StringUtil.getDetails(e));
+        }
+
+        try {
+            storage.deleteOrphanedProfiles(model.getUserPrefs());
+        } catch (IOException e) {
+            logger.severe("Failed to delete contacts " + StringUtil.getDetails(e));
+        }
+
     }
 }

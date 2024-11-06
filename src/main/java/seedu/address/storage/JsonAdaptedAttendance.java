@@ -41,7 +41,7 @@ public class JsonAdaptedAttendance {
      * @throws IllegalValueException if there were any data constraints violated in the adapted attendance.
      */
     public Attendance toModelType() throws IllegalValueException {
-        if (!Attendance.isValidDate(session)) {
+        if (!Attendance.isValidDateFormat(session)) {
             throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
         }
         return new Attendance(session);

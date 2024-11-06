@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.MarkAttendanceCommand.findByTelegram;
+import static seedu.address.logic.Messages.MESSAGE_NONMEMBER_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,11 +39,17 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TELEGRAM + "alexYeoh "
             + PREFIX_TELEGRAM + "berniceYu " + PREFIX_DATE + "2024-10-21";
 
-    public static final String MESSAGE_UNMARK_PERSON_SUCCESS =
-            "Successfully unmark the attendance on %1$s for these people: %2$s";
+    public static final String MESSAGE_UNMARK_MEMBER_SUCCESS =
+            "Successfully unmarked the attendance on %1$s for member(s):\n%2$s\n";
+    public static final String MESSAGE_CONTAIN_UNMARKED_MEMBER =
+            "Please note that attendance of %1$s is already unmarked.";
 
     private final List<Telegram> telegrams;
     private final Attendance attendance;
+    private final List<Telegram> unmatchedTelegrams = new ArrayList<>();
+    private final List<Person> membersToUnmarkAttendance = new ArrayList<>();
+    private final List<Person> membersAttendanceAlreadyUnmarked = new ArrayList<>();
+    private final List<Person> membersAttendanceUnmarkSuccess = new ArrayList<>();
 
     /**
      * Constructs a {@code UnMarkAttendanceCommand} that unmarks (deletes) the attendance
@@ -64,16 +71,24 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> peopleToUnmarkAttendance = findByTelegram(telegrams, lastShownList);
-        List<String> peopleNames = peopleToUnmarkAttendance.stream().map(p -> p.getName().toString()).toList();
-        if (peopleToUnmarkAttendance.isEmpty()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TELEGRAM, telegrams));
+        findByTelegram(telegrams, lastShownList);
+        if (!unmatchedTelegrams.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TELEGRAM, unmatchedTelegrams));
         }
 
-        unmarkAttendance(model, peopleToUnmarkAttendance, this.attendance);
+        unmarkAttendance(model, membersToUnmarkAttendance, this.attendance);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(
-                MESSAGE_UNMARK_PERSON_SUCCESS, attendance, peopleNames));
+
+        String commandResultMessage = membersAttendanceAlreadyUnmarked.isEmpty()
+                ? String.format(MESSAGE_UNMARK_MEMBER_SUCCESS, attendance,
+                displayMembers(membersAttendanceUnmarkSuccess))
+                : (this.membersAttendanceUnmarkSuccess.isEmpty()
+                ? String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER, displayMembers(membersAttendanceAlreadyUnmarked))
+                : String.format(MESSAGE_UNMARK_MEMBER_SUCCESS, attendance,
+                displayMembers(membersAttendanceUnmarkSuccess))
+                + '\n' + String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER,
+                displayMembers(membersAttendanceAlreadyUnmarked)));
+        return new CommandResult(commandResultMessage);
     }
 
     @Override
@@ -102,9 +117,17 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
 
     /**
      * Creates and returns a {@code Person} with the {@code attendance} parameter removed from its attendance list
-     * The attendance list will automatically keep the same if the attendance doesn't exist initially.
+     * For members that initially don't have an attendance at the specified date,
+     * add it to {@code membersAttendanceAlreadyUnmarked}
      */
-    private Person removeAttendanceToPerson(Person person, Attendance attendance) {
+    private Person removeAttendanceToPerson(Person person, Attendance attendance) throws CommandException {
+        if (!person.isMember()) {
+            throw new CommandException(MESSAGE_NONMEMBER_ATTENDANCE);
+        }
+        if (!person.getAttendance().contains(attendance)) {
+            this.membersAttendanceAlreadyUnmarked.add(person);
+            return person;
+        }
         Set<Attendance> newAttendanceList = new HashSet<>(person.getAttendance());
         newAttendanceList.remove(attendance);
         Name name = person.getName();
@@ -115,13 +138,44 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
         Set<Attendance> updatedAttendances = newAttendanceList;
         FavouriteStatus favouriteStatus = person.getFavouriteStatus();
 
-        return new Person(name, phone, email, telegram, roles, updatedAttendances, favouriteStatus);
+        Person newPerson = new Person(name, phone, email, telegram, roles, updatedAttendances, favouriteStatus);
+        membersAttendanceUnmarkSuccess.add(newPerson);
+        return newPerson;
     }
 
-    private void unmarkAttendance(Model model, List<Person> peopleToMark, Attendance attendance) {
-        for (Person p: peopleToMark) {
+    private void unmarkAttendance(
+            Model model, List<Person> peopleToUnmark, Attendance attendance) throws CommandException {
+        for (Person p: peopleToUnmark) {
             Person markedPerson = removeAttendanceToPerson(p, attendance);
             model.setPerson(p, markedPerson);
         }
     }
+
+    /**
+     * Find person with target telegram handle in current contact list
+     * @param telegrams Target telegram handle to search in peopleList
+     * @param peopleList All people in current contact list view
+     *
+     *      Add member to {@code membersToUnmarkAttendance} if their telegram handles is in input list;
+     *      Add telegram handles that don't map to a member to {@code unmatchedTelegrams}
+     *      Set {@code membersToUnmarkAttendance} and {@code unmatchedTelegrams}
+     *                   to object private variables accordingly.
+     */
+    private void findByTelegram(List<Telegram> telegrams, List<Person> peopleList) {
+        List<Telegram> mappedTelegrams = new ArrayList<>();
+        for (Person person: peopleList) {
+            if (telegrams.contains(person.getTelegram())) {
+                membersToUnmarkAttendance.add(person);
+                mappedTelegrams.add(person.getTelegram());
+            }
+        }
+
+
+        for (Telegram t: telegrams) {
+            if (!mappedTelegrams.contains(t)) {
+                unmatchedTelegrams.add(t);
+            }
+        }
+    }
+
 }
