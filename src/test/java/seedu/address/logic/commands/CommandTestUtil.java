@@ -53,14 +53,24 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_CLARA = " " + PREFIX_NAME + VALID_NAME_CLARA;
+    public static final String NAME_DESC_DEACON = " " + PREFIX_NAME + VALID_NAME_DEACON;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String PHONE_DESC_CLARA = " " + PREFIX_PHONE + VALID_PHONE_CLARA;
+    public static final String PHONE_DESC_DEACON = " " + PREFIX_PHONE + VALID_PHONE_DEACON;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String EMAIL_DESC_CLARA = " " + PREFIX_EMAIL + VALID_EMAIL_CLARA;
+    public static final String EMAIL_DESC_DEACON = " " + PREFIX_EMAIL + VALID_EMAIL_DEACON;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String ADDRESS_DESC_CLARA = " " + PREFIX_ADDRESS + VALID_ADDRESS_CLARA;
+    public static final String ADDRESS_DESC_DEACON = " " + PREFIX_ADDRESS + VALID_ADDRESS_DEACON;
     public static final String HOURS_DESC_AMY = " " + PREFIX_HOURS + VALID_HOURS_AMY;
     public static final String HOURS_DESC_BOB = " " + PREFIX_HOURS + VALID_HOURS_BOB;
+    public static final String HOURS_DESC_CLARA = " " + PREFIX_HOURS + VALID_HOURS_CLARA;
+    public static final String HOURS_DESC_DEACON = " " + PREFIX_HOURS + VALID_HOURS_DEACON;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
