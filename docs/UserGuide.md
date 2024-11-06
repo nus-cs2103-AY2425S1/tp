@@ -65,17 +65,17 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 |----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Help](#viewing-help-help)**                           | `help`                                                                                                                                                                                       |
 | **[Add](#adding-a-contact-add)**                         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June` |
-| **[Delete](#deleting-a-contact-del-followed-by-y-or-n)** | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                            |
+| **[Delete](#deleting-a-contact-del-followed-by-y-or-n)** | `del n/NAME` followed by `y` or `n`<br> e.g., `del n/John Doe` followed by `y`                                                                                                            |
 | **[Edit](#editing-a-contact-edit)**                      | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                             |
 | **[List](#listing-all-contacts-list)**                   | `list`                                                                                                                                                                                       |
-| **[Add Wedding](#adding-a-wedding-add-wed)**             | `add-wed w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                          |
-| **[Delete Wedding](#deleting-a-wedding-del-wed)**        | `del-wed w/NAME & NAME` followed by `y` or `n`                                                                                                                                               |
-| **[List Weddings](#listing-all-weddings-list-wed)**      | `list-wed`                                                                                                                                                                                   |
-| **[Adding Tags](#adding-tags-to-a-contact)**             | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                                     |
-| **[Deleting Tags](#deleting-tags-from-a-contact)**       | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                                     |
-| **[Filter](#filtering-contacts-by-job-filter)**          | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                                |
-| **[View Wedding](#view-wedding-view-wed)**               | `view-wed NAME & NAME` <br> e.g., `view-wed John & Sarah`                                                                                                                                    |
-| **[Clear](#clearing-all-entries-clear-ab-and-clear-wb)** | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                            |
+| **[Add Wedding](#adding-a-wedding-add-wed)**             | `add-wed w/NAME & NAME v/VENUE d/DATE` or `aw w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add-wed w/ John & June v/Orchard Hotel d/12/12/2030` or `aw w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                           |
+| **[Delete Wedding](#deleting-a-wedding-del-wed)**        | `del-wed w/NAME & NAME` or `dw w/NAME & NAME` followed by `y` or `n`                                                                                                                                               |
+| **[List Weddings](#listing-all-weddings-list-wed)**      | `list-wed` or `lw`                                                                                                                                                                                   |
+| **[Adding Tags](#adding-tags-to-a-contact)**             | `tag-add n/NAME t/TAG...` or `ta n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James` or `ta n/John Doe t/June & James`                                                                                                                     |
+| **[Deleting Tags](#deleting-tags-from-a-contact)**       | `tag-del n/NAME t/TAG...` or `td n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James`                                                                                                                     |
+| **[Filter](#filtering-contacts-by-job-filter)**          | `filter n/KEYWORD` or `filter j/KEYWORD` or `fil n/KEYWORD` <br> e.g., `filter n/John` or `filter j/Photographer` or `fil n/Harry`                                                                                                |
+| **[View Wedding](#view-wedding-view-wed)**               | `view-wed NAME & NAME` or `vw NAME & NAME` <br> e.g., `view-wed John & Sarah` or `vw John & Sarah`                                                                                                                                    |
+| **[Clear](#clearing-all-entries-clear-ab-and-clear-wb)** | `clear-ab` or `cab` for address book and `clear-wb` or `cwb` for wedding book followed by `y` or `n`                                                                                                            |
 | **[Exit](#exiting-the-program-exit)**                    | `exit`                                                                                                                                                                                       |
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -129,6 +129,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 * If you are worried about adding duplicated people, fret not! Knotty Planner will alert you when an identical person is added
 * We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
+
+</box>
+
+<box type="warning" seamless>
+
+**TAKE NOTE:** `PHONE_NUMBER` only accepts integers between 0 and 9 as valid inputs. Allowing a broader range of characters could introduce inconsistencies and potential misuse, such as the entry of text in place of numbers.
 
 </box>
 
@@ -216,15 +222,16 @@ Format: `list`
 
 ![list message](images/listMsg.png)
 
-### Adding a Wedding: `add-wed`
+### Adding a Wedding: `add-wed` / `aw`
 
 You can add a wedding to the list of weddings.
 
-Format: `add-wed w/NAME & NAME v/VENUE d/DATE`
+Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DATE`
 
 * If you are worried about adding duplicated weddings, fret not! Knotty Planner will alert you when an identical wedding is added.
 * We will also alert you when you add a different wedding with the same name, we need your help to change their input name in these situations 😊.
 * To make adding a wedding easier, Knotty Planner will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+  Examples: `john & jane`, `JOHN   & jane` will all be formatted to `John & Jane`.
 
 <box type="important" seamless>
 
@@ -232,16 +239,13 @@ Format: `add-wed w/NAME & NAME v/VENUE d/DATE`
 
 </box>
 
-
-Examples: `john & jane`, `JOHN   & jane` will all be formatted to `John & Jane`.
-
 ![add wedding message](images/addWeddingMsg.png)
 
 Examples:
 * `add-wed w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
-* `add-wed w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
+* `aw w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
 
-### Deleting a Wedding: `del-wed`
+### Deleting a Wedding: `del-wed` / `dw` 
 
 You can delete a wedding from your list of weddings.
 
@@ -250,11 +254,11 @@ You can delete a wedding from your list of weddings.
 * The wedding is deleted if `y` is entered.
 * The wedding is not deleted if `n` is entered, cancelling the delete operation and nothing will occur.
 
-Format: `del-wed w/NAME & NAME` followed by `y` or `n`
+Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 <box type="important" seamless>
 
-**IMPORTANT:** `del-wed w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+**IMPORTANT:** `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
 
 </box>
 
@@ -275,22 +279,22 @@ Format: `del-wed w/NAME & NAME` followed by `y` or `n`
 
 Examples:
 * `del-wed w/John Loh & Jean Tan` followed by `y` deletes the wedding named `John oh & Jean Tan` from the address book.
-* `del-wed w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
+* `dw w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
-### Listing All Weddings: `list-wed`
+### Listing All Weddings: `list-wed` / `lw`
 
 You can now view all weddings in the order they were added in!
 
-Format: `list-wed`
+Format: `list-wed` / `lw`
 
 ![list wedding message](images/listWedding.png)
 
-### Tagging a Contact: `tag-add` / `tag-del`
+### Tagging a Contact
 
-### Adding Tag(s) to a Contact
-If you need to add your contacts to a particular wedding, you can use `tag-add` to add them to the wedding.
+### Adding Tag(s) to a Contact: `tag-add` / `ta`
+Add your contacts to a particular wedding!
 
-Format: `tag-add n/NAME t/TAG...`
+Format: `tag-add n/NAME t/TAG...` / `ta n/NAME t/TAG...`
 
 <box type="warning" seamless>
 
@@ -317,12 +321,12 @@ Format: `tag-add n/NAME t/TAG...`
 
 Examples:
 *  `tag-add n/John Doe t/Adam and Steve` Adds the tag `Adam and Steve` to John Doe.
-*  `tag-add n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Adds the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` to Betsy Crower.
+*  `ta n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Adds the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` to Betsy Crower.
 
-### Deleting Tag(s) from a Contact
-If you need to remove your contacts from a particular wedding, you can use `tag-del` to remove them from the wedding.
+### Deleting Tag(s) from a Contact: `tag-del` / `td`
+Remove your contacts from a particular wedding!
 
-Format: `tag-del n/NAME t/TAG...`
+Format: `tag-del n/NAME t/TAG...` / `td n/NAME t/TAG...`
 
 * The name of the tag must match the wedding that you want to delete the contact from.
 
@@ -347,13 +351,13 @@ Format: `tag-del n/NAME t/TAG...`
 
 Examples:
 *  `tag-del n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
-*  `tag-del n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
+*  `td n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
 
-### Filtering Contacts by Job: `filter`
+### Filtering Contacts by Name and Job: `filter` / `fil`
 
-If you are looking for contacts with a specific name or job, you can use `filter` to filter out a list of contacts whose name or job matches your input.
+Conveniently search for contacts in your address book by name and/or job.
 
-Format: `filter n/KEYWORD... j/KEYWORD...`
+Format: `filter n/KEYWORD... j/KEYWORD...` / `fil n/KEYWORD... j/KEYWORD...`
 
 * At least one of the `NAME` or `JOB` fields must be present.
 * `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
@@ -380,40 +384,48 @@ Format: `filter n/KEYWORD... j/KEYWORD...`
 Examples:
 * `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers.
 * `filter n/John` returns `John` whose name is John.
-* `filter n/jonus n/harry j/photographer` returns Jonus, Harry and all photographers that are in your contacts.
-* `filter j/host j/caterer` returns all hosts and caterers that are in your contacts.
+* `fil n/jonus n/harry j/photographer` returns Jonus, Harry and all photographers that are in your contacts.
+* `fil j/host j/caterer` returns all hosts and caterers that are in your contacts.
 
-### View Wedding: `view-wed`
+### View Wedding: `view-wed` / `vw`
 
-If you are looking for participants tagged to a particular wedding, you can use `view-wed` to view a list of contacts tagged to the specified wedding.
+You can view a list of all contacts tagged to the specified wedding.
 
-Format: `view-wed NAME & NAME`
+Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
-* `view-wed` shows particpants based on wedding names that match the keyword
+* `view-wed` / `vw` shows participants based on wedding names that match the keyword
 * `NAME & NAME` is the name of the wedding and is not case-sensitive e.g `alice & bob` will match `Alice & Bob`
 * `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`
 * Only full words will be matched e.g. `jak` will not match `Jake`
-* Persons matching at least one keyword will not be returned (i.e. `AND` search).
+* Persons matching at least one keyword will not be returned (i.e. `AND` search)
   e.g. `Alice` will not return `Alice & Bob`
+
+<box type="warning" seamless>
+
+**TAKE NOTE:** No prefixes are required for this command
+
+</box>
+
 
 ![view-wed message](images/viewWeddingMsg.png)
 
 Examples:
 * `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding
+* `vw Ahmad & Esther` returns `Halim` who is a best man for Ahmad and `Jia Zhun` who is a photographer for that wedding
 
-### Clearing All Entries: `clear-ab` and `clear-wb`
+### Clearing All Entries: `clear-ab` / `cab` and `clear-wb` / `cwb`
 
 You can delete ALL contacts in the address book from the application.
 
-1. `clear-ab` clears all contacts in address book.
-2. `clear-wb` clears all weddings in wedding book.
+1. `clear-ab` / `cab` clears all contacts in address book.
+2. `clear-wb` / `cwb` clears all weddings in wedding book.
 3. Both commands will prompt for confirmation before deleting all entries.
 4. If you confirm, all entries will be deleted.
 5. If you cancel, no entries will be deleted.
 
 Format:
-* `clear-ab` followed by `y` clears all contacts in address book.
-* `clear-wb` followed by `y` clears all weddings in wedding book.
+* `clear-ab` / `cab` followed by `y` clears all contacts in the address book.
+* `clear-wb` / `cwb` followed by `n` will not clear all weddings in the wedding book.
 
 <div style="display: flex; justify-content: space-between;">
     <div style="text-align: center; width: 50%;">
@@ -451,10 +463,6 @@ There is no need to save manually.
 * Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
-
-### Archiving Data Files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
