@@ -22,13 +22,13 @@ import seedu.address.model.person.PersonDescriptor;
 
 class JsonAdaptedAppointmentTest {
     private static final String VALID_APPOINTMENT_TYPE = "Consultation";
-    private static final String VALID_APPOINTMENT_DATE_TIME = "2024-10-15 10:30";
+    private static final String VALID_APPOINTMENT_DATE_TIME = "2024-10-15T10:30:00";
     private static final int VALID_PERSON_ID = 1;
     private static final String VALID_SICKNESS = "Flu";
     private static final String VALID_MEDICINE = "Paracetamol";
 
     private static final String INVALID_APPOINTMENT_TYPE = " ";
-    private static final String INVALID_DATE_TIME = "2024-15-10 10:30";
+    private static final String INVALID_DATE_TIME = "2024-15-10T10:30:00";
     private static final int INVALID_PERSON_ID = -1;
     private static final String INVALID_SICKNESS = "";
     private static final String INVALID_MEDICINE = "";
