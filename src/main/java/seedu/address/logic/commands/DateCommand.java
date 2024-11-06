@@ -71,6 +71,7 @@ public class DateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         // Filter persons based on provided criteria
