@@ -66,6 +66,13 @@ Action     | Format, Examples
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
 **Exit**   | `exit`
 
+<box type="warning" header="##### Notes">
+
+* The prefixes (e.g. `a/`, `s/` or `paid`) are case-insensitive, i.e. can use `a/`, `s/` or `pAId/` instead.
+
+* You should not use the prefixes in any other cases, for example, as a content of **ADDRESS**.
+</box>
+
 ## Features
 
 <box type="info">
