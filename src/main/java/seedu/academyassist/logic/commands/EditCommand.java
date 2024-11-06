@@ -40,7 +40,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the student id. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: Student ID (S followed by 5-digit number) "
+            + "Parameters: Student ID (S followed by a 5-digit number between 00001 and 99999) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
