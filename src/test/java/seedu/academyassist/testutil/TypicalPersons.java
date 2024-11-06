@@ -48,25 +48,25 @@ public class TypicalPersons {
             .withSubjects("English").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withAddress("michegan ave").withEmail("werner@example.com")
-            .withPhone("9482224").withIc("F2238567X").withYearGroup("2").withStudentId("S10005")
+            .withPhone("94822240").withIc("F2238567X").withYearGroup("2").withStudentId("S10005")
             .withSubjects("English").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withAddress("little tokyo").withEmail("lydia@example.com")
-            .withPhone("9482427").withIc("F1334567X").withYearGroup("4").withStudentId("S10006")
+            .withPhone("94824270").withIc("F1334567X").withYearGroup("4").withStudentId("S10006")
             .withSubjects("English").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withAddress("4th street").withEmail("anna@example.com")
-            .withPhone("9482442").withIc("F1294667X").withYearGroup("1").withStudentId("S10007")
+            .withPhone("76425642").withIc("F1294667X").withYearGroup("1").withStudentId("S10007")
             .withSubjects("Science").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withAddress("little india").withEmail("stefan@example.com")
-            .withPhone("8482424").withIc("F1236667X").withYearGroup("1").withStudentId("S10008")
+            .withPhone("84829494").withIc("F1236667X").withYearGroup("1").withStudentId("S10008")
             .withSubjects("English").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withAddress("chicago ave").withEmail("hans@example.com")
-            .withPhone("8482131").withIc("F1888567X").withYearGroup("1").withStudentId("S10009")
+            .withPhone("84852131").withIc("F1888567X").withYearGroup("1").withStudentId("S10009")
             .withSubjects("Science").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -91,7 +91,7 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
-        ab.setStudentCount(7);
+        ab.setIdGeneratedCount(7);
         return ab;
     }
 

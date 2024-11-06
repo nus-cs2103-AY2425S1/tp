@@ -48,7 +48,7 @@ public class SampleDataUtil {
         AcademyAssist sampleAa = new AcademyAssist();
         for (Person samplePerson : getSamplePersons()) {
             sampleAa.addPerson(samplePerson);
-            sampleAa.setStudentCount(6);
+            sampleAa.setIdGeneratedCount(6);
         }
         return sampleAa;
     }

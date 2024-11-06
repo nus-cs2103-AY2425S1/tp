@@ -210,12 +210,12 @@ public class AddSubjectCommandTest {
         }
 
         @Override
-        public void incrementStudentCount() {
+        public void incrementIdGeneratedCount() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public int getStudentCount() {
+        public int getIdGeneratedCount() {
             throw new AssertionError("This method should not be called.");
         }
 
