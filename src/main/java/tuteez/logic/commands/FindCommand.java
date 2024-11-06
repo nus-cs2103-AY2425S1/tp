@@ -24,14 +24,14 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names, addresses, tags or"
-            + "lessons contain any of the specified keywords (case-insensitive) and displays them as a list with index"
-            + "numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names, addresses, tags, "
+            + "lessons days contain any of the specified keywords (case-insensitive) or whose lesson times overlaps "
+            + "with the inputted time range.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME_KEYWORDS...] "
             + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS...] "
             + "[" + PREFIX_TAG + "TAG_KEYWORDS...] "
-            + "[" + PREFIX_LESSON_DAY + "LESSON_DAY_KEYWORDS...]"
+            + "[" + PREFIX_LESSON_DAY + "LESSON_DAY_KEYWORDS...] "
             + "[" + PREFIX_LESSON_TIME + "LESSON_TIME_KEYWORDS...]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice charlie " + PREFIX_ADDRESS + "jurong";
 
