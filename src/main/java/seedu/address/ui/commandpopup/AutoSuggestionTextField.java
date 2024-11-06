@@ -55,7 +55,7 @@ public class AutoSuggestionTextField extends TextField {
 
         suggestionPopup = new PopupControl();
         suggestionList = new ListView<>();
-        suggestionList.setFocusTraversable(true);
+        suggestionList.setFocusTraversable(false);
 
         // Set up the popup
         suggestionPopup.getScene().setRoot(suggestionList);
