@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -35,10 +34,9 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         // Verify nameKeywords are valid Name inputs
         List<String> nameKeywords = Arrays.asList(nameKeyArg.split("\\s+"));
-        if (!NameContainsKeywordsPredicate.areValidNameKeywords(nameKeywords)) {
-             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!nameKeyArg.isEmpty() && !NameContainsKeywordsPredicate.areValidNameKeywords(nameKeywords)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-
 
         Set<Tag> tagKeyWords = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
