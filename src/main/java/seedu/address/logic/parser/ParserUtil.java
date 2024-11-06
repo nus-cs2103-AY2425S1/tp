@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -109,12 +112,13 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
+
     /**
-     * Parses a {@code String allergy} into an {@code Allergy}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String allergy} into a {@code Allergy}.
+            * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code allergy} is invalid.
-     */
+             * @throws ParseException if the given {@code allergy} is invalid.
+            */
     public static Allergy parseAllergy(String allergy) throws ParseException {
         requireNonNull(allergy);
         String trimmedAllergy = allergy.trim();
@@ -122,6 +126,18 @@ public class ParserUtil {
             throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
         }
         return new Allergy(trimmedAllergy);
+    }
+
+    /**
+     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>}.
+     */
+    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
+        requireNonNull(allergies);
+        final Set<Allergy> allergySet = new HashSet<>();
+        for (String allergyName : allergies) {
+            allergySet.add(parseAllergy(allergyName));
+        }
+        return allergySet;
     }
 
     /**

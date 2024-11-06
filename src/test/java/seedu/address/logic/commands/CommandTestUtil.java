@@ -44,7 +44,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_MEDIUM_RISK = "Medium Risk";
     public static final String VALID_TAG_LOW_RISK = "Low Risk";
     public static final String VALID_ALLERGY_AMY = "Penicillin";
-    public static final String VALID_ALLERGY_BOB = "Soy, Fish";
+    public static final String VALID_ALLERGY1_BOB = "Soy";
+    public static final String VALID_ALLERGY2_BOB = "Fish";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -57,7 +58,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_LOW_RISK = " " + PREFIX_TAG + VALID_TAG_LOW_RISK;
     public static final String TAG_DESC_HIGH_RISK = " " + PREFIX_TAG + VALID_TAG_HIGH_RISK;
     public static final String ALLERGY_DESC_AMY = " " + PREFIX_ALLERGY + VALID_ALLERGY_AMY;
-    public static final String ALLERGY_DESC_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGY_BOB;
+    public static final String ALLERGY_DESC1_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGY1_BOB;
+    public static final String ALLERGY_DESC2_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGY2_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -76,10 +78,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_LOW_RISK).withAllergy(VALID_ALLERGY_AMY).build();
+                .withTags(VALID_TAG_LOW_RISK).withAllergies(VALID_ALLERGY_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
+                .withTags(VALID_TAG_HIGH_RISK).withAllergies(VALID_ALLERGY1_BOB, VALID_ALLERGY2_BOB).build();
     }
 
     /**

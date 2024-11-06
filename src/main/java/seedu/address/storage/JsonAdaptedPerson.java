@@ -1,5 +1,11 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,7 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final JsonAdaptedTag tag;
-    private final JsonAdaptedAllergy allergy;
+    private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
     private final JsonAdaptedDate date;
 
     /**
@@ -35,14 +41,16 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") JsonAdaptedTag tag,
-                             @JsonProperty("allergy") JsonAdaptedAllergy allergy,
+                             @JsonProperty("allergies") List<JsonAdaptedAllergy> allergies,
                              @JsonProperty("date") JsonAdaptedDate date) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tag = tag;
-        this.allergy = allergy;
+        if (allergies != null) {
+            this.allergies.addAll(allergies);
+        }
         this.date = date;
     }
 
@@ -55,7 +63,9 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         tag = new JsonAdaptedTag(source.getTag());
-        allergy = new JsonAdaptedAllergy(source.getAllergy());
+        allergies.addAll(source.getAllergies().stream()
+                .map(JsonAdaptedAllergy::new)
+                .collect(Collectors.toList()));
         date = new JsonAdaptedDate(source.getDate());
     }
 
@@ -66,7 +76,10 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         Tag personTag = null;
-        Allergy personAllergy = null;
+        final List<Allergy> personAllergies = new ArrayList<>();
+        for (JsonAdaptedAllergy allergy : allergies) {
+            personAllergies.add(allergy.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -104,16 +117,12 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
         final Tag finalPersonTag = personTag;
 
-        if (allergy == null) {
-            throw new IllegalValueException(Allergy.MESSAGE_FIELD_MISSING_FORMAT);
-        }
-        personAllergy = allergy.toModelType();
-        final Allergy modelAllergy = personAllergy;
+        final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
         final Date modelDate = date.toModelType();
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, finalPersonTag, modelAllergy, modelDate);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, finalPersonTag, modelAllergies, modelDate);
     }
 }

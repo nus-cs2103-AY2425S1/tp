@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -38,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ALLERGY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_TAG, PREFIX_ALLERGY)
+                PREFIX_EMAIL, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -49,9 +50,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
-        Allergy allergy = ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).get());
+        Set<Allergy> allergyList = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
         Date date = new Date(LocalDateTime.MIN); // add command does not allow adding an appointment date straight away
-        Person person = new Person(name, phone, email, address, tag, allergy, date);
+        Person person = new Person(name, phone, email, address, tag, allergyList, date);
         return new AddCommand(person);
     }
 

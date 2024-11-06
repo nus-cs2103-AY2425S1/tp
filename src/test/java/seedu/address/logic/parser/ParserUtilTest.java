@@ -1,11 +1,16 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "High Risk";
     private static final String VALID_TAG_2 = "Low Risk";
-    private static final String VALID_ALLERGY = "Fish, Soy";
+    private static final String VALID_ALLERGY_1 = "Fish";
+    private static final String VALID_ALLERGY_2 = "Peanut";
     private static final String VALID_DATE_1 = "26/5/2024 1900";
     private static final String VALID_DATE_2 = "None"; //remove date from a person
     private static final String INVALID_DATE_1 = "26/14/2024 1900";
@@ -188,15 +194,40 @@ public class ParserUtilTest {
 
     @Test
     public void parseAllergy_validValueWithoutWhitespace_returnsAllergy() throws Exception {
-        Allergy expectedAllergy = new Allergy(VALID_ALLERGY);
-        assertEquals(expectedAllergy, ParserUtil.parseAllergy(VALID_ALLERGY));
+        Allergy expectedAllergy = new Allergy(VALID_ALLERGY_1);
+        assertEquals(expectedAllergy, ParserUtil.parseAllergy(VALID_ALLERGY_1));
     }
 
     @Test
     public void parseAllergy_validValueWithWhitespace_returnsTrimmedAllergy() throws Exception {
-        String allergyWithWhitespace = WHITESPACE + VALID_ALLERGY + WHITESPACE;
-        Allergy expectedAllergy = new Allergy(VALID_ALLERGY);
+        String allergyWithWhitespace = WHITESPACE + VALID_ALLERGY_1 + WHITESPACE;
+        Allergy expectedAllergy = new Allergy(VALID_ALLERGY_1);
         assertEquals(expectedAllergy, ParserUtil.parseAllergy(allergyWithWhitespace));
+    }
+
+    @Test
+    public void parseAllergies_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAllergies(null));
+    }
+
+    @Test
+    public void parseAllergies_collectionWithInvalidAllergies_throwsParseException() {
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseAllergies(Arrays.asList(VALID_ALLERGY_1, INVALID_ALLERGY)));
+    }
+
+    @Test
+    public void parseAllergies_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseAllergies(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseAllergies_collectionWithValidAllergies_returnsAllergySet() throws Exception {
+        Set<Allergy> actualAllergySet = ParserUtil.parseAllergies(Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
+        Set<Allergy> expectedAllergySet = new HashSet<Allergy>(Arrays.asList(new Allergy(VALID_ALLERGY_1),
+                new Allergy(VALID_ALLERGY_2)));
+
+        assertEquals(expectedAllergySet, actualAllergySet);
     }
 
     @Test

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY1_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -58,7 +58,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different allergies -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergy(VALID_ALLERGY_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY1_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -70,8 +70,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", tag="
-                + editPersonDescriptor.getTag().orElse(null) + ", allergy="
-                + editPersonDescriptor.getAllergy().orElse(null) + "}";
+                + editPersonDescriptor.getTag().orElse(null) + ", allergies="
+                + editPersonDescriptor.getAllergies().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
