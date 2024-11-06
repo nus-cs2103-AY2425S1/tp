@@ -1,5 +1,6 @@
 package seedu.address.model.restaurant;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -36,6 +37,23 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+    }
+
+    @Test
+    public void testHashCodeConsistency() {
+        Phone phone1 = new Phone("999999");
+        Phone phone2 = new Phone("123456");
+        Phone phone3 = new Phone("123123");
+        Phone phone4 = new Phone("000000");
+        int hashCode1 = phone1.hashCode();
+        int hashCode2 = phone2.hashCode();
+        int hashCode3 = phone3.hashCode();
+        int hashCode4 = phone4.hashCode();
+
+        assertEquals(hashCode1, phone1.hashCode());
+        assertEquals(hashCode2, phone2.hashCode());
+        assertEquals(hashCode3, phone3.hashCode());
+        assertEquals(hashCode4, phone4.hashCode());
     }
 
     @Test

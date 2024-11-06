@@ -1,5 +1,6 @@
 package seedu.address.model.restaurant;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -64,6 +65,23 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+    }
+
+    @Test
+    public void testHashCodeConsistency() {
+        Email email1 = new Email("example@gmail.com");
+        Email email2 = new Email("test@gmail.com");
+        Email email3 = new Email("trail@gmail.com");
+        Email email4 = new Email("awesome@gmail.com");
+        int hashCode1 = email1.hashCode();
+        int hashCode2 = email2.hashCode();
+        int hashCode3 = email3.hashCode();
+        int hashCode4 = email4.hashCode();
+
+        assertEquals(hashCode1, email1.hashCode());
+        assertEquals(hashCode2, email2.hashCode());
+        assertEquals(hashCode3, email3.hashCode());
+        assertEquals(hashCode4, email4.hashCode());
     }
 
     @Test
