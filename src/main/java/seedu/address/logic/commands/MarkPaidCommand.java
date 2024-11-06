@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
 import java.util.List;
@@ -63,16 +63,17 @@ public class MarkPaidCommand extends Command {
 
         //List of participations to delete
         List<Participation> participationsToDelete = model.getParticipationList()
-                .filtered(participation -> participation.getStudent().equals(personToMarkPayment));
+                .filtered(participation -> participation.getStudent().equals(personToMarkPayment)).stream().toList();
 
-        if (participationsToDelete.size() < 1) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToMarkPayment.getName()));
+        if (participationsToDelete.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT,
+                    personToMarkPayment.getName()));
         }
 
-        for (int i = 0; i < participationsToDelete.size(); i++) {
+        for (Participation participation : participationsToDelete) {
             Participation updatedParticipation = new Participation(markedPerson,
-                    participationsToDelete.get(i).getTutorial(), participationsToDelete.get(i).getAttendanceList());
-            model.setParticipation(participationsToDelete.get(i), updatedParticipation);
+                    participation.getTutorial(), participation.getAttendanceList());
+            model.setParticipation(participation, updatedParticipation);
         }
 
         model.setPerson(personToMarkPayment, markedPerson);

@@ -1,10 +1,12 @@
 package seedu.address.ui;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 
 
@@ -16,6 +18,7 @@ public class TutorialCard extends UiPart<Region> {
 
     private static final String FXML = "TutorialCard.fxml";
     private List<Participation> participationList;
+    private final Logger logger = LogsCenter.getLogger(TutorialCard.class);
 
     @FXML
     private Label tutorial;
@@ -32,6 +35,9 @@ public class TutorialCard extends UiPart<Region> {
         this.tutorial.setText(tutorial);
         this.participationList = participationList;
         updateStudentCount();
+
+        logger.info("Successfully created TutorialCard for " + tutorial);
+
     }
 
     /**

@@ -38,14 +38,15 @@ A person can have any number of tags (including 0)
 ---
 ### **2. General Command Format**
 
-The commands follow the general format of `COMMAND INDEX PREFIX/...` .
+The commands in EduVault follow a general format of `COMMAND INDEX PREFIX/...` .
 
 * `COMMAND` refers to the command that you want to execute.
-* `INDEX` refers to the student data you want to alter, specified by the number prepended to the name of the student on the application.
+* `INDEX` refers to the student whose data you want to alter, specified by the number prepended to the name of the student on the application.
 * `PREFIX` specifies the type of data we want to alter.
-    * Refer to the prefix table below for the usage of each prefix.
+    * Refer to the [Prefix Table](#11-prefix-table) below for the usage of each prefix.
 
-<br></br>
+<br>
+
 #### Example
 ![GeneralCommandFormatExample](images/GeneralCommandFormatExample.png)
 
@@ -65,6 +66,37 @@ The commands in this section are used to add new records to the system, such as 
 - [Enrolling student into a tutorial](#33-enrolling-student-into-a-tutorial)
 
 #### **3.1 Adding a student**
+Command: `add`
+
+Usage: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pay/PAYMENT [t/TAG]…`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Fields
+
+* `NAME`: Should only contain alphanumeric characters and spaces and it should not be blank
+* `PHONE_NUMBER`: Should only contain numbers and must be at least 3 digits long
+* `EMAIL`: Should be of the format local-part@domain
+* `ADDRESS`: Can take in any values and should not be blank
+* `PAYMENT`: Refers to a number, either negative, zero or positive. This can be 0 when first creating the student to add to EduVault.
+
+</div>
+{% endraw %}
+
+Example usages
+
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/0`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Invalid usages
+* Student already exists in EduVault
+  * *Error message: This person already exists in the address book.*
+* Format errors, check [here](#12-format-errors).
+
+</div>
+{% endraw %}
 
 #### **3.2 Creating a new tutorial**
 
@@ -146,11 +178,103 @@ Invalid usages
 The commands in this section are used to view and retrieve records on the system, such as students, tutorials, and enrollment status.
 
 - [Listing all students](#41-listing-all-students)  
-4.2 Search
+- [Searching students](#42-searching-students)
 
 #### **4.1 Listing all students**
 
 Command: `list`
+
+<br>
+
+#### **4.2 Searching students**
+
+Search for students that match the condition specified by the given prefix.
+
+<div markdown="span" class="alert alert-success">:bulb:
+**Tip:**
+
+This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table)
+</div>
+
+
+Command:  `find`
+
+Usage: `find [n/NAME] [e/EMAIL] [p/PHONE] [a/ADDRESS] [pay/PAYMENT] [a/ATTENDANCE] [t/TAG] [tut/TUTORIAL_NAME]`
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
+</div>
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+Search is by partial matching for keyword(s) of prefixes `n/`, `e/`, `p/`, `a/`, `t/`.</div>
+
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Fields
+
+* `NAME:` Name of the student to search
+    * Search for multiple keywords is allowed, and students matching at least one keyword will be displayed.
+* `EMAIL:` Email of the student to search
+* `PHONE:` Phone number of the student to search
+* `ADDRESS`: Address of the student to search
+    * Search for multiple keywords is allowed, and students matching at least one keyword will be displayed.
+* `PAYMENT:` Search student based on the payment status (Paid/Unpaid)
+    * If keyword is `true`, it displays all students who has paid.
+    * If keyword is `false`, it displays all students who has not paid.
+* `ATTENDANCE:` Search student based on whether they attended any tutorials within a given period
+    * Keyword must be in the format of `dd/MM/yyyy:dd/MM/yyyy`, first date is the start date and the second date is the end date.
+    * First date must be before the second date.
+* `TAG:` Search based on the tag associated to the student
+    * Allows multiple uses of this prefix together in the command.
+
+* `TUTORIAL_NAME:` Name of the tutorial to search
+    * Search with multiple keywords is allowed, and students matching all keywords will be displayed.
+    * Allows multiple uses of this prefix together in the command.
+
+</div>
+{% endraw %}
+
+
+<div markdown="span" class="alert alert-success">:bulb:
+**Tip:**
+
+Prefixes can be chained to display more specific results. For instance, using `find n/Alex tut/Math t/ADHD` displays all students named “Alex”, in the “Math” tutorial class, and has a tag “ADHD”.
+</div>
+
+
+Example usages
+
+* `find t/ADHD t/scored_A a/Jurong West Ave 5`
+
+* `find p/9123 attend/07/01/2024:07/02/2024 pay/false`
+
+* `find t/ADHD e/a@example.com`
+
+* `find tut/physics tut/math n/Alex Goh`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Invalid usages
+
+* Entering multiple keywords for a prefix that only allows a single keyword
+
+    * *Error Message: At least one of the inputs…*
+
+* Entering only the prefix without providing any keywords
+
+    * *Error Message: Some inputs are missing\! Please…*
+
+* For `a/ATTENDANCE` field, entering the start date after the end date
+
+    * *Error Message: Start date must be before…*
+
+* More format errors, check [here](#12-format-errors).
+
+</div>
+{% endraw %}
+
 
 ---
 
@@ -160,10 +284,12 @@ The commands in this section are used edit records on the system, such as studen
 
 - [Editing student’s details](#51-editing-a-student)  
 - [Logging fees](#52-logging-fees-for-tutorial)  
-- [Marking payment](#53-marking-a-students-payment)  
-4.4 Marking attendance of student
-4.5 Marking attendance of tutorial  
-- [Unenroll a student from tutorial](#56-unenrolling-student-from-a-tutorial)
+- [Marking payment](#53-marking-a-students-payment)
+- [Marking attendance of student](#54-marking-attendance-of-a-student)
+- [Marking attendance of tutorial](#55-marking-attendance-of-a-tutorial)  
+- [Unmarking attendance of student](#56-unmarking-attendance-of-student)
+- [Unenroll a student from tutorial](#57-unenrolling-student-from-a-tutorial)
+
 #### **5.1 Editing a student**
 
 Edit the personal information of students within EduVault
@@ -172,15 +298,22 @@ Command: `edit`
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
+</div>
+<div markdown="span" class="alert alert-success">:bulb:
+**Tip:**
+
+This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table)
+</div>
+
 {% raw %}
 <div markdown="1" class="smaller-text">
 Fields:
 
 * `INDEX`: Index number shown in the displayed person list
     * Must be a positive integer 1, 2, 3, …​
-* `[ ]:` Fields wrapped in square brackets are optional
-    * At least one of the optional fields must be provided
-    * Existing values will be updated to the input values
 * `PAYMENT`: Updates the absolute value of a student’s overdue amount
 * `TAG:` Existing tag will be replaced by the new tag
     * Remove a student’s tag by typing  `t/` without specifying any tags
@@ -189,10 +322,6 @@ Fields:
 * `PAYMENT`: Field not editable within edit
 </div>
 {% endraw %}
-
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-More information about other prefixes can be found here
-</div>
 
 Example Usage:
 
@@ -282,7 +411,130 @@ Invalid usages
 </div>
 {% endraw %}
 
-#### **5.6 Unenrolling student from a tutorial**
+#### **5.4 Marking attendance of a student**
+
+Command: `mas`
+
+Usage: `mas INDEX tut/TUTORIAL attend/ATTENDANCE`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Fields
+
+* `INDEX`: Index number as shown in the displayed person list of the student to mark
+    * Must be a positive integer 1, 2, 3…
+* `TUTORIAL`: Name of the tutorial the student is taking
+* `ATTENDANCE`: Date to mark the attendance for
+    * Must be in format dd/MM/yyyy
+
+</div>
+{% endraw %}
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+If you want to mark the attendance of all students in a tutorial, 
+use the command mat [here](#55-marking-attendance-of-a-tutorial) instead.
+</div>
+
+Example usages
+
+* `mas 1 tut/Math attend/30/10/2024`
+* `mas 2 attend/10/10/2024 tut/Chemistry`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Invalid usages
+* Marking attendance of student who does not take specified tutorial
+    * *Error message: Student STUDENT_NAME does not take TUTORIAL tutorial*
+* Marking attendance of student who already has attendance marked for the corresponding week
+    * *Error message: Student STUDENT_NAME has attendance marked for the corresponding week of date ATTENDANCE*
+* Format errors, check [here](#12-format-errors)
+
+</div>
+{% endraw %}
+
+#### **5.5 Marking attendance of a tutorial**
+*Marks the attendance of all students enrolled in the tutorial for the specified date*
+
+Command: `mat`
+
+Usage: `mat tut/TUTORIAL attend/ATTENDANCE`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Fields
+
+* `TUTORIAL`: Name of the tutorial to mark the attendance for all students
+* `ATTENDANCE`: Date to mark the attendance for
+    * Must be in format dd/MM/yyyy
+
+</div>
+{% endraw %}
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+If at least one student does not have their attendance marked for the corresponding week, those students will 
+have their attendance marked while those students with corresponding weekly attendance will be skipped. 
+</div>
+
+Example usages
+
+* `mat tut/Math attend/30/10/2024`
+* `mat attend/10/10/2024 tut/Chemistry`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Invalid usages
+* Marking attendance of a tutorial with no students enrolled
+    * *Error message: No students are enrolled in TUTORIAL tutorial*
+* Marking attendance of a tutorial where all students already has attendance marked for the corresponding week
+    * *Error message: All students in TUTORIAL tutorial has attendance marked 
+    for the corresponding week of date ATTENDANCE*
+* Format errors, check [here](#12-format-errors)
+
+</div>
+{% endraw %}
+
+#### **5.6 Unmarking attendance of student**
+
+Command: `umas`
+
+Usage: `umas INDEX tut/TUTORIAL attend/ATTENDANCE`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Fields
+
+* `INDEX`: Index number as shown in the displayed person list of the student to unmark.
+  * Must be a positive integer 1, 2, 3…
+* `TUTORIAL`: Name of the tutorial the student is taking.
+* `ATTENDANCE`: Date to unmark the attendance for.
+  * Must be in format dd/MM/yyyy
+
+</div>
+{% endraw %}
+
+Example usages
+
+* `umas 1 tut/Math attend/30/10/2024`
+* `umas 2 attend/10/10/2024 tut/Chemistry`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Invalid usages
+
+* Unmarking attendance of student who does not take specified tutorial
+    * Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial
+* Format errors, check [here](#12-format-errors)
+
+</div>
+{% endraw %}
+
+#### **5.7 Unenrolling student from a tutorial**
 
 Command:  `unenroll`
 
@@ -417,7 +669,7 @@ Command: `help`
 
 Exits the program.
 
-Format: `exit`
+Command: `exit`
 
 ---
 
@@ -438,18 +690,204 @@ For reference, please refer to the Developer Guide for more details.
 
 ---
 
-### **11. Command summary**
+### **11. Prefix Table** 
+
+Prefixes are used whenever we want to alter the data in EduVault, such as adding, updating or deleting data. They are also used when we want to search for data on the student. Each prefix specifies what type of data we want to alter or search for, and the word(s) following each prefix specifies what to alter the data to or what to search for. The table below is a list of all prefixes that are used in our commands.
+
+<table style="width:100%">
+  <tr>
+    <th style="width:10%">Prefix</th>
+    <th style="width:60%">Prefix description and usage</th>
+    <th style="width:30%">Exception Cases</th>
+  </tr>
+
+  <!-- n/ prefix row -->
+
+  <tr>
+    <td rowspan="3">n/</td>
+    <td><u>Description</u><br>Specifies the <b>name</b> of the student.</td>
+    <td rowspan="3">For <code>find</code> command, keyword(s) for this prefix <b>need not</b> be alphanumeric, but it <b>must not</b> be blank.</td>
+  </tr>
+  <tr>
+    <td><u>Format</u><br>The keyword(s) following this prefix must be alphanumeric and cannot be blank. <br><br><i>Multiple keywords are allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  </tr>
+  <tr>
+    <td><u>Invalid Usage</u><br> Keyword(s) contain special characters or are blank.<br><br> <i>Error Message: Names should only contain alphanumeric characters...</i></td>
+  </tr>
+
+  <!-- p/ prefix row -->
+
+  <tr>
+    <td rowspan="3">p/</td>
+    <td><u>Description</u><br>Specifies the <b>phone number</b> of the student.</td>
+    <td rowspan="3">For <code>find</code> command, keyword(s) for this prefix <b>need not</b> be numbers, and can be less than 3 digits. However, it <b>must not</b> be blank.</td>
+  </tr>
+  <tr>
+    <td><u>Format</u><br>The keyword following this prefix must be numbers, and at least 3 digits.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  </tr>
+  <tr>
+    <td><u>Invalid Usage</u><br>Keyword(s) contain non-numeric characters or are less than 3 digits.<br><br><i>Error Message: Phone numbers should only contain numbers...</i></td>
+  </tr>
+
+ <!-- e/ prefix row -->
+
+  <tr>
+    <td rowspan="3">e/</td>
+    <td><u>Description</u><br>Specifies the <b>email</b> of the student.</td>
+    <td rowspan="3">For <code>find</code> command, the format constraints to the keyword does not apply. However, it <b>must not</b> be blank.</td>
+  </tr>
+  <tr>
+    <td><u>Format</u><br>The keyword following this prefix must be in the format of “...@domain.com”.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  </tr>
+  <tr>
+    <td><u>Invalid Usage</u><br>Keyword does not have the valid email format described above.<br><br><i>Error Message: Emails should be of the format...</i></td>
+  </tr>
+
+  <!-- a/ prefix row -->
+
+  <tr>
+    <td rowspan="3">a/</td>
+    <td><u>Description</u><br>Specifies the <b>address</b> of the student.</td>
+    <td rowspan="3">NIL</td>
+  </tr>
+  <tr>
+    <td><u>Format</u><br>The keyword(s) can be any input but cannot be blank.<br><br><i>Multiple keywords are allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  </tr>
+  <tr>
+    <td><u>Invalid Usage</u><br>Keyword(s) is blank.<br><br><i>Error Message: Addresses can take any values, and...</i></td>
+  </tr>
+
+ <!-- pay/ prefix row -->
+
+<tr>
+  <td rowspan="3">pay/</td>
+  <td><u>Description</u><br>Specifies the <b>amount</b> that the student pays or owes.</td>
+  <td rowspan="3">For <code>find</code> command, keyword(s) for this prefix <b>are restricted to only</b> <code>true</code> or <code>false</code>.</td>
+</tr>
+<tr>
+  <td><u>Format</u><br>The keyword provided after this prefix should be a number.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+</tr>
+<tr>
+  <td><u>Invalid Usage</u><br>Keyword provided is not a number.<br><br><i>Error Message: Payment should be an...</i></td>
+</tr>
+
+ <!-- attend/ prefix row -->
+
+<tr>
+  <td rowspan="3">attend/</td>
+  <td><u>Description</u><br>Specifies the <b>attendance date</b> that the student went for class.</td>
+  <td rowspan="3">For <code>find</code> command, keyword <b>must be</b> in the format of <code>dd/MM/yyyy:
+dd/MM/yyyy</code>
+  </td>
+</tr>
+<tr>
+  <td><u>Format</u><br>The keyword provided should be of the format <code>dd/MM/yyyy</code>.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+</tr>
+<tr>
+  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Attendance must be in date format...</i></td>
+</tr>
+
+ <!-- t/ prefix row -->
+
+<tr>
+  <td rowspan="3">t/</td>
+  <td><u>Description</u><br>Specifies the <b>tag</b> associated to the student.</td>
+  <td rowspan="3">
+    For <code>edit</code> command, keyword for this prefix <b>can be blank</b>.<br><br>
+    For <code>find</code> command, keyword for this prefix <b>need not</b> be alphanumeric, but it <b>must not</b> be blank.
+  </td>
+</tr>
+<tr>
+  <td><u>Format</u><br>The keyword provided should be alphanumeric with no spaces, and it cannot be blank.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are allowed.</i></td>
+</tr>
+<tr>
+  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Tag names should be...</i></td>
+</tr>
+
+
+ <!-- tut/ prefix row -->
+
+<tr>
+  <td rowspan="3">tut/</td>
+  <td><u>Description</u><br>Specifies the <b>tutorial</b> of the student.</td>
+  <td rowspan="3">
+    For <code>enroll</code> and <code>unenroll</code> commands, the keyword <b>need not</b> be alphanumeric, but <b>must not</b> be blank.<br><br>
+    For <code>find</code> command, <b>duplicate prefixes are allowed</b>.
+  </td>
+</tr>
+<tr>
+  <td><u>Format</u><br>The keyword provided should be alphanumeric and it cannot be blank. Spaces are allowed.<br><br><i>Multiple keywords are allowed.<br>Duplicate prefixes are not allowed.</i></td>
+</tr>
+<tr>
+  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Tutorial name should only contain...</i></td>
+</tr>
+
+
+</table>
+
 
 ---
 
 ### **12. Format Errors**
 
-| Error Message | Most Likely Cause |
-| :---- | :---- |
-| *Unknown Command….* | <ul><li>Command misspelled</li><li>Command not available in the current release</li></ul> |
-| *Invalid Command format…* | <ul><li>Command word is correct but the format entered is wrong</li> <ul><li>Index is missing, or is a negative number</li> <li>Prefix is missing or misspelled</li> <li>Unidentified inputs after the command word and before the first prefix</li></ul></ul>|
-| *The student’s index provided is invalid…* | <ul><li>Index provided is out of range for the current displayed list</li></ul> |
-| *Multiple values specified for the following single-valued field(s)...* | <ul><li>Duplicated prefix usage when it is not allowed</li></ul> |
+<table>
+    <thead>
+        <tr>
+            <th>Error Message</th>
+            <th>Most Likely Cause</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><em>Unknown Command….</em></td>
+            <td>
+                <ul>
+                    <li>Command misspelled</li>
+                    <li>Command not available in the current release</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>Invalid Command format…</em></td>
+            <td>
+                <ul>
+                    <li>Command word is correct but the format entered is wrong
+                        <ul>
+                            <li>Index is missing, or is a negative number</li>
+                            <li>Prefix is missing or misspelled</li>
+                            <li>Unidentified inputs after the command word and before the first prefix</li>
+                            <li>Keywords of the prefix are incorrect</li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>The student’s index provided is invalid…</em></td>
+            <td>
+                <ul>
+                    <li>Index provided is out of range for the current displayed list</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>Multiple values specified for the following single-valued field(s)...</em></td>
+            <td>
+                <ul>
+                    <li>Duplicated prefix usage when it is not allowed</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>At least one of the dates is not in the right format…</em></td>
+            <td>
+                <ul>
+                    <li>The date format used is incorrect</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 ---
 

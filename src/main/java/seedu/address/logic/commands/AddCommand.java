@@ -2,13 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,7 +31,6 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_PAYMENT + "PAYMENT "
-            + PREFIX_ATTENDANCE + "ATTENDANCE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -37,13 +38,12 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_PAYMENT + "100 "
-            + PREFIX_ATTENDANCE + "false "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in EduVault";
-
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
     private final Person toAdd;
 
     /**
@@ -56,6 +56,7 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info(" - Running execute(Model model) in " + AddCommand.class);
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
@@ -63,6 +64,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        logger.info(" - Successfully added person to model");
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
