@@ -14,15 +14,15 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `clientele+.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14A-3/tp/releases).
+2. Download the latest `ClientelePlus.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14A-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Clientele+.
+3. Copy the file to the folder you want to use as the _home folder_ for Clientele+.
 
-1.  Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clientele+.jar` command to run the application. <br>
+4.  Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ClientelePlus.jar` command to run the application. <br>
     A GUI similar to the below should appear in a few seconds
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
+5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all clients' contacts.
@@ -35,7 +35,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
