@@ -2,7 +2,9 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DESC_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DESC_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
@@ -30,6 +32,7 @@ import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDe
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
@@ -166,6 +169,32 @@ public class EditOrderCommandTest {
         Model expectedModel = model.createCopy();
         expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_THIRD),
                 getOrderByIndex(expectedModel, INDEX_FIRST));
+
+        assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_similarOrderUnfilteredList_warningGiven() {
+        Order firstOrder = getOrderByIndex(model, INDEX_FIRST);
+
+        // edits to something similar(but not identical) to the first order to the person's order list
+        String similarItemName = normalise(firstOrder.getItem().fullDescription);
+        Order similarOrder = new OrderBuilder(firstOrder).withItem(similarItemName).build();
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).withItem(similarItemName).build();
+
+        //ensures that it is not identical
+        assertNotEquals(firstOrder, similarOrder);
+
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_THIRD, descriptor);
+
+        String warningMessage = String.format(EditOrderCommand.MESSAGE_DUPLICATE_ORDER_WARNING,
+                similarOrder.getStatus().getValue());
+        String expectedMessage = warningMessage
+                + String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(similarOrder));
+
+        Model expectedModel = model.createCopy();
+        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_THIRD),
+                similarOrder.createCopy());
 
         assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
