@@ -502,3 +502,16 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+## **Appendix: Planned Enhancements**
+Team Size: 5
+1. **Make 'failed add' message more specific**: Currently, when an add command
+fails due to missing parameters,<br>
+`Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL o/ORGANIZATION [d/LAST SEEN] [t/TAG]... [pr/PRIORITY] [r/REMARK]
+Example: add n/John Doe p/98765432 e/johnd@example.com o/NUS d/23-09-2024 t/friends t/owesMoney pr/low r/likes apple `<br>
+is used as the error message. This can be lengthy and too general. Instead, a more specific message that pinpoints the
+exact error can be used. For instance `add n/Joe p/82828282 e/Joe@gmail.com pr/high r/internship supervisor` does not work 
+because there is a missing `organisation` field, an error like `missing organisation field` can be shown instead.
