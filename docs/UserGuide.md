@@ -101,10 +101,10 @@ in this user guide.
 
 <br>
 
-6. Type the command in the command box, which is indicated by `Enter command here...`. Press `Enter` to execute it. 
-    * E.g. Typing **`help`** and pressing `Enter` will open the help window.<br>
+6. Type the command in the command box, which is indicated by `Enter command here...`. Press `Enter` to execute it.<br>
+   _**Example:** Typing **`help`** and pressing `Enter` will open the help window._<br>
    
-   Some other examples of commands you can try:
+   Some other examples of commands you can enter:
    * `list person` : Lists all contacts.
    * `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering` : Adds a contact named `John Doe` to the Address Book.
    * `delete person 3` : Deletes the 3rd contact shown in the current list.
@@ -132,7 +132,7 @@ and clearing persons/appointments.
 
 <box type="tip" light>
 
-Here are some **key points** to keep in mind when using the commands:
+Here are some **key points** to keep in mind when you are using the commands:
 
 - You should supply **all** the fields (words in **`UPPER_CASE`**) that are needed for a command.<br>
   _**Example:** In `add person n/NAME`, **`NAME`** is a field which can be used as `add person n/John Doe`._
@@ -178,7 +178,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 ## Command Overview
 
-The following sections describe the various commands available in the DocTrack platform:
+The following sections describe the various commands you can use in the DocTrack application:
 
 - [Person Commands](#person-commands)
 - [Appointment Commands](#appointment-commands)
@@ -188,9 +188,22 @@ The following sections describe the various commands available in the DocTrack p
 
 ### Person Commands
 
-A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and 
-optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. 
-DocTrack allows you to interact with patient information through different commands, which can be seen below.
+A **person** is a patient with several fields. The fields and their corresponding prefixes are as follows:
+
+| Field            | Prefix | Optional | Multiple |
+|------------------|--------|----------|----------|
+| **Name**         | `n/`   | No       | No       |
+| **Phone number** | `p/`   | No       | No       |
+| **Email**        | `e/`   | No       | No       |
+| **Address**      | `a/`   | No       | No       |
+| **Status**       | `st/`  | No       | No       |
+| **Tag(s)**       | `t/`   | Yes      | Yes      |
+
+You can identify these patients uniquely by their **patient ID (PID)** for easy reference. 
+
+<br>
+
+ You can manage the patient information through different commands, which can be seen in the table below:
 
 | Action                                                      | Format                                                                                    | Examples                                                                                                       |
 |-------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
@@ -205,7 +218,7 @@ DocTrack allows you to interact with patient information through different comma
 
 ##### Adding a person: `add person`
 
-Adds a person to the address book.
+You can add a person to the address book.
 
 **Format**: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`
 
@@ -227,7 +240,7 @@ _**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 
 ##### Listing all persons : `list person`
 
-Shows a list of all persons in the address book.
+You can view a list of all persons in the address book.
 
 **Format**: `list person`
 
@@ -257,7 +270,7 @@ Edits an existing person in the address book.
 
 ##### Finding persons by name: `find person`
 
-Finds persons whose **names** contain any of the given keywords.
+You can find person(s) whose **names** contain any of the given keywords.
 
 **Format**: `find person KEYWORD [MORE_KEYWORDS]`
 
@@ -279,7 +292,7 @@ Finds persons whose **names** contain any of the given keywords.
 
 ##### Deleting a person : `delete person`
 
-Deletes the specified person from the address book.
+You can delete a specified person from the address book.
 
 **Format**: `delete person INDEX`
 
@@ -300,7 +313,7 @@ Deletes the specified person from the address book.
 
 ##### Clearing all persons : `clear person`
 
-Deletes all entries from the address book.
+You can delete all person entries from the address book.
 
 **Format**: `clear person`
 
@@ -319,9 +332,17 @@ Deletes all entries from the address book.
 
 ### Appointment Commands
 
-- An **appointment** is defined by several fields: an appointment type, appointment date and time, ID of the 
-  person associated with the appointment, sickness, and medicine.  
-- You can interact with appointments in DocTrack using the instructions below:
+An **appointment** is defined by several fields. The fields and their corresponding prefixes are as follows:
+
+| Field               | Prefix | Optional | Multiple |
+|---------------------|--------|----------|----------|
+| **Person ID**       | `i/`   | No       | No       |
+| **Appointment Type**| `ty/`  | No       | No       |
+| **Date and Time**   | `d/`   | No       | No       |
+| **Sickness**        | `s/`   | Yes      | No       |
+| **Medicine**        | `m/`   | Yes      | No       |
+
+You can manage the appointments through different commands, which can be seen in the table below:
 
 <br>
 
@@ -339,7 +360,7 @@ Deletes all entries from the address book.
 
 ##### Adding an appointment: `add appt`
 
-Adds an appointment to the DocTrack. 
+You can an appointment to DocTrack. 
 
 **Format**: `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`
 - The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
@@ -360,7 +381,7 @@ _**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 1
 
 ##### Listing all appointments : `list appt`
 
-Shows a list of all appointments in DocTrack.
+You can view a list of all appointments in DocTrack.
 
 **Format**: `list appt`
 
@@ -368,7 +389,7 @@ Shows a list of all appointments in DocTrack.
 
 ##### Editing an appointment : `edit appt`
 
-Edits an existing appointment in DocTrack.
+You can an existing appointment in DocTrack.
 
 **Format**: `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`
 
@@ -385,7 +406,7 @@ Edits an existing appointment in DocTrack.
 
 ##### Finding appointments by name and date: `find appt`
 
-Finds appointments whose person names and / or dates contain any of the given keywords.
+You can find appointments whose person names and / or dates contain any of the given keywords.
 
 **Format**: `find appt KEYWORD [MORE_KEYWORDS]`
 - Use the prefix `n/` to search for patient names.
@@ -402,7 +423,7 @@ Finds appointments whose person names and / or dates contain any of the given ke
 
 ##### Deleting an appointment : `delete appt`
 
-Deletes the specified appointment from DocTrack.
+You can delete a specified appointment from DocTrack.
 
 **Format**: `delete appt INDEX`
 
@@ -424,7 +445,7 @@ Deletes the specified appointment from DocTrack.
 
 ##### Clearing all appointments : `clear appt`
 
-Deletes all entries from the appointment book.
+You can delete all appointment entries from the appointment book.
 
 **Format**: `clear appt`
 
@@ -454,7 +475,7 @@ This action is irreversible. Ensure you have a backup of the appointment data be
 
 ##### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+You will be able to view a help window that directs you to this user guide.
 
 **Format**: `help`
 
@@ -464,7 +485,7 @@ Shows a message explaining how to access the help page.
 
 ##### Exiting the program : `exit`
 
-Exits the program.
+You will be able to exit the DocTrack application. 
 
 **Format**: `exit`
 
@@ -472,7 +493,8 @@ Exits the program.
 
 ##### Saving the data
 
-AddressBook and AppointmentBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The data of the patients and appointments are saved in the hard disk automatically after any command that changes the data. You do not need to save them manually.
+- For more information on how the data is stored, refer to the [FAQ](#faq) section.
 
 <br>
 
