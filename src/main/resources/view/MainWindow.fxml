@@ -37,17 +37,21 @@
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
+          <SplitPane fx:id="resultBoxPersonGoodsSplitPanePlaceholder" VBox.vgrow="ALWAYS">
+            <VBox>
+              <SplitPane fx:id="personGoodsSplitPanePlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <VBox VBox.vgrow="ALWAYS">
+              <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                         minHeight="100">
+                <padding>
+                  <Insets top="5" right="10" bottom="5" left="10" />
+                </padding>
+              </StackPane>
 
-          <SplitPane fx:id="personGoodsSplitPanePlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+          </SplitPane>
         </VBox>
-
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
