@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.tag.Tag.isValidTagName;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,57 +31,74 @@ public class TagCommandParser implements Parser<TagCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        Set<Index> indexSet = new HashSet<>();
-        Set<Tag> tagSet = new HashSet<>();
         List<String> tagStrings = argMultimap.getAllValues(PREFIX_TAG);
         if (tagStrings.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        try {
-            List<String> indexStrings = List.of(argMultimap.getPreamble().trim().split("\\s+"));
-            boolean isValidIndexes = indexStrings.size() != 1 || !indexStrings.get(0).isEmpty();
-            if (!isValidIndexes) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
-            }
-            checkIndexLength(indexStrings);
+        Set<Index> indexes = parseIndexes(argMultimap.getPreamble());
+        Set<Tag> tags = parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            for (String indexStr : indexStrings) {
-                if (!indexStr.isEmpty()) {
-                    checkIndex(indexStr);
-                    indexSet.add(ParserUtil.parseIndex(indexStr.trim()));
-                }
-            }
-        } catch (NumberFormatException e) {
+        return new TagCommand(new ArrayList<>(indexes), tags);
+    }
+
+    private Set<Index> parseIndexes(String input) throws ParseException {
+        Set<Index> indexSet = new HashSet<>();
+        List<String> indexStrs = List.of(input.trim().split("\\s+"));
+        checkIndexesValidity(indexStrs);
+        checkIndexLength(indexStrs);
+        addIndexToSet(indexStrs, indexSet);
+
+        return indexSet;
+    }
+
+    private Set<Tag> parseTags(List<String> tagStrings) throws ParseException {
+        Set<Tag> tags = new HashSet<>();
+        for (String tagString : tagStrings) {
+            String trimmedTag = tagString.trim().toLowerCase();
+            validateTagName(trimmedTag);
+            tags.add(new Tag(trimmedTag));
+        }
+        return tags;
+    }
+
+    /**
+     * Validates the given tag name to ensure it adheres to the tag naming conventions.
+     *
+     * @param tagName The name of the tag to validate.
+     * @throws ParseException If the provided tag name is invalid.
+     */
+    private void validateTagName(String tagName) throws ParseException {
+        if (!isValidTagName(tagName)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
-
-        for (String tagString : tagStrings) {
-            tagString = tagString.trim().toLowerCase();
-            boolean isEmpty = tagString.isEmpty();
-            boolean isTooLong = tagString.length() > Tag.MAX_CHARACTER_LENGTH;
-            if (isEmpty) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
-            } else if (isTooLong) {
-                throw new ParseException(String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED,
-                        Tag.MAX_CHARACTER_LENGTH));
-            }
-            tagSet.add(new Tag(tagString));
-        }
-
-        return new TagCommand(new ArrayList<>(indexSet), tagSet);
     }
 
     private void checkIndex(String indexStr) throws ParseException {
         if (!indexStr.matches(VALIDATION_REGEX)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private void checkIndexesValidity(List<String> indexStrs) throws ParseException {
+        boolean isValidIndexes = indexStrs.size() != 1 || !indexStrs.get(0).isEmpty();
+        if (!isValidIndexes) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
     }
 
     private void checkIndexLength(List<String> indexStrings) throws ParseException {
         if (indexStrings.size() > Index.MAX_INDEXES) {
             throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_INDEXES, Index.MAX_INDEXES));
+        }
+    }
+
+    private void addIndexToSet(List<String> indexStrs, Set<Index> indexSet) throws ParseException {
+        for (String indexStr : indexStrs) {
+            if (!indexStr.isEmpty()) {
+                checkIndex(indexStr);
+                indexSet.add(ParserUtil.parseIndex(indexStr));
+            }
         }
     }
 }

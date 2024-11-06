@@ -28,8 +28,9 @@ public class UntagCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Untags the guest(s) identified by the index number(s) used in the displayed guest list "
                 + "with the predefined tag(s). \n"
-            + "Parameters: INDEX... (must be positive integer(s))\n"
-            + "[" + PREFIX_TAG + "TAG]... (must be a tag on the guest)\n"
+            + "Parameters: INDEX... (must be within the minimum and maximum list indexes shown)\n"
+            + "[" + PREFIX_TAG + "TAG]...  Maximum of 50 alphanumeric characters, spaces, parenthesis"
+            + " and apostrophes per tag. (must be a tag on the guest)\n"
             + "Example: " + COMMAND_WORD + " 1 2 "
             + PREFIX_TAG + "bride's side" + " "
             + PREFIX_TAG + "groom's side";
