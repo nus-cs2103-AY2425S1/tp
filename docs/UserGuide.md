@@ -59,13 +59,53 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 ---
+
+## Command table of content
+
+### Supplier Commands
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**[Add](#adding-a-supplier-add--s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**[Delete](#deleting-a-supplier--delete--s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**[List](#listing-all-suppliers-list--s)**   | `list -s`
+**[Mark](#mark-a-supplier-with-a-status--mark--s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
+**[Find](#find-a-supplier-find--s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
+
+
+### Delivery Commands
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/litres/ml/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**Delete** | `delete -d INDEX`<br> e.g., `delete -d 3`
+**Mark**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+
+
+### General Commands
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**List**   | `list`
+**Help**   | `help`
+**Exit**   | `exit`
+
+
+---
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
+
+Format: `help`
+
+##### Here's how it would look like in the app:
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+### Viewing all deliveries and suppliers : `list`
+
+Lists all suppliers and deliveries in the VendorVault
+
+Format: `list`
 
 ---
 
@@ -85,9 +125,10 @@ Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]�
 <box type="tip" seamless>
 
 **Warnings**:
-- A spacing between `add` and `-s` is compulsory
+- At least on space between `add` and `-s` is compulsory
 - Duplicate supplier will not be added again
-  </box>
+    - A supplier is considered duplicate if they have the same NAME and COMPANY
+</box>
 
 Examples:
 * `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
@@ -100,19 +141,18 @@ Expected output:
 #### Here's how it would look like in the app:
 ![add Command](images/addSupplierCommand.png)
 
-### Listing all suppliers : `list`
+### Listing all suppliers: `list -s`
 
-Shows a list of all suppliers in the address book.
+Shows a list of all suppliers in the VendorVault. (The delivery list will not be affected)
 
-Format: `list`
+Format: `list -s`
 
 ### Deleting a supplier : `delete -s`
 
 The `delete -s` command is used to delete a supplier from the list of suppliers in VendorVault.
 
-#### Command Format:
-`delete -s INDEX`
 
+Format: `delete -s INDEX`
 - `INDEX`: The index of the supplier in the list.
 
 #### Example
@@ -125,16 +165,13 @@ A success message will be displayed if the supplier is successfully deleted.
 #### Here's how it would look like in the app:
 ![delete command](images/deleteSupplierCommand.png)
 
-### Mark a supplier status : `mark -s`
+### Mark a supplier with a status : `mark -s`
 
 The `mark` command is used to mark a supplier as either **active** or **inactive**
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
 
-#### Command Format:
-`mark -s <supplier_index> <status>`
+Format: `mark -s <supplier_index> <status>`
 - `<supplier_index>`: The index of the supplier in the list.
-
-
 - `<status>`: Either `active` or `inactive` to indicate the supplier's status.
 
 #### Example
@@ -146,6 +183,32 @@ A success message will be displayed if the supplier is successfully marked as ac
 
 #### Here's how it would look like in the app:
 ![mark command](images/markSupplierCommand.png)
+
+### Find a supplier: `find -s`
+
+The `find -s` command is used to find a supplier in VendorVault. 
+This helps you find suppliers based on keyword search.
+
+Format: `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
+
+<box type="tip" seamless>
+
+**Warnings**:
+- At least one prefix and parameter must be given
+- No duplicate prefix can be used
+- Find result(s) will contain/satisfy all the given parameters
+- Find feature is case-insensitive
+</box>
+
+
+#### Example
+To find the supplier whose name contains "link" and company contains "NU":
+
+    find -s n/link com/NU
+
+
+#### Here's how it would look like in the app:
+![find command](images/findSupplierCommand.png)
 
 ---
 
@@ -179,6 +242,12 @@ Expected output:
 
 #### Here's how it would look like in the app:
 ![add delivery command](images/addDeliveryCommand.png)
+
+### Listing all deliveries: `list -d`
+
+Shows a list of all supplier in the VendorVault. (The supplier list will not be affected)
+
+Format: `list -d`
 
 ### Marking a delivery : `mark -d`
 
@@ -262,31 +331,5 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-### Supplier Commands
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**Delete** | `delete -s INDEX`<br> e.g., `delete -s 3`
-**Mark**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
-
-
-### Delivery Commands
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/litres/ml/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-**Delete** | `delete -d INDEX`<br> e.g., `delete -d 3`
-**Mark**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
-
-
-### General Commands
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**List**   | `list`
-**Help**   | `help`
 
 [Back to Top](#vendor-vault-user-guide)
