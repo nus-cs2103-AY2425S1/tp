@@ -19,7 +19,8 @@ You can reach us at the email `cs2103t-w13-3@outlook.com`
 [[github](https://github.com/t-leongchuan)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: UI
 
 ### Ze Rui
 
@@ -28,7 +29,8 @@ You can reach us at the email `cs2103t-w13-3@outlook.com`
 [[github](https://github.com/slidings)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Data
 
 ### Lee Zhi Yi
 
