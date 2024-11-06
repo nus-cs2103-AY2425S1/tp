@@ -28,6 +28,7 @@ import seedu.address.model.tag.Tag;
  */
 public class RemoveGradeCommand extends Command {
     public static final String COMMAND_WORD = "removeGrade";
+    public static final String COMMAND_WORD_LOWER_CASE = "removegrade";
     public static final String MESSAGE_USAGE =
             COMMAND_WORD
                     + ": Removes a grade of an assignment from the person.\n"
