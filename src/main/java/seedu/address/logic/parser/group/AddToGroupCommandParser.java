@@ -6,7 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERS;
 import static seedu.address.logic.parser.ParserUtil.parseMembers;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.group.AddToGroupCommand;
@@ -20,8 +23,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * {@code AddToGroupCommand} with the trimmed argument.
  */
 public class AddToGroupCommandParser implements Parser<AddToGroupCommand> {
-    public static final String MEMBER_MESSAGE_CONSTRAINTS = "The members should be integer indices from "
+    public static final String MEMBER_MESSAGE_CONSTRAINTS = "The members should be positive integer indices from "
             + "the latest shown list.";
+
+    public static final String MEMBER_MESSAGE_DUPLICATES = "There should not be duplicated indices:\n";
+
+    private static Set<Index> findDuplicates(List<Index> members) {
+        return members.stream()
+                .filter(index -> Collections.frequency(members, index) > 1)
+                .collect(Collectors.toSet());
+    }
 
     @Override
     public AddToGroupCommand parse(String args) throws ParseException {
@@ -42,6 +53,14 @@ public class AddToGroupCommandParser implements Parser<AddToGroupCommand> {
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToGroupCommand.MESSAGE_USAGE),
                     e);
+        }
+        Set<Index> duplicates = findDuplicates(members);
+        if (!duplicates.isEmpty()) {
+            String duplicatesAsString = duplicates.stream()
+                    .map(Index::getOneBased)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(" "));
+            throw new ParseException(MEMBER_MESSAGE_DUPLICATES + duplicatesAsString);
         }
         return new AddToGroupCommand(groupName, members);
     }
