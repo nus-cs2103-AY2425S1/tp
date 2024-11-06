@@ -2,6 +2,7 @@ package seedu.sellsavvy.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -89,6 +90,14 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if the customer's name is similar to other given customer's name.
+     * Two customers' names are considered similar if they are the same without considering space and casing.
+     */
+    public boolean isSimilarTo(Person otherPerson) {
+        return normalise(this.name.fullName).equals(normalise(otherPerson.name.fullName));
     }
 
     /**

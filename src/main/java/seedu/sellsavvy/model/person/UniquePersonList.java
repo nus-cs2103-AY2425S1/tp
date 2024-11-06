@@ -39,6 +39,15 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if there is a different customer
+     * with the similar name as the given {@code Person} exists in the {@code UniquePersonList}.
+     */
+    public boolean hasSimilarPerson(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(person -> toCheck.isSimilarTo(person) && person != toCheck);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

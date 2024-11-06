@@ -58,6 +58,9 @@ public class EditPersonCommand extends Command {
     public static final String MESSAGE_SIMILAR_TAGS_WARNING = "Note: "
             + "This customer has 2 or more similar tags after editing tags, "
             + "verify if this is a mistake.\n";
+    public static final String MESSAGE_SIMILAR_NAME_WARNING = "Note: "
+            + "A person with similar name already exists in the address book., "
+            + "verify if this is a mistake.\n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -97,7 +100,10 @@ public class EditPersonCommand extends Command {
             model.updateSelectedPerson(editedPerson);
         }
 
-        String feedbackToUser = editedPerson.hasSimilarTags() && editPersonDescriptor.isTagsEdited()
+        String feedbackToUser = model.hasSimilarPerson(editedPerson)
+                ? MESSAGE_SIMILAR_NAME_WARNING
+                : "";
+        feedbackToUser += editedPerson.hasSimilarTags() && editPersonDescriptor.isTagsEdited()
                 ? MESSAGE_SIMILAR_TAGS_WARNING
                 : "";
 

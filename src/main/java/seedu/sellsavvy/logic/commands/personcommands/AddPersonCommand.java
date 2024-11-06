@@ -43,6 +43,9 @@ public class AddPersonCommand extends Command {
     public static final String MESSAGE_SIMILAR_TAGS_WARNING = "Note: "
             + "This customer has 2 or more similar tags, "
             + "verify if this is a mistake.\n";
+    public static final String MESSAGE_SIMILAR_NAME_WARNING = "Note: "
+            + "A person with similar name already exists in the address book., "
+            + "verify if this is a mistake.\n";
 
     private final Person toAdd;
 
@@ -62,7 +65,10 @@ public class AddPersonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        String feedbackToUser = toAdd.hasSimilarTags()
+        String feedbackToUser = model.hasSimilarPerson(toAdd)
+                ? MESSAGE_SIMILAR_NAME_WARNING
+                : "";
+        feedbackToUser += toAdd.hasSimilarTags()
                 ? MESSAGE_SIMILAR_TAGS_WARNING
                 : "";
 
