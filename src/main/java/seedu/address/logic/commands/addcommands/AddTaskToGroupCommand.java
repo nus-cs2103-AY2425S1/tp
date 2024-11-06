@@ -85,10 +85,12 @@ public class AddTaskToGroupCommand extends Command {
 
         // create a stream consisting of all groups which are entered more than once by the user
         Stream<GroupName> checkForDuplicates = groups.stream().filter(x -> Collections.frequency(groups, x) > 1)
+                .filter(y -> model.hasGroup(new Group(y)))
                 .distinct();
 
         // count the number of duplicated groups entered
         long numDuplicates = groups.stream().filter(x -> Collections.frequency(groups, x) > 1)
+                .filter(y -> model.hasGroup(new Group(y)))
                 .distinct()
                 .count();
 
