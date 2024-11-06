@@ -493,8 +493,8 @@ You will be able to exit the DocTrack application.
 
 ##### Saving the data
 
-The data of the patients and appointments are saved in the hard disk automatically after any command that changes the data. You do not need to save them manually.
-- For more information on how the data is stored, refer to the [FAQ](#faq) section.
+The data of the patients and appointments are saved in the hard disk automatically after you run any command that changes the data. You do not need to save them manually.
+- For more information on how the data is stored, you can refer to the [FAQ](#faq) section.
 
 <br>
 
@@ -506,9 +506,10 @@ For advanced users, feel free to update patient and appointment data directly by
 
 **Caution:**
 
-- If your changes to the data file makes its format invalid, AddressBook will discard all data and start 
-with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-- Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+- If your changes to the data file makes its format invalid, DocTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended that you have a backup of the file before 
+  editing it.<br>
+- Furthermore, certain edits can cause DocTrack to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, you should edit the data file only if you are confident that you 
+  can update it correctly.
 </box>
 
 <br>
@@ -520,7 +521,7 @@ with an empty data file at the next run. Hence, it is recommended to take a back
 ## FAQ
 
 **Q**: How is my data stored?<br>
-**A**: The data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, while the appointments are stored in the `appointmentbook.json` file.
+**A**: Your data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, while the appointments are stored in the `appointmentbook.json` file.
 Examples:
 
 <img src="images/json/addressbook.png" alt="Address Book JSON" width="420">
@@ -532,12 +533,17 @@ Examples:
 
 **Q**: How do I transfer my data (in the `addressbook.json` and `appointmentbook.json` files) to another 
 computer?<br>
-**A**: [Install the DocTrack app](#quick-start) in the other computer. When you run it, it creates empty [.json](https://www.json.org/json-en.html) files in the `data` folder. Replace these empty files with the `addressbook.json` and `appointmentbook.json` files from your previous computer.
+**A**: 
+1. Save the `addressbook.json` and `appointmentbook.json` files from the `data` folder in your current computer.
+2. [Install the DocTrack app](#quick-start) in the other computer. 
+3. When you run DocTrack, it creates empty [.json](https://www.json.org/json-en.html) files in the `data` 
+   folder. 
+4. Replace these empty files with the `addressbook.json` and `appointmentbook.json` files you saved from your previous computer.
 
 <br>
 
 **Q**: Can I access DocTrack without internet connection?<br>
-**A**: Yes, DocTrack is a desktop application that can be run without an internet connection.
+**A**: Yes, You can run DocTrack without an internet connection.
 
 <br>
 
