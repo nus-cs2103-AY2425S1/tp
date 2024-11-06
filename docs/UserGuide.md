@@ -264,6 +264,16 @@ Examples of commands tracked by undo:
 - `edit`
 - `pin`
 
+### Redoing a previously executed undo command: `undo`
+
+Redos the previous undo command that was executed.
+
+Format: `redo`
+
+- The redo feature saves the **5 most recent executed undo commands**.
+- The redo feature only tracks changed made by the undo command
+- The redp feature will clear the focus person panel upon execution.
+
 ### Exporting the contact list : `export`
 
 Exports the contacts in the contact list into the specified file type. The file will be named bizbook.&lt;file extension&gt; and will be located in a folder named exports.
@@ -339,6 +349,7 @@ _Details coming soon ..._
 | **Pin**      | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
 | **Unpin**    | `unpin INDEX` <br> e.g. `unpin 1`                                                                                                                                     |
 | **Undo**     | `undo`                                                                                                                                                                |
+| **Redo**     | `redo`                                                                                                                                                                |
 | **Export**   | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Help**     | `help`                                                                                                                                                                |
