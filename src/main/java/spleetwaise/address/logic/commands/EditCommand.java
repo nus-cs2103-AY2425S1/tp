@@ -31,7 +31,6 @@ import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.util.CollectionUtil;
 import spleetwaise.commons.util.ToStringBuilder;
-import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
