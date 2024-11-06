@@ -18,16 +18,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.EcName;
-import seedu.address.model.person.EcNumber;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonPredicate;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.RegisterNumber;
-import seedu.address.model.person.Sex;
-import seedu.address.model.person.StudentClass;
 
 /**
  * Parses input arguments and creates a new FilterCommand object.
@@ -62,7 +53,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 names.add(ParserUtil.parseName(rawName).toString());
             } catch (ParseException e) {
-                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 
@@ -73,7 +64,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 phones.add(ParserUtil.parsePhone(rawPhone).toString());
             } catch (ParseException e) {
-                throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 
@@ -84,7 +75,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 emails.add(ParserUtil.parseEmail(rawEmail).toString());
             } catch (ParseException e) {
-                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 
@@ -95,7 +86,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 addresses.add(ParserUtil.parseAddress(rawAddress).toString());
             } catch (ParseException e) {
-                throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 
@@ -106,7 +97,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 registerNumbers.add(ParserUtil.parseRegisterNumber(rawRegisterNumber).toString());
             } catch (ParseException e) {
-                throw new ParseException(RegisterNumber.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 
@@ -117,7 +108,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 sexes.add(ParserUtil.parseSex(rawSex).toString());
             } catch (ParseException e) {
-                throw new ParseException(Sex.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 
@@ -128,7 +119,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 classes.add(ParserUtil.parseStudentClass(rawClass).toString());
             } catch (ParseException e) {
-                throw new ParseException(StudentClass.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 
@@ -139,7 +130,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 ecNames.add(ParserUtil.parseEcName(rawEcName).toString());
             } catch (ParseException e) {
-                throw new ParseException(EcName.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 
@@ -150,7 +141,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 ecNumbers.add(ParserUtil.parseEcNumber(rawEcNumber).toString());
             } catch (ParseException e) {
-                throw new ParseException(EcNumber.MESSAGE_CONSTRAINTS);
+                throw new ParseException(e.getMessage(), e);
             }
         }
 

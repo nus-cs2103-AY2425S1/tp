@@ -125,10 +125,16 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Similar for emergency contact names and addresses
-* As for phone numbers, register numbers and class, the entire number must be provided in the command to filter
-* Multiple predicates can be provided, for example, in terms of multiple names or multiple attributes.
-  e.g. both `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will return both Alex's and Bernice's details
-  e.g. `filter s/F p/99999999` will return a female student with the phone number 99999999
+* As for phone numbers and emergency phone numbers, the entire number does not have to be provided to filter. 
+  e.g. `99` will return `99999999`, `99278888`
+* As for register numbers and class, the entire number or class name must be provided in the command to filter
+* For emergency contact names and numbers, if a student does not have existing values in these fields, filtering for those with no emergency contact names or numbers using `filter en/` or `filter ep/` will not return results.
+* Support for Multiple Predicates: The filter command allows users to specify multiple values for a single attribute (e.g.multiple names) or combine multiple attributes for more refined filtering. 
+  e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will both display details for Alex and Bernice.
+  e.g. `filter s/F p/99999999` will display details of a female student with the phone number 99999999.
+* Special Considerations for Address Filtering: Unlike other fields, addresses with multiple words and spaces (e.g.123 Geylang Street) require careful handling in filters. 
+  * Filtering multiple addresses in one command works best for single-word addresses (e.g. `filter a/Geylang a/Lorong`).
+  * For addresses with spaces or longer phrases, apply filters one address at a time, such as `filter a/20 Geylang Road` followed by `filter a/30 Lorong Street`.
 * When multiple predicates are filtered e.g. `filter s/F p/99999999`, an `AND` search is run to return the student with all of the attributes mentioned
 * When only one predicate is used but multiple values are provided e.g. `filter n/Alex Bernice`, an 'OR' search is run to return the students who are either Alex or Bernice.
 * When multiple predicates and multiple values are to be filtered, both an `OR` and an`AND` search is run:
@@ -139,6 +145,8 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
   * e.g. `filter n/Alex Bernice p/99999999 92443567 88888888`, only Alex and Bernice are returned.
   * e.g. `filter n/Alex Bernice Christine p/99999999 92443567 00000000`, only Alex and Bernice are returned, as depicted in the image below.
   ![Filter1 - Failure.png](images%2FFilter1%20-%20Failure.png)
+* All attribute values will be validated to check if the format is correct, otherwise an error message will be displayed to show the correct format.
+  * e.g. `filter p/hello` will display an error message stating that phone numbers can only contain numbers.
 
 Examples:
 * `filter n/John` returns `john` and `John Doe`
@@ -179,6 +187,7 @@ Format: `addEcName INDEX en/[ECNAME]`
 Examples:
 * `addEcName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person in the list.
 * `addEcName 2 en/` to delete the emergency contact's name from the 2nd person in the list.
+* `addEcName 1 en/Jack Doe` to update a prior emergency contact's name "John Doe" of the 1st person in the list to "Jack Doe"
 
 ### Adding an Emergency contact's number : `addEcNumber`
 
@@ -198,6 +207,7 @@ Format: `addEcNumber INDEX [ep/ECNUMBER]`
 Examples:
 * `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
 * `addEcNumber 2 ep/` to delete the emergency contact's number from the 2nd person in the list.
+* `addEcNumber 1 ep/87654321` to update the emergency contact's number 87654321 to the 1st person in the list.
 
 ### Adding Attendance : `addAttendance`
 

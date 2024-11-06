@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AbsentDate;
@@ -35,24 +36,26 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ABSENT_DATE, PREFIX_ABSENT_REASON);
 
-        if (!argMultimap.getValue(PREFIX_ABSENT_DATE).isPresent()) {
-            logger.log(Level.WARNING, "Prefix for absent date is missing.");
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAttendanceCommand.MESSAGE_USAGE));
-        }
-
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        AbsentDate absentDate = ParserUtil.parseAbsentDate(argMultimap.getValue(PREFIX_ABSENT_DATE).get());
-        AbsentReason absentReason;
-        if (argMultimap.getValue(PREFIX_ABSENT_REASON).isPresent()) {
-            absentReason = ParserUtil.parseAbsentReason(argMultimap.getValue(PREFIX_ABSENT_REASON).get());
-        } else {
-            logger.log(Level.WARNING, "Prefix for absent reason is missing.");
+        if (!argMultimap.getValue(PREFIX_ABSENT_DATE).isPresent()
+                || !argMultimap.getValue(PREFIX_ABSENT_REASON).isPresent()) {
+            logger.log(Level.WARNING, "Prefix for absent date or absent reason is missing.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAttendanceCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ABSENT_DATE, PREFIX_ABSENT_REASON);
+
+        Index index;
+        AbsentDate absentDate;
+        AbsentReason absentReason;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            absentDate = ParserUtil.parseAbsentDate(argMultimap.getValue(PREFIX_ABSENT_DATE).get());
+            absentReason = ParserUtil.parseAbsentReason(argMultimap.getValue(PREFIX_ABSENT_REASON).get());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
 
         logger.log(Level.INFO, "parsed addAttendance command without exception");
 

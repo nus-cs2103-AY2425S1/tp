@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddSubmissionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.submission.Submission;
@@ -35,7 +36,13 @@ public class AddSubmissionCommandParser implements Parser<AddSubmissionCommand> 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBMISSION);
 
-        Submission submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
+        Submission submission;
+
+        try {
+            submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
 
         logger.log(Level.INFO, "Parsed AddSubmissionCommand successfully.");
         return new AddSubmissionCommand(submission);
