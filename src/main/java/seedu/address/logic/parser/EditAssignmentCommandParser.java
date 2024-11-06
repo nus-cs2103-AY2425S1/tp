@@ -26,7 +26,8 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         ArgumentMultimap argumentMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
                         PREFIX_ASSIGNMENT_NAME, PREFIX_ASSIGNMENT_MAX_SCORE);
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX)) {
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX)
+                || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditAssignmentCommand.MESSAGE_USAGE));
         }
