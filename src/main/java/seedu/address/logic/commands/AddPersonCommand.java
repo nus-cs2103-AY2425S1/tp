@@ -119,7 +119,7 @@ public class AddPersonCommand extends AddCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("toAdd", personDescriptor)
+            .add("personDescriptor", personDescriptor)
             .toString();
     }
 }

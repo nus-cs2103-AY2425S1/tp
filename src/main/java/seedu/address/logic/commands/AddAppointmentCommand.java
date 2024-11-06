@@ -142,7 +142,7 @@ public class AddAppointmentCommand extends AddCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", appointmentDescriptor)
+                .add("appointmentDescriptor", appointmentDescriptor)
                 .toString();
     }
 }

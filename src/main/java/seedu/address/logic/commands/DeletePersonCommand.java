@@ -44,10 +44,9 @@ public class DeletePersonCommand extends DeleteCommand {
      *
      * @param model Model to delete the person from.
      * @param entity Person to be deleted.
-     * @throws CommandException If the entity is not a Person.
      */
     @Override
-    protected void deleteEntity(Model model, Object entity) throws CommandException {
+    protected void deleteEntity(Model model, Object entity) {
         requireNonNull(entity);
 
         assert entity instanceof Person;

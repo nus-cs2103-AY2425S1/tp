@@ -63,9 +63,8 @@ public abstract class DeleteCommand extends Command {
      *
      * @param model Model to delete entity from.
      * @param entity Entity to delete.
-     * @throws CommandException If entity cannot be deleted.
      */
-    protected abstract void deleteEntity(Model model, Object entity) throws CommandException;
+    protected abstract void deleteEntity(Model model, Object entity);
 
     /**
      * Returns the success message to display upon deleting entity.
