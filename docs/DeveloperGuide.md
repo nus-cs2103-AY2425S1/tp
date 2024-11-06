@@ -249,6 +249,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `:remove`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+
 ### Delete Feature
 
 #### Implementation
@@ -286,6 +287,45 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Deletes the person by name.
     * Pros: More user-friendly as the user can specify the name.
     * Cons: Requires additional logic to handle duplicate names.
+
+### Add Feature
+
+#### Implementation
+
+The add feature allows a person to be added to the address book. It accepts parameters name, phone, address, email,
+remark and tag. The name parameter is compulsory, while the rest are optional. Multiple tags are accepted for one 
+person.
+
+The add feature follows the delete feature in that `AddCommand` calls `ModelManager`, which calls the `AddressBook`
+class, which adds a person to the `UniquePersonList` class. Therefore, the class and activity diagram will be omitted
+for conciseness.
+
+The following sequence diagram shows how an add operation goes through the `Logic` component:
+
+<puml src="diagrams/AddSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `TODO` Command" />
+
+The parsing process is described in detail in this sequence diagram:
+
+<puml src="diagrams/AddSequenceDiagram-Tokenise.puml" alt="Interactions Inside the Logic Component for the `:remove 1, 2, 3` Command" />
+
+The following sequence diagrams give examples of how a compulsory parameter, an optional parameter and a parameter that
+accepts multiple values at once is parsed. 
+
+A compulsory parameter like `Name` is parsed as follows.
+
+<puml src="diagrams/AddSequenceDiagram-ParseName.puml" alt="Interactions Inside the Logic Component when parsing a name string" />
+
+An optional parameter like `Phone` is parsed as follows. `Email`, `Address` and `Remark` are also parsed similarly.
+
+<puml src="diagrams/AddSequenceDiagram-ParsePhone.puml" alt="Interactions Inside the Logic Component when parsing a phone string" />
+
+Finally, a parameter that accepts multiple values at once like `Tag` is parsed as follows.
+
+<puml src="diagrams/AddSequenceDiagram-ParseTags.puml" alt="Interactions Inside the Logic Component when parsing a collection of tags" />
+
+
+Similar to the delete feature, how an add operation goes through the `Model` component is shown below:
+<puml src="diagrams/AddSequenceDiagram-Model.puml" alt="AddSequenceDiagram-Model" />
 
 ### Export Feature
 #### Implementation
@@ -340,6 +380,7 @@ The following sequence diagram explains how the export operation works:
 
 - Pros: Streamlined and faster for frequent exports.
 - Cons: Less flexible, as it may overwrite existing files without warning.
+
 
 ### Encryption Feature
 

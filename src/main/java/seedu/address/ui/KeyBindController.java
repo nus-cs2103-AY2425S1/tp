@@ -4,10 +4,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.TextFlow;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.person.Person;
@@ -57,7 +57,7 @@ public class KeyBindController {
     public void initialize() {
         TextField commandTextField = commandBox.getCommandTextField();
         this.textField = commandTextField;
-        TextArea resultTextArea = resultDisplay.getResultTextArea();
+        TextFlow resultTextArea = resultDisplay.getResultTextArea();
         ListView<Person> personListView = personListPanel.getPersonListView();
 
 

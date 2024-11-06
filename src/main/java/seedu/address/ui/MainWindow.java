@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
@@ -108,6 +109,18 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    // Method to add focus outline styling
+    private void addFocusOutline(Node component) {
+        component.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                component.setStyle("-fx-border-color: rgba(100, 100, 100, 0.5);");
+            } else {
+                component.setStyle(""); // Clear the style when not focused
+            }
+        });
+    }
+
+
     /**
      * Fills up all the placeholders of this window.
      */
@@ -125,7 +138,14 @@ public class MainWindow extends UiPart<Stage> {
         TextField commandBoxTextField = commandBox.getCommandTextField();
         Platform.runLater(commandBoxTextField::requestFocus);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        commandBox.setFocus();
 
+
+        // Apply the focus outline to each component
+        addFocusOutline(personListPanelPlaceholder);
+        addFocusOutline(resultDisplayPlaceholder);
+        addFocusOutline(statusbarPlaceholder);
+        addFocusOutline(commandBoxPlaceholder);
 
         KeyBindController keyBindController = new KeyBindController(commandBox,
                 personListPanel, resultDisplay);
