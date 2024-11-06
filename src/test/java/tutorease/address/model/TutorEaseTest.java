@@ -4,9 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalStudents.ALICE;
+import static tutorease.address.testutil.TypicalStudents.AMY;
+import static tutorease.address.testutil.TypicalStudents.BOB;
 import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import java.util.Arrays;
@@ -77,6 +81,35 @@ public class TutorEaseTest {
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
+
+    @Test
+    public void hasSamePhone_personWithSamePhoneInAddressBook_returnsTrue() {
+        addressBook.addPerson(AMY);
+        Person personWithSamePhone = new StudentBuilder().withPhone(VALID_PHONE_AMY).build();
+        assertTrue(addressBook.hasSamePhone(personWithSamePhone));
+    }
+
+    @Test
+    public void hasSamePhone_personWithDifferentPhoneInAddressBook_returnsFalse() {
+        addressBook.addPerson(BOB);
+        Person personWithDifferentPhone = new StudentBuilder().withPhone(VALID_PHONE_AMY).build();
+        assertFalse(addressBook.hasSamePhone(personWithDifferentPhone));
+    }
+
+    @Test
+    public void hasSameEmail_personWithSameEmailInAddressBook_returnsTrue() {
+        addressBook.addPerson(AMY);
+        Person personWithSameEmail = new StudentBuilder().withEmail(VALID_EMAIL_AMY).build();
+        assertTrue(addressBook.hasSameEmail(personWithSameEmail));
+    }
+
+    @Test
+    public void hasSameEmail_personWithDifferentEmailInAddressBook_returnsFalse() {
+        addressBook.addPerson(ALICE);
+        Person personWithDifferentEmail = new StudentBuilder().withEmail(VALID_EMAIL_AMY).build();
+        assertFalse(addressBook.hasSameEmail(personWithDifferentEmail));
+    }
+
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {

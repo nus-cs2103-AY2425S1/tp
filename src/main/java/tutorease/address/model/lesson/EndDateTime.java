@@ -15,8 +15,11 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  * Represents the end date and time of a lesson.
  */
 public class EndDateTime extends DateTime {
-    public static final String HOURS_MESSAGE_CONSTRAINTS = "Hours to add must be in multiples of 0.5. "
-            + "They also have to be more than 0 and be at most 24";
+    public static final String HOURS_MESSAGE_CONSTRAINTS = "Hours should only use numbers (0-9) and "
+            + "a single `.` for decimal points if required. \n"
+            + "No alphabets or other special characters should be used. \n"
+            + "Hours to add must be in multiples of 0.5. \n"
+            + "They also have to be more than 0 and be at most 24.";
     public static final String END_DATE_MESSAGE_CONSTRAINTS = String.format(INVALID_DATETIME_FORMAT_MESSAGE, "End");
 
     private EndDateTime(LocalDateTime dateTime) throws ParseException {

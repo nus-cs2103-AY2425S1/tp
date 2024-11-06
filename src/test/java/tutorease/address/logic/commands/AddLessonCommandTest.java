@@ -228,6 +228,16 @@ public class AddLessonCommandTest {
         }
 
         @Override
+        public boolean hasSamePhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -283,7 +293,17 @@ public class AddLessonCommandTest {
         }
 
         @Override
+        public Lesson getFilteredLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getLessonScheduleSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
             throw new AssertionError("This method should not be called.");
         }
 
