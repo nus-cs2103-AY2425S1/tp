@@ -12,7 +12,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
-         title="SpleetWaise" minWidth="800" minHeight="600" onCloseRequest="#handleExit">
+         title="SpleetWaise" minWidth="800" maxWidth="1600" minHeight="600" onCloseRequest="#handleExit">
     <icons>
         <Image url="@/images/address_book_32.png"/>
     </icons>
@@ -34,7 +34,7 @@
                 </MenuBar>
 
                 <SplitPane VBox.vgrow="ALWAYS">
-                    <VBox prefWidth="50.0" maxWidth="1080">
+                    <VBox prefWidth="50.0" maxWidth="800">
                         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
                             <padding>
                                 <Insets top="5" right="10" bottom="5" left="10"/>
@@ -57,7 +57,7 @@
                         </VBox>
                     </VBox>
 
-                    <VBox prefWidth="50.0" maxWidth="1080">
+                    <VBox prefWidth="50.0" maxWidth="800">
                         <padding>
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
