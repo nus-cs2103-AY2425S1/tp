@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
