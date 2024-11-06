@@ -1109,7 +1109,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addAttendance 0 ad/24-09-2024 ar/MC`<br>
        Expected: No attendance is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addAttendance commands to try: `addAttendance`, `addAttendance 1 ad/24-09-24 ar/MC`, `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
+    4. Other incorrect addAttendance commands to try:<br>
+       `addAttendance`<br>
+       `addAttendance 1 ad/24-09-24 ar/MC`<br>
+       `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1126,7 +1129,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
        Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addAttendance commands to try: `addAttendance 1 ad/24-09-2024`, `addAttendance 1 ad/2024-12-12 ar/`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
+    4. Other incorrect addAttendance commands to try:<br>
+       `addAttendance 1 ad/24-09-2024`<br>
+       `addAttendance 1 ad/2024-12-12 ar/`<br>
+       `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1143,7 +1149,9 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addExam ex/Midterm#`<br>
        Expected: No exam is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addExam commands to try: `addExam`, `addExam ex/`, `addExam ex/#@*`<br>
+    4. Other incorrect addExam commands to try:<br>
+       `addExam`<br>
+       `addExam ex/`, `addExam ex/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1160,7 +1168,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addExamScore 1 ex/Midterm sc/101.0`<br>
        Expected: No exam score is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addExamScore commands to try: `addExamScore 1 ex/Midterm`, `addExamScore 1 ex/Midterm sc/`, `addExamScore x ex/Midterm sc/70.0` (where x is larger than the list size)<br>
+    4. Other incorrect addExamScore commands to try:<br>
+       `addExamScore 1 ex/Midterm`<br>
+       `addExamScore 1 ex/Midterm sc/`<br>
+       `addExamScore x ex/Midterm sc/70.0` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1177,7 +1188,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `deleteExam ex/Midterm#`<br>
        Expected: No exam is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect deleteExam commands to try: `deleteExam`, `deleteExam ex/`, `deleteExam ex/#@*`<br>
+    4. Other incorrect deleteExam commands to try:<br>
+       `deleteExam`<br>
+       `deleteExam ex/`<br>
+       `deleteExam ex/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1194,7 +1208,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addSubmission sm/Assignment #1`<br>
        Expected: No submission is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addSubmission commands to try: `addSubmission`, `addSubmission sm/`, `addSubmission sm/#@*`<br>
+    4. Other incorrect addSubmission commands to try:<br>
+       `addSubmission`<br>
+       `addSubmission sm/`<br>
+       `addSubmission sm/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1211,7 +1228,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addSubmissionStatus 1 sm/Assignment 1 ss/A`<br>
        Expected: No submission status is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addSubmissionStatus commands to try: `addSubmissionStatus 1 sm/Assignment 1`, `addSubmissionStatus 1 sm/Assignment 1 ss/`, `addSubmissionStatus x sm/Assignment 1 ss/Y` (where x is larger than the list size)<br>
+    4. Other incorrect addSubmissionStatus commands to try:<br>
+       `addSubmissionStatus 1 sm/Assignment 1`<br>
+       `addSubmissionStatus 1 sm/Assignment 1 ss/`<br>
+       `addSubmissionStatus x sm/Assignment 1 ss/Y` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1228,7 +1248,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `deleteSubmission sm/Assignment #1`<br>
        Expected: No submission is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect deleteSubmission commands to try: `deleteSubmission`, `deleteSubmission sm/`, `deleteSubmission sm/#@*`<br>
+    4. Other incorrect deleteSubmission commands to try:<br>
+       `deleteSubmission`<br>
+       `deleteSubmission sm/`<br>
+       `deleteSubmission sm/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
