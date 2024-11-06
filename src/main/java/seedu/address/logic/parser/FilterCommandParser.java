@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +25,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE, PREFIX_COURSE);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_MODULE, PREFIX_COURSE);
         validateArguments(argMultimap);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -42,12 +41,27 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     private void validateArguments(ArgumentMultimap argMultimap) throws ParseException {
         if (!argMultimap.getPreamble().isEmpty()
-                || argMultimap.getValue(PREFIX_NAME).isPresent()
-                    && argMultimap.getValue(PREFIX_NAME).get().isEmpty()
-                || argMultimap.getValue(PREFIX_MODULE).isPresent()
-                    && argMultimap.getValue(PREFIX_MODULE).get().isEmpty()
-                || argMultimap.getValue(PREFIX_COURSE).isPresent()
-                    && argMultimap.getValue(PREFIX_COURSE).get().isEmpty()) {
+                || (argMultimap.getValue(PREFIX_NAME).isPresent()
+                && argMultimap.getValue(PREFIX_NAME).get().isEmpty())
+                || (argMultimap.getValue(PREFIX_MODULE).isPresent()
+                && argMultimap.getValue(PREFIX_MODULE).get().isEmpty())
+                || (argMultimap.getValue(PREFIX_COURSE).isPresent()
+                && argMultimap.getValue(PREFIX_COURSE).get().isEmpty())) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
+        int prefixCount = 0;
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            prefixCount++;
+        }
+        if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
+            prefixCount++;
+        }
+        if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
+            prefixCount++;
+        }
+
+        if (prefixCount > 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
     }
