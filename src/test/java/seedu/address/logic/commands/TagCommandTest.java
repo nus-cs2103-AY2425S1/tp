@@ -207,6 +207,34 @@ public class TagCommandTest {
     }
 
     @Test
+    public  void execute_clearSubjectsWhenOnlyLevelNoneNoneProvided() throws CommandException{
+        Student studentInList = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+
+        //Ensures Student first has a Valid Level and Subject before clearing it
+
+        UpdateStudentDescriptor test =
+                new UpdateStudentDescriptorBuilder()
+                        .withLevel("S2 NA")
+                        .withSubjects("Math")
+                        .build();
+        new TagCommand(studentInList.getName(), test).execute(model);
+
+        UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder()
+                        .withLevel("NONE NONE")
+                        .build();
+        TagCommand tagCommand = new TagCommand(studentInList.getName(), descriptor);
+        Student finalStudent = new StudentBuilder(studentInList).withLevel("NONE NONE").withSubjects().build();
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_STUDENT_SUCCESS,
+                Messages.format(finalStudent));
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, model);
+    }
+
+    @Test
     public void equals() {
         TagCommand tagCommand = new TagCommand(new Name(VALID_NAME_BOB), DESC_BOB);
 
