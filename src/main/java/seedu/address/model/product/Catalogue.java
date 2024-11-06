@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  */
 public abstract class Catalogue {
     protected final Map<Integer, Product> productCatalogue = new HashMap<>();
-    public static int nextProductId = 1;
+    protected int nextProductId = 1;
 
     /**
      * Retrieves a product by its unique ID.

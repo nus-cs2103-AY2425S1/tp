@@ -67,8 +67,7 @@ public class AddIngredientCommand extends Command {
                 .filter(product -> product instanceof Ingredient) // Filter only Ingredient objects
                 .map(product -> (Ingredient) product)             // Cast to Ingredient
                 .anyMatch(existingIngredient ->
-                        existingIngredient.getName().equalsIgnoreCase(newIngredient.getName()) &&
-                                Double.compare(existingIngredient.getCost(), newIngredient.getCost()) == 0);
+                        existingIngredient.getName().equalsIgnoreCase(newIngredient.getName()));
     }
 
     @Override
