@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -56,7 +57,7 @@ public class VolunteerRemoveDateCommand extends Command {
             model.removeDatesFromVolunteer(volunteerToRemoveDate, dateList);
             return new CommandResult(String.format(MESSAGE_REMOVE_DATE_VOLUNTEER_SUCCESS,
                     volunteerToRemoveDate.getName().toString()));
-        } catch (VolunteerDeleteMissingDateException e) {
+        } catch (VolunteerDeleteMissingDateException | VolunteerNotAvailableOnAnyDayException e) {
             throw new CommandException(e.getMessage());
         }
     }

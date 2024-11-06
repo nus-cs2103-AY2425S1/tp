@@ -19,6 +19,7 @@ import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.exceptions.VolunteerNotAvailableException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
 import seedu.address.model.volunteer.VolunteerIsAvailableForEventPredicate;
@@ -227,7 +228,7 @@ public class ModelManager implements Model {
 
     @Override
     public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
-            VolunteerDeleteMissingDateException {
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
         addressBook.removeDatesFromVolunteer(volunteerToRemoveDate, dateList);
     }
 
