@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -23,8 +24,13 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_EMAIL_1 = "example.com";
+    private static final String INVALID_EMAIL_2 = "rachel".repeat(Email.MAXIMUM_EMAIL_LENGTH)
+            + "@example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_REMARK = "Did well\n for midterms";
+    private static final String INVALID_ASSIGNMENT_NAME = "Assignment\n1";
+
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -34,6 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_REMARK = "Did well for midterms";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String VALID_ASSIGNMENT_NAME = "Assignment 1";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -120,13 +127,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL_1));
     }
 
     @Test
     public void parseEmail_invalidValueTooLong_throwsParseException() {
-        String emailExceedingMaxLength = VALID_EMAIL.repeat(Email.MAXIMUM_EMAIL_LENGTH);
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(emailExceedingMaxLength));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL_2));
     }
 
     @Test
@@ -200,6 +206,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseRemark_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRemark(INVALID_REMARK));
+    }
+
+    @Test
     public void parseRemark_invalidValueTooLong_throwsParseException() {
         String remarkExceedingMaxLength = VALID_REMARK.repeat(Remark.MAXIMUM_REMARK_LENGTH);
         assertThrows(ParseException.class, () -> ParserUtil.parseRemark(remarkExceedingMaxLength));
@@ -216,5 +227,27 @@ public class ParserUtilTest {
         String remarkWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
         Remark expectedRemark = new Remark(VALID_REMARK);
         assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
+    }
+
+    @Test
+    public void parseAssignmentName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAssignmentName((String) null));
+    }
+
+    @Test
+    public void parseAssignmentName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAssignmentName(INVALID_ASSIGNMENT_NAME));
+    }
+
+    @Test
+    public void parseAssignmentName_invalidValueTooLong_throwsParseException() {
+        String nameExceedingMaxLength = VALID_ASSIGNMENT_NAME.repeat(AssignmentName.MAXIMUM_NAME_LENGTH);
+        assertThrows(ParseException.class, () -> ParserUtil.parseAssignmentName(nameExceedingMaxLength));
+    }
+
+    @Test
+    public void parseAssignmentName_validValueWithoutWhitespace_returnsName() throws Exception {
+        AssignmentName expectedName = new AssignmentName(VALID_ASSIGNMENT_NAME);
+        assertEquals(expectedName, ParserUtil.parseAssignmentName(VALID_ASSIGNMENT_NAME));
     }
 }
