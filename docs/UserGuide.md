@@ -25,7 +25,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 3. Copy the file to the folder you want to use as the _home folder_ for your address book.
 
-4. Open a command terminal, `cd` into the folder that you put the jar file in
+4. Open a command terminal, `cd` into the folder that you put the jar file in.
 
 5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
@@ -121,6 +121,7 @@ Adds a student to the address book.
 
 ##### Constraints
 
+* **NAME** must only contain alphanumeric characters and spaces.
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and **END_TIME** are represented as `HHmm`.
@@ -141,6 +142,7 @@ Adds a student to the address book.
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
 * UGTeach will inform you of clashing schedules so that you can modify using the [`edit` command](#editing-a-student-edit).
   ![clashingSchedule.png](images/clashingSchedule.png)
+
 </box>
 
 ### Listing all students: `list`
@@ -249,7 +251,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 
 <box type="tip" header="##### Tips">
 
-* In case you accidentally make a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the PAID_AMOUNT as your preference.
+* In case you made a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the PAID_AMOUNT to your preference.
 
 </box>
 
@@ -277,7 +279,7 @@ Updates the amount of tuition fee owed by a specified student after a lesson.
 
 <box type="tip" header="##### Tips">
 
-* In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
+* In case you made a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the OWE_AMOUNT to your preference.
 
 </box>
 
@@ -289,7 +291,7 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 
 **Format:** `settle INDEX amount/AMOUNT`
 
-**Examples:**
+**Example:**
 * `settle 1 amount/500.00`
 
 **Output:**
@@ -361,7 +363,7 @@ to find your schedule for a specific day of the week.
 
 Clears all entries from the address book.
 
-Format: `clear`
+**Format:** `clear`
 
 <div style="page-break-after: always;"></div>
 
@@ -369,7 +371,7 @@ Format: `clear`
 
 Exits the program.
 
-Format: `exit`
+**Format:** `exit`
 
 ### Saving the data
 

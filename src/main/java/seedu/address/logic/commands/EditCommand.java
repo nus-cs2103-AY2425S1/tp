@@ -71,6 +71,8 @@ public class EditCommand extends Command {
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
+     * Creates an EditCommand to edit the student at the specified {@code Index} with {@code EditStudentDescriptor}
+     *
      * @param index of the student in the filtered student list to edit
      * @param editStudentDescriptor details to edit the student with
      */

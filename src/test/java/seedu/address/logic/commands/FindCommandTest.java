@@ -71,6 +71,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroNameKeywords_noStudentFound() {
+        // EP: no name keywords
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
 
         FindCommand command = new FindCommand(List.of(emptyNamePredicate));
@@ -93,6 +94,7 @@ public class FindCommandTest {
     }
     @Test
     public void execute_scheduleOnWednesday_oneStudentFound() {
+        // EP: one schedule keyword
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
 
         ScheduleContainsKeywordsPredicate schedulePredicate = prepareSchedulePredicate(Days.WEDNESDAY);
@@ -129,6 +131,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_nameAndScheduleKeywords_noStudentFound() {
+        // no student has name containing "Elle" and schedule containing "Wednesday"
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
 
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Elle");
@@ -143,6 +146,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_nameAndScheduleKeywords_oneStudentFound() {
+        // one student has name containing "Elle" and schedule containing "Thursday"
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
 
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Elle");

@@ -101,6 +101,7 @@ public class CommandTestUtil {
                                                      .withRate(VALID_RATE_AMY)
                                                      .withPaidAmount(VALID_PAID_AMOUNT_AMY)
                                                      .withOwedAmount(VALID_OWED_AMOUNT_AMY).build();
+
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                                                      .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                                                      .withAddress(VALID_ADDRESS_BOB)
@@ -126,6 +127,7 @@ public class CommandTestUtil {
     }
 
     /**
+     * Converts a string {@code expectedMessage} to a {@code CommandResult} with the message {@code expectedMessage}.
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */

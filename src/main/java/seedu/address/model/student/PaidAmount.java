@@ -14,7 +14,7 @@ public class PaidAmount extends Fee {
 
     public static final String MESSAGE_CONSTRAINTS = "PaidAmount "
             + Fee.MESSAGE_CONSTRAINTS
-            + "2. is between the range of 0.00 to " + MAX_VALUE;
+            + "2. is between the range of $0.00 to $" + String.format("%.2f", MAX_VALUE);
 
     /**
      * Constructs a {@code PaidAmount}.

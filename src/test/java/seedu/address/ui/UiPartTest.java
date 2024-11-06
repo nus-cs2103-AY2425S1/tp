@@ -26,12 +26,14 @@ public class UiPartTest {
 
     @Test
     public void constructor_nullFileUrl_throwsNullPointerException() {
+        // EP: constructor has null file url
         assertThrows(NullPointerException.class, () -> new TestUiPart<Object>((URL) null));
         assertThrows(NullPointerException.class, () -> new TestUiPart<Object>((URL) null, new Object()));
     }
 
     @Test
     public void constructor_missingFileUrl_throwsAssertionError() throws Exception {
+        // EP: constructor has missing file url
         URL missingFileUrl = new URL(testFolder.toUri().toURL(), MISSING_FILE_PATH);
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(missingFileUrl));
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(missingFileUrl, new Object()));
@@ -39,6 +41,7 @@ public class UiPartTest {
 
     @Test
     public void constructor_invalidFileUrl_throwsAssertionError() {
+        // EP: constructor has invalid file url
         URL invalidFileUrl = getTestFileUrl(INVALID_FILE_PATH);
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(invalidFileUrl));
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(invalidFileUrl, new Object()));
@@ -46,12 +49,14 @@ public class UiPartTest {
 
     @Test
     public void constructor_validFileUrl_loadsFile() {
+        // EP: constructor has valid file url
         URL validFileUrl = getTestFileUrl(VALID_FILE_PATH);
         assertEquals(VALID_FILE_ROOT, new TestUiPart<TestFxmlObject>(validFileUrl).getRoot());
     }
 
     @Test
     public void constructor_validFileWithFxRootUrl_loadsFile() {
+        // EP: constructor has valid file with Fx Root url
         URL validFileUrl = getTestFileUrl(VALID_FILE_WITH_FX_ROOT_PATH);
         TestFxmlObject root = new TestFxmlObject();
         assertEquals(VALID_FILE_ROOT, new TestUiPart<TestFxmlObject>(validFileUrl, root).getRoot());
@@ -59,18 +64,21 @@ public class UiPartTest {
 
     @Test
     public void constructor_nullFileName_throwsNullPointerException() {
+        // EP: constructor has null file name
         assertThrows(NullPointerException.class, () -> new TestUiPart<Object>((String) null));
         assertThrows(NullPointerException.class, () -> new TestUiPart<Object>((String) null, new Object()));
     }
 
     @Test
     public void constructor_missingFileName_throwsNullPointerException() {
+        // EP: constructor has missing file name
         assertThrows(NullPointerException.class, () -> new TestUiPart<Object>(MISSING_FILE_PATH));
         assertThrows(NullPointerException.class, () -> new TestUiPart<Object>(MISSING_FILE_PATH, new Object()));
     }
 
     @Test
     public void constructor_invalidFileName_throwsAssertionError() {
+        // EP: constructor has invalid file name
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH));
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH, new Object()));
     }
@@ -91,19 +99,31 @@ public class UiPartTest {
         @FXML
         private TestFxmlObject validFileRoot; // Check that @FXML annotations work
 
+        /**
+         * Constructs a {@code TestUiPart} with the specified fields.
+         */
         TestUiPart(URL fxmlFileUrl, T root) {
             super(fxmlFileUrl, root);
         }
 
+        /**
+         * Constructs a {@code TestUiPart} with the specified fields.
+         */
         TestUiPart(String fxmlFileName, T root) {
             super(fxmlFileName, root);
         }
 
+        /**
+         * Constructs a {@code TestUiPart} with the specified {@code fxmlFileUrl}.
+         */
         TestUiPart(URL fxmlFileUrl) {
             super(fxmlFileUrl);
             assertEquals(VALID_FILE_ROOT, validFileRoot);
         }
 
+        /**
+         * Constructs a {@code TestUiPart} with the specified {@code fxmlFileName}.
+         */
         TestUiPart(String fxmlFileName) {
             super(fxmlFileName);
             assertEquals(VALID_FILE_ROOT, validFileRoot);
