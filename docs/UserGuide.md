@@ -185,9 +185,9 @@ Examples:
 
 Allows the tutor to add lesson(s) to a specific student in Tuteez.
 
-Format: `addlesson INDEX l/LESSON [l/LESSON]`
+Format: `addlesson INDEX l/LESSON [l/LESSON]…​`
 
-* short form: `addlsn INDEX l/LESSON [l/LESSON]`
+* short form: `addlsn INDEX l/LESSON [l/LESSON]…​`
 * Adds new lesson(s) to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * You can add multiple lessons to a student at once.
 * Lessons have to start with the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
@@ -202,9 +202,9 @@ Examples:
 
 Allows the tutor to delete lesson(s) from a specific student in Tuteez.
 
-Format: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]`
+Format: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 
-* short form: `dellsn INDEX li/LESSON_INDEX [li/LESSON_INDEX]`
+* short form: `dellsn INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 * Deletes lesson(s) from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * Lessons are indexed based on the order they were added to the student, starting from 1.
 * If the `LESSON_INDEX` is not valid, an error will be shown.
