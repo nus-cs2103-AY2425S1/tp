@@ -88,6 +88,7 @@ public class MainWindow extends UiPart<Stage> {
 
         if (isSearchMode) {
             allPersonListPanel = new PersonListPanel(logic.getAllPersons());
+            allPersonListPanel.getRoot().setStyle("-fx-border-color: #87CEEB; -fx-border-width: 2;");
             HBox.setHgrow(allPersonListPanel.getRoot(), Priority.ALWAYS);
             hbox.getChildren().add(allPersonListPanel.getRoot());
         }
