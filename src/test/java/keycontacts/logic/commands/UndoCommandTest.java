@@ -11,7 +11,6 @@ import keycontacts.model.ModelManager;
 import keycontacts.model.UserPrefs;
 
 public class UndoCommandTest {
-
     private final Model model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
 
