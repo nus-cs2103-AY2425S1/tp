@@ -59,7 +59,7 @@ public class ScheduleTest {
                 .withScheduleTime("").build();
         Schedule editedAmyScheduleMidnight = new ScheduleBuilder(AMY_SCHEDULE)
                 .withScheduleTime("00:00").build();
-        assertFalse(AMY_SCHEDULE.equals(editedAmySchedule));
+        assertFalse(editedAmyScheduleEmpty.equals(editedAmyScheduleMidnight));
     }
 
     @Test
