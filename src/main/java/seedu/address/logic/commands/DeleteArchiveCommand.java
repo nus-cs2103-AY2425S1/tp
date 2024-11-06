@@ -19,7 +19,7 @@ public class DeleteArchiveCommand extends Command {
     public static final String COMMAND_WORD = "deletearchive";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an archive file.\n"
             + "Parameters: FILENAME\n"
-            + "Example: " + COMMAND_WORD + "addressbook-20241023_114324-example.json";
+            + "Example: " + COMMAND_WORD + " addressbook-20241023_114324-example.json";
 
     public static final String MESSAGE_SUCCESS = "Deleted archive file: %1$s";
     public static final String MESSAGE_NOT_FOUND = "Archive file not found: %1$s";
