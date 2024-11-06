@@ -174,7 +174,13 @@ The `ApponintmentListPanel` will consequently update with a new `AppointmentCard
 > 
 > Immutability of `Persons` in `AddressBook` ensures no dangling / orphaned data resulting from side effects of mutating data. Therefore, any changes are done by the `Model` retrieving the old `AddressBook`, removing the target `Person`, adding a new `Person` with the updated data into `AddressBook`. This is similar for `FilteredAppointmentList` as well, regenerating everytime `Model` replaces a `Person` in `AddressBook`. As such, `AppointmentListPanel` and `PersonListPanel` will repopulate with the correct cells in desired order without needing to keep track of where new cells must be changed or edited.
 
-Given below are an example of the state of the application as the 
+
+
+#### Sequence Diagram
+
+When `addAppt` command is keyed in by the user, this is the sequence of calls that occurs:
+
+![AddApptCommandSequence](images/AddApptCommandSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
