@@ -17,7 +17,8 @@ public class Name {
      * otherwise " " (a blank string) becomes a valid input.
      */
     //accepts only  alphanumeric characters, spaces, and hyphens
-    public static final String VALIDATION_REGEX = "[a-zA-Z0-9][a-zA-Z0-9\\s-]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9][a-zA-Z0-9\\s-/]*";
+
     public final String fullName;
 
     /**

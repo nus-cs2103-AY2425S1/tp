@@ -39,6 +39,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Amelia-Leigh")); // with hyphen and alphabets only
         assertTrue(Name.isValidName("1234-452")); // with hyphen and numbers only
         assertTrue(Name.isValidName("Amelia-Leigh the 2nd")); // with hyphen and alphanumeric characters
+        assertTrue(Name.isValidName("Batman s/o Superman")); // with slash
     }
 
     @Test
