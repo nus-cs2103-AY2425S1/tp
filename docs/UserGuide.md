@@ -97,7 +97,7 @@ Examples:
 ### Listing all persons : `list`
 
 Shows a list of persons in the address book, automatically sorted by their priority from HIGH to LOW.
-- `list`: Shows a list of people who are not archived
+- `list`: Shows a list of people who are current contacts (i.e. not archived)
 - `list archive/`: Shows a list of people who are archived
 - `list all/`: Shows a list of all people
 
