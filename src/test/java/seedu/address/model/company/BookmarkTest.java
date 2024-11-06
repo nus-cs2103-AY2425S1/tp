@@ -2,7 +2,6 @@ package seedu.address.model.company;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,13 +31,13 @@ public class BookmarkTest {
 
     @Test
     public void prettyStringTest() {
-        String EXPECTED_BOOKMARKED_INDICATOR = "Bookmarked";
-        String EXPECTED_NOT_BOOKMARKED_INDICATOR = "Not bookmarked";
+        String expectedBookmarkedIndicator = "Bookmarked";
+        String expectedNotBookmarkedIndicator = "Not bookmarked";
 
         Bookmark bookmarked = new Bookmark(true);
         Bookmark notBookmarked = new Bookmark(false);
 
-        assertTrue(bookmarked.prettyString().equals(EXPECTED_BOOKMARKED_INDICATOR));
-        assertTrue(notBookmarked.prettyString().equals(EXPECTED_NOT_BOOKMARKED_INDICATOR));
+        assertTrue(bookmarked.prettyString().equals(expectedBookmarkedIndicator));
+        assertTrue(notBookmarked.prettyString().equals(expectedNotBookmarkedIndicator));
     }
 }

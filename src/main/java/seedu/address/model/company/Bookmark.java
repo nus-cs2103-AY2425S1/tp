@@ -1,7 +1,5 @@
 package seedu.address.model.company;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Objects;
 
 /**
