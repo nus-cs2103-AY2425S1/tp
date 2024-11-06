@@ -10,7 +10,7 @@ participant "p:GradYearPredicate" as GradYearPredicate LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
 end box
 [-> LogicManager : execute("clean")
 activate LogicManager
@@ -28,7 +28,7 @@ deactivate CleanCommand
 AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
 
-LogicManager -> CleanCommand : execute(model)
+LogicManager -> CleanCommand : execute(m)
 activate CleanCommand
 
 create GradYearPredicate
