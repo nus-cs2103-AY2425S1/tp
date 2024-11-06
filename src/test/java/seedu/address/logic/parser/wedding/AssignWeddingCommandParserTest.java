@@ -4,8 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,7 @@ import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
 public class AssignWeddingCommandParserTest {
-    private AssignWeddingCommandParser parser = new AssignWeddingCommandParser();
+    private final AssignWeddingCommandParser parser = new AssignWeddingCommandParser();
 
     @Test
     public void parse_validArgs_returnsAssignWeddingCommand() {
@@ -26,7 +25,11 @@ public class AssignWeddingCommandParserTest {
         Wedding wedding2 = new Wedding(new WeddingName("Wedding April 17th 2025"));
 
         AssignWeddingCommand expectedCommand = new AssignWeddingCommand(targetIndex,
-                new HashSet<>(Arrays.asList(wedding1, wedding2)));
+                new HashMap<>() {
+                    { put(wedding1, "g"); }
+                    { put(wedding2, "g"); }
+                },
+                false);
 
         String userInput = "1 w/Jeslyn's Wedding w/Wedding April 17th 2025";
 
@@ -66,7 +69,10 @@ public class AssignWeddingCommandParserTest {
         Wedding wedding2 = new Wedding(new WeddingName("Wedding April 17th 2025"));
 
         AssignWeddingCommand expectedCommand = new AssignWeddingCommand(targetIndex,
-                new HashSet<>(Arrays.asList(wedding1, wedding2)), true);
+                new HashMap<>() {
+                    { put(wedding1, "g"); }
+                    { put(wedding2, "g"); }
+                }, true);
 
         String userInput = "1 w/Jeslyn's Wedding w/Wedding April 17th 2025 f/";
 

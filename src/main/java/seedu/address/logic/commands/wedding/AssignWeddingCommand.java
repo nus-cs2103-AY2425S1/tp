@@ -5,7 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTA
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,31 +39,8 @@ public class AssignWeddingCommand extends Command {
             + PREFIX_WEDDING + "Craig's Wedding " + PREFIX_WEDDING + "Wedding April 2025.";
 
     private final Index index;
-    private HashSet<Wedding> weddingsToAdd;
-    private Map<Wedding, String> weddingsToAdd2;
-    private boolean force = false;
-
-    /**
-     * Constructs a {@code AssignWedding} Command to add weddings to a person.
-     * @param index The index of the person in the person list.
-     * @param weddingsToAdd The list of weddings to be added.
-     */
-    public AssignWeddingCommand(Index index, HashSet<Wedding> weddingsToAdd) {
-        this.index = index;
-        this.weddingsToAdd = weddingsToAdd;
-    } //TODO shift away from this and just use the below
-
-    /**
-     * Constructs a {@code AssignWedding} Command to add weddings to a person with the force flag.
-     * @param index The index of the person in the person list.
-     * @param weddingsToAdd The list of weddings to be added.
-     * @param force Whether the command should force the assignment by creating the Wedding object.
-     */
-    public AssignWeddingCommand(Index index, HashSet<Wedding> weddingsToAdd, boolean force) {
-        this.index = index;
-        this.weddingsToAdd = weddingsToAdd;
-        this.force = force;
-    }
+    private final Map<Wedding, String> weddingsToAdd;
+    private final boolean force;
 
     /**
      * Constructs a {@code AssignWedding} Command to add weddings to a person with the force flag.
@@ -74,8 +50,7 @@ public class AssignWeddingCommand extends Command {
      */
     public AssignWeddingCommand(Index index, Map<Wedding, String> weddingsToAdd, boolean force) {
         this.index = index;
-        this.weddingsToAdd = new HashSet<>(weddingsToAdd.keySet());
-        this.weddingsToAdd2 = weddingsToAdd;
+        this.weddingsToAdd = weddingsToAdd;
         this.force = force;
     }
 
@@ -86,7 +61,7 @@ public class AssignWeddingCommand extends Command {
      * @return A success message indicating the weddings that were added and the name of the person.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String addedWeddings = weddingsToAdd.stream()
+        String addedWeddings = weddingsToAdd.keySet().stream()
                 .map(wedding -> wedding.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
         return String.format(MESSAGE_ADD_WEDDING_SUCCESS, addedWeddings, personToEdit.getName().toString());
@@ -102,7 +77,7 @@ public class AssignWeddingCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        for (Map.Entry<Wedding, String> entry : weddingsToAdd2.entrySet()) {
+        for (Map.Entry<Wedding, String> entry : weddingsToAdd.entrySet()) {
             Wedding wedding = entry.getKey();
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
@@ -124,12 +99,9 @@ public class AssignWeddingCommand extends Command {
             wedding.increasePeopleCount();
             model.setWedding(wedding, editedWedding);
         }
-        if (weddingsToAdd2 != null) {
-            weddingsToAdd = new HashSet<>(weddingsToAdd2.keySet());
-        }
 
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
-        updatedWeddings.addAll(weddingsToAdd);
+        updatedWeddings.addAll(weddingsToAdd.keySet());
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -152,13 +124,12 @@ public class AssignWeddingCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AssignWeddingCommand)) {
+        if (!(other instanceof AssignWeddingCommand otherCommand)) {
             return false;
         }
 
-        AssignWeddingCommand otherCommand = (AssignWeddingCommand) other;
-        return index.equals(otherCommand.index) && weddingsToAdd
-                .equals(((AssignWeddingCommand) other).weddingsToAdd)
+        return index.equals(otherCommand.index) && weddingsToAdd.keySet()
+                .equals(otherCommand.weddingsToAdd.keySet())
                 && this.force == otherCommand.force;
     }
 }

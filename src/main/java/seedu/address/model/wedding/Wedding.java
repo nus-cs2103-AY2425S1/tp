@@ -20,12 +20,12 @@ public class Wedding {
      * Validation regex checks that first character of the wedding name must not be a whitespace,
      * so that " " (a blank string) is not a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*(/p[12])?";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*(p[12]/)?";
     private final WeddingName weddingName;
     private int peopleCount;
     private Person partner1;
     private Person partner2;
-    private ArrayList<Person> guestList;
+    private ArrayList<Person> guestList = new ArrayList<>();
     private Address address;
     private String date;
 
@@ -88,7 +88,7 @@ public class Wedding {
 
     /**
      * Sets partner1 in this wedding
-     * @Param A {@code Person} object to be set as {@code partner1}
+     * @param partner1 A {@code Person} object to be set as {@code partner1}
      */
     public void setPartner1(Person partner1) {
         this.partner1 = partner1;
