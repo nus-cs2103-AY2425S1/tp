@@ -18,6 +18,10 @@ public class Bookmark {
         this.isBookmark = value;
     }
 
+    public Bookmark() {
+        this.isBookmark = false;
+    }
+
     public boolean getIsBookmarkValue() {
         return this.isBookmark;
     }
