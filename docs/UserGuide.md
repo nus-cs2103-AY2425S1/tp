@@ -340,10 +340,9 @@ Fields
 {% raw %}
 <div markdown="1" class="alert alert-success">:bulb: **Tip:**
 If you want to mark the attendance of all students in a tutorial, 
-use the command mat [here](#55-marking-attendance-of-a-tutorial instead.
+use the command mat [here](#55-marking-attendance-of-a-tutorial instead).
 </div>
 {% endraw %}
-
 
 Example usages
 
@@ -382,7 +381,7 @@ Fields
 </div>
 {% endraw %}
 
-<div markdown="span" class="alert alert-success">:bulb: **Note:**
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 If at least one student does not have their attendance marked for the corresponding week, those students will 
 have their attendance marked while those students with corresponding weekly attendance will be skipped. 
 </div>
