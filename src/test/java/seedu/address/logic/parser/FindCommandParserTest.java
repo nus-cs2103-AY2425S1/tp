@@ -12,6 +12,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -41,6 +42,11 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommandForAddress =
                 new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList("Wall Street", "Michigan")));
         assertParseSuccess(parser, " a/Wall Street_Michigan", expectedFindCommandForAddress);
+
+        // whitespaces allowed in tags and multiple "_" between tag keywords
+        FindCommand expectedFindCommandForTag =
+                new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList("family", "colleagues")));
+        assertParseSuccess(parser, " t/ family_colleagues", expectedFindCommandForTag);
 
         // name contains 'n/' prefix
         FindCommand expectedFindCommandNameContainsPrefix =
