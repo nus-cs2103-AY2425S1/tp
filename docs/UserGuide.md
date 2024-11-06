@@ -37,44 +37,48 @@ Action | Format (with examples)
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-3/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your MediContacts App.
+3. Copy the file to the folder you want to use as the _home folder_ for your MediContacts App.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediContacts.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediContacts.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds.<br>
+   Note how the app will initially contain some sample data.<br>
+   [You may refer to this video tutorial on how to run JAR files on Windows](https://www.youtube.com/watch?v=hv0UhoaA0eo) (Watch from 0:47 onwards)<br>
+   [You may refer to this video tutorial on how to run JAR files on macOS](https://www.youtube.com/watch?v=GspNQbJLfag) (Watch from 2:23 onwards)<br>
+   [You may refer to this video tutorial on how to run JAR files on Linux](https://www.youtube.com/watch?v=DVD9DIxs9Lo) (Watch full video)<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+   Here are some example commands you can try out:
 
-   * `list` : Lists all contacts.
+   * `list`: Lists all contacts.
 
-   * `list-doctor` : Lists all doctors.
+   * `list-doctor`: Lists all doctors.
    
-   * `list-patient` : Lists all patients.
+   * `list-patient`: Lists all patients.
 
-   * `add-doctor n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 s/Orthopedics` : Adds a doctor named John Doe to the Address Book.
+   * `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`: Adds a doctor named Jane Doe to the Address Book.
    
-   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M` : Adds a patient named John Doe to the Address Book.
+   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`: Adds a patient named John Doe to the Address Book.
 
-   * `add-appt pn/John Doe dn/Jane Doe d/23-12-2024 t/1100` : Adds an appointment between a patient named John Doe and a doctor named Jane Doe on 23rd December 2024 (1100hrs).
+   * `add-appt pn/John Doe dn/Jane Doe d/23-12-2024 t/1100`: Adds an appointment between a patient named John Doe and a doctor named Jane Doe on 23rd December 2024 (1100hrs).
 
-   * `delete-appt 12345678` : Deletes the appointment with the unique ID `12345678`.  
+   * `delete-appt 1231996014`: Deletes the appointment with the unique ID `1231996014`. Refer to the UI screenshot above to know where to identify appointment IDs.  
 
-   * `find John` : Finds contacts whose names contain the keyword `John`.
+   * `find John`: Finds contacts whose names contain the keyword `John`.
 
-   * `find-doctor John` : Finds doctors whose names contain the keyword `John`.
+   * `find-doctor Jane`: Finds doctors whose names contain the keyword `Jane`.
 
-   * `find-patient John` : Finds patients whose names contain the keyword `John`.
+   * `find-patient John`: Finds patients whose names contain the keyword `John`.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3`: Deletes the 3rd contact currently displayed in the list.
    
-   * `clear` : Deletes all contacts.
+   * `clear`: Deletes all contacts.
 
-   * `exit` : Exits the app.
+   * `exit`: Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
