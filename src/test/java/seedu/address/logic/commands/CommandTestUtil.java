@@ -19,7 +19,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.clientcommands.EditClientCommand;
+import seedu.address.logic.commands.clientcommands.ShowClientsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.listingcommands.ShowListingsCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Listing;
@@ -78,8 +81,8 @@ public class CommandTestUtil {
     public static final String BUYER_DESC_PASIR_RIS = " " + PREFIX_BUYER + VALID_FIRST_BUYER_PASIR_RIS
             + " " + PREFIX_BUYER + VALID_SECOND_BUYER_PASIR_RIS;
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditClientCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditClientCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -113,7 +116,7 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         CommandResult expectedCommandResult;
-        if (command instanceof ListCommand) {
+        if (command instanceof ShowClientsCommand) {
             expectedCommandResult = new CommandResult(expectedMessage, false,
                     false, false, true);
         } else if (command instanceof ShowListingsCommand) {

@@ -1,6 +1,7 @@
 package seedu.address.model.listing;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -47,7 +48,25 @@ public class Listing {
         this.region = region;
         this.address = address;
         this.seller = seller;
-        this.buyers = buyers;
+        this.buyers = new HashSet<>(buyers);
+    }
+
+    /**
+     * Copy constructor for creating a new {@code Listing} that is a copy of another {@code Listing}.
+     *
+     * @param other The {@code Listing} to copy.
+     */
+    public Listing(Listing other) {
+        Objects.requireNonNull(other);
+
+        this.name = other.name;
+        this.address = other.address;
+        this.price = other.price;
+        this.area = other.area;
+        this.region = other.region;
+        this.seller = other.seller;
+        this.buyers = new HashSet<>();
+        this.buyers.addAll(other.buyers);
     }
 
     public Name getName() {
@@ -76,6 +95,14 @@ public class Listing {
 
     public Set<Person> getBuyers() {
         return Collections.unmodifiableSet(buyers);
+    }
+
+    /**
+     * Removes a buyer from this listing's buyers.
+     * @param buyer The buyer to be removed.
+     */
+    public void removeBuyer(Person buyer) {
+        buyers.remove(buyer);
     }
 
     /**

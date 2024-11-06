@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox fx:id="confirmationDialog" xmlns:fx="http://javafx.com/fxml/1" spacing="10" alignment="CENTER"
+      fx:controller="seedu.address.ui.ConfirmationDialogController"
+      stylesheets="@ConfirmationDialog.css" styleClass="confirmation-dialog">
+    <Label fx:id="headerLabel" text="Are you sure you want to delete?" styleClass="header-label"/>
+    <Label fx:id="clientNameLabel" styleClass="client-name-label"/>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="yesButton" text="Yes" styleClass="yes-button"/>
+        <Button fx:id="noButton" text="No" styleClass="no-button"/>
+    </HBox>
+</VBox>
