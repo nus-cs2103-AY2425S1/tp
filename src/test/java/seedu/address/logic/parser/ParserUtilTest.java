@@ -277,40 +277,30 @@ public class ParserUtilTest {
 
     @Test
     public void parsePublicAddresses_validInputs_returnsMap() throws Exception {
-        Collection<String> inputs = Arrays.asList(
-            VALID_NETWORK + ">" + VALID_BTC_ADDRESS_1,
-            VALID_NETWORK + ">" + VALID_BTC_ADDRESS_2
-        );
+        Collection<String> inputs = List.of(VALID_NETWORK + ">" + VALID_BTC_ADDRESS_1);
 
         PublicAddressesComposition expected = new PublicAddressesComposition(
-                Map.of(
-                        Network.BTC, Set.of(
-                                new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL),
-                                new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL)
-                        )
-                )
-        );
+                Map.of(Network.BTC, Set.of(new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL))));
 
         assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
     }
 
     @Test
     public void parsePublicAddresses_validInputsWithWhitespace_returnsMap() throws Exception {
-        Collection<String> inputs = Arrays.asList(
-            " " + VALID_NETWORK + " > " + VALID_BTC_ADDRESS_1 + " ",
-            " " + VALID_NETWORK + " > " + VALID_BTC_ADDRESS_2 + " "
-        );
+        Collection<String> inputs = Arrays.asList(" " + VALID_NETWORK + " > " + VALID_BTC_ADDRESS_1 + " ");
 
         PublicAddressesComposition expected = new PublicAddressesComposition(
-                Map.of(
-                        Network.BTC, Set.of(
-                                new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL),
-                                new BtcAddress(VALID_BTC_ADDRESS_2, PublicAddress.DEFAULT_LABEL)
-                        )
-                )
-        );
+                Map.of(Network.BTC, Set.of(new BtcAddress(VALID_BTC_ADDRESS_1, PublicAddress.DEFAULT_LABEL))));
 
         assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
+    }
+
+    @Test
+    public void parsePublicAddresses_invalidDuplicateLabels_throwsIllegalArgumentException() throws Exception {
+        Collection<String> inputs = List.of(VALID_NETWORK + ">" + VALID_BTC_ADDRESS_1,
+                VALID_NETWORK + ">" + VALID_BTC_ADDRESS_2);
+
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parsePublicAddresses(inputs));
     }
 
     @Test
