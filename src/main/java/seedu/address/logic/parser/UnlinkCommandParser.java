@@ -18,13 +18,12 @@ public class UnlinkCommandParser implements Parser<UnlinkCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_CHILD);
 
-        if (!argMultiMap.getPreamble().isEmpty()) {
+        if (!argMultiMap.getPreamble().isEmpty() || argMultiMap.getValue(PREFIX_CHILD).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnlinkCommand.MESSAGE_USAGE));
         }
+        argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_CHILD);
 
-        Name name = argMultiMap.getValue(PREFIX_CHILD).map(Name::new)
-                .orElseThrow(() -> new ParseException(String.format(
-                        MESSAGE_INVALID_COMMAND_FORMAT, UnlinkCommand.MESSAGE_USAGE)));
+        Name name = ParserUtil.parseName(argMultiMap.getValue(PREFIX_CHILD).get());
 
         return new UnlinkCommand(name);
     }

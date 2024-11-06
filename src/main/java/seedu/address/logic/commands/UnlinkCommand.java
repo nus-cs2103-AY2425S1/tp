@@ -116,4 +116,19 @@ public class UnlinkCommand extends Command {
     private String generateParentNotFoundMessage(Name name) {
         return String.format(MESSAGE_PARENT_NOT_FOUND, name.fullName);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UnlinkCommand)) {
+            return false;
+        }
+
+        UnlinkCommand otherUnlinkCommand = (UnlinkCommand) other;
+        return name.equals(otherUnlinkCommand.name);
+    }
 }
