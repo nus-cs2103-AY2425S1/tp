@@ -104,7 +104,7 @@ public class ParserUtil {
         requireNonNull(birthday);
         String trimmedBirthday = birthday.trim();
         if (!Birthday.isValidBirthday(trimmedBirthday)) {
-            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
         }
         return new Birthday(trimmedBirthday);
     }

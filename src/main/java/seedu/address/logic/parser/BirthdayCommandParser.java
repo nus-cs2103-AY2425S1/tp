@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+
+import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -26,9 +29,13 @@ public class BirthdayCommandParser implements Parser<BirthdayCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             String birthday = argMultimap.getValue(PREFIX_BIRTHDAY).orElse("");
             return new BirthdayCommand(index, new Birthday(birthday));
-        } catch (IllegalValueException | IllegalArgumentException ive_or_iae) {
+        } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BirthdayCommand.MESSAGE_USAGE),
-                    ive_or_iae);
+                    ive);
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(iae.getMessage());
+        } catch (DateTimeParseException dtpe) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
     }
 }

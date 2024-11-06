@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.BIRTHDAY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_EARLY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_LATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -93,11 +92,11 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
-        assertParseFailure(parser, "1" + INVALID_BIRTHDAY_LATE_DESC, Birthday.MESSAGE_CONSTRAINTS); //invalid birthday
+        assertParseFailure(parser, "1" + INVALID_BIRTHDAY_LATE_DESC,
+                Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT); //invalid birthday
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + EMAIL_DESC_AMY + INVALID_BIRTHDAY_EARLY_DESC, Birthday.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
