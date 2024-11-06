@@ -127,7 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                     .stream(jobs.spliterator(), false)
                     .anyMatch(job -> job.getIdentifier().equals(jobIdentifier));
             if (!jobExists) {
-                throw new JobNotFoundException(p.getMatch().get().toString());
+                throw new JobNotFoundException(p.getMatch().get());
             }
         }
 
