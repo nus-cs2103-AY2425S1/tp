@@ -36,7 +36,7 @@ public class CountCommand extends Command {
     private final Optional<String> tag;
 
     /**
-     * Creates a CountCommand with optional filters for name prefix and tag.
+     * Creates a CountCommand with optional filters for name prefix and tag to improve search.
      *
      * @param namePrefix Optional prefix to filter persons by name.
      * @param tag Optional tag to filter persons.
