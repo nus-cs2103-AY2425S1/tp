@@ -93,8 +93,8 @@ public class AddExistingTaskToGroupCommand extends Command {
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         if (numDuplicates > 0) {
             return new CommandResult(duplicateMessage + "\n"
-                + String.format(MESSAGE_SUCCESS, taskToAdd.getTaskName().getTaskName(), groupsAdded)
-                , LIST_GROUP_MARKER);
+                + String.format(MESSAGE_SUCCESS, taskToAdd.getTaskName().getTaskName(), groupsAdded),
+                LIST_GROUP_MARKER);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAdd.getTaskName().getTaskName(),
             groupsAdded), LIST_GROUP_MARKER);
