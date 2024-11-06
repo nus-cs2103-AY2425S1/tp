@@ -24,15 +24,15 @@ public class SchemeCommandTest {
 
     @Test
     public void execute_notSchemeAvail_success() {
-        String result = "Schemes available for family: Terry\n"
-                + "No schemes available for this family.";
+        String result = "Schemes available for: Terry\n"
+                + "No schemes available for this person.";
         CommandResult expectedCommandResult = new CommandResult(result);
         assertCommandSuccess(new SchemeCommand(INDEX_THIRD_PERSON), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_allSchemeAvail_success() {
-        String result = "Schemes available for family: Berry\n"
+        String result = "Schemes available for: Berry\n"
                 + "1. MOE Financial Assistance Scheme (MOE FAS)\n"
                 + "2. Student Care Fee Assistance (SCFA)\n";
         CommandResult expectedCommandResult = new CommandResult(result);
@@ -41,7 +41,7 @@ public class SchemeCommandTest {
 
     @Test
     public void execute_oneSchemeAvail_success() {
-        String result = "Schemes available for family: Cherry\n"
+        String result = "Schemes available for: Cherry\n"
                 + "1. Student Care Fee Assistance (SCFA)\n";
         CommandResult expectedCommandResult = new CommandResult(result);
         assertCommandSuccess(new SchemeCommand(INDEX_SECOND_PERSON), model, expectedCommandResult, expectedModel);
