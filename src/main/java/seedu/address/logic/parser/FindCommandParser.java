@@ -62,27 +62,92 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_NAME).get();
             nameKeywords = getKeywords(arg);
+            String invalidInput = nameKeywords.stream().map(word -> {
+                        try {
+                            ParserUtil.parseName(word);
+                            return ""; // successful
+                        } catch (ParseException e) {
+                            return e.getMessage(); // fail
+                        }
+                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                    .limit(1) // to standardise throughout that 1 error at the time is only shown
+                    .reduce("", (toReturn, errorMessage) -> errorMessage);
+            if (!invalidInput.isEmpty()) {
+                throw new ParseException(invalidInput);
+            }
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get();
             telegramKeywords = getKeywords(arg);
+            String invalidInput = telegramKeywords.stream().map(word -> {
+                        try {
+                            ParserUtil.parseTelegramHandle(word);
+                            return ""; // successful
+                        } catch (ParseException e) {
+                            return e.getMessage(); // fail
+                        }
+                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                    .limit(1) // to standardise throughout that 1 error at the time is only shown
+                    .reduce("", (toReturn, errorMessage) -> errorMessage);
+            if (!invalidInput.isEmpty()) {
+                throw new ParseException(invalidInput);
+            }
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_EMAIL).get();
             emailKeywords = getKeywords(arg);
+            String invalidInput = emailKeywords.stream().map(word -> {
+                        try {
+                            ParserUtil.parseEmail(word);
+                            return ""; // successful
+                        } catch (ParseException e) {
+                            return e.getMessage(); // fail
+                        }
+                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                    .limit(1) // to standardise throughout that 1 error at the time is only shown
+                    .reduce("", (toReturn, errorMessage) -> errorMessage);
+            if (!invalidInput.isEmpty()) {
+                throw new ParseException(invalidInput);
+            }
         }
         if (argMultimap.getValue(PREFIX_STUDENT_STATUS).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_STUDENT_STATUS).get();
             studentStatusKeywords = getKeywords(arg);
+            String invalidInput = studentStatusKeywords.stream().map(word -> {
+                        try {
+                            ParserUtil.parseStudentStatus(word);
+                            return ""; // successful
+                        } catch (ParseException e) {
+                            return e.getMessage(); // fail
+                        }
+                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                    .limit(1) // to standardise throughout that 1 error at the time is only shown
+                    .reduce("", (toReturn, errorMessage) -> errorMessage);
+            if (!invalidInput.isEmpty()) {
+                throw new ParseException(invalidInput);
+            }
         }
         if (argMultimap.getValue(PREFIX_NICKNAME).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_NICKNAME).get();
-            nicknameKeywords = getKeywords(arg);
+            nicknameKeywords = getKeywords(arg); // nickname no parsing problem
         }
 
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
             Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
             roleKeywords = roleList.stream().map(role -> role.roleName).toList();
+            String invalidInput = roleKeywords.stream().map(word -> {
+                        try {
+                            ParserUtil.parseRole(word);
+                            return ""; // successful
+                        } catch (ParseException e) {
+                            return e.getMessage(); // fail
+                        }
+                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                    .limit(1) // to standardise throughout that 1 error at the time is only shown
+                    .reduce("", (toReturn, errorMessage) -> errorMessage);
+            if (!invalidInput.isEmpty()) {
+                throw new ParseException(invalidInput);
+            }
         }
 
         ContainsKeywordsPredicate containsKeywordsPredicate =
@@ -115,5 +180,23 @@ public class FindCommandParser implements Parser<FindCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Arrays.stream(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /*
+    private void checkCanParse(List<String> keywords, Function<String, ParserUtil> parser) throws ParseException {
+        String invalidInput = keywords.stream().map(word -> {
+                    try {
+                        parser.apply(word);
+                        return ""; // successful
+                    } catch (ParseException e) {
+                        return e.getMessage(); // fail
+                    }
+                }).filter(inputValidity -> !inputValidity.isEmpty())
+                .limit(1) // to standardise throughout that 1 error at the time is only shown
+                .reduce("", (toReturn, errorMessage) -> errorMessage);
+        if (!invalidInput.isEmpty()) {
+            throw new ParseException(invalidInput);
+        }
+
+    }*/
 }
 
