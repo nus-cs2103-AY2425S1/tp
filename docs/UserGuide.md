@@ -250,11 +250,11 @@ Format: `blacklist INDEX`
 Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+![blacklisted image](images/blacklisted.png)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 <br>
 Entering `blacklist` on its own without any other parameters will filter and display all clients who have been blacklisted.
-
 </div>
 
 ### Whitelist a Client: `whitelist`
