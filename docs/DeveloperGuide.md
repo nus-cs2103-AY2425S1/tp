@@ -602,10 +602,10 @@ testers are expected to do more *exploratory* testing.
 1. Marking a policy as paid
 
     1. Prerequisites: There is at least one contact in the list with a policy.
-    2. Test case: `pay 1`
+    2. Test case: `paid 1 po/1`
     3. Expected: The first policy of the first person is marked as paid.
     - The status bar shows the following:
-      Marked Policy 1 as paid for "The first person in the list"
+      The policy Life Insurance for `Alex Yeoh` will be fully paid after this payment.
     - The list of persons should now have the updated person with the policy marked as paid inside of it.
 
 
