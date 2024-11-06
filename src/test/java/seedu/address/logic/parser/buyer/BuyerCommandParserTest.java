@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.buyer.AddCommand;
+import seedu.address.logic.commands.buyer.ClearCommand;
 import seedu.address.logic.commands.buyer.DeleteCommand;
 import seedu.address.logic.commands.buyer.EditCommand;
 import seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor;
@@ -93,6 +94,11 @@ public class BuyerCommandParserTest {
     @Test
     public void parseCommand_view() throws Exception {
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD, "") instanceof ViewCommand);
+    }
+
+    @Test
+    public void parseCommand_clear() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, "") instanceof ClearCommand);
     }
 
     @Test
