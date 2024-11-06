@@ -40,7 +40,7 @@ public class SortCommandTest {
         String expectedMessage;
         ParserUtil.SortAttribute sortAttribute;
 
-        // compare name
+        // EP: NAME
         sortAttribute = ParserUtil.SortAttribute.NAME;
         command = new SortCommand(sortAttribute);
         comparator = new NameCompare();
@@ -49,7 +49,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // compare phone
+        // EP: PHONE
         sortAttribute = ParserUtil.SortAttribute.PHONE;
         command = new SortCommand(sortAttribute);
         comparator = new PhoneCompare();
@@ -58,7 +58,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // compare address
+        // EP: ADDRESS
         sortAttribute = ParserUtil.SortAttribute.ADDRESS;
         command = new SortCommand(sortAttribute);
         comparator = new AddressCompare();
@@ -67,7 +67,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // compare EcName
+        // EP: EMERGENCYCONTACTNAME
         sortAttribute = ParserUtil.SortAttribute.EMERGENCYCONTACTNAME;
         command = new SortCommand(sortAttribute);
         comparator = new EcNameCompare();
@@ -76,7 +76,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // compare EcNumber
+        // EP: EMERGENCYCONTACTNUMBER
         sortAttribute = ParserUtil.SortAttribute.EMERGENCYCONTACTNUMBER;
         command = new SortCommand(sortAttribute);
         comparator = new EcNumberCompare();
@@ -85,7 +85,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // compare email
+        // EP: EMAIL
         sortAttribute = ParserUtil.SortAttribute.EMAIL;
         command = new SortCommand(sortAttribute);
         comparator = new EmailCompare();
@@ -94,7 +94,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // compare register number
+        // EP: REGISTERNUMBER
         sortAttribute = ParserUtil.SortAttribute.REGISTERNUMBER;
         command = new SortCommand(sortAttribute);
         comparator = new RegisterNumberCompare();
@@ -103,7 +103,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // compare sex
+        // EP: SEX
         sortAttribute = ParserUtil.SortAttribute.SEX;
         command = new SortCommand(sortAttribute);
         comparator = new SexCompare();
@@ -112,7 +112,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // compare student class
+        // EP: STUDENTCLASS
         sortAttribute = ParserUtil.SortAttribute.STUDENTCLASS;
         command = new SortCommand(sortAttribute);
         comparator = new StudentClassCompare();
@@ -121,7 +121,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        // unsorting success
+        // EP: NONE
         sortAttribute = ParserUtil.SortAttribute.NONE;
         command = new SortCommand(sortAttribute);
         comparator = null;
@@ -135,20 +135,20 @@ public class SortCommandTest {
     public void equals() {
         final SortCommand standardCommand = new SortCommand(ParserUtil.SortAttribute.NAME);
 
-        // same values -> returns true
+        // EP: same values -> returns true
         SortCommand commandWithSameValues = new SortCommand(ParserUtil.SortAttribute.NAME);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(standardCommand.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different SortAttribute -> returns false
+        // EP: different SortAttribute -> returns false
         assertFalse(standardCommand.equals(new SortCommand(ParserUtil.SortAttribute.PHONE)));
     }
 }

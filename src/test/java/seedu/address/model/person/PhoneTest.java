@@ -44,6 +44,7 @@ public class PhoneTest {
     public void toInt() {
         Phone phone = new Phone("999");
 
+        // EP: integer strings
         assertEquals(phone.toInt(), 999);
         assertNotEquals(phone.toInt(), 000);
     }

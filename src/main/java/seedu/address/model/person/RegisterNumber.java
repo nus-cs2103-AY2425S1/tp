@@ -35,7 +35,7 @@ public class RegisterNumber implements Comparable<RegisterNumber> {
     }
 
     /**
-     * Returns the integer representation of RegisterNumber
+     * Returns the integer representation of RegisterNumber.
      */
     public Integer toInt() {
         return Integer.valueOf(this.value);

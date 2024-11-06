@@ -12,7 +12,7 @@ import seedu.address.logic.parser.ParserUtil.SortAttribute;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new SortCommand object
+ * Parses input arguments and creates a new SortCommand object.
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
@@ -26,14 +26,16 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
         SortAttribute sortAttribute;
+
         try {
             sortAttribute = ParserUtil.parseSortAttribute(args);
         } catch (IllegalValueException ive) {
-            logger.log(Level.INFO, "Illegal Attribute Exception Caught");
-            throw new ParseException(ive.getMessage() + "\n" + SortCommand.MESSAGE_USAGE);
+            logger.log(Level.INFO, "Illegal attribute exception Caught");
+            throw new ParseException(ive.getMessage() + "\n" + SortCommand.MESSAGE_USAGE, ive);
         }
+
         assert sortAttribute != null;
-        logger.log(Level.INFO, "parsed sort command without exception");
+        logger.log(Level.INFO, "Parsed sort command without exception");
         return new SortCommand(sortAttribute);
     }
 }
