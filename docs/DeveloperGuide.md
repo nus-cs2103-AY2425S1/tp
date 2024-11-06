@@ -1244,3 +1244,16 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+1. The project required a significant amount of effort and focus to implement the new features.
+There were some challenges along the way when we did not know how to implement a specific feature such as filter and sort.
+It was also quite challenging to add attributes such as exams, submissions, and attendance and representing them in
+the GUI.
+2. While AB3 deals with simple attributes of people, we had some attributes that were more complex and needed to store
+more data than usual just for a single student.
+3. Some achievements of the project include learning the workflows of having multiple developers work on the same product
+and managing each other's changes.
