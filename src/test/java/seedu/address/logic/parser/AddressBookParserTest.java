@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonMeetsCriteriaPredicate;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -112,7 +110,7 @@ public class AddressBookParserTest {
                 Arrays.asList(addressCriteria),
                 Arrays.asList(incomeCriteria),
                 Arrays.asList(ageCriteria),
-                new HashSet<>(Arrays.asList(new Tag(tagCriteria)))
+                Arrays.asList(tagCriteria)
         );
 
         FilterCommand command = (FilterCommand) parser.parseCommand(userInput);

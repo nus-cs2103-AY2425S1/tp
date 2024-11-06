@@ -11,13 +11,11 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.person.PersonMeetsCriteriaPredicate;
-import seedu.address.model.tag.Tag;
 
 public class FilterCommandParserTest {
     private final FilterCommandParser parser = new FilterCommandParser();
@@ -45,7 +43,7 @@ public class FilterCommandParserTest {
                 Arrays.asList(addressCriteria),
                 Arrays.asList(incomeCriteria),
                 Arrays.asList(ageCriteria),
-                new HashSet<>(Arrays.asList(new Tag(tagCriteria)))
+                Arrays.asList(tagCriteria)
         );
 
         assertParseSuccess(parser, userInput, new FilterCommand(predicate));
@@ -62,7 +60,7 @@ public class FilterCommandParserTest {
                 Arrays.asList(),
                 Arrays.asList(),
                 Arrays.asList(),
-                new HashSet<>()
+                Arrays.asList()
         );
 
         assertParseSuccess(parser, userInput, new FilterCommand(predicate));

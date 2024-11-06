@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +34,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -55,7 +54,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -75,7 +74,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -95,7 +94,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -115,7 +114,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Arrays.asList("Street");
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -135,7 +134,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Arrays.asList("Avenue");
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -155,7 +154,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Arrays.asList("low");
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -175,7 +174,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Arrays.asList("high");
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -195,7 +194,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Arrays.asList(">20");
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -215,7 +214,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Arrays.asList("<20");
-        Set<Tag> tags = Collections.emptySet();
+        List<String> tags = Collections.emptyList();
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -235,7 +234,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("friend")));
+        List<String> tags = Arrays.asList("friend");
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -255,7 +254,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Collections.emptyList();
         List<String> incomeCriteria = Collections.emptyList();
         List<String> ageCriteria = Collections.emptyList();
-        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("colleague")));
+        List<String> tags = Arrays.asList("colleague");
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -275,7 +274,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Arrays.asList("123 Street");
         List<String> incomeCriteria = Arrays.asList("low");
         List<String> ageCriteria = Arrays.asList(">20");
-        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("friend")));
+        List<String> tags = Arrays.asList("friend");
 
         PersonMeetsCriteriaPredicate predicate1 = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -307,7 +306,7 @@ public class PersonMeetsCriteriaPredicateTest {
         List<String> addressCriteria = Arrays.asList("Street");
         List<String> incomeCriteria = Arrays.asList("low");
         List<String> ageCriteria = Arrays.asList(">20");
-        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("friend")));
+        List<String> tags = Arrays.asList("friend");
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
             phoneCriteria,
@@ -317,7 +316,7 @@ public class PersonMeetsCriteriaPredicateTest {
             ageCriteria,
             tags);
         String expectedString = PersonMeetsCriteriaPredicate.class.getCanonicalName()
-            + "{phone=[123], email=[example.com], address=[Street], income=[low], age=[>20], tags=[[friend]]}";
+            + "{phone=[123], email=[example.com], address=[Street], income=[low], age=[>20], tags=[friend]}";
 
         assertEquals(expectedString, predicate.toString());
     }
