@@ -75,7 +75,8 @@ public class PersonDescriptor {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals((getPhone()));
     }
 
     /**
@@ -84,7 +85,8 @@ public class PersonDescriptor {
      */
     public boolean isSamePerson(Person otherPerson) {
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**

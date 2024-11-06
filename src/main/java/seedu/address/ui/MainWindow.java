@@ -157,14 +157,6 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
-    private void showPersonListPanel() {
-        hbox.getChildren().add(personVBox);
-    }
-
-    private void showAppointmentListPanel() {
-        hbox.getChildren().add(appointmentVBox);
-    }
-
     /**
      * Sets the default size based on {@code guiSettings}.
      */
@@ -219,12 +211,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandText.trim().contains(" person")) {
-                showPersonListPanel();
-            } else if (commandText.trim().contains(" appt")) {
-                showAppointmentListPanel();
-            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

@@ -56,7 +56,7 @@ public class AppointmentUtil {
      * Returns a formatted local date that is used for edit appointment command input.
      */
     public static String formatDateTime(LocalDateTime appointmentDateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return appointmentDateTime.format(formatter);
     }
 }

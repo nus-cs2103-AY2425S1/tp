@@ -9,13 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Sickness {
 
-    public static final String MESSAGE_CONSTRAINTS = "Sicknesses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Sicknesses should contain at least one letter "
+            + "(alphabetic character), and it should not be blank";
 
-    /*
-     * The first character of the sickness must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^(?=\\S)(?=.*[a-zA-Z]).*(?<=\\S)$";
 
     public final String value;
 

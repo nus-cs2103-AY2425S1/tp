@@ -27,6 +27,8 @@ public abstract class DeleteCommand extends Command {
     protected final Index targetIndex;
 
     /**
+     * Constructs a DeleteCommand with the specified index.
+     *
      * @param targetIndex Index of entity to be deleted.
      */
     public DeleteCommand(Index targetIndex) {
@@ -50,26 +52,39 @@ public abstract class DeleteCommand extends Command {
 
     /**
      * Gets the filtered list of entities in the model.
+     *
+     * @param model Model to get the list from.
+     * @return Filtered list of entities.
      */
     protected abstract List<?> getFilteredList(Model model);
 
     /**
      * Deletes the entity from the model.
+     *
+     * @param model Model to delete entity from.
+     * @param entity Entity to delete.
      */
-    protected abstract void deleteEntity(Model model, Object entity) throws CommandException;
+    protected abstract void deleteEntity(Model model, Object entity);
 
     /**
      * Returns the success message to display upon deleting entity.
+     *
+     * @return Success message.
      */
     protected abstract String getSuccessMessage();
 
     /**
      * Returns the invalid index message when the index is out of bounds.
+     *
+     * @return Invalid index message.
      */
     protected abstract String getInvalidIndexMessage();
 
     /**
      * Formats the entity for displaying in the success message.
+     *
+     * @param entity Entity to format.
+     * @return Formatted entity.
      */
     protected abstract String formatEntity(Object entity);
 }

@@ -27,10 +27,19 @@ public abstract class FindCommand<T> extends Command {
 
     protected final Predicate<T> predicate;
 
+    /**
+     * Creates a {@code FindCommand} with the specified predicate.
+     * */
     public FindCommand(Predicate<T> predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the find command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the result of executing the command.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -62,12 +71,15 @@ public abstract class FindCommand<T> extends Command {
 
     /**
      * Finds the person/appointment from the list
+     *
+     * @param model {@code Model} which the FindCommand should operate on.
      */
     protected abstract void findEntity(Model model);
 
     /**
      * Returns the message to be displayed after finding all persons or appointments matching the query.
      *
+     * @param model {@code Model} which the FindCommand should operate on.
      * @return Success message
      */
     protected abstract String getSuccessMessage(Model model);

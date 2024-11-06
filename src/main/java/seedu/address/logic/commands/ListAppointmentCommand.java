@@ -11,7 +11,8 @@ public class ListAppointmentCommand extends ListCommand {
     public static final String MESSAGE_SUCCESS = "Listed all appointments!";
 
     /**
-     * Lists all appointments in the appointment book to the user.*
+     * Lists all appointments in the appointment book to the user.
+     *
      * @param model {@code Model} which the ListAppointmentCommand should operate on.
      * */
     @Override

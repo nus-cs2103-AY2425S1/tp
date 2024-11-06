@@ -2,7 +2,7 @@
   "baseUrl": "",
   "titlePrefix": "DocTrack",
   "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/doctrack_icon.png",
   "style": {
     "codeTheme": "light"
   },

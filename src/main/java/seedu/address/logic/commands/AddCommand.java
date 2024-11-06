@@ -40,10 +40,17 @@ public abstract class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING + " "
             + PREFIX_PERSON_ID + "1 "
             + PREFIX_APPOINTMENT_TYPE + "Check up "
-            + PREFIX_DATETIME + "2024-10-16 12:30:30 "
+            + PREFIX_DATETIME + "2024-10-16 12:30 "
             + PREFIX_SICKNESS + "Common Cold "
             + PREFIX_MEDICINE + "Paracetamol";
 
+    /**
+     * Executes the command to add an entity to the address book.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the success of the command.
+     * @throws CommandException if there are duplicates
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -58,26 +65,38 @@ public abstract class AddCommand extends Command {
 
     /**
      * Checks if the entity being added to model already exists.
+     *
+     * @param model Model to check if entity already exists.
+     * @return True if entity already exists in model, false otherwise.
      */
     protected abstract boolean alreadyExists(Model model);
 
     /**
      * Adds the entity to the model.
+     *
+     * @param model Model to add entity to.
+     * @throws CommandException If entity cannot be added.
      */
     protected abstract void addEntity(Model model) throws CommandException;
 
     /**
      * Returns success message to display upon adding entity.
+     *
+     * @return Success message.
      */
     protected abstract String getSuccessMessage();
 
     /**
      * Returns the message to display when there is a duplicate.
+     *
+     * @return Duplicate entity message.
      */
     protected abstract String getDuplicateEntityMessage();
 
     /**
      * Formats the entity for displaying in the success message.
+     *
+     * @return Formatted entity.
      */
     protected abstract String formatEntity();
 }

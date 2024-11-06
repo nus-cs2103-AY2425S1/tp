@@ -64,18 +64,10 @@ public class EditAppointmentCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT, new EditAppointmentDescriptor());
-        Appointment editedAppointment = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT.getZeroBased());
-
-        String expectedMessage = String.format(
-            EditAppointmentCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS,
-                Messages.formatAppointment(editedAppointment));
-
-        Model expectedModel = new ModelManager(getTypicalAddressBook(),
-            new AppointmentBook(model.getAppointmentBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
+        EditCommand editAppointmentCommand = new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT,
+                new EditAppointmentDescriptor());
+        assertCommandFailure(editAppointmentCommand, model, EditAppointmentCommand.MESSAGE_DUPLICATE_APPOINTMENT);
     }
 
     @Test
