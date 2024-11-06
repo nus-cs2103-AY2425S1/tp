@@ -44,15 +44,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Summary of Features
 ### Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`
-**List**   | `list`
-**Help**   | `help`
+| Action     | Format, Examples                                                                                                                                                    |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President` |
+| **Clear**  | `clear`                                                                                                                                                             |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
+| **Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                      |
+| **Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                |
+| **List**   | `list`                                                                                                                                                              |
+| **Help**   | `help`                                                                                                                                                              |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -91,6 +91,16 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+This also prompts the user to do `help [COMMAND_WORD]` where [COMMAND_WORD] refers to:
+* `add`
+* `list`
+* `edit`
+* `find`
+* `delete`
+* `clear`
+* `exit`
+
+From this, the user can get quick reminder on how to use the various commands without having to refer to the User Guide
 
 ### Adding a contact: `add`
 
@@ -110,7 +120,7 @@ Format:
 5. Events (internal)
 6. Events (external)
 7. External Relations
-   </box>
+</box>
 
 Examples:
 * `add n/John Doe th/johndoe e/johnd@example.com s/undergraduate 3 r/Admin r/President nn/altName`
@@ -143,6 +153,8 @@ Examples:
 *  `edit 1 th/johndoe123 e/johndoe@example.com` Edits the telegram handle and email address of the 1st contact to be `johndoe123` and `johndoe@example.com` respectively.
 *  `edit 2 r/Admin r/President` Edits the roles of the 2nd contact to be Admin and President, this removes all existing roles user has.
 
+Do note that the `edit` command will fail if you enter a duplicate field as seen below under [invalid contacts](#what-is-considered-as-invalid-contacts)
+
 ### Locating contacts by name : `find`
 
 Finds contacts whose details matches all given fields.
@@ -151,7 +163,7 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
 
 * Role field `[r/ROLE]`:
     * Can be repeated any number of times e.g. `find r/Vice President r/Admin` &rarr; valid
-    * Have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))<br>
+    * Have to take a valid role value (Refer to **Tip** section above in [adding a contact](#adding-a-contact-add))<br>
       e.g. `find r/pres` &rarr; invalid<br>
       e.g. `find r/President` &rarr; valid
     * Case-insensitive e.g. `find r/pResiDent` &rarr; valid
@@ -228,9 +240,26 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
     Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## What is considered as invalid contacts
+
+There must not be duplicate fields. For example, if there is a contact with the following data:
+
+`n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny`
+
+1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname` Nickname must be **unique**
+   * **Fail:** `n/John Doe nn/Johnny...`
+   * **Fail:** `n/Jane Hoe nn/Johnny...` there is already a Nickname Johnny
+   * **Success:** `n/John Doe nn/notJohnny...`
+2. Must not have the same `Telegram Handle`. Each Telegram Handle must be **unique**
+   * **Fail:** `th/johndoe...`
+3. Must not have the same `Email`. Each Email must be **unique**
+   * **Fail:** `e/johnd@example.com...`
+4. Must not have more than one `Role` labelled as `President`. Can only have one `President`
+   * **Fail:** `n/Jane Hoe th/janehoe e/janeh@example.com ss/undergraduate 3 r/Admin r/President nn/jane`
+
 
 ## Available fields
 
