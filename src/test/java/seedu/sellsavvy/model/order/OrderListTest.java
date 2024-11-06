@@ -69,6 +69,36 @@ public class OrderListTest {
     }
 
     @Test
+    public void containsSimilarOrder_nullOrder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> orderList.containsSimilarOrder(null));
+    }
+
+    @Test
+    public void containsSimilarOrder_orderNotInList_returnsFalse() {
+        assertFalse(orderList.containsSimilarOrder(ATLAS));
+    }
+
+    @Test
+    public void containsSimilarOrder_onlySameOrderInList_returnsFalse() {
+        orderList.add(ATLAS);
+        assertFalse(orderList.containsSimilarOrder(ATLAS));
+    }
+
+    @Test
+    public void containsSimilarOrder_differentOrderWithSameFieldsInList_returnsTrue() {
+        orderList.add(ATLAS);
+        Order atlasCopy = new OrderBuilder(ATLAS).build();
+        assertTrue(orderList.containsSimilarOrder(atlasCopy));
+    }
+
+    @Test
+    public void containsSimilarOrder_differentOrderWithSimilarFieldsInList_returnsTrue() {
+        orderList.add(ATLAS);
+        Order atlasFailedCopy = new OrderBuilder(ATLAS).withItem(ATLAS.getItem().fullDescription.toLowerCase()).build();
+        assertTrue(orderList.containsSimilarOrder(atlasFailedCopy));
+    }
+
+    @Test
     public void add_nullOrder_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> orderList.add(null));
     }

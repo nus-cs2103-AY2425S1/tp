@@ -10,6 +10,7 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_BOTTLE;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
 
@@ -90,6 +91,55 @@ public class OrderTest {
         // different status -> returns false
         editedAtlas = new OrderBuilder(ATLAS).withStatus(Status.COMPLETED).build();
         assertFalse(ATLAS.equals(editedAtlas));
+    }
+
+    @Test
+    public void isSimilarTo() {
+        // same values -> returns true
+        Order atlasCopy = new OrderBuilder(ATLAS).build();
+        assertTrue(ATLAS.isSimilarTo(atlasCopy));
+
+        // same object -> returns true
+        assertTrue(ATLAS.isSimilarTo(ATLAS));
+
+        // null -> throws exception
+        assertThrows(NullPointerException.class, () ->ATLAS.isSimilarTo(null));
+
+        // different order -> returns false
+        assertFalse(ATLAS.isSimilarTo(BOTTLE));
+
+        // different item -> returns false
+        Order editedAtlas = new OrderBuilder(ATLAS).withItem(VALID_ITEM_BOTTLE).build();
+        assertFalse(ATLAS.isSimilarTo(editedAtlas));
+
+        // different quantity -> returns false
+        editedAtlas = new OrderBuilder(ATLAS).withQuantity(VALID_QUANTITY_BOTTLE).build();
+        assertFalse(ATLAS.isSimilarTo(editedAtlas));
+
+        // different date -> returns false
+        editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_BOTTLE).build();
+        assertFalse(ATLAS.isSimilarTo(editedAtlas));
+
+        // different status -> returns false
+        editedAtlas = new OrderBuilder(ATLAS).withStatus(Status.COMPLETED).build();
+        assertFalse(ATLAS.isSimilarTo(editedAtlas));
+
+        // Similar item -> returns true
+        // Original item : "Atlas A"
+        // different casing
+        editedAtlas = new OrderBuilder(ATLAS).withItem("atlas a").build();
+        assertTrue(ATLAS.isSimilarTo(editedAtlas));
+        assertTrue(editedAtlas.isSimilarTo(ATLAS));
+
+        //different spacing
+        editedAtlas = new OrderBuilder(ATLAS).withItem("Atlas A").build();
+        assertTrue(ATLAS.isSimilarTo(editedAtlas));
+        assertTrue(editedAtlas.isSimilarTo(ATLAS));
+
+        //different casing and spacing
+        editedAtlas = new OrderBuilder(ATLAS).withItem("a TlAsA").build();
+        assertTrue(ATLAS.isSimilarTo(editedAtlas));
+        assertTrue(editedAtlas.isSimilarTo(ATLAS));
     }
 
     @Test
