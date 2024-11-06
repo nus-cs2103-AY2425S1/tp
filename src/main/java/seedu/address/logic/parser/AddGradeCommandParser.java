@@ -61,7 +61,7 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
      * @param scoreString the score string to check.
      * @throws ParseException if either the assignment name or score string is empty.
      */
-    private static void checkAssignmentString(String assignmentName,String scoreString) throws ParseException {
+    private static void checkAssignmentString(String assignmentName, String scoreString) throws ParseException {
         if (assignmentName.isEmpty()) {
             throw new ParseException("Assignment name cannot be empty.");
         }

@@ -18,15 +18,15 @@ import seedu.address.testutil.TypicalPersons;
 
 /**
  * Tests the functionality of the AddGradeCommand class.
- *
- * This class contains test cases for the constructor and execution of the AddGradeCommand, including tests for invalid inputs
- * such as null values, invalid names, and out-of-range scores, as well as tests for successful execution.
+ * <p>
+ * This class contains test cases for the constructor and execution of the AddGradeCommand, including tests for invalid
+ * inputs such as null values, invalid names, and out-of-range scores, as well as tests for successful execution.
  */
 public class AddGradeCommandTest {
     private final Model model = new ModelManager(
-            getTypicalAddressBook(),
-            new UserPrefs(),
-            SampleAssignmentsUtil.getSamplePredefinedAssignments());
+        getTypicalAddressBook(),
+        new UserPrefs(),
+        SampleAssignmentsUtil.getSamplePredefinedAssignments());
 
 
     /**
@@ -64,7 +64,7 @@ public class AddGradeCommandTest {
     @Test
     public void assignment_invalidHighScore() {
         AddGradeCommand command = new AddGradeCommand(new Name("John Doe"),
-                100f, "ex01");
+            100f, "ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
@@ -75,7 +75,7 @@ public class AddGradeCommandTest {
     @Test
     public void assignment_invalidLowScore() {
         AddGradeCommand command = new AddGradeCommand(new Name("John Doe"),
-                -1f, "ex01");
+            -1f, "ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
@@ -98,17 +98,17 @@ public class AddGradeCommandTest {
         Person testPerson = TypicalPersons.ALICE;
         final String name = "Ex02";
         AddGradeCommand command = new AddGradeCommand(
-                testPerson.getName(),
-                9.0f,
-                name);
+            testPerson.getName(),
+            9.0f,
+            name);
         command.execute(model);
         assertEquals(model
-                .getAddressBook()
-                .getPersonList()
-                .stream().filter(person -> person
-                        .getName()
-                        .equals(testPerson.getName()))
-                .toList().get(0).getAssignment().get(name).getScore(), 9.0f);
+            .getAddressBook()
+            .getPersonList()
+            .stream().filter(person -> person
+                .getName()
+                .equals(testPerson.getName()))
+            .toList().get(0).getAssignment().get(name).getScore(), 9.0f);
 
     }
 
@@ -116,8 +116,8 @@ public class AddGradeCommandTest {
     public void execute_helpString() throws Exception {
         AddGradeCommand c = AddGradeCommand.showAssignmentDefault();
         assertEquals(
-                c.execute(model).getFeedbackToUser(),
-                model.getPredefinedAssignments().toString());
+            c.execute(model).getFeedbackToUser(),
+            model.getPredefinedAssignments().toString());
     }
 
 

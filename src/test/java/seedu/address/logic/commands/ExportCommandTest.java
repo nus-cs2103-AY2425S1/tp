@@ -6,6 +6,9 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +34,7 @@ public class ExportCommandTest {
      * @throws CommandException if the command execution fails unexpectedly.
      */
     @Test
-    public void validExportCommandResult_success() throws CommandException {
+    public void validExportCommandResult_success() throws CommandException, IOException {
         // Get the project root directory path
         String projectDir = System.getProperty("user.dir");
         String filePath = projectDir + "/src/test/data/testExport.csv";
@@ -40,6 +43,8 @@ public class ExportCommandTest {
         CommandResult commandResult = command.execute(model);
         assertEquals("Exported " + getTypicalAddressBook().getPersonList().size()
             + " persons to CSV.", commandResult.getFeedbackToUser());
+        Path path = Paths.get(filePath);
+        Files.deleteIfExists(path);
     }
 
 

@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.ImportCommand.CORRECT_HEADER_USAGE;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_READING_ERROR;
+import static seedu.address.model.person.Name.MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.util.SampleAssignmentsUtil;
 
 /**
@@ -46,7 +49,7 @@ public class ImportCommandTest {
         String projectDir = System.getProperty("user.dir");
         String filePath = projectDir + "/src/test/data/invalidHeader.csv";
         ImportCommand command = new ImportCommand(filePath);
-        String expectedMsg = "Error reading from the CSV file: " + "Header is defined incorrectly!\n"
+        String expectedMsg = MESSAGE_READING_ERROR + "Header is defined incorrectly!\n"
             + CORRECT_HEADER_USAGE;
         assertCommandFailure(command, model, expectedMsg);
     }
@@ -60,7 +63,7 @@ public class ImportCommandTest {
         String projectDir = System.getProperty("user.dir");
         String filePath = projectDir + "/src/test/data/extraHeader.csv";
         ImportCommand command = new ImportCommand(filePath);
-        String expectedMsg = "Error reading from the CSV file: " + "There are extra columns!\n"
+        String expectedMsg = MESSAGE_READING_ERROR + "There are extra columns!\n"
             + "Please ensure there is only be 8 corresponding header/data columns\n" + CORRECT_HEADER_USAGE;
         assertCommandFailure(command, model, expectedMsg);
     }
@@ -74,7 +77,7 @@ public class ImportCommandTest {
         String projectDir = System.getProperty("user.dir");
         String filePath = projectDir + "/src/test/data/missingHeaderEntry.csv";
         ImportCommand command = new ImportCommand(filePath);
-        String expectedMsg = "Error reading from the CSV file: "
+        String expectedMsg = MESSAGE_READING_ERROR
             + "There are lesser columns in header than expected!\n" + CORRECT_HEADER_USAGE;
         assertCommandFailure(command, model, expectedMsg);
     }
@@ -88,7 +91,7 @@ public class ImportCommandTest {
         String projectDir = System.getProperty("user.dir");
         String filePath = projectDir + "/src/test/data/missingHeader.csv";
         ImportCommand command = new ImportCommand(filePath);
-        String expectedMsg = "Error reading from the CSV file: "
+        String expectedMsg = MESSAGE_READING_ERROR
             + "CSV header is empty/contains empty values, please ensure"
             + " all headers are valid.\n"
             + CORRECT_HEADER_USAGE;
@@ -136,7 +139,7 @@ public class ImportCommandTest {
         String projectDir = System.getProperty("user.dir");
         String filePath = projectDir + "/src/test/data/noDataRow.csv";
         ImportCommand command = new ImportCommand(filePath);
-        String expectedMsg = "Error reading from the CSV file: "
+        String expectedMsg = MESSAGE_READING_ERROR
             + "There is no person data present.";
         assertCommandFailure(command, model, expectedMsg);
     }
@@ -151,8 +154,22 @@ public class ImportCommandTest {
         String projectDir = System.getProperty("user.dir");
         String filePath = projectDir + "/src/test/data/duplicatePerson.csv";
         ImportCommand command = new ImportCommand(filePath);
-        String expectedMsg = "Error reading from the CSV file " + "Operation would result in duplicate persons"
+        String expectedMsg = MESSAGE_READING_ERROR + "Operation would result in duplicate persons"
             + "\nPlease ensure that there are no duplicate person in the CSV file";
+        assertCommandFailure(command, model, expectedMsg);
+    }
+
+    /**
+     * Tests the execution of an import command with a CSV file containing invalid person name,
+     * expecting failure. Verifies that the command fails with the expected error message
+     * indicating that duplicate persons are present.
+     */
+    @Test
+    public void invalidPersonNameExecution_fail() {
+        String projectDir = System.getProperty("user.dir");
+        String filePath = projectDir + "/src/test/data/invalidPersonName.csv";
+        ImportCommand command = new ImportCommand(filePath);
+        String expectedMsg = MESSAGE_READING_ERROR + MESSAGE_CONSTRAINTS;
         assertCommandFailure(command, model, expectedMsg);
     }
 }
