@@ -475,7 +475,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: An employee has to be added and list all employees using the `list e` command. There should be an employee at index 1.
 
    2. Test case: `edit 1 n/John Doe3 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-      Expected: The employee at index 1 should be edited into John Doe2
+      Expected: The employee at index 1 should be edited into John Doe3
 
    3. Test case: `edit 1 n/John@Doe`<br>
       Expected: Edit failed, error details shown in the status message
@@ -485,7 +485,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: A potential hire has to be added and list all potential hires using the `list ph` command. There should be a potential hire at index 1.
 
    2. Test case: `edit 1 n/John Doe4 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
-      Expected: The employee at index 1 should be edited into John Doe2
+      Expected: The employee at index 1 should be edited into John Doe4
 
    3. Test case: `edit 1 n/John@Doe`<br>
       Expected: Edit failed, error details shown in the status message
