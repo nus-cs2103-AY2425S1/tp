@@ -40,6 +40,8 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("Gavin d/o Qianbo")); // support common Indian name with `s/o`
+        assertTrue(Name.isValidName("Sean s/o YangZhi")); // support common Indian name with `d/o`
 
         // new valid test cases based on the updated regex to allow more legal names
         assertTrue(Name.isValidName("O'Connor")); // name with apostrophe
