@@ -57,11 +57,25 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for _some_ commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the user enters `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+## Accepted values by field
+Field | Accepted input values | Examples | Exceptions
+----------|-----------------------|----------|-----------
+`NAME` | Any valid English name. Alphanumeric characters, spaces and dashes are allowed. | `John Doe`, `Jean Mary-Jane`, `Jackie  Chan` | None
+`PHONE_NUMBER` | Must consist of digits (0 to 9), but spaces and dashes are allowed. | `9143 9032`, `872-233-8554`, `987223414` | None
+`EMAIL` | Must be a in a valid email format (no underscores): `somestring@domain.topleveldomain` | `jemma22@github.com`, `rahulSingh@rocket.net`, `cassie@finance.morganstanley.com` | None
+`ADDRESS` | Any non-empty string | `Singapore`, `42 Wallaby Way, Sydney` | None
+`DEADLINE` | Any valid date in the format dd-mm-[yy]yy<br>Day and Month must be a valid combination (so no 31st of February for example)<br>Year can be either 2-digit or 4-digit<br>Dashes (-), Slashes (/), underscores (_) and vertical bars (\|) can be used as delimiters | `1-1-25` (represents "January 1, 2025"), `10/8/2040` (represents "August 10, 2040"), `29\|2\|28` (represents "February 29, 2028") | None
+`TAG` | Any non-empty alphanumeric string (spaces allowed) | `friends`, `CEO of IMB`, `Born 2017` | None
+`CLIENT_STATUS` | Must be `old`, `potential`, `unresponsive` or `active`. | `old`, `potential`, `unresponsive`, `active` | `blacklisted` is a also valid client status but can only be set using the `blacklist` command ([see here](#blacklist-a-client-blacklist)).
+`PROJECT_STATUS` | Must be `in progress` or `completed` (note the past tense) | `in progress`, `completed` | None
+`PAYMENT_STATUS` | Must be `pending`, `partial`, `paid` or `late` | `pending`, `partial`, `paid`, `late` | None
+
 
 ## General Commands
 ### Viewing help: `help`
@@ -72,7 +86,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Listing all Client: `list`
+### Listing all Clients: `list`
 
 Show a list of all clients contacts in Clientele+.
 
@@ -80,7 +94,7 @@ Format: `list`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 
-This command is often used to return to the main client list
+You can use this command to return to the main client list.
 
 </div>
 
@@ -90,9 +104,16 @@ Clears all entries from Clientele+.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+<br>
+**This command deletes all the clients from Clientele+, archived or otherwise. This cannot be undone. If you are using this command, be very sure that you know what you are doing!**
+
+</div>
+
 ### Exiting the Program: `exit`
 
-Exits the program.
+Automatically saves all of the user's client data and exits the program.
 
 Format: `exit`
 
@@ -106,25 +127,20 @@ You can also exit the program by clicking the "x" at the top left corner of the 
 ## Client Management
 ### Add Client Details: `add`
 
-Add a client to Clientele+, including details such as client name, contact information, project deadline, project status, payment status and client status.
+Add a client to Clientele+, including details such as client name, contact information, project deadline, project status, payment status and client status. Accepted values are as specified in the [accepted values table above](#accepted-values-by-parameter).
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
 * Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
-* A person can have any number of tags (including 0)
-* `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
-* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`).
-* `PHONE_NUMBER` should be **numeric** digits, may include “-” or spaces. Example: `555-1234` or `555 1234`.
-* `EMAIL`  Standard email format: “user@example.com”.
-* `PAYMENT STATUS` Acceptable values are `pending`, `partial`, `paid`, `late`. Case-insensitive. These values are displayed as an icon with the colours orange, yellow, green and red respectively.
-* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case-insensitive.
-* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case-insensitive.
-* `TAG` Should be alphanumeric. May contain spaces.
-* `DEADLINE` Should be in the following format: `DD-MM-YYYY`. Example: `10-10-2024` represents **10th October 2024**
+* A person can have 0 or more tags.
+* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered the same name, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`).
+* If `PAYMENT_STATUS` is not specified, default payment status of `pending` is used.
+* If `CLIENT_STATUS` is not specified, default client status of `active` is used.
+* If `PROJECT_STATUS` is not specified, default project status of `in progress` is used.
 
 Examples:
-* `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan t/Chief Technology Officer ps/in progress py/pending cs/active d/09-09-2024`
+* `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan t/CTO ps/in progress py/pending cs/active d/09-09-2024`
 * `add n/Betsy Crowe t/SoftEng Inc e/betsycrowe@gmail.com a/Wallich Street p/1234567 t/Founder d/11-04-2024`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -137,24 +153,18 @@ Examples:
 
 ### Update Client Details: `edit`
 
-Allows updating of various statuses of an existing client.
+Allows updating of various statuses of an existing client. Accepted values are as specified in the [accepted values table above](#accepted-values-by-parameter).
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DEADLINE]
 [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
-* `NAME` Acceptable values are same as in add command
-* `PHONE_NUMBER` Acceptable values are same as in add command
-* `EMAIL` Acceptable values are same as in add command
-* `PAYMENT STATUS` Acceptable values are same as in add command
-* `CLIENT STATUS` Acceptable values are same as in add command
-* `PROJECT STATUS` Acceptable values are same as in add command
-* `DEADLINE` Acceptable values are same as in add command
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the _displayed_ person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* Any fields not specified will remain unchanged.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Updates the first person’s phone number to `91234567` and email address to `johndoe@example.com`
@@ -164,7 +174,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
-The deadline field will show an `OVERDUE` label if the deadline has passed and the client status is still `active`, so if the client has paid, and your business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `OVERDUE`.
+If a client's project deadline has passed and the client status is still `active` the GUI labels the client card as `OVERDUE`. So if the client has paid, and your business with them is finished, you can set their client status to `old` so the deadline field doesn't show `OVERDUE`.
 
 </div>
 
@@ -175,13 +185,15 @@ Finds persons in client list who match parameters specified.
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
 * All values matched for any parameter are **case-insensitive**.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* The order of the name keywords does not matter. e.g. `n/Hans Bo` will match `Bo Hans`.
 * Persons matching at least one name keyword will be returned (i.e. `OR` search).
   e.g. `find n/Han Bo` will return `Hans Gruber`, `Bo Yang`.
 * Names only need to match the start of a word. e.g. `find n/Han` OR `find n/B` matches `Hans Bo`.
-* Phone number, email, address, project status, payment status, client status must match the exact string
+* Phone number, email, address, project status, payment status, client status and deadline must match the exact string
   e.g. `ps/in progress` will not match `ps/in prog`.
-* All parameters need to be matched for a person to be found, but if multiple tags are specified only one of them need to be matched.
+* All fields need to be matched for a person to be found
+  e.g. `find n/Rah py/paid ps/in progress` matches those clients whose name starts with "Rah", payment status is `paid` and project status is `in progress`.
+* When searching by tags, if multiple tags are specified then only one of the tags need to be matched.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`.
@@ -195,7 +207,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br>
 **Shortcuts: Finding blacklisted/whitelisted clients**
 <br>
-To find all clients that are blacklisted (with no other parameters), the command `blacklist` can be entered.
+To find all clients that are blacklisted (with no other fields specified), the command `blacklist` can be entered.
 
 Similarly, the `whitelist` command can be entered to find all clients who are whitelisted.
 <br>
@@ -209,10 +221,9 @@ Deletes the specified person from Clientele+.
 Format: `delete [n/NAME] [id/INDEX]`
 
 * Deletes clients identified by the specified `INDEX` or `NAME`.
-* `NAME` Acceptable values are same as in add command; the command looks for an **exact, case-insensitive** match in the name
+* `NAME` Acceptable values are same as ialways; the command looks for an **exact, case-insensitive** match in the name
   * Ex: `delete n/John` will match `john`, `JOHN` and `John`, but not `John Doe`.
-* `INDEX` refers to the index number shown in the displayed person list.
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `INDEX` refers to the index number shown in the displayed person list, and **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `delete n/John` deletes the client with the name `John`.
@@ -222,7 +233,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
-If you try to delete by name but there are 2 or more clients in the list that same name, then you will be shown a list of those clients and prompted to delete by index instead.
+If you try to delete by name but there are 2 or more clients in the list with that same name, then you will be shown a list of those clients and prompted to delete by index instead.
 
 </div>
 
@@ -233,8 +244,7 @@ Marks a client as "blacklisted".
 Format: `blacklist INDEX`
 
 * Marks the client specified by the index `INDEX` as "blacklisted".
-* `INDEX` refers to the index number shown in the displayed person list.
-* `INDEX` **must be a positive integer** 1, 2, 3, ...
+* `INDEX` refers to the index number shown in the displayed person list and **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
@@ -286,7 +296,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
-Clientele+ saves you the hassle of sorting the list every time you open the app. Every time you sort, it will save the list in the sort order specified.
+Clientele+ saves you the hassle of sorting the list every time you open the app. Every time you sort, it will save the list in the specified sort order.
 
 </div>
 
@@ -295,8 +305,7 @@ Archives a client present in the main address book.
 
 Format: `archive INDEX`
 
-* `INDEX` refers to the index number shown in the displayed person list.
-* `INDEX` **must be a positive integer** 1, 2, 3, ...
+* `INDEX` refers to the index number shown in the displayed person list and **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 * `archive 1` archives the first person in the list, removing it and storing it in an archived list
@@ -306,8 +315,7 @@ Unarchives a client and adds the client back to the main address book.
 
 Format: `unarchive INDEX`
 
-* `INDEX` refers to the index number shown in the displayed person list.
-* `INDEX` **must be a positive integer** 1, 2, 3, ...
+* `INDEX` refers to the index number shown in the displayed person list and **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 * `unarchive 1` removes the first person from the archived list, adding it back to the main client list
@@ -319,9 +327,9 @@ Format: `archive-list`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 <br>
-The archive list is a purely read-only list, the only available feature to manipulate it is the command `unarchive`. 
+The archive list is a purely read-only list. You can only manipulate it using the command `unarchive`.
 <br>
-Other commands will require to navigate back to the main client list first using `list`
+Other commands will require you to navigate back to the main client list first using the `list` command.
 </div>
 
 ### Deadline Reminder
