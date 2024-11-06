@@ -1089,7 +1089,9 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `addEcName 1 en/John Doe`<br>
        Expected: First student's emergency contact name will be updated to "John Doe". Name and emergency contact name will be shown in the status message.
 
-    5. Other incorrect addEcName commands to try: `addEcName`, `addEcName hhhh en/Jack`<br>
+    5. Other incorrect addEcName commands to try:<br>
+       `addEcName`<br>
+       `addEcName hhhh en/Jack`<br>
        Expected: An error message is shown which includes the correct format of the addEcName command to follow. 
    
 2. _{ more test cases …​ }_
@@ -1297,7 +1299,9 @@ testers are expected to do more *exploratory* testing.
     6. Test case: `filter n/`<br>
        Expected: Filtering does not occur and an error message is depicted to assert that the predicate values cannot be empty.
 
-    7. Other incorrect sort commands to try: `filter n`, `filter n/ p/`<br>
+    7. Other incorrect sort commands to try:<br>
+       `filter n`<br>
+       `filter n/ p/`<br>
        Expected: Similar to previous
 
 2. _{ more test cases …​ }_
