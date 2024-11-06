@@ -40,7 +40,7 @@ public class Item {
     }
 
     /**
-     * Returns true if the item's full description is similar to given item's full description.
+     * Returns true if this item's full description is similar to {@code otherItem}'s full description.
      * Two item's full description are considered similar if they are same without considering space and casing.
      */
     public boolean isSimilarTo(Item otherItem) {
