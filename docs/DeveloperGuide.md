@@ -1056,7 +1056,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `edit 1 c/A1`<br>
        Expected: No student's detailed are changed. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect edit commands to try: `edit`, `edit 0`, `edit c/1A c/2A`<br>
+    4. Other incorrect edit commands to try: `edit`, `edit 0`, `edit c/1A c/2A`, `edit x c/1A` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1076,7 +1076,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `addEcNumber 1 ep/123`<br>
        Expected: No emergency contact number is changed. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect addEcNumber commands to try: `addEcNumber`, `addEcNumber 0 ep/`, `addEcNumber 1 ep/123`<br>
+    5. Other incorrect addEcNumber commands to try: `addEcNumber`, `addEcNumber x ep/91234567` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
