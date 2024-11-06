@@ -48,10 +48,19 @@ public class VolunteerDates {
      */
     public void addStringOfDatesToAvailList(String... dates) throws DateTimeParseException,
             VolunteerDuplicateDateException {
+        ArrayList<LocalDate> arrayListOfDates = new ArrayList<>();
         for (String date : dates) {
             requireNonNull(date);
             checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-            this.addDateToAvailList(LocalDate.parse(date));
+            LocalDate dateToBeAdded = LocalDate.parse(date);
+            if (hasAvailableDate(dateToBeAdded)) {
+                throw new VolunteerDuplicateDateException(date);
+            } else {
+                arrayListOfDates.add(dateToBeAdded);
+            }
+        }
+        for (LocalDate d: arrayListOfDates) {
+            this.addDateToAvailList(d);
         }
         this.datesListAsObservableString.set(this.toString());
     }
@@ -63,12 +72,21 @@ public class VolunteerDates {
      * @throws VolunteerDuplicateDateException
      */
 
-    public void removeStringOfDatesFromAvailList(String... dates) throws VolunteerDeleteMissingDateException {
+    public void removeStringOfDatesFromAvailList(String... dates) throws DateTimeParseException,
+            VolunteerDeleteMissingDateException {
+        ArrayList<LocalDate> arrayListOfDates = new ArrayList<>();
         for (String date : dates) {
             requireNonNull(date);
             checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-            this.removeDateFromAvailList(LocalDate.parse(date));
+            LocalDate dateToBeRemoved = LocalDate.parse(date);
+            if (hasAvailableDate(dateToBeRemoved)) {
+                arrayListOfDates.add(dateToBeRemoved);
+            }
         }
+        for (LocalDate d: arrayListOfDates) {
+            this.removeDateFromAvailList(d);
+        }
+
         this.datesListAsObservableString.set(this.toString());
     }
 
@@ -77,6 +95,7 @@ public class VolunteerDates {
             throw new VolunteerDuplicateDateException(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         } else {
             this.dates.add(date);
+            this.datesListAsObservableString.set(this.toString());
         }
     }
 
@@ -85,6 +104,7 @@ public class VolunteerDates {
             throw new VolunteerDeleteMissingDateException(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         } else {
             this.dates.remove(date);
+            this.datesListAsObservableString.set(this.toString());
         }
     }
 
