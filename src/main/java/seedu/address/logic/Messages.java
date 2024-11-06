@@ -58,8 +58,8 @@ public class Messages {
     public static String markPaidFormat(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; MonthsPaid: ");
-        person.getMonthsPaid().forEach(builder::append);
+                .append("; MonthsPaid: ")
+                .append(person.getMonthsPaid().toString());
         return builder.toString();
     }
 
@@ -69,8 +69,8 @@ public class Messages {
     public static String unmarkPaidFormat(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; MonthsPaid: ");
-        person.getMonthsPaid().forEach(builder::append);
+                .append("; MonthsPaid: ")
+                .append(person.getMonthsPaid().toString());
         return builder.toString();
     }
 }

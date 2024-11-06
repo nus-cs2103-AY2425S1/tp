@@ -35,7 +35,7 @@ public class UnmarkPaidCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Non existing months paid of that person will be ignored, no change happen.\n"
             + "Parameters: UnmarkPaidTarget (must be a positive integer index or 'all') "
-            + "MONTHSPAID... (yyyy-mm format)\n"
+            + "MonthsPaid... (yyyy-mm format)\n"
             + "Example 1: " + COMMAND_WORD + " 1 " + PREFIX_MONTHPAID + "2024-01\n"
             + "Example 2: " + COMMAND_WORD + " all "
             + PREFIX_MONTHPAID + "2024-01"
