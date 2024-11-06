@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalEvents.TECH_CONFERENCE_EDITED;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.EDITED_ALICE;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -323,5 +326,12 @@ public class EventTest {
     public void testGetTotalNumberOfDistinctContacts() {
         Event event = TypicalEvents.getTypicalEvents().get(0);
         assertEquals(event.getTotalNumberOfDistinctContacts(), 6);
+    }
+
+    @Test
+    public void testRemoveContactFromEventRoleOnEdit() {
+        Event event = TypicalEvents.getTypicalEvents().get(0);
+        event.editPerson(ALICE, EDITED_ALICE);
+        assertEquals(event, TECH_CONFERENCE_EDITED);
     }
 }

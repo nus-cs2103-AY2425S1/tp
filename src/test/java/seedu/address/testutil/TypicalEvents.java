@@ -60,6 +60,13 @@ public class TypicalEvents {
             .withVolunteers(getPersonSet(TypicalPersons.ELLE))
             .build();
 
+    public static final Event TECH_CONFERENCE_EDITED = new EventBuilder().withName("Tech Conference 2024")
+            .withAttendees(getPersonSet(TypicalPersons.FIONA))
+            .withVendors(getPersonSet(TypicalPersons.DANIEL))
+            .withSponsors(getPersonSet(TypicalPersons.BENSON, TypicalPersons.CARL))
+            .withVolunteers(getPersonSet(TypicalPersons.ELLE))
+            .build();
+
 
     private TypicalEvents() {} // prevents instantiation
 

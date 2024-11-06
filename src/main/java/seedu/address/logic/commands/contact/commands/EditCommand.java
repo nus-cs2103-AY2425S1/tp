@@ -104,6 +104,7 @@ public class EditCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         // edit person for eventManager
         eventManager.editAllPersonsInEvents(personToEdit, editedPerson);
+        eventManager.updateEvents();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
