@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,8 +27,9 @@ public class GroupCommand extends Command {
     public static final String MESSAGE_NO_STUDENTS_FOUND = "No matching students found.";
 
     public static final String MESSAGE_SUCCESS = "Group %s created with %d student(s)";
-
     public static final String MESSAGE_DUPLICATE_GROUP = "Group name already taken!!";
+
+    public static final String STUDENTS_NOT_FOUND = "The following students could not be found: %s";
     private final String groupName;
     private final List<String> students;
 
@@ -52,12 +54,30 @@ public class GroupCommand extends Command {
         if (model.hasGroupName(new Group(groupName, List.of()))) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
+
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         List<Person> allPersons = model.getFilteredPersonList();
-        List<Person> groupMembers = allPersons.stream()
-                .filter(person -> students.contains(person
-                        .getName().fullName))
-                .toList();
+        List<Person> groupMembers = new ArrayList<>();
+        List<String> notFoundStudents = new ArrayList<>();
+
+        for (String studentName : students) {
+            boolean found = false;
+            for (Person person : allPersons) {
+                if (person.getName().fullName.equals(studentName)) {
+                    groupMembers.add(person);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                notFoundStudents.add(studentName);
+            }
+        }
+
+        if (!notFoundStudents.isEmpty()) {
+            throw new CommandException(String.format(STUDENTS_NOT_FOUND,
+                    String.join(", ", notFoundStudents)));
+        }
 
         if (groupMembers.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENTS_FOUND);
