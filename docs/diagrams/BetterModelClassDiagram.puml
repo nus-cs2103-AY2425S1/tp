@@ -11,7 +11,7 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
-Tag -right-> "1" BloodType
+Tag -right-> BloodType
 UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
