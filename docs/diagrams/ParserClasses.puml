@@ -11,7 +11,7 @@ Class TbCommand
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
 Class AddressBookParser
-Class TransactionParser
+Class TransactionBookParser
 Class AbCommandParser
 Class TbCommandParser
 Class CliSyntax
@@ -24,7 +24,7 @@ Class Pattern
 
 Class HiddenOutside #FFFFFF
 HiddenOutside --> AddressBookParser
-HiddenOutside --> TransactionParser
+HiddenOutside --> TransactionBookParser
 
 ArgumentTokenizer .left.> ArgumentMultimap
 CliSyntax ..> Prefix
@@ -42,10 +42,10 @@ AbCommandParser ..> ArgumentMultimap
 AbCommandParser ..> ArgumentTokenizer
 AbCommandParser ..> CliSyntax
 
-TransactionParser -right-> Pattern
-TransactionParser .down.> TbCommandParser: <<create>>
+TransactionBookParser -right-> Pattern
+TransactionBookParser .down.> TbCommandParser: <<create>>
 TbCommandParser ..> TbCommand : <<create>>
-TransactionParser .right.> Command : <<use>>
+TransactionBookParser .right.> Command : <<use>>
 TbCommandParser .up.|> Parser
 TbCommandParser ..> ArgumentMultimap
 TbCommandParser ..> ArgumentTokenizer
