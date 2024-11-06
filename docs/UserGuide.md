@@ -305,6 +305,9 @@ _Details coming soon ..._
 * Remarks are optional for contacts, and are denoted by the `r/` prefix.
 * It is recommended that long-form notes about a particular contact should be saved in remarks.
 * Remarks can contain any characters, as they allow long-form writing with multiple sentences.<br>
+* **IMPORTANT:** Only one `r/` prefix can be used when adding remarks. 
+  * Adding another `r/` prefix will cause the first part of the `r/` prefix to be lost.
+  * If needed to add the prefix `r/` to remark, enclose the prefix with " ". e.g. `remark 1 r/ use "r/" to add remark`
 
 <box type="tip" seamless>
 
