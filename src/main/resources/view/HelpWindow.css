@@ -1,9 +1,7 @@
-#copyButton, #helpMessage, #helpUsage {
-    -fx-text-fill: white;
-}
-
+/* Ensuring the copy button styling remains intact */
 #copyButton {
     -fx-background-color: dimgray;
+    -fx-text-fill: white;
 }
 
 #copyButton:hover {
@@ -14,14 +12,58 @@
     -fx-background-color: darkgray;
 }
 
+/* Background styling for the main container */
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/* Styling for ListView to enhance readability */
+.list-view {
+    -fx-background-color: #2e2e2e; /* Dark background to align with dark theme */
+    -fx-padding: 10px;
+    -fx-border-color: #2e2e2e; /* Matches the background color to remove the visible border */
+}
+
+/* Styling for individual cells within the ListView */
+.list-cell {
+    -fx-padding: 10px;
+    -fx-text-fill: #f0f0f0; /* Light text color for readability */
+    -fx-background-color: #333333; /* Slightly darker background for contrast */
+    -fx-font-size: 11pt; /* Reduced font size for a more compact look */
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+/* Alternating row colors for better readability */
+.list-cell:filled:even {
+    -fx-background-color: #3c3e3f;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: #515658;
+}
+
+/* Hover effect for each list cell */
+.list-cell:hover {
+    -fx-background-color: #424d5f;
+    -fx-text-fill: white;
+}
+
+/* Selected cell styling */
+.list-cell:filled:selected {
+    -fx-background-color: #3e7b91; /* Highlight color for selected cell */
+    -fx-text-fill: white;
+}
+
+/* Scroll pane styling to ensure it blends with the background */
 .scroll-pane {
-    -fx-background-color: transparent;
+    -fx-background-color: #2e2e2e;
 }
 
 .scroll-pane .viewport {
-    -fx-background-color: transparent;
+    -fx-background-color: #2e2e2e;
+}
+
+/* Setting the border for the entire window to blend with the theme */
+.anchor-pane {
+    -fx-border-color: #2e2e2e;
 }
