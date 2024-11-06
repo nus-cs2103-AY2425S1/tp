@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -22,13 +23,25 @@ public class NameOrJobContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         boolean matchesName = nameKeywords.stream()
                 .anyMatch(keyword -> {
-                    String[] nameWords = person.getName().fullName.toLowerCase().split("\\s+");
-                    return List.of(nameWords).contains(keyword.toLowerCase());
+                    ArrayList<String> nameWords = new ArrayList<>();
+                    String personName = person.getName().fullName.toLowerCase().toString();
+                    nameWords.add(personName);
+                    String[] splitPersonName = personName.split("\\s+");
+                    for (String name : splitPersonName) {
+                        nameWords.add(name);
+                    }
+                    return nameWords.contains(keyword.toLowerCase());
                 });
         boolean matchesJob = jobKeywords.stream()
                 .anyMatch(keyword -> {
-                    String[] jobWords = person.getJob().value.toLowerCase().split("\\s+");
-                    return List.of(jobWords).contains(keyword.toLowerCase());
+                    ArrayList<String> jobWords = new ArrayList<>();
+                    String jobName = person.getJob().value.toLowerCase().toString();
+                    jobWords.add(jobName);
+                    String[] splitPersonJob = jobName.split("\\s+");
+                    for (String job : splitPersonJob) {
+                        jobWords.add(job);
+                    }
+                    return jobWords.contains(keyword.toLowerCase());
                 });
         return matchesName || matchesJob;
     }
