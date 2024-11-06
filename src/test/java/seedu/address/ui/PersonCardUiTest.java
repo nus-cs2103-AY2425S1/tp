@@ -94,7 +94,7 @@ public class PersonCardUiTest extends ApplicationTest {
         // Assert that the person object is not null
         assertNotNull(personCard.person);
 
-        // Check if the displayed ID, name, phone, email, and other labels are correct
+        // Check if the displayed ID, name, phone, email, and other labels are correct (with truncation)
         assertEquals("1. ", personCard.getId().getText());
         assertEquals("John Buyerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...",
                 personCard.getName().getText());
@@ -105,13 +105,11 @@ public class PersonCardUiTest extends ApplicationTest {
 
         // Check if the tags are correctly displayed
         FlowPane tagsFlowPane = personCard.getTags();
-        assertEquals(2, tagsFlowPane.getChildren().size()); // Expecting 2 tags
+        assertEquals(1, tagsFlowPane.getChildren().size()); // Expecting 1 tag
 
-        // Tags are rendered lexicographically
+        // Check correct truncation
         Label firstTag = (Label) tagsFlowPane.getChildren().get(0);
-        Label secondTag = (Label) tagsFlowPane.getChildren().get(1);
-        assertEquals("colleagues", firstTag.getText());
-        assertEquals("friends", secondTag.getText());
+        assertEquals("friendsssssssss...", firstTag.getText());
     }
 
     @Test
@@ -165,8 +163,7 @@ public class PersonCardUiTest extends ApplicationTest {
      */
     private Person createSampleTruncatedBuyer() {
         Set<Tag> tagSet = new HashSet<>();
-        tagSet.add(new Tag("friends"));
-        tagSet.add(new Tag("colleagues"));
+        tagSet.add(new Tag("friendsssssssssssssssssssssssssssssssssssssssssssssssssssss"));
 
         return new Buyer(
                 new Name("John Buyerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"),
