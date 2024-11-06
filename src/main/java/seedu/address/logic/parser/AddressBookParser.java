@@ -66,7 +66,7 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case AddWeddingCommand.COMMAND_WORD:
+        case AddWeddingCommand.COMMAND_WORD, AddWeddingCommand.COMMAND_WORD_SHORT:
             return new AddWeddingCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
