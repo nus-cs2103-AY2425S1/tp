@@ -125,7 +125,9 @@ public class Schedule {
         return (this.dateString.isEmpty() && otherSchedule.dateString.isEmpty())
                 || (this.scheduleName.equals(otherSchedule.scheduleName)
                 && this.date.equals(otherSchedule.date)
-                && this.time.equals(otherSchedule.time));
+                && this.time.equals(otherSchedule.time))
+                && this.dateString.equals(otherSchedule.dateString)
+                && this.timeString.equals(otherSchedule.timeString);
     }
 
     @Override
