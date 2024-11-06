@@ -34,7 +34,7 @@ public class ModelManagerTest {
     @BeforeEach
     public void setUp() {
         modelManager = new ModelManager();
-        volunteerAlice = new VolunteerBuilder().withName("Alice").build();
+        volunteerAlice = new VolunteerBuilder().withName("Alice").withAvailableDate("2024-12-15").build();
         eventMeeting = new EventBuilder().withEventName("Meeting").build();
     }
 

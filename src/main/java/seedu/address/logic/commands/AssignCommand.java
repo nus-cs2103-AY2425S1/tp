@@ -82,7 +82,7 @@ public class AssignCommand extends Command {
         } catch (OverlappingAssignException exception) {
             throw new CommandException(MESSAGE_OVERLAP_ASSIGN);
         } catch (VolunteerNotAvailableException exception) {
-            throw  new CommandException(exception.getMessage());
+            throw new CommandException(exception.getMessage());
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
