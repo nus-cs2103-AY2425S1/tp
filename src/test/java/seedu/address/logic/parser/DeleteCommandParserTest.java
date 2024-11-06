@@ -43,6 +43,16 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_invalidName_throwsParseException() {
+        // Example input with an invalid name (assuming non-alphanumeric names are invalid)
+        String userInput = "delete n/67";
+
+        String expectedMessage = "ERROR: Invalid name format. Enter a valid name.";
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
     public void parse_invalidPhone_throwsParseException() {
         // Simulate an input with an invalid phone number (e.g., less than 8 digits)
         String userInput = "delete n/Alice Pauline p/1234"; // Invalid phone number
