@@ -97,6 +97,21 @@ public class DateCommandTest {
     }
 
     @Test
+    public void execute_multiplePeople_failure() {
+        Person existingPersonOne = new PersonBuilder().withName("John").withPhone("91919191")
+                .withEmail("john1@gmail.com").withAddress("101 Clementi Road").withTag("High Risk").withAllergy("None")
+                .build();
+        model.addPerson(existingPersonOne);
+        Person existingPersonTwo = new PersonBuilder().withName("John").withPhone("92929292")
+                .withEmail("john2@gmail.com").withAddress("102 Clementi Road").withTag("Low Risk").withAllergy("None")
+                .build();
+        model.addPerson(existingPersonTwo);
+        DateCommand dateCommand = new DateCommand(Optional.of("John"), Optional.empty(),
+                Optional.empty(), new Date(VALID_DATE_BOB));
+        assertCommandFailure(dateCommand, model, DateCommand.MESSAGE_MULTIPLE_PERSONS_FOUND);
+    }
+
+    @Test
     public void execute_invalidPhone_failure() {
         DateCommand dateCommand = new DateCommand(Optional.empty(), Optional.of("11111111"),
                 Optional.empty(), new Date(VALID_DATE_BOB));
