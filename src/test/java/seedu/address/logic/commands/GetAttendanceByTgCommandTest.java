@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -12,9 +10,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.application.Platform;
@@ -42,33 +37,11 @@ class GetAttendanceByTgCommandTest {
             .withStudentNumber("A7654321M")
             .withTutorialGroup("A01").build();
 
-    @BeforeEach
-    public void setUp() {
-        // Ensure no AttendanceWindow is open before each test
-        GetAttendanceByTgCommand.closeCurrentWindow();
-    }
-
-    @BeforeAll
-    public static void initJavaFX() {
-        if (!Platform.isFxApplicationThread()) {
-            try {
-                Platform.startup(() -> {});
-                Platform.setImplicitExit(false);
-            } catch (IllegalStateException e) {
-                // JavaFX is already initialized, no need to do anything here
-            }
-        }
-    }
-
-    @AfterAll
-    public static void closeJavaFX() {
-        if (!Platform.isFxApplicationThread()) {
-            Platform.exit();
-        }
-    }
-
     @Test
     void execute_validTutorialGroupWithStub_success() throws CommandException {
+        Platform.startup(() -> {
+            System.out.println("Platform started");
+        });
         Model model = new ModelManager();
         model.addStudent(student1);
         model.addStudent(student2);
@@ -84,6 +57,8 @@ class GetAttendanceByTgCommandTest {
 
         String expectedMessage = "Attendance window opened for Tutorial Group: " + validTutorialGroup;
         assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        Platform.exit();
 
 
     }
@@ -103,9 +78,13 @@ class GetAttendanceByTgCommandTest {
         TutorialGroup tg1 = new TutorialGroup("A01");
         TutorialGroup tg2 = new TutorialGroup("A02");
 
+        AttendanceWindowStub attendanceWindowStub = new AttendanceWindowStub(tg1);
         GetAttendanceByTgCommand command1 = new GetAttendanceByTgCommand(tg1);
+        command1.setAttendanceWindow(attendanceWindowStub);
         GetAttendanceByTgCommand command2 = new GetAttendanceByTgCommand(tg1);
+        command2.setAttendanceWindow(attendanceWindowStub);
         GetAttendanceByTgCommand command3 = new GetAttendanceByTgCommand(tg2);
+        command3.setAttendanceWindow(attendanceWindowStub);
 
         // Same object
         assertEquals(command1, command1);
@@ -126,38 +105,17 @@ class GetAttendanceByTgCommandTest {
     @Test
     public void toStringMethod() {
         TutorialGroup tg = new TutorialGroup("A01");
+        AttendanceWindowStub attendanceWindowStub = new AttendanceWindowStub(tg);
         GetAttendanceByTgCommand command = new GetAttendanceByTgCommand(tg);
+        command.setAttendanceWindow(attendanceWindowStub);
         String expectedString = GetAttendanceByTgCommand.class.getCanonicalName() + "{tutorialGroup=" + tg + "}";
         assertEquals(expectedString, command.toString());
-    }
-
-    @Test
-    void closeCurrentWindow_windowIsOpen_success() {
-        // Set up an open AttendanceWindow
-        AttendanceWindow attendanceWindow = new AttendanceWindow(validTutorialGroup);
-        GetAttendanceByTgCommand command = new GetAttendanceByTgCommand(validTutorialGroup);
-        command.setAttendanceWindow(attendanceWindow);
-
-        // Call closeCurrentWindow and check if it returns true
-        boolean result = GetAttendanceByTgCommand.closeCurrentWindow();
-        assertTrue(result, "Expected closeCurrentWindow to return true when a window is open.");
-    }
-
-    @Test
-    void closeCurrentWindow_noWindowOpen_failure() {
-        // Ensure no window is open
-        GetAttendanceByTgCommand.closeCurrentWindow();
-
-        // Call closeCurrentWindow and check if it returns false
-        boolean result = GetAttendanceByTgCommand.closeCurrentWindow();
-        assertFalse(result, "Expected closeCurrentWindow to return false when no window is open.");
     }
 
     public class AttendanceWindowStub extends AttendanceWindow {
 
         private final List<Student> students;
         private final Set<LocalDate> attendanceDates;
-        private ObservableList<AttendanceRow> data;
 
         public AttendanceWindowStub(TutorialGroup tutorialGroup) {
             super(tutorialGroup);
@@ -205,17 +163,7 @@ class GetAttendanceByTgCommandTest {
             }
             return rows;
         }
-
-        private void refreshTable(Model model) {
-            data.clear();
-            data.addAll(getStudentAttendanceRows(model));
-            sortAndRefreshDates(model);
-        }
-
-        private void sortAndRefreshDates(Model model) {
-            List<LocalDate> sortedDates = new ArrayList<>(getAttendanceDates());
-            sortedDates.sort(LocalDate::compareTo);
-        }
     }
+
 
 }

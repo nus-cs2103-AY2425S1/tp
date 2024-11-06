@@ -39,10 +39,6 @@ public class GetAttendanceByTgCommand extends Command {
      */
     public GetAttendanceByTgCommand(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
-        if (currentWindow != null) {
-            currentWindow.close();
-        }
-        currentWindow = new AttendanceWindow(this.tutorialGroup);
     }
 
     @Override
@@ -53,6 +49,11 @@ public class GetAttendanceByTgCommand extends Command {
         if (students.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_NO_STUDENTS, tutorialGroup));
         }
+
+        if (currentWindow != null) {
+            currentWindow.close();
+        }
+        currentWindow = new AttendanceWindow(this.tutorialGroup);
         currentWindow.show(model);
         return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }
