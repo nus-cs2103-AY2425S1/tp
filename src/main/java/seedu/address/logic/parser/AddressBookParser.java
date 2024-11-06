@@ -23,6 +23,7 @@ import seedu.address.logic.commands.MarkPaidCommand;
 import seedu.address.logic.commands.PieChartCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnmarkPaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -88,6 +89,9 @@ public class AddressBookParser {
 
         case MarkPaidCommand.COMMAND_WORD, MarkPaidCommand.COMMAND_WORD_ALIAS:
             return new MarkPaidCommandParser().parse(arguments);
+
+        case UnmarkPaidCommand.COMMAND_WORD, UnmarkPaidCommand.COMMAND_WORD_ALIAS:
+            return new UnmarkPaidCommandParser().parse(arguments);
 
         case PieChartCommand.COMMAND_WORD:
             return new PieChartCommand();

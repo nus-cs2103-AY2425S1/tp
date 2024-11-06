@@ -40,10 +40,9 @@ public class MarkPaidCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
         Index index = INDEX_FIRST_PERSON;
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(index);
-        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
+        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
         Person modifiedPerson = createMarkedPerson(
-                model.getFilteredPersonList().get(index.getZeroBased()), VALID_MONTHSPAID,
-                false);
+                model.getFilteredPersonList().get(index.getZeroBased()), VALID_MONTHSPAID);
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKPAID_PERSON_SUCCESS,
                 Messages.markPaidFormat(modifiedPerson));
         expectedModel.setPerson(model.getFilteredPersonList().get(index.getZeroBased()),
@@ -56,10 +55,10 @@ public class MarkPaidCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.all();
-        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
+        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
         for (int i = 0; i < model.getFilteredPersonList().size(); i++) {
             Person modifiedPerson = createMarkedPerson(
-                    model.getFilteredPersonList().get(i), VALID_MONTHSPAID, false);
+                    model.getFilteredPersonList().get(i), VALID_MONTHSPAID);
             expectedModel.setPerson(model.getFilteredPersonList().get(i),
                     modifiedPerson);
         }
@@ -71,26 +70,26 @@ public class MarkPaidCommandTest {
     @Test
     public void toStringMethod() {
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
-        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
+        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
         assertEquals("seedu.address.logic.commands.MarkPaidCommand{target="
                         + target.toString()
-                        + ", monthsPaid=[[" + VALID_MONTHPAID_STRING + "]], isRemoving=false}",
+                        + ", monthsPaid=[[" + VALID_MONTHPAID_STRING + "]]}",
                 command.toString());
     }
     @Test
     public void equals() {
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
-        MarkPaidCommand command1 = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
-        MarkPaidCommand command2 = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
-        MarkPaidCommand command3 = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
-        MarkPaidCommand command4 = new MarkPaidCommand(target, Collections.emptySet(), false);
+        MarkPaidCommand command1 = new MarkPaidCommand(target, VALID_MONTHSPAID);
+        MarkPaidCommand command2 = new MarkPaidCommand(target, VALID_MONTHSPAID);
+        MarkPaidCommand command3 = new MarkPaidCommand(target, VALID_MONTHSPAID);
+        MarkPaidCommand command4 = new MarkPaidCommand(target, Collections.emptySet());
         assertTrue(command1.equals(command2));
         assertFalse(command1.equals(command4));
         assertTrue(command1.equals(command3));
         assertTrue(command3.equals(command1));
     }
 
-    private static Person createMarkedPerson(Person personToMark, Set<MonthPaid> monthsPaid, boolean isRemoving) {
+    private static Person createMarkedPerson(Person personToMark, Set<MonthPaid> monthsPaid) {
         assert personToMark != null;
         assert monthsPaid != null;
         // TODO: should we use editPersonDescriptor here instead?
@@ -101,11 +100,7 @@ public class MarkPaidCommandTest {
         Fees fees = personToMark.getFees();
         ClassId classId = personToMark.getClassId();
         Set<MonthPaid> updatedMonthsPaid = new HashSet<>(personToMark.getMonthsPaid());
-        if (isRemoving) {
-            updatedMonthsPaid.removeAll(monthsPaid);
-        } else {
-            updatedMonthsPaid.addAll(monthsPaid);
-        }
+        updatedMonthsPaid.addAll(monthsPaid);
         Set<Tag> tags = personToMark.getTags();
 
         return new Person(name, phone, email, address, fees, classId,
