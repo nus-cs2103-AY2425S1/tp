@@ -25,11 +25,7 @@ Class HealthPolicy
 Class EducationPolicy
 Class "{abstract}\nPolicy" as Policy
 Class ClaimList
-
-class Claim {
-    - description: String
-    - status: ClaimStatus
-}
+Class Claim
 
     enum PolicyType <<enumeration>> {
         LIFE
