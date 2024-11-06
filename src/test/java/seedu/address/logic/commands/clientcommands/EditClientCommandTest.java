@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.clientcommands.EditClientCommand;
 import seedu.address.logic.commands.clientcommands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Listings;
@@ -52,7 +51,8 @@ public class EditClientCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).withTags().build();
         EditClientCommand editClientCommand = new EditClientCommand(VALID_NAME, descriptor);
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new Listings());
@@ -73,7 +73,8 @@ public class EditClientCommandTest {
                 .withTags(VALID_TAG_HUSBAND).build();
         EditClientCommand editClientCommand = new EditClientCommand(VALID_NAME, descriptor);
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new Listings());
@@ -87,7 +88,8 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(VALID_NAME, new EditPersonDescriptor());
         Person editedPerson = model.getPersonByName(VALID_NAME);
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new Listings());
@@ -107,7 +109,8 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(personToEdit.getName(),
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new Listings());
@@ -195,7 +198,8 @@ public class EditClientCommandTest {
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditClientCommand editClientCommand = new EditClientCommand(VALID_NAME, editPersonDescriptor);
-        String expected = EditClientCommand.class.getCanonicalName() + "{name=" + VALID_NAME + ", editPersonDescriptor="
+        String expected = EditClientCommand.class.getCanonicalName()
+                + "{name=" + VALID_NAME + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
         assertEquals(expected, editClientCommand.toString());
     }

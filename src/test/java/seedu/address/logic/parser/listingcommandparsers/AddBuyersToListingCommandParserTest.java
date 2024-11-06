@@ -12,7 +12,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.listingcommands.AddBuyersToListingCommand;
-import seedu.address.logic.parser.listingcommandparsers.AddBuyersToListingCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
@@ -43,7 +42,8 @@ public class AddBuyersToListingCommandParserTest {
     public void parse_missingListingName_throwsParseException() {
         String userInput = AddBuyersToListingCommand.COMMAND_WORD
                 + PREFIX_BUYER + VALID_BUYER_NAME_1;
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyersToListingCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddBuyersToListingCommand.MESSAGE_USAGE);
 
         assertThrows(ParseException.class, () -> parser.parse(userInput), expectedMessage);
     }
@@ -52,7 +52,8 @@ public class AddBuyersToListingCommandParserTest {
     public void parse_missingBuyerNames_throwsParseException() {
         String userInput = AddBuyersToListingCommand.COMMAND_WORD + " "
                 + PREFIX_NAME + VALID_LISTING_NAME;
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyersToListingCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddBuyersToListingCommand.MESSAGE_USAGE);
 
         assertThrows(ParseException.class, () -> parser.parse(userInput), expectedMessage);
     }

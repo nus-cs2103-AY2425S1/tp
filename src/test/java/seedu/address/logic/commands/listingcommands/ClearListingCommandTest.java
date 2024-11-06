@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.listingcommands.ClearListingCommand;
 import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

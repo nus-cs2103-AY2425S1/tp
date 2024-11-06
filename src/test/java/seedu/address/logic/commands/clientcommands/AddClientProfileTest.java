@@ -14,8 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
-import seedu.address.logic.commands.clientcommands.AddSellerProfile;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ModelStub;

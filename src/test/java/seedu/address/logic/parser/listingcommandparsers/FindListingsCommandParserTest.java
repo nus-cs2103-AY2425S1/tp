@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.listingcommands.FindListingCommand;
-import seedu.address.logic.parser.listingcommandparsers.FindListingsCommandParser;
 import seedu.address.model.listing.ListingContainsKeywordsPredicate;
 
 public class FindListingsCommandParserTest {

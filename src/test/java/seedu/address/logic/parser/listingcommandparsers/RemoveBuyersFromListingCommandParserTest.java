@@ -13,7 +13,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.listingcommands.RemoveBuyersFromListingCommand;
-import seedu.address.logic.parser.listingcommandparsers.RemoveBuyersFromListingCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 

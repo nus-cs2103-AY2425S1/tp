@@ -26,7 +26,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.clientcommands.EditClientCommand;
 import seedu.address.logic.commands.clientcommands.EditClientCommand.EditPersonDescriptor;
-import seedu.address.logic.parser.clientcommandparsers.EditClientCommandParser;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;

@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalNames;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.clientcommands.ShowClientsCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Listings;
 import seedu.address.model.Model;

@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.clientcommands.appointmentcommands.AddAppointmentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelStub;
 import seedu.address.model.appointment.Appointment;
@@ -80,7 +79,8 @@ public class AddAppointmentCommandTest {
         // Assert
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
                 .buildBuyer();
-        assertEquals(String.format(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)),
+        assertEquals(String.format(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
+                        Messages.format(editedPerson)),
                 result.getFeedbackToUser());
     }
 
@@ -98,7 +98,8 @@ public class AddAppointmentCommandTest {
         // Assert
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
                 .buildBuyer();
-        assertEquals(String.format(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)),
+        assertEquals(String.format(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
+                        Messages.format(editedPerson)),
                 result.getFeedbackToUser());
     }
 

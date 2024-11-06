@@ -17,20 +17,21 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
-import seedu.address.logic.commands.clientcommands.AddSellerProfile;
-import seedu.address.logic.commands.clientcommands.appointmentcommands.AddAppointmentCommand;
 import seedu.address.logic.commands.ChatWindowCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.clientcommands.appointmentcommands.DeleteAppointmentCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
+import seedu.address.logic.commands.clientcommands.AddSellerProfile;
 import seedu.address.logic.commands.clientcommands.DeleteClientProfileCommand;
 import seedu.address.logic.commands.clientcommands.EditClientCommand;
 import seedu.address.logic.commands.clientcommands.EditClientCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.clientcommands.FindClientCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.clientcommands.ShowClientsCommand;
+import seedu.address.logic.commands.clientcommands.appointmentcommands.AddAppointmentCommand;
+import seedu.address.logic.commands.clientcommands.appointmentcommands.DeleteAppointmentCommand;
+import seedu.address.logic.commands.clientcommands.appointmentcommands.TodayCommand;
 import seedu.address.logic.commands.listingcommands.AddBuyersToListingCommand;
 import seedu.address.logic.commands.listingcommands.AddListingCommand;
 import seedu.address.logic.commands.listingcommands.ClearListingCommand;
@@ -39,7 +40,6 @@ import seedu.address.logic.commands.listingcommands.EditListingCommand;
 import seedu.address.logic.commands.listingcommands.FindListingCommand;
 import seedu.address.logic.commands.listingcommands.RemoveBuyersFromListingCommand;
 import seedu.address.logic.commands.listingcommands.ShowListingsCommand;
-import seedu.address.logic.commands.clientcommands.appointmentcommands.TodayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
@@ -225,7 +225,8 @@ public class EzstatesParserTest {
     @Test
     public void parseCommand_invalidFormat_throwsParseException() {
         String invalidCommand = "editlisting";
-        ParseException thrown = Assertions.assertThrows(ParseException.class, () -> parser.parseCommand(invalidCommand));
+        ParseException thrown = Assertions
+                .assertThrows(ParseException.class, () -> parser.parseCommand(invalidCommand));
         assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE),
                 thrown.getMessage());
     }

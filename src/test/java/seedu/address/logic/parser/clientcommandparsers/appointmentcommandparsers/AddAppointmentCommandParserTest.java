@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.clientcommands.appointmentcommands.AddAppointmentCommand;
-import seedu.address.logic.parser.clientcommandparsers.appointmentcommandparsers.AddAppointmentCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;

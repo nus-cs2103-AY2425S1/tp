@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalListings.KENT_RIDGE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.listingcommands.DeleteListingCommand;
-import seedu.address.logic.parser.listingcommandparsers.DeleteListingCommandParser;
 
 public class DeletingListingCommandParserTest {
     private DeleteListingCommandParser parser = new DeleteListingCommandParser();

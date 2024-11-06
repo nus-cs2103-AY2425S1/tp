@@ -11,7 +11,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.listingcommands.FindListingCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

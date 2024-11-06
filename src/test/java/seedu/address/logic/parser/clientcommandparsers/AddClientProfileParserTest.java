@@ -27,7 +27,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
 import seedu.address.logic.commands.clientcommands.AddSellerProfile;
-import seedu.address.logic.parser.clientcommandparsers.AddClientParser;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;

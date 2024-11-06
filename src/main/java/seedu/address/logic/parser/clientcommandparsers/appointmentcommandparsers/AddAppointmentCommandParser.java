@@ -38,11 +38,13 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         try {
             name = ParserUtil.parseName(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_FROM, PREFIX_TO)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
         }
 
 

@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.listingcommands.AddListingCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Listings;
 import seedu.address.model.ModelStub;

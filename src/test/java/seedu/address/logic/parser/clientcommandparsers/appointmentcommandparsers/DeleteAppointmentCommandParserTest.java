@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.clientcommands.appointmentcommands.DeleteAppointmentCommand;
-import seedu.address.logic.parser.clientcommandparsers.appointmentcommandparsers.DeleteAppointmentCommandParser;
 
 public class DeleteAppointmentCommandParserTest {
     private DeleteAppointmentCommandParser parser = new DeleteAppointmentCommandParser();

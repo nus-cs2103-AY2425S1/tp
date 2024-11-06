@@ -16,7 +16,6 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.clientcommands.MoreInfoCommand;
 import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

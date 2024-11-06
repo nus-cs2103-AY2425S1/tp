@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.clientcommands.appointmentcommands.TodayCommand;
 import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

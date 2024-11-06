@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.clientcommands.MoreInfoCommand;
-import seedu.address.logic.parser.clientcommandparsers.MoreInfoCommandParser;
 
 public class MoreInfoCommandParserTest {
     private MoreInfoCommandParser parser = new MoreInfoCommandParser();

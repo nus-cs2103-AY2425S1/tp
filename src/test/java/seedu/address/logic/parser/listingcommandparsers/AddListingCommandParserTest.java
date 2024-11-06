@@ -28,7 +28,6 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.listingcommands.AddListingCommand;
-import seedu.address.logic.parser.listingcommandparsers.AddListingCommandParser;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;

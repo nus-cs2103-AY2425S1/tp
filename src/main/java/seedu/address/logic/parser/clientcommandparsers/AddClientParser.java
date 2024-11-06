@@ -9,9 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
 import seedu.address.logic.commands.clientcommands.AddSellerProfile;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;

@@ -18,7 +18,6 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.clientcommands.appointmentcommands.DeleteAppointmentCommand;
 import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -34,7 +33,7 @@ public class DeleteAppointmentCommandTest {
 
 
     @Test
-    public void execute_validBuyerNameUnfilteredList_success() {
+    public void execute_validBuyerName_success() {
         Person personToDeleteAppointment = DANIEL;
         DeleteAppointmentCommand deleteAppointmentCommand =
                 new DeleteAppointmentCommand(personToDeleteAppointment.getName());
@@ -54,7 +53,7 @@ public class DeleteAppointmentCommandTest {
     }
 
     @Test
-    public void execute_validSellerNameUnfilteredList_success() {
+    public void execute_validSellerName_success() {
         Person personToDeleteAppointment = ALICE;
         DeleteAppointmentCommand deleteAppointmentCommand =
                 new DeleteAppointmentCommand(personToDeleteAppointment.getName());
@@ -79,32 +78,6 @@ public class DeleteAppointmentCommandTest {
 
         assertCommandFailure(deleteAppointmentCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
     }
-
-    /*
-    Test fails as we are adding a different person to the model, thus the model is different
-    @Test
-    public void execute_validNameFilteredList_success() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 1);
-        showPersonWithName(model, typicalNames.get(randomIndex));
-
-        Person personToDeleteProperty = model.getPersonByName(typicalNames.get(randomIndex));
-        DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(personToDeleteProperty.getName());
-
-        String expectedMessage = String.format(DeletePropertyCommand.MESSAGE_DELETE_PROPERTY_SUCCESS,
-                personToDeleteProperty.getName());
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person personWithoutProperty = new Person(personToDeleteProperty.getName(), personToDeleteProperty.getPhone(),
-                personToDeleteProperty.getEmail(), personToDeleteProperty.getTags(),
-                personToDeleteProperty.getAppointment(), new Property(""));
-        expectedModel.setPerson(personToDeleteProperty, personWithoutProperty);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deletePropertyCommand, model, expectedMessage, expectedModel);
-    }
-     */
 
     @Test
     public void execute_invalidNameFilteredList_throwsCommandException() {
