@@ -3,6 +3,7 @@ package seedu.sellsavvy.logic.commands.personcommands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.DESC_AMY;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.DESC_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
@@ -80,7 +81,56 @@ public class EditPersonCommandTest {
     }
 
     @Test
+    public void execute_similarTags_warning() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_HUSBAND.toUpperCase()).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_HUSBAND.toUpperCase()).build();
+        EditPersonCommand editPersonCommand = new EditPersonCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = EditPersonCommand.MESSAGE_SIMILAR_TAGS_WARNING
+                + String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_similarCustomer_warning() {
+        Index indexLastCustomer = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastCustomer = model.getFilteredPersonList().get(indexLastCustomer.getZeroBased());
+        Person firstCustomer = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        String similarName = normalise(firstCustomer.getName().fullName);
+
+        PersonBuilder personInList = new PersonBuilder(lastCustomer);
+        Person editedCustomer = personInList.withName(similarName).withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(similarName)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditPersonCommand editPersonCommand = new EditPersonCommand(indexLastCustomer, descriptor);
+
+        String expectedMessage = EditPersonCommand.MESSAGE_SIMILAR_NAME_WARNING
+                + String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedCustomer));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastCustomer, editedCustomer);
+
+        assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_personEditedWithOrderDisplayed_success() {
+        // ensures that the selectedPerson got updated
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
         model.updateSelectedPerson(lastPerson);
