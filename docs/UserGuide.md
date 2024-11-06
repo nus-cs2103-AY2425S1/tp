@@ -123,6 +123,7 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE OF BIRTH [pri/PRIORITY = 
 * Parameters can be inputted in any order.
 * Duplicated names are not allowed to be added.
 * Blank parameters are not allowed.
+* `NAME` are case-insensitive e.g. `n/JOHN DOE` is different from `n/john doe`.
 * `PHONE` should contain at least 3 digits.
 * For optional parameters like `PRIORITY, INCOME, FAMILY SIZE`, if not specified, their values will be defaulted to `LOW, 0, 1` respectively.
 <box type="tip" seamless>
@@ -136,13 +137,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book. This list is by default sorted based on priority from HIGH to MEDIUM to LOW.
+Shows a list of all persons in SocialBook. This list is by default sorted based on priority from HIGH to MEDIUM to LOW.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person's details in the address book.
+Edits an existing person's details in the SocialBook.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [r/REMARK] [famsize/FAMILY SIZE] [t/TAG]…​`
 
@@ -177,18 +178,18 @@ Examples:
 
 ### Deleting people : `delete`
 
-Deletes the specified people from the address book.
+Deletes the specified people from SocialBook.
 
 Format: `delete INDEXES`
 
 * Deletes the people at the specified `INDEXES`.
 * The indexes refer to the index numbers shown in the displayed person list.
-* The indexes **must be positive integers** not exceeding 2^31 - 1 e.g. 1, 2, 3, …
+* The indexes **must be positive integers** not exceeding the largest index number e.g. 1, 2, 3, …
 * The indexes can be in **any order** so long as all the indexes fall within the size of the current list.
 * Duplicated valid index inputs would be treated as unique index inputs.
 
 Examples:
-* `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in the address book.
+* `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in SocialBook.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
 
@@ -210,7 +211,12 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from SocialBook.
+
+* All entries even those not currently shown in the list will be cleared.
+
+Examples:
+* `find n/John` followed by `clear` will delete all persons in SocialBook and not just those with `John` in their names.
 
 Format: `clear`
 
@@ -243,7 +249,7 @@ Format: `statistics`
 
 ### Displaying eligible schemes : `scheme`
 
-Displays the schemes that specified people from the address book are eligible for.
+Displays the schemes that specified people from SocialBook are eligible for.
 
 Format: `scheme INDEXES`
 
@@ -253,7 +259,7 @@ Format: `scheme INDEXES`
 * Only 1 index can be inputted at a time.
 
 Examples:
-* `scheme 1` shows scheme that the 1st person in the address book is eligible for.
+* `scheme 1` shows scheme that the 1st person in SocialBook is eligible for.
 
 ### Exiting the program : `exit`
 
@@ -263,17 +269,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SocialBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SocialBook data are saved automatically as a JSON file `[JAR file location]/data/socialbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, SocialBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the SocialBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -285,7 +291,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SocialBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
