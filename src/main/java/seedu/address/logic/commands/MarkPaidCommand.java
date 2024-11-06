@@ -35,7 +35,7 @@ public class MarkPaidCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing months paid of that person will be overwritten by input to this command.\n"
             + "Parameters: MarkPaidTarget (must be a positive integer index or 'all') "
-            + "MonthsPaid... (yyyy-mm format)\n"
+            + "[" + PREFIX_MONTHPAID + "MONTHPAID]...\n"
             + "Example 1: " + COMMAND_WORD + " 1 " + PREFIX_MONTHPAID + "2024-01\n"
             + "Example 2: " + COMMAND_WORD + " all "
             + PREFIX_MONTHPAID + "2024-01"
