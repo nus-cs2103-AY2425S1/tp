@@ -18,6 +18,7 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 2. [Features](#features)
     1. [Viewing help : `help`](#viewing-help--help)
     2. [Adding a company: `add`](#adding-a-company-add)
+        - [Special Tag Values](#special-tag-values)
     3. [Listing all companies : `list`](#listing-all-companies--list)
     4. [Bookmarking a company : `bookmark`](#bookmarking-a-company--bookmark)
     5. [Removing a bookmark from a bookmarked company : `removebm`](#removing-a-bookmark-from-a-bookmarked-company--removebm)
@@ -105,15 +106,15 @@ Examples:
 
 ---
 
-#### Special Tag Values for the `add` Command
+### Special Tag Values
 
 When using the `add` command, certain **tags** have special values.
-
-**Note**: If no valid value is provided, the tag will be displayed as it is without special handling. For example, `t/randomtag` will appear as "randomtag".
+Each Company can only have 1 tag for each type (can't have 2 Salary Tags)
+any extra tags will be ignored
 
 Below are the supported categories:
 
-##### 1. Salary, Work-Life Balance, and Interview Difficulty Tags
+##### Salary, Work-Life Balance, and Interview Difficulty Tags
 
 These tags represent qualitative levels. The valid values for these tags are:
 
@@ -127,12 +128,16 @@ These tags must be written using the following format (note the underscore):
 - Difficulty tag: `t/difficulty_[value]`
 - Work-Life Balance tag: `t/wlb_[value]`
 
+**Note:** Any additional underscores or characters after the given format, 
+like in `t/salary_[value]_extra`, will be ignored.
+
 **Example:**
 add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com
 t/salary_HIGH t/wlb_MEDIUM t/difficulty_MEDIUM
+
 ---
 
-##### 2. **Period Tag**
+##### **Period Tag**
 
 The **`Period`** tag is used to specify:
 
@@ -146,9 +151,24 @@ The **`Period`** tag is used to specify:
 
 Tag format: `t/period_[Season]_[Year]`
 
+**Note:** Any additional underscores or characters after the given format,
+like in `t/period_[Season]_[Year]_hello`, will be ignored.
+
 **Example:**
 add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com
 t/period_summer_2025
+
+##### **Unsupported and Invalid Tag values**
+
+- Only alphanumeric characters are allowed in the tag
+- If you attempt to create tags with values that aren't in the supported list given above, the tag will appear
+with whatever value you input. Example ```t/helloworld``` creates a tag called "helloworld"
+
+Other Invalid tag example:
+- . Trying to create a tag like ```t/mytag_HIGH``` will fail as we will treat your tag value
+as ```mytag_HIGH``` and the underscore is not a alphanumeric character
+
+
 
 ### Listing all companies : `list`
 
