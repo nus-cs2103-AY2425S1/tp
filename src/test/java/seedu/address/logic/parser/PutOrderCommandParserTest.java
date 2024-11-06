@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.PutOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.order.Order;
 import seedu.address.model.person.Name;
 
 class PutOrderCommandParserTest {
@@ -27,7 +26,7 @@ class PutOrderCommandParserTest {
     @Test
     void parse_validInput_success() {
         PutOrderCommandParser p = new PutOrderCommandParser();
-        Order order = new Order("cake");
+        String order = "cake";
         Name name = new Name("Alex");
         try {
             assertEquals(new PutOrderCommand(order, name), p.parse("cake n/ Alex"));

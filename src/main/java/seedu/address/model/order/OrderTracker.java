@@ -3,13 +3,13 @@ package seedu.address.model.order;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Track all the order history of a customer
  */
 public class OrderTracker {
     private ArrayList<OrderHistory> history;
+    /** Internal use only, frequency should be the same iff history is the same */
     private HashMap<Order, Integer> frequency;
 
     /**
@@ -38,6 +38,16 @@ public class OrderTracker {
         this.frequency.merge(order.getOrder(), 1, Integer::sum);
     }
 
+    /**
+     * Add list of order to order tracker
+     * @param history to add
+     */
+    public void add(ArrayList<OrderHistory> history) {
+        for (OrderHistory orderHistory : history) {
+            add(orderHistory);
+        }
+    }
+
     public int getTotalOrder() {
         int sum = 0;
         for (Map.Entry<Order, Integer> entry: this.frequency.entrySet()) {
@@ -60,7 +70,7 @@ public class OrderTracker {
 
     @Override
     public int hashCode() {
-        return Objects.hash(history, frequency);
+        return history.hashCode();
     }
 
     @Override
@@ -74,8 +84,7 @@ public class OrderTracker {
         }
 
         OrderTracker otherTracker = (OrderTracker) rhs;
-        return history.equals(otherTracker.history)
-                && frequency.equals(otherTracker.frequency);
+        return this.history.equals(otherTracker.history);
     }
 
     @Override

@@ -21,21 +21,26 @@ public class AddOrderCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New order added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the address book";
 
-    private final Order toAdd;
+    private final String toAdd;
 
     public AddOrderCommand(String name) {
-        this.toAdd = new Order(name.trim().toLowerCase());
+        this.toAdd = name;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasOrder(toAdd)) {
+        if (!Order.isValidName(toAdd)) {
+            throw new CommandException(Order.MESSAGE_CONSTRAINTS);
+        }
+        Order order = new Order(toAdd);
+
+        if (model.hasOrder(order)) {
             throw new CommandException(MESSAGE_DUPLICATE_ORDER);
         }
 
-        model.addOrder(toAdd);
+        model.addOrder(order);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

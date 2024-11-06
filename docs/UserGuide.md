@@ -105,7 +105,7 @@ Adds a customer to the address book.
 
 ### Listing all customers : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all customers in the address book.
 
 **Format:** `list`
 
@@ -113,7 +113,7 @@ Shows a list of all persons in the address book.
 
 ### Editing a customer : `edit`
 
-Edits an existing person in the address book.
+Edits an existing customer in the address book.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [t/TAG]…​`
 
@@ -132,26 +132,64 @@ Edits an existing person in the address book.
 
 ### Locating customers by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+The `find` command allows users to search for customers by name, phone number, or postal code, with flexible prefix search and multi-criteria functionality.
 
 **Format:** `find KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g., `hans` will match `Hans`.
-- The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
-- Only the name is searched.
-- Only full words will be matched; e.g., `Han` will not match `Hans`.
-- Persons matching at least one keyword will be returned (i.e., `OR` search).
+- The search is case-insensitive.
+- Users can search by **name**, **phone number**, and **postal code** simultaneously.
+- Partial matches are allowed for names, phone numbers, and postal codes.
+- Each keyword can represent a part of a name, phone number, or postal code, allowing flexible search criteria in any order.
+
+
+#### Prefix Search by Name
+
+Users can locate customers by entering the beginning letters (prefix) of their names. Multiple people can be located in a single search command by specifying additional prefixes.
 
 **Examples:**
-- `find John` returns `John Doe`.
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find al` — Finds all customers with names starting with "al".
+- `find al ch` — Finds all customers with names starting with "al" and "ch".
+
+
+#### Search by Phone Number
+
+Users can search for customers by entering part or all of their phone number.
+
+**Examples:**
+- `find 9123` — Finds any customers with phone numbers containing "9123".
+- `find 98124572` — Finds any customers with the exact phone number "98124572".
+
+
+#### Search by Postal Code
+
+Users can search for customers by entering part or all of their postal code. Postal codes should follow the format of a 6-digit number.
+
+**Examples:**
+- `find 560123` — Finds any customers with the postal code "560123".
+- `find 560` — Finds any customers with postal codes starting with "560".
+
+
+#### Simultaneous Search with Multiple Criteria
+
+Users can combine multiple criteria—name, phone number, and postal code—in a single search command for flexible and efficient searching.
+
+**Examples:**
+- `find Alice 9876` — Finds all customers with the name "Alice" **or** a phone number containing "9876".
+- `find 9456 S630123` — Finds all customers with phone numbers containing "9456" **or** postal code "630123".
+- `find S550 Bob` — Finds all customers with postal codes starting with "550" **or** the name "Bob".
+- `find S789123 Carl 97621010` — Finds all customers with postal code "789123" **or** name "Carl" **or** phone number "97621010".
+
+
+
+**Note:** The `find` command performs an `OR` search across the criteria, meaning that customers matching any of the provided keywords will be returned.
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ---
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified customer from the address book.
 
 **Format:** `delete INDEX`
 

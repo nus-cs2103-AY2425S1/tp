@@ -2,6 +2,7 @@ package seedu.address.model.order;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * OrderHistory consist of a past order and the time of order was placed
@@ -43,5 +44,24 @@ public class OrderHistory {
     @Override
     public String toString() {
         return this.time.format(formatter) + ": Ordered " + getOrder();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.order, this.time);
+    }
+
+    @Override
+    public boolean equals(Object rhs) {
+        if (this == rhs) {
+            return true;
+        }
+
+        if (!(rhs instanceof OrderHistory)) {
+            return false;
+        }
+
+        OrderHistory otherOrderHistory = (OrderHistory) rhs;
+        return this.time.equals(otherOrderHistory.time) && this.order.equals(otherOrderHistory.order);
     }
 }

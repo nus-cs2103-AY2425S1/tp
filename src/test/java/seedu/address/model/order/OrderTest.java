@@ -2,10 +2,19 @@ package seedu.address.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 class OrderTest {
+
+    @Test
+    public void constructor_invalidOrderName_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Order(" cake"));
+        assertThrows(IllegalArgumentException.class, () -> new Order("c.ke"));
+        assertThrows(IllegalArgumentException.class, () -> new Order("ca/ke"));
+        assertThrows(IllegalArgumentException.class, () -> new Order(""));
+    }
 
     @Test
     public void equalsTest() {

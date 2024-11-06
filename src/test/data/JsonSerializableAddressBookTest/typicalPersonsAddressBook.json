@@ -15,7 +15,11 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "postalCode": "123000",
     "tags" : [ "Vegetarian", "Gluten Free" ],
-    "isArchived": false
+    "isArchived": false,
+    "orderHistory" : [ {
+      "order" : "pizza",
+      "timestamp" : "2024-10-26T19:59:16.283392"
+    } ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -23,7 +27,11 @@
     "address" : "wall street #12-345",
     "postalCode": "123456",
     "tags" : [ "Vegan"],
-    "isArchived": false
+    "isArchived": false,
+    "orderHistory" : [ {
+      "order" : "pizza",
+      "timestamp" : "2024-10-26T19:59:16.283392"
+    } ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -31,7 +39,11 @@
     "address" : "10th street #12-345",
     "postalCode": "123456",
     "tags" : [ "Gluten Free" ],
-    "isArchived": false
+    "isArchived": false,
+    "orderHistory" : [ {
+      "order" : "pizza",
+      "timestamp" : "2024-10-26T19:59:16.283392"
+    } ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "94824422",
@@ -39,7 +51,11 @@
     "address" : "michegan ave #12-345",
     "postalCode": "123456",
     "tags" : [ "Vegetarian" ],
-    "isArchived": false
+    "isArchived": false,
+    "orderHistory" : [ {
+      "order" : "pizza",
+      "timestamp" : "2024-10-26T19:59:16.283392"
+    } ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "94824422",
@@ -47,7 +63,11 @@
     "address" : "little tokyo #12-345",
     "postalCode" : "123456",
     "tags" : [ ],
-    "isArchived": false
+    "isArchived": false,
+    "orderHistory" : [ {
+      "order" : "pizza",
+      "timestamp" : "2024-10-26T19:59:16.283392"
+    } ]
   }, {
     "name" : "George Best",
     "phone" : "94824422",
@@ -55,7 +75,11 @@
     "address" : "4th street #12-345",
     "postalCode" : "123456",
     "tags" : [ ],
-    "isArchived": false
+    "isArchived": false,
+    "orderHistory" : [ {
+      "order" : "pizza",
+      "timestamp" : "2024-10-26T19:59:16.283392"
+    } ]
   } ],
   "orders": [],
   "shortcuts": []

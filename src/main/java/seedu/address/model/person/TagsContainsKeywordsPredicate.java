@@ -16,19 +16,21 @@ import seedu.address.model.tag.Tag;
 public class TagsContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
     /**
-     * This constructor takes a list of keywords and replaces any keyword that matches a short code
-     * in the {@code Tag.DIETARY_RESTRICTION_MAP} with its corresponding full dietary restriction name.
-     * If no match is found, the keyword remains unchanged. The modified list is then assigned to the
-     * {@code keywords} field.
+     * This constructor takes a list of keywords and, for each keyword, checks if there is a corresponding
+     * full tag name in {@code Tag.shortCutMap}. If a match is found, both the
+     * original keyword and its mapped shortcut name are added to the {@code keywords} list.
+     * If no match is found, the original keyword is added as is.
      *
-     * @param keywords A list of keywords toi be processed and matched again
-     *
+     * @param keywords A list of keywords to be processed and matched.
      */
     public TagsContainsKeywordsPredicate(List<String> keywords) {
         List<String> mappedKeywords = new ArrayList<>();
         for (String item : keywords) {
-            String mappedItem = Tag.getDietaryRestrictionsMappings().getOrDefault(item, item);
-            mappedKeywords.add(mappedItem);
+            String mappedItem = Tag.getShortCutMappings().getOrDefault(item, item);
+            mappedKeywords.add(item);
+            if (!item.equals(mappedItem)) {
+                mappedKeywords.add(mappedItem);
+            }
         }
         this.keywords = mappedKeywords;
     }

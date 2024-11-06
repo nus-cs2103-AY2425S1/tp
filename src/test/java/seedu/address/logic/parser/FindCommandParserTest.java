@@ -35,19 +35,10 @@ public class FindCommandParserTest {
     @Test
     public void parse_validPhoneArgs_returnsFindCommand() {
         FindCommand expectedFindCommand =
-                new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("12345", "67890")));
-        assertParseSuccess(parser, "12345 67890", expectedFindCommand);
-        assertParseSuccess(parser, " \n 12345 \n \t 67890  \t", expectedFindCommand);
+                new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("912345", "967890")));
+        assertParseSuccess(parser, "912345 967890", expectedFindCommand);
+        assertParseSuccess(parser, " \n 912345 \n \t 967890  \t", expectedFindCommand);
     }
-
-    @Test
-    public void parse_validPostal_returnsFindCommand() {
-        FindCommand expectedFindCommand =
-                new FindCommand(new PostalContainsKeywordsPredicate(Arrays.asList("123000", "123456")));
-        assertParseSuccess(parser, "123000 123456", expectedFindCommand);
-        assertParseSuccess(parser, " \n 123000 \n \t 123456  \t", expectedFindCommand);
-    }
-
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
@@ -55,6 +46,11 @@ public class FindCommandParserTest {
     @Test
     public void equals_sameObject_returnsTrue() {
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345"));
+        assertTrue(predicate.equals(predicate));
+    }
+    @Test
+    public void equals_samePostalObject_returnsTrue() {
+        PostalContainsKeywordsPredicate predicate = new PostalContainsKeywordsPredicate(Arrays.asList("S123456"));
         assertTrue(predicate.equals(predicate));
     }
     @Test

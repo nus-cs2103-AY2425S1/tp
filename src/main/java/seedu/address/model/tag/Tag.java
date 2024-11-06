@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
 import seedu.address.model.shortcut.ShortCut;
 
@@ -18,23 +20,9 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*[\\p{Alnum}]?$";
+    private static final Logger logger = LogsCenter.getLogger(Tag.class);
     private static HashMap<String, String> shortCutMap = new HashMap<>();
-    private static String allMappings;
     public final String tagName;
-    static {
-        if (shortCutMap.isEmpty()) {
-            allMappings = "no shortcuts assigned";
-        } else {
-            // If there are mappings, format the mappings as a string and assign to allMappings
-            StringBuilder mappingsBuilder = new StringBuilder();
-            shortCutMap.forEach((alias, fullTagName) -> {
-                mappingsBuilder.append("Alias: ").append(alias)
-                        .append(" -> FullTagName: ").append(fullTagName)
-                        .append("\n");
-            });
-            allMappings = mappingsBuilder.toString().trim();
-        }
-    }
     /**
      * Constructs a {@code Tag}.
      *
@@ -56,7 +44,6 @@ public class Tag {
     }
     /**
      * Updates the hashmap containing the alias and fullTagName
-     * @param model
      */
     public static void updateShortCutMappings(Model model) {
         ObservableList<ShortCut> shortCutList = model.getShortCutList();
@@ -66,6 +53,7 @@ public class Tag {
             mapping.put(shortCut.getAlias().toString(), shortCut.getFullTagName().toString());
         }
         shortCutMap = mapping;
+        logger.info("ShortCut Mappings updated");
     }
 
     @Override
@@ -98,17 +86,10 @@ public class Tag {
     public String toString() {
         return '[' + tagName + ']';
     }
-
-    /**
-     * @return string representation of all mappings
-     */
-    public static String getStringMappings() {
-        return allMappings;
-    }
     /**
      * @return hashmap of all tags and shortcuts
      */
-    public static HashMap<String, String> getDietaryRestrictionsMappings() {
+    public static HashMap<String, String> getShortCutMappings() {
         return shortCutMap;
     }
 }

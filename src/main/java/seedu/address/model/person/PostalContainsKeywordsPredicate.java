@@ -19,7 +19,6 @@ public class PostalContainsKeywordsPredicate implements Predicate<Person> {
                 person.getPostalCode().toString().contains(keyword));
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -33,4 +32,9 @@ public class PostalContainsKeywordsPredicate implements Predicate<Person> {
         PostalContainsKeywordsPredicate otherPredicate = (PostalContainsKeywordsPredicate) other;
         return keywords.equals(otherPredicate.keywords);
     }
+    @Override
+    public int hashCode() {
+        return keywords.hashCode();
+    }
+
 }

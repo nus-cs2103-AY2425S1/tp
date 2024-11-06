@@ -129,7 +129,7 @@ public class FindCommandTest {
     @Test
     public void execute_postalSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("123000"); // postal code matches ALICE and BENSON
+        Predicate<Person> predicate = preparePredicate("S123000"); // postal code matches ALICE and BENSON
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -139,12 +139,13 @@ public class FindCommandTest {
     @Test
     public void execute_nameAndPostalCodeSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("Alice 123000"); // Alice by name, Benson by postal code
+        Predicate<Person> predicate = preparePredicate("Alice S123000"); // Alice by name, Benson by postal code
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
     }
+
     private Predicate<Person> preparePredicate(String userInput) {
         String[] keywords = userInput.split("\\s+");
 
@@ -158,6 +159,7 @@ public class FindCommandTest {
 
         List<String> postalCodeKeywords = Arrays.stream(keywords)
                 .filter(this::isPostalCode)
+                .map(keyword -> keyword.substring(1))
                 .collect(Collectors.toList());
 
         Predicate<Person> namePredicate = nameKeywords.isEmpty()
@@ -180,6 +182,6 @@ public class FindCommandTest {
     }
     private boolean isPostalCode(String str) {
         // checks that the postal code is exactly 6 digits
-        return str.matches("\\d{6}");
+        return str.matches("S\\d+");
     }
 }

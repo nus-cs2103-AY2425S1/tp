@@ -22,54 +22,46 @@ public class TagsContainsKeywordsPredicateTest {
         TagsContainsKeywordsPredicate firstPredicate = new TagsContainsKeywordsPredicate(firstPredicateKeywordList);
         TagsContainsKeywordsPredicate secondPredicate = new TagsContainsKeywordsPredicate(secondPredicateKeywordList);
 
-        // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
-        // same values -> returns true
         TagsContainsKeywordsPredicate firstPredicateCopy = new TagsContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
-        // different types -> returns false
         assertFalse(firstPredicate.equals(1));
-
-        // null -> returns false
         assertFalse(firstPredicate.equals(null));
-
-        // different person -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
     public void test_tagContainsKeywords_returnsTrue() {
-        // One keyword
         TagsContainsKeywordsPredicate predicate = new TagsContainsKeywordsPredicate(Collections.singletonList("Vegan"));
         assertTrue(predicate.test(new PersonBuilder().withTags("Vegan").build()));
 
-        // Multiple keywords mixed with shortcuts
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("v", "Vegetarian"));
         assertTrue(predicate.test(new PersonBuilder().withTags("Vegan", "Vegetarian").build()));
 
-        // Only one matching keyword
-        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Vegan", "Gluten free"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("Vegan").build()));
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("v", "veg"));
+        assertTrue(predicate.test(new PersonBuilder().withTags("Vegan", "Vegetarian").build()));
 
-        // Mixed-case keywords
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("v", "glUtEn free"));
         assertTrue(predicate.test(new PersonBuilder().withTags("Vegan", "Gluten Free").build()));
+
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("VeGaN", "vegetarian"));
+        assertTrue(predicate.test(new PersonBuilder().withTags("Vegan", "Vegetarian").build()));
     }
 
     @Test
     public void test_tagDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
         TagsContainsKeywordsPredicate predicate = new TagsContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withTags("Vegan").build()));
 
-        // Non-matching keyword
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Vegetarian"));
         assertFalse(predicate.test(new PersonBuilder().withTags("Vegan").build()));
 
-        // Non-matching shortcut keyword
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("vg"));
+        assertFalse(predicate.test(new PersonBuilder().withTags("Vegan").build()));
+
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("nonexistent"));
         assertFalse(predicate.test(new PersonBuilder().withTags("Vegan").build()));
     }
 

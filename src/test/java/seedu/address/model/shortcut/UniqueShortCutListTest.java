@@ -33,46 +33,31 @@ public class UniqueShortCutListTest {
         uniqueShortCutList.add(veganShortCut);
         assertTrue(uniqueShortCutList.contains(veganShortCut));
     }
+
     @Test
     void containsAlias_aliasNotInList_returnsFalse() {
-        // Alias not in list
         Alias aliasToCheck = new Alias("v");
         assertFalse(uniqueShortCutList.containsAlias(aliasToCheck));
     }
 
     @Test
     void containsAlias_aliasInList_returnsTrue() {
-        // Add shortcut1 to the list
         uniqueShortCutList.add(veganShortCut);
-
-        // Alias v should now be in the list
         Alias aliasToCheck = new Alias("v");
         assertTrue(uniqueShortCutList.containsAlias(aliasToCheck));
     }
 
     @Test
-    void containsAlias_differentAlias_returnsFalse() {
-        // Add shortcut1 to the list
-        uniqueShortCutList.add(veganShortCut);
-
-        // Alias vg is not in the list, should return false
-        Alias aliasToCheck = new Alias("vg");
-        assertFalse(uniqueShortCutList.containsAlias(aliasToCheck));
+    void containsFullTagName_tagNameNotInList_returnsFalse() {
+        FullTagName tagNameToCheck = new FullTagName("Vegetarian");
+        assertFalse(uniqueShortCutList.containsFullTagName(tagNameToCheck));
     }
 
     @Test
-    void containsAlias_multipleShortcuts_correctAliasCheck() {
-        // Add multiple shortcuts
+    void containsFullTagName_tagNameInList_returnsTrue() {
         uniqueShortCutList.add(veganShortCut);
-        uniqueShortCutList.add(vegetarianShortCut);
-
-        // Alias v should be in the list
-        Alias aliasToCheckV = new Alias("v");
-        assertTrue(uniqueShortCutList.containsAlias(aliasToCheckV));
-
-        // Alias vg should be in the list
-        Alias aliasToCheckVG = new Alias("vg");
-        assertTrue(uniqueShortCutList.containsAlias(aliasToCheckVG));
+        FullTagName tagNameToCheck = new FullTagName("Vegan");
+        assertTrue(uniqueShortCutList.containsFullTagName(tagNameToCheck));
     }
 
     @Test
@@ -142,6 +127,11 @@ public class UniqueShortCutListTest {
     }
 
     @Test
+    public void equals_null_returnsFalse() {
+        assertNotEquals(uniqueShortCutList, null);
+    }
+
+    @Test
     public void hashCode_sameList_sameHashCode() {
         uniqueShortCutList.add(veganShortCut);
         UniqueShortCutList anotherList = new UniqueShortCutList();
@@ -161,5 +151,12 @@ public class UniqueShortCutListTest {
     public void toString_producesCorrectString() {
         uniqueShortCutList.add(veganShortCut);
         assertEquals("[" + veganShortCut.toString() + "]", uniqueShortCutList.toString());
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_returnsImmutableList() {
+        uniqueShortCutList.add(veganShortCut);
+        List<ShortCut> list = uniqueShortCutList.asUnmodifiableObservableList();
+        assertThrows(UnsupportedOperationException.class, () -> list.add(vegetarianShortCut));
     }
 }

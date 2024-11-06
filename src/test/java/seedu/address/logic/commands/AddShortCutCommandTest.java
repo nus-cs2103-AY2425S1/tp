@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,12 +19,16 @@ import seedu.address.model.shortcut.ShortCut;
 
 class AddShortCutCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     void execute_newShortCut_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         ShortCut shortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
         expectedModel.addShortCut(shortCut);
         assertCommandSuccess(new AddShortCutCommand(shortCut), model,
@@ -31,11 +36,25 @@ class AddShortCutCommandTest {
     }
 
     @Test
-    void execute_duplicateShortCut_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        ShortCut shortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
-        model.addShortCut(shortCut);
-        assertThrows(CommandException.class, () -> new AddShortCutCommand(shortCut).execute(model));
+    void execute_duplicateAlias_throwsCommandException() {
+        ShortCut existingShortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
+        model.addShortCut(existingShortCut);
+
+        ShortCut duplicateAliasShortCut = new ShortCut(new Alias("v"), new FullTagName("Vegetarian"));
+        AddShortCutCommand command = new AddShortCutCommand(duplicateAliasShortCut);
+        CommandException exception = assertThrows(CommandException.class, () -> command.execute(model));
+        assertEquals(AddShortCutCommand.MESSAGE_DUPLICATE_ALIAS, exception.getMessage());
+    }
+
+    @Test
+    void execute_duplicateTagName_throwsCommandException() {
+        ShortCut existingShortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
+        model.addShortCut(existingShortCut);
+
+        ShortCut duplicateTagNameShortCut = new ShortCut(new Alias("vg"), new FullTagName("Vegan"));
+        AddShortCutCommand command = new AddShortCutCommand(duplicateTagNameShortCut);
+        CommandException exception = assertThrows(CommandException.class, () -> command.execute(model));
+        assertEquals(AddShortCutCommand.MESSAGE_DUPLICATE_FULLTAGNAME, exception.getMessage());
     }
 
     @Test
@@ -47,15 +66,17 @@ class AddShortCutCommandTest {
         AddShortCutCommand command1 = new AddShortCutCommand(shortCut1);
         AddShortCutCommand command2 = new AddShortCutCommand(shortCut2);
         AddShortCutCommand command3 = new AddShortCutCommand(shortCut3);
-        assertEquals(command1, command1);
-        assertNotEquals(command1, null);
-        assertEquals(command1, command2);
-        assertNotEquals(command1, command3);
+
+        assertEquals(command1, command1); // Same object
+        assertNotEquals(command1, null); // Null check
+        assertEquals(command1, command2); // Equal shortcuts
+        assertNotEquals(command1, command3); // Different shortcuts
     }
 
     @Test
     void toStringMethod() {
         ShortCut shortCut1 = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
-        assertEquals(shortCut1.toString(), "v : Vegan");
+        AddShortCutCommand command = new AddShortCutCommand(shortCut1);
+        assertEquals(command.toString(), "v -> Vegan");
     }
 }

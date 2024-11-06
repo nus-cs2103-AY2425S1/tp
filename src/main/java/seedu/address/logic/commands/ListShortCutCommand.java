@@ -43,7 +43,7 @@ public class ListShortCutCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ListOrderCommand)) {
+        if (!(other instanceof ListShortCutCommand)) {
             return false;
         }
 

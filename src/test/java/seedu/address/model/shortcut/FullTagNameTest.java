@@ -45,23 +45,24 @@ public class FullTagNameTest {
 
     @Test
     public void equals_sameFullTagName_returnsTrue() {
-        // Check that two FullTagName objects with the same name are considered equal
         FullTagName fullTagName1 = new FullTagName("Vegan");
         FullTagName fullTagName2 = new FullTagName("Vegan");
+        FullTagName fullTagName3 = new FullTagName("VeGan");
         assertEquals(fullTagName1, fullTagName2);
+        assertEquals(fullTagName1, fullTagName3);
     }
 
     @Test
     public void equals_differentFullTagName_returnsFalse() {
-        // Check that two FullTagName objects with different names are not considered equal
         FullTagName fullTagName1 = new FullTagName("Vegan");
         FullTagName fullTagName2 = new FullTagName("Vegetarian");
+        Alias alias = new Alias("V");
         assertNotEquals(fullTagName1, fullTagName2);
+        assertNotEquals(fullTagName1, alias);
     }
 
     @Test
     public void hashCode_sameFullTagName_sameHashCode() {
-        // Check that two FullTagName objects with the same name have the same hash code
         FullTagName fullTagName1 = new FullTagName("Vegan");
         FullTagName fullTagName2 = new FullTagName("Vegan");
         assertEquals(fullTagName1.hashCode(), fullTagName2.hashCode());
