@@ -51,13 +51,13 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
    - `help` : Shows a message explaining how to access the help page.
 
    - `listp` : Lists all contacts in the ConcertPhonebook.
-   
+
    - `listc` : Lists all concerts in the ConcertPhonebook.
-   
+
    - `list` : Lists all contacts and concerts in the ConcertPhonebook.
-   
+
    - `listcc` : Lists all concertContacts in the ConcertPhonebook.
-   
+
    - `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/organiser t/friends` : Adds a contact named `John Doe` to the ConcertPhonebook.
 
    - `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010` : Adds a concert named `Coachella` to the ConcertPhonebook.
@@ -77,9 +77,9 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
    - `findc n/coachella glastonbury` : Finds concert(s) named either `Coachella` or `Glastonbury` from the ConcertPhonebook.
 
    - `findcc pi/1 ci/1` : Finds the concertContact between the 1st person and 1st concert.
-   
+
    - `editp 1 n/John Doe` : Edits the name of the 1st person shown in the current person list to `John Doe`.
-   
+
    - `editc 1 n/Coachella` : Edits the name of the 1st concert shown in the current concert list to `Coachella`.
 
    - `exit` : Exits the app.
@@ -110,6 +110,8 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+- INDEX parameters have a max positive value of `2147483647` any value larger would result in an invalid command.
 </div>
 
 ---
@@ -351,7 +353,7 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 ## Command summary
 
 | Action                       | Format, Examples                                                                                                                                                             |
-| ---------------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Help**                     | `help`                                                                                                                                                                       |
 | **List Person**              | `listp`                                                                                                                                                                      |
 | **List Concerts**            | `listc`                                                                                                                                                                      |
