@@ -149,6 +149,71 @@ Examples:
 * `list` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+### Adding a consultation : `addconsult`
+
+Adds a new consultation to TAHub.
+
+**Format**: `addconsult d/DATE t/TIME`
+
+* The date and time should not conflict with any existing consultation.
+* Date format: `YYYY-MM-DD`
+* Time format: `HH:MM`
+
+**Examples**:
+* `addconsult d/2024-10-20 t/14:00`
+* `addconsult d/2024-11-05 t/09:00`
+
+### Listing all consultations : `listconsults`
+
+Displays a list of all consultations in TAHub.
+
+**Format**: `listconsults`
+
+**Example**:
+* `listconsults`
+
+### Adding students to a consultation : `addtoconsult`
+
+Adds students to an existing consultation, specified by its index.
+
+**Format**: `addtoconsult INDEX [n/NAME]... [i/INDEX]...`
+
+* `INDEX` specifies the consultation to add students to.
+* Student names (`n/NAME`) and/or student indices (`i/INDEX`) can be used to specify students.
+* Students already in the consultation will not be added again, and an error message will be shown.
+
+**Examples**:
+* `addtoconsult 1 n/John Doe n/Harry Ng`
+* `addtoconsult 2 i/3 i/5` (adds students at indices 3 and 5 in the student list to the 2nd consultation)
+
+---
+
+### Removing students from a consultation : `removefromconsult`
+
+Removes specified students from a consultation, identified by its index.
+
+**Format**: `removefromconsult INDEX n/NAME...`
+
+* `INDEX` is the index of the consultation from which the students will be removed.
+* Specify one or more students to remove by their names.
+
+**Examples**:
+* `removefromconsult 1 n/John Doe n/Harry Ng` (removes students named John Doe and Harry Ng from the 1st consultation)
+
+---
+
+### Deleting consultations : `deleteconsult`
+
+Deletes one or more consultations from TAHub by their indices.
+
+**Format**: `deleteconsult INDEX[;INDEX]...`
+
+* `INDEX` specifies the consultation to delete. You can delete multiple consultations by separating indices with semicolons (`;`).
+
+**Examples**:
+* `deleteconsult 2`
+* `deleteconsult 1;3;5` (deletes the 1st, 3rd, and 5th consultations)
+
 ### Exporting student data : `export`
 
 Exports the current list of students to a CSV file.

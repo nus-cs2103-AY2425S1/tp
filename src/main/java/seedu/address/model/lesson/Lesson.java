@@ -252,4 +252,23 @@ public class Lesson {
         return String.format("Lesson[date=%s, time=%s, studentLessonInfoList=%s]",
                 date, time, studentLessonInfoList);
     }
+
+    /**
+     * Returns true if both lessons have the same date and time.
+     * This defines a weaker notion of equality between two lessons compared to {@code equals}.
+     *
+     * @param otherLesson The other lesson to compare to.
+     * @return True if the lessons have the same date and time, false otherwise.
+     */
+    public boolean isSameLesson(Lesson otherLesson) {
+        if (otherLesson == this) {
+            return true;
+        }
+
+        if (otherLesson == null) {
+            return false;
+        }
+
+        return date.equals(otherLesson.date) && time.equals(otherLesson.time);
+    }
 }

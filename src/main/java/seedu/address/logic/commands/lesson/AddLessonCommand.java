@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 
 /**
  * Adds a lesson to the address book.
@@ -54,9 +55,13 @@ public class AddLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.addLesson(newLesson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newLesson)),
-                COMMAND_TYPE);
+
+        try {
+            model.addLesson(newLesson);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newLesson)), COMMAND_TYPE);
+        } catch (DuplicateLessonException e) {
+            throw new CommandException("Duplicate lesson. A lesson with this date and time already exists.");
+        }
     }
 
     @Override

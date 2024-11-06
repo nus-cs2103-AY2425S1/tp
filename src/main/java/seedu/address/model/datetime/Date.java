@@ -10,7 +10,7 @@ import java.util.Objects;
  * Represents a Date in the system.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}.
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format YYYY-MM-DD, "
             + "and must be a valid date (e.g., no month 13 or day 32).";
