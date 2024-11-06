@@ -79,7 +79,7 @@ public class RenameTagCommandParserTest {
         assertParseFailure(parser, " t/;%<>}{ t/" + VALID_TAG_BRIDES_SIDE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         assertParseFailure(parser, " t/¡£™ t/" + VALID_TAG_BRIDES_SIDE,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         assertParseFailure(parser, " t/¶¢ t/" + VALID_TAG_BRIDES_SIDE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
