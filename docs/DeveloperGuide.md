@@ -435,6 +435,12 @@ Priorities:
 - **1d.** Contact is already assigned to the wedding
     - **1d1.** Error message displayed in result display.
         - Use case ends.
+- **1e.** Contact is the client of the wedding
+    - **1e1.** Error message displayed in result display.
+        - Use case ends.
+- **1f.** Contact does not have a role
+    - **1f1.** Error message displayed in result display.
+        - Use case ends.
 
 ### Non-Functional Requirements
 
