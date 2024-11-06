@@ -30,10 +30,7 @@ public class StudentNumber {
         requireNonNull(studentNumber);
         checkArgument(isValidStudentNumber(studentNumber), MESSAGE_CONSTRAINTS);
 
-        StringBuilder sb = new StringBuilder(studentNumber);
-        sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
-        sb.setCharAt(sb.length() - 1, Character.toUpperCase(sb.charAt(sb.length() - 1)));
-        this.value = sb.toString();
+        this.value = studentNumber.toUpperCase();
     }
 
     /**
