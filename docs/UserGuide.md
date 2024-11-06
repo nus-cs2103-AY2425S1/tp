@@ -200,6 +200,11 @@ Format: `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 * Adds a transaction to the client at the specified `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The amount should be a number of up to two decimal places containing only digits (`0 - 9`) and one decimal point (`.`) if needed.
+e.g. `10, 100.5, 1000.55`
+* If the amount includes a decimal point, there should be at least one digit before the decimal point. 
+e.g. `0.5`
+* The date should be in the format `YYYY-MM-DD` e.g. `2024-12-20`
 
 <box type="warning" seamless>
 
@@ -207,10 +212,10 @@ Format: `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 </box>
 
 Examples:
-* `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024`
-* `list` followed by `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024` 
+* `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16`
+* `list` followed by `addt 1 d/buy new equipment amt/-10000.5 o/ABC Motor Group dt/2024-11-17` 
 adds the transaction to the 1st client in the application.
-* `find Betsy` followed by `addt 1 d/sell raw materials amt/200 o/Company XYZ dt/01-09-2024` 
+* `find David` followed by `addt 1 d/sell raw materials amt/200 o/Company XYZ dt/2024-09-01` 
 adds the transaction to the 1st client in the results of the `find` command.
 
 #### Listing Transactions for a specified client: `listt`
