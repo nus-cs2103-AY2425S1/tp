@@ -21,9 +21,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 
 /**
- * Parses input arguments and creates a new UpdateCommand object
+ * Parses input arguments and creates a new EditEventCommand object
  */
-public class UpdateCommandParser implements Parser<EditEventCommand> {
+public class EditEventCommandParser implements Parser<EditEventCommand> {
 
     /**
      * List of valid arguments for the {@code update} command.
@@ -39,8 +39,8 @@ public class UpdateCommandParser implements Parser<EditEventCommand> {
     };
 
     /**
-     * Parses the given {@code String} of arguments in the context of the UpdateCommand
-     * and returns an UpdateCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditEventCommand
+     * and returns an EditEventCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditEventCommand parse(String args) throws ParseException {
@@ -64,7 +64,7 @@ public class UpdateCommandParser implements Parser<EditEventCommand> {
                     EditEventCommand.MESSAGE_USAGE));
         }
 
-        // Parse input and create an UpdateCommand
+        // Parse input and create an EditEventCommand
         Index indexToUpdate = parseIndex(argMultimap);
         String name = parseName(argMultimap);
         LocalDate startDate = parseStartDate(argMultimap);

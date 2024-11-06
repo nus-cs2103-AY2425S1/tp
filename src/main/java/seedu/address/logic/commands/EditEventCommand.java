@@ -62,7 +62,7 @@ public class EditEventCommand extends Command {
     private final Index indexToUpdate;
 
     /**
-     * Creates an UpdateCommand to update an event to the specified {@code Event}
+     * Creates an EditEventCommand to update an event to the specified {@code Event}
      */
     public EditEventCommand(String newName,
                             LocalDate newStartDate,
