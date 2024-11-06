@@ -17,20 +17,40 @@ MindMap is a **desktop app for managing contacts, optimized for use via a  Line 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your MindMap application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Open a command terminal,
+  - For Windows user,
+     1. **Can some window user edit this**
+   
+        
+  - For MacOS user,
+     1. Use command + space, to show the highlight search bar
+     2. Type `terminal` into the search bar and select the first option.
+   
+3. Copy the filepath of the folder containing Mindmap. For Windows, **shift and right-click** the folder, then select "Copy as Path" from the context menu. For MacOS, follow [this](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://macpaw.com/how-to/copy-file-path-mac%23:~:text%3DControl%252Dclick%2520or%2520right%252Dclick%2520on%2520the%2520file%2520in%2520Finder,path%2520wherever%2520you%2520need%2520it.&ved=2ahUKEwiUn6S_jseJAxWVxzgGHTVQJQsQFnoECBQQAw&usg=AOvVaw22hRilijfEWC_nmiYfJzmQ).
+4. Change the file directory to match the location of the folder containing the app. Copy the following line into terminal.
+```
+cd [Replace this with the copied filepath]
+```
+6. Copy the followning line into terminal to run the application
+```
+java -jar mindmap.jar
+```
+6. A GUI similar to the below should appear in a few seconds.
+>[!NOTE]
+>The app contains some sample data.<br>
+   
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe i/S1234567D p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -38,7 +58,7 @@ MindMap is a **desktop app for managing contacts, optimized for use via a  Line 
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
