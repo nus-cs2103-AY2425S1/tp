@@ -22,7 +22,7 @@ import seedu.address.model.student.TutorialGroup;
  */
 public class UnmarkPresentAllCommand extends Command {
 
-    public static final String COMMAND_WORD = "unmarkpresentall";
+    public static final String COMMAND_WORD = "markabsentall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all students in the specified tutorial group "
             + "as absent for the specified date.\n"
