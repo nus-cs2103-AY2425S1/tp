@@ -16,6 +16,7 @@ import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.UniqueJobList;
+import seedu.address.model.job.exceptions.JobNotFoundException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -116,10 +117,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to the address book. The person must not already exist in the address book.
+     * If a person is matched, the existence of the job is checked here.
      */
     public void addPerson(Person p) {
+        if (p.isMatchPresent()) {
+            String jobIdentifier = p.getMatch().get();
+            boolean jobExists = StreamSupport
+                    .stream(jobs.spliterator(), false)
+                    .anyMatch(job -> job.getIdentifier().equals(jobIdentifier));
+            if (!jobExists) {
+                throw new JobNotFoundException(p.getMatch().get());
+            }
+        }
+
         persons.add(p);
     }
 

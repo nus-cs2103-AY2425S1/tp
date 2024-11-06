@@ -50,9 +50,9 @@ public class JobTest {
         editedSwe = new JobBuilder(SWE).withCompany(VALID_JOB_COMPANY_BARISTA).build();
         assertFalse(SWE.isSameJob(editedSwe));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Job editedBarista = new JobBuilder(BARISTA).withName(VALID_JOB_NAME_BARISTA.toLowerCase()).build();
-        assertFalse(BARISTA.isSameJob(editedBarista));
+        assertTrue(BARISTA.isSameJob(editedBarista));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
