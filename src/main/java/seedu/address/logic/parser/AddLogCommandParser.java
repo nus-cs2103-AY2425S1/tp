@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
 
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
