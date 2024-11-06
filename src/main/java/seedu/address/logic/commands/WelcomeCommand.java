@@ -39,6 +39,6 @@ public class WelcomeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(WELCOME_MESSAGE, false, false);
+        return new CommandResult(WELCOME_MESSAGE, false, false, USERGUIDE_URL);
     }
 }
