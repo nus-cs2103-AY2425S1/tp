@@ -119,7 +119,7 @@ Shows a message with basic usage instructions for PlanPerfect. The link to this 
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]`
 
-> **Adds a contact to the address book.**
+Adds a contact to the address book.
 
 <box type="info" seamless>
 
@@ -338,7 +338,7 @@ Examples:
 
 Format: `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
 
-> Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
+Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
 
 <box type="info" seamless>
 
@@ -402,7 +402,7 @@ Examples:
 
 Format: `deletew WEDDING_INDEX`
 
-> Deletes the wedding at the specified `WEDDING_INDEX`.
+Deletes the wedding at the specified `WEDDING_INDEX`.
 
 Examples:
 * `deletew 4` deletes the 4th wedding shown on the wedding panel.
