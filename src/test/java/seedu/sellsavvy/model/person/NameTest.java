@@ -1,7 +1,5 @@
 package seedu.sellsavvy.model.person;
 
-import seedu.sellsavvy.model.order.Item;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;

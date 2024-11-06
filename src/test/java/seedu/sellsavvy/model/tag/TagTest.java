@@ -1,7 +1,5 @@
 package seedu.sellsavvy.model.tag;
 
-import seedu.sellsavvy.model.person.Name;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
