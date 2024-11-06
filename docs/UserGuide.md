@@ -687,8 +687,7 @@ Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 > * The order of the keywords does not matter. e.g. `diabetes arthritis` will match `arthritis` and `diabetes` 
 > * Only the medical condition is searched.
 > * Only **full words** will be matched e.g. `diabetes` will not match `diabete`
-> * Patients matching at least one keyword will be returned (i.e. `OR` search).
->    e.g. `diabetes` will return `Alex Yeoh`, `David Li`
+> * Patients with medical conditions matching at least one keyword will be returned (i.e. `OR` search).
 > * Returns an empty Patient List Panel if no matching patients with the given keywords are found.
 
 Example:
