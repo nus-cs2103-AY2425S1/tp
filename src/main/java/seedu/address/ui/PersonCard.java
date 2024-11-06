@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -67,9 +68,13 @@ public class PersonCard extends UiPart<Region> implements Observer {
         roleColors.put("vendor", "#f87f26");
         roleColors.put("volunteer", "#d262f3");
 
-        person.getRoles().stream()
-                .sorted(Comparator.comparing(Role::getRoleName))
-                .forEach(this::addLabel);
+        if (person.getRoles().isEmpty()) {
+            addDefaultNoRoleLabel();
+        } else {
+            person.getRoles().stream()
+                    .sorted(Comparator.comparing(Role::getRoleName))
+                    .forEach(this::addLabel);
+        }
     }
 
     /**
@@ -89,6 +94,15 @@ public class PersonCard extends UiPart<Region> implements Observer {
         String color = roleColors.get(role.getRoleName());
         roleLabel.setStyle("-fx-background-color: " + color + ";");
         roles.getChildren().add(roleLabel);
+    }
+
+    /**
+     * Adds a default "no role" label with a red background color if no roles are assigned.
+     */
+    private void addDefaultNoRoleLabel() {
+        Label noRoleLabel = new Label("no role");
+        noRoleLabel.setStyle("-fx-background-color: #ff0000; -fx-text-fill: white;");
+        roles.getChildren().add(noRoleLabel);
     }
 
     private void setTextForTelegramUsername(Person person) {
