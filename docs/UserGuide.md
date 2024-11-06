@@ -94,14 +94,13 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing Help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
-
+#### Format: `help`
 
 ### Adding a person: `add`
 
