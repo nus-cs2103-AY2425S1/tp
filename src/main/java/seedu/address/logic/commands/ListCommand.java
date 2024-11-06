@@ -16,7 +16,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons in the address book.\n"
-            + "Parameters: [sortOrder]\n"
+            + "Parameters: [SORT_ORDER]\n"
             + "Sort order can be one of the following:\n"
             + "timeAdded asc, timeAdded desc, name asc, name desc\n"
             + "Note: If no sort order is specified, the default is by time added (timeAdded) and ascending (asc).\n"

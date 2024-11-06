@@ -16,7 +16,7 @@ import seedu.address.model.Model;
  * Deletes an archive file.
  */
 public class DeleteArchiveCommand extends Command {
-    public static final String COMMAND_WORD = "deleteArchive";
+    public static final String COMMAND_WORD = "deletearchive";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an archive file.\n"
             + "Parameters: FILENAME\n"
             + "Example: " + COMMAND_WORD + "addressbook-20241023_114324-example.json";
