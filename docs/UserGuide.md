@@ -108,6 +108,9 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 
 **Notes about the command format:**<br>
 
+* All command words should be in lowercase.
+
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
