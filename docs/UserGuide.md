@@ -24,11 +24,14 @@ If you’re comfortable typing, MindMap can help you get contact management task
 1. **Check Your Java Version**  
    Make sure Java **version 17** or above is installed on your computer. [Download Java here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if needed.
 
+
 2. **Download MindMap**  
    Download the latest `.jar` file for MindMap from [this link](https://github.com/AY2425S1-CS2103T-W13-3/tp/releases).
 
+
 3. **Choose a Folder**  
    Copy the `.jar` file to a folder you’d like to use as the home for your MindMap contacts.
+
 
 4. **Open a Terminal**
     - **For Windows**:
@@ -38,8 +41,9 @@ If you’re comfortable typing, MindMap can help you get contact management task
         - Press `Command + Space` to open the search bar.
         - Type "Terminal" and select it from the results.
 
+
 5. **Get the Folder Path**
-    - For **Windows**: Right-click the folder containing the `.jar` file, hold `Shift`, and select **Copy as Path**.
+    - For **Windows**: Hold `Shift` and `Right-click` the folder containing the `.jar` file and select **Copy as Path**.
     - For **Mac**: [Follow these steps](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://macpaw.com/how-to/copy-file-path-mac%23:~:text%3DControl%252Dclick%2520or%2520right%252Dclick%2520on%2520the%2520file%2520in%2520Finder,path%2520wherever%2520you%2520need%2520it.&ved=2ahUKEwiUn6S_jseJAxWVxzgGHTVQJQsQFnoECBQQAw&usg=AOvVaw22hRilijfEWC_nmiYfJzmQ) to copy the folder path.
 
 
@@ -48,12 +52,13 @@ If you’re comfortable typing, MindMap can help you get contact management task
    ```bash
    cd [paste the folder path from step 5 here]
    ```
-
+   
 7. **Start MindMap**  
    Now, type the following line in the terminal to launch the app:
    ```bash
    java -jar mindmap.jar
    ```
+   
 8. **Get Started with the App**  
    In a few seconds, you'll see the MindMap interface open with some sample contacts to explore.
 > **NOTE**: The app contains some sample data.<br>
