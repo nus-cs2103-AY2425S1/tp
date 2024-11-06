@@ -70,6 +70,26 @@ public class Calendar {
     }
 
     /**
+     * Checks if the current {@Code Appointment} can be updated with the provided appointment.
+     */
+    public boolean isValidAppointmentUpdate(Appointment current, Appointment updated) {
+        requireNonNull(current);
+        requireNonNull(updated);
+        if (current.equals(new Appointment(null))) {
+            return false;
+        }
+        if (updated.equals(new Appointment(null))) {
+            return false;
+        }
+        for (Appointment appt : appointments) {
+            if (!current.equals(appt) && updated.isWithinInterval(appt)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Replaces content in calendar with {@code addressBook}'s list
      */
     public void setAppointments(ReadOnlyAddressBook addressBook) {

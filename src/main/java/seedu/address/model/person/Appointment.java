@@ -23,6 +23,7 @@ public class Appointment {
 
     public static final LocalDate TODAY = LocalDate.now();
 
+    // In ENGLISH_FORMAT_WITH_TIME format
     public final String dateTime;
 
     /**
@@ -31,6 +32,7 @@ public class Appointment {
      * @param date A valid Appointment date.
      */
     public Appointment(String date) {
+        // Appointment constructor accepts dates of the formats defined in seedu.address.logic.parser.ParserUtil
         if (isNull(date) || date.equals("-")) {
             dateTime = "-";
         } else {
