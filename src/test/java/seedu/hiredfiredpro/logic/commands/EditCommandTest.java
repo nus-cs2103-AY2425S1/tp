@@ -1,8 +1,5 @@
 package seedu.hiredfiredpro.logic.commands;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,6 +15,9 @@ import static seedu.hiredfiredpro.logic.commands.EditCommand.createEditedPerson;
 import static seedu.hiredfiredpro.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.hiredfiredpro.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.hiredfiredpro.testutil.TypicalPersons.getTypicalHiredFiredPro;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
