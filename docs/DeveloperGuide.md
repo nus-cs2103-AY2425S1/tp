@@ -460,82 +460,52 @@ None.
 8. Code should be organized and documented to facilitate future updates or modifications.
 9. The application should run seamlessly across different operating systems without requiring extensive configuration.
 
+
 ### Glossary
 
-1.  **Hall Pointer:**\
-    A desktop application used by CCA leaders in NUS Halls to track hall points, manage member participation, attendance, and allocate points. It is optimized for Command Line Interface (CLI) usage but also includes a Graphical User Interface (GUI).
+### **HallPointer Developer Glossary**
 
-2.  **CLI (Command Line Interface):**\
-    A text-based interface where users interact with the application by typing commands, making it efficient for users comfortable with fast typing.
+1.  **CLI (Command Line Interface):**\
+    A text-based interface where commands are typed to interact with HallPointer. The CLI is central to the application's functionality, enabling efficient management of CCA members and sessions.
 
-3.  **GUI (Graphical User Interface):**\
-    A visual interface that allows users to interact with the application using graphical components like buttons and menus, in addition to CLI commands.
+2.  **GUI (Graphical User Interface):**\
+    The visual interface, built using JavaFX, that complements the CLI by displaying information on members, sessions, and hall points.
+
+3.  **Hall Points:**\
+    Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
 
 4.  **Member:**\
-    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in the Hall Pointer system (e.g., name, telegram, points, and attendance).
+    A data model representing an individual participant in a CCA. Each `Member` includes details like name, room number, Telegram handle, and hall points.
 
-5.  **Points Allocation:**\
-    The process of awarding hall points to members based on their participation in activities. CCA leaders can customize the criteria for point allocation.
+5.  **Session:**\
+    A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
 
-6.  **CCA (Co-Curricular Activity):**\
-    A club or activity within an NUS Hall that tracks member participation and points. Hall Pointer helps CCA leaders manage their members more efficiently.
+6.  **Tag:**\
+    A label used to categorize members within the HallPointer system (e.g., "leader," "logistics"), allowing for easier management and filtering.
 
-7.  **Gradle:**\
-    A build automation tool used in Hall Pointer for compiling code, managing dependencies, and running tasks such as testing and creating JAR files.
+7.  **Command:**\
+    A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
 
-8.  **JUnit:**\
-    A testing framework for Java, used in Hall Pointer to run automated tests on individual units of the system and ensure code correctness.
+8.  **Model Component:**\
+    Manages data and business logic within HallPointer, including members, sessions, and hall points. The Model component keeps data in memory for efficient access.
 
-9.  **ShadowJar:**\
-    A Gradle task that generates a fat JAR file, which bundles the application and its dependencies into a single JAR for distribution.
+9.  **Storage Component:**\
+    Responsible for data persistence, handling read/write operations to save members, sessions, and preferences in JSON format.
 
-10. **GitHub Actions:**\
-    A Continuous Integration (CI) tool integrated with GitHub to automatically test and build the Hall Pointer application whenever new changes are pushed.
+10. **Logic Component:**\
+    Manages command parsing and execution. It receives CLI commands, processes them through parsers, and interacts with the Model to update data.
 
-11. **Codecov:**\
-    A tool that tracks code coverage during testing. It helps assess how much of the Hall Pointer code is covered by tests, encouraging improvements to the test suite.
+11. **Parser:**\
+    A part of the Logic component that interprets CLI input, converting it into specific command actions that HallPointer can execute.
 
-12. **Fat JAR:**\
-    A JAR file that contains the entire application along with all its dependencies, allowing Hall Pointer to run as a standalone application.
+12. **Gradle:**\
+    A build automation tool used for dependency management, compiling code, running tests, and packaging the application. Gradle also supports creating a JAR file for distribution.
 
-13. **POSIX-compliant OS:**\
-    Operating systems like Linux and macOS that adhere to POSIX standards and are compatible with shell scripts used for CI tasks in Hall Pointer.
+13. **JUnit:**\
+    A Java testing framework for writing and running tests to validate the functionality of HallPointer's components.
 
-14. **Tag:**\
-    Labels or categories assigned to members in the Hall Pointer system (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
-
-15. **Undo/Redo Feature:**\
-    A proposed feature that allows users to revert or redo changes in Hall Pointer, enabling easy correction of mistakes.
-
-16. **Versioned AddressBook:**\
-    Refers to a version of the Hall Pointer system where the state of member data is saved at specific intervals to allow undo/redo functionality.
-
-17. **Test Coverage:**\
-    A metric that measures how much of the Hall Pointer codebase is covered by tests, indicating the effectiveness and thoroughness of the test suite.
-
-18. **User Preferences:**\
-    Settings such as window size and logging levels that can be customized by users and saved in a configuration file (`config.json`) for Hall Pointer.
-
-19. **Configuration File (`config.json`):**\
-    A JSON file that stores user preferences and application settings for Hall Pointer, including file locations and logging levels.
-
-20. **Build Automation:**\
-    The process of automating the compilation, testing, and packaging of Hall Pointer using Gradle to ensure consistent builds across different environments.
-
-21. **Continuous Integration (CI):**\
-    A practice used in Hall Pointer, powered by GitHub Actions, where tests and checks are run automatically to verify the integrity of new code changes before merging.
-
-22. **Unit Test:**\
-    A test that targets individual components or methods in the Hall Pointer system to ensure they function correctly in isolation.
-
-23. **Integration Test:**\
-    A test that checks how different components in Hall Pointer interact with each other, ensuring they work together as expected.
-
-24. **Hybrid Test:**\
-    A combination of unit and integration testing that checks both the individual components and their interactions in the Hall Pointer system.
-
-25. **Command:**\
-    A typed instruction input by the user in the CLI to perform an action in Hall Pointer, such as adding members, updating details, or tracking points (e.g., `add`, `list`, `delete`).
+14. **MainApp:**\
+    The main entry point for HallPointer, responsible for initializing and starting the application, setting up dependencies between components, and managing the overall flow.
 
 ## **Appendix: Instructions for manual testing**
 
