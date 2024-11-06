@@ -166,12 +166,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean addTags(List<Tag> tags) {
-        boolean isSuccessful = true;
+    public Set<Tag> addTags(List<Tag> tags) {
+        Set<Tag> tagsSuccessfullyAdded = new HashSet<>();
         for (Tag tag : tags) {
-            isSuccessful &= addressBook.addTag(tag);
+            boolean isSuccessful = addTag(tag);
+            if (isSuccessful) {
+                tagsSuccessfullyAdded.add(tag);
+            }
         }
-        return isSuccessful;
+        return tagsSuccessfullyAdded;
     }
 
     @Override public boolean deleteTag(Tag tag) {
@@ -179,12 +182,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean deleteTags(List<Tag> tags) {
-        boolean isSuccessful = true;
+    public Set<Tag> deleteTags(List<Tag> tags) {
+        Set<Tag> tagsSuccessfullyDeleted = new HashSet<>();
         for (Tag tag : tags) {
-            isSuccessful &= addressBook.deleteTag(tag);
+            boolean isSuccessful = deleteTag(tag);
+            if (isSuccessful) {
+                tagsSuccessfullyDeleted.add(tag);
+            }
         }
-        return isSuccessful;
+        return tagsSuccessfullyDeleted;
     }
 
     @Override
