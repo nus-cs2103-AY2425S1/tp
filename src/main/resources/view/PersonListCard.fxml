@@ -62,9 +62,27 @@
             <Insets bottom="5" /> <!-- Adds padding below the label -->
           </VBox.margin>
         </Label>
-        <Label fx:id="doctorName" styleClass="doctor" text="\$doctorName" />
-        <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone" />
-        <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail" />
+        <Label fx:id="doctorName" styleClass="doctor" text="\$doctorName">
+          <graphic>
+            <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+                <Image url="@/images/doctor.png"/>
+            </ImageView>
+          </graphic>
+        </Label>
+        <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone">
+          <graphic>
+            <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+                <Image url="@/images/phone.png"/>
+            </ImageView>
+          </graphic>
+        </Label>
+        <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail">
+          <graphic>
+            <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+                <Image url="@/images/mail.png"/>
+            </ImageView>
+          </graphic>
+        </Label>
       </VBox>
       <Region VBox.vgrow="NEVER" prefHeight="7" />
       <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="emergencyContactsBox" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/17">
