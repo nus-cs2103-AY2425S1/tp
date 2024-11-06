@@ -107,7 +107,7 @@ public class AddressBookParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(MarkAttendanceCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
-                MarkAttendanceCommand.COMMAND_WORD + " n/John Doe d/2024-10-01 pr/p")
+                MarkAttendanceCommand.COMMAND_WORD + " n/John Doe dt/2024-10-01 pr/p")
                 instanceof MarkAttendanceCommand);
     }
 
@@ -117,7 +117,7 @@ public class AddressBookParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetAttendanceCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(GetAttendanceCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
-                GetAttendanceCommand.COMMAND_WORD + " n/John Doe d/2019-01-01")
+                GetAttendanceCommand.COMMAND_WORD + " n/John Doe dt/2019-01-01")
                 instanceof GetAttendanceCommand);
     }
 

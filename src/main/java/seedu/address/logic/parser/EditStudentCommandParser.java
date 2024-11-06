@@ -27,6 +27,7 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_TUTORIAL_GROUP, PREFIX_STUDENT_NUMBER);
+        argMultimap.verifyNoInvalidPrefixesFor(args);
 
         Index index;
 

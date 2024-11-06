@@ -29,7 +29,6 @@ public class StudentNumber {
     public StudentNumber(String studentNumber) {
         requireNonNull(studentNumber);
         checkArgument(isValidStudentNumber(studentNumber), MESSAGE_CONSTRAINTS);
-
         this.value = studentNumber.toUpperCase();
     }
 

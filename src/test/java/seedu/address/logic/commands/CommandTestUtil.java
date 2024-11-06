@@ -2,16 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -69,20 +66,9 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     // ----------------- Assignment related fields --------------------------------------------
     public static final String VALID_ASSIGNMENT_MATH = "Math Assignment";
@@ -102,9 +88,6 @@ public class CommandTestUtil {
 
     // Invalid inputs for testing
     public static final String INVALID_ASSIGNMENT_DESC = " " + PREFIX_ASSIGNMENT + "!!!Science";
-    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "done";
-    public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "120";
-    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "20th October";
 
     public static final String STATUS_DESC_Y = " " + PREFIX_STATUS + VALID_STATUS_Y;
     public static final String STATUS_DESC_N = " " + PREFIX_STATUS + VALID_STATUS_N;

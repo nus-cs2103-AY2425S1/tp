@@ -20,6 +20,7 @@ public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
                 PREFIX_NAME, PREFIX_STUDENT_NUMBER
         );
+        argMultimap.verifyNoInvalidPrefixesFor(userInput);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

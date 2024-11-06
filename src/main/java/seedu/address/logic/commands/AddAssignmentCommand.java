@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +31,9 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an assignment to a student. "
             + "Parameters: "
             + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
             + PREFIX_ASSIGNMENT + "ASSIGNMENT "
             + PREFIX_DEADLINE + "DEADLINE "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER (OPTIONAL) "
             + PREFIX_STATUS + "SUBMISSION STATUS (OPTIONAL) "
             + PREFIX_STATUS + "GRADING STATUS (OPTIONAL) "
             + PREFIX_GRADE + "GRADE (OPTIONAL) "
@@ -117,7 +118,7 @@ public class AddAssignmentCommand extends Command {
                     assignment.getAssignmentName(), student.getName()));
         }
 
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getAssignmentName(), student.getName()));
     }
 

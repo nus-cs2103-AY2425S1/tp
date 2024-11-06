@@ -23,6 +23,7 @@ public class MarkAbsentAllCommandParser implements Parser<MarkAbsentAllCommand> 
      */
     public MarkAbsentAllCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_GROUP, PREFIX_DATE);
+        argMultimap.verifyNoInvalidPrefixesFor(args);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIAL_GROUP, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
