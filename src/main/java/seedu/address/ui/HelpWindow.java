@@ -139,8 +139,10 @@ public class HelpWindow extends UiPart<Stage> {
                 FXCollections.observableArrayList(
                         new HelpCommand("Help", "`help`"),
                         new HelpCommand("List", "`list`"),
-                        new HelpCommand("Add", "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
-                        new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
+                        new HelpCommand("Add", "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS "
+                                + "[g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
+                        new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] "
+                                + "[a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
                         new HelpCommand("AddGame", "`addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`\n"),
                         new HelpCommand("EditGame", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`\n"),
                         new HelpCommand("DeleteGame", "`deletegame INDEX g/GAME`\n"),
