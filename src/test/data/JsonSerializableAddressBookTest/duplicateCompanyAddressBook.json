@@ -7,9 +7,7 @@
     "careerPageUrl": "careers.com",
     "applicationStatus": "",
     "tags": [ "bigTech" ],
-    "isBookmark" : {
-      "isBookmark" : false
-    },
+    "isBookmark" : false,
     "remark": "Search engine giant"
   }, {
     "name": "Google",
@@ -19,9 +17,7 @@
     "careerPageUrl": "careers.com",
     "applicationStatus": "",
     "tags": [ ],
-    "isBookmark" : {
-      "isBookmark" : false
-    },
+    "isBookmark" : false,
     "remark": "Duplicate Google entry"
   } ]
 }

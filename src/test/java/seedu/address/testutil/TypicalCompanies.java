@@ -2,12 +2,14 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CAREER_PAGE_URL_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BIGTECH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COMPANY;
 
@@ -27,21 +29,25 @@ public class TypicalCompanies {
     public static final Company GOOGLE = new CompanyBuilder().withName("Google")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("google@example.com")
             .withPhone("00000001")
-            .withCareerPageUrl("www.google-careers.com").withRemark("Leading tech company")
+            .withCareerPageUrl("www.google-careers.com").withRemark("Leading Tech company")
             .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
+
     public static final Company META = new CompanyBuilder().withName("Meta")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("meta@example.com").withPhone("00000002")
             .withCareerPageUrl("www.meta-careers.com").withRemark("Social media giant")
             .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
+
     public static final Company GRAB = new CompanyBuilder().withName("Grab").withPhone("00000003")
             .withEmail("grab@example.com").withAddress("wall street")
             .withCareerPageUrl("www.grab-jobs.com").withRemark("Leading ride-hailing service in Southeast Asia")
             .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
+
     public static final Company SHOPEE = new CompanyBuilder().withName("Shopee").withPhone("00000004")
             .withEmail("shopee@example.com").withAddress("10th street").withTags("bigTech")
             .withCareerPageUrl("www.shopee-careers.com").withRemark("E-commerce platform")
             .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
+
     public static final Company APPLE = new CompanyBuilder().withName("Apple").withPhone("00000005")
             .withEmail("apple@example.com").withAddress("Michigan Ave")
             .withCareerPageUrl("www.apple-careers.com").withRemark("Creators of the iPhone")
@@ -72,13 +78,13 @@ public class TypicalCompanies {
     public static final Company TESLA = new CompanyBuilder().withName(VALID_NAME_TESLA)
             .withPhone(VALID_PHONE_TESLA).withEmail(VALID_EMAIL_TESLA)
             .withAddress(VALID_ADDRESS_TESLA).withTags(VALID_TAG_COMPANY)
-            .withCareerPageUrl("www.tesla-careers.com").withRemark("Electric vehicle leader")
+            .withCareerPageUrl(VALID_CAREER_PAGE_URL_TESLA).withRemark(VALID_REMARK)
             .build();
 
     public static final Company MICROSOFT = new CompanyBuilder().withName(VALID_NAME_MICROSOFT)
             .withPhone(VALID_PHONE_MICROSOFT).withEmail(VALID_EMAIL_MICROSOFT)
             .withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_BIGTECH, VALID_TAG_COMPANY)
-            .withCareerPageUrl("www.microsoft-careers.com").withRemark("Software giant")
+            .withCareerPageUrl(VALID_ADDRESS_MICROSOFT).withRemark(VALID_REMARK)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
