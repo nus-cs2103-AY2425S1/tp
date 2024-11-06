@@ -130,7 +130,15 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
-    -fx-padding: 1px 0 2px 0;
+    -fx-font-weight: bold;
+}
+
+.cell_small_label_field {
+    -fx-background-color: lightblue;
+    -fx-padding: 1 2 1 5;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-text-fill: #404040;
 }
 
 .stack-pane {

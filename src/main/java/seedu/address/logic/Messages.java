@@ -35,6 +35,7 @@ public class Messages {
      */
     public static String format(Company company) {
         final StringBuilder builder = new StringBuilder();
+        builder.append("{ ");
         builder.append(company.getName())
                 .append("; Phone: ")
                 .append(company.getPhone())
@@ -52,6 +53,7 @@ public class Messages {
                 .append(company.getApplicationStatus())
                 .append("; Tags: ");
         company.getTags().forEach(builder::append);
+        builder.append(" }");
         return builder.toString();
     }
 

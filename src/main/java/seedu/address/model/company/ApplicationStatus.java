@@ -8,8 +8,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class ApplicationStatus {
 
-    public final String value;
+    private static final String DEFAULT_STATUS = "None";
 
+    public final String value;
     /**
      * Constructs an {@code ApplicationStatus}.
      *
@@ -17,7 +18,7 @@ public class ApplicationStatus {
      */
     public ApplicationStatus(String status) {
         requireNonNull(status);
-        value = status;
+        value = status.isEmpty() ? DEFAULT_STATUS : status;
     }
 
     @Override
