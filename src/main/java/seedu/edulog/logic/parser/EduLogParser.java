@@ -2,11 +2,9 @@ package seedu.edulog.logic.parser;
 
 import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulog.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import seedu.edulog.commons.core.LogsCenter;
 import seedu.edulog.logic.commands.AddCommand;
 import seedu.edulog.logic.commands.AddLessonCommand;
@@ -17,6 +15,7 @@ import seedu.edulog.logic.commands.DeleteLessonCommand;
 import seedu.edulog.logic.commands.DisplayCalendarCommand;
 import seedu.edulog.logic.commands.EditCommand;
 import seedu.edulog.logic.commands.ExitCommand;
+import seedu.edulog.logic.commands.FilterCommand;
 import seedu.edulog.logic.commands.FindCommand;
 import seedu.edulog.logic.commands.GiftCommand;
 import seedu.edulog.logic.commands.HelpCommand;
@@ -104,14 +103,17 @@ public class EduLogParser {
         case GiftCommand.COMMAND_WORD:
             return new GiftCommand();
 
+        case RevenueCommand.COMMAND_WORD:
+            return new RevenueCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
-        case RevenueCommand.COMMAND_WORD:
-            return new RevenueCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
