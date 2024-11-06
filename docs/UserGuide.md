@@ -6,7 +6,13 @@
 
 # CampusConnect User Guide
 
-CampusConnect(CC) is a **desktop app** for managing contacts, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CC can get your contact management tasks done faster than traditional GUI apps.
+**CampusConnect** is the ultimate contact management app for NUS students looking to socialise. Our
+contact tagging, finding, and organisation features ensure that with a few keystrokes, you never forget
+who you meet and why.
+
+**CampusConnect** offers a seamless and quick contact management experience using our *Command Line Interface* style of
+input, where commands are processed in the blink of an eye. If you can type quickly, we can get it done faster than 
+any traditional point-and-click management app.
 
 <!-- * Table of Contents -->
 <page-nav-print />
