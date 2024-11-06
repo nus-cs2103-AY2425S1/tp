@@ -34,8 +34,8 @@ public abstract class EditCommand<T> extends Command {
         + String.join(", ", Arrays.stream(new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS})
           .map(Prefix::toString).toArray(String[]::new)) + "\n"
         + "Allowed field tags for pets: "
-        + String.join(", ", Arrays.stream(new Prefix[]{PREFIX_NAME, PREFIX_SPECIES, PREFIX_BREED, PREFIX_AGE, PREFIX_SEX})
-          .map(Prefix::toString).toArray(String[]::new)) + "\n";
+        + String.join(", ", Arrays.stream(new Prefix[]{PREFIX_NAME, PREFIX_SPECIES, PREFIX_BREED, PREFIX_AGE,
+            PREFIX_SEX}).map(Prefix::toString).toArray(String[]::new)) + "\n";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
