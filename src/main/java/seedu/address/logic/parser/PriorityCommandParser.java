@@ -19,6 +19,10 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
     public PriorityCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PRIORITY);
 
+        if (argMultimap.getAllValues(PREFIX_PRIORITY).size() != 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
+        }
+
         try {
             String[] splitArgs = argMultimap.getPreamble().trim().split("\\s+");
             if (splitArgs.length != 1) {

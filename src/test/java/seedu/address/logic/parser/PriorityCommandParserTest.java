@@ -128,4 +128,12 @@ public class PriorityCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_multiplePriorityPrefixes_failure() {
+        String input = "1 l/2 l/3";
+
+        assertParseFailure(parser, input,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
+    }
+
 }

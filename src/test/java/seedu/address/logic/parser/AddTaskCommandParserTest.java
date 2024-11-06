@@ -59,4 +59,9 @@ public class AddTaskCommandParserTest {
         assertParseFailure(parser, validTaskString + NAME_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_emptyTaskDescription_failure() {
+        assertParseFailure(parser, "1 d/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
+    }
 }
