@@ -2,14 +2,15 @@ package seedu.address.ui.calendar;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
 import seedu.address.ui.PersonListPanel;
@@ -27,14 +28,18 @@ public class WeeklySchedulePanel extends UiPart<Region> {
     @FXML
     private ListView<ObservableList<Meeting>> weeklyCalendarView;
 
+    @FXML
+    private Label weekHeader;
+
     /**
      * Creates a {@code WeeklySchedulePanel} with the given {@code ObservableList}.
      */
     public WeeklySchedulePanel(ObservableList<ObservableList<Meeting>> dailyScheduleOfWeek,
-                               ObservableList<Person> personList) {
+                               ObservableList<Person> personList, ObservableValue<String> dateToDisplay) {
         super(FXML);
         this.personList = personList;
 
+        weekHeader.textProperty().bind(dateToDisplay);
         weeklyCalendarView.setItems(dailyScheduleOfWeek);
         weeklyCalendarView.setCellFactory(listView -> new WeeklySchedulePanel.CalendarListViewCell());
 

@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 
 <HBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <AnchorPane maxWidth="100" minWidth="100">
+   <AnchorPane  maxWidth="100" minWidth="100">
       <children>
-          <Label fx:id="dayLabel" alignment="CENTER" styleClass="cell_big_label"
+          <Label fx:id="dayLabel" alignment="CENTER" styleClass="cell_day"
                  AnchorPane.topAnchor="0"
                  AnchorPane.leftAnchor="0"
                  AnchorPane.bottomAnchor="0"

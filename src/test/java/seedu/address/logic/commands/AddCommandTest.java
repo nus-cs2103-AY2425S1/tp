@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
@@ -199,6 +200,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<ObservableList<Meeting>> getDailyScheduleOfWeek() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableValue<String> getWeekOfSchedule() {
             throw new AssertionError("This method should not be called.");
         }
 

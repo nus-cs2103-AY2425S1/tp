@@ -17,6 +17,7 @@
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
+        <URL value="@CalendarStyle.css" />
       </stylesheets>
 
       <VBox>

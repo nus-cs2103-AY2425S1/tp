@@ -6,8 +6,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
+import seedu.address.model.schedule.SameWeekAsDatePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,6 +30,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final ScheduleList scheduleList;
     private final FilteredList<Meeting> weeklySchedule;
+
+    private final SimpleStringProperty weekOfDate;
 
     private final ObservableList<ObservableList<Meeting>> dailySchedulesOfWeek;
 
@@ -50,6 +54,7 @@ public class ModelManager implements Model {
         this.scheduleList = new ScheduleList(scheduleList);
         weeklySchedule = new FilteredList<>(this.scheduleList.getMeetingList());
         dailySchedulesOfWeek = this.initialiseDailyScheduleOfWeek();
+        weekOfDate = new SimpleStringProperty();
     }
 
     /**
@@ -70,6 +75,7 @@ public class ModelManager implements Model {
         this.scheduleList = new ScheduleList();
         weeklySchedule = new FilteredList<>(this.scheduleList.getMeetingList());
         dailySchedulesOfWeek = this.initialiseDailyScheduleOfWeek();
+        weekOfDate = new SimpleStringProperty();
     }
 
 
@@ -247,6 +253,7 @@ public class ModelManager implements Model {
     public void changeWeeklySchedule(Predicate<Meeting> predicate) {
         requireNonNull(predicate);
         weeklySchedule.setPredicate(predicate);
+        this.changeWeekOfDate(predicate);
     }
 
     @Override
@@ -265,6 +272,26 @@ public class ModelManager implements Model {
             dailyScheduleOfWeek.add(weeklySchedule);
         }
         return dailyScheduleOfWeek;
+    }
+
+    @Override
+    public ObservableValue<String> getWeekOfSchedule() {
+        return weekOfDate;
+    }
+
+    private void changeWeekOfDate(Predicate<Meeting> pred) {
+        StringBuilder weekOfDateString = new StringBuilder();
+        weekOfDateString.append("Date Shown: ");
+        if (pred instanceof SameWeekAsDatePredicate) {
+            SameWeekAsDatePredicate p = (SameWeekAsDatePredicate) pred;
+            weekOfDateString.append(p.getStartDateOfWeek().toString())
+                    .append(" - ")
+                    .append(p.getLastDateOfWeek());
+        } else {
+            weekOfDateString.append("All Meetings");
+        }
+
+        weekOfDate.setValue(weekOfDateString.toString());
     }
 
 }

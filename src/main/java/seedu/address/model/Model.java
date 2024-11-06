@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
@@ -99,6 +100,8 @@ public interface Model {
     public ObservableList<Meeting> getWeeklySchedule();
 
     public ObservableList<ObservableList<Meeting>> getDailyScheduleOfWeek();
+
+    public ObservableValue<String> getWeekOfSchedule();
 
     void changeWeeklySchedule(Predicate<Meeting> predicate);
 
