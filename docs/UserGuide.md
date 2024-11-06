@@ -323,6 +323,7 @@ The commands in this section are used edit records on the system, such as studen
 - [Marking attendance of tutorial](#55-marking-attendance-of-a-tutorial)  
 - [Unmarking attendance of student](#56-unmarking-attendance-of-student)
 - [Unenroll a student from tutorial](#57-unenrolling-student-from-a-tutorial)
+
 #### **5.1 Editing a student**
 
 Edit the personal information of students within EduVault
@@ -334,6 +335,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [t/TA
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
 Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
+</div>
+<div markdown="span" class="alert alert-success">:bulb:
+**Tip:**
+
+This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table)
 </div>
 
 {% raw %}
@@ -350,10 +356,6 @@ Fields:
 * `PAYMENT`: Field not editable within edit
 </div>
 {% endraw %}
-
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-More information about other prefixes can be found here
-</div>
 
 Example Usage:
 
@@ -853,13 +855,64 @@ dd/MM/yyyy</code>
 
 ### **12. Format Errors**
 
-| Error Message                                                           | Most Likely Cause                                                                                                                                                                                                                                                                                           |
-|:------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *Unknown Command….*                                                     | <ul><li>Command misspelled</li><li>Command not available in the current release</li></ul>                                                                                                                                                                                                                   |
-| *Invalid Command format…*                                               | <ul><li>Command word is correct but the format entered is wrong</li> <ul><li>Index is missing, or is a negative number</li> <li>Prefix is missing or misspelled</li> <li>Unidentified inputs after the command word and before the first prefix</li><li>Keywords of the prefix is incorrect</li> </ul></ul> |
-| *The student’s index provided is invalid…*                              | <ul><li>Index provided is out of range for the current displayed list</li></ul>                                                                                                                                                                                                                             |
-| *Multiple values specified for the following single-valued field(s)...* | <ul><li>Duplicated prefix usage when it is not allowed</li></ul>                                                                                                                                                                                                                                            |                                                                                                                                                                                                                           
-| *At least one of the dates is not in the right format…* | <ul><li>The date format used is incorrect</li></ul>                                                                                                                                                                                                               
+<table>
+    <thead>
+        <tr>
+            <th>Error Message</th>
+            <th>Most Likely Cause</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><em>Unknown Command….</em></td>
+            <td>
+                <ul>
+                    <li>Command misspelled</li>
+                    <li>Command not available in the current release</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>Invalid Command format…</em></td>
+            <td>
+                <ul>
+                    <li>Command word is correct but the format entered is wrong
+                        <ul>
+                            <li>Index is missing, or is a negative number</li>
+                            <li>Prefix is missing or misspelled</li>
+                            <li>Unidentified inputs after the command word and before the first prefix</li>
+                            <li>Keywords of the prefix are incorrect</li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>The student’s index provided is invalid…</em></td>
+            <td>
+                <ul>
+                    <li>Index provided is out of range for the current displayed list</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>Multiple values specified for the following single-valued field(s)...</em></td>
+            <td>
+                <ul>
+                    <li>Duplicated prefix usage when it is not allowed</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>At least one of the dates is not in the right format…</em></td>
+            <td>
+                <ul>
+                    <li>The date format used is incorrect</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 ---
 
