@@ -40,7 +40,7 @@ public class UnpaidCommandTest {
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
                 personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(),
-                false, personToMarkUnpaid.getFrequency());
+                false, personToMarkUnpaid.getFrequency(), personToMarkUnpaid.getProfilePicFilePath());
 
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
@@ -74,7 +74,7 @@ public class UnpaidCommandTest {
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
                 personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(),
-                false, personToMarkUnpaid.getFrequency());
+                false, personToMarkUnpaid.getFrequency(), personToMarkUnpaid.getProfilePicFilePath());
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
         assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);

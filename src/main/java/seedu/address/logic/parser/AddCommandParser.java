@@ -20,6 +20,7 @@ import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProfilePicFilePath;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,11 +48,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));
         Birthday birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Frequency frequency = new Frequency("0"); // default is that customer has no frequency yet
-        Person person = new Person(name, phone, email, address, birthday, tagList, false, frequency);
+
+        ProfilePicFilePath profilePicFilePath =
+                ProfilePicFilePath.getDefaultProfilePic(); // always created with default picture
+
+        Person person = new Person(name, phone, email, address, birthday, tagList,
+                false, frequency, profilePicFilePath);
 
         return new AddCommand(person);
     }

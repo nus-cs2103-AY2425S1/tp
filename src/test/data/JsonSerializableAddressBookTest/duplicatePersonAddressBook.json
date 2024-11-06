@@ -7,7 +7,8 @@
     "birthday" : "01 01 2002",
     "tags": [ "friends" ],
     "hasPaid": "false",
-    "frequency": "0"
+    "frequency": "0",
+    "profilePicFilePath": "/images/profilepicture.png"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -15,6 +16,7 @@
     "address": "4th street",
     "birthday" : "01 01 2002",
     "hasPaid": "false",
-    "frequency": "0"
+    "frequency": "0",
+    "profilePicFilePath": "/images/profilepicture.png"
   } ]
 }

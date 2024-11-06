@@ -31,10 +31,12 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthday("phone")); // non-numeric
         assertFalse(Birthday.isValidBirthday("40 10 2991")); // more than 31 days
         assertFalse(Birthday.isValidBirthday("9312 1534")); // not formatted
+        assertFalse(Birthday.isValidBirthday("31 02 2002")); // february should have <= 28 days
 
         // valid birthdays
         assertTrue(Birthday.isValidBirthday("01 01 2002")); // first of month
         assertTrue(Birthday.isValidBirthday("31 10 1908")); // last of month
+        assertTrue(Birthday.isValidBirthday("28 02 2002")); // last of february
         assertTrue(Birthday.isValidBirthday("15 04 1987")); // random
     }
 

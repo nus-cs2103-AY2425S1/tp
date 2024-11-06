@@ -75,7 +75,7 @@ public class UnpaidCommand extends Command {
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
                 personToPay.getAddress(), personToPay.getBirthday(),
-                personToPay.getTags(), updatedHasNotPaid, updatedFrequency);
+                personToPay.getTags(), updatedHasNotPaid, updatedFrequency, personToPay.getProfilePicFilePath());
     }
 
     @Override
