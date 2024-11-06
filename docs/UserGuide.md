@@ -72,6 +72,30 @@ any traditional point-and-click management app.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`
+**Clear**  | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find by name**   | `find n/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
+**Find by email**   | `find e/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e/bigman123@email.com bobbyrick@example.com`
+**Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
+**Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
+**Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
+**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]` <br> e.g. `addtag 1 t/friend t/classmate`
+**Categorize tag** | `cattag t/TAG [t/MORE_TAGS] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**Undo action** | `undo`
+**Redo action** | `redo`
+**List**   | `list`
+**Help**   | `help`
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -170,9 +194,9 @@ Examples:
 
 Adds the specified person's tag.
 
-Format: `addtag INDEX t/KEYWORD [t/MORE_TAGS]`
+Format: `addtag INDEX t/TAG [t/MORE_TAGS]`
 
-* Adds the tags with the specified name `KEYWORD` of the person at the specified `INDEX`.
+* Adds the tags with the specified name `TAG` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Multiple tags can be added at a time.
@@ -186,9 +210,9 @@ Examples:
 
 Deletes the specified person's tag.
 
-Format: `deltag INDEX t/KEYWORD`
+Format: `deltag INDEX t/TAG`
 
-* Deletes the tag with the specified name `KEYWORD` of the person at the specified `INDEX`.
+* Deletes the tag with the specified name `TAG` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Only one tag can be deleted at a time.
@@ -199,6 +223,31 @@ deletes the friend tag of the first person in the list.
 
 Disallowed examples:
 * `deltag 2 t/classmate t/neighbour` will not succeed as it tries to delete 2 tags at once.
+
+### Categorizing a tag : `cattag`
+
+Categorizes a tag under a defined category.
+
+Format: `cattag t/TAG [t/MORE_TAGS] CATEGORY`
+
+* Sets the tag(s) in CampusConnect with the specified name `TAG` to fall under the specified `CATEGORY`.
+* Currently available categories and their respective keywords are:
+
+    Category      | Keyword (case sensitive)
+    --------------|-------------------------
+    **General**   | `general`
+    **Academics** | `acads`
+    **Activities**| `activity`
+    **Networking**| `network`
+    **Mentorship**| `mentor`
+* Multiple tags can be categorized to the same category at a time.
+* All tags specified must be valid existing tags.
+* Attempts to set a tag to its current category will cause the whole command to be rejected.
+* Only one category is allowed to be entered per command, i.e. `cattag t/tag1 acads t/tag2 general` is not allowed.
+
+Examples:
+* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics`
+* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` 
 
 ### Undo a command : `undo`
 
@@ -261,25 +310,6 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
---------------------------------------------------------------------------------------------------------------------
 
-## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find by name**   | `find n/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
-**Find by email**   | `find e/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e/bigman123@email.com bobbyrick@example.com`
-**Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
-**Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
-**Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]` <br> e.g. `addtag 1 t/friend t/classmate`
-**Categorize tag** | `cattag INDEX t/KEYWORD`
-**Undo action** | `undo`
-**Redo action** | `redo`
-**List**   | `list`
-**Help**   | `help`
-``
+
