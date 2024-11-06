@@ -25,8 +25,9 @@ public class AddEcNameCommand extends Command {
             + "Parameters: [INDEX] en/EMERGENCY_CONTACT\n"
             + "Example: " + COMMAND_WORD + " 1 en/John Doe";
 
-    public static final String MESSAGE_ADD_ECNAME_SUCCESS = "Added emergency contact name for Person: %1$s";
-    public static final String MESSAGE_DELETE_ECNAME_SUCCESS = "Removed emergency contact name from Person: %1$s";
+    public static final String MESSAGE_ADD_ECNAME_SUCCESS = "Added emergency contact name for %1$s\n"
+            + "New Emergency Contact Name: %2$s";
+    public static final String MESSAGE_DELETE_ECNAME_SUCCESS = "Removed emergency contact name for %1$s\n";
 
     private final Index index;
     private final EcName ecName;
@@ -52,6 +53,8 @@ public class AddEcNameCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        assert personToEdit != null;
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
                 personToEdit.getStudentClass(), ecName, personToEdit.getEcNumber(), personToEdit.getExams(),
@@ -69,7 +72,7 @@ public class AddEcNameCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !ecName.value.isEmpty() ? MESSAGE_ADD_ECNAME_SUCCESS : MESSAGE_DELETE_ECNAME_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(message, personToEdit.getName(), personToEdit.getEcName());
     }
 
     @Override

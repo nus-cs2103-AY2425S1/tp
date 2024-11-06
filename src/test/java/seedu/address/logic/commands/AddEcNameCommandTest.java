@@ -34,7 +34,7 @@ public class AddEcNameCommandTest {
         AddEcNameCommand addEcNameCommand = new AddEcNameCommand(INDEX_FIRST_PERSON,
                 new EcName(editedPerson.getEcName().value));
         String expectedMessage = String.format(AddEcNameCommand.MESSAGE_ADD_ECNAME_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), editedPerson.getEcName());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addEcNameCommand, model, expectedMessage, expectedModel);
@@ -46,7 +46,7 @@ public class AddEcNameCommandTest {
         AddEcNameCommand ecNameCommand = new AddEcNameCommand(INDEX_FIRST_PERSON,
                 new EcName(editedPerson.getEcName().toString()));
         String expectedMessage = String.format(AddEcNameCommand.MESSAGE_DELETE_ECNAME_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), editedPerson.getEcName());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(ecNameCommand, model, expectedMessage, expectedModel);
@@ -60,7 +60,7 @@ public class AddEcNameCommandTest {
         AddEcNameCommand ecNameCommand = new AddEcNameCommand(INDEX_FIRST_PERSON,
                 new EcName(editedPerson.getEcName().value));
         String expectedMessage = String.format(AddEcNameCommand.MESSAGE_ADD_ECNAME_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), editedPerson.getEcName());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(ecNameCommand, model, expectedMessage, expectedModel);
@@ -93,25 +93,25 @@ public class AddEcNameCommandTest {
         final AddEcNameCommand standardCommand = new AddEcNameCommand(
                 INDEX_FIRST_PERSON, new EcName(VALID_ECNAME_AMY));
 
-        // same values -> returns true
+        // EP: same values -> returns true
         AddEcNameCommand commandWithSameValues = new AddEcNameCommand(
                 INDEX_FIRST_PERSON, new EcName(VALID_ECNAME_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(standardCommand.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different person name -> returns false
+        // EP: different person name -> returns false
         assertFalse(standardCommand.equals(new AddEcNameCommand(INDEX_SECOND_PERSON,
                 new EcName(VALID_ECNAME_AMY))));
 
-        // different emergency contact name -> returns false
+        // EP: different emergency contact name -> returns false
         assertFalse(standardCommand.equals(new AddEcNameCommand(INDEX_FIRST_PERSON,
                 new EcName(VALID_ECNAME_BOB))));
     }

@@ -44,7 +44,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter n/Alice n/Bob", expectedCommand);
         assertParseSuccess(parser, "filter n/Alice Bob", expectedCommand);
 
-        //multiple whitespaces between keywords
+        // EP: multiple whitespaces between keywords
         assertParseSuccess(parser, "filter \n n/Alice \n \t n/Bob  \t", expectedCommand);
     }
 
@@ -59,7 +59,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter p/12345678 p/87654321", expectedCommand);
         assertParseSuccess(parser, "filter p/12345678 87654321", expectedCommand);
 
-        // Test with multiple whitespaces
+        // EP: Test with multiple whitespaces
         assertParseSuccess(parser, "filter \n p/12345678 \n \t p/87654321  \t", expectedCommand);
     }
 
@@ -74,7 +74,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter e/alice@example.com e/bob@example.com", expectedCommand);
         assertParseSuccess(parser, "filter e/alice@example.com bob@example.com", expectedCommand);
 
-        // Test with multiple whitespaces
+        // EP: Test with multiple whitespaces
         assertParseSuccess(parser, "filter \n e/alice@example.com \n \t e/bob@example.com  \t", expectedCommand);
     }
 
@@ -88,7 +88,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter r/12 r/36", expectedCommand);
         assertParseSuccess(parser, "filter r/12 36", expectedCommand);
 
-        // Test with multiple whitespaces
+        // EP: Test with multiple whitespaces
         assertParseSuccess(parser, "filter \n r/12 \n \t r/36  \t", expectedCommand);
     }
 
@@ -102,7 +102,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter s/M s/F", expectedCommand);
         assertParseSuccess(parser, "filter s/M F", expectedCommand);
 
-        // Test with multiple whitespaces
+        // EP: Test with multiple whitespaces
         assertParseSuccess(parser, "filter \n s/M \n \t s/F  \t", expectedCommand);
     }
 
@@ -116,7 +116,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter c/1A c/1B", expectedCommand);
         assertParseSuccess(parser, "filter c/1A 1B", expectedCommand);
 
-        // Test with multiple whitespaces
+        // EP: Test with multiple whitespaces
         assertParseSuccess(parser, "filter \n c/1A \n \t c/1B  \t", expectedCommand);
     }
 
@@ -130,7 +130,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter en/Alice en/Bob", expectedCommand);
         assertParseSuccess(parser, "filter en/Alice Bob", expectedCommand);
 
-        // Test with multiple whitespaces
+        // EP: Test with multiple whitespaces
         assertParseSuccess(parser, "filter \n en/Alice \n \t en/Bob  \t", expectedCommand);
     }
 
@@ -145,7 +145,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, "filter ep/91112222 ep/92223333", expectedCommand);
         assertParseSuccess(parser, "filter ep/91112222 92223333", expectedCommand);
 
-        // Test with multiple whitespaces
+        // EP: Test with multiple whitespaces
         assertParseSuccess(parser, "filter \n ep/91112222 \n \t ep/92223333  \t", expectedCommand);
     }
 
@@ -158,7 +158,7 @@ public class FilterCommandParserTest {
 
         assertParseSuccess(parser, "filter n/Alice p/99999999", expectedCommand);
 
-        //multiple whitespaces between keywords
+        // EP: multiple whitespaces between keywords
         assertParseSuccess(parser, "filter \n n/Alice \n \t p/99999999  \t", expectedCommand);
     }
 
@@ -188,56 +188,67 @@ public class FilterCommandParserTest {
 
     @Test
     void parse_invalidArgs_namePrefixFilterCommand() {
+        // EP: empty name predicate
         assertParseFailure(parser, "filter n/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_phonePrefixFilterCommand() {
+        // EP: empty phone predicate
         assertParseFailure(parser, "filter p/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_emailPrefixFilterCommand() {
+        // EP: empty email predicate
         assertParseFailure(parser, "filter e/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_addressPrefixFilterCommand() {
+        // EP: empty address predicate
         assertParseFailure(parser, "filter a/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_regNumPrefixFilterCommand() {
+        // EP: empty register number predicate
         assertParseFailure(parser, "filter r/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_sexPrefixFilterCommand() {
+        // EP: empty sex predicate
         assertParseFailure(parser, "filter s/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_classPrefixFilterCommand() {
+        // EP: empty class predicate
         assertParseFailure(parser, "filter c/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_ecNamePrefixFilterCommand() {
+        // EP: empty ecName predicate
         assertParseFailure(parser, "filter en/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_ecPhonePrefixFilterCommand() {
+        // EP: empty ecPhone predicate
         assertParseFailure(parser, "filter ep/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_tagPrefixFilterCommand() {
+        // EP: empty ecTag predicate
         assertParseFailure(parser, "filter t/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
     @Test
     void parse_invalidArgs_spacesPrefixFilterCommand() {
+        // EP: multiple empty predicates
         String emptyPreds = "filter n/ p/ e/ a/ r/ s/ c/ en/ ep/ t/";
         assertParseFailure(parser, emptyPreds, MESSAGE_INCOMPLETE_COMMAND);
     }
@@ -245,6 +256,7 @@ public class FilterCommandParserTest {
     @Test
     void parse_invalidArgs_allEmptyPredicatesFilterCommand() {
         String exceptionString = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE);
+        // EP: Empty predicates
         assertParseFailure(parser, "filter", exceptionString);
         assertParseFailure(parser, "filter  ", exceptionString);
         assertParseFailure(parser, "filter n", exceptionString);

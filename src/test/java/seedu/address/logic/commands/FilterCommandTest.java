@@ -52,20 +52,20 @@ public class FilterCommandTest {
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(filterFirstCommand.equals(filterFirstCommand));
 
-        // same values -> returns true
+        // EP: same values -> returns true
         FilterCommand filterFirstCommandCopy = new FilterCommand(firstPredicate);
         assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(filterFirstCommand.equals(1));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(filterFirstCommand.equals(null));
 
-        // different person -> returns false
+        // EP: different person -> returns false
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
     }
 
