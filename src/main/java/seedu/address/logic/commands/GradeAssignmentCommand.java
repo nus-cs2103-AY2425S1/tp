@@ -79,6 +79,7 @@ public class GradeAssignmentCommand extends Command {
         }
         assignmentToGrade.setScore(score);
         assignmentToGrade.setHasSubmitted(true);
+        assignmentToGrade.setIsGraded(true);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, assignmentToGrade.getName(),
                 studentToGrade.getName().fullName, assignmentToGrade.getScore()),

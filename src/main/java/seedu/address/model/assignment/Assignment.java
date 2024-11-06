@@ -28,6 +28,7 @@ public class Assignment {
     private final int maxScore;
     private int score = 0;
     private boolean hasSubmitted = false;
+    private boolean isGraded = false;
 
     /**
      * Every field must be present and not null.
@@ -76,6 +77,10 @@ public class Assignment {
         return this.score;
     }
 
+    public boolean getIsGraded() {
+        return this.isGraded;
+    }
+
     public boolean getHasSubmitted() {
         return this.hasSubmitted;
     }
@@ -88,6 +93,10 @@ public class Assignment {
     }
     public void setHasSubmitted(boolean hasSubmitted) {
         this.hasSubmitted = hasSubmitted;
+    }
+
+    public void setIsGraded(boolean isGraded) {
+        this.isGraded = isGraded;
     }
 
     /**
@@ -110,7 +119,8 @@ public class Assignment {
                && MIN_SCORE == otherAssignment.MIN_SCORE
                && maxScore == otherAssignment.maxScore
                && score == otherAssignment.score
-               && hasSubmitted == otherAssignment.hasSubmitted;
+               && hasSubmitted == otherAssignment.hasSubmitted
+               && isGraded == otherAssignment.isGraded;
     }
 
     @Override
@@ -127,6 +137,7 @@ public class Assignment {
                 .add("maxScore", maxScore)
                 .add("score", score)
                 .add("hasSubmitted", hasSubmitted)
+                .add("isGraded", isGraded)
                 .toString();
     }
 }

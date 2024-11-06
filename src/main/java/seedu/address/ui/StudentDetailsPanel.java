@@ -73,8 +73,14 @@ public class StudentDetailsPanel extends UiPart<Region> {
                     Label titleLabel = new Label(Integer.toString(i + 1) + ". " + assignment.getName());
                     titleLabel.getStyleClass().add("assignment-name");
 
-                    Label scoreLabel = new Label("Score: " + assignment.getScore() + "/"
-                            + assignment.getMaxScore());
+                    Label scoreLabel;
+                    if (assignment.getIsGraded()) {
+                        scoreLabel = new Label("Score: " + assignment.getScore() + "/"
+                                + assignment.getMaxScore());
+                    } else {
+                        scoreLabel = new Label("Not graded yet. \nMax Score: "
+                                + assignment.getMaxScore());
+                    }
                     Label statusLabel = new Label(assignment.getHasSubmitted() ? "Submitted" : "Not Submitted");
 
                     if (assignment.getHasSubmitted()) {
