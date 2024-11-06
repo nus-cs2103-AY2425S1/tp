@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_RICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -52,7 +52,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateSuppliers_throwsDuplicateSupplierException() {
         // Two suppliers with the same identity fields
-        Supplier editedAlice = new SupplierBuilder(ALICE).withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+        Supplier editedAlice = new SupplierBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .withProducts(VALID_PRODUCT_RICE).build();
         List<Supplier> newSuppliers = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = AddressBookStub.withSuppliers(newSuppliers);
@@ -89,7 +89,7 @@ public class AddressBookTest {
     @Test
     public void hasSupplier_supplierWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addSupplier(ALICE);
-        Supplier editedAlice = new SupplierBuilder(ALICE).withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+        Supplier editedAlice = new SupplierBuilder(ALICE).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_HUSBAND)
                 .withProducts(VALID_PRODUCT_RICE).build();
         assertTrue(addressBook.hasSupplier(editedAlice));
     }

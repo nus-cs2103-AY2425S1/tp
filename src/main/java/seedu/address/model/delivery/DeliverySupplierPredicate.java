@@ -23,7 +23,7 @@ public class DeliverySupplierPredicate implements Predicate<Delivery> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeliverySupplierPredicate // instanceof handles nulls
-                && supplier.equals(((DeliverySupplierPredicate) other).supplier)); // state check
+                && supplier.isSameSupplier(((DeliverySupplierPredicate) other).supplier)); // state check
     }
 }
 

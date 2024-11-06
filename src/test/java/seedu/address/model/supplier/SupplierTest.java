@@ -34,10 +34,15 @@ public class SupplierTest {
         // null -> returns false
         assertFalse(ALICE.isSameSupplier(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, same company, all other attributes different -> returns true
         Supplier editedAlice = new SupplierBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND).withProducts(VALID_PRODUCT_BREAD).build();
+                .withTags(VALID_TAG_HUSBAND).withProducts(VALID_PRODUCT_BREAD).build();
         assertTrue(ALICE.isSameSupplier(editedAlice));
+
+        // same name, all other attributes different -> returns false
+        editedAlice = new SupplierBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND).withProducts(VALID_PRODUCT_BREAD).build();
+        assertFalse(ALICE.isSameSupplier(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new SupplierBuilder(ALICE).withName(VALID_NAME_BOB).build();

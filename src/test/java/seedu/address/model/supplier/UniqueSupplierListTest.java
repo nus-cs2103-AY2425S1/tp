@@ -43,7 +43,7 @@ public class UniqueSupplierListTest {
     @Test
     public void contains_supplierWithSameIdentityFieldsInList_returnsTrue() {
         uniqueSupplierList.add(ALICE);
-        Supplier editedAlice = new SupplierBuilder(ALICE).withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+        Supplier editedAlice = new SupplierBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .withProducts(VALID_PRODUCT_BREAD).build();
         assertTrue(uniqueSupplierList.contains(editedAlice));
     }
