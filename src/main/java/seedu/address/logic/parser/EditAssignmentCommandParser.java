@@ -29,6 +29,7 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
                 PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_GRADE, PREFIX_STUDENT_NUMBER
         );
+        argMultimap.verifyNoInvalidPrefixesFor(userInput);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

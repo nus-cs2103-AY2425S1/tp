@@ -23,6 +23,7 @@ public class GetAttendanceCommandParser implements Parser<GetAttendanceCommand> 
     public GetAttendanceCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
                 PREFIX_STUDENT_NUMBER, PREFIX_DATE);
+        argMultimap.verifyNoInvalidPrefixesFor(args);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

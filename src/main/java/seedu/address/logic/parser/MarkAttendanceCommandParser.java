@@ -30,6 +30,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
                 CliSyntax.PREFIX_DATE,
                 CliSyntax.PREFIX_PRESENT
         );
+        argMultimap.verifyNoInvalidPrefixesFor(args);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_PRESENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

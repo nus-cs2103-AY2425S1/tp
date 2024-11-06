@@ -26,10 +26,11 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
      * and returns an AddStudentCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public AddStudentCommand parse(String arg) throws ParseException {
+    public AddStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(arg, PREFIX_NAME, PREFIX_PHONE,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_TUTORIAL_GROUP, PREFIX_STUDENT_NUMBER);
+        argMultimap.verifyNoInvalidPrefixesFor(args);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_TUTORIAL_GROUP, PREFIX_STUDENT_NUMBER)
                 || !argMultimap.getPreamble().isEmpty()) {

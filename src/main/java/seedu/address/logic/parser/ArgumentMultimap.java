@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ARRAY;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
@@ -73,6 +76,26 @@ public class ArgumentMultimap {
 
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
+        }
+    }
+
+    /**
+     * Throws a {@code ParseException} if any of the prefixes in the given {@code argsString} are not valid.
+     * @param argsString The arguments string to be checked.
+     * @throws ParseException If any of the prefixes in the given {@code argsString} are not valid.
+     */
+    public void verifyNoInvalidPrefixesFor(String argsString) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, PREFIX_ARRAY);
+        Set<Prefix> validPrefixes = this.argMultimap.keySet();
+        List<Prefix> invalidPrefixes = new ArrayList<>();
+        for (Prefix prefix : argMultimap.argMultimap.keySet()) {
+            if (!validPrefixes.contains(prefix) && !argMultimap.argMultimap.get(prefix).isEmpty()) {
+                invalidPrefixes.add(prefix);
+            }
+        }
+
+        if (!invalidPrefixes.isEmpty()) {
+            throw new ParseException(Messages.getErrorMessageForInvalidPrefixes(invalidPrefixes));
         }
     }
 }

@@ -36,6 +36,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_GRADE, PREFIX_STUDENT_NUMBER
         );
+        argMultimap.verifyNoInvalidPrefixesFor(args);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE)
                 || !argMultimap.getPreamble().isEmpty()) {
