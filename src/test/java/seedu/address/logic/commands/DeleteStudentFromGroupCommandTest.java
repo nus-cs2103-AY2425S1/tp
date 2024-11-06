@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.deletecommands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -60,18 +58,19 @@ public class DeleteStudentFromGroupCommandTest {
         assertFalse(model.hasPersonInGroup(validStudent, validGroup));
     }
 
-//    @Test
-//    public void execute_studentDoesNotExist_throwsCommandException() {
-//        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(new StudentNumber("A0000000X"));
-//        assertThrows(CommandException.class, Messages.MESSAGE_STUDENT_NO_NOT_FOUND, () -> command.execute(model));
-//    }
-//
-//    @Test
-//    public void execute_studentNotInAGroup_throwsCommandException() {
-//        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validStudent.getStudentNumber());
-//        assertThrows(CommandException.class, DeleteStudentFromGroupCommand.MESSAGE_STUDENT_NOT_IN_GROUP, ()
-//                -> command.execute(model));
-//    }
+    //    @Test
+    //    public void execute_studentDoesNotExist_throwsCommandException() {
+    //        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(new StudentNumber("A0000000X"));
+    //        assertThrows(CommandException.class, Messages.MESSAGE_STUDENT_NO_NOT_FOUND, () -> command.execute(model));
+    //    }
+    //
+    //    @Test
+    //    public void execute_studentNotInAGroup_throwsCommandException() {
+    //        DeleteStudentFromGroupCommand command =
+    //        new DeleteStudentFromGroupCommand(validStudent.getStudentNumber());
+    //        assertThrows(CommandException.class, DeleteStudentFromGroupCommand.MESSAGE_STUDENT_NOT_IN_GROUP, ()
+    //                -> command.execute(model));
+    //    }
 
     @Test
     public void equals() {
