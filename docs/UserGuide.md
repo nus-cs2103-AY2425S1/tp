@@ -17,7 +17,7 @@ ClubConnect is a **desktop address book application used to streamline the compu
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F09-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your ClubConnect.
 
@@ -30,7 +30,7 @@ ClubConnect is a **desktop address book application used to streamline the compu
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -77,7 +77,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to ClubConnect's contact list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -92,13 +92,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons stored in ClubConnect's contact list.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in ClubConnect's contact list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -152,7 +152,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from ClubConnect's contact list.
 
 Format: `delete INDEX` / `delete CONTACT_NAME`
 
@@ -163,12 +163,12 @@ Format: `delete INDEX` / `delete CONTACT_NAME`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in ClubConnect's contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete john doe` will delete the contact with name `john doe` (Case-insensitive) if there is only one contact with that name.
 
 ### Deleting multiple people : `mass_delete`
-Deletes multiple specified contacts from the address book using their displayed indices.
+Deletes multiple specified contacts from ClubConnect's contact list using their displayed indices.
 
 Format: `mass_delete INDEX1 INDEX2 ... INDEXN`
 
@@ -177,29 +177,29 @@ Format: `mass_delete INDEX1 INDEX2 ... INDEXN`
 * All indices must be positive integers 1, 2, 3, … Invalid indices will be filtered out
 
 Examples:
-* `list` followed by `mass_delete 1 2` deletes the 1st and 2nd persons in the address book.
+* `list` followed by `mass_delete 1 2` deletes the 1st and 2nd persons in ClubConnect's contact list.
 * `find Betsy` followed by `mass_delete 1 3 a` deletes the 1st and 3rd persons in the results of the find command.
 
 ### Exporting all contacts: `export`
 
-Exports all persons in the addressbook into a csv file located in the data folder.
+Exports all persons in ClubConnect into a csv file located in the data folder.
 
 Format: `export`
 
 ### Importing persons: `import`
 
-Reads the specified file to import from and adds the persons to the addressbook.
+Reads the specified file to import from and adds the persons to ClubConnect.
 
 Format: `import FILENAME`
 
 Examples:
-* `import contacts.csv` adds persons stored in `contacts.csv` to the addressbook.
+* `import contacts.csv` adds persons stored in `contacts.csv` to the ClubConnect.
 * The file has to be located in the data folder
 * The specified file name has to exactly match the name of the file to import from
 
 ### Adding an event: `add_event`
 
-Adds an event to the address book.
+Adds an event to ClubConnect's event list.
 
 Format: `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE`
 
@@ -211,13 +211,13 @@ Examples:
 
 ### Listing all events : `list_events`
 
-Shows a list of all events in the address book.
+Shows a list of all events stored in ClubConnect's event list.
 
 Format: `list_events`
 
 ### Deleting an event: `del_event`
 
-Deletes the specified event from the address book.
+Deletes the specified event from ClubConnect's event list.
 
 Format: `del_event INDEX` / `del_event EVENT_NAME`
 
@@ -228,7 +228,7 @@ Format: `del_event INDEX` / `del_event EVENT_NAME`
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list_events` followed by `del_event 2` deletes the 2nd event in the address book.
+* `list_events` followed by `del_event 2` deletes the 2nd event in ClubConnect's event list.
 * `del_event meeting` will delete the event with name `meeting` (case-insensitive) if there is only one event with that name.
 
 ### Assigning an event: `assign_event`
@@ -257,7 +257,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from ClubConnect.
 
 Format: `clear`
 
@@ -269,17 +269,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ClubConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/clubconnect.json`. Advanced users are welcome to update data directly by editing that data file.
+ClubConnect data are saved automatically as a JSON file `[JAR file location]/data/clubconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ClubConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause ClubConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -291,7 +291,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClubConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
