@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PERSON_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -25,6 +24,7 @@ public class AddGradeCommand extends Command {
             + "Existing grades will be updated by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) n/EXAM_NAME s/EXAM_SCORE w/EXAM_WEIGHTAGE\n"
             + "Example: " + COMMAND_WORD + " 1 n/Midterm s/85 w/30";
+    public static final String MESSAGE_ADD_GRADE_SUCCESS = "Added grade for '%1$s' to %2$s";
     public static final String MESSAGE_EXCEED_WEIGHTAGE = "The total weightage of grades cannot exceed 100%";
 
     private final Grade toAdd;
@@ -65,7 +65,8 @@ public class AddGradeCommand extends Command {
             Person updatedPerson = personToEdit.addGrade(this.toAdd);
             model.setPerson(personToEdit, updatedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(updatedPerson)));
+            return new CommandResult(
+                    String.format(MESSAGE_ADD_GRADE_SUCCESS, toAdd.getTestName(), personToEdit.getName()));
         } catch (IllegalStateException e) {
             throw new CommandException("The total weightage of grades cannot exceed 100%");
         }
