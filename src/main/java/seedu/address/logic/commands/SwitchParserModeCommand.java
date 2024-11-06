@@ -6,7 +6,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AbcliParser;
 import seedu.address.logic.parser.ParserMode;
+import seedu.address.logic.parser.buyer.BuyerCommandParser;
 import seedu.address.logic.parser.exceptions.InvalidParserModeException;
+import seedu.address.logic.parser.meetup.MeetUpCommandParser;
+import seedu.address.logic.parser.property.PropertyCommandParser;
 import seedu.address.model.Model;
 
 /**
@@ -34,12 +37,29 @@ public class SwitchParserModeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         assert mode != null;
         try {
             AbcliParser.switchMode(mode);
+
+            switch (mode) {
+
+            case MEETUP:
+                model.updateFilteredMeetUpList(Model.PREDICATE_SHOW_ALL_MEETUPS);
+                break;
+
+            case PROPERTY:
+                model.updateFilteredPropertyList(Model.PREDICATE_SHOW_ALL_PROPERTIES);
+                break;
+
+            default:
+                model.updateFilteredBuyerList(Model.PREDICATE_SHOW_ALL_BUYERS);
+            }
+
             boolean isShowingMeetUpList = this.mode == ParserMode.MEETUP;
             boolean isShowingBuyerList = this.mode == ParserMode.BUYER;
             boolean isShowingPropertyList = this.mode == ParserMode.PROPERTY;
+
             return new CommandResult(SWITCH_SUCCESS_MESSAGE + mode, false,
                     false, isShowingMeetUpList, isShowingBuyerList, isShowingPropertyList);
         } catch (InvalidParserModeException e) {
