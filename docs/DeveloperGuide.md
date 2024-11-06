@@ -725,6 +725,7 @@ Success action: When wedding is successfully added, the details of the added wed
         Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.<br><br>
 
 #### Inputting CLIENT using NAME
+1. Adding a wedding while weddings are shown.
 
     1. Test case: `addw n/Church Wedding c/Alice`
        Expected (No duplicated Alice): Wedding added with contact having name field containing Alice set to be client. Details of the added wedding is displayed on the status message.<br>
