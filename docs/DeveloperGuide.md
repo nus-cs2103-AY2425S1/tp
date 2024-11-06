@@ -134,7 +134,7 @@ The structure is simple:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the CampusConnect data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -155,7 +155,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both CampusConnect data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `CampusConnectStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -169,16 +169,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedCampusConnect`. It extends `CampusConnect` with an undo/redo history, stored internally as an `history` and `future`. Additionally, it implements the following operations:
 
-* `VersionedCampusConnect#saveCurrentData()` — Saves the current address book state in its future.
-*  `VersionedCampusConnect#saveOldData()` — Saves the current address book state in its history.
-* `VersionedCampusConnect#extractOldData()` — Restores the previous address book state from its history.
-* `VersionedCampusConnect#extractUndoneData()` — Restores a previously undone address book state from its history.
+* `VersionedCampusConnect#saveCurrentData()` — Saves the current CampusConnect state in its future.
+*  `VersionedCampusConnect#saveOldData()` — Saves the current CampusConnect state in its history.
+* `VersionedCampusConnect#extractOldData()` — Restores the previous CampusConnect state from its history.
+* `VersionedCampusConnect#extractUndoneData()` — Restores a previously undone CampusConnect state from its history.
 
 These operations are exposed in the `Model` interface as `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` and `Model#redoCampusConnect()` respectively.
 
@@ -188,7 +188,7 @@ Step 1. The user launches the application for the first time. The `VersionedCamp
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
+Step 2. The user executes `delete 5` command to delete the 5th person in the CampusConnect. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
@@ -236,7 +236,7 @@ The `redo` command does the opposite — it calls `Model#redoCampusConnect()
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitCampusConnect()`, `Model#undoCampusConnect()` or `Model#redoCampusConnect()`. Thus, the `campusConnectStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the CampusConnect, such as `list`, will usually not call `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` or `Model#redoCampusConnect()`. Thus, the `history` and `future` remain unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
@@ -252,7 +252,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire CampusConnect.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
