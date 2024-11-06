@@ -133,20 +133,32 @@ Parameters often take up the form of `p/[PARAMETER]` where p is the parameter sy
 - `John Doe` -> parameter.
 </box>
 
-### Parameters
+### Patient Parameters
+
+Symbol     | Parameter     | Constraints
+-----------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**`n`**| `NAME`        |- Must contain at least 1 alphabetic character and has a character limit of 50. <br> - Allows alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.
+**`i`**| `ID`          |- Must contain at least 1 alphanumeric character and has a character limit of 36. <br> - Allows alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets.
+**`w`**| `WARD`        |- Must contain at least 1 alphanumeric character, and has a character limit of 50.
+**`d`**| `DIAGNOSIS`   |- Must contain at least 1 alphabetic character, and has a character limit of 80.
+**`m`**| `MEDICATION`  |- Must contain at least 1 alphanumeric character and has a character limit of 80. <br> - Allows alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.
+**`pn`**| `NOTES`       |- Allows any characters.
+**`a`**| `APPOINTMENT` |- Refer to [Appointment Parameters](#appointment-parameters) table below.
+
+### Appointment Parameters
+
+Symbol     | Parameter    | Constraints
+-----------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**`a`**| `DESCRIPTION` |- Must contain at least 1 alphabetic character, and has a limit of 80 characters.
+**`s`**| `START`      |- A singular `DATE` in the form `DD-MM-YYYY`.
+**`e`**| `END`        |- A singular `DATE` in the form `DD-MM-YYYY`.
+
+### Other Parameters
 
 Symbol     | Parameter                        | Constraints
 -----------|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
 **-**  | `INDEX`                          |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
 **-**  | `DATE`                           |- **Must be of the form `DD-MM-YYYY`**.
-**`n`**| `NAME`                           |- Must contain at least 1 alphabetic character and has a character limit of 50. <br> - Can include alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.
-**`i`**| `ID`                             |- Must contain at least 1 alphanumeric character and has a character limit of 36. <br> - Can include alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets.
-**`w`**| `WARD`                           |- Must contain at least 1 alphanumeric character, and has a character limit of 50.
-**`d`**| `DIAGNOSIS` <br> (if specified)  |- Must contain at least 1 alphabetic character, and has a character limit of 80.
-**`m`**| `MEDICATION` <br> (if specified) |- Must contain at least 1 alphanumeric character and has a character limit of 80. <br> - Can include alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.
-**`a`**| `APPOINTMENT`                    |- Must contain at least 1 alphabetic character, and has a limit of 80 characters.
-**`s`**| `START`                          |- A singular `DATE`.
-**`e`**| `END`                            |- A singular `DATE`.
 
 [Back to Table of Contents](#table-of-contents)
 
