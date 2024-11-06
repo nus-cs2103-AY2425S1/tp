@@ -70,6 +70,7 @@ public class UnmarkAssignmentCommand extends Command {
         }
         assignmentToUnmark.setHasSubmitted(false);
         assignmentToUnmark.setScore(0);
+        assignmentToUnmark.setIsGraded(false);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS, assignmentToUnmark.getName(),
                 studentToUnmark.getName().fullName), studentToUnmark, studentIndex.getZeroBased());
