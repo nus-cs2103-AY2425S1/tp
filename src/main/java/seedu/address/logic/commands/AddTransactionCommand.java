@@ -68,7 +68,7 @@ public class AddTransactionCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
-            logger.fine("CommandException caused by invalid index provided.");
+            logger.fine("CommandException caused by invalid index.");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
