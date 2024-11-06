@@ -174,8 +174,8 @@ public class FindCommandTest {
     @Test
     public void execute_nonExistentTag_noPersonFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0,
-            "(invalid)");
-        TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate("invalid");
+            "(nothing)");
+        TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate("nothing");
         List<Predicate<Person>> predicates = Arrays.asList(tagPredicate);
 
         FindCommand command = new FindCommand(predicates);

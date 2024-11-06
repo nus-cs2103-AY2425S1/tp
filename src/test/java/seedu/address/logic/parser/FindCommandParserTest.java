@@ -163,10 +163,10 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validTag_returnsFindCommand() {
-        FindCommand expectedFindCommad =
+        FindCommand expectedFindCommand =
             new FindCommand(List.of(new TagContainsKeywordsPredicate(List.of("school"))),
                 true);
-        assertParseSuccess(parser, " " + PREFIX_TAG + "school", expectedFindCommad);
+        assertParseSuccess(parser, " " + PREFIX_TAG + "school", expectedFindCommand);
     }
 
     @Test

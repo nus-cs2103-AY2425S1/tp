@@ -66,7 +66,8 @@ public class FindCommand extends Command {
      */
     public FindCommand(List<Predicate<Person>> predicates, boolean isChained) {
         // For now we only support 1, 2 or 3 predicates
-        assert predicates.size() <= 3 : "More than 3 predicates found for find command";
+        assert predicates.size() >= 1 && predicates.size() <= 3
+            : "More than 3 predicates found for find command";
         this.predicates = predicates;
         this.isChained = isChained;
     }
