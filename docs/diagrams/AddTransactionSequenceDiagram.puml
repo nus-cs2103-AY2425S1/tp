@@ -41,46 +41,12 @@ destroy AddTransactionCommandParser
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> AddTransactionCommand : execute(a)
+LogicManager -> AddTransactionCommand : execute()
 activate AddTransactionCommand
 
-AddTransactionCommand -> Model : get info of person to add transaction to
+AddTransactionCommand -> Model : addTransactionToPerson(1)
 activate Model
 Model --> AddTransactionCommand
-deactivate Model
-
-create TransactionList
-AddTransactionCommand -> TransactionList
-activate TransactionList
-TransactionList --> AddTransactionCommand
-deactivate TransactionList
-
-AddTransactionCommand -> TransactionList: copy existing transactions to new list
-activate TransactionList
-deactivate TransactionList
-
-AddTransactionCommand -> TransactionList: add new transaction to list
-activate TransactionList
-deactivate TransactionList
-
-AddTransactionCommand -> TransactionList : sort by recency of transaction date
-activate TransactionList
-TransactionList --> AddTransactionCommand : t
-deactivate TransactionList
-
-create Person
-AddTransactionCommand -> Person : Person(..., t)
-activate Person
-
-Person --> AddTransactionCommand: p
-deactivate Person
-
-AddTransactionCommand -> Model : replace initial person with p
-activate Model
-deactivate Model
-
-AddTransactionCommand -> Model: updateFilteredPersonList(...)
-activate Model
 deactivate Model
 
 create CommandResult
