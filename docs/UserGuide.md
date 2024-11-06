@@ -78,11 +78,11 @@ Format: `list k/KEY`
 
 * The `list` command displays records based on the specified `KEY`.
 * The `KEY` must be one of the following: `buyers`, `sellers`, `clients`, `meetings`, or `properties`.
-    * `buyers`: Lists all buyers in the database.
-    * `sellers`: Lists all sellers in the database.
-    * `clients`: Lists all clients (i.e. buyers and sellers combined) in the database.
-    * `properties`: Lists all properties in the database.
-    * `meetings`: Lists all meetings in the database.
+    * `buyers`: Lists all buyers in the client book.
+    * `sellers`: Lists all sellers in the client book.
+    * `clients`: Lists all clients (i.e. buyers and sellers combined) in the client book.
+    * `properties`: Lists all properties in the property book.
+    * `meetings`: Lists all meetings in the meeting book.
 
 * If an invalid `KEY` is provided, an error message will be displayed.
 
