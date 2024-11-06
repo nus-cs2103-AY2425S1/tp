@@ -3,10 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
@@ -35,7 +32,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.event.EventName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -52,22 +48,22 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                                   + EVENT_NAME_BOB + ROLE_DESC_VOLUNTEER, new AddCommand(expectedPerson));
+                + ROLE_DESC_VOLUNTEER, new AddCommand(expectedPerson));
 
 
         // multiple roles - all accepted
         Person expectedPersonMultipleRoles = new PersonBuilder(BOB).withRoles(VALID_ROLE_VOLUNTEER, VALID_ROLE_ATHLETE)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + EVENT_NAME_BOB
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
                 new AddCommand(expectedPersonMultipleRoles));
     }
 
     @Test
     public void parse_repeatedNonRoleValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                                           + EVENT_NAME_BOB + ROLE_DESC_VOLUNTEER;
+        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB
+                                           + EMAIL_DESC_BOB + ROLE_DESC_VOLUNTEER;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -120,7 +116,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero roles
         Person expectedPerson = new PersonBuilder(AMY).withRoles().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + EVENT_NAME_AMY,
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
@@ -149,31 +145,27 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                                   + EVENT_NAME_BOB + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
+                                    + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB
-                                   + EVENT_NAME_BOB + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
+                                   + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
-                                   + EVENT_NAME_BOB + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
+                                   + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
                 Email.MESSAGE_CONSTRAINTS);
 
-        // invalid event
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                                   + INVALID_EVENT_NAME + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
-                EventName.MESSAGE_CONSTRAINTS);
 
         // invalid role
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + EVENT_NAME_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                                    + INVALID_ROLE_DESC + VALID_ROLE_VOLUNTEER, Role.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                                   + EVENT_NAME_BOB + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
+                                   + ROLE_DESC_ATHLETE + ROLE_DESC_VOLUNTEER,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

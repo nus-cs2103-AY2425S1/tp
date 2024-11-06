@@ -8,7 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -80,11 +82,11 @@ public class FilterCommandTest {
     @Test
     public void execute_singleKeyword_singlePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        RoleContainsKeywordsPredicate predicate = preparePredicate("Volunteer");
+        RoleContainsKeywordsPredicate predicate = preparePredicate("friends");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(BENSON), model.getFilteredPersonList());
+        assertEquals(List.of(CARL), model.getFilteredPersonList());
     }
 
     @Test
@@ -99,19 +101,19 @@ public class FilterCommandTest {
 
     @Test
     public void execute_caseInsensitiveKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(
-                List.of("athlete", "volunteer", "sponsor"));
+                List.of("friends", "colleagues"));
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(List.of(CARL, ELLE), model.getFilteredPersonList());
     }
 
     @Test
     public void toStringMethod() {
         RoleContainsKeywordsPredicate predicate =
-                new RoleContainsKeywordsPredicate(List.of("Athlete", "Volunteer", "Sponsor"));
+                new RoleContainsKeywordsPredicate(List.of("friends", "colleagues", "family"));
         FilterCommand command = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, command.toString());

@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.role.Role;
 
@@ -38,8 +37,7 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label email;
-    @FXML
-    private FlowPane events;
+
     @FXML
     private FlowPane roles;
 
@@ -53,9 +51,6 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().toString());
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        person.getEvents().stream()
-                .sorted(Comparator.comparing(event -> event.getName().toString()))
-                .forEach(event -> events.getChildren().add(new Label(((Event) event).getName().toString())));
         person.getRoles().stream()
                 .sorted(Comparator.comparing(Role::getRoleName))
                 .forEach(role -> roles.getChildren().add(new Label(role.getRoleName() + ", ")));
