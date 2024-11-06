@@ -493,30 +493,27 @@ NUStates will highlight any specific errors in the command entered by the user. 
 - **Unknown Command**: If the command entered is not recognized by NUStates, it will highlight the invalid command keyword and provide a message indicating that the command is unknown.
 - **Missing Preamble Value**: If required preamble value is invalid (e.g., non-positive values where positive numbers are expected), NUStates will highlight the invalid preamble value and provide a message indicating the expected format.
 - **Invalid Parameter Values**: If any parameter values are invalid (e.g., non-numeric values where numbers are expected), NUStates will highlight the invalid values and provide a message indicating the expected format.
-- **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format.
+- **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format. This includes missing parameters, incorrect command structure, and other general errors.
 
 Examples:
 1. **Unknown Command**:
   - Command entered: `ad n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-  - Error message: `Unknown command.`
+  - Cause: The command `ad` is not recognised.
   - Highlight: The `ad` part is highlighted.
 
 2. **Invalid Preamble Value**:
   - Command entered: `addBuy -22 ht/c pc/999111 un/10-01 bp/1000000`
-  - Error message: `Valid person index must be provided.`
+  - Cause: The person index `-22` is invalid.
   - Highlight: The invalid `-22` part is highlighted.
 
 3. **Invalid Parameter Values**:
   - Command entered: `add n/John Doe p/abc e/johnd@example.com a/John street, block 123, #01-01`
-  - Error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
+  - Cause: The phone number `abc` is invalid.
   - Highlight: The `p/abc` part is highlighted.
 
 4. **Invalid Command Format and Other Errors**:
-  - Command entered: `addBuy 1 pc/999111 un/10-01 bp/1000000` (missing `ht/c` parameter)
-  - Error message: `Invalid command format!
-    addBuy: Adds a property to the list of properties to buy for this specific person.
-    Parameters: INDEX (Must be a positive integer) ht/[HOUSING_TYPE] bp/[SELLING_PRICE] pc/[POSTAL_CODE] un/[UNIT_NUMBER] t/[TAG]...
-    Example: addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Extremely spacioust/Near MRT`
+  - Command entered: `addBuy 1 pc/999111 un/10-01 bp/1000000`
+  - Cause: The housing type parameter `ht/` is missing.
   - Highlight: No specific part is highlighted.
 
 ### Saving the data
