@@ -19,6 +19,7 @@ public class CloseWindowCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "invalidCommand", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CloseWindowCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "invalidCommand",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CloseWindowCommand.MESSAGE_USAGE));
     }
 }
