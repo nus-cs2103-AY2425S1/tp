@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -92,14 +94,13 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     private void helpTable(TableView<HelpCommand> table) {
-
         helpTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         TableColumn<HelpCommand, String> commandColumn = new TableColumn<>("Command");
         commandColumn.setCellValueFactory(new PropertyValueFactory<>("command"));
         commandColumn.setMaxWidth(200);
-        commandColumn.setMinWidth(100);
-
+        commandColumn.setMinWidth(200);
+        helpTable.addEventFilter(ScrollEvent.ANY, event -> event.consume());
         TableColumn<HelpCommand, String> descriptionColumn = new TableColumn<>("Usage");
         descriptionColumn.setCellFactory(col -> {
             TableCell<HelpCommand, String> cell = new TableCell<>() {
@@ -128,31 +129,31 @@ public class HelpWindow extends UiPart<Stage> {
                     }
                 }
             };
+            cell.setAlignment(Pos.CENTER);
             return cell;
         });
 
         table.setEditable(false);
-
+        table.setSelectionModel(null);
         ObservableList<HelpCommand> data =
-                FXCollections.observableArrayList(new HelpCommand("Add",
-                                "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`"),
-                        new HelpCommand("Delete", "`delete INDEX`"),
-                        new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] "
-                                + "[e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME]…​`"),
-                        new HelpCommand("EditGame", "`editgame INDEX g/GAME [u/USERNAME]"
-                                + " [s/SKILL_LEVEL] [r/ROLE]`"),
-                        new HelpCommand("FavGame", "`favgame INDEX g/GAME`"),
-                        new HelpCommand("UnFavGame", "`unfavgame INDEX g/GAME`"),
-                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]…` \ne.g., "
-                                + "`find James Jake`"),
-                        new HelpCommand("FindTime", "`findtime TIME-TIME [TIME-TIME]…` \ne.g., "
-                                + "`findtime 1700-1800 2130-2300`"),
-                        new HelpCommand("Clear", "`clear`"),
-                        new HelpCommand("List", "`list`"),
-                        new HelpCommand("Undo", "`undo`"),
+                FXCollections.observableArrayList(
                         new HelpCommand("Help", "`help`"),
+                        new HelpCommand("List", "`list`"),
+                        new HelpCommand("Add", "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
+                        new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
+                        new HelpCommand("AddGame", "`addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`\n"),
+                        new HelpCommand("EditGame", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`\n"),
+                        new HelpCommand("DeleteGame", "`deletegame INDEX g/GAME`\n"),
+                        new HelpCommand("FavGame", "`favgame INDEX g/GAME`\n"),
+                        new HelpCommand("UnFavGame", "`unfavgame INDEX g/GAME`\n"),
+                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]`\n"),
+                        new HelpCommand("FindTime", "`findtime TIME-TIME [TIME-TIME]`\n"),
+                        new HelpCommand("Delete", "`delete INDEX`\n"),
+                        new HelpCommand("Clear", "`clear`"),
+                        new HelpCommand("Undo", "`undo`"),
                         new HelpCommand("Save", "`save`"),
-                        new HelpCommand("Load", "`load`")
+                        new HelpCommand("Load", "`load`"),
+                        new HelpCommand("Exit", "`exit`")
                 );
 
         // Add data to the table
