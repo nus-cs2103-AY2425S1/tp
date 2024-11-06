@@ -69,24 +69,6 @@ public class JsonAdaptedPerson {
     }
 
     /**
-     * Alternative constructor for a {@code JsonAdaptedPerson} without the id.
-     */
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("hours") String hours, @JsonProperty("role") String role,
-                             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.hours = hours;
-        if (subjects != null) {
-            this.subjects.addAll(subjects);
-        }
-        this.role = role;
-    }
-
-    /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {

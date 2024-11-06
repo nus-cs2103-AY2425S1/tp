@@ -42,7 +42,7 @@ public class AddTutorCommandParser implements Parser<AddTutorCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOURS);
-        // Hours is optional for adding a tutee and will be set to 0 if unspecified
+        // Hours is optional for adding a tutor and will be set to 0 if unspecified
         Hours hours;
         if (!arePrefixesPresent(argMultimap, PREFIX_HOURS)) {
             hours = new Hours("0");

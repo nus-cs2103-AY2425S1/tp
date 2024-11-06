@@ -24,6 +24,7 @@ public class AddTutorCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor to VolunTier. \n"
             + "Parameters: "
+
             + PREFIX_NAME + " NAME "
             + PREFIX_PHONE + " PHONE_NUMBER "
             + PREFIX_EMAIL + " EMAIL "
@@ -34,7 +35,7 @@ public class AddTutorCommand extends Command {
             + PREFIX_NAME + " John Doe "
             + PREFIX_PHONE + " 98765432 "
             + PREFIX_EMAIL + " johndoe@example.com "
-            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
+            + PREFIX_ADDRESS + "Clementi, 123456 "
             + PREFIX_HOURS + " 6 "
             + PREFIX_SUBJECT + " Science";
 

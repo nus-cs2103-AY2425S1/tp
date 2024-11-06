@@ -70,10 +70,6 @@ public class DeleteLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        //ToDo
-        // check if the lesson to be deleted is valid by checking if the tutor and tutee are
-        // associated with a Lesson with the correct subject
-
         Person tutorToDelete = lastShownList.get(tutorIndex.getZeroBased());
         Person tuteeToDelete = lastShownList.get(tuteeIndex.getZeroBased());
 

@@ -21,7 +21,7 @@ public class TutorBuilder {
     public static final String DEFAULT_NAME = "James Yeo";
     public static final String DEFAULT_PHONE = "91112222";
     public static final String DEFAULT_EMAIL = "james@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #12-111";
+    public static final String DEFAULT_ADDRESS = "jurong, 123456";
     public static final String DEFAULT_HOURS = "10";
     public static final String DEFAULT_SUBJECT = "english";
 
