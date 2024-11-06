@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllPositive;
+import static seedu.address.logic.Messages.MESSAGE_COMPLETED_APPOINTMENT;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -356,14 +357,14 @@ public class Person implements Appointmentable {
     }
 
     @Override
-    public boolean markAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
+    public void markAppointment(LocalDateTime dateTime, int patientId, int doctorId) throws CommandException{
         requireAllNonNull(dateTime, patientId, doctorId);
-        try {
-            getAppointment(dateTime, patientId, doctorId).markAsComplete();
-        } catch (CommandException e) {
-            return false;
+        Appointment appointment;
+        appointment = getAppointment(dateTime, patientId, doctorId);
+        if (appointment.isCompleted()) {
+            throw new CommandException(MESSAGE_COMPLETED_APPOINTMENT);
         }
-        return true;
+        appointment.markAsComplete();
     }
 
     @Override

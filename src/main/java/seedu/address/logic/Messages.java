@@ -38,7 +38,7 @@ public class Messages {
     public static final String MESSAGE_MIXED_SEQUENCE_ID =
             "You have entered a doctor ID and a patient ID in the wrong sequence.";
     public static final String MESSAGE_COMPLETED_APPOINTMENT =
-            "The appointment is completed. Check the appointment thet you wnat to mark!";
+            "The appointment is completed. Check the appointment that you want to mark!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

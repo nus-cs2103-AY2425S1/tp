@@ -1,13 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_COMPLETED_APPOINTMENT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_MIXED_SEQUENCE_ID;
 import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_DOCTOR_ID;
 import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_PATIENT_ID;
-import static seedu.address.logic.commands.CheckAppointmentCommand.MESSAGE_NO_APPOINTMENT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -17,7 +15,6 @@ import java.time.LocalDateTime;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,7 +35,6 @@ public class MarkAppointmentCommand extends Command {
             + PREFIX_DATE + "2024-12-31 15:23";
     public static final String MESSAGE_MARK_APPOINTMENT_SUCCESS = "Successfully "
             + "marked appointment as complete";
-    public static final String MESSAGE_MARK_APPOINTMENT_FAIL = "The appointment doesn't exist!";
     private final int patientId;
     private final int doctorId;
     private final LocalDateTime appointmentTime;
@@ -75,23 +71,11 @@ public class MarkAppointmentCommand extends Command {
         } else if (patientId % 2 != 0 || doctorId % 2 == 0) {
             throw new CommandException(MESSAGE_MIXED_SEQUENCE_ID);
         }
-        Appointment appointment = patientToMarkAppointment.getAppointment(appointmentTime,
-                patientId, doctorId);
 
-        if (appointment == null) {
-            throw new CommandException(String.format(MESSAGE_NO_APPOINTMENT_FOUND, doctorToMarkAppointment.getName()));
-        }
-
-        if (appointment.isCompleted()) {
-            throw new CommandException(MESSAGE_COMPLETED_APPOINTMENT);
-        }
-
-        boolean isMarkSuccessful = patientToMarkAppointment.markAppointment(appointmentTime,
+        patientToMarkAppointment.markAppointment(appointmentTime,
                 patientToMarkAppointment.getId(),
                 doctorToMarkAppointment.getId());
-        if (!isMarkSuccessful) {
-            throw new CommandException(MESSAGE_MARK_APPOINTMENT_FAIL);
-        }
+
         doctorToMarkAppointment.markAppointment(appointmentTime, patientToMarkAppointment.getId(),
                 doctorToMarkAppointment.getId());
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
