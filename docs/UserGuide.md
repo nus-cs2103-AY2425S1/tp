@@ -309,8 +309,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediContacts home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates there. Do this with the file that contains the data of your MediContacts app in your previous computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
