@@ -348,6 +348,7 @@ Marks a student as present for a particular week.
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Format: `mark n/NAME w/[WEEK_NUMBER]`**</md>
+<md>**Format: `mark n/NAME week/[WEEK_NUMBER]`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -355,6 +356,7 @@ Marks a student as present for a particular week.
 * Marks the particular student as present in that week.
 * The full name and week number is compulsory.
 * The name is case-sensitive.
+* The field for `week` can be written as `week/` or `w/`
 * The range of the WEEK_NUMBER is between 0 and 13, both inclusive. Rationale being there are 13 weeks per semester.
   </box>
 
@@ -381,6 +383,8 @@ Unmarks a student as present for a particular week.
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Format: `unmark n/NAME w/[WEEK_NUMBER]`**</md>
+<md>**Format: `unmark n/NAME week/[WEEK_NUMBER]`**</md>
+
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -388,6 +392,7 @@ Unmarks a student as present for a particular week.
 * Unmarks the particular student as present in that week.
 * The full name and week number is compulsory.
 * The name is case-sensitive. 
+* The field for `week` can be written as `week/` or `w/`
 * The range of the WEEK_NUMBER is between 0 and 13, both inclusive. Rationale being there are 13 weeks per semester.
 </box>
 
