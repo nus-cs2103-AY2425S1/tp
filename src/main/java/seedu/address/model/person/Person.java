@@ -28,7 +28,7 @@ public class Person {
     private final Optional<DateOfLastVisit> dateOfLastVisit;
     private final Optional<EmergencyContact> emergencyContact;
     private final Remark remark;
-    private boolean hasFullViewToggled;
+    private final boolean hasFullViewToggled;
 
     /**
      * Every field must be present and not null.
@@ -64,6 +64,21 @@ public class Person {
         this.emergencyContact = emergencyContact;
         this.remark = remark;
         this.hasFullViewToggled = hasFullViewToggled;
+    }
+
+    /**
+     * Constructs an identical Person with view toggled.
+     */
+    private Person(Person toHaveViewToggled) {
+        this.name = toHaveViewToggled.name;
+        this.phone = toHaveViewToggled.phone;
+        this.email = toHaveViewToggled.email;
+        this.address = toHaveViewToggled.address;
+        this.tags.addAll(toHaveViewToggled.tags);
+        this.dateOfLastVisit = toHaveViewToggled.dateOfLastVisit;
+        this.emergencyContact = toHaveViewToggled.emergencyContact;
+        this.remark = toHaveViewToggled.remark;
+        this.hasFullViewToggled = !toHaveViewToggled.hasFullViewToggled();
     }
 
     public Name getName() {
@@ -161,8 +176,8 @@ public class Person {
     /**
      * Toggles the view of the person.
      */
-    public void toggleView() {
-        this.hasFullViewToggled = !hasFullViewToggled;
+    public Person getToggledViewPerson() {
+        return new Person(this);
     }
 
     /**
