@@ -204,7 +204,62 @@ This section describes some noteworthy details on how certain features are imple
 and more detailed implementation on model changes have been omitted.
 
 </box>
+--------------------------------------------------------------------------------------------------------------------
+### Delete Student Feature
 
+The `Delete Student` feature allows users to delete an existing student in the address book given a student's student number `sno`.
+
+The following shows the activity diagram when the user executes the `del_s` command:
+<puml src="diagrams/DeleteStudentActivityDiagram.puml" alt="DeleteGroupCommandAD" />
+
+#### Usage
+
+**Syntax:** `del_s/ds sno/STUDENT_NUMBER.`
+
+**Example:** `ds sno/A0123456K`
+
+#### Implementation details
+
+1. User has the application launched with at least 1 student added.
+2. User executes `ls` to view all students. For this example, the user wishes to delete a student with student number `A0234567H`.
+3. The user executes `ds sno/A0234567H` to delete the student with a student number `A0234567H`. The command is parsed in
+   the
+   `AddressBookParser`.
+4. `DeleteStudentCommandParser` is created and gets the student number of the student to be deleted. The student number is used to
+   construct a `DeleteStudentCommand` object.
+5. The `DeleteStudentCommand` object then calls `deletePerson(student)` in the `ModelManager` with the specified student to be
+   deleted. This method deletes the specified `Student` in the model.
+7. Finally, the `DeleteStudentCommand` returns the `CommandResult`.
+
+##### Note
+
+This feature will also check if the deleted `Student` belongs to any `Group` and remove the `Student` from that `Group`, 
+resetting the affected `Group` affiliation.
+
+**Sequence Diagram:** The following sequence diagram shows how the above steps for delete group works:
+<puml src="diagrams/DeleteStudentSequenceDiagram.puml" alt="DeleteGroupCommand"/>
+
+<box type="info" seamless>
+
+**Note:** The lifelines for `DeleteStudentCommandParser`, `DeleteStudentCommand`, and
+`CommandResult` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+
+
+
+#### Design considerations
+
+**Aspect 1:** Usage of StudentNumber as identifier
+
+1. **Design #1: Use StudentNumber**
+
+* Pro: More deliberate and since StudentNumber are more complex, the user will be more aware of their decision
+* Con: More typing is required
+
+2. **Design #2:** Use Index
+
+* Pro: Easy and quick
+* Con: Possible for user to mistype the wrong number
 --------------------------------------------------------------------------------------------------------------------
 
 ### Delete Group feature
@@ -251,7 +306,7 @@ PlantUML, the lifeline continues till the end of diagram.
 
 #### Design considerations
 
-**Aspect 1:** Usage of GroupName as identifer
+**Aspect 1:** Usage of GroupName as identifier
 
 1. **Design #1: Use GroupName**
 
