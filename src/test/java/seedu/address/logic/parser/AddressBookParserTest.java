@@ -45,7 +45,7 @@ public class AddressBookParserTest {
     // TODO: Uncomment once message constraints are updated
     //    @Test
     //    public void parseCommand_delete() throws Exception {
-    //        IdentityNumber identityNumber = new IdentityNumber("S1234567A");
+    //        IdentityNumber identityNumber = new IdentityNumber("S1234567D");
     //        DeleteCommand command = (DeleteCommand) parser.parseCommand(
     //                DeleteCommand.COMMAND_WORD + " " + identityNumber);
     //        assertEquals(new DeleteCommand(identityNumber), command);

@@ -21,8 +21,8 @@ public class DeleteCommandParserTest {
     // Uncomment once message constraints are updated
     //    @Test
     //    public void parse_validArgs_returnsDeleteCommand() {
-    //        IdentityNumber identityNumber = new IdentityNumber("S1234567A");  // Example IdentityNumber
-    //        assertParseSuccess(parser, "S1234567A", new DeleteCommand(identityNumber));
+    //        IdentityNumber identityNumber = new IdentityNumber("S1234567D");  // Example IdentityNumber
+    //        assertParseSuccess(parser, "S1234567D", new DeleteCommand(identityNumber));
     //    }
 
     @Test
