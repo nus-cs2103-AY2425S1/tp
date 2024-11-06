@@ -14,12 +14,10 @@ public class Email {
             + "1. The local-part should only contain alphanumeric characters, underscores, periods and dashes."
             + "The local-part may not start or end with any special characters.\n"
             + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
-            + "separated by periods.\n"
+            + "separated by periods and dashes.\n"
             + "The domain name must:\n"
             + "    - end with a domain label at least 2 characters long following a period (e.g. .com)\n"
-            + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens or periods"
-            + ", if any.";
+            + "    - have each domain label start and end with alphanumeric characters\n";
 
     public static final String VALIDATION_REGEX = "^(?![._-])[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@" // local part
             + "(?![.-])[a-zA-Z0-9.-]+(?<![.-])\\.[a-zA-Z]{2,}$"; // domain part
