@@ -415,21 +415,21 @@ The following sequence diagram shows how the encryption process works:
     - If a hacker gains access to the JKS file containing the encryption keys, they could decrypt sensitive data. This represents a fundamental limitation of local storage, as the security of the keys relies on the local file system's security.
 
 2. **Alternative Storage Locations**:
-    - Storing the JKS file in the `JAVA_HOME/lib/security/cacerts` directory is an option, but this depends on the user’s configuration and permissions. Users might not have their `JAVA_HOME` path set correctly, which can lead to access issues.
+   - Storing the JKS file in the `JAVA_HOME/lib/security/cacerts` directory is an option, but this depends on the user’s configuration and permissions. Users might not have their `JAVA_HOME` path set correctly, which can lead to access issues.
 
 3. **Security Through Obscurity**:
     - While relying on obscurity—such as using less common paths for the JKS file—can add a layer of security, it should not be the sole defense mechanism. Obscurity alone does not adequately protect against determined attacks.
 
 ##### Compromise Between Security and User Experience
 - **User Experience Considerations**:
-    - As a local application, vBook prioritizes convenience, which may lead users to prefer simpler access to their data over maximum security. Finding a balance between security and usability is crucial.
-    - Given that vBook handles contact data, adequate security measures must be in place while ensuring users are not overwhelmed by complex key management.
+    - As a local application, VBook prioritizes convenience, which may lead users to prefer simpler access to their data over maximum security. Finding a balance between security and usability is crucial.
+    - Given that VBook handles contact data, adequate security measures must be in place while ensuring users are not overwhelmed by complex key management.
 
 ### Password Management Feature
 
 #### Implementation
 
-The password management mechanism is handled by the `PasswordManager` class. This component is responsible for securely hashing and verifying user passwords using the PBKDF2 (Password-Based Key Derivation Function 2) algorithm with HMAC-SHA1. The `PasswordManager` ensures that passwords are safely stored in a local text file, employing a salting strategy to enhance security. The implementation details are as follows:
+The password management mechanism is handled by the `PasswordManager` class. This component is responsible for securely hashing and verifying user passwords using the **PBKDF2** (Password-Based Key Derivation Function 2) algorithm with **HMAC-SHA1**. The `PasswordManager` ensures that passwords are safely stored in a local text file, employing a salting strategy to enhance security. The implementation details are as follows:
 
 #### Methods Overview
 
@@ -438,7 +438,7 @@ The password management mechanism is handled by the `PasswordManager` class. Thi
     - Returns the hashed password as a string or `null` if the file does not exist.
 
 2. **`savePassword(String password, String path)`**:
-    - Accepts a plaintext password, generates a salt, hashes the password using PBKDF2, and saves the resulting hash and salt to the specified file (default: `password.txt`).
+    - Accepts a plaintext password, generates a salt, hashes the password using **PBKDF2**, and saves the resulting hash and salt to the specified file (default: `password.txt`).
     - Creates the file if it does not already exist.
 
 3. **`isPasswordCorrect(String inputPassword, String path)`**:
@@ -446,7 +446,7 @@ The password management mechanism is handled by the `PasswordManager` class. Thi
     - Reads the stored hash and salt, hashes the input password, and returns `true` if they match or `false` otherwise.
 
 4. **`hashPassword(String password, byte[] salt)`**:
-    - Hashes the provided password using the specified salt with PBKDF2 and returns a string containing both the salt and hash encoded in Base64.
+    - Hashes the provided password using the specified salt with **PBKDF2** and returns a string containing both the salt and hash encoded in Base64.
 
 5. **`generateSalt()`**:
     - Generates a secure random salt using `SecureRandom` for use in password hashing.
@@ -505,7 +505,7 @@ The following sequence diagram illustrates how the password management process o
 
 - **Risk of Local File Exposure**:
     - If an attacker gains access to the `password.txt` file, they could potentially compromise user accounts. This poses a fundamental risk of local file storage, as the security of the password relies on the protection of the local file system.
-    - May consider setting a retry limit.
+    - For future implementation, we may consider setting a retry limit.
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 

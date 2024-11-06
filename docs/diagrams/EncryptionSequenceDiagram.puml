@@ -27,6 +27,7 @@ deactivate
 Cipher --> EncryptionManager: encryptedData
 
 deactivate
+Cipher --[hidden]->EncryptionManager
 destroy Cipher
 
 
@@ -56,6 +57,7 @@ deactivate
 
 Cipher --> EncryptionManager: decryptedData
 deactivate
+Cipher --[hidden]->EncryptionManager
 destroy Cipher
 
 EncryptionManager --> User: decryptedData (as String)
