@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,14 +33,14 @@ public class ListOrderCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ListOrderCommand listOrderCommand = new ListOrderCommand(INDEX_FIRST_PERSON);
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        ListOrderCommand listOrderCommand = new ListOrderCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(ListOrderCommand.MESSAGE_LIST_ORDER_SUCCESS,
                 selectedPerson.getName().fullName);
 
         expectedModel.updateSelectedPerson(
-                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()));
 
         assertCommandSuccess(listOrderCommand, model, expectedMessage, expectedModel);
     }
@@ -55,14 +55,14 @@ public class ListOrderCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
+        showPersonAtIndex(expectedModel, INDEX_FIRST);
 
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ListOrderCommand listOrderCommand = new ListOrderCommand(INDEX_FIRST_PERSON);
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        ListOrderCommand listOrderCommand = new ListOrderCommand(INDEX_FIRST);
 
         expectedModel.updateSelectedPerson(
-                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()));
 
         String expectedMessage = String.format(ListOrderCommand.MESSAGE_LIST_ORDER_SUCCESS,
                 selectedPerson.getName().fullName);
@@ -72,10 +72,10 @@ public class ListOrderCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
+        showPersonAtIndex(expectedModel, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
         assertTrue(outOfBoundIndex.getZeroBased() < expectedModel.getAddressBook().getPersonList().size());
@@ -87,14 +87,14 @@ public class ListOrderCommandTest {
 
     @Test
     public void equals() {
-        ListOrderCommand listOrderOfFirstPersonCommand = new ListOrderCommand(INDEX_FIRST_PERSON);
-        ListOrderCommand listOrderOfSecondPersonCommand = new ListOrderCommand(INDEX_SECOND_PERSON);
+        ListOrderCommand listOrderOfFirstPersonCommand = new ListOrderCommand(INDEX_FIRST);
+        ListOrderCommand listOrderOfSecondPersonCommand = new ListOrderCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(listOrderOfFirstPersonCommand.equals(listOrderOfFirstPersonCommand));
 
         // same values -> returns true
-        ListOrderCommand listOrderOfFirstPersonCommandCopy = new ListOrderCommand(INDEX_FIRST_PERSON);
+        ListOrderCommand listOrderOfFirstPersonCommandCopy = new ListOrderCommand(INDEX_FIRST);
         assertTrue(listOrderOfFirstPersonCommand.equals(listOrderOfFirstPersonCommandCopy));
 
         // different types -> returns false

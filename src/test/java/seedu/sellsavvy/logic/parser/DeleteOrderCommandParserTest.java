@@ -3,7 +3,7 @@ package seedu.sellsavvy.logic.parser;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ public class DeleteOrderCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteOrderCommand(INDEX_FIRST_ORDER));
+        assertParseSuccess(parser, "1", new DeleteOrderCommand(INDEX_FIRST));
     }
 
     @Test

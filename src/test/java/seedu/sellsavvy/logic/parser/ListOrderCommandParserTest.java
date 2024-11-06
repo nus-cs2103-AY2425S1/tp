@@ -2,7 +2,7 @@ package seedu.sellsavvy.logic.parser;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class ListOrderCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsListOrderCommand() {
-        assertParseSuccess(parser, "1", new ListOrderCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new ListOrderCommand(INDEX_FIRST));
     }
 
     @Test
