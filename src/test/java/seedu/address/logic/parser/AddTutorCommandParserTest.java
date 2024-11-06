@@ -56,7 +56,6 @@ public class AddTutorCommandParserTest {
                 + ADDRESS_DESC_BOB + HOURS_DESC_BOB, new AddTutorCommand(expectedTutor));
 
 
-        // multiple tags - all accepted
         Tutor expectedTutorMultipleTags = new TutorBuilder(BOB).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + HOURS_DESC_BOB,
@@ -143,7 +142,7 @@ public class AddTutorCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // zero subjects
         Tutor expectedPerson = new TutorBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + HOURS_DESC_AMY, new AddTutorCommand(expectedPerson));
