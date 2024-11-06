@@ -50,7 +50,7 @@ public class JobTest {
         editedSwe = new JobBuilder(SWE).withCompany(VALID_JOB_COMPANY_BARISTA).build();
         assertFalse(SWE.isSameJob(editedSwe));
 
-        // name differs in case, all other attributes same -> returns trye
+        // name differs in case, all other attributes same -> returns true
         Job editedBarista = new JobBuilder(BARISTA).withName(VALID_JOB_NAME_BARISTA.toLowerCase()).build();
         assertTrue(BARISTA.isSameJob(editedBarista));
 
