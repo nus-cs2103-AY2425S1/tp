@@ -108,7 +108,7 @@ Format: `clear`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
 <br>
-**This command deletes all the clients from Clientele+, archived or otherwise. This cannot be undone. If you are using this command, be very sure that you know what you are doing!**
+**This command deletes all the clients from Clientele+, archived or otherwise. This cannot be undone.** If you are using this command, be very sure that you know what you are doing!
 
 </div>
 
@@ -128,7 +128,7 @@ You can also exit the program by clicking the "x" at the top left corner of the 
 ## Client Management
 ### Add Client Details: `add`
 
-Add a client to Clientele+, including details such as client name, contact information, project deadline, project status, payment status and client status. Accepted values are as specified in the [accepted values table above](#accepted-values-by-parameter).
+Add a client to Clientele+, including details such as client name, contact information, project deadline, project status, payment status and client status. Accepted values are as specified in the [accepted values table above](#accepted-values-by-field).
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
@@ -154,7 +154,7 @@ Examples:
 
 ### Update Client Details: `edit`
 
-Allows updating of various statuses of an existing client. Accepted values are as specified in the [accepted values table above](#accepted-values-by-parameter).
+Allows updating of various statuses of an existing client. Accepted values are as specified in the [accepted values table above](#accepted-values-by-field).
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DEADLINE]
 [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
@@ -181,7 +181,7 @@ If a client's project deadline has passed and the client status is still `active
 
 ### Locating Clients: `find`
 
-Finds persons in client list who match parameters specified.
+Finds persons in client list who match parameters specified. Accepted values are as specified in the [accepted values table above](#accepted-values-by-field).
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
@@ -222,7 +222,7 @@ Deletes the specified person from Clientele+.
 Format: `delete [n/NAME] [id/INDEX]`
 
 * Deletes clients identified by the specified `INDEX` or `NAME`.
-* `NAME` Acceptable values are same as ialways; the command looks for an **exact, case-insensitive** match in the name
+* `NAME` Acceptable values are same as [above](#accepted-values-by-field); the command looks for an **exact, case-insensitive** match in the name
   * Ex: `delete n/John` will match `john`, `JOHN` and `John`, but not `John Doe`.
 * `INDEX` refers to the index number shown in the displayed person list, and **must be a positive integer** 1, 2, 3, …​
 
@@ -373,8 +373,8 @@ Data of archived clients is saved automatically as a separate JSON file `[JAR fi
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
 <br>
-If your changes to the data file makes its format invalid, Clientele+ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the Clientele+ to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, **Clientele+ will discard all data and start with an empty data file at the next run.** Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, **certain edits can cause the Clientele+ to behave in unexpected ways** (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </div>
 
