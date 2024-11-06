@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a client to Client Hub.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE…​`
 
 A **valid** `NAME` should:
 * Not be empty.
@@ -106,6 +106,14 @@ A **valid** `ADDRESS` should:
 * Can only have one address.
     * For eg. Typing `a/John street, block 123, #01-01 a/John street, block 123, #01-02` will throw an error.
 
+A **valid** `DESCRIPTION` should:
+* Not be empty.
+  * For eg. Just typing `d/` without providing any `DESCRIPTION` will throw an error.
+  * Be limited to 500 characters
+  * For eg. Typing `d/Imagine this is a very long description that is more than 500 characters long` will throw an error.
+* Can only have one description.
+  * For eg. Typing `d/likes bubble tea d/likes bubble tea` will throw an error.
+
 A **valid** `CLIENT_TYPE` should:
 * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
     * `CLIENT_TYPE` will always be in alphanumeric format.
@@ -113,20 +121,14 @@ A **valid** `CLIENT_TYPE` should:
     * For eg. Just typing `c/` without providing any `CLIENT_TYPE` will throw an error.
 * Can have multiple client types.
     * For eg. Typing `c/Plan A c/Plan B` is valid.
-
-A **valid** `DESCRIPTION` should:
-* Not be empty.
-    * For eg. Just typing `d/` without providing any `DESCRIPTION` will throw an error.
-    * Be limited to 500 characters
-    * For eg. Typing `d/Imagine this is a very long description that is more than 500 characters long` will throw an error.
-* Can only have one description.
-    * For eg. Typing `d/likes bubble tea d/likes bubble tea` will throw an error.
+* Not have duplicates.
+    * For eg. Typing `c/Plan A c/Plan A` will combine the client types into `Plan A`.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/Investment d/likes bubble tea`
-* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town c/Investment c/Healthcare d/Loves travelling`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01  d/likes bubble tea c/Investment`
+* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town d/Loves travelling c/Investment c/Healthcare `
 
-Result for `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/Investment d/likes bubble tea`:
+Result for `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/likes bubble tea c/Investment`:
 ![result for 'add'](images/result_for_add.png)
 
 
@@ -134,7 +136,7 @@ Result for `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 1
 
 Edits an existing client in  Client Hub.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/CLIENT_TYPE]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/CLIENT_TYPE]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -245,17 +247,20 @@ Result for `find a/tampines`:
 
 
 #### Locating by `CLIENT_TYPE` 
-Format: `find c/CLIENT_TYPE` or `fc CLIENT_TYPE`
+Format: `find c/CLIENT_TYPE…​` or `fc CLIENT_TYPE…​`
 * The search is case-insensitive. e.g `investment` will match `Investment`
 * Only the `CLIENT_TYPE` of the person is searched.
 * Clients whose `CLIENT_TYPE` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
 * Client with `CLIENT_TYPE` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
+* Duplicate `CLIENT_TYPE` will be combined into 1 (No way to have duplicate client types showing)
 
 A **valid** `CLIENT_TYPE` should:
 * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
     * `client_type` will always be in alphanumeric format.
 * Not be empty.
     * For eg. Just typing `find c/` without providing any `CLIENT_TYPE` will throw an error.
+* Not have duplicates.
+    * For eg. Typing `c/Plan A c/Plan A` will combine the client types into `Plan A`.
 
 Examples:
 * `find c/Investment` returns every contact that has a `client_type` beginning with `Investment`
