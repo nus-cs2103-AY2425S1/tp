@@ -631,7 +631,7 @@ Command Details & Constraints:
 ### 4.6 Saving the data
 <a id="saving-the-data"></a>
 
-TO BE DONE
+The data in the TrackMate application are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### 4.7 Editing the data file
 <a id="editing-the-data-file"></a>
