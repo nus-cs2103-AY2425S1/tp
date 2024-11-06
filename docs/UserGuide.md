@@ -6,7 +6,16 @@
 
 # KonTActs User Guide
 
-konTActs is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, konTActs can get your contact management tasks done faster than traditional GUI apps.
+KonTActs is a **desktop app for managing your contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+
+KonTActs streamlines contact management, helping you keep track of students, professors, and fellow TAs more effectively than traditional GUI apps.
+
+
+
+
+
+
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,14 +24,16 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
 ## Quick start
 
+To get started,
+
 1. Ensure you have Java `17` or above installed in your Computer. Refer [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html) for the specific version.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for KonTActs.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar KonTActs.jar` to run the application.<br>
+   A interface similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/loadingPageOfUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -30,7 +41,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
    * `list` : Lists all contacts.
 
-   * `add n/James Ho e/jamesho@example.com telegram/@James t/friend t/colleague github/james-cool` : Adds a contact named `James Ho` to the Address Book.
+   * `add n/James Ho e/jamesho@example.com telegram/@James t/friend t/colleague github/james-cool` : Adds a contact named `James Ho` to the KonTActs.
 
    * `delete n/James Ho` : Deletes the contact with name `James Ho` if it is shown in the current list.
 
@@ -73,8 +84,8 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the parameters supplied by you.<br>
+  e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -85,7 +96,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME telegram/TELEGRAM`, `telegram/TELEGRAM n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -112,12 +123,29 @@ A compact reference guide is also provided for quick reference.
 --------------------------------------------------------------------------------------------------------------------
 ### <i class="fa-solid fa-user-plus"></i> Adding a person: `add`
 
-Adds a person to KonTActs.
+Adds a person's contact detail to KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Format: `add n/NAME e/EMAIL telegram/TELEGRAM [t/TAG]…​ github/GITHUB`**</md>
 </box>
+
+<box type="warning" icon=":fa-solid-circle-exclamation:" light>
+
+<md>**Email restrictions**</md>
+Emails should be of the format `local-part@domain` and adhere to the following constraints:
+1. `local-part` should only contain alphanumeric characters and `+`, `_` , `.` , `-`. 
+2. `local-part` may not start or end with any special characters.
+3. This is followed by an `@` and then a `domain` name. The domain name is made up of domain labels separated by periods.
+The `domain name` must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+Eg. `t/friend t/family`
+
+</box>
+
 <box type="success" icon=":fa-solid-lightbulb:" light>
 
 A person can have any number of tags (including 0)
@@ -127,11 +155,18 @@ A person can have any number of tags (including 0)
 
 <md>**Tag restrictions**</md>
 * Tags must be a single word containing only alphanumeric characters (no spaces or special symbols are allowed).
-* To specify multiple tags, separate each tag with a space.
+* To specify multiple tags, separate each tag parameter with a space.
+
+Eg. `t/friend t/family`
 
 </box>
 
+<box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
+<md>**Telegram username restrictions**</md>
+* Usernames must start with an `@`, and can only contain underscores (`_`) and alphanumeric characters.
+
+</box>
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**GitHub username restrictions**</md>
@@ -325,7 +360,7 @@ Opens a window at the side with the full details of the specified person from th
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* View the full details of the selected contact.
+* View the full details of the contact you specify.
 * `NAME` refers to the full name of the person shown in the displayed person list.
 * Calling `view` without any name parameter closes any windows previously opened by `view`.
   </box>
@@ -353,16 +388,10 @@ Marks a student as present for a particular week.
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Marks the particular student as present in that week.
-* The full name and week number is compulsory.
-* The name is case-sensitive.
-* The range of the WEEK_NUMBER is between 0 and 13, both inclusive. Rationale being there are 13 weeks per semester.
+* The full name and week number is **compulsory**.
+* The name is **case-sensitive**.
+* The range of the WEEK_NUMBER is between 0 and 13, both inclusive. Rationale being there are 14 weeks per semester.
   </box>
-
-<box type="info">
-
-The update of the attendance will only be seen when [`view`](#viewing-a-contact-s-full-details-view) command is executed.
-
-</box>
 
 <box type="definition" icon=":fa-solid-book:" light>
 
@@ -386,15 +415,9 @@ Unmarks a student as present for a particular week.
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Unmarks the particular student as present in that week.
-* The full name and week number is compulsory.
-* The name is case-sensitive. 
-* The range of the WEEK_NUMBER is between 0 and 13, both inclusive. Rationale being there are 13 weeks per semester.
-</box>
-
-<box type="info">
-
-The update of the attendance will only be seen when [`view`](#viewing-a-contact-s-full-details-view) command is executed.
-
+* The full name and week number is **compulsory**.
+* The name is **case-sensitive**. 
+* The range of the WEEK_NUMBER is between 0 and 13, both inclusive. Rationale being there are 14 weeks per semester.
 </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -412,20 +435,24 @@ The update of the attendance will only be seen when [`view`](#viewing-a-contact-
 Sorts the displayed list based on the given field and order.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
-
 <md>**Format: `sort FIELD order/ORDER`**</md>
 
 <md>**Reset Format: `sort reset`**</md>
 
 </box>
 
+<box type="success" icon=":fa-solid-lightbulb:" light>
+
+Order of contact details can be reset to default by calling `sort reset`.
+</box>
+
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* Current FIELD that can be sorted by: `github`, `name`, `telegram`.
-* Current ORDER that is accepted: `asc`, `desc`.
-* The sort order will persist between commands.
+* `FIELD` that can be sorted by: `github`, `name`, `telegram`.
+* `ORDER` that is accepted: `asc`, `desc`.
+* The sort order persists between commands.
 * The sort order will reset when `sort reset` command is given.
-* The sorting is case-insensitive: upper and lower case are treated as the same values.
+* The sorting is **case-insensitive**: upper and lower case are treated as the same values.
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -444,7 +471,7 @@ Sorts the displayed list based on the given field and order.
 
 ### <i class="fa-solid fa-broom"></i> Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -453,7 +480,7 @@ Clears all entries from the address book.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <i class="fa-solid fa-file-import"></i> Importing data from CSV file `import`
+### <i class="fa-solid fa-file-import"></i> Importing data from CSV file: `import`
 
 Imports contacts based on CSV file. Importing a file will replace ALL existing contacts
 
@@ -508,7 +535,7 @@ assignments are present for a person, separate them within the same entry using 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <i class="fa-solid fa-file-export"></i> Exporting data into CSV file `export`
+### <i class="fa-solid fa-file-export"></i> Exporting data into CSV file: `export`
 
 Exports contacts based on contacts and their details stored in KonTActs.
 
