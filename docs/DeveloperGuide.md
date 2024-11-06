@@ -253,7 +253,7 @@ The following sequence diagram shows how a find operation goes through the `Logi
 
 `FindCommandParser` parses the find string into `argMultimap` to pass to `Predicate Factory`, which produces the
 predicates to create a `FindCommand` object.
-![FindCommandParseSequence](images/FindCommandParseSequence.png))
+![FindCommandParseSequence](images/FindCommandParseSequence.png)
 
 `personPredicates` is of type `Predicate<Person>`
 
