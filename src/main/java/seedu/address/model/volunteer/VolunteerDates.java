@@ -85,8 +85,8 @@ public class VolunteerDates {
             date = date.replaceAll("\\s+", "");
             checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
             LocalDate dateToBeAdded = LocalDate.parse(date);
-            if (hasAvailableDate(dateToBeAdded) || !uniqueDates.add(dateToBeAdded)) {
-                throw new VolunteerDuplicateDateException(date);
+            if (!hasAvailableDate(dateToBeAdded) || !uniqueDates.add(dateToBeAdded)) {
+                throw new VolunteerDeleteMissingDateException(date);
             }
         }
 
