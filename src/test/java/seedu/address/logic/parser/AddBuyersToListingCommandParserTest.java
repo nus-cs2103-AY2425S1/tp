@@ -24,8 +24,7 @@ public class AddBuyersToListingCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        String userInput = AddBuyersToListingCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + VALID_LISTING_NAME + " "
+        String userInput = VALID_LISTING_NAME + " "
                 + PREFIX_BUYER + VALID_BUYER_NAME_1 + " "
                 + PREFIX_BUYER + VALID_BUYER_NAME_2;
 
@@ -41,7 +40,7 @@ public class AddBuyersToListingCommandParserTest {
 
     @Test
     public void parse_missingListingName_throwsParseException() {
-        String userInput = AddBuyersToListingCommand.COMMAND_WORD + " "
+        String userInput = AddBuyersToListingCommand.COMMAND_WORD
                 + PREFIX_BUYER + VALID_BUYER_NAME_1;
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyersToListingCommand.MESSAGE_USAGE);
 
@@ -68,8 +67,7 @@ public class AddBuyersToListingCommandParserTest {
 
     @Test
     public void parse_multipleBuyersPresent_success() throws Exception {
-        String userInput = AddBuyersToListingCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + VALID_LISTING_NAME + " "
+        String userInput = VALID_LISTING_NAME + " "
                 + PREFIX_BUYER + VALID_BUYER_NAME_1 + " "
                 + PREFIX_BUYER + VALID_BUYER_NAME_2;
 

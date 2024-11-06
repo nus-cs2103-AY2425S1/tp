@@ -6,7 +6,6 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -110,7 +109,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         Name invalidName = new Name("aaaaaaaaaaaaaaa");
-        String deleteCommand = "delete " + PREFIX_NAME + invalidName;
+        String deleteCommand = "delete " + invalidName;
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_INPUT);
     }
 

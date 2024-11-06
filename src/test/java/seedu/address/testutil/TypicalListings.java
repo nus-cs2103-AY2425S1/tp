@@ -76,7 +76,7 @@ public class TypicalListings {
     public static Listings getTypicalListings() {
         Listings listings = new Listings();
         for (Listing l : getTypicalPropertyListing()) {
-            listings.addListing(l);
+            listings.addListing(new Listing(l));
         }
         return listings;
     }

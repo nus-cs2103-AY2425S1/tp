@@ -1,30 +1,66 @@
+/* Root container styling (like VBox or StackPane containing all elements) */
+.root {
+    -fx-background-color: #121212; /* Ensure overall dark background */
+}
+
 #helpMessageContainer {
-    -fx-background-color: #121212;
+    -fx-background-color: #1E1E1E;
     -fx-padding: 15;
-    -fx-border-radius: 10;
+    -fx-border-color: #FFD700;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
 
 #helpMessage {
     -fx-text-fill: #FFD700;
     -fx-font-size: 16;
     -fx-font-family: 'Georgia';
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 0, 0);
 }
 
-#copyButton {
-    -fx-background-color: dimgray;
-    -fx-text-fill: white;
+/* Copy Button Styling - matches openBrowserButton */
+#copyButton, #openBrowserButton {
+    -fx-background-color: #FFD700; /* Updated to match */
+    -fx-text-fill: #121212;
     -fx-font-size: 14;
-    -fx-border-color: #FFD700;
+    -fx-font-weight: bold;
     -fx-border-radius: 5;
-    -fx-border-width: 2;
+    -fx-background-radius: 5;
     -fx-padding: 5 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(255,215,0,0.3), 6, 0, 0, 0);
 }
 
-#copyButton:hover {
-    -fx-background-color: gray;
+#copyButton:hover, #openBrowserButton:hover {
+    -fx-background-color: #FFC730;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(255,215,0,0.5), 8, 0, 0, 0);
 }
 
-#copyButton:armed {
-    -fx-background-color: darkgray;
+#copyButton:armed, #openBrowserButton:armed {
+    -fx-background-color: #FFB700;
+    -fx-effect: dropshadow(three-pass-box, rgba(255,215,0,0.2), 4, 0, 0, 0);
 }
 
+.text-area {
+    -fx-background-color: #1E1E1E;
+    -fx-text-fill: #FFD700;
+    -fx-font-family: "Consolas", "Monaco", monospace;
+    -fx-font-size: 14px;
+    -fx-border-color: #FFD700;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 8, 0, 0, 0);
+}
+
+.text-area .content {
+    -fx-background-color: #1E1E1E;
+    -fx-background-radius: 5;
+}
+
+.text-area:focused .content {
+    -fx-background-color: #2A2A2A;
+}

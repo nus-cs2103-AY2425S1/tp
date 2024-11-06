@@ -262,6 +262,20 @@ public class ModelManager implements Model {
                 .anyMatch(listing -> listing.getSeller().equals(seller));
     }
 
+    /**
+     * Checks if there are any listings associated with the specified {@code buyer}.
+     *
+     * @param buyer The seller whose listings are to be checked.
+     * @return {@code true} if there is at least one listing associated with the buyer;
+     *         {@code false} otherwise.
+     */
+    @Override
+    public boolean hasListingsForBuyer(Person buyer) {
+        requireNonNull(buyer);
+        return listings.getListingList().stream()
+                .anyMatch(listing -> listing.getBuyers().contains(buyer));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

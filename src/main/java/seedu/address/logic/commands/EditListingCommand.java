@@ -30,18 +30,18 @@ import seedu.address.model.person.Seller;
  */
 public class EditListingCommand extends Command {
 
-    public static final String COMMAND_WORD = "editListing";
+    public static final String COMMAND_WORD = "editlisting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the listing identified "
             + "by the listing name. Buyers cannot be edited using this command. "
-            + "Use addBuyersToListing or removeBuyersFromListing to manage buyers.\n"
-            + "Parameters: n/LISTING_NAME "
+            + "Use addlistingbuyers or removelistingbuyers to manage buyers.\n"
+            + "Parameters: LISTING_NAME "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PRICE + "PRICE] "
             + "[" + PREFIX_AREA + "AREA] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REGION + "REGION]...\n"
-            + "Example: " + COMMAND_WORD + " n/ListingName "
+            + "Example: " + COMMAND_WORD + " ListingName "
             + PREFIX_PRICE + "4500 "
             + PREFIX_AREA + "1200";
 

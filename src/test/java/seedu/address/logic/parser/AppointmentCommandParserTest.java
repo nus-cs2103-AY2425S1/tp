@@ -6,7 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +16,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Name;
 
 public class AppointmentCommandParserTest {
     private static final String VALID_DATE = "01-11-24";
@@ -24,18 +25,19 @@ public class AppointmentCommandParserTest {
     private static final String INVALID_DATE = "01/11/2024";
     private static final String INVALID_FROM = "9am";
     private static final String INVALID_TO = "10";
+    private static final Name VALID_NAME = ALICE.getName();
     private final AppointmentCommandParser parser = new AppointmentCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+        String userInput = ALICE.getName() + " "
                 + PREFIX_DATE + VALID_DATE + " "
                 + PREFIX_FROM + VALID_FROM + " "
                 + PREFIX_TO + VALID_TO;
 
         Appointment expectedAppointment = new Appointment(
                 new Date(VALID_DATE), new From(VALID_FROM), new To(VALID_TO));
-        AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON, expectedAppointment);
+        AppointmentCommand expectedCommand = new AppointmentCommand(ALICE.getName(), expectedAppointment);
 
         AppointmentCommand result = parser.parse(userInput);
         assertEquals(expectedCommand, result);
@@ -45,27 +47,36 @@ public class AppointmentCommandParserTest {
     public void parse_missingFields_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE);
 
+        // missing name
         assertThrows(ParseException.class, () -> parser.parse(
-                INDEX_FIRST_PERSON.getOneBased() + " "
+               PREFIX_DATE + VALID_DATE
+               + PREFIX_FROM + VALID_FROM
+               + PREFIX_TO + VALID_TO), expectedMessage);
+
+        // missing date
+        assertThrows(ParseException.class, () -> parser.parse(
+                VALID_NAME + " "
                         + PREFIX_FROM + VALID_FROM + " "
                         + PREFIX_TO + VALID_TO), expectedMessage);
 
+        // missing from
         assertThrows(ParseException.class, () -> parser.parse(
-                INDEX_FIRST_PERSON.getOneBased() + " "
+                VALID_NAME + " "
                         + PREFIX_DATE + VALID_DATE + " "
                         + PREFIX_TO + VALID_TO), expectedMessage);
 
+        // missing to
         assertThrows(ParseException.class, () -> parser.parse(
-                INDEX_FIRST_PERSON.getOneBased() + " "
+                VALID_NAME + " "
                         + PREFIX_DATE + VALID_DATE + " "
                         + PREFIX_FROM + VALID_FROM), expectedMessage);
     }
 
     @Test
-    public void parse_invalidIndex_failure() {
+    public void parse_invalidName_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE);
 
-        assertThrows(ParseException.class, () -> parser.parse("a "
+        assertThrows(ParseException.class, () -> parser.parse("$$" + " "
                 + PREFIX_DATE + VALID_DATE + " "
                 + PREFIX_FROM + VALID_FROM + " "
                 + PREFIX_TO + VALID_TO), expectedMessage);
@@ -73,7 +84,7 @@ public class AppointmentCommandParserTest {
 
     @Test
     public void parse_invalidDateFormat_failure() {
-        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+        String userInput = VALID_NAME + " "
                 + PREFIX_DATE + INVALID_DATE + " "
                 + PREFIX_FROM + VALID_FROM + " "
                 + PREFIX_TO + VALID_TO;
@@ -83,7 +94,7 @@ public class AppointmentCommandParserTest {
 
     @Test
     public void parse_invalidFromFormat_failure() {
-        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+        String userInput = VALID_NAME + " "
                 + PREFIX_DATE + VALID_DATE + " "
                 + PREFIX_FROM + INVALID_FROM + " "
                 + PREFIX_TO + VALID_TO;
@@ -93,7 +104,7 @@ public class AppointmentCommandParserTest {
 
     @Test
     public void parse_invalidToFormat_failure() {
-        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+        String userInput = VALID_NAME + " "
                 + PREFIX_DATE + VALID_DATE + " "
                 + PREFIX_FROM + VALID_FROM + " "
                 + PREFIX_TO + INVALID_TO;

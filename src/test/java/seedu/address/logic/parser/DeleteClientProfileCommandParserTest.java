@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteClientProfileCommand;
 
 public class DeleteClientProfileCommandParserTest {
@@ -17,17 +16,18 @@ public class DeleteClientProfileCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, PREFIX_NAME + "Alice Pauline", new DeleteClientProfileCommand(ALICE.getName()));
+        assertParseSuccess(parser, "Alice Pauline", new DeleteClientProfileCommand(ALICE.getName()));
     }
 
     @Test
     public void parse_missingField_throwsParseException() {
-        assertParseFailure(parser, PREFIX_NAME.toString(), Messages.MISSING_CLIENT_NAME);
+        assertParseFailure(parser, PREFIX_NAME.toString(), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteClientProfileCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "$$", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteClientProfileCommand.MESSAGE_USAGE));
     }
 }

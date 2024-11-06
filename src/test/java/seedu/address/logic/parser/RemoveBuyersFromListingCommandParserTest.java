@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,8 +24,7 @@ public class RemoveBuyersFromListingCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        String userInput = RemoveBuyersFromListingCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + VALID_LISTING_NAME + " "
+        String userInput = VALID_LISTING_NAME + " "
                 + PREFIX_BUYER + VALID_BUYER_NAME_1 + " "
                 + PREFIX_BUYER + VALID_BUYER_NAME_2;
 
@@ -40,8 +40,7 @@ public class RemoveBuyersFromListingCommandParserTest {
 
     @Test
     public void parse_multipleBuyers_success() throws Exception {
-        String userInput = RemoveBuyersFromListingCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + VALID_LISTING_NAME + " "
+        String userInput = VALID_LISTING_NAME + " "
                 + PREFIX_BUYER + VALID_BUYER_NAME_1 + " "
                 + PREFIX_BUYER + VALID_BUYER_NAME_2;
 
@@ -52,12 +51,12 @@ public class RemoveBuyersFromListingCommandParserTest {
                 new Name(VALID_LISTING_NAME), expectedBuyerNames);
 
         RemoveBuyersFromListingCommand result = parser.parse(userInput);
-        assertEquals(expectedCommand, result);
+        assertTrue(expectedCommand.equals(result));
     }
 
     @Test
     public void parse_missingListingName_throwsParseException() {
-        String userInput = RemoveBuyersFromListingCommand.COMMAND_WORD + " "
+        String userInput = RemoveBuyersFromListingCommand.COMMAND_WORD
                 + PREFIX_BUYER + VALID_BUYER_NAME_1;
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveBuyersFromListingCommand.MESSAGE_USAGE));

@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,16 +17,10 @@ public class AddBuyersToListingCommandParser implements Parser<AddBuyersToListin
 
     @Override
     public AddBuyersToListingCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_BUYER);
-
-        // Check if the listing name (n/) is present
-        if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddBuyersToListingCommand.MESSAGE_USAGE));
-        }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BUYER);
 
         // Parse listing name
-        Name listingName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name listingName = ParserUtil.parseName(argMultimap.getPreamble());
 
         // Parse buyer names with the "buyer/" prefix
         Set<Name> buyerNames = new HashSet<>();

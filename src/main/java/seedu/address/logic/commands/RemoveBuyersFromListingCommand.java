@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class RemoveBuyersFromListingCommand extends Command {
 
-    public static final String COMMAND_WORD = "removeBuyersFromListing";
+    public static final String COMMAND_WORD = "removelistingbuyers";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes buyers from the listing identified by its "
             + "name. "

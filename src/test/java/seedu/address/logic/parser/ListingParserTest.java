@@ -38,25 +38,25 @@ public class ListingParserTest {
     @Test
     public void parseCommand_editListing() throws Exception {
         Command command =
-                parser.parseCommand("editListing n/Kent Ridge Condo n/Kent Ridge HDB");
+                parser.parseCommand("editlisting Kent Ridge Condo n/Kent Ridge HDB");
         assertEquals(EditListingCommand.class, command.getClass());
     }
 
     @Test
     public void parseCommand_deleteListing() throws Exception {
-        Command command = parser.parseCommand("deleteListing n/Wartion House");
+        Command command = parser.parseCommand("deletelisting Wartion House");
         assertEquals(DeleteListingCommand.class, command.getClass());
     }
 
     @Test
     public void parseCommand_clearListing() throws Exception {
-        Command command = parser.parseCommand("clearListings");
+        Command command = parser.parseCommand("clearlistings");
         assertEquals(ClearListingCommand.class, command.getClass());
     }
 
     @Test
     public void parseCommand_findListing() throws Exception {
-        Command command = parser.parseCommand("findListings n/Warton Riverdale");
+        Command command = parser.parseCommand("findlisting Warton Riverdale");
         assertEquals(FindListingCommand.class, command.getClass());
     }
 
@@ -69,14 +69,14 @@ public class ListingParserTest {
     @Test
     public void parseCommand_addBuyersToListing() throws Exception {
         Command command =
-                parser.parseCommand("addBuyersToListing n/Warton House buyer/John Doe");
+                parser.parseCommand("addlistingbuyers Warton House buyer/John Doe");
         assertEquals(AddBuyersToListingCommand.class, command.getClass());
     }
 
     @Test
     public void parseCommand_removeBuyersFromListing() throws Exception {
         Command command =
-                parser.parseCommand("removeBuyersFromListing n/Warton House buyer/John Doe");
+                parser.parseCommand("removelistingbuyers Warton House buyer/John Doe");
         assertEquals(RemoveBuyersFromListingCommand.class, command.getClass());
     }
 
@@ -88,7 +88,7 @@ public class ListingParserTest {
 
     @Test
     public void parseCommand_invalidFormat_throwsParseException() {
-        String invalidCommand = "editListing";
+        String invalidCommand = "editlisting";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parseCommand(invalidCommand));
         assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE),
                 thrown.getMessage());

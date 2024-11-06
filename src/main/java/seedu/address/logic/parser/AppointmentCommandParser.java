@@ -8,14 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new AppointmentCommandParser object
@@ -30,12 +29,11 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_FROM, PREFIX_TO);
-        Index index;
+        Name name;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE),
-                    ive);
+            name = ParserUtil.parseName(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_FROM, PREFIX_TO)) {
@@ -46,7 +44,7 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         From from = ParserUtil.parseFrom(argMultimap.getValue(PREFIX_FROM).get());
         To to = ParserUtil.parseTo(argMultimap.getValue(PREFIX_TO).get());
-        return new AppointmentCommand(index, new Appointment(date, from, to));
+        return new AppointmentCommand(name, new Appointment(date, from, to));
     }
 
     /**

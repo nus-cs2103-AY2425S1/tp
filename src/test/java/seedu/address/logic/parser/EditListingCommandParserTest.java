@@ -29,8 +29,7 @@ public class EditListingCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        String userInput = EditListingCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + VALID_LISTING_NAME_ONE + " "
+        String userInput = VALID_LISTING_NAME_ONE + " "
                 + PREFIX_NAME + VALID_LISTING_NAME_TWO + " "
                 + PREFIX_PRICE + VALID_PRICE + " "
                 + PREFIX_AREA + VALID_AREA + " "
@@ -55,8 +54,7 @@ public class EditListingCommandParserTest {
 
     @Test
     public void parse_partialFieldsPresent_success() throws Exception {
-        String userInput = EditListingCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + VALID_LISTING_NAME_ONE + " "
+        String userInput = VALID_LISTING_NAME_ONE + " "
                 + PREFIX_PRICE + VALID_PRICE;
 
         EditListingDescriptor descriptor = new EditListingDescriptor();
@@ -71,7 +69,7 @@ public class EditListingCommandParserTest {
 
     @Test
     public void parse_missingListingName_throwsParseException() {
-        String userInput = EditListingCommand.COMMAND_WORD + " "
+        String userInput = EditListingCommand.COMMAND_WORD
                 + PREFIX_PRICE + VALID_PRICE;
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
@@ -80,7 +78,7 @@ public class EditListingCommandParserTest {
     @Test
     public void parse_noFieldsEdited_throwsParseException() {
         String userInput = EditListingCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + VALID_LISTING_NAME_ONE;
+                + VALID_LISTING_NAME_ONE;
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 EditListingCommand.MESSAGE_NOT_EDITED);
     }
