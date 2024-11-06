@@ -12,9 +12,7 @@ designed to allow easy and efficient management of dormitory resident details wi
 Created for busy university dorm managers looking to increase their efficiency, DorManagerPro provides unique features to streamline
 the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
 
-
-> [!Tip]
-> If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
+**Note:** If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
 
 
 <!-- * Table of Contents -->
@@ -26,22 +24,20 @@ the process of accessing and updating resident student details. What's more, Dor
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-4/tp/releases/).
+1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-3. Locate the `.jar` file in your computer. Typically, this will be in the `Downloads` folder. 
-> [!Tip]
-> You may wish to copy the `.jar` file to the folder you want to use as the _home folder_ for DorManagerPro. All the files needed to run DorManagerPro will be created within the home folder.
+1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Double click the `.jar` file to run it. Alternatively, open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
-and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following UI.<br>
-![Ui](images/TemplateUi.png)
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/TemplateUi.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -49,7 +45,7 @@ and type `java -jar DorManagerPro.jar` to run the application. After a few secon
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -90,16 +86,29 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
-<box type="tip" seamless>
+> [!Note]
+> * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
+> * A person can have up to 10 tags.
+> * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
+> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `EMAIL` should be of the format local-part@domain
+> * Refer to (TO BE IMPLEMENTED?) for more details on accepted values for each field.
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+> [!Warning]
+> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
+> (TO BE DECIDED WHETHER TO ALLOW DUPLICATE NAMES AND EMAILS)
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/Resident Assistant e/betsycrowe@example.com a/Newgate Street p/1234567 t/Floor 1`
+
+Examples of usage:
+
+Execute `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+
+![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
 
 ### Listing all persons : `list`
 
@@ -176,6 +185,9 @@ Format: `clear`
 Removes all graduated students from the address book based on the current year and their graduation year.
 
 Format: `clean`
+
+> [!Tip]
+> If you mistakenly entered this command, you can undo it with the `undo` command. See [Undo](#undoing-the-previous-command--undo) for details!
 
 Examples of usage:
 
