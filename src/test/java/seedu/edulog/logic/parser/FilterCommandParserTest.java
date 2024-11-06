@@ -3,7 +3,9 @@ package seedu.edulog.logic.parser;
 import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.edulog.logic.commands.FilterCommand;
 import seedu.edulog.model.student.StudentHasPaidPredicate;
 
