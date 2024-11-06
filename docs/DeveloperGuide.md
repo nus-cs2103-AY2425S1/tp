@@ -1074,6 +1074,26 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+### Adding EcName for a student
+
+1. Adding EcName for a student in the list
+
+    1. Prerequisites: List must not be empty, student for which EcName is added should already be in the list.
+
+    2. Test case: `addEcName 1 en/Sally Ho`<br>
+       Expected: First student will have his emergency contact name added. Name and emergency contact name will be shown in the status message.
+
+    3. Test case: `addEcName 1 en/`<br>
+       Expected: First student will have his emergency contact name deleted. Name of student with the emergency contact name deleted will be shown in the status message.
+
+    4. Test case: `addEcName 1 en/John Doe`<br>
+       Expected: First student's emergency contact name will be updated to "John Doe". Name and emergency contact name will be shown in the status message.
+
+    5. Other incorrect addEcName commands to try: `addEcName`, `addEcName hhhh en/Jack`<br>
+       Expected: An error message is shown which includes the correct format of the addEcName command to follow. 
+   
+2. _{ more test cases …​ }_
+
 ### Adding EcNumber for a student
 
 1. Adding EcNumber for a student in the list
@@ -1253,6 +1273,32 @@ testers are expected to do more *exploratory* testing.
        `deleteSubmission sm/`<br>
        `deleteSubmission sm/#@*`<br>
        Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Filtering students
+
+1. Filters all students currently in the list based on the specified attribute and predicate 
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `filter n/John`<br>
+       Expected: Returns the students in the list who have John in their name. Confirmation message is shown in the status message, including the number of persons filtered.
+
+    3. Test case: `filter n/John Park`<br>
+       Expected: Returns the students in the list who have John OR Park in their name. Confirmation message is shown in the status message, including the number of persons filtered.
+
+    4. Test case: `filter n/John Park p/99999999 92929292`<br>
+       Expected: Returns the students in the list who match at least one name and one phone number. Confirmation message is shown in the status message, including the number of persons filtered.
+
+    5. Test case: `filter hhh`<br>
+       Expected: Filtering does not occur and an error message is depicted to show the correct format of the filter command.
+
+    6. Test case: `filter n/`<br>
+       Expected: Filtering does not occur and an error message is depicted to assert that the predicate values cannot be empty.
+
+    7. Other incorrect sort commands to try: `filter n`, `filter n/ p/`<br>
+       Expected: Similar to previous
 
 2. _{ more test cases …​ }_
 
