@@ -66,6 +66,7 @@ public class AddLessonCommand extends LessonCommand {
         Person updatedPerson = addLessonsToPerson(personToUpdate, successfulAdditions);
         model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateLastViewedPerson(updatedPerson);
 
         String resultMessage = generateResultMessage(personToUpdate, successfulAdditions, failureMessages);
         return new CommandResult(resultMessage);
