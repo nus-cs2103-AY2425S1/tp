@@ -25,6 +25,10 @@ public class Bookmark {
     public boolean getIsBookmarkValue() {
         return this.isBookmark;
     }
+    
+    public String prettyString() {
+        return isBookmark ? "Bookmarked" : "Not bookmarked";
+    }
 
     @Override
     public String toString() {
