@@ -98,12 +98,13 @@ Action     | Format, Examples
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message with a clickable hyperlink.
+
+When clicked, this hyperlink will show the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -159,10 +160,15 @@ Format:
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+How `find` works with multiple parameters:
+* If multiple keywords for a field are present, `find` will display contacts that satisfy *any* keyword for that field.
+* If multiple fields are present, `find` will display contacts that satisfy **all** of these fields.
+
 Examples:
-* `find n/John` returns `johnathon` and `John Doe`
-* `find n/bernice t/floor` returns `Bernice Yu` and all contacts with tags containing `floor`<br>
-  ![result for 'find n/bernice t/floor'](images/findBerniceFloorResult.png)
+* `find n/bernice t/is1108` returns `Bernice Yu`<br>
+  ![result for 'find n/bernice t/is1108'](images/findBerniceIS1108Result.png)
+* `find t/floor t/run` returns all contacts with any tag containing `floor` or `run` <br>
+  ![result for 'find t/floor t/run'](images/findFloorRunResult.png)
 
 ### Deleting a person : `delete`
 
