@@ -16,6 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -149,6 +150,10 @@ public class CommandTestUtil {
             LocalDate.parse(VALID_DATE_APPOINTMENT, DATE_FORMATTER),
             LocalTime.parse(VALID_START_TIME_APPOINTMENT, TIME_FORMATTER));
 
+    public static final String VALID_STATUS_COMPLETED = "COMPLETED";
+    public static final String VALID_STATUS_PENDING = "PENDING";
+    public static final String INVALID_STATUS_CANCELLED = "CANCELLED";
+
     public static final String INVALID_DATE_APPOINTMENT = "2025/10/10"; // Invalid date format in YYYY/MM/DD format
     public static final String VALID_END_TIME_APPOINTMENT = "11:00"; // Example end time in HH:mm format
 
@@ -180,6 +185,11 @@ public class CommandTestUtil {
 
     public static final String INVALID_DATE_DESC_APPOINTMENT = " " + PREFIX_DATE
             + INVALID_DATE_APPOINTMENT; // Invalid date format in YYYY/MM/DD format
+
+    public static final String VALID_STATUS_COMPLETED_DESC = " " + PREFIX_STATUS + VALID_STATUS_COMPLETED;
+    public static final String VALID_STATUS_PENDING_DESC = " " + PREFIX_STATUS + VALID_STATUS_PENDING;
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + INVALID_STATUS_CANCELLED;
+    public static final String INVALID_STATUS_DESC_NULL = " " + PREFIX_STATUS;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withNric(VALID_NRIC_AMY)

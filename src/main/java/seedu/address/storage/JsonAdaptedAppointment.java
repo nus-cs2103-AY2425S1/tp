@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Status;
 import seedu.address.model.person.Nric;
 
 
@@ -22,6 +23,7 @@ class JsonAdaptedAppointment {
     private final String startTime;
     private final String endTime;
     private final boolean isCompleted;
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedAppointment} with the given appointment details.
@@ -32,12 +34,14 @@ class JsonAdaptedAppointment {
             @JsonProperty("nric") String nric,
             @JsonProperty("startTime") String startTime,
             @JsonProperty("endTime") String endTime,
-            @JsonProperty("isCompleted") boolean isCompleted) {
+            @JsonProperty("isCompleted") boolean isCompleted,
+            @JsonProperty("status") String status) {
         this.name = name;
         this.nric = nric;
         this.startTime = startTime;
         this.endTime = endTime;
         this.isCompleted = isCompleted;
+        this.status = status;
     }
 
     /**
@@ -49,6 +53,7 @@ class JsonAdaptedAppointment {
         startTime = source.getStartTime().toString();
         endTime = source.getEndTime().toString();
         isCompleted = source.isCompleted();
+        status = source.getStatus().toString();
     }
 
     /**
@@ -83,7 +88,13 @@ class JsonAdaptedAppointment {
             throw new IllegalValueException("End time cannot be before start time.");
         }
 
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Status"));
+        }
+
+        Status status = Status.valueOf(this.status);
+
         // Use the new constructor that accepts isCompleted as a parameter
-        return new Appointment(name, modelNric, modelStartTime, modelEndTime, isCompleted);
+        return new Appointment(name, modelNric, modelStartTime, modelEndTime, isCompleted, status);
     }
 }
