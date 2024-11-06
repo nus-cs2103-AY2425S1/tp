@@ -162,6 +162,37 @@ Notes:
 * COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
 * COURSE_NAME must only contain alphanumeric characters or spaces
 
+### Enrolling a student : `enroll`
+
+Enrolls a student in a particular course and tutorial group.
+
+Format: `enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`
+
+Examples:
+* enroll m/A1234567Y c/CS1101S tut/T12
+* enroll m/A1262929T c/CS2030 tut/T08
+
+Notes:
+* MATRICULATION_NUMBER must be a valid NUS matriculation number in the form AXXXXXXXB, where A is the fixed as A, B is any uppercase character, and XXXXXXX is any 7 integers.
+* COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
+* TUTORIAL_ID should be in the form TXX, where T is fixed as T, while XX is a 2 digit integer from 01 to 99.
+* Students already enrolled in this course and tutorial cannot be enrolled again
+
+### Unenrolling a student : `unenroll`
+
+Unenrolls a student from a particular course and tutorial group that he/she is in
+
+Format: `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`
+
+Examples:
+* unenroll m/A1234567Y c/CS1101S tut/T12
+* unenroll m/A1262929T c/CS2030 tut/T08
+
+Notes:
+* MATRICULATION_NUMBER must be a valid NUS matriculation number in the form AXXXXXXXB, where A is the fixed as A, B is any uppercase character, and XXXXXXX is any 7 integers.
+* COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
+* TUTORIAL_ID should be in the form TXX, where T is fixed as T, while XX is a 2 digit integer from 01 to 99.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
