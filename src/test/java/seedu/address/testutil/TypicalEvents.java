@@ -52,6 +52,14 @@ public class TypicalEvents {
             .withVolunteers(getPersonSet(TypicalPersons.ELLE))
             .build();
 
+    public static final Event EMPTY_EVENT = new EventBuilder().withName("Event to be filled").build();
+    public static final Event FILLED_EVENT = new EventBuilder().withName("Event to be filled")
+            .withAttendees(getPersonSet(TypicalPersons.ALICE, TypicalPersons.FIONA))
+            .withVendors(getPersonSet(TypicalPersons.DANIEL, TypicalPersons.GEORGE))
+            .withSponsors(getPersonSet(TypicalPersons.BENSON, TypicalPersons.CARL))
+            .withVolunteers(getPersonSet(TypicalPersons.ELLE))
+            .build();
+
 
     private TypicalEvents() {} // prevents instantiation
 

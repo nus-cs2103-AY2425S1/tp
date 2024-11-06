@@ -13,9 +13,10 @@ import seedu.address.model.event.EventManager;
  */
 public class ExitSearchModeCommand extends Command {
     public static final String COMMAND_WORD = "exitsearch";
+    public static final String COMMAND_WORD_SHORT_FORM = "es";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits search mode.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + ": Exits "
+            + "search mode.\nExample: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Exited search mode.";
 

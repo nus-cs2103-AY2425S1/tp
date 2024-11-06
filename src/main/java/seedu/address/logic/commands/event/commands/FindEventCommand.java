@@ -26,7 +26,7 @@ public class FindEventCommand extends Command {
             + "index number used in the event list.\n"
             + "e.g. view 1";
 
-    public static final String MESSAGE_SUCCESS = "Viewing event: %1$s";
+    public static final String MESSAGE_SUCCESS = "Listing contacts of event: %1$s";
 
     private final Index targetIndex;
 

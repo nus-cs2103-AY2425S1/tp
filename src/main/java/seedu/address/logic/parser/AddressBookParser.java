@@ -21,6 +21,7 @@ import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
+import seedu.address.logic.commands.event.commands.EventAddAllCommand;
 import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.commands.searchmode.CheckExcludedCommand;
@@ -36,6 +37,7 @@ import seedu.address.logic.parser.contact.parser.FindNameCommandParser;
 import seedu.address.logic.parser.contact.parser.FindRoleCommandParser;
 import seedu.address.logic.parser.event.parser.AddPersonToEventParser;
 import seedu.address.logic.parser.event.parser.DeleteEventCommandParser;
+import seedu.address.logic.parser.event.parser.EventAddAllCommandParser;
 import seedu.address.logic.parser.event.parser.FindEventCommandParser;
 import seedu.address.logic.parser.event.parser.NewEventCommandParser;
 import seedu.address.logic.parser.event.parser.RemovePersonFromEventParser;
@@ -107,6 +109,7 @@ public class AddressBookParser {
             return new NewEventCommandParser().parse(arguments);
 
         case InitSearchModeCommand.COMMAND_WORD:
+        case InitSearchModeCommand.COMMAND_WORD_SHORT_FORM:
             return new InitSearchModeCommand();
 
         case FindEventCommand.COMMAND_WORD:
@@ -151,6 +154,7 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
         switch (commandWord) {
         case ExitSearchModeCommand.COMMAND_WORD:
+        case ExitSearchModeCommand.COMMAND_WORD_SHORT_FORM:
             return new ExitSearchModeCommand();
         case SearchModeSearchCommand.COMMAND_WORD:
             return new SearchModeSearchCommandParser().parse(arguments);
@@ -164,9 +168,12 @@ public class AddressBookParser {
             return new CheckExcludedCommand();
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+        case EventAddAllCommand.COMMAND_WORD:
+            return new EventAddAllCommandParser().parse(arguments);
         default:
             throw new ParseException(
-                    MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse only search, exitsearch or exit");
+                    MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse only search, exitsearch (es), "
+                            + "add-all or exit");
         }
     }
 

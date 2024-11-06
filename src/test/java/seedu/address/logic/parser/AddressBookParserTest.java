@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.SPORTS_FESTIVAL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -34,7 +33,7 @@ import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
-import seedu.address.logic.commands.event.commands.FindEventCommand;
+import seedu.address.logic.commands.event.commands.EventAddAllCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.commands.searchmode.CheckExcludedCommand;
 import seedu.address.logic.commands.searchmode.ClearExcludedCommand;
@@ -154,35 +153,43 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseFindRoleCommand_searchModeSearchCommand() throws ParseException {
+    public void parseSearchModeCommand_searchModeSearchCommand() throws ParseException {
         Command expected = new SearchModeSearchCommand(new NameContainsKeywordsPredicate(Arrays.asList("Amy")));
         assertEquals(expected, new AddressBookParser()
                 .parseSearchModeCommand(SearchModeSearchCommand.COMMAND_WORD + " n/Amy"));
     }
 
     @Test
-    public void parseFindRoleCommand_exitSearchModeCommand() throws ParseException {
+    public void parseSearchModeCommand_exitSearchModeCommand() throws ParseException {
         Command expected = new ExitSearchModeCommand();
         assertEquals(expected, new AddressBookParser()
                 .parseSearchModeCommand(ExitSearchModeCommand.COMMAND_WORD));
     }
     @Test
-    public void parseFindRoleCommand_exitCommand() throws ParseException {
+    public void parseSearchModeCommand_exitCommand() throws ParseException {
         Command expected = new ExitCommand();
         assertEquals(expected, new AddressBookParser()
                 .parseSearchModeCommand(ExitCommand.COMMAND_WORD));
     }
 
     @Test
-    public void parseFindRoleCommand_unrecognisedInput_throwsParseException() {
+    public void parseSearchModeCommand_eventAddAllCommand() throws ParseException {
+        Command expected = new EventAddAllCommand(INDEX_FIRST_EVENT);
+        assertEquals(expected, new AddressBookParser()
+                .parseSearchModeCommand(EventAddAllCommand.COMMAND_WORD + " 1"));
+    }
+
+    @Test
+    public void parseSearchModeCommand_emptyInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 HelpCommand.MESSAGE_USAGE), () -> parser.parseSearchModeCommand(""));
     }
 
-    public void parseCommand_viewEvent() throws ParseException {
-        Command expected = new FindEventCommand(INDEX_FIRST_EVENT);
-        assertEquals(expected, new AddressBookParser()
-                .parseCommand(FindEventCommand.COMMAND_WORD + " " + SPORTS_FESTIVAL.getName()));
+    @Test
+    public void parseSearchModeCommand_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse "
+                + "only search, exitsearch (es), add-all or exit", () ->
+                parser.parseSearchModeCommand("random"));
     }
 
     @Test
@@ -207,12 +214,6 @@ public class AddressBookParserTest {
         Command expected = new HelpCommand();
         assertEquals(expected, new AddressBookParser()
                 .parseSearchModeCommand(HelpCommand.COMMAND_WORD));
-    }
-
-    @Test
-    public void parseSearchModeCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                HelpCommand.MESSAGE_USAGE), () -> parser.parseSearchModeCommand(""));
     }
 
     @Test

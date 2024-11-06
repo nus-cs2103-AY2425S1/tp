@@ -54,16 +54,16 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command contactCommand;
+        Command command;
         if (model.getSearchMode()) {
             logger.info("Searchmode command detected");
-            contactCommand = addressBookParser.parseSearchModeCommand(commandText);
+            command = addressBookParser.parseSearchModeCommand(commandText);
 
         } else {
-            contactCommand = addressBookParser.parseCommand(commandText);
+            command = addressBookParser.parseCommand(commandText);
 
         }
-        commandResult = contactCommand.execute(model, eventManager);
+        commandResult = command.execute(model, eventManager);
 
         try {
             storage.saveAddressBook(model.getAddressBook());

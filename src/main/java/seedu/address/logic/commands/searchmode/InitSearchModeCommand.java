@@ -13,9 +13,10 @@ import seedu.address.model.event.EventManager;
  */
 public class InitSearchModeCommand extends Command {
     public static final String COMMAND_WORD = "searchmode";
+    public static final String COMMAND_WORD_SHORT_FORM = "sm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enters search mode.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + ": Enters "
+            + "search mode.\nExample: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Entered search mode.";
 
