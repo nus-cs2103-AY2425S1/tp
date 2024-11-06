@@ -384,8 +384,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff calls the elderly at the top of the list.  
-3. Staff marks the elderly as called and takes notes of the call with mark command. 
-   * Command is only allowed in `personList` view.
+3. Staff marks the elderly as called and takes notes of the call with mark command.
 4. ContactMate updates the elderly as marked and displays a success message.
 
     Use case ends.
@@ -396,9 +395,6 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 * 3a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.
   * 3a1. ContactMate shows an error message.  
   * Use case resumes from step 3\.
-* 3b. ContactMate detects the command is attempted in `historyList` view.
-  * 3b1. ContactMate shows an error message.  
-  * Use case resumes from step 1\.
 
 **System: ContactMate**  
 **Use case: UC02 \- List elderly contacts by priority**  
@@ -446,8 +442,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
-2. Staff inputs the NRIC or INDEX of elderly they want to delete.  
-    * Command is only allowed in `personList` view.
+2. Staff inputs the NRIC or INDEX of elderly they want to delete.
 3. ContactMate deletes the elderly and shows the updated list with the elderly removed.
 
     Use case ends.
@@ -458,9 +453,6 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 * 2a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.
     * 2a1. ContactMate shows an error message.  
 	* Use case resumes from step 2\.
-* 2b. ContactMate detects the command is attempted in `historyList` view.
-    * 3b1. ContactMate shows an error message.
-    * Use case resumes from step 1\.
 
 **System: ContactMate**  
 **Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
@@ -501,8 +493,6 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 * **AAC**: Active Ageing Centre. A recreational centre that supports elderly in the area.
 * **Befriending** Program: Program which elderly signs up for to receive support from an AAC.
-* **personList**: A list of elderly individuals registered in the Befriending Program.
-* **historyList**: A list of all previous contact records, including dates and notes related to the elderly.
 
 --------------------------------------------------------------------------------------------------------------------
 
