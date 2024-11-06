@@ -228,9 +228,13 @@ public class MainWindow extends UiPart<Stage> {
     public boolean isWeddingCommand(String commandText) {
         String firstWord = commandText.split("\\s+")[0];
         return firstWord.equals(ListWeddingCommand.COMMAND_WORD)
+                || firstWord.equals(ListWeddingCommand.COMMAND_WORD_SHORT)
                 || firstWord.equals(AddWeddingCommand.COMMAND_WORD)
+                || firstWord.equals(AddWeddingCommand.COMMAND_WORD_SHORT)
                 || firstWord.equals(DeleteWeddingCommand.COMMAND_WORD)
-                || firstWord.equals(ClearWeddingBookCommand.COMMAND_WORD);
+                || firstWord.equals(DeleteWeddingCommand.COMMAND_WORD_SHORT)
+                || firstWord.equals(ClearWeddingBookCommand.COMMAND_WORD)
+                || firstWord.equals(ClearWeddingBookCommand.COMMAND_WORD_SHORT);
     }
 
     /**
