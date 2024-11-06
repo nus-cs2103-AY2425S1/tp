@@ -302,19 +302,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I want to …​                                                    | So that I can…​                                                               |
-|----------|-------------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | new user                | see usage instructions                                          | refer to instructions when I forget how to use the App                        |
-| `* * *`  | user                    | add a new contact                                               | easily connect with them                                                      |
-| `* * *`  | user                    | delete a contact                                                | remove entries that I no longer need                                          |
-| `* * *`  | user                    | find a person by name                                           | locate details of persons without having to go through the entire list        |
-| `* *`    | user                    | update my contacts information                                  | always keep an updated version of contact information                         |
-| `*`      | user with many contacts | search contacts by name                                         | locate a contact easily                                                       |
-| `*`      | user                    | add a tag information to contacts                               | easily locate and connect with individuals such as classmates or club members |
-| `*`      | student                 | filter contacts by tags such as "group project" or "internship" | easily access related contacts                                                |
-| `*`      | user                    | undo my last action                                             | prevent the accidental deletion of all my contacts                            |
-
-*{More to be added}*
+| Priority | As a …​                 | I want to …​                                                    | So that I can…​                                                                    |
+|----------|-------------------------|-----------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | new user                | see usage instructions                                          | refer to instructions when I forget how to use the App                             |
+| `* * *`  | user                    | add a new contact                                               | easily connect with them                                                           |
+| `* * *`  | user                    | delete a contact                                                | remove entries that I no longer need                                               |
+| `* * *`  | user                    | find a person by name                                           | locate details of persons without having to go through the entire list             |
+| `* *`    | user                    | update my contacts information                                  | always keep an updated version of contact information                              |
+| `* *`    | user                    | undo my last action                                             | prevent the accidental deletion of all my contacts                                 |
+| `* *`    | user                    | redo my latest undone action                                    | prevent the accidental undoing of certain actions                                  |    
+| `*`      | user with many contacts | search contacts by name                                         | locate a contact easily                                                            |
+| `*`      | user                    | add a tag information to contacts                               | easily locate and connect with individuals such as classmates or club members      |
+| `*`      | student                 | filter contacts by tags such as "group project" or "internship" | easily access related contacts                                                     |
+| `*`      | user with many tags     | categorize tags into different groups                           | easily organize contacts and locate individuals such as classmates or club members |
 
 ### Use cases
 
@@ -427,59 +427,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case ends.
 
-
-**Use case: UC05 - Sort contacts by criterion**
-
-**MSS**
-1. User requests to sort list by criterion.
-2. CampusConnect sorts the list.
-3. CampusConnect displays the sorted list.
-
-   Use case ends.
-
-**Extensions**
-* 1a. Contact list is empty
-
-  Use case ends.
-
-
-* 1b. Input format is invalid.
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again.
-
-      Steps 1b1-1b2 repeat until input format is valid.
-
-      Use case ends.
-
-
-* 1c. Invalid criterion input.
-    * 1c1. CampusConnect shows error message.
-    * 1c2. User enters input again.
-
-      Steps 1c1-1c2 repeat until input format is valid.
-
-      Use case ends.
-
-
-**Use case: UC06 - Pin contacts to the top of the list**\
-**Precondition**: Contact list is not empty
-
-**MSS**
-1. User requests to pin contact to the top of the list.
-2. CampusConnect marks contact as pinned.
-3. CampusConnect displays success message.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. Input format is invalid.
-    * 1a1. CampusConnect shows error message.
-    * 1a2. User enters input again.
-
-      Steps 1a1-1a2 repeat until input format is valid.
-
-      Use case ends.
 
 ### Non-Functional Requirements
 
