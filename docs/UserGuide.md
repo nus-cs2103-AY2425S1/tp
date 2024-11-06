@@ -52,7 +52,7 @@ By the end of this guide, you'll be a ResearchRoster pro, saving time and stream
 
 Upon running ResearchRoster, a GUI similar to below should be displayed.
 
-[screenshot of GUI]
+<img src="images/Ui_annotated.png" width="600px">
 
 1. **Tabs**: Provides access to file options and help.
 2. **Participant List**: Shows a contact list of participants.
