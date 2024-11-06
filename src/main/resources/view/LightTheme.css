@@ -112,7 +112,7 @@
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: #383838;
     -fx-border-width: 1;
 }
 
@@ -318,7 +318,7 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #DFD5CD transparent #DFD5CD;
+    -fx-background-color: #E5E5E4;
     -fx-background-insets: 0;
     -fx-border-color: #383838 #383838 #383838 #383838;
     -fx-border-insets: 0;
