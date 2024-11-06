@@ -79,12 +79,12 @@ public class SortDeliveryCommandTest {
     @Test
     public void execute_ascendingStatus_sortedByAscendingStatus() {
         String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 4,
-                "status, followed by date time", "ascending");
+                "status", "ascending");
         DeliverySortStatusComparator comparator = new DeliverySortStatusComparator(new SortOrder("a"));
         SortDeliveryCommand command = new SortDeliveryCommand(comparator);
         expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(APPLE, BREAD, CAN, DURIAN), model.getSortedDeliveryList());
+        assertEquals(Arrays.asList(DURIAN, APPLE, BREAD, CAN), model.getSortedDeliveryList());
     }
 
     @Test

@@ -27,7 +27,7 @@ public class DeleteSupplierCommandTest {
         DeleteSupplierCommand deleteSupplierCommand = new DeleteSupplierCommand(INDEX_FIRST_SUPPLIER);
 
         String expectedMessage = String.format(DeleteSupplierCommand.MESSAGE_DELETE_SUPPLIER_SUCCESS,
-                INDEX_FIRST_SUPPLIER.getOneBased());
+                Messages.format(supplierToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteSupplier(supplierToDelete);
