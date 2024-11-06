@@ -176,6 +176,11 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 **Tip:** A company can have any number of tags (including 0)
 </box>
 
+<box type="tip" seamless>
+
+**Tip:** You cannot add two companies with the same name. (even if the letter casing is different)
+</box>
+
 Examples:
 * `add n/Apple e/contact@apple.com`
 * `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
