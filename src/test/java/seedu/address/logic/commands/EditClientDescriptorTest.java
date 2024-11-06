@@ -13,6 +13,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIER_REJECT;
 
+import java.math.BigInteger;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
@@ -59,7 +61,7 @@ public class EditClientDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different income level -> returns false
-        editedAmy = new EditClientDescriptorBuilder(DESC_AMY).withIncome(Integer.parseInt(VALID_INCOME_BOB)).build();
+        editedAmy = new EditClientDescriptorBuilder(DESC_AMY).withIncome(new BigInteger(VALID_INCOME_BOB)).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

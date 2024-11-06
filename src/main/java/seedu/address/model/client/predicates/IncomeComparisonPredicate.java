@@ -2,6 +2,7 @@ package seedu.address.model.client.predicates;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigInteger;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,7 +13,7 @@ import seedu.address.model.util.IncomeComparisonOperator;
  * Predicate that compares a {@code Client}'s income against a threshold using a specified comparison operator.
  */
 public class IncomeComparisonPredicate implements Predicate<Client> {
-    private final int incomeThreshold;
+    private final BigInteger incomeThreshold;
     private final IncomeComparisonOperator incomeComparisonOperator;
 
     /**
@@ -21,7 +22,7 @@ public class IncomeComparisonPredicate implements Predicate<Client> {
      * @param incomeComparisonOperator The operator used to compare the client's income with the threshold.
      * @param incomeThreshold          The threshold income to compare against.
      */
-    public IncomeComparisonPredicate(IncomeComparisonOperator incomeComparisonOperator, int incomeThreshold) {
+    public IncomeComparisonPredicate(IncomeComparisonOperator incomeComparisonOperator, BigInteger incomeThreshold) {
         requireNonNull(incomeComparisonOperator);
         checkPositiveIncomeThreshold(incomeThreshold);
         this.incomeThreshold = incomeThreshold;
@@ -30,15 +31,16 @@ public class IncomeComparisonPredicate implements Predicate<Client> {
 
     @Override
     public boolean test(Client client) {
-        int clientIncome = client.getIncome().value;
+        BigInteger clientIncome = client.getIncome().value;
+        int comparisonInt = clientIncome.compareTo(incomeThreshold);
 
         switch (incomeComparisonOperator.comparisonOperator) {
         case "=":
-            return clientIncome == incomeThreshold;
+            return comparisonInt == 0;
         case ">":
-            return clientIncome > incomeThreshold;
+            return comparisonInt > 0;
         case "<":
-            return clientIncome < incomeThreshold;
+            return comparisonInt < 0;
         default:
             return false;
         }
@@ -57,7 +59,7 @@ public class IncomeComparisonPredicate implements Predicate<Client> {
 
         IncomeComparisonPredicate otherIncomeComparisonPredicate =
                 (IncomeComparisonPredicate) other;
-        return incomeThreshold == otherIncomeComparisonPredicate.incomeThreshold
+        return incomeThreshold.equals(otherIncomeComparisonPredicate.incomeThreshold)
                 && incomeComparisonOperator.equals(otherIncomeComparisonPredicate.incomeComparisonOperator);
     }
 
@@ -75,8 +77,8 @@ public class IncomeComparisonPredicate implements Predicate<Client> {
      * @param incomeThreshold The threshold to check.
      * @throws IllegalArgumentException if {@code incomeThreshold} is not greater than 1.
      */
-    private void checkPositiveIncomeThreshold(int incomeThreshold) {
-        if (incomeThreshold < 0) {
+    private void checkPositiveIncomeThreshold(BigInteger incomeThreshold) {
+        if (incomeThreshold.compareTo(BigInteger.ZERO) < 0) {
             throw new IllegalArgumentException("Income threshold cannot be less than 0.");
         }
     }
