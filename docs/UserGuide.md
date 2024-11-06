@@ -116,7 +116,8 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-> [!WARNING]
+> **WARNING**
+> 
 > After confirmation, any cleared data or contact cannot be retrieved. This action is IRREVERSIBLE.
 
 * Recommended practice: Always have a copy of current data. You may refer to [Exporting the data](#exporting the data). You can use [import feature](#importing-contacts-import) if you have lost your data after clearing it unintentionally.
@@ -140,7 +141,8 @@ Deletes the specified person from the address book.
 
 Format: `delete INDEX` / `delete NAME`
 
-> [!WARNING]
+> **WARNING**
+>
 > After confirmation, any deleted data or contact cannot be retrieved. This action is IRREVERSIBLE.
 
 * Deletes the person at the specified `INDEX` or with the specified `NAME`.
