@@ -242,13 +242,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-
-### \[Proposed\] Data archiving
-The following sequence diagram shows how an archive operation goes through the `Logic` component:
-![ArchiveSequenceDiagram](images/ArchiveSequenceDiagramLogic.png)
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
