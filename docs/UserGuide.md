@@ -65,9 +65,9 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/mUdder m/cs` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list and the Meetings associated with it.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all Udders and Meetings.
+   * `clear` : Deletes all Udders.
 
    * `exit` : Exits the app.
 
@@ -159,11 +159,10 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 
 **Format:** `schedule UDDER_INDEX st/YYYY-MM-DD HH:MM et/YYYY-MM-DD HH:MM l/LOCATION`
 
-* Automatically detects any clash in meetings set previously.
+* Automatically detects any clash in meetings with other Udders.
 
 **Examples:**
-*  `schedule 10 st/25-12-2002 00:00 et/25-12-2002 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 00:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
-*  `schedule 1 l/The Terrace st/09-10-2024 09:00 et/09-10-2024 10:00` schedules a meeting with the 1st Udder starting from `9th October 2024, 09:00 a.m.` and ending at `9th October 2024, 10:00 a.m.`, at `The Terrace`.
+*  `schedule 10 st/2002-12-25 00:00 et/2002-12-25 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 00:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
 
 ### Locating Udders by keywords: `find` 🔍
 
@@ -196,7 +195,7 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 
 ### Clearing all Udders : `clear` 🧹
 
-Clears all Udders from the Udders List and all Meetings from the Meetings list.
+Clears all Udders from the Udders List.
 
 **Format:** `clear`
 
@@ -259,9 +258,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find [n/KEYWORD] [p/KEYWORD] [e/KEYWORD] [a/KEYWORD] [r/KEYWORD] [m/KEYWORD] [t/KEYWORD]…​`<br> e.g., `find n/James Jake`
-**Schedule**   | `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
+**Schedule**   | `schedule UDDER_INDEX st/YYYY-MM-DD HH:MM et/YYYY-MM-DD HH:MM l/LOCATION`
 **List**   | `list`
 **Meetings**   | `meetings`
-**Delete Meetings**   | `deletem INDEX`<br> e.g., `deletem 1`
-**Edit Meetings**   | `editm INDEX [n/NAME] [st/DD-MM-YYYY HH:MM] [et/DD-MM-YYYY HH:MM] [l/LOCATION]`<br> e.g., `editm 1 l/The Deck st/09-10-2024 09:30`
 **Help**   | `help`
