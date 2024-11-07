@@ -505,7 +505,15 @@ assignments are present for a person, separate them within the same entry using 
 
 <md>**Example of acceptable CSV file:**</md>
 
-![Valid CSV](images/validCSV.png)
+```
+"Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent"
+"Alex Yeoh","alexyeoh@example.com","@alex","[friends]","Alex","Ex01 | 3.0","5"
+"Bernice Yu","berniceyu@example.com","@bernice","[colleagues],[friends]","Bernice","",""
+"Charlotte Oliveiro","charlotte@example.com","@charlotte","[friend],[colleague]","Charlotte","",""
+"David Li","lidavid@example.com","@david","[family]","david","",""
+"Irfan Ibrahim","irfan@example.com","@irfan","[classmates]","Irfan","",""
+"Roy Balakrishnan","royb@example.com","@roy","[colleagues]","Roy","",""
+```
 ![Valid CSV(excel)](images/validCSV1.png)
 
 </box>
@@ -585,7 +593,7 @@ Add an assignment and its grades to a contact.
 <md>**Examples:**</md>
 
 Example with the following assignment.json file:
-```
+```json
 {
   "assignments" : [
     {
@@ -662,7 +670,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### <i class="fa-solid fa-pen"></i> Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/kontacts.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
