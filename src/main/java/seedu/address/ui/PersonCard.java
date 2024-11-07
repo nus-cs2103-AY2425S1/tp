@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -53,6 +54,15 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
+
+        // check for recent birthday
+        if (isVisualsEnabled && person.getBirthday().hasBirthdayWithin7Days()) {
+            name.setStyle("-fx-text-fill: #ffa500");
+            Tooltip birthdayTooltip = new Tooltip("Birthday soon!");
+            birthdayTooltip.setShowDelay(javafx.util.Duration.millis(10));
+            Tooltip.install(name, birthdayTooltip);
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {

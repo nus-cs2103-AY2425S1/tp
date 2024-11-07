@@ -88,3 +88,11 @@
     -fx-background-radius: 5;
     -fx-font-weight: bold;
 }
+
+
+.tooltip {
+    -fx-background-color: #800000;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 5px;
+}

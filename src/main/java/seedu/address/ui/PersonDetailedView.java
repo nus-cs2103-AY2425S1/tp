@@ -8,6 +8,7 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
@@ -94,6 +95,14 @@ public class PersonDetailedView extends UiPart<Region> {
         profileImage.setClip(clip);
 
         name.setText(contentManager.getName());
+
+        if (isVisualsEnabled && person.getBirthday().hasBirthdayWithin7Days()) {
+            name.setStyle("-fx-text-fill: #ffa500");
+            Tooltip birthdayTooltip = new Tooltip("Birthday soon!");
+            birthdayTooltip.setShowDelay(javafx.util.Duration.millis(10));
+            Tooltip.install(name, birthdayTooltip);
+        }
+
         phone.setText(contentManager.getPhone());
         address.setText(contentManager.getAddress());
         email.setText(contentManager.getEmail());
