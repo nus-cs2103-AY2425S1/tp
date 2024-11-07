@@ -58,9 +58,11 @@ Given below is a quick overview of main components and how they interact with ea
 
 #### Main components of the architecture
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
+<br>
 
 The bulk of the app's work is done by the following four components:
 
@@ -71,9 +73,11 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<br>
+
 #### How the architecture components interact with each other
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user enters the command `delete  person 1`.
+The *Sequence Diagram* below shows how the components interact with each other, for the scenario where the user enters the command `delete  person 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"></puml>
 
@@ -83,9 +87,11 @@ Each of the four main components (also shown in the diagram above),
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the 
   corresponding API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class _(reason: to prevent outside component's being coupled to the implementation of a component)_, as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300"></puml>
+
+<br><br>
 
 The sections below give more details of each component.
 
@@ -93,7 +99,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/ui)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"></puml>
 
@@ -112,7 +118,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/logic)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -146,9 +152,9 @@ How the parsing works:
 <br>
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/model)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450"></puml>
+<puml src="diagrams/ModelClassDiagram.puml" width="750"></puml>
 
 The `Model` component,
 
@@ -158,8 +164,8 @@ The `Model` component,
   * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
   * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * with regards to `Appointment` objects:
-  * stores the details of an appointment in a `AppointmentDescriptor` object
-  * stores the `AppointmentDescriptor` object with a `appointmentId` in the `Appointment` class.
+  * stores the details of an appointment in an `AppointmentDescriptor` object
+  * stores the `AppointmentDescriptor` object with a `Person` and `appointmentId` in the `Appointment` class.
   * stores the address book data i.e., all `Appointment` objects (which are contained in a `UniqueAppointmentList` object).
   * stores the currently 'selected' `Appointment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Appointment>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -167,9 +173,10 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list (the `UniqueTagList`) in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, the `Appointment` objects are shown as such as well.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list (the 
+`UniqueTagList`) in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, the `Appointment` objects are shown as such too.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450"></puml>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="750"></puml>
 
 </box>
 
@@ -177,22 +184,23 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/storage)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550"></puml>
+<puml src="diagrams/StorageClassDiagram.puml" width="650"></puml>
 
-The `Storage` component,
-* can save patient data, appointment data, and user preference data in JSON format, and read them back into corresponding objects.
-* Storage interface inherits from `AddressBookStorage`, `AppointmentBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* Patient data : 
-  * data is saved in `JsonAddressBookStorage` which inherits from interface `AddressBookStorage`.
-  * data is saved as `JsonSerializableAddressBook` which consists of `JsonAdaptedPerson` and `JsonAdaptedTag` which embodies the actual data of the individual patient and their data
+* The `Storage` component can save patient data, appointment data, and user preference data in JSON format, and read them back into corresponding objects.
+* The `Storage` interface inherits from `AddressBookStorage`, `AppointmentBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* Patient data: 
+  * Data is saved in `JsonAddressBookStorage` which inherits from interface `AddressBookStorage`.
+  * Data is saved as `JsonSerializableAddressBook` which consists of `JsonAdaptedPerson` and 
+    `JsonAdaptedTag` which embodies the actual data of the individual patient and their data
 * Appointment data:
-  * data is saved in `JsonAppointmentBookStorage` which inherits from interface `AppointmentBookStorage`.
-  * data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which embodies the actual data of appointments and appointment details
+  * Data is saved in `JsonAppointmentBookStorage` which inherits from interface `AppointmentBookStorage`.
+  * Data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which 
+    embodies the actual data of appointments and appointment details
 * User Preference data:
-    * data is saved in `UserPrefsStorage` interface and saves as `JsonUserPrefsStorage`
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+    * Data is saved in `UserPrefsStorage` interface and saved as `JsonUserPrefsStorage`
+* The `Storage` component depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 <br>
 
@@ -227,74 +235,97 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 ## **Implementation of entity command features**
 
-Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands. Hence, `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
+Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands. 
+* Hence, `xyzCommand` can be `addCommand`, `deleteCommand`, `findCommand`, `clearCommand`, `editCommand`, or `listCommand`.
 
 The sequence diagram shows how an entity command is executed:
 
 <puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
-- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand`. There are two entities, **person** and **appointment**, on which operations can be performed.
 
-**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity, `person` or `appt`. This is followed by appropriate arguments and prefixes.
+<box type="info" seamless>
+
+**Note:** There are two entities, `Person` and `Appointment`.
+- The entity referred in `FindEntityCommand` refers to `FindPersonCommand` and `FindAppointmentCommand`.
+- Similarly, the entity referred in `AddEntityCommand` refers to `AddPersonCommand` and `AddAppointmentCommand`.
+- This applies for the other commands as well.
+</box>
+
+**Step 1**. The user types an `xyz` command input in the `CommandBox`, followed by the type of entity, 
+`person` or `appt`. This is followed by appropriate arguments and prefixes.
 
 
-**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
+**Step 2**. The input is passed to the `LogicManager`. `LogicManager` then calls the 
+`AddressBookParser::parseCommand` method to parse the input.
 
 
-**Step 3**. The `AddressBookParser` creates a `xyzEntityCommand` object, and call the `xyzCommandParser::parse` method, which is returned to the `LogicManager`. This may be different based on the entity type as commands like `addPersonCommand` and `addApptCommand` have a different set of arguments the user can provide. 
+**Step 3**. The `AddressBookParser` parses the input and creates an `xyzCommandParser` object, which is 
+returned to the `AddressBookParser`.
 
 
-**Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
+**Step 4**. The `AddressBookParser` calls the 
+`xyzCommandParser::parse` method to parse the arguments. 
 
 
-**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
+**Step 5**. The `xyzCommandParser` creates an `xyzCommand` object, which is returned to the `LogicManager`.
+
+
+**Step 6**. The `LogicManager` calls the `xyzCommand : execute` method, which creates a `CommandResult` 
+Object.
+
+
+**Step 7**. The `CommandResult` object is returned to the `LogicManager`.
 
 <br>
 
 ### General Design Considerations
 
 **Aspect: Whether to implement entity commands as separate commands or through an abstract base command**
-- **Alternative 1 (Current choice):** Implement an abstract EntityCommand class that specific entity commands (e.g., AddPersonCommand, AddAppointmentCommand, DeletePersonCommand, DeleteAppointmentCommand) inherit from.
-  - Pros: Allows for reuse of code logic between entity commands
-  - Cons: Requires additonal parsing logic since entity in command must be distinguished (person or appointment), which can add complexity
+- **Alternative 1 (Current choice):** Implement an abstract EntityCommand class that specific entity 
+  commands (e.g. `AddPersonCommand`, `AddAppointmentCommand`, `DeletePersonCommand`, 
+  `DeleteAppointmentCommand`) 
+  inherit from.
+  - **Pros**: Allows for reuse of code logic between entity commands.
+  - **Cons**: Requires additional parsing logic since entity in command must be distinguished (person or appointment), which can add complexity.
 - **Alternative 2:** Implement each entity command as entirely separate classes.
-  - Pros: Creates a separate command, so the implementations of each command are separated and less coupled
-  - Cons: Results in significant code duplication
+  - **Pros**: Creates a separate command, so the implementations of each command are separated and less coupled.
+  - **Cons**: Results in significant code duplication.
 
 
 <br>
 
-**Aspect: What constitutes duplicate person that should not be added or edited into the address book**
-- **Alternative 1 (Current choice):** Duplicate person is one that has same name (case-insensitive) and same phone number as an existing person
-  - Pros: Name and phone numbers are identifiers that are commonly recognized by users
-  - Cons: Extra logic required to determine equality of different people
-- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g., by name only)
-  - Pros: Less logic required to determine equality of different people
-  - Cons: Different people could have the same name, but cannot be added into the address book
+**Aspect: What constitutes duplicate person that should not be added or edited into the AddressBook**
+- **Alternative 1 (Current choice):** Duplicate person is one that has the same name (case-insensitive) and same phone number as an existing person
+  - **Pros**: Name and phone numbers are identifiers that are commonly recognized by users.
+  - **Cons**: Extra logic required to determine equality of different people.
+- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g. by name only)
+  - **Pros**: Less logic required to determine equality of different people.
+  - **Cons**: Different people could have the same name, but cannot be added into the AddressBook.
 
 <br>
 
-**Aspect: What constitutes duplicate appointment that should not be added or edited into the appointment book**
-- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time of an existing appointment
-  - Pros: Provides a rule to avoid scheduling conflicts of same person
-  - Cons: Extra logic required to determine equality of different appointments
+**Aspect: What constitutes duplicate appointment that should not be added or edited into the AppointmentBook**
+- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time, and appointment type as an existing appointment
+  - **Pros**: Provides a rule to avoid scheduling conflicts of same person.
+  - **Cons**: Extra logic required to determine equality of different appointments.
 - **Alternative 2:** Define duplicates with only the date and time
-  - Pros: Less logic required to determine equality of different appointments
-  - Cons: Different appointments with different persons could have the same date time, but cannot be added into the appointment book
+  - **Pros**: Less logic required to determine equality of different appointments.
+  - **Cons**: Different appointments with different persons could have the same date time, but cannot be added 
+    into the AppointmentBook.
 
 <br>
 
 ### Command-Specific Design Considerations
 
-### Add Appointment feature
+#### Add Appointment feature
 
 **Aspect: Whether appointment fields should be optional**
 
-- **Alternative 1 (Current choice):** Sickness and medicine fields are optional.
+- **Alternative 1 (Current choice):** `Sickness` and `Medicine` fields are optional.
     - **Pros**: This allows users to create an appointment without specifying all fields initially, which is more realistic and practical as some details may not be available at the time of creation.
 
 - **Alternative 2**: Make all fields mandatory.
     - **Pros**: Ensures complete data at the time of appointment creation, which may simplify data handling and reduce the need for future edits.
-    - **Cons**: Can be inconvenient for users who don’t have all details available immediately, possibly leading to frustration or delays in creating appointments.
+    - **Cons**: Can be inconvenient for users who do not have all details available immediately, possibly leading to frustration or delays in creating appointments.
 
 <br>
 
@@ -312,9 +343,9 @@ The sequence diagram shows how an entity command is executed:
 **Aspect: Deleting person and clearing person list should:**
 
 - **Alternative 1 (Current choice):** remove appointments with the `personId` of that person.
-  - Pros: This prevents the case where appointments are linked to personIds that are non-existent.
+  - **Pros**: This prevents the case where appointments are linked to personIds that are non-existent.
 - **Alternative 2:** not remove any appointments with the `personId` of that person.
-  - Cons: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
+  - **Cons**: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
   
 <br>
 
