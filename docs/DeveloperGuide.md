@@ -363,6 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC02 - Assign a vendor to an event**
 
+Preconditions: User is viewing an item.
 **MSS**
 
 1. User enters command to assign a vendor to an event.
@@ -379,27 +380,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. The event does not exist.
+* 2a. The selected item does not exist.
 
   * 2a1. System shows an error message.
 
       Use case ends.
 
-* 2b. The vendor does not exist.
+* 2b. The vendor has already been assigned to the event.
 
   * 2b1. System shows an error message.
 
       Use case ends.
 
-* 2c. The vendor has already been assigned to the event.
+---
 
-  * 2c1. System shows an error message.
+**Use case: UC03 - Unassign a vendor from an event**
+
+Preconditions: User is viewing an item.
+**MSS**
+
+1. User enters command to unassign a vendor from an event.
+2. System unassigns the vendor from the event.
+3. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+
+    * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+
+* 2a. The selected item is invalid.
+
+    * 2a1. System shows an error message.
+
+      Use case ends.
+
+* 2b. The vendor is not assigned to the event.
+
+    * 2b1. System shows an error message.
 
       Use case ends.
 
 ---
 
-**Use case: UC03 - View an item**
+**Use case: UC04 - View an item**
 
 **MSS**
 1. User enters command to view an item.
@@ -423,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC04 - Delete an item**
+**Use case: UC05 - Delete an item**
 
 **MSS**
 1. User enters command to delete an item.
