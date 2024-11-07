@@ -79,7 +79,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     /**
      * Parses a single allergy and handles any ParseException by rethrowing as RuntimeException.
      */
-    private Allergy parseAllergyWithHandling(String allergy) {
+    public Allergy parseAllergyWithHandling(String allergy) {
         try {
             return ParserUtil.parseAllergy(allergy);
         } catch (ParseException e) {

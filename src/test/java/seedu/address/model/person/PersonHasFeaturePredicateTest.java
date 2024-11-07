@@ -27,9 +27,10 @@ public class PersonHasFeaturePredicateTest {
     private PersonHasFeaturePredicate emailAndAddressPredicate =
             new PersonHasFeaturePredicate(null, null, ALICE.getEmail(), ALICE.getAddress(), null);
 
+
+
     @Test
     public void equals() {
-
         // same object -> returns true
         assertTrue(highTagOnlyPredicate.equals(highTagOnlyPredicate));
 
@@ -51,6 +52,7 @@ public class PersonHasFeaturePredicateTest {
         assertFalse(highTagOnlyPredicate.equals(lowTagOnlyPredicate));
     }
 
+
     @Test
     public void test_personHasTags_returnsTrue() {
         // One tag
@@ -63,6 +65,7 @@ public class PersonHasFeaturePredicateTest {
         assertTrue(highTagOnlyPredicate.test(ALICE));
 
     }
+
 
     @Test
     public void test_personHasEmailAndAddress_returnsTrue() {

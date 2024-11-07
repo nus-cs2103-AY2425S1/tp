@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -18,6 +20,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
@@ -281,5 +284,51 @@ public class FilterCommandParserTest {
         // Verify that the ParseException is thrown due to no valid input provided
         assertThrows(ParseException.class, () -> new FilterCommandParser().parse(userInput));
     }
+
+    @Test
+    public void parseAllergy_validAllergy_returnsCorrectAllergy() {
+        // Valid allergy names that should parse successfully
+        String validAllergy1 = "Peanut Butter";
+        String validAllergy2 = "Egg-nut";
+        String validAllergy3 = "Dust, Mold";
+
+        // Assert that these valid allergy strings do not throw exceptions and are correctly parsed
+        assertDoesNotThrow(() -> parser.parseAllergyWithHandling(validAllergy1));
+        assertDoesNotThrow(() -> parser.parseAllergyWithHandling(validAllergy2));
+        assertDoesNotThrow(() -> parser.parseAllergyWithHandling(validAllergy3));
+    }
+
+    @Test
+    public void parseAllergy_invalidAllergy_throwsRuntimeException() {
+        // Invalid allergy strings
+        String invalidAllergy1 = "Peanut@Butter";
+        String invalidAllergy2 = "Milk$";
+        String invalidAllergy3 = "Dust# Mold";
+        String invalidAllergy4 = "Eggs*";
+        String invalidAllergy5 = "Banana# Peels";
+
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy1),
+                "Error parsing allergy: " + invalidAllergy1);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy2),
+                "Error parsing allergy: " + invalidAllergy2);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy3),
+                "Error parsing allergy: " + invalidAllergy3);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy4),
+                "Error parsing allergy: " + invalidAllergy4);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy5),
+                "Error parsing allergy: " + invalidAllergy5);
+    }
+
+    @Test
+    public void parseAllergy_invalidAllergy_messageContainsError() {
+        // Invalid allergy that should throw RuntimeException
+        String invalidAllergy = "Peanut@Butter";
+
+        // Ensure the RuntimeException contains the correct message
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () ->
+                parser.parseAllergyWithHandling(invalidAllergy));
+        assertTrue(exception.getMessage().contains("Error parsing allergy: " + invalidAllergy));
+    }
+
 
 }
