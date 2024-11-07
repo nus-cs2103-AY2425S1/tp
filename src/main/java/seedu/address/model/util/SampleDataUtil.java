@@ -25,10 +25,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-
-    public static final Remark EMPTY_REMARK = new Remark("");
-
-    public static final LocalDateTime UPDATED_AT = LocalDateTime.of(2024, 1, 1, 0, 0);
+    public static final LocalDateTime UPDATED_AT = LocalDateTime.now();
 
     public static Person[] getSamplePersons() {
         return new Person[] {
