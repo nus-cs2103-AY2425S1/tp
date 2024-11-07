@@ -153,6 +153,8 @@ Examples:
 * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient`
 * `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
 
+![add patient](images/adding%20patient.png)
+
 ### Updating a patient : `update`
 
 Updates an existing patient in ClinicBuddy by searching for their index or NRIC.
@@ -176,6 +178,8 @@ Examples:
 
 * `update S1234567Z p/91234567 e/johndoe@example.com` Updates the phone number and email address of the patient whose NRIC is 'S1234567Z' to be `91234567`
   and `johndoe@example.com` respectively.
+
+![update](images/update%20patient.png)
 
 ### Deleting a patient : `delete`
 
@@ -207,9 +211,13 @@ Examples:
 * `list` followed by `delete 1` deletes the first patient in the list.
 * `find Betsy` followed by `delete 1` deletes the first patient in the results of the `find` command.
 
+![delete](images/delete%20patient.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from ClinicBuddy.
+
+![clear](images/clear%20entries.png)
 
 Format: `clear`
 
@@ -218,6 +226,8 @@ Format: `clear`
 Shows a list of all patients in ClinicBuddy.
 
 Format: `list`
+
+![list](images/list%20all%20patients.png)
 
 ### Locating patients: `find`
 
@@ -295,6 +305,8 @@ Format: `deleteappt Index /d dd-mm-yyyy HH:mm`
 Example:
 * `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the patient at index 1 of the displayed list.
 
+![deleteapt](images/delete%20appointment.png)
+
 ### Updating Operating Hours : `hours`
 
 Updates Operating Hours 
@@ -310,6 +322,8 @@ Examples:
 * `hours`
 * `hours o/09:30 c/18:00`
 * `hours c/18:00`
+
+![hours](images/update%20operating%20hours.png)
 
 ### Saving the data
 
@@ -353,6 +367,9 @@ Format: `backup [DESCRIPTION]`
   ```
   3_After updating John's contact info_2024-10-30_15-45-00-000.json
   ```
+
+![backup](images/backup.png)
+
 #### **Automated Backup:** 🚨
 - Whenever a patient record is deleted or cleared, ClinicBuddy automatically creates a backup of all patient records before the deletion. 
 - This helps to ensure that no data is permanently lost in case of an accidental deletion.
@@ -382,6 +399,7 @@ Format: `listbackups`
 - The date format used is dd MMM yyyy HH:mm:ss.
 - Only the 10 most recent backups are available for storage efficiency.
 
+![listbackups](images/listbackups.png)
 
 ### Restoring data from backups : `restore`
 
@@ -408,6 +426,8 @@ Format: `restore <INDEX>`
 - Ensure any recent changes are backed up before performing a restore.
 - The `restore` command will restore the entire set of patient records from the backup.
 - It is safe to create a backup for current data before performing a restore.
+
+![restore](images/restore.png)
 
 ### Exiting the program : `exit`
 
