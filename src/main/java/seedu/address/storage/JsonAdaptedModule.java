@@ -1,10 +1,13 @@
 package seedu.address.storage;
 
+import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Module;
+
 
 /**
  * Jackson-friendly version of {@link Module}.
@@ -12,7 +15,7 @@ import seedu.address.model.person.Module;
 class JsonAdaptedModule {
 
     private final String module;
-    private int grade;
+    private Integer grade;
 
     /**
      * Constructs a {@code JsonAdaptedModule} with the given {@code module}.
@@ -46,6 +49,14 @@ class JsonAdaptedModule {
      * @throws IllegalValueException if there were any data constraints violated in the adapted module.
      */
     public Module toModelType() throws IllegalValueException {
+        if (module == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
+        }
+
+        if (grade == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Grade"));
+        }
+
         if (!Module.isValidModule(module)) {
             throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
         }
