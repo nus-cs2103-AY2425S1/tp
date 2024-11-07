@@ -126,6 +126,22 @@ public class PublicAddressesComposition {
     }
 
     /**
+     * Returns the public address with the specified label in the network.
+     *
+     * @param network The network to search for.
+     * @param label The label to match against the public addresses.
+     */
+    public Set<PublicAddress> getByNetworkAndLabel(Network network, String label) {
+        assert network != null;
+        assert label != null;
+        return Collections.unmodifiableSet(
+            publicAddresses.getOrDefault(network, Collections.emptySet()).stream()
+            .filter(publicAddress -> publicAddress.getLabel().equals(label))
+            .collect(Collectors.toSet())
+        );
+    }
+
+    /**
      * Checks if a public address exists in any network.
      *
      * @param publicAddressString The public address string to check.
