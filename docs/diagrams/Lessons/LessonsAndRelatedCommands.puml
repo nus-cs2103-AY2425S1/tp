@@ -1,0 +1,52 @@
+@startuml
+
+!include ../style.puml
+
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+title Add Lesson Command and Parser UML Diagram
+package Logic {
+
+    package Commands {
+        Class "{abstract}\nCommand" as Command
+        Class AddLessonCommand
+        Class CommandResult
+    }
+
+    package "Parser Classes" {
+        Class AddLessonCommandParser
+    }
+}
+
+package Model {
+    Class Lesson
+    Class StudentLessonInfo
+    Class Student
+    Class Date
+    Class Time
+    Class Attendance
+    Class ParticipationScore
+}
+
+' Command relationships
+Command <|-- AddLessonCommand
+Command ..> CommandResult : creates >
+
+' Parser relationships
+AddLessonCommandParser ..> AddLessonCommand : creates >
+
+' Model relationships
+Lesson *-- "*" StudentLessonInfo
+StudentLessonInfo --> "1" Student : has >
+Lesson *-- "1" Date
+Lesson *-- "1" Time
+
+' Group visibility for logical structure
+CommandResult ..> Lesson : creates >
+
+StudentLessonInfo *-- "1" Attendance : records >
+StudentLessonInfo *-- "1" ParticipationScore : tracks >
+
+@enduml

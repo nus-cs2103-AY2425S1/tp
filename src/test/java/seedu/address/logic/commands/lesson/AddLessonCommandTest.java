@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.ModelStub;
 
@@ -78,6 +80,36 @@ public class AddLessonCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+    }
+
+    @Test
+    public void execute_duplicateLesson_throwsCommandException() {
+        Lesson lesson = new LessonBuilder().withDate("2024-01-01").withTime("10:00").build();
+        AddLessonCommand addLessonCommand = new AddLessonCommand(lesson);
+
+        ModelStubWithDuplicateLesson modelStub = new ModelStubWithDuplicateLesson(lesson);
+
+        assertThrows(CommandException.class, () -> addLessonCommand.execute(modelStub));
+    }
+
+    private class ModelStubWithDuplicateLesson extends ModelStub {
+        private final Lesson lesson;
+
+        ModelStubWithDuplicateLesson(Lesson lesson) {
+            requireNonNull(lesson);
+            this.lesson = lesson;
+        }
+
+        @Override
+        public void addLesson(Lesson lesson) {
+            throw new DuplicateLessonException();
+        }
+
+        @Override
+        public boolean hasLesson(Lesson lesson) {
+            requireNonNull(lesson);
+            return this.lesson.isSameLesson(lesson);
         }
     }
 }

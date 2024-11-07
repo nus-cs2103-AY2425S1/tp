@@ -16,7 +16,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student provided"
+    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student provided "
             + "at index %1$d is invalid";
     public static final String MESSAGE_INVALID_INDEX_SHOWN = "The target provided at index/indices %1$s is invalid";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
@@ -47,9 +47,12 @@ public class Messages {
                 .append("; Phone: ")
                 .append(student.getPhone())
                 .append("; Email: ")
-                .append(student.getEmail())
-                .append("; Courses: ");
-        student.getCourses().forEach(course -> builder.append(course).append(" "));
+                .append(student.getEmail());
+        if (!student.getCourses().isEmpty()) {
+            builder.append("; Courses: ");
+            student.getCourses().forEach(course -> builder.append(course).append(", "));
+            builder.setLength(builder.length() - 2); // Remove trailing comma and space
+        }
         return builder.toString().trim();
     }
 
@@ -62,6 +65,11 @@ public class Messages {
                 .append(consult.getDate().toString())
                 .append("; Time: ")
                 .append(consult.getTime().toString());
+        if (!consult.getStudents().isEmpty()) {
+            builder.append("; Students: ");
+            consult.getStudents().forEach(student -> builder.append(student.getName()).append(", "));
+            builder.setLength(builder.length() - 2); // Remove trailing comma and space
+        }
         return builder.toString();
     }
 
@@ -73,10 +81,10 @@ public class Messages {
         builder.append("Date: ")
                 .append(lesson.getDate().toString())
                 .append("; Time: ")
-                .append(lesson.getTime().toString())
-                .append("; Students: ");
-        lesson.getStudents().forEach(student -> builder.append(student.getName()).append(", "));
+                .append(lesson.getTime().toString());
         if (!lesson.getStudents().isEmpty()) {
+            builder.append("; Students: ");
+            lesson.getStudents().forEach(student -> builder.append(student.getName()).append(", "));
             builder.setLength(builder.length() - 2); // Remove trailing comma and space
         }
         return builder.toString();

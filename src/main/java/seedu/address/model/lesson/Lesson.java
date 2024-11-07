@@ -154,6 +154,22 @@ public class Lesson {
     }
 
     /**
+     * Sets a student in the lesson.
+     * Method works by removing a Student & Adding a new Student.
+     * Attendance & Participation Score are transferred from target to editedStudent.
+     *
+     * @param target The student to remove.
+     * @param editedStudent The student to add.
+     */
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        StudentLessonInfo oldEntry = getStudentLessonInfo(target);
+        studentLessonInfoList.remove(oldEntry);
+        StudentLessonInfo newEntry = oldEntry.setStudent(editedStudent);
+        studentLessonInfoList.add(newEntry);
+    }
+
+    /**
      * Sets the attendance of the student to the specified value.
      *
      * @param student The student to mark.
@@ -163,9 +179,9 @@ public class Lesson {
     public void setAttendance(Student student, boolean attendance) throws StudentNotFoundException {
         requireNonNull(student);
         StudentLessonInfo oldEntry = getStudentLessonInfo(student);
-        studentLessonInfoList.remove(oldEntry);
         StudentLessonInfo newEntry = oldEntry.setAttendance(attendance);
-        studentLessonInfoList.add(newEntry);
+        int index = studentLessonInfoList.indexOf(oldEntry);
+        studentLessonInfoList.set(index, newEntry);
     }
 
     /**
@@ -235,5 +251,24 @@ public class Lesson {
     public String toString() {
         return String.format("Lesson[date=%s, time=%s, studentLessonInfoList=%s]",
                 date, time, studentLessonInfoList);
+    }
+
+    /**
+     * Returns true if both lessons have the same date and time.
+     * This defines a weaker notion of equality between two lessons compared to {@code equals}.
+     *
+     * @param otherLesson The other lesson to compare to.
+     * @return True if the lessons have the same date and time, false otherwise.
+     */
+    public boolean isSameLesson(Lesson otherLesson) {
+        if (otherLesson == this) {
+            return true;
+        }
+
+        if (otherLesson == null) {
+            return false;
+        }
+
+        return date.equals(otherLesson.date) && time.equals(otherLesson.time);
     }
 }

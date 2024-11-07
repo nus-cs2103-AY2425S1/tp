@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 
 /**
  * Adds a lesson to the address book.
@@ -19,13 +20,13 @@ import seedu.address.model.lesson.Lesson;
 public class AddLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "addlesson";
-    public static final CommandType COMMAND_TYPE = CommandType.ADDLESSON;
+    public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to TAHub. "
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
-            + "Example: " + COMMAND_WORD + " "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_DATE + "2024-10-20 "
             + PREFIX_TIME + "14:00 ";
 
@@ -54,9 +55,13 @@ public class AddLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.addLesson(newLesson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newLesson)),
-                COMMAND_TYPE);
+
+        try {
+            model.addLesson(newLesson);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newLesson)), COMMAND_TYPE);
+        } catch (DuplicateLessonException e) {
+            throw new CommandException("Duplicate lesson. A lesson with this date and time already exists.");
+        }
     }
 
     @Override

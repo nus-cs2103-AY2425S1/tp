@@ -3,13 +3,14 @@ package seedu.address.model.datetime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Objects;
 
 /**
  * Represents a Time in the system.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}.
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     public static final String MESSAGE_CONSTRAINTS = "Times should be in the format HH:mm, "
         + "where hour is between 00 and 23, and minute between 00 and 59 (e.g., 14:30).";
@@ -55,7 +56,8 @@ public class Time {
      * @return True if the string represents a valid time, false otherwise.
      */
     public static boolean isValidTime(String test) {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);
 
         try {
             LocalTime.parse(test, timeFormatter);
@@ -73,10 +75,7 @@ public class Time {
      *         or after the specified time.
      */
     public int compareTo(Time otherTime) {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime thisLocalTime = LocalTime.parse(this.value, timeFormatter);
-        LocalTime otherLocalTime = LocalTime.parse(otherTime.value, timeFormatter);
-        return thisLocalTime.compareTo(otherLocalTime);
+        return this.getLocalTimeValue().compareTo(otherTime.getLocalTimeValue());
     }
 
     @Override

@@ -100,7 +100,7 @@ public class ExportCommandTest {
     @Test
     public void getCommandTypeMethod() {
         ExportCommand exportCommand = new ExportCommand("file1", false, dataDir);
-        assertEquals(CommandType.EXPORTSTUDENT, exportCommand.getCommandType());
+        assertEquals(CommandType.STUDENT, exportCommand.getCommandType());
     }
 
     @Test

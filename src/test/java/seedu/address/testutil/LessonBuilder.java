@@ -66,12 +66,12 @@ public class LessonBuilder {
     }
 
     /**
-     * Sets the {@code Student}'s attendance in the {@code Lesson} we are building.
+     * Sets the {@code Student}'s attendance and participation in the {@code Lesson} we are building.
      */
-    public LessonBuilder withAttendance(Student student, boolean attendance) {
+    public LessonBuilder withAttendanceAndParticipation(Student student, boolean attendance, int participationScore) {
         requireNonNull(student);
         studentLessonInfoList.removeIf(x -> x.isForStudent(student));
-        studentLessonInfoList.add(new StudentLessonInfo(student, attendance, 0));
+        studentLessonInfoList.add(new StudentLessonInfo(student, attendance, participationScore));
         return this;
     }
 

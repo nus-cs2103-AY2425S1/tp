@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalConsultations.CONSULT_2;
 import static seedu.address.testutil.TypicalLessons.LESSON_1;
 import static seedu.address.testutil.TypicalLessons.LESSON_2;
 import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.BENSON;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -64,6 +65,26 @@ public class AddressBookTest {
     }
 
     @Test
+    public void removeStudent_validStudent_alsoRemovedFromConsultsAndLessons() {
+        // setup
+        AddressBook addressBooks = new AddressBook();
+        addressBooks.addStudent(ALICE);
+        Consultation consultWithAlice = new ConsultationBuilder().withStudent(ALICE).build();
+        Lesson lessonWithAlice = new LessonBuilder().withStudent(ALICE).build();
+        addressBooks.addConsult(consultWithAlice);
+        addressBooks.addLesson(lessonWithAlice);
+        // remove ALICE
+        assert addressBooks.hasStudent(ALICE);
+        addressBooks.removeStudent(ALICE);
+        // check for no ALICE
+        Consultation resultConsult = addressBooks.getConsultList().get(0);
+        Lesson resultLesson = addressBooks.getLessonList().get(0);
+        assertFalse(addressBooks.hasStudent(ALICE));
+        assertFalse(resultConsult.hasStudent(ALICE));
+        assertFalse(resultLesson.hasStudent(ALICE));
+    }
+
+    @Test
     public void hasStudent_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
     }
@@ -85,6 +106,35 @@ public class AddressBookTest {
         Student editedAlice = new StudentBuilder(ALICE).withCourses(VALID_COURSE_CS2103T)
                 .build();
         assertTrue(addressBook.hasStudent(editedAlice));
+    }
+
+    @Test
+    public void setStudent_validStudent_alsoUpdatedInConsultationsAndLessons() {
+        // setup
+        AddressBook addressBooks = new AddressBook();
+        addressBooks.addStudent(ALICE);
+        Consultation consultWithAlice = new ConsultationBuilder().withStudent(ALICE).build();
+        Lesson lessonWithAlice = new LessonBuilder()
+                .withStudent(ALICE)
+                .withAttendanceAndParticipation(ALICE, true, 5)
+                .build();
+        addressBooks.addConsult(consultWithAlice);
+        addressBooks.addLesson(lessonWithAlice);
+        // Edit ALICE to BENSON
+        assert addressBooks.hasStudent(ALICE);
+        addressBooks.setStudent(ALICE, BENSON);
+        // Check for no ALICE
+        Consultation resultConsult = addressBooks.getConsultList().get(0);
+        Lesson resultLesson = addressBooks.getLessonList().get(0);
+        assertFalse(addressBooks.hasStudent(ALICE));
+        assertFalse(resultConsult.hasStudent(ALICE));
+        assertFalse(resultLesson.hasStudent(ALICE));
+        // Check for BENSON
+        assertTrue(addressBooks.hasStudent(BENSON));
+        assertTrue(resultConsult.hasStudent(BENSON));
+        assertTrue(resultLesson.hasStudent(BENSON));
+        assertTrue(resultLesson.getAttendance(BENSON));
+        assertEquals(resultLesson.getParticipation(BENSON), 5);
     }
 
     @Test
@@ -194,7 +244,8 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName()
                 + "{students=" + addressBook.getStudentList()
-                + ", consults=" + addressBook.getConsultList() + "}";
+                + ", consults=" + addressBook.getConsultList()
+                + ", lessons=" + addressBook.getLessonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 

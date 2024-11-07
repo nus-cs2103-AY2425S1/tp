@@ -30,6 +30,8 @@ import seedu.address.logic.commands.lesson.AddLessonCommand;
 import seedu.address.logic.commands.lesson.AddToLessonCommand;
 import seedu.address.logic.commands.lesson.DeleteLessonCommand;
 import seedu.address.logic.commands.lesson.ListLessonsCommand;
+import seedu.address.logic.commands.lesson.MarkLessonAttendanceCommand;
+import seedu.address.logic.commands.lesson.MarkLessonParticipationCommand;
 import seedu.address.logic.commands.lesson.RemoveFromLessonCommand;
 import seedu.address.logic.parser.consultation.AddConsultCommandParser;
 import seedu.address.logic.parser.consultation.AddToConsultCommandParser;
@@ -41,6 +43,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.lesson.AddLessonCommandParser;
 import seedu.address.logic.parser.lesson.AddToLessonCommandParser;
 import seedu.address.logic.parser.lesson.DeleteLessonCommandParser;
+import seedu.address.logic.parser.lesson.MarkLessonAttendanceCommandParser;
+import seedu.address.logic.parser.lesson.MarkLessonParticipationCommandParser;
 import seedu.address.logic.parser.lesson.RemoveFromLessonCommandParser;
 
 /**
@@ -143,6 +147,12 @@ public class AddressBookParser {
 
         case RemoveFromLessonCommand.COMMAND_WORD:
             return new RemoveFromLessonCommandParser().parse(arguments);
+
+        case MarkLessonAttendanceCommand.COMMAND_WORD:
+            return new MarkLessonAttendanceCommandParser().parse(arguments);
+
+        case MarkLessonParticipationCommand.COMMAND_WORD:
+            return new MarkLessonParticipationCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

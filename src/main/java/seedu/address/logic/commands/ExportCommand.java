@@ -24,7 +24,7 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
     public static final String FORCE_FLAG = "-f";
-    public static final CommandType COMMAND_TYPE = CommandType.EXPORTSTUDENT;
+    public static final CommandType COMMAND_TYPE = CommandType.STUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the current list of students to a CSV file. "
             + "Parameters: FILENAME " + "[" + FORCE_FLAG + "] "

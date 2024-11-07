@@ -41,6 +41,6 @@ public class ListCommandTest {
     @Test
     public void getCommandTypeMethod() {
         ListCommand listCommand = new ListCommand();
-        assertEquals(listCommand.getCommandType(), CommandType.LISTSTUDENT);
+        assertEquals(listCommand.getCommandType(), CommandType.STUDENT);
     }
 }

@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -25,10 +24,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
-    private static final int TAB_STUDENTS_INDEX = 0;
-    private static final int TAB_CONSULTATIONS_INDEX = 1;
-    private static final int TAB_LESSONS_INDEX = 2;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -62,9 +57,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
-
-    @FXML
-    private TabPane tabList;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -185,11 +177,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    @FXML
-    private void handleTab(int tabIndex) {
-        tabList.getSelectionModel().select(tabIndex);
-    }
-
     public StudentListPanel getStudentListPanel() {
         return studentListPanel;
     }
@@ -205,7 +192,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
@@ -220,31 +207,6 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case EXIT:
                 handleExit();
-                break;
-            // Student Commands
-            case LISTSTUDENT:
-            case ADDSTUDENT:
-            case EDITSTUDENT:
-            case FINDSTUDENT:
-            case DELETESTUDENT:
-            case EXPORTSTUDENT:
-            case IMPORTSTUDENT:
-                handleTab(TAB_STUDENTS_INDEX);
-                break;
-            // Consultation Commands
-            case LISTCONSULT:
-            case ADDCONSULT:
-            case DELETECONSULT:
-            case ADDTOCONSULT:
-            case REMOVEFROMCONSULT:
-                handleTab(TAB_CONSULTATIONS_INDEX);
-                break;
-            case LISTLESSONS:
-            case ADDLESSON:
-            case DELETELESSON:
-            case ADDTOLESSON:
-            case REMOVEFROMLESSON:
-                handleTab(TAB_LESSONS_INDEX);
                 break;
             default:
                 // Do Nothing

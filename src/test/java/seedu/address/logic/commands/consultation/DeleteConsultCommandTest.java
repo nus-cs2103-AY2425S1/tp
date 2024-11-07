@@ -166,6 +166,6 @@ public class DeleteConsultCommandTest {
         Set<Index> targetIndexSet = new HashSet<>();
         targetIndexSet.add(targetIndex);
         DeleteConsultCommand deleteCommand = new DeleteConsultCommand(targetIndexSet);
-        assertEquals(deleteCommand.getCommandType(), CommandType.DELETECONSULT);
+        assertEquals(deleteCommand.getCommandType(), CommandType.CONSULT);
     }
 }

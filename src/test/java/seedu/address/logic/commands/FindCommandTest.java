@@ -223,6 +223,6 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate firstPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         FindCommand findCommand = new FindCommand(firstPredicate);
-        assertEquals(findCommand.getCommandType(), CommandType.FINDSTUDENT);
+        assertEquals(findCommand.getCommandType(), CommandType.STUDENT);
     }
 }

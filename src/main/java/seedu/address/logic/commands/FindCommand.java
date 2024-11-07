@@ -21,7 +21,7 @@ import seedu.address.model.student.Student;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final CommandType COMMAND_TYPE = CommandType.FINDSTUDENT;
+    public static final CommandType COMMAND_TYPE = CommandType.STUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 public class ListLessonsCommand extends Command {
 
     public static final String COMMAND_WORD = "listlessons";
-    public static final CommandType COMMAND_TYPE = CommandType.LISTLESSONS;
+    public static final CommandType COMMAND_TYPE = CommandType.LESSON;
     public static final String MESSAGE_SUCCESS = "Listed all lessons";
 
     @Override

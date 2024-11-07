@@ -14,9 +14,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.exceptions.DuplicateConsultationException;
 import seedu.address.testutil.ConsultationBuilder;
 import seedu.address.testutil.ModelStub;
 
@@ -75,7 +77,7 @@ public class AddConsultCommandTest {
     public void getCommandTypeMethod() {
         Consultation consult = new ConsultationBuilder().build();
         AddConsultCommand addConsultCommand = new AddConsultCommand(consult);
-        assertEquals(addConsultCommand.getCommandType(), CommandType.ADDCONSULT);
+        assertEquals(addConsultCommand.getCommandType(), CommandType.CONSULT);
     }
 
     /**
@@ -99,6 +101,36 @@ public class AddConsultCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+    }
+
+    @Test
+    public void execute_duplicateConsult_throwsCommandException() {
+        Consultation consult = new ConsultationBuilder().withDate("2024-01-01").withTime("10:00").build();
+        AddConsultCommand addConsultCommand = new AddConsultCommand(consult);
+
+        ModelStubWithDuplicateConsult modelStub = new ModelStubWithDuplicateConsult(consult);
+
+        assertThrows(CommandException.class, () -> addConsultCommand.execute(modelStub));
+    }
+
+    private class ModelStubWithDuplicateConsult extends ModelStub {
+        private final Consultation consultation;
+
+        ModelStubWithDuplicateConsult(Consultation consultation) {
+            requireNonNull(consultation);
+            this.consultation = consultation;
+        }
+
+        @Override
+        public boolean hasConsult(Consultation consult) {
+            requireNonNull(consult);
+            return consultation.isSameConsultation(consult);
+        }
+
+        @Override
+        public void addConsult(Consultation consult) {
+            throw new DuplicateConsultationException();
         }
     }
 

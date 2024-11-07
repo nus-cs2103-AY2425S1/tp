@@ -80,6 +80,17 @@ public class LessonTest {
     }
 
     @Test
+    public void setStudent_success() {
+        Lesson lesson = new Lesson(date, time, List.of(
+                new StudentLessonInfo(student1, true, 1)));
+        lesson.setStudent(student1, student2);
+        assertFalse(lesson.getStudents().contains(student1));
+        assertTrue(lesson.getStudents().contains(student2));
+        assertTrue(lesson.getAttendance(student2));
+        assertEquals(lesson.getParticipation(student2), 1);
+    }
+
+    @Test
     public void getAttendance_studentExists_success() {
         boolean attendance = true;
         Lesson lesson = new Lesson(date, time, List.of(
