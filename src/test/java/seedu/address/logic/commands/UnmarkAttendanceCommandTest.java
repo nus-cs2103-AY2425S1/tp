@@ -18,15 +18,42 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-//import seedu.address.model.UserPrefs;
-//import seedu.address.model.person.Student;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.Teacher;
-//import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TeacherBuilder;
 
 public class UnmarkAttendanceCommandTest {
 
     private Model model = new ModelManager();
+
+    @Test
+    public void execute_unmarkAttendance_success() throws CommandException {
+        // Arrange: Create and add a student with marked attendance to the model
+        int initialDays = 5;
+        Student testStudent = new StudentBuilder().withName("Test Student")
+                .withDaysAttended(initialDays).build();
+        model.addPerson(testStudent);
+
+        // Increment attendance for the student
+        Student updatedStudent = (Student) testStudent.withIncrementedAttendance();
+        model.setPerson(testStudent, updatedStudent);
+
+        // Ensure increment is correct
+        assertEquals(initialDays + 1, updatedStudent.getDaysAttended().getValue());
+
+        // Prepare the command to unmark attendance
+        Index studentIndex = Index.fromZeroBased(model.getFilteredPersonList().indexOf(updatedStudent));
+        UnmarkAttendanceCommand unmarkAttendanceCommand = new UnmarkAttendanceCommand(
+                new Index[] { studentIndex });
+
+        // Expected model after unmarking attendance
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.unmarkAttendance(updatedStudent);
+
+        assertEquals(initialDays, updatedStudent.getDaysAttendedValue() - 1);
+    }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
