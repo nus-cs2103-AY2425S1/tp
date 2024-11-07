@@ -129,23 +129,23 @@ Assigns vendors to events.
 * `view v/2` then `assign 1` will assign the 1st event to the current viewed vendor, which is the 2nd vendor.
 * `view e/1` then `assign 3` will assign the 3rd vendor to the current viewed event, which is the 1st event.
 
-### Locating persons by name: `find`
+### Find items by keywords: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds vendors or events whose attributes contain any of the space separated keywords given.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find v/KEYWORD [MORE_KEYWORDS]` or `find e/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
+* Any partial matches will still be matched e.g. `han` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* All attributes of the `Vendor` or `Event` are searched, ie. name, phone number, date, descriptions and tags.
+* Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no matches are found, no changes will be made to the current view, and a message will be shown to the user indicating that no vendors/events were found.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find v/John` returns `john` and `John Doe`
+* `find e/alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Deleting a person : `delete`
 
@@ -216,6 +216,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find v/ KEYWORD [MORE_KEYWORDS] or e/ KEYWORD [MORE_KEYWORDS]` <br> e.g., `find v/James Jake`, `find e/Party at Alice's`
 **List**   | `list`
 **Help**   | `help`
