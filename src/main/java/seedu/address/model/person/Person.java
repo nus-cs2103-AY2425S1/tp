@@ -27,6 +27,7 @@ public class Person {
     private final Age age;
     private final Set<Tag> tags = new HashSet<>();
     private final Boolean hasPaid;
+    private final LastPaidDate lastPaidDate;
     private final Frequency frequency;
     private final ProfilePicFilePath profilePicFilePath;
 
@@ -34,9 +35,10 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Birthday birthday,
-                  Set<Tag> tags, Boolean hasPaid, Frequency frequency, ProfilePicFilePath profilePicFilePath) {
+                  Set<Tag> tags, Boolean hasPaid, LastPaidDate lastpaidDate, Frequency frequency,
+                  ProfilePicFilePath profilePicFilePath) {
 
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, birthday, tags);
         //hasPaid not required to be non-null for testing of commands that do not interact with paid status
         //e.g. edit command in AddressBookParserTest::parseCommand_edit()
         this.name = name;
@@ -47,6 +49,7 @@ public class Person {
         this.age = new Age(birthday);
         this.tags.addAll(tags);
         this.hasPaid = hasPaid;
+        this.lastPaidDate = lastpaidDate;
         this.frequency = frequency;
         this.profilePicFilePath = profilePicFilePath;
     }
@@ -86,6 +89,9 @@ public class Person {
     public Boolean getHasPaid() {
         return hasPaid;
     }
+    public LastPaidDate getLastPaidDate() {
+        return lastPaidDate;
+    }
     public Frequency getFrequency() {
         return frequency;
     }
@@ -102,7 +108,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                // && otherPerson.getName().equals(getName());
+                && this.getName().isSameName(otherPerson.getName());
     }
 
     /**
@@ -129,13 +136,14 @@ public class Person {
                 && age.equals(otherPerson.age)
                 && tags.equals(otherPerson.tags)
                 && hasPaid.equals(otherPerson.hasPaid)
+                && lastPaidDate.equals(otherPerson.lastPaidDate)
                 && frequency.equals(otherPerson.frequency);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, birthday, age, tags, hasPaid, frequency);
+        return Objects.hash(name, phone, email, address, birthday, age, tags, hasPaid, lastPaidDate, frequency);
     }
 
     @Override
@@ -149,6 +157,7 @@ public class Person {
                 .add("age", age)
                 .add("tags", tags)
                 .add("hasPaid", hasPaid)
+                .add("lastPaidDate", lastPaidDate)
                 .add("frequency", frequency)
                 .toString();
     }

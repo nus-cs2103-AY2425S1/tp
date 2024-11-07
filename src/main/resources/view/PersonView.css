@@ -63,3 +63,29 @@
     -fx-font-weight: bold;
     -fx-text-fill: #4a90e2;
 }
+
+/* Template button styling for dark theme */
+.button-template {
+    -fx-background-color: #3a3f47;
+    -fx-text-fill: #d1d1d1;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+    -fx-border-width: 0;
+}
+.button-template:hover {
+    -fx-background-color: #5a5f67;
+}
+.button-template:pressed {
+    -fx-background-color: #2f3338;
+}
+
+.notification-label {
+    -fx-background-color: #5a5f67;
+    -fx-text-fill: #f2f2f2;
+    -fx-padding: 8;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+}
+

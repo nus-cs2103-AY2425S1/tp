@@ -15,6 +15,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final String birthday;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String hasPaid;
+    private final String lastPaidDate;
     private final String frequency;
     private final String profilePicFilePath;
 
@@ -45,8 +47,10 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("hasPaid") String hasPaid, @JsonProperty("frequency") String frequency,
-                             @JsonProperty("profilePicFilePath") String profilePicFilePath) {
+            @JsonProperty("hasPaid") String hasPaid, @JsonProperty("lastPaidDate") String lastPaidDate,
+            @JsonProperty("frequency") String frequency,
+            @JsonProperty("profilePicFilePath") String profilePicFilePath) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +60,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.hasPaid = hasPaid;
+        this.lastPaidDate = lastPaidDate;
         this.frequency = frequency;
         this.profilePicFilePath = profilePicFilePath;
     }
@@ -73,6 +78,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         hasPaid = source.getHasPaid().toString();
+        lastPaidDate = source.getLastPaidDate().value.toString();
         frequency = source.getFrequency().value;
         profilePicFilePath = source.getProfilePicFilePath().toString();
     }
@@ -115,9 +121,6 @@ class JsonAdaptedPerson {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
         final Address modelAddress = new Address(address);
 
         if (birthday == null) {
@@ -137,6 +140,15 @@ class JsonAdaptedPerson {
 
         Boolean modelHasPaid = hasPaid.equals("true");
 
+        if (lastPaidDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LastPaidDate.class.getSimpleName()));
+        }
+        if (!LastPaidDate.isValidDate(lastPaidDate)) {
+            throw new IllegalValueException(LastPaidDate.MESSAGE_CONSTRAINTS);
+        }
+        final LastPaidDate modelLastPaidDate = new LastPaidDate(lastPaidDate);
+
         if (frequency == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Frequency.class.getSimpleName()));
@@ -153,7 +165,7 @@ class JsonAdaptedPerson {
         final ProfilePicFilePath modelProfilePicFilePath = new ProfilePicFilePath(Paths.get(profilePicFilePath));
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday,
-                modelTags, modelHasPaid, modelFrequency, modelProfilePicFilePath);
+                modelTags, modelHasPaid, modelLastPaidDate, modelFrequency, modelProfilePicFilePath);
     }
 
 }
