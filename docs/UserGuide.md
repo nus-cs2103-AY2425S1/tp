@@ -276,6 +276,16 @@ Examples:
 * `list` followed by `link 2 Winter Time Convention` links the 2nd person in the address book to the event.
 * `find p "John"` followed by `link 1 Party` links the 1st person in the results of the `find` command to the event.
 
+### Unlinking a person from an event : `unlink`
+
+Removes an existing link between a person and an event, so the event no longer appears in the person's details.
+
+Format: `unlink INDEX EVENT_NAME`
+
+Examples:
+
+* `list` followed by unlink 3 Winter Time Convention removes the link between the 3rd person in the address book and the event.
+* `find p "Jane"` followed by `unlink 1 Party` removes the link between the 1st person in the results of the `find` command and the event.
 
 ### Clearing all persons : `clear p`
 
@@ -445,5 +455,7 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 | **Find Person**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p James Jake`                                                                                                              |
 | **Find Event**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e Sentosa`                                                                                                                 |
 | **Search Person by Tag** | `search KEYWORD [MORE_KEYWORDS]`<br> e.g., `search Friends`                                                                                                               |
-| **List**                 | `list`                                                                                                                                                                    |
+| **Link**                 | `link INDEX ev/` <br> e.g., `link 1 ev/Winter Convention` 
+| **List**                 | `list`                                               
+| **Unlink**               | `unlink INDEX ev/EVENT_NAME` <br> e.g., `unlink 1 ev/Winter Convention`
 | **Help**                 | `help`                                                                                                                                                                    |
