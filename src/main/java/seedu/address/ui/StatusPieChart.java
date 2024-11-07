@@ -70,8 +70,8 @@ public class StatusPieChart extends UiPart<Region> {
         Platform.runLater(() -> {
             statusChart.getData().clear();
 
-            PieChart.Data naData = new PieChart.Data("N.A. (" + naCount + ")", naCount);
-            PieChart.Data nonUrgentData = new PieChart.Data("Non-Urgent (" + nonUrgentCount + ")", nonUrgentCount);
+            PieChart.Data naData = new PieChart.Data("NA (" + naCount + ")", naCount);
+            PieChart.Data nonUrgentData = new PieChart.Data("Non_Urgent (" + nonUrgentCount + ")", nonUrgentCount);
             PieChart.Data urgentData = new PieChart.Data("Urgent (" + urgentCount + ")", urgentCount);
 
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(

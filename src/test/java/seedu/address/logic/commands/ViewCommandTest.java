@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -31,7 +32,7 @@ class ViewCommandTest {
         Client clientToView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_CLIENT);
 
-        String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView);
+        String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, Messages.format(clientToView));
 
         CommandResult result = viewCommand.execute(model);
 

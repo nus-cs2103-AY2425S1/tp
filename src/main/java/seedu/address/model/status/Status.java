@@ -12,6 +12,7 @@ public class Status {
     public static final String MESSAGE_CONSTRAINTS = "Status must be set to 'Urgent', 'Non_Urgent', or 'NA'. "
             + "Please use one of these options if specifying a status.";
 
+
     public final StatusEnum status;
 
     /**
@@ -22,11 +23,7 @@ public class Status {
     public Status(String statusString) {
         requireNonNull(statusString);
         checkArgument(isValidStatus(statusString), MESSAGE_CONSTRAINTS);
-        if (statusString.isEmpty()) {
-            this.status = StatusEnum.NA;
-        } else {
-            this.status = StatusEnum.valueOf(statusString.toUpperCase());
-        }
+        this.status = StatusEnum.valueOf(statusString.toUpperCase());
     }
 
     /**
@@ -36,9 +33,6 @@ public class Status {
      * @return A boolean value that checks if a given string, belongs to one of the valid status enum values
      */
     public static boolean isValidStatus(String test) {
-        if (test.isEmpty()) {
-            return false;
-        }
         for (StatusEnum currentEnum: StatusEnum.values()) {
             if (currentEnum.name().equals(test.toUpperCase())) {
                 return true;
@@ -75,7 +69,7 @@ public class Status {
      * Formats the status into a string form, without square brackets.
      * @return The string value of the status without brackets
      */
-    public String toParsableString() {
+    public String getValue() {
         return status.toString();
     }
 

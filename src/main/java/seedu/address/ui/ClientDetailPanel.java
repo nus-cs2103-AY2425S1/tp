@@ -126,11 +126,11 @@ public class ClientDetailPanel extends UiPart<Region> {
             setLabelText(emailLabel, client.getEmail().value);
             setLabelText(jobLabel, client.getJob().value);
             setLabelText(incomeLabel, String.valueOf(client.getIncome()));
-            setTier(client.getTier().toParsableString());
+            setTier(client.getTier().getValue());
             setStatus(client.getStatus());
             setLabelText(remarkLabel, client.getRemark().value);
             tagsGroup.getChildren().clear();
-            setTier(client.getTier().toParsableString());
+            setTier(client.getTier().getValue());
             setStatus(client.getStatus());
             boolean hasTags = !tagsGroup.getChildren().isEmpty();
             setManagedAndVisible(tagsContainer, hasTags);
@@ -173,7 +173,7 @@ public class ClientDetailPanel extends UiPart<Region> {
      */
     private void setStatus(Status status) {
         if (status.status != Status.StatusEnum.NA) {
-            Label statusLabel = new Label(status.toParsableString());
+            Label statusLabel = new Label(status.toString());
             String styleClass = switch (status.status) {
             case URGENT -> "urgent-status";
             case NON_URGENT -> "nonUrgent-status";
