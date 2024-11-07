@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# KnottyPlanners Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -294,8 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Wedding Planner | List all weddings                                 | I can view all my weddings that I am planning                                            |
 | `* *`    | Wedding Planner | View all contacts associated with a wedding       | I can easily view which stakeholders are involved in that wedding                        |
 | `* *`    | Wedding Planner | Tag my contacts to a wedding                      | I can group relevant stakeholders and attendees of a wedding together                    |
-| `* *`    | Wedding Planner | Un-tag my contacts from a wedding                 | I can remove relevant stakeholders and attendees who will no associate with that wedding |
-| `*`      | Wedding Planner | Assign contacts to specific events                | I can keep track of all parties involved in a wedding                                    |
+| `* *`    | Wedding Planner | Un-tag my contacts from a wedding                 | I can remove relevant stakeholders and attendees who will no associate with that wedding | |
 | `*`      | Wedding Planner | Create and manage guest lists for each wedding    | I can track RSVPs and dietary preferences                                                |
 | `*`      | Wedding Planner | Track vendor bookings for each wedding            | I can ensure all necessary services are confirmed                                        |
 | `*`      | Wedding Planner | Rate or review vendors after each event           | I can assess their performance for future recommendations                                |
@@ -625,13 +624,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  The system should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using keyboard commands than using the mouse.
 4.  The system should return a response to commands that are inputted by the user within three seconds.
-5.  The codebase should be compliant with AB3 architecture and logic to facilitate easier testing and debugging.
+5.  The codebase should be compliant with KnottyPlanners architecture and logic to facilitate easier testing and debugging.
 6.  The system should be operational and responsive 24/7.
 
 ### Glossary
 
 * **Contact:** An individual or organization associated with wedding planning, such as a client or vendor.
-* **Job:** A service provider for weddings, e.g., caterers, florists, or photographers.
+* **Job:** Role of a person during the weddings, e.g., caterers, florists, or photographer.
 * **Wedding Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to
 multiple contacts involved in the same wedding event.
 * **AddressBook:** The main data model that represents the collection of all 'Person' objects within KnottyPlanners.

@@ -4,7 +4,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 
@@ -38,7 +37,9 @@ public class DeleteNCommandTest {
         DeleteNCommand deleteNCommand = new DeleteNCommand();
         CommandResult commandResult = deleteNCommand.execute(model);
 
-        assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
+        String expectedMessage = DeleteNCommand.MESSAGE_CANCEL_DELETE;
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertNull(StaticContext.getPersonToDelete());
     }
 
@@ -50,7 +51,9 @@ public class DeleteNCommandTest {
         DeleteNCommand deleteNCommand = new DeleteNCommand();
         CommandResult commandResult = deleteNCommand.execute(model);
 
-        assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
+        String expectedMessage = DeleteNCommand.MESSAGE_CANCEL_DELETE;
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertNull(StaticContext.getWeddingToDelete());
     }
 
@@ -60,8 +63,9 @@ public class DeleteNCommandTest {
 
         DeleteNCommand deleteNCommand = new DeleteNCommand();
         CommandResult commandResult = deleteNCommand.execute(model);
+        String expectedMessage = DeleteNCommand.MESSAGE_CANCEL_DELETE;
 
-        assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(false, StaticContext.isClearAddressBookPending());
     }
 
@@ -72,7 +76,9 @@ public class DeleteNCommandTest {
         DeleteNCommand deleteNCommand = new DeleteNCommand();
         CommandResult commandResult = deleteNCommand.execute(model);
 
-        assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
+        String expectedMessage = DeleteNCommand.MESSAGE_CANCEL_DELETE;
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(false, StaticContext.isClearWeddingBookPending());
     }
 
