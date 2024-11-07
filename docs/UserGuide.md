@@ -13,6 +13,7 @@ done faster than traditional GUI apps.
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -22,14 +23,15 @@ done faster than traditional GUI apps.
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Teletutors.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command 
-to run the application.<br>
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
-2. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
+   
+5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
-open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -42,8 +44,9 @@ open the help window.<br>
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
@@ -80,6 +83,10 @@ as space characters surrounding line-breaks may be omitted when copied over to t
 
 Shows a message explaning how to access the help page.
 
+![help message](images/helpMessage.png)
+
+Format: `help`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -92,10 +99,6 @@ Undoes the previous command. <br>
 The closeat command is currently not undoable (planned for future versions).
 
 Format: `undo`
-
-![help message](images/helpMessage.png)
-
-Format: `help`
 
 ## Student Commands
 
@@ -177,11 +180,11 @@ from the contact list.
 
 <box type="tip" seamless>
 
-**Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the 
-student number is not known. However, if there are multiple students with the same name, the student number is required 
-to differentiate between them.
+**Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
+
 </box>
 
+</box>
 
 ### Marking Attendance : `markat`
 
@@ -303,6 +306,7 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
