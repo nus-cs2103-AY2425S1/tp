@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,15 +22,18 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD_RANDOM_CASE = "FiNd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose:\n"
-            + "1. name contain any of the specified KEYWORDS (case-insensitive)\n"
-            + "Parameters: [n/KEYWORD [MORE_KEYWORDS...]] AND\n"
+            + "1. name contains any of the specified KEYWORDS (case-insensitive) AND\n"
             + "2. schedule is on any of the specified DAY keywords (case-insensitive)\n"
-            + "Parameters: [d/DAY [MORE_DAYS...]]\n"
             + "and displays them as a list with index numbers.\n"
-            + "Example: " + COMMAND_WORD + " n/alice bob charlie" + " d/monday tuesday";
+            + "Parameters: " + "[" + PREFIX_NAME + "KEYWORD [MORE_KEYWORDS...]] "
+            + "[" + PREFIX_DAY + "[MORE_DAYS...]]\n"
+            + "Example: " + COMMAND_WORD
+            + " " + PREFIX_NAME + "alex bernice charlotte"
+            + " " + PREFIX_DAY + "wednesday saturday";
+
 
     public static final String MESSAGE_NO_PARAMETERS =
-            "At least one field to find must be provided.\n" + MESSAGE_USAGE;
+            "At least one field to find must be provided.\n";
     public static final String MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX =
             "At least one name keyword to find must be provided.";
     public static final String MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX =

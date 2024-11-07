@@ -46,6 +46,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
 
+        // set editStudentDescriptor fields if present
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editStudentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }

@@ -204,7 +204,24 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
   Additionally, it is not user-friendly for fast typists, as multiline commands are required to add a student.
 
 
-### Owe feature
+### Owe tuition fees
+
+The owe command is part of UGTeach's payment tracking feature. It is used to track the amount of tuition fee owed by a student. The `OweCommandParser` is responsible for parsing the user input and creating an `OweCommand` object. The `OweCommand` object is then executed by the `Logic` component.
+
+`OweCommandParser` obtains the `INDEX` of the student and the values corresponding to the prefix `hr/` from the user input. The `OweCommandParser` will enforce the following constraints:
+* The `INDEX` must be a positive integer.
+* The prefix `hr/` must be provided.
+* If the prefixes are provided, they must appear for only once.
+* Value corresponding to the prefix that is provided must be non-empty and valid (positive multiple of 0.5).
+
+If the constraints are not met, the `OweCommandParser` will throw a `ParseException` with an error message indicating the constraint that was violated.
+Otherwise, a new instance of `OweCommand` is then created with the values of `INDEX` and `HOURS_OWED` parsed by `OweCommandParser`.
+
+On execution, `OweCommand` first queries the supplied model for the student to be updated using the `INDEX`. 
+
+Then, `OweCommand` calculates the amount of tuition fee owed and checks if the total amount owed by the student exceeds the limit of `9999999.99`. If it exceeds, `OweCommand` will throw a `CommandException` with an error message indicating that limit was violated.
+
+Finally, `OweCommand` updates the total amount of tuition fee owed by the student by creating a new `Student` instance with updated fields to replace the outdated `Student` instance in the model.
 
 The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
 <puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>

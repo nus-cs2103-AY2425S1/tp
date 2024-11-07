@@ -37,6 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        // EP: valid command with all fields specified
         Student editedStudent = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
@@ -52,6 +53,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        // EP: valid command with some fields specified
         Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
         Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
@@ -74,6 +76,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+        // EP: valid command with no fields specified
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, new EditStudentDescriptor());
         Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
@@ -87,6 +90,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
+        // EP: valid command in a filtered list
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
@@ -105,6 +109,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateStudentUnfilteredList_failure() {
+        // EP: edit a student to a duplicate in an unfiltered list
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_STUDENT, descriptor);
@@ -114,9 +119,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateStudentFilteredList_failure() {
+
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        // edit student in filtered list into a duplicate in address book
+        // EP: edit student in filtered list into a duplicate in the ugteach data file
         Student studentInList = model.getAddressBook().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
                 new EditStudentDescriptorBuilder(studentInList).build());
@@ -126,6 +132,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidStudentIndexUnfilteredList_failure() {
+        // EP: invalid index in an unfiltered list
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -134,11 +141,12 @@ public class EditCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Edits filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
      */
     @Test
     public void execute_invalidStudentIndexFilteredList_failure() {
+        // EP: invalid index in a filtered list
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         Index outOfBoundIndex = INDEX_SECOND_STUDENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
