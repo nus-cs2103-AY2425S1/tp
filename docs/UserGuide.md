@@ -130,7 +130,7 @@ Examples:
 
 **<ins>When in the main or inspect window**
 
-Takes you back to the main window, and shows a list of all contacts added to the contacts list. 
+Takes you back to the main window, and shows a list of all contacts added to the contacts list.
 
 Format: `list`
 
@@ -141,8 +141,8 @@ Edits an existing contact in the contacts list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the contact at the specified `INDEX`. 
-  - The index is the number displayed next to the contact's name in the list. 
+* Edits the contact at the specified `INDEX`.
+  - The index is the number displayed next to the contact's name in the list.
   - The index **must be a positive number** (starting from 1).
 * You must provide at least one optional field (in [ ]). This means you need to update at least one of the following fields: name, phone, email, role, address, or tag.
 * Editing tags will replace **all** existing ones. If you simply want to remove all tags, type 't/' without specifying any tags after.
@@ -174,7 +174,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * **Keyword order does not matter**: You can enter keywords in any order. e.g. `Hans Bo` will match `Bo Hans`
 * **Only names are searched**: The search only looks at the contact's name, not other details like phone number or address.
 * **Matches full words only**: e.g. `Han` will not match `Hans`
-* **"OR" search**: If a contact's name matches any of the keywords, it will be shown. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* **"OR" search**: If a contact's name contains any of the keywords, it will be shown. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -189,50 +189,54 @@ Find command does not work in the inspect window.
 ### Archiving a contact or delivery : `archive`
 **<ins>When in the main window**
 
-Archives the specified contact from the contacts list. Archived items will have its visibility reduced and be moved to the end of the list.
+Archives the specified contact(s) from the contacts list.<br>
+Archived contact(s) will be less visible and moved to the bottom of the list.
 
 Format: `archive [INDEXES]...`
 
 * Archive the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* The indexes **must not have duplicates**. For example, `archive 1 2 2 4` is not allowed.
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
+* The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
 
 Examples:
-* `list` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+* `back` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
 Note:
-* `inspect INDEX` and `edit INDEX` would not work for archived contact.
+* You will not be able to use `inspect` and `edit` for archived contacts.
 
 **<ins>When in the inspect window**
 
-Archives the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Archives the specified delivery or deliveries from the delivery list of a contact.
+* The same rules apply as in the main window section.
 
 Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
 Note:
-* `edit INDEX` would not work for archived delivery.
+* You will not be able to use `edit` for archived deliveries.
 
 ### Unarchive a contact or delivery : `unarchive`
 **<ins>When in the main window**
 
-Unarchive the specified contact from the contacts list if they are archived, the visibility of the contact would be restored.
+Unarchives the specified contact(s) to restore their visibility in the contacts list, if they were previously archived.
 
 Format: `unarchive [INDEXES]...`
 
-* Undo the archive command the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* The indexes **must not have duplicates**. For example, `unarchive 1 2 2 4 ` is not allowed.
+* Undoes the archive action for the contact(s) at the specified `INDEXES`.
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
+* The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
+
 
 Examples:
-* `list` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `back` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
 
 **<ins>When in the inspect window**
 
-Unarchives the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Unarchives the specified delivery or deliveries to restore their visibility in the delivery list of a contact, if they were previously archived.
+* The same rules apply as in the main window section.
 
 Examples:
 * `unarchive 2` unarchives the 2nd delivery in the delivery list of the inspected contact.
@@ -241,44 +245,44 @@ Examples:
 ### Sorting the contacts or delivery list in ascending order: `asort`
 **<ins>When in the main window**
 
-Sorts all contacts in the contacts list by the specified attribute, in ascending order.
+Sorts all contacts in the contacts list by the specified attribute, from lowest to highest.
 
 Format `asort by/ [ATTRIBUTE]`
 
-* Current attributes supported are: date, email, name, phone, role.
+* Attributes you can sort by: date, email, name, phone, role.
 
 Examples:
 * `asort by/ name` sorts the contacts list by name, in ascending alphabetical order (e.g. A, B, C, ...).
-* `asort by/ date` sorts the contacts list by the date the contact was added, in ascending date order (e.g. 2024-10-31 before 2024-11-1).
+* `asort by/ date` sorts the contacts list by the date the contacts were added, from oldest to newest (e.g. 2024-10-31 before 2024-11-1).
 
 **<ins>When in the inspect window**
 
-Sorts all deliveries in the delivery list of a contact by the specified attribute, in ascending order.
+Sorts all deliveries in the delivery list of a contact by the specified attribute, from lowest to highest.
 
 Format `asort by/ [ATTRIBUTE]`
 
-* Current attributes supported are: address, cost, date, eta, id, status.
+* Attributes you can sort by: address, cost, date, eta, id, status.
 
 Examples:
-* `asort by/ cost` sorts the delivery list by ascending cost (e.g. $1, $100, $1000, ...).
+* `asort by/ cost` sorts the delivery list by cost, from lowest to highest (e.g. $1, $100, $1000, ...).
 * `asort by/ status` sorts the delivery list by delivery status, where `not delivered` deliveries come before `delivered` deliveries.
 
 ### Sorting the contacts or delivery list in descending order: `dsort`
 
-Does the same thing as `asort`, except the sorting is now done in descending order.
+`dsort` works the same way as `asort`, except the sorting is now done from highest to lowest.
 
-Refer to the `asort` feature explanation, and replace `asort` with `dsort` where appropriate.
+Simply use the same format as `asort`, but replace `asort` with `dsort`.
 
 ### Deleting a contact or delivery : `delete`
 **<ins>When in the main window**
 
-Deletes the specified contact from the contacts list.
+Deletes the specified contact(s) from the contacts list.
 
 Format: `delete [INDEXES]...`
 
 * Deletes the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
 
 Examples:
 * `list` followed by `delete 2 3` deletes the 2nd and 3rd contact in the contacts list.
@@ -286,7 +290,8 @@ Examples:
 
 **<ins>When in the inspect window**
 
-Deletes the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Deletes the specified delivery or deliveries from the delivery list of a contact.
+* The same rules apply as in the main window section.
 
 Examples:
 * `delete 2` deletes the 2nd delivery in the delivery list of the inspected contact.
@@ -300,31 +305,31 @@ Inspects a specified contact from the contacts list to see their delivery list.
 Format: `inspect [INDEX]`
 
 * Inspects the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contacts list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index is the number displayed next to the contact's name in the list.
+* The index **must be a positive number** (starting from 1).
 
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
 **<ins>When in the inspect window**
 
-`inspect` command does not work in the inspect window.
+`inspect` does not work in the inspect window.
 
 ### Clearing all entries : `clear`
 **<ins>When in the main or inspect window**
 
-Clears all entries from the contacts list.
+Clears all contacts from the contacts list.
 
 Format: `clear`
 
 **<ins>When in the main or inspect window**
 
-clear command does not work in the inspect window.
+`clear` does not work in the inspect window.
 
 ### Exiting the program : `exit`
 **<ins>When in the main or inspect window**
 
-Exits the program.
+Exits LogiLink.
 
 Format: `exit`
 

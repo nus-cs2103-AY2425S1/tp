@@ -10,12 +10,14 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.BackCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FinddelCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.InspectCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -98,6 +100,12 @@ public class AddressBookParser {
         case SortCommand.COMMAND_WORD_DESCENDING:
             SortCommandParser.setAscending(false);
             return new SortCommandParser().parse(arguments);
+
+        case FinddelCommand.COMMAND_WORD:
+            return new FinddelCommandParser().parse(arguments);
+
+        case BackCommand.COMMAND_WORD:
+            return new BackCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

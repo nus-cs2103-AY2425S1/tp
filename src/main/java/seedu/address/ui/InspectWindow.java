@@ -147,7 +147,7 @@ public class InspectWindow extends UiPart<Stage> {
 
         personInfoBox.getChildren().addAll(nameField, phoneField, emailField, addressField, tagsField, roleField);
 
-        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(InspectWindow.person.getUnmodifiableDeliveryList());
+        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(logic.getFilteredDeliveryList());
         VBox deliveryListBox = new VBox(deliveryListPanel.getRoot());
 
         personInfoPlaceholder.getChildren().add(personInfoBox);
