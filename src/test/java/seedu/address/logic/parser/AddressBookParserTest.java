@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -125,8 +126,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
+        // basic list command
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+
+        // list command with valid sort parameter
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + PREFIX_SORT + "name") instanceof ListCommand);
     }
 
     @Test
