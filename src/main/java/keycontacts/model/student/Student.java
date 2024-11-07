@@ -246,7 +246,7 @@ public class Student {
     }
 
     /**
-     * Returns true if both students have the same name (case-insensitive) and same phone number (case-insensitive).
+     * Returns true if both students have the same name (case-insensitive) and same phone number.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
@@ -256,7 +256,7 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getName().fullName.equalsIgnoreCase(getName().fullName)
-                && otherStudent.getPhone().value.equalsIgnoreCase(getPhone().value);
+                && otherStudent.getPhone().equals(getPhone());
     }
 
     /**
