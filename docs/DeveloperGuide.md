@@ -499,27 +499,96 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a person
 
-1. Deleting a person while all persons are being shown
+1. Adding a candidate to hiredfiredpro
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `add n/Adib j/Developer p/12345678 e/example@example i/1`<br>
+       Expected: New candidate will be added at the end of the list ie. if there are 6 people in the list, he will be 7<sup>th<sup>
+
+    1. Test case: `add n/Adib p/12345678 e/example@example i/1`<br>
+       Expected: Error details shown in the result panel.
+
+    1. Test case: `add n/Adib j/Developer p/phone_number e/example@example i/100`, `...` (invalid parameters for certain fields)<br>
+       Expected: Similar to previous.
+
+    1. Other incorrect delete commands to try: `add`, `add i/1`, `...`(missing one or more compulsory fields)<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Deleting a candidate
+
+1. Deleting a candidate while all candidates are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple candidates in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No candidate is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+1. Viewing a candidate while no candidates are being shown
+
+   1. Prerequisites: List all persons using the `find xxx` where xxx is a name not existing in current candidates list. Multiple candidates existing.
+
+   1. Test case: `delete 1`<br>
+      Expected: No candidate will be deleted. Error details shown in the result panel.
 
 1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data folder.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Open the folder where hiredfiredpro.jar is located.
+
+   1. Data folder containing json file does not exist.
+ 
+   1. Upon making any changes to hiredfiredpro, data folder with json file will be created with updated information.
+
+1. Deleting existing hiredfiredpro.json file in existing data folder.
+
+   1. Open the folder where hiredfiredpro.jar is located. 
+      
+   1. Click into the data folder and delete the existing json file inside. There should only be one file in the data folder
+
+   1. Upon launching hiredfiredpro, our sample data of 6 people will be shown. Changes made up to that point will be discarded.
+
+1. Saving data after changes are made.
+
+   1. Prerequisites: HiredFiredPro should be opened.
+
+   1. Make any changes (e.g `delete 1`).
+
+   1. Close the app.
+
+   1. Open the hiredfiredpro.json file which would be in the same folder as your jar file. <br>
+      
+   1. All changes made are reflected in the json file.
+
+1. _{ more test cases …​ }_
+
+### Viewing Candidates
+
+   1. Viewing a candidate while all candidates are being shown
+
+      1. Prerequisites: List all persons using the `list` command. Multiple candidates in the list. 
+
+      1. Test case: `view n/Adib j/Developer`<br>
+         Expected: Candidate with their details will be shown on the display panel.
+
+      1. Test case: `view n/Adib`, `...` (missing compulsory fields)<br>
+         Expected: No candidate displayed on display panel. Error details shown in the result panel.
+
+   1. Viewing a candidate while no candidates are being shown
+
+       1. Prerequisites: List all persons using the `find xxx` where xxx is a name not existing in current candidates list. Multiple candidates existing.
+
+       1. Test case: `view n/Adib j/Developer`<br>
+          Expected: No candidate displayed on display panel. Error details shown in the result panel.
 
 1. _{ more test cases …​ }_
