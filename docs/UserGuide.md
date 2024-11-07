@@ -62,12 +62,12 @@ if you are using macOS, Ubuntu or Debian, you should see something like this:
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
 
-If your Java version is **not 17**, you may refer to the [FAQ section](#faq) for instructions on installing Java 17. 
+If your machine is **not running Java 17**, you may refer to the [FAQ section](#faq) for instructions on installing Java 17. 
 
 
 #### Step 2: Download the MediBase3 JAR File
 
-1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.3/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this
+1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.5/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this:
 ![githubAssets.png](images/githubAssets.png)
 1. Click on `medibase3.jar` to download the latest MediBase3 JAR File.
 2. Save the file to a location of your choice (e.g., `Downloads` folder).
@@ -84,12 +84,13 @@ If your Java version is **not 17**, you may refer to the [FAQ section](#faq) for
 > java -jar medibase3.jar
 > ```
 
-You should be greeted by the UI, which you will see in the next section.
+You should be greeted by the GUI, which you will see in the next section.
 
 ### Overview of the GUI
 
-Once MediBase3 is running, you will see the main interface. The interface is segmented into different **panel**s, as 
-seen in the image below. Here’s an overview of the key panels:
+![GUIOverview.jpg](images/GUIOverview.jpg)
+
+Once MediBase3 is running, you will see the main interface, as seen in the image above. It is segmented into different **panel**s. Here’s an overview of the key panels:
 
 - **Command Box:** Where you can type and enter commands.
 - **Result Display:** Shows the result of the command you entered.
@@ -97,8 +98,6 @@ seen in the image below. Here’s an overview of the key panels:
 - **Appointment List:** Displays the scheduled appointments for patients.
 - **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
 - **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
-
-![GUIOverview.jpg](images/GUIOverview.jpg)
 
 ### Overview of CLI
 
@@ -139,57 +138,27 @@ This example shows how a typical command might look in MediBase3, with three mai
 
 ### A First Look at MediBase3
 
-Here’s a basic tutorial on how to start using the application:
+Here are some basic commands to get you started.
 
-1. **View the Help Guide:**
-   - Once MediBase3 is running, you can type the following command to view the help window:
-   >```
-   > help
-   >```
-     
-2. **Add a New Patient:**
-   - To add a new patient, use the following command:
-   >```
-   > add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 
-   > e/johnd@example.com a/311, Clementi Ave 2, #02-25 
-   >```
+1. `help`: Opens the help window.
 
-   - This will add a patient named John Doe to the system.
+2. `add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`:  
+   Adds a patient named John Doe to the system.
 
+3. `edit S1234567A p/91234567 e/johndoe@example.com`:  
+   Edits the phone number and email of the patient with NRIC `S1234567A`.
 
-3. **Edit Patient Information:**
-   - If there’s a typo or information changes, use the `edit` command:
-   >```
-   > edit S1234567A p/91234567 e/johndoe@example.com
-   >```
-     
-   - This will change the phone number and email of the patient with NRIC S1234567A
+4. `findNric T0123456A`:  
+   Finds and displays the patient with NRIC `T0123456A`.
 
+5. `delete T0123456A`:  
+   Deletes the patient with NRIC `T0123456A`.
 
-4. **Find a Patient by NRIC:**
-   - To find a patient by NRIC, type:
-   >```
-   > findNric T0123456A
-   >```
-     
-   - This will show the patient with the NRIC `T0123456A`.
+6. `clear`:  
+   Clears all patient and appointment data from the system.
 
+[Back to Table of Contents](#table-of-contents)
 
-5. **Delete a Patient:**
-   - To remove a patient who is no longer visiting the clinic/hospital, type:
-   >```
-   > delete T0123456A
-   >```
-   
-     
-   - This deletes the patient with the NRIC `T0123456A`.
-
-
-6. **Clear All Entries:**
-   - To remove all patient and appointment data from the system, type:
-   >```
-   > clear
-   >```
 
 
 You’re now ready to start using MediBase3.  
