@@ -27,6 +27,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
@@ -74,6 +75,28 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        // Check that all tags that user wants to add are in the Wedlinker
+        if (editPersonDescriptor.getTags().isPresent()) {
+            Set < Tag > editedTags = editPersonDescriptor.getTags().get();
+            for (Tag tag : editedTags) {
+                if (!model.hasTag(tag)) {
+                    throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND);
+                }
+            }
+        }
+
+        // Check that all weddings that user wants to add are in the Wedlinker
+        if (editPersonDescriptor.getWeddings().isPresent()) {
+            Set < Wedding > editedWeddings = editPersonDescriptor.getWeddings().get();
+            for (Wedding wedding : editedWeddings) {
+                if (!model.hasWedding(wedding)) {
+                    throw new CommandException(Messages.MESSAGE_WEDDING_NOT_FOUND);
+                }
+            }
+        }
+
         Person personToEdit = getPerson(model);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
@@ -114,8 +137,13 @@ public class EditCommand extends Command {
         Set<Wedding> updatedWeddings = editPersonDescriptor.getWeddings().orElse(personToEdit.getWeddings());
         Set<Task> updatedTasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedWeddings, updatedTasks);
+        if (personToEdit.isVendor()) {
+            return new Vendor(updatedName, updatedPhone, updatedEmail,
+                    updatedAddress, updatedTags, updatedWeddings, updatedTasks);
+        } else {
+            return new Person(updatedName, updatedPhone, updatedEmail,
+                    updatedAddress, updatedTags, updatedWeddings, updatedTasks);
+        }
     }
 
     @Override
