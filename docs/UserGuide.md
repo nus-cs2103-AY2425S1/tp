@@ -157,12 +157,13 @@ Edits an existing Udder in the address book.
 
 Schedules a meeting with an Udder from the specified start time to end time, at the location.
 
-**Format:** `schedule UDDER_INDEX st/YYYY-MM-DD HH:MM et/YYYY-MM-DD HH:MM l/LOCATION`
+**Format:** `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
 
 * Automatically detects any clash in meetings with other Udders.
 
 **Examples:**
-*  `schedule 10 st/2002-12-25 00:00 et/2002-12-25 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 00:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
+*  `schedule 10 st/25-12-2002 00:00 et/25-12-2002 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 00:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
+*  `schedule 1 st/09-10-2024 09:00 et/09-10-2024 10:00 l/The Terrace` schedules a meeting with the 1st Udder starting from `9th October 2024, 09:00 a.m.` and ending at `9th October 2024, 10:00 a.m.`, at `The Terrace`.
 
 ### Edit meeting with an Udder: `editm` ✏️
 
