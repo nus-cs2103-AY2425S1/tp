@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAMILY_SIZE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_REMARK, PREFIX_PRIORITY, PREFIX_DATE_OF_BIRTH, PREFIX_INCOME);
+                        PREFIX_REMARK, PREFIX_PRIORITY, PREFIX_DATE_OF_BIRTH, PREFIX_INCOME, PREFIX_FAMILY_SIZE);
 
         Index index;
 
@@ -48,7 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_DATE_OF_BIRTH, PREFIX_REMARK, PREFIX_PRIORITY, PREFIX_INCOME);
+                PREFIX_DATE_OF_BIRTH, PREFIX_REMARK, PREFIX_PRIORITY, PREFIX_INCOME, PREFIX_FAMILY_SIZE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -77,6 +78,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
             editPersonDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));
+        }
+        if (argMultimap.getValue(PREFIX_FAMILY_SIZE).isPresent()) {
+            editPersonDescriptor.setFamilySize(
+                    ParserUtil.parseFamilySize(argMultimap.getValue(PREFIX_FAMILY_SIZE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
