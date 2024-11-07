@@ -187,7 +187,7 @@ Format: `list`
 
 ### Viewing a student's detail : `detail`
 
-Shows the details of a specific student. 
+Displays a window that shows the student's details.
 
 Format: `detail STUDENT_ID`
 
@@ -202,6 +202,13 @@ Examples:
 ![Detail Success Message](/images/detail.png)
 
 ## Searching and Sorting
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+* All the following commands will updated the list of students shown in the main window.
+* To return to the full list of students, use the `list` command.
+
+</div>
+
 ### Finding a student : `find`
 
 Finds students whose names contain any of the given keywords.
@@ -232,6 +239,13 @@ Format: `sort by\FIELD`
 * Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
 * Sorting by studentId will sort students based in ascending order based on their studentId.
 * Sorting by yearGroup will sort students in ascending order based on their year group.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+* Sort command will sort the current list of students shown in the main window.
+For example, if you have filtered the list by year group 2 students and then use the `sort by\name` command, only year group 2 students will be sorted.
+</div>
+
 Examples:
 * `sort by\name`
 * `sort by\subject`
@@ -248,6 +262,7 @@ Format: `filter FIELD\VALUE`
 
 * You can only filter by EITHER year group or class.
 * You can only filter one value (eg. filter by Science only).
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After filtering, you can use `list` command to return to the full list of students.
 </div>
@@ -284,6 +299,9 @@ Examples:
 Displays a window that shows how many students are taking each of all the subjects.
 
 Format: `tracksubject`
+
+* The subject count will be displayed in a pop-up window.
+* User may use keyboard shortcut `B` to close the pop-up window.
 
 *Note*: Track subject displays the number of students based on the filtered list. For example,
 filtering by year 2 students followed by a `tracksubject` command will only show how many year 2 students 
