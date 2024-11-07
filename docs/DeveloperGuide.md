@@ -25,6 +25,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 ### Architecture
@@ -50,6 +52,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -66,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -84,6 +90,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W09-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -91,6 +99,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -234,6 +244,8 @@ Step 6. The user executes `clear`, which calls `Model#commitHiredFiredPro()`. Si
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
@@ -283,7 +295,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 compare candidates, and make informed hiring decisions with efficient CLI commands, faster than a typical 
 mouse/GUI driven app.
 
-
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -322,6 +334,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
   - Steps 1a1-1a2 are repeated until the data entered are correct.
   - Use case resumes from step 2.
 
+<div style="page-break-after: always;"></div>
 
 ---
 
@@ -437,6 +450,7 @@ Use case ends.
 8. Sensitive information, like candidate emails and phone numbers, should be stored securely and not exposed in error logs or publicly accessible files.
 9. The application interface should be adaptable to different screen sizes and resolutions, ensuring usability on both standard and high-definition displays.
 
+<div style="page-break-after: always;"></div>
 
 ---
 
