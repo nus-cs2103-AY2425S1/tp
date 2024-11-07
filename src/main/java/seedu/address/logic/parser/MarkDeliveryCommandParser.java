@@ -33,23 +33,11 @@ public class MarkDeliveryCommandParser implements Parser<MarkDeliveryCommand> {
 
         try {
             Index index = ParserUtil.parseIndex(parts[0]);
-            Status status = parseStatus(parts[1].trim());
+            Status status = ParserUtil.parseStatus(parts[1].trim());
             return new MarkDeliveryCommand(index, status);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDeliveryCommand.MESSAGE_USAGE), pe);
-        }
-    }
-
-    /**
-     * Converts a string to a Status enum, case-insensitively.
-     */
-    private Status parseStatus(String statusString) throws ParseException {
-        try {
-            return Status.valueOf(statusString.toUpperCase()); // Convert input to uppercase for case-insensitive match
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDeliveryCommand.MESSAGE_USAGE));
         }
     }
 }
