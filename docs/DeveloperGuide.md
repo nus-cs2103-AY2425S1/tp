@@ -323,11 +323,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**UC03: View contacts**
+**UC03: Find contacts**
+
 
 **MSS**
 
-1. User requests to list persons with parameters e.g. number of contacts, reset sorting order
+1. User requests to list persons with parameters e.g. by name, by tag
 2. ConTActs displays the list of persons
 
     Use case ends.
@@ -346,8 +347,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
+**UC04: Mark/Unmark/Reset contacts' tutorial**
 
+**MSS**
 
+1.  User requests to list persons
+2.  ConTActs shows a list of persons
+3.  User requests to modify the tutorial attendance for a person in the list
+4.  ConTActs modifies the person's tutorial attendance accordingly
+5.  ConTActs shows the unfiltered list after modification 
+
+**Extensions**
+
+* 3a. Parameters contain unacceptable values.
+
+    * 3a1. ConTActs shows an error message.
+
+      Use case resumes at step 3.
+
+* 3b. The list is empty.
+
+    * 3b1. ConTActs shows a message that the list is empty.
+
+      Use case ends.
+  
+* 3c. User tries to modify tutorial state to itself e.g. mark someone present as present
+  
+    * 3c1. ConTActs shows a message that the modification is unnecessary.
+        
+      Use case ends.
+  
+* 3d. User uses wildcard(*) index.
+
+    * 3d1. The list is empty.
+  
+        ConTActs shows error message that there is no Person to modify.
+        
+        Use case resumes at step 5.
+  
+    * 3d2. List is not empty.
+    
+        ConTActs will modify all tutorials for every Person.
+         
+  
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
