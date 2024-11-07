@@ -211,7 +211,7 @@ public class ExportCommandTest {
 
         List<String> lines = Files.readAllLines(txtPath);
 
-        // Verify output
+        // Check first entry
         assertEquals("{", lines.get(0));
         assertEquals("  name | Johnny Appleseed", lines.get(1));
         assertEquals("  phone | 93321121", lines.get(2));
@@ -223,7 +223,7 @@ public class ExportCommandTest {
         assertEquals("}", lines.get(8));
         assertEquals("", lines.get(9)); // Blank line between records
 
-        // Validate the second entry
+        // Check second entry
         assertEquals("{", lines.get(10));
         assertEquals("  name | Kumar", lines.get(11));
         assertEquals("  phone | ", lines.get(12));
