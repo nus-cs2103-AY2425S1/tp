@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HousingType;
@@ -279,6 +280,17 @@ public class ParserUtil {
                 + statistics.getUniqueSellingPropertyList().getUniqueSellingPropertiesCount()
                 + "\nUnique Number of Properties-to-Buy: "
                 + statistics.getUniqueBuyingPropertyList().getUniqueBuyingPropertiesCount();
+        return message;
+    }
+
+    /**
+     * Parses the Commands and returns a String representation of the {@code Commands}.
+     *
+     * @param addressBook The list of commands AddressBook implements.
+     * @return A String representation of the {@code Commands}
+     */
+    public static String parseCommandList(AddressBook addressBook) {
+        String message = addressBook.getCommandList().toString();
         return message;
     }
 }

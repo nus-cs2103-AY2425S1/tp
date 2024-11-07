@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.command.Commands;
 import seedu.address.model.statistics.AddressBookStatistics;
 
 /**
@@ -20,6 +21,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
     private AddressBookStatistics addressBookStatistics;
+    private Commands commandList;
     private boolean isStatisticsPresent = false;
 
     /**
@@ -47,6 +49,16 @@ public class CommandResult {
         this(feedbackToUser, false, false);
         this.isStatisticsPresent = true;
         this.addressBookStatistics = addressBookStatistics;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with specifies {@code feedbackToUser} and {@code Commands}
+     * @param feedbackToUser The feedback to be displayed to the user
+     * @param commandList The list of commands which has to be displayed to the user
+     */
+    public CommandResult(String feedbackToUser, Commands commandList) {
+        this(feedbackToUser, false, false);
+        this.commandList = commandList;
     }
 
     /**
