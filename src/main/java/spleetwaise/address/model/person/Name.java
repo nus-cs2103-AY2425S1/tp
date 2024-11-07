@@ -18,7 +18,7 @@ public class Name {
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[A-Za-z0-9.'&()\\-][A-Za-z0-9.'&()\"\\-/ ]*";
+    public static final String VALIDATION_REGEX = "[A-Za-z0-9.'&(),\\-][A-Za-z0-9.'&(),\"\\-/ ]*";
 
     public final String fullName;
 

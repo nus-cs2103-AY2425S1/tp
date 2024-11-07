@@ -47,6 +47,7 @@ public class NameTest {
         assertTrue(Name.isValidName("O'Connor")); // name with apostrophe
         assertTrue(Name.isValidName("Jean-Luc")); // name with hyphen
         assertTrue(Name.isValidName("J.P. Morgan")); // name with periods
+        assertTrue(Name.isValidName("Dong Yi Xiang, Gavin")); // name with comma
         assertTrue(Name.isValidName("John s/o Tan")); // name with slash
         assertTrue(Name.isValidName("Anne-Marie & Sons")); // name with ampersand and hyphen
         assertTrue(Name.isValidName("John \"Johnny\" Doe")); // name with quotes
