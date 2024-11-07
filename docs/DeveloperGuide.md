@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+_This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/addressbook-level3/)._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -75,8 +75,11 @@ The UI consists of a `MainWindow` and `InspectWindow` that is made up of parts e
 
 The `MainWindow` and `InspectWindow` are toggleable, meaning that if `MainWindow` is currently being displayed, then the `InspectWindow` will be hidden, and vice versa.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. 
-<br> For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml), while the layout of the [`InspectWindow`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/InspectWindow.java) is specified in [`InspectWindow.fxml`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/InspectWindow.fxml).
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+
+For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml), while the layout of the [`InspectWindow`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/InspectWindow.java) is specified in [`InspectWindow.fxml`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/InspectWindow.fxml).
+
+The `CSS` files that style the `UI` are also stored in the same folder.
 
 The `UI` component,
 
@@ -176,13 +179,8 @@ Given below is an example usage scenario of switching from the `MainWindow` to `
 3. The `LogicManager` then executes this `InspectCommand` to return a `CommandResult`. This `CommandResult` stores the boolean `isInspect = true` to indicate that it was created by executing an `InspectCommand`, as well as the contact
 to inspect.
 4. The `executeCommand()` method within `MainWindow.java` checks if `isInspect = true`, and changes the window view from `MainWindow` to `InspectWindow` using the `handleInspect()` method if so.
-5. Additionally, within the `handleInspect()` method, a separate `isInspect` boolean within `AddressBookParser` is set to `true`. Certain `XYZCommandParser` classes use this boolean to decide what user inputs are valid during parsing. This 
-allows the same commands to have different functionality depending on the current window view. 
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+5. Additionally, within the `handleInspect()` method, a separate `isInspect` boolean within `AddressBookParser` is set to `true`. Certain `XYZCommandParser` classes use this boolean to decide what user inputs are valid during parsing. This
+allows the same commands to have different functionality depending on the current window view.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -216,34 +214,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​ | I want to …​ | So that I can…​ |
 |---|---------|--------------|----------------|
-| * * * | new user | add customer contacts | I can store their information for easy access later. |
-| * * * | user | delete customer contacts | I can get rid of contacts that are no longer customers |
-| * * * | user  | view all customer contacts | I can have an overview of what contacts I have |
-| * | first time user | view a demo shipment and contact data | I can understand how the app will look and function when fully populated. |
-| * | new user | be guided through setting up my company's logistics data | I can start using the app immediately. |
-| * | user ready to start | remove any demo/sample data | I can work with only my own company’s data. |
-| * * * | logistics coordinator | input delivery schedules for each contact | I can plan and track upcoming shipments. |
-| * * * | logistics coordinator | add information about each shipment’s ETA | I can easily inform clients of expected arrival times. |
-| * * | logistics coordinator | assign products to a shipment | I can track what goods are being delivered. |
-| * * | logistics coordinator | calculate and view the estimated cost of a shipment | I can provide accurate quotes to clients. |
-| * * | regular user | filter my delivery list by date | I can focus on immediate shipments. |
-| * | regular user | see a visual timeline of my delivery schedules | I can easily plan ahead. |
-| * * | logistics coordinator | update the shipment status (e.g., in transit, delivered) for each delivery | I can track its progress. |
-| * * | logistics coordinator | add notes to each contact | I can record special instructions or preferences for future deliveries. |
-| * * | user | search for a specific client or contact using a search bar | I can find them quickly. |
-| * | logistics manager | categorize customers by priority or frequency | I can manage key accounts effectively. |
-| * | logistics coordinator | add multiple points of contact for a client | I can communicate with various stakeholders within the same company. |
-| * * | logistics coordinator | deactivate contacts that are no longer active | my list remains organized without deleting old records. |
-| * * | long-time user | archive past shipments that have been delivered | I can focus on current and future deliveries. |
-| * | regular user | generate reports showing all shipments for a particular client | I can easily present the information when needed. |
-| * | logistics coordinator | export customer and shipment data into a spreadsheet | I can share information with clients. |
-| * * | logistic coordinator | schedule repeated deliveries | I can ensure consistency in service. |
-| * | logistics manager | assign priority levels to deliveries | I can ensure critical deliveries are handled first. |
-| * * | logistics manager | record any delays or issues with deliveries | I can review them later and work on improving delivery times. |
-| * * | logistics manager | view the delivery history of individual worker | I can evaluate their performance and workload over time. |
-| * * | logistics manager | edit delivery details | I can make adjustments when plans change or errors are identified. |
-| * | logistics manager | print a hard copy of the daily or weekly delivery schedule | I have a physical reference for planning or sharing with others. |
-| * | logistics manager | import and export delivery data in a standard file format | I can back up data or share it with other systems or stakeholders. |
+| *** | new user | add customer contacts | store their information for easy access later. |
+| *** | user | delete customer contacts | get rid of contacts that are no longer customers. |
+| *** | user | view all customer contacts | have an overview of what contacts are available. |
+| *** | user | input delivery schedules for each contact | plan and track upcoming shipments. |
+| *** | user | add information about each shipment’s ETA | easily inform clients of expected arrival times. |
+| ** | user | assign products to a shipment | track what goods are being delivered. |
+| ** | user | calculate and view the estimated cost of a shipment | provide accurate quotes to clients. |
+| ** | regular user | filter my delivery list by date | focus on immediate shipments. |
+| ** | user | update the shipment status (e.g., in transit, delivered) for each delivery | track its progress. |
+| ** | user | add notes to each contact | record special instructions or preferences for future deliveries. |
+| ** | user | search for a specific client or contact using a search bar | find them quickly. |
+| ** | user | deactivate contacts that are no longer active | keep the list organized without deleting old records. |
+| ** | long-time user | archive past shipments that have been delivered | focus on current and future deliveries. |
+| ** | user | schedule repeated deliveries | ensure consistency in service. |
+| ** | user | record any delays or issues with deliveries | review them later and work on improving delivery times. |
+| ** | user | view the delivery history of individual worker | evaluate their performance and workload over time. |
+| ** | user | edit delivery details | make adjustments when plans change or errors are identified. |
+| * | first-time user | view a demo shipment and contact data | understand how the app will look and function when fully populated. |
+| * | new user | be guided through setting up my company's logistics data | start using the app immediately. |
+| * | user ready to start | remove any demo/sample data | work with only my own company’s data. |
+| * | regular user | see a visual timeline of my delivery schedules | easily plan ahead. |
+| * | user | categorize customers by priority or frequency | manage key accounts effectively. |
+| * | user | add multiple points of contact for a client | communicate with various stakeholders within the same company. |
+| * | regular user | generate reports showing all shipments for a particular client | easily present the information when needed. |
+| * | user | export customer and shipment data into a spreadsheet | share information with clients. |
+| * | user | assign priority levels to deliveries | ensure critical deliveries are handled first. |
+| * | user | print a hard copy of the daily or weekly delivery schedule | have a physical reference for planning or sharing with others. |
+| * | user | import and export delivery data in a standard file format | back up data or share it with other systems or stakeholders. |
 
 ### Use cases
 
@@ -418,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, MacOS
 * **Inspection Mode**: A feature that enables the user to enter a specific contact and view detailed information. In this mode, the user can also manage deliveries, such as adding or deleting them, for the selected contact.
 * **Default Page**: The main page that the user is presented with upon launching the application. It serves as the starting point for all primary actions, including adding, viewing, and deleting contacts.
 * **ETA (Estimated Time of Arrival)**: The estimated time when a delivery is expected to reach its destination. This is one of the key delivery details used in planning and tracking shipments.
@@ -447,7 +445,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -456,7 +454,8 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Close the program
+   1. Type `exit` in the command box
 
 ### Deleting a person
 
@@ -473,12 +472,11 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Simulate corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Assuming data present in the program. Find the `addressbook.json` file in the `data` folder
+   2. Delete any line. An empty address book will be loaded.
+   3. IF any command is used the `addressbook.json` would be wiped clean. Save the data in another file if necessary.
+   4. Delete the corrupted `addressbook.json` file. The program will create a new file.

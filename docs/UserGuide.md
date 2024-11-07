@@ -130,7 +130,7 @@ Examples:
 
 **<ins>When in the main or inspect window**
 
-Takes you back to the main window, and shows a list of all contacts added to the contacts list. 
+Takes you back to the main window, and shows a list of all contacts added to the contacts list.
 
 Format: `list`
 
@@ -141,8 +141,8 @@ Edits an existing contact in the contacts list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the contact at the specified `INDEX`. 
-  - The index is the number displayed next to the contact's name in the list. 
+* Edits the contact at the specified `INDEX`.
+  - The index is the number displayed next to the contact's name in the list.
   - The index **must be a positive number** (starting from 1).
 * You must provide at least one optional field (in [ ]). This means you need to update at least one of the following fields: name, phone, email, role, address, or tag.
 * Editing tags will replace **all** existing ones. If you simply want to remove all tags, type 't/' without specifying any tags after.
