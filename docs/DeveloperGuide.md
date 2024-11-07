@@ -252,11 +252,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -275,29 +270,40 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* independent sellers/dropshipping business owners selling on platforms like Carousell
-* lack a central platform for dropshipping and delivery order management
+* independent sellers/drop-shipping business owners selling on platforms like Carousell
+* lack a central platform for drop-shipping and delivery order management
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: For small independent sellers, organizing customer lists can be challenging. SellSavvy offers a centralized platform to store orders and track deliveries, streamlining dropshipping management. SellSavvy is optimized for tech-savvy fast-typing users through command-line interface and efficient functionalities.
+**Value proposition**: For small independent sellers, organizing customer lists can be challenging. SellSavvy offers a centralized platform to store orders and track deliveries, streamlining drop-shipping management. SellSavvy is optimized for tech-savvy fast-typing users through command-line interface and efficient functionalities.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                                 | So that I can…​                                                      |
-|----------|---------------------------------------------|--------------------------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | user                                        | add customers' details such as name, contact number, address | remember key and essential details of customers for future deliveries |
-| `* * *`  | user                                        | add orders related to a customer                             | keep track of deliveries to be made                                  |
-| `* * *`  | user                                        | add details to orders, such as delivery date and item        | know what needs to be delivered and when                             |
-| `* * *`  | user                                        | mark orders as completed                                     | track which orders are still outstanding                             |
-| `* * *`  | user                                        | delete an order                                              | remove orders that have been canceled                                |
-| `* * *`  | user with many contacts in the address book | delete a customer from my address book                       | remove clients who I no longer need to be in contact with            |
+| Priority | As a …​                  | I want to …​                                              | So that I can…​                                            |
+|----------|--------------------------|-----------------------------------------------------------|------------------------------------------------------------|
+| `* * *`  | user                     | add new customers with details such as name and address   | remember details of customers for order deliveries         |
+| `* * *`  | user                     | add orders made by a customer                             | keep track of orders made by each customer                 |
+| `* * *`  | user                     | add details to orders, such as delivery date and quantity | remember details of orders when making deliveries          |
+| `* * *`  | user                     | mark orders as completed                                  | keep track of orders that have been delivered              |
+| `* * *`  | user with many customers | delete a customer from my address book                    | remove clients who I no longer need to be in contact with  |
+| `* * *`  | user with many customers | view all my customer contacts                             | see an overview of all my customers' details               |
+| `* * *`  | user with many orders    | view all orders under a specific customer                 | see an overview of all orders made by a customer           |
+| `* * *`  | user with many orders    | delete an order under a customer                          | remove orders that I no longer need to track               |
+| `* * *`  | user with many orders    | revert an order's completed status                        | keep track of erroneous or failed order deliveries         |
+| `* *`    | tech-savvy user          | save data to local storage                                | keep my data even after exiting SellSavvy                  |
+| `* *`    | tech-savvy user          | load data from local storage                              | access my local data using SellSavvy                       |
+| `* *`    | experienced user         | edit a customer's details                                 | keep the customers' information up-to-date                 |
+| `* *`    | experienced user         | edit an order's details                                   | keep the orders' information up-to-date                    |
+| `*`      | experienced user         | find a customer by name                                   | search for a specific customer's details                   |
+| `*`      | experienced user         | filter orders by their status                             | see which orders are completed or have yet to be delivered |
+| `*`      | inexperienced user       | be informed a customer already made an identical order    | take note of duplicate orders made by the same customer    |
+| `*`      | inexperienced user       | be informed if a new order's delivery date has passed     | take note of erroneous creation of historical orders       |
 
 *{More to be added}*
 
