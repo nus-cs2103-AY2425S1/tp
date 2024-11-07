@@ -519,38 +519,68 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample students. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
-### Deleting a student
+### Student Tests
 
 1. Deleting a student while all students are being shown
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+### Lesson Tests
+
+### General Tests
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+
+
+---
+
+## **Appendix: Planned Enhancements**
+To be added in v1.6
+
+---
+
+## **Appendix: Effort**
+
+### Difficulty Level
+Our project was significantly more complex when compared to AB3. We have introduced various new commands to support new functionalities. Our student objects involve more fields, with certain fields (lessons) requiring syncing across multiple students. Our UI is also more complicated, with the introduction of a new calendar view that updates based on students' lesson data.
+
+### Challenges Faced
+Command Planning: Planning for multiple commands, which enhance the product, while fitting together cohesively, required careful thought and deliberation.
+Lesson-related Logic: Logic for syncing lessons across students in the same group, as well as checking for lesson clashes, needed to be developed.
+UI Refactoring: Designing a UI which could show all existing information, while also displaying a calendar view required multiple drafts and discussions. 
+
+### Effort Required
+Our project involved substantial effort in several key areas:
+
+Refactoring: Modifying existing AB3 features to suit our product (e.g. removing extra fields)
+Command Implementation: Implementing multiple new commands
+Model Implementation: Updating the model with new fields, and implementing lesson-related logic.
+Testing and Debugging: Testing and debugging the new features, as well as performing regression testing 
+
+### Achievements
+We have extended AB3 with multiple new features and a better UI, to make the app more specialised and suitable for piano tutors.
