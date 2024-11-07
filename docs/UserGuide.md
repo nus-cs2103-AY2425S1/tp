@@ -154,15 +154,15 @@ Symbol     | Parameter    | Constraints
 Symbol     | Parameter    | Constraints
 -----------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
 **`a`**| `DESCRIPTION` |- Must contain at least 1 alphabetic character and has a limit of 40 characters.
-**`s`**| `START`      |- A singular `DATE-TIME` in the form `DD-MM-YYYY-HH-MM`.
-**`e`**| `END`        |- A singular `DATE-TIME` in the form `DD-MM-YYYY-HH-MM`.
+**`s`**| `START`      |- A singular `DATE-TIME` in the form `DD-MM-YYYY-HH-mm`, where `DD` is the day, `MM` is the month, `YYYY` is the year, `HH` is the hour and `mm` is the minute.
+**`e`**| `END`        |- A singular `DATE-TIME` in the form `DD-MM-YYYY-HH-mm`, where `DD` is the day, `MM` is the month, `YYYY` is the year, `HH` is the hour and `mm` is the minute..
 
 ### Other Parameters
 
 Symbol     | Parameter                        | Constraints
 -----------|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
 **-**  | `INDEX`                          |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
-**-**  | `DATE`                           |- **Must be of the form `DD-MM-YYYY`**.
+**-**  | `DATE`                           |- **Must be of the form `DD-MM-YYYY`**, where `DD` is the day, `MM` is the month, and `YYYY` is the year.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -272,9 +272,10 @@ Format: `find FIELD/ KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Able to search any field, but only one field at a time.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Any valid [substring](#glossary) will be matched e.g. `Ha` will match `Hans` and `shannon`
 * Persons matching at least one keyword will be returned.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Patients who currently have the specified field empty will not be returned during the search.
 
 Valid fields for `find` Command:
 
@@ -283,12 +284,14 @@ Valid fields for `find` Command:
 * Ward: Use `w/` to search by ward.
 * Diagnosis: Use `d/` to search by diagnosis.
 * Medication: Use `m/` to search by medication.
+* Patient Note: Use `pn/` to search by patient note.
+* Appointment description: Use `a/` to search by appointment description.
 * View parameter constraints [here](#input-parameters)!
 
 Examples:
 * `find n/ John` returns `john` and `John Doe`
 * `find w/ B1` returns all patients in ward B1
-* `find i/ Dave` returns an empty list
+* `find m/ Dave` returns an empty list
 * `find n/ alice benson` returns `Alice Pauline`, `Benson Meier`<br>
 ![result for 'find n/ alice benson'](images/findAliceBensonResult.png)
 
@@ -316,6 +319,7 @@ Adds notes to an existing person in the address book.
 Format: `addnotes INDEX pn/NOTES`
 
 * Adds notes to the person at the specified `INDEX`.
+* Adding a note to a patient who already has an existing note will cause the existing note to be overwritten.
 * View parameter constraints [here](#input-parameters)!
 
 Examples:
@@ -351,6 +355,8 @@ Format: `makeappt INDEX a/DESCRIPTION s/START e/END`
 * `START` and `END` refers to the date and time the appointment starts and ends respectively.
 * The start **must be before** the end date and time.
 * Appointment added **must not overlap** the duration of existing appointments.
+* Adding an appointment to a patient who already has an existing appointment will cause the existing appointment to be overwritten.
+  * Note that attempting to overwrite an appointment will still require the new appointment to not overlap any existing ones, including the appointment that is about to be overwritten.
 * View parameter constraints [here](#input-parameters)!
 
 Examples:
@@ -413,6 +419,8 @@ Format: `scheduleall`
 2. **Graphical User Interface (GUI):** A user interface that allows users to interact with electronic devices through graphical elements such as icons, buttons, and windows, rather than text-based commands. GUIs make it easier for users to navigate and use software applications visually.
 
 3. **Hard Disk (HDD):** A storage device inside a computer that uses spinning magnetic disks to store and retrieve data, commonly used for long-term storage of files, programs, and the operating system.
+
+4. **Substring:** A substring is any consecutive sequence of characters within a sentence. For example, in the sentence "Hello, world!", "Hello" and "world" are both substrings of the entire sentence.
 
 [Back to Table of Contents](#table-of-contents)
 
