@@ -1,16 +1,18 @@
 package seedu.address.ui;
 
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.TypicalPersons;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.Person;
+import seedu.address.testutil.TypicalPersons;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
+
+
 
 public class PersonDetailedViewContentManagerTest {
 
