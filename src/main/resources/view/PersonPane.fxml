@@ -26,13 +26,15 @@
     <Label fx:id="phone" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
     <Label text="Address:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <Label fx:id="address" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label fx:id="address" styleClass="person-pane-label" wrapText="true"
+           GridPane.columnIndex="1" GridPane.rowIndex="3"  />
 
     <Label text="Email:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <Label fx:id="email" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
     <Label text="Remark:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-    <Label fx:id="remark" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <Label fx:id="remark" styleClass="person-pane-label" wrapText="true"
+           GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
     <Label text="Listings:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="6" />
     <Label fx:id="listings" styleClass="person-pane-label"
