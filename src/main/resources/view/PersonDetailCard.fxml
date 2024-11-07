@@ -49,7 +49,7 @@
                 </VBox>
                 <VBox fx:id="logsList" minWidth="380" styleClass="pane" VBox.vgrow="ALWAYS">
                     <padding>
-                        <Insets left="10.0" top="10.0"/>
+                        <Insets top="10.0"/>
                     </padding>
                     <StackPane fx:id="logsListPanelPlaceHolder" styleClass="pane"
                                VBox.vgrow="ALWAYS"/>

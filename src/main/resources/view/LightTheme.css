@@ -94,9 +94,7 @@
 
 /* Style when the ListView is focused */
 .list-view:focused {
-    -fx-border-color: -fx-focus;
-    -fx-border-width: 2px;
-    -fx-border-radius: 4px;
+    -fx-effect: innershadow(one-pass-box, -fx-focus, 5, 1, 0, 0);
 }
 
 /* Styles the contact info cell */
@@ -304,6 +302,10 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: -fx-text;
+}
+
+#commandTextField:focused {
+    -fx-border-color: -fx-focus
 }
 
 #filterField, #personListPanel, #personWebpage {
