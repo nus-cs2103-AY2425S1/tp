@@ -634,7 +634,9 @@ Deletes a task from a group.
 ###### Scenario #1 Delete task with index 1 from `CS2103-F11-1`
 
 This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F11-1`.
+
 ![delete_t_g.png](images/screenshots/dtg.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Task from ALL Groups: `del_t`, `dt`
@@ -684,7 +686,9 @@ Edits a task from a group.
 3. Type and execute: `edit_t_g i/1 gn/CS2103-F12-1 tn/v1.4 Release`
 
 This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-3 tn/v1.4 Release`.
+
 ![edit_t_g.png](images/screenshots/etg.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Task for ALL Groups: `edit_t`, `et`
@@ -703,15 +707,14 @@ Edits a task from all groups that contain it.
 
 ##### Usage Scenario
 
-
 ###### Scenario #1 Edit a task with index 2
 1. Type and execute: `list_t` to see the task list.
 2. After finding the task you wish to delete from this group, remember its index number (task with index 2 in this example).
 3. Type and execute: `edit_t i/2 tn/PE`
 
 This screenshot shows the result of executing `edit_t i/2 tn/PE`.
-![edit_t.png](images/screenshots/et.png)
 
+![edit_t.png](images/screenshots/et.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
