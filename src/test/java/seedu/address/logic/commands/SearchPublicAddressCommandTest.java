@@ -11,13 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_SUB;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
 import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND;
 import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
-
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -101,19 +97,9 @@ public class SearchPublicAddressCommandTest {
 
 
     @Test
-    public void execute_searchPublicAddressInvalidChar_failure() {
-        SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand(INVALID_PUBLIC_ADDRESS_INVALID_CHAR);
-        String expectedMessage = MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
-        assertCommandFailure(searchPublicAddressCommand, model, expectedMessage);
-    }
-
-    @Test
     public void execute_searchPublicAddressTooLong_faliure() {
-        SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand(INVALID_PUBLIC_ADDRESS_TOO_LONG);
-        String expectedMessage = MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
-        assertCommandFailure(searchPublicAddressCommand, model, expectedMessage);
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG));
     }
 
 

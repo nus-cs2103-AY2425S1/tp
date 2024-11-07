@@ -17,16 +17,16 @@ import java.util.stream.Stream;
 public class PublicAddressesComposition {
 
     public static final String MESSAGE_LABELS_CONSTRAINTS =
-            "Public addresses must have unique labels within a network.";
+        "Public addresses must have unique labels within a network.";
 
     public static final String MESSAGE_ADD_CONSTRAINTS =
-            "Public address label already exists within the same network.";
+        "Public address label already exists within the same network.";
 
     public static final String MESSAGE_EDIT_CONSTRAINTS =
-            "Public address label does not exists within the same network.";
+        "Public address label does not exists within the same network.";
 
     public static final String MESSAGE_DUPLICATE_LABEL =
-            "Label %1$s under the network %2$s already exists.";
+        "Label %1$s under the network %2$s already exists.";
 
     private final Map<Network, Set<PublicAddress>> publicAddresses;
 
@@ -59,7 +59,7 @@ public class PublicAddressesComposition {
      * Checks whether labels within in a network are unique.
      * Case is ignored.
      *
-          * @param publicAddresses A map of networks to sets of public addresses.
+     * @param publicAddresses A map of networks to sets of public addresses.
      * @return True if labels within a network are unique, false otherwise.
      */
     private boolean areValidPublicAddressLabels(Map<Network, Set<PublicAddress>> publicAddresses) {
@@ -67,15 +67,20 @@ public class PublicAddressesComposition {
         assert publicAddresses.values().stream().noneMatch(Set::isEmpty);
 
         return publicAddresses.values().stream()
-                .allMatch(addresses -> {
-                    Set<String> labels = new HashSet<>();
-                    return addresses.stream()
-                            .map(PublicAddress::getLabel)
-                            .map(String::toLowerCase)
-                            .allMatch(labels::add);
-                });
+            .allMatch(addresses -> {
+                Set<String> labels = new HashSet<>();
+                return addresses.stream()
+                    .map(PublicAddress::getLabel)
+                    .map(String::toLowerCase)
+                    .allMatch(labels::add);
+            });
     }
 
+    /**
+     * Adds a public address to the composition.
+     *
+     * @param publicAddress The public address to be added.
+     */
     public void addPublicAddress(PublicAddress publicAddress) {
         assert publicAddress != null : "Public address cannot be null.";
         assert publicAddress.getNetwork() != null : "Network cannot be null.";
@@ -103,10 +108,10 @@ public class PublicAddressesComposition {
      */
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
         return publicAddresses.entrySet().stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> new HashSet<>(entry.getValue())
-                ));
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                entry -> new HashSet<>(entry.getValue())
+            ));
     }
 
     /**
@@ -133,7 +138,6 @@ public class PublicAddressesComposition {
     }
 
     /**
-
      * Checks if a public address exists in any network.
      *
      * @param publicAddressString The public address string to check.
@@ -161,15 +165,22 @@ public class PublicAddressesComposition {
             .filter(entry -> entry.getKey().equals(network))
             .flatMap(entry -> entry.getValue().stream())
             .anyMatch(publicAddress -> publicAddress.getLabel().equals(label));
-}
+    }
 
+    /**
+     * Checks if a public address label exists within the specified network.
+     *
+     * @param network The network to search for.
+     * @param label   The label to match against the public addresses.
+     * @return True if a public address label exists within the specified network, false otherwise.
+     */
     public boolean containsPublicAddressLabel(Network network, String label) {
         assert network != null;
         assert label != null;
         return publicAddresses
-                .getOrDefault(network, Collections.emptySet())
-                .stream()
-                .anyMatch(publicAddress -> publicAddress.getLabel().equalsIgnoreCase(label));
+            .getOrDefault(network, Collections.emptySet())
+            .stream()
+            .anyMatch(publicAddress -> publicAddress.getLabel().equalsIgnoreCase(label));
     }
 
     /**
@@ -179,9 +190,10 @@ public class PublicAddressesComposition {
      * @return True if the public address string exists, false otherwise.
      */
     public boolean containsPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
+        assert publicAddress != null;
         return publicAddresses.values().stream()
-                .flatMap(Set::stream)
-                .anyMatch(pa -> pa.isPublicAddressStringEquals(publicAddress.getPublicAddressString()));
+            .flatMap(Set::stream)
+            .anyMatch(pa -> pa.isPublicAddressStringEquals(publicAddress.getPublicAddressString()));
 
 
     }
@@ -224,8 +236,8 @@ public class PublicAddressesComposition {
 
         Map<Network, Set<PublicAddress>> updatedPublicAddresses = getPublicAddresses();
         Set<PublicAddress> networkAddresses = updatedPublicAddresses.getOrDefault(
-                newPublicAddress.getNetwork(),
-                new HashSet<>()
+            newPublicAddress.getNetwork(),
+            new HashSet<>()
         );
         networkAddresses.add(newPublicAddress);
         updatedPublicAddresses.put(newPublicAddress.getNetwork(), networkAddresses);
@@ -274,8 +286,6 @@ public class PublicAddressesComposition {
     }
 
     /**
-
-
      * Creates a new PublicAddressesComposition with updated public address.
      *
      * @param newPublicAddress The new public address.
@@ -291,8 +301,8 @@ public class PublicAddressesComposition {
 
         Map<Network, Set<PublicAddress>> updatedPublicAddresses = getPublicAddresses();
         Set<PublicAddress> networkAddresses = updatedPublicAddresses.getOrDefault(
-                newPublicAddress.getNetwork(),
-                new HashSet<>()
+            newPublicAddress.getNetwork(),
+            new HashSet<>()
         );
         networkAddresses.removeIf(addr -> addr.getLabel().equalsIgnoreCase(newPublicAddress.getLabel()));
         networkAddresses.add(newPublicAddress);
@@ -301,8 +311,20 @@ public class PublicAddressesComposition {
         return new PublicAddressesComposition(updatedPublicAddresses);
     }
 
-  
-  
+    /**
+     * Returns the number of public addresses in the composition.
+     *
+     * @return The number of public addresses.
+     */
+    public int sizeOfAllPublicAddresses() {
+        return publicAddresses.values().stream().mapToInt(Set::size).sum();
+    }
+
+    /**
+     * Returns a string representation of the PublicAddressesComposition with indents and newlines for easy reading.
+     *
+     * @return A string representation of the PublicAddressesComposition.
+     */
     public String toStringIndented() {
         return publicAddresses.entrySet().stream().map(entry -> entry.getKey() + "\n" + INDENT
                 + INDENT + entry.getValue().stream().map(publicAddress -> publicAddress.getLabel() + ": "
@@ -310,6 +332,7 @@ public class PublicAddressesComposition {
                 .reduce((a, b) -> a + "\n" + b).orElse(""))
             .reduce((a, b) -> a + "\n" + b).orElse("");
     }
+
     /**
      * Combines this PublicAddressesComposition with another.
      * Adds all public addresses from the other composition that don't already exist in this one.
@@ -322,25 +345,25 @@ public class PublicAddressesComposition {
 
     public PublicAddressesComposition combineWith(PublicAddressesComposition other) {
         Map<Network, Set<PublicAddress>> combinedAddresses = Stream
-                .concat(
-                        publicAddresses.entrySet().stream(),
-                        other.getPublicAddresses().entrySet().stream()
-                )
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (set1, set2) -> {
-                        Set<PublicAddress> combinedSet = new HashSet<>(set1);
-                        set2.stream()
-                                .filter(addr -> {
-                                    if (combinedSet.stream().anyMatch(existing ->
-                                            existing.getLabel().equalsIgnoreCase(addr.getLabel()))) {
-                                        throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_LABEL,
-                                                addr.getLabel(), addr.getNetwork()));
-                                    }
-                                    return true;
-                                })
-                                .forEach(combinedSet::add);
-                        return combinedSet;
-                    }
-                ));
+            .concat(
+                publicAddresses.entrySet().stream(),
+                other.getPublicAddresses().entrySet().stream()
+            )
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (set1, set2) -> {
+                    Set<PublicAddress> combinedSet = new HashSet<>(set1);
+                    set2.stream()
+                        .filter(addr -> {
+                            if (combinedSet.stream().anyMatch(existing ->
+                                existing.getLabel().equalsIgnoreCase(addr.getLabel()))) {
+                                throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_LABEL,
+                                    addr.getLabel(), addr.getNetwork()));
+                            }
+                            return true;
+                        })
+                        .forEach(combinedSet::add);
+                    return combinedSet;
+                }
+            ));
 
         return new PublicAddressesComposition(combinedAddresses);
 
@@ -362,7 +385,7 @@ public class PublicAddressesComposition {
     /**
      * Removes the public address with the specified label from the network.
      *
-     * @param label The label of the public address to be removed.
+     * @param label   The label of the public address to be removed.
      * @param network The network to remove the public address from.
      * @return A new PublicAddressesComposition with the updated public addresses
      */
@@ -379,8 +402,8 @@ public class PublicAddressesComposition {
         if (networkAddresses != null) {
             // Remove the address with matching label
             Set<PublicAddress> updatedAddresses = networkAddresses.stream()
-                    .filter(addr -> !addr.label.equals(label))
-                    .collect(Collectors.toSet());
+                .filter(addr -> !addr.label.equals(label))
+                .collect(Collectors.toSet());
 
             // If set is empty after removal, remove the network entirely
             if (updatedAddresses.isEmpty()) {
@@ -401,35 +424,11 @@ public class PublicAddressesComposition {
         return new PublicAddressesComposition(publicAddresses);
     }
 
-    /**
-     * Checks if the composition is empty.
-     *
-     * @return True if the composition is empty, false otherwise.
-     */
 
-    public Boolean containsPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
-        assert publicAddress != null : "Public address cannot be null.";
-        return publicAddresses.values().stream()
-            .flatMap(Set::stream)
-            .anyMatch(pa -> pa.isPublicAddressStringEquals(
-                publicAddress.getPublicAddressString()));
-}
     public boolean isEmpty() {
         return publicAddresses.isEmpty();
     }
 
-    /**
-     * Returns a string representation of the public addresses with indentation.
-     *
-     * @return A string representation of the public addresses.
-     */
-
-    public String toStringIndented() {
-        return publicAddresses.entrySet().stream().map(entry -> entry.getKey() + "\n" + INDENT
-            + INDENT + entry.getValue().stream().map(publicAddress -> publicAddress.getLabel() + ": "
-                + publicAddress.getPublicAddressString())
-            .reduce((a, b) -> a + "\n" + b).orElse("")).reduce((a, b) -> a + "\n" + b).orElse("");
-    }
 
     /**
      * Returns the number of networks in the composition.

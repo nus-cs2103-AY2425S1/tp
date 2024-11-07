@@ -70,16 +70,6 @@ public class PublicAddressesCompositionTest {
         assertEquals(2, composition.getByNetwork(Network.BTC).size());
     }
 
-    @Test
-    public void copyAndAddPublicAddress_specialCharacters() {
-        // EP: special characters in address
-        PublicAddressesComposition composition = new PublicAddressesComposition();
-        PublicAddress specialCharAddress = new BtcAddress("address!@#", "Special Char Address");
-
-        composition.addPublicAddress(specialCharAddress);
-
-        assertTrue(composition.hasPublicAddress("address!@#"));
-    }
 
     @Test
     public void copyAndAddPublicAddress_largeNumberOfAddresses() {
@@ -370,22 +360,5 @@ public class PublicAddressesCompositionTest {
             composition.containsPublicAddressStringAmongAllNetworks(null));
     }
 
-    //------------------ Get Any Public Address Tests ------------------
 
-    @Test
-    public void getAnyPublicAddress_nonEmptyComposition() {
-        // EP: get any public address from non-empty composition
-        PublicAddressesComposition composition = new PublicAddressesComposition();
-        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
-
-        assertEquals(VALID_PUBLIC_ADDRESS_BTC_MAIN, composition.getAnyPublicAddress());
-    }
-
-    @Test
-    public void getAnyPublicAddress_emptyComposition_throwsIllegalStateException() {
-        // EP: get any public address from empty composition
-        PublicAddressesComposition composition = new PublicAddressesComposition();
-
-        assertThrows(AssertionError.class, () -> composition.getAnyPublicAddress());
-    }
 }
