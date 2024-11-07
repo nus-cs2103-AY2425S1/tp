@@ -127,12 +127,7 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
 * The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'. 
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
-> [!IMPORTANT]
-> Two identical Transactions with duplicated fields cannot be added into the transaction book.
-> 
-> > `addTxn 1 amt/-24.3 desc/I owe John for dinner date/10102024 cat/FOOD`
-> > Running the above command twice will result in the output of
-> > `Transaction already exists in the transaction book`
+:exclamation: **Important** Two identical Transactions with duplicated fields cannot be added into the transaction book.
 
 :bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
