@@ -29,7 +29,7 @@ public class AddSubjectCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         //no studentId specified
-        assertParseFailure(parser, "s/Math", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "s\\Math", MESSAGE_INVALID_FORMAT);
 
         //no class specified
         assertParseFailure(parser, "S00001", MESSAGE_INVALID_FORMAT);
@@ -47,12 +47,12 @@ public class AddSubjectCommandParserTest {
         assertParseFailure(parser, "S10001 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "S10001 j/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "S10001 j\\ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "S10001" + "s/SomethingWrong", MESSAGE_INVALID_FORMAT); // invalid subject
+        assertParseFailure(parser, "S10001" + "s\\SomethingWrong", MESSAGE_INVALID_FORMAT); // invalid subject
     }
 
     @Test
@@ -63,7 +63,7 @@ public class AddSubjectCommandParserTest {
         subjects.add(new Subject("Math"));
         subjects.add(new Subject("Chinese"));
         AddSubjectCommand addSubjectCommand = new AddSubjectCommand(new StudentId("S00008"), subjects);
-        assertParseSuccess(parser, "S00008 s/Math s/Chinese", addSubjectCommand);
+        assertParseSuccess(parser, "S00008 s\\Math s\\Chinese", addSubjectCommand);
     }
 
 

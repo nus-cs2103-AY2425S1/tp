@@ -28,10 +28,15 @@ public class NameTest {
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName(" peter")); // starting with a space
-        assertFalse(Name.isValidName("^")); // only alphabets allowed
-        assertFalse(Name.isValidName("peter*")); // contains non-alphabet characters
+        assertFalse(Name.isValidName("^")); // ^ not allowed
+        assertFalse(Name.isValidName("peter-")); // should end with an alphabet
+        assertFalse(Name.isValidName("/peter")); // should start with an alphabet
         assertFalse(Name.isValidName("12345")); // numbers only
         assertFalse(Name.isValidName("peter the 2nd")); // contains numbers characters
+        assertFalse(Name.isValidName("peter--the")); // contains more than one consecutive hyphens
+        assertFalse(Name.isValidName("peter///tan")); // contains more than one consecutive slashes
+        assertFalse(Name.isValidName("peter''tan")); // contains more than one consecutive apostrophes
+        assertFalse(Name.isValidName("pe/'ter'/-tan")); // contains more than one consecutive special characters
         /* 256 characters long */
         assertFalse(Name.isValidName("David Peter ethan evans jacky marty edric roger edwin bryan brian "
                 + "David Peter ethan evans jacky marty edric roger edwin bryan brian "
@@ -42,6 +47,11 @@ public class NameTest {
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr")); // long names
+        assertTrue(Name.isValidName("Capital s/o Tan")); // with dash
+        assertTrue(Name.isValidName("Tan-soo-yan")); // with hyphens
+        assertTrue(Name.isValidName("Mary O'Reilly")); // with apostrophe
+        assertTrue(Name.isValidName("Lily-Tan d/o Tan P'Lin Han-Loo")); // with a combination of special characters
+        assertTrue(Name.isValidName("ab")); // two characters only
         /* 255 characters long */
         assertTrue(Name.isValidName("David Peter ethan evans jacky marty edric roger edwin bryan brian "
                 + "David Peter ethan evans jacky marty edric roger edwin bryan brian "

@@ -32,15 +32,15 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the student id. Existing values will be overwritten by the input values.\n"
-            + "Format: " + COMMAND_WORD + " STUDENT_ID FIELD/VALUE [FIELD/VALUE]...\n"
+            + "Format: " + COMMAND_WORD + " STUDENT_ID FIELD\\VALUE [FIELD\\VALUE]...\n"
             + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
             + "Parameters Example:\n"
             + "- STUDENT_ID: S00001\n"
-            + "- FIELD/VALUE: n/John\n"
-            + "- [FIELD/VALUE: p/98765432]...\n";
+            + "- FIELD\\VALUE: n\\John\n"
+            + "- [FIELD\\VALUE: p\\98765432]...\n";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Student %1$s (%2$s)’s details successfully updated.\n"
-            + "Here is the updated information %3$s";
+            + "Here is the updated information\nName: %3$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final StudentId studentId;
