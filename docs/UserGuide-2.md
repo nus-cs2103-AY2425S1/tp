@@ -38,8 +38,8 @@ This guide will walk you through everything you need to know about BakeBuddy, fr
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
 1. Open your computer's terminal:
-    - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
-    - **For Mac**: Press Command + Space, type `terminal`, and press Enter
+  - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
+  - **For Mac**: Press Command + Space, type `terminal`, and press Enter
 
 2. In the black window that appears, type exactly:
    ```
@@ -48,32 +48,33 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
    and press Enter
 
 3. What you should see:
-    - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
-    - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
+  - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
+  - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
 ### Step 2: Install BakeBuddy
 
 1. Download BakeBuddy:
-    - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
-    - Look for the file named `bakebuddy.jar`
-    - Click on it to download
+  - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
+  - Look for the file named `bakebuddy.jar`
+  - Click on it to download
 
 2. Create a home for BakeBuddy:
-    - Create a new folder on your computer named `BakeBuddy`
-    - Move the downloaded `bakebuddy.jar` file into this folder
+  - Create a new folder on your computer named `BakeBuddy`
+  - Move the downloaded `bakebuddy.jar` file into this folder
 
 3. Start BakeBuddy:
-    - Open your terminal (like in Step 1)
-    - Type `cd ` (with a space after cd)
-    - Drag your BakeBuddy folder into the terminal window (this fills in the location automatically!)
-    - Press Enter
-    - Type:
-      ```
-      java -jar bakebuddy.jar
-      ```
-    - Press Enter
+  - Open your terminal (like in Step 1)
+  - Type `cd ` (with a space after cd)
+  - Drag your BakeBuddy folder into the terminal window (this fills in the location automatically!)
+  - Press Enter
+  - Type:
+    ```
+    java -jar bakebuddy.jar
+    ```
+  - Press Enter
 
-   You should see the BakeBuddy window appear!
+   You should see the BakeBuddy window appear as follows!
+
 
 ### Step 3: Try Your First Commands
 
@@ -81,7 +82,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 
 Refer to the [Features](#features) below for details of each command.
 
-=======
 ![screenshot](images/Screenshot-5.png)
 
 ## List of Commands
@@ -175,12 +175,30 @@ Refer to the [Features](#features) below for details of each command.
 * Parameter values are case-insensitive
 
 --------------------------------------------------------------------------------------------------------------------
-## FAQ
 
-
---------------------------------------------------------------------------------------------------------------------
 ## Features
 
+<div markdown="block" class="alert alert-info">
+
+**Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
 
 ### **Add Contact Command**
 Adds a new contact to the bakery’s database.
@@ -189,11 +207,11 @@ Adds a new contact to the bakery’s database.
 addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]
 ```
 - **Parameters:**
-    - `n/NAME`: The person's name.
-    - `p/PHONE_NUMBER`: The person's phone number.
-    - `e/EMAIL`: (Optional) The person's email address.
-    - `a/ADDRESS`: (Optional) The person's address.
-    - `t/TAG`: (Optional) Tags for additional person information.
+  - `n/NAME`: The person's name.
+  - `p/PHONE_NUMBER`: The person's phone number.
+  - `e/EMAIL`: (Optional) The person's email address.
+  - `a/ADDRESS`: (Optional) The person's address.
+  - `t/TAG`: (Optional) Tags for additional person information.
 
 **Example:**
 ```bash
@@ -205,15 +223,15 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 Adds a new customer to the bakery’s customer database.
 
 ```bash
-addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]
+addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]
 ```
 - **Parameters:**
-    - `n/NAME`: The customer's name.
-    - `p/PHONE_NUMBER`: The customer's phone number.
-    - `e/EMAIL`: (Optional) The customer's email address.
-    - `a/ADDRESS`: (Optional) The customer's address.
-    - `s/INFORMATION`: (Optional) Additional information of the customer such as dietary preference.
-    - `t/TAG`: (Optional) Tags for additional customer information.
+  - `n/NAME`: The customer's name.
+  - `p/PHONE_NUMBER`: The customer's phone number.
+  - `e/EMAIL`: (Optional) The customer's email address.
+  - `a/ADDRESS`: (Optional) The customer's address.
+  - `s/INFORMATION`: (Optional) Additional information of the customer such as dietary preference.
+  - `t/TAG`: (Optional) Tags for additional customer information.
 
 **Example:**
 ```bash
@@ -228,8 +246,8 @@ Adds a new ingredient to the bakery's ingredient catalogue, along with its cost.
 addIngredient NAME COST
 ```
 - **Parameters:**
-    - `NAME`: The name of the ingredient.
-    - `COST`: The cost of the ingredient.
+  - `NAME`: The name of the ingredient.
+  - `COST`: The cost of the ingredient.
 
 **Example:**
 ```bash
@@ -240,20 +258,28 @@ addIngredient Syrup 3.50
 ### **Add Customer Order Command**
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
 
+<div class="alert alert-info">
+⚠️ **Important Information**  
+To view the new order in the customer's contact details:<br>
+1. Add the customer order using the command above <br>
+2. Click the refresh button in the UI <br>
+3. The order will now appear under the customer's contact information <br> <br>
+</div>
+
 ```bash
-addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYIDS [MORE_PASTRYIDSs...] [r/REMARK]
+addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REMARK]
 ```
 - **Parameters:**
-    - `n/NAME`: (Optional) The customer's name.
-    - `p/PHONE_NUMBER`: The phone number of the customer (new customer will be added with the name if phone number not found in contacts).
-    - `o/PRODUCTID`: One or more pastry IDs for the items being ordered.
-    - `r/REMARK`: (Optional) Information about the customer order.
+  - `n/NAME`: (Optional) The customer's name.
+  - `p/PHONE_NUMBER`: The phone number of the customer (new customer will be added with the name if phone number not found in contacts).
+  - `o/PRODUCTID`: One or more pastry IDs for the items being ordered.
+  - `r/REMARK`: (Optional) Information about the customer order.
 
 **Example:**
 ```bash
 addCustomerOrder n/John Doe p/98765432 o/1 2 3 r/Delivery at 6pm 
 ```
-![screenshot](images/Screenshot-1.png)
+![screenshot](images/Screenshot-4.png)
 
 ### **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue.
@@ -272,14 +298,13 @@ addPastry Croissant 3.50 Flour Cream Sugar
 ```
 ![Add Pastry.png](images%2FAdd%20Pastry.png)
 
-The Add Pastry Command allows bakery owners to add a new pastry item to their pastry catalogue, specifying the name,
-cost and ingredients for each pastry. This command accepts the pastry's name, a numeric value for how much the
-bakery owner will sell it for, and a list of ingredients required to make it.
+The Add Pastry Command allows bakery owners to add a new pastry item to their pastry catalogue, specifying the name, 
+cost and ingredients for each pastry. This command accepts the pastry's name, a numeric value for how much the 
+bakery owner will sell it for, and a list of ingredients required to make it. 
 
-For example, typing **addPastry Croissant 3.50 Flour Cream Sugar** would add a pastry named "Croissant" priced at $3.50,
-with "Flour," "Cream," and "Sugar" listed as its ingredients. By using this command, bakery owners can easily track of
+For example, typing **addPastry Croissant 3.50 Flour Cream Sugar** would add a pastry named "Croissant" priced at $3.50, 
+with "Flour," "Cream," and "Sugar" listed as its ingredients. By using this command, bakery owners can easily track of 
 all their pastries and ingredient needs, making it more convenient for bakery owners to manage their inventory.
-
 
 ### **Add Supplier Command**
 Adds a new supplier to the bakery’s supplier database.
@@ -297,22 +322,30 @@ addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TA
 
 **Example:**
 ```bash
-addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate
+addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 s/salt, chocolate
 ```
 ![Add Supplier.png](images%2FAdd%20Supplier.png)
 
 The Add Supplier Command allows bakery owners to add a new supplier to the address book records. The supplier is specified
-with all relevant contact details and ingredients supplied to the bakery. This command accepts the supplier's name,
+with all relevant contact details and ingredients supplied to the bakery. This command accepts the supplier's name, 
 phone number, email address, residential address, and a list of ingredients the supplier provides, with an option to
-include a tag for additional information.
+include a tag for additional information. 
 
-For example, typing **addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate**
-will add a supplier named "Tim" with phone number "81234567," email "emily@example.com," located at "456 Cupcake Road, Block 123, #03-04,"
-and supplying "salt" and "chocolate" as the supplied ingredients for the bakery. This command simplifies the tracking
+For example, typing **addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate** 
+will add a supplier named "Tim" with phone number "81234567," email "emily@example.com," located at "456 Cupcake Road, Block 123, #03-04," 
+and supplying "salt" and "chocolate" as the supplied ingredients for the bakery. This command simplifies the tracking 
 of supplier contacts and ingredient sources, helping bakery owners efficiently manage supplier relationships and inventory.
 
 ### **Add Supply Order Command**
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
+
+<div class="alert alert-info">
+⚠️ **Important Information**  <br>
+To view the new order in the supplier's contact details: <br>
+1. Add the supplier order using the command above <br> 
+2. Click the refresh button in the UI <br>
+3. The order will now appear under the supplier's contact information <br> <br>
+</div>
 
 ```bash
 addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
@@ -333,7 +366,7 @@ phone number, and a list of product IDs from the ingredient catalogue, identifyi
 
 For example, typing **addSupplyOrder n/John Doe p/98765432 o/1 2 3** creates a supply order for a supplier named
 "John Doe" with phone number "98765432," ordering products with IDs "1," "2," and "3" from the ingredient catalogue.
-This command helps bakery owners efficiently manage incoming supplies, track supply orders by product ID, and streamline
+This command helps bakery owners efficiently manage incoming supplies, track supply orders by product ID, and streamline 
 the ordering process for necessary ingredients.
 
 ### **Check Ingredient Stock Command**
@@ -351,12 +384,12 @@ checkIngredientStock Flour
 ```
 ![Check Ingredient Stock.png](images%2FCheck%20Ingredient%20Stock.png)
 
-The Check Ingredient Stock Command allows bakery owners to verify the current stock level of a specified ingredient in
-their inventory. This command requires the ingredient's name and will display the available quantity for that ingredient
-if it is in stock.
+The Check Ingredient Stock Command allows bakery owners to verify the current stock level of a specified ingredient in 
+their inventory. This command requires the ingredient's name and will display the available quantity for that ingredient 
+if it is in stock. 
 
-For example, typing **checkIngredientStock Flour** checks the inventory for the "Flour" ingredient and returns the
-quantity available if there is sufficient stock. This command helps bakery owners keep track of ingredient levels,
+For example, typing **checkIngredientStock Flour** checks the inventory for the "Flour" ingredient and returns the 
+quantity available if there is sufficient stock. This command helps bakery owners keep track of ingredient levels, 
 ensuring they have sufficient ingredients to make pastries for customers and can plan pastry orders when needed.
 
 ### **Check Pastry Stock Command**
@@ -373,15 +406,6 @@ checkPastryStock PASTRY
 checkPastryStock Croissant
 ```
 ![Check Pastry Stock.png](images%2FCheck%20Pastry%20Stock.png)
-
-The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
-This command requires only the pastry's name and will display whether there is sufficient stock to meet potential
-customer demand.
-
-For example, typing **checkPastryStock Croissant** checks the inventory for "Croissant" pastry and returns the quantity
-available if there are sufficient pastries. This command helps bakery owners ensure they can fulfill customer orders
-by maintaining the right stock levels for popular pastries.
-
 
 ### **Clear All Command**
 Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
@@ -473,6 +497,14 @@ Exits the program.
 ```bash
 exit
 ```
+=======
+The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
+This command requires only the pastry's name and will display whether there is sufficient stock to meet potential
+customer demand.
+
+For example, typing **checkPastryStock Croissant** checks the inventory for "Croissant" pastry and returns the quantity
+available if there are sufficient pastries. This command helps bakery owners ensure they can fulfill customer orders
+by maintaining the right stock levels for popular pastries.
 
 ### **Filter Contact Command**
 Filter and list contacts in the address book based on specified tags.
@@ -702,3 +734,26 @@ umarkSupplyOrder 1
 ![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
 ----------------------------------------------------------------------------------------------------------------------
+## Key New Features Summary
+
+Action | Format, Examples
+-------|------------------
+**Add Customer** | addCustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INFORMATION [t/TAG] <br> e.g., addCustomer n/John Doe p/12345678 e/john@example.com a/456 Pastry Street i/Allergic to dairy
+**Add Supplier** | addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG] <br> e.g., addSupplier n/Tim p/81234567 e=tim@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate
+**Add Ingredient** | addIngredient NAME COST <br> e.g., addIngredient Flour 1.50
+**Add Pastry** | addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...] <br> e.g., addPastry Croissant 3.50 Flour Cream Sugar
+**Remove Ingredient** | removeIngredient NAME <br> e.g., removeIngredient Flour
+**Remove Pastry** | removePastry NAME <br> e.g., removePastry Croissant
+**Add Customer Order** | addCustomerOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...] <br> e.g., addCustomerOrder 12345678 1 2 3
+**Delete Customer Order** | deleteCustomerOrder INDEX <br> e.g., deleteCustomerOrder 1
+**Add Supply Order** | addSupplyOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...] <br> e.g., addSupplyOrder 98765432 1 2 3
+**Delete Supply Order** | deleteSupplyOrder INDEX <br> e.g., deleteSupplyOrder 1
+**View Orders** | viewOrder
+**View Ingredient Catalogue** | viewIngredientCatalogue
+**View Pastry Catalogue** | viewPastryCatalogue
+**View Inventory** | viewInventory
+**Check Pastry Stock** | checkPastryStock PASTRY <br> e.g., checkPastryStock Croissant
+**Check Ingredient Stock** | checkIngredientStock INGREDIENT <br> e.g., checkIngredientStock Flour
+**Mark Customer Order** | markCustomerOrder INDEX <br> e.g., markCustomerOrder 1
+**Mark Supplier Order** | markSupplierOrder INDEX <br> e.g., markSupplierOrder 1
+

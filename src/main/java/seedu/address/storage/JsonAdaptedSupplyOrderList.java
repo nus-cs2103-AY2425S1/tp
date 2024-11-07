@@ -1,13 +1,13 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.order.SupplyOrder;
-import seedu.address.model.order.SupplyOrderList;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.order.SupplyOrderList;
 
 class JsonAdaptedSupplyOrderList {
     private final List<JsonAdaptedSupplyOrder> supplyOrders;
