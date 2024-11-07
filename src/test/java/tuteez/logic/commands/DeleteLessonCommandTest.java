@@ -177,8 +177,7 @@ public class DeleteLessonCommandTest {
     private String formatLessonList(List<Lesson> lessons) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i).toString());
-            // Only add newline if not the last lesson
+            sb.append("• ").append(lessons.get(i).toString());
             if (i < lessons.size() - 1) {
                 sb.append("\n");
             }
