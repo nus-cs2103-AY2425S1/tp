@@ -156,8 +156,8 @@ In both methods below:
 Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 
 Examples:
-*  `edit 1 th/johndoe123 e/johndoe@example.com` Edits the telegram handle and email address of the 1st contact to be `johndoe123` and `johndoe@example.com` respectively.
-*  `edit 2 r/Admin r/President` Edits the roles of the 2nd contact to be Admin and President, this removes all existing roles user has.
+*  `edit 1 th/johndoe123 e/johndoe@example.com` Edits the telegram handle and email address of the 1st displayed contact to be `johndoe123` and `johndoe@example.com` respectively.
+*  `edit 2 r/Admin r/President` Edits the roles of the 2nd displayed contact to be Admin and President, this removes all existing roles user has.
 
 #### Edit by name
 * Edits the contact specified by `FULL_NAME`.
