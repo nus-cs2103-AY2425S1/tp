@@ -207,14 +207,14 @@ Examples: <br>
 
 Deletes the specified person from the address book.
 
-Format: `delete [INDICES]...`
+Format: `delete INDICES`
 
 * Deletes the person(s) at the specified `INDEX` or range of indices.
 * The index refers to the index number shown in the **last displayed person list**.
 * `INDICES` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`), separated by spaces (e.g., `1 2 3 5-9`).
   * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
-    but `5 - 9` or `5 -9` r `5- 9` is invalid).
-* `INDICES` should not be empty; at least one `INDEX` or range must be provided.
+    but `5 - 9` or `5 -9` or `5- 9` is invalid).
+* `INDICES` should not be empty; at least one `INDEX` or `range` must be provided.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
@@ -226,9 +226,9 @@ Format: `delete [INDICES]...`
 </box>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `search n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `search` command.
-
+* `list` followed by `delete 2 4 6-8` deletes the 2nd, 4th, 6th, 7th, and 8th persons in the address book.
+* `search n/Betsy` followed by `delete 1 3-5` deletes the 1st, 3rd, 4th, and 5th persons in the results of the 
+  `search` command.
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -355,7 +355,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` <br> e.g., `add r/volunteer h/19 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDICES`<br> e.g., `delete 1 2 3 5-7`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Search**   | `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`<br> e.g., `search n/ john`
 **List**   | `list`
