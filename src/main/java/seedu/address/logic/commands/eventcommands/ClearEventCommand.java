@@ -33,8 +33,8 @@ public class ClearEventCommand extends ClearCommand {
             setPrompted(false);
             return new CommandResult(MESSAGE_ABORTED);
         } else {
-            setPrompted(false);
             setConfirmed(false);
+            setPrompted(false);
             model.setEventList(new AddressBook());
             return new CommandResult(MESSAGE_SUCCESS);
         }
