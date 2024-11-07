@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Education {
     public static final String MESSAGE_CONSTRAINTS =
             "Education level should be alphanumeric and length must be within 1 to 25";
-    public static final String VALIDATION_REGEX = "^\\p{Alnum}{1,25}$";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]{0,24}$";
 
     public final String educationLevel;
 
