@@ -49,11 +49,37 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Storing Information
+
+<box type="info" seamless>
+
+EventTory provides users a way to keep track of events and vendors.
+The details of what information can be stored for a vendor/event are as shown below.
+
+### Vendor
+
+* Represents a vendor contracted to provide services for an event e.g. catering, decorating, performing, etc.
+* Information about a vendor can be stored with the following fields:
+  * **Name** : The name of the vendor (usually a company name)
+  * **Phone Number** : The contact number of the vendor
+  * **Description** : Text containing any additional information about the vendor
+  * **Tags** (if applicable) : Metadata used to classify the vendor
+* Multiple vendors can be stored in EventTory.
+
+### Event
+
+* Represents an event that needs to be organised and usually enlists the help of vendors to plan/run it.
+* Information about an event can be stored with the following fields:
+  * **Name** : The name of the event
+  * **Date** : The date the event falls on
+  * **Tags** (if applicable) : Metadata used to classify the event
+* Multiple events can be stored in EventTory.
+
 ## Features
 
 <box type="info" seamless>
 
-**Notes about the command formats:**<br>
+### Command Formats
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. `create v/ n/VENDOR_NAME`, `VENDOR_NAME` is a parameter which is specified by the user:
