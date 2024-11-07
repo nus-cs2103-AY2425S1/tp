@@ -62,8 +62,8 @@ public class Messages {
         person.getTags().forEach(builder::append);
         builder.append("; DateOfCreation: ")
                 .append(person.getDateOfCreation().toString())
-                .append("; History: ").append(person.getHistory());
-        builder.append("; PropertyList: ")
+                .append(";\nHistory: ").append(person.getHistory());
+        builder.append("\nPropertyList: ")
                 .append(person.getPropertyList().toString());
         return builder.toString();
     }
