@@ -54,7 +54,7 @@ public class DateCommandParser implements Parser<DateCommand> {
 
             // Check if the date prefix is present
             if (!Parser.areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
-                throw new ParseException("A date is required. Please include a date. "
+                throw new ParseException("A date and time is required. Please include a date and time. "
                         + String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 

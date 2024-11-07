@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -150,7 +149,7 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (trimmedDate.toLowerCase().equals("none")) {
-            return new Date(LocalDateTime.MIN);
+            return Date.NO_DATE;
         }
         return new Date(Date.parseDateTime(trimmedDate));
     }

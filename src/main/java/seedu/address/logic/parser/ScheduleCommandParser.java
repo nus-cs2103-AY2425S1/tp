@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
@@ -54,7 +53,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             String dateString = argMultimap.getValue(PREFIX_DATE).get();
             date = ParserUtil.parseDate(dateString);
         } else {
-            date = new Date(LocalDateTime.MIN); // Default constructor if no date is provided
+            date = Date.NO_DATE; // Default if no date is provided
         }
 
         return new ScheduleCommand(new SchedulePredicate(date));
