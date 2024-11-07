@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* AB3 for the basic structure of the application.
+* [AB3](https://github.com/se-edu/addressbook-level3) for the basic structure of the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
