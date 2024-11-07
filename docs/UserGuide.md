@@ -224,7 +224,7 @@ Exports a copy of your contact data to a specified file format.
 
 BA€ supports file exports in the CSV and TXT file formats.
 
-Format: `export [format\EXPORT_FORMAT]`
+Format: `export format\EXPORT_FORMAT`
 * `format\EXPORT_FORMAT` specifies a file format for the contact data export.
 
 Examples:
@@ -301,4 +301,4 @@ Action     | Format, Examples
 **Help**   | `help`
 **Filter** | `filter [n\NAME] [t\TAG]…​`<br> e.g., `filter n\John t\client t\friend`
 **Advanced Filter** | `advfilter [t\TAG] [operator] [value]…​`<br> e.g., `advfilter t\premium > 1000`
-**Export** | `export [format\EXPORT_FORMAT]`<br> e.g., `export format\csv`
+**Export** | `export format\EXPORT_FORMAT`<br> e.g., `export format\csv`
