@@ -16,7 +16,7 @@ import seedu.address.model.client.Phone;
 public abstract class AddClientCommand extends Command {
 
     public static final String CLIENT_RESTRICTIONS = String.format(
-            "Restrictions: %s\n%s\n%s",
+            "Restrictions: \n\t%s\n\t%s\n\t%s",
             NameWithoutNumber.MESSAGE_CONSTRAINTS,
             Phone.MESSAGE_CONSTRAINTS,
             Email.MESSAGE_CONSTRAINTS
