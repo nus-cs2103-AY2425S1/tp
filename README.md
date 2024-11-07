@@ -1,19 +1,24 @@
 By CS2103T-T11-2
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml)
 
-![Ui](docs/images/Ui.png)
+[![Java CI](https://github.com/AY2425S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T11-2/tp/graph/badge.svg)](https://codecov.io/github/AY2425S1-CS2103T-T11-2/tp)
 
-* This is **a project for CS2030S TAs**.<br>
-  Example usages:
+![Ui](docs/images/homePage.png)
+
+**KonTActs is a desktop application for CS2030S teaching assistants to manage your students', fellow TAs', and professors' contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+
+
+Build as part of **a project for CS2030S TAs**.<br>
+  Users will be able to use KonTActs:
   * as a reference to get their students' details more easily
   * as a tool to help them keep track of their students.
-* The project simulates an ongoing software project for a desktop application (called _konTActs_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `konTActs` because it is developed for CS2030S TAs to manage their students, store their github details and other contacts like professors and fellow TAs. 
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://ay2425s1-cs2103t-t11-2.github.io/tp/)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
+**The project simulates an ongoing software project for a desktop application (called _KonTActs_) used for managing contact details.
+  * For details on how to use KonTActs, please refer to the user guide for [KonTActs](https://ay2425s1-cs2103t-t11-2.github.io/tp/UserGuide.html)
+
+
+
+* If you are interested about developing KonTActs, the [Developer Guide](https://ay2425s1-cs2103t-t11-2.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 
 
