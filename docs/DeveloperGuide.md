@@ -2,6 +2,11 @@
 layout: page
 title: Developer Guide
 ---
+
+This **EduVault Developer Guide** provides a comprehensive overview for developers who wishes to build on the current EduVault system, or anyone who is interested to learn about the internal structure of EduVault. It includes details on the architectural structure, key classes, and design patterns used to support EduVault’s functionalities, such as student and tutorial management.  This guide also covers some planned enhancements that our team have in mind.
+
+---
+
 * Table of Contents
 {:toc}
 
