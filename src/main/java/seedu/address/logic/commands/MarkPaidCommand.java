@@ -61,25 +61,29 @@ public class MarkPaidCommand extends Command {
                 personToMarkPayment.getEmail(), personToMarkPayment.getAddress(),
                 updatedPayment, personToMarkPayment.getTags());
 
-        //List of participations to delete
-        List<Participation> participationsToDelete = model.getParticipationList()
-                .filtered(participation -> participation.getStudent().equals(personToMarkPayment)).stream().toList();
-
-        if (participationsToDelete.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT,
-                    personToMarkPayment.getName()));
-        }
-
-        for (Participation participation : participationsToDelete) {
-            Participation updatedParticipation = new Participation(markedPerson,
-                    participation.getTutorial(), participation.getAttendanceList());
-            model.setParticipation(participation, updatedParticipation);
-        }
+        updateParticipations(model, personToMarkPayment, markedPerson);
 
         model.setPerson(personToMarkPayment, markedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, markedPerson.getFullName(),
                 markedPerson.getPayment().toString()));
+    }
+
+    private void updateParticipations(
+            Model model, Person originalStudent, Person updatedStudent) throws CommandException {
+        List<Participation> participationsToUpdate = model.getParticipationList()
+                .filtered(participation -> participation.getStudent().isSamePerson(originalStudent));
+
+        if (participationsToUpdate.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT,
+                    updatedStudent.getName()));
+        }
+
+        for (Participation participation : participationsToUpdate) {
+            Participation updatedParticipation = new Participation(updatedStudent,
+                    participation.getTutorial(), participation.getAttendanceList());
+            model.setParticipation(participation, updatedParticipation);
+        }
     }
 
     @Override

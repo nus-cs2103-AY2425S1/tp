@@ -798,7 +798,7 @@ If your changes to the data file make its format invalid, EduVault will discard 
 Furthermore, certain edits can cause EduVault to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-For reference, please refer to the [Developer Guide](https://ay2425s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html#storage-format) for more details on editing the JSON file.
+For reference, please refer to the [Developer Guide](https://ay2425s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html#storage-feature) for more details on editing the JSON file.
 
 ---
 
@@ -1006,7 +1006,7 @@ dd/MM/yyyy</code>
 ### **13. FAQ**
 
 **Q**: How do I transfer my data to another Computer?  
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduVault home folder.
 
 ---
 

@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -72,12 +73,17 @@ public class UnmarkAttendanceByStudentCommandTest {
         Index index = Index.fromOneBased(1);
         Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
         Tutorial tutorial = new Tutorial("Math");
+        Person student = model.getFilteredPersonList().get(0);
+        List<Attendance> attendanceList = new ArrayList<Attendance>();
+        attendanceList.add(attendance);
+
+        model.setParticipation(model.getParticipationList().get(0), new Participation(student, tutorial,
+                attendanceList));
 
         UnmarkAttendanceByStudentCommand unmarkAttendanceByStudentCommand =
                 new UnmarkAttendanceByStudentCommand(index, attendance, tutorial);
         CommandResult result = unmarkAttendanceByStudentCommand.execute(model);
 
-        Person student = model.getFilteredPersonList().get(0);
 
         assertEquals(String.format(UnmarkAttendanceByStudentCommand.MESSAGE_UNMARK_ATTENDANCE_STUDENT_SUCCESS,
                 student.getName(), tutorial.getSubject(), attendance), result.getFeedbackToUser());
