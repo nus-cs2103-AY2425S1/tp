@@ -42,8 +42,8 @@ public class DeleteAttendanceCommand extends Command {
     public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n"
             + "Their student numbers are as follows: %s" + "\n"
             + "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
             + PREFIX_DATE + "DATE "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
             + "to delete the Attendance for the correct Student.";
     private final Name name;
     private final LocalDate date;
