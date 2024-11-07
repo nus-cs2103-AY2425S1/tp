@@ -149,6 +149,7 @@ Before continuing, here are some important information you need to know about th
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
 | **Help**     | `help`                                                                                                                                                                            |
 | **List**     | `list`                                                                                                                                                                            |
+| **Reopen**   | `reopen INDEX`                                                                                                                                                                    |
 | **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                            |
 | **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
 
@@ -195,6 +196,8 @@ Before diving into our features, do note that we set some specifications for nam
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * A Company Status is the first coloured tag under the company's name. It will be set to `INTERESTED` initially, then to `APPLIED` when an Application to the company is made, and finally `CLOSED` when the all Applications are withdrawn from that company.
+
+* To use the `reopen` command, the company at the `Index` provided mus have status `CLOSED`, which will subsequently become `Interested`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -404,6 +407,14 @@ The index refers to the index number shown in the displayed company list. The in
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
+### Reopening company: `reopen`
+
+Changes the status of a company from `CLOSED` to `INTERESTED`
+
+Format: `reopen INDEX`
+* The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+* The company at the provided index **must have status** `CLOSED`.
 
 ### Exiting the program : `exit`
 
