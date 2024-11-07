@@ -86,11 +86,6 @@ public class VolunteerParserUtil {
         for (int i = 0; i < datesArr.length; i++) {
             String d = datesArr[i].trim(); // Only trim outer spaces
 
-            // Check if date contains any internal spaces
-            if (d.contains(" ")) {
-                throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
-            }
-
             if (!VolunteerDates.isValidDate(d)) {
                 throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
             }
@@ -127,11 +122,6 @@ public class VolunteerParserUtil {
 
         for (int i = 0; i < datesArr.length; i++) {
             String d = datesArr[i].trim(); // Only trim outer spaces
-
-            // Check if date contains any internal spaces
-            if (d.contains(" ")) {
-                throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
-            }
 
             if (!VolunteerDates.isValidDate(d)) {
                 throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
