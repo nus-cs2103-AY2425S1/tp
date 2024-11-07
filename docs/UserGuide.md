@@ -157,9 +157,11 @@ Health Connect is an application designed to **streamline client management** fo
 Constraints:
 * **NAME**
     - The string must be alphanumeric and contain at least one alphabetic character (i.e., it cannot consist entirely of numbers). Special characters allowed are space (' '), slash ('/'), and hyphen ('-').
+  
 * **PHONE NUMBER**
     - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
     - Only numeric characters are allowed
+  
 * **EMAIL**
     - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
     - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
@@ -169,9 +171,11 @@ Constraints:
         1. `High Risk`
         2. `Medium Risk`
         3. `Low Risk`
+      
 * **ALLERGY**
     - Only include alphanumeric characters, spaces, and commas.
     - Must not be empty or contain special characters other than commas and spaces.
+    - If a patient has multiple allergies, they can be listed in the add command like this: `m/Allergy1 m/Allergy2`
     - If a patient has no allergies, use this format: `m/None`
       
 * **INDEX**
@@ -203,8 +207,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY...`
 [Parameter Constraints](#parameter-constraints).
 
 Examples:
+
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Lactose m/Gluten`
+
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin m/Penicillin`
-  <br>
+  
 * `add n/Betsy-Crowe p/81239873 e/betsycrowe@example.com a/01 Clementi Road #04-03 Singapore 4374538 t/Low Risk m/None`
 
 
@@ -418,7 +425,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
-
 | Action               | Format, Examples                                                                                                                                                                        |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/High Risk t/colleague` |
