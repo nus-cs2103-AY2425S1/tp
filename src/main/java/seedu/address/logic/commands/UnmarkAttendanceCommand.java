@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,9 +26,9 @@ public class UnmarkAttendanceCommand extends Command {
             + ": Remove an attendance record from the person identified by the index number "
             + "and a datetime.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + "DATETIME \n"
+            + PREFIX_DATE + "DATE_TIME \n"
             + "Example: \n"
-            + COMMAND_WORD + " 1" + PREFIX_DATE + "31/01/2024 12:00 \n";
+            + COMMAND_WORD + " 1 " + PREFIX_DATE + "31/01/2024 12:00 \n";
 
     public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Removed attendance for %1$s on %2$s";
     public static final String MESSAGE_ATTENDANCE_NOT_FOUND = "No attendance record on '%1$s'.";
@@ -67,7 +66,7 @@ public class UnmarkAttendanceCommand extends Command {
 
         Person studentUnmarked = studentToUnmark.removeAttendance(classDate);
         model.setPerson(studentToUnmark, studentUnmarked);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(
                 String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, studentUnmarked.getName(), dateString));
     }

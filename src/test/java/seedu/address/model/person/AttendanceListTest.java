@@ -43,12 +43,12 @@ public class AttendanceListTest {
         // setAttendance should not modify the original list
         AttendanceList list = new AttendanceList();
         list.setAttendance(date, new Attendance(true));
-        assertTrue(list.toString().equals(""));
+        assertTrue(list.toString().equals("No attendance records"));
 
         // removeAttendance should not modify the original list
         list = list.setAttendance(date, new Attendance(true));
         list.removeAttendance(date);
-        assertFalse(list.toString().equals(""));
+        assertFalse(list.toString().equals("No attendance records"));
     }
 
     @Test
