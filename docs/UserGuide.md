@@ -393,11 +393,8 @@ _Details coming soon ..._
 **Q**: How do I add multiple tags to a contact?<br>
 **A**: When adding a person, use t/TAG multiple times. For example, `add person n/John Doe p/98765432 t/CameraMan t/Producer` will add "CameraMan" and "Producer" as tags.
 
-**Q**: What if I accidentally delete a person or event? Can I recover them?<br>
-**A**: TalentHub does not currently support an undo function for deletions. Once deleted, the data cannot be restored. It’s recommended to double-check before confirming deletions.
-
-**Q**: How can I delete a field in Person or Event I have added?<br>
-**A**: You can delete the field using the `edit` command by specifying a blank prefix for the field you want to delete. For example, `edit event v/` deletes the venue field. Note that only optional fields can be removed.
+**Q**: How can I delete an optional field in Person or Event I have added?<br>
+**A**: You can delete the field using the `edit` command by specifying a blank prefix for the field you want to delete. For example, `edit event v/` deletes the venue field.
 
 **Q**: How do I undo a mistake?<br>
 **A**: An update to provide an undo feature is currently in progress.
