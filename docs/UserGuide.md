@@ -13,7 +13,6 @@ DDD is a desktop app for **wedding planners** to keep track of their **clients**
 DDD is tailored specifically to the needs of **wedding planners**, and is designed to streamline your workflows. If you can type fast, DDD can even help you manage your contacts faster than traditional GUI apps! Furthermore, DDD offers features designed to alleviate the hassle of managing disparate sets of contacts!
 
 <!-- * Table of Contents -->
-<page-nav />
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -302,154 +301,184 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 --------------------------------------------------------------------------------------------------------------------
 
+<style>
+  table, th, td {
+    border: 1px solid;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
+
 ## Command Summary
 
 ### `add`
 
 <table>
-  <tr>
-    <th>Action</th>
-    <th>Format</th>
-    <th>Example</th>
-  </tr>
-  <tr>
-    <td><strong>Create Client</strong></td>
-    <td>
-      <code>add -c n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]</code>
-    </td>
-    <td>
-      <code>add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget</code>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Create Vendor</strong></td>
-    <td>
-      <code>add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG ...]</code>
-    </td>
-    <td>
-      <code>add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget</code>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Create Event</strong></td>
-    <td>
-      <code>add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID ... v/VENDOR_ID ...</code>
-    </td>
-    <td>
-      <code>add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2</code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Format</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Create Client</strong></td>
+      <td>
+        <code>add -c n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]</code>
+      </td>
+      <td>
+        <code>add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Create Vendor</strong></td>
+      <td>
+        <code>add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG ...]</code>
+      </td>
+      <td>
+        <code>add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Create Event</strong></td>
+      <td>
+        <code>add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID ... v/VENDOR_ID ...</code>
+      </td>
+      <td>
+        <code>add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2</code>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ### `list`
 
 <table>
-  <tr>
-    <th>Action</th>
-    <th>Format</th>
-    <th>Example</th>
-  </tr>
-  <tr>
-    <td><strong>List Contacts</strong></td>
-    <td>
-      <code>list</code>
-    </td>
-    <td>
-      <code>list</code>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>List Clients</strong></td>
-    <td>
-      <code>list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]</code>
-    </td>
-    <td>
-      <code>list -c n/Jane</code>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>List Vendors</strong></td>
-    <td>
-      <code>list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]</code>
-    </td>
-    <td>
-      <code>list -v s/catering</code>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>List Events</strong></td>
-    <td>
-      <code>list -e [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]</code>
-    </td>
-    <td>
-      <code>list -e des/wedding</code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Format</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>List Contacts</strong></td>
+      <td>
+        <code>list</code>
+      </td>
+      <td>
+        <code>list</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>List Clients</strong></td>
+      <td>
+        <code>list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]</code>
+      </td>
+      <td>
+        <code>list -c n/Jane</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>List Vendors</strong></td>
+      <td>
+        <code>list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]</code>
+      </td>
+      <td>
+        <code>list -v s/catering</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>List Events</strong></td>
+      <td>
+        <code>list -e [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]</code>
+      </td>
+      <td>
+        <code>list -e des/wedding</code>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ### `edit`
 
 <table>
-  <tr>
-    <th>Action</th>
-    <th>Format</th>
-    <th>Example</th>
-  </tr>
-  <tr>
-    <td><strong>Edit by Index</strong></td>
-    <td>
-      <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]</code>
-    </td>
-    <td>
-      <code>edit 1 p/91234567</code>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Edit by ID</strong></td>
-    <td>
-      <code>edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]</code>
-    </td>
-    <td>
-      <code>edit id/0 p/91234567 e/johndoe@example.com</code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Format</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Edit by Index</strong></td>
+      <td>
+        <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]</code>
+      </td>
+      <td>
+        <code>edit 1 p/91234567</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Edit by ID</strong></td>
+      <td>
+        <code>edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]</code>
+      </td>
+      <td>
+        <code>edit id/0 p/91234567 e/johndoe@example.com</code>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ### Miscellaneous
 
 <table>
-  <tr>
-    <th>Action</th>
-    <th>Format</th>
-    <th>Example</th>
-  </tr>
-  <tr>
-    <td><strong>Delete Contact/Event by Index</strong></td>
-    <td>
-      <code>delete INDEX</code>
-    </td>
-    <td>
-      <code>delete 1</code>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Clear Data</strong></td>
-    <td>
-      <code>clear</code>
-    </td>
-    <td>
-      <code>clear</code>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Help</strong></td>
-    <td>
-      <code>help</code>
-    </td>
-    <td>
-      <code>help</code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Format</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Delete Contact/Event by Index</strong></td>
+      <td>
+        <code>delete INDEX</code>
+      </td>
+      <td>
+        <code>delete 1</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Clear Data</strong></td>
+      <td>
+        <code>clear</code>
+      </td>
+      <td>
+        <code>clear</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Help</strong></td>
+      <td>
+        <code>help</code>
+      </td>
+      <td>
+        <code>help</code>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -469,100 +498,104 @@ Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` 
 ### Parameters
 
 <table>
-  <tr>
-    <th>Parameter</th>
-    <th>Description</th>
-    <th>Notes/Constraints</th>
-  </tr>
-  <tr>
-    <td><code>n/NAME</code></td>
-    <td>Name of contact/event</td>
-    <td>
-      <ul>
-        <li>should only lphanumeric characters or spaces</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>p/PHONE</code></td>
-    <td>Phone number of contact</td>
-    <td>
-      <ul>
-        <li>should only contain numbers</li>
-        <li>should have a length between 3 and 20 digits</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>e/EMAIL</code></td>
-    <td>Email address of contact</td>
-    <td>
-      <ul>
-        <li>follows the format <code>LOCAL_PART@DOMAIN_NAME</code></li>
-        <li><code>LOCAL_PART</code> should only contain alphanumeric characters or these special characters <code>+_.-</code></li>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Notes/Constraints</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>n/NAME</code></td>
+      <td>Name of contact/event</td>
+      <td>
         <ul>
-          <li><code>LOCAL_PART</code> should not start or end with special characters</li>
-          <li><code>LOCAL_PART</code> can contain consecutive special characters, except for periods</li>
+          <li>should only lphanumeric characters or spaces</li>
         </ul>
-        <li><code>DOMAIN_NAME</code> should only contain alphanumeric characters and periods</li>
+      </td>
+    </tr>
+    <tr>
+      <td><code>p/PHONE</code></td>
+      <td>Phone number of contact</td>
+      <td>
         <ul>
-          <li><code>DOMAIN_NAME</code> consists of a set of domain labels separated by periods</li>
-          <li>domain labels should be at least 2 characters long</li>
-          <li>domain labels should start and end with alphanumeric characters</li>
+          <li>should only contain numbers</li>
+          <li>should have a length between 3 and 20 digits</li>
         </ul>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>a/ADDRESS</code></td>
-    <td>Address of contact</td>
-    <td>
-      <ul>
-        <li>can contain any value</li>
-        <li>should not be blank</li>
-      </ul>
-    </td>
-  </tr>
-  </tr>
-  <tr>
-    <td><code>s/SERVICE</code></td>
-    <td>Service provided by vendor</td>
-    <td>
-      <ul>
-        <li>should only contain alphanumeric characters and spaces</li>
-        <li>should not be blank</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>d/DATE</code></td>
-    <td>Date of event</td>
-    <td>
-      <ul>should follow one of these formats:
+      </td>
+    </tr>
+    <tr>
+      <td><code>e/EMAIL</code></td>
+      <td>Email address of contact</td>
+      <td>
         <ul>
-          <li><code>MM/dd/yyyy</code></li>
-          <li><code>yyyy-MM-dd</code></li>
-          <li><code>d MMM yyyy</code></li>
+          <li>follows the format <code>LOCAL_PART@DOMAIN_NAME</code></li>
+          <li><code>LOCAL_PART</code> should only contain alphanumeric characters or these special characters <code>+_.-</code></li>
+          <ul>
+            <li><code>LOCAL_PART</code> should not start or end with special characters</li>
+            <li><code>LOCAL_PART</code> can contain consecutive special characters, except for periods</li>
+          </ul>
+          <li><code>DOMAIN_NAME</code> should only contain alphanumeric characters and periods</li>
+          <ul>
+            <li><code>DOMAIN_NAME</code> consists of a set of domain labels separated by periods</li>
+            <li>domain labels should be at least 2 characters long</li>
+            <li>domain labels should start and end with alphanumeric characters</li>
+          </ul>
         </ul>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>t/TAG</code></td>
-    <td>Tag associated with contact</td>
-    <td>
-      <ul>
-        <li>should only contain alphanumeric characters or dashses</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>id/ID</code></td>
-    <td>ID of contact/event</td>
-    <td>
-      <ul>
-        <li>configured by DDD</li>
-      </ul>
-    </td>
-  </tr>
+      </td>
+    </tr>
+    <tr>
+      <td><code>a/ADDRESS</code></td>
+      <td>Address of contact</td>
+      <td>
+        <ul>
+          <li>can contain any value</li>
+          <li>should not be blank</li>
+        </ul>
+      </td>
+    </tr>
+    </tr>
+    <tr>
+      <td><code>s/SERVICE</code></td>
+      <td>Service provided by vendor</td>
+      <td>
+        <ul>
+          <li>should only contain alphanumeric characters and spaces</li>
+          <li>should not be blank</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>d/DATE</code></td>
+      <td>Date of event</td>
+      <td>
+        <ul>should follow one of these formats:
+          <ul>
+            <li><code>MM/dd/yyyy</code></li>
+            <li><code>yyyy-MM-dd</code></li>
+            <li><code>d MMM yyyy</code></li>
+          </ul>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>t/TAG</code></td>
+      <td>Tag associated with contact</td>
+      <td>
+        <ul>
+          <li>should only contain alphanumeric characters or dashses</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>id/ID</code></td>
+      <td>ID of contact/event</td>
+      <td>
+        <ul>
+          <li>configured by DDD</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
 </table>
