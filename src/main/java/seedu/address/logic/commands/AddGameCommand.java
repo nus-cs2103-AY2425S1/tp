@@ -44,6 +44,7 @@ public class AddGameCommand extends Command {
 
     public static final String MESSAGE_ADD_GAME_SUCCESS = "Added Game to Person: %1$s";
     public static final String MESSAGE_GAME_EXISTS = "The game provided already exists for that person.";
+    private static final boolean IS_UNDOABLE = true;
 
     private final Index index;
     private final GameDescriptor addGameDescriptor;
@@ -85,7 +86,9 @@ public class AddGameCommand extends Command {
         Game editedGame = createNewGame(gameName, addGameDescriptor);
         gameMap.put(gameName, editedGame);
         model.setPerson(personToEdit, personToEdit);
-        model.addCommandToLog(this);
+        if (IS_UNDOABLE) {
+            model.addCommandToLog(this);
+        }
         return new CommandResult(String.format(MESSAGE_ADD_GAME_SUCCESS, Messages.format(editedGame)));
     }
 
@@ -97,6 +100,11 @@ public class AddGameCommand extends Command {
         gameMap.remove(gameName);
 
         model.setPerson(personToEdit, personToEdit);
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     /**

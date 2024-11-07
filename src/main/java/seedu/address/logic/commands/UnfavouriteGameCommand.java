@@ -31,6 +31,7 @@ public class UnfavouriteGameCommand extends Command {
     public static final String MESSAGE_UNFAVOURITE_GAME_SUCCESS = "Un-favourited Game: %1$s";
     public static final String MESSAGE_GAME_NOT_SPECIFIED = "Please specify a game!";
     public static final String MESSAGE_GAME_NOT_FOUND = "Game not found!";
+    private static final boolean IS_UNDOABLE = true;
 
     private Index index;
     private String gameName;
@@ -67,7 +68,9 @@ public class UnfavouriteGameCommand extends Command {
         prevGameIsFavourite = targetGame.getFavouriteStatus();
         targetGame.removeFavourite();
         model.setPerson(targetPerson, targetPerson);
-        model.addCommandToLog(this);
+        if (IS_UNDOABLE) {
+            model.addCommandToLog(this);
+        }
         return new CommandResult(String.format(MESSAGE_UNFAVOURITE_GAME_SUCCESS, gameName));
     }
 
@@ -89,6 +92,11 @@ public class UnfavouriteGameCommand extends Command {
         }
 
         model.setPerson(targetPerson, targetPerson);
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     @Override

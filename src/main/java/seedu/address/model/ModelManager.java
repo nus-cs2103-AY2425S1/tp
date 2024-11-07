@@ -189,5 +189,4 @@ public class ModelManager implements Model {
     public String getPreviousInput() {
         return commandLog.getPreviousInput();
     }
-
 }

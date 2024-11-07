@@ -16,6 +16,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
+    private static final boolean IS_UNDOABLE = true;
 
     private Predicate<Person> previousPredicate;
 
@@ -24,7 +25,9 @@ public class ListCommand extends Command {
         requireNonNull(model);
         previousPredicate = model.getCurrentPredicate();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.addCommandToLog(this);
+        if (IS_UNDOABLE) {
+            model.addCommandToLog(this);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -32,5 +35,10 @@ public class ListCommand extends Command {
     public void undo(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(previousPredicate);
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 }

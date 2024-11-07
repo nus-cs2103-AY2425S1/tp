@@ -21,4 +21,9 @@ public abstract class Command {
      * Undoes the command.
      */
     public abstract void undo(Model model);
+
+    /**
+     * Returns whether the command can be undone.
+     */
+    public abstract boolean canBeUndone();
 }

@@ -50,6 +50,10 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        if (command.canBeUndone()) {
+            model.addInputToLog(commandText);
+        }
+
         if (commandResult.isLoad()) {
             try {
                 Optional<ReadOnlyAddressBook> loadedAddressBookOpt = storage.loadAddressBookManually();

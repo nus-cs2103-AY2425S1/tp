@@ -13,14 +13,23 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+    private static final boolean IS_UNDOABLE = false;
 
     @Override
     public CommandResult execute(Model model) {
+        if (IS_UNDOABLE) {
+            model.addCommandToLog(this);
+        }
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false, false);
     }
 
     @Override
     public void undo(Model model) {
 
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 }
