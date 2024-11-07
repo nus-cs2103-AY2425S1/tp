@@ -97,7 +97,7 @@ Remarks:
 * Add a contact with the specified details.
 * `NAME` should only contain alphanumeric characters, spaces and round brackets.
 * Duplicated names is strictly not allowed. Please include a unique identifier like "Ryan Tan (Sec 1)".
-* `NAME` with symbols like "s/o" and "d/o" will not be allowed. Please write without these symbols.
+* `NAME` with symbols like "s/o" and "d/o" will not be allowed. However, so and do are accepted, please write without these symbols.
 * `NAME` with additional white spaces in between terms will be taken as it is.
 * `PHONE_NUMBER` can must be a non-negative integers
 * `PHONE_NUMBER` can start with any number.
@@ -118,6 +118,8 @@ Remarks:
 * `ROLE` need not be case-sensitive. e.g. `ROLE` can be `stUDent` or `GuaRDIAN`.
 * `TAGS` have no limits on quantity.
 * `TAGS` can only have alphanumeric characters with no spacing.
+* `NAME` and `EMAIL` are case-insensitive.
+* `NAME` that are duplicated will be prompted to add a unique identifier.
 
 > **Note:** Lessons can only be added to contacts with the role of student. Therefore, if you want to add a lesson to a contact, you must first add the contact with the role of student.
 
