@@ -13,8 +13,8 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class Group {
 
-    public static final String MESSAGE_CONSTRAINTS = "Group is written as g/GROUP_NAME "
-            + "(100 characters or less, incl spaces between words), please ensure there are no empty group names too!";
+    public static final String MESSAGE_CONSTRAINTS = "Group name should not be blank and is written as g/GROUP_NAME "
+            + "(where GROUP_NAME is 100 characters or less including spaces between words)";
     public static final String VALIDATION_REGEX = "^.{1,100}$";
     private static final Logger logger = LogsCenter.getLogger(Group.class);
     public final String groupName;
