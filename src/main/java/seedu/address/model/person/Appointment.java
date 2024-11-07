@@ -112,11 +112,11 @@ public class Appointment {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         if (this.completed) {
-            return "Appointment: " + getDateTime().format(formatter) + " for " + getPatientId()
+            return "[Completed] Appointment: " + getDateTime().format(formatter) + " for " + getPatientId()
                     + " (patient id) with " + getDoctorId() + " (doctor id). "
                     + "Remarks: " + getRemarks();
         } else {
-            return "Appointment: " + getDateTime().format(formatter) + " for " + getPatientId()
+            return "[Incomplete] Appointment: " + getDateTime().format(formatter) + " for " + getPatientId()
                     + " (patient id) with " + getDoctorId() + " (doctor id). "
                     + "Remarks: " + getRemarks();
         }
