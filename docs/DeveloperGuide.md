@@ -603,6 +603,21 @@ Preconditions: User is viewing an item.
 
 ---
 
+**Use case: UC06 - List items**
+
+**MSS**
+1. User inputs the lists to display.
+2. System displays chosen lists.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
