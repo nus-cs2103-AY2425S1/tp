@@ -17,5 +17,5 @@ Person -up-> "*" Tag
 Person *--> Name
 Person *--> Phone
 Person *--> Gender
-Person *--> "*" Module
+Person *--> Module
 @enduml
