@@ -27,17 +27,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand<?>> {
 
         String entityString = splitArgs[0]; // either "contact, "job" or "company"
         String indexString = splitArgs[1];
-
-
         String entity = ParserUtil.parseEntity(entityString);
+        Index index = ParserUtil.parseIndex(indexString);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(indexString);
-        } catch (ParseException e) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
         switch (entity) {
         case DeleteContactCommand.ENTITY_WORD:
             return new DeleteContactCommand(index);
