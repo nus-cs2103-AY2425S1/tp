@@ -82,19 +82,20 @@ any traditional point-and-click management app.
 Action     | Format, Examples
 :--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:
 **[Add](#adding-a-person-add)**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
-**[Clear](#clearing-all-entries--clear)**  | `clear`
-**[Delete](#deleting-a-person--delete)** | `delete INDEX`<br> e.g., `delete 3`
-**[Edit](#editing-a-person--edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**[Find by contact information](#locating-persons-by-contact-information-find)**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
-**[Delete tag](#deleting-a-persons-tag--deltag)** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**[Add tag](#adds-tags-to-a-specific-person--addtag)** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
-**[Categorize tag](#categorizing-a-tag--cattag)** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
-**[Undo action](#undo-a-command--undo)** | `undo`
+**[Clear](#clearing-all-entries-clear)**  | `clear`
+**[Delete](#deleting-a-person-delete)** | `delete INDEX`<br> e.g., `delete 3`
+**[Edit](#editing-a-person-edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**[Find by contact information](#finding-persons-by-contact-information-find)**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
+**[Delete tag](#deleting-a-persons-tag-deltag)** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
+**[Add tag](#adds-tags-to-a-specific-person-addtag)** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
+**[Categorize tag](#categorizing-a-tag-cattag)** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**[Undo action](#undo-a-command-undo)** | `undo`
 **[Redo action](#redo-a-command-redo)** | `redo`
-**[List](#listing-all-persons--list)**   | `list`
-**[Help](#viewing-help--help)**   | `help` 
+**[List](#listing-all-persons-list)**   | `list`
+**[Help](#viewing-help-help)**   | `help` 
 
 --------------------------------------------------------------------------------------------------------------------
+## Commands
 
 ### Viewing help : `help`
 
@@ -106,7 +107,7 @@ When clicked, this hyperlink will show the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to CampusConnect.
 
@@ -143,14 +144,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed, i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
-* After editing the person, there should be no duplicate contact in the campus connect.
+* After editing the person, there should be no duplicate contact in CampusConnect.
 * Two contacts are considered duplicates if they share the same name, email, or phone number.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by contact information: `find`
+### Finding persons by contact information : `find`
 
 Finds persons whose names, email address, contact number, or tag contain any of the given keywords.
 
@@ -214,7 +215,7 @@ Format: `deltag INDEX t/TAG`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Only one tag can be deleted at a time.
-
+* The list of the tag will be updated accordingly.
 Examples:
 * `deltag 1 t/friend` 
 deletes the friend tag of the first person in the list.
@@ -229,7 +230,6 @@ Categorizes a tag under a defined category.
 Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 
 * Sets the tag(s) in CampusConnect with the specified name `TAG` to fall under the specified `CATEGORY`.
-* 
 * Currently available categories with their respective keywords and colours are:
 
     Category      | Keyword (case sensitive) | Colour
@@ -259,16 +259,16 @@ Format: `undo`
 
 * Reverts the state of CampusConnect to the one before the most recent command, if any.
 * When the oldest version of CampusConnect is reached, `undo` command will cause an exception to be thrown
-* Only the command that modify the data of CampusConnect can be undone. Commands such as `list` and `find` will not be undone.
+* Only commands that modify the data of CampusConnect can be undone. Commands such as `list` and `find` will not be undone.
 
-### Redo a command: `redo`
+### Redo a command : `redo`
 
 Reapplies a command that was previously undone by `undo`.
 
 Format: `redo`
 
 * Advances CampusConnect to the state it was in before the most recent `undo` command, if any.
-* Only the command that modify the data of CampusConnect can be redone. Commands such as `list` and `find` will not be redone.
+* Only commands that modify the data of CampusConnect can be redone. Commands such as `list` and `find` will not be redone.
 * Note: If a new command (excluding `redo` or `undo`) is executed after an `undo`, the redo history is cleared, and further `redo` will not be possible.
 
 ### Clearing all entries : `clear`
@@ -309,7 +309,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.

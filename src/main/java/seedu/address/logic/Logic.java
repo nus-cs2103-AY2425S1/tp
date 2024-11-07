@@ -38,7 +38,7 @@ public interface Logic {
     ObservableList<Tag> getListOfCurrentTags();
 
     /**
-     * Returns the user prefs' campus connect file path.
+     * Returns the user prefs' CampusConnect file path.
      */
     Path getCampusConnectFilePath();
 
