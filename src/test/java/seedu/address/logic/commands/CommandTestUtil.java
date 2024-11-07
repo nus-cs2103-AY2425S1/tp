@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORTORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -55,11 +56,13 @@ public class CommandTestUtil {
     public static final String VALID_FIELD_TELEGRAM = "telegram";
     public static final String VALID_SORT_RESET = "reset";
 
+    public static final String VALID_WEEK = "1";
+
 
     public static final String VALID_FIELD_IMPORT_CSV =
         "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";
     public static final String VALID_FIELD_EXPORT_CSV =
-        "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testExport";
+        "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testExport.csv";
 
 
     public static final String CSV_IMPORT_DESC_VALID = " " + PREFIX_PATH + VALID_FIELD_IMPORT_CSV;
@@ -76,6 +79,8 @@ public class CommandTestUtil {
     public static final String SCORE_DESC = " " + PREFIX_SCORE + VALID_SCORE;
     public static final String ORDER_DESC_ASC = " " + PREFIX_SORTORDER + VALID_ORDER_ASC;
     public static final String ORDER_DESC_DESC = " " + PREFIX_SORTORDER + VALID_ORDER_DESC;
+
+    public static final String WEEK_DESC = " " + PREFIX_WEEK + VALID_WEEK;
 
 
     public static final String GITHUB_DESC_AMY = " " + PREFIX_GITHUB + VALID_GITHUB_AMY;

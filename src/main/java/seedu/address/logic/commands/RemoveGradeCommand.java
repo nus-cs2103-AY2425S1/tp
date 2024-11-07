@@ -29,8 +29,11 @@ import seedu.address.model.tag.Tag;
 public class RemoveGradeCommand extends Command {
     public static final String COMMAND_WORD = "removeGrade";
     public static final String COMMAND_WORD_LOWER_CASE = "removegrade";
+
+    public static final String COMMAND_WORD_SHORT_FORM = "rg";
+
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD
+            COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
                     + ": Removes a grade of an assignment from the person.\n"
                     + "Parameters: "
                     + PREFIX_NAME
@@ -43,7 +46,14 @@ public class RemoveGradeCommand extends Command {
                     + PREFIX_NAME
                     + "John Doe "
                     + PREFIX_ASSIGNMENT
-                    + "Ex09";
+                    + "Ex01\n"
+                    + "Example: "
+                    + COMMAND_WORD_SHORT_FORM
+                    + " "
+                    + PREFIX_NAME
+                    + "John Doe "
+                    + PREFIX_ASSIGNMENT
+                    + "Ex01";
 
     public static final String MESSAGE_SUCCESS = "Assignment %1$s removed from %2$s";
     public static final String MESSAGE_FAILURE = "Assignment %s does not exist for %s.";

@@ -16,12 +16,17 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
+    public static final String COMMAND_WORD_SHORT_FORM = "f";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter the list to show all contacts whose tag "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
+            + ": Filter the list to show all contacts whose tag "
             + "contain any of the specified keywords (case-insensitive) and displays them as a list with index "
             + "numbers.\n"
             + "Parameters: " + PREFIX_TAG + "TAG" + " [" + PREFIX_TAG + "MORE_TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TAG + "student "
+            + PREFIX_TAG + "T02\n"
+            + "Example: " + COMMAND_WORD_SHORT_FORM + " "
             + PREFIX_TAG + "student "
             + PREFIX_TAG + "T02";
 
