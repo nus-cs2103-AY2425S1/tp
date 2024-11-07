@@ -1,0 +1,72 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1010" height="112" class="svgbob">
+    <style>
+        .svgbob line, .svgbob polygon {
+        stroke: black;
+        stroke-width: 2;
+        stroke-opacity: 1;
+        fill-opacity: 1;
+        stroke-linecap: round;
+        stroke-linejoin: miter;
+        }
+
+        .svgbob text {
+        white-space: pre;
+        font-family: Iosevka Fixed, monospace;
+        font-size: 14px;
+        }
+
+        .svgbob rect.backdrop {
+        stroke: none;
+        fill: white;
+        }
+    </style>
+    <rect class="backdrop" x="0" y="0" width="1010" height="112"></rect>
+    <text x="10" y="60" fill="red" font-weight="bold">command</text>
+    <text x="98" y="60" fill="darkgreen" font-weight="bold" >preamble</text>
+    <polygon points="208,47 212,35 216,47" class="filled"></polygon>
+    <line x1="212" y1="47" x2="212" y2="80" class="solid"></line>
+    <text x="226" y="60" fill="blue" font-weight="bold" >parameter</text>
+    <polygon points="328,47 332,35 336,47" class="filled"></polygon>
+    <line x1="332" y1="47" x2="332" y2="80" class="solid"></line>
+    <text x="346" y="60" fill="blue" font-weight="bold" >parameter</text>
+    <polygon points="456,47 460,35 464,47" class="filled"></polygon>
+    <line x1="460" y1="47" x2="460" y2="80" class="solid"></line>
+    <text x="474" y="60" fill="blue" font-weight="bold" >parameter</text>
+    <polygon points="576,47 580,35 584,47" class="filled"></polygon>
+    <line x1="580" y1="47" x2="580" y2="80" class="solid"></line>
+    <text x="594" y="60" fill="blue" font-weight="bold" >parameter</text>
+    <polygon points="712,47 716,35 720,47" class="filled"></polygon>
+    <line x1="716" y1="47" x2="716" y2="80" class="solid"></line>
+    <text x="730" y="60" fill="blue" font-weight="bold" >parameter</text>
+    <polygon points="832,47 836,35 840,47" class="filled"></polygon>
+    <line x1="836" y1="47" x2="836" y2="80" class="solid"></line>
+    <text x="850" y="60" fill="blue" font-weight="bold" >parameter</text>
+    <text x="210" y="92"  fill="brown" font-weight="bold">prefix</text>
+    <text x="330" y="92"  fill="brown" font-weight="bold">prefix</text>
+    <text x="458" y="92"  fill="brown" font-weight="bold">prefix</text>
+    <text x="578" y="92"  fill="brown" font-weight="bold">prefix</text>
+    <text x="714" y="92"  fill="brown" font-weight="bold">prefix</text>
+    <text x="834" y="92"  fill="brown" font-weight="bold">prefix</text>
+    <text x="18" y="28" fill="red"  >edit</text>
+    <text x="90" y="28" fill="darkgreen"  >S1234567A</text>
+    <text x="202"  y="28" fill="brown">n/</text><text x="220"  y="28" fill="blue">John Doe</text>
+    <text x="322"  y="28" fill="brown">i/</text><text x="340"  y="28" fill="blue">S1234567B</text>
+    <text x="450"  y="28" fill="brown">g/</text><text x="468"  y="28" fill="blue">M</text>
+    <text x="570"  y="28" fill="brown">d/</text><text x="588"  y="28" fill="blue">2000-12-03</text>
+    <text x="706"  y="28" fill="brown">p/</text><text x="724"  y="28" fill="blue">65432123</text>
+    <text x="826"  y="28" fill="brown">e/</text><text x="844"  y="28" fill="blue">john.doe@john.com</text>
+    <g>
+        <line x1="4" y1="8" x2="1004" y2="8" class="solid"></line>
+        <line x1="4" y1="8" x2="4" y2="40" class="solid"></line>
+        <line x1="76" y1="8" x2="76" y2="40" class="solid"></line>
+        <line x1="188" y1="8" x2="188" y2="40" class="solid"></line>
+        <line x1="308" y1="8" x2="308" y2="40" class="solid"></line>
+        <line x1="436" y1="8" x2="436" y2="40" class="solid"></line>
+        <line x1="556" y1="8" x2="556" y2="40" class="solid"></line>
+        <line x1="692" y1="8" x2="692" y2="40" class="solid"></line>
+        <line x1="812" y1="8" x2="812" y2="40" class="solid"></line>
+        <line x1="1004" y1="8" x2="1004" y2="40" class="solid"></line>
+        <line x1="4" y1="40" x2="1004" y2="40" class="solid"></line>
+    </g>
+</svg>

@@ -51,13 +51,19 @@ Open **Command Prompt** (Windows) or **Terminal** (macOS/Ubuntu/Debian) and type
 
 If you are using Windows, you should see something like:
 
-![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+{: .alert .alert-secondary}
+>![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+>  
+>**Java Version in Windows**
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
 if you are using macOS, Ubuntu or Debian, you should see something like this:
 
-![javaVersionMacOS.png](images/javaVersionMacOS.png)
+{: .alert .alert-secondary}
+>![javaVersionMacOS.png](images/javaVersionMacOS.png)
+>  
+>**Java Version in Mac**
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
@@ -68,7 +74,12 @@ If your machine is **not running Java 17**, you may refer to the [FAQ section](#
 #### Step 2: Download the MediBase3 JAR File
 
 1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.5/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this:
-![githubAssets.png](images/githubAssets.png)
+
+   {: .alert .alert-secondary}
+   >![githubAssets.png](images/githubAssets.png)
+   >
+   >**Asset Files in GitHub**
+
 1. Click on `medibase3.jar` to download the latest MediBase3 JAR File.
 2. Save the file to a location of your choice (e.g., `Downloads` folder).
 
@@ -88,14 +99,17 @@ You should be greeted by the GUI, which you will see in the next section.
 
 ### Overview of the GUI
 
-![GUIOverview.jpg](images/GUIOverview.jpg)
+{: .alert .alert-secondary}
+>![GUIOverview.jpg](images/GUIOverview.jpg)
+>
+>**Overview of the Graphics User Interface**
 
 Once MediBase3 is running, you will see the main interface, as seen in the image above. It is segmented into different **panel**s. Here’s an overview of the key panels:
 
 - **Command Box:** Where you can type and enter commands.
 - **Result Display:** Shows the result of the command you entered.
 - **Patient List:** Displays all the patients currently stored in the system.
-- **Appointment List:** Displays the scheduled appointments for patients.
+- **Appointment List:** Displays the scheduled appointments for patients in chronological order.
 - **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
 - **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
 
@@ -109,15 +123,19 @@ Each command in MediBase3 follows a structured format to ensure consistency and 
 
 The example below demonstrates this structure:
 
-![CommandPromptFormat.jpg](images/CommandPromptFormat.jpg)
+{: .alert .alert-secondary}
+>![CommandAnatomy](diagrams/CommandAnatomy.svg)
+>  
+>**Anatomy of the Command Structure**
 
 This example shows how a typical command might look in MediBase3, with three main components:
 
-| **Component** | **Description**                                         |
-|---------------|---------------------------------------------------------|
-| **Command**   | The action you want to perform (e.g., `add`, `edit`)    |
-| **Prefix**    | Identifies the data being entered (e.g., `n/` for name) |
-| **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
+| **Component** | **Description**                                                              |
+|---------------|------------------------------------------------------------------------------|
+| **Command**   | The action you want to perform (e.g., `add`, `edit`)                         |
+| **Prefix**    | Identifies the data being entered (e.g., `n/` for name)                      |
+| **Parameter** | The value associated with the prefix (e.g., `John Doe`)                      |
+| **Preamble**  | The value immediately after the command with no prefixes (e.g., `S1234567A`) |
 
 {: .alert .alert-info}
 > :information_source: **Note:**
@@ -133,8 +151,6 @@ This example shows how a typical command might look in MediBase3, with three mai
 - **Command:** `add`
 - **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
 - **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `g`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
-
-<div style="page-break-after: always;"></div>
 
 ### A First Look at MediBase3
 
@@ -166,8 +182,6 @@ For a detailed list of features and instructions, see the [Features](#features) 
 For additional assistance or common questions, please refer to our [FAQ](#faq) section.
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -201,7 +215,6 @@ the constraints of each parameter when used in a command.
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
 
 {: .alert .alert-info}
 > **:information_source: Notes about the command format:**
@@ -234,9 +247,6 @@ the constraints of each parameter when used in a command.
 >
 > All commands (except those in the **Finding Patients** section) will refresh the Patient List Panel to show all patients upon successful execution. This applies to commands for managing patients, appointments, medical conditions, allergies, and priority.
 
-
-<div style="page-break-after: always;"></div>
-
 ### Managing Patient
 
 #### Adding a patient: `add`
@@ -256,14 +266,14 @@ Adds a patient and his/her relevant details to MediBase3.
 **Examples**:
 * `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` adds a patient named `John Doe` with the respective NRIC, gender, date of birth, phone number, email and address provided into MediBase3.
 
+<div style="page-break-after: always;"></div>
+
 {: .alert .alert-success}
 > :bulb: **Tips:**
 > 
 > * Remember that `NRIC` and `GENDER` are case-insensitive.
 >   -  e.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
 > * Made a mistake or a typo? You can use the [`edit` command](#editing-a-patient--edit) to update the patient's details.
-
-[Back to Table of Contents](#table-of-contents)
 
 #### Deleting a patient : `delete`
 
@@ -287,8 +297,6 @@ Deletes a patient and his/her details from MediBase3.
 > 
 > * Patient information **cannot be recovered** once deleted. Double-check the `NRIC` before deletion.
 > * Deleting a patient also removes all associated appointments from the Appointment List Panel.
-
-[Back to Table of Contents](#table-of-contents)
 
 #### Editing a patient : `edit`
 
@@ -318,8 +326,6 @@ to `91234567` and `johndoe@example.com` respectively.
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Managing Appointments
 
 #### Adding an Appointment : `addAppt`
@@ -345,31 +351,25 @@ Schedules an appointment for a patient in MediBase3.
 **Example**:
 * `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` schedules a `Dental` appointment for the patient with `NRIC` `S1234567A` on `2024-10-27`, from `1100` to `1200`.
 
+{: .alert .alert-secondary}
+> ![result for addAppt command example](images/addApptCommand.png)
+>   
+> **Success message, with the "Dental" appointment in the details of patient "Alex Yeoh (S1234567A)" in the patient list panel, as well as in the appointment list panel as the second entry.**
 
-![result for addAppt command example](images/addApptCommand.png)
+<div style="page-break-after: always;"></div>
 
 {: .alert .alert-success}
 > :bulb: **Tips:**
 >
 > * Adding a new appointment will update the Appointment List Panel on the right with the new appointment details.
-> * The Appointment List Panel displays appointments in chronological order.
 > * Appointment names need not be unique.
 > * Different patients may have overlapping appointment timings, as long as those appointments are not from the same patient.
-
-
-{: .alert .alert-success}
-> :bulb: **Tip:**
->
-> For appointments that span across date boundaries, add two appointments:
-> * End the first appointment at `2359` (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-23 @t/2200-2359`).
-> * Start the next appointment at `0000` on the following date (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-24 @t/0000-0100`).
-
-{: .alert .alert-success}
-> :bulb: **Tip:**
->
-> Appointment end times are **exclusive**. For example:
-> * If _Appointment A_ is scheduled from `1200` to `1300`, _Appointment B_ can start at `1300`.
-> * _Appointment B_ cannot start between `1200` and `1259`, nor end between `1201` and `1300`.
+> * For appointments that span across date boundaries, add two appointments:
+>   * End the first appointment at `2359` (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-23 @t/2200-2359`).
+>   * Start the next appointment at `0000` on the following date (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-24 @t/0000-0100`).
+> * Appointment end times are **exclusive**. For example:
+>   * If _Appointment A_ is scheduled from `1200` to `1300`, _Appointment B_ can start at `1300`.
+>   * _Appointment B_ cannot start between `1200` and `1259`, nor end between `1201` and `1300`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -390,8 +390,6 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Managing Medical Conditions
 
 #### Adding Medical Conditions : `addMedCon`
@@ -409,11 +407,16 @@ Adds one or more medical conditions to an existing patient in MediBase3.
 > * Each medical condition can only be added once per patient.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * `addMedCon i/S1234567A c/High Blood Pressure` adds the condition `High Blood Pressure` to the patient with `NRIC` `S1234567A`.
 
 
-![result for addMedCon command example](images/addMedConCommand.png)
+{: .alert .alert-secondary}
+>![result for addMedCon command example](images/addMedConCommand.png)
+>  
+> **Success message, with the "HIGH BLOOD PRESSURE" condition in the details of patient "Alex Yeoh (S1234567A)" in the patient list panel**
 
 {: .alert .alert-success}
 > :bulb: **Tips:**
@@ -440,6 +443,8 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 > * The patient must have the specified condition for it to be removed; otherwise, an error message will display.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * `delMedCon i/S1234567A c/High Blood Pressure` deletes `High Blood Pressure` from the patient with `NRIC` `S1234567A`.
 
@@ -451,8 +456,6 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 >   - e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Managing Allergies
 
@@ -471,10 +474,15 @@ Adds one or more allergies to an existing patient in MediBase3.
 > * Each allergy can only be added once per patient.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * `addAllergy i/S1234567A al/Peanuts` adds the allergy `Peanuts` to the patient with `NRIC` `S1234567A`.
 
-![result for addAllergy command example](images/addAllergyCommand.png)
+{: .alert .alert-secondary}
+>![result for addAllergy command example](images/addAllergyCommand.png)
+>  
+> **Success message, with the "PEANUTS" in the details of patient "Alex Yeoh (S1234567A)" in the patient list panel**
 
 {: .alert .alert-success}
 > :bulb: **Tips:**
@@ -515,8 +523,6 @@ Deletes one or more allergies from an existing patient in MediBase3.
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Managing Priority
 
 #### Setting Priority : `setPriority`
@@ -535,11 +541,12 @@ Sets Priority to an existing patient in MediBase3.
 **Example**:
 * `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
 
-![result for setPriority command example](images/setPriorityCommand.png)
+{: .alert .alert-secondary}
+>![result for setPriority command example](images/setPriorityCommand.png)
+>  
+> **Success message, with the priority of the patient "Alex Yeoh (S1234567A)" tagged as "HIGH" in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Finding Patients
 
@@ -597,11 +604,16 @@ Finds patients whose names contain any of the given keywords.
 >   - e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-![result for 'find alex david'](images/findCommand.png)
+{: .alert .alert-secondary}
+>![result for 'find alex david'](images/findCommand.png)
+>  
+> **Success message of `find alex david` with patient names matching `alex` or `david` shown in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -621,10 +633,15 @@ Finds patients whose medical condition(s) contain the given keywords.
 > * Patients with medical conditions matching at least one keyword will be returned (i.e. `OR` search).
 > * Returns an empty Patient List Panel if no matching patients with the given keywords are found.
 
+<div style="page-break-after: always;"></div>
+
 Example:
  * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
-![result for 'findMedCon diabetes arthritis'](images/findMedConCommand.png)
+{: .alert .alert-secondary}
+>![result for 'findMedCon diabetes arthritis'](images/findMedConCommand.png)
+>  
+> **Success message with patient tagged with `diabetes` or `arthritis` shown in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -643,14 +660,17 @@ Finds patients based on his/her NRIC.
 > * Returns an empty Patient List Panel if no matching patients with the given `NRIC` are found.
 > * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
+<div style="page-break-after: always;"></div>
+
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
 
-![result for 'findNric S1234567A'](images/findNricCommand.png)
+{: .alert .alert-secondary}
+>![result for 'findNric S1234567A'](images/findNricCommand.png)
+>  
+> **Success message with patient `Alex Yeoh (S1234567A)` shown in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### General Features
 
@@ -664,7 +684,10 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-![help message](images/helpMessage.png)
+{: .alert .alert-secondary}
+>![help message](images/helpMessage.png)
+>  
+>**Help message popup shown**
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -710,8 +733,6 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ## Glossary
 
 The table below provides the definitions for the key terms we will be using throughout the guide.
@@ -756,7 +777,10 @@ The table below provides the definitions for the key terms we will be using thro
 
 You should see something like:
 
-![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+{: .alert .alert-secondary}
+>![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+>  
+>**Java vision as seen in Windows Command Prompt / Powershell**
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
@@ -783,7 +807,10 @@ This means that your machine is running Java version 17.0.12, which means that J
 
 You should see something like this:
 
-![javaVersionMacOS.png](images/javaVersionMacOS.png)
+{: .alert .alert-secondary}
+>![javaVersionMacOS.png](images/javaVersionMacOS.png)
+>  
+>**Java version as seen in MacOS Terminal**
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
@@ -802,7 +829,10 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 You should see something like this:
 
-![javaVersionLinux.jpg](images/javaVersionLinux.jpg)
+{: .alert .alert-secondary}
+>![javaVersionLinux.jpg](images/javaVersionLinux.jpg)
+>  
+>**Java version as seen in a Linux shell**
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
@@ -828,7 +858,6 @@ This means that your machine is running Java version 17.0.11, which means that J
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
 
-<div style="page-break-after: always;"></div>
 
 ## Known issues
 
