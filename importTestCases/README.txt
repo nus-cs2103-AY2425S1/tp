@@ -8,8 +8,9 @@ Invalid Input: Attempts to replace invalid inputs for contact info*, skips the c
 Different order: Imports all contacts
 Unnecessary column: Imports all contacts, ignores extraneous columns
 
-*Contact info refer to either the email, telegram handle or phone number. If any of these fields are invalid or empty, the app will replace them with default values when importing
+*Contact info refer to either the email, telegram handle, phone number or module name. If any of these fields are invalid or empty, the app will replace them with default values when importing
 
 Default phone number: 0000 0000
 Default email: Default@email.net
 Default Telegram handle: @defaulthandle
+Default module name: AA0000
