@@ -54,10 +54,10 @@ public class PetCard extends UiPart<Region> {
         this.pet = pet;
         id.setText(displayedIndex + ". ");
         name.setText(pet.getName().name);
-        species.setText(pet.getSpecies().value);
-        breed.setText(pet.getBreed().value);
-        age.setText(pet.getAge().value);
-        sex.setText(pet.getSex().toString()); // toString() method will convert the single char sex value to a full word
+        species.setText("Species: " + pet.getSpecies().value);
+        breed.setText("Breed: " + pet.getBreed().value);
+        age.setText("Age: " + pet.getAge().value);
+        sex.setText("Sex: " + pet.getSex().toString()); // toString() will convert single char sex value to a full word
         // Set the linked pets using the toString() of each pet
         linkedOwner.setText(formatLinkedOwner(pet.getLinkedOwner()));
 

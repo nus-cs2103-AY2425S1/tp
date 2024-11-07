@@ -45,11 +45,11 @@ public class OwnerCard extends UiPart<Region> {
         super(FXML);
         this.owner = owner;
         id.setText(displayedIndex + ". ");
-        icNumber.setText(owner.getIdentificationNumber().getRedacted());
+        icNumber.setText("IC: " + owner.getIdentificationNumber().getRedacted());
         name.setText(owner.getName().fullName);
-        phone.setText(owner.getPhone().value);
-        address.setText(owner.getAddress().value);
-        email.setText(owner.getEmail().value);
+        phone.setText("Phone: " + owner.getPhone().value);
+        address.setText("Address: " + owner.getAddress().value);
+        email.setText("Email: " + owner.getEmail().value);
         // Set the linked pets using the toString() of each pet
         linkedPets.setText(formatLinkedPets(owner.getLinkedPets()));
 
