@@ -30,7 +30,8 @@ public class FilterCommand extends Command {
             + COMMAND_WORD + " "
             + "s/Science";
 
-    public static final String MESSAGE_SUCCESS = "Filtered by: %1$s, %2$s";
+    public static final String MESSAGE_SUCCESS = "Filtered by: %1$s, %2$s\n"
+            + "Number of student(s) found: %3$d";
 
     private FilterParam filterParam;
     private Object filterValue;
@@ -64,7 +65,8 @@ public class FilterCommand extends Command {
             model.updateFilteredPersonList(new PersonInYearPredicate((YearGroup) filterValue));
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filterParam.toString(), filterValue.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filterParam.toString(), filterValue.toString(),
+                model.getFilteredPersonList().size()));
 
     }
 
