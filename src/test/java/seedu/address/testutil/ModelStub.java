@@ -150,4 +150,14 @@ public class ModelStub implements Model {
     public void showLinkedJobsAndPersonsByCompany(Company company) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public ObservableList<Person> getFullPersonList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Job> getFullJobList() {
+        throw new AssertionError("This method should not be called.");
+    }
 }

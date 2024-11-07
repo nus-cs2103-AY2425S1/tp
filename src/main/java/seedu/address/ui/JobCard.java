@@ -42,10 +42,10 @@ public class JobCard extends UiPart<Region> {
         super(FXML);
         this.job = job;
         id.setText(displayedIndex + ". ");
-        name.setText(job.getName().fullName);
-        company.setText(job.getCompany().fullName);
-        salary.setText(job.getSalary().toString());
-        description.setText(job.getDescription().value);
+        name.setText(job.getName().toString());
+        company.setText(job.getCompany().toString());
+        salary.setText("Monthly salary: " + job.getSalary().toString());
+        description.setText(job.getDescription().toString());
         job.getRequirements().stream()
                 .sorted(Comparator.comparing(requirement -> requirement.tagName))
                 .forEach(requirement -> requirements.getChildren().add(new Label(requirement.tagName)));

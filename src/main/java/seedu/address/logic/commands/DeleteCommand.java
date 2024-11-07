@@ -20,7 +20,7 @@ public abstract class DeleteCommand<T> extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the entity identified by subcommand 'contact', 'company' or 'job' and "
             + "the index number used in the displayed person list.\n"
-            + "Parameters: [contact/job/company] INDEX (must be a positive integer)\n"
+            + "Parameters: [contact/job/company] INDEX (must be a positive integer between 1 and 2147483647)\n"
             + "Example: " + COMMAND_WORD + " contact 1";
 
     private final Index targetIndex;

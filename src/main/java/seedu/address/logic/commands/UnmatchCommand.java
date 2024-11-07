@@ -30,6 +30,7 @@ public class UnmatchCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Unmatch a contact from a job\nParameters: <CONTACT_INDEX> <JOB_INDEX>\nExample: "
                     + COMMAND_WORD + " 2 1";
+    public static final String MESSAGE_CONTACT_MATCHED_TO_OTHER_JOB = "The contact is matched to another job!";
 
     public static final String MESSAGE_UNMATCH_SUCCESS = "Unmatched Contact: %1$s with Job: %2$s";
     public static final String MESSAGE_CONTACT_NOT_MATCHED = "This contact is not matched with this job!";
@@ -118,7 +119,7 @@ public class UnmatchCommand extends Command {
 
         // Check and ensure the contact and job are matched to each other before unmatching
         if (!hasContactMatchedJob) {
-            throw new CommandException(MESSAGE_CONTACT_NOT_MATCHED);
+            throw new CommandException(MESSAGE_CONTACT_MATCHED_TO_OTHER_JOB);
         }
     }
 

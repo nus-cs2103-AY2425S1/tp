@@ -57,7 +57,7 @@ public class Company {
         }
 
         return otherCompany != null
-                && otherCompany.name.equals(this.name);
+                && otherCompany.name.isSameName(this.name);
     }
 
     /**
