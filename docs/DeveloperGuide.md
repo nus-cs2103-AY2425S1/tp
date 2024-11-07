@@ -158,12 +158,12 @@ How the parsing works:
 
 The `Model` component,
 
-* with regards to `Person` objects:
+* In regard to `Person` objects:
   * stores the details of a person in a `PersonDescriptor` object
   * stores the `PersonDescriptor` object with a `personId` in the `Person` class.
   * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
   * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* with regards to `Appointment` objects:
+* In regard to `Appointment` objects:
   * stores the details of an appointment in an `AppointmentDescriptor` object
   * stores the `AppointmentDescriptor` object with a `Person` and `appointmentId` in the `Appointment` class.
   * stores the address book data i.e., all `Appointment` objects (which are contained in a `UniqueAppointmentList` object).
