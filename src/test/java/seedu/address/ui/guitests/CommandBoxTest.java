@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.guitests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.ui.CommandBox;
+import seedu.address.ui.guitests.GuiUnitTest;
 
 
 public class CommandBoxTest extends GuiUnitTest {

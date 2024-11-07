@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.guitests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,6 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.ui.MainWindow;
 
 /**
  * Contains tests for closing of the {@code MainWindow}.

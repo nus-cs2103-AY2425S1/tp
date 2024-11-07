@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.guitests;
 
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,6 +11,7 @@ import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.HelpWindowHandle;
 import javafx.stage.Stage;
+import seedu.address.ui.HelpWindow;
 
 public class HelpWindowTest extends GuiUnitTest {
 
