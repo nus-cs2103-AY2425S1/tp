@@ -3,7 +3,6 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.text.DecimalFormat;
 import java.util.Optional;
 
 /**
@@ -67,7 +66,7 @@ public class Grade {
 
     @Override
     public String toString() {
-        return grade.map(g -> new DecimalFormat("#.00").format(grade.get())).orElse("NULL");
+        return grade.map(g -> String.format("%.2f", g)).orElse("NULL");
     }
 
     @Override
