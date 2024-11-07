@@ -264,8 +264,7 @@ _{Explain here how the data archiving feature will be implemented}_
 #### Proposed Implementation
 
 Given below is the sequence diagram on how the `view 1` command is executed:
-<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" width=300/>
-
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" width="250"/>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -399,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3b1. VolunTier shows an error message indicating the missing or invalid fields.
 
-    Use case resumes at step 2.
+  Use case resumes at step 2.
 
 **Use case: UC4 - Update a person's details**
 
@@ -420,13 +419,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. VolunTier shows an error message.
 
-    Use case resumes at step 2.
+  Use case resumes at step 2.
 
 * 4a. User inputs invalid or incomplete details.
 
     * 4a1. VolunTier shows an error message specifying the mistake.
 
-    Use case resumes at step 4.
+  Use case resumes at step 4.
 
 
 ### Non-Functional Requirements
@@ -463,16 +462,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1a. Download the jar file and copy into an empty folder
+   1a. Download the jar file and copy into an empty folder
 
-    1b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
-    2a. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    2b. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2b. Re-launch the app by double-clicking the jar file.<br>
+   Expected: The most recent window size and location is retained.
 
 3. _{ more test cases …​ }_
 
@@ -480,23 +479,23 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a tutor with no email
 
-   1. Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
-      Expected: No tutor is added. Error is thrown, saying invalid command format.
+    1. Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
+       Expected: No tutor is added. Error is thrown, saying invalid command format.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1a. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1a. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1b. Test case: `delete 1`<br>
-        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1b. Test case: `delete 1`<br>
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1c. Test case: `delete 0`<br>
-        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1c. Test case: `delete 0`<br>
+   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-        Expected: Similar to previous.
+   1d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
 
@@ -504,31 +503,31 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a tutor with all fields filled
 
-    1a. Test case: `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`<br>
-        Expected: New contact is added to the list. Details of the new contact shown in the status message.
+   1a. Test case: `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`<br>
+   Expected: New contact is added to the list. Details of the new contact shown in the status message.
 
-    1b. Test case: `addTutor \n Bob \p 98765432 \e invalid \a Block 123, Bob Street, 223456` <br>
-        Expected: No contact is added. Error details shown in the status message for invalid email.
+   1b. Test case: `addTutor \n Bob \p 98765432 \e invalid \a Block 123, Bob Street, 223456` <br>
+   Expected: No contact is added. Error details shown in the status message for invalid email.
 
-    1c. Other incorrect add tutor commands to try: `addTutor \x y` (where x is a tag and y is an invalid value for that field)<br>
-        Expected: Similar to previous.
+   1c. Other incorrect add tutor commands to try: `addTutor \x y` (where x is a tag and y is an invalid value for that field)<br>
+   Expected: Similar to previous.
 2. _{ more test cases …​ }_
 
 ### Editing a tutor
 
 1. Editing a tutor with all fields filled
 
-    1a. Prerequisites: Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
-        Add another tutor with the command `addTutor \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s math`.
+   1a. Prerequisites: Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
+   Add another tutor with the command `addTutor \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s math`.
 
-    1b. Test case: `edit 1 \n Alicia`<br>
-        Expected: Contact is updated in the list. Details of the updated contact shown in the status message.
+   1b. Test case: `edit 1 \n Alicia`<br>
+   Expected: Contact is updated in the list. Details of the updated contact shown in the status message.
 
-    1c. Test case: `edit 2 \n Alice`<br>
-        Expected: No contact is updated. Error details shown in the status message for duplicate name.
+   1c. Test case: `edit 2 \n Alice`<br>
+   Expected: No contact is updated. Error details shown in the status message for duplicate name.
 
-    1d. Other incorrect edit tutor commands to try: `edit 1 \x y` (where x is a tag and y is an invalid value for that field)<br>
-        Expected: Similar to previous.
+   1d. Other incorrect edit tutor commands to try: `edit 1 \x y` (where x is a tag and y is an invalid value for that field)<br>
+   Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
 
@@ -536,14 +535,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding tutors by subject
 
-    1a. Prerequisites: Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
-        Add another tutor with the command `addTutor \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s science`.
+   1a. Prerequisites: Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
+   Add another tutor with the command `addTutor \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s science`.
 
-    1b. Test case: `findSubject math`<br>
-        Expected: List of tutors (only Alice) with the subject `math` is shown.
+   1b. Test case: `findSubject math`<br>
+   Expected: List of tutors (only Alice) with the subject `math` is shown.
 
-    1c. Test case: `findSubject chinese`<br>
-        Expected: No tutor is found. Error details shown in the status message.
+   1c. Test case: `findSubject chinese`<br>
+   Expected: No tutor is found. Error details shown in the status message.
 
 2. _{ more test cases …​ }_
 
@@ -551,6 +550,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
