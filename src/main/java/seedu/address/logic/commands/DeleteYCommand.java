@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Set;
-
 import seedu.address.logic.Messages;
 import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.exceptions.CommandException;
