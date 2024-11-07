@@ -160,16 +160,10 @@ Example:
 
 Sets an appointment date for a client
 
-Format: ``
+Format: `setappointment INDEX d/[YYYY-MM-DD]`
 
-+ "identified "
-+ "by the index number used in the displayed person list. "
-+ "If date is left blank, current appointment will be deleted.\n"
-+ "Parameters: INDEX (must be a positive integer) "
-+ CliSyntax.PREFIX_DATE + "DATE\n"
-+ "Example: " + COMMAND_WORD + " 1 "
-+ CliSyntax.PREFIX_DATE + "2024-10-24";
-
+* Sets appointment date for the client at the specific `INDEX`
+* If the date is left empty, the current appointment date will be removed
 
 ### Locating beneficiaries by name: `find`
 
@@ -228,6 +222,9 @@ manually.
 ### Autocomplete commands
 
 CareConnect provides command autocompletion when pressing the Tab key. For example, typing `f` and pressing Tab will auto complete the command to `find`.
+
+### Easy keyboard navigation
+CareConnect offers convenient keyboard navigation. Press `Shift + Tab` to switch focus between the command box, log list, and person list. Use the `Up` and `Down` arrow keys to scroll through lists.
 
 ### Editing the data file
 
