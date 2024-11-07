@@ -131,6 +131,8 @@ public interface Model {
 
     ObservableList<Person> getOnlyClientList();
 
+    ObservableList<Person> getOnlyEmployeeList();
+
     /** Returns the {@code Index} of the first archived person in the list. */
     Index getFirstArchivedIndex();
 

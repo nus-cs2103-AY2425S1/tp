@@ -135,8 +135,13 @@ public class HelpWindow extends UiPart<Stage> {
         setHelpCards(isInspect ? INSPECT_HELP_CARDS : DEFAULT_HELP_CARDS);
         CommandHelpCard.setCommandBox(currentCommandBox);
         CommandHelpCard.setHelpWindow(this);
+
+        if (getRoot().isIconified()) {
+            getRoot().setIconified(false); // Restore if minimized
+        }
         getRoot().show();
         getRoot().centerOnScreen();
+        getRoot().toFront();
     }
 
     /**

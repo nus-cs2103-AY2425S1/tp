@@ -129,13 +129,15 @@ Examples:
 ### Listing all contacts : `list`
 **<ins>When in the main window**
 
-Shows a list of all contacts added to the contacts list.
+Shows a list of all contacts added to the contacts list. If the contact type is specified, it only shows the contacts with the specified type.
 
-Format: `list`
+Format: `list [clients/employees]`
 
 **<ins>When in the inspect window**
 
-Shows a list of all deliveries added to a contact's delivery list. Format is the same as in the main window.
+Shows a list of all deliveries added to a contact's delivery list. 
+
+Format: `list`
 
 ### Editing a contact or delivery: `edit`
 **<ins>When in the main window**
@@ -355,24 +357,6 @@ Format: `assign INDEX n/EMPLOYEE_NAME`
 Examples:
 * `assign 1 n/Betsy Crowe` assigns first delivery of the current contact to employee Betsy Crowe.
 
-### Remove delivery from employee : `remove`
-**<ins>When in the main window**
-
-`remove` does not work in the main window.
-
-**<ins>When in the inspect window**
-
-Removes the specified delivery from the delivery list of an employee. It does not work when inspecting a client.
-
-Format: `remove INDEX`
-
-* Removes the delivery at the specified `INDEX` from the current employee's delivery list.
-* The index is the number displayed at the top of a delivery in the delivery list of a contact.
-* The index **must be a positive number** (starting from 1).
-
-Examples:
-* `remove 1` removes the first delivery of the current employee's delivery list.
-
 ### Returning to the main window : `back`
 **<ins>When in the main window**
 
@@ -448,8 +432,7 @@ Action     | Format, Examples
 **Find Delivery**| <ins>Main Window:</ins><br> Does not work <br><ins>Inspect Window:</ins><br> `finddel ITEM [MORE_ITEMS]` e.g., `finddel Monitor Mouse`
 **Help**   | <ins>Both Windows:</ins><br> `help`
 **Inspect**| <ins>Main Window:</ins><br> `inspect INDEX`<br> e.g., `inspect 2` <br><ins>Inspect Window:</ins><br> Does not work
-**List**   | <ins>Both Windows:</ins><br> `list`
-**Remove** | <ins>Main Window:</ins><br> Does not work <br><ins>Inspect Window:</ins><br> `remove INDEX` e.g., `remove 1`
+**List**   | <ins>Main Window:</ins><br> `list` or `list clients` or `list employees` <br><ins>Main Window:</ins><br> `list`
 **Sort Ascending**| <ins>Both Windows:</ins><br> `asort by/ATTRIBUTE`
 **Sort Descending**| <ins>Both Windows:</ins><br> `dsort by/ATTRIBUTE`
 **Unarchive**| <ins>Both Windows:</ins><br> `unarchive INDEXES`<br> e.g., `unarchive 3`, `unarchive 3 4`
