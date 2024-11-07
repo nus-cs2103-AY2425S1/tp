@@ -154,15 +154,15 @@ Symbol     | Parameter    | Constraints
 Symbol     | Parameter    | Constraints
 -----------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
 **`a`**| `DESCRIPTION` |- Must contain at least 1 alphabetic character and has a limit of 40 characters.
-**`s`**| `START`      |- A singular `DATE-TIME` in the form `DD-MM-YYYY-HH-mm`, where `DD` is the day, `MM` is the month, `YYYY` is the year, `HH` is the hour and `mm` is the minute.
-**`e`**| `END`        |- A singular `DATE-TIME` in the form `DD-MM-YYYY-HH-mm`, where `DD` is the day, `MM` is the month, `YYYY` is the year, `HH` is the hour and `mm` is the minute..
+**`s`**| `START`      |- A singular `DATE-TIME` in the form `dd-MM-yyyy-HH-mm`, where `dd` is the day, `MM` is the month, `yyyy` is the year, `HH` is the hour and `mm` is the minute.
+**`e`**| `END`        |- A singular `DATE-TIME` in the form `dd-MM-yyyy-HH-mm`, where `dd` is the day, `MM` is the month, `yyyy` is the year, `HH` is the hour and `mm` is the minute..
 
 ### Other Parameters
 
 Symbol     | Parameter                        | Constraints
 -----------|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
 **-**  | `INDEX`                          |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
-**-**  | `DATE`                           |- **Must be of the form `DD-MM-YYYY`**, where `DD` is the day, `MM` is the month, and `YYYY` is the year.
+**-**  | `DATE`                           |- **Must be of the form `dd-MM-yyyy`**, where `dd` is the day, `MM` is the month, and `yyyy` is the year.
 
 [Back to Table of Contents](#table-of-contents)
 
