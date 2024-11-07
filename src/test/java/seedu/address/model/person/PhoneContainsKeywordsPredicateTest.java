@@ -46,41 +46,41 @@ public class PhoneContainsKeywordsPredicateTest {
     public void test_phoneContainsKeywords_returnsTrue() {
         // One keyword
         PhoneContainsKeywordsPredicate predicate =
-                new PhoneContainsKeywordsPredicate(Collections.singletonList("12345"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("12345").build()));
+                new PhoneContainsKeywordsPredicate(Collections.singletonList("12345678"));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("12345678").build()));
 
         // Only one matching keyword
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("67890", "54321"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("67890").build()));
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("67890897", "87654321"));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("67890897").build()));
 
         // Mixed-case keywords (though unlikely in a phone number, but for consistency)
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345", "67890"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("12345").build()));
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345678", "67890897"));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("12345678").build()));
     }
 
     @Test
     public void test_phoneDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withPhone("12345").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("12345678").build()));
 
         // Multiple keywords
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345", "67890"));
-        assertFalse(predicate.test(new PersonBuilder().withPhone("1234567890").build()));
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345678", "67890897"));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("12345677").build()));
 
         // Non-matching keyword
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("67890"));
-        assertFalse(predicate.test(new PersonBuilder().withPhone("12345").build()));
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("67890897"));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("12345678").build()));
 
         // Keywords match name, email and address, but does not match phone
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("Alice", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("12345", "67890");
+        List<String> keywords = List.of("12345678", "67890897");
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(keywords);
 
         String expected = PhoneContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
