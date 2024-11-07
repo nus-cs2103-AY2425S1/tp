@@ -1,6 +1,6 @@
 ---
   layout: default.md
-    title: "XueTing's Project Portfolio Page"
+  title: "XueTing's Project Portfolio Page"
 ---
 
 ### Project: HireMe
@@ -29,19 +29,18 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Updated the GUI color scheme (Pull request [\#185](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/185))
-    * Updated the application with new logo 
+    * Updated the application with new logo (Pull request [\#222](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/222))
     * Fixed checkstyle errors (Pull request [\#87](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/87))
 
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `filter` and `list` (Pull request [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files))
         * Improved introduction section and added table of contents (Pull request [\#200](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/200))
-        * 
     
     * Developer Guide:
-        * Added implementation details and sequence diagram of the `filter` feature [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files)
-        * Tweak sequence diagram to storage [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files)
-        * Added table of contents to introduction section [\#200](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/200)
+        * Added implementation details and sequence diagram of the `filter` feature (Pull request [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files))
+        * Tweak sequence diagram to storage (Pull request [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files))
+        * Added table of contents to introduction section (Pull request [\#200](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/200))
         * Added use cases for exit
         * Added index to glossary
     
