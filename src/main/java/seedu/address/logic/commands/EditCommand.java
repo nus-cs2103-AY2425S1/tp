@@ -16,6 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -58,6 +59,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: \n %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in VolunTier.";
+    public static final String MESSAGE_PERSON_HAS_LESSON = "This person has an existing lesson for the subject you’re "
+            + "about to edit in the address book. Please delete the lesson before proceeding with the subject edit.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -78,6 +81,20 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        // Verify if person to be edited has a lesson already in the address book
+        Set<Subject> subjects = editPersonDescriptor.getSubjectsOp().orElse(null);
+        ObservableList<Lesson> lessonList = model.getAddressBook().getLessonList();
+        Set<Subject> minSet = lessonList.stream()
+                .filter(lesson -> lesson.getTutor().equals(lastShownList.get(index.getZeroBased()))
+                        || lesson.getTutee().equals(lastShownList.get(index.getZeroBased())))
+                .map(Lesson::getSubject)
+                .collect(HashSet::new, Set::add, Set::addAll);
+        if (subjects != null) {
+            if (!subjects.containsAll(minSet)) {
+                throw new CommandException(MESSAGE_PERSON_HAS_LESSON);
+            }
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
