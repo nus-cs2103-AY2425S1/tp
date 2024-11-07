@@ -765,7 +765,7 @@ You will be able to view a help window that directs you to this user guide.
 
 **Format**: `help`
 
-<img src="images/helpMessage.png" alt="Help Message" width="700">
+<img src="images/helpMessage.png" alt="Help Message" width="500px">
 
 <br><sbr>
 
