@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
@@ -48,7 +47,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListAllCommand();
         default:
             String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
-                    AddCommand.COMMAND_WORD, entity);
+                    ListCommand.COMMAND_WORD, entity);
             throw new ParseException(exceptionMessage);
         }
     }

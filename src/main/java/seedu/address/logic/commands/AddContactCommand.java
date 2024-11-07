@@ -30,7 +30,9 @@ public class AddContactCommand extends AddCommand<Person> {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ROLE + "copywriter";
 
-    public static final String MESSAGE_SUCCESS = "Candidate added: %1$s - %2$s - %3$s - Applying for: %4$s";
+    public static final String MESSAGE_SUCCESS = "Candidate added: Name: %1$s; "
+            + "Email: %2$s; Phone: %3$s; Applying for: %4$s.";
+
     public static final String MESSAGE_DUPLICATE_CONTACT = "A candidate with this phone number "
             + "or email already exists.";
 
