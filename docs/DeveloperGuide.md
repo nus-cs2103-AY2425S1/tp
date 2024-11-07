@@ -383,9 +383,9 @@ This diagram shows the main actor (Management Staff) and their interactions with
 4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
 5. System response time for any action should be less than 1 second for all operations.
 6. The system should be able to support concurrent users without data corruption or errors.
-7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 8. The system must comply with Personal Data Protection Act (PDPA) to protect volunteer information.
-9. The application must include comprehensive logging and error handling to facilitate debugging and system maintenance. 
+9. The application must include comprehensive logging and error handling to facilitate debugging and system maintenance.
 10. The system should be capable of running efficiently on devices with limited resources (e.g., 8GB RAM, 4-core CPU).
 
 11. *{More to be added}*
