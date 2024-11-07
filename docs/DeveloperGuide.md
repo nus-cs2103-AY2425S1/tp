@@ -610,8 +610,7 @@ testers are expected to do more *exploratory* testing.
 
    1. In the error message, an example is provided. Copy the example.
 
-   1. Test case (same as the example you copied): `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Sunday-1000-1200 
-   s/Biology r/120 paid/6000 owed/3000`.
+   1. Test case: same as the example you copied.
    
    1. Expected: A new student with the corresponding information will be added to the end of the current list.
 
@@ -626,8 +625,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/a lucky Tester p/87903288 e/suchANiceApp@meta.sg a/COM1 B1 r/10 paid/0 owed/0 t/Tuesday-1500-1600
    s/Physics`.
 
-   1. Expected: An error message shown: `This student already exists in the address book`. You can then refer to [Finding a
-student]() to search for student details.
+   1. Expected: An error message shown: `A student with the same name and the same phone number already exists in the address book`. 
+
 
 1. Adding a new student with a clashing schedule
 
@@ -647,18 +646,18 @@ student]() to search for student details.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
    
-   1. Test case: `eDit 3 owed/500 p/89873423`<br>Expected: Student number 3 will have the new values for their Owed Amount and Phone Number.
+   1. Test case: `eDit 3 owed/500 p/89873423`<br>Expected: Student number 3 will have the new values for their **OWED_AMOUNT** and **PHONE**.
    
    1. Other incorrect edit commands to try: `edit`, `edit 0`, `edit x`, `...` (where x is larger than the list size)<br>
    Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
 1. Editing a student in a filtered list
 
-   1. Prerequisites: Filter the students using `find` command.<br>Test case: `find n/irfan alex d/thursday friday`.
+   1. Prerequisites: Filter the students using `find` command.<br>Test case: `find n/irfan d/thursday`. (Given that at least 1 student with the mentioned **NAME** and **SCHEDULE** is available in the list)
 
    1. Test case: `edit 1 n/Jonathan e/jonjon4343@canadian.com`
    
-   1. Expected: The **NAME** and **EMAIL** of the first student in the current list will be updated. The list shows all students instead of the previous filtered list.
+   1. Expected: The **NAME** and **EMAIL** of the first student in the filtered list will be updated. The list shows all students instead of the previous filtered list.
 
 1. Editing a student with invalid values
 
