@@ -13,14 +13,15 @@ Class ModelManager
 Class UserPrefs
 
 Class UniqueRestaurantList
-Class Restaurant
+Class Restaurant {
+    - isFavourite: Boolean
+}
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Rating
 Class Tag
-Class Favourite
 Class Price
 
 Class I #FFFFFF
@@ -48,12 +49,15 @@ Restaurant *--> "0..1" Rating
 Restaurant *--> "*" Tag
 Restaurant *--> Price
 
+show Restaurant members
+
 Restaurant -[hidden]up--> I
 UniqueRestaurantList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+UniqueRestaurantList -[hidden]right-> Restaurant
 
 ModelManager --> "~* filtered" Restaurant
 @enduml
