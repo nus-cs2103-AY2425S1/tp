@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* The methods for the addition of remark, module and telegram handle field were adapted from AB3 Tutorial 2.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -532,7 +532,12 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Saving theme preferences
+
+    1. Enter the command 'switch light' or 'switch dark' to set the theme of the app. Close the window.
+
+    1. Re-launch the app by double-clicking the jar file.<br> 
+       Expected: The most recent theme is retained.
 
 ### Deleting a person
 
@@ -549,12 +554,31 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person when the list is empty
+
+    1. Prerequisite: Ensure that there are no contacts in the app.
+
+    1. Test case: `delete 1`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x` , `...` (where x can be any number)<br>
+       Expected: Similar to previous
+    
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Navigate to ./data/addressbook.json and delete the addressbook.json file.
+   
+    1. Launch the app by double-clicking the jar file.<br>
+       Expected: The default list of contacts is loaded.
 
-1. _{ more test cases …​ }_
+1. Dealing with corrupted data file
+
+    1. Navigate to ./data/addressbook.json. Right click the addressbook.json file and open in TextEdit.
+
+    1. Delete all the contents of the file and type some symbols (e.g. `&*$@`).
+
+    1. Launch the app by double-clicking the jar file.<br>
+       Expected: The app loads with no contacts.
