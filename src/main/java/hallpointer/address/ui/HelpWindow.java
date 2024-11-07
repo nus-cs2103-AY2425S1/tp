@@ -37,7 +37,8 @@ public class HelpWindow extends UiPart<Stage> {
             + HelpCommand.COMMAND_WORD + "\n"
             + ListCommand.COMMAND_WORD + "\n"
             + UpdateMemberCommand.COMMAND_WORD + "\n";
-    public static final String ADDITIONAL_HELP = "If you need more details, please refer to the user guide: " + USERGUIDE_URL;
+    public static final String ADDITIONAL_HELP = "If you need more details, "
+            + "please refer to the user guide: " + USERGUIDE_URL;
     public static final String HELP_MESSAGE = COMMAND_WORDS + ADDITIONAL_HELP;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
