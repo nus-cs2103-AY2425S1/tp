@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 public class UntagCommandParserTest {
 
@@ -19,7 +20,8 @@ public class UntagCommandParserTest {
     @Test
     public void parse_validArgs_returnsTagCommand() {
         Tag tag = new Tag("tag");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         assertParseSuccess(parser, "1 t/tag", new UntagCommand(INDEX_FIRST_PERSON, tags));
     }
 

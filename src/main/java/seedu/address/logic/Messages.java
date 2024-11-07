@@ -28,6 +28,28 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
 
     /**
+     * Returns a message indicating the number of people listed.
+     */
+    public static String getMessagePersonsListedOverview(int numOfPeople) {
+        if (numOfPeople <= 1) {
+            return numOfPeople + " person listed!";
+        } else {
+            return numOfPeople + " people listed!";
+        }
+    }
+
+    /**
+     * Returns a message indicating the number of groups listed.
+     */
+    public static String getMessageGroupsListedOverview(int numOfGroup) {
+        if (numOfGroup <= 2) {
+            return numOfGroup + " group listed!";
+        } else {
+            return numOfGroup + " groups listed!";
+        }
+    }
+
+    /**
      * Returns an error message indicating the duplicate prefixes.
      */
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
@@ -50,7 +72,7 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        person.getTagSet().forEach(builder::append);
         return builder.toString();
     }
 

@@ -12,7 +12,7 @@ public class Tag {
     public static final String MESSAGE_CHAR_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String MESSAGE_LENGTH_CONSTRAINTS = "Tags names should be within 30 characters";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s]+$";
-    public final String tagName;
+    private final String tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -24,6 +24,10 @@ public class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CHAR_CONSTRAINTS);
         checkArgument(isWithinLengthLimit(tagName), MESSAGE_LENGTH_CONSTRAINTS);
         this.tagName = tagName;
+    }
+
+    public String getTagName() {
+        return this.tagName;
     }
 
     /**
@@ -53,7 +57,7 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equalsIgnoreCase(otherTag.tagName);
     }
 
     @Override

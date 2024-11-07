@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,7 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -119,18 +118,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean tagExists(Person target, Set<Tag> tags) {
+    public boolean tagExists(Person target, Tags tags) {
         return target.tagExists(tags);
     }
 
     @Override
-    public void addTag(Person target, Set<Tag> newTags) {
+    public void addTag(Person target, Tags newTags) {
         Person updatedPerson = target.addTags(newTags);
         setPerson(target, updatedPerson);
     }
 
     @Override
-    public void deleteTag(Person target, Set<Tag> tagsToDelete) {
+    public void deleteTag(Person target, Tags tagsToDelete) {
         Person updatedPerson = target.deleteTags(tagsToDelete);
         setPerson(target, updatedPerson);
     }

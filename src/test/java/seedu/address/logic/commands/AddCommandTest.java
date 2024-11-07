@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -157,17 +156,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean tagExists(Person target, Set<Tag> tags) {
+        public boolean tagExists(Person target, Tags tags) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addTag(Person target, Set<Tag> tags) {
+        public void addTag(Person target, Tags tags) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteTag(Person target, Set<Tag> tags) {
+        public void deleteTag(Person target, Tags tags) {
             throw new AssertionError("This method should not be called.");
         }
 

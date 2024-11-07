@@ -45,8 +45,9 @@ public class FindGroupCommand extends Command {
         if (groupPredicate != null) {
             model.updateFilteredGroupList(groupPredicate);
         }
+        int numOfGroup = model.getFilteredGroupList().size();
         return new CommandResult(
-            String.format(Messages.MESSAGE_GROUPS_LISTED_OVERVIEW, model.getFilteredGroupList().size()),
+            String.format(Messages.getMessageGroupsListedOverview(numOfGroup)),
                 false,
                 false);
     }

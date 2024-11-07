@@ -39,6 +39,7 @@ import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GroupUtil;
 import seedu.address.testutil.GroupsUtil;
@@ -145,7 +146,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_tag() throws Exception {
         Tag tag = new Tag("test");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
         assertEquals(expectedCommand,
                 parser.parseCommand(TagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
@@ -155,7 +157,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_untag() throws Exception {
         Tag tag = new Tag("test");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         UntagCommand expectedCommand = new UntagCommand(INDEX_FIRST_PERSON, tags);
         assertEquals(expectedCommand,
                 parser.parseCommand(UntagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "

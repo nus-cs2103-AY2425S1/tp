@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-//import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -19,8 +18,8 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-//import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -56,9 +55,9 @@ public class TagCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Tag tag = new Tag("friends");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tags);
-
         assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_TAG_ALREADY_EXISTS);
     }
 
@@ -72,7 +71,8 @@ public class TagCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         Tag tag = new Tag("tag");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, tags);
 
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -81,9 +81,11 @@ public class TagCommandTest {
     @Test
     public void equals() {
         Tag firstTag = new Tag("firstTag");
-        Set<Tag> firstTags = Set.of(firstTag);
+        Set<Tag> firstTagSet = Set.of(firstTag);
+        Tags firstTags = new Tags(firstTagSet);
         Tag secondTag = new Tag("secondTag");
-        Set<Tag> secondTags = Set.of(secondTag);
+        Set<Tag> secondTagSet = Set.of(secondTag);
+        Tags secondTags = new Tags(secondTagSet);
         TagCommand tagFirstCommand = new TagCommand(INDEX_FIRST_PERSON, firstTags);
         TagCommand tagSecondCommand = new TagCommand(INDEX_SECOND_PERSON, secondTags);
 
@@ -108,7 +110,8 @@ public class TagCommandTest {
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         Tag tag = new Tag("tag");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         TagCommand tagCommand = new TagCommand(targetIndex, tags);
         String expected = TagCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
                 + ", tags=" + tags + "}";

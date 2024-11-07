@@ -22,6 +22,7 @@ import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -99,7 +100,8 @@ public class ModelManagerTest {
     public void tagExists_correctTag_returnsTrue() {
         Person person = new PersonBuilder().withTags("tag").build();
         Tag tag = new Tag("tag");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         Boolean actualBool = modelManager.tagExists(person, tags);
         assertEquals(true, actualBool);
     }
@@ -108,7 +110,8 @@ public class ModelManagerTest {
     public void tagExists_wrongTag_returnsFalse() {
         Person person = new PersonBuilder().withTags("tag").build();
         Tag tag = new Tag("taggg");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         Boolean actualBool = modelManager.tagExists(person, tags);
         assertEquals(false, actualBool);
     }
@@ -119,7 +122,8 @@ public class ModelManagerTest {
         Person actualPerson = new PersonBuilder().build();
         modelManager.addPerson(actualPerson);
         Tag tag = new Tag("tag");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> setOfTags = Set.of(tag);
+        Tags tags = new Tags(setOfTags);
         modelManager.addTag(actualPerson, tags);
         assertEquals(expectedPerson, actualPerson);
     }
@@ -130,7 +134,8 @@ public class ModelManagerTest {
         Person expectedPerson = new PersonBuilder().build();
         modelManager.addPerson(actualPerson);
         Tag tag = new Tag("tag");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         modelManager.deleteTag(actualPerson, tags);
         assertEquals(expectedPerson, actualPerson);
     }

@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -16,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -146,11 +146,13 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Tags parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        final Tags tagSet = new Tags();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tag = parseTag(tagName);
+            Tags tagsToAdd = new Tags(Set.of(tag));
+            tagSet.addAllTags(tagsToAdd);
         }
         return tagSet;
     }

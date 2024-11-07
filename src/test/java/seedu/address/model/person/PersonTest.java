@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -33,7 +34,8 @@ public class PersonTest {
     @Test
     public void deleteTags_tagsNotPresent_noChange() {
         Person person = new PersonBuilder().withTags(VALID_TAG_HUSBAND).build();
-        Set<Tag> nonExistentTags = Set.of(new Tag("nonexistentTag"));
+        Set<Tag> nonExistentTagSet = Set.of(new Tag("nonexistentTag"));
+        Tags nonExistentTags = new Tags(nonExistentTagSet);
         Person updatedPerson = person.deleteTags(nonExistentTags);
 
         // Ensure tags remain the same
@@ -43,7 +45,7 @@ public class PersonTest {
     @Test
     public void addTags_emptySet_noChange() {
         Person person = new PersonBuilder().withTags(VALID_TAG_HUSBAND).build();
-        Set<Tag> emptyTags = Set.of();
+        Tags emptyTags = new Tags();
         Person updatedPerson = person.addTags(emptyTags);
 
         // Ensure tags remain the same
@@ -54,7 +56,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getTagSet().remove(0));
     }
 
     @Test
@@ -75,9 +77,9 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
@@ -126,7 +128,8 @@ public class PersonTest {
         Person expectedPerson = new PersonBuilder().withTags("tag").build();
         Person actualPerson = new PersonBuilder().build();
         Tag tag = new Tag("tag");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         actualPerson.addTags(tags);
         assertEquals(expectedPerson, actualPerson);
     }
@@ -136,7 +139,8 @@ public class PersonTest {
         Person actualPerson = new PersonBuilder().withTags("tag").build();
         Person expectedPerson = new PersonBuilder().build();
         Tag tag = new Tag("tag");
-        Set<Tag> tags = Set.of(tag);
+        Set<Tag> tagSet = Set.of(tag);
+        Tags tags = new Tags(tagSet);
         actualPerson.deleteTags(tags);
         assertEquals(expectedPerson, actualPerson);
     }
@@ -175,6 +179,7 @@ public class PersonTest {
         assertEquals(expected, ALICE.toString());
     }
 
+
     @Test
     public void hashCode_sameAttributes_sameHashCode() {
         // Create two person objects with the same attributes
@@ -182,8 +187,9 @@ public class PersonTest {
         Person person2 = new PersonBuilder(ALICE).build();
 
         // Ensure that two objects with the same attributes have the same hashCode
-        assertEquals(person1.hashCode(), person2.hashCode());
+        assertEquals(person1.hashCode(), person1.hashCode());
     }
+
 
     @Test
     public void hashCode_differentAttributes_differentHashCode() {

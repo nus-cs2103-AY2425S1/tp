@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,7 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 /**
  * Adds tags to a person.
@@ -30,15 +29,15 @@ public class TagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New tag(s) added";
     public static final String MESSAGE_TAG_ALREADY_EXISTS = "Tag(s) already exist";
     private final Index targetIndex;
-    private final Set<Tag> newTags;
+    private final Tags newTags;
 
     /**
      * Creates a TagCommand to add the specified {@code Set<Tag>}
      * to the person of specified {@code Index}
      */
-    public TagCommand(Index targetIndex, Set<Tag> newTags) {
+    public TagCommand(Index targetIndex, Tags newTagSet) {
         this.targetIndex = targetIndex;
-        this.newTags = newTags;
+        this.newTags = newTagSet;
     }
 
     @Override
@@ -58,6 +57,7 @@ public class TagCommand extends Command {
         }
 
         model.addTag(person, newTags);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person)));
     }
 

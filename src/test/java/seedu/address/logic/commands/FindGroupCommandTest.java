@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_GROUPS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalGroups.GOONERS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -13,6 +12,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -50,7 +50,7 @@ public class FindGroupCommandTest {
 
     @Test
     public void execute_zeroKeywords_noGroupFound() {
-        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(Messages.getMessageGroupsListedOverview(0));
         GroupContainsKeywordsPredicate predicate = prepareGroupPredicate(" ");
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
@@ -71,9 +71,10 @@ public class FindGroupCommandTest {
 
         expectedModel.updateFilteredGroupList(groupPredicate);
 
+        int numOfGroup = expectedModel.getFilteredGroupList().size();
         // Calculate the expected message based on the number of persons in the filtered list
-        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW,
-                expectedModel.getFilteredGroupList().size());
+        String expectedMessage = String.format(
+                Messages.getMessageGroupsListedOverview(numOfGroup));
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
@@ -102,8 +103,9 @@ public class FindGroupCommandTest {
         model.addGroup(GOONERS);
         expectedModel.addGroup(GOONERS);
 
-        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW,
-                expectedModel.getFilteredGroupList().size());
+        int numOfGroup = expectedModel.getFilteredGroupList().size();
+        String expectedMessage = String.format(
+                Messages.getMessageGroupsListedOverview(numOfGroup));
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
@@ -130,7 +132,7 @@ public class FindGroupCommandTest {
         GroupContainsKeywordsPredicate predicate = prepareGroupPredicate("");
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
-        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(Messages.getMessageGroupsListedOverview(0));
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredGroupList());
@@ -143,8 +145,9 @@ public class FindGroupCommandTest {
         GroupContainsKeywordsPredicate predicate = prepareGroupPredicate("gooners");
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
-        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW,
-                expectedModel.getFilteredGroupList().size());
+        int numOfGroup = expectedModel.getFilteredGroupList().size();
+        String expectedMessage = String.format(
+                Messages.getMessageGroupsListedOverview(numOfGroup));
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(expectedModel.getFilteredGroupList(), model.getFilteredGroupList());

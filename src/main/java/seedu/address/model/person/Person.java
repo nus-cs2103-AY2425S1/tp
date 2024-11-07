@@ -11,6 +11,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 /**
  * Represents a Person in the address book.
@@ -25,20 +26,20 @@ public class Person {
 
     // Data fields
     private final StudentClass studentClass;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Tags tags = new Tags();
 
     private final Set<Group> groups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentClass studentClass, Phone phone, Set<Tag> tags) {
+    public Person(Name name, StudentClass studentClass, Phone phone, Tags tags) {
         requireAllNonNull(name, phone, studentClass);
         this.name = name;
         this.studentClass = studentClass;
         this.phone = phone;
         if (tags != null) {
-            this.tags.addAll(tags);
+            this.tags.addAllTags(tags);
         }
     }
 
@@ -58,16 +59,20 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Tag> getTagSet() {
+        return Collections.unmodifiableSet(this.tags.getTags());
+    }
+
+    public Tags getTags() {
+        return this.tags;
     }
 
     /**
      * Returns a new Person object with a new set of tags
      * with new tags added.
      */
-    public Person addTags(Set<Tag> newTags) {
-        this.tags.addAll(newTags);
+    public Person addTags(Tags newTags) {
+        this.tags.addAllTags(newTags);
         return new Person(this.name, this.studentClass, this.phone, this.tags);
     }
 
@@ -75,13 +80,17 @@ public class Person {
      * Returns a new Person object with a new set of tags
      * with specified tags deleted.
      */
-    public Person deleteTags(Set<Tag> tagsToBeDeleted) {
-        this.tags.removeAll(tagsToBeDeleted);
+    public Person deleteTags(Tags tagsToBeDeleted) {
+        this.tags.removeAllTags(tagsToBeDeleted);
         return new Person(this.name, this.studentClass, this.phone, this.tags);
     }
 
-    public boolean tagExists(Set<Tag> tags) {
-        return this.tags.containsAll(tags);
+    /**
+     * Returns true if tags already exist in the existing tags.
+     *
+     */
+    public boolean tagExists(Tags tags) {
+        return tags.tagExists(this.tags);
     }
 
     /**
