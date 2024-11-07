@@ -6,13 +6,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 
@@ -28,34 +31,33 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to a client "
             + "identified by their distinct client name. "
             + "Existing appointment will be overwritten with the new appointment. \n"
-            + "Parameters: NAME (must be an existing name in address book) "
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + " [DATE in ddMMyy] "
             + PREFIX_FROM + " [FROM] "
             + PREFIX_TO + " [TO]\n"
-            + "Example: " + COMMAND_WORD + " Alex Yeoh "
+            + "Example: " + COMMAND_WORD + " 1 "
             + "d/ 201224 fr/ 0800 to/ 1000";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Appointment scheduled for %1$s on:\n"
                                                                     + "%2$s";
     public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment scheduled for %1$s on:\n"
                                                                     + "%2$s";
-    public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book.";
     public static final String MESSAGE_INVALID_PERIOD =
             "Invalid from and to timings! From timing cannot be after to timing.";
 
-    private final Name name;
+    private final Index index;
     private final Appointment appointment;
 
     /**
      * Constructs an {@code AppointmentCommand} with the specified index and appointment details.
      *
-     * @param name The index of the person in the filtered person list.
+     * @param index The index of the person in the filtered person list.
      * @param appointment The new appointment to be added or updated.
      */
-    public AddAppointmentCommand(Name name, Appointment appointment) {
-        requireNonNull(name);
+    public AddAppointmentCommand(Index index, Appointment appointment) {
+        requireNonNull(index);
         requireNonNull(appointment);
-        this.name = name;
+        this.index = index;
         this.appointment = appointment;
     }
 
@@ -67,11 +69,13 @@ public class AddAppointmentCommand extends Command {
      * @throws CommandException If the index is invalid or the person cannot be found.
      */
     public CommandResult execute(Model model) throws CommandException {
-        if (!model.hasPersonOfName(name)) {
-            throw new CommandException(MESSAGE_INVALID_PERSON);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = model.getPersonByName(name);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson;
 
         if (personToEdit instanceof Buyer buyer) {
@@ -108,7 +112,7 @@ public class AddAppointmentCommand extends Command {
         if (!(other instanceof AddAppointmentCommand)) {
             return false;
         }
-        AddAppointmentCommand otherAppointment = (AddAppointmentCommand) other;
-        return name.equals(otherAppointment.name) && appointment.equals(otherAppointment.appointment);
+        AddAppointmentCommand otherAppointmentCommand = (AddAppointmentCommand) other;
+        return index.equals(otherAppointmentCommand.index) && appointment.equals(otherAppointmentCommand.appointment);
     }
 }
