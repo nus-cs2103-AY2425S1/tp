@@ -8,10 +8,13 @@
 
 Welcome! Tuteez is a **desktop address book app that makes managing student contacts seamless for private tutors**, allowing you to focus on what truly matters: your students.
 
-<!-- * Table of Contents -->
+<!-- TOC start -->
 
 - [Tuteez User Guide](#tuteez-user-guide)
    * [Quick start](#quick-start)
+   * [UI ](#ui)
+      + [Left panel](#left-panel)
+      + [Right panel](#right-panel)
    * [Features](#features)
       + [Viewing help : `help`](#viewing-help-help)
       + [Adding a person: `add`](#adding-a-person-add)
@@ -26,12 +29,12 @@ Welcome! Tuteez is a **desktop address book app that makes managing student cont
       + [Displaying Student Information: `display`](#displaying-student-information-display)
       + [Clearing all entries : `clear`](#clearing-all-entries-clear)
       + [Exiting the program : `exit`](#exiting-the-program-exit)
-   * [Key details for Users  ](#key-details-for-users)
-      + [`Lesson` Constraints](#lesson-constraints)
+   * [Things you should definitely know 🤔](#things-you-should-definitely-know-)
+      + [Constraints to add a lesson](#constraints-to-add-a-lesson)
+      + [Current Limitations](#current-limitations)
       + [Saving the data](#saving-the-data)
       + [Editing the data file](#editing-the-data-file)
    * [Future Features](#future-features)
-      + [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
    * [FAQ](#faq)
    * [Known issues](#known-issues)
    * [Command summary](#command-summary)
