@@ -454,24 +454,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Tuteez` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC1 - Add a student**
 
 **MSS**
 
-1. User types keyword followed by student details into textbox
-2. App acknowledges that a new user has been added
+1. User types add keyword followed by student details into the textbox
+2. Tuteez acknowledges that a new student has been added
 3. Use case ends
 
 **Extensions**
 
-- 2a. App detects similar/identical name or phone number in records
+- 2a. Tuteez detects similar/identical name
 
-    - 2a1. Asks user to confirm action
-    - 2a2. User confirms/denies
-    - 2a3. App adds new entry and acknowledges / returns to home screen
-    - 2a4. Use case ends
+    - 2a1. Tuteez rejects the new addition and show error message
+    Use case ends
+
+- 2b. Tuteez detects clashing lesson
+    - 2b1. Tuteez rejects the new addition and show error message
+    Use case ends
 
 
 **Use case: UC2 - List all students**
@@ -479,17 +481,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User types keyword
-2. App displays all students address book in alphabetical order
+2. Tuteez displays all students in alphabetical order
 3. Use case ends
 
-**Use case: UC3 - Delete a person**
+**Use case: UC3 - Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons <u>(UC2)</u>
+1.  User requests to list students
+2.  Tuteez shows a list of student <u>(UC2)</u>
 3.  User types keyword followed by delete index or name
-4.  AddressBook deletes the person
+4.  Tuteez deletes the person
 5. Use case ends
 
 
@@ -501,12 +503,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  - 3a1. Tuteez shows an error message.
 
       Use case resumes at step 2.
 - 3b. The given name does not exist
-  - 3b1 AddressBook shows an error message.
-  - 3b2. Use case resumes from step 2
+  - 3b1. Tuteez shows an error message.
+        
+      Use case resumes at step 2
 
 
 ### Non-Functional Requirements
@@ -528,18 +531,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Student**: A person who is taking lessons from the tutor
 * **Tutor**: The user of the application
-* **Parent**: A person who is the parent or guardian of the student
-* **Add student**: A feature that allows users to create a new student entry along with their information in the application
-* **Delete student**: A feature that allows users to remove a student entry and their information from the application
-* **Search student**: A feature that allows users to find a particular student by entering their name
-* **Private student details**: Student details and contact information that are not meant to be shared with others
-* **Private parent details**: Parent details and contact information that are not meant to be shared with others
-* **Notes tab**: A section within the application where users can record additional information about their students
-* **Tutoring schedule**: A timetable that shows the dates and times of lessons with students
+* **addlsn**: An abbreviation for the addlesson command
+* **dellsn**: An abbreviation for the deletelesson command
+* **addrmk**: An abbreviation for the addremark command
+* **delrmk**: An abbreviation for the deleteremark command
 * **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
 * **Tags**: Labels that can be assigned to students to group them based on common characteristics
-* **Filtering**: A feature that allows users to view specific groups of students based on their tags or specific criteria
-
+* **Remarks**: Longer texts that can be added to students
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -568,29 +566,36 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete 0`, `delete x` (where x is larger than the list size), `delete something`<br>
+      Expected: Invalid student index error is shown in the status message.
 
-1. _{ more test cases …​ }_
+1. _Deleting a student by name
+
+    1. Prerequisites: The student list contains only a student with the name "John"
+
+    1. Test case: `delete john`<br>
+       Expected: John will be deleted from the list. Details of john will be shown in the status message.
+   
+    1. Test case: `delete Alice`<br>
+       Expected: No person is deleted. An error message appears in the status.
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Test case: Delete the data file from the directory containing tuteez.jar to simulate missing file.
+      Expected: A new data file will be automatically created with default set of "dummy" students when tuteez.jar is run.
