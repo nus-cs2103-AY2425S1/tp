@@ -86,22 +86,6 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
-        // if (descriptor.getCaregivers().isPresent()) {
-        //     Set<Nric> caregivers = descriptor.getCaregivers().get();
-        //     if (caregivers.isEmpty()) {
-        //         sb.append(PREFIX_CAREGIVER);
-        //     } else {
-        //         caregivers.forEach(s -> sb.append(PREFIX_CAREGIVER).append(s.value).append(" "));
-        //     }
-        // }
-        // if (descriptor.getPatients().isPresent()) {
-        //     Set<Nric> patients = descriptor.getPatients().get();
-        //     if (patients.isEmpty()) {
-        //         sb.append(PREFIX_PATIENT);
-        //     } else {
-        //         patients.forEach(s -> sb.append(PREFIX_PATIENT).append(s.value).append(" "));
-        //     }
-        // }
         return sb.toString();
     }
 
