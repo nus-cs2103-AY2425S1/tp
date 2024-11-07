@@ -654,11 +654,11 @@ The following sequence diagram illustrates how the password management process o
 
 ### Failing tests on Windows when run more than once
 
-1. In `EncryptionManagerTest.java`, temporary files are created before and deleted after each test.
-2. However, on Windows machine, the test will throw a `java.nio.file.FileSystemException` exception.
+1. In `EncryptionManagerTest.java`, temporary files are created before and deleted after each test for the Encryption and Export tests. Without this cleanup, subsequent runs of `./gradlew test` will fail.
+2. However, on Windows machine, the test will throw a `java.nio.file.FileSystemException` exception due to the difference in how Windows processes manage files. [(Stackoverflow issue)](https://stackoverflow.com/questions/40706380/failed-to-delete-a-file-in-windows-using-java/40707174#40707174)
 3. A current workaround is to check if the OS is Windows, and skip the file deletion on cleanup.
 4. However, before starting subsequent tests, you will need to manually delete the temporary `*.key` files created.
-5. If the files are not deleted, the program fails the test cases.
+5. This issue does not exist on Mac and Linux machines.
 
 --------------------------------------------------------------------------------------------------------------------
 
