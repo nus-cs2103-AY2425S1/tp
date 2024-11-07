@@ -126,19 +126,36 @@ public class PublicAddressesComposition {
     }
 
     /**
-     * Returns the public address with the specified label in the network.
+     * Returns a set of public addresses that matches the label.
      *
-     * @param network The network to search for.
      * @param label The label to match against the public addresses.
+     * @return A set containing the desired public addresses.
      */
-    public Set<PublicAddress> getByNetworkAndLabel(Network network, String label) {
-        assert network != null;
+    public Set<PublicAddress> getByLabel(String label) {
         assert label != null;
-        return Collections.unmodifiableSet(
-            publicAddresses.getOrDefault(network, Collections.emptySet()).stream()
-            .filter(publicAddress -> publicAddress.getLabel().equals(label))
-            .collect(Collectors.toSet())
-        );
+
+        return publicAddresses.values().stream()
+                .flatMap(Set::stream)
+                .filter(publicAddress -> publicAddress.getLabel().toLowerCase().contains(label.toLowerCase()))
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a set of public addresses that matches the label for a specific network.
+     *
+     * @param label   The label to match against the public addresses.
+     * @param network The network to search in.
+     * @return A set containing the desired public addresses.
+     */
+    public Set<PublicAddress> getByLabelAndNetwork(String label, Network network) {
+        assert label != null;
+        assert network != null;
+
+        Set<PublicAddress> addressesInNetwork = publicAddresses.getOrDefault(network, Collections.emptySet());
+
+        return addressesInNetwork.stream()
+                .filter(publicAddress -> publicAddress.getLabel().toLowerCase().contains(label.toLowerCase()))
+                .collect(Collectors.toSet());
     }
 
     /**

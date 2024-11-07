@@ -63,6 +63,8 @@ public class CommandTestUtil {
         "0xE859Ed4267af9f247aAB2703CebcA466C71887b2"; //this is a real ETH public address
     public static final String VALID_PUBLIC_ADDRESS_BTC_MAIN =
         "bc1qak5yzzvn7va9qmkp7g5uykg2msc5kt0z0uhv2k"; //this is a real BTC public address
+    public static final String VALID_PUBLIC_ADDRESS_BTC_MAIN_ALT =
+        "bc1q6l08rtj6j907r2een0jqs6l7qnruwyxfshmf8a";
     public static final String VALID_PUBLIC_ADDRESS_BTC_SUB =
         "bc1qrcpwxgwmy7yp73eq9xmnr9t43ncl7ms8jly0tt"; //this is a real BTC public address
     public static final String VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_NOT =
