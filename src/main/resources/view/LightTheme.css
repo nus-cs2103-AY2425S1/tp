@@ -339,9 +339,9 @@
 }
 
 #profileView {
-    -fx-background-color: #FBEFF2;
+    -fx-background-color: #EFEAE6;
     -fx-padding: 10;
-    -fx-background-radius: 30 0 0 0;
+    -fx-background-radius: 30 30 30 30;
 }
 
 #historyPanel {
