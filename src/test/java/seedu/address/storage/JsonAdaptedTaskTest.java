@@ -55,4 +55,18 @@ public class JsonAdaptedTaskTest {
         JsonAdaptedTask task = new JsonAdaptedTask(VALID_DESCRIPTION, INVALID_PATIENT, VALID_COMPLETION_STATUS);
         assertThrows(IllegalValueException.class, task::toModelType);
     }
+
+    @Test
+    public void toModelType_nullIsComplete_ignoresTask() {
+        JsonAdaptedTask task = new JsonAdaptedTask(VALID_DESCRIPTION, null, VALID_COMPLETION_STATUS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Patient");
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullIsComplete_throwsIllegalValueException() {
+        JsonAdaptedTask task = new JsonAdaptedTask(VALID_DESCRIPTION, VALID_PATIENT, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "isComplete");
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
+    }
 }
