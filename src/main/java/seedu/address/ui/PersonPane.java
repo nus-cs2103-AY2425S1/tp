@@ -5,10 +5,10 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
-//Solution below inspired by ChatGPT
 /**
  * A UI component that displays detailed information of a selected {@code Person}.
  */
@@ -19,7 +19,7 @@ public class PersonPane extends UiPart<VBox> {
     public final Person person;
 
     @FXML
-    private VBox cardPane;
+    private GridPane view;
     @FXML
     private Label name;
     @FXML
@@ -28,6 +28,8 @@ public class PersonPane extends UiPart<VBox> {
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label tagLabel;
     @FXML
     private FlowPane tags;
     @FXML
@@ -60,6 +62,7 @@ public class PersonPane extends UiPart<VBox> {
      */
     private void displayPersonDetails() {
         if (person != null) {
+            view.setVisible(true);
             setNameAndContactDetails();
             renderTags();
             setRemark();
@@ -71,10 +74,10 @@ public class PersonPane extends UiPart<VBox> {
      * Sets the name and contact details (phone, address, email) of the {@code Person}.
      */
     private void setNameAndContactDetails() {
-        name.setText("Name: " + person.getName().fullName);
-        phone.setText("Phone: " + person.getPhone().value);
-        address.setText("Address: " + person.getAddress().value);
-        email.setText("Email: " + person.getEmail().value);
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
     }
 
     /**
@@ -84,9 +87,8 @@ public class PersonPane extends UiPart<VBox> {
     private void renderTags() {
         tags.getChildren().clear();
         if (!person.getTags().isEmpty()) {
-            tagsLabel.setManaged(true);
-            tagsLabel.setVisible(true);
-
+            tagLabel.setVisible(true);
+            tagLabel.setManaged(true);
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> {
@@ -98,8 +100,8 @@ public class PersonPane extends UiPart<VBox> {
                         tags.getChildren().add(tagLabel);
                     });
         } else {
-            tagsLabel.setManaged(false);
-            tagsLabel.setVisible(false);
+            tagLabel.setVisible(false);
+            tagLabel.setManaged(false);
         }
     }
 
@@ -110,7 +112,7 @@ public class PersonPane extends UiPart<VBox> {
     private void setRemark() {
         String remarkValue = person.getRemark().value;
         if (remarkValue != null && !remarkValue.trim().isEmpty()) {
-            remark.setText("Remark: " + remarkValue);
+            remark.setText(remarkValue);
             remark.setManaged(true);
         } else {
             remark.setManaged(false);
@@ -126,7 +128,7 @@ public class PersonPane extends UiPart<VBox> {
     // Clear and display listings
     private void displayListings() {
         if (!person.getListings().isEmpty()) {
-            StringBuilder listingsText = new StringBuilder("Listings:\n");
+            StringBuilder listingsText = new StringBuilder();
             person.getListings().forEach(listing -> listingsText.append(listing.toString()).append("\n"));
             listings.setText(listingsText.toString());
             listings.setManaged(true);
@@ -143,6 +145,7 @@ public class PersonPane extends UiPart<VBox> {
      * Empties pane when no person is selected.
      */
     public void emptyPane() {
+        view.setVisible(false);
         name.setText("");
         phone.setText("");
         address.setText("");
