@@ -26,10 +26,6 @@ public class DeleteTagCommand extends Command {
             + "Parameters: " + PREFIX_TAG + "TAG (must exist in the AddressBook)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "florist";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s.";
-    public static final String MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED = "The Tag: %1$s is still used.";
-    public static final String MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND = "The Tag: %1$s does not exist.";
-
     private final Tag targetTag;
     private boolean force = false;
 
@@ -60,7 +56,9 @@ public class DeleteTagCommand extends Command {
             if (tag.getTagName().equals(targetTag.getTagName())) {
                 if (tag.canBeDeleted()) {
                     model.deleteTag(tag);
-                    return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.format(targetTag)));
+                    return new CommandResult(String.format(
+                            Messages.MESSAGE_DELETE_TAG_SUCCESS, Messages.format(targetTag)
+                    ));
                 } else {
                     if (this.force) {
                         for (Person person : model.getFilteredPersonList()) {
@@ -81,10 +79,13 @@ public class DeleteTagCommand extends Command {
                             }
                         }
                         model.deleteTag(tag);
-                        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.format(targetTag)));
+                        return new CommandResult(String.format(
+                                Messages.MESSAGE_DELETE_TAG_SUCCESS, Messages.format(targetTag)
+                        ));
                     } else {
                         throw new CommandException(
-                                String.format(MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED, Messages.format(targetTag))
+                                String.format(
+                                        Messages.MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED, Messages.format(targetTag))
                                         + "\n"
                                         + Messages.MESSAGE_FORCE_DELETE_TAG);
                     }
@@ -92,7 +93,9 @@ public class DeleteTagCommand extends Command {
             }
         }
         model.updateFilteredTagList(Model.PREDICATE_SHOW_ALL_TAGS);
-        throw new CommandException(String.format(MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND, Messages.format(targetTag)));
+        throw new CommandException(String.format(
+                Messages.MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND, Messages.format(targetTag)
+        ));
     }
 
     @Override

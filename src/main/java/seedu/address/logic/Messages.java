@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -19,30 +20,46 @@ public class Messages {
     /**
      * General Messages
      */
+    public static final String MESSAGE_CLEAR_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_ENTER_VALID_INDEX = "Please enter a valid index from %d to %d.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
+    public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_NOTHING_TO_PERFORM_ON = "There are no %s to %s.";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
 
     /**
-     * Messages specific to People
+     * Messages specific to Person
      */
+    public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_INVALID_EDIT_PERSON_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+    public static final String MESSAGE_LIST_PERSON_SUCCESS = "Listed all persons";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid. \n"
             + MESSAGE_ENTER_VALID_INDEX;
-    public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_PERSON_NOT_EDITED = "At least one field to edit must be provided.";
+
 
     /**
      * Messages specific to Tag
      */
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag(s) %1$s to %2$s.";
+    public static final String MESSAGE_ASSIGN_TAG_SUCCESS = "Added tag(s) %1$s to %2$s.";
+    public static final String MESSAGE_CREATE_TAG_SUCCESS = "New tag added: %1$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s.";
+    public static final String MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED = "The Tag: %1$s is still used.";
+    public static final String MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND = "The Tag: %1$s does not exist.";
+    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book";
     public static final String MESSAGE_FORCE_TAG_TO_CONTACT = "Use f/ to force the tagging of contacts."
             + " This will create the require Tags.";
     public static final String MESSAGE_FORCE_DELETE_TAG = "Use f/ to force the deletion of tags."
             + " This will unassign all people currently with the Tag.";
-
+    public static final String MESSAGE_LIST_TAG_SUCCESS = "Listed all tags";
+    public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) %1$s from %2$s.";
     public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
     public static final String MESSAGE_TAG_NOT_FOUND_IN_CONTACT = "Some tags were not found in the person's tag list.";
     /**

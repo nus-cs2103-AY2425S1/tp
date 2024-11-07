@@ -41,7 +41,7 @@ public class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd);
 
-        String expectedMessage = String.format(Messages.MESSAGE_ADD_TAG_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_TAG_SUCCESS,
                 "colleague", personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -69,7 +69,7 @@ public class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd, true);
 
-        String expectedMessage = String.format(Messages.MESSAGE_ADD_TAG_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_TAG_SUCCESS,
                 "colleague", personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -108,7 +108,7 @@ public class TagCommandTest {
         HashSet<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag(new TagName("colleague")),
                 new Tag(new TagName("gym"))));
         TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd);
-        String expectedMessage = String.format(Messages.MESSAGE_ADD_TAG_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_TAG_SUCCESS,
                 "gym, colleague", personWithTags.getName().toString());
 
         // Create the expected model with the updated tags
