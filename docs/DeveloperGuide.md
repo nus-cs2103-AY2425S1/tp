@@ -9,8 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -527,9 +526,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The list is empty.
 
-  Use case ends.
+    * 3a1. ResearchRoster shows a message indicating that there are no persons to export.
+
+      Use case ends.
+
+* 3b. The given filename is invalid.
+
+    * 3b1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
 
 * 4a. ResearchRoster is unable to write to the text file.
 
@@ -652,6 +659,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ResearchRoster shows an error message.
 
       Use case resumes at step 2.
+
+
+#### Use case: UC16 - Clear listed persons
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* listed persons are removed from the system
+
+MSS
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to clear the listed persons from the system.
+4.  ResearchRoster requests confirmation.
+5.  User gives confirmation.
+6.  ResearchRoster clears listed persons from the system.
+
+    Use case ends.
+
+Extensions
+
+* 3a. The list is empty.
+
+    * 3a1. ResearchRoster shows a message indicating that there are no persons to clear.
+
+      Use case ends.
+
+* 4a. User does not give confirmation and instead requests something else.
+
+  Use case ends.
+
+#### Use case: UC17 - Exit
+* *Preconditions:* ResearchRoster is running
+* *Guarantees:* ResearchRoster will be exited and closed
+
+MSS
+
+1.  User requests to exit.
+2.  ResearchRoster exits and closes.
+
+    Use case ends.
 
 
 ### Non-Functional Requirements
@@ -836,8 +882,19 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `export data/MyEmailsList`<br>
        Expected: Exports current listed persons' emails to `MyEmailsList.txt` in the `data` directory.
+   
     1. Test case: `find g/f` followed by `export female_emails`<br>
          Expected: Exports only the emails of female persons.
+
+### Clearing listed participants : `clear` then `confirm`
+
+1. Clears the listed persons from the address book.
+
+    1. Test case: `list` followed by `clear` then `confirm`<br>
+       Expected: Clears the entire address book.
+   
+    1. Test case: `find g/f` followed by `clear` then `confirm`<br>
+       Expected: Clears all female persons from the address book.
 
 --------------------------------------------------------------------------------------------------------------------
 
