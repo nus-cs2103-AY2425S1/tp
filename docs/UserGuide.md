@@ -506,10 +506,14 @@ If your changes to the data file makes its format invalid, BlitzBiz will discard
 Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Upcoming features
-#### Archiving data files `[coming in v2.0]`
+## Upcoming features
 
-_Details coming soon ..._
+### Mass Adding / Bulk Importing of Contacts
+Have a whole list of contacts to add? We will introduce a bulk importing feature in our next iteration!
+
+### Priority Scheduling
+Want to ensure you do not schedule multiple schedules on the same date and time?
+We will add more flexibility to our `schedule` feature next!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -518,7 +522,6 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: To safely transfer your data, install the app in the other computer. Use the `backup` command on your original computer and transfer the `addressbook.json` file at `[JAR file location]/backup`
 to `[JAR file location]/data` in your new computer.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
