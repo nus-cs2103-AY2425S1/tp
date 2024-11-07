@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
@@ -33,9 +33,10 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD +
-            ": Deletes the persons identified by the index numbers used in the displayed person list.\n" +
-            "Parameters: INDEX (one or more, all must be positive integers)\n" + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the persons identified by the index numbers used in the displayed person list.\n"
+            + "Parameters: INDEX (one or more, all must be positive integers)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted People: \n%1$s";
@@ -113,13 +114,14 @@ public class DeleteCommand extends Command {
         Phone phone = child.getPhone();
         Email email = child.getEmail();
         Address address = child.getAddress();
+        LessonTime lessonTime = child.getLessonTime();
         Education education = child.getEducation();
         Grade grade = child.getGrade();
         Set<Tag> tags = child.getTags();
         boolean isPinned = child.isPinned();
         boolean isArchived = child.isArchived();
 
-        return new Student(name, phone, email, address, education, grade, null, tags, isPinned, isArchived);
+        return new Student(name, phone, email, address, lessonTime, education, grade, null, tags, isPinned, isArchived);
     }
 
     private Parent createUnlinkedParent(Parent parent, Person personToDelete) {

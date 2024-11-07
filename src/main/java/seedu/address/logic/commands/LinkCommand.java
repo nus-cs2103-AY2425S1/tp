@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -30,9 +29,9 @@ public class LinkCommand extends Command {
     public static final String COMMAND_WORD = "link";
 
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Links a Parent and a Student in a parent-child relationship" + "Parameters: " +
-                    PREFIX_CHILD + "CHILD_NAME " + PREFIX_PARENT + "PARENT_NAME\n" + "Example: " + COMMAND_WORD + " " +
-                    PREFIX_CHILD + "John Doe " + PREFIX_PARENT + "Jane Doe ";
+            COMMAND_WORD + ": Links a Parent and a Student in a parent-child relationship" + "Parameters: "
+                    + PREFIX_CHILD + "CHILD_NAME " + PREFIX_PARENT + "PARENT_NAME\n" + "Example: " + COMMAND_WORD + " "
+                    + PREFIX_CHILD + "John Doe " + PREFIX_PARENT + "Jane Doe ";
 
     public static final String MESSAGE_SUCCESS = "Successfully linked Student: %1$s to Parent: %2$s";
     public static final String MESSAGE_PARENT_LINKED = "Parent: %1$s has an existing link to Student: %2$s";
