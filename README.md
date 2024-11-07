@@ -2,7 +2,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-### **Eventory** is a Desktop App for **Event Grganisers and Planners**
+### **Eventory** is a Desktop App for **Event Organisers and Planners**
 #### Features
 * Enhanced Contact Management
   * Store All Your Contacts: Add phone numbers, emails, addresses, and tags
