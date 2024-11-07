@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `SupplierListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `SupplierListPanel`, `StatusBarFooter`, `DeliveryListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Supplier` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Supplier`  and `Delivery` object(s) residing in the `Model`.
 
 ### Logic component
 
@@ -310,17 +310,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases 
+### Use cases
 
 **System**: Vendor Vault (VV)
 
 **Use Case**: UC01 - Add Supplier Information
 
-**Actor**: Grocer
+**Actor**: Shop Owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to add supplier information with the required supplier details (name, contact, email, company, products).
-2. VV successfully adds the supplier and displays the updated list of suppliers.  
+1. User requests to add a new supplier
+2. VV successfully adds the supplier and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
@@ -328,66 +328,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **1a1.** VV displays an appropriate error message.  
       Use case ends.
 
-
 - **1b.** User enters duplicate supplier information.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
-
-- **1c.** User omits supplier name.
-    - **1c1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1d.** User omits or provides an invalid contact number.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1e.** User omits or provides an invalid email address.
-    - **1e1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1f.** User omits the address or provides an invalid format.
-    - **1f1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1g.** User omits the company name.
-    - **1g1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1h.** User omits product information entry.
-    - **1h1.** VV displays an error message.  
-      Use case ends.
-
-      
-- **1i.** User provides duplicate supplier information (e.g., an entry with the same name and contact details already exists).
-    - **1i1.** VV displays an error message.  
-      Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
 **Use Case**: UC02 - Delete Supplier
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to delete a supplier.
-2. VV deletes the supplier and displays the updated supplier list.  
+1. User requests to delete a specific supplier.
+2. VV deletes the supplier and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the supplier index is missing or invalid.
+- **1a.** VV detects that the supplier is missing or invalid.
     - **1a1.** VV displays an error message.  
-      Use case ends.
-
-      
-- **1b.** The entered supplier index does not exist in the supplier list.
-    - **1b1.** VV displays an error message.  
       Use case ends.
 
 ___
@@ -395,75 +355,101 @@ ___
 
 **Use Case**: UC03 - Mark Supplier Status
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to mark a supplier's status as active or inactive.
-2. VV updates the supplier's status and displays the updated supplier list.  
+1. User requests to mark a specific supplier with a specific status.
+2. VV updates the supplier's status and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the supplier index is missing or invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
-
-- **1b.** VV detects that the supplier index does not exist in the list.
+- **1b.** VV detects that one or more parameters are missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
+- **1c.** VV detects that the current status of the specified supplier is the same as the requested status.
+    - **1c1.** VV displays an error message.
+      Use case ends.
 
-- **1c.** VV detects that the status (active/inactive) is missing or invalid.
-    - **1c1.** VV displays an error message.  
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC04 - Find Supplier by given parameters
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find suppliers by keyword in one or more parameters.
+2. VV updates the supplier's list and displays the updated list of all suppliers that contain given keywords in all their respective parameters .  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that the keyword is missing.
+    - **1b1.** VV displays an error message.  
       Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC04 - Add Deliveries
+**Use Case**: UC05 - Sort Suppliers
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to add a new delivery by entering the details for the new delivery (date and time, supplier index, product name, quantity, cost).
+1. User requests to sort suppliers by a specified field in a specified order.
+2. VV sorts the suppliers and displays the sorted list of suppliers.  
+   Use case ends.
+   **Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters is missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC06 - Add Deliveries
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User request to add a new delivery
 2. VV adds the delivery entry to the list and displays the updated list of deliveries.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the date or time format is invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
-
-- **1b.** VV detects that the supplier index is missing or invalid.
+- **1b.** VV detects that one or more parameters are missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
-
-- **1c.** VV detects that the product name is missing.
+- **1c.** VV detects a duplicate delivery.
     - **1c1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1d.** VV detects that the quantity or cost is missing or invalid.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1e.** VV detects a duplicate delivery (matching date, time, supplier index, and product name).
-    - **1e1.** VV displays an error message.  
       Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC05 - Delete Delivery
+**Use Case**: UC07 - Delete Delivery
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to delete a delivery entry.
-2. VV removes the delivery entry from the list and displays the updated list of deliveries.  
+1. User requests to delete a delivery.
+2. VV removes the delivery entry from the list and displays the updated list of all deliveries.
    Use case ends.
 
 **Extensions**:
@@ -475,40 +461,96 @@ ___
 - **1b.** VV detects invalid formatting.
     - **1b1.** VV displays an error message.  
       Use case ends.
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC08 - Mark the Status of Deliveries
+
+**Actor**: Shop Owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to set the status of a delivery
+2. VV displays a confirmation message and then shows an updated list of all deliveries.  
+   Use case ends.
+
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters are missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+- **1c.** VV detects that the current status of the specified delivery is the same as the requested status.
+    - **1c1.** VV displays an error message.
+      Use case ends.
+
+
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC09 - Find Deliveries by given parameters
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find deliveries by keyword in one or more parameters.
+2. VV updates the delivery list and displays the updated list of all deliveries that contain given keywords in all their respective parameters .  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that the keyword is missing.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC06 - Set the Status of Deliveries
+**Use Case**: UC10 - Sort Deliveries
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to set the status of a delivery as pending, delivered, or cancelled.
-2. VV displays a confirmation message and the updated list of deliveries.  
+1. User requests to sort deliveries by a specified field in a specified order.
+2. VV sorts the deliveries and displays the sorted list of deliveries.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the delivery index is missing or invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
+- **1b.** VV detects that one or more parameters is missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
 
-- **1b.** VV detects that the status is missing.
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC10 - UpcomingDeliveries
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find all deliveries with a certain time frame
+2. VV filters the deliveries and displays the filtered list of deliveries within the given time frame.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters is missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
 
-- **1c.** VV detects that the status is not one of the accepted values (pending, delivered, or cancelled).
-    - **1c1.** VV displays an error message.  
-      Use case ends.
 
 
-- **1d.** VV detects invalid formatting.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 

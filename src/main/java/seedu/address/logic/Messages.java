@@ -29,9 +29,12 @@ public class Messages {
     public static final String MESSAGE_EMPTY_KEYWORD = "The keyword provided after the %1$s prefix is empty";
 
     public static final String MESSAGE_INVALID_LIST_COMMAND_FORMAT = "Invalid list command format! \n"
-            + "list    : Lists both suppliers and deliveries (No parameters should be given)\n"
-            + "list -d : Lists deliveries to the user\n"
-            + "list -s : Lists suppliers to the user";
+            + "list -a : Lists both suppliers and deliveries "
+            + "(No parameters or spaces should be given.)\n"
+            + "list -d : Lists deliveries to the user "
+            + "(At least one space between list and -d. No other parameters should be give)\n"
+            + "list -s : Lists suppliers to the user "
+            + "(At least one space between list and -d. No other parameters should be given)";
     public static final String MESSAGE_DUPLICATE_SUPPLIER_STATUS = "%1$s is already marked as %2$s";
 
     public static final String MESSAGE_DELIVERY_ALREADY_HAS_STATUS = "%1$s is already marked as %2$s";

@@ -53,8 +53,8 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list` and `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -66,12 +66,12 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-supplier-add--s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**[Delete](#deleting-a-supplier--delete--s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
-**[List](#listing-all-suppliers-list--s)**   | `list -s`
-**[Mark](#mark-a-supplier-with-a-status--mark--s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
+**[Add](#adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**[Delete](#deleting-a-supplier--delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**[List](#listing-all-suppliers-list-s)**   | `list -s`
+**[Mark](#mark-a-supplier-with-a-status--mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
 **[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
-**[Sort](#sort-suppliers-sort--s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
+**[Sort](#sort-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
 
 ### Delivery Commands
@@ -104,11 +104,18 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 
-### Viewing all deliveries and suppliers : `list`
+### Viewing all deliveries and suppliers : `list -a`
 
 Lists all suppliers and deliveries in the VendorVault
 
-Format: `list`
+Format: `list -a`
+
+<box type="warning" seamless>
+
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -a
+</box>
 
 ---
 
@@ -125,7 +132,7 @@ Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]�
 **Tip:** A supplier can have any number of tags and products (including 0)
 </box>
 
-<box type="tip" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least on space between `add` and `-s` is compulsory
@@ -149,6 +156,14 @@ Expected output:
 Shows a list of all suppliers in the VendorVault. (The delivery list will not be affected)
 
 Format: `list -s`
+
+
+<box type="warning" seamless>
+
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -s
+  </box>
 
 ### Deleting a supplier : `delete -s`
 
@@ -278,6 +293,13 @@ Parameters:
 Shows a list of all supplier in the VendorVault. (The supplier list will not be affected)
 
 Format: `list -d`
+
+
+<box type="warning" seamless>
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -a
+</box>
 
 ### Marking a delivery : `mark -d`
 
