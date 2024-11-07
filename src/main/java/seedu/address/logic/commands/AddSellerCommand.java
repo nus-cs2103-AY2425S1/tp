@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.logging.Logger;
 
@@ -16,17 +19,28 @@ import seedu.address.model.client.Seller;
  */
 public class AddSellerCommand extends AddClientCommand {
 
+    /**
+     * A string describing the expected parameters for adding a client.
+     * Includes name, phone number, and email.
+     */
+    public static final String SELLER_PARAMETERS = String.format(
+            "%SELLER_NAME %SELLER_PHONE_NUMBER %SELLER_EMAIL",
+            PREFIX_NAME,
+            PREFIX_PHONE,
+            PREFIX_EMAIL
+    );
+
     /** The command word used to trigger the AddSellerCommand. */
     public static final String COMMAND_WORD = "addseller";
 
     /**
      * Describes the format and usage of the addseller command.
-     * Includes the command word and expected parameters inherited from {@link AddClientCommand#CLIENT_PARAMETERS}.
+     * Includes the command word and expected parameters inherited from {@link AddSellerCommand#SELLER_PARAMETERS}.
      */
     public static final String MESSAGE_USAGE = String.format(
             "%s: Adds a seller to the client book.\nParameters: %s\n%s",
             COMMAND_WORD,
-            AddClientCommand.CLIENT_PARAMETERS,
+            AddSellerCommand.SELLER_PARAMETERS,
             AddClientCommand.CLIENT_RESTRICTIONS
     );
 

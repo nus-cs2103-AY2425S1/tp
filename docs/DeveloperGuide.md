@@ -12,8 +12,8 @@ pageNav: 3
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+### Use of Generative AI
+Generative AI tools, including ChatGPT, were heavily used for creating detailed Javadocs, commit messages, test suite creation and occasional code refactoring throughout the development of ClientGrid.
 
 --------------------------------------------------------------------------------------------------------------------
 
