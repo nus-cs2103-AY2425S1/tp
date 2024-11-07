@@ -152,8 +152,6 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Undo/redo feature
 
-#### Proposed Implementation
-
 The undo/redo mechanism is facilitated by `VersionedStudentDirectory`. It extends `StudentDirectory` with an undo/redo history, stored internally as an `studentDirectoryStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedStudentDirectory#commit()` — Saves the current student directory state in its history.
@@ -292,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user             | see the grade level of a student                            | be more prepared for lessons                 |
 | `* * *`  | user             | save a person's contact                                     | contact them easily for tutoring             |
 | `* * *`  | user             | undo my last command                                        | revert the effects of a wrong command        |
-| `* * *`  | user             | revert the effects of an undo                               | revert the effects of a wrong undo           |
+| `* * *`  | user             | redo a command that I undid                                 | revert the effects of a wrong undo           |
 | `* *`    | user             | modify the details of each record                           | change particulars when needed               |
 | `* *`    | user             | sort the record by student name, lesson day, contact, etc.  | find specific records easily                 |
 | `* *`    | user             | see students scheduled for a particular day                 | know my schedule for the day                 |
