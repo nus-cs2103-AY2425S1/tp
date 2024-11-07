@@ -522,10 +522,6 @@ filterContact t/TAG [MORE_TAGS...]
 filterContact t/Customer
 ```
 ![screenshot](images/ss filter.png)
-### Clearing all entries : `clear`
-Clears all entries from the address book.
-
-Format: `clear`
 
 ### **Find persons by name**
 Finds persons whose names contain any of the given keywords.
