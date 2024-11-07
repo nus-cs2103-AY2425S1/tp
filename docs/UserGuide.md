@@ -243,7 +243,7 @@ Adds available dates to the volunteer with the specified `VOLUNTEER_INDEX`.
 
 Format: `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the volunteer's name.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Date **must be in yyyy-MM-dd** 2024-11-28
 * Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
@@ -263,7 +263,7 @@ Removes available dates from the volunteer with the specified `VOLUNTEER_INDEX`.
 
 Format: `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the volunteer's name.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Date **must be in yyyy-MM-dd** 2024-11-28
 * Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
@@ -424,12 +424,12 @@ Examples:
 
 ### Filtering volunteers by availability for an event: `/e filter`
 
-Filters the volunteer list to only shows volunteers who can be assigned to the event specified by `INDEX`
+Filters the volunteer list to only shows volunteers who can be assigned to the event specified by `INDEX`.
 After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers as per normal.
 
 Format: `/e filter INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the event name.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
