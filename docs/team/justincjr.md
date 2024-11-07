@@ -34,10 +34,12 @@ Given below are my contributions to the project.
     * Added documentation for quickstart [\#72](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/72)
     * Did cosmetic tweaks to existing documentation of features `help`: [\#136](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/136)
     * Added documentation for the features `add-claim` , `edit-claim` , `delete-claim`  [\#199](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/199)
+    * Update site map [\#229](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/229)
   * Developer Guide:
     * Added user stories, Non-Functional Requirements and Glossary [\#40](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/40)
     * Added Value Proposition [\#44](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/44)
     * Add usecase for `add-claim` [\#139](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/139)
+    * Add activity diagram that illustrates the command parsing and execution process within Prudy. [\#223](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/223)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments) [\#143](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/143) 
