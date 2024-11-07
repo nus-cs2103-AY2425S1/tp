@@ -74,6 +74,7 @@
 
 .table-view:focused .table-row-cell:filled:focused:selected {
     -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #010504;
 }
 
 .split-pane:horizontal .split-pane-divider {
@@ -100,36 +101,63 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #4C7298;
+    -fx-background-color: #003D7C;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #6699CC;
+    -fx-background-color: #2d5f92;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #B5D4F5;
+    -fx-text-fill: #010504;
+    -fx-border-width: 1;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: #B5D4F5;
     -fx-border-width: 1;
+    -fx-text-fill: #010504;
 }
 
 .list-cell .label {
     -fx-text-fill: white;
+    font-family: "Garamond ";
 }
 
 .cell_big_label {
-    -fx-font-family: "Garamond ";
+    font-family: "Garamond ";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-font-weight: bold;
 }
 
 .cell_small_label {
-    -fx-font-family: "Garamond";
+    font-family: "Garamond";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+.cell_cat_label {
+    -fx-background-color: #EF7C00;
+    font-family: "Garamond";
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-spacing: 20px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-alignment: right;
+}
+
+.cell_cat_label.student-background {
+    -fx-background-color: #EF7C00;
+}
+
+.cell_cat_label.company-background {
+    -fx-background-color: #fcb05f;
 }
 
 .stack-pane {
@@ -344,10 +372,17 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #EF7C00;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 14;
     -fx-font-family: 'Garamond';
+}
+
+#tags .label.with-background-1 {
+    -fx-background-color: #003D7C;
+}
+
+#tags .label.with-background-2 {
+    -fx-background-color: #0053a7;
 }

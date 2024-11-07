@@ -90,6 +90,12 @@ public class TypicalContacts {
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL));
     }
+    public static AddressBook getTypicalStudentsWithFriendsTagAddressBook() {
+        AddressBook ab = new AddressBook();
+        ab.addPerson(ALICE);
+        ab.addPerson(BENSON);
+        return ab;
+    }
 
     /**
      * Returns a list of typical companies.

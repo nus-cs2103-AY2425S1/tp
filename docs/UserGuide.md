@@ -6,7 +6,7 @@ title: User Guide
 AdmiNUS is a contact management tool designed for NUS club administrators, student leaders, and event coordinators. It provides an easy and efficient way to manage contacts via a Command Line Interface (CLI), making it perfect for users who prefer typing over navigating complex menus.
 
 ---
-## Table of Content
+## Table of Contents
 
 * [Quick start](#Quick-start)
 * [Features](#Features)
@@ -31,6 +31,11 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
     * [File Operations](#file-operations)
         * [Importing CSV files: `import`](#importing-csv-files-import)
         * [Exporting CSV files: `export`](#exporting-csv-files-export)
+
+* [Glossary](#glossary)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
       
 ---
 
@@ -40,7 +45,7 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T14-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your AdmiNUS.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar adminus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -108,7 +113,7 @@ Pops up a window, where there is a link to the user guide for the user to easily
 
 #### Listing all contacts: `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in AdmiNUS.
 
 **Format**: `list`
 
@@ -126,7 +131,7 @@ Shows the details of a contact.
 
 #### Clearing all entries: `clear`
 
-Clears all entries from the address book.
+Clears all entries from AdmiNUS.
 
 **Format**: `clear`
 
@@ -142,7 +147,7 @@ Exits the program.
 
 #### Adding a student: `student` 
 
-Adds a student to AdmiNUS
+Adds a student to AdmiNUS.
 
 **Format**: 
 ```shell
@@ -161,7 +166,7 @@ student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 <div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
 
 <div markdown="span" class="alert alert-primary">💡 **Tip:**
-A student can have any number of tags (including 0)
+A student can have any number of tags (including 0).
 </div>
 
 **Examples**:
@@ -169,7 +174,7 @@ A student can have any number of tags (including 0)
 
 #### Adding a company: `company`
 
-Adds a company to AdmiNUS
+Adds a company to AdmiNUS.
 
 **Format**:
 ```
@@ -196,7 +201,7 @@ Examples:
 
 #### Editing a contact: `edit`
 
-Edits an existing contact in the address book.
+Edits an existing contact in AdmiNUS.
 
 **Format**: 
 ```
@@ -244,7 +249,7 @@ specifying any tags after it. </div>
 
 #### Deleting contact(s): `delete`
 
-Deletes the contact(s) at the specified indices from AdmiNUS
+Deletes the contact(s) at the specified indices from AdmiNUS.
 
 Format: `delete INDEX [MORE_INDEX]`
 
@@ -267,7 +272,7 @@ Format: `delete INDEX [MORE_INDEX]`
 
 **Examples**:
 * `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
 
 ---
 ### Advanced Commands
@@ -284,20 +289,22 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. For example, `hans` will match `Hans`. 
 
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 
 * Only the name is searched.
 
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 
 * Persons matching at least one keyword will be returned (i.e. `OR` search). <br>
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 </div>
 
 **Examples**:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 #### Filtering contacts by tags: `filtertag`
@@ -305,45 +312,75 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Finds contacts whose tags are the same as the specified keyword.
 
 Format: `filtertag KEYWORD`
-* Filters through the list of contacts by the specified `KEYWORD`
+* Filters through the list of contacts by the specified `KEYWORD`.
 
 Examples:
 * `filtertag buddies` finds contacts who have tags saved as `buddies`
 
 #### Tracking contacts by category: `track`
 
-Tracks and lists all contacts who are in the category of the specified keywords.
+Tracks and lists all contacts who are in the category of the specified keyword.
 
-Format: `track CATEGORY`
-* Allows users to filter or sort contacts by `CATEGORY`, such as students or companies, making it easier to track specific groups
+
+* Allows users to filter or sort contacts by `CATEGORY` (student or company), making it easier to track specific groups.
 
 Examples:
 * `track student` finds contacts with category `student`
 * `track company` finds contacts with category `company`
 
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+* `CATEGORY` must be from the predefined list of categories (student or company).
+
+* `CATEGORY` is case-insensitive. For example, `student` will match `Student`.
+
+* Only full words will be matched e.g. `student` will not match `students`.
+
+</div>
+
 #### Adding tag(s) to contact: `tag`
-Adds additional tags to the specified contact.
+Adds additional specified tag(s) to the specified contact without overwriting existing tags.
 
 Format: `tag INDEX t/TAG [t/MORE_TAG]`
- * Add specified `TAG` or more `TAG` to the contact at specified `INDEX`
+
+ * Add specified `TAG` (and `MORE_TAG` if present) to the contact at specified `INDEX`
  * The index refers to the index number shown in the displayed person list.
  * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+
+* The tag is case-insensitive. For example, `partner` will match `PartnEr`.
+
+* Only full words will be matched e.g. `partner` will not match `partners`.
+
+* The added tags are displayed on the contact in alphabetical order. <br>
+  e.g. `t/partner t/education` will display `education` before `partner`.
+
+</div>
+
 Examples:
-* `tag 1 t/year2 t/computerScience` adds the tags `year2` and `computerScience` to the first contact in the list
+* `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list
 
 #### Deleting tag(s) from contact: `deletetag`
 
 Deletes the specified tag(s) from the specified contact.
 
-Format:  `deletetag INDEX t/TAG [t/MORE_TAG]`
+Format 1: `deletetag INDEX t/TAG [t/MORE_TAG]`
 
-* Deletes specified `TAG` or more `TAG` from the contact at the specified `INDEX` provided the tag already exists.
+* Deletes specified `TAG` (and `MORE_TAG` if present) from the contact at the specified `INDEX` provided the tag already exists.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+Format 2: `deletetag ALL t/TAG [t/MORE_TAG]`
+
+* Deletes specified `TAG` (and `MORE_TAG` if present) from all contacts in the list provided the tag already exists.
+
 Examples:
-* `deletetag 1 t/senior t/Y2` deletes the senior and Y2 tags from the first contact in the list
+* `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
+* `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
 
 ---
 
@@ -399,27 +436,36 @@ Troubleshooting:
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AdmiNUS data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AdmiNUS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AdminNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* ***Category*** : A label that represents the type of contact (e.g., student, company) used for filtering and sorting contacts.
+* ***CLI (Command Line Interface)*** : A text-based user interface through which users interact with the application by typing commands.
+* ***CSV (Comma-separated values)*** : A text file format that uses commas to separate values, and newlines to separate records.
+* ***GUI (Graphical User Interface)*** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
+* ***NUS Club Administrator*** : An NUS club admin user responsible for managing contacts of students, companies, etc.
+* ***Student ID*** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z)
+* ***Tag*** : A keyword or label associated with a contact that allows for easy grouping and filtering.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AdmiNUS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -447,7 +493,9 @@ _Details coming soon ..._
 | **Track**         | `track CATEGORY`                                                                                   | `track student`                                                                                                    |
 | **View**          | `view INDEX`                                                                                       | `view 1`                                                                                                           |
 | **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]`                                                                     | `tag 1 t/year2 t/computerScience`                                                                                  |
-| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                               | `deletetag 1 t/senior t/Y2`                                                                                        |
+| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                               | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                       |
 | **Import CSV**    | `import /path/to/data/File.csv`                                                                    | `import /home/user/data/hackers_2022.csv`                                                                          |
 | **Export CSV**    | `export /path/to/data/File.csv`                                                                    | `export /home/user/data/output_data.csv`                                                                           |
 | **Exit**          | `exit`                                                                                             | `exit`                                                                                                             |
+
+[Back to the top](#table-of-contents)

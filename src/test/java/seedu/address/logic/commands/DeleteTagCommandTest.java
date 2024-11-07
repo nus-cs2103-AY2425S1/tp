@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalContacts.getTypicalStudentsWithFriendsTagAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
@@ -30,6 +31,7 @@ import seedu.address.testutil.StudentBuilder;
 
 public class DeleteTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model2 = new ModelManager(getTypicalStudentsWithFriendsTagAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexValidTags_studentSuccess() {
@@ -40,13 +42,14 @@ public class DeleteTagCommandTest {
 
         Person expectedPerson = new StudentBuilder().withName("Alice Pauline")
                 .withStudentID("A1234567X")
-                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withEmail("alice@example.com")
                 .withPhone("94351253").build();
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, expectedPerson);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                expectedPerson);
+                tagsToDelete, Messages.format(expectedPerson));
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
@@ -62,12 +65,13 @@ public class DeleteTagCommandTest {
         Person expectedPerson = new StudentBuilder().withName("Benson Meier")
                 .withStudentID("A7654321X")
                 .withAddress("311, Clementi Ave 2, #02-25")
-                .withEmail("benson@example.com").withPhone("98765432").build();
+                .withEmail("benson@example.com")
+                .withPhone("98765432").build();
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, expectedPerson);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                expectedPerson);
+                tagsToDelete, Messages.format(expectedPerson));
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
@@ -82,14 +86,43 @@ public class DeleteTagCommandTest {
         Person expectedPerson = new CompanyBuilder().withName("Amazing Bank")
                 .withIndustry("Banking")
                 .withPhone("84871319")
-                .withEmail("abank@example.com").withAddress("Money Fly").withTags("loyalPartner").build();
+                .withEmail("abank@example.com")
+                .withAddress("Money Fly")
+                .withTags("loyalPartner").build();
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(contactToEdit, expectedPerson);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                expectedPerson);
+                tagsToDelete, Messages.format(expectedPerson));
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteTagFromAllContacts_success() {
+        Person person1 = model2.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person2 = model2.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Set<Tag> tagsToDelete = new HashSet<>();
+        tagsToDelete.add(FRIENDS_TAG);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand("all", tagsToDelete);
+
+        Person expectedPerson1 = new StudentBuilder().withName("Alice Pauline")
+                .withStudentID("A1234567X")
+                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                .withPhone("94351253").build();
+        Person expectedPerson2 = new StudentBuilder().withName("Benson Meier")
+                .withStudentID("A7654321X")
+                .withAddress("311, Clementi Ave 2, #02-25")
+                .withEmail("benson@example.com").withPhone("98765432")
+                .withTags("owesMoney").build();
+        Model expectedModel = new ModelManager(getTypicalStudentsWithFriendsTagAddressBook(), new UserPrefs());
+        expectedModel.setPerson(person1, expectedPerson1);
+        expectedModel.setPerson(person2, expectedPerson2);
+
+        String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_FROM_ALL_SUCCESS,
+                tagsToDelete);
+
+        assertCommandSuccess(deleteTagCommand, model2, expectedMessage, expectedModel);
     }
 
     @Test
@@ -120,7 +153,7 @@ public class DeleteTagCommandTest {
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(Index.fromOneBased(7), tagsToDelete);
 
         assertThrows(CommandException.class,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () -> deleteTagCommand.execute(model));
+                DeleteTagCommand.INVALID_INDEX_OR_STRING, () -> deleteTagCommand.execute(model));
     }
 
     @Test
