@@ -22,11 +22,10 @@ public class UnassignProductCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        String userInput = PRODUCT_DESC_APPLE_PIE + SUPPLIER_DESC_AMY;
+        String userInput = PRODUCT_DESC_APPLE_PIE;
         ProductName productName = new ProductName(VALID_PRODUCT_APPLE_PIE);
-        Name supplierName = new Name(VALID_NAME_AMY);
 
-        UnassignProductCommand expectedCommand = new UnassignProductCommand(productName, supplierName);
+        UnassignProductCommand expectedCommand = new UnassignProductCommand(productName);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -34,23 +33,7 @@ public class UnassignProductCommandParserTest {
     @Test
     public void parse_missingProductPrefix_failure() {
         // missing pr/ prefix
-        String userInput = VALID_PRODUCT_APPLE_PIE + SUPPLIER_DESC_AMY;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_MISSING_REQUIRED_PREFIXES,
-                UnassignProductCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_missingSupplierPrefix_failure() {
-        // missing su/ prefix
-        String userInput = PRODUCT_DESC_APPLE_PIE + VALID_NAME_AMY;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_MISSING_REQUIRED_PREFIXES,
-                UnassignProductCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_missingBothPrefixes_failure() {
-        // missing both pr/ and su/ prefixes
-        String userInput = VALID_PRODUCT_APPLE_PIE + VALID_NAME_AMY;
+        String userInput = VALID_PRODUCT_APPLE_PIE;
         assertParseFailure(parser, userInput, String.format(MESSAGE_MISSING_REQUIRED_PREFIXES,
                 UnassignProductCommand.MESSAGE_USAGE));
     }
@@ -66,7 +49,7 @@ public class UnassignProductCommandParserTest {
     @Test
     public void parse_duplicateProductPrefix_failure() {
         // duplicate pr/ prefix
-        String userInput = PRODUCT_DESC_APPLE_PIE + " " + PREFIX_PRODUCT_NAME + "AnotherProduct" + SUPPLIER_DESC_AMY;
+        String userInput = PRODUCT_DESC_APPLE_PIE + " " + PREFIX_PRODUCT_NAME + "AnotherProduct";
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRODUCT_NAME));
     }
 }

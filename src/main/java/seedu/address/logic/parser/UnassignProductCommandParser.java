@@ -1,12 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
 
 import seedu.address.logic.commands.UnassignProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.product.ProductName;
-import seedu.address.model.supplier.Name;
 
 /**
  * Parses input arguments and creates a new UnassignProductCommand object
@@ -19,16 +17,14 @@ public class UnassignProductCommandParser implements Parser<UnassignProductComma
      */
     public UnassignProductCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PRODUCT_NAME, PREFIX_SUPPLIER_NAME);
-        ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_PRODUCT_NAME, PREFIX_SUPPLIER_NAME},
+                ArgumentTokenizer.tokenize(args, PREFIX_PRODUCT_NAME);
+        ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_PRODUCT_NAME},
                 UnassignProductCommand.MESSAGE_USAGE);
         argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_PRODUCT_NAME,
-                PREFIX_SUPPLIER_NAME);
+                PREFIX_PRODUCT_NAME);
         ProductName productName = ParserUtil.parseProductName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
-        Name supplierName = ParserUtil.parseName(argMultimap.getValue(PREFIX_SUPPLIER_NAME).get());
 
-        return new UnassignProductCommand(productName, supplierName);
+        return new UnassignProductCommand(productName);
     }
 
 }
