@@ -193,4 +193,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + TAG_DESC_LOW_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB, Name.MESSAGE_CONSTRAINTS);
     }
+
+    @Test
+    public void parse_invalidPrefix_failure() {
+        //trying to add next appointment date through add command rather than date command
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+              + ADDRESS_DESC_BOB + TAG_DESC_LOW_RISK + ALLERGY_DESC1_BOB
+              + ALLERGY_DESC2_BOB + " d/13/2/2024 1320",
+              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+    }
 }
