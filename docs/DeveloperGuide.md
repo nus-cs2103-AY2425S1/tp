@@ -359,6 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC02 - Assign a vendor to an event**
 
+Preconditions: User is viewing an item.
 **MSS**
 
 1. User enters command to assign a vendor to an event.
@@ -375,21 +376,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. The event does not exist.
+* 2a. The selected item does not exist.
 
   * 2a1. System shows an error message.
 
       Use case ends.
 
-* 2b. The vendor does not exist.
+* 2b. The vendor has already been assigned to the event.
 
   * 2b1. System shows an error message.
-
-      Use case ends.
-
-* 2c. The vendor has already been assigned to the event.
-
-  * 2c1. System shows an error message.
 
       Use case ends.
 
@@ -397,6 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC03 - Unassign a vendor from an event**
 
+Preconditions: User is viewing an item.
 **MSS**
 
 1. User enters command to unassign a vendor from an event.
@@ -413,21 +409,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. The event does not exist.
+* 2a. The selected item does not exist.
 
     * 2a1. System shows an error message.
 
       Use case ends.
 
-* 2b. The vendor does not exist.
+* 2b. The vendor is not assigned to the event.
 
     * 2b1. System shows an error message.
-
-      Use case ends.
-
-* 2c. The vendor is not assigned to the event.
-
-    * 2c1. System shows an error message.
 
       Use case ends.
 
