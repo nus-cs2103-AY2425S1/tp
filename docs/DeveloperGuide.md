@@ -289,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC01 - Add a student**
 
 **Preconditions**
-* User has the student’s details, i.e. name, gender, contact, classes, subject and email
+* User has the student’s details, i.e. name, gender, contact, classes, subject, email, address, attendance, next of kin and emergency contact
 
 **MSS**
 
@@ -302,30 +302,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. Parameter(s) missing in command format
-  * 2a1. EduConnect displays an error message, e.g. “Email parameter is missing! Ensure that you give values for /name /gender /contact /classes /subject /email”
+* 2a. Required parameter(s) missing in command format
+  * 2a1. EduConnect displays an error message.
   
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
-  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to add! Please use the following options: name, gender, contact, classes, subject, email”
+  * 2b1. EduConnect displays an error message.
 
     Use case ends.
 
 * 2c. Invalid argument for a parameter given
-  * 2c1. EduConnect displays an error message, e.g. “Name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
 
     Use case ends.
 
 * 2d. Existing contact or email given
-  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
     
     Use case ends.
 
 **Use case: UC02 - Add a teacher**
 
 **Preconditions**
-* User has the teacher’s details, i.e. name, gender, contact, classes, subject and email.
+* User has the teacher’s details, i.e. name, gender, contact, classes, subject, email and address.
 
 **MSS**
 1. Teacher enters the add teacher command
@@ -336,23 +336,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-* 2a. Parameter(s) missing in command format
-  * 2a1. EduConnect displays an error message, e.g. “Email parameter is missing! Ensure that you give values for /name /gender /contact /classes /subject /email”
+* 2a. Required parameter(s) missing in command format
+  * 2a1. EduConnect displays an error message.
     
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
-  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to add! Please use the following options: name, gender, contact, classes, subject, email”
+  * 2b1. EduConnect displays an error message
     
     Use case ends.
 
 * 2c. Invalid argument for a parameter given 
-  * 2c1. EduConnect displays an error message, e.g. “Name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
     
     Use case ends.
 
 * 2d. Existing contact or email given
-  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
     
     Use case ends.
 
@@ -372,14 +372,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. Invalid index provided
-  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+  * 2a1. EduConnect displays an error message, e.g. “The person index provided is invalid: 2”
     
     Use case ends.
 
 **Use case: UC-04 List contacts**
-
-**Preconditions**
-* User may optionally specify filter criteria using tags
 
 **MSS**
 1. Teacher enters the list command
