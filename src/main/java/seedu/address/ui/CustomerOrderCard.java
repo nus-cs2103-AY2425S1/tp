@@ -44,6 +44,8 @@ public class CustomerOrderCard extends UiPart<Region> {
      */
     public CustomerOrderCard(CustomerOrder order, int displayedIndex) {
         super(FXML);
+        assert order != null : "CustomerOrder should never be null";
+
         this.order = order;
         id.setText(displayedIndex + ". ");
         name.setText(order.getPerson().getName().fullName);

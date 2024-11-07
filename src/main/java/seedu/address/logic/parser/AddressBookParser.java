@@ -106,9 +106,6 @@ public class AddressBookParser {
         case ViewIngredientCatalogueCommand.COMMAND_WORD:
             return new ViewIngredientCatalogueCommand();
 
-        case ViewOrderListCommand.COMMAND_WORD:
-            return new ViewOrderListCommand();
-
         case ViewPastryCatalogueCommand.COMMAND_WORD:
             return new ViewPastryCatalogueCommand();
 

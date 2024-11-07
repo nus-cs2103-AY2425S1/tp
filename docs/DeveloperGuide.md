@@ -262,39 +262,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Home-based bakery business owners
+Home-based bakery business owners
 * Need to manage customer relationships and supplier orders efficiently
 * Prefer simplified digital solutions
 * Want to reduce administrative effort
 * Focus on their craft of baking
 
-**Value proposition**: Simplified digital address book solution for home-based bakery businesses to manage customer relationships and supplier orders more efficiently.
+**Value proposition**: 
+Simplified digital address book solution for home-based bakery businesses to manage customer relationships and supplier orders more efficiently.
 
 ### User stories
-
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​           | I want to …​                                                              | So that I can…​                                                        |
-| -------- | ----------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+|----------| ----------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | bakery owner      | add new customer information                                              | store their contact details and preferences                            |
 | `* * *`  | bakery owner      | update or edit a customer profile                                         | keep track of changing preferences, addresses, or order histories      |
-| `* * *`  | bakery owner      | view the full order history of a customer                                 | offer personalized service                                             |
+| `* * `   | bakery owner      | view the full order history of a customer                                 | offer personalized service                                             |
 | `* * *`  | bakery owner      | track customer orders and deliveries                                      | manage current and upcoming orders efficiently                         |
 | `* * *`  | bakery owner      | add new supplier contact information                                      | easily place orders and track supplier relationships                   |
 | `* * *`  | bakery owner      | track orders placed with suppliers                                        | manage stock and inventory better                                      |
-| `* * *`  | bakery owner      | search for a customer or supplier                                         | quickly access their details and history                               |
-| `* * *`  | bakery owner      | set reminders for recurring customer orders                               | don't miss important events like birthdays or holidays                 |
-| `* *`    | bakery owner      | receive notifications for upcoming deliveries or orders                   | prepare for timely service                                             |
+| `* * `   | bakery owner      | search for a customer or supplier                                         | quickly access their details and history                               |
 | `* *`    | bakery owner      | mark an order as complete once it's delivered or picked up                | keep my records up to date                                             |
-| `* *`    | bakery owner      | store supplier pricing and discounts                                      | track price fluctuations and budget effectively                        |
-| `* *`    | bakery owner      | categorize suppliers by product type                                      | find the right contact quickly when I need specific supplies           |
-| `*`      | bakery owner      | generate automatic reports on my sales and orders                         | better understand my business performance                              |
 | `*`      | bakery owner      | integrate the app with an inventory system                                | monitor ingredient levels more effectively                             |
-| `*`      | bakery owner      | send automated promotional emails to customers                            | engage them with special offers or seasonal products                   |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `BakeryManagementSystem` and the **Actor** is the `bakery owner`, unless specified otherwise)
+(For all use cases below, the **System** is the `BakeBuddy` system and the **Actor** is the `bakery owner`, unless specified otherwise)
 
 **Use case: Adding a Customer**
 

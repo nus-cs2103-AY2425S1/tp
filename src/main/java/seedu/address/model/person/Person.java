@@ -52,7 +52,11 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    // Copy constructor
+    /**
+     * Duplicates a {@code Person}.
+     *
+     * @param person  The person to be duplicated.
+     */
     public Person(Person person) {
         this.name = person.name;
         this.phone = person.phone;
