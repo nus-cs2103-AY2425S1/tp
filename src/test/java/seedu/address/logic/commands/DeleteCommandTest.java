@@ -185,4 +185,43 @@ public class DeleteCommandTest {
                 deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidStudentId));
     }
 
+    @Test
+    public void execute_deleteModuleWhenPersonDisplayed_success() {
+        Person personToDisplay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setPersonToDisplay(personToDisplay);
+
+        Module moduleToDelete = new Module("CS2103T");
+        Person updatedPerson = personToDisplay.addModule(moduleToDelete);
+        model.setPerson(personToDisplay, updatedPerson);
+
+        DeleteCommand deleteCommand = new DeleteCommand(personToDisplay.getStudentId(), moduleToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete.toString());
+
+        ModelManager expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs(), personToDisplay);
+        expectedModel.deleteModule(updatedPerson, moduleToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteModuleWhenPersonNotDisplayed_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDisplay = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        model.setPersonToDisplay(personToDisplay);
+
+        Module moduleToDelete = new Module("CS2103T");
+        Person updatedPerson = personToDelete.addModule(moduleToDelete);
+        model.setPerson(personToDelete, updatedPerson);
+
+        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getStudentId(), moduleToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete.toString());
+
+        ModelManager expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs(), personToDisplay);
+        expectedModel.deleteModule(updatedPerson, moduleToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
 }
