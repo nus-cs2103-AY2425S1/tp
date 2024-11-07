@@ -82,7 +82,7 @@ public class GradeCommandTest {
 
     @Test
     public void execute_gradeAddedWhenPersonDisplayed_success() {
-        Person personToAddGrade= model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToAddGrade = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person expectedStudent = new PersonBuilder(personToAddGrade).build();
 
         Module validModule = new Module(VALID_MODULE_AMY);
