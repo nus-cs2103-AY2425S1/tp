@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's name in the address book.
- * Guarantees: immutable; its value is either "Guardian" or "Student"
+ * Guarantees: immutable; its value is either "Guardian" or "Student".
  */
 public class Role {
     public static final String GUARDIAN = "Guardian";
