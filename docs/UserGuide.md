@@ -392,10 +392,10 @@ Command Details & Constraints:
 Example:
 1. `deleteStu 1` deletes the first person in the list displayed.
 
-#### 4.1.4 Listing students: `listStu`
-<a id="listing-students-listStu"></a>
+#### 4.1.4 Listing students: `list`
+<a id="listing-students-list"></a>
 
-> TO BE DONE
+> Shows a list of all students in the TrackMate application
 
 ### 4.2 Tutorial Data Related Commands:
 <a id="tutorial-data-commands"></a>
@@ -592,9 +592,7 @@ Example:
 
 > View a single student's details in a formatted and organized manner.
 
-**Method 1 -  Using GUI**: Left-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
-
-**Method 2 -  Using CLI**: Navigate using the `UP` and `DOWN` arrow keys to switch between Student Panel Cards on the Student List Panel.
+**Method -  Using GUI**: Left-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
 
 #### 4.5.2 Clearing all entries: `clear`
 <a id="clearing-all-entries-clear"></a>
@@ -644,8 +642,6 @@ If your changes to the data file makes its format invalid, the TrackMate applica
 Furthermore, certain edits can cause the TrackMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-TO BE CHANGED
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. FAQ
@@ -667,7 +663,7 @@ TO BE CHANGED
 <a id="glossary"></a>
 
 | Term           | Definition and or Explanation                                                                                                     |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------| |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------| 
 | **NUS**        | National University of Singapore                                                      |
 | **TA**         | Teaching Assistant, a tutor who will conduct tutorials in National University of Singapore                                        |
 | **SoC**        | School of Computing in National University of Singapore                                                                           |
@@ -675,33 +671,33 @@ TO BE CHANGED
 | **GUI**        | Graphical User Interface , all the part of the application which you can interact with your mouse                                 |
 | **CLI**        | Command Line Interface , part of application which can only be used with commands from the Keyboard                               |
 | **CSV**        | Comma-Separated Values, a file format generally used to import data in Spreadsheets and Do analysis                               |
-| **JSON**       | JavaScript Object Notation, a standard file format for data interchange
+| **JSON**       | JavaScript Object Notation, a standard file format for data interchange                                                          |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 8. Command summary
 <a id="command-summary"></a>
 
-| Action                | Format, Examples                                                                                        |
-|-----------------------|---------------------------------------------------------------------------------------------------------|
-| **Add Student**       | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`            |
-| **Edit Student**      | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`      |
-| **Delete Student**    | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                               |
-| **List Students**     | `listStu`                                                                                               |
-| **Add Tutorial**      | `addTut tn/TUTORIAL NAME c/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 c/T1011`                             |
-| **Delete Tutorial**   | `deleteTut c/TUTORIAL ID`<br> e.g., `deleteTut c/T1011`                                                  |
-| **List Tutorials**    | `listTut`                                                                                               |
-| **Add Assignment**    | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`              |
-| **Delete Assignment** | `deleteAsg n/ASSIGNMENT TITLE`<br> e.g., `deleteAsg n/Assignment 1`                                     |
-| **List Assignments**  | `listAsg`                                                                                               |
-| **Mark Assignment**   | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                                 |
-| **Unmark Assignment** | `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                             |
-| **Check Assignment**  | `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                       |
-| **Mark Attendance**   | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/1001 c/T1001 d/2024-02-21`     |
+| Action                | Format, Examples                                                                                     |
+|-----------------------|------------------------------------------------------------------------------------------------------|
+| **Add Student**       | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`         |
+| **Edit Student**      | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`   |
+| **Delete Student**    | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                            |
+| **List Students**     | `list`                                                                                               |
+| **Add Tutorial**      | `addTut tn/TUTORIAL NAME c/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 c/T1011`                          |
+| **Delete Tutorial**   | `deleteTut c/TUTORIAL ID`<br> e.g., `deleteTut c/T1011`                                               |
+| **List Tutorials**    | `listTut`                                                                                            |
+| **Add Assignment**    | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`           |
+| **Delete Assignment** | `deleteAsg n/ASSIGNMENT TITLE`<br> e.g., `deleteAsg n/Assignment 1`                                  |
+| **List Assignments**  | `listAsg`                                                                                            |
+| **Mark Assignment**   | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                              |
+| **Unmark Assignment** | `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                          |
+| **Check Assignment**  | `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                    |
+| **Mark Attendance**   | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/1001 c/T1001 d/2024-02-21`  |
 | **Unmark Attendance** | `deleteAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `deleteAtt s/1001 c/T1001 d/2024-02-21`|
-| **Clear**             | `clear`                                                                                                 |
-| **Help**              | `help`                                                                                                  |
-| **Exit**              | `exit`                                                                                                  |
+| **Clear**             | `clear`                                                                                              |
+| **Help**              | `help`                                                                                               |
+| **Exit**              | `exit`                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
