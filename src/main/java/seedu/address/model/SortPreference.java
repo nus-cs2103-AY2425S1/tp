@@ -1,12 +1,20 @@
 package seedu.address.model;
 
-import seedu.address.model.person.*;
-
-import java.util.Comparator;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Comparator;
+
+import seedu.address.model.person.DateDistantToRecentComparator;
+import seedu.address.model.person.DateRecentToDistantComparator;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PriorityHighToLowComparator;
+import seedu.address.model.person.PriorityLowToHighComparator;
+
+/**
+ * Represents the sorting preference for the user.
+ * Valid sort preferences are "high", "low", "recent", "distant", "default".
+ */
 public class SortPreference {
     public static final String MESSAGE_CONSTRAINTS =
             "Sort preferences should be one of the following: high, low, recent, distant, or default";
@@ -39,16 +47,16 @@ public class SortPreference {
 
     public Comparator<Person> getComparator() {
         switch(value) {
-            case "high":
-                return new PriorityHighToLowComparator();
-            case "low":
-                return new PriorityLowToHighComparator();
-            case "distant":
-                return new DateDistantToRecentComparator();
-            case "recent":
-                return new DateRecentToDistantComparator();
-            default:
-                return null;
+        case "high":
+            return new PriorityHighToLowComparator();
+        case "low":
+            return new PriorityLowToHighComparator();
+        case "distant":
+            return new DateDistantToRecentComparator();
+        case "recent":
+            return new DateRecentToDistantComparator();
+        default:
+            return null;
         }
     }
 
@@ -58,7 +66,7 @@ public class SortPreference {
     }
 
     @Override
-    public boolean equals (Object other) {
+    public boolean equals(Object other) {
         if (other == this) {
             return true;
         }

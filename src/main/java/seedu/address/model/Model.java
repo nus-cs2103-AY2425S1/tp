@@ -1,19 +1,12 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.DateDistantToRecentComparator;
-import seedu.address.model.person.DateRecentToDistantComparator;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PriorityHighToLowComparator;
-import seedu.address.model.person.PriorityLowToHighComparator;
 import seedu.address.model.person.Reminder;
 
 /**
