@@ -198,7 +198,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
-* `find alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+* `find n/alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
   ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
 
 #### Delete by name
@@ -272,16 +272,17 @@ There must not be duplicate fields. For example, if there is a contact with the 
 
 ![example john doe](images/ExampleJohnDoe.png)
 
+The follow cases will fail / succeed if you try to enter an add command with the following fields: 
 1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname` Nickname must be **unique**
-    * **Fail:** `n/John Doe nn/Johnny...`
-    * **Fail:** `n/Jane Hoe nn/Johnny...` there is already a Nickname Johnny
-    * **Success:** `n/John Doe nn/notJohnny...`
+    * **Fail:** `n/John Doe nn/Johnny ...`
+    * **Fail:** `n/Jane Hoe nn/Johnny ...` there is already a Nickname Johnny
+    * **Success:** `n/John Doe nn/notJohnny ...`
 2. Must not have the same `Telegram Handle`. Each Telegram Handle must be **unique**
-    * **Fail:** `th/johndoe...`
+    * **Fail:** `th/johndoe ...`
 3. Must not have the same `Email`. Each Email must be **unique**
-    * **Fail:** `e/johnd@example.com...`
+    * **Fail:** `e/johnd@example.com ...`
 4. Must not have more than one `Role` labelled as `President`. Can only have one `President`
-    * **Fail:** `n/Jane Hoe th/janehoe e/janeh@example.com ss/undergraduate 3 r/Admin r/President nn/jane`
+    * **Fail:** `r/Admin r/President ...`
 
 
 ## Valid Contact Fields
@@ -350,4 +351,3 @@ There must not be duplicate fields. For example, if there is a contact with the 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
