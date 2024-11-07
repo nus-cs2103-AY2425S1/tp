@@ -80,17 +80,17 @@ public abstract class JsonAdaptedPerson {
     @JsonCreator
     public static JsonAdaptedPerson of(@JsonProperty("type") String type, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("education") String education,
-            @JsonProperty("grade") String grade, @JsonProperty("parentName") String parentName,
-            @JsonProperty("childrensNames") List<String> childrensNames,
+            @JsonProperty("address") String address, @JsonProperty("lessonTime") String lessonTime,
+            @JsonProperty("education") String education, @JsonProperty("grade") String grade,
+            @JsonProperty("parentName") String parentName, @JsonProperty("childrensNames") List<String> childrensNames,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned,
             @JsonProperty("isArcived") boolean isArchived)
             throws IllegalValueException {
 
         switch (type) {
         case ("Student"):
-            return new JsonAdaptedStudent(name, phone, email, address, education, grade, parentName, tags, isPinned,
-                    isArchived);
+            return new JsonAdaptedStudent(name, phone, email, address, lessonTime, education, grade, parentName,
+                    tags, isPinned, isArchived);
 
         case ("Parent"):
             return new JsonAdaptedParent(name, phone, email, address, childrensNames, tags, isPinned, isArchived);

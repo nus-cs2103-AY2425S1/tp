@@ -13,6 +13,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
+    private final LessonTime lessonTime;
     private final Education education;
     private final Grade grade;
     private final Name parentName;
@@ -22,9 +23,10 @@ public class Student extends Person {
      * Constructs a {@code Student} with the given details.
      * Students constructed with this constructor will have isPinned set to false by default.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Education education, Grade grade,
-                   Name parentName, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, Address address, LessonTime lessonTime, Education education,
+                   Grade grade, Name parentName, Set<Tag> tags) {
         super(name, phone, email, address, tags);
+        this.lessonTime = lessonTime;
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
@@ -33,9 +35,10 @@ public class Student extends Person {
     /**
      * Constructs a {@code Student} with the given details.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Education education, Grade grade,
-                   Name parentName, Set<Tag> tags, boolean isPinned, boolean isArchived) {
+    public Student(Name name, Phone phone, Email email, Address address, LessonTime lessonTime, Education education,
+                   Grade grade, Name parentName, Set<Tag> tags, boolean isPinned, boolean isArchived) {
         super(name, phone, email, address, tags, isPinned, isArchived);
+        this.lessonTime = lessonTime;
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
@@ -44,14 +47,19 @@ public class Student extends Person {
     /**
      * Constructs a {@code Student} with the given {@code Person} as a base
      */
-    public Student(Person person, Education education, Grade grade, Name parentName) {
+    public Student(Person person, LessonTime lessonTime, Education education, Grade grade, Name parentName) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags(),
                 person.isPinned(), person.isArchived());
+        this.lessonTime = lessonTime;
+
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
     }
 
+    public LessonTime getLessonTime() {
+        return lessonTime;
+    }
     public Education getEducation() {
         return education;
     }
@@ -77,6 +85,7 @@ public class Student extends Person {
 
         Student otherStudent = (Student) other;
         return super.equals(otherStudent)
+                && lessonTime.equals(otherStudent.lessonTime)
                 && education.equals(otherStudent.education)
                 && grade.equals(otherStudent.grade)
                 && ((parentName == null && otherStudent.parentName == null)
@@ -85,8 +94,9 @@ public class Student extends Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getEducation(),
-                this.getGrade(), this.getParentName(), this.getTags(), this.isPinned(), this.isArchived());
+        return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getLessonTime(),
+                this.getEducation(), this.getGrade(), this.getParentName(), this.getTags(), this.isPinned(),
+                this.isArchived());
     }
 
     @Override
@@ -96,6 +106,7 @@ public class Student extends Person {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
+                .add("lesson time", this.getLessonTime())
                 .add("education", this.getEducation())
                 .add("grade", this.getGrade())
                 .add("parent", this.getParentName())
@@ -113,6 +124,8 @@ public class Student extends Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Lesson Time: ")
+                .append(getLessonTime())
                 .append("; Education: ")
                 .append(getEducation())
                 .append("; Grade: ")

@@ -65,33 +65,7 @@ public class DeleteCommand extends Command {
 
         List<String> resultMessages = new ArrayList<>();
         for (Person person : peopleToDelete) {
-            if (person instanceof Student student) {
-                Person link = model.personFromName(student.getParentName());
-                if (!(link instanceof Parent parent)) {
-                    throw new CommandException("Invalid linked parent found: " + Messages.format(link));
-                }
-                Parent unlinkedParent = createUnlinkedParent(parent, person);
-                model.setPerson(parent, unlinkedParent);
-            } else if (person instanceof Parent parent) {
-                Set<Name> childrenNames = parent.getChildrensNames();
-                Set<Student> children = new HashSet<>();
-
-                for (Name childName : childrenNames) {
-                    Person link = model.personFromName(childName);
-                    if (!(link instanceof Student child)) {
-                        throw new CommandException("Invalid linked child found: " + Messages.format(person));
-                    }
-                   children.add(child);
-                }
-
-                for (Student child : children) {
-                    Student unlinkedChild = createUnlinkedChild(child);
-                    model.setPerson(child, unlinkedChild);
-                }
-            } else {
-                throw new IllegalPersonTypeException(person);
-            }
-
+            removeLinks(person, model);
             model.deletePerson(person);
             resultMessages.add(Messages.format(person));
         }
@@ -102,6 +76,35 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, resultMessages.get(0)));
         } else {
             return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, String.join("\n", resultMessages)));
+        }
+    }
+
+    private void removeLinks(Person person, Model model) throws CommandException {
+        if (person instanceof Student student) {
+            Person link = model.personFromName(student.getParentName());
+            if (!(link instanceof Parent parent)) {
+                throw new CommandException("Invalid linked parent found: " + Messages.format(link));
+            }
+            Parent unlinkedParent = createUnlinkedParent(parent, person);
+            model.setPerson(parent, unlinkedParent);
+        } else if (person instanceof Parent parent) {
+            Set<Name> childrenNames = parent.getChildrensNames();
+            Set<Student> children = new HashSet<>();
+
+            for (Name childName : childrenNames) {
+                Person link = model.personFromName(childName);
+                if (!(link instanceof Student child)) {
+                    throw new CommandException("Invalid linked child found: " + Messages.format(person));
+                }
+                children.add(child);
+            }
+
+            for (Student child : children) {
+                Student unlinkedChild = createUnlinkedChild(child);
+                model.setPerson(child, unlinkedChild);
+            }
+        } else {
+            throw new IllegalPersonTypeException(person);
         }
     }
 
