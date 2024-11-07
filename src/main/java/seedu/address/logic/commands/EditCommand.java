@@ -75,7 +75,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_EMERGENCY_CONTACT_NOT_EDITED = "At least one emergency contact field to edit "
             + "must be provided.";
-    public static final String MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID = "At least one emergency contact name to edit "
+    public static final String MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID = "At least one emergency contact index to edit "
             + "must be provided.";
 
     private final Index index;
