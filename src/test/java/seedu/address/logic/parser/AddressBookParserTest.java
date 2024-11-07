@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TRIAGE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 
@@ -14,19 +15,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RemarkCommand;
-import seedu.address.logic.commands.ScheduleCommand;
-import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
@@ -123,6 +113,12 @@ public class AddressBookParserTest {
         // Test parsing 'sort appointment'
         command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " appointment");
         assertEquals(new SortCommand(SortCommand.SortType.APPOINTMENT), command);
+    }
+
+    @Test
+    public void parseCommand_triage() throws ParseException {
+        assertTrue(parser.parseCommand(TriageCommand.COMMAND_WORD + " "
+                + NRIC_FIRST_PERSON + " " + PREFIX_TRIAGE + "1") instanceof TriageCommand);
     }
 
     @Test

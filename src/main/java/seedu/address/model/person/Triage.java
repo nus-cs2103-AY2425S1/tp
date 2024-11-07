@@ -49,15 +49,14 @@ public class Triage {
      * @return true if the triage value is valid (1-5), false otherwise.
      * @throws ParseException if the input is not a valid integer or not within the valid range.
      */
-    public static boolean isValidTriage(String num) throws ParseException {
-        int test = -1;
-        // Try parsing the string into an integer
-        try {
+    public static boolean isValidTriage(String num) {
+        int test;
+        if (num != null && num.matches("-?\\d+")) {
             test = Integer.parseInt(num);
-        } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TriageCommand.MESSAGE_USAGE), e);
+            return test > 0 && test < 6; // Valid triage range is from 1 to 5
+        } else {
+           return false;
         }
-        return test > 0 && test < 6; // Valid triage range is from 1 to 5
     }
 
     /**
@@ -67,7 +66,7 @@ public class Triage {
      */
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return value;
     }
 
     /**
@@ -80,7 +79,7 @@ public class Triage {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Triage // instanceof handles nulls
-                && value == (((Triage) other).value)); // state check
+                && value.equals(((Triage) other).value)); // state check
     }
 
     /**

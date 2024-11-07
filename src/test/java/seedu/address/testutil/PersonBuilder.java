@@ -42,9 +42,9 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         nric = new Nric(DEFAULT_NRIC);
         address = new Address(DEFAULT_ADDRESS);
+        triage = new Triage(DEFAULT_TRIAGE);
         remark = new Remark(DEFAULT_REMARK);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
-        triage = new Triage(DEFAULT_TRIAGE);
         tags = new HashSet<>();
         logEntries = new LogList();
     }

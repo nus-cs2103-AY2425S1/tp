@@ -157,11 +157,11 @@ public class Person {
                 .add("email", email)
                 .add("nric", nric)
                 .add("address", address)
+                .add("triage", triage)
                 .add("remark", remark)
                 .add("tags", tags)
                 .add("appointment", appointment) // Include appointment in toString
                 .add("logEntries", logEntries)
-                .add("triage", triage)
                 .toString();
     }
 }
