@@ -20,6 +20,7 @@ Class Name
 Class Company
 Class Phone
 Class Tag
+Class Transaction
 
 Class I #FFFFFF
 }
@@ -44,6 +45,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "*" Transaction
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
