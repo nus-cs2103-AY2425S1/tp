@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the student id.\n"
             + "Format: " + COMMAND_WORD + " STUDENT_ID\n"
+            + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
             + "Parameter example:\n"
             + "- STUDENT_ID: S1234567A\n";
 
