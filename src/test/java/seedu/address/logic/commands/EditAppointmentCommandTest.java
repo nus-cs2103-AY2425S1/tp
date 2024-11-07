@@ -194,14 +194,14 @@ public class EditAppointmentCommandTest {
 
         assertTrue(modelStub.hasAppointment(newAppointment));
 
-        EditAppointmentCommand.EditAppointmentDescriptor desc_Appointment = new EditAppointmentDescriptorBuilder()
+        EditAppointmentCommand.EditAppointmentDescriptor descAppointment = new EditAppointmentDescriptorBuilder()
                 .withDate(VALID_DATE_STRING)
                 .withStartTime(CONFLICTING_LOCAL_TIME_HOUR_START_STRING)
                 .withEndTime(CONFLICTING_LOCAL_TIME_HOUR_END_STRING).build();
 
         EditAppointmentCommand editCommandResult = new EditAppointmentCommand(new Nric(testPerson.getNric().toString()),
                 startDateTime,
-                desc_Appointment);
+                descAppointment);
 
         assertThrows(CommandException.class, EditAppointmentCommand
             .MESSAGE_DUPLICATE_APPOINTMENT, () -> editCommandResult.execute(modelStub));
