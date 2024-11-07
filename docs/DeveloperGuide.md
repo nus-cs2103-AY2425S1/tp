@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 * 1b. No users in the existing data pass the filter
     * 1b1. AgentAssist shows a blank list.
-      
+
       Use case ends.
 
 **Use case: U4 - Edit a Client**
@@ -406,11 +406,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The given edit option is invalid.
   * 3b1. AgentAssist shows an invalid parameter error message.
-    
+  
     Use case resumes at step 3.
 * 3c. Provided values are invalid.
   * 3c1. AgentAssist shows the errors pertaining to the fields.
-  
+
     Use case resumes at step 3.
 
 **Use case: U5 - View a client**
@@ -428,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The provided client index is invalid.
   * 3a1. AgentAssist shows an invalid index error message.
-  
+
     Use case resumes at step 3.
 
 **Use case: U6 - Close detailed view**
@@ -465,7 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. User declines confirmation.
   * 3a1. AgentAssist shows cancellation message to user.
   * 3a2. No change is made.
-  
+
     Use case ends.
 
 **Use case: U9 - Undo the most recent change**
@@ -481,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. There was no recorded last change
   * 2a1. AgentAssist shows an error message to user.
   * 2a2. No change is made.
-  
+
     Use case ends.
 
 **Use case: U10 - Exit**
@@ -563,13 +563,13 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a client while all clients are being shown
 
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
-   
+
    2. Test case: `delete 1`<br>
        Expected: A prompt for confirmation from the user is given. If the user provides confirmation, the first contact is deleted from the list. Details of the deleted contact shown in the status message. Otherwise, the user is informed that the command has been cancelled, and no change is made.
-   
+
    3. Test case: `delete 0`<br>
        Expected: An error message is shown to the user. No client is deleted. Error details shown in the status message.
-   
+
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -584,5 +584,5 @@ testers are expected to do more *exploratory* testing.
    2. Since the data file is corrupted, the application will show a blank list of clients' contacts.
    3. Adding any new contacts now, will override the old file.
    4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
-   5. Make sure to follow the constraints laid out in the user guide for each attribute of Client. 
+   5. Make sure to follow the constraints laid out in the user guide for each attribute of Client.
    6. If the data file is successfully repaired, running `agentassist.jar` should result in the old data being displayed back in the application.
