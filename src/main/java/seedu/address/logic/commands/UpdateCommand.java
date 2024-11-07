@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.EqualUtil.nullSafeEquals;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_EVENT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
@@ -55,7 +56,6 @@ public class UpdateCommand extends Command {
 
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The event index provided is invalid";
 
-
     private final String newName;
     private final LocalDate newStartDate;
     private final LocalDate newEndDate;
@@ -103,6 +103,8 @@ public class UpdateCommand extends Command {
             checkValidDates(oldEvent.getStartDate(), newEndDate);
         } else if (newStartDate != null && newEndDate == null) {
             checkValidDates(newStartDate, oldEvent.getEndDate());
+        } else if (newStartDate != null && newEndDate != null) {
+            checkValidDates(newStartDate, newEndDate);
         }
 
         // Add and remove attendees
@@ -129,20 +131,24 @@ public class UpdateCommand extends Command {
             throws CommandException {
         Set<Person> oldAttendees = oldEvent.getAttendees();
         Set<Person> changedAttendees = new HashSet<>(oldAttendees);
-        for (Index i : addIndices) {
-            try {
-                Person p = personList.get(i.getZeroBased());
-                changedAttendees.add(p);
-            } catch (IndexOutOfBoundsException e) {
-                throw new CommandException("Attendee index out of bounds.");
+        if (addIndices != null) {
+            for (Index i : addIndices) {
+                try {
+                    Person p = personList.get(i.getZeroBased());
+                    changedAttendees.add(p);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new CommandException("Attendee index out of bounds.");
+                }
             }
         }
-        for (Index i : removeIndices) {
-            try {
-                Person p = personList.get(i.getZeroBased());
-                changedAttendees.remove(p);
-            } catch (IndexOutOfBoundsException e) {
-                throw new CommandException("Attendee index out of bounds.");
+        if (removeIndices != null) {
+            for (Index i : removeIndices) {
+                try {
+                    Person p = personList.get(i.getZeroBased());
+                    changedAttendees.remove(p);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new CommandException("Attendee index out of bounds.");
+                }
             }
         }
         return changedAttendees;
@@ -172,13 +178,14 @@ public class UpdateCommand extends Command {
         }
 
         UpdateCommand otherUpdateCommand = (UpdateCommand) other;
-        return newName.equals(otherUpdateCommand.newName)
-                && (indexToUpdate == otherUpdateCommand.indexToUpdate)
-                && (newStartDate == otherUpdateCommand.newStartDate)
-                && (newEndDate == otherUpdateCommand.newEndDate)
-                && (newLocation.equals(otherUpdateCommand.newLocation))
-                && (addIndices.equals(otherUpdateCommand.addIndices))
-                && (removeIndices.equals(otherUpdateCommand.removeIndices));
+
+        return nullSafeEquals(newName, otherUpdateCommand.newName)
+                && nullSafeEquals(indexToUpdate, otherUpdateCommand.indexToUpdate)
+                && nullSafeEquals(newStartDate, otherUpdateCommand.newStartDate)
+                && nullSafeEquals(newEndDate, otherUpdateCommand.newEndDate)
+                && nullSafeEquals(newLocation, otherUpdateCommand.newLocation)
+                && nullSafeEquals(addIndices, otherUpdateCommand.addIndices)
+                && nullSafeEquals(removeIndices, otherUpdateCommand.removeIndices);
     }
 
     @Override
