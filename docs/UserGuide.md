@@ -457,6 +457,12 @@ If your changes to the data file makes its format invalid, SocialBook will disca
 Furthermore, certain edits can cause the SocialBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+### Going through entered commands
+
+Commands entered into SocialBook are automatically saved while it is running. To go through previously entered commands, use the up and down arrow keys to go to the previous command and next command respectively. <br><br>
+You can press the up key to go through the previous commands until the command entered earliest is reached. Once there are no more previous commands to retrieve, pressing the up key has no effect, and remains at the command entered earliest.<br><br> 
+On the other hand, you can press the down key until the command entered most recently is reached, and then pressing the down key once more empties the command field for a new command to be entered. Subsequent presses of the down key has no effect, and leaves the command field empty.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Calendar
