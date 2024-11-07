@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_1;
@@ -11,6 +12,7 @@ import static seedu.address.testutil.TypicalAppointments.getTypicalAppointmentBo
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.ALICE_P;
 import static seedu.address.testutil.TypicalPersons.BENSON_P;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,6 +25,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.AppointmentBookBuilder;
 
 public class ModelManagerTest {
 
@@ -160,5 +163,43 @@ public class ModelManagerTest {
             addressBook,
             getTypicalAppointmentBook(),
             differentUserPrefs));
+    }
+
+    @Test
+    public void equals_checkAppointmentBooks_returnsCorrectEquality() {
+        AppointmentBook appointmentBook = new AppointmentBookBuilder().withAppointment(APPOINTMENT_1).build();
+        AppointmentBook differentAppointmentBook = new AppointmentBook();
+        UserPrefs userPrefs = new UserPrefs();
+
+        // same values -> returns true
+        modelManager = new ModelManager(getTypicalAddressBook(), appointmentBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(getTypicalAddressBook(), appointmentBook, userPrefs);
+        assertEquals(modelManager, modelManagerCopy);
+
+        // same object -> returns true
+        assertEquals(modelManager, modelManager);
+
+        // null -> returns false
+        assertNotEquals(null, modelManager);
+
+        // different types -> returns false
+        assertNotEquals(5, modelManager);
+
+        // different appointmentBook -> returns false
+        assertNotEquals(modelManager, new ModelManager(
+                getTypicalAddressBook(),
+                differentAppointmentBook,
+                userPrefs));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+
+        // different userPrefs -> returns false
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        assertNotEquals(modelManager, new ModelManager(
+                getTypicalAddressBook(),
+                appointmentBook,
+                differentUserPrefs));
     }
 }
