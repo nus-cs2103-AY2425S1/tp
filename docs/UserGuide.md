@@ -451,13 +451,14 @@ the data of your previous AddressBook home folder.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
    is to manually restore the minimized Help Window.
-3. ClinicBuddy requires specific formats for dates `dd/MM/yyyy` or `dd-MM-yyyy` and times `HH:mm`. If you input data in a different format, the program may **display an error**. <br>
+3. ClinicBuddy has a limit of storing only the **10 most recent backups**. Once this limit is reached, older backups are **automatically overwritten**. This means that only the latest 10 backups are available for restoring data. To avoid accidental loss of older backups, users should download or move older backup files if they need to retain them long-term.
+4. ClinicBuddy requires specific formats for dates `dd/MM/yyyy` or `dd-MM-yyyy` and times `HH:mm`. If you input data in a different format, the program may **display an error**. <br>
    **Solution:** Double-check the format of **date and time** inputs before submission.
-4. The `restore` command **overwrites** current patient records with backup data. This could lead to unintentional loss of recent changes. <br>
+5. The `restore` command **overwrites** current patient records with backup data. This could lead to unintentional loss of recent changes. <br>
    **Solution:** Always create a new **backup before performing a restore** to preserve current records.
-5. Updating operating hours will fail if there are existing appointments **outside the new hours**. <br>
+6. Updating operating hours will fail if there are existing appointments **outside the new hours**. <br>
    **Solution:** `Reschedule` or `delete` appointments that fall outside the proposed hours before making the update.
-6. If multiple backups have **similar descriptions**, it may be challenging to distinguish between them.
+7. If multiple backups have **similar descriptions**, it may be challenging to distinguish between them.
    **Solution:** Use **unique and specific** descriptions that include the patient names or specific changes to make backups more identifiable. Moreover, you can also refer to the time of the creation time.
 
 --------------------------------------------------------------------------------------------------------------------
