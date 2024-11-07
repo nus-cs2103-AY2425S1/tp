@@ -317,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** User
 
 **Main Success Scenario (MSS)**
-1. User types in `add` command with necessary fields
+1. User requests to add a new contact
 2. NetBook validates the inputs from the user
 3. NetBook adds the new contact to the list of contacts
 4. NetBook displays the new contact on the GUI
@@ -327,22 +327,21 @@ Use case ends.
 **Extensions**
 
 * 2a. A duplicate contact was added
-  * 2ai. NetBook displays the following error message:  
-  `This person's details have already been recording in NetBook!`
+  * 2a1. NetBook displays an error message
   * **Use case ends.**
 
 
 * 2b. Invalid or missing data
-  * 2bi. NetBook displays an error message with the correct format for the `add` command
-  * 2bii. User re-enters `add` command with necessary fields
-  * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+  * 2b1. NetBook displays an error message
+  * 2b2. User requests to add a contact again
+  * 2b3. Steps 2b1 and 2b2 are repeated until the information entered is valid
   * **Use case resumes from Step 3**
 ***
 **Use case:** UCO2 - Delete Contact  
 **Actor:** User
 
 **Main Success Scenario (MSS)**
-1. User types in `delete` command with the index of the specified user
+1. User requests to delete a contact
 2. NetBook validates the input from the user
 3. NetBook deletes the specified contact
 4. NetBook removes the specified contact from the GUI
@@ -352,9 +351,9 @@ Use case ends.
 **Extensions**
 
 * 2a. Invalid index number
-    * 2bi. NetBook displays an error message stating that the given index is invalid
-    * 2bii. User re-enters delete command with valid index
-    * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+    * 2a1. NetBook displays an error message
+    * 2a2. User re-enters delete command with valid index
+    * 2a3. Steps 2b1 and 2b2 are repeated until the information entered is valid
     * **Use case resumes from Step 3**
 
 ***
@@ -362,9 +361,9 @@ Use case ends.
 **Actor:** User
 
 **Main Success Scenario (MSS)**
-1. User types in `find` command with a specified keyword
+1. User requests to find a contact through a keyword
 2. NetBook validates the input from the user
-3. NetBook identifies users with the keyword in their name
+3. NetBook identifies users with the keyword in their name or organisation
 4. NetBook displays the relevant users in the GUI, and displays a message stating the number of contacts displayed
 
 Use case ends.
@@ -374,8 +373,8 @@ Use case ends.
 
 **Main Success Scenario (MSS)**
 1. User types in `list` command
-2. NetBook displays the all registered contacts in the GUI, and displays the following message:
-`All contacts are being displayed!`
+2. NetBook displays the all registered contacts in the GUI, and displays a message
+informing users that all contacts have been displayed
 
 Use case ends.
 ***
@@ -393,7 +392,7 @@ Use case ends.
 **Actor:** User
 
 **Main Success Scenario (MSS)**
-1. User types in `priority` command, followed by the relevant fields
+1. User requests to assign a priority to a contact
 2. NetBook validates the input from the user
 3. NetBook assigns the stated priority to the stated contact
 4. NetBook displays the priority for the contact on the GUI
@@ -403,10 +402,137 @@ Use case ends.
 **Extensions**
 
 * 2a. Invalid or missing fields
-    * 2bi. NetBook displays an error message with the correct format for the `priority` command
-    * 2bii. User re-enters `priority` command with necessary fields
-    * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+    * 2a1. NetBook displays an error message
+    * 2a2. User requests to add a priority to a contact again
+    * 2a3. Steps 2bi and 2bii are repeated until the information entered is valid
     * **Use case resumes from Step 3**
+***
+**Use case:** UCO7 - Edit Contact 
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User requests to edit the details of a specific contact
+2. NetBook validates the input from the user
+3. NetBook edits the specified contact
+4. NetBook updates the information in the GUI
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Invalid index number
+    * 2a1. NetBook displays an error message
+    * 2a2. User re-enters delete command with valid index
+    * 2a3. Steps 2a1 and 2a2 are repeated until the information entered is valid
+    * **Use case resumes from Step 3**
+* 2b. Invalid Data
+    * 2b1. NetBook displays an error message informing the user of the correct format
+    * 2b2. User re-enters data in the correct format
+    * 2b3. Steps 2b1 and 2b2 are repeated until the data entered is valid
+    * **Use case resumes from Step 3**
+
+***
+**Use case:** UCO8 - Sort Contacts
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User requests to sort contacts by a specific sorting preference
+2. NetBook validates the input from the user
+3. NetBook updates the GUI so that the contacts are arranged according to the sorting preference
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Invalid sorting preference
+    * 2a1. NetBook displays an error message stating that the given sorting preference is invalid
+    * 2a2. User re-enters delete command with a valid sorting preference
+    * 2a3. Steps 2a1 and 2a2 are repeated until the sorting preference entered is valid
+    * **Use case resumes from Step 3**
+
+***
+**Use case:** UCO9 - Save sorting preference
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User requests to save a specific sorting preference
+2. NetBook validates the input from the user
+3. NetBook updates the saved sorting preference
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Invalid sorting preference
+    * 2a1. NetBook displays an error message stating that the given sorting preference is invalid
+    * 2a2. User re-enters delete command with a valid sorting preference
+    * 2a3. Steps 2a1 and 2a2 are repeated until the sorting preference entered is valid
+    * **Use case resumes from Step 3**
+
+***
+**Use case:** UC10 - Add a remark to a contact
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User requests to add a remark to a contact
+2. NetBook validates the input from the user
+3. NetBook adds the given remark to the contact
+4. NetBook displays the remark in the GUI
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Invalid index number
+    * 2a1. NetBook displays an error message
+    * 2a2. User re-enters delete command with valid index
+    * 2a3. Steps 2a1 and 2a2 are repeated until the information entered is valid
+    * **Use case resumes from Step 3**
+
+***
+**Use case:** UC11 - Create a reminder
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User requests to create a reminder about a contact
+2. NetBook validates the input from the user
+3. NetBook creates the given reminder
+4. NetBook displays the reminder in the GUI
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Invalid index number
+    * 2a1. NetBook displays an error message
+    * 2a2. User re-enters delete command with valid index
+    * 2a3. Steps 2a1 and 2a2 are repeated until the information entered is valid
+    * **Use case resumes from Step 3**
+* 2b. Invalid Data
+    * 2b1. NetBook displays an error message informing the user of the correct format
+    * 2b2. User re-enters data in the correct format
+    * 2b3. Steps 2b1 and 2b2 are repeated until the data entered is valid
+    * **Use case resumes from Step 3**
+
+***
+**Use case:** UC12 - Delete a reminder
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User requests to delete a specified reminder
+2. NetBook validates the input from the user
+3. NetBook deletes the given reminder and removes it from the GUI
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Invalid index number
+    * 2a1. NetBook displays an error message
+    * 2a2. User re-enters delete command with valid index
+    * 2a3. Steps 2a1 and 2a2 are repeated until the information entered is valid
+    * **Use case resumes from Step 3**
+
 ***
 
 
