@@ -150,7 +150,7 @@ Format: `listcc`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-`F2` key can be used to toggle the concertContact view when search bar is in focus. <br>
+`F2` key can be used to toggle the concertContact view. <br>
 
 </div>
 
