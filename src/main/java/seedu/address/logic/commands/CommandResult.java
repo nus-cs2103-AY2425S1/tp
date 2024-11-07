@@ -22,7 +22,11 @@ public class CommandResult {
 
     private Person personToShow;
 
+    private Person personToEdit;
+
     private final boolean export;
+
+    private boolean showCommand = false;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -32,6 +36,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.personToShow = null;
+        this.personToEdit = null;
         this.export = export;
     }
 
@@ -52,9 +57,11 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with a person to display in the UI.
      */
-    public CommandResult(String feedbackToUser, Person personToShow) {
+    public CommandResult(String feedbackToUser, Person personToEdit, Person personToShow, boolean showCommand) {
         this(feedbackToUser, false, false, false);
         this.personToShow = requireNonNull(personToShow);
+        this.personToEdit = personToEdit;
+        this.showCommand = showCommand;
     }
     //@@author
 
@@ -72,6 +79,14 @@ public class CommandResult {
 
     public Person getPersonToShow() {
         return personToShow;
+    }
+
+    public Person getOriginalPerson() {
+        return personToEdit;
+    }
+
+    public boolean isShowCommand() {
+        return showCommand;
     }
 
     public boolean isExport() {
@@ -106,6 +121,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("personToEdit", personToEdit)
                 .add("personToShow", personToShow)
                 .toString();
     }
