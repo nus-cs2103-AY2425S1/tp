@@ -369,11 +369,11 @@
     -fx-background-radius: 8;
 }
 
-.owed-text {
+.you-owe-text {
     -fx-text-fill: red;
 }
 
-.owes-you-text {
+.you-are-owed-text {
     -fx-text-fill: green;
 }
 
