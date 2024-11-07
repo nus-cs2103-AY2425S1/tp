@@ -115,6 +115,7 @@ public class ViewwCommand extends Command {
         List<Wedding> filteredList = model.getFilteredWeddingList();
 
         if (filteredList.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_VIEW_EMPTY_LIST_ERROR);
         } else if (filteredList.size() == 1) {
             Wedding weddingToView = filteredList.get(0);
