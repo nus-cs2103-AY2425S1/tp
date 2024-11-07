@@ -37,6 +37,7 @@ public class ParserUtil {
         + " (0 < a <= b)";
     public static final String MESSAGE_INVALID_INTERVAL = "Invalid range: start index must be less than or equal"
             + " to end index.";
+    public static final String MESSAGE_EMPTY_INDICES = "At least one index is required.";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -57,7 +58,7 @@ public class ParserUtil {
      * @return A list of {@code Index} objects from start to end of the range.
      * @throws ParseException If the format is invalid or bounds are incorrect.
      */
-    public static List<Index> parseInterval(String range) throws ParseException {
+    public static List<Index> parseRange(String range) throws ParseException {
         String[] bounds = range.split("-");
         System.out.println(bounds.toString());
         // Validate that the range contains exactly two parts
@@ -91,7 +92,7 @@ public class ParserUtil {
     public static List<Index> parseIndices(String args) throws ParseException {
         requireNonNull(args);
         String trimmedIndices = args.trim();
-
+        checkIndicesNotEmpty(trimmedIndices);
         try {
             return Arrays.stream(trimmedIndices.split(" "))
                     .flatMap(arg -> parseArgAsStream(arg))
@@ -100,6 +101,11 @@ public class ParserUtil {
             String causeMessage = e.getCause().getMessage();
             // Catch any ParseExceptions wrapped in RuntimeExceptions
             throw new ParseException(causeMessage, e);
+        }
+    }
+    private static void checkIndicesNotEmpty(String indices) throws ParseException {
+        if (indices.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_INDICES);
         }
     }
 
@@ -115,7 +121,7 @@ public class ParserUtil {
     private static Stream<Index> parseArgAsStream(String arg) {
         try {
             if (arg.contains("-")) {
-                return parseInterval(arg).stream();
+                return parseRange(arg).stream();
             } else {
                 return Stream.of(parseIndex(arg));
             }
