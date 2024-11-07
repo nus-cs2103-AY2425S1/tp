@@ -175,7 +175,9 @@ Edits the details of a student.
 
 1. `edit_s` edits the student identified by the index. It only accepts a valid index
    based on the list when `list_s` is called.
-2. For information on the constraints for each parameter used in this command, go
+2. To update the tags for a student, use the 'edit_s' command followed by t/ along with the new tags you wish to apply. This command will replace all existing tags with the ones provided.
+If you want to remove all tags from the student, simply use t/ without specifying any tags after it.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
