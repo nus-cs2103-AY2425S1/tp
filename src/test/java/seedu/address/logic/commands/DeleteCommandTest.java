@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DUPLICATED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -70,23 +72,28 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_outOfBoundIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         List<Index> outOfBoundIndexList = new ArrayList<>();
         outOfBoundIndexList.add(outOfBoundIndex);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
+        String expectedErrorMessage = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                outOfBoundIndex.getOneBased());
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, expectedErrorMessage);
     }
 
     @Test
     public void execute_duplicateIndexUnfilteredList_throwsCommandException() {
-        List<Index> outOfBoundIndexList = new ArrayList<>();
-        outOfBoundIndexList.add(INDEX_FIRST);
-        outOfBoundIndexList.add(INDEX_FIRST);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
+        List<Index> duplicatedList = new ArrayList<>();
+        duplicatedList.add(INDEX_FIRST);
+        duplicatedList.add(INDEX_FIRST);
+        DeleteCommand deleteCommand = new DeleteCommand(duplicatedList);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String expectedErrorMessage = String.format(MESSAGE_INVALID_DUPLICATED_INDEX,
+                INDEX_FIRST.getOneBased());
+
+        assertCommandFailure(deleteCommand, model, expectedErrorMessage);
     }
 
     @Test
@@ -96,8 +103,10 @@ public class DeleteCommandTest {
         outOfBoundIndexList.add(INDEX_FIRST);
         outOfBoundIndexList.add(outOfBoundIndex);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
+        String expectedErrorMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                outOfBoundIndex.getOneBased());
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, expectedErrorMessage);
     }
 
     @Test
@@ -131,7 +140,10 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String expectedErrorMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                outOfBoundIndex.getOneBased());
+
+        assertCommandFailure(deleteCommand, model, expectedErrorMessage);
     }
 
     @Test
@@ -139,15 +151,18 @@ public class DeleteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST);
 
         Index duplicateIndex = INDEX_FIRST;
-        List<Index> outOfBoundIndexList = new ArrayList<>();
-        outOfBoundIndexList.add(INDEX_SECOND);
-        outOfBoundIndexList.add(INDEX_SECOND);
+        List<Index> duplicatedIndexList = new ArrayList<>();
+        duplicatedIndexList.add(INDEX_FIRST);
+        duplicatedIndexList.add(INDEX_FIRST);
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(duplicateIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
+        DeleteCommand deleteCommand = new DeleteCommand(duplicatedIndexList);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String expectedErrorMessage = String.format(MESSAGE_INVALID_DUPLICATED_INDEX,
+                duplicateIndex.getOneBased());
+
+        assertCommandFailure(deleteCommand, model, expectedErrorMessage);
     }
 
     @Test

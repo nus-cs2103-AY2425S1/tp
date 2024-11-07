@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private FilteredList<Delivery> filteredDeliveries;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +38,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        DeliveryList emptyList = new DeliveryList();
+        filteredDeliveries = new FilteredList<>(emptyList.asUnmodifiableObservableList());
     }
 
     public ModelManager() {
@@ -170,14 +175,37 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Index getFirstArchivedIndex() {
+        return this.addressBook.getFirstArchivedIndex();
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Delivery List Accessors =============================================================
     @Override
     public void addDelivery(Person person, Delivery delivery) {
         person.addDelivery(delivery);
+    }
+
+    @Override
+    public ObservableList<Delivery> getFilteredDeliveryList() {
+        return filteredDeliveries;
+    }
+
+    @Override
+    public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+        requireNonNull(predicate);
+        filteredDeliveries.setPredicate(predicate);
+    }
+
+    @Override
+    public void setFilteredDeliveryList(DeliveryList deliveryList) {
+        requireNonNull(deliveryList);
+        filteredDeliveries = new FilteredList<>(deliveryList.asUnmodifiableObservableList());
     }
 
     @Override

@@ -26,7 +26,7 @@ public class InspectCommandParser implements Parser<InspectCommand> {
         Index index;
         try {
             List<Index> indexList = ParserUtil.parseIndex(args);
-            if (indexList.isEmpty()) {
+            if (indexList.isEmpty() || indexList.size() > 1) {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
             }
             index = indexList.get(0);

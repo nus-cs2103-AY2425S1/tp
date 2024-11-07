@@ -7,6 +7,7 @@ import java.util.Set;
 
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Archive;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -26,12 +27,14 @@ public class PersonBuilder {
     public static final String DEFAULT_ROLE = "client";
 
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111, S120300";
+    public static final String DEFAULT_ARCHIVE = "false";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Role role;
     private Address address;
+    private Archive archive;
     private Set<Tag> tags;
     private List<Delivery> deliveryList;
 
@@ -45,6 +48,7 @@ public class PersonBuilder {
         role = new Role(DEFAULT_ROLE);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        archive = new Archive(DEFAULT_ARCHIVE);
         deliveryList = new ArrayList<>();
     }
 
@@ -58,6 +62,7 @@ public class PersonBuilder {
         role = personToCopy.getRole();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        archive = personToCopy.getArchive();
         deliveryList = new ArrayList<>(personToCopy.getUnmodifiableDeliveryList());
     }
 
@@ -109,8 +114,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Archive} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withArchive(String archive) {
+        this.archive = new Archive(archive);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, role, address, tags);
+        return new Person(name, phone, email, role, address, tags, archive);
     }
 
 }

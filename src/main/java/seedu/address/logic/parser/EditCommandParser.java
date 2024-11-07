@@ -115,6 +115,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editDeliveryDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
+        if (!editDeliveryDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
         return new EditCommand(index, editDeliveryDescriptor);
     }
 
@@ -122,7 +125,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index;
         try {
             List<Index> indexList = ParserUtil.parseIndex(argMultimap.getPreamble());
-            if (indexList.isEmpty()) {
+            if (indexList.isEmpty() || indexList.size() > 1) {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
             }
             index = indexList.get(0);

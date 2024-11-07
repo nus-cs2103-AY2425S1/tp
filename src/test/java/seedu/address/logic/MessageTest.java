@@ -37,7 +37,7 @@ public class MessageTest {
         Delivery delivery = new DeliveryBuilder(APPLES).build();
 
         String expectedMessage = "[apples]; 123, Jurong West Ave 6, #08-111, S120300; "
-                + "Cost: $100; ETA: 2024-12-31; Date Ordered: 2024-10-16; Time Ordered: 00:00";
+                + "Cost: $100.00; ETA: 2024-12-31; Date Ordered: 2024-10-16; Time Ordered: 00:00";
         String actualMessage = Messages.format(delivery);
 
         assertEquals(expectedMessage, actualMessage);
@@ -66,10 +66,10 @@ public class MessageTest {
 
         List<Delivery> deliveryList = Arrays.asList(delivery1, delivery2);
 
-        String expectedMessage = "\n[apples]; 123, Jurong West Ave 6, #08-111, S120300; Cost: $100; "
+        String expectedMessage = "\n[apples]; 123, Jurong West Ave 6, #08-111, S120300; Cost: $100.00; "
                 + "ETA: 2024-12-31; Date Ordered: 2024-10-16; Time Ordered: 00:00"
                 + "\n[oranges]; 123, Jurong West Ave 6, #08-111, S120300; "
-                + "Cost: $120; ETA: 2024-11-23; Date Ordered: 2024-10-17; Time Ordered: 00:10";
+                + "Cost: $120.00; ETA: 2024-11-23; Date Ordered: 2024-10-17; Time Ordered: 00:10";
         String actualMessage = Messages.formatDeliveryList(deliveryList);
 
         assertEquals(expectedMessage, actualMessage);

@@ -38,8 +38,8 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ROLE + "ROLE"
             + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -85,8 +85,8 @@ public class AddCommand extends Command {
              + PREFIX_TAG + "Difficult address to deliver "
              + PREFIX_TAG + "Best before Wednesday";
 
-    public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
-    public static final String MESSAGE_SUCCESS_DELIVERY = "New delivery added to: ";
+    public static final String MESSAGE_SUCCESS_PERSON = "New person added: \n%1$s";
+    public static final String MESSAGE_SUCCESS_DELIVERY = "New delivery added for %1$s: \n%2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_DUPLICATE_PHONE = "\nWarning! There is a person with the same phone number";
     public static final String MESSAGE_DUPLICATE_EMAIL = "\nWarning! There is a person with the same email";
@@ -144,7 +144,10 @@ public class AddCommand extends Command {
             Person inspectedPerson = InspectWindow.getInspectedPerson();
             Index targetIndex = inspectedPerson.getFirstArchivedIndex();
             inspectedPerson.addDelivery(targetIndex, this.deliveryToAdd);
-            return new CommandResult(MESSAGE_SUCCESS_DELIVERY + inspectedPerson.getName(), DeliveryAction.ADD);
+            return new CommandResult(String.format(MESSAGE_SUCCESS_DELIVERY,
+                    inspectedPerson.getName(),
+                    Messages.format(deliveryToAdd)),
+                    DeliveryAction.ADD);
         }
     }
 

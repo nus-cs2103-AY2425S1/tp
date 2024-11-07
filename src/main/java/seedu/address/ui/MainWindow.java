@@ -73,7 +73,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = HelpWindow.getInstance();
     }
 
     public Stage getPrimaryStage() {
@@ -149,11 +149,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show(false, commandBox);
-        } else {
-            helpWindow.focus();
-        }
+        helpWindow.show(false, commandBox);
     }
 
     void show() {

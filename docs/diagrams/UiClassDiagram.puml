@@ -41,8 +41,11 @@ MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-InspectWindow -down-> "1" DeliveryListPanel
+InspectWindow *-down-> "1" DeliveryListPanel
 InspectWindow -down-> "0..1" HelpWindow
+InspectWindow *-down-> "1" ResultDisplay
+InspectWindow *-down-> "1" CommandBox
+InspectWindow *-down-> "1" StatusBarFooter
 
 DeliveryListPanel -down-> "*" DeliveryCard
 

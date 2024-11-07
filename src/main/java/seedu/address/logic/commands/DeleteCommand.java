@@ -28,14 +28,14 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the contacts identified by the indexes found in the displayed person list.\n"
+            + "Parameters: INDEXES (must be positive integers)\n"
+            + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_USAGE_DELIVERY = COMMAND_WORD
-            + ": Deletes the delivery identified by the index number used in the displayed delivery list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the deliveries identified by the indexes found in the displayed delivery list.\n"
+            + "Parameters: INDEXES (must be positive integers)\n"
+            + "Example: " + COMMAND_WORD + " 1 2";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     public static final String MESSAGE_DELETE_DELIVERY_SUCCESS = "Deleted Delivery for %1$s: %2$s";
@@ -68,7 +68,7 @@ public class DeleteCommand extends Command {
     private CommandResult handlePersonDeletion(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        validateIndexes(lastShownList.size(), indexList, true);
+        validateIndexes(lastShownList.size(), indexList, false);
 
         List<Person> personToDeleteList = deletePersons(model, lastShownList);
 
@@ -87,7 +87,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
-        validateIndexes(deliveryList.size(), indexList, false);
+        validateIndexes(deliveryList.size(), indexList, true);
 
         List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList);
 
@@ -105,16 +105,31 @@ public class DeleteCommand extends Command {
      * @param indexList The list of indexes to be validated.
      * @throws CommandException if any index is out of bounds or if duplicates are found.
      */
-    private void validateIndexes(int listSize, List<Index> indexList, boolean isPersonIndex) throws CommandException {
-        boolean duplicate = hasDuplicates(indexList);
-        for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= listSize || duplicate) {
-                if (isPersonIndex) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-                } else {
-                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
-                }
+    private void validateIndexes(int listSize, List<Index> indexList, boolean isDelivery) throws CommandException {
+        List<Index> outOfBoundList = getOutOfBoundList(indexList, listSize);
+        List<Index> duplicateList = getDuplicateList(indexList);
+        String exceptionMessage = "";
+
+        if (!outOfBoundList.isEmpty()) {
+            if (isDelivery) {
+                exceptionMessage = String.format(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX,
+                        Messages.formatIndexList(outOfBoundList));
+            } else {
+                exceptionMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        Messages.formatIndexList(outOfBoundList));
             }
+        }
+
+        if (!duplicateList.isEmpty()) {
+            if (!exceptionMessage.isEmpty()) {
+                exceptionMessage = exceptionMessage + "\n";
+            }
+            exceptionMessage = exceptionMessage + String.format(Messages.MESSAGE_INVALID_DUPLICATED_INDEX,
+                    Messages.formatIndexList(duplicateList));
+        }
+
+        if (!outOfBoundList.isEmpty() || !duplicateList.isEmpty()) {
+            throw new CommandException(exceptionMessage);
         }
     }
 
@@ -166,19 +181,42 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Checks if a list of indexes has any duplicates.
+     * Returns a list of indexes containing duplicates.
      *
      * @param indexList the list of indexes to check
-     * @return true if the list has duplicates, false otherwise
+     * @return a list containing duplicates, an empty list otherwise
      */
-    private boolean hasDuplicates(List<Index> indexList) {
+    private List<Index> getDuplicateList(List<Index> indexList) {
+        List<Index> duplicateList = new ArrayList<>();
         Set<Integer> uniqueIndices = new HashSet<>();
         for (Index index : indexList) {
-            if (!uniqueIndices.add(index.getZeroBased())) {
-                return true; // duplicate found
+            if (!uniqueIndices.add(index.getZeroBased()) && !duplicateList.contains(index)) {
+                duplicateList.add(index);
             }
         }
-        return false; // no duplicates found
+        duplicateList.sort(Comparator.comparingInt(Index::getOneBased));
+        return duplicateList;
+    }
+
+    /**
+     * Returns a list of out-of-bound indexes.
+     *
+     * @param indexList the list of indexes to check
+     * @return list of index containing out-of-bound indexes
+     */
+    private List<Index> getOutOfBoundList(List<Index> indexList, int listSize) {
+        List<Index> invalidIndexList = new ArrayList<>();
+        for (Index index : indexList) {
+            if (invalidIndexList.contains(index)) {
+                continue;
+            }
+
+            if (index.getZeroBased() >= listSize || index.getZeroBased() < 0) {
+                invalidIndexList.add(index);
+            }
+        }
+        invalidIndexList.sort(Comparator.comparingInt(Index::getOneBased));
+        return invalidIndexList;
     }
 
     /**

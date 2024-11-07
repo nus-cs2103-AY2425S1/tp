@@ -23,8 +23,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             List<Index> indexes = ParserUtil.parseIndex(args);
             return new DeleteCommand(indexes);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            if (!AddressBookParser.getInspect()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE_DELIVERY, pe));
+            }
         }
     }
 

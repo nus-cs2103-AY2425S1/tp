@@ -90,7 +90,7 @@ public class InspectWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = HelpWindow.getInstance();
     }
 
     public Stage getPrimaryStage() {
@@ -147,7 +147,7 @@ public class InspectWindow extends UiPart<Stage> {
 
         personInfoBox.getChildren().addAll(nameField, phoneField, emailField, addressField, tagsField, roleField);
 
-        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(InspectWindow.person.getUnmodifiableDeliveryList());
+        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(logic.getFilteredDeliveryList());
         VBox deliveryListBox = new VBox(deliveryListPanel.getRoot());
 
         personInfoPlaceholder.getChildren().add(personInfoBox);
@@ -225,11 +225,7 @@ public class InspectWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show(true, commandBox);
-        } else {
-            helpWindow.focus();
-        }
+        helpWindow.show(true, commandBox);
     }
 
     void show() {

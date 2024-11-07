@@ -14,14 +14,14 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data" , "LogiLink.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
     public UserPrefs() {
         setGuiSettings(new GuiSettings(1087, 732, 178, 79));
-        setAddressBookFilePath(Path.of("data/addressbook.json"));
+        setAddressBookFilePath(Path.of("data/LogiLink.json"));
     }
 
     /**

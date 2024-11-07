@@ -11,7 +11,8 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.ScrollPane?>
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.Region?>
+<fx:root title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -46,6 +47,7 @@
                 alignment="CENTER"
                 focusTraversable="true"
                 spacing="10"/>
+          <Region prefHeight="20"/>
         </VBox>
         <opaqueInsets>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0"/>

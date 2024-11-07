@@ -52,6 +52,7 @@ public class CommandHelpCard extends UiPart<Region> {
     }
 
     private void handleClick(MouseEvent mouseEvent) {
+        clickableBox.requestFocus();
         inputCommand();
     }
 

@@ -13,8 +13,11 @@ public class TypicalIndexes {
     public static final Index INDEX_FIRST = Index.fromOneBased(1);
     public static final Index INDEX_SECOND = Index.fromOneBased(2);
     public static final Index INDEX_THIRD = Index.fromOneBased(3);
+    public static final Index INDEX_HUNDRED = Index.fromOneBased(100);
     public static final List<Index> INDEX_FIRST_LIST = new ArrayList<>(Arrays.asList(INDEX_FIRST));
     public static final List<Index> INDEX_SECOND_LIST = new ArrayList<>(Arrays.asList(INDEX_SECOND));
+    public static final List<Index> INDEX_THIRD_LIST = new ArrayList<>(Arrays.asList(INDEX_THIRD));
+    public static final List<Index> INDEX_HUNDRED_LIST = new ArrayList<>(Arrays.asList(INDEX_HUNDRED));
     public static final List<Index> INDEX_FIRST_SECOND_LIST = new ArrayList<>(Arrays.asList(
             INDEX_FIRST, INDEX_SECOND));
     public static final List<Index> INDEX_SECOND_THIRD_LIST = new ArrayList<>(Arrays.asList(

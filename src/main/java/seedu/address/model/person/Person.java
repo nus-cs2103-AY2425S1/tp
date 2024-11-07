@@ -14,7 +14,6 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryId;
@@ -41,23 +40,24 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
-
+    private final Archive archive;
     private final Date date; // Date and time are used for sorting purposes only.
+
     private final Time time;
 
-    private final Archive archive = new Archive(false); // Change this when implementing.
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Role role, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Role role, Address address, Set<Tag> tags, Archive archive) {
+        requireAllNonNull(name, phone, email, address, tags, archive);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.role = role;
         this.address = address;
         this.tags.addAll(tags);
+        this.archive = archive;
         this.date = new Date(LocalDate.now().toString());
         this.time = new Time(LocalTime.now().toString());
     }
@@ -246,7 +246,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, archive);
     }
 
     @Override
@@ -257,6 +257,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("archive", archive)
                 .toString();
     }
 

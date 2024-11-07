@@ -5,15 +5,19 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluates to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    /** {@code Predicate} that always evaluates to true */
+    Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
     Predicate<Person> PREDICATE_SHOW_ONLY_CLIENTS = person -> person.getRole().getValue().equals("client");
 
     /**
@@ -126,6 +130,9 @@ public interface Model {
 
     ObservableList<Person> getOnlyClientList();
 
+    /** Returns the {@code Index} of the first archived person in the list. */
+    Index getFirstArchivedIndex();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -136,4 +143,20 @@ public interface Model {
      * Adds the given delivery.
      */
     void addDelivery(Person person, Delivery delivery);
+
+    /**
+     * Returns an unmodifiable view of the filtered delivery list
+     */
+    ObservableList<Delivery> getFilteredDeliveryList();
+
+    /**
+     * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredDeliveryList(Predicate<Delivery> predicate);
+
+    /**
+     * Sets the filtered delivery list to the deliveryList given
+     */
+    void setFilteredDeliveryList(DeliveryList deliveryList);
 }

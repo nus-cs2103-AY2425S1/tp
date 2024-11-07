@@ -58,5 +58,10 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Update the card style based on the archive status
+        if (person.isArchived()) {
+            cardPane.getStyleClass().add("archived");
+        }
     }
 }

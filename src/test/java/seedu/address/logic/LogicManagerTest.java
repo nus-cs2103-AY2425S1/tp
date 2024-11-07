@@ -22,6 +22,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -60,14 +61,24 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
+        AddressBookParser.setInspect(false);
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String expectedErrorMessage = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 9);
+        assertCommandException(deleteCommand, expectedErrorMessage);
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
+    public void execute_validCommandInMainWindow_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        AddressBookParser.setInspect(false);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_PERSON, model);
+    }
+
+    @Test
+    public void execute_validCommandInInspectWindow_success() throws Exception {
+        String listCommand = ListCommand.COMMAND_WORD;
+        AddressBookParser.setInspect(true);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_DELIVERY, model);
     }
 
     @Test
@@ -163,7 +174,7 @@ public class LogicManagerTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
-
+        AddressBookParser.setInspect(false);
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
