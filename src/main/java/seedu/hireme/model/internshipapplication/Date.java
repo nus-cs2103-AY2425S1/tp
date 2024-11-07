@@ -19,8 +19,8 @@ public class Date implements Comparable<Date> {
      * A valid Date must be in the format "dd/MM/yy", must represent a real calendar date,
      * and must not be a future date.
      */
-    public static final String MESSAGE_CONSTRAINTS =
-            "Dates must not be in the future, should be in the format 'DD/MM/YY', and must represent a valid calendar date.";
+    public static final String MESSAGE_CONSTRAINTS = "Dates must not be in the future, should be in the format "
+            + c"'DD/MM/YY', and must represent a valid calendar date.";
 
 
     /**
