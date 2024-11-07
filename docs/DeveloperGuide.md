@@ -204,6 +204,7 @@ This section describes some noteworthy details on how certain features are imple
 and more detailed implementation on model changes have been omitted.
 
 </box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Delete Student Feature
@@ -246,6 +247,7 @@ resetting the affected `Group` affiliation.
 `CommandResult` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 
+</box>
 
 
 #### Design considerations
