@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
-participant "epd:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+participant "epd:EditContactDescriptor" as EditContactDescriptor LOGIC_COLOR
 participant "ec:EditCommand" as EditCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -36,16 +36,16 @@ deactivate EditCommandParser
 AddressBookParser -> EditCommandParser : parse("john")
 activate EditCommandParser
 
-create EditPersonDescriptor
-EditCommandParser -> EditPersonDescriptor
-activate EditPersonDescriptor
-EditPersonDescriptor --> EditCommandParser
-deactivate EditPersonDescriptor
+create EditContactDescriptor
+EditCommandParser -> EditContactDescriptor
+activate EditContactDescriptor
+EditContactDescriptor --> EditCommandParser
+deactivate EditContactDescriptor
 
-EditCommandParser -> EditPersonDescriptor : set("john")
-activate EditPersonDescriptor
-EditPersonDescriptor --> EditCommandParser : epd
-deactivate EditPersonDescriptor
+EditCommandParser -> EditContactDescriptor : set("john")
+activate EditContactDescriptor
+EditContactDescriptor --> EditCommandParser : epd
+deactivate EditContactDescriptor
 
 create EditCommand
 EditCommandParser -> EditCommand : "alex", epd

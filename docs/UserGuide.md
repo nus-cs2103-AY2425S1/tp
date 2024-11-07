@@ -17,20 +17,20 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/main_window_ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/altName` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe th/johnny_9876_haha ss/undergraduate 3 e/johnd@example.com r/Admin` : Adds a contact named `John Doe` to the Address Book.
 
     * `delete 3` : Deletes the 3rd contact shown in the current displayed list.
 
@@ -38,7 +38,7 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#Feature-Details) below for details of each command.
+6. Refer to the [Features](#Feature-Details) below for details of each command.
 
 
 ## Summary of Features
@@ -56,6 +56,9 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Terminologies for command line
+![Description for Command Line](images/commandLineDescription.png)
+
 ## Feature Details
 
 <box type="info" seamless>
@@ -66,19 +69,19 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [nn/NICKNAME]` can be used as `n/John Doe nn/johnnyboiiii` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used from one to multiple times.<br>
   e.g. `[r/ROLE]…​` can be used twice as `r/External r/Marketing` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* Except for `list` command, extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.<br>
   Refer to [listing all contacts](#listing-all-contacts-list) section for more details about `list` command.
 
-* The first word of the command is case-insensitive.
+* The COMMAND_WORD is case-insensitive. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -268,30 +271,31 @@ There must not be duplicate fields. For example, if there is a contact with the 
 
 `n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny`
 
-![example john doe](images/examplejohndoe.png)
+![example john doe](images/ExampleJohnDoe.png)
 
 1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname` Nickname must be **unique**
-   * **Fail:** `n/John Doe nn/Johnny...`
-   * **Fail:** `n/Jane Hoe nn/Johnny...` there is already a Nickname Johnny
-   * **Success:** `n/John Doe nn/notJohnny...`
+    * **Fail:** `n/John Doe nn/Johnny...`
+    * **Fail:** `n/Jane Hoe nn/Johnny...` there is already a Nickname Johnny
+    * **Success:** `n/John Doe nn/notJohnny...`
 2. Must not have the same `Telegram Handle`. Each Telegram Handle must be **unique**
-   * **Fail:** `th/johndoe...`
+    * **Fail:** `th/johndoe...`
 3. Must not have the same `Email`. Each Email must be **unique**
-   * **Fail:** `e/johnd@example.com...`
+    * **Fail:** `e/johnd@example.com...`
 4. Must not have more than one `Role` labelled as `President`. Can only have one `President`
-   * **Fail:** `n/Jane Hoe th/janehoe e/janeh@example.com ss/undergraduate 3 r/Admin r/President nn/jane`
+    * **Fail:** `n/Jane Hoe th/janehoe e/janeh@example.com ss/undergraduate 3 r/Admin r/President nn/jane`
 
 
-## Available Contact Fields
+## Valid Contact Fields
 
-| Field                                   | Prefix* | Valid examples
-|-----------------------------------------|---------|---------------
-| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)`
-| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28` 
-| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`
-| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/> 
-| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`
-| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`
+| Field                                   | Prefix* | Valid examples                                                                                                      |
+|-----------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|
+| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` |
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                    |
+| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`                                                                                   |
+| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                    |
+| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                |
+| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                        |
+
 *_By default, all fields must be non-empty when prefix is specified._
 
 ### Name

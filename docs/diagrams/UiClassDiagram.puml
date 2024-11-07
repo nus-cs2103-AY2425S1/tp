@@ -12,8 +12,8 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PaginationPanel
-Class PersonListPanel
-Class PersonCard
+Class ContactListPanel
+Class ContactCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -37,20 +37,20 @@ MainWindow *-down-> "1" PaginationPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PaginationPanel *-up-> "1" PersonListPanel
+PaginationPanel *-up-> "1" ContactListPanel
 
-PaginationPanel -down-> "*" PersonCard
+PaginationPanel -down-> "*" ContactCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PaginationPanel --|> UiPart
-PersonCard --|> UiPart
+ContactCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+ContactCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
