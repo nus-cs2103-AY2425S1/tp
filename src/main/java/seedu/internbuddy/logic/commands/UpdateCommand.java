@@ -33,7 +33,7 @@ public class UpdateCommand extends Command {
             + "Example: " + COMMAND_WORD + " c/1 app/1 "
             + PREFIX_APP_STATUS + "OA";
 
-    public static final String MESSAGE_UPDATE_APPLICATION_SUCCESS = "Updated application: %1$s";
+    public static final String MESSAGE_UPDATE_APPLICATION_SUCCESS = "Updated application for %2$s: %1$s";
 
     private final Index companyIndex;
     private final Index applicationIndex;
@@ -81,7 +81,8 @@ public class UpdateCommand extends Command {
                 companyToEdit.getStatus(), applicationList, companyToEdit.getIsFavourite(), false);
         model.setCompany(companyToEdit, editedCompany);
 
-        return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS, editedApplication));
+        return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS,
+                Messages.format(editedApplication), companyToEdit.getName()));
     }
 
     @Override
