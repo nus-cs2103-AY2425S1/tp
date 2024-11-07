@@ -93,7 +93,8 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - Role-specific fields(not required for `Person`)
   - **Volunteer**: `h/HOURS` :required for volunteers, representing contributed hours.
   - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
-  - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date.
+  - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date. The 
+    date should be in the **YYYY-MM-DD** format and must be a valid date (e.g., 2024-11-07).
 
 Note:
 Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of 
@@ -154,6 +155,7 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in the address book**.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
@@ -205,10 +207,14 @@ Examples: <br>
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete [INDICES]...`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person(s) at the specified `INDEX` or range of indices.
 * The index refers to the index number shown in the **last displayed person list**.
+* `INDICES` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`), separated by spaces (e.g., `1 2 3 5-9`).
+  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
+    but `5 - 9` or `5 -9` r `5- 9` is invalid).
+* At least one `INDEX` for `INDICES` must be provided.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
