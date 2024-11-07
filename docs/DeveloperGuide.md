@@ -33,7 +33,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of lessones [`Main`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -44,7 +44,7 @@ The bulk of the app's work is done by the following four components:
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#common-lessones) represents a collection of lessones used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -55,9 +55,9 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` lesson (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` lesson which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete lesson (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) lesson diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
@@ -67,9 +67,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/UiLessonDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` lesson which captures the commonalities between lessones that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -78,15 +78,15 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+* depends on some lessones in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here's a (partial) lesson diagram of the `Logic` component:
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="diagrams/UiLessonDiagram.puml" alt="Structure of the UI Component"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -101,23 +101,23 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `EdulogParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its sublessones e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+Here are the other lessones in `Logic` (omitted from the lesson diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserLessones.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `EdulogParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `EdulogParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `EdulogParser` lesson creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other lessones shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `EdulogParser` returns back as a `Command` object.
+* All `XYZCommandParser` lessones (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelLessonDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -130,7 +130,7 @@ The `Model` component,
 <box type="info" seamless>
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelLessonDiagram.puml" width="450" />
 
 </box>
 
@@ -139,16 +139,16 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageLessonDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both edulog data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `EdulogStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some lessones in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common lessones
 
-Classes used by multiple components are in the `seedu.edulog.commons` package.
+Lessones used by multiple components are in the `seedu.edulog.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -187,7 +187,7 @@ Step 3. The user executes `add n/David …​` to add a new student. The `add` c
 **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 </box>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitEdulog()`, so the edulog state will not be saved into the `eduLogStateList`.
+<div markdown="span" lesson="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitEdulog()`, so the edulog state will not be saved into the `eduLogStateList`.
 
 </div>
 
@@ -277,82 +277,82 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Include management of students and classes faster than a typical mouse/GUI driven app
+**Value proposition**: Include management of students and lessones faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to have)
 
-| Priority | As a    | I want to                                                    | So that I can                                                              |
-| :---- |:--------|:-------------------------------------------------------------|:---------------------------------------------------------------------------|
-| Essential | Teacher | track class schedules                                        | schedule students                                                          |
-| Essential | Teacher | manage student address                                       | I will be able to mail the student things                                  |
-| Essential | Teacher | manage student phone number                                  | I know who to contact and how to contact                                   |
-| Essential | Teacher | manage student email                                         | I am able to send email attachments                                        |
-| Essential | Teacher | tag students based on how much help they need                | give each student the appropriate amount of help                           |
-| Essential | Teacher | mark all students who has paid                               | so that I can quickly mark all my students who has paid                    |
-| Essential | Teacher | unmark all students, so that they are listed as has not paid | so that I can quickly mark students as unpaid, when the new month comes in |
-| Essential | Teacher | manage how much each student pays in tuition fees            | so that I can remember how much to bill my student every month             |
-| Essential | Teacher | easily total how much money is paid or not paid yet          | so that I can easily see how much revenue I have earned or not earned      |
-                                                                       |
+| Priority  | As a    | I want to                                                      | So that I can                                                     |
+|:----------|:--------|:---------------------------------------------------------------|:------------------------------------------------------------------|
+| Essential | Teacher | track lesson schedules                                          | schedule students                                                 |
+| Essential | Teacher | manage student address                                         | be able to mail the student things                                |
+| Essential | Teacher | manage student phone number                                    | know who to contact and how to contact                            |
+| Essential | Teacher | manage student email                                           | send email attachments                                            |
+| Essential | Teacher | tag students based on how much help they need                  | give each student the appropriate amount of help                  |
+| Essential | Teacher | mark all students who have paid                                | quickly mark all my students who has paid                         |
+| Essential | Teacher | unmark all students, so that they are listed as 'has not paid' | quickly mark students as unpaid, when the new month comes in      |
+| Essential | Teacher | manage how much each student pays in tuition fees              | remember how much to bill my student every month                  |
+| Essential | Teacher | easily total how much money is paid or not paid yet            | easily see how much revenue I have earned or not earned           |
+| Novel     | Teacher | have ideas for gifts                                           | buy gifts for my students.                                        |
 *{More to be added}*
 
 # Use cases
 
 (For all use cases below, the **System** is the `EduLog` and the **Actor** is the `Teacher`, unless specified otherwise)
 
-## UC1: Add a class
-* Postcondition: A class, with at least a name, date, and time is created
+## UC1: Add a lesson
+* Postcondition: A lesson, with at least a name, date, and time is created <br>
 
 **MSS**
 
-1.  Teacher initiates the process to add a new class in EduLog
-2.  System provides the required fields for class information
+1.  Teacher initiates the process to add a new lesson in EduLog
+2.  System provides the required fields for lesson information
 3.  Teacher supplies the information
 4.  System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
-5.  System confirms that class has been added
+5.  System confirms that lesson has been added
 Use case ends.
 
 ### **Extension:**
 
-* **2a. Teacher wants to abort the ‘add class’ process**
+* **2a. Teacher wants to abort the ‘add lesson’ process**
 
     * 2a1. Teacher can clear fields and exit the procedure
 
-* **4a. Class with description already exists**
+* **4a. Lesson with description already exists**
 
-    * 4a1. System alerts the teacher that the class exists and displays its details
+    * 4a1. System alerts the teacher that the lesson exists and displays its details
 
-* **4b. Invalid class details (see features)**
+* **4b. Invalid lesson details (see features)**
 
     * 4b1. System alerts the teacher and prompts them to correct the invalid information
 
 
-## UC2: Delete a class
+## UC2: Delete a lesson
 
-* Postcondition: An existing class is deleted
+* Postcondition: An existing lesson is deleted <br>
 
 **MSS**
 
-1.  Teacher initiates the process to delete a new class in EduLog
-2.  System provides the required fields for class information
+1.  Teacher initiates the process to delete a new lesson in EduLog
+2.  System provides the required fields for lesson information
 3.  Teacher supplies the information
 4.  System validates the provided information to ensure it meets any specified criteria.
-5.  System confirms that class has been deleted
+5.  System confirms that lesson has been deleted
 Use case ends.
 
 ### **Extension:**
 
-* **2a. Teacher wants to abort the ‘delete class’ process**
+* **2a. Teacher wants to abort the ‘delete lesson’ process**
 
     * 2a1. Teacher can clear fields and exit the procedure
 
-* **4a. Class with description does not exist**
+* **4a. Lesson with description does not exist**
 
-    * 4a1. System alerts the teacher that the class does not exist, and prompts user to check again
+    * 4a1. System alerts the teacher that the lesson does not exist, and prompts user to check again
 
-* **4b. Invalid class details (see features)**
+* **4b. Invalid lesson details (see features)**
 
     * 4b1. System alerts the teacher and prompts them to correct the invalid information
 
@@ -360,7 +360,7 @@ Use case ends.
 
 **System**: EduLog
 **Actor**: Teacher 
-**Postcondition**: A student, with at least a name, is successfully enrolled in at least one class
+**Postcondition**: A student, with at least a name, is successfully enrolled in at least one lesson <br>
 
 **MSS:**
 
@@ -385,16 +385,16 @@ Use case ends.
 - **4c. Subject does not exist**
   System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
 
-- **4d. Class does not exist**
-  System prompts the teacher to first create the class using <u>UC1: Add a Class</u>.
+- **4d. Lesson does not exist**
+  System prompts the teacher to first create the lesson using <u>UC1: Add a Lesson</u>.
 
 - **4e. Tag does not exist**
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
 ## UC4: Edit student
 
-**System**: EduLog
-**Actor**: Teacher 
+**System**: EduLog <br>
+**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to edit an existing student in EduLog.
@@ -417,16 +417,16 @@ Use case ends.
 - **4c. Subject does not exist**
   System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
 
-- **4d. Class does not exist**
-  System prompts the teacher to first create the class using <u>UC1: Add a Class</u>.
+- **4d. Lesson does not exist**
+  System prompts the teacher to first create the lesson using <u>UC1: Add a Lesson</u>.
 
 - **4e. Tag does not exist**
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
 ## UC5: Create Tag
 
-**System**: EduLog
-**Actor**: Teacher
+**System**: EduLog <br>
+**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to create a new tag.
@@ -449,8 +449,8 @@ Use case ends.
 
 ## UC6: Edit tag
 
-**System**: EduLog
-**Actor**: Teacher
+**System**: EduLog <br>
+**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to edit an existing tag.
@@ -474,8 +474,8 @@ Use case ends.
 
 ## UC7: Delete tag
 
-**System**: EduLog
-**Actor**: Teacher
+**System**: EduLog <br>
+**Actor**: Teacher <br>
 
 **MSS:**
 
@@ -492,11 +492,11 @@ Use case ends.
 - **2a. Teacher wants to abort the ‘delete tag’ process:**
   Teacher cancels the operation and exits the procedure without deleting the tag.
 
-## UC8: View students (Nikhil)
+## UC8: View students
 
-**System:** EduLog
-**Actor:** Teacher  
-**Precondition:** The teacher is logged into the app.
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
 
@@ -516,12 +516,12 @@ Steps 1a1-1a2 are repeated until an existing student is selected.
 
 Use case resumes from Step 2.
 
-## UC9: Remove student (Nikhil)
+## UC9: Delete student
 
-**System:** EduLog
-**Actor:** Teacher
-**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher.
-**Postcondition:** The student is removed from the teacher’s list of students.
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher. <br>
+**Postcondition:** The student is removed from the teacher’s list of students. <br>
 
 **MSS:**
 
@@ -542,17 +542,56 @@ Use case ends.
 
 ## UC10: Display gift
 
-**System:** EduLog
-**Actor:** Teacher
-**Precondition:** The teacher is logged into the app.
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
 
 1. Teacher requests to see a suggested gift.  
 2. System displays a suggested gift.
+3. 
 Use case ends.
 
+## UC 12: Mark all student
+**System:** EduLog <br>
+**Actor:** Teacher <br>
 
+**MSS:**
+
+1. Teacher types `markall` into the command box
+2. The student list is updated. All the students have a green tick beside their name. Use case ends.
+
+## UC 13: Unmark all students
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+
+**MSS:**
+1. Teacher types `unmarkall` into the command box
+2. The student list is updated. All students now have a red cross beside their name. Use case ends
+
+## UC15: Calculate Revenue
+
+**System:** Edulog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app.
+
+**MSS:**
+
+1. Teacher chooses to search for revenue
+2. Teacher specifies the revenue type to be revenue paid
+3. Edulog retrieves and displays a list of students who have not paid their fee. 
+4. Edulog shows the total amount of the unpaid fees.  
+
+Use case ends.
+
+**Extensions:**
+
+- **3a. Teacher specifies the revenue type to be revenue unpaid.**
+    1. Edulog retrieves and displays a list of students who have not paid their fee.
+    2. Edulog shows the total amount of the unpaid fees.
+  
+Use case ends.
 
 ### Non-Functional Requirements
 
