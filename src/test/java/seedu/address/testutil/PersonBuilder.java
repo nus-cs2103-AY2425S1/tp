@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Sex;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,12 +20,14 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_SEX = "F";
     public static final String DEFAULT_ROLE = "Parent";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
+    private Sex sex;
     private Role role;
     private Phone phone;
     private Email email;
@@ -36,6 +39,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
+        sex = new Sex(DEFAULT_SEX);
         role = new Role(DEFAULT_ROLE);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -48,6 +52,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
+        sex = personToCopy.getSex();
         role = personToCopy.getRole();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -104,9 +109,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Sex} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSex(String sex) {
+        this.sex = new Sex(sex);
+        return this;
+    }
+
 
     public Person build() {
-        return new Person(name, role, phone, email, address, tags);
+        return new Person(name, sex, role, phone, email, address, tags);
     }
 
 

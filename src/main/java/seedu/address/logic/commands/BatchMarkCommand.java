@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Sex;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
@@ -76,6 +77,7 @@ public class BatchMarkCommand extends Command {
 
         this.hasStudent = true;
         Name name = studentToMark.getName();
+        Sex sex = studentToMark.getSex();
         Role role = studentToMark.getRole();
         Phone phone = studentToMark.getPhone();
         Email email = studentToMark.getEmail();
@@ -84,7 +86,7 @@ public class BatchMarkCommand extends Command {
         Integer newAttendanceCountInt = studentToMark.getAttendanceCount().integerCount() + 1;
         String newAttendanceCountStr = newAttendanceCountInt.toString();
         AttendanceCount newAttendanceCount = new AttendanceCount(newAttendanceCountStr);
-        return new Student(name, role, phone, email, address, tags, newAttendanceCount);
+        return new Student(name, sex, role, phone, email, address, tags, newAttendanceCount);
     }
 
     /**

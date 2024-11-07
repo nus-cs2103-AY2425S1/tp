@@ -19,6 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Sex;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
@@ -73,13 +74,14 @@ public class UnmarkCommand extends Command {
     private Student createNewUnmarkedStudent(Student selectedStudent) {
         assert selectedStudent != null;
         Name name = selectedStudent.getName();
+        Sex sex = selectedStudent.getSex();
         Role role = selectedStudent.getRole();
         Phone phone = selectedStudent.getPhone();
         Email email = selectedStudent.getEmail();
         Address address = selectedStudent.getAddress();
         Set<Tag> tags = selectedStudent.getTags();
         AttendanceCount attendanceCount = selectedStudent.getAttendanceCount().decrement();
-        return new Student(name, role, phone, email, address, tags, attendanceCount);
+        return new Student(name, sex, role, phone, email, address, tags, attendanceCount);
 
     }
 

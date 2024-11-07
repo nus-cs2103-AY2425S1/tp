@@ -36,7 +36,8 @@ public class UnmarkCommandTest {
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_PERSON_SUCCESS,
                 Messages.getNameOnly(personToUnmark));
 
-        Person newPerson = new Person(personToUnmark.getName(), personToUnmark.getRole(), personToUnmark.getPhone(),
+        Person newPerson = new Person(personToUnmark.getName(), personToUnmark.getSex(), personToUnmark.getRole(),
+                personToUnmark.getPhone(),
                 personToUnmark.getEmail(), personToUnmark.getAddress(), personToUnmark.getTags(),
                 new AttendanceCount(incrementedAttendanceCount.toString()));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
