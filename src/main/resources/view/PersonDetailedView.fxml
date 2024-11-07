@@ -6,13 +6,13 @@
 <?import javafx.scene.image.ImageView?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      alignment="CENTER" spacing="15" styleClass="root">
+      alignment="CENTER" spacing="15" styleClass="root" maxHeight="300">
 
     <stylesheets>
         <URL value="@PersonView.css" />
     </stylesheets>
 
-    <ImageView fx:id="profileImage" fitHeight="100" fitWidth="100" styleClass="image-view" />
+    <ImageView fx:id="profileImage" fitHeight="100" fitWidth="100" preserveRatio="true" styleClass="image-view" />
 
     <Label fx:id="name" text="\$first" styleClass="label-name" />
     <Label fx:id="phone" text="\$phone" styleClass="label-phone" />
@@ -32,10 +32,6 @@
         <Button fx:id="templateButton1" text="Template 1" styleClass="button-template"/>
         <Button fx:id="templateButton2" text="Template 2" styleClass="button-template"/>
         <Button fx:id="templateButton3" text="Template 3" styleClass="button-template"/>
-    </HBox>
-
-    <HBox fx:id="notificationBox" alignment="BOTTOM_RIGHT" style="-fx-padding: 10 10 0 0;" spacing="10">
-        <Label fx:id="notificationLabel" text="" styleClass="notification-label" visible="false"/>
     </HBox>
 
 </VBox>
