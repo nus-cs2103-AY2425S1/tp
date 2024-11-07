@@ -8,6 +8,7 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -33,7 +34,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_IC, PREFIX_SUBJECT);
+                        PREFIX_IC, PREFIX_YEARGROUP, PREFIX_SUBJECT);
 
         StudentId studentId;
 
@@ -61,6 +62,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_IC).isPresent()) {
             editPersonDescriptor.setIc(ParserUtil.parseIc(argMultimap.getValue(PREFIX_IC).get()));
+        }
+        if (argMultimap.getValue(PREFIX_YEARGROUP).isPresent()) {
+            editPersonDescriptor.setYearGroup((ParserUtil.parseYearGroup(argMultimap.getValue(
+                    PREFIX_YEARGROUP).get())));
         }
         parseSubjectsForEdit(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(editPersonDescriptor::setSubjects);
 

@@ -24,23 +24,15 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the system.\n"
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_IC + "IC "
-            + PREFIX_YEARGROUP + "YEARGROUP "
-            + PREFIX_SUBJECT + "SUBJECT " + "\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_IC + "S1234567A "
-            + PREFIX_YEARGROUP + "1 "
-            + PREFIX_SUBJECT + "English "
-            + PREFIX_SUBJECT + "Science ";
+            + "Parameters: \n"
+            + PREFIX_NAME + "NAME  e.g. John Smith\n"
+            + PREFIX_PHONE + "PHONE  e.g. 98382673\n"
+            + PREFIX_IC + "NRIC  e.g. S9238263A\n"
+            + PREFIX_YEARGROUP + "YEARGROUP  e.g. 1\n"
+            + PREFIX_EMAIL + "EMAIL  e.g. john.smith@example.com\n"
+            + PREFIX_ADDRESS + "ADDRESS  e.g. 311, Clementi Ave 2, #02-25\n"
+            + PREFIX_SUBJECT + "SUBJECT  e.g. English" + "\n"
+            + "[" + PREFIX_SUBJECT + "MORE_SUBJECTS]...  e.g. Chinese";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
 
@@ -62,8 +54,8 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_IC);
         }
 
-        model.incrementStudentCount();
-        Person toAddWithId = toAdd.assignStudentId(model.getStudentCount());
+        model.incrementIdGeneratedCount();
+        Person toAddWithId = toAdd.assignStudentId(model.getIdGeneratedCount());
         model.addPerson(toAddWithId);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAddWithId)));
     }

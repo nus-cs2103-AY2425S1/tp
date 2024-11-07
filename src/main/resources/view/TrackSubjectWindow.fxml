@@ -26,6 +26,7 @@
                 </padding>
                 <children>
                     <Label styleClass="header-label" text="Subject Statistics" />
+                    <Label styleClass="descriptor-label" fx:id="description" />
                     <ScrollPane fitToWidth="true" styleClass="stats-scroll-pane">
                         <VBox fx:id="subjectStatsBox" alignment="TOP_CENTER" spacing="5" styleClass="stats-container">
                             <!-- Subject statistics will be added here dynamically -->

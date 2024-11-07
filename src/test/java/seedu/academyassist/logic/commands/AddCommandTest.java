@@ -204,12 +204,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void incrementStudentCount() {
+        public void incrementIdGeneratedCount() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public int getStudentCount() {
+        public int getIdGeneratedCount() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -253,7 +253,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-        private int studentCount = 0;
+        private int idGeneratedCount = 0;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -271,17 +271,17 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
-            incrementStudentCount();
+            incrementIdGeneratedCount();
         }
 
         @Override
-        public void incrementStudentCount() {
-            studentCount++;
+        public void incrementIdGeneratedCount() {
+            idGeneratedCount++;
         }
 
         @Override
-        public int getStudentCount() {
-            return studentCount;
+        public int getIdGeneratedCount() {
+            return idGeneratedCount;
         }
 
         @Override

@@ -8,13 +8,13 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.academyassist.commons.util.CollectionUtil;
 import seedu.academyassist.commons.util.ToStringBuilder;
 import seedu.academyassist.logic.Messages;
@@ -27,7 +27,6 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.StudentId;
-import seedu.academyassist.model.person.StudentIdMatchesPredicate;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
 
@@ -41,14 +40,14 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the student id. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: Student ID (S followed by 5-digit number) "
+            + "Parameters: Student ID (S followed by a 5-digit number between 00001 and 99999) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_IC + "IC] "
-            + "[" + PREFIX_IC + "YEARGROUP] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
+            + "[" + PREFIX_YEARGROUP + "YEARGROUP] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... \n"
             + "Example: " + COMMAND_WORD + " S12345 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -75,14 +74,12 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FilteredList<Person> filteredPersonList = new FilteredList<>(model.getFilteredPersonList());
-        filteredPersonList.setPredicate(new StudentIdMatchesPredicate(studentId));
 
-        if (filteredPersonList.isEmpty()) {
+        if (!model.hasPersonWithStudentId(studentId)) {
             throw new CommandException(Messages.MESSAGE_NO_STUDENT_FOUND);
         }
 
-        Person personToEdit = filteredPersonList.get(0);
+        Person personToEdit = model.getPersonWithStudentId(studentId);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         boolean hasIcModified = !personToEdit.getIc().equals(editedPerson.getIc());

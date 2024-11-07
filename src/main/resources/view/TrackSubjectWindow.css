@@ -41,3 +41,10 @@
     -fx-text-fill: #124264;
     -fx-font-weight: bold;
 }
+
+.descriptor-label {
+    -fx-text-fill: #124264;
+    -fx-font-family: "Verdana Bold", Helvetica, sans-serif;
+    -fx-font-size: 14px;
+    -fx-padding: 5 0 10 0;
+}

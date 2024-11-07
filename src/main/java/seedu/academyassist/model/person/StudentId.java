@@ -12,7 +12,7 @@ public class StudentId {
             "Student ID should only contain alphanumeric characters and must be "
             + "S followed by a 5-digit number between 00001 and 99999";
     public static final StudentId TEMPORARY_STUDENT_ID = new StudentId("S99999");
-    public static final String VALIDATION_REGEX = "^S(?!00000)\\d{5}$";
+    public static final String VALIDATION_REGEX = "^[Ss](?!00000)\\d{5}$";
     public final String value;
 
     /**
@@ -35,8 +35,8 @@ public class StudentId {
     /**
      * Generates and returns a new unassigned student id.
      */
-    public static StudentId generateNewStudentId(int studentCount) {
-        return new StudentId(String.format("S%05d", studentCount));
+    public static StudentId generateNewStudentId(int idGeneratedCount) {
+        return new StudentId(String.format("S%05d", idGeneratedCount));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class StudentId {
         }
 
         StudentId otherStudentId = (StudentId) other;
-        return value.equals(otherStudentId.value);
+        return value.equalsIgnoreCase(otherStudentId.value);
     }
 
     @Override

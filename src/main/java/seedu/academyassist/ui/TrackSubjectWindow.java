@@ -27,10 +27,16 @@ public class TrackSubjectWindow extends UiPart<Stage> {
     private static final String FXML = "TrackSubjectWindow.fxml";
 
     @FXML
+    private Label headerLabel;
+
+    @FXML
     private VBox subjectStatsBox;
 
     @FXML
     private Label closeWindowMessage;
+
+    @FXML
+    private Label description;
 
     @FXML
     private Scene scene;
@@ -99,6 +105,8 @@ public class TrackSubjectWindow extends UiPart<Stage> {
     public void show() {
         logger.fine("Showing subject statistics.");
         updateSubjectStats();
+        description.setText("This window displays the current enrolment statistics for each subject based on the "
+                + "current list of students.");
         closeWindowMessage.setText("Press 'B' to close this window.");
 
         getRoot().show();

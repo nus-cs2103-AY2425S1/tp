@@ -20,7 +20,7 @@ import seedu.academyassist.model.person.UniquePersonList;
 public class AcademyAssist implements ReadOnlyAcademyAssist {
 
     private final UniquePersonList persons;
-    private int studentCount;
+    private int idGeneratedCount;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,7 +31,7 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
      */
     {
         persons = new UniquePersonList();
-        studentCount = 0;
+        idGeneratedCount = 0;
     }
 
     public AcademyAssist() {}
@@ -61,7 +61,7 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        studentCount = newData.getStudentCount();
+        idGeneratedCount = newData.getIdGeneratedCount();
     }
 
     //// person-level operations
@@ -173,28 +173,27 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
      * Adds {@code subject} to {@code person}
      */
     public void addSubjectsToPerson(Set<Subject> subjects, Person person) {
-        persons.remove(person);
+        Person updatedPerson = person;
         for (Subject s: subjects) {
-            person = person.addSubject(s);
+            updatedPerson = updatedPerson.addSubject(s);
         }
-        persons.add(person);
-
+        persons.setPerson(person, updatedPerson);
     }
 
     //// student count operations
 
     /**
-     * Set the {@code studentCount} of {@code AcademyAssist} to the provided value.
+     * Set the {@code idGeneratedCount} of {@code AcademyAssist} to the provided value.
      */
-    public void setStudentCount(int studentCount) {
-        this.studentCount = studentCount;
+    public void setIdGeneratedCount(int idGeneratedCount) {
+        this.idGeneratedCount = idGeneratedCount;
     }
 
     /**
-     * Increment {@code studentCount} by 1.
+     * Increment {@code idGeneratedCount} by 1.
      */
-    public void incrementStudentCount() {
-        studentCount++;
+    public void incrementIdGeneratedCount() {
+        idGeneratedCount++;
     }
 
     //// util methods
@@ -212,8 +211,8 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     }
 
     @Override
-    public int getStudentCount() {
-        return studentCount;
+    public int getIdGeneratedCount() {
+        return idGeneratedCount;
     }
 
     @Override

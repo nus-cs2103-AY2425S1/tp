@@ -11,13 +11,16 @@ import static seedu.academyassist.testutil.TypicalPersons.getTypicalAcademyAssis
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.exceptions.DuplicatePersonException;
 import seedu.academyassist.testutil.PersonBuilder;
 
@@ -76,6 +79,28 @@ public class AcademyAssistTest {
     }
 
     @Test
+    public void addSubjectsToPerson_oneSubject_success() {
+        academyAssist.addPerson(ALICE);
+        //Alice already taking English
+        Person updatedAlice = new PersonBuilder(ALICE).withSubjects("English", "Math").build();
+        Subject subjectToAdd = new Subject("Math");
+        academyAssist.addSubjectsToPerson(new HashSet<>(List.of(subjectToAdd)), ALICE);
+        assertTrue(academyAssist.getPersonList().contains(updatedAlice));
+    }
+
+    @Test
+    public void addSubjectsToPerson_multipleSubjects_success() {
+        academyAssist.addPerson(ALICE);
+        //Alice already taking English
+        Person updatedAlice = new PersonBuilder(ALICE).withSubjects("English", "Math", "Chinese", "Science").build();
+        Set<Subject> subjectsToAdd = new HashSet<>(List.of(new Subject("Math"), new Subject("Chinese"),
+                new Subject("Science")));
+        academyAssist.addSubjectsToPerson(subjectsToAdd, ALICE);
+        assertTrue(academyAssist.getPersonList().contains(updatedAlice));
+    }
+
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> academyAssist.getPersonList().remove(0));
     }
@@ -102,7 +127,7 @@ public class AcademyAssistTest {
         }
 
         @Override
-        public int getStudentCount() {
+        public int getIdGeneratedCount() {
             return 0;
         }
     }

@@ -53,11 +53,8 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        ic.setText(person.getIc().value);
         studentId.setText(person.getStudentId().value);
+        phone.setText(person.getPhone().value);
         Label yearGroup = new Label("Year: " + person.getYearGroup().value);
         yearGroup.setStyle("-fx-background-color: #8fd3fe; -fx-text-fill: white");
         tags.getChildren().add(yearGroup);

@@ -10,8 +10,10 @@ import seedu.academyassist.commons.util.AppUtil;
 public class Ic {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "IC should only contain alphanumeric characters and spaces, "
-                    + "and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A)";
+            "NRIC should only contain alphanumeric characters, "
+                    + "and should follow the format of Singaporean NRIC and FIN numbers:\n"
+                    + "They should only start with one of 'S, T, F, G, M' followed by a 7 digits number "
+                    + "and end with an alphabet (e.g. S1234567A)";
     public static final String VALIDATION_REGEX = "^[STFGM]\\d{7}[A-Z]$";
     public final String value;
 

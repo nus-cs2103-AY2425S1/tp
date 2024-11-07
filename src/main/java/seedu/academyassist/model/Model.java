@@ -136,14 +136,14 @@ public interface Model {
     void sortAcademyAssistByYearGroup();
 
     /**
-     * Increment student count by 1.
+     * Increment {@code idGeneratedCount} by 1.
      */
-    void incrementStudentCount();
+    void incrementIdGeneratedCount();
 
     /**
-     * Returns student count from academy assist management system.
+     * Returns {@code idGeneratedCount} from academy assist management system.
      */
-    int getStudentCount();
+    int getIdGeneratedCount();
 
     /**
      * Returns person from academy assist management system with given ic.
