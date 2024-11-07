@@ -117,15 +117,21 @@ When EduVault is first started, you will see an interface like the one below, ma
 
 #### **1.3 Brief Walkthrough**
 
-As a start, type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+This section provides a quick walkthrough of the basic functionalities of EduVault and how to use them. You'll learn how to add a student to EduVault
+and mark their attendance for a tutorial.
 
-Some example commands you can try:
+As a start, type the command `list` in the command box and press Enter to execute it. This will display all students currently in EduVault.
 
-1. `list` : Lists all contacts.
-  2. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/false attend/true` : Adds a student named `John Doe` to the Address Book, where he has not made payment but has attended the tuition classes.
-  3. `delete 3` : Deletes the 3rd contact shown in the current list.
-  4. `clear` : Deletes all contacts.
-  5. `exit` : Exits the app.
+If you need help at any time, typing **`help`** and pressing Enter will open the help window.
+
+Next, try executing the following commands in the given order:
+
+1. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a student named `John Doe` to EduVault.
+2. `createtut tut/Math` : Creates a tutorial named `Math`.
+3. `enroll INDEX tut/Math` : Enrolls `John Doe` into `Math` tutorial. Replace `INDEX` with the index number of `John Doe` shown in the list. 
+4. `mas INDEX tut/Math attend/10/10/2024` : Marks the attendance for `John Doe` for `Math` tutorial for date 10/10/2024. Replace `INDEX` with the index number of `John Doe` shown in the list.
+
+And that's it! You've learnt how to add students and mark attendance in EduVault.
 
 <div markdown="span" class="alert alert-success">:bulb: **Tip:**
 Continue reading this guide to learn about the full functionalities of EduVault.
