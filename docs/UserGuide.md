@@ -47,11 +47,13 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
+   * `export format\csv` : Exports contact data in the CSV format.
+
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
-1. For more details on each command, refer to the [Features](#features) section below.
+2. For more details on each command, refer to the [Features](#features) section below.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -101,11 +103,13 @@ A tag can be added with or without a value. For example, `t\client` and `t\insur
 </box>
 
 <box type="warning" seamless>
-**Tag constraints:**<br>
+
+**Tag constraints:** <br>
 * Only alphanumeric characters (alphabets and numbers) are supported in tags<br>
 * Multiple of the same tags are not supported for a single contact<br>
 * Negative numbers are not supported in tag values<br>
 * Operations such as `+, -, *, /` are also not supported in tag values<br>
+
 </box>
 
 Command examples:
@@ -177,7 +181,7 @@ Format: `filter [n\NAME] [t\TAG]…​`
 * n\NAME specifies a name (or partial name) to filter by.
 * t\TAG specifies a tag to filter by. You can provide multiple tags.
 * If both n\NAME and t\TAG are provided, the command will display contacts matching both the name and tags.
-* If no parameters are provided, the full list is displayed.
+* If no parameters are provided, an unfiltered list of contacts will be displayed.
 
 Examples:
 * filter `n\John` filters and displays all contacts whose names contain "John".
@@ -261,20 +265,29 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-**Q**: How do I use the data in another application, such as Microsoft Excel?<br>
-**A**: Type in the command `export format\csv` or click on the Export button followed by CSV. Then, from the folder in which you installed BA€, navigate to the data folder, copy the file named `addressbook.csv` over to your desired file location. Finally, open the file using Microsoft Excel.
+**Q**: How can I open my contact data in another application, such as Microsoft Excel?  
+
+1. Create a data export in your preferred file format.
+    * For CSV exports: type the command `export format\csv` or click `Export` > `Export to CSV`.
+    * For TXT exports: type the command `export format\txt` or click `Export` > `Export to TXT`.
+    * A confirmation message will appear onscreen after the export is complete.
+2. Navigate to the folder where BA€ was installed.
+3. Open the `/data/` folder.
+4. Open your data export file (`addressbook.csv`/`addressbook.txt`) in your application of choice.
+
+**Q**: How can I open my data in BA€ on a different computer?  
+
+1. Install BA€ on your secondary computer.
+2. Copy your data file (`addressbook.json`) from BA€'s `/data/` folder on your primary computer.
+3. Paste the copied data file in BA€'s `/data/` folder on your secondary computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -285,6 +298,7 @@ _Details coming soon ..._
 3. **If you accidentally press the alt key (Windows, Linux) or option key (MacOS)** on your keyboard while typing a command, the arrow keys will no longer navigate the command box. To rectify this, press the alt/option key again.
 3. **If you add very long names, tags, or other information** (> 80 characters) to contacts, and the application window is not wide enough to display the entire line of text, the text will be truncated with `...` at the end.
 4. **If you want to add tags to an existing contact**, you need to type in all existing tags to retain them.
+5. **Advfilter does not accept mathematical expressions as values**. Mathematical expressions encompass any non-alphanumeric strings that include operators such as `+`, `-`, `/`, and `*`. Hence, commands such as `advfilter t\neighbours >= 10/3` will be considered invalid.
 
 --------------------------------------------------------------------------------------------------------------------
 
