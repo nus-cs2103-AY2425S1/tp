@@ -337,22 +337,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts
-2.  KnottyPlanners shows a list of contacts
-3.  User requests to add a wedding tag to a specific contact in the list
-4.  KnottyPlanners adds the wedding tag to that contact
+1. User requests to tag a wedding to a person
+2. KnottyPlanners tags the person to the wedding
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The wedding is not yet created.
 
-  Use case ends.
+    * 1a1. KnottyPlanners shows an error message that prompts the user to create a wedding first.
 
-* 3a. The given tag name is invalid.
+      Use case ends.
 
-    * 3a1. KnottyPlanners shows an error message.
+* 1b. The given wedding name is in an invalid format.
+
+    * 1b1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
