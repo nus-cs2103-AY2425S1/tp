@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
     public static final String MESSAGE_CONSTRAINTS = "Roles can only take in values part of this list, "
-            + "stage manager, sound technician, organiser, artist, promoter";
+            + "stage manager, sound technician, organiser, artist, promoter"
+            + ", venue coordinator, security, logistics, media";
 
     /**
      * All the possible valid roles that can be assigned
@@ -19,7 +20,11 @@ public class Role {
         SOUND_TECHNICIAN,
         ORGANISER,
         ARTIST,
-        PROMOTER
+        PROMOTER,
+        VENUE_COORDINATOR,
+        SECURITY,
+        LOGISTICS,
+        MEDIA
     }
 
     public final String value;
