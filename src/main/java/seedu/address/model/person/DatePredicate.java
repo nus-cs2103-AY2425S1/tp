@@ -24,7 +24,7 @@ public class DatePredicate implements Predicate<Person> {
      * If the current date and time is null, all dates are considered acceptable.
      *
      * @param otherDate The date and time to compare.
-     * @return {@code true} if the date abd tune match or if the current date and time is null, {@code false} otherwise.
+     * @return {@code true} if the date and time match or if the current date and time is null, {@code false} otherwise.
      */
     public boolean isDateTrue(Date otherDate) {
         return date == null || date.equals(otherDate);

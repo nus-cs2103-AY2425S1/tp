@@ -54,10 +54,8 @@ public class Messages {
         if (person.getTag() != null) {
             builder.append("; Tag: ").append(person.getTag());
         }
-
-        if (person.getAllergy() != null) {
-            builder.append("; Allergy: ").append(person.getAllergy());
-        }
+        builder.append("; Allergies: ");
+        person.getAllergies().forEach(builder::append);
         return builder.toString();
     }
 }

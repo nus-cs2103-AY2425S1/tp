@@ -1,0 +1,52 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "  <<interface>>  \nParser" as Parser<DateCommand>
+Class DateCommandParser {
+    -
+    parser(String): DateCommand
+}
+
+Class DateCommand {
+  -date : LocalDate
+  -startTime : StartTime
+  -endTime: EndTime
+  execute(Model) : CommandResult
+}
+
+Class Model {
+    hasOverlappingDate(date): boolean
+}
+Class CommandResult
+
+Class ArgumentMultimap
+Class ParserUtil
+
+Class Person {
+  -dateTime : DateTime
+  -other relevant attributes...
+}
+Class OtherRelevantAttributes
+Class DateTime {
+    -date: LocalDate
+    -startTime: LocalTime
+    -endTime: LocalTime
+    isOverlappingDate(time,time): boolean
+}
+
+DateCommandParser .up.|> Parser
+
+DateCommandParser .down.> DateCommand: initialize >
+DateCommandParser .right.> ArgumentMultimap: utilizes >
+DateCommandParser .right.> ParserUtil: utilizes >
+
+DateCommand .down.> CommandResult: outputs >
+DateCommand .left.>Model: utilizes
+
+DateCommand -right-> Person: creates appointment for person >
+Person *-down-> DateTime: has >
+Person *-down-> OtherRelevantAttributes: has >
+
+
+@enduml

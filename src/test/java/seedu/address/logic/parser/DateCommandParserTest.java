@@ -22,19 +22,24 @@ public class DateCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE);
 
         // No parameters (no identifying prefixes and no date prefix)
-        assertParseFailure(parser, DateCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, DateCommand.COMMAND_WORD,
+                "At least one identifier (name, phone, or email) must be provided. " + expectedMessage);
 
         // Only date provided, but no Name, Phone, or Email
-        assertParseFailure(parser, DateCommand.COMMAND_WORD + " " + nonEmptyDate, expectedMessage);
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " " + nonEmptyDate,
+                "At least one identifier (name, phone, or email) must be provided. " + expectedMessage);
 
         // Only Name provided, but no date prefix
-        assertParseFailure(parser, DateCommand.COMMAND_WORD + " n/Nayana", expectedMessage);
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " n/Nayana",
+                "A date is required. Please include a date. " + expectedMessage);
 
         // Only Phone provided, but no date prefix
-        assertParseFailure(parser, DateCommand.COMMAND_WORD + " p/12345678", expectedMessage);
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " p/12345678",
+                "A date is required. Please include a date. " + expectedMessage);
 
         // Only Email provided, but no date prefix
-        assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/email@example.com", expectedMessage);
+        assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/email@example.com",
+                "A date is required. Please include a date. " + expectedMessage);
     }
 
     @Test

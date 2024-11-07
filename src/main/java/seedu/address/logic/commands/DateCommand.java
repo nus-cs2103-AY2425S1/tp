@@ -43,6 +43,7 @@ public class DateCommand extends Command {
     public static final String MESSAGE_DELETE_DATE_SUCCESS = "Removed date from Person: %1$s";
     public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found."
             + " Use more attributes (name, phone number, email) to identify the exact person.";
+
     public static final String MESSAGE_NO_PERSON_FOUND = "No matching person found. Please check the details.";
     public static final String MESSAGE_OVERLAPPING_DATES = "Given date & time coincides with another appointment below."
             + " Please choose another date and time.";
@@ -70,6 +71,7 @@ public class DateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         // Filter persons based on provided criteria
@@ -98,7 +100,7 @@ public class DateCommand extends Command {
 
         Person personToEdit = matchingPersons.get(0);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTag(), personToEdit.getAllergy(), date);
+                personToEdit.getAddress(), personToEdit.getTag(), personToEdit.getAllergies(), date);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
