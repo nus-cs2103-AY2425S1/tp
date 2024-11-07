@@ -14,10 +14,8 @@ import seedu.address.model.Model;
 public class HomeCommand extends Command {
 
     public static final String COMMAND_WORD = "home";
-
     public static final String MESSAGE_SUCCESS = "Returned to home page" + "\n"
             + MESSAGE_PATIENTS_LISTED_OVERVIEW;
-
 
     @Override
     public CommandResult execute(Model model) {
