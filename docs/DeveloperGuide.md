@@ -179,17 +179,19 @@ The `Storage` component manages data persistence by saving and loading various p
     - `PastryCatalogueStorage`
 
 #### **Key Interfaces and Classes**
-| Interface/Class                     | Description                                                                                  |
-|-------------------------------------|----------------------------------------------------------------------------------------------|
-| `StorageManager`                    | Central manager that implements the `Storage` interface and handles all storage operations.   |
-| `JsonUserPrefsStorage`              | Implements `UserPrefsStorage`. Handles saving and loading of user preferences.               |
-| `JsonAddressBookStorage`            | Implements `AddressBookStorage`. Handles saving and loading of `AddressBook` data.           |
-| `JsonSupplyOrderListStorage`        | Implements `SupplyOrderListStorage`. Handles saving and loading of `SupplyOrderList`.        |
-| `JsonCustomerOrderListStorage`      | Implements `CustomerOrderListStorage`. Handles saving and loading of `CustomerOrderList`.     |
-| `JsonIngredientCatalogueStorage`    | Implements `IngredientCatalogueStorage`. Handles saving and loading of `IngredientCatalogue`. |
-| `JsonPastryCatalogueStorage`        | Implements `PastryCatalogueStorage`. Handles saving and loading of `PastryCatalogue`.        |
 
-### **JSON-Adapted Classes and Their Usage**
+| Interface/Class                  | Description                                                                                   |
+|----------------------------------|-----------------------------------------------------------------------------------------------|
+| `StorageManager`                 | Central manager that implements the `Storage` interface and handles all storage operations.    |
+| `JsonUserPrefsStorage`           | Implements `UserPrefsStorage`. Handles saving and loading of user preferences.                |
+| `JsonAddressBookStorage`         | Implements `AddressBookStorage`. Handles saving and loading of `AddressBook` data.            |
+| `JsonSupplyOrderListStorage`     | Implements `SupplyOrderListStorage`. Handles saving and loading of `SupplyOrderList`.         |
+| `JsonCustomerOrderListStorage`   | Implements `CustomerOrderListStorage`. Handles saving and loading of `CustomerOrderList`.      |
+| `JsonIngredientCatalogueStorage` | Implements `IngredientCatalogueStorage`. Handles saving and loading of `IngredientCatalogue`.  |
+| `JsonPastryCatalogueStorage`     | Implements `PastryCatalogueStorage`. Handles saving and loading of `PastryCatalogue`.         |
+
+
+#### **JSON-Adapted Classes and Their Usage**
 Each data type uses specialized `JsonAdapted` classes to handle JSON serialization and deserialization. These classes ensure data consistency and validate constraints during data conversion.
 
 | **JSON-Adapted Class**              | **Used By (JSON Classes)**           | **Purpose**                                                               |
@@ -204,7 +206,7 @@ Each data type uses specialized `JsonAdapted` classes to handle JSON serializati
 
 ---
 
-### Storage Workflow
+#### Storage Workflow
 
 1. **Application Startup**:
     - The `MainApp` initializes the `StorageManager`.
@@ -228,7 +230,7 @@ Each data type uses specialized `JsonAdapted` classes to handle JSON serializati
     - On startup, `StorageManager` reads data from JSON files.
     - The data is deserialized into in-memory objects and passed to the `Model`.
 
-### Error Handling
+#### Error Handling
 
 The `Storage` component employs robust error handling to manage potential issues:
 - **DataLoadingException**:

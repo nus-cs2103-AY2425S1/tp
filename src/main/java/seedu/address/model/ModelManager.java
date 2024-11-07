@@ -173,18 +173,12 @@ public class ModelManager implements Model {
     public void associateOrdersWithPersons() {
         for (CustomerOrder customerOrder : customerOrderList.getOrders()) {
             addressBook.findPersonByPhone(customerOrder.getPerson().getPhone())
-                    .ifPresent(person -> {
-                        customerOrder.setOriginalPerson(person);
-                        person.addOrder(customerOrder);
-                    });
+                    .ifPresent(person -> person.addOrder(customerOrder));
         }
 
         for (SupplyOrder supplyOrder : supplyOrderList.getOrders()) {
             addressBook.findPersonByPhone(supplyOrder.getPerson().getPhone())
-                    .ifPresent(person -> {
-                        supplyOrder.setOriginalPerson(person);
-                        person.addOrder(supplyOrder);
-                    });
+                    .ifPresent(person -> person.addOrder(supplyOrder));
         }
     }
 

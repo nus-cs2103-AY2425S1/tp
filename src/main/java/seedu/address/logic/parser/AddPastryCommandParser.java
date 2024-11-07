@@ -40,18 +40,26 @@ public class AddPastryCommandParser implements Parser<AddPastryCommand> {
         }
 
         if (costIndex == -1) {
-            throw new ParseException("The cost must be a valid number.");
+            throw new ParseException(String.format("The cost must be a valid number.\n%s",
+                    AddPastryCommand.MESSAGE_USAGE));
         }
 
         if (cost <= 0) {
-            throw new ParseException("The cost must be a positive number.");
+            throw new ParseException(String.format("The cost must be a positive number.\n%s",
+                    AddPastryCommand.MESSAGE_USAGE));
+        }
+        // Extract the ingredient names, which are everything after the cost
+        List<String> ingredientNames = List.of(splitArgs).subList(costIndex + 1, splitArgs.length);
+
+        // Check if there are any ingredients provided
+        if (ingredientNames.isEmpty()) {
+            throw new ParseException(String.format("At least one ingredient must be used.\n%s",
+                    AddPastryCommand.MESSAGE_USAGE));
         }
 
         // Extract the pastry name, which is everything before the cost
         String name = String.join(" ", List.of(splitArgs).subList(0, costIndex));
 
-        // Extract the ingredient names, which are everything after the cost
-        List<String> ingredientNames = List.of(splitArgs).subList(costIndex + 1, splitArgs.length);
         ArrayList<Ingredient> ingredients = parseIngredients(ingredientNames);
 
         return new AddPastryCommand(name, cost, ingredients);

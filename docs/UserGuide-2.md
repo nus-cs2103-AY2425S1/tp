@@ -2,10 +2,6 @@
 layout: page
 title: User Guide
 ---
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 # Welcome to BakeBuddy
 
@@ -30,6 +26,9 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 ## Getting Started
 
 This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
+
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -82,6 +81,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
 Refer to the [Features](#features) below for details of each command.
+
 ![screenshot](images/Screenshot-5.png)
 
 ## List of Commands
@@ -175,10 +175,7 @@ Refer to the [Features](#features) below for details of each command.
 * Parameter values are case-insensitive
 
 --------------------------------------------------------------------------------------------------------------------
-## FAQ
 
-
---------------------------------------------------------------------------------------------------------------------
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -410,14 +407,6 @@ checkPastryStock Croissant
 ```
 ![Check Pastry Stock.png](images%2FCheck%20Pastry%20Stock.png)
 
-The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
-This command requires only the pastry's name and will display whether there is sufficient stock to meet potential
-customer demand.
-
-For example, typing **checkPastryStock Croissant** checks the inventory for "Croissant" pastry and returns the quantity
-available if there are sufficient pastries. This command helps bakery owners ensure they can fulfill customer orders
-by maintaining the right stock levels for popular pastries.
-
 ### **Clear All Command**
 Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
 
@@ -508,6 +497,15 @@ Exits the program.
 ```bash
 exit
 ```
+=======
+The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
+This command requires only the pastry's name and will display whether there is sufficient stock to meet potential
+customer demand.
+
+For example, typing **checkPastryStock Croissant** checks the inventory for "Croissant" pastry and returns the quantity
+available if there are sufficient pastries. This command helps bakery owners ensure they can fulfill customer orders
+by maintaining the right stock levels for popular pastries.
+
 ### **Filter Contact Command**
 Filter and list contacts in the address book based on specified tags.
 
@@ -736,3 +734,26 @@ umarkSupplyOrder 1
 ![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
 ----------------------------------------------------------------------------------------------------------------------
+## Key New Features Summary
+
+Action | Format, Examples
+-------|------------------
+**Add Customer** | addCustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INFORMATION [t/TAG] <br> e.g., addCustomer n/John Doe p/12345678 e/john@example.com a/456 Pastry Street i/Allergic to dairy
+**Add Supplier** | addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG] <br> e.g., addSupplier n/Tim p/81234567 e=tim@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate
+**Add Ingredient** | addIngredient NAME COST <br> e.g., addIngredient Flour 1.50
+**Add Pastry** | addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...] <br> e.g., addPastry Croissant 3.50 Flour Cream Sugar
+**Remove Ingredient** | removeIngredient NAME <br> e.g., removeIngredient Flour
+**Remove Pastry** | removePastry NAME <br> e.g., removePastry Croissant
+**Add Customer Order** | addCustomerOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...] <br> e.g., addCustomerOrder 12345678 1 2 3
+**Delete Customer Order** | deleteCustomerOrder INDEX <br> e.g., deleteCustomerOrder 1
+**Add Supply Order** | addSupplyOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...] <br> e.g., addSupplyOrder 98765432 1 2 3
+**Delete Supply Order** | deleteSupplyOrder INDEX <br> e.g., deleteSupplyOrder 1
+**View Orders** | viewOrder
+**View Ingredient Catalogue** | viewIngredientCatalogue
+**View Pastry Catalogue** | viewPastryCatalogue
+**View Inventory** | viewInventory
+**Check Pastry Stock** | checkPastryStock PASTRY <br> e.g., checkPastryStock Croissant
+**Check Ingredient Stock** | checkIngredientStock INGREDIENT <br> e.g., checkIngredientStock Flour
+**Mark Customer Order** | markCustomerOrder INDEX <br> e.g., markCustomerOrder 1
+**Mark Supplier Order** | markSupplierOrder INDEX <br> e.g., markSupplierOrder 1
+
