@@ -60,8 +60,6 @@ public class ViewWindow extends UiPart<Stage> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         logList = FXCollections.observableArrayList(person.getLogEntries().getLogs());
-        //logListView.setItems(FXCollections.observableArrayList(person.getLogEntries().getLogs()));
-        //logListView.setCellFactory(listView -> new LogListViewCell());
     }
 
     /**
@@ -97,22 +95,6 @@ public class ViewWindow extends UiPart<Stage> {
     public void hide() {
         getRoot().hide();
     }
-
-    /**
-    static class LogListViewCell extends ListCell<Log> {
-        @Override
-        protected void updateItem(Log log, boolean empty) {
-            super.updateItem(log, empty);
-
-            if (empty || log == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new Label(log.toString()));
-            }
-        }
-    }
-     */
 
     private void displayLogs() {
         logListContainer.getChildren().clear();
