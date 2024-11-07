@@ -2,17 +2,34 @@
 layout: page
 title: Teacher's Pet
 ---
-[![CI Status](https://github.com/AY2425S1-CS2103T-W10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-W10-1/tp/actions)
-[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W10-1/tp/graph/badge.svg?token=EIDJ3VHY2B)](https://codecov.io/gh/AY2425S1-CS2103T-W10-1/tp)
-
 ![Ui](images/Ui.png)
 
-- Teacher's pet is **an application for NUS teaching students to handle their students information**.While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+# Teacher's Pet
 
-* If you are interested in using Teacher's Pet, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing Teacher's Pet, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+_Are you a Teaching Assistant in NUS?_
 
+_Ever feel tired of using slow, clunky ~~Canvas~~ websites to manage your students?_ 
+
+_Ever wondered if there is a better option?_
+
+Teacher's pet is **an application specially tailored for NUS teaching students to manage their students**. Optimised to start up quickly and respond efficiently, you never have to stare at a loading screen again! 
+
+## Highlights:
+
+- A minimalistic, colourful design, meant for reducing clutter and time needed to understand the interface
+- Optimised for keyboard users and fast typists
+- Intuitive commands, designed to be quick to type and easy to learn
+- Flexible command syntax to suit a variety of use cases 
+
+
+## Getting Started
+If you are interested in using Teacher's Pet, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+
+## For Developers
+If you are interested in developing Teacher's Pet, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+
+---
 
 **Acknowledgements**
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
