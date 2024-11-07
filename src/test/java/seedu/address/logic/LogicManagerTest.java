@@ -64,7 +64,8 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "del n/Non Existent";
-        assertCommandException(deleteCommand, "No contact with the name 'Non Existent' found.");
+        assertCommandException(deleteCommand, "No contact with the name 'Non Existent' found."
+                + " Please enter the full name (case-insensitive).");
     }
 
     @Test

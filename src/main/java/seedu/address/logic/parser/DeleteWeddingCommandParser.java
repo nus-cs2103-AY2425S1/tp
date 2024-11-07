@@ -23,7 +23,7 @@ public class DeleteWeddingCommandParser implements Parser<DeleteWeddingCommand> 
 
         String weddingName = trimmedArgs.substring(2).trim();
         if (weddingName.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteWeddingCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(DeleteWeddingCommand.MESSAGE_MISSING_NAME));
         }
 
         return new DeleteWeddingCommand(weddingName);

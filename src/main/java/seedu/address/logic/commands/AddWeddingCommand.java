@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,7 +44,7 @@ public class AddWeddingCommand extends Command {
 
     /**
      * Creates an AddWeddingCommand to add the specified {@code Wedding}.
-     * @param wedding
+     * @param wedding {@code Wedding} to be added.
      */
     public AddWeddingCommand(Wedding wedding) {
         requireNonNull(wedding);
@@ -63,8 +64,8 @@ public class AddWeddingCommand extends Command {
         // Normalize, trim, and capitalize the names
         String[] names = toAdd.getName().split("&");
         if (names.length == 2) {
-            names[0] = capitalize(names[0].trim().toLowerCase());
-            names[1] = capitalize(names[1].trim().toLowerCase());
+            names[0] = StringUtil.capitaliseString(names[0].trim().toLowerCase());
+            names[1] = StringUtil.capitaliseString(names[1].trim().toLowerCase());
         }
 
         // Check if the wedding involves the same person twice aka marrying oneself
@@ -87,24 +88,6 @@ public class AddWeddingCommand extends Command {
 
         model.addWedding(normalizedWedding);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(normalizedWedding)));
-    }
-
-    /**
-     * Capitalizes the first letter of each word in the name.
-     * @param name
-     * @return the capitalized name
-     */
-    private String capitalize(String name) {
-        String[] parts = name.split(" ");
-        StringBuilder capitalized = new StringBuilder();
-        for (String part : parts) {
-            if (!part.isEmpty()) {
-                capitalized.append(Character.toUpperCase(part.charAt(0)))
-                        .append(part.substring(1))
-                        .append(" ");
-            }
-        }
-        return capitalized.toString().trim();
     }
 
     /**

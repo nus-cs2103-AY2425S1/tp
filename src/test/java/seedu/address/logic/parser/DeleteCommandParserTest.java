@@ -35,6 +35,6 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_emptyNameArgs_throwsParseException() {
-        assertParseFailure(parser, "n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "n/", String.format(DeleteCommand.MESSAGE_MISSING_NAME));
     }
 }

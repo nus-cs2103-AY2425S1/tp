@@ -14,7 +14,9 @@ public class Tag {
             + "2 person names separated with &. " + "\n"
             + "It should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX =
-            "^\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)?)\\s*&\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)?)\\s*$";
+            "^\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)*(?:\\s+(?:s/o|d/o|S/O|D/O)\\s+[\\p{Alnum}]"
+                    + "+(?:\\s+[\\p{Alnum}]+)?)?)\\s*&\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]"
+                    + "+)*(?:\\s+(?:s/o|d/o|S/O|D/O)\\s+[\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)?)?)\\s*$";
 
     public final String tagName;
 

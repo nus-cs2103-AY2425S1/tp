@@ -23,7 +23,8 @@ public class DeleteCommand extends Command {
             + "\nParameters: " + PREFIX_NAME + "NAME\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Li Sirui";
 
-    public static final String MESSAGE_NO_MATCH_FOUND = "No contact with the name '%1$s' found.";
+    public static final String MESSAGE_NO_MATCH_FOUND = "No contact with the name '%1$s' found."
+            + " Please enter the full name (case-insensitive).";
     public static final String MESSAGE_MISSING_NAME = "Contact name is required.";
     public static final String MESSAGE_CONFIRMATION_PROMPT = """
             Are you sure you want to delete the following contact?
@@ -39,7 +40,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a DeleteCommand to delete the Person with the specified {@code Name}
-     * @param name name of person to delete
+     * @param name Name of the person to delete
      */
     public DeleteCommand(String name) {
         this.name = name.trim();

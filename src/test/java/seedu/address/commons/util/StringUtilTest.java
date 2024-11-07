@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -140,4 +141,25 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for capitaliseString --------------------------------------
+    @Test
+    public void capitaliseString() {
+        // Test with normal words
+        assertEquals("John Doe", StringUtil.capitaliseString("john doe"));
+        assertEquals("John", StringUtil.capitaliseString("john"));
+        assertEquals("John Doe", StringUtil.capitaliseString("JOHN DOE"));
+
+        // Test with "s/o" and "d/o"
+        assertEquals("John s/o Doe", StringUtil.capitaliseString("john s/o doe"));
+        assertEquals("John d/o Doe", StringUtil.capitaliseString("john d/o doe"));
+
+        // Test with mixed cases
+        assertEquals("John s/o Doe", StringUtil.capitaliseString("JOHN s/o DOE"));
+        assertEquals("John d/o Doe", StringUtil.capitaliseString("JOHN d/o DOE"));
+
+        // Test with extra spaces
+        assertEquals("John Doe", StringUtil.capitaliseString("  john   doe  "));
+        assertEquals("John s/o Doe", StringUtil.capitaliseString("  john   s/o   doe  "));
+        assertEquals("John d/o Doe", StringUtil.capitaliseString("  john   d/o   doe  "));
+    }
 }
