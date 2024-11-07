@@ -203,6 +203,7 @@ Examples:
 Format `delete NAME` or `delete [n/NAME]`
 
 * Delete the contact whose name matches the specified `NAME`.
+* The `NAME` has to be an exact match.
 * The `NAME` is non-case-sensitive.
 
 Examples:
