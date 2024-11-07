@@ -23,3 +23,17 @@
   -fx-text-fill: red; /* Makes the text red */
   -fx-padding: 0 0 0 10px; /* Adds 10px padding to the left */
 }
+
+.table-cell {
+  -fx-text-fill: white;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-wrap-text: true;
+}
+
+.table-cell:filled:even {
+  -fx-background-color: #3c3e3f;
+}
+
+.table-cell:filled:odd {
+  -fx-background-color: #515658;
+}
