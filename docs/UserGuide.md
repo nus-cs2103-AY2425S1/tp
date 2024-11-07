@@ -124,8 +124,8 @@ Examples:
 * `link o1 t/p1`
 * `link o2 t/p2 t/p3`
 
-![link between Tricia and Fluffy](images/linkTriciaFluffy.jpeg)
-<div style="text-align: center;"><em>Link between Tricia (owner) and Fluffy (pet)</em></div>
+![link between Claire and Fluffy](images/linkClaireFluffy.jpeg)
+<div style="text-align: center;"><em>Link between Claire (owner) and Fluffy (pet)</em></div>
 
 ### Unlinking entities: `unlink`
 
@@ -152,7 +152,7 @@ Shows a list of desired entities in PawPatrol.
 Format:
 * `list owners`: Shows a list of all owners.
 * `list pets`: Shows a list of all pets.
-* `list both`: Shows both owners and pets in a consolidated view.
+* `list`: Shows both owners and pets in a consolidated view.
 
 ### Editing entities: `edit`
 
@@ -247,13 +247,13 @@ Examples:
 * `find owner Betsy` followed by `delete o1` deletes the 1st owner in the results of the `find` command.
 * `list pets` followed by `delete p2` deletes the 2nd pet in PawPatrol.
 * `find pet Fluffy` followed by `delete p1` deletes the 1st pet in the results of the `find` command, as shown below.
-  ![result for 'find Fluffy'](images/findFluffyResult.jpeg)
+  ![result for 'find pet Fluffy'](images/findFluffyResult.jpeg)
   <div style="text-align: center;">
-    <em>Result for 'find Fluffy'</em>
+    <em>Result for 'find pet Fluffy'</em>
   </div>
 
   ![result for 'delete p1'](images/deletep1Result.jpeg)
-  <div style="text-align: center;"><em>Result for 'delete p1' after 'find Fluffy'</em></div>
+  <div style="text-align: center;"><em>Result for 'delete p1' after 'find pet Fluffy'</em></div>
 
 ### Sorting : `sort`
 
@@ -329,7 +329,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Owner** | `owner n/NAME p/PHONE e/EMAIL a/ADDRESS` <br> e.g., `owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+**Add Owner** | `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS` <br> e.g., `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
 **Add Pet** | `pet n/NAME s/SPECIES b/BREED a/AGE sex/SEX [t/TAG]…​` <br> e.g., `pet n/Megatron s/Cat b/Siamese a/3 x/M t/playful`
 **Clear** | `clear`
 **Delete Owner** | `delete oOWNER_INDEX`<br> e.g., `delete o3`
@@ -342,7 +342,7 @@ Action | Format, Examples
 **Unlink** | `unlink oOWNER_INDEX t/pPET_INDEX…​` <br> e.g., `unlink o1 t/p1 t/p2`
 **List Owners** | `list owners`
 **List Pets** | `list pets`
-**List Owners and Pets** | `list both`
+**List Owners and Pets** | `list`
 **Sort Owners** | `sort owners`
 **Sort Pets** | `sort pets`
 **Help** | `help`
