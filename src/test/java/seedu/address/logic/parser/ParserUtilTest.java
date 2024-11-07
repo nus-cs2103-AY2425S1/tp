@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Set;
 
@@ -33,7 +35,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_HOURS = "5";
     private static final String VALID_SUBJECT = "Math";
-    private static final String VALID_FILEPATH = "~/Desktop/tp/src/test/data/CsvImportTest/typicalPersonsCsv.csv";
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CsvImportTest");
+    private static final String VALID_FILEPATH = TEST_DATA_FOLDER.resolve("typicalPersonsCsv.csv").toString();
 
     private static final String WHITESPACE = " \t\r\n";
 
