@@ -773,7 +773,6 @@ Success action: When wedding is successfully edited, the details of the updated 
        Expected: No wedding edited. `editw` command format is shown in the status message.<br><br>
 
     1. Test case: `addw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is larger than the size of the wedding list)<br>
-<<<<<<< Updated upstream
        Expected: No wedding edited. Error message prompting the user to choose an index within the range shown.
 
 
