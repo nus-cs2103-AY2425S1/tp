@@ -18,7 +18,7 @@ Click on each command to jump to their subsection.
 | Action                                            | Format, Examples                                                                                                                                                            |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Help](#viewing-help--help)**                   | `help`                                                                                                                                                                      |
-| **[Add](#adding-a-person--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague`                            |
+| **[Add](#adding-a-person--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/CS1101 t/colleague`                            |
 | **[List](#listing-all-persons--list)**            | `list`                                                                                                                                                                      |
 | **[Edit](#editing-a-person--edit)**               | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                     |
 | **[Mark](#marking-person-as-attended--mark)**     | `mark INDEX tut/TUTORIAL` <br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list (e.g.,`tut/[1,3,7]`) or range (e.g.,`tut/1-12`) <br> e.g., `mark 2 tut/1` |
@@ -147,8 +147,7 @@ Format: `mark INDEX tut/TUTORIAL`
 Examples:
 
 - `mark 1 tut/1` Marks the 1st person in the address book as attended for tutorial 1.
-- `mark * tut/1` Marks all persons in the address book as attended for tutorial 1.
-- `mark * tut/1-3` Marks all persons in the address book as attended for tutorials 1 to 3.
+- `mark 1 tut/1-3` Marks the 1st person in the address book as attended for tutorials 1 to 3.
 - `mark 1 tut/[2,4,12]` Marks the 1st person in the address book as attended for tutorials 2, 4 and 12.
 
 ### Marking person as absent : `unmark`
@@ -166,8 +165,7 @@ Format: `unmark INDEX tut/TUTORIAL`
 Examples:
 
 - `unmark 1 tut/1` Marks the 1st person in the address book as absent for tutorial 1.
-- `unmark * tut/1` Marks all persons in the address book as absent for tutorial 1.
-- `unmark * tut/1-3` Marks all persons in the address book as absent for tutorials 1 to 3.
+- `unmark 1 tut/1-3` Marks the 1st person in the address book as absent for tutorials 1 to 3.
 - `unmark 1 tut/[2,4,12]` Marks the 1st person in the address book as absent for tutorials 2, 4 and 12.
 
 ### Resetting person's attendance : `reset`
@@ -185,9 +183,17 @@ Format: `reset INDEX tut/TUTORIAL`
 Examples:
 
 - `reset 1 tut/1` Resets the attendance of the 1st person in the address book for tutorial 1.
-- `reset * tut/1` Resets the attendance of all persons in the address book for tutorial 1.
-- `reset * tut/1-3` Resets the attendance of all persons in the address book for tutorials 1 to 3.
+- `reset 1 tut/1-3` Resets the attendance of the 1st person in the address book for tutorials 1 to 3.
 - `reset 1 tut/[2,4,12]` Resets the attendance of the 1st person in the address book for tutorials 2, 4 and 12.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Faster attendance updating:**<br>
+You can use the `mark`, `unmark` and `reset` commands with the wildcard `*` to update the attendance of all persons in the address book at once.
+- `mark * tut/1` marks all persons as attended for tutorial 1.
+- `unmark * tut/1` marks all persons as absent for tutorial 1.
+- `reset * tut/1` resets the attendance of all persons for tutorial 1.
+</div>
 
 ### Locating persons by name or tag: `find`
 
@@ -206,7 +212,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [t/TAG]` or `find [KEYWORDS] t/TAG`
 Examples:
 
 - `find John` returns `john` and `John Doe`
-- `find an` returns `armin` and `brian`
+- `find an` returns `armin` (characters a and n are present in **a**rmi**n**) and `brian`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 - `find t/ri` returns all contacts marked with tag `friends` and `isRich` etc. <br>
