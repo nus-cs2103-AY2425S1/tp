@@ -28,8 +28,10 @@ public class AddCompanyCommand extends AddCommand<Company> {
             + PREFIX_ADDRESS + "12 Ang Mo Kio Street 64, Singapore 569088 "
             + PREFIX_BILLING_DATE + "5 "
             + PREFIX_PHONE + "64815511";
+
     public static final String MESSAGE_SUCCESS = "Company added: %1$s; Address: %2$s; "
             + "Billing date: %3$s; Phone: %4$s;";
+
     public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book";
 
     /**
@@ -46,11 +48,14 @@ public class AddCompanyCommand extends AddCommand<Company> {
         if (model.hasCompany(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_COMPANY);
         }
+        String name = toAdd.getName().toString();
+        String address = toAdd.getAddress().toString();
+        String billingDate = toAdd.getBillingDate().toString();
+        String phone = toAdd.getPhone().toString();
 
         model.addCompany(toAdd);
+        String successMessage = String.format(MESSAGE_SUCCESS, name, address, billingDate, phone);
 
-        String successMessage = String.format(MESSAGE_SUCCESS, toAdd.getName().toString(),
-                toAdd.getAddress().toString(), toAdd.getBillingDate().toString(), toAdd.getPhone().toString());
         return new CommandResult(successMessage);
     }
 
