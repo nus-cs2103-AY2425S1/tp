@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_AMOUNT;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_DATE;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_DESCRIPTION;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_OTHER_PARTY;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -54,6 +58,8 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTION, PREFIX_AMOUNT,
                 PREFIX_OTHER_PARTY, PREFIX_DATE);
 
+        verifyNoBlankValues(argMultimap);
+
         String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
         double amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get().trim());
         String otherParty = argMultimap.getValue(PREFIX_OTHER_PARTY).get().trim();
@@ -70,6 +76,33 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Throws a {@code ParseException} if any of the description, amount, other party and date values are blank.
+     */
+    private static void verifyNoBlankValues(ArgumentMultimap argumentMultimap) throws ParseException {
+
+        String description = argumentMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
+        String amount = argumentMultimap.getValue(PREFIX_AMOUNT).get().trim();
+        String otherParty = argumentMultimap.getValue(PREFIX_OTHER_PARTY).get().trim();
+        String date = argumentMultimap.getValue(PREFIX_DATE).get().trim();
+
+        if (description.isBlank()) {
+            throw new ParseException(MESSAGE_EMPTY_DESCRIPTION);
+        }
+
+        if (amount.isBlank()) {
+            throw new ParseException(MESSAGE_EMPTY_AMOUNT);
+        }
+
+        if (otherParty.isBlank()) {
+            throw new ParseException(MESSAGE_EMPTY_OTHER_PARTY);
+        }
+
+        if (date.isBlank()) {
+            throw new ParseException(MESSAGE_EMPTY_DATE);
+        }
     }
 
 }

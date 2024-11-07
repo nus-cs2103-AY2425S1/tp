@@ -39,6 +39,12 @@ public class Messages {
             + "Use listt command to switch to transaction list view of selected client.";
     public static final String MESSAGE_MUST_BE_PERSON_LIST = "%1$s must only be used in person list view!\n"
             + "Use list command to switch to person list view.";
+
+    public static final String MESSAGE_EMPTY_DESCRIPTION = "Description should not be blank!";
+    public static final String MESSAGE_EMPTY_AMOUNT = "Amount should not be blank!";
+    public static final String MESSAGE_EMPTY_OTHER_PARTY = "Other party should not be blank!";
+    public static final String MESSAGE_EMPTY_DATE = "Date should not be blank!";
+
     public static final String MESSAGE_EMPTY_TRANSACTION_LIST =
             "Invalid command: The current transaction list is empty.";
     /**
