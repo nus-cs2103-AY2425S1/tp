@@ -805,7 +805,7 @@ However, it is always good practice to have a local backup :D You can do this wi
 
 ### <i class="fa-solid fa-pen"></i> Editing the data file
 
-KonTActs data are saved automatically as a JSON file `[JAR file location]/data/konTActs.json`.
+KonTActs data are saved automatically as a JSON file `[JAR file location]/data/kontacts.json`.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
