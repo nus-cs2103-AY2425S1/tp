@@ -16,6 +16,7 @@ import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
@@ -30,12 +31,15 @@ public class UnlinkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": removes any links involving the Student provided.\n"
             + "Parameters: " + PREFIX_CHILD + "CHILD_NAME\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_CHILD + "John Doe";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_CHILD + "John Doe\n"
+            + "Take note, names are case sensitive!";
 
     public static final String MESSAGE_UNLINK_CONTACT_SUCCESS = "Successfully unlinked Student: %1$s from Parent: %2$s";
     public static final String MESSAGE_CONTACT_HAS_NO_LINKS = "Student: %1$s has no links";
-    public static final String MESSAGE_CHILD_NOT_FOUND = "Student: %1$s does not exist in Address Book";
-    public static final String MESSAGE_PARENT_NOT_FOUND = "Student's Parent: %1$s does not exist in Address Book";
+    public static final String MESSAGE_CHILD_NOT_FOUND = "Student: %1$s does not exist in Address Book.\n"
+            + "Take note, names are case sensitive!";
+    public static final String MESSAGE_PARENT_NOT_FOUND = "Student's Parent: %1$s does not exist in Address Book.\n"
+            + "Take note, names are case sensitive!";
 
     private final Name name;
 
@@ -50,8 +54,12 @@ public class UnlinkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person child;
-        child = model.personFromName(name);
-        if (!(child instanceof Student)) {
+        try {
+            child = model.personFromName(name);
+            if (!(child instanceof Student)) {
+                throw new CommandException(generateChildNotFoundMessage());
+            }
+        } catch (PersonNotFoundException e) {
             throw new CommandException(generateChildNotFoundMessage());
         }
 
@@ -62,10 +70,15 @@ public class UnlinkCommand extends Command {
         }
 
         Person parent;
-        parent = model.personFromName(parentName);
-        if (!(parent instanceof Parent)) {
+        try {
+            parent = model.personFromName(parentName);
+            if (!(parent instanceof Parent)) {
+                throw new CommandException(generateParentNotFoundMessage(parentName));
+            }
+        } catch (PersonNotFoundException e) {
             throw new CommandException(generateParentNotFoundMessage(parentName));
         }
+
         Parent castedParent = (Parent) parent;
 
         Pair<Student, Parent> unlinkedPair = unlink(castedChild, castedParent);
