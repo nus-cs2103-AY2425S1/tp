@@ -15,11 +15,11 @@ You can reach us at the email `cs2103t-w13-3@outlook.com`
 
 <img src="images/t-leongchuan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/t-leongchuan)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: UI
 
 ### Ze Rui
 
@@ -28,7 +28,8 @@ You can reach us at the email `cs2103t-w13-3@outlook.com`
 [[github](https://github.com/slidings)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Data
 
 ### Lee Zhi Yi
 
