@@ -50,9 +50,7 @@ public class TaskAssignmentParserUtil {
 
         for (int i = startPosition; i < args.length; i++) {
             Index index = ParserUtil.parseIndex(args[i]);
-            if (!indexes.add(index)) { // Checks if adding was unsuccessful, indicating a duplicate
-                throw new ParseException("Duplicate index detected: " + index.getOneBased());
-            }
+            indexes.add(index);
         }
 
         return indexes;
