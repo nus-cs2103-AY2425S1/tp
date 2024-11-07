@@ -324,7 +324,7 @@ Use case ends.
         Steps 2a1-2a3 are repeated until the data entered are correct.
         Use case resumes from step 3.
 
-* 3a. Patient exists in contact details
+* 3a. Patient does not exist in contact details
 
     * 3a1. System display an error message.
 
