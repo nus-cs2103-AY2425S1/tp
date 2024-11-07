@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -125,6 +126,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new FieldContainsKeywordsPredicate(argumentMultimap));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s weekly schedule to show only the meeting at the given {@code targetIndex} in the
+     * {@code model}'s schedule list.
+     */
+    public static void showMeetingAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getWeeklySchedule().size());
+
+        Meeting meeting = model.getWeeklySchedule().get(targetIndex.getZeroBased());
+        model.changeWeeklySchedule(m -> m.getMeetingDate() == meeting.getMeetingDate());
+
+        assertEquals(1, model.getWeeklySchedule().size());
     }
 
 }

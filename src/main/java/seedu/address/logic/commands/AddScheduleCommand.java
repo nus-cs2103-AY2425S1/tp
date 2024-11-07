@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -80,6 +81,6 @@ public class AddScheduleCommand extends Command {
         // Add the meeting to the model if no conflict
         model.addMeeting(newMeeting);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name + " on " + date + " at " + time));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatMeetings(newMeeting)));
     }
 }

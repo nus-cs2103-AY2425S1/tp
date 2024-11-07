@@ -22,7 +22,7 @@ public class DeleteScheduleCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Event: %1$s on %2$s %3$s";
+    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Event: %1$s";
 
     private final Index targetIndex;
 
@@ -44,8 +44,7 @@ public class DeleteScheduleCommand extends Command {
         model.deleteMeeting(meetingToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS,
-                meetingToDelete.getMeetingName(), meetingToDelete.getMeetingDate().toString(),
-                meetingToDelete.getMeetingTime().toString()));
+                Messages.formatMeetings(meetingToDelete)));
     }
 
     @Override
