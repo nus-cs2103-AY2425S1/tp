@@ -70,7 +70,7 @@ public class Product {
      * Removes assigned supplier if is supplied by the specified supplier.
      */
     public void removeSupplier(Name supplierName) {
-        if (supplierName != null && this.supplierName.equals(supplierName)) {
+        if (supplierName != null && this.supplierName != null && this.supplierName.equals(supplierName)) {
             this.supplierName = null;
         }
     }
