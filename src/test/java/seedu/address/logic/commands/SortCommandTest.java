@@ -50,4 +50,46 @@ public class SortCommandTest {
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
     }
+
+    @Test
+    public void execute_sortByClass_success() throws CommandException {
+        Comparator<Person> comparator = Comparator.comparing(person -> {
+            return person.getClasses().stream()
+                    .min((class1, class2) -> {
+                        int num1 = Integer.parseInt(class1.replaceAll("[^0-9]", ""));
+                        int num2 = Integer.parseInt(class2.replaceAll("[^0-9]", ""));
+                        String section1 = class1.replaceAll("[0-9]", "");
+                        String section2 = class2.replaceAll("[0-9]", "");
+                        int numberComparison = Integer.compare(num1, num2);
+                        return numberComparison != 0 ? numberComparison : section1.compareTo(section2);
+                    }).orElse("");
+        });
+        SortCommand sortCommand = new SortCommand(comparator);
+        String expectedMessage = "List sorted successfully.";
+
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        List<Person> sortedList = new ArrayList<>(expectedModel.getFilteredPersonList());
+        sortedList.sort(comparator);
+        expectedModel.setFilteredPersonList(sortedList);
+
+        CommandResult result = sortCommand.executeCommand(model);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_sortBySubject_success() throws CommandException {
+        Comparator<Person> comparator = Comparator.comparing(person -> person.getSubjects().toString());
+        SortCommand sortCommand = new SortCommand(comparator);
+        String expectedMessage = "List sorted successfully.";
+
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        List<Person> sortedList = new ArrayList<>(expectedModel.getFilteredPersonList());
+        sortedList.sort(comparator);
+        expectedModel.setFilteredPersonList(sortedList);
+
+        CommandResult result = sortCommand.executeCommand(model);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+    }
 }
