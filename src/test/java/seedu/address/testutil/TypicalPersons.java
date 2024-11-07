@@ -39,7 +39,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTag("High Risk").withAllergies("Soy", "Fish")
-            .withDate(LocalDateTime.of(2024, 12, 3, 16, 30)).build();
+            .withDate(LocalDateTime.of(2024, 12, 3, 14, 30)).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("94351253")
             .withEmail("heinz@example.com").withAddress("wall street").withAllergies("None")
             .withDate(LocalDateTime.MIN).build();
