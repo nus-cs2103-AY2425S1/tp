@@ -149,7 +149,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             String substring = parseFieldForFilterCommand(() -> parseField(() -> argMultimap.getValue(
                     PREFIX_TIER).get(), errors));
             if (substring.isEmpty()) {
-                System.out.println("HERE");
                 errors.add("Tier has not been provided any value to filter by.\n"
                         + "Please specify a status label to filter by, such as 'Gold', 'Silver', 'Bronze', 'Reject', "
                         + "or 'NA'\n"
