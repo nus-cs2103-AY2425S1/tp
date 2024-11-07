@@ -18,9 +18,12 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid."
-            + "\n Please enter a valid index from %d to %d.";
+    public static final String MESSAGE_ENTER_VALID_INDEX = "Please enter a valid index from %d to %d.";
+    public static final String MESSAGE_NOTHING_TO_PERFORM_ON = "There are no %s to %s.";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid. \n"
+            + MESSAGE_ENTER_VALID_INDEX;
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid. \n"
+            + MESSAGE_ENTER_VALID_INDEX;
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
 
     public static final String MESSAGE_INVALID_TASK_TYPE = "Unknown task type: %1$s. "
@@ -35,7 +38,6 @@ public class Messages {
             + "Expected format: tk/[task type] [task details].";
     public static final String MESSAGE_TO_BEFORE_FROM_INVALID = "\"From\" date must be before \"To\" date.";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
@@ -91,9 +93,7 @@ public class Messages {
      * Formats the {@code tag} for display to the user.
      */
     public static String format(Tag tag) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(tag.getTagName());
-        return builder.toString();
+        return String.valueOf(tag.getTagName());
     }
 
     public static String format(Wedding wedding) {

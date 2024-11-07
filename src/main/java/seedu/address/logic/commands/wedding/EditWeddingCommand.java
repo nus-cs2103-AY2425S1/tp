@@ -67,7 +67,9 @@ public class EditWeddingCommand extends Command {
         requireNonNull(model);
         List<Wedding> lastShownList = model.getFilteredWeddingList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "weddings", COMMAND_WORD));
+        } else if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
