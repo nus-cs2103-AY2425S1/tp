@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ATTENDEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_SPONSOR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -231,10 +233,12 @@ public class EditCommandTest {
 
     @Test
     public void equals_rolesField() {
-        EditPersonDescriptor descriptorWithRoles = new EditPersonDescriptorBuilder().withRoles("attendee").build();
-        EditPersonDescriptor sameDescriptorWithRoles = new EditPersonDescriptorBuilder().withRoles("attendee").build();
+        EditPersonDescriptor descriptorWithRoles = new EditPersonDescriptorBuilder()
+                .withRoles(VALID_ROLE_ATTENDEE).build();
+        EditPersonDescriptor sameDescriptorWithRoles = new EditPersonDescriptorBuilder()
+                .withRoles(VALID_ROLE_ATTENDEE).build();
         EditPersonDescriptor differentDescriptorWithRoles = new EditPersonDescriptorBuilder()
-               .withRoles("sponsor").build();
+               .withRoles(VALID_ROLE_SPONSOR).build();
 
         assertTrue(descriptorWithRoles.equals(sameDescriptorWithRoles));
         assertFalse(descriptorWithRoles.equals(differentDescriptorWithRoles));

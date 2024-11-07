@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.contact.commands.AddCommand;
@@ -41,10 +42,16 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_TELEGRAM, PREFIX_ROLE);
 
-
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            // There are fields that are missing
+            String missingFields = getMissingFieldsMessage(argMultimap, PREFIX_NAME,
+                                        PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL);
+            String errorMessage = missingFields.isEmpty()
+                                    ? AddCommand.MESSAGE_USAGE
+                                    : AddCommand.MESSAGE_USAGE + "\n"
+                                        + AddCommand.MESSAGE_MISSING_FIELDS + ": " + missingFields;
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -61,6 +68,27 @@ public class AddCommandParser implements Parser<AddCommand> {
         Person person = new Person(name, phone, email, address, telegramUsername, roleList);
 
         return new AddCommand(person);
+    }
+
+    private static String getMissingFieldsMessage(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes)
+                .filter(prefix -> !argumentMultimap.getValue(prefix).isPresent())
+                .map(AddCommandParser::getFieldName) // Call helper method to get field name
+                .collect(Collectors.joining(", "));
+    }
+
+    private static String getFieldName(Prefix prefix) {
+        if (prefix.equals(PREFIX_NAME)) {
+            return "n/NAME";
+        } else if (prefix.equals(PREFIX_PHONE)) {
+            return "p/PHONE NUMBER";
+        } else if (prefix.equals(PREFIX_EMAIL)) {
+            return "e/EMAIL";
+        } else if (prefix.equals(PREFIX_ADDRESS)) {
+            return "a/ADDRESS";
+        }
+        // should not reach here
+        return "ERROR HAS OCCURRED";
     }
 
     /**
