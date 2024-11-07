@@ -181,7 +181,9 @@ The `AssignCommand` and `UnassignCommand` classes were introduced to represent t
 
 Implementing these commands required significant changes to the `Model` of the application, details of which are covered in this section:
 
-A unique id for both the `Event` and `Vendor` classes was introduced, since otherwise there is no unique identifier for either of the items. This is represented by the new `UniqueId` class, which was represented using Java's built-in UUID class. To represent pairs of assigned `Event` and `Vendor`, we introduced a new class `Association`, which stores a pair of `UniqueId` classes, taken from an `Event` and `Vendor` instance. A `UniqueAssociationList` class was also implemented to allow the user to keep the list of associations in memory.
+* A unique id for both the `Event` and `Vendor` classes was introduced, since otherwise there is no unique identifier for either of the items. This is represented by the new `UniqueId` class, which was represented using Java's built-in UUID class.
+* To represent pairs of assigned `Event` and `Vendor`, we introduced a new class `Association`, which stores a pair of `UniqueId` classes, taken from an `Event` and `Vendor` instance.
+* A `UniqueAssociationList` class was also implemented to allow the user to keep the list of associations in memory.
 
 The following methods to support the `assign` and `unassign` commands were implemented in `EventTory`:
 
