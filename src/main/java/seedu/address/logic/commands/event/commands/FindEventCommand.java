@@ -26,10 +26,10 @@ public class FindEventCommand extends Command {
 
     public static final String COMMAND_WORD_SHORT_FORM = "fe";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT INDEX: View list of persons "
-            + "in the event identified by the "
-            + "index number used in the event list.\n"
-            + "e.g. find-event 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT_INDEX: View list of contacts "
+            + "in the event identified by the index number used in the displayed event list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Listing contacts of event: %1$s";
 
