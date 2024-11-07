@@ -126,7 +126,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `search KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -136,9 +136,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `search John` returns `john` and `John Doe`
+* `search alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'search alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -152,7 +152,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `search Betsy` followed by `delete 1` deletes the 1st person in the results of the `search` command.
 
 Format: `delete NAME`
 
@@ -176,7 +176,7 @@ Format: `vip INDEX IS_VIP`
 
 Examples:
 * `list` followed by `vip 2 true` marks the 2nd person in the address book as a VIP.
-* `find Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `find` command.
+* `search Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `search` command.
 
 Examples:
 * `vip 1 true` marks the 1st person in the address book as VIP.
@@ -251,11 +251,11 @@ _Details coming soon ..._
 
 Action       | Format, Examples
 -------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague c/5'11 tall`
+**Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague c/5'11 tall`
 **Clear**    | `clear`
 **Delete**   | `delete INDEX` `delete NAME` <br> e.g., `delete 3` `delete Bernice`
 **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COMMENT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com c/change comment`
-**Search**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Search**   | `search KEYWORD [MORE_KEYWORDS]`<br> e.g., `search James Jake`
 **List**     | `list` `list vip`
 **Vip**      | `vip INDEX IS_VIP`<br> e.g., `vip 3 true`
 **SearchTag**| `searchtag TAG [MORE TAGS]`<br> e.g., `searchtag friends`
