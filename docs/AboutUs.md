@@ -39,7 +39,7 @@ You can reach us at the email `hireme@gmail.com`
 [[github](http://github.com/choaticman)] [[portfolio](team/choaticman.md)]
 
 * Role: Developer
-* Responsibilities: Software Engineer
+* Responsibilities: Software Developer
 
 ### Kelly Wong
 
@@ -49,7 +49,7 @@ You can reach us at the email `hireme@gmail.com`
 [[portfolio](team/woke02.md)]
 
 * Role: Developer
-* Responsibilities: Software Engineer
+* Responsibilities: Software Developer
 
 ### Wu XueTing
 
