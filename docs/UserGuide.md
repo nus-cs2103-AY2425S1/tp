@@ -131,7 +131,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by roles: 'filter'
+### Locating persons by roles: `filter`
 
 Finds persons whose roles contain any of the given keywords.
 
@@ -161,9 +161,9 @@ Examples:
 
 ## Events
 
-### Adds an event to the database.
+### Adding an event : `addevent`
 
-Format: `add n/NAME sp/SPORT v/Venue [pa/PARTICIPANTS]…​`
+Format: `addevent n/NAME sp/SPORT v/Venue [pa/PARTICIPANTS]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An event can have zero or more participants.
@@ -174,9 +174,9 @@ Examples:
 * `add n/Basketball Final s/Basketball Men v/USC pa/John Doe pa/Betsy Crowe`
 * `add n/100m Sprint s/Athletics v/USC pa/John Doe pa/Betsy Crowe pa/Alex Yeoh`
 
-### Edits an event in the database.
+### Editing an event : `editevent`
 
-Format: `edit INDEX [n/NAME] [sp/SPORT] [v/VENUE] [pa/PARTICIPANTS]…​`
+Format: `editevent INDEX [n/NAME] [sp/SPORT] [v/VENUE] [pa/PARTICIPANTS]…​`
 
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -190,17 +190,34 @@ Examples:
 *  `edit 1 n/200m sprint` Edits the name of the event to be `200m sprint`.
 *  `edit 2 sp/Basketball Women r/` Edits the sport of the event to be `Basketball Women` and clears all existing participants.
 
-### Deletes an event from the database.
+### Deleting an event : `deleteevent`
+
+Deletes the specified event from the database.
+
+Format: `deleteevent INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd event in the address book.
+* `findevent dummy` followed by `delete 1` deletes the 1st event in the results of the `find` command.
+
+### Listing all events
 
 ... _Details coming soon ..._
 
-### Lists all events in the database.
+### Finding events by name : `findevent`
 
-... _Details coming soon ..._
+Format: `findevent KEYWORD [MORE_KEYWORDS]`
 
-### Finds events by name.
-
-... _Details coming soon ..._
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 ## More Features
 ### Clearing all entries : `clear`

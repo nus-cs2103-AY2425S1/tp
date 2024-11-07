@@ -48,10 +48,10 @@ public class Messages {
             usage: find <query>
                         
             addevent - Add an Event to the list. It has a name, a sport, a venue and some participants tied to it.
-            usage: addevent n/<name> sp/<sport> v/<venue> p/<participants>
+            usage: addevent n/<name> sp/<sport> v/<venue> pa/<participants>
                         
             editevent - Update the information in an Event entry, via its ID.
-            usage: editevent <id> n/<name> sp/<sport> v/<venue> p/<participants>
+            usage: editevent <id> n/<name> sp/<sport> v/<venue> pa/<participants>
                         
             deleteevent - Delete an Event entry with the given ID.
             usage: deleteevent <id>
