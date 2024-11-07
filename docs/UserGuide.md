@@ -101,6 +101,10 @@ administrators.
 Shows a message explaining how to access the help page.
 
 ![help message](images/help.png)
+
+**Tips:**
+- Press "esc" to close the help window.
+
 [Back to Table of Contents](#table-of-contents)
 
 ***
@@ -110,6 +114,8 @@ Shows a message explaining how to access the help page.
 Adds a person to [EduTuTu](#edututu).
 
 **[Command Format](#command-format):** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASS_ID [t/TAG]…`
+
+**[Command Word Alias](#command-word-alias):** `a`
 
 > **Remark:** A person can have any number of tags (including 0).
 
@@ -158,6 +164,8 @@ Deletes the specified person from the address book.
 
 **[Command Format](#command-format):** `delete INDEX`
 
+**[Command Word Alias](#command-word-alias):** `d`
+
 * Deletes the person at the specified `INDEX`.
 * The [index](#index) refers to the index number shown in the displayed person list.
 * The [index](#index) **must be a positive integer** 1, 2, 3, …
@@ -197,6 +205,8 @@ Deletes the specified person from the address book.
 Updates the [payment status](#payment-status) of a student to completed.
 
 **[Command Format](#command-format):** `markpaid INDEX m/MONTH_PAID`
+
+**[Command Word Alias](#command-word-alias):** `mp`
 
 * Marks the payment of the person at the specified `INDEX` for the given month and year.
 * The `INDEX` refers to the index number shown in the displayed person list.
@@ -242,6 +252,8 @@ Updates the [payment status](#payment-status) of a student by removing the compl
 
 **[Command Format](#command-format):** `unmarkpaid INDEX m/MONTH_UNPAID`
 
+**[Command Word Alias](#command-word-alias):** `ump`
+
 * Removes the payment mark of the person at the specified `INDEX` for the given month and year.
 * The `INDEX` refers to the index number shown in the displayed person list.
 * The `MONTH_UNPAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
@@ -283,6 +295,8 @@ Updates the [payment status](#payment-status) of a student by removing the compl
 Edits an existing person in the address book.
 
 **[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [m/YEAR-MONTH] [t/TAG]…​`
+
+**[Command Word Alias](#command-word-alias):** `e`
 
 * Edits the person at the specified `INDEX`. The [index](#index) refers to the [index](#index) number shown in the displayed person list.
 * At least one of the optional fields must be provided.
@@ -327,6 +341,8 @@ The `list` command displays a list of all persons currently stored in [EduTuTu](
 
 **[Command Format](#command-format):** `list`
 
+**[Command Word Alias](#command-word-alias):** `l`
+
 After entering the `list` command, all persons stored in the address book will be displayed in the UI.
 
 **Example Usage:**
@@ -360,6 +376,9 @@ The `find` command allows you to list persons by their names, [Class IDs](#class
 
 
 **[Command Format](#command-format):** `find`
+
+**[Command Word Alias](#command-word-alias):** `f`
+
 - **By Name Prefix:** `find n/NAME_PREFIX [MORE_NAME_PREFIXES]`
 - **By Phone Number Prefix:** `find p/PHONE_PREFIX [MORE_PHONE_PREFIXES]`
 - **By Address Prefix:** `find a/ADDRESS_PREFIX [MORE_ADDRESS_PREFIXES]`
@@ -500,6 +519,7 @@ For example, given the following data set with 4 students:
 
 **Tips:**
 - Make sure the data is up-to-date before using the `pie` command for accurate visualisation.
+- Press "esc" to close the pie chart window.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -534,6 +554,7 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
 **Tips:**
 - Use the bar command to monitor payment trends and identify any seasonal patterns.
 - Ensure that all payment records are updated for accurate chart visualisation.
+- Press "esc" to close the bar chart window.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -601,6 +622,9 @@ Displaying the detailed command window can be done in two ways:
   </div>
 
 </div>
+
+**Tips:**
+- Press "esc" to close the pie chart window.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -687,6 +711,9 @@ Method 2:
 <a id="edututu"></a>
 - **EduTuTu**: A desktop application designed for tuition centers to streamline student information management. It combines the speed of a Command Line Interface (CLI) with the convenience of a Graphical User Interface (GUI).
 
+<a id="command-word-alias"></a>
+- **Command Word Alias**: A shorter version of a command word that can be used to perform the same action.
+- 
 <a id="cli-command-line-interface"></a>
 - **CLI (Command Line Interface)**: An interface where users type commands to interact with the application. CLI allows for quick and precise control, often preferred by users familiar with typing commands.
 
