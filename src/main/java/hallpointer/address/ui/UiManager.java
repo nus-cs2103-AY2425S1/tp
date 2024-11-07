@@ -43,7 +43,8 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-            mainWindow.setMessageBox("Welcome to hallpointer! Please enter a command to start using the app!");
+            mainWindow.setMessageBox("Welcome to hallpointer! Please enter a command to start using the app!\n"
+                    + "Do type help and press enter if you need a refresher on the possible commands.");
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

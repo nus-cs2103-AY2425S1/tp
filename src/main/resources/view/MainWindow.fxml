@@ -27,7 +27,7 @@
           <Menu text="_File">
             <MenuItem onAction="#handleExit" text="_Exit" />
           </Menu>
-          <Menu text="_Help">
+          <Menu text="Help (F1)">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
