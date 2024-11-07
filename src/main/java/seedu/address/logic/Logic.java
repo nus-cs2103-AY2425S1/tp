@@ -78,4 +78,6 @@ public interface Logic {
 
     State getState();
 
+    void setStatus();
+
 }
