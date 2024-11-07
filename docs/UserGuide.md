@@ -4,24 +4,30 @@ title: AcademyAssist User Guide
 
 ---
 
-## Table of Contents
+# Table of Contents
 
 1. [Introduction](#introduction)
 
 2. [Quick Start](#quick-start)
 
 3. [Features](#features)
-   * [Adding a student](#adding-a-student--add)
-   * [Deleting a student](#deleting-a-student--delete)
-   * [Editing a student](#editing-a-student--edit)
-   * [Viewing all student](#viewing-all-students--view)
-   * [Viewing a student's detail](#viewing-a-students-detail--detail)
-   * [Finding a student](#finding-a-student--find)
-   * [Sorting students](#sorting-students--sort)
-   * [Tracking student count for each subject](#tracking-student-count-for-each-subject--tracksubject)
-   * [Clearing all entries](#clearing-all-entries--clear)
-   * [Getting help](#getting-help--help)
-   * [Exiting the program](#exiting-the-program--exit)
+    * [Student Management](#student-management)
+      * [Adding a student](#adding-a-student--add)
+      * [Deleting a student](#deleting-a-student--delete)
+      * [Editing a student](#editing-a-student--edit)
+      * [Listing all students](#listing-all-students--list)
+      * [Viewing a student's detail](#viewing-a-students-detail--detail)
+    * [Searching and Sorting](#searching-and-sorting)
+        * [Finding a student](#finding-a-student--find)
+        * [Sorting students](#sorting-students--sort)
+        * [Filtering students](#filtering-students--filter)
+    * [Subject Management](#subject-management)
+        * [Adding a subject to a student](#adding-a-subject-to-a-student--addsubject)
+        * [Tracking student count for each subject](#tracking-student-count-for-each-subject--tracksubject)
+    * [Utility Features](#utility-features)
+        * [Clearing all entries](#clearing-all-entries--clear)
+        * [Getting help](#getting-help--help)
+        * [Exiting the program](#exiting-the-program--exit) 
 
 4. [Data Management](#data-management-in-academyassist)
 
@@ -29,7 +35,7 @@ title: AcademyAssist User Guide
 
 6. [Command summary](#command-summary)
 
-## Introduction
+# Introduction
 Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers.
 This desktop application is designed to streamline your administrative tasks, allowing you to focus more
 on what truly matters - educating and nurturing young minds.
@@ -45,14 +51,14 @@ Let's embark on this journey to simpler, faster, and more effective student mana
 
 ---
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
    1. Open a terminal window, and go to the main folder where all your project files are stored.
    2. Run the `java -version` command to confirm the terminal is using Java 17.
    3. If Java version is not Java 17, download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
-2. Download the latest `AcademyAssist.jar` file from the official website.
+2. Download the latest `academyassist.jar` file from the official website.
 
 3. Move the file to the folder you want to use as the _home folder_ for your AcademyAssist.
 
@@ -67,7 +73,7 @@ again, type `help` and press Enter.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -83,7 +89,17 @@ of replacing S00001).
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will
+* Items in square brackets are optional.
+  e.g. `s/SUBJECT [s/MORE_SUBJECTS]` can be used as `s/SUBJECT` or `s/SUBJECT s/MORE_SUBJECTS`.
+
+* Items with `...` after them can be repeated.
+  e.g. `s/SUBJECT [s/MORE_SUBJECTS]...` can be used as `s/SUBJECT`, `s/SUBJECT s/SUBJECT`, `s/SUBJECT s/SUBJECT s/SUBJECT`.
+
+* Commands are case-sensitive (e.g., `add` is not the same as `Add`). Hence, commands should be in lowercase.
+
+* Parameters are case-insensitive (e.g., `Science`, `SCIENCE`, `science` are treated as the same).
+
+* Extraneous parameters for commands that do not take in parameters (such as `tracksubject`,`help`, `list`, `exit` and `clear`) will
 be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -92,13 +108,16 @@ lines as space characters surrounding line-breaks may be omitted when copied ove
 
 </div>
 
+## Student Management
 ### Adding a student : `add`
 
-Adds a new student to the tuition center management system.
+Adds a new student to the student management system.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT`
+Format: `add n/NAME i/NRIC yg/YEARGROUP p/PHONE e/EMAIL a/ADDRESS s/SUBJECT [s/MORE_SUBJECTS]...`
 
-* `NAME` cannot be empty and should contain only alphabets and spaces.
+#### Parameters Constraints:
+* `NAME` cannot be empty and should contain only alphabets and spaces. The maximum length is 255 characters including spaces.
+* Any leading or trailing whitespace in the name will be trimmed, so the spaces in the very front or back are not considered in the length.
 * `PHONE_NUMBER` should be an 8-digit number.
 * `EMAIL` is compulsory and should follow the format username@domain.
 * `ADDRESS` is compulsory.
@@ -150,7 +169,7 @@ Examples:
 
 ![Edit Success Message](/images/edit.png)
 
-### Viewing all students : `view`
+### Listing all students : `list`
 
 Shows a list of all students in the system.
 
@@ -331,18 +350,18 @@ the data of your previous AcademyAssist folder.<br><br>
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                                                                                        |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
-| **Delete**        | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
-| **Edit**          | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
-| **View**          | `view`                                                                                                                                                                                  |
-| **Detail**        | `detail STUDENT_ID`<br> e.g., `detail S00001`                                                                                                                                           |
-| **Find**          | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
-| **Filter**        | `filter FIELD/VALUE`<br> e.g., `filter yg/2`                                                                                                                                            |
-| **Add Subject**   | `addsubject STUDENT_ID s/SUBJECT`<br> e.g., `addsubject S00003 Science`                                                                                                                 |
-| **Track Subject** | `tracksubject`                                                                                                                                                                          |
-| **Sort**          | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
-| **Clear**         | `clear`                                                                                                                                                                                 |
-| **Help**          | `help`                                                                                                                                                                                  |
-| **Exit**          | `exit`                                                                                                                                                                                  |
+| Action            | Format, Examples                                                                                                                                                                                    |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**   | `add n/NAME i/NRIC yg/YEARGROUP p/PHONE e/EMAIL a/ADDRESS s/SUBJECT [s/MORE_SUBJECTS]...` <br><br> e.g., `add n/John Doe i/T384859A yg/3 p/81003999 e/johndoe@gmail.com a/9 Smith Street s/Science` |
+| **Delete Student**| `delete STUDENT_ID`<br><br> e.g., `delete S00001`                                                                                                                                                   |
+| **Edit Student**  | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                              |
+| **List Students** | `list`                                                                                                                                                                                              |
+| **View Student**  | `detail STUDENT_ID`<br><br> e.g., `detail S00001`                                                                                                                                                   |
+| **Find Student**  | `find NAME [MORE_NAMES]`<br><br> e.g., `find John Jane`                                                                                                                                             |
+| **Filter Students**| `filter FIELD/VALUE`<br><br> e.g., `filter yg/2`                                                                                                                                                    |
+| **Add Subject**   | `addsubject STUDENT_ID s/SUBJECT`<br><br> e.g., `addsubject S00003 Science`                                                                                                                         |
+| **Track Subjects**| `tracksubject`                                                                                                                                                                                      |
+| **Sort Students** | `sort s/FIELD`<br><br> e.g., `sort s/name`                                                                                                                                                          |
+| **Clear Data**    | `clear`                                                                                                                                                                                             |
+| **Get Help**      | `help`                                                                                                                                                                                              |
+| **Exit**          | `exit`                                                                                                                                                                                              |
