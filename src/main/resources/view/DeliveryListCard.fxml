@@ -17,7 +17,7 @@
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="150" />
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105"  GridPane.columnIndex="0">
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
@@ -27,11 +27,11 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="productName" styleClass="cell_big_label" text="\$productName" wrapText="true">
+                <Label fx:id="productName" styleClass="cell_big_label" text="asfsadfasfsafdas" wrapText="true">
                <HBox.margin>
                   <Insets bottom="2.5" left="2.5" right="20.0" top="2.5" />
                </HBox.margin></Label>
-                <Label fx:id="status" styleClass="cell_small_label" text="\$status" wrapText="true" minWidth="80"  alignment="CENTER"/>
+                <Label fx:id="status" alignment="CENTER" minWidth="80" styleClass="cell_small_label" text="\$status" wrapText="true" />
             </HBox>
             <FlowPane fx:id="tags" /> <!-- If you want to add tags later -->
 
