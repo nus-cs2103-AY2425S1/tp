@@ -147,6 +147,12 @@ public class Date {
         int monthValue = Integer.parseInt(dateParts[1]);
         int yearValue = Integer.parseInt(dateParts[2]);
 
+        // Allow year 1 but reject years before it (e.g., 0000)
+        if (yearValue < 1) {
+            throw new ParseException("Invalid year: " + yearValue
+                    + " is not supported. Year must be greater than or equal to 1.");
+        }
+
         //Check for months with only 30 days
         if (monthValue == 4 || monthValue == 6 || monthValue == 9 || monthValue == 11) {
             if (dayValue > 30) {
