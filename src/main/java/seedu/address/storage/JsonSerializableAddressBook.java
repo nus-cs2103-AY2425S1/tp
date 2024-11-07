@@ -56,14 +56,20 @@ public class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if wedding data integrity is violated.
      */
-    private void validateWeddingIntegrity() throws IllegalValueException {
-
+    private void validateWeddingIntegrity(List<Wedding> weddings) throws IllegalValueException {
+        List<Integer> validWeddings = weddings.stream().map(Wedding::hashCode).toList();
         // Collect all valid ownWedding hashcodes
-        Set<Integer> validWeddingHashes = new HashSet<>();
+        Set<Integer> validOwnWeddingHashes = new HashSet<>();
         for (JsonAdaptedPerson person : persons) {
             int ownWeddingHash = person.getOwnWedding();
             if (ownWeddingHash != 0) {
-                validWeddingHashes.add(ownWeddingHash);
+                validOwnWeddingHashes.add(ownWeddingHash);
+            }
+        }
+        // Check all wedding hashcodes
+        for (Integer validOwnWeddingHash : validOwnWeddingHashes) {
+            if (!validWeddings.contains(validOwnWeddingHash)) {
+                throw new IllegalValueException(MESSAGE_CORRUPTED_WEDDING_DATA);
             }
         }
 
@@ -72,7 +78,7 @@ public class JsonSerializableAddressBook {
             List<Integer> weddingJobs = person.getWeddingJobs();
             if (weddingJobs != null && !weddingJobs.isEmpty()) {
                 for (Integer weddingJobHash : weddingJobs) {
-                    if (!validWeddingHashes.contains(weddingJobHash)) {
+                    if (!validOwnWeddingHashes.contains(weddingJobHash) || !validWeddings.contains(weddingJobHash)) {
                         throw new IllegalValueException(MESSAGE_CORRUPTED_WEDDING_DATA);
                     }
                 }
@@ -86,7 +92,7 @@ public class JsonSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public AddressBook toModelType() throws IllegalValueException {
-        validateWeddingIntegrity();
+
 
         AddressBook addressBook = new AddressBook();
 
@@ -98,6 +104,7 @@ public class JsonSerializableAddressBook {
             }
             addressBook.addWedding(wedding);
         }
+        validateWeddingIntegrity(addressBook.getWeddingList());
 
         // Add persons
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {

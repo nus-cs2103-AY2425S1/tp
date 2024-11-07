@@ -140,7 +140,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, null, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_DUPLICATE_PERSON, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_NO_CHANGE, Messages.format(editedPerson));
 
         assertCommandFailure(editCommand, model, expectedMessage);
     }

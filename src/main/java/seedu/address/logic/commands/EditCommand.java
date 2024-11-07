@@ -49,6 +49,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NO_CHANGE = "Fields provided are the same as before, no edit is made.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_PHONE = "This number already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
@@ -91,7 +92,12 @@ public class EditCommand extends Command {
             ownWedding.setClient(editedPerson);
         }
 
-        if (personToEdit.isSamePerson(editedPerson) || model.hasPerson(editedPerson)) {
+        if (personToEdit.isSamePerson(editedPerson)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_NO_CHANGE);
+        }
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
