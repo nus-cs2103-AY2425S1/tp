@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* The methods for the addition of remark, module and telegram handle field were adapted from AB3 Tutorial 2.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -532,7 +532,64 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Saving theme preferences
+
+    1. Enter the command 'switch light' or 'switch dark' to set the theme of the app. Close the window.
+
+    1. Re-launch the app by double-clicking the jar file.<br> 
+       Expected: The most recent theme is retained.
+
+### Adding a person
+
+1. Adding a person with minimum fields (name, contact type, telegram handle)
+
+    1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee`<br>
+       Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
+
+    1. Test case: `add n/Nicole 333 ct/work h/@nicole_lee`<br>
+       Expected: No person added. Error details displayed in the status message.
+
+    1. Other incorrect add commands to try: `add`, `add n/Nicole Lee`, `add Nicole Lee`, `...`<br>
+       Expected: Similar to previous.
+
+1. Adding a person with all fields (name, contact type, telegram handle, phone number, email, module, remark, tags)
+
+    1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee p/98765432 e/nicolelee@example.com m/CS2103T r/likes coding t/friend`<br>
+       Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
+
+    1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee p/98765432 e/nicolelee@example.com m/CS2103T r/likes coding t/friend t/colleague t/student`<br>
+       Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
+
+    1. Test case: `add Nicole Lee work @nicole_lee 98765432 nicole@example.com CS2103T likes coding friend`
+       Expected: No person added. Error details displayed in the status message.
+
+### Editing a person's contact details
+
+1. Editing a person's telegram handle from an existing contact
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 h/@ashley_`<br>
+       Expected: Telegram handle of first contact updated to `@ashley_`. Details of the edited contact are shown in the status message.
+   
+    1. Test case: `edit 0 h/@ashley_`<br>
+       Expected: No person is edited. Error details shown in the status message.
+
+    1. Other incorrect edit commands to try: `edit h/@ashley_`, `edit 1 @ashley_`, `edit x @ashley_`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. Editing multiple fields for an existing contact (e.g. email, telegram handle)
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 e/ashley@example.com h/@ashley_`<br>
+       Expected: Email and telegram handle of first contact is updated to `ashley@example.com` and `@ashley_` respectively. Details of the edited contact are shown in the status message.
+   
+    1. Test case `edit 0 e/ashley@example.com h/@ashley_`<br>
+       Expected: No person is edited. Error details shown in the status message.
+
+    1. Other incorrect edit commands to try: `edit e/ashley@example.com h/@ashley_`, `edit 1 e/ashley@example.com @ashley_`, `edit e/ashley@example.com h/@ashley_`, `...`<br>
+       Expected: Similar to previous.
 
 ### Deleting a person
 
@@ -541,20 +598,63 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person when the list is empty
+
+    1. Prerequisite: Ensure that there are no contacts in the app.
+
+    1. Test case: `delete 1`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x` , `...` (where x can be any number)<br>
+       Expected: Similar to previous.
+    
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Navigate to ./data/addressbook.json and delete the addressbook.json file.
+   
+    1. Launch the app by double-clicking the jar file.<br>
+       Expected: The default list of contacts is loaded.
 
-1. _{ more test cases …​ }_
+1. Dealing with corrupted data file
+
+    1. Navigate to ./data/addressbook.json. Right click the addressbook.json file and open in TextEdit.
+
+    1. Delete all the contents of the file and type some symbols (e.g. `&*$@`).
+
+    1. Launch the app by double-clicking the jar file.<br>
+       Expected: The app loads with no contacts.
+                                       
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**   
+This project required substantial effort due to the complexity of expanding beyond the initial structure of AddressBook Level 3 (AB3).
+The following describes the challenges, difficulty level, and effort involved, as well as achievements attained through enhancements and
+additional features.
+
+### Difficulty Level and Challenges
+
+* **Additional Fields**: Our project manages additional fields such as Telegram handle, module, and contact type. Integrating these fields required modifying both data structures and UI components, as well as adapting backend logic to manage and validate these new attributes.
+* **Enhanced Search Functionality**: We implemented additional search functionalities, allowing users to find contacts by tags and Telegram handles, in addition to names. This required integration of the find command with additional fields.
+* **UI Enhancements**: Significant effort went into redesigning the user interface to make it aesthetically pleasing. In addition to improving layout and visual styling, we introduced both light and dark modes, ensuring each element was clearly visible in both themes.
+ 
+### Effort
+
+* **Custom Implementation and Adaptation** The majority of the codebase was custom-developed to meet the specific needs of our project, with very limited reuse of existing libraries or tools beyond those provided in AB3. For example, the additional fields, search functionality, and UI customization were built from scratch, significantly increasing the project’s scope and difficulty level.
+
+### Achievement
+
+* Our team successfully extended the basic functionality of AB3, transforming it into a more versatile and feature-rich application. The enhanced search capabilities and the addition of new fields significantly improved the usability of the application, allowing for more efficient contact management. The aesthetically refined UI, with support for both light and dark modes, further elevated the user experience and set our project apart from AB3.
+
+In summary, this project required considerable effort due to the added functionality, custom UI work, and enhanced search features. The limited reuse of existing libraries meant most of the code had to be written and adapted by our team, adding to the overall effort invested.
+
