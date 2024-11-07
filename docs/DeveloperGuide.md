@@ -191,8 +191,6 @@ When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` g
 :information_source: **Note:** The lifeline for `AddApptCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 [Back to Table of Contents](#table-of-contents)
-### \[Proposed\] Undo/redo feature
-
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -209,7 +207,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete S1234567A` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete S1234567A` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -278,15 +276,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 [Back to Table of Contents](#table-of-contents)
-### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
-
-[Back to Table of Contents](#table-of-contents)
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -727,13 +718,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
-* **Appointment**: A scheduled meeting between a patient and a medical professional, encompassing a specific date, time period and description.
+* **Appointment**: A scheduled meeting between a patient and a doctor, encompassing a specific date, time period and description.
 
 * **Appointment List**: A list of appointments of all patients, displayed chronologically on the right hand side of the application.
 
-* **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
+* **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient. It should start with a letter (S, T, G, F or M), followed by 7 digits, and end with a letter.
 
-* **Priority**: Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
+* **Priority**: Indicates the urgency of a patient’s condition, with values like none, low, medium, or high to assist doctors in managing urgent cases.
 
 * **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
 
