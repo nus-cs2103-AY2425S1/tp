@@ -6,7 +6,9 @@
 
 # Teletutors User Guide
 
-Teletutors is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Teletutors can get your contact management tasks done faster than traditional GUI apps.
+Teletutors is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having 
+the benefits of a Graphical User Interface (GUI). If you can type fast, Teletutors can get your contact management tasks 
+done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -29,6 +31,7 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -56,7 +59,7 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
   e.g. in `adds n/NAME`, `NAME` is a parameter which can be used as `adds n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [sn/STUDENT_NUMBER]` can be used as `n/John Doe sn/A1234567Z` or as `n/John Doe`.
+  e.g. `n/NAME [sn/STUDENT_NUMBER]` can be used as `n/John Doe sn/A1234567Z` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -106,6 +109,7 @@ Format: `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/STUDENT_NUMBER`
 <box type="tip" seamless>
 
 **Tip:** A student must have a unique student number, so if the same student number is used for a new student, the user will be informed that the student already exists in the list.
+
 </box>
 
 Examples:
@@ -223,6 +227,7 @@ Closes all attendance windows if any is currently open.
 ### Adding Assignments : `adda`
 
 Adds an assignment to the specified student
+
 Format: `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`
   * Adds an assignment to the student with `NAME`. If student number is provided, this adds an assignment to the student
 with `STUDENT_NUMBER` and `NAME`.
@@ -234,6 +239,7 @@ with `STUDENT_NUMBER` and `NAME`.
 ### Deleting Assignments : `deletea`
 
 Deletes an assignment for the specified student
+
 Format: `adda n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`
 * Deletes an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided, 
 this deletes the assignment for the student with `STUDENT_NUMBER` and `NAME`.
@@ -242,11 +248,20 @@ this deletes the assignment for the student with `STUDENT_NUMBER` and `NAME`.
 ### Editing Assignments : `edita`
 
 Edits an assignment for the specified student
+
 Format: `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`
 * Edits an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided,
   this edits the assignment for the student with `STUDENT_NUMBER` and `NAME`.
 * If there is more than one student with `NAME`, a student number must be provided.
 * Fields which are not specified will remain unchanged after the operation.
+
+### Adding Assignments by Tutorial Group : `addatg`
+
+Adds an assignment to all students from the specified tutorial group
+
+Format: `attattg tg/TUTORIAL_GROUP a/ASSIGNMENT_NAME d/DEADLINE`
+* Adds an assignment to the students with `TUTORIAL_GROUP`.
+* Assignments default to not submitted and ungraded.
 
 ### Saving the data
 
@@ -261,6 +276,7 @@ Teletutors data are saved automatically as a JSON file `[JAR file location]/data
 **Caution:**
 If your changes to the data file makes its format invalid, Teletutors will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the Teletutors to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -286,24 +302,25 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                                          | Format, Examples                                                                                                                                                            |
-|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                                         | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`                                                      |
-| **Clear**                                       | `deleteall`                                                                                                                                                                 |
-| **Delete**                                      | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                                                                            |
-| **Edit**                                        | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                   |
-| **View**                                        | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                                                                  |
-| **List**                                        | `list`                                                                                                                                                                      |
-| **Help**                                        | `help`                                                                                                                                                                      |
-| **Undo**                                        | `undo`                                                                                                                                                                      
-| **Mark Attendance**                             | `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe d/2021-10-10 pr/P sn/A1234567Z`                                                      |
-| **Mark Present for Tutorial Group**             | `markpresentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markpresentall tg/G17 d/2021-10-10`                                                                                   |
-| **Mark Absent for Tutorial Group**              | `markabsentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markabsentall tg/G17 d/2021-10-10`                                                                                     |
-| **Delete Student's Attendance**                 | `deleteat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `deleteat n/John Doe d/2021-10-10 sn/A1234567Z`                                                                     |
-| **Delete Tutorial Group Attendance**            | `deleteatall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `deleteatall tg/G17 d/2021-10-10`                                                                                         |
-| **Get Attendance**                              | `getat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `getat n/John Doe d/2021-10-10 sn/A1234567Z`                                                                           |
-| **Get Tutorial Group Attendance**               | `getattg tg/TUTORIAL_GROUP`<br> e.g., `getattg tg/G17`                                                                                                          |
-| **Close All Tutorial Group Attendance Windows** | `closeat`                                                                                                                                                                   |
+| Action                                          | Format, Examples                                                                                                                                                             |
+|-------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                                         | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`                                                       |
+| **Clear**                                       | `deleteall`                                                                                                                                                                  |
+| **Delete**                                      | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                                                                             |
+| **Edit**                                        | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                    |
+| **View**                                        | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                                                                   |
+| **List**                                        | `list`                                                                                                                                                                       |
+| **Help**                                        | `help`                                                                                                                                                                       |
+| **Undo**                                        | `undo`                                                                                                                                                                       
+| **Mark Attendance**                             | `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe d/2021-10-10 pr/P sn/A1234567Z`                                                       |
+| **Mark Present for Tutorial Group**             | `markpresentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markpresentall tg/G17 d/2021-10-10`                                                                                    |
+| **Mark Absent for Tutorial Group**              | `markabsentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markabsentall tg/G17 d/2021-10-10`                                                                                      |
+| **Delete Student's Attendance**                 | `deleteat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `deleteat n/John Doe d/2021-10-10 sn/A1234567Z`                                                                      |
+| **Delete Tutorial Group Attendance**            | `deleteatall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `deleteatall tg/G17 d/2021-10-10`                                                                                          |
+| **Get Attendance**                              | `getat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `getat n/John Doe d/2021-10-10 sn/A1234567Z`                                                                            |
+| **Get Tutorial Group Attendance**               | `getattg tg/TUTORIAL_GROUP`<br> e.g., `getattg tg/G17`                                                                                                                       |
+| **Close All Tutorial Group Attendance Windows** | `closeat`                                                                                                                                                                    |
 | **Add Assignment**                              | `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`<br> e.g., `adda n/John Doe a/Assignment 1 d/2021-10-10 s/N g/100 sn/A1234567Z` |
-| **Delete Assignment**                           | `deletea n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletea n/John Doe a/Assignment 1 sn/A1234567Z`                                                           |
-| **Edit Assignment**                             | `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE]`<br> e.g., `edita n/John Doe a/Assignment 1 d/2021-10-10 s/Y g/90`                             |
+| **Delete Assignment**                           | `deletea n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletea n/John Doe a/Assignment 1 sn/A1234567Z`                                                            |
+| **Edit Assignment**                             | `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE]`<br> e.g., `edita n/John Doe a/Assignment 1 d/2021-10-10 s/Y g/90`                              |
+| **Add Assignment by Tutorial Group**            | `addatg tg/TUTORIAL_GROUP a/ASSIGNMENT_NAME d/DEADLINE `<br> e.g., `addatg tg/T15 a/Assignment 1 d/2021-10-10`                                                       |
