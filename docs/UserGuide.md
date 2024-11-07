@@ -1,8 +1,7 @@
 ---
 layout: page
-title: User Guide
+title: NomNomNotifier User Guide
 ---
-# NomNomNotifier - User Guide
 
 Welcome to the NomNomNotifier User Guide, your essential toolkit for mastering customer management in a fast-paced restaurant environment. This guide is crafted for all members of the restaurant team—from front-of-house staff to receptionists—equipping you with everything you need to manage customer information effortlessly. You don’t need any prior technical expertise; this guide is designed with simplicity and ease in mind, making it accessible even for those completely new to digital customer management tools.
 

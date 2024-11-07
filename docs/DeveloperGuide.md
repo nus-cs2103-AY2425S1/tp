@@ -1,9 +1,6 @@
 ---
 layout: page
-title: Developer Guide
----
-# NomNomNotifier - Developer Guide
-
+title: NomNomNotifier Developer Guide
 ---
 * Table of Contents:
   * Acknowledgements
