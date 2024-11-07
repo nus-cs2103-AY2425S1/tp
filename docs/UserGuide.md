@@ -64,9 +64,9 @@ Cher is a **desktop app for managing contacts, optimized for use via a Command L
 
 ### Viewing help : `help`
 
-Shows a pop-up window with our comprehensive User Guide.
+Shows the comprehensive User Guide page and displays a floating window allowing the user to copy the URL of the user guide page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpWindow.png)
 
 Format: `help`
 
@@ -291,10 +291,6 @@ If your changes to the data file makes its format invalid, Cher will discard all
 Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -321,7 +317,8 @@ Action | Format, Examples
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
+**Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
 **Mark** | `mark INDEX` <br> e.g., `mark 2`
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
 **Batch Mark** | `batch-mark`
