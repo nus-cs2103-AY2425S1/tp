@@ -281,10 +281,13 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
    4. Test cases: `addTxn 1 amt/12.3 desc/John owes me for dinner cat/FOOD`<br>
       Expected: A new transaction related to the person in the first index of the address book is added to the list along with description of it. The amount reflected in the transaction is displayed green in the transaction panel to signify that you are owed. The date of the transaction displays the current day. Category of `FOOD` is displayed. Details of the added transaction is shown in the status message.
 
-   5. Test cases: `addTxn 0 amt/ desc/ date/ cat/`<br>
+   5. Test cases: Input `addTxn 1 amt/-12.3 desc/I owe John for dinner date/10102024` twice <br> 
+      Expected: No transaction is added. Error details shown in the status message with `Transaction already exists in the transaction book`. Status bar remains the same.
+
+   6. Test cases: `addTxn 0 amt/ desc/ date/ cat/`<br>
       Expected: No transaction is added. Error details shown in the status message. Status bar remains the same.
 
-   6. Other incorrect `addTxn` commands to try: `addTxn 1`, `addTxn amt/1.234`, `addTxn desc/dinner`, `addTxn date/10102024`, `addTxn cat/FOOD`<br>
+   7. Other incorrect `addTxn` commands to try: `addTxn 1`, `addTxn amt/1.234`, `addTxn desc/dinner`, `addTxn date/10102024`, `addTxn cat/FOOD`<br>
       Expected: Similar to previous.
 
 ### Marking a transaction as done
