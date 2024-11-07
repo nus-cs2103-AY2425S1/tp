@@ -67,8 +67,11 @@ public class EditContactCommand extends ContactCommand {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * Creates an EditContactCommand to edit the details of a person in the filtered person list.
+     *
+     * @param index The index of the person in the filtered person list.
+     * @param editPersonDescriptor A descriptor containing the details to update the person with.
+     * @throws NullPointerException If {@code index} or {@code editPersonDescriptor} is null.
      */
     public EditContactCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -178,8 +181,8 @@ public class EditContactCommand extends ContactCommand {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the person with.
+     * Each non-empty field value will replace the corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;

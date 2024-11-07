@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import tutorease.address.model.person.Person;
 
 /**
- * Unmodifiable view of an address book
+ * Gives an unmodifiable view of an address book.
  */
 public interface ReadOnlyTutorEase {
 

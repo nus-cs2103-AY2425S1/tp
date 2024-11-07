@@ -10,7 +10,7 @@ import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.UserPrefs;
 
 /**
- * A class to access UserPrefs stored in the hard disk as a json file
+ * Accesses UserPrefs stored in the hard disk as a json file.
  */
 public class JsonUserPrefsStorage implements UserPrefsStorage {
 
@@ -31,7 +31,7 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
     }
 
     /**
-     * Similar to {@link #readUserPrefs()}
+     * Serves functions similar to {@link #readUserPrefs()}.
      * @param prefsFilePath location of the data. Cannot be null.
      * @throws DataLoadingException if the file format is not as expected.
      */
