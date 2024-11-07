@@ -207,7 +207,6 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-
     /**
      * Handles autocompletion based on the current input when the Control key is pressed.
      */
@@ -223,25 +222,49 @@ public class CommandBox extends UiPart<Region> {
         // If the command has parameters in the syntax map
         if (commandSyntaxMap.containsKey(command)) {
             String fullSyntax = commandSyntaxMap.get(command);
-            String remainingSyntax = getRemainingCommandSyntax(input, fullSyntax).trim();
+            String[] syntaxParts = fullSyntax.split("\\s+");
 
-            // Determine if there are still remaining parameters to complete
-            if (!remainingSyntax.isEmpty()) {
-                String[] remainingWords = remainingSyntax.split("\\s+");
+            // Track already entered parameters to determine the next suggestion
+            int syntaxIndex = 1; // Start after the command word
+            StringBuilder consumedSyntax = new StringBuilder(command);
 
-                // Find the next parameter that hasn't been entered
-                for (String nextWord : remainingWords) {
-                    if (!isParameterAlreadyEntered(input, nextWord)) {
-                        String completion = nextWord.contains("/")
-                                ? nextWord.substring(0, nextWord.indexOf("/") + 1) : nextWord;
-
-                        // Add the next parameter to the input
-                        String newText = input + (input.endsWith(" ") ? "" : " ") + completion;
-                        commandTextField.setText(newText);
-                        commandTextField.positionCaret(newText.length());
-                        return;
-                    }
+            // Determine which parts of the syntax have already been entered
+            for (int i = 1; i < words.length; i++) {
+                String part = words[i];
+                if (syntaxIndex < syntaxParts.length && syntaxParts[syntaxIndex].equals(part)) {
+                    // If the input matches the current expected syntax part, move forward
+                    consumedSyntax.append(" ").append(part);
+                    syntaxIndex++;
+                } else if (part.contains("/")) {
+                    // If the input is a parameter with a slash, move forward in the syntax parts
+                    consumedSyntax.append(" ").append(part);
+                    syntaxIndex++;
                 }
+            }
+
+            // Skip already entered parameters
+            while (syntaxIndex < syntaxParts.length && isParameterAlreadyEntered(input, syntaxParts[syntaxIndex])) {
+                syntaxIndex++;
+            }
+
+            // If there are remaining parameters or words to suggest
+            if (syntaxIndex < syntaxParts.length) {
+                String nextPart = syntaxParts[syntaxIndex];
+                String completion;
+
+                if (nextPart.contains("/")) {
+                    // It's a parameter, e.g., n/NAME, so autocomplete the prefix
+                    completion = nextPart.substring(0, nextPart.indexOf("/") + 1);
+                } else {
+                    // It's a regular word like INDEX, so autocomplete the entire word
+                    completion = nextPart;
+                }
+
+                // Add the next part to the input
+                String newText = input + (input.endsWith(" ") ? "" : " ") + completion;
+                commandTextField.setText(newText);
+                commandTextField.positionCaret(newText.length());
+                return;
             }
         }
 
@@ -264,38 +287,6 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    /**
-     * Gets remaining syntax after current input.
-     */
-    private String getRemainingCommandSyntax(String input, String fullSyntax) {
-        int inputPos = 0;
-        String[] inputWords = input.split("\\s+");
-        String[] syntaxWords = fullSyntax.split("\\s+");
-
-        // Track consumed words to skip to the next expected parameter
-        for (String word : inputWords) {
-            for (int i = inputPos; i < syntaxWords.length; i++) {
-                if (syntaxWords[i].startsWith(word)) {
-                    inputPos = i + 1;
-                    break;
-                }
-            }
-        }
-
-        if (inputPos >= syntaxWords.length) {
-            return "";
-        }
-
-        StringBuilder remaining = new StringBuilder();
-        for (int i = inputPos; i < syntaxWords.length; i++) {
-            remaining.append(" ").append(syntaxWords[i]);
-        }
-        return remaining.toString().trim();
-    }
-
-    /**
-     * Checks if a parameter has already been entered in the input.
-     */
     private boolean isParameterAlreadyEntered(String input, String parameter) {
         String[] inputWords = input.split("\\s+");
         for (String word : inputWords) {
@@ -341,4 +332,3 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 }
-
