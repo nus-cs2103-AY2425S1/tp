@@ -156,9 +156,9 @@ Examples:
 
 ### Finding a person: `find`
 
-Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tags’’
+Format: `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tag`
 
-* any possible orders and combinations of the 3 parameters name, phone number and room number are applicable
+* any possible orders and combinations of the 4 parameters NAME, PHONE_NUMBER, ROOM_NUMBER, and TAG are applicable
 
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -167,14 +167,14 @@ Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tags’’
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Only full words will be matched for room_number and phone_number, the arguments
-  should be exactly the same as the person's room number and phone number
-* order of the tags doesn't matter `t/friends colleagues` works the same
+  should be exactly the same as the person's ROOM_NUMBER and PHONE_NUMBER
+* Order of the tags do not matter `t/friends colleagues` works the same
   as `t/colleagues friends`
 
 Examples:
-* `find p/test_number n/test_name r/08-1234 t/friends colleagues`  
+* `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues`  
   finds people whose both your friend and colleagues.
-  He has test_name in their name and test_number as their contact number, and at room 08-1234
+  They have Alex Jones as their name, 94509592 as their phone number, and lives in room 08-1234.
 
 ### Deleting a person : `delete`
 
