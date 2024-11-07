@@ -123,8 +123,8 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) throws CommandException {
         requireAllNonNull(target, editedPerson);
-        resortPersonList(getSortSettings());
         addressBook.setPerson(target, editedPerson);
+        resortPersonList(getSortSettings());
     }
 
     //=========== Filtered Person List Accessors =============================================================
