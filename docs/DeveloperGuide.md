@@ -583,7 +583,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `deltag i t/x` where `i` is the index and `x` is the tag chosen<br>
        Expected: The tag x will be deleted from person i and the tag will also disappear from the Tag List.
 
-1. Other incorrect find commands to try: `deltag`, `deltag M t/x` (where M is larger than the list size or smaller than 0), `deltag 1 x`<br>
+1. Other incorrect delete tag commands to try: `deltag`, `deltag M t/x` (where M is larger than the list size or smaller than 0), `deltag 1 x`<br>
    Expected: Similar to previous.
 
 
