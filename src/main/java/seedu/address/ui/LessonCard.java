@@ -85,6 +85,8 @@ public class LessonCard extends UiPart<Region> {
         // Combine All Details into Student Box
         HBox studentBox = new HBox(0);
         studentBox.maxWidthProperty().bind(students.widthProperty().add(-20));
+        // Ensure Participation Label has same height as Student Box
+        participationLabel.maxHeightProperty().bind(studentBox.heightProperty());
         studentBox.getChildren().addAll(studentNameLabel, participationLabel);
         studentBox.setMinWidth(students.getMinWidth());
         students.getChildren().add(studentBox);
