@@ -11,11 +11,9 @@ import static spleetwaise.transaction.model.transaction.Date.getNowDate;
 import static spleetwaise.transaction.model.transaction.Status.NOT_DONE_STATUS;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import spleetwaise.address.logic.parser.ArgumentMultimap;
 import spleetwaise.address.logic.parser.ArgumentTokenizer;
-import spleetwaise.address.logic.parser.Prefix;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.Parser;
@@ -32,15 +30,6 @@ import spleetwaise.transaction.model.transaction.Transaction;
  * Parses input arguments and creates a new transaction AddCommand object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
     /**
      * Parses the given {@code String} argument in the context of the transaction AddCommand and returns an AddCommand
      * object for execution.
@@ -61,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), e);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS);

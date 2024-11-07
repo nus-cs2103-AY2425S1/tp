@@ -13,11 +13,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import spleetwaise.address.logic.parser.ArgumentMultimap;
 import spleetwaise.address.logic.parser.ArgumentTokenizer;
-import spleetwaise.address.logic.parser.Prefix;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.Parser;
@@ -34,15 +32,6 @@ import spleetwaise.transaction.model.transaction.Description;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
     @Override
     public EditCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

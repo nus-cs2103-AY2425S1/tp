@@ -128,11 +128,9 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
 :exclamation: **Important:** Two identical Transactions with duplicated fields cannot be added into the transaction book.<br>
-For consistency and to avoid redundancy, identical transactions with the same details across all fields will not be added to the transaction book. This ensures that each entry remains unique, preventing accidental duplicates and maintaining the clarity of transaction records. If a similar transaction occurs on a different occasion in the same day, we recommend users to tweak the desc field to reflect the specific context. <br> 
-For example:<br>
-
-* `addTxn 1 amnt/2.50 desc/sean owes me for morning latte`
-* `addTxn 1 amnt/2.50 desc/sean owes me for afternoon latte`
+> For consistency and to avoid redundancy, identical transactions with the same details across all fields will not be added to the transaction book. This ensures that each entry remains unique, preventing accidental duplicates and maintaining the clarity of transaction records. If a similar transaction occurs on a different occasion in the same day, we recommend users to tweak the desc field to reflect the specific context.<br>
+>
+> For example:<br> - `addTxn 1 amt/2.50 desc/sean owes me for morning latte`<br>- `addTxn 1 amt/2.50 desc/sean owes me for afternoon latte`
 
 :bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
