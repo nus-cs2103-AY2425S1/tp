@@ -13,7 +13,7 @@ public class Name {
     public static final String ALIAS = "@";
     public static final String SON_OF = "S/O";
     public static final String DAUGHTER_OF = "D/O";
-    public static final String BRACKET_PAIR = "(<Name>)";
+    public static final String BRACKET_PAIR = "(INSERT_NAME)";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain letter characters and spaces, it should neither be blank nor "

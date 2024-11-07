@@ -189,6 +189,7 @@ Examples:
 
 Deletes the specified contact from the address book.
 
+#### Delete by index
 Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
@@ -199,6 +200,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
   ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
+
+#### Delete by name
+Format `delete NAME` or `delete [n/NAME]`
+
+* Delete the contact whose name matches the specified `NAME`.
+* The `NAME` has to be an exact match.
+* The `NAME` is non-case-sensitive.
+
+Examples:
+* Both `delete Amy Gould` and `delete n/Amy Gould` delete the user whose name is `Amy Gould` (non-case-sensitive) in the address book.
+  ![result for 'delete Amy Gould'](images/deleteAmyGouldResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -224,7 +236,14 @@ that they have at least one click on the pagination before using keyboard to mak
 Pagination UI:
 ![ui of pagination](images/pagination_ui.png)
 
-### Status Bar
+### Footer status bar
+
+A status bar that contains information about the number of contacts in the list and the address book data file path is attached as a footer
+at the bottom of the app. It shows the total number of contacts being listed in the app.
+
+Examples:
+* `find n/Adam` may show only 1 contact out of 19.
+  ![ui of footer status bar](images/footer_status_bar_ui.png)
 
 ### Saving the data
 
@@ -265,8 +284,59 @@ There must not be duplicate fields. For example, if there is a contact with the 
    * **Fail:** `n/Jane Hoe th/janehoe e/janeh@example.com ss/undergraduate 3 r/Admin r/President nn/jane`
 
 
-## Available fields
+## Available Contact Fields
 
+| Field                                   | Prefix* | Valid examples
+|-----------------------------------------|---------|---------------
+| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)`
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28` 
+| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`
+| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/> 
+| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`
+| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`
+*_By default, all fields must be non-empty when prefix is specified._
+
+### Name
+- Must contain alphabets and spaces only, with the following exceptions:
+    - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
+    - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
+- Must not be blank
+
+### Telegram Handle
+- Must contain alphabets, numbers and underscores only.
+- Must have a length between 5 and 32 characters inclusive.
+- Must not include `@`.
+
+### Email
+- Emails must be of the format `LOCAL_PART@DOMAIN`.
+- LOCAL_PART 
+  - Must only contain alphabets, numbers, and special characters `+_.-`.
+  - Must not start or end with any special characters.
+- DOMAIN 
+  - Domains must be made up of domain labels separated by periods.
+  - Domains must end with a domain label at least 2 characters long.
+  - Each domain label must only contain alphabets, numbers, and `-`, if any.
+  - Each domain label must not start or end with `-`.
+
+### Student Status
+- Must take one of the following values:
+  1. `Undergraduate x` (where x is an integer between 1 and 6 inclusive).
+  2. `Masters`
+  3. `PhD`
+
+### Role
+- Each contact may take on multiple roles.
+- Each role must take one of the following values:
+  1. `President`
+  2. `Vice President`
+  3. `Admin`
+  4. `Marketing`
+  5. `Events (Internal)`
+  6. `Events (External)`
+  7. `External Relations`
+
+### Nickname
+- Is an optional field.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
