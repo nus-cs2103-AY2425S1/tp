@@ -194,16 +194,8 @@ public class EditWeddingCommand extends Command {
             this.partner2 = partner2;
         }
 
-        public Optional<Index> getPartner1Index() {
-            return Optional.ofNullable(partner1Index);
-        }
-
         public void setPartner1Index(Index partner1Index) {
             this.partner1Index = partner1Index;
-        }
-
-        public Optional<Index> getPartner2Index() {
-            return Optional.ofNullable(partner2Index);
         }
 
         public void setPartner2Index(Index partner2Index) {
