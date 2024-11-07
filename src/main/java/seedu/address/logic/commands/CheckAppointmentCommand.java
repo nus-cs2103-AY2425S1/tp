@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import java.time.LocalDate;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.Messages;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -40,7 +40,7 @@ public class CheckAppointmentCommand extends Command {
      * @param date the specific date and time of the appointment to check (optional)
      */
     public CheckAppointmentCommand(int doctorId, LocalDate date) {
-        requireNonNull(doctorId); // Only patientId is mandatory
+        requireNonNull(doctorId);
         this.doctorId = doctorId;
         this.date = date;
     }
@@ -53,8 +53,7 @@ public class CheckAppointmentCommand extends Command {
         Person doctorToCheckAppointment = model.getFilteredDoctorById(allPersons, doctorId);
 
         if (doctorToCheckAppointment == null) {
-            // Throw an exception if the doctor is not found
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_ID);
         }
 
         if (date == null) {

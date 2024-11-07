@@ -14,7 +14,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class GetIdCommand extends Command {
     public static final String COMMAND_WORD = "get";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": gets the id "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": gets the ID "
             + "of a patient based on the name provided. "
             + COMMAND_WORD + " [KEYWORDS...]\n"
             + "Example: " + COMMAND_WORD

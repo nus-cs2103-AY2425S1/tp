@@ -14,12 +14,15 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX = "The patient index provided is invalid";
-    public static final String MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX = "The doctor index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person ID provided is invalid"
+            + " Please check and enter a new one";
+    public static final String MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX = "The patient ID provided is invalid"
+            + " Please check and enter a new one";
+    public static final String MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX = "The doctor ID provided is invalid"
+            + " Please check and enter a new one";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d person listed! "
             + "Key in [list] to view all patients";
-    public static final String MESSAGE_INVALID_ID = "Invalid Id entered! Check the id that you have entered! "
+    public static final String MESSAGE_INVALID_ID = "Invalid ID entered! Check the ID that you have entered! "
             + "Make sure it is a number!";
     public static final String MESSAGE_EMPTY_REMARK = "The remark you have entered is empty! "
             + "Please enter a valid input!";

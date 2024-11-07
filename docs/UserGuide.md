@@ -222,7 +222,7 @@ Format: `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 Examples:
 * `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
-    Successfully created a new doctor of id: #1 : <br>
+    Successfully created a new doctor of ID: #1 : <br>
     Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: Specialist in physiotherapy
 
 * `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
@@ -248,7 +248,7 @@ Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 Examples:
 * `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br> 
-    Successfully created a new patient of id: #0 : <br>
+    Successfully created a new patient of ID: #0 : <br>
     John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
 * `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
@@ -269,7 +269,7 @@ Examples:
   Successfully deleted a patient.
 * `deleteP 2` <br>
   **Output**: <br>
-  Unable to delete a patient, check the id entered!
+  Unable to delete a patient, check the ID entered!
 
 ### Add a Remark to a Patient : `addR`
 
@@ -286,7 +286,7 @@ Examples:
    Successfully added remarks: cancer to patient of ID: 0.
 *  `addR z/0 r/cancer` <br>
    **Output**: <br>
-   Unable to add remarks! Check the id entered!
+   Unable to add remarks! Check the ID entered!
 
 ### Listing All Persons : `list`
 
@@ -327,7 +327,7 @@ Examples:
 
 ### Getting ID of Doctor or Patient by Name: `get`
 
-Gets the id of a doctor or patient whose names contain any of the given keywords.
+Gets the ID of a doctor or patient whose names contain any of the given keywords.
 
 Format: `get KEYWORD`
 
@@ -337,19 +337,19 @@ Format: `get KEYWORD`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* A _notification message_ will be output if there is failure in retrieving id from MedDict database in address book.
+* A _notification message_ will be output if there is failure in retrieving ID from MedDict database in address book.
 
 Examples:
 * `get john` <br>
   **Output**: <br>
-  The id of the person that you are finding is: 0
+  The ID of the person that you are finding is: 0
 * `get johnny` <br>
   **Output**: <br>
-  Invalid name entered! Check the name that you want to search id for! Key in 'list' to view all patients
+  Invalid name entered! Check the name that you want to search ID for! Key in 'list' to view all patients
 * `get johnny` <br>
   **Output**: <br>
   Two persons listed that suits your keyword! <br>
-  enters more specific name keywords to retrieve the id of the person
+  enters more specific name keywords to retrieve the ID of the person
 
 ### Finding Doctor or Patient by Name: `get`
 
@@ -363,7 +363,7 @@ Format: `find KEYWORD`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* A _notification message_ will be output if there is failure in retrieving id from MedDict database in address book.
+* A _notification message_ will be output if there is failure in retrieving ID from MedDict database in address book.
 
 Examples:
 * `find john` <br>
@@ -371,12 +371,12 @@ Examples:
   One person listed! Key in [list] to view all patients
 * `find ` <br>
   **Output**: <br>
-  Invalid name entered! Check the name that you want to search id for! <br>
+  Invalid name entered! Check the name that you want to search ID for! <br>
   Key in [list] to view all patients
 * `find johnny` <br>
   **Output**: <br>
   Two persons listed that suits your keyword! <br>
-  enters more specific name keywords to retrieve the id of the person
+  enters more specific name keywords to retrieve the ID of the person
 
 ### Adding an Appointment : `addA`
 
@@ -420,11 +420,11 @@ Format: `view z/ID [x/DATE_TIME]`
 Examples:
 *  `view z/0 x/2024-12-31 15:23` <br>
    **Output**: <br>
-   Appointment: `2024-12-31 15:23` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`.
+   Appointment: `2024-12-31 15:23` for `0` (patient ID) with `1` (doctor ID). Remarks: `Third physiotherapy session`.
 *  `view z/0` <br>
    **Output**: <br>
-   Appointment: `2024-12-31 15:23` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`. <br>
-   Appointment: `2024-12-31 16:23` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`.
+   Appointment: `2024-12-31 15:23` for `0` (patient ID) with `1` (doctor ID). Remarks: `Third physiotherapy session`. <br>
+   Appointment: `2024-12-31 16:23` for `0` (patient ID) with `1` (doctor ID). Remarks: `Fourth physiotherapy session`.
 *  `view z/1 x/2024-12-31` <br>
    **Output**: <br>
    No history found for the person.
@@ -441,8 +441,8 @@ Format: `checkA z/ID y/DATE`
 Examples:
 *  `checkA z/1 y/2024-12-31` <br>
    **Output**: <br>
-   Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session` <br>
-   Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`
+   Appointment: `2024-12-31` for `0` (patient ID) with `1` (doctor ID). Remarks: `Third physiotherapy session` <br>
+   Appointment: `2024-12-31` for `0` (patient ID) with `1` (doctor ID). Remarks: `Fourth physiotherapy session`
 *  `checkA z/1 y/2024-12-30` <br>
    **Output**: <br>
    No appointment found for Doctor: `Amy Bee`
