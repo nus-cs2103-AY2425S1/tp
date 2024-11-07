@@ -24,11 +24,11 @@ public class ExcludePersonCommand extends Command {
     public static final String COMMAND_WORD = "exclude";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes a person from the search results.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Removes a contact from the search results.\n"
+            + "Parameters: CONTACT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " pi/ 1, 5";
 
-    public static final String MESSAGE_SUCCESS = "Person removed from search results";
+    public static final String MESSAGE_SUCCESS = "Contact removed from search results";
 
     private final Set<Index> excludedPersonIndices;
 
