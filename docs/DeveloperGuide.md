@@ -728,6 +728,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `mark -s 0 active`<br>
       Expected: Error message is shown. Status of suppliers is not changed.
 
+### Testing Delivery Commands
+
 ### Adding a delivery
 
 1. Adding a delivery with existing supplier
