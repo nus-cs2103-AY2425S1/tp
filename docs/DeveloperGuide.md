@@ -123,8 +123,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the EventTory data i.e., all `Vendor`, `Model`, and `Association` objects
-* contains observables that can be 'observed' by outsiders e.g. the UI can be bound to a UiState state so that the UI automatically changes the screen when the data in UiState changes, such as:
+* stores EventTory data i.e., all `Vendor`, `Model`, and `Association` objects
+* contains observables that can be 'observed' by outsiders e.g. the UI can be bound to a `UiState` state so that the UI automatically changes the screen when the data in `UiState` changes, such as:
     * the current displayed `UiState` as a `ObjectProperty<UiState>` object
     * the current selected (if any) `Event`, `Vendor` objects for viewing as separate `ObjectProperty<Event>`, `ObjectProperty<Vendor>` objects
     * the current selected `Event`, `Vendor` objects (e.g., results of a search query) as a separate _filtered_ list
