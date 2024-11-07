@@ -20,8 +20,8 @@ public class Messages {
             Find: find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]
             Show group: show GROUP_INDEX
             Delete: delete INDEX
-            List: list INDEX
-            Clear: clear INDEX
+            List: list
+            Clear: clear
             Help: help""";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command \n%1$s";
     public static final String MESSAGE_EMPTY_COMMAND_FORMAT = "There needs to be a command and/or arguments! \n%1$s";
@@ -41,10 +41,16 @@ public class Messages {
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_NUMBER_OF_ARGS = "There should be at least one argument";
-    public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_FIELDS = "The following duplicate fields are detected and is not permitted: ";
+
     public static final String MESSAGE_MORE_THAN_TEN_DUPLICATE_FIELDS =
             "There should not be more than ten duplicate fields for group (g/)";
+            
+    public static final String MESSAGE_DUPLICATE_EXPLANATION =
+            "The above is considered duplicate fields because they have a preceding space.";
+    public static final String MESSAGE_DUPLICATE_SOLUTION =
+            "If you are trying to use the field values as part of a string, remove the preceding space";
+
     public static final String MESSAGE_NAME_CANNOT_BE_EMPTY = "Name cannot be empty.";
     public static final String MESSAGE_INVALID_STUDENT_ID_FORMAT = "Invalid Student ID format. It should be 9"
             + " characters with letters at the start and end, and digits in between (e.g., 'A1234567E').";
@@ -66,7 +72,9 @@ public class Messages {
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
-        return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+        return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields)
+                + "\n" + MESSAGE_DUPLICATE_EXPLANATION
+                + "\n" + MESSAGE_DUPLICATE_SOLUTION;
     }
 
     /**
