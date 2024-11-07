@@ -27,15 +27,16 @@ public class DeleteCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL  (atleast one) \n"
+            + PREFIX_EMAIL + "EMAIL  (at least one) \n"
             + "Example: " + COMMAND_WORD + " n/John Doe";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found.";
+    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found."
+            + " Use more attributes (name, phone number, email) to identify the exact person.";
     public static final String MESSAGE_NO_PERSON_FOUND = "No matching person found. Please check the details.";
 
     public static final String MESSAGE_NO_ARGUMENTS_FOUND = "Please provide at least one of the following:"
-            + " name, phone, or email.";
+            + " name, phone, or email that uniquely identifies a patient.";
 
     private final Optional<String> name;
     private final Optional<String> phone;

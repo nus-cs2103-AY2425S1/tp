@@ -15,8 +15,9 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons with the specified tag and/or phone"
-          + " number and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons with the following specified fields:"
+          + " phone number, email, address, tag and any matching allergies"
+          + " and displays them as a list with index numbers.\n"
           + "Parameters: PREFIX/PREFIX_NAME + [PREFIX/MORE_PREFIX_NAMES...]\n"
           + "Example: " + COMMAND_WORD + " t/High Risk p/88506657";
 

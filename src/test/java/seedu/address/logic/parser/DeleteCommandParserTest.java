@@ -67,8 +67,8 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        String expectedMessage = "Invalid command format! \n"
-                + "Please provide at least one of the following: name, phone, or email.";
+        String expectedMessage =
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_NO_ARGUMENTS_FOUND);
         assertParseFailure(parser, "a", expectedMessage);
     }
 
