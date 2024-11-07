@@ -262,11 +262,11 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 3. Open the `/data/` folder.
 4. Open your data export file (`addressbook.csv`/`addressbook.txt`) in your application of choice.
 
-**Q**: I have created a data export file in CSV/TXT. How can I open my data in BA€ on a different computer?  
+**Q**: How can I open my data in BA€ on a different computer?  
 **A**:
 1. Install BA€ on your secondary computer.
-2. Copy your data export file (`addressbook.csv`/`addressbook.txt`) from BA€'s `/data/` folder on your primary computer.
-3. Place the copied file in BA€'s `/data/` folder on your secondary computer.
+2. Copy your data file (`addressbook.json`) from BA€'s `/data/` folder on your primary computer.
+3. Paste the copied data file in BA€'s `/data/` folder on your secondary computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
