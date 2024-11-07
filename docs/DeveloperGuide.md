@@ -646,7 +646,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
    
-   1. Test case: `eDit 3 owed/500 p/89873423`<br>Expected: Student number 3 will have the new values for their **OWED_AMOUNT** and **PHONE**.
+   1. Test case: `eDit 3 owed/500 p/89873423`<br>Expected: Student number 3 will have the new values for their **OWED_AMOUNT** and **PHONE_NUMBER**.
    
    1. Other incorrect edit commands to try: `edit`, `edit 0`, `edit x`, `...` (where x is larger than the list size)<br>
    Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
@@ -665,7 +665,7 @@ testers are expected to do more *exploratory* testing.
       Expected: An error message displayed reminds you that **RATE** must be from $0.01 to $1000.00.
    
    1. Test case: `edit 1 n/ p/654321234` <br/>
-      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE** are invalid; however, the error message is shown in the order that the attributes shown in the app.
+      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE_NUMBER** are invalid; however, the error message is shown in the order that the attributes shown in the app.
 
 
 ### Deleting a student
@@ -804,7 +804,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. Prerequisite: There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
+    1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
 
     1. Test case: Delete the `ugteach.json` file.<br>
        Expected: UGTeach should create a new `ugteach.json` file with default data.
