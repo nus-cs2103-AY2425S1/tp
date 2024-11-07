@@ -40,6 +40,11 @@ public class Messages {
     public static final String MESSAGE_MUST_BE_PERSON_LIST = "%1$s must only be used in person list view!\n"
             + "Use list command to switch to person list view.";
 
+    public static final String MESSAGE_EMPTY_DESCRIPTION = "Description should not be blank!";
+    public static final String MESSAGE_EMPTY_AMOUNT = "Amount should not be blank!";
+    public static final String MESSAGE_EMPTY_OTHER_PARTY = "Other party should not be blank!";
+    public static final String MESSAGE_EMPTY_DATE = "Date should not be blank!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
