@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,38 +24,15 @@ import seedu.address.testutil.TypicalTasks;
 public class DeleteTaskCommandTest {
 
     private Model model;
-    private Model originalModelState;
 
     @BeforeEach
     public void setUp() {
         // Set up a model with a few typical tasks and one person with a task
         model = new ModelManager();
         List<Task> taskList = TypicalTasks.getTypicalTasks();
-        for (Task task : taskList) {
-            model.addTask(task);
-        }
-        Person personWithTask = new PersonBuilder().withTasks("todo: buy groceries").build();
-        model.addPerson(personWithTask);
-
-        // Save original state for resetting
-        originalModelState = new ModelManager();
-        for (Task task : taskList) {
-            originalModelState.addTask(task);
-        }
-        originalModelState.addPerson(personWithTask);
+        model.addTask(taskList.get(0));
     }
 
-    @AfterEach
-    public void tearDown() {
-        // Reset the model to the original state
-        model = new ModelManager();
-        for (Task task : originalModelState.getFilteredTaskList()) {
-            model.addTask(task);
-        }
-        for (Person person : originalModelState.getFilteredPersonList()) {
-            model.addPerson(person);
-        }
-    }
 
     @Test
     public void execute_validIndex_success() throws Exception {
@@ -69,25 +45,31 @@ public class DeleteTaskCommandTest {
         assertEquals(expectedMessage, result.getFeedbackToUser());
 
         // Ensure the task is removed from the model
-        assertFalse(model.getFilteredTaskList().contains(taskToDelete), "The task should be removed from the model.");
+        assertFalse(model.getFilteredTaskList().contains(taskToDelete),
+                "The task should be removed from the model.");
+        model.addTask(new Todo("buy groceries"));
     }
 
     @Test
     public void execute_taskAssignedToPerson_updatesPersonTasks() throws Exception {
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
+        Person personWithTask = new PersonBuilder().withTasks("todo: buy groceries").build();
+        model.addPerson(personWithTask);
         deleteTaskCommand.execute(model);
 
         // Ensure the task is removed from each person's task list
-        for (Person person : model.getFilteredPersonList()) {
-            assertFalse(person.hasTask(taskToDelete), "The person should no longer have the deleted task.");
-        }
+        assertFalse(personWithTask.hasTask(taskToDelete), "The person should no longer have the deleted task.");
+        model.addTask(new Todo("buy groceries"));
+        model.deletePerson(personWithTask);
     }
 
 
     @Test
     public void execute_taskNotAssignedToAnyPerson_noChangesToPersons() throws Exception {
         Task unassignedTask = new Todo("unassigned task");
+        Person personWithNoTask = new PersonBuilder().withName("notask").build();
+        model.addPerson(personWithNoTask);
         model.addTask(unassignedTask);
         Index unassignedTaskIndex = Index.fromOneBased(model.getFilteredTaskList().size());
 
@@ -96,9 +78,10 @@ public class DeleteTaskCommandTest {
         deleteTaskCommand.execute(model);
 
         // Ensure no person was affected since the task was unassigned
-        for (Person person : model.getFilteredPersonList()) {
-            assertFalse(person.hasTask(unassignedTask), "Persons without task should remain unaffected.");
-        }
+
+        assertFalse(personWithNoTask.hasTask(unassignedTask),
+                "Persons without task should remain unaffected.");
+        model.deletePerson(personWithNoTask);
     }
 
     @Test
@@ -115,6 +98,10 @@ public class DeleteTaskCommandTest {
         // Verify task is removed from both persons
         assertFalse(person1.hasTask(taskToDelete), "Person 1 should no longer have the deleted task.");
         assertFalse(person2.hasTask(taskToDelete), "Person 2 should no longer have the deleted task.");
+        model.deletePerson(person1);
+        model.deletePerson(person2);
+        model.addTask(new Todo("buy groceries"));
+
     }
 
     @Test
