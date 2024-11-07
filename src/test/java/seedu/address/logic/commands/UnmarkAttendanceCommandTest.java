@@ -18,7 +18,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.Teacher;
 import seedu.address.testutil.StudentBuilder;
@@ -46,20 +45,19 @@ public class UnmarkAttendanceCommandTest {
         // Prepare the command to unmark attendance
         Index studentIndex = Index.fromZeroBased(model.getFilteredPersonList().indexOf(updatedStudent));
         UnmarkAttendanceCommand unmarkAttendanceCommand = new UnmarkAttendanceCommand(
-                new Index[] { studentIndex });
+                new Index[]{studentIndex});
 
-        // Expected model after unmarking attendance
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.unmarkAttendance(updatedStudent);
-
-        assertEquals(initialDays, updatedStudent.getDaysAttendedValue() - 1);
+        // Execute and check that attendance is decremented correctly
+        unmarkAttendanceCommand.executeCommand(model);
+        Student unmarkedStudent = (Student) model.getFilteredPersonList().get(studentIndex.getZeroBased());
+        assertEquals(initialDays, unmarkedStudent.getDaysAttended().getValue());
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         // Arrange
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(new Index[] { outOfBoundsIndex });
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(new Index[]{outOfBoundsIndex});
 
         // Act & Assert
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
@@ -72,7 +70,7 @@ public class UnmarkAttendanceCommandTest {
         Teacher nonStudentPerson = new TeacherBuilder().withName(VALID_NAME_MICHAEL).build();
         model.addPerson(nonStudentPerson);
         Index indexNonStudent = Index.fromZeroBased(model.getFilteredPersonList().size() - 1);
-        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(new Index[] { indexNonStudent });
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(new Index[]{indexNonStudent});
 
         // Act & Assert
         assertThrows(CommandException.class, () -> command.executeCommand(model),
@@ -80,17 +78,30 @@ public class UnmarkAttendanceCommandTest {
     }
 
     @Test
+    public void execute_studentWithZeroDaysAttendance_throwsCommandException() {
+        // Arrange: Create a student with zero days of attendance and add to the model
+        Student studentWithZeroDays = new StudentBuilder().withName("Student Zero Days").withDaysAttended(0).build();
+        model.addPerson(studentWithZeroDays);
+        Index indexZeroDays = Index.fromZeroBased(model.getFilteredPersonList().indexOf(studentWithZeroDays));
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(new Index[]{indexZeroDays});
+
+        // Act & Assert
+        assertThrows(CommandException.class, () -> command.executeCommand(model),
+                Messages.MESSAGE_INVALID_ATTENDANCE);
+    }
+
+    @Test
     public void equals() {
         // Arrange
-        UnmarkAttendanceCommand unmarkFirstCommand = new UnmarkAttendanceCommand(new Index[] { INDEX_FIRST_PERSON });
-        UnmarkAttendanceCommand unmarkSecondCommand = new UnmarkAttendanceCommand(new Index[] { INDEX_SECOND_PERSON });
+        UnmarkAttendanceCommand unmarkFirstCommand = new UnmarkAttendanceCommand(new Index[]{INDEX_FIRST_PERSON});
+        UnmarkAttendanceCommand unmarkSecondCommand = new UnmarkAttendanceCommand(new Index[]{INDEX_SECOND_PERSON});
         UnmarkAttendanceCommand unmarkMultipleCommand = new UnmarkAttendanceCommand(
-                new Index[] { INDEX_FIRST_PERSON, INDEX_SECOND_PERSON });
+                new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON});
 
         // Act & Assert
         assertTrue(unmarkFirstCommand.equals(unmarkFirstCommand)); // same object
         assertTrue(unmarkFirstCommand.equals(
-                new UnmarkAttendanceCommand(new Index[]{ INDEX_FIRST_PERSON }))); // same values
+                new UnmarkAttendanceCommand(new Index[]{INDEX_FIRST_PERSON}))); // same values
         assertFalse(unmarkFirstCommand.equals(unmarkSecondCommand)); // different index
         assertFalse(unmarkFirstCommand.equals(unmarkMultipleCommand)); // different number of indices
         assertFalse(unmarkFirstCommand.equals(null)); // null comparison
@@ -99,7 +110,7 @@ public class UnmarkAttendanceCommandTest {
 
     @Test
     public void toString_validIndices_correctStringRepresentation() {
-        Index[] indices = { Index.fromOneBased(1), Index.fromOneBased(2) };
+        Index[] indices = {Index.fromOneBased(1), Index.fromOneBased(2)};
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(indices);
         String expectedString = UnmarkAttendanceCommand.class.getCanonicalName() + "{targetIndexArray="
                 + Arrays.toString(indices) + "}";
