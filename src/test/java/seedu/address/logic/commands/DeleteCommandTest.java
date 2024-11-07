@@ -176,4 +176,15 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
             + ": " + outOfBoundIndex.getOneBased());
     }
+
+    @Test
+    public void execute_duplicateIndicesUnfilteredList_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(new Index[]{INDEX_FIRST_PERSON, INDEX_FIRST_PERSON});
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_DUPLICATE_PERSON_DISPLAYED_INDEX
+            + ": " + INDEX_FIRST_PERSON.getOneBased());
+
+        deleteCommand = new DeleteCommand(new Index[]{INDEX_SECOND_PERSON, INDEX_FIRST_PERSON, INDEX_SECOND_PERSON});
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_DUPLICATE_PERSON_DISPLAYED_INDEX
+            + ": " + INDEX_SECOND_PERSON.getOneBased());
+    }
 }
