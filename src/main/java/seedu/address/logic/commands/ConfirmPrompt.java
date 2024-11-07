@@ -40,4 +40,9 @@ public class ConfirmPrompt extends Command {
         }
         return savedCommand.equals(otherConfirmPrompt.savedCommand);
     }
+
+    @Override
+    public String toString() {
+        return "Confirmation prompt of: " + savedCommand.toString();
+    }
 }

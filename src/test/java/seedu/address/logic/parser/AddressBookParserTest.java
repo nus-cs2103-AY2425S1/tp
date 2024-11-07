@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ConfirmCommand;
 import seedu.address.logic.commands.ConfirmPrompt;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -32,8 +33,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person).toString(), command.toString());
+        ConfirmPrompt command = (ConfirmPrompt) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new ConfirmPrompt(new AddCommand(person)).toString(), command.toString());
     }
 
     @Test

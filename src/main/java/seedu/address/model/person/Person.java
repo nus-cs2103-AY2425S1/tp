@@ -157,12 +157,12 @@ public class Person {
      * Returns a string representation of the person's details for confirmation.
      */
     public String getConfirmationString() {
-        return "Name: " + name +
-                ", NRIC: " + identityNumber +
-                ", Phone: " + phone +
-                ", Email: " + email +
-                ", Address: " + address +
-                ", Status: " + status;
+        return "Name: " + name
+                + ", NRIC: " + identityNumber
+                + ", Phone: " + phone
+                + ", Email: " + email
+                + ", Address: " + address
+                + ", Status: " + status;
     }
 
 }
