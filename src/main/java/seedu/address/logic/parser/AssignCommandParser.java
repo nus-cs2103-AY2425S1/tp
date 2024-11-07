@@ -3,12 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
-import java.util.List;
 import java.util.stream.Stream;
 
-import com.fasterxml.jackson.core.JsonToken;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AssignCommand;
@@ -20,6 +17,11 @@ import seedu.address.model.person.Name;
  */
 public class AssignCommandParser implements Parser<AssignCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the Assign Command
+     * and returns an AssignCommand object for execution
+     * @throws ParseException if the user input does not conform to the expected format
+     */
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);

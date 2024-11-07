@@ -95,6 +95,9 @@ public class DeliveryList {
         internalList.remove(deliveryIndex.getZeroBased());
     }
 
+    /**
+     * Removes the specified delivery from the internal list
+     */
     public void remove(Delivery delivery) throws DeliveryNotFoundException {
         requireNonNull(delivery);
         internalList.remove(delivery);

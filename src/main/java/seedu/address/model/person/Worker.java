@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryList;
@@ -13,7 +12,7 @@ import seedu.address.model.delivery.DeliveryList;
  * Contains list of DeliveryIds the worker is responsible for
  */
 public class Worker {
-    private final DeliveryList assignedDeliveryList= new DeliveryList();
+    private final DeliveryList assignedDeliveryList = new DeliveryList();
 
     /**
      * Sets the delivery list of this worker.
@@ -48,6 +47,9 @@ public class Worker {
         return assignedDeliveryList.asUnmodifiableObservableList();
     }
 
+    /**
+     * Checks if the assignedDeliveryList of the worker contains the specified delivery
+     */
     public boolean hasDelivery(Delivery delivery) {
         System.out.println(assignedDeliveryList);
         System.out.println(delivery);

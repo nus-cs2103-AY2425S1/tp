@@ -47,16 +47,19 @@ public class RemoveCommand extends Command {
             throw new CommandException(MESSAGE_NOT_IN_INSPECT);
         } else if (InspectWindow.getInspectedPerson().isClient()) {
             throw new CommandException(MESSAGE_NOT_EMPLOYEE);
-        }   else {
+        } else {
             return handleDeliveryRemoval(model);
         }
     }
 
+    /**
+     * Handles the removal of deliveries from the employee
+     */
     public CommandResult handleDeliveryRemoval(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         Worker inspectedWorker = inspectedPerson.getWorker();
-        List<Delivery> lastShownList= model.getFilteredDeliveryList();
+        List<Delivery> lastShownList = model.getFilteredDeliveryList();
         validateIndexes(lastShownList.size(), indexList);
 
         List<Delivery> deliveriesToDeleteList = deleteDeliveries(inspectedWorker, lastShownList);

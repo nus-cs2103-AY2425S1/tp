@@ -13,6 +13,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class RemoveCommandParser implements Parser<RemoveCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the Remove Command
+     * and returns an RemoveCommand object for execution
+     * @throws ParseException if the user input does not conform to the expected format
+     */
     public RemoveCommand parse(String args) throws ParseException {
         try {
             List<Index> indexes = ParserUtil.parseIndex(args);
