@@ -19,6 +19,7 @@ Main Features:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<!-- Quick start -->
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -48,6 +49,7 @@ Main Features:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<!-- Features -->
 ## Features
 
 <box type="info" seamless>
@@ -72,6 +74,7 @@ Main Features:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<!-- Viewing help -->
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -81,6 +84,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
+<!-- Adding a person -->
 ### Adding a person: `add p`
 
 Adds a person to the address book.
@@ -96,6 +100,7 @@ Examples:
 * `add p n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add p n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<!-- Adding an event -->
 ### Adding an event: `add e`
 
 Adds an event to the address book.
