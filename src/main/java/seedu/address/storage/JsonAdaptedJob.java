@@ -15,6 +15,7 @@ import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
 import seedu.address.model.job.JobSalary;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -65,16 +66,45 @@ class JsonAdaptedJob {
      * @throws IllegalValueException if there were any data constraints violated in the adapted job.
      */
     public Job toModelType() throws IllegalValueException {
-
-        Name modelName = new Name(name);
-
         List<Tag> jobRequirements = new ArrayList<>();
         for (JsonAdaptedTag requirement : requirements) {
             jobRequirements.add(requirement.toModelType());
         }
-        JobCompany modelJobCompany = new JobCompany(company);
-        JobSalary modelJobSalary = new JobSalary(salary);
-        JobDescription modelJobDescription = new JobDescription(description);
+
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+
+        if (company == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JobCompany.class.getSimpleName()));
+        }
+        if (!JobCompany.isValidCompany(company)) {
+            throw new IllegalValueException(JobCompany.MESSAGE_CONSTRAINTS);
+        }
+        final JobCompany modelJobCompany = new JobCompany(company);
+
+        if (salary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JobSalary.class.getSimpleName()));
+        }
+        if (!JobSalary.isValidSalary(salary)) {
+            throw new IllegalValueException(JobSalary.MESSAGE_CONSTRAINTS);
+        }
+        final JobSalary modelJobSalary = new JobSalary(salary);
+
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JobDescription.class.getSimpleName()));
+        }
+        if (!JobDescription.isValidDescription(description)) {
+            throw new IllegalValueException(JobDescription.MESSAGE_CONSTRAINTS);
+        }
+        final JobDescription modelJobDescription = new JobDescription(description);
 
         Set<Tag> modelJobRequirements = new HashSet<>(jobRequirements);
 
