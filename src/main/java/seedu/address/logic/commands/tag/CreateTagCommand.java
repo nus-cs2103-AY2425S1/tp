@@ -26,7 +26,7 @@ public class CreateTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "florist";
 
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the Wedlinker system.";
 
     private final Tag toAdd;
 

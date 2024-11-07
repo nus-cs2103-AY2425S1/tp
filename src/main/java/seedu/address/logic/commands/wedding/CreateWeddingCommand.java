@@ -29,7 +29,7 @@ public class CreateWeddingCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
 
-    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the Wedlinker system.";
 
     private final Wedding weddingToAdd;
 

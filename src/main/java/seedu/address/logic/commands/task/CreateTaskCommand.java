@@ -37,7 +37,7 @@ public class CreateTaskCommand extends Command {
             + PREFIX_TASK + "Inform groom of itinerary";
 
     public static final String MESSAGE_SUCCESS = "New task(s) added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Wedlinker system.";
 
     private final HashSet<Task> tasksToAdd;
 
