@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # TrueRental Developer Guide
@@ -13,8 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+ChatGPT was used to create the TrueRental application logo. ![logo](images/true_rental.jpg)
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -102,8 +103,7 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -118,6 +118,7 @@ call as an example.
 
 **Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
+
 </box>
 
 The sequence diagram below illustrates the interactions within the `Logic` component,
@@ -129,6 +130,7 @@ taking `execute("cadd n/John Doe p/91231231 e/john@example.com")` API call as an
 
 **Note:** The lifeline for `AddClientCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
+
 </box>
 
 How the `Logic` component works:
@@ -157,8 +159,7 @@ How the parsing works:
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="890" />
 
@@ -185,8 +186,7 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -209,7 +209,25 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<!-- TODO!! @Everybody --> 
+### Confirmation prompts
+
+Some commands such as `clear`, `cdelete` and `rdelete` prompts the user for confirmation.
+
+How confirmation prompts work:
+
+* The `CommandResult` class now has different types:
+  * **`ORDINARY`**: A regular result, representing a command's success.
+  * **`SHOW_HELP`**: The help window should be shown to the user.
+  * **`EXIT`**: The app should exit.
+  * **`PROMPT`**: The app should prompt the user for confirmation.
+* There is a new `Supplier<CommandResult>` field in the `CommandResult` class, which will be applied when the user 
+  confirms the prompt.
+* In commands that will prompt for confirmation, the `execute` method returns a `CommandResult` that contains an 
+  additional `Supplier<Command>` and prompt message.
+* The `LogicManager` detects if the result of a command is of the type `PROMPT`, and enters a state where it waits for
+  a confirmation.
+* `LogicManager` also keeps track of the most recent `CommandResult`. When a confirmation is obtained, it will apply
+  the supplier in the previous `CommandResult`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -732,7 +750,224 @@ testers are expected to do more *exploratory* testing.
 
 #### Adding a client's [_rental information_](#glossary-rental-information)
 
-<!-- TODO!! @Song Lin --> 
+Adding a _client_'s rental information while all _clients_ are being shown
+
+<box type="warning">
+
+**Prerequisite**: List all _clients_ using the `list` command and suppose 10 clients are displayed. Additionally, one of 
+the clients already has a rental saved in the application with address of "Blk 321 Ang Mo Kio Ave 3, #09-123".<br>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `radd 99 a/508 Bishan Street 11 #01-386`<br>
+
+<box type="wrong">
+
+No rental information will be added to the client with index 99 as the client does not exist. Error details will be 
+displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 2**: `radd a/508 Bishan Street 11 #01-386`<br>
+
+<box type="wrong">
+
+No rental information will be added as the index of client is not provided in the command. Error details will be 
+displayed in the result display box
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `radd 1 a/Blk 321 Ang Mo Kio Ave 3, #09-123`<br>
+
+<box type="wrong">
+
+No rental information will be added as there already exist a rental with the same address. Error details will be 
+displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4**: `radd 1 a/508 Bishan Street 11 #01-386`<br>
+
+<box type="success">
+
+A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan 
+Street 11 #01-386"; rental start date, rental end date, rental monthly payment date, monthly rent amount, deposit amount
+and customers as "—" because they are not specified in the command.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5**: `radd 1 s/01/01/2024`<br>
+
+<box type="wrong">
+
+No rental information will be added to the client with index 1 as address is not provided (address is mandatory and must
+be provided). Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 6**: `radd 1 a/508 Bishan Street 11 #01-386 s/01/01/2024 e/30/06/2024`<br>
+
+<box type="success">
+
+A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan 
+Street 11 #01-386", rental start date as "01 Jan 2024" and rental end date as "30 Jun 2024"; rental monthly payment 
+date, monthly rent amount, deposit amount and customers as "—" because they are not specified in the command.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 7**: `radd 1 a/508 Bishan Street 11 #01-386 s/01-01-2024` and 
+`radd 1 a/508 Bishan Street 11 #01-386 r/1 e/31-12-2024`<br>
+
+<box type="wrong">
+
+No rental information will be added to the client with index 1 as rental start date and rental end date are required to 
+be in the form of `dd/mm/yyyy`. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 8**: `radd 1 a/508 Bishan Street 11 #01-386 m/4000 d/8500`<br>
+
+<box type="success">
+
+A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan 
+Street 11 #01-386", monthly rent amount as "$4000" and deposit amount as "$8500"; rental start date, rental end date, 
+rental monthly payment date and customers as "—" because they are not specified in the command.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 9**: `radd 1 a/508 Bishan Street 11 #01-386 m/1000.`, `radd 1 a/508 Bishan Street 11 #01-386 d/1000.`,
+`radd 1 a/508 Bishan Street 11 #01-386 m/1000.0`, `radd 1 a/508 Bishan Street 11 #01-386 d/1000.0`,
+`radd 1 a/508 Bishan Street 11 #01-386 m/1000.111`, `radd 1 a/508 Bishan Street 11 #01-386 d/1000.111`,
+`radd 1 a/508 Bishan Street 11 #01-386 m/-1000` and `radd 1 a/508 Bishan Street 11 #01-386 d/-1000`<br>
+
+<box type="wrong">
+
+No rental information will be added to the client with index 1 as monthly rent amount and deposit amount are required to
+be a positive integer (and including 0) and with exactly 2 decimal points if a decimal point is specified. Error details
+will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 10**: `radd 1 a/508 Bishan Street 11 #01-386 dd/20`<br>
+
+<box type="success">
+
+A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan 
+Street 11 #01-386" and rental monthly payment date as "20"; rental start date, rental end date, monthly rent amount, 
+deposit amount and customers as "—" because they are not specified in the command.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 11**: `radd 1 a/508 Bishan Street 11 #01-386 dd/-1` and `radd 1 a/508 Bishan Street 11 #01-386 dd/40`<br>
+
+<box type="wrong">
+
+No rental information will be added to the client with index 1 as rental monthly payment date are required to be an 
+integer in the range of 1 to 31. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 12**: `radd 1 a/508 Bishan Street 11 #01-386 cl/Steven;David`<br>
+
+<box type="success">
+
+A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan 
+Street 11 #01-386" and customers as "Steven;David"; rental start date, rental end date, rental monthly payment date, 
+monthly rent amount and deposit amount as "—" because they are not specified in the command.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 13**: `radd 1 a/508 Bishan Street 11 #01-386 cl/Steven, David;Jason Ong`<br>
+
+<box type="success">
+
+A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan 
+Street 11 #01-386" and customers as "Steven, David;Jason Ong"; rental start date, rental end date, rental monthly 
+payment date, monthly rent amount and deposit amount as "—" because they are not specified in the command. Note that 
+"Steven, David" will be treated as one person, as we only recognized ";" as the separator for customer's name.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 14**: `radd 1 a/508 Bishan Street 11 #01-386 cl/Steven;David;` and
+`radd 1 a/508 Bishan Street 11 #01-386 cl/Steven;`<br>
+
+<box type="wrong">
+
+No rental information will be added to the client with index 1 as single customer does not need the ";" separator; and 
+for multiple customers, ";" separator is used in between names to separate the names, ";" should not be added anywhere 
+else. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 15**: `radd 1 a/508 Bishan Street 11 #01-386 s/ e/ dd/ m/ d/ cl/`<br>
+
+<box type="success">
+
+A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan 
+Street 11 #01-386"; rental start date, rental end date, rental monthly payment date, monthly rent amount, deposit amount
+and customers as "—", because no values are specified after their respective prefix.
+
+</box>
+
+</box>
 
 #### Viewing a client's [_rental information_](#glossary-rental-information)
 
@@ -794,7 +1029,203 @@ testers are expected to do more *exploratory* testing.
 
 #### Editing a client's [_rental information_](#glossary-rental-information)
 
-<!-- TODO!! @Song Lin --> 
+Editing a _client_'s _rental information_.
+
+<box type="warning">
+
+**Prerequisite**: List all _clients_ using the `list` command and suppose 10 clients are displayed. The first client in
+the list has one rental information with address as "Blk 321 Ang Mo Kio Ave 3, #09-123", rental start date as 
+"01 Apr 2018", rental end date as "31 Dec 2024", rental monthly payment date as "15", monthly rent amount as "$2500.00",
+deposit amount as "$7500.00" and customers as "Jackson;Yummi"<br>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `redit 99 r/1 s/01/01/2024`<br>
+
+<box type="wrong">
+
+No client's rental information will be edited as the client with index 99 does not exist. Error details will be
+displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 2**: `redit 1 r/2 s/01/01/2024`<br>
+
+<box type="wrong">
+
+No client's rental information will be edited as the client with index 1 (the first client) does not have a second 
+rental information. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `redit 1 r/1 a/729 Woodlands Circle #01-47`<br>
+
+<box type="success">
+
+The first rental information of the first client will be edited, specifically address will be edited from "Blk 321 Ang 
+Mo Kio Ave 3, #09-123" to "729 Woodlands Circle #01-47".
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4**: `redit 1 r/1 a/`<br>
+
+<box type="wrong">
+
+No client's rental information will be edited as address is mandated and cannot be empty for all rental information.
+Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5**: `redit 1 r/1 s/01/01/2024 e/30/06/2024`<br>
+
+<box type="success">
+
+The first rental information of the first client will be edited, specifically rental start date will be edited from
+"01 Apr 2018" to "01 Jan 2024" and rental end date will be edited from "31 Dec 2024" to "30 Jun 2024".
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 6**: `redit 1 r/1 s/01-01-2024` and `redit 1 r/1 e/31-12-2024`<br>
+
+<box type="wrong">
+
+No client's rental information will be edited as rental start date and rental end date are required to be in the form of
+`dd/mm/yyyy`. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 7**: `redit 1 r/1 m/4000 d/8500`<br>
+
+<box type="success">
+
+The first rental information of the first client will be edited, specifically monthly rent amount will be edited from 
+"$2500.00" to "$4000.00" and deposit amount will be edited from "$7500.00" to "$8500.00".
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 8**: `redit 1 r/1 m/1000.`, `redit 1 r/1 d/1000.`, `redit 1 r/1 m/1000.0`, `redit 1 r/1 d/1000.0`,
+`redit 1 r/1 m/1000.111`, `redit 1 r/1 d/1000.111`, `redit 1 r/1 m/-1000` and `redit 1 r/1 d/-1000`<br>
+
+<box type="wrong">
+
+No client's rental information will be edited as monthly rent amount and deposit amount are required to be a positive 
+integer (and including 0) and with exactly 2 decimal points if a decimal point is specified. Error details will be 
+displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 9**: `redit 1 r/1 dd/20`<br>
+
+<box type="success">
+
+The first rental information of the first client will be edited, specifically rental monthly payment date will be edited
+from "15" to "20".
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 10**: `redit 1 r/1 dd/-1` and `redit 1 r/1 dd/40`<br>
+
+<box type="wrong">
+
+No client's rental information will be edited as rental monthly payment date are required to be an integer in the range
+of 1 to 31. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 11**: `redit 1 r/1 cl/Steven;David`<br>
+
+<box type="success">
+
+The first rental information of the first client will be edited, specifically customers will be edited from
+"Jackson;Yummi" to "Steven;David".
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 12**: `redit 1 r/1 cl/Steven, David;Jason Ong`<br>
+
+<box type="success">
+
+The first rental information of the first client will be edited, specifically customers will be edited from
+"Jackson;Yummi" to "Steven, David;Jason Ong". Note that "Steven, David" will be treated as one person, as we only
+recognized ";" as the separator for customer's name.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 13**: `redit 1 r/1 cl/Steven;David;` and `redit 1 r/1 cl/Steven;`<br>
+
+<box type="wrong">
+
+No client's rental information will be edited as single customer does not need the ";" separator; and for multiple 
+customers, ";" separator is used in between names to separate the names, ";" should not be added anywhere else. Error 
+details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 14**: `redit 1 r/1 s/ e/ dd/ m/ d/ cl/`<br>
+
+<box type="success">
+
+The first rental information of the first client will be edited, specifically rental start date, rental end date, rental
+monthly payment date, monthly rent amount, deposit amount and customers will be edited from their respective value to
+"—", essentially set all the values back to "empty".
+
+</box>
+
+</box>
 
 #### Listing all [_clients_](#glossary-client)
 
@@ -869,7 +1300,7 @@ testers are expected to do more *exploratory* testing.
         5. `list`
         6. `cdelete 2`
 
-    2. Test case: (Steps 1 to 13 are performed sequentially)
+    2. Test case (Steps 1 to 13 are performed sequentially): 
         1. Step 1: Press up-arrow key on the keyboard.<br>
            Expected: `cdelete 2` is shown in the command box.
         2. Step 2: Press up-arrow key on the keyboard.<br>
@@ -902,7 +1333,250 @@ testers are expected to do more *exploratory* testing.
 
 #### Autofill Commands Feature
 
-<!-- TODO!! @Song Lin --> 
+1. Autofills command name.
+
+<box type="warning">
+
+**Prerequisites**: The input command is empty and user is trying to enter the command.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case** (Steps 1 to 6 are performed sequentially):
+
+Step 1: Enter `r` as the input command.<br>
+
+<box type="success">
+
+Value of the input command is now "r".
+
+</box>
+
+Step 2: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "r" to "radd".
+
+</box>
+
+Step 3: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd" to "redit".
+
+</box>
+
+Step 4: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit" to "rdelete".
+
+</box>
+
+Step 5: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "rdelete" to "rview".
+
+</box>
+
+Step 6: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "rview" to "radd".
+
+</box>
+
+</box><br>
+
+2. Autofills parameter prefix for a command.
+
+<box type="warning">
+
+**Prerequisites**: The input command is empty and user is trying to enter the command.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case** (Steps 1 to 9 are performed sequentially):
+
+Step 1: Enter `radd ` as the input command.<br>
+
+<box type="success">
+
+Value of the input command is now "radd " (Take note of the whitespace at the end of the input).
+
+</box>
+
+
+Step 2: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd " to "radd a/".
+
+</box>
+
+Step 3: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd a/" to "radd cl/".
+
+</box>
+
+
+Step 4: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd cl/" to "radd d/".
+
+</box>
+
+
+Step 5: Press Spacebar key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd d/" to "radd d/ " (Take note of the whitespace at the end of the input).
+
+</box>
+
+
+Step 6: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd d/ " to "radd a/".
+
+</box>
+
+Step 7: Enter `1075 Eunos Avenue 6 #01-171 ` at the end of the input command.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd a/" to "radd a/1075 Eunos Avenue 6 #01-171 " (Take note of the whitespace 
+at the end of the input).
+
+</box>
+
+Step 8: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd a/1075 Eunos Avenue 6 #01-171 " to 
+"radd a/1075 Eunos Avenue 6 #01-171 a/".
+
+</box>
+
+Step 9: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "radd a/1075 Eunos Avenue 6 #01-171 a/" to
+"radd a/1075 Eunos Avenue 6 #01-171 cl/".
+
+</box>
+
+</box>
+
+
+3. Autofills value for parameter.
+
+<box type="warning">
+
+**Prerequisites**: The input command is empty and user is trying to enter the command. Note that autofill values are 
+shared across all parameters and only applicable when there is no value for prefix yet.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case** (Steps 1 to 9 are performed sequentially):
+
+Step 1: Enter `redit cl/J` as the input command.<br>
+
+<box type="success">
+
+Value of the input command is now "redit cl/J".
+
+</box>
+
+Step 2: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit cl/J " to "redit cl/Josh".
+
+</box>
+
+Step 3: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit cl/Josh" to "redit cl/Joshua".
+
+</box>
+
+Step 4: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit cl/Joshua" to "redit cl/Jayden".
+
+</box>
+
+Step 5: Press Spacebar key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit cl/Jayden" to "redit cl/Jayden " (Take note of the whitespace at the end
+of the input).
+
+</box>
+
+Step 6: Enter `a/B` at the end of the input command.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit cl/Jayden " to "redit cl/Jayden a/B".
+
+</box>
+
+Step 7: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit cl/Jayden a/B" to "redit cl/Jayden a/Block".
+
+</box>
+
+Step 8: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit cl/Jayden a/Block" to "redit cl/Jayden a/Blk".
+
+</box>
+
+Step 9: Press Tab key on the keyboard.<br>
+
+<box type="success">
+
+Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jayden a/BLOCK".
+
+</box>
+
+</box>
+
 
 #### Sort all _clients_ by personal information
 

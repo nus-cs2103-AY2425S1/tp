@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_CANCEL_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -21,10 +22,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -89,6 +94,20 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_promptAccept_success() throws CommandException, ParseException {
+        logic.execute(ClearCommand.COMMAND_WORD);
+        CommandResult commandResult = logic.execute("y");
+        assertEquals(ClearCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_promptDeny_cancel() throws CommandException, ParseException {
+        logic.execute(ClearCommand.COMMAND_WORD);
+        CommandResult commandResult = logic.execute("n");
+        assertEquals(MESSAGE_CANCEL_COMMAND, commandResult.getFeedbackToUser());
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
@@ -99,33 +118,51 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void importFile_typicalPersonsAddressBook_success() {
-        assert (logic.importFile(TYPICAL_PERSONS_FILE.toFile()));
+    public void processFile_importTypicalPersonsAddressBook_success() throws CommandException, ParseException {
+        logic.execute(ImportCommand.COMMAND_WORD);
+        logic.execute("y");
+        CommandResult commandResult = logic.processFile(TYPICAL_PERSONS_FILE.toFile());
+        assertEquals(ImportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
         assertEquals(getTypicalAddressBook(), model.getAddressBook());
     }
 
     @Test
-    public void importFile_invalidAddressBook_returnsFalse() {
-        assert !(logic.importFile(INVALID_PERSON_FILE.toFile()));
+    public void processFile_importInvalidAddressBook_failure() throws CommandException, ParseException {
+        logic.execute(ImportCommand.COMMAND_WORD);
+        logic.execute("y");
+        CommandResult commandResult = logic.processFile(INVALID_PERSON_FILE.toFile());
+        assertEquals(ImportCommand.MESSAGE_FAILURE, commandResult.getFeedbackToUser());
+        assertEquals(new AddressBook(), model.getAddressBook());
     }
 
     @Test
-    public void importFile_missingFile_returnsFalse() {
-        assert !(logic.importFile(TEST_DATA_FOLDER.resolve("does-not-exist.json").toFile()));
+    public void processFile_importMissingFile_failure() throws CommandException, ParseException {
+        logic.execute(ImportCommand.COMMAND_WORD);
+        logic.execute("y");
+        CommandResult commandResult = logic.processFile(TEST_DATA_FOLDER.resolve("does-not-exist.json").toFile());
+        assertEquals(ImportCommand.MESSAGE_FAILURE, commandResult.getFeedbackToUser());
+        assertEquals(new AddressBook(), model.getAddressBook());
     }
 
     @Test
-    public void exportFile_typicalPersonsAddressBook_success() throws DataLoadingException {
+    public void processFile_null_messageCancel() throws CommandException, ParseException {
+        logic.execute(ImportCommand.COMMAND_WORD);
+        logic.execute("y");
+        CommandResult commandResult = logic.processFile(null);
+        assertEquals(MESSAGE_CANCEL_COMMAND, commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void processFile_exportTypicalPersonsAddressBook_success() throws DataLoadingException,
+            CommandException, ParseException {
         Path temporaryFile = temporaryFolder.resolve("test.json");
-        assert(logic.exportFile(temporaryFile.toFile()));
+
+        logic.execute(ExportCommand.COMMAND_WORD);
+        CommandResult commandResult = logic.processFile(temporaryFile.toFile());
+        assertEquals(ExportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
 
         ReadOnlyAddressBook addressBookFromFile = storage.readAddressBook(temporaryFile).get();
         assertEquals(model.getAddressBook(), addressBookFromFile);
-    }
-
-    @Test
-    public void exportFile_storageThrowsIoException_returnsFalse() {
-        assertExportFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION);
     }
 
     /**
@@ -212,33 +249,5 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedClient);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
-    }
-
-    /**
-     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component
-     * when exporting a file.
-     *
-     * @param e the exception to be thrown by the Storage component
-     */
-    private void assertExportFailureForExceptionFromStorage(IOException e) {
-        Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
-
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
-            @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
-                    throws IOException {
-                throw e;
-            }
-        };
-
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
-        logic = new LogicManager(model, storage);
-
-        Path temporaryFile = temporaryFolder.resolve("test.json");
-        assert !(logic.exportFile(temporaryFile.toFile()));
     }
 }

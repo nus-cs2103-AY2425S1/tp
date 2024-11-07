@@ -13,7 +13,7 @@ public class PreviousCommandHistoryCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the previous command entered. ";
 
-    public static final String MESSAGE_SUCCESS = "The previous command is : ";
+    public static final String MESSAGE_SUCCESS = "The previous command is :";
     public static final String MESSAGE_FAILURE = "There are no more previous commands.";
 
     @Override

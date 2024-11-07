@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "Configuration guide"
+layout: default.md
+title: "Configuration guide"
 ---
 
 # Configuration guide
