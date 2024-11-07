@@ -108,6 +108,8 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <br>
 
+#### General Interaction
+
 The general interactions within the `Logic` component is shown in the sequence diagram below, taking `execute("delete 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
@@ -355,7 +357,7 @@ When storing data, each `Participation` object is stored separately from `Studen
 
 ### **List and Clear feature**  
 
-The implementation of the List and Clear feature **deviates** slightly from the general format provided in the Logic Component [above](?tab=t.0#heading=h.e3816ie7ouik). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. As these two commands are similar to each other, so only the sequence diagram for List feature when the user inputs `list` will be shown below.
+The implementation of the List and Clear feature **deviates** slightly from the general format provided in the Logic Component [above](#logic-component). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. As these two commands are similar to each other, so only the sequence diagram for List feature when the user inputs `list` will be shown below.
 
 ![ListCommandSequenceDiagram-Logic](images/ListCommandSequenceDiagram.png)
 
@@ -373,6 +375,22 @@ The main steps for this execution are:
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
 
 The implementation of the Clear feature is similar to that of the example given above, but instead of `updateFilteredPersonList(...)` method of the Model Component being called, `setAddressBook(...)` is called.
+
+</div>
+
+---
+
+### **Help and Exit feature**
+
+The implementation of the Help and Exit feature **deviates** from the general format provided in the Logic Component [above](#logic-component). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. In addition, they will not be accessing the `Model` Component, since these two features are not updating or retrieving data. As these two commands are similar to each other, so only the sequence diagram for **Help** feature when the user inputs `help` will be shown below.
+
+![HelpCommandSequenceDiagram-Logic](images/HelpCommandSequenceDiagram.png)
+
+Tha main steps of execution are similar to the [List and Clear feature](#list-and-clear-feature), excluding Step 5.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Exit feature is similar to that of the example given above.
 
 </div>
 
