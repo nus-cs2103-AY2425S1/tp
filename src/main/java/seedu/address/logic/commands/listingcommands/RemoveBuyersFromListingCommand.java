@@ -23,8 +23,8 @@ public class RemoveBuyersFromListingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes buyers from the listing identified by its "
             + "name. "
-            + "Parameters: LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES]...\n"
-            + "Example: " + COMMAND_WORD + " Warton House buyer/Alice buyer/Bob";
+            + "Parameters: LISTING_NAME buyer/BUYER_NAME [buy/MORE_BUYER_NAMES]...\n"
+            + "Example: " + COMMAND_WORD + " Warton House buy/Alice buy/Bob";
 
     public static final String MESSAGE_REMOVE_BUYERS_SUCCESS = "Buyers removed from listing: %1$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
