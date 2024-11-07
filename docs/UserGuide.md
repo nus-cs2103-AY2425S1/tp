@@ -615,7 +615,7 @@ Format: `export`
 <box type="info" seamless>
 
 **Note**:
-* Address book data can only be exported as `.json` files.
+* Address book data can only be exported as `.json` files
 * A new window will be opened that prompts for a file. ![export file window](images/exportFileWindow.png)
 
 </box>
