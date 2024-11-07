@@ -19,7 +19,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -229,7 +229,7 @@ Talentcy data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-Talentcy data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Talentcy data are saved automatically as a JSON file `[JAR file location]/data/talentcy.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
