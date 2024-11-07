@@ -41,6 +41,8 @@ public class ViewCommand extends Command {
     private final Name personName;
     private final boolean isClose;
 
+
+
     /**
      * @param name Name of the contact.
      */
@@ -73,15 +75,23 @@ public class ViewCommand extends Command {
             throw new CommandException("Person " + personName + " not in address book");
         }
 
+        return createCommandResult(model);
+    }
+
+    private CommandResult createCommandResult(Model model) {
         ObjectProperty<Person> person = new SimpleObjectProperty<>(model.getPerson(personName).orElseThrow());
-        model.getAddressBook().getPersonList().addListener((ListChangeListener<Person>) change -> {
+        ListChangeListener<Person> listener = change -> {
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
                     person.set(null);
-                    model.getPerson(personName).ifPresentOrElse(person::set, () -> {});
+                    model.getPerson(personName).ifPresentOrElse(
+                            person::set,
+                            () -> {});
+
                 }
             }
-        });
+        };
+        model.getAddressBook().getPersonList().addListener(listener);
         return new CommandResult(VIEW_ACKNOWLEDGMENT, person, false);
     }
 
