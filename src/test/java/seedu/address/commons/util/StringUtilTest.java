@@ -136,4 +136,9 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void truncateText() {
+        String testString = "";
+    }
+
 }
