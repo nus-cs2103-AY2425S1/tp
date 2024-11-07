@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
 import seedu.address.ui.UiPart;
@@ -21,6 +22,9 @@ public class GroupListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Group> groupListView;
+
+    @FXML
+    private VBox groupHeader;
 
     /**
      * Creates a {@code GroupListPanel} with the given {@code ObservableList}.

@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.image.ImageView?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -25,10 +24,9 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="name" text="\$first" style="-fx-font-weight: bold; -fx-font-size: 18px;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <ImageView fx:id="imageView" fitWidth="40" fitHeight="48" style="-fx-padding: -15 0 0 0;"/>
             </HBox>
-            <Label fx:id="deadline" styleClass="cell_small_label" style="-fx-padding: -10 0 0 0;"/>
+            <Label fx:id="deadline" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #D50000"/>
+            <Label fx:id="groups" styleClass="cell_small_label"/>
         </VBox>
     </GridPane>
 </HBox>

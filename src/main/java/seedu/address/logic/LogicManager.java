@@ -183,4 +183,9 @@ public class LogicManager implements Logic {
     public void setMostRecentTaskDisplay() {
         this.model.setMostRecentTaskDisplay();
     }
+
+    @Override
+    public void setStatus() {
+        this.model.setStatus();
+    }
 }

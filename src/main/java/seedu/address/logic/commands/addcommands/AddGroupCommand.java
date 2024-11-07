@@ -34,7 +34,8 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New group(s) added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group(s) entered, only 1 will be added:";
-    public static final String MESSAGE_GROUP_EXISTS_IN_MODEL = "Group(s) already exists in model";
+    public static final String MESSAGE_GROUPS_EXIST_IN_MODEL = "All group(s) entered exist in the model";
+    public static final String MESSAGE_GROUP_IN_MODEL = "The following group(s) already exist and will not be added:";
 
     private final List<Group> toAdd;
 
@@ -51,29 +52,66 @@ public class AddGroupCommand extends Command {
         requireNonNull(model);
         String resultMessage = "";
         int count = 0;
-        Stream<Group> checkForDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1).distinct();
-        long numDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1).distinct().count();
+
+        // create a stream consisting of all groups which are entered more than once by the user
+        Stream<Group> checkForDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1)
+                .filter(x -> !model.hasGroup(x))
+                .distinct();
+
+        // count the number of duplicated groups entered
+        long numDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1)
+                .filter(x -> !model.hasGroup(x))
+                .distinct()
+                .count();
+
+        // create duplicate message for duplicate groups, if none will just return an empty string
         String duplicateMessage = checkForDuplicates.map(a -> a.getGroupName().getGroupName()).reduce(
                 MESSAGE_DUPLICATE_GROUP, (x, y) -> x + "\n" + y);
+        if (numDuplicates == 0) {
+            duplicateMessage = "";
+        }
+
+        //  create a list without duplicate groups
         List<Group> noDuplicateGroupList = toAdd.stream().distinct().toList();
         if (noDuplicateGroupList.size() > 1) {
             resultMessage += "\n";
         }
+
+        int countGroupsInModel = 0;
+        String messageGroupInModel = MESSAGE_GROUP_IN_MODEL;
+
+        // iterate through the list of groups, incrementing count if group does not exist in the model and deleting it
+        // from the original list if it does
         for (Group g: noDuplicateGroupList) {
             if (model.hasGroup(g)) {
-                throw new CommandException(MESSAGE_GROUP_EXISTS_IN_MODEL);
+                countGroupsInModel++;
+                messageGroupInModel += "\n" + g.getGroupName().getGroupName();
+                toAdd.removeAll(List.of(g));
+            } else {
+                count++;
+                resultMessage += Messages.format(g);
+                resultMessage = count < noDuplicateGroupList.size() ? resultMessage + "\n" : resultMessage;
+                model.addGroup(g);
             }
-            count++;
-            resultMessage += Messages.format(g);
-            if (count < toAdd.size()) {
-                resultMessage += "\n";
-            }
-            model.addGroup(g);
         }
+
+        // throws an exception if all groups entered already exist
+        if (countGroupsInModel == noDuplicateGroupList.size()) {
+            throw new CommandException(MESSAGE_GROUPS_EXIST_IN_MODEL);
+        }
+
+        // displays warning message if only some groups entered exist in the model
+        if (0 < countGroupsInModel && countGroupsInModel < noDuplicateGroupList.size()) {
+            duplicateMessage = messageGroupInModel + "\n" + duplicateMessage;
+        }
+
+        // update group list to only display the added groups
         model.updateFilteredGroupList(x ->
                 toAdd.stream().anyMatch(y -> y.getGroupName().equals(x.getGroupName())));
         model.setStateGroups();
-        if (numDuplicates > 0) {
+
+        // displays warning message if duplicates are found or groups exist in model
+        if (numDuplicates > 0 || countGroupsInModel > 0) {
             return new CommandResult(duplicateMessage
                     + "\n" + String.format(MESSAGE_SUCCESS, resultMessage), LIST_GROUP_MARKER);
         }
