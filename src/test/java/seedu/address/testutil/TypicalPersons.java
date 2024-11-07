@@ -25,6 +25,7 @@ import seedu.address.model.person.Student;
 public class TypicalPersons {
     public static final Student ALICE = new StudentBuilder()
             .withName("Alice Pauline")
+            .withSex("F")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com")
             .withPhone("94351253")
@@ -33,6 +34,7 @@ public class TypicalPersons {
             .withAttendanceCount("3").build();
     public static final Student BENSON = new StudentBuilder()
             .withName("Benson Meier")
+            .withSex("M")
             .withRole("Student")
             .withAttendanceCount("3")
             .withAddress("311, Clementi Ave 2, #02-25")
@@ -41,6 +43,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").build();
     public static final Student CARL = new StudentBuilder()
             .withName("Carl Kurz")
+            .withSex("M")
             .withPhone("95352563")
             .withRole("Student")
             .withAttendanceCount("3")
@@ -48,6 +51,7 @@ public class TypicalPersons {
             .withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder()
             .withName("Daniel Meier")
+            .withSex("M")
             .withPhone("87652533")
             .withRole("Parent")
             .withEmail("cornelia@example.com")
@@ -55,6 +59,7 @@ public class TypicalPersons {
             .withTags("friends").build();
     public static final Student ELLE = new StudentBuilder()
             .withName("Elle Meyer")
+            .withSex("F")
             .withPhone("9482224")
             .withRole("student")
             .withAttendanceCount("3")
@@ -62,6 +67,7 @@ public class TypicalPersons {
             .withAddress("michegan ave").build();
     public static final Person CARLMEIER = new PersonBuilder()
             .withName("Carl Meier")
+            .withSex("M")
             .withPhone("876452533")
             .withRole("Parent")
             .withEmail("cornelia@example.com")
@@ -69,6 +75,7 @@ public class TypicalPersons {
             .withTags("omg").build();
     public static final Student FIONA = new StudentBuilder()
             .withName("Fiona Kunz")
+            .withSex("F")
             .withPhone("9482427")
             .withRole("sTuDenT")
             .withAttendanceCount("3")
@@ -76,25 +83,26 @@ public class TypicalPersons {
             .withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder()
             .withName("George Best")
+            .withSex("M")
             .withPhone("9482442")
             .withRole("parent")
             .withEmail("anna@example.com")
             .withAddress("4th street").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withSex("M").withPhone("8482424")
             .withRole("parent")
             .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withSex("F").withPhone("8482131")
             .withRole("student").withAttendanceCount("5")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withRole("student").withAttendanceCount("5")
+    public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withSex("F")
+            .withPhone(VALID_PHONE_AMY).withRole("student").withAttendanceCount("5")
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withRole("parent")
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withSex("M")
+            .withPhone(VALID_PHONE_BOB).withRole("parent")
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 

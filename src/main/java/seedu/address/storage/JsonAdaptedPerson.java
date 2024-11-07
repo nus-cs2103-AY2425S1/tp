@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Sex;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
@@ -28,6 +29,7 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
+    private final String sex;
     private final String role;
     private final String phone;
     private final String email;
@@ -39,12 +41,13 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("role") String role,
-                             @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("sex") String sex,
+                             @JsonProperty("role") String role, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("attendanceCount") String attendanceCount) {
         this.name = name;
+        this.sex = sex;
         this.role = role;
         this.phone = phone;
         this.email = email;
@@ -61,6 +64,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
+        sex = source.getSex().sexName;
         role = source.getRole().roleName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -104,6 +108,14 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
+        if (sex == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Sex.class.getSimpleName()));
+        }
+        if (!Sex.isValidSex(sex)) {
+            throw new IllegalValueException(Sex.MESSAGE_CONSTRAINTS);
+        }
+        final Sex modelSex = new Sex(sex);
+
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
@@ -138,7 +150,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelRole, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelSex, modelRole, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
     public Student toModelTypeStudent() throws IllegalValueException {
@@ -154,6 +166,14 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (sex == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Sex.class.getSimpleName()));
+        }
+        if (!Sex.isValidSex(sex)) {
+            throw new IllegalValueException(Sex.MESSAGE_CONSTRAINTS);
+        }
+        final Sex modelSex = new Sex(sex);
 
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
@@ -198,14 +218,13 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Student(modelName, modelRole, modelPhone, modelEmail, modelAddress, modelTags,
+        return new Student(modelName, modelSex, modelRole, modelPhone, modelEmail, modelAddress, modelTags,
                 modelAttendanceCount);
 
     }
 
     public String getRole() {
+
         return this.role;
     }
-
-
 }

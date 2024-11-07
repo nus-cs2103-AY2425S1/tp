@@ -22,7 +22,7 @@ public class ResetAttendanceCommandTest {
     public void execute_resetAttendance_success() {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         for (Person p : expectedModel.getFilteredPersonList()) {
-            Person personWithResetAttendance = new Person(p.getName(), p.getRole(),
+            Person personWithResetAttendance = new Person(p.getName(), p.getSex(), p.getRole(),
                     p.getPhone(), p.getEmail(), p.getAddress(), p.getTags(), new AttendanceCount("0"));
             expectedModel.setPerson(p, personWithResetAttendance);
         }

@@ -43,6 +43,8 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
+                .append("; Sex: ")
+                .append(person.getSex())
                 .append("; Role: ")
                 .append(person.getRole())
                 .append("; Phone: ")

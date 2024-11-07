@@ -14,6 +14,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Sex;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
@@ -54,11 +55,12 @@ public class ResetAttendanceCommand extends Command {
         assert studentToReset != null;
 
         Name name = studentToReset.getName();
+        Sex sex = studentToReset.getSex();
         Role role = studentToReset.getRole();
         Phone phone = studentToReset.getPhone();
         Email email = studentToReset.getEmail();
         Address address = studentToReset.getAddress();
         Set<Tag> tags = studentToReset.getTags();
-        return new Student(name, role, phone, email, address, tags);
+        return new Student(name, sex, role, phone, email, address, tags);
     }
 }

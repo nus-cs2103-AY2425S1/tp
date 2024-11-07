@@ -9,6 +9,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Sex;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -20,6 +21,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_SEX = "F";
     public static final String DEFAULT_ROLE = "Parent";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -27,6 +29,7 @@ public class StudentBuilder {
     public static final String DEFAULT_ATTENDANCE_COUNT = "3";
 
     private Name name;
+    private Sex sex;
     private Role role;
     private Phone phone;
     private Email email;
@@ -39,6 +42,7 @@ public class StudentBuilder {
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
+        sex = new Sex(DEFAULT_SEX);
         role = new Role(DEFAULT_ROLE);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -53,6 +57,7 @@ public class StudentBuilder {
      */
     public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
+        sex = studentToCopy.getSex();
         role = studentToCopy.getRole();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
@@ -112,6 +117,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code Sex} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withSex(String sex) {
+        this.sex = new Sex(sex);
+        return this;
+    }
+
+    /**
      * Sets the {@code AttendanceCount} of the {@code Student} that we are building.
      */
     public StudentBuilder withAttendanceCount(String attendanceCount) {
@@ -120,7 +133,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, role, phone, email, address, tags, attendanceCount);
+        return new Student(name, sex, role, phone, email, address, tags, attendanceCount);
     }
 
 

@@ -32,6 +32,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label sex;
+    @FXML
     private Label role;
     @FXML
     private Label id;
@@ -55,6 +57,9 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        String rawSex = person.getSex().sexName;
+        String captializedSex = rawSex.toUpperCase();
+        sex.setText(captializedSex);
         String rawRole = person.getRole().roleName;
         String capitalizedRole = rawRole.substring(0, 1).toUpperCase() + rawRole.substring(1);
         role.setText(capitalizedRole);

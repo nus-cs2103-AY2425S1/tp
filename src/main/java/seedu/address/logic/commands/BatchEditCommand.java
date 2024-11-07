@@ -91,6 +91,7 @@ public class BatchEditCommand extends Command {
         withoutOldTag.add(newTag);
         return new Person(
                 person.getName(),
+                person.getSex(),
                 person.getRole(),
                 person.getPhone(),
                 person.getEmail(),
@@ -107,6 +108,7 @@ public class BatchEditCommand extends Command {
         withoutOldTag.add(newTag);
         return new Student(
                 student.getName(),
+                student.getSex(),
                 student.getRole(),
                 student.getPhone(),
                 student.getEmail(),

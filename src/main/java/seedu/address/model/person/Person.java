@@ -18,6 +18,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Sex sex;
     private final Role role;
     private final Phone phone;
     private final Email email;
@@ -30,10 +31,11 @@ public class Person {
      * Constructs a new Person.
      * Every field must be present and not null.
      */
-    public Person(Name name, Role role, Phone phone, Email email, Address address,
+    public Person(Name name, Sex sex, Role role, Phone phone, Email email, Address address,
                   Set<Tag> tags, AttendanceCount attendanceCount) {
-        requireAllNonNull(name, phone, email, address, tags, attendanceCount);
+        requireAllNonNull(name, sex, phone, email, address, tags, attendanceCount);
         this.name = name;
+        this.sex = sex;
         this.role = role;
         this.phone = phone;
         this.email = email;
@@ -44,10 +46,11 @@ public class Person {
     /**
      * Constructs a new Person with the attendance count of 0.
      */
-    public Person(Name name, Role role, Phone phone, Email email, Address address,
+    public Person(Name name, Sex sex, Role role, Phone phone, Email email, Address address,
                   Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, sex, phone, email, address, tags);
         this.name = name;
+        this.sex = sex;
         this.role = role;
         this.phone = phone;
         this.email = email;
@@ -59,6 +62,9 @@ public class Person {
 
     public Name getName() {
         return name;
+    }
+    public Sex getSex() {
+        return sex;
     }
     public Role getRole() {
         return role;
@@ -116,6 +122,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
+                && sex.equals(otherPerson.sex)
                 && role.equals(otherPerson.role)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
@@ -126,13 +133,14 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, role, phone, email, address, tags);
+        return Objects.hash(name, sex, role, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("sex", sex)
                 .add("role", role)
                 .add("phone", phone)
                 .add("email", email)

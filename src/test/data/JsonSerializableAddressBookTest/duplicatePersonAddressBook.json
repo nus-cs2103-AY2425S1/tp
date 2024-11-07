@@ -1,6 +1,7 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
+    "sex": "F",
     "role": "student",
     "phone": "94351253",
     "email": "alice@example.com",
@@ -9,6 +10,7 @@
     "attendanceCount": "3"
   }, {
     "name": "Alice Pauline",
+    "sex": "F",
     "role": "student",
     "phone": "94351253",
     "email": "pauline@example.com",
