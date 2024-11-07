@@ -22,7 +22,7 @@ import seedu.sellsavvy.model.order.Order;
 public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
     private static final String DEFAULT_TITLE = "Orders";
-    private static final String TITLE_WITH_SELECTED_PERSON = "Orders (%1$s";
+    private static final String TITLE_WITH_SELECTED_CUSTOMER = "Orders (%1$s";
     private static final String EMPTY_ORDER_LIST_MESSAGE = "This customer does not have any orders currently.";
     private static final String NO_RELATED_ORDERS_FOUND = "No related orders found.";
 
@@ -45,15 +45,15 @@ public class OrderListPanel extends UiPart<Region> {
     /**
      * Creates a {@code OrderListPanel} with the given {@code ReadOnlyObjectProperty} of {@code Customer}.
      */
-    public OrderListPanel(ReadOnlyObjectProperty<Customer> selectedPersonProperty) {
+    public OrderListPanel(ReadOnlyObjectProperty<Customer> selectedCustomerProperty) {
         super(FXML);
         orderGuide.setText("Use the following command to view order(s):\n"
                 + ListOrderCommand.MESSAGE_USAGE);
         orderListEmpty.setText(EMPTY_ORDER_LIST_MESSAGE);
-        updateOrderList(selectedPersonProperty.get());
+        updateOrderList(selectedCustomerProperty.get());
 
-        selectedPersonProperty.addListener(((observable, oldPerson, newPerson) -> {
-            updateOrderList(newPerson);
+        selectedCustomerProperty.addListener(((observable, oldCustomer, newCustomer) -> {
+            updateOrderList(newCustomer);
         }));
     }
 
@@ -68,7 +68,7 @@ public class OrderListPanel extends UiPart<Region> {
         }
 
         this.selectedCustomer = customer;
-        orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON, customer.getName().fullName));
+        orderListTitle.setText(String.format(TITLE_WITH_SELECTED_CUSTOMER, customer.getName().fullName));
         toggleClosingParenthesisDisplay(true);
         FilteredList<Order> orderList = customer.getFilteredOrderList();
         moveOrderChangeListenerTo(orderList);

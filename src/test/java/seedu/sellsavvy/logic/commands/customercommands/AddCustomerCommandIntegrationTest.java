@@ -1,7 +1,7 @@
 package seedu.sellsavvy.logic.commands.customercommands;
 
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandFailure;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandFailure;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,11 +27,11 @@ public class AddCustomerCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newCustomer_success() {
         Customer validCustomer = new CustomerBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validCustomer);
+        expectedModel.addCustomer(validCustomer);
 
         assertCommandSuccess(new AddCustomerCommand(validCustomer), model,
                 String.format(AddCustomerCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
@@ -39,10 +39,10 @@ public class AddCustomerCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Customer customerInList = model.getAddressBook().getPersonList().get(0);
+    public void execute_duplicateCustomer_throwsCommandException() {
+        Customer customerInList = model.getAddressBook().getCustomerList().get(0);
         assertCommandFailure(new AddCustomerCommand(customerInList), model,
-                AddCustomerCommand.MESSAGE_DUPLICATE_PERSON);
+                AddCustomerCommand.MESSAGE_DUPLICATE_CUSTOMER);
     }
 
 }

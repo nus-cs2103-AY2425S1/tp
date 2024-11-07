@@ -87,7 +87,7 @@ public class OrderCommandTestUtil {
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
-    //TODO: Copy data fields from PersonCommandTestUtil
+    //TODO: Copy data fields from CustomerCommandTestUtil
 
     //TODO:
     /**
@@ -100,11 +100,11 @@ public class OrderCommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCustomerList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredCustomerList());
     }
 
     /**
@@ -112,13 +112,13 @@ public class OrderCommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showOrderAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCustomerList().size());
 
-        Customer customer = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredCustomerList().size());
     }
 
     /**
@@ -132,6 +132,6 @@ public class OrderCommandTestUtil {
      * Returns an {@code OrderList} of the model's selected customer by the given {@code Index}
      */
     public static OrderList getOrderListByIndex(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased()).getOrderList();
+        return model.getFilteredCustomerList().get(index.getZeroBased()).getOrderList();
     }
 }

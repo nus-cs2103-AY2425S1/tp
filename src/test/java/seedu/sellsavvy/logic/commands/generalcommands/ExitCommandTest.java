@@ -1,7 +1,7 @@
 package seedu.sellsavvy.logic.commands.generalcommands;
 
 import static seedu.sellsavvy.logic.commands.generalcommands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 

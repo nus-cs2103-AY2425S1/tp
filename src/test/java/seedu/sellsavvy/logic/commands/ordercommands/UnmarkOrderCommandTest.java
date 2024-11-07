@@ -34,8 +34,8 @@ public class UnmarkOrderCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        customerToUnmarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(customerToUnmarkOrderUnder);
+        customerToUnmarkOrderUnder = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(customerToUnmarkOrderUnder);
     }
 
     @Test
@@ -97,7 +97,7 @@ public class UnmarkOrderCommandTest {
     @Test
     public void execute_noOrderListDisplayed_throwsCommandException() {
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST);
-        model.updateSelectedPerson(null);
+        model.updateSelectedCustomer(null);
 
         assertCommandFailure(unmarkOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);
     }

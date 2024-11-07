@@ -59,7 +59,7 @@ public class FilterOrderCommandTest {
     }
 
     @Test
-    public void execute_noSelectedPersonInModel_throwsCommandException() {
+    public void execute_noSelectedCustomerInModel_throwsCommandException() {
         String expectedMessage = String.format(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         StatusEqualsKeywordPredicate predicate = new StatusEqualsKeywordPredicate(Status.PENDING);
         FilterOrderCommand command = new FilterOrderCommand(predicate);
@@ -74,12 +74,12 @@ public class FilterOrderCommandTest {
         FilterOrderCommand command = new FilterOrderCommand(predicate);
 
         Model expectedModel = model.createCopy();
-        Customer expectedCustomer = expectedModel.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
+        Customer expectedCustomer = expectedModel.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
         expectedCustomer.updateFilteredOrderList(predicate);
-        expectedModel.updateSelectedPerson(expectedCustomer);
+        expectedModel.updateSelectedCustomer(expectedCustomer);
 
-        Customer customer = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(customer);
+        Customer customer = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(customer);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BLOCKS), customer.getFilteredOrderList());
     }
@@ -91,12 +91,12 @@ public class FilterOrderCommandTest {
         FilterOrderCommand command = new FilterOrderCommand(predicate);
 
         Model expectedModel = model.createCopy();
-        Customer expectedCustomer = expectedModel.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
+        Customer expectedCustomer = expectedModel.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
         expectedCustomer.updateFilteredOrderList(predicate);
-        expectedModel.updateSelectedPerson(expectedCustomer);
+        expectedModel.updateSelectedCustomer(expectedCustomer);
 
-        Customer customer = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(customer);
+        Customer customer = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(customer);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ABACUS, CAMERA, DAGGER), customer.getFilteredOrderList());
     }

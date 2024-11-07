@@ -1,27 +1,27 @@
 package seedu.sellsavvy.logic.parser;
 
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.INVALID_NAME_DESC;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.INVALID_TAG_DESC;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.NAME_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.PHONE_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.PHONE_DESC_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_NAME_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_PHONE_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_PHONE_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.INVALID_NAME_DESC;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.INVALID_TAG_DESC;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.NAME_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.PHONE_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.PHONE_DESC_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_NAME_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_PHONE_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand;
-import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditPersonDescriptor;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.sellsavvy.model.customer.Address;
 import seedu.sellsavvy.model.customer.Email;
 import seedu.sellsavvy.model.customer.Name;
@@ -52,7 +52,7 @@ public class EditCustomerCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCustomerCommand.MESSAGE_USAGE);
 
-    private EditPersonCommandParser parser = new EditPersonCommandParser();
+    private EditCustomerCommandParser parser = new EditCustomerCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -109,7 +109,7 @@ public class EditCustomerCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditPersonDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCustomerCommand expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
@@ -122,7 +122,7 @@ public class EditCustomerCommandParserTest {
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditCustomerCommand expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
 
@@ -134,7 +134,7 @@ public class EditCustomerCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCustomerCommand expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -200,7 +200,7 @@ public class EditCustomerCommandParserTest {
         Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditCustomerDescriptorBuilder().withTags().build();
+        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withTags().build();
         EditCustomerCommand expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

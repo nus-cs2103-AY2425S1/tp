@@ -68,13 +68,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Customer> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Customer> getFilteredCustomerList() {
+        return model.getFilteredCustomerList();
     }
 
     @Override
-    public ReadOnlyObjectProperty<Customer> getSelectedPersonProperty() {
-        return model.getSelectedPersonProperty();
+    public ReadOnlyObjectProperty<Customer> getSelectedCustomerProperty() {
+        return model.getSelectedCustomerProperty();
     }
 
     @Override

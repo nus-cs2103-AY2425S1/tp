@@ -1,6 +1,6 @@
 package seedu.sellsavvy.logic.commands.generalcommands;
 
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;

@@ -3,12 +3,12 @@ package seedu.sellsavvy.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.NAME_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.PHONE_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.NAME_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.PHONE_DESC_AMY;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalCustomers.AMY;
 
@@ -63,7 +63,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCustomerCommand = "deletec 9";
-        assertCommandException(deleteCustomerCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCustomerCommand, MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
@@ -85,15 +85,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCustomerList().remove(0));
     }
 
     @Test
-    public void getSelectedPersonProperty_innerContent_isNullInitially() {
-        assertNotNull(logic.getSelectedPersonProperty());
+    public void getSelectedCustomerProperty_innerContent_isNullInitially() {
+        assertNotNull(logic.getSelectedCustomerProperty());
         //ensures that when first initiated no customer's order will be displayed
-        assertNull(logic.getSelectedPersonProperty().get());
+        assertNull(logic.getSelectedCustomerProperty().get());
     }
 
     /**
@@ -178,7 +178,7 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Customer expectedCustomer = new CustomerBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedCustomer);
+        expectedModel.addCustomer(expectedCustomer);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

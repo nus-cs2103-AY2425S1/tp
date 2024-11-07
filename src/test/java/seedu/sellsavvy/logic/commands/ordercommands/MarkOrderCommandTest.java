@@ -35,8 +35,8 @@ public class MarkOrderCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        customerToMarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(customerToMarkOrderUnder);
+        customerToMarkOrderUnder = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(customerToMarkOrderUnder);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class MarkOrderCommandTest {
     @Test
     public void execute_noOrderListDisplayed_throwsCommandException() {
         MarkOrderCommand markOrderCommand = new MarkOrderCommand(INDEX_FIRST);
-        model.updateSelectedPerson(null);
+        model.updateSelectedCustomer(null);
 
         assertCommandFailure(markOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);
     }

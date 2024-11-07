@@ -31,11 +31,11 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Customer> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of customers */
+    ObservableList<Customer> getFilteredCustomerList();
 
     /** Returns a {@code ReadOnlyObjectProperty} of selected {@code Customer} */
-    ReadOnlyObjectProperty<Customer> getSelectedPersonProperty();
+    ReadOnlyObjectProperty<Customer> getSelectedCustomerProperty();
 
     /**
      * Returns the user prefs' address book file path.

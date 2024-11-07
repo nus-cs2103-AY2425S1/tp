@@ -1,14 +1,14 @@
 package seedu.sellsavvy.logic.commands.customercommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all customers in the address book to the user.
  */
 public class ListCustomerCommand extends Command {
 
@@ -21,7 +21,7 @@ public class ListCustomerCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

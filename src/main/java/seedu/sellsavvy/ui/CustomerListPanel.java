@@ -1,6 +1,6 @@
 package seedu.sellsavvy.ui;
 
-import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.logging.Logger;
 
@@ -16,20 +16,20 @@ import seedu.sellsavvy.commons.core.LogsCenter;
 import seedu.sellsavvy.model.customer.Customer;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of customers.
  */
 public class CustomerListPanel extends UiPart<Region> {
     private static final String FXML = "CustomerListPanel.fxml";
-    private static final String EMPTY_PERSON_LIST_MESSAGE = "You do not have any recorded customers currently.";
-    private static final String NO_RELATED_PERSONS_FOUND = "No related customers found.";
+    private static final String EMPTY_CUSTOMER_LIST_MESSAGE = "You do not have any recorded customers currently.";
+    private static final String NO_RELATED_CUSTOMERS_FOUND = "No related customers found.";
     private final Logger logger = LogsCenter.getLogger(CustomerListPanel.class);
-    private final ListChangeListener<Customer> orderChangeListener = change -> handleChangeInPersons();
+    private final ListChangeListener<Customer> orderChangeListener = change -> handleChangeInCustomers();
     private ObservableList<Customer> customerList;
 
     @FXML
-    private ListView<Customer> personListView;
+    private ListView<Customer> customerListView;
     @FXML
-    private Label personListEmpty;
+    private Label customerListEmpty;
 
     /**
      * Creates a {@code CustomerListPanel} with the given {@code ObservableList}.
@@ -38,46 +38,46 @@ public class CustomerListPanel extends UiPart<Region> {
         super(FXML);
         this.customerList = customerList;
         customerList.addListener(orderChangeListener);;
-        personListView.setItems(customerList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
-        handleChangeInPersons();
+        customerListView.setItems(customerList);
+        customerListView.setCellFactory(listView -> new CustomerListViewCell());
+        handleChangeInCustomers();
     }
 
     /**
      * Handles events whether a displayed customer list changes.
      */
-    private void handleChangeInPersons() {
-        toggleNoPersonsLabel(personListView.getItems().isEmpty());
+    private void handleChangeInCustomers() {
+        toggleNoCustomersLabel(customerListView.getItems().isEmpty());
     }
 
     /**
-     * Toggles whether the {@code personListEmpty} is displayed and determines the
+     * Toggles whether the {@code customerListEmpty} is displayed and determines the
      * message displayed.
      */
-    private void toggleNoPersonsLabel(boolean personListIsEmpty) {
-        setPersonListEmptyText();
-        personListEmpty.setManaged(personListIsEmpty);
-        personListEmpty.setVisible(personListIsEmpty);
-        personListView.setManaged(!personListIsEmpty);
-        personListView.setVisible(!personListIsEmpty);
+    private void toggleNoCustomersLabel(boolean customerListIsEmpty) {
+        setCustomerListEmptyText();
+        customerListEmpty.setManaged(customerListIsEmpty);
+        customerListEmpty.setVisible(customerListIsEmpty);
+        customerListView.setManaged(!customerListIsEmpty);
+        customerListView.setVisible(!customerListIsEmpty);
     }
 
     /**
-     * Sets the text displayed in {@code personListEmpty}.
+     * Sets the text displayed in {@code customerListEmpty}.
      */
-    private void setPersonListEmptyText() {
+    private void setCustomerListEmptyText() {
         FilteredList<Customer> filteredList = (FilteredList<Customer>) customerList;
-        if (filteredList.getPredicate() == PREDICATE_SHOW_ALL_PERSONS) {
-            personListEmpty.setText(EMPTY_PERSON_LIST_MESSAGE);
+        if (filteredList.getPredicate() == PREDICATE_SHOW_ALL_CUSTOMERS) {
+            customerListEmpty.setText(EMPTY_CUSTOMER_LIST_MESSAGE);
         } else {
-            personListEmpty.setText(NO_RELATED_PERSONS_FOUND);
+            customerListEmpty.setText(NO_RELATED_CUSTOMERS_FOUND);
         }
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Customer} using a {@code CustomerCard}.
      */
-    class PersonListViewCell extends ListCell<Customer> {
+    class CustomerListViewCell extends ListCell<Customer> {
         @Override
         protected void updateItem(Customer customer, boolean empty) {
             super.updateItem(customer, empty);

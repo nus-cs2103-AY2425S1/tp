@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_NAME_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
@@ -92,122 +92,122 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasCustomer_nullCustomer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasCustomer(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasCustomer_customerNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasCustomer(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasCustomer_customerInAddressBook_returnsTrue() {
+        modelManager.addCustomer(ALICE);
+        assertTrue(modelManager.hasCustomer(ALICE));
     }
 
     @Test
-    public void hasSimilarPerson_onlyIdenticalPerson_returnsFalse() {
-        modelManager.addPerson(ALICE);
-        assertFalse(modelManager.hasSimilarPerson(ALICE));
+    public void hasSimilarCustomer_onlyIdenticalCustomer_returnsFalse() {
+        modelManager.addCustomer(ALICE);
+        assertFalse(modelManager.hasSimilarCustomer(ALICE));
     }
 
     @Test
-    public void hasSimilarPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
+    public void hasSimilarCustomer_customerWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        modelManager.addCustomer(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(modelManager.hasSimilarPerson(editedAlice));
+        assertTrue(modelManager.hasSimilarCustomer(editedAlice));
     }
 
     @Test
-    public void hasSimilarPerson_personWithSimilarNameInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
+    public void hasSimilarCustomer_customerWithSimilarNameInAddressBook_returnsTrue() {
+        modelManager.addCustomer(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE)
                 .withName(ALICE.getName()
                         .fullName.toUpperCase())
                 .withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(modelManager.hasSimilarPerson(editedAlice));
+        assertTrue(modelManager.hasSimilarCustomer(editedAlice));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCustomerList().remove(0));
     }
 
     @Test
-    public void getSelectedPersonProperty_innerContent_isNullInitially() {
-        assertNotNull(modelManager.getSelectedPersonProperty());
+    public void getSelectedCustomerProperty_innerContent_isNullInitially() {
+        assertNotNull(modelManager.getSelectedCustomerProperty());
         //ensures that when first initiated no customer's order will be displayed
-        assertNull(modelManager.getSelectedPersonProperty().get());
-        assertNull(modelManager.getSelectedPerson());
+        assertNull(modelManager.getSelectedCustomerProperty().get());
+        assertNull(modelManager.getSelectedCustomer());
         assertNull(modelManager.getFilteredOrderList());
         assertNull(modelManager.getSelectedOrderList());
     }
 
     @Test
-    public void updateSelectedPerson_updateSuccessfully() {
+    public void updateSelectedCustomer_updateSuccessfully() {
         // Update to a customer
-        modelManager.updateSelectedPerson(ALICE);
-        assertEquals(modelManager.getSelectedPersonProperty().get(), ALICE);
-        assertEquals(modelManager.getSelectedPerson(), ALICE);
+        modelManager.updateSelectedCustomer(ALICE);
+        assertEquals(modelManager.getSelectedCustomerProperty().get(), ALICE);
+        assertEquals(modelManager.getSelectedCustomer(), ALICE);
         assertEquals(modelManager.getFilteredOrderList(), ALICE.getFilteredOrderList());
         assertEquals(modelManager.getSelectedOrderList(), ALICE.getOrderList());
 
         // Update back to null
-        modelManager.updateSelectedPerson(null);
-        assertNull(modelManager.getSelectedPersonProperty().get());
-        assertNull(modelManager.getSelectedPerson());
+        modelManager.updateSelectedCustomer(null);
+        assertNull(modelManager.getSelectedCustomerProperty().get());
+        assertNull(modelManager.getSelectedCustomer());
         assertNull(modelManager.getFilteredOrderList());
         assertNull(modelManager.getSelectedOrderList());
     }
 
     @Test
-    public void findEquivalentPerson_returnNullWhenInputIsNull() {
-        assertNull(modelManager.findEquivalentPerson(null));
+    public void findEquivalentCustomer_returnNullWhenInputIsNull() {
+        assertNull(modelManager.findEquivalentCustomer(null));
     }
 
     @Test
-    public void findEquivalentPerson_modelContainsEquivalentPerson() {
+    public void findEquivalentCustomer_modelContainsEquivalentCustomer() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
         Model modelCopy = model.createCopy();
-        Customer selectedCustomer = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        Customer selectedCustomerCopy = modelCopy.findEquivalentPerson(selectedCustomer);
+        Customer selectedCustomer = model.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased());
+        Customer selectedCustomerCopy = modelCopy.findEquivalentCustomer(selectedCustomer);
         assertNotSame(selectedCustomerCopy, selectedCustomer);
         assertEquals(selectedCustomerCopy, selectedCustomer);
     }
 
     @Test
-    public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
+    public void findEquivalentCustomer_modelDoesNotContainsEquivalentCustomer() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        Customer selectedCustomer = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer selectedCustomer = model.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased());
         Customer differentCustomer = new CustomerBuilder(selectedCustomer).withName(VALID_NAME_BOB).build();
-        assertThrows(CustomerNotFoundException.class, () -> model.findEquivalentPerson(differentCustomer));
+        assertThrows(CustomerNotFoundException.class, () -> model.findEquivalentCustomer(differentCustomer));
     }
 
     @Test
-    public void isSelectedPerson_noSelectedPerson() {
-        assertTrue(modelManager.isSelectedPerson(null));
+    public void isSelectedCustomer_noSelectedCustomer() {
+        assertTrue(modelManager.isSelectedCustomer(null));
     }
 
     @Test
-    public void isSelectedPerson_withSelectedPerson() {
-        modelManager.updateSelectedPerson(ALICE);
+    public void isSelectedCustomer_withSelectedCustomer() {
+        modelManager.updateSelectedCustomer(ALICE);
 
         // same object -> returns true
-        assertTrue(modelManager.isSelectedPerson(ALICE));
+        assertTrue(modelManager.isSelectedCustomer(ALICE));
 
         // same values -> returns true
-        assertTrue(modelManager.isSelectedPerson(new CustomerBuilder(ALICE).build()));
+        assertTrue(modelManager.isSelectedCustomer(new CustomerBuilder(ALICE).build()));
 
         // different values -> returns false
-        assertFalse(modelManager.isSelectedPerson(BOB));
+        assertFalse(modelManager.isSelectedCustomer(BOB));
 
         // null -> returns false
-        assertFalse(modelManager.isSelectedPerson(null));
+        assertFalse(modelManager.isSelectedCustomer(null));
     }
 
     @Test
@@ -217,8 +217,8 @@ public class ModelManagerTest {
         // Assertion error thrown when there is no selectedCustomer
         assertThrows(AssertionError.class, () -> model.setOrder(ABACUS, BOTTLE));
 
-        Customer selectedCustomer = model.findEquivalentPerson(GEORGE);
-        model.updateSelectedPerson(selectedCustomer);
+        Customer selectedCustomer = model.findEquivalentCustomer(GEORGE);
+        model.updateSelectedCustomer(selectedCustomer);
 
         // OrderNotFoundException are thrown when selectedCustomer has no such order
         assertThrows(OrderNotFoundException.class, () -> model.setOrder(new OrderBuilder(BOTTLE).build(), ABACUS));
@@ -233,7 +233,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -256,19 +256,19 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
 
-        // different selectedPerson -> returns false
-        modelManager.updateSelectedPerson(ALICE);
+        // different selectedCustomer -> returns false
+        modelManager.updateSelectedCustomer(ALICE);
         assertFalse(modelManager.equals(modelManagerCopy));
         assertFalse(modelManagerCopy.equals(modelManager));
     }

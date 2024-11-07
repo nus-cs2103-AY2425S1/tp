@@ -3,9 +3,9 @@ package seedu.sellsavvy.logic.commands.customercommands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandFailure;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.showPersonAtIndex;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandFailure;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.showCustomerAtIndex;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
@@ -29,67 +29,67 @@ public class DeleteCustomerCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Customer customerToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased());
         DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
                 Messages.format(customerToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(customerToDelete);
+        expectedModel.deleteCustomer(customerToDelete);
 
         assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCustomerList().size() + 1);
         DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCustomerCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCustomerCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showCustomerAtIndex(model, INDEX_FIRST);
 
-        Customer customerToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased());
         DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
                 Messages.format(customerToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(customerToDelete);
-        showNoPerson(expectedModel);
+        expectedModel.deleteCustomer(customerToDelete);
+        showNoCustomer(expectedModel);
 
         assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showCustomerAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCustomerList().size());
 
         DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCustomerCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCustomerCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_validIndexUnfilteredListWithDeletedPersonOrderDisplayed_success() {
-        Customer customerToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        model.updateSelectedPerson(customerToDelete);
+    public void execute_validIndexUnfilteredListWithDeletedCustomerOrderDisplayed_success() {
+        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased());
+        model.updateSelectedCustomer(customerToDelete);
         DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
                 Messages.format(customerToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(customerToDelete);
+        expectedModel.deleteCustomer(customerToDelete);
 
         assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
     }
@@ -127,9 +127,9 @@ public class DeleteCustomerCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+    private void showNoCustomer(Model model) {
+        model.updateFilteredCustomerList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredCustomerList().isEmpty());
     }
 }

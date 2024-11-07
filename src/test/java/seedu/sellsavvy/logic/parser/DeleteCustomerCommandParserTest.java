@@ -18,7 +18,7 @@ import seedu.sellsavvy.logic.commands.customercommands.DeleteCustomerCommand;
  */
 public class DeleteCustomerCommandParserTest {
 
-    private DeletePersonCommandParser parser = new DeletePersonCommandParser();
+    private DeleteCustomerCommandParser parser = new DeleteCustomerCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

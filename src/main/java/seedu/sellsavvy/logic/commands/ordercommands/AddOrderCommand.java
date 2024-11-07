@@ -62,16 +62,16 @@ public class AddOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Customer> lastShownList = model.getFilteredPersonList();
+        List<Customer> lastShownList = model.getFilteredCustomerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
 
         Customer customerToAddUnder = lastShownList.get(index.getZeroBased());
         OrderList orderList = customerToAddUnder.getOrderList();
         orderList.add(toAdd);
-        model.updateSelectedPerson(customerToAddUnder);
+        model.updateSelectedCustomer(customerToAddUnder);
         customerToAddUnder.resetFilteredOrderList();
 
         String feedbackToUser = orderList.containsSimilarOrder(toAdd)

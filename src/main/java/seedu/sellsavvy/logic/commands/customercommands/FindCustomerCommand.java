@@ -10,7 +10,7 @@ import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all customers in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCustomerCommand extends Command {
@@ -32,9 +32,9 @@ public class FindCustomerCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredCustomerList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW, model.getFilteredCustomerList().size()));
     }
 
     @Override

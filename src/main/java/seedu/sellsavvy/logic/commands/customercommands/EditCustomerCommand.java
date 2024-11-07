@@ -7,7 +7,7 @@ import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -53,74 +53,74 @@ public class EditCustomerCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Customer: %1$s";
+    public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This customer already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the address book.";
     public static final String MESSAGE_SIMILAR_TAGS_WARNING = "Note: "
             + "This customer has 2 or more similar tags after editing tags, "
             + "verify if this is a mistake.\n";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditCustomerDescriptor editCustomerDescriptor;
 
     /**
      * @param index of the customer in the filtered customer list to edit
-     * @param editPersonDescriptor details to edit the customer with
+     * @param editCustomerDescriptor details to edit the customer with
      */
-    public EditCustomerCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCustomerCommand(Index index, EditCustomerDescriptor editCustomerDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editCustomerDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editCustomerDescriptor = new EditCustomerDescriptor(editCustomerDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Customer> lastShownList = model.getFilteredPersonList();
+        List<Customer> lastShownList = model.getFilteredCustomerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
 
         Customer customerToEdit = lastShownList.get(index.getZeroBased());
-        Customer editedCustomer = createEditedPerson(customerToEdit, editPersonDescriptor);
+        Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
 
-        if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!customerToEdit.isSameCustomer(editedCustomer) && model.hasCustomer(editedCustomer)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
-        model.setPerson(customerToEdit, editedCustomer);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setCustomer(customerToEdit, editedCustomer);
+        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
-        if (model.isSelectedPerson(customerToEdit)) {
-            model.updateSelectedPerson(editedCustomer);
+        if (model.isSelectedCustomer(customerToEdit)) {
+            model.updateSelectedCustomer(editedCustomer);
         }
 
-        String feedbackToUser = editPersonDescriptor.isNameEdited() && model.hasSimilarPerson(editedCustomer)
+        String feedbackToUser = editCustomerDescriptor.isNameEdited() && model.hasSimilarCustomer(editedCustomer)
                 ? MESSAGE_SIMILAR_NAME_WARNING
                 : "";
-        feedbackToUser += editPersonDescriptor.isTagsEdited() && editedCustomer.hasSimilarTags()
+        feedbackToUser += editCustomerDescriptor.isTagsEdited() && editedCustomer.hasSimilarTags()
                 ? MESSAGE_SIMILAR_TAGS_WARNING
                 : "";
 
         return new CommandResult(feedbackToUser
-                + String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedCustomer)));
+                + String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, Messages.format(editedCustomer)));
     }
 
     /**
      * Creates and returns a {@code Customer} with the details of {@code customerToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editCustomerDescriptor}.
      */
-    private static Customer createEditedPerson(Customer customerToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Customer createEditedCustomer(Customer customerToEdit, EditCustomerDescriptor editCustomerDescriptor) {
         assert customerToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(customerToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(customerToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(customerToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(customerToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(customerToEdit.getTags());
+        Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());
+        Phone updatedPhone = editCustomerDescriptor.getPhone().orElse(customerToEdit.getPhone());
+        Email updatedEmail = editCustomerDescriptor.getEmail().orElse(customerToEdit.getEmail());
+        Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
+        Set<Tag> updatedTags = editCustomerDescriptor.getTags().orElse(customerToEdit.getTags());
         // edit command does not allow editing customer's order list
         OrderList updatedOrderList = customerToEdit.getOrderList();
 
@@ -140,14 +140,14 @@ public class EditCustomerCommand extends Command {
 
         EditCustomerCommand otherEditCustomerCommand = (EditCustomerCommand) other;
         return index.equals(otherEditCustomerCommand.index)
-                && editPersonDescriptor.equals(otherEditCustomerCommand.editPersonDescriptor);
+                && editCustomerDescriptor.equals(otherEditCustomerCommand.editCustomerDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editCustomerDescriptor", editCustomerDescriptor)
                 .toString();
     }
 
@@ -155,20 +155,20 @@ public class EditCustomerCommand extends Command {
      * Stores the details to edit the customer with. Each non-empty field value will replace the
      * corresponding field value of the customer.
      */
-    public static class EditPersonDescriptor {
+    public static class EditCustomerDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditCustomerDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditCustomerDescriptor(EditCustomerDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -247,16 +247,16 @@ public class EditCustomerCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditCustomerDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditCustomerDescriptor otherEditCustomerDescriptor = (EditCustomerDescriptor) other;
+            return Objects.equals(name, otherEditCustomerDescriptor.name)
+                    && Objects.equals(phone, otherEditCustomerDescriptor.phone)
+                    && Objects.equals(email, otherEditCustomerDescriptor.email)
+                    && Objects.equals(address, otherEditCustomerDescriptor.address)
+                    && Objects.equals(tags, otherEditCustomerDescriptor.tags);
         }
 
         @Override

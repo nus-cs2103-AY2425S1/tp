@@ -9,7 +9,7 @@ import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
-import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditPersonDescriptor;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.tag.Tag;
 
@@ -21,21 +21,21 @@ public class CustomerUtil {
     /**
      * Returns an add customer command string for adding the {@code customer}.
      */
-    public static String getAddPersonCommand(Customer customer) {
-        return AddCustomerCommand.COMMAND_WORD + " " + getPersonDetails(customer);
+    public static String getAddCustomerCommand(Customer customer) {
+        return AddCustomerCommand.COMMAND_WORD + " " + getCustomerDetails(customer);
     }
 
     /**
      * Returns an add customer command string for adding the {@code customer} using the command alias.
      */
-    public static String getAddPersonCommandAlias(Customer customer) {
-        return AddCustomerCommand.COMMAND_ALIAS + " " + getPersonDetails(customer);
+    public static String getAddCustomerCommandAlias(Customer customer) {
+        return AddCustomerCommand.COMMAND_ALIAS + " " + getCustomerDetails(customer);
     }
 
     /**
      * Returns the part of command string for the given {@code customer}'s details.
      */
-    public static String getPersonDetails(Customer customer) {
+    public static String getCustomerDetails(Customer customer) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + customer.getName().fullName + " ");
         sb.append(PREFIX_PHONE + customer.getPhone().value + " ");
@@ -48,9 +48,9 @@ public class CustomerUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditCustomerDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditCustomerDescriptorDetails(EditCustomerDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

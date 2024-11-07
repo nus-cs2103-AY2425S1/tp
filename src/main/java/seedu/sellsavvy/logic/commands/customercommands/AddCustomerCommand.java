@@ -40,7 +40,7 @@ public class AddCustomerCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This customer already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the address book.";
     public static final String MESSAGE_SIMILAR_TAGS_WARNING = "Note: "
             + "This customer has 2 or more similar tags, "
             + "verify if this is a mistake.\n";
@@ -59,18 +59,18 @@ public class AddCustomerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasCustomer(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
-        String feedbackToUser = model.hasSimilarPerson(toAdd)
+        String feedbackToUser = model.hasSimilarCustomer(toAdd)
                 ? MESSAGE_SIMILAR_NAME_WARNING
                 : "";
         feedbackToUser += toAdd.hasSimilarTags()
                 ? MESSAGE_SIMILAR_TAGS_WARNING
                 : "";
 
-        model.addPerson(toAdd);
+        model.addCustomer(toAdd);
         return new CommandResult(feedbackToUser + String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

@@ -38,7 +38,7 @@ public class FilterOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Customer selectedCustomer = model.getSelectedPerson();
+        Customer selectedCustomer = model.getSelectedCustomer();
         if (selectedCustomer == null) {
             throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         }

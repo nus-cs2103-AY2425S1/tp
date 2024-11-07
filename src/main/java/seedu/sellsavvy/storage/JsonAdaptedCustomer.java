@@ -72,9 +72,9 @@ class JsonAdaptedCustomer {
      * @throws IllegalValueException if there were any data constraints violated in the adapted customer.
      */
     public Customer toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> customerTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            customerTags.add(tag.toModelType());
         }
 
         final List<Order> orders = new ArrayList<>();
@@ -114,7 +114,7 @@ class JsonAdaptedCustomer {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(customerTags);
 
         final OrderList modelOrderList = new OrderList();
         modelOrderList.setOrders(orders);

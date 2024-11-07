@@ -11,11 +11,11 @@ import seedu.sellsavvy.model.customer.UniqueCustomerList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameCustomer comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueCustomerList persons;
+    private final UniqueCustomerList customers;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,13 +25,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniqueCustomerList();
+        customers = new UniqueCustomerList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Customers in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -44,8 +44,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the customer list with {@code customers}.
      * {@code customers} must not contain duplicate customers.
      */
-    public void setPersons(List<Customer> customers) {
-        this.persons.setPersons(customers);
+    public void setCustomers(List<Customer> customers) {
+        this.customers.setCustomers(customers);
     }
 
     /**
@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setCustomers(newData.getCustomerList());
     }
 
     //// customer-level operations
@@ -62,26 +62,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
-    public boolean hasPerson(Customer customer) {
+    public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
-        return persons.contains(customer);
+        return customers.contains(customer);
     }
 
     /**
      * Returns true if there is a different customer with the similar name
      * as given {@code Customer} exists in the address book.
      */
-    public boolean hasSimilarPerson(Customer customer) {
+    public boolean hasSimilarCustomer(Customer customer) {
         requireNonNull(customer);
-        return persons.hasSimilarPerson(customer);
+        return customers.hasSimilarCustomer(customer);
     }
 
     /**
      * Adds a customer to the address book.
      * The customer must not already exist in the address book.
      */
-    public void addPerson(Customer p) {
-        persons.add(p);
+    public void addCustomer(Customer p) {
+        customers.add(p);
     }
 
     /**
@@ -89,18 +89,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in the address book.
      */
-    public void setPerson(Customer target, Customer editedCustomer) {
+    public void setCustomer(Customer target, Customer editedCustomer) {
         requireNonNull(editedCustomer);
 
-        persons.setPerson(target, editedCustomer);
+        customers.setCustomer(target, editedCustomer);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Customer key) {
-        persons.remove(key);
+    public void removeCustomer(Customer key) {
+        customers.remove(key);
     }
 
     /**
@@ -108,16 +108,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public AddressBook createCopy() {
         AddressBook newAddressBook = new AddressBook();
-        newAddressBook.setPersons(persons.copyPersons().asUnmodifiableObservableList());
+        newAddressBook.setCustomers(customers.copyCustomers().asUnmodifiableObservableList());
         return newAddressBook;
     }
 
     /**
      * Returns a {@code Customer} in the {@code UniqueCustomerList} equivalent to target Customer given.
      */
-    public Customer findEquivalentPerson(Customer target) {
+    public Customer findEquivalentCustomer(Customer target) {
         assert target != null; // Caller should handle null targets before calling this method
-        return persons.findEquivalentPerson(target);
+        return customers.findEquivalentCustomer(target);
     }
 
     //// util methods
@@ -125,13 +125,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("customers", customers)
                 .toString();
     }
 
     @Override
-    public ObservableList<Customer> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Customer> getCustomerList() {
+        return customers.asUnmodifiableObservableList();
     }
 
     @Override
@@ -146,12 +146,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return customers.equals(otherAddressBook.customers);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return customers.hashCode();
     }
 
 }

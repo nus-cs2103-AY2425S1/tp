@@ -59,22 +59,22 @@ public class AddressBookParser {
 
         case AddCustomerCommand.COMMAND_WORD:
         case AddCustomerCommand.COMMAND_ALIAS:
-            return new AddPersonCommandParser().parse(arguments);
+            return new AddCustomerCommandParser().parse(arguments);
 
         case EditCustomerCommand.COMMAND_WORD:
         case EditCustomerCommand.COMMAND_ALIAS:
-            return new EditPersonCommandParser().parse(arguments);
+            return new EditCustomerCommandParser().parse(arguments);
 
         case DeleteCustomerCommand.COMMAND_WORD:
         case DeleteCustomerCommand.COMMAND_ALIAS:
-            return new DeletePersonCommandParser().parse(arguments);
+            return new DeleteCustomerCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCustomerCommand.COMMAND_WORD:
         case FindCustomerCommand.COMMAND_ALIAS:
-            return new FindPersonCommandParser().parse(arguments);
+            return new FindCustomerCommandParser().parse(arguments);
 
         case ListCustomerCommand.COMMAND_WORD:
         case ListCustomerCommand.COMMAND_ALIAS:

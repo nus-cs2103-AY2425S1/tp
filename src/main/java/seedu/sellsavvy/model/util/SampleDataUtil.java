@@ -30,7 +30,7 @@ public class SampleDataUtil {
     private static final Order DAGGER = new Order(new Item("Damascus daggers"), new Quantity("5"),
             new Date("12-12-2025"), Status.PENDING);
 
-    public static Customer[] getSamplePersons() {
+    public static Customer[] getSampleCustomers() {
         return new Customer[] {
             new Customer(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -55,8 +55,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Customer sampleCustomer : getSamplePersons()) {
-            sampleAb.addPerson(sampleCustomer);
+        for (Customer sampleCustomer : getSampleCustomers()) {
+            sampleAb.addCustomer(sampleCustomer);
         }
         return sampleAb;
     }

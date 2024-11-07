@@ -1,7 +1,7 @@
 package seedu.sellsavvy.logic.commands.customercommands;
 
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.showPersonAtIndex;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.showCustomerAtIndex;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
@@ -33,7 +33,7 @@ public class ListCustomerCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showCustomerAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ListCustomerCommand(), model, ListCustomerCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

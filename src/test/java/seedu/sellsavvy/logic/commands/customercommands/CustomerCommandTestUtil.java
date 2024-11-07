@@ -26,7 +26,7 @@ import seedu.sellsavvy.testutil.EditCustomerDescriptorBuilder;
 /**
  * Contains helper methods for testing Customer commands.
  */
-public class PersonCommandTestUtil {
+public class CustomerCommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -59,8 +59,8 @@ public class PersonCommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCustomerCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCustomerCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCustomerCommand.EditCustomerDescriptor DESC_AMY;
+    public static final EditCustomerCommand.EditCustomerDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -107,24 +107,24 @@ public class PersonCommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCustomerList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredCustomerList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the customer at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showCustomerAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCustomerList().size());
 
-        Customer customer = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredCustomerList().size());
     }
 
 }

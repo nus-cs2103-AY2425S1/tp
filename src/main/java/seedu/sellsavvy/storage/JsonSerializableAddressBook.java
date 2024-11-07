@@ -19,16 +19,16 @@ import seedu.sellsavvy.model.customer.Customer;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate customer(s).";
+    public static final String MESSAGE_DUPLICATE_CUSTOMER = "Customers list contains duplicate customer(s).";
 
-    private final List<JsonAdaptedCustomer> persons = new ArrayList<>();
+    private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given customers.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedCustomer> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("customers") List<JsonAdaptedCustomer> customers) {
+        this.customers.addAll(customers);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
+        customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedCustomer jsonAdaptedCustomer : persons) {
+        for (JsonAdaptedCustomer jsonAdaptedCustomer : customers) {
             Customer customer = jsonAdaptedCustomer.toModelType();
-            if (addressBook.hasPerson(customer)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            if (addressBook.hasCustomer(customer)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
             }
-            addressBook.addPerson(customer);
+            addressBook.addCustomer(customer);
         }
         return addressBook;
     }

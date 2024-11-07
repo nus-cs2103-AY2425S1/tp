@@ -13,7 +13,7 @@ import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
 
 public class FindCustomerCommandParserTest {
 
-    private FindPersonCommandParser parser = new FindPersonCommandParser();
+    private FindCustomerCommandParser parser = new FindCustomerCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -22,7 +22,7 @@ public class FindCustomerCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindPersonCommand() {
+    public void parse_validArgs_returnsFindCustomerCommand() {
         // no leading and trailing whitespaces
         FindCustomerCommand expectedFindCustomerCommand =
                 new FindCustomerCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));

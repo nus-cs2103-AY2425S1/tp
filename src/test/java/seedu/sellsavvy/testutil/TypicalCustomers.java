@@ -1,15 +1,15 @@
 package seedu.sellsavvy.testutil;
 
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_NAME_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_NAME_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_PHONE_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_PHONE_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_NAME_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_PHONE_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
@@ -56,7 +56,7 @@ public class TypicalCustomers {
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withOrders(ABACUS, BLOCKS, CAMERA, DAGGER).build();
 
-    // Manually added - Customer's details found in {@code PersonCommandTestUtil}
+    // Manually added - Customer's details found in {@code CustomerCommandTestUtil}
     public static final Customer AMY = new CustomerBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
             .withOrders().build();
@@ -70,17 +70,17 @@ public class TypicalCustomers {
 
     //TODO: AddressBook to include orders for each customer.
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical customers.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Customer customer : getTypicalPersons()) {
-            ab.addPerson(customer);
+        for (Customer customer : getTypicalCustomers()) {
+            ab.addCustomer(customer);
         }
         return ab;
     }
 
-    public static List<Customer> getTypicalPersons() {
+    public static List<Customer> getTypicalCustomers() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

@@ -16,7 +16,7 @@ import seedu.sellsavvy.model.order.OrderList;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    static Predicate<Customer> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    static Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -59,35 +59,35 @@ public interface Model {
     /**
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
-    boolean hasPerson(Customer customer);
+    boolean hasCustomer(Customer customer);
 
     /**
      * Returns true if there is a different customer
      * with the similar name as given {@code Customer} exists in the address book.
      */
-    boolean hasSimilarPerson(Customer customer);
+    boolean hasSimilarCustomer(Customer customer);
 
     /**
      * Deletes the given customer.
      * The customer must exist in the address book.
      */
-    void deletePerson(Customer target);
+    void deleteCustomer(Customer target);
 
     /**
      * Adds the given customer.
      * {@code customer} must not already exist in the address book.
      */
-    void addPerson(Customer customer);
+    void addCustomer(Customer customer);
 
     /**
      * Replaces the given customer {@code target} with {@code editedCustomer}.
      * {@code target} must exist in the address book.
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in the address book.
      */
-    void setPerson(Customer target, Customer editedCustomer);
+    void setCustomer(Customer target, Customer editedCustomer);
 
     /** Returns an unmodifiable view of the filtered customer list */
-    ObservableList<Customer> getFilteredPersonList();
+    ObservableList<Customer> getFilteredCustomerList();
 
     /**
      * Creates a copy of the entire {@code Model}.
@@ -98,13 +98,13 @@ public interface Model {
      * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Customer> predicate);
+    void updateFilteredCustomerList(Predicate<Customer> predicate);
 
     /** Returns a {@code ReadOnlyObjectProperty} of selected {@code Customer} */
-    ReadOnlyObjectProperty<Customer> getSelectedPersonProperty();
+    ReadOnlyObjectProperty<Customer> getSelectedCustomerProperty();
 
     /** Returns the selected customer displayed*/
-    Customer getSelectedPerson();
+    Customer getSelectedCustomer();
 
     /** Returns the selected OrderList displayed*/
     OrderList getSelectedOrderList();
@@ -115,12 +115,12 @@ public interface Model {
     /**
      * Updates the selected customer whose orders are displayed.
      */
-    void updateSelectedPerson(Customer customer);
+    void updateSelectedCustomer(Customer customer);
 
     /**
      * Checks if the given {@code customer} is the selected customer whose orders are displayed.
      */
-    boolean isSelectedPerson(Customer customer);
+    boolean isSelectedCustomer(Customer customer);
 
     /**
      * Replaces the given order {@code target} with {@code editedOrder}.
@@ -132,5 +132,5 @@ public interface Model {
      * Returns a {@code Customer} in the {@code UniqueCustomerList} equivalent to target Customer given.
      * Returns null if target is null.
      */
-    Customer findEquivalentPerson(Customer customer);
+    Customer findEquivalentCustomer(Customer customer);
 }

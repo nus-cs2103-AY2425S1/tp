@@ -9,9 +9,9 @@ import seedu.sellsavvy.model.customer.Customer;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the customers list.
+     * This list will not contain any duplicate customers.
      */
-    ObservableList<Customer> getPersonList();
+    ObservableList<Customer> getCustomerList();
 
 }

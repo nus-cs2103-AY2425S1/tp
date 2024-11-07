@@ -38,8 +38,8 @@ public class DeleteOrderCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        customerToDeleteOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(customerToDeleteOrderUnder);
+        customerToDeleteOrderUnder = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(customerToDeleteOrderUnder);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class DeleteOrderCommandTest {
     @Test
     public void execute_noOrderListDisplayed_throwsCommandException() {
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST);
-        model.updateSelectedPerson(null);
+        model.updateSelectedCustomer(null);
 
         assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);
     }

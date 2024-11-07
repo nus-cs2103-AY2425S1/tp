@@ -14,7 +14,7 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderByIndex;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
@@ -46,8 +46,8 @@ public class EditOrderCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        selectedCustomer = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(selectedCustomer);
+        selectedCustomer = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(selectedCustomer);
     }
 
     @Test
@@ -89,7 +89,7 @@ public class EditOrderCommandTest {
 
     @Test
     public void execute_noOrderListDisplayed_failure() {
-        model.updateSelectedPerson(null);
+        model.updateSelectedCustomer(null);
         Order editedOrder = new OrderBuilder().build();
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(editedOrder).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST, descriptor);
@@ -251,7 +251,7 @@ public class EditOrderCommandTest {
      * but smaller than size of unfiltered order list
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidCustomerIndexFilteredList_failure() {
         // gets index of last order before filtering
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
 

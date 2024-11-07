@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_NAME_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_PHONE_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalCustomers.ALICE;
 import static seedu.sellsavvy.testutil.TypicalCustomers.BOB;
@@ -35,30 +35,30 @@ public class CustomerTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameCustomer() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(ALICE.isSameCustomer(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(ALICE.isSameCustomer(null));
 
         // same name, all other attributes different -> returns true
         Customer editedAlice = new CustomerBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSameCustomer(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new CustomerBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameCustomer(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Customer editedBob = new CustomerBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertFalse(BOB.isSameCustomer(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new CustomerBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertFalse(BOB.isSameCustomer(editedBob));
     }
 
     @Test

@@ -42,13 +42,13 @@ public class ListOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Customer> lastShownList = model.getFilteredPersonList();
+        List<Customer> lastShownList = model.getFilteredCustomerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
         Customer selectedCustomer = lastShownList.get(index.getZeroBased());
-        model.updateSelectedPerson(selectedCustomer);
+        model.updateSelectedCustomer(selectedCustomer);
         selectedCustomer.resetFilteredOrderList();
         return new CommandResult(String.format(MESSAGE_LIST_ORDER_SUCCESS, selectedCustomer.getName().fullName));
     }

@@ -3,17 +3,17 @@ package seedu.sellsavvy.logic.commands.customercommands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.DESC_AMY;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.DESC_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_NAME_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_PHONE_BOB;
-import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.DESC_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditPersonDescriptor;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.sellsavvy.testutil.EditCustomerDescriptorBuilder;
 
 public class EditCustomerDescriptorTest {
@@ -21,7 +21,7 @@ public class EditCustomerDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditCustomerDescriptor descriptorWithSameValues = new EditCustomerDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -37,7 +37,7 @@ public class EditCustomerDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditCustomerDescriptor editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
@@ -59,13 +59,13 @@ public class EditCustomerDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+        EditCustomerDescriptor editCustomerDescriptor = new EditCustomerDescriptor();
+        String expected = EditCustomerDescriptor.class.getCanonicalName() + "{name="
+                + editCustomerDescriptor.getName().orElse(null) + ", phone="
+                + editCustomerDescriptor.getPhone().orElse(null) + ", email="
+                + editCustomerDescriptor.getEmail().orElse(null) + ", address="
+                + editCustomerDescriptor.getAddress().orElse(null) + ", tags="
+                + editCustomerDescriptor.getTags().orElse(null) + "}";
+        assertEquals(expected, editCustomerDescriptor.toString());
     }
 }
