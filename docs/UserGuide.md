@@ -10,11 +10,11 @@ TalentHub is optimized for use via a **Command Line Interface** (CLI) while stil
 <div markdown="block" class="alert alert-info">
 
 **:information_source: CLI and GUI:**<br>
-This means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your contacts efficiently, while still having the ease of viewing the contacts in a graphical format.
+This means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your celebrities' contacts and events efficiently, while still having the ease of viewing all of them in a graphical format.
 
 </div>
 
-If you can type fast and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
+If you can type fast, and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
 
 - Table of Contents
   {:toc}
@@ -25,28 +25,28 @@ If you can type fast and you need to manage celebrities and their schedules, **T
 
 1. Ensure you have Java `17` or above installed in your computer. You can view an installation guide [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-4/tp/releases/tag/v1.3).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-4/tp/releases/tag/v1.5).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TalentHub.
+3. Copy the file to the folder you want to use as the _home folder_ for your TalentHub.
 
-1. Open a command terminal, `cd` to change directory to the folder your TalentHub is in, and use the `java -jar talenthub.jar` command to run the application.<br>
+4. Open a command terminal, `cd` to change directory to the folder your TalentHub is in, and use the `java -jar talenthub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list person` : Lists all persons.
 
    - `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to TalentHub.
 
-   - `delete person 3` : Deletes the 3rd person shown in the current list.
+   - `delete person 3` : Deletes the 3rd person shown in the current list after receiving confirmation from you.
 
-   - `clear all` : Deletes all events and persons.
+   - `clear all` : Deletes all events and persons after receiving confirmation from you.
 
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -141,9 +141,9 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find person John` returns `john` and `John Doe`
-- `find person john betsy` returns `John Doe`, `Betsy Crowe`
+- `find person john bernice` returns `John Doe`, `Bernice Yu`
 
-![result for 'find john betsy'](images/findJohnBetsyResult.png)
+![result for 'find person john bernice'](images/findJohnBerniceResult.png)
 
 ### Viewing person by name: `view person`
 
@@ -163,7 +163,7 @@ Examples:
 - `view person Betsy Crowe` returns the details for `Betsy Crowe`
 - `view person John Doe` returns the details for `John Doe`
 
-![result for 'view john doe'](images/viewJohnDoeResult.png)
+![result for 'view person john doe'](images/viewJohnDoeResult.png)
 
 ### Filtering person by tag: `filter person`
 
@@ -201,6 +201,7 @@ Examples:
 - `list person` followed by `delete person 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
 
+![result for 'delete person confirmation'](images/delete_person_confirmation.png)
 ![result for 'delete person'](images/delete_person.png)
 
 ## Managing Events
@@ -270,7 +271,7 @@ Examples:
 - `find event Hiking` returns `Hiking` and `Park Hiking`
 - `find event Hair Oscars` returns `Hair Cut`, `Oscars`
 
-![result for 'find hair oscars'](images/findHairOscarsResult.png)
+![result for 'find event hair oscars'](images/findHairOscarsResult.png)
 
 ### Viewing event by name: `view event`
 
@@ -291,7 +292,7 @@ Examples:
 - `view event Oscars` returns the details for `Oscars`
 - `view event Hair Cut` returns the details for `Hair Cut`
 
-![result for 'view hair cut'](images/viewHairCutResult.png)
+![result for 'view event hair cut'](images/viewHairCutResult.png)
 
 ### Filtering events by celebrity name: `filter event`
 
@@ -312,7 +313,7 @@ Examples:
 - `filter event Jim Bob` returns the events for celebrity `Jim Bob`
 - `filter event Betsy Crowe` returns the events for celebrity `Betsy Crowe`
 
-![result for 'filter betsy crowe'](images/filterBetsyCroweResult.png)
+![result for 'filter bernice yu'](images/filterBerniceYuResult.png)
 
 ### Deleting an event : `delete event`
 
@@ -337,6 +338,7 @@ Clears all event entries from the address book.
 
 Format: `clear event`
 
+![result for 'clear event confirmation'](images/clear_event_confirmation.png)
 ![result for 'clear event'](images/clear_event.png)
 
 ## Utility Commands
@@ -347,6 +349,7 @@ Clears all entries from the address book.
 
 Format: `clear all`
 
+![result for 'clear all confirmation'](images/clear_all_confirmation.png)
 ![result for 'clear all'](images/clear_all.png)
 
 ### Exiting the program : `exit`
@@ -365,6 +368,7 @@ Format: `help`
 Example:
 
 ![result for 'help'](images/help.png)
+![result for 'help window'](images/help-window.png)
 
 ### Saving the data
 
