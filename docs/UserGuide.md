@@ -344,7 +344,7 @@ Finds persons whose names contain any of the given tag keywords.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* The search is case-sensitive. e.g `friends` will not match `Friends`
+* The search is case-insensitive. e.g `friends` will match `Friends`
 * At least one tag must be provided.
 * The order of the keywords does not matter. e.g. `t/friends t/family` will match `t/family t/friends`
 * Only the tags is searched.
@@ -495,6 +495,8 @@ Unmarks a student as present for a particular week.
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Format: `unmark n/NAME w/[WEEK_NUMBER]`**</md>
+<md>**Format: `unmark n/NAME week/[WEEK_NUMBER]`**</md>
+
 </box>
 
 <box type="definition" icon=":fa-solid-spell-check:" light>

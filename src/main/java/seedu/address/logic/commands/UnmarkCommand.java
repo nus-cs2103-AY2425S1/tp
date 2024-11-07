@@ -24,10 +24,16 @@ public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the name as present for that particular "
+    public static final String COMMAND_WORD_SHORT_FORM = "um";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
+            + ": Unmarks the name as present for that particular "
             + "week.\n"
             + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_WEEK + "WEEK_NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_WEEK + "1\n"
+            + "Example: " + COMMAND_WORD_SHORT_FORM + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_WEEK + "1";
 
