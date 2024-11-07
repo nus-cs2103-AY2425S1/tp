@@ -148,7 +148,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
-    
+
     /**
      * Finds a person in the internal list by their phone number.
      *
