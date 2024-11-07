@@ -44,7 +44,7 @@ If you can type fast, GOATS can get your student management tasks done faster th
 
 
 | Action            | Format, Examples                                                                                                                                                                               |
-| ----------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**   | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS edu/EDUCATION [t/TAG]` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                  |
 | **Add Parent**    | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/Jane Doe p/33335555 e/janedoe@example.com a/456, Pasir Ris Dr t/friend`                                              |
 | **Grade**         | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`                                                                                                                                           |
@@ -53,6 +53,7 @@ If you can type fast, GOATS can get your student management tasks done faster th
 | **Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [edu/EDUCATION] [pn/PARENT NAME] [pp/PARENT PHONE] [pe/PARENT EMAIL][t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
 | **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
 | **FindTag**       | `findtag KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtag math science`                                                                                                                             |
+| **FindDay**       | `findday KEYWORD [MORE_KEYWORDS]`<br> e.g., `findday tuesday wednesday`                                                                                                                        |
 | **Help**          | `help`                                                                                                                                                                                         |
 | **Pin**           | `pin INDEX [MORE_INDICES]`<br> e.g., `pin 1 2 3 4`                                                                                                                                             |
 | **Unpin**         | `unpin INDEX [MORE_INDICES]`<br> e.g., `unpin 1 2 3 4`                                                                                                                                         |
@@ -203,12 +204,11 @@ Finds persons whose tags contain any of the given keywords.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The search is case-insensitive. e.g `dyslexic` will match `Dyslexic`
+* The order of the keywords does not matter. e.g. `dyslexic vegetarian` will match `vegetarian dyslexic`
+* Only full words will be matched e.g. `veg` will not match `vegetarian`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `vegetarian dyslexic` will return all users with tags containing `vegetarian` or `dyslexic`
 
 Examples:
 
@@ -216,9 +216,27 @@ Examples:
 * `findtag friends colleagues` returns `Alex Yeoh`, `Bernice Yu` and `Roy Balakrishnan`<br>
   ![result for 'findtag friends colleagues'](images/findTagFriendsColleagues.png)
 
+### Locating students by lesson day: `findday`
+
+Finds students who have lessons on specific days.
+
+Format: `findtag DAY [MORE_DAYS]`
+
+* The search is case-insensitive. e.g `tuesday` will match `Tuesday`
+* The order of the keywords does not matter. e.g. `tuesday wednesday` will match `wednesday tuesday`
+* Only full words will be matched e.g. `tues` will not match `tuesday`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `tuesday wednesday` will return all students with lessons on Tuesday and students with lessons on Wednesday.
+
+Examples:
+
+* `findday tuesday` returns `Alex Yeoh` and `Bernice Yu`
+* `findtag friends colleagues` returns `Alex Yeoh`, `Bernice Yu` and `Roy Balakrishnan`<br>
+  ![result for 'findday tuesday wednesday'](images/findDayTuesdayWednesday.png)
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
