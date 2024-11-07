@@ -152,7 +152,7 @@ public class ClientDetailPanel extends UiPart<Region> {
         }
     }
 
-    private void setRemarkText(String remarkText){
+    private void setRemarkText(String remarkText) {
         Label remarkLabel = new Label(remarkText);
         if (remarkText.equalsIgnoreCase(CommandCommons.DEFAULT_REMARK)) {
             setLabelText(remarkLabel, "");
