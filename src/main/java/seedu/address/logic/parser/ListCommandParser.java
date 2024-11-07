@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
