@@ -66,12 +66,12 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-supplier-add--s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**[Delete](#deleting-a-supplier--delete--s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
-**[List](#listing-all-suppliers-list--s)**   | `list -s`
-**[Mark](#mark-a-supplier-with-a-status--mark--s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
+**[Add](#adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**[Delete](#deleting-a-supplier--delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**[List](#listing-all-suppliers-list-s)**   | `list -s`
+**[Mark](#mark-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
 **[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
-**[Sort](#sort-suppliers-sort--s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
+**[Sort](#sort-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
 
 ### Delivery Commands
@@ -285,11 +285,18 @@ Marks the specified delivery from the address book with the specified `STATUS`.
 
 Format: `mark -d INDEX STATUS`
 
-* Marks the delivery at the specified `INDEX` with the specified `STATUS`.
-* The index refers to the index number shown in the displayed delivery list.
-* The status refers to the delivery status of a delivery shown in the displayed delivery list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The status **must be one of the following:** PENDING, DELIVERED, CANCELLED. Note that the status is not case-sensitive.
+Parameters:
+
+- `INDEX`: Must be a number greater than 0 and must not be blank.
+- `STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
+
+<box type="tip" seamless>
+
+**Warnings**:
+- A spacing between `mark` and `-d` is compulsory
+- Both parameters must be given
+- Parameters used are case-insensitive
+  </box>
 
 
 Examples:
@@ -305,9 +312,16 @@ Deletes the specified delivery from the address book.
 
 Format: `delete -d INDEX`
 
-* Deletes the delivery at the specified `INDEX`.
-* The index refers to the index number shown in the displayed delivery list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Parameters:
+
+- `INDEX`: Must be a number greater than 0 and must not be blank.
+
+<box type="tip" seamless>
+
+**Warnings**:
+- A spacing between `delete` and `-d` is compulsory
+- No duplicate prefix can be used
+  </box>
 
 Examples:
 * `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
@@ -318,21 +332,21 @@ Examples:
 
 ### Find a delivery: `find -d`
 
-The `find -d` command is used to find a delivery in VendorVault.
-This helps you find deliveries based on attributes of the delivery, like the delivery date, delivery status, supplier and product.
+Find deliveries based on attributes of the delivery, like the delivery date and time, delivery status, supplier and product.
 
-Format: `find -d on/<DELIVERY_DATE_TIME> stat/<DELIVERY_STATUS> s/<SUPPLIER_INDEX> pro/<PRODUCT_TO_BE_DELIVERED>`
+Format: `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`
 
 Parameters:
 
-- <DELIVERY_DATE_TIME> : Must be in dd-MM-yyyy HH:mm format and must not be blank.
-- <DELIVERY_STATUS> : Must be one of the following: PENDING, DELIVERED, CANCELLED
-- <SUPPLIER_INDEX> : Index of the supplier as seen in the supplier list
-- <PRODUCT_TO_BE_DELIVERED> : Name of product that will be delivered
+- `on/DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
+- `stat/STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
+- `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
 
 <box type="tip" seamless>
 
 **Warnings**:
+- A spacing between `find` and `-d` is compulsory
 - At least one prefix and parameter must be given
 - No duplicate prefix can be used
 - Find result(s) will contain/satisfy all the given parameters
