@@ -434,9 +434,6 @@ Certain changes you make to the file could cause LogiLink to behave unexpectedly
 1. **When using multiple screens**
  - If you are using multiple screens and move the app to a secondary screen, then later switch to using only the primary screen, the app might open off-screen. 
  - To fix this, simply delete the `preferences.json` file created by the app, then restart the app.
-2. **When minimizing the Help Window** 
- - If you minimize the Help Window and try to open it again (either by running the `help` command, using the `Help` menu, or pressing `F1`), the Help Window will stay minimized and no new Help Window will appear. 
- - To fix this, just manually restore the minimized Help Window before using any of the above help functions.
 
 --------------------------------------------------------------------------------------------------------------------
 
