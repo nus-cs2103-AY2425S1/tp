@@ -100,6 +100,11 @@ public interface Model {
      */
     List<Person> getAssociatedPeople(Person person);
 
+    /**
+     * Returns a list of associated lessons for the given person.
+     */
+    List<Lesson> getAssociatedLessons(Person person);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

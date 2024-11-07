@@ -23,6 +23,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hours;
@@ -87,6 +88,15 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        for (Lesson l : model.getAssociatedLessons(personToEdit)) {
+            model.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                model.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                model.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
         }
 
         model.setPerson(personToEdit, editedPerson);
