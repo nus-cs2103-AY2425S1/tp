@@ -560,7 +560,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Perform any operation that modifies the state (all executions except for list and find) to ensure there is an action to undo.
 
    1. Test case: undo 
-   Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action. The timestamp in the status bar is updated.
+   Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action.
 
    1. Test case: undo immediately after starting the application (with no operations performed)
    Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo. The status bar remains unchanged.
