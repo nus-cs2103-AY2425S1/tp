@@ -80,7 +80,7 @@ If your machine is **not running Java 17**, you may refer to the [FAQ section](#
 
 #### Step 2: Download the MediBase3 JAR File
 
-1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.3/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this:
+1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.5/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this:
 ![githubAssets.png](images/githubAssets.png)
 1. Click on `medibase3.jar` to download the latest MediBase3 JAR File.
 2. Save the file to a location of your choice (e.g., `Downloads` folder).
