@@ -476,7 +476,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Simulate corrupted data files
 
-   1. Assuming data present in the program. Find the `addressbook.json` file in the `data` folder
+   1. Assuming data present in the program. Find the `LogiLink.json` file in the `data` folder
    2. Delete any line. An empty address book will be loaded.
-   3. IF any command is used the `addressbook.json` would be wiped clean. Save the data in another file if necessary.
-   4. Delete the corrupted `addressbook.json` file. The program will create a new file.
+   3. IF any command is used the `LogiLink.json` would be wiped clean. Save the data in another file if necessary.
+   4. Delete the corrupted `LogiLink.json` file. The program will create a new file.
