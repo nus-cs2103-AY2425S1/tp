@@ -80,11 +80,11 @@ class GradingSystemTest {
                 "Invalid weight inputs", () -> Assertions.assertThrows(
                         IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(
                                 null, 0.5),
-                        "Should reject null assessment") ,
-                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(
+                        "Should reject null assessment") , () -> Assertions.assertThrows(
+                                IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(
                                 "Test", -0.1),
-                        "Should reject negative weight") ,
-                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(
+                        "Should reject negative weight"), () -> Assertions.assertThrows(
+                                IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(
                                 "Test", 1.1),
                         "Should reject weight above 1.0")
                              );
@@ -106,11 +106,13 @@ class GradingSystemTest {
                                                                              gradingSystem.getOverallScore(),
                                                                              0.001,
                                                                              "Overall score should "
-                                                                                     + "be exactly 91.0"),
-                () -> Assertions.assertTrue(
+                                                                                     + "be exactly 91.0"), (
+
+                ) -> Assertions.assertTrue(
                         gradingSystem.getOverallScore() > 90.0,
-                        "Overall score should be above 90") ,
-                () -> Assertions.assertTrue(
+                        "Overall score should be above 90") , (
+
+                ) -> Assertions.assertTrue(
                         gradingSystem.getOverallScore() < 95.0,
                         "Overall score should be below 95")
                              );
