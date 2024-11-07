@@ -118,9 +118,8 @@ public class DeleteClaimsCommandTest {
 
         HealthPolicy healthPolicy = new HealthPolicy(null, null, null,
                 new ClaimList());
-        healthPolicy.addClaim(claim);
         PolicySet policySet = new PolicySet();
-        policySet.add(healthPolicy);
+        policySet.add(healthPolicy.addClaim(claim));
 
         return new Client(new Name(name), new Phone(phone), new Email(email),
                 new Address(address), Set.of(), policySet);

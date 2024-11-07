@@ -71,8 +71,7 @@ public class DeletePoliciesCommand extends Command {
     }
 
     private PolicySet removePolicies(Set<Policy> policies) throws CommandException {
-        PolicySet updatedPolicies = new PolicySet();
-        updatedPolicies.addAll(policies);
+        PolicySet updatedPolicies = new PolicySet(policies);
         for (PolicyType type : policyTypes) {
             if (!updatedPolicies.remove(type)) {
                 throw new CommandException(MESSAGE_POLICY_NOT_FOUND);

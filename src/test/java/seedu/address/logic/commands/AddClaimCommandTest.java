@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimList;
 import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.HealthPolicy;
@@ -91,7 +92,7 @@ public class AddClaimCommandTest {
         model.addClient(client);
 
         // attempt to add the same claim again
-        Claim duplicateClaim = new Claim(ClaimStatus.PENDING, "Surgery");
+        Claim duplicateClaim = new Claim(validClaim.getStatus(), validClaim.getClaimDescription());
         AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_CLIENT, duplicateClaim,
                 client.getPolicies().iterator().next().getType());
 
@@ -135,10 +136,9 @@ public class AddClaimCommandTest {
 
     private Client createClientWithPolicyAndClaim() {
         // initialize a client with a health policy and a claim
-        HealthPolicy policy = new HealthPolicy();
-        Claim claim = new Claim(ClaimStatus.PENDING, "Surgery");
-
-        policy.getClaimList().add(claim);
+        ClaimList claimList = new ClaimList();
+        claimList.add(validClaim);
+        HealthPolicy policy = new HealthPolicy(null, null, null, claimList);
 
         return new ClientBuilder().withPolicy(policy).build();
     }

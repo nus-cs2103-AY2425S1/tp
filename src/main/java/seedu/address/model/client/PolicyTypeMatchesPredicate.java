@@ -17,8 +17,7 @@ public class PolicyTypeMatchesPredicate implements Predicate<Client> {
 
     @Override
     public boolean test(Client client) {
-        PolicySet policySet = new PolicySet();
-        policySet.addAll(client.getPolicies());
+        PolicySet policySet = new PolicySet(client.getPolicies());
         return policySet.contains(policyType);
     }
 

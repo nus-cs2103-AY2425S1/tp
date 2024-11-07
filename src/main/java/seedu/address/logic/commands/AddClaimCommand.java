@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,11 +13,11 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.claim.Claim;
-import seedu.address.model.claim.ClaimList;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.exceptions.DuplicateClaimException;
 
 /**
  * Adds a claim to a client in Prudy.
@@ -37,9 +36,9 @@ public class AddClaimCommand extends Command {
             + PREFIX_CLAIM_STATUS + "pending "
             + PREFIX_CLAIM_DESC + "stomach surgery";
 
-    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Claim added for policy type"
-            + "'%1$s' of client: %2$s.\n\n"
-            + "Added Claim Details:\nStatus: %3$s | Description: %4$s.\n";
+    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Claim added for policy type "
+            + "'%1$s' of client: %2$s\n\n"
+            + "Added Claim Details:\nStatus: %3$s | Description: %4$s\n";
     public static final String MESSAGE_POLICY_NOT_FOUND = "The policy for the specified type was not found.";
     public static final String MESSAGE_CLAIM_EXISTS = "A similar claim already exists in the policy.";
 
@@ -81,16 +80,16 @@ public class AddClaimCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_POLICY_NOT_FOUND));
 
-        ClaimList claimList = policy.getClaimList();
-        if (!claimList.add(claim)) {
+        Policy updatedPolicy;
+        try {
+            updatedPolicy = policy.addClaim(claim); // returns a new Policy
+        } catch (DuplicateClaimException e) {
             throw new CommandException(MESSAGE_CLAIM_EXISTS);
         }
 
-        // create new policy set with the updated policy (to preserve immutability)
-        PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(new HashSet<>(policySet));
-        updatedPolicySet.remove(policy.getType());
-        updatedPolicySet.add(policy);
+        // create new policy set with the updated policy to preserve immutability
+        PolicySet updatedPolicySet = new PolicySet(policySet);
+        updatedPolicySet.replace(updatedPolicy);
 
         // create a new client with the updated policy set
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(),
