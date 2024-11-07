@@ -379,7 +379,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The wedding is not yet created.
 
-    * 1a1. KnottyPlanners shows an error message that prompts the user to create a wedding first.
+    * 1a1. KnottyPlanners shows an error message.
 
       Use case ends.
 
@@ -389,15 +389,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given contact name is invalid.
+* 1c. The given contact name is invalid.
 
-    * 3b1. KnottyPlanners shows an error message.
+    * 1c1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
-* 3c. The tag already exists for that contact.
+* 1d. The tag already exists for that contact.
 
-    * 3c1. KnottyPlanners shows an error message.
+    * 1d1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -424,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-  * 3b. The tag does not exist for that contact.
+* 3b. The tag does not exist for that contact.
 
     * 3b1. KnottyPlanners shows an error message.
 
