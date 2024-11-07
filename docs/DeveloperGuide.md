@@ -30,7 +30,7 @@
   * [4.3.1 Implementation - Sequence Diagram](#4-3-1-implementation-sequence-diagram)
   * [4.3.2 Design Considerations](#4-3-2-design-considerations)
 * [4.4 Tag Feature](#4-4-tag-feature)
-  * [4.4.1 Implementation - Sequence Diagram](#4-4-1-implementation-sequence-diagrams)
+  * [4.4.1 Implementation - Sequence Diagrams](#4-4-1-implementation-sequence-diagrams)
   * [4.4.2 Design Considerations](#4-4-2-design-considerations)
 * [4.5 View Specific Student Feature](#4-5-view-specific-student-feature)
   * [4.5.1 Implementation - Sequence Diagram](#4-5-1-implementation-sequence-diagram)
@@ -244,7 +244,7 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
 
 ***
 
-### 4.2 Add Feature - Adding a Student
+### 4.2 Add Feature
 The Add feature allows users to register a new student in the system with a range of details, such as name, phone number, emergency contact, address, level, subject(s), and lesson time(s). Users can specify a single level, multiple subjects, and multiple lesson timings per student to tailor profile details for academic tracking and scheduling.
 
 - **Duplicate Prevention**: If a student with identical details already exists, the system will prevent the addition and
