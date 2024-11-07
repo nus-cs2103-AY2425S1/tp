@@ -29,7 +29,9 @@ public class AddNotesCommandParser implements Parser<AddNotesCommand> {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNotesCommand.MESSAGE_USAGE), ive);
         }
-        String notes = argMultimap.getValue(PREFIX_NOTES).orElse("");
-        return new AddNotesCommand(index, new Notes(notes));
+        Notes notes = (argMultimap.getValue(PREFIX_NOTES).isPresent()
+                ? ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).get())
+                : ParserUtil.parseNotes(""));
+        return new AddNotesCommand(index, notes);
     }
 }
