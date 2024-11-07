@@ -4,40 +4,96 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
+
 package Storage as StoragePackage {
+
 
 package "UserPrefs Storage" #F4F6F6{
 Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
 }
 
+
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
+Class JsonAdaptedIngredient
+Class JsonAdaptedPerson
+Class JsonAdaptedTag
+
 
 package "AddressBook Storage" #F4F6F6{
 Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
 }
+
+
+package "CustomerOrderList Storage" #F4F6F6{
+Class "<<interface>>\nCustomerOrderListStorage" as CustomerOrderListStorage
+Class JsonCustomerOrderListStorage
+Class JsonAdaptedCustomerOrderList
+Class JsonAdaptedCustomerOrder
+Class JsonAdaptedPastry
+}
+
+
+package "SupplyOrderList Storage" #F4F6F6{
+Class "<<interface>>\nSupplyOrderListStorage" as SupplyOrderListStorage
+Class JsonSupplyOrderListStorage
+Class JsonAdaptedSupplyOrderList
+Class JsonAdaptedSupplyOrder
+}
+
+
+package "IngredientCatalogue Storage" #F4F6F6{
+Class "<<interface>>\nIngredientCatalogueStorage" as IngredientCatalogueStorage
+Class JsonIngredientCatalogueStorage
+}
+
+
+package "PastryCatalogue Storage" #F4F6F6{
+Class "<<interface>>\nPastryCatalogueStorage" as PastryCatalogueStorage
+Class JsonPastryCatalogueStorage
+}
+
 
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" CustomerOrderListStorage
+StorageManager -up-> "1" SupplyOrderListStorage
+StorageManager -up-> "1" IngredientCatalogueStorage
+StorageManager -up-> "1" PastryCatalogueStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+
+JsonCustomerOrderListStorage .up.|> CustomerOrderListStorage
+JsonCustomerOrderListStorage --> "*" JsonAdaptedCustomerOrderList
+JsonAdaptedCustomerOrderList --> "*" JsonAdaptedCustomerOrder
+JsonAdaptedCustomerOrder --> "1" JsonAdaptedPerson
+JsonAdaptedCustomerOrder --> "*" JsonAdaptedPastry
+JsonAdaptedPastry --> "*" JsonAdaptedIngredient
+
+
+JsonSupplyOrderListStorage .up.|> SupplyOrderListStorage
+JsonSupplyOrderListStorage --> "*" JsonAdaptedSupplyOrderList
+JsonAdaptedSupplyOrderList --> "*" JsonAdaptedSupplyOrder
+JsonAdaptedSupplyOrder --> "1" JsonAdaptedPerson
+JsonAdaptedSupplyOrder --> "*" JsonAdaptedIngredient
+
+
+JsonIngredientCatalogueStorage .up.|> IngredientCatalogueStorage
+
+JsonPastryCatalogueStorage .up.|> PastryCatalogueStorage
+
 
 @enduml
