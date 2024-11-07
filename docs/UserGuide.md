@@ -231,7 +231,7 @@ Examples:
 
 Edits an assignment belonging to a student based on the student's index number and the assignment's index.
 
-Format: `edit_assignment si/INDEX ai/INDEX`
+Format: `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`
 
 * Edits the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
   list and the assignment list on the student detail panel respectively.
@@ -375,7 +375,7 @@ Action            | Format, Examples
 **Help**          | `help`
 **Add Assignment**| `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
 **Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`
-**Edit Assignment** | `edit_assignment si/INDEX ai/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80`
+**Edit Assignment** | `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80`
 **Mark Assignment** | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`
 **Unmark Assignment** | `unmark si/INDEX ai/INDEX`<br> e.g., `unmark si/1 ai/1`
 **Grade Assignment** | `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`<br> e.g., `grade si/1 ai/1 s/100`

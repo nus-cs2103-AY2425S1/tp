@@ -29,7 +29,7 @@ public class GradeAssignmentCommand extends Command {
             + "Parameters: "
             + PREFIX_STUDENT_INDEX + "INDEX "
             + PREFIX_ASSIGNMENT_INDEX + "INDEX "
-            + PREFIX_ASSIGNMENT_SCORE + "ASSIGNMENT SCORE\n"
+            + PREFIX_ASSIGNMENT_SCORE + "ASSIGNMENT_SCORE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_INDEX + "1 "
