@@ -10,3 +10,12 @@
     height: 21px;
     width: 21px
 }
+
+.toc {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 20px;
+    max-width: 250px;  /* Limit the width of the TOC */
+    float: right;
+    margin-left: 20px;
+}

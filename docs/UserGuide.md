@@ -6,7 +6,6 @@ title: User Guide
 ## Overview
 
 CCAConnect is a desktop application that aims to **assist NUS CCA leaders** in **managing and collating relevant CCA personnel’s contact details**, as well as help to **track attendance details for CCA sessions**.
-
 Equipped with features like **attendance marking**, **contact management**, **contact filtering** and **profile switching**, CCAConnect helps to reduce the headaches of personnel tracking.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -30,13 +29,13 @@ Equipped with features like **attendance marking**, **contact management**, **co
     cd ~/Desktop/CCA
     ```
 
-1. Launch the CCAConnect application by typing in the following command:
-    ```dtd
-    java -jar ccaconnect.jar
-    ```
+   1. Launch the CCAConnect application by typing in the following command:
+       ```dtd
+       java -jar ccaconnect.jar
+       ```
 
-   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+      A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+      ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -76,8 +75,10 @@ Equipped with features like **attendance marking**, **contact management**, **co
 * The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
 </div>
 
-[!Warning]
-> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
 
 ### Viewing help : `help`
 
@@ -346,7 +347,7 @@ unmark t/TELEGRAM…​ d/DATE
 
 Clears all entries from the address book.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
 This action permanently deletes all the entries from the address book! **Use with extreme caution**.
 </div>
 
@@ -430,7 +431,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
