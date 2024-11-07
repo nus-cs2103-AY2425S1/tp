@@ -102,7 +102,7 @@ Shows a message and brings you to the help page when you click 'open URL'.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to the address book.
 
@@ -142,7 +142,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower h/@betsyyy t/` Edits the name and telegram handle of the 2nd person to be `Betsy Crower` and `@betsyyy` respectively and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name : `find`
 
 Finds persons whose **names** or **telegram handle** contain any of the specified keywords.
 
@@ -163,7 +163,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`
   ![result for 'find alex david'](images/findAlexDavid.png)
 
-### Filtering persons by contact type: `filter`
+### Filtering persons by contact type : `filter`
 
 Filters persons by their contact type (i.e. work, school or personal).
 
@@ -199,7 +199,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Switching display theme: `switch`
+### Switching display theme : `switch`
 
 Changes the display to 'light' mode or 'dark' mode.
 
