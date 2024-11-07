@@ -545,20 +545,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help` <br> Shows help page
-**Create Doctor** | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy`
-**Create Patient** | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`
-**Delete Patient** | `deleteP z/PATIENT_ID` <br> e.g., `deleteP z/2`
-**Add Notes** | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`
-**List** | `list` <br> Shows all persons in address book
-**Edit** | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`
-**Get ID** | `get KEYWORD` <br> e.g., `get john`
-**Add Appointment** | `addAppointment x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`
-**View History** | `view z/PATIENT_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`
-**Check Appointment** | `checkA z/DOCTOR_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`
-**Mark Appointment** | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`
-**Delete Appointment** | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`
-**Clear** | `clear` <br> Clears all entries
-**Exit** | `exit` <br> Exits the program
+| Action                 | Format, Examples                                                                                                                                          |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**               | `help` <br> Shows help page                                                                                                                               |
+| **Create Doctor**      | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
+| **Create Patient**     | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                     |
+| **Delete Patient**     | `deleteP z/PATIENT_ID` <br> e.g., `deleteP z/2`                                                                                                           |
+| **Add Notes**          | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                               |
+| **List**               | `list` <br> Shows all persons in address book                                                                                                             |
+| **Edit**               | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
+| **Get ID**             | `get KEYWORD` <br> e.g., `get john`                                                                                                                       |
+| **Add Appointment**    | `addAppointment x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                 |
+| **View History**       | `view z/PATIENT_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                                |
+| **Check Appointment**  | `checkA z/DOCTOR_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                          |
+| **Mark Appointment**   | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                                           |
+| **Delete Appointment** | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                                          |
+| **Clear**              | `clear` <br> Clears all entries                                                                                                                           |
+| **Exit**               | `exit` <br> Exits the program                                                                                                                             |
