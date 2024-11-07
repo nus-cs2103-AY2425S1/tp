@@ -783,7 +783,7 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 
 ## FAQ
 
-#### **Q**: How do I transfer my data to another Computer?
+#### **Q**: How do I transfer my data to another computer?
  - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.
 
 #### **Q**: How do we open the command terminal?
