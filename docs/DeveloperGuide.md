@@ -264,8 +264,6 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Adding a transaction
 
 1. Adding a transaction while all transactions are being shown with minimally 1 person in address book
@@ -403,5 +401,3 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
    2. Test cases: Missing `isDone` field in `transactionbook.json` data file<br>
       Simulation: Remove the `isDone` field from a transaction entry in the JSON file, then start the app.
       Expected: The transaction loads as undone by default. Upon closing the app, the transaction is saved as undone in the JSON file.
-
-   3.
