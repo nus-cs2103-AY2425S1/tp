@@ -12,6 +12,7 @@ public enum Commands {
     VIEW("view", "view INDEX/NAME", new String[]{}),
     FILTER("filter", "filter [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]...",
             new String[]{"n/", "r/", "e/", "p/", "a/"}),
+    FIND("find", "find KEYWORD [MORE_KEYWORDS...]", new String[]{}),
     LIST("list", "list", new String[]{}),
     EXIT("exit", "exit", new String[]{}),
     HELP("help", "help", new String[]{}),
@@ -22,7 +23,7 @@ public enum Commands {
     EDITWEDDING("editw", "editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]",
             new String[]{"n/", "d/", "v/", "w/"}),
     VIEWWEDDING("vieww", "vieww INDEX/WEDDING_NAME", new String[]{}),
-    DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
+    DELETEWEDDING("deletew", "deletew INDEX/WEDDING_NAME", new String[]{}),
     ASSIGN("assign", "assign INDEX/NAME [r/ROLE] [w/WEDDING_INDEX...]",
             new String[]{"r/", "w/"});
 

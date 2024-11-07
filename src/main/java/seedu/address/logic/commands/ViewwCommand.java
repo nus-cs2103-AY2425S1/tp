@@ -24,8 +24,8 @@ public class ViewwCommand extends Command {
     public static final String COMMAND_WORD = "vieww";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views the wedding details of the person identified by the index number used in "
-            + "the displayed person list.\n"
+            + ": View the wedding details of the person identified by the index number used in "
+            + "the displayed person list or the wedding name.\n"
             + "Parameters: INDEX (must be a positive integer) or WEDDINGNAME (the name of wedding, case insensitive)\n"
             + "Example: " + COMMAND_WORD + " 1" + " or " + COMMAND_WORD + " alex wedding";
 
