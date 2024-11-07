@@ -25,7 +25,7 @@ public class ParserUtil {
     public static final String MESSAGE_QUANTITY_CONSTRAINT = "Quantity must be an non-negative integer.";
     public static final String MESSAGE_PRICE_CONSTRAINT = "Price must be a non-negative number.";
     public static final String MESSAGE_PROCUREMENT_DATE_CONSTRAINT = "Procurement date must not be in the future.";
-    public static final String MESSAGE_ARRIVAL_DATE_CONSTRAINT = "Arrival date should not be before the procurement date.";
+    public static final String MESSAGE_ARRIVAL_DATE_CONSTRAINT = "Arrival date must be after the procurement date.";
 
     /**
      * Parses a {@code String name} into a {@code Name}.
