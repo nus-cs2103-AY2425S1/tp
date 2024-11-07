@@ -16,6 +16,8 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
    1. [Adding a volunteer](#adding-a-volunteer-v-new)
    1. [Finding volunteers by name](#finding-volunteers-by-name--v-find)
    1. [Deleting a volunteer](#deleting-a-volunteer--v-del)
+   1. [Adding available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)
+   1. [Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)
    1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)
    1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)
 1. [Event-related Commands](#event-related-commands)
@@ -23,6 +25,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
    1. [Finding events by name](#finding-events-by-name--e-find)
    1. [Deleting an event](#deleting-an-event--e-del-)
    1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
+   1. [Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter)
 1. [Commands Summary](#command-summary)
 
 ## Other Resources
@@ -496,20 +499,24 @@ These known issues are actively being worked on, and we are continuously improvi
 
 ### General Commands
 
-| Action                                       | Format   |
-|----------------------------------------------|----------|
-| **List all Volunteers and Events**           | `list`   |
-| **Export database to csv file**              | `export` |
-| **Help**                                     | `help`   |
-| **Exit**                                     | `exit`   |
+| Action                                                                         | Format   |
+|--------------------------------------------------------------------------------|----------|
+| **[List all Volunteers and Events](#listing-all-volunteers-and-events--list)** | `list`   |
+| **[Export database to a CSV file](#export-database-to-a-csv-file--export)**    | `export` |
+| **[View help](#viewing-help--help)**                                           | `help`   |
+| **[Exit the program](#exiting-the-program--exit)**                             | `exit`   |
 
 ### Volunteer Commands
 
-| Action                                       | Format                                                       | Examples                                                          |
-|----------------------------------------------|--------------------------------------------------------------|-------------------------------------------------------------------|
-| **Add Volunteer**                            | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE`     | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02`     |
-| **Delete Volunteer**                         | `/v del VOLUNTEER_INDEX`                                     | `/v del 1`                                                        |
-| **Find Volunteer**                           | `/v find KEYWORD`                                            | `/v find Yeoh`                                                    |
+| Action                                                                                               | Format                                                   | Examples                                                      |
+|------------------------------------------------------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|
+| **[Add a volunteer](#adding-a-volunteer-v-new)**                                                     | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE` | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` |
+| **[Find volunteers by name](#finding-volunteers-by-name--v-find)**                                   | `/v find KEYWORD`                                        | `/v find Anne`                                                |
+| **[Delete a volunteer](#deleting-a-volunteer--v-del)**                                               | `/v del VOLUNTEER_INDEX`                                 | `/v del 1`                                                    |
+| **[Add available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)**              | `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`            | `/v free i/1 d/2024-11-28, 2024-11-29`                        |
+| **[Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)** | `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`          | `/v unfree i/1 d/2024-11-28, 2024-11-29`                      |
+| **[Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)**                         | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                | `assign v/1 e/2`                                              |
+| **[Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)**         | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`              | `unassign v/1 e/2`                                            |
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -517,14 +524,13 @@ These known issues are actively being worked on, and we are continuously improvi
 
 ### Event Commands
 
-| Action                                       | Format                                                                                  | Examples                                                                         |
-|----------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| **Add Event**                                | `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`       | `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`       |
-| **Delete Event**                             | `/e del EVENT_INDEX`                                                                    | `/e del 1`                                                                       |
-| **Find Event**                               | `/e find KEYWORD`                                                                       | `/e find Forest`                                                                 |
-| **Add Volunteer to Event**                   | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                                               | `assign v/1 e/2`                                                                 |
-| **Remove Volunteer from Event**              | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                                             | `unassign v/1 e/2`                                                               |
-| **View all Volunteers involved in an Event** | `/e view EVENT_INDEX`                                                                   | `/e view 1`                                                                      |
+| Action                                                                                                               | Format                                                                                  | Examples                                                                         |
+|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **[Adding an event](#adding-an-event-e-new)**                                                                        | `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`       | `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`       |
+| **[Finding events by name](#finding-events-by-name--e-find)**                                                        | `/e del EVENT_INDEX`                                                                    | `/e del 1`                                                                       |
+| **[Deleting an event](#deleting-an-event--e-del-)**                                                                  | `/e find KEYWORD`                                                                       | `/e find Forest`                                                                 |
+| **[Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)**     | `/e view EVENT_INDEX`                                                                   | `/e view 1`                                                                      |
+| **[Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter)** | `/e filter EVENT_INDEX`                                                                 | `/e filter 1`                                                                    |
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
