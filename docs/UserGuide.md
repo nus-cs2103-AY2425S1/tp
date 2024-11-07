@@ -171,7 +171,7 @@ This suggestion will be displayed as soon as you start typing `add`.
 - Autocomplete will only work if the input before pressing `Control` is a valid substring of a command.
 
 Do take note, for commands like `delete index`, since index can be any number, there will be no autocomplete as there is no meaning to autocomplete the name "INDEX" itself.
-Other examples include `add n/` -> `add n/ p/` as there is no value in autcomplete the name "NAME" itself.
+Other examples include `add n/` -> `add n/ p/` as there is no value in autocomplete the name "NAME" itself.
 
 **Example**:
 - Type `add`, and then press `Control` to autocomplete `add n/`.
@@ -186,7 +186,7 @@ Other examples include `add n/` -> `add n/ p/` as there is no value in autcomple
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpWindow.png)
 
