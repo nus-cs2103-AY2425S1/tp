@@ -47,7 +47,6 @@ done faster than traditional GUI apps.
 7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -97,6 +96,8 @@ Undoes the previous command. <br>
 The closeat command is currently not undoable (planned for future versions).
 
 Format: `undo`
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -169,6 +170,8 @@ Examples:
 * `deletes n/John Tan` deletes the student with the exact name `John Tan` from the contact list.
 * `deletes n/Betsy sn/A0123456X` deletes the student with the exact name `Betsy` and student number `A0123456X` from the contact list.
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## Attendance Commands
@@ -224,6 +227,8 @@ Format: `getattg tg/TUTORIAL_GROUP`
 
 ### Closing Attendance Window : `closeat`
 Closes all attendance windows if any is currently open.
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
