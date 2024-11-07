@@ -9,9 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.addcommands.AddTaskToGroupCommand;
@@ -39,9 +37,9 @@ public class AddTaskToGroupCommandParser implements Parser<AddTaskToGroupCommand
     @Override
     public AddTaskToGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE, PREFIX_GROUP_NAME);
+            ArgumentTokenizer.tokenize(args, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE, PREFIX_GROUP_NAME);
         List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(
-                PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE, PREFIX_GROUP_NAME));
+            PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE, PREFIX_GROUP_NAME));
         List<Prefix> invalidPrefixes = ALL_PREFIX;
         invalidPrefixes.removeAll(allowedPrefix);
         if (containsInvalidPrefix(args, invalidPrefixes)) {
