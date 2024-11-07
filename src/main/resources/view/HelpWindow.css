@@ -1,30 +1,30 @@
 #helpMessage {
-    -fx-text-fill: #87CEEB;
+    -fx-text-fill: black;
     -fx-font-size: 14px;
 }
 
 #commandKeywordsHeader {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
 #functionsHeader {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
 #commandKeywords {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #functions {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#95C6E5, 20%);
 }
 
 #helpContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#95C6E5, 20%);
 }
