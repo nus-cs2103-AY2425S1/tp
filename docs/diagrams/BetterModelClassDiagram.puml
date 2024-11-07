@@ -16,6 +16,6 @@ Person -up-> "*" Tag
 
 Person *--> Name
 Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> Gender
+Person *--> "*" Module
 @enduml
