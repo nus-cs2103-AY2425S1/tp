@@ -233,4 +233,24 @@ public class LogicManagerTest {
         expectedModel.addPerson(expectedBuyer);
         assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage, expectedModel);
     }
+    @Test
+    public void getAddressBook_returnsCorrectAddressBook() {
+        Model testModel = new ModelManager();
+        Logic testLogic = new LogicManager(testModel, new StorageManager(
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json")),
+                new JsonListingsStorage(temporaryFolder.resolve("listings.json"))));
+
+        assertEquals(testModel.getAddressBook(), testLogic.getAddressBook());
+    }
+    @Test
+    public void getListingsFilePath_returnsCorrectListingsFilePath() {
+        Model testModel = new ModelManager();
+        Logic testLogic = new LogicManager(testModel, new StorageManager(
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json")),
+                new JsonListingsStorage(temporaryFolder.resolve("listings.json"))));
+
+        assertEquals(testModel.getListingsFilePath(), testLogic.getListingsFilePath());
+    }
 }

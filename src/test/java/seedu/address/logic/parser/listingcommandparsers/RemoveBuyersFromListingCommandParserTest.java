@@ -75,4 +75,13 @@ public class RemoveBuyersFromListingCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse(""),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveBuyersFromListingCommand.MESSAGE_USAGE));
     }
+    @Test
+    public void parse_emptyBuyerNames_throwsParseException() {
+        String userInput = VALID_LISTING_NAME;
+
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RemoveBuyersFromListingCommand.MESSAGE_USAGE);
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput), expectedMessage);
+    }
 }
