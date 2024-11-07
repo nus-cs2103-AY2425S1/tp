@@ -52,6 +52,10 @@ public class Messages {
     public static final String MESSAGE_EVENT_NOT_FOUND = "Attendance event '%1$s' not found.";
     public static final String MESSAGE_DUPLICATE_GROUPS = "There are duplicate groups. "
             + "Group names are treated as case insensitive and with multiple spaces considered equivalent.";
+    public static final String MESSAGE_INVALID_PREFIX = "If you are trying to use a prefix (eg. 'n/'), ensure there "
+            + "is a space before the prefix and that it is in this list."
+            + "\nSupported prefixes: %1$s";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.

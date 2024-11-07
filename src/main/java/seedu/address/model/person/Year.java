@@ -8,7 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidYear(String)}
  */
 public class Year {
-    public static final String MESSAGE_CONSTRAINTS = "Year should be a positive number";
+    public static final String MESSAGE_CONSTRAINTS = "Year should be a positive number without any special characters"
+            + " or spaces. Example: '1', '5'";
     public static final String VALIDATION_REGEX = "[1-9]\\d*";
     private static final Year EMPTY_YEAR = new Year();
 
