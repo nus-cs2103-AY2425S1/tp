@@ -18,7 +18,7 @@ ClientGrid is an address book targeted for English-speaking real estate agents w
 
 1. Ensure you have Java 17 or above installed in your Computer.
 
-1. Download the latest .jar file from [here](https://github.com/AY2425S1-CS2103T-T16-2/tp/releases).
+1. Download the latest .jar file from [here](https://github.com/AY2425S1-CS2103T-T16-2/tp/releases/latest).
 
 1. Copy the file to an empty folder that you want to use as the _home folder_ for ClientGrid.
 
