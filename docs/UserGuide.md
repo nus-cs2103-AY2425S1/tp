@@ -30,6 +30,7 @@ tasks done faster than traditional GUI apps.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    <br><br/>
       ![Ui](images/Ui.png)
+
    <box type="tip" seamless>
 
    **If you are struggling with step 3 and/or 4, verify that you followed these steps correctly:**
@@ -71,7 +72,10 @@ tasks done faster than traditional GUI apps.
 
 <box type="info" seamless>
 
-**General Notes about the PlanPerfect Command Format:**<br>
+<details open>
+
+<summary> <b> General Notes about the PlanPerfect Command Format </b> </summary>
+ 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -89,12 +93,16 @@ tasks done faster than traditional GUI apps.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Commands are executed relative to current view. The current view could either be a list of all contacts saved in your PlanPerfect application (accessed using the `list` command) or only contacts assigned to a particular wedding (accessed using the `view` command).
-  * eg1: using the `filter` command to find florists while in the all contacts view will list ALL florists in your contacts. However, if you are in a wedding view, using `filter` to find 
+  * Example 1:  Using the `filter` command to find florists while in the all contacts view will list ALL florists in 
+    your contacts. However, if you are in a wedding view, using `filter` to find 
     florists will only list florists assigned to that wedding.
-  * eg2: certain commands like `unassign` can only be used while inside a wedding view. This aligns with the logical flow of viewing the contacts already assigned to a wedding when deciding if a particular assigned contact needs to be unassigned from that wedding.
+  * Example 2: Certain commands like `unassign` can only be used while inside a wedding view. This aligns with the 
+    logical 
+    flow of viewing the contacts already assigned to a wedding when deciding if a particular assigned contact needs to be unassigned from that wedding.
 <br><br/>
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+  </General>
+</box>
 
 <br><br/>
 
@@ -124,14 +132,13 @@ Adds a contact to the address book.
 <box type="info" seamless>
 
 **Note:**
-A contact can only have up to 6 tags (including 0). No two contacts can have the same phone number.
-
+A contact can have up to 6 tags (including 0). No two contacts can have the same phone number.
 </box>
 
 Examples:
+* `add n/Foutou Graffer e/foutougraphy@gmail.com a/123 Commons Studio p/99527199 t/photographer caterer`
 * `add n/Homer Simpson p/98765432 e/homersimpson@gmail.com a/742 Evergreen Terrace, Block 123, #01-01`
-* `add n/Marge Simpson t/florist baker e/margesimpson@yahoo.com a/742 Evergreen Terrace p/98137192`
-* `add n/Foutou Graffer e/foutoug@example.com a/123 Commons Studio p/99527199 t/photographer caterer`
+* `add n/Marge Simpson t/florist baker e/margesimpson@yahoo.com a/742 Evergreen Terrace p/98137192 t/florist`
 
 <br><br/>
 
@@ -310,11 +317,11 @@ Adds a wedding to PlanPerfect with the specified date. Optionally allows users t
 * Running this command will create a new wedding in the wedding panel, allowing you to use its wedding index to execute relevant commands on that wedding.
 * Date can be in the past (for documenting/tracking old weddings), present, or future.
 * Contact indexes must be valid in the context of the current view.
-  <box type="warning" seamless>
+
+<box type="warning" seamless>
 
   **Caution:**
   If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the `addw` command to add a new wedding. Not doing so will mean that you are only able to add contacts from the current wedding being viewed into the new wedding.
-  
   </box>
 Examples:
 * `addw n/Arif and Sonali Wedding d/30/04/2025`
@@ -339,17 +346,25 @@ Format: `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
 
 Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
 
-* Assigning/Removing of contacts from a wedding (editing wedding contacts) is to be done using the `assign` and `unassign` commands.
+<box type="info" seamless>
+
+**Note:** 
+Assigning/removing of contacts from a wedding (editing wedding contacts) is to be done using the `assign` and 
+  `unassign` commands.
+</box>
 
 <box type="warning" seamless>
 
 **Caution:**
-The edited wedding name provided must not be the name of a pre-existing wedding in PlanPerfect
+The edited wedding name provided must not be the name of a pre-existing wedding in PlanPerfect.
 
 </box>
 
 Examples:
 * `editw 1 d/12/11/2025` edits the date of the 1st wedding on the wedding list.
+* `editw 3 n/Marge and Homer` edits the name of the 2nd wedding on the wedding list.
+* `editw 2 n/Maria and Mario d/01/08/2024` edits the name and date of the 3rd wedding on the wedding list.
+
 
 <br><br/>
 
@@ -393,10 +408,10 @@ Examples:
 
 Format: `deletew WEDDING_INDEX`
 
-* Deletes the wedding at the specified `WEDDING_INDEX`.
+Deletes the wedding at the specified `WEDDING_INDEX`.
 
 Examples:
-* `deletew 4` deletes the 4th wedding on the wedding panel.
+* `deletew 4` deletes the 4th wedding shown on the wedding panel.
 
 <br><br/>
 
