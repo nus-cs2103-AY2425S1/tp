@@ -62,7 +62,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [a/ADDRESS] [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -92,7 +92,7 @@ Met a potential client or someone new? This command adds a client to the F.A.R.T
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] b/BIRTHDAY [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of tags (including 0)
+A client can have any number of tags (including 0) but only maximum of 1 address
 </div>
 
 Examples:
@@ -216,15 +216,13 @@ Format: `upload INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive whole number** 1, 2, 3, …​
 
-<div markdown="block" class="alert alert-primary">
-**:information_source: Note!:**<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 * This feature is for Windows users only. Mac and Linux users may encounter errors if they use this feature. Support for the other OSes will be released in future versions!
-
-* The profile picture may look weird if the image chosen is extremely small, too wide or too thin. For best results, we recommend squarish images approximately 300px x 300px.
+* The profile picture may look weird if the image chosen is extremely small, too wide or too thin. For best results, we recommend square images approximately 300px x 300px. 
 You can achieve this by cropping with your computer's image editor or an online one like this one from [Adobe](https://www.adobe.com/express/feature/image/crop).
-
 * Only **PNG** images are supported. Please ensure your chosen image is in **PNG** format.
+
 </div>
 
 ### Exiting the program : `exit`

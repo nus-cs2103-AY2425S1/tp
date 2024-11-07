@@ -23,6 +23,7 @@ Class Birthday
 Class Age
 Class Frequency
 Class ProfilePicFilePath
+Class LastPaidDate
 
 Class I #FFFFFF
 }
@@ -51,6 +52,7 @@ Person *--> Age
 Age ..> Birthday
 Person *--> Frequency
 Person *--> ProfilePicFilePath
+Person *--> LastPaidDate
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

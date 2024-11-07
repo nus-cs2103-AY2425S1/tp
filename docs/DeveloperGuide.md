@@ -70,9 +70,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/NewUiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `PersonDetailedView` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -93,7 +93,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/newDeleteSequenceDiagram1.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -104,6 +104,7 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+2. If the command is one that triggers a `ConfirmationHandler`, e.g. delete, clear, add (duplicate), the `ConfirmationHandler` object will handle whether the user confirms or cancels the action. 
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -273,7 +274,6 @@ _{Explain here how the data archiving feature will be implemented}_
 * Keep track of who has and has not been contacted recently
 * Sort clients based on various categories
 * Filter for clients by above categories
-*
 
 
 ### User stories
@@ -309,44 +309,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `FART` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a contact**
+**Use case 1: Add a contact**
 
 **MSS**
 
 1.  User requests to add a new contact.
-2.  AddressBook adds new contact and shows a confirmation message.
+2.  FART adds new contact and shows a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. AddressBook detects an error in the provided details.
+* 1a. FART detects an error in the provided details.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. FART shows an error message.
 
       Use case ends.
 
-* 1a. AddressBook detects the existence of a duplicate contact.
+* 2a. FART detects the existence of a duplicate contact.
 
-    * 1a1. AddressBook requests for confirmation to add new contact.
-        * 1a1a1. User confirms.
-        * 1a1a2. AddressBook adds the new contact and displays a confirmation message.
-
-          Use case ends.
-
-        * 1a1b1. User declines.
-        * 1a1b2. AddressBook displays a confirmation message.
+    * 2a1. FART requests for confirmation to add new contact.
+        * 2a1a1. User confirms.
+        * 2a1a2. FART adds the new contact and displays a confirmation message.
 
           Use case ends.
 
-**Use case: Find a contact**
+        * 2a1b1. User declines.
+        * 2a1b2. FART displays a confirmation message.
+
+          Use case ends.
+
+**Use case 2: Find a contact**
 
 **MSS**
 
 1.  User requests to find a contact.
-2.  AddressBook shows a list of related contacts.
+2.  FART shows a list of related contacts.
 
     Use case ends.
 
@@ -356,12 +356,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Mark a contact as paid or unpaid**
+**Use case 3: Mark a contact as paid or unpaid**
 
 **MSS**
 
 1.  User requests to mark or unmark a contact.
-2.  AddressBook marks or unmarks contact and shows a confirmation message.
+2.  FART marks or unmarks contact and shows a confirmation message.
 
     Use case ends.
 
@@ -369,18 +369,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. FART shows an error message.
 
       Use case ends.
 
-**Use case: Delete a contact**
+**Use case 4: Delete a contact**
 
 **MSS**
 
-1.  User requests to delete a contact.
-2.  AddressBook requests confirmation.
+1. User requests to delete a contact. 
+2. FART requests confirmation. 
 3. User confirms.
-4. AddressBook deletes the contact and shows a confirmation message.
+4. FART deletes the contact and shows a confirmation message.
 
     Use case ends.
 
@@ -388,13 +388,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. FART shows an error message.
 
       Use case ends.
 
 * 2a. User declines.
 
-    * AddressBook shows a confirmation message.
+    * 2a1. FART shows a confirmation message.
+
+      Use case ends.
+
+**Use case 5: Edit a contact**
+
+**MSS**
+
+1.  User requests to edit a contact.
+2.  FART edits contact and shows a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. FART shows an error message.
+
+      Use case ends.
+
+* 2a. No prefix given or wrong prefix given
+
+    * 2a1. FART shows an error message
 
       Use case ends.
 
