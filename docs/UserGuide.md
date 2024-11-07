@@ -4,8 +4,7 @@ title: User Guide
 ---
 
 ## What is VolunSync?
-VolunSync is a desktop app for **Non-Governmental Organisations** that require keeping track of volunteers and volunteering events, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunSync can get your event and personnel management tasks done faster than traditional GUI apps.
-
+VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailored to meet the unique needs of nonprofits. VolunSync offers a streamlined approach to managing volunteers, coordinating events, tracking hours, and enhancing communication – all from a single, intuitive platform.
 ## Learn About Commands Supported By VolunSync
 1. [Command Format Guidelines](#command-format-guidelines)
 1. [General Commands](#general-commands)
@@ -18,51 +17,47 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
    1. [Finding volunteers by name](#finding-volunteers-by-name--v-find)
    1. [Deleting a volunteer](#deleting-a-volunteer--v-del)
    1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)
-   1. [Unassigning a volunteer from an event](#removing-a-volunteer-from-an-event-unassign)
+   1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)
 1. [Event-related Commands](#event-related-commands)
    1. [Adding an event](#adding-an-event-e-new)
    1. [Finding events by name](#finding-events-by-name--e-find)
    1. [Deleting an event](#deleting-an-event--e-del-)
    1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
-1. [Command Summary](#command-summary)
+1. [Commands Summary](#command-summary)
 
 ## Other Resources
 1. [FAQ](#faq)
-1. [Known Issues](#known-issues-1)
-1. [Saving the data](#saving-the-data-1)
+1. [Known Issues](#known-issues)
+1. [Saving the data](#saving-the-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-:exclamation:Ensure you have Java `17` or above installed in your Computer.
 
-<div class="alert alert-primary">
-  <p>:question: What is my Java's version?</p>
-    <p>
-        Open your computer's command terminal:
-        - On Windows: Press <kbd>Windows + R</kbd>, type <kbd>cmd</kbd>, and hit Enter.<br>
-        - On Mac/Linux: Open the Terminal from your Applications.<br>
-        Then, type <kbd>java -version</kbd> and press Enter. You should see something like <code>java version "17" 2021-09-14</code>.<br>
-    </p>
-</div>
-
-<div class="alert alert-primary">
-  :information_source: Don't have Java 17 installed?:<br>
-  You can download Java 17 <a href="https://www.oracle.com/sg/java/technologies/downloads/#java17-linux"><b>here</b>.</a><br>
-  Scroll down and select the correct version for your operating system.
-</div>
+1. **Check for Java Installation**  
+   Ensure you have Java **17** or above installed on your computer:
+   - Open a terminal or command prompt and run the following command:
+     - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
+     - On Mac/Linux: Open the Terminal from your Applications.
+       ```bash
+       java -version
+       ```  
+   - If you see a version like `java version "17.x.x"` or higher, you're all set!
+   - If Java is not installed or the version is lower than 17:
+      - Download and install the latest Java Development Kit (JDK) **17** from [Oracle's official site](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or [OpenJDK](https://openjdk.org/).
+      - Follow the installation instructions provided for your operating system.
+   - After installation, re-run `java -version` to confirm the setup.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your VolunSync application.
 
-1. Open your computer's command terminal:
-    - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
-    - On Mac/Linux: Open the Terminal from your Applications.
+1. Open your computer's command terminal
+
 1. In the terminal, type `cd` followed by the path to the folder with the .jar file (e.g. `C:/Users/Your_Name/Your_Folder`), then run the following command:
-    `java -jar NAME_OF_JAR_FILE`.
-    For example, `java -jar volunsync-v1.3.jar`.
+   
+   `java -jar NAME_OF_JAR_FILE`. For example, `java -jar volunsync-v1.5.jar`.
 
 1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
    ![Ui](images/VolunSyncUi.png)
@@ -139,7 +134,7 @@ Format: `help`
 
 ### Listing all volunteers and events : `list`
 
-Shows a list of all volunteers and events in the database.<br/><br/>
+Shows a list of all volunteers and events in the database. This will reset the display to show all volunteers or events without any filters, so you can see the complete list again.<br/><br/>
 You should use this command to display all volunteers and events after searching for volunteers or events using any one of the following commands: <br/>
    * [`/v find`](#finding-volunteers-by-name--v-find)
    * [`/e find`](#finding-events-by-name--e-find)
@@ -156,13 +151,20 @@ Format: `list`
 
 ### Export database to a CSV file : `export`
 
-Exports all records within the database to a Comma Separated Value (.csv) file.<br/><br/>
-You can easily print out a hard copy of all volunteers and events in the database by using this command.
+Exports all records within the database to a Comma Separated Value (.csv) file. This allows you to print the records or transfer the data to another computer for external use. Note that the **import function is not yet implemented**, so exported files cannot be directly re-imported into VolunSync at this time.
 
 Format : `export`
+- After running the `export` command, check the `/output` folder located in the same directory as your `.jar` file.
+- You will find two CSV files:
+    - `events.csv` — Contains all event records.
+    - `volunteers.csv` — Contains all volunteer records.
 
+<<<<<<< HEAD
 ![Export File](images/ExportCommand.png)
 * After running the export command, check the `/output` folder located in the same directory as your .jar file. You’ll find two CSV files: events.csv and volunteers.csv.
+=======
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+>>>>>>> master
 
 ### Exiting the program : `exit`
 
@@ -182,8 +184,14 @@ Adds a volunteer to the database.
 
 Format: `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE`
 
+Input Requirements:
+- Name: Alphanumeric and spaces only, 1-100 characters.
+- Phone Number: Digits only, 3-15 characters.
+- Email: Must follow local-part@domain format.
+- Date: Format YYYY-MM-DD (e.g. 2024-01-01)
+
 Examples:
-* `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` creates a volunteer record for `John Doe` with the specified details
+* `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` <br/>creates a volunteer record for `John Doe` with the specified details
 
 Running the command successfully, you should see:
 
@@ -196,7 +204,7 @@ Running the command successfully, you should see:
 ### Finding volunteers by name : `/v find`
 
 Find volunteers whose name contains the given keyword.<br/>
-After using the command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers.
+If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
 
 Format: `/v find KEYWORD`
 
@@ -204,15 +212,16 @@ Format: `/v find KEYWORD`
 * Only the name is searched
 * The searching algorithm returns volunteers with any part of their name matching the `KEYWORD`
     * e.g. `Joe` will match `Joelle`, `Enjoeline` and `Joe`
-
+ 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
-</div>
+you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
 
 Examples:
 * `/v find ng` returns `David Ng`, `Alice Wong` and `Jason Wang`
 
 ![Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
+
+
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -222,7 +231,6 @@ Deletes the volunteer at the specified __VOLUNTEER_INDEX__ from the database.
 
 Format: `/v del VOLUNTEER_INDEX`
 
-* Deletes the volunteer at the specified `VOLUNTEER_INDEX`.
 * The index refers to the number that appears before each volunteer’s name in the displayed volunteer list on the panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -246,7 +254,7 @@ Adds a volunteer with the specified `VOLUNTEER_INDEX` to the list of participant
 
 Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the event and volunteer's name in their respective displayed lists.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -264,7 +272,7 @@ Removes a volunteer with the specified `VOLUNTEER_INDEX` to the list of particip
 
 Format: `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the event and volunteer's name in their respective displayed lists.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -279,17 +287,20 @@ Examples:
 ### Listing all events a volunteer is participating in: `/v view`
 
 Displays all events the volunteer at the specified `INDEX` under the `Volunteers` display is participating in.<br/>
-After using the command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all events.
 
-Format: `/e view EVENT_INDEX`
+Format: `/v view VOLUNTEER_INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the volunteer's name in the Volunteer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
+
 Examples:
-* `/e view 1` displays the volunteers participating in the first event in the event list.
 
 ![View Volunteer Demo](images/commandDemo/ViewVolunteerDemo.png)
+
+* `/v view 1` displays the events the first volunteer is participating in.
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -303,9 +314,17 @@ Adds an event to the database.
 
 Format: `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`
 
+Input Requirements:
+- Event Name: Alphanumeric characters and spaces only, 1-50 characters.
+- Location: Alphanumeric characters and spaces only, 1-100 characters.
+- Date: Format YYYY-MM-DD (e.g. 2024-01-01),
+- Start Time: 24-hour format HH:mm (e.g., 12:00). 
+- End Time: Format HH:mm (e.g., 15:00). Start time must be before end time.
+- Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
+
 Examples:
-* `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`
-* `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00`
+* `/e new n/Blood Donation Drive l/Red Cross Center d/2024-02-14 s/08:30 e/16:00 des/Organizing a blood donation drive` <br/>creates an event record for Blood Donation Drive with the specified details
+* `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00` <br/>creates an event record Buffet Lunch with the specified details
 
 ![New Event Demo](images/commandDemo/NewEventDemo.png)
 
@@ -315,8 +334,8 @@ Examples:
 
 ### Finding events by name : `/e find`
 
-Find events with names containing the given keyword.
-After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all events.
+Find events with names containing the given keyword.<br>
+If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
 
 Format: `/e find KEYWORD`
 
@@ -325,12 +344,11 @@ Format: `/e find KEYWORD`
 * The searching algorithm returns events with any part of their name matching the `KEYWORD`
     * e.g. `Group` will match `Group Project`, `Grouping Task` and `Group`.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
+
 Examples:
 * `/v find beach` returns `Beach Cleanup` and `beach clean2`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**
-If there are no events with names matching the keyword in the database, the entire list of events will be displayed.
-</div>
 
 ![Finding Events](images/commandDemo/FindEventDemo.png)
 
@@ -364,20 +382,21 @@ Examples:
 ### Listing all volunteers participating in an event: `/e view`
 
 Displays all volunteers participating in the event at the specified `INDEX` under the `Volunteers` display.<br/>
-After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers.
 
 Format: `/e view EVENT_INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the event's name in the Event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
+
 Examples:
-* `/e view 1` displayes the volunteers participating in the first event in the event list.
+* `/e view 1` displays the volunteers participating in the first event in the event list.
 
 ![View Event Demo](images/commandDemo/ViewDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
-
 
 <div style="page-break-after: always;"></div>
 
