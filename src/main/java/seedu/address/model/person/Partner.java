@@ -26,7 +26,7 @@ public class Partner extends Person implements Comparable<Partner> {
      * @param partnershipEndDate Date when the partnership with the partner will end.
      */
     public Partner(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Date partnershipEndDate) {
-        super(name, phone, email, address, tags);
+        super(name, Role.PARTNER, phone, email, address, tags);
         requireAllNonNull(partnershipEndDate);
         this.partnershipEndDate = partnershipEndDate;
     }
@@ -63,7 +63,7 @@ public class Partner extends Person implements Comparable<Partner> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, address, tags, partnershipEndDate);
+        return Objects.hash(name, role, phone, email, address, tags, partnershipEndDate);
     }
 
     /**
@@ -79,16 +79,6 @@ public class Partner extends Person implements Comparable<Partner> {
         parentToString = parentToString.substring(0, parentToString.length() - 1);
 
         return parentToString + ", partnershipEndDate=" + partnershipEndDate + "}";
-    }
-
-    @Override
-    public Role getRole() {
-        return Role.PARTNER;
-    }
-
-    @Override
-    public boolean isRole(Role role) {
-        return getRole().equals(role);
     }
 
     @Override

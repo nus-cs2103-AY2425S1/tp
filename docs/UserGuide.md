@@ -155,27 +155,16 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
-  For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
-  Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
-  and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
-  If the resulting role does not have the specified field, the edit will be invalid.
+  * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
+  * Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
+  * For `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+* If the resulting role does not have the specified field, the edit will be invalid.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Set a volunteer's hours
-
-Sets a volunteers hours to a certain amount.
-
-Format: `setHours INDEX h/HOURS`
-
-* The index is based on the indices in the latest list command.
-
-Example: `setHours 2 h/20`
 
 ### Searching persons by field: `search`
 
@@ -191,12 +180,16 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
 * For name searches, persons matching any of the keyswords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned.
 
+<box type="tip" seamless>
+
 **Tip:** Supported search prefixes include:
 * `NAME`: n/
 * `TAG`: t/
 * `PHONE_NUMBER`: p/
 * `GROUP`: g/
 * `ROLE`: r/
+
+</box>
 
 Examples: <br>
 1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role`: donor `group`: blood drive<br>
@@ -207,6 +200,7 @@ Examples: <br>
 * `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
     ![result for 'search alex david'](images/search_alex_david.png)
 
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -214,8 +208,16 @@ Deletes the specified person from the address book.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the **last displayed person list**.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**Tip:** Be careful when using the `delete` command.
+* Even if you are currently viewing a Group List, the delete command will still apply to the last displayed person list. 
+* Ensure you are viewing the correct list before deleting.
+
+</box>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -353,7 +355,6 @@ Action     | Format, Examples
 **List**   | `list`
 **Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`
-**Set a Volunteer's Hours** | `setHours INDEX [h/HOURS]`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
 **Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
 **Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`

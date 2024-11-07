@@ -47,6 +47,13 @@ public class Group extends UniquePersonList {
         return name.equals(group.name);
     }
 
+    /**
+     * Returns the number of persons in the group.
+     */
+    public int size() {
+        return asUnmodifiableObservableList().size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Group otherGroup)) {

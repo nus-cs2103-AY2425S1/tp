@@ -28,7 +28,7 @@ public class GroupCard extends UiPart<Region> {
     @FXML
     private Label groupSize;
     @FXML
-    private Label membersPane;
+    private Label membersList;
 
     /**
      * Creates a {@code GroupCard} with the given {@code Group} and index to display.
@@ -41,12 +41,11 @@ public class GroupCard extends UiPart<Region> {
 
         // Retrieve the list of members in the group
         List<Person> members = group.asUnmodifiableObservableList();
-
-        groupSize.setText("Group Size: " + String.valueOf(members.size()));
+        groupSize.setText(String.valueOf(members.size()));
+        groupSize.getStyleClass().add("groupList");
 
         // Display the first 3 members as a single comma-separated string
-        String membersDisplayText = "Members: "
-                + members.stream()
+        String membersDisplayText = members.stream()
                 .limit(3)
                 .map(member -> member.getName().fullName)
                 .collect(Collectors.joining(", "));
@@ -57,6 +56,7 @@ public class GroupCard extends UiPart<Region> {
         }
 
         // Set the combined text to the membersPane label
-        membersPane.setText(membersDisplayText);
+        membersList.setText(membersDisplayText);
+        membersList.getStyleClass().add("membersList");
     }
 }

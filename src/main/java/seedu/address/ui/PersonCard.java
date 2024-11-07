@@ -64,24 +64,34 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         role.setText(person.getRole().toString());
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Add appropriate style class based on the role
         if (person instanceof Volunteer) {
+            role.getStyleClass().add("role-volunteer");
             Volunteer volunteer = (Volunteer) person;
             hours.setText("Hours: " + volunteer.getHours().toString());
             hours.setVisible(true);
             hours.setManaged(true);
         } else if (person instanceof Donor) {
+            role.getStyleClass().add("role-donor");
             Donor donor = (Donor) person;
             donatedAmount.setText("Donated: $" + donor.getDonatedAmount().toString());
             donatedAmount.setVisible(true);
             donatedAmount.setManaged(true);
         } else if (person instanceof Partner) {
+            role.getStyleClass().add("role-partner");
             Partner partner = (Partner) person;
             partnershipEndDate.setText("End Date: " + partner.getEndDate().toString());
             partnershipEndDate.setVisible(true);
             partnershipEndDate.setManaged(true);
+        } else {
+            role.getStyleClass().add("role-person");
         }
+
+        // Add tags
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
 }

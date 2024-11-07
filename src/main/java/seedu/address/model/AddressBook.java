@@ -99,6 +99,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        groups.removePersonInAllGroups(key);
     }
 
     // group methods

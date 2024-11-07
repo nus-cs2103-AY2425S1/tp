@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -158,6 +159,26 @@ public class GroupList {
                 // Intentionally ignoring exception, as no action need to be taken if the person isn't in any groups.
             }
         });
+    }
+
+    /**
+     * Removes all instances of {@code deletedPerson} in any groups.
+     */
+    public void removePersonInAllGroups(Person deletedPerson) {
+        List<String> groupsToDelete = new ArrayList<>();
+        internalList.forEach(group -> {
+            try {
+                group.remove(deletedPerson);
+                if (group.size() == 0) {
+                    groupsToDelete.add(group.getName());
+                }
+            } catch (PersonNotFoundException pnfe) {
+                // Intentionally ignoring exception, as no action need to be taken if the person isn't in any groups.
+            }
+        });
+        for (String groupName : groupsToDelete) {
+            remove(groupName);
+        }
     }
 
     @Override
