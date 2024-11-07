@@ -88,7 +88,7 @@ class JsonSerializableAddressBook {
             highestId = Math.max(highestId, person.getId());
             addressBook.addPerson(person);
         }
-        Person.initialiseIndex(highestId);
+        Person.initialiseIndex(highestId + 1);
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
             Lesson lesson = jsonAdaptedLesson.toModelType(addressBook);
             if (addressBook.hasLesson(lesson)) {

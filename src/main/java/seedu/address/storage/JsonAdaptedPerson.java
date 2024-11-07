@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -68,26 +67,11 @@ public class JsonAdaptedPerson {
         this.role = role;
     }
 
-    /**
-     * Converts a given {@code Person} into this class for Jackson use.
-     */
-    public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        hours = source.getHours().value;
-        subjects.addAll(source.getSubjects().stream()
-                .map(JsonAdaptedSubject::new)
-                .collect(Collectors.toList()));
-        role = (source instanceof Tutor) ? "Tutor" : "Tutee";
-    }
-
     public int getId() {
         return id;
     }
 
-    public void setId() {
+    public void setId(int id) {
         this.id = id;
     }
 

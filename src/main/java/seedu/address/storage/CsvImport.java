@@ -20,6 +20,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.ImproperFormatException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 /**
  * Handles the import of CSV data into the application.
@@ -86,6 +87,7 @@ public class CsvImport {
                 if (model.hasPerson(p.toModelType())) {
                     duplicates.add(personList.indexOf(p) + 1);
                 } else {
+                    p.setId(Person.getNextIndex());
                     model.addPerson(p.toModelType());
                     success++;
                 }

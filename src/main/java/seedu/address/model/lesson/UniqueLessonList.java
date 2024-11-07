@@ -14,7 +14,6 @@ import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutor;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
@@ -89,7 +88,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @param person The person for whom the associated people are to be retrieved.
      *               Must be non-null and either a Tutor or Tutee.
      * @return A list of associated persons.
-     * @throws PersonNotFoundException If the given person is neither a Tutor nor a Tutee.
      */
     public List<Person> getAssociatedPeople(Person person) {
         requireAllNonNull(person);
@@ -99,6 +97,24 @@ public class UniqueLessonList implements Iterable<Lesson> {
         } else {
             return internalList.stream().filter(item -> item.getTutee().equals(person))
                     .map(Lesson::getTutor).collect(Collectors.toList());
+        }
+    }
+
+    /**
+     * Returns a list of associated lessons for the given person.
+     *
+     * @param person The person for whom the associated lessons are to be retrieved.
+     *               Must be non-null and either a Tutor or Tutee.
+     * @return A list of associated lessons.
+     */
+    public List<Lesson> getAssociatedLessons(Person person) {
+        requireAllNonNull(person);
+        if (person instanceof Tutor) {
+            return internalList.stream().filter(item -> item.getTutor().equals(person))
+                    .collect(Collectors.toList());
+        } else {
+            return internalList.stream().filter(item -> item.getTutee().equals(person))
+                    .collect(Collectors.toList());
         }
     }
 
