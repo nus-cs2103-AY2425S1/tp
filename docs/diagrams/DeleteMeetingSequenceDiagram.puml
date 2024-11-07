@@ -5,7 +5,6 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteMeetingCommandParser" as DeleteMeetingCommandParser LOGIC_COLOR
 participant "d:DeleteMeetingCommand" as DeleteMeetingCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -13,7 +12,6 @@ end box
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 participant "p:Person" as Person MODEL_COLOR
-participant "meet:Meeting" as Meeting MODEL_COLOR
 end box
 
 [-> LogicManager : execute("deletem 1")
@@ -22,33 +20,7 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("deletem 1")
 activate AddressBookParser
 
-create DeleteMeetingCommandParser
-AddressBookParser -> DeleteMeetingCommandParser
-activate DeleteMeetingCommandParser
-
-DeleteMeetingCommandParser --> AddressBookParser
-deactivate DeleteMeetingCommandParser
-
-AddressBookParser -> DeleteMeetingCommandParser : parse("1")
-activate DeleteMeetingCommandParser
-
-create DeleteMeetingCommand
-DeleteMeetingCommandParser -> DeleteMeetingCommand
-activate DeleteMeetingCommand
-
-DeleteMeetingCommand --> DeleteMeetingCommandParser
-deactivate DeleteMeetingCommand
-
-DeleteMeetingCommandParser --> AddressBookParser : d
-deactivate DeleteMeetingCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteMeetingCommandParser -[hidden]-> AddressBookParser
-destroy DeleteMeetingCommandParser
-
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
-
-LogicManager -> DeleteMeetingCommand : execute(m)
+AddressBookParser -> DeleteMeetingCommand
 activate DeleteMeetingCommand
 
 DeleteMeetingCommand -> Model : getMeeting(targetIndex)
@@ -57,28 +29,14 @@ activate Model
 Model --> DeleteMeetingCommand : toDelete
 deactivate Model
 
-DeleteMeetingCommand -> toDelete : getPersonToMeet()
-activate toDelete
-
-toDelete --> DeleteMeetingCommand : target (Name)
-deactivate toDelete
-
-loop for (Person person : model.getFilteredPersonList())
-    alt person.getName().equals(target)
-        DeleteMeetingCommand -> Model : personToDeleteMeeting = person
-    else
-        DeleteMeetingCommand -> Model : continue loop
-    end
-end
-
 DeleteMeetingCommand -> Model : deleteMeeting(personToDeleteMeeting, toDelete)
 activate Model
 
-Model -> personToDeleteMeeting : getMeetings().deleteMeeting(toDelete)
-activate personToDeleteMeeting
+Model -> Person : getMeetings().deleteMeeting(toDelete)
+activate Person
 
-personToDeleteMeeting --> Model
-deactivate personToDeleteMeeting
+Person --> Model
+deactivate Person
 
 Model -> Model : addressBook.deleteMeeting(toDelete)
 activate Model
@@ -99,4 +57,3 @@ deactivate DeleteMeetingCommand
 [<-- LogicManager
 deactivate LogicManager
 @enduml
-
