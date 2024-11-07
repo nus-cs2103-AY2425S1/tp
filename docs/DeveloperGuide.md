@@ -376,7 +376,7 @@ Preconditions: User is viewing an item.
 
       Use case ends.
 
-* 2a. The selected item is invalid.
+* 2a. The selected item does not exist.
 
   * 2a1. System shows an error message.
 
