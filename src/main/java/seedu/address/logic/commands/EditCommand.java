@@ -39,9 +39,12 @@ import seedu.address.model.patient.exceptions.AllergyNotFoundException;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits patient's detail(s) for an existing patient "
-            + "record in the system\n"
-            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " usage: edit [NRIC] n|[NAME] i|[NRIC] s|[SEX] d|[DATE OF BIRTH] p|[PHONE NO.] e|[EMAIL] "
+            + "a|[ADDRESS] b|[BLOOD TYPE] nokn|[NEXT-OF-KIN NAME] nokp|[NEXT-OF-KIN PHONE NO.] "
+            + "al|[ALLERGIES TO BE ADDED ] rmal|[ALLERGIES TO BE REMOVED] rl|[HEALTH RISK LEVEL] "
+            + "ec|[EXISTING CONDITIONS] no|[ADDITIONAL NOTES]\n"
+            + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
     public static final String MESSAGE_NRIC_EMPTY = "NRIC needed to identify patient to execute Edit Command.";
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s\n"
             + "Input \"home\" to return to home page";

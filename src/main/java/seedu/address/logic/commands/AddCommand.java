@@ -21,8 +21,9 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new patient record into the system\n"
-            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " usage: add n|[NAME] i|[NRIC] s|[SEX] d|[DATE OF BIRTH] p|[PHONE NO.]\n"
+            + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s\n"
             + "Input \"home\" to return to home page";
