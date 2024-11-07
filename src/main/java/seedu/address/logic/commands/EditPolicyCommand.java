@@ -115,8 +115,7 @@ public class EditPolicyCommand extends Command {
         ExpiryDate updatedExpiryDate = descriptor.getExpiryDate().orElse(policyToEdit.getExpiryDate());
 
         // claims cannot be edited using this command
-        ClaimList claimList = new ClaimList();
-        claimList.addAll(policyToEdit.getClaimList());
+        ClaimList claimList = new ClaimList(policyToEdit.getClaimList());
 
         return Policy.makePolicy(descriptor.getPolicyType(), updatedPremiumAmount,
                 updatedCoverageAmount, updatedExpiryDate, claimList);

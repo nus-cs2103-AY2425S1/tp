@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimList;
 import seedu.address.model.claim.ClaimStatus;
-import seedu.address.model.policy.exceptions.DuplicateClaimException;
+import seedu.address.model.claim.exceptions.DuplicateClaimException;
 
 public class PolicyTest {
     private final PremiumAmount premiumAmount = new PremiumAmount(200.0);
@@ -104,8 +104,7 @@ public class PolicyTest {
     public void deleteClaim_returnNewUpdatedPolicy() {
         // LifePolicy is used here instead of ConcretePolicy since Policy#removeClaim requires a specific policy type
         final LifePolicy policy = new LifePolicy(premiumAmount, coverageAmount, expiryDate, claimList);
-        final ClaimList expectedClaimList = new ClaimList();
-        expectedClaimList.addAll(claimList);
+        final ClaimList expectedClaimList = new ClaimList(claimList);
         expectedClaimList.remove(0);
 
         final Policy actualPolicy = policy.removeClaim(0);

@@ -9,7 +9,7 @@ import java.util.Objects;
 
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimList;
-import seedu.address.model.policy.exceptions.DuplicateClaimException;
+import seedu.address.model.claim.exceptions.DuplicateClaimException;
 
 
 /**
@@ -113,8 +113,7 @@ public abstract class Policy {
      */
     public Policy addClaim(Claim claim) {
         requireNonNull(claim);
-        ClaimList newClaimList = new ClaimList();
-        newClaimList.addAll(getClaimList());
+        ClaimList newClaimList = new ClaimList(getClaimList());
         if (!newClaimList.add(claim)) {
             throw new DuplicateClaimException();
         }
@@ -130,8 +129,7 @@ public abstract class Policy {
      * @throws IndexOutOfBoundsException when the index is out of bounds of the claim list.
      */
     public Policy removeClaim(int index) {
-        ClaimList newClaimList = new ClaimList();
-        newClaimList.addAll(getClaimList());
+        ClaimList newClaimList = new ClaimList(getClaimList());
         newClaimList.remove(index);
         return makePolicy(getType(), premiumAmount, coverageAmount, expiryDate, newClaimList);
     }

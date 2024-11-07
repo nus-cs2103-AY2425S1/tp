@@ -13,11 +13,11 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.exceptions.DuplicateClaimException;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
-import seedu.address.model.policy.exceptions.DuplicateClaimException;
 
 /**
  * Adds a claim to a client in Prudy.

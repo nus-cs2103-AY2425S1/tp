@@ -1,4 +1,4 @@
-package seedu.address.model.policy.exceptions;
+package seedu.address.model.claim.exceptions;
 
 /**
  * Signals that the operation will result in duplicate Claims.

@@ -166,8 +166,7 @@ public class EditClaimCommand extends Command {
      * @throws CommandException If the claim has not been changed or if there is a duplicate claim.
      */
     public Policy createEditedPolicy(Policy policy, Claim oldClaim, Claim newClaim) throws CommandException {
-        ClaimList updatedClaims = new ClaimList();
-        updatedClaims.addAll(policy.getClaimList());
+        ClaimList updatedClaims = new ClaimList(policy.getClaimList());
 
         if (newClaim.equals(oldClaim)) {
             throw new CommandException(MESSAGE_NOT_CHANGED);
