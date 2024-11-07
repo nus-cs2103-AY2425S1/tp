@@ -140,22 +140,43 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![ModelClassDiagram.png](images%2FModelClassDiagram.png)
 
+The Model component is responsible for managing the core data of the application, structured based on the updated UML diagram.
 
-The `Model` component,
+Stores Address Book Data:
+1) The Model component stores the address book data, which includes all Person objects contained within a UniquePersonList. 
+2) Each Person may have associated details such as Name, Phone, Email, Address, Information, and a list of Tag objects.
+3) The UniquePersonList ensures that each Person entry is unique and provides the primary mechanism for managing collections of Person instances.
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+Maintains Filtered List of Selected Persons:
+1) The Model also maintains a filtered list of Person objects, which represent the currently "selected" persons
+2) This list is exposed as an unmodifiable ObservableList<Person>, which allows external components, such as the UI, to observe changes. 
+3) When the data in this filtered list updates, the UI automatically reflects those changes.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+Stores User Preferences:
+1) A UserPrefs object within the Model component represents the user’s preferences (e.g., UI settings). 
+2) The Model exposes this as a ReadOnlyUserPrefs object, ensuring that external components can read but not modify user preferences.
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+Manages Orders and Products:
+1) The Model component also manages order-related data, including Order, CustomerOrder, SupplyOrder, and their respective lists. 
+2) CustomerOrderList and SupplyOrderList inherit from OrderList, and these lists handle collections of CustomerOrder and SupplyOrder objects, respectively. Each order type is associated with an OrderStatus.
+3) The Model includes management for products within the product package. 
+4) Product serves as the base class for both Ingredient and Pastry, which are organized into IngredientCatalogue and PastryCatalogue, respectively. 
+5) Catalogue serves as a general structure to manage collections of products. 
+6) Inventory aggregates Ingredient and Pastry objects to track stock levels.
 
-</div>
+Optimized Tag Management:
+1) The AddressBook contains a Tag list that optimizes tag management across the application. 
+2) Instead of each Person having their own Tag objects, Person instances reference shared Tag objects in the AddressBook, allowing for memory efficiency and streamlined tag handling.
 
+Utility Components:
+1) The Model component includes several utility classes including Remark and SampleDataUtil.
+2) These support data management and provide sample data for initialization and testing purposes.
+
+Independent of Other Components:
+1) The Model component is self-contained and does not depend on any other application components (e.g., UI, Storage, Logic). 
+2) As it represents core data entities, it is designed to be domain-specific and logically independent.
 
 ### Storage component
 
