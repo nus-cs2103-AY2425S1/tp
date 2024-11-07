@@ -11,6 +11,25 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 <!-- * Table of Contents -->
 <page-nav-print />
 
+---------------------- 
+## Table of Contents
+- [FindingbrUdders User Guide](#findingbrudders-user-guide)
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Viewing Help: `help`](#viewing-help--help-)
+  - [Adding an Udder: `add`](#adding-an-udder-add-)
+  - [Listing all Udders: `list`](#listing-all-udders--list-)
+  - [Editing an Udder: `edit`](#editing-an-udder--edit-)
+  - [Scheduling a meeting with an Udder: `schedule`](#scheduling-a-meeting-with-an-udder--schedule-)
+  - [Locating Udders by keywords: `find`](#locating-udders-by-keywords-find-)
+  - [Deleting an Udder: `delete`](#deleting-an-udder--delete-)
+  - [Clearing all Udders:`clear`](#clearing-all-udders--clear-)
+  - [Exiting the program: `exit`](#exiting-the-program--exit-)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -37,7 +56,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data to help you get started.<br>
 
-![Ui](images/Ui.png) 
+![Ui](images/Ui3.png) 
 
 1. Type the command in the command box at the bottom and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -53,6 +72,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,7 +104,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
 Shows a message via a popup window explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessage2.png)
 
 **Format:** `help`
 
@@ -150,15 +170,16 @@ Finds Udders by specified keywords for each field.
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
+* **IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
 
 **Examples:**
 * `find John` returns `johnny` and `John Doe`<br>
 
-![result for 'find alex david'](images/findCommand.png)
+![result for 'find John'](images/findCommand3.png)
 
 ### Deleting an Udder : `delete` ❌
 
-Deletes the specified Udder from the address book.
+Deletes the specified Udder from the address book. Deleting an Udder also deletes all meetings related to that Udder.
 
 **Format:** `delete INDEX`
 
