@@ -221,5 +221,6 @@ public class AddressBookTest {
         public ObservableList<Product> getProductList() {
             return products;
         }
+
     }
 }
