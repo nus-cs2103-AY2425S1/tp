@@ -378,6 +378,10 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 The following sequence diagram shows how the above steps for how undo works:
 <puml src="diagrams/UndoSequenceDiagram.puml"/>
 
+**Note:** The lifelines for `UndoCommandParser`, `UndoCommand`, and
+`CommandResult`, and `AddressBook` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### \[Proposed\] Data archiving
