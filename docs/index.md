@@ -8,7 +8,7 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-W08-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-W08-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W08-1/tp/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2425S1-CS2103T-W08-1/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/startingGUI.png)
 
 **TrackMate is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
