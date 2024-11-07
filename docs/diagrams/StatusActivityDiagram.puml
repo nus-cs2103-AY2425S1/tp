@@ -3,11 +3,11 @@
 skinparam ArrowFontStyle plain
 
 start
-:User wants to update the status of the internship application at index i;
+:User wants to update the status of the internship application at index i (where i is an integer);
 
 switch ()
 case ([User enters the command "/accept i"])
-    if ( ) then ([Index is valid])
+    if () then ([Index is valid])
         :Update the internship application status to
         **ACCEPTED**;
     else ([else])
@@ -15,7 +15,7 @@ case ([User enters the command "/accept i"])
         stop
     endif
 case ([User enters the command "/reject i"])
-    if ( ) then ([Index is valid])
+    if () then ([Index is valid])
         :Update the internship application status to
         **REJECTED**;
     else ([else])
@@ -23,7 +23,7 @@ case ([User enters the command "/reject i"])
         stop
     endif
 case ([User enters the command "/pending i"])
-    if ( ) then ([Index is valid])
+    if () then ([Index is valid])
         :Update the internship application status to
         **PENDING**;
     else ([else])

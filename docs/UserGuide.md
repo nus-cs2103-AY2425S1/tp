@@ -2,11 +2,11 @@
 
 HireMe is a **free desktop application that helps you manage your extensive list of internship applications.**
 
-* [Easy to use] 
+* [Easy to use]
   - Type simple commands: If you can type fast, HireMe can get your internship tracking tasks done faster than traditional apps.
 * [High quality]
   - User friendly interface: sleek list design to view all of your of internship applications.
-* [Streamlining management] 
+* [Streamlining management]
   - Add, delete and update your internship applications: everything you need to manage your list of internship applications.
 * [Insights]
   - Tailored summary of your list of internship applications so that you can gain hidden insights.
