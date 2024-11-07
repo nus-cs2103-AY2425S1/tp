@@ -3,14 +3,41 @@ layout: page
 title: Developer Guide
 ---
 
-- Table of Contents
-  {:toc}
+## Table of Contents
+
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#Setting-up-getting-started)
+- [Design](#Design)
+  - [Architecture](#Architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+- [Implementation](#implementation)
+  - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+    - [Proposed Implementation](#proposed-implementation)
+    - [Design considerations:](#design-considerations)
+  - [\[Proposed\] Data archiving](#proposed-data-archiving)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Deleting a person](#deleting-a-person)
+  - [Saving data](#saving-data)
 
 ---
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Adapted from: [AB3](https://se-education.org/addressbook-level3/)
+- Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson),
+  [JUnit5](https://github.com/junit-team/junit5)
 
 ---
 
@@ -75,7 +102,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `HelpWindow` and `ContactDisplay`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -279,7 +306,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                      | I want to …​                                                                       | So that I can…​                                                                    |
-| -------- |----------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| -------- | -------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `* * *`  | new user                                     | see usage instructions                                                             | refer to instructions when I forget how to use the App                             |
 | `* * *`  | user                                         | add new contacts                                                                   | manage contact information quickly                                                 |
 | `* * *`  | user                                         | view all contacts                                                                  | see all my contacts saved in one screen                                            |
@@ -308,38 +335,58 @@ _{More to be added}_
 
 (For all use cases below, the **System** is the `AdmiNUS` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case 1: Add a contact**
+**Use case: UC01 - Add a student**
 
 **MSS**
 
-1. User requests to add a new contact
-2. User enters the required information (name, id, phone number, email, and address) and optional information (tag)
-3. AdmiNUS adds the contact and displays a success message
+1. User requests to add a new student by entering the required information (name, student id, phone number, email, and address) and optional information (tag)
+2. AdmiNUS adds the student and displays a success message
 
    Use case ends.
 
 **Extensions**
 
-- 2a. The given arguments are invalid.
+- 1a. The given arguments are invalid.
 
-  - 2a1. AdmiNUS shows an error message for the specific invalid field.
-  
-    Use case resumes at step 2.
+  - 1a1. AdmiNUS shows an error message for the specific invalid field.
 
-- 3a. Contact with the same phone number already exists.
+    Use case resumes at step 1.
 
-  - 3a1. AdmiNUS shows an error message about duplicate contact.
-  
-    Use case resumes at step 2.
+- 2a. Student with the same student id already exists.
 
-**Use case 2: Delete a contact**
+  - 2a1. AdmiNUS shows an error message about duplicate student.
+
+    Use case resumes at step 1.
+
+**Use case: UC02 - Add a company**
+
+**MSS**
+
+1. User requests to add a new company by entering the required information (name, industry, phone number, email, and address) and optional information (tag)
+2. AdmiNUS adds the company and displays a success message
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The given arguments are invalid.
+
+  - 1a1. AdmiNUS shows an error message for the specific invalid field.
+
+    Use case resumes at step 1.
+
+- 2a. Company with the same name and industry already exists.
+
+  - 2a1. AdmiNUS shows an error message about duplicate company.
+
+    Use case resumes at step 1.
+
+**Use case: UC03 - List the contacts**
 
 **MSS**
 
 1.  User requests to list contacts
 2.  AdmiNUS shows a list of contacts
-3.  User requests to delete a specific contact in the list
-4.  AdmiNUS deletes the contact
 
     Use case ends.
 
@@ -349,25 +396,58 @@ _{More to be added}_
 
   Use case ends.
 
-- 3a. The given index is invalid.
-
-  - 3a1. AdmiNUS shows an error message.
-
-    Use case resumes at step 2.
-
-**Use case 3: Edit a contact**
+**Use case: UC04 - Delete a contact**
 
 **MSS**
 
-1. User requests to list contacts.
-2. AdmiNUS shows a list of contacts.
-3. User selects a contact to edit.
-4. User enters updated contact information.
-5. AdmiNUS updates the contact and displays a success message.
+1.  User <u>requests to list contacts(UC03)</u>.
+2.  User requests to delete a specific contact in the list
+3.  AdmiNUS deletes the contact
 
     Use case ends.
 
-**Use case 4: Filter contacts by category or tag**
+**Extensions**
+
+- 2a. The given index is invalid.
+
+  - 2a1. AdmiNUS shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC05 - Edit a contact**
+
+**MSS**
+
+1. User <u>requests to list contacts(UC03)</u>.
+2. User requests to edit a specific contact and the updated information.
+3. AdmiNUS updates the contact and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The given index is invalid.
+  - 2a1. AdmiNUS shows an error message.
+    Use case resumes at step 1.
+- 2a. The given arguments are invalid.
+  - 2a1. AdmiNUS shows an error message for the specific invalid field.
+    Use case resumes at step 1.
+
+**Use case: UC06 - View a contact**
+
+**MSS**
+
+1. User requests to view a specific contact.
+2. AdmiNUS displays the details of the contact.
+   Use case ends.
+
+**Extensions**
+
+- 2a. The given index is invalid.
+  - 2a1. AdmiNUS shows an error message.
+    Use case ends.
+
+**Use case: UC07 - Filter contacts by category or tag**
 
 **MSS**
 
@@ -377,10 +457,13 @@ _{More to be added}_
    Use case ends.
 
 **Extensions**
+
 - 2a. No contacts match the specified category.
+
   - 2a1. AdmiNUS displays an error message and an empty list.
-  
+
     Use case ends.
+
 ---
 
 ### Non-Functional Requirements
@@ -424,7 +507,7 @@ _{More to be added}_
 - **Command**: A user input string that triggers a specific action within the Vinegar application.
 - **User Interface (UI)**: The part of the application that users interact with, which includes graphical components like command boxes and task lists.
 - **CLI (Command Line Interface)**: A text-based user interface through which users interact with the application by typing commands.
-- **Profile Card**: A GUI feature that displays detailed information about a contact.
+- **Contact Display**: A GUI feature that displays detailed information about a contact.
 - **Scalability**: The capacity of the system to handle increasing amounts of data or user load without performance degradation.
 - **JavaFX**: A software platform used for creating and delivering desktop applications with graphical user interfaces in Java.
 - **Data Persistence**: The characteristic of data that outlives the execution of the process that created it, usually achieved through saving data to a file or database.
@@ -452,16 +535,52 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### GUI Testing
+
+1. Main window initialization
+
+   1. Launch the application.
+      Expected:
+      a. Window title is "AdmiNUS".
+      b. AdmiNUS icon is displayed in title bar.
+      c. Menu bar, command box, result display pane, person list pane, contact display pane and status bar footer are loaded correctly.
+
+2. Verify "Help" Menu item functionality
+
+   1. Click on the "Help" menu.
+   2. Click the "Help" item.
+      Expected: A list of all valid commands are shown on the contact display pane.
+
+3. Help window functionality
+
+   1. Type `helpwindow` on the command box.
+      Expected: A help dialog opens displaying the link to AdmiNUS user guide.
+
+4. Result Display behavior and sizing
+
+   1. Rezise the result display pane vertically.
+      Expected: Result display pane remains between 100 and 200 pixels.
+
+5. Contact Display behavior and sizing
+
+   1. Launch the application.
+      Expected: Contact display pane takes up 45% of the main window width.
+   2. Rezise the contact display pane vertically.
+      Expected: Contact display pane remains between 300 and 1000 pixels.
+
+6. Verify "Exit" Menu item functionality
+   1. Click on the "Exit" menu.
+   2. Click the "Exit" item.
+      Expected: Application closes without errors.
 
 ### Deleting a person
 
@@ -469,16 +588,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -486,4 +605,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
