@@ -136,11 +136,13 @@ The `Model` component,
 </box>
 
 ### Course component
+
 API: [`Course.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/model/course/Course.java)
 
 <puml src="diagrams/CourseClassDiagram.puml" width="550" />
 
 The `Course` component,
+
 * stores the course data i.e., all `Course` objects (which are contained in a `UniqueCourseList` object).
 
 ### Storage component
@@ -295,6 +297,8 @@ Priorities:
  <span style="color:#F0AB00;">Medium (nice to have) - ★★</span> |
  <span style="color:#C9190B;">Low (unlikely to have) - ★</span>
 
+<!-- markdownlint-disable MD013 -->
+
 | Priority                                       | As a ... User    | I want to ...                                         | So that I can ...                                              |
 |------------------------------------------------|-------------------|-------------------------------------------------------|----------------------------------------------------------------|
 | <span style="color:#4CB140;">★★★</span>      | Beginner          | Add contacts                                          | Track contact details for students joining the class           |
@@ -321,6 +325,8 @@ Priorities:
 | <span style="color:#C9190B;">★</span>        | Beginner          | Assign preferred communication methods to parents     | Ensure efficient communication through preferred channels      |
 | <span style="color:#C9190B;">★</span>        | Intermediate      | Flag students with missing contact details            | Ensure all required student information is complete            |
 | <span style="color:#C9190B;">★</span>        | Beginner          | Set communication preferences for individual students | Communicate via their preferred method (Telegram, phone, etc.) |
+
+<!-- markdownlint-enable MD013 -->
 
 ### :fa-solid-user: Use cases
 
@@ -365,9 +371,6 @@ Priorities:
 
    Use case ends.</panel>
 
-<<<<<<< HEAD
-**Use case: Delete a contact**
-=======
 <panel header="#### Use Case: Get Warnings Before Making Major Changes" expanded>
 
 **Main Success Scenario (MSS):**
@@ -387,7 +390,6 @@ Priorities:
       Use case ends.</panel>
 
 <panel header="#### Use case: Delete a contact" expanded>
->>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
@@ -624,11 +626,12 @@ Priorities:
 **Extensions:**
 
 * 2a. The list is empty.
-    * 2a1. System shows a message, "No contacts available."
+  * 2a1. System shows a message, "No contacts available."
       Use case ends.
 
 **Use Case: Explore App with Sample Student Data**
 =======
+
 <panel header="#### Use Case: Explore App with Sample Student Data" expanded>
 >>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
@@ -902,57 +905,56 @@ testers are expected to do more _exploratory_ testing.
 ### Enrolling a student into a course and tutorial
 
 1. Enrolling an existing student into an existing course on TAHub
-    
-   1. Prerequisites: Ensure that both *student* and *course* objects have been created.
-      (In this case, the *student* object with matriculation number A2345678Y and the *course*
+
+   1. Prerequisites: Ensure that both _student_ and _course_ objects have been created.
+      (In this case, the _student_ object with matriculation number A2345678Y and the _course_
        object with course code MA1521 must already be created.)
-    
+
    2. Test case: `enroll m/A2345678Y c/MA1521 tut/T17`
-        
+
        Expected: The student with matriculation number A2345678Y is enrolled into tutorial T17 of the course MA1521. A success message will be shown to the user.
-   
-   3. Test case: `enroll m/A2345678Y c/MA1521 tut/T17` (*again*)
-   
+
+   3. Test case: `enroll m/A2345678Y c/MA1521 tut/T17` (_again_)
+
        Expected: An error message will be displayed to the user and no new enrollment will occur.
 
 2. Enrolling an existing student into an invalid course on TAHub
 
-    1. Prerequisites: Ensure that a *student* object has been created but a course with course code *CS3233* has not been created
-    
+    1. Prerequisites: Ensure that a _student_ object has been created but a course with course code _CS3233_ has not been created
+
     2. Test case: Test case: `enroll m/A2345678Y c/CHUNITHM tut/T17`
-   
+
         Expected: An error message will be displayed to the user and no enrollment will occur as the course code entered has an invalid format.
-   
-   3. Test case: Test case: `enroll m/A2345678Y c/CS3233 tut/T17`
+
+    3. Test case: Test case: `enroll m/A2345678Y c/CS3233 tut/T17`
 
        Expected: An error message will be displayed to the user and no enrollment will occur as no such course with course code exists on TAHub.
 
-3. *{ more test cases... }*
-   
+3. _{ more test cases... }_
 
-### Managing Attendance 
-1. Marking students as present 
-    1. Prerequisites:  Ensure that both student and course objects have been created and the student is enrolled into 
-   a valid tutorial of the course.(In this case, the student object with matriculation number A0286651Y, the course 
+### Managing Attendance
+
+1. Marking students as present
+    1. Prerequisites:  Ensure that both student and course objects have been created and the student is enrolled into
+   a valid tutorial of the course.(In this case, the student object with matriculation number A0286651Y, the course
    object with course code MA1521 must already be created and the student must be enrolled in tutorial T17)
-   2. Test case: `attend-present m/A0286651Y c/MA1521 tut/T17` <br>
+    2. Test case: `attend-present m/A0286651Y c/MA1521 tut/T17` <br>
 Expected: Student marked present. Success message shown.
 
-2. Marking students as absent 
+2. Marking students as absent
     1. Prerequisites: Ensure that both student and course objects have been created and the student is enrolled into
        a valid tutorial of the course.(In this case, the student object with matriculation number A0286651Y, the course
        object with course code MA1521 must already be created and the student must be enrolled in tutorial T17)
-   2. Test case: `attend-absent m/A0286651Y c/MA1521 tut/T17` <br>
+    2. Test case: `attend-absent m/A0286651Y c/MA1521 tut/T17` <br>
 Expected: Student marked absent. Success message shown.
     3. Test case: `attend-absent m/A0286651Y c/MA1521 tut/T17` <br>
 Expected: Error message shown. Student not found.
 
-
 3. Clearing attendance records
-    1. Prerequisites: Student has existing attendance record 
-   2. Test case: `attend-clear m/A2345678Y c/MA1521 tut/T17` <br>
+    1. Prerequisites: Student has existing attendance record
+    2. Test case: `attend-clear m/A2345678Y c/MA1521 tut/T17` <br>
 Expected: Attendance cleared. Success message shown.
-   
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
