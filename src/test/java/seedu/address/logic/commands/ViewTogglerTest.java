@@ -20,7 +20,7 @@ public class ViewTogglerTest {
                 ViewToggler.LIST_BOTH_COMMAND);
 
         assertEquals(new ViewToggler(String.format(LinkCommand.MESSAGE_SUCCESS, 4,
-                        Messages.format(ALICE))).getCommandType(),
+                        Messages.format(ALICE), LinkCommand.MESSAGE_RETURN_TO_MAIN_MENU)).getCommandType(),
                 ViewToggler.LINK_OWNER_TO_PET_COMMAND);
 
         assertEquals(new ViewToggler(AddOwnerCommand.MESSAGE_SUCCESS).getCommandType(),
