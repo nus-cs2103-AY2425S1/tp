@@ -200,18 +200,18 @@ Format: `export`
 
 Supply Central data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### Editing the Supplier data file
 
-SupplyCentral supplier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json` and CSV file `[JAR file location]/data/goods.csv`. Advanced users are welcome to update data directly by editing that data file.
+SupplyCentral supplier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SupplyCentral will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause SupplyCentral to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Editing the Goods data file ###
+### Editing the Goods data file
 
-SupplyCentral goods data will be stored in a CSV file for advanced users to access and use for business purposes. However, it is strongly discouraged for users to directly edit this data file due to risk of data corruption.
+SupplyCentral goods data will be stored in a CSV file `[JAR file location]/data/goods.csv` for advanced users to access and use for business purposes. However, it is strongly discouraged for users to directly edit this data file due to risk of data corruption.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Similar to the supplier data file, if your changes to the data file makes its format invalid, SupplyCentral will discard all invalid data and will only retain any valid data within the current file. Hence, as mentioned above, it is strongly discouraged to directly edit this file.<br>
