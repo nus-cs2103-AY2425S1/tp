@@ -214,7 +214,8 @@ public class DeleteCommandTest {
     @Test
     public void execute_personNotAssignedToSpecifiedWeddings_throwsCommandException() {
         // Setup a person some unassigned wedding jobs
-        Person personToDelete = model.getFilteredPersonList().get(0);
+        Person person = model.getFilteredPersonList().get(0);
+        Person personToDelete = new PersonBuilder(person).build();
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Wedding amyWeddingCopy = new WeddingBuilder(AMY_WEDDING).build();
         amyWeddingCopy.setClient(new PersonBuilder(BENSON).build());
@@ -242,7 +243,8 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidWeddingIndex_throwsCommandException() {
         // Setup a wedding and assign it to a person
-        Person personToDelete = model.getFilteredPersonList().get(0);
+        Person person = model.getFilteredPersonList().get(0);
+        Person personToDelete = new PersonBuilder(person).build();
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Wedding amyWeddingCopy = new WeddingBuilder(AMY_WEDDING).build();
         amyWeddingCopy.setClient(new PersonBuilder(BENSON).build());
