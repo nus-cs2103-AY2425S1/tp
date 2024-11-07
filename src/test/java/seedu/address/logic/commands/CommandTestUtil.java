@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -32,14 +35,31 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_ID_AMY = "P12345";
     public static final String VALID_ID_BOB = "P54321";
+    public static final String VALID_ID_WITH_SPECIAL_CHAR_BOB = "P54321/";
     public static final String VALID_WARD_AMY = "A1";
     public static final String VALID_WARD_BOB = "B3";
+    public static final String VALID_WARD_WITH_SPECIAL_CHAR_BOB = "B3!";
     public static final String VALID_DIAGNOSIS_AMY = "Celiac Disease";
     public static final String VALID_DIAGNOSIS_BOB = "Chronic Sinusitis";
     public static final String VALID_MEDICATION_AMY = "gluten-free diet";
     public static final String VALID_MEDICATION_BOB = "Fluticasone (Flonase Veramyst)";
     public static final String VALID_NOTES_AMY = "Like skiing.";
     public static final String VALID_NOTES_BOB = "Favourite pastime: Eating";
+    public static final String VALID_START_DATETIME_1 = "05-11-2024-12-00";
+    public static final String VALID_START_DATETIME_2 = "05-11-2024-14-00";
+    public static final String VALID_END_DATETIME_1 = "25-12-2024-18-00";
+    public static final String VALID_END_DATETIME_2 = "26-12-2024-06-00";
+
+    public static final String DATETIME_START_DESC_AMY = " " + PREFIX_START + VALID_START_DATETIME_1;
+    public static final String DATETIME_START_DESC_BOB = " " + PREFIX_START + VALID_START_DATETIME_2;
+    public static final String DATETIME_END_DESC_AMY = " " + PREFIX_END + VALID_END_DATETIME_1;
+    public static final String DATETIME_END_DESC_BOB = " " + PREFIX_END + VALID_END_DATETIME_2;
+
+    public static final String VALID_APPOINTMENT_AMY = "Surgery";
+    public static final String VALID_APPOINTMENT_BOB = "Consultation";
+
+    public static final String APPOINTMENT_DESC_AMY = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_AMY;
+    public static final String APPOINTMENT_DESC_BOB = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String ID_DESC_AMY = " " + PREFIX_ID + VALID_ID_AMY;
@@ -55,6 +75,12 @@ public class CommandTestUtil {
     public static final String INVALID_WARD_DESC = " " + PREFIX_WARD + ""; // No empty string allowed
     public static final String INVALID_DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + "$<>"; // Only a-z and .()/- allowed
     public static final String INVALID_MEDICATION_DESC = " " + PREFIX_MEDICATION + "$<>"; // Only a-z and .()/- allowed
+    // Only a-z and .()/- allowed
+    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "\t";
+    public static final String INVALID_START_DATETIME = "10/11/2024"; // Only 0-9 and - allowed
+    public static final String INVALID_END_DATETIME = "10-11-202?"; // Only 0-9 and - allowed
+    public static final String INVALID_START_DATETIME_DESC = " " + PREFIX_START + INVALID_START_DATETIME;
+    public static final String INVALID_END_DATETIME_DESC = " " + PREFIX_END + INVALID_END_DATETIME;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
