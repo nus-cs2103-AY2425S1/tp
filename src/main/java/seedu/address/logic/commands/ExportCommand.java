@@ -102,8 +102,8 @@ public class ExportCommand extends Command {
      * @return a single parsed tag
      */
     static String parseTags(String tagString) {
-        // Remove leading and trailing whitespace (including carriage returns).
-        tagString = tagString.replaceAll("\\s+", "");
+        // Remove leading and trailing whitespace
+        tagString = tagString.trim().replaceAll("\\r", "");
 
         // Check if the string starts with { and ends with }
         if (tagString.startsWith("\"{") && tagString.endsWith("}\"")) {
@@ -249,7 +249,8 @@ public class ExportCommand extends Command {
                                 .replace("\"", "")
                                 .replace(",", "")
                                 .replace("\\n", "")
-                                .replace("\\", "");
+                                .replace("\\", "")
+                                .replace("\\r", "");
                     }
 
                     writer.printf("  %s | %s%n", header, cellValue);
