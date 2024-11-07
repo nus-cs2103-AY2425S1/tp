@@ -646,7 +646,7 @@ additional features.
 
 * **Additional Fields**: Our project manages additional fields such as Telegram handle, module, and contact type. Integrating these fields required modifying both data structures and UI components, as well as adapting backend logic to manage and validate these new attributes.
 * **Enhanced Search Functionality**: We implemented additional search functionalities, allowing users to find contacts by tags and Telegram handles, in addition to names. This required integration of the find command with additional fields.
-* **UI Enhancements**: Significant effort went into redesigning the user interface to make it aesthetically pleasing. In addition to improving layout and visual styling, we introduced a light and dark mode, ensuring each element was clearly visible in both themes.
+* **UI Enhancements**: Significant effort went into redesigning the user interface to make it aesthetically pleasing. In addition to improving layout and visual styling, we introduced both light and dark modes, ensuring each element was clearly visible in both themes.
  
 ### Effort
 
