@@ -30,8 +30,8 @@ public class AddGradeCommandParserTest {
         // Leading whitespaces
         assertParseSuccess(parser, "  15 n/Midterm s/95 w/35", command);
 
-        // Float input
-        assertParseSuccess(parser, "15 n/Midterm s/95.000 w/35.000", command);
+        // Float input (2dp)
+        assertParseSuccess(parser, "15 n/Midterm s/95.00 w/35.00", command);
     }
 
     @Test
@@ -46,6 +46,7 @@ public class AddGradeCommandParserTest {
         assertParseFailure(parser, "Adam n/Midterm s/95.6 w/30", MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "15 n/Midterm s/A w/30", MESSAGE_SCORE_CONSTRAINTS);
         assertParseFailure(parser, "15 n/Midterm s/95.6 w/FM", MESSAGE_WEIGHTAGE_CONSTRAINTS);
+        assertParseFailure(parser, "15 n/Midterm s/95.6 w/90.000", MESSAGE_WEIGHTAGE_CONSTRAINTS);
 
         // Too many arguments
         assertParseFailure(parser, "15 n/Midterm s/95.000 w/35.000 w/777",

@@ -212,8 +212,11 @@ public class ParserUtil {
     /**
      * Parses {@code String value} into a valid score float
      * Leading and trailing whitespaces will be trimmed.
+     * The score must be between 0 and 100 (inclusive) with a maximum of 2 decimal places.
      *
-     * @throws ParseException if value is invalid or out of bounds
+     * @param value The string value to be parsed.
+     * @return The parsed score as a float.
+     * @throws ParseException if the value is not a valid number, out of bounds, or has more than 2 decimal places.
      */
     public static float parseScore(String value) throws ParseException {
         requireNonNull(value);
@@ -224,6 +227,12 @@ public class ParserUtil {
             if (res < 0 || res > 100) {
                 throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
             }
+
+            // Check for a maximum of 2 decimal places
+            if (trimmedValue.contains(".") && trimmedValue.split("\\.")[1].length() > 2) {
+                throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
+            }
+
             return res;
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
@@ -231,11 +240,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String value} into a valid weightage float
+     * Parses {@code String value} into a valid weightage float.
      * Leading and trailing whitespaces will be trimmed.
+     * The weightage must be greater than 0 and up to 100, with a maximum of 2 decimal places.
      *
-     * @throws ParseException if value is invalid or out of bounds
+     * @param value The string value to be parsed.
+     * @return The parsed weightage as a float.
+     * @throws ParseException if the value is not a valid number, out of bounds, or has more than 2 decimal places.
      */
+
     public static float parseWeightage(String value) throws ParseException {
         requireNonNull(value);
         String trimmedValue = value.trim();
@@ -245,6 +258,12 @@ public class ParserUtil {
             if (res < 0 || res > 100) {
                 throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
             }
+
+            // Check for a maximum of 2 decimal places
+            if (trimmedValue.contains(".") && trimmedValue.split("\\.")[1].length() > 2) {
+                throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
+            }
+
             return res;
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);

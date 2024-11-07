@@ -8,10 +8,19 @@
 
 TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAHub can get your contact management tasks done faster than traditional GUI apps.
 
+This app is designed for Teaching Assistants (TAs) who are experienced with using the CLI and are comfortable with command-based interactions. However, if you're new to the CLI and still want to try TAHub, there’s a detailed **Quick Start** section to help you get started smoothly and become familiar with the commands.
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
 ---
+## Glossary
+
+- **CLI**: Command Line Interface, where you type commands to interact with the application.
+- **GUI**: Graphical User Interface, where you interact with the application through visual elements like buttons and windows.
+- **Index**: The position of a person in the currently displayed list. For example, in a list of 5 contacts, the command `delete 3` would remove the third contact shown in that list.
+
+
 
 ## Quick start
 
@@ -22,8 +31,8 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
 1. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAHub.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   A GUI similar to the below should appear in a few seconds.<br>
+   ![StartUpPage](images/StartUpPage.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -51,7 +60,7 @@ TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for us
      1. Open your command terminal:
         - <span style="color: #1f77b4;"><strong>Windows:</strong></span>: Press `Windows + R`, type `cmd`, and hit Enter.
         - <span style="color: #ff7f0e;"><strong>Mac:</strong></span> Press `Command + Space`, type `Terminal`, and hit Enter.
-        - Linux: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
+        - <span style="color: #2ca02c;"><strong>Linux</strong></span>: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
      2. Once the terminal is open, type the following command and press Enter:
         ```bash
         java -version
@@ -376,8 +385,38 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAHub home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: To transfer your TAHub data to another computer, follow these steps:
+
+1. **Locate the Data File** on Your Current Computer:
+    - Open the folder where TAHub saves its data. By default, the data file is located at `[JAR file location]/data/TAHub.json`.
+    - If you installed TAHub in a custom folder, look for the `data` folder within that location.
+    - Copy the `TAHub.json` file to a USB drive, cloud storage, or any other method you prefer for transferring files between computers.
+
+2. **Install TAHub on the New Computer**:
+    - Download the latest `.jar` file from the [TAHub releases page](https://github.com/se-edu/TAHub-level3/releases).
+    - Place the `.jar` file in a folder on the new computer where you want to use TAHub.
+
+3. **Run TAHub Once on the New Computer**:
+    - Open a terminal, `cd` into the folder containing the `.jar` file, and run the command:
+      ```bash
+      java -jar TAHub.jar
+      ```
+    - This creates a new `data` folder in the same directory as the `.jar` file with an empty `TAHub.json` file.
+
+4. **Replace the Empty Data File**:
+    - Close the TAHub application on the new computer.
+    - Go to the `data` folder where the new `TAHub.json` file was created.
+    - Delete the empty `TAHub.json` file and replace it with the `TAHub.json` file you copied from the old computer.
+
+5. **Verify the Data Transfer**:
+    - Open TAHub on the new computer by running the `.jar` file again.
+    - Check that all your contacts, grades, and attendance records appear correctly, verifying that the data has been successfully transferred.
+
+---
+
+By following these steps, you can easily transfer all your TAHub data to a new computer without losing any information.
+
 
 ---
 
@@ -388,18 +427,37 @@ _Details coming soon ..._
 
 ---
 
-## Command summary
+## Command Summary
 
-| Action                | Format, Examples                                                                                                                                                      |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**             | `clear`                                                                                                                                                               |
-| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **Add/Edit Grade**    | `grade INDEX TEST_NAME SCORE WEIGHTAGE` <br> e.g., `grade 1 Midterm 85 30`                                                                                            |
-| **Delete Grade**      | `deleteGrade INDEX TEST_NAME` <br> e.g., `deleteGrade 1 Midterm`                                                                                                      |
-| **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended`                                                                               |
-| **Unmark Attendance** | `unmark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `unmark 1 d/31/01/2024 10:00`                                                                                      |
-| **List**              | `list`                                                                                                                                                                |
-| **Help**              | `help`                                                                                                                                                                |
+### Person Commands
+
+| Action      | Format, Examples                                                                                                                                                             |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`        |
+| **Clear**   | `clear`                                                                                                                                                                      |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                          |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                   |
+
+### Grade Commands
+
+| Action              | Format, Examples                                                                                                      |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Add/Edit Grade**  | `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE` <br> e.g., `addGrade 1 n/Midterm s/85 w/30`                          |
+| **Delete Grade**    | `deleteGrade INDEX n/TEST_NAME` <br> e.g., `deleteGrade 1 n/Midterm`                                                 |
+
+### Attendance Commands
+
+| Action                | Format, Examples                                                                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended`                            |
+| **Unmark Attendance** | `unmark INDEX d/DATE_TIME` <br> e.g., `unmark 1 d/31/01/2024 10:00`                                                |
+
+### General Commands
+
+| Action          | Format                                                                                                                    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **List**        | `list`                                                                                                                    |
+| **Help**        | `help`                                                                                                                    |
+| **Exit**        | `exit`                                                                                                                    |
+

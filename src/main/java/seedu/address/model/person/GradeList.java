@@ -2,7 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,11 +27,22 @@ public class GradeList {
         this.grades = Collections.unmodifiableMap(new HashMap<>());
     }
 
+    /**
+     * Constructs a new {@code GradeList} based on {@code Map<String, Grade> grades}
+     */
     public GradeList(Map<String, Grade> grades) {
+        if (grades.keySet().stream().map(String::toLowerCase).distinct().count() != grades.keySet().size()) {
+            throw new IllegalStateException("Duplicates in grade map");
+        }
+
         this.grades = Collections.unmodifiableMap(grades);
     }
 
     private GradeList(List<Grade> grades) {
+        if (grades.stream().map(grade -> grade.getTestName().toLowerCase()).distinct().count() != grades.size()) {
+            throw new IllegalStateException("Duplicates in grade list");
+        }
+
         this.grades = grades.stream().collect(Collectors.toMap(Grade::getTestName, grade -> grade));
     }
 
@@ -51,8 +64,10 @@ public class GradeList {
             totalWeightage += g.getWeightage();
         }
 
+        String normalizedTestName = grade.getTestName().toLowerCase();
         // If there is already a grade for this exam, subtract the old weightage
-        Grade existingGrade = newGrades.get(grade.getTestName());
+        Grade existingGrade = newGrades.get(normalizedTestName);
+
         if (existingGrade != null) {
             totalWeightage -= existingGrade.getWeightage();
         }
@@ -65,7 +80,7 @@ public class GradeList {
             throw new IllegalStateException("Total weightage exceeds 100%");
         }
 
-        newGrades.merge(grade.getTestName(), grade, (oldGrade, newGrade) -> newGrade);
+        newGrades.put(normalizedTestName, grade);
 
         return new GradeList(newGrades);
     }
@@ -79,7 +94,12 @@ public class GradeList {
      */
     public Grade getGrade(String testName) {
         requireNonNull(testName);
-        return this.grades.get(testName);
+        String normalizedTestName = testName.toLowerCase();
+        return this.grades.entrySet().stream()
+                .filter(entry -> entry.getKey().toLowerCase().equals(normalizedTestName))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -92,7 +112,9 @@ public class GradeList {
         requireNonNull(testName);
         Map<String, Grade> newList = new HashMap<>(this.grades);
 
-        newList.remove(testName);
+        newList.keySet().stream()
+                .filter(key -> key.equalsIgnoreCase(testName))
+                .findFirst().ifPresent(newList::remove);
 
         return new GradeList(newList);
     }
@@ -183,7 +205,14 @@ public class GradeList {
         }
 
         GradeList otherGradeList = (GradeList) other;
-        return this.grades.equals(otherGradeList.grades);
+        // Sort both grade lists before comparing
+        List<Grade> sortedGrades = new ArrayList<>(this.grades.values());
+        sortedGrades.sort(Comparator.comparing(grade -> grade.getTestName().toLowerCase()));
+
+        List<Grade> otherSortedGrades = new ArrayList<>(otherGradeList.grades.values());
+        otherSortedGrades.sort(Comparator.comparing(grade -> grade.getTestName().toLowerCase()));
+
+        return sortedGrades.equals(otherSortedGrades);
     }
 
     @Override
