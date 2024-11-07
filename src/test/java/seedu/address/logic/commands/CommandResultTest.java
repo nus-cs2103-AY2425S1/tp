@@ -14,7 +14,8 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false, -1)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false,
+                -1, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,16 +30,28 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, false, -1)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, false,
+                -1, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, false, -1)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, false,
+                -1, false, false)));
 
         // different list value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true, -1)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true,
+                -1, false, false)));
 
         //different personIndex value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, false, 0)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, false,
+                0, false, false)));
+
+        //different isPersonList value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, false,
+                0, true, false)));
+
+        //different isAddLog value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, false,
+                0, false, true)));
     }
 
     @Test
@@ -53,19 +66,27 @@ public class CommandResultTest {
 
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true,
-                false, false, false, -1).hashCode());
+                false, false, false, -1, false, false).hashCode());
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
-                true, false, false, -1).hashCode());
+                true, false, false, -1, false, false).hashCode());
 
         // different list value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
-                false, false, true, -1).hashCode());
+                false, false, true, -1, false, false).hashCode());
 
         // different personIndex value returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
-                false, false, false, 0).hashCode());
+                false, false, false, 0, false, false).hashCode());
+
+        //different isPersonList value -> returns false
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                false, false, false, 0, true, false).hashCode());
+
+        //different isAddLog value -> returns false
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                false, false, false, 0, false, true).hashCode());
     }
 
     @Test
@@ -75,8 +96,10 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit()
                 + ", prompt=" + commandResult.hasPrompt()
-                + ", list=" + commandResult.isList()
-                + ", personIndex=" + commandResult.getPersonIndex() + "}";
+                + ", list=" + commandResult.isListLogs()
+                + ", personIndex=" + commandResult.getPersonIndex()
+                + ", isPersonList=" + commandResult.isPersonList()
+                + ", isAddLog=" + commandResult.isAddLog() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

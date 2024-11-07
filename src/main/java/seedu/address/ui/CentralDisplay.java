@@ -15,9 +15,11 @@ public class CentralDisplay extends UiPart<Region> {
 
     private static final String FXML = "CentralDisplay.fxml";
 
-    private Logic logic;
+    private final Logic logic;
     private PersonListPanel personListPanel;
     private SessionLogPanel sessionLogPanel;
+
+    private int currentPersonLogIndex;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -76,17 +78,34 @@ public class CentralDisplay extends UiPart<Region> {
     }
 
 
+
+    /**
+     * Updates the session log whenever a new entry is added for the session log currently on display.
+     */
+    public void handleLogRefresh(int personIndex) {
+        requireNonNull(personIndex);
+        assert personIndex > -1 : "Person index retrieved is less than 0";
+
+        if (currentPersonLogIndex != personIndex || !sessionLogPanelPlaceholder.isVisible()) {
+            return;
+        }
+
+        sessionLogPanel = new SessionLogPanel(logic.getSessionLog(personIndex));
+        sessionLogPanelPlaceholder.getChildren().clear();
+        sessionLogPanelPlaceholder.getChildren().add(sessionLogPanel.getRoot());
+        showSessionLogPanel();
+    }
+
     /**
      * Injects the logs of the current person identified with their index in the address book
      * to the sessionLogPanel.
      */
-    public void handleLog(int personIndex) {
+    public void handleShowLog(int personIndex) {
         requireNonNull(personIndex);
         assert personIndex > -1 : "Person index retrieved is less than 0";
 
-        System.out.println(personIndex);
+        currentPersonLogIndex = personIndex;
         sessionLogPanel = new SessionLogPanel(logic.getSessionLog(personIndex));
-
 
         sessionLogPanelPlaceholder.getChildren().add(sessionLogPanel.getRoot());
         showSessionLogPanel();

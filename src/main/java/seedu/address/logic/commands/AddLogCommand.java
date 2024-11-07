@@ -47,9 +47,11 @@ public class AddLogCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToUpdate = getPerson(model);
+        int personIndex = model.getPersonList().indexOf(personToUpdate);
         model.addLog(personToUpdate, log);
 
-        return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, personToUpdate.getName()));
+        return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, personToUpdate.getName()),
+                false, false, false, false, personIndex, false, true);
     }
 
     private Person getPerson(Model model) throws CommandException {
