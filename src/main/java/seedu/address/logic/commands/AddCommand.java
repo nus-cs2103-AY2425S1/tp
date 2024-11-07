@@ -33,13 +33,14 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Google "
-            + PREFIX_PHONE + "650-253-0000 "
+            + PREFIX_PHONE + "6502530000 "
             + PREFIX_EMAIL + "google@gmail.com "
             + PREFIX_ADDRESS + "1600 Amphitheatre Parkway, Mountain View, CA 94043 "
             + PREFIX_CAREER_PAGE_URL + "www.google-careers.com "
             + PREFIX_REMARK + "Interview process takes around 6 weeks "
-            + PREFIX_TAG + "interviewDifficulty "
-            + PREFIX_TAG + "salary";
+            + PREFIX_TAG + "difficulty_HIGH "
+            + PREFIX_TAG + "Shopping "
+            + PREFIX_TAG + "salary_MEDIUM";
 
     public static final String MESSAGE_SUCCESS = "New company added: %1$s";
     public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book";
