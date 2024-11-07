@@ -86,7 +86,7 @@ student contact details!
    - `list` : Lists all students.
    - `person-add m/A0296210X n/John Tan p/98765432 e/johnt@email.com a/John street, block 123, #01-01`
       : Adds a contact named `John Tan` to TAHub Contacts.
-   - `delete  m/A0296210X` : Deletes the student with the matriculation number `A0296210X`.
+   - `person-delete  m/A0296210X` : Deletes the student with the matriculation number `A0296210X`.
       In this case, the `John Tan` that we just added.
    - `clear` : Deletes all contacts.
    - `exit` : Exits the app.
@@ -106,7 +106,7 @@ student contact details!
 **Notes about the command format: :fa-solid-lightbulb:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `person-add m/MATRICULATION_NUMBER`, `MATRICULATION_NUMBER` is a parameter which can be used as `person-add m/A1234567L`.
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
