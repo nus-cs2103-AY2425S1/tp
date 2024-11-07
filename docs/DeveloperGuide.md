@@ -20,11 +20,11 @@
 ## **Acknowledgements**
 
 - Initial project template (code and documentation):
-    - [AB3](https://github.com/se-edu/addressbook-level3)
+    - [AB3](https://github.com/se-edu/addressbook-level3) - Adapted the overall structure and some core functionalities of AB3 for DocTrack.
 - Third-party libraries:
-    - [JUnit](https://junit.org/junit5/)
-    - [JavaFX](https://openjfx.io/)
-    - [Jackson](https://github.com/FasterXML/jackson)
+    - [JUnit](https://junit.org/junit5/) - Used for testing.
+    - [JavaFX](https://openjfx.io/) - Used for the graphical user interface.
+    - [Jackson](https://github.com/FasterXML/jackson) - Used for JSON parsing and serialization.
 
 <br>
 
@@ -46,13 +46,17 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
+The ***Architecture Diagram*** below explains the high-level design of the DocTrack application.
+
 <puml src="diagrams/ArchitectureDiagram.puml" width="280"></puml>
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+<br><br>
 
 Given below is a quick overview of main components and how they interact with each other.
 
-**Main components of the architecture**
+<br>
+
+#### Main components of the architecture
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -60,16 +64,16 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of DocTrack.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of DocTrack in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-**How the architecture components interact with each other**
+#### How the architecture components interact with each other
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete  person 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user enters the command `delete  person 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"></puml>
 
