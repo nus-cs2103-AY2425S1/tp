@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.SortSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -165,6 +166,16 @@ public class AddCommandTest {
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SortSettings getSortSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSortSettings(SortSettings sortSettings) {
             throw new AssertionError("This method should not be called.");
         }
 
