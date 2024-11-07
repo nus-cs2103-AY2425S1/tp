@@ -212,7 +212,7 @@ Eduvault stores four types of objects:
 ]
 ```
 There may be no duplicate `Students`.
-Two `Students` are considered to be duplicates if they have matching `NAME` and `PHONE`.
+Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
 
 
 `Tutorial`
@@ -226,7 +226,7 @@ Two `Students` are considered to be duplicates if they have matching `NAME` and 
 ]
 ```
 There may be no duplicate `Tutorials`.
-Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
+Two `Tutorials` are considered to be duplicates if they have matching `subject`.
 
 `Participation`
 ```dtd
@@ -241,6 +241,11 @@ Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
 ]
 ```
 
+Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
+
+There may be no duplicate `Participations`.
+Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same.
+
 `Attendance`
 ```dtd
 "attendances" :
@@ -250,14 +255,27 @@ Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
     }
 ]
 ```
-Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
 
-There may be no duplicate `Participations`.
-Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same
+There is no enforcement of duplicate `Attendance` in storage.
 
 #### Storage 
 
+##### Uniqueness of objects
+For the purposes of storage into JSON format, Eduvault defines two objects as distinct based on these factors:
 
+* Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
+* Two `Tutorials` are considered to be duplicates if they have matching `subject`.
+* Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same.
+
+##### Loading Order
+The order which storage loads `Person`, `Tutorial` and `Participation` is shown below. 
+
+![StorageToModelTypeActivityDiagram](images/StorageToModelTypeActivityDiagram.png)
+
+`Person` and `Tutorial` objects are loaded into the `AddressBook` first.
+
+The `Participation` objects are created using corresponding `Person` and `Tutorial` objects in the `AddressBook`
+based on [uniqueness](#uniqueness-of-objects).
 
 ### Find Command Implementation
 
