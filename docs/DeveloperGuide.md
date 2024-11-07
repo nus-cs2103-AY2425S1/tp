@@ -540,3 +540,52 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix D: Efforts**
+
+### Adapting AB3 for Multiple Entity Types
+
+**Difficulty Level**: Very high
+
+**Challenges Faced**: AB3 was designed to manage a single entity type—contacts. 
+Our project, however, required managing two distinct entities, guests and vendors, each with unique fields and functionalities 
+(e.g., RSVP status for guests, company name for vendors). 
+
+**Effort Required**: Modifying the data model to accommodate multiple entities required extensive refactoring of the underlying structure.
+This included updates to storage, command parsing, and validation logic, to support both entity types consistently while maintaining functionality for existing commands.
+We also spent significant time adjusting current commands to recognize and process both guests and vendors without errors.
+
+**Achievements**: We successfully integrated both entity types while maintaining a clean architecture, enabling BridalBuddy to 
+manage multiple types of contacts with specific fields and functionalities, all without compromising compatibility with existing commands.
+
+### Introducing Optional and Custom Fields
+
+**Difficulty Level**: Medium
+
+**Challenges Faced**: We added new optional fields, such as budget for vendors, and relationship type for guests. 
+This required additional validations and command adjustments to handle partial data inputs, ensuring user flexibility.
+
+**Effort Required**: Implementing and validating optional fields involved command parsing, updates to storage, 
+and ensuring proper input validation (e.g. budgets specified to two decimal places).
+
+**Achievements**: The added flexibility in fields has made BridalBuddy adaptable to a wider variety of planning needs, while the validation ensures high data reliability.
+
+### UI Customization
+
+**Difficulty Level**: High
+
+**Challenges Faced**: Customising the UI to clearly distinguish between guests and vendors required significant modifications to AB3's existing UI structure, 
+which proved more complex than backend coding. Editing the UI relied heavily on visual adjustments, involving considerable trial and error to achieve the right 
+layout and style.
+
+**Effort Required**: We restructured the layout to visually separate guest and vendor lists, allowing users to easily differentiate and manage each contact type.
+
+**Achievements**: The customized UI offers a more intuitive experience, allowing users to quickly access and manage information specific to guests and vendors.
+
+### Statistics Display
+
+**Difficulty Level**: Medium
+
+**Challenges Faced**: Implementing the statistics command required adapting AB3’s structure to dynamically calculate and display counts of guests and vendors.
+
+**Effort Required**: We developed a new `stats` command that calculates and returns the total counts of guests and vendors.
+
+**Achievements**: The `stats` command offers users a quick overview of the total number of guests and vendors, providing planners with valuable insights at a glance.
