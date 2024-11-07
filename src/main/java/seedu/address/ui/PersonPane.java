@@ -85,9 +85,6 @@ public class PersonPane extends UiPart<VBox> {
     private void renderTags() {
         tags.getChildren().clear();
         if (!person.getTags().isEmpty()) {
-            tagsLabel.setManaged(true);
-            tagsLabel.setVisible(true);
-
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> {
@@ -98,9 +95,6 @@ public class PersonPane extends UiPart<VBox> {
 
                         tags.getChildren().add(tagLabel);
                     });
-        } else {
-            tagsLabel.setManaged(false);
-            tagsLabel.setVisible(false);
         }
     }
 
