@@ -11,7 +11,7 @@ import seedu.address.model.attendance.AttendanceEvent;
  * Creates a new attendance event.
  */
 public class CreateAttendanceEventCommand extends Command {
-    public static final String COMMAND_WORD = "createattendance";
+    public static final String COMMAND_WORD = "createattn";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new attendance event.\n"
             + "Parameters: e/EVENT_NAME\n"

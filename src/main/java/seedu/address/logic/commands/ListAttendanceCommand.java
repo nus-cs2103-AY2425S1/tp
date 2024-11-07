@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  */
 public class ListAttendanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "listattendance";
+    public static final String COMMAND_WORD = "listattn";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists students based on attendance.\n"
             + "Parameters: "
             + "e/EVENT_NAME "

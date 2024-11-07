@@ -35,8 +35,6 @@ public class CreateAttendanceEventCommandParser implements Parser<CreateAttendan
                     CreateAttendanceEventCommand.MESSAGE_USAGE));
         }
 
-        //validateEventNames(eventNames);
-
         for (String eventName : eventNames) {
             if (eventName.isEmpty()) {
                 throw new ParseException("Event name cannot be empty.");
@@ -56,13 +54,5 @@ public class CreateAttendanceEventCommandParser implements Parser<CreateAttendan
         }
 
         return new CreateAttendanceEventCommand(eventNames);
-    }
-
-    private void validateEventNames(List<String> eventNames) throws ParseException {
-        for (String eventName : eventNames) {
-            if (eventName.contains("/")) {
-                throw new ParseException("Event name cannot contain '/'.");
-            }
-        }
     }
 }

@@ -21,8 +21,16 @@ public class Messages {
             Show group: show GROUP_INDEX
             Delete: delete INDEX
             List: list
+            Create attendance event: createattn e/EVENT_NAME
+            Delete attendance event: deleteevent e/EVENT_NAME
+            List attendance events: listevents
+            Mark attendance: mark e/EVENT_NAME i/INDEX [i/INDEX...]
+            Unmark attendance: unmark e/EVENT_NAME i/INDEX [i/INDEX...]
+            List attendance: listattn e/EVENT_NAME s/STATUS
             Clear: clear
-            Help: help""";
+            Help: help
+            Exit: exit
+            """;
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command \n%1$s";
     public static final String MESSAGE_EMPTY_COMMAND_FORMAT = "There needs to be a command and/or arguments! \n%1$s";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";

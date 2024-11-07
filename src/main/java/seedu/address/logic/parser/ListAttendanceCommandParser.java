@@ -30,6 +30,8 @@ public class ListAttendanceCommandParser implements Parser<ListAttendanceCommand
 
         String eventName = argMultimap.getValue(PREFIX_EVENT).get().trim();
 
+        validateEventName(eventName);
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT, PREFIX_STATUS);
 
         if (eventName.isEmpty()) {
@@ -48,6 +50,12 @@ public class ListAttendanceCommandParser implements Parser<ListAttendanceCommand
         }
 
         return new ListAttendanceCommand(eventName, isPresent);
+    }
+
+    private void validateEventName(String eventName) throws ParseException {
+        if (eventName.contains("/")) {
+            throw new ParseException("Event name cannot contain '/'.");
+        }
     }
 
 }
