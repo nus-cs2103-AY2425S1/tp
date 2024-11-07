@@ -8,6 +8,7 @@ AppointmentBook *-left-> "1" UniqueAppointmentList
 UniqueAppointmentList *-down-> "1" Appointment
 Appointment *-left-> "1" Person
 
+
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniquePersonList
@@ -22,4 +23,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Status
+
+Appointment *--> AppointmentType
+Appointment *--> DateTime
+Appointment *--> Sickness
+Appointment *--> Medicine
 @enduml
