@@ -31,6 +31,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListShortCutCommand;
+import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -81,6 +82,17 @@ public class AddressBookParserTest {
         ArchiveCommand actualCommand = (ArchiveCommand) parser.parseCommand(ArchiveCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased());
         ArchiveCommand expectedCommand = new ArchiveCommand(INDEX_FIRST_PERSON, descriptor);
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parseCommand_unarchive() throws Exception {
+        Person person = new PersonBuilder().build();
+        ArchivePersonDescriptor descriptor = new ArchivePersonDescriptorBuilder().build();
+        descriptor.setIsArchived(false);
+        UnarchiveCommand actualCommand = (UnarchiveCommand) parser.parseCommand(UnarchiveCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased());
+        UnarchiveCommand expectedCommand = new UnarchiveCommand(INDEX_FIRST_PERSON, descriptor);
         assertEquals(expectedCommand, actualCommand);
     }
 

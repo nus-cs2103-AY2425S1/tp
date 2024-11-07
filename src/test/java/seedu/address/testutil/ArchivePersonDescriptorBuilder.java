@@ -29,7 +29,7 @@ public class ArchivePersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code ArchivePersonDescriptor} with fields containing {@code person}'s details
      */
     public ArchivePersonDescriptorBuilder(Person person) {
         descriptor = new ArchivePersonDescriptor();
@@ -39,10 +39,11 @@ public class ArchivePersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setPostalCode(person.getPostalCode());
+        descriptor.setIsArchived(person.isArchived());
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code ArchivePersonDescriptor} that we are building.
      */
     public ArchivePersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -50,7 +51,7 @@ public class ArchivePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code ArchivePersonDescriptor} that we are building.
      */
     public ArchivePersonDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -58,7 +59,7 @@ public class ArchivePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code ArchivePersonDescriptor} that we are building.
      */
     public ArchivePersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -66,7 +67,7 @@ public class ArchivePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code ArchivePersonDescriptor} that we are building.
      */
     public ArchivePersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
@@ -74,7 +75,7 @@ public class ArchivePersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code ArchivePersonDescriptor}
      * that we are building.
      */
     public ArchivePersonDescriptorBuilder withTags(String... tags) {
@@ -84,10 +85,18 @@ public class ArchivePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code PostalCode} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code PostalCode} of the {@code ArchivePersonDescriptor} that we are building.
      */
     public ArchivePersonDescriptorBuilder withPostalCode(String postalCode) {
         descriptor.setPostalCode(new PostalCode(postalCode));
+        return this;
+    }
+
+    /**
+     * Sets the {@code isArchived} of the {@code ArchivePersonDescriptor} that we are building.
+     */
+    public ArchivePersonDescriptorBuilder withIsArchived(Boolean isArchived) {
+        descriptor.setIsArchived(isArchived);
         return this;
     }
 

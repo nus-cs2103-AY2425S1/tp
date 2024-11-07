@@ -415,6 +415,56 @@ Examples:
 ***Figure 18: Shows filters based on preassigned shortcut***
 
 ---
+### **Archive user: `archive`**
+
+Archive a customer so that it doesn't show when we run `list`
+
+**Format:**
+`archive [index]`
+
+**Warning**
+You must run `list` before running `archive`
+
+**How to run command**:
+
+Assuming there's at least one person that is unarchived.
+
+1. `list`
+2. `archive 1`
+
+---
+### **List archived users `listarchive`**
+
+Shows all archived users only in address book
+
+**Format:**
+`listarchive`
+
+**How to run command**:
+
+Assuming there's at least one person that is archived.
+
+1. `listarchive`
+
+---
+### **Unarchive user: `unarchive`**
+
+Unarchive a customer so that it shows when we run `list`
+
+**Format:**
+`unarchive [index]`
+
+**Warning**
+You must run `listarchive` before running `unarchive`
+
+**How to run command**:
+
+Assuming there's at least one person that is archived.
+
+1. `listarchive`
+2. `unarchive 1`
+
+---
 
 ### **Downloading Data: `download`**  
 Exports Address Book as a CSV file with optional tag-based filtering.
