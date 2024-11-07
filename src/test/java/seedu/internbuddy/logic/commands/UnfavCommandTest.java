@@ -14,7 +14,6 @@ import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
 import seedu.internbuddy.model.UserPrefs;
 import seedu.internbuddy.model.company.Company;
-import seedu.internbuddy.testutil.TypicalCompanies;
 
 public class UnfavCommandTest {
 
@@ -22,8 +21,8 @@ public class UnfavCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Company companyToUnfav = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
-        UnfavCommand unfavCommand = new UnfavCommand(INDEX_FIRST_COMPANY);
+        Company companyToUnfav = model.getFilteredCompanyList().get(INDEX_SIXTH_COMPANY.getZeroBased());
+        UnfavCommand unfavCommand = new UnfavCommand(INDEX_SIXTH_COMPANY);
 
         String expectedMessage = String.format(UnfavCommand.MESSAGE_UNFAV_COMPANY_SUCCESS,
                 companyToUnfav.getName());
@@ -39,21 +38,10 @@ public class UnfavCommandTest {
     }
 
     @Test
-    public void execute_validIndexAlreadyUnfavourited_success() {
-        Company companyToUnfav = model.getFilteredCompanyList().get(INDEX_SIXTH_COMPANY.getZeroBased());
-        UnfavCommand unfavCommand = new UnfavCommand(INDEX_SIXTH_COMPANY);
+    public void execute_validIndexAlreadyUnfavourited_throwsCommandException() {
+        UnfavCommand unfavCommand = new UnfavCommand(INDEX_FIRST_COMPANY);
 
-        String expectedMessage = String.format(UnfavCommand.MESSAGE_COMPANY_ALREADY_UNFAV,
-                companyToUnfav.getName());
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setCompany(companyToUnfav, new Company(companyToUnfav.getName(),
-                companyToUnfav.getPhone(), companyToUnfav.getEmail(),
-                companyToUnfav.getAddress(), companyToUnfav.getTags(),
-                companyToUnfav.getStatus(), companyToUnfav.getApplications(),
-                false, companyToUnfav.getIsShowingDetails()));
-
-        assertCommandSuccess(unfavCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(unfavCommand, model, UnfavCommand.MESSAGE_COMPANY_ALREADY_UNFAV);
     }
 
     @Test

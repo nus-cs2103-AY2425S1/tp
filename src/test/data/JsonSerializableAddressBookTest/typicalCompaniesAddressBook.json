@@ -53,5 +53,14 @@
     "tags": [],
     "applications": [],
     "isFavourite": false
+  }, {
+    "name": "Nvidia",
+    "phone": "4084862000",
+    "email": "info@nvidia.com",
+    "address": "2788 San Tomas Express Way, Santa Clara, CA",
+    "status": "INTERESTED",
+    "tags": [],
+    "applications": [],
+    "isFavourite": true
   } ]
 }

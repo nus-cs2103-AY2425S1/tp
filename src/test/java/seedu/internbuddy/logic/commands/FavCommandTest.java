@@ -4,6 +4,7 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFail
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
+import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SIXTH_COMPANY;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,6 +35,13 @@ public class FavCommandTest {
                 true, companyToFav.getIsShowingDetails()));
 
         assertCommandSuccess(favCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexAlreadyFavourited_throwsCommandException() {
+        FavCommand favCommand = new FavCommand(INDEX_SIXTH_COMPANY);
+
+        assertCommandFailure(favCommand, model, FavCommand.MESSAGE_COMPANY_ALREADY_FAV);
     }
 
     @Test
