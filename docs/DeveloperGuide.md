@@ -592,22 +592,25 @@ Use case ends.
 
 **2a1.** System notifies the teacher that the student is not present in his/her set of students.
 
-## UC 13: Mark all student
+## UC 13: Mark all students
 **System:** EduLog <br>
 **Actor:** Teacher <br>
 
 **MSS:**
 
-1. Teacher types `markall` into the command box
-2. The student list is updated. All the students have a green tick beside their name. Use case ends.
+1. Teacher requests to mark all students.
+2. The system marks all students. 
+Use case ends.
 
 ## UC 14: Unmark all students
 **System:** EduLog <br>
 **Actor:** Teacher <br>
 
 **MSS:**
-1. Teacher types `unmarkall` into the command box
-2. The student list is updated. All students now have a red cross beside their name. Use case ends
+
+1. Teacher requests to unmark all students.
+2. The system unmarks all students.
+   Use case ends.
 
 ## UC15: Calculate Revenue
 
