@@ -158,7 +158,7 @@ Displays a comprehensive summary of the address book, including the total number
 
 ![stats_command](images/statsCommand.png)
 
-Format: `clear`
+Format: `stats`
 
 ### Clearing all entries : `clear`
 
@@ -437,7 +437,7 @@ Format `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL_PRICE`
 * The ACTUAL_PRICE must be a valid numerical value.
 
 Examples:
-* `bought 1 1 ap/1110000` marks property to buy 1 for contact 1 as bought and removes from list.
+* `bought 1 1 ap/1110000` marks property to buy 1 for contact 1 as bought at the actual price of $1110000 and removes from list.
 
 ### To mark property already sold: `sold`
 Records the property that has been sold using the index number of the person and the index number of the property-to-sell in the displayed persons list. This command also removes the purchased property from the property-to-sell list.
@@ -448,7 +448,7 @@ Format `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL_PRICE`
 * The ACTUAL_PRICE must be a valid numerical value.
 
 Examples:
-* `sold 1 1 ap/1110000` marks property to sell 1 for contact 1 as sold and removes from list.
+* `sold 1 1 ap/1110000` marks property to sell 1 for contact 1 as sold at the actual price of $1110000 and removes from list.
 
 ### Pin Contact `pin`
 Pins an unpinned contact at a particular index to the top of the list.
@@ -557,10 +557,6 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **After a property is added** it is not instantly reflected on the Ui. It is reflected on the Ui after a delay. To resolve this,can either wait for a bit or scroll the screen up and down or click on the contact you added the property to.
-4. **Bug in edit command**, the edit command overwrites the property list and deletes them when a person is edited/modified.
-5. **Same Property to Sell** can be tagged to various contacts
-6. **delSell and delBuy** only works with the index displayed using the `list` command and not `findn` or `findp` command.
 
 --------------------------------------------------------------------------------------------------------------------
 

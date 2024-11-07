@@ -26,7 +26,9 @@ public class SortIndividualCommand extends Command {
             + PREFIX_FIELD + "[FIELD] "
             + PREFIX_ORDER + "[ORDER]"
             + " (either \"o/H for High to Low\" or \"o/L for Low to High\")\n"
-            + "Example: " + COMMAND_WORD + " " + "1 " + PREFIX_FIELD + "Price " + PREFIX_ORDER + "L";
+            + "Example: " + COMMAND_WORD + " " + "1 " + PREFIX_FIELD + "Price " + PREFIX_ORDER + "L\n\n"
+            + "Valid FIELD parameter: Price\n"
+            + "Valid ORDER paramter: L, H";
 
     public static final String MESSAGE_AVAILABLE_FIELDS = "Available fields to sort by: Price";
 
