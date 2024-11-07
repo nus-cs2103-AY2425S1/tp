@@ -156,7 +156,7 @@ public class AddPropertyToSellParserTest {
     public void parse_tagLengthExceedsLimit_throwsParseException() {
         assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + SELLING_PRICE_DESC_1500000
                         + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + " t/thisisaverylongtag",
-                AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LENGTH_LIMIT);
+                Property.MESSAGE_PROPERTY_TAG_LENGTH_LIMIT);
     }
 
     @Test
@@ -164,7 +164,7 @@ public class AddPropertyToSellParserTest {
         assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + SELLING_PRICE_DESC_1500000
                         + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11
                         + " t/tag1 t/tag2 t/tag3 t/tag4 t/tag5 t/tag6",
-                AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LIMIT);
+                Property.MESSAGE_PROPERTY_TAG_LIMIT);
     }
 
     @Test

@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import seedu.address.logic.commands.AddPropertyToSellCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortIndividualCommand;
@@ -27,6 +26,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.Price;
+import seedu.address.model.person.Property;
 import seedu.address.model.person.UnitNumber;
 import seedu.address.model.tag.Tag;
 
@@ -180,14 +180,14 @@ public class CommandBox extends UiPart<Region> {
         case MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS:
             errorIndexStart = commandText.indexOf("findp ") + 6;
             break;
-        case AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LIMIT:
+        case Property.MESSAGE_PROPERTY_TAG_LIMIT:
             assert !tagContents.isEmpty() : "tagContents should not be empty here";
             isTagError = true; // To handle tags with multiple words
             // Highlight first tag that appears in the command
             errorIndexStart = commandText.indexOf(tagContents.get(0)) - 2;
             tagLength = tagContents.get(0).length();
             break;
-        case AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LENGTH_LIMIT:
+        case Property.MESSAGE_PROPERTY_TAG_LENGTH_LIMIT:
             assert !tagContents.isEmpty() : "tagContents should not be empty here";
             isTagError = true;
             // Highlight the tag that exceeds the length limit

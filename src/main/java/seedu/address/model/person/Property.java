@@ -16,8 +16,9 @@ import seedu.address.model.tag.Tag;
 public abstract class Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Property names should be alphanumeric";
-    public static final String MESSAGE_PROPERTY_TAG_LIMIT = "The number of tags for a property cannot exceed 2 and "
-            + "the number of characters for each tag cannot exceed 9";
+    public static final String MESSAGE_PROPERTY_TAG_LIMIT = "The number of tags for a property cannot exceed 2";
+    public static final String MESSAGE_PROPERTY_TAG_LENGTH_LIMIT = "The number of characters for each "
+            + "tag cannot exceed 9";
 
     private final PostalCode postalCode;
     private final UnitNumber unitNumber;
