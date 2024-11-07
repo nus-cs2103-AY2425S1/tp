@@ -194,6 +194,7 @@ public class ExportCommandTest {
         assertEquals("\"Ahmad\",\"32109876\",\"kumar@kgoomail.com\"", lines.get(3));
     }
 
+    // Test case written by ChatGPT and adjusted to match output in txt file
     @Test
     public void writeFileTest_txtFormatted() throws IOException {
         List<Map<String, String>> jsonData = new ArrayList<>();
@@ -235,6 +236,7 @@ public class ExportCommandTest {
         assertEquals("}", lines.get(18));
     }
 
+    // Test case written by ChatGPT and adjusted to check for unsupported format
     @Test
     public void writeFile_unsupportedFormat_throwsIllegalArgumentException() {
         List<Map<String, String>> jsonData = new ArrayList<>();

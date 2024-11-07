@@ -13,7 +13,8 @@
 
 ## **Acknowledgements**
 
-Address book app built upon [AB3](https://se-education.org/addressbook-level3/)
+- Some tests and functional code was written with the help of [Github Copilot](https://github.com/features/copilot) autocomplete
+- Address book app built upon [AB3](https://se-education.org/addressbook-level3/)
 
 --------------------------------------------------------------------------------------------------------------------
 
