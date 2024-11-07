@@ -50,7 +50,8 @@ public class AddCommand extends Command {
             + PREFIX_OWED_AMOUNT + "3000 ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "A student with the same name and the same phone number "
+            + "already exists in the address book";
 
     private final Student toAdd;
 

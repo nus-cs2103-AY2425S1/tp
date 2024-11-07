@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -15,20 +17,27 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PAID_AMOUNT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PAID_AMOUNT_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.PAID_AMOUNT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -79,6 +88,30 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB + PAID_AMOUNT_DESC_BOB
                         + OWED_AMOUNT_DESC_BOB,
+                new AddCommand(expectedStudent));
+    }
+
+    @Test
+    public void parse_allFieldsMixedCasePrefixes_success() {
+        Student expectedStudent = new StudentBuilder(AMY).build();
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY_MIXED_CASE + PHONE_DESC_AMY_MIXED_CASE
+            + EMAIL_DESC_AMY_MIXED_CASE + ADDRESS_DESC_AMY_MIXED_CASE + SCHEDULE_DESC_AMY_MIXED_CASE
+                + SUBJECT_DESC_AMY_MIXED_CASE + RATE_DESC_AMY_MIXED_CASE + PAID_AMOUNT_DESC_AMY_MIXED_CASE
+                + OWED_AMOUNT_DESC_AMY_MIXED_CASE,
+                new AddCommand(expectedStudent));
+    }
+
+    @Test
+    public void parse_allFieldsPresentSomeMixedCasePrefixes_success() {
+        Student expectedStudent = new StudentBuilder(AMY).build();
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY_MIXED_CASE
+                        + EMAIL_DESC_AMY_MIXED_CASE + ADDRESS_DESC_AMY + SCHEDULE_DESC_AMY_MIXED_CASE
+                        + SUBJECT_DESC_AMY + RATE_DESC_AMY + PAID_AMOUNT_DESC_AMY_MIXED_CASE
+                        + OWED_AMOUNT_DESC_AMY_MIXED_CASE,
                 new AddCommand(expectedStudent));
     }
 
