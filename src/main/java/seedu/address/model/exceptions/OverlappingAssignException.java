@@ -5,6 +5,11 @@ package seedu.address.model.exceptions;
  * events that occur at the same time.
  */
 public class OverlappingAssignException extends RuntimeException {
+
+    /**
+     * Constructor for this class
+     * @param alrAssignedEvent
+     */
     public OverlappingAssignException(String alrAssignedEvent) {
         super(String.format("The volunteer is already assigned to %s which occurs at the same time.",
                 alrAssignedEvent));

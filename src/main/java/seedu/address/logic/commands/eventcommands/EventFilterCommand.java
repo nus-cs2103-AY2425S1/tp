@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.eventcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.EVENT_COMMAND_INDICATOR;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class EventFilterCommand extends Command {
             + ": Filters the volunteer display list to only show volunteers who are available to attend the "
             + "event identified by the index number used in the displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + EVENT_COMMAND_INDICATOR + " " + COMMAND_WORD + " 1";
 
     private static final String MESSAGE_FILTER_EVENT_SUCCESS = "Showing details of volunteers who are free for %s";
 
