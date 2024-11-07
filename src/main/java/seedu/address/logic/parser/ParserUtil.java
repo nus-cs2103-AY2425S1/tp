@@ -46,7 +46,6 @@ public class ParserUtil {
         String trimmedEntity = entity.trim();
         String normalizedEntity = trimmedEntity.toLowerCase();
 
-        // TODO: Not sure if this is magic string?
         switch (normalizedEntity) {
         case "contact", "company", "job", "all":
             return normalizedEntity;

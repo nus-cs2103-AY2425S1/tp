@@ -30,7 +30,7 @@
       <FlowPane fx:id="requirements" vgap = "5" hgap = "5"/>
       <Label fx:id="company" styleClass="cell_small_label" text="\$company" />
       <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
-      <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+      <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>
