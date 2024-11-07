@@ -92,6 +92,4 @@ public class AddLogEntryCommand extends Command {
                 .add("appointmentDate", appointmentDate)
                 .toString();
     }
-
-
 }
