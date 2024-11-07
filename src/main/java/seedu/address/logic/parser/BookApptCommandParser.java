@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ArgumentTokenizer.checkPrefixPresentAndValidPrefix;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 
@@ -31,6 +32,10 @@ public class BookApptCommandParser implements Parser<BookApptCommand> {
         requireNonNull(args);
         assert args != null : "Arguments cannot be null";
         logger.info("Parsing BookApptCommand");
+
+        checkPrefixPresentAndValidPrefix(args, BookApptCommand.MESSAGE_USAGE,
+                PREFIX_DATETIME, PREFIX_HEALTHSERVICE);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME,
             PREFIX_HEALTHSERVICE);
 

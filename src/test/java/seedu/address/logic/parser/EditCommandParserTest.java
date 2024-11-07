@@ -52,6 +52,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NRIC_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
@@ -95,10 +96,15 @@ public class EditCommandParserTest {
         assertParseFailure(parser, NAME_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY, MESSAGE_EMPTY_NRIC);
 
         // no field specified
-        assertParseFailure(parser, VALID_NRIC_AMY, EditCommand.MESSAGE_NOT_EDITED);
+        String expectedMessageForNoFields = "No valid prefixes found \n" + MESSAGE_USAGE;
+        assertParseFailure(parser, VALID_NRIC_AMY, expectedMessageForNoFields);
 
         // no NRIC and no field specified
-        assertParseFailure(parser, "", MESSAGE_EMPTY_NRIC);
+        String expectedMessageForNoNricAndNoFields = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
+        assertParseFailure(parser, "", expectedMessageForNoNricAndNoFields);
+
+        // field specified but no NRIC
+        assertParseFailure(parser, NRIC_DESC_AMY, MESSAGE_EMPTY_NRIC);
     }
 
     @Test
