@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.DELETE_COMMAND_USAGE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_RANGE;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
 
 import seedu.address.commons.core.index.Index;
@@ -25,7 +25,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         String[] splitArgs = args.trim().split("\\s+");
 
         if (args.length() < 1) {
-            throw new ParseException(DELETE_COMMAND_USAGE);
+            throw new ParseException(DeleteCommand.MESSAGE_USAGE);
         } else if (splitArgs.length < 2) {
             throw new ParseException(MESSAGE_MISSING_INDEX);
         }
@@ -33,8 +33,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         String entityType = splitArgs[0]; // either "contact, "job" or "company"
         String indexString = splitArgs[1];
 
-        Index index = ParserUtil.parseIndex(indexString);
-
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(indexString);
+        } catch (ParseException e) {
+            throw new ParseException(MESSAGE_INVALID_INDEX_RANGE);
+        }
         switch (entityType) {
         case DeleteContactCommand.ENTITY_WORD:
             return new DeleteContactCommand(index);
@@ -43,7 +47,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         case DeleteCompanyCommand.ENTITY_WORD:
             return new DeleteCompanyCommand(index);
         default:
-            throw new ParseException(DELETE_COMMAND_USAGE);
+            throw new ParseException(DeleteCommand.MESSAGE_USAGE);
         }
     }
 }

@@ -19,8 +19,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is out of range of the displayed"
             + " list";
+    public static final String MESSAGE_INVALID_INDEX_RANGE = "The provided index is invalid. "
+            + "Please enter a positive integer within the displayed list's range.";
     public static final String MESSAGE_MISSING_INDEX = "The index is missing";
-    public static final String DELETE_COMMAND_USAGE = "Invalid delete command. Specify 'company', 'contact' or 'job'.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
