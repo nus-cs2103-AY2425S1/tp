@@ -188,8 +188,8 @@ public class DeleteCommand extends Command {
      */
     public void removeWeddingJobs(Person personToDelete, Model model) {
         List<Wedding> weddingList = model.getFilteredWeddingList();
-        for (Wedding wedding : weddingList) {
-            personToDelete.removeWeddingJob(wedding);
+        for (Index index : weddingIndices) {
+            personToDelete.removeWeddingJob(weddingList.get(index.getZeroBased()));
         }
     }
 
