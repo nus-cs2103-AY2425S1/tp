@@ -1,11 +1,8 @@
 ---
 
 layout: default.md
-
 title: "User Guide"
-
 pageNav: 3
-
 ---
 
 # DLTbook User Guide
@@ -55,7 +52,7 @@ Not sure if you have Java? Check out [Setup Guide](#setup-guide)
 
 ## Beginner's Guide
 
-<panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded> 
+<panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded>
 
 _If you're new to DLTbook or the concept of Distributed Ledger Technology (DLT), this guide will walk you through the
 basics. Here, we'll cover key concepts, important terminology, and guide you through the first steps in using DLTbook._
@@ -76,7 +73,7 @@ Unlike traditional databases, DLTs do not have a central administrator, which me
 decentralized.
 </box>
 
-<box type="tip" seamless> 
+<box type="tip" seamless>
 
 **Why is DLTBook useful in managing contacts?**
 
