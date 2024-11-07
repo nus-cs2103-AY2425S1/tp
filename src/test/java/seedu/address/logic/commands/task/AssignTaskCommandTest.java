@@ -105,7 +105,8 @@ public class AssignTaskCommandTest {
         AssignTaskCommand command = new AssignTaskCommand(Index.fromZeroBased(0), Set.of(INDEX_FIRST));
 
         // Command should throw a CommandException for non-vendor person
-        assertThrows(CommandException.class, MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK, () -> command.execute(model));
+        assertThrows(CommandException.class, String.format(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK,
+                nonVendorPerson.getName()), () -> command.execute(model));
     }
 
     @Test

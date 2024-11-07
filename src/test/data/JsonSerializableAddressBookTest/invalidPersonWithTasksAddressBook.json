@@ -42,7 +42,7 @@
       "description" : "Buy groceries",
       "isDone" : false
     }],
-    "isVendor" : true
+    "isVendor" : false
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",

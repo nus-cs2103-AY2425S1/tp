@@ -17,7 +17,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.task.Task;
 
 
@@ -80,15 +79,8 @@ public class AssignTaskCommand extends Command {
 
         Person personToEdit = lastShownPersonList.get(personIndex.getZeroBased());
 
-        boolean isVendor = false;
-        for (Vendor vendor : model.getFilteredVendorList()) {
-            if (personToEdit.getName().equals(vendor.getName())) {
-                isVendor = true;
-                break;
-            }
-        }
-        if (!isVendor) {
-            throw new CommandException(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK);
+        if (!personToEdit.isVendor()) {
+            throw new CommandException(String.format(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK, personToEdit.getName()));
         }
 
         Set<Task> tasksToAdd = new HashSet<>();

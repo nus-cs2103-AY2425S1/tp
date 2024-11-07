@@ -25,20 +25,31 @@ public class UnassignVendorCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unassigns the vendor identified by the index number used in the displayed person list.\n"
-            + " The person becomes a normal contact in the addressbook and cannot have tasks assigned to it.\n"
+            + "The person becomes a normal contact in the addressbook and cannot have tasks assigned to it.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
 
-    public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "This vendor cannot be unassigned "
-        + "as it still has a task.";
-
+    public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "The Vendor: %1$s still has tasks"
+            + " assigned to them";
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
     private final Index targetIndex;
+    private boolean force = false;
 
     /**
      * Creates an UnassignVendorCommand to assign the specified {@code Person} as a vendor.
+     */
+    public UnassignVendorCommand(Index targetIndex, boolean force) {
+        assert targetIndex != null : "Target index must not be null";
+        requireNonNull(targetIndex);
+        this.targetIndex = targetIndex;
+        this.force = force;
+    }
+
+    /**
+     * Creates an UnassignVendorCommand to assign the specified {@code Person} as a vendor, defaulting to a
+     * non-forced command.
      */
     public UnassignVendorCommand(Index targetIndex) {
         assert targetIndex != null : "Target index must not be null";
@@ -59,11 +70,21 @@ public class UnassignVendorCommand extends Command {
         Person personToUnassign = lastShownList.get(targetIndex.getZeroBased());
         assert personToUnassign != null : "Person to unassign must not be null";
 
-
         // need to change to check if model has the vendor already existing
         if (!model.hasVendor(personToUnassign)) {
             throw new CommandException(String.format(MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR,
                     personToUnassign.getName()));
+        }
+
+        if (personToUnassign.hasTasks()) {
+            if (this.force) {
+                personToUnassign.clearTasks();
+            } else {
+                throw new CommandException(String.format(MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS,
+                        personToUnassign.getName())
+                + ".\n"
+                + Messages.MESSAGE_FORCE_UNASSIGN_VENDOR);
+            }
         }
 
         model.unassignVendor(personToUnassign);

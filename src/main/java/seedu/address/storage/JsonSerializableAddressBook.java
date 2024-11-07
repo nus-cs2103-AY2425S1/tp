@@ -13,7 +13,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Event;
@@ -34,7 +33,6 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    private final List<JsonAdaptedVendor> vendors = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
@@ -45,12 +43,10 @@ class JsonSerializableAddressBook {
     @JsonCreator
     public JsonSerializableAddressBook(
             @JsonProperty("persons") List<JsonAdaptedPerson> persons,
-            @JsonProperty("vendors") List<JsonAdaptedVendor> vendors,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("weddings") List<JsonAdaptedWedding> weddings,
             @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.persons.addAll(persons);
-        this.vendors.addAll(vendors);
         this.tags.addAll(tags);
         this.weddings.addAll(weddings);
         this.tasks.addAll(tasks);
@@ -63,7 +59,6 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        vendors.addAll(source.getVendorList().stream().map(JsonAdaptedVendor::new).collect(Collectors.toList()));
         tags.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         weddings.addAll(source.getWeddingList().stream().map(JsonAdaptedWedding::new).collect(Collectors.toList()));
         tasks.addAll(source.getTaskList().stream().map(this::mapToJsonAdaptedTask).collect(Collectors.toList()));;
@@ -82,13 +77,12 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
-        }
-        for (JsonAdaptedVendor jsonAdaptedVendor : vendors) {
-            Vendor vendor = jsonAdaptedVendor.toModelType();
-            if (addressBook.hasVendor(vendor)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_VENDOR);
+            if (jsonAdaptedPerson.isVendor()) {
+                addressBook.addVendor(person);
             }
-            addressBook.addVendor(vendor);
+            if (jsonAdaptedPerson.hasTasks()) {
+                addressBook.addVendor(person);
+            }
         }
         for (JsonAdaptedTag jsonAdaptedTag : tags) {
             Tag tag = jsonAdaptedTag.toModelType();

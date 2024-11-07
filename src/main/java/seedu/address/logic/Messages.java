@@ -37,8 +37,8 @@ public class Messages {
     public static final String MESSAGE_UNASSIGN_TASK_SUCCESS = "Removed task(s) %1$s from %2$s.";
     public static final String MESSAGE_TASK_NOT_FOUND_IN_CONTACT = "Some task(s) "
             + "were not found in the person's task list.";
-    public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "The index specified does not refer "
-            + "to a Vendor, tasks can only be assigned to vendors.";
+    public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "%1$s is not a Vendor, "
+            + "tasks can only be assigned to vendors.";
     public static final String MESSAGE_ADD_WEDDING_SUCCESS = "Added wedding(s) %1$s to %2$s.";
     public static final String MESSAGE_REMOVE_WEDDING_SUCCESS = "Removed wedding(s) %1$s from %2$s.";
     public static final String MESSAGE_WEDDING_NOT_FOUND = "One or more specified weddings do not exist in "
@@ -53,6 +53,8 @@ public class Messages {
             + " This will create the require Tags.";
     public static final String MESSAGE_FORCE_DELETE_TAG = "Use f/ to force the deletion of tags."
             + " This will unassign all people currently with the Tag.";
+    public static final String MESSAGE_FORCE_UNASSIGN_VENDOR = "Use f/ to force the unassignment of vendors."
+            + " This will unassign all tasks currently with the Vendor.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

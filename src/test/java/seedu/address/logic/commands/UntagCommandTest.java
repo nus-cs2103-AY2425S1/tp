@@ -34,12 +34,12 @@ public class UntagCommandTest {
     @Test
     public void execute_validTagsUnfilteredList_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        HashSet<Tag> tagsToRemove = new HashSet<>(List.of(new Tag(new TagName("friends"))));
+        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("photographer"))));
 
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST, tagsToRemove);
 
         String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_TAG_SUCCESS,
-                "friends", personToEdit.getName().toString());
+                "photographer", personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
@@ -65,16 +65,16 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Phone("99999999"),
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
-                new HashSet<>(Arrays.asList(new Tag(new TagName("friends")), new Tag(new TagName("owesMoney")))),
+                new HashSet<>(Arrays.asList(new Tag(new TagName("florist")), new Tag(new TagName("photographer")))),
                 new HashSet<>(),
                 new HashSet<>()
         );
         model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()), personWithTags);
-        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("friends")),
-                new Tag(new TagName("owesMoney"))));
+        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("florist")),
+                new Tag(new TagName("photographer"))));
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST, tagsToRemove);
         String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_TAG_SUCCESS,
-                "owesMoney, friends", personWithTags.getName().toString());
+                "florist, photographer", personWithTags.getName().toString());
 
         // Create the expected model with the updated tags (i.e., an empty set of tags)
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -137,8 +137,8 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
                 new HashSet<>(), // No tags
-                new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Jiazhen's Wedding")),
-                        new Wedding(new WeddingName("Wedding 29th August")))),
+                new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Carla's Wedding")),
+                        new Wedding(new WeddingName("Amy's Wedding")))),
                         new HashSet<>()
         );
 

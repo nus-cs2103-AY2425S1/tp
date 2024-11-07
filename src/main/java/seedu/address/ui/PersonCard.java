@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private FlowPane vendor;
+    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane weddings;
@@ -69,6 +71,9 @@ public class PersonCard extends UiPart<Region> {
         for (Task task : person.getTasks()) {
             TaskCard taskCard = new TaskCard(task, taskIndex++, COMPACT_TASK_FXML);
             tasks.getChildren().add(taskCard.getRoot());
+        }
+        if (person.isVendor()) {
+            vendor.getChildren().add(new Label("VENDOR"));
         }
     }
 }
