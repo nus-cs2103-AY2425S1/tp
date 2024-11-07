@@ -73,6 +73,25 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_consecutiveCommand() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        Command consecutiveCommand = parser.parseCommand(ListCommand.COMMAND_WORD);
+        assertTrue(consecutiveCommand instanceof ConsecutiveCommand);
+    }
+
+    @Test
+    public void parseCommand_consecutiveCommand_help() throws Exception {
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_consecutiveCommand_delete() throws Exception {
+        assertTrue(parser.parseCommand(DeleteCommand.COMMAND_WORD + " 1") instanceof DeleteCommand);
+        assertTrue(parser.parseCommand(DeleteCommand.COMMAND_WORD + " 1") instanceof DeleteCommand);
+    }
+
+    @Test
     public void parseCommand_deleteGroup() throws Exception {
         DeleteGroupCommand command = (DeleteGroupCommand) parser.parseCommand(
                 DeleteGroupCommand.COMMAND_WORD + " " + GROUP_A.getGroupName().toString());

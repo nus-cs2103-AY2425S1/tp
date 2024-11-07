@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -26,8 +29,10 @@ public class GroupCommand extends Command {
     public static final String MESSAGE_NO_STUDENTS_FOUND = "No matching students found.";
 
     public static final String MESSAGE_SUCCESS = "Group %s created with %d student(s)";
-
     public static final String MESSAGE_DUPLICATE_GROUP = "Group name already taken!!";
+    public static final String EMPTY_STUDENT = "Please do not enter an empty string for student name!";
+    public static final String DUPLICATE_STUDENT_FOUND = "Duplicate student found in input: %s";
+    public static final String STUDENTS_NOT_FOUND = "The following students could not be found: %s";
     private final String groupName;
     private final List<String> students;
 
@@ -52,12 +57,40 @@ public class GroupCommand extends Command {
         if (model.hasGroupName(new Group(groupName, List.of()))) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
+
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         List<Person> allPersons = model.getFilteredPersonList();
-        List<Person> groupMembers = allPersons.stream()
-                .filter(person -> students.contains(person
-                        .getName().fullName))
-                .toList();
+        List<Person> groupMembers = new ArrayList<>();
+        List<String> notFoundStudents = new ArrayList<>();
+
+        Set<String> uniqueStudents = new HashSet<>();
+        for (String studentName : students) {
+            if (studentName.equals("")) {
+                throw new CommandException(EMPTY_STUDENT);
+            }
+            if (!uniqueStudents.add(studentName)) {
+                throw new CommandException(String.format(DUPLICATE_STUDENT_FOUND, studentName));
+            }
+        }
+
+        for (String studentName : students) {
+            boolean found = false;
+            for (Person person : allPersons) {
+                if (person.getName().fullName.equals(studentName)) {
+                    groupMembers.add(person);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                notFoundStudents.add(studentName);
+            }
+        }
+
+        if (!notFoundStudents.isEmpty()) {
+            throw new CommandException(String.format(STUDENTS_NOT_FOUND,
+                    String.join(", ", notFoundStudents)));
+        }
 
         if (groupMembers.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENTS_FOUND);

@@ -12,13 +12,19 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_EMPTY_LIST = "There are no persons in the address book.";
 
+    public static final String MESSAGE_SUCCESS = "Listed all %d person(s)";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        int addressBookSize = model.getAddressBook().getPersonList().size();
+        if (addressBookSize == 0) {
+            return new CommandResult(MESSAGE_EMPTY_LIST);
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, addressBookSize));
+        }
     }
 }
