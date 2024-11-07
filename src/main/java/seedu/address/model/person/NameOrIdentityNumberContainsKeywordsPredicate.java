@@ -19,8 +19,8 @@ public class NameOrIdentityNumberContainsKeywordsPredicate implements Predicate<
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword) ||
-                        StringUtil.containsWordIgnoreCase(person.getIdentityNumber().identificationNumber, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
+                        || StringUtil.containsWordIgnoreCase(person.getIdentityNumber().identificationNumber, keyword));
     }
 
     @Override
@@ -34,8 +34,8 @@ public class NameOrIdentityNumberContainsKeywordsPredicate implements Predicate<
             return false;
         }
 
-        NameOrIdentityNumberContainsKeywordsPredicate otherNameOrIdentityNumberContainsKeywordsPredicate
-                = (NameOrIdentityNumberContainsKeywordsPredicate) other;
+        NameOrIdentityNumberContainsKeywordsPredicate otherNameOrIdentityNumberContainsKeywordsPredicate =
+                (NameOrIdentityNumberContainsKeywordsPredicate) other;
         return keywords.equals(otherNameOrIdentityNumberContainsKeywordsPredicate.keywords);
     }
 
