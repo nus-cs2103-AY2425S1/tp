@@ -65,6 +65,10 @@ public class EditPersonDescriptorTest {
         //different caregivers -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withCaregivers(VALID_NRIC_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        //different patients -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPatients(VALID_NRIC_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
