@@ -54,7 +54,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Populates command box with  {@param text}.
+     * Populates command box with {@param text}.
      */
     private void autoCompleteText(String text) {
         commandTextField.setText(text);

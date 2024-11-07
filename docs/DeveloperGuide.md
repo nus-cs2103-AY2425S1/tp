@@ -624,7 +624,7 @@ _Similar to UC10 except without extension 2b._
 
 **MSS**
 
-1.  Actor inputs a command into the System.
+1. Actor inputs a command into the System.
 2. System processes the command and confirms its success.
 3. Actor presses the "Up" arrow key to retrieve and re-populate the previous command in the input field.
 
@@ -641,7 +641,7 @@ _Similar to UC10 except without extension 2b._
 - 3a. Multiple previous commands available.
 
     - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
-    - 3a2 System displays each previous command in sequence.
+    - 3a2. System displays each previous command in sequence.
 
       Use case ends.
 
