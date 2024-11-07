@@ -43,7 +43,7 @@ public class UnmarkCommandParserTest {
         String expectedMessage;
 
         // missing index
-        expectedMessage = ParserUtil.MESSAGE_INVALID_INDEX;
+        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE);
         assertParseFailure(parser, TUTORIAL_DESC_ONE, expectedMessage);
 
         // missing tutorial number with prefix

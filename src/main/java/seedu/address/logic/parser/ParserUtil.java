@@ -25,8 +25,10 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index must be a positive integer.";
     public static final String MESSAGE_INVALID_SORT_ORDER = "Sort order is not 1 or -1, or invalid field provided.";
+    public static final String MESSAGE_INVALID_INDEX_WILDCARD_COMMAND = "Index must be a positive integer, or the "
+            + "wildcard *.";
     public static final String INDEX_WILDCARD = "*";
 
     /**
@@ -52,7 +54,11 @@ public class ParserUtil {
         if (trimmedIndex.equals(ParserUtil.INDEX_WILDCARD)) {
             return Index.getWildcardIndex();
         }
-        return ParserUtil.parseIndex(trimmedIndex);
+
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX_WILDCARD_COMMAND);
+        }
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**

@@ -17,7 +17,7 @@ public class MarkCommand extends TutorialCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks attendance for the contact "
             + "by the index number used in the last person listing and for the tutorial number(s) inputted.\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer) "
+            + "INDEX (must be a positive integer or wildcard *) "
             + "tut/TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " 1 " + "tut/1-5, "
             + COMMAND_WORD + " 1 " + "tut/1,4,6";

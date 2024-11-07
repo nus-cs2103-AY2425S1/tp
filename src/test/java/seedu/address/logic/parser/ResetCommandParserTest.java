@@ -32,7 +32,8 @@ public class ResetCommandParserTest {
 
     @Test
     public void parse_missingIndex_failure() {
-        assertParseFailure(parser, TUTORIAL_DESC_ONE, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, TUTORIAL_DESC_ONE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResetCommand.MESSAGE_USAGE));
     }
 
     @Test
