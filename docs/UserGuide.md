@@ -168,8 +168,9 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+- **Extraneous parameters are not allowed and will cause an error.** Even in commands that do not need any parameters
+  (such as `help`, `list`, `exit` and `clear`), the program will still notify the user when unrecognized parameters are present.
+  This is to prevent the user from making mistakes and misinterpreting what a command does.
 
 - Dates supplied by the user are assumed to be in Anno Domini or the Common Era. In other words, the user will not be able to enter a date before the year 0001 AD. 
 
