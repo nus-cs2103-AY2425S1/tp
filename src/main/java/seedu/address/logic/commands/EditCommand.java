@@ -20,7 +20,10 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Date;
@@ -53,7 +56,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Error. This edit will result in a person "
+            + "that already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -82,12 +86,34 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        //Making sure big changes in person attributes will not need lead to duplicate persons
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        //Making sure gradual changes in person attributes will not lead to duplicate persons
+        if (personToEdit.isSamePerson(editedPerson)) {
+            // Create a temporary model with a copy of the current address book and user preferences.
+            Model tempModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                    new UserPrefs(model.getUserPrefs()));
+
+            // Update the tempModel to show all persons, ensuring the filtered list is complete.
+            tempModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+            // Count duplicates by filtering based on isSamePerson
+            long duplicateCount = tempModel.getFilteredPersonList().stream()
+                    .filter(person -> person.isSamePerson(editedPerson))
+                    .count();
+
+            // If any duplicates are found (count > 1), throw a CommandException.
+            if (duplicateCount > 1) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

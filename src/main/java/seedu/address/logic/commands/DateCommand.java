@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,31 +20,31 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Changes the date of an existing person in the address book.
+ * Updates the date and time of an existing person in the address book.
  */
 public class DateCommand extends Command {
-    public static final Date NO_DATE = new Date(LocalDateTime.MIN);
     public static final String COMMAND_WORD = "date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the appointment date and time of the person identified "
+            + ": Edits the appointment date and time (d/M/yyyy HHmm) of the person identified "
             + "by their name and/or phone and/or email. At least one identifier must be used."
             + "Existing date and time will be overwritten by the input.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME ]"
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
-            + PREFIX_DATE + "DATE\n"
+            + PREFIX_DATE + "DATE_TIME\n"
             + "Example: " + COMMAND_WORD + " n/John Doe "
             + PREFIX_DATE + "12/10/2024 1800";
 
     public static final String MESSAGE_ARGUMENTS = "Person: %1$s, Date: %2$s";
-    public static final String MESSAGE_ADD_DATE_SUCCESS = "Added date to Person: %1$s";
-    public static final String MESSAGE_DELETE_DATE_SUCCESS = "Removed date from Person: %1$s";
+    public static final String MESSAGE_ADD_DATE_SUCCESS = "Added date and time to Person: %1$s";
+    public static final String MESSAGE_DELETE_DATE_SUCCESS = "Removed date and time from Person: %1$s";
     public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found."
             + " Use more attributes (name, phone number, email) to identify the exact person.";
 
     public static final String MESSAGE_NO_PERSON_FOUND = "No matching person found. Please check the details.";
-    public static final String MESSAGE_OVERLAPPING_DATES = "Given date & time coincides with another appointment below."
+    public static final String MESSAGE_OVERLAPPING_DATES = "Given date and time coincides with "
+            + "another appointment below."
             + " Please choose another date and time.";
 
     private final Optional<String> name;
@@ -92,7 +91,7 @@ public class DateCommand extends Command {
         List<Person> matchingPersonsWithDate = lastShownList.stream()
                 .filter(person -> person.getDate().equals(this.date))
                 .collect(Collectors.toList());
-        if (!matchingPersonsWithDate.isEmpty() && !date.equals(NO_DATE)) {
+        if (!matchingPersonsWithDate.isEmpty() && !date.equals(Date.NO_DATE)) {
             DatePredicate predicate = new DatePredicate(date);
             model.updateFilteredPersonList(predicate);
             throw new CommandException(MESSAGE_OVERLAPPING_DATES);
@@ -135,7 +134,9 @@ public class DateCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToAdd) {
-        String message = !(date.value == LocalDateTime.MIN) ? MESSAGE_ADD_DATE_SUCCESS : MESSAGE_DELETE_DATE_SUCCESS;
+        String message = !(date.value.equals(Date.NO_DATE.value))
+                ? MESSAGE_ADD_DATE_SUCCESS
+                : MESSAGE_DELETE_DATE_SUCCESS;
         return String.format(message, Messages.format(personToAdd));
     }
 
