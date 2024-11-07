@@ -335,44 +335,43 @@ The following activity diagram summarizes what happens when a user interacts wit
 
 Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlikely to have) - `**`, Super Low (highly unlikely to have) - `*`
 
-| Priority | As a …​                | I want to …​                                                                 | So that…​                                                                                     |
-| -------- |------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
- | `****` | User                   | Mark elderly as called                                                       | I can easily keep track of who has been contacted                                             |
- | `****` | User                   | List elderly contacts by priority (prioritised by last called date)          | I know whom to contact first                                                                  | 
- | `****` | Frequent User          | Remove elderly from the list                                                 | Any elderly who has passed away or left the program will no longer be on the list             | 
- | `****` | User                   | Record details of the elderly (Name, NRIC etc.)                              | I know who I'm calling                                                                        | 
- | `****` | Frequent User          | Add new elderly who have joined the Befriending Program                      | I can keep track of these new elderly and call them regularly                                 | 
- | `****` | Expert User            | Take notes regarding the call                                                | I can keep track of things which should be followed up on                                     | 
- | `****` | Frequent User          | Update elderly details                                                       | I can keep the elderly details up to date                                                     | 
- | `****` | Frequent User          | Search elderly by name or NRIC                                               | I can more easily find elderly in the list                                                    |
- | `****` | Forgetful User         | Mark calls with a specific date                                              | I can mark a call that I previously forgot to mark                                            | 
- | `****` | User                   | View the next contact date for each elderly                                  | I can quickly see which day the next call should be made to better plan my work               |
- | `****` | Frequent User          | Know if the same elderly has been added before                               | I don't add the same elderly multiple times                                                   |
-| `***` | Expert User            | Generate a monthly report to AIC / excel sheet                               | show the progress and outcome of the Befriending Program                                      | 
-| `***` | Frequent User          | Use my up and down arrow keys to go back and forth between commands          | I don't have to retype the same commands                                                      | 
-| `***` | New user               | Receive a list of commands that the address book uses                        | I can familiarise myself with the commands and shortcuts                                      | 
-| `***` | Frequent User          | I can undo my actions                                                        | I can correct my mistakes                                                                     | 
-| `***` | Expert User            | Quickly update the status of multiple elderly contacts                       | I can efficiently manage my tasks                                                             | 
-| `***` | New user               | Try out the app with sample data                                             | I can familiarise myself with it without worrying about the data I am playing around with     | 
-| `***` | Onboarded user         | Purge all sample data                                                        | The app is ready to be used                                                                   | 
-| `***` | Frequent User          | I can view a history of calls made to an elderly contact                     | I can track past interactions                                                                 | 
-| `***` | Frequent User          | Change the frequency of calls needed to be made for each elderly             | I can track when I need to make calls                                                         | 
-| `***` | Expert User            | Archive elderly contacts who are temporarily not part of the program         | I can keep my contact list organised                                                          | 
+| Priority | As a …​                | I want to …​                                                                 | So that…​                                                                                            |
+| -------- |------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+ | `****` | User                   | Mark elderly as called                                                       | I can easily keep track of who has been contacted                                                    |
+ | `****` | User                   | List elderly contacts by priority (prioritised by last called date)          | I know whom to contact first                                                                         | 
+ | `****` | Frequent User          | Remove elderly from the list                                                 | Any elderly who has passed away or left the program will no longer be on the list                    | 
+ | `****` | User                   | Record details of the elderly (Name, NRIC etc.)                              | I know who I'm calling                                                                               | 
+ | `****` | Frequent User          | Add new elderly who have joined the Befriending Program                      | I can keep track of these new elderly and call them regularly                                        | 
+ | `****` | Expert User            | Take notes regarding the call                                                | I can keep track of things which should be followed up on                                            | 
+ | `****` | Frequent User          | Update elderly details                                                       | I can keep the elderly details up to date                                                            | 
+ | `****` | Frequent User          | Search elderly by name or NRIC                                               | I can more easily find elderly in the list                                                           |
+ | `****` | Forgetful User         | Mark calls with a specific date                                              | I can mark a call that I previously forgot to mark                                                   | 
+ | `****` | User                   | View the next contact date for each elderly                                  | I can quickly see which day the next call should be made to better plan my work                      |
+ | `****` | Frequent User          | Know if the same elderly has been added before                               | I don't add the same elderly multiple times                                                          |
+| `***` | Frequent User          | Use my up and down arrow keys to go back and forth between commands          | I don't have to retype the same commands                                                             | 
+| `***` | New user               | Receive a list of commands that the address book uses                        | I can familiarise myself with the commands and shortcuts                                             | 
+| `***` | Frequent User          | I can undo my actions                                                        | I can correct my mistakes                                                                            | 
+| `***` | Expert User            | Quickly update the status of multiple elderly contacts                       | I can efficiently manage my tasks                                                                    | 
+| `***` | New user               | Try out the app with sample data                                             | I can familiarise myself with it without worrying about the data I am playing around with            | 
+| `***` | Onboarded user         | Purge all sample data                                                        | The app is ready to be used                                                                          | 
+| `***` | Frequent User          | I can view a history of calls made to an elderly contact                     | I can track past interactions                                                                        | 
+| `***` | Frequent User          | Change the frequency of calls needed to be made for each elderly             | I can track when I need to make calls                                                                | 
+| `***` | Expert User            | Archive elderly contacts who are temporarily not part of the program         | I can keep my contact list organised                                                                 | 
 | `***` | Frequent User          | Export/Import my data across computers                                       | If I would like to work using separate computers, e.g. a laptop and desktop, I can keep them updated | 
-| `***` | Expert User            | Set multiple contacts as emergency contacts                                  | I can call their next of kin in the event the elderly do not pick up or needs help            | 
-| `***` | Frequent User          | Export a specific elderly's details and history (All information)            | I can share it with another employee                                                          | 
- | `**` | Frequent User          | Make changes to the style of my address book                                 | I can be happy when I use the address book                                                    | 
- | `**` | Frequent user          | Mark contacted elderly quickly using shortcuts                               | I can work efficiently to contact the entire list                                             | 
- | `**` | Detail-orientated user | Add tags to each elderly                                                     | I can keep track of details that are important when taking the call                           | 
- | `**` | Expert User            | Add custom fields                                                            | I can add details of elderly which are not currently in the system                            | 
- | `**` | Expert User            | Visualise how many and which elderly to be called in a calendar              | I can plan accordingly if any elderly needs to switch dates                                   | 
- | `**` | Expert User            | Filter through certain details added for the elderly                         | I can keep track of how the elderly are doing easily                                          | 
- | `**` | Frequent User          | Receive notifications for the contacts that are due in the next hour         | I can prioritize and complete the calls on time                                               | 
- | `**` | New User               | Receive feedback on the commands I have given if they are incorrect          | I can easily correct the errors in the commands given                                         |
- | `*` | Expert user            | Be notified by the app when too many elderly calls are scheduled on one day  | I will not overwork myself or spend too little time calling each elderly                      | 
- | `*` | Expert User            | I can see a dashboard of my weekly or monthly call stats                     | I can track my productivity and ensure that I hit my KPI                                      | 
- | `*` | Expert User            | Set up automated messages for elderly contacts that are not reachable        | I can have an alternative communication method                                                | 
- | `*` | Expert User            | Use AI to calculate the priority list for elderly based on their information | The correct elderly are being prioritised                                                     | 
+| `***` | Expert User            | Set multiple contacts as emergency contacts                                  | I can call their next of kin in the event the elderly do not pick up or needs help                   | 
+| `***` | Frequent User          | Export a specific elderly's details and history (All information)            | I can share it with another employee                                                                 | 
+ | `**` | Frequent User          | Make changes to the style of my address book                                 | I can be happy when I use the address book                                                           | 
+ | `**` | Frequent user          | Mark contacted elderly quickly using shortcuts                               | I can work efficiently to contact the entire list                                                    | 
+ | `**` | Detail-orientated user | Add tags to each elderly                                                     | I can keep track of details that are important when taking the call                                  | 
+ | `**` | Expert User            | Add custom fields                                                            | I can add details of elderly which are not currently in the system                                   | 
+ | `**` | Expert User            | Visualise how many and which elderly to be called in a calendar              | I can plan accordingly if any elderly needs to switch dates                                          | 
+ | `**` | Expert User            | Filter through certain details added for the elderly                         | I can keep track of how the elderly are doing easily                                                 | 
+ | `**` | Frequent User          | Receive notifications for the contacts that are due in the next hour         | I can prioritize and complete the calls on time                                                      | 
+ | `**` | New User               | Receive feedback on the commands I have given if they are incorrect          | I can easily correct the errors in the commands given                                                |
+ | `*` | Expert user            | Be notified by the app when too many elderly calls are scheduled on one day  | I will not overwork myself or spend too little time calling each elderly                             | 
+ | `*` | Expert User            | I can see a dashboard of my weekly or monthly call stats                     | I can track my productivity and ensure that I hit my KPI                                             | 
+ | `*` | Expert User            | Set up automated messages for elderly contacts that are not reachable        | I can have an alternative communication method                                                       | 
+ | `*` | Expert User            | Use AI to calculate the priority list for elderly based on their information | The correct elderly are being prioritised                                                            | 
 
 ### Use cases
 
@@ -387,7 +386,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff calls the elderly at the top of the list.  
-3. Staff marks the elderly as called and takes notes of the call with mark command.
+3. Staff requests to mark the elderly as called and takes notes of the call, selecting the elderly by INDEX or NRIC.
 4. ContactMate updates the elderly as marked and displays a success message.
 
     Use case ends.
@@ -395,8 +394,14 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
   * Use case ends.  
-* 3a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.
-  * 3a1. ContactMate shows an error message.  
+* 3a. ContactMate detects an incorrect command format.  
+  * 3a1. ContactMate shows an error message with the correct command format.  
+  * Use case resumes from step 3\.
+* 3b. ContactMate detects an INDEX out of bounds of the list or an NRIC that does not exist in the list.
+  * 3b1. ContactMate shows an error message, explaining that the elderly does not exist.  
+  * Use case resumes from step 3\.
+* 3c. ContactMate detects an invalid date format.
+  * 3c1. ContactMate shows an error message with the correct date format.  
   * Use case resumes from step 3\.
 
 **System: ContactMate**  
@@ -408,7 +413,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 **MSS:**
 
-1. Staff inputs list command to view elderly contacts.  
+1. Staff requests to view elderly contacts.  
 2. ContactMate updates view to show contacts sorted based on priority (date to be called).
 
       Use case ends.
@@ -423,7 +428,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
-2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.
+2. Staff requests for the call history of the elderly, selecting the elderly by INDEX or NRIC.
 3. ContactMate updates view to show a list of calls along with their corresponding notes made to a specific elderly. 
 
 	Use case ends.
@@ -431,9 +436,12 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
     * Use case ends.  
-* 2a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.  
-	* 2a1. ContactMate shows an error message.  
-	* Use case resumes from step 2\.
+* 2a. ContactMate detects an incorrect command format.
+    * 2a1. ContactMate shows an error message with the correct command format.
+    * Use case resumes from step 2\.
+* 2b. ContactMate detects an INDEX out of bounds of the list or an NRIC that does not exist in the list.
+    * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
+    * Use case resumes from step 2\.
 
 **System: ContactMate**  
 **Use case: UC04 \- Delete elderly from the call list**  
@@ -445,7 +453,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
-2. Staff inputs the NRIC or INDEX of elderly they want to delete.
+2. Staff requests to delete an elderly, selecting the elderly by INDEX or NRIC.
 3. ContactMate deletes the elderly and shows the updated list with the elderly removed.
 
     Use case ends.
@@ -453,9 +461,12 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
     * Use case ends.  
-* 2a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.
-    * 2a1. ContactMate shows an error message.  
-	* Use case resumes from step 2\.
+* 2a. ContactMate detects an incorrect command format.
+    * 2a1. ContactMate shows an error message with the correct command format.
+    * Use case resumes from step 2\.
+* 2b. ContactMate detects an INDEX out of bounds of the list or an NRIC that does not exist in the list.
+    * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
+    * Use case resumes from step 2\.
 
 **System: ContactMate**  
 **Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
@@ -466,21 +477,101 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 **MSS:**
 
-1. Staff inputs details for the elderly they want to add to the system.  
-2. ContactMate adds the new elderly and shows the updated list with the newly added elderly.
+1. Staff requests to add an elderly, entering the relevant details.  
+1. ContactMate adds the new elderly and shows the updated list with the newly added elderly.
 
       Use case ends.
 
 **Extensions:**  
-* 1a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.  
-	* 1a1. ContactMate shows an error message.  
+* 1a. ContactMate detects an incorrect command format.  
+	* 1a1. ContactMate shows an error message with the correct command format.  
 	* Use case resumes from step 1\.  
-* 1b. ContactMate detects that the elderly being added has an NRIC matching someone in the contact book.  
-	* 1b1. ContactMate shows an error message saying this elderly already exists.  
+* 1b. ContactMate detects an invalid format for one of the fields.  
+    * 1b1. ContactMate shows an error message showing the correct format for the invalid field. 
+    * Use case resumes from step 1\.
+* 1c. ContactMate detects that the elderly being added has an NRIC matching someone in the contact book.  
+	* 1c1. ContactMate shows an error message saying this elderly already exists.  
 	* Use case resumes from step 1\.  
-* 1c. ContactMate detects that the elderly being added has a matching name, phone number or email with someone in the contact book.  
-	* 1c1. ContactMate shows a warning message that the elderly added has a matching field.  
+* 1d. ContactMate detects that the elderly being added has a matching name, phone number or email with someone in the contact book.  
+	* 1d1. ContactMate shows a warning message that the elderly added has a matching name, phone number or email.  
 	* Use case resumes from step 2\.
+
+**System: ContactMate**     
+**Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**      
+**Actor: Staff**    
+**Guarantees:**
+
+* Edits the elderly in the contact book only if input has no errors.
+
+**MSS:**
+
+1. Staff <u>lists elderly contacts by priority (UC02)</u>.
+1. Staff requests to edit an elderly, selecting the elderly by INDEX or NRIC, and entering the relevant details.
+1. ContactMate edits the elderly and shows the updated list with the edited elderly.
+
+   Use case ends.
+
+**Extensions:**
+* 1a. The list is empty.
+    * Use case ends.
+* 2a. ContactMate detects an incorrect command format.
+    * 2a1. ContactMate shows an error message with the correct command format.
+    * Use case resumes from step 2\.
+* 2b. ContactMate detects an INDEX out of bounds of the list or NRIC (used to select the elderly) that does not exist in the list.
+    * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
+    * Use case resumes from step 2\.
+* 2c. ContactMate detects an invalid format for one of the fields.
+    * 2c1. ContactMate shows an error message showing the correct format for the invalid field.
+    * Use case resumes from step 2\.
+* 2d. ContactMate detects that the input of the NRIC field is matching someone in the contact book.
+    * 2d1. ContactMate shows an error message saying this elderly already exists.
+    * Use case resumes from step 2\.
+* 2e. ContactMate detects that input of the name, phone number or email fields matches with someone in the contact book.
+    * 2e1. ContactMate shows a warning message that the elderly has a matching name, phone number or email.
+    * Use case resumes from step 3\.
+
+**System: ContactMate**     
+**Use case: UC07 \- Search elderly by name or NRIC**    
+**Actor: Staff**  
+**Guarantees:**
+
+* Shows the filtered list of elderly that matches the name or NRIC.
+
+**MSS:**    
+
+1. Staff requests to search for an elderly, entering the elderly's name or NRIC.
+2. ContactMate shows the filtered list of elderly  (if any) that matches the name or NRIC.
+
+    Use case ends.
+
+**System: ContactMate**      
+**Use case: UC08 \- Mark an elderly as called, given that elderly's name**      
+**Actor: Staff**        
+**Guarantees:**     
+
+* Marks the elderly as called only if the input has no errors.
+
+**MSS:**
+
+1. Staff <u>searches the elderly by name (UC07)</u>.
+2. Staff calls that elderly.
+3. Staff requests to mark the elderly as called and takes notes of the call, selecting the elderly by INDEX or NRIC.
+4. ContactMate updates the elderly as marked and displays a success message.
+
+    Use case ends.
+
+**Extensions:**
+* 1a. The filtered list is empty.
+    * Use case resumes from step 1\.
+* 3a. ContactMate detects an incorrect command format.
+    * 3a1. ContactMate shows an error message with the correct command format.
+    * Use case resumes from step 3\.
+* 3b. ContactMate detects an INDEX out of bounds of the list or an NRIC that does not exist in the list.
+    * 3b1. ContactMate shows an error message, explaining that the elderly does not exist.
+    * Use case resumes from step 3\.
+* 3c. ContactMate detects an invalid date format.
+    * 3c1. ContactMate shows an error message with the correct date format.
+    * Use case resumes from step 3\.
 
 ### Non-Functional Requirements
 
