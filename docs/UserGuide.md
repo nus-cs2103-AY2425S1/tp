@@ -115,6 +115,7 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
     * have each domain label start and end with alphanumeric characters
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
+**Special Scenario:** It's possible to have a buyer and seller with the same phone number and email but different names. This flexibility provided by ClientGrid allows users to record the same client under different names in buying and selling roles, which may be useful for clients operating under separate business names, personal vs. professional roles, or other distinct identities.
 <box type="info" seamless>
 
 **Note:**
@@ -146,6 +147,8 @@ Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 - **Duplicate Emails**: No duplicate emails are allowed, following the same logic as the `addbuyer` command:
     1. A seller cannot share the same email as another seller.
     2. A seller cannot have the same email as a buyer with a different phone number. Email uniqueness is enforced per client.
+
+The **Special Scenario** also applies here: you can have a buyer and seller with the same phone number and email but different names, allowing flexibility for clients who operate under different names in buying and selling roles.
 </box>
 
 Examples:
