@@ -48,7 +48,11 @@
                         <Insets top="10" right="10" bottom="10" left="10" />
                     </padding>
                     <ScrollPane styleClass="dialog-pane" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
-                        <ListView fx:id="logListView" />
+                        <VBox fx:id="logListContainer" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10" />
+                            </padding>
+                        </VBox>
                     </ScrollPane>
                 </VBox>
             </VBox>
