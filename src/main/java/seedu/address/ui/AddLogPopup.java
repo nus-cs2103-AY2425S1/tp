@@ -57,6 +57,17 @@ public class AddLogPopup extends UiPart<Stage> {
             window.close();
         });
 
+        // Add Ctrl+Enter (or Cmd+Enter) as a shortcut for saving
+        logEntryArea.setOnKeyPressed(event -> {
+            if ((event.isControlDown() || event.isMetaDown()) && event.getCode().toString().equals("ENTER")) {
+                if (!saveButton.isDisabled()) {
+                    logEntry[0] = logEntryArea.getText();
+                    window.close();
+                }
+                event.consume();
+            }
+        });
+
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e -> window.close());
 
