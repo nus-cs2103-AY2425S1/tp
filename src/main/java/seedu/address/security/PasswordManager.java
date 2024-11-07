@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -38,6 +40,7 @@ public class PasswordManager {
 
         File file = new File(path);
         if (!file.exists()) {
+
             return null; // No password set
         }
 
@@ -87,6 +90,13 @@ public class PasswordManager {
 
         String storedPasswordHash = readPassword(path);
         if (storedPasswordHash == null) {
+            try {
+                Files.deleteIfExists(Path.of("data/addressbook.json"));
+                Files.deleteIfExists(Path.of(PASSWORD_FILE));
+            } catch (IOException ex) {
+                return false;
+            }
+
             return false; // No password set
         }
 

@@ -25,7 +25,9 @@ public class AddCommand extends Command {
     public static final String SHORT_COMMAND_WORD = ":a";
     public static final String LONG_COMMAND_WORD = ":add";
 
-    public static final String MESSAGE_USAGE = SHORT_COMMAND_WORD + " or " + LONG_COMMAND_WORD
+    public static final String MESSAGE_USAGE =
+            "\"" + SHORT_COMMAND_WORD + "\"" + " OR "
+            + "\"" + LONG_COMMAND_WORD + "\""
             + ": Adds a person to the address book. "
             + "\nCompulsory parameters: "
             + PREFIX_NAME + "NAME "
@@ -56,7 +58,6 @@ public class AddCommand extends Command {
             ":add -n James Ho -p 98765432 -e jamesho@example.com -l 123, "
                    + "Clementi Rd, 1234665 -t friend -r My favourite colleague" + "\n"
                     + ":a -n James Ho -p 98765432 -e jamesho@example.com -l 123, "
-                    + "Clementi Rd, 1234665 -t friend -r My favourite colleague";
 
     public static final List<String> INVALID_VARIANTS = Arrays.asList("add", "a");
     private final Person toAdd;
