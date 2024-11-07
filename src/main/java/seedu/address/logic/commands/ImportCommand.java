@@ -60,7 +60,7 @@ public class ImportCommand extends FileAccessCommand {
 
         model.setAddressBook(importedData);
         logger.info("Successful import from filePath");
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
     }
 
     @Override
