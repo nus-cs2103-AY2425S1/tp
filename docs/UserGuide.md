@@ -64,9 +64,9 @@ Cher is a **desktop app for managing contacts, optimized for use via a Command L
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows the User Guide page and displays a floating window allowing the user to copy the URL of the user guide page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpWindow.png)
 
 Format: `help`
 
@@ -249,6 +249,7 @@ Action | Format, Examples
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
+**Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
