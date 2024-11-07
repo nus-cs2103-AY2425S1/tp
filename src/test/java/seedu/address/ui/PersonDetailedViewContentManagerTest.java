@@ -1,12 +1,19 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
+
+
+
 
 public class PersonDetailedViewContentManagerTest {
 
@@ -17,6 +24,16 @@ public class PersonDetailedViewContentManagerTest {
     public void setUp() {
         testPerson = TypicalPersons.ALICE;
         contentManager = new PersonDetailedViewContentManager(testPerson);
+    }
+
+    @Test
+    public void setupProfileImage_setsProfileImageCorrectly() {
+        ImageView profileImageView = new ImageView();
+        contentManager.setupProfileImage(profileImageView);
+
+        assertNotNull(profileImageView.getImage(), "Profile image should be set.");
+
+        assertTrue(profileImageView.getClip() instanceof Circle, "Profile image should have a circular clip.");
     }
 
     @Test

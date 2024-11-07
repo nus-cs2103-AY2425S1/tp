@@ -7,13 +7,13 @@
 /* Profile image */
 .image-view {
     -fx-background-radius: 50;
-    -fx-effect: innershadow(gaussian, black, 4, 0.2, 2, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.2, 0, 2);
 }
 
 /* Name label (blue, bold) */
 .label-name {
     -fx-text-fill: #1e90ff;
-    -fx-font-size: 20px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-font-family: "Segoe UI Bold";
 }
@@ -21,14 +21,14 @@
 /* Phone and email labels */
 .label-phone, .label-email {
     -fx-text-fill: white;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-family: "Segoe UI Semibold";
 }
 
 /* Email underline */
 .label-email {
     -fx-underline: true;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-family: "Segoe UI Semibold";
 }
 
@@ -58,16 +58,8 @@
     -fx-vgap: 4;
 }
 
-.tag-label {
-    -fx-background-color: #4a90e2;
-    -fx-text-fill: white;
-    -fx-padding: 4 8;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-}
-
 .other-label-name {
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #4a90e2;
 }
@@ -92,8 +84,15 @@
 .notification-label {
     -fx-background-color: #5a5f67;
     -fx-text-fill: #f2f2f2;
-    -fx-padding: 8;
+    -fx-padding: 5;
     -fx-background-radius: 5;
     -fx-font-weight: bold;
 }
 
+
+.tooltip {
+    -fx-background-color: #800000;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 5px;
+}

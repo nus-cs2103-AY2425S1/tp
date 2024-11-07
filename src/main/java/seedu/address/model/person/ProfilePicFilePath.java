@@ -26,10 +26,10 @@ public class ProfilePicFilePath {
     /**
      * Returns a {@code ProfilePicFilePath} with the default profile picture.
      *
-     * @return A ProfilePicFilePath pointing to /images/profilepicture.png.
+     * @return A ProfilePicFilePath pointing to absolute path of /images/profilepicture.png.
      */
     public static ProfilePicFilePath getDefaultProfilePic() {
-        return new ProfilePicFilePath(Paths.get("images", "profilepicture.png"));
+        return new ProfilePicFilePath(Paths.get("images", "profilepicture.png").toAbsolutePath());
     }
 
     @Override

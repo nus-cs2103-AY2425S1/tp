@@ -1,29 +1,27 @@
 package seedu.address.ui;
 
-import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.util.Duration;
 import seedu.address.model.person.Person;
-
-
 
 /**
  * A UI Component that displays a detailed view of a {@code Person}
  */
 public class PersonDetailedView extends UiPart<Region> {
     private static final String FXML = "PersonDetailedView.fxml";
-
     public final Person person;
+    private boolean isVisualsEnabled;
+
     private final PersonDetailedViewContentManager contentManager;
+
+    private final ResultDisplay resultDisplay;
     @FXML
     private HBox cardPane;
     @FXML
@@ -64,20 +62,25 @@ public class PersonDetailedView extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} to display.
      */
-    public PersonDetailedView(Person person) {
+
+    public PersonDetailedView(Person person, boolean isVisualsEnabled, ResultDisplay resultDisplay) {
         super(FXML);
         this.person = person;
         this.contentManager = new PersonDetailedViewContentManager(person);
+        this.resultDisplay = resultDisplay;
+        this.isVisualsEnabled = isVisualsEnabled;
 
         initialiseView();
         setupTemplateButtons();
     }
 
+    /**
+     * Initializes the detailed view for a person by setting up all UI components.
+     */
     private void initialiseView() {
-        Image profileImg = new Image(getClass()
-                .getResourceAsStream("/" + this.person.getProfilePicFilePath().toString()));
 
-        profileImage.setImage(profileImg);
+        contentManager.setupProfileImage(profileImage);
+        contentManager.setupBirthdayTooltip(name, isVisualsEnabled);
 
         name.setText(contentManager.getName());
         phone.setText(contentManager.getPhone());
@@ -87,6 +90,8 @@ public class PersonDetailedView extends UiPart<Region> {
         age.setText(contentManager.getAge());
         hasPaid.setText(contentManager.getHasPaidStatus());
         frequency.setText(contentManager.getFrequency());
+
+        contentManager.setupTags(tags, isVisualsEnabled);
     }
 
     /**
@@ -110,13 +115,7 @@ public class PersonDetailedView extends UiPart<Region> {
      */
     public void showCopyNotification(String message) {
         copyTemplateToClipboard(message);
-
-        notificationLabel.setText("Copied to clipboard!");
-        notificationLabel.setVisible(true);
-
-        PauseTransition pause = new PauseTransition(Duration.seconds(1.0));
-        pause.setOnFinished(e -> notificationLabel.setVisible(false));
-        pause.play();
+        resultDisplay.setFeedbackToUser("Template Message copied to clipboard!");
     }
 
     /**

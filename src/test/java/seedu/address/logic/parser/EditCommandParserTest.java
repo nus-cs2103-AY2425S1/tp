@@ -213,6 +213,48 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_singleNetWorthTag_success() {
+        // single net worth tag (highnetworth)
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + " t/highnetworth";
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND, "highnetworth").build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // single net worth tag (midnetworth)
+        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + " t/midnetworth";
+
+        descriptor = new EditPersonDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND, "midnetworth").build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_replaceExistingNetWorthTag_success() {
+        // initial net worth tag (highnetworth) replaced with midnetworth
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + " t/highnetworth";
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND, "highnetworth").build();
+        EditCommand initialCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, initialCommand);
+
+        // replace highnetworth with midnetworth
+        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + " t/midnetworth";
+        descriptor = new EditPersonDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND, "midnetworth").build();
+        EditCommand updatedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, updatedCommand);
+    }
+
+    @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
