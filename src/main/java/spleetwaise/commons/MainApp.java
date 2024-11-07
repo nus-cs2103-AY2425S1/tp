@@ -77,8 +77,7 @@ public class MainApp extends Application {
                 new JsonTransactionBookStorage(userPrefs.getTransactionBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
-        addressBookModel = initAddressBookModelManager(storage);
-        transactionBookModel = initTransactionModelManager(storage, addressBookModel);
+        initModelManagers(storage);
 
         // Initialise Common Model
         CommonModelManager.initialise(addressBookModel, transactionBookModel, userPrefs);
@@ -91,51 +90,38 @@ public class MainApp extends Application {
         Runtime.getRuntime().addShutdownHook(new Thread(this::cleanUp));
     }
 
-    /**
-     * Returns a {@code AddressBookModelManager} with the data from {@code storage}'s address book and
-     * {@code userPrefs}. <br> The data from the sample address book will be used instead if {@code storage}'s address
-     * book is not found, or an empty address book will be used instead if errors occur when reading {@code storage}'s
-     * address book.
-     */
-    private AddressBookModel initAddressBookModelManager(Storage storage) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+    private void initModelManagers(Storage storage) {
+        logger.info("Using Ab file : " + storage.getAddressBookFilePath());
+        logger.info("Using Tb file : " + storage.getTransactionBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            Optional<ReadOnlyAddressBook> addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
+                // If the addressbook is not present start from sample data
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
-        }
-
-        return new AddressBookModelManager(initialData);
-    }
-
-    private TransactionBookModel initTransactionModelManager(Storage storage, AddressBookModel addressBookModel) {
-        logger.info("Using data file : " + storage.getTransactionBookFilePath());
-
-        Optional<ReadOnlyTransactionBook> txnBookOptional;
-        ReadOnlyTransactionBook initialData;
-        try {
-            txnBookOptional = storage.readTransactionBook(addressBookModel);
-            if (!txnBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getTransactionBookFilePath()
                         + " populated with a sample TransactionBook.");
+                addressBookModel = new AddressBookModelManager(SampleDataUtil.getSampleAddressBook());
+                // Since addressbook is nonexistent, whatever state transactionbook is in should become irrelevant.
+                // We shall therefore start from sample data with transactionbook as well.
+                transactionBookModel = new TransactionBookModelManager(SampleDataUtil.getSampleTransactionBook());
+                return;
             }
-            initialData = txnBookOptional.orElseGet(SampleDataUtil::getSampleTransactionBook);
+
+            // Read the address book
+            addressBookModel = new AddressBookModelManager(addressBookOptional.get());
+            Optional<ReadOnlyTransactionBook> txnBookOptional = storage.readTransactionBook(addressBookModel);
+            // Read the transaction book
+            ReadOnlyTransactionBook transactionBook = txnBookOptional.orElse(new TransactionBook());
+            transactionBookModel = new TransactionBookModelManager(transactionBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty TransactionBook.");
-            initialData = new TransactionBook();
+            // Files could be corrupted beyond recovery, and therefore we should start from a blank slate
+            logger.warning("Data files could not be loaded: " + e.getMessage()
+                    + " Will be starting with an empty AddressBook and TransactionBook.");
+            addressBookModel = new AddressBookModelManager(new AddressBook());
+            transactionBookModel = new TransactionBookModelManager(new TransactionBook());
         }
-        return new TransactionBookModelManager(initialData);
     }
 
     private void initLogging(Config config) {
