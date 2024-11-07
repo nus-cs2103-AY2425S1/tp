@@ -23,6 +23,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_COMMAND_FOR_PERSON_TYPE =
             "This command cannot be used on this category of contacts!";
+    public static final String MEMBER_MESSAGE_CONSTRAINTS = "The members should be positive integer indices from "
+            + "the latest shown list, separated by spaces.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
