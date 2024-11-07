@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,9 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import seedu.address.model.person.Person;
-
-import java.util.Comparator;
-
 
 /**
  * A UI Component that displays a detailed view of a {@code Person}
