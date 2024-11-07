@@ -64,6 +64,7 @@ public class ListTaskCommand extends Command {
         }
         model.setStateTasks();
         model.setMostRecentTaskDisplay(new Task(null, null));
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS); // added because it won't update after find task
         return new CommandResult(MESSAGE_SUCCESS_ALL_TASKS, LIST_TASK_MARKER);
     }

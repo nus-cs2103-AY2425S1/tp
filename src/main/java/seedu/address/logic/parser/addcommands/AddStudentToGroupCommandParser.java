@@ -49,11 +49,14 @@ public class AddStudentToGroupCommandParser implements Parser<AddStudentToGroupC
                 AddStudentToGroupCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER, PREFIX_GROUP_NAME);
-        StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
+        List<StudentNumber> studentNumberList = new ArrayList<StudentNumber>();
+        for (String s : argMultimap.getAllValues(PREFIX_STUDENT_NUMBER)) {
+            studentNumberList.add(ParserUtil.parseStudentNumber(s));
+        }
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
-        return new AddStudentToGroupCommand(studentNumber, groupName);
+        return new AddStudentToGroupCommand(studentNumberList, groupName);
     }
 
     /**

@@ -9,7 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.student.exceptions.DuplicatePersonException;
-import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -59,7 +59,7 @@ public class UniqueStudentList implements Iterable<Student> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new StudentNotFoundException();
         }
 
         if (!target.isSamePerson(editedStudent) && contains(editedStudent)) {
@@ -76,7 +76,7 @@ public class UniqueStudentList implements Iterable<Student> {
     public void remove(Student toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new StudentNotFoundException();
         }
     }
 
@@ -111,7 +111,7 @@ public class UniqueStudentList implements Iterable<Student> {
                 return student;
             }
         }
-        throw new PersonNotFoundException();
+        throw new StudentNotFoundException();
     }
 
     /**
