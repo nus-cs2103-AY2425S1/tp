@@ -58,7 +58,8 @@ public class ReopenCommand extends Command {
         }
         Company reopenedCompany = new Company(companyToReopen.getName(), companyToReopen.getPhone(),
                 companyToReopen.getEmail(), companyToReopen.getAddress(), companyToReopen.getTags(),
-                new Status(StatusType.INTERESTED), companyToReopen.getApplications(), companyToReopen.getIsFavourite());
+                new Status(StatusType.INTERESTED), companyToReopen.getApplications(),
+                    companyToReopen.getIsFavourite(), false);
         model.setCompany(companyToReopen, reopenedCompany);
         return new CommandResult(String.format(MESSAGE_REOPEN_COMPANY_SUCCESS, reopenedCompany.getName()));
     }

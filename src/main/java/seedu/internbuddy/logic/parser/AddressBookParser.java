@@ -101,7 +101,7 @@ public class AddressBookParser {
 
         case ReopenCommand.COMMAND_WORD:
             return new ReopenCommandParser().parse(arguments);
-            
+
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
