@@ -135,7 +135,7 @@ Shows a list of all clients in the application, together with their current fina
 Format: `list`
 <box type="tip" seamless>
 
-Negative balances are red. Positive balances are green.
+**Tips:** Negative balances are red. Positive and zero balances are green.
 </box>
 
 ![result for `listt`](images/listResult.png =600x)
@@ -144,7 +144,7 @@ Negative balances are red. Positive balances are green.
 
 Edits an existing client in the application.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -354,12 +354,12 @@ Furthermore, certain edits can cause the Clientell to behave in unexpected ways 
 
 ## Command Summary
 
-Client Commands | Format
+Client Commands | Format |
 ---------------|--------
-Add | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
+Add | `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 List | `list`
 Find | `find KEYWORD [MORE_KEYWORDS]`
-Edit | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+Edit | `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 Delete | `delete INDEX`
 
 **Transaction Commands**
