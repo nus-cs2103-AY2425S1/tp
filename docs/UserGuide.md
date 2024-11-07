@@ -320,7 +320,7 @@ Entering the `find n/John` command returns the following result on your screen:
 
 ### Clearing all entries : `clear`
 
-Clears and empties out the entire guest list and vendor list. Could be good to start off your preparations for your next wedding.
+This command will help you clear and empty out the entire guest list and vendor list, and could be good to help you start off your preparations for the next wedding.
 
 **Format:** `clear`
 
