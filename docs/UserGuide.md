@@ -295,6 +295,8 @@ Command | Description
 </box>
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -304,6 +306,8 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a person: `add`
 
@@ -328,6 +332,8 @@ Examples:
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -335,6 +341,8 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing a person : `edit`
 
@@ -364,6 +372,8 @@ Examples:
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -392,6 +402,8 @@ Examples:
   
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -412,48 +424,35 @@ Examples:
 
 <br>
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-<br>
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-<br>
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a public address to a contact : `addpa`
 
 Adds a public address to a contact.
 
 
+Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-Format: `addpa c/NETWORK n/NAME l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-
-* Adds a public address to a contact based on the NAME
-
-* The contact is identified by the `NAME` provided.
+* Adds a public address to a contact at the specified `INDEX`. The index refers to the index number shown in the
+  displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …​
 
 * The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
-  `SOL`, `SUI`, etc.).
-
-* the `NAME` parameter specifies the name of the contact to which the public address belongs.
-
-* The `PUBLIC_ADDRESS` parameter specifies the public address to be added, this fields is not cap sensitive.
+  `SOL`, etc.).
 
 * The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
 
+* The `PUBLIC_ADDRESS` parameter specifies the public address to be added, this fields is not cap sensitive.
+
 Examples:
-* `addPublicAddress c/ETH n/Travis l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a contact named `Travis` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a the first contact on the list `Alex Yeoh` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+
+![img.png](img.png)
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing a public address of a contact : `editpa`
 
@@ -463,7 +462,7 @@ Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`
 
 <box type="tip" seamless>
 
-WALLET_NAME is case-sensitive.
+WALLET_NAME is NOT case-sensitive.
 </box>
 
 * Edits the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
@@ -489,6 +488,8 @@ WALLET_NAME is case-sensitive.
   case-sensitive.<br />
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Retrieving public addresses of a contact : `retrievepa`
 
@@ -516,6 +517,8 @@ Format: `retrievepa INDEX c/NETWORK [l/WALLET_NAME]`
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Deleting a public address of a contact : `deletepa`
 
 Deletes the public address of a contact.
@@ -533,6 +536,8 @@ Examples:
 * `deletepa 3 c/BTC` deletes all the public addresses of the 3rd person in the BTC network.
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Searching for a public address : `publicAddressSearch`
 
@@ -554,6 +559,28 @@ Examples:
 * `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` searches for a public
   address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the contact and wallet to
   which it belongs.
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -587,10 +614,11 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AddressBook home folder.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Common Errors
+
+
 
 ## Known issues
 
