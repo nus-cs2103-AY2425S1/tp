@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import tahub.contacts.logic.commands.ClearCommand;
 import tahub.contacts.logic.commands.ExitCommand;
-import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
 import tahub.contacts.logic.commands.course.CourseDeleteCommand;
@@ -27,6 +26,7 @@ import tahub.contacts.logic.commands.person.PersonAddCommand;
 import tahub.contacts.logic.commands.person.PersonDeleteCommand;
 import tahub.contacts.logic.commands.person.PersonEditCommand;
 import tahub.contacts.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
+import tahub.contacts.logic.commands.person.PersonFindCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
@@ -96,9 +96,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        PersonFindCommand command = (PersonFindCommand) parser.parseCommand(
+                PersonFindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new PersonFindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

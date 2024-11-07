@@ -12,7 +12,6 @@ import tahub.contacts.logic.commands.ClearCommand;
 import tahub.contacts.logic.commands.Command;
 import tahub.contacts.logic.commands.EnrollCommand;
 import tahub.contacts.logic.commands.ExitCommand;
-import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
 import tahub.contacts.logic.commands.attend.AttendAbsentCommand;
@@ -25,6 +24,7 @@ import tahub.contacts.logic.commands.course.CourseEditCommand;
 import tahub.contacts.logic.commands.person.PersonAddCommand;
 import tahub.contacts.logic.commands.person.PersonDeleteCommand;
 import tahub.contacts.logic.commands.person.PersonEditCommand;
+import tahub.contacts.logic.commands.person.PersonFindCommand;
 import tahub.contacts.logic.parser.attend.AttendAbsentCommandParser;
 import tahub.contacts.logic.parser.attend.AttendClearCommandParser;
 import tahub.contacts.logic.parser.attend.AttendPresentCommandParser;
@@ -36,6 +36,7 @@ import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.logic.parser.person.PersonAddCommandParser;
 import tahub.contacts.logic.parser.person.PersonDeleteCommandParser;
 import tahub.contacts.logic.parser.person.PersonEditCommandParser;
+import tahub.contacts.logic.parser.person.PersonFindCommandParser;
 
 /**
  * Parses user input.
@@ -92,8 +93,8 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case PersonFindCommand.COMMAND_WORD:
+            return new PersonFindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
