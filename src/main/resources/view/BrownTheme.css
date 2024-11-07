@@ -435,31 +435,31 @@
 }
 
 #phone {
-    -fx-text-fill: #0d719d
+    -fx-text-fill: black
 }
 
 #address {
-    -fx-text-fill: green
+    -fx-text-fill: black
 }
 
 #email {
-    -fx-text-fill: purple
+    -fx-text-fill: black
 }
 
 #attendees {
-    -fx-text-fill: green;
+    -fx-text-fill: black
 }
 
 #vendors {
-    -fx-text-fill: #b62606
+    -fx-text-fill: black
 }
 
 #sponsors {
-    -fx-text-fill: blue
+    -fx-text-fill: black
 }
 
 #volunteers {
-    -fx-text-fill: purple
+    -fx-text-fill: black
 }
 
 

@@ -22,7 +22,7 @@ import seedu.address.ui.Observer;
  * Represents an Event in the address book.
  */
 public class Event {
-    public static final String MESSAGE_CONSTRAINTS = "Event name should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Event name should not be blank.";
     private final String name;
     private final Set<Person> attendees;
     private final Set<Person> vendors;
