@@ -30,14 +30,30 @@ public class TaskAssignmentParserUtil {
 
         try {
             Index personIndex = ParserUtil.parseIndex(splitArgs[0]);
-            Set<Index> taskIndexes = new HashSet<>();
-            for (int i = 1; i < splitArgs.length; i++) {
-                taskIndexes.add(ParserUtil.parseIndex(splitArgs[i]));
-            }
-            return new ParsedCommandData(personIndex, taskIndexes);
+            Set<Index> secondaryIndexes = parseMultipleIndexes(splitArgs, 1);
+            return new ParsedCommandData(personIndex, secondaryIndexes);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage), pe);
         }
+    }
+
+    /**
+     * Parses multiple indexes from the given array of arguments, starting at the specified position.
+     *
+     * @param args The arguments array containing potential indexes.
+     * @param startPosition The position in the array to start parsing indexes.
+     * @return A set of parsed indexes.
+     * @throws ParseException if any index is invalid.
+     */
+    public static Set<Index> parseMultipleIndexes(String[] args, int startPosition) throws ParseException {
+        Set<Index> indexes = new HashSet<>();
+
+        for (int i = startPosition; i < args.length; i++) {
+            Index index = ParserUtil.parseIndex(args[i]);
+            indexes.add(index);
+        }
+
+        return indexes;
     }
 
     /**

@@ -14,10 +14,19 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListTagsCommand;
+import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindAddressCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
 import seedu.address.logic.commands.findcommand.FindEmailCommand;
@@ -26,14 +35,6 @@ import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
 import seedu.address.logic.commands.findcommand.FindTaskCommand;
 import seedu.address.logic.commands.findcommand.FindWeddingCommand;
-import seedu.address.logic.commands.person.AddCommand;
-import seedu.address.logic.commands.person.DeleteCommand;
-import seedu.address.logic.commands.person.EditCommand;
-import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.tag.CreateTagCommand;
-import seedu.address.logic.commands.tag.DeleteTagCommand;
-import seedu.address.logic.commands.tag.TagCommand;
-import seedu.address.logic.commands.tag.UntagCommand;
 import seedu.address.logic.commands.task.CreateTaskCommand;
 import seedu.address.logic.commands.task.DeleteTaskCommand;
 import seedu.address.logic.commands.task.ListTasksCommand;
@@ -365,11 +366,18 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_listTask() throws Exception {
+    public void parseCommand_listTasks() throws Exception {
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD) instanceof ListTasksCommand);
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD + " 3") instanceof ListTasksCommand);
         // Test using list tasks keyword
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_KEYWORD + " 3") instanceof ListTasksCommand);
+    }
+    @Test
+    public void parseCommand_listTags() throws Exception {
+        assertTrue(parser.parseCommand(ListTagsCommand.COMMAND_WORD) instanceof ListTagsCommand);
+        assertTrue(parser.parseCommand(ListTagsCommand.COMMAND_WORD + " 3") instanceof ListTagsCommand);
+        // Test using list tags keyword
+        assertTrue(parser.parseCommand(ListTagsCommand.COMMAND_KEYWORD + " 3") instanceof ListTagsCommand);
     }
 
     @Test
