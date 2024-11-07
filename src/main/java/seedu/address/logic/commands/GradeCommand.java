@@ -81,6 +81,10 @@ public class GradeCommand extends Command {
         Person updatedPerson = person.setModuleGrade(module, grade);
         model.setPerson(person, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (updatedPerson.isSamePerson(model.getPersonToDisplay())) {
+            model.setPersonToDisplay(updatedPerson);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, module), true);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, module));
     }
 
