@@ -156,7 +156,7 @@ Once successful, you should see the following on your screen:
 
 ### Adding guests
 
-Let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
+Now let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
 Let us familiarise ourselves with the `add_guest` command, which you will need in order to add guests to the guest list.
 
 Let's try entering the following command in the Command Line: `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`.
@@ -268,10 +268,6 @@ This command will open your web browser and redirect you to the online User Guid
 
 **Example Usage:** `help`
 
-Entering the `help` command returns the following result on your screen:
-
-![help message](images/helpMessage.png)
-
 [_Back to Top_](#table-of-contents)
 
 
@@ -285,7 +281,7 @@ This command will show you a guest list consisting of all invited guests and a v
 
 **Example Usage:** `list`
 
-Entering the `list` command returns the following result on your screen:
+Entering the `list` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
 
 ![list command](images/listCommand.png)
 
@@ -307,9 +303,9 @@ This command will help you find guests and vendors that match any of the given k
 - Only full words will be matched e.g. `Jo` will not match `John`
 - Guest/Vendor matching **any** of the keywords will be returned (e.g. `John Tan` will return `John Doe` and `Alan Tan`)
 
-**Example Usage:** `find n/John`
+**Example Usage:** `find n/Steve`
 
-Entering the `find n/John` command returns the following result on your screen:
+Entering the `find n/Steve` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
 
 ![find command](images/findCommand.png)
 
@@ -339,7 +335,7 @@ This command will display to you the total number of guests invited to the weddi
 
 **Example Usage:** `stats`
 
-Entering the `stats` command returns the following result on your screen:
+Entering the `stats` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
 
 ![stats command](images/statsCommand.png)
 
@@ -397,11 +393,11 @@ This command will allow you to edit the details of the guest identified by the `
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
-   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+   * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
-**Example Usage:** `edit_guest 1 p/91234567 e/johndoe@example.com`
+**Example Usage:** `edit_guest 4 p/91234567 e/johndoe@example.com`
 
-Entering the `edit_guest 1 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
+Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
 ![edit_guest command](images/editGuestCommand.png)
 
@@ -416,11 +412,11 @@ This command will help you delete a guest from your existing guest list, identif
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
 
-   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+   * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
 **Example Usage:** `delete_guest 1`
 
-Entering the `delete_guest 1` command returns the following result on your screen:
+Assuming that `Guest` `Tony Stark` has an `INDEX` of 1 on the existing guest list, entering the `delete_guest 1` command returns the following result on your screen:
 
 ![delete_guest command](images/deleteGuestCommand.png)
 
@@ -462,11 +458,11 @@ This command will allow you to edit the details of the vendor identified by the 
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
-    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
+    * Even if a `vendor` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
-**Example Usage:** `edit_vendor 1 p/91234567 e/johndoe@example.com`
+**Example Usage:** `edit_vendor 4 p/91234567 e/johndoe@example.com`
 
-Entering the `edit_vendor 1 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
+Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
 ![edit_vendor command](images/editVendorCommand.png)
 
@@ -485,7 +481,7 @@ This command will help you delete a vendor from your existing vendor list, ident
 
 **Example Usage:** `delete_vendor 1`
 
-Entering the `delete_vendor 1` command returns the following result on your screen:
+Assuming that `Vendor` `Bruce Banner` has an `INDEX` of 1 on the existing guest list, entering the `delete_vendor 1` command returns the following result on your screen:
 
 ![delete_vendor command](images/deleteVendorCommand.png)
 
