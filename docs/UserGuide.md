@@ -216,6 +216,7 @@ Examples:
 <box type="tip" seamless>
 
 **Tip:** You can delete multiple lessons at once by specifying different lesson indices.
+</box>
 
 ### Locating persons by name: `find`
 
