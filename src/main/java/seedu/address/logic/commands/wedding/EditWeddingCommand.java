@@ -2,6 +2,7 @@ package seedu.address.logic.commands.wedding;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
@@ -38,7 +39,8 @@ public class EditWeddingCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters (optional parameters in square brackets): INDEX (must be a positive integer) "
             + "[" + PREFIX_WEDDING + "WEDDING]"
-            + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS]"
+            + "[" + PREFIX_DATE + "DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_WEDDING + "Mr and Mrs John Tan "
             + PREFIX_ADDRESS + "12 College Ave West";
