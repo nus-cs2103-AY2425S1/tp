@@ -331,10 +331,10 @@ Example:
 - `aggGrade median n/Midterm` Shows the median for midterm tests of the current filtered list.
 
 Expected output for `aggGrade median`:
-![result for `aggGrade median`](images/aggGrade_normal.png)
+![result for 'aggGrade median'](images/aggGrade_normal.png)
 
 Expected output for `aggGrade median n/midterm`
-![result for `aggGrade median n/midterm`](images/aggGrade_filtered.png)
+![result for 'aggGrade median n/midterm'](images/aggGrade_filtered.png)
 
 ### Marking attendance: `mark`
 
