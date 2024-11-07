@@ -4,7 +4,7 @@
 }
 
 .list-cell:empty {
-    -fx-background: #ffffff;
+    -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 .tag-selector {

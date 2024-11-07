@@ -2,25 +2,22 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.ScrollPane?>
 
 <HBox fx:id="contactDetailsPanel" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <ScrollPane fitToWidth="true" HBox.hgrow="ALWAYS">
-    <GridPane>
-      <padding>
-        <Insets left="10" />
-      </padding>
-      <VBox fx:id="contactDetailsBox" spacing="15">
-        <Label fx:id="name" styleClass="label-header" />
-        <Label fx:id="phoneNo" styleClass="label-bright" />
-        <Label fx:id="email" styleClass="label-bright" />
-        <Label fx:id="address" styleClass="label-bright" />
-        <Label fx:id="notes" styleClass="label-bright" />
-        <VBox fx:id="notesList" />
-      </VBox>
-    </GridPane>
+    <padding>
+      <Insets left="10" />
+    </padding>
+    <VBox fx:id="contactDetailsBox" spacing="15">
+      <Label fx:id="name" styleClass="label-header" />
+      <Label fx:id="phoneNo" styleClass="label-bright" />
+      <Label fx:id="email" styleClass="label-bright" />
+      <Label fx:id="address" styleClass="label-bright" />
+      <Label fx:id="notes" styleClass="label-bright" />
+      <VBox fx:id="notesList" />
+    </VBox>
   </ScrollPane>
 </HBox>
