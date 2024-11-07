@@ -27,7 +27,7 @@ If you can type fast, GOATS can get your student management tasks done faster th
 3. Copy the file to the folder you want to use as the _home folder_ for your GOATS.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar GOATS.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/UI.png)
+   ![Ui](images/Ui.png)
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -309,6 +309,30 @@ Examples:
 * `listarchive` followed by `find Betsy` followed by `unarchive 1` unarchives the 1st person in the results of the `find` command.
 * `listarchive` followed by `unarchive 2 3 4 5` unarchives the 2nd, 3rd, 4th and 5th people in the address book.
 
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
+### Listing all archived persons : `listarchive`
+
+Shows a list of all archived persons in the address book.
+
+Format: `listarchive`
+
+### Listing students : `liststudents`
+
+Lists all students in the address book.
+
+Format: `liststudents`
+
+### Listing parents : `listparents`
+
+Lists all parents in the address book.
+
+Format: `liststudents`
+
 ### Link a parent to a student : `link`
 
 Links a parent to a student in a parent-child relationship.
@@ -336,30 +360,6 @@ Format: `unlink ch/STUDENT_NAME`
 Examples:
 
 * `unlink ch/John Doe` removes the parent-child-relationship from `John Doe`, assuming `John Doe` exists in the Address Book and has a parent-child relationship.
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Listing all archived persons : `listarchive`
-
-Shows a list of all archived persons in the address book.
-
-Format: `listarchive`
-
-### Listing students : `liststudents`
-
-Lists all students in the address book.
-
-Format: `liststudents`
-
-### Listing parents : `listparents`
-
-Lists all parents in the address book.
-
-Format: `liststudents`
 
 ### Sorting all persons: `sort`
 
