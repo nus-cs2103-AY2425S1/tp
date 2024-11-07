@@ -49,6 +49,10 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         this.contentManager = new HelpContentManager();
         this.logicManager = new HelpLogicManager(contentManager);
+
+        root.setWidth(800);
+        root.setHeight(600);
+
         initializeUiComponents();
 
         assert contentManager != null : "HelpContentManager should be initialized";
