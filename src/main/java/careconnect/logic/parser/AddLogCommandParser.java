@@ -53,6 +53,11 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
                     ParserUtil.parseLogDate((argMultimap.getValue(CliSyntax.PREFIX_DATE).get()),
                             false);
             log = new Log(date, remark);
+            Date currentDate = new Date();
+            if (date.after(currentDate)) {
+                throw new ParseException(String.format(Messages.MESSAGE_LOG_DATE_IN_FUTURE,
+                        AddLogCommand.MESSAGE_USAGE));
+            }
         } else {
             log = new Log(remark);
         }

@@ -74,4 +74,15 @@ public class AddLogCommandParserTest {
                         AddLogCommand.MESSAGE_USAGE));
     }
 
+
+    @Test
+    public void parse_futureDate_failure() {
+
+        assertParseFailure(parser,
+                CommandTestUtil.INDEX_FIRST_PERSON + CommandTestUtil.LOG_DESC_REMARK
+                + CommandTestUtil.INVALID_DATE_FUTURE,
+                String.format(Messages.MESSAGE_LOG_DATE_IN_FUTURE,
+                        AddLogCommand.MESSAGE_USAGE));
+    }
+
 }

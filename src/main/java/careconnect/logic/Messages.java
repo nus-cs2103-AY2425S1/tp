@@ -13,6 +13,8 @@ import careconnect.model.person.Person;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+
+    public static final String MESSAGE_LOG_DATE_IN_FUTURE = "The log date cannot be in the future";
     public static final String MESSAGE_TOO_SHORT_SEARCH = "Searched name must be at least 2 "
             + "characters long. \n%1$s";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
