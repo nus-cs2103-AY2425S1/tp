@@ -133,11 +133,14 @@ public class AddressBookParser {
      * @return Usage information as a hint for the user.
      */
     public String getHint(String userInput) {
-        if (userInput.startsWith("a")) {
+        userInput = userInput.strip(); // Trim any leading or trailing whitespace
+
+        switch (userInput.charAt(0)) {
+        case 'a':
             return getAddHint(userInput);
-        } else if (userInput.startsWith("d")) {
+        case 'd':
             return getDeleteHint(userInput);
-        } else if (userInput.startsWith("e")) {
+        case 'e':
             if (userInput.startsWith("ed")) {
                 return getEditHint(userInput);
             } else if (userInput.startsWith("ex")) {
@@ -145,9 +148,9 @@ public class AddressBookParser {
             } else {
                 return EditCommand.MESSAGE_USAGE + "\n" + ExitCommand.MESSAGE_USAGE;
             }
-        } else if (userInput.startsWith("f")) {
+        case 'f':
             return getFindHint(userInput);
-        } else if (userInput.startsWith("s")) {
+        case 's':
             if (userInput.startsWith("se")) {
                 return getSearchHint(userInput);
             } else if (userInput.startsWith("sc")) {
@@ -155,7 +158,7 @@ public class AddressBookParser {
             } else {
                 return SearchCommand.MESSAGE_USAGE + "\n" + ScheduleCommand.MESSAGE_HINT;
             }
-        } else if (userInput.startsWith("l")) {
+        case 'l':
             if (userInput.startsWith("lis")) {
                 return ListCommand.MESSAGE_USAGE;
             } else if (userInput.startsWith("lin")) {
@@ -163,11 +166,11 @@ public class AddressBookParser {
             } else {
                 return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_HINT;
             }
-        } else if (userInput.startsWith("u")) {
+        case 'u':
             return UnlinkPersonCommand.MESSAGE_USAGE;
-        } else if (userInput.startsWith("c")) {
+        case 'c':
             return getClearHint(userInput);
-        } else {
+        default:
             return HelpCommand.MESSAGE_USAGE;
         }
     }
@@ -192,6 +195,16 @@ public class AddressBookParser {
         }
     }
 
+    private String getEditHint(String userInput) {
+        if (userInput.startsWith("edit e")) {
+            return EditEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("edit p")) {
+            return EditPersonCommand.MESSAGE_USAGE;
+        } else {
+            return EditCommand.MESSAGE_USAGE;
+        }
+    }
+
     private String getFindHint(String userInput) {
         if (userInput.startsWith("find e")) {
             return FindEventCommand.MESSAGE_USAGE;
@@ -209,16 +222,6 @@ public class AddressBookParser {
             return SearchPersonCommand.MESSAGE_USAGE;
         } else {
             return SearchCommand.MESSAGE_USAGE;
-        }
-    }
-
-    private String getEditHint(String userInput) {
-        if (userInput.startsWith("edit e")) {
-            return EditEventCommand.MESSAGE_USAGE;
-        } else if (userInput.startsWith("edit p")) {
-            return EditPersonCommand.MESSAGE_USAGE;
-        } else {
-            return EditCommand.MESSAGE_USAGE;
         }
     }
 

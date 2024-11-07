@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -34,7 +35,7 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             setStyleToDefault();
-            if (!newValue.trim().isEmpty()) {
+            if (!newValue.trim().isEmpty() && !ClearCommand.isPrompted()) {
                 hintHandler.handleRealTimeHint(newValue);
             } else if (mainWindow.isHintDisplayed()) {
                 mainWindow.clearResultDisplay();
