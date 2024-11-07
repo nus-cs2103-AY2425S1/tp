@@ -29,10 +29,10 @@
          </children>
       </HBox>
     <Label fx:id="emailTitleLabel" text="Email:" />
-    <Label fx:id="emailLabel" />
+    <Label fx:id="emailLabel" wrapText="true" />
 
     <Label fx:id="addressTitleLabel" text="Address:" />
-    <Label fx:id="addressLabel" />
+    <Label fx:id="addressLabel" wrapText="true" />
 
     <Label fx:id="remarkTitleLabel" text="Remarks:" />
     <ScrollPane fitToWidth="true">
