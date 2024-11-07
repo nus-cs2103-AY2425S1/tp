@@ -24,8 +24,6 @@ public abstract class FindCommand extends Command {
             + "Parameters: PREFIX/ KEYWORDS [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice charlie";
 
-    public static final String MESSAGE_FIND_PERSON_UNSUCCESSFUL = "No contacts found.";
-
     protected final TraitContainsKeywordsPredicate<?> predicate;
 
     public FindCommand(TraitContainsKeywordsPredicate<?> predicate) {

@@ -2,6 +2,7 @@ package seedu.address.logic.commands.findcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
@@ -10,9 +11,6 @@ import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredi
  * Keyword matching is case-insensitive and allows partial matching.
  */
 public class FindAddressCommand extends FindCommand {
-
-    public static final String MESSAGE_FIND_ADDRESS_PERSON_SUCCESS = "Search for address containing \"%s\" "
-            + " was successful. Showing results:";
 
     /**
      * Command to filter contacts in WedLinker based on phone numbers.
@@ -30,9 +28,11 @@ public class FindAddressCommand extends FindCommand {
         model.updateFilteredPersonList((AddressContainsKeywordsPredicate) predicate);
 
         if (!model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString()));
+            return new CommandResult(String.format(
+                    Messages.MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString()
+            ));
         } else {
-            return new CommandResult(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+            return new CommandResult(Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         }
     }
 

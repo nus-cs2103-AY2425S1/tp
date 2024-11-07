@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -42,7 +43,7 @@ public class CreateTaskCommandTest {
         // Create a CreateTaskCommand with valid tasks
         CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
 
-        String expectedMessage = String.format(CreateTaskCommand.MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd));
+        String expectedMessage = String.format(Messages.MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd));
 
         CommandResult result = command.execute(model);
 
@@ -60,7 +61,9 @@ public class CreateTaskCommandTest {
 
         CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
 
-        assertThrows(CommandException.class, () -> command.execute(model), CreateTaskCommand.MESSAGE_DUPLICATE_TASK);
+        assertThrows(
+                CommandException.class, () -> command.execute(model), Messages.MESSAGE_DUPLICATE_TASK_IN_WEDLINKER
+        );
     }
     @Test
     public void getTaskToAdd_validTaskSet_returnsCorrectSet() {
