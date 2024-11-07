@@ -6,12 +6,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
-import careconnect.Main;
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.core.LogsCenter;
 import careconnect.logic.Logic;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
-import careconnect.logic.commands.Command;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
@@ -172,14 +170,20 @@ public class MainWindow extends UiPart<Stage> {
      */
     protected void setAndShowSelectedPerson(int selectedIndex) {
         if (selectedIndex == CommandResult.NO_RECORD_SELECTED) {
+            this.personListPanel.clearSelection();
             this.selectedPersonDetailCard = null;
             personDetailPlaceholder.getChildren().setAll(personDetailFallback.getRoot());
         } else {
-            // this selects and the selection listener in personListPanel will show
+            // this selects and the selection listener in personListPanel will make a call to showSelectedPerson
             this.personListPanel.setSelected(selectedIndex);
         }
     }
 
+    /**
+     * Shows selected person on the right pane
+     *
+     * @param person the person to be shown
+     */
     protected void showSelectedPerson(Person person) {
         this.selectedPersonDetailCard = new PersonDetailCard(person, this::updateCurrentFocusItem);
         personDetailPlaceholder.getChildren().setAll(this.selectedPersonDetailCard.getRoot());
@@ -189,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::setAndShowSelectedPerson,
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(),
                 this::updateCurrentFocusItem, this::showSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -201,7 +205,8 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        this.commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand, this::validateSyntax, this::updateCurrentFocusItem);
+        this.commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand,
+                this::validateSyntax, this::updateCurrentFocusItem);
         // focus on command box
         updateCurrentFocusItem(FocusItems.COMMAND_BOX_ITEM);
         commandBoxPlaceholder.getChildren().add(this.commandBox.getRoot());
@@ -332,7 +337,8 @@ public class MainWindow extends UiPart<Stage> {
             @Override
             public ShiftTabFocusable getItem(MainWindow mainWindow) {
                 // if no person selected or no logs present return null
-                if (mainWindow.selectedPersonDetailCard == null || mainWindow.selectedPersonDetailCard.isLogListEmpty()) {
+                if (mainWindow.selectedPersonDetailCard == null
+                        || mainWindow.selectedPersonDetailCard.isLogListEmpty()) {
                     return null;
                 } else {
                     return mainWindow.selectedPersonDetailCard;
@@ -350,7 +356,7 @@ public class MainWindow extends UiPart<Stage> {
         public FocusItems next(MainWindow mainWindow) {
             int count = 0;
             FocusItems next = values()[(this.ordinal() + 1) % values().length];
-            while(next.getItem(mainWindow) == null) {
+            while (next.getItem(mainWindow) == null) {
                 // should not go into infinite loop, since focusItem is only set after
                 // command box have been initialized
                 assert(count <= values().length);
@@ -364,7 +370,7 @@ public class MainWindow extends UiPart<Stage> {
         public FocusItems previous(MainWindow mainWindow) {
             int count = 0;
             FocusItems previous = values()[(this.ordinal() - 1 + values().length) % values().length];
-            while(previous.getItem(mainWindow) == null) {
+            while (previous.getItem(mainWindow) == null) {
                 // should not go into infinite loop, since focusItem is only set after
                 // command box have been initialized
                 assert(count <= values().length);

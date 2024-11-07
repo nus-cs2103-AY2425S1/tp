@@ -16,7 +16,7 @@ import javafx.scene.layout.Region;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> implements ShiftTabFocusable{
+public class PersonListPanel extends UiPart<Region> implements ShiftTabFocusable {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
@@ -26,18 +26,24 @@ public class PersonListPanel extends UiPart<Region> implements ShiftTabFocusable
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, Consumer<Integer> setAndShowSelectedPerson,
+    public PersonListPanel(ObservableList<Person> personList,
                            FocusItemUpdater focusItemUpdater, Consumer<Person> showSelectedPerson) {
         super(FXML);
         this.personListView.setItems(personList);
-        this.personListView.setCellFactory(listView -> new PersonListViewCell(setAndShowSelectedPerson));
+        this.personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.setOnMousePressed(event -> {
             focusItemUpdater.updateCurrentFocusItem(FocusItems.PERSON_LIST_ITEM);
         });
         // Add listener to respond to selection changes
-        personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            showSelectedPerson.accept(newValue);
+        personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldPerspm, newPerson) -> {
+            if (newPerson != null) {
+                showSelectedPerson.accept(newPerson);
+            }
         });
+    }
+
+    protected void clearSelection() {
+        personListView.getSelectionModel().clearSelection();
     }
 
     protected void setSelected(int index) {
@@ -53,11 +59,6 @@ public class PersonListPanel extends UiPart<Region> implements ShiftTabFocusable
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
-        private final Consumer<Integer> setAndShowSelectedPerson;
-
-        public PersonListViewCell(Consumer<Integer> setAndShowSelectedPerson) {
-            this.setAndShowSelectedPerson = setAndShowSelectedPerson;
-        }
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -66,7 +67,7 @@ public class PersonListPanel extends UiPart<Region> implements ShiftTabFocusable
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1, setAndShowSelectedPerson).getRoot());
+                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
 

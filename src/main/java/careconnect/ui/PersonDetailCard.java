@@ -6,7 +6,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Comparator;
 
-import careconnect.ui.MainWindow.FocusItemUpdater;
 import careconnect.model.person.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
