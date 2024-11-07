@@ -1,20 +1,13 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.address.model.ClinicConnectSystem;
 import seedu.address.model.ReadOnlyClinicConnectSystem;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.patient.Birthdate;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
-import seedu.address.model.tag.Tag;
-
 /**
  * Contains utility methods for populating {@code ClinicConnectSystem} with sample data.
  */
@@ -36,21 +29,6 @@ public class SampleDataUtil {
             sampleAb.addPatient(samplePatient);
         }
         return sampleAb;
-    }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
-    }
-
-    public static Set<HealthService> getHealthServiceSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(HealthService::new)
-                .collect(Collectors.toSet());
     }
 
 }

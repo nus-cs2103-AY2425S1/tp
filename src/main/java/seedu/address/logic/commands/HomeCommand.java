@@ -24,6 +24,6 @@ public class HomeCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
-        return new DefaultCommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredPatientList().size()));
+        return new DefaultCommandResult(String.format(MESSAGE_SUCCESS, model.getPatientSize()));
     }
 }

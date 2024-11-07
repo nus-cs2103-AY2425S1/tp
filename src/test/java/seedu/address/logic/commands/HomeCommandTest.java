@@ -26,6 +26,7 @@ public class HomeCommandTest {
 
     @Test
     public void execute_homeCommand_success() {
-        assertCommandSuccess(new HomeCommand(), model, HomeCommand.MESSAGE_SUCCESS, expectedModel);
+        String msg_success = String.format(HomeCommand.MESSAGE_SUCCESS, model.getPatientSize());
+        assertCommandSuccess(new HomeCommand(), model, msg_success, expectedModel);
     }
 }

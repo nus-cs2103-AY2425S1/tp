@@ -158,6 +158,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getPatientSize() {
+        return this.filteredPatients.size();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
