@@ -156,8 +156,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_importCommandWord_returnsImportCommand() throws Exception {
-        Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CsvImportTest");
-        Path filePath = TEST_DATA_FOLDER.resolve("typicalPersonsCsv.csv");
+        Path testFolder = Paths.get("src", "test", "data", "CsvImportTest");
+        Path filePath = testFolder.resolve("typicalPersonsCsv.csv");
         assertTrue(parser.parseCommand("import \\f " + filePath) instanceof ImportCommand);
     }
 
