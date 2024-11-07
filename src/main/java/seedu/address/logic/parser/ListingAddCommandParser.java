@@ -13,7 +13,7 @@ import seedu.address.model.person.Listing;
 
 
 /**
- * Parses input arguments and creates a new RemarkCommand object.
+ * Parses input arguments and creates a new ListingAddCommand object.
  */
 public class ListingAddCommandParser implements Parser<ListingAddCommand> {
 
@@ -37,6 +37,16 @@ public class ListingAddCommandParser implements Parser<ListingAddCommand> {
 
         String propertyType = argMultimap.getValue(PREFIX_TAG).orElse("");
         String address = argMultimap.getValue(PREFIX_ADDRESS).orElse("");
+
+        if (propertyType.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListingAddCommand.MESSAGE_USAGE));
+        }
+        if (address.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListingAddCommand.MESSAGE_USAGE));
+        }
+
         Listing listing = ParserUtil.parseListing(propertyType, address);
 
         return new ListingAddCommand(listing, index);
