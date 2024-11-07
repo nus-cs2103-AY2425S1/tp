@@ -71,11 +71,11 @@
     "description" : "Organizing a blood donation drive",
     "volunteers" : [ ]
   }, {
-    "eventName" : "beach clean2",
-    "date" : "2023-10-15",
-    "startTime" : "00:00",
-    "endTime" : "10:00",
-    "location" : "here",
+    "eventName" : "Beach Day",
+    "date" : "2023-10-25",
+    "startTime" : "08:00",
+    "endTime" : "12:00",
+    "location" : "East Coast Park",
     "description" : "",
     "volunteers" : [ ]
   } ]

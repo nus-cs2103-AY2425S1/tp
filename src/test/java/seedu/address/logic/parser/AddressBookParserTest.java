@@ -23,6 +23,7 @@ import seedu.address.logic.commands.volunteercommands.VolunteerViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventNameContainsKeywordPredicate;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.Time;
 import seedu.address.model.volunteer.Email;
@@ -30,6 +31,7 @@ import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerDates;
+import seedu.address.model.volunteer.VolunteerNameContainsKeywordPredicate;
 import seedu.address.testutil.TypicalIndexes;
 
 public class AddressBookParserTest {
@@ -73,10 +75,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_findEvent() throws Exception {
         String keyword = "food";
+        EventNameContainsKeywordPredicate predicate = new EventNameContainsKeywordPredicate(keyword);
         FindEventCommand command = (FindEventCommand) parser.parseCommand(
                 createCommand(AddressBookParser.EVENT_COMMAND_INDICATOR,
-                    FindEventCommand.COMMAND_WORD, keyword));
-        assertEquals(new FindEventCommand(keyword), command);
+                        FindEventCommand.COMMAND_WORD, keyword));
+        assertEquals(new FindEventCommand(predicate), command);
     }
     @Test
     public void parseCommand_newVolunteer() throws Exception {
@@ -105,12 +108,14 @@ public class AddressBookParserTest {
         assertEquals(new VolunteerViewCommand(TypicalIndexes.INDEX_FIRST), command);
     }
 
-    @Test void parseCommand_findVolunteer() throws Exception {
+    @Test
+    void parseCommand_findVolunteer() throws Exception {
         String keyword = "john";
+        VolunteerNameContainsKeywordPredicate predicate = new VolunteerNameContainsKeywordPredicate(keyword);
         FindVolunteerCommand command = (FindVolunteerCommand) parser.parseCommand(
                 createCommand(AddressBookParser.VOLUNTEER_COMMAND_INDICATOR,
-                    FindVolunteerCommand.COMMAND_WORD, keyword));
-        assertEquals(new FindVolunteerCommand(keyword), command);
+                        FindVolunteerCommand.COMMAND_WORD, keyword));
+        assertEquals(new FindVolunteerCommand(predicate), command);
     }
 
     @Test

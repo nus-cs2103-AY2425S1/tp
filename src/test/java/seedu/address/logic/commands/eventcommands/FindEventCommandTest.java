@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.EventNameContainsKeywordPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -26,11 +27,11 @@ public class FindEventCommandTest {
     public void execute_eventFound_success() {
         // Search for an event with a name that exists in the typical events
         String searchString = "Meeting"; // Replace with actual event name present in getTypicalAddressBook()
-        FindEventCommand command = new FindEventCommand(searchString);
+        EventNameContainsKeywordPredicate predicate = new EventNameContainsKeywordPredicate(searchString);
+        FindEventCommand command = new FindEventCommand(predicate);
 
         // Update expected model to show events containing the search string
-        expectedModel.updateFilteredEventList(event -> event.getName().toString().toLowerCase()
-                .contains(searchString.toLowerCase()));
+        expectedModel.updateFilteredEventList(predicate);
 
         String expectedMessage = String.format(FindEventCommand.MESSAGE_EVENT_FOUND,
                 expectedModel.getFilteredEventList().size(), searchString);
@@ -42,7 +43,8 @@ public class FindEventCommandTest {
     public void execute_eventNotFound_noEventsFoundMessage() {
         // Search for a string that does not match any events
         String searchString = "NonExistentEvent";
-        FindEventCommand command = new FindEventCommand(searchString);
+        EventNameContainsKeywordPredicate predicate = new EventNameContainsKeywordPredicate(searchString);
+        FindEventCommand command = new FindEventCommand(predicate);
 
         String expectedMessage = String.format(FindEventCommand.MESSAGE_EVENT_NOT_FOUND, searchString);
 
@@ -52,21 +54,24 @@ public class FindEventCommandTest {
     @Test
     public void execute_emptySearchString_throwsCommandException() {
         String searchString = ""; // An empty search string
-        FindEventCommand command = new FindEventCommand(searchString);
+        EventNameContainsKeywordPredicate predicate = new EventNameContainsKeywordPredicate(searchString);
+        FindEventCommand command = new FindEventCommand(predicate);
 
         assertCommandFailure(command, model, String.format(FindEventCommand.MESSAGE_EVENT_NOT_FOUND, searchString));
     }
 
     @Test
     public void equals() {
-        FindEventCommand findFirstEventCommand = new FindEventCommand("Meeting");
-        FindEventCommand findSecondEventCommand = new FindEventCommand("Conference");
+        EventNameContainsKeywordPredicate predicateFirst = new EventNameContainsKeywordPredicate("Meeting");
+        EventNameContainsKeywordPredicate predicateSecond = new EventNameContainsKeywordPredicate("Conference");
+        FindEventCommand findFirstEventCommand = new FindEventCommand(predicateFirst);
+        FindEventCommand findSecondEventCommand = new FindEventCommand(predicateSecond);
 
         // same object -> returns true
         assertTrue(findFirstEventCommand.equals(findFirstEventCommand));
 
         // same values -> returns true
-        FindEventCommand findFirstEventCommandCopy = new FindEventCommand("Meeting");
+        FindEventCommand findFirstEventCommandCopy = new FindEventCommand(predicateFirst);
         assertTrue(findFirstEventCommand.equals(findFirstEventCommandCopy));
 
         // different types -> returns false
@@ -75,16 +80,17 @@ public class FindEventCommandTest {
         // null -> returns false
         assertFalse(findFirstEventCommand.equals(null));
 
-        // different searchString -> returns false
+        // different predicate -> returns false
         assertFalse(findFirstEventCommand.equals(findSecondEventCommand));
     }
 
     @Test
     public void toStringMethod() {
         String searchString = "Meeting";
-        FindEventCommand findEventCommand = new FindEventCommand(searchString);
+        EventNameContainsKeywordPredicate predicate = new EventNameContainsKeywordPredicate(searchString);
+        FindEventCommand findEventCommand = new FindEventCommand(predicate);
 
-        String expected = "FindEventCommand[searchString=" + searchString + "]";
+        String expected = "FindEventCommand[predicate=" + predicate.toString() + "]";
         assertEquals(expected, findEventCommand.toString());
     }
 }
