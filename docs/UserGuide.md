@@ -144,7 +144,7 @@ Format: `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [inc
 * Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but have high priority. 
 
 Examples:
-* `find pri/high` returns `Alice Tan` and `David Wong`
+* `find pri/high` returns `Alice Tan` and `David Wong` (from sample data)
 * `find n/a n/b n/c pri/high pri/medium` returns `Alice Tan` and `Benny Lim`<br>
   ![sample find result](images/findResult.png)
 
