@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.PersonBuilder;
@@ -127,7 +128,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public Person findPerson(String personName) {
+        public Person findPerson(Name personName) {
             throw new AssertionError("This method should not be called.");
         }
 
