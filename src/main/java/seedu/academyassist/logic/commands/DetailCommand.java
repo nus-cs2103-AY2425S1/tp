@@ -20,7 +20,7 @@ public class DetailCommand extends Command {
             + "Format: " + COMMAND_WORD + " STUDENT_ID\n"
             + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
             + "Parameter Example: \n"
-            + "- STUDENT_ID: S1234567A\n";
+            + "- STUDENT_ID: S00001\n";
 
     public static final String MESSAGE_DETAIL_SUCCESS = "Viewing details of student %1$s";
 

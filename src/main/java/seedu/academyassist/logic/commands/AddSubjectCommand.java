@@ -26,7 +26,7 @@ public class AddSubjectCommand extends Command {
             + PREFIX_SUBJECT + "SUBJECT [" + PREFIX_SUBJECT + "MORE_SUBJECTS]... \n"
             + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
             + "Parameters Example: \n"
-            + "- STUDENT_ID: S1234567A\n"
+            + "- STUDENT_ID: S00001\n"
             + "- SUBJECT: Math";
 
 
