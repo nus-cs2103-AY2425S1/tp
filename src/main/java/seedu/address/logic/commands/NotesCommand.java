@@ -141,15 +141,26 @@ public class NotesCommand extends Command {
             List<Person> exactMatch = fullPersonList.stream()
                     .filter(person -> person.getName().fullName.equalsIgnoreCase(targetName.toString()))
                     .toList();
+            List<Person> partialMatches = fullPersonList.stream()
+                    .filter(person -> person.getName().fullName.toLowerCase()
+                    .contains(targetName.toString().toLowerCase()))
+                    .toList();
             if (exactMatch.size() == 1) {
                 personToEdit = exactMatch.get(0);
             } else {
-                if (exactMatch.size() > 1) {
+                if (partialMatches.size() == 1) {
+                    personToEdit = partialMatches.get(0);
+                } else if (exactMatch.size() > 1) {
+                    FindCommandParser findExactCommandParser = new FindCommandParser();
+                    findExactCommandParser.parse(targetName.toString()).execute(model);
+                    throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, targetName.toString()));
+                } else if (partialMatches.size() > 1) {
                     FindCommandParser findCommandParser = new FindCommandParser();
                     findCommandParser.parse(targetName.toString()).execute(model);
                     throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, targetName.toString()));
+                } else {
+                    throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, targetName.toString()));
                 }
-                throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, targetName.toString()));
             }
         }
 
