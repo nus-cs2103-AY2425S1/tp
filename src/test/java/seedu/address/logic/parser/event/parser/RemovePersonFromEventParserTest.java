@@ -30,14 +30,14 @@ public class RemovePersonFromEventParserTest {
 
     @Test
     public void parse_validArgs_returnsRemovePersonFromEventCommand() {
-        assertParseSuccess(parser, "remove ei/1 pi/1",
+        assertParseSuccess(parser, "remove ei/1 ci/1",
                  new RemovePersonFromEventCommand(Index.fromOneBased(1),
                          Index.fromOneBased(1)));
     }
 
     @Test
     public void parse_validArgs_differentOrder() {
-        assertParseSuccess(parser, "remove pi/1 ei/2",
+        assertParseSuccess(parser, "remove ci/1 ei/2",
                 new RemovePersonFromEventCommand(Index.fromOneBased(2),
                         Index.fromOneBased(1)));
     }

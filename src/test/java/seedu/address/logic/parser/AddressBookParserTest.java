@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -149,7 +150,7 @@ public class AddressBookParserTest {
         Command expected = new RemovePersonFromEventCommand(Index.fromOneBased(1),
                 Index.fromOneBased(1));
         assertEquals(expected, new AddressBookParser()
-                .parseCommand(RemovePersonFromEventCommand.COMMAND_WORD + " ei/1 pi/1"));
+                .parseCommand(RemovePersonFromEventCommand.COMMAND_WORD + " ei/1 ci/1"));
     }
 
     @Test
@@ -187,8 +188,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseSearchModeCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse "
-                + "only search, exitsearch (es), add-all or exit", () ->
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND
+                + Messages.SEARCHMODE_UNKNOWN_COMMAND, () ->
                 parser.parseSearchModeCommand("random"));
     }
 
@@ -222,9 +223,9 @@ public class AddressBookParserTest {
         model.addPerson(ALICE);
         model.addPerson(BOB);
         model.addPerson(CARL);
-        Command expected = new ExcludePersonCommandParser().parse(" pi/1, 2, 3");
+        Command expected = new ExcludePersonCommandParser().parse(" ci/1, 2, 3");
         assertEquals(expected, new AddressBookParser()
-                .parseSearchModeCommand("exclude pi/1, 2, 3"));
+                .parseSearchModeCommand("exclude ci/1, 2, 3"));
     }
 
     @Test
