@@ -152,7 +152,7 @@ Parameters:
 <box type="warning" seamless>
 
 **Warnings**:
-- At least one space between `add` and `-s` is compulsory
+- At least one space between `add` and `-s`
 - Duplicate supplier will not be added again
 - A supplier is considered duplicate if they have the same `NAME` and `COMPANY`
 - Adding duplicate `TAG`/`PRODUCT` will result in only one copy added to the supplier
@@ -179,8 +179,8 @@ Format: `list -s`
 <box type="warning" seamless>
 
 **Warnings**:
-- No other parameters should be given for this command.
 - At least one space between list and -s
+- No other parameters should be given for this command.
   </box>
 
 ### Deleting a supplier : `delete -s`
@@ -207,8 +207,8 @@ The `mark` command is used to mark a supplier as either **active** or **inactive
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
 
 Format: `mark -s SUPPLIER_INDEX STATUS`
-- `SUPPLIER_INDEX`: The index of the supplier in the list.
-- `STATUS`: Either `active` or `inactive` to indicate the supplier's status.
+- `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank.
 
 #### Example
 To mark the supplier at index 3 as active:
@@ -225,13 +225,13 @@ A success message will be displayed if the supplier is successfully marked as ac
 The `find -s` command is used to find a supplier in VendorVault. 
 This helps you find suppliers based on keyword search.
 
-Format: `find -s n/KEYWORD_SUPPLIER_NAME com/KEYWORD_SUPPLIER_COMPANY pro/KEYWORD_SUPPLIER_PRODUCT`
+Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 
 Parameters:
 
-- `n/KEYWORD_SUPPLIER_NAME`: This will check if the Supplier's name contains the given keyword
-- `on/KEYWORD_SUPPLIER_COMPANYE`: This will check if the Supplier's company contains the given keyword
-- `pro/KEYWORD_SUPPLIER_PRODUCT`: This will check if the Supplier's product(s) contains in the given keyword
+- `n/NAME`: Must be alphanumeric, and must not be blank.
+- `on/COMPANY`: Must be alphanumeric, and must not be blank.
+- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
 
 <box type="warning" seamless>
 
@@ -289,7 +289,7 @@ Parameters:
 
 - `on/DELIVERY_DATE_TIME`: Must be in dd-MM-yyyy hh:mm format and must not be blank.
 - `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
+- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
 - `q/QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
 - `c/COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
 <box type="tip" seamless>
@@ -336,7 +336,7 @@ Format: `mark -d INDEX STATUS`
 Parameters:
 
 - `INDEX`: Must be a number greater than 0 and must not be blank.
-- `STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
+- `STATUS`: Must be one of the following: `PENDING`, `DELIVERED`, `CANCELLED` and must not be blank.
 <box type="tip" seamless>
 
 **Warnings**:
@@ -387,7 +387,7 @@ Parameters:
 - `on/DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
 - `stat/STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
 - `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
+- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
 <box type="tip" seamless>
 
 **Warnings**:
