@@ -18,7 +18,7 @@ import seedu.address.model.person.InterestContainsKeywordsPredicate;
 public class FindByInterestCommandParser implements Parser<FindByInterestCommand> {
 
     // Pattern to match each i/ group, allowing spaces or commas within it
-    private static final Pattern INTEREST_KEYWORD_PATTERN = Pattern.compile("i/([^\\s]+(?:\\s*,\\s*[^\\s]+)*)");
+    private static final Pattern INTEREST_KEYWORD_PATTERN = Pattern.compile("i/\\s*([^\\s]+(?:\\s*,\\s*[^\\s]+)*)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindByInterestCommand

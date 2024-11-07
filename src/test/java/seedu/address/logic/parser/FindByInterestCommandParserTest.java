@@ -65,18 +65,15 @@ public class FindByInterestCommandParserTest {
         assertParseFailure(parser, "Reading", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindByInterestCommand.MESSAGE_USAGE));
     }
-
-
-    /*
     @Test
     public void parse_multipleSpaces_returnsTrimmedFindByInterestCommand() {
         // Test input with multiple spaces
         FindByInterestCommand expectedCommand = new FindByInterestCommand(
                 new InterestContainsKeywordsPredicate(Collections.emptyList(),
                 Collections.singletonList("Photography")));
-        assertParseSuccess(parser, " i/   Photography   ", expectedCommand);
+        assertParseSuccess(parser, " i/   Photography    ", expectedCommand);
     }
-    */
+
     @Test
     public void parse_mixedComplexInput_returnsFindByInterestCommand() {
         // Test with complex input including multiple AND and OR conditions with extra spaces
