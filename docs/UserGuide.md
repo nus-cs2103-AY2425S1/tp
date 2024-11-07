@@ -1,11 +1,8 @@
 ---
 
 layout: default.md
-
 title: "User Guide"
-
 pageNav: 3
-
 ---
 
 # DLTbook User Guide
@@ -55,7 +52,7 @@ Not sure if you have Java? Check out [Setup Guide](#setup-guide)
 
 ## Beginner's Guide
 
-<panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded> 
+<panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded>
 
 _If you're new to DLTbook or the concept of Distributed Ledger Technology (DLT), this guide will walk you through the
 basics. Here, we'll cover key concepts, important terminology, and guide you through the first steps in using DLTbook._
@@ -76,7 +73,7 @@ Unlike traditional databases, DLTs do not have a central administrator, which me
 decentralized.
 </box>
 
-<box type="tip" seamless> 
+<box type="tip" seamless>
 
 **Why is DLTBook useful in managing contacts?**
 
@@ -225,14 +222,6 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 
 - Check our [Troubleshooting Guide](link-to-troubleshooting) if you run into any issues
 
-<box type="tip" seamless>
-
-
-**Tip:** 💡 Type commands in any case - they're not case-sensitive
-
-</box>
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -260,6 +249,7 @@ Command | Description
 [**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact
 [**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa) | Deletes the public address of a contact
 [**Public Address Search**](#searching-for-a-public-address-publicaddresssearch) | Searches for a public address
+[**Filter**](#filtering-persons-by-public-addresses-network-filter) | Filters out a list of people with the public addresses of the specified network
 
 <box type="info" seamless>
 
@@ -276,7 +266,6 @@ Command | Description
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
@@ -424,7 +413,7 @@ Examples:
 Adds a public address to a contact.
 
 
-Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
+Format: `addpa INDEX c/NETWORK l/LABEL pa/PUBLIC_ADDRESS`
 
 
 * Adds a public address to a contact at the specified `INDEX`. The index refers to the index number shown in the
@@ -432,14 +421,19 @@ Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
   The index **must be a positive integer** 1, 2, 3, …​
 
 * The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
-  `SOL`, etc.).
+  `SOL`, etc.). 
+  * This field is not case-sensitive and will be converted to UPPERCASE.
 
-* The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
+* The `LABEL` parameter specifies the wallet name to which the public address belongs.
+  * This field is not case-sensitive and will be stored as is.
 
-* The `PUBLIC_ADDRESS` parameter specifies the public address to be added, this fields is not cap sensitive.
+* The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
+  * This field is not case-sensitive and will be converted to lowercase.
 
 Examples:
-* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a the first contact on the list `Alex Yeoh` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to the first contact on the list `Alex Yeoh` under the ETH network with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+
+* `addpa 4 c/BTC l/savings_wallet pa/0x71C7656EC7ab88b098defB751B7401B5f6d8976F` adds a public address to the fourth contact on the list `David Li` under the BC network with the wallet name `savings_wallet` and the public address `0x71C7656EC7ab88b098defB751B7401B5f6d8976F`.
 
 ![img.png](img.png)
 
@@ -490,7 +484,7 @@ Retrieves the public addresses of a contact.
 Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
 * `WALLET_NAME` parameter is compulsory and specifies the label (or part of the label) of the public address(es) to be retrieved.
-  It is **case-insensitive**.
+It is **case-insensitive**.
  
 * `NETWORK` parameter is optional and specifies the ticker name for each network and should be in all CAPS.<br />
   Allowed values: `BTC|ETH|SOL`.
@@ -556,6 +550,30 @@ Examples:
 * `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` searches for a public
   address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the contact and wallet to
   which it belongs.
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Filtering persons by public addresses network : `filter`
+
+Filters out a list of people with the public addresses of the specified network.
+
+Format: `filter c/NETWORK`
+
+<box type="tip" seamless>
+
+The fields are not cap sensitive.
+</box>
+
+* Filters out a list of people with the public addresses of the `NETWORK` provided.
+
+* The `NETWORK` parameter specifies the public addresses network to be filtered.
+
+Examples:
+
+* `filter c/BTC` filters a list of people with the public addresses of `BTC` and 
+  displays it with their respective list number.
 
 <br>
 
@@ -646,3 +664,4 @@ the data of your previous AddressBook home folder.
 | **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                                 |
 | **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                               |
 | **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`                                                              |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                                          |
