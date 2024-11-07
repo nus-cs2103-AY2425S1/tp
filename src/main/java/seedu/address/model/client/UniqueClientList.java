@@ -38,10 +38,19 @@ public class UniqueClientList implements Iterable<Client> {
      */
     public boolean contains(Client toCheck) {
         requireNonNull(toCheck, "Client to check cannot be null.");
-        boolean containsClient = internalList.stream().anyMatch(toCheck::isSameClient);
-        assert containsClient == internalList.stream().anyMatch(toCheck::isSameClient)
+        boolean isSameClient = internalList.stream().anyMatch(toCheck::isSameClient);
+        assert isSameClient == internalList.stream().anyMatch(toCheck::isSameClient)
                 : "Client existence check failed!";
-        return containsClient;
+        return isSameClient;
+    }
+
+    /**
+     * Returns true if the list contains a client with the same client type and email.
+     */
+    public boolean containsEmail(Client toCheck) {
+        requireNonNull(toCheck, "Client to check cannot be null.");
+        boolean isDuplicateEmail = internalList.stream().anyMatch(toCheck::isDuplicateEmail);
+        return isDuplicateEmail;
     }
 
     /**

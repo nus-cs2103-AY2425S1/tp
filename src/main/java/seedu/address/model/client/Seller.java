@@ -41,6 +41,31 @@ public class Seller extends Client {
                 && otherClient.getPhone().equals(getPhone());
     }
 
+    /**
+     * Returns true if both clients are sellers and have the same email.
+     */
+    @Override
+    public boolean isDuplicateEmail(Client otherClient) {
+        if (otherClient == this) {
+            return true;
+        }
+
+        // Ensure that otherClient is not null before proceeding
+        if (otherClient == null) {
+            return false;
+        }
+
+        return ((otherClient instanceof Seller && otherClient.getEmail().equals(getEmail()))
+
+                || (otherClient instanceof Buyer
+                // Buyer's phone number does not match the current seller's
+                && !(otherClient.getPhone().equals(getPhone()))
+                // Verify that the Buyer's email matches the current seller's email
+                && otherClient.getEmail().equals(getEmail())
+            )
+            );
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

@@ -47,6 +47,33 @@ public class UniqueClientListTest {
     }
 
     @Test
+    public void containsEmail_nullClient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueClientList.containsEmail(null));
+    }
+
+    @Test
+    public void containsEmail_noClientWithSameEmail_returnsFalse() {
+        uniqueClientList.add(ALICE);
+        Client clientWithDifferentEmail = new ClientBuilder(BOB).withEmail("unique@example.com").buildBuyer();
+        assertFalse(uniqueClientList.containsEmail(clientWithDifferentEmail));
+    }
+
+    @Test
+    public void containsEmail_sameEmailSameType_returnsTrue() {
+        uniqueClientList.add(ALICE);
+        Client clientWithSameEmailAndType = new ClientBuilder(ALICE).withEmail(ALICE.getEmail().value).buildBuyer();
+        assertTrue(uniqueClientList.containsEmail(clientWithSameEmailAndType));
+    }
+
+    @Test
+    public void containsEmail_sameEmailDifferentType_returnsFalse() {
+        uniqueClientList.add(ALICE);
+        Client clientWithSameEmailDifferentType = new ClientBuilder(ALICE)
+                .withEmail(ALICE.getEmail().value).buildSeller();
+        assertFalse(uniqueClientList.containsEmail(clientWithSameEmailDifferentType));
+    }
+
+    @Test
     public void add_nullClient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueClientList.add(null));
     }

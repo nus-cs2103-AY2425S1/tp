@@ -57,6 +57,82 @@ class BuyerTest {
     }
 
     @Test
+    void testIsDuplicateEmail_sameClient_returnsTrue() {
+        // Arrange
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
+        Phone phone = mock(Phone.class);
+        Email email = mock(Email.class);
+
+        Buyer buyer = new Buyer(name, phone, email);
+
+        // Act & Assert
+        assertTrue(buyer.isDuplicateEmail(buyer));
+    }
+
+    @Test
+    void testIsDuplicateEmail_nullClient_returnsFalse() {
+        // Arrange
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
+        Phone phone = mock(Phone.class);
+        Email email = mock(Email.class);
+
+        Buyer buyer = new Buyer(name, phone, email);
+
+        // Act & Assert
+        assertFalse(buyer.isDuplicateEmail(null));
+    }
+
+    @Test
+    void testIsDuplicateEmail_buyerWithSameEmail_returnsTrue() {
+        // Arrange
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
+        Phone phone1 = mock(Phone.class);
+        Phone phone2 = mock(Phone.class); // Different phone
+        Email email = mock(Email.class);
+
+        when(email.toString()).thenReturn("buyer@example.com");
+
+        Buyer buyer1 = new Buyer(name, phone1, email);
+        Buyer buyer2 = new Buyer(name, phone2, email); // Same email, different phone
+
+        // Act & Assert
+        assertTrue(buyer1.isDuplicateEmail(buyer2));
+    }
+
+    @Test
+    void testIsDuplicateEmail_sellerWithSameEmailDifferentPhone_returnsTrue() {
+        // Arrange
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
+        Phone phone1 = mock(Phone.class);
+        Phone phone2 = mock(Phone.class); // Different phone
+        Email email = mock(Email.class);
+
+        when(email.toString()).thenReturn("seller@example.com");
+
+        Buyer buyer = new Buyer(name, phone1, email);
+        Seller seller = new Seller(name, phone2, email); // Same email, different phone
+
+        // Act & Assert
+        assertTrue(buyer.isDuplicateEmail(seller));
+    }
+
+    @Test
+    void testIsDuplicateEmail_sellerWithSameEmailSamePhone_returnsFalse() {
+        // Arrange
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
+        Phone phone = mock(Phone.class);
+        Email email = mock(Email.class);
+
+        when(email.toString()).thenReturn("same@example.com");
+
+        Buyer buyer = new Buyer(name, phone, email);
+        Seller seller = new Seller(name, phone, email); // Same email and phone
+
+        // Act & Assert
+        assertFalse(buyer.isDuplicateEmail(seller));
+    }
+
+    @Test
     void testEquals_sameObject_returnsTrue() {
         // Arrange
         NameWithoutNumber name = mock(NameWithoutNumber.class);
