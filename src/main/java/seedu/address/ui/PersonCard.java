@@ -37,7 +37,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label client;
+    private FlowPane client;
     @FXML
     private FlowPane role;
 
@@ -52,6 +52,12 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        if (person.isClient()) {
+            client.getChildren().add(new Label("Client"));
+        } else {
+            client.setVisible(false);
+            client.setManaged(false);
+        }
         person.getRole().ifPresent(personRole -> {
             role.getChildren().add(new Label(personRole.roleName));
         });

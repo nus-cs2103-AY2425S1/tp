@@ -26,6 +26,10 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <!-- Spacer region to push client to the far right -->
+        <Region HBox.hgrow="ALWAYS" />
+        <!-- Client is positioned next to the border -->
+        <FlowPane fx:id="client" prefWidth="60"/>
       </HBox>
       <FlowPane fx:id="role" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />

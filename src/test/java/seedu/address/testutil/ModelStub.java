@@ -23,6 +23,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void setAllPersonNotClient() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ReadOnlyUserPrefs getUserPrefs() {
         throw new AssertionError("This method should not be called.");
     }
@@ -49,6 +54,11 @@ public class ModelStub implements Model {
 
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredPersonListWithClient(Predicate<Person> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
