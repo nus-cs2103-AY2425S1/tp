@@ -377,11 +377,11 @@ Object.
 
 **Aspect: How to implement the `find person` and `find appt` commands that allow finding by multiple criteria**
 - **Alternative 1 (Current choice)**: Create one find command that supports filtering by multiple criteria (name, date) using prefixes.
-  - Pros: Fast and easy to find by date and name.
-  - Cons: Confusing syntax from user's perspective.
+  - **Pros**: Fast and easy to find by date and name.
+  - **Cons**: Confusing syntax from user's perspective.
 - **Alternative 2**: Create different find commands, find by date, find by name etc.
-  - Pros: Much easy in terms of user experience.
-  - Cons: More repeated code for each command.
+  - **Pros**: Much easy in terms of user experience.
+  - **Cons**: More repeated code for each command.
 
 <br>
 
@@ -398,7 +398,7 @@ Object.
 **Aspect: Whether to implement case sensitivity in matching for search terms**
 - **Alternative 1 (Current choice)**: Implement case-insensitive matching for search terms.
     - **Pros**: Enhances user experience by allowing searches to ignore case differences.
-    - **Cons**: Slightly more processing required to normalize case .during search
+    - **Cons**: Slightly more processing required to normalise the case during searches.
 - **Alternative 2**: Implement case-sensitive matching for search terms.
     - **Pros**: Potentially faster searches, as no additional case normalization is required.
     - **Cons**: Reduces user-friendliness.
@@ -478,11 +478,11 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 ### Data storage and files
 
-**Aspect: Save patient and appointment data in:**
+**Aspect: Save patient and appointment data in**
 <br>
 * **Alternative 1 (current choice):** two different files, patient data in `data/addressbook.json` and appointment data in `data/appointmentbook.json`.
     * **Pros**: More organised file management, with a quicker read and write times for each file.
-  * **Cons**: Higher chance of inconsistencies between patient and appointment data.
+    * **Cons**: Higher chance of inconsistencies between patient and appointment data.
 * **Alternative 2:** one single file named `data/addressbook.json`
     * **Pros**: Simplicity and convenience of one file for all information.
     * **Cons**: Slower read and write times for file, especially if the user is only accessing one of patient or appointment data.
@@ -496,7 +496,7 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 <br>
 
-**Aspect: When the data is updated in the `.json` file:**
+**Aspect: When the data is updated in the `.json` file**
 <br>
 * **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
     * **Pros**: Simplifies the process for the user, without needing to save manually.
@@ -509,7 +509,7 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 ### Parsing
 
-**Aspect: How to parse the commands:**
+**Aspect: How to parse the commands**
 <br>
 Context: The commands (other than the general) have the command format: `COMMAND ENTITY_TYPE ENTITY_ARGS`
 <br>
@@ -522,7 +522,7 @@ Context: The commands (other than the general) have the command format: `COMMAND
 
 <br>
 
-**Aspect: Command format (with or without prefixes):**
+**Aspect: Command format (with or without prefixes)**
 <br>
 * **Alternative 1 (current choice):** Use prefixes.
   * **Pros**: Easier to identify markers for each parameter, and prefixes allow for free positioning of arguments.
@@ -533,7 +533,7 @@ Context: The commands (other than the general) have the command format: `COMMAND
 
 <br>
 
-**Aspect: The use of `ArgumentMultimap` across different entities:**
+**Aspect: The use of `ArgumentMultimap` across different entities**
 * **Alternative 1 (current choice):** Use the same `ArgumentMultimap` for all entities.
   * **Pros**: Prefixes are shared universally, making it more consistent across entities. There is also less code duplication.
   * **Cons**: Might be more cluttered, as all the prefixes are together, and inability to use same prefixes for different arguments across entities.
