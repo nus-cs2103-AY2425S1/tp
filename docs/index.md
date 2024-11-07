@@ -31,7 +31,7 @@
   <p><strong>EventTory is a desktop application for managing your vendors and events!</strong> While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).</p>
 </div>
 
-<div style="text-align:center; margin-top: 30px; padding: 20px; background: linear-gradient(270deg, #00c6ff, #0072ff); background-size: 400% 400%; color: white; font-size: 1.5em; animation: gradient 15s ease infinite; border-radius: 16px; font-family: verdana">
+<div style="text-align:center; margin-top: 30px; padding: 20px; background: linear-gradient(270deg, #1F398A, #14532D); background-size: 400% 400%; color: white; font-size: 1.5em; animation: gradient 5s ease infinite; border-radius: 16px; font-family: verdana">
   From CLI users for CLI users 😎
 </div>
 
