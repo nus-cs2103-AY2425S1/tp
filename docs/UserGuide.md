@@ -22,7 +22,7 @@ If you’re comfortable typing, MindMap can help you get contact management task
 ## Quick start
 
 1. **Check Your Java Version**  
-   Make sure Java **version 17** or above is installed on your computer. [Download Java here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if needed.
+   Make sure Java **version 17** or above is installed on your computer. <br>To check your current Java version, [learn more here](https://www.java.com/en/download/help/version_manual.html). <br>[Download Java here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if needed.
 
 
 2. **Download MindMap**  
