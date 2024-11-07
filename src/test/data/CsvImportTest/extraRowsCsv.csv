@@ -1,2 +1,2 @@
-name, phone, email, address, hours, tags, role, subjects
-Alice Pauline, 94351253, alice@example.com, "123, Jurong West Ave 6, #08-111", 1, friends, Tutor, Tutor, Math
+name, phone, email, address, hours, role, subjects
+Alice Pauline, 94351253, alice@example.com, "123, Jurong West Ave 6, #08-111", 1, Tutor, Tutor, Math
