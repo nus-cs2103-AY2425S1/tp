@@ -1,0 +1,31 @@
+@startuml
+
+participant Logic
+participant ArchiveCommand
+participant Model
+participant "person:Person"
+
+Logic -> ArchiveCommand : execute()
+ArchiveCommand -> Model : getFilteredPersonList()
+ArchiveCommand -> "person:Person" : check if person is archived
+alt shouldArchive is true and Person is not archived
+    create "modifiedPerson:Person"
+    ArchiveCommand -> "modifiedPerson:Person" : Person(..., isArchived=true)
+    activate "modifiedPerson:Person"
+    ArchiveCommand -> Model : setPerson(person, modifiedPerson)
+    deactivate "modifiedPerson:Person"
+    ArchiveCommand -> Logic : result
+else shouldArchive is false and Person is archived
+    create "modifiedPerson:Person"
+    ArchiveCommand -> "modifiedPerson:Person" : Person(..., isArchived=false)
+    activate "modifiedPerson:Person"
+    ArchiveCommand -> Model : setPerson(person, modifiedPerson)
+    deactivate "modifiedPerson:Person"
+    ArchiveCommand -> Logic : result
+else person already in desired state
+    ArchiveCommand -> Logic : return error "Person is currently archived/unarchived"
+end
+
+deactivate "person:Person"
+
+@enduml

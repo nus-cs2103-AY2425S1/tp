@@ -251,11 +251,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+The data archiving feature allows users to mark contacts as archived rather than permanently deleting them.
+Archiving can be used to manage inactive or unneeded contacts without losing historical information or
+requiring deletion, which may be irreversible and result in data loss.
 
+#### Implementation Details
+The archiving feature is implemented using the `ArchiveCommand` class, which uses a boolean flag `shouldArchive`
+to handle both archiving and unarchiving actions. Instead of directly modifying the `Person` object, which is immutable,
+a new `Person` instance is created with the updated archive status.
 
+<puml src="diagrams/ArchiveSequenceDiagram.puml" width="550" />
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
