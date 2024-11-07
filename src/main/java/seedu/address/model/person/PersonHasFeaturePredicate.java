@@ -1,7 +1,9 @@
 package seedu.address.model.person;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
@@ -19,8 +21,8 @@ public class PersonHasFeaturePredicate implements Predicate<Person> {
     private final List<Allergy> allergies;
 
     /**
-     * @param tag
-     * @param phone
+     * @param tag The tag to filter by (can be null).
+     * @param phone the phone number to filter by (can be null).
      * @param email   The email to filter by (can be null).
      * @param address The address to filter by (can be null).
      */
@@ -90,12 +92,13 @@ public class PersonHasFeaturePredicate implements Predicate<Person> {
      * @param personAllergies The list of allergies the person has.
      * @return {@code true} if any specified allergies are in the person's allergies; or if no allergy filter is set.
      */
-    private boolean isAllergyTrue(List<Allergy> personAllergies) {
+    public boolean isAllergyTrue(List<Allergy> personAllergies) {
 
         if (allergies == null || allergies.isEmpty()) {
             return true;
         }
-        return personAllergies.stream().anyMatch(allergies::contains);
+        Set<Allergy> allergySet = new HashSet<>(allergies);
+        return personAllergies.stream().anyMatch(allergySet::contains);
     }
 
     @Override
