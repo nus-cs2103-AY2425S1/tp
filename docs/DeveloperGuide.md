@@ -348,8 +348,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**: Tuition teachers
 
+* teaches secondary school students
+* teaches in one-on-one sessions
 * has a need to manage a significant number of students and student details
-* prefer desktop apps over other types
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
@@ -770,9 +772,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Emergency contact**: The contact to use if an emergency happens during the tutoring period
-* **Level**: The year and track of study a student is currently at, e.g. Secondary 3 Normal (Academic) (`S3 NA`)
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Emergency contact**: The contact to use if an emergency happens during the tutoring period.
+* **Level**: The year and track of study a student is currently at, e.g. Secondary 3 Normal (Academic) (`S3 NA`).
 * **Subject**: The subject the student is receiving tuition for, e.g. `Math`, `English`, `Literature`. The Subject must correspond with the Level of the student.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -807,97 +809,89 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a student
 
-1. Adding a student
+1. Prerequisites: Delete any student named `Alice Lee` before and between test cases. Ensure there is a student named `Alex Yeoh` in the list of students.
 
-    1. Prerequisites: Delete any student named `Alice Lee` before and between test cases. Ensure there is a student named `Alex Yeoh` in the list of students.
+2. **Valid Test Cases**
 
-    2. **Valid Test Cases**
+    1. Add a student with only compulsory fields: `add n/alice lee p/91234567 e/91234567 a/123 Clementi`<br>
+       Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
+       and address `123 Clementi` is added. No level, subject(s) or lesson time(s) are specified.
 
-        1. Add a student with only compulsory fields: `add n/alice lee p/91234567 e/91234567 a/123 Clementi`<br>
-           Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
-           and address `123 Clementi` is added. No level, subject(s) or lesson time(s) are specified.
+    2. Add a student with compulsory fields, level, subject and lesson times:
+       `add n/alice lee p/91234567 e/91234567 a/123 Clementi l/s1 na s/math s/physics lt/SUN-12:00-14:00 lt/WED-17:00-19:00`<br>
+       Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
+       address `123 Clementi`, subject tags `S1 NA MATH` and `S1 NA PHYSICS`, and lesson times `WED-17:00-19:00` and `SUN-12:00-14:00` is added.
 
-        2. Add a student with compulsory fields, level, subject and lesson times:
-           `add n/alice lee p/91234567 e/91234567 a/123 Clementi l/s1 na s/math s/physics lt/SUN-12:00-14:00 lt/WED-17:00-19:00`<br>
-           Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
-           address `123 Clementi`, subject tags `S1 NA MATH` and `S1 NA PHYSICS`, and lesson times `WED-17:00-19:00` and `SUN-12:00-14:00` is added.
+    3. Other valid test cases: Change the capitalisation and spacing between words for the name, level, subject for
+       any of the above test cases.<br>
+       Expected: The expected result is the same as the unaltered test case.
 
-        3. Other valid test cases: Change the capitalisation and spacing between words for the name, level, subject for
-           any of the above test cases.<br>
-           Expected: The expected result is the same as the unaltered test case.
+3. **Invalid Test Cases**
 
-    3. **Invalid Test Cases**
-
-        1. Add a student with subject without level: `add n/Alice Lee p/91234567 e/91234567 a/123 Clementi s/MATH`<br>
-           Expected: No student is added. Error details shown in the status message. Status bar remains the same.
+    1. Add a student with subject without level: `add n/Alice Lee p/91234567 e/91234567 a/123 Clementi s/MATH`<br>
+       Expected: No student is added. Error details shown in the status message. Status bar remains the same.
        
-        2. Add an existing student: `add n/Alex Yeoh p/91234567 e/91234567 a/123 Clementi`<br>
-           Expected: No student is added. Error details shown in the status message. Status bar remains the same.
+    2. Add an existing student: `add n/Alex Yeoh p/91234567 e/91234567 a/123 Clementi`<br>
+       Expected: Similar to previous.
 
-        3. Other invalid test cases: Add a student without compulsory fields or with invalid values for any field.
-           The valid value range can be found in the User guide.<br>
-           Expected: No student is added. Error details shown in the status message. Status bar remains the same.
+    3. Other invalid test cases: Add a student without compulsory fields or with invalid values for any field.
+       The valid value range can be found in the User guide.<br>
+       Expected: Similar to previous.
 
 ***
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+2. Test case: `delete 1`<br>
+   Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
-    2. Test case: `delete 1`<br>
-       Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
+3. Test case: `delete 0`<br>
+   Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-    3. Test case: `delete 0`<br>
-       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ***
 
 ### Finding specific students
 
-1. Finding specific students while all students are being shown
+1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
+2. **Valid Test Cases**
 
-    2. **Valid Test Cases**
+    1. Find by name: `find n/Alex`<br>
+       Expected: Only students with the name `Alex` are displayed. Number of students found is reflected in the status message.
 
-        1. Find by name: `find n/Alex`<br>
-           Expected: Only students with the name `Alex` are displayed. Number of students found is reflected in the status message.
+    2. Find by level: `find l/S1 NA`<br>
+       Expected: Only students tagged with the level `S1 NA` are displayed. Number of students found is reflected in the status message.
 
-        2. Find by level: `find l/S1 NA`<br>
-           Expected: Only students tagged with the level `S1 NA` are displayed. Number of students found is reflected in the status message.
+    3. Find by subject: `find s/MATH`<br>
+       Expected: Only students tagged with the subject `MATH` are displayed. Number of students found is reflected in the status message.
 
-        3. Find by subject: `find s/MATH`<br>
-           Expected: Only students tagged with the subject `MATH` are displayed. Number of students found is reflected in the status message.
+3. **Invalid Test Cases**
 
-    3. **Invalid Test Cases**
+   1. Find by name: `find n/!@!`, `find n/1e12#>`, `...`<br>
+      Expected: All students still listed. Error details shown in the status message. Status bar remains the same.
 
-       1. Find by name: `find n/!@!`, `find n/1e12#>`, `...`<br>
-          Expected: All students still listed. Error details shown in the status message. Status bar remains the same.
+   2. Find by level and track: `find l/S1` (no track entered), `find l/IP` (no level entered), `...`<br>
+      Expected: Similar to previous.
 
-       2. Find by level and track: `find l/S1` (no track entered), `find l/IP` (no level entered), `...`<br>
-          Expected: Similar to previous.
-
-       3. Find by subject: `find s/ENGINEERING`, `find s/?@!@#a`, `...`<br>
-          Expected: Similar to previous.
+   3. Find by subject: `find s/ENGINEERING`, `find s/?@!@#a`, `...`<br>
+      Expected: Similar to previous.
 
 ***
 
 ### Adding a task for a student
 
-1. Adding a task for a specific student
+1. Prerequisites: Ensure that student `Alex Yeoh` exists.
 
-    1. Prerequisites: Ensure that student `Alex Yeoh` exists.
+2. Test case: `addtask n/alex yeoh t/Mark homework d/2024-11-06`<br>
+   Expected: New task with description `Mark homework` and deadline `2024-11-06` is added to student `Alex Yeoh`.
 
-    2. Test case: `addtask n/alex yeoh t/Mark homework d/2024-11-06`<br>
-       Expected: New task with description `Mark homework` and deadline `2024-11-06` is added to student `Alex Yeoh`
+3. Test case: `addtask n/alex yeoh t/Mark homework d/tmr`<br>
+   Expected: No task is added. Error details shown in the status message. Status bar remains the same.
 
-    3. Test case: `addtask n/alex yeoh t/Mark homework d/tmr`<br>
-       Expected: No task is added. Error details shown in the status message. Status bar remains the same.
-
-    4. Test case: `addtask n/alex yeoh t/  d/2024-11-06`<br>
-       Expected: No task is added. Error details shown in the status message. Status bar remains the same.
+4. Test case: `addtask n/alex yeoh t/  d/2024-11-06`<br>
+   Expected: Similar to previous.

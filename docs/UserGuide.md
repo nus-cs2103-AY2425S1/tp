@@ -12,7 +12,6 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 ***
 
 ## Table of Contents
-<page-nav-print />
 
 [1. Quick Start](#1-quick-start)
 
@@ -83,6 +82,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 [(Back to Top)](#edumanage-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2. Command Summary
 
@@ -107,6 +107,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 |  15   |               [Exit](#342-exiting-edumanage-exit)               |                                                        `exit`                                                        |                                                 `exit`                                                 |
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.2 Parameter Table
 
