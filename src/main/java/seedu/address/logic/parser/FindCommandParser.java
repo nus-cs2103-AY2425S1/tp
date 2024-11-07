@@ -34,6 +34,13 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords = trimmedArgs.split("\\s+");
 
+        for (String keyword : keywords) {
+            if (!isValidKeyword(keyword)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+        }
+
         List<String> phoneKeywords = Arrays.stream(keywords)
                 .filter(this::isNumeric)
                 .collect(Collectors.toList());
@@ -92,5 +99,14 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     private boolean isPostalCode(String str) {
         return str.matches("S\\d+");
+    }
+
+    /**
+     * Utility method to check if keyword/input given by user is valid (i.e., only alphanumeric).
+     * @param str The string to check.
+     * @return True if the string is alphanumeric, false otherwise.
+     */
+    private boolean isValidKeyword(String str) {
+        return str.matches("[\\p{Alnum}]+") || str.matches("\\d{6}");
     }
 }

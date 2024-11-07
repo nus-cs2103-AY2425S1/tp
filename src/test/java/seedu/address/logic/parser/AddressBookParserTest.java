@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddShortCutCommand;
+import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.ArchiveCommand.ArchivePersonDescriptor;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DelShortCutCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -33,6 +35,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagsContainsKeywordsPredicate;
+import seedu.address.testutil.ArchivePersonDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -68,6 +71,17 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_archive() throws Exception {
+        Person person = new PersonBuilder().build();
+        ArchivePersonDescriptor descriptor = new ArchivePersonDescriptorBuilder().build();
+        descriptor.setIsArchived(true);
+        ArchiveCommand actualCommand = (ArchiveCommand) parser.parseCommand(ArchiveCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased());
+        ArchiveCommand expectedCommand = new ArchiveCommand(INDEX_FIRST_PERSON, descriptor);
+        assertEquals(expectedCommand, actualCommand);
     }
 
     @Test

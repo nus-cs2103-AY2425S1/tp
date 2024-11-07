@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import seedu.address.MainApp;
 
 /**
- * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc.
+ * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, etc.
  * It contains a scene graph with a root node of type {@code T}.
  */
 public abstract class UiPart<T> {
