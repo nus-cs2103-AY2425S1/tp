@@ -35,7 +35,8 @@ public class TagCommand extends Command {
     public static final String MESSAGE_ADD_TAG_TO_ALL_SUCCESS = "Added tag(s): %1$s to all contacts.";
     public static final String MESSAGE_DUPLICATE_TAG = "Duplicate tag (case-insensitive) detected!\n"
         + "The tag %1$s has either been added before or there is a duplicate in the tag input.";
-    public static final String MESSAGE_INVALID_INDEX_OR_STRING = "The person index provided is invalid. Index must either be:\n"
+    public static final String MESSAGE_INVALID_INDEX_OR_STRING = "The person index provided is invalid. Index must"
+            + " either be:\n"
             + "1. A positive integer within the size of the list\n"
             + "2. 'all' if you want to add the tag to all contacts in the list.";
     public static final String MESSAGE_NO_CONTACTS_TO_TAG = "There are no contacts to add tags to.\n"
@@ -43,7 +44,6 @@ public class TagCommand extends Command {
     private final Index index;
     private final Set<Tag> tagsToAdd;
     private final boolean shouldAddToAll;
-
 
     /**
      * Constructor for adding tags to a specific person.
@@ -61,10 +61,9 @@ public class TagCommand extends Command {
 
     /**
      * Constructor for adding tags to all persons in the list.
-     * @param all String "all" indicating that tags should be added to all persons.
      * @param tagsToAdd Set of tags to be added to all persons.
      */
-    public TagCommand(String all, Set<Tag> tagsToAdd) {
+    public TagCommand(Set<Tag> tagsToAdd) {
         requireNonNull(tagsToAdd);
 
         this.index = null;
@@ -75,12 +74,8 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        executableList(model, MESSAGE_NO_CONTACTS_TO_TAG);
         List<Person> lastShownList = model.getFilteredPersonList();
-
-        // Checks if there are contacts in the list to add the tags to
-        if (lastShownList.isEmpty()) {
-            throw new CommandException(MESSAGE_NO_CONTACTS_TO_TAG);
-        }
 
         if (shouldAddToAll) {
             // Checks for duplicate tags across all contacts

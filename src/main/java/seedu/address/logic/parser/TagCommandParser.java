@@ -40,7 +40,7 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         if (argMultimap.getPreamble().equalsIgnoreCase("all")) {
             Set<Tag> tagsToAdd = parseTagsForAdd(argMultimap.getAllValues(PREFIX_TAG));
-            return new TagCommand("all", tagsToAdd);
+            return new TagCommand(tagsToAdd);
         } else {
             // Parses the index after format verification
             Index index;
