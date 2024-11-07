@@ -4,7 +4,12 @@
   pageNav: 3
 ---
 
-# KonTActs User Guide
+<center>
+<pic src="images/kontactsLogo.png" width="300" alt="Logo" lazy>
+
+# **KonTActs User Guide**
+</pic>
+</center>
 
 KonTActs is a **desktop app for managing your contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 
