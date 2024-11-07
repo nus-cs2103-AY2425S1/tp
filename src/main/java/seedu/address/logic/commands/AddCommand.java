@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.commandresult.CommandResult;
@@ -25,6 +29,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";
 
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
+
     private final Patient toAdd;
 
     /**
@@ -40,6 +46,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPatient(toAdd)) {
+            logger.log(Level.WARNING, "Attempted to add a duplicate patient");
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 

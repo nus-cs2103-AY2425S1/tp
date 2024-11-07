@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import seedu.address.model.ApptSorter;
+import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 
 /**
  * Represents a list of appointments.
@@ -78,6 +80,10 @@ public class ApptList {
                 .filter(appt -> appt.getDateTime().isAfter(now))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public Stream<Appt> filterAppts(AppointmentDateFilter dateFilter) {
+        return appts.stream().filter(appt -> appt.isBetweenDatesAndMatchService(dateFilter));
     }
 
     /**

@@ -70,6 +70,7 @@ public class AppointmentDateFilter {
      * returns true if start and end dates are valid and end date is after start date
      */
     public static boolean isValidStartAndEndDate(LocalDate startDate, LocalDate endDate) {
+        assert startDate != null && endDate != null;
         return !endDate.isBefore(startDate);
     }
 
