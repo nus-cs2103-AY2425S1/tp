@@ -201,16 +201,13 @@ Examples:
 
 ### Selecting a student randomly: `random`
 
-You can randomly select a student from the current list. For example, you may want to randomly select a student to answer your question.
+You can randomly select a student from the current list! For example, you may want to randomly select a student to answer your question.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The student is randomly chosen from the currently displayed list. So you can use the `show` command first before using `random` if you want to select a random student from a particular group.
 </div>
 
 Format: `random`
-
-Example:
-* `random`  
 
 ![result for 'random'](images/random_example.png)
 
