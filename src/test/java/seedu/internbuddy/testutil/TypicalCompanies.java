@@ -47,6 +47,9 @@ public class TypicalCompanies {
             .withEmail("contact@spotify.com").withAddress("150 Greenwich Street, New York, NY").build();
     public static final Company TWITTER = new CompanyBuilder().withName("Twitter").withPhone("4152229670")
             .withEmail("contact@twitter.com").withAddress("1355 Market Street, San Francisco, CA").build();
+    public static final Company NVIDIA_FAVOURITED = new CompanyBuilder().withName("Nvidia").withPhone("4084862000")
+            .withEmail("info@nvidia.com").withAddress("2788 San Tomas Express Way, Santa Clara, CA")
+            .withIsFavourite(true).build();
 
     // Manually added - Company's details found in {@code CommandTestUtil}
     public static final Company GOOGLE = new CompanyBuilder().withName(VALID_NAME_GOOGLE).withPhone(VALID_PHONE_GOOGLE)
@@ -73,6 +76,6 @@ public class TypicalCompanies {
     }
 
     public static List<Company> getTypicalCompanies() {
-        return new ArrayList<>(Arrays.asList(APPLE, AMAZON, FACEBOOK, TESLA, NETFLIX));
+        return new ArrayList<>(Arrays.asList(APPLE, AMAZON, FACEBOOK, TESLA, NETFLIX, NVIDIA_FAVOURITED));
     }
 }

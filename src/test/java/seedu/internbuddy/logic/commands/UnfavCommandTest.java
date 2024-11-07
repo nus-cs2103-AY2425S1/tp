@@ -4,6 +4,7 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFail
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
+import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SIXTH_COMPANY;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,7 @@ import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
 import seedu.internbuddy.model.UserPrefs;
 import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.testutil.TypicalCompanies;
 
 public class UnfavCommandTest {
 
@@ -24,6 +26,24 @@ public class UnfavCommandTest {
         UnfavCommand unfavCommand = new UnfavCommand(INDEX_FIRST_COMPANY);
 
         String expectedMessage = String.format(UnfavCommand.MESSAGE_UNFAV_COMPANY_SUCCESS,
+                companyToUnfav.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setCompany(companyToUnfav, new Company(companyToUnfav.getName(),
+                companyToUnfav.getPhone(), companyToUnfav.getEmail(),
+                companyToUnfav.getAddress(), companyToUnfav.getTags(),
+                companyToUnfav.getStatus(), companyToUnfav.getApplications(),
+                false, companyToUnfav.getIsShowingDetails()));
+
+        assertCommandSuccess(unfavCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexAlreadyUnfavourited_success() {
+        Company companyToUnfav = model.getFilteredCompanyList().get(INDEX_SIXTH_COMPANY.getZeroBased());
+        UnfavCommand unfavCommand = new UnfavCommand(INDEX_SIXTH_COMPANY);
+
+        String expectedMessage = String.format(UnfavCommand.MESSAGE_COMPANY_ALREADY_UNFAV,
                 companyToUnfav.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
