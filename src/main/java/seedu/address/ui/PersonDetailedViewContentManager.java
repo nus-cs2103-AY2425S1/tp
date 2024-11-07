@@ -170,4 +170,5 @@ public class PersonDetailedViewContentManager {
                 + "Let me know if you’d like to catch up soon"
                 + "—I’m happy to meet whenever it’s convenient for you!";
     }
+
 }
