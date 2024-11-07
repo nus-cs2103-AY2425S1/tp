@@ -382,7 +382,7 @@ Tracks and lists all contacts who are in the category of the specified keyword.
 #### Adding tag(s) to contact: `tag`
 Adds additional specified tag(s) to the specified contact or all contacts without overwriting existing tags.
 
-Format 1: `tag INDEX t/TAG [t/MORE_TAG]…​`
+**Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`
 
 | Parameter Name | Description                         | Required   |
 |----------------|-------------------------------------|------------|
@@ -390,7 +390,13 @@ Format 1: `tag INDEX t/TAG [t/MORE_TAG]…​`
 | `t/TAG`        | Tag to add to the specified contact | Compulsory |
 | `t/MORE_TAG` |  More tags to add | Optional|
 
-Format 2: `tag all t/TAG [t/MORE_TAG]`
+**Format 2**: `tag all t/TAG [t/MORE_TAG]…​`
+
+| Parameter Name | Description                                                              | Required   |
+|----------------|--------------------------------------------------------------------------|------------|
+| `all`          | Indicates that the tagging operation applies to all contacts in the list | Compulsory |
+| `t/TAG`        | Tag to add to every contact in the list                                  | Compulsory |
+| `t/MORE_TAG`   | More tags to add                                                         | Optional|
 
 * Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided <br>
   no duplicate tag(s) are found in all contacts.
