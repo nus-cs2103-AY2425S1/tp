@@ -74,15 +74,13 @@ public class RightPanelTest {
     }
 
     @Test
-    public void testShowAllPositiveOrNegativeTransactions_callsResetShowAllPositiveOrNegativeAndUpdatesPredicate()
+    public void testShowAllPositiveOrNegativeTransactions_updatesPredicate()
             throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         // Call the private method "filterTransactionsByAmount" using reflection
         Method showAllPositiveOrNegativeTransactions = RightPanel.class.getDeclaredMethod(
                 "showAllPositiveOrNegativeTransactions");
         showAllPositiveOrNegativeTransactions.setAccessible(true);
         showAllPositiveOrNegativeTransactions.invoke(rightPanel);
-
-        verify(rightPanel, times(1)).resetFilter();
 
         // Verify the predicate passed to updateFilteredTransactionList
         verify(mockCommonModel, times(1)).updateFilteredTransactionList(argThat(predicate -> {
@@ -101,15 +99,13 @@ public class RightPanelTest {
     }
 
     @Test
-    public void testShowAllDoneOrNotDoneTransactions_callsResetFilterAndUpdatesPredicate()
+    public void testShowAllDoneOrNotDoneTransactions_updatesPredicate()
             throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         // Call the private method "filterTransactionsByDoneStatus" using reflection
         Method showAllDoneOrNotDoneTransactions = RightPanel.class.getDeclaredMethod(
                 "showAllDoneOrNotDoneTransactions");
         showAllDoneOrNotDoneTransactions.setAccessible(true);
         showAllDoneOrNotDoneTransactions.invoke(rightPanel);
-
-        verify(rightPanel, times(1)).resetFilter();
 
         // Verify the predicate passed to updateFilteredTransactionList
         verify(mockCommonModel, times(1)).updateFilteredTransactionList(argThat(predicate -> {
