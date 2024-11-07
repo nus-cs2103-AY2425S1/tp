@@ -119,11 +119,10 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 | [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                         | -                                                                            |
 | [**↑up ↓down arrow key**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                        | -                                                                            |
 | [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                    | -                                                                            |
-| [**import**](#importing-data-import)                                        | Import all client's details             | `import`                                                                                                                                                       | -                                                                            |
-| [**export**](#exporting-data-export)                                        | Export all client's details             | `export`                                                                                                                                                       | -                                                                            |
+| [**import**](#importing-data-import)                                        | Import data from an external file       | `import`                                                                                                                                                       | -                                                                            |
+| [**export**](#exporting-data-export)                                        | Export address book data                | `export`                                                                                                                                                       | -                                                                            |
 | [**clear**](#clearing-all-entries-clear)                                    | Clear all client's details'             | `clear`                                                                                                                                                        | -                                                                            |
 | [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                         | -                                                                            |
-
 </d-table>
 
 ## Parameter Constraints
@@ -497,13 +496,18 @@ Examples:
   </a>
 </div>
 
-### Sorting all entries : `sort`
 
-Sorts all entries from the address book according to name in alphabetical order.
+### Clearing all entries : `clear`
 
-Format: `sort`
+Clears all entries from TrueRental.
 
-<!--TODO: Bryan-->
+Format: `clear`
+
+<box type="info" seamless>
+
+**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -530,22 +534,6 @@ Navigates through all previously entered commands.
 
 **Note:** 
 * All commands within the command history will be cleared upon exiting the TrueRental application.
-* Only TrueRental specific commands will be stored within the command history.
-
-</box>
-
-<box type="info" theme="warning" light>
-
-**Example Set-up:** (Steps 1 to 6 are performed sequentially)
-
-Please set up the following commands before proceeding with the example inputs and outputs.
-
-1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
-2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
-3. `cadd n/Amy Tan p/99887766`
-4. `rview 1`
-5. `list`
-6. `cdelete 2`
 
 </box>
 
@@ -565,6 +553,7 @@ Please set up the following commands before proceeding with the example inputs a
 11. Press `↓ down-arrow key` on the keyboard.
 12. Press `↓ down-arrow key` on the keyboard.
 13. Press `↓ down-arrow key` on the keyboard.
+
 </box>
 
 <box type="success" light>
@@ -574,12 +563,10 @@ Please set up the following commands before proceeding with the example inputs a
 2. Expected: `list` is shown in the command box.
 3. Expected: `rview 1` is shown in the command box.
 4. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
-5. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
-   the command box.
+5. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
 6. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
-7. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
-   are no more previous commands.
-8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
+7. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there are no more previous commands.
+8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
 9. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
 10. Expected: `rview 1` is shown in the command box.
 11. Expected: `list` is shown in the command box.
@@ -662,7 +649,24 @@ Entering the `↹ Tab key` will help to fill or append to the command input with
 
 Imports and overwrite all existing data from a `.json` file.
 
-<!--TODO: Nathan-->
+Format: `import`
+
+<box type="important" seamless>
+
+**Constraints**:
+* Only `.json` files can be imported.
+* The chosen file must have the correct format.
+
+</box>
+
+<box type="info" seamless>
+
+**Note**:
+* Importing data will delete all current data in the address book. It is recommended to back up the current data via the `export` command.
+* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png)
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -674,29 +678,13 @@ Imports and overwrite all existing data from a `.json` file.
 
 Exports all data within TrueRental into a `.json` file.
 
-<box type="info" seamless>
-
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
-
-</box>
-
-<!--TODO: Nathan-->
-
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
-
-### Clearing all entries : `clear`
-
-Clears all entries from TrueRental.
-
-Format: `clear`
+Format: `export`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+**Note**:
+* Address book data can only be exported as `.json` files.
+* A new window will be opened that prompts for a file. ![export file window](images/exportFileWindow.png)
 
 </box>
 
