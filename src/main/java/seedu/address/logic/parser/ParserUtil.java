@@ -278,12 +278,12 @@ public class ParserUtil {
      */
     public static AggGradeCommand.Operation parseAggGradeOperation(String value) throws ParseException {
         requireNonNull(value);
-        String trimmedValue = value.trim();
+        String lowercaseTrimmedValue = value.trim().toLowerCase();
 
-        if (!OPERATION_TRANSLATE.containsKey(trimmedValue)) {
+        if (!OPERATION_TRANSLATE.containsKey(lowercaseTrimmedValue)) {
             throw new ParseException(MESSAGE_OPERATION_CONSTRAINTS);
         }
 
-        return OPERATION_TRANSLATE.get(trimmedValue);
+        return OPERATION_TRANSLATE.get(lowercaseTrimmedValue);
     }
 }
