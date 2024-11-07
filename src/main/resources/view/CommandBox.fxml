@@ -8,6 +8,23 @@
 <HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here..." HBox.hgrow="ALWAYS"/>
   <Button fx:id="enterButton"  mnemonicParsing="false" onAction="#handleCommandEntered" text="Enter">
+<HBox
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+>
+  <TextField
+      fx:id="commandTextField"
+      onAction="#handleCommandEntered"
+      onKeyPressed="#handleKeyPressed"
+      promptText="Enter command here..."
+      HBox.hgrow="ALWAYS"
+  />
+  <Button
+      fx:id="enterButton"
+      mnemonicParsing="false"
+      onAction="#handleCommandEntered"
+      text="Enter"
+  >
     <HBox.margin>
       <Insets left="5.0" />
     </HBox.margin>

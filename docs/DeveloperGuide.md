@@ -325,6 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
 | `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
+| `*`      | user             | use my previous command quickly                                             | avoid retyping a command                                               |
 | `*`      | user             | toggle my application between light and dark mode                           | see the application in my preferred theme                              |
 
 ### Use cases
@@ -610,7 +611,7 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
-**Use case: UC14 - Toggle application's theme** 
+**Use case: UC15 - Toggle application's theme** 
 
 **MSS**
 
@@ -619,12 +620,37 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
+**Use case: UC16 - Command History**
+
+**MSS**
+
+1. Actor inputs a command into the System.
+2. System processes the command and confirms its success.
+3. Actor presses the "Up" arrow key to retrieve and re-populate the previous command in the input field.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. Command fails.
+
+    - 2a1. System displays an error message indicating the failure reason.
+
+      Use case resumes from step 1.
+  
+- 3a. Multiple previous commands available.
+
+    - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
+    - 3a2. System displays each previous command in sequence.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The system should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  The system should be developed in a modular way for easier updates and bug fixes.
-4.  The system should ensure data consistency accross all instances.
+4.  The system should ensure data consistency across all instances.
 5.  The system should continue functioning in the event of a missing or corrupted save file.
 6.  The system should encrypt sensitive data to follow data protection laws.
 7.  The interface should be intuitive and easy to use.
