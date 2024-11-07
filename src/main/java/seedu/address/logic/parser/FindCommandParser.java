@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEHANDLE;
 
 import java.util.Arrays;
 
@@ -9,8 +8,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.TelegramHandle;
-import seedu.address.model.person.TelegramHandleContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
