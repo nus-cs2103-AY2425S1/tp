@@ -24,12 +24,12 @@ management tasks done faster than traditional GUI apps.
 1. Copy the file to the folder you want to use as the _home folder_ for TAchy.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAchy.jar` command to
-   run the application. 
+   run the application.
 <br> By default, it should be saved in your Downloads folder. <br>
    - For Windows users: Type `cd Downloads`, and press `Enter`.
    - For MacOS users: Type `cd ~/Downloads`, and press `Enter`.
    - For Linux users: Type `cd ~/Downloads`, and press `Enter`.
-   
+
 1. Type the command `java -jar TAchy.jar` into the terminal to run the application.
 <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -46,7 +46,7 @@ management tasks done faster than traditional GUI apps.
    * `view_student 2` : Displays the details of the 2nd student shown in the current list.
 
    * `delete_student 3` : Deletes the 3rd student shown in the current list.
-   
+
    * `add_assignment si/1 an/Assignment 1 ms/100` : Adds Assignment 1 to the 1st student in the current list with max score 100.
 
    * `grade si/1 ai/1 s/100` : Edits the score of the 1st assignment belonging to the 1st student in the current list to be 100.
@@ -96,8 +96,8 @@ Format: `help`
 
 Adds a student to the app.
 
-Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> 
-Constraints: 
+Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br>
+Constraints:
 * Tags must be at most 40 characters long, and must be alphanumeric
 * Maximum length for a name is 256 characters long
 * Maximum phone number is 16 numbers.
@@ -151,7 +151,7 @@ Format: `edit_student si/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 Examples:
 *  `edit_student si/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-   ![result for 'edit_student si/1 p/91234567 e/johndoe@example.com'](images/editStudent.png) 
+   ![result for 'edit_student si/1 p/91234567 e/johndoe@example.com'](images/editStudent.png)
 * `edit_student si/2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 ### Locating students by name: `find`
@@ -178,7 +178,7 @@ Deletes the specified student from the app.
 
 Format: `delete_student INDEX`
 
-* Deletes the student at the specified `INDEX`. 
+* Deletes the student at the specified `INDEX`.
 * Similar to the View Command, this index is specified by the number as shown on the left of the Student's name, in the student list display.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -193,7 +193,7 @@ Adds an Assignment to the app.
 
 Format: `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
-* Adds an assignment to the student at the specified `INDEX`. The index refers to the index number shown in the 
+* Adds an assignment to the student at the specified `INDEX`. The index refers to the index number shown in the
   displayed student list.
 * The max score must be a positive integer.
 
@@ -214,9 +214,9 @@ Deletes an assignment belonging to a student based on the student's index number
 
 Format: `delete_assignment si/INDEX ai/INDEX`
 
-* Deletes the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
+* Deletes the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student
   list and the assignment list on the student detail panel respectively. The index **must be a positive integer** 1, 2, 3, …​
-  
+
 Examples:
 * `find John` followed by `delete_assignment si/1 ai/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
 * `delete_assignment si/1 ai/1`
@@ -235,11 +235,11 @@ Format: `edit_assignment si/INDEX ai/INDEX`
 * Existing values will be updated to the input values.
 
 Examples:
-* `view_student 1` followed by `edit_assignment si/1 ai/1 an/Assignment 1 ms/100` edits the 1st assignment of the 1st 
+* `view_student 1` followed by `edit_assignment si/1 ai/1 an/Assignment 1 ms/100` edits the 1st assignment of the 1st
   student to the new name and new max score specified.
 * `edit_assignment si/1 ai/1 an/Assignment 1` will only change the name of the selected assignment.
 * `edit_assignment si/1 ai/1 ms/100` will only change the max score of the selected assignment.
-* `edit_assignment si/1 ai/2 an/Math Assignment ms/100` will change the 2nd assignment of the 1st student to be with 
+* `edit_assignment si/1 ai/2 an/Math Assignment ms/100` will change the 2nd assignment of the 1st student to be with
   a new name `Math Assignment` and a new max score `100`.
 
   Before execution:
@@ -251,7 +251,7 @@ Examples:
 
 Marks an existing assignment belonging to a student as submitted, based on the student's index and the assignment's index.
 
-Constraints: 
+Constraints:
 - The assignment must not have been submitted prior to the Mark Command.
 - The assignment must already exist and belong to a particular student.<br>
 
@@ -260,7 +260,7 @@ Format: `mark si/INDEX ai/INDEX`
 Examples:
 * `list` followed by `mark si/3 ai/1` marks the 1st assignment of the 3rd student in the app.
 * `mark si/1 ai/1`
-  
+
   ![result for 'mark si/1 ai/1'](images/mark.png)
 
 ### Unmarking an assignment: `unmark`
@@ -283,8 +283,8 @@ Examples:
 Edits the score of an assignment belonging to a student and marks it as submitted.
 
 Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
-* Grades the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student 
-  list and the assignment list on the student detail panel respectively. 
+* Grades the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student
+  list and the assignment list on the student detail panel respectively.
 
 Constraints:
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -304,7 +304,7 @@ Format: `remark si/INDEX r/REMARK`
 
 Examples:
 * `remark si/1 r/Weak in Math`
-  
+
   ![result for 'remark si/1 r/Weak in Math'](images/remark.png)
 
 ### Clearing all entries : `clear`

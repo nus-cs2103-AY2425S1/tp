@@ -27,8 +27,8 @@ public class UnmarkAssignmentCommand extends Command {
             + "index belonging to the student. The assignment status will be changed to 'Not Submitted'. "
             + "This also resets the score of the assignment to 0. "
             + "\nParameters: "
-            + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
-            + "[" + PREFIX_ASSIGNMENT_INDEX + "INDEX] "
+            + PREFIX_STUDENT_INDEX + "INDEX "
+            + PREFIX_ASSIGNMENT_INDEX + "INDEX "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_INDEX + "1 ";

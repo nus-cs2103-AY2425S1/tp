@@ -42,7 +42,7 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String TAG_EMPTY = " " + PREFIX_TAG + "";
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -51,15 +51,17 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditCommand.MESSAGE_USAGE));
+        // EP: no index specified
+        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
-        // no field specified
+        // EP: no field specified
         assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1", EditCommand.MESSAGE_NOT_EDITED);
 
-        // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        // EP: no index and no field specified
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + " ", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // EP: no prefix and inputs specified
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -73,44 +75,40 @@ public class EditCommandParserTest {
                 ParserUtil.MESSAGE_INVALID_INDEX);
 
         // EP: invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string" + PREFIX_STUDENT_INDEX + "1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1 some random string",
+                ParserUtil.MESSAGE_INVALID_INDEX);
 
         // EP: invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string" + PREFIX_STUDENT_INDEX + "1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1 i/ string",
+                ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_NAME_DESC,
-                Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_PHONE_DESC,
-                Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_EMAIL_DESC,
-                Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_TAG_DESC,
-                Tag.MESSAGE_CONSTRAINTS); // invalid tag
-
+        // EP: invalid name
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+        // EP: invalid phone
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        // EP: invalid email
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS);
+        // EP: invalid tag
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
         // EP: invalid phone followed by valid email
         assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Student} being edited,
         // EP: parsing it together with a valid tag results in error
-        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND
-                + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + TAG_DESC_FRIEND + TAG_EMPTY
-                + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + TAG_EMPTY + TAG_DESC_FRIEND
-                + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
+                Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_CONSTRAINTS);
 
         // EP: multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, " " + PREFIX_STUDENT_INDEX + "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
-                        + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+                        + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test

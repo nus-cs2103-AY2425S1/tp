@@ -24,10 +24,10 @@ public class DeleteAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an assignment belonging to a "
             + "student based on the student's index number used in the displayed student list,"
             + " and the assignment's index"
-            + " belonging to the student."
+            + " belonging to the student.\n"
             + "Parameters: "
-            + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
-            + "[" + PREFIX_ASSIGNMENT_INDEX + "INDEX] "
+            + PREFIX_STUDENT_INDEX + "INDEX "
+            + PREFIX_ASSIGNMENT_INDEX + "INDEX "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_INDEX + "1 ";
