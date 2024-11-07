@@ -1,5 +1,6 @@
 package bizbook.logic.commands;
 
+import static bizbook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static bizbook.logic.commands.CommandTestUtil.VALID_NOTE_ALICE;
 import static bizbook.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static bizbook.logic.commands.CommandTestUtil.VALID_NOTE_HIGH_PROFILE_CLIENT;
@@ -8,8 +9,12 @@ import static bizbook.testutil.PersonBuilder.DEFAULT_ADDRESS;
 import static bizbook.testutil.PersonBuilder.DEFAULT_EMAIL;
 import static bizbook.testutil.PersonBuilder.DEFAULT_NAME;
 import static bizbook.testutil.PersonBuilder.DEFAULT_PHONE;
+import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_NOTE;
 import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static bizbook.testutil.TypicalIndexes.INDEX_OUTOFBOUND_PERSON;
 import static bizbook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static bizbook.testutil.TypicalNotes.TYPICAL_NOTE;
+import static bizbook.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,6 +26,8 @@ import org.junit.jupiter.api.Test;
 import bizbook.commons.core.index.Index;
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.model.Model;
+import bizbook.model.ModelManager;
+import bizbook.model.UserPrefs;
 import bizbook.model.person.Note;
 import bizbook.model.person.Person;
 import bizbook.testutil.PersonBuilder;
@@ -30,6 +37,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class AddNoteCommandTest {
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullFields_throwsNullPointerException() {
@@ -97,6 +106,15 @@ public class AddNoteCommandTest {
         assertThrows(CommandException.class, AddNoteCommand.DUPLICATE_MESSAGE_CONSTRAINTS, () ->
                 addNoteCommand.execute(modelMock));
     }
+
+
+//    @Test
+//    public void execute_invalidPersonIndex_throwsCommandException() {
+//        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_OUTOFBOUND_PERSON, INDEX_FIRST_NOTE,
+//                TYPICAL_NOTE);
+//        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+//                editNoteCommand.execute(model));
+//    }
 
     @Test
     public void equals() {
