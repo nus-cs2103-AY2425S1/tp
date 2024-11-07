@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,7 +17,7 @@
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="90" GridPane.columnIndex="0">
       <padding>
-        <Insets top="3" right="5" bottom="3" left="15" />
+        <Insets right="5" left="15" />
       </padding>
       <HBox spacing="0.5" alignment="CENTER_LEFT">
         <Label fx:id="id" styleClass="cell_big_label">
@@ -26,8 +28,20 @@
         </Label>
         <Label fx:id="emergencyContactName" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <Label fx:id="emergencyContactPhone" styleClass="emergencyContact" text="\$emergencyContactPhone" />
-      <Label fx:id="emergencyContactRelationship" styleClass="emergencyContact" text="\$emergencyContactRelationship" />
+      <Label fx:id="emergencyContactPhone" styleClass="emergencyContact" text="\$emergencyContactPhone">
+        <graphic>
+          <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+            <Image url="@/images/phone.png"/>
+          </ImageView>
+        </graphic>
+      </Label>
+      <Label fx:id="emergencyContactRelationship" styleClass="emergencyContact" text="\$emergencyContactRelationship">
+        <graphic>
+          <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+            <Image url="@/images/relationship.png"/>
+          </ImageView>
+        </graphic>
+      </Label>
     </VBox>
   </GridPane>
 </HBox>

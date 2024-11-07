@@ -1,11 +1,7 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,80 +14,314 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * The UI component that is responsible for receiving user command inputs.
+ * A CommandBox component that is part of the UI, allowing the user to input commands.
+ * The CommandBox supports autocomplete functionality for command input, including autocompleting
+ * command words and parameters, and displaying suggestions for the current command context.
+ *
+ * <p>
+ * Users can press the Control key for autocompletion when typing a command or parameter.
+ * This component dynamically updates the suggestion based on the user's input and the available
+ * commands in the command syntax map.
+ * </p>
+ *
+ * <p>
+ * The CommandBox listens for user input, and upon submission, it delegates the execution
+ * of the command to the provided {@code CommandExecutor}.
+ * </p>
  */
 public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-    // Store available commands for autocomplete
     private static final Map<String, String> commandSyntaxMap = new HashMap<>();
-    private static final Map<String, List<String>> commandParametersMap = new HashMap<>();
-    private final CommandExecutor commandExecutor;
-    private String currentSuggestion = ""; // Tracks current suggestion part
-    private int tabIndex = 0; // Tracks the current position for tab completion
+    private String currentSuggestion = "";
 
     @FXML
-    private TextField commandTextField; //input field
+    private TextField commandTextField;
     @FXML
-    private Label suggestionLabel; // For greyed-out suggestion -> refer to fxml file
+    private Label suggestionLabel;
+
+    private final CommandExecutor commandExecutor;
 
     static {
-        commandSyntaxMap.put("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS edu/EDUCATION tele/TELEGRAM_HANDLE");
+        // Initialize command syntax map
+        commandSyntaxMap.put("add", "add n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME "
+                + "ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP "
+                + "dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
         commandSyntaxMap.put("clear", "clear");
         commandSyntaxMap.put("delete", "delete INDEX");
-        commandSyntaxMap.put("edit", "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] "
-                + "[edu/EDUCATION] [tele/TELEGRAM_HANDLE]");
+        commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/ECINDEX "
+                + "ecname/EMERGENCY_CONTACT_NAME ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME"
+                + " dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
         commandSyntaxMap.put("find", "find KEYWORD [MORE_KEYWORDS]");
         commandSyntaxMap.put("undo", "undo");
         commandSyntaxMap.put("redo", "redo");
         commandSyntaxMap.put("list", "list");
         commandSyntaxMap.put("help", "help");
-        initializeCommandParameters();
     }
 
     /**
-     * Creates a CommandBox with the given CommandExecutor.
+     * Creates a CommandBox component that allows users to input and execute commands.
+     * It also provides autocomplete suggestions for commands and parameters.
+     *
+     * @param commandExecutor The executor responsible for executing commands input by the user.
      */
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
 
-        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
+        // Handle text changes
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Clear error style whenever text changes
             setStyleToDefault();
-
-            // Handle text changes for suggestions
             handleTextChanged(newValue);
-
-            // Reset tab index when user types
-            if (!oldValue.equals(newValue)) {
-                tabIndex = 0;
-            }
         });
 
-        // Handle space and tab press for completion
-        commandTextField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.SPACE) {
-                handleSpaceCompletion();
-                event.consume();
-            } else if (event.getCode() == KeyCode.TAB) {
-                handleTabCompletion();
+        // Handle Control key release for autocomplete
+        commandTextField.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.CONTROL) {
+                handleControlCompletion();
                 event.consume();
             }
         });
     }
 
     /**
-     * Sets the command box style to use the default style.
+     * Handles text changes in the command box and updates suggestions dynamically.
      */
+    private void handleTextChanged(String input) {
+        if (input.trim().isEmpty()) {
+            suggestionLabel.setVisible(false);
+            return;
+        }
+
+        String[] words = input.split("\\s+");
+        String commandPrefix = words[0];
+
+        // Check if the command prefix matches any command in the commandSyntaxMap
+        for (String cmd : commandSyntaxMap.keySet()) {
+            if (cmd.startsWith(commandPrefix)) {
+                String fullSyntax = commandSyntaxMap.get(cmd);
+                suggestionLabel.setText(fullSyntax);
+                suggestionLabel.setVisible(true);
+                currentSuggestion = fullSyntax;
+
+                if (cmd.equals(commandPrefix)) {
+                    processParameters(input, fullSyntax, words);
+                }
+                return;
+            }
+        }
+        suggestionLabel.setVisible(false);
+    }
+
+    private void processParameters(String input, String fullSyntax, String[] words) {
+        StringBuilder consumedSyntax = new StringBuilder(words[0]);
+        String[] syntaxParts = fullSyntax.split("\\s+");
+
+        int syntaxIndex = 1; // Start after command word
+        boolean hideSuggestion = false;
+
+        // Split input by spaces to properly handle multi-word parameters
+        String[] inputParts = input.split("\\s+");
+        String currentPrefix = null;
+        StringBuilder currentValue = new StringBuilder();
+
+        // Skip the command word and process input parameters
+        for (int i = 1; i < inputParts.length; i++) {
+            String part = inputParts[i];
+
+            // Check if this is a new parameter prefix
+            if (part.contains("/")) {
+                // If we had a previous parameter, add it to consumed syntax
+                if (currentPrefix != null) {
+                    consumedSyntax.append(" ").append(currentPrefix).append(currentValue);
+                    syntaxIndex++;
+                }
+
+                // Start a new parameter
+                currentPrefix = part.substring(0, part.indexOf("/") + 1);
+                currentValue = new StringBuilder(part.substring(part.indexOf("/") + 1));
+
+                // Skip this parameter in the syntax index
+                while (syntaxIndex < syntaxParts.length && syntaxParts[syntaxIndex].startsWith(currentPrefix)) {
+                    syntaxIndex++;
+                }
+
+                // Hide suggestion while typing parameter
+                if (!input.endsWith(" ")) {
+                    hideSuggestion = true;
+                    suggestionLabel.setVisible(false);
+                    return;
+                }
+            } else if (currentPrefix != null) {
+                // Continue building the current parameter value
+                currentValue.append(" ").append(part);
+            }
+
+            // Move to the next parameter if we're at a valid breakpoint
+            if (currentPrefix != null && input.endsWith(" ")) {
+                boolean hasNextParameter = false;
+                if (i + 1 < inputParts.length) {
+                    hasNextParameter = inputParts[i + 1].contains("/");
+                }
+
+                if (hasNextParameter) {
+                    consumedSyntax.append(" ").append(currentPrefix).append(currentValue);
+                    currentPrefix = null;
+                    currentValue = new StringBuilder();
+                    syntaxIndex++;
+                }
+            }
+        }
+
+        // Add the current parameter if we were building one
+        if (currentPrefix != null) {
+            consumedSyntax.append(" ").append(currentPrefix).append(currentValue);
+        }
+
+        // Prepare remaining syntax to append as a suggestion
+        StringBuilder remainingSyntax = new StringBuilder();
+        if (!hideSuggestion && syntaxIndex < syntaxParts.length) {
+            if (input.endsWith(" ") && (currentPrefix == null || currentValue.length() > 0)) {
+                String nextParam = syntaxParts[syntaxIndex];
+                remainingSyntax.append(" ").append(nextParam);
+
+                // Add remaining parameters
+                for (int i = syntaxIndex + 1; i < syntaxParts.length; i++) {
+                    remainingSyntax.append(" ").append(syntaxParts[i]);
+                }
+            }
+        }
+
+        // Update the suggestion label
+        if (!hideSuggestion && remainingSyntax.length() > 0) {
+            suggestionLabel.setText(consumedSyntax.toString() + remainingSyntax);
+            suggestionLabel.setVisible(true);
+        } else {
+            suggestionLabel.setVisible(false);
+        }
+    }
+
+
+    /**
+     * Handles autocompletion based on the current input when the Control key is pressed.
+     */
+    private void handleControlCompletion() {
+        String input = commandTextField.getText().trim();
+        if (input.isEmpty()) {
+            return;
+        }
+
+        String[] words = input.split("\\s+");
+        String command = words[0];
+
+        // If the command has parameters in the syntax map
+        if (commandSyntaxMap.containsKey(command)) {
+            String fullSyntax = commandSyntaxMap.get(command);
+            String remainingSyntax = getRemainingCommandSyntax(input, fullSyntax).trim();
+
+            // Determine if there are still remaining parameters to complete
+            if (!remainingSyntax.isEmpty()) {
+                String[] remainingWords = remainingSyntax.split("\\s+");
+
+                // Find the next parameter that hasn't been entered
+                for (String nextWord : remainingWords) {
+                    if (!isParameterAlreadyEntered(input, nextWord)) {
+                        String completion = nextWord.contains("/")
+                                ? nextWord.substring(0, nextWord.indexOf("/") + 1) : nextWord;
+
+                        // Add the next parameter to the input
+                        String newText = input + (input.endsWith(" ") ? "" : " ") + completion;
+                        commandTextField.setText(newText);
+                        commandTextField.positionCaret(newText.length());
+                        return;
+                    }
+                }
+            }
+        }
+
+        // Autocomplete for partially typed commands, if we are not inside parameter input
+        for (String cmd : commandSyntaxMap.keySet()) {
+            if (cmd.startsWith(command) && !cmd.equals(command)) {
+                String newText = cmd;
+
+                // Check if the command expects additional parameters based on its syntax definition
+                String fullSyntax = commandSyntaxMap.get(cmd);
+                if (fullSyntax.split("\\s+").length > 1) {
+                    newText += " "; // Add trailing space if there are parameters expected
+                }
+
+                commandTextField.setText(newText);
+                commandTextField.positionCaret(newText.length());
+                currentSuggestion = fullSyntax;
+                return;
+            }
+        }
+    }
+
+    /**
+     * Gets remaining syntax after current input.
+     */
+    private String getRemainingCommandSyntax(String input, String fullSyntax) {
+        int inputPos = 0;
+        String[] inputWords = input.split("\\s+");
+        String[] syntaxWords = fullSyntax.split("\\s+");
+
+        // Track consumed words to skip to the next expected parameter
+        for (String word : inputWords) {
+            for (int i = inputPos; i < syntaxWords.length; i++) {
+                if (syntaxWords[i].startsWith(word)) {
+                    inputPos = i + 1;
+                    break;
+                }
+            }
+        }
+
+        if (inputPos >= syntaxWords.length) {
+            return "";
+        }
+
+        StringBuilder remaining = new StringBuilder();
+        for (int i = inputPos; i < syntaxWords.length; i++) {
+            remaining.append(" ").append(syntaxWords[i]);
+        }
+        return remaining.toString().trim();
+    }
+
+    /**
+     * Checks if a parameter has already been entered in the input.
+     */
+    private boolean isParameterAlreadyEntered(String input, String parameter) {
+        String[] inputWords = input.split("\\s+");
+        for (String word : inputWords) {
+            if (word.startsWith(parameter.substring(0, parameter.indexOf("/") + 1))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+    @FXML
+    private void handleCommandEntered() {
+        String commandText = commandTextField.getText();
+        if (commandText.isEmpty()) {
+            return;
+        }
+
+        try {
+            commandExecutor.execute(commandText);
+            commandTextField.setText("");
+            suggestionLabel.setVisible(false);
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
-    /**
-     * Sets the command box style to indicate a failed command.
-     */
     private void setStyleToIndicateCommandFailure() {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
         if (!styleClass.contains(ERROR_STYLE_CLASS)) {
@@ -100,307 +330,11 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Handles the Enter button pressed event.
-     */
-    @FXML
-    private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
-        if (commandText.equals("")) {
-            return;
-        }
-
-        try {
-            commandExecutor.execute(commandText);
-            commandTextField.setText(""); // Clear after successful command execution
-            suggestionLabel.setVisible(false); // Hide the suggestion after execution
-        } catch (CommandException | ParseException e) {
-            setStyleToIndicateCommandFailure();
-        }
-    }
-
-
-    /**
-     * Extract all parameters ending with "/"
-     */
-    private static void initializeCommandParameters() {
-        for (Map.Entry<String, String> entry : commandSyntaxMap.entrySet()) {
-            String command = entry.getKey();
-            String syntax = entry.getValue();
-
-            // Extract all parameters ending with "/"
-            List<String> parameters = new ArrayList<>();
-            String[] parts = syntax.split(" ");
-
-            for (String part : parts) {
-                if (part.contains("/") && part.indexOf("/") > 0) {
-                    // Extract just the parameter prefix (including the slash)
-                    String prefix = part.substring(0, part.indexOf("/") + 1);
-                    parameters.add(prefix);
-                }
-            }
-
-            commandParametersMap.put(command, parameters);
-        }
-    }
-
-
-    /**
-     * This method helps with auto-completion of command parameters when the user presses the Tab key.
-     * It takes the input string (the current command and any parameters the user has typed) and
-     * completes the next parameter by examining what has already been typed.
-     * This will be used to suggest commands as the user types.
-     */
-    private void handleParameterCompletion(String input) {
-        String[] parts = input.split("\\s+", 2); //match 1 or more whitespace characters in a str
-        String command = parts[0];
-        //parts[0] = "add"; command
-        //parts[1] = "n/Saajid p/PHONE_NUMBER"; parameters
-
-        if (commandParametersMap.containsKey(command)) {
-            List<String> parameters = commandParametersMap.get(command);
-            String currentInput = parts.length > 1 ? parts[1] : "";
-            //For the "add" command, the parameters list might look like: ["n/", "p/", "e/", "a/"].
-            //If parts[1] exists, ("n/Saajid p/PHONE_NUMBER"), then currentInput will store, else ->empty string
-
-            // Find current parameter index by looking for the last parameter used
-            int currentParamIndex = -1;
-            for (int i = 0; i < parameters.size(); i++) {
-                if (currentInput.endsWith(parameters.get(i))) {
-                    currentParamIndex = i;
-                    break;
-                }
-            }
-            //Let's say the user has typed: "add n/Saajid ".The currentInput is "n/Saajid ".
-            //The loop compares currentInput with each parameter in ["n/", "p/", "e/"].
-            //Since currentInput ends with "n/Saajid", it will identify that the current parameter is n/ (index 0)
-
-            // Check if we're in the middle of a parameter
-            for (int i = 0; i < parameters.size(); i++) {
-                String param = parameters.get(i);
-                if (currentInput.contains(param)) {
-                    String afterParam = currentInput.substring(
-                            currentInput.indexOf(param) + param.length()
-                    );
-                    if (!afterParam.contains("/")) {
-                        currentParamIndex = i;
-                        break;
-                    }
-                }
-            }
-            //Input: "add n/Saajid p/9876. The method finds that the user is in the middle of typing the phone number.
-            //Since "p/" is alr present but there’s no / after 9876, it identifies the user is working on the p/ param
-
-            // Move to next parameter
-            if (currentParamIndex < parameters.size() - 1) {
-                StringBuilder newText = new StringBuilder(command + " ");
-
-                // Keep existing parameters
-                if (parts.length > 1) {
-                    String[] existingParams = parts[1].split("\\s+");
-                    for (String param : existingParams) {
-                        if (!param.isEmpty() && !param.equals(parameters.get(currentParamIndex + 1))) {
-                            newText.append(param).append(" ");
-                        }
-                    }
-                }
-
-                // Add next parameter
-                newText.append(parameters.get(currentParamIndex + 1));
-
-                commandTextField.setText(newText.toString());
-                commandTextField.positionCaret(commandTextField.getText().length());
-            }
-        }
-    }
-
-    private void handleTextChanged(String input) {
-        // Clear suggestion if input is empty
-        if (input.trim().isEmpty()) {
-            suggestionLabel.setVisible(false);
-            return;
-        }
-
-        String[] parts = input.trim().split("\\s+");
-        String command = parts[0];
-
-        // If we're in parameter mode (after a valid command)
-        if (input.contains(" ") && commandSyntaxMap.containsKey(command)) {
-            handleParameterInput(input, command);
-        } else if (!input.contains(" ")) {
-            // We're still typing the command
-            handleCommandSuggestion(input, command);
-        }
-    }
-
-    private void handleParameterInput(String input, String command) {
-        String[] inputParts = input.split("\\s+");
-        String lastPart = inputParts[inputParts.length - 1];
-
-        // If the last part ends with slash or contains slash and no space after it,
-        // hide suggestion until space is added
-        if (lastPart.endsWith("/") || (lastPart.contains("/") && !input.endsWith(" "))) {
-            suggestionLabel.setVisible(false);
-            return;
-        }
-
-        // If input ends with space, show next parameter suggestion
-        if (input.endsWith(" ")) {
-            handleNextParameterSuggestion(input, command, inputParts);
-            return;
-        }
-
-        // Hide suggestion if we're not in any valid suggestion state
-        suggestionLabel.setVisible(false);
-    }
-
-    private void handleNextParameterSuggestion(String input, String command, String[] inputParts) {
-        List<String> parameters = commandParametersMap.get(command);
-        Set<String> usedParams = new HashSet<>();
-
-        // Find used parameters
-        for (String part : inputParts) {
-            if (part.contains("/")) {
-                String prefix = part.substring(0, part.indexOf("/") + 1);
-                usedParams.add(prefix);
-            }
-        }
-
-        // Find next unused parameter
-        for (String param : parameters) {
-            if (!usedParams.contains(param)) {
-                String fullSyntax = commandSyntaxMap.get(command);
-                String paramDescription = getParameterDescription(fullSyntax, param);
-                suggestionLabel.setText(input + param + paramDescription);
-                suggestionLabel.setVisible(true);
-                return;
-            }
-        }
-
-        // Hide suggestion if all parameters are used
-        suggestionLabel.setVisible(false);
-    }
-
-    private void handleCommandSuggestion(String input, String currentInput) {
-        boolean foundMatch = false;
-
-        for (String command : commandSyntaxMap.keySet()) {
-            if (command.startsWith(currentInput.toLowerCase())) {
-                String fullSyntax = commandSyntaxMap.get(command);
-                String remainingSuggestion = fullSyntax.substring(currentInput.length());
-
-                if (currentInput.equals(command) && !remainingSuggestion.startsWith(" ")) {
-                    remainingSuggestion = " " + remainingSuggestion;
-                } else if (!currentInput.equals(command) && remainingSuggestion.startsWith(" ")) {
-                    remainingSuggestion = remainingSuggestion.substring(1);
-                }
-
-                suggestionLabel.setText(input + remainingSuggestion);
-                suggestionLabel.setVisible(true);
-                currentSuggestion = fullSyntax;
-                foundMatch = true;
-                break;
-            }
-        }
-
-        if (!foundMatch) {
-            suggestionLabel.setVisible(false);
-            currentSuggestion = "";
-        }
-    }
-
-    /**
-     * Handles tab completion based on current input state
-     */
-    private void handleTabCompletion() {
-        String input = commandTextField.getText().trim();
-
-        if (input.isEmpty()) {
-            return;
-        }
-
-        if (!input.contains(" ")) {
-            // Only handle command completion if there's a valid suggestion
-            if (!currentSuggestion.isEmpty() && suggestionLabel.isVisible()) {
-                handleCommandCompletion(input);
-            }
-        } else {
-            handleParameterCompletion(input);
-        }
-    }
-
-    private void handleCommandCompletion(String input) {
-        // Only complete if the input matches the beginning of a valid command
-        boolean validCommand = false;
-        for (String command : commandSyntaxMap.keySet()) {
-            if (command.startsWith(input.toLowerCase())) {
-                List<String> parameters = commandParametersMap.get(command);
-                if (!parameters.isEmpty()) {
-                    commandTextField.setText(command + " " + parameters.get(0));
-                    commandTextField.positionCaret(commandTextField.getText().length());
-                    currentSuggestion = commandSyntaxMap.get(command);
-                    tabIndex = 1;
-                    validCommand = true;
-                }
-                break;
-            }
-        }
-
-        // If no valid command matches, clear suggestion
-        if (!validCommand) {
-            suggestionLabel.setVisible(false);
-            currentSuggestion = "";
-        }
-    }
-
-    /**
-     * Extracts the parameter description from the full syntax
-     */
-    private String getParameterDescription(String syntax, String paramPrefix) {
-        String[] parts = syntax.split(" ");
-        for (String part : parts) {
-            if (part.startsWith(paramPrefix)) {
-                return part.substring(paramPrefix.length());
-            }
-        }
-        return "VALUE";
-    }
-
-    /**
-     * Handles space completion to move to the next part of the suggestion.
-     * After a space is detected, it uses the slash as a pointer to pinpoint
-     * where the suggestion should resume from.
-     */
-    private void handleSpaceCompletion() {
-        String input = commandTextField.getText().trim();
-
-        // Do nothing if the input is empty
-        if (input.isEmpty()) {
-            return;
-        }
-        // Parse input to find the last '/' to append the remaining suggestion
-        int lastSlashIndex = input.lastIndexOf('/');
-        if (lastSlashIndex != -1) {
-            // Find the next part of the suggestion after the last slash
-            String currentInputPart = input.substring(0, lastSlashIndex + 1); // Get everything before the last slash
-            String remainingSuggestion = currentSuggestion.substring(currentInputPart.length()).trim();
-
-            // Concat current input append remaining suggestion after the '  '
-            suggestionLabel.setText(input + " " + remainingSuggestion);
-            suggestionLabel.setVisible(true);
-        }
-    }
-
-
-    /**
-     * Represents a function that can execute commands.
+     * Functional interface for executing commands.
      */
     @FunctionalInterface
     public interface CommandExecutor {
-        /**
-         * Executes the command and returns the result.
-         *
-         * @see seedu.address.logic.Logic#execute(String)
-         */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 }
+

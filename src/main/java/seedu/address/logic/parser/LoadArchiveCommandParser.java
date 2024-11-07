@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.commons.core.filename.Filename;
 import seedu.address.logic.commands.LoadArchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -16,7 +18,13 @@ public class LoadArchiveCommandParser implements Parser<LoadArchiveCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public LoadArchiveCommand parse(String args) throws ParseException {
-        Filename filename = ParserUtil.parseFilename(args);
+        Filename filename;
+        try {
+            filename = ParserUtil.parseFilename(args);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    pe.getMessage() + "\n\n" + LoadArchiveCommand.MESSAGE_USAGE), pe);
+        }
         return new LoadArchiveCommand(filename);
     }
 }

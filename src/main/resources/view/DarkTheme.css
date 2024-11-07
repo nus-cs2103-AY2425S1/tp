@@ -116,6 +116,14 @@
     -fx-border-width: 1;
 }
 
+.emergencyContactListView-odd {
+    -fx-background-color: #3c3e3f;
+}
+
+.emergencyContactListView-even {
+    -fx-background-color: #515658;
+}
+
 #emergencyContactListView .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
@@ -135,8 +143,8 @@
 }
 
 #emergencyContactListView .list-cell:filled:selected #cardPane {
-    -fx-border-color: #406478;
-    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-border-width: 1.5;
 }
 
 #emergencyContactListView .list-cell .label {

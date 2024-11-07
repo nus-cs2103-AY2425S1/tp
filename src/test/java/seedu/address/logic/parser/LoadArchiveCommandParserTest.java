@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -19,6 +20,13 @@ public class LoadArchiveCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "/", Filename.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                Filename.MESSAGE_CONSTRAINTS + "\n\n" + LoadArchiveCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_blankArgs_throwsParseException() {
+        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                Filename.MESSAGE_CONSTRAINTS_BLANK + "\n\n" + LoadArchiveCommand.MESSAGE_USAGE));
     }
 }

@@ -32,11 +32,11 @@ public class AddEmergencyContactCommand extends Command {
     public static final String COMMAND_WORD = "addec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new emergency contact to the person "
-            + "identified by the index number used in the displayed person list. "
+            + "identified by the index number used in the displayed person list.\n\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_EMERGENCY_CONTACT_NAME + "EMERGENCY CONTACT NAME "
             + PREFIX_EMERGENCY_CONTACT_PHONE + "EMERGENCY CONTACT PHONE "
-            + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP "
+            + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMERGENCY_CONTACT_NAME + "Sarah Lim "
             + PREFIX_EMERGENCY_CONTACT_PHONE + "91234567 "

@@ -31,9 +31,9 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person by the index number used in the displayed person list or emergency contact "
-            + "identified by the index number used in the displayed emergency contact list.\n"
+            + "identified by the index number used in the displayed emergency contact list.\n\n"
             + "Parameters: INDEX (must be a positive integer) [" + PREFIX_EMERGENCY_CONTACT_TO_EDIT
-            + "EMERGENCY CONTACT INDEX (must be a positive integer)]\n"
+            + "EMERGENCY CONTACT INDEX (must be a positive integer)]\n\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_EMERGENCY_CONTACT_TO_EDIT + "1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
@@ -74,6 +74,10 @@ public class DeleteCommand extends Command {
     private CommandResult executeDeleteEmergencyContact(Index emergencyContactIndex,
                                                         Person personToDelete,
                                                         Model model) throws CommandException {
+        if (emergencyContactIndex.getOneBased() > personToDelete.getEmergencyContacts().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EMERGENCY_CONTACT_DISPLAYED_INDEX);
+        }
+
         if (personToDelete.hasOnlyOneEmergencyContact()) {
             throw new CommandException(Messages.MESSAGE_LAST_EMERGENCY_CONTACT_INDEX);
         }

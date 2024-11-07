@@ -97,6 +97,6 @@ public class EmergencyContact {
 
     @Override
     public String toString() {
-        return "Name: " + name + " Phone: " + phone + " Relationship: " + relationship + " ";
+        return "Name: " + name + " Phone: " + phone + " Relationship: " + relationship;
     }
 }

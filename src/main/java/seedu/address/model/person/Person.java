@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -32,6 +33,7 @@ public class Person {
     private final Set<EmergencyContact> emergencyContacts = new LinkedHashSet<>();
     private final Doctor doctor;
     private final Set<Tag> tags = new HashSet<>();
+    private final LocalDateTime dateAdded;
 
     /**
      * Every field must be present and not null.
@@ -46,6 +48,7 @@ public class Person {
         this.emergencyContacts.addAll(emergencyContacts);
         this.doctor = doctor;
         this.tags.addAll(tags);
+        this.dateAdded = LocalDateTime.now();
     }
 
     public Name getName() {
@@ -112,7 +115,7 @@ public class Person {
      */
     public Boolean hasEmergencyContact(EmergencyContact emergencyContactToCheck) {
         for (EmergencyContact emergencyContact : emergencyContacts) {
-            if (emergencyContact.equals((emergencyContactToCheck))) {
+            if (emergencyContact.isSamePerson((emergencyContactToCheck))) {
                 return true;
             }
         }
@@ -130,6 +133,13 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns the datetime the person was added to the address book.
+     */
+    public LocalDateTime getDateAdded() {
+        return dateAdded;
     }
 
     /**

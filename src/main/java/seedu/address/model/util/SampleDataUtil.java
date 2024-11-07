@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getEmergencyContactSet(
                         new EmergencyContact(
@@ -35,8 +35,8 @@ public class SampleDataUtil {
                                 new Phone("97645132"),
                                 new Relationship("Son"))),
                 new Doctor(new DoctorName("Tan Wei Ming"), new Phone("99119919"), new Email("drtan@gmail.com")),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                getTagSet("Mandarin-speaking", "hard of hearing")),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@yahoo.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getEmergencyContactSet(
                         new EmergencyContact(
@@ -46,11 +46,11 @@ public class SampleDataUtil {
                         new EmergencyContact(
                                 new Name("Brad Goh"),
                                 new Phone("98764142"),
-                                new Relationship("Cousin")
+                                new Relationship("Son")
                         )),
                 new Doctor(new DoctorName("Lim Heng Seng"), new Phone("80987123"), new Email("drlim@gmail.com")),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+                getTagSet("short-term patient")),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@hotmail.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getEmergencyContactSet(
                         new EmergencyContact(
@@ -62,16 +62,16 @@ public class SampleDataUtil {
                                 new Phone("98763448"),
                                 new Relationship("Grandson"))
                 ),
-                new Doctor(new DoctorName("Robert Lim"), new Phone("91919191"), new Email("robertlim@hotmail.com")),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                new Doctor(new DoctorName("Robert Lim"), new Phone("91919191"), new Email("robertlim@gmail.com")),
+                getTagSet("needs hearing aid")),
+            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@hotmail.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getEmergencyContactSet(
                         new EmergencyContact(new Name("Amanda Lee"), new Phone("98762341"), new Relationship("Cousin"))
                 ),
                 new Doctor(new DoctorName("Jessica Loh"), new Phone("99119919"), new Email("jloh@gmail.com")),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                getTagSet("short-term residential address")),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@gmail.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getEmergencyContactSet(
                         new EmergencyContact(
@@ -89,8 +89,8 @@ public class SampleDataUtil {
                                 new Relationship("Relative")
                         )
                 ), new Doctor(new DoctorName("Zhou Jie Lun"), new Phone("88888888"), new Email("zhoujl@hotmail.com")),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+                getTagSet("requires Malay translator")),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@yahoo.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getEmergencyContactSet(
                         new EmergencyContact(
@@ -103,7 +103,7 @@ public class SampleDataUtil {
                                 new Relationship("Granddaughter"))
                 ),
                 new Doctor(new DoctorName("Ed Sheeran"), new Phone("95114320"), new Email("edsheeran@gmail.com")),
-                getTagSet("colleagues"))
+                getTagSet("speech impaired"))
         };
     }
 

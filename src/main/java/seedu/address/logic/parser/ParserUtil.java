@@ -48,6 +48,9 @@ public class ParserUtil {
     public static Filename parseFilename(String filename) throws ParseException {
         requireNonNull(filename);
         String trimmedFilename = filename.trim();
+        if (trimmedFilename.isBlank()) {
+            throw new ParseException(Filename.MESSAGE_CONSTRAINTS_BLANK);
+        }
         if (!Filename.isValidFilename(trimmedFilename)) {
             throw new ParseException(Filename.MESSAGE_CONSTRAINTS);
         }

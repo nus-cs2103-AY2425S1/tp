@@ -49,7 +49,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be overwritten by the input values.\n\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -63,7 +63,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_DOC_NAME + "DOCTOR NAME]"
             + "[" + PREFIX_DOC_PHONE + "DOCTOR PHONE]"
             + "[" + PREFIX_DOC_EMAIL + "DOCTOR EMAIL]"
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -77,8 +77,6 @@ public class EditCommand extends Command {
             + "must be provided.";
     public static final String MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID = "At least one emergency contact name to edit "
             + "must be provided.";
-    public static final String MESSAGE_EMERGENCY_CONTACT_NOT_FOUND = "Emergency contact name not found. "
-            + "Please provide an exact name match.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

@@ -7,6 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  *
  */
 public class Filename {
+    public static final String MESSAGE_CONSTRAINTS_BLANK = "Filename should not be blank";
     public static final String MESSAGE_CONSTRAINTS = "Invalid filename. Filenames should not contain any of the "
             + "following characters: < > : \" / \\ | ? *";
 

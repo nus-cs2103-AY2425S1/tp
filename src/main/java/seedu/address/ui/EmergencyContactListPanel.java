@@ -29,6 +29,10 @@ public class EmergencyContactListPanel extends UiPart<Region> {
         emergencyContactListView.setCellFactory(listView -> new EmergencyContactListViewCell());
     }
 
+    public ListView<EmergencyContact> getEmergencyContactListView() {
+        return emergencyContactListView;
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code EmergencyContact}
      * using a {@code EmergencyContactCard}.

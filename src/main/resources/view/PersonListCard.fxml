@@ -6,6 +6,8 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -29,19 +31,71 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="doctorName" styleClass="doctor" text="Doctor Name: \$doctorName" />
-      <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone" />
-      <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail" />
-      <VBox xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/17">
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
+          <graphic>
+            <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+                <Image url="@/images/phone.png"/>
+            </ImageView>
+          </graphic>
+        </Label>
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address">
+          <graphic>
+            <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+                <Image url="@/images/address.png"/>
+            </ImageView>
+          </graphic>
+      </Label>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email">
+        <graphic>
+          <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+              <Image url="@/images/mail.png"/>
+          </ImageView>
+        </graphic>
+      </Label>
+      <Region VBox.vgrow="NEVER" prefHeight="5" />
+      <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="doctorBox" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/17">
+        <padding>
+          <Insets top="10" left="10" bottom="15" right="10" />
+        </padding>
+        <Label styleClass="cell_big_label" text="Doctor">
+          <VBox.margin>
+            <Insets bottom="5" /> <!-- Adds padding below the label -->
+          </VBox.margin>
+        </Label>
+        <Label fx:id="doctorName" styleClass="doctor" text="\$doctorName">
+          <graphic>
+            <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+                <Image url="@/images/doctor.png"/>
+            </ImageView>
+          </graphic>
+        </Label>
+        <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone">
+          <graphic>
+            <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+                <Image url="@/images/phone.png"/>
+            </ImageView>
+          </graphic>
+        </Label>
+        <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail">
+          <graphic>
+            <ImageView fitHeight="17" fitWidth="17" preserveRatio="true">
+                <Image url="@/images/mail.png"/>
+            </ImageView>
+          </graphic>
+        </Label>
+      </VBox>
+      <Region VBox.vgrow="NEVER" prefHeight="7" />
+      <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="emergencyContactsBox" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/17">
         <padding>
           <Insets top="10" right="10" bottom="10" left="10" />
         </padding>
-        <StackPane fx:id="emergencyContactListPanelPlaceholder" maxHeight="180" VBox.vgrow="ALWAYS" />
+        <Label styleClass="cell_big_label" text="Emergency contact(s)">
+          <VBox.margin>
+            <Insets bottom="10" /> <!-- Adds padding below the label -->
+          </VBox.margin>
+        </Label>
+        <StackPane fx:id="emergencyContactListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
       </VBox>
-
     </VBox>
   </GridPane>
 </HBox>
