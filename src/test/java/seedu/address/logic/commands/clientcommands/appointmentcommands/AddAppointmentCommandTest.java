@@ -140,8 +140,14 @@ public class AddAppointmentCommandTest {
         // null -> returns false
         assertFalse(firstAddAppointmentCommand.equals(null));
 
-        // different person -> returns false
+        // different index, same appointment -> returns false
         assertFalse(firstAddAppointmentCommand.equals(secondAddAppointmentCommand));
+
+        // same index, different appointment -> returns false
+        Appointment differentAppointment = new Appointment(new Date("02-11-24"), new From("10:00"), new To("11:00"));
+        AddAppointmentCommand firstAddAppointmentCommandWithDifferentAppointment =
+                new AddAppointmentCommand(INDEX_FIRST_PERSON, differentAppointment);
+        assertFalse(firstAddAppointmentCommand.equals(firstAddAppointmentCommandWithDifferentAppointment));
     }
 
     /**
