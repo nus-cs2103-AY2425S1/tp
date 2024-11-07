@@ -76,16 +76,17 @@ public class CommandTextFlow extends TextFlow {
         return switch (command.toLowerCase()) {
         case "help" -> "help - Shows program help instructions and command summary";
         case "list" -> "list - Shows a list of all persons in the gamer address book";
-        case "add" -> "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... [pt/PREFERRED_TIME]...";
+        case "add" -> "add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/TIME-TIME]...";
         case "edit" -> "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... "
-                + "[t/TAG]... [pt/PREFERRED_TIME]...";
+                + "[t/TAG]... [pt/TIME-TIME]...";
         case "addgame" -> "addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]";
         case "editgame" -> "editgame INDEX g/GAME [u/USERNAME] [s/SKILL_LEVEL] [r/ROLE]";
         case "deletegame" -> "deletegame INDEX g/GAME";
         case "favgame" -> "favgame INDEX g/GAME";
         case "unfavgame" -> "unfavgame INDEX g/GAME";
         case "find" -> "find KEYWORD [MORE_KEYWORDS] - Finds persons whose names contain any of the keywords";
-        case "findtime" -> "find HHmm-HHmm [HHmm-HHmm]";
+        case "findtime" -> "find TIME-TIME [TIME-TIME]";
+        case "findgame" -> "findgame g/GAME";
         case "delete" -> "delete INDEX - Deletes the specified person (e.g., delete 3)";
         case "clear" -> "clear - Clears all entries from the gamer address book";
         case "undo" -> "undo - Undoes the previous command (aside from save and load)";
