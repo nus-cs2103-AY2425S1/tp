@@ -230,6 +230,12 @@ public class ModelManager implements Model {
     public void addAssignment(Assignment assignment) {
         addressBook.addAssignment(assignment);
     }
+
+    @Override
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        requireAllNonNull(target, editedAssignment);
+        addressBook.setAssignment(target, editedAssignment);
+    }
     //=========== Filtered Employee List Accessors =============================================================
 
     /**
