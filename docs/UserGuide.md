@@ -28,7 +28,7 @@ Whether you have a small, close-knit family or a large extended family, LegacyLi
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   Some example commands (full indepth guide below) you can try:
 
    * `list -p` : Lists all persons.
 
@@ -89,7 +89,7 @@ Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 
 Examples:
 * `add -n John Doe -p 98765432 -e johnd@example.com -rs Father`
-* `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com`
+* `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123`
 
 ### Editing a person : `edit`
 
@@ -119,9 +119,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find John` returns anyone with "John" as part of their name
+* `find benny williamson` returns anyone with `Benny` OR `Williamson` as part of their name<br>
+  ![result for 'find benny williamson'](images/findBennyWilliamsonResult.png)
 
 ### Deleting a person : `delete`
 
@@ -145,7 +145,7 @@ Format: `clear -p`
 
 ### Clearing all events : `clear -e`
 
-Clears all events from the contact book.
+Clears all events from the event book.
 
 Format: `clear -e`
 
@@ -159,24 +159,39 @@ Format: `list -e` (must be an exact match)
 
 Adds an event to the event book.
 
-Format: `event -n EVENT_NAME -d EVENT_DATE (yyyy-mm-dd) -l LOCATION -a ATTENDEES`
+Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION -a ATTENDEES` <br>
+**Note:** Dates are in (yyyy-mm-dd) format.
 
 <box type="tip" seamless>
 
-**Tip:** All parameters `EVENT_NAME`, `EVENT_DATE`, `LOCATION` must be present but `ATTENDEES` is optional
+**Tip:** All parameters `EVENT_NAME`, `EVENT_START_DATE`, `EVENT_END_DATE`, `LOCATION` must be present but `ATTENDEES` is optional.
 
-**Tip:** Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book
+**Tip:** Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
+Note that the indexes are seperated by **spaces**.
 </box>
+
+Examples:
+* `event -n Get Together Party -sd 2023-10-25 -ed 2023-10-27 -l MBS` adds a get together party event to the event book.
+* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3` creates the birthday party event and adds the first 3 people in the contacts book to the event.
+
 
 ### Updating an event: `update`
 
 Updates the details of an existing event in the address book.
 
-Format: `update -i INDEX -n NEW_NAME -d NEW_DATE -l NEW_LOCATION -a NEW_ATTENDEES_INDICES -r REMOVED_ATTENDEES_INDICES`
+Format: `update -i INDEX -n NEW_NAME -sd NEW_START_DATE -ed NEW_END_DATE -l NEW_LOCATION -a NEW_ATTENDEES_INDICES -r REMOVED_ATTENDEES_INDICES`
+**Note:** Dates are in (yyyy-mm-dd) format.
 
-**Tip:** The `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
+**Tip:** The initial `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
 remove attendees from an event, and can be used together with the `-a` flag. If you add and remove the same index, the result
 will be adding the person first, then removing them, i.e. they will not be present in the attendee list after the command executes.
+Indexes supplied to the `NEW_ATTENDEES_INDICIES`  and `REMOVED_ATTENDEES INDICES` parameters must be based on existing contacts indexing in the Address Book.
+Note that the indexes are seperated by **spaces**.
+
+Examples:
+* `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -a 1 2 4 5 -l Marine Parade Road #12-34 -r 3 6` updates the 3rd event, reflecting all the provided details.
+* `update -i 1 -l NUS` updates only the location of the first event.
+
 
 ### Exiting the program : `exit`
 
@@ -228,9 +243,10 @@ Action     | Format, Examples
 **Delete Person** | `delete INDEX`<br> e.g., `delete 3`
 **Edit Person**   | `edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-rs RELATIONSHIP]`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
 **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Clear Person**  | `clear -p`
-**Add Event**     | `event -n EVENT_NAME -d EVENT_DATE -l LOCATION -a ATTENDEES` <br> e.g., `event -n party -d 2023-12-12 -l my house -a 1 2 3`
+**Clear Person Book**  | `clear -p`
+**Add Event**     | `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION -a ATTENDEES` <br> e.g., `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3`
+**Edit Event**     | `update -i INDEX [-n NEW_NAME] [-sd NEW_START_DATE] [-ed NEW_END_DATE] [-l NEW_LOCATION] [-a NEW_ATTENDEES_INDICES] [-r REMOVED_ATTENDEES_INDICES`] <br> e.g., `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -a 1 2 4 5 -r 3 6`
 **List Events**   | `list -e`
-**Clear Event**  | `clear -e`
+**Clear Events**  | `clear -e`
 **Help**   | `help`
 **Exit**   | `exit`
