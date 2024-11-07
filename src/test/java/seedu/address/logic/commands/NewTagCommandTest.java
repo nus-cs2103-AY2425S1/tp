@@ -45,7 +45,6 @@ public class NewTagCommandTest {
         Tag tagBridesFriend = TypicalTags.BRIDES_SIDE;
         Tag tagColleagues = TypicalTags.COLLEAGUES;
         List<Tag> newTags = List.of(tagBridesFriend, tagColleagues);
-        newTags.add(tagColleagues);
         NewTagCommand newTagCommand = new NewTagCommand(newTags);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
