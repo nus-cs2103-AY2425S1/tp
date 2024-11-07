@@ -15,7 +15,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes an person identified using it's displayed index or NRIC from the address book.
+ * Deletes a person identified using it's displayed index or NRIC from the address book.
  */
 public class DeleteCommand extends Command {
 
