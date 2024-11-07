@@ -1,7 +1,6 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,27 +30,30 @@ public class SampleDataUtil {
                 new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40")),
             new Owner(new IdentificationCardNumber("S0000002G"), new Name("Bernice Yu"), new Phone("99272758"),
                 new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
-            new Owner(new IdentificationCardNumber("S0000003E"), new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04")),
+            new Owner(new IdentificationCardNumber("S0000003E"), new Name("Charlotte Oliveiro"),
+                    new Phone("93210283"), new Email("charlotte@example.com"),
+                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04")),
             new Owner(new IdentificationCardNumber("S0000004C"), new Name("David Li"), new Phone("91031282"),
                 new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43")),
-            new Owner(new IdentificationCardNumber("S0000005A"), new Name("Irfan Ibrahim"), new Phone("92492021"),
-                new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35")),
-            new Owner(new IdentificationCardNumber("S0000006Z"), new Name("Roy Balakrishnan"), new Phone("92624417"),
-                new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"))
+            new Owner(new IdentificationCardNumber("S0000005A"), new Name("Irfan Ibrahim"),
+                    new Phone("92492021"), new Email("irfan@example.com"),
+                    new Address("Blk 47 Tampines Street 20, #17-35")),
+            new Owner(new IdentificationCardNumber("S0000006Z"), new Name("Roy Balakrishnan"),
+                    new Phone("92624417"), new Email("royb@example.com"),
+                    new Address("Blk 45 Aljunied Street 85, #11-31"))
         };
     }
 
     public static Pet[] getSamplePets() {
         return new Pet[] {
             new Pet(new seedu.address.model.pet.Name("Fluffy"), new Species("Cat"), new Breed("Siamese"),
-                new Age("3"), new Sex("M"), new HashSet<>()),
+                new Age("3"), new Sex("Male"), getTagSet("cute", "gentle")),
             new Pet(new seedu.address.model.pet.Name("Honey"), new Species("Dog"), new Breed("Golden Retriever"),
-                new Age("5"), new Sex("M"), new HashSet<>()),
+                new Age("5"), new Sex("Female"), getTagSet("energetic")),
             new Pet(new seedu.address.model.pet.Name("Bison"), new Species("Cat"), new Breed("Bengal"),
-                new Age("2"), new Sex("F"), new HashSet<>()),
+                new Age("2"), new Sex("Male"), getTagSet("loyal", "loud")),
             new Pet(new seedu.address.model.pet.Name("Daisy"), new Species("Dog"), new Breed("Poodle"),
-                new Age("4"), new Sex("M"), new HashSet<>())
+                new Age("4"), new Sex("Female"), getTagSet("playful"))
         };
     }
 

@@ -203,7 +203,8 @@ public class EditPetCommand extends EditCommand<Pet> {
                     && Objects.equals(species, otherEditPetDescriptor.species)
                     && Objects.equals(breed, otherEditPetDescriptor.breed)
                     && Objects.equals(age, otherEditPetDescriptor.age)
-                    && Objects.equals(sex, otherEditPetDescriptor.sex);
+                    && Objects.equals(sex, otherEditPetDescriptor.sex)
+                    && Objects.equals(tags, otherEditPetDescriptor.tags);
         }
 
         @Override
@@ -214,6 +215,7 @@ public class EditPetCommand extends EditCommand<Pet> {
                     .add("breed", breed)
                     .add("age", age)
                     .add("sex", sex)
+                    .add("tags", tags)
                     .toString();
         }
     }
