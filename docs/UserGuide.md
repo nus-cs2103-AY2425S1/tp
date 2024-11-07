@@ -279,7 +279,7 @@ Entering the `help` command returns the following result on your screen:
 
 ### Listing all persons : `list`
 
-Shows a guest list consisting of all invited guests and a vendor list consisting of all vendors involved.
+This command will show you a guest list consisting of all invited guests and a vendor list consisting of all vendors involved in the current wedding that you are planning.
     
 * The guest list will be on the left of your screen while the vendor list will be on the right of your screen.
 
@@ -296,7 +296,7 @@ Entering the `list` command returns the following result on your screen:
 
 ### Finding a person : `find`
 
-Finds guests and vendors that match any of the given keyword(s).
+This command will help you find guests and vendors that match any of the given keyword(s) that you provide.
 
 **Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
