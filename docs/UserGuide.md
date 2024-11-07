@@ -203,7 +203,6 @@ Examples: <br>
 * `search n/ john` returns persons with the name `john` like `John Doe`
 * `search t/ friends` returns all persons tagged as friends like `Alex Yeoh` and `David Li`
 * `search n/ david t/ friends g/ blood drive` returns all persons with name matching `david`, tag matching `friends` and in group `blood drive` like `David Li`. <br>
-    ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 

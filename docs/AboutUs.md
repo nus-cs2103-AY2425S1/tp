@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/seah-minlong.png" width="200px">
 
 [[github](https://github.com/seah-minlong)]
-[[portfolio](team/seah-minlong.md)]
+[[portfolio](team/seahminlong.md)]
 
 * Role: Developer
 * Responsibilities: 
