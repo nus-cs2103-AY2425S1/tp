@@ -30,13 +30,12 @@ Equipped with features like **attendance marking**, **contact management**, **co
     cd ~/Desktop/CCA
     ```
 
-   1. Launch the CCAConnect application by typing in the following command:
-       ```dtd
-       java -jar ccaconnect.jar
-       ```
-
-      A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
-      ![Ui](images/Ui.png)
+1. Launch the CCAConnect application by typing in the following command:
+    ```dtd
+    java -jar ccaconnect.jar
+    ```
+   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+   ![Ui](images/startUpPage.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -60,17 +59,17 @@ Equipped with features like **attendance marking**, **contact management**, **co
 <details>
   <summary style="font-weight:600;font-size:20px;">Notes about the command format:</summary>
 
-  - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-    - e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br><br>
+  - Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.<br>
+     - e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.<br><br>
   - Items in square brackets are optional.<br>
-    - e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.<br><br>
+     - e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.<br><br>
   - Items in square brackets are optional.<br>
-    - e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.<br><br>
-  - Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
-    - e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/exco`, `r/member r/exco` etc. <br><br>
+     - e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.<br><br>
+  - Items with <code>…</code>​ after them can be used multiple times. If the item is optional, e.g. <code>[r/ROLE]…​</code>, it can also be used zero times<br>
+     - e.g. <code>[r/ROLE]…​</code> can be used as <code> </code> (i.e. 0 times), <code>r/exco</code>, <code>r/member r/exco</code> etc. <br><br>
   - Parameters can be in any order.<br>
-    - e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.<br><br>
-  - The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
+     - e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.<br><br>
+  - The parameter prefixes (e.g. <code>n/</code>) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
 </details>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
@@ -172,7 +171,7 @@ You can remove all the person’s roles by typing `r/` without specifying any ro
 
 #### Example
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
+*  `edit 2 n/Betsy Crower r/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
 
 ### Locating persons: `find`
 
@@ -316,7 +315,7 @@ mark t/TELEGRAM…​ d/DATE
 
 #### Example
 
-**Please note this part is updated on 2024-11-07, the GUI may be different if duplicate them on another date.**
+**Please note the following code will display a different GUI if used on a different day (other than 7th November 2024)**
 
 * `mark t/alexYeoh t/berniceYu d/2024-11-07`
 
@@ -378,10 +377,16 @@ clear
 
 Views all the contact information of the specified contact.
 
-Format: `view t/TELEGRAM_HANDLE`
+#### Format
+```
+view t/TELEGRAM_HANDLE
+```
 
-* Displays all contact information of the person with specified `TELEGRAM_HANDLE`
-* `TELEGRAM_HANDLE` must contain 5 - 32 characters, and can only contain letters, numbers and underscores.
+#### Parameters
+
+| Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                         |
+|------------|--------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> |
 
 Examples:
 * `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
@@ -499,4 +504,4 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Attendance**        | `attendance`                                                            | `attendance`                                                            |
 | **Mark Attendance**   | `mark t/TELEGRAM…​ d/DATE`                                              | `mark t/berniceYu t/alexYeoh d/2024-11-02`                              |
 | **Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                            | `unmark t/berniceYu d/2024-11-02`                                       |
-| **View**              | `view t/TELEGRAM_HANDLE`<br> e.g., `view t/bob123`                      |                                                                         |
+| **View**              | `view t/TELEGRAM_HANDLE`                                                | `view t/bob12`                                                          |

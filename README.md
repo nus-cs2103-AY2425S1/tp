@@ -23,7 +23,7 @@ ___
 # About the Project
 **CCAConnect** serves to aid CCA leaders in NUS in handling and collating relevant CCA personal contact information! Through a sleek and clean user interface that's catered towards command line users, **CCAConnect** can expedite the process of managing & contacting various members, leaders, and more!
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/startUpPage.png)
 
 <!-- Project Installation Guide -->
 # Getting Started
