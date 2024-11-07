@@ -44,9 +44,9 @@ public class EventFilterCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Event eventToView = lastShownList.get(targetIndex.getZeroBased());
-        model.filterEvent(eventToView);
-        return new CommandResult(String.format(MESSAGE_FILTER_EVENT_SUCCESS, eventToView.getName().toString()));
+        Event eventToFilter = lastShownList.get(targetIndex.getZeroBased());
+        model.filterEvent(eventToFilter);
+        return new CommandResult(String.format(MESSAGE_FILTER_EVENT_SUCCESS, eventToFilter.getName().toString()));
     }
 
     @Override
@@ -60,8 +60,8 @@ public class EventFilterCommand extends Command {
             return false;
         }
 
-        EventFilterCommand otherViewEventCommand = (EventFilterCommand) other;
-        return targetIndex.equals(otherViewEventCommand.targetIndex);
+        EventFilterCommand otherFilterEventCommand = (EventFilterCommand) other;
+        return targetIndex.equals(otherFilterEventCommand.targetIndex);
     }
 
     @Override
