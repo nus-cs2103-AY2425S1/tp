@@ -2,15 +2,14 @@
 layout: page
 title: User Guide
 ---
-<img src="images/meddict_logo.png" alt="MedDict Logo" style="max-width: 200px; width: 100%;" />
-
+<img src="images/meddict_logo.png" alt="MedDict Logo" style="max-width: 200px; width: 100%; margin: 0" />
 ### About us
 
 Welcome to the MedDict User Guide!
 
 MedDict is a _desktop application designed for medical staff_ who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application is designed with large databases in mind, supporting a streamlined process for tracking medical history, patient appointments, and treatment progress.
 
-Unlike most other applications who predominantly function on a Graphical User Interface (GUI) where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a Command Line Interface (CLI) -- where all features and utility can be achieved via typed-in commands -- would be far more efficeint.
+Unlike most other applications who predominantly function on a Graphical User Interface (GUI) where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a Command Line Interface (CLI) -- where all features and utility can be achieved via typed-in commands -- would be far more efficient.
 
 <img src="images/gui_vs_cli.png" alt="GUI vs CLI" style="width: 100%; display: block; margin: 0 auto;" />
 
@@ -157,7 +156,7 @@ This section is for users who are experienced in installing and using Java execu
 
     * `createP n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a Patient named John Doe to the Address Book.
 
-    * `deleteP z/2` : Deletes the Patient with Id = 2.
+    * `deleteP z/2` : Deletes the Patient with ID = 2.
 
     * `clear` : Deletes all persons.
 
@@ -177,7 +176,7 @@ This section is for users who are experienced in installing and using Java execu
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -257,7 +256,7 @@ Deletes the patient with the specified `PatientId` from the MedDict database in 
 
 Format: `deleteP z/PATIENT_ID`
 
-* **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
+* **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * A _notification message_ will be output if there is failure in deleting patient.
 
 Examples:
@@ -274,7 +273,7 @@ Adds a remark to an existing patient with the specified `PatientId` in the MedDi
 
 Format: `addR z/PATIENT_ID r/REMARK`
 
-* **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
+* **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * A _notification message_ will be output if there is failure in adding notes to the patient.
 
 Examples:
@@ -302,11 +301,11 @@ Edits an existing person with the specified `Id` in the address book.
 
 Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
-* **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
+* **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
+* **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Editing the person with the detail same as the existing detail is not allowed.
 * A _notification message_ will be output if there is failure in editing person in MedDict database in address book.
@@ -322,13 +321,13 @@ Examples:
   **Output**: <br>
   This person already exists in the address book.
 
-### Getting Id of Doctor or Patient by Name: `get`
+### Getting ID of Doctor or Patient by Name: `get`
 
 Gets the id of a doctor or patient whose names contain any of the given keywords.
 
 Format: `get KEYWORD`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -351,8 +350,8 @@ Adds an appointment to an existing patient with the specified `PatientId` and do
 
 Format: `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID …​`
 
-* **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
-* **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
+* **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
+* **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * **Remark**: Optional, user can add remark details by adding `[r/Remark]` when calling the command.
   Empty remark will be added to the appointment if remark is not specified.
 * When adding appointment, the appointment detail will be added to the appointments list in both patient and doctor class.
@@ -420,8 +419,8 @@ with a doctor with the specified `DoctorId` in the MedDict database in address b
 
 Format: `mark x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
 
-* **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
-* **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
+* **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
+* **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there is failure in marking appointments.
 
 Examples:
@@ -439,8 +438,8 @@ with a doctor with the specified `DoctorId` in the MedDict database in address b
 
 Format: `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
 
-* **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
-* **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
+* **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
+* **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there is failure in deleting appointment.
 
 Examples:
@@ -478,7 +477,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving Data Files `[coming in v2.0]`
@@ -498,8 +497,8 @@ _Details coming soon ..._
 **Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
 **A**: No worries, you can easily transfer your data! Refer to the steps below.
 1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
-2. In that folder, find a folder titled data (eg. `C:\Users\YourName\Documents\MedDict\data`)
-3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (eg. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
+2. In that folder, find a folder titled data (e.g. `C:\Users\YourName\Documents\MedDict\data`)
+3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (e.g. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
 4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#quick-start) if needed)
 5. Open / run the application once.
 6. Close the application.
