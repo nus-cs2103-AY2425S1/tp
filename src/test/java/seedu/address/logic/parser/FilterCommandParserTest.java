@@ -43,7 +43,7 @@ public class FilterCommandParserTest {
         AppointmentDateFilter filter = new AppointmentDateFilter(startDate,
                 LocalDate.parse("2025-10-10"), service);
         FilterCommand expectedFilterCommand = new FilterCommand(filter);
-        assertParseSuccess(parser, " ed/2025-10-10", expectedFilterCommand);
+        assertParseSuccess(parser, " ed|2025-10-10", expectedFilterCommand);
     }
 
     @Test
