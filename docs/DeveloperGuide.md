@@ -609,7 +609,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a delivery with existing supplier
 
-    1. Prerequisites: List all suppliers using the `list` command. Ensure there is at least 1 supplier.
+    1. Prerequisites: List all suppliers using the `list -s` command. Ensure there is at least 1 supplier.
 
     1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/bread q/500 g c/5.50`<br>
        Expected: A delivery paired to the first supplier is added. Details of the delivery shown in the status message.
@@ -619,13 +619,13 @@ testers are expected to do more *exploratory* testing.
        Expected: No delivery is added. Error message indicating that SUPPLIER_INDEX should be a positive number greater than 0 and smaller than total number of suppliers shown in the status message.
 
 3. Adding a delivery with invalid units for QUANTITY
-   1. Prerequisites: List all suppliers using the `list` command. Ensure there is at least 1 supplier.
+   1. Prerequisites: List all suppliers using the `list -s` command. Ensure there is at least 1 supplier.
    
    1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/bread q/500 pounds c/105.50`<br>
       Expected: No delivery is added. Error message indicating that QUANTITY should be a positive number followed by a space and valid unit shown in the status message. 
 
 4. Adding a delivery with invalid parameter values
-    1. Prerequisites: List all suppliers using the `list` command. Ensure there is at least 1 supplier.
+    1. Prerequisites: List all suppliers using the `list -s` command. Ensure there is at least 1 supplier.
 
     1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/###@@ q/500 pounds c/105.50`<br>
        Expected: No delivery is added. Error message indicating that PRODUCT should be alphanumeric shown in the status message.

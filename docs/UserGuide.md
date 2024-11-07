@@ -248,11 +248,7 @@ Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg
 
 Parameters:
 
-<<<<<<< HEAD
 - `on/DELIVERY_DATE_TIME`: Must be in dd-MM-yyyy hh:mm format and must not be blank.
-=======
-- `on/DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
->>>>>>> master
 - `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
 - `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
 - `q/QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
