@@ -3,7 +3,7 @@ package bizbook.logic.commands;
 import static bizbook.logic.Messages.MESSAGE_INVALID_NOTE_INDEX;
 import static bizbook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static bizbook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static bizbook.logic.commands.EditNotesCommand.DUPLICATE_MESSAGE_CONSTRAINTS;
+import static bizbook.logic.commands.EditNoteCommand.DUPLICATE_MESSAGE_CONSTRAINTS;
 import static bizbook.testutil.Assert.assertThrows;
 import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_NOTE;
 import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -29,7 +29,7 @@ import bizbook.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for
  * EditCommand.
  */
-public class EditNotesCommandTest {
+public class EditNoteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -43,10 +43,10 @@ public class EditNotesCommandTest {
                 TYPICAL_NOTE.getNote(), "Likes dumplings").build();
 
         // Define the EditNotesCommand
-        EditNotesCommand editNotesCommand = new EditNotesCommand(INDEX_FIRST_PERSON, INDEX_FIRST_NOTE, TYPICAL_NOTE);
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_NOTE, TYPICAL_NOTE);
 
         // Define the expected message
-        String expectedMessage = String.format(EditNotesCommand.MESSAGE_EDIT_NOTES_SUCCESS,
+        String expectedMessage = String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS,
                 Messages.format(editedPerson));
 
         // Create the expected model
@@ -55,28 +55,28 @@ public class EditNotesCommandTest {
         expectedModel.getFocusedPerson().set(editedPerson);
         model.setPerson(personToEdit, personToEdit);
 
-        assertCommandSuccess(editNotesCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editNoteCommand, model, expectedMessage, expectedModel);
     }
 
 
     @Test
     public void execute_duplicateNote_throwsCommandException() {
-        EditNotesCommand editNotesCommand = new EditNotesCommand(INDEX_SECOND_PERSON, INDEX_FIRST_NOTE, DUPLICATE_NOTE);
-        assertThrows(CommandException.class, DUPLICATE_MESSAGE_CONSTRAINTS, () -> editNotesCommand.execute(model));
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_SECOND_PERSON, INDEX_FIRST_NOTE, DUPLICATE_NOTE);
+        assertThrows(CommandException.class, DUPLICATE_MESSAGE_CONSTRAINTS, () -> editNoteCommand.execute(model));
     }
 
     @Test
     public void execute_invalidPersonIndex_throwsCommandException() {
-        EditNotesCommand editNotesCommand = new EditNotesCommand(INDEX_OUTOFBOUND_PERSON, INDEX_FIRST_NOTE,
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_OUTOFBOUND_PERSON, INDEX_FIRST_NOTE,
                 DUPLICATE_NOTE);
         assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
-                editNotesCommand.execute(model));
+                editNoteCommand.execute(model));
     }
 
     @Test
     public void execute_invalidNoteIndex_throwsCommandException() {
-        EditNotesCommand editNotesCommand = new EditNotesCommand(INDEX_SECOND_PERSON, INDEX_OUTOFBOUND_NOTE,
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_SECOND_PERSON, INDEX_OUTOFBOUND_NOTE,
                 TYPICAL_NOTE);
-        assertThrows(CommandException.class, MESSAGE_INVALID_NOTE_INDEX, () -> editNotesCommand.execute(model));
+        assertThrows(CommandException.class, MESSAGE_INVALID_NOTE_INDEX, () -> editNoteCommand.execute(model));
     }
 }
