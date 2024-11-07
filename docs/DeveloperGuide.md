@@ -178,6 +178,69 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add/Delete Order feature
+
+#### Implementation
+The order management mechanism is facilitated by `CustomerOrderList` and `SupplyOrderList`. Both classes extends `OrderList` with methods to add and manage orders. Additionally, it implements the following operations:  
+* `CustomerOrderList#addOrder(Order)` — Adds a new customer order to the customer order list.
+* `CustomerOrderList#removeOrder(Order)` — Removes an existing order from the customer order list.
+* `SupplyOrderList#addOrder(Order)` — Adds a new supply order to the supply order list.
+* `SupplyOrderList#removeOrder(Order)` — Removes an existing supply order from the supply order list.
+
+These operations are exposed in the `Model` interface as `Model#addCustomerOrder(Order)`, `Model#removeCustomerOrder(Order)`, `Model#removeCustomerOrder(Order)` and `Model#removeSupplyOrder(Order)` respectively.  
+
+**Adding an Order**
+* Given below is an example usage scenario on how the order management mechanism behaves at each step when an order is added. 
+* For simplicity, we will only focus on the customer order list since both customer and supply order lists share the same behavior. 
+
+Step 1: The user launches the application for the first time. The `CustomerOrderList` will be initialized with the initial order list state.  
+
+Step 2: The user executes `addCustomerOrder` command to add a new customer order. 
+
+Command Execution:  
+* The execute method is called with the `Model` as a parameter.
+* It retrieves the `PastryCatalogue` from the `Model`.
+* It checks if all product IDs in the `idList` exist in the `PastryCatalogue`.
+* It retrieves the list of products corresponding to the IDs.
+* It retrieves the list of persons from the `Model`.
+* It checks if the person exists in the list by their phone number.
+* If the person does not exist, it creates a new guest person and adds them to the `Model`.
+* It creates a new `CustomerOrder` with the person, product list, order status, and remark.
+* It adds the order to the person and the `CustomerOrderList` within `Model`.
+
+The sequence diagram below illustrates the interactions within the `AddCustomerOrderCommand` during the execution of the `addCustomerOrder` command:
+![AddCustomerOrderSequenceDiagram.png](images/AddCustomerOrderSequenceDiagram.png)
+
+**Deleting an Order**
+* An example of how the order management mechanism behaves at each step when an order is removed is given below. 
+* Once again only the customer order list will be focused on.
+
+Step 1: The user executes `deleteCustomerOrder` command to remove an existing customer order.
+
+Command Execution:  
+* The execute method is called with the `Model` as a parameter.
+* It retrieves the `CustomerOrderList` from the `Model`.
+* It checks if the provided index is valid (1-based index).
+* It retrieves the order at the specified index.
+* It retrieves the person associated with the order.
+* It removes the order from the person.
+* It removes the order from the `CustomerOrderList`.
+* It returns a `CommandResult` indicating the success of the operation.
+
+The sequence diagram below illustrates the interactions within the DeleteCustomerOrderCommand during the execution of the deleteCustomerOrder command.
+![DeleteCustomerOrderSequenceDiagram.png](images/DeleteCustomerOrderSequenceDiagram.png)
+
+#### Design Considerations:
+
+**Aspect: Storage of Orders**  
+* **Alternative 1 (current choice):** Store orders in a JSON file.  
+  * Pros: Easy to implement and maintain.
+  * Cons: May not be efficient for large datasets.
+  
+* **Alternative 2:** Store orders in a database.  
+  * Pros: More efficient for large datasets, supports complex queries.
+  * Cons: Requires additional setup and maintenance.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
