@@ -53,7 +53,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "There are no changes to make.";
     public static final String MESSAGE_DUPLICATE_PHONE = "This number already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
-    public static final String MESSAGE_EDIT_EMPTY_LIST_ERROR = "There is nothing to edit.";
+    public static final String MESSAGE_EDIT_EMPTY_LIST_ERROR = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to edit.\n"
                     + "Find the index from the list below and type edit INDEX ...\n"
