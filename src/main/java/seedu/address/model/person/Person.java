@@ -74,6 +74,7 @@ public class Person {
      */
     public Task getTask(Task task) throws NoSuchElementException {
         for (Task eachTask : tasks) {
+            System.out.println(eachTask);
             if (eachTask.isSameTask(task)) {
                 return eachTask;
             }

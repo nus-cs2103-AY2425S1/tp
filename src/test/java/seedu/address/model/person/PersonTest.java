@@ -33,6 +33,15 @@ public class PersonTest {
         Task task = new Task(VALID_TASK_TODO);
         assertFalse(person.hasTask(task));
     }
+
+    @Test
+    public void getTaskAssigned_returnsSuccessfully() {
+        String taskStr = "todo: buy groceries";
+        Person person = new PersonBuilder().withTasks(taskStr).build();
+        Task newTask = new Task("buy groceries");
+
+        assertEquals(person.getTask(newTask), newTask);
+    }
     @Test
     public void removeTask_taskAssigned_taskRemovedSuccessfully() {
         Person person = new PersonBuilder().withName("assigned").withTasks(VALID_TASK_TODO).build();

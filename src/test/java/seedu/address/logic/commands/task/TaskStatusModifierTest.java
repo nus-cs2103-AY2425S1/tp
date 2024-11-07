@@ -64,7 +64,7 @@ public class TaskStatusModifierTest {
     }
 
     @Test
-    public void modifyTasks_markTasks_assigned_to_person_success() throws Exception {
+    public void modifyTasks_markTasksAssignedToPerson_success() throws Exception {
         TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), true);
         Task taskToMark = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
         Person personWithSameTask = new PersonBuilder().withName("newperson").withTasks("todo: buy groceries").build();
