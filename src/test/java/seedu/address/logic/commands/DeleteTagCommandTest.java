@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
 import static seedu.address.testutil.TypicalTags.FRIENDS_TAG;
+import static seedu.address.testutil.TypicalTags.TEST;
 import static seedu.address.testutil.TypicalTags.TEST_SET;
 
 import java.util.HashSet;
@@ -154,6 +155,17 @@ public class DeleteTagCommandTest {
 
         assertThrows(CommandException.class,
                 DeleteTagCommand.INVALID_INDEX_OR_STRING, () -> deleteTagCommand.execute(model));
+    }
+
+    @Test
+    public void execute_deleteTagFromAllContacts_throwsCommandException() {
+        Set<Tag> tagsToDelete = new HashSet<>();
+        tagsToDelete.add(TEST);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand("all", tagsToDelete);
+
+        assertThrows(CommandException.class, String.format(
+                DeleteTagCommand.DELETE_ALL_INVALID_TAG, TEST), () -> deleteTagCommand.execute(model2));
+
     }
 
     @Test
