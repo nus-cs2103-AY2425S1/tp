@@ -79,7 +79,8 @@ public class PersonTest {
 
     @Test
     public void withUpdatedPublicAddress_newNetwork_returnsDifferentPerson() {
-        PublicAddress newAddress = PublicAddressFactory.createPublicAddress(Network.SOL, VALID_SOL_ADDRESS_1, "solLabel");
+        PublicAddress newAddress = PublicAddressFactory.createPublicAddress(
+            Network.SOL, VALID_SOL_ADDRESS_1, "solLabel");
         Person updatedPerson = person.withAddedPublicAddress(newAddress);
 
         assertNotEquals(person, updatedPerson);

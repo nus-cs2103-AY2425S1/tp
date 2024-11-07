@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +43,7 @@ import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
-    private static final String VALID_PUBLIC_ADDRESS = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    private static final String VALID_PUBLIC_ADDRESS = VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
 
     private final AddressBookParser parser = new AddressBookParser();
 
@@ -55,7 +56,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPublicAddress() throws Exception {
-        final String publicAddress = "vjyt87576";
+        final String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
         AddPublicAddressCommand command = (AddPublicAddressCommand) parser.parseCommand(
             AddPublicAddressCommand.COMMAND_WORD + " "
                 + "1 "

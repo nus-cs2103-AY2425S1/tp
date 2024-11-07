@@ -62,8 +62,6 @@ public abstract class PublicAddress {
             throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
         } else if (!(publicAddress.matches(VALIDATION_PUBLIC_ADDRESS_REGEX))) {
             throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
-        } else if (publicAddress.isEmpty()) {
-            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND);
         } else if (publicAddress.length() < 26) { //length of public address too short
             throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_SHORT);
         }
@@ -120,7 +118,7 @@ public abstract class PublicAddress {
      * @return String
      */
     public String getPublicAddressString() {
-        return publicAddress;
+        return publicAddress.toLowerCase();
     }
 
     /**

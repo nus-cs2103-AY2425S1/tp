@@ -170,7 +170,7 @@ public class PublicAddressesComposition {
         return publicAddresses.values().stream()
             .flatMap(Set::stream)
             .anyMatch(publicAddress -> publicAddress.getPublicAddressString()
-                .equalsIgnoreCase(publicAddress.getPublicAddressString()));
+                .equalsIgnoreCase(publicAddressString));
     }
 
     /**
@@ -290,7 +290,8 @@ public class PublicAddressesComposition {
      * @param existingPublicAddress
      * @param updatedPublicAddress
      */
-    public void updatePublicAddress(PublicAddress existingPublicAddress, PublicAddress updatedPublicAddress) {
+    public void updatePublicAddress(PublicAddress existingPublicAddress,
+                                    PublicAddress updatedPublicAddress) {
         assert existingPublicAddress != null : "Existing public address cannot be null.";
         assert updatedPublicAddress != null : "Updated public address cannot be null.";
         assert existingPublicAddress.getNetwork().equals(updatedPublicAddress.getNetwork())
@@ -326,7 +327,8 @@ public class PublicAddressesComposition {
             newPublicAddress.getNetwork(),
             new HashSet<>()
         );
-        networkAddresses.removeIf(addr -> addr.getLabel().equalsIgnoreCase(newPublicAddress.getLabel()));
+        networkAddresses.removeIf(addr -> addr.getLabel().equalsIgnoreCase(
+            newPublicAddress.getLabel()));
         networkAddresses.add(newPublicAddress);
         updatedPublicAddresses.put(newPublicAddress.getNetwork(), networkAddresses);
 
@@ -339,7 +341,8 @@ public class PublicAddressesComposition {
      * @return The number of public addresses.
      */
     public int sizeOfAllPublicAddresses() {
-        return publicAddresses.values().stream().mapToInt(Set::size).sum();
+        return publicAddresses.values().stream()
+            .mapToInt(Set::size).sum();
     }
 
 
@@ -357,7 +360,8 @@ public class PublicAddressesComposition {
                 publicAddresses.entrySet().stream(),
                 other.getPublicAddresses().entrySet().stream()
             )
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (set1, set2) -> {
+            .collect(Collectors.toMap(Map.Entry::getKey,
+                Map.Entry::getValue, (set1, set2) -> {
                     Set<PublicAddress> combinedSet = new HashSet<>(set1);
                     set2.stream()
                         .filter(addr -> {
@@ -454,7 +458,7 @@ public class PublicAddressesComposition {
                     .append(address.getLabel())
                     .append(":\n")
                     .append(INDENT + INDENT + INDENT + INDENT)
-                    .append(address.getPublicAddressString())
+                    .append(address.getPublicAddressString().toLowerCase())
                     .append("\n");
             });
         });
