@@ -63,9 +63,9 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(meeting.getLocation())
                 .append("; Start Time: ")
-                .append(meeting.getStartTime())
+                .append(meeting.getStartTimeFormatted())
                 .append("; End Time: ")
-                .append(meeting.getEndTime());
+                .append(meeting.getEndTimeFormatted());
         return builder.toString();
     }
 
