@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=T17-1&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=jeremychiaaaaa&tabRepo=AY2425S1-CS2103T-T17-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Testing** (Pull requests [\#62](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/62), [\#76](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/76))
-    * What it does: Increased test coverage for specific components, including `MaContainsKeywordsPredicate`, `FindByMajorCommand`, `FindByMajorCommandParser`, `FindByInterestCommandParser`, `FindByWorkExperienceCommandParser`, `FindByWorkExperienceCommand`, `WorkExperienceContainsKeywordsPredicate`.
+    * What it does: Increased test coverage for specific components, including `MajorContainsKeywordsPredicate`, `FindByMajorCommand`, `FindByMajorCommandParser`, `FindByInterestCommandParser`, `FindByWorkExperienceCommandParser`, `FindByWorkExperienceCommand`, `WorkExperienceContainsKeywordsPredicate`.
     * Justification: Improved test coverage ensures reliability and correctness of the new and existing features, particularly in handling user inputs and commands.
     * Highlights: Raised the coverage from 0% to 100% for these components, contributing to the overall robustness of the application.
 
