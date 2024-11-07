@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
-participant "ConfirmDeleteWindow" as ConfirmDeleteWindow LOGIC_COLOR
+participant "c:ConfirmDeleteWindow" as ConfirmDeleteWindow LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -51,9 +51,9 @@ LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
 ' ConfirmDeleteWindow interaction within Logic
-DeleteCommand -> ConfirmDeleteWindow : confirmDelete()
+DeleteCommand -> ConfirmDeleteWindow : confirm()
 activate ConfirmDeleteWindow
-ConfirmDeleteWindow --> DeleteCommand : confirmation
+ConfirmDeleteWindow --> DeleteCommand : c
 deactivate ConfirmDeleteWindow
 
 DeleteCommand -> Model : deletePerson(1)
