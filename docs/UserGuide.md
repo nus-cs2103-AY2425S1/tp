@@ -90,6 +90,7 @@ Shows a window showing all commands and usage examples.
 
 Format: `help`
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
