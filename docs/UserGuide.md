@@ -3,13 +3,16 @@ layout: page
 title: User Guide
 ---
 <img src="images/meddict_logo.png" alt="MedDict Logo" style="max-width: 200px; width: 100%; margin: 0" />
+
 ### About us
 
-Welcome to the MedDict User Guide!
+Welcome to the **MedDict User Guide!** 🎉
+
+We're excited to have you on board with us 🥳🥳
 
 MedDict is a _desktop application designed for medical staff_ who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application is designed with large databases in mind, supporting a streamlined process for tracking medical history, patient appointments, and treatment progress.
 
-Unlike most other applications who predominantly function on a Graphical User Interface (GUI) where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a Command Line Interface (CLI) -- where all features and utility can be achieved via typed-in commands -- would be far more efficient.
+Unlike most other applications who predominantly function on a **Graphical User Interface (GUI)** where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a **Command Line Interface (CLI)** -- where all features and utility can be achieved via typed-in commands -- would be far more efficient.
 
 <img src="images/gui_vs_cli.png" alt="GUI vs CLI" style="width: 100%; display: block; margin: 0 auto;" />
 
@@ -496,6 +499,7 @@ _Details coming soon ..._
 
 **Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
 **A**: No worries, you can easily transfer your data! Refer to the steps below.
+
 1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
 2. In that folder, find a folder titled data (e.g. `C:\Users\YourName\Documents\MedDict\data`)
 3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (e.g. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
