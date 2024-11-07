@@ -34,7 +34,7 @@ public class DeleteTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "BusinessMan";
 
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Tag was removed from Person: %1$s";
-    public static final String TAG_DOES_NOT_EXIST = "Unable to delete %1$s "
+    public static final String TAG_DOES_NOT_EXIST = "Unable to delete tag named %1$s "
             + "because the tag does not exist for the person.";
 
     private final Index personIndex;
