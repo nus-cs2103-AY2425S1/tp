@@ -29,12 +29,12 @@ public class SampleDataUtil {
         return new Person[] {
             new Vendor(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"),
+                getTagSet("hotel manager"),
                 getWeddingSet("Casey's Wedding"),
                 getTaskSet("todo: Finalize Catering Menu")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"),
+                getTagSet("florist", "guest"),
                 getWeddingSet(),
                 getTaskSet()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
@@ -44,19 +44,20 @@ public class SampleDataUtil {
                 getTaskSet()),
             new Vendor(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"),
-                getWeddingSet(),
-                getTaskSet("todo: Order wedding cake")),
+                getTagSet("makeup artist"),
+                getWeddingSet("Wedding August 2025", "Tom's Wedding"),
+                getTaskSet("todo: Send invitations")),
             new Vendor(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"),
+                getTagSet("photographer", "guest"),
                 getWeddingSet("Casey's Wedding"),
                 getTaskSet("deadline: Schedule Hair and Makeup Trials")),
             new Vendor(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"),
-                getWeddingSet("Wedding 10"),
-                getTaskSet("event: Schedule Hair and Makeup Trials"))
+                getTagSet("hairstylist"),
+                getWeddingSet("Tom's Wedding"),
+                getTaskSet())
+
         };
     }
 
@@ -64,6 +65,9 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+            if (samplePerson.getName().fullName != "Roy Balakrishnan") {
+                sampleAb.addVendor(samplePerson);
+            }
         }
         //TODO tags & weddings
         return sampleAb;

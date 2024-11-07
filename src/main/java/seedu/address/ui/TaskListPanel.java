@@ -31,7 +31,7 @@ public class TaskListPanel extends ListPanel<Task> {
     /**
      * Updates the {@code TaskListView} with an updated list of tasks.
      */
-    public void updatePersonList(ObservableList<Task> taskList) {
+    public void updateTaskList(ObservableList<Task> taskList) {
         taskListView.setItems(taskList);
     }
 

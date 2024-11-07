@@ -18,13 +18,16 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_ENTER_VALID_INDEX = "Please enter a valid index from %d to %d.";
+    public static final String MESSAGE_NOTHING_TO_PERFORM_ON = "There are no %s to %s.";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid. \n"
+            + MESSAGE_ENTER_VALID_INDEX;
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided (%d) is invalid. \n"
+            + MESSAGE_ENTER_VALID_INDEX;
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
-    public static final String MESSAGE_INCOMPLETE_TASK_DESCRIPTION = "Task description is incomplete. "
-            + "Expected format: tk/[task type] [task details].";
+    public static final String MESSAGE_TASK_NOT_FOUND_IN_AB = "Task does not exist in the address book.";
     public static final String MESSAGE_TO_BEFORE_FROM_INVALID = "\"From\" date must be before \"To\" date.";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
@@ -34,8 +37,6 @@ public class Messages {
     public static final String MESSAGE_UNASSIGN_TASK_SUCCESS = "Removed task(s) %1$s from %2$s.";
     public static final String MESSAGE_TASK_NOT_FOUND_IN_CONTACT = "Some task(s) "
             + "were not found in the person's task list.";
-    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
-
     public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "%1$s is not a Vendor, "
             + "tasks can only be assigned to vendors.";
     public static final String MESSAGE_ADD_WEDDING_SUCCESS = "Added wedding(s) %1$s to %2$s.";
@@ -90,9 +91,7 @@ public class Messages {
      * Formats the {@code tag} for display to the user.
      */
     public static String format(Tag tag) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(tag.getTagName());
-        return builder.toString();
+        return String.valueOf(tag.getTagName());
     }
 
     public static String format(Wedding wedding) {

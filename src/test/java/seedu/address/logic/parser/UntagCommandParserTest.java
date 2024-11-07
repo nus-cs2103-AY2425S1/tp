@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -17,7 +16,7 @@ import seedu.address.model.tag.TagName;
 
 public class UntagCommandParserTest {
 
-    private UntagCommandParser parser = new UntagCommandParser();
+    private final UntagCommandParser parser = new UntagCommandParser();
 
     @Test
     public void parse_validArgs_returnsUntagCommand() {
@@ -37,10 +36,12 @@ public class UntagCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Invalid index (non-numeric)
-        assertParseFailure(parser, "a t/colleague", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "a t/colleague", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                UntagCommand.MESSAGE_USAGE));
 
         // Index missing
-        assertParseFailure(parser, "t/colleague t/gym", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "t/colleague t/gym", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                UntagCommand.MESSAGE_USAGE));
 
         // Missing tags (no tags specified)
         assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,

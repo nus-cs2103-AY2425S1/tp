@@ -156,7 +156,7 @@ The `Model` component handles the data and state management for the app, storing
 2. **Class Diagram**:
     * Diagram of the `Model` structure:
 
-      <puml src="diagrams/ModelClassDiagram.puml" width="450" />
+      <puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 3. **Responsibilities**:
     * **Data Storage**:
@@ -185,7 +185,7 @@ The `Model` component handles the data and state management for the app, storing
 4. **Class Diagram**:
     * Diagram illustrating `Storage` structure:
 
-      <puml src="diagrams/StorageClassDiagram.puml" width="600" />
+      <puml src="diagrams/StorageClassDiagram.puml" width="900" />
     
 ### Common classes
 
@@ -203,103 +203,94 @@ includes non-zero unsigned integer, or whether there is a partial match for a wo
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Force Feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The Force feature is a quality of life addition for WedLinker. It enables users to bypass certain checks in the `Logic` in a controlled manner to make usage easier.
+The force feature is applicable for the following commands:
+* `tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person}`.
+* `delete-tag`: This unassigns the target `Tag` from all contacts before deleting it.
+* `assign-wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
+* `delete-wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The force functionality can be used with the above functions by including f/ at the end of the command.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Example usage: delete-tag t/Tag1 f/
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 1. The user excutes `delete-tag t/Tag1 f/`.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 2. The parser will search through the user input to find f/. f/ is implemented as a `Prefix`. User inputs after f/ will be ignored.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+Step 3. The parser will construct the `DeleteTagCommand` differently based on the presence of the force flag.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 4. During `DeleteTagCommand#execute()`, the force flag is checked. If present, it unassigns all `Person` with the `Tag` tag1 before deleting tag1.
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+### Wedding Feature
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+#### Implementation
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+The Wedding Feature is a significant addition for WedLinker. Wedding contains the Contacts involved to facilitate easy planning and consolidation for wedding planners.
+Wedding would support the following functions
 
-<box type="info" seamless>
+* `Create Wedding` — Creates a Wedding in WedLinker to allow compilation of information.
+* `Assign Wedding` — Assigns `Person` to a Wedding. This can be the `Partners` or `Guest`.
+* `Edit Wedding` — Edits the information for a Wedding. Editable information includes the `Wedding Name`, `Address` and `Date`.
+* `Unassign Wedding` — Unassigns a `Person` from a Wedding.
+* `Delete Wedding` — Deletes the Wedding from WedLinker.
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Given below is an example usage scenario and how Weddings are used in WedLinker.
 
-</box>
+Step 1. The user launches the application, `Weddings` are loaded into the `Model.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 2. The user executes `create-wedding w/Test Wedding 1`. WedLinker will create a Wedding based on the name provided. In this case: `Test Weddign 1`.
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+Step 3. The user executes `assign-wedding 1 w/Test Wedding 1` to assign a `Person` to `Test Wedding 1`. WedLinker includes the `Person` in the `Guest List`.
 
+Step 4. If the user executes `assign-wedding 1 w/Test Wedding 1 p1/`, WedLinker will assign the `Person` as a partner instead.
 
-<box type="info" seamless>
+Step 5. To view the Weddings in WedLinker, use `list-weddings`. This will switch the right panel to a Wedding view.
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+Step 6. The user executes `edit-wedding 1 w/Test Wedding 2 a/Fullerton Hotel`. `Test Wedding 1` will have its name edited to `Test Wedding 2` and its address be changed to `Fullerton Hotel`.
+        If the right panel is still in the Wedding view, the changes will be reflected.
 
-</box>
+Step 7. The user executes `unassign-wedding 1 w/Test Wedding 2`. WedLinker would unassign the `Person` from `Test Wedding 2`.
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+Step 8. The user executes `delete-wedding w/Test Wedding 2`. WedLinker would delete `Test Wedding 2`.
 
 <box type="info" seamless>
+Wedding supports the force functionality for easier usage.
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
+Force is supported for the following functions:
+- `assign-wedding` (Creates the Wedding if it does not already exist in WedLinker.)
+- `delete-wedding` (Unassigns all Person from the Wedding before it is deleted.)
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+<box type="info" seamless>
+Known bugs:
+- Editing wedding names does not update the name of the Wedding when viewing the Person card.
+</box>
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+### Vendors
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+### Task
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+### Switch Views
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: Force Functionality:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1:** Users have to strictly follow the restrictions in running commands in WedLinker.
+    * Pros: This is easier to implement and would be more stable
+    * Cons: This might be restrictive and could slow down the usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Users have the ability to bypass some restrictions in a controlled manner.
+    * Pros: This would improve the ease of use.
+    * Cons: Additional code is required to ensure controlled execution.
+
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -356,6 +347,7 @@ Those without any stars are user stories that were considered but will not be im
 |  `* *`   | first-time user           | see some sample contacts already available in the app                                                                | I can try out the different features without needing to add my own data (e.g allocating people to wedding, allocating task to contacts).                            |
 |  `* *`   | careless, first-time user | reload the sample contacts into the app                                                                              | I can continue trying out different features without needing to add my own data in case I accidentally cleared the contacts.                                        |
 |  `* *`   | first-time user           | see a help message showing all the commands/feature I can use                                                        | I can try out all the different features by referring to the message.                                                                                               |
+|  `* *`   | lazy user                 | have the ability to bypass certain controlled features                                                               |                                                                                                                                                                     |
 |   `*`    | user                      | assign tasks to contacts                                                                                             | I can track which tasks have been assigned to each contact.                                                                                                         |
 |   `*`    | user                      | update the status of tasks of contacts                                                                               | I can track the status of completion of the tasks assigned to contacts.                                                                                             |
 |   `*`    | user                      | add a tag to each guest indicating their table number                                                                | track the table each guest is seated at.                                                                                                                            |
@@ -363,7 +355,6 @@ Those without any stars are user stories that were considered but will not be im
 |   `*`    | user                      | assign a rating out of 5 to each vendor                                                                              | I can track the experience with this vendor for future reference.                                                                                                   |
 |   `*`    | busy user                 | add multiple wedding events                                                                                          | I can track contacts for multiple weddings at once.                                                                                                                 |
 |   `*`    | busy user                 | tag each contact to a wedding                                                                                        | I can easily see which contacts are relevant to which wedding.                                                                                                      |
-|   `*`    | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled.                                                                                                          |
 |   `*`    | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled.                                                                                                          |
 |   `*`    | user                      | filter contacts by wedding                                                                                           | I can keep track of which contacts are relevant for each wedding.                                                                                                   |
 |   `*`    | user                      | send out (standardised formatted) information (text/email) from the application                                      | I can efficiently send out information without any mistakes.                                                                                                        |
@@ -404,10 +395,10 @@ Those without any stars are user stories that were considered but will not be im
     Use case ends.
 
 ### **Use case: UC02 — List all Weddings**
-Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view weddings instead of contacts.
+Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view weddings instead of contacts.
 
 ### **Use case: UC03 — List all Tasks**
-Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view tasks instead of contacts.
+Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view tasks instead of contacts.
 
 ---
 
@@ -430,10 +421,10 @@ Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view tasks ins
       Use case ends.
 
 ### **Use case: UC05 — Create a Wedding**
-Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a wedding to WedLinker instead of a Contact
+Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a wedding to WedLinker instead of a Contact
 
 ### **Use case: UC06 — Create a Task**
-Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a task to WedLinker instead of a Contact
+Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a task to WedLinker instead of a Contact
 
 ### **Use case: UC07 — Add Phone Number to Contact**
 
@@ -442,7 +433,7 @@ Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a task to W
 
 **MSS**
 
-1. User <ins>lists all contacts [(UC01)](#use-case-uc01list-all-contacts)</ins>.
+1. User <ins>lists all contacts [(UC01)](#use-case-uc01-list-all-contacts)</ins>.
 2. User requests to add phone number for a contact with the corresponding details.
 3. The system adds the phone number to the contact and displays a success message.
 4. The system displays the updated contact information in the address book.
@@ -460,10 +451,10 @@ Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a task to W
       Use case resumes at step 1.
 
 ### **Use case: UC08 — Add Address to Contact** 
-Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplicated addresses are allowed
+Similar to [<ins>UC07](#use-case-uc07-add-phone-number-to-contact) except duplicated addresses are allowed
 
 ### **Use case: UC09 — Add Email to Contact**
-Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplicated email addresses are allowed
+Similar to [<ins>UC07](#use-case-uc07-add-phone-number-to-contact) except duplicated email addresses are allowed
 
 ---
 
@@ -477,27 +468,27 @@ Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplica
     Use case ends.
 
 ### **Use case: UC11 — Search for Contacts by Tag**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by tag.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by tag.
 
 ### **Use case: UC12 — Search for Contacts by Wedding**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by wedding.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by wedding.
 
 ### **Use case: UC13 — Search for Contacts by Phone Number**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by phone number.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by phone number.
 
 ### **Use case: UC14 — Search for Contacts by Address**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by address.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by address.
 
 ### **Use case: UC15 — Search for Contacts by Email Address**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by email address.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by email address.
 
 ---
 
 ### **Use case: UC16 — Search for Wedding by Wedding Name**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for wedding by wedding name.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for wedding by wedding name.
 
 ### **Use case: UC17 — Search for Task by Task Name**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for task by task name.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for task by task name.
 
 ---
 
@@ -521,13 +512,13 @@ Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searchi
       Use case resumes at step 1.
 
 ### **Use case: UC19 — Delete Wedding**
-Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting wedding.
+Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting wedding.
 
 ### **Use case: UC20 — Delete Task**
-Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting task.
+Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting task.
 
 ### **Use case: UC21 — Delete Tag**
-Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
+Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting tag.
 
 ---
 
@@ -542,39 +533,30 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 **Extensions**
 
 * 1a. The list is empty.
-
   Use case ends.
 
-
 * 2a. The given index is invalid.
-
     * 2a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 1.
 
-
 * 2b. The user does not specify what type of details they want to change.
-
     * 2b1. System shows an error message prompting the user to put in the type of details they want to edit.
 
       Use case resumes at step 1.
 
-
 * 2c. The user does not specify what the new details should be.
-
     * 2c1. System shows an error message prompting the user to put in the new details.
 
       Use case resumes at step 1.
 
-
 * 2d. The user specifies details that do not meet the requirements of the detail type.
-
     * 2d1. System shows an error message prompting the user with the correct detail type format and requirements.
 
       Use case resumes at step 1.
 
 ### **Use case: UCSH02 — Edit details for a Wedding**
-Similar to [<ins>USCH01](#use-case-ucsh01edit-details-for-a-contact) except editing for wedding.
+Similar to [<ins>USCH01](#use-case-ucsh01-edit-details-for-a-contact) except editing for wedding.
 
 ### **Use case: UCSH03 — Clear all contacts**
 

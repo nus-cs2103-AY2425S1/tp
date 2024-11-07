@@ -6,6 +6,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.HashSet;
+
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 
 /**
  * Helper functions for handling strings.
@@ -105,5 +111,29 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Formats the tasks nicely for output
+     * @param tasks HashSet of tasks to be formatted
+     * @return Properly formatted string for output
+     */
+    public static String tasksString(HashSet<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : tasks) {
+            if (task instanceof Todo) {
+                sb.append("\nTodo: ").append(task.getDescription());
+            } else if (task instanceof Deadline deadline) {
+                // Cast to Deadline to access its specific methods
+                sb.append("\nDeadline: ").append(deadline.getDescription())
+                        .append(" by ").append(deadline.getBy());
+            } else if (task instanceof Event event) {
+                // Cast to Event to access its specific methods
+                sb.append("\nEvent: ").append(event.getDescription())
+                        .append(" from ").append(event.getFrom())
+                        .append(" to ").append(event.getTo());
+            }
+        }
+        return sb.toString();
     }
 }

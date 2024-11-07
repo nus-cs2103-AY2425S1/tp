@@ -6,7 +6,13 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }],
-  "vendors": [],
+  "vendors": [{
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "friends" ]
+  }],
   "tags": ["chef", "florist"],
   "weddings": [{
     "weddingName": "Wedding July 2026",
