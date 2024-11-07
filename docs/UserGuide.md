@@ -409,7 +409,7 @@ LogiLink data is saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-LogiLink automatically saves your data in a JSON file `[JAR file location]/data/LogiLink.json`. Advanced users are welcome to update data directly by editing that data file.
+LogiLink automatically saves your data as a JSON file `[JAR file location]/data/LogiLink.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
