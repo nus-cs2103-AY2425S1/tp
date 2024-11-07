@@ -535,16 +535,52 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### GUI Testing
+
+1. Main window initialization
+
+   1. Launch the application.
+      Expected:
+      a. Window title is "AdmiNUS".
+      b. AdmiNUS icon is displayed in title bar.
+      c. Menu bar, command box, result display pane, person list pane, contact display pane and status bar footer are loaded correctly.
+
+2. Verify "Help" Menu item functionality
+
+   1. Click on the "Help" menu.
+   2. Click the "Help" item.
+      Expected: A list of all valid commands are shown on the contact display pane.
+
+3. Help window functionality
+
+   1. Type `helpwindow` on the command box.
+      Expected: A help dialog opens displaying the link to AdmiNUS user guide.
+
+4. Result Display behavior and sizing
+
+   1. Rezise the result display pane vertically.
+      Expected: Result display pane remains between 100 and 200 pixels.
+
+5. Contact Display behavior and sizing
+
+   1. Launch the application.
+      Expected: Contact display pane takes up 45% of the main window width.
+   2. Rezise the contact display pane vertically.
+      Expected: Contact display pane remains between 300 and 1000 pixels.
+
+6. Verify "Exit" Menu item functionality
+   1. Click on the "Exit" menu.
+   2. Click the "Exit" item.
+      Expected: Application closes without errors.
 
 ### Deleting a person
 
@@ -552,16 +588,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -569,4 +605,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
