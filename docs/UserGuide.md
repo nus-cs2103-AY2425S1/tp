@@ -363,4 +363,4 @@ Action     | Format, Examples
 **Help**   | `help`
 **Seed**   | `seed`
 **Sort**   | `sort PARAMETER_PREFIX/ORDER` <br> e.g., `sort n/ascending`
-**Remark** | `remark INDEX r/REMARK`
+**Remark** | `remark INDEX r/REMARK` <br> e.g., `remark 1 r/some remark about contact`
