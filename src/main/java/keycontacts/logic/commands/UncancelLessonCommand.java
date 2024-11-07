@@ -98,9 +98,9 @@ public class UncancelLessonCommand extends Command {
             return false;
         }
 
-        UncancelLessonCommand otheruncancelLessonCommand = (UncancelLessonCommand) other;
-        return index.equals(otheruncancelLessonCommand.index)
-                && cancelledLesson.equals(otheruncancelLessonCommand.cancelledLesson);
+        UncancelLessonCommand otherUncancelLessonCommand = (UncancelLessonCommand) other;
+        return index.equals(otherUncancelLessonCommand.index)
+                && cancelledLesson.equals(otherUncancelLessonCommand.cancelledLesson);
     }
 
     @Override
