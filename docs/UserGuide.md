@@ -52,8 +52,13 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list` and `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
+
+* For all parameters, starting and ending spaces are trimmed.
+
+* For all commands except `find` and `sort`, the displayed list of suppliers/deliveries will be the unfiltered and unsorted list of all suppliers/deliveries.<br>
+  For `find` and `sort` commands, the displayed list will be the corresponding filtered/sorted list of supplier/deliveries.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -131,15 +136,29 @@ Adds a supplier to the address book.
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
 <box type="tip" seamless>
 
+Parameters:
+
+- `n/NAME`: Must be alphanumeric, and must not be blank.
+- `p/PHONE`: Must be numeric, must contain at least 3 digits, and must not be blank.
+- `e/EMAIL`: Must be a valid email address, and must not be blank.
+- `com/COMPANY`: Must be alphanumeric, and must not be blank.
+- `[t/TAG]`: Must be alphanumeric, and must be between 1 and 50 (inclusive) characters long.
+- `[pro/PRODUCT]`: Must be alphanumeric, can include spaces, and must be between 1 and 50 (inclusive) characters long.
+
 **Tip:** A supplier can have any number of tags and products (including 0)
+
+**Tip:** A supplier has a default status of `active`
+
 </box>
 
 <box type="warning" seamless>
 
 **Warnings**:
-- At least on space between `add` and `-s` is compulsory
+- At least one space between `add` and `-s`
 - Duplicate supplier will not be added again
-- A supplier is considered duplicate if they have the same NAME and COMPANY
+- A supplier is considered duplicate if they have the same `NAME` and `COMPANY`
+- Adding duplicate `TAG`/`PRODUCT` will result in only one copy added to the supplier
+- A tag/product is considered duplicate if they have the same `TAG`/`PRODUCT`
 </box>
 
 Examples:
@@ -147,24 +166,23 @@ Examples:
 * `add -s n/Betsy Crowe p/98223232 e/betsycrowe@example.com com/Newgates t/urgent pro/soap`
 
 Expected output:
-* `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products breadrice`
-* `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products soap`
+* `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products [bread][rice]; Status: active`
+* `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products [soap]; Status: active`
 
 #### Here's how it would look like in the app:
 ![add Command](images/addSupplierCommand.png)
 
 ### Listing all suppliers: `list -s`
 
-Shows a list of all suppliers in the VendorVault. (The delivery list will not be affected)
+Shows a list of all suppliers in VendorVault. (The delivery list will not be affected)
 
 Format: `list -s`
-
 
 <box type="warning" seamless>
 
 **Warnings**:
-- No other parameters should be given for this command.
 - At least one space between list and -s
+- No other parameters should be given for this command.
   </box>
 
 ### Deleting a supplier : `delete -s`
@@ -190,9 +208,9 @@ A success message will be displayed if the supplier is successfully deleted.
 The `mark` command is used to mark a supplier as either **active** or **inactive**
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
 
-Format: `mark -s <supplier_index> <status>`
-- `<supplier_index>`: The index of the supplier in the list.
-- `<status>`: Either `active` or `inactive` to indicate the supplier's status.
+Format: `mark -s SUPPLIER_INDEX STATUS`
+- `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank.
 
 #### Example
 To mark the supplier at index 3 as active:
@@ -209,13 +227,13 @@ A success message will be displayed if the supplier is successfully marked as ac
 The `find -s` command is used to find a supplier in VendorVault. 
 This helps you find suppliers based on keyword search.
 
-Format: `find -s n/KEYWORD_SUPPLIER_NAME com/KEYWORD_SUPPLIER_COMPANY pro/<KEYWORD_SUPPLIER_PRODUCT>`
+Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 
 Parameters:
 
-- `n/KEYWORD_SUPPLIER_NAME`: This will check if the Supplier's name contains the given keyword
-- `on/KEYWORD_SUPPLIER_COMPANYE`: This will check if the Supplier's company contains the given keyword
-- `pro/KEYWORD_SUPPLIER_PRODUCT`: This will check if the Supplier's product(s) contains in the given keyword
+- `n/NAME`: Must be alphanumeric, and must not be blank.
+- `com/COMPANY`: Must be alphanumeric, and must not be blank.
+- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
 
 <box type="warning" seamless>
 
@@ -241,9 +259,9 @@ To find the supplier whose name contains "link" and company contains "NU":
 The `sort -s` command is used to sort suppliers in VendorVault.
 This helps you to view the suppliers in a different order (ascending or descending), based on the supplier name.
 
-Format: `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`
+Format: `sort -s so/SORT_ORDER sb/SORT_BY`
 - `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending.
-- `SORT_BY_FIELD`: Must be 'n' for name. (current version of VendorVault only supports sorting by name)
+- `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name)
 
 **Warnings**:
 - A spacing between `add` and `-s` is compulsory
@@ -271,11 +289,11 @@ Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg
 
 Parameters:
 
-- `on/DELIVERY_DATE_TIME`: Must be in dd-MM-yyyy hh:mm format and must not be blank.
-- `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
-- `q/QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
-- `c/COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
+- `on/DELIVERY_DATE_TIME`: Must be in dd-MM-yyyy hh:mm format, and must not be blank.
+- `s/SUPPLIER_INDEX`: Must be a number greater than 0, and must not be blank.
+- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
+- `q/QUANTITY`: Must be a number greater than 0 followed by a space, and unit and must not be blank.
+- `c/COST`: Must be a number greater than 0 with up to 2 decimal places allowed, and must not be blank.
 <box type="tip" seamless>
 
 **Tip:** Day and month of date must be in double digits!
@@ -320,7 +338,7 @@ Format: `mark -d INDEX STATUS`
 Parameters:
 
 - `INDEX`: Must be a number greater than 0 and must not be blank.
-- `STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
+- `STATUS`: Must be one of the following: `PENDING`, `DELIVERED`, `CANCELLED` and must not be blank.
 <box type="tip" seamless>
 
 **Warnings**:
@@ -371,7 +389,7 @@ Parameters:
 - `on/DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
 - `stat/STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
 - `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
+- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
 <box type="tip" seamless>
 
 **Warnings**:
@@ -396,12 +414,12 @@ To find deliveries of product "milk" on "28-06-2025 17:00" :
 The `sort -d` command is used to sort deliveries in VendorVault.
 This helps you to view the deliveries in a different order, based on the delivery cost, date or status.
 
-Format: `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`
+Format: `sort -d so/SORT_ORDER sb/SORT_BY`
 
 Parameters:
 
-- SORT_ORDER: Must be either 'a' for ascending or 'd' for descending, and must not be blank.
-- SORT_BY_FIELD: Must be either 'c' for cost, 'd' for date or 's' for status, and must not be blank.
+- `SORT_ORDER`: Must be either `a` for ascending or `d` for descending, and must not be blank.
+- `SORT_BY`: Must be either 'c' for cost, `d` for date or `s` for status, and must not be blank.
 <box type="tip" seamless>
 
 **Warnings**:
