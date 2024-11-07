@@ -38,13 +38,13 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `paid 3 f/ 6` : Marks the 3rd contact shown in the current list as paid and sets the policy renewal frequency to 6 months.
+   * `paid 3 f/6` : Marks the 3rd contact shown in the current list as paid and sets the policy renewal frequency to 6 months.
 
    * `unpaid 3` : Marks the 3rd contact shown in the current list as unpaid and changes the policy renewal frequency to 0.
 
    * `clear` : Deletes all contacts.
 
-   * `find john`  : Displays all contacts with keyword(s) matching "john"
+   * `find n/john`  : Displays all contacts with name(s) matching "john"
 
    * `exit` : Exits the app.
 
@@ -89,7 +89,7 @@ Format: `help`
 
 Adds a person to the FART book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] b/BIRTHDAY [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -130,23 +130,19 @@ Examples:
 
 ### Locating persons by attribute: `find`
 
-Finds persons whose attributes contain any of the given keywords.
+Need to quickly find a client by their address or something other than their name? Use this command to find clients whose attributes contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* Keywords are matched against Name, Phone, Address, Email, Birthday, Tag
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Partial matches of a keyword will also be returned. e.g. ``9123`` will return person
-with the phone number ``91234567``
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
+* At least one of the optional fields must be provided.
+* Keywords are matched against the attribute that is inputted (i.e. searching for names will match against all names).
+* Partial matches of a keyword will also be returned. e.g. ``9123`` will return clients
+with the phone number ``91234567``.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find serangoon` returns ``Bernice Yu``, ``David Li``
+* `find n/John` returns clients with names `john` and `John Doe`.
+* `find a/serangoon` returns ``Bernice Yu``, ``David Li``.
 ![result for 'find serangoon'](images/findSerangoonResult.png)
 
 ### Deleting a person : `delete`
@@ -208,18 +204,29 @@ Examples:
 * `list` followed by `unpaid 2` marks the 2nd person in the FART book as unpaid.
 * `find Betsy` followed by `unpaid 1` marks the 1st person in the results of the `find` command as unpaid.
 
-### Viewing a Contact's Details
-* When the app starts, a placeholder on the right panel will prompt you to select a contact on the list.
-* **Double-click** on a contact in the contact list to bring up a more detailed view of the person, including information like address and birthday
-* **Note:**
-  * The displayed contact will persist and edits will not be reflected until you select another contact or close the FART book.
-
-
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+### Viewing a Client's Details
+* When the app starts, a placeholder on the right panel will prompt you to select a contact on the list.
+* **Double-click** on a contact in the contact list to bring up a more detailed view of the person, including information like address and birthday
+
+<div markdown="block" class="alert alert-info">
+  **:information_source: Note!**<br>
+The displayed contact will persist and edits will not be reflected until you select another contact or close the FART book.
+If you made any changes to the current contact on display, kindly double click to refresh the detailed view.
+</div>
+
+### Visual Features
+FART has some handy visual cues that highlight certain clients.
+
+| Feature                   | Details                                                                                                                                                                                                                                                                                                                         | Examples |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| **Net Worth Tagging**     | You can add tags to clients that say `"highnetworth"`, `"midnetworth"`, `"lownetworth"` <br>that will be highlighted. <br><br> Each client can only have one net worth tag at a time.<br><br>(e.g. if you add a `"highnetworth"` tag to a client who already has a "midnetworth" tag, <br>then the existing tag will be removed) |          |
+| **Birthday Highlighting** | When a client's birthday is approaching or has recently passed (**7 days** before and after <br> the current date), his name will turn orange. Take this chance to wish him a happy birthday!                                                                                                                                   |          | 
 
 ### Saving the data
 
@@ -234,10 +241,6 @@ FART data are saved automatically as a JSON file `[JAR file location]/data/addre
 If your changes to the data file makes its format invalid, FART will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the FART to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,14 +260,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/11 09 2001 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-**Paid** | `paid INDEX f/FREQUENCY`<br> e.g., `paid 3 f/ 3`
-**Unpaid** | `unpaid INDEX`<br> e.g., `unpaid 3`
+| Action     | Format, Examples                                                                                                                                                                                |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] b/BIRTHDAY [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/11 09 2001 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                         |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                             |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                     |
+| **Find**   | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`find e/jameslee@example.com`                                                                                         |
+| **List**   | `list`                                                                                                                                                                                          |
+| **Help**   | `help`                                                                                                                                                                                          |
+| **Paid**   | `paid INDEX f/FREQUENCY`<br> e.g., `paid 3 f/ 3`                                                                                                                                                |
+| **Unpaid** | `unpaid INDEX`<br> e.g., `unpaid 3`                                                                                                                                                             |
