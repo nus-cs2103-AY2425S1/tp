@@ -300,10 +300,9 @@ filtered student list.
     - **Cons**: Users must visually track and remember the index number of the student, which can be cumbersome if the list is long or filtered.
 
 - **Alternative 2**:
-    - **Description**: The user specifies the student’s name for deletion..
+    - **Description**: The user specifies the student’s name for deletion.
     - **Pros**: Names are easier for users to remember and identify, making the deletion process more intuitive.
-    - **Cons**: Searching for a student by name may be slower, especially when there is a large number of contacts, and will require
-      additional validation logic to handle variations in case, spelling, and extra spaces.
+    - **Cons**: Searching for a student by name may be slower, especially when there is a large number of contacts. 
 
 ***
 
