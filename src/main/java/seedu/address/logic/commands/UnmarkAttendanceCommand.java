@@ -5,12 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -27,6 +30,8 @@ public class UnmarkAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
     public static final String MESSAGE_SUCCESS = "Attendance unmarked successfully for:\n%1$s";
+
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final Index[] targetIndexArray;
 
     /**
@@ -47,19 +52,28 @@ public class UnmarkAttendanceCommand extends Command {
     @Override
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Starting to execute unmark attendance command.");
+
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> studentsToUnmark = new ArrayList<>();
 
         for (Index index : targetIndexArray) {
             if (index.getZeroBased() >= lastShownList.size()) {
+                logger.warning("Invalid index provided: " + index.getOneBased());
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
                         + ": " + index.getOneBased());
             }
+
             Person personToUnmark = lastShownList.get(index.getZeroBased());
+            assert personToUnmark != null;
+
             if (!(personToUnmark instanceof Student)) {
+                logger.warning("Invalid student index: " + index.getOneBased());
                 throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
             }
+
             if (personToUnmark.getDaysAttendedValue() <= 0) {
+                logger.warning("Attendance already at zero for student: " + Messages.format(personToUnmark));
                 throw new CommandException(Messages.MESSAGE_INVALID_ATTENDANCE);
             }
             studentsToUnmark.add(personToUnmark);
@@ -71,6 +85,7 @@ public class UnmarkAttendanceCommand extends Command {
             unmarkedStudents.append(Messages.format(personToUnmark)).append("\n");
         }
 
+        logger.info("Attendance unmarked successfully.");
         return new CommandResult(String.format(MESSAGE_SUCCESS, unmarkedStudents.toString().trim()));
     }
 
