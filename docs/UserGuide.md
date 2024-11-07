@@ -127,7 +127,9 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
 * The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'. 
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
-:exclamation: **Important:** Two identical Transactions with duplicated fields cannot be added into the transaction book.<br>
+:exclamation: **Important:** Two identical Transactions with duplicated fields cannot be added into the transaction 
+book. The duplicated fields refers to `INDEX`, `AMOUNT`, `DESCRIPTION`, and `DATE` fields where combined it should 
+form a unique transaction.<br>
 > For consistency and to avoid redundancy, identical transactions with the same details across all fields will not be added to the transaction book. This ensures that each entry remains unique, preventing accidental duplicates and maintaining the clarity of transaction records. If a similar transaction occurs on a different occasion in the same day, we recommend users to tweak the desc field to reflect the specific context.<br>
 >
 > For example:<br> - `addTxn 1 amt/2.50 desc/sean owes me for morning latte`<br>- `addTxn 1 amt/2.50 desc/sean owes me for afternoon latte`
@@ -379,6 +381,10 @@ AddressBook and Transaction data are saved in the hard disk automatically after 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If changes to the data file make its format invalid, SpleetWaise will discard corrupted data and start as usual. To avoid data loss, it’s recommended to back up the file before making edits. Person and Transactions with invalid fields will be discarded before the application starts.<br>
 Furthermore, certain edits can cause the AddressBook or TransactionBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Notably, if SpleetWaise encounter a person/transaction with an existing person/transaction ID in the 
+address/transaction book, it will bediscarded. Similarly, if SpleetWaise encounter a transaction with the same 
+person ID, amount, date and description as an existing transaction in the transaction book, it will be discarded as 
+well.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
