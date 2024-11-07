@@ -14,6 +14,9 @@ import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getParentOnlyAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AddressBook;
@@ -35,7 +38,9 @@ public class BatchMarkCommandTest {
 
     @Test
     public void execute_unfilteredListWithStudents_success() {
-        String expectedMessage = String.format(BatchMarkCommand.MESSAGE_BATCH_MARK_SUCCESS);
+        String expectedMessage = String.format(BatchMarkCommand.MESSAGE_BATCH_MARK_SUCCESS,
+                "Alice Pauline, Benson Meier, "
+                + "Carl Kurz, Elle Meyer, Fiona Kunz");
         BatchMarkCommand batchMarkCommand = new BatchMarkCommand();
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Student newAlice = new StudentBuilder().withName("Alice Pauline")
@@ -86,7 +91,7 @@ public class BatchMarkCommandTest {
 
     @Test
     public void execute_filteredListWithStudents_success() {
-        String expectedMessage = String.format(BatchMarkCommand.MESSAGE_BATCH_MARK_SUCCESS);
+        String expectedMessage = String.format(BatchMarkCommand.MESSAGE_BATCH_MARK_SUCCESS, "Alice Pauline");
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("Alice");
         model.updateFilteredPersonList(predicate);
@@ -124,6 +129,15 @@ public class BatchMarkCommandTest {
                 .withTags("fren").withAttendanceCount("4").build();
         assertEquals(expectedStudent, markedStudent);
 
+    }
+
+    @Test
+    public void testFormatMarkedStudents_multipleStudents_returnsFormattedString() throws Exception {
+        String expectedString = "Alice Pauline, Benson Meier";
+        List<Student> students = new ArrayList();
+        students.add(ALICE);
+        students.add(BENSON);
+        assertEquals(expectedString, BatchMarkCommand.formatStudentsToMark(students));
     }
 
     @Test
