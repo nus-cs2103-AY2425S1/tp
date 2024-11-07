@@ -33,7 +33,7 @@ public class MeetingTitle {
         requireNonNull(meetingTitle);
         checkArgument(isValidMeetingTitle(meetingTitle), MESSAGE_CONSTRAINTS);
         this.value = meetingTitle;
-        logger.info("MeetingTitle created: " + this);
+        logger.info("MeetingTitle created.");
     }
 
     /**
