@@ -16,7 +16,7 @@ public class Role {
      * The role should only contain alphanumeric characters, spaces, and forward slashes (/),
      * and it should not be blank.
      */
-    public static final String MESSAGE_CONSTRAINTS = "Role should only contain alphanumeric "
+    public static final String MESSAGE_CONSTRAINTS = "Roles should only contain alphanumeric "
             + "characters, spaces, and forward slashes (/), and it should not be blank.";
     private final String value;
 
