@@ -4,6 +4,7 @@ import spleetwaise.address.model.AddressBook;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.model.CommonModelManager;
+import spleetwaise.transaction.model.TransactionBook;
 
 /**
  * Clears the address book.
@@ -18,6 +19,7 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         CommonModelManager model = CommonModelManager.getInstance();
         model.setAddressBook(new AddressBook());
+        model.setTransactionBook(new TransactionBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
