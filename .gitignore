@@ -256,3 +256,9 @@ bin/main/images/view_icon.png
 bin/main/seedu/address/logic/commands/ViewCommand.class
 bin/main/seedu/address/logic/parser/ViewCommandParser.class
 bin/test/seedu/address/logic/commands/ViewCommandTest.class
+bin/main/seedu/address/logic/commands/commandresult/CommandResult.class
+bin/main/seedu/address/logic/commands/commandresult/DefaultCommandResult.class
+bin/main/seedu/address/logic/commands/commandresult/ExitCommandResult.class
+bin/main/seedu/address/logic/commands/commandresult/KeywordCommandResult.class
+bin/main/seedu/address/logic/commands/commandresult/ShowFilteredApptsCommandResult.class
+bin/main/seedu/address/logic/commands/commandresult/ShowPatientInfoCommandResult.class
