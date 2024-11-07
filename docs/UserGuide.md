@@ -44,15 +44,16 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 ## Summary of Features
 ### Command summary
 
-| Action     | Format, Examples                                                                                                                                                                  |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/johnnyboiiii` |
-| **Clear**  | `clear`                                                                                                                                                                           |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
-| **Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                    |
-| **Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                              |
-| **List**   | `list`                                                                                                                                                                            |
-| **Help**   | `help`                                                                                                                                                                            |
+| Action                                                 | Format, Examples                                                                                                                                                    |
+|--------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-contact-add)**                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President` |
+| **[Clear](#clearing-all-entries-clear)**               | `clear`                                                                                                                                                             |
+| **[Delete](#deleting-a-contact-delete)**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
+| **[Edit](#editing-a-contact-edit)**                    | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                      |
+| **[Find](#locating-contacts-by-contact-details-find)** | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                |
+| **[List](#listing-all-contacts-list)**                 | `list`                                                                                                                                                              |
+| **[Help](#viewing-help-help)**                         | `help`                                                                                                                                                              |
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Terminologies for command line
@@ -85,7 +86,7 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaning how to access the help page.
 
@@ -128,7 +129,7 @@ Examples:
 * `add n/John Doe th/johndoe e/johnd@example.com s/undergraduate 3 r/Admin r/President nn/altName`
 * `add n/Betsy Crowe th/betsycrowe e/betsycrowe@example.com s/masters r/President r/Admin`
 
-### Listing all contacts : `list`
+### Listing all contacts: `list`
 
 Shows a list of all contacts in the address book.
 
@@ -140,7 +141,7 @@ Possible example of slight variations:
 * `list contacts`
 * `list all contacts`
 
-### Editing a contact : `edit`
+### Editing a contact: `edit`
 
 Edits an existing contact in the address book.
 
@@ -157,7 +158,7 @@ Examples:
 
 Do note that the `edit` command will fail if you enter a duplicate field as seen below under [invalid contacts](#what-is-considered-as-invalid-contacts)
 
-### Locating contacts by name : `find`
+### Locating contacts by contact details: `find`
 
 Finds contacts whose details matches all given fields.
 
@@ -185,7 +186,7 @@ Examples:
 * `find r/Admin r/President` returns `Bernice Yu` who holds both roles, but not `Alex Yeoh` who only holds the role `President`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
-### Deleting a contact : `delete`
+### Deleting a contact: `delete`
 
 Deletes the specified contact from the address book.
 
@@ -212,13 +213,13 @@ Examples:
 * Both `delete Amy Gould` and `delete n/Amy Gould` delete the user whose name is `Amy Gould` (non-case-sensitive) in the address book.
   ![result for 'delete Amy Gould'](images/deleteAmyGouldResult.png)
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
