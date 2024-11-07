@@ -64,6 +64,20 @@ public class TaskStatusModifierTest {
     }
 
     @Test
+    public void modifyTasks_markTasks_assigned_to_person_success() throws Exception {
+        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), true);
+        Task taskToMark = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        Person personWithSameTask = new PersonBuilder().withName("newperson").withTasks("todo: buy groceries").build();
+        model.addPerson(personWithSameTask);
+        model.assignVendor(personWithSameTask);
+
+        Set<Task> modifiedTasks = modifier.modifyTasks(model);
+
+        assertEquals(Set.of(taskToMark), modifiedTasks, "The modified tasks should contain only the marked task.");
+        assertTrue(taskToMark.getIsDone(), "The task should be marked as done.");
+    }
+
+    @Test
     public void modifyTasks_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         TaskStatusModifier modifier = new TaskStatusModifier(Set.of(outOfBoundIndex), true);
