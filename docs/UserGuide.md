@@ -170,6 +170,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete n/Betsy` will delete contact with the full name Betsy.
+* `delete e/betsy@gmail.com` will delete the contact with the email betsy@gmail.com
 * If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command`delete n/John Doe p/8834156` to delete the former.
 
 ### Adding/Removing remark for a person : `remark`
@@ -186,6 +187,19 @@ Format:
 
 **Examples**:
 - `remark 2 r/Available for part-time work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
+
+### Showing applicant statistics: `stats`
+
+Format: 
+`stats`
+
+Shows the following statistics of the contact book at the time the command is called:
+- Total number of applicants.
+- Percentage of applicants in each interview stage regardless of job code.
+- Number of applicants for each job code and each interview stage for that job code.
+
+Examples:
+`stats`
 
 ### Clearing all entries : `clear`
 
