@@ -22,11 +22,18 @@ public class RemarkTest {
     }
 
     @Test
-    public void isValidPhone() {
-        // null phone number
+    public void isValidRemark() {
+        // null remark
         assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 
-        // valid phone numbers
+        // invalid remark
+        String invalidRemark = "D4xacLPJRNcpzdMJo6VVTAZJmEwFxPK0YWONE6cd3B5IqCya1dJA26NH8"
+                + "JYNvp5wtFp1ZxGzw3lUNSJBtwWTLCNX1kuEGzRw5CbnqHwPKDIdeDrSsNwTf8Hc3YHrNd"
+                + "u3fkmKdytxx2s1ZnPo9t9V76lgY8o88b2IMlAXUviDTNmNgjTxTBcVtKb4IcQMviHKpus"
+                + "EGlpm11111";
+        assertFalse(Remark.isValidRemark(invalidRemark));
+
+        // valid remark
         assertTrue(Remark.isValidRemark("")); // blank remark
         assertTrue(Remark.isValidRemark("Hello world"));
     }
