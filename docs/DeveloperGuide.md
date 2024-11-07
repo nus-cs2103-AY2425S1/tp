@@ -644,7 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC11 - Locating persons**
+**Use case: UC12 - Locating persons**
 
 **MSS**
 
