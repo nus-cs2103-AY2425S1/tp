@@ -3,22 +3,18 @@ package keycontacts.ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Day;
@@ -31,25 +27,25 @@ import keycontacts.model.student.Student;
  * The calendar view
  */
 public class CalendarView extends UiPart<Region> {
+    public static final List<String> CALENDAR_COLORS = List.of(
+            "cadetblue",
+            "goldenrod",
+            "teal",
+            "indianred",
+            "darkolivegreen",
+            "steelblue",
+            "sienna",
+            "mediumpurple",
+            "coral",
+            "burlywood",
+            "darkseagreen",
+            "darkkhaki"
+    );
+
     private static final String FXML = "CalendarView.fxml";
 
     private static final int NUM_ROWS = 7;
     private static final int NUM_MINUTES = 24 * 60;
-
-    private static final List<Color> CALENDAR_COLORS = List.of(
-            Color.CADETBLUE,
-            Color.GOLDENROD,
-            Color.TEAL,
-            Color.INDIANRED,
-            Color.DARKOLIVEGREEN,
-            Color.STEELBLUE,
-            Color.SIENNA,
-            Color.MEDIUMPURPLE,
-            Color.CORAL,
-            Color.BURLYWOOD,
-            Color.DARKSEAGREEN,
-            Color.DARKKHAKI
-    );
 
     @SuppressWarnings("unchecked")
     private final List<TimeBlock>[] timeBlocks = (ArrayList<TimeBlock>[]) new ArrayList[NUM_ROWS];
@@ -119,7 +115,7 @@ public class CalendarView extends UiPart<Region> {
         }
     }
 
-    private void createBlock(Day day, Time startTime, Time endTime, Color color, String name) {
+    private void createBlock(Day day, Time startTime, Time endTime, String color, String name) {
         assert endTime.isAfter(startTime);
 
         TimeBlock timeBlock = new TimeBlock(startTime, endTime);
@@ -198,10 +194,9 @@ public class CalendarView extends UiPart<Region> {
         }
 
         for (int i = 0; i < uniqueGroupStudents.size(); i++) {
-            Color groupColor = CALENDAR_COLORS.get(i % CALENDAR_COLORS.size());
-
             Student student = uniqueGroupStudents.get(i);
             String name = student.getGroup().isNoGroup() ? student.getName().fullName : student.getGroup().groupName;
+            String groupColor = CALENDAR_COLORS.get(Math.abs(Objects.hash(name)) % CALENDAR_COLORS.size());
 
             RegularLesson regularLesson = student.getRegularLesson();
             if (regularLesson != null) {
@@ -328,10 +323,10 @@ public class CalendarView extends UiPart<Region> {
         /**
          * Returns a block rectangle based on the duration of this {@code TimeBlock} with the provided color
          */
-        public Node createBlock(Color color, String name) {
+        public Node createBlock(String color, String name) {
             this.blockWidth = getDuration();
             this.block = new Pane();
-            this.block.setBackground(new Background(new BackgroundFill(color, new CornerRadii(0), new Insets(0))));
+            this.block.setStyle("-fx-background-color: " + color);
 
             Label label = new Label(name);
             label.getStyleClass().add("label-calendar-block");
