@@ -225,7 +225,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The Force feature is a quality of life addition for WedLinker. It enables users to bypass certain checks in the `Logic` in a controlled manner to make usage easier.
 The force feature is applicable for the following commands:
-* `tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person}`.
+* `tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
 * `delete-tag`: This unassigns the target `Tag` from all contacts before deleting it.
 * `assign-wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
 * `delete-wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
@@ -247,7 +247,7 @@ Step 4. During `DeleteTagCommand#execute()`, the force flag is checked. If prese
 #### Implementation
 
 The Wedding Feature is a significant addition for WedLinker. Wedding contains the Contacts involved to facilitate easy planning and consolidation for wedding planners.
-Wedding would support the following functions
+Wedding would support the following functions:
 
 * `Create Wedding` — Creates a Wedding in WedLinker to allow compilation of information.
 * `Assign Wedding` — Assigns `Person` to a Wedding. This can be the `Partners` or `Guest`.
@@ -257,9 +257,9 @@ Wedding would support the following functions
 
 Given below is an example usage scenario and how Weddings are used in WedLinker.
 
-Step 1. The user launches the application, `Weddings` are loaded into the `Model.
+Step 1. The user launches the application, `Weddings` are loaded into the `Model`.
 
-Step 2. The user executes `create-wedding w/Test Wedding 1`. WedLinker will create a Wedding based on the name provided. In this case: `Test Weddign 1`.
+Step 2. The user executes `create-wedding w/Test Wedding 1`. WedLinker will create a Wedding based on the name provided. In this case: `Test Wedding 1`.
 
 Step 3. The user executes `assign-wedding 1 w/Test Wedding 1` to assign a `Person` to `Test Wedding 1`. WedLinker includes the `Person` in the `Guest List`.
 
@@ -288,6 +288,22 @@ Known bugs:
 </box>
 
 ### Vendors
+
+#### Implementation
+
+The Vendor Feature allows users to track which contacts are Vendors and assign tasks to them. Only Vendors can be assigned tasks.
+Vendor would support the following functions:
+
+* `Assign Vendor` — Assigns an existing `Person` in WedLinker to become a `Vendor`. 
+* `Unassign Vendor` — Unassigns a `Vendor` to become a non-vendor `Person` contact. 
+
+Given below is an example usage scenario and how Vendors are used in WedLinker.
+
+Step 1. The user launches the application, `Persons` and `Vendors` are loaded into the `Model`.
+
+Step 2. The user executes `assign-vendor 1`. WedLinker will assign the `Person` at index 1 of the current displayed person list to become a `Vendor`. The user can now assign `Tasks` to this contact.
+
+Step 3. The user executes `unassign-vendor 1` to unassign the `Vendor` to become a non-. WedLinker includes the `Person` in the `Guest List`.
 
 ### Task
 
