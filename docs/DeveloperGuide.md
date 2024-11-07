@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `BlitzBiz` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a contact**
+**Use case: UC01 - Delete a contact**
 
 **MSS**
 
@@ -360,7 +360,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Add a contact**
+**Use case: UC02 - Restore a contact**
+Preconditions: User has deleted a contact
+
+**MSS**
+
+1. User restores the deleted contact
+2. The contact is restored to BlitzBiz
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The contact has been added back using the add command
+    * 2a1. BlitzBiz shows an error message.
+
+    Use case ends.
+
+**Use case: UC03 - Add a contact**
 
 **MSS**
 
@@ -386,7 +403,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       *a2. User confirms the cancellation.
       Use case ends.
 
-**Use case: Find contacts by name**
+**Use case: UC04 - Find contacts by name**
 
 **MSS**
 
