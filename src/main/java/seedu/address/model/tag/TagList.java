@@ -22,7 +22,7 @@ public class TagList {
      * Adds a new tag if it is not already present.
      *
      * @param tag The tag to add.
-     * @return true if the tag was added, false if it already exists.
+     * @return True if the tag was added, false if it already exists.
      */
     public boolean addTag(Tag tag) {
         if (tags.contains(tag)) {
@@ -36,7 +36,7 @@ public class TagList {
      * Deletes a tag if it is already present.
      *
      * @param tag The tag to delete.
-     * @return true if the tag was deleted, false if it does not exist.
+     * @return True if the tag was deleted, false if it does not exist.
      */
     public boolean deleteTag(Tag tag) {
         return tags.remove(tag);
@@ -46,14 +46,19 @@ public class TagList {
      * Renames a tag if it is already present.
      *
      * @param tag The tag to be renamed.
-     * @return true if the tag was renamed, false if it does not exist.
+     * @param newTagName The new name the tag is be to be renamed to.
+     * @return True if the tag was renamed, false if the tag to be renamed does not exist,
+     *     or if the new name is already in use by an existing tag.
      */
     public boolean renameTag(Tag tag, String newTagName) {
         int index = tags.indexOf(tag);
+
+        // Check if original tag exists
         if (index == -1) {
             return false;
         }
 
+        // Check if the new name is in use
         if (tags.contains(new Tag(newTagName))) {
             return false;
         }
@@ -82,7 +87,10 @@ public class TagList {
 
     /**
      * Returns true if the size of the tag list is below
-     * or equal to the maximum size allowed.
+     * or equal to the maximum size allowed, assuming the specified number
+     * of additional tags are added to the existing tag list.
+     *
+     * @param additionalTags The number of tags to be added.
      */
     public boolean checkAcceptableSize(int additionalTags) {
         return tags.size() + additionalTags <= MAXIMUM_TAGLIST_SIZE;
@@ -102,6 +110,7 @@ public class TagList {
         }
         return String.join(", ", tags.stream().map(Tag::getTagName).toList());
     }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
