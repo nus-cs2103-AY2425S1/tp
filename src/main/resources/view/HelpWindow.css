@@ -30,10 +30,16 @@
   -fx-wrap-text: true;
 }
 
-.table-cell:filled:even {
+.table-row-cell:filled:even {
   -fx-background-color: #3c3e3f;
 }
 
-.table-cell:filled:odd {
+.table-row-cell:filled:odd {
   -fx-background-color: #515658;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+  -fx-background-color: #424d5f;
+  -fx-border-color: #3e7b91;
+  -fx-border-width: 1;
 }
