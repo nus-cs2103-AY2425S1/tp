@@ -136,25 +136,25 @@ Below are the supported categories:
 
 ##### Salary, Work-Life Balance, and Interview Difficulty Tags
 
-These tags represent qualitative levels. The valid values for these tags are:
+These tags represent qualitative levels. The valid VALUES for these tags are:
 
-- **LOW**
-- **MEDIUM**
-- **HIGH**
+- **Low**
+- **Medium**
+- **High**
 
 These tags must be written using the following format (note the underscore):
 
-- Salary tag: `t/salary_[value]`
-- Difficulty tag: `t/difficulty_[value]`
-- Work-Life Balance tag: `t/wlb_[value]`
+- Salary tag: `t/salary_VALUE`
+- Difficulty tag: `t/difficulty_VALUE`
+- Work-Life Balance tag: `t/wlb_VALUE`
 
 **Note:** Any additional underscores or characters after the given format, 
-like in `t/salary_[value]_extra`, will be ignored.
+like in `t/salary_VALUE_extra`, will be ignored.
 
 **Example:**
 ```
 add n/Google p/98765432 e/google@example.com a/John street, block 123, 
-#01-01 cp/www.google-career-url.com r/ t/salary_HIGH t/wlb_MEDIUM t/difficulty_MEDIUM
+#01-01 cp/www.google-career-url.com r/ t/salary_high t/wlb_medium t/difficulty_medium
 ```
 **Outcome**:
 ![TagCommandOutcome.png](images%2FTagCommandOutcome.png)
@@ -165,18 +165,18 @@ add n/Google p/98765432 e/google@example.com a/John street, block 123,
 
 The **`Period`** tag is used to specify:
 
-- **Season**:
+- **SEASON**:
 
     - **Summer**
     - **Winter**
     - **Part-time**
 
-- **Year**: Any year between **2000 and 2500**
+- **YEAR**: Any year between **2000 and 2500**
 
-Tag format: `t/period_[Season]_[Year]`
+Tag format: `t/period_SEASON_YEAR`
 
 **Note:** Any additional underscores or characters after the given format,
-like in `t/period_[Season]_[Year]_hello`, will be ignored.
+like in `t/period_SEASON_YEAR_hello`, will be ignored.
 
 **Example:**
 ```
@@ -192,8 +192,8 @@ cp/www.shopee-career-url.com t/period_summer_2025
 with whatever value you input. Example ```t/helloworld``` creates a tag called "helloworld"
 
 Other Invalid tag example:
-- . Trying to create a tag like ```t/mytag_HIGH``` will fail as we will treat your tag value
-as ```mytag_HIGH``` and the underscore is not a alphanumeric character
+- . Trying to create a tag like ```t/mytag_high``` will fail as we will treat your tag value
+as ```mytag_high``` and the underscore is not a alphanumeric character
 
 [Back to Table of Contents](#table-of-contents)
 
