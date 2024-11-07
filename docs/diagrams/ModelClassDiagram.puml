@@ -12,7 +12,7 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class PersonList
+Class UniquePersonList
 Class Person
 Class Address
 Class Email
@@ -38,8 +38,8 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" PersonList
-PersonList --> "~* all" Person
+AddressBook *--> "1" UniquePersonList
+UniquePersonList --> "~* all" Person
 Person *--> "1" Name
 Person *--> "1" Phone
 Person *--> "0..1" Email
@@ -50,7 +50,7 @@ Person *--> "0..1" Income
 Person *--> "0..1" Age
 
 Person -[hidden]up--> I
-PersonList -[hidden]right-> I
+UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
