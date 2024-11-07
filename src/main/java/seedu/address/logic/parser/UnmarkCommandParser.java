@@ -28,13 +28,7 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL);
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndexAllowWildcard(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE), pe);
-        }
+        Index index = ParserUtil.parseIndexAllowWildcard(argMultimap.getPreamble());
 
         List<Tutorial> tutorials = ParserUtil.parseTutorials(argMultimap.getValue(PREFIX_TUTORIAL).get());
 

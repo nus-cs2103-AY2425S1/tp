@@ -26,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index must be a positive integer.";
+    public static final String MESSAGE_EMPTY_INDEX = "Index cannot be empty.";
     public static final String MESSAGE_INVALID_SORT_ORDER = "Sort order is not 1 or -1, or invalid field provided.";
     public static final String MESSAGE_INVALID_INDEX_WILDCARD_COMMAND = "Index must be a positive integer, or the "
             + "wildcard *.";
@@ -38,6 +39,10 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_INDEX);
+        }
+
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
@@ -54,11 +59,11 @@ public class ParserUtil {
         if (trimmedIndex.equals(ParserUtil.INDEX_WILDCARD)) {
             return Index.getWildcardIndex();
         }
-
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        try {
+            return ParserUtil.parseIndex(trimmedIndex);
+        } catch (ParseException pe) {
             throw new ParseException(MESSAGE_INVALID_INDEX_WILDCARD_COMMAND);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
@@ -193,14 +198,12 @@ public class ParserUtil {
         } else if (tutorialInput.contains("-")) {
             String[] range = tutorialInput.split("-");
             if (range.length != 2) {
-                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        Tutorial.MESSAGE_INVALID_FORMAT));
+                throw new ParseException(Tutorial.MESSAGE_INCORRECT_RANGE_INPUT);
             }
             int start = Integer.parseInt(range[0].trim());
             int end = Integer.parseInt(range[1].trim());
             if (start > end) {
-                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        Tutorial.MESSAGE_INVALID_FORMAT));
+                throw new ParseException(Tutorial.MESSAGE_INCORRECT_RANGE_ORDER);
             }
             for (int i = start; i <= end; i++) {
                 tutorials.add(parseTutorial(Integer.toString(i)));

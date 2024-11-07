@@ -28,13 +28,7 @@ public class ResetCommandParser implements Parser<ResetCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL);
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndexAllowWildcard(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResetCommand.MESSAGE_USAGE), pe);
-        }
+        Index index = ParserUtil.parseIndexAllowWildcard(argMultimap.getPreamble());
 
         List<Tutorial> tutorials = ParserUtil.parseTutorials(argMultimap.getValue(PREFIX_TUTORIAL).get());
 
