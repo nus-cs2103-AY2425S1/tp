@@ -104,8 +104,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String publicAddress} into a {@code PublicAddress}.
      */
-    public static PublicAddress parsePublicAddress(String publicAddress, String paLabel, String network)
-            throws ParseException {
+    public static PublicAddress parsePublicAddress(String publicAddress,
+                                                   String paLabel, String network) throws ParseException {
         requireNonNull(publicAddress);
         requireNonNull(paLabel);
 

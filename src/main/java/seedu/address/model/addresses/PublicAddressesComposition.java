@@ -320,7 +320,6 @@ public class PublicAddressesComposition {
         return publicAddresses.values().stream().mapToInt(Set::size).sum();
     }
 
-  
 
     /**
      * Combines this PublicAddressesComposition with another.
@@ -330,8 +329,6 @@ public class PublicAddressesComposition {
      * @return A new PublicAddressesComposition containing all unique addresses from both compositions.
      * @throws IllegalArgumentException if there's a conflicting address (same label in the same network).
      */
-
-
     public PublicAddressesComposition combineWith(PublicAddressesComposition other) {
         Map<Network, Set<PublicAddress>> combinedAddresses = Stream
             .concat(
@@ -428,15 +425,15 @@ public class PublicAddressesComposition {
         StringBuilder sb = new StringBuilder();
         publicAddresses.forEach((network, addresses) -> {
             sb.append(INDENT)
-                    .append(network)
-                    .append(":\n");
+                .append(network)
+                .append(":\n");
             addresses.forEach(address -> {
                 sb.append(INDENT + INDENT)
-                        .append(address.getLabel())
-                        .append(":\n")
-                        .append(INDENT + INDENT + INDENT)
-                        .append(address.getPublicAddressString())
-                        .append("\n");
+                    .append(address.getLabel())
+                    .append(":\n")
+                    .append(INDENT + INDENT + INDENT)
+                    .append(address.getPublicAddressString())
+                    .append("\n");
             });
         });
         return sb.toString();

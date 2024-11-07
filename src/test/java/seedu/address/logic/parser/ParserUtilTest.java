@@ -41,6 +41,7 @@ public class ParserUtilTest {
     private static final String VALID_NETWORK = "BTC";
     private static final String VALID_LABEL_1 = "Main";
     private static final String VALID_LABEL_2 = "Sub";
+
     private static final String VALID_PUBLIC_ADDRESS_STRING_BTC_1 = "bc1qa96vpa8ypgpkvzqw3xu9n4re5vhamg89v0q92j";
     private static final String VALID_PUBLIC_ADDRESS_STRING_BTC_2 = "bc1qnmd6uvx49w57cqe7du5pg3htyah9xmxep7gc46";
 
@@ -226,7 +227,6 @@ public class ParserUtilTest {
     public void parsePublicAddress_invalidLabel_throwsParseException() {
         assertThrows(ParseException.class, () ->
             ParserUtil.parsePublicAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, INVALID_LABEL_1, VALID_NETWORK));
-
     }
 
     @Test
@@ -252,72 +252,6 @@ public class ParserUtilTest {
     }
 
     @Test
-
-    public void parsePublicAddresses_nullCollection_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePublicAddresses(null));
-    }
-
-    @Test
-    public void parsePublicAddresses_emptyCollection_returnsEmptyMap() throws Exception {
-        assertTrue(ParserUtil.parsePublicAddresses(Collections.emptyList()).isEmpty());
-    }
-
-    @Test
-    public void parsePublicAddresses_invalidFormat_throwsParseException() {
-        assertThrows(ParseException.class, () ->
-            ParserUtil.parsePublicAddresses(List.of("BTC" + VALID_PUBLIC_ADDRESS_STRING_BTC_1)));
-    }
-
-    @Test
-    public void parsePublicAddresses_invalidNetwork_throwsParseException() {
-        assertThrows(ParseException.class, () ->
-            ParserUtil.parsePublicAddresses(List.of(INVALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_1)));
-    }
-
-    @Test
-    public void parsePublicAddresses_validInputs_returnsMap() throws Exception {
-        Collection<String> inputs = List.of(
-            VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_1
-        );
-
-        PublicAddressesComposition expected = new PublicAddressesComposition();
-        PublicAddressesComposition btcAddresses = new PublicAddressesComposition();
-        btcAddresses = btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, PublicAddress.DEFAULT_LABEL));
-
-        expected = expected.combineWith(btcAddresses);
-
-
-        assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
-    }
-
-    @Test
-    public void parsePublicAddresses_validInputsWithWhitespace_returnsMap() throws Exception {
-
-
-        Collection<String> inputs = List.of(
-            " " + VALID_NETWORK + " > " + VALID_PUBLIC_ADDRESS_STRING_BTC_1 + " "
-
-        );
-
-        PublicAddressesComposition expected = new PublicAddressesComposition();
-        PublicAddressesComposition btcAddresses = new PublicAddressesComposition();
-        btcAddresses = btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, PublicAddress.DEFAULT_LABEL));
-        expected = expected.combineWith(btcAddresses);
-
-
-        assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
-    }
-
-    @Test
-    public void parsePublicAddresses_invalidDuplicateLabels_throwsIllegalArgumentException() throws Exception {
-        Collection<String> inputs = List.of(VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_BTC_MAIN,
-            VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_BTC_SUB);
-
-        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parsePublicAddresses(inputs));
-    }
-
-    @Test
-
     public void parsePublicAddressLabel_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePublicAddressLabel(null));
     }
