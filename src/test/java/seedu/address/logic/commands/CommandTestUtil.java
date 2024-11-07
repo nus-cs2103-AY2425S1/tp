@@ -40,6 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
+    public static final String VALID_ADDRESS_AMY_NO_SPECIAL = "block312AmyStreet1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
@@ -50,13 +51,10 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_BOB = "2024-10-10 11:00";
     public static final String VALID_POLICY_NAME_LIFE = "life insurance";
     public static final String VALID_POLICY_NAME_INVESTMENT = "investment insurance";
-    public static final String NON_EXISTENT_POLICY_NAME = "non-existent policy";
-    public static final String EXPIRING_POLICY_NAME = "expiring policy";
     public static final String VALID_DATE_1 = "2021-10-16";
     public static final String VALID_DATE_2 = "2027-11-11";
     public static final String VALID_INSURANCE_PAYMENT = "2023-05-05 349.00";
     public static final String VALID_PAID_INSURANCE_PAYMENT = "2026-12-12 349.00";
-    public static final String EXPIRING_INSURANCE_PAYMENT = "2026-12-12 349.00";
     public static final String VALID_INSURANCE_PAYMENT_DATE = "2023-05-05";
     public static final String VALID_INSURANCE_AMOUNT_DUE = "349.00";
     public static final String INVALID_INSURANCE_AMOUNT_DUE = "349.00asdd";

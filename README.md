@@ -2,7 +2,7 @@
 
 [![Codecov](https://codecov.io/gh/AY2425S1-CS2103T-W10-2/tp/graph/badge.svg?token=134QRO3UI3)](https://codecov.io/gh/AY2425S1-CS2103T-W10-2/tp)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/GUI.png)
 
 # AgentConnect
 
@@ -51,6 +51,6 @@ Sort your client list based on different criteria, such as name, policy type, pa
 
 
 ## More about it
-* For user and developer documentation**, head over to **[DocTrack Documentation](https://ay2425s1-cs2103t-w10-3.github.io/tp/)**
+* For user and developer documentation**, head over to **[AgentConnect Documentation](https://ay2425s1-cs2103t-w10-3.github.io/tp/)**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)

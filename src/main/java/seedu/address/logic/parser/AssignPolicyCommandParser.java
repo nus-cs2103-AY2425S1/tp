@@ -2,12 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
+
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AssignPolicyCommand;
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Policy;
+
 
 /**
  * Parses user input for assigning a policy to a client.
@@ -38,15 +40,15 @@ public class AssignPolicyCommandParser implements Parser<AssignPolicyCommand> {
                         PREFIX_PAYMENT_AMOUNT);
         if (!arePrefixesPresent(argMultimap, PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
                 PREFIX_POLICY_END_DATE, PREFIX_NEXT_PAYMENT_DATE, PREFIX_PAYMENT_AMOUNT)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_POLICY_FORMAT + "\n"
-                    + AssignPolicyCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignPolicyCommand.MESSAGE_USAGE));
         }
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT
-                    + "\n" + AssignPolicyCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignPolicyCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
                 PREFIX_POLICY_END_DATE, PREFIX_NEXT_PAYMENT_DATE,
@@ -80,7 +82,7 @@ public class AssignPolicyCommandParser implements Parser<AssignPolicyCommand> {
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return java.util.stream.Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

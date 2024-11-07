@@ -91,7 +91,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete John")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete John Doe")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete John` Command](images/DeleteSequenceDiagram.png)
 
@@ -155,11 +155,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -228,16 +228,16 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Current Implementation:** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 1:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+
 
 ### \[Proposed\] Data archiving
 
@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | know when was my client's last appointment         | track when to follow up                                                       |
 | `* * *`  | user    | know when is my client's birthday                  | reach out to build rapport                                                    |
 | `* * *`  | user    | know when is my client's next insurance payment    | so that I can keep track of client's payment                                  |
-*{More to be added}*
+
 
 ### Use cases
 
@@ -363,20 +363,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2b2. User can retry with a valid policy Index.
   * Use case resumes from step 2.
 
-**Use case: Undo a Delete Command**
+**Use case: Undo a Command**
 
 **MSS**
 
-1. User enters the undo command after deleting a person or policy.
+1. User enters the undo command.
 2. AgentConnect validates the input.
-3. AgentConnect restores the deleted person or policy.
+3. AgentConnect restores the previous state of the address book.
 4. AgentConnect shows a success message confirming the undo operation.
 
     Use case ends.
 
 **Extensions**
-* 2a. No delete operation to undo.
-  * 2a1. AgentConnect shows an error message indicating no delete operation to undo.
+* 2a. No commands to undo.
+  * 2a1. AgentConnect shows an error message indicating no commands to undo.
+  * Use case ends.
+
+**Use case: Redo a Command**
+
+**MSS**
+
+1. User enters the redo command.
+2. AgentConnect validates the input.
+3. AgentConnect restores the previously undone state of the address book.
+4. AgentConnect shows a success message confirming the redo operation.
+    
+    Use case ends.
+
+**Extensions**
+* 2a. No commands to redo.
+  * 2a1. AgentConnect shows an error message indicating no commands to redo.
   * Use case ends.
 
 **Use case: Sort Clients**
@@ -549,40 +565,175 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
+    2. Open up a terminal, and run the following command: java -jar AgentConnect.jar   
+       - Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2. Re-launch the app by double-clicking the jar file.<br>
+      - Expected: The most recent window size and location is retained.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Adding a Client
 
-1. _{ more test cases …​ }_
+1. Adding a client
+   1. Prerequisites: None 
+   2. Test case: `add n/John Doe p/98765432 e/johnd@example.com addr/311, Clementi Ave 2, #02-25 b/1990-10-10 appt/2024-12-12 12:00`
+   3. Expected: A new contact has been added into the list. 
+      - Status Message: "New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Birthday: 1990-10-10; Appointment: 2024-12-12 12:00; Tags:"
+   4. The list view should now have the new contact inside.
 
-### Deleting a person
+### Assigning Policies
+1. Creating and Assigning policies to client
+   1. Prerequisites: There must be at least one client showing in the list with no Policy Name "PolicyOne".
+   2. Test Case: `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
+      - Expected: "Policy successfully assigned to Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Birthday: 1990-05-20; Appointment: 2024-10-15 14:00; Tags: [friends]"
 
-1. Deleting a person while all persons are being shown
+   3. Test Case: `assign 1 pon/PoicyOne pos/2025-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
+      - Expected: "End date cannot be before start date!"
+   4. Test Case: `assign 1 pon/PoicyOne pos/2022-12-12 poe/2023-12-12 paydate/2021-11-01 amt/300.00`
+      - Expected: "Premium due date cannot be before start date!"
+   5. Test Case: `assign 1 pon/PoicyOne pos/2022-12-12 poe/2022-12-12 paydate/2022-01-01 amt/300.00`
+      - Expected: "Start date and end date cannot be the same!"
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Marking a policy as paid
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Marking a policy as paid
 
-   1. Test case: `delete 0`<br>
+    1. Prerequisites: There is at least one contact in the list with a policy.
+    2. Test case: `paid 1 po/1`
+    3. Expected: The first policy of the first person is marked as paid.
+    - The status bar shows the following:
+      The policy Life Insurance for `Alex Yeoh` will be fully paid after this payment.
+    - The list of persons should now have the updated person with the policy marked as paid inside of it.
+
+
+### Deleting a Client
+
+
+1. Deleting a Client while all contacts are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple persons in the list including a `John Doe`.
+
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    
+   3. Test case: `delete Bernice Yu`<br>
+        Expected: Contact with name `Bernice Yu` is deleted from the list. Details of the deleted contact shown in the status message.
+   
+   4. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Deleting a policy
+
+1. Deleting a policy from a person
+    1. Prerequisites: There is at least one contact in the list with a policy.
+    2. Test case: `delete 1 po/1`
+    3. Expected: The first policy of the first person is deleted.
+       - The status bar shows the following:
+         Deleted Policy 1 from "The first person in the list"
+       - The list of persons should now have the updated person with the policy deleted inside of it.
+
+### Editing a person
+
+1. Editing a person with all details
+   1. Prerequisites: There is at least one contact in the list.
+   2. Test case: `edit 1 p/9999000` 
+   3. Expected: The phone number of the first person is updated to 9999000.
+   - The status bar shows the following:
+     Edited Person: Alex Yeoh; Phone: 99990000; Email...
+   - The list of persons should now have the updated person inside of it.
+
+### Finding a person
+
+1. Finding a person
+   1. Prerequisites: There is at least one contact in the list.
+   2. Test case: `find alex`
+   3. Expected: The list of persons should now only show persons with the names containing "alex" which is not case-sensitive.
+   - The status bar shows the following:
+     `n` persons listed! (where `n` is the number of persons found)
+   - The list of persons should now only have the found persons inside of it.
+
+### Sorting the list
+
+1. Sorting the list by name
+   1. Prerequisites: There is at least more than one contact in the list.
+   2. Test case: `sort n/ desc`
+   3. Expected: The list of persons should now be sorted by name in descending order.
+   - The status bar shows the following:
+     Contacts have been sorted by name in desc order.
+   - The list of persons should now be sorted by name in descending order.
+
+2. Sorting the list by appointment date
+   1. Prerequisites: There is at least more than one contact in the list.
+   2. Test case: `sort appt/ asc`
+   3. Expected: The list of persons should now be sorted by appointment date in ascending order.
+   - The status bar shows the following:
+     Contacts have been sorted by appointment date in asc order.
+   - The list of persons should now be sorted by appointment date in ascending order.
+
+3. Sorting the list by birthday
+   1. Prerequisites: There is at least more than one contact in the list.
+   2. Test case: `sort bday/ desc`
+   3. Expected: The list of persons should now be sorted by birthday in descending order.
+   - The status bar shows the following:
+     Contacts have been sorted by birthday in desc order.
+   - The list of persons should now be sorted by birthday in descending order.
+
+### Searching
+
+1. Searching for appointments
+   1. Prerequisites: There is at least one contact in the list.
+   2. Test case: `search b/1990-05-20`
+   3. Expected: The list of persons should now only show persons with the birthday on 1990-05-20.
+   - The status bar shows the following:
+     Listed all clients with birthdays on 1990-05-20
+   - The list of persons should now only have the found persons inside of it.
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: missing data file
+      1. Locate the `addressbook.json` file in `../data/` and delete it
+      2. Relaunch the app
+      3. Expected: The app should create a new `addressbook.json` file with default data
 
-1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned enhancements**
+Team size: 5
+
+1.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+#### Difficulty Level
+The project was moderately difficult due to the complexity of managing multiple entity types (e.g., `Person`, `Policy`, `Appointment`) and their relationships. The undo/redo feature was also challenging to implement due to the need to manage multiple states of the address book.
+
+#### Challenges Faced
+- Multiple Entity Management: Handling multiple entities such as clients, policies, and appointments required significant effort in designing and implementing the data models and their interactions.
+- Undo/Redo Functionality: Implementing a robust undo/redo mechanism that works seamlessly across various commands was challenging and required careful state management.
+- User Interface: Ensuring the UI updates correctly in response to changes in the model, especially with the addition of new features like policy management and appointment scheduling, was a significant challenge.
+- Testing: Writing comprehensive tests for the new features and ensuring they integrate well with existing functionality required substantial effort.
+
+#### Effort Required 
+The project required a considerable ammount of effort in the following areas:
+- **Design and Architecture**: Significant time was spent on designing the architecture to support multiple entities and their interactions.
+- **Implementation**: Implementing the new features, especially the undo/redo functionality and policy management, required detailed coding and debugging.
+- **Testing**: Writing unit tests, integration tests, and ensuring high test coverage was time-consuming but essential for maintaining code quality.
+- **Documentation**: Updating the user guide, developer guide, and other documentation to reflect the new features and changes was necessary to ensure clarity and usability.
+
+#### Achievements
+- **Comprehensive Policy Management**: Successfully implemented a feature-rich policy management system that allows users to assign, delete, and mark policies as paid.
+- **Robust Undo/Redo Mechanism**: Developed a reliable undo/redo mechanism that enhances user experience by allowing them to revert and reapply changes easily.
+- **Enhanced User Interface**: Improved the UI to handle multiple entities and provide a seamless user experience.
+- **Extensive Testing**: Achieved high test coverage and ensured the reliability of the application through rigorous testing.

@@ -13,9 +13,12 @@ UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
-
+Person -right-> "*"Policy
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Birthday
+Person *--> Appointment
+
 @enduml

@@ -37,8 +37,19 @@ public class Address {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Normalizes the address by removing all non-alphanumeric characters
+     * (such as spaces, commas, and hyphens) and converting all letters to lowercase.
+     *
+     * For example:
+     * - "311, Clementi Ave 5, unit 02-2" will become "311clementiave5unit022"
+     * - "123 Main St - Apt 4B" will become "123mainstapt4b"
+     *
+     * @return A normalized version of the address as a lowercase alphanumeric string.
+     */
     public String normaliseAddress() {
-        return value.replaceAll("[,\\s-]+", "").toLowerCase();
+        return value.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
     }
 
     @Override

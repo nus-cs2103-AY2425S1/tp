@@ -25,7 +25,7 @@ public class Policy {
     public static final String END_DATE_BEFORE_START_DATE = "End date cannot be before start date!";
     public static final String PREMIUM_DUE_DATE_BEFORE_START_DATE = "Premium due date cannot "
             + "cannot be before start date!";
-    public static final String PREMIUM_DUE_DATE_AFTER_END_DATE = "Premium due date cannot cannot be after end date!";
+    public static final String PREMIUM_DUE_DATE_AFTER_END_DATE = "Premium due date cannot be after end date!";
     public static final String START_EQ_END = "Start date and end date cannot be the same!";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -164,8 +164,16 @@ public class Policy {
         return payment.getPaymentDueDate().plusYears(1).isAfter(endDate);
     }
 
+    public boolean isFullyPaid() {
+        return payment.getPaymentDueDate().equals(LocalDate.MAX);
+    }
+
+    /**
+     * Returns a comparator that compares two policies based on their payment due dates.
+     * Policies that are fully paid will be considered last.
+     */
     public static Comparator<Policy> getPolicyPaymentDueDateComparator() {
-        return Comparator.comparing(policy -> policy.getPolicyPaymentDueDate());
+        return Comparator.comparing(Policy::getPolicyPaymentDueDate);
     }
 
     /**

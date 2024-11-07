@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSIGN_POLICY;
 import static seedu.address.logic.commands.CommandTestUtil.POLICY_END_DATE_EARLIER_THAN_START;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGN_POLICY;
@@ -29,23 +29,24 @@ public class AssignPolicyCommandParserTest {
     public void parse_invalidParts_failure() {
         // no index specified
         assertParseFailure(parser, VALID_POLICY_NAME_LIFE,
-                String.format(MESSAGE_INVALID_POLICY_FORMAT + "\n" + AssignPolicyCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AssignPolicyCommand.MESSAGE_USAGE));
 
         //no policy details specified
-        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_POLICY_FORMAT + "\n"
-                + AssignPolicyCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AssignPolicyCommand.MESSAGE_USAGE));
 
         //invalid insurance field
         assertParseFailure(parser, "1" + INVALID_ASSIGN_POLICY, String.format(Payment.MESSAGE_CONSTRAINTS));
 
         // invalid index specified
         assertParseFailure(parser, "-1" + VALID_POLICY_NAME_LIFE,
-                String.format(MESSAGE_INVALID_POLICY_FORMAT + "\n" + AssignPolicyCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AssignPolicyCommand.MESSAGE_USAGE));
 
         // invalid policy --> end date earlier than start date
         assertParseFailure(parser, "1" + POLICY_END_DATE_EARLIER_THAN_START,
                 String.format(Policy.END_DATE_BEFORE_START_DATE));
-
     }
 
     @Test
