@@ -2,9 +2,8 @@ package seedu.address.logic.parser;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-import seedu.address.commons.util.ClassComparatorUtil;
+import seedu.address.commons.util.ComparatorUtil;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -21,13 +20,12 @@ public class SortCommandParser implements Parser<SortCommand> {
         switch (trimmedArgs) {
         case "name" -> comparator = Comparator.comparing(person -> person.getName().toString());
         case "subject" -> comparator = Comparator.comparing(person -> person.getSubjects().toString());
-        case "class" -> comparator = Comparator.comparing(person -> {
-            List<String> classes = Collections.singletonList(person.getClasses().toString());
-            return ClassComparatorUtil.getPrimaryClassForSorting(classes);
-        });
+        case "class" -> comparator = Comparator.comparing(person ->
+                ComparatorUtil.getPrimaryClassForSorting(Collections.singletonList(person.getClasses().toString()))
+        );
         case "attendance" -> comparator = Comparator.comparing(
-                person -> person.getDaysAttended() != null ? person.getDaysAttended().toString() : null,
-                Comparator.nullsLast(Comparator.naturalOrder())
+                Person::getDaysAttended,
+                ComparatorUtil.getDaysAttendedComparator()
         );
         default -> throw new ParseException(SortCommand.MESSAGE_USAGE);
         }

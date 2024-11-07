@@ -1,11 +1,13 @@
 package seedu.address.commons.util;
 
+import java.util.Comparator;
 import java.util.List;
 
+import seedu.address.model.person.DaysAttended;
 /**
  * Utility class for comparing class strings.
  */
-public class ClassComparatorUtil {
+public class ComparatorUtil {
 
     /**
      * Compares two class strings based on their class number and section.
@@ -31,8 +33,19 @@ public class ClassComparatorUtil {
      */
     public static String getPrimaryClassForSorting(List<String> classes) {
         return classes.stream()
-                .sorted(ClassComparatorUtil::compareClassStrings)
+                .sorted(ComparatorUtil::compareClassStrings)
                 .findFirst()
                 .orElse("");
+    }
+
+    /**
+     * Comparator for DaysAttended objects, placing null values last.
+     * @return A Comparator for DaysAttended that handles nulls by placing them last.
+     */
+    public static Comparator<DaysAttended> getDaysAttendedComparator() {
+        return Comparator.comparing(
+                daysAttended -> daysAttended != null ? daysAttended.getValue() : null,
+                Comparator.nullsLast(Comparator.reverseOrder())
+        );
     }
 }
