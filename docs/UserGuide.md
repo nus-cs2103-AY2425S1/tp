@@ -26,25 +26,25 @@ The user guide contains formatting to highlight important info. The standards us
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-  - [Viewing help](#viewing-help--help)
-  - [Adding a person](#adding-a-person-add)
-  - [Listing all persons](#listing-all-persons--list)
-  - [Editing a person](#editing-a-person--edit)
-  - [Editing a person](#editing-a-person--edit)
-  - [Filtering persons by skills](#filtering-persons-by-skills-filter)
-  - [Locating persons by name](#locating-persons-by-name-find)
-  - [Deleting a person](#deleting-a-person--delete)
-  - [Clearing all entries](#clearing-all-entries--clear)
-  - [Adding a project](#adding-a-project--addproject)
-  - [Listing all projects](#listing-all-projects--listproject)
-  - [Listing all members of a project](#listing-all-members-of-a-project--listprojectmembers)
-  - [Finding projects by name](#finding-projects-by-name--findproject)
-  - [Deleting a project](#deleting-a-project--deleteproject)
-  - [Clear all project entries](#clear-all-project-entries--clearproject)
-  - [Create Assignment](#create-assignment--assign)
-  - [List Assignments](#list-assignments--listassignments)
-  - [Delete Assignment](#delete-assignment-unassign)
-  - [Exiting the program](#exiting-the-program--exit)
+  - [Viewing help : `help`](#viewing-help--help)
+  - [Adding an employee : `add`](#adding-an-employee-add)
+  - [Listing all employees : `listemployees`](#listing-all-employees--list)
+  - [Editing an employee : `edit`](#editing-an-employee--edit)
+  - [Filtering employees by skills : `filter`](#filtering-employees-by-skills-filter)
+  - [Locating employees by name : `find`](#locating-employees-by-name-find)
+  - [Deleting an employee : `delete`](#deleting-an-employee--delete)
+  - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
+  - [Adding a project : `addproject`](#adding-a-project--addproject)
+  - [Listing all projects : `listproject`](#listing-all-projects--listproject)
+  - [Listing all members of a project : `listprojectmembers`](#listing-all-members-of-a-project--listprojectmembers)
+  - [Editing a project : `editproject`](#editing-a-project--editproject)
+  - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
+  - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
+  - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
+  - [Create an assignment : `assign`](#create-assignment--assign)
+  - [List assignments : `listassignments`](#list-assignments--listassignments)
+  - [Delete Assignment : `unassign`](#delete-assignment-unassign)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -138,9 +138,9 @@ Format: `help`
 
 [Return to Top](#table-of-contents)
 
-### Adding a person: `add`
+### Adding an employee: `add`
 
-Adds a person to the address book.
+**Adds an employee** to the address book.
 
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
 
@@ -156,7 +156,7 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
 - Skills and tags must be: [Alphanumeric](#alphanumeric), no spaces
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0) and any number of skills (including 0)
+An employee can have any number of tags (including 0) and any number of skills (including 0)
 </div>
 
 Examples:
@@ -165,29 +165,29 @@ Examples:
 - `add id/2 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal s/lockpicking`
 
 Expected output:
-- System message noting success and details of person edited
+- System message noting success and details of employee edited
 
 [Return to Top](#table-of-contents)
 
-### Listing all persons : `list`
+### Listing all employees : `list`
 
-Shows a list of all persons in the address book.
+Shows a **list of all employees** in the address book.
 
 Format: `list`
 
 Expected output:
 - System message noting success
-- All persons shown in the displayed person list
+- All persons shown in the displayed employee list
 
 [Return to Top](#table-of-contents)
 
-### Editing a person : `edit`
+### Editing an employee : `edit`
 
-Edits an existing person in the address book.
+**Edits an existing employee** in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -204,13 +204,13 @@ Examples:
 - `edit 2 n/Betsy Crower t/` Edits the projectName of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 Expected output:
-- System message noting success and details of person edited
+- System message noting success and details of employee edited
 
 [Return to Top](#table-of-contents)
 
-### Filtering persons by skills: `filter`
+### Filtering employees by skills: `filter`
 
-Finds employees who has at least one skill or tag matching at least one of the search items.
+Finds employees who has **at least one skill or tag matching** at least one of the search items.
 
 Format: `filter [s/SKILL]... [t/TAG]...`
 
@@ -229,13 +229,13 @@ Examples:
 
 Expected output:
 - System message noting success
-- Persons with skills above shown in the displayed person list
+- Persons with skills above shown in the displayed employee list
 
 [Return to Top](#table-of-contents)
 
-### Locating persons by name: `find`
+### Locating employees by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+**Finds employees whose names contain any of the given keywords.**
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -254,17 +254,17 @@ Examples:
 
 Expected output:
 - System message noting success
-- Persons matching criteria above shown in the displayed person list
+- Persons matching criteria above shown in the displayed employee list
 
 [Return to Top](#table-of-contents)
 
-### Deleting a person : `delete`
+### Deleting an employee : `delete`
 
-Deletes the specified person from the address book.
+**Deletes the specified employee** from the address book.
 
 Format: `delete INDEX`
 
-- Deletes the person at the specified `INDEX`.
+- Deletes the employee at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
@@ -275,19 +275,20 @@ Examples:
 
 Expected output:
 - System message noting success
-- Deleted person vanishes from displayed person list
+- Deleted employee vanishes from displayed employee list
 
 [Return to Top](#table-of-contents)
 
-### Clearing all entries : `clear`
+### Clearing all employee entries : `clear`
 
-Clears all entries from the address book.
+**Clears all employee entries** from the address book.
+**<span style="color:red">This deletes all employee data!</span>**
 
 Format: `clear`
 
 Expected output:
 - System message noting success
-- Displayed person list becomes empty
+- Displayed employee list becomes empty
 
 [Return to Top](#table-of-contents)
 
@@ -344,7 +345,7 @@ Expected output:
 
 ### Editing a project : `editproject`
 
-Edits an existing project in the address book.
+**Edits an existing project** in the address book.
 
 Format: `editproject INDEX [n/NAME] [s/SKILL]…​`
 
@@ -540,29 +541,30 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ## Command Summary
 
-| Action                      | Format, Examples                                                                                                                                                                                                         |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **- Employee Commands -**   |                                                                                                                                                                                                                          |
-| **Add Employee**            | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
-| **Clear Employees**         | `clear`                                                                                                                                                                                                                  |
-| **Delete Employee**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
-| **Edit Employee**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
-| **Filter Employees**        | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
-| **Find Employees**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
-| **List Employees**          | `listemployees`                                                                                                                                                                                                          |
-| **- Project Commands -**    |                                                                                                                                                                                                                          |
-| **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`                                                                                                                                |
-| **Clear Projects**          | `clearproject`                                                                                                                                                                                                           |
-| **Delete Project**          | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                                                                                                                        |
-| **Edit Project**            | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity`                                                                                                                       |
-| **Find Projects**           | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                                                                                                                                 |
-| **List Projects**           | `listproject`                                                                                                                                                                                                            |
-| **- Assignment Commands -** |                                                                                                                                                                                                                          |
-| **Add Assignment**          | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/1 id/1`                                                                                                                             |
-| **Delete Assignment**       | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                  |
-| **List Assignments**        | `listassignments`                                                                                                                                                                                                        |
-| **Other Commands**          |                                                                                                                                                                                                                          |
-| **Help**                    | `help`                                                                                                                                                                                                                   |
+| Action                          | Format, Examples                                                                                                                                                                                                         |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **- Employee Commands -**       |                                                                                                                                                                                                                          |
+| **Add Employee**                | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
+| **Clear Employees**             | `clear`                                                                                                                                                                                                                  |
+| **Delete Employee**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
+| **Edit Employee**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
+| **Filter Employees (by skill)** | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
+| **Find Employees (by name)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
+| **List Employees**              | `listemployees`                                                                                                                                                                                                          |
+| **- Project Commands -**        |                                                                                                                                                                                                                          |
+| **Add Project**                 | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`                                                                                                                                |
+| **Clear Projects**              | `clearproject`                                                                                                                                                                                                           |
+| **Delete Project**              | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                                                                                                                        |
+| **Edit Project**                | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity`                                                                                                                       |
+| **Find Projects**               | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                                                                                                                                 |
+| **List Projects**               | `listproject`                                                                                                                                                                                                            |
+| **- Assignment Commands -**     |                                                                                                                                                                                                                          |
+| **Add Assignment**              | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/1 id/1`                                                                                                                             |
+| **Delete Assignment**           | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                  |
+| **List Assignments**            | `listassignments`                                                                                                                                                                                                        |
+| **Other Commands**              |                                                                                                                                                                                                                          |
+| **Help**                        | `help`                                                                                                                                                                                                                   |
+| **Exit Program**                | `exit`                                                                                                                                                                                                                    |
 
 [Return to Top](#table-of-contents)
 
