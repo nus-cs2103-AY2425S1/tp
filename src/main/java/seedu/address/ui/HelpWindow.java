@@ -74,8 +74,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-
-        this.getRoot().setResizable(true);
         this.getRoot().setMinHeight(500);
         this.getRoot().setMinWidth(600);
 
