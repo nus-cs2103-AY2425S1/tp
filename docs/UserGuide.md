@@ -192,6 +192,37 @@ Notes:
 * COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
 * COURSE_NAME must only contain alphanumeric characters or spaces
 
+### Editing a course: `course-add`
+
+Edit by changing the name of a course in TAHub Contacts.
+
+Format: `course-edit c/COURSE_CODE n/COURSE_NAME`
+
+Examples:
+* course-edit c/CS1101S n/Programming Methodology 2
+* course-edit c/MA1522 n/Linear Algebra 2
+
+Notes:
+* COURSE_CODE must be an existing course code
+* COURSE_NAME is the new course name and must only contain alphanumeric characters or spaces
+* Note that it is not possible to edit the course code
+
+### Deleting a course: `course-delete`
+
+Deletes a course in TAHub Contacts.
+
+Format: `course-delete c/COURSE_CODE`
+
+Examples:
+* course-delete c/CS1101S
+
+Notes:
+* COURSE_CODE must be an existing course code
+
+<box type="warning" seamless>
+**Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
+</box>
+
 ### Enrolling a student : `enroll`
 
 Enrolls a student in a particular course and tutorial group.
