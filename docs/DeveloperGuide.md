@@ -301,6 +301,8 @@ testers are expected to do more _exploratory_ testing.
 
 7. Try deleting the public address by entering `deletepa 1 c/BTC` or `deletepa 1 c/BTC l/default`.
 
+8. Try filtering the persons with public addresses network by entering `filter c/BTC`.
+
 <box type = "success">
 
 Good job!🥳 You have tested the basic functionalities of the app. We recommend you to explore the app further to test more functionalities.
@@ -351,6 +353,18 @@ _{More to be added}_
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Filter persons by network**
+
+**MSS**
+
+1. User requests to filter persons by a specific network.
+2. AddressBook shows a list of persons with the specified network.
+
+**Extensions**
+
+- 2a. No persons have the specified network.
+  - 2a1. AddressBook shows an error message.
 
 **Use case: Delete a person**
 
