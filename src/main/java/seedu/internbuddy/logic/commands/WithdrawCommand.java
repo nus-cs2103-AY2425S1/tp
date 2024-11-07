@@ -29,7 +29,7 @@ public class WithdrawCommand extends Command {
             + PREFIX_APP_INDEX + "APPLICATION_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " c/1 app/1";
 
-    public static final String MESSAGE_WITHDRAW_APPLICATION_SUCCESS = "Withdrawn application: %1$s";
+    public static final String MESSAGE_WITHDRAW_APPLICATION_SUCCESS = "Withdrawn application for %2$s: %1$s";
 
     private final Index companyIndex;
     private final Index applicationIndex;
@@ -51,14 +51,16 @@ public class WithdrawCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (companyIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            throw new CommandException("Company "
+                    + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
         }
 
         Company companyToEdit = lastShownList.get(companyIndex.getZeroBased());
         List<Application> applicationList = new ArrayList<>(companyToEdit.getApplications());
 
         if (applicationIndex.getZeroBased() >= applicationList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
+            throw new CommandException("Application "
+                    + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, applicationList.size()));
         }
 
         Application applicationToWithdraw = applicationList.get(applicationIndex.getZeroBased());
@@ -71,7 +73,13 @@ public class WithdrawCommand extends Command {
                 newStatus, applicationList, companyToEdit.getIsFavourite(), false);
 
         model.setCompany(companyToEdit, editedCompany);
-        return new CommandResult(String.format(MESSAGE_WITHDRAW_APPLICATION_SUCCESS, applicationToWithdraw));
+        String successMessage = String.format(MESSAGE_WITHDRAW_APPLICATION_SUCCESS,
+                Messages.format(applicationToWithdraw), companyToEdit.getName());
+        if (applicationList.isEmpty()) {
+            return new CommandResult(successMessage + "\nNo more applications for "
+                    + companyToEdit.getName().fullName + ". Status has been set to CLOSED.");
+        }
+        return new CommandResult(successMessage);
     }
 
     public static Status getNewStatus(Company companyToEdit, List<Application> applicationList) {

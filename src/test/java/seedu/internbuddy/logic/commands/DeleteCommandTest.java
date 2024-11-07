@@ -3,6 +3,7 @@ package seedu.internbuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.internbuddy.logic.Messages.MESSAGE_INDEX_EXCEEDS_SIZE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.showCompanyAtIndex;
@@ -13,7 +14,6 @@ import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.core.index.Index;
-import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
 import seedu.internbuddy.model.UserPrefs;
@@ -44,9 +44,11 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
+        String expectedMessage = String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
@@ -75,8 +77,10 @@ public class DeleteCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCompanyList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        String expectedMessage = String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
