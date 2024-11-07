@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -36,6 +37,10 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
+        Set<Tag> sampleTags = getSampleTags();
+
+        sampleTags.forEach(sampleAb :: addTag);
+
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
@@ -51,4 +56,12 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns the tag set containing the list of predefined tags
+     */
+    public static Set<Tag> getSampleTags() {
+        return Stream.of("family", "classmates", "colleagues", "neighbours", "friends")
+                .map(Tag :: new)
+                .collect(Collectors.toSet());
+    }
 }
