@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -114,7 +113,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person personFromName(Name name) throws IllegalValueException {
+    public Person personFromName(Name name) {
         return addressBook.personFromName(name);
     }
 
@@ -131,6 +130,11 @@ public class ModelManager implements Model {
     @Override
     public void sortByPin() {
         addressBook.sortByPin();
+    }
+
+    @Override
+    public void sortByName() {
+        addressBook.sortByName();
     }
 
     // Archive related Methods
@@ -159,6 +163,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Predicate<Person> getFilteredPersonListPredicate() {
+        return (Predicate<Person>) filteredPersons.getPredicate();
     }
 
     @Override

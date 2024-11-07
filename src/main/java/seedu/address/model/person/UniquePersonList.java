@@ -9,7 +9,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -102,9 +101,9 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns the first person in the list with the specified {@code Name}.
      */
-    public Person personFromName(Name name) throws IllegalValueException {
-        return internalList.stream().filter(person -> person.getName().equals(name)).findFirst().orElseThrow(() -> new
-               IllegalValueException("Person named" + name.fullName + "does not exist"));
+    public Person personFromName(Name name) {
+        return internalList.stream().filter(person -> person.getName().equals(name)).findFirst().orElseThrow(
+                PersonNotFoundException::new);
     }
 
     /**
@@ -150,6 +149,13 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void sortByPin() {
         FXCollections.sort(internalList, Comparator.comparing(Person::isPinned).reversed());
+    }
+
+    /**
+     * Sorts the list by name.
+     */
+    public void sortByName() {
+        FXCollections.sort(internalList, Comparator.comparing(Person::getFullName));
     }
 
     /**

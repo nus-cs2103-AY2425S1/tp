@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
@@ -122,9 +121,19 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     *  Returns the predicate of the current filtered person list
+     */
+    Predicate<Person> getFilteredPersonListPredicate();
+
+    /**
      * Sorts the person list to put all pinned persons at the top of the list.
      */
     void sortByPin();
 
-    Person personFromName(Name name) throws IllegalValueException;
+    /**
+     * Sorts the person list according to their name.
+     */
+    void sortByName();
+
+    Person personFromName(Name name);
 }

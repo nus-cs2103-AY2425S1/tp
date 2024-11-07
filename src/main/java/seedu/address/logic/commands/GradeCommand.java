@@ -26,7 +26,7 @@ public class GradeCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing grade will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_GRADE + "[GRADE_INDEX] (must be an integer from 0 to 4)\n"
+            + PREFIX_GRADE + "GRADE_INDEX (must be an integer from 0 to 4)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GRADE + "1.";
 
@@ -60,8 +60,8 @@ public class GradeCommand extends Command {
         }
         Student studentToEdit = (Student) personToEdit;
         Student editedPerson = new Student(studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-                studentToEdit.getAddress(), studentToEdit.getEducation(), grade, studentToEdit.getParentName(),
-                personToEdit.getTags());
+                studentToEdit.getAddress(), studentToEdit.getLessonTime(), studentToEdit.getEducation(), grade,
+                studentToEdit.getParentName(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_UNARCHIVED_PERSONS);

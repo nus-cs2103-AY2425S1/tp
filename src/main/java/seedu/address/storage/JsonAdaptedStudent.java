@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
@@ -25,6 +26,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
     public static final String MISSING_PARENT_FIELD_MESSAGE_FORMAT = "Person's parent %s field is missing!";
 
+    private final String lessonTime;
     private final String education;
     private final String grade;
     private final String parentName;
@@ -35,10 +37,12 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("education") String education, @JsonProperty("grade") String grade,
-            @JsonProperty("parentName") String parentName, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArchived") boolean isArchived) {
+            @JsonProperty("lessonTime") String lessonTime, @JsonProperty("education") String education,
+            @JsonProperty("grade") String grade, @JsonProperty("parentName") String parentName,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned,
+            @JsonProperty("isArchived") boolean isArchived) {
         super("Student", name, phone, email, address, tags, isPinned, isArchived);
+        this.lessonTime = lessonTime;
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
@@ -49,6 +53,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      */
     public JsonAdaptedStudent(Student source) {
         super(source);
+        lessonTime = source.getLessonTime() == null ? null : source.getLessonTime().value;
         education = source.getEducation() == null ? null : source.getEducation().educationLevel;
         grade = source.getGrade() == null ? null : source.getGrade().gradeIndex;
         parentName = source.getParentName() == null ? null : source.getParentName().fullName;
@@ -102,6 +107,15 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (lessonTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LessonTime.class.getSimpleName()));
+        }
+        if (!LessonTime.isValidLessonTime(lessonTime)) {
+            throw new IllegalValueException(LessonTime.MESSAGE_CONSTRAINTS);
+        }
+        final LessonTime modelLessonTime = new LessonTime(lessonTime);
+
         if (education == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Education.class.getSimpleName()));
@@ -130,7 +144,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelEducation, modelGrade, modelParentName,
-                modelTags, isPinned, isArchived);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelLessonTime, modelEducation, modelGrade,
+                modelParentName, modelTags, isPinned, isArchived);
     }
 }

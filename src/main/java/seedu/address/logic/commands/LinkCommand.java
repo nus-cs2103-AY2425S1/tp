@@ -7,16 +7,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
@@ -29,18 +30,18 @@ public class LinkCommand extends Command {
     public static final String COMMAND_WORD = "link";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Links a Parent and a Student in a parent-child relationship"
-            + "Parameters: " + PREFIX_CHILD + "CHILD_NAME "
-            + PREFIX_PARENT + "PARENT_NAME\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CHILD + "John Doe "
-            + PREFIX_PARENT + "Jane Doe ";
+            + ": Links a Parent and a Student in a parent-child relationship\n"
+            + "Parameters: " + PREFIX_CHILD + "CHILD_NAME " + PREFIX_PARENT + "PARENT_NAME\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_CHILD + "John Doe " + PREFIX_PARENT + "Jane Doe\n"
+            + "Take note, names are case sensitive!";
 
     public static final String MESSAGE_SUCCESS = "Successfully linked Student: %1$s to Parent: %2$s";
     public static final String MESSAGE_PARENT_LINKED = "Parent: %1$s has an existing link to Student: %2$s";
     public static final String MESSAGE_CHILD_LINKED = "Student: %1$s has an existing link to Parent: %2$s";
-    public static final String MESSAGE_PARENT_NOT_FOUND = "Parent: %1$s does not exist in Address Book";
-    public static final String MESSAGE_CHILD_NOT_FOUND = "Student: %1$s does not exist in Address Book";
+    public static final String MESSAGE_PARENT_NOT_FOUND = "Parent: %1$s does not exist in Address Book.\n"
+            + "Take note, names are case sensitive!";
+    public static final String MESSAGE_CHILD_NOT_FOUND = "Student: %1$s does not exist in Address Book.\n"
+            + "Take note, names are case sensitive!";
 
     private final Name childName;
     private final Name parentName;
@@ -61,21 +62,21 @@ public class LinkCommand extends Command {
         Person child;
 
         try {
-            parent = model.personFromName(parentName);
-            if (!(parent instanceof Parent)) {
-                throw new CommandException(generateParentNotFoundMessage());
-            }
-        } catch (IllegalValueException e) {
-            throw new CommandException(generateParentNotFoundMessage());
-        }
-
-        try {
             child = model.personFromName(childName);
             if (!(child instanceof Student)) {
                 throw new CommandException(generateChildNotFoundMessage());
             }
-        } catch (IllegalValueException e) {
+        } catch (PersonNotFoundException e) {
             throw new CommandException(generateChildNotFoundMessage());
+        }
+
+        try {
+            parent = model.personFromName(parentName);
+            if (!(parent instanceof Parent)) {
+                throw new CommandException(generateParentNotFoundMessage());
+            }
+        } catch (PersonNotFoundException e) {
+            throw new CommandException(generateParentNotFoundMessage());
         }
 
         Parent castedParent = (Parent) parent;
@@ -96,6 +97,7 @@ public class LinkCommand extends Command {
         Phone phone = child.getPhone();
         Email email = child.getEmail();
         Address address = child.getAddress();
+        LessonTime lessonTime = child.getLessonTime();
         Education education = child.getEducation();
         Grade grade = child.getGrade();
         Name parentName = parent.getName();
@@ -103,7 +105,8 @@ public class LinkCommand extends Command {
         boolean isPinned = child.isPinned();
         boolean isArchived = child.isArchived();
 
-        return new Student(name, phone, email, address, education, grade, parentName, tags, isPinned, isArchived);
+        return new Student(name, phone, email, address, lessonTime, education, grade, parentName, tags,
+                isPinned, isArchived);
 
     }
 
