@@ -58,7 +58,7 @@ public class Cost {
         }
 
         Cost otherCost = (Cost) other;
-        return value.equals(otherCost.value);
+        return Double.valueOf(value).equals(Double.valueOf(otherCost.value));
     }
 
     @Override
