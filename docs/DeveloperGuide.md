@@ -268,7 +268,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**:
 * Manage students' schedules faster than a typical mouse/GUI driven app
-* Track income and the sale of learning materials, ensuring they get reimbursed while managing inventory effectively
 * Accommodate students who need to reschedule, making for a flexible scheduling tool
 * Track students' learning over time, enabling piano teachers to monitor students' grade and progress on piano pieces
 
