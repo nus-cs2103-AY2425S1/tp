@@ -311,8 +311,8 @@ Changes the application theme from light to dark or from dark to light.
 Format: `toggle`
 
 - If application is currently in light mode, toggle command will set it to dark mode.
-- If application is currently in dark mode, toggle command will set it to light mode.
-  Please note that our application does not save your theme preference, so it will always open in dark mode by default.
+- If application is currently in dark mode, toggle command will set it to light mode. 
+- Please note that our application does not save your theme preference, so it will always open in dark mode by default.
 
 Examples:
 
