@@ -60,7 +60,8 @@ public class EditCommand extends Command {
             + "Note: Lessons can be added or removed via the 'addlesson' or 'deletelesson' commands respectively.";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited student: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one of the following fields to edit must be provided:"
+            + " n/NAME p/PHONE e/EMAIL a/ADDRESS tg/TELEGRAM_USERNAME t/TAG";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
