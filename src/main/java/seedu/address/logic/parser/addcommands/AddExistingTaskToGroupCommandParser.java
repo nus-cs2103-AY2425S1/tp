@@ -16,7 +16,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GroupName;
+import seedu.address.model.group.Group;
 
 /**
  * Parses input arguments and creates a new AddExistingTaskToGroupCommand object.
@@ -40,12 +40,12 @@ public class AddExistingTaskToGroupCommandParser implements Parser<AddExistingTa
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-        List<GroupName> groupNameList = new ArrayList<>();
+        List<Group> groupList = new ArrayList<>();
         for (String s : argMultimap.getAllValues(PREFIX_GROUP_NAME)) {
-            groupNameList.add(ParserUtil.parseGroupName(s));
+            groupList.add(new Group(ParserUtil.parseGroupName(s)));
         }
 
-        return new AddExistingTaskToGroupCommand(index, groupNameList);
+        return new AddExistingTaskToGroupCommand(index, groupList);
 
     }
 
