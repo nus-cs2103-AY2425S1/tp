@@ -108,7 +108,7 @@ Cmd + Space
 ```
 
 ##### On Windows:
-Search for command prompt or powershell in the start menu.
+Search for command prompt or Powershell in the start menu.
 
 ##### On Linux:
 ```shell
@@ -144,33 +144,64 @@ Ctrl + Alt + T
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows the command summary and a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
 
-Adds a person to the address book.
+### Adding a Tutor: `addTutor`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Adds a Tutor to VolunTier.
+Format: `addTutor \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [s\ SUBJECT]…​’
+
+Examples:
+* `addTutor \n Alice Pauline \p 98722342 \e alicep@example.com \a Alice street, block 123, 999888 \s math \s science`
+* `addTutor \n John Doe \p 98765432 \e johnd@example.com \a Mingyang street, block 123, 888777 \h 6 \s english`
+
+
+### Adding a Tutee: `addTutee`
+
+Adds a tutee to VolunTier.
+
+Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [s\ SUBJECT]…​‘
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of subjects (including 0)
+**Tip:** Hours will default to 0 if it is not specified
+**Tip:** Phone number must be of 8 integers.
+**Tip:** Address must have any text followed by a comma and a 6-digit postal code.<br>
+e.g. `Tampines, 234678`.
+**Tip:** Hours must be a non-negative integer, with a maximum of 876,000 (100 years).
+
 </box>
 
+
+### Adding a Lesson: `addLesson`
+
+Add a lesson in VolunTier between a tutor and tutee. A lesson must have a tutor, a tutee and a subject.
+
+Format: `addLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT‘
+
+* Adds a lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX`.
+* The index refers to the index number shown in the displayed person list. * The index **must be a positive integer** 1, 2, 3, …​
+* The Tutor, Tutee, and the Lesson added must have matching subjects.
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addLesson 1 2 \s science`
+
+> [!TIP]
+> Check if lesson is added
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in VolunTier.
 
 Format: `list`
+
 
 ### Editing a person : `edit`
 
