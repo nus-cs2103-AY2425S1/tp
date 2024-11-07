@@ -257,10 +257,13 @@ Format: `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
 Additional Details:
 * The search is case-sensitive.
 * The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
-* You can filter by **tag, email, allergy, address and phone number**
+* You can filter by **tag, email, allergy, address, phone number and allergies**
 * Only full words will be matched e.g. `99999999` will not match `999`
-* Patients matching all features listed will be returned (i.e. `AND` search).
-* There can only be one of each feature as a maximum (i.e. cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not accepted.
+* Allergies is the only attribute that allows multiple parameters. For other attributes, there can only be one of each feature as a maximum (i.e. cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not accepted.
+* The filter search uses AND logic between different attributes (e.g., tag and allergies) — all specified attributes must match. If multiple allergies are specified, it uses OR logic — an entry will match allergies attribute if it has any one of the specified allergies, or all. 
+For example:
+filter t/High Risk m/Peanuts m/Dairy will return entries with the "High Risk" tag and any of the allergies "Peanuts" or "Dairy".
+filter m/Peanuts m/Dairy will return entries with either "Peanuts" or "Dairy" allergy, or both.
 * Filter requires at least one feature to filter by (e.g. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
   e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
 
@@ -270,9 +273,7 @@ Examples:
 * returns all patients who are at high risk AND have address `John street, block 123, #01-01`
   ![Example of Filter Command ](./images/FeatureFilterExample.png)
   <br></br>
-* `filter m/Penicillin p/88451234`
-  returns all patients who have an allergy to penicillin AND have the phone number `88451234`
-  <br></br>
+
 
 ### Deleting a patient : `delete`
 
@@ -402,7 +403,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Delete**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
 | **Edit**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                             |
 | **Find**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                              |
-| **Filter**           | `filter n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE [atleast one parameter]`<br> e.g., `filter t/High Risk`                                                          |
+| **Filter**           | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY] [atleast one parameter]`<br> e.g., `filter t/High Risk`                                                     |
 | **View**             | `view`                                                                                                                                                                                  |
 | **Help**             | `help`                                                                                                                                                                                  |
 | **Appointment Date** | `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE`                                                                                                                                       |
