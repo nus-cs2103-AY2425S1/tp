@@ -105,18 +105,64 @@ public class UpdateCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
+        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
-        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student updatedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
-        UpdateCommand updateCommand = new UpdateCommand(studentInFilteredList.getName(),
-                new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        StudentBuilder studentInList = new StudentBuilder(lastStudent);
+        Student updatedStudent = studentInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withLevel(VALID_LEVEL_S1_EXPRESS)
+                .withSubjects(VALID_SUBJECT_MATH).build();
 
-        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS,
-                Messages.format(updatedStudent));
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withLevel(VALID_LEVEL_S1_EXPRESS).withSubjects(VALID_SUBJECT_MATH).build();
+        UpdateCommand updateCommand = new UpdateCommand(lastStudent.getName(), descriptor);
+
+        String expectedMessage =
+                String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS, Messages.format(updatedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
+        expectedModel.setStudent(lastStudent, updatedStudent);
+
+        assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+    }
+
+    @Test
+    public void execute_levelNoneNoneNoSubjectsClearsSubjects_success() {
+        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
+        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+
+        StudentBuilder studentInList = new StudentBuilder(lastStudent);
+        Student updatedStudent = studentInList.withLevel("NONE NONE").withSubjects().build();
+
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withLevel("NONE NONE").build();
+        UpdateCommand updateCommand = new UpdateCommand(lastStudent.getName(), descriptor);
+
+        String expectedMessage =
+                String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS, Messages.format(updatedStudent));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(lastStudent, updatedStudent);
+
+        assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+    }
+
+    @Test
+    public void execute_levelNoneNoneWithSubjectsClearsSubjects_success() {
+        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
+        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+
+        StudentBuilder studentInList = new StudentBuilder(lastStudent);
+        Student updatedStudent = studentInList.withLevel("NONE NONE").withSubjects().build();
+
+        UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder().withLevel("NONE NONE").withSubjects("A_MATH", "PHYSICS").build();
+        UpdateCommand updateCommand = new UpdateCommand(lastStudent.getName(), descriptor);
+
+        String expectedMessage =
+                String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS, Messages.format(updatedStudent));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(lastStudent, updatedStudent);
 
         assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
@@ -197,7 +243,6 @@ public class UpdateCommandTest {
 
     @Test
     public void execute_invalidLevelForStudentSubjects_failure() {
-
         Student studentInList = model.getAddressBook()
                 .getStudentList()
                 .get(INDEX_SECOND_STUDENT
@@ -210,10 +255,11 @@ public class UpdateCommandTest {
         UpdateStudentDescriptor descriptor =
                 new UpdateStudentDescriptorBuilder()
                         .withLevel("S3 Express")
+                        .withSubjects("SCIENCE")
                         .build();
 
         String expectedMessage = "Subject is not valid for given level. "
-                + "Valid subjects for S3 EXPRESS: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "Valid subjects for S3 EXPRESS: [MATH, A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
                 + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
                 + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
                 + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";

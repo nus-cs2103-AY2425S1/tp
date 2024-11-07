@@ -35,7 +35,6 @@ import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 import seedu.address.ui.Ui.UiState;
 
 public class TagCommandTest {
-
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -182,10 +181,11 @@ public class TagCommandTest {
         UpdateStudentDescriptor descriptor =
                 new UpdateStudentDescriptorBuilder()
                         .withLevel("S3 Express")
+                        .withSubjects("science")
                         .build();
 
         String expectedMessage = "Subject is not valid for given level. "
-                + "Valid subjects for S3 EXPRESS: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "Valid subjects for S3 EXPRESS: [MATH, A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
                 + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
                 + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
                 + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
@@ -218,7 +218,7 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_doesNotClearSubjectsWhenLevelNoneNoneAndSubjectsProvided() {
+    public void execute_clearsSubjectsWhenLevelNoneNoneAndSubjectsProvided() {
         Student studentInList = model.getAddressBook()
                 .getStudentList()
                 .get(INDEX_SECOND_STUDENT
@@ -234,8 +234,11 @@ public class TagCommandTest {
                         .withSubjects("MATH")
                         .build();
         TagCommand tagCommand = new TagCommand(studentInList.getName(), descriptor);
+        Student finalStudent = new StudentBuilder(studentInList).withLevel("NONE NONE").withSubjects().build();
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_STUDENT_SUCCESS,
+                Messages.format(finalStudent));
 
-        assertCommandFailure(tagCommand, model, "Tag a student with a level first or in the same command");
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, model);
     }
 
     @Test

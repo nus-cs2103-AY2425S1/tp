@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddTaskCommand.MESSAGE_DUPLICATE_TASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
@@ -108,7 +109,7 @@ public class UpdateTaskCommand extends Command {
      * updated with {@code updateTaskDescriptor} at the specified task index.
      */
     private static Student createUpdatedStudent(Student studentToUpdate, Index taskIndex,
-                                                UpdateTaskDescriptor updateTaskDescriptor) {
+                                                UpdateTaskDescriptor updateTaskDescriptor) throws CommandException {
         assert studentToUpdate != null;
 
         Task originalTask = studentToUpdate.getTaskList().get(taskIndex.getZeroBased());
@@ -117,6 +118,11 @@ public class UpdateTaskCommand extends Command {
         TaskDeadline updatedTaskDeadline = updateTaskDescriptor.getTaskDeadline()
                 .orElse(originalTask.getTaskDeadline());
         Task updatedTask = new Task(updatedTaskDescription, updatedTaskDeadline);
+
+        if (studentToUpdate.getTaskList().contains(updatedTask)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+
         TaskList updatedTaskList = studentToUpdate.getTaskList().updateTask(taskIndex, updatedTask);
 
         return new Student(

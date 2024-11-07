@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.AddTaskCommand.MESSAGE_DUPLICATE_TASK;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_TASK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_TASK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -12,8 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
-
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,29 +42,26 @@ public class UpdateTaskCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student updatedStudent = model.getAddressBook().getStudentList().get(1);
-        Task updatedTask = updatedStudent.getTaskList().get(0);
-        UpdateTaskDescriptor descriptor = new UpdateTaskDescriptorBuilder(updatedTask).build();
+        Student targetStudent = model.getAddressBook().getStudentList().get(1);
+        Task lastTask = targetStudent.getTaskList().get(1);
+
+        TaskBuilder newTask = new TaskBuilder(lastTask);
+        Task updatedTask = newTask.withTaskDescription("Prepare test").withTaskDeadline("2024-12-25").build();
+
+        StudentBuilder studentInList = new StudentBuilder(targetStudent);
+        Student updatedStudent = studentInList.withTaskList(targetStudent.getTaskList().get(0), updatedTask).build();
+
+        UpdateTaskDescriptor descriptor = new UpdateTaskDescriptorBuilder().withTaskDescription("Prepare test")
+                .withTaskDeadline("2024-12-25").build();
         UpdateTaskCommand updateTaskCommand =
-                new UpdateTaskCommand(updatedStudent.getName(), INDEX_FIRST_TASK, descriptor);
+                new UpdateTaskCommand(targetStudent.getName(), INDEX_SECOND_TASK, descriptor);
 
         String expectedMessage =
                 String.format(UpdateTaskCommand.MESSAGE_UPDATE_TASK_SUCCESS,
-                        updatedTask.getTaskDescription(), updatedStudent.getName(), updatedTask.getTaskDeadline());
+                        updatedTask.getTaskDescription(), targetStudent.getName(), updatedTask.getTaskDeadline());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        Optional<Student> studentToUpdate = model.getAddressBook()
-                .getStudentList()
-                .stream()
-                .filter(student -> student.getName().equals(updatedStudent.getName()))
-                .findFirst();
-
-        if (studentToUpdate.isPresent()) {
-            expectedModel.setStudent(studentToUpdate.get(), updatedStudent);
-        } else {
-            throw new IllegalStateException("Student to update not found");
-        }
+        expectedModel.setStudent(targetStudent, updatedStudent);
         expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
 
         assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
@@ -124,23 +120,6 @@ public class UpdateTaskCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        Student updatedStudent = model.getFilteredStudentList().get(1);
-        Task updatedTask = updatedStudent.getTaskList().get(0);
-        UpdateTaskCommand updateTaskCommand =
-                new UpdateTaskCommand(updatedStudent.getName(), INDEX_FIRST_TASK, new UpdateTaskDescriptor());
-
-        String expectedMessage =
-                String.format(UpdateTaskCommand.MESSAGE_UPDATE_TASK_SUCCESS,
-                        updatedTask.getTaskDescription(), updatedStudent.getName(), updatedTask.getTaskDeadline());
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
-
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
         showStudentAtIndex(model, INDEX_SECOND_STUDENT);
 
@@ -165,6 +144,32 @@ public class UpdateTaskCommandTest {
         expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
 
         assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
+    }
+
+    @Test
+    public void execute_updatedTaskAlreadyExists_throwsCommandException() {
+        Student updatedStudent = model.getFilteredStudentList().get(1);
+        Task target = updatedStudent.getTaskList().get(0);
+
+        UpdateTaskDescriptor duplicateTask = new UpdateTaskDescriptorBuilder()
+                .withTaskDescription(target.getTaskDescription().toString())
+                .withTaskDeadline(target.getTaskDeadline().toString()).build();
+
+        UpdateTaskCommand updateTaskCommand =
+                new UpdateTaskCommand(updatedStudent.getName(), INDEX_SECOND_TASK, duplicateTask);
+
+        assertCommandFailure(updateTaskCommand, model, MESSAGE_DUPLICATE_TASK);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_throwsCommandException() {
+        // No fields are specified for updating, meaning the task's description and deadline
+        // will default to the values of the existing task, resulting in a duplicate.
+        Student updatedStudent = model.getFilteredStudentList().get(1);
+        UpdateTaskCommand updateTaskCommand =
+                new UpdateTaskCommand(updatedStudent.getName(), INDEX_FIRST_TASK, new UpdateTaskDescriptor());
+
+        assertCommandFailure(updateTaskCommand, model, MESSAGE_DUPLICATE_TASK);
     }
 
     @Test

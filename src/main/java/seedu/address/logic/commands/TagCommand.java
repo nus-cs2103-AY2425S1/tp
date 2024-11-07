@@ -105,7 +105,7 @@ public class TagCommand extends Command {
         Optional<Set<Subject>> newSubjects = tagsToAdd.getSubjects();
         Set<Subject> updatedSubjects = newSubjects.orElse(studentToTag.getSubjects());
 
-        if (updatedLevel.equals(new Level("None None")) && newSubjects.isEmpty()) {
+        if (updatedLevel.equals(new Level("None None"))) {
             updatedSubjects = new HashSet<Subject>();
         }
 

@@ -114,7 +114,13 @@ public class UpdateCommand extends Command {
         Address updatedAddress = updateStudentDescriptor.getAddress().orElse(studentToUpdate.getAddress());
         Note updatedNote = updateStudentDescriptor.getNote().orElse(studentToUpdate.getNote());
         Level updatedLevel = updateStudentDescriptor.getLevel().orElse(studentToUpdate.getLevel());
-        Set<Subject> updatedSubjects = updateStudentDescriptor.getSubjects().orElse(studentToUpdate.getSubjects());
+
+        Optional<Set<Subject>> newSubjects = updateStudentDescriptor.getSubjects();
+        Set<Subject> updatedSubjects = newSubjects.orElse(studentToUpdate.getSubjects());
+
+        if (updatedLevel.equals(new Level("None None"))) {
+            updatedSubjects = new HashSet<Subject>();
+        }
 
         if (!updatedSubjects.isEmpty()) {
             if (!Subject.isValidSubjectsByLevel(updatedLevel,
