@@ -76,6 +76,12 @@ public class EmailTest {
         // same object -> returns true
         assertTrue(email.equals(email));
 
+        // upper or lower case values -> returns true
+        assertTrue(email.equals(new Email("VALID@email"))); // upper case local part
+        assertTrue(email.equals(new Email("valid@EMAIL"))); // upper case domain part
+        assertTrue(email.equals(new Email("VALID@EMAIL"))); // upper case both local and domain parts
+        assertTrue(email.equals(new Email("vAlId@EMaiL"))); // a mix of upper and lower case
+
         // null -> returns false
         assertFalse(email.equals(null));
 
