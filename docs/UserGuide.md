@@ -159,7 +159,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the FART book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-**Note:** 
+**Note:**
 1. As a `delete` command cannot be undone, the FART Book will first prompt you to confirm that the
  contact that you want to delete is correct. If you select `No`, the deletion will be aborted.
 ### Clearing all entries : `clear`

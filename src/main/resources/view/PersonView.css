@@ -58,14 +58,6 @@
     -fx-vgap: 4;
 }
 
-.tag-label {
-    -fx-background-color: #4a90e2;
-    -fx-text-fill: white;
-    -fx-padding: 4 8;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-}
-
 .other-label-name {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
@@ -96,4 +88,3 @@
     -fx-background-radius: 5;
     -fx-font-weight: bold;
 }
-
