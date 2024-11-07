@@ -39,12 +39,19 @@ This section introduces the HiredFiredPro layout, command format and commonly us
 
 * If you are interested in setting up and using HiredFiredPro, head over to the [Quick Start](#quick-start) section.
 * If you are interested in learning more about the features, you can visit the [Features](#features) section.
+<br><br>
 
 ### HiredFiredPro Layout
 
 The image below shows the different components of HiredFiredPro.
 
 ![HiredFiredPro_layout](images/UI-Layout.png)
+
+* **Command Input Line:** You can type your commands here and execute them by pressing Enter.
+* **Result panel:** Displays the results of the command that has been executed.
+* **Candidate panel:** Displays the complete or filtered list of candidates.
+* **Display panel:** Displays the details of a candidate.
+<br><br>
 
 ### Command Format
 
@@ -56,13 +63,14 @@ The image below shows the different components of HiredFiredPro.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Remote` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Contract`, `t/Contract t/Remote` etc.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
+<br><br>
 
 ### Commonly Used Parameters
 
@@ -75,7 +83,7 @@ The image below shows the different components of HiredFiredPro.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  </box>
+</box>
 
 Parameter     | Notes
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,8 +157,8 @@ Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE 
 </box>
 
 Examples:
-* `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com i/5.0`
-* `add n/Betsy Crowe j/Software Tester t/friend e/betsycrowe@example.com  p/1234567 i/7 s/Python s/Java`
+* `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com i/5.0 t/Remote`
+* `add n/Betsy Crowe j/Software Tester t/Hybrid e/betsycrowe@example.com  p/1234567 i/7 s/Python s/Java`
 <br><br>
 
 ### Listing all candidates: `list`
@@ -189,10 +197,11 @@ Format: `hire n/NAME j/JOB`
 * Changes the candidate's status to `Hired`.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Hired` status.
-* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`.
-* Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`.
+
+<box type="tip">
+
+**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `hire n/Hans j/Software Engineer` and `hire n/hans j/SOFTWARE engineer` will mark the candidate as hired.
+</box>
 <br><br>
 
 ### Rejecting a candidate: `reject`
@@ -204,25 +213,27 @@ Format: `reject n/NAME j/JOB`
 * Changes the candidate's status to `Rejected`.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Rejected` status.
-* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`.
-* Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`.
+
+<box type="tip">
+
+**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `reject n/Hans j/Software Engineer` and `reject n/hans j/SOFTWARE engineer` will mark the candidate as rejected.
+</box>
 <br><br>
 
 ### View a candidate's status: `view`
 
-Shows a candidate's status in HiredFiredPro.
+Shows a candidate's status and details in HiredFiredPro.
 
 Format: `view n/NAME j/JOB`
 
-* Views the candidate's status (Hired / Rejected / Pending).
+* Views the candidate's status (Hired / Rejected / Pending) and full details.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
-* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`.
-* Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`.
 * Details of the candidate being viewed will be displayed in the display panel.
+
+<box type="tip">
+
+**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `view n/Hans j/Software Engineer` and `view n/hans j/SOFTWARE engineer` will show the candidate's status and details.
+</box>
 
 Examples:
 * `view n/Alex Yeoh j/Software Engineer` displays the details of candidate Alex Yeoh in the display panel, as shown below:
@@ -318,11 +329,12 @@ Format: `exit`
 **A**: HiredFiredPro data are saved automatically as a JSON file `[JAR file location]/data/hiredfiredpro.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning">
-**Caution:**
-If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+
+**Caution:** If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 <br><br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -338,7 +350,7 @@ Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **List**   | `list`
-**Add**    | `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE  [t/TAG]…​` <br> e.g., `add n/James Ho j/Site Reliability Engineer p/22224444 e/jamesho@example.com s/python s/java i/8.5 t/friend`
+**Add**    | `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE  [t/TAG]…​` <br> e.g., `add n/James Ho j/Site Reliability Engineer p/22224444 e/jamesho@example.com s/python s/java i/8.5 t/Remote`
 **Edit**   | `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVIEW_SCORE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Hire**   | `hire n/NAME j/JOB`<br> e.g., `hire n/James Jake j/Software Engineer`
