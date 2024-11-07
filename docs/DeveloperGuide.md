@@ -249,7 +249,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 1 (current choice):** Saves entire Prudy.
   * Pros: Easy to implement. Each state is a complete snapshot of `Prudy`, making it simple to revert to previous states by just moving the `currentStatePointer`.
-  * Cons: Man lead to memory issues, especially if the `Prudy` state is large and changes frequently, as each modification requires storing a full snapshot.
+  * Cons: May lead to memory issues, especially if the `Prudy` state is large and changes frequently, as each modification requires storing a full snapshot.
 
 
 * **Alternative 2:** Command-specific undo/redo (Individual command knows how to undo/redo by itself.)
