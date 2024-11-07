@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -35,8 +37,34 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOBCODE,
                         PREFIX_TAG, PREFIX_REMARK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_JOBCODE, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG)
-                || !argMultimap.getPreamble().isEmpty()) {
+        // Check for missing prefixes
+        List<String> missingFields = new ArrayList<>();
+
+        if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            missingFields.add("Name");
+        }
+        if (!argMultimap.getValue(PREFIX_JOBCODE).isPresent()) {
+            missingFields.add("Job Code");
+        }
+        if (!argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            missingFields.add("Phone");
+        }
+        if (!argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            missingFields.add("Email");
+        }
+        if (!argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            missingFields.add("Tag");
+        }
+
+        // Check if there is any additional content in the preamble
+        if (!missingFields.isEmpty()) {
+            throw new ParseException(String.format("Invalid command format! Missing fields: %s\n%s",
+                    String.join(", ", missingFields),
+                    String.format(AddCommand.MESSAGE_USAGE)));
+        }
+
+        String preamble = argMultimap.getPreamble();
+        if (!preamble.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
