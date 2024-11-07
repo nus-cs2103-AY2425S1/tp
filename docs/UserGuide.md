@@ -33,7 +33,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar t_assistant.jar`
    command to run the application.<br>
    *A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.*<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" width="600">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
@@ -109,7 +109,7 @@ Shows a list of all students in the T_Assistant.
 
 This screenshot shows the result of executing `list_s`.
 
-![list_students](images/screenshots/list_students.png)
+<img src="images/screenshots/list_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -136,7 +136,7 @@ Adds a student to T_Assistant.
 
 This screenshot shows the result of executing `add_s sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9`.
 
-![add_student](images/screenshots/add_student.png)
+<img src="images/screenshots/add_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,7 +161,7 @@ Deletes a student from T_Assistant.
 
 This screenshot shows the result of executing `del_s sno/A0123456A`.
 
-![delete_student](images/screenshots/del_s.png)
+<img src="images/screenshots/del_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -173,9 +173,9 @@ Edits the details of a student.
 
 ##### Notes
 
-1. `edit_s` edits the student identified by the index. It only accepts a valid index
-   based on the list when `list_s` is called.
-2. For information on the constraints for each parameter used in this command, go
+1. `edit_s` edits the student identified by the index. It only accepts a valid index based on the list when `list_s` is called.
+2. Since `Student Number` is the unique identifier for each student, `Student Number` can't be edited.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -187,7 +187,7 @@ Edits the details of a student.
 
 This screenshot shows the result of executing `edit_s i/2 sn/Bernice Yu Ting Kang`.
 
-![edit_student](images/screenshots/edit_s.png)
+<img src="images/screenshots/edit_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -205,14 +205,14 @@ Adds student(s) to a group.
 
 ##### Usage Scenario
 
-###### Scenario #1: Adding `James Ho` to `CS2103-F11-1`
+###### Scenario #1: Adding `Roy Balakrishnan` to `CS2103-F11-1`
 
 1. You can begin this command on any panel.
-2. Type and execute: `add_s_g sno/A0123456A gn/CS2103-F11-1`
+2. Type and execute: `add_s_g sno/A0122764H gn/CS2103-F11-1`
 
-This screenshot shows the result of executing `add_s_g sno/A0123456A gn/CS2103-F11-1`.
+This screenshot shows the result of executing `add_s_g sno/A0122764H gn/CS2103-F11-1`.
 
-![add_s_g](images/screenshots/add_s_g.png)
+<img src="images/screenshots/add_s_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,21 +224,22 @@ Deletes a student from its assigned group.
 
 ##### Notes
 
-1. This feature only removes a student from a group, not from T_Assistant.
+1. This command only removes a student from a group, not from T_Assistant.
 2. The student must exist in T_Assistant and be in a group.
-3. For information on the constraints for each parameter used in this command, go
+3. Since a student can only be in one group, it will automatically remove the student from the group it is in.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
 
-###### Scenario #1: Deleting `James Ho` from `CS2103-F11-1`
+###### Scenario #1: Deleting `Alex Yeoh` from `CS2103-F12-1`
 
 1. You can begin this command on any panel.
-2. Type and execute: `del_s_g sno/A0123456A`
+2. Type and execute: `del_s_g sno/A0737935G`
 
-This screenshot shows the result of executing `del_s_g sno/A0123456A`.
+This screenshot shows the result of executing `del_s_g sno/A0737935G`.
 
-![del_s_g](images/screenshots/del_s_g.png)
+<img src="images/screenshots/del_s_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -252,7 +253,6 @@ Searches T_Assistant for students with fields that match the search query.
 
 1. The command will only match full words. You may search for part of a person's name such as `Doe` to find `John Doe`.
    > i.e. `Do` will not match `Doe` and `berniceyu` will not match `berniceyu@u.nus.edu`
-
 2. Searches the following fields that a student has that matches the query:
 
     * Student name
@@ -278,7 +278,7 @@ Take note that if any other student with a group happens to have a field that ma
 
 This screenshot shows the result of executing `find_s q/TD7 q/Olveiro`.
 
-![find_student](images/screenshots/find_s.png)
+<img src="images/screenshots/find_s.png" width="600">
 
 ###### Scenario #2: Find students with no groups
 
@@ -287,7 +287,7 @@ This screenshot shows the result of executing `find_s q/TD7 q/Olveiro`.
 
 This screenshot shows the result of executing `find_s q/!nogroup`.
 
-![find_student_nogrp.png](images/screenshots/find_s_nogroup.png)
+<img src="images/screenshots/find_s_nogroup.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -299,7 +299,7 @@ Sorts the list of students in alphabetical order.
 
 This screenshot shows the result of executing `sort_s`.
 
-![sort_s](images/screenshots/sort_s.png)
+<img src="images/screenshots/sort_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -315,7 +315,8 @@ Shows a list of all groups in the T_Assistant.
 
 This screenshot shows the result of executing `list_g`.
 
-![list_groups](images/screenshots/lg.png)
+<img src="images/screenshots/list_g.png" width="600">
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Group: `add_g`, `ag`
@@ -330,27 +331,19 @@ Adds a group to the T_Assistant。
 2. Group names must follow a three-part format: course type: either `CS2103` or `CS2103T`;
 tutorial group: a letter followed by a number;
 group number: any number
-2. For information on the constraints for each parameter used in this command, go
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
-
-<box type="warning" seamless>
-
-**Caution:**
-The command will stop running the moment it hits an error.
-
-For example `add_g gn/CS2103-F11-3`
-
-</box>
 
 ##### Usage Scenario
 
-###### Scenario #1
+###### Scenario #1: Adding group `CS2103T-T10-1`
+
 1. You can begin this command on any panel.
-2. Type and execute: `add_g gn/CS2103-F11-3`
+2. Type and execute: `add_g gn/CS2103T-T10-1`
 
-This screenshot shows the result of executing `add_g gn/CS2103-F11-3`.
+This screenshot shows the result of executing `add_g gn/CS2103T-T10-1`.
 
-![add_group](images/screenshots/ag.png)
+<img src="images/screenshots/add_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -370,14 +363,14 @@ Deletes the specified group from T_Assistant.
 
 ##### Usage Scenario
 
-###### Scenario #1: Deleting a group `CS2103-F12-2`
+###### Scenario #1: Deleting group `CS2103-F12-2`
 
-1. Type and execute: `list_g` to see the list of groups.
-2. After finding `CS2103-F12-2`, type and execute: `del_g gn/CS2103-F12-2`
+1. You can begin this command on any panel.
+2. Type and execute: `del_g gn/CS2103-F12-2`
 
 This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
 
-![del_g.png](images/screenshots/del_g.png)
+<img src="images/screenshots/del_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -389,18 +382,21 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. `edit_g` edits the group identified by the index. It only accepts a valid index
+   based on the list when `list_g` is called.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Editing `CS2103-F11-3` to `CS2103T-F11-3`
 
-###### Scenario #1
+1. Execute `list_g` to see the list of groups.
+2. Type and execute: `edit_g i/3 gn/CS2103T-F11-3`
 
-This screenshot shows the result of executing `edit_g i/1 gn/CS2103-F12-3`.
+This screenshot shows the result of executing `edit_g i/3 gn/CS2103T-F11-3`.
+
+<img src="images/screenshots/edit_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -421,14 +417,14 @@ Searches T_Assistant for groups with fields that match the search query.
 
 ##### Usage Scenario
 
-###### Scenario #1: Find groups with the following query - `F12`
+###### Scenario #1: Finding groups with the following query - `F11`
 
 1. You can begin this command on any panel.
-2. Type and execute: `find_g q/F12`
+2. Type and execute: `find_g q/F11`
 
-This screenshot shows the result of executing `find_g q/F12`.
+This screenshot shows the result of executing `find_g q/F11`.
 
-![find_g.png](images/screenshots/find_g.png)
+<img src="images/screenshots/find_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -438,9 +434,9 @@ Sorts the list of groups in alphabetical order.
 
 **Format**: `sort_g`
 
-This screenshot shows the result of executing `sort_s`.
+This screenshot shows the result of executing `sort_g`.
 
-![sort_g](images/screenshots/sg.png)
+<img src="images/screenshots/sort_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -454,8 +450,31 @@ Shows a list of all tasks in the T_Assistant.
 
 **Format**: `list_t [gn/GROUP_NAME]`
 
+##### Notes
+
+1. If there's a `Group Name`, all of the tasks in that group will be listed.
+2. For information on the constraints for each parameter used in this command, go
+   to [Command Parameters](#command-parameters).
+
+##### Usage Scenario
+
+###### Scenario #1: Listing all tasks in all groups
+
+1. You can begin this command on any panel.
+2. Type and execute: `list_t`
+
 This screenshot shows the result of executing `list_t`.
-![list_t](images/screenshots/lt.png)
+
+<img src="images/screenshots/list_t.png" width="600">
+
+###### Scenario #2: Listing all tasks in `CS2103-F11-1`
+
+1. You can begin this command on any panel.
+2. Type and execute: `list_t gn/CS2103-F11-1`
+
+This screenshot shows the result of executing `list_t gn/CS2103-F11-1`.
+
+<img src="images/screenshots/list_t_group.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -478,61 +497,26 @@ Adds a task to a group or multiple groups.
 
 ##### Usage Scenario
 
-###### Scenario #1: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-`CS2103-F12-2` and `CS2103-F11-1`. This is the default scenario where the task does not already exist and both 
-groups exist. 
+###### Scenario #1: Adding a task with the name of `Complete task 4` and deadline of `2024-11-15 1700` to groups `CS2103-F12-1` and `CS2103-F11-1`
+This is the default scenario where the task does not already exist and both groups exist. 
 
 1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
+2. Type `add_t_g tn/Complete task 4 td/2024-11-15 1700 gn/CS2103-F12-1 gn/CS2103-F11-1`.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
+This screenshot shows the result of executing `add_t_g tn/Complete task 4 td/2024-11-15 1700 gn/CS2103-F12-1 gn/CS2103-F11-1`.
 
-###### Scenario #2: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-`CS2103-F12-2` and `CS2103-F11-1` when `Do Homework` already exists.
+<img src="images/screenshots/add_t_g_1.png" width="600">
 
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
-3. This will yield an error message.
-
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
-
-###### Scenario #3: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-`CS2103-F13-2` and `CS2103-F11-1` when `CS2103-F13-1` does not exist.
+###### Scenario #2: Adding a task with the name of `Complete task 5` and deadline of `2024-12-30 1900` to groups `CS2103-F11-1` and `CS2103-F13-2` when `CS2103-F13-2` does not exist.
 
 1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
+2. Type `add_t_g tn/Complete task 5 td/2024-12-30 1900 gn/CS2103-F11-1 gn/CS2103-F13-2`.
 3. Since `CS2103-F11-1` exists, the command will still allow you to add the task into the group. However, it will display
-   an additional warning message regarding the input `CS2103-F13-1` which does not exist.
+   an additional warning message regarding the input `CS2103-F13-2` which does not exist.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
+This screenshot shows the result of executing `add_t_g tn/Complete task 5 td/2024-12-30 1900 gn/CS2103-F11-1 gn/CS2103-F13-2`.
 
-###### Scenario #4: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-`CS2103-F13-2` and `CS2103-F14-1` when both groups do not exist.
-
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
-3. Now, the command should throw an error message because both groups are non-existent.
-
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
-
-##### Scenario #5: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-`CS2103-F12-1` and `CS2103-F12-1` when the group exists.
-
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
-3. The command functionally ignores the duplicates and add the task into the group specified. It will also display a 
-   warning message to you.
-
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
-
-##### Scenario #6: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-`CS2103-F14-1` and `CS2103-F14-1` when the group does not exist.
-
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
-3. The command should yield an error message.
-
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F14-1 gn/CS2103-F14-1`.
+<img src="images/screenshots/add_t_g_2.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -550,13 +534,14 @@ Adds a task to all groups.
 
 ##### Usage Scenario
 
-###### Scenario #1: Executing `add_t tn/Submit Postmortem td/2024-10-20 1800`
-1. The task will be added to all groups.
+###### Scenario #1: Executing `add_t tn/Complete task 6 td/2024-10-20 1800`
 
-###### Scenario #2: Executing `add_t tn/Submit Postmortem td/2024-10-20`
-1. An error message will be shown because the task deadline has an incorrect format.
+1. You can begin this command on any panel.
+2. Type and execute `add_t tn/Complete task 6 td/2024-10-20 1800`.
 
-This screenshot shows the result of executing `add_t tn/Submit Postmortem td/2024-10-20 1800`.
+This screenshot shows the result of executing `add_t tn/Complete task 6 td/2024-10-20 1800`.
+
+<img src="images/screenshots/add_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -570,8 +555,10 @@ Adds an existing task to the groups specified.
 
 1. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-2. You can add an existing task to multiple groups.
-3. For information on the constraints for each parameter used in this command, go
+2. `add_et_g` adds an existing task identified by the index. It only accepts a valid index
+   based on the list when `list_t` is called.
+3. You can add an existing task to multiple groups.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 <box type="warning" seamless>
@@ -579,37 +566,37 @@ Adds an existing task to the groups specified.
 **Caution:**
 The command will stop running the moment it hits an error.
 
-For example `add_et_g i/1 gn/CS2103-F11-2 gn/CS2103-F12-2 gn/CS2103-F13-1`
+For example `add_et_g i/1 gn/CS2103-F11-1 gn/CS2103-F11-2`
 
-If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
-`CS2103-F13-1`.
+If the group `CS2103-F11-1` already has the task, the command will only add the task to `CS2103-F11-2` and not
+`CS2103-F11-1`.
 
 </box>
 
 ##### Usage Scenario
 
-###### Scenario #1: Add task with index `1` to `CS2103-S1-21`
+###### Scenario #1: Adding task in index `1` to `CS2103T-T10-1`
 
 1. Type and execute: `list_t` to see the list of tasks.
 2. After finding the task you wish to add, remember its index number (task with index 1 in this example).
 3. You may wish to execute `list_g` to check on the names of groups you wish to add the task to.
-4. Type and execute: `add_et_g i/1 gn/CS2103-S1-21`
+4. Type and execute: `add_et_g i/1 gn/CS2103T-T10-1`
 
-This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-S1-21`.
+This screenshot shows the result of executing `add_et_g i/1 gn/CS2103T-T10-1`.
 
-![add_existing_task_to_group.png](images/screenshots/add_et_g.png)
+<img src="images/screenshots/add_et_g_1.png" width="600">
 
-###### Scenario #2: Add task that is already in a group
+###### Scenario #2: Adding task with index `1` that is already in `CS2103-F11-1`
 
 1. Type and execute: `list_t` to see the list of tasks.
 2. After finding the task you wish to add, remember its index number (task with index 1 in this example).
 3. You may wish to execute `list_g` to check on the names of groups you wish to add the task to.
-4. Type and execute: `add_et_g i/1 gn/CS2103-S1-21`
+4. Type and execute: `add_et_g i/1 gn/CS2103-F11-1 gn/CS2103-F11-2`
 5. You will get an error message.
 
-This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-S1-21`.
+This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-F11-1 gn/CS2103-F11-2`.
 
-![add_existing_task_to_group_err.png](images/screenshots/add_et_g_err.png)
+<img src="images/screenshots/add_et_g_2.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -622,19 +609,25 @@ Deletes a task from a group.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-2. This command is case-insensitive.
+2. `del_t_g` deletes a task identified by the index. It only accepts a valid index
+      based on the list when `list_t` is called.
+3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-3. For information on the constraints for each parameter used in this command, go
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
+
+###### Scenario #1: Deleting task with index `1` from `CS2103-F11-1`
+
 1. Type and execute: `list_t gn/CS2103-F11-1` to see the list of tasks in `CS2103-F11-1`.
 2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this example).
-3. Type and execute: `del_t_g i/1 gn/CS2103-S1-21`
-###### Scenario #1 Delete task with index 1 from `CS2103-F11-1`
+3. Type and execute: `del_t_g i/1 gn/CS2103-F11-1`
 
 This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F11-1`.
-![delete_t_g.png](images/screenshots/dtg.png)
+
+<img src="images/screenshots/del_t_g.png" width="600">
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Task from ALL Groups: `del_t`, `dt`
@@ -651,12 +644,14 @@ Delete a task from all groups that contain it.
 
 ##### Usage Scenario
 
-###### Scenario #1 Delete task with index 2
+###### Scenario #1: Deleting task in index `2`
+
 1. Type and execute: `list_t` to see the list of tasks.
-2. After finding the task you wish to add, remember its index number (task with index 2 in this example).
-3. Type and execute: `edit_t i/2 gn/CS2103-F`
+2. Type and execute: `del_t i/2`
+
 This screenshot shows the result of executing `del_t i/2`.
-![delete_t.png](images/screenshots/dt.png)
+
+<img src="images/screenshots/del_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -668,7 +663,7 @@ Edits a task from a group.
 
 ##### Notes
 
-1. `Index` must be valid
+1. The index must be valid and should be the index of target task in the group's task list.
 2. `Group Name` must exist in the T_Assistant.
 3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
@@ -677,14 +672,15 @@ Edits a task from a group.
 
 ##### Usage Scenario
 
+###### Scenario #1: Editing a task with index `1` in `CS2103-F12-1`
 
-###### Scenario #1 Edit a task with index 1 in `CS2103-F12-1`
 1. Type and execute: `list_t gn/CS2103-F12-1` to see the list of tasks in `CS2103-F12-1`.
-2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this example).
-3. Type and execute: `edit_t_g i/1 gn/CS2103-F12-1 tn/v1.4 Release`
+2. After finding the task you wish to edit, type and execute: `edit_t_g i/1 gn/CS2103-F12-1 tn/Complete task 7`
 
-This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-3 tn/v1.4 Release`.
-![edit_t_g.png](images/screenshots/etg.png)
+This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-1 tn/Complete task 7`.
+
+<img src="images/screenshots/del_t.png" width="600">
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Task for ALL Groups: `edit_t`, `et`
@@ -695,7 +691,7 @@ Edits a task from all groups that contain it.
 
 ##### Notes
 
-1. `Index` must be valid.
+1. The index must be valid and should be the index of task list.
 2. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
 3. For information on the constraints for each parameter used in this command, go
@@ -703,15 +699,14 @@ Edits a task from all groups that contain it.
 
 ##### Usage Scenario
 
+###### Scenario #1: Editing task in index `2`
 
-###### Scenario #1 Edit a task with index 2
 1. Type and execute: `list_t` to see the task list.
-2. After finding the task you wish to delete from this group, remember its index number (task with index 2 in this example).
-3. Type and execute: `edit_t i/2 tn/PE`
+2. After finding the task you wish to edit, type and execute: `edit_t i/2 tn/Complete task 8`
 
-This screenshot shows the result of executing `edit_t i/2 tn/PE`.
-![edit_t.png](images/screenshots/et.png)
+This screenshot shows the result of executing `edit_t i/2 tn/Complete task 8`.
 
+<img src="images/screenshots/del_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -723,26 +718,31 @@ Marks a task as done or undone.
 
 ##### Notes
 
-1. You are unable to specify whether to mark a task as done or undone.
-2. If a task is done it will be marked as undone, and vice versa.
-2. For information on the constraints for each parameter used in this command, go
+1. The index must be valid and should be the index of target task in the group's task list.
+2. You are unable to specify whether to mark a task as done or undone.
+3. If a task is done it will be marked as undone, and vice versa.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario 
 
 ###### Scenario #1: Marking an undone task
-1. Executing `mark_t` will mark the task as done.
+
+1. Type and execute: `mark_t gn/CS2103-F12-1 i/2`
+2. Executing `mark_t` will mark the task as done.
+
+3. This screenshot shows the result of executing `mark_t gn/CS2103-F12-1 i/2`.
+
+<img src="images/screenshots/mark_t_1.png" width="600">
 
 ###### Scenario #2: Marking a done task
-1. Executing `mark_t` will mark the task as undone.
 
-###### Scenario #3: Executing the command `mark_t gn/CS2103-F15-2 i/2` when the group does not exist.
-1. The system will display an error message.
+1. Type and execute: `mark_t gn/CS2103-F12-1 i/2`
+2. Executing `mark_t` will mark the task as undone.
 
-###### Scenario #4: Executing the command `mark_t gn/CS2103-F15-2 i/10` when there are only 5 tasks.
-1. The system will display an error message because the task index does not exist.
+3. This screenshot shows the result of executing `mark_t gn/CS2103-F12-1 i/2`.
 
-This screenshot shows the result of executing `mark_t gn/CS2103-F12-2 i/2`.
+<img src="images/screenshots/mark_t_2.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -763,27 +763,23 @@ Searches T_Assistant for tasks with fields that match the search query.
 
 ##### Usage Scenario
 
-###### Scenario #1: Find task with the following query: `consultation`
+###### Scenario #1: Finding tasks with the following query: `4`
 
-This screenshot shows the result of executing `find_t q/consulation`.
+This screenshot shows the result of executing `find_t q/4`.
+
+<img src="images/screenshots/mark_t_2.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Sorting Tasks: `sort_t`, `st`
 
-Sorts the task list by deadline in ascending order.
+Sorts the task list by deadline from the earliest to the latest date.
 
 **Format**: `sort_t`
 
-##### Notes
+This screenshot shows the result of executing `sort_t`.
 
-1. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario 
-
-###### Scenario #1: Executing command `sort_t`
-1. The task list will be sorted by deadline.
+<img src="images/screenshots/sort_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -809,7 +805,6 @@ Undoes the previous command ran.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-
 #### Redoing change: `redo`
 
 Redoes the previously undone command.
@@ -822,7 +817,7 @@ Format: `redo`
    redo the application after at least one undo has been executed.
 2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands), and
    not the commands which do not make any changes (find, list, help, exit commands).
-5. For information on the constraints for each parameter used in this command, go
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 #### Viewing help : `help`
