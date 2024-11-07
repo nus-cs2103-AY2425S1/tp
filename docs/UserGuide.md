@@ -296,6 +296,14 @@ in the job list.
 `view company 2` will show the job in the job list 
 and the contact in the contact list.
 
+### Viewing statistics : `stats`
+
+Shows a summary of the data, including the total number of contacts, jobs, and companies in the address book. 
+Additionally, it provides a breakdown of matched and unmatched contacts, offering insights 
+into recruitment activity and data utilization.
+
+Format: `stats`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -354,3 +362,4 @@ _Details coming soon ..._
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**   | `list`                                                                                                                                                                |
 | **Help**   | `help`                                                                                                                                                                |
+| **Stats**  | `stats`        
