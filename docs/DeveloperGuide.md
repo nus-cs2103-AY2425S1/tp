@@ -290,14 +290,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                                 | So that I can…​                                                      |
-|----------|---------------------------------------------|--------------------------------------------------------------|----------------------------------------------------------------------|
+| Priority | As a …​                                     | I want to …​                                                 | So that I can…​                                                       |
+|----------|---------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------|
 | `* * *`  | user                                        | add customers' details such as name, contact number, address | remember key and essential details of customers for future deliveries |
-| `* * *`  | user                                        | add orders related to a customer                             | keep track of deliveries to be made                                  |
-| `* * *`  | user                                        | add details to orders, such as delivery date and item        | know what needs to be delivered and when                             |
-| `* * *`  | user                                        | mark orders as completed                                     | track which orders are still outstanding                             |
-| `* * *`  | user                                        | delete an order                                              | remove orders that have been canceled                                |
-| `* * *`  | user with many contacts in the address book | delete a customer from my address book                       | remove clients who I no longer need to be in contact with            |
+| `* * *`  | user                                        | add orders related to a customer                             | keep track of deliveries to be made                                   |
+| `* * *`  | user                                        | add details to orders, such as delivery date and item        | know what needs to be delivered and when                              |
+| `* * *`  | user                                        | mark orders as completed                                     | track which orders are still outstanding                              |
+| `* * *`  | user                                        | delete an order                                              | remove orders that have been canceled                                 |
+| `* * *`  | user                                        | filter orders by order status                                | see outstanding or completed orders at one glance                     |
+| `* * *`  | user with many contacts in the address book | delete a customer from my address book                       | remove clients who I no longer need to be in contact with             |
 
 *{More to be added}*
 
@@ -419,7 +420,7 @@ Use case ends.
 * **Actor**: User
 * **Use Case**: UC06 - Remove “Completed” Marking from Order
 * **Guarantees**:
-    * Specified order will have “Completed” Marking removed if the input parameters are valid..
+    * Specified order will have “Completed” Marking removed if the input parameters are valid.
 
 **MSS**
 
@@ -449,8 +450,25 @@ Use case ends.
 
 1.  User wants to delete an order.
 2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
-3.  User deletes the customer by the customer name and the order index.
+3.  User deletes the order by the customer name and the order index.
 4.  SellSavvy updates the status of the order and indicates that the action is successful.
+
+Use case ends.
+
+**Use case 8: Filter order list by order status**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC08 - Filter an Order List by Order Status
+* **Guarantees**:
+    * Orders with specified status made by specific customer will be displayed as a list, if input parameters are valid.
+
+**MSS**
+
+1.  User wants to filter an order list.
+2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
+3.  User filters the order list of the customer by the status keyword.
+4.  SellSavvy displays the orders with specified status in a list in GUI.
 
 Use case ends.
 
@@ -473,6 +491,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Status**: The current fulfilment condition of an order, such as completed or pending.
 
 --------------------------------------------------------------------------------------------------------------------
 
