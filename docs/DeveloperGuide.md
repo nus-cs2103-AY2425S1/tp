@@ -426,6 +426,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Data should be stored in a local file in a format that is easy to read and edit manually.
 5. The app should be able to recover from common errors (e.g. invalid user input) gracefully, without crashing.
 6. The app should avoid very high usage of system resources (CPU, memory) to ensure it can run efficiently even on systems with limited hardware capacity.
+7. The app should provide a consistent user interface experience across different screen sizes and resolutions.
+8. The application should be highly modular and well-documented to facilitate easy modification and maintenance from new developers.
 
 ### Glossary
 
@@ -434,6 +436,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Patient ID**: A unique identifier for a patient in a medical system
 * **Medical record**: A collection of data about a patient’s health history
 * **Description**: A textual summary associated with a appointment or medical record
+* **Timestamp**: A record of the date and time an event occurred
+* **Tag**: A keyword or term assigned to a piece of information (e.g., a patient) to describe or categorize it
+* **Command Line Interface**: A text-based interface for interacting with a computer program
+* **Graphical User Interface**: A visual interface for interacting with a computer program
 
 --------------------------------------------------------------------------------------------------------------------
 
