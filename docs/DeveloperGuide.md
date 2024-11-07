@@ -303,7 +303,7 @@ Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to ha
 (For all use cases below, the **System** is the `EduLog` and the **Actor** is the `Teacher`, unless specified otherwise)
 
 ## UC1: Add a class
-* Postcondition: A class, with at least a name, date, and time is created
+* Postcondition: A class, with at least a name, date, and time is created <br>
 
 **MSS**
 
@@ -331,7 +331,7 @@ Use case ends.
 
 ## UC2: Delete a class
 
-* Postcondition: An existing class is deleted
+* Postcondition: An existing class is deleted <br>
 
 **MSS**
 
@@ -358,9 +358,9 @@ Use case ends.
 
 ## UC3: Add student
 
-**System**: EduLog
-**Actor**: Teacher 
-**Postcondition**: A student, with at least a name, is successfully enrolled in at least one class
+**System**: EduLog <br>
+**Actor**: Teacher <br>
+**Postcondition**: A student, with at least a name, is successfully enrolled in at least one class <br>
 
 **MSS:**
 
@@ -393,8 +393,8 @@ Use case ends.
 
 ## UC4: Edit student
 
-**System**: EduLog
-**Actor**: Teacher 
+**System**: EduLog <br>
+**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to edit an existing student in EduLog.
@@ -425,8 +425,8 @@ Use case ends.
 
 ## UC5: Create Tag
 
-**System**: EduLog
-**Actor**: Teacher
+**System**: EduLog <br>
+**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to create a new tag.
@@ -449,8 +449,8 @@ Use case ends.
 
 ## UC6: Edit tag
 
-**System**: EduLog
-**Actor**: Teacher
+**System**: EduLog <br>
+**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to edit an existing tag.
@@ -474,8 +474,8 @@ Use case ends.
 
 ## UC7: Delete tag
 
-**System**: EduLog
-**Actor**: Teacher
+**System**: EduLog <br>
+**Actor**: Teacher <br>
 
 **MSS:**
 
@@ -494,9 +494,9 @@ Use case ends.
 
 ## UC8: View students (Nikhil)
 
-**System:** EduLog
-**Actor:** Teacher  
-**Precondition:** The teacher is logged into the app.
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
 
@@ -518,10 +518,10 @@ Use case resumes from Step 2.
 
 ## UC9: Remove student (Nikhil)
 
-**System:** EduLog
-**Actor:** Teacher
-**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher.
-**Postcondition:** The student is removed from the teacher’s list of students.
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher. <br>
+**Postcondition:** The student is removed from the teacher’s list of students. <br>
 
 **MSS:**
 
@@ -542,9 +542,9 @@ Use case ends.
 
 ## UC10: Display gift
 
-**System:** EduLog
-**Actor:** Teacher
-**Precondition:** The teacher is logged into the app.
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
 
@@ -552,6 +552,22 @@ Use case ends.
 2. System displays a suggested gift.
 Use case ends.
 
+## UC 12: Mark all student
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+
+**MSS:**
+
+1. Teacher types `markall` into the command box
+2. The student list is updated. All the students have a green tick beside their name. Use case ends.
+
+## UC 13: Unmark all students
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+
+**MSS:**
+1. Teacher types `unmarkall` into the command box
+2. The student list is updated. All students now have a red cross beside their name. Use case ends
 
 
 ### Non-Functional Requirements
