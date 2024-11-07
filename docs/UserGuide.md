@@ -666,16 +666,16 @@ TO BE CHANGED
 ## 7. Glossary
 <a id="glossary"></a>
 
-| Term           | Definition and or Explanation                                                                                                      |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------|
-| **CSV**        | Comma-Separated Values, a file format generally used to import data in Spreadsheets and Do analysis                                |
-| **JSON**       | JavaScript Object Notation, a standard file format for data interchange                                                            |
-| **NUS**        | National University of Singapore , A University Located in Central Singapore                                                       |
-| **TA**         | Teaching Assistant, a tutor who will conduct tutorials in National University of Singapore                                         |
-| **SoC**        | School of Computing in National University of Singapore                                                                            |
+| Term           | Definition and or Explanation                                                                                                     |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------| |
+| **NUS**        | National University of Singapore                                                      |
+| **TA**         | Teaching Assistant, a tutor who will conduct tutorials in National University of Singapore                                        |
+| **SoC**        | School of Computing in National University of Singapore                                                                           |
 | **Student ID** | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L |
-| **GUI**        | Graphical User Interface , all the part of the application which you can interact with your mouse                                  |
-| **CLI**        | Command Line Interface , part of application which can only be used with commands from the Keyboard                                |
+| **GUI**        | Graphical User Interface , all the part of the application which you can interact with your mouse                                 |
+| **CLI**        | Command Line Interface , part of application which can only be used with commands from the Keyboard                               |
+| **CSV**        | Comma-Separated Values, a file format generally used to import data in Spreadsheets and Do analysis                               |
+| **JSON**       | JavaScript Object Notation, a standard file format for data interchange
 
 --------------------------------------------------------------------------------------------------------------------
 
