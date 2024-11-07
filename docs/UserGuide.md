@@ -84,6 +84,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​`
 
+- Name of person is case-insensitive - same name but different casing is considered duplicate.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
@@ -188,6 +190,7 @@ Format: `tag INDEX t/TAG`
 
 - Ability to add more than one tag at once by doing another `t/TAG` after.
 - The index **must be a positive integer** 1, 2, 3, …​
+- Tag is case-insensitive - same word but different casing is a duplicate.
 
 ![Tag](images/Tag.png)
 
@@ -315,18 +318,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                      |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Action           | Format, Examples                                                                                                                                                     |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**        | `clear`                                                                                                                                                               |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                                                                   |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Export**       | `export`                                                                                                                                                              |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **Find Group**   | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`                                                                                                       |
-| **Group**        | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie Martin Jianbing Shaun Wenjie`                                                        |
-| **Import**       | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                                                                            |
-| **List**         | `list`                                                                                                                                                                |
-| **Tag**          | `tag [s/STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                                                                    |
-| **Help**         | `help`                                                                                                                                                                |
+| **Clear**        | `clear`                                                                                                                                                              |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                                                                  |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                          |
+| **Export**       | `export`                                                                                                                                                             |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
+| **Find Group**   | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`                                                                                                      |
+| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                                                                  |
+| **Group**        | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie Martin Jianbing Shaun Wenjie`                                                       |
+| **Import**       | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                                                                           |
+| **List**         | `list`                                                                                                                                                               |
+| **Tag**          | `tag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                                                                     |
+| **Untag**        | `untag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                                                                   |
+| **Help**         | `help`                                                                                                                                                               |
