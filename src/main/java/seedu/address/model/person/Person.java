@@ -81,6 +81,14 @@ public abstract class Person {
         return null;
     }
 
+    public Name getNextOfKinName() {
+        return null;
+    }
+
+    public Phone getEmergencyContact() {
+        return null;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -192,10 +200,11 @@ public abstract class Person {
      */
     public static Person createPerson(String type, Name name, Gender gender, Phone phone, Email email, Address address,
                                       Set<Tag> tags, Set<Subject> subjects, Set<String> classes,
-                                      DaysAttended daysAttended) {
+                                      DaysAttended daysAttended, Name nextOfKinName, Phone emergencyContact) {
         switch (type) {
         case STUDENT_TYPE:
-            return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended);
+            return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended,
+                    nextOfKinName, emergencyContact);
         case TEACHER_TYPE:
             return new Teacher(name, gender, phone, email, address, tags, subjects, classes);
         default:

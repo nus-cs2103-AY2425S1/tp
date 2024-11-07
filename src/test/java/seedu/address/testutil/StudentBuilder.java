@@ -26,6 +26,8 @@ public class StudentBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUBJECT = "Mathematics";
     private static final Integer DEFAULT_DAYS_ATTENDED = 0;
+    private static final String DEFAULT_NEXT_OF_KIN = "Bob Bee";
+    private static final String DEFAULT_EMERGENCY_CONTACT = "85355999";
 
     private Name name;
     private Phone phone;
@@ -36,6 +38,9 @@ public class StudentBuilder {
     private Set<Tag> tags;
     private Set<String> classes;
     private DaysAttended daysAttended;
+    private Name nextOfKin;
+    private Phone emergencyContact;
+
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -50,6 +55,8 @@ public class StudentBuilder {
         tags = new HashSet<>();
         classes = new HashSet<>();
         daysAttended = new DaysAttended(DEFAULT_DAYS_ATTENDED);
+        nextOfKin = new Name(DEFAULT_NEXT_OF_KIN);
+        emergencyContact = new Phone(DEFAULT_EMERGENCY_CONTACT);
     }
 
     /**
@@ -65,6 +72,8 @@ public class StudentBuilder {
         tags = new HashSet<>(studentToCopy.getTags());
         classes = new HashSet<>(studentToCopy.getClasses());
         daysAttended = studentToCopy.getDaysAttended();
+        nextOfKin = studentToCopy.getNextOfKinName();
+        emergencyContact = studentToCopy.getEmergencyContact();
     }
 
     /**
@@ -139,8 +148,28 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code NextOfKin} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withNextOfKin(String nextOfKin) {
+        this.nextOfKin = new Name(nextOfKin);
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withEmergencyContact(String emergencyContact) {
+        this.emergencyContact = new Phone(emergencyContact);
+        return this;
+    }
+
+    /**
+     * @return a Student object with the details of the StudentBuilder
+     */
     public Student build() {
-        return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended);
+        return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended, nextOfKin,
+                emergencyContact);
     }
 
 }
