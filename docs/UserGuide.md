@@ -3,14 +3,14 @@ layout: page
 title: User Guide
 ---
 
-PawPatrol is a **desktop app to help veterinary clinics manage their patient data**. It allows the clinic to add and edit 2 types of
+PawPatrol is a **desktop app to help veterinary clinics manage their patient data**. It allows the clinic to add and edit two types of
 entities, owners and pets. PawPatrol also allows the user to link owners to pets, allowing the user
 to easily see at a glance which pets belong to which owner. It is optimised
-for use via a Command Line Interface** (CLI) which improves use speed while still having the user-friendliness of a Graphical User Interface (GUI).
-If you can type fast, PawPatrol can manage patient owner and pet data faster than traditional organisation apps.
+for use via a **Command Line Interface** (CLI) which improves speed of usage while still having the user-friendliness of a Graphical User Interface (GUI).
+If you can type fast, PawPatrol can manage pet owner and pet data faster than traditional organisation apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -29,17 +29,17 @@ If you can type fast, PawPatrol can manage patient owner and pet data faster tha
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all owners and pets.
+    * `list` : Lists all owners and pets.
 
-   * `owner i/S0000001I n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 ` : Adds a contact named `John Doe` to PawPatrol.
+    * `owner i/S0000001I n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` : Adds a contact named `John Doe` to PawPatrol.
 
-   * `delete o3` : Deletes the 3rd owner shown in the current list.
+    * `delete o3` : Deletes the 3rd owner shown in the current list.
 
-   * `link o1 t/p1` : Links 1st owner shown to 1st pet shown.
+    * `link o1 t/p1` : Links 1st owner shown to 1st pet shown.
 
-   * `clear` : Deletes all owners and pets in PawPatrol.
+    * `clear` : Deletes all owners and pets in PawPatrol.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -79,9 +79,9 @@ Format: `help`
 
 ### Adding an entity: `owner` / `pet`
 
-#### <u>Adding an Owner</u>
+#### <u>Adding an owner</u>
 
-Adds an owner to PawPatrol.
+Adds a pet owner to PawPatrol.
 
 <div markdown="block" class="alert alert-info">
 
@@ -89,14 +89,14 @@ Adds an owner to PawPatrol.
 <ul>
 <li>IC number: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
 <li>Owner name: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
-<li>Phone number: Must contain exactly 8 digits.</li>
+<li>Phone number: Must contain exactly 8 digits as according to Singapore phone standards.</li>
 <li>Email: Should follow a standard email format of local-part@domain and adhere to the following constraints:
 <ul>
-<li>The local-part should only contain alphanumeric characters and these special characters +_.-.</li>
+<li>The local-part should only contain alphanumeric characters and the following special characters (excluding the apostrophes) '+', '_', '.', '-'.</li>
 <li>The local-part may not start or end with any special characters.</li>
-<li>The domain name is made up of domain labels separated by periods.</li>
-<li>The domain name must end with a domain label at least 2 characters long, 
-have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li>
+<li>The domain name is made up of domain labels separated by periods. There must be at least 2 domain labels.</li>
+<li>Each domain label must be between 1 and 63 characters long, begin and end with an alphanumeric character and may contain hyphens (-) in the middle but not at the start or end</li>
+<li>The last domain label (Top-Level Domain (TLD)) must only contain letters (e.g. <code>.com</code>) or be a valid TLD combination like <code>.co.uk</code>.</li>
 </ul>
 </li>
 <li>Address: Can contain any characters, but must be at least 3 characters long.</li>
@@ -119,8 +119,8 @@ Adds a pet to PawPatrol.
 <li>Pet name: Must only contain alphanumeric characters, spaces, or hyphens, and it should not be blank.</li>
 <li>Pet species: Must only contain alphabetic characters, should be a single word, and it should not be blank.</li>
 <li>Pet breed: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
-<li>Pet age: Must only contain numbers, and it should be 1 or 2 digits long</li>
-<li>Pet sex: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female).</li>
+<li>Pet age: Must only contain numbers, and it should be 1 or 2 digits long.</li>
+<li>Pet sex: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female respectively).</li>
 <li>Pet tags: Must be alphanumeric and should only contain a single word each.</li>
 </ul>
 </div>
@@ -167,9 +167,9 @@ Format: `unlink oOWNER_INDEX t/pPET_INDEX…​`
 <div markdown="span" class="alert alert-info">
 
 :exclamation: **Extra information:**<br>
-  
+
 Unlinks owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
-  
+
 </div>
 
 Examples:
@@ -193,7 +193,7 @@ Edits an existing owner or pet in PawPatrol. Refer to information on owner and p
 
 **:information_source: Extra information:**<br>
 <ul>
-<li>Edits the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​</li>
+<li>Edits the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively. The index refers to the index number shown in the displayed owner or pet list. The index <strong>must be a positive integer</strong> 1, 2, 3, …​</li>
 <li>At least one of the optional fields must be provided.</li>
 <li>IC number cannot be changed.</li>
 <li>Existing values will be updated to the input values.</li>
@@ -229,13 +229,13 @@ Finds owners or pets whose names contain any of the given keywords.
 <li>The search is case-insensitive. e.g. <code>hans</code> will match <code>Hans</code></li>
 <li>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></li>
 <li>Only the name is searched.</li>
-<li>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></li>
+<li>Words can be partially searched. e.g. Searching <code>Han</code> will give <code>Hans Bo</code>.</li>
 <li>Owners or pets matching at least one keyword will be returned (i.e. <code>OR</code> search).<br>
   e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></li>
 </ul>
 </div>
 
-Format: 
+Format:
 * `find owner KEYWORD [MORE_KEYWORDS]`: Finds owners whose names contain any of the given keywords.
 * `find pet KEYWORD [MORE_KEYWORDS]`: Finds pets whose names contain any of the given keywords.
 
@@ -254,7 +254,7 @@ Deletes the specified owner or pet from PawPatrol.
 <ul>
 <li>Deletes the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively.</li>
 <li>The index refers to the index number shown in the displayed owner or pet list.</li>
-<li>The index **must be a positive integer** 1, 2, 3, …​</li>
+<li>The index <strong>must be a positive integer</strong> 1, 2, 3, …​</li>
 </ul>
 </div>
 
