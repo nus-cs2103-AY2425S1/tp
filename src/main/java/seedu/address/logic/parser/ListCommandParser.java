@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
@@ -29,9 +31,13 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
 
-        switch (trimmedArgs) {
+        String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 1, ListCommand.MESSAGE_USAGE);
+        String entityString = splitArgs[0];
+
+        String entity = ParserUtil.parseEntity(entityString);
+
+        switch (entity) {
         case ListContactCommand.ENTITY_WORD:
             return new ListContactCommand();
         case ListJobCommand.ENTITY_WORD:
@@ -41,7 +47,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         case ListAllCommand.ENTITY_WORD:
             return new ListAllCommand();
         default:
-            throw new ParseException(ListCommand.MESSAGE_USAGE);
+            String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
+                    AddCommand.COMMAND_WORD, entity);
+            throw new ParseException(exceptionMessage);
         }
     }
 

@@ -3,16 +3,17 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<?import javafx.scene.layout.HBox?>
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Talent Connect" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -45,14 +46,33 @@
           </padding>
         </StackPane>
 
-        <HBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border"
-              HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <HBox fx:id="personList" minWidth="340" prefWidth="340" spacing="10.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-               <StackPane fx:id="jobListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-               <StackPane fx:id="companyListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+          <!-- Contact Panel with Label -->
+          <StackPane HBox.hgrow="ALWAYS">
+            <VBox>
+              <Label text="Contacts" styleClass="label-contacts"/>
+              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </StackPane>
+
+          <!-- Job Panel with Label -->
+          <StackPane HBox.hgrow="ALWAYS">
+            <VBox>
+              <Label text="Jobs" styleClass="label-jobs"/>
+              <StackPane fx:id="jobListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </StackPane>
+
+          <!-- Company Panel with Label -->
+          <StackPane HBox.hgrow="ALWAYS">
+            <VBox>
+              <Label text="Companies" styleClass="label-companies"/>
+              <StackPane fx:id="companyListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </StackPane>
         </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

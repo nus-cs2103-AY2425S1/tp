@@ -14,6 +14,7 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.company.exceptions.CompanyNotFoundException;
+import seedu.address.model.job.exceptions.JobNotFoundException;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -60,6 +61,9 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         } catch (CompanyNotFoundException cnfe) {
             logger.info("Job associated with non-existent company in " + filePath + ": " + cnfe.getMessage());
             throw new DataLoadingException(cnfe);
+        } catch (JobNotFoundException jnfe) {
+            logger.info("Person associated with non-existent job in " + filePath + ": " + jnfe.getMessage());
+            throw new DataLoadingException(jnfe);
         }
     }
 
