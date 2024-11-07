@@ -45,10 +45,10 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     @FXML
-    private Button WbButton;
+    private Button wbButton;
 
     @FXML
-    private Button AbButton;
+    private Button abButton;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -267,18 +267,18 @@ public class MainWindow extends UiPart<Stage> {
 
     private void toggleWeddingBookButton(boolean isToggled) {
         if (isToggled) {
-            WbButton.setId("WeddingBookButtonToggled");
+            wbButton.setId("WeddingBookButtonToggled");
         } else {
-            WbButton.setId("WeddingBookButtonNotToggled");
+            wbButton.setId("WeddingBookButtonNotToggled");
         }
     }
 
     // Method to toggle the address book button style
     private void toggleAddressBookButton(boolean isToggled) {
         if (isToggled) {
-            AbButton.setId("AddressBookButtonToggled");
+            abButton.setId("AddressBookButtonToggled");
         } else {
-            AbButton.setId("AddressBookButtonNotToggled");
+            abButton.setId("AddressBookButtonNotToggled");
         }
     }
 }

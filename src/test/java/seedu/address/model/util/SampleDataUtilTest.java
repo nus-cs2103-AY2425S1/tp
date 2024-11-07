@@ -19,14 +19,14 @@ public class SampleDataUtilTest {
     public void test_getSamplePersons() {
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
         assertNotNull(samplePersons);
-        assertEquals(6, samplePersons.length);
+        assertEquals(11, samplePersons.length);
     }
 
     @Test
     public void test_getSampleAddressBook() {
         ReadOnlyAddressBook sampleAddressBook = SampleDataUtil.getSampleAddressBook();
         assertNotNull(sampleAddressBook);
-        assertEquals(6, sampleAddressBook.getPersonList().size());
+        assertEquals(11, sampleAddressBook.getPersonList().size());
     }
 
     @Test
@@ -41,20 +41,20 @@ public class SampleDataUtilTest {
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
         Set<Person> participantSet = SampleDataUtil.getParticipantSet(samplePersons);
         assertNotNull(participantSet);
-        assertEquals(6, participantSet.size());
+        assertEquals(11, participantSet.size());
     }
 
     @Test
     public void test_getSampleWeddings() {
         Wedding[] sampleWeddings = SampleDataUtil.getSampleWeddings();
         assertNotNull(sampleWeddings);
-        assertEquals(2, sampleWeddings.length);
+        assertEquals(6, sampleWeddings.length);
     }
 
     @Test
     public void test_getSampleWeddingBook() {
         ReadOnlyWeddingBook sampleWeddingBook = SampleDataUtil.getSampleWeddingBook();
         assertNotNull(sampleWeddingBook);
-        assertEquals(2, sampleWeddingBook.getWeddingList().size());
+        assertEquals(6, sampleWeddingBook.getWeddingList().size());
     }
 }
