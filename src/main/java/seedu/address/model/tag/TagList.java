@@ -48,7 +48,7 @@ public class TagList {
      * @param tag The tag to be renamed.
      * @param newTagName The new name the tag is be to be renamed to.
      * @return True if the tag was renamed, false if the tag to be renamed does not exist,
-     * or if the new name is already in use by an existing tag.
+     *     or if the new name is already in use by an existing tag.
      */
     public boolean renameTag(Tag tag, String newTagName) {
         int index = tags.indexOf(tag);
