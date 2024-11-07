@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -31,19 +30,12 @@ public class ClientMatchesWeddingPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonMatchesWeddingPredicate)) {
+        if (!(other instanceof ClientMatchesWeddingPredicate)) {
             return false;
         }
 
         ClientMatchesWeddingPredicate otherWeddingPredicate = (ClientMatchesWeddingPredicate) other;
         return wedding.equals(otherWeddingPredicate.wedding);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("wedding", wedding)
-                .toString();
     }
 }
 
