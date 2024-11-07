@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ConcreteCommand;
+import seedu.address.logic.commands.Undoable;
 import seedu.address.model.person.Person;
 
 /**
@@ -116,12 +116,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Pushes a concrete command to the undo stack.
+     * Pushes an undoable command to the undo stack.
      */
-    void pushToUndoStack(ConcreteCommand command);
+    void pushToUndoStack(Undoable command);
 
     /**
-     * Undoes the most recent concrete command.
+     * Undoes the most recent undoable command.
      */
     CommandResult undoAddressBook();
 

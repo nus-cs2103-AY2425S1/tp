@@ -232,7 +232,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void pushToUndoStack(ConcreteCommand command) {
+        public void pushToUndoStack(Undoable command) {
             throw new AssertionError("This method should not be called.");
         }
 
