@@ -240,62 +240,65 @@ public class CommandBox extends UiPart<Region> {
         String[] words = input.split("\\s+");
         String command = words[0];
 
-        // If the command has parameters in the syntax map
-        if (commandSyntaxMap.containsKey(command)) {
-            String fullSyntax = commandSyntaxMap.get(command);
-            String[] syntaxParts = fullSyntax.split("\\s+");
+        // Find the best matching command based on the prefix
+        String bestMatch = findBestMatchingCommand(command);
 
-            // Track already entered parameters to determine the next suggestion
-            int syntaxIndex = 1; // Start after the command word
-            StringBuilder consumedSyntax = new StringBuilder(command);
+        if (bestMatch != null) {
+            // If the best match is the same as the command, we want to suggest parameters
+            if (bestMatch.equals(command)) {
+                // If the command has parameters, suggest the next part of the command
+                String fullSyntax = commandSyntaxMap.get(bestMatch);
+                String[] syntaxParts = fullSyntax.split("\\s+");
 
-            // Determine which parts of the syntax have already been entered
-            for (int i = 1; i < words.length; i++) {
-                String part = words[i];
-                if (syntaxIndex < syntaxParts.length && syntaxParts[syntaxIndex].equals(part)) {
-                    // If the input matches the current expected syntax part, move forward
-                    consumedSyntax.append(" ").append(part);
-                    syntaxIndex++;
-                } else if (part.contains("/")) {
-                    // If the input is a parameter with a slash, move forward in the syntax parts
-                    consumedSyntax.append(" ").append(part);
-                    syntaxIndex++;
-                }
-            }
+                // Track already entered parameters to determine the next suggestion
+                int syntaxIndex = 1; // Start after the command word
+                StringBuilder consumedSyntax = new StringBuilder(command);
 
-            // Skip already entered parameters
-            while (syntaxIndex < syntaxParts.length && isParameterAlreadyEntered(input, syntaxParts[syntaxIndex])) {
-                syntaxIndex++;
-            }
-
-            // If there are remaining parameters or words to suggest
-            if (syntaxIndex < syntaxParts.length) {
-                String nextPart = syntaxParts[syntaxIndex];
-                String completion;
-
-                if (nextPart.contains("/")) {
-                    // It's a parameter, e.g., n/NAME, so autocomplete the prefix
-                    completion = nextPart.substring(0, nextPart.indexOf("/") + 1);
-                } else {
-                    // It's a regular word like INDEX, so autocomplete the entire word
-                    completion = nextPart;
+                // Determine which parts of the syntax have already been entered
+                for (int i = 1; i < words.length; i++) {
+                    String part = words[i];
+                    if (syntaxIndex < syntaxParts.length && syntaxParts[syntaxIndex].equals(part)) {
+                        // If the input matches the current expected syntax part, move forward
+                        consumedSyntax.append(" ").append(part);
+                        syntaxIndex++;
+                    } else if (part.contains("/")) {
+                        // If the input is a parameter with a slash, move forward in the syntax parts
+                        consumedSyntax.append(" ").append(part);
+                        syntaxIndex++;
+                    }
                 }
 
-                // Add the next part to the input
-                String newText = input + (input.endsWith(" ") ? "" : " ") + completion;
-                commandTextField.setText(newText);
-                commandTextField.positionCaret(newText.length());
-                return;
-            }
-        }
+                // Skip already entered parameters
+                while (syntaxIndex < syntaxParts.length && isParameterAlreadyEntered(input, syntaxParts[syntaxIndex])) {
+                    syntaxIndex++;
+                }
 
-        // Autocomplete for partially typed commands, if we are not inside parameter input
-        for (String cmd : commandSyntaxMap.keySet()) {
-            if (cmd.startsWith(command) && !cmd.equals(command)) {
-                String newText = cmd;
+                // If there are remaining parameters or words to suggest
+                if (syntaxIndex < syntaxParts.length) {
+                    String nextPart = syntaxParts[syntaxIndex];
+                    String completion;
 
-                // Check if the command expects additional parameters based on its syntax definition
-                String fullSyntax = commandSyntaxMap.get(cmd);
+                    if (nextPart.contains("/")) {
+                        // It's a parameter, e.g., n/NAME, so autocomplete the prefix
+                        completion = nextPart.substring(0, nextPart.indexOf("/") + 1);
+                    } else {
+                        // It's a regular word like INDEX, so autocomplete the entire word
+                        completion = nextPart;
+                    }
+
+                    // Add the next part to the input
+                    String newText = input + (input.endsWith(" ") ? "" : " ") + completion;
+                    commandTextField.setText(newText);
+                    commandTextField.positionCaret(newText.length());
+                    return;
+                }
+            } else {
+                // If the current input doesn't fully match the best match,
+                // autocomplete to the best match command without further parameters
+                String newText = bestMatch;
+
+                // Check if there are additional parameters for the command
+                String fullSyntax = commandSyntaxMap.get(bestMatch);
                 if (fullSyntax.split("\\s+").length > 1) {
                     newText += " "; // Add trailing space if there are parameters expected
                 }
@@ -303,10 +306,10 @@ public class CommandBox extends UiPart<Region> {
                 commandTextField.setText(newText);
                 commandTextField.positionCaret(newText.length());
                 currentSuggestion = fullSyntax;
-                return;
             }
         }
     }
+
 
     private boolean isParameterAlreadyEntered(String input, String parameter) {
         String[] inputWords = input.split("\\s+");
