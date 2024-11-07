@@ -130,7 +130,6 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -265,6 +264,10 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+--------------------------------------------------------------------------------------------------------------------
+## **Planned Enhancements**
+Team size: 4
+1. Make each applicant to have a unique ID: The current addressbook list shows the numbering of each contact based on its sequence. We plan to generate a random unique ID for each applicant (Eg.JXZ1000).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -437,7 +440,6 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Contact**: An entry in Talentcy address book that contains information about a particular person such as name, phone number, email address, and any other relevant details
 * **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a contact to the address book)
