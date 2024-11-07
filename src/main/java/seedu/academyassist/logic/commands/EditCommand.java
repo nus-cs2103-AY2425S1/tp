@@ -36,8 +36,8 @@ public class EditCommand extends Command {
             + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
             + "Parameters Example:\n"
             + "- STUDENT_ID: S00001\n"
-            + "- FIELD/VALUE: n\\John\n"
-            + "- [FIELD/VALUE: p\\98765432]...\n";
+            + "- FIELD\\VALUE: n\\John\n"
+            + "- [FIELD\\VALUE: p\\98765432]...\n";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Student %1$s (%2$s)’s details successfully updated.\n"
             + "Here is the updated information\nName: %3$s";
