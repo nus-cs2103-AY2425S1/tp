@@ -142,10 +142,10 @@ Format: `tag INDEX t/TAG_NAME`
 
 Example:
 - `tag 1 t/urgent`
-- 
-### Tagging a client: `untag`
 
-Tags a client in the case management system.
+### Untagging a client: `untag`
+
+Untags a client in the case management system.
 
 Format: `untag INDEX t/TAG`
 
@@ -155,6 +155,20 @@ Format: `untag INDEX t/TAG`
 
 Example:
 - `untag 1 t/urgent`
+
+### Setting an appointment: `setappointment`
+
+Sets an appointment date for a client
+
+Format: ``
+
++ "identified "
++ "by the index number used in the displayed person list. "
++ "If date is left blank, current appointment will be deleted.\n"
++ "Parameters: INDEX (must be a positive integer) "
++ CliSyntax.PREFIX_DATE + "DATE\n"
++ "Example: " + COMMAND_WORD + " 1 "
++ CliSyntax.PREFIX_DATE + "2024-10-24";
 
 
 ### Locating beneficiaries by name: `find`
