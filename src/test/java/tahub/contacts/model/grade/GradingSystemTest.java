@@ -1,12 +1,11 @@
 package tahub.contacts.model.grade;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link GradingSystem}.
@@ -27,13 +26,22 @@ class GradingSystemTest {
     @Test
     void testAddAndGetGrade() {
         gradingSystem.addGrade("Midterm", 85.0);
-        assertEquals(85.0, gradingSystem.getGrade("Midterm"), 0.001);
-        assertEquals(-1.0, gradingSystem.getGrade("Final"), 0.001);
+        assertEquals(85.0, gradingSystem.getGrade("Midterm"), 0.001, "Grade should be exactly 85.0");
+        assertTrue(gradingSystem.getGrade("Midterm") > 80.0, "Grade should be above 80");
+        assertNotEquals(-1.0, gradingSystem.getGrade("Midterm"), "Grade should not be -1.0");
+        assertEquals(-1.0, gradingSystem.getGrade("Final"), 0.001, "Non-existent grade should return -1.0");
 
-        assertThrows(IllegalArgumentException.class, () -> gradingSystem.addGrade(null, 85.0));
-        assertThrows(IllegalArgumentException.class, () -> gradingSystem.addGrade("", 85.0));
-        assertThrows(IllegalArgumentException.class, () -> gradingSystem.addGrade("Test", -1.0));
-        assertThrows(IllegalArgumentException.class, () -> gradingSystem.addGrade("Test", 101.0));
+        // Test invalid inputs
+        assertAll("Invalid grade inputs",
+                  () -> assertThrows(IllegalArgumentException.class,
+                                     () -> gradingSystem.addGrade(null, 85.0), "Should reject null assessment name"),
+                  () -> assertThrows(IllegalArgumentException.class,
+                                     () -> gradingSystem.addGrade("", 85.0), "Should reject empty assessment name"),
+                  () -> assertThrows(IllegalArgumentException.class,
+                                     () -> gradingSystem.addGrade("Test", -1.0), "Should reject negative grade"),
+                  () -> assertThrows(IllegalArgumentException.class,
+                                     () -> gradingSystem.addGrade("Test", 101.0), "Should reject grade above 100")
+                 );
     }
 
     /**
@@ -43,14 +51,22 @@ class GradingSystemTest {
     void testSetAssessmentWeight() {
         gradingSystem.setAssessmentWeight("Midterm", 0.4);
         Map<String, Double> weights = gradingSystem.getAllWeights();
-        assertEquals(0.4, weights.get("Midterm"), 0.001);
 
-        assertThrows(IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(null,
-                                                                                             0.5));
-        assertThrows(IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight("Test",
-                                                                                             -0.1));
-        assertThrows(IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight("Test",
-                                                                                             1.1));
+        assertAll("Weight validations",
+                  () -> assertEquals(0.4, weights.get("Midterm"), 0.001, "Weight should be exactly 0.4"),
+                  () -> assertTrue(weights.containsKey("Midterm"), "Weights map should contain Midterm"),
+                  () -> assertFalse(weights.isEmpty(), "Weights map should not be empty")
+                 );
+
+        // Test invalid weights
+        assertAll("Invalid weight inputs",
+                  () -> assertThrows(IllegalArgumentException.class,
+                                     () -> gradingSystem.setAssessmentWeight(null, 0.5), "Should reject null assessment"),
+                  () -> assertThrows(IllegalArgumentException.class,
+                                     () -> gradingSystem.setAssessmentWeight("Test", -0.1), "Should reject negative weight"),
+                  () -> assertThrows(IllegalArgumentException.class,
+                                     () -> gradingSystem.setAssessmentWeight("Test", 1.1), "Should reject weight above 1.0")
+                 );
     }
 
     /**
@@ -62,7 +78,16 @@ class GradingSystemTest {
         gradingSystem.addGrade("Final", 95.0);
         gradingSystem.setAssessmentWeight("Midterm", 0.4);
         gradingSystem.setAssessmentWeight("Final", 0.6);
-        assertEquals(91.0, gradingSystem.getOverallScore(), 0.001);
+
+        double expectedScore = 91.0;
+        assertAll("Overall score calculations",
+                  () -> assertEquals(expectedScore, gradingSystem.getOverallScore(), 0.001,
+                                     "Overall score should be exactly 91.0"),
+                  () -> assertTrue(gradingSystem.getOverallScore() > 90.0,
+                                   "Overall score should be above 90"),
+                  () -> assertTrue(gradingSystem.getOverallScore() < 95.0,
+                                   "Overall score should be below 95")
+                 );
     }
 
     /**
