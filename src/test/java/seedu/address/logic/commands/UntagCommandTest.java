@@ -35,6 +35,9 @@ public class UntagCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    /**
+     * EP: Valid tag successfully untagged from person (i.e. Tag is in tag list and on person).
+     */
     @Test
     public void execute_validIndexAndTag_success() {
         Tag tag = new Tag("friends");
@@ -68,6 +71,9 @@ public class UntagCommandTest {
                         .getTags().contains(tag));
     }
 
+    /**
+     * EP: Valid tag successfully untagged multiple people (i.e. Tag is in tag list and on multiple people).
+     */
     @Test
     public void execute_tagExistsAndOnMultiplePersons_success() {
         Tag tag = new Tag("friends");
@@ -103,6 +109,9 @@ public class UntagCommandTest {
         assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * EP: Index out of bounds (i.e. Index greater than list size).
+     */
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -115,8 +124,12 @@ public class UntagCommandTest {
         assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    /**
+     * EP: Valid tag successfully untagged from some people but not on others (i.e. Tag is in tag list, is not on
+     * some but on others).
+     */
     @Test
-    public void execute_bulkUntagging_someTagsNotFoundReportsProperly() {
+    public void execute_bulkUntagging_tagNotFoundOnSomeReportsProperly() {
         // Tags "friends" are on guests at indexes 1 and 2, but 3
         Tag friendTag = FRIENDS;
 
@@ -148,6 +161,9 @@ public class UntagCommandTest {
         assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * EP: Undo a successful untag command (i.e. Previous successful untag command is undone).
+     */
     @Test
     public void execute_undoUntagCommand_success() {
         Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -182,6 +198,80 @@ public class UntagCommandTest {
         model.updatePreviousCommand(untagCommand);
         UndoCommand undoCommand = new UndoCommand();
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
+
+    /**
+     * EP: Attempting to undo an unsuccessful untag command involving tag not on person.
+     */
+    @Test
+    public void execute_undoUntagCommandWithTagNotOnPerson_failure() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person personToUntag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertFalse(personToUntag.getTags().contains(BRIDES_SIDE));
+
+        Set<Tag> tags = new HashSet<>();
+        List<Index> indexes = new ArrayList<>();
+        tags.add(BRIDES_SIDE);
+        indexes.add(INDEX_FIRST_PERSON);
+        UntagCommand untagCommand = new UntagCommand(indexes, tags);
+
+        String expectedFailureMessage = UntagCommand.MESSAGE_TAG_NOT_FOUND + BRIDES_SIDE;
+        assertCommandSuccess(untagCommand, model, expectedFailureMessage, originalModel);
+
+        UndoCommand undoCommand = new UndoCommand();
+        String expectedUndoMessage = UndoCommand.MESSAGE_NO_PREVIOUS_COMMAND;
+        assertCommandFailure(undoCommand, model, expectedUndoMessage);
+    }
+
+    /**
+     * EP: Attempting to undo an unsuccessful untag command involving invalid index.
+     */
+    @Test
+    public void execute_undoUntagCommandWithInvalidIndex_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        List<Index> indexList = new ArrayList<>();
+        indexList.add(outOfBoundIndex);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(BRIDES_SIDE);
+        UntagCommand untagCommand = new UntagCommand(indexList, tags);
+
+        assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        UndoCommand undoCommand = new UndoCommand();
+        String expectedUndoMessage = UndoCommand.MESSAGE_NO_PREVIOUS_COMMAND;
+        assertCommandFailure(undoCommand, model, expectedUndoMessage);
+    }
+
+    /**
+     * EP: Undo a partially successful untag command involving some tags not on person.
+     */
+    @Test
+    public void execute_undoUntagCommandWithMixedValidityTags_successfullyUndone() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person personToUntag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertFalse(personToUntag.getTags().contains(BRIDES_SIDE));
+        assertTrue(personToUntag.getTags().contains(FRIENDS));
+
+        List<Index> indexes = List.of(INDEX_FIRST_PERSON);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(BRIDES_SIDE);
+        tags.add(FRIENDS);
+        UntagCommand untagCommand = new UntagCommand(indexes, tags);
+
+        Set<Tag> updatedTags = new HashSet<>(personToUntag.getTags());
+        updatedTags.remove(FRIENDS);
+        Person updatedPerson = new Person(personToUntag.getName(), personToUntag.getPhone(), personToUntag.getEmail(),
+                personToUntag.getRsvpStatus(), updatedTags);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToUntag, updatedPerson);
+
+        String expectedMessage = UntagCommand.MESSAGE_UNTAG_PERSON_SUCCESS + Messages.format(updatedPerson)
+                + "\n" + UntagCommand.MESSAGE_TAG_NOT_FOUND + BRIDES_SIDE;
+        assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(untagCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test

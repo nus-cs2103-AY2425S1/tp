@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -172,11 +173,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public String getTagList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Tag> getTagListAsObservableList() {
             return null;
         }
@@ -196,7 +192,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public boolean addTags(List<Tag> tags) {
+        public Set<Tag> addTags(List<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -206,7 +202,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean deleteTags(List<Tag> tag) {
+        public Set<Tag> deleteTags(List<Tag> tag) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -246,6 +242,46 @@ public class AddCommandTest {
 
         @Override
         public Predicate<Person> getCurrentPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Tag> getTagFiltersList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<RsvpStatus> getStatusFiltersList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTagFilters(Set<Tag> tagFilters) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addStatusFilters(Set<RsvpStatus> statusFilters) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkTagFilterAlreadyExists(Tag tagToCheck) {
+            return false;
+        }
+
+        @Override
+        public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearFilterSet() {
             throw new AssertionError("This method should not be called.");
         }
     }

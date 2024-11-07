@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Commands <<Rectangle>> {
+    Class "{abstract}\nCommand" as Command
+    Class "{abstract}\nUndoableCommand" as UndoableCommand
+
+    Class AddCommand
+    Class ClearCommand
+    Class DeleteCommand
+    Class DeleteTagCommand
+    Class EditCommand
+    Class ExitCommand
+    Class FilterCommand
+    Class FindCommand
+    Class HelpCommand
+    Class ListCommand
+    Class NewtagCommand
+    Class RenameTagCommand
+    Class SetRsvpCommand
+    Class TagCommand
+    Class UntagCommand
+    Class UndoCommand
+
+
+    UndoableCommand -up-> Command
+    ClearCommand -up-> Command
+    ExitCommand -up-> Command
+    HelpCommand -up-> Command
+    HelpCommand -[hidden]right-> UndoableCommand
+    ListCommand -up-> Command
+    ListCommand -[hidden]right-> UndoableCommand
+    UndoCommand -up-> Command
+
+    AddCommand -[hidden]up-> UndoableCommand
+    AddCommand -up-> UndoableCommand
+    DeleteCommand -up-> UndoableCommand
+    DeleteTagCommand -up-> UndoableCommand
+    EditCommand -up-> UndoableCommand
+    FilterCommand -up-> UndoableCommand
+    FindCommand -up-> UndoableCommand
+    NewtagCommand -up-> UndoableCommand
+    RenameTagCommand -up-> UndoableCommand
+    SetRsvpCommand -up-> UndoableCommand
+    TagCommand -up-> UndoableCommand
+    UntagCommand -up-> UndoableCommand
+
+    AddCommand-[hidden]-> DeleteCommand
+        FindCommand -[hidden]up-> FilterCommand
+        DeleteCommand -[hidden]down-> DeleteTagCommand
+        EditCommand -[hidden]down-> FilterCommand
+        FindCommand -[hidden]down-> NewtagCommand
+        RenameTagCommand -[hidden]-> SetRsvpCommand
+        UntagCommand -[hidden]up-> TagCommand
+        UntagCommand -[hidden]up-> DeleteTagCommand
+
+
+}
+
+
+
+@enduml

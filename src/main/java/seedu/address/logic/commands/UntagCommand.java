@@ -28,8 +28,10 @@ public class UntagCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Untags the guest(s) identified by the index number(s) used in the displayed guest list "
                 + "with the predefined tag(s). \n"
-            + "Parameters: INDEX... (must be positive integer(s)) "
-            + "[" + PREFIX_TAG + "TAG]... (must be a tag on the guest)\n"
+
+            + "Parameters: INDEX... (must be within the minimum and maximum list indexes shown)\n"
+            + "[" + PREFIX_TAG + "TAG]...  Maximum of 50 alphanumeric characters, spaces, parenthesis"
+            + " and apostrophes per tag. (must be a tag on the guest)\n"
             + "Example: " + COMMAND_WORD + " 1 2 "
             + PREFIX_TAG + "bride's side" + " "
             + PREFIX_TAG + "groom's side";
@@ -40,6 +42,9 @@ public class UntagCommand extends UndoableCommand {
     private final List<Index> targetIndexes;
     private final Set<Tag> tags;
     private final Map<Index, Set<Tag>> removedTagsMap = new HashMap<>();
+    private Set<Tag> missingTags = new HashSet<>();
+    private StringBuilder successMessage = new StringBuilder();
+    private StringBuilder finalMessage = new StringBuilder();
 
     /**
      * @param targetIndexes of the guest in the filtered person list to untag
@@ -58,40 +63,12 @@ public class UntagCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Set<Tag> missingTags = new HashSet<>();
-        StringBuilder successMessage = new StringBuilder();
-        StringBuilder finalMessage = new StringBuilder();
-
-        for (Index targetIndex : targetIndexes) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            Person personToUntag = lastShownList.get(targetIndex.getZeroBased());
-            Set<Tag> newTags = new HashSet<>(personToUntag.getTags());
-            Set<Tag> removedTags = new HashSet<>();
-            boolean isUpdated = false;
-
-            for (Tag tag : tags) {
-                if (!newTags.contains(tag)) {
-                    missingTags.add(tag);
-                } else {
-                    newTags.remove(tag);
-                    removedTags.add(tag);
-                    isUpdated = true;
-                }
-            }
-
-            if (isUpdated) {
-                Person updatedPerson = setPerson(model, personToUntag, newTags);
-                removedTagsMap.put(targetIndex, removedTags);
-                updateSuccessMessage(successMessage, updatedPerson);
-            }
-        }
+        untagPersons(model, targetIndexes, lastShownList);
         if (!successMessage.isEmpty()) {
             finalMessage.append(MESSAGE_UNTAG_PERSON_SUCCESS).append(successMessage);
         }
         if (!missingTags.isEmpty()) {
-            updateFinalMessage(finalMessage, missingTags);
+            updateFinalMessage();
         }
         return new CommandResult(finalMessage.toString());
     }
@@ -149,7 +126,7 @@ public class UntagCommand extends UndoableCommand {
         successMessage.append(Messages.format(updatedPerson));
     }
 
-    private void updateFinalMessage(StringBuilder finalMessage, Set<Tag> missingTags) {
+    private void updateFinalMessage() {
         if (!finalMessage.isEmpty()) {
             finalMessage.append("\n");
         }
@@ -157,5 +134,43 @@ public class UntagCommand extends UndoableCommand {
                 .append(missingTags.stream()
                         .map(Tag::toString)
                         .collect(Collectors.joining(", ")));
+    }
+
+    private void untagPersons(Model model, List<Index> targetIndexes, List<Person> lastShownList)
+            throws CommandException {
+        for (Index targetIndex : targetIndexes) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person personToUntag = lastShownList.get(targetIndex.getZeroBased());
+            Set<Tag> newTags = new HashSet<>(personToUntag.getTags());
+            Set<Tag> removedTags = new HashSet<>();
+
+            boolean isUpdated = updateTags(newTags, removedTags);
+            if (isUpdated) {
+                updatePerson(model, personToUntag, newTags, targetIndex, removedTags);
+            }
+        }
+    }
+
+    private boolean updateTags(Set<Tag> newTags, Set<Tag> removedTags) {
+        boolean isUpdated = false;
+        for (Tag tag : tags) {
+            if (!newTags.contains(tag)) {
+                missingTags.add(tag);
+            } else {
+                newTags.remove(tag);
+                removedTags.add(tag);
+                isUpdated = true;
+            }
+        }
+        return isUpdated;
+    }
+
+    private void updatePerson(Model model, Person personToUntag, Set<Tag> newTags, Index targetIndex,
+                              Set<Tag> addedTags) {
+        Person updatedPerson = setPerson(model, personToUntag, newTags);
+        removedTagsMap.put(targetIndex, addedTags);
+        updateSuccessMessage(successMessage, updatedPerson);
     }
 }

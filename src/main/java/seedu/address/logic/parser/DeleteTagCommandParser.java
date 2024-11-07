@@ -48,7 +48,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     }
 
     /**
-     * Validates the length of the provided list of arguments.
+     * Validates whether a list of arguments is empty.
      *
      * @param arguments The list of arguments to validate.
      * @throws ParseException If the list of arguments is empty, indicating no tags were provided.
@@ -58,6 +58,8 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
         }
     }
+
+
 
     /**
      * Parses a string of arguments into a list of strings based on the specified prefix.
@@ -79,12 +81,13 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
      */
     public DeleteTagCommand parse(String args) throws ParseException {
         List<String> arguments = parseArgumentsToList(args);
+        String trimmedInput = args.trim();
+        boolean isForceDelete = trimmedInput.startsWith("-force");
 
         requireAllNonNull(arguments);
         validateArgumentLength(arguments);
 
         List<Tag> tagsToDelete = parseTagsFromArgs(arguments);
-
-        return new DeleteTagCommand(tagsToDelete);
+        return new DeleteTagCommand(tagsToDelete, isForceDelete);
     }
 }
