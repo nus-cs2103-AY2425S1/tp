@@ -39,13 +39,14 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~*" Person: has all
-Person *--> Name
-Person *--> Id
-Person *--> Ward
-Person *--> Diagnosis
-Person *--> Medication
-Person *--> Notes
-Person *--> Appointment
+Person *--> "1" Name
+Person *--> "1" Id
+Person *--> "1" Ward
+Person *--> "0..1" Diagnosis
+Person *--> "0..1" Medication
+Person *--> "0..1" Notes
+Person *--> "0..1" Appointment
+Appointment *--> "2" LocalDateTime
 
 I -[hidden]left-> UniquePersonList
 I -[hidden]down-> Person
@@ -57,7 +58,7 @@ Diagnosis -[hidden]right-> Medication
 Medication -[hidden]right-> Notes
 Notes -[hidden]right-> Appointment
 
-ModelManager --> "~*" Person: search results
-ModelManager --> "~*" Person: appointments
+ModelManager --> "*" Person: filter and sort appointments
+ModelManager --> "*" Person: filters
 @enduml
 
