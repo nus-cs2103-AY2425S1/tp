@@ -68,9 +68,10 @@ public class DeleteRemarkCommandParserTest {
     @Test
     public void parse_invalidRemarkIndex_throwsParseException() {
         assertParseFailure(parser, String.format("1 %s 0", PREFIX_REMARK_INDEX),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_REMARK_INDEX_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(MESSAGE_INVALID_REMARK_INDEX_FORMAT, "0")));
 
         assertParseFailure(parser, String.format("1 %s -1", PREFIX_REMARK_INDEX),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_REMARK_INDEX_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        String.format(MESSAGE_INVALID_REMARK_INDEX_FORMAT, "-1")));
     }
 }

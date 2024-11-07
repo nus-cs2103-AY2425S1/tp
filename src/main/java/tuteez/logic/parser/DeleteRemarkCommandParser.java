@@ -84,7 +84,7 @@ public class DeleteRemarkCommandParser implements Parser<DeleteRemarkCommand> {
             index = ParserUtil.parseIndex(remarkIndexStr);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_INVALID_REMARK_INDEX_FORMAT));
+                    String.format(MESSAGE_INVALID_REMARK_INDEX_FORMAT, remarkIndexStr)));
         }
         return new DeleteRemarkCommand(personIndex, index);
     }
