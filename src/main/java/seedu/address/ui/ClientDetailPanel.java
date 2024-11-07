@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.client.Client;
 import seedu.address.model.status.Status;
+import seedu.address.model.tier.Tier;
 
 /**
  * A UI component that displays detailed information about a {@code Client}.
@@ -127,12 +128,10 @@ public class ClientDetailPanel extends UiPart<Region> {
             setLabelText(emailLabel, client.getEmail().value);
             setLabelText(jobLabel, client.getJob().value);
             setLabelText(incomeLabel, String.valueOf(client.getIncome()));
-            setTier(client.getTier().getValue());
+            tagsGroup.getChildren().clear();
+            setTier(client.getTier());
             setStatus(client.getStatus());
             setRemarkText(client.getRemark().value);
-            tagsGroup.getChildren().clear();
-            setTier(client.getTier().getValue());
-            setStatus(client.getStatus());
             boolean hasTags = !tagsGroup.getChildren().isEmpty();
             setManagedAndVisible(tagsContainer, hasTags);
         } else {
@@ -167,10 +166,10 @@ public class ClientDetailPanel extends UiPart<Region> {
      *
      * @param tier The tier value to display
      */
-    private void setTier(String tier) {
-        if (!tier.isEmpty()) {
-            Label tierLabel = new Label(tier.toUpperCase());
-            tierLabel.getStyleClass().addAll("label", tier.toLowerCase() + "-tier");
+    private void setTier(Tier tier) {
+        if (tier.tierName != Tier.TierEnum.NA) {
+            Label tierLabel = new Label(tier.getValue().toUpperCase());
+            tierLabel.getStyleClass().addAll("label", tier.getValue().toLowerCase() + "-tier");
             tagsGroup.getChildren().add(tierLabel);
         }
     }
