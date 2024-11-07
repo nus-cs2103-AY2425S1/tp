@@ -119,8 +119,8 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 | [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                         | `sort name`                                                                  |
 | [**↑up ↓down arrow key**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                        | -                                                                            |
 | [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                    | -                                                                            |
-| [**import**](#importing-data-import)                                        | Import all client's details             | `import`                                                                                                                                                       | -                                                                            |
-| [**export**](#exporting-data-export)                                        | Export all client's details             | `export`                                                                                                                                                       | -                                                                            |
+| [**import**](#importing-data-import)                                        | Import data from and external file      | `import`                                                                                                                                                       | -                                                                            |
+| [**export**](#exporting-data-export)                                        | Export address book data                | `export`                                                                                                                                                       | -                                                                            |
 | [**clear**](#clearing-all-entries-clear)                                    | Clear all client's details'             | `clear`                                                                                                                                                        | -                                                                            |
 | [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                         | -                                                                            |
 
@@ -443,23 +443,25 @@ Format: `find [k/KEYWORD]... [n/NAME]... [p/PHONE_NUMBER]... [e/EMAIL]... [t/TAG
 
 Deletes the specified client from TrueRental.
 
-<!--TODO: Nathan-->
-
 Format: `cdelete CLIENT_INDEX`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
-
-</box>
-
+**Note**: 
+* Confirmation required. Type `y` for **yes** and `n` for **no**.
 * Deletes the client at the specified `CLIENT_INDEX` and all related rental information.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+</box>
+
+<box type="success" light>
+
+**Examples**:
 * `list` followed by `cdelete 2` deletes the 2nd client in the address book.
 * `find Betsy` followed by `cdelete 1` deletes the 1st client in the results of the `find` command.
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -471,25 +473,26 @@ Examples:
 
 Deletes the specified rental information from the specified client
 
-<!--TODO: Nathan-->
-
-
 Format: `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
-
-</box>
-
+**Note**: 
+* Confirmation required. Type `y` for **yes** and `n` for **no**.
 * Deletes the rental information at the specified `RENTAL_INDEX` from the client at the specified `CLIENT_INDEX`.
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list.
 * `RENTAL_INDEX` refers to the index number shown in the displayed rental information list when the `rview` command is run. (i.e. `rview CLIENT_INDEX`)
 * `CLIENT_INDEX` and `RENTAL_INDEX` **must be positive integers** 1, 2, 3, …​
 
-Examples:
+</box>
+
+<box type="success" light>
+
+**Examples**:
 * `list` followed by `rdelete c/2 r/1` deletes the 1st rental information from the 2nd client in the address book.
 * `find Betsy` followed by `rdelete c/1 r/2` deletes the 2nd rental information from the 1st client in the results of the `find` command.
+
+</box>
 
 ### Sorting all entries : `sort`
 
