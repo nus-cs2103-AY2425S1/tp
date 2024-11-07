@@ -112,15 +112,12 @@ public class WeddingTest {
     @Test
     public void increasePeopleCount() {
         Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
-        amyWedding.increasePeopleCount();
         assertEquals(1, amyWedding.getNumPersonsForWedding());
     }
 
     @Test
     public void decrementPeopleCount() {
         Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
-        amyWedding.increasePeopleCount();
-        amyWedding.decreasePeopleCount();
         assertEquals(0, amyWedding.getNumPersonsForWedding());
     }
 

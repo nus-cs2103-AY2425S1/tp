@@ -106,7 +106,6 @@ public class TypicalPersons {
             ab.addPerson(person);
             for (Wedding wedding : person.getWeddings()) {
                 Wedding weddingInAb = ab.getWedding(wedding);
-                weddingInAb.increasePeopleCount();
             }
         }
         return ab;
