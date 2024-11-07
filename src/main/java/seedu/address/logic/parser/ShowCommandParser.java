@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_ARUGUMENTS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_ARGUMENTS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 
@@ -35,7 +35,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
                 throw new ParseException(MESSAGE_INVALID_NUMBER_OF_ARGS);
             }
             if (!trimmedArgs.matches(VALIDATION_REGEX)) {
-                throw new ParseException(MESSAGE_INVALID_ARUGUMENTS);
+                throw new ParseException(MESSAGE_INVALID_ARGUMENTS);
             }
             return new ShowCommand(new GroupContainsKeywordsPredicate(keywords));
         } catch (ParseException pe) {

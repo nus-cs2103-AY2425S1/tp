@@ -41,12 +41,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            String errorMessage = String.format("%s \n%s",
+                    pe.getMessage(),
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+
+            throw new ParseException(String.format(errorMessage), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID, PREFIX_NETID,
                 PREFIX_MAJOR, PREFIX_YEAR);
-        argMultimap.verifyLessThanFourDuplicatePrefixesFor(PREFIX_GROUP);
+
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 

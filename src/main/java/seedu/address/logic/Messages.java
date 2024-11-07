@@ -28,13 +28,13 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_DELETE_EMPTY_INDEX = "Error: The index cannot be empty";
-    public static final String MESSAGE_INVALID_ARUGUMENTS = "Invalid arguments! "
+    public static final String MESSAGE_INVALID_ARGUMENTS = "Invalid arguments! "
             + "Must be alphanumeric lowercase characters";
     public static final String MESSAGE_OVERFLOW_INDEX = "Error: Index is too large!"
                 + " The largest possible value is 2147483647.";
     public static final String MESSAGE_MAXLEADINGZEROS = "Error: The index has too many digits!"
             + " The maximum amount of digits is 10 including leading zeros to be ignored";
-    public static final String MESSAGE_DELETE_UPPERBOUND_ERROR = "Sorry but the index was too large "
+    public static final String MESSAGE_INDEX_UPPERBOUND_ERROR = "Sorry but the index was too large "
                 + "compared to your list size!";
     public static final String MESSAGE_DELETE_EMPTY_ERROR = "Sorry but you cannot delete from an empty list.";
     public static final String MESSAGE_EDIT_EMPTY_ERROR = "Sorry but you cannot edit from an empty list.";
@@ -43,13 +43,16 @@ public class Messages {
     public static final String MESSAGE_INVALID_NUMBER_OF_ARGS = "There should be at least one argument";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "The following duplicate fields are detected and is not permitted: ";
+
+    public static final String MESSAGE_MORE_THAN_TEN_DUPLICATE_FIELDS =
+            "There should not be more than ten duplicate fields for group (g/)";
+
     public static final String MESSAGE_DUPLICATE_EXPLANATION =
             "The above is considered duplicate fields because they have a preceding space.";
+
     public static final String MESSAGE_DUPLICATE_SOLUTION =
             "If you are trying to use the field values as part of a string, remove the preceding space";
 
-    public static final String MESSAGE_MORE_THAN_FOUR_DUPLICATE_FIELDS =
-            "There should not be more than four duplicate fields for group (g/)";
     public static final String MESSAGE_NAME_CANNOT_BE_EMPTY = "Name cannot be empty.";
     public static final String MESSAGE_INVALID_STUDENT_ID_FORMAT = "Invalid Student ID format. It should be 9"
             + " characters with letters at the start and end, and digits in between (e.g., 'A1234567E').";

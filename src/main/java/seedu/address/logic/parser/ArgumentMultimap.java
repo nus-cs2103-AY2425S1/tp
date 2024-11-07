@@ -75,19 +75,7 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
-    /**
-     * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
-     * four times among the arguments.
-     */
-    public void verifyLessThanFourDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
-        long duplicateCount = Stream.of(prefixes)
-                .filter(argMultimap::containsKey)
-                .mapToLong(prefix -> argMultimap.get(prefix).size())
-                .sum();
-        if (duplicateCount > 4) {
-            throw new ParseException(Messages.MESSAGE_MORE_THAN_FOUR_DUPLICATE_FIELDS);
-        }
-    }
+
     /**
      * Counts the total number of occurrences of the specified prefixes in the argument map
      */
