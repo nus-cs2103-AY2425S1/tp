@@ -2,11 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,10 +39,9 @@ public class SortCommand extends Command {
             + "Example 6: " + COMMAND_WORD + " t/ j/ n/ p/\n";
 
 
-    private final List<Prefix> sortCriteria;
-
     public static final String MESSAGE_EMPTY = "Talentcy is empty. Please add contacts before attempting to sort.";
 
+    private final List<Prefix> sortCriteria;
     public SortCommand(List<Prefix> sortCriteria) {
         this.sortCriteria = sortCriteria;
     }
@@ -67,16 +64,16 @@ public class SortCommand extends Command {
 
         return new CommandResult(model.isListEmpty() ? MESSAGE_EMPTY
                 : String.format("Contact list is sorted based on your selected criteria(s)\n%s",
-                this.sortCriteria.isEmpty() ? "n/" :
-                        this.sortCriteria.stream()
-                                .map(Prefix::toString)
-                                .collect(Collectors.joining(", "))));
+                this.sortCriteria.isEmpty() ? "n/"
+                        : this.sortCriteria.stream()
+                        .map(Prefix::toString)
+                        .collect(Collectors.joining(", "))));
     }
 
     private Comparator<Person> buildComparator(Comparator<Person> comparator, Prefix criterion) {
 
         if (criterion.equals(PREFIX_TAG)) {
-            comparator =  this.sortCriteria.indexOf(criterion) == 0
+            comparator = this.sortCriteria.indexOf(criterion) == 0
                     ? Comparator.comparing(Person::getTag, Tag.TAG_COMPARATOR)
                     : comparator.thenComparing(Person::getTag, Tag.TAG_COMPARATOR);
         } else if (criterion.equals(PREFIX_JOBCODE)) {

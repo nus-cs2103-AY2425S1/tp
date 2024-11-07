@@ -11,6 +11,9 @@ import java.util.Comparator;
  */
 public class Email {
 
+    public static final Comparator<Email> EMAIL_COMPARATOR = Comparator
+            .comparing(email -> email.value.toLowerCase());
+
     public static final String MESSAGE_CONSTRAINTS_FIND = "Email must be between 1 and 50 characters inclusive.";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
@@ -35,8 +38,6 @@ public class Email {
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
-    public static final Comparator<Email> EMAIL_COMPARATOR = Comparator
-            .comparing(email -> email.value.toLowerCase());
 
     public final String value;
 
