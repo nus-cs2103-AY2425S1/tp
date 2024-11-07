@@ -18,7 +18,7 @@ public class SortOrder {
     }
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Sort order should be 'a' for ascending or 'd' for descending, and it should not be blank";
+            "Sort order should be 'a' for ascending or 'd' for descending and it must not be blank.";
 
     /**
      * Sort order must be 'a' or 'd'.

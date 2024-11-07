@@ -15,7 +15,7 @@ public class SupplierSortBy {
     public enum SupplierSortByField {
         N
     }
-    public static final String MESSAGE_CONSTRAINTS = "Supplier sort by field should be 'n' for name";
+    public static final String MESSAGE_CONSTRAINTS = "Supplier sort by field should be 'n' for name.";
     /**
      * Field to sort by must be 'n'.
      */

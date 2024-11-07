@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindDeliveryCommand;
-import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
@@ -71,7 +70,7 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
                 status = Status.valueOf(statusString.toUpperCase());
             } catch (IllegalArgumentException e) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkSupplierCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDeliveryCommand.MESSAGE_USAGE));
             }
             predicates.add(new DeliveryStatusMatchInputPredicate(status));
         }
