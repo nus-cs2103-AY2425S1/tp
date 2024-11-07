@@ -56,6 +56,9 @@ public class ProductCard extends UiPart<Region> {
         product.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (stock.getStockLevel() < stock.getMinStockLevel()) {
+            cardPane.setStyle("-fx-background-color: #9d6260;");
+        }
     }
 
     @Override

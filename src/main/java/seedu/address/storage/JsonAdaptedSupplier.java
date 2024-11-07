@@ -102,7 +102,7 @@ class JsonAdaptedSupplier {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Email.getDetailedErrorMessage(email));
         }
         final Email modelEmail = new Email(email);
 
