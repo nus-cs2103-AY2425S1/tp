@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Set;
@@ -21,7 +23,17 @@ import seedu.address.model.person.PersonContainsTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 class BatchDeleteCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    private final Set<Tag> friendsOwesMoneyTag = Set.of(new Tag("friends"), new Tag("owesMoney"));
+    private final PersonContainsTagsPredicate friendsOwesMoneyPredicate =
+            new PersonContainsTagsPredicate(friendsOwesMoneyTag);
+    private final BatchDeleteCommand batchDeleteFriendsOwesMoneyCommand =
+            new BatchDeleteCommand(friendsOwesMoneyTag, friendsOwesMoneyPredicate);
+
+    private final Set<Tag> friendsTag = Set.of(new Tag("friends"));
+    private final PersonContainsTagsPredicate friendsPredicate = new PersonContainsTagsPredicate(friendsTag);
+    private final BatchDeleteCommand batchDeleteFriendsCommand = new BatchDeleteCommand(friendsTag, friendsPredicate);
 
     @Test
     public void constructor_nullArguments_throwsNullPointerException() {
@@ -39,10 +51,7 @@ class BatchDeleteCommandTest {
 
     @Test
     public void execute_validTags_success() {
-        Set<Tag> tagsV1 = Set.of(new Tag("friends"), new Tag("owesMoney"));
-        PersonContainsTagsPredicate predicate1 = new PersonContainsTagsPredicate(tagsV1);
-        BatchDeleteCommand batchDeleteCommand = new BatchDeleteCommand(tagsV1, predicate1);
-
+        // Deletes one person, two tags
         String expectedMessage = String.format(
                 BatchDeleteCommand.MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
                 Messages.format(BENSON)
@@ -52,7 +61,36 @@ class BatchDeleteCommandTest {
         expectedModel.deletePerson(BENSON);
         expectedModel.updateFilteredPersonList(Predicate.not(Model.PREDICATE_SHOW_ALL_PERSONS));
 
-        assertCommandSuccess(batchDeleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(batchDeleteFriendsOwesMoneyCommand, model, expectedMessage, expectedModel);
+
+        // Two tags but no person found
+        expectedMessage = String.format(
+                BatchDeleteCommand.MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG,
+                friendsOwesMoneyTag
+        );
+
+        assertCommandSuccess(batchDeleteFriendsOwesMoneyCommand, model, expectedMessage, expectedModel);
+
+        // Deletes two persons, single tag
+        expectedMessage = String.format(
+                BatchDeleteCommand.MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
+                Messages.format(ALICE))
+                + String.format(
+                BatchDeleteCommand.MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
+                Messages.format(DANIEL));
+
+        expectedModel.deletePerson(ALICE);
+        expectedModel.deletePerson(DANIEL);
+        expectedModel.updateFilteredPersonList(Predicate.not(Model.PREDICATE_SHOW_ALL_PERSONS));
+        assertCommandSuccess(batchDeleteFriendsCommand, model, expectedMessage, expectedModel);
+
+        // One tag but no person found
+        expectedMessage = String.format(
+                BatchDeleteCommand.MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG,
+                friendsTag
+        );
+
+        assertCommandSuccess(batchDeleteFriendsCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -72,28 +110,21 @@ class BatchDeleteCommandTest {
 
     @Test
     public void equals() {
-        Set<Tag> tagsV1 = Set.of(new Tag("friends"), new Tag("owesMoney"));
-        PersonContainsTagsPredicate predicate1 = new PersonContainsTagsPredicate(tagsV1);
-        BatchDeleteCommand batchDeleteCommand1 = new BatchDeleteCommand(tagsV1, predicate1);
-
-        Set<Tag> tagsV2 = Set.of(new Tag("friends"));
-        PersonContainsTagsPredicate predicate2 = new PersonContainsTagsPredicate(tagsV2);
-        BatchDeleteCommand batchDeleteCommand2 = new BatchDeleteCommand(tagsV2, predicate2);
-
         // same object -> returns true
-        assertTrue(batchDeleteCommand1.equals(batchDeleteCommand1));
+        assertTrue(batchDeleteFriendsOwesMoneyCommand.equals(batchDeleteFriendsOwesMoneyCommand));
 
         // same values -> returns true
-        BatchDeleteCommand batchDeleteCommandV1Copy = new BatchDeleteCommand(tagsV1, predicate1);
-        assertTrue(batchDeleteCommand1.equals(batchDeleteCommandV1Copy));
+        BatchDeleteCommand batchDeleteCommandV1Copy =
+                new BatchDeleteCommand(friendsOwesMoneyTag, friendsOwesMoneyPredicate);
+        assertTrue(batchDeleteFriendsOwesMoneyCommand.equals(batchDeleteCommandV1Copy));
 
         // different types -> returns false
-        assertFalse(batchDeleteCommand1.equals(1));
+        assertFalse(batchDeleteFriendsOwesMoneyCommand.equals(1));
 
         // null -> returns false
-        assertFalse(batchDeleteCommand1.equals(null));
+        assertFalse(batchDeleteFriendsOwesMoneyCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(batchDeleteCommand1.equals(batchDeleteCommand2));
+        assertFalse(batchDeleteFriendsOwesMoneyCommand.equals(batchDeleteFriendsCommand));
     }
 }
