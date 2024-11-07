@@ -43,7 +43,7 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
         String reminderDate = ParserUtil.parseReminderDate(argMultimap.getValue(PREFIX_LAST_SEEN).get());
 
         if (LocalDate.now().isAfter(LocalDate.parse(reminderDate, FORMATTER))) {
-            throw new ParseException("Reminder date must be in the future");
+            throw new ParseException("Reminder date cannot be in the past");
         }
 
         String reminderDescription = ParserUtil
