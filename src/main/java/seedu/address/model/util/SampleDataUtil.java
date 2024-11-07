@@ -47,7 +47,7 @@ public class SampleDataUtil {
                     new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new Tag("High Risk"),
-                    getAllergySet("Penicillin, Wheat"),
+                    getAllergySet("Penicillin", "Wheat"),
                     EMPTY_DATE),
             new Person(
                     new Name("David Li"),
@@ -71,7 +71,7 @@ public class SampleDataUtil {
                     new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
                     new Tag("Low Risk"),
-                    getAllergySet("Pollen, Egg"),
+                    getAllergySet("Pollen", "Egg"),
                     EMPTY_DATE)
         };
     }
