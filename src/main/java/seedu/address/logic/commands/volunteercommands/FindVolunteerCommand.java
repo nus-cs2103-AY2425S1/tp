@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.volunteercommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VOLUNTEERS;
 
 import java.util.function.Predicate;
@@ -22,7 +23,7 @@ public class FindVolunteerCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds volunteers whose names start with the specified prefix (case-insensitive).\n"
             + "Parameters: PREFIX (must be a non-empty alphanumeric between 1 and 100 characters)\n"
-            + "Example: " + COMMAND_WORD + " volunteerSearchString";
+            + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " volunteerSearchString";
 
     public static final String MESSAGE_VOLUNTEER_FOUND = "Found %d volunteer(s) containing '%s':";
     public static final String MESSAGE_VOLUNTEER_NOT_FOUND = "No volunteers found containing '%s'.";

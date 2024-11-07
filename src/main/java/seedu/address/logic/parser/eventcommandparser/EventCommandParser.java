@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.eventcommands.EventDeleteCommand;
+import seedu.address.logic.commands.eventcommands.EventFilterCommand;
 import seedu.address.logic.commands.eventcommands.EventNewCommand;
 import seedu.address.logic.commands.eventcommands.EventViewCommand;
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
@@ -57,6 +58,8 @@ public class EventCommandParser {
             return new FindEventCommandParser().parse(arguments);
         case EventViewCommand.COMMAND_WORD:
             return new EventViewCommandParser().parse(arguments);
+        case EventFilterCommand.COMMAND_WORD:
+            return new EventFilterCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

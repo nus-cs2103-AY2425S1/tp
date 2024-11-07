@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.eventcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.EVENT_COMMAND_INDICATOR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.function.Predicate;
@@ -22,7 +23,7 @@ public class FindEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds events with names containing the specified keyword (case-insensitive).\n"
             + "Parameters: KEYWORD (must be a non-empty string)\n"
-            + "Example: " + COMMAND_WORD + " eventSearchString";
+            + "Example: " + EVENT_COMMAND_INDICATOR + " " + COMMAND_WORD + " eventSearchString";
 
     public static final String MESSAGE_EVENT_FOUND = "Found %d event(s) containing '%s':";
     public static final String MESSAGE_EVENT_NOT_FOUND = "No events found containing '%s'.";

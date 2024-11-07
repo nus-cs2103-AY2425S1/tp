@@ -200,6 +200,11 @@ public class VolunteerNewCommandTest {
         }
 
         @Override
+        public void filterEvent(Event eventToView) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasVolunteer(Volunteer volunteer) {
             throw new AssertionError("This method should not be called.");
         }

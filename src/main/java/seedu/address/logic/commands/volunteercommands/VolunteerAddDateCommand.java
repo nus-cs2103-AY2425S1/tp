@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.volunteercommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class VolunteerAddDateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds dates to the list of available dates of volunteer identified by the index number "
             + "used in the displayed volunteer list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
+            + "Parameters: dates (must be in yyyy-MM-dd and cannot repeat)\n"
+            + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
     private static final String MESSAGE_ADD_DATE_VOLUNTEER_SUCCESS =
             "Added dates to %s's list of available dates.";
 
