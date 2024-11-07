@@ -661,6 +661,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC15 - Grade a student**
+
+**MSS**
+
+1.  User requests to <u>list persons (UC3)</u>
+2.  User requests to edit a specific student in the list
+3.  GOATS edits the student
+4.  GOATS outputs list of all contacts
+5.  GOATS shows success message
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    *  Use case ends.
+
+* 2a. The given command or index is invalid.
+
+    * 2a1. GOATS shows an error message.
+
+      Use case ends.
+
+* 2b. The given index is not a student
+
+    * 2b1. GOATS shows an error message.
+  
+      Use case ends.
+
 *{More to be added}*
 
 
