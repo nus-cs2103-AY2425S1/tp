@@ -10,14 +10,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 
 
-### Sarah
+### Sarah Faith Teo
 
 <img src="images/sarahteonin.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/sarahteonin)]
-
-[[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
@@ -28,7 +25,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 
 [[github](http://github.com/jiayr99)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -37,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/jasmiinee.png" width="200px">
 
-[[github](https://github.com/jasmiinee)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/jasmiinee)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -49,7 +45,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 
 [[github](http://github.com/GuanpengR)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Integration
@@ -60,7 +55,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jumpyjay.png" width="200px">
 
 [[github](https://github.com/JumpyJay)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
