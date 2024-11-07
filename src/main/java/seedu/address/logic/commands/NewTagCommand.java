@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.tag.Tag.MESSAGE_CONSTRAINTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +15,13 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagList;
 
 /**
- * Adds a new predefined tag.
+ * Adds a new tag to the tag list.
  */
-public class NewtagCommand extends UndoableCommand {
+public class NewTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "newtag";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Creates new tag(s) (case insensitive). Maximum of 50 alphanumeric characters, spaces, parenthesis "
-            + "and apostrophes per tag.\n"
+            + ": Creates new tag(s) (case insensitive).\n"
+            + MESSAGE_CONSTRAINTS
             + "Parameters: " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
@@ -30,25 +31,28 @@ public class NewtagCommand extends UndoableCommand {
     public static final String MESSAGE_SOME_DUPLICATE = "Non-duplicate tag(s) has/have been created successfully.\n"
             + "The following tag(s) already exist(s):\n";
 
-    public static final String MESSAGE_TOO_MANY_TAGS = "You are attempting to add more than "
-            + TagList.MAXIMUM_TAGLIST_SIZE + " tags in total.\n"
-            + "Please remove some using 'deletetag first'.\n";
+    public static final String MESSAGE_TOO_MANY_TAGS = "This action may cause the number of predefined tags to exceed "
+            + TagList.MAXIMUM_TAGLIST_SIZE + " in total.\n"
+            + "Please remove some using 'deletetag' first.\n";
 
     private final List<Tag> tags;
 
 
     /**
-     * Constructs a NewtagCommand to add the specified {@code tags}.
+     * Constructs a NewTagCommand to add the specified {@code tags}.
+     *
      * @param tags The {@code List} of tags to be added.
      */
-    public NewtagCommand(List<Tag> tags) {
+    public NewTagCommand(List<Tag> tags) {
         requireAllNonNull(tags);
         this.tags = tags;
     }
 
     /**
-     * @throws CommandException if the number of defined tags in the system will exceed the maximum
-     *      allowable number if the new tags were to be added.
+     * Checks if the number of tags in the tag list will exceed the maximum
+     * allowable number if the new tags were to be added.
+     *
+     * @throws CommandException If the specified limit will be exceeded.
      */
     private void validateTagListSize(Model model) throws CommandException {
         requireAllNonNull(model);
@@ -60,7 +64,9 @@ public class NewtagCommand extends UndoableCommand {
 
     /**
      * Adds the tags to the model and checks for duplicates.
+     *
      * @param model The model to which tags will be added.
+     * @return The set of tags which were successfully added.
      */
     private Set<Tag> addTagsToModel(Model model) {
         requireAllNonNull(model);
@@ -70,9 +76,9 @@ public class NewtagCommand extends UndoableCommand {
     }
 
     /**
-     * Creates a CommandResult based on the success of adding tags to the model.
+     * Creates a CommandResult based on the tags which were successfully added to the model.
      *
-     * @param tagsSuccessfullyAdded the tags that were successfully added.
+     * @param tagsSuccessfullyAdded The tags that were successfully added.
      * @return The corresponding CommandResult.
      */
     private CommandResult createCommandResult(Set<Tag> tagsSuccessfullyAdded) {
@@ -80,12 +86,14 @@ public class NewtagCommand extends UndoableCommand {
         List<Tag> tagsNotSuccessfullyAdded = new ArrayList<>(tags);
         tagsNotSuccessfullyAdded.removeAll(tagsSuccessfullyAdded);
 
+        if (!tagsNotSuccessfullyAdded.isEmpty() && tagsSuccessfullyAdded.isEmpty()) {
+            return new CommandResult(MESSAGE_ALL_DUPLICATE + tagsNotSuccessfullyAdded);
+        }
+
         if (!tagsNotSuccessfullyAdded.isEmpty()) {
-            if (tagsSuccessfullyAdded.isEmpty()) {
-                return new CommandResult(MESSAGE_ALL_DUPLICATE + tagsNotSuccessfullyAdded);
-            }
             return new CommandResult(MESSAGE_SOME_DUPLICATE + tagsNotSuccessfullyAdded);
         }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -108,11 +116,11 @@ public class NewtagCommand extends UndoableCommand {
             return true;
         }
 
-        if (!(other instanceof NewtagCommand)) {
+        if (!(other instanceof NewTagCommand)) {
             return false;
         }
 
-        NewtagCommand otherCommand = (NewtagCommand) other;
+        NewTagCommand otherCommand = (NewTagCommand) other;
         return tags.equals(otherCommand.tags);
     }
 

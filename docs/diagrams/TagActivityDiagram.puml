@@ -1,0 +1,37 @@
+@startuml
+sprite $rake [16x16/8] {
+0000000000000000
+0000000jj0000000
+0000000jj0000000
+0005555jj5555000
+000jjeejjeejj000
+000jj00jj00jj000
+000jj00jj00jj000
+0000000000000000
+}
+skin rose
+skinparam ActivityFontSize 20
+skinparam ArrowFontSize 20
+title Activity: Tag guest
+start
+repeat :User inputs command, guest index and name of tag;
+:System checks if input is valid;
+if () then ([invalid command format])
+    :System shows error and specifies command usage;
+else ([else])
+    :System extracts tag name from input;
+    :System checks if tag name is valid;
+    if () then ([invalid name])
+        :System shows error and specifies command usage;
+    else ([else])
+        if () then ([tag not in tag list))
+            :User creates new tag <$rake>;
+        else ([else])
+            :System checks if the index is valid;
+            if () then ([invalid index])
+                :System shows error and specifies command usage;
+            else ([else])
+                :System tags the guest with the tag;
+                :System notifies that the guest is successfully tagged;
+stop
+@enduml

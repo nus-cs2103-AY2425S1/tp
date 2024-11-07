@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.tag.Tag.MESSAGE_CONSTRAINTS;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,8 +25,8 @@ public class DeleteTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes existing tag(s) from the tag list (case insensitive). Each tag can contain a maximum of "
-            + "50 alphanumeric characters, spaces, parentheses, and apostrophes.\n"
+            + ": Deletes existing tag(s) from the tag list (case insensitive).\n"
+            + MESSAGE_CONSTRAINTS
             + "Parameters: " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
@@ -70,9 +71,10 @@ public class DeleteTagCommand extends UndoableCommand {
     /**
      * Checks whether the tags to be deleted are currently tagged to guests (in use).
      *
-     * @throws CommandException if any of the tags are currently in use.
+     * @throws CommandException If any of the tags are currently in use.
      */
     private void checkForTagsInUse(Model model) throws CommandException {
+        requireAllNonNull(model);
         Set<Tag> tagsInUse = model.getTagsInUse();
         Set<Tag> matchingTags = tagsInUse.stream().filter(tags::contains).collect(Collectors.toSet());
 
@@ -92,13 +94,14 @@ public class DeleteTagCommand extends UndoableCommand {
         requireAllNonNull(tagsSuccessfullyDeleted);
         List<Tag> tagsNotSuccessfullyDeleted = new ArrayList<>(tags);
 
-        // Tags that were not deleted successfully
+        // Get tags that were not deleted successfully
         tagsNotSuccessfullyDeleted.removeAll(tagsSuccessfullyDeleted);
 
+        if (!tagsNotSuccessfullyDeleted.isEmpty() && tagsSuccessfullyDeleted.isEmpty()) {
+            return new CommandResult(MESSAGE_ALL_NONEXISTENT + tagsNotSuccessfullyDeleted);
+        }
+
         if (!tagsNotSuccessfullyDeleted.isEmpty()) {
-            if (tagsSuccessfullyDeleted.isEmpty()) {
-                return new CommandResult(MESSAGE_ALL_NONEXISTENT + tagsNotSuccessfullyDeleted);
-            }
             return new CommandResult(MESSAGE_SOME_NONEXISTENT + tagsNotSuccessfullyDeleted);
         }
 
