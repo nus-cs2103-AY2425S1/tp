@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_CANCEL_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.ImportCommand;
@@ -92,6 +94,20 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_promptAccept_success() throws CommandException, ParseException {
+        logic.execute(ClearCommand.COMMAND_WORD);
+        CommandResult commandResult = logic.execute("y");
+        assertEquals(ClearCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_promptDeny_cancel() throws CommandException, ParseException {
+        logic.execute(ClearCommand.COMMAND_WORD);
+        CommandResult commandResult = logic.execute("n");
+        assertEquals(MESSAGE_CANCEL_COMMAND, commandResult.getFeedbackToUser());
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
@@ -126,6 +142,14 @@ public class LogicManagerTest {
         CommandResult commandResult = logic.processFile(TEST_DATA_FOLDER.resolve("does-not-exist.json").toFile());
         assertEquals(ImportCommand.MESSAGE_FAILURE, commandResult.getFeedbackToUser());
         assertEquals(new AddressBook(), model.getAddressBook());
+    }
+
+    @Test
+    public void processFile_null_messageCancel() throws CommandException, ParseException {
+        logic.execute(ImportCommand.COMMAND_WORD);
+        logic.execute("y");
+        CommandResult commandResult = logic.processFile(null);
+        assertEquals(MESSAGE_CANCEL_COMMAND, commandResult.getFeedbackToUser());
     }
 
     @Test
