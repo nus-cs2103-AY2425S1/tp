@@ -13,7 +13,14 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+### AI Assistance
+Parts of the codebase were developed with the assistance of ChatGPT. The contributions from ChatGPT include:
+* Assisting in enhancing test cases for AddCommand and EditCommand
+* Assisting in enhancing tests for ClearCommand
+* Extensive help on implementing DetailPanel UI Component
+* LocalDateTime and DateTimeFormatter implementation for Meetings
+* Suggesting how test cases can be designed for FindCommand, DeleteMeetingCommand, EditMeetingCommand, FindCommandParser,  DeleteMeetingCommandParser, and EditMeetingCommandParser
+* Suggesting the usage of and helped with implementation of Observer pattern (i.e. SelectionListener and ModelClearObserver) for some UI components
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +78,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `DetailPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -367,7 +374,7 @@ For all use cases below,
 
 **MSS**
 
-1. FindingbrUdders shows the list of contacts either by default, by <u>list request</u> ,or after a <u>find request</u>.
+1. FindingbrUdders shows the list of contacts either by default, by <u>list request</u>, or after a <u>find request</u>.
 2. User clicks the Udder in the Udder list panel.
 3. FindingbrUdders displays the details in the details panel.
 
