@@ -199,8 +199,10 @@ public class MainWindow extends UiPart<Stage> {
 
             // We should update the show panel ONLY if the current Person being shown has changed
             // or of course, it is a show command
+            System.out.println(logic.getCurrentlyShownPerson());
+            System.out.println(commandResult.getOriginalPerson());
             if (commandResult.isShowCommand()
-                    || logic.getCurrentlyShownPerson().equals(commandResult.getPersonToShow())) {
+                    || logic.getCurrentlyShownPerson().equals(commandResult.getOriginalPerson())) {
                 setShowPerson(commandResult.getPersonToShow());
             }
 

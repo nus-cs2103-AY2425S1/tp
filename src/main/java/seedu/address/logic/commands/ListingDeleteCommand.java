@@ -74,7 +74,7 @@ public class ListingDeleteCommand extends Command {
 
         return new CommandResult(
                 generateSuccessMessage(editedPerson, MESSAGE_DELETE_LISTING_SUCCESS),
-                editedPerson, false);
+                personToEdit, editedPerson, false);
     }
 
     /**

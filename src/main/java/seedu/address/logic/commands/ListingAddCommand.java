@@ -80,7 +80,8 @@ public class ListingAddCommand extends Command {
 
 
         return new CommandResult(generateSuccessMessage(editedPerson,
-                MESSAGE_ADDED_LISTING_SUCCESS), editedPerson, false);
+                MESSAGE_ADDED_LISTING_SUCCESS),
+                personToEdit, editedPerson, false);
     }
 
     /**

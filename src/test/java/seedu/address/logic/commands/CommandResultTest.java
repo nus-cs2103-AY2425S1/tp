@@ -63,14 +63,15 @@ public class CommandResultTest {
         // Without personToShow
         String expectedWithoutPerson = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + ", personToShow=null}";
+                + ", exit=" + commandResult.isExit() + ", personToEdit=null, personToShow=null}";
         assertEquals(expectedWithoutPerson, commandResult.toString());
 
         // With personToShow
-        CommandResult commandResultWithPerson = new CommandResult("feedback", person, false);
+        CommandResult commandResultWithPerson = new CommandResult("feedback", person, person, false);
         String expectedWithPerson = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResultWithPerson.getFeedbackToUser() + ", showHelp=" + commandResultWithPerson.isShowHelp()
-                + ", exit=" + commandResultWithPerson.isExit() + ", personToShow=" + person + "}";
+                + ", exit=" + commandResultWithPerson.isExit() + ", personToEdit=" + person
+                + ", personToShow=" + person + "}";
         assertEquals(expectedWithPerson, commandResultWithPerson.toString());
     }
 }
