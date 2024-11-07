@@ -44,15 +44,15 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 ## Summary of Features
 ### Command summary
 
-| Action                                                 | Format, Examples                                                                                                                                                    |
-|--------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-contact-add)**                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President` |
-| **[Clear](#clearing-all-entries-clear)**               | `clear`                                                                                                                                                             |
-| **[Delete](#deleting-a-contact-delete)**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
-| **[Edit](#editing-a-contact-edit)**                    | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                      |
-| **[Find](#locating-contacts-by-contact-details-find)** | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                |
-| **[List](#listing-all-contacts-list)**                 | `list`                                                                                                                                                              |
-| **[Help](#viewing-help-help)**                         | `help`                                                                                                                                                              |
+| Action                                                 | Format, Examples                                                                                                                                                          |
+|--------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-contact-add)**                       | `add n/NAME th/TELEGRAM_HANDLE ss/STUDENT_STATUS e/EMAIL r/ROLE…​` <br> e.g., `add n/James Ho th/jamesho123 ss/undergraduate 3 e/jamesho@example.com r/Admin r/President` |
+| **[Clear](#clearing-all-entries-clear)**               | `clear`                                                                                                                                                                   |
+| **[Delete](#deleting-a-contact-delete)**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                       |
+| **[Edit](#editing-a-contact-edit)**                    | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                    |
+| **[Find](#locating-contacts-by-contact-details-find)** | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                      |
+| **[List](#listing-all-contacts-list)**                 | `list`                                                                                                                                                                    |
+| **[Help](#viewing-help-help)**                         | `help`                                                                                                                                                                    |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -145,7 +145,7 @@ Possible example of slight variations:
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`
+Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE] [nn/NICKNAME]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -183,7 +183,7 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
 Examples:
 * `find n/john` returns `Johnny Tan` and `John Doe`<br>
 * `find n/harlot olive ss/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`<br>
-* `find r/Admin r/President` returns `Bernice Yu` who holds both roles, but not `Alex Yeoh` who only holds the role `President`<br>
+* `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
 ### Deleting a contact: `delete`
