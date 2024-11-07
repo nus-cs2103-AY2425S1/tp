@@ -90,7 +90,6 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -110,9 +109,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
+        Set<Nric> updatedCaregivers = editPersonDescriptor.getCaregivers().orElse(personToEdit.getCaregivers());
+        Set<Nric> updatedPatients = editPersonDescriptor.getPatients().orElse(personToEdit.getPatients());
 
         return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedRoles);
+                updatedRoles, updatedCaregivers, updatedPatients);
     }
 
     @Override
@@ -152,8 +153,15 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Set<Role> roles;
+        private Set<Nric> caregivers;
+        private Set<Nric> patients;
 
+        /**
+         * Creates an {@code EditPersonDescriptor} with empty fields.
+         */
         public EditPersonDescriptor() {
+            caregivers = new HashSet<>();
+            patients = new HashSet<>();
         }
 
         /**
@@ -168,6 +176,8 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setRoles(toCopy.roles);
+            setCaregivers(toCopy.caregivers);
+            setPatients(toCopy.caregivers);
         }
 
         /**
@@ -253,6 +263,22 @@ public class EditCommand extends Command {
             this.roles = (roles != null) ? new HashSet<>(roles) : null;
         }
 
+        public Optional<Set<Nric>> getCaregivers() {
+            return (caregivers != null) ? Optional.of(Collections.unmodifiableSet(caregivers)) : Optional.empty();
+        }
+
+        public void setCaregivers(Set<Nric> caregivers) {
+            this.caregivers = (caregivers != null) ? new HashSet<>(caregivers) : null;
+        }
+
+        public Optional<Set<Nric>> getPatients() {
+            return (patients != null) ? Optional.of(Collections.unmodifiableSet(patients)) : Optional.empty();
+        }
+
+        public void setPatients(Set<Nric> patients) {
+            this.patients = (patients != null) ? new HashSet<>(patients) : null;
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -271,7 +297,9 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(roles, otherEditPersonDescriptor.roles);
+                    && Objects.equals(roles, otherEditPersonDescriptor.roles)
+                    && Objects.equals(caregivers, otherEditPersonDescriptor.caregivers)
+                    && Objects.equals(patients, otherEditPersonDescriptor.patients);
         }
 
         @Override
@@ -284,6 +312,8 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("tags", tags)
                     .add("roles", roles)
+                    .add("caregivers", caregivers)
+                    .add("patients", patients)
                     .toString();
         }
     }

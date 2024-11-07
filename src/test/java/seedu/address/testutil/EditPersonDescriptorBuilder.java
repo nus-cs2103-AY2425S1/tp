@@ -41,6 +41,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setRoles(person.getRoles());
+        descriptor.setCaregivers(person.getCaregivers());
+        descriptor.setPatients(person.getPatients());
     }
 
     /**
@@ -100,6 +102,26 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withRoles(String... roles) {
         Set<Role> roleSet = Stream.of(roles).map(Role::valueOf).collect(Collectors.toSet());
         descriptor.setRoles(roleSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code caregivers} into a {@code Set<Nric>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withCaregivers(String... caregivers) {
+        Set<Nric> caregiverSet = Stream.of(caregivers).map(Nric::new).collect(Collectors.toSet());
+        descriptor.setCaregivers(caregiverSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code patients} into a {@code Set<Nric>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withPatients(String... patients) {
+        Set<Nric> patientSet = Stream.of(patients).map(Nric::new).collect(Collectors.toSet());
+        descriptor.setPatients(patientSet);
         return this;
     }
 

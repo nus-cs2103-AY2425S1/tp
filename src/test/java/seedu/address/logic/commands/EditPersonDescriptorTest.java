@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -41,6 +42,10 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different nric -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNric(VALID_NRIC_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different phone -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -60,6 +65,14 @@ public class EditPersonDescriptorTest {
         // different roles -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRoles(VALID_ROLE_AMY).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        //different caregivers -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withCaregivers(VALID_NRIC_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        //different patients -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPatients(VALID_NRIC_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -72,7 +85,9 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", roles="
-                + editPersonDescriptor.getRoles().orElse(null) + "}";
+                + editPersonDescriptor.getRoles().orElse(null) + ", caregivers="
+                + editPersonDescriptor.getCaregivers().orElse(null) + ", patients="
+                + editPersonDescriptor.getPatients().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

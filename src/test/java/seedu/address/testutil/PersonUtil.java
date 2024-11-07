@@ -53,6 +53,10 @@ public class PersonUtil {
 
         person.getRoles().stream().forEach(
                 s -> sb.append(PREFIX_ROLE + s.name() + " "));
+        person.getCaregivers().stream().forEach(
+                s -> sb.append(PREFIX_CAREGIVER + s.value + " "));
+        person.getPatients().stream().forEach(
+                s -> sb.append(PREFIX_PATIENT + s.value + " "));
         return sb.toString();
     }
 
@@ -99,11 +103,11 @@ public class PersonUtil {
 
     public static String getDeleteAppointmentCommand(Nric testperson, String date, String time) {
         return DeleteAppointmentCommand.COMMAND_WORD + " " + PREFIX_NRIC + testperson.value
-            + " " + PREFIX_DATE + date + " " + PREFIX_START_TIME + time;
+                + " " + PREFIX_DATE + date + " " + PREFIX_START_TIME + time;
     }
 
     public static String getUpdateAppointmentStatusCommand(Nric testperson, String date, String time, String status) {
         return UpdateAppointmentStatusCommand.COMMAND_WORD + " " + PREFIX_NRIC + testperson.value
-            + " " + PREFIX_DATE + date + " " + PREFIX_START_TIME + time + " " + PREFIX_STATUS + status;
+                + " " + PREFIX_DATE + date + " " + PREFIX_START_TIME + time + " " + PREFIX_STATUS + status;
     }
 }
