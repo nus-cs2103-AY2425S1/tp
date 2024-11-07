@@ -40,20 +40,25 @@ The bulk of the app's work is done by the `UI`, `Logic`, `Model`, and `Storage` 
     * At launch, it initializes the other components in the correct sequence and connects them.
     * At shutdown, it terminates the components and invokes cleanup methods where necessary.
 
+
 * <a href="#ui-component" style="text-decoration: underline;"><strong><code>UI</code></strong></a>:
     * The interface of the app (WedLinker) that the user primarily interacts with.
     * Displays relevant information (e.g., wedding details) from `Model`.
     * Receives commands from user input.
 
+
 * <a href="#logic-component" style="text-decoration: underline;"><strong><code>Logic</code></strong></a>:
     * The command executor.
+
 
 * <a href="#model-component" style="text-decoration: underline;"><strong><code>Model</code></strong></a>:
     * Holds the data of the app in memory, which can be altered by commands.
     * Some data is displayed to the user via the UI.
 
+
 * <a href="#storage-component" style="text-decoration: underline;"><strong><code>Storage</code></strong></a>:
     * Reads data from, and writes data to, the locally stored `data/addressbook.json` file.
+
 
 * <a href="#common-classes" style="text-decoration: underline;"><strong><code>Commons</code></strong></a>:
     * Represents a collection of classes used by multiple other components.
@@ -86,11 +91,13 @@ The `UI` component handles interactions between the user and the app's graphical
       (<a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/ui/UiPart.java#L15" style="text-decoration: underline;"><strong><code>UiPart</strong></code></a>),
    capturing commonalities among visible GUI components.
 
+
 2. **Class Diagram**:
     * Diagram showing the `UI` structure:
 
       <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
+    
 3. **JavaFX and Layout Files**:
     * The layout of each UI part is defined using `.fxml` files in the
       <a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/resources/view" style="text-decoration: underline;"><strong><code>src/main/resources/view</strong></code></a>,
@@ -98,6 +105,7 @@ The `UI` component handles interactions between the user and the app's graphical
       <a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java" style="text-decoration: underline;"><strong><code>MainWindow</strong></code></a>,
    is specified in
       <a href="https://github.com/AY2425S1-CS2103T-F15-4/tp/tree/master/src/main/resources/view/MainWindow.fxml" style="text-decoration: underline;"><strong><code>MainWindow.fxml</strong></code></a>,
+
 
 4. **Responsibilities**:
     * Executes user commands by interfacing with the `Logic` component.
@@ -117,11 +125,13 @@ The `Logic` component processes user inputs passed through the UI, utilizing a s
     * `LogicManager` executes the `Command`, interacting with the `Model` to make necessary updates (e.g., deleting a person).
     * Execution results are encapsulated in a `CommandResult` and returned to `Logic`, which relays the outcome back to the UI.
 
+
 2. **Class Diagram**:
     * Partial diagram of the `Logic` component:
 
       <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
+    
 3. **Sequence Diagram**:
     * Example interaction in the `Logic` component for `execute("delete 1")` (from user inputting delete 1 on UI):
 
@@ -131,6 +141,7 @@ The `Logic` component processes user inputs passed through the UI, utilizing a s
       **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X), but due to a PlantUML limitation, it continues to the end of the diagram.
       </box>
 
+    
 4. **Parser Classes**:
     * Other classes in `Logic` handle command parsing:
 
@@ -153,11 +164,13 @@ The `Model` component handles the data and state management for the app, storing
         * `Wedding` objects within a `UniqueWeddingList`.
         * `Task` objects within a `UniqueTaskList`.
 
+
 2. **Class Diagram**:
     * Diagram of the `Model` structure:
 
       <puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
+    
 3. **Responsibilities**:
     * **Data Storage**:
         * Maintains address book data, including lists of `Person`, `Wedding`, and `Task` objects.
@@ -176,11 +189,14 @@ The `Model` component handles the data and state management for the app, storing
     * Supports saving and loading both address book data and user preferences as JSON files.
     * Reads JSON data into corresponding in-memory objects for the app's use.
 
+
 2. **Inheritance**:
     * Inherits from `AddressBookStorage` and `UserPrefStorage`, allowing it to be used interchangeably with either interface, depending on the functionality needed.
 
+
 3. **Dependencies**:
     * Depends on classes within the `Model` component, as `Storage` is tasked with saving and retrieving `Model`-related objects.
+
 
 4. **Class Diagram**:
     * Diagram illustrating `Storage` structure:
@@ -209,7 +225,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The Force feature is a quality of life addition for WedLinker. It enables users to bypass certain checks in the `Logic` in a controlled manner to make usage easier.
 The force feature is applicable for the following commands:
-* `tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person}`.
+* `tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
 * `delete-tag`: This unassigns the target `Tag` from all contacts before deleting it.
 * `assign-wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
 * `delete-wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
@@ -231,7 +247,7 @@ Step 4. During `DeleteTagCommand#execute()`, the force flag is checked. If prese
 #### Implementation
 
 The Wedding Feature is a significant addition for WedLinker. Wedding contains the Contacts involved to facilitate easy planning and consolidation for wedding planners.
-Wedding would support the following functions
+Wedding would support the following functions:
 
 * `Create Wedding` — Creates a Wedding in WedLinker to allow compilation of information.
 * `Assign Wedding` — Assigns `Person` to a Wedding. This can be the `Partners` or `Guest`.
@@ -241,9 +257,9 @@ Wedding would support the following functions
 
 Given below is an example usage scenario and how Weddings are used in WedLinker.
 
-Step 1. The user launches the application, `Weddings` are loaded into the `Model.
+Step 1. The user launches the application, `Weddings` are loaded into the `Model`.
 
-Step 2. The user executes `create-wedding w/Test Wedding 1`. WedLinker will create a Wedding based on the name provided. In this case: `Test Weddign 1`.
+Step 2. The user executes `create-wedding w/Test Wedding 1`. WedLinker will create a Wedding based on the name provided. In this case: `Test Wedding 1`.
 
 Step 3. The user executes `assign-wedding 1 w/Test Wedding 1` to assign a `Person` to `Test Wedding 1`. WedLinker includes the `Person` in the `Guest List`.
 
@@ -272,6 +288,22 @@ Known bugs:
 </box>
 
 ### Vendors
+
+#### Implementation
+
+The Vendor Feature allows users to track which contacts are Vendors and assign tasks to them. Only Vendors can be assigned tasks.
+Vendor would support the following functions:
+
+* `Assign Vendor` — Assigns an existing `Person` in WedLinker to become a `Vendor`. 
+* `Unassign Vendor` — Unassigns a `Vendor` to become a non-vendor `Person` contact. 
+
+Given below is an example usage scenario and how Vendors are used in WedLinker.
+
+Step 1. The user launches the application, `Persons` and `Vendors` are loaded into the `Model`.
+
+Step 2. The user executes `assign-vendor 1`. WedLinker will assign the `Person` at index 1 of the current displayed person list to become a `Vendor`. The user can now assign `Tasks` to this contact.
+
+Step 3. The user executes `unassign-vendor 1` to unassign the `Vendor` to become a non-. WedLinker includes the `Person` in the `Guest List`.
 
 ### Task
 
@@ -415,6 +447,7 @@ Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view tasks in
 **Extensions**
 
 * 1a. The contact already exists.
+
     * 1a1. System does not create a new contact.
     * 1a2. System informs the user the contact already exists.
 
