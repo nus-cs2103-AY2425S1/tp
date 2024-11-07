@@ -86,7 +86,7 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
                 ? String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER, displayMembers(membersAttendanceAlreadyUnmarked))
                 : String.format(MESSAGE_UNMARK_MEMBER_SUCCESS, attendance,
                 displayMembers(membersAttendanceUnmarkSuccess))
-                + '\n' + String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER,
+                + String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER,
                 displayMembers(membersAttendanceAlreadyUnmarked)));
         return new CommandResult(commandResultMessage);
     }
