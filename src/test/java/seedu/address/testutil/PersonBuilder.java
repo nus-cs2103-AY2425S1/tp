@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TAG = "Low Risk";
     public static final String DEFAULT_ALLERGY = "Peanuts";
-    public static final LocalDateTime DEFAULT_DATE = LocalDateTime.MIN;
+    public static final LocalDateTime DEFAULT_DATE = Date.NO_DATE.value;
 
     private Name name;
     private Phone phone;
