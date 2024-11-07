@@ -23,8 +23,8 @@ public class DeleteLinkCommand extends Command {
             + PREFIX_PATIENT + "PATIENT_NRIC "
             + PREFIX_CAREGIVER + "CAREGIVER_NRIC\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PATIENT + "S1234567A "
-            + PREFIX_CAREGIVER + "S1234567B";
+            + PREFIX_PATIENT + "S1234567D "
+            + PREFIX_CAREGIVER + "S1234567D";
 
     public static final String MESSAGE_DELETE_LINK_SUCCESS = "Deleted Link between %1$s and %2$s";
 
