@@ -79,6 +79,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         } else if (isAssignWedding & !isAssignRole) {
             // assign to wedding only
             Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
+            personWithRoleDescriptor.setRole(null);
             return new AssignCommand(personIndex, predicate, personWithRoleDescriptor, weddingIndices);
         } else {
             // assign role and wedding
