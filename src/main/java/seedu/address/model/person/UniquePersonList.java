@@ -162,4 +162,19 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return false;
     }
+
+    /**
+     * Checks if the list contains a person with the given Telegram handle.
+     *
+     * @param telegramHandle The Telegram handle to check for.
+     * @return True if a person with the given Telegram handle exists in the list, false otherwise.
+     */
+    public boolean hasTelegramHandle(TelegramHandle telegramHandle) {
+        for (Person person : internalList) {
+            if (person.getTelegramHandle().isPresent() && person.getTelegramHandle().get().equals(telegramHandle)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

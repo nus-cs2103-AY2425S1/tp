@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -100,6 +101,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean hasPhoneNumber(Phone phone) {
         return persons.hasPhoneNumber(phone); // persons is of type UniquePersonList
+    }
+
+    @Override
+    public boolean hasTelegramHandle(TelegramHandle telegramHandle) {
+        return persons.hasTelegramHandle(telegramHandle); // persons is of type UniquePersonList
     }
 
     /**
