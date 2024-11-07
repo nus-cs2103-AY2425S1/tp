@@ -55,7 +55,8 @@ public class AddLogEntryCommand extends Command {
         return new CommandResult(
                 "Please enter the log entry for the appointment on "
                         + appointmentDate.toString(),
-                false, false, false, false, -1, true, identityNumber, appointmentDate, "this should never be shown");
+                false, false, false, false, -1, true, identityNumber,
+                appointmentDate, "this should never be shown");
     }
 
     /**

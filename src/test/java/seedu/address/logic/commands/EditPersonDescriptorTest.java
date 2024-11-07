@@ -11,6 +11,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -60,13 +64,15 @@ public class EditPersonDescriptorTest {
     @Test
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", identity number="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", status="
-                + editPersonDescriptor.getStatus().orElse(null) + "}";
+        String expected = Stream.of(
+                        editPersonDescriptor.getName().map(name -> "Name: " + name).orElse(null),
+                        editPersonDescriptor.getIdentityNumber().map(id -> "NRIC: " + id).orElse(null),
+                        editPersonDescriptor.getPhone().map(phone -> "Phone: " + phone).orElse(null),
+                        editPersonDescriptor.getEmail().map(email -> "Email: " + email).orElse(null),
+                        editPersonDescriptor.getAddress().map(address -> "Address: " + address).orElse(null),
+                        editPersonDescriptor.getStatus().map(status -> "Status: " + status).orElse(null)
+                ).filter(Objects::nonNull)
+                .collect(Collectors.joining(", "));
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
