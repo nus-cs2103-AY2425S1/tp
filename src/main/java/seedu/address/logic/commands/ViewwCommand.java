@@ -31,6 +31,7 @@ public class ViewwCommand extends Command {
 
     public static final String MESSAGE_VIEW_EMPTY_LIST_ERROR = "There are no wedding records to view.";
     public static final String MESSAGE_VIEW_WEDDING_SUCCESS = "Viewing Wedding Details of: %1$s";
+
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the wedding which wedding details you want to view.\n"
                     + "Find the index from the list below and type vieww INDEX\n"
@@ -136,7 +137,7 @@ public class ViewwCommand extends Command {
                     clientOfWedding.getEmail(), clientOfWedding.getAddress(), clientOfWedding.getRole(),
                     weddingToView);
             updatedClient.setWeddingJobs(weddingJobs);
-            updatedClient.setClient(true);
+            updatedClient.setIsClient(true);
             model.setPerson(clientOfWedding, updatedClient);
         } else {
             throw new CommandException(String.format(MESSAGE_MULTIPLE_CLIENT, weddingToView.getName()));

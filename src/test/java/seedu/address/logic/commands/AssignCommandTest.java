@@ -160,8 +160,10 @@ public class AssignCommandTest {
         Set<Index> weddingIndices = Set.of(INDEX_FIRST_WEDDING);
         Wedding assignedWedding = model.getFilteredWeddingList().get(0);
 
+        AssignCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().build();
+        descriptor.setRole(null);
         AssignCommand assignCommand = new AssignCommand(indexFirstPerson, null,
-                new PersonWithRoleDescriptorBuilder().build(), weddingIndices);
+                descriptor, weddingIndices);
 
         Person expectedPerson = new PersonBuilder(personToAssign).build();
         expectedPerson.setWeddingJobs(Set.of(assignedWedding));
@@ -193,8 +195,11 @@ public class AssignCommandTest {
 
         Person personToAssign = model.getFilteredPersonList().get(0); // Assume Alice is the first person
         Set<Index> weddingIndices = Set.of(INDEX_FIRST_WEDDING, Index.fromOneBased(2));
+
+        AssignCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().build();
+        descriptor.setRole(null);
         AssignCommand assignCommand = new AssignCommand(INDEX_FIRST_PERSON, null,
-                new PersonWithRoleDescriptorBuilder().build(), weddingIndices);
+                descriptor, weddingIndices);
 
         // Create expected person with assigned weddings
         Person expectedPerson = new PersonBuilder(personToAssign).build();
