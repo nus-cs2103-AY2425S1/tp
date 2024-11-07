@@ -47,11 +47,7 @@ public class VolunteerCard extends UiPart<Region> {
         phone.setText(volunteer.getPhone().value);
         email.setText(volunteer.getEmail().value);
 
-        date.textProperty().bind(
-                Bindings.createStringBinding(() -> volunteer.getAvailableDates().toString(),
-                        volunteer.getAvailableDates().getDatesListAsObservableString()
-                )
-        );
+        date.textProperty().bind(volunteer.getAvailableDates().getDatesListAsObservableString());
 
         // Bind the "involvedIn" label to update automatically when events change.
         involvedIn.textProperty().bind(

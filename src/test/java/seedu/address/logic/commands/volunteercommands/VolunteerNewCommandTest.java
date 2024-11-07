@@ -171,7 +171,9 @@ public class VolunteerNewCommandTest {
         public void viewEvent(Event eventToView) {
             throw new AssertionError("This method should not be called.");
         }
-
+        public boolean filterEventsByName(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void viewVolunteer(Volunteer volunteerToView) {
             throw new AssertionError("This method should not be called.");
@@ -196,6 +198,11 @@ public class VolunteerNewCommandTest {
         @Override
         public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList)
                 throws VolunteerDeleteMissingDateException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void filterEvent(Event eventToView) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -229,6 +236,10 @@ public class VolunteerNewCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean filterVolunteersByName(Predicate<Volunteer> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

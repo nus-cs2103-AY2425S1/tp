@@ -165,4 +165,9 @@ public interface Model {
 
     void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
             VolunteerDeleteMissingDateException;
+
+    boolean filterEventsByName(Predicate<Event> predicate);
+
+    boolean filterVolunteersByName(Predicate<Volunteer> predicate);
+    void filterEvent(Event eventToView);
 }
