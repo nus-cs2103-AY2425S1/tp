@@ -66,7 +66,8 @@ public class EditPetDescriptorTest {
                 + editPetDescriptor.getSpecies().orElse(null) + ", breed="
                 + editPetDescriptor.getBreed().orElse(null) + ", age="
                 + editPetDescriptor.getAge().orElse(null) + ", sex="
-                + editPetDescriptor.getSex().orElse(null) + "}";
+                + editPetDescriptor.getSex().orElse(null) + ", tags="
+                + editPetDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPetDescriptor.toString());
     }
 }

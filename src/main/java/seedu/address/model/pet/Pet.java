@@ -35,7 +35,7 @@ public class Pet implements Linkable {
     /**
      * Every field must be present and not null.
      */
-    public Pet(Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> modelTags) {
+    public Pet(Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> tags) {
         requireAllNonNull(name, species, breed, age, sex);
         this.uniqueId = UUID.randomUUID().toString();
         this.name = name;
@@ -50,7 +50,7 @@ public class Pet implements Linkable {
     /**
      * Overloaded constructor to load uniqueIds that are saved in the storage.
      */
-    public Pet(String uniqueId, Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> modelTags) {
+    public Pet(String uniqueId, Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> tags) {
         requireAllNonNull(name, species, breed, age, sex);
         this.uniqueId = uniqueId;
         this.name = name;
@@ -164,6 +164,7 @@ public class Pet implements Linkable {
                 .add("breed", breed)
                 .add("age", age)
                 .add("sex", sex)
+                .add("tags", tags)
                 .toString();
     }
 }

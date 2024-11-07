@@ -87,7 +87,7 @@ public class PetTest {
     public void toStringMethod() {
         String expected = Pet.class.getCanonicalName() + "{uniqueId=" + BELLA.getUniqueID()
                 + ", name=" + BELLA.getName() + ", species=" + BELLA.getSpecies() + ", breed=" + BELLA.getBreed()
-                + ", age=" + BELLA.getAge() + ", sex=" + BELLA.getSex() + "}";
+                + ", age=" + BELLA.getAge() + ", sex=" + BELLA.getSex() + ", tags=" + BELLA.getTags() + "}";
         assertEquals(expected, BELLA.toString());
     }
 }
