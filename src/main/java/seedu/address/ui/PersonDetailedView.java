@@ -1,22 +1,14 @@
 package seedu.address.ui;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.shape.Circle;
 import seedu.address.model.person.Person;
 
 /**
@@ -82,27 +74,15 @@ public class PersonDetailedView extends UiPart<Region> {
         setupTemplateButtons();
     }
 
+    /**
+     * Initializes the detailed view for a person by setting up all UI components.
+     */
     private void initialiseView() {
-        try {
-            File profileFile = new File(this.person.getProfilePicFilePath().toString());
-            Image profileImg = new Image(new FileInputStream(profileFile));
-            profileImage.setImage(profileImg);
-        } catch (FileNotFoundException e) {
-            profileImage.setImage(new Image(getClass().getResourceAsStream("/images/profilepicture.png")));
-        }
-        Circle clip = new Circle(profileImage.getFitWidth() / 2,
-                profileImage.getFitHeight() / 2, profileImage.getFitWidth() / 2);
-        profileImage.setClip(clip);
+
+        contentManager.setupProfileImage(profileImage);
+        contentManager.setupBirthdayTooltip(name, isVisualsEnabled);
 
         name.setText(contentManager.getName());
-
-        if (isVisualsEnabled && person.getBirthday().hasBirthdayWithin7Days()) {
-            name.setStyle("-fx-text-fill: #ffa500");
-            Tooltip birthdayTooltip = new Tooltip("Birthday soon!");
-            birthdayTooltip.setShowDelay(javafx.util.Duration.millis(10));
-            Tooltip.install(name, birthdayTooltip);
-        }
-
         phone.setText(contentManager.getPhone());
         address.setText(contentManager.getAddress());
         email.setText(contentManager.getEmail());
@@ -110,22 +90,8 @@ public class PersonDetailedView extends UiPart<Region> {
         age.setText(contentManager.getAge());
         hasPaid.setText(contentManager.getHasPaidStatus());
         frequency.setText(contentManager.getFrequency());
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
 
-                    if (isVisualsEnabled) {
-                        if ("highnetworth".equalsIgnoreCase(tag.tagName)) {
-                            tagLabel.getStyleClass().add("tag-high");
-                        } else if ("midnetworth".equalsIgnoreCase(tag.tagName)) {
-                            tagLabel.getStyleClass().add("tag-mid");
-                        } else if ("lownetworth".equalsIgnoreCase(tag.tagName)) {
-                            tagLabel.getStyleClass().add("tag-low");
-                        }
-                    }
-                    tags.getChildren().add(tagLabel);
-                });
+        contentManager.setupTags(tags, isVisualsEnabled);
     }
 
     /**
