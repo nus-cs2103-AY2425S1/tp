@@ -264,15 +264,6 @@ Adds a new person to the address book.
     - `add n/John Doe p/98765432 e/johnd@example.com a/123 Street`
     - `add n/Betsy Crowe p/91234567 e/betsycrowe@example.com a/Tanglin Mall r/florist`
     - `add n/Betsy Crowe p/91234567 e/betsycrowe@example.com a/Tanglin Mall w/1 w/2`
-- **Common Error Cases**:
-    - Duplicate phone number:
-        - Error: "This number already exists in the address book."
-    - Duplicate email:
-        - Error: "This email already exists in the address book."
-    - Duplicate contact:
-        - Error: "This contact already exists in the address book."
-    - Invalid wedding index:
-        - Error: "Wedding [index] is not in the list."
 
 ---
 
@@ -305,11 +296,6 @@ Edits the details of an existing person.
         - Edits the phone number and email of the person at index 1.
     - `edit John Doe n/John Smith`
         - Changes the name of `John Doe` to `John Smith`.
-- **Error Messages**:
-    - Invalid index:
-        - Error: "The person index provided is invalid."
-    - No fields specified:
-        - Error: "At least one field to edit must be provided."
 
 ---
 
@@ -358,11 +344,6 @@ Displays detailed information about a specified person.
     - `view Alex Yeo` displays details for `Alex Yeo`.
 ![View multiple weddings](images/view_mulitple_weddings_unfiltered.png)
 *Viewing a contact with mulitple matches shows their details and weddings remain unfiltered*
-- **Error Messages**:
-    - No contacts to view:
-        - Error: "There is no contact to view."
-    - Multiple matches found:
-        - System displays matching contacts and prompts for index.
 
 ---
 
@@ -380,11 +361,6 @@ Deletes a specified person from the address book.
 - **Examples**:
     - `delete 2` deletes the person at index 2.
     - `delete Betsy` deletes Betsy if there's only one match.
-- **Error Messages**:
-    - No contacts to delete:
-        - Error: "There is nothing to delete."
-    - Invalid index:
-        - Error: "The person index provided is invalid."
 
 ---
 
@@ -453,15 +429,6 @@ Adds a new wedding to the address book.
         - Adds a wedding for "John Doe" if there's only one match.
 ![Adding a wedding example](images/addw_example.png)
 *Example of successfully adding a new wedding with all fields specified*
-- **Error Messages**:
-    - Client already has a wedding:
-        - Error: "This person is already a client for another wedding."
-    - Invalid date format:
-        - Error: "Date must be in YYYY-MM-DD format."
-    - Blank venue:
-        - Error: "Venue cannot be blank or whitespace."
-    - Name not in address book:
-        - Error: "This person does not exist in the address book."
 
 ---
 
@@ -480,15 +447,6 @@ Edits the details of an existing wedding.
         - Changes the name of the wedding at index 1 to "Sunset Wedding".
     - `editw w/2 d/2025-01-01 v/Grand Hotel`
         - Updates the date and venue of the wedding at index 2.
-- **Error Messages**:
-    - Invalid index:
-        - Error: "The wedding index provided is invalid."
-    - No fields specified:
-        - Error: "No fields specified to edit."
-    - Invalid date format:
-        - Error: "Date must be in YYYY-MM-DD format."
-    - Blank venue:
-        - Error: "Venue cannot be blank or whitespace."
 
 ---
 
@@ -508,11 +466,6 @@ Views the details of a wedding.
 - **Examples**:
     - `vieww 1` displays details of the wedding at index 1.
     - `vieww John` displays John's wedding if there's only one match.
-- **Error Messages**:
-    - Invalid index:
-        - Error: "The wedding index provided is invalid."
-    - No wedding records:
-        - Error: "There are no wedding records to view."
 
 ---
 
@@ -529,13 +482,6 @@ Deletes a wedding from the address book.
 - **Examples**:
     - `deletew 2` deletes the wedding at index 2.
     - `deletew Beach Wedding` deletes the wedding named "Beach Wedding" if there's only one match.
-- **Error Messages**:
-    - No weddings to delete:
-        - Error: "There is nothing to delete."
-    - Invalid index:
-        - Error: "The wedding index provided is invalid."
-    - Multiple matches found:
-        - System displays matching weddings and prompts for index.
 
 ---
 
@@ -570,21 +516,7 @@ Assigns a role and/or weddings to a person.
 
 **Success Examples**:
 ![Successful multiple assignment](images/success_multi_match.png)
-
 *Example of successfully assigning a person to multiple weddings*
-- **Error Messages**: FIX HERE
-    - Cannot assign client to own wedding:
-        - Error: "Cannot assign client to their own wedding."
-    - Person already assigned to wedding(s):
-        - Error: "Person has already been assigned to wedding(s)."
-    - Invalid wedding index:
-        - Error: "Wedding [index] is not in the list."
-    - No person to assign:
-        - Error: "There is no person to assign."
-    - No weddings to assign:
-        - Error: "There is no wedding to assign as the wedding list is empty."
-    - Multiple matches found:
-        - System displays matching contacts and prompts for index.
 
 ---
 
