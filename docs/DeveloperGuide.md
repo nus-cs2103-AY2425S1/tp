@@ -334,7 +334,7 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
 - **1e.** Address is blank
     - **1e1.** Error message displayed in result display.
         - Use case ends.
-- **1f.** Role is blank when prefix is inputted, or is not one word
+- **1f.** Role is not one word
     - **1f1.** Error message is displayed in result display.  
 - **1g.** Wedding is blank when prefix is inputted, or is not one word
     - **1g1.** Error message is displayed in result display.
@@ -437,9 +437,6 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
         - Use case ends.
 - **1e.** Contact is the client of the wedding
     - **1e1.** Error message displayed in result display.
-        - Use case ends.
-- **1f.** Contact does not have a role
-    - **1f1.** Error message displayed in result display.
         - Use case ends.
 
 ---
@@ -880,6 +877,9 @@ Success action: When a person is successfully assigned:
 
     1. Test case: `assign x r/photographer` (where x is an invalid index (< 0, 0 , larger than list size)))<br>
        Expected: Error message shown about invalid person index.
+   
+    1. Test case: `assign 1 r/`<br>
+       Expected: Role of first person in list is removed. Success action carried out
 
 2. Assigning to weddings
 
@@ -925,6 +925,11 @@ Success action: When a person is successfully assigned:
     1. Test case: `assign Al!ce r/photographer` (name with special characters)<br>
        Expected: Error message that no such person exists.
 
+    1. Test case: `assign Alice r/`<br>
+       Expected (Unique Alice): Removes role from Alice. Success action carried out.<br>
+       Expected (Multiple matches): Person list filtered to show matches. Message prompts to use index.<br>
+       Expected (No matches): Error message that no such person exists.
+
 2. Complex name assignments
 
     1. Test case: `assign Alice r/photographer w/1 w/2`<br>
@@ -946,6 +951,39 @@ Success action: When a person is successfully assigned:
 
     1. Test case: `assign 1 w/1 w/2`<br>
        Expected: Error message about already being assigned to wedding 1.
+
+### Removing wedding jobs assigned to a person 
+
+#### Removing with INDEX of person list and wedding list
+
+1. Removing wedding jobs assigned to a person while all weddings are being shown
+
+    1. Prerequisites: List all persons and weddings using the `list` command. Multiple persons and weddings in the list.<br><br>
+
+    1. Test case: `delete 1 w/1`<br>
+       Expected: First wedding is unassigned from first person. Details of the unassigned contact shown in the status message. Timestamp in the status bar is updated.<br><br>
+
+    1. Test case: `delete 0 w/1`<br>
+       Expected: No person to unassign wedding job. `delete` command format is shown in the status message.<br><br>
+
+    1. Test case: `delete 1 w/x` (where x is larger than the size of wedding list)<br>
+       Expected: Error message prompting the user to choose an index within the range shown.<br><br>
+
+1. Removing wedding jobs assigned to a person while a partial list of weddings is shown.
+
+    1. Prerequisite: List some of the weddings using `vieww NAME`, where a partial list of weddings that matches NAME will be shown, assuming there are multiple of such weddings.
+
+    1. Test cases used are similar, except that the index will follow that of the shown list.
+
+#### Removing with NAME of person and INDEX of wedding list
+
+1. Since `delete NAME w/1` searches from the entire list of contacts, rather than only the partial list, it works either way.
+
+    1. Test case: `delete Alice Tan w/1` <br>
+       Expected (Unique Alice Tan): The contact of `Alice Tan` will be unassigned from wedding at index 1. Details of the unassigned contact shown in the status message. Timestamp in the status bar is updated.<br>
+       Expected (Duplicated Alice Tan): Contacts with name field containing `Alice Tan` exactly will be shown. Status message prompts user to re-input using index according to the newly filtered list to specify which `Alice Tan` they want to unassign. <br>
+       Expected (No Alice Tan): No person to unassign. Error details is shown in the status message, as the NAME does not belong to anyone in the address book.
+
 
 
 ### Saving data
