@@ -142,7 +142,7 @@ If everything went well, you'll be greeted by this view:
 ![delete_command](images/delete_command_tutorial.png)
 
 ### Wrapping Up
-Congratulations! :grin: You've successfully completed the beginner's tutorial for Tuteez.
+Congratulations! 😁 You've successfully completed the beginner's tutorial for Tuteez.
 You're now ready to move on to more advanced features and commands that Tuteez has to offer.
 Simply visit the [Features](#features) section to learn more about the various commands available to you.
 
