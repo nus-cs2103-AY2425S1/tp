@@ -1,0 +1,130 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ "photographer" ],
+    "isVendor" : false
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ "florist", "photographer" ],
+    "weddings": [{
+      "weddingName": "Wedding 2",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    },{
+      "weddingName": "Carla's Wedding",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }],
+    "isVendor" : false
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "tags" : [ ],
+    "tasks": [{
+      "type" : "todo",
+      "description" : "Buy groceries",
+      "isDone" : false
+    }],
+    "isVendor" : false
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "tags" : [ "florist" ],
+    "isVendor" : false
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "tags" : [ ],
+    "weddings" : [ {
+      "weddingName": "Wedding 2",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }],
+    "isVendor" : false
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "tags" : [ ],
+    "isVendor" : false
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "tags" : [],
+    "tasks" : [],
+    "isVendor" : false
+  } ],
+  "tags": ["florist"],
+  "weddings": [{
+    "weddingName": "Amy's Wedding",
+    "peopleCount": 0,
+    "partner1": null,
+    "partner2": null,
+    "guestList": [],
+    "address": null,
+    "date": null
+    }, {
+    "weddingName": "Bob's Wedding",
+    "peopleCount": 0,
+    "partner1": null,
+    "partner2": null,
+    "guestList": [],
+    "address": null,
+    "date": null
+    }, {
+    "weddingName": "Wedding 2",
+    "peopleCount": 0,
+    "partner1": null,
+    "partner2": null,
+    "guestList": [],
+    "address": null,
+    "date": null
+  },
+    {
+      "weddingName": "Carla's Wedding",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }],
+  "tasks": [{
+    "type" : "todo",
+    "description" : "Buy groceries",
+    "isDone" : false
+  }, {
+    "type" : "deadline",
+    "description" : "Submit report",
+    "isDone" : false,
+    "by" : "2024-12-31"
+  } ]
+}
