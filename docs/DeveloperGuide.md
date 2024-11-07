@@ -260,7 +260,7 @@ How this feature works:
 The `DisplayCommand` allows users to display a specified person in the addressbook.
 It uses `DisplayCommandParser` to parse the user input and create an `DisplayCommand` object, which modifies the `lastViewedPerson` object in the `Model`.
 
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("remark 1 -a Good progress")` API call as an example.
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `displayCommand`, taking `execute("display 1")` API call as an example.
 
 <puml src="diagrams/DisplaySequenceDiagram.puml" alt="Interactions Inside the Logic Component when a display command is called" />
 
