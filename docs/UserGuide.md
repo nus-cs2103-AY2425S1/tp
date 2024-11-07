@@ -3,13 +3,20 @@ layout: page
 title: User Guide
 ---
 
-### Welcome to the MedDict User Guide! 
+### About us
+
+Welcome to the MedDict User Guide!
+![Ui](images/meddict_logo.png)
 
 MedDict is a _desktop application designed for medical staff_ who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application is designed with large databases in mind, supporting a streamlined process for tracking medical history, patient appointments, and treatment progress.
 
 Unlike most other applications who predominantly function on a Graphical User Interface (GUI) where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a Command Line Interface (CLI) -- where all features and utility can be achieved via typed-in commands -- would be far more efficeint.
 
-With all that said, let's get you started on your journey towards a new peak level of efficiency!
+![Ui](images/gui_vs_cli.png)
+
+With MedDict, we believe we can revolutionise your work and management experience! 💪
+
+With all that said, let's get you started on your journey towards a new peak level of efficiency! 💯
 
 If you would like to skip to any specific part of the User Guide, you can refer to the table below! 😊
 
@@ -20,7 +27,7 @@ If you would like to skip to any specific part of the User Guide, you can refer 
 
 ## Quick Start
 
-This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-detailed) or scroll past this section.
+This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-beginner-friendly-detailed) or scroll past this section.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -30,7 +37,7 @@ This section is for users who are experienced in installing and using Java execu
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![StartUpPage](images/StartUpPage.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -78,17 +85,13 @@ This section is for users who are experienced in installing and using Java execu
         1. Visit [Oracle’s Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
         2. Download and install the correct Java Development Kit (JDK) for your operating system by following the on-screen instructions.
         3. Once installed, run the `java -version` command again to confirm that Java is installed correctly.
-
 <br><br>
-
 2. **Download the latest `.jar` file as follows:**
 
     1. Go to the [GitHub releases page](https://github.com/) for the latest version.
     2. Download the `.jar` file (for example, `MedDict.jar`) from the latest release.
     3. Save the `.jar` file in the folder where you want to keep your MedDict project.
-
 <br><br>
-
 3. **Copy the `.jar` file to the folder you want to use as the home folder for MedDict.**
 
     * **Windows:**
@@ -105,11 +108,8 @@ This section is for users who are experienced in installing and using Java execu
         1. Open your file manager and go to the Downloads directory.
         2. Right-click on the `.jar` file and choose Copy.
         3. Go to the destination folder, right-click, and select Paste.
-
 <br><br>
-
 4. **Open a command terminal, navigate to the folder where the `.jar` file is saved using the `cd` command, and then run the application with the following command.**
-
     * **Windows:**
         1. Open the folder where the `.jar` file is saved.
         2. To get the full path of this folder:
@@ -118,23 +118,17 @@ This section is for users who are experienced in installing and using Java execu
         3. Open the Command Prompt:
             - Press `Windows + R`, type `cmd`, and press Enter.
             - Use the `cd` command and paste the copied path to navigate to the folder where the `.jar` file is saved. For example:
-
                ```bash
                cd C:\Users\YourName\Documents\MedDict
                ```
-
         4. Run the application according to the name of the jar file downloaded:
-
            ```bash
            java -jar MedDict.jar
            ```
-
            Note: For example, if the name of the jar file is `meddict-v1.6.jar`, type the following instead:
-
            ```bash
            java -jar meddict-v1.6.jar
            ```
-
     * **Mac/Linux:**
         1. Open the Terminal by searching for it or by pressing `Ctrl + Alt + T`.
         2. To get the full path of the folder where the `.jar` file is located:
@@ -142,27 +136,20 @@ This section is for users who are experienced in installing and using Java execu
             - Navigate to the folder where you saved the `.jar` file.
             - Right-click on the folder and choose Get Info (Mac) or Properties (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy it.
         3. Use the `cd` command and paste the copied path to go to the folder where the `.jar` file is saved. For example:
-
            ```bash
            cd /Users/YourName/Documents/MedDict
            ```
-
         4. Run the application according to the name of the jar file downloaded:
-
            ```bash
            java -jar MedDict.jar
            ```
-           
            Note: For example, if the name of the jar file is `meddict-v1.6.jar`, type the following instead:
-
            ```bash
            java -jar meddict-v1.6.jar
            ```
-
-
-After a few seconds, a GUI similar to the one below should appear:
-![StartUpPage](images/StartUpPage.png)
-
+    After a few seconds, a GUI similar to the one below should appear:
+    ![StartUpPage](images/StartUpPage.png)
+<br><br>
 5. **Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.** <br>
    Some example commands you can try:
 
@@ -175,32 +162,8 @@ After a few seconds, a GUI similar to the one below should appear:
     * `clear` : Deletes all persons.
 
     * `exit` : Exits the app.
-
 <br><br>
-
 6. Refer to the [Features](#features) below for details of each command.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -533,7 +496,16 @@ _Details coming soon ..._
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 **Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
-**A**: No worries, you can easily transfer your data! Go to where the MedDict .jar file is currently located in and find the data folder. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. Afterwards, after downloading the new release or version of MedDict, run it once (you can refer to the [Quick Start Guide](#quick-start) if needed), then exit or close the application. Next, go to where the new MedDict .jar file is located in, replace the new addressbook.json file in the data folder with the previous addressbook.json file that you have copied or saved. Alternatively, you can use a text editor of your choice to edit the addressbook.json file, then copy paste all the content from the old addressbook.json file to the new one.
+**A**: No worries, you can easily transfer your data! Refer to the steps below.
+1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
+2. In that folder, find a folder titled data (eg. `C:\Users\YourName\Documents\MedDict\data`)
+3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (eg. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
+4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#quick-start) if needed)
+5. Open / run the application once.
+6. Close the application.
+7. Go to where the new MedDict `.jar` file is located in, and repeat steps 2 to 3.
+8. Replace the new addressbook.json file in the current data folder with the previous addressbook.json file that you have copied or saved. You can do this by copying the addressbook.json file from the old data folder and pasting it in the new data folder. When prompted to overwrite, click yes.
+9. Alternatively, for step 8, you can use a text editor of your choice to edit the new and old addressbook.json file, then copy and paste all the content from the old addressbook.json file to the new one.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
