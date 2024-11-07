@@ -6,7 +6,7 @@
 
 # BridalBuddy User Guide
 
-BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](#glossary).
+BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary).
 It is an app targeted at Wedding Planners to help them streamline guest and vendor management for their clients.
 
 As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
@@ -49,7 +49,6 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 5. [**FAQ**](#faq)
 6. [**Known Issues**](#known-issues)
 7. [**Command summary**](#command-summary)
-8. [**Glossary**](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -74,8 +73,7 @@ This section tells you what information you will find in each of the sections of
 3. [Features](#features) helps you understand how all our features work.
 4. [FAQ](#faq) clarifies the doubts that many of our users have.
 5. [Command Summary](#command-summary) summarises all our features for easy reference.
-6. [Glossary](#glossary) explains the more technical terms used in this guide.
-7. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
+6. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
 
 [_Back to Top_](#table-of-contents)
 
@@ -91,8 +89,9 @@ This section tells you what information you will find in each of the sections of
 3. Copy the file to the folder you want to use as the _home folder_ for your BridalBuddy application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
-   A [(GUI)](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A [(GUI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+    > If you need any help opening a command terminal, you may find the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -101,13 +100,7 @@ This section tells you what information you will find in each of the sections of
 
     * `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/H t/friends t/owesMoney` : Adds a guest named `John Doe` to the guest list.
 
-    * `add_vendor n/Jack Tan p/98273782 e/jackt@example.com a/391, Clementi Mall, #03-32 c/Jack's Florist b/1000 t/florist t/responsible` : Adds a guest named `Jack Tan` to the vendor list.
-
-    * `delete_guest 3` : Deletes the 3rd guest shown in the current guest list.
-
     * `delete_vendor 3` : Deletes the 3rd vendor shown in the current vendor list.
-
-    * `clear` : Deletes all persons from both the guest list and the vendor list.
 
     * `exit` : Exits the app.
 
@@ -120,7 +113,7 @@ Alternatively, if you’d like to explore the application independently, refer t
 
 ## Tutorial for Beginners
 
-Perfect if you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
+If you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
 
 
 ### Tutorial Contents
@@ -136,8 +129,12 @@ When you open up the application for the first time, you will see the interface 
 
 ![Ui](images/firstUseUi.png)
 
-At the top of the screen, there is a text box we will refer to as the *Command Line*. This is where you type in your commands to BridalBuddy, and you confirm your instruction by pressing the <kbd>Enter</kbd> key on your keyboard.
+At the top of the screen, there is a text box we will refer to as the *Command Line*. This is where you type in your commands to BridalBuddy.
+
+To confirm your instructions, simply the <kbd>Enter</kbd> key on your keyboard.
+
 Below the *Command Line* is the *Outcome Box*, which will tell you the outcome of the commands you have entered, as well as other relevant information related to that command.
+
 Finally, below the *Outcome Box* is the *Display Panel*, which will contain the guest list and the vendor list for the wedding that you are planning.
 
 
@@ -263,7 +260,7 @@ Commands listed in this section are applicable to both guest management and vend
 
 ### Viewing help : `help`
 
-Opens your web browser and redirects you to the online User Guide, providing detailed instructions and resources for using the app.
+This command will open your web browser and redirect you to the online User Guide which will provide detailed instructions and resources for you to use the app.
 
 * :warning: The online User Guide will require a stable internet connection to successfully open.
 
@@ -280,7 +277,7 @@ Entering the `help` command returns the following result on your screen:
 
 ### Listing all persons : `list`
 
-Shows a guest list consisting of all invited guests and a vendor list consisting of all vendors involved.
+This command will show you a guest list consisting of all invited guests and a vendor list consisting of all vendors involved in the current wedding that you are planning.
     
 * The guest list will be on the left of your screen while the vendor list will be on the right of your screen.
 
@@ -297,11 +294,11 @@ Entering the `list` command returns the following result on your screen:
 
 ### Finding a person : `find`
 
-Finds guests and vendors that match any of the given keyword(s).
+This command will help you find guests and vendors that match any of the given keyword(s) that you provide.
 
 **Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
-> :warning: Only one type of [prefix](#glossary) should be used for each find command.
+> :warning: Only one type of [prefix](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary) should be used for each find command.
 
 - Specifying multiple different prefixes (e.g. `find n/John p/12345`) will result in an invalid command
 - The prefix specified in the command indicates the attribute to be searched (e.g. `find n/NAME` searches for guests and vendors whose name matches the given keyword)
@@ -321,7 +318,7 @@ Entering the `find n/John` command returns the following result on your screen:
 
 ### Clearing all entries : `clear`
 
-Clears and empties out the entire guest list and vendor list. Could be good to start off your preparations for your next wedding.
+This command will help you clear and empty out the entire guest list and vendor list, and could be good to help you start off your preparations for the next wedding.
 
 **Format:** `clear`
 
@@ -336,7 +333,7 @@ Entering the `clear` command returns the following result on your screen:
 
 ### Viewing statistics : `stats`
 
-Displays the total number of guests invited to the wedding and the total number of vendors involved in the wedding.
+This command will display to you the total number of guests invited to the wedding and the total number of vendors involved in the wedding.
 
 **Format:** `stats`
 
@@ -351,7 +348,7 @@ Entering the `stats` command returns the following result on your screen:
 
 ### Exiting the program : `exit`
 
-Exits the program.
+This command will exit the program.
 
 Format: `exit`
 
@@ -371,7 +368,7 @@ Commands listed in this section are applicable to managing your guest list (gues
 
 ### Adding a guest : `add_guest`
 
-Adds a guest to the bottom of the existing overall guest list.
+This command will help you add a new guest to the bottom of the existing overall guest list.
 
 **Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
@@ -392,7 +389,7 @@ Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clement
 
 ### Editing a guest : `edit_guest`
 
-Edits the details of the guest identified by the index number used in the displayed guest list. Existing values will be overwritten by the input values.
+This command will allow you to edit the details of the guest identified by the `INDEX` number used in the displayed guest list. Existing values will be overwritten by the input values.
 
 **Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
@@ -413,7 +410,7 @@ Entering the `edit_guest 1 p/91234567 e/johndoe@example.com` command returns the
 
 ### Deleting a guest : `delete_guest`
 
-Deletes a guest from your existing guest list.
+This command will help you delete a guest from your existing guest list, identified by the `INDEX` number used in the displayed guest list.
 
 **Format:** `delete_guest INDEX`
 
@@ -438,7 +435,7 @@ Commands listed in this section are applicable to managing your vendor list (ven
 
 ### Adding a vendor : `add_vendor`
 
-Adds a vendor to the bottom of the existing overall vendor list.
+This command will help you add a new vendor to the bottom of the existing overall vendor list.
 
 **Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS c/COMPANY [b/BUDGET] [t/TAG]...`
 
@@ -457,7 +454,7 @@ Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clemen
 
 ### Editing a vendor : `edit_vendor`
 
-Edits the details of the vendor identified by the index number used in the displayed vendor list. Existing values will be overwritten by the input values.
+This command will allow you to edit the details of the vendor identified by the `INDEX` number used in the displayed vendor list. Existing values will be overwritten by the input values.
 
 **Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
@@ -478,7 +475,7 @@ Entering the `edit_vendor 1 p/91234567 e/johndoe@example.com` command returns th
 
 ### Deleting a vendor : `delete_vendor`
 
-Deletes a vendor from your existing vendor list.
+This command will help you delete a vendor from your existing vendor list, identified by the `INDEX` number used in the displayed vendor list.
 
 **Format:** `delete_vendor INDEX`
 
@@ -504,7 +501,7 @@ Other additional features of BridalBuddy that are good to know.
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+You do not need to save manually as BridalBuddy data are saved in the hard disk automatically after any command that changes the data.
 
 [_Back to Top_](#table-of-contents)
 
@@ -555,17 +552,6 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 | **Clear**         | `clear`                                                                                                                                                                                                                      |
 | **Stats**         | `stats`                                                                                                                                                                                                                      |
 | **Exit**          | `exit`                                                                                                                                                                                                                       |
-
-
-[_Back to Top_](#table-of-contents)
-
-## **Glossary**
-
-| Term/Keyword                       | Definition                                                                                                 |
-|------------------------------------|------------------------------------------------------------------------------------------------------------|
-| **Command Line Interface (CLI)**   | An interface that allows you to interact with our program by inputting lines of text called command-lines. |
-| **Graphical User Interface (GUI)** | An interface that displays information to you and allows you to interact with visual elements.             |
-| **Prefix**                         | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.              |
 
 
 [_Back to Top_](#table-of-contents)
