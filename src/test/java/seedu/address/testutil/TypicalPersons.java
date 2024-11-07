@@ -70,13 +70,13 @@ public class TypicalPersons {
             .withSubjects("Mathematics").withClasses("7B").withNextOfKin("Bob Bee")
             .withEmergencyContact("85355999").build();
     public static final Student STUDENT_ELLE = new StudentBuilder().withName("Elle Meyer").withGender("female")
-        .withPhone("94822224").withEmail("werner@example.com")
-        .withAddress("michegan ave").withSubjects("Mathematics").withClasses("7A")
-        .withNextOfKin("Bob Bee").withEmergencyContact("85355999").build();
+            .withPhone("94822224").withEmail("werner@example.com")
+            .withAddress("michegan ave").withSubjects("Mathematics").withClasses("7A")
+            .withNextOfKin("Bob Bee").withEmergencyContact("85355999").build();
     public static final Student STUDENT_FIONA = new StudentBuilder().withName("Fiona Kunz").withGender("female")
-        .withPhone("94824277").withEmail("lydia@example.com")
-        .withAddress("little tokyo").withSubjects("Physics").withClasses("7B")
-      .withNextOfKin("Bob Bee").withEmergencyContact("85355999").build();
+            .withPhone("94824277").withEmail("lydia@example.com")
+            .withAddress("little tokyo").withSubjects("Physics").withClasses("7B")
+            .withNextOfKin("Bob Bee").withEmergencyContact("85355999").build();
     public static final Student STUDENT_ALICE = new StudentBuilder().withName("Alice Pauline").withGender("female")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
