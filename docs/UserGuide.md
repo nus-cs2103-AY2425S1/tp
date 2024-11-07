@@ -16,26 +16,29 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 <div style="page-break-after: always;"></div>
 
 ## Learn About Commands Supported By VolunSync
+
+The command words are shown beside their corresponding commands below. The command words should be used before the parameters when entering commands in VolunSync.
+
 1. [Command Format Guidelines](#command-format-guidelines)
 1. [General Commands](#general-commands)
-   1. [Viewing help](#viewing-help--help)
-   1. [Listing all volunteers and events](#listing-all-volunteers-and-events--list)
-   1. [Export database to a CSV file](#export-database-to-a-csv-file--export)
-   1. [Exiting the program](#exiting-the-program--exit)
+   1. [Viewing help](#viewing-help--help) `help`
+   1. [Listing all volunteers and events](#listing-all-volunteers-and-events--list) `list`
+   1. [Export database to a CSV file](#export-database-to-a-csv-file--export) `export`
+   1. [Exiting the program](#exiting-the-program--exit) `exit`
 1. [Volunteer-related Commands](#volunteer-related-commands)
-   1. [Adding a volunteer](#adding-a-volunteer-v-new)
-   1. [Finding volunteers by name](#finding-volunteers-by-name--v-find)
-   1. [Deleting a volunteer](#deleting-a-volunteer--v-del)
-   1. [Adding available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)
-   1. [Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)
-   1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)
-   1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)
+   1. [Adding a volunteer](#adding-a-volunteer-v-new) `/v new`
+   1. [Finding volunteers by name](#finding-volunteers-by-name--v-find) `/v find`
+   1. [Deleting a volunteer](#deleting-a-volunteer--v-del) `/v del`
+   1. [Adding available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free) `/v free`
+   1. [Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree) `/v unfree`
+   1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign) `assign`
+   1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign) `unassign`
 1. [Event-related Commands](#event-related-commands)
-   1. [Adding an event](#adding-an-event-e-new)
-   1. [Finding events by name](#finding-events-by-name--e-find)
-   1. [Deleting an event](#deleting-an-event--e-del-)
-   1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
-   1. [Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter)
+   1. [Adding an event](#adding-an-event-e-new) `/e new`
+   1. [Finding events by name](#finding-events-by-name--e-find) `/e find`
+   1. [Deleting an event](#deleting-an-event--e-del-) `/e del`
+   1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view) `/e view`
+   1. [Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter) `/e filter`
 1. [Commands Summary](#command-summary)
 
 ## Other Resources
