@@ -60,13 +60,21 @@ title: User Guide
    6.2. [Closing a tutorial](#62-closing-a-tutorial)
 
    6.3. [Clearing all entries](#63-clearing-all-entries)
+
 7. [Viewing help](#7-viewing-help)
+
 8. [Exiting the program](#8-exiting-the-program)
+
 9. [Saving the data](#9-saving-data)
+
 10. [Editing the data file](#10-editing-the-data-file)
+
 11. [Prefix Table](#11-prefix-table)
+
 12. [Format Errors](#12-format-errors)
+
 13. [FAQ](#13-faq)
+
 14. [Known issues](#14-known-issues)
 
 ---
@@ -85,7 +93,7 @@ title: User Guide
   5. After downloading it, move the  `EduVault.jar` file to the folder you want to use for the EduVault application.
   6. Using the Terminal from Step 1, use `cd` command to go to the folder you put the jar file in.
   7. Refer [here](https://tutorials.codebar.io/command-line/introduction/tutorial.html) for the usage of `cd` command in Terminal if you are unsure.
-  8. Type `java -jar eduvault.jar` in the Terminal to start the application.
+  8. Type `java -jar EduVault.jar` in the Terminal to start the application.
   9. An EduVault interface similar to the [below](#12-introduction-to-the-interface) should appear in a few seconds. Note that the app will contain some sample data.
 
 <br>
@@ -271,8 +279,6 @@ The commands in this section are used to view and retrieve records on the system
 #### **4.1 Listing all students**
 
 Command: `list`
-
-<br>
 
 #### **4.2 Searching students**
 
@@ -749,7 +755,7 @@ Command:  `clear`
 Clears all entries from Eduvault.
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-Eduvault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/addressbook.json` before executing.
+EduVault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/addressbook.json` before executing.
 </div>
 
 ---
@@ -772,7 +778,7 @@ Command: `exit`
 ---
 
 ### **9. Saving data** 
-Eduvault data is saved in the hard disk automatically after any command that changes the data.
+EduVault data is saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 ---
@@ -782,8 +788,8 @@ Eduvalt data is saved automatically as a JSON file at `[JAR file location]/data/
 Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-If your changes to the data file make its format invalid, Eduvault will discard all data and start with an empty data file at the next run. Hence, it is recommended to create a backup of the file before editing it.
-Furthermore, certain edits can cause Eduvault to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file make its format invalid, EduVault will discard all data and start with an empty data file at the next run. Hence, it is recommended to create a backup of the file before editing it.
+Furthermore, certain edits can cause EduVault to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 For reference, please refer to the [Developer Guide](https://ay2425s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html#storage-format) for more details on editing the JSON file.
