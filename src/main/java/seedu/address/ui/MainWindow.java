@@ -79,6 +79,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        resultDisplay = new ResultDisplay();
+
 
         primaryStage.getScene().heightProperty().addListener((observable, oldHeight, newHeight) -> {
             double heightDifference = newHeight.doubleValue() - oldHeight.doubleValue();
@@ -91,6 +93,8 @@ public class MainWindow extends UiPart<Stage> {
                 resultDisplay.setPrefHeight(Math.max(newResultHeight, 100));
             }
         });
+
+
     }
 
     public Stage getPrimaryStage() {
