@@ -23,23 +23,28 @@ public class DateCommandParserTest {
 
         // No parameters (no identifying prefixes and no date prefix)
         assertParseFailure(parser, DateCommand.COMMAND_WORD,
-                "At least one identifier (name, phone, or email) must be provided. " + expectedMessage);
+                "At least one identifier (name, phone, or email) must be provided. \n"
+                        + expectedMessage);
 
         // Only date provided, but no Name, Phone, or Email
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " " + nonEmptyDate,
-                "At least one identifier (name, phone, or email) must be provided. " + expectedMessage);
+                "At least one identifier (name, phone, or email) must be provided. \n"
+                        + expectedMessage);
 
         // Only Name provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " n/Nayana",
-                "A date and time is required. Please include a date and time. " + expectedMessage);
+                "A date and time is required. Please include a date and time. \n"
+                        + expectedMessage);
 
         // Only Phone provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " p/12345678",
-                "A date and time is required. Please include a date and time. " + expectedMessage);
+                "A date and time is required. Please include a date and time. \n"
+                        + expectedMessage);
 
         // Only Email provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/email@example.com",
-                "A date and time is required. Please include a date and time. " + expectedMessage);
+                "A date and time is required. Please include a date and time. \n"
+                        + expectedMessage);
     }
 
     @Test
