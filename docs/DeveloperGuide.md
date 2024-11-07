@@ -154,7 +154,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+``This section describes some noteworthy details on how certain features are implemented.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -224,7 +224,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
-
+``
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -495,6 +495,25 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding Reminders
+
+### Deleting Reminders
+**Prerequisite**: Manually add several reminders as specified in the [Adding Reminders](#adding-reminders) section.
+1. Deleting a reminder that is present
+   1. Test case: `delete_reminder 1`<br>
+      Expected: First reminder is deleted from the reminder list. Details of the deleted contact will be displayed. Remaining reminders below the deleted reminder are shifted up by 1 position.
+   1. Alternative command to try: `dr`, `dr x`, `...` (where x is at between 1 and the size of the reminder list)<br>
+      Expected: similar to above
+2. Deleting a reminder that is not present
+   1. Test case: `delete_reminder 0`<br>
+      Expected: No reminder is deleted. Error status displayed.
+   1. Other incorrect delete_reminder commands to try: `delete_reminder`, `delete_reminder x`, `...`
+      (where x is larger than the size of the reminder list)<br>
+      Expected: No reminder is deleted. Error status displayed.
+   1. Alternative command to try: `dr`, `dr x`, `...` (where x is larger than the size of the reminder list)<br>
+      Expected: similar to above
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -502,3 +521,53 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Saving sort preference
+1. **Saving valid sort preferences**
+   1. **Prerequisites**: Ensure there are several persons in NetBook, you can check so using the `list` command.
+   1. **Test case**: `save_sort high`
+      **Expected**: The list of persons is sorted by priority with high_priority contacts at the top, and this preference is 
+      saved. Upon restarting the application, the contact list should reflect this order.
+   1. **Test case**: `svp distant`
+      **Expected**: The list is sorted by `last seen` dates from most distant to most recent. After restarting the application, 
+      this sorting preference is retained and automatically applied to the contacts list.
+   1. **Other commands to try**:
+      1. **Test case**: `save_sort default`
+         **Expected**: The list sorts contacts by the order they were added, with older entries displayed first. When the 
+         application restarts, contacts are presented in this order.
+      1. **Test case**: `svp recent`
+         **Expected**: The list is sorted with the most recently seen contacts at the top, and this preference is saved,
+         upon restarting, the list will retain this order.
+1. **Invalid preferences and error handling**
+   1. **Test case**: `save_sort name`
+      **Expected**: An error message is shown, indicating the correct usage for the command `save_sort`.
+   1. **Test case**: `svp`
+      **Expected**: The same error message in i will appear.
+   1. **Other incorrect commands to try**: `save_sort`, `svp z` (where `x` and `z` are not valid preferences such as `high`
+      `low`, etc.)
+      **Expected**: Error messages similar to the previous cases, and the saved preference remains unchanged.
+1. **Verifying persistence of saved preferences**
+   1. **Prerequisites**: Have already saved a sort preference (e.g, `save_sort recent` or `svp high`).
+   1. **Test case**: Close the application and re-launch it.
+      **Expected**: The contacts list should automatically display according to the saved preference
+
+## **Appendix: Effort**
+1. Unlike AB3, which deals primarily with single entity type (Person), our project involves multiple entity types, such as
+   entity types such as Persons, and Reminders, each with their own attributes and functionality. This added complexity required 
+   us to design different classes and interfaces to handle each entity type effectively, as well as implementing additional
+   features to support interactions between them. Hence, this increased the overall difficulty and effort required, as it 
+   demanded additional design consideration and testing.
+
+## **Appendix: Planned Enhancements**
+Team Size: 5
+1. **Make 'failed add' message more specific**: Currently, when an add command
+fails due to missing parameters,<br>
+`Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL o/ORGANIZATION [d/LAST SEEN] [t/TAG]... [pr/PRIORITY] [r/REMARK]
+Example: add n/John Doe p/98765432 e/johnd@example.com o/NUS d/23-09-2024 t/friends t/owesMoney pr/low r/likes apple `<br>
+is used as the error message. This can be lengthy and too general. Instead, a more specific message that pinpoints the
+exact error can be used. For instance `add n/Joe p/82828282 e/Joe@gmail.com pr/high r/internship supervisor` does not work 
+because there is a missing `organisation` field, an error like `missing organisation field` can be shown instead.
+2. **Automate deletion of reminders for planned events that are over**: Currently, events that are over will show negative
+date for the time remaining field. Users will have to delete unwanted reminders themselves which can be troublesome. 
+This process can be automated such that reminders that have expired can be archived or deleted according to the user's preference.
