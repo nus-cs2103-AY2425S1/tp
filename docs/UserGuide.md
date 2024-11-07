@@ -82,17 +82,17 @@ any traditional point-and-click management app.
 Action     | Format, Examples
 :--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:
 **[Add](#adding-a-person-add)**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
-**[Clear](#clearing-all-entries--clear)**  | `clear`
-**[Delete](#deleting-a-person--delete)** | `delete INDEX`<br> e.g., `delete 3`
-**[Edit](#editing-a-person--edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**[Find by contact information](#locating-persons-by-contact-information-find)**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
-**[Delete tag](#deleting-a-persons-tag--deltag)** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**[Add tag](#adds-tags-to-a-specific-person--addtag)** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
-**[Categorize tag](#categorizing-a-tag--cattag)** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
-**[Undo action](#undo-a-command--undo)** | `undo`
+**[Clear](#clearing-all-entries-clear)**  | `clear`
+**[Delete](#deleting-a-person-delete)** | `delete INDEX`<br> e.g., `delete 3`
+**[Edit](#editing-a-person-edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**[Find by contact information](#finding-persons-by-contact-information-find)**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
+**[Delete tag](#deleting-a-persons-tag-deltag)** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
+**[Add tag](#adds-tags-to-a-specific-person-addtag)** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
+**[Categorize tag](#categorizing-a-tag-cattag)** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**[Undo action](#undo-a-command-undo)** | `undo`
 **[Redo action](#redo-a-command-redo)** | `redo`
-**[List](#listing-all-persons--list)**   | `list`
-**[Help](#viewing-help--help)**   | `help` 
+**[List](#listing-all-persons-list)**   | `list`
+**[Help](#viewing-help-help)**   | `help` 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -106,7 +106,7 @@ When clicked, this hyperlink will show the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to CampusConnect.
 
@@ -150,7 +150,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by contact information: `find`
+### Finding persons by contact information : `find`
 
 Finds persons whose names, email address, contact number, or tag contain any of the given keywords.
 
@@ -261,7 +261,7 @@ Format: `undo`
 * When the oldest version of CampusConnect is reached, `undo` command will cause an exception to be thrown
 * Only commands that modify the data of CampusConnect can be undone. Commands such as `list` and `find` will not be undone.
 
-### Redo a command: `redo`
+### Redo a command : `redo`
 
 Reapplies a command that was previously undone by `undo`.
 
