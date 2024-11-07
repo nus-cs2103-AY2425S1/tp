@@ -21,6 +21,8 @@ Eventory is a **desktop app for managing contacts and events**, optimized for us
     <a href="UserGuide.html#quick-start">
         <img src="images/getstartedblue.svg" alt="Get Started" width="450" height="150">
     </a>
+</div>
+<div style="display: flex; gap: 20px;">
     <a href="DeveloperGuide.html">
         <img src="images/develop.svg" alt="Develop" width="450" height="150">
     </a>
@@ -52,11 +54,6 @@ Effortlessly manage your network, streamline tasks, and enhance communication wi
 </box>
 <box type="success" seamless>
   Advanced Filters: Filter by name, tag, or date
-</box>
-
-#### <span class="badge bg-primary">**Automated Communication**</span>
-<box type="success" seamless>
-  Automated Message Generation: Copy and send event summaries
 </box>
 
 ### Powered By Leading Technologies
