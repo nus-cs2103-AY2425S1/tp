@@ -1,0 +1,45 @@
+{
+  "persons" : [ {
+    "name" : "ALEX YEOH",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "jobCode" : "SWE2025",
+    "tag" : "N",
+    "remark" : ""
+  }, {
+    "name" : "BERNICE YU",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "jobCode" : "HRD140572",
+    "tag" : "TP",
+    "remark" : "very confident"
+  }, {
+    "name" : "CHARLOTTE OLIVEIRO",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "jobCode" : "INTERN0829",
+    "tag" : "TC",
+    "remark" : "can only do part time"
+  }, {
+    "name" : "DAVID LI",
+    "phone" : "91031282",
+    "email" : "lidavid@example.com",
+    "jobCode" : "ST0182",
+    "tag" : "A",
+    "remark" : ""
+  }, {
+    "name" : "IRFAN IBRAHIM",
+    "phone" : "92492021",
+    "email" : "irfan@example.com",
+    "jobCode" : "A0824B8",
+    "tag" : "R",
+    "remark" : ""
+  }, {
+    "name" : "ROY BALAKRISHNAN",
+    "phone" : "92624417",
+    "email" : "royb@example.com",
+    "jobCode" : "ZSGGG",
+    "tag" : "BP",
+    "remark" : ""
+  } ]
+}
