@@ -28,7 +28,7 @@
                 <Label fx:id="date" text="\$date" styleClass="cell_big_label" />
                 <Label fx:id="time" text="\$time" styleClass="cell_big_label" />
             </HBox>
-            <FlowPane fx:id="students" styleClass="cell_big_label" />
+            <FlowPane fx:id="students" styleClass="cell_big_label" minWidth="10" />
         </VBox>
     </GridPane>
 </HBox>
