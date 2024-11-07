@@ -14,14 +14,11 @@ import seedu.address.model.patient.Patient;
  */
 public class FilteredAppointment {
 
-    public static final Comparator<FilteredAppointment> APPOINTMENT_COMPARATOR = new Comparator<FilteredAppointment>() {
-        @Override
-        public int compare(FilteredAppointment appt1, FilteredAppointment appt2) {
-            if (DATETIME_COMPARATOR.compare(appt1.getAppt(), appt2.getAppt()) == 0) {
-                return appt1.getPatient().compareTo(appt2.getPatient());
-            }
-            return DATETIME_COMPARATOR.compare(appt1.getAppt(), appt2.getAppt());
+    public static final Comparator<FilteredAppointment> APPOINTMENT_COMPARATOR = (appt1, appt2) -> {
+        if (DATETIME_COMPARATOR.compare(appt1.getAppt(), appt2.getAppt()) == 0) {
+            return appt1.getPatient().compareTo(appt2.getPatient());
         }
+        return DATETIME_COMPARATOR.compare(appt1.getAppt(), appt2.getAppt());
     };
 
     private final Appt appt;

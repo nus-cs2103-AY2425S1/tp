@@ -10,7 +10,7 @@ import java.util.Objects;
  * Guarantees: immutable; is valid as declared in {@link #isValidHealthRisk (String)}
  */
 public class HealthRisk {
-    public static final String MESSAGE_CONSTRAINTS = "Health condition should be categorized as either"
+    public static final String MESSAGE_CONSTRAINTS = "Risk level should be categorized as either"
             + " 'HIGH', 'MEDIUM', or 'LOW.'";
 
     private enum Priority { HIGH, MEDIUM, LOW };
@@ -33,6 +33,7 @@ public class HealthRisk {
      */
     public static boolean isValidHealthRisk(String test) {
         requireNonNull(test);
+        test = test.trim().toUpperCase();
         return Objects.equals(test, Priority.LOW.name())
                 || Objects.equals(test, Priority.MEDIUM.name())
                 || Objects.equals(test, Priority.HIGH.name());

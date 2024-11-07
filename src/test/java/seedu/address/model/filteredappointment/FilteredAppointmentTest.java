@@ -50,5 +50,4 @@ public class FilteredAppointmentTest {
         assertFalse(filteredAppointment.equals(filteredAppointmentDifferentPatient));
     }
 
-
 }

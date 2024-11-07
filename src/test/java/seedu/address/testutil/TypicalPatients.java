@@ -111,8 +111,6 @@ public class TypicalPatients {
             .withHealthRisk(VALID_HEALTHRISK_KEANU).withExistingCondition(VALID_EXISTINGCONDITION_KEANU)
             .withNote(VALID_NOTE_KEANU).build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalPatients() {} // prevents instantiation
 
     /**
