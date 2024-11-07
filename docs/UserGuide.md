@@ -52,6 +52,9 @@ faster than traditional GUI apps.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add contact n/NAME`, `NAME` is a parameter which can be used as `add contact n/John Doe`.
 
+* Commands, not including their parameters, are case-insensitive.<br>
+  e.g. if the command specifies `adD CONTact`, it will be interpreted as `add contact`. 
+
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [s/SKILL]` can be used as `n/John Doe s/Python` or as `n/John Doe`.
 
@@ -61,7 +64,7 @@ faster than traditional GUI apps.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -133,6 +136,12 @@ Format: `list job`
 Shows a list of all companies in the address book.
 
 Format: `list company`
+
+### Listing all entities : `list all`
+
+Show all contact, jobs and companies in the address book.
+
+Format: `list all`
 
 ### Editing a contact : `edit`
 
@@ -287,6 +296,14 @@ in the job list.
 `view company 2` will show the job in the job list 
 and the contact in the contact list.
 
+### Viewing statistics : `stats`
+
+Shows a summary of the data, including the total number of contacts, jobs, and companies in the address book. 
+Additionally, it provides a breakdown of matched and unmatched contacts, offering insights 
+into recruitment activity and data utilization.
+
+Format: `stats`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -336,12 +353,25 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action             | Format, Examples                                                                                                                                                                 |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact**    | `add contact n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILL]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com r/copywriter s/MSWord`                        |
+| **Add Job**        | `add job n/NAME c/COMPANY s/SALARY d/DESCRIPTION [r/REQUIREMENT]…​` <br> e.g., `add job n/Software Engineer c/Google s/2000 d/Needs to know AI s/Python`                         |
+| **Add Company**    | `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE` <br> e.g., `add company n/Google a/70 Pasir Panjang Rd #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000` |
+| **List Contacts**  | `list contact`                                                                                                                                                                   |
+| **List Jobs**      | `list job`                                                                                                                                                                       |
+| **List Companies** | `list company`                                                                                                                                                                   |
+| **Clear**          | `clear`                                                                                                                                                                          |
+| **Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`                                                                                                                              |
+| **Delete Job**     | `delete job INDEX` <br> e.g., `delete job 2`                                                                                                                                     |
+| **Delete Company** | `delete company INDEX` <br> e.g., `delete company 2`                                                                                                                             |
+| **Screen Job**     | `screen job INDEX` <br> e.g., `screen job 1`                                                                                                                                     |
+| **Match**          | `match CONTACT_INDEX JOB_INDEX` <br> e.g., `match 1 2`                                                                                                                           |
+| **Unmatch**        | `unmatch CONTACT_INDEX JOB_INDEX` <br> e.g., `unmatch 3 2`                                                                                                                       |
+| **View Company**   | `view company INDEX` <br> e.g., `view company 1`                                                                                                                                 |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                      |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                       |
+| **Help**           | `help`                                                                                                                                                                           |
+| **Exit**           | `exit`                                                                                                                                                                           |
+| **Stats**          | `stats`                                                                                                                                                                                  |
+

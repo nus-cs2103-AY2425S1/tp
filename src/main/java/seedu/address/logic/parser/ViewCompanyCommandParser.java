@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_OPERATION_NOT_ALLOWED;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewCompanyCommand;
@@ -20,24 +19,19 @@ public class ViewCompanyCommandParser implements Parser<ViewCompanyCommand> {
      */
     public ViewCompanyCommand parse(String args) throws ParseException {
 
-        String[] splitArgs = args.trim().split("\\s+");
+        String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 2, ViewCompanyCommand.MESSAGE_USAGE);
 
-        if (args.isEmpty()) {
-            throw new ParseException(ViewCompanyCommand.MESSAGE_USAGE);
-        } else if (splitArgs.length < 2) {
-            throw new ParseException(MESSAGE_MISSING_INDEX);
-        }
-
-        // TODO: Implement an entity for view command
-        if (!splitArgs[0].equals("company")) {
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-        }
-
+        String entityString = splitArgs[0];
         String indexString = splitArgs[1];
-
+        String entity = ParserUtil.parseEntity(entityString);
         Index index = ParserUtil.parseIndex(indexString);
 
-        return new ViewCompanyCommand(index);
-
+        switch (entity) {
+        case ViewCompanyCommand.ENTITY_WORD:
+            return new ViewCompanyCommand(index);
+        default:
+            throw new ParseException(String.format(MESSAGE_OPERATION_NOT_ALLOWED,
+                    ViewCompanyCommand.COMMAND_WORD, entity));
+        }
     }
 }

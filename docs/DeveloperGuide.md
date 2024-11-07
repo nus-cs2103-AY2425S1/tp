@@ -400,6 +400,31 @@ and the **Actor** is the `user`, unless specified otherwise)
 
     Use case ends.
 
+**Use case: View company **
+
+**MSS**
+
+1. User requests to list companies.
+2. User requests to view a company.
+3. AddressBook selects the targeted company.
+4. AddressBook filters the contact and job lists to show those associated with company.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 2a. The given parameters are invalid.
+    * 2a1. AddressBook shows an error message.
+    
+        Use case resumes at step 2.
+
+* 4a. The list is empty.
+    
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.

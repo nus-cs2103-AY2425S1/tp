@@ -320,4 +320,64 @@ public class ParserUtilTest {
         BillingDate expectedDate = new BillingDate(VALID_BILLING_DATE);
         assertEquals(expectedDate, ParserUtil.parseBillingDate(dateWithWhitespace));
     }
+
+    @Test
+    public void parseRequiredNumberOfArguments_validInput_returnSplitArgs() throws Exception {
+        String inputString = WHITESPACE + "1" + WHITESPACE + "2" + WHITESPACE;
+        int numberOfArguments = 2;
+        String usageMessage = "sample usage message";
+
+        String[] expectedOutput = {"1", "2"};
+        String[] actualOutput = ParserUtil.parseRequiredNumberOfArguments(inputString, numberOfArguments, usageMessage);
+
+        assertEquals(numberOfArguments, expectedOutput.length);
+        assertEquals(expectedOutput.length, actualOutput.length);
+        for (int i = 0; i < numberOfArguments; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+
+    @Test
+    public void parseRequiredNumberOfArguments_incorrectNumberOfArguments_throwException() throws Exception {
+        String inputString = WHITESPACE + "1" + WHITESPACE + "2" + WHITESPACE;
+        int numberOfArguments = 3;
+        String usageMessage = "sample usage message";
+
+        assertThrows(ParseException.class, ()
+                -> ParserUtil.parseRequiredNumberOfArguments(inputString, numberOfArguments, usageMessage));
+    }
+
+    @Test
+    public void parseRequiredNumberOfArguments_emptyInput_throwException() throws Exception {
+        int numberOfArguments = 0;
+        String usageMessage = "sample usage message";
+
+        assertThrows(ParseException.class, ()
+                -> ParserUtil.parseRequiredNumberOfArguments(WHITESPACE, numberOfArguments, usageMessage));
+    }
+
+    @Test
+    public void parseEntity_validEntity_noExceptionsThrown() throws Exception {
+        assertEquals("contact", ParserUtil.parseEntity("contact"));
+        assertEquals("job", ParserUtil.parseEntity("job"));
+        assertEquals("company", ParserUtil.parseEntity("company"));
+        assertEquals("all", ParserUtil.parseEntity("all"));
+
+        // Different case
+        assertEquals("contact", ParserUtil.parseEntity("CoNtAcT"));
+        assertEquals("job", ParserUtil.parseEntity("jOb"));
+        assertEquals("company", ParserUtil.parseEntity("COMPany"));
+        assertEquals("all", ParserUtil.parseEntity("aLL"));
+    }
+
+    @Test
+    public void parseEntity_invalidEntity_throwParseException() throws Exception {
+        assertThrows(ParseException.class, ()
+                ->ParserUtil.parseEntity("someInvalidEntity"));
+    }
+
+    @Test
+    public void parseEntity_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEntity(null));
+    }
 }

@@ -32,12 +32,19 @@ public class Name {
     }
 
     /**
+     * Returns true if both names have the same characters, ignoring case.
+     * Used as a weaker notion of equality to enable case-insensitive checks.
+     */
+    public boolean isSameName(Name otherName) {
+        return fullName.equalsIgnoreCase(otherName.fullName);
+    }
+
+    /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
 
     @Override
     public String toString() {
