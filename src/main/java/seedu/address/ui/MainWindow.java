@@ -173,22 +173,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    /**
-     * Toggles the Central Display to show the Person List or the session logs.
-     */
-    @FXML
-    private void handleTogglePanel() {
-        if (centralDisplay.isPersonListVisible()) {
-            centralDisplay.showSessionLogPanel();
-            return;
-        }
-
-        if (centralDisplay.isSessionLogVisible()) {
-            centralDisplay.showPersonListPanel();
-            return;
-        }
-    }
-
 
     /**
      * Opens the session log associated with the person with {@code personIndex}
