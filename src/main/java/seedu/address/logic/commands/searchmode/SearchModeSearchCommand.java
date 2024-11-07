@@ -23,7 +23,7 @@ public class SearchModeSearchCommand extends Command {
             + "Parameters: [Flag] [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/Amy Bob Charlie";
 
-    public static final String MESSAGE_SUCCESS = "Added Contacts %1$s who fit search parameter.";
+    public static final String MESSAGE_SUCCESS = "Added %1$s Contacts who fit search parameter.";
     public static final String MESSAGE_NO_PERSONS_FOUND = "No Contacts found with the search parameter.";
 
     //maintains a set of predicates, reducing them to get the final predicate in execute
@@ -49,6 +49,7 @@ public class SearchModeSearchCommand extends Command {
 
         model.updateFilteredListWithExclusions(newPredicate);
         int updatedSize = model.getFilteredPersonList().size();
+        // or predicate, so if the size is the same, no new persons were added
         if (updatedSize == originalSize) {
             return new CommandResult(MESSAGE_NO_PERSONS_FOUND);
         }
