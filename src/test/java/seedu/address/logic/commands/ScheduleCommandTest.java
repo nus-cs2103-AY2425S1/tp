@@ -26,6 +26,7 @@ import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.TimeClashException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.ModelClearObserver;
 
 public class ScheduleCommandTest {
     private Index index = Index.fromZeroBased(0);
@@ -149,6 +150,16 @@ public class ScheduleCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addObserver(ModelClearObserver observer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void notifyUddersListCleared() {
             throw new AssertionError("This method should not be called.");
         }
 

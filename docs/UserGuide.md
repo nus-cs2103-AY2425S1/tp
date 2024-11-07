@@ -11,6 +11,25 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 <!-- * Table of Contents -->
 <page-nav-print />
 
+---------------------- 
+## Table of Contents
+- [FindingbrUdders User Guide](#findingbrudders-user-guide)
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Viewing Help: `help`](#viewing-help--help-)
+  - [Adding an Udder: `add`](#adding-an-udder-add-)
+  - [Listing all Udders: `list`](#listing-all-udders--list-)
+  - [Editing an Udder: `edit`](#editing-an-udder--edit-)
+  - [Scheduling a meeting with an Udder: `schedule`](#scheduling-a-meeting-with-an-udder--schedule-)
+  - [Locating Udders by keywords: `find`](#locating-udders-by-keywords-find-)
+  - [Deleting an Udder: `delete`](#deleting-an-udder--delete-)
+  - [Clearing all Udders:`clear`](#clearing-all-udders--clear-)
+  - [Exiting the program: `exit`](#exiting-the-program--exit-)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -37,7 +56,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data to help you get started.<br>
 
-![Ui](images/Ui.png) 
+![Ui](images/Ui3.png) 
 
 1. Type the command in the command box at the bottom and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -53,6 +72,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -83,8 +103,9 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 ### Viewing help : `help` 💡
 
 Shows a message via a popup window explaining how to access the help page.
+Access the url shown on the popup window to be redirected to the help screen.
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessage2.png)
 
 **Format:** `help`
 
@@ -103,6 +124,7 @@ Adds an Udder to the address book.
 **Examples:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/mUdder m/ceg t/potential connection`
+* `add n/Charlie Brown e/snoopy@gmail.com a/Yellow House p/24157842 m/cs r/brUdder t/friend`
 
 ### Listing all Udders : `list` 📜
 
@@ -146,19 +168,21 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 
 Finds Udders by specified keywords for each field.
 
-**Format:** `find [n/]`
+**Format:** `find [n/] [p/] [t/] [a/] [e/] [m/] [r/]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
+* **IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
 
 **Examples:**
 * `find John` returns `johnny` and `John Doe`<br>
+* `find friend` returns `Charlie Brown` and `Betsy Crowe`<br>
 
-![result for 'find alex david'](images/findCommand.png)
+![result for 'find John'](images/findCommand3.png)
 
 ### Deleting an Udder : `delete` ❌
 
-Deletes the specified Udder from the address book.
+Deletes the specified Udder from the address book. Deleting an Udder also deletes all meetings related to that Udder.
 
 **Format:** `delete INDEX`
 
@@ -219,7 +243,7 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. 
-Solution: delete the `preferences.json` file created by the application before running the application again. 
+Solution: delete the `preferences.json` file created by the application before running the application again to prevent this problem.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. 
 Solution: manually restore the minimized Help Window.
 
