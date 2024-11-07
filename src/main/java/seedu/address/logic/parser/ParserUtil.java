@@ -1,14 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.group.AddToGroupCommandParser.MEMBER_MESSAGE_CONSTRAINTS;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -300,14 +298,6 @@ public class ParserUtil {
      * @throws ParseException if the given membersAsString is invalid.
      */
     public static List<Index> parseMembers(String membersAsString) throws ParseException {
-        requireNonNull(membersAsString);
-        List<Index> members;
-        try {
-            members = Arrays.stream(membersAsString.split(" ")).map(
-                    i -> Index.fromOneBased(Integer.parseInt(i))).toList();
-        } catch (PatternSyntaxException | NumberFormatException e) {
-            throw new ParseException(MEMBER_MESSAGE_CONSTRAINTS);
-        }
-        return members;
+        return parseIndices(membersAsString);
     }
 }
