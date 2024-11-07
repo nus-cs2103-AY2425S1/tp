@@ -16,6 +16,27 @@
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+## Callouts Convention
+
+The callout boxes below are used in documentation to enhance readability and provide important contextual information.
+
+<box type="info" seamless>
+
+**Info Box:**
+Provides additional information or context.
+</box>
+
+<box type="tip" seamless>
+
+**Tip Box:**
+Offers helpful tips or suggestions.
+</box>
+
+<box type="warning" seamless>
+
+**Caution Box:**
+Alerts you to potential issues or problems that may arise.
+</box>
 
 ## Quick start
 
@@ -46,6 +67,8 @@
        cd \path\to\your\folder
        ```
        <box type="warning" seamless>
+
+       **Caution:**
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\AddressBook`
        </box>
        
@@ -54,6 +77,8 @@
        cd /path/to/your/folder
        ```
        <box type="warning" seamless>
+
+       **Caution:**
        Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/AddressBook`
        </box>
    * Run the application with the following command:
@@ -78,21 +103,6 @@
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-## Callouts Convention
-
-The callout boxes below are used in documentation to enhance readability and provide important contextual information.
-
-<box type="info" seamless>
-**Info Box:** Provides additional information or context.
-</box>
-
-<box type="tip" seamless>
-**Tip Box:** Offers helpful tips or suggestions.
-</box>
-
-<box type="warning" seamless>
-**Caution Box:** Alerts you to potential issues or problems that may arise.
-</box>
 
 ## Features
 
