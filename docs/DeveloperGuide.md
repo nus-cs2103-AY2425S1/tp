@@ -143,8 +143,11 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save goods data in CSV format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage`, `GoodsStorage`, and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* `CsvConverters` are used to convert between the model objects fields and the CSV fields.
+* `CsvGoodsStorage` and `CsvConverters` use OpenCSV to read and write CSV files.
 
 ### Common classes
 
@@ -510,7 +513,7 @@ testers are expected to do more *exploratory* testing.
 Difficulty level for the project was high as we increased the complexity of our use case by handling another entity `Goods` in addition to the suppliers. As we strived to tackle the pain points faced by our persona, we had to add goods tracking and other important features for our persona. We have been able to build a comprehensive application that we believe can help to alleviate the pain points of our persona. This app handles two different entities in two different data types, while ensuring smooth integration between both.
 
 # Goods Storage
-OpenCSV was used to handle working with CSV files. Hence, we are handling another file type besides the JSON that AB3 uses. Integrating this library made it easier to implement CSV-related functions. However, we did have to learn to use this library effectively and in a way that could make the application bug-free even wtih unintended incorrect usage. This resulted in quite some time and effort being used to ensure the testability of the integration of the project with OpenCSV.
+OpenCSV was used to handle working with CSV files. Hence, we are handling another file type besides the JSON that AB3 uses. Integrating this library made it easier to implement CSV-related functions. However, we did have to learn to use this library effectively and in a way that could make the application bug-free even with unintended incorrect usage. This resulted in quite some time and effort being used to ensure the testability of the integration of the project with OpenCSV.
 
 # Main Challenges Faced
 Besides ensuring that any bugs with OpenCSV are handled correctly, we also had to:
@@ -518,6 +521,11 @@ Besides ensuring that any bugs with OpenCSV are handled correctly, we also had t
 * Ensure that proper business rules are enforced throughout the application (*e.g.* quantites and prices of the goods cannot be negative)
 * Consider the needs of our persona, and develop features accordingly (*e.g.* addition of statistical data when viewing the desired list of goods)
 * Adding minor GUI fixes for better display formats
+
+# Empathising with our Persona: Non-Tech Savvy Business Owner
+In efforts to cater to our persona, we have added features that would be useful for a business owner who is not tech-savvy. We have added and modified features such as:
+* Deleting based on name instead of index.
+* Automatically updates the status of goods when Arrival Date is in the past.
 
 --------------------------------------------------------------------------------------------------------------------
 

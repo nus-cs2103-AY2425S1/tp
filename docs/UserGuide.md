@@ -195,7 +195,8 @@ Note: All filters are optional, and all goods will be shown if no filters are pr
 ### Export Goods Data to CSV: `export`
 
 Exports the currently displayed goods in a new CSV file. Should be used after filters have been applied to obtain a clean set of data for any external usage.
-- This command is dependant on the 'viewgoods' command.
+- This command is dependent on the `viewgoods` command.
+- The new CSV file will be saved as `[JAR file location]/data/filteredGoods.csv`
 
 Format: `export`
 
@@ -203,7 +204,7 @@ Format: `export`
 
 Supply Central data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### Editing the Supplier data file
 
 SupplyCentral supplier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -212,9 +213,9 @@ If your changes to the data file makes its format invalid, SupplyCentral will di
 Furthermore, certain edits can cause SupplyCentral to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Editing the Goods data file ###
+### Editing the Goods data file
 
-SupplyCentral goods data will be stored in a CSV file for advanced users to access and use for business purposes. However, it is strongly discouraged for users to directly edit this data file due to risk of data corruption.
+SupplyCentral goods data will be stored in a CSV file `[JAR file location]/data/goods.csv` for advanced users to access and use for business purposes. However, it is strongly discouraged for users to directly edit this data file due to risk of data corruption.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Similar to the supplier data file, if your changes to the data file makes its format invalid, SupplyCentral will discard all invalid data and will only retain any valid data within the current file. Hence, as mentioned above, it is strongly discouraged to directly edit this file.<br>
