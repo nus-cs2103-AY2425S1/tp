@@ -28,7 +28,10 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " alex";
 
-    public static final String MESSAGE_DELETE_EMPTY_LIST_ERROR = "There is nothing to delete.";
+    public static final String MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR = "There is no person to delete.";
+    public static final String MESSAGE_DELETE_EMPTY_WEDDING_LIST_ERROR =
+            "There is no wedding to assign as the wedding list is empty.\n"
+                    + "Please refresh the list with a command (e.g. list, vieww).";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     public static final String MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS = "Removed wedding jobs from person: %1$s";
@@ -96,7 +99,7 @@ public class DeleteCommand extends Command {
     private Person getPersonByIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (lastShownList.isEmpty()) {
-            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
+            throw new CommandException(MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR);
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -115,7 +118,7 @@ public class DeleteCommand extends Command {
         List<Person> filteredList = model.getFilteredPersonList();
 
         if (filteredList.isEmpty()) {
-            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
+            throw new CommandException(MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR);
         } else if (filteredList.size() == 1) {
             return filteredList.get(0);
         } else {
@@ -147,7 +150,7 @@ public class DeleteCommand extends Command {
         List<Wedding> lastShownList = model.getFilteredWeddingList();
 
         if (lastShownList.isEmpty()) {
-            throw new CommandException(MESSAGE_ASSIGN_EMPTY_WEDDING_LIST_ERROR);
+            throw new CommandException(MESSAGE_DELETE_EMPTY_WEDDING_LIST_ERROR);
         }
 
         for (Index index : weddingIndices) {
