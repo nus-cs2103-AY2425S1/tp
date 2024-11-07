@@ -166,23 +166,6 @@ public class DeleteTagCommandTest {
         assertThrows(CommandException.class, String.format(
                 DeleteTagCommand.DELETE_ALL_INVALID_TAG, TEST), () -> deleteTagCommand.execute(model2));
 
-        /*Person expectedPerson1 = new StudentBuilder().withName("Alice Pauline")
-                .withStudentID("A1234567X")
-                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").build();
-        Person expectedPerson2 = new StudentBuilder().withName("Benson Meier")
-                .withStudentID("A7654321X")
-                .withAddress("311, Clementi Ave 2, #02-25")
-                .withEmail("benson@example.com").withPhone("98765432")
-                .withTags("owesMoney").build();
-        Model expectedModel = new ModelManager(getTypicalStudentsWithFriendsTagAddressBook(), new UserPrefs());
-        expectedModel.setPerson(person1, expectedPerson1);
-        expectedModel.setPerson(person2, expectedPerson2);
-
-        String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_FROM_ALL_SUCCESS,
-                tagsToDelete);
-
-        assertCommandSuccess(deleteTagCommand, model2, expectedMessage, expectedModel);*/
     }
 
     @Test

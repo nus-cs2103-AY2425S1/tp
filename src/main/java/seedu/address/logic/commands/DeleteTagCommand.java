@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -71,6 +72,8 @@ public class DeleteTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        Logger logger = Logger.getAnonymousLogger();
+        List<Person> copyoflist = List.copyOf(lastShownList);
 
         if (deleteFromAll) {
             for (Person p : lastShownList) {
@@ -80,11 +83,16 @@ public class DeleteTagCommand extends Command {
                     }
                 }
             }
-            for (Person p : lastShownList) {
+            logger.info(lastShownList.toString());
+            for (Person p : copyoflist) {
+                logger.info(p.toString());
+                logger.info(lastShownList.toString());
                 Person editedPerson = deleteTagsFromPerson(p, tagsToDelete);
                 model.setPerson(p, editedPerson);
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+                logger.info(p.toString());
+                logger.info(lastShownList.toString());
             }
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_TAG_FROM_ALL_SUCCESS, tagsToDelete));
         } else {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -95,7 +103,7 @@ public class DeleteTagCommand extends Command {
             Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
             Person editedPerson = deleteTagsFromPerson(personToEdit, tagsToDelete);
             model.setPerson(personToEdit, editedPerson);
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            //model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS,
                     tagsToDelete, Messages.format(editedPerson)));
         }
