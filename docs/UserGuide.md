@@ -154,6 +154,7 @@ Adds a session to Hall Pointer and associates it with specified members.
 Format: `add_session s/NAME d/DATE p/POINTS m/INDEX...`
 
 * Adds a session with the specified `NAME`, `DATE`, and `POINTS`.
+* **Points** should be between 0 and 100. A maximum of 100 points can be awarded to any session.
 * The index (`INDEX`) refers to the index number shown in the displayed member list and **must be a positive integer** (1, 2, 3, …).
 * If one or more `INDEX` values are provided, the session will be associated with those members.
 
