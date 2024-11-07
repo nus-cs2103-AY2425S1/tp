@@ -20,6 +20,7 @@ import seedu.address.model.event.EventManager;
 import seedu.address.testutil.TypicalPersons;
 
 
+
 public class RemovePersonFromEventCommandTest {
 
     /**
@@ -138,6 +139,61 @@ public class RemovePersonFromEventCommandTest {
                 Index.fromOneBased(1), Index.fromOneBased(2));
         assertNotEquals(removePersonFromEventCommand, removePersonFromEventCommand2);
     }
+
+    @Test
+    public void execute_lastPredicateNotRelated() {
+        EventManager eventManager = model.getEventManager();
+        assertEquals(eventManager.getEventList().get(0).getAllPersons().size(), 6);
+        // Remove ALICE from TECH_CONFERENCE
+        RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1), INDEX_FIRST_PERSON);
+        model.updateFilteredPersonList(p -> p.getName().fullName.contains("Alice"));
+
+        // filtered list should have length 1 (only alice)
+        assertEquals(model.getFilteredPersonList().size(), 1);
+        try {
+            removePersonFromEventCommand.execute(model, eventManager);
+        } catch (Exception e) {
+            // do nothing
+        }
+        //check no. of people in TECH_CONFERENCE
+        Event techConference = eventManager.getEventList().get(0);
+        assertEquals(5, techConference.getAllPersons().size());
+        //check no. of people in ART_EXHIBITION
+        Event artExhibition = eventManager.getEventList().get(1);
+        assertEquals(6, artExhibition.getAllPersons().size());
+        //check that displayed list is the same
+        assertEquals(model.getFilteredPersonList().size(), 1);
+    }
+
+    @Test
+    public void execute_lastPredicateRelated() {
+        EventManager eventManager = model.getEventManager();
+        assertEquals(eventManager.getEventList().get(0).getAllPersons().size(), 6);
+        // Remove ALICE from TECH_CONFERENCE
+        RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1), INDEX_FIRST_PERSON);
+        model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(eventManager.getEventList().get(0)));
+
+        // filtered list should have length
+        assertEquals(model.getFilteredPersonList().size(), 6);
+        try {
+            removePersonFromEventCommand.execute(model, eventManager);
+        } catch (Exception e) {
+            // do nothing
+        }
+        //check no. of people in TECH_CONFERENCE
+        Event techConference = eventManager.getEventList().get(0);
+        assertEquals(5, techConference.getAllPersons().size());
+        //check no. of people in ART_EXHIBITION
+        Event artExhibition = eventManager.getEventList().get(1);
+        assertEquals(6, artExhibition.getAllPersons().size());
+        //check that displayed list was updated
+        assertEquals(model.getFilteredPersonList().size(), 5);
+    }
+
+
+
 
 
 }
