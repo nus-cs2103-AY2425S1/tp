@@ -128,9 +128,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE_APPLIED_FOR] [t/TAG
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
-### Locating persons by name: `find`
+### Locating persons by criteria given: `find`
 
-Finds persons
+Finds persons by criteria given
 
 Format:
 `find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB CODE] [t/TAG] [r/REMARK]`
