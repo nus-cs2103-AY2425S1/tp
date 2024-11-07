@@ -84,6 +84,7 @@ public class CommandBoxUiTest extends ApplicationTest {
         robot.write("UNKNOWN COMMMAND");
         robot.type(KeyCode.ENTER);
         assertTrue(robot.lookup("#commandTextField").query().getStyleClass().contains(ERROR_STYLE_CLASS));
+        robot.type(KeyCode.ENTER);
+        assertTrue(robot.lookup("#commandTextField").query().getStyleClass().contains(ERROR_STYLE_CLASS));
     }
-
 }
