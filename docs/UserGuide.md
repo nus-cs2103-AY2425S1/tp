@@ -156,7 +156,7 @@ Once successful, you should see the following on your screen:
 
 ### Adding guests
 
-Let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
+Now let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
 Let us familiarise ourselves with the `add_guest` command, which you will need in order to add guests to the guest list.
 
 Let's try entering the following command in the Command Line: `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`.
@@ -267,10 +267,6 @@ This command will open your web browser and redirect you to the online User Guid
 **Format:** `help`
 
 **Example Usage:** `help`
-
-Entering the `help` command returns the following result on your screen:
-
-![help message](images/helpMessage.png)
 
 [_Back to Top_](#table-of-contents)
 
