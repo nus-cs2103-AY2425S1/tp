@@ -127,7 +127,7 @@ and there should not be more than one consecutive special character.
   secondary school years 7 - 13).
 * `PHONE_NUMBER` should only contain number. It should be between 4 and 20 digits long with no spaces in between.
 * `EMAIL` should follow the format username@domain.
-* `ADDRESS` allow any characters and should not be empty. The maximum length is 255 characters including spaces in between. 
+* `ADDRESS` allow any characters and should not be empty. The maximum length is 300 characters including spaces in between. 
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the `s\` field. Only subjects that are available
 within the tuition centre will be allowed.
 * `[MORE_SUBJECTS]` is optional and can be repeated to add more subjects.
