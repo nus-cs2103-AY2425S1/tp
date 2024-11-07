@@ -48,6 +48,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                         PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG, PREFIX_REMARK);
                 return parseOtherAttributes(argMultiMap);
             }
+
         }
         return parseOtherAttributes(argMultiMap);
     }
