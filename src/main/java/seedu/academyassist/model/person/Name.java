@@ -11,13 +11,14 @@ import seedu.academyassist.commons.util.AppUtil;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabets and spaces. Names should not be blank.";
+            "Names should only contain alphabets and spaces. Names should not be blank and should not exceed 255 "
+                    + "characters long.";
 
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
+    public static final String VALIDATION_REGEX = "^[\\p{Alpha}][\\p{Alpha} ]{0,254}$";
 
     public final String fullName;
 

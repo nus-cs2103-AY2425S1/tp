@@ -11,9 +11,9 @@ import seedu.academyassist.commons.util.AppUtil;
 public class Phone {
 
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be 8 digits long with no spaces in between";
-    public static final String VALIDATION_REGEX = "\\d{8}";
+    public static final String MESSAGE_CONSTRAINTS = "Phone numbers should only contain numbers, and it should between "
+            + "4 and 20 digits long with no spaces in between";
+    public static final String VALIDATION_REGEX = "^\\d{4,20}$";
     public final String value;
 
     /**
