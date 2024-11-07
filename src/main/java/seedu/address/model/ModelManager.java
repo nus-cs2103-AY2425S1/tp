@@ -272,6 +272,13 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
+
+    @Override
+    public void updateFilteredPersonListByTask(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> person.getTasks().stream().anyMatch(predicate));
+    }
+
     @Override
     public ObservableList<Wedding> getFilteredWeddingList() {
         return filteredWeddings;

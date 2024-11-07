@@ -156,7 +156,7 @@ The `Model` component handles the data and state management for the app, storing
 2. **Class Diagram**:
     * Diagram of the `Model` structure:
 
-      <puml src="diagrams/ModelClassDiagram.puml" width="450" />
+      <puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 3. **Responsibilities**:
     * **Data Storage**:
@@ -185,7 +185,7 @@ The `Model` component handles the data and state management for the app, storing
 4. **Class Diagram**:
     * Diagram illustrating `Storage` structure:
 
-      <puml src="diagrams/StorageClassDiagram.puml" width="600" />
+      <puml src="diagrams/StorageClassDiagram.puml" width="900" />
     
 ### Common classes
 
@@ -364,7 +364,6 @@ Those without any stars are user stories that were considered but will not be im
 |   `*`    | busy user                 | add multiple wedding events                                                                                          | I can track contacts for multiple weddings at once.                                                                                                                 |
 |   `*`    | busy user                 | tag each contact to a wedding                                                                                        | I can easily see which contacts are relevant to which wedding.                                                                                                      |
 |   `*`    | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled.                                                                                                          |
-|   `*`    | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled.                                                                                                          |
 |   `*`    | user                      | filter contacts by wedding                                                                                           | I can keep track of which contacts are relevant for each wedding.                                                                                                   |
 |   `*`    | user                      | send out (standardised formatted) information (text/email) from the application                                      | I can efficiently send out information without any mistakes.                                                                                                        |
 |   `*`    | user                      | share the contact details to relevant third-parties for bookings (eg: venue bookings, suit/dress rental, etc.)       | I can easily send out all relevant information (including dietary restriction, and other tags) to all the third-parties.                                            | 
@@ -404,10 +403,10 @@ Those without any stars are user stories that were considered but will not be im
     Use case ends.
 
 ### **Use case: UC02 — List all Weddings**
-Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view weddings instead of contacts.
+Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view weddings instead of contacts.
 
 ### **Use case: UC03 — List all Tasks**
-Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view tasks instead of contacts.
+Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view tasks instead of contacts.
 
 ---
 
@@ -430,10 +429,10 @@ Similar to [<ins>UC01](#use-case-uc01list-all-contacts) except to view tasks ins
       Use case ends.
 
 ### **Use case: UC05 — Create a Wedding**
-Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a wedding to WedLinker instead of a Contact
+Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a wedding to WedLinker instead of a Contact
 
 ### **Use case: UC06 — Create a Task**
-Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a task to WedLinker instead of a Contact
+Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a task to WedLinker instead of a Contact
 
 ### **Use case: UC07 — Add Phone Number to Contact**
 
@@ -442,7 +441,7 @@ Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a task to W
 
 **MSS**
 
-1. User <ins>lists all contacts [(UC01)](#use-case-uc01list-all-contacts)</ins>.
+1. User <ins>lists all contacts [(UC01)](#use-case-uc01-list-all-contacts)</ins>.
 2. User requests to add phone number for a contact with the corresponding details.
 3. The system adds the phone number to the contact and displays a success message.
 4. The system displays the updated contact information in the address book.
@@ -460,10 +459,10 @@ Similar to [<ins>UC04](#use-case-uc04create-a-contact) except adding a task to W
       Use case resumes at step 1.
 
 ### **Use case: UC08 — Add Address to Contact** 
-Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplicated addresses are allowed
+Similar to [<ins>UC07](#use-case-uc07-add-phone-number-to-contact) except duplicated addresses are allowed
 
 ### **Use case: UC09 — Add Email to Contact**
-Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplicated email addresses are allowed
+Similar to [<ins>UC07](#use-case-uc07-add-phone-number-to-contact) except duplicated email addresses are allowed
 
 ---
 
@@ -477,27 +476,27 @@ Similar to [<ins>UC07](#use-case-uc07add-phone-number-to-contact) except duplica
     Use case ends.
 
 ### **Use case: UC11 — Search for Contacts by Tag**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by tag.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by tag.
 
 ### **Use case: UC12 — Search for Contacts by Wedding**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by wedding.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by wedding.
 
 ### **Use case: UC13 — Search for Contacts by Phone Number**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by phone number.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by phone number.
 
 ### **Use case: UC14 — Search for Contacts by Address**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by address.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by address.
 
 ### **Use case: UC15 — Search for Contacts by Email Address**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for contacts by email address.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by email address.
 
 ---
 
 ### **Use case: UC16 — Search for Wedding by Wedding Name**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for wedding by wedding name.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for wedding by wedding name.
 
 ### **Use case: UC17 — Search for Task by Task Name**
-Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searching for task by task name.
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for task by task name.
 
 ---
 
@@ -521,13 +520,13 @@ Similar to [<ins>UC10](#use-case-uc10search-for-contacts-by-name) except searchi
       Use case resumes at step 1.
 
 ### **Use case: UC19 — Delete Wedding**
-Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting wedding.
+Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting wedding.
 
 ### **Use case: UC20 — Delete Task**
-Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting task.
+Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting task.
 
 ### **Use case: UC21 — Delete Tag**
-Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
+Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting tag.
 
 ---
 
@@ -542,39 +541,30 @@ Similar to [<ins>UC18](#use-case-uc18delete-contact) except deleting tag.
 **Extensions**
 
 * 1a. The list is empty.
-
   Use case ends.
 
-
 * 2a. The given index is invalid.
-
     * 2a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 1.
 
-
 * 2b. The user does not specify what type of details they want to change.
-
     * 2b1. System shows an error message prompting the user to put in the type of details they want to edit.
 
       Use case resumes at step 1.
 
-
 * 2c. The user does not specify what the new details should be.
-
     * 2c1. System shows an error message prompting the user to put in the new details.
 
       Use case resumes at step 1.
 
-
 * 2d. The user specifies details that do not meet the requirements of the detail type.
-
     * 2d1. System shows an error message prompting the user with the correct detail type format and requirements.
 
       Use case resumes at step 1.
 
 ### **Use case: UCSH02 — Edit details for a Wedding**
-Similar to [<ins>USCH01](#use-case-ucsh01edit-details-for-a-contact) except editing for wedding.
+Similar to [<ins>USCH01](#use-case-ucsh01-edit-details-for-a-contact) except editing for wedding.
 
 ### **Use case: UCSH03 — Clear all contacts**
 
