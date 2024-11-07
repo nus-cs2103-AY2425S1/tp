@@ -335,7 +335,7 @@ Entering the `clear` command returns the following result on your screen:
 
 ### Viewing statistics : `stats`
 
-Displays the total number of guests invited to the wedding and the total number of vendors involved in the wedding.
+This command will display to you the total number of guests invited to the wedding and the total number of vendors involved in the wedding.
 
 **Format:** `stats`
 
@@ -350,7 +350,7 @@ Entering the `stats` command returns the following result on your screen:
 
 ### Exiting the program : `exit`
 
-Exits the program.
+This command will exit the program.
 
 Format: `exit`
 
@@ -370,7 +370,7 @@ Commands listed in this section are applicable to managing your guest list (gues
 
 ### Adding a guest : `add_guest`
 
-Adds a guest to the bottom of the existing overall guest list.
+This command will help you add a new guest to the bottom of the existing overall guest list.
 
 **Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
@@ -391,7 +391,7 @@ Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clement
 
 ### Editing a guest : `edit_guest`
 
-Edits the details of the guest identified by the index number used in the displayed guest list. Existing values will be overwritten by the input values.
+This command will allow you to edit the details of the guest identified by the `INDEX` number used in the displayed guest list. Existing values will be overwritten by the input values.
 
 **Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
@@ -412,7 +412,7 @@ Entering the `edit_guest 1 p/91234567 e/johndoe@example.com` command returns the
 
 ### Deleting a guest : `delete_guest`
 
-Deletes a guest from your existing guest list.
+This command will help you delete a guest from your existing guest list, identified by the `INDEX` number used in the displayed guest list.
 
 **Format:** `delete_guest INDEX`
 
@@ -437,7 +437,7 @@ Commands listed in this section are applicable to managing your vendor list (ven
 
 ### Adding a vendor : `add_vendor`
 
-Adds a vendor to the bottom of the existing overall vendor list.
+This command will help you add a new vendor to the bottom of the existing overall vendor list.
 
 **Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS c/COMPANY [b/BUDGET] [t/TAG]...`
 
@@ -456,7 +456,7 @@ Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clemen
 
 ### Editing a vendor : `edit_vendor`
 
-Edits the details of the vendor identified by the index number used in the displayed vendor list. Existing values will be overwritten by the input values.
+This command will allow you to edit the details of the vendor identified by the `INDEX` number used in the displayed vendor list. Existing values will be overwritten by the input values.
 
 **Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
@@ -477,7 +477,7 @@ Entering the `edit_vendor 1 p/91234567 e/johndoe@example.com` command returns th
 
 ### Deleting a vendor : `delete_vendor`
 
-Deletes a vendor from your existing vendor list.
+This command will help you delete a vendor from your existing vendor list, identified by the `INDEX` number used in the displayed vendor list.
 
 **Format:** `delete_vendor INDEX`
 
@@ -503,7 +503,7 @@ Other additional features of BridalBuddy that are good to know.
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+You do not need to save manually as BridalBuddy data are saved in the hard disk automatically after any command that changes the data.
 
 [_Back to Top_](#table-of-contents)
 
