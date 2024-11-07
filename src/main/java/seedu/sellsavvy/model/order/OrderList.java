@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.sellsavvy.model.order.exceptions.OrderNotFoundException;
 
 /**
- * A list of orders made by a specific Person that does not allow nulls.
+ * A list of orders made by a specific Customer that does not allow nulls.
  * Supports a minimal set of list operations.
  */
 public class OrderList implements Iterable<Order> {

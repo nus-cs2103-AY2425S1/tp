@@ -138,8 +138,8 @@ public class EditOrderCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the customer with. Each non-empty field value will replace the
+     * corresponding field value of the customer.
      */
     public static class EditOrderDescriptor {
         private Item item;

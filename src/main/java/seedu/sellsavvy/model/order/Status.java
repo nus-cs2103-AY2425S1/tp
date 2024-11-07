@@ -3,7 +3,7 @@ package seedu.sellsavvy.model.order;
 import seedu.sellsavvy.commons.exceptions.IllegalValueException;
 
 /**
- * Represents the status of a Person's Order in the address book.
+ * Represents the status of a Customer's Order in the address book.
  * An order is either PENDING or COMPLETED.
  */
 public enum Status {

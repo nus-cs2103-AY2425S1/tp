@@ -16,12 +16,12 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.person.Person;
 
 /**
- * Adds an order under a specified person.
+ * Adds an order under a specified customer.
  */
 public class AddOrderCommand extends Command {
 
@@ -50,8 +50,8 @@ public class AddOrderCommand extends Command {
     /**
      * Creates an AddOrderCommand to add the specific order under the specified index.
      *
-     * @param index of the person in the filtered person list to add order under.
-     * @param toAdd the order made by the person.
+     * @param index of the customer in the filtered customer list to add order under.
+     * @param toAdd the order made by the customer.
      */
     public AddOrderCommand(Index index, Order toAdd) {
         requireAllNonNull(index, toAdd);
@@ -62,17 +62,17 @@ public class AddOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Customer> lastShownList = model.getFilteredCustomerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
 
-        Person personToAddUnder = lastShownList.get(index.getZeroBased());
-        OrderList orderList = personToAddUnder.getOrderList();
+        Customer customerToAddUnder = lastShownList.get(index.getZeroBased());
+        OrderList orderList = customerToAddUnder.getOrderList();
         orderList.add(toAdd);
-        model.updateSelectedPerson(personToAddUnder);
-        personToAddUnder.resetFilteredOrderList();
+        model.updateSelectedCustomer(customerToAddUnder);
+        customerToAddUnder.resetFilteredOrderList();
 
         String feedbackToUser = orderList.containsSimilarOrder(toAdd)
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
@@ -82,7 +82,7 @@ public class AddOrderCommand extends Command {
                 : "";
 
         return new CommandResult(feedbackToUser
-                + String.format(MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(toAdd)));
+                + String.format(MESSAGE_ADD_ORDER_SUCCESS, customerToAddUnder.getName(), Messages.format(toAdd)));
     }
 
     @Override

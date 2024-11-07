@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the item quantity of a Person's Order in the address book.
+ * Represents the item quantity of a Customer's Order in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
  */
 public class Quantity {

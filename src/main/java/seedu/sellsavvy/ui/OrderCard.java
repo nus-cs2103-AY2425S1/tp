@@ -8,7 +8,7 @@ import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Customer}.
  */
 public class OrderCard extends UiPart<Region> {
 
