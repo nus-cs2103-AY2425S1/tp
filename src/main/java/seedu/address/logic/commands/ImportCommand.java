@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.LogicManager;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -21,7 +22,7 @@ import seedu.address.storage.Storage;
 public class ImportCommand extends FileAccessCommand {
 
     public static final String COMMAND_WORD = "import";
-    public static final String MESSAGE_SUCCESS = "Address book has been imported!";
+    public static final String MESSAGE_SUCCESS = "Address book from %s has been imported!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Imports the contacts found in the provided file into the address book. \n"
             + "Parameters: " + PREFIX_FILE_PATH + "FILE_PATH\n"
@@ -44,6 +45,7 @@ public class ImportCommand extends FileAccessCommand {
     public CommandResult execute(Model model, Storage storage) throws CommandException {
         requireNotExecuted();
         requireNonNull(model);
+        requireNonNull(storage);
         isExecuted = true;
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -59,5 +61,27 @@ public class ImportCommand extends FileAccessCommand {
         model.setAddressBook(importedData);
         logger.info("Successful import from filePath");
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ImportCommand)) {
+            return false;
+        }
+
+        ImportCommand otherImportCommand = (ImportCommand) other;
+        return filePath.equals(otherImportCommand.filePath);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("filePath", filePath)
+                .toString();
     }
 }

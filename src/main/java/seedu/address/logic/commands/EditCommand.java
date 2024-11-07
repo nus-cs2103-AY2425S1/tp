@@ -64,6 +64,8 @@ public class EditCommand extends ConcreteCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_NAME = "A person with this name already exists in the address book";
     public static final String MESSAGE_DUPLICATE_PHONE = "This phone number already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book";
+
     public static final String MESSAGE_UNDO_SUCCESS = "Reverted edit of person: %1$s";
 
 
@@ -103,6 +105,8 @@ public class EditCommand extends ConcreteCommand {
             throw new CommandException(MESSAGE_DUPLICATE_NAME);
         } else if (!personToEdit.isSameNumber(editedPerson) && model.hasPhone(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+        } else if (!personToEdit.isSameEmail(editedPerson) && model.hasEmail(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.setPerson(personToEdit, editedPerson);
