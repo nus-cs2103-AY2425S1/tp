@@ -73,7 +73,7 @@ public class EditReminderCommand extends Command {
         Reminder reminderToEdit = lastShownList.get(index.getZeroBased());
         Reminder editedReminder = createEditedReminder(reminderToEdit, editReminderFields);
 
-        if (!reminderToEdit.isSameReminder(editedReminder) && model.hasReminder(editedReminder)
+        if (reminderToEdit.isSameReminder(editedReminder)
                 || !editReminderFields.isAnyFieldEdited()) {
             throw new CommandException(MESSAGE_REMINDER_NOT_EDITED);
         }
@@ -93,7 +93,7 @@ public class EditReminderCommand extends Command {
             person.addReminder(editedReminder);
             model.setReminder(reminderToEdit, editedReminder);
             model.updateFilteredReminderList();
-            return new CommandResult(String.format(MESSAGE_EDIT_REMINDER_SUCCESS, Messages.format(reminderToEdit)));
+            return new CommandResult(String.format(MESSAGE_EDIT_REMINDER_SUCCESS, Messages.format(editedReminder)));
         } else {
             throw new CommandException("More than one person with the specified name found. Please be more specific.");
         }

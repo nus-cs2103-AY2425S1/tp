@@ -71,7 +71,7 @@ public class EditReminderCommandTest {
         editReminderFields.setDateTime(editedReminder.getDateTime());
         editReminderFields.setDescription(editedReminder.getDescription());
 
-        EditReminderCommand command = new EditReminderCommand(Index.fromZeroBased(0), editReminderFields);
+        EditReminderCommand command = new EditReminderCommand(Index.fromZeroBased(1), editReminderFields);
 
         assertThrows(CommandException.class, () -> command.execute(model), MESSAGE_REMINDER_NOT_EDITED);
     }
