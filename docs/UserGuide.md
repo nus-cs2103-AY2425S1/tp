@@ -209,7 +209,6 @@ Here’s a reference table of available flags and the type of data they correspo
 
 | **Flag** | **Type of Data** |
 |----------|------------------|
-| `i/`     | `index`          |
 | `n/`     | `name`           |
 | `p/`     | `phone`          |
 | `e/`     | `email`          |
@@ -217,6 +216,7 @@ Here’s a reference table of available flags and the type of data they correspo
 | `j/`     | `job`            |
 | `i/`     | `income`         |
 | `t/`     | `tier`           |
+| `s/`     | `status`         |
 | `r/`     | `remark`         |
 | `ra/`    | `remark append`  |
 | `rn/`    | `remark new`     |
@@ -233,6 +233,7 @@ Arguments are the values that follow each flag in a command. **Arguments cannot 
 
 Refer to the table below for more details.
 
+
 | **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
 |----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             |
@@ -241,11 +242,13 @@ Refer to the table below for more details.
 | `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Must be numeric<br/> • Cannot include commas and decimal points<br/> • Cannot be fractional |
-| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                                                    |
+| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject, Na                                                |
+| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent, Na                                                       |
 | `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                                                   |
-| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                                                           |
+
+
 **Note:** All of the above arguments are case-insensitive.
 
 > 💡 **Pro Tip:**
@@ -371,7 +374,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       - Message:
         ```
         Invalid command format!
-        <INDIVIDUAL FIELD'S ERROR MESSAGES>..``.
+        <INDIVIDUAL FIELD'S ERROR MESSAGES>...
         add: Adds a client to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS j/JOB i/INCOME [t/TIER]...
         [r/REMARK]...[s/STATUS]...
         Example: 'add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/doctor i/300 t/GOLD r/He is very smart s/NON_URGENT'    
@@ -379,7 +382,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 > **Note on Duplicates:**
 
-> AgentAssist will prevent duplicate entries if a client with t``he **same name, email and phone number** is already saved.  
+> AgentAssist will prevent duplicate entries if a client with the **same name, email and phone number** is already saved.  
 > When this happens, you will see the following message:
 >
 > ```
@@ -390,7 +393,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 >
 > If you need to update details for an existing contact, use the `edit` command instead.  
 > For more information, see Section [5.2.2 Editing a client](#522-edit-an-existing-clients-information).
-
+- **Note:** If the value for either `Tier` and `Status` is the default value (`NA`), they will not be shown.
 
 
 
@@ -407,9 +410,8 @@ edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [
 - Mandatory Field: `<INDEX>`
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
 - **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command.
-- **Note:** Assigning an empty value to `t/` or `s/` flags will remove the existing value for either of these flags and assign a default value to both. The default value for both `Tier` and `Status` is `NA`. 
 
-For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)`
+For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments).
 
 **Examples:**
 - Edit only 1 specific field:
@@ -442,13 +444,43 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       Edited Client: <CLIENT DETAILS> 
       ```
 - **On Error:**
-    - Message:
-      ```
-      Failed to update client <INDEX>.
-      ```
+    - Error caused by invalid index
+        - Message:
+          ```
+          Invalid command format!
+          edit: Edits the details of the client identified by the index number used in the displayed client list. Existing values will be overwritten by the input values. Any fields unspecified will not be modified.
+          Required Parameters: INDEX (must be a positive integer)
+          Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
+          Example Usage: 'edit 1 p/91234567 e/johndoe@example.com'
+          ```
+  - Error caused by invalid values for some fields
+      - Message:
+        ```
+        Invalid command format!
+        <INDIVIDUAL FIELD'S ERROR MESSAGES>...
+        ```
+
+- **On Error**
+    - Error caused by invalid index
+        - Message:
+          ```
+          Invalid command format!
+          edit: Edits the details of the client identified by the index number used in the displayed client list. Existing values will be overwritten by the input values. Any fields unspecified will not be modified.
+          Required Parameters: INDEX (must be a positive integer)
+          Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
+          Example Usage: 'edit 1 p/91234567 e/johndoe@example.com'
+          ```
+    - Error caused by invalid values for some fields
+        - Message:
+          ```
+          Invalid command format!
+          <INDIVIDUAL FIELD'S ERROR MESSAGES>...
+          ```
+
 
 > 💡 **Pro Tip:**  
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
+- **Note:** If the value for either `Tier` and `Status` is the default value (`NA`), they will not be shown.
 
 
 
@@ -653,7 +685,7 @@ view <INDEX>
 - **On Error:**
     - Invalid index error message:
       ```
-      The client index provided is invalid
+      The client index provided is invalid.
       ```
 
 > 💡 **Pro Tip:**  
@@ -686,7 +718,7 @@ close
 ```
 undo
 ```
-- Reverts all changes of the previous command:
+- Reverts all changes of the previous command.
 - **Note:** This command can only be used after a permanent change has been made (e.g. after using the edit command).
 - **Note:** You can only use `undo` once. Using `undo` 2 times in a row has the same effect as not using the `undo` command at all.
 
@@ -747,7 +779,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
 ### How do I change the remarks or credit card tier of an existing client?
-Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
+Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s).
 
 ### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
@@ -785,9 +817,9 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 | **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>]`            | `filter n/ GORDON MOORE j/ doctor t/ gold s/ urgent`                                                                |
 | **View Client Details**    | `view <INDEX>`                                                                                                                            | `view 1`                                                                                                            |
 | **Close Client Details**   | `close`                                                                                                                                   | `close`                                                                                                             |
-| **View Help**              | `help`                                                                                                                                    | `help`                                                                                                              |
-| **Undo Command**           | `undo`                                                                                                                                    | `undo`                                                                                                              |
-| **Exit Application**       | `exit`                                                                                                                                    | `exit`                                                                                                              |
 | **Clear All Data**         | `clear`                                                                                                                                   | `clear`                                                                                                             |
+| **Undo Command**           | `undo`                                                                                                                                    | `undo`                                                                                                              |
+| **View Help**              | `help`                                                                                                                                    | `help`                                                                                                              |
+| **Exit Application**       | `exit`                                                                                                                                    | `exit`                                                                                                              |
 
 [↑ Return to Table of Contents](#table-of-contents)

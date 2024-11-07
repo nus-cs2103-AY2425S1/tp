@@ -96,24 +96,24 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandSummary(
                         "Add New Client",
                         "add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
-                                + "[t/ <TIER>] [s/ <STATUS>] [r/ <REMARK>]",
+                                + "[t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]",
                         "add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 "
-                                + "t/ gold s/ urgent r/ got anger issue"),
+                                + "t/ gold r/ got anger issue s/ urgent"),
                 new CommandSummary("Remove Old Client",
                         "delete <INDEX>",
                         "delete 69"),
                 new CommandSummary("Edit Existing Client",
                         "edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
-                                + "[t/ <TIER>] [s/ <STATUS>]"
-                                + "[rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>]",
+                                + "[t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>] "
+                                + "[s/ <STATUS>]",
                         "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 "
-                                + "t/ bronze s/ urgent ra/ Specialist in eye care"),
+                                + "t/ bronze ra/ Specialist in eye care s/ urgent"),
                 new CommandSummary("List All Clients",
                         "list",
                         "list"),
                 new CommandSummary("Filter Client List",
-                        "filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] "
-                                + "[t/<TIER>] [i/<INCOME>]",
+                        "filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [i/<INCOME>] "
+                                + "[t/<TIER>] [r/<REMARK>] [s/ <STATUS>]",
                         "filter n/ TAN LESHEW t/ gold"),
                 new CommandSummary("View Client Details",
                         "view <INDEX>",
@@ -121,18 +121,18 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandSummary("Close Client Details",
                         "close",
                         "close"),
-                new CommandSummary("View Help",
-                        "help",
-                        "help"),
-                new CommandSummary("Undo Command",
-                        "undo",
-                        "undo"),
-                new CommandSummary("Exit Application",
-                        "exit",
-                        "exit"),
                 new CommandSummary("Clear All Data",
                         "clear",
                         "clear"),
+                new CommandSummary("Undo Command",
+                        "undo",
+                        "undo"),
+                new CommandSummary("View Help",
+                        "help",
+                        "help"),
+                new CommandSummary("Exit Application",
+                        "exit",
+                        "exit"),
                 new CommandSummary("Save Data Automatically",
                         "Automatic",
                         "No command required")
