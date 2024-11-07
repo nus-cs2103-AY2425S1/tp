@@ -57,11 +57,11 @@ public class AddTaskToGroupCommandParser implements Parser<AddTaskToGroupCommand
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE);
         TaskName taskName = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_NAME).get());
         Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_TASK_DEADLINE).get());
-        Set<GroupName> groupNameSet = new LinkedHashSet<>();
+        List<GroupName> groupNameList = new ArrayList<>();
         for (String s : argMultimap.getAllValues(PREFIX_GROUP_NAME)) {
-            groupNameSet.add(ParserUtil.parseGroupName(s));
+            groupNameList.add(ParserUtil.parseGroupName(s));
         }
-        return new AddTaskToGroupCommand(taskName, deadline, groupNameSet);
+        return new AddTaskToGroupCommand(taskName, deadline, groupNameList);
     }
 
     /**

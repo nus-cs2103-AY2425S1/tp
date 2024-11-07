@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.task.Task;
 
 /**
  * Lists all the tasks in the address book or for a specified group.
@@ -24,11 +25,11 @@ public class ListTaskCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "lt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Lists all tasks of a specified group.\n"
+        + ": Lists all tasks of a specified group or all tasks in T_Assistant.\n"
         + "PARAMETERS: " + COMMAND_WORD
-        + PREFIX_GROUP_NAME + "GROUP_NAME "
+        + "[" + PREFIX_GROUP_NAME + "GROUP_NAME] "
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "Group 1 ";
+        + PREFIX_GROUP_NAME + "CS2103-F15-3 ";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks for this group";
     public static final String MESSAGE_SUCCESS_ALL_TASKS = "Listed all tasks available";
@@ -62,8 +63,8 @@ public class ListTaskCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS, LIST_GROUP_TASK_MARKER);
         }
         model.setStateTasks();
+        model.setMostRecentTaskDisplay(new Task(null, null));
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS); // added because it won't update after find task
-        model.setMostRecentGroupTaskDisplay("");
         return new CommandResult(MESSAGE_SUCCESS_ALL_TASKS, LIST_TASK_MARKER);
     }
 

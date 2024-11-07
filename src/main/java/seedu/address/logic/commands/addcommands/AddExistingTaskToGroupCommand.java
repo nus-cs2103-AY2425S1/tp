@@ -27,14 +27,14 @@ public class AddExistingTaskToGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "aetg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Adds an existing task to the group(s).\n"
+        + ": Adds an existing task to the group(s) based on the index when listing all tasks.\n"
         + "Parameters: "
-        + PREFIX_INDEX + "INDEX (must be a positive integer) "
+        + PREFIX_INDEX + "INDEX "
         + PREFIX_GROUP_NAME + "GROUP_NAME "
         + "[" + PREFIX_GROUP_NAME + "GROUP_NAME]...\n"
-        + "Example: " + COMMAND_WORD
+        + "Example: " + COMMAND_WORD + " "
         + PREFIX_INDEX + "1 "
-        + PREFIX_GROUP_NAME + "CS2103T-F12-2"
+        + PREFIX_GROUP_NAME + "CS2103T-T14-1 "
         + PREFIX_GROUP_NAME + "CS2103-F13-3";
     public static final String MESSAGE_SUCCESS = "Added task (%1$s) to the following group(s):\n";
     public static final String MESSAGE_FAILURE = "Could not complete the command, see below:\n%1$s";
@@ -147,7 +147,7 @@ public class AddExistingTaskToGroupCommand extends Command {
         txt += "\n";
         return txt;
     }
-
+  
     @Override
     public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
         versionHistory.addVersion(model);

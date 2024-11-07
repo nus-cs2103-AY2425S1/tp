@@ -41,18 +41,18 @@ public class EditStudentCommand extends Command {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Edits the student identified by the index.\n"
+        + ": Edits the student based on the index when listing all students. "
         + "Fields including group and student number cannot be modified.\n"
         + "Parameters: "
-        + PREFIX_INDEX + "INDEX (must be an integer) "
+        + PREFIX_INDEX + "INDEX "
         + "[" + PREFIX_STUDENT_NAME + "NAME] "
         + "[" + PREFIX_EMAIL + "EMAIL] "
         + "[" + PREFIX_TAG + "TAG]... \n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_INDEX + "1 "
-        + PREFIX_STUDENT_NAME + "John Doe "
-        + PREFIX_EMAIL + "johnd@u.nus.edu "
-        + PREFIX_TAG + "good at UI ";
+        + PREFIX_STUDENT_NAME + "John Leow Doe "
+        + PREFIX_EMAIL + "newjohn@u.nus.edu "
+        + PREFIX_TAG + "goodatAI";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

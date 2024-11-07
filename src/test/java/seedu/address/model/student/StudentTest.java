@@ -34,11 +34,11 @@ public class StudentTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        // because student number is different
+        // same name, all other attributes different -> returns false
+        // because email is different
         Student editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
             .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different student number, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withStudentNumber(VALID_STUDENT_NUMBER_BOB).build();

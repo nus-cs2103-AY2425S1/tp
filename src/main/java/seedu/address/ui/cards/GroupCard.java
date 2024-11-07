@@ -15,6 +15,7 @@ import seedu.address.ui.UiPart;
 public class GroupCard extends UiPart<Region> {
 
     private static final String FXML = "GroupListCard.fxml";
+    private static final String NO_STUDENTS_YET = "No students yet!";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,12 +43,20 @@ public class GroupCard extends UiPart<Region> {
         super(FXML);
         this.group = group;
         id.setText(displayedIndex + ". ");
+        id.setWrapText(true);
         name.setText(group.getGroupName().getGroupName());
+        name.setWrapText(true);
         String studentList = "";
         for (Student student : group.getStudents()) {
             studentList += student.toDisplayString();
             studentList += "\n";
         }
-        students.setText(studentList);
+
+        if (group.getStudents().size() == 0) {
+            students.setText(NO_STUDENTS_YET);
+        } else {
+            students.setText(studentList);
+        }
+        students.setWrapText(true);
     }
 }

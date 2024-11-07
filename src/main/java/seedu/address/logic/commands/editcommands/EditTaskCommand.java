@@ -37,17 +37,17 @@ public class EditTaskCommand extends Command {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Edits the details of the task of given group.\n"
+        + ": Edits the details of the task of given group based on the index when listing all tasks in that group"
         + "Fields like task status cannot be modified through this function.\n"
         + "Parameters: "
         + PREFIX_GROUP_NAME + " GROUP NAME "
-        + PREFIX_INDEX + "INDEX (must be a positive integer) "
+        + PREFIX_INDEX + "INDEX "
         + "[" + PREFIX_TASK_NAME + "TASK NAME] "
         + "[" + PREFIX_TASK_DEADLINE + "DEADLINE]\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "team 2 "
+        + PREFIX_GROUP_NAME + "CS2103-F15-3 "
         + PREFIX_INDEX + "1 "
-        + PREFIX_TASK_NAME + "Complete Assignment "
+        + PREFIX_TASK_NAME + "Complete a new assignment "
         + PREFIX_TASK_DEADLINE + "2024-12-12 1800";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s in %2s";
@@ -93,7 +93,7 @@ public class EditTaskCommand extends Command {
         if (group.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK_IN_GROUP);
         }
-        model.setTask(taskToEdit, editedTask, group);
+        model.setTask(index, editedTask, group);
         model.decreaseGroupWithTask(taskToEdit);
         if (!model.hasTask(editedTask)) {
             model.addTask(editedTask);

@@ -27,6 +27,13 @@ public class TaskName {
     }
 
     /**
+     * Represents an empty constructor.
+     */
+    public TaskName() {
+        taskName = "";
+    }
+
+    /**
      * Returns true if a given string is a valid task name.
      */
     public static boolean isValidName(String test) {
