@@ -182,11 +182,10 @@ Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
 * Hence, we can only add one social media handle to each contact.
 * Handles must be non-empty, have a limit of 30 characters,and consist only of alphanumeric characters, or `-`, `_` and `.`.
 * If multiple handles are entered, only the last handle will be accepted. <br>
+  e.g., `socialMedia 1 ig/first cs/second` will only add the handle `[cs-second]` to the user.
 
 </div>
 
-Examples
-* `socialMedia 1 ig/first cs/second` will only add the handle `[cs-second]` to the user.
 
 Examples:
 *  Adds the handle `[ig-charlotteo]` to the third contact Charlotte. <br>
@@ -219,6 +218,13 @@ Format: `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]
 * `SCHEDULE_NAME` must strictly be alphanumerical.
 * `SCHEDULE_DATE` must be in the format `yyyy-MM-dd`.
 * `SCHEDULE_TIME` must be in the format `HH:mm`.
+
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+When performing the [`search`](#search-persons-by-schedule-range--search) command, contacts with an existing schedule,
+but no `SCHEDULE_TIME` provided will have their schedule time's treated as `00:00`.
 
 </div>
 
@@ -277,6 +283,13 @@ For commands that involve providing an `INDEX`, such as `edit`, `schedule`, `soc
 
 Shows a list of all persons in the address book.
 Perfect for viewing all contacts after performing [`filter`](#filter-persons-by-tag--filter), [`search`](#search-persons-by-schedule-range--search) or [`find`](#locating-persons-by-name--find)!
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** Sometimes some of the commands in this section can return an empty list.
+Use the [`list`](#listing-all-persons--list) command to view all contacts again!
+
+</div>
 
 Format: `list`
 
@@ -375,17 +388,17 @@ Examples:
 Need to know who you have a schedule with this week?
 Use our `search` feature, which searches for a list of persons within a given range of schedule.
 
-Format: `search [b/START_TIME] [en/END_TIME]`
+Format: `search [b/START_DATETIME] [en/END_DATETIME]`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the `search` command:**<br>
 
-* `START_TIME` and `END_TIME` must adhere to the datetime format yyyy-MM-dd HH:mm
-* Either `[b/START_TIME]` or `[en/END_TIME]` or both has to be provided
-* It will search for schedules between the given `[b/START_TIME]` and `[en/END_TIME]`
-* If `[b/START_TIME]` is not provided, it will search for all schedules that is before `[en/END_TIME]`
-* If `[en/END_TIME]` is not provided, it will search for all schedules that is after `[b/START_TIME]`
+* `START_DATETIME` and `END_DATETIME` must adhere to the datetime format yyyy-MM-dd HH:mm
+* Either `[b/START_DATETIME]` or `[en/END_DATETIME]` or both has to be provided
+* It will search for schedules between the given `[b/START_DATETIME]` and `[en/END_DATETIME]`
+* If `[b/START_DATETIME]` is not provided, it will search for all schedules that is before or equals to `[en/END_DATETIME]`
+* If `[en/END_DATETIME]` is not provided, it will search for all schedules that is after or equals to `[b/START_DATETIME]`
 * Persons with no schedule given will not appear in the search results
 * Persons with only a date as a schedule but not time will be searched under the assumption that time is 00:00
 * Search result will be inclusive of the beginning time and end time
@@ -409,15 +422,6 @@ This segment describes features of BlitzBiz that helps users with using the app 
 #### Viewing help : `help`
 
 Need to quickly access this user guide while using BlitzBiz? Get **help** with this one simple command!
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `restore` command:**<br>
-
-* Shows a message explaining how to access the help page.
-
-</div>
-
 
 ![help message](images/helpMessage.png)
 
@@ -519,22 +523,22 @@ to `[JAR file location]/data` in your new computer.
 
 ## Command summary
 
-| Action                                                  | Format, Examples                                                                                                                                                      |
-|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person--add)**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **[Edit](#editing-a-person--edit)**                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX [ig/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                             |
-| **[Schedule](#scheduling-contacts--schedule)**          | `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]` <br> e.g., `schedule 1 sn/appointment sd/2024-12-12 st/12:00`                               |
-| **[Rename Tag](#renaming-a-tag--renameTag)**            | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`                                                                                              |
-| **[Delete](#deleting-a-person--delete)**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **[List](#listing-all-persons--list)**                  | `list`                                                                                                                                                                |
-| **[Sort](#sort-persons-by-name--sort)**                 | `sort [ORDER]`<br> e.g., `sort asc`                                                                                                                                   |
-| **[Filter](#filter-persons-by-tag--filter)**            | `filter [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                       |
-| **[Find](#locating-persons-by-name--find)**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **[Search](#search-persons-by-schedule-range--search)** | `search [b/START_TIME] [en/END_TIME]`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                       |
-| **[Help](#viewing-help--help)**                         | `help`                                                                                                                                                                |
-| **[Restore](#restoring-a-deleted-person--restore)**     | `restore`                                                                                                                                                             |
-| **[Backup](#backing-up-save-file--backup)**             | `backup`                                                                                                                                                              |
-| **[Clear](#clearing-all-entries--clear)**               | `clear`                                                                                                                                                               |
-| **[Exit](#exiting-the-program--exit)**                  | `exit`                                                                                                                                                                |
+| Action                                                  | Format, Examples                                                                                                                                                                                                                                                                                  |
+|---------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person--add)**                        | `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS [cs/CAROUSELL_HANDLE] [fb/FACEBOOK_HANDLE] [ig/INSTAGRAM_HANDLE]> [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **[Edit](#editing-a-person--edit)**                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                       |
+| **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX [ig/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                                                                                                                                                         |
+| **[Schedule](#scheduling-contacts--schedule)**          | `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]` <br> e.g., `schedule 1 sn/appointment sd/2024-12-12 st/12:00`                                                                                                                                                           |
+| **[Rename Tag](#renaming-a-tag--renameTag)**            | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`                                                                                                                                                                                                                          |
+| **[Delete](#deleting-a-person--delete)**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                               |
+| **[List](#listing-all-persons--list)**                  | `list`                                                                                                                                                                                                                                                                                            |
+| **[Sort](#sort-persons-by-name--sort)**                 | `sort {n/[ORDER] sch/[ORDER]}`<br> e.g., `sort asc`                                                                                                                                                                                                                                               |
+| **[Filter](#filter-persons-by-tag--filter)**            | `filter [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                                                                                                                                                   |
+| **[Find](#locating-persons-by-name--find)**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                        |
+| **[Search](#search-persons-by-schedule-range--search)** | `search [b/START_DATETIME] [en/END_DATETIME]`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                           |
+| **[Help](#viewing-help--help)**                         | `help`                                                                                                                                                                                                                                                                                            |
+| **[Restore](#restoring-a-deleted-person--restore)**     | `restore`                                                                                                                                                                                                                                                                                         |
+| **[Backup](#backing-up-save-file--backup)**             | `backup`                                                                                                                                                                                                                                                                                          |
+| **[Clear](#clearing-all-entries--clear)**               | `clear`                                                                                                                                                                                                                                                                                           |
+| **[Exit](#exiting-the-program--exit)**                  | `exit`                                                                                                                                                                                                                                                                                            |
 
