@@ -104,7 +104,7 @@ Adds a remark to a specified patient profile.
 
 Format: `remark NRIC r/REMARK`
 
-Examples: 
+Examples:
 * `remark S1234567A r/allergic to dogs`
 * `remark T1231231D r/keep away from flashing lights`
 
@@ -204,7 +204,7 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Murphy's List home folder.
 **Q**: What should I do if the application does not start?<br>
-**A**: Ensure you have Java `17` or above installed in your Computer. If the problem persists, contact the developers. 
+**A**: Ensure you have Java `17` or above installed in your Computer. If the problem persists, contact the developers.
 You can check your Java version by running `java -version` in the command terminal.
 **Q**: How do I recover data if I accidentally delete a patient profile?
 **A**: Unfortunately, there is no built-in undo feature for deleted data. It is recommended to back up your data by making a copy of the data file periodically.
