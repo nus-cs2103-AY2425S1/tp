@@ -20,4 +20,7 @@ Person *--> Email
 Person *--> Address
 Person *--> Age
 Person *--> Birthday
+Person *--> Frequency
+Person *--> ProfilePicFilePath
+Person *--> LastPaidDate
 @enduml
