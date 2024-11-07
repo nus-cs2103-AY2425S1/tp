@@ -1,9 +1,9 @@
 package seedu.address.model.product;
 
-import seedu.address.model.util.SampleDataUtil;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Catalogue for managing pastries. Provides methods to add pastries with specified ingredients

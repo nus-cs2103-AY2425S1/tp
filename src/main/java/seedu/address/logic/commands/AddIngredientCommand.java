@@ -41,7 +41,7 @@ public class AddIngredientCommand extends Command {
         requireNonNull(model);
 
         // Use the existing ingredient catalogue from the model
-        IngredientCatalogue ingredientCatalogue = IngredientCatalogue.getInstance();
+        IngredientCatalogue ingredientCatalogue = model.getIngredientCatalogue();
         int nextProductId = ingredientCatalogue.getNextProductId();
 
         // Create a new ingredient with the next available product ID
@@ -67,8 +67,8 @@ public class AddIngredientCommand extends Command {
                 .filter(product -> product instanceof Ingredient) // Filter only Ingredient objects
                 .map(product -> (Ingredient) product) // Cast to Ingredient
                 .anyMatch(existingIngredient ->
-                        existingIngredient.getName().equalsIgnoreCase(newIngredient.getName()) &&
-                                Double.compare(existingIngredient.getCost(), newIngredient.getCost()) == 0);
+                        existingIngredient.getName().equalsIgnoreCase(newIngredient.getName())
+                                );
     }
 
     @Override
