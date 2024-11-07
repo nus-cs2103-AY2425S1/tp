@@ -605,7 +605,7 @@ testers are expected to do more *exploratory* testing.
 ### Clearing all entries
 
 1. **Clear all contacts**
-   1. Prerequisites: Add at least one person to the address book. 
+   1. Prerequisites: Add at least one person to the address book.
    2. Test case: `clear`
    3. Expected: All contacts are removed from the list
 
