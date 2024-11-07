@@ -5,14 +5,15 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Comfortaa";
     -fx-text-fill: white; /* dark emerald green */
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Comfortaa";
+    -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
@@ -40,7 +41,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Comfortaa";
     -fx-text-fill: #2e7d32; /* dark emerald green */
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -52,7 +53,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #b2dfdb; /* light emerald green */
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Comfortaa";
     -fx-font-size: 11pt;
     -fx-text-fill: #2e7d32; /* dark emerald green */
 }
