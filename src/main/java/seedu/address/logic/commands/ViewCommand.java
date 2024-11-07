@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -38,12 +37,9 @@ public class ViewCommand extends Command {
     public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact";
     private static final ViewCommand closeView = new ViewCommand();
     private static final CommandResult closeViewResult = new CommandResult(CLOSE_VIEW_ACKNOWLEDGMENT, null, true);
-
+    private static ListChangeListener<Person> listener;
     private final Name personName;
     private final boolean isClose;
-
-    private static ListChangeListener<Person> listener;
-
 
 
     /**
