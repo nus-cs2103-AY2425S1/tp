@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# CampusConnect Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -510,7 +510,15 @@ before the command was executed.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI**: The *Graphical User Interface*, through which the user can input commands and view contacts and tags.
+* **Field**: An attribute possessed by a contact, namely Phone number, Tags, Name and Email.
+* **Prefix**: An identifier used in commands to indicate which field is referred to. For the 4 fields Phone, Name, Tags and Email,
+    the *prefixes* would be `p/`, `t/`, `n/` and `e/` respectively.
+* **Duplicate Contact**: A contact that has the same Phone, Email and Name as another contact.
+* **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories.
+* **Person List**: The scrollable list of contacts in the GUI displaying all contacts and the respective values for their fields.
+* **Commands affected by `undo` and `redo`**: These refer to all commands that affect the *state* of the Tag List and Contact List
+  in **CampusConnect** and exclude `list` and `find`, as they do not alter the state of the contact or tag list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -604,3 +612,6 @@ in the GUI required a restructuring of our GUI files (under the `ui` folder) and
 implementing this system was not easy but it did provide better tag customisation and control than AB3.
 
 Most commands implemented used the given `Command` classes as a reference, but modified them to adapt the respective `execute()` methods for the command.
+
+On top of all these, we had also modified the GUI, which required us to familiarise and work through the 
+quirks of JavaFX.
