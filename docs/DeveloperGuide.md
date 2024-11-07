@@ -492,6 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *  **RSVP Status**: The attendance response status of a guest. It can be either confirmed, pending, or declined.
 *  **Tag**: A keyword or label assigned to an entry to categorize and easily filter it within the list.
 *  **Index**: A numerical value representing the position of an entry in a list, used to reference and perform operations on the contact.
+*  **Prefix**: Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.
 
 --------------------------------------------------------------------------------------------------------------------
 
