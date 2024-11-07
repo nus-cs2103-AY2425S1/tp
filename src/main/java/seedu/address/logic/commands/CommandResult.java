@@ -24,6 +24,8 @@ public class CommandResult {
 
     private final boolean export;
 
+    private boolean showCommand = false;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -52,9 +54,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with a person to display in the UI.
      */
-    public CommandResult(String feedbackToUser, Person personToShow) {
+    public CommandResult(String feedbackToUser, Person personToShow, boolean showCommand) {
         this(feedbackToUser, false, false, false);
         this.personToShow = requireNonNull(personToShow);
+        this.showCommand = showCommand;
     }
     //@@author
 
@@ -72,6 +75,10 @@ public class CommandResult {
 
     public Person getPersonToShow() {
         return personToShow;
+    }
+
+    public boolean isShowCommand() {
+        return showCommand;
     }
 
     public boolean isExport() {

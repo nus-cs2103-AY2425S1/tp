@@ -79,7 +79,8 @@ public class ListingAddCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
 
-        return new CommandResult(generateSuccessMessage(editedPerson, MESSAGE_ADDED_LISTING_SUCCESS));
+        return new CommandResult(generateSuccessMessage(editedPerson,
+                MESSAGE_ADDED_LISTING_SUCCESS), editedPerson, false);
     }
 
     /**

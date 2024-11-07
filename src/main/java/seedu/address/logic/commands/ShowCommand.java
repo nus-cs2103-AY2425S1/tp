@@ -61,7 +61,7 @@ public class ShowCommand extends Command {
 
         Person personToShow = lastShownList.get(targetIndex.getZeroBased());
         return new CommandResult(String.format(MESSAGE_SHOW_PERSON_SUCCESS,
-                personToShow.getName().fullName), personToShow);
+                personToShow.getName().fullName), personToShow, true);
     }
     //@@author
 }

@@ -59,4 +59,15 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Gets the ID of the currently shown person
+     * @return ID of currently shown person
+     */
+    Person getCurrentlyShownPerson();
+
+    /**
+     * Sets the ID of the currently shown person
+     */
+    void setCurrentlyShownPerson(Person person);
 }

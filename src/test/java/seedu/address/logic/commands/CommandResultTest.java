@@ -67,7 +67,7 @@ public class CommandResultTest {
         assertEquals(expectedWithoutPerson, commandResult.toString());
 
         // With personToShow
-        CommandResult commandResultWithPerson = new CommandResult("feedback", person);
+        CommandResult commandResultWithPerson = new CommandResult("feedback", person, false);
         String expectedWithPerson = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResultWithPerson.getFeedbackToUser() + ", showHelp=" + commandResultWithPerson.isShowHelp()
                 + ", exit=" + commandResultWithPerson.isExit() + ", personToShow=" + person + "}";

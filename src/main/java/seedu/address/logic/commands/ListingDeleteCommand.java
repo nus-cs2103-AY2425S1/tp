@@ -72,7 +72,9 @@ public class ListingDeleteCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson, MESSAGE_DELETE_LISTING_SUCCESS));
+        return new CommandResult(
+                generateSuccessMessage(editedPerson, MESSAGE_DELETE_LISTING_SUCCESS),
+                editedPerson, false);
     }
 
     /**

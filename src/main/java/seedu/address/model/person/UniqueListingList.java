@@ -47,6 +47,15 @@ public class UniqueListingList implements Iterable<Listing> {
     }
 
     /**
+     * Retrieves a listing specified by index
+     *
+     * @return The list of listings.
+     */
+    public Listing get(Integer id) {
+        return listings.get(id);
+    }
+
+    /**
      * Retrieves the set of listings.
      *
      * @return The set of listings.

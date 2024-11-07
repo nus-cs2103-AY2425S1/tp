@@ -34,6 +34,8 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
+    private Person currentlyShownPerson;
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
@@ -68,6 +70,8 @@ public class LogicManager implements Logic {
                 throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
             }
         }
+
+
 
         return commandResult;
     }
@@ -105,5 +109,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Person getCurrentlyShownPerson() {
+        return currentlyShownPerson;
+    }
+
+    @Override
+    public void setCurrentlyShownPerson(Person person) {
+        currentlyShownPerson = person;
     }
 }
