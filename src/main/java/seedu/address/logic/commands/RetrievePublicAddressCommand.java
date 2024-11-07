@@ -90,6 +90,7 @@ public class RetrievePublicAddressCommand extends Command {
                                     publicAddress.getNetwork(), publicAddress.getLabel(),
                                     publicAddress.getPublicAddressString()));
                 })
+                .sorted()
                 .toList();
 
         return new CommandResult(String.format(
