@@ -40,7 +40,8 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by one or more of the specified attributes.\n"
+            + ": Edits the contact details of the person identified by index. "
+            + "Key in the new contact details after the corresponding prefix. \n"
             + "Parameters: [" + "INDEX" + "] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ROLE + "ROLE] "
