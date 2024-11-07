@@ -163,11 +163,11 @@ Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
 2. `AddressBookParser` parses the user input (if valid) to create and return an `AddGuestCommandParser`
 3. `AddGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create a `Guest` object with the specified attributes (`Name`, `Phone`, `Email`, `Address`). An `AddGuestCommand` is then created with the new `Guest` object and returned.
-4. `LogicManager` executes the `AddGuestCommand`, which calls the `addPerson` method of the `Model` to add the guest into the address book.
+4. `LogicManager` executes the `AddGuestCommand`, which calls the `hasPerson` method of `Model` to check if the guest already exists in the address book. If the guest is not a duplicate, the `AddGuestCommand` then calls the `addPerson` method of the `Model` to add the guest into the address book.
 5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
 
 ### Find feature
-The `find` command searches for all guests and vendors that match the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched
+The `find` command searches for all guests and vendors that match the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that only one type of prefix should be used for each find command.
 
 The sequence diagram below provides an overview for the execution flow of a `find` command:
 <puml src="diagrams/FindSequenceDiagram.puml" />
@@ -181,8 +181,8 @@ Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
 2. `AddressBookParser` parses the user input (if valid) to create and return a `FindCommandParser`
 3. `FindCommandParser` parses the user input (if valid) to extract the prefix and its corresponding value, before calling the corresponding parse predicate method to create the corresponding predicate to be used. In this case, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. A `FindCommand` is then created with the predicate and returned.
-4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the predicate as the argument.
-5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
+4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the predicate as the argument. Subsequently, the `FindCommand` calls `getFilteredGuestListCount` and `getFilteredVendorListCount` methods from `Model` to respectively obtain the number of guest(s) and vendor(s) that match the given keyword(s)
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
 
 
 --------------------------------------------------------------------------------------------------------------------
