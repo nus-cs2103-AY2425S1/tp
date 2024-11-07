@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -19,12 +20,15 @@ public class GroupListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Group> groupListView;
+    @FXML
+    private Label groupListTitle;
 
     /**
      * Creates a {@code GroupListPanel} with the given {@code ObservableList}.
      */
     public GroupListPanel(ObservableList<Group> groupList) {
         super(FXML);
+        this.groupListTitle.setText("Your Current Groups:");
         groupListView.setItems(groupList);
         groupListView.setCellFactory(listView -> new GroupListViewCell());
     }

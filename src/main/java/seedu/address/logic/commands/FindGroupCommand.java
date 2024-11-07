@@ -48,7 +48,6 @@ public class FindGroupCommand extends Command {
         return new CommandResult(
             String.format(Messages.MESSAGE_GROUPS_LISTED_OVERVIEW, model.getFilteredGroupList().size()),
                 false,
-                true,
                 false);
     }
 
