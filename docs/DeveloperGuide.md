@@ -527,11 +527,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Student**: A person who is taking lessons from the tutor
 * **Tutor**: The user of the application
-* **Add student**: A feature that allows tutors to create a new student entry along with their information in the application
-* **Delete student**: A feature that allows tutors to remove a student entry and their information from the application
-* **Find student**: A feature that allows tutors to find a particular student by entering their name
+* **addlsn**: An abbreviation for the addlesson command
+* **dellsn**: An abbreviation for the deletelesson command
+* **addrmk**: An abbreviation for the addremark command
+* **delrmk**: An abbreviation for the addremark command
 * **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
 * **Tags**: Labels that can be assigned to students to group them based on common characteristics
+* **Remarks**: Longer texts that can be added to students
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
