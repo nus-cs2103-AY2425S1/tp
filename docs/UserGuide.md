@@ -372,6 +372,22 @@ Examples:
 Expected output:
 ![result for 'find John' followed by 'unmark 1 d/31/01/2024 12:00'](images/unmarkAttendance.png)
 
+### Filtering people who were absent: `absentees`
+
+Finds all people who were absent on the specified date and time.
+
+Format: `absentees d/DATE_TIME`
+
+- `DATE_TIME` refers to the date and time for which you want to find people who were absent. It must be written in the format `dd/MM/yyyy HH:mm`.
+- Note that people who were present at the specified date and time will not be shown.
+
+Examples:
+
+- `absentees d/31/01/2024 10:00` Finds all people who were absent on the 10 AM of January 31st, 2024.
+
+Expected output:
+![result for 'absentees d/31/01/2024 10:00'](images/absentees.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
