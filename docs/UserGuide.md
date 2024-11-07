@@ -275,7 +275,7 @@ Searches T_Assistant for students with fields that match the search query.
 Take note that if any other student with a group happens to have a field that matches the special keyword, they will also appear in the results.
 </box>
 
-2. For information on the constraints for each parameter used in this command, go
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
