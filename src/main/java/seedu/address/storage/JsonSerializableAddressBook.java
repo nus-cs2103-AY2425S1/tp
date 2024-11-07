@@ -22,9 +22,6 @@ import seedu.address.model.task.Task;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
-
     private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
@@ -38,11 +35,6 @@ class JsonSerializableAddressBook {
                                        @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
 
         this.persons.addAll(persons);
-
-        // if (tasks != null) {
-        //    this.tasks.addAll(tasks);
-        // }
-
         this.tasks.addAll(tasks);
     }
 
