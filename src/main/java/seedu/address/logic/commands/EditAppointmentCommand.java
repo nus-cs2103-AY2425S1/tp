@@ -92,7 +92,7 @@ public class EditAppointmentCommand extends EditCommand {
     protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit) {
         Appointment entityToEditCasted = (Appointment) entityToEdit;
         Appointment editedEntityCasted = (Appointment) editedEntity;
-        return entityToEditCasted.isSameAppointment(editedEntityCasted);
+        return entityToEditCasted.equals(editedEntityCasted);
     }
 
     /**

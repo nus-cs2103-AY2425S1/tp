@@ -68,7 +68,7 @@ public class EditPersonCommand extends EditCommand {
     protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit) {
         Person entityToEditCasted = (Person) entityToEdit;
         Person editedEntityCasted = (Person) editedEntity;
-        return entityToEditCasted.isSamePerson(editedEntityCasted);
+        return entityToEditCasted.equals(editedEntityCasted);
     }
 
     @Override
