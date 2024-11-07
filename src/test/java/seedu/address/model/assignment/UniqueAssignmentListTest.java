@@ -203,6 +203,56 @@ public class UniqueAssignmentListTest {
     }
 
     @Test
+    public void removeAll_existingAssignmentsWithEmployeeId_removesAssignments() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        uniqueAssignmentList.add(BENSON_BETA);
+        boolean isRemoved = uniqueAssignmentList.removeAll(ALICE.getEmployeeId());
+
+        assertTrue(isRemoved);
+
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        expectedUniqueAssignmentList.add(BENSON_BETA);
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
+    public void removeAll_assignmentsWithEmployeeIdDoesNotExist_noAssignmentsRemoved() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        boolean isRemoved = uniqueAssignmentList.removeAll(BENSON.getEmployeeId());
+
+        assertFalse(isRemoved);
+
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        expectedUniqueAssignmentList.add(ALICE_ALPHA);
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
+    public void removeAll_existingAssignmentsWithProjectId_removesAssignments() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        uniqueAssignmentList.add(BENSON_BETA);
+        boolean isRemoved = uniqueAssignmentList.removeAll(ALPHA.getId());
+
+        assertTrue(isRemoved);
+
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        expectedUniqueAssignmentList.add(BENSON_BETA);
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
+    public void removeAll_assignmentsWithProjectIdDoesNotExist_noAssignmentsRemoved() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        boolean isRemoved = uniqueAssignmentList.removeAll(BETA.getId());
+
+        assertFalse(isRemoved);
+
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        expectedUniqueAssignmentList.add(ALICE_ALPHA);
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
     public void setAssignments_nullUniqueAssignmentList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAssignmentList.setAssignments(
                 (UniqueAssignmentList) null));

@@ -518,7 +518,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting an employee while all employees are being shown
 
-   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+   1. Prerequisites: List all employees using the `listemployees` command. Multiple employees in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.

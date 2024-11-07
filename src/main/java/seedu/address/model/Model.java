@@ -66,8 +66,31 @@ public interface Model {
      */
     void setAddressBookProject(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces address book assignments data with the data in {@code addressBook}.
+     */
+    void setAddressBookAssignments(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Returns the user prefs' command text history file path.
+     */
+    Path getCommandTextHistoryFilePath();
+
+    /**
+     * Sets the user prefs' command text history file path.
+     */
+    void setCommandTextHistoryFilePath(Path commandTextHistoryFilePath);
+
+    /**
+     * Replaces all command text history data with the data in {@code commandTextHistory}.
+     */
+    void setCommandTextHistory(CommandTextHistory commandTextHistory);
+
+    /** Returns the CommandTextHistory */
+    CommandTextHistory getCommandTextHistory();
 
     /**
      * Returns true if an employee with the same identity as {@code employee} exists
@@ -180,6 +203,18 @@ public interface Model {
      * The assignment must exist in the address book.
      */
     void deleteAssignment(ProjectId targetProjectId, EmployeeId targetEmployeeId);
+
+    /**
+     * Deletes the all assignments with matching {@code EmployeeId}
+     *
+     * @return true if at least
+     */
+    boolean deleteAllAssignments(EmployeeId targetEmployeeId);
+
+    /**
+     * Deletes the all assignments with matching {@code ProjectId}
+     */
+    boolean deleteAllAssignments(ProjectId targetProjectId);
 
     /**
      * Adds the given assignment.

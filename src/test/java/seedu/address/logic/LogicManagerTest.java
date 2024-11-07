@@ -29,7 +29,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
+import seedu.address.storage.CommandTextHistoryStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCommandTextHistoryStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.EmployeeBuilder;
@@ -48,8 +50,10 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        CommandTextHistoryStorage commandTextHistoryStorage =
+                new JsonCommandTextHistoryStorage(temporaryFolder.resolve("commandTextHistory.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, commandTextHistoryStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -124,7 +128,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getCommandTextHistory(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -158,10 +162,12 @@ public class LogicManagerTest {
                 throw e;
             }
         };
+        JsonCommandTextHistoryStorage commandTextHistoryStorage = new JsonCommandTextHistoryStorage(prefPath);
+
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, commandTextHistoryStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

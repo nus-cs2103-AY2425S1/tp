@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showProjectAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROJECT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PROJECT;
-import static seedu.address.testutil.TypicalProjects.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +15,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.project.Project;
+import seedu.address.testutil.TypicalAssignments;
+import seedu.address.testutil.TypicalProjects;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -25,7 +25,7 @@ import seedu.address.model.project.Project;
  */
 public class DeleteProjectCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalProjects.getTypicalAddressBook());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +35,7 @@ public class DeleteProjectCommandTest {
         String expectedMessage = String.format(DeleteProjectCommand.MESSAGE_DELETE_PROJECT_SUCCESS,
                 Messages.format(projectToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook());
         expectedModel.deleteProject(projectToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -59,7 +59,7 @@ public class DeleteProjectCommandTest {
         String expectedMessage = String.format(DeleteProjectCommand.MESSAGE_DELETE_PROJECT_SUCCESS,
                 Messages.format(projectToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook());
         expectedModel.deleteProject(projectToDelete);
         showNoProject(expectedModel);
 
@@ -77,6 +77,43 @@ public class DeleteProjectCommandTest {
         DeleteProjectCommand deleteCommand = new DeleteProjectCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PROJECT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListWithAssignment_success() {
+        Model modelWithAssignments = new ModelManager(TypicalAssignments.getTypicalAddressBook());
+
+        Project projectToDelete = modelWithAssignments.getFilteredProjectList()
+                .get(INDEX_FIRST_PROJECT.getZeroBased());
+        DeleteProjectCommand deleteCommand = new DeleteProjectCommand(INDEX_FIRST_PROJECT);
+
+        String expectedMessage = String.format(DeleteProjectCommand.MESSAGE_DELETE_PROJECT_SUCCESS,
+                Messages.format(projectToDelete));
+
+        ModelManager expectedModel = new ModelManager(modelWithAssignments.getAddressBook());
+        expectedModel.deleteProject(projectToDelete);
+
+        assertCommandSuccess(deleteCommand, modelWithAssignments, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexFilteredListWithAssignments_success() {
+        Model modelWithAssignments = new ModelManager(TypicalAssignments.getTypicalAddressBook());
+
+        showProjectAtIndex(modelWithAssignments, INDEX_FIRST_PROJECT);
+
+        Project projectToDelete = modelWithAssignments.getFilteredProjectList()
+                .get(INDEX_FIRST_PROJECT.getZeroBased());
+        DeleteProjectCommand deleteCommand = new DeleteProjectCommand(INDEX_FIRST_PROJECT);
+
+        String expectedMessage = String.format(DeleteProjectCommand.MESSAGE_DELETE_PROJECT_SUCCESS,
+                Messages.format(projectToDelete));
+
+        Model expectedModel = new ModelManager(modelWithAssignments.getAddressBook());
+        expectedModel.deleteProject(projectToDelete);
+        showNoProject(expectedModel);
+
+        assertCommandSuccess(deleteCommand, modelWithAssignments, expectedMessage, expectedModel);
     }
 
     @Test

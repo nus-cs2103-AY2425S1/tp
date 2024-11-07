@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
+import static seedu.address.testutil.TypicalAssignments.BENSON_BETA;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
@@ -35,6 +36,8 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getEmployeeList());
+        assertEquals(Collections.emptyList(), addressBook.getProjectList());
+        assertEquals(Collections.emptyList(), addressBook.getAssignmentList());
     }
 
     @Test
@@ -204,6 +207,62 @@ public class AddressBookTest {
     public void removeAssignment_projectIdAndEmployeeIdNotInAddressBook_throwsAssignmentNotFoundException() {
         assertThrows(AssignmentNotFoundException.class, () -> addressBook.removeAssignment(
                 ALPHA.getId(), ALICE.getEmployeeId()));
+    }
+
+    // EP: valid project id, addressbook has 1 assignment
+    @Test
+    public void removeAllAssignments_projectIdInAddressBookSingleAssignment_returnsFalse() {
+        addressBook.addAssignment(ALICE_ALPHA);
+        assertTrue(addressBook.removeAllAssignments(ALPHA.getId()));
+    }
+
+    // EP: valid project id, addressbook has more than 1 assignment
+    @Test
+    public void removeAllAssignments_projectIdInAddressBookMultipleAssignments_returnsFalse() {
+        addressBook.addAssignment(ALICE_ALPHA);
+        addressBook.addAssignment(BENSON_BETA);
+        assertTrue(addressBook.removeAllAssignments(ALPHA.getId()));
+    }
+
+    // EP: invalid project id, addressbook is not empty
+    @Test
+    public void removeAllAssignments_projectIdNotInAddressBook_returnsFalse() {
+        addressBook.addAssignment(BENSON_BETA);
+        assertFalse(addressBook.removeAllAssignments(ALPHA.getId()));
+    }
+
+    // EP: invalid project id, addressbook is empty
+    @Test
+    public void removeAllAssignments_projectIdNotInEmptyAddressBook_returnsFalse() {
+        assertFalse(addressBook.removeAllAssignments(ALPHA.getId()));
+    }
+
+    // EP: valid employee id, addressbook has 1 assignment
+    @Test
+    public void removeAllAssignments_employeeIdInAddressBookSingleAssignment_returnsFalse() {
+        addressBook.addAssignment(ALICE_ALPHA);
+        assertTrue(addressBook.removeAllAssignments(ALICE.getEmployeeId()));
+    }
+
+    // EP: valid employee id, addressbook has more than 1 assignment
+    @Test
+    public void removeAllAssignments_employeeIdInAddressBookMultipleAssignment_returnsFalse() {
+        addressBook.addAssignment(ALICE_ALPHA);
+        addressBook.addAssignment(BENSON_BETA);
+        assertTrue(addressBook.removeAllAssignments(ALICE.getEmployeeId()));
+    }
+
+    // EP: invalid employee id, addressbook is not empty
+    @Test
+    public void removeAllAssignments_employeeIdNotInAddressBook_returnsFalse() {
+        addressBook.addAssignment(BENSON_BETA);
+        assertFalse(addressBook.removeAllAssignments(ALICE.getEmployeeId()));
+    }
+
+    // EP: invalid employee id, addressbook is empty
+    @Test
+    public void removeAllAssignments_employeeIdNotInEmptyAddressBook_returnsFalse() {
+        assertFalse(addressBook.removeAllAssignments(ALICE.getEmployeeId()));
     }
 
     @Test

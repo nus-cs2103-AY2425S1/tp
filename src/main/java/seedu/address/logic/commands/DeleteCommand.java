@@ -23,7 +23,8 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the employee identified by the index number used in the displayed employee list.\n"
+            + ": Deletes the employee identified by the index number used in the displayed employee list,"
+            + " as well as associated assignments.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -51,6 +52,9 @@ public class DeleteCommand extends Command {
 
         Employee employeeToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEmployee(employeeToDelete);
+
+        // Delete associated assignments
+        model.deleteAllAssignments(employeeToDelete.getEmployeeId());
 
         // Deleted employee successfully
         logger.fine(COMMAND_WORD + " employee\n" + employeeToDelete);

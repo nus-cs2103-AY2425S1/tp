@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
+import static seedu.address.testutil.TypicalAssignments.BENSON_BETA;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
@@ -78,6 +79,18 @@ public class ModelManagerTest {
         Path path = Paths.get("address/book/file/path");
         modelManager.setAddressBookFilePath(path);
         assertEquals(path, modelManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void setCommandTextHistoryFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setCommandTextHistory(null));
+    }
+
+    @Test
+    public void setCommandTextHistoryFilePath_validPath_setsCommandTextHistoryFilePath() {
+        Path path = Paths.get("command/text/history/file/path");
+        modelManager.setCommandTextHistoryFilePath(path);
+        assertEquals(path, modelManager.getCommandTextHistoryFilePath());
     }
 
     @Test
@@ -214,15 +227,75 @@ public class ModelManagerTest {
                 modelManager.deleteAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
     }
 
+    // EP: valid project id, addressbook has 1 assignment
+    @Test
+    public void deleteAllAssignment_assignmentWithProjectIdInAddressBookSingleAssignment_deleteAllSuccess() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        assertTrue(modelManager.deleteAllAssignments(ALPHA.getId()));
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    // EP: valid project id, addressbook has more than 1 assignment
+    @Test
+    public void deleteAllAssignment_assignmentWithProjectIdInAddressBookMultipleAssignments_deleteAllSuccess() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        modelManager.addAssignment(BENSON_BETA);
+        assertTrue(modelManager.deleteAllAssignments(ALPHA.getId()));
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    // EP: invalid project id, addressbook is empty
+    @Test
+    public void deleteAllAssignment_assignmentWithProjectIdNotInEmptyAddressBook_noError() {
+        assertFalse(modelManager.deleteAllAssignments(ALPHA.getId()));
+    }
+
+    // EP: invalid project id, addressbook is not empty
+    @Test
+    public void deleteAllAssignment_assignmentWithProjectIdNotInAddressBook_noError() {
+        modelManager.addAssignment(BENSON_BETA);
+        assertFalse(modelManager.deleteAllAssignments(ALPHA.getId()));
+    }
+
+    // EP: valid employee id, addressbook has 1 assignment
+    @Test
+    public void deleteAllAssignment_assignmentWithEmployeeIdInAddressBookSingleAssignment_deleteAllSuccess() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        assertTrue(modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    // EP: valid employee id, addressbook has more than 1 assignment
+    @Test
+    public void deleteAllAssignment_assignmentWithEmployeeIdInAddressBookMultipleAssignments_deleteAllSuccess() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        modelManager.addAssignment(BENSON_BETA);
+        assertTrue(modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    // EP: invalid employee id, addressbook is empty
+    @Test
+    public void deleteAllAssignment_assignmentWithEmployeeIdNotInEmptyAddressBook_noError() {
+        assertFalse(modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
+    }
+
+    // EP: invalid employee id, addressbook is not empty
+    @Test
+    public void deleteAllAssignment_assignmentWithEmployeeIdNotInAddressBook_noError() {
+        modelManager.addAssignment(BENSON_BETA);
+        assertFalse(modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
+    }
+
     @Test
     public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEmployeeList().remove(0));
     }
+
     @Test
     public void getFilteredProjectList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredProjectList().remove(0));
     }
-
 
     @Test
     public void equals() {
@@ -231,11 +304,12 @@ public class ModelManagerTest {
                 .withProject(ALPHA).withProject(BETA)
                 .build();
         AddressBook differentAddressBook = new AddressBook();
+        CommandTextHistory commandTextHistory = new CommandTextHistory();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, commandTextHistory, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, commandTextHistory, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -248,18 +322,18 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, commandTextHistory, userPrefs)));
 
         // different filteredEmployeeList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredEmployeeList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, commandTextHistory, userPrefs)));
 
         // different filteredProjectList -> returns false
         keywords = ALPHA.getName().fullName.split("\\s+");
         modelManager.updateFilteredProjectList(
                 new ProjectNameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, commandTextHistory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
@@ -268,6 +342,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, commandTextHistory, differentUserPrefs)));
     }
 }

@@ -13,6 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.CommandTextHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
@@ -48,6 +49,14 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        try {
+            storage.saveCommandTextHistory(model.getCommandTextHistory());
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
+
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
@@ -66,6 +75,11 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
+    }
+
+    @Override
+    public CommandTextHistory getCommandTextHistory() {
+        return model.getCommandTextHistory();
     }
 
     @Override

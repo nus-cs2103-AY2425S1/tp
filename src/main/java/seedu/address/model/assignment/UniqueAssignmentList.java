@@ -171,6 +171,34 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         }
     }
 
+    /**
+     * Removes the assignments from the list with matching employeeIds.
+     *
+     * @return true if assignments were deleted, false otherwise
+     */
+    public boolean removeAll(EmployeeId employeeId) {
+        requireNonNull(employeeId);
+        if (internalList.removeAll(internalList.stream().filter(assignment ->
+                assignment.getEmployee().getEmployeeId().equals(employeeId)).toList())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Removes the assignments from the list with matching projectIds.
+     *
+     * @return true if assignments were deleted, false otherwise
+     */
+    public boolean removeAll(ProjectId projectId) {
+        requireNonNull(projectId);
+        if (internalList.removeAll(internalList.stream().filter(assignment ->
+                assignment.getProject().getId().equals(projectId)).toList())) {
+            return true;
+        }
+        return false;
+    }
+
     public void setAssignments(UniqueAssignmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
