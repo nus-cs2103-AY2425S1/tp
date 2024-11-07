@@ -276,6 +276,31 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ---
 
+## **Appendix: Instructions for Manual Testing**
+
+Given below are instructions to test the app manually.
+
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
+testers are expected to do more _exploratory_ testing.
+
+</box>
+
+1. First, launch the app by entering the folder and running `java -jar DLTbook.jar`.
+2. The app should start and display the main window with a list of sample contacts.
+3. Try adding a public address to a user by entering `add 1 c/BTC l/default pa/0x1234`.
+4. Try retrieving the public address by entering `retrievepa 1 c/BTC` or `retrievepa 1 c/BTC l/default`.
+5. Try editing the public address by entering `editpa 1 c/BTC l/default pa/0x5678`.
+6. Try searching for the public address by entering `searchpa pa/0x5678`.
+7. Try deleting the public address by entering `deletepa 1 c/BTC` or `deletepa 1 c/BTC l/default`.
+
+<box type="Success" title="Congratulations!">
+
+Good job! You have tested the basic functionalities of the app. We recommend you to explore the app further to test more functionalities.
+
+</box>
+
 ## **Appendix: Requirements**
 
 ### Product scope
