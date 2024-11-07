@@ -24,7 +24,6 @@ import seedu.address.testutil.TypicalTasks;
 public class DeleteTaskCommandTest {
 
     private Model model;
-    private Model originalModelState;
 
     @BeforeEach
     public void setUp() {
