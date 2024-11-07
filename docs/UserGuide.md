@@ -27,9 +27,13 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
     * `list` : Lists all clients' contacts.
 
-    * `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan py/pending cs/active d/09-09-2024` : Adds a client contact named `John Dimon` to Clientele+.
+    * `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan py/pending cs/active d/09-09-2024` : Adds a client contact named `John Dimon` with pending payment to Clientele+.
 
     * `delete id/3` : Deletes the 3rd client contact shown in the current list.
+
+    * `blacklist 1` : Blacklists the 1st client contact shown in the current list.
+   
+    * `archive 2` : Archives the 2nd client contact shown in the current list.
 
     * `clear` : Deletes all client contacts.
 
@@ -73,7 +77,7 @@ Field | Accepted input values | Examples | Exceptions
 `ADDRESS` | Any non-empty string | `Singapore`, `42 Wallaby Way, Sydney` | None
 `DEADLINE` | Any valid date in the format dd-mm-[yy]yy<br>Day and Month must be a valid combination (so no 31st of February for example)<br>Year can be either 2-digit or 4-digit<br>Dashes (-), Slashes (/), underscores (_) and vertical bars (&#124;) can be used as delimiters | `1-1-25` (represents "January 1, 2025"), `10/8/2040` (represents "August 10, 2040"), <code>29&#124;2&#124;28</code> (represents "February 29, 2028") | None
 `TAG` | Any non-empty alphanumeric string (spaces allowed) | `friends`, `CEO of IMB`, `Born 2017` | None
-`CLIENT_STATUS` | Must be `old`, `potential`, `unresponsive` or `active`. | `old`, `potential`, `unresponsive`, `active` | `blacklisted` is a also valid client status but can only be set using the `blacklist` command ([see here](#blacklist-a-client-blacklist)).
+`CLIENT_STATUS` | Must be `old`, `potential`, `unresponsive` or `active`. | `old`, `potential`, `unresponsive`, `active` | `blacklisted` is also a valid client status but can only be set using the `blacklist` command ([see here](#blacklist-a-client-blacklist)).
 `PROJECT_STATUS` | Must be `in progress` or `completed` (note the past tense) | `in progress`, `completed` | None
 `PAYMENT_STATUS` | Must be `pending`, `partial`, `paid` or `late` | `pending`, `partial`, `paid`, `late` | None
 
@@ -250,11 +254,11 @@ Format: `blacklist INDEX`
 Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+![blacklisted image](images/blacklisted.png)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 <br>
 Entering `blacklist` on its own without any other parameters will filter and display all clients who have been blacklisted.
-
 </div>
 
 ### Whitelist a Client: `whitelist`
