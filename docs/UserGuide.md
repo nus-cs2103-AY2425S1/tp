@@ -16,12 +16,15 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
   * [Listing all contacts: `list`](#listing-all-contacts--list)
   * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
   * [Locating contacts or deliveries by name: `find`](#locating-contacts-or-deliveries-by-name-find)
+  * [Locating deliveries by item: `finddel`](#locating-deliveries-by-item-finddel)
   * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery--archive)
   * [Unarchiving a contact or delivery: `unarchive`](#unarchiving-a-contact-or-delivery--unarchive)
   * [Sorting contacts or deliveries in ascending order: `asort`](#sorting-the-contacts-or-delivery-list-in-ascending-order-asort)
   * [Sorting contacts or deliveries in descending order: `dsort`](#sorting-the-contacts-or-delivery-list-in-descending-order-dsort)
   * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery--delete)
   * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
+  * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee--assign)
+  * [Returning to the main window: `back`](#returning-to-the-main-window--back)
   * [Clearing all entries: `clear`](#clearing-all-entries--clear)
   * [Exiting the program: `exit`](#exiting-the-program--exit)
 * [FAQ](#faq)
@@ -71,22 +74,23 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
   - Main window: the default window you see when opening LogiLink.
   - Inspect window: the window you see when inspecting a contact.<br></br>
 
-* Words in `UPPER_CASE` are parameters to be supplied by you.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are parameters you need to provide.<br>
+  e.g. In `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Square brackets [ ] mean that the parameter is optional.<br>
+  e.g `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Ellipsis (...) means you can repeat the parameter multiple times, or leave it out completely.<br>
+e.g. `[t/TAG]…​`lets you add any number of tags like `t/friend`, `t/friend t/family`, etc., or you can skip the tags altogether.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* You can enter parameters in any order.<br>
+  e.g. If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+*  Commands that do not require parameters (like `help`, `list`, `exit` and `clear`) will ignore anything extra you type.<br>
+  e.g. If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Sometimes, the spaces around line-breaks may not copy correctly, which could cause issues when you paste them into
+the app.
 </box>
 
 ### Viewing help : `help`
@@ -377,7 +381,7 @@ Format: `clear`
 
 **<ins>When in the main or inspect window**
 
-Clears all deliveries from the delivery list of a contact.
+`clear` does not work in the inspect window.
 
 ### Exiting the program : `exit`
 **<ins>When in the main or inspect window**
@@ -392,13 +396,15 @@ LogiLink data is saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-LogiLink data is saved automatically as a JSON file `[JAR file location]/data/LogiLink.json`. Advanced users are welcome to update data directly by editing that data file.
+LogiLink automatically saves your data as a JSON file `[JAR file location]/data/LogiLink.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, LogiLink will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the LogiLink to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, LogiLink will erase all data and start with an empty data file on the next launch. To avoid losing your information, we recommended creating a backup of the file before making
+any changes.<br>
+
+Certain changes you make to the file could cause LogiLink to behave unexpectedly (e.g., entering an invalid value). So, only edit the data file if you are confident you can do so correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -412,8 +418,9 @@ Furthermore, certain edits can cause the LogiLink to behave in unexpected ways (
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **When using multiple screens**
+ - If you are using multiple screens and move the app to a secondary screen, then later switch to using only the primary screen, the app might open off-screen. 
+ - To fix this, simply delete the `preferences.json` file created by the app, then restart the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
