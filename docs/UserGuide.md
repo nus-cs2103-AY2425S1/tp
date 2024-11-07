@@ -8,23 +8,23 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 
 ## Learn About Commands Supported By VolunSync
 1. [Command Format Guidelines](#command-format-guidelines)
-1. [General Commands](#general-commands)
+2. [General Commands](#general-commands)
    1. [Viewing help](#viewing-help--help)
-   1. [Listing all volunteers and events](#listing-all-volunteers-and-events--list)
-   1. [Export database to a CSV file](#export-database-to-a-csv-file--export)
-   1. [Exiting the program](#exiting-the-program--exit)
-1. [Volunteer-related Commands](#volunteer-related-commands)
+   2. [Listing all volunteers and events](#listing-all-volunteers-and-events--list)
+   3. [Export database to a CSV file](#export-database-to-a-csv-file--export)
+   4. [Exiting the program](#exiting-the-program--exit)
+3. [Volunteer-related Commands](#volunteer-related-commands)
    1. [Adding a volunteer](#adding-a-volunteer-v-new)
-   1. [Finding volunteers by name](#finding-volunteers-by-name--v-find)
-   1. [Deleting a volunteer](#deleting-a-volunteer--v-del)
-   1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)
-   1. [Unassigning a volunteer from an event](#removing-a-volunteer-from-an-event-unassign)
-1. [Event-related Commands](#event-related-commands)
+   2. [Finding volunteers by name](#finding-volunteers-by-name--v-find)
+   3. [Deleting a volunteer](#deleting-a-volunteer--v-del)
+   4. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)
+   5. [Unassigning a volunteer from an event](#removing-a-volunteer-from-an-event-unassign)
+4. [Event-related Commands](#event-related-commands)
    1. [Adding an event](#adding-an-event-e-new)
-   1. [Finding events by name](#finding-events-by-name--e-find)
-   1. [Deleting an event](#deleting-an-event--e-del-)
-   1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
-1. [Command Summary](#command-summary)
+   2. [Finding events by name](#finding-events-by-name--e-find)
+   3. [Deleting an event](#deleting-an-event--e-del-)
+   4. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
+5. [Command Summary](#command-summary)
 
 ## Other Resources
 1. [FAQ](#faq)
@@ -35,7 +35,7 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 
 ## Quick start
 
-:exclamation:Ensure you have Java `17` or above installed in your Computer.
+:exclamation: Ensure you have Java `17` or above installed in your Computer.
 
 <div class="alert alert-primary">
   <p>:question: What is my Java's version?</p>
@@ -55,19 +55,19 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your VolunSync application.
+2. Copy the file to the folder you want to use as the _home folder_ for your VolunSync application.
 
-1. Open your computer's command terminal:
+3. Open your computer's command terminal:
     - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
     - On Mac/Linux: Open the Terminal from your Applications.
-1. In the terminal, type `cd` followed by the path to the folder with the .jar file (e.g. `C:/Users/Your_Name/Your_Folder`), then run the following command:
+4. In the terminal, type `cd` followed by the path to the folder with the .jar file (e.g. `C:/Users/Your_Name/Your_Folder`), then run the following command:
     `java -jar NAME_OF_JAR_FILE`.
     For example, `java -jar volunsync-v1.3.jar`.
 
-1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
+5. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
    ![Ui](images/VolunSyncUi.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
    Some example commands you can try:
 
     * `list` : Lists all volunteers and events in the VolunSync database.
@@ -82,7 +82,7 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 
     * `exit` : Exits the app.
 
-1. Refer to the [Command Format](#command-format) below for details of each command.
+7. Refer to the [Command Format](#command-format) below for details of each command.
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -239,6 +239,46 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
+### Adding available dates to a volunteer: `/v free`
+
+Adds available dates to the volunteer with the specified `VOLUNTEER_INDEX`.
+
+Format: `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
+
+* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Date **must be in yyyy-MM-dd** 2024-11-28
+* Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
+
+Examples:
+* `/v free i/1 d/2024-11-28, 2024-11-29` adds 2024-11-28 and 2024-11-29 as available dates to the first volunteer on the volunteer list.
+
+![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Removing available dates from a volunteer: `/v unfree`
+
+Removes available dates from the volunteer with the specified `VOLUNTEER_INDEX`.
+
+Format: `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
+
+* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Date **must be in yyyy-MM-dd** 2024-11-28
+* Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
+
+Examples:
+* `/v unfree i/1 d/2024-11-28, 2024-11-29` removes 2024-11-28 and 2024-11-29 as available dates from the first volunteer on the volunteer list.
+
+![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
 ### Assigning a volunteer to event: `assign`
 
 Adds a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
@@ -250,6 +290,10 @@ Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
 Examples:
 * `assign v/1 e/2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Volunteers who not available on the day of the event or are assigned to another event happening at the same time cannot be assigned.
+</div>
 
 ![Assign Volunteer Demo](images/commandDemo/AssignDemo.png)
 
@@ -375,6 +419,29 @@ Examples:
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
+
+<div style="page-break-after: always;"></div>
+
+### Filtering volunteers by availability for an event: `/e filter`
+
+Filters the volunteer list to only shows volunteers who can be assigned to the event specified by `INDEX`
+After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers as per normal.
+
+Format: `/e filter INDEX`
+
+* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `/e filter 1` returns volunteers available to be assigned to the first event on the event list.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Volunteers who are already assigned to the specified event, not available on the day of the event or are assigned to another event happening at the same time will not be shown.
+</div>
+
+![Finding Events](images/commandDemo/FindEventDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 <div style="page-break-after: always;"></div>
 
