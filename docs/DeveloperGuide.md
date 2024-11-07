@@ -291,7 +291,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                 | add an appointment of a patient                                      | view the appointment activity of a patient                                                |
 | `* *`    | user                 | edit the information of a patient                                    | update a patient's condition and contact details if there are changes                     |
 | `* *`    | user                 | add notes to a patient                                               | be reminded of important updates, observations or instructions related to their care      |
-| `* *`    | user                 | export a patient's information as a file (eg. PDF, CSV)              | store or share the information externally, especially for offline access                  |
 | `* *`    | user                 | log the patient's treatment progress over time                       | understand how a patient is responding to his/her respective treatment meth               |
 | `* *`    | user                 | edit the appointment of a patient                                    | reschedule an appointment for a patient easily                                            |
 | `* *`    | user                 | view appointments in the form of a schedule                          | easily see all appointments on a specific day                                             |
@@ -300,6 +299,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                 | sort list of patients                                                | view patient's details based on specified criteria                                        |
 | `* *`    | user                 | filter patients based on medical condition                           | view patients based on certain conditions or severity                                     |
 | `* *`    | user                 | see a popup alert on the day of a patient's appointment              | remind myself and prepare for a patient's appointment if needed                           |
+| `* `     | user                 | export a patient's information as a file (eg. PDF, CSV)              | store or share the information externally, especially for offline access                  |
 | `*`      | CLI experienced user | have access to command completion features                           | complete tasks faster without typing commands fully                                       |
 | `*`      | CLI experienced user | customize command shortcuts                                          | access these commands quickly and more comfortably                                        |
 | `*`      | user                 | import contact details from external sources                         | quickly populate the list without manually adding each patient                            |
@@ -314,10 +314,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new person.
-2.  The system prompts the user to enter the person's details (name, phone number, email, address).
-3.  User provides the required details.
-4.  The system adds the person to the database.
+1.  User enters appropriate command keyword to add a person.
+2.  User enters the person's details (name, phone number, email, address, etc.) with the appropriate prefixes (n/, p/, e/, etc.).
+3.  The system adds the person to the database.
+4.  The system shows a success message.
 
     Use case ends.
 
@@ -329,9 +329,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3a. User enters invalid information.
+* 2b. User enters invalid information.
 
-    * 3a1. The system shows an error message indicating invalid input.
+    * 2b1. The system shows an error message indicating invalid input.
 
       Use case resumes at step 2.
 
@@ -341,26 +341,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons.
-2.  The system displays a list of persons.
-3.  User requests to edit a specific person's information.
-4.  The system prompts the user to enter updated information.
-5.  User provides the updated details.
-6.  The system updates the person's information.
+1. User enters appropriate command keyword to edit a person.
+2. User enters the NRIC of the person to be edited.
+3. User enters updated details for the person with the appropriate prefixes.
+4. The system updates the person's information.
+5. The system shows a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given NRIC is invalid.
 
-    Use case ends.
+    * 2a1. The system shows an error message.
 
-* 3a. The given index is invalid.
-
-    * 3a1. The system shows an error message.
-
-      Use case resumes at step 2.
+      Use case ends.
 
 ---
 
@@ -368,20 +363,74 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add an appointment for a specific person.
-2.  The system prompts the user to enter appointment details (date, time, description).
+1.  User enters appropriate command keyword to add appointment information to a person.
+2.  User enters the NRIC of the person for whom the appointment is being added.
 3.  User provides the appointment details.
 4.  The system adds the appointment information.
+5.  The system shows a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. User provides invalid appointment details (e.g., invalid date/time format).
+* 2a. The given NRIC is invalid.
 
-    * 2a1. The system shows an error message indicating invalid input.
+    * 2a1. The system shows an error message that no person with the given NRIC is found.
 
-      Use case resumes at step 2.
+      Use case ends.
+
+* 3a. User provides invalid appointment details (e.g., invalid date/time format).
+
+    * 3a1. The system shows an error message indicating invalid input.
+
+      Use case ends.
+
+---
+
+### **Use case: Add a remark to a patient's profile**
+
+**MSS**
+
+1.  User enters appropriate command keyword to add a remark to a patient's profile.
+2.  User enters the NRIC of the patient.
+3.  User provides the remark.
+4.  The system adds the remark to the patient's profile.
+5.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. The system shows an error message that no person with the given NRIC is found.
+
+      Use case ends.
+* 3a. User provides an empty remark.
+
+    * 3a1. The system shows an error message indicating that the remark cannot be empty.
+
+      Use case ends.
+
+---
+
+### **Use case: Search for a patient by name**
+
+**MSS**
+
+1.  User enters appropriate command keyword to search for a patient by name.
+2.  User enters the name of a patient.
+3.  The system displays all patients with a name that matches with the user's input.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given name does not match any patient.
+
+    * 2a1. The system shows an empty list.
+
+      Use case ends.
 
 ---
 
@@ -389,8 +438,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to display a list of patients.
+1.  User enters appropriate command keyword to request a list of patients.
 2.  The system displays a list of patients with relevant information (name, contact details, appointments).
+3.  The system shows a success message.
 
     Use case ends.
 
@@ -400,16 +450,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+### **Use case: Display a list of patients in a schedule by appointment dates**
+
+**MSS**
+
+1.  User enters appropriate command keyword to request a list of patients by appointment dates.
+2.  The system displays a list of patients with relevant information (name, contact details, appointments) sorted by appointment dates.
+3.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+* 2b. There are no appointments scheduled.
+
+    Use case ends.
+
+---
+
+### **Use case: Log information to a patient's profile**
+
+**MSS**
+
+1. User enters appropriate command keyword to log information to a patient's profile.
+2. User enters the NRIC of the patient.
+3. User provides the date, time and information to be logged.
+4. The system logs the information to the patient's profile.
+5. The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. The system shows an error message that no person with given NRIC is found.
+
+      Use case ends.
+  
+* 3a. User provides invalid information (e.g., invalid date/time format, empty log message).
+
+    * 3a1. The system shows an error message indicating invalid input.
+
+      Use case ends.
+
 ---
 
 ### **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User enters appropriate command keyword to delete a person.
+2.  User enters the NRIC of the person to be deleted.
+3.  The system deletes the person.
 
     Use case ends.
 
@@ -419,12 +515,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given NRIC is invalid.
 
     * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
+---
+
+### **Use case: View a patient's full information**
+
+**MSS**
+
+1.  User enters appropriate command keyword to view a patient's full information.
+2.  User enters the NRIC of the patient.
+3.  The system opens a new window displaying the patient's full information.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. The system shows an error message that no person with the given NRIC is found.
+
+      Use case ends.
+
+---
+
+### **Use case: Viewing the help page**
+
+**MSS**
+
+1.  User enters appropriate command keyword to view the help page.
+2.  The system opens a new window displaying a list of available commands and their descriptions.
+
+    Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
@@ -466,16 +594,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -483,16 +611,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete S1234567A`<br>
+   2. Test case: `delete S1234567A`<br>
       Expected: Patient with NRIC S1234567A is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is not an NRIC)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is not an NRIC)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
