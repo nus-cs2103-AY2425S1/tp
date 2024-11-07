@@ -64,8 +64,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2020-12-31 12:00pm"; //
-    // invalid date format - 24 hours used
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2020-12-31 12:00pm"; // invalid date format - 24 hours used
+    public static final String INVALID_DATE_FUTURE = " " + PREFIX_DATE + "2060-12-31 12:00"; //
     public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " "; // empty string
     // not allowed for remarks
 
