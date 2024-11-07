@@ -60,8 +60,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `statistics`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `statistics`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `statistics 123`, it will be interpreted as `statistics`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -131,14 +131,14 @@ Examples:
 
 Finds persons that match the specified filters.
 
-Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY] [income/INCOME]`
+Format: `find [n/StartOfName]... [a/PartOfAddress]... [pri/PRIORITY]... [income/INCOME]...`
 
 * The search is case-insensitive. e.g `n/alice` will match `Alice`.
+* At least one filter must be specified (i.e. no empty `find` command).
 * For names, only those that start with the given filter will be matched e.g. `find n/A` returns all persons whose first name starts with A only. 
 * For addresses, those that contain the part of the address given are returned e.g. `find a/clementi` returns all persons who stay at clementi only.
 * For priorities, exact priorities must be specified to filter accurately e.g. `find pri/high` returns all persons with high priority only.
 * For income, those with income less than or equal to the specified float value are listed e.g. `find income/2000` returns all persons with income less than or equal to 2000.00 only.
-* At least one filter must be specified.
 * To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. `find n/alex n/david n/bobby`
 * Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but have high priority. 
 
@@ -376,7 +376,8 @@ Action           | Format, Examples
 **Clear**        | `clear`
 **Delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`
 **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**         | `find [n/START_OF_NAME] [a/PART_OF_ADDRESS]`<br> e.g., `find James Jake`
+**Sort**         | `sort `
 **Get**          | `get PARAMETERS`<br> e.g.,`get email phone`
 **Undo**         | `undo`
 **List**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`
