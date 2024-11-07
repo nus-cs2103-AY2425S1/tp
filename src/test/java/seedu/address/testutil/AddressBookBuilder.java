@@ -16,10 +16,6 @@ public class AddressBookBuilder {
         addressBook = new AddressBook();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
-    }
-
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
