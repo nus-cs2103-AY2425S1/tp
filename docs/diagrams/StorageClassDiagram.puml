@@ -40,7 +40,7 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedSupplier
 JsonSerializableAddressBook --> "*" JsonAdaptedDelivery
-JsonAdaptedDelivery --> "1" JsonAdaptedSupplier
+JsonAdaptedDelivery -left-> "1" JsonAdaptedSupplier
 JsonAdaptedSupplier --> "*" JsonAdaptedTag
 
 @enduml

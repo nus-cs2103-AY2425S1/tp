@@ -53,8 +53,8 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list` and `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -88,7 +88,7 @@ Action     | Format, Examples
 ### General Commands
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**List**   | `list`
+**List**   | `list -a`
 **Help**   | `help`
 **Exit**   | `exit`
 
@@ -104,11 +104,18 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 
-### Viewing all deliveries and suppliers : `list`
+### Viewing all deliveries and suppliers : `list -a`
 
 Lists all suppliers and deliveries in the VendorVault
 
-Format: `list`
+Format: `list -a`
+
+<box type="warning" seamless>
+
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -a
+</box>
 
 ---
 
@@ -125,7 +132,7 @@ Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]�
 **Tip:** A supplier can have any number of tags and products (including 0)
 </box>
 
-<box type="tip" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least on space between `add` and `-s` is compulsory
@@ -149,6 +156,14 @@ Expected output:
 Shows a list of all suppliers in the VendorVault. (The delivery list will not be affected)
 
 Format: `list -s`
+
+
+<box type="warning" seamless>
+
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -s
+  </box>
 
 ### Deleting a supplier : `delete -s`
 
@@ -192,13 +207,19 @@ A success message will be displayed if the supplier is successfully marked as ac
 The `find -s` command is used to find a supplier in VendorVault. 
 This helps you find suppliers based on keyword search.
 
-Format: `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
+Format: `find -s n/KEYWORD_SUPPLIER_NAME com/KEYWORD_SUPPLIER_COMPANY pro/<KEYWORD_SUPPLIER_PRODUCT>`
 
-<box type="tip" seamless>
+Parameters:
+
+- `n/KEYWORD_SUPPLIER_NAME`: This will check if the Supplier's name contains the given keyword
+- `on/KEYWORD_SUPPLIER_COMPANYE`: This will check if the Supplier's company contains the given keyword
+- `pro/KEYWORD_SUPPLIER_PRODUCT`: This will check if the Supplier's product(s) contains in the given keyword
+
+<box type="warning" seamless>
 
 **Warnings**:
-- At least one prefix and parameter must be given
-- No duplicate prefix can be used
+- At least one non-empty parameter must be given
+- No duplicate parameter can be used
 - Find result(s) will contain/satisfy all the given parameters
 - Find feature is case-insensitive
 </box>
@@ -258,7 +279,7 @@ Parameters:
 **Tip:** Day and month of date must be in double digits!
 </box>
 
-<box type="tip" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - A spacing between `add` and `-d` is compulsory
@@ -278,6 +299,13 @@ Parameters:
 Shows a list of all supplier in the VendorVault. (The supplier list will not be affected)
 
 Format: `list -d`
+
+
+<box type="warning" seamless>
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -a
+</box>
 
 ### Marking a delivery : `mark -d`
 
