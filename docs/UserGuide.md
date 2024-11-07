@@ -191,7 +191,8 @@ Note: All filters are optional, and all goods will be shown if no filters are pr
 ### Export Goods Data to CSV: `export`
 
 Exports the currently displayed goods in a new CSV file. Should be used after filters have been applied to obtain a clean set of data for any external usage.
-- This command is dependant on the 'viewgoods' command.
+- This command is dependent on the `viewgoods` command.
+- The new CSV file will be saved as `[JAR file location]/data/filteredGoods.csv`
 
 Format: `export`
 
@@ -201,7 +202,7 @@ Supply Central data are saved in the hard disk automatically after any command t
 
 ### Editing the data file
 
-SupplyCentral supplier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SupplyCentral supplier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json` and CSV file `[JAR file location]/data/goods.csv`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SupplyCentral will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
