@@ -14,7 +14,7 @@ import seedu.address.model.person.Remark;
 
 
 /**
- * Adds notes to a Patient's remarks
+ * Adds remarks to a Patient's remarks
  */
 public class AddRemarksCommand extends Command {
 
@@ -55,17 +55,10 @@ public class AddRemarksCommand extends Command {
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Person patientToAddRemarks = model.getFilteredPatientById(allPersons, patientId);
-        if (patientToAddRemarks == null) {
-            throw new CommandException(MESSAGE_ADD_REMARKS_FAILURE);
-        }
-        if (patientToAddRemarks.getRole().equals("DOCTOR")) {
-            throw new CommandException(MESSAGE_WRONG_ROLE);
-        }
-        Person editedPatient = new Person(patientToAddRemarks.getName(),
-                patientToAddRemarks.getId(), patientToAddRemarks.getRole(), patientToAddRemarks.getPhone(),
-                patientToAddRemarks.getEmail(), patientToAddRemarks.getAddress(),
-                patientToAddRemarks.addRemarks(additionalRemarks.getValue()),
-                patientToAddRemarks.getAppointments(), patientToAddRemarks.getTags());
+
+        checkForCorrectPatient(patientToAddRemarks);
+
+        Person editedPatient = createUpdatedRemarksPatient(patientToAddRemarks);
 
         model.setPerson(patientToAddRemarks, editedPatient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -73,6 +66,29 @@ public class AddRemarksCommand extends Command {
         return new CommandResult(String.format(MESSAGE_ADD_REMARKS_SUCCESS,
                 additionalRemarks, patientId
         ));
+    }
+
+    /**
+     * Checks for valid patient input
+     */
+    public void checkForCorrectPatient(Person patient) throws CommandException {
+        if (patient == null) {
+            throw new CommandException(MESSAGE_ADD_REMARKS_FAILURE);
+        }
+        if (patient.getRole().equals("DOCTOR")) {
+            throw new CommandException(MESSAGE_WRONG_ROLE);
+        }
+    }
+
+    /**
+     * Creates a copy of the original patient with remarks being updated
+     */
+    public Person createUpdatedRemarksPatient(Person patientToAddRemarks) {
+        return new Person(patientToAddRemarks.getName(),
+                patientToAddRemarks.getId(), patientToAddRemarks.getRole(), patientToAddRemarks.getPhone(),
+                patientToAddRemarks.getEmail(), patientToAddRemarks.getAddress(),
+                patientToAddRemarks.addRemarks(additionalRemarks.getValue()),
+                patientToAddRemarks.getAppointments(), patientToAddRemarks.getTags());
     }
     @Override
     public boolean equals(Object other) {

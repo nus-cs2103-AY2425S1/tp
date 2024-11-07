@@ -54,7 +54,7 @@ public class Person implements Appointmentable {
     }
 
     /**
-     * Creates a patient with a fixed id
+     * Creates a patient with a fixed ID
      */
     public Person(Name name, int id, String role, Phone phone, Email email,
                   Address address, Remark remark, Set<Tag> tags) {
@@ -257,18 +257,6 @@ public class Person implements Appointmentable {
 
         return apts.get(0);
 
-    }
-
-    public Appointment getAppointment(LocalDateTime dateTime, int patientId) throws CommandException {
-        requireAllNonNull(dateTime, patientId);
-        List<Appointment> apts = appointments.stream()
-                .filter(apt -> apt.getDateTime().toString().equals(dateTime.toString()))
-                .filter(apt -> apt.getPatientId() == patientId)
-                .collect(Collectors.toList());
-        if (apts.isEmpty() || apts.size() == 0) {
-            throw new CommandException(Messages.MESSAGE_NO_APPOINTMENTS_FOUND);
-        }
-        return apts.get(0);
     }
 
     public String getOneHistory(LocalDateTime dateTime, int patientId) {
