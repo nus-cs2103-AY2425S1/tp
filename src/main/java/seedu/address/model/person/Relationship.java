@@ -28,7 +28,12 @@ public class Relationship {
         requireNonNull(relationship);
         checkArgument(isAlphanumericRelationship(relationship), ALPHANUMERIC_CONSTRAINTS);
         checkArgument(isValidRelationship(relationship), RELATIONSHIP_TYPE_CONSTRAINTS);
-        this.relationship = relationship;
+        this.relationship = getRelationshipString(relationship);
+    }
+
+    private static String getRelationshipString(String relationship) {
+        assert isValidRelationship(relationship);
+        return relationship.substring(0, 1).toUpperCase() + relationship.substring(1).toLowerCase();
     }
 
     /**

@@ -46,7 +46,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_EMERGENCY_CONTACT_NAME + "Beatrice Bean "
             + PREFIX_EMERGENCY_CONTACT_PHONE + "91324856 "
-            + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "Parent "
+            + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "Son "
             + PREFIX_DOC_NAME + "Tan Wei Ming "
             + PREFIX_DOC_PHONE + "62345678 "
             + PREFIX_DOC_EMAIL + "tanweiming@gmail.com "

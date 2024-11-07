@@ -42,6 +42,7 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
 
     static {
+
         // Initialize command syntax map
         commandSyntaxMap.put("add", "add n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME "
                 + "ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP "
@@ -58,10 +59,16 @@ public class CommandBox extends UiPart<Region> {
         commandSyntaxMap.put("finddoc", "finddoc KEYWORD [MORE_KEYWORDS]");
         commandSyntaxMap.put("help", "help");
         commandSyntaxMap.put("list", "list");
+        commandSyntaxMap.put("deletearchive", "deletearchive FILE_NAME");
         commandSyntaxMap.put("listArchives", "listArchives");
         commandSyntaxMap.put("loadArchive", "loadArchive FILE_NAME");
         commandSyntaxMap.put("redo", "redo");
+<<<<<<< HEAD
         commandSyntaxMap.put("undo", "undo");
+=======
+        commandSyntaxMap.put("undo", "undo");     
+
+>>>>>>> 27d774278f718a76ef854885e749c5adbe60808f
     }
     
     /**
