@@ -254,6 +254,7 @@ table {
   }
   th, td {
     padding: ($spacing-unit / 3) ($spacing-unit / 2);
+    width: 25%
   }
   th {
     background-color: $table-header-bg-color;
