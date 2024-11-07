@@ -85,8 +85,6 @@ public class Meetings {
      */
     public void addMeeting(Meeting toAdd) {
         requireNonNull(toAdd);
-        System.out.println(internalList);
-        System.out.println(toAdd);
         if (isClash(toAdd)) {
             throw new TimeClashException();
         }
