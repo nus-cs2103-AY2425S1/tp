@@ -14,15 +14,15 @@ Tuteez is a **desktop address book app** designed specifically for **private tut
    * [Quick start](#quick-start)
    * [Features](#features)
       + [Viewing help : `help`](#viewing-help-help)
-      + [Adding a person: `add`](#adding-a-person-add)
-      + [Listing all persons : `list`](#listing-all-persons-list)
-      + [Editing a person : `edit`](#editing-a-person-edit)
+      + [Adding a student: `add`](#adding-a-person-add)
+      + [Listing all students : `list`](#listing-all-persons-list)
+      + [Editing a student : `edit`](#editing-a-person-edit)
       + [Adding a Remark: `addremark` or `addrmk`](#adding-a-remark-addremark-or-addrmk)
       + [Deleting a Remark: `deleteremark` or `delrmk`](#deleting-a-remark-deleteremark-or-delrmk)
       + [Adding Lessons: `addlesson` or `addlsn`](#adding-lessons-addlesson-or-addlsn)
       + [Deleting Lessons: `deletelesson` or `dellsn`](#deleting-lessons-deletelesson-or-dellsn)
-      + [Locating persons by name: `find`](#locating-persons-by-name-find)
-      + [Deleting a person : `delete`](#deleting-a-person-delete)
+      + [Locating students by name: `find`](#locating-persons-by-name-find)
+      + [Deleting a student : `delete`](#deleting-a-person-delete)
       + [Displaying Student Information: `display`](#displaying-student-information-display)
       + [Clearing all entries : `clear`](#clearing-all-entries-clear)
       + [Exiting the program : `exit`](#exiting-the-program-exit)
@@ -81,6 +81,78 @@ Tuteez is a **desktop address book app** designed specifically for **private tut
 * Provides full view of students information when you call display
 * This is where you can see all your student's lesson details and the remarks you have left them
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Beginner's Tutorial for Tuteez
+
+If you're a new user, fret not! Simply follow this beginner-friendly tutorial that will walk you through your first
+steps with the application, which will allow you to get comfortable with managing your student contacts effectively.
+
+### Before You Begin
+Make sure you have:
+- Successfully installed Tuteez and launched the application (Refer to the [Quick Start](#quick-start) section if you have not)
+
+### Starting with a Clean Slate
+Let us start by clearing the sample data that comes with the application. Type `clear` in the Command Box and press <kbd>Enter</kbd>.
+
+You should see a message indicating that all entries have been cleared, and the list of students should now be empty.
+
+If everything went well, you'll be greeted by this view:
+![clear_command](images/clear_command_tutorial.png)
+
+### Adding Your First Student
+Let's say you already have a student named John Doe, and you wish to add his details into Tuteez.
+
+Let's try entering the following command: `add n/John Doe p/98765432 e/johnd@example.com a/Jurong West`
+
+This means that you've added a student named `John Doe`, with the phone number `98765432`, email `johnd@example.com`,
+and address `Jurong West`.
+
+If everything went well, you'll be greeted by this view:
+![add_command](images/add_command_tutorial.png)
+
+> :information_source: For more details on the `add` command, please refer to the [Add Command](#adding-a-student-add) section.
+
+### Adding a Lesson to your Student's details
+Now, you have finalized a lesson schedule with John Doe, and you wish to add it to his details.
+
+Let's try entering the following command: `addlesson 1 l/Monday 0900-1100`
+
+This means that you've added a lesson for `John Doe` on `Monday` from `9 am to 11 am`.
+
+If everything went well, you'll be greeted by this view:
+![addlesson_command](images/addlesson_command_tutorial.png)
+
+### Editing Student Details
+You've realized that you've made a mistake in John Doe's email address, and wish to edit it.
+
+Let's try entering the following command: `edit 1 e/johndoe@gmail.com`
+
+John's email address should now be updated to `johndoe@gmail.com` and the updated email address should be reflected in Tuteez.
+
+If everything went well, you'll be greeted by this view:
+![edit_command](images/edit_command_tutorial.png)
+
+> :information_source: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student--edit) section.
+
+### Deleting a Student
+John Doe has decided to stop engaging your tuition services, and you wish to remove him from your list of students.
+
+Let's try entering the following command: `delete John Doe`
+
+John Doe should now be removed from your list of students.
+
+If everything went well, you'll be greeted by this view:
+![delete_command](images/delete_command_tutorial.png)
+
+### Wrapping Up
+Congratulations! 😁 You've successfully completed the beginner's tutorial for Tuteez.
+You're now ready to move on to more advanced features and commands that Tuteez has to offer.
+Simply visit the [Features](#features) section to learn more about the various commands available to you.
+
+[_Go Back to the Top_](#table-of-contents)
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <box type="info" seamless>
@@ -114,7 +186,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a student: `add`
 
 Adds a student to Tuteez.
 
@@ -135,19 +207,19 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Math l/ monday 0900-1100`
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
 Shows a list of all students in Tuteez.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a student : `edit`
 
 Edits an existing student in Tuteez.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing **tags**, **all previous values will be replaced** by the new ones entered.
@@ -226,7 +298,7 @@ Examples:
 **Tip:** You can delete multiple lessons at once by specifying different lesson indices.
 </box>
 
-### Locating persons by name: `find`
+### Locating students by name: `find`
 
 Finds students whose names, addresses, tags or lessons contain any of the given keywords.
 
@@ -247,7 +319,7 @@ Examples:
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
 Deletes the specified student from Tuteez.
 
