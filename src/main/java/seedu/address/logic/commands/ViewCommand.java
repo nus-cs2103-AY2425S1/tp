@@ -61,13 +61,17 @@ public class ViewCommand extends Command {
         }
 
         Person personToView = lastShownList.get(index.getZeroBased());
-        if (contactDisplay == null) {
-            testContactDisplay.updateContactDetails(personToView);
-        } else {
-            contactDisplay.updateContactDetails(personToView);
-        }
+        updateContactDisplay(personToView);
 
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)),
         personToView);
+    }
+
+    private void updateContactDisplay(Person person) {
+        if (contactDisplay != null) {
+            contactDisplay.updateContactDetails(person);
+        } else if (testContactDisplay != null) {
+            testContactDisplay.updateContactDetails(person);
+        }
     }
 }
