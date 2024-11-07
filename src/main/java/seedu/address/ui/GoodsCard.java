@@ -3,7 +3,9 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 
 /**
@@ -58,7 +60,8 @@ public class GoodsCard extends UiPart<Region> {
         arrivalDate.setText("Arriving on " + goodsReceipt.getArrivalDate().getReadableDateTimeString());
         isDelivered.setText("Delivery Status: ");
         isDeliveredContent.setText(deliveryStatus);
-        setStyle(isDeliveredContent, goodsReceipt.isDelivered() ? "cell_small_label_success" : "cell_small_label_warning");
+        setStyle(isDeliveredContent, goodsReceipt.isDelivered()
+                ? "cell_small_label_success" : "cell_small_label_warning");
         quantity.setText("Quantity: " + String.valueOf(goodsReceipt.getQuantity()));
         price.setText("Total Cost: " + String.valueOf(goodsReceipt.getPriceTotal()));
     }
