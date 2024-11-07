@@ -59,8 +59,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: \n %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in VolunTier.";
-    public static final String MESSAGE_PERSON_HAS_LESSON = "This person has an existing lesson for the subject you’re " +
-            "about to edit in the address book. Please delete the lesson before proceeding with the subject edit.";
+    public static final String MESSAGE_PERSON_HAS_LESSON = "This person has an existing lesson for the subject you’re "
+            + "about to edit in the address book. Please delete the lesson before proceeding with the subject edit.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
