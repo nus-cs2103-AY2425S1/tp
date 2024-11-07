@@ -186,9 +186,7 @@ Policies are not mentioned in this section as there is a dedicated section for m
 Adds a client to the address book.
 
 Format: 
-`
-add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<HOME ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT TIME>
-`
+`add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<HOME ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT TIME>`
 
 - **Parameters**:
     * Birthday should be in `yyyy-mm-dd`
@@ -207,9 +205,7 @@ Examples:
     * Home address: John street, block 123, #01-01
     * Client birthday: 2000-12-12
     * Client next appointment: 2024-12-12 12:00
-    ```
-    add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00
-    ```
+    `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
 
 * The command below adds a new client to the client list with the following information:
     * Client name: Betsy Crowe
@@ -218,9 +214,7 @@ Examples:
     * Home address: Newgate Prison
     * Client birthday: 2001-10-10
     * Client next appointment: 2024-12-01 09:00
-    ```
-    add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00
-    ```
+    `add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
     ![result for 'find alex david'](images/addUI.png)
 
 ---
@@ -265,9 +259,7 @@ Format: `list`
 Edits an existing client in the address book.
 
 Format: 
-`
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAY_DATE amt/AMOUNT]…​
-`
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAY_DATE amt/AMOUNT]…​`
 
 - **Parameters**:
 
@@ -310,9 +302,7 @@ Examples:
 Organizes your client list based on different criteria for easier management and viewing.
 
 Format: 
-`
-sort <CRITERIA> <ORDER>
-`
+`sort <CRITERIA> <ORDER>`
 
 - **Parameters**:
     - `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
@@ -381,9 +371,7 @@ The search function section contain commands that allows you to search client-sp
 Finds clients whose names contain any of the given keywords.
 
 Format: 
-`
-find <KEYWORD> [MORE_KEYWORDS]
-`
+`find <KEYWORD> [MORE_KEYWORDS]`
 
 - **Parameters**:
   * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -414,13 +402,9 @@ Finds clients with appointments on a specific date or within a date range.
 Format: 
 
 Single datetime search:
-`
-search a/ <DATETIME>
-`  
+`search a/ <DATETIME>`  
 Range datetime search:
-`
-search a/ <START DATETIME> to <END DATETIME>
-`
+`search a/ <START DATETIME> to <END DATETIME>`
 - **Parameters**:
   - `DATETIME`: A specific date and time in `yyyy-mm-dd HH:mm` format.
   - `START DATETIME`: A specific start date and time in `yyyy-mm-dd HH:mm` format.
@@ -453,14 +437,10 @@ Finds clients who have birthdays on a specific date or within a date range.
 Format: 
 
 Single date search:
-`
-search b/ <DATE>
-`  
+`search b/ <DATE>`  
 
 Range date search:
-`
-search b/ <START DATE> to <END DATE>
-`
+`search b/ <START DATE> to <END DATE>`
 
 - **Parameters**:
   - `DATE`: A specific date in `yyyy-mm-dd` format.
@@ -493,9 +473,7 @@ Examples:
 Find clients who currently owns a certain policy.
 
 Format: 
-`
-search p/ <POLICY_NAME>
-`
+`search p/ <POLICY_NAME>`
 
 - **Parameters**:
   - `POLICY_NAME`: A specific policy name.
@@ -530,9 +508,7 @@ The policy management section contain commands that allows you to manage policy-
 Assign policy to a client.
 
 Format: 
-`
-assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> /paydate <INSURANCE DUE DATE> /amt <AMOUNT DUE>
-`
+`assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> /paydate <INSURANCE DUE DATE> /amt <AMOUNT DUE>`
 - **Parameters**:
     * `POLICY START DATE` and `POLICY END DATE` refer to the duration of the policy's coverage.
     * `POLICY START DATE` and `POLICY END DATE` must be in the format `yyyy-mm-dd`.
@@ -567,9 +543,7 @@ Example:
 Deletes the specified policy from the specified client using the index of the client and policy.
 
 Format: 
-`
-delete <INDEX> po/<POLICY_INDEX>
-`
+`delete <INDEX> po/<POLICY_INDEX>`
 Deletes the policy at the specified `POLICY_INDEX` of the client at the specified `INDEX`.
 
 
@@ -604,9 +578,7 @@ Examples:
 Marks a policy payment installment as paid for a client.
 
 Format: 
-`
-paid <INDEX> po/<POLICY_INDEX>
-`
+`paid <INDEX> po/<POLICY_INDEX>`
 - **Parameters**:
     - `INDEX`: The index of the client in the client list.
     - `POLICY_INDEX`: The index of the policy to be marked as paid.
