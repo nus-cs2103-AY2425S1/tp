@@ -91,9 +91,6 @@ public class CommandBox extends UiPart<Region> {
         });
     }
 
-    /**
-     * Handles text changes in the command box and updates suggestions dynamically.
-     */
     private void handleTextChanged(String input) {
         if (input.trim().isEmpty()) {
             suggestionLabel.setVisible(false);
@@ -103,22 +100,45 @@ public class CommandBox extends UiPart<Region> {
         String[] words = input.split("\\s+");
         String commandPrefix = words[0];
 
-        // Check if the command prefix matches any command in the commandSyntaxMap
-        for (String cmd : commandSyntaxMap.keySet()) {
-            if (cmd.startsWith(commandPrefix)) {
-                String fullSyntax = commandSyntaxMap.get(cmd);
-                suggestionLabel.setText(fullSyntax);
-                suggestionLabel.setVisible(true);
-                currentSuggestion = fullSyntax;
+        // Find the best matching command
+        String bestMatch = findBestMatchingCommand(commandPrefix);
 
-                if (cmd.equals(commandPrefix)) {
-                    processParameters(input, fullSyntax, words);
+        if (bestMatch != null) {
+            String fullSyntax = commandSyntaxMap.get(bestMatch);
+            suggestionLabel.setText(fullSyntax);
+            suggestionLabel.setVisible(true);
+            currentSuggestion = fullSyntax;
+
+            if (bestMatch.equals(commandPrefix)) {
+                processParameters(input, fullSyntax, words);
+            }
+        } else {
+            suggestionLabel.setVisible(false);
+        }
+    }
+
+    /**
+     * Finds the best matching command based on the given prefix.
+     * Prioritizes shorter matches first and only moves to longer commands
+     * when the prefix uniquely matches the longer command.
+     */
+    private String findBestMatchingCommand(String prefix) {
+        String bestMatch = null;
+
+        for (String cmd : commandSyntaxMap.keySet()) {
+            if (cmd.startsWith(prefix)) {
+                if (bestMatch == null || cmd.length() < bestMatch.length()) {
+                    bestMatch = cmd;
                 }
-                return;
+                // If the prefix fully matches the command, use the longer one
+                if (cmd.equals(prefix)) {
+                    return cmd;
+                }
             }
         }
-        suggestionLabel.setVisible(false);
+        return bestMatch;
     }
+
 
     private void processParameters(String input, String fullSyntax, String[] words) {
         StringBuilder consumedSyntax = new StringBuilder(words[0]);
