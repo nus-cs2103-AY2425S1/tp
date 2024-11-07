@@ -224,8 +224,9 @@ Listed below are the currently supported lesson commands.
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **[Schedule](#scheduling-a-regular-lesson-schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
-**[Cancel](#cancelling-a-regular-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
 **[Makeup](#scheduling-a-makeup-lesson-makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
+**[Cancel](#cancelling-a-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
+**[Uncancel](#uncancelling-a-cancelled-regular-lesson-uncancel)** |  `uncancel INDEX dt/DATE` <br> e.g. `uncancel 1 dt/14-10-2024`
 
 <br>
 
@@ -246,22 +247,6 @@ Example:
 
 <br>
 
-### Cancelling a regular lesson : `cancel`
-
-Cancels a regular lesson at a specific date for the specified student in the student directory.
-
-Format: `cancel INDEX dt/DATE st/START_TIME`
-
-* Cancels a regular lesson for the student at the specified `INDEX`.
-* Cancelled lessons are shared across students in the same group.
-* `DATE` must be written in the format `DD-MM-YYYY` for the command to parse the input properly.
-* `DATE` must fall on the student's regular lesson `DAY`, and `START_TIME` must match the student's lesson `START_TIME`.
-
-Example:
-* `cancel 1 dt/15-10-2024 st/16:00` Cancels a regular lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
-
-<br>
-
 ### Scheduling a makeup lesson : `makeup`
 
 Schedules a makeup lesson for the specified student in the student directory.
@@ -277,6 +262,37 @@ Examples:
 * `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
 
 <br>
+
+### Cancelling a lesson : `cancel`
+
+Cancels a lesson at a specific date and start time for the specified student in the student directory.
+
+Format: `cancel INDEX dt/DATE st/START_TIME`
+
+* Cancels a lesson for the student at the specified `INDEX`.
+* Cancelling a makeup lesson will remove it from the student's list of makeup lessons.
+* Cancelling a regular lesson adds it to a list of cancelled lessons. This is shared across students in the same group.
+* `DATE` must be written in the format `DD-MM-YYYY` for the command to parse the input properly.
+* `DATE` must match the student's lesson `DATE`, and `START_TIME` must match the student's lesson `START_TIME`.
+
+Example:
+* `cancel 1 dt/15-10-2024 st/16:00` Cancels a lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
+
+<br> 
+
+### Uncancelling a cancelled regular lesson : `uncancel`
+
+Uncancels a cancelled regular lesson at a specific date for the specified student in the student directory.
+
+Format: `uncancel INDEX dt/DATE`
+
+* Uncancels a regular lesson for the student at the specified `INDEX`.
+* Uncancelling a lesson removes it from the student's cancelled lesson list.
+* `DATE` must be written in the format `DD-MM-YYYY` for the command to parse the input properly.
+* `DATE` must match the student's cancelled lesson `DATE`.
+
+Example:
+* `uncancel 1 dt/20-10-2024` Uncancels a regular lesson on 20-10-2024 for the 1st student.
 
 ## General Commands
 
@@ -460,8 +476,9 @@ Action     | Format, Examples
 **[Assign](#assigning-piano-pieces-to-a-student-assign)** | `assign INDEX pn/PIECE_NAME...`<br> e.g.`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **[Unassign](#unassigning-piano-pieces-from-a-student-unassign)** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g. `unassign 1 pn/Moonlight Sonata pn/Canon in D`
 **[Schedule](#scheduling-a-regular-lesson-schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
-**[Cancel](#cancelling-a-regular-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
 **[Makeup](#scheduling-a-makeup-lesson-makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
+**[Cancel](#cancelling-a-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
+**[Uncancel](#uncancelling-a-cancelled-regular-lesson-uncancel)** |  `uncancel INDEX dt/DATE` <br> e.g. `uncancel 1 dt/14-10-2024`
 **[Help](#viewing-help-help)**   | `help`
 **[List](#listing-all-students-list)**   | `list`
 **[View](#viewing-the-schedule-view)**   | `view [dt/DATE]`<br> e.g. `view dt/01-10-2024`
