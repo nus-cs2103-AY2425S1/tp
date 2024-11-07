@@ -1,13 +1,11 @@
 package tahub.contacts.logic.parser.person;
 
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tahub.contacts.logic.commands.CommandTestUtil.COURSE_CODE_DESC;
 import static tahub.contacts.logic.commands.CommandTestUtil.MATRICULATION_NUMBER_DESC_BOB;
 import static tahub.contacts.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tahub.contacts.logic.commands.CommandTestUtil.VALID_MATRICULATION_NUMBER_BOB;
 import static tahub.contacts.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tahub.contacts.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static tahub.contacts.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
