@@ -104,6 +104,9 @@ Adds a customer to the address book.
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pc/666234`
 - `add n/Betsy Crowe t/Vegetarian e/betsycrowe@example.com a/Clementi Ave 5 #02-03 p/72345673 t/VIP pc/123123`
 
+![adding customer](images/add_customer.png)
+***Figure 2: Shows customer named Sarah being added***
+
 ---
 
 ### Listing all customers : `list`
@@ -111,6 +114,9 @@ Adds a customer to the address book.
 Shows a list of all customers in the address book.
 
 **Format:** `list`
+
+![list customers](images/list.png)
+***Figure 3: Shows all customers listed***
 
 ---
 
@@ -130,6 +136,9 @@ Edits an existing customer in the address book.
 **Examples:**
 - `edit 1 p/91234567 e/johndoe@example.com` — Edits the phone number and email address of the 1st person to `91234567` and `johndoe@example.com`, respectively.
 - `edit 2 n/Betsy Crower t/` — Edits the name of the 2nd person to `Betsy Crower` and clears all existing tags.
+
+![edit customers](images/edit_customer.png)
+***Figure 4: Shows customer details being edited***
 
 ---
 
@@ -153,7 +162,6 @@ Users can locate customers by entering the beginning letters (prefix) of their n
 - `find al` — Finds all customers with names starting with "al".
 - `find al ch` — Finds all customers with names starting with "al" and "ch".
 
-
 #### Search by Phone Number
 
 Users can search for customers by entering part or all of their phone number.
@@ -161,6 +169,9 @@ Users can search for customers by entering part or all of their phone number.
 **Examples:**
 - `find 9123` — Finds any customers with phone numbers containing "9123".
 - `find 98124572` — Finds any customers with the exact phone number "98124572".
+
+![find customers](images/find_name_and_number.png)
+***Figure 5: Shows multiple people found using prefix search and number***
 
 
 #### Search by Postal Code
@@ -182,6 +193,8 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 - `find S550 Bob` — Finds all customers with postal codes starting with "550" **or** the name "Bob".
 - `find S789123 Carl 97621010` — Finds all customers with postal code "789123" **or** name "Carl" **or** phone number "97621010".
 
+![find customers](images/find_name.png)
+***Figure 6: Shows multiple people found using prefix search***
 
 
 **Note:** The `find` command performs an `OR` search across the criteria, meaning that customers matching any of the provided keywords will be returned.
@@ -204,6 +217,9 @@ Deletes the specified customer from the address book.
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+![delete customers](images/delete_customer.png)
+***Figure 7: Shows customer being delete usign delete command***
+
 ---
 
 ### Deleting customers : `deletePC`
@@ -216,6 +232,11 @@ Format: `delete POSTALCODE`
 
 Examples:
 * `list` followed by `deletePC 560102` deletes all persons with postal code `560102` in the address book.
+
+![deletePC customers](images/delete_by_pc.png)
+***Figure 7: Shows multiple customers being delete using deletePC command***
+
+---
 
 ### Clearing all entries : `clear`
 
@@ -238,6 +259,9 @@ Adds an order to NomNomNotifier.
 **Examples:**
 - `order cake` — Adds an order called "cake" to NomNomNotifier.
 
+![order](images/order.png)
+***Figure 8: Shows new order being added***
+
 ---
 
 ### Deleting an order: `deleteOrder`
@@ -253,6 +277,9 @@ Deletes an order from NomNomNotifier.
 **Examples:**
 - `deleteOrder cake` — Deletes an order called "cake" from NomNomNotifier.
 
+![delete order](images/deleteOrder.png)
+***Figure 9: Shows order being deleted***
+
 ---
 
 ### Listing all orders: `listOrder`
@@ -260,6 +287,9 @@ Deletes an order from NomNomNotifier.
 Shows a list of all orders in NomNomNotifier.
 
 **Format:** `listOrder`
+
+![list order](images/listOrder.png)
+***Figure 10: Shows all orders being listed***
 
 ---
 
@@ -277,6 +307,9 @@ Adds an order history to a customer.
 **Examples:**
 - `put pizza n/Alex Yeoh` — Adds an order called "pizza" to a customer named "Alex Yeoh".
 
+![put order](images/put_order.png)
+***Figure 11: Shows order being associated with customer***
+
 ---
 
 ### Listing all order histories of a customer: `history`
@@ -287,7 +320,9 @@ Lists all order histories of a customer, including the time of each order.
 
 **Examples:**
 - `history Alex Yeoh` — Lists order histories of a customer named `Alex Yeoh`.
-  ![history command](images/historyCommandExample.png)
+
+![history](images/history.png)
+***Figure 12: Shows order history of John Doe***
 
 ---
 
@@ -307,6 +342,9 @@ Tag shortcuts allow you to create aliases for commonly used tags, saving you tim
     - `addShortCut al/vn tn/VeGan` — Shows an error, as "Vegan" is already used.
     - `addShortCut al/v tn/Vegetarian` — Shows an error, as "v" is already an alias.
 
+![adding shortcuts](images/add_shortcut.png)
+***Figure 13: Shows shortcut being added***
+
 ---
 
 ### Deleting Shortcuts for Tags
@@ -318,6 +356,9 @@ You can delete an existing shortcut by specifying its alias and tag name.
 **Example:**
 - `delShortCut al/v tn/Vegan` — Deletes the shortcut for alias "v" and tag name "Vegan".
 
+![deleting shortcuts](images/del_shortcut.png)
+***Figure 14: Shows shortcut being deleted***
+
 ---
 
 ### Listing Existing Shortcuts
@@ -325,6 +366,9 @@ You can delete an existing shortcut by specifying its alias and tag name.
 View all current shortcuts to see the mappings of aliases to tag names.
 
 **Format:** `listShortCut`
+
+![listing shortcuts](images/list_shortcut.png)
+***Figure 15: Shows shortcuts being listed***
 
 ---
 
@@ -340,6 +384,9 @@ Examples:
     - `edit 1 t/vg` — Tags the contact at index 1 with "Vegetarian".
     - `edit 1 t/vg t/v` — Tags the contact at index 1 with "Vegetarian" and "Vegan".
     - `add n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2, #02-25 pc/123456 t/v` — Creates a contact tagged as "Vegan".
+
+![using shortcuts](images/using_shortcut.png)
+***Figure 16: Shows shortcut being used to edit tags***
 
 > **Note**: While adding shortcuts, aliases and tag names are case-insensitive. However, when using tags (`/t`) in commands, they are case-sensitive.
 
@@ -362,6 +409,12 @@ Examples:
     - `filter Vegan Vegetarian` — Shows all customers with tags starting with "Vegan" or "Vegetarian" (e.g., "VeganPlus").
     - `filter v vg` — Uses shortcuts to show customers tagged as "Vegan" or "Vegetarian" or tags that start with those aliases (e.g., "VeganFriendly").
 
+![filter](images/filter.png)
+***Figure 17: Shows filter based on tag: Vegan***
+
+![filter_shortcuts](images/filter_shortcuts.png)
+***Figure 18: Shows filters based on preassigned shortcut***
+
 ---
 
 ### **Downloading Data: `download`**  
@@ -378,8 +431,14 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 
 **Examples:**
 - `download` — Exports all contacts or orders.
-- `download t/Vegan` — Exports only the contacts or orders tagged as "Vegan."
+- `download t/Vegan` — Exports only wthe contacts or orders tagged as "Vegan."
 - `download t/friend t/colleague` — Exports contacts or orders tagged as "friend" and "colleague."
+
+![download](images/dowload.png)
+***Figure 19: Shows entire contact list being downloaded***
+
+![download shortcuts](images/download_shortcuts.png)
+***Figure 20: Shows shortcut being added***
 
 ---
 
