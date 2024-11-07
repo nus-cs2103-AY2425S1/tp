@@ -1,4 +1,4 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.person;
 
 import static tahub.contacts.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tahub.contacts.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -17,9 +17,9 @@ import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationLis
 import tahub.contacts.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code PersonAddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class PersonAddCommandIntegrationTest {
 
     private Model model;
 
@@ -37,16 +37,16 @@ public class AddCommandIntegrationTest {
                 model.getScaList());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new PersonAddCommand(validPerson), model,
+                String.format(PersonAddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new PersonAddCommand(personInList), model,
+                PersonAddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }
