@@ -63,6 +63,14 @@ public class AddCommand extends Command {
     }
 
     @Override
+    public void validateInput(Model model) throws CommandException {
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -79,8 +87,6 @@ public class AddCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+        return "Add person: " + toAdd.getConfirmationString();
     }
 }
