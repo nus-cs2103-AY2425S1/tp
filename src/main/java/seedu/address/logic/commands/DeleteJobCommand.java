@@ -11,8 +11,7 @@ import seedu.address.model.job.Job;
  */
 public class DeleteJobCommand extends DeleteCommand<Job> {
     public static final String ENTITY_WORD = "job";
-    public static final String MESSAGE_DELETE_JOB_SUCCESS = "Job %1$s - %2$s "
-            + "has been successfully deleted.";
+    public static final String MESSAGE_DELETE_JOB_SUCCESS = "Job deleted: Title: %1$s; Location: %2$s.";
 
     public DeleteJobCommand(Index targetIndex) {
         super(targetIndex);

@@ -23,7 +23,6 @@ public class Messages {
             + "'contact', 'job', or 'all'";
     public static final String MESSAGE_OPERATION_NOT_ALLOWED = "Command '%1$s' is not allowed on entity '%2$s'.";
     public static final String MESSAGE_MISSING_INDEX = "The index is missing";
-    public static final String DELETE_COMMAND_USAGE = "Invalid delete command. Specify 'company', 'contact' or 'job'.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";

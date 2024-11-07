@@ -25,8 +25,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand<?>> {
 
         String entityString = splitArgs[0]; // either "contact, "job" or "company"
         String indexString = splitArgs[1];
-
-
         String entity = ParserUtil.parseEntity(entityString);
         Index index = ParserUtil.parseIndex(indexString);
 
@@ -38,6 +36,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand<?>> {
         case DeleteCompanyCommand.ENTITY_WORD:
             return new DeleteCompanyCommand(index);
         default:
+
             String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
                     DeleteCommand.COMMAND_WORD, entity);
             throw new ParseException(exceptionMessage);
