@@ -351,7 +351,7 @@ Use case ends.
 **Extensions**
 
 * 2a. Invalid index number
-    * 2a1. NetBook displays an error message stating that the given index is invalid
+    * 2a1. NetBook displays an error message
     * 2a2. User re-enters delete command with valid index
     * 2a3. Steps 2b1 and 2b2 are repeated until the information entered is valid
     * **Use case resumes from Step 3**
@@ -421,7 +421,7 @@ Use case ends.
 **Extensions**
 
 * 2a. Invalid index number
-    * 2a1. NetBook displays an error message stating that the given index is invalid
+    * 2a1. NetBook displays an error message
     * 2a2. User re-enters delete command with valid index
     * 2a3. Steps 2a1 and 2a2 are repeated until the information entered is valid
     * **Use case resumes from Step 3**
@@ -484,7 +484,7 @@ Use case ends.
 **Extensions**
 
 * 2a. Invalid index number
-    * 2a1. NetBook displays an error message stating that the given index is invalid
+    * 2a1. NetBook displays an error message
     * 2a2. User re-enters delete command with valid index
     * 2a3. Steps 2a1 and 2a2 are repeated until the information entered is valid
     * **Use case resumes from Step 3**
@@ -497,14 +497,14 @@ Use case ends.
 1. User requests to create a reminder about a contact
 2. NetBook validates the input from the user
 3. NetBook creates the given reminder
-4. NetBook displays the remark in the GUI
+4. NetBook displays the reminder in the GUI
 
 Use case ends.
 
 **Extensions**
 
 * 2a. Invalid index number
-    * 2a1. NetBook displays an error message stating that the given index is invalid
+    * 2a1. NetBook displays an error message
     * 2a2. User re-enters delete command with valid index
     * 2a3. Steps 2a1 and 2a2 are repeated until the information entered is valid
     * **Use case resumes from Step 3**
@@ -521,15 +521,14 @@ Use case ends.
 **Main Success Scenario (MSS)**
 1. User requests to delete a specified reminder
 2. NetBook validates the input from the user
-3. NetBook deletes the given reminder
-4. NetBook removes the deleted reminder from the GUI
+3. NetBook deletes the given reminder and removes it from the GUI
 
 Use case ends.
 
 **Extensions**
 
 * 2a. Invalid index number
-    * 2a1. NetBook displays an error message stating that the given index is invalid
+    * 2a1. NetBook displays an error message
     * 2a2. User re-enters delete command with valid index
     * 2a3. Steps 2a1 and 2a2 are repeated until the information entered is valid
     * **Use case resumes from Step 3**
