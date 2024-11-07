@@ -304,6 +304,7 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 <style>
   table, th, td {
     border: 1px solid #dddddd;
+    padding: 8;
   }
 
   table {
@@ -312,7 +313,7 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
   th {
     background-color: #f2f2f2;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid #dddddd;
   }
 
   tr:nth-child(even) {
