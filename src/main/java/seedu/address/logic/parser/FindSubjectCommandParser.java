@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.person.Subject.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.person.Subject.isValidSubject;
 
 import seedu.address.logic.commands.FindSubjectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,6 +25,9 @@ public class FindSubjectCommandParser implements Parser<FindSubjectCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSubjectCommand.MESSAGE_USAGE)
             );
+        }
+        if (!isValidSubject(trimmedArgs)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
         String subjectToFind = trimmedArgs;
         return new FindSubjectCommand(new PersonHaveSubjectPredicate(subjectToFind));
