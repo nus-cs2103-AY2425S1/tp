@@ -338,18 +338,25 @@ Displays detailed information about a specified person.
 
 #### Deleting a Person: `delete`
 
-Deletes a specified person from the address book.
+Deletes a specified person from the address book or removes wedding jobs assigned to specified person.
 
 - **Formats**:
-    - **By Index**: `delete INDEX`
-    - **By Name**: `delete NAME`
+    - **By Index**: `delete INDEX [w/WEDDING_INDEX]...`
+    - **By Name**: `delete NAME [w/WEDDING_INDEX]...`
 - **Notes**:
-    - Cannot delete a client who has an active wedding.
-        - Error: "Cannot delete this person as they are a client in a wedding. Please delete their wedding first."
-    - If multiple matches are found when using name-based format, the system will prompt for index.
+    - **Deleting a person**:
+        - Cannot delete a client who has an active wedding.
+          - Error: "Cannot delete this person as they are a client in a wedding. Please delete their wedding first."
+        - If multiple matches are found when using name-based format, the system will prompt for index.
+  - **Removing wedding jobs assigned to a person**:
+      - Can remove multiple weddings jobs a person is assigned to.
+      - Wedding indices must be valid and refer to weddings that person is already assigned to.
 - **Examples**:
     - `delete 2` deletes the person at index 2.
     - `delete Betsy` deletes Betsy if there's only one match.
+    - `delete 1 w/1` unassigns wedding at index 1 from person at index 1.
+    - `delete Alice w/1 w/2` unassigns Alice from weddings at index 1 and 2 if there's only one match to 'Alice'.
+
 
 ---
 
@@ -487,7 +494,7 @@ Assigns a role and/or weddings to a person.
     - **Role Assignment**:
         - Each person can have either 0 or 1 role at a time.
         - Assigning a new role replaces the existing role.
-        - Role cannot be blank when using `r/`.
+        - Role can be blank using `r/` to remove the role of a person.
     - **Wedding Assignment**:
         - Can assign a person to multiple weddings.
         - Wedding indices must be valid and refer to existing weddings.
@@ -498,6 +505,8 @@ Assigns a role and/or weddings to a person.
         - Assigns the role "florist" to the person at index 1.
     - `assign 1 w/1 w/2`
         - Assigns the person at index 1 to weddings at indices 1 and 2.
+    - `assign 1 r/`
+      - Removes the role of person at index 1.
     -  `assign John Doe r/photographer w/2`
         - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.<br>
           **Error Examples**:<br>
@@ -614,7 +623,8 @@ Advanced users can edit the data file directly to modify the address book data.
     - Cannot search for multiple names like `find` does - must use exact single name
 
 **Q**: How do I remove a role from a contact?<br>
-**A**: Currently, roles cannot be removed once assigned. You can only change them to a different role using the `assign` command.
+**A**: Roles can be removed using the assign command.
+        - e.g., `assign 1 r/` to remove the role of person at index 1.
 
 **Q**: What happens to wedding assignments if I edit a contact's details?<br>
 **A**: Editing a contact's basic details (name, phone, email, address) does not affect their wedding assignments or role. These relationships remain intact.
@@ -637,7 +647,7 @@ Advanced users can edit the data file directly to modify the address book data.
 |-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]... …​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/florist w/1 w/2`                                                      |
 | **Clear**   | `clear`                                                                                                                                                                                                                                        |
-| **Delete**  | #1: `delete INDEX` or <br> #2: `delete NAME`<br> e.g., `delete 1`, `delete Alex`, `delete Alex Tan`                                                                                                                                            |
+| **Delete**  | #1: `delete INDEX [w/WEDDING_INDEX]...` or <br> #2: `delete NAME [w/WEDDING_INDEX]...`<br> e.g., `delete 1`, `delete Alex`, `delete Alex Tan`, `delete 1 w/1`, `delete Alex w/1 w/2`                                                           |
 | **Edit**    | #1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or <br> #2: `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit James n/James Lee e/jameslee@example.com` |
 | **View**    | #1: `view NAME` or <br> #2: `view INDEX` e.g., `view Alex`, `view 1`                                                                                                                                                                           |
 | **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                     |
@@ -648,6 +658,6 @@ Advanced users can edit the data file directly to modify the address book data.
 | **Editw**   | `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`<br> e.g., `editw w/1 d/2024-12-31 v/Garden Venue`                                                                                                                                                  |
 | **Vieww**   | `vieww INDEX` or `vieww KEYWORD`<br> e.g., `vieww 1`, `vieww John`                                                                                                                                                                             |
 | **Deletew** | #1: `deletew INDEX` or <br> #2: `deletew KEYWORD`<br> e.g., `deletew 1`, `deletew Beach Wedding`                                                                                                                                               |
-| **Assign**  | `assign INDEX [r/ROLE] [w/WEDDING_INDEX]...` or `assign NAME [r/ROLE] [w/WEDDING_INDEX]...`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer w/2`                                                                                |
+| **Assign**  | `assign INDEX [r/ROLE] [w/WEDDING_INDEX]...` or `assign NAME [r/ROLE] [w/WEDDING_INDEX]...`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer w/1 w/2`, `assign 1 r/`                                                             |
 | **Help**    | `help`                                                                                                                                                                                                                                         |
 | **Exit**    | `exit`                                                                                                                                                                                                                                         |

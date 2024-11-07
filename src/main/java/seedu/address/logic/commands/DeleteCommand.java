@@ -24,8 +24,11 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list or keyword.\n"
+            + "OR deletes wedding jobs identified by index number used in displayed wedding list "
+            + "from specified person.\n"
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact)\n"
-            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " alex";
+            + "Examples:\n" + COMMAND_WORD + " 1\n" + COMMAND_WORD + " alex\n"
+            + COMMAND_WORD + "1 w/1 w/2";
 
     public static final String MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR = "There is no person to delete.";
     public static final String MESSAGE_DELETE_EMPTY_WEDDING_LIST_ERROR =
@@ -172,7 +175,7 @@ public class DeleteCommand extends Command {
         List<Wedding> weddingList = model.getFilteredWeddingList();
         for (Index index : weddingIndices) {
             Wedding wedding = weddingList.get(index.getZeroBased());
-            if (!personToDelete.isAssignedToWedding(wedding)) {
+            if (!personToDelete.isAssignedToWeddingNonClient(wedding)) {
                 throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
             }
         }
