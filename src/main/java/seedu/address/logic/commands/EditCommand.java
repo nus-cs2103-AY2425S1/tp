@@ -81,7 +81,6 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            System.out.println("Print from Edit Command Class: " + index.getZeroBased());
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -96,13 +95,10 @@ public class EditCommand extends Command {
         int meetingCount = meetings.getMeetingsCount();
 
         for (int i = 0; i < meetingCount; i++) {
-            System.out.println(i);
             Meeting meeting = meetings.getMeeting(0);
             model.deleteMeeting(personToEdit, meeting);
-            System.out.println("Deleted Meeting" + meeting + personToEdit.getName());
             model.addMeeting(editedPerson, new Meeting(editedPerson.getName(), meeting.getStartTime(),
                     meeting.getEndTime(), meeting.getLocation()));
-            System.out.println("Added Meeting" + meeting + editedPerson.getName());
         }
 
         model.setPerson(personToEdit, editedPerson);
