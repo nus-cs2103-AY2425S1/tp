@@ -171,6 +171,7 @@ Format: `log NRIC DD-MM-YYYY HH:MM INFO`
 * Logs the information to the patient with the specified `NRIC`.
 * Date and time inputs refer to log date and time.
 * Logged information must be non-empty.
+* Note that when the View Window is opened when adding log entries, the window will not display the new log entries until the view command is executed by the user again.
 
 Examples:
 * `log S1234567A 25-12-2024 14:30 Patient has been discharged` logs the information `Patient has been discharged` to the patient with `NRIC S1234567A` at `25-12-2024 14:30`.
