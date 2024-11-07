@@ -125,7 +125,7 @@ Examples:
 * Adding a contact with only a social media handle. <br>
 `add n/Adam An t/customer ig/theAdamAn`
 * Adding a contact with a tag. <br>
-`add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/supplier`
+`add n/Betsy Crowe t/friend e/betsycrowe@example.com p/12345678 t/supplier`
 * Adding a contact with only an email address. <br>
 `add n/Charlie Chan t/investor e/charlieChan@example.com`
 * Adding a contact with a schedule. <br>
@@ -542,7 +542,7 @@ to `[JAR file location]/data` in your new computer.
 |---------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Add](#adding-a-person--add)**                        | `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS [cs/CAROUSELL_HANDLE] [fb/FACEBOOK_HANDLE] [ig/INSTAGRAM_HANDLE]> [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **[Edit](#editing-a-person--edit)**                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                       |
-| **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX [ig/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                                                                                                                                                         |
+| **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                                                                                                                             |
 | **[Schedule](#scheduling-contacts--schedule)**          | `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]` <br> e.g., `schedule 1 sn/appointment sd/2024-12-12 st/12:00`                                                                                                                                                           |
 | **[Rename Tag](#renaming-a-tag--renameTag)**            | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`                                                                                                                                                                                                                          |
 | **[Delete](#deleting-a-person--delete)**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                               |
