@@ -378,6 +378,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. Teletutors App displays an error message: `This student is not in your student list.`
       Use case resumes from Step 3.
 
+**Use case: Add an assignment to a student**
+
+**MSS**
+
+1. Tutor requests to add an assignment to a student
+2. Teletutors App prompts for the assignment details
+3. Tutor provides the required assignment details
+4. Teletutors App confirms the assignment has been successfully added
+
+    Use case ends.
+
+**Extensions**
+* 3a. Tutor enters an invalid deadline for the assignment.
+    * 3a1. Teletutors App prompts the user to enter a valid deadline.
+    * 3a2. Tutor re-enters a valid date for the deadline or uses the correct format if he typed it in the wrong format previously. 
+      Use case resumes from step 4.
+  
+* 3b. Tutor enters an invalid grade for the assignment.
+    * 3b1. Teletutors App prompts the user to enter a valid weightage.
+    * 3b2. Tutor re-enters a valid weightage for the assignment. 
+      Use case resumes from step 4.
+
 
 ### Non-Functional Requirements
 
