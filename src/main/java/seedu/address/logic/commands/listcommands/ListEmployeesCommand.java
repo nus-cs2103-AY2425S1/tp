@@ -15,12 +15,13 @@ public class ListEmployeesCommand extends ListCommand {
     // Command word using the 'list' prefix + 'employees'
     public static final String COMMAND_WORD = COMMAND_PREFIX + "employees";
 
-    public static final String MESSAGE_SUCCESS = "Listed all ";
+    public static final String MESSAGE_SUCCESS = "%1$s employees listed!";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-        return new CommandResult(MESSAGE_SUCCESS, DisplayType.EMPLOYEE_LIST);
+        int numEmployeesShown = model.getFilteredEmployeeList().size();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, numEmployeesShown), DisplayType.EMPLOYEE_LIST);
     }
 }

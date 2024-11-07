@@ -21,21 +21,21 @@ public class EmployeeIdTest {
 
     @Test
     public void isValidId() {
-        // EP: null name
-        assertThrows(AssertionError.class, () -> EmployeeId.isValidEmployeeId(null));
+        // EP: null id
+        assertThrows(AssertionError.class, () -> EmployeeId.isValidId(null));
 
-        // EP: invalid name
-        assertFalse(EmployeeId.isValidEmployeeId("")); // empty string
-        assertFalse(EmployeeId.isValidEmployeeId(" ")); // spaces only
-        assertFalse(EmployeeId.isValidEmployeeId("^")); // only non-alphanumeric characters
-        assertFalse(EmployeeId.isValidEmployeeId("5252*")); // contains non-alphanumeric characters
-        assertFalse(EmployeeId.isValidEmployeeId("abac gjku")); // alphabets only
-        assertFalse(EmployeeId.isValidEmployeeId("kk12658j")); // alphanumeric characters
-        assertFalse(EmployeeId.isValidEmployeeId("A0276123J20")); // with capital letters
-        assertFalse(EmployeeId.isValidEmployeeId("A0276123J20 A2552 6456 R20")); // long names
+        // EP: invalid id
+        assertFalse(EmployeeId.isValidId("")); // empty string
+        assertFalse(EmployeeId.isValidId(" ")); // spaces only
+        assertFalse(EmployeeId.isValidId("^")); // only non-alphanumeric characters
+        assertFalse(EmployeeId.isValidId("5252*")); // contains non-alphanumeric characters
+        assertFalse(EmployeeId.isValidId("abac gjku")); // alphabets only
+        assertFalse(EmployeeId.isValidId("kk12658j")); // alphanumeric characters
+        assertFalse(EmployeeId.isValidId("A0276123J20")); // with capital letters
+        assertFalse(EmployeeId.isValidId("A0276123J20 A2552 6456 R20")); // long names
 
-        // EP: valid name
-        assertTrue(EmployeeId.isValidEmployeeId("12345")); // numbers only
+        // EP: valid id
+        assertTrue(EmployeeId.isValidId("12345")); // numbers only
     }
 
     @Test

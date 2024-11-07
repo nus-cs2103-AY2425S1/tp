@@ -92,7 +92,7 @@ class JsonAdaptedEmployee {
             throw new IllegalValueException(String.format(
                     MISSING_FIELD_MESSAGE_FORMAT, EmployeeId.class.getSimpleName()));
         }
-        if (!EmployeeId.isValidEmployeeId(employeeId)) {
+        if (!EmployeeId.isValidId(employeeId)) {
             throw new IllegalValueException(EmployeeId.MESSAGE_CONSTRAINTS);
         }
         final EmployeeId modelEmployeeId = new EmployeeId(employeeId);

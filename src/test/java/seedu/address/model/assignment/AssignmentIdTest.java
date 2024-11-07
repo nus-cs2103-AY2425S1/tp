@@ -22,18 +22,18 @@ public class AssignmentIdTest {
     @Test
     public void isValidId() {
         // invalid id
-        assertFalse(AssignmentId.isValidAssignmentId(null)); // null
-        assertFalse(AssignmentId.isValidAssignmentId("")); // empty string
-        assertFalse(AssignmentId.isValidAssignmentId(" ")); // spaces only
-        assertFalse(AssignmentId.isValidAssignmentId("^")); // only non-alphanumeric characters
-        assertFalse(AssignmentId.isValidAssignmentId("5252*")); // contains non-alphanumeric characters
-        assertFalse(AssignmentId.isValidAssignmentId("abac gjku")); // alphabets only
-        assertFalse(AssignmentId.isValidAssignmentId("kk12658j")); // alphanumeric characters
-        assertFalse(AssignmentId.isValidAssignmentId("A0276123J20")); // with capital letters
-        assertFalse(AssignmentId.isValidAssignmentId("A0276123J20 A2552 6456 R20")); // long names
+        assertThrows(AssertionError.class, () -> AssignmentId.isValidId(null)); // null
+        assertFalse(AssignmentId.isValidId("")); // empty string
+        assertFalse(AssignmentId.isValidId(" ")); // spaces only
+        assertFalse(AssignmentId.isValidId("^")); // only non-alphanumeric characters
+        assertFalse(AssignmentId.isValidId("5252*")); // contains non-alphanumeric characters
+        assertFalse(AssignmentId.isValidId("abac gjku")); // alphabets only
+        assertFalse(AssignmentId.isValidId("kk12658j")); // alphanumeric characters
+        assertFalse(AssignmentId.isValidId("A0276123J20")); // with capital letters
+        assertFalse(AssignmentId.isValidId("A0276123J20 A2552 6456 R20")); // long names
 
         // valid id
-        assertTrue(AssignmentId.isValidAssignmentId("12345")); // numbers only
+        assertTrue(AssignmentId.isValidId("12345")); // numbers only
     }
 
     @Test

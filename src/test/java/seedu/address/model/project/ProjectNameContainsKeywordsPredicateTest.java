@@ -74,8 +74,8 @@ public class ProjectNameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new ProjectBuilder().withName("Project Alpha").build()));
 
         // Keywords match id, but does not match name
-        predicate = new ProjectNameContainsKeywordsPredicate(Arrays.asList("A0276123J"));
-        assertFalse(predicate.test(new ProjectBuilder().withName("Alpha").withId("A0276123J").build()));
+        predicate = new ProjectNameContainsKeywordsPredicate(Arrays.asList("1"));
+        assertFalse(predicate.test(new ProjectBuilder().withName("Alpha").withId("1").build()));
     }
 
     @Test

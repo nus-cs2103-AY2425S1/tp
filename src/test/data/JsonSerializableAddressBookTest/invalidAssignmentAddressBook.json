@@ -11,12 +11,12 @@
   }],
   "projects" : [ {
     "name" : "Project Alpha",
-    "id" : "A0276123J"
+    "id" : "1"
   }],
   "assignments": [ {
     "assignmentId": "01234",
     "employeeId": "2",
-    "projectId": "A0276123J"
+    "projectId": "1"
   }]
 }
 
