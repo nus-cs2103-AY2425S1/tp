@@ -221,13 +221,14 @@ Examples:
 
 Finds students whose names, addresses, tags or lessons contain any of the given keywords.
 
-Format: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [l/LESSON_KEYWORDS]`
+Format: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * For name keywords, only the name is searched. For address keywords, only the address is searched etc.
 * For words, only full words will be matched e.g. `Han` will not match `Hans`
-* For time-range, lessons with overlapping time-ranges will be matched e.g. `0900-1000` will overlap with `0800-0930`
+* Lesson day keywords must be a **day** of the week (case-insensitive), or the first 3 letters of a day e.g. `mon tue wed`
+* Lesson time keywords must be in **24-hour format** `HHMM-HHMM`. Lessons with overlapping time-ranges will be matched e.g. `0800-1000` will overlap with `0900-1100`
 * Persons with at least one parameter matching at least one of its keyword will be returned (i.e. `OR` search).
 * `find n/John t/Science English` will can return students `John Doe` with tag `Math`, `Alice Richardson` with tag `Science` and `Mary Jane` with tag `English`
 
@@ -235,7 +236,7 @@ Examples:
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
-* `find l/monday 1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
+* `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
 ### Deleting a person : `delete`
 
@@ -353,6 +354,6 @@ Action     | Format, Examples
 **Remark** | `remark INDEX -a REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 -a Great progress in Math`<br> `remark INDEX -d REMARK_INDEX` to delete a specific remark from the student at `INDEX`<br> e.g., `remark 1 -d 2` to delete the second remark of student 1.
 **Add Lesson** | `addlesson INDEX l/LESSON [l/LESSON]`<br> e.g., `addlesson 1 l/Monday 0900-1100`
 **Delete Lesson** | `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]`<br> e.g., `deletelesson 1 li/1`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`<br> e.g., `find n/James jake t/science`
 **List**   | `list`
 **Help**   | `help`
