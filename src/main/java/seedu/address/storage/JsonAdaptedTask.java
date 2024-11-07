@@ -54,6 +54,9 @@ class JsonAdaptedTask {
         if (this.description.trim().isEmpty()) {
             throw new IllegalValueException("Task's description cannot be empty!");
         }
+        if (this.isComplete == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "isComplete"));
+        }
 
         Person modelPatient = this.patient.toModelType();
         return new Task(modelPatient, description, isComplete);
