@@ -1,14 +1,15 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MEMBER_MESSAGE_CONSTRAINTS;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.PatternSyntaxException;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -29,8 +30,14 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    public static final String MESSAGE_INVALID_INDEX = "Contains one or more indices that are not non-zero unsigned "
+            + "integers.";
+    public static final String MESSAGE_INVALID_INTERVAL_FORMAT = "Invalid range format. Expected format: a-b"
+        + " (0 < a <= b)";
+    public static final String MESSAGE_INVALID_INTERVAL = "Invalid range: start index must be less than or equal"
+            + " to end index.";
+    public static final String MESSAGE_EMPTY_INDICES = "INDICES should not be empty; at least one index or range "
+            + "must be provided.";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -42,6 +49,84 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a range in the format "a-b" into a list of {@code Index} objects.
+     *
+     * @param range The range string to parse.
+     * @return A list of {@code Index} objects from start to end of the range.
+     * @throws ParseException If the format is invalid or bounds are incorrect.
+     */
+    public static List<Index> parseRange(String range) throws ParseException {
+        String[] bounds = range.split("-");
+        // Validate that the range contains exactly two parts
+        if (bounds.length != 2) {
+            throw new ParseException(MESSAGE_INVALID_INTERVAL_FORMAT);
+        }
+
+        // Parse start and end indices
+        Index startIndex = parseIndex(bounds[0]);
+        Index endIndex = parseIndex(bounds[1]);
+
+        // Validate that startIndex is less than or equal to endIndex
+        if (startIndex.getOneBased() > endIndex.getOneBased()) {
+            throw new ParseException(MESSAGE_INVALID_INTERVAL);
+        }
+
+        // Generate and return the list of indices from start to end
+        return IntStream.rangeClosed(startIndex.getOneBased(), endIndex.getOneBased())
+                .mapToObj(Index::fromOneBased)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Parses a string containing indices and ranges (e.g., "1 2 3 5-9") into a list of {@code Index} objects.
+     * Accepts both single indices and ranges separated by spaces.
+     *
+     * @param args The string containing indices and/or ranges to parse.
+     * @return A list of {@code Index} objects representing the parsed indices and ranges.
+     * @throws ParseException If any part of the input is not a valid index or range.
+     */
+    public static List<Index> parseIndices(String args) throws ParseException {
+        requireNonNull(args);
+        String trimmedIndices = args.trim();
+        checkIndicesNotEmpty(trimmedIndices);
+        try {
+            return Arrays.stream(trimmedIndices.split(" "))
+                    .flatMap(arg -> parseArgAsStream(arg))
+                    .collect(Collectors.toList());
+        } catch (RuntimeException e) {
+            String causeMessage = e.getCause().getMessage();
+            // Catch any ParseExceptions wrapped in RuntimeExceptions
+            throw new ParseException(causeMessage, e);
+        }
+    }
+    private static void checkIndicesNotEmpty(String indices) throws ParseException {
+        if (indices.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_INDICES);
+        }
+    }
+
+    /**
+     * Parses a single argument as either an interval (e.g., "5-9") or a single index (e.g., "3"),
+     * returning a stream of {@code Index} objects. This allows for processing both individual indices
+     * and ranges within a stream context.
+     *
+     * @param arg The argument string to parse as an index or interval.
+     * @return A stream of {@code Index} objects parsed from the argument.
+     * @throws RuntimeException wrapping a {@code ParseException} if the argument is invalid.
+     */
+    private static Stream<Index> parseArgAsStream(String arg) {
+        try {
+            if (arg.contains("-")) {
+                return parseRange(arg).stream();
+            } else {
+                return Stream.of(parseIndex(arg));
+            }
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -213,14 +298,6 @@ public class ParserUtil {
      * @throws ParseException if the given membersAsString is invalid.
      */
     public static List<Index> parseMembers(String membersAsString) throws ParseException {
-        requireNonNull(membersAsString);
-        List<Index> members;
-        try {
-            members = Arrays.stream(membersAsString.split(" ")).map(
-                    i -> Index.fromOneBased(Integer.parseInt(i))).toList();
-        } catch (PatternSyntaxException | NumberFormatException | IndexOutOfBoundsException e) {
-            throw new ParseException(MEMBER_MESSAGE_CONSTRAINTS);
-        }
-        return members;
+        return parseIndices(membersAsString);
     }
 }
