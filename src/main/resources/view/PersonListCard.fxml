@@ -13,9 +13,9 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200"/>
     </columnConstraints>
-    <VBox minHeight="105" spacing="12" GridPane.columnIndex="0">
+    <VBox minHeight="105" minWidth="200" spacing="12" GridPane.columnIndex="0">
       <HBox spacing="8" alignment="CENTER_LEFT">
         <HBox HBox.hgrow="NEVER" alignment="CENTER" minHeight="26" maxHeight="26" minWidth="26" maxWidth="26"
               style="-fx-background-color: #F2F2F2; -fx-background-radius: 20">
@@ -29,26 +29,26 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" style="-fx-font-size: 16"/>
       </HBox>
       <FlowPane fx:id="tags"/>
-      <HBox alignment="CENTER_LEFT" style="-fx-padding: 12 0 0 0">
+      <HBox style="-fx-padding: 12 0 0 0">
         <ImageView fitHeight="14" fitWidth="14">
           <Image url="@/images/phone_icon.png"/>
         </ImageView>
         <Label minWidth="65" prefWidth="65" text="Phone" styleClass="contact-label"/>
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
       </HBox>
-      <HBox alignment="CENTER_LEFT">
+      <HBox>
         <ImageView fitHeight="14" fitWidth="14">
           <Image url="@/images/email_icon.png"/>
         </ImageView>
         <Label minWidth="65" prefWidth="65" text="Email" styleClass="contact-label"/>
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
       </HBox>
-      <HBox alignment="CENTER_LEFT">
+      <HBox>
         <ImageView fitHeight="14" fitWidth="14">
           <Image url="@/images/home_icon.png"/>
         </ImageView>
         <Label minWidth="65" prefWidth="65" text="Address" styleClass="contact-label"/>
-        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
       </HBox>
     </VBox>
     <VBox fx:id="paymentCardPlaceholder" GridPane.columnIndex="1"/>

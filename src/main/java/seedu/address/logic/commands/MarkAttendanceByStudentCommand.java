@@ -32,16 +32,16 @@ public class MarkAttendanceByStudentCommand extends Command {
             + ": Marks the attendance of the student identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_ATTENDANCE + "ATTENDANCE"
+            + PREFIX_ATTENDANCE + "ATTENDANCE "
             + PREFIX_TUTORIAL + "TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ATTENDANCE + "20/10/2024"
+            + PREFIX_ATTENDANCE + "20/10/2024 "
             + PREFIX_TUTORIAL + "Math";
 
     public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS =
             "Marked attendance of %1$s student for %2$s tutorial for %3$s";
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
-            "Student %1$s does not take %2$s tutorial";
+            "Student %1$s is not enrolled in %2$s tutorial";
     public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE =
             "Student %1$s has attendance marked for the corresponding week of date %2$s for %3$s tutorial";
 

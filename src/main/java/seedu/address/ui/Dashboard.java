@@ -160,7 +160,7 @@ public class Dashboard extends UiPart<Region> {
      */
     private void setEmptyTutorialsPlaceholder() {
         Label label = new Label("No classes offered yet");
-        label.setStyle("-fx-background-color: #F3F8FB; -fx-background-radius: 5; -fx-padding: 10 15"
+        label.setStyle("-fx-background-color: #F3F8FB; -fx-background-radius: 5; -fx-padding: 10 15;"
                 + "-fx-text-fill: #262626");
 
         HBox emptyState = new HBox(label);

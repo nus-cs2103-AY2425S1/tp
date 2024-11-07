@@ -40,7 +40,7 @@ public class AttendanceTest {
     void isValidAttendance_invalidInput_failure() {
         // Invalid inputs
         assertFalse(Attendance.isValidAttendance("32/10/2024")); // invalid day
-        assertFalse(Attendance.isValidAttendance("30/13/2024")); // invalid month
+        assertFalse(Attendance.isValidAttendance("30/00/2024")); // invalid month
         assertFalse(Attendance.isValidAttendance("3/10/2024")); // no leading 0 for day
         assertFalse(Attendance.isValidAttendance("30/3/2024")); // no leading 0 for month
         assertFalse(Attendance.isValidAttendance("3/10/24")); // wrong format for year

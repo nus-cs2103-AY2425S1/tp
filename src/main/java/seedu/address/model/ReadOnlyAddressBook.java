@@ -23,8 +23,8 @@ public interface ReadOnlyAddressBook {
     ObservableList<Tutorial> getTutorialList();
 
     /**
-     * Returns an unmodifiable view of the participations list.
-     * This list will not contain any duplicate tutorials.
+     * Returns an unmodifiable view of the participation list.
+     * This list will not contain any duplicate participations.
      */
     ObservableList<Participation> getParticipationList();
 

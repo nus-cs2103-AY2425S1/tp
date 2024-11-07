@@ -2,6 +2,11 @@
 layout: page
 title: Developer Guide
 ---
+
+This **EduVault Developer Guide** provides a comprehensive overview for developers who wishes to build on the current EduVault system, or anyone who is interested to learn about the internal structure of EduVault. It includes details on the architectural structure, key classes, and design patterns used to support EduVault’s functionalities, such as student and tutorial management.  This guide also covers some planned enhancements that our team have in mind.
+
+---
+
 * Table of Contents
 {:toc}
 
@@ -31,7 +36,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-success">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -46,7 +51,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -78,13 +83,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -95,24 +100,28 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+<br>
+
+#### General Interaction
+
+The general interactions within the `Logic` component is shown in the sequence diagram below, taking `execute("delete 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a person and his/her [participation](#participation-class)).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -124,8 +133,14 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+For more information on the interactions of features with the Logic Component, please refer [here](#implementation).
+</div>
+
+
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -134,20 +149,21 @@ The `Model` component,
 * stores the currently ‘selected’ `Person` objects (e.g., results of a search query) as a separate *filtered* list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores `Tutorial` objects as a separate list which is exposed to outsiders as an unmodifiable `ObservableList<Tutorial>` that can be observed.
 * stores `Participation` objects as a separate list which is exposed to outsiders as an unmodifiable `ObservableList<Participation>` that can be observed.
-* Each `Participation` object is also composed of a `Tutorial` object, a `Person` object, and a `List<Attendance>` object. More information on this [here](?tab=t.0#heading=h.k3pglksfd2of).
+* Each `Participation` object is also composed of a `Tutorial` object, a `Person` object, and a `List<Attendance>` object. More information on this [here](#storage-feature).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
 
+
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -170,24 +186,18 @@ This section describes some noteworthy details on how certain features are imple
 `Students` are named as `Persons` due to Legacy code.
 </div>
 
-* stores the address book data i.e.,
-    * all `Person` objects (which are contained in a `UniquePersonList` object).
-    * all Tutorial objects (contained in a UniqueTutorialList object)
-    * all Participation objects (contained in a UniqueParticipationList object)
-* Participation is an association class and contains the relationship between Person and Tutorial, as well as a List\<Attendance\> object
-
-<img src="images/ParticipationAsAssociationDiagram.png" width="400" />
 
 ### Storage feature
 
-#### Storage format
-Eduvault stores data in JSON file using the Jackson library.
+EduVault stores data in JSON file using the Jackson library.
 
-Eduvault stores four types of objects:
-* Student (person)
+EduVault stores four types of objects:
+* Student (Person)
 * Tutorial
 * Participation
 * Attendance
+
+An overarching structure of the JSON file is as shown below:
 
 ```dtd
 {
@@ -196,6 +206,10 @@ Eduvault stores four types of objects:
     "participations" : [...]
 }
 ```
+
+<br>
+
+Within each of the different objects (Student, Tutorial, Participation), data is stored in the following format as shown below. Conditions for storage are also included.
 
 `Student`
 ```dtd
@@ -212,9 +226,8 @@ Eduvault stores four types of objects:
     ...
 ]
 ```
-There may be no duplicate `Students`.
+**Condition:** There may be no duplicate `Students`.
 Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
-
 
 `Tutorial`
 ```dtd
@@ -226,7 +239,7 @@ Two `Students` are considered to be duplicates if they have matching `name` and 
     ...
 ]
 ```
-There may be no duplicate `Tutorials`.
+**Condition:** There may be no duplicate `Tutorials`.
 Two `Tutorials` are considered to be duplicates if they have matching `subject`.
 
 `Participation`
@@ -241,10 +254,10 @@ Two `Tutorials` are considered to be duplicates if they have matching `subject`.
     },
 ]
 ```
+**Condition:**
+1. Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
 
-Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
-
-There may be no duplicate `Participations`.
+2. There may be no duplicate `Participations`.
 Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same.
 
 `Attendance`
@@ -259,10 +272,8 @@ Two `Participations` are considered to be duplicates if the `Student` and `Tutor
 
 There is no enforcement of duplicate `Attendance` in storage.
 
-#### Storage 
-
 ##### Uniqueness of objects
-For the purposes of storage into JSON format, Eduvault defines two objects as distinct based on these factors:
+For the purposes of storage into JSON format, EduVault defines two objects as distinct based on these factors:
 
 * Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
 * Two `Tutorials` are considered to be duplicates if they have matching `subject`.
@@ -278,7 +289,8 @@ The order which storage loads `Person`, `Tutorial` and `Participation` is shown 
 The `Participation` objects are created using corresponding `Person` and `Tutorial` objects in the `AddressBook`
 based on [uniqueness](#uniqueness-of-objects).
 
-### Find Command Implementation
+
+### Find feature
 
 The following sequence diagram shows how a find operation goes through the `Logic` component
 ![FindSequenceDiagram-Logic](images/FindSequenceDiagram-Logic.png)
@@ -293,6 +305,129 @@ predicates to create a `FindCommand` object.
 
 `Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
 
+
+### Enroll and Unenroll feature
+
+The implementation of the Enroll and Unenroll feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Enroll feature when the user inputs `enroll 1 tut/math` will be shown below.
+
+![EnrollStudentSequenceDiagram-Logic](images/EnrollStudentSequenceDiagram.png)
+
+
+The main steps for this execution are:
+
+1. The user inputs the command `enroll 1 tut/math` to enroll the student at index 1 into a math tutorial.
+2. **LogicManager** receives the command and calls `parseCommand("enroll 1 tut/math")` on AddressBookParser to interpret the input.
+3. **AddressBookParser** receives the command and identifies that it’s an enrollment command. It calls `parse("1 tut/math")` on EnrollCommandParser to parse the specific details.
+4. **EnrollCommandParser** processes the arguments `("1 tut/math")` and creates an instance of EnrollCommand, which is configured to enroll the specified student in the math tutorial.
+5. **LogicManager** then calls `execute(model)` on the created EnrollCommand to carry out the enrollment operation.
+6. **EnrollCommand** proceeds to retrieve the relevant data from the Model instance, and then adding the student to the math tutorial, by creating a `Participation` object. 
+
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+
+Details of the Participation class are included [below](#participation-class).
+</div>
+
+<ol start="7">
+    <li>Once the enrollment is completed, EnrollCommand returns a **CommandResult** with a message indicating the successful enrollment.</li>
+    <li>The result then flows back through **LogicManager**.</li>
+</ol>
+
+
+<br>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Unenroll feature is similar to that of the example given above, but instead of `addParticipation(...)` method of the Model Component being called, `deleteParticipation(...)` is called.
+
+</div>
+
+<br>
+
+#### Participation Class
+`Participation` is an **association** class used to represent the relationship between a student and a tutorial, as well as his/her attendance, which is stored in a List. Below is a class diagram denoting such a relationship.
+
+<img src="images/ParticipationAsAssociationDiagram.png" width="400" />
+
+When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
+
+### **Add Student and Create Tutorial feature**
+
+The implementation of the Add Student and Create Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for **Add Student** feature when the user inputs `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  will be shown below.   
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+For simplicity's sake, we use `add n/…` to represent the user input in the sequence diagram below.
+</div>
+
+![AddCommandSequenceDiagram-Logic](images/AddCommandSequenceDiagram.png)
+
+The main steps for execution are similar to the Enroll and Unenroll feature documented [above](#enroll-and-unenroll-feature). The main difference is that **AddCommandParser** does not process the index and the `tut` prefix, but instead, it processes other prefixes like `n/` and  `e/`.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+Between Add Student and Create Tutorial feature, the main difference is with regard to how they access the Model Component. Create Tutorial calls `hasTutorial(...)` and `createTutorial(...)`  method from the Model Component instead.
+</div>
+
+### **Delete Student and Close Tutorial feature**
+
+The implementation of the Delete Student and Close Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Delete Student feature when the user inputs `delete 1` will be shown below. 
+
+Note that this sequence diagram is the same as the one used in [Logic Component](#logic-component), but it is added here for easier referencing.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+The main steps for execution are similar to the Enroll and Unenroll feature documented [above](#enroll-and-unenroll-feature), ignoring the difference in parsers and commands being executed.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Between Delete Student and Close Tutorial feature, the main difference is with regard to how they access the Model Component. Instead of calling student-related methods such as `getFilteredPersonList()` and `deletePerson(...),` Close Tutorial calls tutorial-related methods like `getTutorialList()` and `deleteTutorial(...)` instead.
+</div>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+`Student` are named as `Person` due to Legacy code.
+</div>
+
+### List and Clear feature
+
+The implementation of the List and Clear feature **deviates** slightly from the general format provided in the Logic Component [above](#logic-component). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. As these two commands are similar to each other, so only the sequence diagram for List feature when the user inputs `list` will be shown below.
+
+![ListCommandSequenceDiagram-Logic](images/ListCommandSequenceDiagram.png)
+
+The main steps for this execution are:
+
+1. The user inputs the command `list` to display all students.
+2. **LogicManager** receives the command and calls `parseCommand("list")` on AddressBookParser to interpret the input.
+3. **AddressBookParser** receives the command and identifies that it is a list command. It directly creates an instance of **ListCommand**, since there are no arguments to parse.
+4. **LogicManager** then calls `execute(model)` on the created **ListCommand** to perform the listing operation.
+5. **ListCommand** then retrieves and update the list.
+6. After updating the list, **ListCommand** returns a **CommandResult** with a message indicating that the list operation has been completed successfully.
+7. The result then flows back to **LogicManager**.
+
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Clear feature is similar to that of the example given above, but instead of `updateFilteredPersonList(...)` method of the Model Component being called, `setAddressBook(...)` is called.
+
+</div>
+
+
+
+### Help and Exit feature
+
+The implementation of the Help and Exit feature **deviates** from the general format provided in the Logic Component [above](#logic-component). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. In addition, they will not be accessing the `Model` Component, since these two features are not updating or retrieving data. As these two commands are similar to each other, so only the sequence diagram for **Help** feature when the user inputs `help` will be shown below.
+
+![HelpCommandSequenceDiagram-Logic](images/HelpCommandSequenceDiagram.png)
+
+Tha main steps of execution are similar to the [List and Clear feature](#list-and-clear-feature), excluding Step 5.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Exit feature is similar to that of the example given above.
+
+</div>
+
+---
 
 ### \[Proposed\] Undo/redo feature
 
@@ -320,7 +455,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
@@ -328,7 +463,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -337,7 +472,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -347,7 +482,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
@@ -410,7 +545,7 @@ This product is for admin at tuition centres and has to track a large number of 
 
 **Value proposition**:
 
-Enable easy management and fast access to student records for administrators working at tuition centres. We aim to provide easy tracking of payments to send reminders, learning progress of students and shifting of classes etc. This also helps tuition centres save time by reducing administrative burdens on their staff.
+Enable easy management and fast access to student records for administrators working at tuition centres. We aim to provide easy tracking of payments and attendance, along with classes enrollment. This also helps tuition centres save time by reducing administrative burdens on their staff.
 
 
 
@@ -418,40 +553,47 @@ Enable easy management and fast access to student records for administrators wor
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                     | So that I can…​                                                                                                                |
-| -------- |-----------------| ------------------------------ |--------------------------------------------------------------------------------------------------------------------------------|
-|`* * *`|admin|search for students' information using their name| quickly access students' information when needed                                                                               |
-|`* * *`|admin|remove ex-students' information from the address book| clean and organise the database                                                                                                |
-|`* * *`|admin|check for student's attendance for past weeks| send reminders to remind them to attend classes                                                                                |
-|`* * *`|admin|record how much a student have paid| check the remaining overdue amount                                                                                             |
-|`* * *`|admin|check when the is the payment deadline for the student| send reminders for student to get ready to pay/pay before the deadline                                                         |
-|`* * *`|admin|see the students' contacts(telegram, whatsapp, email)| chase/remind the students for payment                                                                                          |
-|`* * *`|admin|login to the address book| prevent other people from accessing and modifying the information                                                              |
-|`* * *`|admin|input student information| keep track of new students joining the center                                                                                  |
-|`* * *`|admin |mark attendance of the students for that week| arrange makeup lessons for students if necessary                                                                               |
-|`* * *`|new admin|be disallowed from keying in invalid grade| not enter invalid information                                                                                                  |
-|`* * *`|new admin|be disallowed from keying in invalid student contact information| not enter invalid information                                                                                                  |
-|`* * *`|new admin |see all students' contact information under their profile| easily contact students when required without having to learn how the database is organised and searching for required details |
-|`* *`|admin|check the number of students referred by a student | determine which referral reward the student is entitled to if the maximum limit has not been reached                           |
-|`* *`|admin|check the grades of students| make marketing posters through quick statistics                                                                                |
-|`* *`|admin|track the homework submitted by each students| keep track of their progress and inform tutor's easily as required                                                             |
-|`* *`|admin|access a help sheet of commands| be reminded of the commands                                                                                                    |
-|`* *`|admin|archive records of past students| make the data cleaner and easier to manage                                                                                     |
-|`* *`|admin|see which student have the most overdue amount| chase/remind the students for payment                                                                                          |
-|`* *`|admin|change the status of the student from existing to past-student| focus on tracking the exisiting students                                                                                       |
-|`* *`|expert admin|have a way to mass input new students into the system| enter a bigger influx of students more easily                                                                                  |
-|`* *`|expert admin|create shortcuts for mass marking student's attendance| speed up repetitive tasks                                                                                                      |
-|`* *`|new admin|be shown a template example for valid input| learn the proper input format                                                                                                  |
-|`* *`|tutor|track the grades of students| monitor the learning progess of my students                                                                                    |
-|`* *`|tutor |check the availability of the classrooms | schedule makeup lessons or consultations                                                                                       |
-|`*`|admin|see the availability of slots per class for a subject | easily shift students around to different available time slots if they were to make requests to attend different slots         |
-|`*`|admin|see all available classes for different subjects and the respective availabilities| inform new students of available classes easily                                                                                |
-|`*`|admin|view the week's class schedule and which student is inside| be clear on who is attending class and when, know who I am teaching, and if there are any conflicts in scheduling              |
-|`*`|admin |check students who are entitled to but have not received referral rewards| keep track and give out referral rewards to students more easily                                                               |
-|`*`|expert admin|can categorise students' profiles into different groups for different actions to be taken like those who need to pay fees, take tests, submit homework, etc| send appropriate reminders in a more organised manner                                                                          |
-|`*`|expert admin|automate admin tasks like sending reminders for payment, homework, etc| saved time from not doing these repetitive tasks every month                                                                   |
-|`*`|expert admin|do mass tracking for student counts or revenue| see if the tuition centre is doing well                                                                                        |
-|`*`|part-time admin|see specific categories of students that I am in charge in| focus on only managing the relevant student records without distractions                                                       |
+| Priority | As a …​     | I want to …​                                                                                                                                                          | So that I can…​                                                                                                                |
+|----------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | admin       | list all students in the system                                                             <br/><br/><br/><br/>                                                      | show all students, can look through everyone's information at once, and allow other commands to reference the list index       |
+| `* * *`  | admin       | delete ex-students' information from the address book                                                    <br/>                                                        | clean and organise the database                                                                                                |
+| `* * *`  | admin       | edit students' information in the address book                                                    <br/><br/><br/><br/>                                                | Edit a student's information without having to remove and adding them in again                                                 |
+| `* * *`  | admin       | check for student's attendance for past weeks                                                        <br/><br/><br/>                                                  | arrange for make up classes and calculate payment                                                                              |
+| `* * *`  | admin       | record how much a student have paid                                                                                                                                   | track the overdue fees or advance payment                                                                                      |
+| `* * *`  | admin       | log monthly/term fees for students                                                                                                                                    | increment the tutorial fees for student                                                                                        |
+| `* * *`  | admin       | see the students' contacts(phone, email)                                                                                                                              | contact the students for adminstrative issues                                                                                  |
+| `* * *`  | admin       | add a new student and his/her related information                                                                                                                     | keep track of new students joining the center                                                                                  |
+| `* * *`  | admin       | mark attendance of the students                                                                                                                                       | keep track of students' attendance                                                                                             |
+| `* * *`  | new admin   | be disallowed from keying in invalid grade                                                                                                                            | not enter invalid information                                                                                                  |
+| `* * *`  | new admin   | be disallowed from keying in invalid student contact information                                                                                                      | not enter invalid information                                                                                                  |
+| `* * *`  | new admin   | see all students' contact information under their profile                                                                                                             | easily contact students when required without having to learn how the database is organised and searching for required details |
+| `* *`    | admin       | search for a student using their profile information                                               <br/><br/>              <br/>                                      | quickly locate students' information based on their phone number, email address etc.                                           |
+| `* *`    | admin       | search for students using their attendance                                                           <br/>                                                            | quickly locate students' information based on their attendnace                                                                 |
+| `* *`    | admin       | search for students using their payment status                                                       <br/>         <br/>  <br/>                                       | quickly locate student information based on their payment status                                                               |
+| `* *`    | admin       | search for student using their tutroial enrollment status                                                              <br/><br/>                                     | quickly locate student information based on their enrolled tutorial                                                            |
+| `* *`    | admin       | check the number of students referred by a student                                                                                                                    | determine which referral reward the student is entitled to if the maximum limit has not been reached                           |
+| `* *`    | admin       | Creating a new tutorial class                                                                                                                                         | Track the various tutorials within the center                                                                                  |
+| `* *`    | admin       | Closing a tutorial class                                                                              <br/> <br/>                                                     | Maintain only opened tutorials in the system, keep the system organised. Also can undo mistakenly opened tutorial              |
+| `* *`    | admin       | enroll students into the tutorials                                                                                                     <br/>                          | Track which student is in which tutorial                                                                                       |
+| `* *`    | admin       | unenrolling students from the tutorials                                                                <br/><br/><br/><br/>                                     <br/> | remove student from tutorial if student want to change class or quit, or tutorial is closing                                   |
+| `* *`    | admin       | record the grades of students                                                                                                                                         | Keep track of student's grades                                                                                                 |
+| `* *`    | admin       | track the homework submitted by each students                                                                                                                         | keep track of their progress and inform tutor's easily as required                                                             |
+| `* *`    | admin       | archive records of past students                                                                                                                                      | make the data cleaner and easier to manage                                                                                     |
+| `* *`    | admin       | see which student have the most overdue amount                                                                                                                        | chase/remind the students for payment                                                                                          |
+| `* *`    | expert admin | have a way to mass input new students into the system                                                                                                                 | enter a bigger influx of students more easily                                                                                  |
+| `* *`    | admin       | do mass marking for students' attendance based on tutorial                                                 <br/>  <br/>       <br/>                                   | reduce time required to mark everyone's attendance                                                                             |
+| `* *`    | admin | unmark students' attendance                                                  <br/>  <br/>       <br/><br/><br/>                                                       | undo the attendance just in case I made a mistake                                                                              |
+| `* *`    | expert admin | clear all entries with one command                                                              <br/><br/>                                <br/>                       | reset the entries                                                                                                              |
+| `* *`    | tutor       | filter student by their grades                                                               <br/>                                                                    | flag out students that need help                                                                                               |
+| `* *`    | tutor       | check the availability of the classrooms                                                                                                                              | schedule makeup lessons or consultations                                                                                       |
+| `* *`    | new admin   | have a link to user guide                                                 <br/>            <br/>                       <br/>                                          | easy access guide to use the system                                                                                            |
+| `*`      | admin       | see the availability of slots per class for a subject                                                                                                                 | easily shift students around to different available time slots if they were to make requests to attend different slots         |
+| `*`      | admin       | see all available classes for different subjects and the respective availabilities                                                                                    | inform new students of available classes easily                                                                                |
+| `*`      | admin       | view the week's class schedule and which student is inside                                                                                                            | be clear on who is attending class and when, know who I am teaching, and if there are any conflicts in scheduling              |
+| `*`      | admin       | check students who are entitled to but have not received referral rewards                                                                                             | keep track and give out referral rewards to students more easily                                                               |
+| `*`      | expert admin | can categorise students' profiles into different groups for different actions to be taken like those who need to pay fees, take tests, submit homework, etc           | send appropriate reminders in a more organised manner                                                                          |
+| `*`      | expert admin | automate admin tasks like sending reminders for payment, homework, etc                                                                                                | saved time from not doing these repetitive tasks every month                                                                   |
+| `*`      | expert admin | do mass tracking for student count                                                           <br/><br/><br/>                                                          | have a general statictic of the size of the tuition center                                                                     |
 
 
 *{More to be added}*
@@ -465,8 +607,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: Admin**
 
-**Preconditions:** Admin is logged in (UC03).
-
 **MSS:**
 1. Admin prompts the system to list all students' details.
 2. System returns a list of all students with their respective details with their names.
@@ -478,120 +618,436 @@ Use case ends.
 
 **Actor: Admin**
 
-**Preconditions:** Admin is logged in (UC03).
-
 **MSS:**
 1. Admin prompts the system to add a student.
-2. System prompts the admin to key in details of the student.
-3. Admin key in details.
-4. System adds the student and display success status.
+2. Admin inputs details.
+3. System adds the student and display success status.
 
 Use case ends.
 
 **Extensions:**
-* 3a. Admin keyed in the information in the wrong format.
-    * 3a1. System display wrong format status.
-    * 3a2. System prompt admin to key in information again.
-    * 3a3. Admin key in information again.
+* 2a. Admin inputs information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to key in information again.
+    * 2a3. Admin inputs information again.
 
-        Repeat 3a1 to 3a3 until Admin key in the right information.
-    * 3a4. System adds the student and display success status.
-
-    Use case ends.
-
-<br><br>
-**UC03 - Log into system**
-
-**Actor: Admin**
-
-**MSS:**
-
-1. Admin enters username.
-2. Admin enters password.
-3. Admin gets logged in.
-
-Use case ends.
-
-**Extensions:**
-* 3a. System detects mismatch in either username or password or both.
-    * 3a1. System notifies user of wrong username or password.
-    * 3a2. System requests for correct username and password.
-    * 3a3. User enters new username and password.
-
-        Repeat 3a1 to 3a3 until the data entered is correct.
+        Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System adds the student and displays success status.
 
     Use case ends.
 
 <br><br>
-**UC04 - Mark payment of students**
+**UC03 - Mark payment of students**
 
 **Actor: Admin**
-
-**Preconditions:** Admin is logged in (UC03).
 
 **MSS:**
 
 1. Admin prompts the system to mark payment.
-2. System prompts the admin to key in details of this student.
-3. Admin key in details.
-4. System marks the payment for the student and returns a success message.
+2. Admin inputs details.
+3. System marks the payment for the student and returns a success message.
 
 Use case ends.
 
 **Extensions:**
 
-* 3a. Admin keyed in the information in the wrong format.
-  * 3a1. System display wrong format status.
-  * 3a2. System prompt admin to key in information again.
-  * 3a3. Admin key in information again.
+* 2a. Admin inputs the information in the wrong format.
+  * 2a1. System display wrong format status.
+  * 2a2. System prompt admin to key in information again.
+  * 2a3. Admin inputs information again.
 
-    Repeat 3a1 to 3a3 until Admin key in the right information.
-  * 3a4. System adds the student and display success status
+    Repeat 3a1 to 3a3 until Admin inputs the right information.
+  * 2a4. System adds the student and displays success status
 
   Use case ends.
 
-* 4a. Payment of the student has already being marked.
-  * 4a1. System returns a message on payment of student being marked already.
-  * 4a2. System returns a fail status.
+* 3a. Payment of the student has already being marked.
+  * 3a1. System returns a message on payment of student being marked already.
+  * 3a2. System returns a fail status.
 
   Use case ends.
 
 <br><br>
-**UC05 - Delete student from system**
+**UC04 - Delete student from system**
 
 **Actor: Admin**
-
-**Preconditions:** Admin is logged in (UC03).
 
 **MSS:**
 
 1. Admin decides student to be deleted from the system.
-2. Admin selects that student.
-3. System requests for confirmation.
-4. Admin confirms.
-5. System deletes the student information.
+2. Admin inputs student to be deleted.
+3. System deletes the student information.
+
+**Extensions**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to key in information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System deletes the student and displays success status.
+    
+    Use case ends.
 
 Use case ends.
 
+<br><br>
+
+**UC05 - Create new tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides tutorial to add to system.
+2. Admin adds the tutorial.
+3. System records the tutorial and displays success status.
+
 **Extensions:**
 
-* *a. At any time, user chooses to cancel the deletion.
-    * *a1. System requests to confirm the cancellation.
-    * *a2. Admin confirms the cancellation.
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System records the tutorial and displays success status.
 
   Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC06 - Enroll student in tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student to be added to a tutorial.
+2. Admin enrolls the student in the tutorial.
+3. System records student as enrolled in tutorial and displays success status.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompts admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System enrolls the student and displays success status.
+
+  Use case ends.
+
+
+* 2b. Admin inputs student or tutorial that do not exist.
+  * 2b1. System displays errors status.
+  * 2b2. System prompts admin to key in information again.
+  * 2b3. Admin inputs information again.
+    
+    Repeat 2b1 to 2b3 until Admin inputs student and/or tutorial that exist.
+  * 2b4. System enrolls the student and displays success status.
+  
+  Use case ends.
+
+Use case ends. 
+
+<br><br>
+
+**UC07 - Unenroll student from tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student to be removed from a tutorial.
+2. Admin unenrolls the student from the tutorial.
+3. Systems records student as no longer part of the tutorial and displays success status.
+
+**Extensions:**
+
+* 2a. Admin keyed in the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System unenrolls the student and displays success status.
+
+  Use case ends.
+
+
+* 2b. Admin keys in student or tutorial that do not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+  
+        Repeat 2b1 to 2b3 until Admin inputs student and/or tutorial that exist.
+    * 2b4. System enrolls the student and displays success status. 
+  
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC08 - Edit student information**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student and information to be edited.
+2. Admin inputs information to be edited for student.
+3. System records edited information for student and shows success status.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System edits the student and displays success status.
+
+  Use case ends.
+
+
+* 2b. Admin inputs student that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System edits the student and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC09 - Search for a student in system**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student or criteria to search for.
+2. Admin inputs criteria to be searched for.
+3. System displays search results that match inputted criteria.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System shows search results and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC10 - Delete tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides tutorial to delete from system.
+2. Admin inputs the tutorial.
+3. System deletes the tutorial and displays success status.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System deletes the tutorial and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC11 - Add fees to student**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student to add fees for.
+2. Admin inputs information of student and fees.
+3. System adds fees to student's information.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System records the tutorial and displays success status.
+
+  Use case ends.
+
+* 2b. Admin inputs student that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System adds fees for the student and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC12 - Marking attendance of student**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student for whom attendance is to be marked.
+2. Admin inputs information about student and date.
+3. System marks attendance for student for specified date.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System records the attendance and displays success status.
+
+  Use case ends.
+
+* 2b. Admin inputs student that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System marks attendance for the student and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC13 - Marking attendance of tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides tutorial for whom attendance is to be marked.
+2. Admin inputs information about tutorial and date.
+3. System marks attendance for all students in tutorial for specified date.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System records the attendance and displays success status.
+
+  Use case ends.
+
+* 2b. Admin inputs tutorial that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System marks attendance for the tutorial and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC14 - Unmarking attendance of student**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student for whom attendance is to be unmarked.
+2. Admin inputs information about student and date.
+3. System unmarks attendance for student for specified date.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System unmarks the attendance and displays success status.
+
+  Use case ends.
+
+* 2b. Admin inputs student that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System unmarks attendance for the student and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC015 - Clearing all students**
+
+**Actor: Admin**
+
+**MSS:**
+1. Admin prompts the system to clear all students' from system.
+2. System deletes all students.
+
+Use case ends.
 
 <br><br>
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 400 students' information without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should retrieve and display student information for typical queries within 2 seconds.
-5. The system must be available 99.9% of the time, excluding scheduled maintenance.
 6. Data should be stored in a local human text editable file.
 7. Should contain an easy-to-read and detailed User and Developer Guides.
 8. The System should be run on the user's own computer.
+9. The system should only be accessible after the user have logged into their computer.
 9. Users should be able to run the application directly from the downloaded JAR file without an installer.
 10. The code should follow coding standard and be well-documented with clear comments for ease of understanding.
 11. The code architecture should allow for the addition of new features without restructuring components.
@@ -602,7 +1058,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Admin**: Admin at the tuition center who is in charge of all administrative processes
 * **System**: The Eduvault application
-* **Student**: Current and pat students who attended the tuition centre
+* **Student**: Current students who attend the tuition centre
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -611,7 +1067,7 @@ Use case ends.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 </div>
 
@@ -628,7 +1084,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
      
    2. Re-launch the app by double-clicking the jar file.
-     
+
    3. Expected result: The most recent window size and location is retained.
 
 
@@ -645,21 +1101,21 @@ testers are expected to do more *exploratory* testing.
 1. Adding a student that does not exist
 
    * Prerequisites: Student with name ‘Alex’ and phone number ‘98765432’ exist
-   
+
    * Test case: `add n/Bernice p/87654321 e/bernice@example.com a/Blk 30 Clementi Street 20 #10-10`
-      
+
       - Expected: Student is added to the list. Details of the added student are shown in the message box.
-      
+
    * Test case: `add n/Alex Yeoh p/98765432 e/alexyeoh@example.com a/Blk 20 Jurong Street 76 #11-11`
-      
+
       - Expected: Same as previous
-         
+
 2. Adding a student that already exist
-         
+
    * Prerequisites: Student with name ‘Alex’ and phone number ‘98765432’ exist
-            
+
    * Test case: `add n/Alex p/98765432 e/alexyeoh@example.com a/Blk 20 Jurong Street 76 #11-11`
-      
+
       - Expected: Student is not added to the list. Error message is shown in the message box.
 
 ### Editing a student
@@ -667,19 +1123,19 @@ testers are expected to do more *exploratory* testing.
 1. Editing one or more details of a student
 
    * Prerequisites: Student with name ‘Alex’ and phone number ‘98765432’ does not exist
-   
+
    * Test case: `edit 1 a/Blk 20 Jurong Street 76 #11-11`
-   
+
       - Expected: Address of first student is changed to ‘Blk 20 Jurong Street 76 #11-11’. Details of the edited student are shown in the message box.
-         
+
    * Test case: `edit 1 n/Alex p/98765432`
-         
+
       - Expected: Name and phone number of first student is changed to ‘Alex’ and ‘98765432’ respectively. Details of the edited student are shown in the message box.
-            
+
 2. Editing details of a student to match another student in EduVault
-   
+
    * Prerequisites: Student with name “Alex” and phone number “98765432” exist
-      
+
    * Test case: `edit 1 n/Alex p/98765432`
 
       - Expected: Details of first student are not updated. Error message is shown in the message box.
@@ -689,15 +1145,15 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a student while all students are being shown
 
    * Prerequisites: List all students using the list command. Multiple students in the list.
-   
+
    * Test case: `delete 1`
-   
+
       - Expected result: First student is deleted from the list. Details of the deleted student shown in the message box.
-   
+
    * Test case: `delete 0`
-   
+
       - Expected result: No student is deleted. Error message shown in the message box.
-   
+
    * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
    Expected: Similar to previous.
 
@@ -707,36 +1163,36 @@ testers are expected to do more *exploratory* testing.
 1. Creating a new tutorial
 
    * Prerequisites: Tutorial with name ‘Math’ does not exist.
-   
+
    * Test case: `createtut tut/Math`
-   
-      - Expected: Tutorial with name ‘Math’ is created. Name of the tutorial created is shown in the message box. 
+
+      - Expected: Tutorial with name ‘Math’ is created. Name of the tutorial created is shown in the message box.
       Dashboard shows newly created tutorial with 0 students enrolled under classes offered.
-   
+
    * Test case: `createtut tut/Math 1pm`
-   
+
       - Expected: Same as previous except tutorial with name ‘Math 1pm’ is created.
 
 2. Creating a tutorial that already exist
 
    * Prerequisites: Tutorial with name ‘Math’ exists.
-   
+
    * Test case: `createtut tut/Math`
-   
+
       - Expected: No tutorial is created. Error message shown in the message box.
-   
+
    * Test case: `createtut tut/math`
-   
+
       - Expected: Same as previous.
-   
+
 3. Creating a tutorial with non-alphanumeric characters in name
-   
+
    * Test case: `createtut tut/Math-secondary`
-   
+
       - Expected: No tutorial is created. Error message shown in the message box.
-   
+
    * Test case: `createtut tut/Math O’Lvl`
-      
+
       - Expected: Same as previous
 
 ### Closing a tutorial
@@ -744,19 +1200,19 @@ testers are expected to do more *exploratory* testing.
 1. Closing an existing tutorial
 
    * Prerequisites: Tutorial with name ‘Math’ exists.
-   
+
    * Test case: `closetut tut/Math`
-   
-      - Expected: Tutorial with name ‘Math’ is closed. Name of the tutorial that is closed is shown in the message box. 
-         Dashboard no longer shows the tutorial under classes offered. All students who are still enrolled in the tutorial 
+
+      - Expected: Tutorial with name ‘Math’ is closed. Name of the tutorial that is closed is shown in the message box.
+         Dashboard no longer shows the tutorial under classes offered. All students who are still enrolled in the tutorial
          are unenrolled from the tutorial and the attendance card for that tutorial will no longer be shown.
-   
+
 2. Closing a tutorial that does not exist
-   
+
    * Prerequisites: Tutorial with name ‘Math’ does not exist.
-    
+
    * Test case: `closetut tut/Math`
-      
+
       - Expected: Error message shown in the message box.
 
 ### Enrolling students in tutorial
@@ -764,129 +1220,129 @@ testers are expected to do more *exploratory* testing.
 1. Enrolling a student in a tutorial that exists
 
    * Prerequisites: Tutorial with name ‘Math’ exists.
-   
+
    * Test case: `enroll 1 tut/Math`
    
       - Expected: First student is enrolled in ‘Math’ tutorial.
-      Dashboard shows the updated number of students enrolled in ‘Math’ tutorial. 
+      Dashboard shows the updated number of students enrolled in ‘Math’ tutorial.
       Attendance card is created for the first student for ‘Math’ tutorial.
-   
+
 2. Enrolling a student in a tutorial that does not exist
-   
+
    * Prerequisites: Tutorial with name ‘Math’ does not exist.
-      
+
    * Test case: `enroll 1 tut/Math`
-   
+
       - Expected: First student is not enrolled in ‘Math’ tutorial. Error message is shown in the message box.
-      
+
 3. Enrolling a student in a tutorial that they are already taking
-      
+
    * Prerequisites: Student 1 is already taking ‘Math’ tutorial.
-         
+
    * Test case: `enroll 1 tut/Math`
-   
+
       - Expected: First student is not enrolled in ‘Math’ tutorial. Error message is shown in the message box.
-         
+
 ### Unenrolling students from tutorial
-         
+
 1. Unenrolling a student from a tutorial that the student takes
 
    * Prerequisites: Student is taking ‘Math’ tutorial.
-            
+
    * Test case: `unenroll 1 tut/Math`
-   
-      - Expected: First student is unenrolled from ‘Math’ tutorial. Dashboard shows the updated number of students enrolled in ‘Math’ tutorial. 
+
+      - Expected: First student is unenrolled from ‘Math’ tutorial. Dashboard shows the updated number of students enrolled in ‘Math’ tutorial.
       Attendance card is removed for the first student for ‘Math’ tutorial.
-            
+
 2. Unenrolling a student from a tutorial that the student is not taking
-            
+
    * Prerequisites: Student is not taking ‘Math’ tutorial.
-               
+
    * Test case: `unenroll 1 tut/Math`
-   
+
       - Expected: Error message is shown in the message box.
-               
+
 ### Marking attendance of student
 
 1. Marking attendance of a student for a tutorial the student takes
 
    * Prerequisites: Student is taking ‘Math’ tutorial and does not have attendance marked for the week of 10/10/2024 for ‘Math’ tutorial
-                  
+
    * Test case: `mas 1 tut/Math attend/10/10/2024`
-      
-      - Expected: Attendance of first student is marked for ‘Math’ tutorial on 10/10/2024. 
+
+      - Expected: Attendance of first student is marked for ‘Math’ tutorial on 10/10/2024.
       Dashboard shows the marked attendance if the attendance marked is for the current week.
-                  
+
    * Test case: `mas 1 attend/10/10/2024 tut/Math`
    
       - Expected: Same as previous
-                  
+
 2. Marking attendance of a student for a tutorial the student does not take
 
    * Prerequisites: Student is not taking ‘Math’ tutorial
-                     
+
    * Test case: `mas 1 tut/Math attend/10/10/2024`
-   
+
       - Expected: Attendance of first student is not marked. Error message is shown in the message box.
-                     
+
 3. Marking attendance of a student for a tutorial that has attendance marked for the corresponding week
-                     
+
    * Prerequisites: Student has attendance marked for any date in the week of 10/10/2024 for ‘Math’ tutorial.
-   
+
    * Test case: `mas 1 tut/Math attend/10/10/2024`
-   
+
       - Expected: Attendance of first student is not marked. Error message is shown in the message box.
 
 4. Marking attendance of a student for a future date
 
    * Prerequisites: Student is taking ‘Math’ tutorial.
-      
+
    * Test case: `mas 1 tut/Math attend/FUTURE_DATE`
-   
-      - Expected: Attendance of first student is not marked. Error message is shown in the message box.
+
+   - Expected: Attendance of first student is not marked. Error message is shown in the message box.
 
 ### Marking attendance of tutorial
 
 1. Marking attendance of a tutorial that exists
 
-   * Prerequisites: ‘Math’ tutorial exists and at least one student is enrolled in the tutorial. 
+   * Prerequisites: ‘Math’ tutorial exists and at least one student is enrolled in the tutorial.
    There must also be at least one student who does not have attendance marked for the week of 10/10/2024 for ‘Math’ tutorial.
 
    * Test case: `mat tut/Math attend/10/10/2024`
-   
-      - Expected: Attendance of all students who do not have corresponding weekly attendance is marked for ‘Math’ tutorial on 10/10/2024. 
+
+      - Expected: Attendance of all students who do not have corresponding weekly attendance is marked for ‘Math’ tutorial on 10/10/2024.
       Dashboard shows the marked attendance for marked students if the attendance marked is for the current week.
-      
+
    * Test case: `mat attend/10/10/2024 tut/Math`
-      
+
       - Expected: Same as previous
-         
+
 2. Marking attendance of a tutorial that does not exist
-         
+
    * Prerequisites: ‘Math’ tutorial does not exist
-            
+
    * Test case: `mat tut/Math attend/10/10/2024`
-            
+
       - Expected: Attendance is not marked. Error message is shown in the message box.
-               
+
    * Test case: `mat tut/math attend/10/10/2024`
-               
+
       - Expected: Same as previous
-                  
+
 3. Marking attendance of a tutorial where all students already have attendance marked for the corresponding week
-                  
+
    * Prerequisites: All students have attendance marked for any date in the week of 10/10/2024 for ‘Math’ tutorial.
-                     
+
    * Test case: `mat tut/Math attend/10/10/20241`
-                     
+
       - Expected: Attendance of all students are not marked. Error message is shown in the message box.
-                        
+
 4. Marking attendance of a tutorial for a future date
-                        
+
    * Prerequisites: ‘Math’ tutorial exists.
-                           
+
    * Test case: `mat tut/Math attend/FUTURE_DATE`
-                           
+
       - Expected: Attendance of students are not marked. Error message is shown in the message box.
 
 ### Unmarking attendance of student
@@ -894,92 +1350,92 @@ testers are expected to do more *exploratory* testing.
 1. Unmarking attendance of a student for a tutorial the student takes
 
    * Prerequisites: Student is taking ‘Math’ tutorial and has attendance marked for 10/10/2024 for ‘Math’ tutorial
-   
+
    * Test case: `umas 1 tut/Math attend/10/10/2024`
-   
-      - Expected: Attendance of first student is unmarked for ‘Math’ tutorial on 10/10/2024. 
+
+      - Expected: Attendance of first student is unmarked for ‘Math’ tutorial on 10/10/2024.
       Dashboard no longer shows marked attendance if the attendance unmarked is for the current week.
-      
+
    * Test case: `umas 1 attend/10/10/2024 tut/Math`
-      
+
       - Expected: Same as previous
-         
+
 2. Unmarking attendance of a student for a tutorial the student does not take
-    
+
    * Prerequisites: Student is not taking ‘Math’ tutorial
-            
+
    * Test case: `umas 1 tut/Math attend/10/10/2024`
-            
+
       - Expected: Error message is shown in the message box.
-               
+
 3. Unmarking attendance of a student for a future date
-               
+
    * Prerequisites: Student is taking ‘Math’ tutorial.
-                  
+
    * Test case: `umas 1 tut/Math attend/FUTURE_DATE`
-                  
+
       - Expected: Error message is shown in the message box.
-                     
+
 ### Marking payment
 
 1. Marking payment of a student
 
    * Prerequisites: Student is enrolled in at least one tutorial
-   
+
    * Test case: `markpaid 1 pay/100`
-   
+
       - Expected: Payment due decreases by 100 for the first student. If the amount paid is equal to payment due, the UI updates to show the fees are paid. If the amount paid is greater than the payment due, the advance amount will also be shown.
-      
+
 2. Marking payment of a student that is not enrolled in any tutorial
-      
+
    * Prerequisites: Student is not enrolled in any tutorial
-         
+
    * Test case: `markpaid 1 pay/100`
-         
+
       - Expected: Payment is not updated for the first student. Error message is shown in the message box.
-      
+
 ### Logging payment
 
 1. Adding payment for a student
-            
+
    * Prerequisites: Student is enrolled in at least one tutorial
-      
+
    * Test case: `addfees 1 pay/100`
-           
+
       - Expected: If there is no advance, the payment due increases by 100. If there is an advance amount greater than 100, the advance amount decreases by 100. If the advance is less than 100, the payment due increases by the excess amount after deducting the advance. If the advance is equal to 100, the payment due will be marked as 0.
-              
+
 2. Adding payment of a student that is not enrolled in any tutorial
-              
+
    * Prerequisites: Student is not enrolled in any tutorial
-                 
+
    * Test case: `markpaid 1 pay/100`
-      
+
       - Expected: Payment is not updated for the first student. Error message is shown in the message box.
-      
+
 ### Searching students
-                    
+
 1. Searching for students who have overdue payment
-                    
+
    * Test case: `find pay/false`
-   
+
      - Expected: List of students who have overdue payment is shown.
-                       
+
 2. Searching for students who have attended any tutorial within a given period
-                       
+
    * Test case: `find attend/10/10/2024:17/10/2024`
-                          
+
       - Expected: List of students who have attended any tutorial within the period 10/10/2024 - 17/10/2024.
-                             
+
 3. Searching for students with a specific name who have attended any tutorial within a given period
-                             
+
    * Test case: `find n/alex attend/10/10/2024:17/10/2024`
-                                
+
       - Expected: List of students, with name matching ‘Alex’, who have attended any tutorial within the period 10/10/2024 - 17/10/2024.
-                                   
-4. Searching for students with specific name enrolled in a given tutorial with overdue payment  
-                                   
+
+4. Searching for students with specific name enrolled in a given tutorial with overdue payment
+
    * Test case: `find n/alex tut/Math pay/false`
-                                      
+
       - Expected: List of students, with name matching ‘Alex’, who is enrolled in ‘Math’ tutorial and has overdue payment.
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -1037,5 +1493,7 @@ tutorial at a time. We plan to add functionality to support enrolling or unenrol
 simultaneously, improving efficiency.
 9. **Prevent Duplicate Attendance Records**: Currently, attendance can be added multiple times even if it’s within the
 same week for the same tutorial participation. We plan to add a check to prevent duplicate attendance within the same week, ensuring accurate attendance tracking.
-10. **Enhance Find Command with OR Logic for Tags**: The current “Find” command uses AND logic to combine multiple
-conditions, which can limit search results when looking for contacts with any one of multiple tags. We plan to enhance the command by allowing OR logic, which would broaden the search results when users search for contacts with multiple tags, making it more flexible.
+10. **Enhance Find Command with list sorted by relevance**: The current “Find” command uses AND logic to combine multiple
+conditions, which can limit search results when looking for students that only satisfy one of the conditions. We plan to enhance
+this command by allowing OR logic. Results that matches the OR command would be displayed below results that matches
+the AND logic. Basically, the list would be sorted by their relevance to the search.
