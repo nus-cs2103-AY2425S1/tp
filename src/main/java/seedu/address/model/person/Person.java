@@ -121,7 +121,7 @@ public class Person {
     }
 
     /**
-     * Checks if this person is already assigned to the given wedding.
+     * Checks if this person is already assigned to the given wedding or person is client of wedding.
      *
      * @param wedding The wedding to check
      * @return true if the person is already assigned to the wedding
@@ -129,6 +129,16 @@ public class Person {
     public boolean isAssignedToWedding(Wedding wedding) {
         return weddingJobs.contains(wedding)
                 || (ownWedding != null && ownWedding.equals(wedding));
+    }
+
+    /**
+     * Checks if this person is already assigned to the given wedding and not client of the wedding.
+     *
+     * @param wedding The wedding to check
+     * @return true if the person is already assigned to the wedding
+     */
+    public boolean isAssignedToWeddingNonClient(Wedding wedding) {
+        return weddingJobs.contains(wedding);
     }
 
     /**

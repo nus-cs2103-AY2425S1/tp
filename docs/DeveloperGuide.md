@@ -587,7 +587,7 @@ Success action: Details of edited contact shown in the status message, person in
 ### Viewing a person
 
 Success action: When a person is successfully viewed, the details of the viewed contact is shown in the person list. Status message shows that that contact is viewed. 
-Timestamp in the status bar is updated. The weddings involved of the person will be reflected in the wedding list on the right.
+The weddings involved of the person will be reflected in the wedding list on the right.
 
 #### Viewing with INDEX
 
@@ -632,7 +632,7 @@ Timestamp in the status bar is updated. The weddings involved of the person will
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.<br><br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. <br><br>
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. `delete` command format is shown in the status message.<br><br>
@@ -654,7 +654,7 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 1. Since `delete NAME` searches from the entire list of contacts, rather than only the partial list, it works either way.
 
    1. Test case: `delete Alice Tan` <br>
-      Expected (Unique Alice Tan): The contact of `Alice Tan` will be deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.<br>
+      Expected (Unique Alice Tan): The contact of `Alice Tan` will be deleted. Details of the deleted contact shown in the status message. <br>
       Expected (Duplicated Alice Tan): Contacts with name field containing `Alice Tan` exactly will be shown. Status message prompts user to re-input using index according to the newly filtered list to specify which `Alice Tan` they want to delete. <br>
       Expected (No Alice Tan): No person is deleted. Error details is shown in the status message, as the NAME does not belong to anyone in the address book.
 
@@ -769,14 +769,14 @@ Success action: When wedding is successfully edited, the details of the updated 
        Test case: `editw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is a negative number) <br>
        Expected: No wedding edited. `editw` command format is shown in the status message.<br><br>
 
-    1. Test case: `addw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is larger than the size of the wedding list)<br>
+    1. Test case: `addw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is outside of the range of wedding list or a non-numeric character)<br>
        Expected: No wedding edited. Error message prompting the user to choose an index within the range shown.
 
 
 ### Viewing weddings
 
 Success action: When wedding is successfully viewed, the details of the viewed wedding is shown in the status message and reflected in wedding list.
-The persons involved in the viewed wedding will be shown in the person list. Timestamp in the status bar is updated.
+The persons involved in the viewed wedding will be shown in the person list. 
 
 #### Viewing weddings using INDEX
 
@@ -815,7 +815,7 @@ The persons involved in the viewed wedding will be shown in the person list. Tim
 ### Deleting weddings
 
 Success action: When a wedding is successfully deleted, the details of the deleted wedding is shown in the status message. The client of the wedding will have their wedding status reset.
-Persons who are involved in the wedding will also be unassigned. Timestamp in the status bar is updated.
+Persons who are involved in the wedding will also be unassigned.
 
 - To verify this: view the contact itself using `view` command, which will show the weddings the person is involved in. The deleted wedding should not be included.
 
@@ -961,12 +961,12 @@ Success action: When a person is successfully assigned:
     1. Prerequisites: List all persons and weddings using the `list` command. Multiple persons and weddings in the list.<br><br>
 
     1. Test case: `delete 1 w/1`<br>
-       Expected: First wedding is unassigned from first person. Details of the unassigned contact shown in the status message. Timestamp in the status bar is updated.<br><br>
+       Expected: First wedding is unassigned from first person. Details of the unassigned contact shown in the status message. <br><br>
 
     1. Test case: `delete 0 w/1`<br>
        Expected: No person to unassign wedding job. `delete` command format is shown in the status message.<br><br>
 
-    1. Test case: `delete 1 w/x` (where x is larger than the size of wedding list)<br>
+    1. Test case: `delete 1 w/x` (where x is outside of the range of wedding list or a non-numeric character)<br>
        Expected: Error message prompting the user to choose an index within the range shown.<br><br>
 
 1. Removing wedding jobs assigned to a person while a partial list of weddings is shown.
@@ -980,7 +980,7 @@ Success action: When a person is successfully assigned:
 1. Since `delete NAME w/1` searches from the entire list of contacts, rather than only the partial list, it works either way.
 
     1. Test case: `delete Alice Tan w/1` <br>
-       Expected (Unique Alice Tan): The contact of `Alice Tan` will be unassigned from wedding at index 1. Details of the unassigned contact shown in the status message. Timestamp in the status bar is updated.<br>
+       Expected (Unique Alice Tan): The contact of `Alice Tan` will be unassigned from wedding at index 1. Details of the unassigned contact shown in the status message. <br>
        Expected (Duplicated Alice Tan): Contacts with name field containing `Alice Tan` exactly will be shown. Status message prompts user to re-input using index according to the newly filtered list to specify which `Alice Tan` they want to unassign. <br>
        Expected (No Alice Tan): No person to unassign. Error details is shown in the status message, as the NAME does not belong to anyone in the address book.
 
