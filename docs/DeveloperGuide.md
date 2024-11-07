@@ -207,32 +207,36 @@ Classes used by multiple components are in the `tuteez.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add/delete remark feature
+### Find feature
 
-The `addRemarkCommand` allows users to add a remark to a specified person in the addressbook.
-The `deleteRemarkCommand` allows users to delete a remark from a specified person in the addressbook.
-They both use `RemarkCommandParser` to parse the user input and create an `addRemarkCommand` and `deleteRemarkCommand` object respectively, which modifies the `Person` object in the `Model`.
+#### Implementation details
 
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("remark 1 -a Good progress")` API call as an example.
+The `find` command involves searching for keywords that match the student's details.
 
-<puml src="diagrams/AddRemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark 1 -a Good progress` Command" />
+It uses `FindCommandParser` to parse the user input and create a `FindCommand` object, which modifies the `Person` object in the `Model`.
 
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `deleteRemarkCommand`, taking `execute("remark 1 -d 2")` API call as an example.
+The following sequence diagram demonstrates the flow for the `find` command:
 
-<puml src="diagrams/DeleteRemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark 1 -d 2` Command" />
+<puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find n/john` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `RemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `FindParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-How the this feature works:
+### Design Considerations
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command `remark` (i.e., `RemarkCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddRemarkCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed.<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it takes several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+Aspect: Keyword differentiated by prefixes
+- Alternative 1 (Current choice): Keywords are preceded by prefixes (eg `n/`) that represent the command searches from within the student's details
+    - Pros:
+        - Allows for more accurate searches
+    - Cons
+        - Users must remember prefixes
+- Alternative 2: No differentiation of keywords
+    - Pros:
+        - More straightforward to type out
+    - Cons:
+        - May result in ambiguous commands, leading to incorrect or incomplete searches.
 
 ### Detection of next lesson
 
@@ -256,7 +260,7 @@ How this feature works:
 The `DisplayCommand` allows users to display a specified person in the addressbook.
 It uses `DisplayCommandParser` to parse the user input and create an `DisplayCommand` object, which modifies the `lastViewedPerson` object in the `Model`.
 
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("remark 1 -a Good progress")` API call as an example.
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `displayCommand`, taking `execute("display 1")` API call as an example.
 
 <puml src="diagrams/DisplaySequenceDiagram.puml" alt="Interactions Inside the Logic Component when a display command is called" />
 
@@ -450,24 +454,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Tuteez` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC1 - Add a student**
 
 **MSS**
 
-1. User types keyword followed by student details into textbox
-2. App acknowledges that a new user has been added
+1. User types add keyword followed by student details into the textbox
+2. Tuteez acknowledges that a new student has been added
 3. Use case ends
 
 **Extensions**
 
-- 2a. App detects similar/identical name or phone number in records
+- 2a. Tuteez detects similar/identical name
 
-    - 2a1. Asks user to confirm action
-    - 2a2. User confirms/denies
-    - 2a3. App adds new entry and acknowledges / returns to home screen
-    - 2a4. Use case ends
+    - 2a1. Tuteez rejects the new addition and show error message
+    Use case ends
+
+- 2b. Tuteez detects clashing lesson
+    - 2b1. Tuteez rejects the new addition and show error message
+    Use case ends
 
 
 **Use case: UC2 - List all students**
@@ -475,17 +481,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User types keyword
-2. App displays all students address book in alphabetical order
+2. Tuteez displays all students in alphabetical order
 3. Use case ends
 
-**Use case: UC3 - Delete a person**
+**Use case: UC3 - Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons <u>(UC2)</u>
+1.  User requests to list students
+2.  Tuteez shows a list of student <u>(UC2)</u>
 3.  User types keyword followed by delete index or name
-4.  AddressBook deletes the person
+4.  Tuteez deletes the person
 5. Use case ends
 
 
@@ -497,12 +503,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  - 3a1. Tuteez shows an error message.
 
       Use case resumes at step 2.
 - 3b. The given name does not exist
-  - 3b1 AddressBook shows an error message.
-  - 3b2. Use case resumes from step 2
+  - 3b1. Tuteez shows an error message.
+        
+      Use case resumes at step 2
 
 
 ### Non-Functional Requirements
@@ -524,18 +531,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Student**: A person who is taking lessons from the tutor
 * **Tutor**: The user of the application
-* **Parent**: A person who is the parent or guardian of the student
-* **Add student**: A feature that allows users to create a new student entry along with their information in the application
-* **Delete student**: A feature that allows users to remove a student entry and their information from the application
-* **Search student**: A feature that allows users to find a particular student by entering their name
-* **Private student details**: Student details and contact information that are not meant to be shared with others
-* **Private parent details**: Parent details and contact information that are not meant to be shared with others
-* **Notes tab**: A section within the application where users can record additional information about their students
-* **Tutoring schedule**: A timetable that shows the dates and times of lessons with students
+* **addlsn**: An abbreviation for the addlesson command
+* **dellsn**: An abbreviation for the deletelesson command
+* **addrmk**: An abbreviation for the addremark command
+* **delrmk**: An abbreviation for the deleteremark command
 * **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
 * **Tags**: Labels that can be assigned to students to group them based on common characteristics
-* **Filtering**: A feature that allows users to view specific groups of students based on their tags or specific criteria
-
+* **Remarks**: Longer texts that can be added to students
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -564,29 +566,36 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete 0`, `delete x` (where x is larger than the list size), `delete something`<br>
+      Expected: Invalid student index error is shown in the status message.
 
-1. _{ more test cases …​ }_
+1. _Deleting a student by name
+
+    1. Prerequisites: The student list contains only a student with the name "John"
+
+    1. Test case: `delete john`<br>
+       Expected: John will be deleted from the list. Details of john will be shown in the status message.
+   
+    1. Test case: `delete Alice`<br>
+       Expected: No person is deleted. An error message appears in the status.
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Test case: Delete the data file from the directory containing tuteez.jar to simulate missing file.
+      Expected: A new data file will be automatically created with default set of "dummy" students when tuteez.jar is run.

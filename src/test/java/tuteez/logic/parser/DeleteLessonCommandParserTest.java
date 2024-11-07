@@ -3,6 +3,7 @@ package tuteez.logic.parser;
 import static tuteez.logic.Messages.MESSAGE_DUPLICATE_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_LESSON_INDEX_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
@@ -52,6 +53,12 @@ public class DeleteLessonCommandParserTest {
     public void parse_whitespaceOnlyAfterCommandWord_throwsParseException() {
         assertParseFailure(parser, " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidPersonIndex_throwsParseException() {
+        assertParseFailure(parser, "0 " + PREFIX_LESSON_INDEX + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, "0")));
     }
 
     @Test

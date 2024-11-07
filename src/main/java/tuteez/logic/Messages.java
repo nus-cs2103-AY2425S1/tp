@@ -20,7 +20,8 @@ public class Messages {
     public static final String MESSAGE_MISSING_PERSON_INDEX =
             "Student index is required but missing. Please provide the index of the student as displayed in the list.";
     public static final String MESSAGE_INVALID_PERSON_INDEX_FORMAT =
-            "Student index must be a single, positive number (eg, '1', '2', '3').";
+            "Student index must be a single, positive number (eg, '1', '2', '3'). "
+                    + "However, it is currently detected as: %1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The student index provided is invalid";
     public static final String MESSAGE_MISSING_PERSON_NAME =
             "Student's name is required but missing. Please provide the name of the student using n/.";
@@ -37,8 +38,8 @@ public class Messages {
     public static final String MESSAGE_MISSING_REMARK_INDEX_PREFIX = "The remark index prefix 'ri/' is missing";
     public static final String MESSAGE_MISSING_REMARK_INDEX = "Remark index is required for deletion but missing. "
             + "Please specify which remark to delete (e.g., 'deleteremark 1 ri/1').";
-    public static final String MESSAGE_INVALID_REMARK_INDEX_FORMAT =
-            "Remark index must be a single, positive number (eg, '1', '2', '3').";
+    public static final String MESSAGE_INVALID_REMARK_INDEX_FORMAT = "Remark index must be a single, positive number "
+        + "(eg, '1', '2', '3'). However, it is currently detected as: %1$s";
     public static final String MESSAGE_INVALID_REMARK_INDEX = "The remark index provided is out of bounds.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NAME =
                 "No student named %1$s was found, please try again!";

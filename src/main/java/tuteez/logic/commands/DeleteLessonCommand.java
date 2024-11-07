@@ -42,7 +42,9 @@ public class DeleteLessonCommand extends LessonCommand {
 
         Person personToUpdate = getPersonFromModel(model);
 
-        List<Lesson> currentLessons = new ArrayList<>(personToUpdate.getLessons());
+        List<Lesson> currentLessons = new ArrayList<>(personToUpdate.getLessons().stream()
+                .sorted(new Lesson.LessonComparator())
+                .toList());
         List<Lesson> lessonsToDelete = new ArrayList<>();
         List<Index> invalidIndices = new ArrayList<>();
 
@@ -82,7 +84,7 @@ public class DeleteLessonCommand extends LessonCommand {
     private String formatLessonList(List<Lesson> lessons) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i).toString());
+            sb.append("• ").append(lessons.get(i).toString());
             if (i < lessons.size() - 1) {
                 sb.append("\n");
             }

@@ -6,9 +6,9 @@
 
 # Tuteez User Guide
 
-Tuteez is a **desktop address book app designed specifically for tech-savvy private tutors to manage student contacts**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student. If you can type fast, Tuteez can get your contact management tasks done faster than traditional GUI apps.
+Welcome! Tuteez is a **desktop address book app that makes managing student contacts seamless for private tutors**, allowing you to focus on what truly matters: your students.
 
-<!-- * Table of Contents -->
+<!-- TOC start -->
 
 - [Tuteez User Guide](#tuteez-user-guide)
    * [Quick start](#quick-start)
@@ -37,12 +37,12 @@ Tuteez is a **desktop address book app designed specifically for tech-savvy priv
       + [Displaying Student Information: `display`](#displaying-student-information-display)
       + [Clearing all entries : `clear`](#clearing-all-entries-clear)
       + [Exiting the program : `exit`](#exiting-the-program-exit)
-   * [Key details for Users  ](#key-details-for-users)
-      + [`Lesson` Constraints](#lesson-constraints)
+   * [Things you should definitely know 🤔](#things-you-should-definitely-know-)
+      + [Constraints to add a lesson](#constraints-to-add-a-lesson)
+      + [Current Limitations](#current-limitations)
       + [Saving the data](#saving-the-data)
       + [Editing the data file](#editing-the-data-file)
    * [Future Features](#future-features)
-      + [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
    * [FAQ](#faq)
    * [Known issues](#known-issues)
    * [Command summary](#command-summary)
@@ -84,8 +84,15 @@ Tuteez is a **desktop address book app designed specifically for tech-savvy priv
 
 ### Left panel
 
-* Meant to showcase only important information such as student's phone number, address, telegram and next lesson based on your computer's current time
+* Prioritizes important information such as student's phone number, address, next lesson, based on your computer's current time
 * If a lesson is currently ongoing it will show that lesson as the next lesson on the left panel
+
+<div style="width: 60%;">
+
+> 📘 **Info**  
+> If you change your computer's current time, just restart the app to sync our internal clock to your new time!!
+
+</div>
 
 ### Right panel
 
@@ -210,7 +217,7 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] 
 
 <box type="tip" seamless>
 
-**Tip:** A student can have any number of tags and lessons (including 0)
+**Tip:** You can add any number of tags and lessons to a student (or you could also omit them)
 </box>
 
 Examples:
@@ -234,14 +241,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing **tags**, **all previous values will be replaced** by the new ones entered.
     - This means you must **retype all old tags** you wish to keep, as editing will overwrite them completely.
-    - For example, if a student already has two lessons and you wish to add another, you need to re-enter the previous lessons along with the new one.
-* Lessons cannot clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, the app will notify the user with an error message.
 * You can remove all optional fields as specified in the `add` command by typing its parameter prefix (e.g. `t/`) without specifying any values after them.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 l/tuesday 0900-1100` Edits the lesson of the 3rd student to be `MONDAY 0900-1100`.
 
 ### Adding a Remark: `addremark` or `addrmk`
 
@@ -297,7 +301,7 @@ Format: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 
 * short form: `dellsn INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 * Deletes lesson(s) from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* Lessons are indexed based on the order they were added to the student, starting from 1.
+* Lessons are indexed starting from 1 and sorted in ascending order based on their day and time.
 * If the `LESSON_INDEX` is not valid, an error will be shown.
 
 Examples:
@@ -307,6 +311,7 @@ Examples:
 <box type="tip" seamless>
 
 **Tip:** You can delete multiple lessons at once by specifying different lesson indices.
+</box>
 
 ### Locating students by name: `find`
 
@@ -325,7 +330,7 @@ Format: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON
 
 Examples:
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  <img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="800">
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
@@ -347,21 +352,22 @@ Format: `delete INDEX` or `delete NAME`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the first student in the results of the `find` command.
 * `delete John Doe` deletes the student with the full name "John Doe" from the address book, ignoring case sensitivity.
 
 ### Displaying Student Information: `display`
 
 Displays specific information of a student in Tuteez.
 
-Format: `display INDEX`
+Format: `display INDEX` or `display NAME`
 
-* Displays the details of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Displays the details of the student at the specified `INDEX` or with the specified `NAME`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * The displayed information includes the student's name, phone number, email, address, tags, lessons, and any remarks associated with the student.
 
 Examples:
 * `display 1` Shows the details of the first student in the list.
 * `display 3` Shows the details of the third student in the list.
+* `display john doe` Shows the details of student John Doe in the list, if they were to be found.
 
 ### Clearing all entries : `clear`
 
@@ -377,9 +383,9 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Key details for Users  
+## Things you should definitely know 🤔
 
-### `Lesson` Constraints
+### Constraints to add a lesson
 
 Unfortunately, as of `V1.5` there are a few important constraints regarding lessons:  
 
@@ -388,12 +394,22 @@ Unfortunately, as of `V1.5` there are a few important constraints regarding less
 
 This means the following constraints apply:
 
-  1. Lesson start time must be before end time  
-  1. Lesson start and end time cannot be identical  
+  1. Lesson start time must be before end time (e.g. `1600-1500`)
+  1. Lesson start and end time cannot be identical (e.g. `1300-1300`)
   1. The latest lesson start time is `2358`
   1. The latest lesson end time is `2359`, `0000` is treated as the start of a new day
 
 Look forward to [future updates](#future-features) for group tuition support!!
+
+### Current Limitations
+
+As of `V1.5`, our app has a few limitations outlined below. Rest assured we, plan to resolve them in [future updates](#future-features)
+
+1. Remarks and lessons can only be added one at a time
+1. If you wish to edit a remark or lesson, first delete the incorrect one, then add the updated version.
+1. After using the find command to locate student(s), running most other commands will reset the left panel to the default view, similar to calling `list`.
+1. Tags that are too long are cut off on the left panel
+
 ### Saving the data
 
 Tuteez data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -413,9 +429,13 @@ Furthermore, certain edits can cause Tuteez to behave in unexpected ways (e.g., 
 
 ## Future Features
 
-### Archiving data files `[coming in v2.0]`
+With the ever-changing responsibilities of tutors, Tuteez evolves right alongside you, adding new features to support your journey. Here’s what’s in store for future updates!
 
-_Details coming soon ..._
+1. Group Lessons: Tuteez will soon support overlapping lessons and student grouping for group tuition! And as always, it will alert you in advance if there are any scheduling conflicts. 😉
+1. Document Management: Upload and associate PDFs or other documents directly with specific students for easy access and organization.
+1. Quick Messaging: Instantly open WhatsApp or Telegram chats with students directly from Tuteez with a single click, making it easy to reach out right away.
+1. Data Export: Enable seamless exporting of student information and lesson data into files for easy sharing, backup, or analysis outside of Tuteez.
+1. Of course, addressing all the limitations stated [above](#current-limitations)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -440,7 +460,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [l/LESSON]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math t/monday 0900-1100`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME`<br> e.g., `delete 3` or `delete James Ho`
-**Display**| `display INDEX` <br> e.g., `display 1`
+**Display**| `display INDEX` or display `NAME` <br> e.g., `display 1` or display `John Doe`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math l/sunday 1000-1100`
 **Add Remark** | `remark INDEX r/REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 r/Great progress in Math`
 **Delete Remark** |  `remark INDEX ri/REMARK_INDEX` to delete the remark at `REMARK_INDEX` from the student at `INDEX`<br> e.g., `remark 1 ri/2` to delete the second remark of student 1.
