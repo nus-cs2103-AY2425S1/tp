@@ -241,9 +241,8 @@ pre {
  * Tables
  */
 table {
-  margin-left: -9vw;
   margin-bottom: $spacing-unit;
-  min-width: 1000px;
+  width: 100%;
   text-align: $table-text-align;
   color: $table-text-color;
   border-collapse: collapse;
