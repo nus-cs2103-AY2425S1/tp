@@ -244,13 +244,13 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - Existing values will be updated to the input values.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can delete a event's venue or points of contact of the person by leaving their fields empty, like `v/`, `p/` respectively!
+You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
 </div>
   
 Examples:
 
 - `edit event 1 t/2024-03-21 v/Jane's Salon` Edits the time and venue of the 1st event to be `2024-03-21` and `Jane's Salon` respectively.
-- `edit event 2 n/Movie Screening v/ p/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue and points of contact of the person.
+- `edit event 2 n/Movie Screening v/ p/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue and points of contact.
 
 ![result for 'edit event'](images/edit_event.png)
 
