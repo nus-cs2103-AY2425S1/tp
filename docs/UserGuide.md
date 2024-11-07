@@ -127,7 +127,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Finding persons : `find`
+### Finding persons: `find`
 
 Finds persons that match the specified filters.
 
@@ -147,7 +147,7 @@ Examples:
 * `find n/a n/b n/c pri/high pri/medium` returns `Alice Tan` and `Benny Lim`<br>
   ![sample find result](images/findResult.png)
 
-### Sorting persons : `sort`
+### Sorting persons: `sort`
 
 Sorts persons in the order of the specified parameter.
 
