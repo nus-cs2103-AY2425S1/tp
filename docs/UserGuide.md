@@ -127,6 +127,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 |  12   |    Task Index     |                 `t/TASK_INDEX`                 | Should be a positive integer equal to or less than the size of the specified student's task list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.3 Notes on the Command Format
 
@@ -163,6 +164,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 [(Back to Top)](#edumanage-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3. Features
 
