@@ -41,6 +41,7 @@ public class AddCommand extends ConcreteCommand {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PHONE = "This phone number already exists in the address book";
     public static final String MESSAGE_DUPLICATE_NAME = "A person with this name already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "A person with this email already exists in the address book";
     public static final String MESSAGE_UNDO_SUCCESS = "Reverted addition of person: %1$s";
 
     private final Person toAdd;
@@ -63,6 +64,8 @@ public class AddCommand extends ConcreteCommand {
             throw new CommandException(MESSAGE_DUPLICATE_NAME);
         } else if (model.hasPhone(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+        } else if (model.hasEmail(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.addPerson(toAdd);
