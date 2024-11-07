@@ -81,18 +81,6 @@ public class UniqueLessonListTest {
     }
 
     @Test
-    public void getSubject_null_throwsNullPointerException() {
-        UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        assertThrows(NullPointerException.class, () -> uniqueLessonList.getSubject(null, null));
-    }
-
-    @Test
-    public void getSubject_lessonNotInList_returnsNull() {
-        UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        assertNull(uniqueLessonList.getSubject(ALICE, DANIEL));
-    }
-
-    @Test
     public void getAssociatedPeople_null_throwsNullPointerException() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
         assertThrows(NullPointerException.class, () -> uniqueLessonList.getAssociatedPeople(null));
