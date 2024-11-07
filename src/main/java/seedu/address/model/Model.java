@@ -117,12 +117,36 @@ public interface Model {
      */
     boolean hasAssignment(String name);
 
-    float maxScore(String assignment);
+    /**
+     * Returns the maximum score for a specified assignment.
+     *
+     * @param assignment The name of the assignment to retrieve the maximum score for.
+     * @return The maximum score for the specified assignment.
+     */
+    float getMaxScore(String assignment);
 
+    /**
+     * Retrieves the exact name of a specified assignment.
+     *
+     * @param name The name to retrieve.
+     * @return The assignment name as a {@code String}.
+     */
     String getAssignmentName(String name);
 
+
+    /**
+     * Checks if a person with the specified name exists in the address book.
+     *
+     * @param name The {@code Name} of the person to check.
+     * @return {@code true} if a person with the specified name exists, {@code false} otherwise.
+     */
     boolean hasName(Name name);
 
+    /**
+     * Retrieves the predefined assignments data as a read-only data object.
+     *
+     * @return A {@code ReadOnlyPredefinedAssignmentsData} object containing predefined assignments.
+     */
     ReadOnlyPredefinedAssignmentsData getPredefinedAssignments();
 
     /**
@@ -130,6 +154,11 @@ public interface Model {
      */
     Github getGitHubUsername(Name name);
 
+    /**
+     * Replaces all persons in the predefined assignments data with a new list.
+     *
+     * @param newPersons A list of {@code Person} objects to replace the existing persons.
+     */
     void replaceAllPersons(List<Person> newPersons);
 
 }

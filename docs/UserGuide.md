@@ -63,26 +63,26 @@ To get started,
 
 ## Summary of commands
 
-| Action                                                          | Format, Examples                                                                                                                                                                          |
-|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                                                          | Format, Examples                                                                                                                                                                            |
+|-----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-person-add)                                 | `add name/NAME email/EMAIL telegram/TELEGRAM [tag/TAG]…​ github/GITHUB` <br> e.g., `add name/James Ho email/jamesho@example.com telegram/@James tag/friend tag/colleague github/james-cool` |
-| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                                   |
-| [**Delete**](#deleting-a-person-delete)                         | `delete name/NAME`<br> e.g., `delete name/James`                                                                                                                                          |
-| [**Edit**](#editing-a-person-edit)                              | `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`                                        |
-| [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| [**Filter**](#filtering-persons-by-tag-filter)                  | `filter tag/[TAG] tag/[MORE_TAG]…​`<br> e.g., `filter tag/friends tag/family`                                                                                                             |
-| [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                                    |
-| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                                    |
-| [**View**](#viewing-a-contact-s-full-details-view)              | `view [name/NAME]` <br> e.g., `view name/John Doe`                                                                                                                                        |
-| [**Github**](#launching-github-repository-github)               | `github name/NAME`  <br> e.g., `github name/Harry`                                                                                                                                        |
-| [**Mark**](#marking-a-student-as-present-mark)                  | `mark name/NAME week/WEEK NUMBER` <br> e.g. `mark name/John Doe week/1`                                                                                                                   |
-| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark name/NAME week/WEEK NUMBER` <br> e.g. `unmark name/John Doe week/1`                                                                                                               |
-| [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                  |
-| [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                      |
-| [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                           |
-| [**Command History**](#accessing-command-history-and)           | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                                             |## Features
-| [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade name/NAME assignment/ASSIGNMENT_NAME score/SCORE` <br> e.g. `addGrade n/JohnDoe assignment/Ex01 score/5`                                                                        |
-| [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade name/NAME assignment/ASSIGNMENT_NAME` <br> e.g. `removeGrade name/John Doe assignment/Ex01`                                                                                        |
+| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                                     |
+| [**Delete**](#deleting-a-person-delete)                         | `delete name/NAME`<br> e.g., `delete name/James`                                                                                                                                            |
+| [**Edit**](#editing-a-person-edit)                              | `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`                                          |
+| [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| [**Filter**](#filtering-persons-by-tag-filter)                  | `filter tag/[TAG] tag/[MORE_TAG]…​`<br> e.g., `filter tag/friends tag/family`                                                                                                               |
+| [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                                      |
+| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                                      |
+| [**View**](#viewing-a-contact-s-full-details-view)              | `view [name/NAME]` <br> e.g., `view name/John Doe`                                                                                                                                          |
+| [**Github**](#launching-github-repository-github)               | `github name/NAME`  <br> e.g., `github name/Harry`                                                                                                                                          |
+| [**Mark**](#marking-a-student-as-present-mark)                  | `mark name/NAME week/WEEK NUMBER` <br> e.g. `mark name/John Doe week/1`                                                                                                                     |
+| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark name/NAME week/WEEK NUMBER` <br> e.g. `unmark name/John Doe week/1`                                                                                                                 |
+| [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                    |
+| [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV_FILE_PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                        |
+| [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED_FILE_DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                             |
+| [**Command History**](#accessing-command-history-and)           | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                                               |## Features
+| [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade name/NAME assignment/ASSIGNMENT_NAME score/SCORE` <br> e.g. `addGrade n/JohnDoe assignment/Ex01 score/5`                                                                          |
+| [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade name/NAME assignment/ASSIGNMENT_NAME` <br> e.g. `removeGrade name/John Doe assignment/Ex01`                                                                                    |
 
 --------------------------------------------------------------------------------------------------------------------
 ## <i class="fa-solid fa-bolt-lightning"></i> Parameter shortcuts
@@ -613,8 +613,10 @@ Imports contacts based on CSV file. Importing a file will replace ALL existing c
   "Assignments", "WeeksPresent"} (Case-insensitive)
 * The CSV file must contain information about at least 1 person
 * The data fields for Name, Email, Telegram, Github is compulsory
-* Tags format: enclose tag in square brackets ("[tag]"). If a person has multiple tags, separate the tags within the same entry 
-with commas. (e.g."[tag1],[tag2],[tag3].....")
+  * Do note that each of these field have their own restrictions 
+  [(refer above)](#i-classfa-solid-fa-user-plusi-adding-a-person-add)
+* Tags format: enclose tag in square brackets ("[tag]"). If a person has multiple tags, separate the tags within 
+the same entry with commas. (e.g."[tag1],[tag2],[tag3].....")
   * Duplicate tags will be ignored (e.g."[Group1],[Group1]" will be treated as "[Group1]")
   * This field can be empty (will be treated as no tags for specific person)
 * Assignment format: Assignment name and assignment score should be separated with "|" (e.g. Ex01|10). If multiple 
@@ -665,6 +667,7 @@ Exports contacts based on contacts and their details stored in KonTActs.
 
 * File path can be relative or absolute but must end with .csv
   </box>
+* You must have write permission in order to export CSV file to specified location
 
 <box type="definition" icon=":fa-solid-book:" light>
 

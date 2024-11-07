@@ -126,14 +126,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Checks if name is in address book, ignoring casing
+     * Checks if the given name exists in the address book, ignoring case.
      *
-     * @param name the name
-     * @return the boolean
+     * @param name The name to search for.
+     * @return true if the name is found in the address book, false otherwise.
      */
     public boolean hasName(Name name) {
         for (Person x : persons) {
-            if (x.getName().equalIgnoreCase(name)) {
+            if (x.getName().equals(name)) {
                 return true;
             }
         }
@@ -149,7 +149,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public Github getGitHubUsername(Name name) {
         for (Person x : persons) {
-            if (x.getName().equalIgnoreCase(name)) {
+            if (x.getName().equals(name)) {
                 return x.getGithub();
             }
         }
