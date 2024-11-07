@@ -34,6 +34,7 @@ import seedu.address.logic.commands.ListIncompleteCommand;
 import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.commands.MarkTaskCommand;
 import seedu.address.logic.commands.PriorityCommand;
+import seedu.address.logic.commands.UnmarkTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
@@ -132,6 +133,13 @@ public class AddressBookParserTest {
         MarkTaskCommand command = (MarkTaskCommand) parser.parseCommand(
                 MarkTaskCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new MarkTaskCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_unmark() throws Exception {
+        UnmarkTaskCommand command = (UnmarkTaskCommand) parser.parseCommand(
+                UnmarkTaskCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnmarkTaskCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
