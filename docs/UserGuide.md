@@ -11,18 +11,19 @@ Health Connect is an application designed to **streamline client management** fo
     1. [For Windows Users](#for-windows-users)
     2. [For Mac Users](#for-mac-users)
 2. [Features](#features)
-    1. [Command Format](#command-format)
-    2. [Viewing Help: `help`](#viewing-help-help)
-    3. [Adding a Person: `add`](#adding-a-patient-add)
-    4. [Viewing All Patients `view`](#viewing-all-patients-view)
-    5. [Editing a Patient: `edit`](#editing-a-patient--edit)
-    6. [Locating Patients by Name: `find`](#locating-patients-by-name-find)
-    7. [Locating Patients by Features: `filter`](#locating-patients-by-different-parameters-filter)
-    8. [Deleting a Patient: `delete`](#deleting-a-patient--delete)
-    9. [Adding Or Updating Appointment Date and Time to Patient: `date`](#adding-or-updating-an-appointment-date-and-time-to-a-person--date)
-    10. [Seeing the Schedule for the Day: `schedule`](#seeing-the-schedule-for-the-day-schedule)
-    11. [Clearing All Entries: `clear`](#clearing-all-entries--clear)
-    12. [Exiting the Program: `exit`](#exiting-the-program--exit)
+   1. [Command Format](#command-format)
+   2. [Parameter Constraints](#parameter-constraints)
+   3. [Viewing Help: `help`](#viewing-help-help)
+   4. [Adding a Person: `add`](#adding-a-patient-add)
+   5. [Viewing All Patients `view`](#viewing-all-patients-view)
+   6. [Editing a Patient: `edit`](#editing-a-patient--edit)
+   7. [Locating Patients by Name: `find`](#locating-patients-by-name-find)
+   8. [Locating Patients by Features: `filter`](#locating-patients-by-different-parameters-filter)
+   9. [Deleting a Patient: `delete`](#deleting-a-patient--delete)
+   10. [Adding Or Updating Appointment Date and Time to Patient: `date`](#adding-or-updating-an-appointment-date-and-time-to-a-person--date)
+   11. [Seeing the Schedule for the Day: `schedule`](#seeing-the-schedule-for-the-day-schedule)
+   12. [Clearing All Entries: `clear`](#clearing-all-entries--clear)
+   13. [Exiting the Program: `exit`](#exiting-the-program--exit)
 3. [Data](#data)
     1. [Saving the Data File](#saving-the-data)
     2. [Editing the Data File](#editing-the-data-file)
@@ -140,6 +141,38 @@ Health Connect is an application designed to **streamline client management** fo
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+### Parameter Constraints
+
+Constraints:
+* **NAME**
+    - The string must be alphanumeric and contain at least one alphabetic character (i.e., it cannot consist entirely of numbers). Special characters allowed are space (' '), slash ('/'), and hyphen ('-').
+* **PHONE NUMBER**
+    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
+    - Only numeric characters are allowed
+* **EMAIL**
+    - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
+    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
+
+* **TAG**
+    - A patient must have one of the following priority tags:
+        1. `High Risk`
+        2. `Medium Risk`
+        3. `Low Risk`
+* **ALLERGY**
+    - Only include alphanumeric characters, spaces, and commas.
+    - Must not be empty or contain special characters other than commas and spaces.
+    - If a patient has no allergies, use this format: `m/None`
+      
+* **INDEX**
+    - Must be a positive integer: 1, 2, 3, ...
+    - Must be an index number shown in the displayed patient list
+
+* **DATE**
+    - Must follow the format of dd/MM/YYYY HHmm
+
+* **DATE_ONLY**
+    - Must follow the format of dd/MM/YYYY
+
 ### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
@@ -152,33 +185,16 @@ Format: `help`
 
 Adds a patient to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY...` 
 
-Constraints:
-* **NAME**
-    - Alphanumeric string of any length. Special characters allowed are ' ', '/' and '-'.
-* **PHONE NUMBER**
-    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
-    - Only numeric characters are allowed
-* **EMAIL**
-    - Must follow a valid email format and include a domain e.g. `name@example.com`
-    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
-* **TAG**
-    - A patient must have one of the following priority tags:
-        1. `High Risk`
-        2. `Medium Risk`
-        3. `Low Risk`
-* **ALLERGY**
-    - Only include alphanumeric characters, spaces, and commas.
-    - Must not be empty or contain special characters other than commas and spaces.
+[Parameter Constraints](#parameter-constraints).
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin`
-  ![Example of Add Command 1](./images/FeatureAddExample1.png)
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin m/Penicillin`
 
   <br></br>
 * `add n/Betsy-Crowe p/81239873 e/betsycrowe@example.com a/01 Clementi Road #04-03 Singapore 4374538 t/Low Risk m/None`
-  ![Example of Add Command 2](./images/FeatureAddExample2.png)
+
 
 ### Viewing all patients: `view`
 
@@ -186,13 +202,14 @@ Shows a list of all patients in the address book.
 
 Format: `view`
 
-![Example of View Command](./images/FeatureViewExample1.png)
 
 ### Editing a patient : `edit`
 
 Edits an existing patient in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]`
+
+[Parameter Constraints](#parameter-constraints).
 
 Additional Details:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
@@ -201,34 +218,10 @@ Additional Details:
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
-Constraints:
-* **INDEX**
-    - Must be a positive integer: 1, 2, 3, ...
-    - Must be an index number shown in the displayed patient list
-* **NAME**
-    - Only alphabets and spaces are allowed
-* **PHONE NUMBER**
-    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
-    - Only numeric characters are allowed
-* **EMAIL**
-    - Must follow a valid email format and include a domain e.g. `name@example.com`
-    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
-* **TAG**
-    - A patient must have one of the following priority tags:
-        1. `High Risk`
-        2. `Medium Risk`
-        3. `Low Risk`
-* **ALLERGY**
-    - Only include alphanumeric characters, spaces, and commas.
-    - Must not be empty or contain special characters other than commas and spaces.
-
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com`
-   ![Example of Edit Command 1](./images/FeatureEditExample1.png)
-   Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
    <br></br>
 * `edit 2 n/Betsy Crower`
-  ![Example of Edit Command 2](./images/FeatureEditExample2.png)
   Edits the name of the 2nd person to be `Betsy Crower`.
 
 ### Locating patients by name: `find`
@@ -236,6 +229,7 @@ Examples:
 Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
+[Parameter Constraints](#parameter-constraints).
 
 Additional Details:
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -247,18 +241,19 @@ Additional Details:
 
 Examples:
 * `find John`
-  ![Example of Find Command 1](./images/FeatureFindExample1.png)
   Returns `John` and `John Doe`
   <br></br>
-* `find craig adam`
-  ![Example of Find Command 2](./images/FeatureFindExample2.png)
-  Returns `Craig` and `Adam`
+* `find bernice charlotte` Returns `Bernice` and `Charlotte`
+  ![Example of Find Command 2](./images/FeatureFindExample.png)
+  
 
 ### Locating patients by different parameters: `filter`
 
 Filters the list to return patients who have the given features.
 
 Format: `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
+
+[Parameter Constraints](#parameter-constraints).
 
 Additional Details:
 * The search is case-sensitive.
@@ -272,13 +267,12 @@ Additional Details:
 
 
 Examples:
-* `filter a/Residential College 4`
-  ![Example of Filter Command 1](./images/FeatureFilterExample1.png)
-  returns all patients who have address Residential College 4
+* `filter t/High Risk a/John street, block 123, #01-01` 
+* returns all patients who are at high risk AND have address `John street, block 123, #01-01`
+  ![Example of Filter Command ](./images/FeatureFilterExample.png)
   <br></br>
-* `filter m/Penicillin t/High Risk`
-  ![Example of Filter Command 2](./images/FeatureFilterExample2.png)
-  returns all patients who have an allergy to penicillin AND an allergy to penicillin
+* `filter m/Penicillin p/88451234`
+  returns all patients who have an allergy to penicillin AND have the phone number `88451234`
   <br></br>
 
 ### Deleting a patient : `delete`
@@ -287,27 +281,17 @@ Deletes the specified patient from the address book.
 
 Format: `delete n/NAME p/PHONE e/EMAIL`
 
+[Parameter Constraints](#parameter-constraints).
+
 Additional Details:
 - Deletes the person that matches the following NAME, PHONE and/or EMAIL
 - If the NAME cannot uniquely identify the patient, then more details (e.g. PHONE or EMAIL) need to be provided.
 
-Constraints:
-* **NAME**
-    - Only alphabets and spaces are allowed
-* **PHONE NUMBER**
-    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
-    - Only numeric characters are allowed
-* **EMAIL**
-    - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
-    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
-
 Examples:
 * `delete n/john`
-  ![Example of Delete Command 1](./images/FeatureDeleteExample1.png)
   Deletes `John` assuming that there is only 1 `John` in the address book.
   <br></br>
 * `delete n/craig p/98761230`
-  ![Example of Delete Command 2](./images/FeatureDeleteExample2.png)
   Deletes `Craig` with phone `98761230` assuming that there is only 1 patient with name `Craig` and phone `98761230` in the address book
 
 ### Adding or updating an appointment date and time to a person : `date`
@@ -316,39 +300,27 @@ Adds or updates the next appointment date and time of the specified person in th
 
 Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE`
 
+[Parameter Constraints](#parameter-constraints).
+
 Additional Details:
 * Adds or updates the next appointment date of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`
 * If the attribute provided matches more than one person, two of the attributes need to be provided to uniquely match to a person
 * To remove the date and time from a person, use `d/None`.
 * 2 patients cannot have the same date and time for the appointment
 
-Constraints:
-* **NAME**
-    - Only alphabets and spaces are allowed
-* **PHONE NUMBER**
-    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
-    - Only numeric characters are allowed
-* **EMAIL**
-    - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
-    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
-* **DATE**
-    - Must follow the format of dd/MM/YYYY HHmm
 
 Examples:
 * `date n/Jason Tan p/93823871 e/jasontan@gmail.com d/23/10/2024 1830`
-  ![Example of Date Command 1](./images/FeatureDateExample1.png)
+  ![Example of Date Command 1](./images/FeatureDateExample.png)
   Adds appointment date and time `23/10/2024 1830` to patient with name:`Jason Tan`, phone:`93823871`, email:`jasontan@gmail.com`
   <br></br>
 * `date p/92938132 d/22/10/2024 1920`
-  ![Example of Date Command 2](./images/FeatureDateExample2.png)
   Adds appointment date and time `22/10/2024 1920` to patient with phone:`92938132`
   <br></br>
 * `date e/johndoe@gmail.com d/10/02/2023 1520`
-  ![Example of Date Command 3](./images/FeatureDateExample3.png)
   Adds appointment date and time `10/02/2023 1520` to patient with email `johndoe@gmail.com`
   <br></br>
 * `date n/Alex Yeoh d/None`
-  ![Example of Date Command 4](./images/FeatureDateExample4.png)
   Removes appointment date from `Alex Yeoh`
 
 ### Seeing the schedule for the day: `schedule`
@@ -358,20 +330,17 @@ Filters the list to return patients who have an appointment of the given day. <b
 
 Format: `schedule d/[DATE_ONLY]`
 
+[Parameter Constraints](#parameter-constraints).
+
 Additional Details:
 * Date in the `schedule` feature differs from the date in the `date` feature.
 * Date in the `schedule` feature does not accept a time.
 * All patients with an appointment date on that given day will be listed regardless of what their appointment time is.
 
-Constraints:
-* **DATE_ONLY**
-    - Must follow the format of dd/MM/YYYY
-
 Examples:
 * `schedule d/23/10/2024`
-  ![Example of Schedule Command 1](./images/FeatureScheduleExample1.png)
+  ![Example of Schedule Command](./images/FeatureScheduleExample.png)
   returns all patients with appointment date on 23rd October 2024
-
 
 ### Clearing all entries : `clear`
 
@@ -379,7 +348,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-![Example of Clear Command 1](./images/FeatureClearExample1.png)
+![Example of Clear Command 1](./images/FeatureClearExample.png)
 
 ### Exiting the program : `exit`
 
