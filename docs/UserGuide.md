@@ -350,11 +350,11 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue s/ urgent
   ```
 
-#### What to Expect
+**What to Expect:**
 - **On Success:**
     - Message:
       ```
-      New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>, Status: <STATUS>.
+      New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>, Status: <STATUS>
       ```
     - If `Tier`, `Status` or `Remark` is not provided, they will be set to "NA" and displayed as such in the success message.
 
@@ -412,7 +412,7 @@ edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)`
 
-`**Examples:**
+**Examples:**
 - Edit only 1 specific field:
   ```
   edit 12 a/ Ridge View Residential College
@@ -421,8 +421,8 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   edit 12 t/ gold
   ```
   ```
-  edit 12 s/ urgent ``
-- ```
+  edit 12 s/ urgent
+  ```
 - Edit multiple fields at the same time:
   ```
   edit 12 p/ 99887766 e/ mrtan_newemail@ntu.sg j/ unemployed i/ 0 t/ reject
@@ -440,7 +440,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success:**
     - Message:
       ```
-      Client <INDEX> has been updated successfully.
+      Edited Client: <CLIENT DETAILS> 
       ```
 - **On Error:**
     - Message:
@@ -473,7 +473,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   delete 12
   ```
-  Confirmation prompt:
+  **Confirmation prompt:**
   ```
   This will permanently delete this contact.  Are you sure you want to execute this command? (y/n)
   ```
@@ -482,7 +482,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success (after confirming with y/yes):**
     - Message:
       ```
-      Deleted Client: <CLIENT DETAILS>
+      Deleted Client: <CLIENT DETAILS> 
       ```
 - **On Cancellation (if confirmation is declined):**
     - Message:
@@ -509,7 +509,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 ```
 clear
 ```
-Confirmation prompt:
+**Confirmation prompt:**
 ```
 This will permanently clear all contacts. Are you sure you want to execute this command? (y/n)
 ```
@@ -529,14 +529,6 @@ This will permanently clear all contacts. Are you sure you want to execute this 
 - **On Error:**
     - This command does not typically produce errors but will have no effect if there are no clients in the database to clear.
 
-> ⛔ **Danger:**  
-> The `clear` command is **irreversible**. Once executed, all client data is **permanently deleted**.
->
-> It is highly recommended to **avoid using this command** unless absolutely necessary.
-
-
-
-
 ## 5.3 Data Filtering Commands
 
 ### 5.3.1 List All Clients
@@ -552,7 +544,7 @@ list
 
 
 
-### 5.2.3 Filter Clients by Details / Find a Client
+### 5.3.2 Filter Clients by Details / Find a Client
 
 **Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, remarks or status.
 
@@ -643,7 +635,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 **Command Format:**
 ```
-view index
+view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
 * Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
@@ -687,7 +679,19 @@ close
 - **On Error:**
     - No error messages are shown; the command is simply ignored if no split view is open
 
-### 5.4.3 Help Menu 
+### 5.4.3 Undo Previous Command
+
+**Purpose:** Undo previous command.
+
+**Command Format:**
+```
+undo
+```
+- Reverts all changes of the previous command:
+- **Note:** This command can only be used after a permanent change has been made (e.g. after using the edit command).
+- **Note:** You can only use `undo` once. Using `undo` 2 times in a row has the same effect as not using the `undo` command at all.
+
+### 5.4.4 Help Menu 
 
 **Purpose:** Provides quick access to a command summary and the user guide for AgentAssist.
 
