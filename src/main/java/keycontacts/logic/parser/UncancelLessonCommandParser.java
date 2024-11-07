@@ -32,7 +32,7 @@ public class UncancelLessonCommandParser implements Parser<UncancelLessonCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UncancelLessonCommand.MESSAGE_USAGE), e);
         }
 
-        if (!argMultimap.arePrefixesPresent(PREFIX_DATE) || !argMultimap.isPreamblePresent()) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_DATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UncancelLessonCommand.MESSAGE_USAGE));
         }
