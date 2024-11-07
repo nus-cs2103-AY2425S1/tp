@@ -159,7 +159,7 @@ Before continuing, here are some important information you need to know about th
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
-Before diving into our features, do note that we set some specifications for naming and such.
+Before diving into our features, do note that we set some specifications for naming and such. You might want to read this section if you keep getting an `Invalid command format!` message, or want to find out more intricate details about InternBuddy. Otherwise, skip to [add command](#adding-a-company-add) to begin.
 
 <box type="info" seamless>
 
@@ -177,23 +177,26 @@ Before diving into our features, do note that we set some specifications for nam
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* `NAME` would be the Company's name, InternBuddy only allows alphanumeric characters (letters and numbers) to represent it. <br>
+* `NAME` would be the company's name, InternBuddy only allows alphanumeric characters (letters and numbers) to represent it. <br>
   e.g. `7Eleven` is allowed but not `7-Eleven` because `-` is neither a letter nor a number.
 
-* `PHONE_NUMBER` is the Company's phone number. Company phone numbers should be at least 3 digits long, does not take into account the `+` prefix and must be all numbers.
+* `PHONE_NUMBER` is the company's phone number. Company phone numbers should be at least 3 digits long, does not take into account the `+` prefix and must be all numbers.
   e.g. `85092323`, `0122345677`
 
 * InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters again (letters and numbers). The following special characters `+ - _ .` are allowed in `local-part` but note that:
     1. `local-part` can't begin or end with any special characters.
     2. `local-part` can't have consecutive special characters in it.
-    3. The only special characters allowed in `domain` are periods (`.`) are allowed in `domain` and follows the 2 rules for `local-part` above. <br>
-       e.g. `abc-123+spam@nus.edu.sg`
+    3. The only special characters allowed in `domain` are periods (`.`) are allowed in `domain` and follows the 2 rules for `local-part` above.
+
+    e.g. `abc-123+spam@nus.edu.sg`
 
 * Commands are **case-sensitive**, meaning they must be typed exactly as shown. <br>
   e.g. to use the `add` command to add a company, type `add n/Tencent e/tencent@gmail.com`. Variations like `ADD ...`, `Add ...`, or `adD ...` will not work.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* A Company Status is the first coloured tag under the company's name. It will be set to `INTERESTED` initially, then to `APPLIED` when an Application to the company is made, and finally `CLOSED` when the all Applications are withdrawn from that company.
 
 * To use the `reopen` command, the company at the `Index` provided mus have status `CLOSED`, which will subsequently become `Interested`.
 
