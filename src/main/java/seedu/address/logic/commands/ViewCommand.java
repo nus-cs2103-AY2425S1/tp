@@ -58,7 +58,8 @@ public class ViewCommand extends Command {
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView),
-                false, false, true, clientToView, false);
+                false, false, true, clientToView,
+                false, null, false);
     }
 
     /**

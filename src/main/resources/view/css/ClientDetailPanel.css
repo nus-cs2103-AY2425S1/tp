@@ -1,26 +1,64 @@
-.cell_small_label {
-    -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
-    -fx-text-fill: #a0a0a0;
-}
-
-.cell_big_label {
-    -fx-font-family: "Segoe UI Bold";
-    -fx-font-size: 16px;
-    -fx-text-fill: white;
+.background {
+    -fx-background-color: #2b2b2b;
 }
 
 .name-label {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
 }
 
-.detail-tier -label {
-    -fx-padding: 3 6 4 6;
+.field-label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-text-fill: #a0a0a0;
+    -fx-font-weight: bold;
+}
+
+.value-label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+}
+
+/* Tag styling */
+#tagsGroup .label {
+    -fx-padding: 5 8 6 8;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
-    -fx-font-size: 12;
+    -fx-font-size: 13;
     -fx-font-weight: bold;
 }
 
+/* Colors for tiers */
+.gold-tier {
+    -fx-background-color: #B59410;
+    -fx-text-fill: #1A1A1A;
+}
 
-/** ADD THE COLOUR LOGIC HERE FOR CLEINT DETAIL PANEL!!! **/
+.silver-tier {
+    -fx-background-color: #C0C0C0;
+    -fx-text-fill: #1A1A1A;
+}
+
+.bronze-tier {
+    -fx-background-color: #804a00;
+    -fx-text-fill: white;
+}
+
+.reject-tier {
+    -fx-background-color: #5C0002;
+    -fx-text-fill: white;
+}
+
+/* Colors for statuses */
+.urgent-status {
+    -fx-background-color: #B22222;
+    -fx-text-fill: white;
+}
+
+.nonUrgent-status {
+    -fx-background-color: #C46210;
+    -fx-text-fill: white;
+}

@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,12 +96,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJob(VALID_JOB_AMY).withIncome(Integer.parseInt(VALID_INCOME_AMY))
+                .withJob(VALID_JOB_AMY).withIncome(new BigInteger(VALID_INCOME_AMY))
                 .withTier(VALID_TIER_GOLD).withNewRemark(VALID_REMARK_AMY).build();
 
         DESC_BOB = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withJob(VALID_JOB_BOB).withIncome(Integer.parseInt(VALID_INCOME_BOB))
+                .withJob(VALID_JOB_BOB).withIncome(new BigInteger(VALID_INCOME_BOB))
                 .withTier(VALID_TIER_REJECT).withNewRemark(VALID_REMARK_BOB).build();
     }
 

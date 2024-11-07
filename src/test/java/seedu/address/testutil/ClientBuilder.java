@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.math.BigInteger;
+
 import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
@@ -23,7 +25,7 @@ public class ClientBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOB = "Engineer";
-    public static final int DEFAULT_INCOME = 0;
+    public static final BigInteger DEFAULT_INCOME = BigInteger.ZERO;
 
     private Name name;
     private Phone phone;
@@ -108,7 +110,7 @@ public class ClientBuilder {
     /**
      * Sets the {@code Income} of the {@code Client} that we are building.
      */
-    public ClientBuilder withIncome(int income) {
+    public ClientBuilder withIncome(BigInteger income) {
         this.income = new Income(income);
         return this;
     }
