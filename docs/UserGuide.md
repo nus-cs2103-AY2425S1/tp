@@ -6,7 +6,7 @@
 
 #  UGTeach User Guide
 
-UGTeach is a **desktop app for managing your students' contacts** that aims to empower undergraduate private tutors to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
+UGTeach is a **desktop app for managing your students' contacts** that aims to empower **Singapore-based undergraduate private tutors** to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
 
 Whether you're a Command Line Interface (CLI) pro or new to command lines, **we've got you covered**. Our app offers both a **CLI interface for advanced users** and a **GUI for those who prefer a more visual experience**.
 If you can type fast, UGTeach can get your contact management tasks done **faster than traditional GUI apps**.
@@ -115,7 +115,10 @@ Shows a message explaining how to access the help page.
 
 Shows a list of all students in the address book.
 
-Format: `list`
+**Format:** `list`
+
+**Output:**
+![listResult.png](images/listResult.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -194,7 +197,6 @@ for convenient ways to update the paid amount and owed amount.
 
 <div style="page-break-after: always;"></div>
 
-
 ### Deleting a student : `delete`
 
 Deletes the specified student from the address book.
@@ -259,7 +261,7 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 ### Receiving payment from a student: `pay`
 
-Updates the amount of tuition fee paid by the specified student after a lesson.
+Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
 
 **Format:** `pay INDEX hr/HOURS_PAID`
 
@@ -287,7 +289,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 
 ### Recording unpaid tuition fee of a student: `owe`
 
-Updates the amount of tuition fee owed by a specified student after a lesson.
+Updates the amount of tuition fee owed by a specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
 
 **Format:** `owe INDEX hr/HOURS_OWED`
 
@@ -313,14 +315,14 @@ Updates the amount of tuition fee owed by a specified student after a lesson.
 
 <div style="page-break-after: always;"></div>
 
-### Settle payments from students: `settle`
+### Settling outstanding fees from students: `settle`
 
-Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student.
+Updates the amount of tuition fee paid and the amount of tuition fee owed by the student after the student pays for his/her outstanding tuition fees.
 
 **Format:** `settle INDEX amount/AMOUNT`
 
 **Example:**
-* `settle 1 amount/500.00`
+* `settle 1 amount/50.00`
 
 **Output:**
 ![settleResult.png](images/settleResult.png)
