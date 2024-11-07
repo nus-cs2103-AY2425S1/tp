@@ -25,6 +25,10 @@ public class AssignmentCard extends UiPart<Region> {
     @javafx.fxml.FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
+    private Label name;
+    @FXML
     private Label assignmentId;
     @FXML
     private Label projectId;
@@ -32,13 +36,16 @@ public class AssignmentCard extends UiPart<Region> {
     private Label employeeId;
 
     /**
-     * Creates a {@code AssignmentCode} with the given {@code Assignment} and index to display.
+     * Creates a {@code AssignmentCode} with the given {@code Assignment} and index
+     * to display.
      */
     public AssignmentCard(Assignment assignment, int displayedIndex) {
         super(FXML);
         this.assignment = assignment;
-        assignmentId.setText(displayedIndex + ". ");
-        projectId.setText(assignment.getProject().getId().toString());
-        employeeId.setText(assignment.getEmployee().getEmployeeId().toString());
+        id.setText(displayedIndex + ". ");
+        name.setText(assignment.getAssignmentName());
+        assignmentId.setText("assignment id: " + assignment.getAssignmentId());
+        projectId.setText("project id: " + assignment.getProject().getId().toString());
+        employeeId.setText("employee id:" + assignment.getEmployee().getEmployeeId().toString());
     }
 }

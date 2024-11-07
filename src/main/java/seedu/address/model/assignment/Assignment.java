@@ -16,6 +16,7 @@ public class Assignment {
     private final AssignmentId assignmentId;
     private final Project project;
     private final Employee employee;
+    private final String assignmentName;
 
     /**
      * Every field must be present and not null.
@@ -25,6 +26,7 @@ public class Assignment {
         this.assignmentId = assignmentId;
         this.project = project;
         this.employee = employee;
+        this.assignmentName = project.getName().toString() + " - " + employee.getName().toString();
     }
 
     public AssignmentId getAssignmentId() {
@@ -37,6 +39,10 @@ public class Assignment {
 
     public Employee getEmployee() {
         return employee;
+    }
+
+    public String getAssignmentName() {
+        return assignmentName;
     }
 
     /**
