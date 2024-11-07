@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,6 +42,9 @@ public class DeleteApptCommand extends Command {
      * @param nric {@code Nric} of the patient
      */
     public DeleteApptCommand(Nric nric, LocalDateTime apptDateTime) {
+        requireAllNonNull(nric, apptDateTime);
+        assert nric != null : "NRIC cannot be null";
+        assert apptDateTime != null : "Appointment date and time cannot be null";
         this.apptDateTime = apptDateTime;
         this.nric = nric;
     }

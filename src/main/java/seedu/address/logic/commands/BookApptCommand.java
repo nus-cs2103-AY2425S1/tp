@@ -40,6 +40,8 @@ public class BookApptCommand extends Command {
      */
     public BookApptCommand(Nric nric, Appt appt) {
         requireAllNonNull(appt, nric);
+        assert nric != null : "NRIC cannot be null";
+        assert appt != null : "Appointment cannot be null";
         this.appt = appt;
         this.nric = nric;
     }
@@ -53,6 +55,7 @@ public class BookApptCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert model != null : "Model cannot be null";
         logger.info("Executing BookApptCommand");
         List<Patient> lastShownList = model.getFilteredPatientList();
 

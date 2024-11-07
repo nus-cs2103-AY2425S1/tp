@@ -26,6 +26,7 @@ public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
      */
     public DeleteApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        assert args != null : "Arguments cannot be null";
         logger.info("Parsing DeleteApptCommand");
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME);
 

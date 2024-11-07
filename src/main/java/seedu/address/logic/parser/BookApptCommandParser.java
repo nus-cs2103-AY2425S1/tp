@@ -29,6 +29,7 @@ public class BookApptCommandParser implements Parser<BookApptCommand> {
      */
     public BookApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        assert args != null : "Arguments cannot be null";
         logger.info("Parsing BookApptCommand");
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME,
             PREFIX_HEALTHSERVICE);
