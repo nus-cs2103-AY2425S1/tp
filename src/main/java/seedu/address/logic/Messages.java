@@ -28,7 +28,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_DELETE_EMPTY_INDEX = "Error: The index cannot be empty";
-    public static final String MESSAGE_INVALID_ARUGUMENTS = "Invalid arguments! "
+    public static final String MESSAGE_INVALID_ARGUMENTS = "Invalid arguments! "
             + "Must be alphanumeric lowercase characters";
     public static final String MESSAGE_OVERFLOW_INDEX = "Error: Index is too large!"
                 + " The largest possible value is 2147483647.";
