@@ -31,7 +31,7 @@ public class PersonDetails extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label tag;
+    private Label role;
     @FXML
     private Label course;
     @FXML
@@ -69,7 +69,7 @@ public class PersonDetails extends UiPart<Region> {
             name.setText(person.getName().fullName);
             studentId.setText(person.getStudentId().value);
             phone.setText(person.getPhone().value);
-            tag.setText(person.getTag().role.getRole());
+            role.setText(person.getRole().role.getRole());
             address.setText(person.getAddress().value);
             email.setText(person.getEmail().value);
             course.setText(person.getCourse().course);
@@ -90,7 +90,7 @@ public class PersonDetails extends UiPart<Region> {
             phone.setText("");
             address.setText("");
             email.setText("");
-            tag.setText("");
+            role.setText("");
             course.setText("");
             module.setText("");
             profileImage.setVisible(false);

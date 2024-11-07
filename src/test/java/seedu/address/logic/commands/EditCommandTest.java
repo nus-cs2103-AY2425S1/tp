@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_TUTOR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -68,7 +68,7 @@ public class EditCommandTest {
                 .withEmail("johnd@example.com")
                 .withPhone("98765432")
                 .withCourse("Medicine")
-                .withTag("Student")
+                .withRole("Student")
                 .addUngradedModule("CS1231S")
                 .build();
 
@@ -103,7 +103,7 @@ public class EditCommandTest {
                 .withEmail("alice@example.com")
                 .withPhone("94351253")
                 .withCourse("Math")
-                .withTag("Student")
+                .withRole("Student")
                 .addGradedModule("CS1010", "A")
                 .addUngradedModule("MA2202")
                 .build();
@@ -161,10 +161,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTag(VALID_TAG_TUTOR).build();
+                .withRole(VALID_ROLE_TUTOR).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTag(VALID_TAG_TUTOR).build();
+                .withPhone(VALID_PHONE_BOB).withRole(VALID_ROLE_TUTOR).build();
         EditCommand editCommand = new EditCommand(lastPersonId, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
