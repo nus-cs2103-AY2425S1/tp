@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
  *     detailPanel.setPerson(new Person("John Doe", "john.doe@example.com"));
  * </pre>
  */
-public class DetailPanel extends UiPart<Region> implements SelectionListener {
+public class DetailPanel extends UiPart<Region> implements SelectionListener, ModelClearObserver {
     /**
      * The FXML file that represents the layout of the DetailPanel.
      */
@@ -65,22 +65,28 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
      * Sets the person details on the DetailPanel.
      * This method updates the text of the labels with the provided person's details.
      *
+     * If selected Udder is deleted, the detailPanel will show details of the Udder with index after the deleted Udder.
+     *
      */
     public void updateDetails() {
-        name.setText(person.getName().fullName);
-        id.setText("ID\t\t: " + displayedIndex);
-        phone.setText("Phone\t: " + person.getPhone().value);
-        address.setText("Address\t: " + person.getAddress().value);
-        email.setText("Email\t: " + person.getEmail().value);
-        role.setText("Role\t\t: " + person.getRole());
-        major.setText("Major\t: " + getMajorFullName(person.getMajor()));
-        tagStart.setText("Tags\t\t: ");
-        tagDetails.getChildren().clear(); // necessary to clear existing tags, cus flowpane keeps memory
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tagDetails.getChildren().add(new Label(tag.tagName)));
+        if (this.person == null) {
+            clearDetails();
+        } else {
+            name.setText(person.getName().fullName);
+            id.setText("ID\t\t: " + displayedIndex);
+            phone.setText("Phone\t: " + person.getPhone().value);
+            address.setText("Address\t: " + person.getAddress().value);
+            email.setText("Email\t: " + person.getEmail().value);
+            role.setText("Role\t\t: " + person.getRole());
+            major.setText("Major\t: " + getMajorFullName(person.getMajor()));
+            tagStart.setText("Tags\t\t: ");
+            tagDetails.getChildren().clear(); // necessary to clear existing tags, cus flowpane keeps memory
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tagDetails.getChildren().add(new Label(tag.tagName)));
 
-        meetings.setText("Meetings\t:\n" + (person.getMeetings().toDetailPanelString()));
+            meetings.setText("Meetings\t:\n" + (person.getMeetings().toDetailPanelString()));
+        }
     }
 
 
@@ -103,6 +109,40 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
         this.person = person;
         this.displayedIndex = index + 1;
         updateDetails();
+    }
+
+    /**
+     * Called when the udders list is cleared.
+     * This method updates the Detail Panel to reflect that no individuals are currently selected.
+     * This is done by invoking {@code updateDetailsToDefault}.
+     */
+    @Override
+    public void uddersCleared() {
+        updateDetailsToDefault();
+    }
+
+    /**
+     * Resets the display details to a default state where no individual is displayed.
+     */
+    private void updateDetailsToDefault() {
+        this.person = null;
+        updateDetails();
+    }
+
+    /**
+     * Clears all person details displayed in the UI.
+     */
+    private void clearDetails() {
+        name.setText("");
+        id.setText("");
+        phone.setText("");
+        address.setText("");
+        email.setText("");
+        role.setText("");
+        major.setText("");
+        tagStart.setText("");
+        tagDetails.getChildren().clear();
+        meetings.setText("");
     }
 
     /**
