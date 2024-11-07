@@ -150,7 +150,7 @@ public class AddressBookParserTest {
         Command expected = new RemovePersonFromEventCommand(Index.fromOneBased(1),
                 Index.fromOneBased(1));
         assertEquals(expected, new AddressBookParser()
-                .parseCommand(RemovePersonFromEventCommand.COMMAND_WORD + " ei/1 pi/1"));
+                .parseCommand(RemovePersonFromEventCommand.COMMAND_WORD + " ei/1 ci/1"));
     }
 
     @Test
@@ -223,9 +223,9 @@ public class AddressBookParserTest {
         model.addPerson(ALICE);
         model.addPerson(BOB);
         model.addPerson(CARL);
-        Command expected = new ExcludePersonCommandParser().parse(" pi/1, 2, 3");
+        Command expected = new ExcludePersonCommandParser().parse(" ci/1, 2, 3");
         assertEquals(expected, new AddressBookParser()
-                .parseSearchModeCommand("exclude pi/1, 2, 3"));
+                .parseSearchModeCommand("exclude ci/1, 2, 3"));
     }
 
     @Test
