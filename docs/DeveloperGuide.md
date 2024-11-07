@@ -122,7 +122,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the client hub data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the client hub data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all Reminders(which are contained in a ReminderList object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _sorted_ list composed using a _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -141,7 +141,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both ClientHub data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `ClientHubStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -212,7 +212,7 @@ The following activity diagram summarizes what happens when a user executes a ad
 * Need a system that provides quick access to relevant client information, including financial plans, policy expiration dates, and client details.
 * Often handle tasks that involve tracking insurance policies, renewals, and financial documents.
 
-**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (eg. Track insurance policies). Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information for their clients.
+**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (eg. Track insurance policies) as well as create reminders for meet ups with them. Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information of their clients and important dates their clients.
 
 
 ### User stories
@@ -504,38 +504,46 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch 
 
-   1. Download the jar file and copy into an empty folder
+**For Mac**
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample clients. The window size may not be optimum.
+    1. Download the jar file and copy into an empty folder called `ClientHu`b in `Desktop`. 
+    2. Open Terminal 
+    3. Inside the terminal enter: `cd/Desktop/ClientHub`
+    4. Then run:`java -jar clienthub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+**For Windows**
 
+    1.Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
+    2.Open PowerShell
+    3.Inside the Command Prompt enter: `cd Downloads\ClientHub`
+    4. Then run:`java -jar clienthub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+
+2. Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 
-### Deleting a client
+### Deleting a contact
 
-1. Deleting a client while all clients are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete Ahmad`<br>
-      Expected: client with name "Ahmad" is deleted. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
+      Expected: Contact with name "Ahmad" is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete x` (where x is a number) <br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a client not in the list) <br>
+   1. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a contact not in the list) <br>
       Expected: Similar to previous.
 
-1. Deleting a client with the same name
+1. Deleting a contact with the same name
 
-    1. Test case: `delete Jeremy` with more than one client with the name `Jeremy` <br>
+    1. Test case: `delete Jeremy` with more than one contact with the name `Jeremy` <br>
         Expected: User is prompted to be more specific. Details of the required change are shown in the status message. Status bar remains the same.
 
 ### Saving data
