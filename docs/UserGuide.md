@@ -206,30 +206,48 @@ Examples:
 ### Locating all suppliers: `view_supplier`
 
 Displays:
-1. all the suppliers currently present in the supplier list
-2. specified suppliers with the keyword provided
+1. All the suppliers currently present in the supplier list.
+2. Specified suppliers with the keyword provided.
+3. Suppliers filtered by tags.
 
 Format:
 
 ` view_supplier ` (For displaying details of all suppliers)
 
-` view_supplier [KEYWORD] ` (For displaying details about specified supplier)
+` view_supplier [n/KEYWORD] [t/TAG]... ` (For displaying details about filtered/sorted suppliers)
 
-Examples: `view_supplier` `view_supplier Sussane `
+Examples: 
+- `view_supplier`
+- `view_supplier n/Sussane`
+- `view_supplier t/reliable`
+- `view_supplier n/Sussane t/reliable`
+- `view_supplier t/reliable`
 
 ### Locating all products: `view_product`
 
 Displays:
-1. all the products currently present in the supplier list
-2. specified products with the keyword provided
+1. All the products currently present in the product list.
+2. Specified products with the keyword provided.
+3. Products filtered by tags.
+4. Products filtered by supplier.
+5. Products sorted by proximity of stock level from minimum threshold (stockLevel - minStockLevel) in increasing or decreasing order.
 
 Format:
 
 ` view_product ` (For displaying details of all products)
 
-` view_product [KEYWORD] ` (For displaying details about specified product)
+` view_product [n/NAME] [t/TAG]... [su/SUPPLIER_NAME] [sort/i|sort/d] ` (For displaying details about specified products)
 
-Examples: `view_product` `view_product Socks `
+Examples: 
+- `view_product`
+- `view_product n/chocolate`
+- `view_product t/dessert`
+- `view_product su/Best Supplier`
+- `view_product n/chocolate t/dessert`
+- `view_product t/dessert su/Best Supplier`
+- `view_product n/chocolate t/dessert su/Best Supplier`
+- `view_product t/dessert sort/i`
+- `view_product n/chocolate t/dessert su/Best Supplier sort/d`
 
 ### Deleting a supplier: `delete_supplier`
 

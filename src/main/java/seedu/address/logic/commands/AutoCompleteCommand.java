@@ -47,24 +47,24 @@ public class AutoCompleteCommand extends Command {
         if (inputType == null) {
             possibleCompletions = CommandWords.getCommandWords();
         } else if (inputType.equals(PREFIX_SUPPLIER_NAME)) {
-            possibleCompletions = model.getFilteredSupplierList().stream()
+            possibleCompletions = model.getModifiedSupplierList().stream()
                     .map(Supplier::getName)
                     .map(name -> name.fullName)
                     .collect(Collectors.toList());
         } else if (inputType.equals(PREFIX_PRODUCT_NAME)) {
-            possibleCompletions = model.getFilteredProductList().stream()
+            possibleCompletions = model.getModifiedProductList().stream()
                     .map(Product::getName)
                     .map(name -> name.fullName)
                     .collect(Collectors.toList());
         } else if (inputType.equals(PREFIX_TAG)) {
             Set<String> tagSet = new HashSet<>();
 
-            model.getFilteredProductList().stream()
+            model.getModifiedProductList().stream()
                     .flatMap(product -> product.getTags().stream())
                     .map(tag -> tag.tagName)
                     .forEach(tagSet::add);
 
-            model.getFilteredSupplierList().stream()
+            model.getModifiedSupplierList().stream()
                     .flatMap(supplier -> supplier.getTags().stream())
                     .map(tag -> tag.tagName)
                     .forEach(tagSet::add);

@@ -29,7 +29,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Supplier supplierToDelete = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier supplierToDelete = model.getModifiedSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_SUPPLIER);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_SUPPLIER_SUCCESS,
@@ -43,7 +43,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredSupplierList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getModifiedSupplierList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
@@ -53,7 +53,7 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showSupplierAtIndex(model, INDEX_FIRST_SUPPLIER);
 
-        Supplier supplierToDelete = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier supplierToDelete = model.getModifiedSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_SUPPLIER);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_SUPPLIER_SUCCESS,
@@ -115,6 +115,6 @@ public class DeleteCommandTest {
     private void showNoSupplier(Model model) {
         model.updateFilteredSupplierList(p -> false);
 
-        assertTrue(model.getFilteredSupplierList().isEmpty());
+        assertTrue(model.getModifiedSupplierList().isEmpty());
     }
 }

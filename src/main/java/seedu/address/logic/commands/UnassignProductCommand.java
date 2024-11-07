@@ -50,8 +50,8 @@ public class UnassignProductCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Objects.requireNonNull(model);
 
-        List<Supplier> lastShownSupplierList = model.getFilteredSupplierList();
-        List<Product> lastShownProductList = model.getFilteredProductList();
+        List<Supplier> lastShownSupplierList = model.getModifiedSupplierList();
+        List<Product> lastShownProductList = model.getModifiedProductList();
 
         Supplier supplierToUnassign = lastShownSupplierList.stream()
                 .filter(supplier -> supplier.getName().equals(this.supplierName))

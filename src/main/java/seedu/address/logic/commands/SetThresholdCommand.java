@@ -64,7 +64,7 @@ public class SetThresholdCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Product> productList = model.getFilteredProductList();
+        List<Product> productList = model.getModifiedProductList();
 
         Product productToEdit = productList.stream()
                 .filter(product -> product.getName().equals(productName))

@@ -116,10 +116,10 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
 
         if (isShowSupplier) {
-            supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
+            supplierListPanel = new SupplierListPanel(logic.getModifiedSupplierList());
             viewListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
         } else {
-            productListPanel = new ProductListPanel(logic.getFilteredProductList());
+            productListPanel = new ProductListPanel(logic.getModifiedProductList());
             viewListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
         }
 
@@ -191,12 +191,12 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowSupplier()) {
                 isShowSupplier = true;
                 viewListPanelPlaceholder.getChildren().clear();
-                supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
+                supplierListPanel = new SupplierListPanel(logic.getModifiedSupplierList());
                 viewListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
             } else if (commandResult.isShowProduct()) {
                 isShowSupplier = false;
                 viewListPanelPlaceholder.getChildren().clear();
-                productListPanel = new ProductListPanel(logic.getFilteredProductList());
+                productListPanel = new ProductListPanel(logic.getModifiedProductList());
                 viewListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
             }
 

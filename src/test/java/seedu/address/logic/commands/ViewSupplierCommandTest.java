@@ -61,7 +61,7 @@ public class ViewSupplierCommandTest {
         ViewSupplierCommand command = new ViewSupplierCommand(predicate);
         expectedModel.updateFilteredSupplierList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredSupplierList());
+        assertEquals(Collections.emptyList(), model.getModifiedSupplierList());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ViewSupplierCommandTest {
         ViewSupplierCommand command = new ViewSupplierCommand(predicate);
         expectedModel.updateFilteredSupplierList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredSupplierList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getModifiedSupplierList());
     }
 
     @Test
