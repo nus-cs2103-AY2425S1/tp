@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Talentcy Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -303,23 +303,23 @@ improving efficiency and reducing time spent on administrative tasks.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority     | As a …​                              | I want to …​                                                                 | So that I can…​                                                                                   |
-|--------------|--------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `* * *`      | user                                 | see the list of all contacts                                                 | see the contact of every applicants                                                               |
-| `* * *`      | user                                 | add a new contact                                                            | keep track of applicant's contact details                                                         |
-| `* * *`      | user                                 | delete a contact                                                             | remove contact of applicants who is no longer in the recruitment process                          |
-| `* * *`      | user                                 | find a contact by his/her name                                               | see particular applicant's contact detail without having to go through the entire list            |
-| `* * *`      | user                                 | tag applicants based on their stage in the recruitment process               | track their progress and determine the next steps in the recruitment process.                     |
-| `**`         | efficient user                       | filter contacts which fulfil several criteria                                | quickly access the list of contacts that matches my needs                                         |
-| `**`         | user                                 | sort the contacts based on certain criteria                                  | quickly access the contacts that I need to prioritize                                             |
-| `**`         | user with a high volume of applicants | batch update applicants stage in one action                                  | manage and progress multiple contacts efficiently without repetitive tasks                        |
-| `**`         | user                                 | change any detail of a contact                                               | update the contact details when needed                                                            |
-| `**`         | newbie user                          | get help on how to start using the program                                   | familiarize myself with how to use the program                                                    |
-| `**`         | senior user                          | know proportion of contacts who pass/fail in different recruitment stages    | get insightful data to help me adjust how much more/less to accept in the next recruitment period |
-| `**`         | user                                 | filter contacts with fuzzy match                                             | find relevant contacts easily without typing the exact keywords                                   |
-| `*`          | user                                 | highlight contact of applicant with criminal record or conflicts of interest | easily locate applicants who needs to be investigated further                                     |
-| `*`          | organized user                       | view visual timeline of each contact's recruitment stage                     | easily keep track of the position of each contact in the recruitment process                      |
-| `*`          | user | store applicant's resume                                                     | easily access and refer to their resume                                                           |
+| Priority | As a …​                              | I want to …​                                                                 | So that I can…​                                                                                   |
+|----------|--------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | user                                 | see the list of all contacts                                                 | see the contact of every applicants                                                               |
+| `* * *`  | user                                 | add a new contact                                                            | keep track of applicant's contact details                                                         |
+| `* * *`  | user                                 | delete a contact                                                             | remove contact of applicants who is no longer in the recruitment process                          |
+| `* * *`  | user                                 | find a contact by his/her name                                               | see particular applicant's contact detail without having to go through the entire list            |
+| `* * *`  | user                                 | tag applicants based on their stage in the recruitment process               | track their progress and determine the next steps in the recruitment process.                     |
+| `* *`    | efficient user                       | filter contacts which fulfil several criteria                                | quickly access the list of contacts that matches my needs                                         |
+| `* *`    | user                                 | sort the contacts based on certain criteria                                  | quickly access the contacts that I need to prioritize                                             |
+| `* *`    | user with a high volume of applicants | batch update applicants stage in one action                                  | manage and progress multiple contacts efficiently without repetitive tasks                        |
+| `* *`    | user                                 | change any detail of a contact                                               | update the contact details when needed                                                            |
+| `* *`    | newbie user                          | get help on how to start using the program                                   | familiarize myself with how to use the program                                                    |
+| `* *`    | senior user                          | know proportion of contacts who pass/fail in different recruitment stages    | get insightful data to help me adjust how much more/less to accept in the next recruitment period |
+| `* *`    | user                                 | filter contacts with fuzzy match                                             | find relevant contacts easily without typing the exact keywords                                   |
+| `*`      | user                                 | highlight contact of applicant with criminal record or conflicts of interest | easily locate applicants who needs to be investigated further                                     |
+| `*`      | organized user                       | view visual timeline of each contact's recruitment stage                     | easily keep track of the position of each contact in the recruitment process                      |
+| `*`      | user | store applicant's resume                                                     | easily access and refer to their resume                                                           |
 
 
 ### Use Cases
@@ -332,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a new contact by providing a name, phone number, email, job code, and tag.
+1. User requests to add a new contact by providing a name, phone number, email, job code, tag, and optional remark.
 2. System validates the provided input.
 3.  System checks if the contact already exists by verifying the uniqueness of the phone number and email. 
 4. System adds the contact to the system and displays a confirmation message.
@@ -360,11 +360,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to delete a specific contact by providing a valid identifier, which can be one of the following:  
-    Index (positive integer), Name (n/NAME), Email (e/EMAIL), Phone (p/PHONE), or a combination of Name & Email (n/NAME e/EMAIL) or Name & Phone (n/NAME p/PHONE).
+    Index (positive integer), Name (n/NAME), Email (e/EMAIL), Phone (p/PHONE).
 2. System validates the provided input:
 Checks if the identifier matches the valid format (e.g., positive integer, name, email, or phone).
 
-3. System checks if the contact exists (using the provided identifier, which could be a name, email, phone number, or a combination).
+3. System checks if the contact exists (using the provided identifier, which could be a name, email, or phone number).
 
 4. System deletes the contact and displays a confirmation message.
 
