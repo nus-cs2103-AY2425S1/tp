@@ -11,5 +11,4 @@ package Commands {
     class State2 as "<u>c1:Command</u>"
 }
 State1 -[hidden]right-> State2
-hide State2
 @end
