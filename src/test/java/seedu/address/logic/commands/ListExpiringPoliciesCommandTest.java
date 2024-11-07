@@ -42,6 +42,15 @@ public class ListExpiringPoliciesCommandTest {
     }
 
     @Test
+    public void execute_zeroDaysInput_showsNoExpiringPoliciesMessage() {
+        // Edge case where daysFromExpiry is zero (assuming it's valid based on design)
+        ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(0);
+        String expectedMessage = getNoExpiringPoliciesMessage(0);
+        assertCommandSuccess(command, model, expectedMessage, model);
+    }
+
+
+    @Test
     public void execute_expiringPoliciesFound_showsExpiringPolicies() {
         Model modelWithExpiringPolicies = new ModelManager(getTypicalPrudyWithExpiringPolicies(), new UserPrefs());
 
@@ -154,4 +163,5 @@ public class ListExpiringPoliciesCommandTest {
         model.setClient(client, updatedClient);
         return model.getPrudy();
     }
+
 }

@@ -182,7 +182,7 @@ public class DeleteClaimsCommand extends Command {
                 .findFirst();
 
         if (policyOptional.isEmpty()) {
-            LOGGER.log(Level.WARNING, "No policy of type {0} found for client {1}",
+            LOGGER.log(Level.INFO, "No policy of type {0} found for client {1}",
                     new Object[]{policyType, client.getName()});
             throw new CommandException(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, client.getName()));
         }

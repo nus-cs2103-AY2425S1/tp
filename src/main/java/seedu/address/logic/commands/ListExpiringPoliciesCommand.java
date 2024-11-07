@@ -60,7 +60,6 @@ public class ListExpiringPoliciesCommand extends Command {
             String resultMessage = getExpiringPoliciesMessage(model);
             return new CommandResult(resultMessage);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error occurred while retrieving expiring policies.", e);
             return new CommandResult(MESSAGE_FAILURE);
         }
     }

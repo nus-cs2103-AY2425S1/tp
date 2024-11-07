@@ -78,7 +78,7 @@ public class ListPoliciesCommand extends Command {
     private Client getClientFromList(List<Client> clients, Index index) throws CommandException {
         assert clients != null : "Clients list should not be null";
         if (index.getZeroBased() >= clients.size()) {
-            LOGGER.log(Level.WARNING, "Invalid client index: {0}", index.getZeroBased());
+            LOGGER.log(Level.INFO, "Invalid client index: {0}", index.getZeroBased());
             throw new CommandException(MESSAGE_INVALID_CLIENT_INDEX);
         }
         return clients.get(index.getZeroBased());

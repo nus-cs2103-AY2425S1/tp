@@ -114,7 +114,7 @@ public class ListClaimsCommand extends Command {
                 .filter(policy -> policy.getType().equals(policyType))
                 .findFirst()
                 .orElseThrow(() -> {
-                    LOGGER.log(Level.WARNING, "No policy of type {0} found for client {1}",
+                    LOGGER.log(Level.INFO, "No policy of type {0} found for client {1}",
                             new Object[]{policyType, client.getName()});
                     return new CommandException(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, client.getName()));
                 });
