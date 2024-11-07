@@ -4,6 +4,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.INDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
+import static seedu.address.model.addresses.PublicAddress.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 import static seedu.address.model.addresses.PublicAddress.validatePublicAddress;
 
 import java.util.List;
@@ -30,9 +31,7 @@ public class SearchPublicAddressCommand extends Command {
 
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND = "Successfully found Persons with public "
         + "address inputted: %1$s";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND =
-        "Can't find any Person with public address"
-            + " inputted: %1$s";
+
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUBSTRING_SUCCESS = "Successfully found Persons with "
         + "public "
         + "address containing the substring inputted:\n%1$s";
@@ -40,12 +39,11 @@ public class SearchPublicAddressCommand extends Command {
         "Can't find any Person with public address of"
             + " containing the "
             + "public substring inputted:\n%1$s";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR =
-        "Public Address contains only alphanumeric characters";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG =
-        "Public Address length should be around 40 characters";
 
 
+    //ETH PA length 42
+    //SOL PA length 32-44
+    //BTC PA length 26-35
     public static final String MESSAGE_ARGUMENTS = "Public Address: %1$s";
 
 
@@ -57,8 +55,6 @@ public class SearchPublicAddressCommand extends Command {
     public SearchPublicAddressCommand(String publicAddressString) {
         requireAllNonNull(publicAddressString);
 
-        validatePublicAddress(publicAddressString);
-
 
         this.publicAddressString = publicAddressString;
 
@@ -67,6 +63,12 @@ public class SearchPublicAddressCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+
+        try {
+            validatePublicAddress(publicAddressString);
+        } catch (IllegalArgumentException e) {
+            return new CommandResult(e.getMessage());
+        }
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -92,7 +94,7 @@ public class SearchPublicAddressCommand extends Command {
                     publicAddressString))
                 .reduce((a, b) -> a + "\n" + b)
                 .orElse("");
-            output = String.format(message, publicAddressString + "\n" + personsDetails);
+            output = String.format(message, publicAddressString.toLowerCase() + "\n" + personsDetails);
         } else {
             String message = MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
             output = String.format(message, publicAddressString);

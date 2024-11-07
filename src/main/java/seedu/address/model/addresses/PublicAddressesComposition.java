@@ -135,9 +135,9 @@ public class PublicAddressesComposition {
         assert label != null;
 
         return publicAddresses.values().stream()
-                .flatMap(Set::stream)
-                .filter(publicAddress -> publicAddress.getLabel().toLowerCase().contains(label.toLowerCase()))
-                .collect(Collectors.toSet());
+            .flatMap(Set::stream)
+            .filter(publicAddress -> publicAddress.getLabel().toLowerCase().contains(label.toLowerCase()))
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -154,8 +154,8 @@ public class PublicAddressesComposition {
         Set<PublicAddress> addressesInNetwork = publicAddresses.getOrDefault(network, Collections.emptySet());
 
         return addressesInNetwork.stream()
-                .filter(publicAddress -> publicAddress.getLabel().toLowerCase().contains(label.toLowerCase()))
-                .collect(Collectors.toSet());
+            .filter(publicAddress -> publicAddress.getLabel().toLowerCase().contains(label.toLowerCase()))
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -169,7 +169,8 @@ public class PublicAddressesComposition {
         assert publicAddressString != null;
         return publicAddresses.values().stream()
             .flatMap(Set::stream)
-            .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
+            .anyMatch(publicAddress -> publicAddress.getPublicAddressString()
+                .equalsIgnoreCase(publicAddress.getPublicAddressString()));
     }
 
     /**
@@ -449,10 +450,10 @@ public class PublicAddressesComposition {
                 .append(network)
                 .append(":\n");
             addresses.forEach(address -> {
-                sb.append(INDENT + INDENT)
+                sb.append(INDENT + INDENT + INDENT)
                     .append(address.getLabel())
                     .append(":\n")
-                    .append(INDENT + INDENT + INDENT)
+                    .append(INDENT + INDENT + INDENT + INDENT)
                     .append(address.getPublicAddressString())
                     .append("\n");
             });

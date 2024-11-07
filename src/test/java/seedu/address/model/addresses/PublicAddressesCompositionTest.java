@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_MAIN;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_SUB;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -145,7 +146,7 @@ public class PublicAddressesCompositionTest {
     public void updatePublicAddress_nonExistentAddress() {
         // EP: update non-existent address
         PublicAddressesComposition composition = new PublicAddressesComposition();
-        PublicAddress updatedAddress = new BtcAddress("updatedAddress", "Updated Label");
+        PublicAddress updatedAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_SOL_MAIN.getPublicAddressString(), "Updated Label");
 
         assertThrows(AssertionError.class, () ->
             composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, updatedAddress));

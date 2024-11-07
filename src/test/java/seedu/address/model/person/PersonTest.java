@@ -26,6 +26,10 @@ public class PersonTest {
 
     private static final String VALID_BTC_ADDRESS_1 = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
     private static final String VALID_BTC_ADDRESS_2 = "34qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    private static final String VALID_ETH_ADDRESS_1 = "0x14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    private static final String VALID_ETH_ADDRESS_2 = "0x34qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    private static final String VALID_SOL_ADDRESS_1 = "34qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    private static final String VALID_SOL_ADDRESS_2 = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
 
     private Person person;
     private PublicAddress btcAddress1;
@@ -75,7 +79,7 @@ public class PersonTest {
 
     @Test
     public void withUpdatedPublicAddress_newNetwork_returnsDifferentPerson() {
-        PublicAddress newAddress = PublicAddressFactory.createPublicAddress(Network.SOL, "solAddress", "solLabel");
+        PublicAddress newAddress = PublicAddressFactory.createPublicAddress(Network.SOL, VALID_SOL_ADDRESS_1, "solLabel");
         Person updatedPerson = person.withAddedPublicAddress(newAddress);
 
         assertNotEquals(person, updatedPerson);

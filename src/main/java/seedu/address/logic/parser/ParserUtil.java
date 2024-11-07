@@ -169,7 +169,7 @@ public class ParserUtil {
      */
     public static Network parseNetwork(String network) throws ParseException {
         requireNonNull(network);
-        String trimmedNetwork = network.trim();
+        String trimmedNetwork = network.trim().toUpperCase();
         Logger logger = LogsCenter.getLogger(ParserUtil.class);
         logger.info(trimmedNetwork);
         try {

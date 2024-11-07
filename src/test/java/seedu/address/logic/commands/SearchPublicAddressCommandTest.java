@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_SUB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
+import static seedu.address.model.addresses.PublicAddress.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
+import static seedu.address.model.addresses.PublicAddress.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -90,7 +90,7 @@ public class SearchPublicAddressCommandTest {
         SearchPublicAddressCommand searchPublicAddressCommand =
             new SearchPublicAddressCommand(PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK);
         String expectedMessage =
-            String.format(SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND,
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND,
                 PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK);
         assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
     }
