@@ -39,4 +39,19 @@ public class ClearEventCommand extends ClearCommand {
             return new CommandResult(MESSAGE_SUCCESS);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ClearEventCommand)) {
+            return false;
+        }
+
+        // all instances of clear event command are equal
+        return true;
+    }
 }

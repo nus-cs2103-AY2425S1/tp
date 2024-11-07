@@ -95,6 +95,27 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void isPrompted_check() throws ParseException {
+        final AddressBookParser tempParser = new AddressBookParser();
+        ClearCommand.setPrompted(true);
+        ClearCommand firstCommand = (ClearCommand) tempParser.parseCommand("yes");
+        assertEquals(new ClearCommandParser().parseClear(), firstCommand);
+
+        ClearCommand.setPrompted(true);
+        ClearCommand secondCommand = (ClearCommand) tempParser.parseCommand("y");
+        assertEquals(new ClearCommandParser().parseClear(), secondCommand);
+
+        ClearCommand.setPrompted(true);
+        ClearCommand thirdCommand = (ClearCommand) tempParser.parseCommand("zzz");
+        assertEquals(new ClearCommandParser().parseAbort(), thirdCommand);
+
+        // Reset
+        new ClearCommandParser();
+        ClearCommand.setConfirmed(false);
+        ClearCommand.setPrompted(false);
+    }
+
+    @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
         AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
@@ -222,7 +243,13 @@ public class AddressBookParserTest {
     public void getHint_editCommandHint() {
         assertEquals(EditPersonCommand.MESSAGE_USAGE, parser.getHint("edit p"));
         assertEquals(EditEventCommand.MESSAGE_USAGE, parser.getHint("edit e"));
+        assertEquals(EditCommand.MESSAGE_USAGE, parser.getHint("edit "));
         assertEquals(EditCommand.MESSAGE_USAGE + "\n" + ExitCommand.MESSAGE_USAGE, parser.getHint("e"));
+    }
+
+    @Test
+    public void getHint_exitCommandHint() {
+        assertEquals(ExitCommand.MESSAGE_USAGE, parser.getHint("ex"));
     }
 
     @Test
@@ -236,6 +263,7 @@ public class AddressBookParserTest {
     public void getHint_searchCommandHint() {
         assertEquals(SearchPersonCommand.MESSAGE_USAGE, parser.getHint("search p"));
         assertEquals(SearchEventCommand.MESSAGE_USAGE, parser.getHint("search e"));
+        assertEquals(SearchCommand.MESSAGE_USAGE + "\n" + ScheduleCommand.MESSAGE_HINT, parser.getHint("s"));
         assertEquals(SearchCommand.MESSAGE_USAGE, parser.getHint("se"));
     }
 

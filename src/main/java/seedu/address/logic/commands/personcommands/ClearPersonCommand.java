@@ -39,4 +39,19 @@ public class ClearPersonCommand extends ClearCommand {
             return new CommandResult(MESSAGE_SUCCESS);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ClearPersonCommand)) {
+            return false;
+        }
+
+        // all instances of clear person command are equal
+        return true;
+    }
 }
