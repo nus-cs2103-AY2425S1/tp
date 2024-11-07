@@ -115,6 +115,8 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 | [Delete a client: **cdelete**](#deleting-a-client-cdelete)                                           | `cdelete CLIENT_INDEX` <br> e.g., `cdelete 3`                                                                                                                                                                                        |
 | [Delete rental information from a client: **rdelete**](#deleting-a-rental-information-rdelete)       | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX` <br> e.g., `rdelete c/1 r/2`                                                                                                                                                                 |
 | [Delete all clients and their associated rental information: **clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                                                                                                              |
+| [Import data from an external file: **import**](#importing-data-import)                              | `import`                                                                                                                                                                                                                             |
+| [Export data to an external file: **export**](#exporting-data-export)                                | `export`                                                                                                                                                                                                                             |
 | [Exit the application: **exit**](#exiting-the-application-exit)                                      | `exit`                                                                                                                                                                                                                               |
 
 ## Parameter Constraints
@@ -580,17 +582,54 @@ Navigates through all previously entered commands.
 
 </box>
 
-### Exporting data: `export`
-
-Exports all data within TrueRental into a `.json` file.
-
-<!--TODO: Nathan-->
-
 ### Importing data: `import`
 
 Imports and overwrite all existing data from a `.json` file.
 
-<!--TODO: Nathan-->
+Format: `import`
+
+<box type="important" seamless>
+
+**Constraints**:
+* Only `.json` files can be imported.
+* The chosen file must have the correct format.
+
+</box>
+
+<box type="info" seamless>
+
+**Note**:
+* Importing data will delete all current data in the address book. It is recommended to back up the current data via the `export` command.
+* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png)
+
+</box>
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+### Exporting data: `export`
+
+Exports all data within TrueRental into a `.json` file.
+
+Format: `export`
+
+<box type="info" seamless>
+
+**Note**:
+* Address book data can only be exported as `.json` files.
+* A new window will be opened that prompts for a file. ![export file window](images/exportFileWindow.png)
+
+</box>
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
 
 ### Exiting the application : `exit`
 
