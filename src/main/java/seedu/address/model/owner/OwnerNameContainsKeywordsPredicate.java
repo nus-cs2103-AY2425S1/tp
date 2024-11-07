@@ -19,7 +19,7 @@ public class OwnerNameContainsKeywordsPredicate implements Predicate<Owner> {
     @Override
     public boolean test(Owner owner) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(owner.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsTextIgnoreCase(owner.getName().fullName, keyword));
     }
 
     @Override
