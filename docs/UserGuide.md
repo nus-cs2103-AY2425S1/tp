@@ -64,6 +64,8 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
 
+**Note**: We have a default database for you to try out and test commands! If you prefer not to have it, you can use the commands `clear-ab` and `clear-wb` to clear the address book and wedding book respectively.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
