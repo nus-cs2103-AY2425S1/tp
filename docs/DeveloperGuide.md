@@ -423,10 +423,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters command to create a new event, specifying the event name, date, and optionally tags.
-2. System verifies the input format.
-3. System creates the event.
-4. System displays a success message.
+1. User enters command to create a new event.
+2. System creates the event.
+3. System displays a success message.
 
     Use case ends.
 
@@ -436,16 +435,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System shows an error message and displays the correct command format.
     * Use case ends.
 
-* 2a. The event name is invalid.
-    * 2a1. System shows an error message indicating the name format is incorrect.
+* 1a. The event name is invalid.
+    * 1a1. System shows an error message indicating the name format is incorrect.
     * Use case ends.
 
-* 2b. The date format is invalid.
-    * 2b1. System shows an error message indicating the date format is incorrect.
+* 1b. The date format is invalid.
+    * 1b1. System shows an error message indicating the date format is incorrect.
     * Use case ends.
 
-* 2c. The event already exists in the system.
-    * 2c1. System shows an error message indicating a duplicate event.
+* 1c. The event already exists in the system.
+    * 1c1. System shows an error message indicating a duplicate event.
     * Use case ends.
 
 ---
@@ -654,10 +653,9 @@ Preconditions: User is viewing an item.
 
 **MSS**
 
-1. User enters command to create a new vendor, with the vendor's name, description, phone number, and optionally tags.
-2. System verifies the input format.
-3. System creates the vendor.
-4. System displays a success message.
+1. User enters command to create a new vendor.
+2. System creates the vendor.
+3. System displays a success message.
 
     Use case ends.
 
@@ -667,16 +665,16 @@ Preconditions: User is viewing an item.
     * 1a1. System shows an error message and displays the correct command format.
     * Use case ends.
 
-* 2a. The vendor name is invalid.
-    * 2a1. System shows an error message indicating the name format is incorrect.
+* 1a. The vendor name is invalid.
+    * 1a1. System shows an error message indicating the name format is incorrect.
     * Use case ends.
 
-* 2b. The phone number format is invalid.
-    * 2b1. System shows an error message indicating the phone number format is incorrect.
+* 1b. The phone number format is invalid.
+    * 1b1. System shows an error message indicating the phone number format is incorrect.
     * Use case ends.
 
-* 2c. The vendor already exists in the system.
-    * 2c1. System shows an error message indicating a duplicate vendor.
+* 1c. The vendor already exists in the system.
+    * 1c1. System shows an error message indicating a duplicate vendor.
     * Use case ends.
 
 ### Non-Functional Requirements
@@ -852,7 +850,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Getting Help
 
-   1. Type `help` in the command box and press Enter.  
+   1. Type `help` in the command box and press Enter.
       Expected: A help window appears, showing instructions and command summaries.
 
 ### Editing Data File (Advanced Users)
