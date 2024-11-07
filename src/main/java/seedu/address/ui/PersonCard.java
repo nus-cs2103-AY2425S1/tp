@@ -92,4 +92,32 @@ public class PersonCard extends UiPart<Region> {
         LocalDate today = LocalDate.now();
         return attendedDates.contains(new Attendance(today.toString()));
     }
+
+    public HBox getCardPane() {
+        return this.cardPane;
+    }
+
+    public Label getNameLabel() {
+        return this.name;
+    }
+
+    public Label getIdLabel() {
+        return this.id;
+    }
+
+    public Label getAttendanceLabel() {
+        return this.attendance;
+    }
+
+    public Label getPhoneLabel() {
+        return this.phone;
+    }
+
+    public Label getTelegramLabel() {
+        return this.telegram;
+    }
+
+    public Label getEmailLabel() {
+        return this.email;
+    }
 }
