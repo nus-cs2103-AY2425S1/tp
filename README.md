@@ -5,17 +5,17 @@
 
 # EduContacts
 
-**EduContacts** is a desktop application designed for **tertiary teachers and educators** to manage contacts with 
+**EduContacts** is a desktop application designed for **tertiary teachers and educators** to manage contacts with
 students, parents, and faculty across multiple classes or educational years.
 
-- It is optimized for those who prefer to work with a **Command Line Interface** (CLI) while still having the 
+- It is optimized for those who prefer to work with a **Command Line Interface** (CLI) while still having the
 - benefits of a **Graphical User Interface** (GUI).
-- It helps educators keep communication organized, track academic progress, and support parent-teacher interactions 
+- It helps educators keep communication organized, track academic progress, and support parent-teacher interactions
 - efficiently, often across large groups.
 
 ## Value Proposition
 
-An address book tailored for educators simplifies student and parent contact management, enhances communication 
+An address book tailored for educators simplifies student and parent contact management, enhances communication
 tracking, and integrates progress reports, helping teachers save time and foster effective collaboration across the school community.
 
 ## Features
@@ -23,13 +23,13 @@ tracking, and integrates progress reports, helping teachers save time and foster
 - **Class/Group-Based Contact Management**: Organize contacts by class, subject, or school year for easy access.
 - **Parent-Teacher Communication Tracking**: Keep a history of messages or meetings with parents and faculty.
 - **Student Progress and Grade Tracking**: Link contact information with student records and academic performance.
-- **Event Scheduling and Reminders**: Integrate with school calendars to manage parent-teacher meetings, 
+- **Event Scheduling and Reminders**: Integrate with school calendars to manage parent-teacher meetings,
 report deadlines, or school events.
-- **Group Messaging**: Enable teachers to send messages to an entire class or group of parents at once, 
+- **Group Messaging**: Enable teachers to send messages to an entire class or group of parents at once,
 streamlining communication.
-- **Custom Fields**: Add notes for individual students (e.g., learning accommodations, 
+- **Custom Fields**: Add notes for individual students (e.g., learning accommodations,
 behavioral issues, or special needs).
-- **Integration with School Management Systems**: Sync with platforms like Google Classroom or 
+- **Integration with School Management Systems**: Sync with platforms like Google Classroom or
 school LMS (Learning Management Systems).
 
 ## Getting Started

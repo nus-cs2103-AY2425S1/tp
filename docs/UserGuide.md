@@ -8,7 +8,7 @@
 
 # EduContacts User Guide
 
-<br> 
+<br>
 
 EduContacts is a **desktop app for Educators in Tertiary Institution to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. For educators who may be less experienced with command-based tools, EduContacts also includes user-friendly and intuitive features and guidance, making it accessible for all users.
 
@@ -57,7 +57,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
    ```bash
    cd ~/Desktop/EduContacts
    ```
-   
+
    and use the following command to run the application:
 
    ```bash
@@ -71,17 +71,17 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   ```bash 
-   list 
+   ```bash
+   list
       ```
    Lists all contacts.
 
-   ```bash 
+   ```bash
    add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student
-   ``` 
+   ```
    Adds a contact named `John Doe` to EduContacts.
-   
-   ```bash 
+
+   ```bash
    delete 12345678
    ```
    Deletes a student contact with StudentID `12345678`.
@@ -126,7 +126,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 Shows a message explaining how to access the help page.
 
 Format:
-```bash 
+```bash
 help
 ```
 ![help message](images/helpMessage.png)
@@ -136,7 +136,7 @@ help
 
 Adds a person contact to the EduContacts.
 
-Format: 
+Format:
 ```bash
 add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE t/TAG
 ```
@@ -150,7 +150,7 @@ Examples:
 
 Shows a list of all persons in EduContacts.
 
-Format: 
+Format:
 ```bash
 list
 ```
@@ -200,7 +200,7 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 * **For filtering by Course:**
 
   * Use prefix `c/`
-  * Partial matching is supported, but the first keyword must match the beginning of the course name. 
+  * Partial matching is supported, but the first keyword must match the beginning of the course name.
     e.g `Engineer` will match courses like "Engineering" but not "Civil Engineering".
 
 <box type="tip" seamless>
@@ -210,7 +210,7 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 
 Examples:
 * ```filter n/John``` returns `john` and `John Doe`
-* `filter m/CS2103T` returns a list of all students with module CS2103T. 
+* `filter m/CS2103T` returns a list of all students with module CS2103T.
 * `filter c/Computer Science` returns a list of all students with course Computer Science.<br>
 * `filter n/alex david` returns `Alex Yeoh`, `David Li`
 
@@ -220,7 +220,7 @@ Examples:
 
 Deletes the specified person from EduContacts.
 
-Format: 
+Format:
 ```bash
 delete ID
 ```
@@ -234,7 +234,7 @@ Examples:
 
 Clears all entries from EduContacts.
 
-Format: 
+Format:
 ```bash
 clear
 ```

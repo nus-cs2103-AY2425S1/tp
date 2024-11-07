@@ -71,11 +71,11 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI is managed by the `UiManager` class, which serves as the main controller for managing the UI in EduContacts. 
+The UI is managed by the `UiManager` class, which serves as the main controller for managing the UI in EduContacts.
 It serves as the interface layer between the application's backend logic and the JavaFX UI components, ensuring a smooth
 and consistent user experience.
 
-The UI consists of a `MainWindow` that is made up of the following parts: 
+The UI consists of a `MainWindow` that is made up of the following parts:
 * `CommandBox`
   * Where the user types in his desired command
 * `ResultDisplay`
@@ -84,17 +84,17 @@ The UI consists of a `MainWindow` that is made up of the following parts:
   * The panel which holds the list of persons in EduContacts, each person represented by a `PersonCard`
 * `StatusBarFooter`
   * Designed to show the save location of EduContacts' data
-* `PersonDetails` 
+* `PersonDetails`
   * A section of the UI that renders when a `FindCommand` is run, showing the resulting person's full details
 * `PersonCard`
   * Shows simple and brief details about a person
 * `HelpWindow`
   * Displayed by clicking the "Help" button at the top right hand of the screen
 
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between 
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between
 classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that 
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -547,7 +547,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. EduContacts overwrites the old grade with the new grade.
 
       Use case ends.
-  
+
 **Use case: UC08 - Add contacts of next-of-kins of a student**
 
 **MSS**
@@ -653,7 +653,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder.
 
-    2. Double-click the jar file.<br> 
+    2. Double-click the jar file.<br>
        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -683,17 +683,17 @@ testers are expected to do more *exploratory* testing.
 2. Deleting a person while only one person is being shown
 
     1. Prerequisites: Filter persons using the `filter` command until only one person remains. Multiple persons in the list. Person that remains has Student ID `12345678`. One person in the list has Student ID `11111111`
-   
+
     2. Test case: `delete 12345678`<br>
        Expected: Person with Student ID `12345678` is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. List of persons shown is now blank.
-   
+
     3. Test case: `delete 11111111`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 3. Deleting a person while no persons are in the list
 
     1. Prerequisites: Delete all persons in the list using the `clear` command.
-   
+
     2. Test case: `delete 12345678`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
@@ -704,7 +704,7 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing data files
 
     1. To simulate a missing file, in the same folder as the jar file, navigate to the `data` folder and delete the `address.json` file in the folder.
-   
+
     2. Launch EduContacts by double-clicking the jar file.<br>
        Expected: EduContacts is populated by a set of default list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
 
