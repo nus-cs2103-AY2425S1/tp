@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -117,10 +116,13 @@ public class MainWindow extends UiPart<Stage> {
             allPersonListPanel = new PersonListPanel(logic.getAllPersons());
             HBox.setHgrow(allPersonListPanel.getRoot(), Priority.ALWAYS);
             hbox.getChildren().add(allPersonListPanel.getRoot());
+
+            commandBoxPlaceholder.setStyle("-fx-border-color: #87CEEB; -fx-border-width: 2; ");
         } else {
             personListPanel = new PersonListPanel(logic.getFilteredPersonList());
             HBox.setHgrow(personListPanel.getRoot(), Priority.ALWAYS);
             hbox.getChildren().add(personListPanel.getRoot());
+            commandBoxPlaceholder.setStyle("");
         }
     }
 
