@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static spleetwaise.transaction.testutil.TransactionBuilder.DEFAULT_CATEGORY;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
@@ -24,11 +25,13 @@ import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.filterpredicate.AmountFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.CategoryFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DateFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.StatusFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Status;
@@ -42,11 +45,13 @@ public class FilterCommandTest {
     private static final Description testDescription = TypicalTransactions.SEANOWESME.getDescription();
     private static final Date testDate = TypicalTransactions.SEANOWESME.getDate();
     private static final Status testStatus = TypicalTransactions.SEANOWESME.getStatus();
+    private static final Category testCategory = DEFAULT_CATEGORY;
     private static final Predicate<Transaction> testPersonPred = new PersonFilterPredicate(testPerson);
     private static final Predicate<Transaction> testAmountPred = new AmountFilterPredicate(testAmount);
     private static final Predicate<Transaction> testDescriptionPred = new DescriptionFilterPredicate(testDescription);
     private static final Predicate<Transaction> testDatePred = new DateFilterPredicate(testDate);
     private static final Predicate<Transaction> testStatusPred = new StatusFilterPredicate(testStatus);
+    private static final Predicate<Transaction> testCategoryPred = new CategoryFilterPredicate(testCategory);
     private static final AddressBookModel abModel = new AddressBookModelManager();
     private static final TransactionBookModel txnModel = new TransactionBookModelManager();
 
@@ -77,6 +82,7 @@ public class FilterCommandTest {
         subPredicates.add(testDescriptionPred);
         subPredicates.add(testDatePred);
         subPredicates.add(testStatusPred);
+        subPredicates.add(testCategoryPred);
         FilterCommandPredicate pred = new FilterCommandPredicate(subPredicates);
 
         FilterCommand cmd = new FilterCommand(pred);
