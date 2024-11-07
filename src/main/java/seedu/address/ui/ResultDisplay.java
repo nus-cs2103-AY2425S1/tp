@@ -39,6 +39,14 @@ public class ResultDisplay extends UiPart<Region> {
         enableMouseResize();
     }
 
+    public double getPrefHeight() {
+        return resultDisplay.getPrefHeight();
+    }
+
+    public void setPrefHeight(double height) {
+        resultDisplay.setPrefHeight(height);
+        placeHolder.setPrefHeight(height);
+    }
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
