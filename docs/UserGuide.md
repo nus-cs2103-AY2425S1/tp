@@ -28,12 +28,12 @@ Let’s begin and get you up to speed with AgentAssist!
 4. [Understanding Commands in AgentAssist](#4-understanding-commands-in-agentassist)
    - 4.1 [Command Structure Overview](#41-command-structure-overview)
    - 4.2 [Commands](#42-commands)
-   - 4.3 [Flags](#43-flags)  
+   - 4.3 [Flags](#43-flags)
    - 4.4 [Arguments](#44-arguments)
    - 4.5 [Using Commands](#45-using-commands)
 5. [Commands](#5-commands)
-   - 5.1 [How to Read Commands](#51-how-to-read-commands)  
-   - 5.2 [Data Modification Commands](#52-data-modification-commands)  
+   - 5.1 [How to Read Commands](#51-how-to-read-commands)
+   - 5.2 [Data Modification Commands](#52-data-modification-commands)
    - 5.3 [Data Filtering Commands](#53-data-filtering-commands)
    - 5.4 [General Commands](#54-general-commands)
    - 5.5 [Saving Data](#55-saving-data)
@@ -138,7 +138,7 @@ Find or create a folder on your computer where you want to store the AgentAssist
       <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
 
 
-4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
+4. 🎉 **Congratulations! AgentAssist is now up and running!**  
    You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
 
 <div style="page-break-after: always;"></div>
@@ -264,7 +264,7 @@ Refer to the table below for more details.
 ## 4.5 Using Commands
 To get started, simply type a command into the command box and hit **Enter**.
 
-Some initial commands to try:  
+Some initial commands to try:
 **Viewing All Clients**
 * `list`: This command displays all clients currently in your database, making it easy to browse through entries.
 
@@ -316,10 +316,10 @@ If you're unfamiliar with how commands are structured, refer back to the [Comman
 
 When reading commands, there are certain syntax conventions that help indicate how to use them:
 
-- **`< >` (Angle Brackets):**  
+- **`< >` (Angle Brackets):**
   Text enclosed in angle brackets represents a **placeholder** for the actual value you need to provide. For example, `<NAME>` should be replaced by the client's actual name, such as "John Doe."
 
-- **`[ ]` (Square Brackets):**  
+- **`[ ]` (Square Brackets):**
   Components enclosed in square brackets are **optional**. You can choose to include them if necessary, but they are not required for the command to execute. For instance, `[t/ <TIER>]` means that the credit card tier is optional, and if omitted, a default value will be used.
 
 ### Example Command:
@@ -381,12 +381,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         <INDIVIDUAL FIELD'S ERROR MESSAGES>...
         add: Adds a client to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS j/JOB i/INCOME [t/TIER]...
         [r/REMARK]...[s/STATUS]...
-        Example: 'add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/doctor i/300 t/GOLD r/He is very smart s/NON_URGENT'    
+        Example: 'add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/doctor i/300 t/GOLD r/He is very smart s/NON_URGENT'
         ```
 
 > **Note on Duplicates:**
 >
-> AgentAssist will prevent duplicate entries if a client with the **same name, email and phone number** is already saved.  
+> AgentAssist will prevent duplicate entries if a client with the **same name, email and phone number** is already saved.
 > When this happens, you will see the following message:
 >
 > ```
@@ -395,7 +395,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 >
 > **The duplicate contact will not be saved** to prevent redundancy.
 >
-> If you need to update details for an existing contact, use the `edit` command instead.  
+> If you need to update details for an existing contact, use the `edit` command instead.
 > For more information, see Section [5.2.2 Editing a client](#522-edit-an-existing-clients-information).
 - **Note:** If the value for either `Tier` and `Status` is the default value (`NA`), they will not be shown.
 
@@ -438,14 +438,14 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
 - Replace all remark(s) with new remark(s):
   ```
-  edit 69 rn/ Do not call, angry about calls 
+  edit 69 rn/ Do not call, angry about calls
   ```
 
 **What to Expect:**
 - **On Success:**
     - Message:
       ```
-      Edited Client: <CLIENT DETAILS> 
+      Edited Client: <CLIENT DETAILS>
       ```
 - **On Error:**
     - Error caused by invalid index
@@ -482,7 +482,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
           ```
 
 
-> 💡 **Pro Tip:**  
+> 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 - **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
 
@@ -512,12 +512,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   This will permanently delete this contact.  Are you sure you want to execute this command? (y/n)
   ```
-  
+
 **What to Expect:**
 - **On Success (after confirming with y/yes):**
     - Message:
       ```
-      Deleted Client: <CLIENT DETAILS> 
+      Deleted Client: <CLIENT DETAILS>
       ```
 - **On Cancellation (if confirmation is declined):**
     - Message:
@@ -530,7 +530,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       The client index provided is invalid.
       ```
 
-> 💡 **Pro Tip:**  
+> 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 
 
@@ -614,28 +614,28 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
 **Matching Criteria & Filter Behavior:**
 
-- **Substring Matching: (For most fields)**  
+- **Substring Matching: (For most fields)**
   Searches for most fields use **substring matching**, meaning the search term must match part of the field in the same order as it appears in the client record.
-    - **Example:**  
+    - **Example:**
       If a client’s name is `Gordon Moore`, the search term `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
 
-- **Filtering by Tier (Prefix Matching):**  
+- **Filtering by Tier (Prefix Matching):**
   Tier searches use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
-    - **Example:**  
+    - **Example:**
       If a client has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
 - **Filtering by Income (Using Comparison Operators):** <a id="filter-by-income"></a>
   Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find clients whose income meets certain criteria.
 
-    - **Equal to (`=`):**  
+    - **Equal to (`=`):**
       Use `=` to find clients with a specific income.
       Example: `i/ =5000` will match clients with an income of exactly 5000.
 
-    - **Greater than (`>`):**  
+    - **Greater than (`>`):**
       Use `>` to find clients with an income higher than the specified threshold.
       Example: `i/ >5000` will match clients with incomes greater than 5000.
 
-    - **Less than (`<`):**  
+    - **Less than (`<`):**
       Use `<` to find clients with an income lower than the specified threshold.
       Example: `i/ <5000` will match clients with incomes below 5000.
 
@@ -650,11 +650,11 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
     - If no valid flags are used:
       ```
       filter: Searches for all clients whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
-  
+
       Parameters: <FLAG>/ <SEARCH TERM>
-    
+
       Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
-    
+
       Example: filter n/ Alice p/ 91112222 i/ >2000
       ```
     - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to all the invalid search terms.
@@ -692,11 +692,11 @@ view <INDEX>
       The client index provided is invalid.
       ```
 
-> 💡 **Pro Tip:**  
+> 💡 **Pro Tip:**
 > You can use the split view to compare client details side by side with the main list, making it easier to reference multiple clients at once.
 
 
-### 5.4.2 Closing a Client's Details 
+### 5.4.2 Closing a Client's Details
 
 **Purpose:** Close the split view of client details and return to the full list view.
 
@@ -726,7 +726,7 @@ undo
 - **Note:** This command can only be used after a permanent change has been made (e.g. after using the edit command).
 - **Note:** You can only use `undo` once. Using `undo` 2 times in a row has the same effect as not using the `undo` command at all.
 
-### 5.4.4 Help Menu 
+### 5.4.4 Help Menu
 
 **Purpose:** Provides quick access to a command summary and the user guide for AgentAssist.
 
@@ -741,7 +741,7 @@ help
 
 
 
-### 5.4.5 Exiting AgentAssist 
+### 5.4.5 Exiting AgentAssist
 
 **Purpose:** Exit the application directly from the command line, providing a quick and easy way to close the program without using external controls.
 
@@ -766,7 +766,7 @@ AgentAssist **automatically saves** all client data to your computer after each 
 ## 5.6 Modifying the Data File
 The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file as `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
 
-> ⚠️ **Danger:**  
+> ⚠️ **Danger:**
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
 >
 > Incorrect data modifications may also cause unexpected behavior. **Only modify the data file if you're confident in doing so correctly.**
@@ -802,7 +802,7 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran' 
+3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran'
 4.  **Using non-english text input can cause visual bugs**. This release fully supports English text input only. Using non-English characters or text—especially those with right-to-left direction, like Arabic—may result in display problems, including incorrect text alignment, direction, and character rendering. We are actively working to expand support for international languages in future releases.
 5. **For index based commands**, negative inputs and inputs that are too large result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
 
