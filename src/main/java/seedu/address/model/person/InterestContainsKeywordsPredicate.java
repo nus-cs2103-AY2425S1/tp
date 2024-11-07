@@ -11,7 +11,15 @@ import seedu.address.commons.util.ToStringBuilder;
 public class InterestContainsKeywordsPredicate implements Predicate<Person> {
     private final List<List<String>> andKeywords;
     private final List<String> orKeywords;
-
+    /**
+     * Constructs an {@code InterestContainsKeywordsPredicate} with specified AND and OR keyword lists.
+     *
+     * @param andKeywords A list of lists, where each inner list represents a group of keywords that must all be
+     *                    matched (AND condition). Each person must contain all keywords in at least one inner list
+     *                    to satisfy this condition.
+     * @param orKeywords A list of keywords where any single keyword can match (OR condition). A person satisfies
+     *                   this condition if they contain at least one of the keywords in this list.
+     */
     public InterestContainsKeywordsPredicate(List<List<String>> andKeywords, List<String> orKeywords) {
         this.andKeywords = andKeywords;
         this.orKeywords = orKeywords;
@@ -37,7 +45,9 @@ public class InterestContainsKeywordsPredicate implements Predicate<Person> {
                         group.stream()
                                 .allMatch(keyword ->
                                         person.getInterests().stream()
-                                                .anyMatch(interest -> interest.toString().toLowerCase().contains(keyword.toLowerCase()))
+                                                .anyMatch(interest ->
+                                                        interest.toString().toLowerCase()
+                                                                .contains(keyword.toLowerCase()))
                                 )
                 );
 

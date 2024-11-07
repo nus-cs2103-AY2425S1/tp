@@ -3,11 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_INTEREST;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_PERSON_FOUND_INTEREST;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_INTEREST;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -39,11 +41,13 @@ public class FindByInterestCommandTest {
     public void equals() {
         List<List<String>> firstAndKeywords = Collections.singletonList(Arrays.asList("reading"));
         List<String> firstOrKeywords = Arrays.asList("sports");
-        InterestContainsKeywordsPredicate firstPredicate = new InterestContainsKeywordsPredicate(firstAndKeywords, firstOrKeywords);
+        InterestContainsKeywordsPredicate firstPredicate = new InterestContainsKeywordsPredicate(firstAndKeywords,
+                firstOrKeywords);
 
         List<List<String>> secondAndKeywords = Collections.singletonList(Arrays.asList("writing"));
         List<String> secondOrKeywords = Arrays.asList("cooking");
-        InterestContainsKeywordsPredicate secondPredicate = new InterestContainsKeywordsPredicate(secondAndKeywords, secondOrKeywords);
+        InterestContainsKeywordsPredicate secondPredicate = new InterestContainsKeywordsPredicate(secondAndKeywords,
+                secondOrKeywords);
 
         FindByInterestCommand findFirstCommand = new FindByInterestCommand(firstPredicate);
         FindByInterestCommand findSecondCommand = new FindByInterestCommand(secondPredicate);
@@ -68,7 +72,8 @@ public class FindByInterestCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(), Collections.emptyList());
+        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(),
+                Collections.emptyList());
         FindByInterestCommand command = new FindByInterestCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -80,7 +85,8 @@ public class FindByInterestCommandTest {
     public void execute_singleOrKeyword_onePersonFound() {
         // Assume ALICE has the interest "reading"
         String expectedMessage = MESSAGE_PERSON_FOUND_INTEREST;
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(), Arrays.asList("reading"));
+        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(),
+                Arrays.asList("reading"));
         FindByInterestCommand command = new FindByInterestCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -92,7 +98,8 @@ public class FindByInterestCommandTest {
     public void execute_multipleOrKeywords_multiplePersonsFound() {
         // Assume ALICE has "reading" and BOB has "sports"
         String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_INTEREST, 2);
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(), Arrays.asList("reading", "football"));
+        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(),
+                Arrays.asList("reading", "football"));
         FindByInterestCommand command = new FindByInterestCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -105,7 +112,8 @@ public class FindByInterestCommandTest {
         // Expect "Found 1 person that have similar interest" for exactly one result with AND keywords
         String expectedMessage = MESSAGE_PERSON_FOUND_INTEREST;
         List<List<String>> andKeywords = Collections.singletonList(Arrays.asList("reading", "swimming"));
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(andKeywords, Collections.emptyList());
+        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(andKeywords,
+                Collections.emptyList());
         FindByInterestCommand command = new FindByInterestCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
