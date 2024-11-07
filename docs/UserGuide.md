@@ -150,7 +150,6 @@ Congratulations! 😁 You've successfully completed the beginner's tutorial for 
 You're now ready to move on to more advanced features and commands that Tuteez has to offer.
 Simply visit the [Features](#features) section to learn more about the various commands available to you.
 
-[_Go Back to the Top_](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
