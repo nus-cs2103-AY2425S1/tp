@@ -14,6 +14,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -120,7 +121,7 @@ Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close t
 
 Format: `help`
 
-<br><br>
+<br>
 
 ### Listing all persons : `list`
 
