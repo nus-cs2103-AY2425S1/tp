@@ -39,6 +39,6 @@ public class AssignmentCard extends UiPart<Region> {
         this.assignment = assignment;
         assignmentId.setText(displayedIndex + ". ");
         projectId.setText(assignment.getProject().getId().toString());
-        employeeId.setText(assignment.getPerson().getEmployeeId().toString());
+        employeeId.setText(assignment.getEmployee().getEmployeeId().toString());
     }
 }

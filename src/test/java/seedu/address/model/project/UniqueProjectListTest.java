@@ -51,7 +51,7 @@ public class UniqueProjectListTest {
     }
 
     @Test
-    public void add_duplicateProject_throwsDuplicatePersonException() {
+    public void add_duplicateProject_throwsDuplicateEmployeeException() {
         uniqueProjectList.add(ALPHA);
         assertThrows(DuplicateProjectException.class, () -> uniqueProjectList.add(ALPHA));
     }
@@ -147,23 +147,23 @@ public class UniqueProjectListTest {
     @Test
     public void setProjects_list_replacesOwnListWithProvidedList() {
         uniqueProjectList.add(ALPHA);
-        List<Project> personList = Collections.singletonList(BETA);
-        uniqueProjectList.setProjects(personList);
+        List<Project> employeeList = Collections.singletonList(BETA);
+        uniqueProjectList.setProjects(employeeList);
         UniqueProjectList expectedUniqueProjectList = new UniqueProjectList();
         expectedUniqueProjectList.add(BETA);
         assertEquals(expectedUniqueProjectList, uniqueProjectList);
     }
 
     @Test
-    public void setProjects_listWithDuplicateProjects_throwsDuplicatePersonException() {
-        List<Project> listWithDuplicatePersons = Arrays.asList(ALPHA, ALPHA);
-        assertThrows(DuplicateProjectException.class, () -> uniqueProjectList.setProjects(listWithDuplicatePersons));
+    public void setProjects_listWithDuplicateProjects_throwsDuplicateEmployeeException() {
+        List<Project> listWithDuplicateEmployees = Arrays.asList(ALPHA, ALPHA);
+        assertThrows(DuplicateProjectException.class, () -> uniqueProjectList.setProjects(listWithDuplicateEmployees));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-            -> uniqueProjectList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> uniqueProjectList
+                .asUnmodifiableObservableList().remove(0));
     }
 
     @Test

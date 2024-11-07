@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
 import static seedu.address.testutil.TypicalAssignments.BENSON_BETA;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.EmployeeId;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.AssignmentBuilder;
 
@@ -68,8 +68,8 @@ public class AssignmentTest {
         editedAlice = new AssignmentBuilder(ALICE_ALPHA).withProject(BETA).build();
         assertFalse(ALICE_ALPHA.equals(editedAlice));
 
-        // different person -> returns false
-        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withPerson(BENSON).build();
+        // different employee -> returns false
+        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withEmployee(BENSON).build();
         assertFalse(ALICE_ALPHA.equals(editedAlice));
     }
 }

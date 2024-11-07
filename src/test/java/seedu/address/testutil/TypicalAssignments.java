@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
+import static seedu.address.testutil.TypicalEmployees.BOB;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
@@ -20,13 +20,13 @@ import seedu.address.model.assignment.Assignment;
 public class TypicalAssignments {
     public static final Assignment ALICE_ALPHA = new AssignmentBuilder().withAssignmentId("1")
             .withProject(ALPHA)
-            .withPerson(ALICE).build();
+            .withEmployee(ALICE).build();
     public static final Assignment BENSON_BETA = new AssignmentBuilder().withAssignmentId("2")
             .withProject(BETA)
-            .withPerson(BENSON).build();
+            .withEmployee(BENSON).build();
     public static final Assignment BOB_BETA = new AssignmentBuilder().withAssignmentId("2")
             .withProject(BETA)
-            .withPerson(BOB).build();
+            .withEmployee(BOB).build();
 
 
     private TypicalAssignments() {
@@ -42,8 +42,8 @@ public class TypicalAssignments {
         }
         ab.addProject(ALPHA);
         ab.addProject(BETA);
-        ab.addPerson(ALICE);
-        ab.addPerson(BENSON);
+        ab.addEmployee(ALICE);
+        ab.addEmployee(BENSON);
         return ab;
     }
 

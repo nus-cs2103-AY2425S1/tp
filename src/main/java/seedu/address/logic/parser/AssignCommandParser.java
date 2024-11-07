@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
+import seedu.address.model.employee.EmployeeId;
 import seedu.address.model.project.ProjectId;
 
 /**

@@ -13,7 +13,7 @@ import seedu.address.model.project.Project;
 import seedu.address.ui.DisplayType;
 
 /**
- * Adds a person to the address book.
+ * Adds an employee to the address book.
  */
 public class AddProjectCommand extends Command {
 
@@ -23,7 +23,7 @@ public class AddProjectCommand extends Command {
             + "Parameters: "
             + PREFIX_PROJECT_ID + "PROJECT ID "
             + PREFIX_PROJECT_NAME + "PROJECT NAME "
-            + PREFIX_SKILL + "PROJECT SKILL"
+            + PREFIX_SKILL + "PROJECT SKILL\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PROJECT_ID + "A0276123K "
             + PREFIX_PROJECT_NAME + "Project Alpha "
@@ -36,7 +36,7 @@ public class AddProjectCommand extends Command {
     private final Project toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Employee}
      */
     public AddProjectCommand(Project project) {
         requireNonNull(project);

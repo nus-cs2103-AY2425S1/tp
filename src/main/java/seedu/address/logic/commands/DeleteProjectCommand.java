@@ -13,14 +13,15 @@ import seedu.address.model.project.Project;
 import seedu.address.ui.DisplayType;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an employee identified using it's displayed index from the address book.
  */
 public class DeleteProjectCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteproject";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the project identified by the index number used in the displayed project list.\n"
+            + ": Deletes the project identified by the index number used in the displayed project list,"
+            + " as well as associated assignments.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -43,6 +44,10 @@ public class DeleteProjectCommand extends Command {
 
         Project projectToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteProject(projectToDelete);
+
+        // Delete associated assignments
+        model.deleteAllAssignments(projectToDelete.getId());
+
         return new CommandResult(String.format(MESSAGE_DELETE_PROJECT_SUCCESS, Messages.format(projectToDelete)),
                 DisplayType.PROJECT_LIST);
     }

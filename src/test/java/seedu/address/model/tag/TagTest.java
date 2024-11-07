@@ -36,8 +36,18 @@ public class TagTest {
         assertTrue(Tag.isValidTagName("softwareEngineer")); // Mixed case
         assertTrue(Tag.isValidTagName("123")); // numbers only
         assertTrue(Tag.isValidTagName("web3")); // alphanumeric
+
+        // EP: 49 characters
         assertTrue(Tag.isValidTagName(
-                "softwareInTestSeniorEngineerForWeb3andSaasDevelopment")); // long tag
+                "softwareInTestSeniorEngineerForWeb3andSaasDevelop"));
+
+        // EP: 50 characters
+        assertTrue(Tag.isValidTagName(
+                "softwareInTestSeniorEngineerForWeb3andSaasDevelope"));
+
+        // EP: 51 characters
+        assertFalse(Tag.isValidTagName(
+                "softwareInTestSeniorEngineerForWeb3andSaasDeveloper"));
     }
 
     @Test

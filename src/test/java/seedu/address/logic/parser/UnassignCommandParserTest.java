@@ -25,7 +25,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UnassignCommand;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.testutil.AssignmentBuilder;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalEmployees;
 import seedu.address.testutil.TypicalProjects;
 
 
@@ -35,7 +35,7 @@ public class UnassignCommandParserTest {
     @Test
     public void parse_assignmentIdPresent_success() {
         Assignment expectedAssignment = new AssignmentBuilder().withAssignmentId(VALID_ASSIGNMENT_ID_ONE)
-                .withPerson(TypicalPersons.ALICE).withProject(TypicalProjects.ALPHA).build();
+                .withEmployee(TypicalEmployees.ALICE).withProject(TypicalProjects.ALPHA).build();
 
         // whitespace only preamble
         assertParseSuccess(parser,
@@ -46,14 +46,14 @@ public class UnassignCommandParserTest {
     @Test
     public void parse_projectIdAndEmployeeIdPresent_success() {
         Assignment expectedAssignment = new AssignmentBuilder().withAssignmentId(VALID_ASSIGNMENT_ID_ONE)
-                .withPerson(TypicalPersons.BOB).withProject(TypicalProjects.BETA).build();
+                .withEmployee(TypicalEmployees.BOB).withProject(TypicalProjects.BETA).build();
 
         // whitespace only preamble
         assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + PROJECT_ID_DESC_BETA
                         + EMPLOYEE_ID_DESC_BOB,
                 new UnassignCommand(expectedAssignment.getProject().getId(),
-                        expectedAssignment.getPerson().getEmployeeId()));
+                        expectedAssignment.getEmployee().getEmployeeId()));
     }
 
     @Test

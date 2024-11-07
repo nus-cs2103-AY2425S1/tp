@@ -36,8 +36,18 @@ public class SkillTest {
         assertTrue(Skill.isValidSkill("softwareEngineer")); // Mixed case
         assertTrue(Skill.isValidSkill("123")); // numbers only
         assertTrue(Skill.isValidSkill("web3")); // alphanumeric
+
+        // EP: 49 characters
         assertTrue(Skill.isValidSkill(
-                "softwareInTestSeniorEngineerForWeb3andSaasDevelopment")); // long skill
+                "softwareInTestSeniorEngineerForWeb3andSaasDevelop"));
+
+        // EP: 50 characters
+        assertTrue(Skill.isValidSkill(
+                "softwareInTestSeniorEngineerForWeb3andSaasDevelope"));
+
+        // EP: 51 characters
+        assertFalse(Skill.isValidSkill(
+                "softwareInTestSeniorEngineerForWeb3andSaasDeveloper"));
     }
 
     @Test

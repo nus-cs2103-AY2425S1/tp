@@ -16,15 +16,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.project.ProjectNameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindProjectCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook());
 
     @Test
     public void equals() {
@@ -49,7 +48,7 @@ public class FindProjectCommandTest {
         // null -> returns false
         assertFalse(findProjectFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(findProjectFirstCommand.equals(findProjectSecondCommand));
     }
 

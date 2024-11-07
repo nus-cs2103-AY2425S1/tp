@@ -39,16 +39,16 @@ public class ListProjectMembersCommand extends ListCommand {
         model.updateFilteredAssignmentList(predicate);
         List<Assignment> filteredAssignments = model.getFilteredAssignmentList();
 
-        model.updateFilteredPersonList(person ->
+        model.updateFilteredEmployeeList(employee ->
                 filteredAssignments.stream()
-                        .map(Assignment::getPerson)
+                        .map(Assignment::getEmployee)
                         .distinct()
-                        .anyMatch(person::equals)
+                        .anyMatch(employee::equals)
         );
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PROJECT_MEMBERS_LISTED,
-                        filteredAssignments.size()), DisplayType.PERSON_LIST);
+                        filteredAssignments.size()), DisplayType.EMPLOYEE_LIST);
     }
 
     @Override
