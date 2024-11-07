@@ -190,7 +190,7 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the session log associated with the person with {@code personIndex}
      */
     private void handleShowSessionLogs(int personIndex) {
-        centralDisplay.handleShowLog(personIndex);
+        centralDisplay.handleLog(personIndex);
     }
 
 
@@ -217,18 +217,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isListLogs()) {
+            if (commandResult.isList()) {
                 handleShowSessionLogs(commandResult.getPersonIndex());
-            }
-
-            if (commandResult.isPersonList()) {
+            } else {
                 centralDisplay.showPersonListPanel();
             }
-
-            if (commandResult.isAddLog()) {
-                centralDisplay.handleLogRefresh(commandResult.getPersonIndex());
-            }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
