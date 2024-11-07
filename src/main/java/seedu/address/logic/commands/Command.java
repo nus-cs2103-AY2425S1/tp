@@ -21,5 +21,4 @@ public abstract class Command {
      * Undoes the command.
      */
     public abstract void undo(Model model);
-
 }
