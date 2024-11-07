@@ -219,6 +219,35 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_personDisplayedEdited_success() throws CommandException {
+
+        Person personToDisplay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setPersonToDisplay(personToDisplay);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName("Edited Name")
+                .withPhone("98765432")
+                .withEmail("edited@example.com")
+                .build();
+
+        EditCommand editCommand = new EditCommand(personToDisplay.getStudentId(), descriptor);
+
+        Person editedPerson = new PersonBuilder(personToDisplay)
+                .withName("Edited Name")
+                .withPhone("98765432")
+                .withEmail("edited@example.com")
+                .build();
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs());
+        expectedModel.setPerson(personToDisplay, editedPerson);
+        expectedModel.setPersonToDisplay(editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         StudentId firstPersonId = model.getFilteredPersonList().get(0).getStudentId();
         StudentId secondPersonId = model.getFilteredPersonList().get(1).getStudentId();
