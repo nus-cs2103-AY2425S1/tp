@@ -187,13 +187,13 @@ class JsonAdaptedPerson {
      * Fills empty contactInfo with default values
      */
     public void fillEmptyContactInfo() {
-        if (phone ==  null) {
+        if (phone == null) {
             this.phone = DEFAULT_PHONE;
         }
         if (email == null) {
             this.email = DEFAULT_EMAIL;
         }
-        if (telegramHandle ==  null) {
+        if (telegramHandle == null) {
             this.telegramHandle = DEFAULT_TELEGRAMHANDLE;
         }
     }
