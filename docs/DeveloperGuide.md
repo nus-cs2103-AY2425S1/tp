@@ -539,7 +539,7 @@ student]() to search for student details.
 
    1. Test case: `add N/Teaching Assistant p/90908767 e/getaboveAtobeaTA123@hotmail.com a/21 Lower Kent Ridge Drive r/40.00 t/Thursday-1130-1330 s/Economics Paid/12.00`
 
-   2. Expected: Prefixes are case-insensitive; therefore, a new contact with the corresponding information will be added to the end of the current list.
+   2. Expected: A new contact with the corresponding information will be added to the end of the current list.
 
 ### Editing an existing student
 
@@ -562,9 +562,12 @@ student]() to search for student details.
 
 1. Editing a student with invalid values
 
-   1. You can test the command using unacceptable values, e.g., `r/0`, `paid/100.000`, `n/   ` .
+   1. Test case: `edit 1 r/0` <br/>
+      Expected: An error message displayed reminds you that **RATE** must be from $0.01 to $1000.00.
    
-   1. Expected: Corresponding error messages will be displayed.
+   1. Test case: `edit 1 n/ p/654321234` <br/>
+      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE** are invalid the error message is shown in the order that the attributes shown in the app.
+
 
 ### Deleting a student
 
