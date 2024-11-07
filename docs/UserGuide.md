@@ -219,7 +219,7 @@ This deletes all students who graduate in 2023 or earlier.
 
 Undoes the previous command that changes the data in the address book.
 
-Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`.
+Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`, `import`.
 
 Format: `undo`
 
