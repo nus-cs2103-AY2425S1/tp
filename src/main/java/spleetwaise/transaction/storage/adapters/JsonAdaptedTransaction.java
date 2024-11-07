@@ -32,11 +32,11 @@ public class JsonAdaptedTransaction {
 
     private final String id;
     private final String personId;
-    private final JsonAdaptedAmount jsonAmount;
-    private final String jsonDescription;
-    private final String jsonDate;
+    private final JsonAdaptedAmount amount;
+    private final String description;
+    private final String date;
     private final boolean isDone;
-    private final List<JsonAdaptedCategory> jsonCategories = new ArrayList<>();
+    private final List<JsonAdaptedCategory> categories = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedTransaction} with the given transaction details.
@@ -53,12 +53,12 @@ public class JsonAdaptedTransaction {
     ) {
         this.id = id;
         this.personId = personId;
-        this.jsonAmount = amount;
-        this.jsonDescription = description;
-        this.jsonDate = date;
+        this.amount = amount;
+        this.description = description;
+        this.date = date;
         this.isDone = isDone;
         if (categories != null) {
-            this.jsonCategories.addAll(categories);
+            this.categories.addAll(categories);
         }
     }
 
@@ -68,11 +68,11 @@ public class JsonAdaptedTransaction {
     public JsonAdaptedTransaction(Transaction transaction) {
         this.id = transaction.getId();
         this.personId = transaction.getPerson().getId();
-        this.jsonAmount = new JsonAdaptedAmount(transaction.getAmount());
-        this.jsonDescription = transaction.getDescription().toString();
-        this.jsonDate = transaction.getDate().getDate().format(Date.VALIDATION_FORMATTER);
+        this.amount = new JsonAdaptedAmount(transaction.getAmount());
+        this.description = transaction.getDescription().toString();
+        this.date = transaction.getDate().getDate().format(Date.VALIDATION_FORMATTER);
         this.isDone = transaction.getStatus().isDone();
-        this.jsonCategories.addAll(transaction.getCategories().stream().map(JsonAdaptedCategory::new)
+        this.categories.addAll(transaction.getCategories().stream().map(JsonAdaptedCategory::new)
                 .toList());
     }
 
@@ -81,15 +81,15 @@ public class JsonAdaptedTransaction {
     }
 
     public JsonAdaptedAmount getAmount() {
-        return jsonAmount;
+        return amount;
     }
 
     public String getDescription() {
-        return jsonDescription;
+        return description;
     }
 
     public String getDate() {
-        return jsonDate;
+        return date;
     }
 
     public boolean getIsDone() {
@@ -111,7 +111,7 @@ public class JsonAdaptedTransaction {
         final Status status;
         final List<Category> transactionCategories = new ArrayList<>();
 
-        for (JsonAdaptedCategory category : jsonCategories) {
+        for (JsonAdaptedCategory category : categories) {
             transactionCategories.add(category.toModelType());
         }
 
@@ -128,24 +128,24 @@ public class JsonAdaptedTransaction {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "personId"));
         }
 
-        if (jsonAmount == null) {
+        if (this.amount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Amount.class.getSimpleName()));
         }
 
-        if (jsonDescription == null) {
+        if (this.description == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
 
-        if (jsonDate == null) {
+        if (this.date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
 
-        if (!Description.isValidDescription(jsonDescription)) {
+        if (!Description.isValidDescription(this.description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
 
-        if (!Date.isValidDate(jsonDate)) {
+        if (!Date.isValidDate(this.date)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
 
@@ -155,9 +155,9 @@ public class JsonAdaptedTransaction {
         }
 
         person = optionalPerson.get();
-        amount = jsonAmount.toModelType();
-        description = new Description(jsonDescription);
-        date = new Date(jsonDate);
+        amount = this.amount.toModelType();
+        description = new Description(this.description);
+        date = new Date(this.date);
         status = new Status(isDone);
         Set<Category> categories = new HashSet<>(transactionCategories);
 
