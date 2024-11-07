@@ -222,14 +222,6 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 
 - Check our [Troubleshooting Guide](link-to-troubleshooting) if you run into any issues
 
-<box type="tip" seamless>
-
-
-**Tip:** 💡 Type commands in any case - they're not case-sensitive
-
-</box>
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -274,7 +266,6 @@ Command | Description
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
@@ -422,7 +413,7 @@ Examples:
 Adds a public address to a contact.
 
 
-Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
+Format: `addpa INDEX c/NETWORK l/LABEL pa/PUBLIC_ADDRESS`
 
 
 * Adds a public address to a contact at the specified `INDEX`. The index refers to the index number shown in the
@@ -430,14 +421,19 @@ Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
   The index **must be a positive integer** 1, 2, 3, …​
 
 * The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
-  `SOL`, etc.).
+  `SOL`, etc.). 
+  * This field is not case-sensitive and will be converted to UPPERCASE.
 
-* The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
+* The `LABEL` parameter specifies the wallet name to which the public address belongs.
+  * This field is not case-sensitive and will be stored as is.
 
-* The `PUBLIC_ADDRESS` parameter specifies the public address to be added, this fields is not cap sensitive.
+* The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
+  * This field is not case-sensitive and will be converted to lowercase.
 
 Examples:
-* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a the first contact on the list `Alex Yeoh` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to the first contact on the list `Alex Yeoh` under the ETH network with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+
+* `addpa 4 c/BTC l/savings_wallet pa/0x71C7656EC7ab88b098defB751B7401B5f6d8976F` adds a public address to the fourth contact on the list `David Li` under the BC network with the wallet name `savings_wallet` and the public address `0x71C7656EC7ab88b098defB751B7401B5f6d8976F`.
 
 ![img.png](img.png)
 
