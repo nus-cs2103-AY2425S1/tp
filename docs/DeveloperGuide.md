@@ -305,8 +305,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                     | I want to …​                                                      | So that I can…​                                                                                |
 |----------|-----------------------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| `* * *`  | event planner               | create a new event with name, date and tags                       | easily track upcoming events                                                                   |
-| `* * *`  | event planner               | create a new vendor with name, phone number, description and tags | keep track of vendors' data easily                                                             |
+| `* * *`  | event planner               | create a new event with name and date                             | easily track upcoming events                                                                   |
+| `* * *`  | event planner               | create a new vendor with name, phone number, and description      | keep track of vendors' data easily                                                             |
 | `* * *`  | event planner               | delete an event                                                   | remove entries I no longer need and keep the address book less cluttered                       |
 | `* * *`  | event planner               | delete a vendor                                                   | remove entries I no longer need and keep the address book less cluttered                       |
 | `* * *`  | event planner               | assign a vendor to an event                                       | keep track of which vendors have been hired for an event                                       |
@@ -314,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | event planner               | find a vendor by name and tags                                    | choose a suitable vendor quickly for a new event                                               |
 | `* *`    | event planner               | find an event by name and tags                                    | search for an event of interest                                                                |
 | `* *`    | event planner               | view information related to a vendor                              | lookup vendor information                                                                      |
-| `* *`    | event planner               | view information related to an event                              | lookup event information                                                                       |  
+| `* *`    | event planner               | view information related to an event                              | lookup event information                                                                       |
 | `* *`    | computer user with no mouse | navigate the address book using only a keyboard                   | use the app without a mouse                                                                    |
 | `* *`    | event planner               | modify event and vendor details                                   | correct any mistakes or changes made to an event or vendor                                     |
 | `* *`    | forgetful event planner     | write additional notes for an event or vendor                     | keep track of miscellaneous information regarding each events or remarks regarding a vendor    |
