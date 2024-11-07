@@ -280,15 +280,15 @@ Examples of commands tracked by undo:
 - `edit`
 - `pin`
 
-### Redoing a previously executed undo command: `undo`
+### Redoing a previously executed undo command: `redo`
 
-Redos the previous undo command that was executed.
+Redoes the previous undo command that was executed.
 
 Format: `redo`
 
 - The redo feature saves the **5 most recent executed undo commands**.
 - The redo feature only tracks changed made by the undo command
-- The redp feature will clear the focus person panel upon execution.
+- The redo feature will clear the focus person panel upon execution.
 
 ### Exporting the contact list : `export`
 
@@ -365,10 +365,10 @@ _Details coming soon ..._
 ## Command summary
 
 | Action         | Format, Examples                                                                                                                                                      |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **List**       | `list`                                                                                                                                                                |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Deletetag**  | `deletetag INDEX t/[TAG]` <br> e.g. `deletetag 1 t/Client`                                                                                                            |
@@ -379,7 +379,8 @@ _Details coming soon ..._
 | **Pin**        | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
 | **Unpin**      | `unpin INDEX` <br> e.g. `unpin 1`                                                                                                                                     |
 | **Undo**       | `undo`                                                                                                                                                                |
-| **Redo**       | `redo`                                                                                                                                                                || **Redo**       | `redo`                                                                                                                                                                || **Redo**       | `redo`                                                                                                                                                                |
+| **Redo**       | `redo`                                                                                                                                                                |
+| **Toggle**     | `toggle`                                                                                                                                                              |
 | **Export**     | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
 | **Clear**      | `clear`                                                                                                                                                               |
 | **Help**       | `help`                                                                                                                                                                |
