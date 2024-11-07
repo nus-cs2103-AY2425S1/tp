@@ -430,6 +430,64 @@ Preconditions: User has deleted a contact
       4a1. BlitzBiz informs the user that there were no matches found.
       Use case ends.
 
+**Use case: UC05 - Rename Tag**
+
+**MSS**
+
+1.  User requests to rename a tag
+2.  BlitzBiz requests for the old and new tag names
+3.  User enters old and new tag names
+4.  BlitzBiz renames all the tags with the old tag name to the new tag name
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command.
+       Steps 3a1-3a2 are repeated until the command format entered is correct.
+       Use case resumes from step 4.
+
+* 3b. The new tag does not follow requirements.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command with new tag.
+       Steps 3a1-3a2 are repeated until the new tag entered is valid.
+       Use case resumes from step 4.
+
+* 4a. There are no tags with the old tag name.
+  4a1. BlitzBiz informs the user that there were no matches found.
+  Use case ends.
+
+* 4b. There are contacts with both the old tag and new tag.
+  4b1. BlitzBiz informs the user that contacts which will result in duplicated tags will not be updated.
+
+**Use case: UC06 - Social Media**
+
+**MSS**
+
+1.  User requests to add a social media handle to a contact
+2.  BlitzBiz requests for the social media platform and handle name
+3.  User enters social media platform and handle name
+4.  BlitzBiz adds the social media to the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command.
+       Steps 3a1-3a2 are repeated until the command format entered is correct.
+       Use case resumes from step 4.
+
+* 3b. The handle does not follow requirements.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command with new handle.
+       Steps 3a1-3a2 are repeated until the handle entered is valid.
+       Use case resumes from step 4.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
