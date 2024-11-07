@@ -21,6 +21,7 @@ import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
 import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
+import seedu.eventtory.ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindVendorCommand}.
@@ -80,6 +81,14 @@ public class FindVendorCommandTest {
         FindVendorCommand findCommand = new FindVendorCommand(predicate);
         String expected = FindVendorCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
+    }
+
+    @Test
+    public void execute_wrongView_invalidViewError() {
+        model.setUiState(UiState.EVENT_LIST);
+        VendorContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        FindVendorCommand command = new FindVendorCommand(predicate);
+        assertCommandFailure(command, model, FindVendorCommand.MESSAGE_FIND_VENDOR_FAILURE_INVALID_VIEW);
     }
 
     /**
