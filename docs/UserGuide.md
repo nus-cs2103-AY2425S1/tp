@@ -20,7 +20,7 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
     - [Clearing all entries: `clear`](#clearing-all-entries-clear)
     - [Exiting the program: `exit`](#exiting-the-program-exit)
   - [Contact Management](#contact-management)
-    - [Adding a student: `student`](#adding-a-student-student-)
+    - [Adding a student: `student`](#adding-a-student-student)
     - [Adding a company: `company`](#adding-a-company-company)
     - [Editing a contact: `edit`](#editing-a-contact-edit)
     - [Deleting contact(s): `delete`](#deleting-contacts-delete)
