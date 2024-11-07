@@ -415,7 +415,7 @@ Format: `find [k/KEYWORD]... [n/NAME]... [p/PHONE_NUMBER]... [e/EMAIL]... [t/TAG
 
 <box type="info" light>
 
-Example inputs:
+**Example inputs**:
 1. `find n/Jason`
 2. `find k/912`
 3. `find n/Jason Lee p/91231231`
@@ -424,7 +424,7 @@ Example inputs:
 
 <box type="success" light>
 
-Example outputs:
+**Example outputs**:
 1. `3 persons listed!`. It will return every client with the name called `jason`.
 2. `3 persons listed!`. It will return every client with the keyword `912` within all its attributes.
 3. `3 persons listed!`. It will return every client with the name `Jason Lee` and phone number `91231231`.
@@ -571,7 +571,7 @@ Please set up the following commands before proceeding with the example inputs a
 6. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
 7. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
    are no more previous commands.
-8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
+8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
 9. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
 10. Expected: `rview 1` is shown in the command box.
 11. Expected: `list` is shown in the command box.
@@ -654,7 +654,24 @@ Entering the `↹ Tab key` will help to fill or append to the command input with
 
 Imports and overwrite all existing data from a `.json` file.
 
-<!--TODO: Nathan-->
+Format: `import`
+
+<box type="important" seamless>
+
+**Constraints**:
+* Only `.json` files can be imported.
+* The chosen file must have the correct format.
+
+</box>
+
+<box type="info" seamless>
+
+**Note**:
+* Importing data will delete all current data in the address book. It is recommended to back up the current data via the `export` command.
+* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png)
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -666,13 +683,21 @@ Imports and overwrite all existing data from a `.json` file.
 
 Exports all data within TrueRental into a `.json` file.
 
+Format: `export`
+
 <box type="info" seamless>
 
 **Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
 
 </box>
 
-<!--TODO: Nathan-->
+<box type="info" seamless>
+
+**Note**:
+* Address book data can only be exported as `.json` files.
+* A new window will be opened that prompts for a file. ![export file window](images/exportFileWindow.png)
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
