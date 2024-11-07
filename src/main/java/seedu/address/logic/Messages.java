@@ -15,6 +15,9 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_EMPTY_MONTH_PAID = "The month paid cannot be empty";
+    public static final String MESSAGE_EMPTY_INDEX = "The index cannot be empty";
+    public static final String MESSAGE_NEGATIVE_INDEX = "The index cannot be negative";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
