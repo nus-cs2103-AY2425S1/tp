@@ -212,7 +212,7 @@ public class AddSessionCommandParserTest {
     @Test
     public void parse_pointsExceedMax_failure() {
         // Case where points exceed 100, expecting a failure due to max points constraint
-        String pointsExceedMax = SESSION_NAME_DESC_MEETING + DATE_DESC_MEETING + " p/150" + MEMBER_INDEX_DESC_ONE;
+        String pointsExceedMax = SESSION_NAME_DESC_MEETING + DATE_DESC_MEETING + " p/101" + MEMBER_INDEX_DESC_ONE;
         assertParseFailure(parser, pointsExceedMax, MESSAGE_MAX_SESSION_POINTS);
     }
 
