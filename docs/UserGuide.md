@@ -47,6 +47,8 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
+   * `export format\csv` : Exports contact data in the CSV format.
+
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
@@ -177,7 +179,7 @@ Format: `filter [n\NAME] [t\TAG]…​`
 * n\NAME specifies a name (or partial name) to filter by.
 * t\TAG specifies a tag to filter by. You can provide multiple tags.
 * If both n\NAME and t\TAG are provided, the command will display contacts matching both the name and tags.
-* If no parameters are provided, the full list is displayed.
+* If no parameters are provided, an unfiltered list of contacts will be displayed.
 
 Examples:
 * filter `n\John` filters and displays all contacts whose names contain "John".
