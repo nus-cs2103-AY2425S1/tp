@@ -93,7 +93,8 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - Role-specific fields(not required for `Person`)
   - **Volunteer**: `h/HOURS` :required for volunteers, representing contributed hours.
   - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
-  - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date.
+  - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date. The 
+    date should be in the **YYYY-MM-DD** format and must be a valid date (e.g., 2024-11-07).
 
 Note:
 Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of 
@@ -154,6 +155,7 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in the address book**.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
@@ -205,10 +207,14 @@ Examples: <br>
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDICES`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the **last displayed person list**.
+* Deletes the person(s) at the specified `INDICES`.
+* `INDICES` refers to the index numbers shown in the **last displayed person list**.
+* `INDICES` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`), separated by spaces (e.g., `1 2 3 5-9`).
+  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
+    but `5 - 9` or `5 -9` or `5- 9` is invalid).
+* `INDICES` should not be empty.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
@@ -220,9 +226,9 @@ Format: `delete INDEX`
 </box>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `search n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `search` command.
-
+* `list` followed by `delete 2 4 6-8` deletes the 2nd, 4th, 6th, 7th, and 8th persons in the address book.
+* `search n/Betsy` followed by `delete 1 3-5` deletes the 1st, 3rd, 4th, and 5th persons in the results of the 
+  `search` command.
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -369,7 +375,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` <br> e.g., `add r/volunteer h/19 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDICES`<br> e.g., `delete 1 2 3 5-7`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Search**   | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`<br> e.g., `search n/john`
 **List**   | `list`
