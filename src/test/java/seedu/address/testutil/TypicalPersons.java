@@ -54,18 +54,18 @@ public class TypicalPersons {
     public static final Tutee DANIEL = new TuteeBuilder().withId(3).withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street, 123456").withHours("4")
             .withSubjects("Math").build();
-    public static final Tutee ELLE = new TuteeBuilder().withId(4).withName("Elle Meyer").withPhone("9482224")
+    public static final Tutee ELLE = new TuteeBuilder().withId(4).withName("Elle Meyer").withPhone("94822240")
             .withEmail("werner@example.com").withAddress("michegan ave, 878777").withHours("5")
             .withSubjects("English").build();
-    public static final Tutee FIONA = new TuteeBuilder().withId(5).withName("Fiona Kunz").withPhone("9482427")
+    public static final Tutee FIONA = new TuteeBuilder().withId(5).withName("Fiona Kunz").withPhone("94824270")
             .withEmail("lydia@example.com").withAddress("little tokyo, 123456").withHours("6").build();
-    public static final Tutee GEORGE = new TuteeBuilder().withId(6).withName("George Best").withPhone("9482442")
+    public static final Tutee GEORGE = new TuteeBuilder().withId(6).withName("George Best").withPhone("94824420")
             .withEmail("anna@example.com").withAddress("4th street, 897978").withHours("7").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withId(7).withName("Hoon Meier").withPhone("8482424")
+    public static final Person HOON = new PersonBuilder().withId(7).withName("Hoon Meier").withPhone("84824240")
             .withEmail("stefan@example.com").withAddress("little india, 123211").build();
-    public static final Person IDA = new PersonBuilder().withId(8).withName("Ida Mueller").withPhone("8482131")
+    public static final Person IDA = new PersonBuilder().withId(8).withName("Ida Mueller").withPhone("84821310")
             .withEmail("hans@example.com").withAddress("chicago ave, 898888").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
