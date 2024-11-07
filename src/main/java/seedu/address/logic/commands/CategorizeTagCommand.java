@@ -25,7 +25,7 @@ public class CategorizeTagCommand extends Command {
             + "Parameters: " + PREFIX_TAG + "TAG (at least one existing tag label) CATEGORY\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "CS1101S acads";
 
-    public static final String MESSAGE_CAT_TAG_SUCCESS = "Category of tag %1$s has been changed successfully.";
+    public static final String MESSAGE_CAT_TAG_SUCCESS = "Category of tag(s) %1$s has been changed successfully.";
     public static final String MESSAGE_TAG_NOT_EXIST = "Tag not found: %1$s";
     public static final String MESSAGE_INVALID_CATEGORY = "Invalid category: %1$s";
     public static final String MESSAGE_DUPLICATE_CATEGORY = "Current category of %s is already %s";
@@ -58,15 +58,17 @@ public class CategorizeTagCommand extends Command {
             model.refreshCampusConnect();
         }
 
-        String targetTagsResult = targetTags.stream()
-                .map(x -> x.toString())
-                .collect(Collectors.joining(", "));
-
-        return new CommandResult(String.format(MESSAGE_CAT_TAG_SUCCESS, targetTagsResult));
+        String formattedTags = formatTags(targetTags);
+        return new CommandResult(String.format(MESSAGE_CAT_TAG_SUCCESS, formattedTags));
     }
 
     private boolean isDuplicateCategory(TagCategory cat) {
         return updatedCategory.equals(cat);
+    }
+
+    private String formatTags(List<Tag> tags) {
+        String result = tags.toString();
+        return result.substring(1, result.length() - 1);
     }
 
     @Override
