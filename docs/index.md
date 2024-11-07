@@ -6,7 +6,7 @@ title: MedConnect
 [![CI Status](https://github.com/AY2425S1-CS2103T-T13-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T13-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T13-1/tp/graph/badge.svg)](https://codecov.io/github/AY2425S1-CS2103T-T13-1/tp)
 
-![Ui](images/sampleUiImage.png)
+![Ui](images/Ui.png)
 
 **MedConnect is a desktop application for healthcare administrators in old folks homes for dementia patients to consolidate contacts of patients and related information into a single database.**
 
