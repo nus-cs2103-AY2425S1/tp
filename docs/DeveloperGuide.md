@@ -245,9 +245,9 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
 ***
 
 ### 4.2 Add Feature
-The Add feature allows users to register a new student in the system with a range of details, such as name, phone number, emergency contact, address, level, subject(s), and lesson time(s). Users can specify a single level, multiple subjects, and multiple lesson timings per student to tailor profile details for academic tracking and scheduling.
+The Add feature allows users to register a new student in EduManage with a range of details, such as name, phone number, emergency contact, address, level, subject(s), and lesson time(s). Users can specify a single level, multiple subjects, and multiple lesson timings per student to tailor profile details for academic tracking and scheduling.
 
-- **Duplicate Prevention**: If a student with identical details already exists, the system will prevent the addition and
+- **Duplicate Prevention**: If a student with identical details already exists, EduManage will prevent the addition and
   notify the user with an error message.
 - **Level and Subject Compatibility**: When specified, the level and subjects are validated to ensure compatibility,
   helping to avoid entry errors.
@@ -280,7 +280,7 @@ success message. If any check fails, the user is notified with an appropriate er
 This feature allows users to delete a student from EduManage based on their index in the displayed student list. The
 process involves identifying the student by their index and removing their details from the database.
 
-- **Index Validation**: The system checks if the provided index is valid and within the bounds of the current student
+- **Index Validation**: EduManage checks if the provided index is valid and within the bounds of the current student
   list. If the index is out of bounds or invalid, an error message is shown.
 - **Student Deletion**: Upon valid index input, the student is deleted from the model and the filtered student list is
   updated to reflect this change and a success message is shown.
@@ -312,10 +312,11 @@ This feature allows users to tag a student's profile with specific details relat
 subject(s) (e.g., `MATH`). By entering the student's name and specifying tags for level or subject(s) (or both), users can
 manage student profiles more efficiently.
 
-- **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified
-  tags already exist on the profile, an error message will notify the user, avoiding duplicate tags.
-- **Invalid Input**: If an invalid student name, level, or subject is inputted, the system displays the constraints and
-  guidelines for tag parameters.
+- **Adding Multiple Tags**: Users can specify multiple subject tags and one level tag for a student. Each time tags are
+  added, they will override any previously existing tags on the profile, ensuring that only the latest tags are retained.
+- **Invalid Input**: If an invalid student name, level, or subject is inputted, EduManage displays the constraints and
+  guidelines for tag parameters. Additionally, if there is a mismatch between the tagged subjects and the specified level,
+  an error message will highlight the incompatibility.
 - **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in
   value (e.g., `Math` and `MATH`), only one instance of each unique tag will be added, preventing unnecessary
   duplication.
@@ -336,7 +337,7 @@ lifeline till the diagram's end.
       maintainability and modularity.
     - **Pros**: By isolating validation in `ParserUtil`, updates and modifications are easier to manage, promoting a
       consistent approach across commands.
-    - **Cons**: Adds a layer of abstraction, which may slightly increase the system’s complexity.
+    - **Cons**: Adds a layer of abstraction, which may slightly increase EduManage’s complexity.
 
 - **Alternative 2**:
     - **Description**: Validation occurs directly within `TagCommandParser`.
@@ -362,11 +363,11 @@ lifeline till the diagram's end.
 This feature allows users to view the details of an existing student by specifying their name. It enables quick access
 to a student's profile for viewing key information.
 
-- **Viewing a Student's Profile**: Users can enter a student's name to view the corresponding details. The system will
+- **Viewing a Student's Profile**: Users can enter a student's name to view the corresponding details. EduManage will
   search for the student by name and display their profile if found.
-- **Invalid Input**: If an invalid or non-existent student name is entered, the system will show an error message
+- **Invalid Input**: If an invalid or non-existent student name is entered, EduManage will show an error message
   indicating that the student was not found.
-- **Case Insensitivity**: The system treats student names case-insensitively, ensuring that variations in capitalization
+- **Case Insensitivity**: EduManage treats student names case-insensitively, ensuring that variations in capitalization
   do not affect the search result.
 
 #### 4.5.1 Implementation - Sequence Diagram
@@ -399,7 +400,7 @@ can manage and monitor students' progress more efficiently.
 
 - **Adding Multiple Tasks**: Users can add multiple tasks to a student. If a task with identical parameters already
   exists in the student's task list, an error message will alert the user, avoiding duplicate entries.
-- **Invalid Input**: If an invalid student name, task description or due date is provided, the system displays the
+- **Invalid Input**: If an invalid student name, task description or due date is provided, EduManage displays the
    constraints and guidelines for the incorrect parameter(s).
 - **Fixed Date Format**: Due dates must be entered in a strict `YYYY-MM-DD` format. This format avoids ambiguity and
   enforces consistency, helping users easily interpret task deadlines.
