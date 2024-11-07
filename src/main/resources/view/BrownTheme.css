@@ -1,3 +1,11 @@
+.root {
+    -fx-base-color: #954535;
+    -fx-cell-odd-color: #DAA06D;
+    -fx-cell-even-color: #D27D2D;
+    -fx-boxes-color: #8B4513;
+    -fx-text-color: black;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
@@ -13,14 +21,14 @@
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text-color;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text-color;
     -fx-opacity: 1;
 }
 
@@ -97,22 +105,30 @@
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-padding: 2;
+    -fx-background-color: -fx-boxes-color;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: -fx-cell-even-color;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-border-width: 2;
+    -fx-border-color: -fx-boxes-color; /* Choose your border color */
+    -fx-border-style: solid; /* Set border style */
+    -fx-background-radius: 15;
+    -fx-border-radius: 10;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: -fx-cell-even-color;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: -fx-cell-odd-color;
 }
 
 .list-cell:filled:selected {
@@ -125,7 +141,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text-color;
 }
 
 .cell_big_label {
@@ -154,21 +170,22 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: derive(-fx-boxes-color, 20%);
+
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(-fx-base-color, 20%);
+     -fx-border-color: derive(#722F37, 10%);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(-fx-cell-even-color, 30%);
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: -fx-base-color;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
@@ -178,9 +195,19 @@
     -fx-text-fill: black !important;
 }
 
+.text-area .scroll-pane {
+    -fx-background-color: derive(-fx-base-color, 20%);
+}
+.text-area .scroll-pane .viewport{
+    -fx-background-color: derive(-fx-base-color, 20%);
+}
+.text-area .scroll-pane .content{
+    -fx-background-color: derive(-fx-base-color, 20%);
+}
+
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text-color;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -206,7 +233,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(-fx-boxes-color, 50%);
 }
 
 .context-menu .label {
@@ -214,7 +241,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(-fx-base-color, 20%);
 }
 
 .menu-bar .label {
@@ -303,11 +330,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(-fx-base-color, 20%);
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(-fx-base-color, 50%);
     -fx-background-insets: 3;
 }
 
@@ -339,7 +366,7 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: transparent #000000 transparent #000000;
     -fx-background-insets: 0;
     -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
@@ -347,6 +374,9 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-prompt-text-fill: white;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -354,8 +384,10 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
-    -fx-background-radius: 0;
+    -fx-background-color: transparent, -fx-boxes-color, transparent, -fx-boxes-color;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: -fx-cell-odd-color;
 }
 
 #tags {
@@ -387,4 +419,7 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+
+
 
