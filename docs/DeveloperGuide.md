@@ -3,7 +3,6 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
-* [Acknowledgements](#acknowledgements)
 * [Setting up, getting started](#setting-up-getting-started)
 * [Design](#design)
     * [Architecture](#architecture)
@@ -25,12 +24,6 @@ title: Developer Guide
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a person](#deleting-a-person)
     * [Saving data](#saving-data)
-
-
---------------------------------------------------------------------------------------------------------------------
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -867,45 +860,183 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
-1. Initial launch
+1. **Initial Launch**
+  - **Steps**:
+    1. Download the `.jar` file and copy it into an empty folder.
+    2. Double-click the `.jar` file to launch the application.
+  - **Expected**:
+    - GUI opens with a set of sample contacts.
+    - Sample contacts include example patients and caregivers.
+    - Window size may not be optimal, but sample data should be visible.
 
-   1. Download the jar file and copy into an empty folder
+2. **Saving Window Preferences**
+  - **Steps**:
+    1. Resize the window to an optimal size.
+    2. Move the window to a different location on the screen.
+    3. Close the window.
+    4. Re-launch the app by double-clicking the `.jar` file.
+  - **Expected**:
+    - The most recent window size and location are retained upon re-launch.
+    - Application opens in the same position with the same dimensions.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+---
 
-1. Saving window preferences
+### Adding a Person
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+1. **Adding a New Patient**
+  - **Prerequisites**: Ensure the app is running.
+  - **Test case**: `add n/John Doe nric/S1234567D p/91234567 e/johndoe@example.com a/123 Clementi Rd #01-01 role/patient t/diabetes`
+  - **Expected**:
+    - New patient with name "John Doe" is added to the list.
+    - Patient details, including NRIC, contact, role, and tags, are displayed.
+    - Success message confirms the addition.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+2. **Adding a New Caregiver**
+  - **Test case**: `add n/Jane Smith nric/S2345678E p/98765432 e/janesmith@example.com a/456 Bukit Timah Rd #02-02 role/caregiver t/primary`
+  - **Expected**:
+    - New caregiver is added with the specified details.
+    - The list reflects the addition, showing Jane Smith as a caregiver.
+    - Success message confirms the addition.
 
-1. _{ more test cases …​ }_
+3. **Adding a Person with Missing Required Fields**
+  - **Test case**: `add n/John Doe p/91234567`
+  - **Expected**:
+    - Error message indicating missing required fields (e.g., NRIC or role).
+    - Person is not added to the list.
 
-### Deleting a person
+---
 
-1. Deleting a person while all persons are being shown
+### Deleting a Person
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. **Deleting a Person by NRIC**
+  - **Prerequisites**: Ensure a person with NRIC `S1234567D` is in the list.
+  - **Test case**: `delete S1234567D`
+  - **Expected**:
+    - Person with NRIC `S1234567D` is removed from the list.
+    - Success message confirms the deletion.
+    - Timestamp in the status bar updates.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+2. **Attempting to Delete Nonexistent Person**
+  - **Test case**: `delete S0000000J`
+  - **Expected**:
+    - Error message stating that no person with the specified NRIC exists.
+    - No change to the list.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+3. **Invalid Delete Command**
+  - **Test case**: `delete`
+  - **Expected**:
+    - Error message indicating invalid input.
+    - No change to the list.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+---
 
-1. _{ more test cases …​ }_
+### Editing a Person
 
-### Saving data
+1. **Editing a Person’s Contact Details**
+  - **Prerequisites**: Ensure person with NRIC `S1234567D` exists in the list.
+  - **Test case**: `edit S1234567D p/91234567 e/johndoe_new@example.com`
+  - **Expected**:
+    - Updates the phone and email of the specified person.
+    - Success message confirms changes.
+    - List reflects updated details.
 
-1. Dealing with missing/corrupted data files
+2. **Editing a Person’s Tags**
+  - **Test case**: `edit S1234567D t/updated_tag`
+  - **Expected**:
+    - Replaces existing tags with the new tag `updated_tag`.
+    - Success message confirms tag update.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+---
 
-1. _{ more test cases ...​ }_
+### Linking and Deleting Links
 
+1. **Linking a Patient and Caregiver**
+  - **Prerequisites**: Ensure two persons, one with NRIC `S1234567D` (patient) and `S2345678E` (caregiver), exist in the list.
+  - **Test case**: `link patient/S1234567D caregiver/S2345678E`
+  - **Expected**:
+    - Link is created between the patient and caregiver.
+    - Success message confirms the link.
+
+2. **Deleting a Link**
+  - **Test case**: `deletelink patient/S1234567D caregiver/S2345678E`
+  - **Expected**:
+    - Link between the specified patient and caregiver is removed.
+    - Success message confirms the deletion.
+
+3. **Invalid Link Command**
+  - **Test case**: `link patient/S0000000J caregiver/S2345678E`
+  - **Expected**:
+    - Error message indicating that the patient does not exist.
+
+---
+
+### Managing Appointments
+
+#### Adding an Appointment
+
+1. **Adding a Valid Appointment**
+  - **Prerequisites**: Ensure person with NRIC `S1234567D` exists in the list.
+  - **Test case**: `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`
+  - **Expected**:
+    - Appointment is added to the person's schedule.
+    - Success message confirms the addition.
+
+2. **Adding an Appointment with Past Date**
+  - **Test case**: `addapp nric/S1234567D d/01/01/2020 start/10:00 end/11:00`
+  - **Expected**:
+    - Error message stating appointment cannot be scheduled in the past.
+    - No appointment is added.
+
+#### Editing an Appointment
+
+1. **Editing Appointment Date and Time**
+  - **Prerequisites**: Ensure an existing appointment on `01/01/2025` at `10:00`.
+  - **Test case**: `editapp nric/S1234567D d/01/01/2025 start/10:00 newd/02/01/2025 newstart/11:00 newend/12:00`
+  - **Expected**:
+    - Appointment is updated to the new date and time.
+    - Success message confirms the update.
+
+#### Deleting an Appointment
+
+1. **Deleting an Existing Appointment**
+  - **Prerequisites**: Ensure an appointment exists on `01/01/2025` at `10:00`.
+  - **Test case**: `deleteapp nric/S1234567D d/01/01/2025 start/10:00`
+  - **Expected**:
+    - Appointment is removed from the person's schedule.
+    - Success message confirms deletion.
+
+---
+
+### Finding Entries
+
+1. **Finding a Person by Name**
+  - **Test case**: `find n/John`
+  - **Expected**:
+    - Lists all persons whose name contains "John".
+    - Results include detailed information on each match.
+
+2. **Finding by Multiple Criteria**
+  - **Test case**: `find nric/S1234567D t/diabetes`
+  - **Expected**:
+    - Lists all persons who match any of the specified criteria (OR search).
+    - Results include persons with the specified NRIC or the specified tag.
+
+---
+
+### Saving Data
+
+1. **Automatic Data Saving**
+  - **Prerequisites**: Make changes to the list (e.g., add, edit, or delete a person).
+  - **Expected**:
+    - Data is saved automatically without requiring a manual save command.
+    - Upon restarting the app, data reflects the latest changes.
+
+2. **Dealing with Missing/Corrupted Data Files**
+  - **Steps**:
+    1. Manually delete or corrupt the data file (`addressbook.json`) in the application's data directory.
+    2. Restart the application.
+  - **Expected**:
+    - Application initializes with an empty list or sample data if the file is missing.
+    - If the file is corrupted, application should display an error message and create a new, clean data file.
