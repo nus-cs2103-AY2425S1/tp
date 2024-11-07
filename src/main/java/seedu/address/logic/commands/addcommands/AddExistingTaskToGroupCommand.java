@@ -40,8 +40,8 @@ public class AddExistingTaskToGroupCommand extends Command {
     public static final String MESSAGE_FAILURE = "Could not complete the command, see below:\n%1$s";
     public static final String GROUP_HAS_TASK = "The following groups(s) already have the task:";
     public static final String GROUP_NOT_FOUND = "The following group(s) do not exist:";
-    public static final String GROUP_DUPLICATE
-        = "The following group(s) are duplicated, task will be added to only one:";
+    public static final String GROUP_DUPLICATE =
+        "The following group(s) are duplicated, task will be added to only one:";
 
     private final Index targetIndex;
     private final List<Group> groups;
