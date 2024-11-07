@@ -573,7 +573,7 @@ Preconditions: User is viewing an item.
 
 ---
 
-** Use case: UC05 - Edit an item**
+**Use case: UC05 - Edit an item**
 
 **MSS**
 1. User enters command to edit an item.
@@ -623,7 +623,27 @@ Preconditions: User is viewing an item.
 
       Use case ends.
 
-*{More to be added}*
+**Use case: UC07 - Find items**
+
+**Preconditions**: User is in list view.
+
+**MSS**
+
+1. User enters the command to find items with specific keywords.
+2. System filters and displays items (e.g., vendors or events) that match the keywords.
+3. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+    * 1a1. System shows an error message and displays the correct command format.
+    * Use case ends.
+
+* 2a. No items match the search keywords.
+    * 2a1. System displays a message indicating no items were found.
+    * Use case ends.
 
 ### Non-Functional Requirements
 
