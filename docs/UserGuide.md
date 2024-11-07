@@ -154,8 +154,8 @@ Symbol     | Parameter    | Constraints
 Symbol     | Parameter    | Constraints
 -----------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
 **`a`**| `DESCRIPTION` |- Must contain at least 1 alphabetic character and has a limit of 40 characters.
-**`s`**| `START`      |- A singular `DATE` in the form `DD-MM-YYYY`.
-**`e`**| `END`        |- A singular `DATE` in the form `DD-MM-YYYY`.
+**`s`**| `START`      |- A singular `DATE-TIME` in the form `DD-MM-YYYY-HH-MM`.
+**`e`**| `END`        |- A singular `DATE-TIME` in the form `DD-MM-YYYY-HH-MM`.
 
 ### Other Parameters
 
@@ -218,7 +218,6 @@ Examples:
 * `add n/John Doe i/P12345 w/A1 d/TYPE 1 DIABETES m/METFORMIN `
 * `add n/Nicky Lam i/P17777 w/A5 d/Gastritis m/Proton pump inhibitors `
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Editing a patient : `edit`
@@ -227,17 +226,17 @@ Examples:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX i/ID w/WARD d/DIAGNOSIS m/MEDICATION`
+Format: `edit INDEX [n/NAME] [i/ID] [w/WARD] [d/DIAGNOSIS] [m/MEDICATION]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* View parameter constraints [here](#input-parameters)!
 
 Examples:
 *  `edit 1 i/P12345 w/A2` Edits the patient ID and ward of the 1st person to be `P12345` and `A2` respectively.
 *  `edit 2 n/Betsy Crower m/Paracetamol` Edits the name and medication of the 2nd person to be `Betsy Crower` and `Panadol`
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting a patient : `delete`
@@ -249,19 +248,14 @@ Deletes the specified person from the address book.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Listing all patients : `list`
-
-![list all patients result'](images/list.png)
 
 Shows a list of all patients in WardWatch.
 
@@ -279,7 +273,7 @@ Format: `find FIELD/ KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Able to search any field, but only one field at a time.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons matching at least one keyword will be returned.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Valid fields for `find` Command:
@@ -289,6 +283,7 @@ Valid fields for `find` Command:
 * Ward: Use `w/` to search by ward.
 * Diagnosis: Use `d/` to search by diagnosis.
 * Medication: Use `m/` to search by medication.
+* View parameter constraints [here](#input-parameters)!
 
 Examples:
 * `find n/ John` returns `john` and `John Doe`
@@ -297,7 +292,6 @@ Examples:
 * `find n/ alice benson` returns `Alice Pauline`, `Benson Meier`<br>
 ![result for 'find n/ alice benson'](images/findAliceBensonResult.png)
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Viewing a patient's details: `view`
@@ -306,14 +300,13 @@ Displays more details about a specific patient listed.
 
 Format: `view INDEX`
 
-* Shows the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* Displays additional information such as a patient's `diagnosis`, `medication`, `notes` and `appointments`.
+* Shows the person at the specified `INDEX`.
+* Displays additional information such as a patient's `DIAGNOSIS`, `MEDICATION`, `NOTES` and `APPOINTMENT`.
 
 Examples:
 * `view 1` to view the 1st patient's details.
 ![result for 'view 1'](images/viewResult.png)
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding notes to a patient : `addnotes`
@@ -322,13 +315,13 @@ Adds notes to an existing person in the address book.
 
 Format: `addnotes INDEX pn/NOTES`
 
-* Adds notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds notes to the person at the specified `INDEX`.
+* View parameter constraints [here](#input-parameters)!
 
 Examples:
 *  `addnotes 1 pn/Patient is prone to falling`
 *  `addnotes 2 pn/Patient requires frequent checkups`
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting notes from a patient : `delnotes`
@@ -337,50 +330,43 @@ Deletes notes from an existing person in the address book.
 
 Format: `delnotes INDEX`
 
-* Deletes notes to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ 
+* Deletes notes to the person at the specified `INDEX`.
 * The person specified must have notes for this command to work.
 
 Examples:
 *  `delnotes 1`
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding an Appointment to a patient: `makeappt`
 
 ![makeappt for patient result'](images/makeappt.png)
 
-Makes an appointment for a person
+Makes an appointment for a person.
 
-Format: `make_appt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_TIME`
+Format: `makeappt INDEX a/DESCRIPTION s/START e/END`
 
 * Adds appointment to the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The `APPOINTMENT_DESCRIPTION` refers to the type of appointment.
-* `START_DATE_TIME` and `END_DATE_TIME` **must be in the form of `DD-MM-YYYY-HH-MM`.**
-* `START_DATE_TIME` and `END_DATE_TIME` refers to the date and time the appointment starts and ends respectively.
+* The `DESCRIPTION` refers to the description of the appointment.
+* `START` and `END` refers to the date and time the appointment starts and ends respectively.
 * The start **must be before** the end date and time.
 * Appointment added **must not overlap** the duration of existing appointments.
+* View parameter constraints [here](#input-parameters)!
 
 Examples:
-* `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
-  1st person in the address book that is on the 23rd of October 2024 from 12pm to 3pm.
+* `list` followed by `makeappt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
+  1st person in the address book that is on the *23rd of October 2024 from 12pm to 3pm*.
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting an Appointment from a patient: `delappt`
 
 Deletes an appointment from a person
 
-Format: `del_appt INDEX`
+Format: `delappt INDEX`
 
 * Deletes the appointment for the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Show appointments on a specific date: `scheduledate`
@@ -395,9 +381,8 @@ Format: `scheduledate DATE`
 * Appointments that overlap with the specified date will be displayed.
 
 Examples:
-* `schedule_date 01-01-2020` returns all the appointments that takes place on 1 January 2020.
+* `scheduledate 01-01-2020` returns all the appointments that takes place on *1 January 2020*.
 
-[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### List all patient appointment: `scheduleall`
@@ -449,17 +434,17 @@ Action     | Format, Examples
 **Help**   | `help`
 **Clear**  | `clear`
 **Exit**   | `exit`
-**Add**    | `add n/NAME i/ID w/WARD d/DIAGNOSIS m/MEDICATION`<br> e.g., `add i/P23456 n/Donald Duck w/B5 d/Diabetes m/Insulin`
-**Edit**   | `edit INDEX [n/NAME] [w/WARD] [d/DIAGNOSIS] [m/MEDICATION]`<br> e.g.,`edit 2 n/Betsy Crower m/Paracetamol`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Add**    | `add n/NAME i/ID w/WARD [d/DIAGNOSIS] [m/MEDICATION]`<br> e.g. `add i/P23456 n/Donald Duck w/B5 d/Diabetes m/Insulin`
+**Edit**   | `edit INDEX [n/NAME] [i/ID] [w/WARD] [d/DIAGNOSIS] [m/MEDICATION]`<br> e.g.`edit 2 n/Betsy Crower m/Paracetamol`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
 **List**   | `list`
-**Find**   | `find FIELD/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
-**View**   | `view INDEX`<br> e.g., `view 1`
-**Add Notes**   | `addnotes INDEX pn/NOTES`<br> e.g., `addnotes 1 pn/Patient is prone to falling` 
-**Delete Notes**   | `delnotes INDEX`<br> e.g., `delnotes 1` 
-**Add appointment** | `makeappt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_TIME`<br> e.g.,`make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00`
-**Delete appointment**   | `delappt INDEX`<br> e.g., `delappt 1` 
+**Find**   | `find FIELD/ KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/ James Jake`
+**View**   | `view INDEX`<br> e.g. `view 1`
+**Add Notes**   | `addnotes INDEX pn/NOTES`<br> e.g. `addnotes 1 pn/Patient is prone to falling` 
+**Delete Notes**   | `delnotes INDEX`<br> e.g. `delnotes 1` 
+**Add appointment** | `makeappt INDEX a/DESCRIPTION s/START e/END`<br> e.g.`makeappt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00`
+**Delete appointment**   | `delappt INDEX`<br> e.g. `delappt 1` 
+**Schedule appointments by date**| `scheduledate DATE`<br> e.g.`scheduledate 01-01-2020`
 **Schedule all appointments**| `scheduleall`<br>
-**Schedule appointments by date**| `scheduledate DATE`<br> e.g.,`scheduledate 01-01-2020`
 
 [Back to Table of Contents](#table-of-contents)
