@@ -13,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+VendorVault is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+
+Icons used in this project are from [UXWing](https://www.uxwing.com/). All icons on this site can be used in personal, commercial, and client projects.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -124,7 +126,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Supplier` objects (which are contained in a `UniqueSupplierList` object).
-* stores the currently 'selected' `Supplier` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Supplier>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+*The model stores the Supplier objects in 2 separate lists. FilteredSupplierList holds the Supplier objects after applying a filter based on some criteria. SortedSupplierList holds the Supplier objects after sorting them according to a specified criterion. A boolean flag controls which list is exposed to outsiders (e.g., the UI). Depending on the flag, one of the 2 lists will be exposed as an unmodifiable ObservableList<Supplier> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
