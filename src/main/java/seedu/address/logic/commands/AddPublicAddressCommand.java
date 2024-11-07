@@ -9,8 +9,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.addresses.Network;
-import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -37,8 +35,7 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         + "wallet1 " + PREFIX_PUBLIC_ADDRESS + "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
 
     public static final String MESSAGE_ADDPA_SUCCESS = "Added Person's Public Address: %1$s";
-    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS =
-        "Invalid: person %1$s already has label %2$s under the network %3$s!\n"
+    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: %1$s\n"
             + "You may either:\n"
             + "1. Use another label for the new public address\n"
             + "2. Edit the existing public address for the current label"
@@ -64,21 +61,18 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        PublicAddressesComposition currentPublicAddresses = personToEdit.getPublicAddressesComposition().copy();
+        PublicAddressesComposition currentPublicAddresses = personToEdit.getPublicAddressesComposition();
         PublicAddressesComposition addedPublicAddresses =
             editPersonDescriptor.getPublicAddresses().orElse(new PublicAddressesComposition());
 
-        PublicAddress publicAddress = addedPublicAddresses.getAnyPublicAddress();
-        Network network = publicAddress.getNetwork();
-
-        if (currentPublicAddresses.containsPublicAddressStringAmongAllNetworks(publicAddress)) {
-            throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
-                updatedName, publicAddress, network));
+        try {
+            PublicAddressesComposition combinedPublicAddresses =
+                    currentPublicAddresses.combineWith(addedPublicAddresses);
+            return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, combinedPublicAddresses,
+                    updatedTags);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS, e.getMessage()));
         }
-
-        currentPublicAddresses.addPublicAddress(network, publicAddress);
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, currentPublicAddresses, updatedTags);
     }
 
     @Override

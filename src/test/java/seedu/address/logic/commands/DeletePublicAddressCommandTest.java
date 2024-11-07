@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -14,6 +17,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressFactory;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -21,50 +27,104 @@ import seedu.address.model.addresses.Network;
  */
 public class DeletePublicAddressCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //    @Test
-    //    public void execute_validIndexValidNetwork_success() throws Exception {
-    //        Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        DeletePublicAddressCommand deletePublicAddressCommand =
-    //            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
-    //
-    //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //        Person updatedPerson = new PersonBuilder(personToDeleteAddress).build();
-    //        updatedPerson.addPublicAddressToNetwork(Network.BTC, new HashSet<>());
-    //        expectedModel.setPerson(personToDeleteAddress, updatedPerson);
-    //
-    //        String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-    //            updatedPerson.getPublicAddressesComposition());
-    //
-    //        assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
-    //    }
 
 
-    //    @Test
-    //    public void execute_validIndexValidNetworkValidLabel1_success() throws Exception {
-    //        //disabled this test as get filtered list returns a person that is modifies the original person in model
-    //        Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        HashSet<PublicAddress> addresses = new HashSet<>(
-    //            personToDeleteAddress.getPublicAddressesByNetwork(Network.BTC)
-    //        );
-    //        addresses.add(new BtcAddress("12345", "test2"));
-    //        addresses.add(new BtcAddress("12345", "test"));
-    //
-    //        personToDeleteAddress.addPublicAddressToNetwork(Network.BTC, new HashSet<>(addresses));
-    //        DeletePublicAddressCommand deletePublicAddressCommand =
-    //            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "test");
-    //
-    //        addresses.remove(new BtcAddress("12345", "test"));
-    //        Person updatedPerson = new PersonBuilder(personToDeleteAddress).build();
-    //        updatedPerson.addPublicAddressToNetwork(Network.BTC, new HashSet<>(addresses));
-    //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //        expectedModel.setPerson(personToDeleteAddress, updatedPerson);
-    //
-    //        String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-    //            updatedPerson.getPublicAddressesComposition());
-    //
-    //        assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
-    //    }
+    //---------------- Tests for execute method ----------------
 
+    // EP: valid index, valid network
+    @Test
+    public void execute_validIndexValidNetwork_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        // Create and add the public address
+        Network network = Network.BTC;
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC;
+        String label = "default";
+        PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+
+        // Update actual models with the new address
+        Person personWithAddress = personToDelete.withAddedPublicAddress(publicAddressToAdd);
+        model.setPerson(personToDelete, personWithAddress);
+
+        // Create and execute delete command
+        DeletePublicAddressCommand deletePublicAddressCommand =
+                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "");
+
+        String expectedMessage = String.format(
+                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
+                personWithAddress.getPublicAddressesComposition()
+        );
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+
+        assertCommandSuccess(deletePublicAddressCommand, model, expectedCommandResult, expectedModel);
+    }
+    // EP: valid index, valid network, valid label
+    @Test
+    public void execute_validIndexValidNetworkValidLabel_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        // Create and add the public address
+        Network network = Network.BTC;
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC;
+        String label = "default";
+        PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+
+        Person personWithAddress = personToDelete.withAddedPublicAddress(publicAddressToAdd);
+        model.setPerson(personToDelete, personWithAddress);
+
+        // Create and execute delete command
+        DeletePublicAddressCommand deletePublicAddressCommand =
+                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, label);
+
+        String expectedMessage = String.format(
+                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
+                personWithAddress.getPublicAddressesComposition()
+        );
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+
+        assertCommandSuccess(deletePublicAddressCommand, model, expectedCommandResult, expectedModel);
+    }
+
+
+
+    // EP: valid index, valid network, invalid label
+    @Test
+    public void execute_validIndexValidNetworkInvalidLabel_throwsCommandException() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        // Create and add the public address
+        Network network = Network.BTC;
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC;
+        String label = "default";
+        PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+
+        Person personWithAddress = personToDelete.withAddedPublicAddress(publicAddressToAdd);
+        model.setPerson(personToDelete, personWithAddress);
+
+        DeletePublicAddressCommand deletePublicAddressCommand =
+            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "invalid");
+
+        assertCommandFailure(deletePublicAddressCommand, model,
+            String.format(DeletePublicAddressCommand.MESSAGE_NON_MATCHING_LABEL, "invalid",
+            personToDelete.getName()));
+    }
+
+    // EP: valid index, invalid network
+    @Test
+    public void execute_validIndexInvalidNetwork_throwsCommandException() {
+        DeletePublicAddressCommand deletePublicAddressCommand =
+            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.ETH);
+
+        assertCommandFailure(deletePublicAddressCommand, model,
+            String.format(
+                DeletePublicAddressCommand.MESSAGE_EMPTY_NETWORK,
+                Network.ETH,
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName())
+        );
+    }
+
+    // EP: invalid index
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -74,6 +134,7 @@ public class DeletePublicAddressCommandTest {
         assertCommandFailure(deletePublicAddressCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    //---------------- Tests for equals() method ----------------
     @Test
     public void equals() {
         DeletePublicAddressCommand deleteFirstCommand = new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
