@@ -19,7 +19,9 @@ public class AliasTest {
     public void constructor_invalidAlias_throwsIllegalArgumentException() {
         // Check that an IllegalArgumentException is thrown for an invalid alias (non-alphanumeric)
         String invalidAlias = "!@#";
+        String invalidAlias2 = "mmmmmmmmmmm";
         assertThrows(IllegalArgumentException.class, () -> new Alias(invalidAlias));
+        assertThrows(IllegalArgumentException.class, () -> new Alias(invalidAlias2));
     }
 
     @Test
