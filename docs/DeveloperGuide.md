@@ -300,15 +300,16 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                          | So that I can…​                                            |
-|----------|-----------------------------|-----------------------------------------------------------------------|------------------------------------------------------------|
-| `* * *`  | university student          | add a new contact with basic details like name, university, and major | start building my professional network from school         |
-| `* * *`  | university student          | delete a contact from my network                                      | keep my contact list clean and up-to-date                  |
-| `* * *`  | university student          | search for contacts by their university                               | quickly find peers from the same university                |
-| `* * *`  | university student          | search for contacts by their major                                    | connect with peers in the same academic field              |
-| `* * *`  | aspiring university student | add internship or work experience to a contact                        | network with people who have relevant industry experience  |
-| `* *`    | lonely university student   | add interests and hobbies to a contact                                | remember what we have in common                            |
-| `*`      | sociable university student | add social media links (e.g., LinkedIn, Instagram) to a contact       | connect with people on other social platforms              |
+| Priority | As a …​                     | I want to …​                                                                                            | So that I can…​                                           |
+|----------|-----------------------------|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| `* * *`  | university student          | add a new contact with basic details like name, university, major, birthday, work experience, interests | start building my professional network from school        |
+| `* * *`  | university student          | delete a contact from my network                                                                        | keep my contact list clean and up-to-date                 |
+| `* * *`  | university student          | search for contacts by their university                                                                 | quickly find peers from the same university               |
+| `* * *`  | university student          | search for contacts by their major                                                                      | connect with peers in the same academic field             |
+| `* * *`  | aspiring university student | add internship or work experience to a contact                                                          | network with people who have relevant industry experience |
+| `* * *`  | aspiring university student | search for contacts by their internship or work experience                                              | network with people who have relevant industry experience |
+| `* * *`  | lonely university student   | add interests and hobbies to a contact                                                                  | remember what we have in common                           |
+| `* * *`  | sociable university student | search for contacts by their interests                                                                  | connect with people with similar interests                |
 
 
 ---
@@ -330,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. Use case ends.
 
 **Extensions**
-- **1a**: The Name/Email/Phone Number/Address/University/Major of contact has an invalid format.
+- **1a**: The Name/Email/Phone Number/Address/University/Major/Birthday/Work Experience/Interests of contact has an invalid format.
     - **1a1**: UniVerse displays an error message.
     - **1a2**: Use case resumes at step 1.
 
@@ -460,7 +461,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **4a2**: User decides whether to re-enter a different interest or cancel the action.
     - **4a3**: Use case ends if the user cancels.
 
+<br>
+
+#### **Use Case: Search for Contacts by Work Experience**  
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC07 - Search for Contacts by Work Experience
+
+**MSS**
+1. User requests to search for contacts by work experience. 
+2. System prompts the user to enter a company, role, or year.
+3. User provides the desired work experience criteria.
+4. System searches for contacts that match the specified work experience. 
+5. System displays a list of contacts with the specified work experience. 
+6. Use case ends.
+
+**Extensions**
+- 3a: The entered work experience criteria are invalid or do not match any records.
+  - 3a1: System displays an error message requesting valid work experience criteria.
+  - 3a2: User re-enters the criteria.
+  - 3a3: Use case resumes at step 4.
+- 4a: No contacts found for the specified work experience. 
+  - 4a1: System displays a message indicating no contacts were found.
+  - 4a2: Use case ends.
+
+<br>
+
+#### **Use Case: Search for Contacts by Interest**  
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC08 - Search for Contacts by Interest
+
+**MSS**
+1. User requests to search for contacts by interest.
+2. System prompts the user to enter an interest.
+3. User provides the desired interest.
+4. System searches for contacts with the specified interest.
+5. System displays a list of contacts who have the specified interest.
+6. Use case ends.
+
+**Extensions**
+- 3a: The entered interest is invalid or does not match any records.
+  - 3a1: System displays an error message requesting a valid interest.
+  - 3a2: User re-enters the interest.
+  - 3a3: Use case resumes at step 4.
+- 4a: No contacts found for the specified interest.
+  - 4a1: System displays a message indicating no contacts were found.
+  - 4a2: Use case ends.
+
 ---
+
 
 
 ### Non-Functional Requirements
