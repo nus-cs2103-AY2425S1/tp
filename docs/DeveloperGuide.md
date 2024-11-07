@@ -440,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC1 - Add a student**
 
@@ -473,9 +473,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons <u>(UC2)</u>
+2.  tuteez shows a list of persons <u>(UC2)</u>
 3.  User types keyword followed by delete index or name
-4.  AddressBook deletes the student
+4.  tuteez deletes the student
 5. Use case ends
 
 
@@ -487,11 +487,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. tuteez shows an error message.
 
       Use case resumes at step 2.
 - 3b. The given name does not exist
-  - 3b1 AddressBook shows an error message.
+  - 3b1 tuteez shows an error message.
   - 3b2. Use case resumes from step 2
 
 **Use case: UC4 - Add a lesson to a student**
@@ -499,27 +499,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-1. AddressBook shows a list of persons <u>(UC2)</u>
+1. tuteez shows a list of persons <u>(UC2)</u>
 1. User types keyword followed by index then lesson day and time
-1. AddressBook adds lesson to student
+1. tuteez adds lesson to student
 
 **Extensions**
 
 * 3a. The lesson clashes with an existing lesson(s)
 
-   * 3a1. AddressBook shows error message with timings of the lessons that it clashes with
+   * 3a1. tuteez shows error message with timings of the lessons that it clashes with
 
    Use case resumes at step 2
 
 * 3b. The lesson has invalid day or times
 
-   * 3b1. AddressBook shows error message specifying the error
+   * 3b1. tuteez shows error message specifying the error
 
    Use case resumes at step 2
 
 * 3c. The given index is invalid.
 
-   * 3c1. AddressBook shows an error message.
+   * 3c1. tuteez shows an error message.
 
    Use case resumes at step 2
 
