@@ -162,6 +162,18 @@ public interface Model {
     Tag getTag(Tag tag);
 
     /**
+     * Marks the given task as done.
+     * The task must exist in the Wedlinker.
+     */
+    void markTask(Task task);
+
+    /**
+     * Unmarks the given task to become not undone.
+     * The task must exist in the Wedlinker.
+     */
+    void unmarkTask(Task task);
+
+    /**
      * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.
      */
     boolean hasTask(Task toAdd);

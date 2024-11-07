@@ -26,7 +26,9 @@ import seedu.address.logic.commands.task.AssignTaskCommand;
 import seedu.address.logic.commands.task.CreateTaskCommand;
 import seedu.address.logic.commands.task.DeleteTaskCommand;
 import seedu.address.logic.commands.task.ListTasksCommand;
+import seedu.address.logic.commands.task.MarkTaskCommand;
 import seedu.address.logic.commands.task.UnassignTaskCommand;
+import seedu.address.logic.commands.task.UnmarkTaskCommand;
 import seedu.address.logic.commands.vendor.AddVendorCommand;
 import seedu.address.logic.commands.vendor.AssignVendorCommand;
 import seedu.address.logic.commands.vendor.UnassignVendorCommand;
@@ -40,7 +42,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.task.AssignTaskCommandParser;
 import seedu.address.logic.parser.task.CreateTaskCommandParser;
 import seedu.address.logic.parser.task.DeleteTaskCommandParser;
+import seedu.address.logic.parser.task.MarkTaskCommandParser;
 import seedu.address.logic.parser.task.UnassignTaskCommandParser;
+import seedu.address.logic.parser.task.UnmarkTaskCommandParser;
 import seedu.address.logic.parser.vendor.AddVendorCommandParser;
 import seedu.address.logic.parser.vendor.AssignVendorCommandParser;
 import seedu.address.logic.parser.vendor.UnassignVendorCommandParser;
@@ -118,6 +122,10 @@ public class AddressBookParser {
                 -> new AssignTaskCommandParser().parse(arguments);
         case UnassignTaskCommand.COMMAND_WORD, UnassignTaskCommand.COMMAND_KEYWORD
                 -> new UnassignTaskCommandParser().parse(arguments);
+        case MarkTaskCommand.COMMAND_WORD, MarkTaskCommand.COMMAND_KEYWORD
+                -> new MarkTaskCommandParser().parse(arguments);
+        case UnmarkTaskCommand.COMMAND_WORD, UnmarkTaskCommand.COMMAND_KEYWORD
+                -> new UnmarkTaskCommandParser().parse(arguments);
         case DeleteTaskCommand.COMMAND_WORD, DeleteTaskCommand.COMMAND_KEYWORD
                 -> new DeleteTaskCommandParser().parse(arguments);
         case AssignVendorCommand.COMMAND_WORD, AssignVendorCommand.COMMAND_KEYWORD
