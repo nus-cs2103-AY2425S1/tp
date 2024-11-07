@@ -11,8 +11,9 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = """
             Tags can contain alphanumeric characters, hyphens '-', and underscores '_' only.
-            Tags cannot be made up of only hyphens '-' and underscores '_'.""";
+            Tags cannot be made up of only hyphens '-' and underscores '_' and can only be 30 characters max""";
     public static final String VALIDATION_REGEX = "^(?=.*\\p{Alnum})[\\p{Alnum}_-]+$";
+    public static final int MAXIMUM_LENGTH = 30;
 
     public final String tagName;
 
@@ -31,6 +32,9 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
+        if (test.length() > MAXIMUM_LENGTH) {
+            return false;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
