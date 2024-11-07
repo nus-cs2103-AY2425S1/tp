@@ -9,7 +9,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.assignment.AssignmentProjectPredicate;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
