@@ -8,6 +8,10 @@ import bizbook.model.Model;
  */
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Redoes the previous undo command that was executed.\n"
+            + "Parameters: None\n"
+            + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_REDO_SUCCESS = "Changes has been reverted!";
     public static final String MESSAGE_REDO_FAILURE = "Unable revert changes because "

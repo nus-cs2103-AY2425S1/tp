@@ -266,7 +266,7 @@ Examples of commands tracked by undo:
 
 ### Redoing a previously executed undo command: `undo`
 
-Redos the previous undo command that was executed.
+Redoes the previous undo command that was executed.
 
 Format: `redo`
 
