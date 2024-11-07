@@ -18,6 +18,10 @@ This section defines key terms and concepts used throughout the user guide.
 - **Command**: A text instruction that you type into the command box to perform a specific action in EduConnect.
 - **Parameter**: A value that you provide to a command to specify details about the action to be performed.
 - **Index**: A number that refers to the position of an item in a list.
+- **Attribute**: A specific characteristic or property of a person, such as name, class, or attendance.
+- **Format**: The required structure for entering commands in EduConnect.
+- **Syntax**: The specific arrangement of characters and parameters required to execute a command correctly.
+- **Constraints**: The rules or conditions that a parameter must meet.
 
 ### Annotated Box Conventions
 
@@ -236,25 +240,30 @@ Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/ad
 Examples:
 * `find /name John` returns `John` and `John Doe`
 * `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A) <br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Sorting the results : `sort`
+### Sorting persons : `sort`
 
-Sorts the results by name / subject / classes / attendance.
+Sorts the list of people by name, subject, class, or attendance.
 
 Format: `sort [ATTRIBUTE]`
 
 * Sorts the results based on the specified `ATTRIBUTE`. The available attributes are `name`, `subject`, `class`, `attendance`.
-* `sort name` sorts the results by name in alphabetical order.
-* `sort subject` sorts the results by the subjects they take in alphabetical order. It will only consider the first subject in the list for sorting.
-* `sort class` sorts the results by class in alphanumerical order. It will only consider the first class in the list for sorting.
-* `sort attendance` sorts the results by the number of days attended by Students in ascending order. It will put Teachers at the end of the list.
+* `sort name` Sorts the results by name in alphabetical order.
+* `sort subject` Sorts the results by the subjects they take in alphabetical order. Only the **first subject** in each person's list of subjects is considered when sorting.
+* `sort class` Sorts the results by class in alphanumerical order. Only the **first class** in each person's list of classes is considered when sorting. 
+* `sort attendance` Sorts the results by the number of days attended by students in ascending order. Teachers, who do not have an attendance count, are placed at the end of the list
 * The command applies to the current list of displayed results. 
 * Sorting is case-insensitive.
 
 Examples:
 * `list` followed by `sort name` sorts all students in the address book by name.
 
+{: .alert .alert-info}
+> :information_source: **Note:**
+> Explanation on Sorting by First Item: 
+> When sorting by attributes such as subject or class, only the first item in the list of subjects or classes is considered. For instance:
+> * If a student has subjects listed as "Math, Physics, Chemistry", the `sort subject` command will use "Math" as the primary sorting key. 
+> * Similarly, if a teacher is associated with classes "5A, 7C, 8B", the `sort class` command will use "5A" as the sorting key.
 ### Undoing the last command : `undo`
 
 Reverts the most recent change made to the address book.
@@ -329,6 +338,7 @@ Format: `unmark INDEX…​`
 * The index **must be a positive integer** 1, 2, 3, …​
 * The person corresponding to the index must be a student.
 * The student must have attended at least one day to be unmarked.
+* the indexes entered must be unique.
 
 Example:
 * `unmark 2` educes the attendance of the student at index 2 in EduConnect by 1.
