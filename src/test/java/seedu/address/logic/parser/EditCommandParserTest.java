@@ -99,9 +99,10 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NRIC_AMY, expectedMessageForNoFields);
 
         // no NRIC and no field specified
-        String expectedMessageForNoNricAndNoField = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditCommand.MESSAGE_NRIC_EMPTY);
-        assertParseFailure(parser, "", expectedMessageForNoNricAndNoField);
+        assertParseFailure(parser, "", expectedMessageForNoFields);
+
+        // field specified but no NRIC
+        assertParseFailure(parser, NRIC_DESC_AMY, MESSAGE_EMPTY_NRIC);
     }
 
     @Test

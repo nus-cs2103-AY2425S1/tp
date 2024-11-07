@@ -43,6 +43,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         logger.info("Attempting to parse EditCommand arguments.");
         requireNonNull(args);
 
+        checkPrefixPresentAndValidPrefix(args, EditCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE,
+                PREFIX_SEX, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME,
+                PREFIX_NOKPHONE, PREFIX_ALLERGY, PREFIX_REMOVEALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION,
+                PREFIX_NOTE);
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
@@ -54,11 +59,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             logger.warning("No NRIC provided in input.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_NRIC_EMPTY));
         }
-
-        checkPrefixPresentAndValidPrefix(args, EditCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE,
-                PREFIX_SEX, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME,
-                PREFIX_NOKPHONE, PREFIX_ALLERGY, PREFIX_REMOVEALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION,
-                PREFIX_NOTE);
 
         try {
             assert !argMultimap.getPreamble().isEmpty();
