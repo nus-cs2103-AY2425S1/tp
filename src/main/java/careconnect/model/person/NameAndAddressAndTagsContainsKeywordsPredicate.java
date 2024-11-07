@@ -57,7 +57,7 @@ public class NameAndAddressAndTagsContainsKeywordsPredicate implements Predicate
             passedTests[1] = true;
         } else {
             passedTests[1] = addressKeywords.stream()
-                    .anyMatch(
+                    .allMatch(
                             keyword -> StringUtil.containsPartialWordIgnoreCase(person.getAddress().toString(), keyword)
                     );
         }
