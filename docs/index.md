@@ -10,15 +10,15 @@ title: ClinicConnect
 
 # ***ClinicConnect* - The *ideal* patient management and appointment tracker system for health-screening clinics.**
 
-> *Tired* of sorting through dozens of files just to find the details of a patient coming for a health screening later?  
->  
-> *Tired* of how relevant patient details such as allergies, blood types, health conditions are scattered all over different systems?  
->  
-> *Tired* of manually scanning each individual appointment for the next week to ensure sufficient health screening materials for those health screenings?  
+> *Tired* of sorting through dozens of files just to find the details of a patient coming for a health screening later?
+>
+> *Tired* of how relevant patient details such as allergies, blood types, health conditions are scattered all over different systems?
+>
+> *Tired* of manually scanning each individual appointment for the next week to ensure sufficient health screening materials for those health screenings?
 
 Try out **ClinicConnect**, our revolutionary system that integrates **patient management** and **appointment tracking** into one simple, cohesive package.
 
-With ClinicConnect, you can:  
+With ClinicConnect, you can:
 - Access all relevant patient details at a glance in a consolidated view
 - View important details for all upcoming appointments on a specific date or over a range of dates at a glance
 - Easily add, delete or update patient details and appointment details on the app

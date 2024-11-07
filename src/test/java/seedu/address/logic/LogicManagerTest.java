@@ -106,7 +106,7 @@ public class LogicManagerTest {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
     }
 
-    /**
+     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
