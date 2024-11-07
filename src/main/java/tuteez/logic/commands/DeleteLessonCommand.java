@@ -26,7 +26,7 @@ public class DeleteLessonCommand extends LessonCommand {
     private final List<Index> lessonIndices;
 
     /**
-     * Deletes a Lesson with the specified {@code lessonIndex} from the student with the {@code personIndex}
+     * Deletes a Lesson with the specified {@code lessonIndex} from the student with the {@code studentIndex}
      * of the displayed list.
      * @param personIndex The Index of the student in the displayed list to delete the lesson from
      * @param lessonIndices A List of Index's of the lesson to be deleted
