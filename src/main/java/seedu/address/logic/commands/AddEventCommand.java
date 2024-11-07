@@ -43,14 +43,14 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_NAME + "Oscars "
             + PREFIX_EVENT_TIME + "2024-03-01 12:10 to 2024-03-01 18:30 "
             + PREFIX_EVENT_VENUE + "Hollywood "
-            + PREFIX_EVENT_CELEBRITY + "John Doe "
-            + PREFIX_EVENT_CONTACTS + "Alex Yeoh "
-            + PREFIX_EVENT_CONTACTS + "Bernice Yu";
+            + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney "
+            + PREFIX_EVENT_CONTACTS + "Jack Black "
+            + PREFIX_EVENT_CONTACTS + "Lebron James";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
-    public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event";
-    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in Talent Hub.";
+    public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event.";
+    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list.";
     private final EventName eventName;
     private final Time time;
     private final Venue venue;

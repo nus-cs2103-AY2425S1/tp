@@ -546,21 +546,27 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Talents**: Well known or up-and-coming individuals who partake in the entertainment industry in one way or another
-* **Industry Professional**: Individuals that talents make contact for events
-* **Events**: Social and networking events organised by third parties e.g. award shows, brand events
-* **Talent Manager**: Industry professionals involved in managing and planning talent schedules
-* **Model-View-Controller (MVC)**: A design pattern that separates an application into three main logical components: the Model, the View, and the Controller. 
-* **Logic Component**: A part of the architecture responsible for handling user commands and parsing them. 
-* **Model Component**: Manages the application’s data and handles the business logic of the application. 
-* **Storage Component**: Manages reading from and writing to the persistent storage. 
-* **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the address book.  
-* **Person**: Refers to a contact object within the address book application. 
-* **Index**: Refers to the position of an individuals contact in the address book
-* **Tag**: The associated description with said contact based on common groups
-* **Undo/Redo Feature**: A functionality that allows reverting or reapplying actions taken by the user within the application. 
+* **AddressBook**: A structured data set containing contact and event information for Talents managed by Talent Managers.
+* **Events**: Social and networking events organised by third parties e.g. award shows, brand, events.
+* **Index**: Refers to the position of the individuals contact or event in TalentHub.
+* **Industry Professional**: Individuals that Talents make contacts for events.
+* **Logic Component**: A part of the architecture responsible for handling user commands and parsing them.
+* **Mainstream OS**: Windows, Linux, macOS.
+* **Model Component**: Manages the applications responsible for handling user commands and parsing them.
+* **Model-View-Controller (MVC)**: A design pattern that separates an application into three main logical components: the Model, the View, and the Controller.
+* **ObservableList**: A list that is monitored for changes, triggering updates to any UI components bound to it.
+* **Parser**: A component that interprets and processes commands inputted by the user.
+* **Persistence**: The storage of data in a way that it can be retrieved later, even after the application is closed.
+* **Person**: Refers to a contact object within the address book application.
+* **Points of Contact (POCs)**: List of persons involved in the event that the Talent Manager would have to contact e.g. hairdresser, stylist, chauffeur.
+* **Private Contact Detail**: A contact detail that is not meant to be shared with others.
+* **Sequence Diagram**: A type of UML diagram that shows the order of interactions between objects in a particular scenario.
+* **Storage Component**: Manages reading from and writing to the persistent storage.
+* **Tag**: The associated description with said contact based on common groups.
+* **Talent Manager**: Industry professionals involved in managing and planning Talent schedules.
+* **Talents**: Well-known or up-and-coming individuals who partake in the entertainment industry in one way or another.
+* **Undo/Redo Feature**: A functionality that allows reverting or reapplying actions taken by the user within the application.
+* **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the TalentHub
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -578,33 +584,265 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person to TalentHub
+
+   1. Test case: `add person n/Sydney Sweeney p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
+      1. **Expected**
+         1. A contact with the name 'Sydney Sweeney' with the tag 'Celebrity' and phone number '98765432' is added to the persons list. 
+         2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
+   
+   2. Test case: Add same person above
+      1. **Expected**: This person already exists in TalentHub.
+
+   3. Test case: Add new person with same number as above
+      1. **Expected**: This phone number is already used by another person in TalentHub
+
+   4. Test case: `add person n/Sydney Sweeney e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity `<br>
+      1. **Expected**: 
+         1. Invalid command format!<br>
+            add person: Adds a person to the address book.<br>
+            Parameters: n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [t/TAG]...<br>
+            Example: `add person n/Sydney Sweeney p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
+   
+   5. Other incorrect add commands to try: `add person n/Sydney Sweeney p/98765432 a/311, Clementi Ave 2, #02-25 t/Celebrity` or any inputs that do not include a name, phone number, email or address.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete person 1`
+       1. **Expected**: Are you sure you want to delete this person? All events tied to this person will be deleted and this person will no longer show in any event's contact list. (Y/N)
+       2. **Input Y or y**: Deleted Person: `Sydney Sweeney; Phone: 98765432; Email: sydney@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Celebrity]`
+       3. **Input N or n**: Pending command has been cancelled
+       4. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete event 0`
+       1. **Expected**
+          1. Invalid command format!<br>
+             delete person: Deletes the person identified by the index number used in the displayed person list.<br> 
+             Parameters: INDEX (must be a positive integer).<br> 
+             Example: `delete person 1`
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete person`, `delete person x`, `...` (where x is larger than the list size)<br>
+       1. Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding an event
+
+1. Adding an event to TalentHub
+
+    1. **Prerequisites**: Have 2 test contacts for Sydney Sweeney and Jack Black created in your Persons list
+
+    2. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Sydney Sweeney p/Jack Black`
+         1. **Expected**
+            1. An event with the name 'Oscars' with the associated celebrity, duration and venue is added to the persons list.
+            2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+   
+    3. Test case: Add same event as above
+         1. **Expected**: This event already exists in TalentHub.  
+    
+    4. Test case: Add new event with different event name but same celebrity name and clashing timing e.g. `t/2024-02-28 12:10 to 2024-03-01 18:30`
+         1. **Expected**: Sydney Sweeney has another event that clashes with this event.
+    
+    5. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Sydney Sweeney p/Sydney Sweeney`
+         1.  **Expected**: Celebrity cannot be a contact in contact list.
+
+    6. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/John Doe p/Jack Black`<br>
+         1. **Expected**: John Doe not found in address book!
+    
+    7. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Jack Black p/John Doe`
+         1. **Expected**: John Doe not found in address book!
+   
+    8. Test case: `add event t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Jack Black p/Sydney Sweeney`
+         1. **Expected**
+             1.  Invalid command format!<br>
+                 add event: Adds an event to the address book.<br> 
+                 Parameters: n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/CONTACTS]...<br>
+                 Example: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Sydney Sweeney p/Jack Black`
+    
+    9. Other incorrect add commands to try: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 c/Sydney Sweeney p/Jack Black` or any inputs that do not include a name, time, venue or Talent name.
+
+### Deleting an event
+
+1. Deleting an event while all persons are being shown
+
+    1. Prerequisites: List all events using the `list event` command. Multiple events in the list.
+
+    2. Test case: `delete event 1`
+        1. **Expected**: Deleted Event: `Oscars; Time: From: 2024-03-01 12:10 To: 2024-03-01 18:30; Venue: Hollywood; Celebrity: Jack Black; Contacts:`
+        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact. 
+
+    3. Test case: `delete event 0`
+        1. **Expected**
+            1. Invalid command format!<br>
+               delete: Deletes the event identified by the index number used in the displayed event list.<br>
+               Parameters: INDEX (must be a positive integer)<br>
+               Example: `delete event 1`
+
+    4. Other incorrect delete commands to try: `delete event`, `delete event x`, `...` (where x is larger than the list size)<br>
+        1. Expected: Similar to previous.
+
+### Viewing a person
+
+1. Viewing a person on TalentHub
+   
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. An entry with the person Sydney Sweeney listed and no entries with person Jack Black listed
+
+    2. Test case: `view person Sydney Sweeney`
+        1. **Expected**: Sydney Sweeney shown!
+        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
+    
+    3. Test case: `view person Jack Black`
+        1. **Expected**: Name not found in TalentHub!
+    
+    4. Test case: `view person`
+        1. **Expected**
+            1. Invalid command format!<br>
+               view: Views the person whose name is the specified keywords (case-insensitive) and displays him/her.<br>
+               Parameters: KEYWORD [MORE_KEYWORDS]...<br>
+               Example: view person David Li<br>
+        
+    5. Test case: `view person Brad Pitt` or any other contact names not found in TalentHub
+
+### Viewing an event
+
+1. Viewing an event on TalentHub
+
+    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. An entry with the event called Oscars listed and no entries with event Emmys listed
+
+    2. Test case: `view event Oscars`
+        1. **Expected**: 1 events listed!
+        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+
+    3. Test case: `view event Emmys`
+        1. **Expected**: 0 events listed!
+
+    4. Test case: `view event`
+        1. **Expected**
+            1. Invalid command format!<br>
+               view: Views the event whose name is the specified keywords (case-insensitive) and displays it.<br>
+               Parameters: KEYWORD [MORE_KEYWORDS]...<br>
+               Example: view event Awards show<br>
+        
+    5. Test case: `view event Fashion Week` or any other events not found in TalentHub
+
+### Finding a person
+
+1. Finding a person on TalentHub
+
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Three entries with names starting with Sydney listed. One entry with names starting with John listed. No entries with names starting with Jack listed
+
+    2. Test case: `find person Sydney`
+        1. **Expected**: 3 persons listed!
+        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contacts.
+
+    3. Test case: `find person Jack`
+        1. **Expected**: 0 persons listed!
+
+    4. Test case: `find person Sydney John`
+        1. **Expected**: 4 persons listed!
+
+    5. Test case: `find person`
+         1. **Expected**
+             1. Invalid command format!<br>
+                find: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.<br>
+                Parameters: KEYWORD [MORE_KEYWORDS]...<br>
+                Example: find person Sydney Jack<br>
+         
+    6. Test case: `find person Brad` or any other contact names not found in TalentHub
+
+### Finding an event
+
+1. Finding an event on TalentHub
+
+    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. Three entries with the name Oscars listed. One entry with the name Red Carpet. No entries with name Emmys listed
+
+    2. Test case: `find event Oscars`
+        1. **Expected**: 3 events listed!
+        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+
+    3. Test case: `find event Emmys`
+        1. **Expected**: 0 events listed!
+    
+    4. Test case: `find event Oscars Red`
+        1. **Expected**: 4 events listed!
+
+    5. Test case: `find event`
+        1. **Expected**
+            1. Invalid command format!<br>
+               find: Finds all events whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.<br>
+               Parameters: KEYWORD [MORE_KEYWORDS]...<br>
+               Example: find event Emmys Oscars<br>
+
+    6. Test case: `find event Red Carpet` or any other events not found in TalentHub
+
+### Filter a person
+
+1. Filtering a person on TalentHub
+
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Three entries with tags called Celebrity.  No entries with tags called TwitchStreamer.
+
+    2. Test case: `filter person celebrity`
+        1. **Expected**: 3 persons listed!
+        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contacts.
+
+    3. Test case: `filter person TwitchStreamer`
+        1. **Expected**: 0 persons listed!
+
+    4. Test case: `filter person`
+         1. **Expected**
+             1. Invalid command format!<br>
+                filter: Filters the persons by the specified tag (case-insensitive) and displays it.<br>
+                Parameters: TAG<br>
+                Example: filter person Chauffeur<br>
+            
+    5. Test case: `filter person TikToker` or any other tags not found in TalentHub.
+
+### Filtering an event
+
+1. Filtering an event on TalentHub
+
+    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. Three entries with celebrity name Sydney Sweeney. No entries with celebrity name Jack Black listed
+
+    2. Test case: `filter event Sydney Sweeney`
+        1. **Expected**: 3 events listed!
+        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+
+    3. Test case: `filter event Jack Black`
+        1. **Expected**: 0 events listed!
+
+    4. Test case: `filter event`
+         1. **Expected**
+             1. Invalid command format!<br>
+                filter: Filters the events by the specified celebrity (case-insensitive) and displays it.<br>
+                Parameters: NAME<br>
+                Example: filter event Lebron James<br>
+
+    5. Test case: `filter event Brad Pitt` or any other contact names not found in TalentHub
+
+### Editing a person
+
+1. Editing a person on TalentHub
+
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Contact at index 1 should be for Sydney Sweeney. Contact at index 2 be at 
+
+    2. Test case: `edit person 1 p/91234567 e/johndoe@example.com`
+       1. **Expected**: Edited Person: Sydney Sweeney; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Celebrity]
+   
+    3. Test case: edit the 
 
 ### Saving data
 
@@ -612,4 +850,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
