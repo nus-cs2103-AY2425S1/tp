@@ -26,6 +26,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
+import seedu.address.model.person.Meeting;
+import seedu.address.model.person.Meetings;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -90,7 +92,21 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        Meetings meetings = personToEdit.getMeetings();
+
+        for (int i = 0; i < meetings.getMeetingsCount(); i++) {
+            Meeting meeting = meetings.getMeeting(i);
+            model.deleteMeeting(personToEdit, meeting);
+        }
+
         model.setPerson(personToEdit, editedPerson);
+
+        for (int i = 0; i < meetings.getMeetingsCount(); i++) {
+            Meeting meeting = meetings.getMeeting(i);
+            model.addMeeting(editedPerson, new Meeting(editedPerson.getName(), meeting.getStartTime(),
+                    meeting.getEndTime(), meeting.getLocation()));
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }

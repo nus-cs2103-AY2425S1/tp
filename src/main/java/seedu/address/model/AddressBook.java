@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Meetings;
 import seedu.address.model.person.Person;
@@ -93,8 +94,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson) throws CommandException {
         requireNonNull(editedPerson);
+
+        editPersonNameInMeetings(target, editedPerson);
 
         persons.setPerson(target, editedPerson);
     }
@@ -131,6 +134,25 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public Meeting getMeeting(int index) {
         return meetings.getMeeting(index);
+    }
+
+    /**
+     * Edits all Person Names in meetings that contains (@code p).
+     */
+    public void editPersonNameInMeetings(Person p, Person editedPerson) throws CommandException {
+        Meetings personMeetings = p.getMeetings();
+        for (int i = 0; i < personMeetings.getMeetingsCount(); i++) {
+            Meeting m = personMeetings.getMeeting(i);
+            System.out.println(m);
+            for (int j = 0; j < meetings.getMeetingsCount(); j++) {
+                if (m.equals(meetings.getMeeting(j))) {
+                    Meeting toChange = meetings.getMeeting(j);
+                    Meeting newMeeting = new Meeting(editedPerson.getName(), toChange.getStartTime(),
+                            toChange.getEndTime(), toChange.getLocation());
+                    setMeeting(toChange, newMeeting);
+                }
+            }
+        }
     }
 
     /**
