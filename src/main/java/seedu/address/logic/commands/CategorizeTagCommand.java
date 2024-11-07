@@ -21,7 +21,7 @@ public class CategorizeTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Categorizes a tag. Changes all occurrences of the specified tag to the desired category.\n"
-            + "Parameters: " + PREFIX_TAG + "TAG (existing tag label) CATEGORY\n"
+            + "Parameters: " + PREFIX_TAG + "TAG (at least one existing tag label) CATEGORY\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "CS1101S acads";
 
     public static final String MESSAGE_CAT_TAG_SUCCESS = "Category of tag %1$s has been changed successfully.";
@@ -57,7 +57,9 @@ public class CategorizeTagCommand extends Command {
             model.refreshCampusConnect();
         }
 
-        return new CommandResult(String.format(MESSAGE_CAT_TAG_SUCCESS, targetTags));
+        String targetTagsResult = targetTags.stream().map(x -> x.toString()).reduce((x, y) -> x + y).orElse("");
+
+        return new CommandResult(String.format(MESSAGE_CAT_TAG_SUCCESS, targetTagsResult));
     }
 
     private boolean isDuplicateCategory(TagCategory cat) {
