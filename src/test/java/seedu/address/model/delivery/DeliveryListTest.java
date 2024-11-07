@@ -102,7 +102,7 @@ public class DeliveryListTest {
 
     @Test
     public void removeDelivery_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> VALID_DELIVERY_LIST.remove(null));
+        assertThrows(NullPointerException.class, () -> VALID_DELIVERY_LIST.remove((Delivery) null));
     }
 
     @Test
