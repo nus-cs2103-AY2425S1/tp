@@ -13,8 +13,8 @@ done faster than traditional GUI apps.
 <!-- * Table of Contents -->
 <page-nav-print />
 
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -46,8 +46,8 @@ done faster than traditional GUI apps.
 
 7. Refer to the [Features](#features) below for details of each command.
 
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -98,7 +98,7 @@ The closeat command is currently not undoable (planned for future versions).
 
 Format: `undo`
 
-## Student Commands
+# Student Commands
 
 ### Adding a student: `adds`
 
@@ -167,8 +167,9 @@ Examples:
 * `deletes n/John Tan` deletes the student with the exact name `John Tan` from the contact list.
 * `deletes n/Betsy sn/A0123456X` deletes the student with the exact name `Betsy` and student number `A0123456X` from the contact list.
 
+<div style="page-break-after: always;"></div>
 
-## Attendance Commands
+# Attendance Commands
 
 <box type="tip" seamless>
 
@@ -222,7 +223,9 @@ Format: `getattg tg/TUTORIAL_GROUP`
 ### Closing Attendance Window : `closeat`
 Closes all attendance windows if any is currently open.
 
-## Assignment Commands
+<div style="page-break-after: always;"></div>
+
+# Assignment Commands
 
 ### Adding Assignments : `adda`
 
@@ -297,8 +300,8 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
