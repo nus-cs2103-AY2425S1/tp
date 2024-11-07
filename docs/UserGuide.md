@@ -18,7 +18,7 @@ ClientGrid is an address book targeted for English-speaking real estate agents w
 
 1. Ensure you have Java 17 or above installed in your Computer.
 
-1. Download the latest .jar file from [here](https://github.com/AY2425S1-CS2103T-T16-2/tp/releases).
+1. Download the latest .jar file from [here](https://github.com/AY2425S1-CS2103T-T16-2/tp/releases/latest).
 
 1. Copy the file to an empty folder that you want to use as the _home folder_ for ClientGrid.
 
@@ -107,17 +107,17 @@ Add a specified buyer into the client book of ClientGrid.
 Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
-* The `BUYER_NAME` should ignore case sensitivity/extra/leading/trailing spaces and not be empty. Each word is separated by a single space or apostrophes and has a character limit of 747 ([longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name) in the world is 747 characters). Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. All names will be converted to lower case and checked against the client book.
+* The `BUYER_NAME` should ignore case sensitivity and not be empty. Each word is separated by a single space or apostrophe and has a character limit of 747 ([longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name) in the world is 747 characters). Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words.
 * The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
 * The `BUYER_EMAIL` should be of the format `local-part@domain-name.top-level-domain` and adhere to the following constraints: 
   * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
     * The `local-part` may not start or end with any special characters and must not contain consecutive special characters.
-  * This is followed by an `@` and then a `domain-name`. The `domain-name` is made up of domain labels separated by periods.
+  * This is followed by an `@` and then a `domain-name`.
   * The `domain-name` must:
     * have each domain label start and end with alphanumeric characters.
-    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    * have each domain label consist of alphanumeric characters, separated by a single period, if any.
   * The `domain-name` must be followed with a period and end with a `top-level-domain` (TLD) that is at least 2 alphabetic characters long.
-  * The `domain-name` with multiple domain labels should be a separated by a single period.
+  * `domain-name`s with multiple domain labels should be separated by a single period.
     * e.g. `domain-name` with a single label: `example@gmail.com`.
     * e.g. `domain-name` with multiple labels: `example@u.nus.edu`.
   
@@ -239,6 +239,9 @@ No duplicate properties are allowed. Duplicate properties are checked based on:
 
 **Unit Defaults:**
 The Unit parameter for `LANDED` properties will default to `00-00` regardless of the unit value placed. This is because, a landed property is not segmented into multiple apartments and therefore, deemed to be a unit in itself.
+
+**Ask And Bid Prices:**
+Ask and Bid prices cannot be less than $1 (thousand) as the prices of almost all properties in Singapore are at least in the thousands.
 </box>
 
 Examples:
@@ -254,7 +257,7 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 
 * Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
 * The `TYPE` is case-insensitive: `HDB`, `CONDO` or `LANDED`.
-* The `MATCHING_PRICE` is a non-negative integer (i.e. no non-numeric symbols such as decimal points, currency symbols, etc.).
+* The `MATCHING_PRICE` must be a non-negative integer smaller than 1,000,000 (thousand) with only numeric characters.
 
 <box type="definition" seamless>
 
@@ -265,6 +268,7 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 **Important**
 1. At least one optional prefix needs to be present for any filtering to be possible.
 2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than or equal to `$500 (thousand)` and less than or equal to `$60,000 (thousand)`.
+3. Matching Price cannot be less than $1 (thousand) as the prices of almost all properties in Singapore are at least in the thousands.
 </box>
 
 Examples:

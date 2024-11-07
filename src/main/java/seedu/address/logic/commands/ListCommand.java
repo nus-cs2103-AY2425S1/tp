@@ -20,10 +20,10 @@ public abstract class ListCommand extends Command {
      */
     public static final String MESSAGE_USAGE = String.format(
             "%s: Shows a list of all existing buyers, sellers, clients (i.e., buyers and sellers), "
-                    + "properties, and meetings in the address book.\n"
-                    + "Parameters: k/KEY\nRestrictions: KEY must be one of the following: "
-                    + "\"buyers\", \"sellers\", \"clients\", \"properties\", or \"meetings\". (case-insensitive)\n"
-                    + "Only these 5 types of records are stored in the address book.",
+                    + "properties, or meetings in the address book.\n"
+                    + "Parameters: k/KEY\nRestrictions:\n\tKey must be one of the following: "
+                    + "\"buyers\", \"sellers\", \"clients\", \"properties\", or \"meetings\" (case-insensitive).\n"
+                    + "\tOnly these 5 types of records are stored in the address book.",
             COMMAND_WORD
     );
 

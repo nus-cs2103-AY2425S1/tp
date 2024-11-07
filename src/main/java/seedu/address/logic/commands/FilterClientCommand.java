@@ -23,7 +23,7 @@ public class FilterClientCommand extends Command {
      * Provides a description of the command's purpose and the format for entering client names.
      */
     public static final String MESSAGE_USAGE = String.format(
-            "%s: Filters the clients based on their name.\nParameters: %sNAME\nRestrictions: %s",
+            "%s: Filters the clients based on their name.\nParameters: %sNAME\nRestrictions: \n\t%s",
             COMMAND_WORD,
             PREFIX_NAME,
             NameWithoutNumber.MESSAGE_CONSTRAINTS

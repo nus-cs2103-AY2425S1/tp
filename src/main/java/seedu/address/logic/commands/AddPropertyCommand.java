@@ -38,7 +38,7 @@ public class AddPropertyCommand extends Command {
                     Ask.MESSAGE_CONSTRAINTS, Bid.MESSAGE_CONSTRAINTS);
 
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists in the address book.";
     private static final Logger logger = LogsCenter.getLogger(AddPropertyCommand.class);
 
     private final Property toAdd;
