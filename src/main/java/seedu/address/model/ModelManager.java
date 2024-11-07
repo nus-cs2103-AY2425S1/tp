@@ -215,7 +215,7 @@ public class ModelManager implements Model {
      */
     // add override
     @Override
-    public boolean isValidAppointmentUdpate(Appointment current, Appointment updated) {
+    public boolean isValidAppointmentUpdate(Appointment current, Appointment updated) {
         return calendar.isValidAppointmentUpdate(current, updated);
     }
 

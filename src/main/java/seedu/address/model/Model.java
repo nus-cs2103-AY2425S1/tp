@@ -114,7 +114,7 @@ public interface Model {
      * @param updated The person to check for an appointment.
      * @return true if the appointment can be updated.
      */
-    boolean isValidAppointmentUdpate(Appointment current, Appointment updated);
+    boolean isValidAppointmentUpdate(Appointment current, Appointment updated);
 
     /**
      * Deletes the specified person from the address book and updates the calendar.

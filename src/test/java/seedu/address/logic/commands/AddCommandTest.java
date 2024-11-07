@@ -190,7 +190,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean isValidAppointmentUdpate(Appointment current, Appointment updated) {
+        public boolean isValidAppointmentUpdate(Appointment current, Appointment updated) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -157,7 +157,7 @@ public class UpdateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!model.isValidAppointmentUdpate(personToEdit.getAppointment(), editedPerson.getAppointment())) {
+        if (!model.isValidAppointmentUpdate(personToEdit.getAppointment(), editedPerson.getAppointment())) {
             throw new CommandException(MESSAGE_APPOINTMENT_TAKEN);
         }
 
