@@ -3,7 +3,14 @@ layout: page
 title: User Guide
 ---
 
-Teacher's Pet (TP) is a **desktop app for managing students, tailored for the National University of Singapore (NUS) and optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TP enables you to manage your students faster than traditional GUI apps.
+Teacher's Pet is a **desktop app for managing students, tailored for Teaching Assistants (TA) in the National University of Singapore (NUS). Teacher's Pet offers a lightweight, efficient solution optimized for small (<30 students) classes and works completely offline, promising performance even with an unstable network connection. 
+
+To get started with Teacher's Pet, kindly refer to our [Quick Start](#quick-start) guide. 
+
+If you simply need to find a command, you can refer to our [Command Summary](#command-summary) for the full list of commands and how to use them. 
+
+Have a question? You might find the answer in our [FAQ](#faq) section.
+
 
 * Table of Contents
 {:toc}
@@ -12,31 +19,52 @@ Teacher's Pet (TP) is a **desktop app for managing students, tailored for the Na
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer. You may download Java 17 through [this link](https://www.oracle.com/sg/java/technologies/downloads/)
+You can refer to the [FAQ](#frequently-asked-questions-quick-start) section below for more information.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W10-1/tp/releases/tag/v1.3).
+1. Ensure you have Java `17` or above installed in your Computer. You may download Java 17 through [this link](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). 
 
-3. Copy the file to the folder you want to use as the _home folder_ for your app.
+2. Download the latest `teacherspet.jar` file from [here](https://github.com/AY2425S1-CS2103T-W10-1/tp/releases/tag/v1.3). The downloaded file should be  found in your  `Downloads` folder.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teacherspet.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+3. Copy the file, make an empty folder in your `Documents` folder and paste `teacherspet.jar` in the new folder.
+
+4. Open a command terminal, enter `cd Downloads/NAME_OF_YOUR_FOLDER`. Then, enter `java -jar teacherspet.jar` to run the application.<br>
+   A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all students.
 
-   * `add n/John Doe id/A1234567B nid/E1234567 m/Math y/2 g/group 1` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe id/A1234567B nid/E1234567 m/Math y/2 g/group 1` : Adds a student named `John Doe` to the app.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd student shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all students.
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to [Commands](#commands) below for more details of each command. Alternatively, refer to [Command Summary](#command-summary) for a cheatsheet of commands and how to use them.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ If you want the app to be in another folder, you can copy the app to any folder you want. Just make sure to copy all files in the original folder (Not just the `teacherspet.jar` file).
+</div>
+
+### Frequently Asked Questions (Quick Start)
+
+Back to [Quick Start](#quick-start)
+
+**Q:** How do I check what version of Java I have on my device? </br>
+**A:** You can refer to this [link](https://www.java.com/en/download/help/version_manual.html) for more information.
+
+**Q:** I clicked the link to install Java 17, now which file should I download? </br>
+**A:** You want to look for the file with `Installer` in its name for the Operating System of your device (eg. `macOS x64 DMG Installer` if you use an Apple device). After downloading the file, simply run it to install Java 17.
+
+**Q:** How do I open a command terminal? </br>
+**A:** If you are using a Windows device, search for `Windows PowerShell` or `Command Prompt`. If you are using a Mac/Apple device, search for `Terminal`.
+
+**Q:** After running the app, some messages appear on my terminal, should I be concerned? </br>
+**A:** If a window similar to the one in the image above appears, then the app is working well and you can safely ignore any messages on the terminal.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Commands
@@ -45,7 +73,7 @@ Teacher's Pet (TP) is a **desktop app for managing students, tailored for the Na
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -53,9 +81,6 @@ Teacher's Pet (TP) is a **desktop app for managing students, tailored for the Na
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME id/NUS_STUDENTID`, `id/NUS_STUDENTID n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -76,15 +101,17 @@ Format: `help`
 
 You can add a student easily to Teacher's Pet!
 
-Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
+Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`
 
-* The NUS_STUDENTID here refers to the NUS Matriculation Number of the student (Starts with "A")
-* The NUS_NETID here refers to the id that is associated with the student's NUS outlook account ("NUS_NETID@u.nus.edu")
-* Both the NUS_STUDENTID and NUS_NETID must be unique (ie. Two students cannot have the same NUS_STUDENTID and/or NUS_NETID)
+* The `NUS_STUDENTID` here refers to the NUS Matriculation Number of the student (Starts with 'A')
+* The `NUS_NETID` here refers to the id that is associated with the student's NUS Outlook account ("NUS_NETID@u.nus.edu")
+* The `NUS_STUDENTID` must be unique (ie. Two students cannot have the same `NUS_STUDENTID`)
 
 Here are some examples for you to try!
 * `add n/John Doe id/A1234567P`
-* `add n/Betsy Crowe m/Computer Science nid/e1111111 id/A9999999L y/1 g/group 1`
+* `add n/Betsy Crowe m/Computer Science nid/e1111111 id/A9999999L y/1 g/Group 1`
+
+![add_success_ui](images/add_success_ui.png)
 
 ---
 
@@ -174,15 +201,18 @@ Examples:
 
 ### Selecting a student randomly: `random`
 
-Displays a student randomly selected from the current list of students.
+You can randomly select a student from the current list. For example, you may want to randomly select a student to answer your question.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The student is randomly chosen from the currently displayed list. So you can use the `show` command first before using `random` if you want to select a random student from a particular group.
+</div>
 
 Format: `random`
 
 Example:
 * `random`  
 
-
-  ![result for 'random'](images/random_example.png)
+![result for 'random'](images/random_example.png)
 
 ---
 
@@ -253,16 +283,16 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 ## FAQ
 
 **Q**: Where is my data saved?<br>
-**A**: The data file for Teacher's Pet is named `addressbook.json` and is saved in `[JAR file location]/data/addressbook.json` by default. (ie, if your `teacherspet.jar` file is in `Documents` then the data file is found in `Documents/data/addressbook.json`)
+**A**: The data file for Teacher's Pet is named `students.json` and is saved in `[JAR file location]/data/students.json` by default. (ie, if your `teacherspet.jar` file is in `Documents` then the data file is found in `Documents/data/students.json`)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: 
 1. Install the app on the other computer 
 2. Run the app on the other computer (See [Quick start](#quick-start) above) 
-3. Find the data file on the other computer (See above) and replace the `addressbook.json` file with the `addressbook.json` file from the previous computer
+3. Find the data file on the other computer (See above) and replace the `students.json` file with the `students.json` file from the previous computer
 
 **Q**: How do I keep a copy of my data?<br>
-**A**: Find the `addressbook.json` file and copy it to your desired location/storage device
+**A**: Find the `students.json` file and copy it to your desired location/storage device
 
 **Q**: What is the maximum size of my student list?<br>
 **A**: The maximum size is 2,147,483,647 students.
@@ -282,12 +312,14 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]` <br> e.g., `add n/James Ho id/A1234567X nid/E1234567 m/Computer Science y/2 g/group 4`
-**Clear** | `clear`
-**Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`<br> e.g.,`edit 1 n/James Lee m/4`
-**Find** | `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`<br> e.g., `find n/ James Jake`, `find id/ A1234567E A2345678B`, `find n/ Alice id/ A1234567E`
-**Show** | `show GROUP_NUMBER`
-**List** | `list`
 **Help** | `help`
+**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/ROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/E1234567 m/Computer Science y/2 g/Group 4`
+**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`<br> e.g.,`edit 1 n/James Lee m/4`
+**Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
+**List** | `list`
+**Show** | `show GROUP_NAME`
+**Find** | `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`<br> e.g., `find n/ James Jake`, `find id/ A1234567E A2345678B`, `find n/ Alice id/ A1234567E`
+**Random** | `random`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Clear** | `clear`
+**Exit** | `exit`
