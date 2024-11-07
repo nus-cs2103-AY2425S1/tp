@@ -13,7 +13,8 @@ Created for busy university dorm managers looking to increase their efficiency, 
 the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
 
 
-> [!Tip]
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
 > If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
 
 
@@ -26,17 +27,17 @@ the process of accessing and updating resident student details. What's more, Dor
 - [Quick start](#quick-start)
 - [Features](#features)
     - [Viewing help : `help`](#viewing-help--help)
-    - [Adding a person : `add`](#adding-a-person-add)
+    - [Adding a person : `add`](#adding-a-person--add)
     - [Listing all persons : `list`](#listing-all-persons--list)
     - [Editing a person : `edit`](#editing-a-person--edit)
-    - [Finding a person : `find`](#locating-persons-by-name-phone_number-room_number-or-tag-find)
+    - [Finding a person : `find`](#finding-a-person--find)
     - [Deleting a person : `delete`](#deleting-a-person--delete)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Cleaning graduated students : `clean`](#cleaning-graduated-students--clean)
     - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
-    - [Manual saving : `export`](#manual-saving-export)
-    - [Manual data restoration : `import`](#manual-data-restoration-import)
+    - [Manual saving : `export`](#manual-saving--export)
+    - [Manual data restoration : `import`](#manual-data-restoration--import)
 - [FAQ](#FAQ)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -59,7 +60,8 @@ the process of accessing and updating resident student details. What's more, Dor
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-4/tp/releases/).
 
 3. Locate the `.jar` file in your computer. Typically, this will be in the `Downloads` folder.
-> [!Tip]
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
 > You may wish to copy the `.jar` file to the folder you want to use as the _home folder_ for DorManagerPro. All the files needed to run DorManagerPro will be created within the home folder.
 
 4. Open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
@@ -111,10 +113,9 @@ the process of accessing and updating resident student details. What's more, Dor
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
+![help message](images/helpMessage.png)
 
 ### Adding a person: `add`
 
@@ -122,7 +123,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
-> [!Note]
+> <span style="color:Gray"> NOTE! </span> <br>
+>
 > * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
 > * A person can have up to 10 tags (including 0).
 > * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
@@ -130,9 +132,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]..
 > * `EMAIL` should be of the format local-part@domain
 > * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
-> [!Warning]
-> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
-> If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
+> <span style="color:Tomato"> WARNING! </span> <br>
+> 
+> * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
+> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
 
 
 
@@ -220,7 +224,8 @@ Removes all graduated students from the address book based on the current year a
 
 Format: `clean`
 
-> [!Tip]
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
 > If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
 
 Examples of usage:
@@ -331,9 +336,10 @@ Constraints:
 
 Duplicate handling:
 * Two resident student contacts with the same phone numbers are not allowed.
-> [!Note]
-> Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
-> Duplicate handling rationale: Phone numbers are unique to each individual
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> * Duplicate handling rationale: Phone numbers are unique to each individual
 
 ### Email
 
