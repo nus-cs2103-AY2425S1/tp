@@ -80,6 +80,13 @@ public class EditGroupCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
+        if (groupToEdit.hasStudents()) {
+            for (Student student : groupToEdit.getStudents()) {
+                Student studentUpdate = student.addGroup(editedGroup.getGroupName());
+                model.setPerson(student, studentUpdate);
+            }
+        }
+
         model.setGroup(groupToEdit, editedGroup);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, Messages.format(editedGroup)),
