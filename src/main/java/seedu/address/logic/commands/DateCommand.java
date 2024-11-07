@@ -26,7 +26,7 @@ public class DateCommand extends Command {
     public static final String COMMAND_WORD = "date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the appointment date and time (d/M/yyyy HHmm) of the person identified "
-            + "by their name and/or phone and/or email. At least one identifier must be used."
+            + "by their name and/or phone and/or email. \nAt least one identifier must be used."
             + "Existing date and time will be overwritten by the input.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME ]"
