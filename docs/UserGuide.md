@@ -130,13 +130,16 @@ Ctrl + Alt + T
   e.g `\n NAME [\h HOURS]` can be used as `\n John Doe \h 10` or as `\n John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[\s SUBJECT]…​` can be used as ` ` (i.e. 0 times), `\s English`, `s\ English \s Math` etc.
+  e.g. `[\s SUBJECT]…​` can be used as ` ` (i.e. 0 times), `\s English`, `\s English \s Math` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `\n NAME \p PHONE_NUMBER`, `\p PHONE_NUMBER \n NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* `INDEX` refers to the index number shown in the displayed person list.<br>
+  Index **must be a positive integer**.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -153,7 +156,8 @@ Format: `help`
 ### Adding a Tutor: `addTutor`
 
 Adds a Tutor to VolunTier.
-Format: `addTutor \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [s\ SUBJECT]…​’
+
+Format: `addTutor \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​`
 
 Examples:
 * `addTutor \n Alice Pauline \p 98722342 \e alicep@example.com \a Alice street, block 123, 999888 \s math \s science`
@@ -164,17 +168,22 @@ Examples:
 
 Adds a tutee to VolunTier.
 
-Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [s\ SUBJECT]…​‘
+Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of subjects (including 0).
-**Tip:** Hours will default to 0 if it is not specified.
-**Tip:** Phone number must be 8 integer digits and start with 8, 9, or 6.
-**Tip:** Address must have any text followed by a comma and a 6-digit postal code.<br>
-e.g. `Tampines, 234678`.
-**Tip:** Hours must be a non-negative integer, with a maximum of 876,000 (100 years).
+**Tips:**
 
+* Phone number must be 8 integer digits and start with 8, 9, or 6.
+
+* Address must have any text followed by a comma and a 6-digit postal code.<br>
+e.g. `Tampines, 234678`.
+
+* Hours must be a non-negative integer, with a maximum of 876,000 (100 years).
+
+* Hours will default to 0 if it is not specified.
+
+* A person can have any number of subjects (including 0).
 </box>
 
 
@@ -182,17 +191,13 @@ e.g. `Tampines, 234678`.
 
 Add a lesson in VolunTier between a tutor and tutee. A lesson must have a tutor, a tutee and a subject.
 
-Format: `addLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT‘
+Format: `addLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT`
 
 * Adds a lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX`.
-* The index refers to the index number shown in the displayed person list. * The index **must be a positive integer** 1, 2, 3, …​
 * The Tutor, Tutee, and the Lesson added must have matching subjects.
 
 Examples:
 * `addLesson 1 2 \s science`
-
-> [!TIP]
-> Check if lesson is added
 
 ### Listing all persons : `list`
 
@@ -207,7 +212,7 @@ Edits an existing person in VolunTier.
 
 Format: `edit INDEX [\n NAME] [\p PHONE_NUMBER] [\e EMAIL] [\a ADDRESS] [\h HOURS] [\s SUBJECT]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing subjects, the existing subjects of the person will be removed i.e adding of subjects is not cumulative.
@@ -257,8 +262,7 @@ Deletes the specified person from VolunTier.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* When a person is deleted, their associated lessons will be removed as well.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in VolunTier.
@@ -270,13 +274,10 @@ Deletes the specified lesson from VolunTier.
 
 Format: `deleteLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT`
 
-* Deletes the lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX` and subject.
-* The index refers to the index number shown in the displayed person list. * The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX`, and subject.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in VolunTier.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
+* `findSubject Math` followed by `deleteLesson 2 5 \s Math` deletes the lesson between the Tutor with index 2 and the Tutee with index 5.
 
 ### Viewing a person's details : `view`
 
@@ -285,8 +286,7 @@ Displays the details of a person that might not be shown in their card.
 Format: `view INDEX`
 
 * Views the details of the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Details that are not shown on Person Card but can be viewed includes Hours and the person they are paired with along with the subject.
 
 Examples:
 * `list` followed by `view 3` displays the details of the 3rd person in the address book.
@@ -301,7 +301,7 @@ Format: `undo`
 * You can only undo commands executed during the current session.
 
 Examples:
-* If you accidentally deleted a person, `undo` will add that person back.
+* If you accidentally deleted a person, `undo` will add that person back along with their associated lessons.
 
 ### Redoing a command : `redo`
 
@@ -370,7 +370,8 @@ Format: `import \f FILEPATH`
 * For any field that requires a comma, surround it in quotes like this: "1 Jurong, 123456".
 
 * For more than one subject, separate it with a semicolon like this: English; Science.
-  </box>
+</box>
+
 
 Example:
 *  `import \f ~/data/new_persons.csv` imports a list of people in new_persons.csv located in ~/data/ into VolunTier.
