@@ -13,7 +13,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 
@@ -37,7 +36,7 @@ public class DeleteAppointmentCommand extends Command {
      * Creates a {@code DeleteAppointmentCommand} to delete the appointment of the person with the specified
      * {@code Name}.
      *
-     * @param targetName The name of the person whose appointment will be deleted.
+     * @param targetIndex The index of the person whose appointment will be deleted.
      */
     public DeleteAppointmentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
