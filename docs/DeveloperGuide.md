@@ -6,8 +6,42 @@
 
 # Tuteez Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+<!-- TOC -->
+
+- [Tuteez Developer Guide](#tuteez-developer-guide)
+   * [**Acknowledgements**](#acknowledgements)
+   * [**Setting up, getting started**](#setting-up-getting-started)
+   * [**Design**](#design)
+      + [Architecture](#architecture)
+      + [UI component](#ui-component)
+         - [Command Box Component](#command-box-component)
+      + [Logic component](#logic-component)
+      + [Model component](#model-component)
+      + [Storage component](#storage-component)
+      + [Common classes](#common-classes)
+   * [**Implementation**](#implementation)
+      + [Find feature](#find-feature)
+         - [Implementation details](#implementation-details)
+      + [Design Considerations](#design-considerations)
+      + [Detection of next lesson](#detection-of-next-lesson)
+      + [Display feature](#display-feature)
+      + [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
+         - [Proposed Implementation](#proposed-implementation)
+         - [Design considerations:](#design-considerations-1)
+      + [[Proposed] Data archiving](#proposed-data-archiving)
+   * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+   * [**Appendix: Requirements**](#appendix-requirements)
+      + [Product scope](#product-scope)
+      + [User stories](#user-stories)
+      + [Use cases](#use-cases)
+      + [Non-Functional Requirements](#non-functional-requirements)
+      + [Glossary](#glossary)
+   * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+      + [Launch and shutdown](#launch-and-shutdown)
+      + [Deleting a student](#deleting-a-student)
+      + [Saving data](#saving-data)
+
+<!-- TOC end -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -260,7 +294,7 @@ How this feature works:
 The `DisplayCommand` allows users to display a specified person in the addressbook.
 It uses `DisplayCommandParser` to parse the user input and create an `DisplayCommand` object, which modifies the `lastViewedPerson` object in the `Model`.
 
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `displayCommand`, taking `execute("display 1")` API call as an example.
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("remark 1 -a Good progress")` API call as an example.
 
 <puml src="diagrams/DisplaySequenceDiagram.puml" alt="Interactions Inside the Logic Component when a display command is called" />
 
@@ -460,7 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types add keyword followed by student details into the textbox
+1. User types keyword followed by student details into the textbox
 2. Tuteez acknowledges that a new student has been added
 3. Use case ends
 
@@ -511,6 +545,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
       Use case resumes at step 2
 
+**Use case: UC4 - Add a lesson to a student**
+
+**MSS**
+
+1. User requests to list persons
+1. tuteez shows a list of persons <u>(UC2)</u>
+1. User types keyword followed by index then lesson day and time
+1. tuteez adds lesson to student
+
+**Extensions**
+
+* 3a. The lesson clashes with an existing lesson(s)
+
+   * 3a1. Tuteez shows error message with timings of the lessons that it clashes with
+
+   Use case resumes at step 2
+
+* 3b. The lesson has invalid day or times
+
+   * 3b1. Tuteez shows error message specifying the error
+
+   Use case resumes at step 2
+
+* 3c. The given index is invalid.
+
+   * 3c1. Tuteez shows an error message.
+
+   Use case resumes at step 2
 
 ### Non-Functional Requirements
 
@@ -566,6 +628,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+1. _{ more test cases …​ }_
 
 ### Deleting a student
 
