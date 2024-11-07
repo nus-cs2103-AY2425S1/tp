@@ -35,7 +35,7 @@ If you’re comfortable typing, MindMap can help you get contact management task
 
 4. **Open a Terminal**
     - **For Windows**:
-        - Open the Start menu, type “Windows PowerShell,” and click on it to open.
+        - Open the Start menu, type “Windows PowerShell”, and click on it to open.
 
     - **For Mac**:
         - Press `Command + Space` to open the search bar.
