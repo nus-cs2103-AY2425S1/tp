@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":VolunteerCommandParser" as VolunteerCommandParser LOGIC_COLOR
+participant ":VolunteerDeleteCommandParser" as VolunteerDeleteCommandParser LOGIC_COLOR
+participant "<<class>> VolunteerParserUtil" as VolunteerParserUtil LOGIC_COLOR
+participant "d:VolunteerDeleteCommand" as VolunteerDeleteCommand LOGIC_COLOR
+
+group sd create VolunteerDeleteCommand
+activate AddressBookParser
+
+create VolunteerCommandParser
+AddressBookParser -> VolunteerCommandParser
+activate VolunteerCommandParser
+
+VolunteerCommandParser --> AddressBookParser
+deactivate VolunteerCommandParser
+
+AddressBookParser -> VolunteerCommandParser : parseCommand("del 1")
+activate VolunteerCommandParser
+
+
+create VolunteerDeleteCommandParser
+VolunteerCommandParser -> VolunteerDeleteCommandParser
+activate VolunteerDeleteCommandParser
+
+VolunteerDeleteCommandParser --> VolunteerCommandParser
+deactivate VolunteerDeleteCommandParser
+
+VolunteerCommandParser -> VolunteerDeleteCommandParser : parse("1")
+activate VolunteerDeleteCommandParser
+
+VolunteerDeleteCommandParser -> VolunteerParserUtil : parseIndex("1")
+activate VolunteerParserUtil
+
+VolunteerParserUtil --> VolunteerDeleteCommandParser : index:Index
+deactivate VolunteerParserUtil
+
+create VolunteerDeleteCommand
+VolunteerDeleteCommandParser -> VolunteerDeleteCommand : VolunteerDeleteCommand(index)
+activate VolunteerDeleteCommand
+
+VolunteerDeleteCommand --> VolunteerDeleteCommandParser
+deactivate VolunteerDeleteCommand
+
+VolunteerDeleteCommandParser --> VolunteerCommandParser : d
+deactivate VolunteerDeleteCommandParser
+
+VolunteerCommandParser --> AddressBookParser : d
+deactivate VolunteerCommandParser
+
+[<-- AddressBookParser : d
+deactivate AddressBookParser
+end
+
+@enduml

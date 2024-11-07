@@ -2,11 +2,9 @@
 layout: page
 title: User Guide
 ---
+
 ## What is VolunSync?
 VolunSync is a desktop app for **Non-Governmental Organisations** that require keeping track of volunteers and volunteering events, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunSync can get your event and personnel management tasks done faster than traditional GUI apps.
-
-## Download VolunSync
-Installation instructions can be found [here](#quick-start).
 
 ## Learn About Commands Supported By VolunSync
 VolunSync supports the following types of commands to help you manage your volunteers and events.
@@ -28,9 +26,11 @@ Click the links to find out more about each command type:
    1. [Deleting an event](#deleting-an-event--e-del-)
    1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
 
-#### Command Format Guidelines can be found [here](#command-format-guidelines).
+#### [Command Format Guidelines](#command-format-guidelines).
 
-#### A summary of all available commands' format can be found [here](#command-summary).
+#### [Command Summary](#command-summary).
+
+<div style="page-break-after: always;"></div>
 
 ## Other Resources
 #### [FAQ](#faq-1)
@@ -55,7 +55,7 @@ Click the links to find out more about each command type:
    `java -jar NAME_OF_JAR_FILE`. For example, `java -jar volunsync-v1.3.jar`.
 
 1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
-   ![Ui](images/Ui.png)
+   ![Ui](images/VolunSyncUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
    Some example commands you can try:
@@ -106,6 +106,8 @@ Click the links to find out more about each command type:
 * When copying multi-line commands from this guide, make sure the spaces between lines remain intact, especially if you're using a PDF version.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ## General Commands
 
 ### Viewing help : `help`
@@ -119,7 +121,7 @@ Format: `help`
 Shows a list of all volunteers and events in the database.
 
 Format: `list`
-![Ui](images/Ui.png)
+![Ui](images/VolunSyncUi.png)
 
 Examples:
 * `list` would show the full list of events and volunteers
@@ -138,6 +140,8 @@ Exits the program.
 
 Format: `exit`
 
+<div style="page-break-after: always;"></div>
+
 ## Volunteer-related Commands
 
 ### Adding a volunteer: `/v new`
@@ -153,6 +157,8 @@ Examples:
 Running the command successfully, you should see:
 
 ![New Volunteer Demo](images/NewVolunteer.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Locating volunteers by name : `/v find`
 
@@ -194,6 +200,8 @@ Examples:
 
 ![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Assigning a volunteer to event: `assign`
 
 Adds a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
@@ -207,6 +215,8 @@ Examples:
 * `assign v/1 e/2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
 
 ![Assign Volunteer Demo](images/commandDemo/AssignDemo.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Removing a volunteer from an event: `unassign`
 
@@ -222,6 +232,8 @@ Examples:
 
 ![Unassign Volunteer Demo](images/commandDemo/UnassignDemo.png)
 
+<div style="page-break-after: always;"></div>
+
 ## Event-related Commands
 
 ### Adding an event: `/e new`
@@ -235,6 +247,8 @@ Examples:
 * `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00`
 
 ![New Event Demo](images/commandDemo/NewEventDemo.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Locating events by name : `/e find`
 
@@ -256,6 +270,8 @@ If there are no events with names matching the keyword in the database, the enti
 
 ![Finding Events](images/commandDemo/FindEventDemo.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an event : `/e del `
 
 Deletes the specified event from the database.
@@ -275,6 +291,8 @@ Examples:
 
 ![Delete Event Demo](images/commandDemo/DeleteEventDemo.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all volunteers participating in an event: `/e view`
 
 Displays all volunteers participating in the event at the specified `INDEX` under the `Volunteers` display.
@@ -288,6 +306,8 @@ Examples:
 * `/e view 1` displayes the volunteers participating in the first event in the event list.
 
 ![View Event Demo](images/commandDemo/ViewDemo.png)
+
+<div style="page-break-after: always;"></div>
 
 ## Saving the data
 

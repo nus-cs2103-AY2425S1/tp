@@ -187,13 +187,15 @@ public class Event {
      * @return boolean
      */
     public boolean isOverlappingWith(Event event) {
+        if (event == null) {
+            return false;
+        }
 
         if (!this.date.isSameDate(event.getDate())) {
             return false;
         }
 
-        return !(endTime.isBefore(event.startTime)
-                || startTime.isAfter(event.endTime));
+        return this.startTime.isBefore(event.getEndTime()) && this.endTime.isAfter(event.getStartTime());
     }
 
 }

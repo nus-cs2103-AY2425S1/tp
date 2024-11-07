@@ -26,7 +26,7 @@ public class VolunteerViewCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_VIEW_VOLUNTEER_SUCCESS = "Viewing details of events that %s is involved in.";
+    public static final String MESSAGE_VIEW_VOLUNTEER_SUCCESS = "Viewing details of events that %s is involved in.";
 
     private final Index targetIndex;
 
