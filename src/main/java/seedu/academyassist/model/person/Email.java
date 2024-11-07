@@ -42,7 +42,7 @@ public class Email {
     public Email(String email) {
         requireNonNull(email);
         AppUtil.checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        value = email.toLowerCase();
     }
 
     /**
