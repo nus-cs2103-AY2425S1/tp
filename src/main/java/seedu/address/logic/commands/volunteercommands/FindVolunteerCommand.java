@@ -38,7 +38,8 @@ public class FindVolunteerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // Check if any volunteers matched the filter
+        assert predicate.getKeyword() != null && !predicate.getKeyword().trim().isEmpty()
+                : "Keyword should not be null or empty";
         if (predicate.getKeyword().trim().isEmpty()) {
             throw new CommandException(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, predicate.getKeyword()));
         }
