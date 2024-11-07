@@ -54,7 +54,7 @@ The callout boxes below are used in documentation to enhance readability and pro
 </box>
 
 <box type="tip" seamless>
-**Tip Box:** Offers helpful tips or suggestions to enhance the user experience.
+**Tip Box:** Offers helpful tips or suggestions.
 </box>
 
 <box type="warning" seamless>
