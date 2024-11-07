@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteNCommand;
 import seedu.address.logic.commands.DeleteWeddingCommand;
 import seedu.address.logic.commands.DeleteYCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListWeddingCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -41,6 +43,12 @@ public class MainWindow extends UiPart<Stage> {
     private WeddingListPanel weddingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    @FXML
+    private Button WbButton;
+
+    @FXML
+    private Button AbButton;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -79,6 +87,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        toggleAddressBookButton(true);
+        toggleWeddingBookButton(false);
     }
 
     public Stage getPrimaryStage() {
@@ -196,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (isDeleteCommand(commandText)) {
+            if (isNonUiCommand(commandText)) {
                 return commandResult;
             }
 
@@ -205,9 +215,13 @@ public class MainWindow extends UiPart<Stage> {
             if (isWeddingCommand(commandText)) {
                 weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
                 listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+                toggleWeddingBookButton(true);
+                toggleAddressBookButton(false);
             } else {
                 personListPanel = new PersonListPanel(logic.getFilteredPersonList());
                 listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+                toggleWeddingBookButton(false);
+                toggleAddressBookButton(true);
             }
 
 
@@ -244,9 +258,27 @@ public class MainWindow extends UiPart<Stage> {
      * @return true if the command is a delete command that
      *      should not change the UI, false otherwise
      */
-    public boolean isDeleteCommand(String commandText) {
+    public boolean isNonUiCommand(String commandText) {
         String firstWord = commandText.split("\\s+")[0];
         return firstWord.equals(DeleteYCommand.COMMAND_WORD)
-                || firstWord.equals(DeleteNCommand.COMMAND_WORD);
+                || firstWord.equals(DeleteNCommand.COMMAND_WORD)
+                || firstWord.equals(HelpCommand.COMMAND_WORD);
+    }
+
+    private void toggleWeddingBookButton(boolean isToggled) {
+        if (isToggled) {
+            WbButton.setId("WeddingBookButtonToggled");
+        } else {
+            WbButton.setId("WeddingBookButtonNotToggled");
+        }
+    }
+
+    // Method to toggle the address book button style
+    private void toggleAddressBookButton(boolean isToggled) {
+        if (isToggled) {
+            AbButton.setId("AddressBookButtonToggled");
+        } else {
+            AbButton.setId("AddressBookButtonNotToggled");
+        }
     }
 }

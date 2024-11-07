@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="KnottyPlanners" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -41,9 +43,17 @@
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-without-border"
                    minHeight="198" prefHeight="198" maxHeight="198">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets top="5" right="10" bottom="5" left="10"  />
           </padding>
         </StackPane>
+
+        <HBox spacing="20" alignment="CENTER_LEFT" VBox.vgrow="NEVER"  styleClass="button-container" >
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+          </padding>
+          <Button fx:id="AbButton" text="AddressBook" />
+          <Button fx:id="WbButton" text="WeddingBook" />
+        </HBox>
 
         <VBox fx:id="personList" styleClass="pane-without-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
