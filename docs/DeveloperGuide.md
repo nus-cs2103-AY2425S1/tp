@@ -661,47 +661,93 @@ testers are expected to do more *exploratory* testing.
 
    1. Use the `exit` command or close the window directly.<br> Expected: The application should close without any errors or delays.
 
+## Managing Patient Records
 
-### Adding a person
+### Adding a patient
 
-1. Adding a valid person
+1. Adding a valid patient
 
     1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
-       Expected: "John Doe" is added to the list of contacts. Details of the added contact shown in the status message.
+       Expected: New person added: Joanne; Phone: 98788432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tag: Low Risk; Allergies: None
 
-2. Adding a person with missing fields
+2. Adding a patient with missing fields
 
     1. Test case: `add n/John`<br>
-       Expected: No person is added. Invalid command format shown in the status message.
+       Expected: Following parameters are missing : p/, e/, a/, t/, m/
+       add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG [m/ALLERGY]...
+       Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Low Risk m/Peanuts
+   
+3. Adding a duplicate patient
 
-3. Adding a duplicate person
-
-    1. Prerequisites: Ensure "John Doe" with the contact details in "Adding a valid person" is already in the contact list.
-
+    1. Prerequisites: Ensure "John Doe" with the contact details in "Adding a valid patient" is already in the contact list.
+   
     2. Test Case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
-       Expected: Error message displayed indicating that the person already exists.
+       Expected Error Message: This person already exists in the address book
 
     3. Other duplicate person add command to try: `add n/John Doe p/98765432 e/differentemail@example.com a/123 Main St t/Low Risk m/None`,
 
+
 ### Deleting a person
 
-1. Deleting a person
+1. Deleting a patient 
 
-   1. Test case: `delete n/Alex Yeoh`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete n/Alex Yeoh`<br>
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+   
+    2. Test case: `delete p/81239873`<br>
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+   
+    3. Test case: `delete e/alex@yahoo.com`<br>
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+   
+    4. Other incorrect delete commands to try: `delete`, `delete 1`, `delete x`, `...` <br>
+       Expected: Invalid command format!
+       Please provide at least one of the following: name, phone, or email
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Editing a patient
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Editing a patient
 
-1. _{ more test cases …​ }_
+     1. Test case: `edit 1 n/Axel`<br>
+        Expected: Edited Person: Axel; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+
+     2. Test case: `edit 1 p/88452209 e/alex@gmail.com`<br>
+        Expected: Edited Person: Axel; Phone: 88452209; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+
+     3. Test case: `edit 1 n/Alice p/90967209 e/alice@gmail.com`<br>
+        Expected: Edited Person: Alice; Phone: 90967209; Email: alice@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+
+     4. Test case: `edit 1`<br>
+        Expected: At least one field to edit must be provided
+
+2. Attempting to edit to create a duplicate patient
+    
+     1. Prerequisites: Ensure "Alaya" with the contact details is already in the contact list.
+    
+     2. Test case: `edit 1 n/Alice p/90967209
+        Expected Error Message: This person already exists in the address book
+
+### Filtering patients
+
+1. Filtering patients by tag
+
+     1. Test case: `filter t/Low Risk`<br>
+        Expected: Lists all patients with tag "Low Risk"
+
+2. Filtering patients by phone number
+
+     1. Test case: `filter p/98765432`<br>
+        Expected: Lists all patients with phone number "98765432"
+
+3. Filtering patients by allergy
+
+     1. Test case: `filter m/Penicillin`<br>
+        Expected: Lists all patients with allergy "Penicillin"
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    1. Delete the data file.
+    2. Restart the app.
+    3. Expected: The app should create a new data file with default data.
