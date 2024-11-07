@@ -43,7 +43,8 @@ This app is a desktop app for managing candidates and job roles, **optimized for
     - [Editing a Person: `edit`](#editing-a-person-edit)
     - [Finding Persons by Name: `find`](#finding-persons-by-name-find)
     - [Deleting a Person: `delete`](#deleting-a-person-delete)
-    - [Filtering Contacts by Status: `filter`](#filtering-contacts-by-status-filter)
+    - [Filtering Applicant by Status: `filter`](#filtering-contacts-by-status-filter)
+    - [Displaying Summary: `summary`](#summary-summary)
     - [Clearing All Entries: `clear`](#clearing-all-entries-clear)
     - [Exiting the Program: `exit`](#exiting-the-program-exit)
     - [Saving Data](#saving-data)
@@ -60,18 +61,18 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 ## Command Summary
 
 
-| Action      | Format, Examples                                                                                                                                                                                                           |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action      | Format, Examples                                                                                                                                                                                                            |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd, 1234665 s/Java t/friend` |
-| **Clear**   | `clear`                                                                                                                                                                                                                    |
-| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                        |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Active`                                             |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                      |
-| **List**    | `list`                                                                                                                                                                                                                     |
-| **Help**    | `help`                                                                                                                                                                                                                     |
-| **View**    | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                            |
-| **Filter**  | `filter st/STATUS`<br> e.g., `filter st/Shortlisted`                                                                                                                                                                       |
-| **Summary** | `summary`                                                                                                                                                                                                                  |
+| **Clear**   | `clear`                                                                                                                                                                                                                     |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                         |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Active`                                              |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                       |
+| **List**    | `list`                                                                                                                                                                                                                      |
+| **Help**    | `help`                                                                                                                                                                                                                      |
+| **View**    | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                             |
+| **Filter**  | `filter STATUS`<br> e.g., `filter Shortlisted`                                                                                                                                                                              |
+| **Summary** | `summary`                                                                                                                                                                                                                   |
 
 Detailed information can be found under [Features](#features).
 
@@ -125,10 +126,10 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
     - For example, typing `help` and pressing Enter will display the help message. ✨
 
 7. **Try Out Example Commands**:
-    - `list` : Lists all contacts.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` : Adds a contact named `John Doe` to TalentSG.
-    - `delete 3` : Deletes the 3rd contact shown in the current list.
-    - `clear` : Deletes all contacts.
+    - `list` : Lists all Applicant.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` : Adds a Applicant named `John Doe` to TalentSG.
+    - `delete 3` : Deletes the 3rd applicant shown in the current list.
+    - `clear` : Deletes all applicant.
     - `exit` : Exits the app.
 
 8. **Explore Features**: Refer to the [Features](#features) section for detailed information on each command.
@@ -195,11 +196,11 @@ Adds a new candidate to TalentSG.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex/EXPERIENCE st/STATUS note/NOTE  [t/TAG]...`
 
 
-<u>Example</u>
+#### Example
 
 `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dr/Software Engineer s/Java, Python, C++ ex/Project Manager at Google from 2010-2020 st/Interviewed note/Super confident t/friends t/owesMoney`
 
-<u>Image Example</u>
+#### Image Example
 
 Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends `
 
@@ -219,7 +220,7 @@ Shows a list of all applicants in TalentSG.
 
 Format: `list`
 
-<u>Image Example</u>
+#### Image Example
 
 Command: ` list `
 
@@ -233,7 +234,7 @@ Command: ` list `
 <img src="images/afterlist.png" alt="afterlist.png" width="800">
 
 
-[**Tip**]:Regularly listing all contacts helps you review the information stored and identify any duplicates or mistakes early.
+[**Tip**]:Regularly listing all Applicants helps you review the information stored and identify any duplicates or mistakes early.
 
 
   ---
@@ -250,12 +251,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STAT
 - **At Least One Field**: Must be provided.
 - **Existing Values**: Will be replaced with new inputs.
 
-<u>Examples<u>
+#### Example
 
 - `edit 1 p/91234567 e/johndoe@example.com`: Updates phone and email of the first candidate.
 - `edit 2 n/Betsy Crower t/`: Changes the name and clears all tags of the second candidate.
 
-<u>Image Example<u>
+#### Image Example
 
 Command: ` edit 1 st/Rejected note/arrogant `
 
@@ -287,14 +288,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-<u>Examples:<u>
+#### Example
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 
-[**Caution**]:  If you search for "Han," contacts named "Hans" will not appear in the results. Always search by full words.
+[**Caution**]:  If you search for "Han," Applicants named "Hans" will not appear in the results. Always search by full words.
 
-<u>Image Example<u>
+#### Image Example
 
 Command: ` find John Stanley `
 
@@ -319,12 +320,12 @@ Removes a candidate from TalentSG.
 - **INDEX**: Refers to the candidate's number in the current list.
 - **Positive Integer**: Must be 1, 2, 3, etc.
 
-<u>Examples<u>
+#### Example
 
 - `list` followed by `delete 2`: Deletes the second candidate.
 - `find Betsy` followed by `delete 1`: Deletes the first candidate in the search results.
 
-<u>Image Example<u>
+#### Image Example
 
 Command: ` delete 2 `
 
@@ -341,8 +342,52 @@ Command: ` delete 2 `
 [**Caution**]: Deleted entries cannot be recovered.
 
 ---
+### Viewing Applicant Details: `view`
 
-### Filtering Contacts by Status: `filter`
+Displays the details of a specific applicant in the list. This command allows you to quickly view all relevant information of an applicant by specifying their index in the list.
+
+**Format**: `view INDEX`
+
+#### Constraints
+
+- **INDEX**: Must be a positive integer corresponding to the applicant's position in the current list.
+
+#### Example
+
+- `view 2`: Displays the details of the second applicant in the list.
+- `list` followed by `view 1`: Lists all applicants, then shows details of the first applicant.
+
+#### Image Example
+
+Command: `view 2`
+
+**Before the view command is run:**
+
+<img src="images/beforeview.png" alt="beforeview.png" width="800">
+
+**After the view command is run:**
+
+<img src="images/afterview.png" alt="afterview.png" width="800">
+
+**View Output Example:**
+When using the `view` command, the applicant's details will appear in the right panel, displaying information such as:
+- Name
+- Phone Number
+- Address
+- Email
+- Skills
+- Experience
+- Status
+- Desired Role
+- Note
+- Tags
+
+This allows you to conveniently access all the specific details about an applicant in one view.
+
+[**Tip**]: Use the `view` command frequently to ensure you have the most updated and detailed information about each applicant during your recruitment process.
+---
+
+### Filtering Applicants by Status: `filter`
 
 Filters candidates based on their status.
 
@@ -383,6 +428,42 @@ Command: `filter screening`
 If an invalid status is input (e.g., `filter applying`), an error message will appear:
 > **Invalid status: applying. Valid statuses are: Applied, Screening, Interview Scheduled, Interviewed, Offer, Onboarding, Hired, Rejected**
 
+
+---
+
+### Summary: `summary`
+
+Provides a quick overview of the current applicants' status, giving you a breakdown of the number of applicants in each stage of the recruitment process. This feature is useful for quickly assessing the progress of your recruitment pipeline.
+
+**Format**: `summary`
+
+- The summary command can be activated by typing `summary` in the command line or by clicking the **Summary** option in the **File** menu.
+
+#### Example
+
+1. **Using the Command Line**
+    - Simply type `summary` and press Enter.
+2. **Using the File Menu**
+    - Go to the **File** menu and select **Summary**.
+
+#### Image Example
+
+<u>Before the summary command is run:</u>
+
+<img src="images/beforesummary.png" alt="beforesummary.png" width="800">
+
+<u>After the summary command is run:</u>
+
+<img src="images/aftersummary.png" alt="aftersummary.png" width="800">
+
+**Summary Output Example:**
+The summary will display information such as:
+- Total number of applicants
+- Number of applicants in each status (e.g., Applied, Screening, Rejected, etc.)
+
+This quick view allows you to monitor the distribution of candidates across different stages.
+
+[**Tip**]: Use the summary command regularly to keep track of your recruitment pipeline's health and quickly identify any bottlenecks in the process.
 
 ---
 
@@ -437,6 +518,39 @@ Advanced users can edit the data file located at `[JAR file location]/data/addre
 - It is recommended to take a backup of the file before editing it.
 - Certain edits can cause TalentSG to behave unexpectedly (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
+
+---
+
+### Reporting a Bug: `report bug`
+
+If you encounter any issues or bugs while using TalentSG, you can easily report them through the Report Bug feature. This feature allows users to submit feedback directly through a designated Google Form.
+
+#### How to Report a Bug
+
+1. **Open the Report Bug Window**:
+    - In the TalentSG application, go to the **Help** menu at the top and select **Report Bug**.
+    - This will open a pop-up window containing a message and a link to the bug report form.
+
+2. **Copy the URL**:
+    - Click the **Copy URL** button in the Report Bug window to copy the Google Form link to your clipboard.
+    - The message displayed will be:  
+      _"Let us know the bug through this Google Form: https://forms.gle/cGnn2jZ2fdfhWc3q7"_
+
+3. **Access the Google Form**:
+    - Open your browser, paste the URL from the clipboard, and complete the Google Form with details about the bug.
+    - Be as descriptive as possible to help us identify and resolve the issue effectively.
+
+#### Example Image
+
+Below is an example of the Report Bug pop-up window that will appear when you access the feature:
+
+<img src="images/reportBugWindow.png" alt="Report Bug Window" width="800">
+
+#### Notes
+- **Internet Connection**: Ensure that your device has an active internet connection before accessing the Google Form.
+- **Privacy**: Your feedback will be used solely for improving TalentSG. Any personal information provided will be handled according to our privacy policy.
+
+[**Tip**]: Reporting bugs with detailed steps and screenshots (if applicable) can help speed up the troubleshooting process.
 
 ---
 
