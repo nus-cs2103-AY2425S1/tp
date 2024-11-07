@@ -20,34 +20,73 @@ simplifying the process of adding, editing and deleting your volunteers, student
 
 --------------------------------------------------------------------------------------------------------------------
 
+<!-- Table of Contents -->
+- [VolunTier User Guide](#voluntier-user-guide)
+- [Quick start](#quick-start)
+    - [Installation of application](#installation-of-application)
+- [Features](#features)
+    - [Viewing help](#viewing-help--help)
+    - [Adding a Tutor](#adding-a-tutor-addtutor)
+    - [Adding a Tutee](#adding-a-tutee-addtutee)
+    - [Adding a Lesson](#adding-a-lesson-addlesson)
+    - [Listing all persons](#listing-all-persons--list)
+    - [Editing a person](#editing-a-person--edit)
+    - [Locating persons by name](#locating-persons-by-name-find)
+    - [Locating persons by subject](#locating-persons-by-subject-findsubject)
+    - [Deleting a person](#deleting-a-person--delete)
+    - [Deleting a lesson](#deleting-a-lesson--deletelesson)
+    - [Viewing a person's details](#viewing-a-persons-details--view)
+    - [Undoing a command](#undoing-a-command--undo)
+    - [Redoing a command](#redoing-a-command--redo)
+    - [Viewing command history](#viewing-command-history--history)
+    - [Viewing chart of tutors’ volunteer hours](#viewing-chart-of-tutors-volunteer-hours--vtc)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Importing people from CSV files](#importing-people-from-csv-files--import)
+    - [Exiting the program](#exiting-the-program--exit)
+- [Saving the data](#saving-the-data)
+- [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
+
+<page-nav-print />
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
 ### Installation of application
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F08-1a/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your VolunTier app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar VolunTier.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+* `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+* `addTutor \n John Doe \p 98765432 \e johndoe@example.com \a 311, Clementi Ave 2, 123456 \h 6 ` : Adds a tutor named `John Doe` with the phone number `98765432`, email `johndoe@example.com`, residing at `311, Clementi Ave 2, 123456`, and records `6` hours of tutoring.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+* `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `exit` : Exits the app.
+* `clear` : Deletes all contacts.
 
-1. Refer to the [Features](#features) below for details of each command.
+* `exit` : Exits the app.
+
+7. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ### CLI tutorial
 
