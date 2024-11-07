@@ -19,6 +19,7 @@ import seedu.address.logic.commands.EditGameCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FavouriteGameCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindGameCommand;
 import seedu.address.logic.commands.FindTimeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -79,6 +80,9 @@ public class AddressBookParser {
 
         case FindTimeCommand.COMMAND_WORD:
             return new FindTimeCommandParser().parse(arguments);
+
+        case FindGameCommand.COMMAND_WORD:
+            return new FindGameCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
