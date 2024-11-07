@@ -128,14 +128,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="600" />
-
-</box>
-
 
 ### Storage component
 
@@ -200,16 +192,16 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How add command is carried out:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Key in all the details for student in one command.
+  * Pros: Easy to implement, as only one command needs to be key in by user.
+  * Cons: Command might get too long.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Key in the details for students in multiple steps.
+  * Pros: A step-by-step guide for adding details can be especially helpful for new users, as it offers clear and structured guidance.
+  * Cons: It is hard to implement, especially with a mix of optional and compulsory fields. 
+  Additionally, it is not user-friendly for fast typists, as multiline commands are required to add a student.
 
 
 ### Owe tuition fees
@@ -315,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters command to create new student entry.
-2. System displays success message and command line is cleared.
+1. System displays success message and command line is cleared.
 
    Use case ends.
 
@@ -323,84 +315,87 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
-
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.
+  
 
 **Use case: UC02 - Read all entries**
 
 **MSS**
 1. User enters command to view all entries.
-2. System displays list with all entries to the user.
+1. System displays list with all entries to the user.
 
    Use case ends.
 
 **Extension**
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.<br><br>
 
 * 1b. System detects the list is empty.
-    * 1b1. System shows an empty list.
-
+    * 1b1. System shows an empty list.<br> 
   Use case ends.
 
 **Use case: UC03 - Read total earnings**
 
 **MSS**
 
-1. User enters command to read total earnings and total money owed.
-2. System displays total earnings and total money owed to the user.
+1. User enters command to read total earnings and total amount owed by the students. 
+1. System displays total earnings and total amount owed to the user.
 
    Use case ends.
 
 **Extension**
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br> 
+  Use case resumes from step 2.
 
 
 **Use case: UC04 - Delete a student entry**
 
 **MSS**
 
-1. User requests to <ins>list students(UC02)</ins>.
-2. User enters command to delete a specific student.
-3. System displays list with specified student deleted from the list.
+1. User requests to <ins>find a student(UC05)</ins>.
+1. User enters command to delete a specific student.
+1. System displays list with specified student deleted from the list.
 
    Use case ends.
 
 **Extensions**
-
+* 1a. System cannot find the specified student.<br>
+    Use case ends.<br><br>
+  
 * 2a. System detects error in format of entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters new command.
-* Steps 2a1-2a2 are repeated until all details entered are correct.
-* Use case resumes from step 3.
+    * 2a2. User enters command with new index.<br>
+  Steps 2a1-2a2 are repeated until index entered is correct.<br>
+  Use case resumes from step 3.
 
 
 **Use case: UC05 - Find student entries**
 
 **MSS**
 
-1. User enters command to find students.
+1. User enters command to find students based on the specified keywords.
 1. System displays list with students with matching details.
 
    Use case ends.
 
 **Extensions**
-
-* 1a. System detects error in entered command.
-    * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
+* 1a. System cannot find any student with the specified keyword.
+    * 1a1. System displays an empty list.<br>
+  Use case ends.<br><br>
+    
+* 1b. System detects error in entered command.
+    * 1b1. System displays error message and does not clear command line.
+    * 1b2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.
 
 
 **Use case: UC06 - Receiving tuition fee from a student**
@@ -417,14 +412,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
-* Use case resumes from step 1.
+    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
+  Use case resumes from step 1.<br><br>
 
 * 2a. System detects error in entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters new command.
-* Steps 2a1-2a2 are repeated until all details entered are correct.
-* Use case resumes from step 3.
+    * 2a2. User enters new command.<br>
+  Steps 2a1-2a2 are repeated until all details entered are correct.<br> 
+  Use case resumes from step 3.
 
 
 **Use case: UC07 - Settle outstanding fees for student**
@@ -441,14 +436,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
-* Use case resumes from step 1.
+    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
+  Use case resumes from step 1.<br><br>
 
 * 2a. System detects error in entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters new command.
-* Steps 2a1-2a2 are repeated until all details entered are correct.
-* Use case resumes from step 3.
+    * 2a2. User enters new command.<br>
+  Steps 2a1-2a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 3.
 
 ### Non-Functional Requirements
 **Environment Requirements**
@@ -510,6 +505,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+
 ### Launch and shutdown
 
 1. Initial launch
@@ -518,7 +514,7 @@ testers are expected to do more *exploratory* testing.
    
    1. Open a command terminal, `cd` into the folder that you put the jar file in.
 
-   1. Run the jar file with the command in the terminal `java -jar ugteach.jar`
+   1. Run the jar file with the command in the terminal `java -jar ugteach.jar`<br>
       Expected: Shows the GUI with a set of sample contacts and a reminder for lessons scheduled today. 
       The window size may not be optimum.
 
@@ -628,5 +624,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisite: There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
+
+   1. Test case: Delete the `ugteach.json` file.<br>
+       Expected: UGTeach should create a new `ugteach.json` file with default data.
+        
+   1. Test case: Delete the `data` folder together with the `ugteach.json` file.<br>
+       Expected: Similar to previous.
+
+   1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
+   e.g. add a non-alphanumeric character to one of the student's name.<br>
+       Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
