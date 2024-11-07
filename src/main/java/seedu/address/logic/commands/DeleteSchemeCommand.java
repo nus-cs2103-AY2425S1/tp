@@ -38,8 +38,7 @@ public class DeleteSchemeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a scheme from the person identified by the "
             + "index number used in the displayed person list.\n"
-            + "This command can only be used after Scheme command.\n"
-            + "Parameters: PERSON_INDEX SCHEME_INDEX (both must be positive integers)\n"
+            + "Parameters: PERSON_INDEX i/SCHEME_INDEXES (both must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 i/1";
     private final Index personIndex;
     private final ArrayList<Index> schemeIndex = new ArrayList<>();
