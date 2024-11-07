@@ -170,10 +170,10 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookOlderVersionList` for the undo history and `addressBookNewerVersionList` for the redo history. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally in an `addressBookOlderVersionList` for the undo history and `addressBookNewerVersionList` for the redo history. Additionally, it implements the following operations:
 
-- `VersionedAddressBook#canRedo()` — Checks if there is a version to undo to
-- `VersionedAddressBook#canUndo()` — Checks if there is a version to redo to
+- `VersionedAddressBook#canRedo()` — Checks if there is a version to redo to.
+- `VersionedAddressBook#canUndo()` — Checks if there is a version to undo to.
 - `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 - `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 - `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
