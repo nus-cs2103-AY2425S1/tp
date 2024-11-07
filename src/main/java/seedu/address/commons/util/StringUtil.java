@@ -48,13 +48,13 @@ public class StringUtil {
      *       containsNumber("123456", "124") == false
      *       </pre>
      * @param phoneNumber cannot be null, must be a single number
-     * @param number cannot be null, cannot be empty, must be a single number
+     * @param inputNumber cannot be null, cannot be empty, must be a single number
      */
-    public static boolean containsNumber(String phoneNumber, String number) {
+    public static boolean containsNumber(String phoneNumber, String inputNumber) {
         requireNonNull(phoneNumber);
-        requireNonNull(number);
+        requireNonNull(inputNumber);
 
-        String preppedNumber = number.trim();
+        String preppedNumber = inputNumber.trim();
         checkArgument(!preppedNumber.isEmpty(), "Number parameter cannot be empty");
 
         String preppedPhoneNumber = phoneNumber.trim();
@@ -68,7 +68,7 @@ public class StringUtil {
 
         Pattern pattern = Pattern.compile("^\\d+$");
 
-        return pattern.matcher(phoneNumber).matches() && phoneNumber.contains(number);
+        return pattern.matcher(phoneNumber).matches() && phoneNumber.contains(inputNumber);
     }
 
     /**
