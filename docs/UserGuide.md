@@ -74,19 +74,15 @@ Format: `help`
 
 ### Adding a student: `add`
 
-Adds a student to Teacher’s Pet
+You can add a student easily to Teacher's Pet!
 
 Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can only belong to one group at a time.
-</div>
+* The NUS_STUDENTID here refers to the NUS Matriculation Number of the student (Starts with "A")
+* The NUS_NETID here refers to the id that is associated with the student's NUS outlook account ("NUS_NETID@u.nus.edu")
+* Both the NUS_STUDENTID and NUS_NETID must be unique (ie. Two students cannot have the same NUS_STUDENTID and/or NUS_NETID)
 
-* NUS_STUDENTID here refers to the NUS Matriculation Number of the student (Starts with "A")
-* NUS_NETID here refers to the id that is associated with the student's NUS outlook account ("NUS_NETID@u.nus.edu")
-* Both NUS_STUDENTID and NUS_NETID must be unique (ie. Two students cannot have the same NUS_STUDENTID and/or NUS_NETID)
-
-Examples:
+Here are some examples for you to try!
 * `add n/John Doe id/A1234567P`
 * `add n/Betsy Crowe m/Computer Science nid/e1111111 id/A9999999L y/1 g/group 1`
 
