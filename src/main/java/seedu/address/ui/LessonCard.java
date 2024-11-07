@@ -64,7 +64,7 @@ public class LessonCard extends UiPart<Region> {
                 .forEach(this::createLabel);
 
         // Ui Doesn't Properly Update Unless this Line of Code is run multiple times
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 500; i++) {
             Platform.runLater(() -> cardPane.getParent().requestLayout());
         }
     }
