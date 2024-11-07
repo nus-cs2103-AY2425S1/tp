@@ -151,11 +151,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAgentAssist`. It extends `AgentAssist` with an undo/redo history, stored internally as an `agentAssistStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAgentAssist`. It extends `AgentAssist` with an undo/redo history, stored internally as an `agentAssistStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAgentAssist#commit()` — Saves the current address book state in its history.
 * `VersionedAgentAssist#undo()` — Restores the previous address book state from its history.
@@ -224,14 +224,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* Saves the entire address book.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
 
 ## **Planned enhancements**
 
