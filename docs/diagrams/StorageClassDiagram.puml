@@ -14,6 +14,7 @@ Class JsonUserPrefsStorage
 package "Goods Storage" #F4F6F6{
 Class "<<interface>>\nGoodsStorage" as GoodsStorage
 Class CsvGoodsStorage
+Class CsvConverters
 }
 
 Class "<<interface>>\nStorage" as Storage
