@@ -17,7 +17,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 This project uses [JavaFX](https://openjfx.io/) for the GUI and [JUnit5](https://junit.org/junit5/) for testing. The project is built using [Gradle](https://gradle.org/).
 
-This project uses Github Copilot extensively for code completion throughout the project by [@InfinityTwo](http://github.com/infinitytwo), [@KiKusaurus](https://github.com/kikuasaurus) and [@thortol](http://github.com/thortol).
+This project uses Github Copilot extensively for code completion throughout the project by [@InfinityTwo](http://github.com/infinitytwo) and [@KiKusaurus](https://github.com/kikuasaurus).
 
 This project also makes use of [Google's Material Icons](https://fonts.google.com) and Fonts for styling under the [SIL Open Font License](https://developers.google.com/fonts/faq#can_i_use_any_font_in_a_commercial_product) for Fonts and [Apache License 2.0](https://fonts.google.com/icons) for Icons.
 
@@ -63,7 +63,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -114,8 +114,8 @@ The sequence diagram below illustrates another interaction within the `Logic` co
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteEmployeeCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g. `DeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteEmployeeCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -125,8 +125,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g. `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g. `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -137,7 +137,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g. results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -183,21 +183,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 **Target user profile**:
 
-* has a need to manage a significant number of employees and potential hires
-* has a need to match potential hires with available job openings
-* has a need to find details about an employee or potential hire quickly
-* has a need to search for employees or potential hires with relevant details
-* forgets commands and requires a list of commands to use the application
-* prefer desktop applications over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of employees and potential hires.
+* Has a need to match potential hires with available job openings.
+* Has a need to find details about an employee or potential hire quickly.
+* Has a need to search for employees or potential hires with relevant details.
+* Forgets commands and requires a list of commands to use the application.
+* Prefer desktop applications over other types.
+* Can type fast.
+* Prefers typing to mouse interactions.
+* Is reasonably comfortable using CLI apps.
 
 **Value proposition**:
-* manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app
-* find details about an employee or potential hire faster than a spreadsheet
-* matches potential hires with available job openings faster than a spreadsheet
-* for organizations seeking to manage employees and potential hires, our application offers a more specialized solution than an address book application
+* Manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app.
+* Find details about an employee or potential hire faster than a spreadsheet.
+* Matches potential hires with available job openings faster than a spreadsheet.
+* For organizations seeking to manage employees and potential hires, our application offers a more specialized solution than an address book application.
 
 
 ### User stories
@@ -206,18 +206,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority             | As a …​    | I want to …​                                                     | So that I can…​                                                   |
 |----------------------|------------|------------------------------------------------------------------|-------------------------------------------------------------------|
-| `* * *`              | HR Manager | View phone number of my employees/potential hire                 | I can easily contact them if required                             |
-| `* * *`              | HR Manager | Insert phone number of my employees/potential hire               | I can retrieve their phone number if required                     |
-| `* * *`              | HR Manager | View email addresses of employees/potential hire                 | I can contact them if its not an emergency                        |
-| `* * *`              | HR Manager | Insert phone number of my employees/potential hire               | I can retrieve their email address if required                    |
-| `* * *`              | HR Manager | Delete data through the UI                                       | I can delete users who are incorrectly added                      |
-| `* * *`              | HR Manager | View address of employees/potential hire                         | I can view the address of the user to decide where to deploy them |
-| `* *`                | New user   | Be shown some basic functions                                    | I can learn the basic functions of the product                    |
-| `* *`                | New user   | View the user guide easily                                       | I can learn more functions of the product whenever I want         |
-| `* *`                | New user   | Purge the sample data in the tutorial                            | I can input my own data to use                                    |
-| `*`                  | HR Manager | View the emergency contact details of employees                  | I can quickly respond in case of an emergency                     |
-| `*`                  | HR Manager | Sort the employee information by when their contract will expire | I can better plan out when to resign contracts                    |
-*{More to be added}*
+| `* * *`              | HR Manager | view phone number of my employees/potential hire.                 | easily contact them if required.                             |
+| `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their phone number if required.                     |
+| `* * *`              | HR Manager | view email addresses of employees/potential hire.                 | contact them if its not an emergency.                        |
+| `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their email address if required.                    |
+| `* * *`              | HR Manager | delete data through the UI.                                       | delete users who are incorrectly added.                      |
+| `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them. |
+| `* *`                | New user   | be shown some basic functions.                                    | learn the basic functions of the product.                    |
+| `* *`                | New user   | view the user guide easily.                                       | learn more functions of the product whenever I want.         |
+| `* *`                | New user   | purge the sample data in the tutorial.                            | input my own data to use.                                    |
+| `*`                  | HR Manager | view the emergency contact details of employees.                  | quickly respond in case of an emergency.                     |
+| `*`                  | HR Manager | sort the employee information by when their contract will expire. | better plan out when to resign contracts.                    |
+
 
 ### Use cases
 

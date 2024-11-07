@@ -289,13 +289,13 @@ Next, enter `java -jar staffSync.jar` to run the application.<br>
 <strong>5. </strong>Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list ph` : Lists all potential hires.
+   * `list ph`: Lists all potential hires.
 
-   * `employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01` : Adds an employee named `John Doe` to StaffSync.
+   * `employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01`: Adds an employee named `John Doe` to StaffSync.
 
-   * `delete ph 1` : Deletes the 1st person shown if they are a potential hire.
+   * `delete ph 1`: Deletes the 1st person shown if they are a potential hire.
 
-   * `exit` : Exits the app.
+   * `exit`: Exits the app.
 
 <br>
 
@@ -342,8 +342,8 @@ journey with StaffSync!
 
 <br>
 
-* Parameters and commands are case-sensitive
-  e.g. the command `Help` and `edit 1 N/John Doe` will return an error
+* Parameters and commands are case-sensitive.
+  e.g. the command `Help` and `edit 1 N/John Doe` will return an error.
 
 <br>
 
@@ -352,7 +352,7 @@ journey with StaffSync!
 
 <br>
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as there may be formatting issues.
 
 </div>
 
@@ -435,7 +435,7 @@ journey with StaffSync!
   <div class="box box-mistake" type="warning" seamless>
 
   **Common Mistakes:**
-  * `delete E 1` - invalid parameter, you should type `e` instead of `E` as it is case-sensitive
+  * `delete E 1` - invalid format, you should type `e` instead of `E` as it is case-sensitive
   * `delete 1` - invalid format, you forgot to specify the person type `e` or `ph`
   </div>
   </div>
@@ -484,7 +484,7 @@ journey with StaffSync!
 
   **Common Mistakes:**
   * `list ph` followed by `demote 2` - You cannot demote a potential hire, you can use `list e` instead of `list ph` to get the list of employees
-  * `demote 0` - invalid index number, you should change 0 to a greater number corresponding to the index
+  * `demote 0` - invalid format, you should change 0 to a greater number corresponding to the index
   * `demote 3` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again
   </div>
   </div>
@@ -533,7 +533,7 @@ journey with StaffSync!
 
   <div class="box" type="tip" seamless>
 
-  **Tip:** It is not possible to edit the contract end date of a potential hire
+  **Tip:** It is not possible to edit the contract end date of a potential hire.
   </div>
 
 <br>
@@ -541,7 +541,7 @@ journey with StaffSync!
 **Examples:**
 
   *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-  *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+  *  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
   </div>
 </details>
 
@@ -573,30 +573,30 @@ journey with StaffSync!
 
   **Parameters:**
 
-  `NAME`: Contains only alphanumeric characters and spaces, and it should not be blank
+  `NAME`: Contains only alphanumeric characters and spaces, and it should not be blank.
 
-  `PHONE_NUMBER`: Contains numbers that are at least 3 digits long
+  `PHONE_NUMBER`: Contains numbers that are at least 3 digits long.
 
-  `EMAIL`: In the format local-part@domain
+  `EMAIL`: In the format local-part@domain.
 
-  `ADDRESS`: Takes any values, and it should not be blank
+  `ADDRESS`: Takes any values, and it should not be blank.
 
-  `DEPARTMENT`: Takes any values, and it should not be blank
+  `DEPARTMENT`: Takes any values, and it should not be blank.
 
-  `ROLE`: Takes any values, and it should not be blank
+  `ROLE`: Takes any values, and it should not be blank.
 
-  `CONTRACT_END_DATE`: In the format of yyyy-MM-dd
+  `CONTRACT_END_DATE`: In the format of yyyy-MM-dd.
 
   <div class="box" type="tip" seamless>
 
-  **Tip:** All fields are mandatory
+  **Tip:** All fields are mandatory.
   </div>
 
 <br>
 
 **Examples:**
 
-  * `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
+  * `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01`
   </div>
 </details>
 
@@ -686,10 +686,10 @@ journey with StaffSync!
 
 **Examples:**
 
-  * `find all n/John p/12345678` returns persons with `John` in their name, and with phone number `12345678`
+  * `find all n/John p/12345678` returns persons with `John` in their name, and with phone number `12345678`.
   * `find e p/12345678 e/john@example.com alice@example.com` returns employees with phone number `12345678` and with
-  email either `john@example.com` or `alice@example.com`
-  * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`
+  email either `john@example.com` or `alice@example.com`.
+  * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`.
 
   <br>
 
@@ -705,9 +705,9 @@ journey with StaffSync!
   <div class="box box-mistake" type="warning" seamless>
 
   **Common Mistakes:**
-  * `find a n/John` - invalid parameter, you might want to use `e`, `ph` or `all` instead of `a`
-  * `find all a/John` - invalid keyword prefix, you might want to use `n/`, `p/`, `e/` , `d/` or `r/` instead of `a/`
-  * `find all n/John n/John` - duplicate keyword prefix, you can remove either one of the `n/John`
+  * `find a n/John` - invalid format, you might want to use `e`, `ph` or `all` instead of `a`.
+  * `find all a/John` - invalid keyword prefix, you might want to use `n/`, `p/`, `e/` , `d/` or `r/` instead of `a/`.
+  * `find all n/John n/John` - duplicate keyword prefix, you can remove either one of the `n/John`.
   </div>
 
   </div>
@@ -725,7 +725,7 @@ journey with StaffSync!
   </summary>
 
   <div class="command-content">
-  Displays a help window containing the list of commands, its purpose and the format
+  Displays a help window containing the list of commands, its purpose and the format.
 
   <br>
   <br>
@@ -762,7 +762,7 @@ journey with StaffSync!
 
   <div class="box box-info">
 
-  **Format**: `list KEYWORD`
+  **Format**: `list PARAMETER`
   </div>
   <br>
 
@@ -772,7 +772,7 @@ journey with StaffSync!
 
 **Parameters:**
 
-  `KEYWORD`:
+  `PARAMETER`:
   * `all` for all persons.
   * `ph` for potential hires.
   * `e` for employees.
@@ -814,28 +814,28 @@ journey with StaffSync!
 
   **Parameters:**
 
-  `NAME`: Contains only alphanumeric characters and spaces, and it should not be blank
+  `NAME`: Contains only alphanumeric characters and spaces, and it should not be blank.
 
-  `PHONE_NUMBER`: Contains numbers that are at least 3 digits long
+  `PHONE_NUMBER`: Contains numbers that are at least 3 digits long.
 
-  `EMAIL`: In the format local-part@domain
+  `EMAIL`: In the format local-part@domain.
 
-  `ADDRESS`: Takes any values, and it should not be blank
+  `ADDRESS`: Takes any values, and it should not be blank.
 
-  `DEPARTMENT`: Takes any values, and it should not be blank
+  `DEPARTMENT`: Takes any values, and it should not be blank.
 
-  `ROLE`: Takes any values, and it should not be blank
+  `ROLE`: Takes any values, and it should not be blank.
 
   <div class="box" type="tip" seamless>
 
-  **Tip:** All fields are mandatory
+  **Tip:** All fields are mandatory.
   </div>
 
 <br>
 
 **Examples:**
 
-  * `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+  * `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and informatics`
   </div>
 </details>
 
@@ -884,11 +884,11 @@ journey with StaffSync!
   <div class="box box-mistake" type="warning" seamless>
 
   **Common Mistakes:**
-  * `promote 2 12-20-2025` - the contract end date is in the wrong date format, you can enter `2025-12-20` to represent 20 Dec 2025 instead of `12-20-2025`
-  * `promote 2 2025-20-12` - the day and the month of the contract end date is swapped, you can enter `2025-12-20` to represent 20 Dec 2025 instead of `2025-20-12`
-  * `list e` followed by `promote 2 2025-12-20` - cannot promote an employee, you can use `list ph` instead of `list e` to get the list of potential hires
-  * `promote 0 2025-12-20` - invalid index number, you should change 0 to a greater number corresponding to the index
-  * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again
+  * `promote 2 12-20-2025` - the contract end date is in the wrong date format, you can enter `2025-12-20` to represent 20 Dec 2025 instead of `12-20-2025`.
+  * `promote 2 2025-20-12` - the day and the month of the contract end date is swapped, you can enter `2025-12-20` to represent 20 Dec 2025 instead of `2025-20-12`.
+  * `list e` followed by `promote 2 2025-12-20` - cannot promote an employee, you can use `list ph` instead of `list e` to get the list of potential hires.
+  * `promote 0 2025-12-20` - invalid format, you should change 0 to a greater number corresponding to the index.
+  * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again.
   </div>
   </div>
 </details>
@@ -918,7 +918,7 @@ journey with StaffSync!
 
   <br>
 
-  Sorts the list by the given parameter in the given order.
+  Sorts the list by the given field in the given order.
 
 <br>
 
@@ -975,14 +975,14 @@ Action     | Format                                                             
 **Delete** | `delete e INDEX` <br> `delete ph INDEX`                                                       | `delete e 3`<br> `delete ph 1`
 **Demote** | `demote INDEX`                                                                                | `demote 2`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT] [r/ROLE] [ced/CONTRACT_END_DATE]` | `edit 2 n/James Lee e/jameslee@example.com`
-**Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
+**Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01`
 **Exit**   | `exit`                                                                                        |
 **Find**   | `find (e/ph/all) [n/NAMES] [p/PHONE_NUMBERS] [e/EMAILS] [d/DEPARTMENTS] [r/ROLES]`            | `find e n/Jake e/jake@example.com` <br> `find ph n/Don p/97651234` <br> `find all n/James d/IT r/SWE`
 **Help**   | `help`                                                                                        |
 **List**   | `list all` <br> `list e` <br> `list ph`                                                       |
-**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and informatics`
 **Promote** | `promote INDEX CONTRACT_END_DATE`                                                            | `promote 2 2025-12-20`
-**Sort**   | `sort name [ORDER]` <br> `sort date [ORDER]` <br> `sort dept [ORDER]` <br> `sort role [ORDER]`| `sort name` <br> `sort date asc` <br> `sort dept desc`
+**Sort**   | `sort (name/date/dept/role) [asc/desc]` | `sort name` <br> `sort date asc` <br> `sort dept desc`
 
 
 </div>
@@ -1011,8 +1011,11 @@ StaffSync data are saved in the hard disk automatically after any command that c
 <div class="box box-mistake" type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the StaffSync to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+
+<br>
+
+Furthermore, certain edits can cause the StaffSync to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 </div>

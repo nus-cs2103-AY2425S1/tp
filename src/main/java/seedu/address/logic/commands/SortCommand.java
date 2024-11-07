@@ -17,7 +17,7 @@ public abstract class SortCommand extends Command {
 
     public static final String MESSAGE_PURPOSE = "Sorts the contents of StaffSync.";
 
-    public static final String MESSAGE_FORMAT = COMMAND_WORD + " FIELD (name/date/dept/role) [ORDER (asc/desc)]";
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " (name/date/dept/role) [asc/desc]";
 
     public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " name asc";
 
