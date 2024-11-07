@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -36,13 +37,20 @@ public class DeleteTransactionCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        if (!model.getIsViewTransactions()) {
+            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, COMMAND_WORD));
+        }
+
         if (CURRENT_PERSON.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person selected = lastShownList.get(CURRENT_PERSON.getZeroBased());
-        List<Transaction> transactions = selected.getTransactions();
+        List<Transaction> transactions = new ArrayList<>(model.getFilteredTransactionList());
 
+        if (transactions.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_TRANSACTION_LIST);
+        }
         if (index.getZeroBased() >= transactions.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
         }
@@ -50,6 +58,7 @@ public class DeleteTransactionCommand extends Command {
         Transaction transactionToRemove = transactions.get(index.getZeroBased());
         transactions.remove(index.getZeroBased());
         selected.updateBalance(transactionToRemove.getAmount() * -1);
+        selected.removeTransaction(transactionToRemove);
         model.updateTransactionList(transactions);
 
         return new CommandResult(String.format(MESSAGE_DELETE_TRANSACTION_SUCCESS, Messages.format(transactionToRemove),

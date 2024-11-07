@@ -132,7 +132,8 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-        setViewTransactions(false);
+        updateTransactionList(List.of());
+        setIsViewTransactions(false);
     }
 
     //=========== Transaction =============================================================
@@ -153,17 +154,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setViewTransactions(boolean viewTransactions) {
+    public void setIsViewTransactions(boolean viewTransactions) {
         this.isViewTransactions = viewTransactions;
     }
 
     @Override
-    public boolean getViewTransactions() {
+    public boolean getIsViewTransactions() {
         return this.isViewTransactions;
     }
     @Override
     public void updateTransactionList(List<Transaction> transactions) {
         this.filteredTransactions = new FilteredList<>(FXCollections.observableList(transactions));
+        setIsViewTransactions(true);
     }
     @Override
     public boolean equals(Object other) {

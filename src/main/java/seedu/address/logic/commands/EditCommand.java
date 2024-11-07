@@ -28,6 +28,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Transaction;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -73,7 +74,16 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getIsViewTransactions()) {
+            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, COMMAND_WORD));
+        }
+
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, COMMAND_WORD));
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -104,8 +114,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        List<Transaction> transactions = personToEdit.getTransactions();
 
-        return new Person(updatedName, updatedCompany, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedCompany, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                transactions);
     }
 
     @Override

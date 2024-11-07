@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -21,6 +23,7 @@ public class ArgumentMultimap {
 
     /** Prefixes mapped to their respective arguments**/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
+    private final Logger logger = LogsCenter.getLogger(ArgumentMultimap.class);
 
     /**
      * Associates the specified argument value with {@code prefix} key in this map.
@@ -72,7 +75,15 @@ public class ArgumentMultimap {
                 .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
+            logger.fine("ParseException caused by duplicate prefixes.");
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    /**
+     * Returns true if all prefixes are present in the ArgumentMultimap.
+     */
+    public boolean arePrefixesPresent(Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(argMultimap::containsKey);
     }
 }

@@ -174,12 +174,12 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void setViewTransactions(boolean isViewTransaction) {
+        public void setIsViewTransactions(boolean isViewTransaction) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean getViewTransactions() {
+        public boolean getIsViewTransactions() {
             throw new AssertionError("This method should not be called.");
         }
     }

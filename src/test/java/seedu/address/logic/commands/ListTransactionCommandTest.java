@@ -2,32 +2,65 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showEmptyPersonList;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ListTransactionCommandTest {
-    private Model model;
-    private Model expectedModel;
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
     @Test
     public void execute_listAllTransactions_success() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListTransactionCommand(INDEX_FIRST_PERSON), model,
+        showPersonAtIndex(expectedModel, INDEX_SECOND_PERSON);
+        expectedModel.updateTransactionList(BENSON.getTransactions());
+        assertCommandSuccess(new ListTransactionCommand(INDEX_SECOND_PERSON), model,
                 String.format(ListTransactionCommand.MESSAGE_SUCCESS,
-                        Messages.format(expectedModel.getFilteredPersonList().get(0))),
+                        1,
+                        Messages.format(BENSON)),
                 expectedModel);
+    }
+
+    @Test
+    public void execute_emptyList_throwCommandException() {
+        showEmptyPersonList(model);
+
+        Index outOfBoundIndex = INDEX_FIRST_PERSON;
+
+        ListTransactionCommand listTransactionCommand = new ListTransactionCommand(outOfBoundIndex);
+
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, "listt");
+
+        assertCommandFailure(listTransactionCommand, model, expectedMessage);
+
+    }
+
+    @Test
+    public void execute_listTransactionsInvalidIndex_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        ListTransactionCommand command = new ListTransactionCommand(outOfBoundIndex);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_transactionListView_throwsCommandException() {
+        ListTransactionCommand command = new ListTransactionCommand(INDEX_FIRST_PERSON);
+        model.setIsViewTransactions(true);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "listt");
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test

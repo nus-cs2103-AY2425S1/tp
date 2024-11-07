@@ -41,14 +41,14 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -104,12 +104,14 @@ public class PersonTest {
     public void updateBalance() {
         // update balance by adding
         Person person1 = new PersonBuilder().build();
+        double initialBalance1 = person1.getBalance();
         person1.updateBalance(20);
-        assertEquals(20, person1.getBalance());
+        assertEquals(initialBalance1 + 20, person1.getBalance());
 
         // update balance by deducting
         Person person2 = new PersonBuilder().build();
+        double initialBalance2 = person2.getBalance();
         person2.updateBalance(-20);
-        assertEquals(-20, person2.getBalance());
+        assertEquals(initialBalance2 - 20, person2.getBalance());
     }
 }

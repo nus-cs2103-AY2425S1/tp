@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
@@ -26,9 +28,11 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final Transaction DEFAULT_TRANSACTION_1 = new Transaction(
-            "Buy raw materials", -100, "ABC Company", "10/10/2023");
+            "Buy raw materials", -100, "ABC Company",
+            LocalDate.parse("2024-10-10", DateTimeUtil.DEFAULT_DATE_PARSER));
     public static final Transaction DEFAULT_TRANSACTION_2 = new Transaction(
-            "Invest", -1000, "Nice Company", "!st August 2024");
+            "Invest", -1000, "Nice Company",
+            LocalDate.parse("2024-08-01", DateTimeUtil.DEFAULT_DATE_PARSER));
 
     private Name name;
     private Company company;
@@ -49,6 +53,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         transactions = new ArrayList<>();
+        transactions.add(DEFAULT_TRANSACTION_1);
     }
 
     /**
@@ -116,7 +121,7 @@ public class PersonBuilder {
      * Sets the {@code Transaction} of the {@code Person} that we are building.
      */
     public PersonBuilder withTransactions(Transaction ... transactions) {
-        this.transactions.addAll(List.of(transactions));
+        this.transactions = SampleDataUtil.getTransactionList(transactions);
         return this;
     }
 

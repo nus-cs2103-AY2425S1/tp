@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.lang.Math.abs;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -60,11 +62,13 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        String paddedBalance = String.format("%.2f", abs(person.getBalance()));
         if (person.getBalance() < 0) {
-            balance.setText("Balance: -$" + person.getBalance() * -1);
+            balance.setText("Balance: -$" + paddedBalance);
             balance.setStyle("-fx-background-color: red");
         } else {
-            balance.setText("Balance: $" + person.getBalance());
+            balance.setText("Balance: $" + paddedBalance);
             balance.setStyle("-fx-background-color: green");
         }
     }

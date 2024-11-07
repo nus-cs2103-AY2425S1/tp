@@ -94,6 +94,6 @@ public class LogicManager implements Logic {
 
     @Override
     public boolean isViewTransactions() {
-        return model.getViewTransactions();
+        return model.getIsViewTransactions();
     }
 }

@@ -107,12 +107,12 @@ public interface Model {
     /**
      * Specifies if transaction view or person view is used.
      */
-    void setViewTransactions(boolean newValue);
+    void setIsViewTransactions(boolean newValue);
 
     /**
      * Determines if transaction view or person view is used.
      */
-    boolean getViewTransactions();
+    boolean getIsViewTransactions();
 
     /**
      * Updates the transaction list to contain the specified transactions.

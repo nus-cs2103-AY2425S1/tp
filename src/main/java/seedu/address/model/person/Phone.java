@@ -9,10 +9,22 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should be in the format: (+XXX) 123 456 789 [notes]\n"
+                    + "where:\n"
+                    + "- Country code (+XXX) is optional and X must be 1-3 digits\n"
+                    + "- Main phone number must contain only digits with optional single spaces between numbers\n"
+                    + "- [notes] is optional and must be maximum 10 characters";
+
+    // Regex breakdown:
+    // ^                        - Start of string
+    // (?:\(\+\d{1,3}\)\s)?    - Optional country code in format (+X) to (+XXX)
+    // \d+(?:\s\d+)*           - Main phone number with optional single spaces between digits
+    // (?:\s\[.{1,10}\])?      - Optional notes in [] with max 10 chars
+    // $                        - End of string
+    public static final String VALIDATION_REGEX =
+            "^(?:\\(\\+\\d{1,3}\\)\\s)?\\d+(?:\\s\\d+)*(?:\\s\\[.{1,10}\\])?$";
+
     public final String value;
 
     /**
@@ -57,5 +69,4 @@ public class Phone {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

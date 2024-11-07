@@ -14,11 +14,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -84,12 +86,14 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION = "buy raw materials";
     public static final int VALID_AMOUNT = -100;
     public static final String VALID_OTHER_PARTY = "Company ABC";
-    public static final String VALID_DATE = "15-10-2024";
+    public static final LocalDate VALID_DATE = LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER);
 
     public static final String VALID_DESCRIPTION_INPUT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION;
+    public static final String INVALID_AMOUNT_INPUT = " " + PREFIX_AMOUNT + "100.001";
     public static final String VALID_AMOUNT_INPUT = " " + PREFIX_AMOUNT + VALID_AMOUNT;
     public static final String VALID_OTHER_PARTY_INPUT = " " + PREFIX_OTHER_PARTY + VALID_OTHER_PARTY;
     public static final String VALID_DATE_INPUT = " " + PREFIX_DATE + VALID_DATE;
+    public static final String INVALID_DATE_INPUT = " " + PREFIX_DATE + "22-10-2024"; // incorrect date format
 
 
     /**
@@ -147,5 +151,14 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
+
+    /**
+     * Updates {@code model}'s filtered list to empty person list in the {@code model}'s address book.
+     */
+    public static void showEmptyPersonList(Model model) {
+        model.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList("PREDICATE_ALWAYS_FALSE")));
+        assertEquals(0, model.getFilteredPersonList().size());
+    }
+
 
 }

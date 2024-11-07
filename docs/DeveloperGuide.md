@@ -158,6 +158,17 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Transaction `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
+
+#### Implementation
+
+The add transaction mechanism is facilitated by the creation of a new `Person` with the updated transaction list, 
+followed by replacing the target `Person` in the Model with the newly created person by calling `Model#setPerson(Person, Person))`.
+
+The following sequence diagram shows an example execution of command `addt 1 ...`.
+
+<puml src="diagrams/AddTransactionSequenceDiagram.puml" width="550" />
+
 ### List Transactions `listt INDEX`
 
 #### Implementation

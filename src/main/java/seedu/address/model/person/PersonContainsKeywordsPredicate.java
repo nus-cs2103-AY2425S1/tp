@@ -22,7 +22,9 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
                         || StringUtil.containsWordIgnoreCase(person.getCompany().value, keyword));
     }
-
+    public String getKeywordsAsString() {
+        return keywords.toString();
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

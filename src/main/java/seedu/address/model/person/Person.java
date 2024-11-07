@@ -29,7 +29,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     private final List<Transaction> transactions;
-    private int balance;
+    private double balance;
 
     /**
      * Every field must be present and not null.
@@ -57,8 +57,8 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.transactions = transactions;
-        this.balance = transactions.stream().map(Transaction::getAmount).reduce(0, Integer::sum);
+        this.transactions = new ArrayList<>(transactions);
+        this.balance = transactions.stream().map(Transaction::getAmount).reduce(0.0, Double::sum);
     }
 
     public Name getName() {
@@ -93,7 +93,11 @@ public class Person {
         return transactions;
     }
 
-    public int getBalance() {
+    public void removeTransaction(Transaction transaction) {
+        this.transactions.remove(transaction);
+    }
+
+    public double getBalance() {
         return balance;
     }
 
@@ -102,7 +106,7 @@ public class Person {
      *
      * @param amount the amount the balance is supposed to change by.
      */
-    public void updateBalance(int amount) {
+    public void updateBalance(double amount) {
         balance += amount;
     }
 

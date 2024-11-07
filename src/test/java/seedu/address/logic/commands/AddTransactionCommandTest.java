@@ -4,26 +4,38 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showEmptyPersonList;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Transaction;
+import seedu.address.model.person.TransactionDateComparator;
 
 public class AddTransactionCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void constructor_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTransactionCommand(INDEX_FIRST_PERSON, null));
+    }
+
 
     @Test
     public void execute_filteredList_success() {
@@ -32,11 +44,13 @@ public class AddTransactionCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
 
-        List<Transaction> transactions = personToEdit.getTransactions();
+        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
         transactions.add(transactionToAdd);
+        transactions.sort(new TransactionDateComparator());
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
 
@@ -45,6 +59,7 @@ public class AddTransactionCommandTest {
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(addTransactionCommand, model, expectedMessage, expectedModel);
     }
@@ -55,11 +70,13 @@ public class AddTransactionCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
 
-        List<Transaction> transactions = personToEdit.getTransactions();
+        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
         transactions.add(transactionToAdd);
+        transactions.sort(new TransactionDateComparator());
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
 
@@ -72,6 +89,22 @@ public class AddTransactionCommandTest {
         assertCommandSuccess(addTransactionCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_emptyList_throwCommandException() {
+        showEmptyPersonList(model);
+
+        Transaction transactionToAdd = new Transaction("buy raw materials", -100,
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
+
+        Index outOfBoundIndex = INDEX_FIRST_PERSON;
+
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(outOfBoundIndex, transactionToAdd);
+
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, "addt");
+
+        assertCommandFailure(addTransactionCommand, model, expectedMessage);
+
+    }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -79,7 +112,7 @@ public class AddTransactionCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
 
@@ -95,7 +128,7 @@ public class AddTransactionCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
 
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
@@ -104,15 +137,25 @@ public class AddTransactionCommandTest {
         assertCommandFailure(addTransactionCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    @Test
+    public void execute_transactionListView_throwsCommandException() {
+        Transaction transactionToAdd = new Transaction("buy raw materials", -100,
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
+        model.setIsViewTransactions(true);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "addt");
+        assertCommandFailure(addTransactionCommand, model, expectedMessage);
+    }
+
 
     @Test
     public void equals() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         Transaction t1 = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
         Transaction t2 = new Transaction("sell raw materials", 200,
-                "Company XYZ", "16/10/2024");
+                "Company XYZ", LocalDate.parse("2024-10-16", DateTimeUtil.DEFAULT_DATE_PARSER));
 
         AddTransactionCommand addT1Command = new AddTransactionCommand(INDEX_FIRST_PERSON, t1);
         AddTransactionCommand addT2Command = new AddTransactionCommand(INDEX_FIRST_PERSON, t2);
