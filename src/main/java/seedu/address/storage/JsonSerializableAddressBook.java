@@ -80,14 +80,12 @@ class JsonSerializableAddressBook {
         }
 
         // Participation has to be loaded after Students and Tutorials
-        //TODO duplicate participation injects itself first, but duplicates aren't removed
         for (JsonAdaptedParticipation jsonAdaptedParticipation : participations) {
             Participation participation = jsonAdaptedParticipation.toModelType(addressBook);
             if (addressBook.hasParticipation(participation)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PARTICIPATION);
             }
             addressBook.addParticipation(participation);
-            //participation.addSelfToStudentTutorial();
         }
         return addressBook;
     }
