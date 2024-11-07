@@ -214,6 +214,29 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+### Switch Profile Feature
+
+The `switch` command allows users to manage separate profiles within the application, each storing independent data in an isolated session. This feature enables users to work on different datasets without interference, as if each profile represented a unique instance of the application.
+
+#### Implementation
+
+The `switch` command relies on the `Model` component to manage active and inactive profiles. Each profile’s data is stored separately, and they are accessible through the application’s working directory.
+
+When a profile switch is initiated:
+1. **Current Profile Update:** The `Model` adds the current profile to the inactive profiles list.
+2. **Profile Data Swap:** The new profile is set as the active profile, and the `preferences.json` file is updated to reflect this change.
+3. **Persistence Management:** `LogicManager` ensures the data is persisted to the hard disk upon valid command execution or application exit.
+
+> **Note for Developers:** When testing in Gradle, avoid using the stop button, as it may bypass the standard data-saving mechanism. Use the GUI to exit to ensure data integrity.
+
+#### Testing
+
+Consider these test cases for `switch` command validation:
+1. **Basic Profile Switching:** Verify that profiles are swapped correctly and data is isolated per profile.
+2. **Data Persistence on Exit:** Confirm that profile changes are saved on application exit.
+3. **Error Handling:** Test the different error messages that should appear based on the program's state:
+   - **Single Profile Scenario:** If no other profiles are available to be swapped (i.e., only one profile exists), the application should display a help message to guide the user.
+   - **Multiple Profiles Scenario:** If multiple profiles are available, the application should list the available profiles, showing the options that can be switched to.
 
 --------------------------------------------------------------------------------------------------------------------
 
