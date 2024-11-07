@@ -404,6 +404,10 @@ Examples:
 * `find john` <br>
   **Output**: <br>
   One person listed! Key in [list] to view all patients
+* `find ` <br>
+  **Output**: <br>
+  Invalid name entered! Check the name that you want to search id for! <br>
+  Key in [list] to view all patients
 * `find johnny` <br>
   **Output**: <br>
   Two persons listed that suits your keyword! <br>
