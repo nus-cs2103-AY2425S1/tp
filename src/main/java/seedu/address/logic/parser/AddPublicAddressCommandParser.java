@@ -39,6 +39,13 @@ public class AddPublicAddressCommandParser implements Parser<AddPublicAddressCom
      */
     public AddPublicAddressCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        if (ArgumentTokenizer.containsExtraPrefixes(args, PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS_LABEL,
+                PREFIX_PUBLIC_ADDRESS)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPublicAddressCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS,
                 PREFIX_PUBLIC_ADDRESS_LABEL);
