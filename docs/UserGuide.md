@@ -334,13 +334,13 @@ _Details coming soon ..._
 In our application, the concept of a phone number is defined as:
 
 1. a string without any whitespace,
-2. with at least 3 digits,
+2. with at least 2 digits,
 3. without any alphabet characters,
 4. and may contain additional characters such as but not limited to "+", "-", "(", and ")".
 
 Some valid phone numbers include `+6581234567`, `81234567`, or `+44-1234567`.
 
-Some invalid phone numbers include `+65 81 23 45 67`, or `8123p4567`.
+Some invalid phone numbers include `+6 5 8 1 2 3 4 5 6 7`, or `8123p4567`.
 
 ### `PHONE_NUMBER` field
 
