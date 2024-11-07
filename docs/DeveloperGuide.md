@@ -1337,8 +1337,8 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-* The project required a significant amount of effort and focus to implement the new features. 
-* There were some challenges along the way when we did not know how to implement a specific feature such as filter and sort.<br>
-* It was also quite challenging to add attributes such as exams, submissions, and attendance and representing them in the GUI.
-* While AB3 deals with simple attributes of people, we had some attributes that were more complex and needed to store more data than usual just for a single student.
+* The project required a significant amount of effort and focus to implement the new features.
+* There were some challenges along the way when we did not know how to implement specific features such as filter and sort.
+* It was also quite challenging to add new attributes and represent them as tables in the GUI, such as exams, submissions, and attendance.
+* While AB3 deals with simple attributes of a person, we had to include attributes that were more complex and tailored for our application use and needs, thus requiring us to store more non-trivial data for every student.
 * Some achievements of the project include learning the workflows of having multiple developers work on the same product and managing each other's changes.
