@@ -63,7 +63,7 @@ public class Messages {
         builder.append("; DateOfCreation: ")
                 .append(person.getDateOfCreation().toString())
                 .append(";\nHistory: ").append(person.getHistory());
-        builder.append("\nPropertyList: ")
+        builder.append("PropertyList: ")
                 .append(person.getPropertyList().toString());
         return builder.toString();
     }
