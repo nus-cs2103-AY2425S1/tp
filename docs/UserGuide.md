@@ -180,10 +180,10 @@ Format: `filter [n\NAME] [t\TAG]…​`
 * If no parameters are provided, the full list is displayed.
 
 Examples:
-* filter `n\John` filters and displays all contacts whose names contain "John".
-* filter `t\client` filters and displays all contacts tagged as "client".
-* filter `n\John t\friend t\coworker` filters and displays contacts whose name contains "John" and who are tagged as both "friend" and "coworker".
-* filter `n\Jo n\Al t\worth` filters and displays contacts whose name contains "Jo" or "Al" and tagged as "worth"
+* `filter n\John` filters and displays all contacts whose names contain "John".
+* `filter t\client` filters and displays all contacts tagged as "client".
+* `filter n\John t\friend t\coworker` filters and displays contacts whose name contains "John" and who are tagged as both "friend" and "coworker".
+* `filter n\Jo n\Al t\worth` filters and displays contacts whose name contains "Jo" or "Al" and tagged as "worth"
   ![result for 'filter n/Jo n/Al t/worth](images/UG_Images/filterJoAliWorth.png)
 
 <box type="tip" seamless>
