@@ -121,13 +121,11 @@ class JsonAdaptedPerson {
 
         final Email modelEmail;
         if (email.isEmpty()) {
-            System.out.println("help");
             modelEmail = new Email(new Blank());
         } else {
             if (!Email.isValidEmail(email)) {
                 throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
             }
-            System.out.println("uh oh");
             modelEmail = new Email(email);
         }
 
