@@ -125,7 +125,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `schedule 1 sd/2024-10-24` Command](images/ScheduleSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("sort n/asc"")` API call as an example.
@@ -341,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `BlitzBiz` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a contact**
+**Use case: UC01 - Delete a contact**
 
 **MSS**
 
@@ -364,7 +364,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Add a contact**
+**Use case: UC02 - Restore a contact**
+Preconditions: User has deleted a contact
+
+**MSS**
+
+1. User restores the deleted contact
+2. The contact is restored to BlitzBiz
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The contact has been added back using the add command
+    * 2a1. BlitzBiz shows an error message.
+
+    Use case ends.
+
+**Use case: UC03 - Add a contact**
 
 **MSS**
 
@@ -390,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       *a2. User confirms the cancellation.
       Use case ends.
 
-**Use case: Find contacts by name**
+**Use case: UC04 - Find contacts by name**
 
 **MSS**
 
@@ -413,6 +430,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       4a1. BlitzBiz informs the user that there were no matches found.
       Use case ends.
 
+**Use case: Filter contact list by tag(s)**
+
+**MSS**
+
+1.  User requests filter the contact list by tag(s)
+2.  BlitzBiz requests tag(s) to filter for
+3.  User enters tag(s)
+4.  BlitzBiz displays the filter list of contacts with the given tag(s)
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The entered tag(s) do not follow the correct format.
+    *  3a1. BlitzBiz requests for the correct format.
+       3a2. User enters again in the new format.
+       Steps 3a1-3a2 are repeated until the format entered is correct.
+       Use case resumes from step 4.
+
+* 4a. No contacts with the tag(s) are found
+    * 4a1. BlitzBiz informs the user that there were no matches found.
+      Use case ends.
+
+**Use case: Sort list of contacts**
+
+**MSS**
+
+1.  User requests to sort contact list by name or schedules in ascending or descending order
+2.  BlitzBiz requests for order to sort by and the field to sort by
+3.  User enters field to sort by and order to sort by
+4. BlitzBiz displays the sorted list
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User did not enter order to sort by
+    *  3a1. BlitzBiz will sort by ascending order by default
+
+* 3b. User enter more than one field to sort by
+    * 3b1. BlitzBiz displays error message to inform user
+        that it can only sort by one field
+    * 3a2. User enters again with only one field to sort by
+        Steps 3b1 is repeated until the format entered is correct.
+        Use case resumes from step 4.
+  
+**Use case: Search for contacts by schedules**
+
+**MSS**
+
+1.  User requests to search the contact list for contacts within a range of schedules
+2.  BlitzBiz requests for start and end time to search
+3.  User enters start and end time
+4.  BlitzBiz displays the searched list of contacts with schedules within the start and end time
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User only entered start time but not end time
+    *  3a1. BlitzBiz searches for schedules that starts later than the given start time
+
+* 3b. User only entered end time
+    *  3b1. BlitzBiz searches for schedules that ends before the end time
+
+* 3c. User enters an end time before start time
+    * 3c1. BlitzBiz displays error message to inform user
+        that end time provided must be after start time
+    * 3c2. User enters again with a later end time than start time
+      Step 3c1 is repeated until end time is later than start time.
+      Use case resumes from step 4.
+
+* 4a. No contacts with schedules in the given range are found
+    * 4a1. BlitzBiz informs the user that there were no matches found.
+      Use case ends.
 *{More to be added}*
 
 ### Non-Functional Requirements
