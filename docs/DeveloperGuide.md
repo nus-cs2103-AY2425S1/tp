@@ -183,13 +183,16 @@ When executed, this command parses user input and creates an internal representa
 
 #### Sequence Diagram
 
-When `addAppt` command is keyed in by the user, this is the sequence of calls that occurs:
+When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmnetName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
 
 ![AddApptCommandSequence](images/AddApptCommandSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+{: .alert .alert-info}
+:information_source: **Note:** The lifeline for `AddApptCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 [Back to Table of Contents](#table-of-contents)
+### \[Proposed\] Undo/redo feature
+
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:

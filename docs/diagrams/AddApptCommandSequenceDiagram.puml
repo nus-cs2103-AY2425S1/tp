@@ -5,14 +5,13 @@ skinparam ArrowFontStyle plain
 Actor user as user USER_COLOR
 
 box Logic LOGIC_COLOR_T1
-participant "LogicManager" as Logic LOGIC_COLOR
-participant "AddApptCommand" as AddApptCommand LOGIC_COLOR
-participant "CommandResult" as CommandResult LOGIC_COLOR
+participant ":LogicManager" as Logic LOGIC_COLOR
+participant ":AddApptCommand" as AddApptCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "Model" as Model MODEL_COLOR
-participant "AddressBook" as AddressBook MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
 participant "appt:Appointment" as Appt MODEL_COLOR
 participant "edited:Person" as Person MODEL_COLOR
 end box
@@ -36,7 +35,7 @@ AddApptCommand -[LOGIC_COLOR]> AddApptCommand : createEditedPerson(target)
 activate AddApptCommand LOGIC_COLOR_T1
 
 create Appt MODEL_COLOR
-AddApptCommand -[LOGIC_COLOR]> Appt : Name, Date, Time
+AddApptCommand -[LOGIC_COLOR]> Appt : name, date, time
 activate Appt MODEL_COLOR
 Appt -[MODEL_COLOR]-> AddApptCommand
 deactivate Appt
@@ -56,6 +55,7 @@ deactivate Model MODEL_COLOR
 AddApptCommand -[LOGIC_COLOR]> Model : update ListView filters
 activate Model MODEL_COLOR
 Model -[UI_COLOR]-> ApptListPanel : Listener triggered
+note left: trigger and update to PersonListView\nhas been omitted but occurs as well
 activate ApptListPanel UI_COLOR
 ApptListPanel -[UI_COLOR]> ApptListPanel : refresh ListView
 ApptListPanel -[UI_COLOR]-> Model
@@ -73,7 +73,9 @@ deactivate CommandResult LOGIC_COLOR
 AddApptCommand -[LOGIC_COLOR]> Logic : r
 deactivate AddApptCommand LOGIC_COLOR
 
-Logic -[LOGIC_COLOR]> user : r
 destroy AddApptCommand
+Logic -[LOGIC_COLOR]> : save addressbook to storage
+]-[STORAGE_COLOR]-> Logic
+Logic -[LOGIC_COLOR]> user : r
 deactivate Logic LOGIC_COLOR
 @enduml
