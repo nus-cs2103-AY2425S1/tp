@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EnrollCommandParser" as EnrollCommandParser LOGIC_COLOR
+participant "e:EnrollCommand" as EnrollCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("enroll 1 tut/math")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("enroll 1 tut/math")
+activate AddressBookParser
+
+create EnrollCommandParser
+AddressBookParser -> EnrollCommandParser
+activate EnrollCommandParser
+
+EnrollCommandParser --> AddressBookParser
+deactivate EnrollCommandParser
+
+AddressBookParser -> EnrollCommandParser : parse("1 tut/math")
+activate EnrollCommandParser
+
+create EnrollCommand
+EnrollCommandParser -> EnrollCommand
+activate EnrollCommand
+
+EnrollCommand --> EnrollCommandParser :
+deactivate EnrollCommand
+
+EnrollCommandParser --> AddressBookParser : e
+deactivate EnrollCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EnrollCommandParser -[hidden]-> AddressBookParser
+destroy EnrollCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EnrollCommand : execute(model)
+activate EnrollCommand
+
+EnrollCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> EnrollCommand
+deactivate Model
+
+EnrollCommand -> Model : getFilteredTutorialList()
+activate Model
+
+Model --> EnrollCommand
+deactivate Model
+
+EnrollCommand -> Model : hasParticipation(...)
+activate Model
+
+Model --> EnrollCommand
+deactivate Model
+
+EnrollCommand -> Model : addParticipation(...)
+activate Model
+
+Model --> EnrollCommand
+deactivate Model
+
+create CommandResult
+EnrollCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EnrollCommand
+deactivate CommandResult
+
+EnrollCommand --> LogicManager : r
+deactivate EnrollCommand
+
+EnrollCommand -[hidden]-> AddressBookParser
+destroy EnrollCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

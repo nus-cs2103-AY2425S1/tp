@@ -106,7 +106,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+<br>
+
+The general interactions within the `Logic` component is shown in the sequence diagram below, taking `execute("delete 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -128,6 +130,12 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+For more information on the interactions of features with the Logic Component, please refer [here](#implementation).
+</div>
+
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -175,16 +183,6 @@ This section describes some noteworthy details on how certain features are imple
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 `Students` are named as `Persons` due to Legacy code.
 </div>
-
----
-
-### Participation Class
-
-Participation is an **association** class used to represent the relationship between a student and a tutorial, as well as his/her attendance, which is stored in a List. Below is a class diagram denoting such a relationship.
-
-<img src="images/ParticipationAsAssociationDiagram.png" width="400" />
-
-When storing data, each Participation object is stored separately from Student and Tutorial. Please refer to the [Storage Feature](#storage-feature) for more information of how the Participation objects are being stored.
 
 ---
 
@@ -287,6 +285,51 @@ predicates to create a `FindCommand` object.
 `participationPredicates` is of type `Predicate<Participation>`
 
 `Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
+
+---
+
+### **Enroll and Unenroll feature**
+
+The implementation of the Enroll and Unenroll feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Enroll feature when the user inputs `enroll 1 tut/math` will be shown below.
+
+![EnrollStudentSequenceDiagram-Logic](images/EnrollStudentSequenceDiagram.png)
+
+
+The main steps for this execution are:
+
+1. The user inputs the command `enroll 1 tut/math` to enroll the student at index 1 into a math tutorial.
+2. **LogicManager** receives the command and calls `parseCommand("enroll 1 tut/math")` on AddressBookParser to interpret the input.
+3. **AddressBookParser** receives the command and identifies that it’s an enrollment command. It calls `parse("1 tut/math")` on EnrollCommandParser to parse the specific details.
+4. **EnrollCommandParser** processes the arguments `("1 tut/math")` and creates an instance of EnrollCommand, which is configured to enroll the specified student in the math tutorial.
+5. **LogicManager** then calls `execute(model)` on the created EnrollCommand to carry out the enrollment operation.
+6. **EnrollCommand** proceeds to retrieve the relevant data from the Model instance, and then adding the student to the math tutorial, by creating a `Participation` object. 
+
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+
+Details of the Participation class are included [below](#participation-class).
+</div>
+
+7. **Command Result:** Once the enrollment is completed, EnrollCommand returns a CommandResult with a message indicating the successful enrollment.
+8. **Return Flow:** The result then flows back through LogicManager.
+
+<br>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Unenroll feature is similar to that of the example given above, but instead of `addParticipation(...)` method of the Model Component being called, `deleteParticipation(...)` is called.
+
+</div>
+
+<br>
+
+#### **Participation Class**
+`Participation` is an **association** class used to represent the relationship between a student and a tutorial, as well as his/her attendance, which is stored in a List. Below is a class diagram denoting such a relationship.
+
+<img src="images/ParticipationAsAssociationDiagram.png" width="400" />
+
+When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
+
 
 ---
 
