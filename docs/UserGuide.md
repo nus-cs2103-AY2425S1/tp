@@ -149,6 +149,7 @@ Before continuing, here are some important information you need to know about th
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                     |
 | **Help**     | `help`                                                                                                                                                                        |
 | **List**     | `list`                                                                                                                                                                        |
+| **Reopen**   | `reopen INDEX`                                                                                                                                                                    |
 | **View**     | `view INDEX`                                                                                                                                                                  |
 | **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                        |
 | **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                               |
@@ -193,6 +194,8 @@ Before diving into our features, do note that we set some specifications for nam
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* To use the `reopen` command, the company at the `Index` provided mus have status `CLOSED`, which will subsequently become `Interested`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -422,6 +425,14 @@ The index refers to the index number shown in the displayed company list. The in
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
+### Reopening company: `reopen`
+
+Changes the status of a company from `CLOSED` to `INTERESTED`
+
+Format: `reopen INDEX`
+* The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+* The company at the provided index **must have status** `CLOSED`.
 
 ### Exiting the program : `exit`
 
