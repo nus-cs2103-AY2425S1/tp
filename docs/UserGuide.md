@@ -120,7 +120,7 @@ Assigns vendors to events.
 #### Format: `assign INDEX`
 
 * Assigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
-  * The index refers to the index number shown in the vendor/event list.
+  * The index refers to the index number shown in the assignable vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
 * The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
 * If the specified vendor-event pair are already associated (assigned to each other), the operation will fail.
@@ -128,6 +128,22 @@ Assigns vendors to events.
 #### Examples:
 * `view v/2` then `assign 1` will assign the 1st event to the current viewed vendor, which is the 2nd vendor.
 * `view e/1` then `assign 3` will assign the 3rd vendor to the current viewed event, which is the 1st event.
+
+### Unassigning Vendors & Events: `unassign`
+
+Unassigns vendors to events.
+
+#### Format: `unassign INDEX`
+
+* Unassigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
+  * The index refers to the index number shown in the assigned vendor/event list.
+  * The index **must be a positive integer** 1, 2, 3, ...
+* The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
+* If the specified vendor-event pair are not already associated (not assigned to each other), the operation will fail.
+
+#### Examples:
+* `view v/2` then `unassign 1` will unassign the 1st event from the current viewed vendor, which is the 2nd vendor.
+* `view e/1` then `unassign 3` will unassign the 3rd vendor from the current viewed event, which is the 1st event.
 
 ### Locating persons by name: `find`
 
