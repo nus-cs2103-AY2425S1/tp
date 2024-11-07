@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static spleetwaise.transaction.model.transaction.Status.DONE_STATUS;
 import static spleetwaise.transaction.model.transaction.Status.NOT_DONE_STATUS;
 
 import java.util.HashSet;
@@ -65,6 +66,14 @@ public class TransactionTest {
 
         assertEquals(txn1, txn2);
         assertEquals(txn1, txn1);
+
+        Set<Category> testCategories2 = new HashSet<>(List.of(new Category("EXTRA")));
+        txn2 = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories2, testStatus);
+        assertEquals(txn1, txn2);
+
+        Status oppositeTestStatus = new Status(DONE_STATUS);
+        txn2 = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories, oppositeTestStatus);
+        assertEquals(txn1, txn2);
     }
 
     @Test
@@ -87,10 +96,6 @@ public class TransactionTest {
 
         Date testDate2 = new Date("02012024");
         txn2 = new Transaction(testPerson, testAmount, testDescription, testDate2, testCategories, testStatus);
-        assertNotEquals(txn1, txn2);
-
-        Set<Category> testCategories2 = new HashSet<>(List.of(new Category("EXTRA")));
-        txn2 = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories2, testStatus);
         assertNotEquals(txn1, txn2);
 
         assertNotEquals(null, txn1);
