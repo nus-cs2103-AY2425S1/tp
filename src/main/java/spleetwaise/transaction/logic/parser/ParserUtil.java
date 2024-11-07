@@ -26,7 +26,8 @@ import spleetwaise.transaction.model.transaction.Status;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil extends BaseParserUtil {
-    public static final String MESSAGE_PHONE_NUMBER_IS_UNKNOWN = "Phone number is unknown.";
+    public static final String MESSAGE_PHONE_NUMBER_IS_UNKNOWN = "No matching phone number found. Please check if the "
+            + "contact exists in your address book.";
 
     /**
      * Parses a {@code String amount} into a {@code Amount}. Leading and trailing whitespaces will be trimmed.
