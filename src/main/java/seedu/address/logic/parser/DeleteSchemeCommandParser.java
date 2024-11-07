@@ -27,7 +27,8 @@ public class DeleteSchemeCommandParser implements Parser<DeleteSchemeCommand> {
         try {
             personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSchemeCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteSchemeCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(CliSyntax.PREFIX_INDEX).isEmpty()) {
