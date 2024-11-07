@@ -12,11 +12,12 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names can only contain alphanumeric characters, spaces, "
-                    + "and one of the following symbols: hyphen, comma, and apostrophe.\n"
+                    + "and one of the following symbols: hyphen, comma, and apostrophe, where commas should be "
+                    + "followed with a space.\n"
                     + "Names should have alphanumeric characters before and after the symbol, "
-                    + "and it should not be blank. "
-                    + "Relationship indicator preceded \"S/O\" or \"D/O\" can be included, but must be followed "
-                    + "with the name of person with stated relationship.";
+                    + "and it should not be blank.\n"
+                    + "Relationship indicator using \"S/O\" or \"D/O\" can be included but should be wrapped "
+                    + "with spaces, and followed with the name of the person with stated relationship.";
 
     /*
      * The first character of a name must not be a whitespace,
