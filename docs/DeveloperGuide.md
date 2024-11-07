@@ -11,6 +11,7 @@ title: Developer Guide
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Multiple areas of the code were completed with the help of generative AI including ChatGPT, Codeium and ClaudeAI.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -270,9 +271,6 @@ for the execution of `appointment-list` command.
 
 ![ListAppointmentSequenceDiagram](images/ListAppointmentSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
 
 #### Details
 
@@ -661,13 +659,13 @@ and does not accept duplicate names, so there will never be a case where more th
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+1. Saving window preferences.
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -700,35 +698,50 @@ and does not accept duplicate names, so there will never be a case where more th
        **Expected**: The contact named John Doe is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. **Test case**: `delete John Doe`<br>
-       **Expected**: No person is deleted. Error details shown in the status message.
+       **Expected**: No contact is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `delete`, `delete XXX`, `...` (where XXX is not a name in the address book)<br>
        **Expected**: Similar to previous.
 
+### Editing a person
 
-### Locating Persons
+1. Editing a person's information while all clients are being shown.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    1. **Test case**: `edit John Doe p/91234567`<br>
+       **Expected**: The contact named john doe has his/her phone number changed to `91234567`. Details of the edited contact is shown in the status message.
+
+    1. **Test case**: `edit John Doe n/John Doo`<br>
+       **Expected**: The contact named john doe has his/her name changed to john doo. Details of the edited contact is shown in the status message.
+
+    1. **Test case**: `edit John Doo`<br>
+       **Expected**: No contact is edited. Error details shown in the status message.
+
+
+### Locating persons
 
 1. Locating a person by name while all clients are being shown.
 
-    1. **Prerequisites**: Ensure at least one contact with the name "john doe" exists in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 
-    2. **Test case**: `find John`<br>**Expected**: All contacts with names containing "john" (case-insensitive) should appear in the results, e.g., "john doe." The search should be able to display "john" and "john doe" regardless of casing.
+    2. **Test case**: `find John`<br>**Expected**: All contacts with names containing "john" (case-insensitive) should appear in the results, e.g., "john doe." The search should be able to display "john" and "john doe" regardless of casing. Total number of the matched contacts is shown in the status message.
 
-    3. **Test case**: `find alex david`<br>**Expected**: Contacts containing "alex" or "david" in any order should appear in the results, e.g., "alex yeoh" and "david li." The results should display all contacts that match at least one keyword in a case-insensitive manner.
+    3. **Test case**: `find alex david`<br>**Expected**: Contacts containing "alex" or "david" in any order should appear in the results, e.g., "alex yeoh" and "david li." The results should display all contacts that match at least one keyword in a case-insensitive manner. Total number of the matched contacts is shown in the status message.
 
-    4. **Test case**: `find Han`<br>**Expected**: No contact is shown in the results if only partial matches exist, such as "hans," since the system only matches full words.
+    4. **Test case**: `find Han`<br>**Expected**: No contact is shown in the results if no client's name contains "han". Error details shown in the status message.
 
 2. Locating a person by phone number while all clients are being shown.
 
-    1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "john doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches.
+    1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "john doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches. Total number of the matched contacts is shown in the status message.
 
-### Viewing a Person
+### Viewing a person
 
 1. Viewing a person’s details in the address book.
 
-    1. **Prerequisites**: Ensure that the contact with the exact name exists in PhysioPal. And that he or she has a scheduled appointment. If not, add the required contact or appointment using a command similar to:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` and `schedule John Doe d/2024-10-29 1200 note/First Appointment` respectively
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. And that he or she has a scheduled appointment. If not, add the required contact or appointment using a command similar to:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` and `schedule John Doe d/2024-10-29 1200 note/First Appointment` respectively
 
-    2. **Test case**: `view John Doe`<br>**Expected**: A pop-up window should display the full details for john doe, including:
+    1. **Test case**: `view John Doe`<br>**Expected**: A pop-up window should display the full details for john doe, including:
         - Name
         - Phone Number
         - Email
@@ -737,15 +750,9 @@ and does not accept duplicate names, so there will never be a case where more th
         - Schedule
         - Reminder Note
 
-    3. **Test case**: `view Betsy Crowe`<br>**Expected**: A pop-up window displays betsy crowe’s details with all specified fields shown.
+    1. **Test case**: `view John`<br>**Expected**: No window will pop up. Error details shown in the status message.
 
-    4. **Test case**: `view John`<br>**Expected**: An error message appears, as the name entered does not match the full name exactly.
-
-    5. **Test case**: `view Nonexistent Name`<br>**Expected**: An error message appears indicating that no matching contact is found.
-   
-    1. **Test case**: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>**Expected**: No contact is updated with the corresponding appointment. Error details shown in the status message.
-
-    1. **Test case**: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>**Expected**: Similar to previous.
+    1. **Test case**: `view Nonexistent Name`<br>**Expected**: No window will pop up. Error details shown in the status message.
 
 ### Scheduling an appointment
 
@@ -763,11 +770,13 @@ and does not accept duplicate names, so there will never be a case where more th
 
 1. Deleting an appointment for a client while all clients are being shown.
 
-    1. **Prerequisites**: Name john doe should exist in the contact list. At least **one** appointment should exist for the client john doe. If not, run the appropriate command to schedule an appointment for john doe.<br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    
+        At least **one** appointment should exist for the client john doe. If not, run the appropriate command to schedule an appointment for john doe.<br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>
 
     1. **Test case**: `appointment-delete John Doe d/2024-10-29 1200`<br>**Expected**: Contact named john doe will be updated without the appointment on Oct 29 2024, 12:00 pm. Success message of the appointment deletion shown in the status message.
 
-    1. **Test case**: `appointment-delete John Doe d/2024-10-29 1200`<br>**Expected**: No contact is updated. Error details shown in the status message.
+    1. **Test case**: `appointment-delete John Doe d/2024-10-29 1300`<br>**Expected**: No contact is updated. Error details shown in the status message.
 
     1. **Test case**: `appointment-delete John Doe d/2024-10-29 1800`<br>**Expected**: Similar to previous.
 
@@ -777,7 +786,7 @@ and does not accept duplicate names, so there will never be a case where more th
 
     1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
         
-        At **least one** appointment must be scheduled for john doe. If not, run the appropriate command to add an appointment for john doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
+        At least **one** appointment must be scheduled for john doe. If not, run the appropriate command to add an appointment for john doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
 
     1. **Test case**: `reminder John Doe r/1 hour`<br>**Expected**: Contact name john doe will be updated with a reminder note of 1 hour before Oct 29 2024, 12:00pm
 
@@ -789,7 +798,7 @@ and does not accept duplicate names, so there will never be a case where more th
 
 1. Deleting a reminder note for a client while all clients are being shown.
 
-    1. **Prerequisites**: Name john doe should exist in the contact list. A reminder note should be set for the client john doe. If not, run the appropriate command to set a reminder note for john doe.<br>`reminder John Doe r/1 day`<br>
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. A reminder note should be set for the client john doe. If not, run the appropriate command to set a reminder note for john doe.<br>`reminder John Doe r/1 day`<br>
 
     1. **Test case**: `reminder-delete John Doe`<br>**Expected**: Contact named john doe will be updated without the reminder note. Success message of the reminder note deletion shown in the status message.
 
@@ -797,51 +806,63 @@ and does not accept duplicate names, so there will never be a case where more th
 
 ### Listing upcoming appointments
 
-1. Listing all upcoming appointments
+1. Listing all upcoming appointments.
+
+   1. **Prerequisites**: Only appointments scheduled for a future date and time relative to the current local date and time will be displayed. 
 
    1. **Test case**: `appointment-list`<br>
-      **Expected**: Lists all upcoming appointments in chronological order. Total number of appointments and 
-    details of the appointments shown in the status message.
+     **Expected**: Lists all upcoming appointments in chronological order. Total number of appointments and 
+   details of the appointments shown in the status message.
    
    2. **Test case**: `appointment-list d/2024-11-25`<br>
-      **Expected**: Lists upcoming appointments on 25 Nov 2024. Total number of appointments and
-    details of the appointments shown in the status message.
+     **Expected**: Lists upcoming appointments on 25 Nov 2024. Total number of appointments and
+   details of the appointments shown in the status message.
    
    3. **Test case**: `appointment-list d/2024-11-10 1000`<br>
-      **Expected**: Lists upcoming appointments on 10 Nov 2024 at 10am. Total number of appointments and
-      details of the appointments shown in the status message.
+     **Expected**: Lists upcoming appointments on 10 Nov 2024 at 10am. Total number of appointments and
+     details of the appointments shown in the status message.
    
    4. Other incorrect appointment-list commands to try: `appointment-list d/`, `appointment-list d/2025-13-32`, `...`<br>
-      **Expected**: No appointments listed. Error details shown in the status message.
+     **Expected**: No appointments listed. Error details shown in the status message.
 
 ### Making payment for an appointment
 
-1. Marking payment as paid
+1. Marking payment as paid.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
     1. **Test case**: `payment John Doe d/2024-10-14 1200 pay/paid`<br>
        **Expected**: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as paid. 
        Details of the status change shown in the status message.
+
     2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
        **Expected**: No payment made. Error details shown in the status message.
-2. Marking payment as unpaid
+
+2. Marking payment as unpaid.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
     1. **Test case**: `payment John Doe d/2024-10-14 1200 pay/unpaid`<br>
        **Expected**: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as unpaid.
        Details of the status change shown in the status message.
+
     2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
        **Expected**: No payment made. Error details shown in the status message.
 
 ### Showing Top Three Upcoming Appointments
 
-1. Handling Data Retrieval
+1. Handling Data Retrieval.
     1. If there are no upcoming appointments: A message indicating no upcoming appointments will be displayed to the user.
     2. If there are upcoming appointments: The top three upcoming appointments will be displayed in order.
 
 ### Listing all persons
 
-1. Viewing all clients in PhysioPal
+1. Viewing all clients in PhysioPal.
 
     1. **Prerequisites**: There are client contacts stored in PhysioPal. If not run the appropriate command to add clients to PhysioPal.
         <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
         <br>`add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Newgate Prison`
+   
    2. **Test Case**: `list`
         <br>Expected: All previously saved client contacts will be shown in the list. Success message is displayed.
 
@@ -851,6 +872,13 @@ and does not accept duplicate names, so there will never be a case where more th
 
     1. **Test case**: `clear`<br>
        **Expected**: All contacts in the data file are cleared.
+
+### Exiting the application
+
+1. Closes the PhysioPal application.
+
+    1. **Test case**: `exit`<br>
+       **Expected**: The application closes.
 
 ### Saving data
 
