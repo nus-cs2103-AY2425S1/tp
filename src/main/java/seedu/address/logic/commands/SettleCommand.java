@@ -30,7 +30,7 @@ public class SettleCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_AMOUNT + "AMOUNT";
 
-    public static final String MESSAGE_SETTLE_SUCCESS = "Payment of %.2f has been settled for %s";
+    public static final String MESSAGE_SETTLE_SUCCESS = "Payment of $%.2f has been settled for %s";
     public static final String MESSAGE_INVALID_AMOUNT = "Entered amount is more than amount owed";
 
     private final Index index;

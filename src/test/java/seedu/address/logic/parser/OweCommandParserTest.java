@@ -20,6 +20,7 @@ public class OweCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
+        // EP: missing parts
         // no index specified
         assertParseFailure(parser, VALID_HOUR_AMY, MESSAGE_INVALID_FORMAT);
 
@@ -36,6 +37,7 @@ public class OweCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
+        // EP: invalid input
         // negative index
         assertParseFailure(parser, "-5" + VALID_HOUR_DESC, MESSAGE_INVALID_FORMAT);
 

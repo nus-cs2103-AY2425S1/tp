@@ -24,17 +24,17 @@ class AttributeContainsKeywordsPredicateTest {
         List<String> keywords = List.of("keyword1", "keyword2");
         AttributeContainsKeywordsPredicate<String> predicate = generatePredicate(keywords);
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertEquals(predicate, predicate);
 
-        // same values -> returns true
+        // EP: same values -> returns true
         AttributeContainsKeywordsPredicate<String> predicateCopy = generatePredicate(keywords);
         assertEquals(predicate, predicateCopy);
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertNotEquals(predicate, 1);
 
-        // null -> returns false
+        // EP: null -> returns false
         assertNotEquals(predicate, null);
     }
 
@@ -48,7 +48,7 @@ class AttributeContainsKeywordsPredicateTest {
         assertEquals(expected, predicate.toString());
     }
 
-    public AttributeContainsKeywordsPredicate<String> generatePredicate(List<String> keywords) {
+    private AttributeContainsKeywordsPredicate<String> generatePredicate(List<String> keywords) {
         return new AttributeContainsKeywordsPredicate<String>(keywords) {
             @Override
             public boolean test(Student student) {
