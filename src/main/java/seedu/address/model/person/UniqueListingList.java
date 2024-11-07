@@ -14,9 +14,6 @@ import seedu.address.model.person.exceptions.ListingNotFoundException;
 public class UniqueListingList implements Iterable<Listing> {
     private final ArrayList<Listing> listings;
     private final HashSet<Listing> listingsSet;
-    private int hdbCount = 0;
-    private int landedCount = 0;
-    private int condoCount = 0;
 
     /**
      * Constructs an empty UniqueListingList.
@@ -44,6 +41,15 @@ public class UniqueListingList implements Iterable<Listing> {
      */
     public ArrayList<Listing> getListings() {
         return listings;
+    }
+
+    /**
+     * Retrieves a listing specified by index
+     *
+     * @return The list of listings.
+     */
+    public Listing get(Integer id) {
+        return listings.get(id);
     }
 
     /**

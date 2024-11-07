@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniqueListingList;
 
 /**
  * A UI component that displays detailed information of a selected {@code Person}.
@@ -129,7 +130,11 @@ public class PersonPane extends UiPart<VBox> {
     private void displayListings() {
         if (!person.getListings().isEmpty()) {
             StringBuilder listingsText = new StringBuilder();
-            person.getListings().forEach(listing -> listingsText.append(listing.toString()).append("\n"));
+
+            UniqueListingList personListings = person.getListings();
+            for (int i = 0; i < personListings.size(); i++) {
+                listingsText.append((i + 1) + ". " + personListings.get(i)).append("\n");
+            }
             listings.setText(listingsText.toString());
             listings.setManaged(true);
             listings.setVisible(true);
