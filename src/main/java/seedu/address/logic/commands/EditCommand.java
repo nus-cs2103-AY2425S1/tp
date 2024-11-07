@@ -87,7 +87,9 @@ public class EditCommand extends Command {
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
         Wedding ownWedding = editedPerson.getOwnWedding();
-        ownWedding.setClient(editedPerson);
+        if (ownWedding != null) {
+            ownWedding.setClient(editedPerson);
+        }
 
         if (personToEdit.isSamePerson(editedPerson) || model.hasPerson(editedPerson)) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
