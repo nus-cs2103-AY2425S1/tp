@@ -88,6 +88,7 @@ public class BookmarkCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         expectedModel.setCompany(companyToBookmark, companyBookmarked);
+        showCompanyAtIndex(expectedModel, INDEX_FIRST_COMPANY);
 
         // Assert that the command is successful
         assertCommandSuccess(bookmarkCommand, model, expectedMessage, expectedModel);
