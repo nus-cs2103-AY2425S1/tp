@@ -153,6 +153,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Sorts the list by name.
+     */
+    public void sortByName() {
+        FXCollections.sort(internalList, Comparator.comparing(Person::getFullName));
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

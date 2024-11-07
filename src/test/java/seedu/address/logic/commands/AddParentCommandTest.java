@@ -188,6 +188,11 @@ public class AddParentCommandTest {
         }
 
         @Override
+        public void sortByName() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Person personFromName(Name name) throws IllegalValueException {
             throw new AssertionError("This method should not be called.");
         }

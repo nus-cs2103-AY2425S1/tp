@@ -60,6 +60,10 @@ public abstract class Person {
         return name;
     }
 
+    public String getFullName() {
+        return name.fullName;
+    };
+
     public Phone getPhone() {
         return phone;
     }

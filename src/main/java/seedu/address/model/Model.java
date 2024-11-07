@@ -126,5 +126,10 @@ public interface Model {
      */
     void sortByPin();
 
+    /**
+     * Sorts the person list according to their name.
+     */
+    void sortByName();
+
     Person personFromName(Name name) throws IllegalValueException;
 }

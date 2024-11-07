@@ -104,6 +104,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.sortByPin();
     }
 
+    public void sortByName() {
+        persons.sortByName();
+    }
+
     // Archive related Methods
 
     public void archivePerson(Person person) {
