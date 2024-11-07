@@ -52,8 +52,11 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list` and `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
+
+* For all commands except `find` and `sort`, the displayed list of suppliers/deliveries will be the unfiltered and unsorted list of all suppliers/deliveries.<br>
+  For `find` and `sort` commands, the displayed list will be the corresponding filtered/sorted list of supplier/deliveries.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -127,7 +130,19 @@ Adds a supplier to the address book.
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
 <box type="tip" seamless>
 
+Parameters:
+
+- `n/NAME`: Must be alphanumeric, and must not be blank.
+- `p/PHONE`: Must be numeric, and must not be blank.
+- `e/EMAIL`: Must be a valid email address, and must not be blank.
+- `com/COMPANY`: Must be alphanumeric, and must not be blank.
+- `[t/TAG]`: Must be alphanumeric, and must not be blank.
+- `[pro/PRODUCT]`: Must be alphanumeric, can include spaces but must not start with a space, and must not be blank.
+
 **Tip:** A supplier can have any number of tags and products (including 0)
+
+**Tip:** A supplier has a default status of `active`
+
 </box>
 
 <box type="warning" seamless>
@@ -135,7 +150,9 @@ Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]�
 **Warnings**:
 - At least on space between `add` and `-s` is compulsory
 - Duplicate supplier will not be added again
-- A supplier is considered duplicate if they have the same NAME and COMPANY
+- A supplier is considered duplicate if they have the same `NAME` and `COMPANY`
+- Adding duplicate `TAG`/`PRODUCT` will result in only one copy added to the supplier
+- A tag/product is considered duplicate if they have the same `TAG`/`PRODUCT`
 </box>
 
 Examples:
@@ -143,8 +160,8 @@ Examples:
 * `add -s n/Betsy Crowe p/98223232 e/betsycrowe@example.com com/Newgates t/urgent pro/soap`
 
 Expected output:
-* `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products breadrice`
-* `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products soap`
+* `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products [bread][rice]; Status: active`
+* `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products [soap]; Status: active`
 
 #### Here's how it would look like in the app:
 ![add Command](images/addSupplierCommand.png)
@@ -154,7 +171,6 @@ Expected output:
 Shows a list of all suppliers in the VendorVault. (The delivery list will not be affected)
 
 Format: `list -s`
-
 
 <box type="warning" seamless>
 
