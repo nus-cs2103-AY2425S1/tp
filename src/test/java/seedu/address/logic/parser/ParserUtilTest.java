@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_ALL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Tutorial;
 import seedu.address.model.tag.Tag;
@@ -221,22 +223,26 @@ public class ParserUtilTest {
         assertEquals(1, ParserUtil.parseSortOrder(sortOrderWithWhitespace));
     }
 
+    // EP: Not a number
     @Test
     public void parseTutorial_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorials(null));
     }
 
+    // EP: Non-positive numbers
     @Test
     public void parseTutorial_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL));
     }
 
+    // EP: Positive numbers
     @Test
     public void parseTutorial_validValueWithoutWhitespace_returnsTutorial() throws Exception {
         Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
         assertEquals(List.of(expectedTutorial), ParserUtil.parseTutorials(VALID_TUTORIAL_1));
     }
 
+    // EP: Positive numbers with whitespace
     @Test
     public void parseTutorial_validValueWithWhitespace_returnsTrimmedTutorial() throws Exception {
         String tutWithWhitespace = WHITESPACE + VALID_TUTORIAL_1 + WHITESPACE;
@@ -266,5 +272,63 @@ public class ParserUtilTest {
     @Test
     public void parseTutorial_invalidTutorialNumberInRange_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_RANGE));
+    }
+
+    // EP: No keywords
+    @Test
+    public void parseNameKeywords_empty_success() throws Exception {
+        List<String> keywords = new ArrayList<>();
+
+        NameContainsKeywordsPredicate expected = new NameContainsKeywordsPredicate(keywords);
+        assertEquals(expected, ParserUtil.parseNameKeywords(keywords));
+    }
+
+    // EP: Numerical keywords
+    @Test
+    public void parseNameKeywords_numbersOnlyKeywords_success() throws Exception {
+        List<String> keywords = new ArrayList<>();
+        keywords.add("123");
+
+        NameContainsKeywordsPredicate expected = new NameContainsKeywordsPredicate(keywords);
+        assertEquals(expected, ParserUtil.parseNameKeywords(keywords));
+    }
+
+    // EP: Alphabetical keywords
+    @Test
+    public void parseNameKeywords_alphabetsOnlyKeywords_success() throws Exception {
+        List<String> keywords = new ArrayList<>();
+        keywords.add("a");
+
+        NameContainsKeywordsPredicate expected = new NameContainsKeywordsPredicate(keywords);
+        assertEquals(expected, ParserUtil.parseNameKeywords(keywords));
+    }
+
+    // EP: Alphanumeric keywords
+    @Test
+    public void parseNameKeywords_alphanumericKeywords_success() throws Exception {
+        List<String> keywords = new ArrayList<>();
+        keywords.add("a12");
+
+        NameContainsKeywordsPredicate expected = new NameContainsKeywordsPredicate(keywords);
+        assertEquals(expected, ParserUtil.parseNameKeywords(keywords));
+    }
+
+    // EP: Non-alphanumeric keywords
+    @Test
+    public void parseNameKeywords_specialCharacters_throwsParseException() {
+        List<String> keywords = new ArrayList<>();
+        keywords.add("/");
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseNameKeywords(keywords));
+    }
+
+    // EP: Testing valid with invalid inputs
+    @Test
+    public void parseNameKeywords_specialCharactersAndValidKeywords_throwsParseException() {
+        List<String> keywords = new ArrayList<>();
+        keywords.add("/");
+        keywords.add("name");
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseNameKeywords(keywords));
     }
 }

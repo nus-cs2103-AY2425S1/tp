@@ -12,8 +12,35 @@ import seedu.address.commons.util.ToStringBuilder;
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code NameContainsKeywordsPredicate}.
+     *
+     * @param keywords A list of keywords used to check the address book.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+    }
+
+    /**
+     * Checks all keywords for invalid characters
+     */
+    public static boolean areValidNameKeywords(List<String> keywords) {
+        for (String s : keywords) {
+            if (!isValidKeyword(s)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the name keyword is a valid and possible name in the address book,
+     * or if there is no keyword, since name is an optional param
+     *
+     * @param keyword the name keyword used to search the list.
+     */
+    private static boolean isValidKeyword(String keyword) {
+        return keyword.isEmpty() || Name.isValidName(keyword);
     }
 
     @Override

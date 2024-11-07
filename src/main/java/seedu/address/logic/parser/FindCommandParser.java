@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
@@ -30,11 +29,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+
         List<String> nameKeywords = Arrays.asList(nameKeyArg.split("\\s+"));
         Set<Tag> tagKeyWords = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         return new FindCommand(
-                new NameContainsKeywordsPredicate(nameKeywords), new TagContainsKeywordsPredicate(tagKeyWords));
+                ParserUtil.parseNameKeywords(nameKeywords), new TagContainsKeywordsPredicate(tagKeyWords));
     }
 
 }

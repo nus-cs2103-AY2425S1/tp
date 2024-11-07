@@ -14,6 +14,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Tutorial;
@@ -218,5 +219,19 @@ public class ParserUtil {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
         return new StudentId(trimmedId);
+    }
+
+    /**
+     * Parses a {@code List<String> keywords} into a {@code NameContainsKeywordPredicate}.
+     *
+     * @throws ParseException if any of the keywords in {@code keywords} is invalid.
+     */
+    public static NameContainsKeywordsPredicate parseNameKeywords(List<String> keywords) throws ParseException {
+        requireNonNull(keywords);
+
+        if (!NameContainsKeywordsPredicate.areValidNameKeywords(keywords)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new NameContainsKeywordsPredicate(keywords);
     }
 }
