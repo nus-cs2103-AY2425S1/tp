@@ -1,11 +1,13 @@
 package bizbook.logic.parser;
 
 import static bizbook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static bizbook.logic.Messages.MESSAGE_INVALID_FILE_PATH;
 import static bizbook.logic.Messages.MESSAGE_UNSUPPORTED_FILE_TYPE;
 import static bizbook.logic.parser.CliSyntax.PREFIX_FILE;
 import static bizbook.logic.parser.CliSyntax.PREFIX_PATH;
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
 import bizbook.logic.commands.ImportCommand;
@@ -33,7 +35,13 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         }
 
         FileType fileType = ParserUtil.parseFileType(argMultimap.getValue(PREFIX_FILE).get());
-        Path path = Path.of(argMultimap.getValue(PREFIX_PATH).get());
+        String rawPath = argMultimap.getValue(PREFIX_PATH).get();
+        Path path;
+        try {
+            path = Path.of(rawPath);
+        } catch (InvalidPathException ipe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_FILE_PATH, rawPath));
+        }
 
         if (!fileType.hasImporter()) {
             throw new ParseException(
