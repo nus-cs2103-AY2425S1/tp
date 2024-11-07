@@ -85,11 +85,21 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-`AttendanceWindow` and `AttendanceRow`,
-* depend on the `Logic` component, as they need to execute commands to update the attendance.
-* depend on the `Model` component, as they need to access the `Person` objects to display the attendance.
+**`AttendanceWindow` Class**
+
+The `AttendanceWindow` Class represents a window displaying the attendance records of students in a specific tutorial group. It,
+* depends on the `Logic` component, as they need to execute commands to update the attendance.
+* depends on the `Model` component, as they need to access the `Person` objects to display the attendance.
 * listens for changes to the `Model` data so that the table view can be refreshed and updated with the modified data
 
+
+**`AttendanceRow` Class**
+
+The `AttendanceRow` class represents a single row in the attendance table, displaying a student's name and attendance status for each date. It,
+* depends on the `Model` component, as they need to access the `Person` objects to display the attendance.
+* listens for changes to the `Model` data so that the row can be refreshed and updated with the modified data
+
+Each `AttendanceRow` is updated in real-time as the underlying attendance records are modified, allowing the UI to maintain up-to-date attendance statuses for each student.
 
 ### Logic component
 
