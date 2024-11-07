@@ -61,7 +61,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
- **Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
+**Owe**    | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
 **Income**  | `income`
 **Remind**   | `remind`
