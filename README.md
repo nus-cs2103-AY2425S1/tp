@@ -5,6 +5,8 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 ![Ui](docs/images/Ui.png)
 
+* Hey! Are you a **private tutor** looking for an app to **save time**? why not try this one out!
+
 * **GOATS is a desktop address book application built upon AddressBook Level 3, targeted towards private tutors to help manage student and parent contact information.**<br>
   * While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
