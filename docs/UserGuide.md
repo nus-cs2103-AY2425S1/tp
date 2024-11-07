@@ -2,18 +2,26 @@
 layout: page
 title: User Guide
 ---
-
-## Overview
+<!-- Project Title -->
+<div align="center">
+  <h1 style="font-weight:800;font-size:70px;">CCAConnect</h1>
+</div>
 
 CCAConnect is a desktop application that aims to **assist NUS CCA leaders** in **managing and collating relevant CCA personnel’s contact details**, as well as help to **track attendance details for CCA sessions**.
 
 Equipped with features like **attendance marking**, **contact management**, **contact filtering** and **profile switching**, CCAConnect helps to reduce the headaches of personnel tracking.
 
---------------------------------------------------------------------------------------------------------------------
-
+<!-- Table of Content -->
 ## Table of Contents
-* Table of Contents
-{:toc}
+<details>
+  <summary style="font-weight:600;font-size:30px;">Table of Contents</summary>
+
++ <a href="#quick-start" style="font-size:20px;">Quick Start</a>
++ <a href="#features" style="font-size:20px;">Features</a>
++ <a href="#faq" style="font-size:20px;">FAQ</a>
++ <a href="#known-issues" style="font-size:20px;">Known Issues</a>
++ <a href="#command-summary" style="font-size:20px;">Command Summary</a>
+</details>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +53,7 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
    * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe` : Adds a person named `John Doe`, with those specified information.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 1` : Deletes the 1st contact shown in the current list.
 
    * `clear` : Deletes all contacts stored in the current profile.
 
@@ -57,12 +65,13 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<details>
+  <summary style="font-weight:600;font-size:20px;">Notes about the command format:</summary>
 
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  + Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  + Items in square brackets are optional.<br>
+    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -70,8 +79,8 @@ Equipped with features like **attendance marking**, **contact management**, **co
 * Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
   e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/exco`, `r/member r/exco` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  + Parameters can be in any order.<br>
+      e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
 </div>
@@ -119,7 +128,7 @@ A person is uniquely identified by his/her **telegram handle**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of roles (including 0)
-</div>
+
 
 #### Example
 * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe12`
@@ -359,6 +368,19 @@ clear
 `c` can be used in place of `clear`
 
 
+### Viewing a specific contact : `view`
+
+Views all the contact information of the specified contact.
+
+Format: `view t/TELEGRAM_HANDLE`
+
+* Displays all contact information of the person with specified `TELEGRAM_HANDLE`
+* `TELEGRAM_HANDLE` must contain 5 - 32 characters, and can only contain letters, numbers and underscores.
+
+Examples:
+* `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
+![result for `view t/bob12`](images/viewBob12.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -430,10 +452,10 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -441,7 +463,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCAConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -469,3 +491,4 @@ Action | Format                                                                 
 **Attendance** | `attendance`                                                            |`attendance`
 **Mark Attendance** | `mark t/TELEGRAM…​ d/DATE`                                              |`mark t/berniceYu t/alexYeoh d/2024-11-02`
 **Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                            |`unmark t/berniceYu d/2024-11-02`
+**View** | `view t/TELEGRAM_HANDLE`<br> e.g., `view t/bob123`
