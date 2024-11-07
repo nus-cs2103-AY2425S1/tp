@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -49,7 +50,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         studentClass = source.getStudentClass().value;
         phone = source.getPhone().value;
-        tags.addAll(source.getTags().stream()
+        tags.addAll(source.getTagSet().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
@@ -90,7 +91,8 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTagSet = new HashSet<>(personTags);
+        final Tags modelTags = new Tags(modelTagSet);
         return new Person(modelName, modelStudentClass, modelPhone, modelTags);
     }
 

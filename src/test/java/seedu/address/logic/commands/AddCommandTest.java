@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import seedu.address.model.tag.Tags;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -157,17 +158,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean tagExists(Person target, Set<Tag> tags) {
+        public boolean tagExists(Person target, Tags tags) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addTag(Person target, Set<Tag> tags) {
+        public void addTag(Person target, Tags tags) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteTag(Person target, Set<Tag> tags) {
+        public void deleteTag(Person target, Tags tags) {
             throw new AssertionError("This method should not be called.");
         }
 

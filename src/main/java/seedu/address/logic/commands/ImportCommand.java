@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -24,7 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentClass;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
@@ -98,7 +97,7 @@ public class ImportCommand extends Command {
                 List<String> tagList = Arrays.asList(nextLine[3].split(" "));
 
                 if (!"".equals(tagList.get(0))) {
-                    Set<Tag> tags = ParserUtil.parseTags(tagList);
+                    Tags tags = ParserUtil.parseTags(tagList);
 
                     importStudentNumbers = handleAddStudent(model, new Person(name, studentClass, phone, tags),
                         importStudentNumbers, duplicatePersonsNames);

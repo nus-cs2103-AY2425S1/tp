@@ -49,7 +49,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         studentClass.setText("Class: " + person.getStudentClass().value);
         phone.setText(person.getPhone().value);
-        person.getTags().stream()
+        person.getTagSet().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

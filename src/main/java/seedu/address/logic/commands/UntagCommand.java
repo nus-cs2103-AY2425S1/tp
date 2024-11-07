@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,7 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 /**
  * Adds tags to a person.
@@ -30,13 +29,13 @@ public class UntagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Tag(s) deleted";
     public static final String MESSAGE_TAG_DOES_NOT_EXIST = "The tag(s) does not exist";
     private final Index targetIndex;
-    private final Set<Tag> tagsToDelete;
+    private final Tags tagsToDelete;
 
     /**
      * Creates a TagCommand to add the specified {@code Set<Tag>}
      * to the person of specified {@code Index}
      */
-    public UntagCommand(Index targetIndex, Set<Tag> tagsToDelete) {
+    public UntagCommand(Index targetIndex, Tags tagsToDelete) {
         this.targetIndex = targetIndex;
         this.tagsToDelete = tagsToDelete;
     }
