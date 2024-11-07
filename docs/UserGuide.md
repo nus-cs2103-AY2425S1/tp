@@ -130,19 +130,6 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by roles: 'filter'
-
-Finds persons whose roles contain any of the given keywords.
-
-Format: `filter KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `athlete` will match `Athlete`
-* The order of the keywords does not matter. e.g. `athlete student` will match `Student Athlete`
-* Only the roles are searched.
-* Only full words will be matched e.g. `ath` will not match `athlete`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `athlete student` will return `Student Athlete`, `Athlete`
-
 
 ### Deleting a person : `delete`
 
