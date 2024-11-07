@@ -1,10 +1,9 @@
 package seedu.address.model.client;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.CommandCommons;
 
-
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Client's remarks in the address book, as added by a user.
