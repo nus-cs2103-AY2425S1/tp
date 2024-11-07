@@ -563,7 +563,7 @@ list
 ```
 filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIER> i/ <INCOME> s/ <STATUS>
 ```
-- **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left blank.
+- **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left empty.
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
