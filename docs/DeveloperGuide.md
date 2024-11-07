@@ -450,6 +450,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+** Use case: UC05 - Edit an item**
+
+**MSS**
+1. User enters command to edit an item.
+2. System updates the item with the new details provided by the user.
+3. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+* 2a. The item does not exist.
+
+  * 2a1. System shows an error message.
+
+      Use case ends.
+
+* 2b. The updated details conflict with an existing item.
+
+  * 2b1. System shows an error message.
+
+      Use case ends.
+
+* 2c. The item is currently being viewed.
+
+  * 2c1. System updates the displayed item with the new details.
+
+      Use case ends.
+
+---
+
 *{More to be added}*
 
 ### Non-Functional Requirements
