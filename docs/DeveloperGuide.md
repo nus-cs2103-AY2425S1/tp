@@ -387,12 +387,6 @@ PlantUML, the lifeline continues till the end of diagram.
 
 ---
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
----
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 - [Documentation guide](Documentation.md)
