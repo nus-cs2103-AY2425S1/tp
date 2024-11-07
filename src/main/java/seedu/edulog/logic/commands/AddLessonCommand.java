@@ -9,7 +9,6 @@ import static seedu.edulog.logic.parser.CliSyntax.PREFIX_START_TIME;
 import seedu.edulog.commons.util.ToStringBuilder;
 import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
 
 /**
@@ -50,10 +49,6 @@ public class AddLessonCommand extends Command {
 
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
-        }
-
-        if (!model.checkTimeslot(toAdd)) {
-            throw new CommandException(EdulogCalendar.OVERLOAD_SIMULTANEOUS_TIMING);
         }
 
         model.addLesson(toAdd);

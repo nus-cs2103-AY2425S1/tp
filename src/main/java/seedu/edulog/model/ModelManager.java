@@ -188,12 +188,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean checkTimeslot(Lesson lesson) {
-        requireNonNull(lesson);
-        return eduLog.getEdulogCalendar().checkTimeslot(lesson);
-    }
-
-    @Override
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
         eduLog.getEdulogCalendar().removeLesson(lesson);
