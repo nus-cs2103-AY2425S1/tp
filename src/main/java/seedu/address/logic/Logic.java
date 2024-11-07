@@ -25,7 +25,7 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns a sorted list of commands registered and available.
+     * Returns an immutable sorted list of commands registered and available.
      * @return the list set of commands, sorted alphabetically
      */
     List<String> getCommandNames();
