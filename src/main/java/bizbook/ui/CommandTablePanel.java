@@ -106,7 +106,7 @@ public class CommandTablePanel extends UiPart<Region> {
     /**
      * Custom table record that displays onto table.
      */
-    public static class CommandEntry {
+    public class CommandEntry {
         private String commandWord;
         private String commandUsage;
 
