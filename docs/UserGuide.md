@@ -7,7 +7,7 @@
 # UniLink User Guide
 
 UniLink is a desktop app that allows university students to manage their contacts. With UniLink, students can categorise
-their contacts into 'work' contacts and 'personal' contacts to better manage their lives!
+their contacts into 'work', 'personal' and 'school' contacts to better manage their lives!
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -79,9 +79,9 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message and brings you to the help page when you click 'open URL'.
 
-![help message](images/help.png)
+![help message](images/HelpWindow.png)
 
 Format: `help`
 
