@@ -17,7 +17,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
 ### Installation
 
-1. Ensure Java `17` or above installed on your computer. If not you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).                                      
+1. Ensure Java `17` or above installed on your computer. If not you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-2/tp/releases).
 
@@ -224,6 +224,32 @@ Examples:
 
 </box>
 
+### Sorting contacts: `sort`
+
+Sort contacts by tag values, in ascending or descending order.
+Format: `sort [t\TAG] [asc/desc]`
+* Sorts the contact list by tags values according to specified sort order.
+* Numeric-only tag values are of lower sort value than alpha-numeric tag values.
+* Empty tag values will always appear at the end of the list regardless of sort order.
+
+Examples:
+* `sort t\premium asc` would show all contacts that have the tag of premium, beginning with the contact that has the smallest
+numeric-only tag value for premium, then the contact with the largest alphanumeric tag value for premium, and lastly the contact
+that has empty tag value for premium.
+* `sort t\premium desc` would show all contacts that have the tag of premium, beginning with the contact that has the largest
+alphanumeric tag value for premium, then the contact with the smallest numeric-only tag value for premium, and lastly contact
+that has empty tag value for premium.
+  ![result for 'sort t/premium asc](images/sortEg.png)
+
+<box type="tip" seamless>
+
+**Tip:** Use the command button for Sort provided to get command template
+<div style="text-align: left;">
+    <img src="images/sortGUIEg.png" alt="Using filter button" width=545 />
+</div>
+
+</box>
+
 ### Exporting your contacts: `export`
 
 Exports a copy of your contact data to a specified file format.
@@ -317,6 +343,7 @@ Action     | Format, Examples
 **Help**   | `help`
 **Filter** | `filter [n\NAME] [t\TAG]…​`<br> e.g., `filter n\John t\client t\friend`
 **Advanced Filter** | `advfilter [t\TAG] [operator] [value]…​`<br> e.g., `advfilter t\premium > 1000`
+**Sort** | `sort [t\TAG] [asc/desc]…`<br> e.g., `sort t\premium asc`
 **Export** | `export format\EXPORT_FORMAT`<br> e.g., `export format\csv`
 
 --------------------------------------------------------------------------------------------------------------------
@@ -332,3 +359,4 @@ Action     | Format, Examples
 * **Index**: The number next to each contact in the list that helps you refer to them when you want to make changes.
 * **Social Media Handle**: A person's username on social platforms like Twitter or Instagram, for example, @john_doe.
 * **Tag**: Form of text-based labelling to categorise persons or data for organisation.
+
