@@ -85,6 +85,18 @@ public class EditWeddingCommand extends Command {
 
         model.setWedding(weddingToEdit, editedWedding);
         model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+
+        // Update wedding for all people in wedding
+        if (editedWedding.hasPartner1()) {
+            editedWedding.getPartner1().setWedding(weddingToEdit, editedWedding);
+        }
+        if (editedWedding.hasPartner2()) {
+            editedWedding.getPartner2().setWedding(weddingToEdit, editedWedding);
+        }
+        for (Person person : editedWedding.getGuestList()) {
+            person.setWedding(weddingToEdit, editedWedding);
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));
     }
 

@@ -74,6 +74,13 @@ public class Wedding {
     }
 
     /**
+     * Returns whether the wedding has a partner 1
+     */
+    public boolean hasPartner1() {
+        return this.partner1 != null;
+    }
+
+    /**
      * Returns partner2 associated with wedding
      * @return A {@code Person} object of the partner2 of the wedding
      */
@@ -87,6 +94,13 @@ public class Wedding {
      */
     public void setPartner2(Person partner2) {
         this.partner2 = partner2;
+    }
+
+    /**
+     * Returns whether the wedding has a partner 2
+     */
+    public boolean hasPartner2() {
+        return this.partner2 != null;
     }
 
     /**

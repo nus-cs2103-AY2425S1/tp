@@ -106,6 +106,15 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_WEDDING);
             }
             addressBook.addWedding(wedding);
+            if (wedding.hasPartner1()) {
+                addressBook.getPerson(wedding.getPartner1()).addWedding(wedding);
+            }
+            if (wedding.hasPartner2()) {
+                addressBook.getPerson(wedding.getPartner2()).addWedding(wedding);
+            }
+            for (Person person : wedding.getGuestList()) {
+                addressBook.getPerson(person).addWedding(wedding);
+            }
         }
         // load tags and weddings from people after loading weddings and tags, because if tag or wedding already exist,
         // method will throw an error
