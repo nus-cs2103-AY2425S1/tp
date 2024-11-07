@@ -160,14 +160,85 @@ The `Model` component,
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+![StorageDiagram.png](images%2FStorageDiagram.png)
+[StorageClassDiagram.puml](diagrams%2FStorageClassDiagram.puml)
 
-<img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component manages data persistence by saving and loading various parts of the application's data in JSON format. It handles the following components: `AddressBook`, `UserPrefs`, `SupplyOrderList`, `CustomerOrderList`, `IngredientCatalogue`, and `PastryCatalogue`.
 
+#### **Responsibilities**
+1. **Saving Data**: Converts in-memory objects from the `Model` component into JSON format and writes them to disk.
+2. **Loading Data**: Reads data from JSON files and converts them back into in-memory objects used by the `Model` component.
+3. **Error Handling**: Provides robust mechanisms to handle missing files, corrupt data, and deserialization errors.
+4. **Interface Implementation**: Implements multiple storage interfaces to handle the different types of data:
+    - `AddressBookStorage`
+    - `UserPrefsStorage`
+    - `SupplyOrderListStorage`
+    - `CustomerOrderListStorage`
+    - `IngredientCatalogueStorage`
+    - `PastryCatalogueStorage`
+
+#### **Key Interfaces and Classes**
+| Interface/Class                     | Description                                                                                  |
+|-------------------------------------|----------------------------------------------------------------------------------------------|
+| `StorageManager`                    | Central manager that implements the `Storage` interface and handles all storage operations.   |
+| `JsonUserPrefsStorage`              | Implements `UserPrefsStorage`. Handles saving and loading of user preferences.               |
+| `JsonAddressBookStorage`            | Implements `AddressBookStorage`. Handles saving and loading of `AddressBook` data.           |
+| `JsonSupplyOrderListStorage`        | Implements `SupplyOrderListStorage`. Handles saving and loading of `SupplyOrderList`.        |
+| `JsonCustomerOrderListStorage`      | Implements `CustomerOrderListStorage`. Handles saving and loading of `CustomerOrderList`.     |
+| `JsonIngredientCatalogueStorage`    | Implements `IngredientCatalogueStorage`. Handles saving and loading of `IngredientCatalogue`. |
+| `JsonPastryCatalogueStorage`        | Implements `PastryCatalogueStorage`. Handles saving and loading of `PastryCatalogue`.        |
+
+### **JSON-Adapted Classes and Their Usage**
+Each data type uses specialized `JsonAdapted` classes to handle JSON serialization and deserialization. These classes ensure data consistency and validate constraints during data conversion.
+
+| **JSON-Adapted Class**              | **Used By (JSON Classes)**           | **Purpose**                                                               |
+|-------------------------------------|--------------------------------------|---------------------------------------------------------------------------|
+| `JsonAdaptedPerson`                 | `JsonSerializableAddressBook`, `JsonAdaptedSupplyOrder`, `JsonAdaptedCustomerOrder` | Represents a `Person` in JSON format for serialization.  |
+| `JsonAdaptedIngredient`             | `JsonAdaptedPastry`, `JsonAdaptedSupplyOrder` | Represents an `Ingredient` in JSON format.  |
+| `JsonAdaptedPastry`                 | `JsonAdaptedCustomerOrder` | Represents a `Pastry` in JSON format.            |
+| `JsonAdaptedTag`                    | `JsonSerializableAddressBook`, `JsonAdaptedPerson` | Represents `Tag` data associated with a `Person`.   |
+| `JsonSerializableAddressBook`       | `AddressBookStorage`                 | Converts `AddressBook` to/from JSON.                                      |
+| `JsonAdaptedCustomerOrder`          | `JsonAdaptedCustomerOrderList`       | Represents `CustomerOrder` in JSON.                                        |
+| `JsonAdaptedSupplyOrder`            | `JsonAdaptedSupplyOrderList`         | Represents `SupplyOrder` in JSON.                                          |
+
+---
+
+### Storage Workflow
+
+1. **Application Startup**:
+    - The `MainApp` initializes the `StorageManager`.
+    - The `StorageManager` loads data from JSON files.
+    - If data files are missing or corrupted, the application falls back to sample data.
+
+2. **User Interaction**:
+    - Users interact with the application through commands.
+    - Upon successful command execution, updated data is saved via `StorageManager`.
+
+3. **Application Shutdown**:
+    - The `MainApp` ensures all modified data is saved before closing.
+    - This includes saving the current state of User Preferences, Address Book, Ingredient Catalogue, Pastry Catalogue, Customer Orders, and Supply Orders.
+
+#### **Data Flow**
+1. **Saving Data**:
+    - When data is modified, `Model` notifies `StorageManager`.
+    - `StorageManager` converts the data to JSON and saves it using the respective storage class.
+
+2. **Loading Data**:
+    - On startup, `StorageManager` reads data from JSON files.
+    - The data is deserialized into in-memory objects and passed to the `Model`.
+
+### Error Handling
+
+The `Storage` component employs robust error handling to manage potential issues:
+- **DataLoadingException**:
+    - Thrown when data loading fails due to corruption or format issues.
+    - The application uses sample data in such cases.
+
+- **IOException**:
+    - Thrown during file read/write operations.
+    - Errors are logged, and users are notified.
+--------------------------------------------------------------------------------------------------------------------
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
@@ -601,14 +672,14 @@ Given below are instructions to test the app manually.
 ### Adding a pastry
 
 1. Prerequisites: Ensure that the ingredients required for the pastry are already available in the ingredient catalogue.
-2. **Test case**: `addPastry Chocolate Croissant 4.50 Chocolate, Flour, Sugar` (Assuming Chocolate, Flour and Sugar exist in the Ingredient catalogue)
+2. **Test case**: `addPastry Chocolate Croissant 4.50 Chocolate Flour Sugar` (Assuming Chocolate, Flour and Sugar exist in the Ingredient catalogue)
     - **Expected**: The pastry "Chocolate Croissant" is added successfully, and a success message is displayed.
 
 #### Adding with invalid data
 
-1. **Test case**: `addPastry Strawberry Tart 5.00 Strawberry, Cream, Butter` (assuming Butter is not in the ingredient catalogue)
+1. **Test case**: `addPastry Strawberry Tart 5.00 Strawberry Cream Butter` (assuming Butter is not in the ingredient catalogue)
     - **Expected**: Error message indicating that Butter must be added using the `addIngredient` command before it can be used in a pastry.
-2. **Test case**: `addPastry Apple Pie -3.00 Apple, Flour, Sugar`
+2. **Test case**: `addPastry Apple Pie -3.00 Apple Flour Sugar`
     - **Expected**: Error message indicating that the cost cannot be negative.
 3. **Test case**: `addPastry Blueberry Muffin 3.00`
     - **Expected**: Error message indicating that at least one ingredient must be provided.
