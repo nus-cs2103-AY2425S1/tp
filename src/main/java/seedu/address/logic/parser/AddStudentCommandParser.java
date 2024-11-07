@@ -73,6 +73,9 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         int attendanceValue;
         try {
             attendanceValue = Integer.parseInt(attendanceString);
+            if (attendanceValue < 0) {
+                throw new NumberFormatException();
+            }
         } catch (NumberFormatException e) {
             throw new ParseException(DaysAttended.MESSAGE_CONSTRAINTS);
         }
