@@ -8,8 +8,11 @@ Welcome to the NomNomNotifier User Guide, your essential toolkit for mastering c
 NomNomNotifier brings powerful features right to your desktop, enabling quick and accurate access to customer data like names, addresses, contact details, and dietary preferences. Our app enhances the speed of customer service while helping teams manage VIPs and special requests with ease. Combining a Command Line Interface (CLI) with a user-friendly Graphical Interface (GUI), NomNomNotifier offers the flexibility to work however you prefer—type commands to streamline actions or navigate visually to find exactly what you need.
 
 * Table of Contents
-  {:toc}
-
+  * Quick start
+  * Command summary
+  * Features
+  * FAQ
+  * Known Issues
 ---
 
 ## Quick start
@@ -23,9 +26,15 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 4. Open a command terminal, `cd` into the folder where you placed the jar file, and use the `java -jar NomNomNotifier.jar` command to run the application.<br>
-   A GUI similar to the one below should appear in a few seconds, containing some sample data.<br>
-   ![Ui](images/QuickStart.png)
-    ***Figure 1: shows what application should look like***
+   A GUI similar to the one below should appear in a few seconds, containing some sample data.
+
+
+   <div style="text-align: center;">
+    <img src="images/QuickStart.png" alt="Ui" width="350"/>
+    <br>
+    <em>Figure 1: Shows what the application should look like</em>
+</div>
+
 
 5. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -105,8 +114,11 @@ Adds a customer to the address book.
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pc/666234`
 - `add n/Betsy Crowe t/Vegetarian e/betsycrowe@example.com a/Clementi Ave 5 #02-03 p/72345673 t/VIP pc/123123`
 
-![adding customer](images/add_customer.png)
-***Figure 2: Shows customer named Sarah being added***
+<div style="text-align: center;">
+    <img src="images/add_customer.png" alt="adding customer" width="350"/>
+    <br>
+    <em>Figure 2: Shows customer named Sarah being added</em>
+</div>
 
 ---
 
@@ -116,8 +128,11 @@ Shows a list of all customers in the address book.
 
 **Format:** `list`
 
-![list customers](images/list.png)
-***Figure 3: Shows all customers listed***
+<div style="text-align: center;">
+    <img src="images/list.png" alt="list customers" width="350"/>
+    <br>
+    <em>Figure 3: Shows all customers listed</em>
+</div>
 
 ---
 
@@ -138,8 +153,11 @@ Edits an existing customer in the address book.
 - `edit 1 p/91234567 e/johndoe@example.com` — Edits the phone number and email address of the 1st person to `91234567` and `johndoe@example.com`, respectively.
 - `edit 2 n/Betsy Crower t/` — Edits the name of the 2nd person to `Betsy Crower` and clears all existing tags.
 
-![edit customers](images/edit_customer.png)
-***Figure 4: Shows customer details being edited***
+<div style="text-align: center;">
+    <img src="images/edit_customer.png" alt="edit customers" width="350"/>
+    <br>
+    <em>Figure 4: Shows customer details being edited</em>
+</div>
 
 ---
 
@@ -171,8 +189,11 @@ Users can search for customers by entering part or all of their phone number.
 - `find 9123` — Finds any customers with phone numbers containing "9123".
 - `find 98124572` — Finds any customers with the exact phone number "98124572".
 
-![find customers](images/find_name_and_number.png)
-***Figure 5: Shows multiple people found using prefix search and number***
+<div style="text-align: center;">
+    <img src="images/find_name_and_number.png" alt="find customers" width="350"/>
+    <br>
+    <em>Figure 5: Shows multiple people found using prefix search and number</em>
+</div>
 
 
 #### Search by Postal Code
@@ -194,8 +215,11 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 - `find S550 Bob` — Finds all customers with postal codes starting with "550" **or** the name "Bob".
 - `find S789123 Carl 97621010` — Finds all customers with postal code "789123" **or** name "Carl" **or** phone number "97621010".
 
-![find customers](images/find_name.png)
-***Figure 6: Shows multiple people found using prefix search***
+<div style="text-align: center;">
+    <img src="images/find_name.png" alt="find customers" width="350"/>
+    <br>
+    <em>Figure 6: Shows multiple people found using prefix search</em>
+</div>
 
 
 **Note:** The `find` command performs an `OR` search across the criteria, meaning that customers matching any of the provided keywords will be returned.
@@ -216,8 +240,11 @@ Deletes the specified customer from the address book.
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-![delete customers](images/delete_customer.png)
-***Figure 7: Shows customer being delete usign delete command***
+<div style="text-align: center;">
+    <img src="images/delete_customer.png" alt="delete customers" width="350"/>
+    <br>
+    <em>Figure 7: Shows customer being deleted using the delete command</em>
+</div>
 
 ---
 
@@ -232,8 +259,11 @@ Format: `delete POSTALCODE`
 Examples:
 * `list` followed by `deletePC 560102` deletes all persons with postal code `560102` in the address book.
 
-![deletePC customers](images/delete_by_pc.png)
-***Figure 7: Shows multiple customers being delete using deletePC command***
+<div style="text-align: center;">
+    <img src="images/delete_by_pc.png" alt="deletePC customers" width="350"/>
+    <br>
+    <em>Figure 8: Shows multiple customers being deleted using deletePC command</em>
+</div>
 
 ---
 
@@ -258,8 +288,11 @@ Adds an order to NomNomNotifier.
 **Examples:**
 - `order cake` — Adds an order called "cake" to NomNomNotifier.
 
-![order](images/order.png)
-***Figure 8: Shows new order being added***
+<div style="text-align: center;">
+    <img src="images/order.png" alt="order" width="350"/>
+    <br>
+    <em>Figure 9: Shows new order being added</em>
+</div>
 
 ---
 
@@ -276,8 +309,11 @@ Deletes an order from NomNomNotifier.
 **Examples:**
 - `deleteOrder cake` — Deletes an order called "cake" from NomNomNotifier.
 
-![delete order](images/deleteOrder.png)
-***Figure 9: Shows order being deleted***
+<div style="text-align: center;">
+    <img src="images/deleteOrder.png" alt="delete order" width="350"/>
+    <br>
+    <em>Figure 10: Shows order being deleted</em>
+</div>
 
 ---
 
@@ -287,8 +323,11 @@ Shows a list of all orders in NomNomNotifier.
 
 **Format:** `listOrder`
 
-![list order](images/listOrder.png)
-***Figure 10: Shows all orders being listed***
+<div style="text-align: center;">
+    <img src="images/listOrder.png" alt="list order" width="350"/>
+    <br>
+    <em>Figure 11: Shows all orders being listed</em>
+</div>
 
 ---
 
@@ -306,8 +345,11 @@ Adds an order history to a customer.
 **Examples:**
 - `put pizza n/Alex Yeoh` — Adds an order called "pizza" to a customer named "Alex Yeoh".
 
-![put order](images/put_order.png)
-***Figure 11: Shows order being associated with customer***
+<div style="text-align: center;">
+    <img src="images/put_order.png" alt="put order" width="350"/>
+    <br>
+    <em>Figure 12: Shows order being associated with customer</em>
+</div>
 
 ---
 
@@ -320,8 +362,11 @@ Lists all order histories of a customer, including the time of each order.
 **Examples:**
 - `history Alex Yeoh` — Lists order histories of a customer named `Alex Yeoh`.
 
-![history](images/history.png)
-***Figure 12: Shows order history of John Doe***
+<div style="text-align: center;">
+    <img src="images/history.png" alt="history" width="350"/>
+    <br>
+    <em>Figure 13: Shows order history of John Doe</em>
+</div>
 
 ---
 
@@ -341,8 +386,11 @@ Tag shortcuts allow you to create aliases for commonly used tags, saving you tim
     - `addShortCut al/vn tn/VeGan` — Shows an error, as "Vegan" is already used.
     - `addShortCut al/v tn/Vegetarian` — Shows an error, as "v" is already an alias.
 
-![adding shortcuts](images/add_shortcut.png)
-***Figure 13: Shows shortcut being added***
+<div style="text-align: center;">
+    <img src="images/add_shortcut.png" alt="adding shortcuts" width="350"/>
+    <br>
+    <em>Figure 14: Shows shortcut being added</em>
+</div>
 
 ---
 
@@ -355,8 +403,11 @@ You can delete an existing shortcut by specifying its alias and tag name.
 **Example:**
 - `delShortCut al/v tn/Vegan` — Deletes the shortcut for alias "v" and tag name "Vegan".
 
-![deleting shortcuts](images/del_shortcut.png)
-***Figure 14: Shows shortcut being deleted***
+<div style="text-align: center;">
+    <img src="images/del_shortcut.png" alt="deleting shortcuts" width="350"/>
+    <br>
+    <em>Figure 15: Shows shortcut being deleted</em>
+</div>
 
 ---
 
@@ -366,8 +417,11 @@ View all current shortcuts to see the mappings of aliases to tag names.
 
 **Format:** `listShortCut`
 
-![listing shortcuts](images/list_shortcut.png)
-***Figure 15: Shows shortcuts being listed***
+<div style="text-align: center;">
+    <img src="images/list_shortcut.png" alt="listing shortcuts" width="350"/>
+    <br>
+    <em>Figure 16: Shows shortcuts being listed</em>
+</div>
 
 ---
 
@@ -384,8 +438,11 @@ Examples:
     - `edit 1 t/vg t/v` — Tags the contact at index 1 with "Vegetarian" and "Vegan".
     - `add n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2, #02-25 pc/123456 t/v` — Creates a contact tagged as "Vegan".
 
-![using shortcuts](images/using_shortcut.png)
-***Figure 16: Shows shortcut being used to edit tags***
+<div style="text-align: center;">
+    <img src="images/using_shortcut.png" alt="using shortcuts" width="350"/>
+    <br>
+    <em>Figure 17: Shows shortcut being used to edit tags</em>
+</div>
 
 > **Note**: While adding shortcuts, aliases and tag names are case-insensitive. However, when using tags (`/t`) in commands, they are case-sensitive.
 
@@ -408,11 +465,17 @@ Examples:
     - `filter Vegan Vegetarian` — Shows all customers with tags starting with "Vegan" or "Vegetarian" (e.g., "VeganPlus").
     - `filter v vg` — Uses shortcuts to show customers tagged as "Vegan" or "Vegetarian" or tags that start with those aliases (e.g., "VeganFriendly").
 
-![filter](images/filter.png)
-***Figure 17: Shows filter based on tag: Vegan***
+<div style="text-align: center;">
+    <img src="images/filter.png" alt="filter" width="350"/>
+    <br>
+    <em>Figure 18: Shows filter based on tag: Vegan</em>
+</div>
 
-![filter_shortcuts](images/filter_shortcuts.png)
-***Figure 18: Shows filters based on preassigned shortcut***
+<div style="text-align: center;">
+    <img src="images/filter_shortcuts.png" alt="filter shortcuts" width="350"/>
+    <br>
+    <em>Figure 19: Shows filters based on preassigned shortcut</em>
+</div>
 
 ---
 ### **Archive user: `archive`**
@@ -483,11 +546,17 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 - `download t/Vegan` — Exports only wthe contacts or orders tagged as "Vegan."
 - `download t/friend t/colleague` — Exports contacts or orders tagged as "friend" and "colleague."
 
-![download](images/dowload.png)
-***Figure 19: Shows entire contact list being downloaded***
+<div style="text-align: center;">
+    <img src="images/dowload.png" alt="download" width="350"/>
+    <br>
+    <em>Figure 20: Shows entire contact list being downloaded</em>
+</div>
 
-![download shortcuts](images/download_shortcuts.png)
-***Figure 20: Shows shortcut being added***
+<div style="text-align: center;">
+    <img src="images/download_shortcuts.png" alt="download shortcuts" width="350"/>
+    <br>
+    <em>Figure 21: Shows shortcut being added</em>
+</div>
 
 ---
 
@@ -500,15 +569,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+NomNomNotifier data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+NomNomNotifier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, NomNomNotifier will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the NoNomNotifier application to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`

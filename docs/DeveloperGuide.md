@@ -24,6 +24,7 @@ title: Developer Guide
 * Below are the Java libraries used in this project:
   * JavaFX for UI
   * JUnit5 and TestFX for Testing
+  * Jackson for Storage
   
 --------------------------------------------------------------------------------------------------------------------
 
