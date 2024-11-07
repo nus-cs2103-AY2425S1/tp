@@ -116,7 +116,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]â€¦â€
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can delete a person's tags, email or address by leaving their fields empty, like t/, e/ or a/ respectively!
+You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
 </div>
 
 Examples:
