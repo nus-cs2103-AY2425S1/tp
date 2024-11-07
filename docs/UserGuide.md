@@ -90,7 +90,7 @@ The address and email address fields are also optional!
 Examples:
 
 - `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity`
-- `add person n/Betsy Crowe e/betsycrowe@example.com a/Crowe Apartment p/1234567 t/CameraMan`
+- `add person n/Bernice Yu e/berniceyu@example.com a/Yu Apartment p/99272758 t/Hairdresser`
 
 ![result for 'add person'](images/add_person.png)
 
@@ -121,8 +121,8 @@ You can delete a person's tags, email or address by leaving their fields empty, 
 
 Examples:
 
-- `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit person 2 n/Betsy Crower a/ t/` Edits the name of the 2nd person to be `Betsy Crower` and clears the address and all existing tags.
+- `edit person 7 p/91234567 e/ a/123 Clementi Rd` Edits the phone number and address of the 7th person to be `91234567` and `123 Clementi Rd` respectively and clears the email address.
+- `edit person 2 n/Bernice Yu a/ t/` Edits the name of the 2nd person to be `Bernice Yu` and clears the address and all existing tags.
 
 ![result for 'edit person'](images/edit_person.png)
 
@@ -160,7 +160,7 @@ Format: `view person KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-- `view person Betsy Crowe` returns the details for `Betsy Crowe`
+- `view person Bernice Yu` returns the details for `Bernice Yu`
 - `view person John Doe` returns the details for `John Doe`
 
 ![result for 'view person john doe'](images/viewJohnDoeResult.png)
@@ -199,7 +199,7 @@ When you delete a person, TalentHub will ask for your confirmation because you w
 Examples:
 
 - `list person` followed by `delete person 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
+- `find person Bernice` followed by `delete person 1` deletes the 1st person in the results of the `find person` command.
 
 ![result for 'delete person confirmation'](images/delete_person_confirmation.png)
 ![result for 'delete person'](images/delete_person.png)
@@ -218,8 +218,8 @@ An event can have any number of points of contact (including 0)
 
 Examples:
 
-- `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe`
-- `add event n/Hair Cut t/2022-03-27 v/John's Salon c/Betsy Crowe`
+- `add event n/Oscars t/2022-03-27 16:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li`
+- `add event n/Hair Cut t/2022-03-27 v/Salon for John c/Bernice Yu`
 
 ![result for 'add event'](images/add_event.png)
 
@@ -257,7 +257,7 @@ Examples:
 
 Finds events whose names contain any of the given keywords.
 
-Format: `find person KEYWORD [MORE_KEYWORDS]`
+Format: `find event KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g. `hiking` will match `Hiking`
 - The order of the keywords does not matter. e.g. `Hair Cut` will match `Cut Hair`
@@ -301,17 +301,17 @@ ensuring that only events associated with that celebrity are displayed.
 
 Format: `filter event CELEBRITY_NAME`
 
-- The search is case-insensitive. e.g. `betsy crowe` will match `Betsy Crowe`
-- The order of the keywords matters. e.g. `Betsy Crowe` will not match `Crowe Betsy`
+- The search is case-insensitive. e.g. `bernice yu` will match `Bernice Yu`
+- The order of the keywords matters. e.g. `Bernice Yu` will not match `Yu Bernice`
 - Only the **full celebrity name** is searched.
-- Only full name will be matched. e.g. `Bet` will not match `Betsy`
+- Only full name will be matched. e.g. `Ber` will not match `Bernice`
 - Persons matching all keywords exactly will be returned.
-  e.g. `Betsy` will match `Betsy` but not `Betsy Crowe`
+  e.g. `Bernice` will match `Bernice` but not `Bernice Yu`
 
 Examples:
 
-- `filter event Jim Bob` returns the events for celebrity `Jim Bob`
-- `filter event Betsy Crowe` returns the events for celebrity `Betsy Crowe`
+- `filter event Alex Yeoh` returns the events for celebrity `Alex Yeoh`
+- `filter event Bernice Yu` returns the events for celebrity `Bernice Yu`
 
 ![result for 'filter bernice yu'](images/filterBerniceYuResult.png)
 
@@ -328,13 +328,13 @@ Format: `delete event INDEX`
 Examples:
 
 - `list event` followed by `delete event 2` deletes the 2nd event in the address book.
-- `find Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find` command.
+- `find event Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find event` command.
 
 ![result for 'delete event'](images/delete_event.png)
 
 ### Clearing all events : `clear event`
 
-Clears all event entries from the address book.
+Clears all event entries from the address book after receiving confirmation from you.
 
 Format: `clear event`
 
@@ -345,7 +345,7 @@ Format: `clear event`
 
 ### Clearing all entries : `clear all`
 
-Clears all entries from the address book.
+Clears all entries from the address book after receiving confirmation from you.
 
 Format: `clear all`
 
@@ -360,7 +360,7 @@ Format: `exit`
 
 ### More information on Commands : `help`
 
-Provides users with a link to the application's user guide. This link can be copied using the copy URL button to access
+Provides users with a link to the application's user guide in a new window. This link can be copied using the copy URL button to access
 the user guide online.
 
 Format: `help`
