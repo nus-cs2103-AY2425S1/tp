@@ -634,3 +634,27 @@ testers are expected to do more *exploratory* testing.
 
     1. Launch the app by double-clicking the jar file.<br>
        Expected: The app loads with no contacts.
+                                       
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**   
+This project required substantial effort due to the complexity of expanding beyond the initial structure of AddressBook Level 3 (AB3).
+The following describes the challenges, difficulty level, and effort involved, as well as achievements attained through enhancements and
+additional features.
+
+### Difficulty Level and Challenges
+
+* **Additional Fields**: Our project manages additional fields such as Telegram handle, module, and contact type. Integrating these fields required modifying both data structures and UI components, as well as adapting backend logic to manage and validate these new attributes.
+* **Enhanced Search Functionality**: We implemented additional search functionalities, allowing users to find contacts by tags and Telegram handles, in addition to names. This required integration of the find command with additional fields.
+* **UI Enhancements**: Significant effort went into redesigning the user interface to make it aesthetically pleasing. In addition to improving layout and visual styling, we introduced a light and dark mode, ensuring each element was clearly visible in both themes.
+ 
+### Effort
+
+* **Custom Implementation and Adaptation** The majority of the codebase was custom-developed to meet the specific needs of our project, with very limited reuse of existing libraries or tools beyond those provided in AB3. For example, the additional fields, search functionality, and UI customization were built from scratch, significantly increasing the project’s scope and difficulty level.
+
+### Achievement
+
+* Our team successfully extended the basic functionality of AB3, transforming it into a more versatile and feature-rich application. The enhanced search capabilities and the addition of new fields significantly improved the usability of the application, allowing for more efficient contact management. The aesthetically refined UI, with support for both light and dark modes, further elevated the user experience and set our project apart from AB3.
+
+In summary, this project required considerable effort due to the added functionality, custom UI work, and enhanced search features. The limited reuse of existing libraries meant most of the code had to be written and adapted by our team, adding to the overall effort invested.
+
