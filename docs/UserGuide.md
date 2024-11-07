@@ -172,7 +172,7 @@ Format: `/v find KEYWORD`
     * e.g. `Joe` will match `Joelle`, `Enjoeline` and `Joe`
 
 Examples:
-* `/v find A` returns `Alice Wong`, `Bob Tan` and `David Ng`
+* `/v find Anne` returns `Anne Khoo`, `Annebette Tan` and `Jonanne Tan`
 
 ![Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
 
