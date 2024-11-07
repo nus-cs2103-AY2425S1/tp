@@ -82,7 +82,7 @@ public class StudentCard extends UiPart<Region> {
 
         if (!student.getGroup().isNoGroup()) {
             String name = student.getGroup().groupName;
-            String color = CALENDAR_COLORS.get(Math.abs(Objects.hash(name)) % CALENDAR_COLORS.size());
+            String color = CALENDAR_COLORS.get(Math.abs(Objects.hash(name.toLowerCase())) % CALENDAR_COLORS.size());
             Label groupChip = new Label(name);
             groupChip.getStyleClass().add("group-chip");
             groupChip.setStyle("-fx-background-color: " + color);
