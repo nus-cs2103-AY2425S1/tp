@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.product.Product;
@@ -33,6 +35,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Supplier> filteredSuppliers;
     private final FilteredList<Product> filteredProducts;
+    private final SortedList<Product> sortedProducts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -46,6 +49,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
         filteredProducts = new FilteredList<>(this.addressBook.getProductList());
+        sortedProducts = new SortedList<>(filteredProducts);
     }
 
     public ModelManager() {
@@ -170,21 +174,7 @@ public class ModelManager implements Model {
         return addressBook.findSupplier(supplierName);
     }
 
-    //=========== Filtered Supplier List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Supplier} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Supplier> getFilteredSupplierList() {
-        return filteredSuppliers;
-    }
-
-    @Override
-    public ObservableList<Product> getFilteredProductList() {
-        return filteredProducts;
-    }
+    //=========== Filtered/Sorted Supplier/Product List Accessors ===========
 
     @Override
     public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
@@ -196,6 +186,26 @@ public class ModelManager implements Model {
     public void updateFilteredProductList(Predicate<Product> predicate) {
         requireNonNull(predicate);
         filteredProducts.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedProductList(Comparator<Product> comparator) {
+        requireNonNull(comparator);
+        sortedProducts.setComparator(comparator);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Supplier} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Supplier> getModifiedSupplierList() {
+        return filteredSuppliers;
+    }
+
+    @Override
+    public ObservableList<Product> getModifiedProductList() {
+        return sortedProducts;
     }
 
     @Override
@@ -214,5 +224,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredSuppliers.equals(otherModelManager.filteredSuppliers);
     }
-
 }

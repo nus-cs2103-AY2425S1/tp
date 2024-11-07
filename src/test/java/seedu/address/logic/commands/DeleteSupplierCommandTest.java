@@ -34,7 +34,7 @@ public class DeleteSupplierCommandTest {
     @Test
     public void execute_validSupplierNameUnfilteredList_success() {
         // Arrange
-        Supplier supplierToDelete = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier supplierToDelete = model.getModifiedSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         Name supplierName = supplierToDelete.getName();
         DeleteSupplierCommand deleteSupplierCommand = new DeleteSupplierCommand(supplierName);
 
@@ -63,7 +63,7 @@ public class DeleteSupplierCommandTest {
         // Arrange
         showSupplierAtIndex(model, INDEX_FIRST_SUPPLIER);
 
-        Supplier supplierToDelete = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier supplierToDelete = model.getModifiedSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         Name supplierName = supplierToDelete.getName();
         DeleteSupplierCommand deleteSupplierCommand = new DeleteSupplierCommand(supplierName);
 
@@ -120,12 +120,12 @@ public class DeleteSupplierCommandTest {
      * Updates {@code model}'s filtered list to show only the supplier at the given {@code index}.
      */
     private void showSupplierAtIndex(Model model, Index index) {
-        assertTrue(index.getZeroBased() < model.getFilteredSupplierList().size());
+        assertTrue(index.getZeroBased() < model.getModifiedSupplierList().size());
 
-        Supplier supplier = model.getFilteredSupplierList().get(index.getZeroBased());
+        Supplier supplier = model.getModifiedSupplierList().get(index.getZeroBased());
         model.updateFilteredSupplierList(s -> s.equals(supplier));
 
-        assertEquals(1, model.getFilteredSupplierList().size());
+        assertEquals(1, model.getModifiedSupplierList().size());
     }
 
     /**
@@ -134,6 +134,6 @@ public class DeleteSupplierCommandTest {
     private void showNoSupplier(Model model) {
         model.updateFilteredSupplierList(s -> false);
 
-        assertTrue(model.getFilteredSupplierList().isEmpty());
+        assertTrue(model.getModifiedSupplierList().isEmpty());
     }
 }

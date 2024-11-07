@@ -108,10 +108,10 @@ public interface Model {
     void setProduct(Product target, Product editedProduct);
 
     /** Returns an unmodifiable view of the filtered supplier list */
-    ObservableList<Supplier> getFilteredSupplierList();
+    ObservableList<Supplier> getModifiedSupplierList();
 
     /** Returns an unmodifiable view of the filtered product list */
-    ObservableList<Product> getFilteredProductList();
+    ObservableList<Product> getModifiedProductList();
 
     /**
      * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
@@ -124,6 +124,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);
+
+    /**
+     * Updates the sort of the sorted product list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateSortedProductList(java.util.Comparator<Product> comparator);
 
     Product findProductByName(ProductName productName);
 

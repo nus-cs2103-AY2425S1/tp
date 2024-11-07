@@ -112,24 +112,24 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Supplier> expectedFilteredList = new ArrayList<>(actualModel.getFilteredSupplierList());
+        List<Supplier> expectedFilteredList = new ArrayList<>(actualModel.getModifiedSupplierList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredSupplierList());
+        assertEquals(expectedFilteredList, actualModel.getModifiedSupplierList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the supplier at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showSupplierAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredSupplierList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getModifiedSupplierList().size());
 
-        Supplier supplier = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
+        Supplier supplier = model.getModifiedSupplierList().get(targetIndex.getZeroBased());
         final String[] splitName = supplier.getName().fullName.split("\\s+");
         model.updateFilteredSupplierList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredSupplierList().size());
+        assertEquals(1, model.getModifiedSupplierList().size());
     }
 
 }

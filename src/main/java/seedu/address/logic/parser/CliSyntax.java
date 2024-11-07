@@ -24,4 +24,7 @@ public class CliSyntax {
     // AddProduct, AssignProduct
     public static final Prefix PREFIX_PRODUCT_NAME = new Prefix("pr/");
     public static final Prefix PREFIX_SUPPLIER_NAME = new Prefix("su/");
+
+    // View
+    public static final Prefix PREFIX_SORT = new Prefix("sort/");
 }

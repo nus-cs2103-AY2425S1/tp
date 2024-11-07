@@ -36,20 +36,20 @@ public class TestUtil {
      * Returns the middle index of the supplier in the {@code model}'s supplier list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredSupplierList().size() / 2);
+        return Index.fromOneBased(model.getModifiedSupplierList().size() / 2);
     }
 
     /**
      * Returns the last index of the supplier in the {@code model}'s supplier list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredSupplierList().size());
+        return Index.fromOneBased(model.getModifiedSupplierList().size());
     }
 
     /**
      * Returns the supplier in the {@code model}'s supplier list at {@code index}.
      */
     public static Supplier getSupplier(Model model, Index index) {
-        return model.getFilteredSupplierList().get(index.getZeroBased());
+        return model.getModifiedSupplierList().get(index.getZeroBased());
     }
 }
