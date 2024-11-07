@@ -19,26 +19,26 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("female"),
-                    getModuleSet("MA1522"), getTagSet("friend", "mentor", "leader")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Gender("male"),
-                    getModuleSet("CS1101"), getTagSet("colleague", "project", "tutorial")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Gender("male"),
-                    getModuleSet("LS1301"), getTagSet("neighbor", "debate")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Gender("female"),
-                    getModuleSet("EL1101"), getTagSet("family", "mentor", "honor")),
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("male"),
+                    getModuleSet("Chemistry"), getTagSet("new", "IB", "smart")),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Gender("female"),
+                    getModuleSet("History"), getTagSet("smart")),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Gender("female"),
+                    getModuleSet("English"), getTagSet("OLevels")),
+            new Person(new Name("David Li"), new Phone("91031282"), new Gender("male"),
+                    getModuleSet("English"), getTagSet("OLevels", "smart", "new")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Gender("male"),
-                    getModuleSet("EL1101"), getTagSet("classmate", "tutor", "soccer")),
+                    getModuleSet("Mathematics"), getTagSet("ALevels", "smart")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Gender("male"),
-                    getModuleSet("MA1522"), getTagSet("colleague", "project", "basketball")),
+                    getModuleSet("Tamil"), getTagSet("new", "smart")),
             new Person(new Name("Evelyn Tan"), new Phone("81234567"), new Gender("female"),
-                    getModuleSet("CS2103"), getTagSet("project", "tutorial", "software")),
-            new Person(new Name("Farah Ahmed"), new Phone("87987654"), new Gender("female"),
-                    getModuleSet("MA1101"), getTagSet("classmate", "mentor", "honor")),
+                    getModuleSet("Chinese"), getTagSet("IB", "smart")),
+            new Person(new Name("Farah Ahmed"), new Phone("87987654"), new Gender("male"),
+                    getModuleSet("Malay"), getTagSet("NLevels")),
             new Person(new Name("Gabriel Lim"), new Phone("89876543"), new Gender("male"),
-                    getModuleSet("IS1103"), getTagSet("classmate", "project", "coding")),
+                    getModuleSet("Higher Chinese"), getTagSet("help")),
             new Person(new Name("Hannah Koh"), new Phone("89765432"), new Gender("female"),
-                    getModuleSet("CS1231"), getTagSet("debate", "leader"))
+                    getModuleSet("Literature"), getTagSet("new"))
         };
     }
 
