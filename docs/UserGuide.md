@@ -5,17 +5,17 @@ pageNav: 3
 
 # TechConnect User Guide
 
-TechConnect is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TechConnect can help you manage your applications more efficiently than traditional GUI apps.
+TechConnect is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can are looking for job opportunities, TechConnect can help you manage your applications more efficiently than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 ---
-
 # Table of Contents
 
-1. [Quick start](#quick-start)
-2. [Features](#features)
+1. [Glossary](#glossary)
+2. [Quick start](#quick-start)
+3. [Features](#features)
     1. [Viewing help : `help`](#viewing-help--help)
     2. [Adding a company: `add`](#adding-a-company-add)
         - [Special Tag Values](#special-tag-values)
@@ -32,7 +32,17 @@ TechConnect is a **desktop app for managing internship applications, optimized f
     13. [Exiting the program : `exit`](#exiting-the-program--exit)
 3. [FAQ](#faq)
 4. [Command Summary](#command-summary)
+---
+## Glossary
 
+| Term                     | Definition                                                                                                                                                                                   |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Command Line Interface (CLI)** | A text-based user interface that allows users to type commands to perform specific tasks, rather than using graphical elements like buttons.                                         |
+| **Graphical User Interface (GUI)** | A visual interface that includes graphical elements (such as windows, icons, and buttons) for users to interact with applications.                                                    |
+| **JSON (JavaScript Object Notation)** | A lightweight data-interchange format often used for data storage and communication between applications. TechConnect saves data in JSON format for easy access and modification. |
+| **Parameter**            | Information or input provided to a command to specify how it should operate. For example, in `add n/NAME`, `NAME` is a parameter that specifies the company name to add.                    |
+| **Jar File (.jar)**      | A Java ARchive file, which is a package file format used to distribute Java applications. Running the `.jar` file will start the TechConnect application.                                  |
+---
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -41,68 +51,78 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 
 3. Copy the file to the folder you want to use as the _home folder_ for TechConnect.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar techconnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui.png](images%2FUi.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
     - `list` : Lists all companies.
-
     - `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com` : Adds a company named `Google` to the Address Book.
-
-    - `delete 3` : Deletes the 3rd company shown in the current list.
-
+    - `bookmark 1` : Bookmarks the 1st company shown in the current list.
+    - `bmlist` : Shows a list of all the bookmarked companies in the address book.
+    - `edit 2 p/91234567 e/grab@example.com` : Edits the phone number and email address of the 2nd company to be 91234567 and grab@example.com respectively.
+    - `remark 3 r/Has good internship opportunities` : Edits the remark of the 3rd company to Has good internship opportunities.
+    - `find Google` :  Finds companies whose name contain Google.
+    - `delete 4` : Deletes the 4th company shown in the current list.
+    - `status 5 as/Applied` : Edits the application status of the 5th company at index 5 to `Applied`
     - `clear` : Deletes all companies.
-
     - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Glossary](#Glossary) for any unfamiliar terms.
 
 ---
 
 ## Features
+### Notes about the Command Format
 
-**Notes about the command format:**<br>
-
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.
-
-- Items in square brackets are optional.<br>
-  e.g., `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.
-
-- Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g., `[t/TAG]…​` can be used as ` ` (i.e., 0 times), `t/bigTech`, `t/bigTech t/BigCompany` etc.
-
-- Parameters can be in any order.<br>
-  e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.<br>
-  e.g., if the command specifies `help 123`, it will be interpreted as `help`.
-
-- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
+| Format Note                                                                                                                                                                                                                      | Example                                                                                                                                                                             |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Words in `UPPER_CASE` are parameters to be supplied by the user.                                                                                                                                                                 | e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.                                                                                                   |
+| Items in square brackets are optional.                                                                                                                                                                                           | e.g., `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.                                                                                                        |
+| Items with `…` after them can be used multiple times, including zero times.                                                                                                                                                      | e.g., `[t/TAG]…` can be used as ` ` (i.e., 0 times), `t/bigTech`, `t/bigTech t/BigCompany`, etc.                                                                                    |
+| Parameters can be in any order.                                                                                                                                                                                                  | e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.                                                                                 |
+| Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.                                                                                                 | e.g., if the command specifies `help 123`, it will be interpreted as `help`.                                                                                                        |
+| If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application.            | N/A                                                                                                                                                                                 |
+---
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
+Format: `help`
+
 ![help message](images/helpMessage.png)
 
-Format: `help`
+[Back to Table of Contents](#table-of-contents)
+
+---
+
 
 ### Adding a company: `add`
 
 Adds a company to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cp/CAREER_PAGE_URL [r/REMARK] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cp/CAREER_PAGE_URL r/REMARK [t/TAG] …​`
 
 **Tip:** A company can have any number of tags (including 0)
 
-Examples:
+**Example**:
 
-- `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com`
-- `add n/Meta t/bigTech e/meta@example.com a/Newgate Prison p/1234567 t/salary_high cp/www.meta-career-url.com r=Leading tech company`
+```
+add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 
+cp/www.google-career-url.com r/Dream job
+```
+**Outcome**:
+![AddCommandOutcome.png](images%2FAddCommandOutcome.png)
+```
+add n/Meta t/bigTech e/meta@example.com a/Newgate Prison 
+p/1234567 t/salary_high cp/www.meta-career-url.com r/Leading tech company
+```
+**Outcome**:
+![AddCommandOutcome2.png](images%2FAddCommandOutcome2.png)
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -132,8 +152,12 @@ These tags must be written using the following format (note the underscore):
 like in `t/salary_[value]_extra`, will be ignored.
 
 **Example:**
-add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com
-t/salary_HIGH t/wlb_MEDIUM t/difficulty_MEDIUM
+```
+add n/Google p/98765432 e/google@example.com a/John street, block 123, 
+#01-01 cp/www.google-career-url.com r/ t/salary_HIGH t/wlb_MEDIUM t/difficulty_MEDIUM
+```
+**Outcome**:
+![TagCommandOutcome.png](images%2FTagCommandOutcome.png)
 
 ---
 
@@ -155,9 +179,12 @@ Tag format: `t/period_[Season]_[Year]`
 like in `t/period_[Season]_[Year]_hello`, will be ignored.
 
 **Example:**
-add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com
-t/period_summer_2025
-
+```
+add n/Shopee p/98765432 e/shopee@example.com a/John street, block 123, #01-01 r/ 
+cp/www.shopee-career-url.com t/period_summer_2025
+```
+**Outcome**:
+![TagCommandOutcome2.png](images%2FTagCommandOutcome2.png)
 ##### **Unsupported and Invalid Tag values**
 
 - Only alphanumeric characters are allowed in the tag
@@ -168,7 +195,9 @@ Other Invalid tag example:
 - . Trying to create a tag like ```t/mytag_HIGH``` will fail as we will treat your tag value
 as ```mytag_HIGH``` and the underscore is not a alphanumeric character
 
+[Back to Table of Contents](#table-of-contents)
 
+---
 
 ### Listing all companies : `list`
 
@@ -176,6 +205,9 @@ Shows a list of all companies in the address book.
 
 Format: `list`
 
+[Back to Table of Contents](#table-of-contents)
+
+---
 ### Bookmarking a company : `bookmark`
 
 Bookmarks a company in the address book.
@@ -186,6 +218,16 @@ Format: `bookmark INDEX`
 - The index refers to the index number shown in the displayed company list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
+**Example**:
+```dtd
+bookmark 1
+```
+**Outcome**:
+![BookmarkOutcome.png](images%2FBookmarkOutcome.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+---
 ### Removing a bookmark from a bookmarked company : `removebm`
 
 Removes a company from the list of bookmarked companies in the address book.
@@ -196,17 +238,41 @@ Format: `removebm INDEX`
 - The index refers to the index number shown in the displayed company list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
+**Example**:
+```dtd
+removebm 1
+```
+**Outcome**:
+
+![BookmarkOutcome.png](images%2FBookmarkOutcome.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+---
+
 ### Listing all bookmarked companies : `bmlist`
 
 Shows a list of all the bookmarked companies in the address book.
 
 Format: `bmlist`
 
+**Example**:
+```dtd
+bmlist
+```
+
+**Outcome**:
+![BookmarkListOutcome.png](images%2FBookmarkListOutcome.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+---
+
 ### Editing a company : `edit`
 
 Edits an existing company in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL] [t/TAG]`
 
 - Edits the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
@@ -214,10 +280,23 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL
 - When editing tags, the existing tags of the company will be removed; i.e., adding of tags is not cumulative.
 - You can remove all the company’s tags by typing `t/` without specifying any tags after it.
 
-Examples:
+**Examples**:
 
-- `edit 1 p/91234567 e/grab@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `grab@example.com` respectively.
-- `edit 2 n/Grab t/` Edits the name of the 2nd company to be `Grab` and clears all existing tags.
+```
+edit 1 p/91234567 e/grab@example.com
+```
+Edits the phone number and email address of the 1st company to be `91234567` and `grab@example.com` respectively.
+
+**Outcome**:
+
+**Before**
+![EditBefore.png](images%2FEditBefore.png)
+**After**
+![EditAfter.png](images%2FEditAfter.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+--- 
 
 ### Editing a company's remark : `remark`
 
@@ -231,11 +310,34 @@ Format: `remark INDEX r/REMARK`
 - Existing remark will be overwritten by the input.
 - You can remove the company's remark by typing `remark INDEX r/` without specifying any text after `r/`.
 
-Examples:
+**Examples**:
 
-- `remark 2 r/Has good internship opportunities` Edits the remark of the 2nd company to `Has good internship opportunities`.
-- `remark 3 r/` Removes the remark from the 3rd company.
+```dtd
+remark 2 r/Has good internship opportunities
+```
+Edits the remark of the 2nd company to `Has good internship opportunities`.
 
+**Outcome**:
+
+**Before**
+![RemarkBefore.png](images%2FRemarkBefore.png)
+**After**
+![RemarkAfter.png](images%2FRemarkAfter.png)
+```
+remark 3 r/
+```
+Removes the remark from the 3rd company.
+
+**Outcome**:
+
+**Before**
+![RemoveRemarkBefore.png](images%2FRemoveRemarkBefore.png)
+**After**
+![RemoveRemarkAfter.png](images%2FRemoveRemarkAfter.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+---
 ### Locating companies by name: `find`
 
 Finds companies whose names or tags contain any of the given keywords.
@@ -249,12 +351,21 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - Companies matching at least one keyword will be returned (i.e., `OR` search).
   e.g., `Grab Food` will return `Grab Ride`, `Food Panda`
 
-Examples:
+**Examples**:
 
-- `find Salary:HIGH` returns companies with Salary tags and value HIGH
+```
+find bigTech
+```
+returns companies with bigTech tag
+
+**Outcome**:
+![Rename.png](images%2FRename.png)
 - `find Food` returns `Grab Food` and `Food Panda`
 - `find Shop Fast` returns `Shop Back`, `Fast Food`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+---
 
 ### Deleting a company : `delete`
 
@@ -270,7 +381,10 @@ Examples:
 
 - `list` followed by `delete 2` deletes the 2nd company in the address book.
 - `find Google` followed by `delete 1` deletes the 1st company in the results of the `find` command.
+- 
+[Back to Table of Contents](#table-of-contents)
 
+---
 ### Editing an application status: `status`
 
 Edits the application status of a company.
@@ -283,16 +397,43 @@ Format: `status INDEX as/STATUS`
 - The `STATUS` can be any text that describes the current application status.
 - You can remove the company's application status by typing `status INDEX as/` without specifying any text after `as/`.
 
-Examples:
+**Examples**:
 
-- `status 1 as/Applied` modifies the application status of the company at index 1 to `Applied`.
-- `status 2 as/` Removes the remark from the 2nd company.
+```
+status 1 as/Applied
+``` 
+modifies the application status of the company at index 1 to `Applied`.
+**Outcome**:
 
+**Before**
+![StatusBefore.png](images%2FStatusBefore.png)
+**After**
+![StatusAfter.png](images%2FStatusAfter.png)
+
+```
+status 2 as/
+``` 
+Removes the remark from the 2nd company.
+
+**Outcome**
+
+**Before**
+![StatusRemoveBefore.png](images%2FStatusRemoveBefore.png)
+**After**
+![StatusRemoveAfter.png](images%2FStatusRemoveAfter.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+---
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+[Back to Table of Contents](#table-of-contents)
+
+---
 
 ### Exiting the program : `exit`
 
@@ -300,9 +441,16 @@ Exits the program.
 
 Format: `exit`
 
+[Back to Table of Contents](#table-of-contents)
+
+---
 ### Saving the data
 
 TechConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[Back to Table of Contents](#table-of-contents)
+
+--- 
 
 ### Editing the data file
 
@@ -311,6 +459,8 @@ TechConnect data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file make its format invalid, TechConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the TechConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -324,12 +474,18 @@ Furthermore, certain edits can cause the TechConnect to behave in unexpected way
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TechConnect home folder.
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **When using multiple screens**, if you move the application to a secondary screen and later switch to using only the primary screen, the GUI will open off-screen.
+- The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. 
+- The remedy is to manually restore the minimized Help Window.
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -349,3 +505,4 @@ Furthermore, certain edits can cause the TechConnect to behave in unexpected way
 | **List bookmarked companies** | `bmlist`                                                                                                                                                                                                                                                  |
 | **Add application status**    | `status INDEX as/STATUS` <br>e.g., `status 2 as/Round 2 of interview`                                                                                                                                                                                     |
 | **Help**                      | `help`                                                                                                                                                                                                                                                    |
+[Back to Table of Contents](#table-of-contents)
