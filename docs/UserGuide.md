@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# EventTory - User Guide
+# EventTory User Guide
 
 EventTory is a **desktop app for managing vendors and events**.
 
@@ -152,6 +152,7 @@ Displays the list of vendors and/or events in EventTory.
 
 #### Format: `list [v/] [e/]`
 
+#### Notes:
 * The list(s) displayed depends on whether the `v/` and/or `e/` prefix(es) is specified.
 * If no prefixes are specified, both the vendor and event lists will be displayed.
 * The prefixes can be specified in any order.
@@ -160,7 +161,7 @@ Displays the list of vendors and/or events in EventTory.
 #### Examples:
 * `list v/` will display the list of vendors.
 * `list e/` will display the list of events.
-* `list v/ e/` and `list` will display both lists.
+* `list v/ e/` and `list` will display both vendor and event lists.
 
 ### Editing a Vendor or Event : `edit`
 
@@ -187,12 +188,13 @@ Edits an existing vendor or event in EventTory.
 
 ### Assigning Vendors & Events: `assign`
 
-Assigns vendors to events.
+Assigns vendors to events and vice versa.
 
 #### Format: `assign INDEX`
 
+#### Notes:
 * Assigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
-  * The index refers to the index number shown in the assignable vendor/event list.
+  * The index refers to the index number shown in the **assignable** vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
 * The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
 * If the specified vendor-event pair are already associated (assigned to each other), the operation will fail.
@@ -203,12 +205,13 @@ Assigns vendors to events.
 
 ### Unassigning Vendors & Events: `unassign`
 
-Unassigns vendors from events.
+Unassigns vendors from events and vice versa.
 
 #### Format: `unassign INDEX`
 
+#### Notes:
 * Unassigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
-  * The index refers to the index number shown in the assigned vendor/event list.
+  * The index refers to the index number shown in the **assigned** vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
 * The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
 * If the specified vendor-event pair are not already associated (not assigned to each other), the operation will fail.
@@ -249,9 +252,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Clearing All Entries : `clear`
 
-Clears all entries from EventTory.
+Clears all vendor and event entries from EventTory.
 
 #### Format: `clear`
 
@@ -263,13 +266,13 @@ Exits the program.
 
 ### Saving Data
 
-EventTory data is saved in the hard disk automatically after any command that changes the data.
+EventTory data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ### Editing the Data File
 
-EventTory data is saved automatically as a JSON file `[JAR file location]/data/eventTory.json`.
-<br>Advanced users are welcome to update data directly by editing that data file.
+EventTory data is saved automatically as a JSON file `[JAR file location]/data/eventTory.json`.<br>
+Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
