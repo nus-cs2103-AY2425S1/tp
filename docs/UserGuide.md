@@ -114,7 +114,7 @@ Alternatively, if you’d like to explore the application independently, refer t
 
 ## Tutorial for Beginners
 
-Perfect if you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
+If you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
 
 
 ### Tutorial Contents
