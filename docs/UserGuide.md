@@ -40,6 +40,16 @@ the process of accessing and updating resident student details. What's more, Dor
 - [FAQ](#FAQ)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
+- [Field constraints](#field-constraints)
+  - [Name](#name)
+  - [Phone number](#phone-number)
+  - [Email](#email)
+  - [Address](#address)
+  - [Tags](#tags)
+  - [Room number](#room-number)
+  - [Emergency contact name](#emergency-contact-name)
+  - [Emergency contact phone number](#emergency-contact-phone-number)
+  - [Graduation year](#graduation-year)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -114,7 +124,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have up to 10 tags (including 0).
 </box>
 
 Examples:
@@ -234,12 +244,14 @@ The `import` command allows users to restore data from any one save file into th
 
 Format: `import f/FILE_PATH`
 
-* Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
-
 Examples:
 
-* `import ./SaveFile3.json` imports data from the file named at `./SaveFile3.json` into the application.
+* `import fp/C:/SaveFile3.json` imports data from the file at `C:/SaveFile3.json` into the application.
 
+<box type="tip" seamless>
+
+**Tip:** Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
+</box>
 
 ### Editing the data file
 
@@ -286,3 +298,25 @@ Action     | Format, Examples
 **Help**   | `help`
 **Clean**  | `clean`
 **Undo**   | `undo`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Field constraints
+
+### Name
+
+### Phone number
+
+### Email
+
+### Address
+
+### Tags
+
+### Room number
+
+### Emergency contact name
+
+### Emergency contact phone number
+
+### Graduation year
