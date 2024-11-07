@@ -1,6 +1,7 @@
 package tuteez.logic.parser;
 
-import static tuteez.logic.Messages.*;
+import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 
 import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.AddLessonCommand;
