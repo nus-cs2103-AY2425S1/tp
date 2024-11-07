@@ -19,17 +19,18 @@
     -fx-background-insets: 12px 0px 12px 0px;
 }
 
-.text-command-code {
-    -fx-background-color: rgba(255, 187, 131, 0.8);
-    -fx-padding: 12px 20px;
-}
-
 .text-command .content, .text-command {
     -fx-padding: 20px 20px;
     -fx-font-size: 1.5em;
     -fx-wrap-text: true;
     -fx-font-family: "DM Sans Medium", sans-serif;
     -fx-fill: white !important;
+}
+
+.text-command-code {
+    -fx-background-color: rgba(255, 187, 131, 0.8);
+    -fx-padding: 20px 44px 20px 20px;
+    -fx-background-insets: 12px 24px 12px 0px;
 }
 
 .text-box {

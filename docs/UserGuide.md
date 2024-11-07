@@ -26,7 +26,15 @@
 
   img {
     pointer-events: none;
-    scale: 0.85;
+    width: 70%;
+    margin: 24px 0 24px 15%;
+    border-radius: 8px;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .help-image {
+    width: 80%;
+    margin: auto;
   }
 
   .ug {
@@ -224,8 +232,8 @@
   <a href="#command-summary">
     <button class="toc-btns"><span>3. Commands Summary</span></button>
   </a>
-  <a href="#features">
-    <button class="toc-btns"><span>4. Features</span></button>
+  <a href="#storing-data">
+    <button class="toc-btns"><span>4. Storing Data</span></button>
   </a>
   <a href="#faq">
     <button class="toc-btns"><span>5. FAQ</span></button>
@@ -396,7 +404,6 @@
   </details>
 </div>
 
-</div>
 <div class="content content-droppable">
 
 <details open>
@@ -636,7 +643,11 @@ Example: "find ph n/John".
   **Format**: `help`
   </div>
 
+  <div class="help-image">
+  
   ![Ui](images/helpWindow.png)
+  </div>
+ 
   </div>
 </details>
 
@@ -850,7 +861,7 @@ Action     | Format                                                             
 
 <br>
 
-<h1 class="headers" id="features">Features</h1>
+<h1 class="headers" id="storing-data">Storing Data</h1>
 
 <div class="content">
 
@@ -876,13 +887,6 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 </div>
 
 </div>
-<br>
-<br>
-
-### **Archiving data files `[coming in v2.0]`**
-<div class="sub-content">
-
-_Details coming soon ..._
 
 </div>
 </div>

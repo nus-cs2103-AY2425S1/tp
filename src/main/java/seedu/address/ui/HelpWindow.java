@@ -399,9 +399,10 @@ public class HelpWindow extends UiPart<Stage> {
             // Setting the corresponding MenuItem to scroll to the Text object
             ChangeListener<Number> listener = (obs, oldText, newText) -> {
                 Platform.runLater(() -> {
-                    commandTextPurpose.setWrappingWidth(getRoot().getScene().getWidth() - ABSOLUTE_PADDING);
-                    logger.log(Level.INFO, "Setting Height of ResultDisplay to "
-                            + (getRoot().getScene().getWidth() - ABSOLUTE_PADDING));
+                    int newWidth = (int) getRoot().getScene().getWidth() - ABSOLUTE_PADDING;
+                    commandTextPurpose.setWrappingWidth(newWidth);
+                    commandTextExample.setWrappingWidth(newWidth);
+                    logger.log(Level.INFO, "Setting Width of ResultDisplay to " + newWidth);
                 });
             };
             getRoot().widthProperty().addListener(listener);
