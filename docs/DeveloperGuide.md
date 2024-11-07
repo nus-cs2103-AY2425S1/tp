@@ -430,6 +430,63 @@ Preconditions: User has deleted a contact
       4a1. BlitzBiz informs the user that there were no matches found.
       Use case ends.
 
+**Use case: UC05 - Rename Tag**
+
+**MSS**
+
+1.  User requests to rename a tag
+2.  BlitzBiz requests for the old and new tag names
+3.  User enters old and new tag names
+4.  BlitzBiz renames all the tags with the old tag name to the new tag name
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command.
+       Steps 3a1-3a2 are repeated until the command format entered is correct.
+       Use case resumes from step 4.
+
+* 3b. The new tag does not follow requirements.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command with new tag.
+       Steps 3a1-3a2 are repeated until the new tag entered is valid.
+       Use case resumes from step 4.
+
+* 4a. There are no tags with the old tag name.
+  4a1. BlitzBiz informs the user that there were no matches found.
+  Use case ends.
+
+* 4b. There are contacts with both the old tag and new tag.
+  4b1. BlitzBiz informs the user that contacts which will result in duplicated tags will not be updated.
+
+**Use case: UC06 - Social Media**
+
+**MSS**
+
+1.  User requests to add a social media handle to a contact
+2.  BlitzBiz requests for the social media platform and handle name
+3.  User enters social media platform and handle name
+4.  BlitzBiz adds the social media to the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command.
+       Steps 3a1-3a2 are repeated until the command format entered is correct.
+       Use case resumes from step 4.
+
+* 3b. The handle does not follow requirements.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command with new handle.
+       Steps 3a1-3a2 are repeated until the handle entered is valid.
+       Use case resumes from step 4.
+
 **Use case: Filter contact list by tag(s)**
 
 **MSS**
@@ -462,7 +519,7 @@ Preconditions: User has deleted a contact
 3.  User enters field to sort by and order to sort by
 4. BlitzBiz displays the sorted list
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -471,11 +528,11 @@ Preconditions: User has deleted a contact
 
 * 3b. User enter more than one field to sort by
     * 3b1. BlitzBiz displays error message to inform user
-        that it can only sort by one field
+      that it can only sort by one field
     * 3a2. User enters again with only one field to sort by
-        Steps 3b1 is repeated until the format entered is correct.
-        Use case resumes from step 4.
-  
+      Steps 3b1 is repeated until the format entered is correct.
+      Use case resumes from step 4.
+
 **Use case: Search for contacts by schedules**
 
 **MSS**
@@ -497,7 +554,7 @@ Preconditions: User has deleted a contact
 
 * 3c. User enters an end time before start time
     * 3c1. BlitzBiz displays error message to inform user
-        that end time provided must be after start time
+      that end time provided must be after start time
     * 3c2. User enters again with a later end time than start time
       Step 3c1 is repeated until end time is later than start time.
       Use case resumes from step 4.
@@ -505,6 +562,7 @@ Preconditions: User has deleted a contact
 * 4a. No contacts with schedules in the given range are found
     * 4a1. BlitzBiz informs the user that there were no matches found.
       Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
