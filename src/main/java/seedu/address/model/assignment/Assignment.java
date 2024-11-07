@@ -41,33 +41,30 @@ public class Assignment {
 
     /**
      * Returns true if both {@code Project#equals(Project)} and
-     * {@code Employee#equals(Employee)} returns true.
+     * {@code Employee#equals(Employee)} returns true or if both assignments have
+     * the same Id.
      * This defines a weaker notion of equality between two assignments.
      */
     public boolean isSameAssignment(Assignment otherAssignment) {
         if (otherAssignment == this) {
             return true;
         }
-
         if (otherAssignment == null) {
             return false;
         }
-
         boolean isSameProject = otherAssignment.getProject().equals(project);
         boolean isSameEmployee = otherAssignment.getEmployee().equals(employee);
-        return isSameEmployee && isSameProject;
+        return (isSameEmployee && isSameProject) || otherAssignment.getAssignmentId().equals(assignmentId);
     }
 
     /**
      * Returns true if both {@code ProjectId#equals(ProjectId)} and
      * {@code EmployeeId#equals(EmployeeId)} returns true.
-     * This defines a weaker notion of equality between two assignments.
      */
-    public boolean isSameAssignment(ProjectId projectId, EmployeeId employeeId) {
+    public boolean hasSameId(ProjectId projectId, EmployeeId employeeId) {
         if (projectId == null || employeeId == null) {
             return false;
         }
-
         boolean isSameProject = projectId.equals(this.project.getId());
         boolean isSameEmployee = employeeId.equals(this.employee.getEmployeeId());
         return isSameEmployee && isSameProject;
@@ -75,13 +72,11 @@ public class Assignment {
 
     /**
      * Returns true if {@code assignmentId#equals(assignmentId)}.
-     * This defines a weaker notion of equality between two assignments.
      */
-    public boolean isSameAssignment(AssignmentId assignmentId) {
+    public boolean hasSameId(AssignmentId assignmentId) {
         if (assignmentId == null) {
             return false;
         }
-
         return this.assignmentId.equals(assignmentId);
     }
 
