@@ -21,6 +21,8 @@ Class JsonSerializableStudentDirectory
 Class JsonAdaptedStudent
 Class JsonAdaptedPianoPiece
 Class JsonAdaptedRegularLesson
+Class JsonAdaptedMakeupLesson
+Class JsonAdaptedCancelledLesson
 }
 }
 
@@ -42,5 +44,7 @@ JsonSerializableStudentDirectory --> "*" JsonAdaptedStudent
 
 JsonAdaptedStudent --> "*" JsonAdaptedPianoPiece
 JsonAdaptedStudent --> "0..1" JsonAdaptedRegularLesson
+JsonAdaptedStudent --> "*" JsonAdaptedMakeupLesson
+JsonAdaptedStudent --> "*" JsonAdaptedCancelledLesson
 
 @enduml

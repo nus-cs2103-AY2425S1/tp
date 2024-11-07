@@ -133,7 +133,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T08-2/tp/tree/master/src/main/java/keycontacts/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="900" />
 
 The `Storage` component,
 * can save both student directory data and user preference data in JSON format, and read them back into corresponding objects.
