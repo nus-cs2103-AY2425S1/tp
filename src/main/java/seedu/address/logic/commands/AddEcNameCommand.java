@@ -5,7 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,9 +28,11 @@ public class AddEcNameCommand extends Command {
             + "Parameters: [INDEX] en/EMERGENCY_CONTACT\n"
             + "Example: " + COMMAND_WORD + " 1 en/John Doe";
 
-    public static final String MESSAGE_ADD_ECNAME_SUCCESS = "Added emergency contact name for Person: %1$s";
-    public static final String MESSAGE_DELETE_ECNAME_SUCCESS = "Removed emergency contact name from Person: %1$s";
+    public static final String MESSAGE_ADD_ECNAME_SUCCESS = "Added emergency contact name for %1$s\n"
+            + "New Emergency Contact Name: %2$s";
+    public static final String MESSAGE_DELETE_ECNAME_SUCCESS = "Removed emergency contact name for %1$s\n";
 
+    private static final Logger logger = LogsCenter.getLogger(AddEcNameCommand.class);
     private final Index index;
     private final EcName ecName;
 
@@ -48,10 +53,13 @@ public class AddEcNameCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, "Invalid index: {0}. No person at this index.", index);
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        assert personToEdit != null;
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
                 personToEdit.getStudentClass(), ecName, personToEdit.getEcNumber(), personToEdit.getExams(),
@@ -68,8 +76,9 @@ public class AddEcNameCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
+        assert personToEdit != null;
         String message = !ecName.value.isEmpty() ? MESSAGE_ADD_ECNAME_SUCCESS : MESSAGE_DELETE_ECNAME_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(message, personToEdit.getName(), personToEdit.getEcName());
     }
 
     @Override

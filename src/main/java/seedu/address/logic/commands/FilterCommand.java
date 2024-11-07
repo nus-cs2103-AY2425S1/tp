@@ -12,10 +12,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonPredicate;
 
 /**
@@ -42,16 +48,31 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_INCOMPLETE_COMMAND = "Filter predicate cannot be empty.";
 
+    private static final Logger logger = LogsCenter.getLogger(FilterCommand.class);
     private final PersonPredicate predicate;
 
+    /**
+     * Constructs a {@code FilterCommand} with the specified {@code predicate}.
+     * This command will filter and display all persons that match the given criteria.
+     * @param predicate The filtering criteria to apply for person objects in the address book.
+     */
     public FilterCommand(PersonPredicate predicate) {
+        assert predicate != null;
         this.predicate = predicate;
+        logger.log(Level.FINE, "FilterCommand initialized with predicate");
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+
+        List<Person> filteredPersonsList = model.getFilteredPersonList();
+        assert filteredPersonsList != null;
+
+        int filterCount = filteredPersonsList.size();
+        logger.log(Level.INFO, "FilterCommand execution completed. Number of persons listed: {0}", filterCount);
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

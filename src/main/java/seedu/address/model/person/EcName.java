@@ -79,6 +79,7 @@ public class EcName implements Comparable<EcName> {
      */
     @Override
     public int compareTo(EcName e) {
+        assert e != null;
         if (this.isEmpty() || e.isEmpty()) {
             return e.toString().compareTo(this.toString());
         } else {
