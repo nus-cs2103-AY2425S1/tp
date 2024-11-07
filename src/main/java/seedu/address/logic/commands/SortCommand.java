@@ -56,7 +56,7 @@ public class SortCommand extends Command {
         this.comparator = this.getComparator();
 
         model.sortFilteredPersonList(this.comparator);
-        logger.log(Level.INFO, "SortCommand has been executed");
+        logger.log(Level.INFO, "SortCommand has been executed.");
         return new CommandResult(this.generateSuccessMessage());
     }
 

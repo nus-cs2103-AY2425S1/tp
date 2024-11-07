@@ -203,6 +203,7 @@ Format: `addEcNumber INDEX [ep/ECNUMBER]`
 * Adds the emergency contact's number `ECNUMBER` to the person at the specified `INDEX`
 * Deletes the emergency contact's number at the specified `INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
+* The number **must be an 8 digit number** or **left empty**
 
 Examples:
 * `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
@@ -322,7 +323,7 @@ Format: `sort [ATTRIBUTE]`
 
 * Sorts the list based on the ATTRIBUTE lexicographically in increasing order
 * Sorts the list based on one attribute at a time
-* Missing attributes will be shifted to the end of the list (only for emergency contact name and emergency contact number)
+* Empty attributes will be shifted to the end of the list (only for emergency contact name and emergency contact number)
 * Unsort the list when the attribute is `none`
 
 Examples:

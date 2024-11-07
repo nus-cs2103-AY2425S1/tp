@@ -30,7 +30,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         try {
             sortAttribute = ParserUtil.parseSortAttribute(args);
         } catch (IllegalValueException ive) {
-            logger.log(Level.INFO, "Illegal attribute exception Caught");
+            logger.log(Level.WARNING, "Exception caught at when parsing for SortCommand");
             throw new ParseException(ive.getMessage() + "\n" + SortCommand.MESSAGE_USAGE, ive);
         }
 
