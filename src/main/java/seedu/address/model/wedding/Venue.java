@@ -10,8 +10,8 @@ public class Venue extends Address {
     public static final String MESSAGE_CONSTRAINTS = "Venue can take any values, and it should not be blank";
 
     /**
-     *  Constructs and {@code Venue}
-      * @param value
+     *  Constructs an {@code Venue}
+      * @param value Venue name
      */
     public Venue(String value) {
         super(value);
