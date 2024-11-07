@@ -66,23 +66,23 @@ public class SampleDataUtil {
         Meeting[] newMeetings;
 
         try {
-            newMeetings =  new Meeting[]{
-                    new Meeting(new Name("Alex Yeoh"),
-                        LocalDateTime.of(LocalDate.of(2024, 10, 9), LocalTime.of(9, 0, 0)),
-                        LocalDateTime.of(LocalDate.of(2024, 10, 9), LocalTime.of(10, 0, 0)),
-                        "The Terrace"),
-                    new Meeting(new Name("David Li"),
-                        LocalDateTime.of(LocalDate.of(2024, 10, 10), LocalTime.of(14, 0, 0)),
-                        LocalDateTime.of(LocalDate.of(2024, 10, 10), LocalTime.of(16, 0, 0)),
-                        "COM-01"),
-                    new Meeting(new Name("Alex Yeoh"),
-                        LocalDateTime.of(LocalDate.of(2024, 10, 11), LocalTime.of(12, 0, 0)),
-                        LocalDateTime.of(LocalDate.of(2024, 10, 11), LocalTime.of(13, 30, 0)),
-                        "The Terrace"),
-                    new Meeting(new Name("John Mayer"),
-                        LocalDateTime.of(LocalDate.of(2024, 10, 11), LocalTime.of(14, 0, 0)),
-                        LocalDateTime.of(LocalDate.of(2024, 10, 11), LocalTime.of(15, 0, 0)),
-                        "Our Tutorial Class")
+            newMeetings = new Meeting[]{
+                new Meeting(new Name("Alex Yeoh"),
+                    LocalDateTime.of(LocalDate.of(2024, 10, 9), LocalTime.of(9, 0, 0)),
+                    LocalDateTime.of(LocalDate.of(2024, 10, 9), LocalTime.of(10, 0, 0)),
+                    "The Terrace"),
+                new Meeting(new Name("David Li"),
+                    LocalDateTime.of(LocalDate.of(2024, 10, 10), LocalTime.of(14, 0, 0)),
+                    LocalDateTime.of(LocalDate.of(2024, 10, 10), LocalTime.of(16, 0, 0)),
+                    "COM-01"),
+                new Meeting(new Name("Alex Yeoh"),
+                    LocalDateTime.of(LocalDate.of(2024, 10, 11), LocalTime.of(12, 0, 0)),
+                    LocalDateTime.of(LocalDate.of(2024, 10, 11), LocalTime.of(13, 30, 0)),
+                    "The Terrace"),
+                new Meeting(new Name("John Mayer"),
+                    LocalDateTime.of(LocalDate.of(2024, 10, 11), LocalTime.of(14, 0, 0)),
+                    LocalDateTime.of(LocalDate.of(2024, 10, 11), LocalTime.of(15, 0, 0)),
+                    "Our Tutorial Class")
             };
         } catch (CommandException var1) {
             newMeetings = new Meeting[]{};
