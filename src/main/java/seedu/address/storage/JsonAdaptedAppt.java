@@ -60,7 +60,7 @@ public class JsonAdaptedAppt {
             throw new IllegalValueException(Appt.DATETIME_MESSAGE_CONSTRAINTS);
         }
 
-        if (!HealthService.isValidHealthserviceName(healthService)) {
+        if (!HealthService.isValidHealthServiceName(healthService)) {
             logger.severe("Invalid health service.");
             throw new IllegalValueException(HealthService.MESSAGE_CONSTRAINTS);
         }

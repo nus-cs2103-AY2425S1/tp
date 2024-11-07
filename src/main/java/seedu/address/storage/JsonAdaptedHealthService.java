@@ -39,7 +39,7 @@ class JsonAdaptedHealthService {
      * @throws IllegalValueException if there were any data constraints violated in the adapted healthService.
      */
     public HealthService toModelType() throws IllegalValueException {
-        if (!HealthService.isValidHealthserviceName(healthServiceName)) {
+        if (!HealthService.isValidHealthServiceName(healthServiceName)) {
             throw new IllegalValueException(HealthService.MESSAGE_CONSTRAINTS);
         }
         return new HealthService(healthServiceName);
