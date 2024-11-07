@@ -35,13 +35,8 @@ public class VolunteerDates {
      * @param listOfDates A valid list of dates.
      */
     public VolunteerDates(String listOfDates) throws DateTimeParseException, VolunteerDuplicateDateException {
-<<<<<<< HEAD
         String trimmedDate = listOfDates.replaceAll("\\s+", "").trim();
         String[] dates = trimmedDate.split(",");
-=======
-        listOfDates = listOfDates.replaceAll("\\s+", "").trim();
-        String[] dates = listOfDates.split(",");
->>>>>>> 99dc134432004d0b91fdf59634879d34d1735606
         this.addStringOfDatesToAvailList(dates);
     }
 

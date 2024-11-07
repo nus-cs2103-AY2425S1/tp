@@ -27,11 +27,7 @@ public class VolunteerRemoveDateCommand extends Command {
             + ": Removes dates from the list of available dates of volunteer identified by the index number "
             + "used in the displayed volunteer list.\n"
             + "Parameters: dates (must be in yyyy-MM-dd and cannot repeat)\n"
-<<<<<<< HEAD
-            + "Example: " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
-=======
             + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
->>>>>>> 99dc134432004d0b91fdf59634879d34d1735606
     private static final String MESSAGE_REMOVE_DATE_VOLUNTEER_SUCCESS =
             "Removed dates from %s's list of available dates.";
 
