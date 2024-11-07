@@ -780,3 +780,28 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+**Difficulty Level:**
+
+As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. 
+However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles.
+Most of our effort was dedicated to adding commands, and debugging cases that we have not previously considered.
+
+**Challenges Faced:**
+
+- Mapping requirements to real-life scenarios: As we are unfamiliar with the potential for patients with same details, we found it difficult to finalise the final logic for duplicate patients.
+- Consistent logic throughout codebase: As we had different ideas on implementation, it required many iterations to change the code to make the logic consistent.
+- Overriding or changing functionality of the code unintentionally: As there are some portions where we implement the feature concurrently, it results in many merge conflicts and unintentional behaviour.
+
+
+**Reuse and Adaptation:**
+
+Our group tried to reuse as much of AB3's code structure as much as possible to save time in adding the new commands. 
+However, some commands required extensive changes due to the duplicate persons logic.
+
+**Achievements:**
+
+Our group is happy with the outcome of Health Connect, as the process of adding and obtaining information of patients is simplified. 
+With the use of tags, it makes it easier to filter people to find the relevant details. 
