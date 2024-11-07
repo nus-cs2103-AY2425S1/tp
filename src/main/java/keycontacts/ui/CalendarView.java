@@ -37,18 +37,18 @@ public class CalendarView extends UiPart<Region> {
     private static final int NUM_MINUTES = 24 * 60;
 
     private static final List<Color> CALENDAR_COLORS = List.of(
-            Color.DARKBLUE,
-            Color.DARKRED,
-            Color.SLATEBLUE,
-            Color.SLATEGREY,
-            Color.MEDIUMSLATEBLUE,
+            Color.CADETBLUE,
             Color.GOLDENROD,
-            Color.OLIVEDRAB,
             Color.TEAL,
-            Color.CORNFLOWERBLUE,
             Color.INDIANRED,
+            Color.DARKOLIVEGREEN,
             Color.STEELBLUE,
-            Color.ORANGERED
+            Color.SIENNA,
+            Color.MEDIUMPURPLE,
+            Color.CORAL,
+            Color.BURLYWOOD,
+            Color.DARKSEAGREEN,
+            Color.DARKKHAKI
     );
 
     @SuppressWarnings("unchecked")
@@ -141,7 +141,10 @@ public class CalendarView extends UiPart<Region> {
             }
 
             TimeBlock currentTimeBlock = currentDayBlocks.get(i);
-            assert !currentTimeBlock.isIntersecting(timeBlock);
+            if (currentTimeBlock.isIntersecting(timeBlock)) {
+                return;
+            }
+
             if (currentTimeBlock.isAfter(timeBlock)) {
                 // attach
                 dayVBoxes.get(dayValue).getChildren().add(i * 2,

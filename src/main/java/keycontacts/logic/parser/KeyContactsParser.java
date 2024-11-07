@@ -24,6 +24,7 @@ import keycontacts.logic.commands.RedoCommand;
 import keycontacts.logic.commands.ScheduleCommand;
 import keycontacts.logic.commands.SortCommand;
 import keycontacts.logic.commands.UnassignPiecesCommand;
+import keycontacts.logic.commands.UncancelLessonCommand;
 import keycontacts.logic.commands.UndoCommand;
 import keycontacts.logic.commands.ViewCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
@@ -75,6 +76,7 @@ public class KeyContactsParser {
         case AssignPiecesCommand.COMMAND_WORD -> new AssignPiecesCommandParser().parse(arguments);
         case UnassignPiecesCommand.COMMAND_WORD -> new UnassignPiecesCommandParser().parse(arguments);
         case CancelLessonCommand.COMMAND_WORD -> new CancelLessonCommandParser().parse(arguments);
+        case UncancelLessonCommand.COMMAND_WORD -> new UncancelLessonCommandParser().parse(arguments);
         case ViewCommand.COMMAND_WORD -> new ViewCommandParser().parse(arguments);
         case UndoCommand.COMMAND_WORD -> new UndoCommand();
         case RedoCommand.COMMAND_WORD -> new RedoCommand();

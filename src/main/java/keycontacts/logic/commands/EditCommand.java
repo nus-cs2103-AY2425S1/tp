@@ -3,6 +3,7 @@ package keycontacts.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GROUP;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -44,7 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_GRADE_LEVEL + "GRADE_LEVEL]\n"
+            + "[" + PREFIX_GRADE_LEVEL + "GRADE_LEVEL] "
+            + "[" + PREFIX_GROUP + "GROUP]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_ADDRESS + "Town";

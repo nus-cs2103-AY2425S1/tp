@@ -82,7 +82,7 @@ Adds a student to the student directory.
 Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
 
 * If a group is not provided, or left blank (`g/`), the student will not be assigned to any group.
-* The student will be assigned all the lessons of other students in the group.
+* If an existing group is provided, the student will be assigned all the lessons of the other students in the group.
 
 Examples:
 * `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1`

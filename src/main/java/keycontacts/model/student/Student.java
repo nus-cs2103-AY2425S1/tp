@@ -193,6 +193,26 @@ public class Student {
     }
 
     /**
+     * Creates and returns a new {@code Student} with the {@code cancelledLesson} removed.
+     */
+    public Student withoutCancelledLesson(CancelledLesson cancelledLesson) {
+        assert (cancelledLessons.contains(cancelledLesson));
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
+        updatedCancelledLessons.remove(cancelledLesson);
+
+        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with all {@code CancelledLessons} removed.
+     */
+    public Student withoutCancelledLessons() {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>();
+
+        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
+    }
+
+    /**
      * Creates and returns a new {@code Student} with the {@code makeupLesson} added.
      */
     public Student withAddedMakeupLesson(MakeupLesson makeupLesson) {
@@ -206,19 +226,11 @@ public class Student {
      * Creates and returns a new {@code Student} with the {@code makeupLesson} removed.
      */
     public Student withoutMakeupLesson(MakeupLesson makeupLesson) {
+        assert (makeupLessons.contains(makeupLesson));
         Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
         updatedMakeupLessons.remove(makeupLesson);
 
         return new Updater().withMakeupLessons(updatedMakeupLessons).update();
-    }
-
-    /**
-     * Creates and returns a new {@code Student} with all {@code CancelledLessons} removed.
-     */
-    public Student withoutCancelledLessons() {
-        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>();
-
-        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
     }
 
     /**
