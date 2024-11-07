@@ -166,6 +166,7 @@ The name must match the full name exactly
 - Address
 - Condition
 - Schedule
+- Reminder Note
 
 **Examples:**
 * `view John Doe`
