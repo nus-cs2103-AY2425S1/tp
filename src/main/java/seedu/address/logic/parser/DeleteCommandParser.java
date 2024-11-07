@@ -29,8 +29,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 throw new ParseException("Invalid type to delete");
             }
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            if (pe.getMessage() == "Index is not a non-zero unsigned integer.") {
+                throw pe;
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
 }

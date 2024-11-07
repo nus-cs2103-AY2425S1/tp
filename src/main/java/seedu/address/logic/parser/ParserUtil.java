@@ -18,6 +18,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INPUT = "Input is not of the correct format.";
 
     /**
      * Checks if a given string is of the form "px", where "x" is an integer of up to 3 digits.
@@ -41,12 +42,14 @@ public class ParserUtil {
     public static Pair parseIndexAndType(String oneBasedIndexAndType) throws ParseException {
         String trimmedIndex = oneBasedIndexAndType.trim();
         if (!isValidInput(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INPUT);
+        }
+        if (Integer.parseInt(trimmedIndex.substring(1)) == 0) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         Pair res = new Pair(Index.fromOneBased(Integer.parseInt(trimmedIndex.substring(1))),
                 Character.toString(trimmedIndex.charAt(0)));
         return res;
-        //return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
