@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1">
-    <Label fx:id="id" styleClass="person-pane-label" />
     <Label fx:id="name" styleClass="person-pane-label" />
     <Label fx:id="tagsLabel" text="Tags:" visible="false" managed="false" styleClass="person-pane-label" />
     <FlowPane fx:id="tags" />
