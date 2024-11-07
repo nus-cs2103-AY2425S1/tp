@@ -27,6 +27,7 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.listingcommands.AddListingCommand;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
@@ -48,9 +49,8 @@ public class AddListingCommandParserTest {
                 new Area(VALID_AREA_PASIR_RIS),
                 new Address(VALID_ADDRESS_PASIR_RIS),
                 Region.fromString(VALID_REGION_PASIR_RIS),
-                new Name(VALID_SELLER_PASIR_RIS),
-                new HashSet<Name>(Arrays.asList(new Name(VALID_FIRST_BUYER_PASIR_RIS),
-                        new Name(VALID_SECOND_BUYER_PASIR_RIS)))));
+                Index.fromOneBased(1),
+                new HashSet<Index>(Arrays.asList(Index.fromOneBased(4), Index.fromOneBased(6)))));
     }
 
     @Test

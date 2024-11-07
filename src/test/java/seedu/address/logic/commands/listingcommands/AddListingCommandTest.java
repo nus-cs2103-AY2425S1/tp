@@ -5,6 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.TAMPINES;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -40,43 +46,43 @@ public class AddListingCommandTest {
     @Test
     public void constructor_nulllistingName_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddListingCommand(null, PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON))));
     }
 
     @Test
     public void constructor_nullPrice_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), null,
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON))));
     }
 
     @Test
     public void constructor_nullArea_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                null, PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+                null, PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON))));
     }
 
     @Test
     public void constructor_nullAddress_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), null, PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+                PASIR_RIS.getArea(), null, PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON))));
     }
 
     @Test
     public void constructor_nullRegion_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), null, ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), null, INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON))));
     }
 
     @Test
     public void constructor_nullSeller_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), null,
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))));
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON))));
     }
 
     @Test
@@ -84,7 +90,7 @@ public class AddListingCommandTest {
         ModelStubAcceptingListingAdded modelStub = new ModelStubAcceptingListingAdded();
         modelStub.addPerson(ALICE);
         CommandResult commandResult = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
                 null).execute(modelStub);
         Listing listingWithNoBuyers = new ListingBuilder(PASIR_RIS).withBuyers().build();
 
@@ -111,8 +117,8 @@ public class AddListingCommandTest {
     @Test
     public void execute_duplicateListing_throwsCommandException() {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
         modelStub.addPerson(ALICE);
         modelStub.addPerson(DANIEL);
@@ -125,8 +131,8 @@ public class AddListingCommandTest {
     @Test
     public void execute_buyerAsSeller_throwsCommandException() {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIFTH_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
         modelStub.addPerson(FIONA);
         modelStub.addPerson(DANIEL);
@@ -139,8 +145,8 @@ public class AddListingCommandTest {
     @Test
     public void execute_sellerDoesNotExist_throwsCommandException() {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIFTH_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
         modelStub.addPerson(DANIEL);
         modelStub.addPerson(GEORGE);
@@ -152,11 +158,11 @@ public class AddListingCommandTest {
     @Test
     public void execute_buyerDoesNotExist_throwsCommandException() {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), FIONA.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIFTH_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
         modelStub.addPerson(ALICE);
-        // DANIEL does not exist
+        // DANIEL does not exist (FOURTH PERSON)
         modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
@@ -167,20 +173,20 @@ public class AddListingCommandTest {
     @Test
     public void equals() {
         AddListingCommand addPasirRisCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
 
         AddListingCommand addTampinesCommand = new AddListingCommand(TAMPINES.getName(), TAMPINES.getPrice(),
-                TAMPINES.getArea(), TAMPINES.getAddress(), TAMPINES.getRegion(), BENSON.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), ELLE.getName())));
+                TAMPINES.getArea(), TAMPINES.getAddress(), TAMPINES.getRegion(), INDEX_SECOND_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_FIFTH_PERSON)));
 
         // same object -> return true
         assertTrue(addPasirRisCommand.equals(addPasirRisCommand));
 
         // same values -> returns true
         AddListingCommand addPasirRisCommandCopy = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         assertTrue(addPasirRisCommand.equals(addPasirRisCommandCopy));
 
         // different values -> return false
@@ -194,41 +200,41 @@ public class AddListingCommandTest {
 
         // any one value is different -> return false
         AddListingCommand different = new AddListingCommand(PASIR_RIS.getName(), TAMPINES.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         assertFalse(addPasirRisCommand.equals(different));
 
         different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                new Area("50"), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                new Area("50"), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         assertFalse(addPasirRisCommand.equals(different));
 
         different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), TAMPINES.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), TAMPINES.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         assertFalse(addPasirRisCommand.equals(different));
 
         different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), Region.WEST, ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), Region.WEST, INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         assertFalse(addPasirRisCommand.equals(different));
 
         different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), BENSON.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_SECOND_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         assertFalse(addPasirRisCommand.equals(different));
 
         different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON)));
         assertFalse(addPasirRisCommand.equals(different));
     }
 
     @Test
     public void toStringMethod() {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
         String expected = AddListingCommand.class.getCanonicalName()
                 + "{toAdd=" + PASIR_RIS.getName()
                 + ", address=" + PASIR_RIS.getAddress()

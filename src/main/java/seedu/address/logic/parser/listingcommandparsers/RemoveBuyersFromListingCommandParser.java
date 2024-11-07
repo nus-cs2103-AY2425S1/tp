@@ -32,14 +32,6 @@ public class RemoveBuyersFromListingCommandParser implements Parser<RemoveBuyers
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BUYER);
 
         // Parse index
-        String name = argMultimap.getPreamble();
-        if (name.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RemoveBuyersFromListingCommand.MESSAGE_USAGE));
-        }
-        Name listingName = ParserUtil.parseName(name);
-
-        // Parse index
         String indexOneBased = argMultimap.getPreamble().trim();
         if (!StringUtil.isNonZeroUnsignedInteger(indexOneBased)) {
             throw new ParseException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);

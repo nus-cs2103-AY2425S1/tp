@@ -35,7 +35,8 @@ public class RemoveBuyersFromListingCommand extends Command {
             + "Removed buyers: %2$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
     public static final String MESSAGE_EMPTY_SET = "Please provide valid buyers";
-    public static final String MESSAGE_PERSON_NOT_BUYER = "The buyer specified is not a buyer: %d";
+    public static final String MESSAGE_PERSON_NOT_BUYER = "The specified person is not a buyer:\n"
+            + "%d. %s";
     public static final String MESSAGE_NOT_BUYER_FOR_LISTING =
             "The specified buyer %1$s is not a buyer of the listing %2$s.";
     public static final String MESSAGE_BUYER_NOT_FOUND = "The specified buyer %1$s does not exist in the client list.";

@@ -33,7 +33,8 @@ public class AddBuyersToListingCommand extends Command {
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
     public static final String MESSAGE_DUPLICATE_BUYERS = "%1$s is already associated with this listing.";
     public static final String MESSAGE_BUYER_NOT_FOUND = "The specified buyer %1$s does not exist in the client list.";
-    public static final String MESSAGE_PERSON_NOT_BUYER = "The specified person %1$s is not a buyer.";
+    public static final String MESSAGE_PERSON_NOT_BUYER = "The specified person is not a buyer:\n"
+            + "%d. %s";
     private final Index index;
     private final Set<Index> buyersToAdd;
 
@@ -69,6 +70,7 @@ public class AddBuyersToListingCommand extends Command {
 
         for (Index buyerIndex : buyersToAdd) {
             int zeroBasedBuyer = buyerIndex.getZeroBased();
+            int oneBasedBuyer = buyerIndex.getOneBased();
             if (zeroBasedBuyer >= lastShownPersonList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
@@ -77,7 +79,8 @@ public class AddBuyersToListingCommand extends Command {
 
             // Check if the person is actually an instance of Buyer
             if (!buyerToAdd.getRole().equals(Role.BUYER)) {
-                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER, buyerToAdd.getName()));
+                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER,
+                        oneBasedBuyer, buyerToAdd.getName()));
             }
 
             // Add the buyer to newBuyers set only if not already in existingBuyers
