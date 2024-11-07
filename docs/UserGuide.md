@@ -16,28 +16,31 @@ tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Prerequisite
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have the Java `17` installed in your computer. However, Mac users should use the specific `Azul JDK 17` distribution following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+2. Familiarity with the command line is beneficial but not required.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick start
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F12-4/tp/releases/tag/v1.4).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+2. Copy the file to the folder you want to use as the _home folder_ for VBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar {{ jarFile }}` command
+3. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar {{ jarFile }}` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`:help`** and pressing Enter will
+    
+4. Type the command in the command box and press Enter to execute it. e.g. typing **`:help`** and pressing Enter will
    open the help window.<br>
+    The results will be displayed in the Result Display Area.<br>
+    Contacts are shown in the Display List.<br>
+    ![Ui_annotated](images/Ui_annotated.png)
     {{ commandSummary }}
-
-Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Features
 
 <box type="info" seamless>
 
@@ -64,6 +67,12 @@ Refer to the [Features](#features) below for details of each command.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
+
 ### View Help
 
 > Shows a command cheatsheet, as well as a link to access the user guide.
@@ -75,8 +84,8 @@ Refer to the [Features](#features) below for details of each command.
 
 > Adds a person to the address book.
 
-**Short command:** `:a -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`\
-**Long command:** `:add -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`
+**Short command:** `:a -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]`\
+**Long command:** `:add -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]`
 
 
 <box type="tip" seamless>
@@ -86,8 +95,17 @@ Refer to the [Features](#features) below for details of each command.
 
 **Examples:**
 
-* `:add -n John Doe -p 98765432 -e johnd@example.com -l John street, block 123, #01-01`
-* `:a -n Betsy Crowe -t friend -e betsycrowe@example.com -l Newgate Prison -p 1234567 -t criminal`
+Initial State
+
+![initialState](images/addcommandimages/initialState.png){width=700px}
+
+1. `:add -n Jack Lee -p 76543219 -e jackl@example.com -l 909 Fir St -t client -r Met at a wedding`
+
+![addJackLee](images/addcommandimages/addJackLee.png){width=700px}
+
+2. `:a -n Ivy King -p 87654320 -e ivyk@example.com -l 808 Palm St -t friend -t client -r Met at a conference`
+
+![addIvyKing](images/addcommandimages/addIvyKing.png){width=700px}
 
 ### List All
 
@@ -100,8 +118,8 @@ Refer to the [Features](#features) below for details of each command.
 
 > Edits an existing person in the address book.
 
-**Short command:** `:ed INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`\
-**Long command:** `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
+**Short command:** `:ed INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]…​`\
+**Long command:** `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -172,6 +190,11 @@ Refer to the [Features](#features) below for details of each command.
   using `:undo` will remove John Doe from the address book.
 * If we delete a contact with `:rm -i 3`, using `:undo` will restore the deleted contact.
 
+<box type="tip" seamless>
+
+**Tip:** Ctrl-Z can also be used to undo the last change outside the command box.
+</box>
+
 ### Redo
 
 > Reapplies the last undone change to the address book.\
@@ -184,6 +207,11 @@ Refer to the [Features](#features) below for details of each command.
 
 * After using `:undo` to revert the addition of John Doe, using `:redo` will add John Doe back to the address book.
 * After using `:undo` to revert the deletion of a contact, using `:redo` will delete the contact again.
+
+<box type="tip" seamless>
+
+**Tip:** Ctrl-Shift-Z can also be used to redo the last change outside the command box.
+</box>
 
 ### Export Data
 
@@ -206,14 +234,34 @@ Refer to the [Features](#features) below for details of each command.
 **Short command:** `:q`\
 **Long command:** `:quit`
 
+--------------------------------------------------------------------------------------------------------------------
+## Keyboard Shortcuts
+There are two modes in VBook: Command Box and UI Navigation. The following keyboard shortcuts are available in each mode.
+
+### Command Box
+* `Ctrl + Z` - Undo the last change in the command box.
+* `F1` - Open the Help Window.
+* `ESC` - Go back to UI Navigation Mode
+
+### UI Navigation
+* `Ctrl + Z` - Undo the last change made to the address book.
+* `Ctrl + Shift + Z` - Redo the last undone change made to the address book.
+* `F1` - Open the Help Window.
+* `Up Arrow` - Highlight the previous contact in the list.
+* `Down Arrow` - Highlight the next contact in the list.
+* `:` - Focus on the Command Box.
+
+--------------------------------------------------------------------------------------------------------------------
+## File Management
+
 ### Save Data
 
-> AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+> VBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
 > save manually.
 
 ### Edit Data File
 
-> AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users
+> VBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users
 > are
 > welcome to update data directly by editing that data file.
 
@@ -222,7 +270,7 @@ Refer to the [Features](#features) below for details of each command.
 **Caution:**
 If your changes to the data file makes its format invalid, VBook will discard all data and start with an empty
 data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside
+Furthermore, certain edits can cause the VBook to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -232,7 +280,7 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+the data of your previous VBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
