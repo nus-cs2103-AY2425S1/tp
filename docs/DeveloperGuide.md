@@ -325,18 +325,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Use case ends.
 
-**Use case 2: View List of Customers**
+**Use case 2: Add a Customer**
 
 * **System**: SellSavvy
 * **Actor**: User
 * **Use Case**: UC02 - Add Customer
 * **Guarantees**:
-  * Customer will be added to contact list if input parameters are valid.
+  * Customer will be added to customer list if input parameters are valid.
 
 **MSS**
 
-1.  User chooses to add a new customer.
-2.  SellSavvy validates the input and adds the customer to the database.
+1.  User chooses to add a new customer and specifies the customer details.
+2.  SellSavvy adds the customer into the list.
 3.  SellSavvy confirms the addition by displaying the newly added customer's details.
 
 Use case ends.
@@ -344,73 +344,166 @@ Use case ends.
 **Extensions**
 
 * 1a. SellSavvy detects required details missing.
-  * 1a1. SellSavvy displays an error message “Missing details of customer!”.
+  * 1a1. SellSavvy displays an error message “Invalid command format!” and states the command format.
 
   Use case ends.
+
+
+* 1b. SellSavvy detects that there is a parameter not satisfying its constraint.
+  * 1b1. SellSavvy states the constraint of the invalid parameter.
+
+  Use case ends
+
+
+* 1c. SellSavvy detects that a customer with identical name already exists.
+  * 1c1. SellSavvy displays an error that the customer already exists.
+  
+  Use case ends.
+
+
+* 2a. SellSavvy detects that there is an existing customer with a similar name.
+  * 2a1. SellSavvy gives a warning that a customer with a similar name already exists.
+  
+  Use case resumes from step 3.
+
+
+* 2b. SellSavvy detects that the new customer has tags with similar names.
+  * 2b1. SellSavvy gives a warning that there are similar tags in the new customer.
+  
+  Use case resumes from step 3.
 
 **Use case 3: Delete Customer and All Orders Related to The Customer**
 
 * **System**: SellSavvy
 * **Actor**: User
 * **Use Case**: UC03 - Delete Customer and All Orders related to the customer
+* **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
     * Customer and all their orders will be deleted if input parameters are valid.
 
 **MSS**
 
-1.  User wants to delete a customer.
-2.  User chooses to <ins>view all customers as a list (UC01)</ins>.
-3.  SellSavvy displays the list of customers.
-4.  User finds the customer index from the list.
-5.  User deletes the customer by his index.
-6.  SellSavvy updates the list of customers and indicates that delete is successful.
+1. User wants to delete a customer.
+2. User finds the customer index from the list.
+3. User deletes the customer by their index.
+4. SellSavvy updates the displayed list of customers and indicates that delete is successful.
 
 Use case ends.
 
-**Use case 4: List Orders by Customer**
+**Extensions**
+
+* 3a. SellSavvy detects that there are no customers with the specified index.
+  * 3a1. SellSavvy displays an error that the customer index is invalid. 
+  
+  Use case ends.
+
+
+* 3b. SellSavvy detects that there are no customers with the specified index.
+    * 3a1. SellSavvy displays an error that the customer index is invalid.
+
+  Use case ends.
+
+**Use case 4: Find the Customer by their Name**
 
 * **System**: SellSavvy
 * **Actor**: User
-* **Use Case**: UC04 - List Orders by Customer
+* **Use Case**: UC04 - Find the Customer by their Name
 * **Guarantees**:
-    * Orders made by specific customer will be displayed as a list, if input parameters are valid.
+  * All customers displayed will have at least one of the specified keywords in their name.
 
 **MSS**
 
-1.  User wants to view all orders made by a specific customer
-2.  User chooses to <ins>view all customers as a list (UC01)</ins>.
-3.  User inputs command to list all orders, by the index of customer in contact list.
-4.  SellSavvy validates the input, and retrieves a list of all orders made by specified customer.
-5.  SellSavvy displays the orders in a list in GUI.
+1. User wants to search for a specific customer.
+2. User specifies keyword(s) of the name of the customer
+3. SellSavvy displays all customers whose names have at least one of the keywords.
+
+Use case ends.
+
+**Use case 5: Add an Order under a Customer**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC06 - Add an Order under a Customer
+* **Preconditions**: There are customers displayed in the customer list.
+* **Guarantees**:
+    * A new pending order will be added under the specified customer, if input parameters are valid.
+
+**MSS**
+
+1. User wants to add an order under a specific customer.
+2. User finds the customer index from the list.
+3. User adds the customer using the index, specifying the details of the order.
+4. SellSavvy adds the order under the customer.
+5. SellSavvy confirms the addition by displaying the newly added order's details and customer's list of orders.
 
 Use case ends.
 
 **Extensions**
 
 * 3a. SellSavvy detects required details missing.
-    * 3a1. SellSavvy displays an error message “Missing details of customer!”.
+    * 3a1. SellSavvy displays an error message “Invalid command format!” and states the command format.
 
-    Use case ends.
+  Use case ends.
 
-* 3b. User can list orders made by a customer using their username.
-    * 3b1. User inputs command to list all orders using the username of the intended customer.
 
-    Use case resumes from step 4.
+* 3b. SellSavvy detects that there is a parameter not satisfying its constraint.
+    * 3b1. SellSavvy states the constraint of the invalid parameter.
 
-**Use case 5: Mark Order as Completed**
+  Use case ends
+
+
+* 3c. SellSavvy detects that there are no customers with the specified index.
+    * 3c1. SellSavvy displays an error that the customer index is invalid.
+
+  Use case ends.
+
+
+* 4a. SellSavvy detects that there is an existing pending order under the customer with a similar details.
+    * 4a1. SellSavvy gives a warning that an order with a similar details already exists.
+
+  Use case resumes from step 5.
+
+**Use case 6: List a Customer's Orders**
 
 * **System**: SellSavvy
 * **Actor**: User
-* **Use Case**: UC05 - Mark Order as Completed
+* **Use Case**: UC06 - List a Customer's Orders
+* **Preconditions**: There are customers displayed in the customer list.
+* **Guarantees**:
+    * Orders made by specific customer will be displayed as a list, if input parameters are valid.
+
+**MSS**
+
+1. User wants to view all orders made by a specific customer.
+2. User finds the customer index from the customer list.
+3. User inputs command to list all orders, by the index of customer in customer list.
+4. SellSavvy retrieves a list of all orders made by specified customer.
+5. SellSavvy displays the orders in a list in GUI.
+
+Use case ends.
+
+**Extensions**
+
+* 3a. SellSavvy detects that there are no customers with the specified index.
+    * 3a1. SellSavvy displays an error that the customer index is invalid.
+
+    Use case ends.
+
+**Use case 7: Mark Order as Completed**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC07 - Mark Order as Completed
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Specified order will be marked as “Completed” if the input parameters are valid.
 
 **MSS**
 
-1.  User wants to mark an order by a customer as completed.
-2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
-3.  User marks the order as completed by the customer index and the order index.
-4.  SellSavvy updates the status of the order and indicates that the action is successful.
+1. User wants to mark an order by a customer as completed.
+2. User finds the order they want to mark as completed.
+3. User specifies the index of the order.
+4. SellSavvy updates the status of the order and indicates that the action is successful.
 
 Use case ends.
 
@@ -421,20 +514,27 @@ Use case ends.
 
     Use case ends.
 
-**Use case 6: Remove “Completed” Marking from Order**
+
+* 3b. There are no orders with the specified index.
+  * 3b1. SellSavvy displays an error that the order index is invalid.
+
+  Use case ends.
+
+**Use case 8: Remove "Completed" Marking from Order**
 
 * **System**: SellSavvy
 * **Actor**: User
-* **Use Case**: UC06 - Remove “Completed” Marking from Order
+* **Use Case**: UC08 - Remove "Completed" Marking from Order
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
-    * Specified order will have “Completed” Marking removed if the input parameters are valid.
+    * Specified order will be reverted to "Pending" status if the input parameters are valid.
 
 **MSS**
 
-1.  User wants to remove marking on an order due to mistake.
-2.  User chooses to <ins>view all orders from the customer with that customer index (UC04)</ins>.
-3.  User inputs command to remove marking on the order by the customer index and the order index.
-4.  SellSavvy updates the status of the order and indicates that the action is successful.
+1. User wants to remove "Completed" Marking from Order due to mistake.
+2. User finds the order they want to mark as completed.
+3. User specifies the index of the order.
+4. SellSavvy updates the status of the order and indicates that the action is successful.
 
 Use case ends.
 
@@ -445,39 +545,59 @@ Use case ends.
 
   Use case ends.
 
-**Use case 7: Delete an order**
+
+* 3b. There are no orders with the specified index.
+    * 3b1. SellSavvy displays an error that the order index is invalid.
+
+  Use case ends.
+
+**Use case 9: Delete an order**
 
 * **System**: SellSavvy
 * **Actor**: User
-* **Use Case**: UC07 - Delete an Order
+* **Use Case**: UC09 - Delete an Order
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
-    * An order made by the specified customer will be deleted if input parameters are valid.
+    * An order made by the customer will be deleted if input parameters are valid.
 
 **MSS**
 
-1.  User wants to delete an order.
-2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
-3.  User deletes the order by the customer name and the order index.
-4.  SellSavvy updates the status of the order and indicates that the action is successful.
+1. User wants to delete an order.
+2. User finds the order they want to delete.
+3. User deletes the order by their index.
+4. SellSavvy updates the displayed list of orders that the action is successful.
 
 Use case ends.
 
-**Use case 8: Filter order list by order status**
+
+* 3a. There are no orders with the specified index.
+    * 3a1. SellSavvy displays an error that the order index is invalid.
+
+  Use case ends.
+
+**Use case 10: Filter order list by order status**
 
 * **System**: SellSavvy
 * **Actor**: User
-* **Use Case**: UC08 - Filter an Order List by Order Status
+* **Use Case**: UC10 - Filter an Order List by Order Status
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
-    * Orders with specified status made by specific customer will be displayed as a list, if input parameters are valid.
+    * Orders with specified status under the customer will be displayed as a list, if input parameters are valid.
 
 **MSS**
 
-1.  User wants to filter an order list.
-2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
-3.  User filters the order list of the customer by the status keyword.
-4.  SellSavvy displays the orders with specified status in a list in GUI.
+1. User wants to filter an order list.
+2. User filters the order list of the customer by the status keyword.
+3. SellSavvy displays the orders with specified status in a list in GUI.
 
 Use case ends.
+
+**Extensions**
+
+* 2a. There is no such status with specified status keyword.
+  * 2a1. SellSavvy displays an error message "Invalid command format!" and provides the available status keywords.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
@@ -499,6 +619,8 @@ Use case ends.
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
+* **Similar names**: Names which are identical if whitespaces and case sensitivity are ignored.
+* **Similar details (orders)**: Orders with identical date, quantity and status along with similar item names.
 
 --------------------------------------------------------------------------------------------------------------------
 
