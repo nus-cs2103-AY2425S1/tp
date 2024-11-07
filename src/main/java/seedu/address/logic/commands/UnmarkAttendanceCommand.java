@@ -55,6 +55,19 @@ public class UnmarkAttendanceCommand extends Command {
         logger.info("Starting to execute unmark attendance command.");
 
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> studentsToUnmark = getStudentsToUnmark(lastShownList);
+
+        StringBuilder unmarkedStudents = new StringBuilder();
+        for (Person personToUnmark : studentsToUnmark) {
+            model.unmarkAttendance(personToUnmark);
+            unmarkedStudents.append(Messages.format(personToUnmark)).append("\n");
+        }
+
+        logger.info("Attendance unmarked successfully.");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, unmarkedStudents.toString().trim()));
+    }
+
+    private List<Person> getStudentsToUnmark(List<Person> lastShownList) throws CommandException {
         List<Person> studentsToUnmark = new ArrayList<>();
 
         for (Index index : targetIndexArray) {
@@ -76,18 +89,16 @@ public class UnmarkAttendanceCommand extends Command {
                 logger.warning("Attendance already at zero for student: " + Messages.format(personToUnmark));
                 throw new CommandException(Messages.MESSAGE_INVALID_ATTENDANCE);
             }
+            if (studentsToUnmark.contains(personToUnmark)) {
+                logger.warning("Duplicate index detected: " + index.getOneBased());
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON_DISPLAYED_INDEX
+                        + ": " + index.getOneBased());
+            }
             studentsToUnmark.add(personToUnmark);
         }
-
-        StringBuilder unmarkedStudents = new StringBuilder();
-        for (Person personToUnmark : studentsToUnmark) {
-            model.unmarkAttendance(personToUnmark);
-            unmarkedStudents.append(Messages.format(personToUnmark)).append("\n");
-        }
-
-        logger.info("Attendance unmarked successfully.");
-        return new CommandResult(String.format(MESSAGE_SUCCESS, unmarkedStudents.toString().trim()));
+        return studentsToUnmark;
     }
+
 
     @Override
     public boolean equals(Object other) {

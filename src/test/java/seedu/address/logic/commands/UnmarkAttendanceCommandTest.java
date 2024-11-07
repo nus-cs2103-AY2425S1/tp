@@ -87,6 +87,17 @@ public class UnmarkAttendanceCommandTest {
     }
 
     @Test
+    public void execute_duplicateIndex_throwsCommandException() {
+        Student studentWithValidDays = new StudentBuilder().withName("Student Valid Days").withDaysAttended(10).build();
+        model.addPerson(studentWithValidDays);
+        Index index = Index.fromZeroBased(model.getFilteredPersonList().indexOf(studentWithValidDays));
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(new Index[]{index, index});
+
+        assertThrows(CommandException.class, () -> command.executeCommand(model),
+                Messages.MESSAGE_DUPLICATE_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void equals() {
         UnmarkAttendanceCommand unmarkFirstCommand = new UnmarkAttendanceCommand(new Index[]{INDEX_FIRST_PERSON});
         UnmarkAttendanceCommand unmarkSecondCommand = new UnmarkAttendanceCommand(new Index[]{INDEX_SECOND_PERSON});
