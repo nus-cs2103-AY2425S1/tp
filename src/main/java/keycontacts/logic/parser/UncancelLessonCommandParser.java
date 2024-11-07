@@ -5,7 +5,6 @@ import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 
 import keycontacts.commons.core.index.Index;
-import keycontacts.logic.commands.CancelLessonCommand;
 import keycontacts.logic.commands.UncancelLessonCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.CancelledLesson;
@@ -35,7 +34,7 @@ public class UncancelLessonCommandParser implements Parser<UncancelLessonCommand
 
         if (!argMultimap.arePrefixesPresent(PREFIX_DATE) || !argMultimap.isPreamblePresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    CancelLessonCommand.MESSAGE_USAGE));
+                    UncancelLessonCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE);
 

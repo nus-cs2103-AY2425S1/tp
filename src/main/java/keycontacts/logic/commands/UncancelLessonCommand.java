@@ -62,7 +62,7 @@ public class UncancelLessonCommand extends Command {
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
         if (!studentToUpdate.getCancelledLessons().contains(cancelledLesson)) {
-            throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, studentToUpdate));
+            throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, Messages.format(studentToUpdate)));
         }
         ArrayList<Student> studentsInGroup = model.getStudentsInGroup(studentToUpdate.getGroup());
 
