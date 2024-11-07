@@ -31,17 +31,21 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyInput_throwsParseException() {
+        // EP: white space
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidInput_throwsParseException() {
+        // EP: invalid input
         assertParseFailure(parser, " hello",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_PARAMETERS));
     }
     @Test
     public void parse_emptyNameArgument_throwsParseException() {
+        // EP: missing argument
+
         // day argument is present
         assertParseFailure(parser, " n/  d/Saturday",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX));
@@ -55,6 +59,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyDayArgumentWithValidNameArgumentInfront_throwsParseException() {
+        // EP: valid command
         // name argument is present
         assertParseFailure(parser, " n/Alice BOB d/    ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX));
@@ -63,6 +68,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyDayArgument_throwsParseException() {
+        // EP: missing argument
         assertParseFailure(parser, " d/ n/Alice",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX));
 
@@ -74,6 +80,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validNameArgs_returnsFindCommand() {
+        // EP: valid command with name argument
         FindCommand expectedFindCommand = new FindCommand(List.of(namePredicateKeywords));
 
         // alnum characters and extra whitespaces allowed
@@ -82,6 +89,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validDayArgs_returnsFindCommand() {
+        // EP: valid command with day argument
         FindCommand expectedFindCommand = new FindCommand(List.of(schedulePredicateKeywords));
 
         // random case and extra whitespaces allowed
@@ -90,7 +98,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-
+        // EP: valid command with all arguments present
         FindCommand expectedFindCommand = new FindCommand(Arrays.asList(
                 schedulePredicateKeywords,
                 namePredicateKeywords)
@@ -106,6 +114,22 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " d/Monday Tuesday n/Alice1 Bob", expectedFindCommand);
     }
 
+    @Test
+    public void parse_validArgsMixedCasePrefixes_returnsFindCommand() {
+        FindCommand expectedFindCommand = new FindCommand(Arrays.asList(
+                schedulePredicateKeywords,
+                namePredicateKeywords)
+        );
+
+        // mixed-case prefix n/
+        assertParseSuccess(parser, " N/Alice1 Bob d/Monday Tuesday", expectedFindCommand);
+
+        // mixed-case prefix d/
+        assertParseSuccess(parser, " n/Alice1 Bob D/Monday Tuesday", expectedFindCommand);
+
+        // mixed-case both prefixes
+        assertParseSuccess(parser, " N/Alice1 Bob D/Monday Tuesday", expectedFindCommand);
+    }
 
 
 

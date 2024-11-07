@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":OweCommand" as OweCommand LOGIC_COLOR
+
+box ModelManager MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniqueStudentList" as UniqueStudentList MODEL_COLOR
+
+note left of OweCommand
+ For simplicity and
+ readability, steps to
+ obtain studentToEdit and
+ editedStudent are
+ excluded from this
+ diagram
+end note
+activate OweCommand
+
+OweCommand -> ModelManager : getFilteredStudentList()
+activate ModelManager
+
+ModelManager --> OweCommand : filtered student list
+deactivate ModelManager
+
+opt index is in the range of filtered list
+    OweCommand -> ModelManager : setStudent(studentToEdit, editedStudent)
+    activate ModelManager
+    ModelManager -> AddressBook : setStudent(studentToEdit, editedStudent)
+    activate AddressBook
+    AddressBook -> UniqueStudentList : setStudent(studentToEdit, editedStudent)
+    activate UniqueStudentList
+    UniqueStudentList --> AddressBook
+    deactivate UniqueStudentList
+    AddressBook --> ModelManager
+    deactivate AddressBook
+    ModelManager --> OweCommand
+    deactivate ModelManager
+
+end
+
+deactivate OweCommand
+@enduml

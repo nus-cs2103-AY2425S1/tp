@@ -26,7 +26,7 @@ public class OwedAmountTest {
         // null owed
         assertThrows(NullPointerException.class, () -> OwedAmount.isValidOwedAmount(null));
 
-        // invalid oweds
+        // invalid owedAmounts
         assertFalse(OwedAmount.isValidOwedAmount("")); // empty string
         assertFalse(OwedAmount.isValidOwedAmount(" ")); // spaces only
         assertFalse(OwedAmount.isValidOwedAmount("1.234")); // more than 2 decimal places
@@ -34,7 +34,7 @@ public class OwedAmountTest {
         assertFalse(OwedAmount.isValidOwedAmount("-1.23")); // negative number
         assertFalse(OwedAmount.isValidOwedAmount("10000000.00")); // more than max value
 
-        // valid oweds
+        // valid owedAmounts
         assertTrue(OwedAmount.isValidOwedAmount("1")); // 0 decimal places
         assertTrue(OwedAmount.isValidOwedAmount("1.2")); // 1 decimal place
         assertTrue(OwedAmount.isValidOwedAmount("123.23")); // 2 decimal places
@@ -43,39 +43,34 @@ public class OwedAmountTest {
     }
 
     @Test
-    public void increaseValue() {
-        OwedAmount owedAmount = new OwedAmount("10.00");
+    public void isValidOwedAmount_double() {
+        // null owed
+        assertThrows(NullPointerException.class, () -> OwedAmount.isValidOwedAmount(null));
 
-        OwedAmount increasedOwedAmount = owedAmount.increaseValue(5.00);
-        assertEquals("15.00", increasedOwedAmount.toString());
+        // invalid owedAmounts
+        assertFalse(OwedAmount.isValidOwedAmount(OwedAmount.MAX_VALUE + 1));
+        assertFalse(OwedAmount.isValidOwedAmount(-1.5));
 
-        OwedAmount increasedOwedAmount2 = owedAmount.increaseValue(0.01);
-        assertEquals("10.01", increasedOwedAmount2.toString());
+        // valid owedAmounts
+        assertTrue(OwedAmount.isValidOwedAmount(OwedAmount.MAX_VALUE));
+        assertTrue(OwedAmount.isValidOwedAmount(0.000));
     }
 
     @Test
     public void decreaseValue() {
         OwedAmount owedAmount = new OwedAmount("10.00");
 
-        OwedAmount decreasedOwedAmount = owedAmount.decreaseValue(5.00);
+        OwedAmount decreasedOwedAmount = owedAmount.decreaseValue(new SettleAmount("5.00"));
         assertEquals("5.00", decreasedOwedAmount.toString());
-
-        OwedAmount decreasedOwedAmount2 = owedAmount.decreaseValue(0.01);
-        assertEquals("9.99", decreasedOwedAmount2.toString());
-
-        OwedAmount decreasedOwedAmount3 = owedAmount.decreaseValue(10.00);
-        assertEquals("0.00", decreasedOwedAmount3.toString());
     }
 
     @Test
     public void isGreater() {
         OwedAmount owedAmount = new OwedAmount("10.00");
 
-        assertFalse(owedAmount.isGreater(5.00));
+        assertFalse(owedAmount.isGreater(new SettleAmount("5.00")));
 
-        assertTrue(owedAmount.isGreater(15.00));
-
-        assertFalse(owedAmount.isGreater(10.00));
+        assertTrue(owedAmount.isGreater(new SettleAmount("15.00")));
     }
 
 

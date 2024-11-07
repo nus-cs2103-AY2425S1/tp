@@ -22,6 +22,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.PaidAmount;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Student;
 
 
@@ -30,14 +31,14 @@ public class SettleCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        double amountToSettle = 50.0;
+        SettleAmount amountToSettle = new SettleAmount("50.00");
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, amountToSettle);
 
         Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student editedStudent = createEditedStudentWithUpdatedAmounts(studentToEdit, amountToSettle);
 
         String expectedMessage = String.format(SettleCommand.MESSAGE_SETTLE_SUCCESS,
-                amountToSettle, editedStudent.getName());
+                amountToSettle.value, editedStudent.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(studentToEdit, editedStudent);
@@ -48,7 +49,7 @@ public class SettleCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        SettleCommand settleCommand = new SettleCommand(outOfBoundIndex, 50.0);
+        SettleCommand settleCommand = new SettleCommand(outOfBoundIndex, new SettleAmount("50.00"));
 
         assertCommandFailure(settleCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
@@ -57,14 +58,14 @@ public class SettleCommandTest {
     public void execute_filteredList_success() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        double amountToSettle = 30.0;
+        SettleAmount amountToSettle = new SettleAmount("30.00");
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, amountToSettle);
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student editedStudent = createEditedStudentWithUpdatedAmounts(studentInFilteredList, amountToSettle);
 
         String expectedMessage = String.format(SettleCommand.MESSAGE_SETTLE_SUCCESS,
-                amountToSettle, editedStudent.getName());
+                amountToSettle.value, editedStudent.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(studentInFilteredList, editedStudent);
@@ -78,38 +79,30 @@ public class SettleCommandTest {
 
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
 
-        SettleCommand settleCommand = new SettleCommand(outOfBoundIndex, 50.0);
+        SettleCommand settleCommand = new SettleCommand(outOfBoundIndex, new SettleAmount("50.00"));
 
         assertCommandFailure(settleCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
     @Test
     public void execute_invalidAmount_failure() {
         Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        double invalidAmount = student.getOwedAmount().value + 1.0; // More than what is owed
+        String amountString = Double.toString(student.getOwedAmountValue() + 1.0);
+        SettleAmount invalidAmount = new SettleAmount(amountString); // More than what is owed
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, invalidAmount);
 
         assertCommandFailure(settleCommand, model, SettleCommand.MESSAGE_INVALID_AMOUNT);
     }
 
     @Test
-    public void constructor_negativeAmount_throwsAssertionError() {
-        try {
-            new SettleCommand(INDEX_FIRST_STUDENT, -10.0);
-        } catch (AssertionError e) {
-            assertEquals("assertion failed: amount must be positive", e.getMessage());
-        }
-    }
-
-    @Test
     public void createUpdatedStudent_validAmount_updatesCorrectly() throws Exception {
-        double amountToSettle = 20.0;
+        SettleAmount amountToSettle = new SettleAmount("20.00");
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, amountToSettle);
 
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student updatedStudent = settleCommand.createUpdatedStudent(studentToUpdate);
 
-        double expectedOwedAmount = studentToUpdate.getOwedAmount().value - amountToSettle;
-        double expectedPaidAmount = studentToUpdate.getPaidAmount().value + amountToSettle;
+        double expectedOwedAmount = studentToUpdate.getOwedAmount().value - amountToSettle.value;
+        double expectedPaidAmount = studentToUpdate.getPaidAmount().value + amountToSettle.value;
 
         assertEquals(expectedOwedAmount, updatedStudent.getOwedAmount().value, 0.001);
         assertEquals(expectedPaidAmount, updatedStudent.getPaidAmount().value, 0.001);
@@ -119,7 +112,8 @@ public class SettleCommandTest {
     @Test
     public void createUpdatedStudent_amountExceedsOwed_throwsCommandException() {
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        double amountToSettle = studentToUpdate.getOwedAmount().value + 10.0; // more than owed
+        String amountString = Double.toString(studentToUpdate.getOwedAmountValue() + 10.0);
+        SettleAmount amountToSettle = new SettleAmount(amountString); // more than owed
 
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, amountToSettle);
 
@@ -130,38 +124,42 @@ public class SettleCommandTest {
     @Test
     public void createUpdatedStudent_fullSettlement_updatesOwedToZero() throws Exception {
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        double fullSettlementAmount = studentToUpdate.getOwedAmount().value;
+        String amountString = Double.toString(studentToUpdate.getOwedAmountValue());
+
+        SettleAmount fullSettlementAmount = new SettleAmount(amountString);
 
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, fullSettlementAmount);
         Student updatedStudent = settleCommand.createUpdatedStudent(studentToUpdate);
 
-        assertEquals(0.0, updatedStudent.getOwedAmount().value, 0.001);
-        double expectedPaidAmount = studentToUpdate.getPaidAmount().value + fullSettlementAmount;
-        assertEquals(expectedPaidAmount, updatedStudent.getPaidAmount().value, 0.001);
+        assertEquals(0.0, updatedStudent.getOwedAmountValue(), 0.001);
+        double expectedPaidAmount = studentToUpdate.getPaidAmountValue() + fullSettlementAmount.value;
+        assertEquals(expectedPaidAmount, updatedStudent.getPaidAmountValue(), 0.001);
     }
 
     // Case where partial payment is made, ensuring both paid and owed amounts are updated correctly
     @Test
     public void createUpdatedStudent_partialSettlement_updatesCorrectly() throws Exception {
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        double partialPayment = studentToUpdate.getOwedAmount().value / 2;
+        String amountString = Double.toString(studentToUpdate.getOwedAmountValue() / 2);
+
+        SettleAmount partialPayment = new SettleAmount(amountString);
 
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, partialPayment);
         Student updatedStudent = settleCommand.createUpdatedStudent(studentToUpdate);
 
-        double expectedOwedAmount = studentToUpdate.getOwedAmount().value - partialPayment;
-        double expectedPaidAmount = studentToUpdate.getPaidAmount().value + partialPayment;
+        double expectedOwedAmount = studentToUpdate.getOwedAmountValue() - partialPayment.value;
+        double expectedPaidAmount = studentToUpdate.getPaidAmountValue() + partialPayment.value;
 
-        assertEquals(expectedOwedAmount, updatedStudent.getOwedAmount().value, 0.001);
-        assertEquals(expectedPaidAmount, updatedStudent.getPaidAmount().value, 0.001);
+        assertEquals(expectedOwedAmount, updatedStudent.getOwedAmountValue(), 0.001);
+        assertEquals(expectedPaidAmount, updatedStudent.getPaidAmountValue(), 0.001);
     }
 
     @Test
     public void equals() {
-        final SettleCommand standardCommand = new SettleCommand(INDEX_FIRST_STUDENT, 30.0);
+        final SettleCommand standardCommand = new SettleCommand(INDEX_FIRST_STUDENT, new SettleAmount("30.00"));
 
         // same values -> returns true
-        SettleCommand commandWithSameValues = new SettleCommand(INDEX_FIRST_STUDENT, 30.0);
+        SettleCommand commandWithSameValues = new SettleCommand(INDEX_FIRST_STUDENT, new SettleAmount("30.00"));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -174,16 +172,16 @@ public class SettleCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new SettleCommand(INDEX_SECOND_STUDENT, 30.0)));
+        assertFalse(standardCommand.equals(new SettleCommand(INDEX_SECOND_STUDENT, new SettleAmount("30.00"))));
 
         // different amount -> returns false
-        assertFalse(standardCommand.equals(new SettleCommand(INDEX_FIRST_STUDENT, 50.0)));
+        assertFalse(standardCommand.equals(new SettleCommand(INDEX_FIRST_STUDENT, new SettleAmount("50.00"))));
     }
 
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        double amount = 50.0;
+        SettleAmount amount = new SettleAmount("50.00");
         SettleCommand settleCommand = new SettleCommand(index, amount);
 
         String expected = SettleCommand.class.getCanonicalName() + "{index=" + index + ", amount=" + amount + "}";
@@ -191,9 +189,9 @@ public class SettleCommandTest {
         assertEquals(expected, settleCommand.toString());
     }
 
-    private Student createEditedStudentWithUpdatedAmounts(Student studentToEdit, double amountSettled) {
-        double updatedOwedAmount = studentToEdit.getOwedAmount().value - amountSettled;
-        double updatedPaidAmount = studentToEdit.getPaidAmount().value + amountSettled;
+    private Student createEditedStudentWithUpdatedAmounts(Student studentToEdit, SettleAmount amountSettled) {
+        double updatedOwedAmount = studentToEdit.getOwedAmount().value - amountSettled.value;
+        double updatedPaidAmount = studentToEdit.getPaidAmount().value + amountSettled.value;
         return new Student(
                 studentToEdit.getName(),
                 studentToEdit.getPhone(),

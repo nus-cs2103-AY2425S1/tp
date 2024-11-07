@@ -87,6 +87,7 @@ public class AddressBookParser {
 
         case SettleCommand.COMMAND_WORD:
             return new SettleCommandParser().parse(arguments);
+
         case PayCommand.COMMAND_WORD:
             return new PayCommandParser().parse(arguments);
 

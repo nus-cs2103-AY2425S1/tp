@@ -19,6 +19,7 @@ import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Subject;
 
 /**
@@ -28,6 +29,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_HOUR = "Number of hours should be a positive multiple of 0.5";
+    public static final String MESSAGE_OVERFLOW = "Number of hours exceeds max limit of the machine";
 
     private static final Logger logger = Logger.getLogger(ParserUtil.class.getName());
     /**
@@ -202,13 +204,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the {@code amount} is invalid.
      */
-    public static double parseAmount(String amount) throws ParseException {
+    public static SettleAmount parseAmount(String amount) throws ParseException {
         String trimmedAmount = amount.trim();
-        double amountDouble = Double.parseDouble(trimmedAmount);
-        if (amountDouble <= 0) {
-            throw new ParseException("Amount has to positive");
+        if (!SettleAmount.isValidSettleAmount(trimmedAmount)) {
+            throw new ParseException(SettleAmount.MESSAGE_CONSTRAINTS);
         }
-        return amountDouble;
+        return new SettleAmount(trimmedAmount);
     }
 
     /**
@@ -222,6 +223,9 @@ public class ParserUtil {
         String trimmedHour = hour.trim();
         if (!StringUtil.isPositiveMultipleOfHalfHour(trimmedHour)) {
             throw new ParseException(MESSAGE_INVALID_HOUR);
+        }
+        if (Double.parseDouble(trimmedHour) >= Double.MAX_VALUE) {
+            throw new ParseException(MESSAGE_OVERFLOW);
         }
         return Double.parseDouble(trimmedHour);
     }

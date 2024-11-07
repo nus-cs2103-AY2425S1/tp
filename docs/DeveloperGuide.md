@@ -13,7 +13,8 @@
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -127,14 +128,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="600" />
-
-</box>
-
 
 ### Storage component
 
@@ -157,102 +150,98 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add a new student
 
-#### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The add command is used to add a new student to the address book. The `AddCommandParser` is responsible for parsing the user input and creating an `AddCommand` object. The `AddCommand` object is then executed by the `Logic` component.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+`AddCommandParser` obtains the values corresponding to the prefixes `n/` `p/` `e/` `a/` `t/` `s/` `r/` `paid/` `owed/` from the user input. The `AddCommandParser` will enforce the following constraints:
+* There is no preamble text between the `add` command word and the prefixes.
+* The prefixes `n/` `p/` `e/` `a/` `t/` `s/` `r/` must be provided (`paid/` and `owed/` are optional).
+* If the prefixes are provided, they must appear for only once.
+* All values corresponding to the prefixes that are provided must be non-empty and valid.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+If the constraints are not met, the `AddCommandParser` will throw a `ParseException` with an error message indicating the constraint that was violated.
+Otherwise, a new instance of `Student` is created with the values obtained from the user input. 
+A new instance of `AddCommand` is then created with the `Student` instance.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+On execution, `AddCommand` first queries the supplied model if it contains a student with both an identical name **and** an identical phone number. If no such student exists, `AddCommand` then calls on `model::addStudent` to add the student into the addressBook data.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+Below is an activity diagram when [Adding a new student](#add-a-new-student)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
+The following sequence diagram shows how an add operation goes through the `Logic` component:
+<puml src="diagrams/ParseArgsToGetStudentFieldReferenceFrame.puml" alt="ParseArgsToGetStudentFieldReferenceFrame"/>
+<puml src="diagrams/AddSequenceDiagram-Logic.puml" alt="AddSequenceDiagram-Logic" />
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+Similarly, how an AddCommand operation goes through the `Model` component is shown below:
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<puml src="diagrams/AddSequenceDiagram-Model.puml" alt="AddSequenceDiagram-Model" height="500"/>
 
-<box type="info" seamless>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How add command is carried out:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Key in all the details for student in one command.
+  * Pros: Easy to implement, as only one command needs to be key in by user.
+  * Cons: Command might get too long.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Key in the details for students in multiple steps.
+  * Pros: A step-by-step guide for adding details can be especially helpful for new users, as it offers clear and structured guidance.
+  * Cons: It is hard to implement, especially with a mix of optional and compulsory fields. 
+  Additionally, it is not user-friendly for fast typists, as multiline commands are required to add a student.
 
-_{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Owe tuition fees
 
-_{Explain here how the data archiving feature will be implemented}_
+The owe command is part of UGTeach's payment tracking feature. It is used to track the amount of tuition fee owed by a student. The `OweCommandParser` is responsible for parsing the user input and creating an `OweCommand` object. The `OweCommand` object is then executed by the `Logic` component.
+
+`OweCommandParser` obtains the `INDEX` of the student and the values corresponding to the prefix `hr/` from the user input. The `OweCommandParser` will enforce the following constraints:
+* The `INDEX` must be a positive integer.
+* The prefix `hr/` must be provided.
+* If the prefixes are provided, they must appear for only once.
+* Value corresponding to the prefix that is provided must be non-empty and valid (positive multiple of 0.5).
+
+If the constraints are not met, the `OweCommandParser` will throw a `ParseException` with an error message indicating the constraint that was violated.
+Otherwise, a new instance of `OweCommand` is then created with the values of `INDEX` and `HOURS_OWED` parsed by `OweCommandParser`.
+
+On execution, `OweCommand` first queries the supplied model for the student to be updated using the `INDEX`. 
+
+Then, `OweCommand` calculates the amount of tuition fee owed and checks if the total amount owed by the student exceeds the limit of `9999999.99`. If it exceeds, `OweCommand` will throw a `CommandException` with an error message indicating that limit was violated.
+
+Finally, `OweCommand` updates the total amount of tuition fee owed by the student by creating a new `Student` instance with updated fields to replace the outdated `Student` instance in the model.
+
+The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
+<puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
+
+How an OweCommand operation goes through the `Model` component is shown below:
+
+<puml src="diagrams/OweSequenceDiagram-Model.puml" alt="OweSequenceDiagram-Model" height="1400" />
+
+#### Design considerations:
+
+**Aspect: How owe executes:**
+
+* **Alternative 1 (current choice):** Calculations for amount owed done by UGTeach.
+    * Pros: User friendly.
+    * Cons: May have performance issues due to the need to fetch data and perform calculations.
+
+* **Alternative 2:** Calculations for amount owed done by the user.
+    * Pros: Easy to implement.
+    * Cons: Might not be user-friendly as user would need to find out what is the 
+    tuition rate charged and calculate how much tuition fee did the student owe.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -280,7 +269,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, track student performance, and organize schedules using CLI.
+**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, and organize schedules using CLI.
 
 
 ### User stories
@@ -309,7 +298,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
 | `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -319,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters command to create new student entry.
-2. System displays success message and command line is cleared.
+1. System displays success message and command line is cleared.
 
    Use case ends.
 
@@ -327,100 +315,157 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
-
-
-* 1b. System detects error in parameters.
-    * 1b1. System displays error message and does not clear command line.
-    * 1b2. User enters command with correct parameters.
-* Steps 1b1-1b2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
-
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.
+  
 
 **Use case: UC02 - Read all entries**
 
 **MSS**
 1. User enters command to view all entries.
-2. System displays list with all entries to the user.
+1. System displays list with all entries to the user.
 
    Use case ends.
 
 **Extension**
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.<br><br>
 
 * 1b. System detects the list is empty.
-    * 1b1. System shows an empty list.
-
+    * 1b1. System shows an empty list.<br> 
   Use case ends.
 
 **Use case: UC03 - Read total earnings**
 
 **MSS**
 
-1. User enters command to read total earnings and total money owed.
-2. System displays total earnings and total money owed to the user.
+1. User enters command to read total earnings and total amount owed by the students. 
+1. System displays total earnings and total amount owed to the user.
 
    Use case ends.
 
 **Extension**
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use cases resumes from step 2.
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br> 
+  Use case resumes from step 2.
 
 
 **Use case: UC04 - Delete a student entry**
 
 **MSS**
 
-1. User requests to <ins>list students(UC02)</ins>.
-2. User enters command to delete a specific student.
-3. System displays list with specified student deleted from the list.
+1. User requests to <ins>find a student(UC05)</ins>.
+1. User enters command to delete a specific student.
+1. System displays list with specified student deleted from the list.
 
    Use case ends.
 
 **Extensions**
-
-* 2a. The given index is invalid.
+* 1a. System cannot find the specified student.<br>
+    Use case ends.<br><br>
+  
+* 2a. System detects error in format of entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters command with new index.
-* Steps 2a1-2a2 are repeated until index entered is correct.
-* Use cases resumes from step 3.
+    * 2a2. User enters command with new index.<br>
+  Steps 2a1-2a2 are repeated until index entered is correct.<br>
+  Use case resumes from step 3.
 
-
-* 2b. System detects error in format of entered command.
-    * 2b1. System displays error message and does not clear command line.
-    * 2b2. User enters new command.
-* Steps 2b1-2b2 are repeated until all details entered are correct.
-* Use cases resumes from step 3.
 
 **Use case: UC05 - Find student entries**
 
 **MSS**
 
-1. User enters command to find students.
+1. User enters command to find students based on the specified keywords.
 1. System displays list with students with matching details.
 
    Use case ends.
 
 **Extensions**
+* 1a. System cannot find any student with the specified keyword.
+    * 1a1. System displays an empty list.<br>
+  Use case ends.<br><br>
+    
+* 1b. System detects error in entered command.
+    * 1b1. System displays error message and does not clear command line.
+    * 1b2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.
 
-* 1a. System detects error in entered command.
-    * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
 
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
+**Use case: UC06 - Receiving tuition fee from a student**
 
-*{More to be added}*
+**MSS**
+
+1. User requests to <ins>find a student(UC05)</ins>.
+1. User enters command to record payment received from the specified student after a lesson.
+1. System updates the total tuition fee paid by the student.
+1. System displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System cannot find the specified student.
+    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
+  Use case resumes from step 1.<br><br>
+
+* 2a. System detects error in entered command.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters new command.<br>
+  Steps 2a1-2a2 are repeated until all details entered are correct.<br> 
+  Use case resumes from step 3.
+
+**Use case: UC07 - Updating amount of tuition fee owed by student**
+
+**MSS**
+
+1. User requests to <ins>find a student(UC05)</ins>.
+1. User enters command to update amount of tuition fee owed by the specified student after a lesson.
+1. System updates the total tuition fee owed by the student.
+1. System displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System cannot find the specified student.
+    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
+      Use case resumes from step 1.<br><br>
+
+* 2a. System detects error in entered command.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters new command.<br>
+      Steps 2a1-2a2 are repeated until all details entered are correct.<br>
+      Use case resumes from step 3.
+
+**Use case: UC08 - Settle outstanding fees for student**
+
+**MSS**
+
+1. User requests to <ins>find a student(UC05)</ins>.
+1. User enters command to settle outstanding fees for the specified student.
+1. System updates the total tuition fee paid and total tuition fee owed by the student.
+1. System displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System cannot find the specified student.
+    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
+  Use case resumes from step 1.<br><br>
+
+* 2a. System detects error in entered command.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters new command.<br>
+  Steps 2a1-2a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 3.
 
 ### Non-Functional Requirements
 **Environment Requirements**
@@ -428,32 +473,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Data Requirements**
 1. All the data should be stored in human-editable files and must not be stored using DBMS. 
-2. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown.
+1. Data should be saved permanently and must not be affected by power outage.
 
 **Performance Requirements**
-1. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage. 
-2. For any simple usage, the application should be able to respond within 2 seconds.
+1. Should be able to hold up to 1000 students without any noticeable sluggishness in performance for typical usage. 
+1. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-2. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
-3. The application should provide clear help sections for users, explaining how to use its features.
+1. The user interface should work appear seamlessly for screens with standard resolutions (1920x1080) and higher.
+1. The user interface should be easy to navigate and intuitive, with clear labels, and large enough texts. 
+1. The application should provide clear help sections for users, explaining how to use its features.
 
 **Concurrency Control**
-1. Should only be used by one student at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
+1. Should only be used by one user at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
 
 **Testability**
 1. The software should not depend on any remote server and should be able to run at any time. 
-2. The application should be able to launch without an installer.
-3. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
+1. The application should be able to launch without an installer.
+1. Features should be testable without any external access e.g., remote APIs, audio players, user accounts, internet connection, after the initial download of the application's jar file.
 
 **Security Requirements**
 1. The application is assumed to be used locally without creating any user account.
-2. Data stored in human-editable files is assumed to be highly secured and not damaged.
+1. Data stored in human-editable files is assumed to be highly secured and not damaged.
 
 **Maintainability Requirements**
 1. The codebase should be modular and well-documented (i.e. JavaDoc, following abstraction and cohesion) to ensure ease of maintenance and updates.
-2. The application must use a version control system to track changes and maintain multiple versions of the software.
+1. The application must use a version control system to track changes and maintain multiple versions of the software.
 
 **Logging**
 1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
@@ -481,13 +527,18 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+
 ### Launch and shutdown
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   
+   1. Open a command terminal, `cd` into the folder that you put the jar file in.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Run the jar file with the command in the terminal `java -jar ugteach.jar`<br>
+      Expected: Shows the GUI with a set of sample contacts and a reminder for lessons scheduled today. 
+      The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -496,7 +547,56 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Finding students
+
+1. Finding students by name
+
+    1. Test case: `find n/Alex`<br>
+       Expected: Only students whose name contains keyword `Alex` listed.
+
+    1. Test case: `find n/Alex Bernice`<br>
+       Expected: Only students whose name contains keyword `Alex` **OR** `Bernice` listed.
+   
+    1. Test case: `find n/Alex!`<br>
+       Expected: Search not performed. UGTeach shows an error message.
+    
+    1. Other incorrect find commands to try: `find n/  `, `find n/Bernice!`<br>
+   (where keyword supplied contains non-alphanumeric characters or only whitespace)<br>
+       Expected: Similar to previous.
+
+1. Finding students by day
+    1. Test case: `find d/Thursday`<br>
+       Expected: Only students whose tuition day falls on `Thursday` listed.
+
+    1. Test case: `find d/Wednesday Thursday`<br>
+       Expected: Only students whose tuition day falls on `Wednesday` **OR** `Thursday` listed.
+   
+    1. Test case: `find d/Thur`<br>
+       Expected: Search not performed. UGTeach shows an error message.
+    
+    1. Other incorrect find commands to try: `find d/`, `find d/foo`<br>
+    (where days supplied does not match any day or contains only whitespace)<br>
+       Expected: Similar to previous.
+
+1. Finding students by name or day
+   1. Test case: `find n/Alex d/Thursday`<br>
+      Expected: Only students whose name contains keyword `Alex`<br>
+      **AND** their tuition day falls on `Thursday` listed.
+   
+   1. Test case: `find d/Thursday n/Alex `<br>
+      Expected: Similar to previous.
+
+   1. Test case: `find d/Alex Bernice d/Wednesday Thursday`<br>
+      Expected: Only students whose name contains keyword `Alex` **OR** `Bernice`<br>
+      **AND** their tuition day falls on `Wednesday` **OR** `Thursday` listed.
+   
+   1. Test case: `find n/Alex d/`<br>
+      Expected: Search not performed. UGTeach shows an error message.
+   
+   1. Other incorrect find commands to try: `find n/ d/Thursday`, `find n/Alex! d/Thursday`, `find n/Alex d/Thur`<br>
+   (where keywords supplied contains non-alphanumeric characters or only whitespace) or<br>
+   (where days supplied does not match any day or contains only whitespace)<br>
+      Expected: Similar to previous.
 
 ### Adding a new student
 
@@ -571,25 +671,60 @@ student]() to search for student details.
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Deleting a student while all students are being shown.
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. UGTeach displays success message with details of the deleted student.
 
    1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. UGTeach displays error message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a student from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `delete 1`<br>
+        Expected: First contact is deleted from the filtered list. UGTeach displays success message with details of the deleted student.
+
+    1. Test case: `delete 0`<br>
+       Expected: No student is deleted. UGTeach displays error message.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+        Expected: Similar to previous.
+   
+### Getting a reminder
+
+1. Getting a reminder when there are lessons scheduled for today.
+
+    1. Prerequisite: There should be **at least 1 lesson** scheduled for today.
+
+    1. Test case: `remind`<br>
+         Expected: UGTeach displays success message with details such as student's name, time of the lesson and the subject to be taught.
+
+1. Getting a reminder when there are no lessons scheduled for today.
+
+    1. Prerequisite: There should be **no lessons** scheduled for today.
+
+    1. Test case: `remind`<br>
+        Expected: UGTeach displays congratulatory message for having no lessons scheduled today.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisite: There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
 
-1. _{ more test cases …​ }_
+   1. Test case: Delete the `ugteach.json` file.<br>
+       Expected: UGTeach should create a new `ugteach.json` file with default data.
+        
+   1. Test case: Delete the `data` folder together with the `ugteach.json` file.<br>
+       Expected: Similar to previous.
+
+   1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
+   e.g. add a non-alphanumeric character to one of the student's name.<br>
+       Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.

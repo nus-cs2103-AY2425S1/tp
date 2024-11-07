@@ -33,11 +33,13 @@ public class AddCommandTest {
 
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
+        // EP: null
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
+        // EP: valid student
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
 
@@ -50,6 +52,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
+        // EP: valid student but already in model
         Student validStudent = new StudentBuilder().build();
         AddCommand addCommand = new AddCommand(validStudent);
         ModelStub modelStub = new ModelStubWithStudent(validStudent);
@@ -59,6 +62,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_studentWithClashes_returnsClashingMessage() throws Exception {
+        // EP: valid student but schedule clashes with existing student
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         modelStub.addStudent(ALICE); // Add a student that causes a clash
 
@@ -166,6 +170,15 @@ public class AddCommandTest {
 
         @Override
         public List<Student> getScheduledStudents(Days day) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public double getTotalPaidAmount() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public double getTotalOwedAmount() {
             throw new AssertionError("This method should not be called.");
         }
 

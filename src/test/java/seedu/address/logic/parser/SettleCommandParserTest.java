@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DESC_MIXED_CASE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.SettleCommand;
+import seedu.address.model.student.SettleAmount;
 
 public class SettleCommandParserTest {
 
@@ -22,6 +24,7 @@ public class SettleCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
+        // EP: missing parts
         // no index specified
         assertParseFailure(parser, VALID_AMOUNT_DESC, MESSAGE_INVALID_FORMAT);
 
@@ -35,6 +38,7 @@ public class SettleCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
+        // EP: invalid input
         // negative index
         assertParseFailure(parser, "-5" + VALID_AMOUNT_DESC, MESSAGE_INVALID_FORMAT);
 
@@ -50,15 +54,16 @@ public class SettleCommandParserTest {
 
     @Test
     public void parse_invalidAmount_failure() {
-        assertParseFailure(parser, "1" + INVALID_AMOUNT_DESC, "Amount has to positive");
+        assertParseFailure(parser, "1" + INVALID_AMOUNT_DESC, SettleAmount.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        double amount = 100.0; // Example amount
+        double amount = 100.00;
+        SettleAmount settleAmount = new SettleAmount(Double.toString(amount));
         String userInput = INDEX_SECOND_STUDENT.getOneBased() + " " + PREFIX_AMOUNT + amount;
 
-        SettleCommand expectedCommand = new SettleCommand(INDEX_SECOND_STUDENT, amount);
+        SettleCommand expectedCommand = new SettleCommand(INDEX_SECOND_STUDENT, settleAmount);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -68,5 +73,15 @@ public class SettleCommandParserTest {
         String userInput = INDEX_FIRST_STUDENT.getOneBased() + VALID_AMOUNT_DESC + INVALID_AMOUNT_DESC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
+    }
+
+    @Test
+    public void parse_validValueMixedCase_success() {
+        SettleAmount settleAmount = new SettleAmount("5.00");
+        String userInput = INDEX_FIRST_STUDENT.getOneBased() + " " + VALID_AMOUNT_DESC_MIXED_CASE;
+
+        SettleCommand expectedCommand = new SettleCommand(INDEX_FIRST_STUDENT, settleAmount);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

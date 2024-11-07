@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+
 public class PaidAmountTest {
 
     @Test
@@ -41,14 +44,17 @@ public class PaidAmountTest {
     }
 
     @Test
-    public void updateValue() {
+    public void updateValue_validInput_success() throws CommandException {
         PaidAmount paidAmount = new PaidAmount("10.00");
 
-        PaidAmount updatedPaidAmount = paidAmount.updateValue(5.00);
+        PaidAmount updatedPaidAmount = paidAmount.updateValue(new SettleAmount("5.00"));
         assertEquals("15.00", updatedPaidAmount.toString());
+    }
 
-        PaidAmount updatedPaidAmount2 = paidAmount.updateValue(0.01);
-        assertEquals("10.01", updatedPaidAmount2.toString());
+    @Test
+    public void updateValue_overflowError_throwsCommandException() {
+        PaidAmount paidAmount = new PaidAmount("10.00");
+        assertThrows(CommandException.class, () -> paidAmount.updateValue(new SettleAmount("999999999")));
     }
 
 

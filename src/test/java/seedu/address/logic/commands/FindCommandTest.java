@@ -71,6 +71,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroNameKeywords_noStudentFound() {
+        // EP: no name keywords
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
 
         FindCommand command = new FindCommand(List.of(emptyNamePredicate));
@@ -93,12 +94,25 @@ public class FindCommandTest {
     }
     @Test
     public void execute_scheduleOnWednesday_oneStudentFound() {
+        // EP: one schedule keyword
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
 
         ScheduleContainsKeywordsPredicate schedulePredicate = prepareSchedulePredicate(Days.WEDNESDAY);
 
         FindCommand command = new FindCommand(List.of(schedulePredicate));
         expectedModel.updateFilteredStudentList(List.of(schedulePredicate));
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(DANIEL), model.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_oneNameWithMultipleScheduleKeywords_oneStudentFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
+
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Daniel");
+        FindCommand command = new FindCommand(List.of(namePredicate, schedulePredicate));
+        expectedModel.updateFilteredStudentList(List.of(namePredicate, schedulePredicate));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.singletonList(DANIEL), model.getFilteredStudentList());
@@ -116,8 +130,9 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_nameAndScheduleKeywords_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+    public void execute_nameAndScheduleKeywords_noStudentFound() {
+        // no student has name containing "Elle" and schedule containing "Wednesday"
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
 
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Elle");
         ScheduleContainsKeywordsPredicate schedulePredicate = prepareSchedulePredicate(Days.WEDNESDAY);
@@ -126,7 +141,22 @@ public class FindCommandTest {
         expectedModel.updateFilteredStudentList(List.of(namePredicate, schedulePredicate));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, ELLE), model.getFilteredStudentList());
+        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_nameAndScheduleKeywords_oneStudentFound() {
+        // one student has name containing "Elle" and schedule containing "Thursday"
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
+
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Elle");
+        ScheduleContainsKeywordsPredicate schedulePredicate = prepareSchedulePredicate(Days.THURSDAY);
+
+        FindCommand command = new FindCommand(List.of(namePredicate, schedulePredicate));
+        expectedModel.updateFilteredStudentList(List.of(namePredicate, schedulePredicate));
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(ELLE), model.getFilteredStudentList());
     }
 
     @Test

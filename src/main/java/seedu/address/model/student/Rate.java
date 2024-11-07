@@ -10,7 +10,7 @@ public class Rate extends Fee {
 
     public static final String MESSAGE_CONSTRAINTS = "Rate "
             + Fee.MESSAGE_CONSTRAINTS
-            + "2. is between the range of 0.01 to " + MAX_VALUE;
+            + "2. is between the range of $0.01/h to $" + String.format("%.2f", MAX_VALUE) + "/h";
 
 
     /**
