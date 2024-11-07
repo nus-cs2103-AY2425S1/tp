@@ -3,7 +3,11 @@ package tuteez.model.person.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tuteez.model.person.lesson.Lesson.isLessonEndAtValidTime;
+import static tuteez.model.person.lesson.Lesson.isLessonStartAtValidTime;
 import static tuteez.model.person.lesson.Lesson.isValidLesson;
+import static tuteez.model.person.lesson.Lesson.isValidTimeOrder;
+import static tuteez.model.person.lesson.Lesson.isValidTimeRange;
 import static tuteez.testutil.Assert.assertThrows;
 
 import java.time.Duration;
@@ -35,7 +39,65 @@ public class LessonTest {
     }
 
     @Test
-    public void isClashingWithOtherLessonTest_noClash() {
+    public void isLessonStartAtValidTime_invalidStart() {
+        LocalTime inValidStartTime = LocalTime.of(23, 59);
+        assertFalse(isLessonStartAtValidTime(inValidStartTime));
+    }
+
+    @Test
+    public void isLessonEndAtValidTime_invalidEnd() {
+        LocalTime inValidEndTime = LocalTime.of(0, 0);
+        assertFalse(isLessonEndAtValidTime(inValidEndTime));
+    }
+
+    @Test
+    public void isValidTimeOrder_validTimeOrder() {
+        LocalTime startTime = LocalTime.of(18, 0);
+        LocalTime endTime = LocalTime.of(19, 0);
+
+        // EP: Start time before end time
+        assertTrue(isValidTimeOrder(startTime, endTime));
+    }
+
+    @Test
+    public void isValidTimeOrder_invalidTimeOrder() {
+        LocalTime startTime = LocalTime.of(18, 0);
+        LocalTime endTime = LocalTime.of(19, 0);
+
+        // EP : Start time after end time
+        assertFalse(isValidTimeOrder(endTime, startTime));
+
+        // EP: Start time same as end time
+        assertFalse(isValidTimeOrder(startTime, startTime));
+    }
+
+    @Test
+    public void isValidTimeRange_validTimeRange() {
+        String validTimeRange = "1800-1900";
+
+        // EP: Valid time
+        assertTrue(isValidTimeRange(validTimeRange));
+    }
+
+    @Test
+    public void isValidTimeRange_invalidTimeRange() {
+        String validTimeRange = "1800-1900";
+        String invalidTimeRange = "2525-2780";
+        String startValidEndInvalid = "2300-2500";
+        String startInvalidEndValid = "1870-2300";
+
+        // EP: Both start, end invalid
+        assertFalse(isValidTimeRange(invalidTimeRange));
+
+        // EP: Start valid, end invalid
+        assertFalse(isValidTimeRange(startValidEndInvalid));
+
+        // EP: Start invalid, end valid
+        assertFalse(isValidTimeRange(startInvalidEndValid));
+    }
+
+    @Test
+    public void isClashingWithOtherLesson_noClash() {
         Lesson l1 = new Lesson("Friday 1300-1400");
         Lesson l2 = new Lesson("Friday 1400-1500");
         Lesson l3 = new Lesson("Thursday 1300-1400");
@@ -54,7 +116,7 @@ public class LessonTest {
     }
 
     @Test
-    public void isClashingWithOtherLessonTest_clashOccur() {
+    public void isClashingWithOtherLesson_clashOccur() {
         Lesson l1 = new Lesson("Friday 1300-1400");
         Lesson l2 = new Lesson("Friday 1330-1430");
 
@@ -165,7 +227,7 @@ public class LessonTest {
     }
 
     @Test
-    public void durationTillLessonTest_currentlyOngoing() {
+    public void durationTillLesson_currentlyOngoing() {
         LocalDateTime currentTimePlaceholder = LocalDateTime.of(2024, 10, 30, 11, 0);
 
         LessonStub lesson1 = new LessonStub("wednesday 1100-1130");

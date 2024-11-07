@@ -1,9 +1,7 @@
 package tuteez.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.logic.commands.CommandTestUtil.DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.DESC_BOB;
@@ -22,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import tuteez.commons.core.index.Index;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
-import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.AddressBook;
 import tuteez.model.Model;
 import tuteez.model.ModelManager;
@@ -108,7 +105,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -120,51 +117,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
-
-    @Test
-    public void execute_lessonClashesWithExistingLesson_noClashOccurs() {
-        Person secondPersonInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditPersonDescriptor secondPersonDescriptor = new EditPersonDescriptorBuilder(secondPersonInList)
-                .withLessons("friday 1830-2000").build();
-        EditCommand firstEdit = new EditCommand(INDEX_SECOND_PERSON, secondPersonDescriptor);
-        assertDoesNotThrow(() -> firstEdit.execute(model));
-
-        Person firstPersonInList = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditPersonDescriptor firstPersonDescriptor = new EditPersonDescriptorBuilder(firstPersonInList)
-                .withLessons("friday 1730-1830").build();
-        EditCommand secondEdit = new EditCommand(INDEX_FIRST_PERSON, firstPersonDescriptor);
-        assertDoesNotThrow(() -> secondEdit.execute(model));
-    }
-
-    @Test
-    public void execute_lessonClashesWithExistingLesson_clashOccurs() {
-        Person secondPersonInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditPersonDescriptor secondPersonDescriptor = new EditPersonDescriptorBuilder(secondPersonInList)
-                .withLessons("friday 1800-2000").build();
-        EditCommand firstEdit = new EditCommand(INDEX_SECOND_PERSON, secondPersonDescriptor);
-        assertDoesNotThrow(() -> firstEdit.execute(model));
-
-        Person firstPersonInList = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditPersonDescriptor firstPersonDescriptor = new EditPersonDescriptorBuilder(firstPersonInList)
-                .withLessons("friday 1730-1830").build();
-        EditCommand secondEdit = new EditCommand(INDEX_FIRST_PERSON, firstPersonDescriptor);
-        assertThrows(CommandException.class, () -> secondEdit.execute(model));
-    }
-
-    @Test
-    public void execute_lessonClashesWithSameStudentsExistingLesson_noClashOccurs() {
-        Person firstPersonInList = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditPersonDescriptor firstDescriptor = new EditPersonDescriptorBuilder(firstPersonInList)
-                .withLessons("friday 1800-2000").build();
-        EditCommand firstEdit = new EditCommand(INDEX_FIRST_PERSON, firstDescriptor);
-        assertDoesNotThrow(() -> firstEdit.execute(model));
-
-        EditPersonDescriptor secondDescriptor = new EditPersonDescriptorBuilder(firstPersonInList)
-                .withLessons("friday 1730-1830").build();
-        EditCommand secondEdit = new EditCommand(INDEX_FIRST_PERSON, secondDescriptor);
-        assertDoesNotThrow(() -> secondEdit.execute(model));
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -191,6 +144,31 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_retainsOriginalLessons_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        // Verify that lessons remain unchanged
+        assertEquals(lastPerson.getLessons(), editedPerson.getLessons());
     }
 
     @Test

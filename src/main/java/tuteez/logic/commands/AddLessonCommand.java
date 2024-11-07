@@ -24,8 +24,12 @@ public class AddLessonCommand extends LessonCommand {
             + "Successfully added:\n%1$s"
             + "Failed to add:\n%2$s";
 
-    private final List<Lesson> lessonsToAdd;
+    public static final String MESSAGE_USAGE = "Add lessons by index in displayed student list: " + COMMAND_WORD_ADD
+            + " (short form: " + COMMAND_WORD_ADD_ALT + ")"
+            + " INDEX l/LESSON [l/LESSON]...\n"
+            + "Example: " + COMMAND_WORD_ADD + " 1 l/monday 0900-1100 l/wednesday 1400-1600";
 
+    private final List<Lesson> lessonsToAdd;
 
     /**
      * Adds a Lesson to the student with the specified {@code personIndex} of the displayed list.
@@ -66,6 +70,7 @@ public class AddLessonCommand extends LessonCommand {
         Person updatedPerson = addLessonsToPerson(personToUpdate, successfulAdditions);
         model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateLastViewedPerson(updatedPerson);
 
         String resultMessage = generateResultMessage(personToUpdate, successfulAdditions, failureMessages);
         return new CommandResult(resultMessage);
@@ -86,8 +91,11 @@ public class AddLessonCommand extends LessonCommand {
 
     private String formatFailureMessages(List<String> failureMessages) {
         StringBuilder sb = new StringBuilder();
-        for (String message : failureMessages) {
-            sb.append(message).append("\n");
+        for (int i = 0; i < failureMessages.size(); i++) {
+            sb.append(failureMessages.get(i));
+            if (i < failureMessages.size() - 1) {
+                sb.append("\n");
+            }
         }
         return sb.toString();
     }
@@ -133,17 +141,18 @@ public class AddLessonCommand extends LessonCommand {
     private String formatLessonList(List<Lesson> lessons) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i).toString()).append("\n");
+            sb.append("• ").append(lessons.get(i).toString()).append("\n");
         }
         return sb.toString();
     }
 
     private String formatClashMessage(Lesson lesson, Map<Person, ArrayList<Lesson>> clashingLessons) {
         StringBuilder sb = new StringBuilder();
-        sb.append(lesson.toString()).append(" - Clashes with •");
+        sb.append(lesson.toString()).append(" - Clashes with:\n");
         clashingLessons.forEach((person, lessons) -> {
-            sb.append(person.getName()).append(": ");
+            sb.append("•").append(person.getName()).append(": ");
             lessons.forEach(ls -> sb.append(ls.toString()).append(" "));
+            sb.append("\n");
         });
         return sb.toString();
     }

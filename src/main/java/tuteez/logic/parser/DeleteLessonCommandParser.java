@@ -3,11 +3,13 @@ package tuteez.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static tuteez.logic.Messages.MESSAGE_DUPLICATE_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_INVALID_LESSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+import static tuteez.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +67,7 @@ public class DeleteLessonCommandParser implements Parser<LessonCommand> {
             index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_INVALID_PERSON_INDEX_FORMAT));
+                    String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, preamble)));
         }
         return index;
     }
@@ -87,8 +89,12 @@ public class DeleteLessonCommandParser implements Parser<LessonCommand> {
                 }
                 indices.add(index);
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        MESSAGE_INVALID_PERSON_INDEX_FORMAT));
+                if (pe.getMessage().equals(MESSAGE_INVALID_INDEX)) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            MESSAGE_INVALID_LESSON_INDEX_FORMAT));
+                }
+                // Pass through other ParseExceptions (like duplicate index) as-is
+                throw pe;
             }
         }
 

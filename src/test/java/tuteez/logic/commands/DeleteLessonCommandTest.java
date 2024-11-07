@@ -3,6 +3,8 @@ package tuteez.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static tuteez.logic.commands.CommandTestUtil.VALID_LESSON_MONDAY;
+import static tuteez.logic.commands.CommandTestUtil.VALID_LESSON_WEDNESDAY;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tuteez.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -32,7 +34,7 @@ public class DeleteLessonCommandTest {
     @Test
     public void execute_deleteLessonUnfilteredList_success() {
         Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String[] lessonsToDelete = {"monday 1000-1200", "wednesday 1400-1600"};
+        String[] lessonsToDelete = {VALID_LESSON_MONDAY, VALID_LESSON_WEDNESDAY};
         List<Lesson> lessonList = Arrays.asList(new Lesson(lessonsToDelete[0]), new Lesson(lessonsToDelete[1]));
 
         Person personToUpdate = new PersonBuilder(originalPerson).withLessons(lessonsToDelete).build();
@@ -57,7 +59,7 @@ public class DeleteLessonCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String[] lessonsToDelete = {"monday 1000-1200", "wednesday 1400-1600"};
+        String[] lessonsToDelete = {VALID_LESSON_MONDAY, VALID_LESSON_WEDNESDAY};
         List<Lesson> lessonList = Arrays.asList(new Lesson(lessonsToDelete[0]), new Lesson(lessonsToDelete[1]));
 
         Person personToUpdate = new PersonBuilder(personInFilteredList).withLessons(lessonsToDelete).build();
@@ -101,7 +103,7 @@ public class DeleteLessonCommandTest {
     @Test
     public void execute_invalidLessonIndexUnfilteredList_throwsCommandException() {
         Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String[] lessons = {"monday 1000-1200"}; // Only one lesson
+        String[] lessons = {VALID_LESSON_MONDAY}; // Only one lesson
         Person personWithLesson = new PersonBuilder(originalPerson).withLessons(lessons).build();
         model.setPerson(originalPerson, personWithLesson);
 
@@ -116,7 +118,7 @@ public class DeleteLessonCommandTest {
     @Test
     public void execute_multipleInvalidLessonIndices_throwsCommandException() {
         Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String[] lessons = {"monday 1000-1200"}; // Only one lesson
+        String[] lessons = {VALID_LESSON_MONDAY}; // Only one lesson
         Person personWithLesson = new PersonBuilder(originalPerson).withLessons(lessons).build();
         model.setPerson(originalPerson, personWithLesson);
 
@@ -175,8 +177,7 @@ public class DeleteLessonCommandTest {
     private String formatLessonList(List<Lesson> lessons) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i).toString());
-            // Only add newline if not the last lesson
+            sb.append("• ").append(lessons.get(i).toString());
             if (i < lessons.size() - 1) {
                 sb.append("\n");
             }

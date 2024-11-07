@@ -145,4 +145,15 @@ public class ArgumentTokenizer {
         }
     }
 
+    /**
+     * Checks if at least one of the specified prefixes is present in the user input.
+     *
+     * @param argMultimap The ArgumentMultimap containing parsed prefixes and their values.
+     * @param prefixes  The prefixes to check for.
+     * @return True if at least one of the prefixes is present, otherwise false.
+     */
+    public static boolean checkHasAtLeastOnePrefix(ArgumentMultimap argMultimap, Prefix... prefixes) {
+        return Arrays.stream(prefixes)
+                .anyMatch(prefix -> argMultimap.getValue(prefix).isPresent());
+    }
 }

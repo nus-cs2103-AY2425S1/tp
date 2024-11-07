@@ -50,7 +50,7 @@ public class DeleteRemarkCommandTest {
 
         Person updatedPerson = new PersonBuilder(personToDeleteRemark).withRemarks(UPDATED_REMARKLIST).build();
 
-        String expectedMessage = String.format("Deleted remark at index %1$s from %2$s", 1, originalPersonName);
+        String expectedMessage = String.format(DeleteRemarkCommand.MESSAGE_SUCCESS, 1, originalPersonName);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToDeleteRemark, updatedPerson);
@@ -73,7 +73,7 @@ public class DeleteRemarkCommandTest {
 
         Person updatedPerson = new PersonBuilder(personToDeleteRemark).withRemarks(UPDATED_REMARKLIST).build();
 
-        String expectedMessage = String.format("Deleted remark at index %1$s from %2$s", 1, originalPersonName);
+        String expectedMessage = String.format(DeleteRemarkCommand.MESSAGE_SUCCESS, 1, originalPersonName);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToDeleteRemark, updatedPerson);
@@ -128,7 +128,7 @@ public class DeleteRemarkCommandTest {
 
         Person expectedPerson = new PersonBuilder(personToDeleteRemark).withRemarks(UPDATED_REMARKLIST).build();
 
-        String expectedMessage = String.format("Deleted remark at index %1$s from %2$s", 1, originalPersonName);
+        String expectedMessage = String.format(DeleteRemarkCommand.MESSAGE_SUCCESS, 1, originalPersonName);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToDeleteRemark, expectedPerson);
 

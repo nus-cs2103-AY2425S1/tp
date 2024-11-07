@@ -32,7 +32,11 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TELEGRAM = "J@ckson";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_LESSON = "someday 0900-1100";
+    private static final String INVALID_LESSON_DAY = "someday 0900-1100";
+    private static final String INVALID_LESSON_END_TIME = "monday 2300-0000";
+    private static final String INVALID_LESSON_START_TIME = "monday 2359-0000";
+    private static final String INVALID_LESSON_END_BEFORE_START = "monday 1800-1700";
+    private static final String INVALID_LESSON_TIME = "monday 2500-2670";
     private static final String INVALID_REMARK = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -44,6 +48,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_LESSON = "monday 0800-1100";
     private static final String VALID_LESSON_2 = "sunday 0900-1135";
+    private static final String VALID_LESSON_LATEST_END_TIME = "sunday 2300-2359";
+    private static final String VALID_LESSON_LATEST_START_TIME = "sunday 2358-2359";
     private static final String VALID_REMARK = "Good progress!";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -222,7 +228,7 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
@@ -234,14 +240,67 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLesson_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_LESSON));
+    public void parseLesson_invalidLessonDay_throwsParseException() {
+        // EP: Invalid lesson day
+        try {
+            ParserUtil.parseLesson(INVALID_LESSON_DAY);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Lesson.MESSAGE_INVALID_LESSON_DAY);
+        }
     }
 
     @Test
-    public void parseLesson_validValueWithoutWhitespace_returnsTag() throws Exception {
+    public void parseLesson_invalidLessonTime_throwParseException() {
+        try {
+            ParserUtil.parseLesson(INVALID_LESSON_TIME);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Lesson.MESSAGE_INVALID_LESSON_TIME);
+        }
+    }
+
+    @Test
+    public void parseLesson_invalidLessonStartTime_throwsParseException() {
+        // EP: Invalid lesson start time
+        try {
+            ParserUtil.parseLesson(INVALID_LESSON_START_TIME);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Lesson.MESSAGE_INVALID_LESSON_START_TIME);
+        }
+    }
+
+    @Test
+    public void parseLesson_invalidLessonEndTime_throwsParseException() {
+        // EP: Invalid lesson end time
+        try {
+            ParserUtil.parseLesson(INVALID_LESSON_END_TIME);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Lesson.MESSAGE_INVALID_LESSON_END_TIME);
+        }
+    }
+
+    @Test
+    public void parseLesson_invalidLessonOrder_throwsParseException() {
+        // EP: Invalid lesson, end time before start time
+        try {
+            ParserUtil.parseLesson(INVALID_LESSON_END_BEFORE_START);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Lesson.MESSAGE_INVALID_TIME_ORDER);
+        }
+    }
+
+
+    @Test
+    public void parseLesson_validValueWithoutWhitespace_returnsLesson() throws Exception {
         Lesson expectedLesson = new Lesson(VALID_LESSON);
         assertEquals(expectedLesson, ParserUtil.parseLesson(VALID_LESSON));
+
+        // Boundary value
+        Lesson expectedLessonLatestStart = new Lesson(VALID_LESSON_LATEST_START_TIME);
+        assertEquals(expectedLessonLatestStart, ParserUtil.parseLesson(VALID_LESSON_LATEST_START_TIME));
+
+        // Boundary value
+        Lesson expectedLessonLatestEnd = new Lesson(VALID_LESSON_LATEST_END_TIME);
+        assertEquals(expectedLessonLatestEnd, ParserUtil.parseLesson(VALID_LESSON_LATEST_END_TIME));
     }
 
     @Test
@@ -252,22 +311,23 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLesson_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, INVALID_LESSON)));
+    public void parseLesson_collectionWithInvalidLessons_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil
+                .parseLessons(Arrays.asList(VALID_LESSON, INVALID_LESSON_DAY)));
     }
 
     @Test
-    public void parseLessons_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseLessons_emptyCollection_returnsEmptyList() throws Exception {
         assertTrue(ParserUtil.parseLessons(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseLessons_collectionWithValidTags_returnsTagSet() throws Exception {
-        List<Lesson> actualLessonSet = ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, VALID_LESSON_2));
+    public void parseLessons_collectionWithValidLessons_returnsLessonList() throws Exception {
+        List<Lesson> actualLessonList = ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, VALID_LESSON_2));
         List<Lesson> expectedLessonList =
                 new ArrayList<>(Arrays.asList(new Lesson(VALID_LESSON), new Lesson(VALID_LESSON_2)));
 
-        assertEquals(actualLessonSet, expectedLessonList);
+        assertEquals(actualLessonList, expectedLessonList);
     }
 
     @Test

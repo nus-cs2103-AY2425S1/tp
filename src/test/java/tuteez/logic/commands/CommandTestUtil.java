@@ -19,8 +19,8 @@ import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.AddressBook;
 import tuteez.model.Model;
-import tuteez.model.person.NameContainsKeywordsPredicate;
 import tuteez.model.person.Person;
+import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -44,6 +44,7 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_MONDAY = "Monday 1000-1100";
     public static final String VALID_LESSON_TUESDAY = "Tuesday 1000-1100";
     public static final String VALID_LESSON_WEDNESDAY = "Wednesday 1000-1100";
+    public static final String VALID_LESSON_THURSDAY = "Thursday 1000-1100";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -82,7 +83,7 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withLessons(VALID_LESSON_DAY_AND_TME).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import tuteez.model.Model;
 import tuteez.model.ModelManager;
 import tuteez.model.UserPrefs;
-import tuteez.model.person.NameContainsKeywordsPredicate;
+import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

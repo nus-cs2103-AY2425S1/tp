@@ -13,6 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_TELEGRAM = new Prefix("tg/");
     public static final Prefix PREFIX_LESSON = new Prefix("l/");
+    public static final Prefix PREFIX_LESSON_DAY = new Prefix("ld/");
+    public static final Prefix PREFIX_LESSON_TIME = new Prefix("lt/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_REMARK_INDEX = new Prefix("ri/");
     public static final Prefix PREFIX_LESSON_INDEX = new Prefix("li/");

@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + "Optional Parameters:"
             + " [" + PREFIX_EMAIL + "EMAIL]"
             + " [" + PREFIX_ADDRESS + "ADDRESS]"
-            + " [" + PREFIX_TELEGRAM + "TELEGRAM USERNAME]"
+            + " [" + PREFIX_TELEGRAM + "TELEGRAM_USERNAME]"
             + " [" + PREFIX_TAG + "TAG]..."
             + " [" + PREFIX_LESSON + "LESSON]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -53,7 +53,6 @@ public class AddCommand extends Command {
             + "Note: Parameters marked optional can be omitted.";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
     public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
     public static final String MESSAGE_NEW_LESSONS_CLASH = "Added lessons clash with one another";
 
@@ -73,22 +72,24 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON);
         }
 
-        List<Lesson> lessonLst = toAdd.getLessons();
-        if (Lesson.hasClashingLessonWithinList(lessonLst)) {
+        List<Lesson> lessonList = toAdd.getLessons();
+        if (Lesson.hasClashingLessonWithinList(lessonList)) {
+            logger.info("There are clashing lessons within the following list: " + lessonList);
             throw new CommandException(MESSAGE_NEW_LESSONS_CLASH);
         }
 
-        Map<Person, ArrayList<Lesson>> resultMap = findAllClashingLessonsMap(model, lessonLst);
+        Map<Person, ArrayList<Lesson>> resultMap = findAllClashingLessonsMap(model, lessonList);
 
         if (!resultMap.isEmpty()) {
             String logMessage = String.format("Student: %s | Lessons: %s | Conflict: Clashes with "
-                    + "another student's lesson", toAdd.getName(), toAdd.getLessons().toString());
+                    + "another student's lesson, clashes logged below", toAdd.getName(), toAdd.getLessons().toString());
             logger.info(logMessage);
 
             String clashMsg = generateClashMessage(resultMap);
+            logger.info(clashMsg);
             throw new CommandException(clashMsg);
         }
 
@@ -105,14 +106,14 @@ public class AddCommand extends Command {
      * they are added to a map with the student and their conflicting lessons.</p>
      *
      * @param model The model, representing in-memory model for app
-     * @param lessonLst The list of lessons to check for clashes.
+     * @param lessonList The list of lessons to check for clashes.
      * @return A map where each key is a {@code Person} representing a student, and the value is an
      *         {@code ArrayList} of {@code Lesson} objects that are allocated to student and
      *         conflict with the given lessons.
      */
-    public Map<Person, ArrayList<Lesson>> findAllClashingLessonsMap(Model model, List<Lesson> lessonLst) {
+    public Map<Person, ArrayList<Lesson>> findAllClashingLessonsMap(Model model, List<Lesson> lessonList) {
         Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
-        for (Lesson lesson: lessonLst) {
+        for (Lesson lesson: lessonList) {
             assert lesson != null;
             Map<Person, ArrayList<Lesson>> clashingLessons = model.getClashingLessons(lesson);
 

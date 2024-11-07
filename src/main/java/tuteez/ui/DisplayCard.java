@@ -1,6 +1,5 @@
 package tuteez.ui;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -10,8 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import tuteez.commons.util.UiUtil;
 import tuteez.model.person.Person;
-import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
 
 /**
@@ -22,13 +21,8 @@ public class DisplayCard extends UiPart<Region> {
     private static final String FXML = "DisplayCard.fxml";
 
     public final Person person;
-
-    @FXML
-    private VBox cardPane;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
     @FXML
     private Label phone;
     @FXML
@@ -51,34 +45,14 @@ public class DisplayCard extends UiPart<Region> {
         super(FXML);
         this.person = lastViewedPerson.orElse(null);
         if (lastViewedPerson.isPresent()) {
-            name.setText(person.getName().fullName);
-            phone.setText(person.getPhone().value);
-            setTelegramUsernameText(person);
-            address.setText(person.getAddress().value);
-            email.setText(person.getEmail().value);
-            setTags(person);
+            UiUtil.setNameText(name, person);
+            UiUtil.setPhoneText(phone, person);
+            UiUtil.setTelegramUsernameText(telegram, person);
+            UiUtil.setAddressText(address, person);
+            UiUtil.setEmailText(email, person);
+            UiUtil.setTags(displayTags, person);
             setRemarks(person);
             setDisplayLessons(person);
-        }
-    }
-
-    /**
-     * Sets the Telegram username text for the provided person.
-     *
-     * This method checks if the provided person has a valid, non-empty Telegram username.
-     * If a username is available, it updates the display text with the username prefixed by "@" and
-     * makes the Telegram field visible. If no valid username is found, the Telegram field is hidden.
-     *
-     * @param person the Person object whose Telegram username is to be displayed
-     */
-    private void setTelegramUsernameText(Person person) {
-        assert(person != null);
-        TelegramUsername username = person.getTelegramUsername();
-        if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
-            telegram.setText("@" + username.telegramUsername);
-            telegram.setVisible(true);
-        } else {
-            telegram.setVisible(false);
         }
     }
 
@@ -107,19 +81,6 @@ public class DisplayCard extends UiPart<Region> {
     }
 
     /**
-     * Sets the tags associated with the {@code Person} in the tags flow pane.
-     * Sorts the tags alphabetically for consistent ordering.
-     *
-     * @param person The {@code Person} whose tags are to be displayed.
-     */
-    private void setTags(Person person) {
-        assert(person != null);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> displayTags.getChildren().add(new Label(tag.tagName)));
-    }
-
-    /**
      * Sets the remarks associated with the {@code Person} in the remarks display pane.
      * Each remark is displayed in a numbered format (e.g., "1. Remark text").
      *
@@ -130,7 +91,8 @@ public class DisplayCard extends UiPart<Region> {
         IntStream.range(0, person.getRemarkList().getRemarks().size())
                 .forEach(i -> {
                     String remark = person.getRemarkList().getRemarks().get(i).toString();
-                    displayRemarks.getChildren().add(new Label((i + 1) + ". " + remark));
+                    String remarkText = (i + 1) + ".\u00A0" + remark;
+                    displayRemarks.getChildren().add(new Label(remarkText));
                 });
     }
 }

@@ -3,7 +3,6 @@ package tuteez.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,10 +11,8 @@ import static tuteez.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -45,7 +42,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -54,18 +51,17 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM USERNAME] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_LESSON + "LESSON]...\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johnd@gmail.com\n"
-            + "Note: You can leave the optional parameters specified in 'add' blank "
-            + "in order to delete the existing values.";
+            + "Note: To delete existing values of an optional parameter in the 'add' command, "
+            + "enter its prefix with an empty value. (eg. edit 1 e/ will delete the email) \n"
+            + "Note: Lessons can be added or removed via the 'addlesson' or 'deletelesson' commands respectively.";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited student: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one of the following fields to edit must be provided:"
+            + " n/NAME p/PHONE e/EMAIL a/ADDRESS tg/TELEGRAM_USERNAME t/TAG";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -96,40 +92,7 @@ public class EditCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        Optional<List<Lesson>> lessons = editPersonDescriptor.getLessons();
-        if (lessons.isPresent()) {
-            Map<Person, ArrayList<Lesson>> resultMap = new HashMap<>();
-            for (Lesson newlesson: lessons.get()) {
-                assert newlesson != null;
-                Map<Person, ArrayList<Lesson>> clashingLessons = model.getClashingLessons(newlesson);
-
-                clashingLessons.forEach((person, lessonArr) -> {
-                    /* Operation is safe because we do not allow student's with the exact same name */
-                    if (!editedPerson.hasSameName(person)) {
-                        System.out.println(editedPerson + " is edited");
-                        System.out.println(person + " is not edited");
-                        resultMap.computeIfAbsent(person, k -> new ArrayList<>()).addAll(lessonArr);
-                    }
-                });
-            }
-
-            if (!resultMap.isEmpty()) {
-                String logMessage = String.format("Student: %s | Lessons: %s "
-                        + "| Conflict: Clashes with another student's lesson",
-                        editedPerson.getName(), editedPerson.getLessons().toString());
-                logger.info(logMessage);
-                StringBuilder clashMsg = new StringBuilder(MESSAGE_CLASHING_LESSON).append("\n");
-                resultMap.keySet().forEach(student -> {
-                    clashMsg.append(student.getName()).append(": ");
-
-                    resultMap.get(student).forEach(ls -> clashMsg.append(ls.getDayAndTime()).append(" "));
-                    clashMsg.append("\n");
-                });
-                throw new CommandException(clashMsg.toString());
-            }
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -162,12 +125,12 @@ public class EditCommand extends Command {
         TelegramUsername updatedTelegramUser = editPersonDescriptor.getTelegramUsername()
                 .orElse(personToEdit.getTelegramUsername());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        List<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
+        List<Lesson> currentLessons = personToEdit.getLessons();
 
         RemarkList originalRemarkList = personToEdit.getRemarkList();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTelegramUser, updatedTags,
-                updatedLessons, originalRemarkList);
+                currentLessons, originalRemarkList);
     }
 
     @Override
@@ -221,7 +184,6 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setTelegramUsername(toCopy.telegramUsername);
-            setLessons(toCopy.lessons);
         }
 
         /**
@@ -323,8 +285,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(telegramUsername, otherEditPersonDescriptor.telegramUsername)
-                    && Objects.equals(lessons, otherEditPersonDescriptor.lessons);
+                    && Objects.equals(telegramUsername, otherEditPersonDescriptor.telegramUsername);
         }
 
         @Override
@@ -336,7 +297,6 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("telegramUsername", telegramUsername)
                     .add("tags", tags)
-                    .add("lessons", lessons)
                     .toString();
         }
     }

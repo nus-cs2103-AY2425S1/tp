@@ -17,11 +17,16 @@ import tuteez.model.person.lesson.Lesson;
 public class DeleteLessonCommand extends LessonCommand {
     public static final String MESSAGE_SUCCESS = "Deleted lessons from %1$s:\n%2$s";
     public static final String MESSAGE_INVALID_LESSON_INDEX = "The following lesson indices are invalid:\n%s";
+    public static final String MESSAGE_USAGE = "Delete lessons by index in displayed student list: "
+            + COMMAND_WORD_DELETE
+            + " (short form: " + COMMAND_WORD_DELETE_ALT + ")"
+            + " INDEX li/LESSON_INDEX [li/LESSON_INDEX]...\n"
+            + "Example: " + COMMAND_WORD_DELETE + " 1 li/1 li/2";
 
     private final List<Index> lessonIndices;
 
     /**
-     * Deletes a Lesson with the specified {@code lessonIndex} from the student with the {@code personIndex}
+     * Deletes a Lesson with the specified {@code lessonIndex} from the student with the {@code studentIndex}
      * of the displayed list.
      * @param personIndex The Index of the student in the displayed list to delete the lesson from
      * @param lessonIndices A List of Index's of the lesson to be deleted
@@ -37,7 +42,9 @@ public class DeleteLessonCommand extends LessonCommand {
 
         Person personToUpdate = getPersonFromModel(model);
 
-        List<Lesson> currentLessons = new ArrayList<>(personToUpdate.getLessons());
+        List<Lesson> currentLessons = new ArrayList<>(personToUpdate.getLessons().stream()
+                .sorted(new Lesson.LessonComparator())
+                .toList());
         List<Lesson> lessonsToDelete = new ArrayList<>();
         List<Index> invalidIndices = new ArrayList<>();
 
@@ -58,6 +65,7 @@ public class DeleteLessonCommand extends LessonCommand {
         Person updatedPerson = updatePersonLessons(personToUpdate, currentLessons);
         model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateLastViewedPerson(updatedPerson);
 
         return new CommandResult(generateResultMessage(personToUpdate, lessonsToDelete));
     }
@@ -76,7 +84,7 @@ public class DeleteLessonCommand extends LessonCommand {
     private String formatLessonList(List<Lesson> lessons) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i).toString());
+            sb.append("• ").append(lessons.get(i).toString());
             if (i < lessons.size() - 1) {
                 sb.append("\n");
             }

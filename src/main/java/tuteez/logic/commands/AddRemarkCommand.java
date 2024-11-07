@@ -23,8 +23,8 @@ public class AddRemarkCommand extends Command {
     public static final String COMMAND_WORD_ALT = "addrmk";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " (short form: " + COMMAND_WORD_ALT + ")"
             + ": Adds a remark for the student identified by the index number in the displayed student list."
-            + "\nParameters: INDEX (must be a positive integer)" + PREFIX_REMARK + "REMARK\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_REMARK + "This is a new remark\n";
+            + "\nParameters: INDEX (must be a positive integer) " + PREFIX_REMARK + "REMARK\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_REMARK + "This is a new remark";
 
     private static final Logger logger = LogsCenter.getLogger(AddRemarkCommand.class);
 
@@ -51,8 +51,6 @@ public class AddRemarkCommand extends Command {
 
         model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-
-        // Update the last viewed person in the model after updating remarks
         model.updateLastViewedPerson(updatedPerson);
 
         return new CommandResult(String.format("Added remark to %1$s: %2$s",

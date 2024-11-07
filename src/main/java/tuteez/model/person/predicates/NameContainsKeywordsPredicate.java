@@ -1,10 +1,11 @@
-package tuteez.model.person;
+package tuteez.model.person.predicates;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import tuteez.commons.util.StringUtil;
 import tuteez.commons.util.ToStringBuilder;
+import tuteez.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
