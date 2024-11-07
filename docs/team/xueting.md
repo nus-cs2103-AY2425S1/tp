@@ -19,8 +19,6 @@ Given below are my contributions to the project.
     * What it does: Allows the user to filter through all internship applications by status of pending, accepted or rejected.
     * Justification: This feature is nice-to-have as it allows users to easily find a group of internship application of specified status.
 
-
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=snowstopxt&tabRepo=AY2425S1-CS2103T-W09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
@@ -43,7 +41,6 @@ Given below are my contributions to the project.
         * Added table of contents to introduction section (Pull request [\#200](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/200))
         * Added use cases for exit
         * Added index to glossary
-
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#103](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/103), [\#115](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/115), [\#135](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/135), [\#181](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/181)
