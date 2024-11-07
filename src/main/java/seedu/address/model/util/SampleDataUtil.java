@@ -22,7 +22,7 @@ public class SampleDataUtil {
     public static final Remark EMPTY_REMARK = new Remark("");
     private static Person person1 = new Person(
             new Name("Alex Yeoh"),
-            "patient",
+            "PATIENT",
             new Phone("87438807"),
             new Email("alexyeoh@example.com"),
             new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -32,7 +32,7 @@ public class SampleDataUtil {
 
     private static Person person2 = new Person(
             new Name("Bernice Yu"),
-            "patient",
+            "PATIENT",
             new Phone("99272758"),
             new Email("berniceyu@example.com"),
             new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
@@ -42,7 +42,7 @@ public class SampleDataUtil {
 
     private static Person person3 = new Person(
             new Name("Charlotte Oliveiro"),
-            "patient",
+            "PATIENT",
             new Phone("93210283"),
             new Email("charlotte@example.com"),
             new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
@@ -52,7 +52,7 @@ public class SampleDataUtil {
 
     private static Person person4 = new Person(
             new Name("David Li"),
-            "patient",
+            "PATIENT",
             new Phone("91031282"),
             new Email("lidavid@example.com"),
             new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
@@ -62,7 +62,7 @@ public class SampleDataUtil {
 
     private static Person person5 = new Person(
             new Name("Irfan Ibrahim"),
-            "patient",
+            "PATIENT",
             new Phone("92492021"),
             new Email("irfan@example.com"),
             new Address("Blk 47 Tampines Street 20, #17-35"),
@@ -72,7 +72,7 @@ public class SampleDataUtil {
 
     private static Person person6 = new Person(
             new Name("Roy Balakrishnan"),
-            "patient",
+            "PATIENT",
             new Phone("92624417"),
             new Email("royb@example.com"),
             new Address("Blk 45 Aljunied Street 85, #11-31"),

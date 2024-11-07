@@ -36,10 +36,10 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         /*
         for (Person person : filteredPersons) {
-            if (person.getRole().equals("doctor")) {
+            if (person.getRole().equals("PATIENT")) {
                 Doctor.addDoctors((Doctor) person);
             }
-            if (person.getRole().equals("patient")) {
+            if (person.getRole().equals("PATIENT")) {
                 Patient.addPatient(person);
             }
         }
@@ -104,6 +104,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getPersonRole(Person person) {
+        requireNonNull(person);
+        return addressBook.getPersonRole(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -154,7 +160,6 @@ public class ModelManager implements Model {
         Person patient = null;
         for (Person person : allPersons) {
             if (person.getId() == id) {
-                System.out.println(person.getName());
                 patient = person;
                 break;
             }

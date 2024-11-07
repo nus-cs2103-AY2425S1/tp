@@ -9,14 +9,14 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddAppointmentCommand;
-import seedu.address.logic.commands.AddNotesCommand;
+import seedu.address.logic.commands.AddRemarksCommand;
 import seedu.address.logic.commands.CheckAppointmentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateDoctorCommand;
 import seedu.address.logic.commands.CreatePatientCommand;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
-import seedu.address.logic.commands.DeletePatientCommand;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -24,7 +24,6 @@ import seedu.address.logic.commands.GetIdCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkAppointmentCommand;
-import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.ViewHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -71,9 +70,6 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case RemarkCommand.COMMAND_WORD:
-            return new RemarkCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -98,11 +94,11 @@ public class AddressBookParser {
         case CreatePatientCommand.COMMAND_WORD:
             return new CreatePatientCommandParser().parse(arguments);
 
-        case DeletePatientCommand.COMMAND_WORD:
-            return new DeletePatientCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
 
-        case AddNotesCommand.COMMAND_WORD:
-            return new AddNotesCommandParser().parse(arguments);
+        case AddRemarksCommand.COMMAND_WORD:
+            return new AddRemarksCommandParser().parse(arguments);
 
         case CheckAppointmentCommand.COMMAND_WORD:
             return new CheckAppointmentCommandParser().parse(arguments);

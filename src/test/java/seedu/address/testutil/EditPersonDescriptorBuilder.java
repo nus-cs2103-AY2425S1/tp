@@ -38,6 +38,20 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
     }
+    /**
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * with the id fixed
+     */
+
+    public EditPersonDescriptorBuilder(Person person, int id) {
+        descriptor = new EditPersonDescriptor();
+        descriptor.setId(id);
+        descriptor.setName(person.getName());
+        descriptor.setPhone(person.getPhone());
+        descriptor.setEmail(person.getEmail());
+        descriptor.setAddress(person.getAddress());
+        descriptor.setTags(person.getTags());
+    }
 
     /**
      * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.

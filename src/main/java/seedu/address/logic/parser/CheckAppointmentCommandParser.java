@@ -30,18 +30,14 @@ public class CheckAppointmentCommandParser implements Parser<CheckAppointmentCom
     @Override
     public CheckAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-
-        // Tokenize the arguments and look for the /d (date) and /id (doctor ID) prefixes
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DAY_DATE);
 
-        // Check if both /d and /id prefixes are present, and there is no unexpected preamble
         if (!arePrefixesPresent(argumentMultimap, PREFIX_ID, PREFIX_DAY_DATE)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     CheckAppointmentCommand.MESSAGE_USAGE));
         }
 
-        // Parse the doctor ID
         int doctorId;
         try {
             doctorId = ParserUtil.parsePersonId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
@@ -59,7 +55,6 @@ public class CheckAppointmentCommandParser implements Parser<CheckAppointmentCom
             }
         }
 
-        // Return the constructed CheckAppointmentCommand with doctorId and the parsed or null date
         return new CheckAppointmentCommand(doctorId, date);
     }
 

@@ -85,6 +85,10 @@ public class CreateDoctorCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public String getPersonRole(Person person) {
+            return "DOCTOR";
+        }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
@@ -123,7 +127,7 @@ public class CreateDoctorCommandTest {
 
         @Override
         public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
-            return null; // TODO?
+            return null;
         }
 
         @Override

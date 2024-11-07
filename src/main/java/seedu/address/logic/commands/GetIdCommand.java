@@ -13,12 +13,12 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Keyword matching is case-insensitive.
  */
 public class GetIdCommand extends Command {
-    public static final String COMMAND_WORD = "getId";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": gets the id "
+    public static final String COMMAND_WORD = "get";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": gets the ID "
             + "of a patient based on the name provided. "
-            + COMMAND_WORD + "[KEYWORDS...]\n"
+            + COMMAND_WORD + " [KEYWORDS...]\n"
             + "Example: " + COMMAND_WORD
-            + "John Philips";
+            + " John Philips";
     private final NameContainsKeywordsPredicate predicate;
     public GetIdCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
@@ -29,6 +29,10 @@ public class GetIdCommand extends Command {
         model.updateFilteredPersonList(predicate);
         if (model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(Messages.MESSAGE_INVALID_NAME);
+        }
+        if (model.getFilteredPersonList().size() > 1) {
+            return new CommandResult(String.format(Messages.MESSAGE_MULTIPLE_PERSONS_WITH_THE_SAME_NAME,
+                    model.getFilteredPersonList().size()));
         }
 
         return new CommandResult(String.format(Messages.MESSAGE_GET_ID,

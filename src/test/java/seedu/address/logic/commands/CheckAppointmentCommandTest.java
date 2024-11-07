@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -16,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.Messages;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -46,14 +47,15 @@ public class CheckAppointmentCommandTest {
 
         CheckAppointmentCommand command = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
         CommandResult result = command.execute(modelStub);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         String expectedMessage = String.format("Appointments on %s:\n"
                                         + "Appointment: %s for %s (patient id)" + " "
                                         + "with %s (doctor id). Remarks: %s\n"
                                         + "Appointment: %s for %s (patient id)" + " "
                                         + "with %s (doctor id). Remarks: %s\n",
-                appointmentDate, appointmentTime1, validPatient.getId(),
-                validDoctor.getId(), appointmentRemark, appointmentTime2,
+                appointmentDate, appointmentTime1.format(formatter), validPatient.getId(),
+                validDoctor.getId(), appointmentRemark, appointmentTime2.format(formatter),
                 validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
@@ -83,7 +85,7 @@ public class CheckAppointmentCommandTest {
         Person validDoctor = new PersonBuilder().buildDoctor();
         modelStub.addPerson(validPatient);
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_ID, () ->
                         new CheckAppointmentCommand(validDoctor.getId(), appointmentDate).execute(modelStub));
     }
 
@@ -137,6 +139,10 @@ public class CheckAppointmentCommandTest {
 
         @Override
         public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public String getPersonRole(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 

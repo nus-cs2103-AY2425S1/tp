@@ -12,8 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 
-public class AddNotesCommandTest {
+public class AddRemarksCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -22,25 +23,27 @@ public class AddNotesCommandTest {
         Person patientToEdit = model.getFilteredPersonList().get(0);
         int validPatientId = patientToEdit.getId();
         String newNotes = "New notes added.";
+        Remark newRemarks = new Remark(newNotes);
 
-        AddNotesCommand addNotesCommand = new AddNotesCommand(validPatientId, newNotes);
+        AddRemarksCommand addRemarksCommand = new AddRemarksCommand(validPatientId, newRemarks);
 
-        String expectedMessage = String.format(AddNotesCommand.MESSAGE_ADD_NOTES_SUCCESS, newNotes, validPatientId);
+        String expectedMessage = String.format(AddRemarksCommand.MESSAGE_ADD_REMARKS_SUCCESS,
+                newRemarks, validPatientId);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         Person expectedPatient = expectedModel.getFilteredPersonList().get(0);
-        expectedPatient.addNotes(newNotes);
+        expectedPatient.addRemarks(newNotes);
 
-        assertCommandSuccess(addNotesCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addRemarksCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidPatientId_throwsCommandException() {
         int invalidPatientId = 9999;
-        AddNotesCommand addNotesCommand = new AddNotesCommand(invalidPatientId, "Some notes");
-        String expectedMessage = "Unable to add notes! Check the id entered!";
+        AddRemarksCommand addRemarksCommand = new AddRemarksCommand(invalidPatientId, new Remark("Some notes"));
+        String expectedMessage = "Unable to add remarks! Check the id entered!";
 
-        assertCommandFailure(addNotesCommand, model, expectedMessage);
+        assertCommandFailure(addRemarksCommand, model, expectedMessage);
     }
 
     @Test
@@ -48,6 +51,6 @@ public class AddNotesCommandTest {
         Person patientToEdit = model.getFilteredPersonList().get(0);
         int validPatientId = patientToEdit.getId();
 
-        assertThrows(NullPointerException.class, () -> new AddNotesCommand(validPatientId, null));
+        assertThrows(NullPointerException.class, () -> new AddRemarksCommand(validPatientId, null));
     }
 }

@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllPositive;
+import static seedu.address.logic.Messages.MESSAGE_COMPLETED_APPOINTMENT;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,8 +14,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,7 +32,7 @@ public class Person implements Appointmentable {
     private final Email email;
     private final int id;
     private final Address address;
-    private final Remark remark;
+    private Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private List<Appointment> appointments;
 
@@ -50,11 +54,30 @@ public class Person implements Appointmentable {
     }
 
     /**
-     * Creates a Person with the given  fields. Each field must be present and not null.
+     * Creates a patient with a fixed ID
+     */
+    public Person(Name name, int id, String role, Phone phone, Email email,
+                  Address address, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, role, phone, email, address, tags);
+        requireAllPositive(id);
+        this.name = name;
+        this.role = role;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.tags.addAll(tags);
+        this.id = id;
+        this.appointments = new ArrayList<>();
+    }
+
+    /**
+     * Creates a Person with the given fields. Each field must be present and not null.
      */
     public Person(Name name, int id, String role, Phone phone, Email email,
                   Address address, Remark remark, List<Appointment> appointments, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
+        requireAllPositive(id);
         this.name = name;
         this.id = id;
         this.role = role;
@@ -90,8 +113,16 @@ public class Person implements Appointmentable {
         return remark;
     }
 
-    public void addNotes(String notes) {
-        this.remark.addNotes(notes);
+    public List<Appointment> getAllAppointments() {
+        return this.appointments;
+    }
+
+    /**
+     * Adds additional remarks to a person
+     */
+    public Remark addRemarks(String remarks) {
+        remark.addRemarks(remarks);
+        return remark;
     }
 
     public int getId() {
@@ -142,8 +173,15 @@ public class Person implements Appointmentable {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
+                && normalizeName(otherPerson.getName()).equals(normalizeName(getName()))
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+    }
+
+    /**
+     * Normalizes a name by converting it to lowercase and removing all spaces.
+     */
+    private String normalizeName(Name name) {
+        return name.toString().toLowerCase().replaceAll("\\s+", "");
     }
 
     /**
@@ -174,6 +212,30 @@ public class Person implements Appointmentable {
         requireAllNonNull(dateTime, patientId, doctorId);
         return appointments.remove(new Appointment(dateTime, patientId, doctorId, ""));
     }
+    /**
+     * Deletes all appointments for this person based on their role.
+     * If the role is "patient", deletes appointments where this person is the patient.
+     * If the role is "doctor", deletes appointments where this person is the doctor.
+     */
+    public void deleteAllAppointments(Model model) {
+        if (role.equals("patient")) {
+            for (Appointment appointment : appointments) {
+                if (appointment.getDoctorId() == this.id) {
+                    ObservableList<Person> allPersons = model.getFilteredPersonList();
+                    Person doctor = model.getFilteredPersonById(allPersons, appointment.getDoctorId());
+                    doctor.deleteAppointment(appointment.getDateTime(), appointment.getPatientId(), this.id);
+                }
+            }
+        } else {
+            for (Appointment appointment : appointments) {
+                if (appointment.getDoctorId() == this.id) {
+                    ObservableList<Person> allPersons = model.getFilteredPersonList();
+                    Person patient = model.getFilteredPersonById(allPersons, appointment.getPatientId());
+                    patient.deleteAppointment(appointment.getDateTime(), appointment.getPatientId(), this.id);
+                }
+            }
+        }
+    }
 
     /**
      * Gets an appointment at the specified time, with the respective patient and doctor.
@@ -197,16 +259,16 @@ public class Person implements Appointmentable {
 
     }
 
-    public Appointment getAppointment(LocalDateTime dateTime, int patientId) throws CommandException {
+    public String getOneHistory(LocalDateTime dateTime, int patientId) {
         requireAllNonNull(dateTime, patientId);
         List<Appointment> apts = appointments.stream()
                 .filter(apt -> apt.getDateTime().toString().equals(dateTime.toString()))
                 .filter(apt -> apt.getPatientId() == patientId)
                 .collect(Collectors.toList());
         if (apts.isEmpty() || apts.size() == 0) {
-            throw new CommandException(Messages.MESSAGE_NO_APPOINTMENTS_FOUND);
+            return null;
         }
-        return apts.get(0);
+        return apts.get(0).toString();
     }
 
     public String getStringAppointments() {
@@ -244,6 +306,9 @@ public class Person implements Appointmentable {
 
     }
 
+    public void editRemark(Remark remark) {
+        this.remark = remark;
+    }
 
     @Override
     public boolean editAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
@@ -280,14 +345,15 @@ public class Person implements Appointmentable {
     }
 
     @Override
-    public boolean markAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
+    public void markAppointment(LocalDateTime dateTime, int patientId, int doctorId)
+            throws CommandException {
         requireAllNonNull(dateTime, patientId, doctorId);
-        try {
-            getAppointment(dateTime, patientId, doctorId).markAsComplete();
-        } catch (CommandException e) {
-            return false;
+        Appointment appointment;
+        appointment = getAppointment(dateTime, patientId, doctorId);
+        if (appointment.isCompleted()) {
+            throw new CommandException(MESSAGE_COMPLETED_APPOINTMENT);
         }
-        return true;
+        appointment.markAsComplete();
     }
 
     @Override

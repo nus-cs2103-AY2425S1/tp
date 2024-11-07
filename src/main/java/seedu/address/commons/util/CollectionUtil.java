@@ -27,6 +27,17 @@ public class CollectionUtil {
     }
 
     /**
+     * Throws IllegalArgumentException if any numbers is negative.
+     */
+    public static void requireAllPositive(int... numbers) {
+        for (int number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException("All numbers must be positive. Found: " + number);
+            }
+        }
+    }
+
+    /**
      * Returns true if {@code items} contain any elements that are non-null.
      */
     public static boolean isAnyNonNull(Object... items) {

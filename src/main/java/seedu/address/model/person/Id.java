@@ -75,6 +75,54 @@ public class Id {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Resets the patientIdCounter
+     */
+    public static void resetPatientIdCounter() {
+        patientIdCounter = 0;
+    }
+
+    /**
+     * Resets the doctorIdCounter
+     */
+    public static void resetDoctorIdCounter() {
+        doctorIdCounter = 1;
+    }
+
+    /**
+     * Gets the current patientIdCounter
+     */
+    public static int getCurrentPatientIdCounter() {
+        return patientIdCounter;
+    }
+
+    /**
+     * Gets the current doctorIdCounter
+     */
+    public static int getCurrentDoctorIdCounter() {
+        return doctorIdCounter;
+    }
+
+    /**
+     * Reduces the current patientIdCounter by 2
+     */
+    public static void reduceCurrentPatientIdCounter() {
+        if (patientIdCounter == 0) {
+        } else {
+            patientIdCounter = patientIdCounter - 2;
+        }
+    }
+
+    /**
+     * Reduces the current doctorIdCounter by 2
+     */
+    public static void reduceCurrentDoctorIdCounter() {
+        if (doctorIdCounter == 0) {
+        } else {
+            doctorIdCounter = doctorIdCounter - 2;
+        }
+    }
+
     @Override
     public String toString() {
         return String.valueOf(idValue);
