@@ -37,6 +37,6 @@ public class EventIdsContainsIdsPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", ids).toString();
+        return new ToStringBuilder(this).add("ids", ids).toString();
     }
 }
