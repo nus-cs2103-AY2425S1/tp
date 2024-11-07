@@ -36,7 +36,7 @@ public class HelpLogicManager {
     }
 
     /**
-     * Formats the TextFlow with content, adding hyperlinks where necessary.
+     * Formats the TextFlow with content.
      */
     public void formatTextFlow(String content, TextFlow helpContentFlow) {
         assert content != null && !content.isEmpty() : "Content should not be null or empty";
