@@ -11,7 +11,7 @@ participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("tag n/John l/S1 NA")
@@ -46,7 +46,7 @@ destroy TagCommandParser
 AddressBookParser --> LogicManager : t
 deactivate AddressBookParser
 
-LogicManager -> TagCommand : execute()
+LogicManager -> TagCommand : execute(m)
 activate TagCommand
 
 TagCommand -> Model : setStudent(studentToTag, studentWithTags)
