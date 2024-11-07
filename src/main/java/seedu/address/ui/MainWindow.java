@@ -37,7 +37,6 @@ public class MainWindow extends UiPart<Stage> {
     private PatientListPanel patientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private HelpKeywordWindow helpKeywordWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -145,14 +144,23 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleHelp(String keyword) {
         if (keyword.isEmpty()) {
-            handleHelp();
+            handleHelpWindow();
         } else {
-            helpKeywordWindow = new HelpKeywordWindow(keyword);
-            if (!helpKeywordWindow.isShowing()) {
-                helpKeywordWindow.show();
-            } else {
-                helpKeywordWindow.focus();
-            }
+            handleHelpKeywordWindow(keyword);
+        }
+    }
+
+    /**
+     * Checks if the specified keyword HelpKeywordWindow is open and focuses on it if it's already opened, else
+     * open a new HelpKeywordWindow.
+     */
+    private void handleHelpKeywordWindow(String keyword) {
+        if (HelpKeywordWindow.isOpen(keyword)) {
+            HelpKeywordWindow existingWindow = HelpKeywordWindow.getHelpKeywordWindow(keyword);
+            existingWindow.focus();
+        } else {
+            HelpKeywordWindow helpKeywordWindow = new HelpKeywordWindow(keyword);
+            helpKeywordWindow.show();
         }
     }
 
@@ -160,7 +168,7 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    public void handleHelpWindow() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
