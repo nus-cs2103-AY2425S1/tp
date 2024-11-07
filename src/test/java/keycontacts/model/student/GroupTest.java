@@ -45,6 +45,9 @@ public class GroupTest {
         // same values -> returns true
         assertTrue(group.isSameGroup(new Group("Group")));
 
+        // same value but different case -> returns true
+        assertTrue(group.isSameGroup(new Group("group")));
+
         // comparing two NoGroups -> return false
         assertFalse(noGroup.isSameGroup(new Group("")));
 

@@ -50,7 +50,7 @@ public class Group implements Comparable<Group> {
             return false;
         }
 
-        return otherGroup.groupName.equals(groupName);
+        return otherGroup.groupName.equalsIgnoreCase(groupName);
     }
 
     /**
