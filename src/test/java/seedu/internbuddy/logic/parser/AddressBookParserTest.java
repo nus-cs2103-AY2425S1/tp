@@ -30,6 +30,7 @@ import seedu.internbuddy.logic.commands.FavCommand;
 import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
+import seedu.internbuddy.logic.commands.ReopenCommand;
 import seedu.internbuddy.logic.commands.UnfavCommand;
 import seedu.internbuddy.logic.commands.UpdateCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
@@ -129,6 +130,13 @@ public class AddressBookParserTest {
                 + PREFIX_APP_STATUS + "OA");
         AppStatus appStatus = new AppStatus("OA");
         assertEquals(new UpdateCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_COMPANY, appStatus), command);
+    }
+
+    @Test
+    public void parseCommand_reopen() throws Exception {
+        ReopenCommand command = (ReopenCommand) parser.parseCommand(
+                ReopenCommand.COMMAND_WORD + " " + INDEX_FIRST_COMPANY.getOneBased());
+        assertEquals(new ReopenCommand(INDEX_FIRST_COMPANY), command);
     }
 
     @Test

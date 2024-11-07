@@ -41,6 +41,9 @@ public class TypicalCompanies {
             .withEmail("contact@tesla.com").withAddress("3500 Deer Creek Road, Palo Alto, CA").build();
     public static final Company NETFLIX = new CompanyBuilder().withName("Netflix").withPhone("4085403700")
             .withEmail("contact@netflix.com").withAddress("100 Winchester Circle, Los Gatos, CA").build();
+    public static final Company SAP = new CompanyBuilder().withName("SAP").withPhone("6503407500")
+            .withEmail("SAP@career.com").withAddress("3410 Hillview Ave, Palo Alto, CA")
+            .withStatus("CLOSED").build();
 
     // Manually added
     public static final Company SPOTIFY = new CompanyBuilder().withName("Spotify").withPhone("9175653894")
@@ -73,6 +76,6 @@ public class TypicalCompanies {
     }
 
     public static List<Company> getTypicalCompanies() {
-        return new ArrayList<>(Arrays.asList(APPLE, AMAZON, FACEBOOK, TESLA, NETFLIX));
+        return new ArrayList<>(Arrays.asList(APPLE, AMAZON, FACEBOOK, TESLA, NETFLIX, SAP));
     }
 }
