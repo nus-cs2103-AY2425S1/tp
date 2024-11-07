@@ -66,7 +66,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page or display how to use a specified command.
 
@@ -94,13 +94,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book, automatically sorted by their priority from HIGH to LOW.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in the address book.
 
@@ -136,7 +136,7 @@ Examples:
 * `find n/alex n/david pri/high` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/newFindAlexDavidResult.png)
 
-### Deleting people : `delete`
+### Deleting people: `delete`
 
 Deletes the specified people from the address book.
 
@@ -154,6 +154,7 @@ Examples:
 * list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
 
 ### Getting the parameters of these people: `get` 
+
 Gets the specified parameters of each individual person in current person list.
 
 Format: `get PARAMETERS`
@@ -169,13 +170,95 @@ Examples:
 * `list` followed by `get pHone phone` gets only one set of the phone numbers of the people in SocialBook.
 * `find pri/HIGH` followed by `get nAmE ADDress` gets the names followed by the addresses of the high priority people.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
+### Adding an appointment: `addappt`
+
+Adds an appointment with a person to the address book.
+
+Format: `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`
+
+* Adds an appointment with a person at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed person list.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
+* `date` specifies the date of the appointment in the `yyyy-MM-dd` format, where:
+  * `yyyy` is the four-digit year (e.g., `2024`)
+  * `MM` is the two-digit month (e.g., `01`)
+  * `dd` is the two-digit day of the month (e.g., `08`)
+* `from` and `to` specify the start and end times of the appointment in the `HH:mm` format (24-hour clock).
+* The start time should be before the end time, and the appointment should not conflict with any existing appointments.
+
+For more details on the command format, refer to the [notes about the command format](#features).
+
+<box type="info" seamless>
+Adding appointments in the past is allowed for record-keeping purposes and to store historical data,
+as future appointments will eventually become past appointments.
+</box>
+
+<box type="tip" seamless>
+To add an appointment that spans multiple days, add separate consecutive appointments for each day
+to cover the entire period.
+</box>
+
+Examples:
+
+* `addappt 1 date/2024-11-08 from/16:00 to/17:00`
+* `addappt 2 date/2024-11-26 from/17:00 to/18:30`
+
+### Listing all appointments: `listappt`
+
+Displays a list of all appointments in the address book.
+
+Format: `listappt`
+
+<box type="info">
+Appointments are displayed in order of date and time, with the earliest shown first.
+</box>
+
+### Editing an appointment: `editappt`
+
+Edits an existing appointment in the address book.
+
+Format: `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`
+
+* Edits the appointment at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed appointment list.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
+* `date` specifies the new date of the appointment in the `yyyy-MM-dd` format, where:
+    * `yyyy` is the four-digit year (e.g., `2024`)
+    * `MM` is the two-digit month (e.g., `01`)
+    * `dd` is the two-digit day of the month (e.g., `08`)
+* `from` and `to` specify the new start and end times of the appointment in the `HH:mm` format (24-hour clock).
+* The start time should be before the end time, and the updated appointment should not conflict with any existing appointments.
+* At least one of the optional fields must be provided.
+
+For more details on the command format, refer to the [notes about the command format](#features).
+
+Examples:
+
+* `editappt 1 date/2024-11-15 from/16:00 to/18:00`: Updates the first appointment to November 15, 2024, from 4:00 to 6:00 PM.
+* `editappt 2 from/10:00 to/11:30`: Updates the start and end times of the second appointment to 10:00 AM and 11:30 AM, respectively, on the same date.
+
+### Deleting an appointment: `deleteappt`
+
+Deletes the specified appointment from the address book.
+
+Format: `deleteappt INDEX`
+
+* Deletes the appointment at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed appointment list.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
+
+Examples:
+
+* `listappt` followed by `deleteappt 2` deletes the second appointment from the address book.
+
 ### Undo the previous command: `undo`
+
 Undoes the previous command from SocialBook.
 
 Format: `undo`
@@ -188,7 +271,7 @@ Examples:
 * `clear` followed by `undo` will retrieve back the uncleared SocialBook.
 * `edit 1 n/John` followed by `undo` will change name back to what it was before.
 
-### Displaying overall statistics : `statistics`
+### Displaying overall statistics: `statistics`
 
 Displays the statistics of current person list.
 
@@ -202,7 +285,7 @@ Statistics include:
 
 Format: `statistics`
 
-### Displaying eligible schemes : `scheme`
+### Displaying eligible schemes: `scheme`
 
 Displays the schemes that specified people from the address book are eligible for.
 
@@ -216,7 +299,7 @@ Format: `scheme INDEXES`
 Examples:
 * `scheme 1` shows scheme that the 1st person in the address book is eligible for.
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -243,9 +326,31 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Calendar
+
+![Calendar](images/calendarView.png)
+
+The calendar UI allows you to visualize your appointments throughout the day.
+
+The **right side of the calendar** shows a timeline view of today's appointments. Each appointment is represented
+by a blue box with the person's name. For appointments lasting 30 minutes or more, the start time is also displayed.
+The height of the box represents the duration of the appointment.
+
+The **left side of the calendar** shows a monthly calendar view along with an agenda view that lists appointments 
+for the next 30 days, including today (e.g., November 7 to December 7). The agenda view provides detailed information
+for each appointment, including the person's name and the start and end times.
+
+You can also navigate the calendar using these keyboard shortcuts:
+
+* `Ctrl + P`: Go to the previous day
+* `Ctrl + N`: Go to the next day
+* `Ctrl + T`: Go to today
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
