@@ -220,7 +220,7 @@ public class ParserUtil {
             }
 
             if (indices.contains(index)) {
-                throw new ParseException("There cannot be duplicate indices for the same role e.g. a/1,1");
+                throw new ParseException("There cannot be duplicate indices for the same flag e.g. a/1,1");
             }
             indices.add(index);
         }
