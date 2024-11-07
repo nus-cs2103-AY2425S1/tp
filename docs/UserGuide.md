@@ -160,7 +160,8 @@ Examples:
 
 <br>1. The deadline could be the date you need to submit the project to the client. <br>
 2. The deadline could instead be the date by which you need to follow up with a potential client. <br>
-3. You may hover over the Payment Status Icon to view the payment status as text.
+3. Payment status values are displayed as an icon with the colours orange, yellow, green and red for the values pending, partial, paid and late respectively. <br>
+4. You may hover over the Payment Status Icon to view the payment status as text.
 
 </div>
 
@@ -389,6 +390,14 @@ If your changes to the data file makes its format invalid, **Clientele+ will dis
 Furthermore, **certain edits can cause the Clientele+ to behave in unexpected ways** (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </div>
+
+### Undo Command `[coming in v2.0]`
+
+_Details coming soon ..._
+
+### Add Notes for a Client `[coming in v2.0]`
+
+_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
