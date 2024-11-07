@@ -465,6 +465,8 @@ This quick view allows you to monitor the distribution of candidates across diff
 
 [**Tip**]: Use the summary command regularly to keep track of your recruitment pipeline's health and quickly identify any bottlenecks in the process.
 
+[**Caution**]: Please call the summary command again after modifying data to refresh the changes.
+
 ---
 
 ### Clearing All Entries: `clear`
