@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -100,6 +101,25 @@ public class FindCommandTest {
 
         // different Favourite predicate only -> returns false
         assertFalse(findSixthCommand.equals(findSeventhCommand));
+    }
+
+    @Test
+    public void execute_onePersonListed() {
+        String expectedMessage = MESSAGE_PERSON_LISTED_OVERVIEW;
+
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("lenor");
+        RoleContainsKeywordsPredicate rolePredicate = prepareRolePredicate(" ");
+        TelegramContainsKeywordsPredicate telePredicate = prepareTelegramPredicate(" ");
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.empty());
+        FindCommand command = new FindCommand(namePredicate, rolePredicate, telePredicate, isFavouritePredicate);
+
+        expectedModel.updateFilteredPersonList(namePredicate
+                .or(rolePredicate)
+                .or(telePredicate)
+                .or(isFavouritePredicate));
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(LENOR), model.getFilteredPersonList());
     }
 
     @Test

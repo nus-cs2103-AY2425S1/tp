@@ -5,7 +5,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -21,7 +20,7 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Viewing contact now...";
 
     public static final String MESSAGE_NO_SUCH_TELEGRAM =
-            "There is no one in your address book with the telegram handle: @";
+            "There is no one in your address book with the telegram handle: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds one contact whose telegram handle "
@@ -45,7 +44,7 @@ public class ViewCommand extends Command {
         List<Person> p = lastShownList.stream().filter(person ->
                 person.getTelegram().value.toLowerCase().equals(this.tele)).toList();
         if (p.isEmpty()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TELEGRAM, "@" + this.tele));
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_TELEGRAM, "@" + this.tele));
         }
         Person person = p.get(0);
         return new CommandResult(MESSAGE_SUCCESS, true, person);

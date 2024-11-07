@@ -1,14 +1,21 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FAVOURITE_LABEL;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NOT_FAVOURITE_LABEL;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAVOURITE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NOT_FAVOURITE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NOT_FAVOURITE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_FRIEND;
@@ -23,6 +30,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NONFAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -104,6 +113,33 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_bothFavouriteAndNonFavouritePrefixesPresent_failure() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + TELEGRAM_DESC_BOB + NAME_DESC_BOB + FAVOURITE_DESC + NOT_FAVOURITE_DESC;
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_favouriteFieldIsNotEmpty_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + INVALID_FAVOURITE_DESC;
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FAVOURITE_LABEL);
+    }
+
+    @Test
+    public void parse_notFavouriteFieldIsNotEmpty_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + INVALID_NOT_FAVOURITE_DESC;
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_NOT_FAVOURITE_LABEL);
+    }
+
+
+
+    @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ROLE_DESC_HUSBAND
@@ -156,9 +192,21 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
+        // role
         userInput = targetIndex.getOneBased() + ROLE_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withRoles(VALID_ROLE_FRIEND).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // favourite
+        userInput = targetIndex.getOneBased() + FAVOURITE_DESC;
+        descriptor = new EditPersonDescriptorBuilder().withFavourite().build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // not favourite
+        userInput = targetIndex.getOneBased() + NOT_FAVOURITE_DESC;
+        descriptor = new EditPersonDescriptorBuilder().withNotFavourite().build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -182,10 +230,21 @@ public class EditCommandParserTest {
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY
                 + ROLE_DESC_FRIEND + PHONE_DESC_AMY + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY + ROLE_DESC_FRIEND
-                + PHONE_DESC_BOB + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_HUSBAND;
+                + PHONE_DESC_BOB + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_HUSBAND + FAVOURITE_DESC
+                + FAVOURITE_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
+                        PREFIX_FAVOURITE));
+
+        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY
+                + ROLE_DESC_FRIEND + PHONE_DESC_AMY + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY + ROLE_DESC_FRIEND
+                + PHONE_DESC_BOB + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_HUSBAND + NOT_FAVOURITE_DESC
+                + NOT_FAVOURITE_DESC;
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
+                        PREFIX_NONFAVOURITE));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_TELEGRAM_DESC + INVALID_EMAIL_DESC
@@ -194,6 +253,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM));
     }
+
 
     @Test
     public void parse_resetRoles_success() {

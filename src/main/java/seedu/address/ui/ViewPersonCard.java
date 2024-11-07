@@ -73,5 +73,33 @@ public class ViewPersonCard extends UiPart<Region> {
                 .filter(label -> label.getText().equals(Member.MEMBER_ROLE))
                 .forEach(label -> label.setId("memberRole"));
     }
+
+    public Label getViewName() {
+        return this.viewName;
+    }
+
+    public Label getViewPhone() {
+        return this.viewPhone;
+    }
+
+    public Label getViewEmail() {
+        return this.viewEmail;
+    }
+
+    public Label getViewTelegram() {
+        return this.viewTelegram;
+    }
+
+    public FlowPane getViewRoles() {
+        return this.viewRoles;
+    }
+
+    public FlowPane getViewAttendance() {
+        return this.viewAttendance;
+    }
+
+    public Label getPersonInfo() {
+        return this.personInfo;
+    }
 }
 

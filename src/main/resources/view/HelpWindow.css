@@ -1,27 +1,50 @@
-#copyButton, #helpMessage, #helpUsage {
-    -fx-text-fill: white;
-}
-
-#copyButton {
-    -fx-background-color: dimgray;
-}
-
-#copyButton:hover {
-    -fx-background-color: gray;
-}
-
-#copyButton:armed {
-    -fx-background-color: darkgray;
-}
-
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.list-view {
+    -fx-background-color: #2e2e2e;
+    -fx-padding: 10px;
+    -fx-border-color: #2e2e2e;
+}
+
+.list-cell {
+    -fx-padding: 10px;
+    -fx-text-fill: #f0f0f0;
+    -fx-background-color: #333333;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-overrun: ellipsis;
+    -fx-pref-width: 650px;
+    -fx-wrap-text: false;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: #3c3e3f;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: #515658;
+}
+
+.list-cell:hover {
+    -fx-background-color: #424d5f;
+    -fx-text-fill: white;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #3e7b91;
+    -fx-text-fill: white;
+}
+
 .scroll-pane {
-    -fx-background-color: transparent;
+    -fx-background-color: #2e2e2e;
 }
 
 .scroll-pane .viewport {
-    -fx-background-color: transparent;
+    -fx-background-color: #2e2e2e;
+}
+
+.anchor-pane {
+    -fx-border-color: #2e2e2e;
 }

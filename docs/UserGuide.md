@@ -2,14 +2,15 @@
 layout: page
 title: User Guide
 ---
-
-## Overview
+<!-- Project Title -->
+<div align="center">
+  <h1 style="font-weight:800;font-size:70px;">CCAConnect</h1>
+</div>
 
 CCAConnect is a desktop application that aims to **assist NUS CCA leaders** in **managing and collating relevant CCA personnel’s contact details**, as well as help to **track attendance details for CCA sessions**.
 Equipped with features like **attendance marking**, **contact management**, **contact filtering** and **profile switching**, CCAConnect helps to reduce the headaches of personnel tracking.
 
---------------------------------------------------------------------------------------------------------------------
-
+<!-- Table of Content -->
 ## Table of Contents
 * Table of Contents
 {:toc}
@@ -44,7 +45,7 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
    * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe` : Adds a person named `John Doe`, with those specified information.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 1` : Deletes the 1st contact shown in the current list.
 
    * `clear` : Deletes all contacts stored in the current profile.
 
@@ -56,24 +57,24 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<details>
+  <summary style="font-weight:600;font-size:20px;">Notes about the command format:</summary>
 
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  + Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  + Items in square brackets are optional.<br>
+    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  + Items in square brackets are optional.<br>
+    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
+  + Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
   e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/exco`, `r/member r/exco` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  + Parameters can be in any order.<br>
+      e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
-</div>
+</details>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -114,11 +115,11 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
 |`ROLE`|`r/`|No| Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                   
 |      |`f/`|No| Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.|
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 A person is uniquely identified by his/her **telegram handle**
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 A person can have any number of roles (including 0)
 </div>
 
@@ -166,7 +167,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 * Existing values will be updated to the input values.
 * Only one of `f/` or `nf/` should be present in the command at once, not both.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 You can remove all the person’s roles by typing `r/` without specifying any roles after it.
 </div>
 
@@ -187,7 +188,7 @@ Search for contact(s) whose contact details satisfy either of the following:
 find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/] 
 ```
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 When using `find`, at least **one** of the optional parameters must be included.
 </div>
 
@@ -245,7 +246,7 @@ Sorting works together with the `find` command, meaning that if you sort after r
 ### Example
 * `sort asc` sorts the current list of contacts by name, in ascending order
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 Even though `sort` orders the list of contacts in alphabetical order of their names, this action is case-insensitive. This means that the letters `A` and `a` will be treated equally, for instance.
 </div>
 
@@ -360,6 +361,19 @@ clear
 `c` can be used in place of `clear`
 
 
+### Viewing a specific contact : `view`
+
+Views all the contact information of the specified contact.
+
+Format: `view t/TELEGRAM_HANDLE`
+
+* Displays all contact information of the person with specified `TELEGRAM_HANDLE`
+* `TELEGRAM_HANDLE` must contain 5 - 32 characters, and can only contain letters, numbers and underscores.
+
+Examples:
+* `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
+![result for `view t/bob12`](images/viewBob12.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -442,7 +456,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCAConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -470,3 +484,4 @@ Action | Format                                                                 
 **Attendance** | `attendance`                                                            |`attendance`
 **Mark Attendance** | `mark t/TELEGRAM…​ d/DATE`                                              |`mark t/berniceYu t/alexYeoh d/2024-11-02`
 **Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                            |`unmark t/berniceYu d/2024-11-02`
+**View** | `view t/TELEGRAM_HANDLE`<br> e.g., `view t/bob123`
