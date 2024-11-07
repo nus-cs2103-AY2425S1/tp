@@ -109,12 +109,14 @@ Links an owner to one or more pets.
 <div markdown="span" class="alert alert-info">
 
 **:exclamation: Extra information:**<br>
-  
-* Links owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.<br>
-  
-* An owner can be linked to 0 or more pets.<br>
-  
-* A pet can be linked to 0 or more owners.<br>
+
+<ul>
+<li>Links owner at specified <code>OWNER_INDEX</code> to pet(s) at specified <code>PET_INDEX</code>s.</li>
+
+<li>An owner can be linked to 0 or more pets.</li>
+
+<li>A pet can be linked to 0 or more owners.</li>
+</ul>
   
 </div>
 
@@ -162,17 +164,19 @@ Edits an existing owner or pet in PawPatrol.
 
 **:exclamation: Extra information:**<br>
 
-* Edits the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​<br>
+<ul>
+<li>Edits the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​</li>
 
-* At least one of the optional fields must be provided.<br>
+<li>At least one of the optional fields must be provided.</li>
 
-* IC number cannot be changed.<br>
+<li>IC number cannot be changed.</li>
 
-* Existing values will be updated to the input values.<br>
+<li>Existing values will be updated to the input values.</li>
 
-* When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.<br>
+<li>When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.</li>
 
-* You can remove all the pet’s tags by typing `t/` without specifying any tags after it.<br>
+<li>You can remove all the pet’s tags by typing <code>t/</code> without specifying any tags after it.</li>
+</ul>
 
 </div>
 
@@ -200,17 +204,20 @@ Finds owners or pets whose names contain any of the given keywords.
 
 **:exclamation: Extra information:**<br>
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`<br>
+<ul>
 
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`<br>
+<li>The search is case-insensitive. e.g. <code>hans</code> will match <code>Hans</code></li>
 
-* Only the name is searched.<br>
+<li>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></li>
 
-* Only full words will be matched e.g. `Han` will not match `Hans`<br>
+<li>Only the name is searched.</li>
 
-* Owners or pets matching at least one keyword will be returned (i.e. `OR` search).<br>
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+<li>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></li>
 
+<li>Owners or pets matching at least one keyword will be returned (i.e. <code>OR</code> search).<br>
+  e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></li>
+
+</ul>
 </div>
 
 Format: 
@@ -230,11 +237,15 @@ Deletes the specified owner or pet from PawPatrol.
 
 **:exclamation: Extra information:**<br>
 
-* Deletes the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively.<br>
+<ul>
 
-* The index refers to the index number shown in the displayed owner or pet list.<br>
+<li>Deletes the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively.</li>
 
-* The index **must be a positive integer** 1, 2, 3, …​<br>
+<li>The index refers to the index number shown in the displayed owner or pet list.</li>
+
+<li>The index **must be a positive integer** 1, 2, 3, …​</li>
+
+</ul>
 
 </div>
 
