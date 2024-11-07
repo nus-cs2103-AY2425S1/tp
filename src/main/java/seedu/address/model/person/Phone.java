@@ -15,7 +15,7 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "The `PHONE_NUMBER` field is defined as a string where, if split by spaces,"
             + " at least one of the resulting tokens is a valid phone number, which is a"
-            + " string without spaces that has at least 3 digits, and no alphabets.";
+            + " string without spaces that has at least 2 digits, and no alphabets.";
 
     public final String value;
 
@@ -33,7 +33,7 @@ public class Phone {
     /**
      * Returns true if a given string is a valid phone number.
      * Our definition of a valid phone number is a string without spaces that has
-     * at least 3 digits, and no alphabets.
+     * at least 2 digits, and no alphabets.
      */
     static boolean isValidPhone(String test) {
         // Assert that there should not be whitespaces in the string
@@ -47,7 +47,7 @@ public class Phone {
             .filter(Character::isAlphabetic)
             .count();
 
-        return digitCount >= 3 && alphaCount == 0;
+        return digitCount >= 2 && alphaCount == 0;
     }
 
     /**

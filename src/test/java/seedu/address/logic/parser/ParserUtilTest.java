@@ -33,7 +33,7 @@ import seedu.address.model.person.RoleType;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = " ";
     private static final String INVALID_PHONE = "+65p1";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
