@@ -151,18 +151,20 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the address book by finding exact match of a field
 
 Format:
 `delete INDEX`
 `delete n/NAME`
+`delete e/EMAIL`
+`delete p/PHONE`
 `delete n/NAME p/PHONE`
 `delete n/NAME e/EMAIL`
 
-* Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE`, or `NAME` and `EMAIL`
+* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`/NAME` and `PHONE`/`NAME` and `EMAIL`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If there are contacts with duplicate names, user must specifically find `NAME` and `PHONE` or `NAME` and `EMAIL`.
+* If there are contacts with duplicate names, user must specify `NAME` and `PHONE`/`NAME` and `EMAIL`.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -199,7 +201,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Talentcy data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
