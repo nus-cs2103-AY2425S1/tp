@@ -21,13 +21,10 @@ CareLink is a desktop address book application targeted towards independent Geri
     - [Listing all persons : `list`](#listing-all-persons--list)
     - [Editing a person : `edit`](#editing-a-person--edit)
     - [Locating persons by name, NRIC, role, or tags: `find`](#locating-persons-by-name-nric-role-or-tags-find)
-    - [Prefixes:](#prefixes)
-    - [Examples:](#examples)
     - [Adding an appointment: `addapp`](#adding-an-appointment-addapp)
     - [Editing an appointment: `editapp`](#editing-an-appointment-editapp)
     - [Deleting an appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
     - [Locating appointments by date-time range: `findapp`](#locating-appointments-by-date-time-range-findapp)
-    - [Examples:](#examples-1)
     - [Deleting a person : `delete`](#deleting-a-person--delete)
     - [Clearing all entries : `clear confirm`](#clearing-all-entries-clear-confirm)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
@@ -207,19 +204,19 @@ Finds persons based on the specified criteria using the provided prefixes.
 
 **Format**: `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]…​`
 
-- The search is case-insensitive. e.g., `n/alex` will match `Alex`.
-- The order of the prefixes and keywords does not matter. e.g., `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
+- The search is case-insensitive. e.g `n/alex` will match `Alex`.
+- The order of the prefixes and keywords does not matter. e.g `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
 - Persons matching any of the provided criteria will be returned (i.e., `OR` search). For example, `n/Alex t/friend` will return persons whose name contains "Alex" or have the tag "friend".
 
 ### Prefixes:
 
 - `n/NAME`: Searches by name.
 - `nric/NRIC`: Searches by Singapore National ID.
-- `role/ROLE`: Searches by role (e.g., `role/patient` or `role/caregiver`).
-- `t/TAG`: Searches by tag (e.g., `t/friend`, `t/family`).
+- `role/ROLE`: Searches by role (e.g `role/patient` or `role/caregiver`).
+- `t/TAG`: Searches by tag (e.g `t/friend`, `t/family`).
 - `p/PHONE`: Searches by phone number.
 - `e/EMAIL`: Searches by email address.
-- `role/ROLE`: Searches by role (e.g., `role/patient` or `role/caregiver`).
+- `role/ROLE`: Searches by role (e.g `role/patient` or `role/caregiver`).
 
 ### Examples:
 
@@ -242,8 +239,8 @@ Adds an appointment for a person in CareLink.
 Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
 - The `NRIC` must belong to a person already in CareLink
-- `DATE` must be in the format DD/MM/YYYY (e.g., 01/01/2025)
-- `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g., 14:30)
+- `DATE` must be in the format DD/MM/YYYY (e.g. 01/01/2025)
+- `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g 14:30)
 - The appointment must follow these rules:
   - Start time must be before end time
   - Appointment must be in the future
@@ -251,14 +248,14 @@ Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
 Examples:
 
-- `addapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00` adds a one-hour appointment on January 1st, 2025
+- `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00` adds a one-hour appointment on January 1st, 2025
 - `addapp nric/S9876543B d/15/03/2025 start/14:30 end/16:00` adds a 90-minute appointment on March 15th, 2025
 
 Common errors and their meanings:
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
-- `Invalid date` - Make sure to use DD/MM/YYYY format (e.g., 01/01/2025)
-- `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g., 14:30)
+- `Invalid date` - Make sure to use DD/MM/YYYY format (e.g 01/01/2025)
+- `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g 14:30)
 - `Start time must be before end time` - Check your appointment times
 - `Start time must be in the future` - Can't schedule appointments in the past
 - `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot
@@ -270,8 +267,8 @@ Edits an existing appointment for a person in CareLink
 Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`
 
 - The `NRIC` must belong to a person already in CareLink
-- `DATE` must be in the format DD/MM/YYYY (e.g., 01/01/2025)
-- `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g., 14:30)
+- `DATE` must be in the format DD/MM/YYYY (e.g 01/01/2025)
+- `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g 14:30)
 The edited appointment follows the same rules as add appointment:
   - Start time must be before end time
   - Appointment must be in the future
@@ -279,14 +276,14 @@ The edited appointment follows the same rules as add appointment:
 
 Examples:
 
-- `editapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025` changes the appointment date, timings remain the same
-- `editapp nric/S1234567A d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, appointment remains on the same day.
+- `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025` changes the appointment date, timings remain the same
+- `editapp nric/S1234567D d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, appointment remains on the same day.
 
 Common errors and their meanings:
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
-- `Invalid date` - Make sure to use DD/MM/YYYY format (e.g., 01/01/2025)
-- `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g., 14:30)
+- `Invalid date` - Make sure to use DD/MM/YYYY format (e.g 01/01/2025)
+- `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g 14:30)
 - `Start time must be before end time` - Check your edited appointment times
 - `Start time must be in the future` - Can't schedule appointments in the past
 - `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot
@@ -299,13 +296,13 @@ Deletes an existing appointment for a person in CareLink.
 Format: `deleteapp nric/NRIC d/DATE start/START_TIME`
 
 - The `NRIC` must belong to a person with an existing appointment
-- `DATE` must be in the format DD/MM/YYYY (e.g., 01/01/2025)
-- `START_TIME` must be in 24-hour format HH:MM (e.g., 14:30)
+- `DATE` must be in the format DD/MM/YYYY (e.g 01/01/2025)
+- `START_TIME` must be in 24-hour format HH:MM (e.g 14:30)
 - The appointment must exist at the specified date and time for the person
 
 Examples:
 
-- `deleteapp nric/S1234567A d/01/01/2025 start/10:00` deletes the appointment on January 1st, 2025 at 10:00
+- `deleteapp nric/S1234567D d/01/01/2025 start/10:00` deletes the appointment on January 1st, 2025 at 10:00
 - `deleteapp nric/S9876543B d/15/03/2025 start/14:30` deletes the appointment on March 15th, 2025 at 14:30
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -315,8 +312,8 @@ To delete an appointment, you only need the start time. The end time is not requ
 Common errors and their meanings:
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
-- `Invalid date` - Make sure to use DD/MM/YYYY format (e.g., 01/01/2025)
-- `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g., 14:30)
+- `Invalid date` - Make sure to use DD/MM/YYYY format (e.g. 01/01/2025)
+- `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g. 14:30)
 - `This appointment does not exist in CareLink` - There is no appointment at the specified date and time for this person
 
 ### Locating appointments by date-time range: `findapp`
@@ -393,7 +390,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -420,17 +417,17 @@ _Details coming soon ..._
 
 | Action               | Format, Examples                                                                                                                                                     |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Link**             | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                          |
 | **Deletelink**       | `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `deletelink patient/S6283947C caregiver/S6382947A`                                              |
 | **Addnote**          | `addnote nric/NRIC note/NOTES` <br> e.g. `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`                                                      |
 | **Clear**            | `clear`                                                                                                                                                              |
-| **Delete**           | `delete NRIC`<br> e.g., `delete S6483749D`                                                                                                                           |
-| **Edit**             | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit S1234567D n/James Lee e/jameslee@example.com`                                   |
-| **Find**             | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567D`                                                                            |
-| **Find Appointment** | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g., `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`          |
-| **Add Appointment** | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g., `addapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00`|
-| **Edit Appointment** | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g., `editapp nric/S1234567A d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00`|
-| **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g., `deleteapp nric/S9876543B d/15/03/2025 start/14:30`|
+| **Delete**           | `delete NRIC`<br> e.g `delete S6483749D`                                                                                                                           |
+| **Edit**             | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g`edit S1234567D n/James Lee e/jameslee@example.com`                                   |
+| **Find**             | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g `find n/Alex nric/S1234567D`                                                                            |
+| **Find Appointment** | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`          |
+| **Add Appointment** | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`|
+| **Edit Appointment** | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00`|
+| **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g `deleteapp nric/S9876543B d/15/03/2025 start/14:30`|
 | **List**             | `list`                                                                                                                                                               |
 | **Help**             | `help`                                                                                                                                                               |
