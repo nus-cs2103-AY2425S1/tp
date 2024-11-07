@@ -6,7 +6,8 @@ import static seedu.hireme.commons.util.AppUtil.checkArgument;
 import seedu.hireme.logic.validator.EmailValidator;
 
 /**
- * Represents a Company's email in the internship book.
+ * Represents a Company's email.
+ * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}.
  */
 public class Email {
 

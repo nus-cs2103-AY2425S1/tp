@@ -7,12 +7,17 @@ import seedu.hireme.logic.validator.RoleValidator;
 
 /**
  * Represents an Internship's role in the internship application.
+ * Guarantees: immutable; the role value is validated upon construction.
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Role should only contain alphanumeric characters and spaces and it should not be blank";
-
+    /**
+     * Message constraints that define the valid format for the role.
+     * The role should only contain alphanumeric characters, spaces, and forward slashes (/),
+     * and it should not be blank.
+     */
+    public static final String MESSAGE_CONSTRAINTS = "Role should only contain alphanumeric "
+            + "characters, spaces, and forward slashes (/), and it should not be blank.";
     private final String value;
 
     /**

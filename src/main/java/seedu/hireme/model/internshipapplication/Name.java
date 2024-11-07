@@ -6,13 +6,20 @@ import static seedu.hireme.commons.util.AppUtil.checkArgument;
 import seedu.hireme.logic.validator.NameValidator;
 
 /**
- * Represents a Company's name in the internship book.
+ * Represents a Company's name.
+ * Guarantees: immutable; the name is valid as declared in {@link NameValidator}.
  */
 public class Name {
 
+    /**
+     * The message that describes the constraints for a valid name format.
+     * Names should contain only alphanumeric characters, spaces, and the following special characters:
+     * underscore (_), ampersand (&), forward slash (/), dot (.), colon (:), and parentheses ().
+     * Names should not be blank.
+     */
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters, underscores, spaces, ampersand, dot, colon, parentheses"
-                    + " and it should not be blank";
+            "Names should only contain alphanumeric characters, spaces, underscores (_), ampersand (&), "
+                    + "forward slash (/), dot (.), colon (:), and parentheses (). Names should not be blank.";
 
     private final String value;
 
@@ -31,11 +38,10 @@ public class Name {
         this.value = name.trim();
     }
 
-
     /**
      * Returns a string representation of the name.
      *
-     * @return the name as a string.
+     * @return The name as a string.
      */
     @Override
     public String toString() {
@@ -43,10 +49,10 @@ public class Name {
     }
 
     /**
-     * Compares this name to another object.
+     * Checks if this name is equal to another object.
      *
-     * @param other the object to compare.
-     * @return true if the object is an instance of {@code Name} and has the same value, false otherwise.
+     * @param other The object to compare.
+     * @return True if the object is an instance of {@code Name} and has the same value, ignoring case.
      */
     @Override
     public boolean equals(Object other) {
@@ -65,7 +71,7 @@ public class Name {
     /**
      * Returns the hash code of the name.
      *
-     * @return the hash code of the name value.
+     * @return The hash code of the name value.
      */
     @Override
     public int hashCode() {

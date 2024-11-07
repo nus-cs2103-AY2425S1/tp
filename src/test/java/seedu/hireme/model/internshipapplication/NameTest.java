@@ -21,11 +21,30 @@ public class NameTest {
     }
 
     @Test
+    public void constructor_validSpecialCharacters_success() {
+        // Only permitted special characters
+        assertEquals(new Name("Google & Co."), new Name("Google & Co."));
+        assertEquals(new Name("Research/Development"), new Name("Research/Development"));
+        assertEquals(new Name("Example: AI (Research)"), new Name("Example: AI (Research)"));
+    }
+
+    @Test
+    public void constructor_invalidSpecialCharacters_throwsIllegalArgumentException() {
+        // Unsupported characters such as %, $, @, !
+        assertThrows(IllegalArgumentException.class, () -> new Name("Company@123"));
+        assertThrows(IllegalArgumentException.class, () -> new Name("Innovate! Co."));
+        assertThrows(IllegalArgumentException.class, () -> new Name("Finance%Inc"));
+    }
+
+    @Test
     public void equals() {
         Name name = new Name("Valid Name");
 
         // same values -> returns true
         assertTrue(name.equals(new Name("Valid Name")));
+
+        // different cases but same content -> returns true
+        assertTrue(name.equals(new Name("valid name")));
 
         // same object -> returns true
         assertTrue(name.equals(name));
