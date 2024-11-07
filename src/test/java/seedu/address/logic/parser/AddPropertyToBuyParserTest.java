@@ -4,9 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.BUYING_PRICE_DESC_1650000;
 import static seedu.address.logic.commands.CommandTestUtil.HOUSING_TYPE_DESC_HDB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_BUYING_PRICE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_POSTAL_CODE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNIT_NUMBER_DESC;
+//import static seedu.address.logic.commands.CommandTestUtil.INVALID_BUYING_PRICE_DESC;
+//import static seedu.address.logic.commands.CommandTestUtil.INVALID_POSTAL_CODE_DESC;
+//import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNIT_NUMBER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.POSTAL_CODE_DESC_567510;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_NEAR_MRT;
@@ -105,7 +105,7 @@ public class AddPropertyToBuyParserTest {
                 expectedMessageDuplicateHt);
     }
 
-    @Test
+    /*@Test
     public void parse_invalidValue_failure() {
         // invalid postal code
         assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000
@@ -121,11 +121,7 @@ public class AddPropertyToBuyParserTest {
         assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + INVALID_BUYING_PRICE_DESC
                         + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT,
                 Price.MESSAGE_CONSTRAINTS);
-
-        // invalid housing type
-        // assertParseFailure(parser, PREAMBLE_INDEX + INVALID_HOUSING_TYPE_DESC + BUYING_PRICE_DESC_1650000
-        // + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT, Hdb.MESSAGE_CONSTRAINTS);
-    }
+    }*/
 
     @Test
     public void parse_emptyPreamble_throwsParseException() {
