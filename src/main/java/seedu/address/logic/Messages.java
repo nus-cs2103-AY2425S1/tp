@@ -50,6 +50,8 @@ public class Messages {
             + " This will create the require Tags.";
     public static final String MESSAGE_FORCE_DELETE_TAG = "Use f/ to force the deletion of tags."
             + " This will unassign all people currently with the Tag.";
+    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "Some tasks specified are already completed.";
+    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "Some tasks specified are already uncompleted.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
