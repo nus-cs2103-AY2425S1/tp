@@ -23,6 +23,7 @@ CLass Payment
 
 Class Tutorial
 Class UniqueTutorialList
+Class Attendance
 
 Class Participation
 Class UniqueParticipationList
@@ -53,17 +54,25 @@ Person *--> Payment
 Person *--> "*" Tag
 
 AddressBook *--> "1" UniqueTutorialList
-UniqueTutorialList *-->"0..*" Tutorial
+UniqueTutorialList -->"0..*" Tutorial
+Participation *--> Tutorial
 
 AddressBook *--> "1" UniqueParticipationList
-UniqueParticipationList *-->"0..*" Participation
+UniqueParticipationList -->"0..*" Participation
+Participation *--> Person
+Participation *--> "*" Attendance
+ModelManager -down-> "~* filtered" Tutorial
+
 
 Person -[hidden]up--> AddressBook
 UniquePersonList -[hidden]right-> I
+UniqueParticipationList -[hidden]right-> I
+UniqueTutorialList -[hidden]left-> I
 
+Person -[hidden]left-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager -down-> "~* filtered" Person
 @enduml

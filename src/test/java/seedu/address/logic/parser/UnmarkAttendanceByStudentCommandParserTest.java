@@ -18,10 +18,10 @@ public class UnmarkAttendanceByStudentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsUnmarkAttendanceByStudentCommand() {
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
         UnmarkAttendanceByStudentCommand expectedCommand =
                 new UnmarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, new Tutorial("Mathematics"));
-        assertParseSuccess(parser, "1 attend/12/12/2024 tut/Mathematics", expectedCommand);
+        assertParseSuccess(parser, "1 attend/10/10/2024 tut/Mathematics", expectedCommand);
     }
 
     @Test

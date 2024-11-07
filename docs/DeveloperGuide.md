@@ -9,7 +9,17 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project, EduVault, builds upon the Address Book Level 3 (AB3) project, originally developed by the [SE-EDU initiative](https://se-education.org/). Our team would like to extend our gratitude to the developers of AB3 for their work, which has significantly contributed to the structure and functionality of this project.
+
+In addition, we acknowledge and thank the creators of the following resources, libraries, and tools that were instrumental in the development of EduVault:
+
+* [AB3 Codebase](https://github.com/se-edu/addressbook-level3)
+* [JavaFX](https://openjfx.io/)
+* [JUnit](https://junit.org/junit5/)
+* [Jackson Library](https://github.com/FasterXML/jackson)
+* Other code segments and ideas that we have adopted from Stack Overflow, YouTube, and other online sources
+
+We deeply appreciate the contributions of these resources and their developers, which made our work possible and helped us bring EduVault to life.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -119,13 +129,14 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently ‘selected’ `Person` objects (e.g., results of a search query) as a separate *filtered* list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores `Tutorial` objects as a separate list which is exposed to outsiders as an unmodifiable `ObservableList<Tutorial>` that can be observed.
+* stores `Participation` objects as a separate list which is exposed to outsiders as an unmodifiable `ObservableList<Participation>` that can be observed.
+* Each `Participation` object is also composed of a `Tutorial` object, a `Person` object, and a `List<Attendance>` object. More information on this [here](?tab=t.0#heading=h.k3pglksfd2of).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -155,15 +166,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+`Students` are named as `Persons` due to Legacy code.
+</div>
+
 * stores the address book data i.e.,
     * all `Person` objects (which are contained in a `UniquePersonList` object).
     * all Tutorial objects (contained in a UniqueTutorialList object)
-    * all Participation objects (contained in a UniqueParticipationList object)![][image1]
-* Participation is an association class and contains the relationship between Person and Tutorial, as well as an List\<Attendance\> object
+    * all Participation objects (contained in a UniqueParticipationList object)
+* Participation is an association class and contains the relationship between Person and Tutorial, as well as a List\<Attendance\> object
 
 <img src="images/ParticipationAsAssociationDiagram.png" width="400" />
 
-### Storage implementation
+### Storage feature
+
+#### Storage format
 Eduvault stores data in JSON file using the Jackson library.
 
 Eduvault stores four types of objects:
@@ -174,9 +191,9 @@ Eduvault stores four types of objects:
 
 ```dtd
 {
-  "persons" : [...],
-  "tutorials" : [...],
-  "participations" : [...]
+    "persons" : [...],
+    "tutorials" : [...],
+    "participations" : [...]
 }
 ```
 
@@ -192,11 +209,11 @@ Eduvault stores four types of objects:
         "payment" : "189",
         "tags" : [ "Scholar" ]
     },
-  ...
+    ...
 ]
 ```
 There may be no duplicate `Students`.
-Two `Students` are considered to be duplicates if they have matching `NAME` and `PHONE`.
+Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
 
 
 `Tutorial`
@@ -206,11 +223,11 @@ Two `Students` are considered to be duplicates if they have matching `NAME` and 
     {
         "subject" : "Mathematics"
     },
-  ...
+    ...
 ]
 ```
 There may be no duplicate `Tutorials`.
-Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
+Two `Tutorials` are considered to be duplicates if they have matching `subject`.
 
 `Participation`
 ```dtd
@@ -225,17 +242,56 @@ Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
 ]
 ```
 
-`Attendance`
-```dtd
-"attendances" : [ {
-      "attendanceDate" : "02/02/2024"
-    } ]
-```
 Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
 
 There may be no duplicate `Participations`.
-Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same
+Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same.
 
+`Attendance`
+```dtd
+"attendances" :
+[
+    {
+        "attendanceDate" : "02/02/2024"
+    }
+]
+```
+
+There is no enforcement of duplicate `Attendance` in storage.
+
+#### Storage 
+
+##### Uniqueness of objects
+For the purposes of storage into JSON format, Eduvault defines two objects as distinct based on these factors:
+
+* Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
+* Two `Tutorials` are considered to be duplicates if they have matching `subject`.
+* Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same.
+
+##### Loading Order
+The order which storage loads `Person`, `Tutorial` and `Participation` is shown below. 
+
+![StorageToModelTypeActivityDiagram](images/StorageToModelTypeActivityDiagram.png)
+
+`Person` and `Tutorial` objects are loaded into the `AddressBook` first.
+
+The `Participation` objects are created using corresponding `Person` and `Tutorial` objects in the `AddressBook`
+based on [uniqueness](#uniqueness-of-objects).
+
+### Find Command Implementation
+
+The following sequence diagram shows how a find operation goes through the `Logic` component
+![FindSequenceDiagram-Logic](images/FindSequenceDiagram-Logic.png)
+
+`FindCommandParser` parses the find string into `argMultimap` to pass to `Predicate Factory`, which produces the
+predicates to create a `FindCommand` object.
+![FindCommandParseSequence](images/FindCommandParseSequence.png)
+
+`personPredicates` is of type `Predicate<Person>`
+
+`participationPredicates` is of type `Predicate<Participation>`
+
+`Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
 
 
 ### \[Proposed\] Undo/redo feature
@@ -871,7 +927,6 @@ Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
 ### Launch and shutdown
@@ -880,52 +935,366 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
+   2. Use the terminal and type java -jar eduvault.jar in the folder with the jar file. Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   
+2. Saving window preferences 
+   
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+     
+   2. Re-launch the app by double-clicking the jar file.
+     
+   3. Expected result: The most recent window size and location is retained.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
 
-### Creating and closing a tutorial
+### Adding a student
 
-### Enrolling and Unenrolling students
+1. Adding a student that does not exist
 
-### Marking and unmarking attendance
+   * Prerequisites: Student with name ‘Alex’ and phone number ‘98765432’ exist
+   
+   * Test case: `add n/Bernice p/87654321 e/bernice@example.com a/Blk 30 Clementi Street 20 #10-10`
+      
+      - Expected: Student is added to the list. Details of the added student are shown in the message box.
+      
+   * Test case: `add n/Alex Yeoh p/98765432 e/alexyeoh@example.com a/Blk 20 Jurong Street 76 #11-11`
+      
+      - Expected: Same as previous
+         
+2. Adding a student that already exist
+         
+   * Prerequisites: Student with name ‘Alex’ and phone number ‘98765432’ exist
+            
+   * Test case: `add n/Alex p/98765432 e/alexyeoh@example.com a/Blk 20 Jurong Street 76 #11-11`
+      
+      - Expected: Student is not added to the list. Error message is shown in the message box.
 
-### Marking and Logging Payment
+### Editing a student
 
-### Finding students
+1. Editing one or more details of a student
 
+   * Prerequisites: Student with name ‘Alex’ and phone number ‘98765432’ does not exist
+   
+   * Test case: `edit 1 a/Blk 20 Jurong Street 76 #11-11`
+   
+      - Expected: Address of first student is changed to ‘Blk 20 Jurong Street 76 #11-11’. Details of the edited student are shown in the message box.
+         
+   * Test case: `edit 1 n/Alex p/98765432`
+         
+      - Expected: Name and phone number of first student is changed to ‘Alex’ and ‘98765432’ respectively. Details of the edited student are shown in the message box.
+            
+2. Editing details of a student to match another student in EduVault
+   
+   * Prerequisites: Student with name “Alex” and phone number “98765432” exist
+      
+   * Test case: `edit 1 n/Alex p/98765432`
+
+      - Expected: Details of first student are not updated. Error message is shown in the message box.
+
+### Deleting a student
+
+1. Deleting a student while all students are being shown
+
+   * Prerequisites: List all students using the list command. Multiple students in the list.
+   
+   * Test case: `delete 1`
+   
+      - Expected result: First student is deleted from the list. Details of the deleted student shown in the message box.
+   
+   * Test case: `delete 0`
+   
+      - Expected result: No student is deleted. Error message shown in the message box.
+   
+   * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
+   Expected: Similar to previous.
+
+
+### Creating a tutorial
+
+1. Creating a new tutorial
+
+   * Prerequisites: Tutorial with name ‘Math’ does not exist.
+   
+   * Test case: `createtut tut/Math`
+   
+      - Expected: Tutorial with name ‘Math’ is created. Name of the tutorial created is shown in the message box. 
+      Dashboard shows newly created tutorial with 0 students enrolled under classes offered.
+   
+   * Test case: `createtut tut/Math 1pm`
+   
+      - Expected: Same as previous except tutorial with name ‘Math 1pm’ is created.
+
+2. Creating a tutorial that already exist
+
+   * Prerequisites: Tutorial with name ‘Math’ exists.
+   
+   * Test case: `createtut tut/Math`
+   
+      - Expected: No tutorial is created. Error message shown in the message box.
+   
+   * Test case: `createtut tut/math`
+   
+      - Expected: Same as previous.
+   
+3. Creating a tutorial with non-alphanumeric characters in name
+   
+   * Test case: `createtut tut/Math-secondary`
+   
+      - Expected: No tutorial is created. Error message shown in the message box.
+   
+   * Test case: `createtut tut/Math O’Lvl`
+      
+      - Expected: Same as previous
+
+### Closing a tutorial
+
+1. Closing an existing tutorial
+
+   * Prerequisites: Tutorial with name ‘Math’ exists.
+   
+   * Test case: `closetut tut/Math`
+   
+      - Expected: Tutorial with name ‘Math’ is closed. Name of the tutorial that is closed is shown in the message box. 
+         Dashboard no longer shows the tutorial under classes offered. All students who are still enrolled in the tutorial 
+         are unenrolled from the tutorial and the attendance card for that tutorial will no longer be shown.
+   
+2. Closing a tutorial that does not exist
+   
+   * Prerequisites: Tutorial with name ‘Math’ does not exist.
+    
+   * Test case: `closetut tut/Math`
+      
+      - Expected: Error message shown in the message box.
+
+### Enrolling students in tutorial
+
+1. Enrolling a student in a tutorial that exists
+
+   * Prerequisites: Tutorial with name ‘Math’ exists.
+   
+   * Test case: `enroll 1 tut/Math`
+   
+      - Expected: First student is enrolled in ‘Math’ tutorial.
+      Dashboard shows the updated number of students enrolled in ‘Math’ tutorial. 
+      Attendance card is created for the first student for ‘Math’ tutorial.
+   
+2. Enrolling a student in a tutorial that does not exist
+   
+   * Prerequisites: Tutorial with name ‘Math’ does not exist.
+      
+   * Test case: `enroll 1 tut/Math`
+   
+      - Expected: First student is not enrolled in ‘Math’ tutorial. Error message is shown in the message box.
+      
+3. Enrolling a student in a tutorial that they are already taking
+      
+   * Prerequisites: Student 1 is already taking ‘Math’ tutorial.
+         
+   * Test case: `enroll 1 tut/Math`
+   
+      - Expected: First student is not enrolled in ‘Math’ tutorial. Error message is shown in the message box.
+         
+### Unenrolling students from tutorial
+         
+1. Unenrolling a student from a tutorial that the student takes
+
+   * Prerequisites: Student is taking ‘Math’ tutorial.
+            
+   * Test case: `unenroll 1 tut/Math`
+   
+      - Expected: First student is unenrolled from ‘Math’ tutorial. Dashboard shows the updated number of students enrolled in ‘Math’ tutorial. 
+      Attendance card is removed for the first student for ‘Math’ tutorial.
+            
+2. Unenrolling a student from a tutorial that the student is not taking
+            
+   * Prerequisites: Student is not taking ‘Math’ tutorial.
+               
+   * Test case: `unenroll 1 tut/Math`
+   
+      - Expected: Error message is shown in the message box.
+               
+### Marking attendance of student
+
+1. Marking attendance of a student for a tutorial the student takes
+
+   * Prerequisites: Student is taking ‘Math’ tutorial and does not have attendance marked for the week of 10/10/2024 for ‘Math’ tutorial
+                  
+   * Test case: `mas 1 tut/Math attend/10/10/2024`
+      
+      - Expected: Attendance of first student is marked for ‘Math’ tutorial on 10/10/2024. 
+      Dashboard shows the marked attendance if the attendance marked is for the current week.
+                  
+   * Test case: `mas 1 attend/10/10/2024 tut/Math`
+   
+      - Expected: Same as previous
+                  
+2. Marking attendance of a student for a tutorial the student does not take
+
+   * Prerequisites: Student is not taking ‘Math’ tutorial
+                     
+   * Test case: `mas 1 tut/Math attend/10/10/2024`
+   
+      - Expected: Attendance of first student is not marked. Error message is shown in the message box.
+                     
+3. Marking attendance of a student for a tutorial that has attendance marked for the corresponding week
+                     
+   * Prerequisites: Student has attendance marked for any date in the week of 10/10/2024 for ‘Math’ tutorial.
+   
+   * Test case: `mas 1 tut/Math attend/10/10/2024`
+   
+      - Expected: Attendance of first student is not marked. Error message is shown in the message box.
+
+4. Marking attendance of a student for a future date
+
+   * Prerequisites: Student is taking ‘Math’ tutorial.
+      
+   * Test case: `mas 1 tut/Math attend/FUTURE_DATE`
+   
+      - Expected: Attendance of first student is not marked. Error message is shown in the message box.
+
+### Marking attendance of tutorial
+
+1. Marking attendance of a tutorial that exists
+
+   * Prerequisites: ‘Math’ tutorial exists and at least one student is enrolled in the tutorial. 
+   There must also be at least one student who does not have attendance marked for the week of 10/10/2024 for ‘Math’ tutorial.
+
+   * Test case: `mat tut/Math attend/10/10/2024`
+   
+      - Expected: Attendance of all students who do not have corresponding weekly attendance is marked for ‘Math’ tutorial on 10/10/2024. 
+      Dashboard shows the marked attendance for marked students if the attendance marked is for the current week.
+      
+   * Test case: `mat attend/10/10/2024 tut/Math`
+      
+      - Expected: Same as previous
+         
+2. Marking attendance of a tutorial that does not exist
+         
+   * Prerequisites: ‘Math’ tutorial does not exist
+            
+   * Test case: `mat tut/Math attend/10/10/2024`
+            
+      - Expected: Attendance is not marked. Error message is shown in the message box.
+               
+   * Test case: `mat tut/math attend/10/10/2024`
+               
+      - Expected: Same as previous
+                  
+3. Marking attendance of a tutorial where all students already have attendance marked for the corresponding week
+                  
+   * Prerequisites: All students have attendance marked for any date in the week of 10/10/2024 for ‘Math’ tutorial.
+                     
+   * Test case: `mat tut/Math attend/10/10/20241`
+                     
+      - Expected: Attendance of all students are not marked. Error message is shown in the message box.
+                        
+4. Marking attendance of a tutorial for a future date
+                        
+   * Prerequisites: ‘Math’ tutorial exists.
+                           
+   * Test case: `mat tut/Math attend/FUTURE_DATE`
+                           
+      - Expected: Attendance of students are not marked. Error message is shown in the message box.
+
+### Unmarking attendance of student
+
+1. Unmarking attendance of a student for a tutorial the student takes
+
+   * Prerequisites: Student is taking ‘Math’ tutorial and has attendance marked for 10/10/2024 for ‘Math’ tutorial
+   
+   * Test case: `umas 1 tut/Math attend/10/10/2024`
+   
+      - Expected: Attendance of first student is unmarked for ‘Math’ tutorial on 10/10/2024. 
+      Dashboard no longer shows marked attendance if the attendance unmarked is for the current week.
+      
+   * Test case: `umas 1 attend/10/10/2024 tut/Math`
+      
+      - Expected: Same as previous
+         
+2. Unmarking attendance of a student for a tutorial the student does not take
+    
+   * Prerequisites: Student is not taking ‘Math’ tutorial
+            
+   * Test case: `umas 1 tut/Math attend/10/10/2024`
+            
+      - Expected: Error message is shown in the message box.
+               
+3. Unmarking attendance of a student for a future date
+               
+   * Prerequisites: Student is taking ‘Math’ tutorial.
+                  
+   * Test case: `umas 1 tut/Math attend/FUTURE_DATE`
+                  
+      - Expected: Error message is shown in the message box.
+                     
+### Marking payment
+
+1. Marking payment of a student
+
+   * Prerequisites: Student is enrolled in at least one tutorial
+   
+   * Test case: `markpaid 1 pay/100`
+   
+      - Expected: Payment due decreases by 100 for the first student. If the amount paid is equal to payment due, the UI updates to show the fees are paid. If the amount paid is greater than the payment due, the advance amount will also be shown.
+      
+2. Marking payment of a student that is not enrolled in any tutorial
+      
+   * Prerequisites: Student is not enrolled in any tutorial
+         
+   * Test case: `markpaid 1 pay/100`
+         
+      - Expected: Payment is not updated for the first student. Error message is shown in the message box.
+      
+### Logging payment
+
+1. Adding payment for a student
+            
+   * Prerequisites: Student is enrolled in at least one tutorial
+      
+   * Test case: `addfees 1 pay/100`
+           
+      - Expected: If there is no advance, the payment due increases by 100. If there is an advance amount greater than 100, the advance amount decreases by 100. If the advance is less than 100, the payment due increases by the excess amount after deducting the advance. If the advance is equal to 100, the payment due will be marked as 0.
+              
+2. Adding payment of a student that is not enrolled in any tutorial
+              
+   * Prerequisites: Student is not enrolled in any tutorial
+                 
+   * Test case: `markpaid 1 pay/100`
+      
+      - Expected: Payment is not updated for the first student. Error message is shown in the message box.
+      
+### Searching students
+                    
+1. Searching for students who have overdue payment
+                    
+   * Test case: `find pay/false`
+   
+     - Expected: List of students who have overdue payment is shown.
+                       
+2. Searching for students who have attended any tutorial within a given period
+                       
+   * Test case: `find attend/10/10/2024:17/10/2024`
+                          
+      - Expected: List of students who have attended any tutorial within the period 10/10/2024 - 17/10/2024.
+                             
+3. Searching for students with a specific name who have attended any tutorial within a given period
+                             
+   * Test case: `find n/alex attend/10/10/2024:17/10/2024`
+                                
+      - Expected: List of students, with name matching ‘Alex’, who have attended any tutorial within the period 10/10/2024 - 17/10/2024.
+                                   
+4. Searching for students with specific name enrolled in a given tutorial with overdue payment  
+                                   
+   * Test case: `find n/alex tut/Math pay/false`
+                                      
+      - Expected: List of students, with name matching ‘Alex’, who is enrolled in ‘Math’ tutorial and has overdue payment.
 
 ---------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**

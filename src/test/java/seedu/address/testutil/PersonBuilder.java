@@ -1,11 +1,9 @@
 package seedu.address.testutil;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
@@ -23,16 +21,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-
-    public static final String DEFAULT_PAYMENT = "-200";
-    public static final LocalDate DEFAULT_ATTENDANCE = LocalDate.now();
+    public static final String DEFAULT_PAYMENT = "0";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Payment payment;
-    private Attendance attendance;
     private Set<Tag> tags;
 
     /**
@@ -104,15 +99,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withPayment(String value) {
         this.payment = new Payment(value);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Attendance} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAttendance(String attendance) {
-        LocalDate attendanceDate = LocalDate.parse(attendance, Attendance.VALID_DATE_FORMAT);
-        this.attendance = new Attendance(attendanceDate);
         return this;
     }
 

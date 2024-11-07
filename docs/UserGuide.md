@@ -5,17 +5,79 @@ title: User Guide
 
 **EduVault** is a desktop application **designed for tuition centers to manage students and classes effectively**. Optimised for quick use through a Command Line Interface (CLI) and complemented by an intuitive graphical user interface (GUI), EduVault enables efficient tracking of student and class information, making it ideal for fast typists and busy administrators.
 
+![Ui](images/Ui.png)
+
+<br>
+
 ---
 
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-A person can have any number of tags (including 0)
-</div>
-<div markdown="span" class="alert alert-success">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-A person can have any number of tags (including 0)
-</div>
+## **Table of Contents**
+
+1. [Quick Start](#1-quick-start)
+
+      1.1. [Installation Guide](#11-installation-guide)
+
+      1.2. [Introduction to the interface](#12-introduction-to-the-interface)
+
+      1.3. [Brief Walkthrough](#13-brief-walkthrough)
+
+2. [General Command Format](#2-general-command-format)
+
+3. [Adding data](#3-adding-data)
+
+   3.1. [Adding a student](#31-adding-a-student)
+
+   3.2. [Creating a new tutorial](#32-creating-a-new-tutorial)
+
+   3.3. [Enrolling student in tutorial](#33-enrolling-student-into-a-tutorial)
+
+4. [Viewing and Retrieving data](#4-viewing-and-retrieving-data)
+
+   4.1. [Listing all students](#41-listing-all-students)
+
+   4.2.[Searching Students](#42-searching-students)
+
+5. [Editing and Updating data](#5-editing-and-updating-data)
+
+   5.1. [Editing student’s details](#51-editing-a-student)
+
+   5.2. [Logging fees](#52-logging-fees-for-tutorial)
+
+   5.3. [Marking payment](#53-marking-a-students-payment)
+
+   5.4. [Marking attendance of student](#54-marking-attendance-of-a-student)
+
+   5.5. [Marking attendance of tutorial](#55-marking-attendance-of-a-tutorial)
+
+   5.6. [Unmarking attendance of a student](#56-unmarking-attendance-of-a-student)
+
+   5.7. [Unenroll a student from tutorial](#57-unenrolling-student-from-a-tutorial)
+
+6. [Deleting data](#6-deleting-data)
+
+   6.1. [Deleting a student](#61-deleting-a-student)
+
+   6.2. [Closing a tutorial](#62-closing-a-tutorial)
+
+   6.3. [Clearing all entries](#63-clearing-all-entries)
+
+7. [Viewing help](#7-viewing-help)
+
+8. [Exiting the program](#8-exiting-the-program)
+
+9. [Saving the data](#9-saving-data)
+
+10. [Editing the data file](#10-editing-the-data-file)
+
+11. [Prefix Table](#11-prefix-table)
+
+12. [Format Errors](#12-format-errors)
+
+13. [FAQ](#13-faq)
+
+14. [Known issues](#14-known-issues)
+
+---
 
 ### **1. Quick Start**
 
@@ -31,7 +93,7 @@ A person can have any number of tags (including 0)
   5. After downloading it, move the  `EduVault.jar` file to the folder you want to use for the EduVault application.
   6. Using the Terminal from Step 1, use `cd` command to go to the folder you put the jar file in.
   7. Refer [here](https://tutorials.codebar.io/command-line/introduction/tutorial.html) for the usage of `cd` command in Terminal if you are unsure.
-  8. Type `java -jar eduvault.jar` in the Terminal to start the application.
+  8. Type `java -jar EduVault.jar` in the Terminal to start the application.
   9. An EduVault interface similar to the [below](#12-introduction-to-the-interface) should appear in a few seconds. Note that the app will contain some sample data.
 
 <br>
@@ -40,7 +102,7 @@ A person can have any number of tags (including 0)
 
 When EduVault is first started, you will see an interface like the one below, made up of multiple components. Here’s a breakdown of each section and its functionality:
 
-![Ui](images/Ui.png)
+![Ui](images/Ui-intro.png)
 
 * **Options Box:**  Provides basic options like exiting the application or accessing the user guide
 * **Command Box:** An input box where users can type in commands to execute specific actions within EduVault
@@ -217,8 +279,6 @@ The commands in this section are used to view and retrieve records on the system
 #### **4.1 Listing all students**
 
 Command: `list`
-
-<br>
 
 #### **4.2 Searching students**
 
@@ -460,14 +520,14 @@ Fields
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking
 * `ATTENDANCE`: Date to mark the attendance for
-    * Must be in format dd/MM/yyyy
+    * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
 
 <div markdown="span" class="alert alert-success">:bulb: **Tip:**
 If you want to mark the attendance of all students in a tutorial, 
-use the command mat [here](#55-marking-attendance-of-a-tutorial) instead.
+use the command `mat` [here](#55-marking-attendance-of-a-tutorial).
 </div>
 
 Example usages
@@ -481,12 +541,16 @@ Example usages
 Invalid usages
 * Marking attendance of student who does not take specified tutorial
     * *Error message: Student STUDENT_NAME does not take TUTORIAL tutorial*
-* Marking attendance of student who already has attendance marked for the corresponding week
-    * *Error message: Student STUDENT_NAME has attendance marked for the corresponding week of date ATTENDANCE*
+* Marking attendance of student who already has attendance marked for the corresponding week for the specified tutorial
+    * *Error message: Student STUDENT_NAME has attendance marked for the corresponding week of date ATTENDANCE for TUTORIAL tutorial*
 * Format errors, check [here](#12-format-errors)
 
 </div>
 {% endraw %}
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+You can click anywhere in the attendance box to show other weeks' attendance for that tutorial.
+</div>
 
 #### **5.5 Marking attendance of a tutorial**
 *Marks the attendance of all students enrolled in the tutorial for the specified date*
@@ -502,7 +566,7 @@ Fields
 
 * `TUTORIAL`: Name of the tutorial to mark the attendance for all students
 * `ATTENDANCE`: Date to mark the attendance for
-    * Must be in format dd/MM/yyyy
+    * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -521,9 +585,11 @@ Example usages
 <div markdown="1" class="smaller-text">
 
 Invalid usages
+* Marking attendance of a tutorial that does not exist
+    * *Error message: No tutorial class with the name TUTORIAL is found*
 * Marking attendance of a tutorial with no students enrolled
     * *Error message: No students are enrolled in TUTORIAL tutorial*
-* Marking attendance of a tutorial where all students already has attendance marked for the corresponding week
+* Marking attendance of a tutorial where **all students** already has attendance marked for the corresponding week
     * *Error message: All students in TUTORIAL tutorial has attendance marked 
     for the corresponding week of date ATTENDANCE*
 * Format errors, check [here](#12-format-errors)
@@ -531,7 +597,7 @@ Invalid usages
 </div>
 {% endraw %}
 
-#### **5.6 Unmarking attendance of student**
+#### **5.6 Unmarking attendance of a student**
 
 Command: `umas`
 
@@ -546,7 +612,7 @@ Fields
   * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking.
 * `ATTENDANCE`: Date to unmark the attendance for.
-  * Must be in format dd/MM/yyyy
+  * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -562,7 +628,7 @@ Example usages
 Invalid usages
 
 * Unmarking attendance of student who does not take specified tutorial
-    * Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial
+    * *Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial*
 * Format errors, check [here](#12-format-errors)
 
 </div>
@@ -689,7 +755,7 @@ Command:  `clear`
 Clears all entries from Eduvault.
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-Eduvault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/addressbook.json` before executing.
+EduVault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/addressbook.json` before executing.
 </div>
 
 ---
@@ -712,7 +778,7 @@ Command: `exit`
 ---
 
 ### **9. Saving data** 
-Eduvault data is saved in the hard disk automatically after any command that changes the data.
+EduVault data is saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 ---
@@ -722,11 +788,11 @@ Eduvalt data is saved automatically as a JSON file at `[JAR file location]/data/
 Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-If your changes to the data file make its format invalid, Eduvault will discard all data and start with an empty data file at the next run. Hence, it is recommended to create a backup of the file before editing it.
-Furthermore, certain edits can cause Eduvault to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file make its format invalid, EduVault will discard all data and start with an empty data file at the next run. Hence, it is recommended to create a backup of the file before editing it.
+Furthermore, certain edits can cause EduVault to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-For reference, please refer to the [Developer Guide](https://ay2425s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html#storage-implementation) for more details on editing the JSON file.
+For reference, please refer to the [Developer Guide](https://ay2425s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html#storage-format) for more details on editing the JSON file.
 
 ---
 
@@ -939,11 +1005,9 @@ dd/MM/yyyy</code>
 ---
 
 ### **14. Known issues**
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the application before running the application again.
 
----
+2. **If you minimize the Help Window** and then run the help command (or use the Help menu, or the keyboard shortcut F1) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-### **15. Archiving data files \[coming in v2.0\]**
-
-
-
+3. **If the UI does not update automatically** on modifying student's details such as attendance and enrolling in tutorial, manually click on the area containing the student's details. If the UI still does not update, try restarting the application.
 

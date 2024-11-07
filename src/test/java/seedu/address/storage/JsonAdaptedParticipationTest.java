@@ -27,7 +27,7 @@ public class JsonAdaptedParticipationTest {
 
     @Test
     public void toModelType_validParticipationDetails_returnsParticipation() throws Exception {
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
         Participation participation = new Participation(BENSON, MATH, Collections.singletonList(attendance));
         JsonAdaptedParticipation jsonAdaptedParticipation = new JsonAdaptedParticipation(participation);
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, MATH);
@@ -36,7 +36,7 @@ public class JsonAdaptedParticipationTest {
 
     @Test
     public void toModelType_missingPerson_throwsIllegalValueException() {
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
         Participation participation = new Participation(BENSON, MATH, Collections.singletonList(attendance));
         JsonAdaptedParticipation jsonAdaptedParticipation = new JsonAdaptedParticipation(participation);
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(null, MATH);
@@ -50,7 +50,7 @@ public class JsonAdaptedParticipationTest {
 
     @Test
     public void toModelType_missingTutorial_throwsIllegalValueException() {
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
         Participation participation = new Participation(BENSON, MATH, Collections.singletonList(attendance));
         JsonAdaptedParticipation jsonAdaptedParticipation = new JsonAdaptedParticipation(participation);
         AddressBookStubWithPersonAndTutorial model = new AddressBookStubWithPersonAndTutorial(BENSON, null);

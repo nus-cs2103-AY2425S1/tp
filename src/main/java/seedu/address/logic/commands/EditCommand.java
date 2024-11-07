@@ -157,7 +157,6 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Payment payment;
-        private List<Participation> participationList;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -172,7 +171,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setPayment(toCopy.payment);
-            setParticipation(toCopy.participationList);
             setTags(toCopy.tags);
         }
 
@@ -180,7 +178,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, payment, participationList, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, payment, tags);
         }
 
         public void setName(Name name) {
@@ -223,14 +221,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setParticipation(List<Participation> participationList) {
-            this.participationList = participationList;
-        }
-
-        public Optional<List<Participation>> getParticipation() {
-            return Optional.ofNullable(participationList);
-        }
-
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -265,7 +255,6 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(payment, otherEditPersonDescriptor.payment)
-                    && Objects.equals(participationList, otherEditPersonDescriptor.participationList)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -276,7 +265,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("participation", participationList)
+                    .add("payment", payment)
                     .add("tags", tags)
                     .toString();
         }
