@@ -3,56 +3,55 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
-import seedu.address.ui.NotesWindow;
 
 /**
- * Views, adds, or deletes notes of a person identified using the person's name in the address book.
+ * Views, adds, or deletes notes of a person identified using the person's name or index in the address book.
  */
 public class NotesCommand extends Command {
 
     public static final String COMMAND_WORD = "notes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views, adds, edits, or deletes the notes of the person identified by their name.\n"
+            + ": Views, adds, or deletes the notes of the person identified by their name or index.\n"
             + "Parameters: \n"
-            + "View: " + PREFIX_VIEW + "NAME\n"
-            + "Add: " + PREFIX_ADD + "NAME " + PREFIX_NOTES + "NOTES\n"
-            + "Edit: " + PREFIX_EDIT + "NAME\n"
-            + "Delete: " + PREFIX_DELETE + "NAME\n"
+            + "View: [" + PREFIX_VIEW + "NAME] or [" + PREFIX_VIEW + "INDEX]\n"
+            + "Add: [" + PREFIX_ADD + "NAME " + PREFIX_NOTES + "NOTES] or [" + PREFIX_ADD
+            + "INDEX " + PREFIX_NOTES + "NOTES]\n"
+            + "Delete: [" + PREFIX_DELETE + "NAME] or [" + PREFIX_DELETE + "INDEX]\n"
             + "Example: \n"
-            + COMMAND_WORD + " " + PREFIX_VIEW + "John Doe\n"
-            + COMMAND_WORD + " " + PREFIX_EDIT + "John Doe\n"
-            + COMMAND_WORD + " " + PREFIX_ADD + "John Doe " + PREFIX_NOTES + "Prefers email contact\n"
-            + COMMAND_WORD + " " + PREFIX_DELETE + "John Doe";
+            + COMMAND_WORD + " " + PREFIX_VIEW + "John Doe OR " + PREFIX_VIEW + "1\n"
+            + COMMAND_WORD + " " + PREFIX_ADD + "John Doe " + PREFIX_NOTES + "Prefers email contact OR "
+            + PREFIX_ADD + "1 " + PREFIX_NOTES + "Prefers email contact\n"
+            + COMMAND_WORD + " " + PREFIX_DELETE + "John Doe OR " + PREFIX_DELETE + "1";
 
-    public static final String MESSAGE_VIEW_NOTES_SUCCESS = "Notes for %1$s: \n%2$s";
+    public static final String MESSAGE_VIEW_NOTES_SUCCESS = "Notes for %1$s: %2$s";
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Deleted notes for %1$s";
-    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes for %1$s: \n%2$s";
-    public static final String MESSAGE_EDIT_NOTES_SUCCESS = "Edited notes for %1$s: \n%2$s";
+    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes for %1$s: %2$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with name: %1$s";
 
-    private final Name targetName;
     private final Mode mode;
     private final Notes newNotes;
+    private final Index targetIndex;
+    private final Name targetName;
 
     /**
      * Represents the different modes of operation for the NotesCommand.
      * VIEW - displays the notes of a person
-     * ADD - adds or replaces the notes of a person
+     * ADD - adds or updates the notes of a person
      * DELETE - removes the notes of a person
-     * EDIT - uses a pop-up window to edit
      */
     public enum Mode {
         /**
@@ -61,34 +60,49 @@ public class NotesCommand extends Command {
         VIEW,
 
         /**
-         * Adds or replaces the notes of the specified person.
+         * Adds or updates the notes of the specified person.
          */
         ADD,
 
         /**
          * Removes the notes of the specified person.
          */
-        DELETE,
-
-        /**
-         * Edit the notes of the specified person using a pop-up window.
-         */
-        EDIT
+        DELETE
     }
 
     /**
-     * Creates command to view or delete notes.
+     * Creates command to view or delete notes using index.
+     */
+    public NotesCommand(Index targetIndex, Mode mode) {
+        this(targetIndex, mode, null);
+    }
+
+    /**
+     * Creates command to view or delete notes using name.
      */
     public NotesCommand(Name targetName, Mode mode) {
         this(targetName, mode, null);
     }
 
     /**
-     * Creates command to add notes.
+     * Creates command to add notes using index.
+     */
+    public NotesCommand(Index targetIndex, Mode mode, Notes notes) {
+        requireNonNull(targetIndex);
+        requireNonNull(mode);
+        this.targetIndex = targetIndex;
+        this.targetName = null;
+        this.mode = mode;
+        this.newNotes = notes;
+    }
+
+    /**
+     * Creates command to add notes using name.
      */
     public NotesCommand(Name targetName, Mode mode, Notes notes) {
         requireNonNull(targetName);
         requireNonNull(mode);
+        this.targetIndex = null;
         this.targetName = targetName;
         this.mode = mode;
         this.newNotes = notes;
@@ -99,16 +113,24 @@ public class NotesCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person personToEdit = null;
-        for (Person person : lastShownList) {
-            if (person.getName().equals(targetName)) {
-                personToEdit = person;
-                break;
-            }
-        }
+        Person personToEdit;
 
-        if (personToEdit == null) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, targetName.toString()));
+        if (targetIndex != null) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            personToEdit = lastShownList.get(targetIndex.getZeroBased());
+        } else {
+            personToEdit = null;
+            for (Person person : lastShownList) {
+                if (person.getName().equals(targetName)) {
+                    personToEdit = person;
+                    break;
+                }
+            }
+            if (personToEdit == null) {
+                throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, targetName.toString()));
+            }
         }
 
         switch (mode) {
@@ -132,16 +154,6 @@ public class NotesCommand extends Command {
             return new CommandResult(String.format(MESSAGE_ADD_NOTES_SUCCESS,
                     personToEdit.getName(), newNotes.toString()));
 
-        case EDIT:
-            NotesWindow notesWindow = new NotesWindow();
-            Notes newNotes = new Notes(notesWindow.showNotesWindow(personToEdit));
-            Person personWithEditedNotes = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                    personToEdit.getEmail(), personToEdit.getAddress(), newNotes,
-                    personToEdit.getTags(), personToEdit.getIncome(), personToEdit.getAge());
-            model.setPerson(personToEdit, personWithEditedNotes);
-            return new CommandResult(String.format(MESSAGE_EDIT_NOTES_SUCCESS,
-                    personWithEditedNotes.getName(), personWithEditedNotes.getNotes().toString()));
-
         default:
             throw new AssertionError("Unknown mode: " + mode);
         }
@@ -158,7 +170,18 @@ public class NotesCommand extends Command {
         }
 
         NotesCommand otherNotesCommand = (NotesCommand) other;
-        return targetName.equals(otherNotesCommand.targetName)
+
+        // Check if both have same identifier type (both index or both name)
+        if ((targetIndex == null) != (otherNotesCommand.targetIndex == null)) {
+            return false;
+        }
+
+        // Compare based on identifier type
+        boolean identifierEquals = targetIndex != null
+                ? targetIndex.equals(otherNotesCommand.targetIndex)
+                : targetName.equals(otherNotesCommand.targetName);
+
+        return identifierEquals
                 && mode == otherNotesCommand.mode
                 && (newNotes == null ? otherNotesCommand.newNotes == null
                         : newNotes.equals(otherNotesCommand.newNotes));
@@ -166,10 +189,16 @@ public class NotesCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetName", targetName)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("mode", mode)
-                .add("newNotes", newNotes)
-                .toString();
+                .add("newNotes", newNotes);
+
+        if (targetIndex != null) {
+            builder.add("targetIndex", targetIndex);
+        } else {
+            builder.add("targetName", targetName);
+        }
+
+        return builder.toString();
     }
 }
