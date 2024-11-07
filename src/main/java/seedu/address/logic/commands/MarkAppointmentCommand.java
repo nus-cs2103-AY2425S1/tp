@@ -57,20 +57,9 @@ public class MarkAppointmentCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Person patientToMarkAppointment = model.getFilteredPatientById(allPersons, patientId);
         Person doctorToMarkAppointment = model.getFilteredDoctorById(allPersons, doctorId);
-        if (doctorToMarkAppointment == null) {
-            throw new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
-        }
-        if (patientToMarkAppointment == null) {
-            throw new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
-        }
 
-        if (patientId % 2 == 0 && doctorId % 2 == 0) {
-            throw new CommandException(MESSAGE_MULTIPLE_PATIENT_ID);
-        } else if (patientId % 2 != 0 && doctorId % 2 != 0) {
-            throw new CommandException(MESSAGE_MULTIPLE_DOCTOR_ID);
-        } else if (patientId % 2 != 0 || doctorId % 2 == 0) {
-            throw new CommandException(MESSAGE_MIXED_SEQUENCE_ID);
-        }
+        checkForExistenceOfPersons(patientToMarkAppointment, doctorToMarkAppointment);
+        checkForValidIds(patientId, doctorId);
 
         patientToMarkAppointment.markAppointment(appointmentTime,
                 patientToMarkAppointment.getId(),
@@ -82,6 +71,31 @@ public class MarkAppointmentCommand extends Command {
 
         return new CommandResult(MESSAGE_MARK_APPOINTMENT_SUCCESS);
 
+    }
+
+    /**
+     * Checks for the existence of patient and doctor that the user enters
+     */
+    public void checkForExistenceOfPersons(Person patient, Person doctor) throws CommandException {
+        if (doctor == null) {
+            throw new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
+        }
+        if (patient == null) {
+            throw new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        }
+    }
+
+    /**
+     * Checks that the user enters a patient's ID then a doctor ID
+     */
+    public void checkForValidIds(int patientId, int doctorId) throws CommandException {
+        if (patientId % 2 == 0 && doctorId % 2 == 0) {
+            throw new CommandException(MESSAGE_MULTIPLE_PATIENT_ID);
+        } else if (patientId % 2 != 0 && doctorId % 2 != 0) {
+            throw new CommandException(MESSAGE_MULTIPLE_DOCTOR_ID);
+        } else if (patientId % 2 != 0) {
+            throw new CommandException(MESSAGE_MIXED_SEQUENCE_ID);
+        }
     }
 
     @Override

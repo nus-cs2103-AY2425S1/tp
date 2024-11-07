@@ -127,7 +127,7 @@ public class CreateDoctorCommandTest {
 
         @Override
         public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
-            return null; // TODO?
+            return null;
         }
 
         @Override

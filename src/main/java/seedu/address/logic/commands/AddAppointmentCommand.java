@@ -67,39 +67,59 @@ public class AddAppointmentCommand extends Command {
         Person patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
         Person doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
 
-        if (doctorToAddAppointment == null) {
+        checkForPersonsExistence(patientToAddAppointment, doctorToAddAppointment);
+        checkForInputId(patientId, doctorId);
+        checkForAvailability(patientToAddAppointment, doctorToAddAppointment);
+
+        logger.info(String.format("Added appointment for patient ID %d and doctor ID %d at time %s with remarks: %s",
+                patientId, doctorId, appointmentTime.toString(), remarks));
+
+        return new CommandResult(MESSAGE_ADD_APPOINTMENT_SUCCESS);
+    }
+
+    /**
+     * Checks for the existence of patient and doctor that the user enters
+     */
+    public void checkForPersonsExistence(Person patient, Person doctor) throws CommandException {
+        if (doctor == null) {
             logger.warning(String.format("Doctor with ID %d not found.", doctorId));
             throw new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
         }
-        if (patientToAddAppointment == null) {
+
+        if (patient == null) {
             logger.warning(String.format("Patient with ID %d not found.", patientId));
             throw new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
+    }
 
+    /**
+     * Checks that the user enters a patient's ID then a doctor ID
+     */
+    public void checkForInputId(int patientId, int doctorId) throws CommandException {
         if (patientId % 2 == 0 && doctorId % 2 == 0) {
             logger.warning("The user enter two patientId");
             throw new CommandException(MESSAGE_MULTIPLE_PATIENT_ID);
         } else if (patientId % 2 != 0 && doctorId % 2 != 0) {
             logger.warning("The user enter two doctorId");
             throw new CommandException(MESSAGE_MULTIPLE_DOCTOR_ID);
-        } else if (patientId % 2 != 0 || doctorId % 2 == 0) {
-            logger.warning("The user enter doctorId and patientId in wrong sequence");
+        } else if (patientId % 2 != 0) {
+            logger.warning("The user enters doctorId and patientId in wrong sequence");
             throw new CommandException(MESSAGE_MIXED_SEQUENCE_ID);
         }
+    }
 
-        boolean isPatientFree = patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
-                doctorToAddAppointment.getId(), remarks);
-        boolean isDoctorFree = doctorToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
-                doctorToAddAppointment.getId(), remarks);
+    /**
+     * Checks for the availability of both patient and doctor
+     */
+    public void checkForAvailability(Person patient, Person doctor) throws CommandException {
+        boolean isPatientFree = patient.addAppointment(appointmentTime, patient.getId(),
+                doctor.getId(), remarks);
+        boolean isDoctorFree = doctor.addAppointment(appointmentTime, patient.getId(),
+                doctor.getId(), remarks);
 
         if (!isPatientFree || !isDoctorFree) {
             throw new CommandException(MESSAGE_UNAVAILABLE_SLOT);
         }
-
-        logger.info(String.format("Added appointment for patient ID %d and doctor ID %d at time %s with remarks: %s",
-                patientId, doctorId, appointmentTime.toString(), remarks));
-
-        return new CommandResult(MESSAGE_ADD_APPOINTMENT_SUCCESS);
     }
 
     @Override

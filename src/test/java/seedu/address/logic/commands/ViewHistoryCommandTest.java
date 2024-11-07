@@ -61,7 +61,7 @@ public class ViewHistoryCommandTest {
         Person validDoctor = new PersonBuilder().buildDoctor();
         modelStub.addPerson(validDoctor);
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_ID, () ->
                 new ViewHistoryCommand(validPatient.getId(), appointmentTime1).execute(modelStub));
     }
 

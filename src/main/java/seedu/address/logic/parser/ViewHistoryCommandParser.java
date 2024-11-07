@@ -31,11 +31,8 @@ public class ViewHistoryCommandParser implements Parser<ViewHistoryCommand> {
     @Override
     public ViewHistoryCommand parse(String args) throws ParseException {
         requireNonNull(args);
-
-        // Tokenize the arguments and look for the x/ (date) and z/ (patient ID) prefixes
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_ID);
 
-        // Check if z/ prefixes is present, and there is no unexpected preamble
         if (!arePrefixesPresent(argumentMultimap, PREFIX_ID)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -61,7 +58,6 @@ public class ViewHistoryCommandParser implements Parser<ViewHistoryCommand> {
             }
         }
 
-        // Return the constructed ViewHistoryCommand with patientId and the parsed or null dateTime
         return new ViewHistoryCommand(patientId, dateTime);
     }
 

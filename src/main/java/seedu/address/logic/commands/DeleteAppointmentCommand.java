@@ -33,7 +33,8 @@ public class DeleteAppointmentCommand extends Command {
             + PREFIX_DATE + "2024-12-31 15:23";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Successfully "
             + "deleted appointment to a patient";
-    public static final String MESSAGE_DELETE_APPOINTMENT_FAIL = "The appointment doesn't exist!";
+    public static final String MESSAGE_DELETE_APPOINTMENT_FAIL = "The appointment doesn't exist! "
+            + "Please check again the details you have entered!";
     private static final Logger logger = Logger.getLogger(DeleteAppointmentCommand.class.getName());
     private final int patientId;
     private final int doctorId;

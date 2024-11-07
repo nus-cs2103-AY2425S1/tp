@@ -71,7 +71,7 @@ public class CheckAppointmentCommandParserTest {
     @Test
     public void parse_idWrongFormat_failure() {
         String userInput = INVALID_ID_DESC + INVALID_APPOINTMENT_DATE_DESC;
-        assertParseFailure(parser, userInput, "Invalid Id entered! Check the id that you have entered! "
+        assertParseFailure(parser, userInput, "Invalid ID entered! Check the ID that you have entered! "
                 + "Make sure it is a number!");
     }
 }

@@ -715,7 +715,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Use non-existent patient or doctor IDs.
 
    2. Test case: `addA z/9999 z/5679 x/2024-12-31 15:23 r/consultation` (non-existent patient ID)  
-   Expected: No appointment is added. An error message "The doctor or the patient id that you have entered doesn't exist. Please enter again!" is displayed.
+   Expected: No appointment is added. An error message "The doctor or the patient ID that you have entered doesn't exist. Please enter again!" is displayed.
 
    3. Test case: `addA z/1234 z/9998 x/2024-12-31 15:23 r/consultation` (non-existent doctor ID)  
    Expected: No appointment is added. The same error message as above is displayed.
@@ -760,7 +760,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding remarks with non-existent patient ID
 
    1. Test case: `addR z/9999 r/Condition improving.` (where patient ID 9999 does not exist)  
-   Expected: No remarks are added. An error message "Unable to add remarks! Check the id entered!" is displayed, indicating that the patient ID is invalid.
+   Expected: No remarks are added. An error message "Unable to add remarks! Check the ID entered!" is displayed, indicating that the patient ID is invalid.
    
 1. Adding empty remarks
 
@@ -868,7 +868,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `mark z/1234 z/5679 x/2023-01-01 10:00`  
    Expected: The appointment is marked as complete if it exists. If marked, a success message is shown. If the appointment does not exist, an error message is displayed.
 
-### Getting id of a person
+### Getting ID of a person
 
 1. Get ID with an exact match of the name
    1. Prerequisites: Ensure a person with the name "John Philips" exists in the address book.

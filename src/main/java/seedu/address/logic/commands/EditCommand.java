@@ -41,7 +41,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the id of the person. "
+            + "by the ID of the person. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + "[" + PREFIX_ID + "ID] "
@@ -60,7 +60,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_EDIT_FAILURE = "Unable to "
-            + "find the person! Check the id entered!";
+            + "find the person! Check the ID entered!";
 
     private final EditPersonDescriptor editPersonDescriptor;
     private final int idToEdit;
