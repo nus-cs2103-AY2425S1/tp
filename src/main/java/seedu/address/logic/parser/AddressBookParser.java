@@ -178,6 +178,7 @@ public class AddressBookParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case EventAddAllCommand.COMMAND_WORD:
+        case EventAddAllCommand.COMMAND_WORD_SHORT_FORM:
             return new EventAddAllCommandParser().parse(arguments);
         default:
 

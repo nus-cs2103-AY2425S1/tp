@@ -25,6 +25,7 @@ import seedu.address.model.role.Volunteer;
  */
 public class EventAddAllCommand extends Command {
     public static final String COMMAND_WORD = "add-all";
+    public static final String COMMAND_WORD_SHORT_FORM = "aa";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT INDEX: Adds contacts listed in searchmode "
             + "to event. e.g. add-all 2";
     private Index targetIndex;
