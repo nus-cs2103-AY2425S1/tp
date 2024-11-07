@@ -117,12 +117,20 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (emergencyContactName == null || emergencyContactNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EmergencyContact.class.getSimpleName()));
+        final String emergencyName = (emergencyContactName == null || emergencyContactName.isBlank())
+                ? "No Name Entered" : emergencyContactName;
+        final String emergencyNumber = (emergencyContactNumber == null || emergencyContactNumber.isBlank())
+                ? "000" : emergencyContactNumber;
+
+        if (!Name.isValidName(emergencyName)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final EmergencyContact modelEmergencyContact = new EmergencyContact(new Name(emergencyContactName),
-                new Phone(emergencyContactNumber));
+        if (!Phone.isValidPhone(emergencyNumber)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+
+        final EmergencyContact modelEmergencyContact = new EmergencyContact(new Name(emergencyName),
+                new Phone(emergencyNumber));
 
         final PriorityLevel modelPriorityLevel;
 
