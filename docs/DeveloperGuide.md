@@ -364,15 +364,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 3a. Student is not found in the session list
-<<<<<<< HEAD
     * 3a1. Teletutors App displays an default placeholder message: `No students found.`
 
       Use case resumes from Step 2
-=======
-  * 3a1. Teletutors App displays an default placeholder message: `No students found.`
-
-    Use case resumes from Step 2
->>>>>>> 178988f591551519cd55cd6c8d5910c737f0143a
 
 
 **Use case: Delete student details**
@@ -443,13 +437,9 @@ testers are expected to do more *exploratory* testing.
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-<<<<<<< HEAD
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-=======
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
->>>>>>> 178988f591551519cd55cd6c8d5910c737f0143a
+
 
 1. _{ more test cases …​ }_
 
