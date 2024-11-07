@@ -308,7 +308,7 @@ Priorities:
 
 ### Use Cases
 
-(For all use cases below, the **System** is *Bridal Boss* and the **Actor** is the *Wedding Organizer*.)
+For all use cases below, refer to the [User Guide](UserGuide.md) for more details.
 
 #### **Use Case: Add a Contact**
 
