@@ -433,19 +433,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format entered by the user is invalid.
     * 1a1. System shows an error message and displays the correct command format.
-    * Use case ends.
+    
+      Use case ends.
 
 * 1a. The event name is invalid.
     * 1a1. System shows an error message indicating the name format is incorrect.
-    * Use case ends.
+    
+      Use case ends.
 
 * 1b. The date format is invalid.
     * 1b1. System shows an error message indicating the date format is incorrect.
-    * Use case ends.
+    
+      Use case ends.
 
 * 1c. The event already exists in the system.
     * 1c1. System shows an error message indicating a duplicate event.
-    * Use case ends.
+      
+      Use case ends.
 
 ---
 
