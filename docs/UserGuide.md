@@ -290,7 +290,7 @@ Clears all contacts from the address book.
 
 Format: `clear`
 
-### Undo latest change to contact data: `undo`
+### Undoing latest change to contact data: `undo`
 Undoes the effect done by the latest data-modifying command, if any.
 
 Format: `undo`
@@ -299,6 +299,8 @@ Format: `undo`
 such as add, edit, delete or clear.
 * Commands that does not modify contact data in the address book(list, help, find etc.)
 are not considered by the undo command.
+* If you input `undo` when there's nothing to undo, GUI will remind you about this
+and no effect would be applied to the address book.
 
 Examples:
 * If you accidentally delete a contact using the `delete` command,
@@ -306,6 +308,20 @@ you can revert this change by input `undo` command.
 * Similarly, if you accidentally clear the whole address book using the `clear` command,
 you can restore the whole address book using `undo` command as well.
 * Wrong adding/editing of contact info can be reverted by inputting `undo` as well.
+
+### Redoing latest undone change to contact data: `redo`
+Redoes the latest undone modification on contact data, if any.
+
+Format: `redo`
+
+* Redo only helps to restore command results that can be handled by undo command,
+such as add, edit, delete and clear.
+* If you input `redo` when there's nothing to undo, GUI will remind you about this
+and no effect would be applied to the address book.
+
+Examples:
+* If you undo a change to the contact data, but end up thinking that it may be
+better to keep it, you can input `redo` after undo the change to restore it back.
 
 ### Exiting the program : `exit`
 
