@@ -379,7 +379,7 @@ What you'll need:
 - Event Name: Alphanumeric characters and spaces only, 1-50 characters.
 - Location: Alphanumeric characters and spaces only, 1-100 characters.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01),
-- Start Time: 24-hour format HH:mm (e.g., 12:00).
+- Start Time: 24-hour Format HH:mm (e.g., 12:00).
 - End Time: 24-hour Format HH:mm (e.g., 15:00). Start time must be before end time.
 - Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
 
@@ -506,7 +506,7 @@ Don't worry about saving - VolunSync automatically saves everything you do! Ever
 
 1. **Trying To Modify Data Files?**
    - **Don't** modify the data files in the `data` folder
-   - Doing so may result in unexpected behaviour when using VolunSync
+   - Doing so may result in unexpected behaviour when using VolunSync, such as the app crashing
    - You may lose your data permanently
 
 These known issues are actively being worked on, and we are continuously improving VolunSync to provide a better experience. Please stay tuned for future updates!
