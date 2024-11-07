@@ -16,25 +16,28 @@
     --code-bg-color: rgba(202, 206, 255, 0.6);
     --box-bg-color: rgba(255, 130, 21, 0.6);
     --box-border-color: rgba(255, 130, 21, 0.75);
-    --warn-bg-color: rgba(255, 0, 0, 0.2);
-    --warn-border-color: rgba(255, 0, 0, 0.4);
+    --mistake-bg-color: rgba(255, 0, 0, 0.2);
+    --mistake-border-color: rgba(255, 0, 0, 0.4);
+    --warn-bg-color: rgba(255, 205, 0, 0.2);
+    --warn-border-color: rgba(255, 205, 0, 0.4);
     --info-bg-color: rgba(100, 150, 255, 0.2);
     --info-border-color: rgba(100, 150, 255, 0.4);
     --border-color: rgb(220, 220, 220);
     --black-color: rgb(0, 0, 0);
   }
 
-  img {
+  .ug-images img {
     pointer-events: none;
-    width: 70%;
-    margin: 24px 0 24px 15%;
+    width: 500px;
+    margin: 24px auto 24px auto;
     border-radius: 8px;
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
   }
 
-  .help-image {
-    width: 80%;
+  .ug-images {
     margin: auto;
+    display: flex;
+    justify-content: center;
   }
 
   .ug {
@@ -45,7 +48,7 @@
   .box {
     background-color: var(--box-bg-color) !important;
     padding: 8px 16px;
-    margin: 16px 0;
+    margin: 8px 0;
     border-radius: 5px;
     border: 2px solid var(--box-border-color);
   }
@@ -60,6 +63,12 @@
     background-color: var(--warn-bg-color) !important;
     padding: 16px 24px;
     border: 2px solid var(--warn-border-color);
+  }
+
+  .box-mistake {
+    background-color: var(--mistake-bg-color) !important;
+    padding: 16px 24px;
+    border: 2px solid var(--mistake-border-color);
   }
 
   .box > p {
@@ -267,7 +276,10 @@
    Alternatively, you can double-click the jar file to run the application (though we do not officially support it).
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   <div class="ug-images">
+   
    ![Ui](images/Ui.png)
+   </div>
 
 <br>
 
@@ -381,6 +393,9 @@
   <br>
 
   Deletes the potential hire/employee at the specified `INDEX`.
+<br>
+
+**Parameters:**
 
   `PARAMETER`:
   * `e` for employees
@@ -390,11 +405,14 @@
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
   * `INDEX` **must be within the size of the list** shown.
 
-  Examples:
+<br>
+
+**Examples:**
+
   * `list ph` followed by `delete ph 2` deletes the 2nd person in the potential hire list.
   * `find e n/Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
 
-  <div class="box box-warn" type="warning" seamless>
+  <div class="box box-mistake" type="warning" seamless>
 
   **Common Mistakes:**
   * `delete E 1` - You should type `e` instead of `E` as it is case-sensitive
@@ -425,18 +443,22 @@
 
   **Format**: `demote INDEX`
   </div>
-  <br>
+<br>
+
+**Parameters:**
 
   `INDEX`: The index number shown in the displayed person list.
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
   * `INDEX` **must be within the size of the list** shown.
   * The person at the `INDEX` must be an employee.
+<br>
 
-  Examples:
+**Examples:**
+
   * `list e` followed by `demote 2` demotes the 2nd person in the employee list.
   * `find e n/Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
 
-  <div class="box box-warn" type="warning" seamless>
+  <div class="box box-mistake" type="warning" seamless>
 
   **Common Mistakes:**
   * `list ph` followed by `demote 2` - cannot demote a potential hire
@@ -472,21 +494,27 @@
   <br>
 
   Edits the person at the specified `INDEX`.
+<br>
+
+**Parameters:**
 
   `INDEX`: The index number shown in the displayed person list.
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
   * `INDEX` **must be within the size of the list** shown.
 
-  Other Fields:
+**Optional Parameters:**
   * At least one of the optional fields must be provided.
   * Existing values will be updated to the input values.
+  * Refer to the `employee` command for each parameter's format.
 
   <div class="box" type="tip" seamless>
 
   **Tip:** It is not possible to edit the contract end date of a potential hire
   </div>
+<br>
 
-  Examples:
+**Examples:**
+
   *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
   *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
   </div>
@@ -517,19 +545,30 @@
   </div>
   <br>
 
+  **Parameters:**
+
+  `NAME`: Contains only alphanumeric characters and spaces, and it should not be blank
+
+  `PHONE_NUMBER`: Contains numbers that are at least 3 digits long
+
+  `EMAIL`: In the format local-part@domain
+
+  `ADDRESS`: Takes any values, and it should not be blank
+
+  `DEPARTMENT`: Takes any values, and it should not be blank
+
+  `ROLE`: Takes any values, and it should not be blank
+
+  `CONTRACT_END_DATE`: In the format of yyyy-MM-dd
+
   <div class="box" type="tip" seamless>
 
-  **Tips:** 
-  * All fields are mandatory
-  * Names should only contain alphanumeric characters and spaces, and it should not be blank
-  * Phone numbers should only contain numbers, and it should be at least 3 digits long
-  * Emails should be of the format local-part@domain
-  * Addresses can take any values, and it should not be blank
-  * Department can take any values, and it should not be blank
-  * Role can take any values, and it should not be blank
+  **Tip:** All fields are mandatory
   </div>
+<br>
 
-  Examples:
+**Examples:**
+
   * `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
   </div>
 </details>
@@ -579,38 +618,59 @@
 
   <div class="box box-info">
 
-  **Format**: `find (e/ph/all) [n/NAMES] [p/PHONE_NUMBERS] [e/EMAILS] [d/DEPARTMENTS] [r/ROLES]`
+  **Format**: `find PARAMETER [n/NAMES] [p/PHONE_NUMBERS] [e/EMAILS] [d/DEPARTMENTS] [r/ROLES]`
   </div>
-  
-* Only name, phone number, email, department and role can be searched.
-* Only full words will be matched. e.g. `find e n/Han` will not match `find e n/Hans`.
-* The search is case-insensitive. e.g. `find all n/hans` will match `find all n/Hans`.
-* Allows for searching of multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
-with name `alice`, with phone number `123445678` and with email `alice@example.com`.
-* Persons matching at least one keyword in every field specified will be returned.
-  e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
-  and with phone number either `12345678` or `87654321`.
-* The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
-`find all e/bob@example.com alice@example.com`.
-* The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match 
-`find all e/john@example.com n/john`.
+<br>
+
+**Parameters:** 
+
+  `PARAMETER`:
+  * `all` for all persons.
+  * `e` for employees.
+  * `ph` for potential hires.
+
+
+**Optional Parameters:**
+    
+  * Refer to the `employee` or `potential` command for each parameter's format.
+  * Only name, phone number, email, department and role can be searched.
+  * Only full words will be matched. e.g. `find e n/Han` will not match `find e n/Hans`.
+  * The search is case-insensitive. e.g. `find all n/hans` will match `find all n/Hans`.
+  * Allows for searching of multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
+  with name `alice`, with phone number `123445678` and with email `alice@example.com`.
+  * Persons matching at least one keyword in every field specified will be returned.
+    e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
+    and with phone number either `12345678` or `87654321`.
+  * The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
+  `find all e/bob@example.com alice@example.com`.
+  * The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match 
+  `find all e/john@example.com n/john`.
 
 
   <div class="box" type="tip" seamless>
 
   **Tip:** At least one keyword is required.
   </div>
+<br>
 
-  Examples:
+**Examples:**
+
   * `find all n/John p/12345678` returns persons with `John` in their name, and with phone number `12345678`
   * `find e p/12345678 e/john@example.com alice@example.com` returns employees with phone number `12345678` and with
   email either `john@example.com` or `alice@example.com`
   * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`
 
-Example: "find ph n/John".
-![result for 'find ph n/John'](images/findJohnResult.png)
+  <br>
+  Example: `find ph n/John`
+  </div>
 
-  <div class="box box-warn" type="warning" seamless>
+  <div class="command-content">
+  <div class="ug-images">
+   
+  ![result for 'find ph n/John'](images/findJohnResult.png)
+  </div>
+
+  <div class="box box-mistake" type="warning" seamless>
 
   **Common Mistakes:**
   * `find a n/John`: Invalid parameter
@@ -643,7 +703,7 @@ Example: "find ph n/John".
   **Format**: `help`
   </div>
 
-  <div class="help-image">
+  <div class="ug-images">
   
   ![Ui](images/helpWindow.png)
   </div>
@@ -676,12 +736,18 @@ Example: "find ph n/John".
 
   Lists type of persons based on the parameter given.
 
+<br>
+
+**Parameters:**
+
   `KEYWORD`:
   * `all` for all persons.
   * `ph` for potential hires.
   * `e` for employees.
+<br>
 
-  Examples:
+**Examples:**
+
   * `list all`
   * `list e`
   * `list ph`
@@ -712,19 +778,28 @@ Example: "find ph n/John".
   </div>
   <br>
 
+  **Parameters:**
+
+  `NAME`: Contains only alphanumeric characters and spaces, and it should not be blank
+
+  `PHONE_NUMBER`: Contains numbers that are at least 3 digits long
+
+  `EMAIL`: In the format local-part@domain
+
+  `ADDRESS`: Takes any values, and it should not be blank
+
+  `DEPARTMENT`: Takes any values, and it should not be blank
+
+  `ROLE`: Takes any values, and it should not be blank
+
   <div class="box" type="tip" seamless>
 
-  **Tips:**
-  * All fields are mandatory
-  * Names should only contain alphanumeric characters and spaces, and it should not be blank
-  * Phone numbers should only contain numbers, and it should be at least 3 digits long
-  * Emails should be of the format local-part@domain
-  * Addresses can take any values, and it should not be blank
-  * Department can take any values, and it should not be blank
-  * Role can take any values, and it should not be blank
+  **Tip:** All fields are mandatory
   </div>
+<br>
 
-  Examples:
+**Examples:**
+
   * `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
   </div>
 </details>
@@ -751,7 +826,10 @@ Example: "find ph n/John".
 
   **Format**: `promote INDEX CONTRACT_END_DATE`
   </div>
-  <br>
+
+<br>
+
+**Parameters:**
 
   `INDEX`: The index number shown in the displayed person list.
 
@@ -760,12 +838,14 @@ Example: "find ph n/John".
   * The person at the `INDEX` must be a potential hire
 
   `CONTRACT_END_DATE`: The contract end date of the employee in the format of yyyy-MM-dd.
+<br>
 
-  Examples:
+**Examples:**
+
   * `list ph` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
   * `find ph n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
 
-  <div class="box box-warn" type="warning" seamless>
+  <div class="box box-mistake" type="warning" seamless>
 
   **Common Mistakes:**
   * `promote 2 12-20-2025` - the contract end date is in the wrong date format
@@ -803,11 +883,19 @@ Example: "find ph n/John".
 
   Sorts the list by the given parameter in the given order.
 
+<br>
+
+**Parameters:**
+
   `FIELD`: The type of data you want to sort by.
   * `name` will sort the list based on the names of the contacts in alphabetical order.
   * `date` will sort the list based on the contract end dates of the employees.
   * `dept` will sort the list based on the department of the contacts in alphabetical order.
   * `role` will sort the list based on the roles of the contacts in alphabetical order.
+
+<br>
+
+**Optional Parameters:**
 
   `[ORDER]`: The order you wish to sort the list in. Defaults to ascending order if not specified.
   * `asc` will sort the list in ascending order.
@@ -820,8 +908,10 @@ Example: "find ph n/John".
   * When sort date is used, potential hires show up at the bottom as they do not have a contract end date.
   * If the order is left out StaffSync will sort in ascending order by default.
   </div>
+<br>
 
-  Examples:
+**Examples:**
+
   * `sort name` sorts all contacts by name in alphabetical order.
   * `sort date desc` sorts by contract end date with potential hires at the bottom.
   * `sort role asc` sorts contacts by role in alphabetical order.
@@ -879,7 +969,7 @@ StaffSync data are saved in the hard disk automatically after any command that c
 
   StaffSync data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div class="box box-warn" type="warning" seamless>
+<div class="box box-mistake" type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -888,7 +978,6 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 
 </div>
 
-</div>
 </div>
 
 <br>
