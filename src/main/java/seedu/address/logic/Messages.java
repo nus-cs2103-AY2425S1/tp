@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Volunteer;
 
 /**
  * Container for user visible messages.
@@ -53,19 +52,6 @@ public class Messages {
         person.getTags().forEach(builder::append);
         String roleSpecificInfo = getRoleSpecificInfoString(person);
         builder.append(roleSpecificInfo);
-        return builder.toString();
-    }
-
-
-
-    /**
-     * Formats the updated {@code volunteer}'s new hours for display to the user.
-     */
-    public static String formatSetVolunteerHours(Volunteer volunteer) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(volunteer.getName())
-                .append("; Hours Contributed: ")
-                .append(volunteer.getHours());
         return builder.toString();
     }
 }
