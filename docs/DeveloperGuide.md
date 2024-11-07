@@ -165,7 +165,6 @@ The UI consists of a `MainWindow` that is made up of the following parts:
 - `PersonListPanel`
   - `PersonCard`
 - `CommandBox`
-- `StatusBarFooter` 
 
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -652,7 +651,7 @@ The CommandResult object is then passed to the UI, which opens a panel displayin
 
 Our primary target users are Recruiters and HR professionals who are responsible for managing job candidates and employee information in mid-size companies.
 
-**Value proposition**: 
+**Value proposition**:
 
 Simplify and enhance the recruitment process for HR professionals and recruiters.
 

@@ -16,7 +16,6 @@ Class PersonCard
 Class OverviewPanel
 Class OverviewListCard
 Class ReportBugWindow
-Class StatusBarFooter
 Class CommandBox
 }
 
@@ -36,7 +35,6 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
 MainWindow *-down-> "1" OverviewPanel
 MainWindow --> "0..1" HelpWindow
 MainWindow --> "0..1" ReportBugWindow
@@ -52,7 +50,6 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 OverviewPanel --|> UiPart
 OverviewListCard --|> UiPart
-StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 ReportBugWindow --|> UiPart
 
@@ -64,7 +61,6 @@ MainWindow -left-> Logic
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
 @enduml
