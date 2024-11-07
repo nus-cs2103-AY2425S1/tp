@@ -72,7 +72,7 @@ public class UntagCommandParserTest {
     @Test
     public void parse_invalidIndex_failure() {
         String userInput = "untag 999 t/friends";
-        String expectedMessage = "Error: 1 or more contact indexes provided is invalid.";
+        String expectedMessage = "Error: Contact index must be a positive number.";
         assertParseFailure(parser, userInput, expectedMessage);
     }
 }
