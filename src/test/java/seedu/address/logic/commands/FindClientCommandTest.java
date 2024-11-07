@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -11,6 +13,7 @@ import static seedu.address.testutil.TypicalClients.ELLE;
 import static seedu.address.testutil.TypicalClients.FIONA;
 import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +22,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,6 +39,60 @@ import seedu.address.model.policy.PolicyType;
 public class FindClientCommandTest {
     private Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalPrudy(), new UserPrefs());
+
+    @Test
+    public void execute_modelReturnsNullList_throwsNullPointerException() {
+        // Create a custom Model implementation
+        Model modelWithNullFilteredList = new ModelManager(getTypicalPrudy(), new UserPrefs()) {
+            @Override
+            public ObservableList<Client> getFilteredClientList() {
+                return null; // Return null to simulate the edge case
+            }
+
+            @Override
+            public void updateFilteredClientList(Predicate<Client> predicate) {
+                // Do nothing or retain existing behavior
+            }
+        };
+
+        FindClientCommand command = new FindClientCommand(client -> true);
+
+        assertThrows(NullPointerException.class, () -> command.execute(modelWithNullFilteredList));
+    }
+
+    @Test
+    public void constructor_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new FindClientCommand(null));
+    }
+
+    @Test
+    public void constructor_validPredicate_success() {
+        Predicate<Client> validPredicate = client -> true;
+        FindClientCommand command = new FindClientCommand(validPredicate);
+        assertNotNull(command);
+    }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        Predicate<Client> validPredicate = client -> true;
+        FindClientCommand command = new FindClientCommand(validPredicate);
+        assertThrows(NullPointerException.class, () -> command.execute(null));
+    }
+
+    @Test
+    public void equals_otherCommandWithNullPredicate_returnsFalse() {
+        Predicate<Client> validPredicate = client -> true;
+        FindClientCommand command = new FindClientCommand(validPredicate);
+        FindClientCommand otherCommand = new FindClientCommand(validPredicate);
+        try {
+            Field predicateField = FindClientCommand.class.getDeclaredField("predicate");
+            predicateField.setAccessible(true);
+            predicateField.set(otherCommand, null);
+        } catch (Exception e) {
+            fail("Failed to set predicate to null using reflection");
+        }
+        assertFalse(command.equals(otherCommand));
+    }
 
     @Test
     public void equals() {
@@ -70,11 +128,6 @@ public class FindClientCommandTest {
 
         // different predicates -> returns false
         assertFalse(findClientCommand1.equals(findClientCommand2));
-    }
-
-    @Test
-    public void constructor_nullPredicate_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> new FindClientCommand(null));
     }
 
     @Test
@@ -155,16 +208,5 @@ public class FindClientCommandTest {
         FindClientCommand findClientCommand = new FindClientCommand(compositePredicate);
         String expected = FindClientCommand.class.getCanonicalName() + "{predicate=" + compositePredicate + "}";
         assertEquals(expected, findClientCommand.toString());
-    }
-
-    @Test
-    public void execute_nullModel_throwsNullPointerException() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice"));
-        List<Predicate<Client>> predicatesList = new ArrayList<>();
-        predicatesList.add(predicate);
-        CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
-
-        FindClientCommand command = new FindClientCommand(compositePredicate);
-        assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 }

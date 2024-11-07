@@ -29,21 +29,26 @@ public class FindClientCommand extends Command {
      *
      * @param predicate The predicate used to filter clients based on specified criteria.
      *                  Must not be {@code null}.
-     * @throws AssertionError if {@code predicate} is {@code null}.
+     * @throws NullPointerException if {@code predicate} is {@code null}.
      */
     public FindClientCommand(Predicate<Client> predicate) {
-        assert predicate != null : "Predicate should not be null";
+        requireNonNull(predicate, "Predicate should not be null");
         this.predicate = predicate;
     }
+
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredClientList(predicate);
-        assert model.getFilteredClientList() != null : "Filtered client list should not be null";
-        assert model.getFilteredClientList().size() >= 0 : "Filtered client list size should be non-negative";
+
+        if (model.getFilteredClientList() == null) {
+            throw new NullPointerException("Filtered client list is null");
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredClientList().size()));
+                String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW,
+                model.getFilteredClientList().size()));
     }
 
     @Override
