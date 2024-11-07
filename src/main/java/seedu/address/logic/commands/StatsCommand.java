@@ -18,10 +18,10 @@ public class StatsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         int[] guestCounts = model.getFilteredGuestListCount();
         int vendorCount = model.getFilteredVendorListCount();
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(Messages.getSuccessMessageWithStats(MESSAGE_STATS_SUCCESS, guestCounts, vendorCount));
     }
 }

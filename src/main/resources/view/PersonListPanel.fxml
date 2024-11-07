@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ScrollBar?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="panel-container" stylesheets="PersonListPanel.css">
     <Label fx:id="titleLabel" styleClass="label-header" />
     <Separator prefWidth="248.0" styleClass="separator" />
@@ -19,6 +20,7 @@
     </VBox>
     <VBox fx:id="personListContainer" VBox.vgrow="ALWAYS" visible="false" managed="false">
         <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+        <ScrollBar fx:id="horizontalSb" />
     </VBox>
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />

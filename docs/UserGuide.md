@@ -22,6 +22,11 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 1. [**Helpful Guidelines for the User Guide**](#helpful-guidelines-for-the-user-guide)
 2. [**Quick Start**](#quick-start)
 3. [**Tutorial for Beginners**](#tutorial-for-beginners)
+   * [**Starting a fresh template**](#starting-a-fresh-template)
+   * [**Adding guests**](#adding-guests)
+   * [**Adding vendors**](#adding-vendors)
+   * [**Deleting persons**](#deleting-persons)
+   * [**Exiting the program**](#exiting-the-program)
 4. [**Features**](#features)
     * [**General Commands**](#general-commands)
         * [`help` Viewing help](#viewing-help-help)
@@ -31,13 +36,13 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
         * [`stats` Viewing the wedding statistics](#viewing-statistics-stats)
         * [`exit` Exiting the program](#exiting-the-program-exit)
     * [**Guest Related Commands**](#guest-related-commands)
-        * [`add_guest` Adding a new guest to the guest list](#adding-a-guest-add_guest)
-        * [`edit_guest` Editing the details of a guest](#editing-a-guest-edit_guest)
-        * [`delete_guest` Deleting a guest from the guest list](#deleting-a-guest-delete_guest)
+        * [`add_guest` Adding a new guest to the guest list](#adding-a-guest-add-guest)
+        * [`edit_guest` Editing the details of a guest](#editing-a-guest-edit-guest)
+        * [`delete_guest` Deleting a guest from the guest list](#deleting-a-guest-delete-guest)
     * [**Vendor Related Commands**](#vendor-related-commands)
-        * [`add_vendor` Adding a vendor to the vendor list](#adding-a-vendor-add_vendor)
-        * [`edit_vendor` Editing the details of a vendor](#editing-a-vendor-edit_vendor)
-        * [`delete_vendor` Deleting a vendor from the vendor list](#deleting-a-vendor-delete_vendor)
+        * [`add_vendor` Adding a vendor to the vendor list](#adding-a-vendor-add-vendor)
+        * [`edit_vendor` Editing the details of a vendor](#editing-a-vendor-edit-vendor)
+        * [`delete_vendor` Deleting a vendor from the vendor list](#deleting-a-vendor-delete-vendor)
     * [**Other Useful Features**](#other-useful-features)
         * [Saving the data](#saving-the-data)
         * [Editing the data file](#editing-the-data-file)
@@ -296,7 +301,7 @@ Finds guests and vendors that match any of the given keyword(s).
 
 **Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
-> :warning: Only one type of prefix should be used for each find command.
+> :warning: Only one type of [prefix](#glossary) should be used for each find command.
 
 - Specifying multiple different prefixes (e.g. `find n/John p/12345`) will result in an invalid command
 - The prefix specified in the command indicates the attribute to be searched (e.g. `find n/NAME` searches for guests and vendors whose name matches the given keyword)
@@ -529,7 +534,6 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 [_Back to Top_](#table-of-contents)
 

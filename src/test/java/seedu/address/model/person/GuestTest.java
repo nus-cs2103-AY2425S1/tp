@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RELATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RSVP_PENDING;
@@ -91,10 +92,18 @@ public class GuestTest {
         // null -> returns false
         assertFalse(AMY.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Guest editedAmy = new GuestBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        // same name and phone number, all other attributes different -> returns true
+        Guest editedAmy = new GuestBuilder(AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(AMY.isSamePerson(editedAmy));
+
+        // same name, all other attributes different -> returns false
+        editedAmy = new GuestBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(AMY.isSamePerson(editedAmy));
+
+        // same phone number, all other attributes different -> returns false
+        editedAmy = new GuestBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(AMY.isSamePerson(editedAmy));
 
         // different name, all other attributes same -> returns false
         editedAmy = new GuestBuilder(AMY).withName(VALID_NAME_BOB).build();
