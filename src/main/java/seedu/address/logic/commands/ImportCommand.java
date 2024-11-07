@@ -92,7 +92,7 @@ public class ImportCommand extends Command {
         // Check if the file has a .csv extension
         String fileName = filePath.getFileName().toString();
         if (!fileName.toLowerCase().endsWith(".csv")) {
-            throw new CommandException(MESSAGE_INCORRECT_FILE_FORMAT);
+            return false;
         }
         // Proceed to check the header format
         try (BufferedReader br = Files.newBufferedReader(filePath)) {
