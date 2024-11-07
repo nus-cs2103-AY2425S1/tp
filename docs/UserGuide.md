@@ -368,6 +368,7 @@ clear
 
 <div style="page-break-after: always;"></div>
 <br>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -417,7 +418,7 @@ _Details coming soon ..._
 
 ## Command Summary
 | Action                      | Format, Examples                                                                                                                                                                                                                          |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| --------------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/UNIVERSITY m/MAJOR b/BIRTHDATE [w/WORK_EXPERIENCE]... [i/INTEREST]... [t/TAG]...`<br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St u/NUS m/Engineering b/13-12-2003` |
 | **Add Interests**           | `addi in/INDEX i/INTEREST...` <br> e.g., `addi in/1 i/Swimming`                                                                                                                                                                           |
 | **Add Work Experience**     | `addw in/INDEX w/ROLE,COMPANY,YEAR` <br> e.g., `addw in/1 w/Software Engineer,Google,2023`                                                                                                                                                |
@@ -428,7 +429,7 @@ _Details coming soon ..._
 | **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                               |
 | **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                |
 | **Find by Interest**        | `findi i/INTEREST` <br> e.g., `findi i/Swimming`                                                                                                                                                                                          |
-| **Find by Work Experience** | `findw w/ROLE,COMPANY` <br> e.g., `findw w/Engineer,Google`                                                                                                                                                                               |
+| **Find by Work Experience** | `findw w/[ROLE],COMPANY,[YEAR]` <br> e.g., `findw w/Engineer,Google`,`findw w/Google`, `findw w/Google, 2024`                                                                                                                             |
 | **Find by University**      | `findu u/UNIVERSITY` <br> e.g., `findu u/NUS`                                                                                                                                                                                             |
 | **Find by Major**           | `findm m/MAJOR` <br> e.g., `findm m/Computer Science`                                                                                                                                                                                     |
 | **List**                    | `list`                                                                                                                                                                                                                                    |

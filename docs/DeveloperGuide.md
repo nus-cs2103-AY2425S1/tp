@@ -25,7 +25,6 @@ Additionally, we acknowledge the following resources and tools that contributed 
 * **IntelliJ IDEA**: The primary Integrated Development Environment (IDE) used for writing and debugging the codebase.
 * **MarkBind**: Used for generating and maintaining the project’s documentation website, ensuring an organized and accessible layout.
 * **GitHub Actions**: Implemented for continuous integration and automated testing to catch potential issues early in the development cycle.
-* **Various open-source Java libraries**, including Apache Commons and Google Guava, were utilized for utility functions and collections enhancements.
 
 Special thanks to the **CS2103/T teaching team** for their structured guidance, feedback, and provision of relevant learning materials that helped shape this project.
 
@@ -79,6 +78,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -95,6 +97,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -128,6 +132,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 In addition to the original AB3 features, the `Logic` component has been extended to support new commands such as adding interests, work experience, and finding contacts based on various criteria. The class diagram below showcases these new features integrated into the `Command` structure:
 
@@ -181,7 +187,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -293,6 +299,8 @@ _{more aspects and alternatives to be added}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ## **Appendix: Requirements**
 
@@ -323,9 +331,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | aspiring university student | search for contacts by their internship or work experience                                              | network with people who have relevant industry experience |
 | `* * *`  | lonely university student   | add interests and hobbies to a contact                                                                  | remember what we have in common                           |
 | `* * *`  | sociable university student | search for contacts by their interests                                                                  | connect with people with similar interests                |
-
+| `* *`    | university student          | add what year or alumni a contact is in                                                       | filter my search better                                           |
+| `*`      | university student          | add social media links (e.g., LinkedIn, Instagram) to a contact                               | easily connect with them on other platforms                       |
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -547,6 +557,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Auto-Save**: A feature that saves changes automatically without requiring explicit user action to prevent data loss.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -609,6 +620,8 @@ This command adds work experience to a contact, replacing any existing work expe
 **Test case 3:** `addw in/3 w/`
 
 ***Expected:*** Error message due to incomplete work experience details.
+
+<div style="page-break-after: always;"></div>
 
 ### 3. Finding Contacts by Interest: `findi`
 
@@ -673,6 +686,7 @@ This command finds contacts by university. It requires a university. University 
 ***Expected:*** Error message due to missing university name.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### Appendix: Effort
 
