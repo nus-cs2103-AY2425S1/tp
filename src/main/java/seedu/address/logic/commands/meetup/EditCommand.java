@@ -55,7 +55,7 @@ public class EditCommand extends Command {
             + PREFIX_ADDED_BUYER + "David Li ";
 
     public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited meet-up: %1$s";
-    public static final String MESSAGE_MEETUP_NOT_EDITED = "Please check for missing fields or invalid format.";
+    public static final String MESSAGE_MEETUP_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the meet-up list.";
 
     private final Index targetIndex;
