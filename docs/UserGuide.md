@@ -120,16 +120,29 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
-<box type="tip" seamless>
+> [!Note]
+> * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
+> * A person can have up to 10 tags (including 0).
+> * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
+> * `PHONE_NUMBER` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `EMAIL` should be of the format local-part@domain
+> * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
-**Tip:** A person can have up to 10 tags (including 0).
-</box>
+> [!Warning]
+> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
+
+
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/Resident Assistant e/betsycrowe@example.com a/Newgate Street p/1234567 t/Floor 1`
+
+The following screenshot shows the results of executing `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+
+![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
 
 ### Listing all persons : `list`
 
@@ -141,7 +154,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -206,6 +219,9 @@ Format: `clear`
 Removes all graduated students from the address book based on the current year and their graduation year.
 
 Format: `clean`
+
+> [!Tip]
+> If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
 
 Examples of usage:
 
