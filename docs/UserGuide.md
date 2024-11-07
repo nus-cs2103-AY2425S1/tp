@@ -50,8 +50,6 @@ By following these sections, you can quickly find the information you need and m
 
 <img src="images/Quickstart-new-terminal.png" alt="NewTerminal">
 
-
-
 5. Type the command in the [command box](#command-box) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -177,7 +175,7 @@ Valid inputs for sort order parameter: `timeadded`, `timeadded asc`, `timeadded 
 </div>
 
 * `SORT_ORDER` parameter is **optional**. If parameter is not provided, the patients listed will be sorted in the order they were added. The patient who was added the most recently will be at the bottom of the list.
-* `timeadded`, `timeadded asc` and `timeadded desc` will sort the patient list according to the time they were added to Medconnect.
+* `timeadded`, `timeadded asc` and `timeadded desc` will sort the patient list according to the time they were added to MedConnect.
 * `timeadded` and `timeadded asc` will sort the patient list from least to most recently added. `timeadded desc` will sort the patient list from most to least recently added.
 <br><br>
 * `name`, `name asc` and `name desc` will sort the patient list according to their name in alphabetical order.
@@ -214,7 +212,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* Only the name is searched.
+* **Only the patient's name is searched.**
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Names will match if the keyword is found in any part of the name. For example, `Ha` will match `Hans`
@@ -292,19 +290,19 @@ Examples:
 
 [↑ Back to top](#table-of-contents)
 
-### Listing all archived data files: `listArchives`
+### Listing all archived data files: `listarchives`
 
 Lists the names of all the archived data files in the archive folder.
 
-Format: `listArchives`
+Format: `listarchives`
 
 [↑ Back to top](#table-of-contents)
 
-### Loading data from an archived data file: `loadArchive`
+### Loading data from an archived data file: `loadarchive`
 
 Loads the data from an archived data file into the address book.
 
-Format: `loadArchive FILE_NAME`
+Format: `loadarchive FILE_NAME`
 
 * The `FILE_NAME` must be the name of an archived data file in the archive folder.
 * The data from the archived file will replace the current data in the address book.
@@ -315,21 +313,24 @@ Did you accidentally load an archive and want your old data back? Enter the 'und
 </div>
 
 Examples:
-* `loadArchive addressbook-20241023_114324-example.json` Loads the data from the archived file named `addressbook-20241023_114324-example.json` into the address book.
+* `loadarchive addressbook-20241023_114324-example.json` Loads the data from the archived file named `addressbook-20241023_114324-example.json` into the address book.
 
 [↑ Back to top](#table-of-contents)
 
-### Deleting an archived data file: `deleteArchive`
+### Deleting an archived data file: `deletearchive`
 
 Deletes the data of an existing archived data file in the archives folder.
 
-Format: `deleteArchive FILE_NAME`
+Format: `deletearchive FILE_NAME`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Deleting an archive file is permanent. The `undo` command cannot restore a deleted archive file.
 </div> <br>
 
 * The `FILE_NAME` must be the name of an archived data file in the archive folder.
+
+Examples:
+* `deletearchive addressbook-20241023_114324-example.json` Deletes the archived file with the file name `addressbook-20241023_114324-example.json`.
 
 [↑ Back to top](#table-of-contents)
 
@@ -348,7 +349,7 @@ Format: `undo`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 An action cannot be undone once you close the MedConnect application.
-</div> <br>
+</div>
 
 [↑ Back to top](#table-of-contents)
 
@@ -388,10 +389,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedConnect home folder.
 
-**Q**: How do I change the AddressBook home folder?<br>
-**A**: The AddressBook home folder is set to the folder where the `medconnect.jar` file is located. If you want to change it, move the `medconnect.jar` file and all the files in the original home folder to the new folder.
+**Q**: How do I change the MedConnect home folder?<br>
+**A**: The MedConnect home folder is set to the folder where the `medconnect.jar` file is located. If you want to change it, move the `medconnect.jar` file and all the files in the original home folder to the new folder.
 
 [↑ Back to top](#table-of-contents)
 
@@ -407,6 +408,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ---
 
 ## Glossary
+
 | Term            | Details      | Example |
 |-----------------|--------------|---------|
 | **Alphanumeric**|Characters that are either numbers or letters.|1, 2, 3, A, b, c are alphanumeric characters.|
@@ -428,14 +430,14 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Archive** | `archive [DESCRIPTION]` <br> e.g., `archive before major update`|
 | **Clear**  | `clear`|
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`|
-| **Delete Archive File** | `deleteArchive FILE_NAME` <br> e.g., `deleteArchive addressbook-20241106_014247.json`|
+| **Delete Archive File** | `deletearchive FILE_NAME` <br> e.g., `deletearchive addressbook-20241106_014247.json`|
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`|
 | **Find Doctor** | `finddoc KEYWORD [MORE_KEYWORDS]` <br> e.g., `find Tan Sheeran`|
 | **Help**   |`help`|
 | **List**   |`list [SORT_ORDER]` <br> e.g., `list timeadded desc`|
-| **List Archive Files** | `listArchives`|
-| **Load Archive File** | `loadArchive FILE_NAME` <br> e.g., `loadArchive addressbook-20241106_010856.json`|
+| **List Archive Files** | `listarchives`|
+| **Load Archive File** | `loadarchive FILE_NAME` <br> e.g., `loadarchive addressbook-20241106_010856.json`|
 | **Redo**   |`redo`|
 | **Undo**   |`undo`|
 
