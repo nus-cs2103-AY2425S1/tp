@@ -2,12 +2,13 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
 /**
- * Represents an Allergy in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidAllergyName(String)}
+ * Represents an Allergy in MediBase3.
+ * Guarantees: immutable; allergy name is validated to be non-empty, alphanumeric, and does not exceed 30 characters.
  */
 public class Allergy implements Comparable<Allergy> {
 
@@ -18,25 +19,36 @@ public class Allergy implements Comparable<Allergy> {
     public final String allergyName;
 
     /**
-     * Constructs a {@code Allergy}.
+     * Constructs a {@code Allergy} object with the specified allergy string.
      *
      * @param allergyName A valid allergy name.
      */
     public Allergy(String allergyName) {
         requireNonNull(allergyName);
         checkArgument(!allergyName.isEmpty(), MESSAGE_EMPTY_FIELD);
-        checkArgument(isValidAllergyName(allergyName), MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
+        checkArgument(isValidLength(allergyName), MESSAGE_CONSTRAINTS_LENGTH);
+        checkArgument(isAlphanumeric(allergyName), MESSAGE_CONSTRAINTS_ALPHANUMERIC);
         this.allergyName = allergyName.toUpperCase();
     }
 
     /**
-     * Returns true if a given string is a valid allergy name.
+     * Returns true if a given string contains only alphanumeric characters.
+     *
+     * @param allergy The string to be validated.
+     * @return true if the string contains only alphanumeric characters.
      */
-    public static boolean isValidAllergyName(String allergy) {
-        if (allergy == null || allergy.isEmpty()) {
-            return false;
-        }
-        return allergy.matches(VALIDATION_REGEX) && allergy.length() <= 30;
+    public static boolean isAlphanumeric(String allergy) {
+        return allergy != null && allergy.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the given string does not exceed the maximum length.
+     *
+     * @param allergy The string to be validated.
+     * @return true if the string length is less than or equal to 30.
+     */
+    public static boolean isValidLength(String allergy) {
+        return allergy != null && allergy.length() <= 30;
     }
 
     @Override

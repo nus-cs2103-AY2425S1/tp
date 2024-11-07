@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC;
 import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
@@ -164,9 +164,9 @@ public class ParserUtil {
     /**
      * Parses and validates the given allergy string.
      *
-     * @param allergyStr The medical condition string to parse.
+     * @param allergyStr The allergy string to parse.
      * @return A {@code Allergy} object.
-     * @throws ParseException If the allergy string is invalid.
+     * @throws ParseException If the allergy string is empty, exceeds 30 characters, or contains invalid characters.
      */
     public static Allergy parseAllergy(String allergyStr) throws ParseException {
         requireNonNull(allergyStr);
@@ -175,7 +175,7 @@ public class ParserUtil {
         } else if (allergyStr.length() > 30) {
             throw new ParseException("Allergy " + MESSAGE_CONSTRAINTS_LENGTH);
         } else if (!allergyStr.matches(Allergy.VALIDATION_REGEX)) {
-            throw new ParseException("Allergy " + MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
+            throw new ParseException("Allergy " + MESSAGE_CONSTRAINTS_ALPHANUMERIC);
         }
         return new Allergy(allergyStr);
     }
@@ -203,7 +203,8 @@ public class ParserUtil {
      *
      * @param medConStr The medical condition string to parse.
      * @return A {@code MedCon} object.
-     * @throws ParseException If the medical condition string is invalid.
+     * @throws ParseException If the medical condition string is empty, exceeds 30 characters,
+     *     or contains invalid characters.
      */
     public static MedCon parseMedCon(String medConStr) throws ParseException {
         requireNonNull(medConStr);
@@ -212,7 +213,7 @@ public class ParserUtil {
         } else if (medConStr.length() > 30) {
             throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_LENGTH);
         } else if (!medConStr.matches(MedCon.VALIDATION_REGEX)) {
-            throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
+            throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_ALPHANUMERIC);
         }
         return new MedCon(medConStr);
     }

@@ -2,12 +2,14 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
 /**
- * Represents a patient's medical condition in the address book.
- * Guarantees: The priority is immutable and always valid.
+ * Represents a patient's medical condition in MediBase3.
+ * Guarantees: immutable; medical condition name is validated to be non-empty, alphanumeric,
+ * and does not exceed 30 characters.
  */
 public class MedCon implements Comparable<MedCon> {
 
@@ -22,7 +24,8 @@ public class MedCon implements Comparable<MedCon> {
     public MedCon(String medConName) {
         requireNonNull(medConName);
         checkArgument(!medConName.isEmpty(), MESSAGE_EMPTY_FIELD);
-        checkArgument(isValidMedConName(medConName), MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
+        checkArgument(isValidLength(medConName), MESSAGE_CONSTRAINTS_LENGTH);
+        checkArgument(isAlphanumeric(medConName), MESSAGE_CONSTRAINTS_ALPHANUMERIC);
         this.medConName = medConName.toUpperCase();
     }
 
@@ -30,15 +33,37 @@ public class MedCon implements Comparable<MedCon> {
      * Returns true if a given string is a valid medical condition name.
      *
      * @param medCon the string to be validated
-     * @return true if the string is not empty and does not exceed 45 characters.
+     * @return true if the string passes both alphanumeric and length validation.
      */
     public static boolean isValidMedConName(String medCon) {
+        return isAlphanumeric(medCon) && isValidLength(medCon);
+    }
+
+    /**
+     * Returns true if the given string is alphanumeric.
+     *
+     * @param medCon the string to be validated
+     * @return true if the string matches the alphanumeric regex.
+     */
+    public static boolean isAlphanumeric(String medCon) {
         if (medCon == null || medCon.isEmpty()) {
             return false;
         }
-        return medCon.matches(VALIDATION_REGEX) && medCon.length() <= 30;
+        return medCon.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the given string is of valid length.
+     *
+     * @param medCon the string to be validated
+     * @return true if the string does not exceed 30 characters.
+     */
+    public static boolean isValidLength(String medCon) {
+        if (medCon == null) {
+            return false;
+        }
+        return medCon.length() <= 30;
+    }
 
     /**
      * Returns the medical condition of the patient.
