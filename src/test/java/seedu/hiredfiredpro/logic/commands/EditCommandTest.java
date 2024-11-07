@@ -11,9 +11,13 @@ import static seedu.hiredfiredpro.logic.commands.CommandTestUtil.VALID_TAG_HUSBA
 import static seedu.hiredfiredpro.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.hiredfiredpro.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.hiredfiredpro.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.hiredfiredpro.logic.commands.EditCommand.createEditedPerson;
 import static seedu.hiredfiredpro.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.hiredfiredpro.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.hiredfiredpro.testutil.TypicalPersons.getTypicalHiredFiredPro;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +28,14 @@ import seedu.hiredfiredpro.model.HiredFiredPro;
 import seedu.hiredfiredpro.model.Model;
 import seedu.hiredfiredpro.model.ModelManager;
 import seedu.hiredfiredpro.model.UserPrefs;
+import seedu.hiredfiredpro.model.person.Email;
+import seedu.hiredfiredpro.model.person.InterviewScore;
+import seedu.hiredfiredpro.model.person.Job;
+import seedu.hiredfiredpro.model.person.Name;
 import seedu.hiredfiredpro.model.person.Person;
+import seedu.hiredfiredpro.model.person.Phone;
+import seedu.hiredfiredpro.model.skill.Skill;
+import seedu.hiredfiredpro.model.tag.Tag;
 import seedu.hiredfiredpro.testutil.EditPersonDescriptorBuilder;
 import seedu.hiredfiredpro.testutil.PersonBuilder;
 
@@ -80,6 +91,42 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new HiredFiredPro(model.getHiredFiredPro()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyTagRetainsHired() {
+        Person hiredPerson = new Person(
+                new Name("Amy Bee"),
+                new Job("Software Engineer"),
+                new Phone("85355255"),
+                new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
+                new HashSet<>(Set.of(new Tag("hired")))
+        );
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setTags(null);
+        Person editedPerson = createEditedPerson(hiredPerson, descriptor);
+
+        assertTrue(editedPerson.isHired());
+    }
+
+    @Test
+    public void execute_emptyTagRetainsRejected() {
+        Person rejectedPerson = new Person(
+                new Name("Amy Bee"),
+                new Job("Software Engineer"),
+                new Phone("85355255"),
+                new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
+                new HashSet<>(Set.of(new Tag("rejected")))
+        );
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setTags(null);
+        Person editedPerson = createEditedPerson(rejectedPerson, descriptor);
+
+        assertTrue(editedPerson.isRejected());
     }
 
     @Test

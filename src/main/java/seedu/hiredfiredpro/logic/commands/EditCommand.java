@@ -99,7 +99,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -109,9 +109,16 @@ public class EditCommand extends Command {
         Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
         InterviewScore updatedInterviewScore = editPersonDescriptor.getInterviewScore()
                 .orElse(personToEdit.getInterviewScore());
+
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        return new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedSkills,
+        Person editedPerson = new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedSkills,
                 updatedInterviewScore, updatedTags);
+        if (personToEdit.isHired()) {
+            editedPerson.markAsHired();
+        } else if (personToEdit.isRejected()) {
+            editedPerson.markAsRejected();
+        }
+        return editedPerson;
     }
 
     @Override
