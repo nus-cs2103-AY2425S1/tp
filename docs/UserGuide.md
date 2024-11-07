@@ -18,12 +18,16 @@ This user guide will walk you through:
 
 By the end of this guide, you'll be a ResearchRoster pro, saving time and streamlining your research process.​
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -48,6 +52,8 @@ By the end of this guide, you'll be a ResearchRoster pro, saving time and stream
    <br>5.1 Type in `java -jar "researchroster.jar"`.
    <br>5.2 Press `Enter` to run the command.
 
+<div style="page-break-after: always;"></div>
+
 ### Introduction to the GUI
 
 Upon running ResearchRoster, a GUI similar to below should be displayed.
@@ -63,6 +69,8 @@ Upon running ResearchRoster, a GUI similar to below should be displayed.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 ResearchRoster provides sample data upon first run.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### CLI Tutorial
 
@@ -82,6 +90,8 @@ Below are some example commands for you to try out!
 _Refer to the [Features](#features) section for details of each command!_
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
