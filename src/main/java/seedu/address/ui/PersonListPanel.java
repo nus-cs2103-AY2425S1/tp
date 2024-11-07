@@ -236,9 +236,10 @@ public class PersonListPanel extends UiPart<Region> {
                      * Only auto-scroll for the first change.
                      * Hence, we use the below if check to enforce this.
                      */
+
                     if (change.getAddedSize() == 1) {
                         Platform.runLater(() -> {
-                            personListView.scrollTo(change.getTo());
+                            personListView.scrollTo(change.getTo() - 1);
                             personListView.getSelectionModel().select(change.getTo() - 1);
                         });
                         break;
@@ -254,15 +255,6 @@ public class PersonListPanel extends UiPart<Region> {
                         }
                         personListView.scrollTo(removalIndex);
                         personListView.getSelectionModel().select(removalIndex);
-                    });
-                    break;
-                }
-
-                if (change.wasUpdated()) {
-                    Platform.runLater(() -> {
-                        int changeIndex = change.getFrom();
-                        personListView.scrollTo(changeIndex);
-                        personListView.getSelectionModel().select(changeIndex);
                     });
                     break;
                 }
