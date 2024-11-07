@@ -132,6 +132,11 @@ public class ModelManager implements Model {
         addressBook.sortByPin();
     }
 
+    @Override
+    public void sortByName() {
+        addressBook.sortByName();
+    }
+
     // Archive related Methods
     @Override
     public void archivePerson(Person person) {
