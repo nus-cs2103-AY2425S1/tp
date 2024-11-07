@@ -20,9 +20,6 @@ public class Person {
     private final Medication medication;
     private final Appointment appointment;
     private final Notes notes;
-    /*
-    private final Set<Tag> tags = new HashSet<>();
-     */
 
     /**
      * Every field must be present and not null.
@@ -66,7 +63,6 @@ public class Person {
         return diagnosis;
     }
 
-
     public Medication getMedication() {
         return medication;
     }
@@ -78,17 +74,6 @@ public class Person {
     public Appointment getAppointment() {
         return this.appointment;
     }
-
-    /*
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    /*
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-     */
 
     /**
      * Returns true if both persons have the same name.

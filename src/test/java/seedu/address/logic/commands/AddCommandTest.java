@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_WITH_SPECIAL_CHAR_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_WITH_SPECIAL_CHAR_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -52,6 +54,52 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personWithWardWithSpecialCharShowsWarning_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder()
+                .withWard(VALID_WARD_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(Messages.WARD_SPECIAL_CHARACTER
+                        + AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithIdWithSpecialCharShowsWarning_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder()
+                .withId(VALID_ID_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(Messages.ID_SPECIAL_CHARACTER
+                        + AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithWardAndIdWithSpecialCharShowsWarning_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder()
+                .withId(VALID_ID_WITH_SPECIAL_CHAR_BOB)
+                .withWard(VALID_WARD_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(Messages.WARD_ID_SPECIAL_CHARACTER
+                        + AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
     @Test

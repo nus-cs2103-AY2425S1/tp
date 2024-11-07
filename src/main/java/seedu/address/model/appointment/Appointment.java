@@ -12,11 +12,9 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class Appointment {
-
-    public static final String MESSAGE_CONSTRAINTS = "Appointment description cannot be empty and has a "
-            + "character limit of 100";
-    public static final String VALIDATION_REGEX = "^(?!\\s*$).{1,100}$";
-
+    public static final String MESSAGE_CONSTRAINTS = "Appointment description must contain at least 1 alphabetic"
+            + " character and has a limit of 80 characters.";
+    public static final String VALIDATION_REGEX = "^(?!\\s*$)(?=.*[a-zA-Z]).{1,80}$";
     private final String description;
     private final LocalDateTime start;
     private final LocalDateTime end;
@@ -49,9 +47,6 @@ public class Appointment {
     public LocalDateTime getEnd() {
         return this.end;
     }
-    public static boolean isValidDescription(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -68,6 +63,13 @@ public class Appointment {
         return description.equals(otherAppt.description)
                 && start.equals(otherAppt.start)
                 && end.equals(otherAppt.end);
+    }
+
+    /**
+     * Returns true if a given string is a valid appointment description.
+     */
+    public static boolean isValidDescription(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

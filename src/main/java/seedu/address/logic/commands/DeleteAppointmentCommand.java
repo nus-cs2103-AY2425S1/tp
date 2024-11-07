@@ -23,7 +23,7 @@ public class DeleteAppointmentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment from Person: %1$s";
+    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment from Person: \n\n%1$s";
     public static final String MESSAGE_NO_APPOINTMENT = "The Patient indicated does not have an appointment";
 
     private final Index targetIndex;
@@ -57,7 +57,7 @@ public class DeleteAppointmentCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, Messages.format(editedPerson)));
     }
 
     @Override

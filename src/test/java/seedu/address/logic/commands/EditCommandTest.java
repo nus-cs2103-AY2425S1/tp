@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_WITH_SPECIAL_CHAR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_WITH_SPECIAL_CHAR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -141,6 +143,76 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_wardContainsSpecialCharAndShowsWarning_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList.withWard(VALID_WARD_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withWard(VALID_WARD_WITH_SPECIAL_CHAR_BOB).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(Messages.WARD_SPECIAL_CHARACTER
+                + EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_idContainsSpecialCharAndShowsWarning_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList.withId(VALID_ID_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withId(VALID_ID_WITH_SPECIAL_CHAR_BOB).build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(Messages.ID_SPECIAL_CHARACTER
+                + EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_idAndWardContainsSpecialCharAndShowsWarning_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList
+                .withId(VALID_ID_WITH_SPECIAL_CHAR_BOB)
+                .withWard(VALID_WARD_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withId(VALID_ID_WITH_SPECIAL_CHAR_BOB)
+                .withWard(VALID_WARD_WITH_SPECIAL_CHAR_BOB)
+                .build();
+        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(Messages.WARD_ID_SPECIAL_CHARACTER
+                + EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

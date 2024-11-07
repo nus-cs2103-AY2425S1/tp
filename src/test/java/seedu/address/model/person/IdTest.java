@@ -20,6 +20,26 @@ public class IdTest {
     }
 
     @Test
+    public void containsSpecialChar() {
+        //no special char
+        Id id1 = new Id("P12345");
+        assertFalse(id1.containsSpecialChar());
+
+        Id id2 = new Id("Patient1235");
+        assertFalse(id2.containsSpecialChar());
+
+        //special char
+        Id id3 = new Id("P12356/");
+        assertTrue(id3.containsSpecialChar());
+
+        Id id4 = new Id("#P12345()");
+        assertTrue(id4.containsSpecialChar());
+
+        Id id5 = new Id("C135()()-");
+        assertTrue(id5.containsSpecialChar());
+    }
+
+    @Test
     public void isValidId() {
         // null id
         assertThrows(NullPointerException.class, ()-> Id.isValidId(null));

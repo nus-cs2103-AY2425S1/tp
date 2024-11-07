@@ -19,8 +19,8 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_ID = "P24689";
     public static final String DEFAULT_WARD = "A1";
-    public static final String DEFAULT_DIAGNOSIS = "Celiac Disease";
-    public static final String DEFAULT_MEDICATION = "gluten-free diet";
+    public static final String DEFAULT_DIAGNOSIS = "";
+    public static final String DEFAULT_MEDICATION = "";
     public static final String DEFAULT_NOTES = "";
     /*
     public static final String DEFAULT_PHONE = "85355255";
