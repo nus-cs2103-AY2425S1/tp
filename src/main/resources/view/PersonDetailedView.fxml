@@ -12,7 +12,7 @@
         <URL value="@PersonView.css" />
     </stylesheets>
 
-    <ImageView fx:id="profileImage" fitHeight="100" fitWidth="100" styleClass="image-view" />
+    <ImageView fx:id="profileImage" fitHeight="100" fitWidth="100" preserveRatio="true" styleClass="image-view" />
 
     <Label fx:id="name" text="\$first" styleClass="label-name" />
     <Label fx:id="phone" text="\$phone" styleClass="label-phone" />

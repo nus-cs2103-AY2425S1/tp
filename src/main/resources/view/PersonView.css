@@ -7,7 +7,7 @@
 /* Profile image */
 .image-view {
     -fx-background-radius: 50;
-    -fx-effect: innershadow(gaussian, black, 4, 0.2, 2, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.2, 0, 2);
 }
 
 /* Name label (blue, bold) */
