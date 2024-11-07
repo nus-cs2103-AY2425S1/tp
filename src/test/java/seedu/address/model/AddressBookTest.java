@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramHandle;
@@ -114,6 +115,12 @@ public class AddressBookTest {
         @Override
         public boolean hasPhoneNumber(Phone phone) {
             // This is a stub method for testing purposes, returning false by default.
+            return true;
+        }
+
+        @Override
+        public boolean hasEmail(Email email) {
+            // This is a stub method for testing purposes, returning fa
             return true;
         }
     }

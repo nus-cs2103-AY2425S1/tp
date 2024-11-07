@@ -97,7 +97,15 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                // && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && ((otherPerson.getPhone().isPresent()
+                            && getPhone().isPresent() && otherPerson.getPhone().get().equals(getPhone().get()))
+                            || (otherPerson.getEmail().isPresent() && getEmail().isPresent()
+                            && otherPerson.getEmail().get().equals(getEmail().get()))
+                            || (otherPerson.getTelegramHandle().isPresent() && getTelegramHandle().isPresent()
+                            && otherPerson.getTelegramHandle().get().equals(getTelegramHandle().get()))
+            );
     }
 
     /**
