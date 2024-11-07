@@ -504,19 +504,28 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Saving changes in data
 
-### Deleting a person
+   1. Prerequisites: Has at least 1 customer listed using `listcustomer` in the GUI
+    
+   1.  Add an order under a customer using the `addorder` command.<br>
+      Example: `addorder 1 i/Lamp d/20-11-2024 q/3`
+      Expected: Order added under the first customer in the customer list and all his orders will be displayed. 
 
-1. Deleting a person while all persons are being shown
+   1.  Re-launch the app by double-clicking the jar file.<br>
+       Expected: The newest order added is retained.
+   
+### Deleting a customer
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Deleting a customer while all customers are being shown
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Prerequisites: List all customers using the `listcustomer` command. Multiple customers in the list.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `deletecustomer 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+   1. Test case: `deletecustomer 0`<br>
+      Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
