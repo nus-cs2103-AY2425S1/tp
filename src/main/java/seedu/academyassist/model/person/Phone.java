@@ -13,7 +13,7 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be 8 digits long with no spaces in between";
-    public static final String VALIDATION_REGEX = "\\d{8}";
+    public static final String VALIDATION_REGEX = "^\\d{4,17}$";
     public final String value;
 
     /**

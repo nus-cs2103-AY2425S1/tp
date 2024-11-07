@@ -32,21 +32,21 @@ public class NameTest {
         assertFalse(Name.isValidName("peter*")); // contains non-alphabet characters
         assertFalse(Name.isValidName("12345")); // numbers only
         assertFalse(Name.isValidName("peter the 2nd")); // contains numbers characters
+        /* 256 characters long */
         assertFalse(Name.isValidName("David Peter ethan evans jacky marty edric roger edwin bryan brian "
                 + "David Peter ethan evans jacky marty edric roger edwin bryan brian "
                 + "David Peter ethan evans jacky marty edric roger edwin bryan brian "
                 + "David Peter ethan evans jacky marty edric roger edwin royy"));
-                // 256 characters long
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr")); // long names
+        /* 255 characters long */
         assertTrue(Name.isValidName("David Peter ethan evans jacky marty edric roger edwin bryan brian "
                 + "David Peter ethan evans jacky marty edric roger edwin bryan brian "
                 + "David Peter ethan evans jacky marty edric roger edwin bryan brian "
                 + "David Peter ethan evans jacky marty edric roger edwin roy"));
-        // 255 characters long
     }
 
     @Test
