@@ -134,12 +134,9 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
-
 
 ### Storage component
 
@@ -327,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The information format entered is invalid
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. WardWatch shows an invalid patient information error message.
 
       Use case resumes at step 1.
 
@@ -346,21 +343,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty
 
-    * 2a1. WardWatch shows that list is empty
+    * 2a1. WardWatch shows an empty list
 
       Use case ends.
 
 * 3a. The given field is invalid
 
-    * 2a1. WardWatch shows an error message.
+    * 2a1. WardWatch shows an invalid field message.
 
       Use case resumes at step 2.
-
-* 3b. The parameter field is invalid.
-
-    * 2b1. WardWatch shows an error message.
-
-      Use case resumes at step 2. 
 
 **Use case: UC03 - Update a patient**
 
@@ -375,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The information format entered is invalid
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. AddressBook shows an invalid format error message.
 
       Use case resumes at step 1.
 
@@ -391,19 +382,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The search field is invalid.
-    * 2a1. AddressBook shows an error message.
+    * 2a1. AddressBook shows an invalid field error message.
         
         Use case resumes at step 1.
 
-* 2b. The parameter field is invalid.
+* 2b. There is no patient that matches the search
 
-    * 2b1. AddressBook shows an error message.
-  
-        Use case resumes at step 1.
-
-* 2c. There is no patient that matches the search
-
-    * 2c1. AddressBook shows that there is no matching patient.
+    * 2b1. AddressBook shows that there is no matching patient.
 
         Use case ends.
 
@@ -428,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The patient entered does not exist
 
-    * 3a1. WardWatch shows an error message.
+    * 3a1. WardWatch shows an invalid index error message.
 
       Use case resumes at step 2.
 
@@ -456,7 +441,144 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-*{More to be added}*
+**Use case: UC07 - Add Appointment**
+
+**MSS**
+
+1. Doctor submits new Appointment information tied to a patient
+2. WardWatch displays Appointment information tied to that patient
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. The information format entered is invalid
+
+    * 1a1. WardWatch shows an invalid description error message.
+
+      Use case resumes at step 1.
+
+* 2a. The Appointment date format is invalid.
+
+    * 2a1. WardWatch shows an invalid date format error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC08 - Delete Appointment**
+
+**MSS**
+
+1. Doctor request appointments for a specific date
+2. WardWatch displays Appointments for the day
+3. Doctor request to delete a specific appointment tied to a patient
+4. WardWatch deletes specified appointment
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The delete appointment command format entered is invalid
+
+    * 1a1. WardWatch shows an incorrect format error message.
+
+      Use case resumes at step 3.
+  
+* 3b. The Appointment does not exist
+*
+    * 2a1. WardWatch shows an appointment does not exist error message.
+
+      Use case resumes at step 3.
+
+**Use case: UC09 - Change Appointment**
+
+**MSS**
+
+1. Doctor request to delete a specific appointment tied to a patient
+2. WardWatch deletes Appointment
+3. Doctor submits new Appointment information tied to a patient
+4. WardWatch displays Appointment information tied to that patient
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The information format entered is invalid
+
+    * 3a1. WardWatch shows an incorrect appointment format error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC10 - See Schedule for a certain day**
+
+**MSS**
+
+1. Doctor request to see schedule for a certain day
+2. WardWatch displays all appointments for that day
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The date format is invalid
+
+    * 1a1. WardWatch shows an invalid date error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC11 - See Schedule for all appointments**
+
+**MSS**
+
+1. Doctor request to see schedule for all days
+2. WardWatch displays all appointments for all days
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The schedule all command format is invalid
+
+    * 1a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC12 - Add notes tied to a specific patient**
+
+**MSS**
+
+1. Doctor submits new notes for a certain patient
+2. WardWatch displays patient information with notes 
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Patient Notes format is invalid 
+
+    * 1a1. WardWatch shows a invalid note description error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC13 - delete notes to a specific patient**
+
+**MSS**
+
+1. Doctor request to delete notes for a certain patient
+2. WardWatch deletes the patient notes
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Patient Notes field is empty
+
+    * 1a1. WardWatch shows a notes is already empty error message.
+
+      Use case resumes at step 1.
+
+
+
+
 
 ### Non-Functional Requirements
 
@@ -531,3 +653,25 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Efforts**
+
+This appendix provides an overview of the effort and complexity involved in modifying the original AB3 (Address Book Level 3) to create WardWatch. WardWatch extends AB3’s basic structure to support a healthcare-focused system, which manages multiple entity types and introduces new functionalities like handling patient information, medications, and appointments.
+
+### Logic (Parser)
+1. The Parser component required significant modifications to accommodate the new entity types and fields introduced in WardWatch. Challenges included:
+
+    * **Tokenization**: Setting specific conditions for the tokenizer to handle new fields, such as medication and appointment, was complex. This required carefully configuring the tokenizer to recognize and differentiate between new input formats and ensure accurate data processing.
+    * **Input Validation**: To handle healthcare-related data, validation had to be strict to avoid incorrect entries. This involved refining the Parser logic to enforce stricter data checks than AB3, requiring additional time to test and ensure robust error handling.
+
+### Logic (Command)
+1. Creating new commands, especially the AddAppointment and AddMedication commands, presented unique challenges:
+    * **Command Structure Adaptation**: Extending the existing command structure for WardWatch was necessary to support new types of commands without impacting AB3’s base functionality. This required carefully designing new command classes to integrate seamlessly with existing entities.
+    * **Difficulty in Implementing AddAppointment**: The AddAppointment command was particularly challenging because it required understanding how to schedule and validate appointments within the existing architecture. This command also had to be compatible with patient data, ensuring appointments were correctly linked.
+
+### Model
+1. The Model component needed restructuring to support multiple entity types, such as patients, medications, and appointments, which added complexity:
+   * **Data Relationships**: Establishing relationships between entities, such as linking patients with medications and appointments, was challenging. Designing these relationships in a way that allowed for seamless data manipulation without creating dependencies was an important aspect of the model redesign.
+### Storage
+
+### UI
