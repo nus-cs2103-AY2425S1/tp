@@ -5,6 +5,7 @@ import bizbook.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 
 /**
@@ -16,16 +17,19 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandHistory commandHistory;
 
     @FXML
     private TextField commandTextField;
 
     /**
-     * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
+     * Creates a {@code CommandBox} with the given {@code CommandExecutor} and {@code CommandHistory}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, CommandHistory commandHistory) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.commandHistory = commandHistory;
+
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -43,8 +47,34 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
+            commandHistory.addCommand(commandText);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        }
+    }
+
+    /**
+     * Populates command box with {@param text}.
+     */
+    private void autoCompleteText(String text) {
+        commandTextField.setText(text);
+        commandTextField.positionCaret(commandTextField.getText().length()); // Move cursor to end
+    }
+
+    /**
+     * Handles the key press event, {@code KeyEvent}.
+     */
+    @FXML
+    private void handleKeyPressed(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+        case UP:
+            autoCompleteText(commandHistory.getPreviousCommand());
+            break;
+        case DOWN:
+            autoCompleteText(commandHistory.getNextCommand());
+            break;
+        default:
+            break;
         }
     }
 

@@ -19,10 +19,10 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@HelpWindow.css" />
+        <URL value="@HelpWindowDark.css" />
       </stylesheets>
       <VBox>
-        <VBox fx:id="commandTable" styleClass="pane-with-border" minWidth="400">
+        <VBox fx:id="commandTable" minWidth="400">
           <StackPane fx:id="commandTablePlaceholder" VBox.vgrow="ALWAYS" />
         </VBox>
         <HBox alignment="CENTER" fx:id="helpMessageContainer">

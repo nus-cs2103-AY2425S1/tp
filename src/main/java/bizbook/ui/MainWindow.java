@@ -8,8 +8,10 @@ import bizbook.logic.Logic;
 import bizbook.logic.commands.CommandResult;
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.logic.parser.exceptions.ParseException;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -24,18 +26,32 @@ import javafx.stage.Stage;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String DARK_THEME_URL = MainWindow.class.getResource("/view/DarkTheme.css").toExternalForm();
+    private static final String LIGHT_THEME_URL = MainWindow.class.getResource("/view/LightTheme.css").toExternalForm();
+    private static final String DARK_THEME_HELP_URL =
+            MainWindow.class.getResource("/view/HelpWindowDark.css").toExternalForm();
+    private static final String LIGHT_THEME_HELP_URL =
+            MainWindow.class.getResource("/view/HelpWindowLight.css").toExternalForm();
+
+    private boolean isDarkTheme = true;
+    private Scene scene;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
+    private CommandHistory commandHistory;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private PinnedPersonListPanel pinnedPersonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ContactDetails contactDetailsPanel;
     private SearchBox searchBox;
+
+    @FXML
+    private MenuItem toggleThemeMenuItem;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -48,6 +64,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane pinnedListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -67,6 +86,8 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.commandHistory = new CommandHistory();
+        this.scene = getRoot().getScene();
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -126,13 +147,16 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFocusedPerson());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        pinnedPersonListPanel = new PinnedPersonListPanel(logic.getPinnedPersonList(), logic.getFocusedPerson());
+        pinnedListPanelPlaceholder.getChildren().add(pinnedPersonListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, commandHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         searchBox = new SearchBox(this::executeFindCommand);
@@ -179,6 +203,32 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         primaryStage.hide();
     }
+    /**
+     * Toggles between light and dark themes
+     */
+    @FXML
+    private void handleThemeChange() {
+        isDarkTheme = !isDarkTheme;
+
+        // Get the scene's stylesheets
+        ObservableList<String> stylesheets = scene.getStylesheets();
+        ObservableList<String> helpStylesheets = helpWindow.getRoot().getScene().getStylesheets();
+        stylesheets.clear();
+        helpStylesheets.clear();
+
+        // Add the appropriate stylesheet based on the theme
+        if (isDarkTheme) {
+            stylesheets.add(DARK_THEME_URL);
+            helpStylesheets.add(DARK_THEME_HELP_URL);
+            toggleThemeMenuItem.setText("Switch to Light Theme");
+        } else {
+            stylesheets.add(LIGHT_THEME_URL);
+            helpStylesheets.add(LIGHT_THEME_HELP_URL);
+            toggleThemeMenuItem.setText("Switch to Dark Theme");
+        }
+
+        logger.info("Theme switched to " + (isDarkTheme ? "dark" : "light") + " mode");
+    }
 
     /**
      * Executes the command and returns the result.
@@ -197,6 +247,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isThemeChange()) {
+                handleThemeChange();
             }
 
             searchBox.clearSearchBox();
