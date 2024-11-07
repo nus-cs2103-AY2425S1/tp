@@ -8,28 +8,27 @@ optimized for use via a Command Line Interface** (CLI) while still having the be
 If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
 PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
-and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It taps on the
-fact that it is a lot less complicated to operate than its competitors such as Microsoft Excel while being faster to
-operate than graphical user interfaces commonly found in smartphones.
+and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It is much
+simpler to use while being even more functional than alternatives on the market.
 
 ## Table of Contents
 * [Quick start](#quick-start)
 * [Features](#features)
     * [Adding a client: `add`](#adding-a-client-add)
+    * [Editing a client : `edit`](#editing-a-client--edit)    
+    * [Deleting a client : `delete`](#deleting-a-client--delete)
     * [Listing all clients : `list`](#listing-all-clients--list)
-    * [Editing a client : `edit`](#editing-a-client--edit)
+    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
+    * [Showing property listings of a client : `show`](#showing-property-listings-of-a-client--show)
     * [Locating clients by name: `find`](#locating-clients-by-name-find)
     * [Locating clients by tag: `findtag`](#locating-clients-by-tag-findtag)
-    * [Deleting a client : `delete`](#deleting-a-client--delete)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    * [Exiting the program : `exit`](#exiting-the-program--exit)
-    * [Quick reference help: `help`](#quick-reference-help-help)
     * [Managing Remarks : `remark`](#managing-remarks--remark)
-    * [Showing property listings of a client : `show`](#showing-property-listings-of-a-client--show)
     * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
     * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
     * [Exporting your contacts : `export`](#exporting-your-contacts--export)
-    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Open help menu: `help`](#open-help-menu-help)
 * [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
 * [FAQ](#faq)
@@ -53,7 +52,7 @@ operate than graphical user interfaces commonly found in smartphones.
 4. Double-click on the `.jar` file to run it
    - **For advanced users:** Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
 
-- A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+- A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 ![Ui](images/user-guide-images/Ui.png)
 
@@ -224,22 +223,6 @@ Visual example of correct output:
 
 ![Show Command](images/user-guide-images/ShowCommandShowcase.png)
 
-### Quick reference help: `help`
-
-Shows commands in a help menu for quick reference during use of PROperty.
-
-Format: `help`
-
-Example:
-
-- `help` results in a popup window which contains all the commands in PROperty for easy reference during use.
-
-Visual example of correct output:
-
-![HelpCommandShowcase.png](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase2.png)
-
 ### Locating clients by name: `find`
 
 Finds clients whose names contain any of the given keywords.
@@ -345,7 +328,7 @@ Visual example of correct output (Remove Remark):
 
 Adds a property listing to the client specified by `INDEX`
 
-Format: `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`
+Format: `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`
 
 - Adds a property listing to the client specified by `INDEX`
 - The `INDEX` refers to the index number shown in the displayed client list.
@@ -415,6 +398,22 @@ Example:
 
 * `exit` exits PROperty.
 
+### Open help menu: `help`
+
+Shows commands in a help menu for quick reference during use of PROperty.
+
+Format: `help`
+
+Example:
+
+- `help` results in a popup window which contains all the commands in PROperty for easy reference during use.
+
+Visual example of correct output:
+
+![HelpCommandShowcase.png](images/user-guide-images/HelpMessageShowcase.png)
+![help message](images/user-guide-images/HelpMessageShowcase.png)
+![help message](images/user-guide-images/HelpMessageShowcase2.png)
+
 ### Saving the data
 
 PROperty data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -459,23 +458,23 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                |
-|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action             | Format, Examples                                                                                                                                                            |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/buyer` |
-| **List**           | `list`                                                                                                                                                                          |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/client_TAG] [r/REMARK]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                         |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                       |
-| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                         |
-| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
-| **Clear**          | `clear`                                                                                                                                                                         |
-| **Exit**           | `exit`                                                                                                                                                                          |
-| **Help**           | `help`                                                                                                                                                                          |
-| **Remark**         | `remark INDEX r/[REMARKS]`<br> e.g., `remark 1 r/Prefers a higher floor apartment`, `remark 1 r/` (to delete the remark)                                                        |
-| **Show**           | `show INDEX`<br> e.g., `show 2`                                                                                                                                                 |
-| **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
-| **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                            |
-| **Export**         | `export`                                                                                                                                                                        |
-| **Sort**           | `sort`                                                                                                                                                                          |
+| **List**           | `list`                                                                                                                                                                      |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/client_TAG] [r/REMARK]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                     |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                   |
+| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                     |
+| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                         |
+| **Clear**          | `clear`                                                                                                                                                                     |
+| **Exit**           | `exit`                                                                                                                                                                      |
+| **Help**           | `help`                                                                                                                                                                      |
+| **Remark**         | `remark INDEX r/[REMARKS]`<br> e.g., `remark 1 r/Prefers a higher floor apartment`, `remark 1 r/` (to delete the remark)                                                    |
+| **Show**           | `show INDEX`<br> e.g., `show 2`                                                                                                                                             |
+| **Add Listing**    | `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
+| **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                        |
+| **Export**         | `export`                                                                                                                                                                    |
+| **Sort**           | `sort`                                                                                                                                                                      |
 
 --------------------------------------------------------------------------------------------------------------------
 
