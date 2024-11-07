@@ -14,7 +14,6 @@ import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.VolunteerDates;
 
-
 /**
  * Contains utility methods used for parsing strings in volunteer-related classes.
  */
@@ -77,7 +76,7 @@ public class VolunteerParserUtil {
      */
     public static VolunteerDates parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.replaceAll("\\s+", "");
+        String trimmedDate = date.replaceAll("\\s+", "").trim();
         String[] datesArr = trimmedDate.split(",");
         Set<String> uniqueDates = new HashSet<>();
         for (String d : datesArr) {
@@ -100,10 +99,18 @@ public class VolunteerParserUtil {
      */
     public static String checkStringListOfDates(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.trim();
-        if (!VolunteerDates.isValidListOfDates(trimmedDate)) {
-            throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
+        String trimmedDate = date.replaceAll("\\s+", "").trim();
+        String[] datesArr = trimmedDate.split(",");
+        Set<String> uniqueDates = new HashSet<>();
+        for (String d : datesArr) {
+            if (!VolunteerDates.isValidDate(d)) {
+                throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
+            }
+            if (!uniqueDates.add(d)) {
+                throw new ParseException((new VolunteerDuplicateDateException(d)).getMessage());
+            }
         }
+
         return trimmedDate;
     }
 

@@ -169,4 +169,5 @@ public interface Model {
     boolean filterEventsByName(Predicate<Event> predicate);
 
     boolean filterVolunteersByName(Predicate<Volunteer> predicate);
+    void filterEvent(Event eventToView);
 }

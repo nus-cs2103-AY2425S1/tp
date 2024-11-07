@@ -243,6 +243,11 @@ public class EventNewCommandTest {
         public boolean filterVolunteersByName(Predicate<Volunteer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void filterEvent(Event eventToView) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
