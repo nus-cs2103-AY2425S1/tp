@@ -150,7 +150,7 @@ public class UnmarkAttendanceByStudentCommand extends Command {
     private boolean containsAttendance(List<Attendance> attendanceList) {
         assert attendanceList != null;
         for (Attendance currentAttendance : attendanceList) {
-            if (currentAttendance.isSameWeek(attendance)) {
+            if (currentAttendance.equals(attendance)) {
                 return true;
             }
         }
