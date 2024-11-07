@@ -3,15 +3,16 @@
 ![Ui](docs/images/Ui.png)
 
 # Grub 🍔
-Keep your dining options at the tip of your fingers with Grub! 
+Keep your dining options at the tip of your fingers with Grub!
 
 ## 🤔 What is Grub?
 
-Grub is a desktop app for managing your dining options, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+Grub is a desktop app for managing your dining options, optimized for use via a Command Line Interface (CLI) 
+while still having the benefits of a Graphical User Interface (GUI).
 
 **Target Audience:** Diners
 
-**Value Proposition:** 
+**Value Proposition:**
 It offers a curated list of nearby restaurants tailored to your preferences, ensuring quick and efficient searches for local dining options.
 
 ## 📦 Features

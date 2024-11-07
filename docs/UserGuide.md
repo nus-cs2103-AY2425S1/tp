@@ -20,7 +20,7 @@ GRUB is a quick and efficient solution to search for local dining options, tailo
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Uii.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -178,10 +178,25 @@ Examples:
 *  `rate 1 r/2` Edits the rating of the 1st restaurant to be `2`.
 *  `rate 2 r/2` Edits the rating of the 2nd restaurant to be `No Rating`.
 
+### Searching for restaurants by price: `price`
+
+Finds restaurants of a specific price label.
+
+Format: `price PRICE_LABEL [MORE_PRICE_LABELS]`
+
+* Multiple price labels can be entered, and the search will return restaurants that match any one of the labels (i.e. `OR` search).
+  (e.g. `price $ $$` will return restaurants that are either `$` or `$$`)
+* The order of the keywords does not matter. e.g. `$ $$` will match `$$ $`
+* Refer to the glossary for details on the price labels.
+
+Examples:
+* `price $ $$` returns restaurants that are either `$` or `$$`
+* `price $$` returns restaurants that are `$$`<br>
+
 ### Favourite a restaurant : `fav`
 
 Set the specified restaurant from the address book as favourite.
-Favourite items will be highlighted with a yellow outline and pushed to the top of the list. 
+Favourite items will be highlighted with a yellow outline and pushed to the top of the list.
 
 Format: `fav INDEX`
 
@@ -191,21 +206,6 @@ Format: `fav INDEX`
 
 Examples:
 *  `fav 1` Favourite the 1st restaurant.
-
-### Searching for restaurants by price: `price`
-
-Finds restaurants of a specific price label.
-
-Format: `price PRICE_LABEL [MORE_PRICE_LABELS]`
-
-* Multiple price labels can be entered, and the search will return restaurants that match any one of the labels (i.e. `OR` search).
-   (e.g. `price $ $$` will return restaurants that are either `$` or `$$`)
-* The order of the keywords does not matter. e.g. `$ $$` will match `$$ $`
-* Refer to the glossary for details on the price labels.
-
-Examples:
-* `price $ $$` returns restaurants that are either `$` or `$$`
-* `price $$` returns restaurants that are `$$`<br>
 
 ### Un-favourite a restaurant : `unfav`
 
@@ -276,4 +276,7 @@ Action | Format, Examples
 **Tag** | `tags KEYWORD [MORE_KEYWORDS]`<br> e.g., `tags Chinese`
 **List** | `list`
 **Help** | `help`
+**Rating** | `rate INDEX [r/RATING]`<br> e.g.`rate 1 r/2`
 **Price** | `price PRICE_LABEL [MORE_PRICE_LABELS]`<br> e.g., `price $ $$`
+**Favourite** | `fav INDEX`<br> e.g., `fav 1`
+**Un-Favourite** | `unfav INDEX`<br> e.g., `unfav 1`

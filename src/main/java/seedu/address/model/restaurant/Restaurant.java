@@ -25,8 +25,8 @@ public class Restaurant {
     private final Address address;
     private final Rating rating;
     private final Set<Tag> tags = new HashSet<>();
-    private boolean isFavourite;
     private final Price price;
+    private boolean isFavourite;
 
     /**
      * Every field must be present and not null.
