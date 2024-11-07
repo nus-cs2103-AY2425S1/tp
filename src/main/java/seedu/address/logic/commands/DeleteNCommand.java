@@ -13,6 +13,9 @@ public class DeleteNCommand extends Command {
 
     public static final String MESSAGE_CANCEL_DELETE = "Deletion operation cancelled.";
 
+    public static final String MESSAGE_NO_PENDING_OPERATION = "No pending delete operation.";
+
+
     /**
      * Executes the DeleteNCommand.
      * @param model {@code Model} which the command should operate on.
@@ -21,6 +24,9 @@ public class DeleteNCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (StaticContext.hasNoDeleteOperation()) {
+            return new CommandResult(MESSAGE_NO_PENDING_OPERATION);
+        }
         // Clear the personToDelete from StaticContext
         StaticContext.setPersonToDelete(null);
         // Clear the weddingToDelete from StaticContext

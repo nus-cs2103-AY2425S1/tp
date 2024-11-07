@@ -43,4 +43,15 @@ public class StaticContext {
     public static void setWeddingToDelete(Wedding weddingToDelete) {
         StaticContext.weddingToDelete = weddingToDelete;
     }
+    /**
+     * Checks if there are no delete operations pending for a person or wedding, and no clear operations
+     * pending for the address book or wedding book.
+     *
+     * @return {@code true} if there are no delete operations or clear operations pending,
+     *         {@code false} otherwise.
+     */
+    public static boolean hasNoDeleteOperation() {
+        return personToDelete == null && weddingToDelete == (null)
+                && !clearAddressBookPending && !clearWeddingBookPending;
+    }
 }
