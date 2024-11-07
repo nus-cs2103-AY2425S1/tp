@@ -6,10 +6,10 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-public class EventIdsContainsIdsPredicate implements Predicate<Person> {
+public class TempPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public EventIdsContainsIdsPredicate(List<String> keywords) {
+    public TempPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -21,6 +21,10 @@ public class EventIdsContainsIdsPredicate implements Predicate<Person> {
                         eventId.equals(Integer.valueOf(keyword))));
     }
 
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -28,13 +32,13 @@ public class EventIdsContainsIdsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EventIdsContainsIdsPredicate)) {
+        if (!(other instanceof TempPredicate)) {
             return false;
         }
 
-        EventIdsContainsIdsPredicate otherEventIdsContainsIdsPredicate =
-                (EventIdsContainsIdsPredicate) other;
-        return keywords.equals(otherEventIdsContainsIdsPredicate.keywords);
+        TempPredicate otherTempPredicate =
+                (TempPredicate) other;
+        return keywords.equals(otherTempPredicate.keywords);
     }
 
     @Override
