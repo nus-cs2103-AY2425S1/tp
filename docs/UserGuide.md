@@ -388,10 +388,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
-**Q**: How do I undo a mistake?<br>
-**A**: You can edit the data using the `edit` command to revert the changes. An update to provide an undo feature is currently in progress.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TalentHub home folder.
 
 **Q**: How do I add multiple tags to a contact?<br>
 **A**: When adding a person, use t/TAG multiple times. For example, `add person n/John Doe p/98765432 t/CameraMan t/Producer` will add "CameraMan" and "Producer" as tags.
@@ -401,6 +398,9 @@ _Details coming soon ..._
 
 **Q**: How can I delete a field in Person or Event I have added?<br>
 **A**: You can delete the field using the `edit` command by specifying a blank prefix for the field you want to delete. For example, `edit event v/` deletes the venue field. Note that only optional fields can be removed.
+
+**Q**: How do I undo a mistake?<br>
+**A**: An update to provide an undo feature is currently in progress.
 
 ---
 
