@@ -1,18 +1,20 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # DorManagerPro User Guide
 
-DorManagerPro (DMP) is a desktop app tailored for **university dorm managers who prefer to work with a Command Line Interface (CLI)**, 
+DorManagerPro (DMP) is a desktop app tailored for **university dorm managers who prefer to work with a Command Line Interface (CLI)**,
 designed to allow easy and efficient management of dormitory resident details within an address book.
 
 Created for busy university dorm managers looking to increase their efficiency, DorManagerPro provides unique features to streamline
 the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
 
-**Note:** If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
+
+> [!Tip]
+> If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
 
 
 <!-- * Table of Contents -->
@@ -23,18 +25,18 @@ the process of accessing and updating resident student details. What's more, Dor
 
 - [Quick start](#quick-start)
 - [Features](#features)
-  - [Viewing help : `help`](#viewing-help--help)
-  - [Adding a person : `add`](#adding-a-person-add)
-  - [Listing all persons : `list`](#listing-all-persons--list)
-  - [Editing a person : `edit`](#editing-a-person--edit)
-  - [Finding a person : `find`](#locating-persons-by-name-phone_number-room_number-or-tag-find)
-  - [Deleting a person : `delete`](#deleting-a-person--delete)
-  - [Clearing all entries: `clear`](#clearing-all-entries--clear)
-  - [Cleaning graduated students : `exit`](#cleaning-graduated-students--clean)
-  - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
-  - [Exiting the program : `exit`](#exiting-the-program--exit)
-  - [Manual saving : `export`](#manual-saving-export)
-  - [Manual data restoration : `import`](#manual-data-restoration-import)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Adding a person : `add`](#adding-a-person-add)
+    - [Listing all persons : `list`](#listing-all-persons--list)
+    - [Editing a person : `edit`](#editing-a-person--edit)
+    - [Finding a person : `find`](#locating-persons-by-name-phone_number-room_number-or-tag-find)
+    - [Deleting a person : `delete`](#deleting-a-person--delete)
+    - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+    - [Cleaning graduated students : `exit`](#cleaning-graduated-students--clean)
+    - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Manual saving : `export`](#manual-saving-export)
+    - [Manual data restoration : `import`](#manual-data-restoration-import)
 - [FAQ](#FAQ)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -44,28 +46,30 @@ the process of accessing and updating resident student details. What's more, Dor
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-4/tp/releases/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Locate the `.jar` file in your computer. Typically, this will be in the `Downloads` folder.
+> [!Tip]
+> You may wish to copy the `.jar` file to the folder you want to use as the _home folder_ for DorManagerPro. All the files needed to run DorManagerPro will be created within the home folder.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double click the `.jar` file to run it. Alternatively, open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
+   and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following UI.<br>
    ![Ui](images/TemplateUi.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -91,7 +95,7 @@ the process of accessing and updating resident student details. What's more, Dor
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing help : `help`
 
@@ -106,29 +110,16 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-> [!Note]
-> * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
-> * A person can have up to 10 tags.
-> * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
-> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
-> * `EMAIL` should be of the format local-part@domain
-> * Refer to (TO BE IMPLEMENTED?) for more details on accepted values for each field.
+<box type="tip" seamless>
 
-> [!Warning]
-> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
-> (TO BE DECIDED WHETHER TO ALLOW DUPLICATE NAMES AND EMAILS)
+**Tip:** A person can have any number of tags (including 0)
+</box>
 
 Examples:
-* `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/Resident Assistant e/betsycrowe@example.com a/Newgate Street p/1234567 t/Floor 1`
-
-Examples of usage:
-
-Execute `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
-
-![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Listing all persons : `list`
 
@@ -147,7 +138,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -172,8 +163,8 @@ Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tags’’
 
 Examples:
 * `find p/test_number n/test_name r/08-1234 t/friends colleagues`  
-finds people whose both your friend and colleagues. 
-He has test_name in their name and test_number as their contact number, and at room 08-1234
+  finds people whose both your friend and colleagues.
+  He has test_name in their name and test_number as their contact number, and at room 08-1234
 
 ### Deleting a person : `delete`
 
@@ -184,8 +175,8 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* After user enters the command, the window will show a confirmation popout, 
-click 'OK' to continue, 'cancel' to abort the deletion.
+* After user enters the command, the window will show a confirmation popout,
+  click 'OK' to continue, 'cancel' to abort the deletion.
 
 ![delete popout](images/deleteConfirmation.png)
 
@@ -205,9 +196,6 @@ Format: `clear`
 Removes all graduated students from the address book based on the current year and their graduation year.
 
 Format: `clean`
-
-> [!Tip]
-> If you mistakenly entered this command, you can undo it with the `undo` command. See [Undo](#undoing-the-previous-command--undo) for details!
 
 Examples of usage:
 
@@ -248,7 +236,7 @@ Format: `import f/FILE_PATH`
 
 * Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
 
-Examples: 
+Examples:
 
 * `import ./SaveFile3.json` imports data from the file named at `./SaveFile3.json` into the application.
 
@@ -257,7 +245,7 @@ Examples:
 
 DorManagerPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" 
+<box type="warning"
 seamless>
 
 **Caution:**
