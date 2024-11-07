@@ -21,7 +21,7 @@ Class IdentityNumber
 Class Name
 Class Phone
 Class Log
-Class Tag
+Class Status
 
 Class I #FFFFFF
 }
@@ -50,7 +50,7 @@ Person *--> IdentityNumber
 Person *--> Email
 Person *--> Address
 Person *--> "*" Log
-Person *--> "*" Tag
+Person *--> Status
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -61,8 +61,12 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 Email -[hidden]right-> IdentityNumber
-IdentityNumber -[hidden]right-> Tag
-Tag -[hidden]right-> Log
+IdentityNumber -[hidden]right-> Log
+Log -[hidden]right-> Status
+
+Log *--> LogEntry
+Log *--> AppointmentDate
+AppointmentDate -[hidden]right-> LogEntry
 
 ModelManager --> "~* filtered" Person
 @enduml
