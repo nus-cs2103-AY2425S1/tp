@@ -99,4 +99,11 @@ public class PersonTest {
                 + ", frequency=" + ALICE.getFrequency() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hashCodeMethod() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+    }
+
 }
