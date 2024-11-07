@@ -44,13 +44,13 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
 2. If you do not have Java installed, you can download it from [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html). 
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F08-3/tp/releases/).
+3. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F08-3/tp/releases/).
 
     Scroll to the very bottom of the page to find the latest release. Under the `Assets` section, download the `.jar` file by clicking on it.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your FindingbrUdders app. This can be any folder on your computer, it can also be an empty folder.
+4. Copy the file to the folder you want to use as the _home folder_ for your FindingbrUdders app. This can be any folder on your computer, it can also be an empty folder.
 
-1. Right click on the `.jar` file and select `Open with` and then `Java(TM) Platform SE binary`. 
+5. Right-click on the `.jar` file and select `Open with` and then `Java(TM) Platform SE binary`. 
 
    Alternatively, you can also run the `.jar` file by opening a command terminal, typing `cd` into the folder you put the jar file in, and using the `java -jar findingbrudders.jar` command to run the application.
 
@@ -71,7 +71,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+2. Refer to the [Features](#features) below for details of each command.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -190,8 +190,29 @@ Finds Udders by specified keywords for each field.
 * **IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
 
 **Examples:**
-* `find John` returns `johnny` and `John Doe`<br>
+* `find n/ John` returns Udders: `johnny` and `John Doe`<br>
 * `find friend` returns `Charlie Brown` and `Betsy Crowe`<br>
+  **CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE
+  CHANGE**
 
 ![result for 'find John'](images/findCommand3.png)
 
