@@ -498,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC06 - List items**
 
 **MSS**
-1. User enters command to list
+1. User enters command to list items.
 2. System displays lists of both events and vendors.
 
     Use case ends.
