@@ -242,10 +242,9 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing points of contact, the existing points of contact of the person will be removed i.e adding of points of contact is not cumulative.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can delete a event's venue by leaving their fields empty, like `v/` respectively!
+You can delete a event's venue or points of contact of the person by leaving their fields empty, like `v/`, `p/` respectively!
 </div>
   
 Examples:
