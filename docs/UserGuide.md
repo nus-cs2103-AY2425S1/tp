@@ -214,7 +214,7 @@ Format: `delete [INDICES]...`
 * `INDICES` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`), separated by spaces (e.g., `1 2 3 5-9`).
   * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
     but `5 - 9` or `5 -9` r `5- 9` is invalid).
-* At least one `INDEX` for `INDICES` must be provided.
+* `INDICES` should not be empty; at least one `INDEX` or range must be provided.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
