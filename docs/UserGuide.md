@@ -210,11 +210,11 @@ When using `find`, at least **one** of the optional parameters must be included.
   ![result for 'find n/david'](images/findDavidLiResult.png)
 
 ##### Usage: Find by role
-* `find r/treasurer` returns `Irfan Ibrahim` who has the role `Treasurer`<br>
+* `find r/treasurer` returns `Irfan Ibrahim` who has a role `Treasurer`<br>
   ![result for 'find r/treasurer'](images/findTreasurerResult.png)
 
 ##### Usage: Find by telegram
-* `find t/alexyeoh` returns `Alex Yeoh` who has a telegram handle `alexYeoh`<br>
+* `find t/alexyeoh` returns `Alex Yeoh` who has the telegram handle `alexYeoh`<br>
   ![result for 'find t/alexyeoh'](images/findAlexYeohResult.png)
 
 ##### Usage: Find by favourite
