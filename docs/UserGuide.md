@@ -99,7 +99,7 @@ the process of accessing and updating resident student details. What's more, Dor
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER `, `p/PHONE_NUMBER  n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -120,7 +120,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER  e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -141,7 +141,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER ] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -156,24 +156,26 @@ Examples:
 
 ### Finding a person: `find`
 
-Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/Tag`
+Format: `find n/NAME p/PHONE_NUMBER  r/ROOM_NUMBER t/Tag`
 
-* any possible orders and combinations of the 4 parameters NAME, PHONE, ROOM_NUMBER, and TAG are applicable
+* any possible orders and combinations of the 4 parameters NAME, PHONE_NUMBER , ROOM_NUMBER, and TAG are applicable
 
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The name search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords in name search does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* In the name search persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Only full words will be matched for room_number and phone, the arguments
-  should be exactly the same as the person's ROOM_NUMBER and PHONE
+* Only full words will be matched for room_number and phone_number, the arguments
+  should be exactly the same as the person's ROOM_NUMBER and PHONE_NUMBER 
 * Order of the tags do not matter `t/friends t/colleagues` works the same
   as `t/colleagues t/friends`
+* Tags search is case-sensitive `Friends` will not match `friends`
+* In tag search the contacts have to contain all the specified tags in order to match
 
 Examples:
 * `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues`  
-  finds people whose both your friend and colleagues.
+  finds people who are both your friend and colleagues.
   They have Alex Jones as their name, 94509592 as their phone number, and lives in room 08-1234.
 
 ### Deleting a person : `delete`
@@ -289,11 +291,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add [n/NAME] [p/PHONE_NUMBER ] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER ] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find [n/NAME] [p/PHONE_NUMBER ] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
 **List**   | `list`
 **Help**   | `help`
 **Clean**  | `clean`
