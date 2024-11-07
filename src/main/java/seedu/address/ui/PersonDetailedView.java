@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -59,6 +60,15 @@ public class PersonDetailedView extends UiPart<Region> {
         profileImage.setImage(profileImg);
 
         name.setText(person.getName().fullName);
+
+        // check for recent birthday
+        if (isVisualsEnabled && person.getBirthday().hasBirthdayWithin7Days()) {
+            name.setStyle("-fx-text-fill: #ffa500");
+            Tooltip birthdayTooltip = new Tooltip("Birthday soon!");
+            birthdayTooltip.setShowDelay(javafx.util.Duration.millis(10));
+            Tooltip.install(name, birthdayTooltip);
+        }
+
         phone.setText("+65 " + person.getPhone().value);
         address.setText("Address: " + person.getAddress().value);
         birthday.setText("Birthday: " + person.getBirthday().value);
