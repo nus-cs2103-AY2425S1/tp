@@ -16,7 +16,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
 import seedu.address.model.person.Person;
 
 /**
