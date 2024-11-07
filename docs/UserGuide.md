@@ -95,13 +95,19 @@ Open **Command Prompt** (Windows) or **Terminal** (macOS/Ubuntu/Debian) and type
 
 If you are using Windows, you should see something like:
 
-![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+{: .alert .alert-secondary}
+>![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+>  
+>**Java Version in Windows**
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
 if you are using macOS, Ubuntu or Debian, you should see something like this:
 
-![javaVersionMacOS.png](images/javaVersionMacOS.png)
+{: .alert .alert-secondary}
+>![javaVersionMacOS.png](images/javaVersionMacOS.png)
+>  
+>**Java Version in Mac**
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
@@ -112,7 +118,10 @@ If your Java version is **not 17**, you may refer to the [FAQ section](#faq) for
 #### Step 2: Download the MediBase3 JAR File
 
 1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.3/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this
-![githubAssets.png](images/githubAssets.png)
+{: .alert .alert-secondary}
+>![githubAssets.png](images/githubAssets.png)
+>  
+>**Asset Files in GitHub**
 1. Click on `medibase3.jar` to download the latest MediBase3 JAR File.
 2. Save the file to a location of your choice (e.g., `Downloads` folder).
 
@@ -142,7 +151,10 @@ seen in the image below. Here’s an overview of the key panels:
 - **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
 - **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
 
-![GUIOverview.jpg](images/GUIOverview.jpg)
+{: .alert .alert-secondary}
+>![GUIOverview.jpg](images/GUIOverview.jpg)
+>  
+>**Overview of the Graphics User Interface**
 
 ### Overview of CLI
 
@@ -154,16 +166,19 @@ Each command in MediBase3 follows a structured format to ensure consistency and 
 
 The example below demonstrates this structure:
 
-![CommandAnatomy](diagrams/CommandAnatomy.svg)
+{: .alert .alert-secondary}
+>![CommandAnatomy](diagrams/CommandAnatomy.svg)
+>  
+>**Anatomy of the Command Structure**
 
 This example shows how a typical command might look in MediBase3, with three main components:
 
-| **Component** | **Description**                                         |
-|---------------|---------------------------------------------------------|
-| **Command**   | The action you want to perform (e.g., `add`, `edit`)    |
-| **Prefix**    | Identifies the data being entered (e.g., `n/` for name) |
-| **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
-| **Preamble**  | The value associated with the prefix (e.g., `John Doe`) |
+| **Component** | **Description**                                                              |
+|---------------|------------------------------------------------------------------------------|
+| **Command**   | The action you want to perform (e.g., `add`, `edit`)                         |
+| **Prefix**    | Identifies the data being entered (e.g., `n/` for name)                      |
+| **Parameter** | The value associated with the prefix (e.g., `John Doe`)                      |
+| **Preamble**  | The value immediately after the command with no prefixes (e.g., `S1234567A`) |
 
 {: .alert .alert-info}
 > :information_source: **Note:**
@@ -479,7 +494,10 @@ Adds one or more medical conditions to an existing patient in MediBase3.
 * `addMedCon i/S1234567A c/High Blood Pressure` adds the condition `High Blood Pressure` to the patient with `NRIC` `S1234567A`.
 
 
-![result for addMedCon command example](images/addMedConCommand.png)
+{: .alert .alert-secondary}
+>![result for addMedCon command example](images/addMedConCommand.png)
+>  
+> **Success message, with the "HIGH BLOOD PRESSURE" condition in the details of patient "Alex Yeoh (S1234567A)" in the patient list panel**
 
 {: .alert .alert-success}
 > :bulb: **Tips:**
@@ -540,7 +558,10 @@ Adds one or more allergies to an existing patient in MediBase3.
 **Example**:
 * `addAllergy i/S1234567A al/Peanuts` adds the allergy `Peanuts` to the patient with `NRIC` `S1234567A`.
 
-![result for addAllergy command example](images/addAllergyCommand.png)
+{: .alert .alert-secondary}
+>![result for addAllergy command example](images/addAllergyCommand.png)
+>  
+> **Success message, with the "PEANUTS" in the details of patient "Alex Yeoh (S1234567A)" in the patient list panel**
 
 {: .alert .alert-success}
 > :bulb: **Tips:**
@@ -601,7 +622,10 @@ Sets Priority to an existing patient in MediBase3.
 **Example**:
 * `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
 
-![result for setPriority command example](images/setPriorityCommand.png)
+{: .alert .alert-secondary}
+>![result for setPriority command example](images/setPriorityCommand.png)
+>  
+> **Success message, with the priority of the patient "Alex Yeoh (S1234567A)" tagged as "HIGH" in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -667,7 +691,10 @@ Finds patients whose names contain any of the given keywords.
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-![result for 'find alex david'](images/findCommand.png)
+{: .alert .alert-secondary}
+>![result for 'find alex david'](images/findCommand.png)
+>  
+> **Success message of `find alex david` with patient names matching `alex` or `david` shown in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -690,7 +717,10 @@ Finds patients whose medical condition(s) contain the given keywords.
 Example:
  * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
-![result for 'findMedCon diabetes arthritis'](images/findMedConCommand.png)
+{: .alert .alert-secondary}
+>![result for 'findMedCon diabetes arthritis'](images/findMedConCommand.png)
+>  
+> **Success message with patient tagged with `diabetes` or `arthritis` shown in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -712,7 +742,10 @@ Finds patients based on his/her NRIC.
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
 
-![result for 'findNric S1234567A'](images/findNricCommand.png)
+{: .alert .alert-secondary}
+>![result for 'findNric S1234567A'](images/findNricCommand.png)
+>  
+> **Success message with patient `Alex Yeoh (S1234567A)` shown in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -730,7 +763,10 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-![help message](images/helpMessage.png)
+{: .alert .alert-secondary}
+>![help message](images/helpMessage.png)
+>  
+>**Help message popup shown**
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -803,7 +839,10 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 
 You should see something like:
 
-![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+{: .alert .alert-secondary}
+>![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
+>  
+>**Java vision as seen in Windows Command Prompt / Powershell**
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
@@ -830,7 +869,10 @@ This means that your machine is running Java version 17.0.12, which means that J
 
 You should see something like this:
 
-![javaVersionMacOS.png](images/javaVersionMacOS.png)
+{: .alert .alert-secondary}
+>![javaVersionMacOS.png](images/javaVersionMacOS.png)
+>  
+>**Java version as seen in MacOS Terminal**
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
@@ -849,7 +891,10 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 You should see something like this:
 
-![javaVersionLinux.jpg](images/javaVersionLinux.jpg)
+{: .alert .alert-secondary}
+>![javaVersionLinux.jpg](images/javaVersionLinux.jpg)
+>  
+>**Java version as seen in a Linux shell**
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
