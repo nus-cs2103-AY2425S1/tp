@@ -217,7 +217,7 @@ Format: `upload INDEX`
 * The index **must be a positive whole number** 1, 2, 3, …​
 
 <div markdown="block" class="alert alert-primary">
-**:information_source: Notes about the command format:**<br>
+**:information_source: Note!:**<br>
 
 * This feature is for Windows users only. Mac and Linux users may encounter errors if they use this feature. Support for the other OSes will be released in future versions!
 
