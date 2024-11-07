@@ -31,14 +31,18 @@ public class SortCommandTest {
     @Test
     public void execute_sortIsNotFiltered_showsSortedList() {
         expectedModel.sortByName();
+        expectedModel.sortByPin();
 
         assertCommandSuccess(new SortCommand(), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
+
 
     @Test
     public void execute_sortIsFiltered_showsSortedFilteredList() {
         showPersonAtIndices(expectedModel, List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON));
         expectedModel.sortByName();
+        expectedModel.sortByPin();
+
         showPersonAtIndices(model, List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON));
 
         assertCommandSuccess(new SortCommand(), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
