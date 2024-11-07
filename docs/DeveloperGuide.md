@@ -43,6 +43,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
+<div style="page-break-after: always;"></div>
+
 **Main components of the architecture**
 
 **`Main`** (consisting of
@@ -205,8 +207,6 @@ The `Storage` component,
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
-
-<div style="page-break-after: always;"></div>
 
 ### Common classes
 
@@ -581,8 +581,6 @@ Use case ends.
 
 8. **Error Handling**:
     - The system must display specific error messages for invalid inputs and revert to the last saved state on critical errors.
-
-<div style="page-break-after: always;"></div>
 
 9. **Data Recovery**:
     - In the event of a system crash, patient data should not be lost.
