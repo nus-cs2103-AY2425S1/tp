@@ -15,89 +15,89 @@ public class TagContainsKeywordPredicateTest {
 
     @Test
     public void testTagContainsExactKeyword_success() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("friend");
-        Person person = new PersonBuilder().withTags("friend").build();
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("Scholar");
+        Person person = new PersonBuilder().withTags("Scholar").build();
         assertTrue(predicate.test(person));
     }
 
     @Test
     public void testTagContainsCaseInsensitiveKeyword_success() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("FrIeNd");
-        Person person = new PersonBuilder().withTags("friend").build();
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("SchOLaR");
+        Person person = new PersonBuilder().withTags("scholar").build();
         assertTrue(predicate.test(person));
     }
 
     @Test
     public void testTagContainsKeywordWithMultipleTags_success() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("student");
-        Person person = new PersonBuilder().withTags("friend", "student", "colleague").build();
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("ADHD");
+        Person person = new PersonBuilder().withTags("Scholar", "ADHD", "SessionB").build();
         assertTrue(predicate.test(person));
     }
 
     @Test
     public void testTagDoesNotContainKeyword_failure() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("hobby");
-        Person person = new PersonBuilder().withTags("friend", "family").build();
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("Scholar");
+        Person person = new PersonBuilder().withTags("ADHD", "sessionA").build();
         assertFalse(predicate.test(person));
     }
 
     @Test
     public void testTagContainsKeywordInDifferentCase_failure() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("Work");
-        Person person = new PersonBuilder().withTags("WORK", "school").build();
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("scholar");
+        Person person = new PersonBuilder().withTags("SCHOLAR", "school").build();
         assertTrue(predicate.test(person)); // Should return true because of case-insensitive match
     }
 
     @Test
     public void testMultipleTagsWithOnlyOneMatching_success() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("hobby");
-        Person person = new PersonBuilder().withTags("friend", "hobby", "colleague").build();
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("scholar");
+        Person person = new PersonBuilder().withTags("ADHD", "scholar", "SessionA").build();
         assertTrue(predicate.test(person));
     }
 
     @Test
     public void testPersonWithNoTags_noMatch() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("friend");
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("SessionA");
         Person person = new PersonBuilder().build(); // No tags added
         assertFalse(predicate.test(person));
     }
 
     @Test
     public void testPersonWithMultipleSameTags_containsKeyword_success() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("study");
-        Person person = new PersonBuilder().withTags("study", "study", "study").build();
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("SessionA");
+        Person person = new PersonBuilder().withTags("SessionA", "SessionA", "SessionA").build();
         assertTrue(predicate.test(person)); // Multiple same tags should still return true
     }
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("friend");
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("scholar");
         assertEquals(predicate, predicate); // Same object should be equal
     }
 
     @Test
     public void equals_differentTypes_returnsFalse() {
-        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("friend");
+        TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate("scholar");
         assertNotEquals("some string", predicate); // Different types should not be equal
     }
 
     @Test
     public void equals_differentKeyword_returnsFalse() {
-        TagContainsKeywordPredicate predicate1 = new TagContainsKeywordPredicate("friend");
-        TagContainsKeywordPredicate predicate2 = new TagContainsKeywordPredicate("family");
+        TagContainsKeywordPredicate predicate1 = new TagContainsKeywordPredicate("scholar");
+        TagContainsKeywordPredicate predicate2 = new TagContainsKeywordPredicate("ADHD");
         assertNotEquals(predicate1, predicate2); // Different keywords should not be equal
     }
 
     @Test
     public void equals_sameKeyword_returnsTrue() {
-        TagContainsKeywordPredicate predicate1 = new TagContainsKeywordPredicate("friend");
-        TagContainsKeywordPredicate predicate2 = new TagContainsKeywordPredicate("friend");
+        TagContainsKeywordPredicate predicate1 = new TagContainsKeywordPredicate("scholar");
+        TagContainsKeywordPredicate predicate2 = new TagContainsKeywordPredicate("scholar");
         assertEquals(predicate1, predicate2); // Same keyword should be equal
     }
 
     @Test
     public void toString_correctFormat() {
-        String keyword = "friend";
+        String keyword = "scholar";
         TagContainsKeywordPredicate predicate = new TagContainsKeywordPredicate(keyword);
         String expected = TagContainsKeywordPredicate.class.getCanonicalName() + "{keyword=" + keyword + "}";
         assertEquals(expected, predicate.toString()); // Verify that toString returns the expected format

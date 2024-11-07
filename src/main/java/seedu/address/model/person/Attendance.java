@@ -13,7 +13,8 @@ import java.time.temporal.IsoFields;
  */
 public class Attendance {
 
-    public static final String MESSAGE_CONSTRAINTS = "Attendance must be in date format: dd/MM/yyyy.";
+    public static final String MESSAGE_CONSTRAINTS = "Attendance must be in date format: dd/MM/yyyy "
+            + "and cannot be a future date";
     public static final DateTimeFormatter VALID_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public final LocalDate attendanceDate;
@@ -33,8 +34,8 @@ public class Attendance {
      */
     public static Boolean isValidAttendance(String test) {
         try {
-            LocalDate.parse(test, VALID_DATE_FORMAT);
-            return true;
+            LocalDate date = LocalDate.parse(test, VALID_DATE_FORMAT);
+            return !date.isAfter(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
         }

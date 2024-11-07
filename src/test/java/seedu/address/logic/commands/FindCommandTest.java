@@ -52,8 +52,8 @@ public class FindCommandTest {
     private final FieldContainsKeywordsPredicate<Person> thirdAddressPredicate =
             new FieldContainsKeywordsPredicate<>(Collections.singletonList("second"), Person::getAddressValue,
                     true, FieldContainsKeywordsPredicate.ADDRESS_IDENTIFIER);
-    private final TagContainsKeywordPredicate firstTagPredicate = new TagContainsKeywordPredicate("friends");
-    private final TagContainsKeywordPredicate secondTagPredicate = new TagContainsKeywordPredicate("friend");
+    private final TagContainsKeywordPredicate firstTagPredicate = new TagContainsKeywordPredicate("Scholars");
+    private final TagContainsKeywordPredicate secondTagPredicate = new TagContainsKeywordPredicate("Scholar");
     private final SubjectMatchesKeywordsPredicate firstSubjectPredicate = new SubjectMatchesKeywordsPredicate("Math");
     private final SubjectMatchesKeywordsPredicate secondSubjectPredicate = new SubjectMatchesKeywordsPredicate("Malay");
     private final StudentAttendedTutorialPredicate firstAttendancePredicate =

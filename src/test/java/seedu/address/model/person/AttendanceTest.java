@@ -32,21 +32,21 @@ public class AttendanceTest {
     @Test
     void isValidAttendance_validInput_success() {
         // Valid inputs
-        assertTrue(Attendance.isValidAttendance("12/12/2024"));
-        assertTrue(Attendance.isValidAttendance("31/12/2024"));
+        assertTrue(Attendance.isValidAttendance("10/10/2024"));
+        assertTrue(Attendance.isValidAttendance("31/10/2024"));
     }
 
     @Test
     void isValidAttendance_invalidInput_failure() {
         // Invalid inputs
-        assertFalse(Attendance.isValidAttendance("32/12/2024")); // invalid day
+        assertFalse(Attendance.isValidAttendance("32/10/2024")); // invalid day
         assertFalse(Attendance.isValidAttendance("30/13/2024")); // invalid month
-        assertFalse(Attendance.isValidAttendance("3/12/2024")); // no leading 0 for day
+        assertFalse(Attendance.isValidAttendance("3/10/2024")); // no leading 0 for day
         assertFalse(Attendance.isValidAttendance("30/3/2024")); // no leading 0 for month
-        assertFalse(Attendance.isValidAttendance("3/13/24")); // wrong format for year
-        assertFalse(Attendance.isValidAttendance("/13/2024")); // missing day
+        assertFalse(Attendance.isValidAttendance("3/10/24")); // wrong format for year
+        assertFalse(Attendance.isValidAttendance("/10/2024")); // missing day
         assertFalse(Attendance.isValidAttendance("30//2024")); // missing month
-        assertFalse(Attendance.isValidAttendance("30/12/")); // missing year
+        assertFalse(Attendance.isValidAttendance("30/10/")); // missing year
         assertFalse(Attendance.isValidAttendance("//2024")); // missing day & month
         assertFalse(Attendance.isValidAttendance("//")); // missing field
         assertFalse(Attendance.isValidAttendance("1 Jan")); // non-numerical input

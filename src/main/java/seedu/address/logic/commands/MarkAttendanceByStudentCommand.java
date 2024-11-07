@@ -43,7 +43,7 @@ public class MarkAttendanceByStudentCommand extends Command {
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
             "Student %1$s does not take %2$s tutorial";
     public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE =
-            "Student %1$s has attendance marked for the corresponding week of date %2$s";
+            "Student %1$s has attendance marked for the corresponding week of date %2$s for %3$s tutorial";
 
     private final Logger logger = LogsCenter.getLogger(MarkAttendanceByStudentCommand.class);
 
@@ -88,7 +88,7 @@ public class MarkAttendanceByStudentCommand extends Command {
             logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
                     + "\n - Duplicate weekly attendance found for " + studentToMarkAttendance.getFullName()));
             throw new CommandException(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                    studentToMarkAttendance.getName(), attendance));
+                    studentToMarkAttendance.getName(), attendance, tutorial.getSubject()));
         }
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
