@@ -41,13 +41,26 @@ public class ModelManager implements Model {
     private final ObservableList<SupplyOrder> supplyOrderObservableList;
     private final ObservableList<CustomerOrder> customerOrderObservableList;
     private final Inventory inventory;
-    private final Storage storage;  // Add Storage as a field
+    private final Storage storage; // Add Storage as a field
 
-    // Constructor that accepts IngredientCatalogue, PastryCatalogue, and Storage
+    /**
+     * Constructs a {@code ModelManager} using the provided address book, user preferences, ingredient catalogue,
+     * pastry catalogue, storage, customer order list, and supply order list.
+     * Initializes the internal structures and associates orders with their respective persons in the address book.
+     *
+     * @param addressBook The read-only address book containing person data.
+     * @param userPrefs The read-only user preferences.
+     * @param ingredientCatalogue The catalogue containing ingredients.
+     * @param pastryCatalogue The catalogue containing pastries.
+     * @param storage The storage manager to handle saving and loading data.
+     * @param customerOrderList The list of customer orders.
+     * @param supplyOrderList The list of supply orders.
+     */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
                         IngredientCatalogue ingredientCatalogue, PastryCatalogue pastryCatalogue,
                         Storage storage, CustomerOrderList customerOrderList, SupplyOrderList supplyOrderList) {
-        requireAllNonNull(addressBook, userPrefs, ingredientCatalogue, pastryCatalogue, storage, customerOrderList, supplyOrderList);
+        requireAllNonNull(addressBook, userPrefs, ingredientCatalogue, pastryCatalogue,
+                storage, customerOrderList, supplyOrderList);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -71,7 +84,11 @@ public class ModelManager implements Model {
         associateOrdersWithPersons();
     }
 
-    // Default constructor with properly initialized parameters
+    /**
+     * Constructs a {@code ModelManager} with default parameters initialized to empty or default values.
+     * Initializes an empty address book, user preferences, and default ingredient and pastry catalogues.
+     * Also initializes the storage manager and creates empty customer and supply order lists.
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), IngredientCatalogue.getInstance(),
                 new PastryCatalogue(), new StorageManager(), new CustomerOrderList(), new SupplyOrderList());
@@ -147,6 +164,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    /**
+     * Associates customer and supply orders with their respective persons in the address book based on phone numbers.
+     * This method iterates through the customer and supply orders and links each order with the person in the
+     * address book that matches the phone number provided in the order. If a matching person is found,
+     * the order is associated with that person, and the order is added to the person's list of orders.
+     */
     public void associateOrdersWithPersons() {
         for (CustomerOrder customerOrder : customerOrderList.getOrders()) {
             addressBook.findPersonByPhone(customerOrder.getPerson().getPhone())

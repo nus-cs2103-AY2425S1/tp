@@ -12,7 +12,11 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
+Class SupplyOrderListPanel
+Class CustomerOrderListPanel
 Class PersonCard
+Class SupplyOrderCard
+Class CustomerOrderCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -33,21 +37,31 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" SupplyOrderListPanel
+MainWindow *-down-> "1" CustomerOrderListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+SupplyOrderListPanel -down-> "*" SupplyOrderCard
+CustomerOrderListPanel -down-> "*" CustomerOrderCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
+SupplyOrderListPanel --|> UiPart
+CustomerOrderListPanel --|> UiPart
 PersonCard --|> UiPart
+SupplyOrderCard --|> UiPart
+CustomerOrderCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ..> Model
+SupplyOrderCard ..> Model
+CustomerOrderCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
