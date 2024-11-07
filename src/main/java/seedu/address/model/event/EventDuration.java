@@ -10,8 +10,8 @@ import java.time.LocalDate;
  * Guarantees: immutable; is valid as declared in {@link #isValidDuration(LocalDate, LocalDate)}
  */
 public class EventDuration {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in {YYYY-MM-DD} format, and end date cannot be earlier than start date.";
+    public static final String MESSAGE_CONSTRAINTS_DATE_STRING = "Dates should be valid and be in {YYYY-MM-DD} format.";
+    public static final String MESSAGE_CONSTRAINTS_DATE_ORDER = "End date cannot be earlier than start date.";
     public final LocalDate eventFrom;
     public final LocalDate eventTo;
 
@@ -24,7 +24,7 @@ public class EventDuration {
     public EventDuration(LocalDate eventFrom, LocalDate eventTo) {
         requireNonNull(eventFrom);
         requireNonNull(eventTo);
-        checkArgument(isValidDuration(eventFrom, eventTo), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDuration(eventFrom, eventTo), MESSAGE_CONSTRAINTS_DATE_ORDER);
         this.eventFrom = eventFrom;
         this.eventTo = eventTo;
     }

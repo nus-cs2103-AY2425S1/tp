@@ -15,12 +15,13 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code UnassignEventByPersonNameEventIndexCommand}.
+ * {@code AssignEventByPersonNameEventNameCommand}.
  */
-public class UnassignEventByPersonNameEventIndexCommandTest {
+public class AssignEventByPersonNameEventIndexCommandTest {
 
     private Model model;
 
@@ -29,20 +30,20 @@ public class UnassignEventByPersonNameEventIndexCommandTest {
         model = new ModelManager();
         model.addPerson(ALICE);
         model.addEvent(MEETING);
-        model.assignEventToPerson(ALICE, MEETING);
     }
 
     @Test
     public void execute_validPersonAndEvent_success() {
-        UnassignEventByPersonNameEventIndexCommand command = new UnassignEventByPersonNameEventIndexCommand(
+        AssignEventByPersonNameEventIndexCommand command = new AssignEventByPersonNameEventIndexCommand(
                 ALICE.getName(), Index.fromOneBased(1));
 
-        String expectedMessage = String.format(UnassignEventByPersonNameEventIndexCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(AssignEventByPersonNameEventIndexCommand.MESSAGE_SUCCESS,
                 MEETING.getEventName(), ALICE.getName());
 
         Model expectedModel = new ModelManager();
         expectedModel.addPerson(ALICE);
         expectedModel.addEvent(MEETING);
+        expectedModel.assignEventToPerson(ALICE, MEETING);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -50,7 +51,7 @@ public class UnassignEventByPersonNameEventIndexCommandTest {
     @Test
     public void execute_personNotFound_throwsCommandException() {
         Name invalidName = new Name("Invalid Name");
-        UnassignEventByPersonNameEventIndexCommand command = new UnassignEventByPersonNameEventIndexCommand(
+        AssignEventByPersonNameEventIndexCommand command = new AssignEventByPersonNameEventIndexCommand(
                 invalidName, Index.fromOneBased(1));
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
@@ -58,32 +59,46 @@ public class UnassignEventByPersonNameEventIndexCommandTest {
 
     @Test
     public void execute_eventNotFound_throwsCommandException() {
-        UnassignEventByPersonNameEventIndexCommand command = new UnassignEventByPersonNameEventIndexCommand(
+        AssignEventByPersonNameEventIndexCommand command = new AssignEventByPersonNameEventIndexCommand(
                 ALICE.getName(), Index.fromOneBased(2)); // Assuming event index 2 does not exist
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_personNotAssignedToEvent_throwsCommandException() {
-        model.addPerson(BOB);
+    public void execute_personAlreadyAssignedToEvent_throwsCommandException() {
+        model.assignEventToPerson(ALICE, MEETING);
+        AssignEventByPersonNameEventIndexCommand command = new AssignEventByPersonNameEventIndexCommand(
+                ALICE.getName(), Index.fromOneBased(1));
 
-        UnassignEventByPersonNameEventIndexCommand command = new UnassignEventByPersonNameEventIndexCommand(
-                BOB.getName(), Index.fromOneBased(1));
+        assertCommandFailure(command, model, String.format(Messages.MESSAGE_PERSON_ALREADY_ASSIGNED_TO_EVENT,
+                ALICE.getName(), MEETING.getEventName()));
+    }
 
-        assertCommandFailure(command, model, String.format(Messages.MESSAGE_PERSON_NOT_ASSIGNED_TO_EVENT,
-                BOB.getName(), MEETING.getEventName()));
+    @Test
+    public void execute_multiplePersonsWithSameName_throwsCommandException() {
+        // Create two persons with the same name
+        Person aliceClone = new Person(new Name("ALICE PAULINE"),
+                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
+                ALICE.getTags(), ALICE.getEventIds(), ALICE.getId() + 1);
+        model.addPerson(aliceClone);
+
+        AssignEventByPersonNameEventIndexCommand command = new AssignEventByPersonNameEventIndexCommand(
+                ALICE.getName(), Index.fromOneBased(1));
+
+        assertCommandFailure(command, model, Messages.MESSAGE_MORE_THAN_ONE_PERSON_DISPLAYED_NAME);
     }
 
     @Test
     public void equals() {
-        UnassignEventByPersonNameEventIndexCommand command1 = new UnassignEventByPersonNameEventIndexCommand(
+        model.addPerson(BOB);
+        AssignEventByPersonNameEventIndexCommand command1 = new AssignEventByPersonNameEventIndexCommand(
                 ALICE.getName(), Index.fromOneBased(1));
-        UnassignEventByPersonNameEventIndexCommand command2 = new UnassignEventByPersonNameEventIndexCommand(
+        AssignEventByPersonNameEventIndexCommand command2 = new AssignEventByPersonNameEventIndexCommand(
                 ALICE.getName(), Index.fromOneBased(1));
-        UnassignEventByPersonNameEventIndexCommand command3 = new UnassignEventByPersonNameEventIndexCommand(
+        AssignEventByPersonNameEventIndexCommand command3 = new AssignEventByPersonNameEventIndexCommand(
                 BOB.getName(), Index.fromOneBased(1));
-        UnassignEventByPersonNameEventIndexCommand command4 = new UnassignEventByPersonNameEventIndexCommand(
+        AssignEventByPersonNameEventIndexCommand command4 = new AssignEventByPersonNameEventIndexCommand(
                 ALICE.getName(), Index.fromOneBased(2));
 
         // same object -> returns true
@@ -109,10 +124,10 @@ public class UnassignEventByPersonNameEventIndexCommandTest {
     public void toStringMethod() {
         Name personName = new Name("Alice");
         Index eventIndex = Index.fromOneBased(1);
-        UnassignEventByPersonNameEventIndexCommand unassignEventCommand =
-                new UnassignEventByPersonNameEventIndexCommand(personName, eventIndex);
-        String expected = UnassignEventByPersonNameEventIndexCommand.class.getCanonicalName() + "{targetPersonName="
+        AssignEventByPersonNameEventIndexCommand assignEventCommand =
+                new AssignEventByPersonNameEventIndexCommand(personName, eventIndex);
+        String expected = AssignEventByPersonNameEventIndexCommand.class.getCanonicalName() + "{targetPersonName="
                 + personName + ", targetEventIndex=" + eventIndex + "}";
-        assertEquals(expected, unassignEventCommand.toString());
+        assertEquals(expected, assignEventCommand.toString());
     }
 }

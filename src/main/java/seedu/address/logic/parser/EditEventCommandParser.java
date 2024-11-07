@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,11 +33,11 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEventCommand.MESSAGE_USAGE));
         }
 
-        int eventId;
+        Index targetIndex;
         try {
-            eventId = Integer.parseInt(argMultiMap.getPreamble().trim());
-        } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEventCommand.MESSAGE_USAGE));
+            targetIndex = ParserUtil.parseIndex(argMultiMap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEventCommand.MESSAGE_USAGE), pe);
         }
 
         EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
@@ -50,7 +51,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
             editEventDescriptor.setDescription(eventDescription);
         }
         if (argMultiMap.getValue(PREFIX_EVENT_START_DATE)
-                        .isPresent() && argMultiMap.getValue(PREFIX_EVENT_END_DATE).isPresent()) {
+                .isPresent() && argMultiMap.getValue(PREFIX_EVENT_END_DATE).isPresent()) {
             EventDuration eventDuration = ParserUtil.parseEventDuration(
                     argMultiMap.getValue(PREFIX_EVENT_START_DATE).get(),
                     argMultiMap.getValue(PREFIX_EVENT_END_DATE).get());
@@ -61,6 +62,6 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
             throw new ParseException(EditEventCommand.MESSAGE_NO_CHANGES);
         }
 
-        return new EditEventCommand(eventId, editEventDescriptor);
+        return new EditEventCommand(targetIndex, editEventDescriptor);
     }
 }
