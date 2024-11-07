@@ -12,6 +12,12 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 # Quick start
 
+<div markdown="block" class="alert alert-info">
+
+**:information_desk_person: If you are an experienced user, and know how to set up jar files, you may wish to skip to the [command summary](#command-summary) and get started.**
+
+</div>
+
 1. Ensure you have Java `17` or above installed in your Computer.
 
 2. Download the latest `ClientelePlus.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14A-3/tp/releases).
@@ -32,12 +38,14 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
     * `delete id/3` : Deletes the 3rd client contact shown in the current list.
 
     * `blacklist 1` : Blacklists the 1st client contact shown in the current list.
-   
+
     * `archive 2` : Archives the 2nd client contact shown in the current list.
 
-    * `clear` : Deletes all client contacts.
+    * `edit n/James Thompson d/11-05-2025` : Set a client's deadline, and automatically update reminder manager
 
-    * `exit` : Exits the app.
+    * `find n/Jeremy` : Finds all clients whose name matches Jeremy
+
+    * `edit n/Joseph Wharton py/late` : Update client's payment status (will display as red $ on GUI)
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -395,7 +403,7 @@ Furthermore, **certain edits can cause the Clientele+ to behave in unexpected wa
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When adding/editing a client after filtering**, the application resets to showing _all_ clients, and the filter may need to be applied again. This is to work around the issue that rises when the client that is added or edited may not match the filter and would not be shown to you which makes it confusing to understand if the command has been executed successfully.
+3. **When adding/editing a client after filtering**, the application resets to showing _all_ clients, removing the initial filter. This is because newly added/edited clients may not match the current filter. The remedy is to reapply the initial filter.
 
 --------------------------------------------------------------------------------------------------------------------
 
