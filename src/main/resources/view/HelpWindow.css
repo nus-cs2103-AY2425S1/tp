@@ -6,6 +6,10 @@
     -fx-background-color: dimgray;
 }
 
+#copyButton:focused, #closeButton:focused {
+    -fx-border-color: red;
+}
+
 #copyButton:hover, #closeButton:hover {
     -fx-background-color: gray;
 }
@@ -13,6 +17,7 @@
 #copyButton:armed, #closeButton:armed {
     -fx-background-color: darkgray;
 }
+
 
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
