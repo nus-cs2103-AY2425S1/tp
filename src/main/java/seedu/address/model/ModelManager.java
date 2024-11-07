@@ -331,16 +331,9 @@ public class ModelManager implements Model {
 
     @Override
     public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
-        this.tagFilters.remove(tagFilters);
-        this.statusFilters.remove(statusFilters);
+        this.tagFilters.removeAll(tagFilters);
+        this.statusFilters.removeAll(statusFilters);
 
-        for (Tag tag : tagFilters) {
-            this.tagFilters.remove(tag);
-        }
-
-        for (RsvpStatus status : statusFilters) {
-            this.statusFilters.remove(status);
-        }
     }
 
     @Override
