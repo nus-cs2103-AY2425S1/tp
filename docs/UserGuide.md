@@ -243,7 +243,7 @@ Format: `findSubject SUBJECT [MORE_SUBJECTS]`
 * The order of the keywords does not matter. e.g., `math science` will match `science math`
 * Only the subject field is searched.
 * Only full words will be matched e.g., `mat` will not match `math`
-* Persons matching at least one keyword will be returned (i.e., `OR` search).  
+* Persons matching at least one keyword will be returned (i.e., `OR` search).
   e.g., `math science` will return persons with subjects `Math`, `Science`, `Math and Science`
 
 Examples:
@@ -321,6 +321,25 @@ Provides a list of commands executed, from the most recent to the earliest.
 Format: `history`
 
 * History displays only commands executed during the current session.
+* History displays all commands that was entered, regardless if it was successful or not.
+
+Examples:
+* If you accidentally add a tutor as a tutee using the `addTutee` command instead of `addTutor`, `history` lets you easily select and copy the previous command, saving you from retyping it.
+* If you were in the middle of updating records and was distracted, `history` will allow you to find out where you left off last.
+
+### Viewing chart of tutors’ volunteer hours : `vtc`
+
+Generates a chart displaying the total volunteering hours of all volunteer tutors.
+
+Format: `vtc`
+
+Examples:
+* To see an overview of volunteer contributions, `vtc` will display a chart with each tutor's name and total hours logged.
+
+<box type="info" seamless>
+vtc will cause all persons to be listed
+</box>
+
 
 ### Clearing all entries : `clear`
 
@@ -328,30 +347,63 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+
+### Importing people from CSV files : `import`
+
+Allows users to import data from a CSV file and add multiple persons at once to the address book.
+If any rows fail the validation check or contain duplicates, they are skipped, and detailed feedback is provided to the user.
+
+Format: `import \f FILEPATH`
+
+<box type="tip" seamless>
+
+**Tips**
+* Use this to import your current users from your Excel spreadsheets to VolunTier.
+
+* The .csv file to be imported must have these headings in this order: “name”, “phone”, “email”, “address”, “hours”, “role” and “subjects”.
+
+* There should be no empty rows in your CSV file.
+
+* For optional fields like hours and subject, leave a blank.<br>
+  For example, the following row leaves hours and subject blank: John, 91234567, john@gmail.com, “1 Jurong, 123456”, , Tutor,
+
+* For any field that requires a comma, surround it in quotes like this: "1 Jurong, 123456".
+
+* For more than one subject, separate it with a semicolon like this: English; Science.
+  </box>
+
+Example:
+*  `import \f ~/data/new_persons.csv` imports a list of people in new_persons.csv located in ~/data/ into VolunTier.
+* Output: `5 persons added. Rows with duplicates: [2, 4]. The following rows had data which failed some constraints: Row 3: Invalid email format. Row 5: Missing phone number.`
+
+<box type="info" seamless>
+
+Import only works for a list of persons. It does not support the lessons feature.
+</box>
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+VolunTier data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+VolunTier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, VolunTier will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the VolunTier to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -373,10 +425,21 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Lesson**   | `addLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT` <br> e.g., `addLesson 1 2 \s science`
+**Add Tutee**    | `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT​]…​` <br> e.g., `addTutee \n Evan Lee \p 88889999 \e evanlee@example.com \a 345, Clementi Rd, 1234665 \h 2 \s english`
+**Add Tutor**    | `addTutor \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​` <br> e.g., `addTutor \n James Ho \p 92224444 \e jamesho@example.com \a 123, Clementi Rd, 1234665 \h 7 \s math`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**DeleteLesson**| `deleteLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT `<br> e.g., `deleteLesson 1 2 \s science`
+**Edit**   | `edit INDEX [\n NAME] [\p PHONE_NUMBER] [\e EMAIL] [\a ADDRESS] [\h HOURS] [\s SUBJECT]…​`<br> e.g.,`edit 2 \n James Lee \e jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindSubject** | `findSubject SUBJECT [MORE_SUBJECTS]` <br> e.g., `findSubject math science`
+**History**	    | `history`
+**Import** | `import \f FILEPATH`
 **List**   | `list`
+**Undo**   | `undo`
+**Redo**   | `redo`
+**View**   | `view`
+**View Tutor Hours**   | `vtc`
+**Exit**   | `exit`
 **Help**   | `help`
