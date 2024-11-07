@@ -17,7 +17,6 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is invalid";
     public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is out of range of the displayed"
             + " list";
     public static final String MESSAGE_INVALID_ENTITY = "Invalid entity '%1$s'. Valid entities are 'company', "
