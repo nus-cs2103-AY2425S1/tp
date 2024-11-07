@@ -182,9 +182,8 @@ public class ModelManager implements Model {
 
     @Override
     public void addObserver(ModelClearObserver observer) {
-        if (observer == null) {
-            throw new NullPointerException("Observer cannot be null");
-        }
+        assert observer != null;
+
         this.observer = observer;
     }
 

@@ -65,6 +65,8 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener, Mo
      * Sets the person details on the DetailPanel.
      * This method updates the text of the labels with the provided person's details.
      *
+     * If selected Udder is deleted, the detailPanel will show details of the Udder with index after the deleted Udder.
+     *
      */
     public void updateDetails() {
         if (this.person == null) {
