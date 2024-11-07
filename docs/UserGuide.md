@@ -201,8 +201,17 @@ Examples:
 - `list person` followed by `delete person 2` deletes the 2nd person in the address book.
 - `find person Bernice` followed by `delete person 1` deletes the 1st person in the results of the `find person` command.
 
+Users will be provided with the following prompt.
+
 ![result for 'delete person confirmation'](images/delete_person_confirmation.png)
-![result for 'delete person'](images/delete_person.png)
+
+Typing `N` or `n` and pressing enter would return the following message.
+
+![result for 'delete person N'](images/delete_person_reject.png)
+
+Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
+
+![result for 'delete person Y'](images/delete_person.png)
 
 ## Managing Events
 
@@ -344,8 +353,17 @@ Clears all event entries from the address book after receiving confirmation from
 
 Format: `clear event`
 
+Users will be provided with the following prompt.
+
 ![result for 'clear event confirmation'](images/clear_event_confirmation.png)
-![result for 'clear event'](images/clear_event.png)
+
+Typing `N` or `n` and pressing enter would return the following message.
+
+![result for 'clear event N'](images/clear_event_reject.png)
+
+Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
+
+![result for 'clear event Y'](images/clear_event.png)
 
 ## Utility Commands
 
@@ -357,15 +375,15 @@ Format: `clear all`
 
 Users will be provided with the following prompt.
 
-![result for 'clear all'](images/clear_all_confirmation.png)
+![result for 'clear all confirmation'](images/clear_all_confirmation.png)
 
 Typing `N` or `n` and pressing enter would return the following message.
 
-![result for 'N'](images/clear_all_reject.png)
+![result for 'clear all N'](images/clear_all_reject.png)
 
 Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
 
-![result for 'Y'](images/clear_all.png)
+![result for 'clear all Y'](images/clear_all.png)
 
 ### Exiting the program : `exit`
 
