@@ -19,19 +19,20 @@ Main Features:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<!-- Quick start -->
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -44,10 +45,16 @@ Main Features:
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
+
+<box type="info">
+
+Refer to [Troubleshooting](#troubleshooting) for help on setting up.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
+<!-- Features -->
 ## Features
 
 <box type="info" seamless>
@@ -72,6 +79,7 @@ Main Features:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<!-- Viewing help -->
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -81,6 +89,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
+<!-- Adding a person -->
 ### Adding a person: `add p`
 
 Adds a person to the address book.
@@ -96,6 +105,7 @@ Examples:
 * `add p n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add p n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<!-- Adding an event -->
 ### Adding an event: `add e`
 
 Adds an event to the address book.
@@ -255,11 +265,38 @@ Examples:
     ![result for 'delete e 2'](images/deleteEventAfter.png)
 * `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
 
+
+### Linking a person to an event : `link`
+
+Creates a link between a person and event which will appear in the person's details.
+
+Format: `link INDEX EVENT_NAME`
+
+Examples:
+* `list` followed by `link 2 Winter Time Convention` links the 2nd person in the address book to the event.
+* `find p "John"` followed by `link 1 Party` links the 1st person in the results of the `find` command to the event.
+
+
+### Clearing all persons : `clear p`
+
+Displays a confirmation, enter "yes" or "y" to clear all persons from the address book.
+
+Format: `clear p` then `y` or `yes`
+
+
+### Clearing all events : `clear e`
+
+Displays a confirmation, enter "yes" or "y" to clear all events from the address book.
+
+Format: `clear e` then `y` or `yes`
+
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Displays a confirmation, enter "yes" or "y" to clear all entries from the address book.
 
-Format: `clear`
+Format: `clear` then `y` or `yes`
+
 
 ### Exiting the program : `exit`
 
@@ -282,16 +319,109 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Troubleshooting
+
+<box type="important" seamless icon=":question:">
+
+"I don’t know if I have Java installed or what version I have."
+
+</box>
+
+<box type="tip" seamless>
+
+* Open a command prompt (on Windows) or terminal (on macOS/Linux).
+* Type the command: ```java -version```
+* If Java is installed, you should see a version number. Look for a line that says java version "17.0.1" or higher.
+* If you don’t have Java installed or see a version lower than 17, download the latest Java Development Kit (JDK) from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+
+</box>
+
+--- {.border-secondary}
+
+<box type="important" seamless icon=":question:">
+
+"I’m not sure what the home folder is or where to copy the file."
+
+</box>
+
+<box type="tip" seamless>
+
+The home folder can be any folder where you’d like to store your Eventory files. This folder will contain your Eventory data as you use the application.
+Choose a location you can easily find later (e.g., Desktop or Documents).
+Copy (or move) the downloaded .jar file into this folder.
+
+</box>
+
+--- {.border-secondary}
+
+<box type="important" seamless icon=":question:">
+
+"I’m not familiar with how to open a command terminal or navigate to a folder."
+
+</box>
+
+<box type="tip" seamless>
+
+On Windows:
+
+Press Win + R, type cmd, and press Enter to open the command prompt.
+Use the cd command to navigate to your folder. For example, if your file is on the Desktop, type:
+```
+cd Desktop
+```
+
+On macOS:
+
+Press Command + Space, type Terminal, and press Enter.
+Use the cd command to navigate to your folder. For example, if your file is on the Desktop, type:
+```
+cd ~/Desktop
+```
+On Linux:
+
+Open your terminal (often found in Applications > Utilities or by pressing Ctrl + Alt + T).
+Use the cd command to navigate to your folder. For example, if your file is on your home directory, type:
+```
+cd ~
+```
+
+<box type="info" light>
+
+If the folder path has spaces, enclose it in quotes. For example:
+```
+cd "C:\Users\YourName\Desktop\My Folder"
+cd "~/My Folder"
+```
+</box>
+</box>
+
+<box type="important" seamless icon=":question:">
+
+"I get an error when I try to run the command java -jar addressbook.jar."
+
+</box>
+
+<box type="tip" seamless>
+
+Check the file name: Ensure you’re using the exact name of the .jar file. If the file you downloaded has a different name, use that exact name in the command instead:
+```
+java -jar differentname.jar
+```
+<box type="info" light>
+If you receive a "Permission denied" error, ensure you have permissions to access the folder and file. Try running the terminal as an administrator (on Windows) or using sudo before the command on macOS/Linux.
+Java not recognized: If you get an error like "java is not recognized as an internal or external command," Java may not be installed correctly, or it’s not in your system's PATH. Refer back to Step 1 to verify and reinstall if necessary.
+
+</box>
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
