@@ -281,9 +281,7 @@ Object.
 
 **Aspect: Whether to implement entity commands as separate commands or through an abstract base command**
 - **Alternative 1 (Current choice):** Implement an abstract EntityCommand class that specific entity 
-  commands (e.g. `AddPersonCommand`, `AddAppointmentCommand`, `DeletePersonCommand`, 
-  `DeleteAppointmentCommand`) 
-  inherit from.
+  commands (e.g. `AddPersonCommand`, `AddAppointmentCommand`, `DeletePersonCommand`,`DeleteAppointmentCommand`) inherit from.
   - **Pros**: Allows for reuse of code logic between entity commands.
   - **Cons**: Requires additional parsing logic since entity in command must be distinguished (person or appointment), which can add complexity.
 - **Alternative 2:** Implement each entity command as entirely separate classes.
@@ -294,17 +292,19 @@ Object.
 <br>
 
 **Aspect: What constitutes duplicate person that should not be added or edited into the AddressBook**
-- **Alternative 1 (Current choice):** Duplicate person is one that has the same name (case-insensitive) and same phone number as an existing person
+- **Alternative 1 (Current choice):** Duplicate person is one that has the same name (case-insensitive) 
+  and same phone number as an existing person.
   - **Pros**: Name and phone numbers are identifiers that are commonly recognized by users.
   - **Cons**: Extra logic required to determine equality of different people.
-- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g. by name only)
+- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g. by name only).
   - **Pros**: Less logic required to determine equality of different people.
   - **Cons**: Different people could have the same name, but cannot be added into the AddressBook.
 
 <br>
 
 **Aspect: What constitutes duplicate appointment that should not be added or edited into the AppointmentBook**
-- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time, and appointment type as an existing appointment
+- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time, 
+  and appointment type as an existing appointment.
   - **Pros**: Provides a rule to avoid scheduling conflicts of same person.
   - **Cons**: Extra logic required to determine equality of different appointments.
 - **Alternative 2:** Define duplicates with only the date and time
@@ -355,7 +355,6 @@ Object.
 - **Alternative 1 (Current choice):** Use the index of the person / appointment in the list.
   - **Pros**: Enables efficient retrieval directly from the list, simplifying implementation.
   - **Cons**: Entity indexes may shift after deletions, which could lead to unintended edits if the user is not aware of changes in ordering.
-
 - **Alternative 2:** Use a unique ID for each entity.
   - **Pros**: IDs remain consistent regardless of list modifications, ensuring stable reference to the entity.
   - **Cons**: Implementing ID-based retrieval requires additional logic and may be slower, especially for larger lists.
