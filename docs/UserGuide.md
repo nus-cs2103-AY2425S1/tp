@@ -37,23 +37,23 @@ experience to their clients without being weighed down by administrative burdens
 
    * `delete John Doe` : Deletes the contact named `john doe` in the current list.
 
-   * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for john doe on October 14, 2024, at 12pm with the given note.
-
-   * `appointment-delete John Doe d/2024-10-14 1200` : Deletes a specified appointment for john doe.
-
-   * `appointment-list` : Lists all upcoming scheduled appointments.
-
    * `edit John Doe n/John Doo` : Edits the name of john doe to john doo.
 
    * `view John Doe` : Shows the details of john doe.
 
    * `find John Doe` : Searches for john doe in the current list.
 
+   * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for john doe on October 14, 2024, at 12pm with the given note.
+
+   * `appointment-delete John Doe d/2024-10-14 1200` : Deletes a specified appointment for john doe.
+
+   * `appointment-list` : Lists all upcoming scheduled appointments.
+
+   * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for john doe on October 14, 2024, at 12pm as paid.
+
    * `reminder John Doe r/1 hour` : Sets a reminder for john doe 1 hour before his scheduled appointment.
 
    * `reminder-delete John Doe` : Deletes the reminder set for john doe.
-
-   * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for john doe on October 14, 2024, at 12pm as paid.
 
    * `clear` : Deletes all contacts.
 
@@ -97,7 +97,6 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -114,6 +113,84 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/acl tear e/betsycrowe@example.com a/Newgate Prison p/1234567 t/ankle sprain`<br>
   ![add Betsy Crowe](images/addBetsyCrowe.png)
+
+### Editing a person : `edit`
+
+Edits an existing person in the address book.
+
+Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+* Edits the person with the specified `NAME`. The name refers to the name shown in the displayed person list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `John Doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `Betsy Crowe` to be `Betsy Crower` and clears all existing tags.
+
+### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete NAME`
+
+* Deletes the person with the specified `NAME`.
+* The name must be the name of an existing person.
+
+Examples:
+* `delete John Doe` deletes the person named `john doe` in the address book.
+
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
+### Viewing a person: `view NAME`
+
+Displays the details of a person in the address book.
+
+**Format:** `view NAME`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The name must match the full name exactly
+</div>
+
+**On success:** A pop-up window will show the details including:
+- Name
+- Phone Number
+- Email
+- Address
+- Condition
+- Schedule
+
+**Examples:**
+* `view John Doe`
+* `view Jamie Chew`<br>
+  ![view Jamie Chew](images/viewJamieChew.png)<br>
+
+### Locating persons: `find`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find [KEYWORD] [MORE_KEYWORDS] || [p/PHONE]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `hans bo` will match `bo hans`
+* Only the name or the number is searched.
+* Persons matching at least one keyword (or parts of it) will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `hans gruber`, `bo yang`
+* Persons matching the phone number (or parts of it) will be returned
+
+Examples:
+* `find john` returns `john` and `john doe`
+* `find alex david` returns `alex yeoh`, `david li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)<br>
+* `find p/887` returns `john doo` (with phone number `88765432`) <br>
+  ![result for 'find p/887'](images/find887.png)
 
 ### Scheduling an appointment: `schedule`
 
@@ -136,6 +213,53 @@ Examples:
 * `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`<br>
   ![schedule for Betsy Crowe](images/scheduleBetsyCrowe.png)
 
+### Deleting an appointment: `appointment-delete`
+
+Deletes a specified appointment for a client in the address book.
+
+Format: `appointment-delete NAME d/DATE_AND_TIME`
+
+* The given name must be the name of an existing client.
+* The given date and time must be in the format yyyy-MM-dd HHmm.
+* The appointment given must be an existing appointment for the client.
+
+Examples:
+* `appointment-delete Betsy Crowe d/2024-10-14 1300`<br>
+  ![appointment delete Betsy Crowe](images/appointmentDeleteBetsyCrowe.png)
+
+### Making Payment for an appointment: `payment`
+
+Marks an appointment for a client as paid or unpaid.
+
+Format: `payment NAME d/DATE_AND_TIME pay/PAYMENT_STATUS`
+
+* Format for the date and time must be in yyyy-MM-dd HHmm.
+* Payment status can be in the format [paid or unpaid] and will be shown in the client tab.
+
+Examples:
+* `payment John Doe d/2024-10-14 1200 pay/unpaid`
+* `payment Betsy Crowe d/2024-10-14 1300 pay/paid`<br>
+  ![payment Betsy Crowe](images/paymentBetsyCrowe.png)<br>
+
+### Viewing upcoming appointments: `appointment-list`
+
+Lists all upcoming appointments in the order of the earliest next upcoming appointment.
+
+Format: `appointment-list [d/DATE][TIME]`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The optional date and time fields act as filters
+</div>
+
+* This will only show appointments that are in the **future** (compared to local time now).
+* A time filter cannot be applied without date filter.
+* Format for the date and time must be in yyyy-MM-dd HHmm.
+
+Examples:
+* `appointment-list`<br>
+  ![appointment list](images/appointmentList.png)<br>
+* `appointment-list d/2024-10-17`
+* `appointment-list d/2024-10-18 1000`
 
 ### Setting a reminder: `reminder`
 
@@ -172,132 +296,6 @@ Format: `reminder-delete NAME`
 Examples:
 * `reminder-delete Betsy Crowe`<br>
   ![reminder delete Betsy Crowe](images/reminderDeleteBetsyCrowe.png)
-
-### Deleting an appointment: `appointment-delete`
-
-Deletes a specified appointment for a client in the address book.
-
-Format: `appointment-delete NAME d/DATE_AND_TIME`
-
-* The given name must be the name of an existing client.
-* The given date and time must be in the format yyyy-MM-dd HHmm.
-* The appointment given must be an existing appointment for the client.
-
-Examples:
-* `appointment-delete Betsy Crowe d/2024-10-14 1300`<br>
-  ![appointment delete Betsy Crowe](images/appointmentDeleteBetsyCrowe.png)
-
-### Viewing upcoming appointments: `appointment-list`
-
-Lists all upcoming appointments in the order of the earliest next upcoming appointment.
-
-Format: `appointment-list [d/DATE][TIME]`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The optional date and time fields act as filters
-</div>
-
-* This will only show appointments that are in the **future** (compared to local time now).
-* A time filter cannot be applied without date filter.
-* Format for the date and time must be in yyyy-MM-dd HHmm.
-
-Examples:
-* `appointment-list`<br>
-  ![appointment list](images/appointmentList.png)<br>
-* `appointment-list d/2024-10-17`
-* `appointment-list d/2024-10-18 1000`
-
-### Making Payment for an appointment: `payment`
-
-Marks an appointment for a client as paid or unpaid.
-
-Format: `payment NAME d/DATE_AND_TIME pay/PAYMENT_STATUS`
-
-* Format for the date and time must be in yyyy-MM-dd HHmm.
-* Payment status can be in the format [paid or unpaid] and will be shown in the client tab.
-
-Examples:
-* `payment John Doe d/2024-10-14 1200 pay/unpaid`
-* `payment Betsy Crowe d/2024-10-14 1300 pay/paid`<br>
-  ![payment Betsy Crowe](images/paymentBetsyCrowe.png)<br>
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Viewing a person: `view NAME`
-
-Displays the details of a person in the address book.
-
-**Format:** `view NAME`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The name must match the full name exactly
-</div>
-
-**On success:** A pop-up window will show the details including:
-- Name
-- Phone Number
-- Email
-- Address
-- Condition
-- Schedule
-
-**Examples:**
-* `view John Doe`
-* `view Jamie Chew`<br>
-  ![view Jamie Chew](images/viewJamieChew.png)<br>
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person with the specified `NAME`. The name refers to the name shown in the displayed person list.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `John Doe` to be `91234567` and `johndoe@example.com` respectively.
-*  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `Betsy Crowe` to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find [KEYWORD] [MORE_KEYWORDS] || [p/PHONE]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `hans bo` will match `bo hans`
-* Only the name or the number is searched.
-* Persons matching at least one keyword (or parts of it) will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `hans gruber`, `bo yang`
-* Persons matching the phone number (or parts of it) will be returned
-
-Examples:
-* `find john` returns `john` and `john doe`
-* `find alex david` returns `alex yeoh`, `david li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)<br>
-* `find p/887` returns `john doo` (with phone number `88765432`) <br>
-  ![result for 'find p/887'](images/find887.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete NAME`
-
-* Deletes the person with the specified `NAME`.
-* The name must be the name of an existing person.
-
-Examples:
-* `delete John Doe` deletes the person named `john doe` in the address book.
 
 ### Clearing all entries : `clear`
 
