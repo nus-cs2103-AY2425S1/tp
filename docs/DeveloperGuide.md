@@ -582,27 +582,148 @@ testers are expected to do more *exploratory* testing.
    2. Click the "Exit" item.
       Expected: Application closes without errors.
 
-### Deleting a person
+### Viewing help
 
-1. Deleting a person while all persons are being shown
+1. **Viewing help instructions**
+    - **Prerequisites**: Ensure that AdmiNUS is running.
+    - **Test case**: `help`  
+      **Expected**: A message explaining the various commands available is shown. No changes to the contact list. Status message updates to indicate the help command was executed.
+    - **Test case**: `help extra`  
+      **Expected**: Command is interpreted as `help`, and the help message is shown. Status message updates as expected.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Listing all contacts
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. **Listing contacts in AdmiNUS**
+    - **Prerequisites**: Ensure that AdmiNUS is running and there are contacts present in the list.
+    - **Test case**: `list`  
+      **Expected**: All contacts are displayed in the list. Status message updates to indicate the command was executed.
+    - **Test case**: `list 123`  
+      **Expected**: Command is interpreted as `list`, and the contact list is shown. Status bar remains the same.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Viewing a contact
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. **Viewing details of a specific contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `view 1`  
+      **Expected**: Details of the first contact in the list are shown. Status message updates with relevant details.
+    - **Test case**: `view 0`  
+      **Expected**: No contact details shown. Error message displayed, status bar remains unchanged.
+    - **Other incorrect commands to try**: `view`, `view x` (where x exceeds list size)  
+      **Expected**: Error details shown in the status message. Status bar remains the same.
 
-2. _{ more test cases …​ }_
+### Clearing all entries
 
-### Saving data
+1. **Clearing all contacts in AdmiNUS**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `clear`  
+      **Expected**: All entries in AdmiNUS are cleared. Status message updates confirming the action, timestamp is updated.
+    - **Test case**: `clear extra`  
+      **Expected**: Command is interpreted as `clear`. Status message updates confirming the action, timestamp is updated.
 
-1. Dealing with missing/corrupted data files
+### Exiting the program
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. **Exiting AdmiNUS**
+    - **Prerequisites**: Ensure that AdmiNUS is running.
+    - **Test case**: `exit`  
+      **Expected**: Program closes gracefully.
+    - **Test case**: `exit extra`  
+      **Expected**: Command is interpreted as `exit`, and the program closes.
 
-2. _{ more test cases …​ }_
+### Adding a student
+
+1. **Adding a student contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and the contact list is visible.
+    - **Test case**: `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
+      **Expected**: A student named John Doe is added. Status message updates to show success. Timestamp in the status bar is updated.
+    - **Test case**: `student n/John id/invalid_id p/98765432 e/john@example.com a/Some Address`  
+      **Expected**: No contact is added. Error message shown in status. Status bar remains unchanged.
+
+### Adding a company
+
+1. **Adding a company contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and the contact list is visible.
+    - **Test case**: `company n/Newgate Prison i/Security p/1234567 e/newgateprison@example.com a/Newgate Prison t/prison facility`  
+      **Expected**: Company contact added successfully. Status message updates with details, timestamp updated.
+    - **Test case**: `company n/Newgate p/invalid_phone e/email@domain.com a/Address`  
+      **Expected**: No contact added. Error message shown in the status message. Status bar remains unchanged.
+
+### Editing a contact
+
+1. **Editing an existing contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and a contact list is visible.
+    - **Test case**: `edit 1 p/91234567 e/johndoe@example.com`  
+      **Expected**: First contact is updated. Status message confirms the update, timestamp updated.
+    - **Test case**: `edit 0 p/12345678`  
+      **Expected**: No contact edited. Error message shown. Status bar unchanged.
+
+### Deleting contact(s)
+
+1. **Deleting one or more contacts**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `delete 2 3`  
+      **Expected**: 2nd and 3rd contacts are deleted. Status message confirms the action, timestamp updated.
+    - **Test case**: `delete 0`  
+      **Expected**: No contact deleted. Error message shown. Status bar unchanged.
+
+### Locating persons by name
+
+1. **Finding contacts by name**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `find John`  
+      **Expected**: Contacts with "John" in their name are shown. Status message updates.
+    - **Test case**: `find unknown`  
+      **Expected**: No contacts found. Status message updates with no results.
+
+### Filtering contacts by tags
+
+1. **Filtering contacts by tag**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed with tags.
+    - **Test case**: `filtertag buddies`  
+      **Expected**: Contacts with the tag "buddies" are shown. Status message updates.
+    - **Test case**: `filtertag non-existent-tag`  
+      **Expected**: No contacts found. Status message updates with no results.
+
+### Tracking contacts by category
+
+1. **Tracking contacts by category**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `track student`  
+      **Expected**: All student contacts are shown. Status message updates.
+    - **Test case**: `track non-category`  
+      **Expected**: No contacts found. Error message shown. Status bar unchanged.
+
+### Adding tag(s) to contact
+
+1. **Adding tags to an existing contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `tag 1 t/Y2 t/computerScience`  
+      **Expected**: Tags added to the first contact. Status message updates. Timestamp updated.
+    - **Test case**: `tag 0 t/invalid`  
+      **Expected**: No tags added. Error message shown. Status bar unchanged.
+
+### Deleting tag(s) from contact
+
+1. **Deleting tags from an existing contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `deletetag 1 t/Y2 t/computerScience`  
+      **Expected**: Tags removed from the first contact. Status message updates. Timestamp updated.
+    - **Test case**: `deletetag 0 t/invalid`  
+      **Expected**: No tags removed. Error message shown. Status bar unchanged.
+
+### Importing CSV files
+
+1. **Importing a CSV file with correct format**
+    - **Prerequisites**: Ensure that AdmiNUS is running and the CSV file exists.
+    - **Test case**: `import /path/to/data.csv`  
+      **Expected**: Data imported successfully. Status message confirms import, timestamp updated.
+    - **Test case**: `import /invalid/path.csv`  
+      **Expected**: No data imported. Error message shown. Status bar unchanged.
+
+### Exporting CSV files
+
+1. **Exporting data to a CSV file**
+    - **Prerequisites**: Ensure that AdmiNUS is running and there is data to export.
+    - **Test case**: `export /path/to/output.csv`  
+      **Expected**: Data exported successfully. Status message confirms export, timestamp updated.
+    - **Test case**: `export /invalid/path/output.csv`  
+      **Expected**: No data exported. Error message shown. Status bar unchanged.
