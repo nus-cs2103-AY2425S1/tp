@@ -3,13 +3,14 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -246,5 +247,20 @@ public class ParserUtilTest {
         assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1"));
         assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("0"));
         assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1234567890"));
+    }
+
+    @Test
+    public void parseProcurementDate_futureDate_failure() {
+        // Test case may not work in year 292278994.
+        Date future = new Date(Long.MAX_VALUE);
+        String dateString = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(future);
+        assertThrows(ParseException.class, () -> ParserUtil.parseProcurementDate(dateString));
+    }
+
+    @Test
+    public void parseProcurementDate_notFutureDate_success() {
+        Date now = new Date();
+        String dateString = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(now);
+        assertDoesNotThrow(() -> ParserUtil.parseProcurementDate(dateString));
     }
 }
