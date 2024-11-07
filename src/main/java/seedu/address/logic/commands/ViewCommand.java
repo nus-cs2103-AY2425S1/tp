@@ -12,6 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.PersonHasWeddingPredicate;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingMatchesClientPredicate;
 
 
 /**
@@ -35,6 +37,7 @@ public class ViewCommand extends Command {
             "To view a specific contact, please specify the index of the contact you want to view.\n"
                     + "Find the index from the list below and type view INDEX\n"
                     + "Example: " + COMMAND_WORD + " 1";
+    private static final String MESSAGE_MULTIPLE_WEDDING = "The client %s has multiple weddings.";
 
     private final Index targetIndex;
     private final NameMatchesKeywordPredicate predicate;
@@ -54,13 +57,15 @@ public class ViewCommand extends Command {
         if (this.targetIndex != null) {
             Person personToView = getPersonByIndex(model);
             model.updateFilteredPersonList(p -> p.equals(personToView));
-            model.updateFilteredWeddingList(new PersonHasWeddingPredicate(personToView));
+            updateWedding(personToView, model);
+            model.updateFilteredWeddingListWithOwnWedding(new PersonHasWeddingPredicate(personToView));
             return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView.getName()));
         } else {
             Person personToView = getPersonByKeyword(model);
             if (personToView != null) {
                 // unique person found
-                model.updateFilteredWeddingList(new PersonHasWeddingPredicate(personToView));
+                updateWedding(personToView, model);
+                model.updateFilteredWeddingListWithOwnWedding(new PersonHasWeddingPredicate(personToView));
                 return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView.getName()));
             } else {
                 return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
@@ -99,6 +104,21 @@ public class ViewCommand extends Command {
             return filteredList.get(0);
         } else {
             return null;
+        }
+    }
+
+    private void updateWedding(Person client, Model model) throws CommandException {
+        WeddingMatchesClientPredicate clientPredicate = new WeddingMatchesClientPredicate(client);
+        model.updateFilteredWeddingList(clientPredicate);
+        List<Wedding> filteredList = model.getFilteredWeddingList();
+        if (filteredList.size() == 1) {
+            Wedding ownWedding = filteredList.get(0);
+            Wedding updatedWedding = new Wedding(ownWedding.getName(), ownWedding.getClient(),
+                    ownWedding.getDate(), ownWedding.getVenue());
+            updatedWedding.setIsOwnWedding(true);
+            model.setWedding(ownWedding, updatedWedding);
+        } else if (filteredList.size() > 1) {
+            throw new CommandException(String.format(MESSAGE_MULTIPLE_WEDDING, client.getName()));
         }
     }
 

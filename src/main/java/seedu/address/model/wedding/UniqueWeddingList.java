@@ -103,6 +103,12 @@ public class UniqueWeddingList implements Iterable<Wedding> {
         internalList.setAll(replacement.internalList);
     }
 
+    public void setAllWeddingIsOwnFalse() {
+        for (Wedding wedding : internalList) {
+            wedding.setIsOwnWedding(false);
+        }
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

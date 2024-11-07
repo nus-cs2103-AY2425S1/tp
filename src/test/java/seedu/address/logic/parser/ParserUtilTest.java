@@ -30,7 +30,6 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROLE_1 = "#friend";
-    private static final String INVALID_ROLE_2 = "";
     private static final String INVALID_DATE = "31 December 2024";
     private static final String INVALID_VENUE = "";
     private static final String INVALID_CLIENT_INDEX = "-1";
@@ -42,6 +41,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ROLE_1 = "friend";
+    private static final String VALID_EMPTY_ROLE = "";
     private static final String VALID_DATE = "2024-12-31";
     private static final String VALID_VENUE = "Chijmes";
     private static final String VALID_CLIENT_INDEX = "1";
@@ -172,7 +172,6 @@ public class ParserUtilTest {
     @Test
     public void parseRole_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE_1));
-        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE_2));
     }
 
     @Test
@@ -189,15 +188,16 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(null));
-    }
-
-    @Test
     public void parseRole_withValidRole_returnsRole() throws Exception {
         Optional<Role> actualRole = ParserUtil.parseRole(VALID_ROLE_1);
         Optional<Role> expectedRole = Optional.of(new Role(VALID_ROLE_1));
+        assertEquals(expectedRole, actualRole);
+    }
 
+    @Test
+    public void parseRole_withValidEmptyRole_returnsRole() throws Exception {
+        Optional<Role> actualRole = ParserUtil.parseRole(VALID_EMPTY_ROLE);
+        Optional<Role> expectedRole = Optional.empty();
         assertEquals(expectedRole, actualRole);
     }
 

@@ -10,7 +10,7 @@ public class Role {
 
     public static final String MESSAGE_CONSTRAINTS = "Role should be one word, alphanumeric, "
             + "and should not be blank.";
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9]+$";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9]*$";
 
 
     public final String roleName;
@@ -57,7 +57,7 @@ public class Role {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + roleName + ']';
+        return roleName;
     }
 
 }
