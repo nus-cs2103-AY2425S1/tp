@@ -159,6 +159,17 @@ public class Person {
         return new Person(name, phone, email, course, tags, gradeList, newAttendanceList);
     }
 
+
+    /**
+     * Checks if the person has attendance recorded for the specified date.
+     *
+     * @param date The date to check for attendance.
+     * @return true if attendance is recorded for the specified date, false otherwise.
+     */
+    public boolean hasAttendance(LocalDateTime date) {
+        return attendanceList.getMap().containsKey(date);
+    }
+
     /**
      * Returns the total weightage of all grades associated with this person.
      *

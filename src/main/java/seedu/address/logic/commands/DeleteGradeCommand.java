@@ -61,7 +61,6 @@ public class DeleteGradeCommand extends Command {
 
         final Person editedPerson = personToEdit.removeGrade(testName);
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(
                 String.format(MESSAGE_DELETE_GRADE_SUCCESS, personToEdit.getName(), this.testName));
