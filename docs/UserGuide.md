@@ -118,6 +118,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 </box>
 
 * The phone number must follow the Singaporean convention: have 8 digits, start with 6, 8, or 9, and consist only of numbers.
+* Do not add duplicate contacts to the list.
+* Two contacts are considered duplicates if they share the same name, email, or phone number.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
@@ -141,6 +143,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed, i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* After editing the person, there should be no duplicate contact in the campus connect.
+* Two contacts are considered duplicates if they share the same name, email, or phone number.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -184,7 +188,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in CampusConnect.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adds tags to a specific person : `addtag`
+### Adding tags to a specific person : `addtag`
 
 Adds the specified person's tag.
 
@@ -255,6 +259,7 @@ Format: `undo`
 
 * Reverts the state of CampusConnect to the one before the most recent command, if any.
 * When the oldest version of CampusConnect is reached, `undo` command will cause an exception to be thrown
+* Only the command that modify the data of CampusConnect can be undone. Commands such as `list` and `find` will not be undone.
 
 ### Redo a command: `redo`
 
@@ -263,6 +268,7 @@ Reapplies a command that was previously undone by `undo`.
 Format: `redo`
 
 * Advances CampusConnect to the state it was in before the most recent `undo` command, if any.
+* Only the command that modify the data of CampusConnect can be redone. Commands such as `list` and `find` will not be redone.
 * Note: If a new command (excluding `redo` or `undo`) is executed after an `undo`, the redo history is cleared, and further `redo` will not be possible.
 
 ### Clearing all entries : `clear`
