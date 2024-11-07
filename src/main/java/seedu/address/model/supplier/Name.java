@@ -1,7 +1,6 @@
 package seedu.address.model.supplier;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Supplier's name in the address book.
@@ -18,6 +17,7 @@ public class Name {
     public static final String VALIDATION_REGEX = "[^/][^/]*";
 
     public final String fullName;
+    private final String normalizedName;
 
     /**
      * Constructs a {@code Name}.
@@ -26,8 +26,14 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+
+        fullName = name.trim().replaceAll("\\s+", " ");
+
+        normalizedName = fullName.toLowerCase();
+
+        if (!isValidName(name)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
@@ -37,30 +43,24 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getNormalizedName() {
+        return normalizedName;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Name
+                && normalizedName.equals(((Name) other).normalizedName));
+    }
+
+    @Override
+    public int hashCode() {
+        return normalizedName.hashCode();
+    }
 
     @Override
     public String toString() {
         return fullName;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Name)) {
-            return false;
-        }
-
-        Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
-    }
-
-    @Override
-    public int hashCode() {
-        return fullName.hashCode();
-    }
-
 }

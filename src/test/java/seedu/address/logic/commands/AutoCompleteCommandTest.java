@@ -69,7 +69,7 @@ public class AutoCompleteCommandTest {
         AutoCompleteCommand autoCompleteCommand = new AutoCompleteCommand("",
             CliSyntax.PREFIX_PRODUCT_NAME.getPrefix());
         CommandResult result = autoCompleteCommand.execute(model);
-        List<String> expectedCompletions = Arrays.asList(apple.getName().fullName);
+        List<String> expectedCompletions = Arrays.asList(apple.getName().getOriginalName());
         assertEquals(String.join(AutoCompleteCommand.SUGGESTIONS_DELIMITER, expectedCompletions),
             result.getFeedbackToUser());
     }

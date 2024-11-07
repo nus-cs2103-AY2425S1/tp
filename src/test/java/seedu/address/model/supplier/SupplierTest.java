@@ -47,14 +47,13 @@ public class SupplierTest {
         editedAlice = new SupplierBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameSupplier(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
         Supplier editedBob = new SupplierBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameSupplier(editedBob));
+        assertTrue(BOB.isSameSupplier(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new SupplierBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameSupplier(editedBob));
+        assertTrue(BOB.isSameSupplier(editedBob));
     }
 
     @Test
