@@ -154,7 +154,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Pagination
 
-The pagination makes use of `javafx.scene.control.Pagination` component which is inherited by `PaginationPanel`. 
+The pagination makes use of `javafx.scene.control.Pagination` component which is inherited by `PaginationPanel`.
 The `PaginationPanel.java` stores all logic and attributes related to Pagination.
 
 The `PaginationPanel` contains the following member/class variables:
