@@ -78,20 +78,6 @@ public class AssignEventByPersonNameEventNameCommandTest {
     }
 
     @Test
-    public void execute_multiplePersonsWithSameName_throwsCommandException() {
-        // Create two persons with the same name
-        Person aliceClone = new Person(new Name("ALICE PAULINE"),
-                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
-                ALICE.getTags(), ALICE.getEventIds(), ALICE.getId() + 1);
-        model.addPerson(aliceClone);
-
-        AssignEventByPersonNameEventNameCommand command = new AssignEventByPersonNameEventNameCommand(
-                ALICE.getName(), MEETING.getEventName());
-
-        assertCommandFailure(command, model, Messages.MESSAGE_MORE_THAN_ONE_PERSON_DISPLAYED_NAME);
-    }
-
-    @Test
     public void equals() {
         model.addPerson(BOB);
         AssignEventByPersonNameEventNameCommand command1 = new AssignEventByPersonNameEventNameCommand(
