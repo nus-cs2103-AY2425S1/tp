@@ -33,7 +33,7 @@ public class AddSupplyOrderCommandParser implements Parser<AddSupplyOrderCommand
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ORDER);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ORDER, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ORDER, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -41,18 +41,17 @@ public class AddSupplyOrderCommandParser implements Parser<AddSupplyOrderCommand
                     AddSupplyOrderCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ORDER, PREFIX_REMARK);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse("Guest Supplier"));
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
         String[] splitArgs = argMultimap.getValue(PREFIX_ORDER).orElse("").split("\\s+");
 
-        if (splitArgs.length == 0) {
+        if (splitArgs[0].isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplyOrderCommand.MESSAGE_USAGE));
         }
-
         ArrayList<Integer> idList = new ArrayList<>();
 
         for (int i = 0; i < splitArgs.length; i++) {

@@ -27,7 +27,7 @@ import seedu.address.model.util.Remark;
 public class AddSupplyOrderCommand extends Command {
     public static final String COMMAND_WORD = "addSupplyOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new customer order to the bakery's order list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new supply order to the bakery's order list. "
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + PREFIX_PHONE + "PHONE "
