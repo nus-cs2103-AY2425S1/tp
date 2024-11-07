@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags should be High Risk, Medium Risk or Low Risk";
+    public static final String VALIDATION_REGEX = "high risk|medium risk|low risk";
     public static final String MESSAGE_FIELD_MESSAGE_FORMAT = "Person's Tag field is missing!";
-    private static final String VALIDATION_REGEX = "(?i)high risk|medium risk|low risk";
     public final String tagName;
 
     /**
@@ -21,22 +21,30 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        tagName = formatTagName(tagName);
+        tagName = tagName.strip().toLowerCase();
+        tagName = standardizeTagName(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        this.tagName = standardizeTagName(tagName);
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.strip().matches(VALIDATION_REGEX);
+        return test.toLowerCase().strip().matches(VALIDATION_REGEX);
     }
 
     /**
-     * Formats the tag name to title case (e.g., "High Risk").
+     * Standardizes the input tag name to a predefined format.
+     *
+     * <p>This method takes a tag name as input and standardizes it based on predefined mappings:
+     * "low risk" becomes "Low Risk", "medium risk" becomes "Medium Risk", and any other input
+     * is considered as "High Risk". This ensures consistent formatting of risk tags.</p>
+     *
+     * @param tagName The input tag to be standardized.
+     * @return A standardized version of the input tag, either "Low Risk", "Medium Risk", or "High Risk".
      */
-    private String formatTagName(String tagName) {
+    public static String standardizeTagName(String tagName) {
         String trimmedTag = tagName.strip().toLowerCase();
 
         if ("high risk".equals(trimmedTag)) {
