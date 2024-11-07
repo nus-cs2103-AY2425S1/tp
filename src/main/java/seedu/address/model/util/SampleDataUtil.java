@@ -45,7 +45,7 @@ public class SampleDataUtil {
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Telegram("royBala"),
                 getRoleSet("Member", "Welfare-IC"),
-                new HashSet<>(), FavouriteStatus.NOT_FAVOURITE)
+                new HashSet<>(), FavouriteStatus.FAVOURITE)
         };
     }
 

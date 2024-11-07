@@ -208,24 +208,24 @@ When using `find`, at least **one** of the optional parameters must be included.
 
 #### Example
 ##### Usage: Find by name
-* `find n/john` returns `John Doe`, `John`, `Bob Johnson`<br>
-  ![result for 'find n/john'](images/findJohnDoeJohnBobJohnson.png)
+* `find n/david` returns `David Li`<br>
+  ![result for 'find n/david'](images/findDavidLiResult.png)
 
 ##### Usage: Find by role
-* `find r/exco` returns `Michael` who has the role `exco`<br>
-  ![result for 'find r/exco'](images/findExcoResult.png)
+* `find r/treasurer` returns `Irfan Ibrahim` who has the role `Treasurer`<br>
+  ![result for 'find r/treasurer'](images/findTreasurerResult.png)
 
 ##### Usage: Find by telegram
-* `find t/eveadams` returns `Eve Adams` who has a telegram handle `eveadams`<br>
-  ![result for 'find t/eveadams'](images/findeveadamsResult.png)
+* `find t/alexyeoh` returns `Alex Yeoh` who has a telegram handle `alexYeoh`<br>
+  ![result for 'find t/alexyeoh'](images/findAlexYeohResult.png)
 
 ##### Usage: Find by favourite
-* `find f/` returns all 4 favourite contacts<br>
+* `find f/` returns 1 favourite contact<br>
   ![result for 'find f/'](images/findFavouriteResult.png)
 
 ##### Usage: Find composition
 Composing all 4 types of search will give an `OR` search, a contact that has at least one matching criteria will be returned.
-* `find n/john f/` returns all contacts with a name that partially matches `john`, **OR** are favourited contacts
+* `find n/david f/` returns all contacts with a name that partially matches `john`, **OR** are favourited contacts
 
 ### Sorting the contacts: `sort`
 
