@@ -8,17 +8,21 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.HOON;
+import static seedu.address.testutil.TypicalPersons.IDA;
 
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 
 
 public class CalendarTest {
+
     private final Calendar calendar = new Calendar(new AddressBook());
 
     @Test
@@ -57,6 +61,26 @@ public class CalendarTest {
         assertTrue(calendar.hasAppointment(editedAlice));
     }
 
+    @Test
+    public void isValidAppointmentUpdate() {
+        calendar.addAppointment(new PersonBuilder(BOB).withAppointment(null).build());
+        calendar.addAppointment(new PersonBuilder(ALICE).withAppointment("10/10/2024 10:30").build());
+        calendar.addAppointment(new PersonBuilder(IDA).withAppointment("10/10/2024 10:15").build());
+        calendar.addAppointment(new PersonBuilder((HOON)).withAppointment("10/10/2024 10:45").build());
 
+        assertFalse(calendar.isValidAppointmentUpdate(new Appointment("10/10/2024 10:15"),
+                                                        new Appointment("10/10/2024 10:16"))); // will clash
+
+        assertFalse(calendar.isValidAppointmentUpdate(new Appointment(null),
+                                                        new Appointment("10/10/2024 10:15"))); // taken
+
+        assertTrue(calendar.isValidAppointmentUpdate(new Appointment(null), new Appointment(null)));
+
+        assertTrue(calendar.isValidAppointmentUpdate(new Appointment("10/10/2024 10:15"),
+                                                        new Appointment("10/10/2024 10:14"))); // no clash
+
+        assertTrue(calendar.isValidAppointmentUpdate(new Appointment(null),
+                                                        new Appointment("10/10/2024 10:00")));
+    }
 
 }

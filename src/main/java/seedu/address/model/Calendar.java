@@ -2,11 +2,21 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Appointment;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains all appointments set in the address book
@@ -62,6 +72,7 @@ public class Calendar {
         }
 
         for (Appointment appt : appointments) {
+            System.out.println(appt);
             if (person.getAppointment().isWithinInterval(appt)) {
                 return true;
             }
@@ -75,8 +86,14 @@ public class Calendar {
     public boolean isValidAppointmentUpdate(Appointment current, Appointment updated) {
         requireNonNull(current);
         requireNonNull(updated);
+
         if (current.equals(new Appointment(null))) {
-            return false;
+            Set<Tag> temp = new HashSet<>();
+            temp.add(new Tag("P"));
+
+            return !hasAppointment(new Person(new Name("John Doe"), new Age("10"),
+                    new Gender("M"), new Nric("S1234567z"), new Phone("111"),
+                    new Email("e@test.com"), new Address("hello"), updated, temp));
         }
         if (updated.equals(new Appointment(null))) {
             return false;
