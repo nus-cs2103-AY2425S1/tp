@@ -17,8 +17,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index provided is invalid.";
-    public static final String MESSAGE_INVALID_INPUT = "Input is not of the correct format.";
+    public static final String MESSAGE_INVALID_INDEX = "Index provided is invalid";
+    public static final String MESSAGE_INVALID_INPUT = "Input is not of the correct format";
 
     /**
      * Checks if a given string is of the form "px", where "x" is an integer of up to 3 digits.
