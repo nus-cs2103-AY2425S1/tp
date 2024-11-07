@@ -204,7 +204,7 @@ Examples:
     * Client email: johnd@example.com
     * Home address: John street, block 123, #01-01
     * Client birthday: 2000-12-12
-    * Client next appointment: 2024-12-12 12:00
+    * Client next appointment: 2024-12-12 12:00  
     `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
 
 * The command below adds a new client to the client list with the following information:
@@ -213,7 +213,7 @@ Examples:
     * Client email: betsycrowe@example.com
     * Home address: Newgate Prison
     * Client birthday: 2001-10-10
-    * Client next appointment: 2024-12-01 09:00
+    * Client next appointment: 2024-12-01 09:00  
     `add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
     ![result for 'find alex david'](images/addUI.png)
 
