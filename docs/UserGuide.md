@@ -27,17 +27,17 @@ the process of accessing and updating resident student details. What's more, Dor
 - [Quick start](#quick-start)
 - [Features](#features)
     - [Viewing help : `help`](#viewing-help--help)
-    - [Adding a person : `add`](#adding-a-person--add)
+    - [Adding a person : `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons--list)
     - [Editing a person : `edit`](#editing-a-person--edit)
-    - [Finding a person : `find`](#finding-a-person--find)
+    - [Finding a person : `find`](#finding-a-person-find)
     - [Deleting a person : `delete`](#deleting-a-person--delete)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Cleaning graduated students : `clean`](#cleaning-graduated-students--clean)
     - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
-    - [Manual saving : `export`](#manual-saving--export)
-    - [Manual data restoration : `import`](#manual-data-restoration--import)
+    - [Manual saving : `export`](#manual-saving-export)
+    - [Manual data restoration : `import`](#manual-data-restoration-import)
 - [FAQ](#FAQ)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -114,6 +114,8 @@ the process of accessing and updating resident student details. What's more, Dor
 Shows a message explaning how to access the help page.
 
 Format: `help`
+
+A help window will pop up containing basic introduction to the three core features `add`, `edit` and `delete`.
 
 ![help message](images/helpMessage.png)
 
@@ -228,7 +230,7 @@ Format: `clean`
 >
 > If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
 
-Examples of usage:
+Example:
 
 `clean`, executed in 2024.
 
@@ -259,6 +261,13 @@ DorManagerPro data are saved in the hard disk automatically after any command th
 The `export` command will directly and immediately save the contents of the data to a save file akin to the one created automatically when closing the application.
 
 Format: `export`
+
+Examples of usage:
+
+`export`
+
+This exports the data of DorManagerPro to a file NOW.json in 
+
 
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
