@@ -210,7 +210,7 @@ Format: `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 Examples:
 * `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
-    Successfully created a new doctor Doctor#01 : Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: Specialist in physiotherapy
+    Successfully created a new doctor of id: #1 : Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: Specialist in physiotherapy
 
 * `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
@@ -235,7 +235,7 @@ Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 Examples:
 * `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br> 
-    Successfully created a new patient Patient#00 : John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
+    Successfully created a new patient of id: #0 : John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
 
 * `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
@@ -251,10 +251,10 @@ Format: `deleteP z/PATIENT_ID`
 * A _notification message_ will be output if there is failure in deleting patient.
 
 Examples:
-* `deleteP 00` <br>
+* `deleteP 0` <br>
   **Output**: <br>
   Successfully deleted a patient.
-* `deleteP 02` <br>
+* `deleteP 2` <br>
   **Output**: <br>
   Unable to delete a patient, check the id entered!
 
@@ -270,7 +270,7 @@ Format: `addR z/PATIENT_ID r/REMARK`
 Examples:
 *  `addR z/0 r/cancer` <br>
     **Output**: <br>
-   Successfully added remarks: cancer to patient of ID: 00.
+   Successfully added remarks: cancer to patient of ID: 0.
 *  `addR z/0 r/cancer` <br>
    **Output**: <br>
    Unable to add remarks! Check the id entered!
@@ -329,7 +329,7 @@ Format: `get KEYWORD`
 Examples:
 * `get john` <br>
   **Output**: <br>
-  The id of the person that you are finding is: 00
+  The id of the person that you are finding is: 0
 * `get johnny` <br>
   **Output**: <br>
   Invalid name entered! Check the name that you want to search id for! Key in 'list' to view all patients
@@ -376,11 +376,11 @@ Format: `view z/ID [x/DATE_TIME] …​`
 Examples:
 *  `view z/0 x/2024-12-31 15:23` <br>
    **Output**: <br>
-   Appointment: `2024-12-31 15:23` for `00` (patient id) with `01` (doctor id). Remarks: `Third physiotherapy session`.
+   Appointment: `2024-12-31 15:23` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`.
 *  `view z/0` <br>
    **Output**: <br>
-   Appointment: `2024-12-31 15:23` for `00` (patient id) with `01` (doctor id). Remarks: `Third physiotherapy session`. <br>
-   Appointment: `2024-12-31 16:23` for `00` (patient id) with `01` (doctor id). Remarks: `Fourth physiotherapy session`.
+   Appointment: `2024-12-31 15:23` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`. <br>
+   Appointment: `2024-12-31 16:23` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`.
 *  `view z/1 x/2024-12-31` <br>
    **Output**: <br>
    No history found for the person.
@@ -397,9 +397,9 @@ Format: `checkA z/ID y/DATE`
 Examples:
 *  `checkA z/1 y/2024-12-31` <br>
    **Output**: <br>
-   Appointment: `2024-12-31 15:23` for `00` (patient id) with `01` (doctor id). Remarks: `Third physiotherapy session`. <br>
-   Appointment: `2024-12-31 16:23` for `00` (patient id) with `01` (doctor id). Remarks: `Fourth physiotherapy session`.
-*  `checkA z/1 y/2024-12-31` <br>
+   Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`. <br>
+   Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`.
+*  `checkA z/1 y/2024-12-30` <br>
    **Output**: <br>
    No appointment found for Doctor: `Amy Bee`
 
@@ -415,10 +415,10 @@ Format: `mark x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
 * A _notification message_ will be output if there is failure in marking appointments.
 
 Examples:
-*  `mark x/2024-12-31 15:23 z/00 z/01` <br>
+*  `mark x/2024-12-31 15:23 z/0 z/1` <br>
    **Output**: <br>
    Successfully marked appointment as complete
-*  `mark x/2024-12-31 16:23 z/02 z/03` <br>
+*  `mark x/2024-12-31 16:23 z/2 z/3` <br>
    **Output**: <br>
    The appointment doesn't exist!
 
@@ -434,10 +434,10 @@ Format: `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
 * A _notification message_ will be output if there is failure in deleting appointment.
 
 Examples:
-*  `deleteA x/2024-12-31 15:23 z/00 z/01` <br>
+*  `deleteA x/2024-12-31 15:23 z/0 z/1` <br>
    **Output**: <br>
    Successfully deleted appointment to a patient
-*  `deleteA x/2024-12-31 15:23 z/01 z/03` <br>
+*  `deleteA x/2024-12-31 15:23 z/1 z/3` <br>
    **Output**: <br>
    The appointment doesn't exist!
 
@@ -506,7 +506,7 @@ Action | Format, Examples
 **Add Appointment** | `addAppointment x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`
 **View History** | `view z/PATIENT_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`
 **Check Appointment** | `checkA z/DOCTOR_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`
-**Mark Appointment** | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`
-**Delete Appointment** | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`
+**Mark Appointment** | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/0 z/1`
+**Delete Appointment** | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/0 z/1`
 **Clear** | `clear` <br> Clears all entries
 **Exit** | `exit` <br> Exits the program
