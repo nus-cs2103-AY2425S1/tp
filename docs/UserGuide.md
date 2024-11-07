@@ -239,6 +239,8 @@ No duplicate properties are allowed. Duplicate properties are checked based on:
 
 **Unit Defaults:**
 The Unit parameter for `LANDED` properties will default to `00-00` regardless of the unit value placed. This is because, a landed property is not segmented into multiple apartments and therefore, deemed to be a unit in itself.
+**Ask and Bid Prices:**
+Ask and Bid prices cannot be less than $1 (thousand) as the prices of almost all properties in Singapore are not smaller than the hundreds.
 </box>
 
 Examples:
@@ -265,6 +267,7 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 **Important**
 1. At least one optional prefix needs to be present for any filtering to be possible.
 2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than or equal to `$500 (thousand)` and less than or equal to `$60,000 (thousand)`.
+3. Matching Price cannot be less than $1 (thousand) as the prices of almost all properties in Singapore are not smaller than the hundreds.
 </box>
 
 Examples:
