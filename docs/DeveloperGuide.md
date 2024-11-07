@@ -1,12 +1,13 @@
 ---
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
 # UniVerse Developer Guide
 
 <!-- * Table of Contents -->
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -114,6 +115,21 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+In addition to the original AB3 features, the `Logic` component has been extended to support new commands such as adding interests, work experience, and finding contacts based on various criteria. The class diagram below showcases these new features integrated into the `Command` structure:
+
+The diagram below shows the original AB3 features.
+<puml src="diagrams/AB3Commands.puml" width="1000"/>
+
+
+The diagram below shows the newly added features for UniVerse.
+<puml src="diagrams/UniVerseNewCommands.puml" width="1000"/>
+
+<br> 
+
+**Explanation**:
+- **AB3 Features**: These are the original commands provided by AddressBook Level 3, which include basic CRUD (Create, Read, Update, Delete) operations, help, and navigation commands.
+- **New Features**: These extend the command capabilities in `UniVerse` to allow users to add specific details like interests and work experience, and search contacts based on university, major, interest, or work experience.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -251,9 +267,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -287,22 +300,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                              | So that I can…​                                           |
-|----------|-----------------------------|-------------------------------------------|-----------------------------------------------------------|
-| `* * *`  | university student          | add a new contact with basic details like name, university, and major | start building my professional network from school        |
-| `* * *`  | university student          | delete a contact from my network          | keep my contact list clean and up-to-date                 |
-| `* * *`  | university student          | search for contacts by their major        | connect with peers in the same academic field             |
-| `* * *`  | aspiring university student | add internship or work experience to a contact | network with people who have relevant industry experience |
-| `* *`    | lonely university student   | add interests and hobbies to a contact    | remember what we have in common                           |
-| `*`      | sociable university student | add social media links (e.g., LinkedIn, Instagram) to a contact| connect with people on other social platforms             |
+| Priority | As a …​                     | I want to …​                                                          | So that I can…​                                            |
+|----------|-----------------------------|-----------------------------------------------------------------------|------------------------------------------------------------|
+| `* * *`  | university student          | add a new contact with basic details like name, university, and major | start building my professional network from school         |
+| `* * *`  | university student          | delete a contact from my network                                      | keep my contact list clean and up-to-date                  |
+| `* * *`  | university student          | search for contacts by their university                               | quickly find peers from the same university                |
+| `* * *`  | university student          | search for contacts by their major                                    | connect with peers in the same academic field              |
+| `* * *`  | aspiring university student | add internship or work experience to a contact                        | network with people who have relevant industry experience  |
+| `* *`    | lonely university student   | add interests and hobbies to a contact                                | remember what we have in common                            |
+| `*`      | sociable university student | add social media links (e.g., LinkedIn, Instagram) to a contact       | connect with people on other social platforms              |
 
-*{More to be added}*
 
 ---
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UniVerse` and the **Actor** is the `user`, unless specified otherwise)
 
 <br>
 
@@ -346,10 +359,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
+
+#### **Use Case: Search for Contacts by University**
+
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC03 - Find Contacts by University
+
+**MSS**:
+1. User requests to search for contacts enrolled in a specific university.
+2. System prompts the user to enter the name of the university.
+3. User provides the university name.
+4. System searches for contacts that match the specified university.
+5. System displays a list of contacts enrolled in the specified university.
+6. Use case ends.
+
+**Extensions**:
+- **3a**: The entered university name is invalid or does not exist.
+    - **3a1**: System displays an error message requesting a valid university name.
+    - **3a2**: User re-enters the university name.
+    - **3a3**: Use case resumes at step 4.
+- **4a**: No contacts found for the specified university.
+    - **4a1**: System displays a message indicating no contacts were found.
+    - **4a2**: Use case ends.
+  
+<br>
+  
 #### **Use Case: Search for Contacts by Major**
 **System**: UniVerse  
 **Actor**: User  
-**Use Case ID**: UC03 - Search for Contacts by Major
+**Use Case ID**: UC04 - Search for Contacts by Major
 
 **MSS**
 1. User requests to search contacts by major.
@@ -373,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### **Use Case: Add Internship or Work Experience**
 **System**: UniVerse  
 **Actor**: User  
-**Use Case ID**: UC04 - Add Internship/Work Experience to a Contact
+**Use Case ID**: UC05 - Add Internship/Work Experience to a Contact
 
 **MSS**
 1. User requests to add internship/work experience to an existing contact.
@@ -400,7 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### **Use Case: Add Interests or Hobbies**
 **System**: UniVerse  
 **Actor**: User  
-**Use Case ID**: UC05 - Add Interest/Hobby to a Contact
+**Use Case ID**: UC06 - Add Interest/Hobby to a Contact
 
 **MSS**
 1. User requests to add an interest or hobby to an existing contact.
@@ -498,3 +537,37 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+---
+
+### Appendix: Effort
+
+Our goal was to enhance AB3 by introducing new commands and improving functionality for better contact management, specifically tailored for university students.
+
+#### Key Efforts and Challenges
+
+**1. Adding Work Experience and Interests (`addw` and `addi` commands)**:
+- **Effort**: These commands were developed to allow users to add work experiences and interests to existing contacts. The `Command` classes were extended to handle new parameters while ensuring that the `Model` and `Storage` components were updated for data integrity and compatibility.
+- **Challenges**:
+    - Ensuring seamless integration with the `Logic` and `Parser` components.
+    - Implementing robust validation and data handling mechanisms.
+    - Adjusting the UI to reflect changes dynamically.
+- **Outcome**: Successful integration with moderate complexity due to the restructuring required for data validation and UI updates.
+
+**2. Enhanced Search Capabilities (`findu`, `findm`, `findi`, and `findw` commands)**:
+- **Effort**: Implementing these commands expanded the app's ability to search for contacts based on university, major, interests, or work experience. This required creating new predicate classes and extending the `FindCommand` logic to handle various input types.
+- **Challenges**:
+    - Ensuring compatibility across all search fields.
+    - Maintaining search efficiency while handling multiple parameters and criteria.
+- **Outcome**: Enhanced functionality that allows users to search and filter contacts more effectively, with significant modifications needed to achieve this.
+
+**3. Refactoring and Integration**:
+- **Effort**: Most new commands and features leveraged the existing `Command` structure, but required significant modifications to ensure that new logic paths were integrated without disrupting current system functionality.
+- **Challenges**:
+    - Addressing edge cases and integrating unit tests to verify the reliability of new features.
+    - Managing dependencies between various components to avoid coupling.
+- **Outcome**: A cohesive set of features that improved user experience while maintaining system robustness.
+
+**Achievements**:
+- The project successfully extended the original AB3 with functionality focused on university students' needs, balancing ease of use and powerful data organization.
+- Careful planning and rigorous testing ensured the new features did not introduce regressions or instability.
