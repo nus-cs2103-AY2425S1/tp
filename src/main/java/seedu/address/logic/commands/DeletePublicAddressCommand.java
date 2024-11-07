@@ -102,15 +102,19 @@ public class DeletePublicAddressCommand extends Command {
         if (targetLabel.isEmpty()) {
             // Delete all the addresses in the network
             deletedPerson = personToDelete.withoutPublicAddressesByNetwork(targetAddressnetwork);
-        } else {
-            // Delete the specific address with the label
-            deletedPerson = personToDelete.withoutPublicAddressByNetworkAndLabel(targetAddressnetwork, targetLabel);
+            model.setPerson(personToDelete, deletedPerson);
+            return new CommandResult(String.format(
+                    MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
+                    personToDelete.getPublicAddressesByNetwork(targetAddressnetwork)
+            ));
         }
+        // Delete the specific address with the label
+        deletedPerson = personToDelete.withoutPublicAddressByNetworkAndLabel(targetAddressnetwork, targetLabel);
         model.setPerson(personToDelete, deletedPerson);
         return new CommandResult(String.format(
-                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(), personToDelete.getPublicAddressesComposition()
+                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
+                personToDelete.getPublicAddressesByNetworkAndLabel(targetAddressnetwork, targetLabel)
         ));
-
     }
 
     @Override

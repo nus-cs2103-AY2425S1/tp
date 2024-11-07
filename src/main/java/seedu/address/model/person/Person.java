@@ -65,6 +65,16 @@ public class Person {
         return publicAddressesComposition.getByNetwork(network);
     }
 
+    /**
+     * Returns the public address with the specified label in the network.
+     *
+     * @param network
+     * @param label
+     * @return
+     */
+    public Set<PublicAddress> getPublicAddressesByNetworkAndLabel(Network network, String label) {
+        return publicAddressesComposition.getByNetworkAndLabel(network, label);
+    }
 
     /**
      * Returns true if the person has a public address in the network
