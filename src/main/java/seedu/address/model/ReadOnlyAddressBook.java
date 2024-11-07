@@ -17,7 +17,7 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
 
-    public Person personFromName(Name name) throws IllegalValueException;
+    public Person personFromName(Name name);
 
 
 }

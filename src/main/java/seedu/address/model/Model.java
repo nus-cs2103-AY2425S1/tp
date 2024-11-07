@@ -126,5 +126,5 @@ public interface Model {
      */
     void sortByPin();
 
-    Person personFromName(Name name) throws IllegalValueException;
+    Person personFromName(Name name);
 }

@@ -73,11 +73,7 @@ public class UnlinkCommand extends Command {
         }
 
         Person counterPart;
-        try {
-            counterPart = model.personFromName(counterPartName);
-        } catch (IllegalValueException e) {
-            throw new PersonNotFoundException();
-        }
+        counterPart = model.personFromName(counterPartName);
 
         Person unlinkedPerson = unlink(personToEdit);
         Person unlinkedCounterPart = unlink(counterPart);

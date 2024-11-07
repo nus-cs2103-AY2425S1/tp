@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
-    public Person personFromName(Name name) throws IllegalValueException {
+    public Person personFromName(Name name) {
         return persons.personFromName(name);
     }
 

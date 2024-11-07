@@ -114,7 +114,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person personFromName(Name name) throws IllegalValueException {
+    public Person personFromName(Name name) {
         return addressBook.personFromName(name);
     }
 
