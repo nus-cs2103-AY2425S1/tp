@@ -52,10 +52,11 @@
 * [7.1 Launch and Shutdown](#7-1-launch-and-shutdown)
 * [7.2 Adding a Student](#7-2-adding-a-student)
 * [7.3 Deleting a Student](#7-3-deleting-a-student)
-* [7.4 Finding Specific Student(s)](#7-4-finding-specific-students)
+* [7.4 Finding Specific Students](#7-4-finding-specific-students)
 * [7.5 Adding a Task to a Student](#7-5-adding-a-task-to-a-student)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 1. Acknowledgements
 
