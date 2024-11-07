@@ -126,7 +126,7 @@ Examples:
 
 ![result for 'edit person'](images/edit_person.png)
 
-### Locating persons by name: `find person`
+### Finding persons by name: `find person`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -255,7 +255,7 @@ Examples:
 
 ![result for 'edit event'](images/edit_event.png)
 
-### Locating events by name: `find event`
+### Finding events by name: `find event`
 
 Finds events whose names contain any of the given keywords.
 
