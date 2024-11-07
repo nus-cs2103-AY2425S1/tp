@@ -49,7 +49,7 @@ public class ViewPersonSchemeCommand extends Command {
         if (result.toString().equals("")) {
             result = new StringBuilder("No schemes available for this person.");
         }
-        result.insert(0, "Schemes available for person: " + targetPerson.getName() + "\n");
+        result.insert(0, "Schemes available for " + targetPerson.getName() + ":\n");
         return new CommandResult(result.toString());
     }
 

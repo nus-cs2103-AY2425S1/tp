@@ -87,7 +87,8 @@ public class AddSchemeCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_ADD_SCHEME_PERSON_SUCCESS, editedPerson.getName(),
+                targetScheme.getSchemeName()));
 
     }
 

@@ -80,7 +80,12 @@ public class DeleteSchemeCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_DELETE_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
+        StringBuilder commandResult = new StringBuilder();
+        commandResult.append(String.format(MESSAGE_DELETE_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
+        for (int i = 0; i < schemesToBeDeleted.size(); i++) {
+            commandResult.append((i + 1 + ". ")).append(schemesToBeDeleted.get(i).getSchemeName()).append("\n");
+        }
+        return new CommandResult(commandResult.toString());
 
     }
 
