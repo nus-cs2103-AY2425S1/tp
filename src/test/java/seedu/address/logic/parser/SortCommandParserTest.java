@@ -75,6 +75,20 @@ public class SortCommandParserTest {
     }
 
     @Test
+    public void parse_validArgsForUpdated_returnsSortCommand() {
+        SortCommand expectedSortCommand = new SortCommand("updated");
+
+        // No leading and trailing whitespaces
+        assertParseSuccess(parser, " updated", expectedSortCommand);
+
+        // Multiple whitespaces
+        assertParseSuccess(parser, " \n \t updated \t \t \n", expectedSortCommand);
+
+        // Case-insensitive
+        assertParseSuccess(parser, " UpDAted", expectedSortCommand);
+    }
+
+    @Test
     public void parse_invalidArgs_failure() {
         // Multiple args
         assertParseFailure(parser, " name address",

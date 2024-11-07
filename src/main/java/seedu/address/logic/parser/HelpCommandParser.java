@@ -5,10 +5,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSchemeCommand;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteSchemeCommand;
+import seedu.address.logic.commands.EditAppointmentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -47,9 +49,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             message = AddCommand.MESSAGE_USAGE;
             break;
 
-        case AddAppointmentCommand.COMMAND_WORD:
-            message = AddAppointmentCommand.MESSAGE_USAGE;
-            break;
 
         case EditCommand.COMMAND_WORD:
             message = EditCommand.MESSAGE_USAGE;
@@ -59,9 +58,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             message = DeleteCommand.MESSAGE_USAGE;
             break;
 
-        case DeleteAppointmentCommand.COMMAND_WORD:
-            message = DeleteAppointmentCommand.MESSAGE_USAGE;
-            break;
 
         case ClearCommand.COMMAND_WORD:
             message = ClearCommand.MESSAGE_USAGE;
@@ -79,8 +75,20 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             message = ListCommand.MESSAGE_USAGE;
             break;
 
+        case AddAppointmentCommand.COMMAND_WORD:
+            message = AddAppointmentCommand.MESSAGE_USAGE;
+            break;
+
+        case DeleteAppointmentCommand.COMMAND_WORD:
+            message = DeleteAppointmentCommand.MESSAGE_USAGE;
+            break;
+
         case ListAppointmentCommand.COMMAND_WORD:
             message = ListAppointmentCommand.MESSAGE_USAGE;
+            break;
+
+        case EditAppointmentCommand.COMMAND_WORD:
+            message = EditAppointmentCommand.MESSAGE_USAGE;
             break;
 
         case UndoCommand.COMMAND_WORD:
@@ -113,6 +121,10 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case ViewPersonSchemeCommand.COMMAND_WORD:
             message = ViewPersonSchemeCommand.MESSAGE_USAGE;
+            break;
+
+        case ArchiveCommand.COMMAND_WORD_ARCHIVE: case ArchiveCommand.COMMAND_WORD_UNARCHIVE:
+            message = ArchiveCommand.MESSAGE_USAGE;
             break;
 
         case SortCommand.COMMAND_WORD:

@@ -93,6 +93,12 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Returns the current predicate used by the filtered person list.
+     * Should not return {@code null}.
+     */
+    Predicate<? super Person> getFilteredPersonListPredicate();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

@@ -196,8 +196,8 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping SocialBook ] =============================");
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveAppointments(model.getAppointmentList());
             storage.saveUserPrefs(model.getUserPrefs());
-            storage.saveAppointments(model.getFilteredAppointmentList());
         } catch (IOException e) {
             logger.severe("Failed to save the address book, preferences and appointments" + StringUtil.getDetails(e));
         }
