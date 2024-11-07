@@ -27,7 +27,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_AMOUNT = "Incorrect amount format or invalid amount!\n"
             + "Amount should be a number of up to 2 decimal places.\n"
-            + "Amount should contain only digits (0-9), at most 1 decimal point (.), and at most 1 minus sign (-).\n"
+            + "Amount should contain only digits (0-9), at most 1 decimal point (.) and at most 1 minus sign (-).\n"
             + "If decimal point is used, there should be at least 1 digit before and 1 digit after the decimal point.\n"
             + "If minus sign is used, it should be the first character.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Incorrect date format or invalid date!\n"
