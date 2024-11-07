@@ -119,6 +119,7 @@ Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close t
 ![help message](images/helpMessage.png)
 
 Format: `help`  
+  
 
 ### Listing all persons : `list`
 
