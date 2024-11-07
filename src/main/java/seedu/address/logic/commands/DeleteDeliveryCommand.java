@@ -13,13 +13,12 @@ import seedu.address.model.delivery.Delivery;
 /**
  * Deletes a delivery identified using it's displayed index from the address book.
  */
-public class DeleteDeliveryCommand extends Command {
+public class DeleteDeliveryCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY + " "
             + ": Deletes the delivery identified by the index number used in the displayed delivery list.\n"
-            + "Parameters: -d INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " -d 1";
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " 1";
 
     public static final String MESSAGE_DELETE_DELIVERY_SUCCESS = "Deleted Delivery: %1$s";
 
