@@ -16,4 +16,11 @@
 
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-min-width: 1180;
+    -fx-font-size: 14;
+}
+
+#helpMessageScrollPane {
+    -fx-max-height: 600;
+    -fx-min-width: 1200;
 }
