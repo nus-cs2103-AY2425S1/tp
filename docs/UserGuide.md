@@ -442,12 +442,27 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [c/COURSE]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com c/CS2103T;CS2101`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com c/CS2100`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Delete** | `delete INDEX [;INDEX]…​`<br> e.g., `delete 3` <br> e.g., `delete 2;3;4`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com c/CS2100`<br> e.g.,`edit 2 c/CS2103T;CS2101;CS2106` <br> e.g.,`edit 2 c/CS2103T c/CS2101 c/CS2106` <br> e.g.,`edit 2 c/CS2103T;CS2101 c/CS2106`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake` to find all students named `James Jake` <br> e.g.,`find n/James;Jake` to find all students whose names contain either `James` or `Jake` <br> e.g.,`find c/CS2103T c/CS2100` to find all students who are enrolled both `CS2103T` and `CS2100` <br> e.g.,`find n/James c/CS2103T` to find all students whose names contain `James` and are enrolled in `CS2103T` 
+**List Students** | `liststudents`
 **Help** | `help`
 **Export Students** | `export [-f] FILENAME`<br> e.g., `export students`
 **Export Consultations** | `exportconsult [-f] FILENAME`<br> e.g., `exportconsult sessions`
 **Import Students** | `import FILENAME`<br> e.g., `import students.csv`
 **Import Consultations** | `importconsult FILENAME`<br> e.g., `importconsult sessions.csv`
+**Add Consultation** | `addconsult d/DATE t/TIME`<br> e.g., `addconsult d/2024-10-20 t/14:00`
+**Add to Consultation** | `addtoconsult INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtoconsult n/James Jake n/John Jill i/2 i/3`
+**Delete Consultations** | `deleteconsult INDEX [;INDEX]…​`<br> e.g., `deleteconsult 3` <br> e.g., `deleteconsult 2;3;4`
+**List Consultations** | `listconsults`
+**Remove from Consultation** | `removefromconsult INDEX n/NAME…​`<br> e.g., `removefromconsult n/Jake John` <br> e.g., `removefromconsult n/Jake n/John`
+**Add Lesson** | `addlesson d/DATE t/TIME`<br> e.g., `addlesson d/2024-10-20 t/14:00`
+**Add to Lesson** | `addtolesson INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtolesson n/James Jake n/John Jill i/2 i/3`
+**Delete Lesson** | `deletelesson INDEX [;INDEX]…​`<br> e.g., `deletelesson 3` <br> e.g., `deletelesson 2;3;4`
+**List Lessons** | `listlessons`
+**Mark Attendance for Lesson** | `marka INDEX n/NAME…​ a/ATTENDANCE`<br> e.g., `marka 3 n/Jack a/y` <br> e.g., `marka 3 n/Jack n/Jill a/1` <br> e.g., `marka 3 n/Jack a/n` <br> e.g., `marka 3 n/Jack a/0`
+**Mark Participation for Lesson** | `markp INDEX n/NAME…​ pt/POINTS`<br> e.g., `markp 3 n/Jack pt/75`
+**Remove from Lesson** | `removefromlesson INDEX n/NAME…​`<br> e.g., `removefromlesson n/Jake John` <br> e.g., `removefromlesson n/Jake n/John`
+
+
+
