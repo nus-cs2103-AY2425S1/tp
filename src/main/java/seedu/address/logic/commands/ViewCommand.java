@@ -85,8 +85,7 @@ public class ViewCommand extends Command {
                 if (change.wasAdded() || change.wasRemoved()) {
                     person.set(null);
                     model.getPerson(personName).ifPresentOrElse(
-                            person::set,
-                            () -> {});
+                            person::set, () -> {});
 
                 }
             }
