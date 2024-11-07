@@ -10,7 +10,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
-import seedu.address.model.group.Group;
 
 /**
  * Lists all the groups in the address book.
