@@ -244,9 +244,9 @@ edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS]
 
 - At least one of the optional fields must be provided.
 
-- For student contact, editing student id field is **prohibited**.
+- For student contact, editing industry field is **prohibited**.
 
-- For company contact, editing industry field is **prohibited**.
+- For company contact, editing student id field is **prohibited**.
 
 - Existing values will be updated to the input values.
 
@@ -322,7 +322,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 **Examples**:
 
 - `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find alex david` returns `Alex Yeoh`, `David Allen`<br>
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -349,6 +349,8 @@ Examples:
 - `track student` finds contacts with category `student`
 - `track company` finds contacts with category `company`
 
+![track UI](images/trackUI.png)
+
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
@@ -367,6 +369,7 @@ Adds additional specified tag(s) to the specified contact without overwriting ex
 
 Format: `tag INDEX t/TAG [t/MORE_TAG]`
 
+
  * Add specified `TAG` (and `MORE_TAG` if present) to the contact at specified `INDEX`
  * The index refers to the index number shown in the displayed person list.
  * The index **must be a positive integer** 1, 2, 3, …​
@@ -384,7 +387,7 @@ Format: `tag INDEX t/TAG [t/MORE_TAG]`
 
 </div>
 
-Examples:
+**Examples**:
 
 - `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list
 
@@ -408,7 +411,7 @@ Format 2: `deletetag ALL t/TAG [t/MORE_TAG]`
 
 * Deletes specified `TAG` (and `MORE_TAG` if present) from all contacts in the list provided the tag already exists.
 
-Examples:
+**Examples**:
 
 * `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
 * `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
@@ -511,11 +514,11 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 | Action            | Format                                                                                             | Example                                                                                                            |
 | ----------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Add a student** | `student n/NAME s/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho s/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add a student** | `student n/NAME id/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                             | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`     |
 | **Clear**         | `clear`                                                                                            | `clear`                                                                                                            |
 | **Delete**        | `delete INDEX [MORE_INDEX]`                                                                        | `delete 3` or `delete 2 4`                                                                                         |
-| **Edit**          | `edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                        |
+| **Edit**          | `edit INDEX [n/NAME] [id/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                        |
 | **Filtertag**     | `filtertag KEYWORD`                                                                                | `filtertag bestie`                                                                                                 |
 | **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                                                                                                  |
 | **List**          | `list`                                                                                             | `list`                                                                                                             |
