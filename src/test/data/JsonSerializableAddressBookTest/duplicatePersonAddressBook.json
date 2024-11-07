@@ -1,14 +1,15 @@
 {
-  "persons": [ {
+  "persons": [
+    {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "emergency contact name": "No Name Entered",
-    "emergency contact number": "000",
+    "emergency contact name": "Billy",
+    "emergency contact number": "77777777",
     "tags": [ "friends" ],
-    "priorityLevel": 1
-  }, {
+    "priorityLevel": 3
+    }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
@@ -16,5 +17,16 @@
     "emergency contact name": "No Name Entered",
     "emergency contact number": "000",
     "priorityLevel": 1
-  } ]
+    }, {
+    "name": "Benson Meier",
+    "phone": "98765432",
+    "email": "johnd@example.com",
+    "address": "311, Clementi Ave 2, #02-25",
+    "emergency contact name": "Ken",
+    "emergency contact number": "66666666",
+    "tags": [ "owesMoney", "friends" ],
+    "priorityLevel": 3
+    }
+  ],
+  "tasks": []
 }
