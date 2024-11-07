@@ -26,7 +26,7 @@ public class GradeCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing grade will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_GRADE + "[GRADE_INDEX] (must be an integer from 0 to 4)\n"
+            + PREFIX_GRADE + "GRADE_INDEX (must be an integer from 0 to 4)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GRADE + "1.";
 

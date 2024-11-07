@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -17,7 +16,7 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
 
-    public Person personFromName(Name name) throws IllegalValueException;
+    public Person personFromName(Name name);
 
 
 }

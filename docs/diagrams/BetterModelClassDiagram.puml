@@ -20,9 +20,10 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 
-Parent -[hidden]up-> Tag
-Student "child" <-right-> "parent" Parent
+
+Student "child" <-up-> "parent" Parent
 Student *--> "1" Grade
 Student *--> "1" Education
+Student *--> "1" LessonTime
 
 @enduml
