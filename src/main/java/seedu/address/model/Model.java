@@ -122,6 +122,11 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     *  Returns the predicate of the current filtered person list
+     */
+    Predicate<Person> getFilteredPersonListPredicate();
+
+    /**
      * Sorts the person list to put all pinned persons at the top of the list.
      */
     void sortByPin();

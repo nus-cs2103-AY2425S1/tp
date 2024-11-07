@@ -162,6 +162,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Predicate<Person> getFilteredPersonListPredicate() {
+        return (Predicate<Person>) filteredPersons.getPredicate();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
