@@ -82,6 +82,28 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+In addition, the `UI` component includes the `AttendanceWindow` and `AttendanceRow` classes to display the attendance of students within selected tutorial groups.
+
+**AttendanceWindow Class**
+
+The `AttendanceWindow` Class represents a window displaying the attendance records of students in a specific tutorial group. It contains:
+
+* a `TableView` to display attendance data, with columns for student names and attendance dates.
+* methods to initialize the table, add attendance records, and dynamically update the display when new students are added or attendance records change.
+* listeners to detect changes in the attendance data, enabling the UI to refresh and show the latest information.
+
+The `AttendanceWindow` class is primarily used to visualize and manage attendance data in an organized table format. The `initializeTable` method sets up the table structure, while the `initializeStudentListListener` monitors the list of students in the tutorial group.
+
+**AttendanceRow Class**
+
+The `AttendanceRow` class represents a single row in the attendance table, displaying a student's name and attendance status for each date. It contains:
+
+* a `Student` object and the student's name.
+* a `Map` to store attendance by date.
+* methods to add, update, and retrieve attendance data for specific dates.
+
+Each `AttendanceRow` is updated in real-time as the underlying attendance records are modified, allowing the UI to maintain up-to-date attendance statuses for each student.
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
