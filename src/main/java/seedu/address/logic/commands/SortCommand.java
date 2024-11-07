@@ -19,6 +19,7 @@ import seedu.address.model.tag.Tag;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
+    public static final String ASCENDING_KEYWORD = "ASC";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the contact list by tag values in ascending or descending order.\n"
@@ -45,72 +46,13 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        Predicate<Person> predicateMatch = person -> {
-            boolean tagMatches = tagName != null && !tagName.isEmpty()
-                    && person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
-            return tagMatches;
-        };
-
-        Comparator<Person> sortOrderComparator = new Comparator<Person>() {
-            @Override
-            public int compare(Person p1, Person p2) {
-                Optional<Tag> p1Tag = p1.getTags().stream().filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
-                        .findFirst();
-                Optional<Tag> p2Tag = p2.getTags().stream().filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
-                        .findFirst();
-
-                int compareResult = 0;
-
-                if (p1Tag.isEmpty() || p2Tag.isEmpty()) {
-                    return compareResult;
-                }
-
-                if (p1Tag.get().tagValue == null && p2Tag.get().tagValue == null) {
-                    return compareResult;
-                } else if (p1Tag.get().tagValue == null) {
-                    return 1;
-                } else if (p2Tag.get().tagValue == null) {
-                    return -1;
-                }
-
-                Double p1TagDouble = tryParseDouble(p1Tag.get().tagValue);
-                Double p2TagDouble = tryParseDouble(p2Tag.get().tagValue);
-
-                if (p1TagDouble != null && p2TagDouble != null) {
-                    if (p1TagDouble > p2TagDouble) {
-                        compareResult = 1;
-                    } else if (p1TagDouble < p2TagDouble) {
-                        compareResult = -1;
-                    }
-                } else if (p1TagDouble == null && p2TagDouble == null) {
-                    if (p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue) > 0) {
-                        compareResult = 1;
-                    } else if (p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue) < 0) {
-                        compareResult = -1;
-                    }
-                } else if (p1TagDouble != null) {
-                    compareResult = -1;
-                } else if (p2TagDouble != null) {
-                    compareResult = 1;
-                }
-
-                if (sortOrder.equalsIgnoreCase("ASC")) {
-                    return compareResult;
-                } else {
-                    return -compareResult;
-                }
-            }
-        };
-
+        Predicate<Person> predicateMatch = this::test;
+        Comparator<Person> sortOrderComparator = this::compare;
         model.updateFilteredPersonList(predicateMatch, sortOrderComparator);
-
         List<Person> filteredList = model.getFilteredPersonList();
-
         if (filteredList.isEmpty()) {
             return new CommandResult(MESSAGE_NO_CONTACT_FOUND);
         }
-
         return new CommandResult(constructSuccessMessage(this.tagName));
     }
 
@@ -131,16 +73,70 @@ public class SortCommand extends Command {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof SortCommand)) {
             return false;
         }
-
         SortCommand otherCommand = (SortCommand) other;
-
-        boolean isTagNameEqual = (tagName == null && otherCommand.tagName == null)
+        return (tagName == null && otherCommand.tagName == null)
                 || (tagName != null && tagName.equals(otherCommand.tagName));
-        return isTagNameEqual;
+    }
+
+    private boolean test(Person person) {
+        return tagName != null
+                && !tagName.isEmpty()
+                && person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
+    }
+
+    private int compare(Person p1, Person p2) {
+        Optional<Tag> p1Tag = p1.getTags()
+                .stream()
+                .filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
+                .findFirst();
+        Optional<Tag> p2Tag = p2.getTags()
+                .stream()
+                .filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
+                .findFirst();
+
+        int compareResult = 0;
+
+        if (p1Tag.isEmpty() || p2Tag.isEmpty()) {
+            return compareResult;
+        }
+
+        if (p1Tag.get().tagValue == null && p2Tag.get().tagValue == null) {
+            return compareResult;
+        } else if (p1Tag.get().tagValue == null) {
+            return 1;
+        } else if (p2Tag.get().tagValue == null) {
+            return -1;
+        }
+
+        Double p1TagDouble = tryParseDouble(p1Tag.get().tagValue);
+        Double p2TagDouble = tryParseDouble(p2Tag.get().tagValue);
+
+        if (p1TagDouble != null && p2TagDouble != null) {
+            if (p1TagDouble > p2TagDouble) {
+                compareResult = 1;
+            } else if (p1TagDouble < p2TagDouble) {
+                compareResult = -1;
+            }
+        } else if (p1TagDouble == null && p2TagDouble == null) {
+            if (p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue) > 0) {
+                compareResult = 1;
+            } else if (p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue) < 0) {
+                compareResult = -1;
+            }
+        } else if (p1TagDouble != null) {
+            compareResult = -1;
+        } else {
+            compareResult = 1;
+        }
+
+        if (sortOrder.equalsIgnoreCase(ASCENDING_KEYWORD)) {
+            return compareResult;
+        } else {
+            return -compareResult;
+        }
     }
 
     @Override
@@ -152,8 +148,7 @@ public class SortCommand extends Command {
 
     Double tryParseDouble(String value) {
         try {
-            double d = Double.parseDouble(value);
-            return d;
+            return Double.parseDouble(value);
         } catch (NumberFormatException e) {
             return null;
         }
