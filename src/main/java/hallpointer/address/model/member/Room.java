@@ -4,12 +4,14 @@ import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Member's room in the address book.
+ * Represents a Member's room in HallPointer.
  * Guarantees: immutable; is valid as declared in {@link #isValidRoom(String)}
  */
 public class Room {
 
-    public static final String MESSAGE_CONSTRAINTS = "Room should be in the format <block>-<floor>-<room_number>";
+    public static final String MESSAGE_CONSTRAINTS = "Room should be in the format block-floor-room number.\n"
+            + "Example: 10-3-100\n"
+            + "Unfortunately, non-numeric block or room numbers are currently unsupported.";
 
     public static final String VALIDATION_REGEX = "^[0-9]+-[0-9]+-[0-9]+$";
 

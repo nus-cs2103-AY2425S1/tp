@@ -47,7 +47,7 @@ class JsonSerializableHallPointer {
     }
 
     /**
-     * Converts this address book into the model's {@code HallPointer} object.
+     * Converts this hall pointer into the model's {@code HallPointer} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

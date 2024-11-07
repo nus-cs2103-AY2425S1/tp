@@ -20,7 +20,7 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/hall_pointer_32.png";
 
     private Logic logic;
     private MainWindow mainWindow;
@@ -43,7 +43,8 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-            mainWindow.setMessageBox("Welcome to hallpointer! Please enter a command to start using the app!");
+            mainWindow.setMessageBox("Welcome to hallpointer! Please enter a command to start using the app!\n"
+                    + "Do type help and press enter if you need a refresher on the possible commands.");
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

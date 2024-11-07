@@ -4,16 +4,16 @@ import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Member's telegram in the address book.
+ * Represents a Member's telegram in HallPointer.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
  */
 public class Telegram {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram must only contain alphanumeric characters or underscores"
-                    + "and be between 5 to 32 characters long"
-                    + ", starting with a letter and not ending with a underscore\n"
-                    + "@ is not required as it is implicitly assumed to be there";
+            "Telegram must only contain alphanumeric characters or underscores,\n"
+                    + "and be between 5 to 32 characters long.\n"
+                    + "It must also start with a letter and not end with a underscore.\n"
+                    + "@ is not required as it is implicitly assumed to be there.";
 
     public static final String VALIDATION_REGEX = "^[a-zA-Z](?:[a-zA-Z0-9]|_(?=.*[a-zA-Z0-9]$)){4,31}$";
 

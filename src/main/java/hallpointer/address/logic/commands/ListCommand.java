@@ -6,7 +6,7 @@ import static java.util.Objects.requireNonNull;
 import hallpointer.address.model.Model;
 
 /**
- * Lists all members in the CCA system to the user.
+ * Lists all members in HallPointer to the user.
  */
 public class ListCommand extends Command {
 

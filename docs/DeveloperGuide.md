@@ -45,7 +45,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 ### Storage Component
 
-The Storage component is responsible for reading and writing data to the local storage. It includes classes for handling user preferences and the address book data.
+The Storage component is responsible for reading and writing data to the local storage. It includes classes for handling user preferences and the hall pointer data.
 
 Here is the UML diagram for the Storage component:
 
@@ -114,7 +114,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteMemberCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `Parser` object which in turn creates a parser that matches the command (e.g., `DeleteMemberCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a member).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -126,7 +126,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddMemberCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `AddressBookParser` returns back as a `Command` object.
+- When called upon to parse a user command, the `Parser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddMemberCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `Parser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -137,14 +137,14 @@ How the parsing works:
 
 The `Model` component,
 
-- stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object).
+- stores the hall pointer data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object).
 - stores the currently 'selected' `Member` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Hall Pointer`, which `Member` references. This allows `Hall Pointer` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -158,8 +158,8 @@ The `Model` component,
 
 The `Storage` component,
 
-- can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- can save both hall pointer data and user preference data in JSON format, and read them back into scorresponding objects.
+- inherits from both `Storage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -173,18 +173,95 @@ Classes used by multiple components are in the `hallpointer.address.commons` pac
 This section describes some noteworthy details on how certain features are implemented.
 
 
-
 ### [Proposed] Undo Command
+The proposed undo/redo mechanism is facilitated by `Versioned`. It extends `HallPointer` with an undo/redo history, stored internally as an `hallPointerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`, which extends `AddressBook` with an undo/redo history. This history is stored internally as `addressBookStateList` and `currentStatePointer`. The following operations are implemented to manage the undo and redo functionalities:
+- `VersionedHallPointer#commit()` — Saves the current hall pointer state in its history.
+- `VersionedHallPointer#undo()` — Restores the previous hall pointer state from its history.
+- `VersionedHallPointer#redo()` — Restores a previously undone hall pointer state from its history.
 
-- **VersionedAddressBook#commit()** — Saves the current state of the address book to the history, allowing future undo and redo actions.
-- **VersionedAddressBook#undo()** — Restores the previous state of the address book from the history, moving the `currentStatePointer` back.
-- **VersionedAddressBook#redo()** — Restores a previously undone state of the address book from the history, moving the `currentStatePointer` forward.
+These operations are exposed in the `Model` interface as `Model#commitHallPointer()`, `Model#undoHallPointer()` and `Model#redoHallPointer()` respectively.
 
-This approach ensures that any changes to the address book can be reverted or reapplied as needed, enhancing user experience by allowing easy correction of recent actions.
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
----
+Step 1. The user launches the application for the first time. The `VersionedHallPointer` will be initialized with the initial hall pointer state, and the `currentStatePointer` pointing to that single hall pointer state.
+
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+
+Step 2. The user executes `delete 5` command to delete the 5th member in the hall pointer system. The `delete` command calls `Model#commitHallPointer()`, causing the modified state of the hall pointer system after the `delete 5` command executes to be saved in the `hallPointerStateList`, and the `currentStatePointer` is shifted to the newly inserted hall pointer state.
+
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+S
+Step 3. The user executes `add n/David …​` to add a new member. The `add` command also calls `Model#commitHallPointer()`, causing another modified hall pointer state to be saved into the `hallPointerStateList`.
+
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#commitHallPointer()`, so the hall pointer state will not be saved into the `hallPointerStateList`.
+
+</box>
+
+Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHallPointer()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous hall pointer state, and restores the hall pointer system to that state.
+
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial HallPointer state, then there are no previous HallPointer states to restore. The `undo` command uses `Model#canUndoHallPointer()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</box>
+
+The following sequence diagram shows how an undo operation goes through the `Logic` component:
+
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+Similarly, how an undo operation goes through the `Model` component is shown below:
+
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+
+The `redo` command does the opposite — it calls `Model#redoHallPointer()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the hall pointer system to that state.
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index `hallPointerStateList.size() - 1`, pointing to the latest hall pointer state, then there are no undone HallPointer states to restore. The `redo` command uses `Model#canRedoHallPointer()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the hall pointer system, such as `list`, will usually not call `Model#commitHallPointer()`, `Model#undoHallPointer()` or `Model#redoHallPointer()`. Thus, the `hallPointerStateList` remains unchanged.
+
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+
+Step 6. The user executes `clear`, which calls `Model#commitHallPointer()`. Since the `currentStatePointer` is not pointing at the end of the `hallPointerStateList`, all hall pointer states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+- **Alternative 1 (current choice):** Saves the entire hall pointer.
+
+    - Pros: Easy to implement.
+    - Cons: May have performance issues in terms of memory usage.
+
+- **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    - Pros: Will use less memory (e.g. for `delete`, just save the member being deleted).
+    - Cons: We must ensure that the implementation of each individual command are correct.
+
+_{more aspects and alternatives to be added}_
 
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -278,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use Case: UC02 - Add Session to CCA
+#### Use Case: UC02 - Add Session to Hall Pointer
 
 **System**: Hall Pointer App
 
@@ -353,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 None.
 
 **Main Success Scenario (MSS)**:
-1. CCA Leader inputs the `list_members` command.
+1. CCA Leader inputs the `list` command.
 2. Hall Pointer retrieves and displays all members in the GUI.
     - Use case ends.
 
@@ -391,14 +468,14 @@ None.
     Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
 
 4.  **Member:**\
-    A data model representing an individual participant in a CCA. Each `Member` includes details like name, room number, Telegram handle, and hall points.
+    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
 
 5.  **Session:**\
     A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
 
 6.  **Tag:**\
-    A label used to categorize members within the HallPointer system (e.g., "leader," "logistics"), allowing for easier management and filtering.
-
+    Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
+    
 7.  **Command:**\
     A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
 
@@ -423,6 +500,10 @@ None.
 14. **MainApp:**\
     The main entry point for HallPointer, responsible for initializing and starting the application, setting up dependencies between components, and managing the overall flow.
 
+15. **User Preferences:**\
+    Settings such as window size and logging levels that can be customized by users and saved in a configuration file (`config.json`) for Hall Pointer.
+
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -434,44 +515,95 @@ testers are expected to do more _exploratory_ testing.
 
 </box>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the `.jar` file and copy it into an empty folder.
+    2. Open a terminal window and navigate to the directory where the `.jar` file is located.
+    3. Execute `java -jar hallpointer.jar`.<br>
+       **Expected:** Shows the GUI with a set of sample data. The window size may not be optimal.
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-2. Saving window preferences
+2. Saving Window Preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    2. Re-launch the app by double-clicking the `.jar` file.<br>
+       **Expected:** The most recent window size and location is retained.
 
-    2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Managing Members
 
-### Deleting a member
+1. Adding a member
 
-1. Deleting a member while all members are being shown
+    1. Test case: `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics`<br>
+       **Expected:** Adds a contact named "John Doe" with specified room number and tags. Details of the added member shown in the status message.
+
+    2. Test case: `add_member n/John Doe`<br>
+       **Expected:** Displays an error message.
+
+2. Deleting a member
 
     1. Prerequisites: List all members using the `list_members` command. Multiple members in the list.
+    2. Test case: `delete_member 1`<br>
+       **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
 
-    2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    3. Test case: `delete_member 0`<br>
+       **Expected:** No member is deleted. Error details shown in the status message.
 
-    3. Test case: `delete 0`<br>
-       Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect delete commands to try: `delete_member`, `delete_member x`, `...` (where `x` is larger than the list size).<br>
+       **Expected:** Similar to previous.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+3. Updating a member
 
-2. _{ more test cases …​ }_
+    1. Test case: `update_member 1 t/johndoe123_updated n/John Doe`<br>
+       **Expected:** Updates the telegram handle and name for the member at index 1.
 
-### Saving data
+    2. Test case: `update_member 2 tag/`<br>
+       **Expected:** Clears all tags for the member at index 2.
+
+
+### Managing Sessions
+
+1. Adding a session
+
+    1. Test case: `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`<br>
+       **Expected:** Adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with members at indexes 1 and 3 in the displayed list.
+
+2. Deleting a session
+
+    1. Prerequisites: Ensure a session with the specified name exists for members.
+    2. Test case: `delete_session s/Rehearsal m/1 m/3`<br>
+       **Expected:** Deletes the session "Rehearsal" for members at indexes 1 and 3 in the displayed list.
+
+### Saving Data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Open the hallpointer.json file located in the data directory (this file is created after the app is first launched). Modify it by deleting the name of the first entry.
+       **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
 
-2. _{ more test cases …​ }_
+2. Confirming data persistence
+
+    1. Add or modify member/session data.
+    2. Exit the app and re-launch it.<br>
+       **Expected:** All previous data should be saved and displayed upon restart.
+
+### Other Features
+
+1. Clearing all entries
+
+    1. Test case: `clear`<br>
+       **Expected:** Deletes all entries from the Hall Pointer. The list should be empty.
+
+2. Exiting the program
+
+    1. Test case: `exit`<br>
+       **Expected:** Closes the application.
+
+3. Viewing help
+
+    1. Test case: `help`<br>
+       **Expected:** Displays a message explaining how to access the help page.
+
+
+---
