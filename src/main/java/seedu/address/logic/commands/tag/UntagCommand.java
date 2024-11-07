@@ -1,8 +1,6 @@
 package seedu.address.logic.commands.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
@@ -25,7 +23,6 @@ import seedu.address.model.tag.Tag;
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
-    public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) %1$s from %2$s.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple tags from the person identified "
@@ -61,7 +58,9 @@ public class UntagCommand extends Command {
         String removedTags = tagsToRemove.stream()
                 .map(tag -> tag.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
-        return String.format(MESSAGE_REMOVE_TAG_SUCCESS, removedTags, personToEdit.getName().toString());
+        return String.format(
+                Messages.MESSAGE_REMOVE_TAG_SUCCESS, removedTags, personToEdit.getName().toString()
+        );
     }
 
     @Override
@@ -71,22 +70,24 @@ public class UntagCommand extends Command {
         if (lastShownList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", COMMAND_WORD));
         } else if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
-            throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()));
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()
+            ));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
 
         if (personToEdit.getTags().isEmpty()) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
+            throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
         if (tagsToRemove.isEmpty()) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
+            throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
         if (!updatedTags.containsAll(tagsToRemove)) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
+            throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
         for (Tag tag : updatedTags) {

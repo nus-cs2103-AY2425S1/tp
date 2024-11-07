@@ -37,7 +37,7 @@ public class AssignWeddingCommandTest {
         AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
                 INDEX_FIRST, weddingsToAdd, false);
 
-        String expectedMessage = String.format(Messages.MESSAGE_ADD_WEDDING_SUCCESS, "Amy's Wedding",
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS, "Amy's Wedding",
                 personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -121,7 +121,7 @@ public class AssignWeddingCommandTest {
                 .map(wedding -> wedding.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
         String expectedMessage = String.format(
-                Messages.MESSAGE_ADD_WEDDING_SUCCESS,
+                Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS,
                 addedWeddings,
                 personToEdit.getName().toString());
         CommandTestUtil.assertCommandSuccess(assignWeddingCommand, model, expectedMessage, model);

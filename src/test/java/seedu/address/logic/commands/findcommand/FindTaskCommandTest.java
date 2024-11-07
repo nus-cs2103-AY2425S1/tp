@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -12,6 +11,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -51,7 +51,7 @@ public class FindTaskCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+        String expectedMessage = String.format(Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         TaskContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTaskCommand command = new FindTaskCommand(predicate);
         expectedModel.updateFilteredPersonListByTask(predicate);
@@ -61,7 +61,7 @@ public class FindTaskCommandTest {
 
     @Test
     public void execute_missingKeyword_noPersonsFound() {
-        String expectedMessage = String.format(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+        String expectedMessage = String.format(Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         TaskContainsKeywordsPredicate predicate = preparePredicate("XxX");
         FindTaskCommand command = new FindTaskCommand(predicate);
         expectedModel.updateFilteredPersonListByTask(predicate);

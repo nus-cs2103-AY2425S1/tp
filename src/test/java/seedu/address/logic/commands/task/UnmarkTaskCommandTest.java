@@ -53,7 +53,7 @@ public class UnmarkTaskCommandTest {
 
         CommandResult result = command.execute(model);
 
-        assertEquals(String.format(UnmarkTaskCommand.MESSAGE_UNMARK_TASK_SUCCESS, Set.of(taskToUnmark)),
+        assertEquals(String.format(Messages.MESSAGE_UNMARK_TASK_SUCCESS, Set.of(taskToUnmark)),
                 result.getFeedbackToUser());
         assertFalse(taskToUnmark.getIsDone(), "The task should be unmarked as not done.");
     }

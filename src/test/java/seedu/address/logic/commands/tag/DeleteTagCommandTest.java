@@ -24,7 +24,7 @@ public class DeleteTagCommandTest {
         Tag tagToDelete = model.getFilteredTagList().get(0);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete, true);
 
-        String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_DELETE_TAG_SUCCESS,
                 Messages.format(tagToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -37,7 +37,7 @@ public class DeleteTagCommandTest {
         Tag tagToDelete = model.getFilteredTagList().get(1);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete);
         String expectedMessage = String.format(
-                DeleteTagCommand.MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED, Messages.format(tagToDelete))
+                Messages.MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED, Messages.format(tagToDelete))
                 + "\n"
                 + Messages.MESSAGE_FORCE_DELETE_TAG;
         assertCommandFailure(deleteTagCommand, model, expectedMessage);
@@ -48,7 +48,7 @@ public class DeleteTagCommandTest {
         Tag tagToDelete = model.getFilteredTagList().get(1);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete, true);
         String expectedMessage = String.format(
-                DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, Messages.format(tagToDelete));
+                Messages.MESSAGE_DELETE_TAG_SUCCESS, Messages.format(tagToDelete));
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, model);
     }
 
@@ -56,7 +56,7 @@ public class DeleteTagCommandTest {
     public void execute_invalidNotFoundDeleteTagCommand() {
         Tag tagToDelete = model.getFilteredTagList().get(0);
 
-        String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND,
+        String expectedMessage = String.format(Messages.MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND,
                 Messages.format(tagToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
