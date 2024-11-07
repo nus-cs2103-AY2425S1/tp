@@ -51,7 +51,7 @@
   }, {
     "name" : "Elle Meyer",
     "gender": "female",
-    "phone" : "9482224",
+    "phone" : "94822224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
@@ -63,7 +63,7 @@
   }, {
     "name" : "Fiona Kunz",
     "gender": "female",
-    "phone" : "9482427",
+    "phone" : "94824277",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],

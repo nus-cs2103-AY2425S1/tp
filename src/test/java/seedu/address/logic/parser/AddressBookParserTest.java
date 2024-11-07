@@ -43,9 +43,13 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD
-                + " " + CliSyntax.PREFIX_NAME) instanceof ClearCommand);
+                + " " + CliSyntax.PREFIX_NAME + " Bob") instanceof ClearCommand);
 
         assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, () ->
+                parser.parseCommand(ClearCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_NAME));
+        assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_NAME + " " + CliSyntax.PREFIX_ADDRESS));
     }
 
     @Test
@@ -74,7 +78,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("/name", "foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " /name "
+                FindCommand.COMMAND_WORD + " "
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new PersonContainsKeywordsPredicate(keywords)), command);
     }

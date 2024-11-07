@@ -127,20 +127,6 @@ public class Teacher extends Person {
                 getTags(), getSubjects(), getClasses(), getDaysAttended(), getNextOfKinName(), getEmergencyContact());
     }
 
-    /**
-     * Returns true if both are teachers with the same name and email address.
-     * This defines a weaker notion of equality between two persons.
-     */
-    @Override
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson instanceof Teacher
-            && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
-    }
-
     @Override
     public String getType() {
         return TEACHER_TYPE;
