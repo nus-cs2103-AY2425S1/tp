@@ -311,100 +311,155 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Use cases
 
-(For all use cases below, the **System** is the `FindingbrUdders` and the **Actor** is the `anUdder`, unless specified otherwise)
+For all use cases below, 
+**System** is the `FindingbrUdders` application
+**Actor** is the `Udder` user using the application
 
 <br>
 
-**Use case: Delete anUdder**
+**Use case: Delete an Udder**
 
 **MSS**
 
-1.  anUdder requests to list all their contacts
-2.  FindingbrUdders shows a list of contacts
-3.  anUdder requests to delete a specific contact from the list
-4.  FindingbrUdders deletes the contact
+1. The user <u>lists all Udders</u>.
+2. The user requests to delete a specific Udder from the list.
+3. FindingbrUdders deletes the Udder and displays the new Udder list.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-   * 2a1. FindingbrUdders shows a warning message.
-
-     Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. FindingbrUdders shows an error message.
+    * 2a1. FindingbrUdders shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
-**Use case: Schedule a meeting with a specific anUdder**
+**Use case: Schedule a meeting with a specific Udder**
 
 **MSS**
 
-1.  anUdder filters to list all their contacts that fulfils a criteria
-2.  FindingbrUdders shows the corresponding list of contacts
-3.  anUdder requests to schedule a meeting with a specific contact from the list, adding details where available
-4.  FindingbrUdders creates the meeting with the contact written as an attendee
+1. The user <u>lists all Udders</u>.
+2. The user requests to schedule a meeting with a specific Udder from the list using the index, start and end date, and location.
+3. FindingbrUdders creates the meeting with the Udder.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Filter field is invalid.
+* 2a. The given index is invalid.
 
-    * 1a1. FindingbrUdders shows an error message.
+    * 2a1. FindingbrUdders shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. The date/time clashes with another meeting.
+
+    * 2b1. FindingbrUdders shows a error message.
+
+      Use case resumes at step 2.
+
+<br>
+
+**Use case: View details of a specific Udder**
+
+**MSS**
+
+1. FindingbrUdders shows the list of contacts either by default, by <u>list request</u> ,or after a <u>find request</u>.
+2. User clicks the Udder in the Udder list panel.
+3. FindingbrUdders displays the details in the details panel.
+
+    Use case ends.
+
+<br>
+
+**Use case: Find Udders**
+
+**MSS**
+
+1. The user requests to find the Udders using the specified search parameters.
+2. FindingbrUdders displays the list of Udders that match the search parameters.
+
+    Use case ends.
+
+<br>
+
+**Use case: List all Udders**
+
+**MSS**
+
+1. The user requests to list all Udders.
+2. FindingbrUdders displays the list of all Udders.
+
+   Use case ends.
+
+<br>
+
+**Use case: List all meetings**
+
+**MSS**
+
+1. The user requests to list all meetings.
+2. FindingbrUdders displays the list of all meetings in the command result panel.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no meetings.
+
+    * 2a1. FindingbrUdders shows an error message in the command result panel.
 
       Use case ends.
 
-* 2a. The list is empty.
+<br>
 
-  * 2a1. FindingbrUdders shows a warning message.
+**Use case: Delete a meeting**
 
-     Use case ends.
+**MSS**
 
-* 3a. The given index is invalid.
+1. The user requests to <u>list meetings</u>.
+2. The user requests to delete a specific meeting from the meetings list using the index.
+3. FindingbrUdders deletes the meeting.
 
-    * 3a1. FindingbrUdders shows an error message.
+   Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
 
-* 3b. The date/time clashes with another meeting.
+* 2a. The given index is invalid.
 
-    * 3b1. FindingbrUdders shows a warning message.
+    * 2a1. FindingbrUdders shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
-**Use case: View details of a specific mUdder**
+
+**Use case: Edit a meeting**
 
 **MSS**
 
-1.  anUdder filters to list all their contacts that fulfils a criteria
-2.  FindingbrUdders shows the corresponding list of contacts
-3.  anUdder clicks the contact in the address list display
-4.  FindingbrUdders displays the details in the profile display tab
+1. The user requests to <u>list meetings</u>.
+2. The user requests to edit a specific meeting using the index, with various optional parameters.
+3. FindingbrUdders updates the meeting.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. Filter field is invalid.
+* 2a. The given index is invalid.
 
-    * 1a1. FindingbrUdders shows an error message.
+    * 2a1. FindingbrUdders shows an error message.
 
-      Use case ends.
+      Use case resumes at step 2.
 
-* 2a. The list is empty.
+* 2b. The date/time clashes with another meeting.
 
-  * 2a1. FindingbrUdders shows a warning message.
+    * 2b1. FindingbrUdders shows a error message.
 
-     Use case ends.
+      Use case resumes at step 2.
 
 <br>
 
