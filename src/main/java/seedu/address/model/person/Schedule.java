@@ -41,6 +41,12 @@ public class Schedule {
         return dateTime;
     }
 
+    public String getFormattedDateTime() {
+        LocalDateTime dateTime = LocalDateTime.parse(getDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        String formattedDate = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
+        return formattedDate;
+    }
+
     /**
      * Returns the notes associated with the appointment.
      * @return a {@code String} representing the notes.

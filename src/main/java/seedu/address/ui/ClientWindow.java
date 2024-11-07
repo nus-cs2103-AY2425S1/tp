@@ -174,7 +174,7 @@ public class ClientWindow extends UiPart<Stage> implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        clientScheduleDate.setCellValueFactory(new PropertyValueFactory<Schedule, String>("dateTime"));
+        clientScheduleDate.setCellValueFactory(new PropertyValueFactory<Schedule, String>("formattedDateTime"));
         clientScheduleDetails.setCellValueFactory(new PropertyValueFactory<Schedule, String>("notes"));
         clientSchedulePaymentStatus.setCellValueFactory(new PropertyValueFactory<Schedule, String>("isPaid"));
         scheduleList = FXCollections.observableArrayList();
