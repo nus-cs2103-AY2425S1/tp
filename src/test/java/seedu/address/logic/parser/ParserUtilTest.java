@@ -2,17 +2,13 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_SUB;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -20,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.BtcAddress;
 import seedu.address.model.addresses.PublicAddress;
-import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -257,6 +252,7 @@ public class ParserUtilTest {
     }
 
     @Test
+
     public void parsePublicAddresses_nullCollection_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePublicAddresses(null));
     }
@@ -321,6 +317,7 @@ public class ParserUtilTest {
     }
 
     @Test
+
     public void parsePublicAddressLabel_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePublicAddressLabel(null));
     }
