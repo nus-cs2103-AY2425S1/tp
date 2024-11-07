@@ -173,7 +173,7 @@ Format: `delete-appt UNIQUE_ID`
 * Deletes the appointment tagged to the `UNIQUE_ID`.
 
 **Examples:**
-* `delete-appt 1355`
+* `delete-appt 1231996014`
 
 ### Listing all persons: `list`
 
