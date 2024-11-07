@@ -48,6 +48,7 @@ public class ParserUtil {
      */
     public static Index[] parseIndexes(String args) throws ParseException {
         String trimmedIndices = args.trim();
+        trimmedIndices = trimmedIndices.replaceAll("\\s+", " ");
         String[] parts = trimmedIndices.split(" ");
         if (parts.length != 2) {
             throw new ParseException(MESSAGE_INVALID_INDEXES);
@@ -109,6 +110,7 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
+        trimmedAddress = trimmedAddress.replaceAll(",\\s*", ", ");
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
