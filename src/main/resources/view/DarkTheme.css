@@ -94,7 +94,7 @@
 
 /* Style when the ListView is focused */
 .list-view:focused {
-    -fx-border-color: #FFCC00;
+    -fx-border-color: -fx-focus;
     -fx-border-width: 2px;
     -fx-border-radius: 4px;
 }

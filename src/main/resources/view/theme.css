@@ -5,6 +5,7 @@
     -fx-primary: #FFBF61;
     -fx-secondary: #E9EED9;
     -fx-secondary-bg: #FEF9F2;
+    -fx-focus: #FFCC00;
     -fx-link: #3e7b91;
     -fx-error: #d06651;
 }

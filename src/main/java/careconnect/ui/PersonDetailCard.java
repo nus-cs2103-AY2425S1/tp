@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Comparator;
 
+import careconnect.ui.MainWindow.FocusItemUpdater;
 import careconnect.model.person.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -57,7 +58,7 @@ public class PersonDetailCard extends UiPart<Region> implements ShiftTabFocusabl
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonDetailCard(Person person) {
+    public PersonDetailCard(Person person, MainWindow.FocusItemUpdater focusItemUpdater) {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
@@ -80,7 +81,7 @@ public class PersonDetailCard extends UiPart<Region> implements ShiftTabFocusabl
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        logsListPanel = new LogListPanel(person.getLogs());
+        logsListPanel = new LogListPanel(person.getLogs(), focusItemUpdater);
         logsListPanelPlaceHolder.getChildren().setAll(logsListPanel.getRoot());
     }
 
@@ -93,5 +94,9 @@ public class PersonDetailCard extends UiPart<Region> implements ShiftTabFocusabl
     @Override
     public void focus() {
         this.logsListPanel.focus();
+    }
+
+    protected boolean isLogListEmpty() {
+        return this.logsListPanel.isLogListEmpty();
     }
 }

@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import careconnect.commons.core.LogsCenter;
 import careconnect.model.log.Log;
+import careconnect.ui.MainWindow.FocusItemUpdater;
+import careconnect.ui.MainWindow.FocusItems;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -23,10 +25,13 @@ public class LogListPanel extends UiPart<Region> implements ShiftTabFocusable {
     /**
      * Creates a {@code LogsListPanel} with the given immutable {@code List}.
      */
-    public LogListPanel(List<Log> logs) {
+    public LogListPanel(List<Log> logs, FocusItemUpdater focusItemUpdater) {
         super(FXML);
         logListView.setItems(FXCollections.observableList(logs));
         logListView.setCellFactory(cell -> new LogListViewCell());
+        logListView.setOnMousePressed(event -> {
+            focusItemUpdater.updateCurrentFocusItem(FocusItems.LOG_LIST_ITEM);
+        });
     }
 
     @Override
@@ -54,5 +59,9 @@ public class LogListPanel extends UiPart<Region> implements ShiftTabFocusable {
                 setGraphic(new LogCard(log, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    protected boolean isLogListEmpty() {
+        return this.logListView.getItems().isEmpty();
     }
 }

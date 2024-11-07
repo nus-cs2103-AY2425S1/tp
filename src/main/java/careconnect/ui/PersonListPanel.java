@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import careconnect.commons.core.LogsCenter;
 import careconnect.model.person.Person;
+import careconnect.ui.MainWindow.FocusItemUpdater;
+import careconnect.ui.MainWindow.FocusItems;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -24,10 +26,22 @@ public class PersonListPanel extends UiPart<Region> implements ShiftTabFocusable
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, Consumer<Integer> setAndShowSelectedPerson) {
+    public PersonListPanel(ObservableList<Person> personList, Consumer<Integer> setAndShowSelectedPerson,
+                           FocusItemUpdater focusItemUpdater, Consumer<Person> showSelectedPerson) {
         super(FXML);
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell(setAndShowSelectedPerson));
+        this.personListView.setItems(personList);
+        this.personListView.setCellFactory(listView -> new PersonListViewCell(setAndShowSelectedPerson));
+        personListView.setOnMousePressed(event -> {
+            focusItemUpdater.updateCurrentFocusItem(FocusItems.PERSON_LIST_ITEM);
+        });
+        // Add listener to respond to selection changes
+        personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            showSelectedPerson.accept(newValue);
+        });
+    }
+
+    protected void setSelected(int index) {
+        personListView.getSelectionModel().select(index);
     }
 
     @Override
@@ -55,6 +69,8 @@ public class PersonListPanel extends UiPart<Region> implements ShiftTabFocusable
                 setGraphic(new PersonCard(person, getIndex() + 1, setAndShowSelectedPerson).getRoot());
             }
         }
+
+
     }
 
 }
