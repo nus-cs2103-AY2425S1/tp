@@ -1,14 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.addresses.Network;
@@ -22,68 +23,77 @@ public class RetrievePublicAddressCommand extends Command {
 
     public static final String COMMAND_WORD = "retrievepa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves public addresses of a contact.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_PUBLIC_ADDRESS_NETWORK + "NETWORK "
-            + "[" + PREFIX_PUBLIC_ADDRESS_LABEL + "LABEL]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieve public addresses by label.\n"
+            + "Parameters: "
+            + PREFIX_PUBLIC_ADDRESS_LABEL + "LABEL "
+            + "[" + PREFIX_PUBLIC_ADDRESS_NETWORK + "NETWORK] "
+            + "[" + PREFIX_NAME + "NAME]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet "
             + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
-            + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet";
+            + PREFIX_NAME + "John";
 
     public static final String MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS =
-            "Retrieved %1$d %2$s public addresses for %3$s:\n%4$s";
+            "Retrieved %1$d public addresses:\n%2$s";
 
-    private final Index index;
-    private final Network network;
+    public static final String MESSAGE_PERSON_FORMAT = "%1$s | %2$s | %3$s | %4$s";
+
     private final String label;
+    private final String name;
+    private final Network network;
 
     /**
-     * Creates a RetrievePublicAddressCommand to retrieve the corresponding public address.
+     * Creates a RetrievePublicAddressCommand to retrieve the corresponding public addresses.
      *
-     * @param index   of the person to retrieve the public address from
-     * @param network network type of desired public address
-     * @param label   label of desired public address
+     * @param label   label of the desired public addresses
+     * @param name    name of owner desired public addresses
+     * @param network network type of the desired public addresses
      */
-    public RetrievePublicAddressCommand(Index index, Network network, String label) {
-        requireNonNull(index);
-        requireNonNull(network);
+    public RetrievePublicAddressCommand(String label, String name, Network network) {
+        requireNonNull(label);
+        requireNonNull(name);
 
-        this.index = index;
-        this.network = network;
         this.label = label;
+        this.name = name;
+        this.network = network;
     }
 
     /**
-     * Creates a RetrievePublicAddressCommand with default value for label.
+     * Creates a RetrievePublicAddressCommand for any network.
      *
-     * @param index   of the person to retrieve the public address from
-     * @param network network type of desired public address
+     * @param label label of the desired public addresses
+     * @param name  name of owner desired public addresses
      */
-    public RetrievePublicAddressCommand(Index index, Network network) {
-        this(index, network, "");
+    public RetrievePublicAddressCommand(String label, String name) {
+        this(label, name, null);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person desiredPerson = lastShownList.get(index.getZeroBased());
-        List<PublicAddress> desiredPublicAddresses = desiredPerson.getPublicAddressesByNetwork(network)
+        List<Person> matchingPersons = model.getAddressBook().getPersonList()
                 .stream()
-                .filter(publicAddress -> publicAddress.label.toLowerCase().contains(label.toLowerCase()))
-                .sorted((a, b) -> a.label.compareToIgnoreCase(b.label))
+                .filter(person -> person.getName().toString().toLowerCase().contains(name.toLowerCase()))
                 .toList();
 
-        return new CommandResult(String.format(MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-                desiredPublicAddresses.size(),
-                network,
-                desiredPerson.getName(),
-                desiredPublicAddresses.isEmpty() ? "-" : Messages.format(desiredPublicAddresses)));
+        List<String> personDetails = matchingPersons
+                .stream()
+                .flatMap(person -> {
+                    String personName = person.getName().toString();
+                    Set<PublicAddress> desiredPublicAddresses =
+                            network == null ? person.getPublicAddressesByLabel(label)
+                                            : person.getPublicAddressesByLabelAndNetwork(label, network);
+
+                    return desiredPublicAddresses.stream()
+                            .map(publicAddress -> String.format(MESSAGE_PERSON_FORMAT, personName,
+                                    publicAddress.getNetwork(), publicAddress.getLabel(),
+                                    publicAddress.getPublicAddressString()));
+                })
+                .toList();
+
+        return new CommandResult(String.format(
+                MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS, personDetails.size(), String.join("\n", personDetails)));
     }
 
     @Override
@@ -98,17 +108,17 @@ public class RetrievePublicAddressCommand extends Command {
         }
 
         RetrievePublicAddressCommand otherCommand = (RetrievePublicAddressCommand) other;
-        return index.equals(otherCommand.index)
-                && network.equals(otherCommand.network)
-                && label.equals(otherCommand.label);
+        return label.equals(otherCommand.label)
+                && Objects.equals(network, otherCommand.network)
+                && name.equals(otherCommand.name);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("network", network)
                 .add("label", label)
+                .add("name", name)
+                .add("network", network)
                 .toString();
     }
 
