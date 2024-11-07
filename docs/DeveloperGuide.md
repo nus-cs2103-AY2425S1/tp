@@ -442,64 +442,56 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
     - **1f1.** Error message displayed in result display.
         - Use case ends.
 
+---
+
+## **Appendix: Requirements**
+
 ### Non-Functional Requirements
 
 1. **Performance Requirements:**
-    - **Response Time:** The system should respond to user commands within 2 seconds under normal operating conditions (e.g., managing up to 100 weddings and 1,000 contacts). This should ensure that the system performs well for fast typists, complying with the typing-preferred constraint.
-    - **Startup Time:** The system should start up and be fully usable within 5 seconds on modern machines (with at least 8GB RAM and SSD storage), ensuring it is portable and doesn't rely on any installer or external dependencies.
+    - **Response Time:** The system should respond to user commands within **1 second** under normal operating conditions (e.g., managing up to **50 weddings** and **500 contacts**). This ensures the application remains efficient for fast typists and small to medium-sized wedding organizers.
+    - **Startup Time:** The system should start up and be fully usable within **5 seconds** on modern machines (e.g., with at least 4GB RAM), ensuring quick access without reliance on any installer or external dependencies.
 
-2. **Scalability:**
-    - The system should be designed for future scalability to support new features like advanced budgeting tools, contact management enhancements, and more, while maintaining object-oriented principles.
-    - The application should scale to handle up to 500 weddings and 10,000 contacts without significant performance degradation.
+2. **Portability:**
+    - The system must work cross-platform on **Windows 10/11** and **macOS 10.15 (Catalina)** or later, running **Java 17** and above. It should avoid the use of platform-specific libraries or features, ensuring it can be used by a wide range of users across different environments.
+    - The product must be packaged as a single **JAR file** to comply with the single-file packaging constraint, avoiding external dependencies that could complicate installation or distribution.
 
-3. **Portability:**
-    - The system must work cross-platform on Windows, macOS, and Linux running Java 17 and above, avoiding the use of platform-specific libraries or features. This ensures that it can be used by a wide range of users across different environments.
-    - The product must be packaged in a single JAR file to comply with the single-file packaging constraint, avoiding external dependencies that could complicate installation or distribution.
+3. **Usability:**
+    - The system should offer a **CLI-first experience** optimized for fast typists, with a user interface that caters to wedding organizers who prefer text-based commands.
+    - The GUI should primarily provide feedback and display information, while command-based input remains the primary interaction method.
 
-4. **Usability:**
-    - The system should offer a CLI-first experience optimized for fast typists, with a user interface that caters to wedding organizers who prefer text-based commands. The GUI should primarily provide feedback but allow command-based input to be the primary interaction method.
-    - The system must comply with the CLI-first recommendation, ensuring that typing tasks (e.g., adding vendors, managing profiles) is faster than using a GUI-only interface.
+4. **Data Storage:**
+    - All data should be stored locally in a human-readable format (e.g., JSON), allowing users to back up and edit data manually if necessary.
+    - The system should not require a database management system (DBMS), ensuring ease of setup and maintenance.
 
-5. **Data Security and Privacy:**
-    - All sensitive information should be stored in a human-editable text file and should not require a DBMS, per the human-editable and no-DBMS constraints. Encryption should only be used if the system provides a simple way to decrypt and edit manually, to preserve the human-editability of the data file.
-    - The system must comply with data protection regulations such as PDPA, ensuring that data is stored and processed securely. However, storing data locally in a text file should assume that the system is used in a secure, password-protected environment.
-
-6. **Data Backup and Recovery:**
-    - Users should be able to back up and restore their data easily. Since data is stored locally in human-editable text files, users should be able to create backups manually by copying the text file, ensuring minimal disruption in the event of failure.
-
-7. **Interoperability:**
-    - The system should be able to import/export data in common formats such as CSV or PDF, making it compatible with other wedding management software or services without relying on a remote server.
-    - The system should not depend on external APIs, avoiding dependency on unreliable networks (following the recommendation to minimize network reliance).
-
-8. **Reliability and Fault Tolerance:**
+5. **Reliability and Fault Tolerance:**
     - The system should have robust error handling that gives users clear feedback when errors occur.
     - In case of errors, the system should allow users to retry operations or resolve issues without losing data.
 
-9. **Maintainability:**
-    - The codebase should follow **OOP principles** and be modular to facilitate future maintenance and extension. Each component should be documented and follow best practices to ensure maintainability.
-    - Incremental updates are recommended to align with the **Incremental Delivery** constraint, ensuring that the product evolves gradually rather than in big, risky jumps.
+6. **Maintainability:**
+    - The codebase should follow **Object-Oriented Programming (OOP) principles** and be modular to facilitate future maintenance and extension.
+    - Each component should be well-documented and follow best practices to ensure maintainability.
+    - Incremental updates are recommended to align with the **Incremental Delivery** approach, ensuring that the product evolves gradually.
 
-10. **Testability:**
-    - The system should include unit and integration tests for at least **80%** of the codebase to ensure high test coverage. Testability must be a priority, avoiding features that make testing difficult (e.g., account-based logins, reliance on external APIs).
-    - Manual testing should also be easy to perform, with clear feedback provided to testers.
+7. **Testability:**
+    - The system should include unit and integration tests to ensure code quality.
+    - Manual testing should be straightforward, with clear feedback provided to testers. Detailed instructions for manual testing should be provided in the developer documentation.
 
-11. **Documentation:**
-    - Both **user documentation** and **developer documentation** must be provided. User documentation should explain how to interact with the CLI and manage wedding data, while developer documentation should detail system architecture and extensions.
+8. **Documentation:**
+    - Both **User Guide** and **Developer Guide** must be provided.
+    - The User Guide should explain how to interact with the CLI and manage wedding data.
+    - The Developer Guide should detail system architecture, design decisions, and instructions for extending the application.
 
-12. **Compliance:**
-    - The system must follow the **no-remote-server** constraint, ensuring it can operate entirely offline without dependence on a remote server.
-    - Legal compliance should include industry standards for data encryption and storage, even though it stores data locally.
+9. **Compliance:**
+    - The system must operate entirely offline without dependence on a remote server, ensuring data privacy and usability without internet access.
+    - Legal compliance should be considered regarding data storage and user privacy, but given the local nature of data storage, extensive data security measures are not required.
 
-13. **Environmental Requirements:**
-    - The system should operate efficiently across different environments, such as machines with varying processing power, ensuring that the product runs smoothly on modern systems (with at least 8GB RAM).
-    - It should also work offline by default, only relying on internet access for optional features like calendar syncing, but without any dependency on continuous network access.
-
-14. **Graphical Interface:**
-    - The GUI must be designed to work on **common screen resolutions** (1920x1080 and higher) and should remain usable at lower resolutions like 1280x720 and higher, following the **screen resolution** constraints. The interface should be scalable to accommodate different screen sizes without compromising usability.
+10. **Graphical Interface:**
+    - The GUI should be responsive and display correctly on common screen resolutions, including when the application window is maximized.
+    - The interface should be usable on screens with resolutions of **1280x720** and higher.
 
 ---
 
-These non-functional requirements ensure that **Bridal Boss** remains a reliable, secure, and scalable application tailored to the needs of wedding organizers. They address critical aspects like performance, security, usability, and maintainability, ensuring the system meets both current and future needs.
 ### Glossary
 
 - **Wedding Organizer:** A professional responsible for planning and managing wedding events, coordinating with clients and vendors.
