@@ -23,12 +23,9 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_HELP = """
             EventfulNUS allows you to manage a list of people and events, for easier event planning.
-                        
-            These are the available commands:
-                        
+            These are the available commands:\n
             help - Display this help page.
-            usage: help
-                        
+            usage: help\n
             add - Add a Person to the list. They have a name, phone number, email and an event tied to them.
             usage: add n/<name> p/<phone number> e/<email> s/<subevent> {r/<role>}
             examples:
@@ -36,44 +33,33 @@ public class Messages {
             2. add ... r/committee - <branch> - <position>
             3. add ... r/committee - Sports - <position> - <faculty>
             4. add ... r/sponsor - <description>
-            5. add ... r/volunteer - <volunteerRole>
-                        
+            5. add ... r/volunteer - <volunteerRole>\n
             edit - Update the information in an entry of Person, via its ID.
-            usage: edit <id> n/<name> p/<phone number> e/<email> s/<subevent> {r/<role>}
-                        
+            usage: edit <id> n/<name> p/<phone number> e/<email> s/<subevent> {r/<role>}\n
             delete - Delete a Person entry with the given ID.
-            usage: delete <id>
-            
+            usage: delete <id>\n
             find - Show all entries containing a case-insensitive query in the Person's name, phone, email, or events.
-            usage: find <query>
-                        
+            usage: find <query>\n
             addevent - Add an Event to the list. It has a name, a sport, a venue and some participants tied to it.
-            usage: addevent n/<name> sp/<sport> v/<venue> pa/<participants>
-                        
+            usage: addevent n/<name> sp/<sport> v/<venue> pa/<participants>\n
             editevent - Update the information in an Event entry, via its ID.
-            usage: editevent <id> n/<name> sp/<sport> v/<venue> pa/<participants>
-                        
+            usage: editevent <id> n/<name> sp/<sport> v/<venue> pa/<participants>\n
             deleteevent - Delete an Event entry with the given ID.
-            usage: deleteevent <id>
-            
-            findevent - Show all Event entries containing a case-insensitive query in the Event's name, sport, venue or participants.
-            usage: findevent <query>
-                        
+            usage: deleteevent <id>\n
+            findevent - Show all entries containing a case-insensitive query in the Event's name,
+            sport, venue or participants.
+            usage: findevent <query>\n
             clear - Delete all entries in the list. But be careful, the deleted entries are gone forever.
-            usage: clear
-                      
+            usage: clear\n
             filter - Show all entries containing a case-insensitive keyword in the Person's roles.
-            usage: filter <keyword>
-                        
+            usage: filter <keyword>\n
             list - List all entries registered to EventfulNUS.
-            usage: list
-                                
+            usage: list\n
             exit - Exit the program.
-            usage: exit
-                        
-            Input data is automatically saved when you exit EventfulNUS, and will be loaded the next time you run it.
-                        
-            Find out more about using EventfulNUS on our user guide at: https://ay2425s1-cs2103t-w14-4.github.io/tp/UserGuide.html
+            usage: exit\n
+            Input data is automatically saved when you exit EventfulNUS, and will be loaded the next time you run it.\n
+            Find out more about using EventfulNUS on our user guide at:
+            https://ay2425s1-cs2103t-w14-4.github.io/tp/UserGuide.html
             Press the 'Copy URL' button to copy the link to your clipboard.""";
 
     /**
