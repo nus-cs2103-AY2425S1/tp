@@ -11,7 +11,7 @@ import seedu.hireme.logic.validator.NameValidator;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters, underscores, spaces, ampersand, dot, colon, brackets"
+            "Names should only contain alphanumeric characters, underscores, spaces, ampersand, dot, colon, parentheses"
                     + " and it should not be blank";
 
     private final String value;

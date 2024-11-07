@@ -36,7 +36,6 @@ Given below are my contributions to the project.
     * User Guide:
         * Added documentation for the features `filter` and `list` (Pull request [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files))
         * Improved introduction section and added table of contents (Pull request [\#200](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/200))
-        * 
     
     * Developer Guide:
         * Added implementation details and sequence diagram of the `filter` feature [\#126](https://github.com/AY2425S1-CS2103T-W09-3/tp/pull/126/files)

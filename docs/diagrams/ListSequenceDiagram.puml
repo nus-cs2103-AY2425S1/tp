@@ -50,4 +50,7 @@ deactivate ListCommand
 
 [<--LogicManager : r
 deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommand -[hidden]-> LogicManager
+destroy ListCommand
 @enduml
