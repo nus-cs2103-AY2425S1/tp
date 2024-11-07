@@ -20,11 +20,11 @@
 ## **Acknowledgements**
 
 - Initial project template (code and documentation):
-    - [AB3](https://github.com/se-edu/addressbook-level3)
+    - [AB3](https://github.com/se-edu/addressbook-level3) - Adapted the overall structure and some core functionalities of AB3 for DocTrack.
 - Third-party libraries:
-    - [JUnit](https://junit.org/junit5/)
-    - [JavaFX](https://openjfx.io/)
-    - [Jackson](https://github.com/FasterXML/jackson)
+    - [JUnit](https://junit.org/junit5/) - Used for testing.
+    - [JavaFX](https://openjfx.io/) - Used for the graphical user interface.
+    - [Jackson](https://github.com/FasterXML/jackson) - Used for JSON parsing and serialization.
 
 <br>
 
@@ -46,30 +46,38 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
+The ***Architecture Diagram*** below explains the high-level design of the DocTrack application.
+
 <puml src="diagrams/ArchitectureDiagram.puml" width="280"></puml>
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+<br><br>
 
 Given below is a quick overview of main components and how they interact with each other.
 
-**Main components of the architecture**
+<br>
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+#### Main components of the architecture
+
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
+<br>
+
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of DocTrack.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of DocTrack in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-**How the architecture components interact with each other**
+<br>
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete  person 1`.
+#### How the architecture components interact with each other
+
+The *Sequence Diagram* below shows how the components interact with each other, for the scenario where the user enters the command `delete  person 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"></puml>
 
@@ -79,9 +87,11 @@ Each of the four main components (also shown in the diagram above),
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the 
   corresponding API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class _(reason: to prevent outside component's being coupled to the implementation of a component)_, as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300"></puml>
+
+<br><br>
 
 The sections below give more details of each component.
 
@@ -89,7 +99,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/ui)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"></puml>
 
@@ -108,7 +118,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/logic)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -142,9 +152,9 @@ How the parsing works:
 <br>
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/model)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450"></puml>
+<puml src="diagrams/ModelClassDiagram.puml" width="750"></puml>
 
 The `Model` component,
 
@@ -154,8 +164,8 @@ The `Model` component,
   * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
   * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * with regards to `Appointment` objects:
-  * stores the details of an appointment in a `AppointmentDescriptor` object
-  * stores the `AppointmentDescriptor` object with a `appointmentId` in the `Appointment` class.
+  * stores the details of an appointment in an `AppointmentDescriptor` object
+  * stores the `AppointmentDescriptor` object with a `Person` and `appointmentId` in the `Appointment` class.
   * stores the address book data i.e., all `Appointment` objects (which are contained in a `UniqueAppointmentList` object).
   * stores the currently 'selected' `Appointment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Appointment>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -163,9 +173,10 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list (the `UniqueTagList`) in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, the `Appointment` objects are shown as such as well.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list (the 
+`UniqueTagList`) in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, the `Appointment` objects are shown as such too.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450"></puml>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="750"></puml>
 
 </box>
 
@@ -173,22 +184,23 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W10-2/tp/tree/master/src/main/java/seedu/address/storage)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550"></puml>
+<puml src="diagrams/StorageClassDiagram.puml" width="650"></puml>
 
-The `Storage` component,
-* can save patient data, appointment data, and user preference data in JSON format, and read them back into corresponding objects.
-* Storage interface inherits from `AddressBookStorage`, `AppointmentBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* Patient data : 
-  * data is saved in `JsonAddressBookStorage` which inherits from interface `AddressBookStorage`.
-  * data is saved as `JsonSerializableAddressBook` which consists of `JsonAdaptedPerson` and `JsonAdaptedTag` which embodies the actual data of the individual patient and their data
+* The `Storage` component can save patient data, appointment data, and user preference data in JSON format, and read them back into corresponding objects.
+* The `Storage` interface inherits from `AddressBookStorage`, `AppointmentBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* Patient data: 
+  * Data is saved in `JsonAddressBookStorage` which inherits from interface `AddressBookStorage`.
+  * Data is saved as `JsonSerializableAddressBook` which consists of `JsonAdaptedPerson` and 
+    `JsonAdaptedTag` which embodies the actual data of the individual patient and their data
 * Appointment data:
-  * data is saved in `JsonAppointmentBookStorage` which inherits from interface `AppointmentBookStorage`.
-  * data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which embodies the actual data of appointments and appointment details
+  * Data is saved in `JsonAppointmentBookStorage` which inherits from interface `AppointmentBookStorage`.
+  * Data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which 
+    embodies the actual data of appointments and appointment details
 * User Preference data:
-    * data is saved in `UserPrefsStorage` interface and saves as `JsonUserPrefsStorage`
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+    * Data is saved in `UserPrefsStorage` interface and saved as `JsonUserPrefsStorage`
+* The `Storage` component depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 <br>
 
@@ -223,157 +235,178 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 ## **Implementation of entity command features**
 
-Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands. Hence, `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
+Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands. 
+* Hence, `xyzCommand` can be `addCommand`, `deleteCommand`, `findCommand`, `clearCommand`, `editCommand`, or `listCommand`.
 
 The sequence diagram shows how an entity command is executed:
 
 <puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
-- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand`. There are two entities, **person** and **appointment**, on which operations can be performed.
 
-**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity, `person` or `appt`. This is followed by appropriate arguments and prefixes.
+<box type="info" seamless>
+
+**Note:** There are two entities, `Person` and `Appointment`.
+- The entity referred in `FindEntityCommand` refers to `FindPersonCommand` and `FindAppointmentCommand`.
+- Similarly, the entity referred in `AddEntityCommand` refers to `AddPersonCommand` and `AddAppointmentCommand`.
+- This applies for the other commands as well.
+</box>
+
+**Step 1**. The user types an `xyz` command input in the `CommandBox`, followed by the type of entity, 
+`person` or `appt`. This is followed by appropriate arguments and prefixes.
 
 
-**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
+**Step 2**. The input is passed to the `LogicManager`. `LogicManager` then calls the 
+`AddressBookParser::parseCommand` method to parse the input.
 
 
-**Step 3**. The `AddressBookParser` creates a `xyzEntityCommand` object, and call the `xyzCommandParser::parse` method, which is returned to the `LogicManager`. This may be different based on the entity type as commands like `addPersonCommand` and `addApptCommand` have a different set of arguments the user can provide. 
+**Step 3**. The `AddressBookParser` parses the input and creates an `xyzCommandParser` object, which is 
+returned to the `AddressBookParser`.
 
 
-**Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
+**Step 4**. The `AddressBookParser` calls the 
+`xyzCommandParser::parse` method to parse the arguments. 
 
 
-**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
+**Step 5**. The `xyzCommandParser` creates an `xyzCommand` object, which is returned to the `LogicManager`.
+
+
+**Step 6**. The `LogicManager` calls the `xyzCommand : execute` method, which creates a `CommandResult` 
+Object.
+
+
+**Step 7**. The `CommandResult` object is returned to the `LogicManager`.
 
 <br>
 
 ### General Design Considerations
 
 **Aspect: Whether to implement entity commands as separate commands or through an abstract base command**
-- **Alternative 1 (Current choice):** Implement an abstract EntityCommand class that specific entity commands (e.g., AddPersonCommand, AddAppointmentCommand, DeletePersonCommand, DeleteAppointmentCommand) inherit from.
-  - Pros: Allows for reuse of code logic between entity commands
-  - Cons: Requires additonal parsing logic since entity in command must be distinguished (person or appointment), which can add complexity
+- **Alternative 1 (Current choice):** Implement an abstract EntityCommand class that specific entity 
+  commands (e.g. `AddPersonCommand`, `AddAppointmentCommand`, `DeletePersonCommand`,`DeleteAppointmentCommand`) inherit from.
+  - **Pros**: Allows for reuse of code logic between entity commands.
+  - **Cons**: Requires additional parsing logic since entity in command must be distinguished (person or appointment), which can add complexity.
 - **Alternative 2:** Implement each entity command as entirely separate classes.
-  - Pros: Creates a separate command, so the implementations of each command are separated and less coupled
-  - Cons: Results in significant code duplication
+  - **Pros**: Creates a separate command, so the implementations of each command are separated and less coupled.
+  - **Cons**: Results in significant code duplication.
 
 
 <br>
 
-**Aspect: What constitutes duplicate person that should not be added or edited into the address book**
-- **Alternative 1 (Current choice):** Duplicate person is one that has same name (case-insensitive) and same phone number as an existing person
-  - Pros: Name and phone numbers are identifiers that are commonly recognized by users
-  - Cons: Extra logic required to determine equality of different people
-- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g., by name only)
-  - Pros: Less logic required to determine equality of different people
-  - Cons: Different people could have the same name, but cannot be added into the address book
+**Aspect: What constitutes duplicate person that should not be added or edited into the AddressBook**
+- **Alternative 1 (Current choice):** Duplicate person is one that has the same name (case-insensitive) 
+  and same phone number as an existing person.
+  - **Pros**: Name and phone numbers are identifiers that are commonly recognized by users.
+  - **Cons**: Extra logic required to determine equality of different people.
+- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g. by name only).
+  - **Pros**: Less logic required to determine equality of different people.
+  - **Cons**: Different people could have the same name, but cannot be added into the AddressBook.
 
 <br>
 
-**Aspect: What constitutes duplicate appointment that should not be added or edited into the appointment book**
-- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time of an existing appointment
-  - Pros: Provides a rule to avoid scheduling conflicts of same person
-  - Cons: Extra logic required to determine equality of different appointments
+**Aspect: What constitutes duplicate appointment that should not be added or edited into the AppointmentBook**
+- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time, 
+  and appointment type as an existing appointment.
+  - **Pros**: Provides a rule to avoid scheduling conflicts of same person.
+  - **Cons**: Extra logic required to determine equality of different appointments.
 - **Alternative 2:** Define duplicates with only the date and time
-  - Pros: Less logic required to determine equality of different appointments
-  - Cons: Different appointments with different persons could have the same date time, but cannot be added into the appointment book
+  - **Pros**: Less logic required to determine equality of different appointments.
+  - **Cons**: Different appointments with different persons could have the same date time, but cannot be added 
+    into the AppointmentBook.
 
 <br>
 
 ### Command-Specific Design Considerations
 
-### Add Appointment feature
+#### Add Appointment feature
 
 **Aspect: Whether appointment fields should be optional**
-
-- **Alternative 1 (Current choice):** Sickness and medicine fields are optional.
-    - **Pros**: This allows users to create an appointment without specifying all fields initially, which is more realistic and practical as some details may not be available at the time of creation.
-
+- **Alternative 1 (Current choice):** `Sickness` and `Medicine` fields are optional.
+  - **Pros**: This allows users to create an appointment without specifying all fields initially, which is 
+    more realistic and practical as some details may not be available at the time of creation.
 - **Alternative 2**: Make all fields mandatory.
-    - **Pros**: Ensures complete data at the time of appointment creation, which may simplify data handling and reduce the need for future edits.
-    - **Cons**: Can be inconvenient for users who don’t have all details available immediately, possibly leading to frustration or delays in creating appointments.
+  - **Pros**: Ensures complete data at the time of appointment creation, which may simplify data handling and reduce the need for future edits.
+  - **Cons**: Can be inconvenient for users who do not have all details available immediately, possibly leading to frustration or delays in creating appointments.
 
 <br>
 
-**Aspect: What Input Should Be Valid for Fields Sickness and Medicine**
-
-- **Alternative 1 (Current choice):** Require input with at least one alphanumeric character.
-    - **Pros**: Ensures these fields contain meaningful data, reducing the likelihood of accidental or erroneous inputs.
-
+**Aspect: What input should be valid for fields `Sickness` and `Medicine`**
+- **Alternative 1 (Current choice):** Require input with at least one alphabet.
+  - **Pros**: Ensures these fields contain meaningful data, reducing the likelihood of accidental or erroneous inputs.
 - **Alternative 2:** Allow any value as valid input.
-    - **Cons**: Increases the risk of erroneous inputs, such as empty fields, accidental symbols, or irrelevant characters, potentially reducing data quality.
+  - **Cons**: Increases the risk of erroneous inputs, such as empty fields, accidental symbols, or 
+    irrelevant characters, potentially reducing data quality.
 
+<br>
 
-#### Delete/Clear Person feature
+#### Delete / Clear Person feature
 
-**Aspect: Deleting person and clearing person list should:**
+**Aspect: Whether `delete person` and `clear person` should remove appointments too**
 
-- **Alternative 1 (Current choice):** remove appointments with the `personId` of that person.
-  - Pros: This prevents the case where appointments are linked to personIds that are non-existent.
-- **Alternative 2:** not remove any appointments with the `personId` of that person.
-  - Cons: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
+- **Alternative 1 (Current choice):** Deleting person and clearing the person list also removes appointments with the `personId` of the deleted person(s).
+  - **Pros**: This prevents the case where appointments are linked to personIds that are non-existent.
+- **Alternative 2:** Deleting person and clearing the person list will not remove any appointments with the `personId` of that person.
+  - **Cons**: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
   
 <br>
 
-#### Edit Person/Appointment feature
+#### Edit Person / Appointment feature
 
 **Aspect: What value to use for indicating entity**
 
-- **Alternative 1 (Current choice):** Use the index of the person/appointment in the list.
-    - **Pros**: Enables efficient retrieval directly from the list using `List#get`, simplifying implementation.
-    - **Cons**: Entity indexes may shift after deletions, which could lead to unintended edits if the user isn’t aware of changes in ordering.
-
+- **Alternative 1 (Current choice):** Use the index of the person / appointment in the list.
+  - **Pros**: Enables efficient retrieval directly from the list, simplifying implementation.
+  - **Cons**: Entity indexes may shift after deletions, which could lead to unintended edits if the user is not aware of changes in ordering.
 - **Alternative 2:** Use a unique ID for each entity.
-    - **Pros**: IDs remain consistent regardless of list modifications, ensuring stable reference to the entity.
-    - **Cons**: Implementing ID-based retrieval requires additional logic and may be slower, especially for larger lists.
+  - **Pros**: IDs remain consistent regardless of list modifications, ensuring stable reference to the entity.
+  - **Cons**: Implementing ID-based retrieval requires additional logic and may be slower, especially for larger lists.
 
 <br>
 
-**Aspect: During Edit Appointment, check if new person ID associated with edited appointment corresponds to an existing person in the address book**
-- This is to ensure no unwanted errors occur while editing the appointment and helps to maintain data integrity.
+**Aspect: Whether to check if the `personId` associated with edited appointment corresponds to an existing person in the AddressBook**
+- **Alternative 1 (Current choice):** When executing the `edit appt` command, check if the new `personId` 
+  exists in the AddressBook.
+  - **Pros:** Ensures data integrity by preventing appointments from being linked to non-existent persons.
+  - **Cons:** Requires additional validation logic during the edit process.
+- **Alternative 2:** Execution of the `edit appt` command does not check if the new `personId` exists in the AddressBook.
+  - **Pros:** Simplifies the edit process by removing the need for additional validation.
+  - **Cons:** Increases the risk of data inconsistency, as appointments may be linked to non-existent persons.
 
 <br>
 
-#### Find Person/Appointment feature
+#### Find Person / Appointment feature
 
-**Aspect: How to show find person/appointment based on different criteria**
-
+**Aspect: How to implement the `find person` and `find appt` commands that allow finding by multiple criteria**
 - **Alternative 1 (Current choice)**: Create one find command that supports filtering by multiple criteria (name, date) using prefixes.
-  - Pros: Fast and easy to find by date and name
-  - Cons: Confusing syntax from user's perspective
-
+  - **Pros**: Fast and easy to find by date and name.
+  - **Cons**: Confusing syntax from user's perspective.
 - **Alternative 2**: Create different find commands, find by date, find by name etc.
-  - Pros: Much easy in terms of user experience
-  - Cons: More repeated code for each command
+  - **Pros**: Much easy in terms of user experience.
+  - **Cons**: More repeated code for each command.
 
 <br>
 
-**Aspect: How to combine multiple prefixes when finding results**
-
+**Aspect: How to combine multiple prefixes when executing the `find` commands**
 - **Alternative 1 (Current choice)**: Prefixes should be combined using an AND condition.
-  - Pros: Ensures more specific search results, as all conditions must be met
-  - Cons: May be too restrictive
-
+  - **Pros**: Ensures more specific search results, as all conditions must be met.
+  - **Cons**: May be too restrictive.
 - **Alternative 2**: Prefixes should be combined using an OR condition
-  - Pros: Allows for more flexible and broader search results, as any one of the conditions can yield matches.
-  - Cons: May return too many results
+  - **Pros**: Allows for more flexible and broader search results, as any one of the conditions can yield matches.
+  - **Cons**: May return too many results.
 
 <br>
 
-**Aspect: Whether to implement case sensitivity in matching**
-
+**Aspect: Whether to implement case sensitivity in matching for search terms**
 - **Alternative 1 (Current choice)**: Implement case-insensitive matching for search terms.
-    - **Pros**: Enhances user experience by allowing searches to ignore case differences
-    - **Cons**: Slightly more processing required to normalize case during search
-
+    - **Pros**: Enhances user experience by allowing searches to ignore case differences.
+    - **Cons**: Slightly more processing required to normalise the case during searches.
 - **Alternative 2**: Implement case-sensitive matching for search terms.
-    - **Pros**: Potentially faster searches, as no additional case normalization is required
-    - **Cons**: Reduces user-friendliness
+    - **Pros**: Potentially faster searches, as no additional case normalization is required.
+    - **Cons**: Reduces user-friendliness.
 <br>
 
 <box type="tip" theme="success" seamless>
 
 **Tip:**
-To add a new predicate, navigate the corresponding entity folder in the model package. There, you can create a new class that implements `Predicate<Entity>`. Ensure that this method has a test method which defines the specific condition for a predicate.
+To add a new predicate, navigate the corresponding entity folder in the `model` package. There, you can create a new class that implements `Predicate<Entity>`. Ensure that this method has a test method which defines the specific condition for a predicate.
 
 </box>
 
@@ -402,14 +435,11 @@ object.
 <br>
 
 ### Exit feature
-#### Implementation
 When a user types an `exit` command, the DocTrack application will exit.
   
 <br>
 
 ### Help feature
-#### Implementation
-
 When a user types a `help` command, the DocTrack application will display a `HelpWindow`.
 
 #### Design considerations
@@ -417,11 +447,11 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 **Aspect: How to display help information:**
 
 * **Alternative 1 (current choice):** Display help information in a new window.
-  * Pros: Keeps the main application window uncluttered.
-  * Cons: Requires managing an additional window.
+  * **Pros**: Keeps the main application window uncluttered.
+  * **Cons**: Requires managing an additional window.
 * **Alternative 2:** Display help information in a modal dialog.
-  * Pros: Simpler to implement.
-  * Cons: Can clutter the main application window and interrupt the user's workflow.
+  * **Pros**: Simpler to implement.
+  * **Cons**: Can clutter the main application window and interrupt the user's workflow.
 
 <br>
 
@@ -447,19 +477,14 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 ### Data storage and files
 
-**Aspect: Save patient and appointment data in:**
+**Aspect: Save patient and appointment data in**
 <br>
 * **Alternative 1 (current choice):** two different files, patient data in `data/addressbook.json` and appointment data in `data/appointmentbook.json`.
-    * Pros: 
-        * More organised file management
-        * Quicker read and write times for each file
-    * Cons: 
-        * Higher chance of inconsistencies between patient and appointment data
+    * **Pros**: More organised file management, with a quicker read and write times for each file.
+    * **Cons**: Higher chance of inconsistencies between patient and appointment data.
 * **Alternative 2:** one single file named `data/addressbook.json`
-    * Pros:
-        * Simplicity and convenience of one file for all information
-    * Cons:
-        * Slower read and write times for file, especially if the user is only accessing one of patient or appointment data.
+    * **Pros**: Simplicity and convenience of one file for all information.
+    * **Cons**: Slower read and write times for file, especially if the user is only accessing one of patient or appointment data.
 
 <box type="warning" seamless>
 
@@ -470,76 +495,50 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 <br>
 
-**Aspect: When the data is updated in the `.json` file:**
+**Aspect: When the data is updated in the `.json` file**
 <br>
 * **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
-    * Pros: Simplifies the process for the user, without needing to save manually.
-    * Cons: May be slow if there are many changes to save.
+    * **Pros**: Simplifies the process for the user, without needing to save manually.
+    * **Cons**: May be slow if there are many changes to save.
 * **Alternative 2:** Prompt the user to save changes before exiting.
-    * Pros: Gives the user more control over the saving process.
-    * Cons: May be annoying for users who do not want an additional step to save changes.
+    * **Pros**: Gives the user more control over the saving process.
+    * **Cons**: May be annoying for users who do not want an additional step to save changes.
 
 <br>
 
 ### Parsing
 
-**Aspect: How to parse the commands:**
+**Aspect: How to parse the commands**
 <br>
 Context: The commands (other than the general) have the command format: `COMMAND ENTITY_TYPE ENTITY_ARGS`
 <br>
 * **Alternative 1 (current choice):** Parse `ENTITY_TYPE` and `ENTITY_ARGS` separately.
-    * Pros:
-        * Easier to parse
-        * Easier to debug, as the parsing is separated into different portions
-    * Cons:
-        * More verbose, and less centralised.
+  * **Pros**: Easier to parse and debug, as the parsing is separated into different portions. 
+  * **Cons**: More verbose, and less centralised.
 * **Alternative 2**: Parse them together.
-    * Pros:
-        * Everything is parsed together, centralising the parsing logic.
-    * Cons:
-        * Harder to parse and debug
+    * **Pros**: Everything is parsed together, centralising the parsing logic.
+    * **Cons**: Harder to parse and debug.
 
 <br>
 
-**Aspect: Command format (with or without prefixes):**
+**Aspect: Command format (with or without prefixes)**
 <br>
-* **Alternative 1 (current choice):** Use prefixes
-    * Pros:
-        * Easier to identify markers for each parameter
-        * Prefixes allow for free positioning of arguments
-    * Cons:
-        * Less intuitive for the user at start
-        * Need to create prefixes
-* **Alternative 2:** Use no prefixes
-    * Parsing the arguments based on position.
-    * Pros:
-        * More intuitive at start
-        * No need to create prefixes
-    * Cons:
-        * Harder to identify markers - may result in issues with arguments that have spaces in between
-        * No free positioning
-        * Might be harder to implement variable amount of arguments
+* **Alternative 1 (current choice):** Use prefixes.
+  * **Pros**: Easier to identify markers for each parameter, and prefixes allow for free positioning of arguments.
+  * **Cons**: Less intuitive for the user at start, and need to create the prefixes.
+* **Alternative 2:** Use no prefixes, parse the arguments based on position.
+  * **Pros**: More intuitive at start, no need to create prefixes.
+  * **Cons**: Harder to identify markers - may result in issues with arguments that have spaces in between, no free positioning, and might be harder to implement variable amount of arguments.
 
 <br>
 
-**Aspect: `ArgumentMultimap` use across different entities:**
-<br>
-Context: The `ArgumentMultimap` is used across different entities.
-<br>
+**Aspect: The use of `ArgumentMultimap` across different entities**
 * **Alternative 1 (current choice):** Use the same `ArgumentMultimap` for all entities.
-    * Pros:
-        * Prefixes are shared universally, making it more consistent across entities.
-        * Less code duplication
-    * Cons:
-        * Might be more cluttered, as all the prefixes are together
-        * Inability to use same prefixes for different arguments across entities
+  * **Pros**: Prefixes are shared universally, making it more consistent across entities. There is also less code duplication.
+  * **Cons**: Might be more cluttered, as all the prefixes are together, and inability to use same prefixes for different arguments across entities.
 * **Alternative 2**: Use different `ArgumentMultimap` for each entity.
-    * Pros:
-        * Less cluttered, only prefixes for that entity will be addressed
-        * Can use prefixes used in different entities for different arguments
-    * Cons:
-        * More code duplication, as there are shared prefixes
-        * Might be harder to track shared prefixes, causing confusion to users
+  * **Pros**: Less cluttered, only prefixes for that entity will be addressed. Prefixes used in different entities can also be used for different arguments.
+  * **Cons**: More code duplication, as there are shared prefixes. Might be harder to track shared prefixes, causing confusion to users.
 
 <br>
 
@@ -547,37 +546,26 @@ Context: The `ArgumentMultimap` is used across different entities.
 
 **Aspect: How to show appointment and person lists**
 <br>
-Context: There are two entity types (appointment and person) being managed in DocTrack
+Context: There are two entity types (appointment and person) being managed in DocTrack.
 <br>
-* **Alternative 1 (current choice):** Show lists as two separate panels side by side
-    * Pros:
-        * Easier to see all information at once
-        * Easier to cross reference when doing `add appt` or `edit appt` commands, which may need information about person ID
-    * Cons:
-        * More verbose and could result in information overload
-* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command
-    * Pros:
-        * Information is simpler to digest
-    * Cons:
-        * More overhead of handling switching between lists
-        * Difficult to cross reference when typing certain commands
+* **Alternative 1 (current choice):** Show lists as two separate panels side by side.
+  * **Pros**: Easier to see all information at once, and easier to cross-reference when doing `add appt` 
+    or `edit appt` commands, which may need information about `personId`.
+  * **Cons**: More verbose and could result in information overload.
+* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command.
+  * **Pros**: Information is simpler to digest.
+  * **Cons**: More overhead of handling switching between lists, and difficult to cross-reference when typing certain commands.
 
 <br>
 
 **Aspect: Color Scheme**
 <br>
-* **Alternative 1 (current choice):** Create new red, white and gray color scheme
-    * Pros:
-        * Creates brand identity
-        * Makes the GUI more appealling to the target audience
-    * Cons:
-        * Constant oversight needed to maintain color scheme in future feature enhancements
-* **Alternative 2:** Use the original AB3 gray color schee
-    * Pros:
-        * No extra effort needed
-    * Cons:
-        * Colors are not appealing
-        * Colors are not professional and do not suit target audience
+* **Alternative 1 (current choice):** Create new red, white and gray color scheme.
+    * **Pros**: Creates brand identity, makes the GUI more appealing to the target audience.
+    * **Cons**: Constant oversight needed to maintain color scheme in future feature enhancements.
+* **Alternative 2:** Use the original AB3 gray color scheme
+    * **Pros**: No extra needed to maintain color scheme. 
+    * **Cons**: Colors are not appealing and not professional, they might not suit the target audience.
 
 <br>
 
@@ -1126,7 +1114,7 @@ Our project presented a higher level of complexity compared to AB3. Our project 
 Our project involved substantial effort in several key areas:
 - **Design and Refactoring**: Extending the AB3 framework to handle two separate entity types required refactoring and designing new classes. 
 - **Command Implementation**: In creating patient- and appointment-specific commands, we implemented additional parser classes and commands.
-- **Testing and Debugging**: To ensure robust funtionality, we implemented comprehensive test cases. This was necessary to ensure 
+- **Testing and Debugging**: To ensure robust functionality, we implemented comprehensive test cases. This was necessary to ensure 
   that each command and feature worked as expected for both entity types.
 
 #### Achievements
