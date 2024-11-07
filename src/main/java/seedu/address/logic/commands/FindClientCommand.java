@@ -23,6 +23,14 @@ public class FindClientCommand extends Command {
 
     private final Predicate<Client> predicate;
 
+
+    /**
+     * Constructs a {@code FindClientCommand} with the specified {@code Predicate} to filter clients.
+     *
+     * @param predicate The predicate used to filter clients based on specified criteria.
+     *                  Must not be {@code null}.
+     * @throws AssertionError if {@code predicate} is {@code null}.
+     */
     public FindClientCommand(Predicate<Client> predicate) {
         assert predicate != null : "Predicate should not be null";
         this.predicate = predicate;
