@@ -138,9 +138,7 @@ Views the details of a vendor or event.
 * Views the details of the vendor/event at the specified `INDEX`.
   * The index refers to the index number shown in the displayed vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
-* The details page include assigned events/vendors as well as a list of assignable events/vendors.
-  * The vendor details also include name, phone number, description, and tags.
-  * The event details also include name, date, and tags.
+* The details page includes assigned events/vendors as well as a list of assignable events/vendors.
 
 #### Examples:
 * `view v/2` will show the details of the 2nd vendor.
