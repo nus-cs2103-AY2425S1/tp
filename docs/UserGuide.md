@@ -388,16 +388,26 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
 **Q**: How do I undo a mistake?<br>
-**A**: You can edit the data using the `edit` command to revert the changes. An update to provide an undo feature is currently in progress.<br>
+**A**: You can edit the data using the `edit` command to revert the changes. An update to provide an undo feature is currently in progress.
+
+**Q**: How do I add multiple tags to a contact?<br>
+**A**: When adding a person, use t/TAG multiple times. For example, `add person n/John Doe p/98765432 t/CameraMan t/Producer` will add "CameraMan" and "Producer" as tags.
+
+**Q**: What if I accidentally delete a person or event? Can I recover them?<br>
+**A**: TalentHub does not currently support an undo function for deletions. Once deleted, the data cannot be restored. It’s recommended to double-check before confirming deletions.
+
+**Q**: How can I delete a field in Person or Event I have added?<br>
+**A**: You can delete the field using the `edit` command by specifying a blank prefix for the field you want to delete. For example, `edit event v/` deletes the venue field. Note that only optional fields can be removed.
 
 ---
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **When editing Person or Event name in View mode**, the Person or Event being viewed will be exited and a blank screen will be displayed. The remedy is to use the `view` command to view the new Person or Event name.
+2. **When editing Person or Event name in View mode**, the Person or Event being viewed will be exited and a blank screen will be displayed. The remedy is to use the `view` command to view the new Contact or Event name.
 3. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
