@@ -117,7 +117,7 @@ How the parsing works:
 
 How commands work:
 * `XYZEventCommand` and `XYZVendorCommand` classes (e.g., `CreateEventCommand`, `CreateVendorCommand`, ...) inherit from their respective abstract classes (e.g., `CreateCommand`).
-* `ClearCommand`, `HelpCommand` and `ExitCommand` do not have corresponding `XYZEventCommand` and `XYZVendorCommand` classes.
+* `ClearCommand`, `HelpCommand`, `ExitCommand`, `AssignCommand`, and `UnassignCommand` do not have corresponding `XYZEventCommand` and `XYZVendorCommand` classes.
 * `ListCommand` is not an abstract class.
 
 ### Model component
