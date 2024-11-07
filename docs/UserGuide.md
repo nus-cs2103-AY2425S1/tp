@@ -101,13 +101,7 @@ This section tells you what information you will find in each of the sections of
 
     * `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/H t/friends t/owesMoney` : Adds a guest named `John Doe` to the guest list.
 
-    * `add_vendor n/Jack Tan p/98273782 e/jackt@example.com a/391, Clementi Mall, #03-32 c/Jack's Florist b/1000 t/florist t/responsible` : Adds a guest named `Jack Tan` to the vendor list.
-
-    * `delete_guest 3` : Deletes the 3rd guest shown in the current guest list.
-
     * `delete_vendor 3` : Deletes the 3rd vendor shown in the current vendor list.
-
-    * `clear` : Deletes all persons from both the guest list and the vendor list.
 
     * `exit` : Exits the app.
 
