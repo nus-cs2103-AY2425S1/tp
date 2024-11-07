@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "c:ClearCommand" as ClearCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("/clear")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("/clear")
+activate AddressBookParser
+
+create ClearCommand
+AddressBookParser -> ClearCommand
+activate ClearCommand
+
+ClearCommand --> AddressBookParser :
+deactivate ClearCommand
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> ClearCommand : execute(m)
+activate ClearCommand
+
+ClearCommand -> Model : clear all internship applications
+activate Model
+
+Model --> ClearCommand
+deactivate Model
+
+create CommandResult
+ClearCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ClearCommand
+deactivate CommandResult
+
+ClearCommand --> LogicManager : r
+deactivate ClearCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ClearCommand -[hidden]-> LogicManager
+destroy ClearCommand
+@enduml

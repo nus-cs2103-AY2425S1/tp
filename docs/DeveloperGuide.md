@@ -26,6 +26,7 @@
     * [Update the Status of an Internship Application](#update-the-status-of-an-internship-application)
     * [Filter internship applications](#filter-internship-applications)
     * [Sort internship application list](#sort-internship-application-list)
+    * [Clear](#clear)
     * [View chart](#view-chart)
     * [Close the application](#close-the-application)
   * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
@@ -44,17 +45,12 @@
     * [Finding internship applications](#finding-internship-applications)
     * [Updating the status of an internship application](#updating-the-status-of-an-internship-application)
     * [Saving data](#saving-data)
-    * [Shutdown](#shutdown)
+    * [Exit HireMe](#exit-hireme-application)
 <!-- TOC -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
@@ -273,6 +269,7 @@ Finally, `StatusCommand` generates a `CommandResult` with a confirmation message
 <puml src="diagrams/StatusActivityDiagram.puml" alt="StatusActivityDiagram" />
 
 The activity diagram above outlines the detailed flow for the `StatusCommand`, showing the decision points and actions taken during the command execution.
+
 ### Filter internship applications
 
 The implementation of the filter command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -287,7 +284,6 @@ Otherwise, it creates a new instance of `FilterCommand` that corresponds to the 
 `FilterCommand` comprises of a `StatusPredicate`.
 
 Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `model::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
-
 
 ### Sort internship application list
 The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -304,15 +300,20 @@ Upon execution, `SortCommand` calls on `model::sortFilteredList` which in turns 
 `sortItems` updates the `filteredList` in `model` to sort the internship applications in the list according to the order specified by the user.
 
 
-[//]: # (Clear section here)
+### Clear
+The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 
+<puml src="diagrams/ClearSequenceDiagram.puml" alt="ClearSequenceDiagram" />
+
+`AddressBookParser` creates `ClearCommand`. 
+Upon execution, `ClearCommand` calls on `model::setAddressBook` with a new address book that has zero internship applications. Finally, `ClearCommand` generates a `CommandResult` with a confirmation message.
 
 ### View chart
 The implementation of the chart command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 
 <puml src="diagrams/ChartSequenceDiagram.puml" alt="ChartSequenceDiagram" />
 
-`AddressBookParser` creates `ChartCommand`
+`AddressBookParser` creates `ChartCommand`.
 Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`
 
 
