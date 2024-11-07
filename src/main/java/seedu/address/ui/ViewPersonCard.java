@@ -83,8 +83,8 @@ public class ViewPersonCard extends UiPart<Region> {
         return this.viewPhone;
     }
 
-    public Label getViewEmail() {
-        return this.viewEmail;
+    public Label getViewTitle() {
+        return this.viewTitle;
     }
 
     public Label getViewTelegram() {

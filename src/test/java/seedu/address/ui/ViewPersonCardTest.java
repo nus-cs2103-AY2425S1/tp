@@ -44,7 +44,7 @@ public class ViewPersonCardTest {
         ViewPersonCard card = new ViewPersonCard(person);
 
         // Check if the name label is marked with a star
-        assertEquals("John Doe ☆", card.getViewName().getText());
+        assertEquals("Contact Information ☆", card.getViewTitle().getText());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class ViewPersonCardTest {
         ViewPersonCard card = new ViewPersonCard(person);
 
         // Check if the name label is not marked with a star
-        assertEquals("Jane Doe", card.getViewName().getText());
+        assertEquals("Contact Information", card.getViewTitle().getText());
     }
 
     @Test
