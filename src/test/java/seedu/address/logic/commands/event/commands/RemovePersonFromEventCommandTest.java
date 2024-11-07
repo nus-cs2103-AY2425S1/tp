@@ -17,10 +17,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
 
-import java.util.function.Predicate;
 
 
 public class RemovePersonFromEventCommandTest {
@@ -160,7 +158,7 @@ public class RemovePersonFromEventCommandTest {
         }
         //check no. of people in TECH_CONFERENCE
         Event techConference = eventManager.getEventList().get(0);
-        assertEquals(5,techConference.getAllPersons().size());
+        assertEquals(5, techConference.getAllPersons().size());
         //check no. of people in ART_EXHIBITION
         Event artExhibition = eventManager.getEventList().get(1);
         assertEquals(6, artExhibition.getAllPersons().size());
@@ -186,7 +184,7 @@ public class RemovePersonFromEventCommandTest {
         }
         //check no. of people in TECH_CONFERENCE
         Event techConference = eventManager.getEventList().get(0);
-        assertEquals(5,techConference.getAllPersons().size());
+        assertEquals(5, techConference.getAllPersons().size());
         //check no. of people in ART_EXHIBITION
         Event artExhibition = eventManager.getEventList().get(1);
         assertEquals(6, artExhibition.getAllPersons().size());
