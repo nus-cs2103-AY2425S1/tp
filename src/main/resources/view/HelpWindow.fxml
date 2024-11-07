@@ -19,18 +19,22 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="BOTTOM_RIGHT" fx:id="helpMessageContainer">
+      <HBox maxWidth="850" maxHeight="600" alignment="CENTER" fx:id="helpMessageContainer">
         <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
-          </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
+          <HBox maxWidth="850" maxHeight="600" alignment="CENTER">
+            <Label fx:id="helpMessage" text="Label">
+              <HBox.margin>
+                <Insets right="5.0" />
+              </HBox.margin>
+            </Label>
+          </HBox>
+          <HBox maxWidth="850" maxHeight="600" alignment="BOTTOM_RIGHT">
+            <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+              <HBox.margin>
+                <Insets left="5.0" />
+              </HBox.margin>
+            </Button>
+          </HBox>
         </children>
         <opaqueInsets>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
