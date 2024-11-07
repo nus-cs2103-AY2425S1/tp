@@ -14,6 +14,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.task.Task;
@@ -36,11 +38,33 @@ public class PersonTest {
     }
 
     @Test
+    public void getTask_taskNotAssigned_throwsNoSuchElementException() {
+        // Create a person without any tasks
+        Person person = new PersonBuilder().build();
+        Task nonExistentTask = new Todo("Non-existent task");
+
+        // Attempt to get a task that isn't assigned to the person
+        assertThrows(NoSuchElementException.class, () -> {
+            person.getTask(nonExistentTask);
+        });
+    }
+
+
+    @Test
     public void getTaskAssigned_returnsSuccessfully() {
         String taskStr = "todo: buy groceries";
         Person person = new PersonBuilder().withTasks(taskStr).build();
         Task newTask = new Todo("buy groceries");
         assertEquals(person.getTask(newTask), newTask);
+    }
+
+    @Test
+    public void hasTask_taskAssigned_returnsTrue() {
+        Task assignedTask = new Todo("Buy groceries");
+        Person person = new PersonBuilder().withTasks("todo: Buy groceries").build();
+
+        // Check that hasTask returns true for the assigned task
+        assertTrue(person.hasTask(assignedTask), "Expected to return true for a task that is assigned.");
     }
     @Test
     public void removeTask_taskAssigned_taskRemovedSuccessfully() {

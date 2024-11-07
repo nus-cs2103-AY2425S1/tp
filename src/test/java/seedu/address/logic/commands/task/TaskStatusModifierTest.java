@@ -51,6 +51,63 @@ public class TaskStatusModifierTest {
     }
 
     @Test
+    public void modifyTasks_updatePersonsWithModifiedTask_success() throws Exception {
+        Task taskToModify = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), true);
+
+        // Add multiple persons with the task to modify
+        Person person1 = new PersonBuilder().withName("Person 1").withTasks("todo: buy groceries").build();
+        Person person2 = new PersonBuilder().withName("Person 2").withTasks("todo: buy groceries").build();
+        model.addPerson(person1);
+        model.addPerson(person2);
+
+        // Execute the modification
+        modifier.modifyTasks(model);
+
+        // Verify that both persons have the updated (marked) task
+        for (Person person : model.getFilteredPersonList()) {
+            if (person.hasTask(taskToModify)) {
+                assertTrue(person.getTask(taskToModify).getIsDone(),
+                        "Task in person's task list should be marked as done.");
+            }
+        }
+
+        TaskStatusModifier demodifier = new TaskStatusModifier(Set.of(INDEX_FIRST), false);
+        demodifier.modifyTasks(model);
+        model.deletePerson(person1);
+        model.deletePerson(person2);
+    }
+
+    @Test
+    public void modifyTasks_updatePersonsWithModifiedTask_setUpdatedTaskSuccess() throws Exception {
+        // Create a task to be modified
+        Task taskToModify = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+
+        // Add multiple persons, each with the task to modify
+        Person person1 = new PersonBuilder().withName("Person 1").withTasks("todo: buy groceries").build();
+        Person person2 = new PersonBuilder().withName("Person 2").withTasks("todo: buy groceries").build();
+        model.addPerson(person1);
+        model.addPerson(person2);
+
+        // Create the TaskStatusModifier with markAsDone set to true
+        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), true);
+
+        // Execute the modification
+        modifier.modifyTasks(model);
+
+        // Verify that each person has the updated (marked) task in their task list
+        for (Person person : model.getFilteredPersonList()) {
+            if (person.hasTask(taskToModify)) {
+                Task updatedTask = person.getTask(taskToModify);
+                assertTrue(updatedTask.getIsDone(),
+                        "The task should be marked as done in each person's task list.");
+            }
+        }
+    }
+
+
+
+    @Test
     public void modifyTasks_unmarkTasks_success() throws Exception {
         TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), false);
         Task taskToUnmark = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());

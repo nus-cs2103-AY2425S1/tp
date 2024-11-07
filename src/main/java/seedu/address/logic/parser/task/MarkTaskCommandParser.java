@@ -21,7 +21,7 @@ public class MarkTaskCommandParser implements Parser<MarkTaskCommand> {
      */
     public MarkTaskCommand parse(String args) throws ParseException {
         String[] splitArgs = args.trim().split("\\s+");
-        if (splitArgs.length == 0) {
+        if (args == null || args.trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkTaskCommand.MESSAGE_USAGE));
         }
         Set<Index> targetIndexes = TaskAssignmentParserUtil.parseMultipleIndexes(splitArgs, 0);
