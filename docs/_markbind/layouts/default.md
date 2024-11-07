@@ -66,7 +66,7 @@
     * [7.2 Adding a Student]({{ baseUrl }}/DeveloperGuide.html#7-2-adding-a-student)
     * [7.3 Deleting a Student]({{ baseUrl }}/DeveloperGuide.html#7-3-deleting-a-student)
     * [7.4 Finding Specific Students]({{ baseUrl }}/DeveloperGuide.html#7-4-finding-specific-students)
-    * [7.5 Adding a Task to a Student check]({{ baseUrl }}/DeveloperGuide.html#7-5-adding-a-task-to-a-student)
+    * [7.5 Adding a Task to a Student]({{ baseUrl }}/DeveloperGuide.html#7-5-adding-a-task-to-a-student)
 * Tutorials
   * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
   * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
