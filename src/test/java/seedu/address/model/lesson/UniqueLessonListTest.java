@@ -121,7 +121,6 @@ public class UniqueLessonListTest {
         assertEquals(uniqueLessonList.getUniqueSubjectsInLessons(DANIEL), expected);
     }
 
-
     @Test
     public void remove_nullLesson_throwsNullPointerException() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
@@ -184,7 +183,7 @@ public class UniqueLessonListTest {
     public void toStringTest() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
         uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
-        assertEquals("[Lesson: tutor Alice Pauline is teaching tutee Daniel Meier Math ]", uniqueLessonList.toString());
+        assertEquals("[Lesson: tutor Alice Pauline is teaching tutee Daniel Meier Math]", uniqueLessonList.toString());
     }
 }
 
