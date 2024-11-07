@@ -93,18 +93,6 @@ Refer to the [Features](#features) below for details of each command.
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-<br>
 ### Viewing help : `help`
 
 Stuck on how to use the app?
@@ -119,10 +107,9 @@ Format: `help`
 
 ### Adding a supplier: `add_supplier`
 
-Registers a new supplier in the inventory management system.
+Let's add all of your suppliers into the system.
 
 Format: `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
 
 > **Tip:** A supplier can have any number of tags (including 0)
 
@@ -131,7 +118,8 @@ Examples:
 * `add_supplier n/Global Produce Inc e/globalproduce@example.com p/1234567 a/789 Harvest Ave, Level 2 t/International t/Organic`
 
 ### Deleting a supplier : `delete`
-Deletes the specified supplier from the address book.
+
+If any supplier stops supplying goods, this command will help you delete their information from the system.
 
 Format: `delete n/SUPPLIER_NAME`
 
@@ -144,17 +132,25 @@ Examples:
 
 ### Adding a product : `add_product`
 
-Add a product.
+Now, let us add the products supplied in your store. 
+This command will help you add the product information into the system.
 
-Format: `add_product n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`
+Format: `add_product n/NAME [stk/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`
+
+Examples: 
+- `add_product n/sweaters` Adds product named sweaters
+- `add_product n/eggs stk/120` Adds product named eggs with current stock level as 120
+- `add_product n/hakka noodles stk/90 su/Rachel Geller` Adds product named hakka noodles with current stock level as 90 and is assigned to supplier Rachel Geller
+
 
 ### Assigning a product to supplier: `assign`
-The **Assign** feature allows you to connect products with their current supplier. This makes it easier to track which supplier is responsible for each product in your store.
+
+This feature allows you to connect products with their current supplier. This makes it easier to track which supplier is responsible for each product in your store.
 
 Format: `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`
 
-Example Commands:
-- `assign Tissue Paper Jacob Smith` assigns product named `Tissue paper` to supplier named `Jacob Smith`
+Example:
+- `assign Tissue Paper Jacob Smith` assigns product named Tissue paper to supplier named Jacob Smith
 
 > **Important**:
 > The product and supplier must already exist in the system before you can assign them.
@@ -164,11 +160,12 @@ Example Commands:
 > If product has already been assigned to supplier, the system will notify you.
 
 ### Un-assigning a product to supplier: `unassign`
-Allows the user to remove or "unassign" products from their current supplier, useful if the store manager decides to stop sourcing a particular product from a supplier or switch to a new one.
+
+This feature allows you to remove the assigned supplier from the previously connected product. Useful if the store manager decides to stop sourcing a particular product from a supplier or switch to a new one.
 
 Format: `unassign pr/PRODUCT_NAME su/SUPPLIER_NAME`
 
-Example Commands:
+Example:
 - `unassign Tissue Paper Jacob Smith` Unassigns product named `Tissue paper` to supplier named `Jacob Smith`
 
 > **Important**:
@@ -180,7 +177,7 @@ Example Commands:
 
 ### Setting threshold for a product: `set_threshold`
 
-Updates the minimum and maximum stock level for a product.
+To allocate specified space for your products,you would want to update the minimum and maximum stock level for a product, this feature does that for you!
 
 Format: `set_threshold pr/PRODUCT_NAME min/MIN_STOCK_LEVEL max/MAX_STOCK_LEVEL`
 
@@ -195,9 +192,13 @@ Examples:
 
 ### Updating stock level for a product: `update_stock`
 
-Updates the current stock level for a product.
+Stock level always seem to change after the purchases are done for the day, hence this feature lets you update the current stock level for the product.
 
 Format: `update_stock pr/PRODUCT_NAME stk/STOCK_LEVEL`
+
+> **Note:**
+> Stock levels must be a number equal or above 0(zero).<br>
+> Products should already exist in he system, otherwise errors are displayed.
 
 Examples:
 * `update_stock pr/sweater stk/1000`
@@ -205,9 +206,9 @@ Examples:
 
 ### Locating all suppliers: `view_supplier`
 
-Displays:
-1. all the suppliers currently present in the supplier list
-2. specified suppliers with the keyword provided
+If you want to look through your current list of suppliers, view feature helps you to do it in two ways - 
+1. See all the suppliers currently present in the supplier list
+2. See the specified suppliers with the keyword provided
 
 Format:
 
@@ -215,13 +216,15 @@ Format:
 
 ` view_supplier [KEYWORD] ` (For displaying details about specified supplier)
 
-Examples: `view_supplier` `view_supplier Sussane `
+Examples: 
+- `view_supplier`
+- `view_supplier Sussane `
 
 ### Locating all products: `view_product`
 
-Displays:
-1. all the products currently present in the supplier list
-2. specified products with the keyword provided
+If you want to look through your current list of products, view feature helps you to do it in two ways -
+1. See all the products currently present in the supplier list
+2. See the specified products with the keyword provided
 
 Format:
 
@@ -229,41 +232,43 @@ Format:
 
 ` view_product [KEYWORD] ` (For displaying details about specified product)
 
-Examples: `view_product` `view_product Socks `
+Examples: 
+- `view_product`
+- `view_product Socks `
 
 ### Deleting a supplier: `delete_supplier`
 
-Deletes the specified supplier from the Supplier List.
+If a supplier does not supply products anymore, you can delete their information from the Supplier List, using this delete feature.
 
-Format: `delete_supplier pr/PRODUCT_NAME stk/STOCK_LEVEL`
+Format: `delete_supplier n/SUPPLIER_NAME`
 
 Examples:
 * `delete_supplier n/Jack Molly`
 
 ### Deleting a product: `delete_product`
 
-Deletes the specified product from the Product List.
+If you want to delete a product from the Product List, this command will help you do that.
 
-Format: `delete_product pr/PRODUCT_NAME stk/STOCK_LEVEL`
+Format: `delete_product n/PRODUCT_NAME`
 
 Examples:
 * `delete_product n/sweater`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the system.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits from the program once all your tasks related to updating stocks, editing suppliers and product info etc. are done!
 
 Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data are saved in the hard disk automatically after executing any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -273,7 +278,8 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 > If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 > Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
-### Archiving data files `[coming in v2.0]`
+### Update Max Stock Level for a particular supplier's products
+`[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -282,7 +288,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -298,8 +304,6 @@ _Details coming soon ..._
 | Action               | Format, Examples                                                                                                                                               |
 |----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Supplier**     | `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add_supplier n/Fresh Farms Ltd p/98765432 e/contact@freshfarms.com a/Orchard St, Suite 5` |
-| **Edit Supplier**    | `edit_supplier INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g., `edit_supplier 1 n/Global Produce p/91234567 e/globalproduce@example.com` |
-| **Delete Supplier**  | `delete_supplier n/SUPPLIER_NAME`<br> e.g., `delete_supplier n/Global Produce`                                                                                 |
 | **Add Product**      | `add_product n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`<br> e.g., `add_product n/Tissue Paper st/500 su/Global Produce`                            |
 | **Assign Product**   | `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`<br> e.g., `assign pr/Tissue Paper su/Fresh Farms Ltd`                                                               |
 | **Unassign Product** | `unassign pr/PRODUCT_NAME su/SUPPLIER_NAME`<br> e.g., `unassign pr/Tissue Paper su/Fresh Farms Ltd`                                                           |
@@ -307,6 +311,7 @@ _Details coming soon ..._
 | **Update Stock**     | `update_stock pr/PRODUCT_NAME stk/STOCK_LEVEL`<br> e.g., `update_stock pr/Tissue Paper stk/300`                                                               |
 | **View Suppliers**   | `view_supplier [KEYWORD]`<br> e.g., `view_supplier Fresh` or `view_supplier`                                                                                  |
 | **View Products**    | `view_product [KEYWORD]`<br> e.g., `view_product Tissue` or `view_product`                                                                                    |
+| **Delete Supplier**  | `delete_supplier n/SUPPLIER_NAME`<br> e.g., `delete_supplier n/Global Produce`                                                                                 |
 | **Delete Product**   | `delete_product pr/PRODUCT_NAME`<br> e.g., `delete_product pr/Tissue Paper`                                                                                   |
 | **Clear All**        | `clear`                                                                                                                                                       |
 | **Help**             | `help`                                                                                                                                                        |
