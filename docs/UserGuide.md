@@ -209,22 +209,23 @@ Examples:
 
 Adds an event to TalentHub.
 
-Format: `add event n/NAME t/TIME v/VENUE c/CELEBRITY [p/POINTS OF CONTACT]…​`
+Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An event can have any number of points of contact (including 0)
+An event can have any number of points of contact or none at all!
+The venue fields is also optional!
 </div>
 
 Examples:
 
+- `add event n/Hair Cut t/2022-03-27 c/Betsy Crowe`
 - `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe`
-- `add event n/Hair Cut t/2022-03-27 v/John's Salon c/Betsy Crowe`
 
 ![result for 'add event'](images/add_event.png)
 
 ### Listing all events: `list event`
 
-Shows a list of all events in the address book.
+Shows a list of all events in TalentHub.
 
 Format: `list event`
 
@@ -234,21 +235,23 @@ Example: Calling `list event` would yield the following output
 
 ### Editing an event : `edit event`
 
-Edits an existing event in the address book.
+Edits an existing event in TalentHub.
 
 Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`
 
 - Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- - When editing points of contact, the existing points of contact of the person will be removed i.e adding of points of contact is not cumulative.
-- You can remove all the person’s points of contact by typing `p/` without
-  specifying any points of contact after it.
+- When editing points of contact, the existing points of contact of the person will be removed i.e adding of points of contact is not cumulative.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can delete a event's venue by leaving their fields empty, like `v/` respectively!
+</div>
+  
 Examples:
 
 - `edit event 1 t/2024-03-21 v/Jane's Salon` Edits the time and venue of the 1st event to be `2024-03-21` and `Jane's Salon` respectively.
-- `edit event 2 n/Movie Screening t/` Edits the name of the 2nd event to be `Movie Screening` and clears all existing points of contact.
+- `edit event 2 n/Movie Screening v/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue.
 
 ![result for 'edit event'](images/edit_event.png)
 
@@ -260,7 +263,6 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g. `hiking` will match `Hiking`
 - The order of the keywords does not matter. e.g. `Hair Cut` will match `Cut Hair`
-- Only the name is searched.
 - Only full words will be matched. e.g. `Oscar` will not match `Oscars`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hair Hiking` will return `Hair Cut`, `Park Hiking`, `Hiking`
