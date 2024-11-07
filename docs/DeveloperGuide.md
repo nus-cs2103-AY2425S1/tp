@@ -665,3 +665,25 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Efforts**
+
+This appendix provides an overview of the effort and complexity involved in modifying the original AB3 (Address Book Level 3) to create WardWatch. WardWatch extends AB3’s basic structure to support a healthcare-focused system, which manages multiple entity types and introduces new functionalities like handling patient information, medications, and appointments.
+
+### Logic (Parser)
+1. The Parser component required significant modifications to accommodate the new entity types and fields introduced in WardWatch. Challenges included:
+
+    * **Tokenization**: Setting specific conditions for the tokenizer to handle new fields, such as medication and appointment, was complex. This required carefully configuring the tokenizer to recognize and differentiate between new input formats and ensure accurate data processing.
+    * **Input Validation**: To handle healthcare-related data, validation had to be strict to avoid incorrect entries. This involved refining the Parser logic to enforce stricter data checks than AB3, requiring additional time to test and ensure robust error handling.
+
+### Logic (Command)
+1. Creating new commands, especially the AddAppointment and AddMedication commands, presented unique challenges:
+    * **Command Structure Adaptation**: Extending the existing command structure for WardWatch was necessary to support new types of commands without impacting AB3’s base functionality. This required carefully designing new command classes to integrate seamlessly with existing entities.
+    * **Difficulty in Implementing AddAppointment**: The AddAppointment command was particularly challenging because it required understanding how to schedule and validate appointments within the existing architecture. This command also had to be compatible with patient data, ensuring appointments were correctly linked.
+
+### Model
+1. The Model component needed restructuring to support multiple entity types, such as patients, medications, and appointments, which added complexity:
+   * **Data Relationships**: Establishing relationships between entities, such as linking patients with medications and appointments, was challenging. Designing these relationships in a way that allowed for seamless data manipulation without creating dependencies was an important aspect of the model redesign.
+### Storage
+
+### UI
