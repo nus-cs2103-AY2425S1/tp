@@ -19,7 +19,7 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
         model.setFocusPerson(null);
-        CommandResult commandResult = new CommandResult(MESSAGE_SUCCESS, false, false);
+        CommandResult commandResult = new CommandResult(MESSAGE_SUCCESS);
         return commandResult;
     }
 }

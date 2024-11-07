@@ -26,7 +26,7 @@ public class AddNoteCommand extends Command {
             + "by the person index number used on the left display panel. "
             + "New note(letters and numbers) will be appended to the notes currently stored.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "n/[NOTE]\n"
+            + "n/NOTE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "n/High profile client.";
 

@@ -280,15 +280,15 @@ Examples of commands tracked by undo:
 - `edit`
 - `pin`
 
-### Redoing a previously executed undo command: `undo`
+### Redoing a previously executed undo command: `redo`
 
-Redos the previous undo command that was executed.
+Redoes the previous undo command that was executed.
 
 Format: `redo`
 
 - The redo feature saves the **5 most recent executed undo commands**.
 - The redo feature only tracks changed made by the undo command
-- The redp feature will clear the focus person panel upon execution.
+- The redo feature will clear the focus person panel upon execution.
 
 ### Exporting the contact list : `export`
 
@@ -303,6 +303,20 @@ Examples:
 
 - `export f/csv` exports the contact list into a csv file.
 - `export f/vcf` exports the contact list into a vcf file.
+
+### Changing the application's theme : `toggle`
+
+Changes the application theme from light to dark or from dark to light.
+
+Format: `toggle`
+
+- If application is currently in light mode, toggle command will set it to dark mode.
+- If application is currently in dark mode, toggle command will set it to light mode. 
+- Please note that our application does not save your theme preference, so it will always open in dark mode by default.
+
+Examples:
+
+- `toggle` changes the application theme.
 
 ### Clearing all entries : `clear`
 
@@ -326,7 +340,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -352,10 +366,10 @@ _Details coming soon ..._
 ## Command summary
 
 | Action         | Format, Examples                                                                                                                                                      |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **List**       | `list`                                                                                                                                                                |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Deletetag**  | `deletetag INDEX t/[TAG]` <br> e.g. `deletetag 1 t/Client`                                                                                                            |
@@ -367,6 +381,7 @@ _Details coming soon ..._
 | **Unpin**      | `unpin INDEX` <br> e.g. `unpin 1`                                                                                                                                     |
 | **Undo**       | `undo`                                                                                                                                                                |
 | **Redo**       | `redo`                                                                                                                                                                |
+| **Toggle**     | `toggle`                                                                                                                                                              |
 | **Export**     | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
 | **Clear**      | `clear`                                                                                                                                                               |
 | **Help**       | `help`                                                                                                                                                                |

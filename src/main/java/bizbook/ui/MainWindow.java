@@ -8,8 +8,10 @@ import bizbook.logic.Logic;
 import bizbook.logic.commands.CommandResult;
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.logic.parser.exceptions.ParseException;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -24,6 +26,15 @@ import javafx.stage.Stage;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String DARK_THEME_URL = MainWindow.class.getResource("/view/DarkTheme.css").toExternalForm();
+    private static final String LIGHT_THEME_URL = MainWindow.class.getResource("/view/LightTheme.css").toExternalForm();
+    private static final String DARK_THEME_HELP_URL =
+            MainWindow.class.getResource("/view/HelpWindowDark.css").toExternalForm();
+    private static final String LIGHT_THEME_HELP_URL =
+            MainWindow.class.getResource("/view/HelpWindowLight.css").toExternalForm();
+
+    private boolean isDarkTheme = true;
+    private Scene scene;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -37,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private ContactDetails contactDetailsPanel;
     private SearchBox searchBox;
+
+    @FXML
+    private MenuItem toggleThemeMenuItem;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -69,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.commandHistory = new CommandHistory();
+        this.scene = getRoot().getScene();
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -181,6 +196,32 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         primaryStage.hide();
     }
+    /**
+     * Toggles between light and dark themes
+     */
+    @FXML
+    private void handleThemeChange() {
+        isDarkTheme = !isDarkTheme;
+
+        // Get the scene's stylesheets
+        ObservableList<String> stylesheets = scene.getStylesheets();
+        ObservableList<String> helpStylesheets = helpWindow.getRoot().getScene().getStylesheets();
+        stylesheets.clear();
+        helpStylesheets.clear();
+
+        // Add the appropriate stylesheet based on the theme
+        if (isDarkTheme) {
+            stylesheets.add(DARK_THEME_URL);
+            helpStylesheets.add(DARK_THEME_HELP_URL);
+            toggleThemeMenuItem.setText("Switch to Light Theme");
+        } else {
+            stylesheets.add(LIGHT_THEME_URL);
+            helpStylesheets.add(LIGHT_THEME_HELP_URL);
+            toggleThemeMenuItem.setText("Switch to Dark Theme");
+        }
+
+        logger.info("Theme switched to " + (isDarkTheme ? "dark" : "light") + " mode");
+    }
 
     /**
      * Executes the command and returns the result.
@@ -199,6 +240,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isThemeChange()) {
+                handleThemeChange();
             }
 
             searchBox.clearSearchBox();

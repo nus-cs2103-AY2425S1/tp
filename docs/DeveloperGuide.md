@@ -326,6 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
 | `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
 | `*`      | user             | use my previous command quickly                                             | avoid retyping a command                                               |
+| `*`      | user             | toggle my application between light and dark mode                           | see the application in my preferred theme                              |
 
 ### Use cases
 
@@ -610,7 +611,16 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
-**Use case: UC15 - Command History**
+**Use case: UC15 - Toggle application's theme** 
+
+**MSS**
+
+1.  Actor toggle the system's theme.
+2.  System changes theme.
+
+    Use case ends.
+
+**Use case: UC16 - Command History**
 
 **MSS**
 

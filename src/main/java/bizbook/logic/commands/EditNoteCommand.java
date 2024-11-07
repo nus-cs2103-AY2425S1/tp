@@ -24,7 +24,7 @@ public class EditNoteCommand extends Command {
             + ": Edits the note of the person identified "
             + "by the person index number used on the left display panel. "
             + "The note will replace the currently stored note at the specified index.\n"
-            + "Parameters: INDEX i/[NOTE_INDEX] n/[NOTE]\n"
+            + "Parameters: INDEX i/NOTE_INDEX n/NOTE\n"
             + "Example: " + COMMAND_WORD + " 1 i/1 n/High profile client.";
 
     public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edit note of Person: %1$s";
