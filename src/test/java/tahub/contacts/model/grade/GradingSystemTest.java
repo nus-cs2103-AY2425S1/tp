@@ -27,7 +27,7 @@ class GradingSystemTest {
         gradingSystem.addGrade("Midterm", 85.0);
         Assertions.assertEquals(85.0, gradingSystem.getGrade("Midterm"), 0.001,
                                  "Grade should be exactly 85.0");
-        Assertions.assertTrue (
+        Assertions.assertTrue(
                 gradingSystem.getGrade("Midterm") > 80.0 ,
                 "Grade should be above 80");
         Assertions.assertNotEquals(-1.0, gradingSystem.getGrade("Midterm"),
@@ -37,28 +37,20 @@ class GradingSystemTest {
 
         // Test invalid inputs
         Assertions.assertAll(
-                "Invalid grade inputs",
-                () -> Assertions.assertThrows(
-                        IllegalArgumentException.class,
-                        () -> gradingSystem.addGrade(
+                "Invalid grade inputs", () -> Assertions.assertThrows(
+                        IllegalArgumentException.class, () -> gradingSystem.addGrade(
                                 null ,
                                 85.0) ,
-                        "Should reject null assessment name"),
-                () -> Assertions.assertThrows(
-                        IllegalArgumentException.class,
-                        () -> gradingSystem.addGrade(
+                        "Should reject null assessment name"), () -> Assertions.assertThrows(
+                        IllegalArgumentException.class, () -> gradingSystem.addGrade(
                                 "",
                                 85.0),
-                        "Should reject empty assessment name") ,
-                () -> Assertions.assertThrows(
-                        IllegalArgumentException.class,
-                        () -> gradingSystem.addGrade(
+                        "Should reject empty assessment name") , () -> Assertions.assertThrows(
+                        IllegalArgumentException.class, () -> gradingSystem.addGrade(
                                 "Test",
                                 -1.0),
-                        "Should reject negative grade"),
-                () -> Assertions.assertThrows(
-                        IllegalArgumentException.class,
-                        () -> gradingSystem.addGrade(
+                        "Should reject negative grade"), () -> Assertions.assertThrows(
+                        IllegalArgumentException.class, () -> gradingSystem.addGrade(
                                 "Test",
                                 101.0),
                         "Should reject grade above 100")
@@ -74,33 +66,25 @@ class GradingSystemTest {
         Map<String, Double> weights = gradingSystem.getAllWeights();
 
         Assertions.assertAll(
-                "Weight validations" ,
-                () -> Assertions.assertEquals(0.4, weights.get("Midterm"), 0.001,
-                                               "Weight should be exactly 0.4") ,
-                () -> Assertions.assertTrue(
+                "Weight validations" , () -> Assertions.assertEquals(
+                        0.4, weights.get("Midterm"), 0.001,
+                                               "Weight should be exactly 0.4") , () -> Assertions.assertTrue(
                         weights.containsKey("Midterm"),
-                        "Weights map should contain Midterm"),
-                () -> Assertions.assertFalse(
+                        "Weights map should contain Midterm"), () -> Assertions.assertFalse(
                         weights.isEmpty(),
                         "Weights map should not be empty")
                              );
 
         // Test invalid weights
         Assertions.assertAll(
-                "Invalid weight inputs",
-                () -> Assertions.assertThrows(
-                        IllegalArgumentException.class,
-                        () -> gradingSystem.setAssessmentWeight(
+                "Invalid weight inputs", () -> Assertions.assertThrows(
+                        IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(
                                 null, 0.5),
                         "Should reject null assessment") ,
-                () -> Assertions.assertThrows(
-                        IllegalArgumentException.class,
-                        () -> gradingSystem.setAssessmentWeight(
+                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(
                                 "Test", -0.1),
                         "Should reject negative weight") ,
-                () -> Assertions.assertThrows(
-                        IllegalArgumentException.class,
-                        () -> gradingSystem.setAssessmentWeight(
+                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> gradingSystem.setAssessmentWeight(
                                 "Test", 1.1),
                         "Should reject weight above 1.0")
                              );
@@ -118,10 +102,11 @@ class GradingSystemTest {
 
         double expectedScore = 91.0;
         Assertions.assertAll(
-                "Overall score calculations" ,
-                () -> Assertions.assertEquals(expectedScore, gradingSystem.getOverallScore(),
-                                               0.001,
-                                               "Overall score should be exactly 91.0"),
+                "Overall score calculations" , () -> Assertions.assertEquals(expectedScore,
+                                                                             gradingSystem.getOverallScore(),
+                                                                             0.001,
+                                                                             "Overall score should "
+                                                                                     + "be exactly 91.0"),
                 () -> Assertions.assertTrue(
                         gradingSystem.getOverallScore() > 90.0,
                         "Overall score should be above 90") ,
