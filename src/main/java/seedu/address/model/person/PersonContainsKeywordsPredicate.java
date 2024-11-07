@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -28,6 +29,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     private final NameContainsKeywordsPredicate namePredicate;
     private final PhoneContainsKeywordsPredicate phonePredicate;
     private final EmailContainsKeywordsPredicate emailPredicate;
+    private final GenderContainsKeywordsPredicate genderPredicate;
 
     // Data predicates
     private final AddressContainsKeywordsPredicate addressPredicate;
@@ -47,6 +49,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
             namePredicate = new NameContainsKeywordsPredicate(new ArrayList<>());
             phonePredicate = new PhoneContainsKeywordsPredicate(new ArrayList<>());
             emailPredicate = new EmailContainsKeywordsPredicate(new ArrayList<>());
+            genderPredicate = new GenderContainsKeywordsPredicate(new ArrayList<>());
             addressPredicate = new AddressContainsKeywordsPredicate(new ArrayList<>());
             tagsPredicate = new TagContainsKeywordsPredicate(new ArrayList<>());
             subjectsPredicate = new SubjectContainsKeywordsPredicate(new ArrayList<>());
@@ -58,6 +61,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         List<String> nameKeywords = new ArrayList<>();
         List<String> phoneKeywords = new ArrayList<>();
         List<String> emailKeywords = new ArrayList<>();
+        List<String> genderKeywords = new ArrayList<>();
         List<String> addressKeywords = new ArrayList<>();
         List<String> tagsKeywords = new ArrayList<>();
         List<String> subjectsKeywords = new ArrayList<>();
@@ -67,6 +71,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         keywordMap.put(PREFIX_NAME, nameKeywords);
         keywordMap.put(PREFIX_PHONE, phoneKeywords);
         keywordMap.put(PREFIX_EMAIL, emailKeywords);
+        keywordMap.put(PREFIX_GENDER, genderKeywords);
         keywordMap.put(PREFIX_ADDRESS, addressKeywords);
         keywordMap.put(PREFIX_TAG, tagsKeywords);
         keywordMap.put(PREFIX_SUBJECT, subjectsKeywords);
@@ -99,6 +104,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
         phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
         emailPredicate = new EmailContainsKeywordsPredicate(emailKeywords);
+        genderPredicate = new GenderContainsKeywordsPredicate(genderKeywords);
         addressPredicate = new AddressContainsKeywordsPredicate(addressKeywords);
         tagsPredicate = new TagContainsKeywordsPredicate(tagsKeywords);
         subjectsPredicate = new SubjectContainsKeywordsPredicate(subjectsKeywords);
@@ -116,13 +122,14 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         boolean hasMatchingName = namePredicate.test(person);
         boolean hasMatchingPhone = phonePredicate.test(person);
         boolean hasMatchingEmail = emailPredicate.test(person);
+        boolean hasMatchingGender = genderPredicate.test(person);
         boolean hasMatchingAddress = addressPredicate.test(person);
         boolean hasMatchingTags = tagsPredicate.test(person);
         boolean hasMatchingSubjects = subjectsPredicate.test(person);
         boolean hasMatchingClasses = classesPredicate.test(person);
 
-        return hasMatchingName || hasMatchingPhone || hasMatchingEmail || hasMatchingAddress || hasMatchingTags
-                || hasMatchingSubjects || hasMatchingClasses;
+        return hasMatchingName || hasMatchingPhone || hasMatchingEmail || hasMatchingGender || hasMatchingAddress
+                || hasMatchingTags || hasMatchingSubjects || hasMatchingClasses;
     }
 
     @Override
@@ -139,6 +146,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         return namePredicate.equals(otherPersonContainsKeywordPredicate.namePredicate)
                 && phonePredicate.equals(otherPersonContainsKeywordPredicate.phonePredicate)
                 && emailPredicate.equals(otherPersonContainsKeywordPredicate.emailPredicate)
+                && genderPredicate.equals(otherPersonContainsKeywordPredicate.genderPredicate)
                 && addressPredicate.equals(otherPersonContainsKeywordPredicate.addressPredicate)
                 && tagsPredicate.equals(otherPersonContainsKeywordPredicate.tagsPredicate)
                 && subjectsPredicate.equals(otherPersonContainsKeywordPredicate.subjectsPredicate)

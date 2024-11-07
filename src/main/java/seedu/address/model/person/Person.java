@@ -221,4 +221,11 @@ public abstract class Person {
     public String getType() {
         throw new InvalidPersonTypeException();
     }
+
+    /**
+     * Returns the number of days attended by the person.
+     *
+     * @return The number of days attended by the person.
+     */
+    public abstract int getDaysAttendedValue() throws CommandException;
 }

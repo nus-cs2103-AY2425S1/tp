@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -10,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * Unmarks the attendance of a particular student.
@@ -18,30 +21,55 @@ public class UnmarkAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the attendance of a particular student.\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the attendance of the student(s) identified "
+            + "by the index numbers used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer, multiple indices should be separated by spaces)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_SUCCESS = "Attendance unmarked successfully.";
-    public static final String MESSAGE_NO_STUDENTS = "There is no student to unmark attendance.";
-
-    private final Index targetIndex;
+    public static final String MESSAGE_SUCCESS = "Attendance unmarked successfully for:\n%1$s";
+    private final Index[] targetIndexArray;
 
     /**
-     * Creates an UnmarkAttendanceCommand to unmark the attendance of the student at the specified {@code Index}.
+     * @param targetIndexArray of the student in the filtered person list to unmark attendance
      */
-    public UnmarkAttendanceCommand(Index index) {
-        this.targetIndex = index;
+    public UnmarkAttendanceCommand(Index[] targetIndexArray) {
+        this.targetIndexArray = targetIndexArray;
+    }
+
+    /**
+     * @param targetIndex of the student in the filtered person list to unmark attendance
+     */
+    public UnmarkAttendanceCommand(Index targetIndex) {
+        this.targetIndexArray = new Index[] { targetIndex };
     }
     @Override
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        List<Person> studentsToUnmark = new ArrayList<>();
+
+        for (Index index : targetIndexArray) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                        + ": " + index.getOneBased());
+            }
+            Person personToUnmark = lastShownList.get(index.getZeroBased());
+            if (!(personToUnmark instanceof Student)) {
+                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
+            }
+            if (personToUnmark.getDaysAttendedValue() <= 0) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ATTENDANCE);
+            }
+            studentsToUnmark.add(personToUnmark);
         }
-        Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        model.unmarkAttendance(personToUnmark);
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        StringBuilder unmarkedStudents = new StringBuilder();
+        for (Person personToUnmark : studentsToUnmark) {
+            model.unmarkAttendance(personToUnmark);
+            unmarkedStudents.append(Messages.format(personToUnmark)).append("\n");
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, unmarkedStudents.toString().trim()));
     }
 
     @Override
@@ -49,19 +77,19 @@ public class UnmarkAttendanceCommand extends Command {
         if (other == this) {
             return true;
         }
-        // instanceof handles nulls
+
         if (!(other instanceof UnmarkAttendanceCommand)) {
             return false;
         }
 
-        UnmarkAttendanceCommand otherUnmarkAttendanceCommand = (UnmarkAttendanceCommand) other;
-        return targetIndex.equals(otherUnmarkAttendanceCommand.targetIndex);
+        UnmarkAttendanceCommand otherCommand = (UnmarkAttendanceCommand) other;
+        return Arrays.equals(targetIndexArray, otherCommand.targetIndexArray);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndexArray", Arrays.toString(targetIndexArray))
                 .toString();
     }
 }
