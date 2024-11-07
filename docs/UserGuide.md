@@ -45,8 +45,8 @@ If you can type fast, GOATS can get your student management tasks done faster th
 
 | Action            | Format, Examples                                                                                                                                                                               |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**   | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS edu/EDUCATION [t/TAG]` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                  |
-| **Add Parent**    | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/Jane Doe p/33335555 e/janedoe@example.com a/456, Pasir Ris Dr t/friend`                                              |
+| **Add Student**   | `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS edu/EDUCATION [t/TAG]` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`            |
+| **Add Parent**    | `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/Jane Doe p/33335555 e/janedoe@example.com a/456, Pasir Ris Dr t/friend`                                         |
 | **Grade**         | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`                                                                                                                                           |
 | **Clear**         | `clear`                                                                                                                                                                                        |
 | **Delete**        | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 1 2 3 4`                                                                                                                                       |
@@ -88,11 +88,11 @@ If you can type fast, GOATS can get your student management tasks done faster th
 
 </box>
 
-### Adding a student: `adds`
+### Adding a student: `addstudent`
 
 Adds a student to the address book.
 
-Format: `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS edu/EDUCATION [t/TAG]…`
+Format: `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS edu/EDUCATION [t/TAG]…`
 
 <box type="tip" seamless>
 
@@ -101,14 +101,14 @@ Format: `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS edu/EDUCATION [t/TAG]…`
 
 Examples:
 
-* `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/Primary`
-* `adds n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal edu/Secondary`
+* `addstudent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/Primary`
+* `addstudent n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal edu/Secondary`
 
-### Adding a parent: `addp`
+### Adding a parent: `addparent`
 
 Adds a parent to the address book.
 
-Format: `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
+Format: `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 
 <box type="tip" seamless>
 
@@ -117,8 +117,8 @@ Format: `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 
 Examples:
 
-* `addp n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addp n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addparent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addparent n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Assigning grade to students: `grade`
 

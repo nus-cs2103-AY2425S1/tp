@@ -18,7 +18,7 @@ import seedu.address.model.person.Parent;
  */
 public class AddParentCommand extends Command {
 
-    public static final String COMMAND_WORD = "addp";
+    public static final String COMMAND_WORD = "addparent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a parent to the address book. "
             + "Parameters: "
