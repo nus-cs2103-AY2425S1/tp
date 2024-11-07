@@ -65,8 +65,9 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
 * Command words come with **shorthands** <br>
   e.g. `add_s...` and `as...` will both be recognised as commands to add a new student.
-* Prefixes are **case-sensitive**!<br>
-  e.g. `i/INDEX` will be recognised but `I/INDEX` will not be recognised.
+
+* Prefixes are **case-insensitive**!<br>
+  e.g. `i/INDEX` and `I/INDEX` will be recognised.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `as sn/STUDENT_NAME`, `STUDENT_NAME` is a parameter which can be used as `as sn/John Doe`.
