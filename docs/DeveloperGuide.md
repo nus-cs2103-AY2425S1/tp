@@ -13,7 +13,14 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+We would like to acknowledge the following:
+
+* Libraries used:
+  * [JavaFX](https://openjfx.io/) - An open source client application platform for desktop, mobile and embedded systems built on Java
+  * [Jackson](https://github.com/FasterXML/jackson) - A suite of data-processing tools for Java
+  * [JUnit5](https://github.com/junit-team/junit5) - The programmer-friendly testing framework for Java and the JVM
+
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/)
 
 --------------------------------------------------------------------------------------------------------------------
 
