@@ -37,8 +37,8 @@ public class Appt {
      * @return int
      * @see Comparator
      */
-    public static final Comparator<Appt> DATETIME_COMPARATOR =
-            (appt1, appt2) -> appt1.getDateTime().compareTo(appt2.getDateTime());
+    public static final Comparator<Appt> DATETIME_COMPARATOR = (appt1, appt2) -> appt1.getDateTime()
+            .compareTo(appt2.getDateTime());
 
     private final LocalDateTime dateTime;
     private final HealthService healthService;
