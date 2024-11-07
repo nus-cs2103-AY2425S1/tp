@@ -12,7 +12,7 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should start with an optional '+' followed by a country code, contain only numbers, "
-                    + "and be between 7 and 15 digits long.";
+                    + "and be between 3 and 15 digits long.";
     public static final String VALIDATION_REGEX = "\\+?\\d{3,15}";
     public final String value;
 
