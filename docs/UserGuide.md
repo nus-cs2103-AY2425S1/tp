@@ -235,6 +235,7 @@ Arguments are the values that follow each flag in a command. **Arguments cannot 
 
 Refer to the table below for more details.
 
+
 | **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
 |----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             |
@@ -248,6 +249,8 @@ Refer to the table below for more details.
 | `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                                                   |
+
+
 **Note:** All of the above arguments are case-insensitive.
 
 > 💡 **Pro Tip:**
