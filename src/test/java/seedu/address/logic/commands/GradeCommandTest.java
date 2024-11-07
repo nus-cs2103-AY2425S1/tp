@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import org.junit.jupiter.api.Test;
@@ -77,6 +78,28 @@ public class GradeCommandTest {
         assertThrows(CommandException.class,
                 String.format(GradeCommand.MESSAGE_MODULE_NOT_FOUND, invalidModule.value), ()
                         -> gradeCommand.execute(model));
+    }
+
+    @Test
+    public void execute_gradeAddedWhenPersonDisplayed_success() {
+        Person personToAddGrade = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person expectedStudent = new PersonBuilder(personToAddGrade).build();
+
+        Module validModule = new Module(VALID_MODULE_AMY);
+        Grade validGrade = new Grade(VALID_GRADE_AMY);
+        Person newPerson = personToAddGrade.addModule(validModule);
+        model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), newPerson);
+        expectedStudent = expectedStudent.addModule(validModule);
+        expectedStudent = expectedStudent.setModuleGrade(validModule, validGrade);
+        GradeCommand gradeCommand = new GradeCommand(personToAddGrade.getStudentId(), validModule, validGrade);
+        model.setPersonToDisplay(expectedStudent);
+        String expectedMessage = String.format(GradeCommand.MESSAGE_SUCCESS, validModule);
+
+        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()),
+                new UserPrefs(), expectedStudent);
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), expectedStudent);
+
+        assertCommandSuccess(gradeCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

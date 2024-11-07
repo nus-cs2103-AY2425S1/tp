@@ -144,7 +144,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         eduContacts.setPerson(target, editedPerson);
-        setPersonToDisplay(editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================

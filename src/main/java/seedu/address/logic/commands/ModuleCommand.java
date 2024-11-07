@@ -67,6 +67,7 @@ public class ModuleCommand extends Command {
         }
 
         ArrayList<Module> modules = person.getModules();
+
         if (modules.contains(module)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module.value));
         }
@@ -74,6 +75,10 @@ public class ModuleCommand extends Command {
         Person updatedPerson = person.addModule(module);
         model.setPerson(person, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (updatedPerson.isSamePerson(model.getPersonToDisplay())) {
+            model.setPersonToDisplay(updatedPerson);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, studentId), true);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentId));
     }
 

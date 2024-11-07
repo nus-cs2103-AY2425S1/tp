@@ -93,6 +93,12 @@ public class PersonDetails extends UiPart<Region> {
             tag.setText("");
             course.setText("");
             module.setText("");
+            profileImage.setVisible(false);
+            studentIdHeader.setVisible(false);
+            contactHeader.setVisible(false);
+            addressHeader.setVisible(false);
+            emailHeader.setVisible(false);
+            moduleHeader.setVisible(false);
         }
     }
 }

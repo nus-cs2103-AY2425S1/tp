@@ -93,8 +93,14 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        if (personToEdit.isSamePerson(model.getPersonToDisplay())) {
+            model.setPersonToDisplay(editedPerson);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), true);
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -118,12 +124,12 @@ public class EditCommand extends Command {
             Module newModule = editPersonDescriptor.newModule;
 
             boolean isModuleRenamed = false;
-            if (updatedModules.stream().anyMatch(m -> m.value.equals(newModule.value))) {
+            if (updatedModules.stream().anyMatch(m -> m.value.toUpperCase().equals(newModule.value.toUpperCase()))) {
                 throw new CommandException(EditCommand.MESSAGE_DUPLICATE_MODULE);
             }
 
             for (int i = 0; i < updatedModules.size(); i++) {
-                if (updatedModules.get(i).value.equals(oldModule.value)) {
+                if (updatedModules.get(i).value.toUpperCase().equals(oldModule.value.toUpperCase())) {
                     Module updatedModule = new Module(newModule.value);
                     if (updatedModules.get(i).hasGrade()) {
                         updatedModule.setGrade(updatedModules.get(i).getGrade());
