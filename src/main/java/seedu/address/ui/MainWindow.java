@@ -243,7 +243,7 @@ public class MainWindow extends UiPart<Stage> {
                 hidePatientInfo();
             }
 
-            if (commandResult.getKeyword() != null && commandResult.getKeyword().equals("appts")) {
+            if (commandResult.isShowFilteredAppts()) {
                 showAppts(logic.getFilteredAppts());
             }
 
