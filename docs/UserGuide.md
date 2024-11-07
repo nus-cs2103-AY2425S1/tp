@@ -144,22 +144,21 @@ Edits an existing person in the address book.
 ```
 edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 ```
-
 #### Alias
 `e` can be used in place of `edit`.
 
 #### Parameters
 
-| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                       |
-|----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).        |
-| `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                             |
-| `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                                    |
-| `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                              |
-| `TELEGRAM`     | `t/`   | No          | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                     |
-| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative. |
-|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                  |
-|                | `nf/`  | No          | Represents unfavouriting of a contact. <br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                          |
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                           |
+|----------------|--------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/>  It must be a positive unsigned integer and must not exceed the size of the displayed contact list. |
+| `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                                                 |
+| `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                                                        |
+| `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                                                  |
+| `TELEGRAM`     | `t/`   | No          | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                                         |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative.                     |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                                      |
+|                | `nf/`  | No          | Represents unfavouriting of a contact. <br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                                              |
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -264,9 +263,9 @@ delete INDEX
 
 #### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                   |
-|-----------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> The index **must be a positive integer**, e.g. 1, 2, 3, …​, 2147483647. |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                              |
+|-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list. | 
 
 * The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`
 
@@ -404,11 +403,11 @@ exit
 ### Switching a profile : `switch`
 The `switch` command allows you to change the current session to a specified profile.
 - If a valid profile name is provided, the session will switch to that profile.
-  - If the profile already exists, it will switch to the existing profile.
-  - If the profile does not exist, a new profile with that name will be created.
+  - If the profile does not exist, a new profile with the specified name will be created.
+  - If the profile already exists, it will switch to that profile.
 
 
-- If no profile name is provided (empty input) and multiple profiles exist, the command will display a list of
+- If no profile name is provided (empty input) and other profiles exist, the command will display a list of
 available profiles to switch to.
 - Attempting to switch to the currently active profile will not perform a switch.
 
@@ -421,8 +420,9 @@ switch PROFILE
 `sw` can be used in place of `switch`
 
 #### Parameters
+<a id="switch-remarks"></a>
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                        |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                             |
 |-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `switch` will attempt to switch to.<br/> `PROFILE` must be between 1 and 30 characters, and can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).<br/> `PROFILE` names are **case-insensitive** and treated as lowercase. |
 
@@ -445,13 +445,13 @@ deleteProfile PROFILE
 
 #### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                            |
-|-----------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all requirements from the `switch` command, and should be an existing profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile. |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                               |
+|-----------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all [requirements](#switch-remarks) from the `switch` command, and should be an existing profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile. |
 
 
 #### Example
-Assuming your current profile is `addressbook`, then:
+This is a logical sequence of commands, assuming your current profile is addressbook:
 * `deleteProfile addressbook` is not allowed because `addressbook` is the active profile.
 * `sw alice` switches the current profile to `alice`
 * `delp addressbook` deletes the `addressbook` profile after switching to 'alice'
@@ -463,7 +463,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file at the directory `[JAR file location]/data/`. Advanced users are welcome to update data directly by editing the data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -475,8 +475,11 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCAConnect home folder.
+**Q**: How do I transfer my data to another computer?
+**A**: To transfer your data:
+1. [Install](#quick-start) the app on the new computer.
+2. Copy the data folder: Locate the data folder in your original CCAConnect home folder. Replace the default data folder in the new installation with this folder.
+3. Transfer profiles: In the original CCAConnect home folder, locate the preference.json file. Copy this file and overwrite the default preference.json in the new computer's CCAConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -484,6 +487,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. Forcing the application to close (e.g., using the terminal or Task Manager) will be treated as a system crash and may result in data loss.
 
 --------------------------------------------------------------------------------------------------------------------
 
