@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Comparator;
+
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
@@ -20,6 +22,10 @@ public class Phone {
             "Phone number must be between 1 and 15 digits inclusive.";
 
     public static final String VALIDATION_REGEX = "(\\+)?[0-9\\-\\s]+";
+
+    public static final Comparator<Phone> PHONE_COMPARATOR = Comparator
+            .comparing(phone -> phone.value);
+
     public final String value;
 
     /**
