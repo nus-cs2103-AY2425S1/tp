@@ -330,7 +330,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Finds contacts whose tags are the same as the specified keyword.
 
-Format: `filtertag KEYWORD`
+Format: `filtertag KEYWORD [KEYWORD]`
 
 - Filters through the list of contacts by the specified `KEYWORD`.
 
@@ -420,54 +420,56 @@ Format 2: `deletetag ALL t/TAG [t/MORE_TAG]`
 
 ### File Operations
 
-#### Importing CSV files: `import`
+### Importing CSV Files: `import`
 
-Imports data from a CSV file, use the import command followed by the path to your CSV file. This allows you to quickly load structured data into your application or script for further analysis and processing.
+**Format**: `import FILE_PATH`
 
-Format: `import /path/to/data/File.csv`
+**Absolute Path**:
+- Specifies the full path from the root directory.
+- **Unix/Linux/Mac**: `/home/user/data/hackers_2022.csv`
+- **Windows**: `C:\\Users\\user\\data\\hackers_2022.csv`
 
-- `/path/to/data/File.csv` should be the full path to the CSV file you wish to import. Replace `/path/to/data/File.csv` with the actual path to your file. Ensure that the file path is correct and accessible to avoid errors.
+**Relative Path**:
+- Starts from the current working directory of the application.
+- Example: `data/File.csv` or `./data/hackers_2022.csv`
+- If the application runs in `/home/user/project`, `import data/File.csv` points to `/home/user/project/data/File.csv`.
 
-Example:
-
-- `import /home/user/data/hackers_2022.csv` imports the CSV file named hackers_2022 from the data directory located in the user's home directory. Once imported, the data can be manipulated or used within the program
+**Examples**:
+- Absolute: `import /home/user/data/hackers_2022.csv`
+- Relative: `import ./data/hackers_2022.csv`
 
 <div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
-
-- Make sure to use the correct file path. For Windows, use backslashes or double backslashes (e.g., `C:\Users\username\data\File.csv`).
-- The CSV file should be properly formatted, with each value separated by commas and each row ending with a newline character.
-- Ensure you have the necessary read permissions for the file. If you encounter a permission denied error, you may need to adjust the file permissions or run the command with the required privileges.
-
+- Windows paths use backslashes (e.g., `C:\\Users\\username\\data\\File.csv`).
+- Verify file format and read permissions.
 </div>
 
-Troubleshooting:
+**Troubleshooting**:
+- For errors like "file not found," confirm the path type (absolute vs. relative) and the file's existence.
 
-- If you receive an error indicating that the file is not found, double-check the file path and ensure that the CSV file exists in the specified location.
-- If the CSV is not properly formatted, importing may fail. Make sure the file follows the standard CSV format (e.g., no extra commas).
+### Exporting CSV Files: `export`
 
-#### Exporting CSV Files: `export`
+**Format**: `export FILE_PATH`
 
-Export data to a CSV file, use the export command followed by the desired path and filename for your CSV. This command allows you to save the current data in a structured format that can be easily shared or used by other applications.
+**Absolute Path**:
+- Specifies the full path, starting from the root directory.
+- **Unix/Linux/Mac**: `/home/user/data/output_data.csv`
+- **Windows**: `C:\\Users\\user\\data\\output_data.csv`
 
-Format: `export /path/to/data/File.csv`
+**Relative Path**:
+- Refers to paths relative to the current directory.
+- Example: `./data/Output.csv` saves to `data` in the current directory.
 
-- `/path/to/data/File.csv` should be the full path where you want to save the CSV file. Replace `/path/to/data/File.csv` with the actual path and filename for your exported file. Ensure that the directory exists and you have the correct permissions to write to it.
+**Examples**:
+- Absolute: `export /home/user/data/output_data.csv`
+- Relative: `export ./data/Output.csv`
 
-Example:
+<div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
+- Ensure directories exist before exporting. For Windows, use `\\` or `\\`.
+- Files may be overwritten without warning.
+</div>
 
-- `export /home/user/data/output_data.csv` exports the current dataset to a CSV file named `output_data.csv` in the data directory located in the user's home directory. This file can then be opened or shared for further use.
-- `export ./data/Output.csv` exports the data to a CSV file named Output.csv in the data subdirectory of the current working directory. This approach is useful when you want to save data relative to your current location.
-
-Important Notes:
-
-- Ensure that the directory you are exporting to exists. For Windows, use backslashes or double backslashes, e.g., `C:\Users\username\data\File.csv`.
-- If the specified file already exists, it may be overwritten without warning. Ensure you use a unique filename or double-check if overwriting is acceptable.
-- Make sure you have the necessary write permissions for the directory you are exporting to. If you encounter a permission denied error, adjust the file permissions or run the command with the required privileges.
-
-Troubleshooting:
-
-- If the directory does not exist, you will receive an error. Create the directory first or specify a valid path.
-- If you do not have the necessary write permissions, you will need to adjust them or choose a different directory.
+**Troubleshooting**:
+- Confirm the file path is valid and distinguish between absolute and relative paths as needed. Adjust directory permissions if "permission denied" errors occur.
 
 ### Saving the data
 
@@ -478,9 +480,10 @@ AdmiNUS data are saved in the hard disk automatically after any command that cha
 AdmiNUS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AdminNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file make its format invalid, AdmiNUS will discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it.
 Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
 
 ---
 
@@ -493,13 +496,15 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 - **_NUS Club Administrator_** : An NUS club admin user responsible for managing contacts of students, companies, etc.
 - **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z)
 - **_Tag_** : A keyword or label associated with a contact that allows for easy grouping and filtering.
-
+- **_Relative Path_** : A file path that is relative to the current working directory of the user or application.
+- **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
 ---
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AdmiNUS home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app on the new computer, then replace its default data file with the data file from your previous AdmiNUS home folder.<br>
+**Alternative Option**: Export your data to a CSV file from the original computer and import it on the new computer using the import command.
 
 ---
 
@@ -512,24 +517,24 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 ## Command summary
 
-| Action            | Format                                                                                             | Example                                                                                                            |
-| ----------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Action            | Format                                                                                              | Example                                                                                                             |
+|-------------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
 | **Add a student** | `student n/NAME id/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                             | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`     |
-| **Clear**         | `clear`                                                                                            | `clear`                                                                                                            |
-| **Delete**        | `delete INDEX [MORE_INDEX]`                                                                        | `delete 3` or `delete 2 4`                                                                                         |
-| **Edit**          | `edit INDEX [n/NAME] [id/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                        |
-| **Filtertag**     | `filtertag KEYWORD`                                                                                | `filtertag bestie`                                                                                                 |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                                                                                                  |
-| **List**          | `list`                                                                                             | `list`                                                                                                             |
-| **Help**          | `help`                                                                                             | `help`                                                                                                             |
-| **Help Window**   | `helpwindow`                                                                                       | `helpwindow`                                                                                                       |
-| **Track**         | `track CATEGORY`                                                                                   | `track student`                                                                                                    |
-| **View**          | `view INDEX`                                                                                       | `view 1`                                                                                                           |
-| **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]`                                                                     | `tag 1 t/year2 t/computerScience`                                                                                  |
-| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                               | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                       |
-| **Import CSV**    | `import /path/to/data/File.csv`                                                                    | `import /home/user/data/hackers_2022.csv`                                                                          |
-| **Export CSV**    | `export /path/to/data/File.csv`                                                                    | `export /home/user/data/output_data.csv`                                                                           |
-| **Exit**          | `exit`                                                                                             | `exit`                                                                                                             |
+| **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`      |
+| **Clear**         | `clear`                                                                                             | `clear`                                                                                                             |
+| **Delete**        | `delete INDEX [MORE_INDEX]`                                                                         | `delete 3` or `delete 2 4`                                                                                          |
+| **Edit**          | `edit INDEX [n/NAME] [id/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
+| **Filtertag**     | `filtertag KEYWORD [MORE_KEYWORDS]`                                                                 | `filtertag bestie` or `filtertag bestie slay`                                                                       |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                      | `find James Jake`                                                                                                   |
+| **List**          | `list`                                                                                              | `list`                                                                                                              |
+| **Help**          | `help`                                                                                              | `help`                                                                                                              |
+| **Help Window**   | `helpwindow`                                                                                        | `helpwindow`                                                                                                        |
+| **Track**         | `track CATEGORY`                                                                                    | `track student`                                                                                                     |
+| **View**          | `view INDEX`                                                                                        | `view 1`                                                                                                            |
+| **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]`                                                                      | `tag 1 t/year2 t/computerScience`                                                                                   |
+| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                                | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                        |
+| **Import CSV**    | `import FILE_PATH`                                                                                  | `import C:\Users\user\data\File.csv` or `import data/File.csv`                                                      |
+| **Export CSV**    | `export FILE_PATH`                                                                                  | `export C:\Users\user\data\File.csv` or `import data/File.csv`                                                      |
+| **Exit**          | `exit`                                                                                              | `exit`                                                                                                              |
 
 [Back to the top](#table-of-contents)
