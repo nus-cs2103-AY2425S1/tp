@@ -58,7 +58,7 @@ The callout boxes below are used in documentation to enhance readability and pro
 </box>
 
 <box type="warning" seamless>
-**Caution Box:** Alerts users to potential issues or problems that may arise.
+**Caution Box:** Alerts you to potential issues or problems that may arise.
 </box>
 
 ## Features
