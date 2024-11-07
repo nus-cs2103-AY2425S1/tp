@@ -12,22 +12,24 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 <!-- * Table of Contents -->
 <page-nav-print />
-<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
 1. Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, use `cd` to nvaigate into the folder you put the jar file in, and use the `java -jar GamerBook.jar` command to run the application.<br>
+4. Open a command terminal, use `cd` to nvaigate into the folder you put the jar file in, and use the `java -jar GamerBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts, this is useful after you filter the address book using commands such as `find`.
@@ -40,10 +42,11 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for more details.
+Refer to the [Features](#features) below for more details.
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -85,9 +88,9 @@ Underneath each suggested command is the syntax for that command and what parame
 * The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
 
 </box>
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
@@ -110,7 +113,9 @@ Underneath each suggested command is the syntax for that command and what parame
 | **Save**       | `save`                                                                                                                                                                                                                   |
 | **Load**       | `load`                                                                                                                                                                                                                   |
 | **Exit**       | `exit`                                                                                                                                                                                                                   |
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Commands
 
 <br>
