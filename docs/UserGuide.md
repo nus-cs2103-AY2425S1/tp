@@ -515,8 +515,8 @@ Format: `clear`
 
 Navigates through all previously entered commands.
 
-1. Entering the `up arrow-key` will revisit the **previous** command in the command history.
-2. Entering the `down arrow-key` will revisit the **next** command in the command history.
+1. Entering the `↑ up arrow-key` will revisit the **previous** command in the command history.
+2. Entering the `↓ down arrow-key` will revisit the **next** command in the command history.
 
 <box type="important" seamless>
 
@@ -535,48 +535,39 @@ Navigates through all previously entered commands.
 
 <box type="info" light>
 
-**Example inputs:** (Steps 1 to 6 are performed sequentially)
-1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
-2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
-3. `cadd n/Amy Tan p/99887766`
-4. `rview 1`
-5. `list`
-6. `cdelete 2`
+**Example Inputs:** (Steps 1 to 13 are performed sequentially)
+1. Press `↑ up-arrow key` on the keyboard.
+2. Press `↑ up-arrow key` on the keyboard.
+3. Press `↑ up-arrow key` on the keyboard.
+4. Press `↑ up-arrow key` on the keyboard.
+5. Press `↑ up-arrow key` on the keyboard.
+6. Press `↑ up-arrow key` on the keyboard.
+7. Press `↑ up-arrow key` on the keyboard.<br>
+8. Press `↓ down-arrow key` on the keyboard.
+9. Press `↓ down-arrow key` on the keyboard.
+10. Press `↓ down-arrow key` on the keyboard.
+11. Press `↓ down-arrow key` on the keyboard.
+12. Press `↓ down-arrow key` on the keyboard.
+13. Press `↓ down-arrow key` on the keyboard.
 
 </box>
 
 <box type="success" light>
 
 **Example Outputs:** (Steps 1 to 13 are performed sequentially)
-1. Step 1: Press up-arrow key on the keyboard.<br>
-       Expected: `cdelete 2` is shown in the command box.
-2. Step 2: Press up-arrow key on the keyboard.<br>
-   Expected: `list` is shown in the command box.
-3. Step 3: Press up-arrow key on the keyboard.<br>
-   Expected: `rview 1` is shown in the command box.
-4. Step 4: Press up-arrow key on the keyboard.<br>
-   Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
-5. Step 5: Press up-arrow key on the keyboard.<br>
-   Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
-   the command box.
-6. Step 6: Press up-arrow key on the keyboard.<br>
-   Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
-7. Step 7: Press up-arrow key on the keyboard.<br>
-   Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
-   are no more previous commands.
-8. Step 8: Press down-arrow key on the keyboard.<br>
-   Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
-   the command box.
-9. Step 9: Press down-arrow key on the keyboard.<br>
-   Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
-10. Step 10: Press down-arrow key on the keyboard.<br>
-    Expected: `rview 1` is shown in the command box.
-11. Step 11: Press down-arrow key on the keyboard.<br>
-    Expected: `list` is shown in the command box.
-12. Step 12: Press down-arrow key on the keyboard.<br>
-    Expected: `cdelete 3` is shown in the command box.
-13. Step 13: Press down-arrow key on the keyboard.<br>
-    Expected: : Nothing is shown in the command box.
+1. Expected: `cdelete 2` is shown in the command box.
+2. Expected: `list` is shown in the command box.
+3. Expected: `rview 1` is shown in the command box.
+4. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
+5. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
+6. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
+7. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there are no more previous commands.
+8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
+9. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
+10. Expected: `rview 1` is shown in the command box.
+11. Expected: `list` is shown in the command box.
+12. Expected: `cdelete 3` is shown in the command box.
+13. Expected: : Nothing is shown in the command box.
 
 </box>
 
