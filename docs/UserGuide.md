@@ -120,7 +120,7 @@ Format: `clear`
 > 
 > After confirmation, any cleared data or contact cannot be retrieved. This action is IRREVERSIBLE.
 
-* Recommended practice: Always have a copy of current data. You may refer to [Exporting the data](#exporting the data). You can use [import feature](#importing-contacts-import) if you have lost your data after clearing it unintentionally.
+* Recommended practice: Always have a copy of current data. You may refer to [Exporting the data](#exporting-the-data). You can use [import feature](#importing-contacts-import) if you have lost your data after clearing it unintentionally.
 * You can directly delete the addressbook.json file which can be found in data folder or in the data directory if you want to recover the sample data.
 
 **Confirmation Requirement:**
