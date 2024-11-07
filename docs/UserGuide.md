@@ -126,28 +126,22 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE_APPLIED_FOR] [t/TAG
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
-### Locating persons by name: `find`
+### Locating persons by criteria given: `find`
 
-Finds persons
+Finds persons by criteria given
 
 Format:
-`find n/FULL_NAME`
-`find j/JOB_CODE_APPLIED_FOR`
-`find t/TAG`
-`find n/FULL_NAME p/PHONE`
-`find n/FULL_NAME e/EMAIL`
+`find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB CODE] [t/TAG] [r/REMARK]`
 
-* The search for name is case-insensitive. e.g `hans` will match `Hans`
-* The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and not `Bo Hans`
-* Job code is case-sensitive.
-* Tag is case-insensitive.
-* Email is case-insensitive.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and `Hans Bobo`, but not `Bo Hans`
+* All fields are case-insensitive
+* Search will be done using partial match
 
 Examples:
-* `find n/alex yeoh` returns `Alex Yeoh`
-* `find t/TP` returns the list of contacts with TP tag <br>
+* `find n/alex yeoh` returns `Alex Yeoh` and `Alex Yeoh Bin Sheng`
+* `find t/TP` returns the list of contacts with `TP` tag <br>
   ![result for 'findTp'](images/findTp.png)
+* `find n/alex yeoh t/TP` return the list of contacts with name containing `alex yeoh` whose tag is `TP`
 
 ### Deleting a person : `delete`
 
@@ -184,6 +178,22 @@ Format:
 
 **Examples**:
 - `remark 2 r/Available for part-time work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
+
+### Bulk reject persons by criteria: `massreject`
+
+Marks persons as "rejected" by updating their tags based on specified job code, tag, or a combination of both.
+
+Format:
+`massreject [j/JOB CODE] [t/TAG]`
+
+* Updates contacts' tags to `r` (rejected) based on the specified criteria.
+* You can filter by job code only, tag only, or a combination of both.
+* If only a job code is provided, persons with the `a` (accepted) tag will be excluded from the update.
+
+Examples:
+* `massreject j/SWE2024 t/TP` marks all persons with the job code `SWE2024` and the tag `TP` as rejected.
+* `massreject t/BP` marks all persons with the tag `BP` as rejected.
+* `massreject j/SWE2024` marks all persons with the job code `SWE2024` as rejected, except those already tagged as `a` (accepted).
 
 ### Clearing all entries : `clear`
 
