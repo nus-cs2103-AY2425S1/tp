@@ -50,6 +50,8 @@ public class EventCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
 
 
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event book";
+
     private final String eventName;
     private final LocalDate eventStartDate;
     private final LocalDate eventEndDate;
