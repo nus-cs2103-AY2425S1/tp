@@ -34,11 +34,9 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_ID_AMY = "P12345";
-    public static final String VALID_ID_WITH_SPECIAL_CHAR_AMY = "P12345/";
     public static final String VALID_ID_BOB = "P54321";
     public static final String VALID_ID_WITH_SPECIAL_CHAR_BOB = "P54321/";
     public static final String VALID_WARD_AMY = "A1";
-    public static final String VALID_WARD_WITH_SPECIAL_CHAR_AMY = "A1!";
     public static final String VALID_WARD_BOB = "B3";
     public static final String VALID_WARD_WITH_SPECIAL_CHAR_BOB = "B3!";
     public static final String VALID_DIAGNOSIS_AMY = "Celiac Disease";

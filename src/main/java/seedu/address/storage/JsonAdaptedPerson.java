@@ -109,6 +109,9 @@ class JsonAdaptedPerson {
         if (notes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Notes.class.getSimpleName()));
         }
+        if (!Notes.isValidNote(notes)) {
+            throw new IllegalValueException(Notes.MESSAGE_CONSTRAINTS);
+        }
         final Notes modelNotes = new Notes(notes);
 
         final Appointment modelAppointment = (appointment != null) ? appointment.toModelType() : null;

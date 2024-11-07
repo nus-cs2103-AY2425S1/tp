@@ -15,14 +15,9 @@ public class AddNotesCommandParserTest {
     private final String nonEmptyNotes = "Some notes.";
     @Test
     public void parse_indexSpecified_success() {
-        // have remark
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_NOTES + nonEmptyNotes;
         AddNotesCommand expectedCommand = new AddNotesCommand(INDEX_FIRST_PERSON, new Notes(nonEmptyNotes));
-        assertParseSuccess(parser, userInput, expectedCommand);
-        // no remark
-        userInput = targetIndex.getOneBased() + " " + PREFIX_NOTES;
-        expectedCommand = new AddNotesCommand(INDEX_FIRST_PERSON, new Notes(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test

@@ -25,11 +25,13 @@ public class AddNotesCommand extends Command {
             + "by the index number used in the last patient listing. "
             + "Existing notes will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NOTES + "[NOTES]\n"
+            + PREFIX_NOTES + "NOTES\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NOTES + "Patient is prone to falling.";
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Patient: \n\n%1$s";
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Removed notes from Patient: %1$s";
+    public static final String MESSAGE_EMPTY_NOTE = "Unable to add empty notes.\n"
+            + "If you intended to delete a current patient note, please use the delnotes command";
 
     private final Index index;
     private final Notes notes;
@@ -70,7 +72,7 @@ public class AddNotesCommand extends Command {
      * the remark is added to or removed from
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
+    public String generateSuccessMessage(Person personToEdit) {
         String message = !notes.value.isEmpty() ? MESSAGE_ADD_NOTES_SUCCESS : MESSAGE_DELETE_NOTES_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }

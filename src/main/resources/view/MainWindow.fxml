@@ -14,10 +14,10 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
-<fx:root minHeight="670" minWidth="1200" onCloseRequest="#handleExit" title="Ward Watch App" type="javafx.stage.Stage"
+<fx:root minHeight="670" minWidth="1200" onCloseRequest="#handleExit" title="WardWatch" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png"/>
+    <Image url="@/images/wardwatch_logo.png"/>
   </icons>
   <scene>
     <Scene>
