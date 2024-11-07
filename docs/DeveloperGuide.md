@@ -134,6 +134,8 @@ The activity diagram below represents the flow of actions within the UI based on
 
 <puml src="diagrams/UiActivityDiagram.puml" alt="Workflow of Updating the UI State"/>
 
+***
+
 ### 3.3 Logic Component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
