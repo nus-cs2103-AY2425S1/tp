@@ -21,7 +21,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         validateBasicCommandFormat(args);
-        if (args.trim().matches("\\d+")) {
+        if (args.trim().matches("-?\\d+")) {
             Index index = parsePersonIndex(args);
             return new DeleteCommand(index);
         } else {
