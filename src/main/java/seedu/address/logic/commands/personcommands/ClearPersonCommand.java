@@ -33,8 +33,8 @@ public class ClearPersonCommand extends ClearCommand {
             setPrompted(false);
             return new CommandResult(MESSAGE_ABORTED);
         } else {
-            setPrompted(false);
             setConfirmed(false);
+            setPrompted(false);
             model.setPersonList(new AddressBook());
             return new CommandResult(MESSAGE_SUCCESS);
         }
