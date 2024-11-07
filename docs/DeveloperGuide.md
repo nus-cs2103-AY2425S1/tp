@@ -495,6 +495,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC06 - List items**
+
+**MSS**
+1. User enters command to list
+2. System displays lists of both events and vendors.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+* 1b. User list events only.
+
+  * 1b1. System displays a list of events.
+
+      Use case ends.
+
+* 1c. User list vendors only.
+
+  * 1c1. System displays a list of vendors.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
