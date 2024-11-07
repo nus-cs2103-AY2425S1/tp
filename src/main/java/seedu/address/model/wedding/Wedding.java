@@ -156,6 +156,20 @@ public class Wedding {
     }
 
     /**
+     * Removes the given person from anywhere in the wedding (partner 1, partner 2, or guest list)
+     */
+    public void removePerson(Person person) {
+        if (person.isSamePerson(partner1)) {
+            partner1 = null;
+        } else if (person.isSamePerson(partner2)) {
+            partner2 = null;
+        } else {
+            Person match = guestList.stream().filter(person::isSamePerson).findFirst().orElse(null);
+            guestList.remove(match);
+        }
+    }
+
+    /**
      * Returns wedding address associated with wedding
      * @return A {@code Address} object of the address of the wedding
      */

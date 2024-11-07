@@ -108,7 +108,14 @@ public class UnassignWeddingCommand extends Command {
                     personToEdit.getTasks());
         }
 
+        // Remove Wedding from Person
         model.setPerson(personToEdit, editedPerson);
+
+        // Remove Person from all Weddings
+        for (Wedding wedding : weddingsToRemove) {
+            model.getWedding(wedding).removePerson(personToEdit);
+        }
+
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredWeddingList(Model.PREDICATE_SHOW_ALL_WEDDINGS);
 
