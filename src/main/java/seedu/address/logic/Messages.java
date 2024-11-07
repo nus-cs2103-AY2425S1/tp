@@ -62,7 +62,10 @@ public class Messages {
                 .append("\nAddress: ")
                 .append(person.getAddress())
                 .append("\nEmergency Contact(s): ");
-        person.getEmergencyContacts().forEach(x -> {builder.append(x); builder.append("\n");});
+        person.getEmergencyContacts().forEach(x -> {
+            builder.append(x);
+            builder.append("\n");
+        });
         builder.append("\nTags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
