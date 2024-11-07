@@ -99,7 +99,7 @@ you want to seek help:
 
 **Shows a message explain the usage of the specified command keyword**
 
-Format: `help COMMAND_KEYWORD`
+Format: `help [COMMAND_KEYWORD]`
 
 Example: 
 - `help add` shows the help message for `add` command in the following format
@@ -117,8 +117,13 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]`
+Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL | p/PHONE_NUMBER e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]`
 
+<box type="information" seamless>
+The command accepts either one phone number, one email, or both.
+</box>
+
+* `NAME` can take any values and can not be blank. Refer to the [input format section](#input-format) to find out more.
 * `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
 * `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
 * `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
@@ -132,7 +137,9 @@ Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADD
 <box type="info" seamless>
 
 **Info: Duplicate Handling:**
-A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers. 
+- A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers. 
+- For the same reason, the app will prevent the user from changing the email address or phone number of a contact to one that is already in use by another contact.
+
 </box>
 
 Examples:
@@ -153,7 +160,7 @@ is explained below.
 
 #### Module-role
 
-The module-role pairs can be edited by adding, deleting, or replacing.
+The module-role pairs can be edited by adding and deleting.
 
 ##### Adding new module-role pairs
 
@@ -257,16 +264,17 @@ Format: `find (r/KEYWORD)+`
 
 Examples:
 * `find r/CS2103T` returns all students taking the module `CS2103T`
-* `find r/CS2103T-Prof r/CS1101S` returns all persons with the role Prof in CS2103T or Student in CS1101S 
+* `find r/CS2103T-Prof r/CS1101S` returns all persons with the role Prof in CS2103T or Student in CS1101S
+
   ![result for 'find r/cs2103t-prof r/cs1101s'](images/findModuleRoleExample.png)
 
 #### By name and module-role
 
 Finds persons whose names and module-role pairs contain any combination of the given keywords.
 
-Format: `find (n/KEYWORD)+ (r/KEYWORD)+`
+Format: `find (n/KEYWORD | r/KEYWORD)+`
 
-* Person matching at least one name keyword AND one module-role keyword will be returned (i.e. AND search).
+* Person matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) will be returned (i.e. AND search).
 
 Example:
 * `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
@@ -309,7 +317,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all contacts from the address book.
 
 Format: `clear`
 
@@ -359,6 +367,10 @@ _Details coming soon ..._
 
 ## Input format
 
+### `NAME` field
+
+In our application, we understand that everyone's names can have various characters and symbols, thus we decided that as long as it is not a blank string, it is considered acceptable.
+
 ### Concept of a phone number
 
 In our application, the concept of a phone number is defined as:
@@ -398,13 +410,13 @@ This allows you to add extra annotations if you wish to.
 
 ## Command summary
 
-Action     | Format, Examples                                                                                                                                                                                            
------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague d/A good guy` 
-**Clear**  | `clear`                                                                                                                                                                                                     
-**Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                    
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/+(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                      
-**Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521` 
-**Undo**   | `undo`
-**List**   | `list`                                                                                                                                                                                                      
-**Help**   | `help`                                                                                                                                                                                                      
+ Action     | Format, Examples                                                                                                                                                                                                                                                        
+------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**    | `add n/NAME (p/PHONE_NUMBER \| e/EMAIL \| p/PHONE_NUMBER e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague d/A good guy` 
+ **Clear**  | `clear`                                                                                                                                                                                                                                                                 
+ **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                                                                                
+ **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/(+\|-)(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com r/+CS2030S CS1101S-TA`                                                                     
+ **Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521`                                                                                                                                                                   
+ **Undo**   | `undo`                                                                                                                                                                                                                                                                  
+ **List**   | `list`                                                                                                                                                                                                                                                                  
+ **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                                                 

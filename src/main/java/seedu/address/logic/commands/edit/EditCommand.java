@@ -48,8 +48,8 @@ public class EditCommand extends Command {
             + "When deleting module roles, any role associated with the module will be deleted if you do not specify.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "(" + PREFIX_PHONE + "PHONE"
-            + " | " + PREFIX_EMAIL + "EMAIL) "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]+ "
             + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+] "
@@ -60,8 +60,9 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "%1$s\nEdited Person: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "The phone number already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PHONE_AND_EMAIL =
+            "This email and this phone number already exist in the address book.";
+    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number already exists in the address book";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
     public static final String MESSAGE_INVALID_VALUES = "Edit failed due to invalid values provided: %1$s";
     private final Index index;
@@ -95,7 +96,7 @@ public class EditCommand extends Command {
         boolean emailExists = model.hasEmail(editedPerson);
 
         if (!personToEdit.isSamePerson(editedPerson) && phoneExists && emailExists) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE_AND_EMAIL);
         } else if (!personToEdit.isPhonePresentAndSame(editedPerson) && phoneExists) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE_NUMBER);
         } else if (!personToEdit.isEmailPresentAndSame(editedPerson) && emailExists) {
