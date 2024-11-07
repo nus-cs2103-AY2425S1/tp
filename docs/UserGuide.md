@@ -285,6 +285,39 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactMate home folder.
 
+**Q**: How do I save my data?<br>
+**A**: ContactMate ensures your data is saved automatically after every command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **CLI (Command Line Interface)**: A text-based user interface that allows users to interact with the system by typing commands.
+
+
+* **GUI (Graphical User Interface)**: A visual interface that enables users to interact with the system through graphical elements like buttons, menus, and icons.
+
+
+* **Index**: A number to used to identify a specific record (elderly) in the list. For instance, "1" refers to the first record in the list.
+
+
+* **Field**: A specific attribute or property of an elderly. For example, fields might include Name, Email, or Phone Number.
+
+
+* **Parameter**: Specific data (e.g. `NAME`, `DATE`, `NOTES`) that you provide when using commands to modify its behaviour. Some parameters are mandatory, while others are optional, depending on the command.
+
+
+* **Backup**: A copy of data stored separately to protect against loss or accidental deletion. Backups ensure data can be restored in case of unexpected issues.
+
+
+* **JSON**: Known as JavaScript Object Notation, JSON is a lightweight, text-based data format that is easy for both humans and machines to read and write.
+
+
+* **Profile View**: A display that shows all the details of a specific elderly.
+
+
+* **Person List View**: Also referred to as "`personList` view", this is the display that shows the list of elderly in ContactMate. By default, it is displayed when you start the application and is also displayed after using the `list` command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
