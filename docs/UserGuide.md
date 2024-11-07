@@ -140,7 +140,7 @@ Move the .jar file you downloaded into this folder.
 
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
-   You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity.
+   You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
 
 <div style="page-break-after: always;"></div>
 
@@ -172,6 +172,7 @@ Let's take a look at the structure in more detail:
 | **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> This guide may represent it as a placeholder using `<ARGUMENT>`. | `John Doe`, `john@example.com` |
 
 Here's an example that uses multiple flags and arguments:
+Here's an example that uses multiple flags and arguments:
 ```
 add n/ John Doe e/ john@example.com
 ```
@@ -181,7 +182,7 @@ add n/ John Doe e/ john@example.com
 
 
 ## 4.2 Commands
-A command is the action that AgentAssist will perform, such as adding, deleting, or editing a contact.
+A command is the action that AgentAssist will perform, such as adding, deleting, or editing a client's contact.
 
 Here is a reference table that briefly summarizes available commands:
 
@@ -291,7 +292,7 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 
 > 💡 **Pro Tip:**
 > 
-> Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
+> Combine commands like `filter` followed by `edit` or `delete` to manage your clients' contacts more effectively.
 > 
 > For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
 
@@ -383,7 +384,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 > **Note on Duplicates:**
 >
-> AgentAssist will prevent duplicate entries if a client with t``he **same name, email and phone number** is already saved.  
+> AgentAssist will prevent duplicate entries if a client with the **same name, email and phone number** is already saved.  
 > When this happens, you will see the following message:
 >
 > ```
