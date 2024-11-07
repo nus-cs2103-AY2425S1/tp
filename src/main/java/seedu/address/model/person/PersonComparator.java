@@ -11,7 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class PersonComparator {
     public static final String NAME = "name";
     public static final String DATE_OF_LAST_VISIT = "date of last visit";
-    private static final String SORT_EXCEPTION = "The specified sort parameter being used is invalid.";
+    private static final String SORT_EXCEPTION = "The specified sort parameter is invalid.";
 
     public PersonComparator() {
 

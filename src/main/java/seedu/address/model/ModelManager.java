@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -22,6 +23,8 @@ import seedu.address.model.person.PersonComparator;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final String RESORT_ERROR = "Error: User Prefs had an invalid sort parameter. "
+            + "Resorting after changes were made to the addressbook was abandoned.";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -114,14 +117,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Person person) throws CommandException {
+    public void addPerson(Person person) {
         addressBook.addPerson(person);
         resortPersonList(getSortSettings());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) throws CommandException {
+    public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
         resortPersonList(getSortSettings());
@@ -167,10 +170,15 @@ public class ModelManager implements Model {
         setSortSettings(new SortSettings(parameter, isAscending));
     }
 
-    private void resortPersonList(SortSettings sortSettings) throws CommandException {
+    private void resortPersonList(SortSettings sortSettings) {
         String parameter = sortSettings.getSortParameter();
         boolean isAscending = sortSettings.isAscendingOrder();
-        addressBook.sort(new PersonComparator().getComparator(parameter, isAscending));
+        try {
+            addressBook.sort(new PersonComparator().getComparator(parameter, isAscending));
+        } catch (CommandException ce) {
+            //This case should only happen if the user incorrectly edits the UserPrefs manually.
+            logger.log(Level.WARNING, RESORT_ERROR);
+        }
     }
 
 }
