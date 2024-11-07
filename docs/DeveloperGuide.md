@@ -479,9 +479,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
-### Adding a person
+### Adding a candidate
 
 1. Adding a candidate to hiredfiredpro
 
@@ -494,16 +492,14 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add n/Adib j/Developer p/phone_number e/example@example i/100`, `...` (invalid parameters for certain fields)<br>
        Expected: Similar to previous.
 
-    1. Other incorrect delete commands to try: `add`, `add i/1`, `...`(missing one or more compulsory fields)<br>
+    1. Other incorrect add commands to try: `add`, `add i/1`, `...`(missing one or more compulsory fields)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a candidate
 
 1. Deleting a candidate while all candidates are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple candidates in the list.
+   1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -515,12 +511,10 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 1. Viewing a candidate while no candidates are being shown
 
-   1. Prerequisites: List all persons using the `find xxx` where xxx is a name not existing in current candidates list. Multiple candidates existing.
+   1. Prerequisites: List all candidates using the `find xxx` where xxx is a name not existing in current candidates list. Multiple candidates existing.
 
    1. Test case: `delete 1`<br>
       Expected: No candidate will be deleted. Error details shown in the result panel.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -552,13 +546,11 @@ testers are expected to do more *exploratory* testing.
       
    1. All changes made are reflected in the json file.
 
-1. _{ more test cases …​ }_
-
 ### Viewing Candidates
 
    1. Viewing a candidate while all candidates are being shown
 
-      1. Prerequisites: List all persons using the `list` command. Multiple candidates in the list. 
+      1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list. 
 
       1. Test case: `view n/Adib j/Developer`<br>
          Expected: Candidate with their details will be shown on the display panel.
@@ -568,9 +560,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Viewing a candidate while no candidates are being shown
 
-       1. Prerequisites: List all persons using the `find xxx` where xxx is a name not existing in current candidates list. Multiple candidates existing.
+       1. Prerequisites: List all candidates using the `find xxx` where xxx is a name not existing in current candidates list. Multiple candidates existing.
 
        1. Test case: `view n/Adib j/Developer`<br>
           Expected: No candidate displayed on display panel. Error details shown in the result panel.
-
-1. _{ more test cases …​ }_
