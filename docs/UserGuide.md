@@ -139,6 +139,9 @@ Health Connect is an application designed to **streamline client management** fo
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. If the command specifies `help 123`, it will be interpreted as `help`.
 
+* Prefixes are case sensitive, and must be in lower case. <br>
+  e.g. `n/` is allowed but `N/` is not allowed
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 * The following are considered duplicate patients:
@@ -146,6 +149,8 @@ Health Connect is an application designed to **streamline client management** fo
   * Same name AND same email
   * Same name, same phone number AND same email
   * Note: same phone number AND same email are not considered as a duplicate patient since the patient might use their NOK's contact details
+
+
 
 ### Parameter Constraints
 
