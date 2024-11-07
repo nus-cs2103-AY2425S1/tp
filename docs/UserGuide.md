@@ -46,6 +46,11 @@ This section introduces the HiredFiredPro layout, command format and commonly us
 The image below shows the different components of HiredFiredPro.
 
 ![HiredFiredPro_layout](images/UI-Layout.png)
+
+* **Command Input Line:** You can type your commands here and execute them by pressing Enter.
+* **Result panel:** Displays the results of the command that has been executed.
+* **Candidate panel:** Displays the complete or filtered list of candidates.
+* **Display panel:** Displays the details of a candidate.
 <br><br>
 
 ### Command Format
