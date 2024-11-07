@@ -70,7 +70,11 @@ public class StudentBuilder extends PersonBuilder {
      * Sets the {@code Parent's name} of the {@code Student} that we are building.
      */
     public StudentBuilder withParentName(String parentName) {
-        this.parentName = new Name(parentName);
+        if (parentName == null) {
+            this.parentName = null;
+        } else {
+            this.parentName = new Name(parentName);
+        }
         return this;
     }
 

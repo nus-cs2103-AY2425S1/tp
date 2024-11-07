@@ -79,11 +79,13 @@ public class UnlinkCommand extends Command {
         Parent castedParent = (Parent) parent;
 
         Pair<Student, Parent> unlinkedPair = unlink(castedChild, castedParent);
-        model.setPerson(child, unlinkedPair.getKey());
-        model.setPerson(parent, unlinkedPair.getValue());
+        Student unlinkedStudent = unlinkedPair.getKey();
+        Parent unlinkedParent = unlinkedPair.getValue();
+        model.setPerson(child, unlinkedStudent);
+        model.setPerson(parent, unlinkedParent);
 
         return new CommandResult(String.format(MESSAGE_UNLINK_CONTACT_SUCCESS,
-                Messages.format(child), Messages.format(parent)));
+                unlinkedStudent.getName(), unlinkedParent.getName()));
     }
 
     private Pair<Student, Parent> unlink(Student student, Parent parent) {
