@@ -189,7 +189,7 @@ Examples:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Faster attendance updating:**<br>
-You can use the `mark`, `unmark` and `reset` commands with the wildcard `*` to update the attendance of all persons in the address book at once.
+You can use the `mark`, `unmark` and `reset` commands with the wildcard `*` to update the attendance of all currently displayed persons in the address book at once.
 - `mark * tut/1` marks all persons as attended for tutorial 1.
 - `unmark * tut/1` marks all persons as absent for tutorial 1.
 - `reset * tut/1` resets the attendance of all persons for tutorial 1.
