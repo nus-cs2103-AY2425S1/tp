@@ -52,7 +52,7 @@ AssignCommand -> Model : getUiState()
 alt viewing Vendor Details
     AssignCommand -> Model : getViewedVendor()
     AssignCommand -> Model : resolveEvent(selectedIndex)
-    
+
     alt vendor already assigned to event
         AssignCommand -> AssignCommand : throw CommandException
     else
@@ -61,7 +61,7 @@ alt viewing Vendor Details
 else viewing Event Details
     AssignCommand -> Model : getViewedEvent()
     AssignCommand -> Model : resolveVendor(selectedIndex)
-    
+
     alt event already contains vendor
         AssignCommand -> AssignCommand : throw CommandException
     else
