@@ -38,13 +38,13 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `paid 3 f/ 6` : Marks the 3rd contact shown in the current list as paid and sets the policy renewal frequency to 6 months.
+   * `paid 3 f/6` : Marks the 3rd contact shown in the current list as paid and sets the policy renewal frequency to 6 months.
 
    * `unpaid 3` : Marks the 3rd contact shown in the current list as unpaid and changes the policy renewal frequency to 0.
 
    * `clear` : Deletes all contacts.
 
-   * `find n/ john`  : Displays all contacts with name(s) matching "john"
+   * `find n/john`  : Displays all contacts with name(s) matching "john"
 
    * `exit` : Exits the app.
 
@@ -89,7 +89,7 @@ Format: `help`
 
 Adds a person to the FART book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] b/BIRTHDAY [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -260,14 +260,14 @@ Furthermore, certain edits can cause the FART to behave in unexpected ways (e.g.
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                              |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/11 09 2001 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                       |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                           |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                   |
-| **Find**   | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`find e/jameslee@example.com`                                                                                       |
-| **List**   | `list`                                                                                                                                                                                        |
-| **Help**   | `help`                                                                                                                                                                                        |
-| **Paid**   | `paid INDEX f/FREQUENCY`<br> e.g., `paid 3 f/ 3`                                                                                                                                              |
-| **Unpaid** | `unpaid INDEX`<br> e.g., `unpaid 3`                                                                                                                                                           |
+| Action     | Format, Examples                                                                                                                                                                                |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] b/BIRTHDAY [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/11 09 2001 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                         |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                             |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                     |
+| **Find**   | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`find e/jameslee@example.com`                                                                                         |
+| **List**   | `list`                                                                                                                                                                                          |
+| **Help**   | `help`                                                                                                                                                                                          |
+| **Paid**   | `paid INDEX f/FREQUENCY`<br> e.g., `paid 3 f/ 3`                                                                                                                                                |
+| **Unpaid** | `unpaid INDEX`<br> e.g., `unpaid 3`                                                                                                                                                             |
