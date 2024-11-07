@@ -2,12 +2,30 @@
 
 ![Ui](docs/images/Ui.png)
 
-Product name: Grub
+# Grub 🍔
+Keep your dining options at the tip of your fingers with Grub! 
 
-Target Audience:
-Diners
+## 🤔 What is Grub?
 
-Value Proposition: 
+Grub is a desktop app for managing your dining options, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+
+**Target Audience:** Diners
+
+**Value Proposition:** 
 It offers a curated list of nearby restaurants tailored to your preferences, ensuring quick and efficient searches for local dining options.
+
+## 📦 Features
+Refer to the [User Guide](https://ay2425s1-cs2103-f12-3.github.io/tp/UserGuide.html#features) for more details on the features.
+
+## 📋 Requirements
+- [Java 17](https://www.oracle.com/java/technologies/downloads/#java17)
+
+## 📖 User Guide
+[Link to the User Guide](https://ay2425s1-cs2103-f12-3.github.io/tp/UserGuide.html)
+
+## 🛠️ Developer Guide
+[Link to the Developer Guide](https://ay2425s1-cs2103-f12-3.github.io/tp/DeveloperGuide.html)
+
+## 🤝 Acknowledgements
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
