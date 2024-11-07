@@ -22,7 +22,6 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SetThresholdCommand;
 import seedu.address.logic.commands.UnassignProductCommand;
-import seedu.address.logic.commands.UpdateMaxStockLevelCommand;
 import seedu.address.logic.commands.UpdateStockLevelCommand;
 import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.commands.ViewSupplierCommand;
@@ -113,9 +112,6 @@ public class AddressBookParser {
 
         case UpdateStockLevelCommand.COMMAND_WORD:
             return new UpdateStockLevelCommandParser().parse(arguments);
-
-        case UpdateMaxStockLevelCommand.COMMAND_WORD:
-            return new UpdateMaxStockLevelCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
