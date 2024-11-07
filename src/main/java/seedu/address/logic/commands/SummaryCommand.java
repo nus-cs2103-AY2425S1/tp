@@ -25,7 +25,7 @@ public class SummaryCommand extends Command {
             + "START_MONTH must be before or equal to END_MONTH.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_START_MONTH + "2024-09 " + PREFIX_END_MONTH + "2024-12";
 
-    public static final String MESSAGE_SUCCESS = "The total amount of transactions from %s to %s is: $%.2f";
+    public static final String MESSAGE_SUCCESS = "The total amount of transactions from %s to %s is: %s";
     private final TransactionDatePredicate predicate;
 
     /**
@@ -45,8 +45,14 @@ public class SummaryCommand extends Command {
         }
         model.updateTransactionListPredicate(predicate);
         double summary = model.getFilteredTransactionList().stream().mapToDouble(Transaction::getAmount).sum();
+        String sumString;
+        if (summary < 0) {
+            sumString = String.format("-$%.2f", -summary);
+        } else {
+            sumString = String.format("$%.2f", summary);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, predicate.getFormattedStartDate(),
-                predicate.getFormattedEndDate(), summary));
+                predicate.getFormattedEndDate(), sumString));
     }
 
     @Override

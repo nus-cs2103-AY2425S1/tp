@@ -65,7 +65,7 @@ public class SummaryCommandTest {
         showPersonAtIndex(model, Index.fromOneBased(3));
         model.updateTransactionList(CARL.getTransactions());
         assertCommandSuccess(summaryCommand, model, String.format(SummaryCommand.MESSAGE_SUCCESS,
-                        predicate.getFormattedStartDate(), predicate.getFormattedEndDate(), -1000.0), expectedModel);
+                predicate.getFormattedStartDate(), predicate.getFormattedEndDate(), "-$1000.00"), expectedModel);
         // multiple months
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -77,7 +77,8 @@ public class SummaryCommandTest {
         showPersonAtIndex(model, Index.fromOneBased(3));
         model.updateTransactionList(CARL.getTransactions());
         assertCommandSuccess(summaryCommandMultipleMonths, model, String.format(SummaryCommand.MESSAGE_SUCCESS,
-                        predicate.getFormattedStartDate(), predicate.getFormattedEndDate(), -1100.0), expectedModel);
+                        predicate.getFormattedStartDate(), predicate.getFormattedEndDate(), "-$1100.00"),
+                expectedModel);
     }
 
     @Test
