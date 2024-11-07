@@ -12,7 +12,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.volunteer.VolunteerNameContainsKeywordPredicate;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code FindVolunteerCommand}.
+ */
 public class FindVolunteerCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -22,13 +27,14 @@ public class FindVolunteerCommandTest {
     public void execute_volunteersFound_success() {
         // Search for a volunteer name that exists in the volunteer list
         String searchString = "Alice"; // Replace with an actual volunteer name in getTypicalVolunteerList()
-        FindVolunteerCommand command = new FindVolunteerCommand(searchString);
-        // Update expected model to show volunteers containing the search string
-        expectedModel.updateFilteredVolunteerList(volunteer -> volunteer.getName().toString().toLowerCase()
-                .contains(searchString.toLowerCase()));
+        VolunteerNameContainsKeywordPredicate predicate = new VolunteerNameContainsKeywordPredicate(searchString);
+        FindVolunteerCommand command = new FindVolunteerCommand(predicate);
 
-        String expectedMessage = String.format(FindVolunteerCommand.MESSAGE_VOLUNTEER_FOUND, expectedModel
-                .getFilteredVolunteerList().size(), searchString);
+        // Update expected model to show volunteers containing the search string
+        expectedModel.updateFilteredVolunteerList(predicate);
+
+        String expectedMessage = String.format(FindVolunteerCommand.MESSAGE_VOLUNTEER_FOUND,
+                expectedModel.getFilteredVolunteerList().size(), searchString);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -36,7 +42,8 @@ public class FindVolunteerCommandTest {
     public void execute_noVolunteersFound_failure() {
         // Search for a name that does not match any volunteers
         String searchString = "NonExistentName";
-        FindVolunteerCommand command = new FindVolunteerCommand(searchString);
+        VolunteerNameContainsKeywordPredicate predicate = new VolunteerNameContainsKeywordPredicate(searchString);
+        FindVolunteerCommand command = new FindVolunteerCommand(predicate);
 
         String expectedMessage = String.format(FindVolunteerCommand.MESSAGE_VOLUNTEER_NOT_FOUND, searchString);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -45,7 +52,8 @@ public class FindVolunteerCommandTest {
     @Test
     public void execute_emptySearchString_throwsCommandException() {
         String searchString = ""; // Empty search string
-        FindVolunteerCommand command = new FindVolunteerCommand(searchString);
+        VolunteerNameContainsKeywordPredicate predicate = new VolunteerNameContainsKeywordPredicate(searchString);
+        FindVolunteerCommand command = new FindVolunteerCommand(predicate);
 
         assertCommandFailure(command, model, String.format(FindVolunteerCommand.MESSAGE_VOLUNTEER_NOT_FOUND,
                 searchString));
@@ -53,14 +61,16 @@ public class FindVolunteerCommandTest {
 
     @Test
     public void equals() {
-        FindVolunteerCommand findAliceCommand = new FindVolunteerCommand("Alice");
-        FindVolunteerCommand findBobCommand = new FindVolunteerCommand("Bob");
+        VolunteerNameContainsKeywordPredicate predicateAlice = new VolunteerNameContainsKeywordPredicate("Alice");
+        VolunteerNameContainsKeywordPredicate predicateBob = new VolunteerNameContainsKeywordPredicate("Bob");
+        FindVolunteerCommand findAliceCommand = new FindVolunteerCommand(predicateAlice);
+        FindVolunteerCommand findBobCommand = new FindVolunteerCommand(predicateBob);
 
         // same object -> returns true
         assertTrue(findAliceCommand.equals(findAliceCommand));
 
         // same values -> returns true
-        FindVolunteerCommand findAliceCommandCopy = new FindVolunteerCommand("Alice");
+        FindVolunteerCommand findAliceCommandCopy = new FindVolunteerCommand(predicateAlice);
         assertTrue(findAliceCommand.equals(findAliceCommandCopy));
 
         // different types -> returns false
@@ -69,16 +79,17 @@ public class FindVolunteerCommandTest {
         // null -> returns false
         assertFalse(findAliceCommand.equals(null));
 
-        // different searchString -> returns false
+        // different predicate -> returns false
         assertFalse(findAliceCommand.equals(findBobCommand));
     }
 
     @Test
     public void toStringMethod() {
         String searchString = "Alice";
-        FindVolunteerCommand findVolunteerCommand = new FindVolunteerCommand(searchString);
+        VolunteerNameContainsKeywordPredicate predicate = new VolunteerNameContainsKeywordPredicate(searchString);
+        FindVolunteerCommand findVolunteerCommand = new FindVolunteerCommand(predicate);
 
-        String expected = "FindVolunteerCommand[searchString=" + searchString + "]";
+        String expected = "FindVolunteerCommand[predicate=" + predicate.toString() + "]";
         assertEquals(expected, findVolunteerCommand.toString());
     }
 }

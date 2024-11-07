@@ -108,6 +108,7 @@ public class CommandTestUtil {
             + "31/02/2023"; // Invalid date
     public static final String INVALID_EVENT_START_TIME_DESC = " " + EVENT_PREFIX_START_TIME + "30:00"; // Invalid time
     public static final String INVALID_EVENT_END_TIME_DESC = " " + EVENT_PREFIX_END_TIME + "99:99"; // Invalid time
+    public static final String INVALID_EVENT_END_TIME_BEFORE_START_DESC = " " + EVENT_PREFIX_END_TIME + "07:00";
     public static final String INVALID_EVENT_LOCATION_DESC = " " + EVENT_PREFIX_LOCATION
             + ""; // Empty location not allowed
     public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + EVENT_PREFIX_DESCRIPTION
