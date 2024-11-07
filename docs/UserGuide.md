@@ -87,17 +87,19 @@ again, type `help` and press Enter.
 of replacing S00001).
 
 * Parameters can be in any order.
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n\NAME p\PHONE_NUMBER`, `p\PHONE_NUMBER n\NAME` is also acceptable.
 
 * Items in square brackets are optional.
-  e.g. `s/SUBJECT [s/MORE_SUBJECTS]` can be used as `s/SUBJECT` or `s/SUBJECT s/MORE_SUBJECTS`.
+  e.g. `s\SUBJECT [s\MORE_SUBJECTS]` can be used as `s\SUBJECT` or `s\SUBJECT s\MORE_SUBJECTS`.
 
 * Items with `...` after them can be repeated.
-  e.g. `s/SUBJECT [s/MORE_SUBJECTS]...` can be used as `s/SUBJECT`, `s/SUBJECT s/SUBJECT`, `s/SUBJECT s/SUBJECT s/SUBJECT`.
+  e.g. `s\SUBJECT [s\MORE_SUBJECTS]...` can be used as `s\SUBJECT`, `s\SUBJECT s\SUBJECT`, `s\SUBJECT s\SUBJECT s\SUBJECT`.
 
 * Commands are case-sensitive (e.g., `add` is not the same as `Add`). Hence, commands should be in lowercase.
 
 * Parameters are case-insensitive (e.g., `Science`, `SCIENCE`, `science` are treated as the same).
+
+* Leading and trailing spaces will be removed from the parameters. Hence, the length of the parameters is not affected by the leading and trailing spaces.
 
 * Extraneous parameters for commands that do not take in parameters (such as `tracksubject`,`help`, `list`, `exit` and `clear`) will
 be ignored.<br>
@@ -113,30 +115,29 @@ lines as space characters surrounding line-breaks may be omitted when copied ove
 
 Adds a new student to the student management system.
 
-Format: `add n/NAME i/NRIC yg/YEARGROUP p/PHONE e/EMAIL a/ADDRESS s/SUBJECT [s/MORE_SUBJECTS]...`
+Format: `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...`
 
 #### Parameters Constraints:
-* `NAME` cannot be empty and should contain only alphabets and spaces. The maximum length is 255 characters including spaces.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Any leading or trailing whitespace in the name will be trimmed, so the spaces in the very front or back are not considered in the length.
-</div>
-
-* `PHONE_NUMBER` should be an 8-digit number.
-* `EMAIL` is compulsory and should follow the format username@domain.
-* `ADDRESS` is compulsory.
-* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers. It should start with one of 
-`S, T, F, G, M` followed by a 7-digit number and another alphabet (e.g., S1234567A).
+* `NAME` should not be blank and should between 2 and 255 characters long. Names should only contain alphabets, spaces,
+and the special characters (-/') excluding parentheses (). Names should start and end with an alphabet,
+and there should not be more than one consecutive special character.
+* `NRIC` is compulsory and should follow the format of Singaporean IC and FIN numbers. It should start with one of
+  `S, T, F, G, M` followed by a 7-digit number and another alphabet (e.g., S1234567A).
 * `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
-secondary school years 7 - 13).
-* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Only subjects that are available
-within the tuition centre will be allowed. Subjects are case-insensitive (i.e. science, Science, SCIENCE will be treated
-as the same).
+  secondary school years 7 - 13).
+* `PHONE_NUMBER` should only contain number. It should be between 4 and 20 digits long with no spaces in between.
+* `EMAIL` should follow the format username@domain.
+* `ADDRESS` allow any characters and should not be empty. The maximum length is 255 characters including spaces in between. 
+* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the `s\` field. Only subjects that are available
+within the tuition centre will be allowed.
+* `[MORE_SUBJECTS]` is optional and can be repeated to add more subjects.
+> **Note:** repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject will be added. 
 * A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
 message and can be used for `addsubject`, `edit`, `detail` and `delete`.
 
 Examples:
-* `add n/Sam Tan p/81003999 e/samtan@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
+* `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street \Science`
+* `add n\John Doe i\S1234567A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`
 
 ![Add Success Message](/images/add.png)
 
@@ -146,8 +147,11 @@ Removes a student from the tuition center management system.
 
 Format: `delete STUDENT_ID`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
   automatically assigned when the student contact is first added and can be found by viewing the student's details.
+> **Note:** The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
+` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 (instead
+of replacing S00001).
 
 Examples:
 * `delete S00001`
@@ -158,18 +162,18 @@ Examples:
 
 Edits an existing student's details in the system.
 
-Format: `edit STUDENT_ID FIELD/NEW_VALUE`
+Format: `edit STUDENT_ID FIELD\NEW_VALUE`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
-automatically assigned when the student contact is first added and can be found by viewing the student's details.
-* `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
-* `NEW_VALUE` should follow the format for the respective field.
-* Although editing the IC number is allowed, it must not match any other student's IC number in the system. 
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
+  automatically assigned when the student contact is first added and can be found by viewing the student's details.
+* `FIELD` can be one of: Name(`n\ `), Phone Number(`p\ `), Email(`e\ `), Address(`a\ `), IC Number(`i\ `) or Subject taken(`s\ `).
+* `NEW_VALUE` should follow the format for the respective field. May refer to the constraints in the [add feature](#adding-a-student--add) section.
+* Although editing the NRIC is allowed, it must not match any other student's NRIC in the system. 
 An error message will be shown if a duplicate is detected.
 
 Examples:
-* `edit S00001 a/New_Address`
-* `edit s00002 p/91234567 a/New_Address`
+* `edit S00001 a\New_Address`
+* `edit s00002 p\91234567 a\New_Address`
 
 ![Edit Success Message](/images/edit.png)
 
@@ -177,93 +181,107 @@ Examples:
 
 Shows a list of all students in the system.
 
-Format: `view`
+Format: `list`
+
+![List Success Message](/images/list.png)
 
 ### Viewing a student's detail : `detail`
 
-Shows the details of a specific student.
+Shows the details of a specific student. 
 
 Format: `detail STUDENT_ID`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
   automatically assigned when the student contact is first added and can be found by viewing the student's details.
+* The student's details will be displayed in a pop-up window.
+* User may use keyboard shortcut `B` to close the pop-up window.
 
 Examples:
 * `detail S00001`
 
-![View Success Message](/images/view.png)
+![Detail Success Message](/images/detail.png)
 
+## Searching and Sorting
 ### Finding a student : `find`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `find NAME [MORE_NAMES]`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive (i.e. John, JOHN, john are all treated the same way).
 * You can only search for a student by their name.
 * Students matching at least one keyword will be returned.
-
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+After finding, you can use `list` command to return to the full list of students.
+</div>
 Examples:
 * `find John` returns `John` and `John Doe`
 * `find John Jane` returns any student having names `John` or `Jane`
+* `find J` returns any student having names starting with `J`
 
 ![Find Success Message](/images/find.png)
+
+### Sorting students : `sort`
+
+Sort the list of students based on a specified field.
+
+Format: `sort by\FIELD`
+
+* `FIELD` can be either `name`, `subject`, `studentId` or `yearGroup`.
+* Sorting by name will sort students in lexicographical ascending order of their names.
+* Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
+* Sorting by studentId will sort students based in ascending order based on their studentId.
+* Sorting by yearGroup will sort students in ascending order based on their year group.
+Examples:
+* `sort by\name`
+* `sort by\subject`
+* `sort by\yearGroup`
+* `sort by\studentId`
+
+![Sort Success Message](/images/sort.png)
 
 ### Filtering the list : `filter`
 
 Shows a list of students filtered by year group or subject.
 
-Format: `filter FIELD/VALUE`
+Format: `filter FIELD\VALUE`
 
 * You can only filter by EITHER year group or class.
 * You can only filter one value (eg. filter by Science only).
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+After filtering, you can use `list` command to return to the full list of students.
+</div>
 
 Examples:
-* `filter yg/2` shows only students who belong to year group 2
-* `filter s/Science` shows only students who take Science as a subject
+* `filter yg\2` shows only students who belong to year group 2
+* `filter s\Science` shows only students who take Science as a subject
 
 ![Filter Success Message](/images/filter.png)
 
+## Subject Management
 ### Adding subject(s) to a student : `addsubject`
 
 Adds one or more subjects to an existing student's record.
 
-Format: `addsubject STUDENT_ID s/SUBJECT`
+Format: `addsubject STUDENT_ID s\SUBJECT`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
   automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Subjects are case-insensitive
   (i.e. science, SCIENCE, Science are treated the same way).
-* Subjects available are English, Math, Chinese, Science
+> **Note:** repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject will be added.
+* Subjects available: English, Chinese, Malay, Tamil, Math, Further Math, Science, History, Geography, Literature,
+Economics, Accounting, Business, Physics, Chemistry, Biology and Computing.
 
 Examples:
-* `addsubject S00001 s/Science`
+* `addsubject S00001 s\Science`
+* `addsubject S00002 s\Science s\Math`
 
 ![Addsubject Success Message](/images/addsubject.png)
 
-### Sorting students : `sort`
-
-Sorts the list of students based on a specified field.
-
-Format: `sort s/FIELD`
-
-* `FIELD` can be either `name`, `subject`, `studentID` or `yearGroup`.
-* Sorting by name will sort students in lexicographical ascending order of their names.
-* Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
-* Sorting by studentID will sort students based in ascending order based on their studentID.
-* Sorting by yearGroup will sort students in ascending order based on their year group.
-
-Examples:
-* `sort s/name`
-* `sort s/subject`
-* `sort s/yearGroup`
-
-
-![Sort Success Message](/images/sort.png)
-
 ### Tracking student count for each subject : `tracksubject`
 
-Displays a window that shows how many students are taking each of the 4 subjects.
+Displays a window that shows how many students are taking each of all the subjects.
 
 Format: `tracksubject`
 
@@ -273,9 +291,14 @@ are taking each of the subjects.
 
 ![TrackSubject Success Message](/images/tracksubject.png)
 
+## Utility Features
 ### Clearing all entries : `clear`
 
 Clears all student entries from the system.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This action is irreversible. All student entries will be deleted permanently.
+</div>
 
 Format: `clear`
 

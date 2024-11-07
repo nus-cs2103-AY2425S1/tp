@@ -40,7 +40,7 @@ public class EditCommand extends Command {
             + "- [FIELD/VALUE: p/98765432]...\n";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Student %1$s (%2$s)’s details successfully updated.\n"
-            + "Here is the updated information %3$s";
+            + "Here is the updated information\nName: %3$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final StudentId studentId;
