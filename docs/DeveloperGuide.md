@@ -102,8 +102,7 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -159,8 +158,7 @@ How the parsing works:
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="890" />
 
@@ -187,8 +185,7 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -211,7 +208,25 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<!-- TODO!! @Everybody --> 
+### Confirmation prompts
+
+Some commands such as `clear`, `cdelete` and `rdelete` prompts the user for confirmation.
+
+How confirmation prompts work:
+
+* The `CommandResult` class now has different types:
+  * **`ORDINARY`**: A regular result, representing a command's success.
+  * **`SHOW_HELP`**: The help window should be shown to the user.
+  * **`EXIT`**: The app should exit.
+  * **`PROMPT`**: The app should prompt the user for confirmation.
+* There is a new `Supplier<CommandResult>` field in the `CommandResult` class, which will be applied when the user 
+  confirms the prompt.
+* In commands that will prompt for confirmation, the `execute` method returns a `CommandResult` that contains an 
+  additional `Supplier<Command>` and prompt message.
+* The `LogicManager` detects if the result of a command is of the type `PROMPT`, and enters a state where it waits for
+  a confirmation.
+* `LogicManager` also keeps track of the most recent `CommandResult`. When a confirmation is obtained, it will apply
+  the supplier in the previous `CommandResult`.
 
 --------------------------------------------------------------------------------------------------------------------
 
