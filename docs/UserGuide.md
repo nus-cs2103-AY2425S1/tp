@@ -47,7 +47,7 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-3/tp/releases/).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for the WardWatch application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wardwatch.jar` command to run the application.<br>
 
@@ -92,30 +92,30 @@ There are 5 CLI command formats as shown below:
 4) `COMMAND_WORD INDEX PARAMETERS`
 </box>
 
-For more information on the formats of `PARAMETERS`, please refer to [Input parameters](#input-parameters).
+For more information on the format of `PARAMETERS`, please refer to [Input parameters](#input-parameters).
 
 **Other things to note in this User Guide:**
 1) Items in square brackets are optional:<br>
-   e.g `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
+   - `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
 2) Parameters can be in any order: <br>
-   `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`
+   - `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`.
 3) Extra parameters for commands without parameters (such as `help`, `list`, `exit` and `clear`) will be ignored: <br>
-   `help 123` is interpreted as `help`.
+   - `help 123` is interpreted as `help`.
 4) Command word is not case-sensitive: <br>
-   e.g. `list` and `LIST` are both valid commands.
+   - `list` and `LIST` are both valid commands.
 5) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 **Save and Storage information:**
 
-- AddressBook data are saved in the [hard disk](#glossary) automatically after any command that changes the data. There is no need to save manually.
+- WardWatch data are saved in the [hard disk](#glossary) automatically after any command that changes the data. There is no need to save manually.
 
-- AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+- WardWatch data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, WardWatch will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the WardWatch to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 [Back to Table of Contents](#table-of-contents)
@@ -415,7 +415,7 @@ Format: `scheduleall`
 # FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WardWatch home folder.
 
 [Back to Table of Contents](#table-of-contents)
 
