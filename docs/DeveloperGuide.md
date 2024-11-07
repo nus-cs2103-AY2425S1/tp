@@ -391,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 2b1. System shows an error message.
 
-    Use case ends.  
+    Use case ends.
 
 **Use case: UC5 - View person contact**
 
