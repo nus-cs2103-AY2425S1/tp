@@ -682,7 +682,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **PENDING**: The internship application is currently in progress.
     - **REJECTED**: The user has rejected or been rejected from this internship application.
     - **ACCEPTED**: The user has accepted the offer for this internship.
-  
+
 
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
@@ -731,41 +731,41 @@ testers are expected to do more *exploratory* testing.
 1. Opening Help window via Command Line
 
    1. Prerequisite: Help window is not open.
-   
+
    2. Test case: `/help` <br>
    Expected: Help window opens.
 
 1. Opening Help window via `F1`
 
     1. Prerequisite: Help window is not open.
-   
+
     2. Test case: Click the `F1` key on your keyboard. <br>
        Expected: Help window opens.
 
 1. Opening Help window via Tool Bar
 
     1. Prerequisite: Help window is not open.
-   
+
     2. Test case: Click on the `Help` button on the Tool Bar, and then click on the `Help F1` button on the drop down.<br>
        Expected: Help window opens.
-   
+
 1. Minimising the Help window
 
    1. Prerequisite: Help window is not open.
-   
+
    2. Test case: `/help` <br>
       Expected: Help window opens.
-   
-   3. Test case: Click on the minimise buttn of the Help window.<br>
+
+   3. Test case: Click on the minimise button of the Help window.<br>
    Expected: Help window minimises.
-   
+
    4. Test case: `/help` after the Help window is minimised.<br>
    Expected: Help window does not pop open.
 
 1. Closing the Help window
 
    1. Prerequisite: Help window is open.
-   
+
    2. Test case: Click on the close button on the Help window. <br>
    Expected: Help window closes.
 
