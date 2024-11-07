@@ -88,7 +88,7 @@ public class TuteeTest {
         assertFalse(CLARA.equals(editedClara));
 
         // different hours -> returns false
-        editedClara = new TuteeBuilder(CLARA).withAddress(VALID_HOURS_DEACON).build();
+        editedClara = new TuteeBuilder(CLARA).withHours(VALID_HOURS_DEACON).build();
         assertFalse(CLARA.equals(editedClara));
     }
 

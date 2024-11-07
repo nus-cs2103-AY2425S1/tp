@@ -41,18 +41,6 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
     }
 
     /**
-     * Constructs a {@code JsonAdaptedTutor} with the given tutor details.
-     */
-    @JsonCreator
-    public JsonAdaptedTutor(@JsonProperty("name") String name,
-                            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                            @JsonProperty("address") String address, @JsonProperty("hours") String hours,
-                            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
-
-        super(name, phone, email, address, hours, "Tutor", subjects);
-    }
-
-    /**
      * Converts a given {@code Tutor} into this class for Jackson use.
      */
     public JsonAdaptedTutor(Person source) {
@@ -70,6 +58,7 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tutor.
      */
     public Tutor toModelType() throws IllegalValueException {
+        int id = this.getId();
         String name = this.getName();
         String phone = this.getPhone();
         String email = this.getEmail();

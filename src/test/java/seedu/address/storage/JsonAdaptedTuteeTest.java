@@ -42,7 +42,7 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_HOURS,
+                new JsonAdaptedTutee(0, INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_HOURS,
                         VALID_SUBJECTS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -50,7 +50,7 @@ public class JsonAdaptedTuteeTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(null, VALID_PHONE, VALID_EMAIL,
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(0, null, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_HOURS, VALID_SUBJECTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -59,7 +59,7 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, INVALID_PHONE, VALID_EMAIL,
+                new JsonAdaptedTutee(0, VALID_NAME, INVALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, VALID_HOURS, VALID_SUBJECTS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -67,7 +67,7 @@ public class JsonAdaptedTuteeTest {
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, null, VALID_EMAIL,
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(0, VALID_NAME, null, VALID_EMAIL,
                 VALID_ADDRESS, VALID_HOURS, VALID_SUBJECTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -76,7 +76,7 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, INVALID_EMAIL,
+                new JsonAdaptedTutee(0, VALID_NAME, VALID_PHONE, INVALID_EMAIL,
                         VALID_ADDRESS, VALID_HOURS, VALID_SUBJECTS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -84,7 +84,7 @@ public class JsonAdaptedTuteeTest {
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, null,
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(0, VALID_NAME, VALID_PHONE, null,
                 VALID_ADDRESS, VALID_HOURS, VALID_SUBJECTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -93,7 +93,7 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                new JsonAdaptedTutee(0, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         INVALID_ADDRESS, VALID_HOURS, VALID_SUBJECTS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -101,7 +101,7 @@ public class JsonAdaptedTuteeTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(0, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 null, VALID_HOURS, VALID_SUBJECTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -110,7 +110,7 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidHours_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                new JsonAdaptedTutee(0, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, INVALID_HOURS, VALID_SUBJECTS);
         assertThrows(IllegalValueException.class, tutee::toModelType);
     }
@@ -118,7 +118,7 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_nullHours_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                new JsonAdaptedTutee(0, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, null, VALID_SUBJECTS);
         assertThrows(IllegalValueException.class, tutee::toModelType);
     }
@@ -128,7 +128,7 @@ public class JsonAdaptedTuteeTest {
         List<JsonAdaptedSubject> invalidSubjects = new ArrayList<>(VALID_SUBJECTS);
         invalidSubjects.add(new JsonAdaptedSubject(INVALID_SUBJECTS));
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                new JsonAdaptedTutee(0, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, INVALID_HOURS, invalidSubjects);
         assertThrows(IllegalValueException.class, tutee::toModelType);
     }

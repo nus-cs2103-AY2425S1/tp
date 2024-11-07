@@ -1,64 +1,64 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
+    "id": 0,
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
+    "address" : "jurong, 123456",
     "hours" : "1",
-    "tags" : [ "friends" ],
     "role" : "Tutor",
     "subjects" : [ "math" ]
   }, {
+    "id": 1,
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
+    "address" : "Clementi, 345212",
     "hours" : "2",
-    "tags" : [ "owesMoney", "friends" ],
     "subjects" : [ "english" ],
     "role" : "Tutor"
   }, {
+    "id": 2,
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
+    "address" : "wall street, 987543",
     "hours" : "3",
-    "tags" : [ ],
     "role" : "Tutor"
   }, {
+    "id": 3,
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
+    "address" : "10th street, 123456",
     "hours" : "4",
-    "tags" : [ "friends" ],
     "role" : "Tutee",
     "subjects" : [ "Math" ]
   }, {
+    "id": 4,
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "address" : "michegan ave",
+    "address" : "michegan ave, 878777",
     "hours" : "5",
-    "tags" : [ ],
     "role" : "Tutee",
     "subjects" : [ "English" ]
   }, {
+    "id": 5,
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "address" : "little tokyo",
+    "address" : "little tokyo, 123456",
     "hours" : "6",
-    "tags" : [ ],
     "role" : "Tutee"
   }, {
+    "id": 6,
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "address" : "4th street",
+    "address" : "4th street, 897978",
     "hours" : "7",
-    "tags" : [ ],
     "role" : "Tutee"
   } ]
 }

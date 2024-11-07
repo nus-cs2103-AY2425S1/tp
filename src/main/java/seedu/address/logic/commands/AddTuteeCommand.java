@@ -31,12 +31,13 @@ public class AddTuteeCommand extends Command {
             + "[" + PREFIX_HOURS + " HOURS] "
             + "[" + PREFIX_SUBJECT + " SUBJECT]… \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " John Doe "
-            + PREFIX_PHONE + " 98765432 "
-            + PREFIX_EMAIL + " johndoe@example.com "
-            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
-            + PREFIX_HOURS + " 6 "
-            + PREFIX_SUBJECT + " Math ";
+
+            + PREFIX_NAME + " Mary Jane "
+            + PREFIX_PHONE + " 87802631 "
+            + PREFIX_EMAIL + " maryjane@example.com "
+            + PREFIX_ADDRESS + " Tampines, 456788 "
+            + PREFIX_HOURS + " 10 "
+            + PREFIX_SUBJECT + " Science";
 
     public static final String MESSAGE_SUCCESS = "New tutee added: \n %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This tutee already exists in VolunTier";

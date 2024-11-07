@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
@@ -123,5 +124,13 @@ public class PersonHaveSubjectPredicateTest {
         // Test case: Subject that includes special characters
         predicate = new PersonHaveSubjectPredicate("science!");
         assertFalse(predicate.test(person));
+    }
+
+    @Test
+    public void test_toString() {
+        String subject = "math";
+        PersonHaveSubjectPredicate predicate = new PersonHaveSubjectPredicate(subject);
+        String expectedString = "seedu.address.model.person.PersonHaveSubjectPredicate{subject to find=math}";
+        assertEquals(expectedString, predicate.toString());
     }
 }

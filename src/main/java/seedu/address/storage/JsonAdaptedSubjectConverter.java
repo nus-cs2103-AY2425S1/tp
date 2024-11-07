@@ -19,6 +19,6 @@ public class JsonAdaptedSubjectConverter extends AbstractBeanField<List<JsonAdap
             return new ArrayList<>();
         }
         List<String> stringList = Arrays.asList(value.split(";"));
-        return stringList.stream().map(JsonAdaptedSubject::new).toList();
+        return stringList.stream().map(String::trim).map(JsonAdaptedSubject::new).toList();
     }
 }

@@ -134,6 +134,11 @@ public class ModelManager implements Model {
         return versionedAddressBook.getAssociatedPeople(person);
     }
 
+    @Override
+    public List<Lesson> getAssociatedLessons(Person person) {
+        return versionedAddressBook.getAssociatedLessons(person);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

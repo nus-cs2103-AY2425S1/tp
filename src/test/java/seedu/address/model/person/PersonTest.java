@@ -91,7 +91,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different hours -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_HOURS_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withHours(VALID_HOURS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different subjects -> everything else same (should be user error and should be the same person)
@@ -107,5 +107,43 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", hours=" + ALICE.getHours()
                 + ", subjects=" + ALICE.getSubjects() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    /**
+     * Tests that the setSubject method successfully adds a subject to the person's list of subjects.
+     */
+    @Test
+    public void setSubject_success() {
+        Person person = new PersonBuilder().build();
+        person.setSubject(new Subject(VALID_SUBJECT_MATH));
+        assertTrue(person.getSubjects().contains(new Subject(VALID_SUBJECT_MATH)));
+    }
+
+    /**
+     * Tests that the setSubject method throws a NullPointerException when the input is null.
+     */
+    @Test
+    public void setSubject_nullInput_throwsNullPointerException() {
+        Person person = new PersonBuilder().build();
+        assertThrows(NullPointerException.class, () -> person.setSubject(null));
+    }
+
+
+    /**
+     * Tests that the hashcode of two different persons with the same attributes are the same.
+     */
+    @Test
+    public void hashCode_sameAttributes_sameHashCode() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+    }
+
+    /**
+     * Tests that the hashcode of two different persons with different attributes are different.
+     */
+    @Test
+    public void hashCode_differentAttributes_differentHashCode() {
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
     }
 }

@@ -24,6 +24,7 @@ public class AddTutorCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor to VolunTier. \n"
             + "Parameters: "
+
             + PREFIX_NAME + " NAME "
             + PREFIX_PHONE + " PHONE_NUMBER "
             + PREFIX_EMAIL + " EMAIL "
@@ -31,12 +32,13 @@ public class AddTutorCommand extends Command {
             + "[" + PREFIX_HOURS + " HOURS] "
             + "[" + PREFIX_SUBJECT + " SUBJECT]… \n"
             + "Example: " + COMMAND_WORD + " "
+
             + PREFIX_NAME + " John Doe "
             + PREFIX_PHONE + " 98765432 "
             + PREFIX_EMAIL + " johndoe@example.com "
-            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
+            + PREFIX_ADDRESS + " Clementi, 123456 "
             + PREFIX_HOURS + " 6 "
-            + PREFIX_SUBJECT + " Science";
+            + PREFIX_SUBJECT + " Math ";
 
     public static final String MESSAGE_SUCCESS = "New tutor added: \n %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This tutor already exists in VolunTier";
