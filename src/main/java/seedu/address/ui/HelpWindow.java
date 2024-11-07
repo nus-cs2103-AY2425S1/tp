@@ -26,7 +26,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "<<Listing all persons>>\n"
             + "Format: list\n\n"
             + "<<Adding an appointment>>\n"
-            + "Format: appointment NRIC app/APPOINTMENT\n"
+            + "Format: appointment NRIC app/APPOINTMENT\n\n"
             + "<<Editing a person>>\n"
             + "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [r/REMARK] [a/ADDRESS] [t/TAG]\n\n"
             + "<<Locating persons by name>>\n"
