@@ -1,6 +1,5 @@
 .background {
     -fx-background-color: derive(#ffffff, -20%);
-    background-color: #e0e0e0; /* Bright background */
 }
 
 .label {
@@ -301,4 +300,4 @@
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
     -fx-padding: 1 8
-
+}
