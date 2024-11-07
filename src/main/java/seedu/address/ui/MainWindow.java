@@ -239,8 +239,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowPatientInfo()) {
                 showPatientInfo(commandResult.getPatient());
+                logger.info("Showing patient info for: " + commandResult.getPatient().getName());
             } else {
                 hidePatientInfo();
+                logger.info("Hiding patient info panel");
             }
 
             if (commandResult.isShowFilteredAppts()) {

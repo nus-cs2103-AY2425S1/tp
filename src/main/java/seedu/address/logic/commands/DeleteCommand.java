@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.commandresult.CommandResult;
@@ -26,6 +28,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
+
     private final Nric targetNric;
 
     public DeleteCommand(Nric targetNric) {
@@ -41,10 +45,13 @@ public class DeleteCommand extends Command {
                 .findFirst()
                 .orElse(null);
         if (patientToDelete == null) {
+            logger.warning("Patient with NRIC " + targetNric + " not found");
             throw new CommandException(String.format(Messages.MESSAGE_PATIENT_NOT_FOUND, targetNric));
         }
 
         model.deletePatient(patientToDelete);
+        logger.info("Deleted patient: " + patientToDelete);
+
         return new DefaultCommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS,
                 Messages.format(patientToDelete)));
     }
