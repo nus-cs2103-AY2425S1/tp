@@ -47,6 +47,11 @@ public class Student extends Person {
         return daysAttended;
     }
 
+    @Override
+    public int getDaysAttendedValue() {
+        return daysAttended.getValue();
+    }
+
     public Name getNextOfKinName() {
         return nextOfKinName;
     }

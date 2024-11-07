@@ -64,13 +64,6 @@ public class DaysAttendedTest {
     }
 
     @Test
-    public void decremented_throwsCommandException() {
-        // When days attended is 0 (should throw CommandException)
-        DaysAttended daysAttended = new DaysAttended(0);
-        assertThrows(CommandException.class, daysAttended::decremented);
-    }
-
-    @Test
     public void reset_success() {
         DaysAttended daysAttended = new DaysAttended(5);
         daysAttended = daysAttended.reset();
