@@ -17,7 +17,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Reminder;
-import seedu.address.model.person.SortPreference;
+import seedu.address.model.SortPreference;
 import seedu.address.model.tag.Tag;
 
 /**

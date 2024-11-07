@@ -5,7 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SaveSortPreferenceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.SortPreference;
+import seedu.address.model.SortPreference;
 
 /**
  * Parses input arguments and creates a new {@code SaveSortPreference} object
