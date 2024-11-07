@@ -6,12 +6,42 @@
 
 # TAHub Contacts User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+If you are a busy **Computer Science Student** juggling Teaching Assistant roles and struggling to keep track of your 
+many students, TAHub Contacts is a desktop application for you to easily manage your student contact details!
 
-<!-- * Table of Contents -->
-<page-nav-print />
+While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI 
+(Command Line Interface) with typed commands. A perfect fit if you’re already a wizard at the keyboard.
 
 --------------------------------------------------------------------------------------------------------------------
+## Table of Contents 
+- [Quick Start 🚀](#quick-start)
+- [Features 💻](#features)
+
+
+* Viewing help : [`help`](#viewing-help--help)
+* Listing all students : [`list`](#listing-all-persons--list)
+* Clearing all entries : [`clear`](#clearing-all-entries--clear)
+* Adding a student : [`add-student`](#adding-a-person-add)
+* Editing a student : [`edit-student`](#editing-a-person--edit)
+* Finding a student: [`find-student`](#locating-persons-by-name-find)
+* Deleting a student : [`delete-student`](#deleting-a-person--delete)
+* Adding a course: [`add-course`](#)
+* Editing a course: [`edit-course`](#)
+* Deleting a course : [`delete-course`](#)
+* Adding a course tutorial : [`add-tutorial`](#)
+* Deleting a course tutorial : [`delete-tutorial`](#)
+* Enrolling a student : [`enroll`](#)
+* Unenrolling a student : [`unenroll`](#)
+* Marking attendance : [`attend-present`](#)
+* Marking absence : [`attend-absent`](#)
+* Clear attendance : [`attend-clear`](#)
+* Exiting the program : [`exit`](#exiting-the-program--exit)
+* [Saving the data 💾](#saving-the-data)
+* ADVANCED: Editing the data file
+
+- [FAQ ❔](#faq)
+- [Known Issues 🐛](#known-issues)
+- [Command Summary 🧭](#command-summary)
 
 ## Quick start
 
