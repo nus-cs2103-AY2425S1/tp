@@ -74,8 +74,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        this.getRoot().setMinHeight(500);
-        this.getRoot().setMinWidth(600);
+        //this.getRoot().setMinHeight(500);
+        //this.getRoot().setMinWidth(600);
 
         helpTable(helpTable);
         helpMessage.setText(HELP_MESSAGE);
@@ -143,17 +143,17 @@ public class HelpWindow extends UiPart<Stage> {
                         new HelpCommand("Help", "`help`"),
                         new HelpCommand("List", "`list`"),
                         new HelpCommand("Add", "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS "
-                                + "[g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
+                                + "[g/GAME]… [t/TAG]… [pt/TIME-TIME]…`"),
                         new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] "
-                                + "[a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
-                        new HelpCommand("AddGame", "`addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`\n"),
-                        new HelpCommand("EditGame", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`\n"),
-                        new HelpCommand("DeleteGame", "`deletegame INDEX g/GAME`\n"),
-                        new HelpCommand("FavGame", "`favgame INDEX g/GAME`\n"),
-                        new HelpCommand("UnFavGame", "`unfavgame INDEX g/GAME`\n"),
-                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]`\n"),
-                        new HelpCommand("FindTime", "`findtime TIME-TIME [TIME-TIME]`\n"),
-                        new HelpCommand("Delete", "`delete INDEX`\n"),
+                                + "[a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`"),
+                        new HelpCommand("AddGame", "`addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`"),
+                        new HelpCommand("EditGame", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`"),
+                        new HelpCommand("DeleteGame", "`deletegame INDEX g/GAME`"),
+                        new HelpCommand("FavGame", "`favgame INDEX g/GAME`"),
+                        new HelpCommand("UnFavGame", "`unfavgame INDEX g/GAME`"),
+                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]`"),
+                        new HelpCommand("FindTime", "`findtime TIME-TIME [TIME-TIME]`"),
+                        new HelpCommand("Delete", "`delete INDEX`"),
                         new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("Undo", "`undo`"),
                         new HelpCommand("Save", "`save`"),
