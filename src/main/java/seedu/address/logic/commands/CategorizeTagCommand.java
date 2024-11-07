@@ -21,7 +21,8 @@ public class CategorizeTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Categorizes a tag. Changes all occurrences of the specified tag to the desired category.\n"
-            + "Parameters: " + PREFIX_TAG + "TAG (existing tag label) CATEGORY\n"
+            + "Parameters: " + PREFIX_TAG + "TAG (existing tag label)"
+            + " [" + PREFIX_TAG + "TAG (existing tag label)]... CATEGORY\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "CS1101S acads";
 
     public static final String MESSAGE_CAT_TAG_SUCCESS = "Category of tag(s) %1$s has been changed successfully.";
