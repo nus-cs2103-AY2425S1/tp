@@ -10,12 +10,6 @@ import java.util.regex.Pattern;
 import tahub.contacts.commons.core.LogsCenter;
 import tahub.contacts.logic.commands.ClearCommand;
 import tahub.contacts.logic.commands.Command;
-<<<<<<< HEAD
-import tahub.contacts.logic.commands.DeleteCommand;
-import tahub.contacts.logic.commands.EditCommand;
-=======
-import tahub.contacts.logic.commands.EnrollCommand;
->>>>>>> acb482fe914bfc3edc02f3f5df76b4e50803d0a0
 import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
