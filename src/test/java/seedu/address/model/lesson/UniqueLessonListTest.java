@@ -2,6 +2,7 @@ package seedu.address.model.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -11,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.CLARA;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -70,6 +72,15 @@ public class UniqueLessonListTest {
     }
 
     @Test
+    public void setLessons_lessonsNotUnique_throwsDuplicateLessonException() {
+        UniqueLessonList uniqueLessonList = new UniqueLessonList();
+        List<Lesson> replacement = new ArrayList<>();
+        replacement.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        replacement.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        assertThrows(DuplicateLessonException.class, () -> uniqueLessonList.setLessons(replacement));
+    }
+
+    @Test
     public void getSubject_null_throwsNullPointerException() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
         assertThrows(NullPointerException.class, () -> uniqueLessonList.getSubject(null, null));
@@ -108,6 +119,23 @@ public class UniqueLessonListTest {
     }
 
     @Test
+    public void getUniqueSubjectsInLessons_null_throwsNullPointerException() {
+        UniqueLessonList uniqueLessonList = new UniqueLessonList();
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.getUniqueSubjectsInLessons(null));
+    }
+
+    @Test
+    public void getUniqueSubjectsInLessons_singleLesson_returnsUniqueSubjects() {
+        UniqueLessonList uniqueLessonList = new UniqueLessonList();
+        uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        HashSet<Subject> expected = new HashSet<>();
+        expected.add(new Subject("Math"));
+        assertEquals(uniqueLessonList.getUniqueSubjectsInLessons(ALICE), expected);
+        assertEquals(uniqueLessonList.getUniqueSubjectsInLessons(DANIEL), expected);
+    }
+
+
+    @Test
     public void remove_nullLesson_throwsNullPointerException() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
         assertThrows(NullPointerException.class, () -> uniqueLessonList.remove(null));
@@ -137,6 +165,7 @@ public class UniqueLessonListTest {
         UniqueLessonList copy = new UniqueLessonList();
         copy.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
         assertTrue(uniqueLessonList.equals(copy));
+        assertTrue(uniqueLessonList.equals(uniqueLessonList));
 
         UniqueLessonList different = new UniqueLessonList();
         different.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
@@ -147,4 +176,28 @@ public class UniqueLessonListTest {
 
         assertFalse(uniqueLessonList.equals(new UniqueLessonList()));
     }
+
+    @Test
+    public void hashCodeTest_differentObjects_returnFalse() {
+        UniqueLessonList uniqueLessonList = new UniqueLessonList();
+        uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        UniqueLessonList copy = new UniqueLessonList();
+        copy.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        assertNotEquals(uniqueLessonList.hashCode(), copy.hashCode());
+    }
+
+    @Test
+    public void hashCodeTest_sameObjects_returnTrue() {
+        UniqueLessonList uniqueLessonList = new UniqueLessonList();
+        uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        assertEquals(uniqueLessonList.hashCode(), uniqueLessonList.hashCode());
+    }
+
+    @Test
+    public void toStringTest() {
+        UniqueLessonList uniqueLessonList = new UniqueLessonList();
+        uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        assertEquals("[Lesson: tutor Alice Pauline is teaching tutee Daniel Meier Math ]", uniqueLessonList.toString());
+    }
 }
+
