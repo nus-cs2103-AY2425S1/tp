@@ -23,6 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
@@ -38,6 +39,8 @@ public class MarkTaskCommandTest {
             model.addTask(task);
         }
         Person personWithTask = new PersonBuilder().withTasks("todo: buy groceries").build();
+        Task task = new Task(new Description("buy groceries"));
+        model.addTask(task);
         model.addPerson(personWithTask);
         model.assignVendor(personWithTask);
 
