@@ -148,8 +148,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book. The module role pairs are edited with a slightly different syntax which
-is explained below.
+Edits an existing person in the address book.
 
 #### Module-role
 
