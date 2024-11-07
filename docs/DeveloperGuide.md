@@ -328,8 +328,11 @@ The main steps for this execution are:
 Details of the Participation class are included [below](#participation-class).
 </div>
 
-7. Once the enrollment is completed, EnrollCommand returns a **CommandResult** with a message indicating the successful enrollment.
-8. The result then flows back through **LogicManager**.
+<ol start="7">
+    <li>Once the enrollment is completed, EnrollCommand returns a **CommandResult** with a message indicating the successful enrollment.</li>
+    <li>The result then flows back through **LogicManager**.</li>
+</ol>
+
 
 <br>
 
