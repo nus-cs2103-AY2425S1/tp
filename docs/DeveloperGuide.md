@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The event name is invalid or empty.
+* 1a. The event name is invalid.
 
     * 1a1. System shows an error message.
 
@@ -393,6 +393,69 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+---
+
+**Use case: UC03 - View an item**
+
+**MSS**
+1. User enters command to view an item.
+2. System displays success message and switches page to the details of the item.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+
+* 1b. The item does not exist.
+
+  * 1b1. System shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: UC04 - Delete an item**
+
+**MSS**
+1. User enters command to delete an item.
+2. System deletes the item.
+3. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+    Use case ends.
+
+* 1b. The item does not exist.
+
+  * 1b1. System shows an error message.
+
+    Use case ends.
+
+* 1c. The event has associated entities assigned to it.
+
+  * 1c1. System shows an error message.
+
+    Use case ends.
+
+* 2a. The item is currently being viewed.
+
+  * 2a1. System returns to the main page.
+
+     Use case ends.
+
+---
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -426,6 +489,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. **Vendor:** A service provider, such as a caterer, photographer, decorator, who is employed for events.
 
 11. **Vendor Rating:** A qualitative score assigned to a vendor to track their past performance in events.
+
+12. **Item**: Refers to any entity or object that can be viewed or deleted within the system, such as an event, vendor.
+
+13. **Associated Entities**: Refers to any related items or dependencies connected to the main item. For example, for an event, associated entities include assigned vendors; for a vendor, associated entities include assigned events.
 
 --------------------------------------------------------------------------------------------------------------------
 
