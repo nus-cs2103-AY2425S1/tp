@@ -249,14 +249,14 @@ public class MainWindow extends UiPart<Stage> {
      * Shows the full details of each {@code ConcertCard}.
      */
     public void handleShowFullConcertContact() {
-        concertListPanel.showFullConcert();
+        concertContactListPanel.showFullConcertContact();
     }
 
     /**
      * Hides the full details of each {@code ConcertCard}.
      */
     public void handleHideFullConcertContact() {
-        concertListPanel.hideFullConcert();
+        concertContactListPanel.hideFullConcertContact();
     }
 
     /**

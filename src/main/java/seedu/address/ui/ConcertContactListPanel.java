@@ -30,18 +30,18 @@ public class ConcertContactListPanel extends UiPart<Region> {
     }
 
     /**
-     * Sets the list to show full details of its {@code Concert} cards.
+     * Sets the list to show full details of its {@code ConcertContact} cards.
      */
-    public void showFullConcert() {
+    public void showFullConcertContact() {
         concertContactListView.setCellFactory(
                 listView -> new ConcertContactListPanel.ConcertContactListViewCell(true));
         concertContactListView.refresh();
     }
 
     /**
-     * Sets the list to hide full details of its {@code Concert} cards.
+     * Sets the list to hide full details of its {@code ConcertContact} cards.
      */
-    public void hideFullConcert() {
+    public void hideFullConcertContact() {
         concertContactListView.setCellFactory(
                 listView -> new ConcertContactListPanel.ConcertContactListViewCell(false));
         concertContactListView.refresh();
