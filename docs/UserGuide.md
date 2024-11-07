@@ -166,7 +166,7 @@ Format: `edit STUDENT_ID FIELD\NEW_VALUE`
 
 * `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
   automatically assigned when the student contact is first added and can be found by viewing the student's details.
-* `FIELD` can be one of: Name(`n\ `), Phone Number(`p\ `), Email(`e\ `), Address(`a\ `), IC Number(`i\ `) or Subject taken(`s\ `).
+* `FIELD` can be one of: Name(`n\ `), Phone Number(`p\ `), Email(`e\ `), Address(`a\ `), NRIC(`i\ `) or Subject taken(`s\ `).
 * `NEW_VALUE` should follow the format for the respective field. May refer to the constraints in the [add feature](#adding-a-student--add) section.
 * Although editing the NRIC is allowed, it must not match any other student's NRIC in the system. 
 An error message will be shown if a duplicate is detected.
