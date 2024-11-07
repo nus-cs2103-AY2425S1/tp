@@ -486,7 +486,7 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 |-----------------------|----------------------------------------------------------------------------------------------|
 | **Add/Edit Grade**    | `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE` <br> e.g., `addGrade 1 n/Midterm s/85 w/30` |
 | **Delete Grade**      | `deleteGrade INDEX n/TEST_NAME` <br> e.g., `deleteGrade 1 n/Midterm`                         |
-| **Grade Aggregation** | `aggGrade OPERATION [n/TEST_NAME]`                                                           |
+| **Grade Aggregation** | `aggGrade OPERATION [n/TEST_NAME]` <br> e.g., `aggGrade median n/Midterm`                    |
 
 ### Attendance Commands
 
@@ -494,7 +494,7 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 |-----------------------|-----------------------------------------------------------------------------------------|
 | **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended` |
 | **Unmark Attendance** | `unmark INDEX d/DATE_TIME` <br> e.g., `unmark 1 d/31/01/2024 10:00`                     |
-| **Filter Absentees**  | `absentees d/DATE_TIME`                                                                 |
+| **Filter Absentees**  | `absentees d/DATE_TIME` <br> e.g., `absentees d/31/01/2024 10:00`                        |
 
 ### General Commands
 
