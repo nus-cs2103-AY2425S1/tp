@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
@@ -103,16 +104,16 @@ public class EzstatesParserTest {
     @Test
     public void parseCommand_deleteClientProfile() throws Exception {
         DeleteClientProfileCommand command = (DeleteClientProfileCommand) parser.parseCommand(
-                DeleteClientProfileCommand.COMMAND_WORD + " " + ALICE.getName());
-        assertEquals(new DeleteClientProfileCommand(ALICE.getName()), command);
+                DeleteClientProfileCommand.COMMAND_WORD + " " + "1");
+        assertEquals(new DeleteClientProfileCommand(INDEX_FIRST_PERSON), command);
     }
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().buildBuyer();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditClientCommand command = (EditClientCommand) parser.parseCommand(EditClientCommand.COMMAND_WORD + " "
-                + ALICE.getName() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditClientCommand(ALICE.getName(), descriptor), command);
+                + "1" + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditClientCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

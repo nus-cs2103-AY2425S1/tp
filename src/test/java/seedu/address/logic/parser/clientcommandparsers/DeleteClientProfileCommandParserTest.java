@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class DeleteClientProfileCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "Alice Pauline", new DeleteClientProfileCommand(ALICE.getName()));
+        assertParseSuccess(parser, "1", new DeleteClientProfileCommand(INDEX_FIRST_LISTING));
     }
 
     @Test
