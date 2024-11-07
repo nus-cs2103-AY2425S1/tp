@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "ClinicBuddy has been cleared!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the address book.";
     public static final String MESSAGE_BACKUP_FAILURE = "Failed to create a backup before clearing records.";
 
