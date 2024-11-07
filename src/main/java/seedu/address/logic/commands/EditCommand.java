@@ -80,14 +80,16 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        // A person's uniqueness is based on their phone and email. If the edit command results in sharing those
-        // identifiers with 2 others, it means the uniqueness invariant was violated and hence there are duplicates.
-        if (countDuplicatePerson(fullPersonList, editedPerson) == 2) {
+        // Handles case where edit command changes one of the two fields which uniquely identifies a person, contact
+        // or email. The editedPerson is considered the same person as personToEdit and is counted as a duplicate.
+        // If there are 2 duplicates, it means that there is another existing contact with the same identifier.
+        // While there should not be a case where there are 3 or more duplicates, good to be defensive.
+        if (personToEdit.isSamePerson(editedPerson) && countDuplicatePerson(fullPersonList, editedPerson) >= 2) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        // This covers an edge case, when the edit command changes both the phone and email to fully match another
-        // existing person, which will circumvent the above check.
-        if (!personToEdit.isSamePerson(editedPerson) && countDuplicatePerson(fullPersonList, editedPerson) == 1) {
+        // Handles case where edit command changes both fields that uniquely identify a person. In this case, there
+        // should not be any duplicates at all.
+        if (!personToEdit.isSamePerson(editedPerson) && countDuplicatePerson(fullPersonList, editedPerson) >= 1) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
