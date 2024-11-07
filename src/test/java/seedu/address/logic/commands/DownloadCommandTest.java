@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -24,7 +25,7 @@ class DownloadCommandTest {
     private final Set<Tag> emptyTagSet = new HashSet<>();
 
     @Test
-    public void execute_downloadWithTags_success() {
+    public void execute_downloadWithTags_success() throws CommandException {
         // Test scenario where specific tags are used
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("tag1"));
@@ -44,7 +45,7 @@ class DownloadCommandTest {
     }
 
     @Test
-    public void execute_downloadWithoutTags_success() {
+    public void execute_downloadWithoutTags_success() throws CommandException {
         // Test scenario where no tags are used
         downloadCommand = new DownloadCommand(emptyTagSet); // No tags specified
 
@@ -62,21 +63,22 @@ class DownloadCommandTest {
     }
 
     @Test
-    public void execute_noMatchingTags_noCsvSaved() {
+    public void execute_noMatchingTags_noCsvSaved() throws CommandException {
         // Test scenario where tags do not match any person
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("nonexistentTag"));
         downloadCommand = new DownloadCommand(tags);
 
-        // Execute the command
-        CommandResult result = downloadCommand.execute(model);
+        // Execute the command and check for CommandException
+        CommandException exception = assertThrows(CommandException.class, () -> downloadCommand.execute(model));
 
-        // Check the success message and CSV creation
-        assertEquals(DownloadCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        // Check the error message
+        assertEquals(DownloadCommand.MESSAGE_NO_ROWS, exception.getMessage());
+
     }
 
     @Test
-    public void execute_emptyPersonList_noCsvSaved() {
+    public void execute_emptyPersonList_noCsvSaved() throws CommandException {
         // Test scenario with no persons in the model
         downloadCommand = new DownloadCommand(emptyTagSet); // No tags specified
 

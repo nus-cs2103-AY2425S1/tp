@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CsvUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -20,6 +21,7 @@ public class DownloadCommand extends Command {
 
     public static final String COMMAND_WORD = "download";
     public static final String MESSAGE_SUCCESS = "Downloaded the csv file.";
+    public static final String MESSAGE_NO_ROWS = "No rows to download.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports JSON data to CSV format. "
             + "If no tags are specified, all rows are downloaded. "
@@ -44,12 +46,29 @@ public class DownloadCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> addressBookJson = model.getFilteredPersonListFromAddressBook(this.tagList);
-        String addressBookCsv = CsvUtil.convertObservableListToCsv(addressBookJson);
+        ObservableList<Person> addressBookJson = model.getFilteredPersonList();
+        ObservableList<Person> filteredAddressBook = filterByTags(addressBookJson);
+        String addressBookCsv = CsvUtil.convertObservableListToCsv(filteredAddressBook);
         StorageManager.saveCsvToFile(addressBookCsv);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    /**
+     * Filters the address book by the tags specified.
+     * @param unfilteredAddressBook the address book to filter
+     * @return the filtered address book
+     * @throws CommandException if the address book is empty
+     */
+    public ObservableList<Person> filterByTags(ObservableList<Person> unfilteredAddressBook) throws CommandException {
+        ObservableList<Person> filterList = unfilteredAddressBook.filtered(person -> person.hasAllTags(tagList));
+
+        if (filterList.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_ROWS);
+        }
+
+        return filterList;
     }
 
     @Override

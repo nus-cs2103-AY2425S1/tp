@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -20,7 +19,6 @@ import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.shortcut.ShortCut;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -94,11 +92,6 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
-    }
-
-    @Override
-    public ObservableList<Person> getFilteredPersonListFromAddressBook(Set<Tag> tagList) {
-        return addressBook.getFilteredPersonList(tagList);
     }
 
     @Override
