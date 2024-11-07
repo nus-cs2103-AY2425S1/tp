@@ -108,7 +108,9 @@ Underneath each suggested command is the syntax for that command and what parame
 | **Exit**       | `exit`                                                                                                                                                                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
-## Commands <br><br>
+## Commands 
+
+<br><br>
 
 ### Viewing help : `help`
 
@@ -118,13 +120,17 @@ Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close t
 
 ![help message](images/helpMessage.png)
 
-Format: `help`<br><br>
+Format: `help`
+
+<br><br>
 
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
-Format: `list`<br><br>
+Format: `list`
+
+<br><br>
 
 ### Adding a person: `add`
 
@@ -140,9 +146,9 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]..
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal pt/2100-2300`<br><br>
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal pt/2100-2300`
 
-
+* <br><br>
 
 ### Editing a person : `edit`
 
@@ -160,7 +166,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Matthew g/Overwatch g/Valorant` Edits the name of the 2nd person to be `Matthew` with games `Overwatch` and `Valorant`.
-*  `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and preferred times.<br><br>
+*  `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and preferred times.
+
+<br><br>
 
 ### Adding a game : `addgame`
 
@@ -173,7 +181,9 @@ Format: `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`
 
 Examples:
 * `addgame 1 g/Overwatch` Adds the game `Overwatch` to the 1st person.
-* `addgame 2 g/League of Legends u/Potato s/Pro r/Support` Adds the game `League of Legends` to the 2nd person with the following information: Username: `Potato` Skill level: `Pro` Role: `Support`<br><br>
+* `addgame 2 g/League of Legends u/Potato s/Pro r/Support` Adds the game `League of Legends` to the 2nd person with the following information: Username: `Potato` Skill level: `Pro` Role: `Support`
+
+<br><br>
 
 ### Editing a game : `editgame`
 
@@ -187,7 +197,9 @@ Format: `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`
 
 Examples:
 *  `editgame 1 g/Overwatch u/Potato` Edits the username of game `Overwatch` of the 1st person to be `Potato`.
-*  `editgame 2 g/League of Legends u/Potato s/Pro r/Support` Edits the game `League of Legends` of the 2nd person to have the following information: Username: `Potato` Skill level: `Pro` Role: `Support`<br><br>
+*  `editgame 2 g/League of Legends u/Potato s/Pro r/Support` Edits the game `League of Legends` of the 2nd person to have the following information: Username: `Potato` Skill level: `Pro` Role: `Support`
+
+<br><br>
 
 ### Deleting a game : `deletegame`
 
@@ -197,8 +209,9 @@ Format: `deletegame INDEX g/GAME`
 
 * Deletes the game `GAME` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​<br><br>
+* The index **must be a positive integer** 1, 2, 3, …​
 
+<br><br>
 
 ### Favouriting a game : `favgame`
 
@@ -211,7 +224,9 @@ Format: `favgame INDEX g/GAME`
 * There will be no observable change if this command is used on a game that is already given the "favourite" status.
 
 Examples:
-* `favgame 2 g/Overwatch` Sets the game "Overwatch" of the 2nd person to "favourite".<br><br>
+* `favgame 2 g/Overwatch` Sets the game "Overwatch" of the 2nd person to "favourite".
+
+<br><br>
 
 ### Un-favouriting a game : `unfavgame`
 
@@ -224,7 +239,9 @@ Format: `unfavgame INDEX g/GAME`
 * There will be no observable change if this command is used on a game that is not set to "favourite".
 
 Examples:
-* `unfavgame 3 g/LoL` Remove the "favourite" status from the game "LoL" of the 3rd person.<br><br>
+* `unfavgame 3 g/LoL` Remove the "favourite" status from the game "LoL" of the 3rd person.
+
+<br><br>
 
 ### Locating persons by name: `find`
 
@@ -242,7 +259,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)<br><br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<br><br>
 
 ### Locating persons by time range: `findtime`
 
@@ -268,7 +287,9 @@ You can enter the same time twice e.g. `2300-2300` to only search that time.
 Examples:
 * `findtime 2030-2100` returns persons who have at least one preferred time range overlaps with the specified range.
 * `findtime 2030-2100 2230-2330` returns persons with any preferred time range overlapping with any 
-one of the specified ranges<br><br>
+one of the specified ranges
+
+<br><br>
 
 ### Deleting a person : `delete`
 
@@ -282,13 +303,17 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.<br><br>
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+<br><br>
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
-Format: `clear`<br><br>
+Format: `clear`
+
+<br><br>
 
 ### Undoing previous command : `undo`
 
@@ -298,13 +323,17 @@ Only undoes commands that change the content of GamerBook or the displayed list 
 Supported commands: `list`, `add`, `edit`, `addgame`, `editgame`, `deletegame`, `favgame`, `unfavgame`,
 `find`, `findtime`, `delete`, `clear`
 
-Format: `undo`<br><br>
+Format: `undo`
+
+<br><br>
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`<br><br>
+Format: `exit`
+
+<br><br>
 
 ### Data storage
 
@@ -312,15 +341,21 @@ GamerBook data are saved automatically as a JSON file `[JAR file location]/data/
 
 GamerBook data are saved in the hard automatically after any command that changes the data.
 
-GamerBook data are loaded from `[JAR file location]/data/addressbook.json` automatically when you open the app.<br><br>
+GamerBook data are loaded from `[JAR file location]/data/addressbook.json` automatically when you open the app.
+
+<br><br>
 
 ### Saving the data file : `save`
 
-Manually saves the data in another JSON file `[JAR file location]/data/save.json`.<br><br>
+Manually saves the data in another JSON file `[JAR file location]/data/save.json`.
+
+<br><br>
 
 ### Loading the data file : `load`
 
-Manually loads the data from JSON file `[JAR file location]/data/save.json`.<br><br>
+Manually loads the data from JSON file `[JAR file location]/data/save.json`.
+
+<br><br>
 
 ### Editing the data file
 
@@ -331,7 +366,9 @@ GamerBook data are saved automatically as a JSON file `[JAR file location]/data/
 **Caution:**
 If your changes to the data file makes its format invalid, GamerBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the GamerBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box><br><br>
+</box>
+
+<br><br>
 
 ### Archiving data files `[coming in v2.0]`
 
