@@ -18,6 +18,11 @@ h2 {
   border-radius : $alert-border-radius;
 }
 
+// Secondary alerts for images
+.alert-secondary {
+    text-align: center;
+}
+
 // Headings for larger alerts
 .alert-heading {
   // Specified to prevent conflicts of changing $headings-color
