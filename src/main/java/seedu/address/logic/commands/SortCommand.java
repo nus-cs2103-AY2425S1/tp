@@ -17,9 +17,11 @@ import seedu.address.model.person.Person;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of persons by the specified parameter. "
-            + "Parameters: name/subject/class\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons by the specified parameter.\n"
+            + "Parameters: name / subject / class / attendance\n"
             + "Example: " + COMMAND_WORD + " name";
+
+    public static final String MESSAGE_SUCCESS = "List sorted successfully.";
 
     private final Comparator<? super Person> comparator;
 
@@ -34,7 +36,7 @@ public class SortCommand extends Command {
         List<Person> sortedList = new ArrayList<>(model.getFilteredPersonList());
         sortedList.sort(comparator);
         model.setFilteredPersonList(sortedList);
-        return new CommandResult("List sorted successfully.");
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

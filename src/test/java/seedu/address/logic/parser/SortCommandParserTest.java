@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Person;
 
 public class SortCommandParserTest {
@@ -19,6 +20,20 @@ public class SortCommandParserTest {
     public void parse_validArgsName_returnsSortCommand() throws Exception {
         SortCommand command = parser.parse("name");
         Comparator<? super Person> expectedComparator = Comparator.comparing(person -> person.getName().toString());
+        SortCommand expectedCommand = new SortCommand(expectedComparator);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parse_validArgsAttendance_returnsSortCommand() throws Exception {
+        SortCommand command = parser.parse("attendance");
+        Comparator<? super Person> expectedComparator = Comparator.comparing(
+                Person::getDaysAttended,
+                Comparator.comparing(
+                        DaysAttended::getValue,
+                        Comparator.nullsLast(Comparator.reverseOrder())
+                )
+        );
         SortCommand expectedCommand = new SortCommand(expectedComparator);
         assertEquals(expectedCommand, command);
     }

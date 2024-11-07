@@ -1,10 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-import seedu.address.commons.util.ClassComparatorUtil;
+import seedu.address.commons.util.ComparatorUtil;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -21,11 +22,15 @@ public class SortCommandParser implements Parser<SortCommand> {
         switch (trimmedArgs) {
         case "name" -> comparator = Comparator.comparing(person -> person.getName().toString());
         case "subject" -> comparator = Comparator.comparing(person -> person.getSubjects().toString());
-        case "class" -> comparator = Comparator.comparing(person -> {
-            List<String> classes = Collections.singletonList(person.getClasses().toString());
-            return ClassComparatorUtil.getPrimaryClassForSorting(classes);
-        });
-        default -> throw new ParseException(SortCommand.MESSAGE_USAGE);
+        case "class" -> comparator = Comparator.comparing(person ->
+                ComparatorUtil.getPrimaryClassForSorting(Collections.singletonList(person.getClasses().toString()))
+        );
+        case "attendance" -> comparator = Comparator.comparing(
+                Person::getDaysAttended,
+                ComparatorUtil.getDaysAttendedComparator()
+        );
+        default -> throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         return new SortCommand(comparator);
