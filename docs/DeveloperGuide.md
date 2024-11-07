@@ -190,7 +190,7 @@ Step 1. The user launches the application for the first time. The `VersionedHall
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th member in the hall pointer. The `delete` command calls `Model#commitHallPointer()`, causing the modified state of the hall pointer after the `delete 5` command executes to be saved in the `hallPointerStateList`, and the `currentStatePointer` is shifted to the newly inserted hall pointer state.
+Step 2. The user executes `delete 5` command to delete the 5th member in the hall pointer system. The `delete` command calls `Model#commitHallPointer()`, causing the modified state of the hall pointer system after the `delete 5` command executes to be saved in the `hallPointerStateList`, and the `currentStatePointer` is shifted to the newly inserted hall pointer state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
@@ -204,7 +204,7 @@ Step 3. The user executes `add n/David …​` to add a new member. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHallPointer()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous hall pointer state, and restores the hall pointer to that state.
+Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHallPointer()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous hall pointer state, and restores the hall pointer system to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -229,7 +229,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoHallPointer()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the hall pointer to that state.
+The `redo` command does the opposite — it calls `Model#redoHallPointer()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the hall pointer system to that state.
 
 <box type="info" seamless>
 
@@ -237,7 +237,7 @@ The `redo` command does the opposite — it calls `Model#redoHallPointer()`,
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the hall pointer, such as `list`, will usually not call `Model#commitHallPointer()`, `Model#undoHallPointer()` or `Model#redoHallPointer()`. Thus, the `hallPointerStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the hall pointer system, such as `list`, will usually not call `Model#commitHallPointer()`, `Model#undoHallPointer()` or `Model#redoHallPointer()`. Thus, the `hallPointerStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
@@ -472,7 +472,7 @@ None.
     A visual interface that allows users to interact with the application using graphical components like buttons and menus, in addition to CLI commands.
 
 4.  **Member:**\
-    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in the Hall Pointer system (e.g., name, telegram, points, and attendance).
+    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
 
 5.  **Points Allocation:**\
     The process of awarding hall points to members based on their participation in activities. CCA leaders can customize the criteria for point allocation.
@@ -502,13 +502,13 @@ None.
     Operating systems like Linux and macOS that adhere to POSIX standards and are compatible with shell scripts used for CI tasks in Hall Pointer.
 
 14. **Tag:**\
-    Labels or categories assigned to members in the Hall Pointer system (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
+    Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
 
 15. **Undo/Redo Feature:**\
     A proposed feature that allows users to revert or redo changes in Hall Pointer, enabling easy correction of mistakes.
 
 16. **Versioned HallPointer:**\
-    Refers to a version of the Hall Pointer system where the state of member data is saved at specific intervals to allow undo/redo functionality.
+    Refers to a version of Hall Pointer where the state of member data is saved at specific intervals to allow undo/redo functionality.
 
 17. **Test Coverage:**\
     A metric that measures how much of the Hall Pointer codebase is covered by tests, indicating the effectiveness and thoroughness of the test suite.
@@ -526,13 +526,13 @@ None.
     A practice used in Hall Pointer, powered by GitHub Actions, where tests and checks are run automatically to verify the integrity of new code changes before merging.
 
 22. **Unit Test:**\
-    A test that targets individual components or methods in the Hall Pointer system to ensure they function correctly in isolation.
+    A test that targets individual components or methods in Hall Pointer to ensure they function correctly in isolation.
 
 23. **Integration Test:**\
     A test that checks how different components in Hall Pointer interact with each other, ensuring they work together as expected.
 
 24. **Hybrid Test:**\
-    A combination of unit and integration testing that checks both the individual components and their interactions in the Hall Pointer system.
+    A combination of unit and integration testing that checks both the individual components and their interactions in Hall Pointer.
 
 25. **Command:**\
     A typed instruction input by the user in the CLI to perform an action in Hall Pointer, such as adding members, updating details, or tracking points (e.g., `add`, `list`, `delete`).
