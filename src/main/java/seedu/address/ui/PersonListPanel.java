@@ -45,7 +45,7 @@ public class PersonListPanel extends UiPart<Region> {
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
-            } else if (person.hasFullViewToggled()) {
+            } else if (person.isBeingViewed()) {
                 // if the user had requested this person to be viewed in full, return a PersonCardFull instead
                 setGraphic(new PersonCardFull(person, getIndex() + DISPLAYED_INDEX_OFFSET).getRoot());
             } else {

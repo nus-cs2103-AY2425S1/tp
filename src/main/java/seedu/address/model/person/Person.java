@@ -28,7 +28,7 @@ public class Person {
     private final Optional<DateOfLastVisit> dateOfLastVisit;
     private final Optional<EmergencyContact> emergencyContact;
     private final Remark remark;
-    private final boolean hasFullViewToggled;
+    private final boolean isBeingViewed;
 
     /**
      * Every field must be present and not null.
@@ -45,7 +45,7 @@ public class Person {
         this.dateOfLastVisit = dateOfLastVisit;
         this.emergencyContact = emergencyContact;
         this.remark = remark;
-        this.hasFullViewToggled = false;
+        this.isBeingViewed = false;
     }
 
     /**
@@ -53,7 +53,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Optional<Email> email, Optional<Address> address, Set<Tag> tags,
                   Optional<DateOfLastVisit> dateOfLastVisit, Optional<EmergencyContact> emergencyContact,
-                  Remark remark, boolean hasFullViewToggled) {
+                  Remark remark, boolean isBeingViewed) {
         requireAllNonNull(name, phone, email, address, tags, dateOfLastVisit, remark);
         this.name = name;
         this.phone = phone;
@@ -63,7 +63,7 @@ public class Person {
         this.dateOfLastVisit = dateOfLastVisit;
         this.emergencyContact = emergencyContact;
         this.remark = remark;
-        this.hasFullViewToggled = hasFullViewToggled;
+        this.isBeingViewed = isBeingViewed;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Person {
         this.dateOfLastVisit = toHaveViewToggled.dateOfLastVisit;
         this.emergencyContact = toHaveViewToggled.emergencyContact;
         this.remark = toHaveViewToggled.remark;
-        this.hasFullViewToggled = !toHaveViewToggled.hasFullViewToggled();
+        this.isBeingViewed = !toHaveViewToggled.isBeingViewed();
     }
 
     public Name getName() {
@@ -169,8 +169,8 @@ public class Person {
     /**
      * Returns whether the detailed view of Person is toggled.
      */
-    public boolean hasFullViewToggled() {
-        return hasFullViewToggled;
+    public boolean isBeingViewed() {
+        return isBeingViewed;
     }
 
     /**

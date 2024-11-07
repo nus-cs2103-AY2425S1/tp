@@ -113,7 +113,7 @@ public class EditCommand extends Command {
         Optional<EmergencyContact> updatedEmergencyContact = editPersonDescriptor.getEmergencyContact()
                 .orElse(personToEdit.getEmergencyContact());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
-        boolean isBeingViewed = personToEdit.hasFullViewToggled();
+        boolean isBeingViewed = personToEdit.isBeingViewed();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedTags, updatedDateOfLastVisit, updatedEmergencyContact, updatedRemark, isBeingViewed);
