@@ -48,7 +48,6 @@ public class EventNewCommandParser implements Parser<EventNewCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventNewCommand.MESSAGE_USAGE));
         }
 
-
         argMultimap.verifyNoDuplicatePrefixesFor(EVENT_PREFIX_NAME, EVENT_PREFIX_LOCATION, EVENT_PREFIX_DATE,
                 EVENT_PREFIX_START_TIME, EVENT_PREFIX_END_TIME, EVENT_PREFIX_DESCRIPTION);
         EventName eventName = EventParserUtil.parseEventName(argMultimap.getValue(EVENT_PREFIX_NAME).get());
