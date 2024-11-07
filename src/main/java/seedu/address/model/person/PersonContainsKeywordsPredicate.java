@@ -2,9 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -30,8 +32,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     // Data predicates
     private final AddressContainsKeywordsPredicate addressPredicate;
     private final TagContainsKeywordsPredicate tagsPredicate;
-
-    // TODO: Missing keywords lists for subject and classes
+    private final SubjectContainsKeywordsPredicate subjectsPredicate;
+    private final ClassContainsKeywordsPredicate classesPredicate;
 
     /**
      * Constructs a {@code PersonContainsKeywordsPredicate}
@@ -47,6 +49,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
             emailPredicate = new EmailContainsKeywordsPredicate(new ArrayList<>());
             addressPredicate = new AddressContainsKeywordsPredicate(new ArrayList<>());
             tagsPredicate = new TagContainsKeywordsPredicate(new ArrayList<>());
+            subjectsPredicate = new SubjectContainsKeywordsPredicate(new ArrayList<>());
+            classesPredicate = new ClassContainsKeywordsPredicate(new ArrayList<>());
             return;
         }
 
@@ -56,6 +60,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         List<String> emailKeywords = new ArrayList<>();
         List<String> addressKeywords = new ArrayList<>();
         List<String> tagsKeywords = new ArrayList<>();
+        List<String> subjectsKeywords = new ArrayList<>();
+        List<String> classesKeywords = new ArrayList<>();
 
         Map<Prefix, List<String>> keywordMap = new HashMap<>();
         keywordMap.put(PREFIX_NAME, nameKeywords);
@@ -63,6 +69,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         keywordMap.put(PREFIX_EMAIL, emailKeywords);
         keywordMap.put(PREFIX_ADDRESS, addressKeywords);
         keywordMap.put(PREFIX_TAG, tagsKeywords);
+        keywordMap.put(PREFIX_SUBJECT, subjectsKeywords);
+        keywordMap.put(PREFIX_CLASSES, classesKeywords);
 
         List<String> currentList = null;
 
@@ -93,6 +101,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         emailPredicate = new EmailContainsKeywordsPredicate(emailKeywords);
         addressPredicate = new AddressContainsKeywordsPredicate(addressKeywords);
         tagsPredicate = new TagContainsKeywordsPredicate(tagsKeywords);
+        subjectsPredicate = new SubjectContainsKeywordsPredicate(subjectsKeywords);
+        classesPredicate = new ClassContainsKeywordsPredicate(classesKeywords);
     }
 
     @Override
@@ -108,8 +118,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         boolean hasMatchingEmail = emailPredicate.test(person);
         boolean hasMatchingAddress = addressPredicate.test(person);
         boolean hasMatchingTags = tagsPredicate.test(person);
+        boolean hasMatchingSubjects = subjectsPredicate.test(person);
+        boolean hasMatchingClasses = classesPredicate.test(person);
 
-        return hasMatchingName || hasMatchingPhone || hasMatchingEmail || hasMatchingAddress || hasMatchingTags;
+        return hasMatchingName || hasMatchingPhone || hasMatchingEmail || hasMatchingAddress || hasMatchingTags
+                || hasMatchingSubjects || hasMatchingClasses;
     }
 
     @Override
@@ -127,6 +140,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 && phonePredicate.equals(otherPersonContainsKeywordPredicate.phonePredicate)
                 && emailPredicate.equals(otherPersonContainsKeywordPredicate.emailPredicate)
                 && addressPredicate.equals(otherPersonContainsKeywordPredicate.addressPredicate)
-                && tagsPredicate.equals(otherPersonContainsKeywordPredicate.tagsPredicate);
+                && tagsPredicate.equals(otherPersonContainsKeywordPredicate.tagsPredicate)
+                && subjectsPredicate.equals(otherPersonContainsKeywordPredicate.subjectsPredicate)
+                && classesPredicate.equals(otherPersonContainsKeywordPredicate.classesPredicate);
     }
 }
