@@ -9,8 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Product {
 
-    public static final String MESSAGE_CONSTRAINTS = "PRODUCT should be alphanumeric";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
+    public static final String MESSAGE_CONSTRAINTS = "Product names must be alphanumeric, can include spaces but must "
+            + "not start with a space, and must be between 1 and 50 (inclusive) characters long.";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]{0,49}$";
 
     public final String productName;
 

@@ -66,7 +66,7 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **[Add](#adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**[Delete](#deleting-a-supplier--delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**[Delete](#deleting-a-supplier-delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
 **[List](#listing-all-suppliers-list-s)**   | `list -s`
 **[Mark](#mark-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
 **[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>` <br> e.g., `find -s n/link com/NU`
@@ -90,9 +90,10 @@ Action     | Format, Examples
 ### General Commands
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**List**   | `list -a`
-**Help**   | `help`
-**Exit**   | `exit`
+**[List](#viewing-all-deliveries-and-suppliers-list)**   | `list -a`
+**[Help](#viewing-help-help)**   | `help`
+**[Exit](#exiting-the-program-exit)**   | `exit`
+
 
 
 ---
@@ -470,7 +471,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook automatically saves your data as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file.
 <box type="warning" seamless>
 
 **Caution:**
