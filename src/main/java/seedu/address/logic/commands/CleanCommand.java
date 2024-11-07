@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.Year;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -32,7 +30,6 @@ public class CleanCommand extends ConcreteCommand {
     public static final String MESSAGE_CLEAN_SUCCESS = "Deleted graduated people";
     public static final String MESSAGE_ALREADY_CLEANED = "All graduated people have already been deleted";
     public static final String MESSAGE_UNDO_SUCCESS = "Restored deleted graduated people";
-    private static final Logger logger = LogsCenter.getLogger(CleanCommand.class);
 
     private final Predicate<Person> predicate;
     private final String gradYear;
@@ -54,7 +51,6 @@ public class CleanCommand extends ConcreteCommand {
         if (model.hasGraduatedBefore(gradYear)) {
             model.deletePersonByPredicate(predicate);
             isExecuted = true;
-            logger.info("clean successful");
             return new CommandResult(MESSAGE_CLEAN_SUCCESS);
         } else {
             throw new CommandException(MESSAGE_ALREADY_CLEANED);
