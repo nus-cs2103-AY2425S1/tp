@@ -28,7 +28,8 @@ public class EventDeleteCommandParserTest {
         String invalidInput = "abc";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(invalidInput));
 
-        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventDeleteCommand.MESSAGE_USAGE), thrown.getMessage());
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventDeleteCommand.MESSAGE_USAGE),
+                thrown.getMessage());
     }
 
     @Test
@@ -36,6 +37,7 @@ public class EventDeleteCommandParserTest {
         String emptyInput = "";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(emptyInput));
 
-        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventDeleteCommand.MESSAGE_USAGE), thrown.getMessage());
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventDeleteCommand.MESSAGE_USAGE),
+                thrown.getMessage());
     }
 }

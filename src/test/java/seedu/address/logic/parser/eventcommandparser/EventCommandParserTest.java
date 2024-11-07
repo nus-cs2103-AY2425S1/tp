@@ -27,7 +27,8 @@ public class EventCommandParserTest {
 
     @Test
     public void parseCommand_newEventCommand_success() throws Exception {
-        String userInputWithoutEventCommandIndicator = "new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam";
+        String userInputWithoutEventCommandIndicator = "new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00"
+                + " e/21:00 des/Final Exam";
         Command command = parser.parseCommand(userInputWithoutEventCommandIndicator);
         assertTrue(command instanceof EventNewCommand);
     }
@@ -73,7 +74,8 @@ public class EventCommandParserTest {
     public void parseCommand_emptyInput_throwsParseException() {
         String emptyUserInput = "";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parseCommand(emptyUserInput));
-        assertTrue(thrown.getMessage().contains(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE)));
+        assertTrue(thrown.getMessage().contains(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE)));
     }
 }
 

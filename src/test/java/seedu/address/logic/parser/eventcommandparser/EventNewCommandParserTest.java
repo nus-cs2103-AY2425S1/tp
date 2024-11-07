@@ -9,8 +9,10 @@ import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_DESC_BEACH
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_START_TIME_DESC_BEACH_CLEANUP;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_END_TIME_BEFORE_START_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_END_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_LOCATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_START_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DATE_BEACH_CLEANUP;
@@ -33,6 +35,7 @@ import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
+import seedu.address.model.event.Time;
 import seedu.address.model.event.exceptions.ChronologicalOrderException;
 import seedu.address.testutil.EventBuilder;
 
@@ -61,10 +64,11 @@ public class EventNewCommandParserTest {
     @Test
     public void parse_duplicateFields_failure() {
         String validCommand = EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_LOCATION_DESC_BEACH_CLEANUP
-                + EVENT_DATE_DESC_BEACH_CLEANUP + EVENT_START_TIME_DESC_BEACH_CLEANUP + EVENT_END_TIME_DESC_BEACH_CLEANUP;
+                + EVENT_DATE_DESC_BEACH_CLEANUP + EVENT_START_TIME_DESC_BEACH_CLEANUP
+                + EVENT_END_TIME_DESC_BEACH_CLEANUP;
 
         // duplicate name prefix - rejected
-        assertParseFailure(parser, EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_NAME_DESC_BEACH_CLEANUP
+        assertParseFailure(parser, EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_NAME_DESC_BEACH_git CLEANUP
                         + EVENT_LOCATION_DESC_BEACH_CLEANUP + EVENT_DATE_DESC_BEACH_CLEANUP
                         + EVENT_START_TIME_DESC_BEACH_CLEANUP + EVENT_END_TIME_DESC_BEACH_CLEANUP,
                 Messages.getErrorMessageForDuplicatePrefixes(EVENT_PREFIX_NAME));
@@ -141,32 +145,23 @@ public class EventNewCommandParserTest {
         assertParseFailure(parser, args, new ChronologicalOrderException().getMessage());
     }
 
-//    @Test
-//    public void parse_multipleDates_success() {
-//        String multipleDatesDesc = " " + EVENT_PREFIX_DATE + "2024-12-01,2024-12-02";
-//        Event expectedEventTwoDates = new EventBuilder()
-//                .withEventName(VALID_EVENT_NAME_BEACH_CLEANUP)
-//                .withLocation(VALID_EVENT_LOCATION_BEACH_CLEANUP)
-//                .withDate("2024-12-01,2024-12-02")
-//                .withStartTime(VALID_EVENT_START_TIME_BEACH_CLEANUP)
-//                .withEndTime(VALID_EVENT_END_TIME_BEACH_CLEANUP)
-//                .build();
-//
-//        assertParseSuccess(parser, EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_LOCATION_DESC_BEACH_CLEANUP
-//                        + multipleDatesDesc + EVENT_START_TIME_DESC_BEACH_CLEANUP + EVENT_END_TIME_DESC_BEACH_CLEANUP,
-//                new EventNewCommand(expectedEventTwoDates));
-//    }
-//
-//    @Test
-//    public void parse_invalidMultipleDates_failure() {
-//        String mixedDatesDesc = " " + EVENT_PREFIX_DATE + "2024-12-01,2024-13-45";
-//        assertParseFailure(parser, EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_LOCATION_DESC_BEACH_CLEANUP
-//                        + mixedDatesDesc + EVENT_START_TIME_DESC_BEACH_CLEANUP + EVENT_END_TIME_DESC_BEACH_CLEANUP,
-//                Date.MESSAGE_CONSTRAINTS);
-//
-//        String allInvalidDatesDesc = " " + EVENT_PREFIX_DATE + "2024-13-45,2024-15-67,2024-00-00";
-//        assertParseFailure(parser, EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_LOCATION_DESC_BEACH_CLEANUP
-//                        + allInvalidDatesDesc + EVENT_START_TIME_DESC_BEACH_CLEANUP + EVENT_END_TIME_DESC_BEACH_CLEANUP,
-//                Date.MESSAGE_CONSTRAINTS);
-//    }
+    @Test
+    public void parse_invalidStartTimeFormat_failure() {
+        // invalid start time format
+        String input = EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_LOCATION_DESC_BEACH_CLEANUP
+                + EVENT_DATE_DESC_BEACH_CLEANUP + INVALID_EVENT_START_TIME_DESC // Invalid start time
+                + EVENT_END_TIME_DESC_BEACH_CLEANUP;
+
+        assertParseFailure(parser, input, "Start " + Time.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidEndTimeFormat_failure() {
+        // invalid end time format
+        String input = EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_LOCATION_DESC_BEACH_CLEANUP
+                + EVENT_DATE_DESC_BEACH_CLEANUP + EVENT_START_TIME_DESC_BEACH_CLEANUP
+                + INVALID_EVENT_END_TIME_DESC; // Invalid end time
+
+        assertParseFailure(parser, input, "End " + Time.MESSAGE_CONSTRAINTS);
+    }
 }
