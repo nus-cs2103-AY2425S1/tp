@@ -30,7 +30,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Admin` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe th/johnny_9876_haha ss/undergraduate 3 e/johnd@example.com r/Admin` : Adds a contact named `John Doe` to the Address Book.
 
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -44,15 +44,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Summary of Features
 ### Command summary
 
-| Action     | Format, Examples                                                                                                                                                    |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President` |
-| **Clear**  | `clear`                                                                                                                                                             |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
-| **Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                      |
-| **Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                |
-| **List**   | `list`                                                                                                                                                              |
-| **Help**   | `help`                                                                                                                                                              |
+| Action     | Format, Examples                                                                                                                                                                  |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/johnnyboiiii` |
+| **Clear**  | `clear`                                                                                                                                                                           |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
+| **Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                    |
+| **Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                              |
+| **List**   | `list`                                                                                                                                                                            |
+| **Help**   | `help`                                                                                                                                                                            |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Terminologies for command line
@@ -68,16 +68,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [nn/NICKNAME]` can be used as `n/John Doe nn/johnnyboiiii` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used from one to multiple times.<br>
   e.g. `[r/ROLE]…​` can be used twice as `r/External r/Marketing` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* Except for `list` command, extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.<br>
   Refer to [listing all contacts](#listing-all-contacts-list) section for more details about `list` command.
 
 * The COMMAND_WORD is case-insensitive. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
@@ -270,30 +270,31 @@ There must not be duplicate fields. For example, if there is a contact with the 
 
 `n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny`
 
-![example john doe](images/examplejohndoe.png)
+![example john doe](images/ExampleJohnDoe.png)
 
 1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname` Nickname must be **unique**
-   * **Fail:** `n/John Doe nn/Johnny...`
-   * **Fail:** `n/Jane Hoe nn/Johnny...` there is already a Nickname Johnny
-   * **Success:** `n/John Doe nn/notJohnny...`
+    * **Fail:** `n/John Doe nn/Johnny...`
+    * **Fail:** `n/Jane Hoe nn/Johnny...` there is already a Nickname Johnny
+    * **Success:** `n/John Doe nn/notJohnny...`
 2. Must not have the same `Telegram Handle`. Each Telegram Handle must be **unique**
-   * **Fail:** `th/johndoe...`
+    * **Fail:** `th/johndoe...`
 3. Must not have the same `Email`. Each Email must be **unique**
-   * **Fail:** `e/johnd@example.com...`
+    * **Fail:** `e/johnd@example.com...`
 4. Must not have more than one `Role` labelled as `President`. Can only have one `President`
-   * **Fail:** `n/Jane Hoe th/janehoe e/janeh@example.com ss/undergraduate 3 r/Admin r/President nn/jane`
+    * **Fail:** `n/Jane Hoe th/janehoe e/janeh@example.com ss/undergraduate 3 r/Admin r/President nn/jane`
 
 
-## Available Contact Fields
+## Valid Contact Fields
 
-| Field                                   | Prefix* | Valid examples
-|-----------------------------------------|---------|---------------
-| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)`
-| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28` 
-| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`
-| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/> 
-| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`
-| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`
+| Field                                   | Prefix* | Valid examples                                                                                                      |
+|-----------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|
+| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` |
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                    |
+| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`                                                                                   |
+| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                    |
+| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                |
+| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                        |
+
 *_By default, all fields must be non-empty when prefix is specified._
 
 ### Name
