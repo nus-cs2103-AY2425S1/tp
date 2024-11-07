@@ -19,6 +19,12 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Schedule
+Class SocialMedia
+
+Class ScheduleDate
+Class ScheduleName
+Class ScheduleTime
 
 Class I #FFFFFF
 }
@@ -38,10 +44,16 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "0..1" Phone
+Person *--> "0..1" Email
+Person *--> "0..1" Address
+Person *--> "0..1" Schedule
+Person *--> "0..1" SocialMedia
 Person *--> "*" Tag
+
+Schedule *--> ScheduleDate
+Schedule *--> ScheduleName
+Schedule *--> "0..1" ScheduleTime
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
