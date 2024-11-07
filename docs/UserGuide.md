@@ -68,7 +68,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Displays a summary of commands available.
+Shows a message explaining how to access the help page at the bottom.
 
 ![help message](images/helpMessage.png)
 
@@ -77,7 +78,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book. People with same names are allowed.
+Adds a person to the address book. People with **both** same **Name** and **Phone** are not allowed.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
@@ -113,7 +114,7 @@ Notes:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book. People with **both** same **Name** and **Phone** are not allowed.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
