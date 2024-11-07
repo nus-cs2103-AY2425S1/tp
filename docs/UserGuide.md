@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# ServiceTrack User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ServiceTrack is a **desktop app for managing customer contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ServiceTrack can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -21,7 +21,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ServiceTrack.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT]`
 
 <box type="tip" seamless>
 
@@ -88,19 +88,25 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/life sentence`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book. Vips will be shown on top of the list.
 
 Format: `list`
+
+### Listing all VIPs : `list vip`
+
+Shows a list of all VIPs in the address book.
+
+Format: `list vip`
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COMMENT]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -112,6 +118,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 c/Working t/` Edits the comment of the 3rd person to be `Working` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -145,6 +152,52 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+Format: `delete NAME`
+
+* Deletes the person with the specified `NAME`.
+* The name refers to the exact name shown in the displayed person list.
+* The name is **case insensitive**. ​
+
+Examples:
+* `list` followed by `delete Betsy` deletes the person with the name `Betsy` in the address book.
+
+### Marking whether a person is a VIP : `vip`
+
+Marks the specified person from the address book as a VIP or removes said label.
+
+Format: `vip INDEX IS_VIP`
+
+* Affects the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* IS_VIP should either be `true` or `false`, corresponding to whether you intend to mark the target as a VIP or remove such a mark.
+
+Examples:
+* `list` followed by `vip 2 true` marks the 2nd person in the address book as a VIP.
+* `find Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `find` command.
+
+Examples:
+* `vip 1 true` marks the 1st person in the address book as VIP.
+* `vip 1 false` unmarks the 1st person in the address book to be a non VIP<br>
+  ![result for 'vip 1 false'](images/unmark Bernice as non vip.png)
+
+### Locating person by tag: `searchtag`
+
+Finds all customers whose any tag contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+
+Format: `searchtag TAG [MORE TAGS]`
+
+* The search is case-insensitive. e.g `FRIENDS` will match `friends`
+* Only the tags are searched.
+* Only full words will be matched e.g. `fri` will not match `friends`
+* Persons have at least one matching tag will be returned.
+  e.g. If `searchtag friends` is the input, a person with tags `friends` and `colleagues` will be included in the search result.
+
+Examples:
+* `searchtag friends` returns all persons containing the tag `friends`<br>
+  ![result for 'searchtag friends'](images/Searchtag Friends.png)
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -172,21 +225,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Marking whether a person is a VIP : `vip`
-
-Marks the specified person from the address book as a VIP or removes said label.
-
-Format: `vip INDEX IS_VIP`
-
-* Affects the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* IS_VIP should either be `true` or `false`, corresponding to whether you intend to mark the target as a VIP or remove such a mark.
-
-Examples:
-* `list` followed by `vip 2 true` marks the 2nd person in the address book as a VIP.
-* `find Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `find` command.
-
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -211,11 +249,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague c/5'11 tall`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete INDEX` `delete NAME` <br> e.g., `delete 3` `delete Bernice`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COMMENT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com c/change comment`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**List**   | `list` `list vip`
 **Vip**    | `vip INDEX IS_VIP`<br> e.g., `vip 3 true`
+**searchtag**| `searchtag TAG [MORE TAGS]`<br> e.g., `searchtag friends`
 **Help**   | `help`
