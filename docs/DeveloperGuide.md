@@ -3,15 +3,15 @@ layout: page
 title: Developer Guide
 ---
 
-- Table of Contents
+* Table of Contents
   {:toc}
 
 ---
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+* This project is based on the AddressBook-Level3 project created by the SE-EDU initiative.
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ---
 
@@ -102,7 +102,7 @@ The `UI` component,
 - executes user commands using the `Logic` component.
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- depends on some classes in the `Model` component, as it displays `Pet` or `Owner` object residing in the `Model`.
 
 ### Logic component
 
@@ -156,15 +156,15 @@ The `Model` component,
 
 - stores the PawPatrol data i.e., all `Pet` and `Owner` objects (which are contained in a `UniquePetList` and 
 `UniqueOwnerList` object respectively).
-- stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+- stores the currently 'selected' `Pet` or `Owner` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Pet/Owner>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Pet` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Pet` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagramUpdated.png" width="450" />
 
@@ -198,7 +198,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Link/Unlink Feature
 #### Current Implementation
-The link feature mechanism allows linking of Owners to Pets. Links can be created and entities to be linked can be determined by implementing the `Linkable` interface. In the current implementation, `LinkCommand` only allows linking of Onwers to Pets using the indices as per other commands e.g. `link o1 t/p1 t/p2` would link owner at index 1 to pets at index 1 and 2.
+The link feature mechanism allows linking of `Owner` to `Pet`. Links can be created and entities to be linked can be determined by implementing the `Linkable` interface. In the current implementation, `LinkCommand` only allows linking of Owners to Pets using the indices as per other commands e.g. `link o1 t/p1 t/p2` would link owner at index 1 to pets at index 1 and 2.
 
 A `LinkCommand` is only executed in its entirety when all `Link`s are non-duplicate and having valid indices. Should any single `Link` fail this criteria, no links will be created.
 
@@ -210,7 +210,7 @@ The sequence diagram below illustrates the interactions between the `Logic` and 
 The `UnlinkCommand` works similarly, finding the unique ID from the `Linkable` interface and removing the associated `Link` from `Model` instead.
 
 #### Handling of Deletes
-When an Owner or Pet is deleted, all associated `Link`s are deleted from the application.
+When an `Owner` or `Pet` is deleted, all associated `Link`s are deleted from the application.
 
 #### Future Improvements
 The `LinkCommand` can be generalized for other entity-entity links. For example, linking health records to pets.
