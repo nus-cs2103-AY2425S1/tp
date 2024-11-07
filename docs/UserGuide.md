@@ -21,7 +21,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your Talentcy app.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Talentcy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -85,15 +85,16 @@ Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG`
 Please refer to this table
 for list of valid tags:
 
-| Tag | Interview Stage                 | Definition                                               |
-|-----|---------------------------------|----------------------------------------------------------|
-| N   | New                             | New applicant                                            |
-| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled |
-| TC | Technical Interview Confirmed | Technical interview has been schedule|                                           
-| BP | Behavioral Interview in Progress |Behavioral interview is in the progress of being scheduled|
-| BC | Behavioral Interview Confirmed |Behavioral interview has been scheduled|
-| A| Accepted|Applicant has been accepted|
-| R | Rejected |Applicant has been rejected|
+
+| Tag | Interview Stage                 | Definition                                                                  |
+|-----|---------------------------------|-----------------------------------------------------------------------------|
+| N   | New                             | New applicant                                                               |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled for the applicant  |
+| TC | Technical Interview Confirmed | Technical interview has been schedule for the applicant                     |                                           
+| BP | Behavioral Interview in Progress | Behavioral interview is in the process of being scheduled for the applicant |
+| BC | Behavioral Interview Confirmed | Behavioral interview has been scheduled for the applicant                   |
+| A| Accepted| Applicant has been accepted by the company                                  |
+| R | Rejected | Applicant has been rejected by the company                                  |
 
 
 Examples:
@@ -290,15 +291,15 @@ _Details coming soon ..._
 Please refer to this table
 for list of valid tags:
 
-| Tag | Interview Stage                 | Definition                                               |
-|-----|---------------------------------|----------------------------------------------------------|
-| N   | New                             | New applicant                                            |
-| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled |
-| TC | Technical Interview Confirmed | Technical interview has been schedule|                                           
-| BP | Behavioral Interview in Progress |Behavioral interview is in the progress of being scheduled|
-| BC | Behavioral Interview Confirmed |Behavioral interview has been scheduled|
-| A| Accepted|Applicant has been accepted|
-| R | Rejected |Applicant has been rejected|
+| Tag | Interview Stage                 | Definition                                                                  |
+|-----|---------------------------------|-----------------------------------------------------------------------------|
+| N   | New                             | New applicant                                                               |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled for the applicant  |
+| TC | Technical Interview Confirmed | Technical interview has been schedule for the applicant                     |                                           
+| BP | Behavioral Interview in Progress | Behavioral interview is in the process of being scheduled for the applicant |
+| BC | Behavioral Interview Confirmed | Behavioral interview has been scheduled for the applicant                   |
+| A| Accepted| Applicant has been accepted by the company                                  |
+| R | Rejected | Applicant has been rejected by the company                                  |
 
 - Input tag code is case-insensitive. (e.g., "bp" will be treated the same as "BP").
 - Spaces within the tag will be removed (e.g., "T P" will become "TP"), and hence tags with spaces is still valid as long as it is one of the tags listed above. 
