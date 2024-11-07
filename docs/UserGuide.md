@@ -41,6 +41,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for more details.
+
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,6 +85,7 @@ Underneath each suggested command is the syntax for that command and what parame
 * The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
 
 </box>
+
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
@@ -108,7 +110,6 @@ Underneath each suggested command is the syntax for that command and what parame
 | **Save**       | `save`                                                                                                                                                                                                                   |
 | **Load**       | `load`                                                                                                                                                                                                                   |
 | **Exit**       | `exit`                                                                                                                                                                                                                   |
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
 
