@@ -746,14 +746,14 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 ### How do I transfer my data to another Computer?
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
-### How do I change the remarks or credit card tier of an existing client?
-Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
+### How do I change the remarks, credit card tier of an existing client?
+Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the visible `Tier` or `Status` label of a client, use `t/ NA` or `s/ NA` with the `edit` command.
 
 ### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
 
 ### What do the different tier colors represent in the UI?
-Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each client.
+Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a maroon banner. This makes it easy to see at a glance the tier of each client.
 
 ### What do the different status colors represent in the UI?
 Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non_urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
