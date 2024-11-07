@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import seedu.address.security.PasswordManager;
 
 
@@ -45,6 +46,9 @@ public class PasswordPromptDialog {
             dialog.getIcons().add(new Image(PasswordPromptDialog.class.getResourceAsStream("/images/VBookLogo.png")));
             dialog.setTitle("Welcome to VBook!");
             dialog.setScene(scene);
+            dialog.setOnCloseRequest((WindowEvent event) -> {
+                System.exit(0); // Exit the program if the close button is clicked
+            });
             dialog.showAndWait();
             // Return true if the password is correct or if the user set a new password
             return existingPassword == null
