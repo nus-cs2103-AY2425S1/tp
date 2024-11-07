@@ -95,9 +95,12 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code
         // Company} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_COMPANY + TAG_DESC_BIGTECH + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_COMPANY + TAG_EMPTY + TAG_DESC_BIGTECH, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_COMPANY + TAG_DESC_BIGTECH, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_COMPANY + TAG_DESC_BIGTECH
+                + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_COMPANY + INVALID_TAG_DESC
+                + TAG_DESC_BIGTECH, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_TAG_DESC + TAG_DESC_COMPANY
+                + TAG_DESC_BIGTECH, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_TESLA

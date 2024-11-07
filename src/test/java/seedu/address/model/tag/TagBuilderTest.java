@@ -66,6 +66,11 @@ public class TagBuilderTest {
     }
 
     @Test
+    public void build_emptyTag_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> tagBuilder.build(""));
+    }
+
+    @Test
     public void build_invalidEnumValue_throwsIllegalArgumentException() {
         // Test invalid difficulty levels
         assertThrows(IllegalArgumentException.class, () -> tagBuilder.build("difficulty_easy"));

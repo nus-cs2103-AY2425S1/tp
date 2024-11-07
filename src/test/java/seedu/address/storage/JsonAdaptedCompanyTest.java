@@ -9,12 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.company.Address;
-import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
@@ -28,7 +26,10 @@ public class JsonAdaptedCompanyTest {
     private static final String INVALID_URL = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_REMARK = "   "; // Assuming a completely blank remark is invalid.
+    private static final String INVALID_REMARK = "q8ElAFCNZ5)-:Q7$-}m4KH#1QF*HI-tiR,1o"
+            + "`Hg}1K86Lm`t-0$oS)hY,31+*`t#^W|?tm3%2-px#[,/>Mqrgcvam~Kq7|.EN6,7a8jxI1mZw]p_n|0<DA=Rl)[rwh3+gyL$S')"
+            + "dtBasijifhihsfihoajod9138943409734102914/1afC60L~5(^Ph?eO9Q-mP,</^OL&+q}oWnkIY)*Uv_-aUmYfe^"
+            + ";({K1B";
     private static final String VALID_NAME = META.getName().toString();
     private static final String VALID_PHONE = META.getPhone().toString();
     private static final String VALID_EMAIL = META.getEmail().toString();
@@ -40,7 +41,7 @@ public class JsonAdaptedCompanyTest {
             .map(tag -> new JsonAdaptedTag(tag.toString())) // Use lambda to call toString()
             .collect(Collectors.toList());
 
-    private static final Bookmark VALID_BOOKMARK = META.getIsBookmark();
+    private static final Boolean VALID_BOOKMARK = META.getIsBookmark().getIsBookmarkValue();
 
     @Test
     public void toModelType_validCompanyDetails_returnsCompany() throws Exception {
@@ -140,7 +141,6 @@ public class JsonAdaptedCompanyTest {
     }
 
     @Test
-    @Disabled
     public void toModelType_invalidRemark_throwsIllegalValueException() {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_URL, VALID_STATUS, VALID_TAGS, VALID_BOOKMARK, INVALID_REMARK);

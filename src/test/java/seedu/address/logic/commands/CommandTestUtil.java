@@ -57,7 +57,7 @@ public class CommandTestUtil {
     public static final String CAREER_PAGE_URL_DESC_TESLA = " " + PREFIX_CAREER_PAGE_URL + VALID_CAREER_PAGE_URL_TESLA;
     public static final String CAREER_PAGE_URL_DESC_MICROSOFT = " " + PREFIX_CAREER_PAGE_URL
             + VALID_CAREER_PAGE_URL_MICROSOFT;
-    public static final String REMARK_DESC_COMPANY = " " + PREFIX_ADDRESS + VALID_REMARK_COMPANY;
+    public static final String REMARK_DESC_COMPANY = " " + PREFIX_REMARK + VALID_REMARK_COMPANY;
     public static final String TAG_DESC_COMPANY = " " + PREFIX_TAG + VALID_TAG_COMPANY;
     public static final String TAG_DESC_BIGTECH = " " + PREFIX_TAG + VALID_TAG_BIGTECH;
     public static final String REMARK_DESC_VALID = " " + PREFIX_REMARK + VALID_REMARK; // New valid remark description
@@ -70,7 +70,10 @@ public class CommandTestUtil {
     public static final String INVALID_CAREER_PAGE_URL_DESC = " " + PREFIX_CAREER_PAGE_URL
             + " "; // Invalid URL format
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + ""; // Empty remark not allowed
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "q8ElAFCNZ5)-:Q7$-}m4KH#1QF*HI-tiR,1o"
+            + "`Hg}1K86Lm`t-0$oS)hY,31+*`t#^W|?tm3%2-px#[,/>Mqrgcvam~Kq7|.EN6,7a8jxI1mZw]p_n|0<DA=Rl)[rwh3+gyL$S')"
+            + "dtBasijifhihsfihoajod9138943409734102914/1afC60L~5(^Ph?eO9Q-mP,</^OL&+q}oWnkIY)*Uv_-aUmYfe^"
+            + ";({K1B"; // Remark > 200 not allowed
 
     // Preambles
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -101,6 +104,7 @@ public class CommandTestUtil {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
+
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);

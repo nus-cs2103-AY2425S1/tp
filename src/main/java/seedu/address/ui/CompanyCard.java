@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -43,7 +44,11 @@ public class CompanyCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private ImageView bookmarkIcon;
+    @FXML
     private Label applicationStatus;
+    @FXML
+    private Label remark;
     @FXML
     private FlowPane tags;
 
@@ -59,7 +64,9 @@ public class CompanyCard extends UiPart<Region> {
         phone.setText(company.getPhone().value);
         address.setText(company.getAddress().value);
         careerPageUrl.setText(company.getCareerPageUrl().value);
-        applicationStatus.setText(company.getApplicationStatus().value);
+        bookmarkIcon.setVisible(company.getIsBookmark().getIsBookmarkValue());
+        applicationStatus.setText(company.getApplicationStatus().getStatusValue());
+        remark.setText(company.getRemark().getRemarkValue());
         email.setText(company.getEmail().value);
         company.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.toString()))

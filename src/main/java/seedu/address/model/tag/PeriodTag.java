@@ -11,7 +11,7 @@ import seedu.address.model.tag.enums.InternshipPeriod;
  * This tag ensures that the provided period is one of the valid options
  * (Summer, Winter, or PARTTIME) and that the year falls between 2000 and 2500.
  */
-public class PeriodTag extends Tag {
+class PeriodTag extends Tag {
 
     /** The message to display when the provided period or year is invalid. */
     public static final String MESSAGE_CONSTRAINTS = "Period needs to be either Summer, Winter, or PARTTIME "
@@ -25,7 +25,7 @@ public class PeriodTag extends Tag {
     /**
      * Constructs a {@code PeriodTag} with the given tag name, period, and year.
      *
-     * @param tagName The name of the tag.
+     * @param tagName The name of the tag. Should preferably be "Period" in this case
      * @param period The internship period together with year (e.g., "Summer 2000", "Winter 2015", "PARTTIME 2100").
      * @param year The year of internship.
      * @throws IllegalArgumentException if the period is not valid or the year is out of range.
@@ -54,7 +54,7 @@ public class PeriodTag extends Tag {
             InternshipPeriod.valueOf(period.toUpperCase(Locale.ROOT));
             return year >= 2000 && year <= 2500;
         } catch (IllegalArgumentException e) {
-            return false; // If the conversion fails, the value is invalid.
+            return false;
         }
     }
 

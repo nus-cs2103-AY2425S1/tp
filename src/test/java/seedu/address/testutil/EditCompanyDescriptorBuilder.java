@@ -43,6 +43,7 @@ public class EditCompanyDescriptorBuilder {
         descriptor.setAddress(company.getAddress());
         descriptor.setCareerPageUrl(company.getCareerPageUrl()); // Added this line
         descriptor.setTags(company.getTags());
+        descriptor.setRemark(company.getRemark()); // Added this line
     }
 
     /**

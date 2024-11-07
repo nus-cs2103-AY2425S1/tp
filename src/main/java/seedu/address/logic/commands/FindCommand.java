@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.company.Company;
 import seedu.address.model.company.NameContainsKeywordsPredicate;
 
 /**
@@ -32,7 +34,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredCompanyList(predicate);
-        List<?> filteredCompanies = model.getFilteredCompanyList();
+        List<Company> filteredCompanies = model.getFilteredCompanyList();
 
         if (filteredCompanies.isEmpty()) {
             return new CommandResult("There is no company that suits your keyword!");
@@ -40,7 +42,7 @@ public class FindCommand extends Command {
 
         return new CommandResult(
                 String.format("Found %d companies!", filteredCompanies.size())
-                        + "\n" + filteredCompanies.toString());
+                        + "\n" + filteredCompanies.stream().map(Messages::format).toList());
     }
 
     @Override

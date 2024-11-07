@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -25,16 +27,55 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <HBox alignment="CENTER" spacing="5">
+          <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+          <ImageView fx:id="bookmarkIcon" fitHeight="17" fitWidth="17">
+            <Image url="@/images/bookmark.png" />
+          </ImageView>
+        </HBox>
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="careerPageUrl" styleClass="cell_small_label" text="\$careerPageUrl" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <HBox spacing="5" alignment="CENTER_LEFT" >
+        <padding>
+          <Insets top="8" />
+        </padding>
+        <Label text="Phone Number:" styleClass="cell_small_label_field" style="-fx-text-fill: #404040;" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      </HBox>
       <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label text="Application Status:" style="-fx-background-color: lightblue; -fx-padding: 3 5 3 5; -fx-border-radius: 3; -fx-background-radius: 3;" />
-        <Label fx:id="applicationStatus" style="-fx-font-weight: bold;" />
+        <padding>
+          <Insets top="5" />
+        </padding>
+        <Label text="Address:" styleClass="cell_small_label_field" style="-fx-text-fill: #404040;" />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="5" />
+        </padding>
+        <Label text="Career Page Url:" styleClass="cell_small_label_field" style="-fx-text-fill: #404040;" />
+        <Label fx:id="careerPageUrl" styleClass="cell_small_label" text="\$careerPageUrl" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="5" />
+        </padding>
+        <Label text="Email:" styleClass="cell_small_label_field" style="-fx-text-fill: #404040;" />
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="5" />
+        </padding>
+        <Label text="Remark:" styleClass="cell_small_label_field" style="-fx-text-fill: #404040;" />
+        <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="5" />
+        </padding>
+        <Label text="Application Status:" styleClass="cell_small_label_field" style="-fx-text-fill: #404040;" />
+        <Label fx:id="applicationStatus" styleClass="cell_small_label" text="\$applicationStatus"/>
       </HBox>
     </VBox>
   </GridPane>

@@ -20,14 +20,14 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class CompanyBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_URL = "careers.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NAME = "OpenAI";
+    public static final String DEFAULT_PHONE = "00000010";
+    public static final String DEFAULT_EMAIL = "openai@example.com";
+    public static final String DEFAULT_URL = "www.openai-careers.com";
+    public static final String DEFAULT_ADDRESS = "123, Jurong East Ave 6, #08-111";
     public static final String DEFAULT_STATUS = "";
     public static final Bookmark DEFAULT_BOOKMARK = new Bookmark(false);
-    public static final String DEFAULT_REMARK = "This is a default remark"; // New default remark
+    public static final String DEFAULT_REMARK = "Leading AI company"; // New default remark
 
     private Name name;
     private Phone phone;

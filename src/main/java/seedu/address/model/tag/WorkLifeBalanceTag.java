@@ -11,7 +11,7 @@ import seedu.address.model.tag.enums.Level;
  * This tag ensures that the provided work-life balance level matches one of the
  * with possible levels being "low", "medium", or "high".
  */
-public class WorkLifeBalanceTag extends Tag {
+class WorkLifeBalanceTag extends Tag {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Work Life Balance level needs to be either Low, Medium, or High";
@@ -20,7 +20,7 @@ public class WorkLifeBalanceTag extends Tag {
     /**
      * Constructs a {@code WorkLifeBalanceTag} with the given tag name and work-life balance level.
      *
-     * @param tagName The name of the tag.
+     * @param tagName The name of the tag. Should preferably be "WLB" in this case
      * @param workLifeBalanceLevel The work-life balance level (e.g., "Low", "Medium", "High").
      * @throws IllegalArgumentException if the provided level is not a valid {@link Level} value.
      */
@@ -45,7 +45,7 @@ public class WorkLifeBalanceTag extends Tag {
             Level.valueOf(workLifeBalanceLevel.toUpperCase(Locale.ROOT));
             return true;
         } catch (IllegalArgumentException e) {
-            return false; // If the conversion fails, the value is invalid.
+            return false;
         }
     }
 

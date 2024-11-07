@@ -8,19 +8,16 @@ import static seedu.address.logic.commands.CommandTestUtil.CAREER_PAGE_URL_DESC_
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_TESLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_TESLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CAREER_PAGE_URL_TESLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_TESLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TESLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_VALID;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_COMPANY;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalCompanies.TESLA;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -77,14 +74,12 @@ public class LogicManagerTest {
     }
 
     @Test
-    @Disabled
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
-    @Disabled
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
@@ -186,18 +181,11 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_TESLA + PHONE_DESC_TESLA
-                + EMAIL_DESC_TESLA + ADDRESS_DESC_TESLA + CAREER_PAGE_URL_DESC_TESLA;
+                + EMAIL_DESC_TESLA + ADDRESS_DESC_TESLA + CAREER_PAGE_URL_DESC_TESLA + TAG_DESC_COMPANY
+                + REMARK_DESC_VALID;
 
         // Construct expectedCompany using the same data as in addCommand
-        Company expectedCompany = new CompanyBuilder()
-                .withName(VALID_NAME_TESLA)
-                .withPhone(VALID_PHONE_TESLA)
-                .withEmail(VALID_EMAIL_TESLA)
-                .withAddress(VALID_ADDRESS_TESLA)
-                .withCareerPageUrl(VALID_CAREER_PAGE_URL_TESLA)
-                .withTags() // Assuming no tags are provided in the command
-                .withIsBookmark(false) // Default isBookmark value
-                .build();
+        Company expectedCompany = new CompanyBuilder(TESLA).build();
 
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCompany(expectedCompany);

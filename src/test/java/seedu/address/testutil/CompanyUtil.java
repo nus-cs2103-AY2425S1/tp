@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CAREER_PAGE_URL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -38,6 +39,7 @@ public class CompanyUtil {
         sb.append(PREFIX_CAREER_PAGE_URL + company.getCareerPageUrl().value + " ");
         company.getTags().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        sb.append(PREFIX_REMARK + company.getRemark().value + " ");
         return sb.toString();
     }
 

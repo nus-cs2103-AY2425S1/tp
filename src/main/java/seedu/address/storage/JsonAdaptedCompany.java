@@ -37,7 +37,7 @@ class JsonAdaptedCompany {
     private final String applicationStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
-    private final Bookmark isBookmark;
+    private final Boolean isBookmark;
 
     /**
      * Constructs a {@code JsonAdaptedCompany} with the given company details.
@@ -48,7 +48,7 @@ class JsonAdaptedCompany {
                               @JsonProperty("careerPageUrl") String careerPageUrl,
                               @JsonProperty("applicationStatus") String status,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                              @JsonProperty("bookmark") Bookmark isBookmark,
+                              @JsonProperty("bookmark") Boolean isBookmark,
                               @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
@@ -77,7 +77,7 @@ class JsonAdaptedCompany {
         tags.addAll(source.getTags().stream()
                 .map(tag -> new JsonAdaptedTag(tag))
                 .collect(Collectors.toList()));
-        isBookmark = source.getIsBookmark();
+        isBookmark = source.getIsBookmark().getIsBookmarkValue();
     }
 
     /**
@@ -151,7 +151,7 @@ class JsonAdaptedCompany {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Bookmark.class.getSimpleName()));
         }
-        final Bookmark modelBookmark = new Bookmark(isBookmark.getIsBookmarkValue());
+        final Bookmark modelBookmark = new Bookmark(isBookmark);
 
         return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl,
                 modelApplicationStatus, modelTags, modelBookmark, modelRemark);
