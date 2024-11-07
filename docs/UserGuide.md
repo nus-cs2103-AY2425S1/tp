@@ -170,7 +170,7 @@ Examples:
 
 Search persons whose fields match the keywords given.
 
-Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
+Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * Search is restricted to the fields indicated by the provided prefixes.
@@ -290,10 +290,14 @@ Example:
 * `deleteGroup g/blood drive 2024`
 
 ### Listing groups: `listGroups`
-
-Lists out all existing Group names.
+Shows a list of all existing groups.
 
 Format: `listGroups`
+
+* The group size and up to three members are displayed for each group.
+* If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
+
+![result for 'list groups'](images/list-groups.png)
 
 ### Getting emails: `email`
 
@@ -351,7 +355,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Search**   | `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`<br> e.g., `search n/ john`
+**Search**   | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`<br> e.g., `search n/john`
 **List**   | `list`
 **Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`
