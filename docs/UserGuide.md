@@ -202,7 +202,7 @@ Examples:
 
 ### Adding a lesson : `lesson add`
 
-Adds a lesson to the lesson schedule.
+Adds a lesson tied to a student with start and end date time.
 
 Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
 
@@ -247,7 +247,8 @@ Remarks:
 
 * Deletes the lesson at the specified `INDEX`.
 * The index refers to the index number shown in the displayed lesson schedule.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​.
+* `INDEX` must be within the range of the displayed list.
 
 Examples:
 
@@ -320,6 +321,9 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous TutorEase home folder.
+
+**Q**: What languages are supported for inputs?<br>
+**A**: Currently only english inputs are supported.
 
 --------------------------------------------------------------------------------------------------------------------
 
