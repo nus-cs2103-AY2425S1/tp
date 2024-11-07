@@ -106,8 +106,8 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 <<<<<<< HEAD
 are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 =======
-are in the `src/main/resources/view` folder. For example, the layout of the 
-[`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) 
+are in the `src/main/resources/view` folder. For example, the layout of the
+[`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 >>>>>>> 550f0146c8868387d6e04d7b2929482db9d748df
 
@@ -117,7 +117,7 @@ is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
- 
+
 #### `CommandHistory` Integration
 
 The `CommandHistory` class, located in `seedu.address.ui.util`, is responsible for tracking user-entered commands.

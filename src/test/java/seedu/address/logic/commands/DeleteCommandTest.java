@@ -186,7 +186,7 @@ public class DeleteCommandTest {
         assertCommandFailure(
                 deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidStudentId));
     }
-  
+
     @Test
     public void execute_validStudentIdAndModule_success() {
         Person personWithModule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
