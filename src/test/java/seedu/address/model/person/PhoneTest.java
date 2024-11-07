@@ -31,11 +31,13 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("59999999"));
+        assertFalse(Phone.isValidPhone("78847473"));
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("91111111")); // exactly 8 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("92429384")); // long phone numbers
+        assertTrue(Phone.isValidPhone("83121534"));
+        assertTrue(Phone.isValidPhone("62429384")); // long phone numbers
     }
 
     @Test
