@@ -26,6 +26,9 @@ public class ListingDeleteCommandParser implements Parser<ListingDeleteCommand> 
         Index listingIndex;
         try {
             String[] bothIndexes = argMultimap.getPreamble().trim().split(" ");
+            if (bothIndexes.length != 2) {
+                throw new IllegalValueException("Missing indexes");
+            }
             personIndex = ParserUtil.parseIndex(bothIndexes[0]);
             listingIndex = ParserUtil.parseIndex(bothIndexes[1]);
 

@@ -168,6 +168,8 @@ public class ParserUtil {
         } catch (IllegalArgumentException ive) {
             throw new ParseException(ive.getMessage() + " | Allowed tags: " + ALLOWED_PROPERTY_TAGS, ive);
         }
+
+
         Address address = new Address(addressStr.trim());
 
         return new Listing(propertyTag, address);
