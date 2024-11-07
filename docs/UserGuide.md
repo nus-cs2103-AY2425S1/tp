@@ -6,7 +6,7 @@
 
 # Tuteez User Guide
 
-Tuteez is a **desktop address book app designed specifically for tech-savvy private tutors to manage student contacts**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student. If you can type fast, Tuteez can get your contact management tasks done faster than traditional GUI apps.
+Tuteez is a **desktop address book app** designed specifically for **private tutors** to **manage student contacts seamlessly**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student. If you can type fast, Tuteez can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 
@@ -128,7 +128,7 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] 
 
 <box type="tip" seamless>
 
-**Tip:** A student can have any number of tags and lessons (including 0)
+**Tip:** You can add any number of tags and lessons to a student (or you could also omit them)
 </box>
 
 Examples:
@@ -153,13 +153,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing **tags**, **all previous values will be replaced** by the new ones entered.
     - This means you must **retype all old tags** you wish to keep, as editing will overwrite them completely.
     - For example, if a student already has two lessons and you wish to add another, you need to re-enter the previous lessons along with the new one.
-* Lessons cannot clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, the app will notify the user with an error message.
+* Lessons cannot clash (i.e., lessons scheduled on the same day cannot overlap in timing). If a clash is detected, the app will notify the user with an error message.
 * You can remove all optional fields as specified in the `add` command by typing its parameter prefix (e.g. `t/`) without specifying any values after them.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 l/tuesday 0900-1100` Edits the lesson of the 3rd student to be `MONDAY 0900-1100`.
 
 ### Adding a Remark: `addremark` or `addrmk`
 
@@ -266,21 +265,22 @@ Format: `delete INDEX` or `delete NAME`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the first student in the results of the `find` command.
 * `delete John Doe` deletes the student with the full name "John Doe" from the address book, ignoring case sensitivity.
 
 ### Displaying Student Information: `display`
 
 Displays specific information of a student in Tuteez.
 
-Format: `display INDEX`
+Format: `display INDEX` or `display NAME`
 
-* Displays the details of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Displays the details of the student at the specified `INDEX` or with the specified `NAME`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * The displayed information includes the student's name, phone number, email, address, tags, lessons, and any remarks associated with the student.
 
 Examples:
 * `display 1` Shows the details of the first student in the list.
 * `display 3` Shows the details of the third student in the list.
+* `display john doe` Shows the details of student John Doe in the list, if they were to be found.
 
 ### Clearing all entries : `clear`
 
@@ -298,7 +298,7 @@ Format: `exit`
 
 ## Key details for Users  
 
-### `Lesson` Constraints
+### Constraints to add a lesson
 
 Unfortunately, as of `V1.5` there are a few important constraints regarding lessons:  
 
@@ -359,7 +359,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [l/LESSON]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math t/monday 0900-1100`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME`<br> e.g., `delete 3` or `delete James Ho`
-**Display**| `display INDEX` <br> e.g., `display 1`
+**Display**| `display INDEX` or display `NAME` <br> e.g., `display 1` or display `John Doe`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math l/sunday 1000-1100`
 **Add Remark** | `remark INDEX r/REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 r/Great progress in Math`
 **Delete Remark** |  `remark INDEX ri/REMARK_INDEX` to delete the remark at `REMARK_INDEX` from the student at `INDEX`<br> e.g., `remark 1 ri/2` to delete the second remark of student 1.
