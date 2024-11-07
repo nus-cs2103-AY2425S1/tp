@@ -511,19 +511,19 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
 1. Viewing a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
 
     1. Test case: `view 1` <br>
-       Expected: First contact from the list is viewed. Success action will be carried out for that contact.
+       Expected: First contact from the list is viewed. Success action will be carried out for that contact.<br><br>
 
     1. Test case: `view 0`<br>
-       Expected: No person is viewed. Error details shown in the status message. 
+       Expected: No person is viewed. Error details shown in the status message. <br><br>
 
     1. Test case: `view x` (where x is larger than the size of person list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.
+       Expected: Error message prompting the user to choose an index within the range shown.<br><br>
 
     1. Other incorrect view commands to try: `view`, `view x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii).
+       Expected: Similar to point #1(iii). <br><br>
 
 1. Viewing a person while a filtered list of contacts is shown
 
@@ -533,7 +533,7 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
 #### Viewing with NAME
 
-1. Since `view NAME` searches from the entire list of contacts, rather than only the partial list, it is okay either way.
+1. Since `view NAME` searches from the entire list of contacts, rather than only the partial list, it works either way.
 
     1. Test case: `view Alice Tan` <br>
        Expected (Unique Alice Tan): The contact of `Alice Tan` is viewed. Success action will be carried out for that contact.<br>
@@ -548,19 +548,19 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.<br><br>
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No person is deleted. Error details shown in the status message.<br><br>
 
    1. Test case: `delete x` (where x is larger than the size of person list)<br>
-      Expected: Error message prompting the user to choose an index within the range shown.
+      Expected: Error message prompting the user to choose an index within the range shown.<br><br>
 
    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is a negative integer)<br>
-      Expected: Similar to point #1(iii).
+      Expected: Similar to point #1(iii).<br><br>
 
 1. Deleting a person while a filtered list of contacts is shown
 
@@ -570,7 +570,7 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
 #### Deleting with NAME
 
-1. Since `delete NAME` searches from the entire list of contacts, rather than only the partial list, it is okay either way.
+1. Since `delete NAME` searches from the entire list of contacts, rather than only the partial list, it works either way.
 
    1. Test case: `delete Alice Tan` <br>
       Expected (Unique Alice Tan): The contact of `Alice Tan` will be deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.<br>
@@ -582,38 +582,38 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
 1. Filtering while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
 
     2. Test case: `filter n/John`<br>
-       Expected: All the contacts with the exact name match "John" (case-insensitive matching) are shown.
+       Expected: All the contacts with the exact name match "John" (case-insensitive matching) are shown.<br><br>
 
     3. Test case: `filter r/vendor e/gmail`<br>
-       Expected: All the contacts who have the role "vendor" OR have "gmail" in their email are shown.
+       Expected: All the contacts who have the role "vendor" OR have "gmail" in their email are shown.<br><br>
 
     4. Test case: `filter n/Alex Tan`<br>
-       Expected: Error message is shown as the name field must be a single word. Error details shown in the status message.
+       Expected: Error message is shown as the name field must be a single word. Error details shown in the status message.<br><br>
 
 2. Invalid filter commands to try:
 
     1. Test case: `filter`<br>
-       Expected: Error message is shown as at least one filter criteria must be provided. Error details shown in the status message.
+       Expected: Error message is shown as at least one filter criteria must be provided. Error details shown in the status message.<br><br>
 
     2. Test case: `filter n/`<br>
-       Expected: Error message is shown as parameter cannot be left empty. Error details shown in the status message.
+       Expected: Error message is shown as parameter cannot be left empty. Error details shown in the status message.<br><br>
 
     3. Test case: `filter x/value`<br>
-       Expected: Error message is shown due to unknown prefix. Error details shown in the status message.
+       Expected: Error message is shown due to unknown prefix. Error details shown in the status message.<br><br>
 
 3. Edge cases to test:
 
     1. Test case: `filter n/john`<br>
-       Expected: The names of contacts will be matched and shown regardless of case (e.g., "John", "JOHN", "JoHn").
+       Expected: The names of contacts will be matched and shown regardless of case (e.g., "John", "JOHN", "JoHn").<br><br>
 
     2. Test case: `filter e/gmail a/street`<br>
-       Expected: All the contacts with either "gmail" in email OR "street" in address will be shown.
+       Expected: All the contacts with either "gmail" in email OR "street" in address will be shown.<br><br>
 
     3. Test case: `filter p/91234567`<br>
-       Expected: Only the contacts with the exact phone number will be shown.
+       Expected: Only the contacts with the exact phone number will be shown.<br><br>
 
 4. Filtering a person while a filtered list of contacts is shown
 
@@ -629,23 +629,23 @@ The persons involved in the viewed wedding will be shown in the person list. Tim
 
 #### Viewing weddings using INDEX
 
-1. Viewing a wedding while all weddings are being shown
+1. Viewing of a wedding while all weddings are being shown
 
-    1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.
+    1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.<br><br>
 
     1. Test case: `vieww 1` <br>
-       Expected: First wedding from the wedding list is viewed. Success action will be carried out for that wedding.
+       Expected: First wedding from the wedding list is viewed. Success action will be carried out for that wedding.<br><br>
 
     1. Test case: `vieww 0`<br>
-       Expected: No wedding is viewed. Error details shown in the status message.
+       Expected: No wedding is viewed. Error details shown in the status message.<br><br>
 
     1. Test case: `vieww x` (where x is larger than the size of wedding list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.
+       Expected: Error message prompting the user to choose an index within the range shown.<br><br>
 
     1. Other incorrect vieww commands to try: `vieww`, `vieww x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii).
+       Expected: Similar to point #1(iii).<br><br>
 
-1. Viewing a wedding while a filtered list of weddings is shown
+1. Viewing of a wedding while a filtered list of weddings is shown
 
     1. Prerequisite: A partial list of weddings is shown.
 
@@ -653,7 +653,7 @@ The persons involved in the viewed wedding will be shown in the person list. Tim
 
 #### Viewing weddings using WEDDING_NAME
 
-1. Since `vieww WEDDING_NAME` searches from the entire list of contacts, rather than only the partial list, it is okay either way.
+1. Since `vieww WEDDING_NAME` searches from the entire list of contacts, rather than only the partial list, it is works either way.
 
     1. Test case: `vieww Alice` <br>
        Expected (Unique Alice): The wedding of `Alice` will be shown. Success action will be carried out for that wedding.<br>
@@ -673,21 +673,21 @@ Persons who are involved in the wedding will also be unassigned. Timestamp in th
 
 1. Deleting a wedding while all weddings are being shown
 
-    1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.
+    1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.<br><br>
 
     1. Test case: `deletew 1`<br>
-       Expected: First wedding is deleted from the list. Success action will be carried out for that wedding.
+       Expected: First wedding is deleted from the list. Success action will be carried out for that wedding.<br><br>
 
     1. Test case: `deletew 0`<br>
-       Expected: No wedding is deleted. Error details shown in the status message.
+       Expected: No wedding is deleted. Error details shown in the status message.<br><br>
 
     1. Test case: `deletew x` (where x is larger than the size of wedding list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.
+       Expected: Error message prompting the user to choose an index within the range shown.<br><br>
 
     1. Other incorrect deletew commands to try: `deletew`, `deletew x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii).
+       Expected: Similar to point #1(iii).<br><br>
 
-1. Deleting a wedding while a filtered list of contacts is shown
+1. Deleting a wedding while a filtered list of weddings is shown
 
     1. Prerequisite: A partial list of weddings is shown.
 
