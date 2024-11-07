@@ -490,7 +490,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Status**: The current fulfilment condition of an order, such as completed or pending.
+* **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
 
 --------------------------------------------------------------------------------------------------------------------
 
