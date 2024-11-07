@@ -3,9 +3,9 @@ layout: page
 title: MediBase3 User Guide
 ---
 
-MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage their patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for MB3 to handle and focus more on your patients! 
+MediBase3 (MB3) is a **desktop app for doctors, offering an all-in-one solution to manage patient records with ease.** From tracking medical conditions, allergies, and priorities to even scheduling appointments, MediBase3 takes care of it so you can focus more on your patients.
 
-Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
+Optimised via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@ Each aspect of MediBase3 is split into different sections, which are accessible 
 
 **For experienced MediBase3 users:**
 1. If you need a quick refresher on how to use a specific feature in MediBase3, you can navigate to the [Features](#features) section.
-1. You may also skip to the [Command Summary](#command-summary) section for a quick overview of all the commands available in MediBase3 and their formats.
+1. You may also skip to the [Command Summary](#command-summary) section for a quick overview of all available commands in MediBase3 and their formats.
 
 For any additional information or queries, you can refer to the [FAQ](#faq) section or the [Known Issues](#known-issues) section.
 
@@ -302,59 +302,64 @@ the constraints of each parameter when used in a command.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+{: .alert .alert-info}
+> :information_source: **General Behavior:**
+>
+> All commands (except those in the **Finding Patients** section) will refresh the Patient List Panel to show all patients upon successful execution. This applies to commands for managing patients, appointments, medical conditions, allergies, and priority.
+
+
 <div style="page-break-after: always;"></div>
 
 ### Managing Patient
 
 #### Adding a patient: `add`
 
-Adds a patient and their relevant details to MediBase3.
+Adds a patient and his/her relevant details to MediBase3.
 
-Format: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE e/EMAIL a/ADDRESS`
+**Format**: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE e/EMAIL a/ADDRESS`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 > 
 > * All fields are compulsory and must be non-empty.
-> * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case.
+> * If the `NRIC` provided already exists in MediBase3, an error message will be displayed, and the patient will not be added.
 > * The new patient will be added to the end of the Patient List Panel.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
-Examples:
+**Examples**:
 * `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` adds a patient named `John Doe` with the respective NRIC, gender, date of birth, phone number, email and address provided into MediBase3.
 
 {: .alert .alert-success}
-> :bulb: **Tip:**
+> :bulb: **Tips:**
 > 
 > * Remember that `NRIC` and `GENDER` are case-insensitive.
-> E.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
+>   -  e.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
 > * Made a mistake or a typo? You can use the [`edit` command](#editing-a-patient--edit) to update the patient's details.
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting a patient : `delete`
 
-Deletes the specified patient and their details from MediBase3.
+Deletes a patient and his/her details from MediBase3.
 
-Format: `delete NRIC`
+**Format**: `delete NRIC`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 > 
-> * Deletes the patient with the specified `NRIC` in MediBase3.
-> * The `NRIC` provided must be the **full NRIC** of the patient to be deleted. e.g. `S1234567A` and not `S123`.
-> * You can delete a patient even if they are not being currently displayed in the Patient List Panel.
-> * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
+> * Deletes the patient with the specified `NRIC` from MediBase3.
+> * The `NRIC` provided must be the full NRIC of the patient to be deleted.
+    >   - e.g. `S1234567A` (not partial, like `S123`).
+> * Refer to [Parameter Details](#parameter-details) for NRIC constraints.
 
-Example:
-* `delete S1234567A` will delete the patient with the NRIC `S1234567A`.
+**Example**:
+* `delete S1234567A` deletes the patient with the NRIC `S1234567A`.
 
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
 > 
-> * Once a patient is deleted from MediBase3, you will be **unable to recover their information**.
-> Please ensure that you have provided the correct `NRIC` of the patient that you want to delete.
-> * Deleting a patient will also remove all their associated appointments from the Appointment List Panel.
+> * Patient information **cannot be recovered** once deleted. Double-check the `NRIC` before deletion.
+> * Deleting a patient also removes all associated appointments from the Appointment List Panel.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -362,26 +367,27 @@ Example:
 
 Edits an existing patient details in MediBase3.
 
-Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+**Format**: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 > 
 > * Edits the patient with the specified `NRIC` in MediBase3.
-> * The NRIC provided must be the full NRIC of the patient to be edited. e.g. `S1234567A` and not `S123`.
-> * **At least one** of the optional fields must be provided. e.g. `edit S1234567A` is invalid.
+> * The NRIC provided must be the full NRIC of the patient to be edited. 
+>   - e.g. `S1234567A` (not partial, like `S123`).
+> * **At least one** of the optional fields must be provided. 
+>   - e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
-> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after the patient's details have been edited.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+> * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
-Example:
+**Example**:
 *  `edit S1234567A p/91234567 e/johndoe@example.com` will edit the phone number and email address of the patient with the NRIC`S1234567A`
 to `91234567` and `johndoe@example.com` respectively.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
 > 
-> Editing the patient's `NAME` or `NRIC` will also update their associated appointments in the Appointment List Panel to reflect the new change.
+> Editing the patient's `NAME` or `NRIC` will also update his/her associated appointments in the Appointment List Panel to reflect the change.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -389,76 +395,71 @@ to `91234567` and `johndoe@example.com` respectively.
 
 ### Managing Appointments
 
-#### Adding Appointments : `addAppt`
+#### Adding an Appointment : `addAppt`
 
-Allow doctors to schedule an appointment with a patient.
+Schedules an appointment for a patient in MediBase3.
 
-Format: `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
+**Format**: `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 >
-> * Adds Appointment Time and Appointment Name to the patient with the specified `NRIC` in MediBase3.
-> * You can schedule an appointment to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been added.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+> * Adds an appointment with the specified `APPOINTMENT_NAME`, `APPOINTMENT_DATE`, and `APPOINTMENT_TIME` for the patient identified by `NRIC`.
+> * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
 >
-> * For each patient, appointment time intervals cannot overlap with other existing appointment time intervals.
+> * For each patient, appointment times cannot overlap.
 > * Earliest valid appointment time is `0000`, and latest is `2359`.
-> * Appointments cannot span beyond date boundaries
+> * Appointments cannot span across date boundaries
 
-Example:
-* `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` will schedule an appointment for the patient with NRIC `S1234567A` on `2024-10-27`, from `1100` to `1200` titled `Dental`. 
+**Example**:
+* `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` schedules a `Dental` appointment for the patient with `NRIC` `S1234567A` on `2024-10-27`, from `1100` to `1200`.
+
 
 ![result for addAppt command example](images/addApptCommand.png)
 
 {: .alert .alert-success}
-> :bulb: **Tip:**
+> :bulb: **Tips:**
 >
 > * Adding a new appointment will update the Appointment List Panel on the right with the new appointment details.
-> * Appointment List Panel is displayed in chronological order.
+> * The Appointment List Panel displays appointments in chronological order.
 > * Appointment names need not be unique.
-> * Different patients may have overlapping appointment timings, as long as overlapping appointments are not from the same patient 
+> * Different patients may have overlapping appointment timings, as long as those appointments are not from the same patient.
+
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> Input two new appointments to represent any appointments that span across date boundaries. 
-> * Input the first ending at `2359`: e.g. `addAppt Transfusion i/S1234567A @d/2024-10-23 @t/2200-2359`; and
-> * Input the next starting on the following date at `0000`: e.g. `addAppt Transfusion i/S1234567A @d/2024-10-24 @t/0000-0100`.
+> For appointments that span across date boundaries, add two appointments:
+> * End the first appointment at `2359` (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-23 @t/2200-2359`).
+> * Start the next appointment at `0000` on the following date (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-24 @t/0000-0100`).
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> Appointment end timings are **exclusive** - the next appointment can start immediately after the previous.
->
-> If the time period of _Appointment A_ is `1200-1300`:
-> * the time period of _Appointment B_ can be `1300-1400`.
-> * the time period of _Appointment B_ can be `1300-1400`.
-> * _Appointment B_'s time period **cannot** start anywhere from `1200` to `1259`.
-> * _Appointment B_'s time period **cannot** end anywhere from `1201` to `1300`.
+> Appointment end times are **exclusive**. For example:
+> * If _Appointment A_ is scheduled from `1200` to `1300`, _Appointment B_ can start at `1300`.
+> * _Appointment B_ cannot start between `1200` and `1259`, nor end between `1201` and `1300`.
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Deleting Appointments : `delAppt`
+#### Deleting an Appointment : `delAppt`
 
-Allow doctors to delete an appointment. 
+Deletes a scheduled appointment from MediBase3.
 
-Format: `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
+**Format**: `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
-> 
-> * Unlike addAppt, there is no need for `APPOINTMENT_NAME` preamble.
-> * Deletes Appointment from the patient with the specified `NRIC` in MediBase3.
-> * You can delete an appointment from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been deleted.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+> :information_source: **Notes:**
+>
+> * Only `NRIC`, `APPOINTMENT_DATE`, and `APPOINTMENT_TIME` are required; `APPOINTMENT_NAME` is not needed.
+> * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 Example:
-* `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200` will delete an appointment on `2024-10-27` from `1100` to `1200` for the patient with NRIC `S1234567A`.
+* `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200` deletes an appointment on `2024-10-27` from `1100` to `1200` for the patient with `NRIC` `S1234567A`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -468,57 +469,59 @@ Example:
 
 #### Adding Medical Conditions : `addMedCon`
 
-Adds medical condition(s) to an existing patient in MediBase3.
+Adds one or more medical conditions to an existing patient in MediBase3.
 
-Format: `addMedCon i/NRIC c/CONDITION...`
+**Format**: `addMedCon i/NRIC c/CONDITION...`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 >
-> * Adds the specified `CONDITION` to the patient with the specified `NRIC` in MediBase3.
-> * You can add a medical condition to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been added.
-> * **At least one** `CONDITION` must be provided. e.g. `addMedCon i/S1234567A` is invalid.
-> * `CONDITION` is case-insensitive. e.g. `addMedCon i/S1234567A c/Flu` will add the medical condition `FLU` to the patient with the NRIC `S1234567A`.
-> * You cannot add the same `CONDITION` to a patient more than once.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+> * Adds the specified `CONDITION` to the patient identified by `NRIC` in MediBase3.
+> * **At least one** `CONDITION` must be provided. 
+>   - e.g. `addMedCon i/S1234567A` is invalid.
+> * Each medical condition can only be added once per patient.
+> * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
-Example: 
-* `addMedCon i/S1234567A c/High Blood Pressure` will add medical condition `High Blood Pressure` to patient with NRIC `S1234567A`.   
+**Example**:
+* `addMedCon i/S1234567A c/High Blood Pressure` adds the condition `High Blood Pressure` to the patient with `NRIC` `S1234567A`.
+
 
 ![result for addMedCon command example](images/addMedConCommand.png)
 
 {: .alert .alert-success}
-> :bulb: **Tip:**
->
+> :bulb: **Tips:**
+> 
+> * `CONDITION` is case-insensitive.
+>   - e.g. `addMedCon i/S1234567A c/Flu` will add the medical condition `FLU` to the patient with the NRIC `S1234567A`.
 > * You can add multiple medical conditions to a patient by using multiple `c/CONDITION`parameters
-> * e.g. `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+>   - e.g. `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting Medical Conditions : `delMedCon`
 
-Deletes medical condition(s) from an existing patient in MediBase3.
+Deletes one or more medical conditions from an existing patient in MediBase3.
 
-Format: `delMedCon i/NRIC c/CONDITION...`
+**Format**: `delMedCon i/NRIC c/CONDITION...`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 >
-> * Deletes Medical Condition from the patient with the specified `NRIC` in MediBase3.
-> * You can delete a Medical Condition from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been removed.
-> * **At least one** `CONDITION` must be provided. e.g. `delMedCon i/S1234567A` is invalid.
-> * `CONDITION` is case-insensitive. e.g. `delMedCon i/S1234567A c/Flu` will delete the medical condition `FLU` from the patient with the NRIC `S1234567A`.
-> * Patient must have the given `CONDITION` in order for it to be deleted, else an error message will be displayed.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+> * Deletes the specified `CONDITION` from the patient identified by `NRIC` in MediBase3.
+> * **At least one** `CONDITION` must be provided. 
+>   - e.g. `delMedCon i/S1234567A` is invalid.
+> * The patient must have the specified condition for it to be removed; otherwise, an error message will display.
+> * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
-Example:
-* `delMedCon i/S1234567A c/High Blood Pressure` will delete medical condition `High Blood Pressure` from patient with NRIC `S1234567A`.
+**Example**:
+* `delMedCon i/S1234567A c/High Blood Pressure` deletes `High Blood Pressure` from the patient with `NRIC` `S1234567A`.
 
 {: .alert .alert-success}
-> :bulb: **Tip:**
->
+> :bulb: **Tips:**
+> * `CONDITION` is case-insensitive.
+>   - e.g. `delMedCon i/S1234567A c/Flu` will delete the medical condition `FLU` from the patient with the NRIC `S1234567A`.
 > * You can delete multiple medical conditions from a patient by using multiple `c/CONDITION`parameters
-> * e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+>   - e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -528,57 +531,60 @@ Example:
 
 #### Adding an allergy: `addAllergy`
 
-Adds an allergy or multiple allergies to an existing patient in MediBase3.
+Adds one or more allergies to an existing patient in MediBase3.
 
-Format: `addAllergy i/NRIC al/ALLERGY…`
+**Format**: `addAllergy i/NRIC al/ALLERGY…`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 >
-> * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
-> * You can add an allergy to a patient even if they are not being currently displayed in the Patient List Panel.
-> * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
-> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
-> * You cannot add the same `ALLERGY` to a patient more than once.
-> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
+> * Adds the specified `ALLERGY` to the patient identified by `NRIC` in MediBase3.
+> * **At least one** `ALLERGY` must be provided. 
+>   - e.g. `addAllergy i/S1234567A` is invalid.
+> * Each allergy can only be added once per patient.
+> * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
-Example:
-* `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+**Example**:
+* `addAllergy i/S1234567A al/Peanuts` adds the allergy `Peanuts` to the patient with `NRIC` `S1234567A`.
 
 ![result for addAllergy command example](images/addAllergyCommand.png)
 
 {: .alert .alert-success}
-> :bulb: **Tip:**
+> :bulb: **Tips:**
 > 
+> * `ALLERGY` is case-insensitive.
+>   - e.g. `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
 > * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
-> * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+>   - e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting an allergy: `delAllergy`
 
-Deletes an allergy or multiple allergies from an existing patient in MediBase3.
+Deletes one or more allergies from an existing patient in MediBase3.
 
-Format: `delAllergy i/NRIC al/ALLERGY…`
+**Format**: `delAllergy i/NRIC al/ALLERGY…`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 >
-> * Deletes the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
-> * **At least one** `ALLERGY` must be provided. e.g. `delAllergy i/S1234567A` is invalid.
-> * `ALLERGY` is case-insensitive. e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
-> * Patient must have the given `ALLERGY` in order for it to be deleted, else an error message will be displayed.
-> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
+> * Deletes the specified `ALLERGY` for the patient identified by `NRIC` in MediBase3.
+> * **At least one** `ALLERGY` must be provided. 
+>   - e.g. `delAllergy i/S1234567A` is invalid.
+> * The patient must have the specified `ALLERGY` for it to be removed; otherwise, an error message will be displayed.
+> * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
-Example:
-* `delAllergy i/S1234567A al/Peanuts` will delete the existing allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
+**Example**:
+* `delAllergy i/S1234567A al/Peanuts` deletes the allergy `Peanuts` from the patient with `NRIC` `S1234567A`.
 
 {: .alert .alert-success}
-> :bulb: **Tip:**
+> :bulb: **Tips:**
 >
+> * `ALLERGY` is case-insensitive.
+>   - e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
 > * You can delete multiple allergies from a patient by using multiple `al/ALLERGY` parameters.
-> * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+>   - e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -590,17 +596,16 @@ Example:
 
 Sets Priority to an existing patient in MediBase3.
 
-Format: `setPriority i/NRIC !/PRIORITY`
+**Format**: `setPriority i/NRIC !/PRIORITY`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 >
 > * Sets Priority to the patient with the specified `NRIC` in MediBase3.
-> * You can set Priority to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after Priority has been set.
 > * On default Patient has been set to `NONE` Priority level.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+> * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
-Example: 
+**Example**:
 * `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
 
 ![result for setPriority command example](images/setPriorityCommand.png)
@@ -612,7 +617,7 @@ Example:
 ### Finding Patients
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 > 
 > * The following commands in this section will alter the view of the Patient List Panel to display only patients that match the given criteria.
 > * They will not alter the view of the Appointment List Panel.
@@ -621,7 +626,7 @@ Example:
 
 Shows a list of all patients in MediBase3.
 
-Format: `list`
+**Format**: `list`
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -631,19 +636,19 @@ Format: `list`
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Listing all patients by their priority: `listPrio`
+#### Listing all patients by his/her priority: `listPrio`
 
 Shows a list of all patients with a specific `PRIORITY` in MediBase3.
 
-Format: `listPrio !/PRIORITY`
+**Format**: `listPrio !/PRIORITY`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 > 
 > * An empty Patient List Panel will be displayed if no patients with the given `PRIORITY` are found.
 > * `PRIORITY` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section. 
 
-Example: 
+**Example**:
 * `listPrio !/High` will display all patients with the priority `HIGH`.
 
 [Back to Table of Contents](#table-of-contents)
@@ -652,20 +657,20 @@ Example:
 
 Finds patients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]…`
+**Format**: `find KEYWORD [MORE_KEYWORDS]…`
 
 {: .alert .alert-info} 
-> :information_source: **Note:**
+> :information_source: **Notes:**
 > 
 > * The search is case-insensitive. e.g. `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * Only the name is searched.
 > * Only **full words** will be matched e.g. `Han` will not match `Hans`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+>   - e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 
-Examples:
+**Example**:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
@@ -677,10 +682,10 @@ Examples:
 
 Finds patients whose medical condition(s) contain the given keywords.
 
-Format: `findMedCon KEYWORD [MORE_KEYWORDS]…`
+**Format**: `findMedCon KEYWORD [MORE_KEYWORDS]…`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 >
 > * The search is case-insensitive. e.g `diabetes` will match `Diabetes`
 > * The order of the keywords does not matter. e.g. `diabetes arthritis` will match `arthritis` and `diabetes` 
@@ -698,12 +703,12 @@ Example:
 
 #### Locating patient by NRIC: `findNric`
 
-Finds patients based on their NRIC.
+Finds patients based on his/her NRIC.
 
-Format: `findNric NRIC`
+**Format**: `findNric NRIC`
 
 {: .alert .alert-info}
-> :information_source: **Note:**
+> :information_source: **Notes:**
 > 
 > * The search is case-insensitive. e.g `S1234567a` will match `S1234567A`
 > * Only the `NRIC` is searched.
