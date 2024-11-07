@@ -598,6 +598,76 @@ testers are expected to do more *exploratory* testing.
    (where days supplied does not match any day or contains only whitespace)<br>
       Expected: Similar to previous.
 
+### Adding a new student
+
+**Note:** You are encouraged to follow the test cases in order to see the expected results
+
+1. Adding a new student with all parameters specified
+
+   1. Type `add` and press `Enter` on your keyboard.
+
+   1. You will see an error message in the result display area that shows you how to use this command.
+
+   1. In the error message, an example is provided. Copy the example.
+
+   1. Test case: same as the example you copied.
+   
+   1. Expected: A new student with the corresponding information will be added to the end of the current list.
+
+1. Adding a new student with only compulsory parameters specified, order changed and case-insensitive command words
+
+   1. Test case: `aDD n/A Lucky Tester t/Sunday-1000-1200 s/Biology r/500 p/87903288 e/ilovecs2103t@nus.edu.sg a/COM2`.
+   
+   1. Expected: The student is successfully added.
+
+1. Adding a duplicated student
+
+   1. Test case: `add n/a lucky Tester p/87903288 e/suchANiceApp@meta.sg a/COM1 B1 r/10 paid/0 owed/0 t/Tuesday-1500-1600
+   s/Physics`.
+
+   1. Expected: An error message shown: `A student with the same name and the same phone number already exists in the address book`. 
+
+
+1. Adding a new student with a clashing schedule
+
+   1. Test case: `add n/software Developer p/65894545 e/coderwithoutbug@gmail.com a/Jurong West Condo r/100 t/Sunday-1130-1330 s/GP`
+
+   1. Expected: The new student is successfully added with a warning message.
+
+1. Adding a new student with mixed-case prefixes
+
+   1. Test case: `add N/Teaching Assistant p/90908767 e/getaboveAtobeaTA123@hotmail.com a/21 Lower Kent Ridge Drive r/40.00 t/Thursday-1130-1330 s/Economics Paid/12.00`
+
+   2. Expected: A new contact with the corresponding information will be added to the end of the current list.
+
+### Editing an existing student
+
+1. Editing a student while all students are being shown
+
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   
+   1. Test case: `eDit 3 owed/500 p/89873423`<br>Expected: Student number 3 will have the new values for their **OWED_AMOUNT** and **PHONE**.
+   
+   1. Other incorrect edit commands to try: `edit`, `edit 0`, `edit x`, `...` (where x is larger than the list size)<br>
+   Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+1. Editing a student in a filtered list
+
+   1. Prerequisites: Filter the students using `find` command.<br>Test case: `find n/irfan d/thursday`. (Given that at least 1 student with the mentioned **NAME** and **SCHEDULE** is available in the list)
+
+   1. Test case: `edit 1 n/Jonathan e/jonjon4343@canadian.com`
+   
+   1. Expected: The **NAME** and **EMAIL** of the first student in the filtered list will be updated. The list shows all students instead of the previous filtered list.
+
+1. Editing a student with invalid values
+
+   1. Test case: `edit 1 r/0` <br/>
+      Expected: An error message displayed reminds you that **RATE** must be from $0.01 to $1000.00.
+   
+   1. Test case: `edit 1 n/ p/654321234` <br/>
+      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE** are invalid; however, the error message is shown in the order that the attributes shown in the app.
+
+
 ### Deleting a student
 
 1. Deleting a student while all students are being shown.
