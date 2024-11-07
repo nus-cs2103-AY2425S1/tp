@@ -83,19 +83,23 @@ public class UniqueAssignmentListTest {
 
     @Test
     public void contains_assignmentWithDifferentProjectFieldInList_returnsFalse() {
+        // We don't want two assignments with different fields with the same
+        // assignmentId in the displayed list.
         uniqueAssignmentList.add(ALICE_ALPHA);
         Assignment editedAssignment = new AssignmentBuilder(ALICE_ALPHA).withProject(BETA)
                 .build();
-        assertFalse(uniqueAssignmentList.contains(editedAssignment));
+        assertTrue(uniqueAssignmentList.contains(editedAssignment));
     }
 
     @Test
     public void contains_assignmentWithDifferentEmployeeFieldInList_returnsFalse() {
+        // We don't want two assignments with different fields with the same
+        // assignmentId in the displayed list.
         uniqueAssignmentList.add(ALICE_ALPHA);
         Assignment editedAssignment = new AssignmentBuilder(ALICE_ALPHA)
                 .withEmployee(BENSON)
                 .build();
-        assertFalse(uniqueAssignmentList.contains(editedAssignment));
+        assertTrue(uniqueAssignmentList.contains(editedAssignment));
     }
 
     @Test

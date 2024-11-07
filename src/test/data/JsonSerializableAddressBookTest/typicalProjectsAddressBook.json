@@ -3,9 +3,9 @@
   "employees" : [],
   "projects" : [ {
     "name" : "Project Alpha",
-    "id" : "A0276123J"
+    "id" : "1"
   }, {
     "name" : "Project Beta",
-    "id" : "A0276123K"
+    "id" : "2"
   }]
 }
