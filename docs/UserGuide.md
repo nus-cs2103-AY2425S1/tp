@@ -418,7 +418,7 @@ Fields:
 * `PHONE`: Edited phone number of the student at specified index
 * `EMAIL`: Edited email of the student at specified index
 * `ADDRESS`: Edited address of the student at specified index
-* `TAG:` Tags to replace for the person at specified index
+* `TAG:` Tags to replace for the student at specified index
   * Existing tag will be replaced by the new tag
   * Remove a student’s tag by typing  `t/` without specifying any tags
 * `ATTENDANCE`: Field not editable within edit
