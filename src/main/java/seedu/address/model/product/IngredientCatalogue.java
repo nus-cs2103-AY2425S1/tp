@@ -1,12 +1,11 @@
 package seedu.address.model.product;
 
-import seedu.address.model.util.SampleDataUtil;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import seedu.address.model.util.SampleDataUtil;
 /**
  * Catalogue for managing ingredients. Provides methods to add and retrieve ingredients
  * by ID or name, and initializes with a set of default ingredients if no data is loaded.
@@ -21,7 +20,7 @@ public class IngredientCatalogue extends Catalogue {
      */
     // New constructor to initialize with a given Map of ingredients
     public IngredientCatalogue(Map<Integer, Ingredient> ingredients) {
-        super();  // Call to initialize productCatalogue in the parent class
+        super(); // Call to initialize productCatalogue in the parent class
         for (Ingredient ingredient : ingredients.values()) {
             addIngredient(ingredient);
         }

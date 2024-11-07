@@ -2,20 +2,17 @@ package seedu.address.model.product;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+/**
+ * Represents the Json values for the two different products.
+ */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type"
 )
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Ingredient.class, name = "Ingredient"),
-        @JsonSubTypes.Type(value = Pastry.class, name = "Pastry")
-})
+@JsonSubTypes({@JsonSubTypes.Type(value = Ingredient.class, name = "Ingredient"),
+    @JsonSubTypes.Type(value = Pastry.class, name = "Pastry")})
 
-/**
- * Represents a generic product with a unique ID, name, and cost.
- * This class is abstract and intended to be subclassed by specific types of products.
- */
 public abstract class Product {
     private final int productId;
     private final String name;
