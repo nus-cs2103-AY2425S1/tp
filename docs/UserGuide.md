@@ -54,6 +54,9 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 | **List Shortcuts**  | `listShortCut`                                                                                                                                                            |
 | **Filter**          | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                              |
 
+> **Note**: NomNomNotifier only accepts inputs in english without any emojis
+
+
 ---
 
 ## Features
@@ -187,7 +190,7 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 
 ---
 
-### Deleting a person : `delete`
+### Deleting a customer : `delete`
 
 Deletes the specified customer from the address book.
 
@@ -203,7 +206,7 @@ Deletes the specified customer from the address book.
 
 ---
 
-### Deleting persons : `deletePC`
+### Deleting customers : `deletePC`
 * Delete all persons from the address book with the given postal code.
 
 Format: `delete POSTALCODE`
@@ -385,8 +388,6 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 Exits the program.
 
 Format: `exit`
-
-
 
 
 ### Saving the data
