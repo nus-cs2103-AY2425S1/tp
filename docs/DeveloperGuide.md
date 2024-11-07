@@ -320,8 +320,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | beginner user   | have a help menu                                                           | I know how to perform a particular task                                                                                             |
 | `*`      | beginner user   | have some sample client data that has already been inputted into the app | I can find out information can be saved in the application                                                                          |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `AgentAssist` and the **Actor** is the `user`, unless specified otherwise)
@@ -350,6 +348,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AgentAssist shows an error message.
 
       Use case resumes at step 2.
+* 4a. User declines to give confirmation
+  * 4a1. AgentAssist shows a cancellation message.
+  * 4a2. Nothing is changed.
 
 **Use case: U2 - Add a Client**
 
@@ -357,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to add a user.
 2.  AgentAssist adds a client.
-3.  AgentAssist returns the unique user ID assigned to the new user.
+3.  AgentAssist returns a success message.
 
     Use case ends.
 
@@ -374,6 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to view a client using an attribute like name to filter for the client.
 2.  AgentAssist returns a list of users which match the filter set in step 1.
+3. AgentAssist returns a success message.
 
     Use case ends.
 
@@ -386,18 +388,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. No users in the existing data pass the filter
     * 1b1. AgentAssist shows a blank list.
 
-**Use case: U4 - Add remarks about a client**
+**Use case: U4 - Edit a Client**
 
 **MSS**
 
-1.  User performs <u>Filter for a client (U3)</u> .
-2.  AgentAssist returns a list of people, with the client in it.
-3.  User requests to add a remark about the client, using the index of the client in the list.
-4.  AgentAssist adds a remark for the client.
+1. User performs <u>Filter for a client(U3)</u> or requests to list all clients.
+2. AgentAssist returns a list of all users which match the filter in step 1.
+3. User specifies which client and attribute they would like to edit, using the index of the client of the list.
+4. AgentAssist edits the selected client.
+5. AgentAssist returns a success message.
 
     Use case ends.
 
-**Use case: U5 - Exit**
+**Extensions**
+
+* 3a. The provided client index is invalid.
+  * 3a1. AgentAssist shows an invalid index error message.
+
+    Use case resumes at step 3.
+
+* 3b. The given edit option is invalid.
+  * 3b1. AgentAssist shows an invalid parameter error message.
+    
+    Use case resumes at step 3.
+* 3c. Provided values are invalid.
+  * 3c1. AgentAssist shows the errors pertaining to the fields.
+  
+    Use case resumes at step 3.
+
+**Use case: U5 - View a client**
+
+**MSS**
+
+1.  User performs <u>Filter for a client (U3)</u> or requests to list all clients.
+2.  AgentAssist returns a list of people, with the client in it.
+3.  User requests to view a client, using the index of the client of the list.
+4.  AgentAssist returns a detailed view of the client and a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The provided client index is invalid.
+  * 3a1. AgentAssist shows an invalid index error message.
+  
+    Use case resumes at step 3.
+
+**Use case: U6 - Close detailed view**
+
+**MSS**
+
+1.  User requests to close detailed view. 
+2.  AgentAssist closes the detailed view.
+
+    Use case ends.
+
+**Use case: U7 - Remove remarks about a client**
+
+**MSS**
+
+1.  User performs <u> Edit remarks about a client (U4)</u>.
+2.  User removes existing remark through editing.
+
+    Use case ends.
+
+**Use case: U8 - Clear clients' contacts**
+
+**MSS**
+
+1. User requests to clear the list of clients' contacts.
+2. AgentAssist prompts for confirmation from user.
+3. User provides confirmation.
+4. AgentAssist clears contact list and shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User declines confirmation.
+  * 3a1. AgentAssist shows cancellation message to user.
+  * 3a2. No change is made.
+
+**Use case: U9 - Undo the most recent change**
+
+**MSS**
+1. User requests to undo the last change made to the list of contacts.
+2. AgentAssist reverse the last change made, and displays the edited list and a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There was no recorded last change
+  * 2a1. AgentAssist shows an error message to user.
+  * 2a2. No change is made.
+
+**Use case: U7 - Exit**
 
 **MSS**
 
@@ -476,25 +562,26 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a client while all clients are being shown
 
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
-
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
-    1. Test case: `delete 0`<br>
-       Expected: No client is deleted. Error details shown in the status message.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   
+   2. Test case: `delete 1`<br>
+       Expected: A prompt for confirmation from the user is given. If the user provides confirmation, the first contact is deleted from the list. Details of the deleted contact shown in the status message. Otherwise, the user is informed that the command has been cancelled, and no change is made.
+   
+   3. Test case: `delete 0`<br>
+       Expected: An error message is shown to the user. No client is deleted. Error details shown in the status message.
+   
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. Deleting a client after having filtered based on a criteria
-    1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
-
-    1. Functions similar to above example except that the indexes to be used are based on the new list shown.
+   1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
+   2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Back up the existing `agentassist.json` file under the `data` directory.
+   2. Since the data file is corrupted, the application will show a blank list of clients' contacts.
+   3. Adding any new contacts now, will override the old file.
+   4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
+   5. Make sure to follow the constraints laid out in the user guide for each attribute of Client. 
+   6. If the data file is successfully repaired, running `agentassist.jar` should result in the old data being displayed back in the application.
