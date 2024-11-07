@@ -119,8 +119,8 @@ Format:
 2. Vice President
 3. Admin
 4. Marketing
-5. Events (internal)
-6. Events (external)
+5. Events (Internal)
+6. Events (External)
 7. External Relations
 </box>
 
