@@ -9,7 +9,7 @@ import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
- * Tests if a {@code Transaction}'s {@code Description} contains the given {@code Description}.
+ * Tests if a {@code Transaction}'s {@code Category} contains the given {@code Category}.
  */
 public class CategoryFilterPredicate implements Predicate<Transaction> {
 
