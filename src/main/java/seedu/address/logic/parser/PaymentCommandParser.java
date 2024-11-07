@@ -24,6 +24,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
     public PaymentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_PAID);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_PAID);
 
         // Extract name from preamble
         String preamble = argMultimap.getPreamble().trim();
