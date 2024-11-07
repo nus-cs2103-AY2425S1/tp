@@ -152,8 +152,6 @@ This example shows how a typical command might look in MediBase3, with three mai
 - **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
 - **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `g`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
 
-<div style="page-break-after: always;"></div>
-
 ### A First Look at MediBase3
 
 Here are some basic commands to get you started.
@@ -184,8 +182,6 @@ For a detailed list of features and instructions, see the [Features](#features) 
 For additional assistance or common questions, please refer to our [FAQ](#faq) section.
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -219,7 +215,6 @@ the constraints of each parameter when used in a command.
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
 
 {: .alert .alert-info}
 > **:information_source: Notes about the command format:**
@@ -252,9 +247,6 @@ the constraints of each parameter when used in a command.
 >
 > All commands (except those in the **Finding Patients** section) will refresh the Patient List Panel to show all patients upon successful execution. This applies to commands for managing patients, appointments, medical conditions, allergies, and priority.
 
-
-<div style="page-break-after: always;"></div>
-
 ### Managing Patient
 
 #### Adding a patient: `add`
@@ -274,14 +266,14 @@ Adds a patient and his/her relevant details to MediBase3.
 **Examples**:
 * `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` adds a patient named `John Doe` with the respective NRIC, gender, date of birth, phone number, email and address provided into MediBase3.
 
+<div style="page-break-after: always;"></div>
+
 {: .alert .alert-success}
 > :bulb: **Tips:**
 > 
 > * Remember that `NRIC` and `GENDER` are case-insensitive.
 >   -  e.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
 > * Made a mistake or a typo? You can use the [`edit` command](#editing-a-patient--edit) to update the patient's details.
-
-[Back to Table of Contents](#table-of-contents)
 
 #### Deleting a patient : `delete`
 
@@ -305,8 +297,6 @@ Deletes a patient and his/her details from MediBase3.
 > 
 > * Patient information **cannot be recovered** once deleted. Double-check the `NRIC` before deletion.
 > * Deleting a patient also removes all associated appointments from the Appointment List Panel.
-
-[Back to Table of Contents](#table-of-contents)
 
 #### Editing a patient : `edit`
 
@@ -335,8 +325,6 @@ to `91234567` and `johndoe@example.com` respectively.
 > Editing the patient's `NAME` or `NRIC` will also update his/her associated appointments in the Appointment List Panel to reflect the change.
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Managing Appointments
 
@@ -367,6 +355,8 @@ Schedules an appointment for a patient in MediBase3.
 > ![result for addAppt command example](images/addApptCommand.png)
 >   
 > **Success message, with the "Dental" appointment in the details of patient "Alex Yeoh (S1234567A)" in the patient list panel, as well as in the appointment list panel as the second entry.**
+
+<div style="page-break-after: always;"></div>
 
 {: .alert .alert-success}
 > :bulb: **Tips:**
@@ -400,8 +390,6 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Managing Medical Conditions
 
 #### Adding Medical Conditions : `addMedCon`
@@ -418,6 +406,8 @@ Adds one or more medical conditions to an existing patient in MediBase3.
 >   - e.g. `addMedCon i/S1234567A` is invalid.
 > * Each medical condition can only be added once per patient.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
+
+<div style="page-break-after: always;"></div>
 
 **Example**:
 * `addMedCon i/S1234567A c/High Blood Pressure` adds the condition `High Blood Pressure` to the patient with `NRIC` `S1234567A`.
@@ -453,6 +443,8 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 > * The patient must have the specified condition for it to be removed; otherwise, an error message will display.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * `delMedCon i/S1234567A c/High Blood Pressure` deletes `High Blood Pressure` from the patient with `NRIC` `S1234567A`.
 
@@ -464,8 +456,6 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 >   - e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Managing Allergies
 
@@ -483,6 +473,8 @@ Adds one or more allergies to an existing patient in MediBase3.
 >   - e.g. `addAllergy i/S1234567A` is invalid.
 > * Each allergy can only be added once per patient.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
+
+<div style="page-break-after: always;"></div>
 
 **Example**:
 * `addAllergy i/S1234567A al/Peanuts` adds the allergy `Peanuts` to the patient with `NRIC` `S1234567A`.
@@ -531,8 +523,6 @@ Deletes one or more allergies from an existing patient in MediBase3.
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Managing Priority
 
 #### Setting Priority : `setPriority`
@@ -557,8 +547,6 @@ Sets Priority to an existing patient in MediBase3.
 > **Success message, with the priority of the patient "Alex Yeoh (S1234567A)" tagged as "HIGH" in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Finding Patients
 
@@ -616,6 +604,8 @@ Finds patients whose names contain any of the given keywords.
 >   - e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
@@ -643,6 +633,8 @@ Finds patients whose medical condition(s) contain the given keywords.
 > * Patients with medical conditions matching at least one keyword will be returned (i.e. `OR` search).
 > * Returns an empty Patient List Panel if no matching patients with the given keywords are found.
 
+<div style="page-break-after: always;"></div>
+
 Example:
  * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
@@ -668,6 +660,8 @@ Finds patients based on his/her NRIC.
 > * Returns an empty Patient List Panel if no matching patients with the given `NRIC` are found.
 > * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
+<div style="page-break-after: always;"></div>
+
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
 
@@ -677,8 +671,6 @@ Example:
 > **Success message with patient `Alex Yeoh (S1234567A)` shown in the patient list panel**
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### General Features
 
@@ -740,8 +732,6 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 > Furthermore, certain edits can cause the MediBase3 to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ## Glossary
 
@@ -868,7 +858,6 @@ This means that your machine is running Java version 17.0.11, which means that J
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
 
-<div style="page-break-after: always;"></div>
 
 ## Known issues
 
