@@ -190,14 +190,13 @@ Example:
 * `list -e des/wedding`
 
 Notes:
-* If no arguments are specified, `list` will list all contacts (clients and vendors).
+* All parameters are optional. Leaving them out will list all contacts (clients and vendors) by default.
 * The `-c`, `-v` and `-e` flags can be used to decide what type of data to list.
 * `s/SERVICE` should only be specified if `v` is specified.
 * `d/DATE` should only be specified if `-e` is specified.
 * `des/DESCRIPTION` should only be specified if `-e` is specified.
 * If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
 * All user input in between flags are ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
-* All parameters are optional. Leaving them out will list all contacts by default.
 * The name keyword search is case-insensitive. e.g `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` **AND** phone number `91234567`.
@@ -239,13 +238,12 @@ Notes:
 * The command is highly dependent on what is displayed on the screen, i.e., `delete 1` will have different results when preceded by different `list` options.
 * To delete an event, the user has to enter `list -e` (with optional filters) to ensure the screen displays events, before entering the `delete` command.
 * Similarly, to delete contacts, the user has to enter `list` (with optional filters) to ensure the screen displays contacts, before entering the `delete` command.
-* The user will not be allowed to delete clients that are the **sole** client of any event, i.e., if any event only has a single client, that client cannot be deleted.
+* The user will not be allowed to delete clients and vendors that are the **sole** client/vendor of any event, i.e., if any event only has a single client/vendor, that client/vendor cannot be deleted.
 * The user must delete the corresponding event(s) before deleting the intended client.
-* Users are allowed to delete vendors that are the **sole** vendor of any event, i.e. if the event only has a single vendor, it can still be deleted. However, while adding an event, at least 1 client and 1 vendor must be input to create an event.
 
 ### Clearing All Entries : `clear`
 
-Clears all entries.
+Clears all contacts and events.
 
 Format:
 ```
