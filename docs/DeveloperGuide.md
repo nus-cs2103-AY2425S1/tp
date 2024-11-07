@@ -21,7 +21,7 @@ Libraries Used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/Fast
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [<u>_Setting up and getting started_</u>](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -37,18 +37,18 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [<u>`Main`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [<u>`MainApp`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**<u>`UI`</u>**](#ui-component): The UI of the App.
+* [**<u>`Logic`</u>**](#logic-component): The command executor.
+* [**<u>`Model`</u>**](#model-component): Holds the data of the App in memory.
+* [**<u>`Storage`</u>**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**<u>`Commons`</u>**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -73,13 +73,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [<u>`Ui.java`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [<u>`MainWindow`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [<u>`MainWindow.fxml`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -90,7 +90,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [<u>`Logic.java`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,7 +121,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+**API** : [<u>`Model.java`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -134,7 +134,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [<u>`Storage.java`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -305,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `KnottyPlanner` and the **Actor** is the `User`, unless specified otherwise)
+(For all use cases below, the **System** is the `KnottyPlanners` and the **Actor** is the `User`, unless specified otherwise)
 
 
 **Use case: UC01 - Delete a contact**
@@ -313,11 +313,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  KnottyPlanner shows a list of contacts
+2.  KnottyPlanners shows a list of contacts
 3.  User requests to delete a specific contact in the list
-4.  KnottyPlanner shows a confirmation prompt
+4.  KnottyPlanners shows a confirmation prompt
 5.  User confirms the deletion
-6.  KnottyPlanner deletes the contact
+6.  KnottyPlanners deletes the contact
 
     Use case ends.
 
@@ -329,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given contact name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -338,9 +338,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  KnottyPlaner shows a list of contacts
+2.  KnottyPlanners shows a list of contacts
 3.  User requests to add a wedding tag to a specific contact in the list
-4.  KnottyPlanner adds the wedding tag to that contact
+4.  KnottyPlanners adds the wedding tag to that contact
 
     Use case ends.
 
@@ -352,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given tag name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -361,9 +361,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  KnottyPlanner shows a list of contacts
+2.  KnottyPlanners shows a list of contacts
 3.  User requests to delete a tag from a specific contact in the list
-4.  KnottyPlanner deletes the tag from that contact
+4.  KnottyPlanners deletes the tag from that contact
 
     Use case ends.
 
@@ -375,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -384,9 +384,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  KnottyPlanner shows a list of contacts
+2.  KnottyPlanners shows a list of contacts
 3.  User requests to view all tags for a specific contact
-4.  KnottyPlanner shows all tags for that contact
+4.  KnottyPlanners shows all tags for that contact
 
     Use case ends.
 
@@ -398,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -407,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to search for contacts by name criteria
-2. KnottyPlanner shows a list of contacts that matches the name criteria
+2. KnottyPlanners shows a list of contacts that matches the name criteria
 
     Use case ends.
 
@@ -415,13 +415,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given criterion is invalid.
 
-    * 2a1. KnottyPlanner shows an error message.
+    * 2a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. There are no contacts that matches the name.
 
-    * 2ba1. KnottyPlanner shows an empty list.
+    * 2ba1. KnottyPlanners shows an empty list.
 
   Use case ends.
 
@@ -430,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to search for contacts by job criteria
-2. KnottyPlanner shows a list of contacts that match the job criteria
+2. KnottyPlanners shows a list of contacts that match the job criteria
 
    Use case ends.
 
@@ -438,13 +438,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given criterion is invalid.
 
-    * 2a1. KnottyPlanner shows an error message.
+    * 2a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. There are no contacts that matches the job.
 
-    * 2ba1. KnottyPlanner shows an empty list.
+    * 2ba1. KnottyPlanners shows an empty list.
 
   Use case ends.
 
@@ -453,9 +453,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list contacts
-2. KnottyPlanner shows a list of contacts
+2. KnottyPlanners shows a list of contacts
 3. User requests to edit details of a specific contact
-4. KnottyPlanner updates the details for that contact
+4. KnottyPlanners updates the details for that contact
 
    Use case ends.
 
@@ -467,13 +467,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given contact name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The new contact details given are invalid.
 
-  * 3b1. KnottyPlanner shows an error message.
+  * 3b1. KnottyPlanners shows an error message.
 
     Use case resumes at step 2.
 
@@ -482,9 +482,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list weddings
-2. KnottyPlanner shows a list of weddings
+2. KnottyPlanners shows a list of weddings
 3. User requests to add a new wedding
-4. KnottyPlanner adds the new wedding
+4. KnottyPlanners adds the new wedding
 
    Use case ends.
 
@@ -496,7 +496,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given wedding name is invalid or fields are missing/invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -505,11 +505,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list weddings
-2. KnottyPlanner shows a list of weddings
+2. KnottyPlanners shows a list of weddings
 3. User requests to delete a specific wedding in the list
-4. KnottyPlanner shows a confirmation prompt
+4. KnottyPlanners shows a confirmation prompt
 5. User confirms the deletion
-6. KnottyPlanner deletes the wedding
+6. KnottyPlanners deletes the wedding
 
    Use case ends.
 
@@ -521,7 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given wedding name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -531,15 +531,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  The system should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using keyboard commands than using the mouse.
 4.  The system should return a response to commands that are inputted by the user within three seconds.
-5.  The codebase should be compliant with AB3 architecture and logic to faclilitate easier testing and debugging.
+5.  The codebase should be compliant with AB3 architecture and logic to facilitate easier testing and debugging.
 6.  The system should be operational and responsive 24/7.
 
 ### Glossary
 
-* **Contact**: An individual or organization associated with wedding planning, such as a client or vendor.
-* **Job:**: A service provider for weddings, e.g., caterers, florists, or photographers.
+* **Contact:** An individual or organization associated with wedding planning, such as a client or vendor.
+* **Job:** A service provider for weddings, e.g., caterers, florists, or photographers.
 * **Wedding Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to
 multiple contacts involved in the same wedding event.
+* **AddressBook:** The main data model that represents the collection of all 'Person' objects within KnottyPlanners.
+* **WeddingBook:** The data model that represents the collection of all 'Wedding' objects within KnottyPlanners.
 * **Priority:** The relative importance of a user story or task, often categorized as must-have, should-have,
 or could-have.
 * **Success/Failure Messages:** Feedback provided to the user indicating the outcome of a command
@@ -592,5 +594,5 @@ testers are expected to do more *exploratory* testing.
 
    2. To simulate a corrupted file, locate the addressbok.json or weddingbook.json file in the data folder.
 
-   3. Delete a random line in the .json file, and relaunch KnottyPlanner.
-        Expected: KnottyPlanner will launch with all previous data wiped and cleared.
+   3. Delete a random line in the .json file, and relaunch KnottyPlanners.
+        Expected: KnottyPlanners will launch with all previous data wiped and cleared.

@@ -27,7 +27,8 @@ import seedu.address.model.wedding.WeddingName;
 public class TagAddCommand extends Command {
 
     public static final String COMMAND_WORD = "tag-add";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD
+    public static final String COMMAND_WORD_SHORT = "ta";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD_SHORT
             + ": Adds a tag to the person identified "
             + "by their name.\n"
             + "Also adds them as a participant in wedding given by specified tag.";
@@ -35,7 +36,7 @@ public class TagAddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "\nParameters: "
             + PREFIX_NAME + "NAME " + PREFIX_TAG + "[TAG]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Li Sirui "
+            + "Example: " + COMMAND_WORD_SHORT + " " + PREFIX_NAME + "Li Sirui "
             + PREFIX_TAG + "Jane Lim & Tom Koh";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tag(s) '%1$s' to Contact: '%2$s'." + "\n"
@@ -45,7 +46,7 @@ public class TagAddCommand extends Command {
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet."
             + "\n"
             + "Wedding needs to be created with Tag(s): '%2$s' using command '"
-            + AddWeddingCommand.COMMAND_WORD
+            + AddWeddingCommand.COMMAND_WORD_SHORT
             + "' first.";
     private final Name name;
     private final Set<Tag> tagsToAdd;
@@ -92,7 +93,7 @@ public class TagAddCommand extends Command {
         if (message.isEmpty()) {
             return new CommandResult(generateSuccessMessage(personToEdit, editedPerson));
         } else {
-            return new CommandResult(message + generateSuccessMessage(personToEdit, editedPerson));
+            return new CommandResult(message + "\n" + generateSuccessMessage(personToEdit, editedPerson));
         }
     }
 

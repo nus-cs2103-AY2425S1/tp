@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class DeleteCommand extends Command {
             + ": Deletes the person identified by the name used in the address book.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "\nParameters: n/NAME\n"
-            + "Example: " + COMMAND_WORD + " n/Li Sirui";
+            + "\nParameters: " + PREFIX_NAME + "NAME\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Li Sirui";
 
     public static final String MESSAGE_NO_MATCH_FOUND = "No contact with the name '%1$s' found."
             + " Please enter the full name (case-insensitive).";

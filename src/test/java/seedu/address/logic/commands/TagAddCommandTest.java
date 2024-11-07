@@ -108,7 +108,7 @@ public class TagAddCommandTest {
                 VALID_TAG_WEDDING2, VALID_TAG_WEDDING2);
         String duplicatesMessage = String.format(TagAddCommand.MESSAGE_DUPLICATE_TAGS,
                 Messages.getName(editedPerson), VALID_TAG_WEDDING1);
-        String expectedMessage = nonDuplicateMessage + duplicatesMessage;
+        String expectedMessage = nonDuplicateMessage + "\n" + duplicatesMessage;
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
 
