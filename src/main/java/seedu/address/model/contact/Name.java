@@ -82,7 +82,7 @@ public class Name {
         if (nameInput.isEmpty()) {
             return nameInput;
         }
-        List<String> words = List.of(nameInput.toLowerCase().split(" "));
+        List<String> words = List.of(nameInput.toLowerCase().split(" +"));
         return words.stream()
                 .map(word -> convertCase(word))
                 .reduce("", (name, word) -> name + " " + word).trim();
