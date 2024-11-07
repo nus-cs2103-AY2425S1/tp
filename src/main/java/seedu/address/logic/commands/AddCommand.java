@@ -103,7 +103,7 @@ public class AddCommand extends Command {
      * @param tags Set of tags input by the user.
      * @return a List of weddings that match the tag.
      */
-    private List<Wedding> getWeddingfromTags(Model model, Set<Tag> tags) {
+    List<Wedding> getWeddingfromTags(Model model, Set<Tag> tags) {
         List<String> predicate = tags
                 .stream().map(Tag::getTagName).toList();
         List<Wedding> list = new ArrayList<>();
@@ -124,7 +124,7 @@ public class AddCommand extends Command {
      * @return String message stating whether tag exists as a wedding or not.
      * @throws CommandException
      */
-    private String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) {
+    String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) {
         List<Wedding> weddingList = getWeddingfromTags(model, editedTags);
         if (weddingList.isEmpty() && !editedTags.isEmpty()) {
             Set<Tag> tagsDontExist = new HashSet<>(editedTags);
