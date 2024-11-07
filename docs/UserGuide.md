@@ -146,11 +146,9 @@ Ctrl + Alt + T
 
 Shows the command summary and a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
-
+![help message](images/helpMessage.png)
 
 ### Adding a Tutor: `addTutor`
 
@@ -170,9 +168,9 @@ Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [s\ SUB
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of subjects (including 0)
-**Tip:** Hours will default to 0 if it is not specified
-**Tip:** Phone number must be of 8 integers.
+**Tip:** A person can have any number of subjects (including 0).
+**Tip:** Hours will default to 0 if it is not specified.
+**Tip:** Phone number must be 8 integer digits and start with 8, 9, or 6.
 **Tip:** Address must have any text followed by a comma and a 6-digit postal code.<br>
 e.g. `Tampines, 234678`.
 **Tip:** Hours must be a non-negative integer, with a maximum of 876,000 (100 years).
@@ -205,20 +203,18 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in VolunTier.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [\n NAME] [\p PHONE_NUMBER] [\e EMAIL] [\a ADDRESS] [\h HOURS] [\s SUBJECT]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing subjects, the existing subjects of the person will be removed i.e adding of subjects is not cumulative.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 \p 91234567 \e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 3 \n Betsy Crower \s` Edits the name of the 2nd person to be `Betsy Crower` and removes all subjects linked.
 
 ### Locating persons by name: `find`
 
@@ -235,12 +231,28 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex david` returns `Alex Yeoh`, `David Li`
+
+### Locating persons by subject: `findSubject`
+
+Find persons who have any of the subject(s).
+
+Format: `findSubject SUBJECT [MORE_SUBJECTS]`
+
+* The search is case-insensitive. e.g., `math` will match `Math`
+* The order of the keywords does not matter. e.g., `math science` will match `science math`
+* Only the subject field is searched.
+* Only full words will be matched e.g., `mat` will not match `math`
+* Persons matching at least one keyword will be returned (i.e., `OR` search).  
+  e.g., `math science` will return persons with subjects `Math`, `Science`, `Math and Science`
+
+Examples:
+* `findSubject Math` returns persons with subjects `Math`
+* `findSubject math science` returns persons with subjects `Math`, `Science`
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from VolunTier.
 
 Format: `delete INDEX`
 
@@ -249,8 +261,22 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in VolunTier.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting a lesson : `deleteLesson`
+
+Deletes the specified lesson from VolunTier.
+
+Format: `deleteLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT`
+
+* Deletes the lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX` and subject.
+* The index refers to the index number shown in the displayed person list. * The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in VolunTier.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
 
 ### Viewing a person's details : `view`
 
