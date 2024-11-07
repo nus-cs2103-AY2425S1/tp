@@ -163,7 +163,7 @@ public class Person {
      * @throws NullPointerException if {@code otherPerson} is null or if {@code otherPerson.name} is null.
      */
     public int compareNamesIgnorecase(Person otherPerson) {
-        return name.compareToIgnoreCase(otherPerson.name);
+        return name.compareTo(otherPerson.name);
     }
 
     public boolean hasPhoneNumber(String phoneNumber) {
