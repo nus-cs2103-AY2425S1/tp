@@ -3,7 +3,7 @@ layout: page
 title: MediBase3 User Guide
 ---
 
-MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage his/her patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for us to handle and focus more on your patients! 
+MediBase3 (MB3) is a **desktop app for doctors, offering an all-in-one solution to manage patient records with ease.** From tracking medical conditions, allergies, and priorities to even scheduling appointments, MediBase3 takes care of it so you can focus more on your patients.
 
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
@@ -27,7 +27,7 @@ Each aspect of MediBase3 is split into different sections, which are accessible 
 
 **For experienced MediBase3 users:**
 1. If you need a quick refresher on how to use a specific feature in MediBase3, you can navigate to the [Features](#features) section.
-1. You may also skip to the [Command Summary](#command-summary) section for a quick overview of all the commands available in MediBase3 and his/her formats.
+1. You may also skip to the [Command Summary](#command-summary) section for a quick overview of all available commands in MediBase3 and their formats.
 
 For any additional information or queries, you can refer to the [FAQ](#faq) section or the [Known Issues](#known-issues) section.
 
@@ -316,7 +316,7 @@ Adds a patient and his/her relevant details to MediBase3.
 > :information_source: **Note:**
 > 
 > * All fields are compulsory and must be non-empty.
-> * If the `NRIC` provided already exists in MediBase3, an error message will display, and the patient will not be added.
+> * If the `NRIC` provided already exists in MediBase3, an error message will be displayed, and the patient will not be added.
 > * The new patient will be added to the end of the Patient List Panel.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
@@ -335,7 +335,7 @@ Adds a patient and his/her relevant details to MediBase3.
 
 #### Deleting a patient : `delete`
 
-Removes a patient and his/her details from MediBase3.
+Deletes a patient and his/her details from MediBase3.
 
 **Format**: `delete NRIC`
 
@@ -343,8 +343,8 @@ Removes a patient and his/her details from MediBase3.
 > :information_source: **Note:**
 > 
 > * Deletes the patient with the specified `NRIC` from MediBase3.
-> * The `NRIC` provided must be complete, 
->   - e.g. `S1234567A` (not partial, like `S123`).
+> * The `NRIC` provided must be the full NRIC of the patient to be deleted.
+    >   - e.g. `S1234567A` (not partial, like `S123`).
 > * You can delete a patient even if they’re not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for NRIC constraints.
 
@@ -370,11 +370,11 @@ Edits an existing patient details in MediBase3.
 > 
 > * Edits the patient with the specified `NRIC` in MediBase3.
 > * The NRIC provided must be the full NRIC of the patient to be edited. 
->   - e.g. `S1234567A` and not `S123`.
+>   - e.g. `S1234567A` (not partial, like `S123`).
 > * **At least one** of the optional fields must be provided. 
 >   - e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
-> * You can edit a patient's details even if they’re not currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after the patient's details have been edited.
+> * You can edit a patient's details even if they’re not currently displayed in the Patient List Panel. The panel will refresh to show all patients after the patient's details have been edited.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 **Example**:
@@ -402,7 +402,7 @@ Schedules an appointment for a patient in MediBase3.
 > :information_source: **Note:**
 >
 > * Adds an appointment with the specified `APPOINTMENT_NAME`, `APPOINTMENT_DATE`, and `APPOINTMENT_TIME` for the patient identified by `NRIC`.
-> * If the patient is not currently displayed in the Patient List Panel, the panel will refresh to show all patients after adding the appointment.
+> * You can add an appointment even if the patient is not currently displayed in the Patient List Panel. The panel will refresh to display all patients after adding the appointment.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 
@@ -605,7 +605,7 @@ Sets Priority to an existing patient in MediBase3.
 > :information_source: **Note:**
 >
 > * Sets Priority to the patient with the specified `NRIC` in MediBase3.
-> * You can set Priority to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after Priority has been set.
+> * You can set priority for a patient even if they’re not currently displayed in the Patient List Panel. The panel will refresh to show all patients after the priority has been set.
 > * On default Patient has been set to `NONE` Priority level.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
