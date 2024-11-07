@@ -170,6 +170,24 @@ Parameters:
 * The criteria for phone, email, address, and tags are case-insensitive and can be partial matches.
 * The criteria income group only checks for exact matches.
 
+### Viewing, adding and editing notes: `notes` 
+
+Views, adds, edits, or deletes the notes of the person identified by their name or index.
+
+Format: `notes [PARAMETER]`
+
+Parameters:
+* View: [view/NAME] or [view/INDEX]
+* Add: [add/NAME nt/NOTES] or [add/INDEX nt/NOTES]
+* Edit: [edit/NAME] or [edit/INDEX]
+* Delete: [del/NAME] or [del/INDEX]
+
+**Examples**:
+* `notes view/John Doe` OR `view/1`
+* `notes add/John Doe nt/Prefers email contact` OR `add/1 nt/Prefers email contact`
+* `notes edit/John Doe` OR `edit/1`
+* `notes del/John Doe` OR `del/1`
+
 ### Deleting a person : `delete`
 
 Deletes the person with the specified `NAME` or the person at the specified `INDEX`
