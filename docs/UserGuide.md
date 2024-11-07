@@ -114,7 +114,10 @@ Examples:
 
 - `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient`
 
+An example for adding a patient to the address book is given below.
 ![add Patient Command](images/addPatient.png)
+
+Once the command succeeds, the person will be added to the address book and the following message will be displayed.
 ![add Patient Succeeds](images/addPatientSucceed.png)
 
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -131,7 +134,10 @@ Examples:
 - `link patient/S6283947C caregiver/S6382947A`
 - `link caregiver/S6382947A patient/S7193475F`
 
+An example of using CareLink to link a patient and a caregiver is given below.
 ![Link command example](images/linkcommandexample.png)
+
+Once the command succeeds, the patient will be linked with the caregiver and the following message will be displayed.
 ![Link command success](images/linkcommandsucceed.png)
 
 ### Deleting a link between patient and a caregiver: `deletelink`
@@ -145,7 +151,10 @@ Examples:
 - `deletelink patient/S6283947C caregiver/S6382947A`
 - `deletelink caregiver/S6382947A patient/S7193475F`
 
+An example of using CareLink to delete a link between a patient and a caregiver is given below.
 ![Deletelink command example](images/DeleteLinkCommand.png)
+
+Once the command succeeds, the link will be removed and the following message will be displayed.
 ![Deletelink command success](images/DeleteLinkCommandSuccess.png)
 
 ### Adding Notes to a Person: `addnote`
@@ -159,7 +168,10 @@ Examples:
 - `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`
 - `addnote nric/S7012345B note/is caregiver for patient XYZ only until ABC day`
 
+An example of using CareLink to add notes to a person is given below.
 ![AddNote command example](images/AddNoteExample.png)
+
+Once the command succeeds, the notes will be added to the person and the following message will be displayed.
 ![AddNote command success](images/AddNoteSuccessExample.png)
 
 ### Listing all persons : `list`
@@ -214,7 +226,10 @@ Finds persons based on the specified criteria using the provided prefixes.
 - `find role/caregiver` returns all caregivers.
 - `find p/1234567 e/johndoe@example.com` returns persons with phone number `1234567` or email address `johndoe@example.com`.
 
+An example of using the find command in CareLink is given below.
 ![Find command example](images/findcommandexample.png)
+
+Once the command succeeds, the persons found will be displayed providing comprehensive information about the persons.
 ![Find command success](images/findcommandsucceed.png)
 
 ### Adding an appointment: `addapp`
@@ -318,6 +333,7 @@ Finds and lists appointment that falls within the specified date-time range. The
 
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
 
+An example of the result obtained from the `findapp` command is given below.
 ![Find Appointment command example](images/findappointment.png)
 
 ### Deleting a person : `delete`
@@ -333,7 +349,12 @@ Examples:
 
 - `find n/David` returns `David LI` with NRIC `S6483749D`
 - `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
+
+An example of using the delete command in CareLink is given below.
+Notice the NRIC used in the example belongs to `David LI`.
 ![delete command example](images/deleteDavid.png)
+
+Once the command succeeds, notice that David is removed and hence no longer displayed.
 ![result for 'delete S6483749D'](images/deleteDavidResult.png)
 
 ### Clearing all entries: `clear confirm`
@@ -405,12 +426,8 @@ _Details coming soon ..._
 | **Edit**             | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g`edit S1234567D n/James Lee e/jameslee@example.com`                                   |
 | **Find**             | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g `find n/Alex nric/S1234567D`                                                                            |
 | **Find Appointment** | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`          |
-
-| **Add Appointment** | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`
-
-| **Edit Appointment** | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00`
-
-| **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g `deleteapp nric/S9876543B d/15/03/2025 start/14:30`
-
+| **Add Appointment** | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`|
+| **Edit Appointment** | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00`|
+| **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g `deleteapp nric/S9876543B d/15/03/2025 start/14:30`|
 | **List**             | `list`                                                                                                                                                               |
 | **Help**             | `help`                                                                                                                                                               |
