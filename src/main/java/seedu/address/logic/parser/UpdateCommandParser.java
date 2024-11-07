@@ -91,7 +91,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
      * Returns true if no prefixes other than the event index has been supplied.
      */
     private boolean hasNoPrefixesSupplied(ArgumentMultimap argumentMultimap) {
-        return Stream.of(PREFIX_NAME, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_ATTENDEES, PREFIX_REMOVE_ATTENDEE)
+        return Stream.of(VALID_ARG_LIST)
                 .allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
