@@ -1,5 +1,9 @@
 package seedu.address.model.client;
 
+import seedu.address.logic.commands.CommandCommons;
+
+
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -60,7 +64,9 @@ public class Remark {
     public static Remark combineRemarks(Remark... remarks) {
         StringBuilder combinedValues = new StringBuilder();
         for (Remark currentRemark: remarks) {
-            combinedValues.append(currentRemark.value + "\n");
+            if (!currentRemark.value.equalsIgnoreCase(CommandCommons.DEFAULT_REMARK)) {
+                combinedValues.append(currentRemark.value).append("\n");
+            }
         }
         return new Remark(combinedValues.toString().trim());
     }
