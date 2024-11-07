@@ -36,10 +36,10 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
 
     public static final String MESSAGE_ADDPA_SUCCESS = "Added Person's Public Address: %1$s";
     public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: %1$s\n"
-            + "You may either:\n"
-            + "1. Use another label for the new public address\n"
-            + "2. Edit the existing public address for the current label"
-            + "(overwrite) using the editpa command\n";
+        + "You may either:\n"
+        + "1. Use another label for the new public address\n"
+        + "2. Edit the existing public address for the current label"
+        + "(overwrite) using the editpa command\n";
 
     /**
      * Adds a public address to the person identified by the index number
@@ -64,15 +64,15 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         PublicAddressesComposition currentPublicAddresses = personToEdit.getPublicAddressesComposition();
         PublicAddressesComposition addedPublicAddresses =
             editPersonDescriptor.getPublicAddresses().orElse(new PublicAddressesComposition());
-
         try {
             PublicAddressesComposition combinedPublicAddresses =
-                    currentPublicAddresses.combineWith(addedPublicAddresses);
+                currentPublicAddresses.combineWith(addedPublicAddresses);
             return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, combinedPublicAddresses,
-                    updatedTags);
+                updatedTags);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS, e.getMessage()));
         }
+
     }
 
     @Override

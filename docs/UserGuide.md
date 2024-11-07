@@ -25,16 +25,22 @@ If terms like 'command line', 'terminal', or 'Java' sound unfamiliar to you, don
 - 🔧 [Setup Guide](#setup-guide) for installation help
 - ❓ [FAQ Section](#faq) for common questions
 - 🛠️ [Troubleshooting Guide](#common-errors) for known issues
-  </panel>
+
+### Experienced Users
+If you're already familiar with DLTbook, jump straight to [Quick Start](#quick-start) for a quick overview on basic commands.
+Go to the [Features](#features) section for a detailed guide on all available commands and capabilities.
+</panel>
 
 ## Quick Start
 
 ### System Requirements
 
 - **Java 17 or newer installed**
-  <box type="info" seamless>
+
+<box type="info" seamless>
 
 Not sure if you have Java? Check out [Setup Guide](#setup-guide)
+
 </box>
 
 ### Quick Installation
@@ -45,14 +51,14 @@ Not sure if you have Java? Check out [Setup Guide](#setup-guide)
 
 3. **Start**: Open Terminal and run `java -jar DLTbook.jar`
 
-4. **Try it Out**: If you are an experienced user, skip to [Try It Out!](#try-it-out) for a guide of the basic commands
+4. **Try it Out**: If you are an experienced user, skip to [Try It Out!](#try-it-out) for a guide of the basic commands or go to [Features](#features) for a detailed list of all commands.
 
 ## Beginner's Guide
 
 <panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded> 
 
-If you're new to DLTbook or the concept of Distributed Ledger Technology (DLT), this guide will walk you through the
-basics. Here, we'll cover key concepts, important terminology, and guide you through the first steps in using DLTbook.
+_If you're new to DLTbook or the concept of Distributed Ledger Technology (DLT), this guide will walk you through the
+basics. Here, we'll cover key concepts, important terminology, and guide you through the first steps in using DLTbook._
 </panel>
 
 <br>
@@ -216,6 +222,8 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 
     * `retrievepa 1 c/BTC l/wallet1` : Retrieves the public address of a contact
 
+<br>
+
 ### Need Help?
 
 - Type `help` in the application to see all available commands
@@ -235,46 +243,59 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 --------------------------------------------------------------------------------------------------------------------
 
 
-Ready to learn more? Check out the [Features](#features) section below for a complete guide to all DLTbook commands and
-capabilities.
-
+Ready to learn more? Check out the [Features](#features) section below for a complete guide to all DLTbook commands and capabilities.
+<br>
+<br>
 ## Features
 
-<box type="info" seamless>
+### Command Overview
 
+DLTbook supports the following commands:
+
+Command | Description
+--------|------------
+[**Help**](#viewing-help-help) | Shows a message explaining how to access the help page
+[**Add**](#adding-a-person-add) | Adds a person to the address book
+[**List**](#listing-all-persons-list) | Shows a list of all persons in the address book
+[**Edit**](#editing-a-person-edit) | Edits an existing person in the address book
+[**Find**](#locating-persons-by-name-find) | Finds persons whose names contain any of the given keywords
+[**Delete**](#deleting-a-person-delete) | Deletes the specified person from the address book
+[**Clear**](#clearing-all-entries-clear) | Clears all entries from the address book
+[**Exit**](#exiting-the-program-exit) | Exits the program
+[**Add Public Address**](#adding-a-public-address-to-a-contact-addpa) | Adds a public address to a contact
+[**Edit Public Address**](#editing-a-public-address-of-a-contact-editpa) | Edits an existing public address of a contact
+[**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact
+[**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa) | Deletes the public address of a contact
+[**Public Address Search**](#searching-for-a-public-address-publicaddresssearch) | Searches for a public address
+
+<box type="info" seamless>
 
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-
 * Items in square brackets are optional.<br>
-
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-
 * Parameters can be in any order.<br>
-
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
 
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
-
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help : `help`
 
@@ -283,6 +304,10 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a person: `add`
 
@@ -305,11 +330,19 @@ Examples:
 
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing a person : `edit`
 
@@ -337,6 +370,10 @@ Examples:
 
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -362,6 +399,10 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a person : `delete`
 
@@ -381,43 +422,37 @@ Examples:
 
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+<br>
 
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a public address to a contact : `addpa`
 
 Adds a public address to a contact.
 
 
+Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-Format: `addpa c/NETWORK n/NAME l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-
-* Adds a public address to a contact based on the NAME
-
-* The contact is identified by the `NAME` provided.
+* Adds a public address to a contact at the specified `INDEX`. The index refers to the index number shown in the
+  displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …​
 
 * The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
-  `SOL`, `SUI`, etc.).
-
-* the `NAME` parameter specifies the name of the contact to which the public address belongs.
-
-* The `PUBLIC_ADDRESS` parameter specifies the public address to be added, this fields is not cap sensitive.
+  `SOL`, etc.).
 
 * The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
 
-Examples:
-* `addPublicAddress c/ETH n/Travis l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a contact named `Travis` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+* The `PUBLIC_ADDRESS` parameter specifies the public address to be added, this fields is not cap sensitive.
 
+Examples:
+* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a the first contact on the list `Alex Yeoh` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+
+![img.png](img.png)
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing a public address of a contact : `editpa`
 
@@ -427,7 +462,7 @@ Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`
 
 <box type="tip" seamless>
 
-WALLET_NAME is case-sensitive.
+WALLET_NAME is NOT case-sensitive.
 </box>
 
 * Edits the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
@@ -451,6 +486,10 @@ WALLET_NAME is case-sensitive.
 * `editpa 3 c/BTC l/daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
   **DOES NOT** change the third contact's BTC public address labelled `Daily wallet` as `WALLET_NAME` is
   case-sensitive.<br />
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Retrieving public addresses of a contact : `retrievepa`
 
@@ -476,6 +515,10 @@ Format: `retrievepa INDEX c/NETWORK [l/WALLET_NAME]`
 * `retrievepa 3 c/BTC l/Daily wal`<br />
   Retrieves all the BTC public addresses of the third contact which label contains "daily wal" (case-insensitive).
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Deleting a public address of a contact : `deletepa`
 
 Deletes the public address of a contact.
@@ -492,8 +535,9 @@ Examples:
 
 * `deletepa 3 c/BTC` deletes all the public addresses of the 3rd person in the BTC network.
 
+<br>
 
-
+--------------------------------------------------------------------------------------------------------------------
 
 ### Searching for a public address : `publicAddressSearch`
 
@@ -516,12 +560,36 @@ Examples:
   address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the contact and wallet to
   which it belongs.
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
 DLTbook data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
+
+<br>
 
 ### Editing the data file
 
@@ -546,10 +614,11 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AddressBook home folder.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Common Errors
+
+
 
 ## Known issues
 

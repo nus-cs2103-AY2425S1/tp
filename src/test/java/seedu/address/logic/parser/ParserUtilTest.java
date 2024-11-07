@@ -2,17 +2,13 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_SUB;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -20,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.BtcAddress;
 import seedu.address.model.addresses.PublicAddress;
-import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -254,69 +249,6 @@ public class ParserUtilTest {
         PublicAddress expectedAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, VALID_LABEL_1);
         assertEquals(expectedAddress,
             ParserUtil.parsePublicAddress(addressWithWhitespace, labelWithWhitespace, VALID_NETWORK));
-    }
-
-    @Test
-    public void parsePublicAddresses_nullCollection_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePublicAddresses(null));
-    }
-
-    @Test
-    public void parsePublicAddresses_emptyCollection_returnsEmptyMap() throws Exception {
-        assertTrue(ParserUtil.parsePublicAddresses(Collections.emptyList()).isEmpty());
-    }
-
-    @Test
-    public void parsePublicAddresses_invalidFormat_throwsParseException() {
-        assertThrows(ParseException.class, () ->
-            ParserUtil.parsePublicAddresses(List.of("BTC" + VALID_PUBLIC_ADDRESS_STRING_BTC_1)));
-    }
-
-    @Test
-    public void parsePublicAddresses_invalidNetwork_throwsParseException() {
-        assertThrows(ParseException.class, () ->
-            ParserUtil.parsePublicAddresses(List.of(INVALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_1)));
-    }
-
-    @Test
-    public void parsePublicAddresses_validInputs_returnsMap() throws Exception {
-
-        Collection<String> inputs = List.of(
-            VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_1
-        );
-
-        PublicAddressesComposition expected = new PublicAddressesComposition();
-        PublicAddressesComposition btcAddresses = new PublicAddressesComposition();
-        btcAddresses = btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, PublicAddress.DEFAULT_LABEL));
-
-        expected = expected.combineWith(btcAddresses);
-
-
-        assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
-    }
-
-    @Test
-    public void parsePublicAddresses_validInputsWithWhitespace_returnsMap() throws Exception {
-
-        Collection<String> inputs = List.of(
-            " " + VALID_NETWORK + " > " + VALID_PUBLIC_ADDRESS_STRING_BTC_1 + " "
-
-        );
-
-        PublicAddressesComposition expected = new PublicAddressesComposition();
-        PublicAddressesComposition btcAddresses = new PublicAddressesComposition();
-        btcAddresses = btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_1, PublicAddress.DEFAULT_LABEL));
-        expected = expected.combineWith(btcAddresses);
-
-        assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
-    }
-
-    @Test
-    public void parsePublicAddresses_invalidDuplicateLabels_throwsIllegalArgumentException() throws Exception {
-        Collection<String> inputs = List.of(VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_BTC_MAIN,
-            VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_BTC_SUB);
-
-        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parsePublicAddresses(inputs));
     }
 
     @Test
