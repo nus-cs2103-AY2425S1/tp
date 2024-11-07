@@ -135,13 +135,15 @@ public class TagCommand extends UndoableCommand {
             finalMessage.append(MESSAGE_TAG_NOT_CREATED)
                     .append(missingTags.stream().map(Tag::toString).collect(Collectors.joining(", ")));
         }
-        if (!duplicateTags.isEmpty()) {
-            if (!missingTags.isEmpty()) {
-                finalMessage.append("\n");
-            }
-            finalMessage.append(MESSAGE_DUPLICATE_TAG)
-                    .append(duplicateTags.stream().map(Tag::toString).collect(Collectors.joining(", ")));
+        if (duplicateTags.isEmpty()) {
+            return;
         }
+
+        if (!missingTags.isEmpty()) {
+            finalMessage.append("\n");
+        }
+        finalMessage.append(MESSAGE_DUPLICATE_TAG)
+                .append(duplicateTags.stream().map(Tag::toString).collect(Collectors.joining(", ")));
     }
 
     private void tagPersons(Model model, List<Index> targetIndexes, List<Person> lastShownList)

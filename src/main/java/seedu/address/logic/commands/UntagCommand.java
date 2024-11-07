@@ -67,7 +67,7 @@ public class UntagCommand extends UndoableCommand {
             finalMessage.append(MESSAGE_UNTAG_PERSON_SUCCESS).append(successMessage);
         }
         if (!missingTags.isEmpty()) {
-            updateFinalMessage(finalMessage, missingTags);
+            updateFinalMessage();
         }
         return new CommandResult(finalMessage.toString());
     }
@@ -125,7 +125,7 @@ public class UntagCommand extends UndoableCommand {
         successMessage.append(Messages.format(updatedPerson));
     }
 
-    private void updateFinalMessage(StringBuilder finalMessage, Set<Tag> missingTags) {
+    private void updateFinalMessage() {
         if (!finalMessage.isEmpty()) {
             finalMessage.append("\n");
         }
