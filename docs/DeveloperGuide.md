@@ -494,20 +494,8 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
+Team size: 5
+
 * Job
-  * Edit a job
-  * Locating jobs by name
-  * Screen jobs by a contact
-  * Support job type (part-time, intern, full-time, contract)
-  * Support other job duration attribute (6-month contract, summer vacation internship)
-  * Support job requirement type (mandatory, good to have)
-  * Support job quota
-  * Smart select company if not found when creating job listing (find & return 1st match)
   * Support screening candidates via more advanced requirement (salary range, number of skills)
-  * Sorting capability of job list
-* Company
-  * Edit a company
-  * Locating company by name
-  * Enhance company contact details by having contacts as company liaises 
-* Archiving capability
-* Set a contact as potential candidate of a job
+
