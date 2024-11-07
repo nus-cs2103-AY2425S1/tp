@@ -25,13 +25,18 @@ public class SortCommand extends Command {
 
     private final Comparator<? super Person> comparator;
 
+    /**
+     * Creates a SortCommand to sort the list of persons based on the specified {@code comparator}.
+     */
     public SortCommand(Comparator<? super Person> comparator) {
+        requireNonNull(comparator, "Comparator cannot be null");
         this.comparator = comparator;
     }
 
     @Override
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
+        assert model.getFilteredPersonList() != null : "Filtered person list should not be null";
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> sortedList = new ArrayList<>(model.getFilteredPersonList());
         sortedList.sort(comparator);

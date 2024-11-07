@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import javafx.beans.property.IntegerProperty;
@@ -102,6 +103,7 @@ public class DaysAttended {
      * Returns the property of the days attended.
      */
     public IntegerProperty daysAttendedProperty() {
+        requireNonNull(daysAttended);
         return daysAttended;
     }
 }
