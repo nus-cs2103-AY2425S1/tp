@@ -307,7 +307,7 @@ Updates the amount of tuition fee owed by a specified student after a lesson. Yo
 
 ### Settling outstanding fees from students: `settle`
 
-Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student after the student pays for his/her outstanding tuition fees.
+Updates the amount of tuition fee paid and the amount of tuition fee owed by the student after the student pays for his/her outstanding tuition fees.
 
 **Format:** `settle INDEX amount/AMOUNT`
 
