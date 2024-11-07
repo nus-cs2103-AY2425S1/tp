@@ -6,9 +6,8 @@
 
 # UniVerse User Guide
 
-UniVerse is a **desktop app for managing contacts**, optimized for use via a **Command Line Interface (CLI)**
-while incorporating a **Graphical User Interface (GUI)** for ease of use. UniVerse is designed to help you manage
-detailed contact information, including academic and professional details, quickly and efficiently.
+
+UniVerse is more than just a **desktop app for managing contacts**—it is a platform designed to foster meaningful connections and support the holistic growth of **university students**. Tailored specifically for students balancing academic, social, and career aspirations, UniVerse allows users to organize and manage their networks effectively. By leveraging a **Command Line Interface (CLI)** for quick, efficient input and command execution, along with an intuitive **Graphical User Interface (GUI)** for easy navigation, UniVerse empowers students to maintain detailed contact information and build relationships that go beyond academic and professional circles. Whether it’s connecting with peers, professors, or industry mentors, UniVerse encourages students to form lasting bonds rooted in shared interests and experiences, making it an essential tool for thriving both socially and academically on campus.
 
 <!-- * Table of Contents -->
 
