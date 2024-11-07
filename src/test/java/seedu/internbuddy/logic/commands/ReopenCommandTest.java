@@ -58,7 +58,7 @@ public class ReopenCommandTest {
         CompanyBuilder newCompany = new CompanyBuilder(companyToReopen);
         Company newCompanyToSet = newCompany.withStatus("INTERESTED").build();
 
-        expectedModel.setCompany(companyToReopen, newCompany.build());
+        expectedModel.setCompany(companyToReopen, newCompanyToSet);
         assertCommandSuccess(reopenCommand, model, expectedMessage, expectedModel);
     }
 
