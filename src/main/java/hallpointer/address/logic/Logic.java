@@ -24,7 +24,7 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the HallPointer.
+     * Returns HallPointer.
      *
      * @see hallpointer.address.model.Model#getHallPointer()
      */

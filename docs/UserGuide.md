@@ -32,7 +32,7 @@ HallPointer is a **desktop app for managing contacts, optimized for use via a  L
 
    * `list_members` : Lists all contacts.
 
-   * `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics` : Adds a contact named `John Doe` to the Hall Pointer.
+   * `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics` : Adds a contact named `John Doe` to Hall Pointer.
 
    * `delete_member 3` : Deletes the 3rd contact shown in the current list.
 
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a member: `add_member`
 
-Adds a member to the Hall Pointer.
+Adds a member to Hall Pointer.
 
 Format: `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
@@ -94,13 +94,13 @@ Examples:
 
 ### Listing all members : ` list`
 
-Shows a list of all members in the Hall Pointer.
+Shows a list of all members in Hall Pointer.
 
 Format: `list`
 
 ### Updating a member : `update_member`
 
-Updates an existing member in the Hall Pointer.
+Updates an existing member in Hall Pointer.
 
 Format: `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
 
@@ -135,7 +135,7 @@ Examples:
 
 ### Deleting a member : `delete_member`
 
-Deletes the specified member from the Hall Pointer.
+Deletes the specified member from Hall Pointer.
 
 Format: `delete_member INDEX`
 
@@ -144,12 +144,12 @@ Format: `delete_member INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list_members` followed by `delete_member 2` deletes the 2nd member in the Hall Pointer.
+* `list_members` followed by `delete_member 2` deletes the 2nd member in Hall Pointer.
 * `find_members Betsy` followed by `delete_member 1` deletes the 1st member in the results of the `find` command.
 
 ### Adding a Session: `add_session`
 
-Adds a session to the Hall Pointer and associates it with specified members.
+Adds a session to Hall Pointer and associates it with specified members.
 
 Format: `add_session s/NAME d/DATE p/POINTS m/INDEX...`
 
@@ -162,7 +162,7 @@ Examples:
 
 ### Deleting a Session: `delete_session`
 
-Deletes a session associated with one or more members in the Hall Pointer.
+Deletes a session associated with one or more members in Hall Pointer.
 
 Format: `delete_session s/NAME m/INDEX...`
 
@@ -175,7 +175,7 @@ Format: `delete_session s/NAME m/INDEX...`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the Hall Pointer.
+Clears all entries from Hall Pointer.
 
 Format: `clear`
 
@@ -197,7 +197,7 @@ HallPointer data are saved automatically as a JSON file `[JAR file location]/dat
 
 **Caution:**
 If your changes to the data file makes its format invalid, HallPointer will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the HallPointer to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the Hall Pointer system to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 

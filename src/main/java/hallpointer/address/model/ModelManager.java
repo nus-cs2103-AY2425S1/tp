@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 /**
- * Represents the in-memory model of the hall pointer data.
+ * Represents the in-memory model of the HallPointer data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);

@@ -12,13 +12,13 @@ import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
 
 /**
- * Adds a member to the HallPointer.
+ * Adds a member to HallPointer.
  */
 public class AddMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "add_member";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the Hall Pointer.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to Hall Pointer.\n"
         + "Parameters: "
         + PREFIX_NAME + "NAME "
         + PREFIX_TELEGRAM + "TELEGRAM_HANDLE "
@@ -32,12 +32,12 @@ public class AddMemberCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Member %1$s with room %2$s and Telegram username %3$s "
         + "added successfully.";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the Hall Pointer.";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in Hall Pointer.";
 
     private final Member toAdd;
 
     /**
-     * Creates an AddMemberCommand to add the specified {@code Member} to the HallPointer.
+     * Creates an AddMemberCommand to add the specified {@code Member} to HallPointer.
      */
     public AddMemberCommand(Member member) {
         requireNonNull(member);
