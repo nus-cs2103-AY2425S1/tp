@@ -16,6 +16,7 @@ public class Wedding {
     private Client client;
     private Date date;
     private Venue venue;
+    private boolean isOwnWedding;
 
     /**
      * Constructs a temporary {@code Wedding}.
@@ -41,7 +42,13 @@ public class Wedding {
         this.date = date;
         this.venue = venue;
     }
+    public void setIsOwnWedding(boolean isOwnWedding) {
+        this.isOwnWedding = isOwnWedding;
+    }
 
+    public boolean isOwnWedding() {
+        return isOwnWedding;
+    }
     public void setClient(Person person) {
         this.client = new Client(person);
         if (person.getOwnWedding() == null || person.getOwnWedding() != this) {

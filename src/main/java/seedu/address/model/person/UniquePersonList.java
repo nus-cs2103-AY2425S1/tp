@@ -132,7 +132,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     public void setAllPersonNotClient() {
         for (Person person : internalList) {
-            person.setClient(false);
+            person.setIsClient(false);
         }
     }
 

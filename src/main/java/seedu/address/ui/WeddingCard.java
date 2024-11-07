@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.wedding.Wedding;
@@ -33,6 +34,8 @@ public class WeddingCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label venue;
+    @FXML
+    private FlowPane ownWedding;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -42,11 +45,19 @@ public class WeddingCard extends UiPart<Region> {
         this.wedding = wedding;
         id.setText(displayedIndex + ". ");
         weddingName.setText(wedding.getName().fullName);
+        venue.setText(wedding.getVenue() == null ? null : wedding.getVenue().toString());
+
         if (wedding.getDate() == null) {
             date.visibleProperty().setValue(false);
         } else {
             date.setText(wedding.getDate().toString());
         }
-        venue.setText(wedding.getVenue() == null ? null : wedding.getVenue().toString());
+
+        if (wedding.isOwnWedding()) {
+            ownWedding.getChildren().add(new Label("Own Wedding"));
+        } else {
+            ownWedding.visibleProperty().setValue(false);
+            ownWedding.setManaged(false);
+        }
     }
 }
