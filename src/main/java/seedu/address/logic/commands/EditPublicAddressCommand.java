@@ -15,9 +15,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
-import seedu.address.model.addresses.PublicAddressFactory;
 import seedu.address.model.person.Person;
 
 /**
@@ -50,15 +48,13 @@ public class EditPublicAddressCommand extends Command {
      * Creates an EditPublicAddressCommand to edit the public address of a specified person.
      *
      * @param index         of the person in the filtered person list to edit
-     * @param network       network type of desired public address
-     * @param label         label of desired public address
      * @param publicAddress new public address
      */
-    public EditPublicAddressCommand(Index index, Network network, String publicAddress, String label) {
-        requireAllNonNull(index, network, label, publicAddress);
+    public EditPublicAddressCommand(Index index, PublicAddress publicAddress) {
+        requireAllNonNull(index, publicAddress);
 
         this.index = index;
-        this.publicAddress = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+        this.publicAddress = publicAddress;
     }
 
     /**
