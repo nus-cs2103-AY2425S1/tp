@@ -609,7 +609,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a delivery with existing supplier
 
-    1. Prerequisites: List all suppliers using the `list -s` command. Ensure there is at least 1 supplier.
+    1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
 
     1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/bread q/500 g c/5.50`<br>
        Expected: A delivery paired to the first supplier is added. Details of the delivery shown in the status message.
@@ -619,13 +619,13 @@ testers are expected to do more *exploratory* testing.
        Expected: No delivery is added. Error message indicating that SUPPLIER_INDEX should be a positive number greater than 0 and smaller than total number of suppliers shown in the status message.
 
 3. Adding a delivery with invalid units for QUANTITY
-   1. Prerequisites: List all suppliers using the `list -s` command. Ensure there is at least 1 supplier.
+   1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
    
    1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/bread q/500 pounds c/105.50`<br>
       Expected: No delivery is added. Error message indicating that QUANTITY should be a positive number followed by a space and valid unit shown in the status message. 
 
 4. Adding a delivery with invalid parameter values
-    1. Prerequisites: List all suppliers using the `list -s` command. Ensure there is at least 1 supplier.
+    1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
 
     1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/###@@ q/500 pounds c/105.50`<br>
        Expected: No delivery is added. Error message indicating that PRODUCT should be alphanumeric shown in the status message.
@@ -640,28 +640,28 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking a delivery as CANCELLED
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with either PENDING or DELIVERED status.
+    1. Prerequisites: Ensure that the first delivery has either PENDING or DELIVERED status by listing all deliveries using the `list -d` command.
 
     1. Test case: `mark -d 1 CANCELLED`<br>
        Expected: The first delivery has status changed to CANCELLED. Details of the delivery shown in the status message.
 
 2. Marking a delivery as DELIVERED
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with either PENDING or CANCELLED status.
+    1. Prerequisites: Ensure that the first delivery has either PENDING or CANCELLED status by listing all deliveries using the `list -d` command.
 
     1. Test case: `mark -d 1 DELIVERED`<br>
        Expected: The first delivery has status changed to DELIVERED. Details of the delivery shown in the status message.
 
 3. Marking a delivery as PENDING
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with either CANCELLED or DELIVERED status.
+    1. Prerequisites: Ensure that the first delivery has either CANCELLED or DELIVERED status by listing all deliveries using the `list -d` command.
 
     1. Test case: `mark -d 1 PENDING`<br>
        Expected: The first delivery has status changed to PENDING. Details of the delivery shown in the status message.
    
 4. Marking a PENDING delivery as PENDING
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with PENDING status.
+    1. Prerequisites: Ensure that the first delivery has PENDING status by listing all deliveries using the `list -d` command.
 
     1. Test case: `mark -d 1 PENDING`<br>
        Expected: The first delivery remains unchanged. Error message showing that delivery already has PENDING as status.
@@ -673,14 +673,14 @@ testers are expected to do more *exploratory* testing.
 
 1. deleting an existing delivery
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery.
+    1. Prerequisites: Ensure there is at least 1 delivery by listing all deliveries using the `list -d` command.
 
     1. Test case: `delete -d 1`<br>
        Expected: The first delivery is deleted. Details of the deleted delivery shown in the status message.
 
 2. deleting a non-existent delivery
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is no delivery.
+    1. Prerequisites: Ensure there is no delivery by listing all deliveries using the `list -d` command.
 
     1. Test case: `delete -d 1`<br>
        Expected: No delivery is deleted. An error message that states that the delivery index provided is invalid is shown in the status message.
@@ -692,21 +692,21 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding an existing delivery by status
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with status PENDING.
+    1. Prerequisites: Ensure there is at least 1 delivery with status PENDING by listing all deliveries using the `list -d` command.
 
     1. Test case: `find -d stat/PENDING`<br>
        Expected: All deliveries with status PENDING are displayed. Success message indicating number of deliveries listed shown in the status message.
 
 2. Finding an existing delivery by PRODUCT
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with rice as product.
+    1. Prerequisites: Ensure there is at least 1 delivery with rice as product by listing all deliveries using the `list -d` command.
 
     1. Test case: `find -d pro/rice`<br>
        Expected: All deliveries with rice as product are displayed. Success message indicating number of deliveries listed shown in the status message.
 
 3. Finding a delivery that does not exist
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is no deliveries with 20-10-1999 12:00 as DELIVERY_DATE_TIME.
+    1. Prerequisites: Ensure there is no deliveries with 20-10-1999 12:00 as DELIVERY_DATE_TIME by listing all deliveries using the `list -d` command.
    
     1. Test case: `find -d on/20-10-1999 12:00`<br>
        Expected: No deliveries is displayed. Message indicating 0 deliveries listed shown in the status message.
@@ -718,7 +718,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Sorting deliveries with valid Parameter in ascending order
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with DELIVERED status and 1 delivery with PENDING status
+    1. Prerequisites: Ensure there is at least 1 delivery with DELIVERED status and 1 delivery with PENDING status by listing all deliveries using the `list -d` command.
 
     1. Test case: `sort -d so/a sb/s`<br>
        Expected: All deliveries with status Delivered are displayed before deliveries with status PENDING. Success message indicating number of deliveries sorted and the sorting conditions shown in the status message.
@@ -730,7 +730,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Sorting an empty list of deliveries
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is no deliveries displayed.
+    1. Prerequisites: Ensure there is no deliveries displayed by listing all deliveries using the `list -d` command.
 
     1. Test case: `sort -d so/a sb/c`<br>
        Expected: No deliveries is displayed. Message indicating 0 deliveries sorted by cost in ascending order is shown in the status message.
@@ -742,21 +742,21 @@ testers are expected to do more *exploratory* testing.
 
 1. View upcoming deliveries that are within a specified date range.
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with PENDING status and between 20-10-1999 12:00 and 12-10-2024 13:00
+    1. Prerequisites: Ensure there is at least 1 delivery with PENDING status and between 20-10-1999 12:00 and 12-10-2024 13:00 by listing all deliveries using the `list -d` command.
 
     1. Test case: `upcoming aft/20-10-1999 12:00 bef/12-10-2024 13:00`<br>
        Expected: All PENDING deliveries between 20-10-1999 12:00 and 12-10-2024 13:00 are displayed. Success message indicating number of upcoming deliveries shown in the status message.
 
 2. View upcoming deliveries before a specified date.
 
-     1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery with PENDING status and before d 12-10-2024 12:00
+     1. Prerequisites: Ensure there is at least 1 delivery with PENDING status and before d 12-10-2024 12:00 by listing all deliveries using the `list -d` command.
 
      1. Test case: `upcoming bef/12-10-2024 12:00`<br>
        Expected: All Pending deliveries before 12-10-2024 12:00 are displayed. Success message indicating number of upcoming deliveries shown in the status message.
 
 3. Invalid parameter values.
 
-    1. Prerequisites: List all deliveries using the `list -d` command. Ensure there is at least 1 delivery displayed.
+    1. Prerequisites: Ensure there is at least 1 delivery displayed by listing all deliveries using the `list -d` command.
 
     1. Test case: `upcoming aft/20-10-101010`<br>
        Expected: No deliveries is displayed. Message indicating DELIVERY_DATE_TIME should be in the format dd-MM-yyyy HH:mm is shown in the status message.
