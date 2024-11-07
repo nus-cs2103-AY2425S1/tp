@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 
+import java.util.List;
+import java.util.Optional;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -54,7 +57,17 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        //check if person already exists in database
         if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        //check if specified NRIC already exists in database
+        List<Person> existingPersons = model.getAddressBook().getPersonList();
+        Optional<Person> existingPersonWithSameNric = existingPersons.stream()
+                        .filter(person -> person.getNric().equals(toAdd.getNric()))
+                        .findAny();
+        if (existingPersonWithSameNric.isPresent()) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

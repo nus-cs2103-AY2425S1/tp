@@ -107,4 +107,14 @@ public class Appointment {
         }
         return value.toLocalDate().equals(currentDate);
     }
+
+    /**
+     * Converts the LocalDateTime value of the appointment to a string in the format DD-MM-YYYY HH:MM
+     *
+     * @return the formatted date-time string
+     */
+    public String formatDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return this.value.format(formatter);
+    }
 }

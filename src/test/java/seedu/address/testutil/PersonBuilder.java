@@ -16,7 +16,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_NRIC = "S1234567A";
+    public static final String DEFAULT_NRIC = "T1234567A";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "She likes Marvel movies";
     public static final String DEFAULT_APPOINTMENT = "19-10-2021 12:34";

@@ -4,12 +4,12 @@ import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Log;
@@ -40,9 +40,13 @@ public class ViewWindow extends UiPart<Stage> {
     @FXML
     private Label nric;
     @FXML
+    private Label appointment;
+    @FXML
     private FlowPane tags;
     @FXML
-    private ListView<Log> logListView;
+    private VBox logListContainer;
+
+    private ObservableList<Log> logList;
 
     private ViewWindow(Stage root, String feedbackDisplayText, Person person) {
         super(FXML, root);
@@ -54,11 +58,11 @@ public class ViewWindow extends UiPart<Stage> {
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
         nric.setText(person.getNric().value);
+        appointment.setText("Appointment on " + person.getAppointment().formatDateTime());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        logListView.setItems(FXCollections.observableArrayList(person.getLogEntries().getLogs()));
-        logListView.setCellFactory(listView -> new LogListViewCell());
+        logList = FXCollections.observableArrayList(person.getLogEntries().getLogs());
     }
 
     /**
@@ -74,6 +78,8 @@ public class ViewWindow extends UiPart<Stage> {
      * Shows the view window.
      */
     public void show() {
+        displayLogs();
+
         logger.fine("Showing view page on a patient.");
         getRoot().show();
         getRoot().centerOnScreen();
@@ -93,17 +99,13 @@ public class ViewWindow extends UiPart<Stage> {
         getRoot().hide();
     }
 
-    static class LogListViewCell extends ListCell<Log> {
-        @Override
-        protected void updateItem(Log log, boolean empty) {
-            super.updateItem(log, empty);
+    private void displayLogs() {
+        logListContainer.getChildren().clear();
 
-            if (empty || log == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new Label(log.toString()));
-            }
+        for (Log log : logList) {
+            Label logLabel = new Label(log.toString());
+            logLabel.getStyleClass().add("label-bright");
+            logListContainer.getChildren().add(logLabel);
         }
     }
 }
