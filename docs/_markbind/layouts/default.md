@@ -42,8 +42,8 @@
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
 * [Tutorials](https://se-education.org/guides/tutorials/ab3.html)
   * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
+  * [Adding a command](https://se-education.org/guides/tutorials/ab3AddRemark.html)
+  * [Removing Fields](https://se-education.org/guides/tutorials/ab3RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
