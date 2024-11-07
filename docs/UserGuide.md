@@ -208,9 +208,9 @@ Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `findtag friends` returns `Alex Yeoh` and `Bernice Yu`
-* `findtag friends colleagues` returns `Alex Yeoh`, `Bernice Yu` and `Roy Balakrishnan`<br>
-  ![result for 'findtag friends colleagues'](images/findTagFriendsColleagues.png)
+* `findtag hyperactive` returns `Alex Yeoh`
+* `findtag hyperactive ambitious fierce` returns `Alex Yeoh`, `David Li` and `Charlotte Li`<br>
+  ![result for 'findtag friends colleagues'](images/findTagHyperactiveAmbitiousFierce.png)
 
 ### Viewing help : `help`
 

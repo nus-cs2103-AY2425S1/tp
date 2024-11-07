@@ -16,7 +16,7 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true" >
     <columnConstraints>
-      <ColumnConstraints minWidth="15" prefWidth="60" />
+      <ColumnConstraints minWidth="20" prefWidth="80" />
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
@@ -26,6 +26,7 @@
         <ImageView fx:id="pinIcon" fitWidth="24" fitHeight="24">
           <Image url="@/images/pin_icon.png"/>
         </ImageView>
+        <Label text=" S " styleClass="green-box" />
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
