@@ -1,5 +1,5 @@
 #viewTitle {
-    -fx-underline: true;
+    -fx-font-style: italic;
     -fx-text-fill: white;
     -fx-font-size: 35px;
     -fx-font-weight: bolder;

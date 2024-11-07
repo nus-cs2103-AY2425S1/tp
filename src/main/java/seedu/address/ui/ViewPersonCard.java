@@ -24,7 +24,7 @@ public class ViewPersonCard extends UiPart<Region> {
     private VBox view;
 
     @FXML
-    private Label personInfo;
+    private Label viewTitle;
 
     @FXML
     private Label viewName;
@@ -50,10 +50,11 @@ public class ViewPersonCard extends UiPart<Region> {
     public ViewPersonCard(Person person) {
         super(FXML);
         if (person.getFavouriteStatus().equals(FavouriteStatus.FAVOURITE)) {
-            viewName.setText(person.getName().fullName + " \u2606");
+            viewTitle.setText("Contact Information \u2606");
         } else {
-            viewName.setText(person.getName().fullName);
+            viewTitle.setText("Contact Information");
         }
+        viewName.setText(person.getName().fullName);
         viewPhone.setText(person.getPhone().value);
         viewTelegram.setText("@" + person.getTelegram().value);
         viewEmail.setText(person.getEmail().value);
@@ -82,8 +83,8 @@ public class ViewPersonCard extends UiPart<Region> {
         return this.viewPhone;
     }
 
-    public Label getViewEmail() {
-        return this.viewEmail;
+    public Label getViewTitle() {
+        return this.viewTitle;
     }
 
     public Label getViewTelegram() {
@@ -96,10 +97,6 @@ public class ViewPersonCard extends UiPart<Region> {
 
     public FlowPane getViewAttendance() {
         return this.viewAttendance;
-    }
-
-    public Label getPersonInfo() {
-        return this.personInfo;
     }
 }
 

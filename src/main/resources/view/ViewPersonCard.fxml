@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 
 <VBox fx:id="view" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <Label id="viewTitle" text="Contact Information" />
+    <Label id="viewTitle" fx:id="viewTitle" />
     <GridPane>
     <HBox alignment="BASELINE_LEFT" prefWidth="1250">
         <Label id="viewName" fx:id="viewName"/>
