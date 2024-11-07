@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import bizbook.commons.core.LogsCenter;
 import bizbook.logic.commands.AddCommand;
 import bizbook.logic.commands.AddNoteCommand;
+import bizbook.logic.commands.ClearCommand;
 import bizbook.logic.commands.DeleteCommand;
 import bizbook.logic.commands.EditCommand;
 import bizbook.logic.commands.FindCommand;
@@ -66,8 +67,6 @@ public class CommandTablePanel extends UiPart<Region> {
 
     /**
      * Fills up the table with the commands.
-     *
-     * @param commandList list of commands to print.
      */
     private void populateData() {
         logger.fine("Showing a few command format of the application.");
@@ -75,6 +74,7 @@ public class CommandTablePanel extends UiPart<Region> {
             // Add more commands here as needed
             new CommandEntry(AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE),
             new CommandEntry(AddNoteCommand.COMMAND_WORD, AddNoteCommand.MESSAGE_USAGE),
+            new CommandEntry(ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_USAGE),
             new CommandEntry(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
             new CommandEntry(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
             new CommandEntry(FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE),
