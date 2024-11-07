@@ -59,16 +59,12 @@ public class CommandBox extends UiPart<Region> {
         commandSyntaxMap.put("finddoc", "finddoc KEYWORD [MORE_KEYWORDS]");
         commandSyntaxMap.put("help", "help");
         commandSyntaxMap.put("list", "list");
+        commandSyntaxMap.put("listarchives", "listArchives");
+        commandSyntaxMap.put("loadarchive", "loadArchive FILE_NAME");
         commandSyntaxMap.put("deletearchive", "deletearchive FILE_NAME");
-        commandSyntaxMap.put("listArchives", "listArchives");
-        commandSyntaxMap.put("loadArchive", "loadArchive FILE_NAME");
         commandSyntaxMap.put("redo", "redo");
-<<<<<<< HEAD
         commandSyntaxMap.put("undo", "undo");
-=======
-        commandSyntaxMap.put("undo", "undo");     
 
->>>>>>> 27d774278f718a76ef854885e749c5adbe60808f
     }
     
     /**
