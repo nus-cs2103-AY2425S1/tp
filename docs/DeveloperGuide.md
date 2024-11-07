@@ -175,6 +175,14 @@ Step 2. Assign the first `Event` from the list of assignable events to the curre
 
 Step 3. To unassign the `Event` from the vendor, use the command `unassign 1`. The `Event` should now be shifted from the list of assigned events to the list of assignable events.
 
+<puml src="diagrams/AssignSequenceDiagram.puml" width="800" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AssignCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 The `AssignCommand` and `UnassignCommand` classes were introduced to represent these operations. To support parsing the arguments to both commands, the `AssignCommandParser` and `UnassignCommandParser` classes were added.
 
 #### Changes to Model
