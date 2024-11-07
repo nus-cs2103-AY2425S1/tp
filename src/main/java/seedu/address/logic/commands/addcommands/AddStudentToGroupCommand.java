@@ -25,7 +25,7 @@ import seedu.address.model.group.GroupName;
 import seedu.address.model.group.exceptions.ExceedGroupSizeException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
-import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 
 /**
  * Adds a student to a group.
@@ -139,7 +139,7 @@ public class AddStudentToGroupCommand extends Command {
                         + String.format(MESSAGE_SUCCESS, Messages.format(toAddInto), studentsAdded), LIST_GROUP_MARKER);
             }
 
-        } catch (PersonNotFoundException e) {
+        } catch (StudentNotFoundException e) {
             throw new CommandException(MESSAGE_STUDENT_NO_NOT_FOUND);
         } catch (ExceedGroupSizeException e) {
             throw new CommandException(MESSAGE_EXCEED_GROUP_SIZE);
