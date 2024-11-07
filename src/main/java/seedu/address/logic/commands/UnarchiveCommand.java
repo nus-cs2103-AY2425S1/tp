@@ -21,10 +21,10 @@ public class UnarchiveCommand extends Command {
             + "by the index number used in the archived person list and adds the person back to the "
             + "main client list\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_UNARCHIVE_PERSON_SUCCESS = "Unarchived Person: %1$s";
-    public static final String MESSAGE_NOT_IN_ARCHIVED_LIST = "Unarchive can only be used when "
-            + "viewing the archived list!";
+    public static final String MESSAGE_NOT_IN_ARCHIVED_LIST =
+            "This command can only be used when viewing the archived list!";
     private final Index index;
     /**
      * Creates an UnarchiveCommand to remove the Person at the specified {@code Index} from the archived list and
