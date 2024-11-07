@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX_FORMAT =
             MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".\n%1$s";
     public static final String MESSAGE_EMPTY_MONTH_PAID = "At least 1 month paid must be specified, with the prefix m/";
+    public static final String MESSAGE_EMPTY_MONTH_PAID_FORMAT = MESSAGE_EMPTY_MONTH_PAID + "\n%1$s";
     public static final String MESSAGE_EMPTY_INDEX = "A person index must be provided";
     public static final String MESSAGE_EMPTY_INDEX_FORMAT = MESSAGE_EMPTY_INDEX + ".\n%1$s";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";

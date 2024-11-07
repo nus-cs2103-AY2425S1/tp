@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_EMPTY_MONTH_PAID;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_MONTH_PAID_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -17,8 +16,8 @@ import seedu.address.logic.commands.MarkPaidCommand;
 import seedu.address.model.person.MonthPaid;
 
 public class MarkPaidCommandParserTest {
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_NO_MONTH_PAID_SPECIFIED =
+            String.format(MESSAGE_EMPTY_MONTH_PAID_FORMAT, MarkPaidCommand.MESSAGE_USAGE);
 
     private static final String VALID_MONTHPAID1 = "2024-01";
     private static final String VALID_MONTHPAID2 = "2024-02";
@@ -33,7 +32,7 @@ public class MarkPaidCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index and no field specified
-        assertParseFailure(parser, "m/", MESSAGE_EMPTY_MONTH_PAID);
+        assertParseFailure(parser, "m/", MESSAGE_NO_MONTH_PAID_SPECIFIED);
     }
     @Test
     public void parse_missingField_success() {
@@ -41,7 +40,7 @@ public class MarkPaidCommandParserTest {
         String userInput = String.valueOf(targetIndex.getOneBased());
 
         // Since no prefixes are provided, we expect a parse failure
-        assertParseFailure(parser, userInput, MESSAGE_EMPTY_MONTH_PAID);
+        assertParseFailure(parser, userInput, MESSAGE_NO_MONTH_PAID_SPECIFIED);
     }
     @Test
     public void parse_invalidPreamble_failure() {
@@ -52,10 +51,10 @@ public class MarkPaidCommandParserTest {
         assertParseFailure(parser, "0 " + withPrefix(VALID_MONTHPAID2), MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_EMPTY_MONTH_PAID);
+        assertParseFailure(parser, "1 some random string", MESSAGE_NO_MONTH_PAID_SPECIFIED);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_EMPTY_MONTH_PAID);
+        assertParseFailure(parser, "1 i/ string", MESSAGE_NO_MONTH_PAID_SPECIFIED);
     }
     @Test
     public void parse_oneField_success() {
