@@ -29,9 +29,16 @@ public class UnitNumber {
             return false;
         }
         String[] split = test.split("-");
+        for (String s : split) {
+            for (int i = 0; i < s.length(); i++) {
+                if (!Character.isDigit(s.charAt(i))) {
+                    return false;
+                }
+            }
+        }
         // The string in each array must be at max length 3
         if (split.length == 2) {
-            return split[0].length() <= 3 && split[1].length() <= 3;
+            return split[0].length() <= 3 && split[1].length() <= 3 && split[0].length() > 0 && split[1].length() > 0;
         } else {
             return false;
         }
