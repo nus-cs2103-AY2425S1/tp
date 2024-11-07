@@ -18,7 +18,7 @@ import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Phone;
 
 public class JsonAdaptedSupplierTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "Rachel/Ross";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
