@@ -75,6 +75,8 @@ Action     | Format, Examples
 * You should not use the prefixes in any other cases, e.g. as content of **ADDRESS**.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <box type="info">
@@ -101,7 +103,7 @@ Action     | Format, Examples
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-<div style="page-break-after: always;"></div>
+[//]: # (<div style="page-break-after: always;"></div>)
 
 ### Viewing help : `help`
 
