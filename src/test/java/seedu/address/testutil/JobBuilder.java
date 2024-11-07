@@ -76,7 +76,7 @@ public class JobBuilder {
     }
 
     /**
-     * Sets the {@code JobRequirements} of the {@code Job} that we are building.
+     * Sets the job requirements of the {@code Job} that we are building.
      */
     public JobBuilder withRequirements(String... requirements) {
         this.requirements = Arrays.stream(requirements).map(Tag::new).collect(Collectors.toSet());

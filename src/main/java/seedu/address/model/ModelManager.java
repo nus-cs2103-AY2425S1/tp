@@ -286,4 +286,28 @@ public class ModelManager implements Model {
         updateFilteredCompanyList(company -> company.equals(targetCompany));
     }
 
+    /**
+     * Returns an unmodifiable view of the full person list stored in the address book.
+     * This list includes all persons, regardless of any current filters applied
+     * to the filtered person list.
+     *
+     * @return An unmodifiable {@code ObservableList} of all persons in the address book.
+     */
+    @Override
+    public ObservableList<Person> getFullPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    /**
+     * Returns an unmodifiable view of the full job list stored in the address book.
+     * This list includes all jobs, regardless of any current filters applied
+     * to the filtered job list.
+     *
+     * @return An unmodifiable {@code ObservableList} of all jobs in the address book.
+     */
+    @Override
+    public ObservableList<Job> getFullJobList() {
+        return addressBook.getJobList();
+    }
+
 }
