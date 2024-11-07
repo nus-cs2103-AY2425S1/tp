@@ -43,7 +43,7 @@ Person *--> "1" Phone
 Person *--> "1" Email
 Person *--> "1" StudentId
 Person *--> "*" Tag
-Person *--> "*" Tutorial
+Person *--> "12" Tutorial
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
