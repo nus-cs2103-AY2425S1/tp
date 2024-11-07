@@ -158,7 +158,6 @@ public class ModelManager implements Model {
     @Override
     public void linkPersonToEvent(Person person, Event event) {
         requireAllNonNull(person, event);
-        addressBook.removePersonFromAllEvents(person);
         addressBook.linkPersonToEvent(person, event);
     }
 
