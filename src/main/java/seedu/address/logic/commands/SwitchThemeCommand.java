@@ -11,7 +11,7 @@ import seedu.address.ui.ThemeController;
  */
 public class SwitchThemeCommand extends Command {
     public static final String COMMAND_WORD = "switch";
-    public static final String MESSAGE_SUCCESS = "Changed Theme!";
+    public static final String MESSAGE_SUCCESS = "Changed Theme to %1$s!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Changes the theme of this interface.\n"
             + "Parameters: light or dark\n"
@@ -25,7 +25,8 @@ public class SwitchThemeCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         ThemeController.switchTheme(theme);
-        return new CommandResult(MESSAGE_SUCCESS);
+        String themeMessage = theme.substring(0, 1).toUpperCase() + theme.substring(1).toLowerCase();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, themeMessage));
     }
 
     @Override
