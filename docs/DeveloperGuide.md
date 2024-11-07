@@ -158,6 +158,52 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+#### Implementation
+
+The image below shows the class diagram of a Person object and its related class attributes.
+
+![Person Class Diagram](images/PersonClassDiagram.png)
+
+The Person object is made up of several attributes:
+* `Name`: The name of the patient.
+* `Phone`: The phone number of the patient.
+* `Email`: The email of the patient.
+* `Address`: The address of the patient.
+* `Doctor`: The doctor assigned to the patient.
+* `Emergency Contact`: A list of emergency contacts of the patient.
+* `Tags`: Additional information about the patient.
+
+The Doctor object is also made up of attributes:
+* `Doctor Name`: The name and title of the doctor.
+* `Phone`: The phone number of the doctor.
+* `Email`: The email of the doctor.
+
+The Emergency Contact object is also made up of attributes:
+* `Name`: The name of the emergency contact.
+* `Phone`: The phone number of the emergency contact.
+* `Relationship`: The relationship of the emergency contact to the patient.
+
+#### Feature details
+
+1. MedConnect will verify that the parameters supplied by the user follow a set of relevant restrictions for the respective parameters.
+2. If any invalid parameter is provided, an error will be thrown, informing the user which parameter violates the restrictions. The format for the valid input for that parameter will be displayed to the user.
+3. If all parameters are valid, a new `Person` entry will be created and stored in the `VersionedAddressBook`.
+
+#### Design Considerations:
+
+**Aspect: The required input of parameters:**
+
+* **Alternative 1 (current choice):** Make all parameters compulsory, except Tags.
+  * Pros: Will not have missing data when it is needed in an emergency.
+  * Cons: Add Command is lengthy to type out, might be hard to remember the syntax.
+* **Alternative 2:** Make only a few specific parameters compulsory.
+  * Pros: Patient registration will be faster.
+  * Cons: If user forgets to update missing details, there will be no one to contact in an emergency.
+
+We opted for Alternative 1 to make almost all parameters compulsory as the autocomplete feature we implemented will aid users in typing out the Add Command.
+
 ### Undo/redo feature
 
 #### Implementation
@@ -641,9 +687,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T13-1/tp/releases) and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a terminal window and `cd` into the same folder.
+
+   1. Enter `java -jar medconnect.jar` into the terminal. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum but it is resizable.
 
 1. Saving window preferences
 
@@ -652,29 +700,95 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutdown
 
-### Deleting a person
+    There are multiple ways to exit the application:
 
-1. Deleting a person while all persons are being shown
+   1. Use the `exit` command.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Click `File` in the top left corner, then `Exit` in the dropdown menu.
+
+   1. Click the red 'X' of the application window.
+
+   1. Use the keyboard shortcut `Alt + F4`.
+
+### Deleting a patient
+
+1. Deleting a patient while all patients are being shown
+
+   1. Prerequisites: List all patients using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact is shown in the status message.
+
+   1. Test case: `delete 1 ec/1`<br> Expected: The first emergency contact of the first contact in the list is deleted. The details of the deleted emergency contact is shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. The index of the person to delete follows the list index seen in Medconnect.<br>
+      Error details are shown in the status message. A valid `delete` command and parameters are shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Test case: `delete 2 ec/0`<br> Expected: No emergency contact is deleted. The index of the emergency contact to delete follows the list index seen in MedConnect.<br>
+   Error details are shown in the status message, stating that the index cannot be a non-zero unsigned integer.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `delete ec/1`, `delete 1 ec/x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a patient while a filtered list is being shown
 
-### Saving data
+   1. Prerequisites: The patient list is filtered using the `find` or `finddoc` command.
 
-1. Dealing with missing/corrupted data files
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact is shown in the status message.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: `delete 1 ec/1`<br> Expected: The first emergency contact of the first contact in the list is deleted. The details of the deleted emergency contact is shown in the status message.
+
+   1. Test case: `delete 0`<br>
+      Expected: No person is deleted. The index of the person to delete follows the list index seen in Medconnect.<br>
+      Error details are shown in the status message. A valid `delete` command and parameters are shown in the status message.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `delete ec/1`, `delete 1 ec/x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Adding a patient
+
+1. Adding a patient while any number of patients are being shown.
+
+   1. Note: Due to the long length of valid `add` commands, the usage of `xx/PARAMETER...` will refer to all remaining compulsory parameters that have not been mentioned for that test case, with valid inputs for the respective parameters.
+
+   1. Prerequisites: List all patients using the `list` command. Patients are sorted by the time they were added to MedConnect.
+
+   1. Test case: `add n/Ryan p/98765432 xx/PARAMETER...`<br>
+   Expected: A new patient John Doe is added to the bottom of the patient list. Details shown in the status message include all the details of John Doe.
+
+   1. Test case: `add n/Ryan n/Daniel p/98765432 xx/PARAMETER...`<br>
+   Expected: No patient is added to the bottom of the list. Duplicate parameters are provided.
+   Error details are shown in the status message, showing which parameters contain duplicates.
+
+   1. Test case: `add n/Ryan`<br>
+   Expected: No patient is added. Error details are shown in the status message showing all the parameters required and an example of a valid `add` command.
+
+   1. Test case: `add`<br>
+   Expected: No patient is added. Same as previous test case.
+
+   1. Test case: `add n/`<br>
+   Expected: No patient is added. Same as previous test case.
+
+   1. Test case: `add p/???`<br>
+   Expected: No patient is added. Same as previous test case.
+
+   1. Test case: `add n/John+Doe xx/PARAMETER`<br>
+   Expected: No patient is added. Error details are shown in the status message, stating the valid parameters for the patient's name.
+
+   1. Other incorrect `add` commands to try: `add n/Ryan p/91234567 xx/INVALID_PARAMETER xx/PARAMETER`<br>
+   For xx/INVALID_PARAMETER, `xx` refers to any of the valid prefixes and `INVALID_PARAMETER` refers to an invalid parameter input for the respective prefix.<br>
+   Expected: Same as previous test case, but error details shown are specific to the invalid parameter provided.
+
+
+
+  ### Saving data
+
+  1. Dealing with missing/corrupted data files
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_

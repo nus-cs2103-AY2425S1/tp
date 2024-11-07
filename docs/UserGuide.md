@@ -53,8 +53,6 @@ By following these sections, you can quickly find the information you need and m
 
 <img src="images/Quickstart-new-terminal.png" alt="NewTerminal">
 
-
-
 5. Type the command in the [command box](#command-box) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -218,7 +216,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* Only the name is searched.
+* **Only the patient's name is searched.**
 * The search is case-insensitive. (e.g `hans` will match `Hans`)
 * The order of the keywords does not matter. (e.g. `Hans Bo` will match `Bo Hans`)
 * Names will match if the keyword is found in any part of the name. (e.g. `Ha` will match `Hans`)
@@ -318,7 +316,8 @@ Did you accidentally load an archive and want your old data back? Enter the 'und
 </div>
 
 Examples:
-* `loadarchive addressbook-2024-11-06T20-29-05.7609475-example.json` Loads the data from the archived file named `addressbook-20241023_114324-example.json` into the address book.
+* `loadarchive addressbook-2024-11-06T20-29-05.7609475-example.json` Loads the data from the archived file named `addressbook-2024-11-06T20-29-05.7609475-example.json` into the address book.
+
 
 [↑ Back to top](#table-of-contents)
 
@@ -333,6 +332,9 @@ Deletes the data of an existing archived data file in the archive folder.
 Format: `deletearchive FILE_NAME`
 
 * `FILE_NAME` must be the name of an archived data file in the archive folder.
+
+Examples:
+* `deletearchive addressbook-20241023_114324-example.json` Deletes the archived file with the file name `addressbook-20241023_114324-example.json`.
 
 [↑ Back to top](#table-of-contents)
 
@@ -351,7 +353,7 @@ Format: `undo`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 An action cannot be undone once you close the MedConnect application.
-</div> <br>
+</div>
 
 [↑ Back to top](#table-of-contents)
 
@@ -394,10 +396,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedConnect home folder.
 
-**Q**: How do I change the AddressBook home folder?<br>
-**A**: The AddressBook home folder is set to the folder where the `medconnect.jar` file is located. If you want to change it, move the `medconnect.jar` file and all the files in the original home folder to the new folder.
+**Q**: How do I change the MedConnect home folder?<br>
+**A**: The MedConnect home folder is set to the folder where the `medconnect.jar` file is located. If you want to change it, move the `medconnect.jar` file and all the files in the original home folder to the new folder.
 
 [↑ Back to top](#table-of-contents)
 
