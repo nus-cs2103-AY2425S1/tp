@@ -571,3 +571,27 @@ testers are expected to do more *exploratory* testing.
    3. Copy the .jar file into this same folder (not into `data`!).
    4. Run the .jar file.
       - Expected: The changes you made are still displayed in the app.
+
+## Appendix: Effort
+
+HRConnect is based on the [AddressBook Level-3 (AB3)](https://github.com/nus-cs2103-AY2425S1/tp) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
+
+### Challenges and Difficulty
+Both AB3 and HRConnect deal with their stored data as entities (`Person` for AB3, `Employee`, `Project` and `Assignment` for HRConnect).  
+
+However, HRConnect ended up as a significantly larger project due to the multiple entities involved (instead of only one). HRConnect also ended up more complicated in general due to the interactions between these entities. For instance, Assignment represents a link between an Employee and a Project, and we also had to deal with handling them in case of deletions to Employees or Projects.
+
+Integration was also a challenge at the start, mainly due to some members' unfamiliarity with GitHub and Git. There were a few merge conflicts that we were able to resolve. However, we were able to mitigate much of the pain points by splitting the work up into relatively defined portions.
+
+### Reuse
+In the earlier stages of the project, some effort was saved by reusing certain parts of AB3 code. For instance, the code for adding and deleting projects was a heavily modified version of the original AB3 commands. 
+
+Due to the increasing size of our project, we have since refactored certain parts (e.g. all three `list` commands) for better code structure.
+
+### Achievements
+
+We had a clear and defined vision of the requirements and features from the start, which helped with executing the implementation (coding) portion of the project.
+
+We are happy to say we were able to match all of our milestones, even the earlier ones. 
+
+We were also able to achieve a high level of test coverage for each Pull Request, and our features are confirmed to work well for the average target user so far.
