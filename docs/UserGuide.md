@@ -315,17 +315,26 @@ mark t/TELEGRAM…​ d/DATE
 | `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
 
 #### Example
-* `mark t/toom t/maary d/2024-11-02`
 
-  ![result of command `mark t/toom t/maary d/2024-11-02`](images/MarkCommandResult.png)
+**Please note this part is updated on 2024-11-07, the GUI may be different if duplicate them on another date.**
 
-* Mark attendance of contact with telegram `toom` first, then input command `mark t/toom t/maary d/2024-11-02`
+* `mark t/alexYeoh t/berniceYu d/2024-11-07`
 
-  ![img_3.png](images/RepeatedMarkCommandResult.png)
+  ![result of command `mark t/alexYeoh t/berniceYu d/2024-11-07`](images/MarkCommandResult.png)
 
-* Mark attendance of a non-member contact `mark t/jerry d/2024-11-02`
+* Mark attendance of contact with telegram `alexYeoh`, `berniceYu` first, then input command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07`
 
-  ![result of command `mark t/jerry d/2024-11-02`](images/MarkNonMemberCommandResult.png)
+  ![result of command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07` if Alex and Bernice's attendance is marked before.png](images/RepeatedMarkCommandResult.png)  
+
+* Mark attendance of a non-member contact `mark t/davidLi d/2024-11-07`
+
+  ![result of command `mark t/davidLi d/2024-11-07`](images/MarkNonMemberCommandResult.png)
+
+* Mark attendance from a list with non-exist telegrams `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`
+
+  ![result of command `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`](images/MarkNonExistCommandResult.png)
+
+
 
 
 ### Unmarking attendance : `unmark`

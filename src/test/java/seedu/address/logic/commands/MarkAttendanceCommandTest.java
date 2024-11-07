@@ -119,7 +119,7 @@ public class MarkAttendanceCommandTest {
 
         List<String> alreadyMarkedList = displayMembers(membersAttendanceMarked);
         String expectedMessage = String.format(
-                MESSAGE_MARK_MEMBER_SUCCESS, attendance, displayMembers(membersMarkSuccess)) + '\n'
+                MESSAGE_MARK_MEMBER_SUCCESS, attendance, displayMembers(membersMarkSuccess))
                 + String.format(MESSAGE_CONTAIN_MARKED_MEMBER, alreadyMarkedList);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());

@@ -84,7 +84,7 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
                     ? String.format(MESSAGE_CONTAIN_MARKED_MEMBER, displayMembers(membersAttendanceAlreadyMarked))
                     : String.format(MESSAGE_MARK_MEMBER_SUCCESS, attendance,
                 displayMembers(membersAttendanceMarkSuccess))
-                + '\n' + String.format(MESSAGE_CONTAIN_MARKED_MEMBER, displayMembers(membersAttendanceAlreadyMarked)));
+                + String.format(MESSAGE_CONTAIN_MARKED_MEMBER, displayMembers(membersAttendanceAlreadyMarked)));
         return new CommandResult(commandResultMessage);
     }
 
