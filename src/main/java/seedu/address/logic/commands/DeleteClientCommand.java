@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.model.client.Phone;
 
@@ -12,9 +11,6 @@ import seedu.address.model.client.Phone;
  * which implement client-type specific deletion logic.
  */
 public abstract class DeleteClientCommand extends Command {
-
-    /** Command parameter format for phone. */
-    public static final String CLIENT_PARAMETERS = String.format("%sPHONE", PREFIX_PHONE);
 
     /**
      * Command restrictions indicating that the phone number must be an
