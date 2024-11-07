@@ -26,7 +26,7 @@ public class AggGradeCommand extends Command {
                    "min", Operation.MIN, "stddev", Operation.STDDEV, "var", Operation.VAR));
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Performs aggregation operation the displayed "
             + "person list.\n"
-            + "Parameters: OPERATION " + PREFIX_NAME + "EXAM_NAME (optional)\n"
+            + "Parameters: OPERATION [" + PREFIX_NAME + "EXAM_NAME]\n"
             + "n/EXAM_NAME is optional. Inclusion of exam name will only perform aggregation on that specific exam\n"
             + "Operations can be: " + String.join(", ", OPERATION_TRANSLATE.keySet()) + "\n"
             + "example:\n" + "  aggGrade median\n" + "  aggGrade median n/midterm";
@@ -107,7 +107,7 @@ public class AggGradeCommand extends Command {
             return new SmartList(
                     gradeLists.stream().map(gradeList -> gradeList.getMap().values().stream()
                             .reduce(0F, (
-                                            total, grade) -> grade.getScore() * grade.getWeightage() / 100,
+                                            total, grade) -> total + grade.getScore() * grade.getWeightage() / 100,
                                     Float::sum)).toList());
         }
 
