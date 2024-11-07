@@ -30,5 +30,6 @@
     <Label fx:id="remark" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
     <Label text="Listings:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-    <Label fx:id="listings" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+    <Label fx:id="listings" styleClass="person-pane-label"
+           GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" />
 </GridPane>
