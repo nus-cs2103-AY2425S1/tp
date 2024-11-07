@@ -88,7 +88,7 @@ Adds an owner to PawPatrol.
 **:information_source: Important notes about owner fields:**<br>
 <ul>
 <li>IC number: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
-<li>Owner name: Must contain only alphanumeric characters and spaces,pus and cannot be empty.</li>
+<li>Owner name: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
 <li>Phone number: Must contain exactly 8 digits as according to Singapore phone standards.</li>
 <li>Email: Should follow a standard email format of local-part@domain and adhere to the following constraints:
 <ul>
