@@ -156,8 +156,41 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### `addAppt` - Add Appointment
 
+This command enables the addition of an `Appointment` for a specified `Person` in the `Model`. Its implementation involves coordinated updates between the `Model` and UI.
+
+#### Overview
+
+When executed, this command parses user input and creates an internal representation of the appointment data. The sequence proceeds as follows:
+
+1. **Parse Command and Target Person:**  
+   The input command text is parsed to identify the type of command and the target `Person` for the appointment. If the `Person` is found in the model, the process continues with creating an appointment.
+
+2. **Create and Add Appointment:**  
+   A new `Appointment` is created with the provided details, and an updated `Person` object is prepared, associating this appointment with the target individual.
+
+3. **Model Update:**  
+   The model replaces the old `Person` with this modified version in the address book, which then updates the internal list of appointments to include the new entry.
+
+4. **Automatic UI Refresh:**  
+   The `AppointmentListPanel` UI component, which observes changes in the list of appointments, detects the addition and refreshes its display. The UI then reflects this change by showing a new `AppointmentCard` for the recently added appointment.
+
+{: .alert .alert-primary}
+> :bulb: **Tip:**
+>
+> Immutability in `Person` objects prevents data conflicts by ensuring the `AddressBook` only stores updated versions, eliminating orphaned data. Each update cycle refreshes the relevant list views, automatically redrawing the necessary UI elements in the correct order.
+
+#### Sequence Diagram
+
+When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmnetName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
+
+![AddApptCommandSequence](images/AddApptCommandSequenceDiagram.png)
+
+{: .alert .alert-info}
+:information_source: **Note:** The lifeline for `AddApptCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+[Back to Table of Contents](#table-of-contents)
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
