@@ -1,13 +1,17 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.DateDistantToRecentComparator;
 import seedu.address.model.person.DateRecentToDistantComparator;
 import seedu.address.model.person.PriorityHighToLowComparator;
 import seedu.address.model.person.PriorityLowToHighComparator;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class SortPreferenceTest {
     // Test for valid sort preference input
