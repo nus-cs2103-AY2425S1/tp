@@ -1,7 +1,6 @@
 package careconnect.ui;
 
 import java.util.Comparator;
-import java.util.function.Consumer;
 
 import careconnect.model.person.Person;
 import javafx.fxml.FXML;
@@ -48,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex, Consumer<Integer> showSelectedPerson) {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -61,9 +60,5 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        // Attach event listener
-        cardPane.setOnMousePressed(e -> {
-            showSelectedPerson.accept(displayedIndex - 1); // Because the list is 0-indexed
-        });
     }
 }

@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import careconnect.commons.core.LogsCenter;
 import careconnect.model.log.Log;
+import careconnect.ui.MainWindow.FocusItemUpdater;
+import careconnect.ui.MainWindow.FocusItems;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -13,7 +15,7 @@ import javafx.scene.layout.Region;
 /**
  * Panel containing the list of logs.
  */
-public class LogListPanel extends UiPart<Region> {
+public class LogListPanel extends UiPart<Region> implements ShiftTabFocusable {
     private static final String FXML = "LogListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(LogListPanel.class);
 
@@ -23,10 +25,18 @@ public class LogListPanel extends UiPart<Region> {
     /**
      * Creates a {@code LogsListPanel} with the given immutable {@code List}.
      */
-    public LogListPanel(List<Log> logs) {
+    public LogListPanel(List<Log> logs, FocusItemUpdater focusItemUpdater) {
         super(FXML);
         logListView.setItems(FXCollections.observableList(logs));
         logListView.setCellFactory(cell -> new LogListViewCell());
+        logListView.setOnMousePressed(event -> {
+            focusItemUpdater.updateCurrentFocusItem(FocusItems.LOG_LIST_ITEM);
+        });
+    }
+
+    @Override
+    public void focus() {
+        this.logListView.requestFocus();
     }
 
     /**
@@ -49,5 +59,9 @@ public class LogListPanel extends UiPart<Region> {
                 setGraphic(new LogCard(log, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    protected boolean isLogListEmpty() {
+        return this.logListView.getItems().isEmpty();
     }
 }

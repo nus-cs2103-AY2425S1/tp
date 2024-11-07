@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
  * An UI component that displays detailed information of a {@code Person} in the right pane of
  * the window.
  */
-public class PersonDetailCard extends UiPart<Region> {
+public class PersonDetailCard extends UiPart<Region> implements ShiftTabFocusable {
 
     private static final String FXML = "PersonDetailCard.fxml";
 
@@ -57,7 +57,7 @@ public class PersonDetailCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonDetailCard(Person person) {
+    public PersonDetailCard(Person person, MainWindow.FocusItemUpdater focusItemUpdater) {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
@@ -80,7 +80,22 @@ public class PersonDetailCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        logsListPanel = new LogListPanel(person.getLogs());
+        logsListPanel = new LogListPanel(person.getLogs(), focusItemUpdater);
         logsListPanelPlaceHolder.getChildren().setAll(logsListPanel.getRoot());
+    }
+
+    /**
+     * Sets focus on the logs within the PersonDetailCard.
+     * Currently, logs are the only component in the PersonDetailCard
+     * that should be focusable with Shift + Tab navigation.
+     * This method directs the focus to logsListPanel by calling logsListPanel.focus().
+     */
+    @Override
+    public void focus() {
+        this.logsListPanel.focus();
+    }
+
+    protected boolean isLogListEmpty() {
+        return this.logsListPanel.isLogListEmpty();
     }
 }

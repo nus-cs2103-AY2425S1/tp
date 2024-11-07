@@ -18,6 +18,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -36,7 +38,10 @@ public class MainWindow extends UiPart<Stage> {
     private final PersonDetailFallback personDetailFallback = new PersonDetailFallback();
     private final Stage primaryStage;
     private final Logic logic;
+    private FocusItems currentFocusItem;
     // Independent Ui parts residing in this Ui container
+    private PersonDetailCard selectedPersonDetailCard;
+    private CommandBox commandBox;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     @FXML
@@ -65,12 +70,52 @@ public class MainWindow extends UiPart<Stage> {
 
         // Set dependencies
         this.primaryStage = primaryStage;
+        this.initializeShiftTabListener();
         this.logic = logic;
+        this.selectedPersonDetailCard = null;
+        this.currentFocusItem = null;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
+    }
+
+    /**
+     * Updates current focus item to provided focus item.
+     *
+     * @param focusItem the focusItem to update
+     */
+    public void updateCurrentFocusItem(FocusItems focusItem) {
+        assert(focusItem != null);
+        currentFocusItem = focusItem;
+        try {
+            currentFocusItem.focus(this);
+        } catch (NullPointerException e) {
+            logger.warning("Tried to focus on: " + focusItem + ", but it is null.");
+        }
+    }
+
+    /**
+     * Initializes the shift+tab button listener.
+     */
+    @FXML
+    public void initializeShiftTabListener() {
+        // declare key combination for Shift + Tab
+        KeyCombination shiftTabCombination = new KeyCodeCombination(KeyCode.TAB, KeyCombination.SHIFT_DOWN);
+
+        // add listener
+        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (shiftTabCombination.match(event)) {
+                // only cycle, currentFocusItem is not null
+                if (currentFocusItem != null) {
+                    FocusItems focusItem = currentFocusItem.next(this);
+                    this.updateCurrentFocusItem(focusItem);
+                }
+                event.consume();
+            }
+
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -112,22 +157,44 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+
+
     /**
-     * Displays the details of the selected {@code Person} on the right pane.
+     * Sets the {@code selectedPersonDetailCard} field based on the provided selected index.
+     * This method creates a new {@code PersonDetailCard} using the specified index and
+     * updates the UI to reflect the selected person's details. If {@code selectedIndex} is equal
+     * to {@code CommandResult.NO_RECORD_SELECTED}, a default {@code PersonDetailFallback} card
+     * will be shown instead.
      *
-     * @param index of the selected {@code Person}
+     * @param selectedIndex the index of the selected person used to create the detail card
      */
-    protected void showSelectedPerson(int index) {
-        Person selectedPerson = logic.getFilteredPersonList().get(index);
-        PersonDetailCard personDetailCard = new PersonDetailCard(selectedPerson);
-        personDetailPlaceholder.getChildren().setAll(personDetailCard.getRoot());
+    protected void setAndShowSelectedPerson(int selectedIndex) {
+        if (selectedIndex == CommandResult.NO_RECORD_SELECTED) {
+            this.personListPanel.clearSelection();
+            this.selectedPersonDetailCard = null;
+            personDetailPlaceholder.getChildren().setAll(personDetailFallback.getRoot());
+        } else {
+            // this selects and the selection listener in personListPanel will make a call to showSelectedPerson
+            this.personListPanel.setSelected(selectedIndex);
+        }
+    }
+
+    /**
+     * Shows selected person on the right pane
+     *
+     * @param person the person to be shown
+     */
+    protected void showSelectedPerson(Person person) {
+        this.selectedPersonDetailCard = new PersonDetailCard(person, this::updateCurrentFocusItem);
+        personDetailPlaceholder.getChildren().setAll(this.selectedPersonDetailCard.getRoot());
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::showSelectedPerson);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(),
+                this::updateCurrentFocusItem, this::showSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -138,8 +205,11 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand, this::validateSyntax);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        this.commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand,
+                this::validateSyntax, this::updateCurrentFocusItem);
+        // focus on command box
+        updateCurrentFocusItem(FocusItems.COMMAND_BOX_ITEM);
+        commandBoxPlaceholder.getChildren().add(this.commandBox.getRoot());
     }
 
     /**
@@ -206,13 +276,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             int selectedIndex = commandResult.getSelectedIndex();
-            if (selectedIndex == CommandResult.NO_RECORD_SELECTED) {
-                // display fallback ui if no index is selected
-                personDetailPlaceholder.getChildren().setAll(personDetailFallback.getRoot());
-            } else {
-                // display detail page
-                showSelectedPerson(selectedIndex);
-            }
+            this.setAndShowSelectedPerson(selectedIndex);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -248,6 +312,83 @@ public class MainWindow extends UiPart<Stage> {
         boolean isValidSyntax = logic.validateSyntax(syntax);
         logger.info("isValidSyntax: " + isValidSyntax);
         return isValidSyntax;
+    }
+
+    /**
+     * Represents a function that can update focus item
+     */
+    @FunctionalInterface
+    public interface FocusItemUpdater {
+        /**
+         * Updates current focus item
+         */
+        void updateCurrentFocusItem(FocusItems focusItem);
+    }
+
+    protected enum FocusItems {
+        COMMAND_BOX_ITEM {
+            @Override
+            public ShiftTabFocusable getItem(MainWindow mainWindow) {
+                return mainWindow.commandBox;
+            }
+
+        },
+        LOG_LIST_ITEM {
+            @Override
+            public ShiftTabFocusable getItem(MainWindow mainWindow) {
+                // if no person selected or no logs present return null
+                if (mainWindow.selectedPersonDetailCard == null
+                        || mainWindow.selectedPersonDetailCard.isLogListEmpty()) {
+                    return null;
+                } else {
+                    return mainWindow.selectedPersonDetailCard;
+                }
+            }
+        },
+        PERSON_LIST_ITEM {
+            @Override
+            public ShiftTabFocusable getItem(MainWindow mainWindow) {
+                return mainWindow.personListPanel;
+            }
+        };
+
+        // Method to get the next focus item (gets next until item not null)
+        public FocusItems next(MainWindow mainWindow) {
+            int count = 0;
+            FocusItems next = values()[(this.ordinal() + 1) % values().length];
+            while (next.getItem(mainWindow) == null) {
+                // should not go into infinite loop, since focusItem is only set after
+                // command box have been initialized
+                assert(count <= values().length);
+                next = values()[(next.ordinal() + 1) % values().length];
+                count += 1;
+            }
+            return next;
+        }
+
+        // Method to get the previous focus item (gets previous until item not null)
+        public FocusItems previous(MainWindow mainWindow) {
+            int count = 0;
+            FocusItems previous = values()[(this.ordinal() - 1 + values().length) % values().length];
+            while (previous.getItem(mainWindow) == null) {
+                // should not go into infinite loop, since focusItem is only set after
+                // command box have been initialized
+                assert(count <= values().length);
+                previous = values()[(previous.ordinal() - 1 + values().length) % values().length];
+                count += 1;
+            }
+            return previous;
+        }
+
+        public abstract ShiftTabFocusable getItem(MainWindow mainWindow);
+
+        public void focus(MainWindow mainWindow) throws NullPointerException {
+            ShiftTabFocusable shiftTabFocusable = this.getItem(mainWindow);
+            if (shiftTabFocusable == null) {
+                throw new NullPointerException("ShiftTabFocusable item is null. Cannot focus.");
+            }
+            shiftTabFocusable.focus();
+        }
     }
 
 }
