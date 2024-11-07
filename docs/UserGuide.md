@@ -104,6 +104,10 @@ Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 Examples:
 *  `edit 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+* `Before:`
+* ![](images/beforeEditCommandExample.png)
+* `After:`
+* ![](images/afterEditCommandExample.png)
 
 ### Locating persons by name: `find`
 
@@ -136,6 +140,10 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `Before:`
+* ![](images/beforeDeleteCommandExample.png)
+* `After:`
+* ![](images/afterDeleteCommandExample.png)
 
 ### Clearing all persons : `clear -p`
 
@@ -180,6 +188,7 @@ Examples:
 Updates the details of an existing event in the address book.
 
 Format: `update -i INDEX -n NEW_NAME -sd NEW_START_DATE -ed NEW_END_DATE -l NEW_LOCATION -a NEW_ATTENDEES_INDICES -r REMOVED_ATTENDEES_INDICES`
+
 **Note:** Dates are in (yyyy-mm-dd) format.
 
 **Tip:** The initial `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
