@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventNameContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindEventCommand object
@@ -23,6 +24,6 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
         }
 
-        return new FindEventCommand(trimmedArgs);
+        return new FindEventCommand(new EventNameContainsKeywordPredicate(trimmedArgs));
     }
 }

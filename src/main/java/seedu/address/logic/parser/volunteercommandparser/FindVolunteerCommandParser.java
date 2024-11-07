@@ -6,6 +6,7 @@ import seedu.address.logic.commands.volunteercommands.FindVolunteerCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.VolunteerParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.volunteer.VolunteerNameContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindVolunteerCommand object.
@@ -20,7 +21,7 @@ public class FindVolunteerCommandParser implements Parser<FindVolunteerCommand> 
     public FindVolunteerCommand parse(String args) throws ParseException {
         try {
             String searchTerm = VolunteerParserUtil.parseSearchTerm(args);
-            return new FindVolunteerCommand(searchTerm);
+            return new FindVolunteerCommand(new VolunteerNameContainsKeywordPredicate(searchTerm));
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindVolunteerCommand.MESSAGE_USAGE), pe);
