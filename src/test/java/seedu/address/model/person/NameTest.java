@@ -45,6 +45,9 @@ public class NameTest {
         // same values -> returns true
         assertTrue(name.equals(new Name("Valid Name")));
 
+        // same values (not case sensitive) -> returns true
+        assertTrue(name.equals(new Name("valid name")));
+
         // same object -> returns true
         assertTrue(name.equals(name));
 
@@ -65,49 +68,24 @@ public class NameTest {
         Name nameAliceUpper = new Name("ALICE");
         Name nameAliceLower = new Name("alice");
 
-        // same names (case-sensitive) -> returns 0
+        // same names -> returns 0
         assertTrue(nameAlice.compareTo(new Name("Alice")) == 0);
 
         // different names -> returns negative if less than, positive if greater than
         assertTrue(nameAlice.compareTo(nameBob) < 0);
         assertTrue(nameBob.compareTo(nameAlice) > 0);
 
-        // names that differ in case -> compareTo is case-sensitive
-        assertTrue(nameAlice.compareTo(nameAliceUpper) != 0);
-        assertTrue(nameAlice.compareTo(nameAliceLower) != 0);
+        // names that differ in case -> compareTo is not case-sensitive
+        assertTrue(nameAlice.compareTo(nameAliceUpper) == 0);
+        assertTrue(nameAlice.compareTo(nameAliceLower) == 0);
 
         // ordering based on ASCII values
-        assertTrue(nameAliceUpper.compareTo(nameAliceLower) < 0);
+        assertTrue(nameAliceUpper.compareTo(nameAliceLower) == 0);
     }
 
     @Test
     public void compareTo_null_throwsNullPointerException() {
         Name name = new Name("Alice");
         assertThrows(NullPointerException.class, () -> name.compareTo(null));
-    }
-
-    @Test
-    public void compareToIgnoreCase() {
-        Name nameAlice = new Name("Alice");
-        Name nameBob = new Name("Bob");
-        Name nameAliceUpper = new Name("ALICE");
-        Name nameAliceLower = new Name("alice");
-
-        // same names regardless of case -> returns 0
-        assertTrue(nameAlice.compareToIgnoreCase(nameAliceUpper) == 0);
-        assertTrue(nameAlice.compareToIgnoreCase(nameAliceLower) == 0);
-
-        // different names -> returns negative if less than, positive if greater than
-        assertTrue(nameAlice.compareToIgnoreCase(nameBob) < 0);
-        assertTrue(nameBob.compareToIgnoreCase(nameAlice) > 0);
-
-        // comparing names with different cases
-        assertTrue(nameAliceUpper.compareToIgnoreCase(nameAliceLower) == 0);
-    }
-
-    @Test
-    public void compareToIgnoreCase_null_throwsNullPointerException() {
-        Name name = new Name("Alice");
-        assertThrows(NullPointerException.class, () -> name.compareToIgnoreCase(null));
     }
 }
