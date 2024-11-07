@@ -187,7 +187,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting SocialBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
@@ -195,10 +195,11 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping SocialBook ] =============================");
         try {
+            storage.saveAddressBook(model.getAddressBook());
             storage.saveUserPrefs(model.getUserPrefs());
             storage.saveAppointments(model.getFilteredAppointmentList());
         } catch (IOException e) {
-            logger.severe("Failed to save preferences and appointments" + StringUtil.getDetails(e));
+            logger.severe("Failed to save the address book, preferences and appointments" + StringUtil.getDetails(e));
         }
     }
 }

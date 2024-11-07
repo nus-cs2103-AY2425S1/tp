@@ -216,6 +216,53 @@ Format: `scheme INDEXES`
 Examples:
 * `scheme 1` shows scheme that the 1st person in the address book is eligible for.
 
+### Adding a scheme to a person : `addscheme`
+
+Adds a scheme to the specified person in the address book.
+
+Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
+
+* Adds the scheme at the specified `SCHEME_INDEX` to the person at the specified `PERSON_INDEX`.
+* The person index refers to the index number shown in the displayed person list.
+* The scheme index refers to the index number shown in the displayed scheme list with scheme command.
+* The indexes **must be a positive integer** 1, 2, 3, …​
+* Only 1 scheme index and 1 person index can be inputted at a time.
+
+Examples:
+* `addscheme 1 i/1` adds the 1st scheme to the 1st person in the address book.
+
+### Viewing schemes attached to a person : `viewscheme`
+
+Displays the schemes that the specified person in the address book is attached to.
+
+Format: `viewscheme INDEX`
+* Displays the schemes that the person at the specified `INDEX` is attached to.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Only 1 index can be inputted at a time.
+* The index must be within the size of the current list.
+
+Examples:
+* `viewscheme 1` shows the schemes that the 1st person in the address book is attached to.
+
+### Delete a scheme from a person : `deletescheme`
+
+Deletes the specified scheme from the specified person in the address book.
+
+Format: `deletescheme PERSON_INDEX i/SCHEME_INDEXS`
+
+* Deletes the schemes at the specified `SCHEME_INDEXES` from the person at the specified `PERSON_INDEX`.
+* The person index refers to the index number shown in the displayed person list.
+* The scheme index refers to the index number shown in the displayed scheme list with viewscheme command.
+* The indexes **must be a positive integer** 1, 2, 3, …​
+* Multiple scheme indexes can be inputted at a time but only 1 person index can be inputted at a time.
+* The scheme indexes can be in **any order** so long as all the indexes fall within the size of the current list.
+* Duplicated valid scheme index inputs would be treated as unique scheme index inputs.
+
+Examples:
+* `deletescheme 1 i/1` deletes the 1st scheme from the 1st person in the address book.
+* `deletescheme 1 i/1, 2` deletes the 1st and 2nd scheme from the 1st person in the address book.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -270,4 +317,8 @@ Action           | Format, Examples
 **Undo**         | `undo`
 **List**         | `list`
 **Statistics**   | `statistics` <br> Shows general statistics
+**Scheme**       | `scheme INDEX` <br> e.g., `scheme 1`
+**AddScheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`
+**ViewScheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`
+**DeleteScheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`
 **Help**         | `help`

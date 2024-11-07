@@ -35,6 +35,10 @@
           <HBox.margin>
             <Insets left="4" />
           </HBox.margin>
+          <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
         </Label>
       </HBox>
       <FlowPane fx:id="tags" />

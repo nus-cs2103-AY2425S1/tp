@@ -51,6 +51,8 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final String VALID_UPDATED_AT = LocalDateTime.now().toString();
 
+    private static final ArrayList<JsonAdaptedScheme> VALID_SCHEMES = new ArrayList<>();
+
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
@@ -62,7 +64,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -72,7 +75,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -82,7 +86,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -92,7 +97,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -102,7 +108,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -112,7 +119,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, null, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -122,7 +130,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -132,7 +141,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -142,7 +152,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = Priority.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -152,7 +163,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -162,7 +174,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        INVALID_FORMAT_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        INVALID_FORMAT_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = Messages.MESSAGE_INVALID_DATE_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -172,7 +185,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        INVALID_FUTURE_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        INVALID_FUTURE_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS,
+                        VALID_SCHEMES, VALID_UPDATED_AT);
         String expectedMessage = DateOfBirth.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -182,7 +196,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        null, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        null, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES, VALID_UPDATED_AT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateOfBirth.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -192,7 +206,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, INVALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, INVALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = Income.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -202,7 +217,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, INVALID_FAMILY_SIZE, VALID_TAGS, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, INVALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         String expectedMessage = FamilySize.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -214,7 +230,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(
                         VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, invalidTags, VALID_UPDATED_AT);
+                        VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, invalidTags, VALID_SCHEMES,
+                        VALID_UPDATED_AT);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
@@ -222,6 +239,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidUpdatedAt_shouldNotThrow() {
         assertDoesNotThrow(() -> new JsonAdaptedPerson(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_PRIORITY, VALID_REMARK,
-                VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, INVALID_UPDATED_AT));
+                VALID_DATE_OF_BIRTH, VALID_INCOME, VALID_FAMILY_SIZE, VALID_TAGS, VALID_SCHEMES,
+                INVALID_UPDATED_AT));
     }
 }

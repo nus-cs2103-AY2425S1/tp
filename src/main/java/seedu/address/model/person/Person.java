@@ -2,12 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,16 +34,18 @@ public class Person {
 
     private final UpdatedAt updatedAt;
 
+    private final ArrayList<Scheme> schemes = new ArrayList<>();
     private final boolean isArchived;
 
     /**
+     * Constructor for a new person with schemes, only used to AddSchemeCommand.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt,
-                  boolean isArchived) {
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags,
+                  ArrayList<Scheme> schemes, UpdatedAt updatedAt, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, priority, remark,
-                dateOfBirth, income, familySize, tags, updatedAt);
+                dateOfBirth, income, familySize, tags, schemes, updatedAt);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -52,6 +56,7 @@ public class Person {
         this.income = income;
         this.familySize = familySize;
         this.tags.addAll(tags);
+        this.schemes.addAll(schemes);
         this.updatedAt = updatedAt;
         this.isArchived = isArchived;
     }
@@ -61,7 +66,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
                   DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt) {
-        this(name, phone, email, address, priority, remark, dateOfBirth, income, familySize, tags, updatedAt, false);
+        this(name, phone, email, address, priority, remark, dateOfBirth, income, familySize, tags, new
+                        ArrayList<Scheme>(), updatedAt, false);
     }
 
     public Name getName() {
@@ -112,6 +118,10 @@ public class Person {
         return updatedAt;
     }
 
+    public ArrayList<Scheme> getSchemes() {
+        return schemes;
+    }
+
     public boolean isArchived() {
         return this.isArchived;
     }
@@ -153,6 +163,8 @@ public class Person {
                 && income.equals(otherPerson.income)
                 && familySize.equals(otherPerson.familySize)
                 && tags.equals(otherPerson.tags)
+                && schemes.containsAll(otherPerson.schemes)
+                && otherPerson.schemes.containsAll(schemes)
                 && isArchived == otherPerson.isArchived;
     }
 
@@ -160,7 +172,7 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, priority, remark,
-                dateOfBirth, income, familySize, tags, updatedAt);
+                dateOfBirth, income, familySize, tags, updatedAt, schemes);
     }
 
     @Override
