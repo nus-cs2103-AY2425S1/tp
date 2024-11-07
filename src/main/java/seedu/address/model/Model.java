@@ -92,4 +92,6 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     void sortPersonList(Comparator<Person> comparator);
+
+    boolean isListEmpty();
 }

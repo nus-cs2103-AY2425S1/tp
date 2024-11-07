@@ -34,7 +34,8 @@ public class SortCommandParser implements Parser<SortCommand> {
             return new SortCommand(sortCriteria);
         }
         // Tokenize the arguments using ArgumentTokenizer
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_JOBCODE, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_JOBCODE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG);
 
         for (Prefix prefix : allowedCriteria) {
@@ -47,7 +48,8 @@ public class SortCommandParser implements Parser<SortCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        sortCriteria = ArgumentTokenizer.extractPrefixes(args, PREFIX_JOBCODE, PREFIX_TAG);
+        sortCriteria = ArgumentTokenizer.extractPrefixes(args,
+                PREFIX_JOBCODE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
 
         // Create and return the SortCommand object with the criteria in order
         return new SortCommand(sortCriteria);

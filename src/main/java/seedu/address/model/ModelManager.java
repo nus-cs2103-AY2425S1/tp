@@ -174,4 +174,9 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public boolean isListEmpty() {
+        return this.filteredPersons.isEmpty();
+    }
+
 }

@@ -141,6 +141,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void sort(Comparator<Person> comparator) {
-        persons.sort(comparator); // Call the setAsc method from UniquePersonList
+        persons.sort(comparator);
     }
 }
