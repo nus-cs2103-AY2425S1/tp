@@ -265,7 +265,6 @@ Examples:
     ![result for 'delete e 2'](images/deleteEventAfter.png)
 * `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
 
-
 ### Linking a person to an event : `link`
 
 Creates a link between a person and event which will appear in the person's details.
@@ -276,6 +275,27 @@ Examples:
 * `list` followed by `link 2 Winter Time Convention` links the 2nd person in the address book to the event.
 * `find p "John"` followed by `link 1 Party` links the 1st person in the results of the `find` command to the event.
 
+### Unlinking a person from an event : `unlink`
+
+Removes an existing link between a person and an event, so the event no longer appears in the person's details.
+
+Format: `unlink INDEX EVENT_NAME`
+
+Examples:
+
+* `list` followed by `unlink 3 Winter Time Convention` removes the link between the 3rd person in the address book and the event.
+* `find p "Jane"` followed by `unlink 1 Party` removes the link between the 1st person in the results of the `find` command and the event.
+
+### Schedule an event : `schedule`
+
+Lists all events with the given date, or find all events happening within the given number of days.
+
+Format: `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD`
+
+Examples:
+
+* `schedule 2024-01-01` displays all events occurring on 1 Jan 2024.
+* `schedule 7` displays all events happening within 7 days from the current date.
 
 ### Clearing all persons : `clear p`
 
@@ -439,11 +459,17 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 | **Add Person**           | `add p n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add p n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Add Event**            | `add e n/NAME a/ADDRESS s/START_TIME [t/TAG]…​` <br> e.g., `add e n/Sentosa a/sentosa coast s/2024-10-15 14:30 t/Friends`                                                 |
 | **Clear**                | `clear`                                                                                                                                                                   |
+| **Clear Person**         | `clear p` |
+| **Clear Event**          | `clear e` |
 | **Delete Person**        | `delete p INDEX`<br> e.g., `delete p 3`                                                                                                                                   |
 | **Delete Event**         | `delete e INDEX`<br> e.g., `delete e 3`                                                                                                                                   |
-| **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **Edit Person**          | `edit p INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **Edit Event**           | `edit e INDEX [n/NAME] [a/ADDRESS] [s/START_TIME] [t/TAG]
 | **Find Person**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p James Jake`                                                                                                              |
 | **Find Event**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e Sentosa`                                                                                                                 |
-| **Search Person by Tag** | `search KEYWORD [MORE_KEYWORDS]`<br> e.g., `search Friends`                                                                                                               |
-| **List**                 | `list`                                                                                                                                                                    |
+| **Search Person by Tag** | `search p KEYWORD [MORE_KEYWORDS]`<br> e.g., `search p Friends`                                                                                                               |
+| **Search Event by Tag**  | `search e KEYWORD [MORE_KEYWORDS]`<br> e.g., `search e Summer`
+| **Link**                 | `link INDEX ev/` <br> e.g., `link 1 ev/Winter Convention` 
+| **List**                 | `list`                                               
+| **Unlink**               | `unlink INDEX ev/EVENT_NAME` <br> e.g., `unlink 1 ev/Winter Convention`
 | **Help**                 | `help`                                                                                                                                                                    |
