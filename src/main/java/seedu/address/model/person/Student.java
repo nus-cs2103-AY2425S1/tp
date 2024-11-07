@@ -134,20 +134,6 @@ public class Student extends Person {
                 getTags(), getSubjects(), getClasses(), updatedDaysAttended);
     }
 
-    /**
-     * Returns true if both are students with the same name and email address.
-     * This defines a weaker notion of equality between two persons.
-     */
-    @Override
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson instanceof Student
-            && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
-    }
-
     @Override
     public String getType() {
         return STUDENT_TYPE;

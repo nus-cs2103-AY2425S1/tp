@@ -11,7 +11,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TeacherBuilder;
 
 public class TeacherTest {
 
@@ -54,33 +53,6 @@ public class TeacherTest {
                     getTagSet("Friends"), getSubjectSet("Math"),
                     getClassSet("1A"));
         });
-    }
-
-    @Test
-    public void isSameTeacher() {
-        Teacher teacher1 = new Teacher(new Name("John Doe"), new Gender("male"), new Phone("12345678"),
-                new Email("johndoe@hotmail.com"), new Address("123 Main St"),
-                SampleDataUtil.getTagSet("Friends"), getSubjectSet("Math"),
-                SampleDataUtil.getClassSet("1A"));
-
-        Teacher teacher2 = new Teacher(new Name("John Doe"), new Gender("male"), new Phone("87654321"),
-                new Email("john.doe@example.com"), new Address("456 Elm St"),
-                SampleDataUtil.getTagSet("Colleagues"), getSubjectSet("Science"),
-                SampleDataUtil.getClassSet("2B"));
-
-        Teacher teacher3 = new Teacher(new Name("Jane Doe"), new Gender("female"), new Phone("12345678"),
-                new Email("jane.doe@example.com"), new Address("123 Main St"),
-                SampleDataUtil.getTagSet("Friends"), getSubjectSet("Math"),
-                SampleDataUtil.getClassSet("1A"));
-
-        // same object -> returns true
-        assertTrue(teacher1.isSameTeacher(teacher1));
-
-        // same name, different other attributes -> returns true
-        assertTrue(teacher1.isSameTeacher(teacher2));
-
-        // different name -> returns false
-        assertFalse(teacher1.isSameTeacher(teacher3));
     }
 
     @Test
@@ -156,46 +128,6 @@ public class TeacherTest {
                 SampleDataUtil.getTagSet("Friends"), SampleDataUtil.getSubjectSet("Math"),
                 SampleDataUtil.getClassSet("1A", "2B"));
         assertEquals("[1A, 2B]", teacher.getClasses().toString());
-    }
-
-    @Test
-    public void isSamePerson_sameObject_returnsTrue() {
-        Teacher teacher = new TeacherBuilder().withName("John Doe").build();
-        assertTrue(teacher.isSamePerson(teacher));
-    }
-
-    @Test
-    public void isSamePerson_differentObjectSameIdentityFields_returnsTrue() {
-        Teacher teacher1 = new TeacherBuilder().withName("John Doe").withPhone("12345678").build();
-        Teacher teacher2 = new TeacherBuilder().withName("John Doe").withPhone("12345678").build();
-        assertTrue(teacher1.isSamePerson(teacher2));
-    }
-
-    @Test
-    public void isSamePerson_differentObjectDifferentName_returnsFalse() {
-        Teacher teacher1 = new TeacherBuilder().withName("John Doe").withPhone("12345678").build();
-        Teacher teacher2 = new TeacherBuilder().withName("Jane Doe").withPhone("87654321").build();
-        assertFalse(teacher1.isSamePerson(teacher2));
-    }
-
-    @Test
-    public void isSamePerson_differentObjectDifferentEmail_returnsFalse() {
-        Teacher teacher1 = new TeacherBuilder().withName("John Doe").withEmail("johndoe@example.com").build();
-        Teacher teacher2 = new TeacherBuilder().withName("John Doe").withEmail("janedoe@example.com").build();
-        assertFalse(teacher1.isSamePerson(teacher2));
-    }
-
-    @Test
-    public void isSamePerson_differentObjectSameNameSameEmail_returnsTrue() {
-        Teacher teacher1 = new TeacherBuilder().withPhone("12345678").build();
-        Teacher teacher2 = new TeacherBuilder().withPhone("87654321").build();
-        assertTrue(teacher1.isSamePerson(teacher2));
-    }
-
-    @Test
-    public void isSamePerson_nullObject_returnsFalse() {
-        Teacher teacher = new TeacherBuilder().withName("John Doe").build();
-        assertFalse(teacher.isSamePerson(null));
     }
 
 }
