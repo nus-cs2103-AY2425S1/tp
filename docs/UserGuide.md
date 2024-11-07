@@ -358,6 +358,14 @@ Examples:
 
 </box>
 
+<box type="warning">
+
+##### Warning
+
+Filtering the order list by status and changing an order's status will cause the order to not be displayed under the filtered list.
+
+</box>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
