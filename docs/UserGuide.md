@@ -24,7 +24,8 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 
 4. Open a command terminal, `cd` into the folder where you placed the jar file, and use the `java -jar NomNomNotifier.jar` command to run the application.<br>
    A GUI similar to the one below should appear in a few seconds, containing some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/QuickStart.png)
+    ***Figure 1: shows what application should look like***
 
 5. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -198,8 +199,6 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 
 
 **Note:** The `find` command performs an `OR` search across the criteria, meaning that customers matching any of the provided keywords will be returned.
-
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ---
 
