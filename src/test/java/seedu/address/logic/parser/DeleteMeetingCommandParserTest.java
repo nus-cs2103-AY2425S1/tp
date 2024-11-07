@@ -21,7 +21,7 @@ public class DeleteMeetingCommandParserTest {
 
     private DeleteMeetingCommandParser parser = new DeleteMeetingCommandParser();
     private final String validMeetingTitle = "Project Meeting";
-    private final String validMeetingDate = "01-01-2024";
+    private final String validMeetingDate = "01-01-2025";
     private final String emptyMeetingTitle = "";
     private final String emptyMeetingDate = "";
 
