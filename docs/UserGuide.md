@@ -159,12 +159,11 @@ Format : `export`
     - `events.csv` — Contains all event records.
     - `volunteers.csv` — Contains all volunteer records.
 
-<<<<<<< HEAD
 ![Export File](images/ExportCommand.png)
+
 * After running the export command, check the `/output` folder located in the same directory as your .jar file. You’ll find two CSV files: events.csv and volunteers.csv.
-=======
+* 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
->>>>>>> master
 
 ### Exiting the program : `exit`
 
@@ -248,6 +247,46 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
+### Adding available dates to a volunteer: `/v free`
+
+Adds available dates to the volunteer with the specified `VOLUNTEER_INDEX`.
+
+Format: `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
+
+* The index refers to the number on the left of the volunteer's name.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Date: Format YYYY-MM-DD (e.g. 2024-01-01)
+* Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
+
+Examples:
+* `/v free i/1 d/2024-11-28, 2024-11-29` adds 2024-11-28 and 2024-11-29 as available dates to the first volunteer on the volunteer list.
+
+![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Removing available dates from a volunteer: `/v unfree`
+
+Removes available dates from the volunteer with the specified `VOLUNTEER_INDEX`.
+
+Format: `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
+
+* The index refers to the number on the left of the volunteer's name.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Date: Format YYYY-MM-DD (e.g. 2024-01-01)
+* Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
+
+Examples:
+* `/v unfree i/1 d/2024-11-28, 2024-11-29` removes 2024-11-28 and 2024-11-29 as available dates from the first volunteer on the volunteer list.
+
+![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
 ### Assigning a volunteer to event: `assign`
 
 Adds a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
@@ -259,6 +298,10 @@ Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
 Examples:
 * `assign v/3 e/2` assigns the third volunteer on the volunteer list to the list of participants of the second event on the event list.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Volunteers who not available on the day of the event or are assigned to another event happening at the same time cannot be assigned.
+</div>
 
 ![Assign Volunteer Demo](images/commandDemo/AssignVolunteerDemo.png)
 
@@ -400,6 +443,29 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
+### Filtering volunteers by availability for an event: `/e filter`
+
+Filters the volunteer list to only shows volunteers who can be assigned to the event specified by `INDEX`.
+After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers as per normal.
+
+Format: `/e filter INDEX`
+
+* The index refers to the number on the left of the event name.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `/e filter 1` returns volunteers available to be assigned to the first event on the event list.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Volunteers who are already assigned to the specified event, not available on the day of the event or are assigned to another event happening at the same time will not be shown.
+</div>
+
+![Finding Events](images/commandDemo/FindEventDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
 ## Saving the data
 
 VolunSync's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -421,7 +487,7 @@ VolunSync's data are saved in the hard disk automatically after any command that
     - To fix this, locate and delete the `preferences.json` file, which stores the app's window position.
     - After deleting the file, restart the application, and the GUI will open correctly on the primary screen.
 
-2. **Help Window Remaining Minimized**
+1. **Help Window Remaining Minimized**
    **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening.
    **Solution:**
     - Manually restore the Help Window from your taskbar or dock.
