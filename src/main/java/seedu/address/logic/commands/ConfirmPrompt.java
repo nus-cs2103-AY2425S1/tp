@@ -24,7 +24,7 @@ public class ConfirmPrompt extends Command {
         savedCommand.validateInput(model);
         model.setSavedCommand(savedCommand);
 
-        String resultString = MESSAGE_CONFIRM_PROMPT + "\n" + savedCommand;
+        String resultString = MESSAGE_CONFIRM_PROMPT + "\nOperation: " + savedCommand;
 
         return new CommandResult(resultString, false, false, true, false,
                 -1, false, null, null, null);
