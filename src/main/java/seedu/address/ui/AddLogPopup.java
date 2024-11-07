@@ -39,6 +39,7 @@ public class AddLogPopup extends UiPart<Stage> {
 
         TextArea logEntryArea = new TextArea();
         logEntryArea.setPromptText("Enter your log entry here...");
+        logEntryArea.setWrapText(true); // Enable wrapping without new lines
 
         VBox.setVgrow(logEntryArea, Priority.ALWAYS);
 
@@ -72,6 +73,11 @@ public class AddLogPopup extends UiPart<Stage> {
 
         Scene scene = new Scene(layout, 300, 250);
         window.setScene(scene);
+
+        // Set minimum window size
+        window.setMinWidth(400);
+        window.setMinHeight(300);
+
         window.showAndWait();
 
         return LogEntry.convertToStorageString(logEntry[0]);
