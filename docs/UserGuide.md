@@ -247,6 +247,18 @@ Format: `addExam ex/EXAMNAME`
 Examples:
 * `addExam ex/Midterm`
 
+### Deleting an Exam : `deleteExam`
+
+Deletes the specified exam from every student in the address book.
+
+Format: `deleteExam ex/EXAM_NAME`
+
+* The exam name can only contain alphanumeric characters and spaces.
+* The exam name is case-sensitive. e.g. "Physics" will be treated differently from "physics".
+
+Examples:
+* `deleteExam ex/Physics`
+
 ### Adding an Exam Score: `addExamScore`
 
 Adds an exam score for the specified exam for the person at the specified index.
