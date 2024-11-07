@@ -182,5 +182,24 @@ public class CommandTestUtil {
         assertEquals(targetIndices.length, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Simulates the actions of executing the data-modifying {@code command} and
+     * committing the address book by {@code logicManager}. Mainly for testing of
+     * {@code undo} and {@code redo} commands.
+     */
+    public static void executeDataModifyingCommand(Command command, Model model)
+            throws CommandException {
+        command.execute(model);
+        model.commitAddressBook();
+    }
 
+    /**
+     * Simulates the actions of executing non data-modifying {@code command},
+     * without any commit to the address book. Mainly for testing of
+     * {@code undo} and {@code redo} commands.
+     */
+    public static void executeNonDataModifyingCommand(Command command, Model model)
+            throws CommandException {
+        command.execute(model);
+    }
 }
