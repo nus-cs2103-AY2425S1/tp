@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILEPATH;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 import seedu.address.commons.exceptions.ImproperFormatException;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -41,7 +41,7 @@ public class ImportCommand extends Command {
         int personsAdded;
         try {
             personsAdded = importer.readCsv(model);
-        } catch (ImproperFormatException e) {
+        } catch (ImproperFormatException | FileNotFoundException e) {
             throw new CommandException(e.getMessage());
         }
 
@@ -85,12 +85,5 @@ public class ImportCommand extends Command {
             message.append(String.format(MESSAGE_FAILED, failedRowsAndConstraints));
         }
         return message.toString();
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("toImport", importFilePath)
-                .toString();
     }
 }

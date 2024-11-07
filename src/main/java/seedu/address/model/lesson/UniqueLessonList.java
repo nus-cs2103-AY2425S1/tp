@@ -3,8 +3,10 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -104,6 +106,21 @@ public class UniqueLessonList implements Iterable<Lesson> {
             return internalList.stream().filter(item -> item.getTutee().equals(person))
                     .collect(Collectors.toList());
         }
+    }
+
+    /**
+     * Returns the set of subjects that the person (either Tutor or Tutee) has taught or is currently being tutored in.
+     *
+     * @param person The person for whom the unique subjects are to be retrieved.
+     *               Must be non-null.
+     * @return A set of unique subjects.
+     */
+    public Set<Subject> getUniqueSubjectsInLessons(Person person) {
+        requireAllNonNull(person);
+        return internalList.stream().filter(lesson -> lesson.getTutor().equals(person)
+                || lesson.getTutee().equals(person))
+                .map(Lesson::getSubject)
+                .collect(HashSet::new, Set::add, Set::addAll);
     }
 
     /**

@@ -14,7 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Person {
-    private static int index = 0;
+    private static int index;
     // Identity fields
     protected final int id;
     private final Name name;
@@ -37,7 +37,7 @@ public abstract class Person {
         this.address = address;
         this.hours = hours;
         this.subjects.addAll(subjects);
-        this.id = ++index;
+        this.id = index++;
     }
 
     /**
@@ -52,7 +52,6 @@ public abstract class Person {
         this.hours = hours;
         this.subjects.addAll(subjects);
         this.id = id;
-        index = id++;
     }
 
     public abstract boolean isTutor();
@@ -91,6 +90,10 @@ public abstract class Person {
         Person.index = index;
     }
 
+    public static int getNextIndex() {
+        return index++;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -103,30 +106,6 @@ public abstract class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.isTutee() == this.isTutee();
-    }
-
-    /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Person)) {
-            return false;
-        }
-
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && hours.equals(otherPerson.hours)
-                && subjects.equals(otherPerson.subjects);
     }
 
     @Override

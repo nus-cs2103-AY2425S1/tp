@@ -6,6 +6,7 @@ import static seedu.address.storage.CsvImport.INCORRECT_HEADERS;
 import static seedu.address.storage.CsvImport.INCORRECT_ROWS;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -20,7 +21,7 @@ public class CsvImportTest {
     private final Model model = new ModelManager();
 
     @Test
-    public void readCsv_typicalPersonsCsv_success() throws ImproperFormatException {
+    public void readCsv_typicalPersonsCsv_success() throws Exception {
         Path filePath = TEST_DATA_FOLDER.resolve("typicalPersonsCsv.csv");
         CsvImport importer = new CsvImport(filePath.toString());
         assertEquals(1, importer.readCsv(model));
@@ -48,5 +49,27 @@ public class CsvImportTest {
         CsvImport extraRowsImporter = new CsvImport(extraRows.toString());
         assertThrows(ImproperFormatException.class,
                 String.format(INCORRECT_ROWS, HEADER_COUNT, "[1]"), () -> extraRowsImporter.readCsv(model));
+    }
+
+    @Test
+    public void readCsv_invalidFile_throwsFileNotFoundException() {
+        Path invalidFile = TEST_DATA_FOLDER.resolve("invalidFileCsv.csv");
+        CsvImport invalidFileImporter = new CsvImport(invalidFile.toString());
+        assertThrows(FileNotFoundException.class, () -> invalidFileImporter.readCsv(model));
+    }
+
+    @Test
+    public void readCsv_emptyHeaders_throwsImproperFormatException() {
+        Path emptyHeaders = TEST_DATA_FOLDER.resolve("missingHeadersCsv.csv");
+        CsvImport emptyHeadersImporter = new CsvImport(emptyHeaders.toString());
+        assertThrows(ImproperFormatException.class, INCORRECT_HEADERS, () -> emptyHeadersImporter.readCsv(model));
+    }
+
+    @Test
+    public void readCsv_emptyRows_throwsImproperFormatException() {
+        Path emptyRows = TEST_DATA_FOLDER.resolve("missingRowsCsv.csv");
+        CsvImport emptyRowsImporter = new CsvImport(emptyRows.toString());
+        assertThrows(ImproperFormatException.class,
+                String.format(INCORRECT_ROWS, HEADER_COUNT, "[1]"), () -> emptyRowsImporter.readCsv(model));
     }
 }
