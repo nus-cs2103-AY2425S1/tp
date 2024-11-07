@@ -111,6 +111,13 @@ Shows a message explaining how to access the help page.
 
 **Format**: `help`
 
+### Listing all students: `list`
+
+Shows a list of all students in the address book.
+
+Format: `list`
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a student: `add`
 
@@ -152,6 +159,8 @@ Adds a student to the address book.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a student: `edit`
 
 Edits an existing student in the address book.
@@ -170,10 +179,8 @@ Edits an existing student in the address book.
 <box type="important" header="##### Constraints">
 
 * The <md>**INDEX**</md> refers to the index number shown in the **displayed student** list. The index **must be a positive integer** 1, 2, 3, …​
-
 * At least one of the optional fields must be provided. You may refer to
 [Constraints of Add command](#constraints) for acceptable values of each field.
-
 * Existing values will be updated to the input values.
 </box>
 
@@ -182,19 +189,11 @@ Edits an existing student in the address book.
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
 [`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settle-payments-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
-
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
 </box>
 
 <div style="page-break-after: always;"></div>
 
-### Listing all students: `list`
-
-Shows a list of all students in the address book.
-
-Format: `list`
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting a student : `delete`
 
@@ -215,6 +214,8 @@ Deletes the specified student from the address book.
 * The **INDEX must be a positive integer** 1, 2, 3, …​
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Finding students' information: `find`
 
@@ -332,8 +333,6 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 ### Showing income data: `income`
 
 Shows the total amount of tuition fee that you have been paid, as well as the total amount that is owed.
@@ -378,8 +377,6 @@ This action is irreversible and your deleted data cannot be recovered.
 
 **Format:** `clear`
 
-<div style="page-break-after: always;"></div>
-
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -407,6 +404,7 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
