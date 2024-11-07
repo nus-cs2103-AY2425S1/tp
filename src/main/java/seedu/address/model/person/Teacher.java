@@ -134,7 +134,7 @@ public class Teacher extends Person {
     }
 
     @Override
-    public int getDaysAttendedValue() throws CommandException {
-        throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
+    public int getDaysAttendedValue(){
+        return 0;
     }
 }
