@@ -29,7 +29,8 @@ You can refer to the [FAQ](#frequently-asked-questions-quick-start) section belo
 
 4. Open a command terminal, enter `cd Downloads/NAME_OF_YOUR_FOLDER`. Then, enter `java -jar teacherspet.jar` to run the application.<br>
    A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   
+   <img width="1000" alt="image" src="https://github.com/user-attachments/assets/eba34e61-93a6-4ccd-afad-1e3eb37560d2">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -130,9 +131,11 @@ Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GR
 If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
 </div>
 
-Examples:
+Continuing from the previous example in `add`, you could try this
 *  `edit 1 m/ Science nid/e1234567` Edits the major and NUS NetID of the 1st student to be `Science` and `e1234567` respectively.
-*  `edit 2 n/Betsy Crower g/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing groups.
+*  `edit 2 n/Betsy Tan g/` Edits the name of the 2nd student to be `Betsy Tan` and clears all of Betsy's groups.
+
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/e3ba5f4a-e849-4f62-ae7e-5718de7d0db5">
 
 ---
 
@@ -164,6 +167,10 @@ Format: `list`
 
 * Note that there should be no additional arguments after `list` (eg. `list all`)
 
+Here is an example of what you might see, our lists would be different, of course!:
+
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/c9d071e2-9e10-4a43-a86c-3414bb0035f9">
+
 ---
 
 ### Displaying students in a group : `show`
@@ -180,9 +187,10 @@ You can view a list of students in the same group(s)
 You can search for substrings within the content, but the search will only return results where the content starts with the entered text. For example, searching for "gro" will match "group 1", but will not match "1 group".
 </div>
 
-Examples:
-* `show 1` returns students who are in group 1.
-  ![result for 'show 1'](images/show_feature.png)
+Here is an example you could try:
+* `show group 2` returns students who are in groups containing the words `group` or `2` (or both).
+
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/2861ca50-565a-48ad-91ed-29f3ef29dbe8">
 
 ---
 
