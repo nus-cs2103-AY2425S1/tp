@@ -44,6 +44,8 @@ public class EditCommand extends Command {
             + "record in the system\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
+    public static final String MESSAGE_NRIC_EMPTY = "NRIC needed to identify patient to execute Edit Command.";
+
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s\n"
             + "Input \"home\" to return to home page";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
