@@ -60,6 +60,7 @@ public class PersonPane extends UiPart<VBox> {
      */
     private void displayPersonDetails() {
         if (person != null) {
+            view.setVisible(true);
             setNameAndContactDetails();
             renderTags();
             setRemark();
@@ -143,6 +144,7 @@ public class PersonPane extends UiPart<VBox> {
      * Empties pane when no person is selected.
      */
     public void emptyPane() {
+        view.setVisible(false);
         name.setText("");
         phone.setText("");
         address.setText("");
