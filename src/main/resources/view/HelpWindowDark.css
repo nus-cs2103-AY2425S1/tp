@@ -19,6 +19,10 @@
   -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.help-textbox {
+  -fx-text-fill: white;
+}
+
 #errorMessageLabel {
   -fx-text-fill: red; /* Makes the text red */
   -fx-padding: 0 0 0 10px; /* Adds 10px padding to the left */

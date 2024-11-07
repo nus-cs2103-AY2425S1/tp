@@ -28,6 +28,10 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
     private static final String DARK_THEME_URL = MainWindow.class.getResource("/view/DarkTheme.css").toExternalForm();
     private static final String LIGHT_THEME_URL = MainWindow.class.getResource("/view/LightTheme.css").toExternalForm();
+    private static final String DARK_THEME_HELP_URL =
+            MainWindow.class.getResource("/view/HelpWindowDark.css").toExternalForm();
+    private static final String LIGHT_THEME_HELP_URL =
+            MainWindow.class.getResource("/view/HelpWindowLight.css").toExternalForm();
 
     private boolean isDarkTheme = true;
     private Scene scene;
@@ -199,14 +203,18 @@ public class MainWindow extends UiPart<Stage> {
 
         // Get the scene's stylesheets
         ObservableList<String> stylesheets = scene.getStylesheets();
+        ObservableList<String> helpStylesheets = helpWindow.getRoot().getScene().getStylesheets();
         stylesheets.clear();
+        helpStylesheets.clear();
 
         // Add the appropriate stylesheet based on the theme
         if (isDarkTheme) {
             stylesheets.add(DARK_THEME_URL);
+            helpStylesheets.add(DARK_THEME_HELP_URL);
             toggleThemeMenuItem.setText("Switch to Light Theme");
         } else {
             stylesheets.add(LIGHT_THEME_URL);
+            helpStylesheets.add(LIGHT_THEME_HELP_URL);
             toggleThemeMenuItem.setText("Switch to Dark Theme");
         }
 
