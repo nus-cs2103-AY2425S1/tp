@@ -36,7 +36,7 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
-<box type="info" seamless> </box>
+<box type="info" seamless>
 
 **Notes about the command format:**<br>
 
