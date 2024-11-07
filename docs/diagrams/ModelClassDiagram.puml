@@ -26,7 +26,6 @@ Class Service
 'common in contact
 Class Address
 Class Contact
-Class "<<enumeration>>\nContactType" as ContactType
 Class Email
 Class Phone
 Class UniqueContactList
