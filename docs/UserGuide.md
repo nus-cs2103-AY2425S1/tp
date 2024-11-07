@@ -6,19 +6,70 @@ title: User Guide
 **EduVault** is a desktop application **designed for tuition centers to manage students and classes effectively**. Optimised for quick use through a Command Line Interface (CLI) and complemented by an intuitive graphical user interface (GUI), EduVault enables efficient tracking of student and class information, making it ideal for fast typists and busy administrators.
 
 ![Ui](images/Ui.png)
+
+<br>
+
 ---
 
-{:toc}
+## **Table of Contents**
 
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-A person can have any number of tags (including 0)
-</div>
-<div markdown="span" class="alert alert-success">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-A person can have any number of tags (including 0)
-</div>
+1. [Quick Start](#1-quick-start)
+
+      1.1. [Installation Guide](#11-installation-guide)
+
+      1.2. [Introduction to the interface](#12-introduction-to-the-interface)
+
+      1.3. [Brief Walkthrough](#13-brief-walkthrough)
+
+2. [General Command Format](#2-general-command-format)
+
+3. [Adding data](#3-adding-data)
+
+   3.1. [Adding a student](#31-adding-a-student)
+
+   3.2. [Creating a new tutorial](#32-creating-a-new-tutorial)
+
+   3.3. [Enrolling student in tutorial](#33-enrolling-student-into-a-tutorial)
+
+4. [Viewing and Retrieving data](#4-viewing-and-retrieving-data)
+
+   4.1. [Listing all students](#41-listing-all-students)
+
+   4.2.[Searching Students](#42-searching-students)
+
+5. [Editing and Updating data](#5-editing-and-updating-data)
+
+   5.1. [Editing student’s details](#51-editing-a-student)
+
+   5.2. [Logging fees](#52-logging-fees-for-tutorial)
+
+   5.3. [Marking payment](#53-marking-a-students-payment)
+
+   5.4. [Marking attendance of student](#54-marking-attendance-of-a-student)
+
+   5.5. [Marking attendance of tutorial](#55-marking-attendance-of-a-tutorial)
+
+   5.6. [Unmarking attendance of a student](#56-unmarking-attendance-of-a-student)
+
+   5.7. [Unenroll a student from tutorial](#57-unenrolling-student-from-a-tutorial)
+
+6. [Deleting data](#6-deleting-data)
+
+   6.1. [Deleting a student](#61-deleting-a-student)
+
+   6.2. [Closing a tutorial](#62-closing-a-tutorial)
+
+   6.3. [Clearing all entries](#63-clearing-all-entries)
+7. [Viewing help](#7-viewing-help)
+8. [Exiting the program](#8-exiting-the-program)
+9. [Saving the data](#9-saving-data)
+10. [Editing the data file](#10-editing-the-data-file)
+11. [Prefix Table](#11-prefix-table)
+12. [Format Errors](#12-format-errors)
+13. [FAQ](#13-faq)
+14. [Known issues](#14-known-issues)
+
+---
 
 ### **1. Quick Start**
 
@@ -953,10 +1004,4 @@ dd/MM/yyyy</code>
 2. **If you minimize the Help Window** and then run the help command (or use the Help menu, or the keyboard shortcut F1) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 3. **If the UI does not update automatically** on modifying student's details such as attendance and enrolling in tutorial, manually click on the area containing the student's details. If the UI still does not update, try restarting the application.
----
-
-### **15. Archiving data files \[coming in v2.0\]**
-
-
-
 
