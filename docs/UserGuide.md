@@ -67,7 +67,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 
     * `list` : Lists all volunteers and events in the VolunSync database.
 
-    * `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
+    * `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
 
     * `/v del 3` : Deletes the third volunteer on the list of volunteers.
 
@@ -259,9 +259,9 @@ Format: `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
 * Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
 
 Examples:
-* `/v free i/1 d/2024-11-28, 2024-11-29` adds 2024-11-28 and 2024-11-29 as available dates to the first volunteer on the volunteer list.
+* `/v free i/1 d/2023-10-28, 2023-10-29` adds 2023-10-28 and 2023-10-29 as available dates to the first volunteer on the volunteer list.
 
-![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+![Free Volunteer Demo](images/commandDemo/FreeVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -279,9 +279,9 @@ Format: `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
 * Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
 
 Examples:
-* `/v unfree i/1 d/2024-11-28, 2024-11-29` removes 2024-11-28 and 2024-11-29 as available dates from the first volunteer on the volunteer list.
+* `/v unfree i/1 d/2023-10-28, 2023-10-29` removes 2024-11-28 and 2024-11-29 as available dates from the first volunteer on the volunteer list.
 
-![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+![Unfree Volunteer Demo](images/commandDemo/UnfreeVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
