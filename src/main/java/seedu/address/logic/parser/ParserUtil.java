@@ -81,7 +81,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a string containing indices and ranges (e.g., "1,2,3,5-9") into a list of {@code Index} objects.
+     * Parses a string containing indices and ranges (e.g., "1 2 3 5-9") into a list of {@code Index} objects.
      * Accepts both single indices and ranges separated by spaces.
      *
      * @param args The string containing indices and/or ranges to parse.

@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDICES (must be a positive integer or a range, separated by commas)\n"
+            + "Parameters: INDICES (must be a positive integer or a closed range, separated by spaces)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3 5-7";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Entries(s): \n";
@@ -50,16 +50,16 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getPersonList();
         List<Person> personToDeleteList = new ArrayList<>();
-        String commandResultString = MESSAGE_DELETE_PERSON_SUCCESS;
+        StringBuilder commandResultString = new StringBuilder(MESSAGE_DELETE_PERSON_SUCCESS);
         validateIndices(targetIndices, lastShownList.size());
         for (Index targetIndex : targetIndices) {
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
             personToDeleteList.add(personToDelete);
-            commandResultString += Messages.format(personToDelete) + "\n";
+            commandResultString.append(Messages.format(personToDelete)).append("\n");
         }
         deletePersonsFromModel(model, personToDeleteList);
-        return new CommandResult(commandResultString);
+        return new CommandResult(commandResultString.toString());
     }
 
     @Override
