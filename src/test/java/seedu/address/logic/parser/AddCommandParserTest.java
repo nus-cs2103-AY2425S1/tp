@@ -137,25 +137,36 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        //String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage;
 
-        // missing name prefix
+        // missing name and tag prefix
+        expectedMessage = String.format("Invalid command format! Missing fields: Name, Tag\n"
+                + String.format(AddCommand.MESSAGE_USAGE));
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + JOBCODE_DESC_BOB,
                 expectedMessage);
 
-        // missing phone prefix
+        // missing phone and tag prefix
+        expectedMessage = String.format("Invalid command format! Missing fields: Phone, Tag\n"
+                + String.format(AddCommand.MESSAGE_USAGE));
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + JOBCODE_DESC_BOB,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + JOBCODE_DESC_BOB,
+        expectedMessage = String.format("Invalid command format! Missing fields: Email\n"
+                + String.format(AddCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + JOBCODE_DESC_BOB + TAG_DESC_NEW,
                 expectedMessage);
 
         // missing job codes prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_JOBCODE_BOB,
+        expectedMessage = String.format("Invalid command format! Missing fields: Job Code\n"
+                + String.format(AddCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_EMAIL_BOB + TAG_DESC_NEW,
                 expectedMessage);
 
         // all prefixes missing
+        expectedMessage = String.format("Invalid command format! Missing fields: Name, Job Code, Phone, Email, Tag\n"
+                + String.format(AddCommand.MESSAGE_USAGE));
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_JOBCODE_BOB,
                 expectedMessage);
     }
@@ -188,7 +199,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + JOBCODE_DESC_BOB + TAG_DESC_REJECTED,
+                        + JOBCODE_DESC_BOB + TAG_DESC_REJECTED,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 
