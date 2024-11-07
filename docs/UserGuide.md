@@ -219,6 +219,21 @@ Examples:
 * `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10`
 * `add_event n/Workshop d/Orbital Workshop f/2024-10-01 t/2024-10-10`
 
+### Editing an event: edit_event
+
+Edits the details of an existing event in the address book.
+
+Format: `edit_event INDEX n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE`
+
+* The INDEX is required to identify which event to edit.
+* The date inputs must be in the format YYYY-MM-DD.
+* At least one of the optional fields (EVENT_NAME, EVENT_DESCRIPTION, EVENT_START_DATE, EVENT_END_DATE) must be provided to make changes.
+
+Examples:
+* `edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11`
+* `edit_event 2 d/Changed description`
+* `edit_event 3 f/2024-11-01 t/2024-11-05`
+
 ### Listing all events : `list_events`
 
 Shows a list of all events stored in ClubConnect's event list.
