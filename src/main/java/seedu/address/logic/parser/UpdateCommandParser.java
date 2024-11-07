@@ -69,6 +69,9 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         String name = parseName(argMultimap);
         LocalDate startDate = parseStartDate(argMultimap);
         LocalDate endDate = parseEndDate(argMultimap);
+        if (startDate != null && endDate != null) {
+            ParserUtil.checkValidDates(startDate, endDate);
+        }
         Address location = parseLocation(argMultimap);
         Set<Index> addIndices = parseAttendeeIndices(argMultimap, PREFIX_ATTENDEES);
         Set<Index> removeIndices = parseAttendeeIndices(argMultimap, PREFIX_REMOVE_ATTENDEE);

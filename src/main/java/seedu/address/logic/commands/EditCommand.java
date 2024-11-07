@@ -11,12 +11,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -78,9 +80,19 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        editPersonInEvent(model, personToEdit, editedPerson);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private void editPersonInEvent(Model model, Person personToEdit, Person editedPerson) {
+        ObservableList<Event> eventsList = model.getEventList();
+        for (Event event : eventsList) {
+            if (event.isPersonAttending(personToEdit)) {
+                event.editAttendee(personToEdit, editedPerson);
+            }
+        }
     }
 
     /**

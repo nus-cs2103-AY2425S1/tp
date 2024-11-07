@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_EVENT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATES;
 import static seedu.address.commons.util.EqualUtil.nullSafeEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
@@ -52,9 +54,8 @@ public class UpdateCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Event has been updated: %1$s";
 
-    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "There is no event at this index";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The event index provided is invalid";
 
-    public static final String ERR_END_DATE_BEFORE_START_DATE = "The start date must come before the end date";
 
     private final String newName;
     private final LocalDate newStartDate;
@@ -98,11 +99,15 @@ public class UpdateCommand extends Command {
         Event oldEvent = eventList.get(indexToUpdate.getZeroBased());
         Event newEvent;
 
+        // check if updated date is valid
+        if (newStartDate == null && newEndDate != null) {
+            checkValidDates(oldEvent.getStartDate(), newEndDate);
+        } else if (newStartDate != null && newEndDate == null) {
+            checkValidDates(newStartDate, oldEvent.getEndDate());
+        }
+
         // Add and remove attendees
         Set<Person> changedAttendees = getChangedAttendees(oldEvent, personList);
-
-        checkStartDateBeforeEnd(newStartDate, newEndDate);
-
         newEvent = new Event(
                 newName.isEmpty() ? oldEvent.getEventName() : newName,
                 newStartDate == null ? oldEvent.getStartDate() : newStartDate,
@@ -111,6 +116,10 @@ public class UpdateCommand extends Command {
                 changedAttendees);
 
         assert newEvent != null;
+
+        if (model.hasEvent(newEvent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
 
         model.updateEvent(newEvent, indexToUpdate.getZeroBased());
         return new CommandResult(String.format(MESSAGE_SUCCESS,
@@ -142,6 +151,18 @@ public class UpdateCommand extends Command {
             }
         }
         return changedAttendees;
+    }
+
+    /**
+     * Checks if two dates, start date and end date, are valid.
+     * @param startDate the starting date
+     * @param endDate the ending date
+     * @throws CommandException if the end date occurs before the start date
+     */
+    private void checkValidDates(LocalDate startDate, LocalDate endDate) throws CommandException {
+        if (endDate.isBefore(startDate)) {
+            throw new CommandException(MESSAGE_INVALID_DATES);
+        }
     }
 
     @Override
@@ -177,11 +198,5 @@ public class UpdateCommand extends Command {
                 .add("addIndices", addIndices)
                 .add("removeIndices", removeIndices)
                 .toString();
-    }
-
-    private void checkStartDateBeforeEnd(LocalDate sd, LocalDate ed) throws CommandException {
-        if (sd != null && ed != null && sd.compareTo(ed) > 0) {
-            throw new CommandException(ERR_END_DATE_BEFORE_START_DATE);
-        }
     }
 }

@@ -398,6 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User enters name, start date, end date, location of the event.
 2. User confirms the details of the event.
 3. System adds the event.
+4. User is given feedback that the event is added successfully.
 
     Use case ends.
 
@@ -447,7 +448,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. If the User cancels deleting the event, the event is kept and the use case ends.
 
-*a. If the user exists the application without confirming, the event is kept and the use case ends.
+*a. If the user exits the application without confirming, the event is kept and the use case ends.
 
 **Use case 7: View all events**
 
@@ -648,6 +649,40 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `list -e` (must be an exact match)
         Expected: `Listed all events` is shown in the status message. Tabs switched to Events.
 
+### Adding an event
+
+1. Adding an event
+
+    1. Prerequisites: List all events using the `list -e` command. Multiple events in the list. If adding attendees, attendees must exist in the address book.
+
+    1. Test case (No attendees): `event -n Study -sd 2025-01-01 -ed 2025-01-01 -l School`<br>
+       Expected: Event with name `Study` with start date `Jan 01 2025`, end date `Jan 01 2025`, location `School` is added. `New event added: Study; Date: 2025-01-01 - 2025-01-01; Location: School; No Attendees.` is shown in the status message.
+
+    1. Test case: `event`<br>
+       Expected: No event is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+    1. Test case: `event -n abc` <br>
+       Expected: No event is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+    1. Test case (Invalid dates): `event -n Study -sd 2030-01-01 -ed 2025-01-01 -l School` <br>
+       Expected: No event is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+    1. Test case (Invalid attendees): `event -n Study -sd 2025-01-01 -ed 2025-01-01 -l School -a -10` <br>
+       Expected: No event is added to the contact. Error details shown in the status message. Status bar remains the same.
+   
+    1. Test case (Multiple values for fields): `event -n Study -n Event -sd 2025-01-01 -ed 2025-01-01 -l School` <br>
+       Expected: No event is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+    1. Test case (Missing fields): `event -n Study -sd 2025-01-01 -l School` <br>
+       Expected: No event is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+2. Adding a duplicate event
+
+    1. Prerequisites: List all events using the `list -e` command. Event with name `Study` with start date `Jan 01 2025`, end date `Jan 01 2025`, location `School` already exists.
+
+    1. Test case: `event -n Study -sd 2025-01-01 -ed 2025-01-01 -l School`
+       Expected: `This event already exists in the event book` is displayed.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -662,4 +697,3 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-1. **Make upcoming events in PersonDetailView update automatically when a Person is edited.** Currently, users need to click on another person card then back to view the upcoming events as a result of editing the person.
