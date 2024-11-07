@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showEmptyPersonList;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -86,6 +87,23 @@ public class AddTransactionCommandTest {
         expectedModel.setPerson(personToEdit, editedPerson);
 
         assertCommandSuccess(addTransactionCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyList_throwCommandException() {
+        showEmptyPersonList(model);
+
+        Transaction transactionToAdd = new Transaction("buy raw materials", -100,
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
+
+        Index outOfBoundIndex = INDEX_FIRST_PERSON;
+
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(outOfBoundIndex, transactionToAdd);
+
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, "addt");
+
+        assertCommandFailure(addTransactionCommand, model, expectedMessage);
+
     }
 
     @Test

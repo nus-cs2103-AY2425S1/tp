@@ -152,4 +152,13 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to empty person list in the {@code model}'s address book.
+     */
+    public static void showEmptyPersonList(Model model) {
+        model.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList("PREDICATE_ALWAYS_FALSE")));
+        assertEquals(0, model.getFilteredPersonList().size());
+    }
+
+
 }

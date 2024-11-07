@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showEmptyPersonList;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -39,6 +40,21 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyList_throwCommandException() {
+        showEmptyPersonList(model);
+
+
+        Index outOfBoundIndex = INDEX_FIRST_PERSON;
+
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, "delete");
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+
     }
 
     @Test
