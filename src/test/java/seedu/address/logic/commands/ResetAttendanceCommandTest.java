@@ -49,7 +49,8 @@ public class ResetAttendanceCommandTest {
     @Test
     public void execute_unfilteredListWithoutStudents_throwsCommandException() {
         BatchMarkCommand batchMarkCommand = new BatchMarkCommand();
-        assertCommandFailure(batchMarkCommand, parentsOnlyModel, ResetAttendanceCommand.MESSAGE_BATCH_MARK_NO_STUDENT_LIST);
+        assertCommandFailure(batchMarkCommand, parentsOnlyModel,
+                ResetAttendanceCommand.MESSAGE_BATCH_MARK_NO_STUDENT_LIST);
     }
 
     @Test
