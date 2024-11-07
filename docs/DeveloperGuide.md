@@ -559,6 +559,19 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
       Use case ends.
 
+#### **Use case 12: Filter Student List** 
+
+**Main Success Scenario**
+
+1.  User request to filter a list of student based on specified conditions.
+2.  StoreClass displays all students that match all conditions. </br>
+    Use case ends.
+
+**Extensions**
+* 1a. No matching student found.
+    * 1a1. StoreClass display a message indicating that no students match the search query. </br>
+      Use case ends.
+  
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
