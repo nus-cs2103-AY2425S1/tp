@@ -303,6 +303,8 @@ Format: `cancel INDEX dt/DATE st/START_TIME`
 * Cancelling a regular lesson adds it to a list of cancelled lessons. This is shared across students in the same group.
 * `DATE` must be a valid date in the format `DD-MM-YYYY`.
 * `DATE` must match the student's lesson `DATE`, and `START_TIME` must match the student's lesson `START_TIME`.
+* `START_TIME` must be in 24-hour format (`HH:MM`).
+
 
 Example:
 * `cancel 1 dt/15-10-2024 st/16:00` Cancels a lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
@@ -398,7 +400,6 @@ Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_L
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-*  TODO: ADD BETTER EXAMPLES
 
 <br>
 <br>
