@@ -148,11 +148,23 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
             String substring = parseFieldForFilterCommand(() -> parseField(() -> argMultimap.getValue(
                     PREFIX_TIER).get(), errors));
+            if (substring.isEmpty()) {
+                System.out.println("HERE");
+                errors.add("Tier has not been provided any value to filter by.\n"
+                        + "Please specify a status label to filter by, such as 'Gold', 'Silver', 'Bronze', 'Reject', "
+                        + "or 'NA'\n"
+                        + "To filter for clients without a visible tier label beside their name: filter s/ NA");
+            }
             predicates.add(new TierStartsWithSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             String substring = parseFieldForFilterCommand(() -> parseField(() -> argMultimap.getValue(
                     PREFIX_STATUS).get(), errors));
+            if (substring.isEmpty()) {
+                errors.add("Status has not been provided any value to filter by.\n"
+                        + "Please specify a status label to filter by, such as 'Urgent', 'Non_Urgent' or 'NA'\n"
+                        + "To filter for clients without a visible status label beside their name: filter s/ NA");
+            }
             predicates.add(new StatusStartsWithSubstringPredicate(substring));
         }
         if (!errors.isEmpty()) {
