@@ -1,9 +1,9 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 
 /**
@@ -22,6 +22,8 @@ public class GoodsCard extends UiPart<Region> {
     @FXML
     private Label goodsName;
     @FXML
+    private FlowPane goodsCategoryFlowPane;
+    @FXML
     private Label goodsCategory;
     @FXML
     private Label supplierName;
@@ -31,6 +33,8 @@ public class GoodsCard extends UiPart<Region> {
     private Label arrivalDate;
     @FXML
     private Label isDelivered;
+    @FXML
+    private Label isDeliveredContent;
     @FXML
     private Label quantity;
     @FXML
@@ -43,25 +47,30 @@ public class GoodsCard extends UiPart<Region> {
     public GoodsCard(GoodsReceipt goodsReceipt, int displayedIndex) {
         super(FXML);
         this.goodsReceipt = goodsReceipt;
+        String deliveryStatus = goodsReceipt.isDelivered() ? "Delivered" : "Pending";
         id.setText(displayedIndex + ". ");
         goodsName.setText(goodsReceipt.getGoods().toString());
-        setStyle(goodsName, goodsReceipt.isDelivered() ? "cell_big_label_success" : "cell_big_label_warning");
+        goodsCategory = new Label();
         goodsCategory.setText(goodsReceipt.getGoods().getCategory().toString());
+        goodsCategoryFlowPane.getChildren().add(goodsCategory);
         supplierName.setText("From: " + goodsReceipt.getSupplierName().toString());
         procurementDate.setText("Ordered on " + goodsReceipt.getProcurementDate().getReadableDateTimeString());
         arrivalDate.setText("Arriving on " + goodsReceipt.getArrivalDate().getReadableDateTimeString());
-        isDelivered.setText("Delivery Status: " + (goodsReceipt.isDelivered() ? "Delivered" : "Pending"));
+        isDelivered.setText("Delivery Status: ");
+        isDeliveredContent.setText(deliveryStatus);
+        setStyle(isDeliveredContent, goodsReceipt.isDelivered() ? "cell_small_label_success" : "cell_small_label_warning");
         quantity.setText("Quantity: " + String.valueOf(goodsReceipt.getQuantity()));
-        price.setText("Cost: " + String.valueOf(goodsReceipt.getPriceTotal()));
+        price.setText("Total Cost: " + String.valueOf(goodsReceipt.getPriceTotal()));
     }
 
     /**
-     * Sets the style of the label
-     * @param label The label to be styled.
+     * Sets the style of the node
+     * @param node The label to be styled.
      * @param style the style to be applied to the label.
      */
-    private void setStyle(Label label, String style) {
-        label.getStyleClass().clear();
-        label.getStyleClass().add(style);
+    private void setStyle(Node node, String style) {
+        node.getStyleClass().clear();
+        node.getStyleClass().add(style);
     }
+
 }

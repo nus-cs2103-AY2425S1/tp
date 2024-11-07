@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane HBox.hgrow="ALWAYS">
+    <GridPane fx:id="containerGridPane" HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
@@ -19,22 +19,32 @@
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
             <HBox spacing="0.5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="cell_big_label">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="goodsName" text="\$goodsName" styleClass="cell_big_label" />
+                <VBox>
+                    <Label fx:id="id" styleClass="cell_big_label">
+                        <minWidth>
+                            <!-- Ensures that the label text is never truncated -->
+                            <Region fx:constant="USE_PREF_SIZE" />
+                        </minWidth>
+                    </Label>
+                </VBox>
+                <HBox HBox.hgrow="ALWAYS">
+                    <VBox>
+                        <Label fx:id="goodsName" text="\$goodsName" styleClass="cell_big_label" />
+                        <FlowPane fx:id="goodsCategoryFlowPane" styleClass="goods_category" />
+                        <Label fx:id="supplierName" styleClass="cell_small_label" text="\$supplierName" />
+                        <Label fx:id="procurementDate" styleClass="cell_small_label" text="\$procurementDate" />
+                        <Label fx:id="arrivalDate" styleClass="cell_small_label" text="\$arrivalDate" />
+                    </VBox>
+                </HBox>
+                <VBox alignment="CENTER_RIGHT">
+                    <HBox>
+                        <Label fx:id="isDelivered" styleClass="cell_small_label" text="\$isDelivered" />
+                        <Label fx:id="isDeliveredContent" styleClass="cell_small_label" text="\$isDeliveredContent" />
+                    </HBox>
+                    <Label fx:id="quantity" styleClass="cell_small_label" text="\$quantity" />
+                    <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
+                </VBox>
             </HBox>
-            <FlowPane fx:id="tags" />
-            <Label fx:id="goodsCategory" styleClass="cell_small_label" text="\$goodsCategory" />
-            <Label fx:id="supplierName" styleClass="cell_small_label" text="\$supplierName" />
-            <Label fx:id="procurementDate" styleClass="cell_small_label" text="\$procurementDate" />
-            <Label fx:id="arrivalDate" styleClass="cell_small_label" text="\$arrivalDate" />
-            <Label fx:id="isDelivered" styleClass="cell_small_label" text="\$isDelivered" />
-            <Label fx:id="quantity" styleClass="cell_small_label" text="\$quantity" />
-            <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
         </VBox>
     </GridPane>
 </HBox>
