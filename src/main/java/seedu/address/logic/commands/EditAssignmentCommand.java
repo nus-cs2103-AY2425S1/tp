@@ -59,7 +59,7 @@ public class EditAssignmentCommand extends Command {
     public final Optional<StudentNumber> studentNumber;
     public final AssignmentQuery assignmentQuery;
 
-    private AssignmentQuery oldAssignment;
+    private Assignment oldAssignment;
     private Student student;
 
     /**
@@ -131,7 +131,7 @@ public class EditAssignmentCommand extends Command {
 
     @Override
     public boolean undo(Model model) {
-        student.editAssignment(assignmentName, oldAssignment);
+        student.editAssignment(assignmentName, new AssignmentQuery(oldAssignment));
         return true;
     }
 

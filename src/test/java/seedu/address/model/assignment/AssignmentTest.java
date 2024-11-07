@@ -37,56 +37,56 @@ public class AssignmentTest {
     @Test
     void edit_editDeadline_updatesDeadline() {
         AssignmentQuery query = new AssignmentQuery(null, NEW_DEADLINE, null, null);
-        assignment.edit(query);
+        Assignment newAssignment = assignment.edit(query);
 
-        assertEquals(NEW_DEADLINE, assignment.getDeadline());
-        assertEquals(ORIGINAL_SUBMISSION_STATUS, assignment.getSubmissionStatus());
-        assertEquals(ORIGINAL_GRADE, assignment.getGrade());
+        assertEquals(NEW_DEADLINE, newAssignment.getDeadline());
+        assertEquals(ORIGINAL_SUBMISSION_STATUS, newAssignment.getSubmissionStatus());
+        assertEquals(ORIGINAL_GRADE, newAssignment.getGrade());
     }
 
     @Test
     void edit_editSubmissionStatus_updatesSubmissionStatus() {
         AssignmentQuery query = new AssignmentQuery(null, null, NEW_SUBMISSION_STATUS, null);
-        assignment.edit(query);
+        Assignment newAssignment = assignment.edit(query);
 
-        assertEquals(ORIGINAL_DEADLINE, assignment.getDeadline());
-        assertEquals(NEW_SUBMISSION_STATUS, assignment.getSubmissionStatus());
-        assertEquals(ORIGINAL_GRADE, assignment.getGrade());
+        assertEquals(ORIGINAL_DEADLINE, newAssignment.getDeadline());
+        assertEquals(NEW_SUBMISSION_STATUS, newAssignment.getSubmissionStatus());
+        assertEquals(ORIGINAL_GRADE, newAssignment.getGrade());
     }
 
     @Test
     void edit_editGrade_updatesGrade() {
         AssignmentQuery query = new AssignmentQuery(null, null, null, NEW_GRADE);
-        assignment.edit(query);
+        Assignment newAssignment = assignment.edit(query);
 
-        assertEquals(ORIGINAL_DEADLINE, assignment.getDeadline());
-        assertEquals(ORIGINAL_SUBMISSION_STATUS, assignment.getSubmissionStatus());
-        assertEquals(NEW_GRADE, assignment.getGrade());
+        assertEquals(ORIGINAL_DEADLINE, newAssignment.getDeadline());
+        assertEquals(ORIGINAL_SUBMISSION_STATUS, newAssignment.getSubmissionStatus());
+        assertEquals(NEW_GRADE, newAssignment.getGrade());
     }
 
     @Test
     void edit_editMultipleFields_updatesFields() {
         AssignmentQuery query = new AssignmentQuery(null, NEW_DEADLINE, NEW_SUBMISSION_STATUS, NEW_GRADE);
-        assignment.edit(query);
+        Assignment newAssignment = assignment.edit(query);
 
-        assertEquals(NEW_DEADLINE, assignment.getDeadline());
-        assertEquals(NEW_SUBMISSION_STATUS, assignment.getSubmissionStatus());
-        assertEquals(NEW_GRADE, assignment.getGrade());
+        assertEquals(NEW_DEADLINE, newAssignment.getDeadline());
+        assertEquals(NEW_SUBMISSION_STATUS, newAssignment.getSubmissionStatus());
+        assertEquals(NEW_GRADE, newAssignment.getGrade());
     }
 
     @Test
     void edit_noChanges_originalFieldsRemainUnchanged() {
         AssignmentQuery query = new AssignmentQuery(null, null, null, null);
-        assignment.edit(query);
+        Assignment newAssignment = assignment.edit(query);
 
-        assertEquals(ORIGINAL_DEADLINE, assignment.getDeadline());
-        assertEquals(ORIGINAL_SUBMISSION_STATUS, assignment.getSubmissionStatus());
-        assertEquals(ORIGINAL_GRADE, assignment.getGrade());
+        assertEquals(ORIGINAL_DEADLINE, newAssignment.getDeadline());
+        assertEquals(ORIGINAL_SUBMISSION_STATUS, newAssignment.getSubmissionStatus());
+        assertEquals(ORIGINAL_GRADE, newAssignment.getGrade());
     }
 
     @Test
-    void edit_nullGrade_doesNotChangeGrade() {
-        AssignmentQuery query = new AssignmentQuery(null, null, null, null);
+    void edit_changes_doesNotChangeOriginalFields() {
+        AssignmentQuery query = new AssignmentQuery(null, NEW_DEADLINE, NEW_SUBMISSION_STATUS, NEW_GRADE);
         assignment.edit(query);
         assertEquals(ORIGINAL_GRADE, assignment.getGrade());
 
