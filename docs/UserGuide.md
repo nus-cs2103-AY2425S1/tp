@@ -152,13 +152,12 @@ Format:
 `delete n/NAME`
 `delete e/EMAIL`
 `delete p/PHONE`
-`delete n/NAME p/PHONE`
-`delete n/NAME e/EMAIL`
 
-* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`/NAME` and `PHONE`/`NAME` and `EMAIL`
+
+* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If there are contacts with duplicate names, user must specify `NAME` and `PHONE`/`NAME` and `EMAIL`.
+* If there are contacts with duplicate names, user must use `delete e/EMAIL` or `delete p/PHONE`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.

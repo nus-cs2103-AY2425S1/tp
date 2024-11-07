@@ -68,26 +68,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (optionalJobCode.isPresent() || optionalRemark.isPresent() || optionalTag.isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
-        if (optionalName.isPresent() && optionalPhone.isPresent() && optionalEmail.isEmpty()) {
-            System.out.println("name and phone only");
-            // find using name and phone ONLY
-            Name name = ParserUtil.parseName(optionalName.get());
-            Phone phone = ParserUtil.parsePhone(optionalPhone.get());
-            return new DeleteCommand(name, phone);
-        } else if (optionalName.isPresent() && optionalEmail.isPresent() && optionalPhone.isEmpty()) {
-            System.out.println("name and email only");
-            //find using name and email ONLY
-            Name name = ParserUtil.parseName(optionalName.get());
-            Email email = ParserUtil.parseEmail(optionalEmail.get());
-            return new DeleteCommand(name, email);
-        } else if (optionalName.isPresent() && optionalPhone.isEmpty() && optionalEmail.isEmpty()) {
+        if (optionalName.isPresent() && optionalPhone.isEmpty() && optionalEmail.isEmpty()) {
             // find using name only
             Name name = ParserUtil.parseName(optionalName.get());
             return new DeleteCommand(name);
         } else if (optionalEmail.isPresent() && optionalPhone.isEmpty() && optionalName.isEmpty()) {
+            // find using email only
             Email email = ParserUtil.parseEmail(optionalEmail.get());
             return new DeleteCommand(email); // handles unique emails
         } else if (optionalPhone.isPresent() && optionalEmail.isEmpty() && optionalName.isEmpty()) {
+            // find using phone only
             Phone phone = ParserUtil.parsePhone(optionalPhone.get());
             return new DeleteCommand(phone); // handles unique phone
         } else {

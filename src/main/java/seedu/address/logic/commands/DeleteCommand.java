@@ -15,8 +15,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailPredicate;
 import seedu.address.model.person.FullNameMatchesPredicate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameEmailPredicate;
-import seedu.address.model.person.NamePhonePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhonePredicate;
@@ -29,19 +27,15 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person with a positive integer index/name/email/phone/name & email/name & phone \n"
+            + ": Deletes the person with a positive integer index/name/email/phone\n"
             + "Parameters:\n"
             + "n/NAME\n"
             + "n/EMAIL\n"
             + "n/PHONE\n"
-            + "n/NAME e/EMAIL\n"
-            + "n/NAME p/PHONE\n"
             + "Examples:\n" + COMMAND_WORD + " 1\n"
             + COMMAND_WORD + " n/John Doe\n"
             + COMMAND_WORD + " e/johndoe@gmail.com\n"
-            + COMMAND_WORD + " p/88308830\n"
-            + COMMAND_WORD + " n/John Doe e/johndoe@gmail.com\n"
-            + COMMAND_WORD + " n/John Doe p/88308830\n";
+            + COMMAND_WORD + " p/88308830";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -127,10 +121,6 @@ public class DeleteCommand extends Command {
         // Check if index is not empty
         if (targetIndex.isPresent()) {
             return this.deleteByIndex(targetIndex, model, lastShownList);
-        } else if (name.isPresent() && phone.isPresent()) {
-            return deleteByNamePhone(name, phone, model, listForFilter);
-        } else if (name.isPresent() && email.isPresent()) {
-            return deleteByNameEmail(name, email, model, listForFilter);
         } else if (name.isPresent()) {
             return deleteByName(name, model, listForFilter);
         } else if (email.isPresent()) {
@@ -202,55 +192,10 @@ public class DeleteCommand extends Command {
             throw new CommandException("No matching contacts found.");
         }
         if (listForFilter.size() > 1) {
-            throw new CommandException("Multiple contacts with the same full name found. Please specify more using "
-                    + "this format:\n" + COMMAND_WORD + " n/NAME e/EMAIL OR "
-                    + COMMAND_WORD + " n/NAME p/PHONE");
-        }
-        Person personToDelete = listForFilter.get(0);
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-    }
-
-    /**
-     * Deletes the Contact by finding using name.
-     * @param name Optional containing Name object.
-     * @param phone Optional containing Phone object.
-     * @param model ModelManager storing the addressbook.
-     * @param listForFilter FilteredList supplied with Name and Email predicate.
-     * @return CommandResult that shows that a certain contact has been deleted.
-     * @throws CommandException containing custom Exception messages.
-     */
-    private CommandResult deleteByNamePhone(Optional<Name> name, Optional<Phone> phone, Model model,
-                                            FilteredList<Person> listForFilter) throws CommandException {
-        String nameString = name.get().fullName;
-        String phoneString = phone.get().value;
-        NamePhonePredicate namePhonePredicate = new NamePhonePredicate(nameString, phoneString);
-        listForFilter.setPredicate(namePhonePredicate);
-        if (listForFilter.isEmpty()) {
-            throw new CommandException("No matching contacts found.");
-        }
-        Person personToDelete = listForFilter.get(0);
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-    }
-
-    /**
-     * Deletes the Contact by finding using name.
-     * @param name Optional containing Name object.
-     * @param email Optional containing Emil object.
-     * @param model ModelManager storing the addressbook.
-     * @param listForFilter FilteredList supplied with Name and Email predicate.
-     * @return CommandResult that shows that a certain contact has been deleted.
-     * @throws CommandException containing custom Exception messages.
-     */
-    private CommandResult deleteByNameEmail(Optional<Name> name, Optional<Email> email, Model model,
-                                            FilteredList<Person> listForFilter) throws CommandException {
-        String nameString = name.get().fullName;
-        String emailString = email.get().value;
-        NameEmailPredicate nameEmailPredicate = new NameEmailPredicate(nameString, emailString);
-        listForFilter.setPredicate(nameEmailPredicate);
-        if (listForFilter.isEmpty()) { // if no matching contact
-            throw new CommandException("No matching contacts found.");
+            throw new CommandException("Multiple contacts with the same full name found. Please delete "
+                    + "using email or phone by following "
+                    + "this format:\n" + COMMAND_WORD + " e/EMAIL\n"
+                    + COMMAND_WORD + " p/PHONE");
         }
         Person personToDelete = listForFilter.get(0);
         model.deletePerson(personToDelete);
