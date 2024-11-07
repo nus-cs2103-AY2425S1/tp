@@ -48,13 +48,13 @@ public class DateCommandParser implements Parser<DateCommand> {
 
             // Ensure that at least one identifier (name, phone, or email) is present
             if (!Parser.areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
-                throw new ParseException("At least one identifier (name, phone, or email) must be provided. "
+                throw new ParseException("At least one identifier (name, phone, or email) must be provided. \n"
                         + String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
             // Check if the date prefix is present
             if (!Parser.areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
-                throw new ParseException("A date and time is required. Please include a date and time. "
+                throw new ParseException("A date and time is required. Please include a date and time. \n"
                         + String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
