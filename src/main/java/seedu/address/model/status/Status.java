@@ -9,9 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Status {
 
-    public static final String MESSAGE_CONSTRAINTS = "Status can be left blank, or set to 'non_urgent' or 'urgent'. "
+    public static final String MESSAGE_CONSTRAINTS = "Status must be set to 'Urgent', 'Non_Urgent', or 'NA'. "
             + "Please use one of these options if specifying a status.";
-
 
     public final StatusEnum status;
 

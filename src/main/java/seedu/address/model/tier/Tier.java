@@ -8,9 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTierName(String)}
  */
 public class Tier {
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "The Tiers are gold, silver, bronze and reject. Please use one of them.";
+    public static final String MESSAGE_CONSTRAINTS = "Tier must be set to Gold, Silver, Bronze, Reject, or NA. "
+            + "Please use one of these options if specifying a tier.";
 
     public final TierEnum tierName;
 
