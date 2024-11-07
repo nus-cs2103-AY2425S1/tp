@@ -768,14 +768,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Navigating through command history
 1. Navigating to previous command
-   1. Prerequisite: There must be at least 1 command previously entered.
+   1. Prerequisite: You have just entered the command `list`.
    2. Test case: Press the `UP` arrow key<br>
-      Expected: The command history is shown in the command box. Pressing `UP` again will show the previous command in the command history. (`history S3916784J` if followed in order)
+      Expected: The previous command (`list`) is shown in the command box.
 
 2. Navigating to next command
-   1. Prerequisite: There must be at least 1 command previously entered.
-   2. Test case: Press the `UP` arrow key followed by the `DOWN` arrow key<br>
-      Expected: The command history is shown in the command box. Pressing `UP` followed by `DOWN` will show `history S1486256J` followed by `history S3916784J` in the status bar.
+   1. Prerequisite: You have entered the `help` command, followed by the `list` command.
+   2. Test case: Press the `UP` arrow key twice, followed by the `DOWN` arrow key<br>
+      Expected: You would see these commands in the command box, in this order: `list`, `help`, `list`.
 
 ### Data management
 
