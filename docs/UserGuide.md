@@ -127,6 +127,8 @@ Format:
 Examples:
 * `add n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/altName`
 * `add n/Betsy Crowe th/betsycrowe e/betsycrowe@example.com ss/masters r/President r/Admin`
+* `add n/Alex Yeoh th/alexyeoh123 e/alexyeoh@example.com ss/masters r/President r/Admin`
+![result for 'add'](images/addAlexYeohResult.png)
 
 ### Listing all contacts: `list`
 
@@ -143,19 +145,34 @@ Possible example of slight variations:
 ### Editing a contact: `edit`
 
 Edits an existing contact in the address book.
-
-Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
-
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+In both methods below:
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing roles, the existing roles of the contact will be removed i.e adding of roles is not cumulative.
+
+#### Edit by index
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+
+Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 
 Examples:
 *  `edit 1 th/johndoe123 e/johndoe@example.com` Edits the telegram handle and email address of the 1st contact to be `johndoe123` and `johndoe@example.com` respectively.
 *  `edit 2 r/Admin r/President` Edits the roles of the 2nd contact to be Admin and President, this removes all existing roles user has.
 
-Do note that the `edit` command will fail if you enter a duplicate field as seen below under [invalid contacts](#what-is-considered-as-invalid-contacts)
+#### Edit by name
+* Edits the contact specified by `FULL_NAME`.
+* The `FULL_NAME` has to be an exact match to an existing contact.
+* The `FULL_NAME` is non-case-sensitive.
+
+Format `edit FULL_NAME [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
+
+Examples:
+*  `edit alex yeoh th/johndoe123 e/johndoe@example.com` Edits the telegram handle and email address of the contact `Alex Yeoh` to be `johndoe123` and `johndoe@example.com` respectively.
+![result for 'edit FULL_NAME'](images/editAlexYeohResult.png)
+
+Note:
+* `FULL_NAME` refers to the full name of contact in the address book (to edit) while `n/NAME` is an input to change the name to (to change to).
+* `edit` command will fail if you enter a duplicate field as seen below under [invalid contacts](#what-is-considered-as-invalid-contacts)
 
 ### Locating contacts by contact details: `find`
 
