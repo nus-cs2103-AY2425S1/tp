@@ -22,7 +22,7 @@ public class EventFilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters the volunteer display list to only show volunteers who are available to attend the "
+            + ": Filters the volunteer display list to only show volunteers who can be assigned to the\n "
             + "event identified by the index number used in the displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + EVENT_COMMAND_INDICATOR + " " + COMMAND_WORD + " 1";

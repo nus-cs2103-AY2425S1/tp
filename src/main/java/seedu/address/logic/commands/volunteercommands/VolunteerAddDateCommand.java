@@ -26,7 +26,8 @@ public class VolunteerAddDateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds dates to the list of available dates of volunteer identified by the index number "
             + "used in the displayed volunteer list.\n"
-            + "Parameters: dates (must be in yyyy-MM-dd and cannot repeat)\n"
+            + "Parameters: Dates (Must be in yyyy-MM-dd and cannot repeat. Multiple dates must be separated by a comma,"
+            + " although spacing is optional.)\n"
             + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
     private static final String MESSAGE_ADD_DATE_VOLUNTEER_SUCCESS =
             "Added dates to %s's list of available dates.";
@@ -74,8 +75,8 @@ public class VolunteerAddDateCommand extends Command {
             return false;
         }
 
-        VolunteerAddDateCommand otherViewCommand = (VolunteerAddDateCommand) other;
-        return targetIndex.equals(otherViewCommand.targetIndex);
+        VolunteerAddDateCommand otherAddDateCommand = (VolunteerAddDateCommand) other;
+        return targetIndex.equals(otherAddDateCommand.targetIndex);
     }
 
     @Override

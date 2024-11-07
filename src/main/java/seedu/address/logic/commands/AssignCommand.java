@@ -24,8 +24,6 @@ import seedu.address.model.volunteer.Volunteer;
 public class AssignCommand extends Command {
     public static final String COMMAND_WORD = "assign";
     private static final String MESSAGE_DUPLICATE_ASSIGN = "Already assigned!";
-    private static final String MESSAGE_OVERLAP_ASSIGN = "This volunteer is already assigned to another event"
-            + " during this time slot.";
     private static final String MESSAGE_SUCCESS = "Volunteer assigned successfully!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a volunteer to an event.\n"
             + "Parameters: "

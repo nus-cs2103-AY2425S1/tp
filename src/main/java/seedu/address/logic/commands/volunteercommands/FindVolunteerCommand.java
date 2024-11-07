@@ -18,7 +18,7 @@ public class FindVolunteerCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds volunteers with names containing the specified keyword (case-insensitive).\n"
-            + "Parameters: KEYWORD (must be a non-empty string)\n"
+            + "Parameters: KEYWORD (must only contain between 1 and 100 alphanumeric characters or spaces)\n"
             + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " volunteerSearchString";
 
     public static final String MESSAGE_VOLUNTEER_FOUND = "Found %d volunteer(s) containing '%s':";

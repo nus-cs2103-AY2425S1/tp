@@ -64,8 +64,8 @@ public class VolunteerNewCommand extends Command {
         }
 
         if (other instanceof VolunteerNewCommand) {
-            VolunteerNewCommand otherCommand = (VolunteerNewCommand) other;
-            return otherCommand.toAdd.equals(toAdd);
+            VolunteerNewCommand otherNewCommand = (VolunteerNewCommand) other;
+            return otherNewCommand.toAdd.equals(toAdd);
         } else {
             return false;
         }
