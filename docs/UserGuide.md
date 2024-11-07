@@ -10,7 +10,7 @@
 
 <br>
 
-EduContacts is a **desktop app for Educators in Tertiary Institution to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. For educators who may be less experienced with command-based tools, EduContacts also includes user-friendly and intuitive features and guidance, making it accessible for all users.
+EduContacts is a **desktop app for educators in tertiary institutions to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduContacts can get your contact management tasks done faster than traditional GUI apps. For educators who may be less experienced with command-based tools, EduContacts also includes user-friendly and intuitive features and guidance, making it accessible for all users.
 
 <br>
 <!-- * Table of Contents -->
@@ -38,7 +38,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 [Download Java here](https://www.oracle.com/sg/java/technologies/downloads/) if you haven't already.
 
 <box type="tip" seamless>
@@ -47,13 +47,13 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 
 </box>
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-2/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the home folder for your EduContacts.
+3. Copy the file to the folder you want to use as the home folder for your EduContacts.
 
-1. To run EduContacts, open a command terminal.
+4. To run EduContacts, open a command terminal.
 
-   To navigate to the folder where you placed the `.jar` file, use the `cd` command. For example, if you placed the file in a folder named `EduContacts` on your Desktop, you would enter:
+   To navigate to the folder where you placed the `.jar` file, use the `cd` command. For example, if you placed the file in a folder named `EduContacts` on your desktop, you would enter:
 
    ```bash
    cd ~/Desktop/EduContacts
@@ -65,11 +65,11 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
    java -jar educontacts.jar
    ```
 
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    ```bash
@@ -78,14 +78,14 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
    Lists all contacts.
 
    ```bash
-   add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student
+   add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student
    ```
-   Adds a contact named `John Doe` to EduContacts.
+   Adds a person named `John Doe` to EduContacts.
 
    ```bash
    delete 12345678
    ```
-   Deletes a student contact with StudentID `12345678`.
+   Deletes a person contact with student ID `12345678`.
 
    ```bash
    clear
@@ -95,9 +95,14 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
    ```bash
    exit
    ```
-   Exits the app.
+   Exits the EduContacts application.
 
-1. Refer to the [Features](#features) below for details of each command.
+<box type="tip" seamless>
+
+**Tip:** Use the UP and DOWN arrow keys to scroll through previous commands in the Command Box. This feature helps you reuse recent commands without retyping, making it faster for you to correct or repeat commands!
+</box>
+
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -143,7 +148,7 @@ Alternatively, you can click the button on the top right hand corner as indicate
 
 ### Adding a person: `add`
 
-Adds a person contact to the EduContacts.
+Adds a person contact to EduContacts.
 
 Format:
 ```bash
@@ -151,9 +156,10 @@ add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
 
 Examples:
-* `add 87654321 n/Betsy Crowe t/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics`
-* `add 12345678 n/John Doe p/98981212 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
-* `add 71271222 n/Benson Boon p/89229191 e/benson@example.com a/Blk 12 Benson Street c/Economics t/Student`
+* `add 87654321 n/Betsy Crowe r/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics` will add a person named `Betsy Crowe` with student ID of `87654321` to EduContacts.
+* `add 12345678 n/John Doe p/98981212 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student` will add a person named `John Doe` with student ID of `12345678` to EduContacts.
+* `add 71271222 n/Benson Boon p/89229191 e/benson@example.com a/Blk 12 Benson Street c/Economics r/Student` will add a person named `Benson Boon` with student ID of `71271222` to EduContacts.
+
   ![result for 'add command result'](images/addCommandResult.png)
 
 <br>
@@ -168,11 +174,28 @@ list
 ```
 ![result for 'list command result'](images/listCommandResult.png)
 
-<div style="page-break-after: always;"></div>
+<br>
+
+### Adding a module to a person: `module`
+
+Adds a module to a specified person in EduContacts.
+
+Format:
+```bash
+module ID m/MODULE
+```
+
+Examples:
+* `module 12345678 m/GEA1000` will add a module `GEA1000` to a person with student ID of `12345678`.
+* `module 13131313 m/CS2103T` will add a module `CS2103T` to a person with student ID of `13131313`.
+
+  ![result for 'add module result'](images/addModule.png)
+
+<br>
 
 ### Editing a person : `edit`
 
-Edits an existing person in EduContacts.
+Edits a specified person in EduContacts.
 
 Format:
 ```bash
@@ -180,45 +203,47 @@ edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```
 
 
-* Edits a student's details according to the fields specified.
+* Edits a person's details according to the fields specified.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  To edit the module CS2103T to CS2101 of a student with ID 12345678, type  `edit 12345678 m/CS2103T CS2101` utilizing the `m/` prefix for modules
-*  To edit the course of a student with ID 12121212 to Computer Science type `edit 12121212 c/Computer Science`
+*  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
+*  `edit 12121212 c/Computer Science` will edit a person with student ID of `12121212` by editing their course to `Computer Science`.
+
    ![result for 'edit command result'](images/editCommandResult.png)
 
 <br>
 
 ### Adding a grade : `grade`
 
-Adds a grade to a person's module
+Adds a grade to a person's module.
 
 ```bash
 grade ID m/MODULE g/GRADE
 ```
 
-* Adds a grade to a person according to the specified ID and Module
-* Module specified must exist prior to execution grade command
-* Acceptable grades: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
-* Existing grade will be updated to the input grade
+* Adds a grade to a person according to the specified student ID and Module.
+* Module specified must exist prior to execution grade command.
+* Acceptable grades: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`.
+* Existing grade will be updated to the input grade.
 
 Examples:
-* `grade 23876767 m/CS2103T g/A` will assign an A grade to the CS2103T module of a Person whose ID is 23876767
+* `grade 23876767 m/CS2103T g/A` will assign an `A` grade to the `CS2103T` module of a person with student ID of `23876767`.
+* `grade 14141414 m/CS1101S g/B+` will assign an `B+` grade to the `CS1101S` module of a person with student ID of `14141414`.
 
 <br>
 
-### Listing students by certain attributes : `filter`
+### Listing person by certain attributes : `filter`
 
-Filter students based on their Names, Courses and Modules.
+Filters person contacts based on their names, courses and modules.
 
 Format:
 ```bash
 filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 ```
 
-* **For filtering by Names:**
+* **For filtering by names:**
   * Use prefix `n/`.
   * Only full words will be matched e.g. `Han` will not match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -228,14 +253,12 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 <!-- -->
 
 * **For filtering by Module:**
-
   * Use prefix `m/`.
-  * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will return modules like "CS2103T" and "CS2101."
+  * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will match modules like "CS2103T" and "CS2101."
 
 <!-- -->
 
 * **For filtering by Course:**
-
   * Use prefix `c/`
   * Partial matching is supported, but the first keyword must match the beginning of the course name.
     e.g `Engineer` will match courses like "Engineering" but not "Civil Engineering".
@@ -246,10 +269,10 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 </box>
 
 Examples:
-* ```filter n/John``` returns `john` and `John Doe`
-* `filter m/CS2103T` returns a list of all students with module CS2103T.
-* `filter c/Computer Science` returns a list of all students with course Computer Science.<br>
-* `filter n/alex david` returns `Alex Yeoh`, `David Li`
+* `filter n/John` will return a list of all persons with `John` in their name e.g. `john` and `John Doe`.
+* `filter m/CS2103T` will return a list of all persons with module `CS2103T`.
+* `filter c/Computer Science` will return a list of all persons with course `Computer Science`.
+* `filter n/alex david` will return a list of all persons with `alex` or `david` in their name e.g.  `Alex Yeoh`, `David Li`.
 
   ![result for 'find alex david'](images/filterAlexDavidResult.png)
 <br>
@@ -258,26 +281,9 @@ Examples:
 
 **Note:**  After using `filter`, only the persons displayed in the filtered list can be edited or deleted, and persons not shown in this truncated list cannot be modified.  
 
-To return to display the full list of persons, use `list` command.
+To return to display the full list of persons, use the `list` command.
 
 </box>
-
-<div style="page-break-after: always;"></div>
-
-### Adding a module to a student: `module`
-
-Adds a module to a specific student using their ID.
-
-Format:
-```bash
-module ID m/MODULE
-```
-
-Examples:
-* `module 12345678 m/CS2103T`
-  ![result for 'add module result'](images/addModule.png)
-
-<br>
 
 ### Deleting a person : `delete`
 
@@ -288,13 +294,15 @@ Format:
 delete ID
 ```
 
-* Deletes student with the specified `ID`.
+* Deletes person with the specified student ID.
 
 Examples:
-* `delete 71271222` will delete student contact with `ID: 71271222`.
-  ![result for 'delete_71271222'](images/filterAlexDavidResult.png)
+* `delete 15151515` will delete a person with student ID of `15151515` from EduContacts.
+* `delete 71271222` will delete a person with student ID of `71271222` from EduContacts.
 
-<br>
+  ![result for 'delete_71271222'](images/deleteCommandResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Finding a person : `find`
 
@@ -305,9 +313,9 @@ Format: `find ID`
 * Finds student with the specified `ID`.
 
 Examples:
-* `find 12345678` will find student contact with `ID: 12345678` and display their details
+* `find 12345678` will find a person with student ID of `12345678` and display their details.
 
-<div style="page-break-after: always;"></div>
+<br>
 
 ### Clearing all entries : `clear`
 
@@ -329,18 +337,12 @@ The `clear` command will erase all contacts from the system. Please ensure that 
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the EduContacts application.
 
 Format:
 ```bash
 exit
 ```
-
-<box type="tip" seamless>
-
-**Tip:**  UP and DOWN arrow to Navigate Command History
-Use the UP and DOWN arrow keys to scroll through previous commands in the Command Box. This feature helps you reuse recent commands without retyping, making it faster to correct or repeat commands.
-</box>
 
 <br>
 
@@ -375,7 +377,7 @@ _Details coming soon ..._
 **Q**: I am unfamiliar with command-line interfaces. How should I begin using EduContacts?<br>
 **A**: We recommend starting with the **Quick Start** section of the user guide, which provides essential steps for setup and installation. Once you have the application running, utilize the `help` command or Help button to view a comprehensive list of available commands and their functions. Additionally, the **Features** section offers detailed instructions and examples for each command. We recommend familiarizing yourself with these resources as it will enhance your experience with EduContacts.
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduContacts home folder.
 
 **Q**: Is there a way to recover accidentally deleted contacts?<br>
@@ -398,7 +400,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
+**Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student`
 **Clear**  | `clear`
 **Delete** | `delete ID`<br> e.g., `delete 12345678`
 **Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
