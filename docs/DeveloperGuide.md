@@ -8,10 +8,11 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
+Libraries used: 
+* [JavaFX](https://openjfx.io/)
+* [Jackson](https://github.com/FasterXML/jackson)
+* [JUnit5](https://github.com/junit-team/junit5)
 * [AddressBook Level 3](https://se-education.org/addressbook-level3/) (Original Source)
-* JavaFX
-* JSON
 
 --------------------------------------------------------------------------------------------------------------------
 
