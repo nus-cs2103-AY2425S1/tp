@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=Justincjr&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByAuthors&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20)
   * Created parsing and logic for `delete-policy`
-  * Created parsing for `edit-policy`
+  * Created parsing for `edit-policy` , `add-claim`
   * Created storage for `Policy`
   * Created `Claim` , `ClaimStatus` and collaborated on `ClaimList`
   * Created storage for `Claim`
