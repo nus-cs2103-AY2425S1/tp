@@ -104,8 +104,6 @@ public class CommandBox extends UiPart<Region> {
         }
 
         ValidateSyntaxResultEnum result = syntaxValidator.validateSyntax(commandText);
-        System.out.println(result);
-        System.out.println(commandTextField.getStyleClass());
         switch (result) {
         case VALID_COMMAND_WORD:
             this.setStyleToIndicateValidCommandWord();

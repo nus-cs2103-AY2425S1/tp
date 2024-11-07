@@ -252,8 +252,19 @@ manually.
 
 CareConnect provides command autocompletion when pressing the Tab key. For example, typing `f` and pressing Tab will auto complete the command to `find`.
 
+### Syntax Highlighting
+CareConnect provides visual feedback to help users recognize and correct commands by highlighting text in different colors.
+
+* Gray: Indicates a valid command word.
+* Black: Indicates a fully valid command.
+* Red: Indicates an invalid command.
+
+This color-coded feedback helps users ensure their commands are correct and minimizes errors in usage.
+
 ### Easy keyboard navigation
 CareConnect offers convenient keyboard navigation. Press `Shift + Tab` to switch focus between the command box, log list, and person list. Use the `Up` and `Down` arrow keys to scroll through lists.
+
+
 
 ### Editing the data file
 
