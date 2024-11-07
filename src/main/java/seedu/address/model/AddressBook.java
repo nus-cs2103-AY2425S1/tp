@@ -70,6 +70,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
+    public void setAllPersonNotClient() {
+        persons.setAllPersonNotClient();
+    }
+
     //// person-level operations
 
     /**

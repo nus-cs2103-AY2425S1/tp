@@ -171,9 +171,20 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        setAllPersonNotClient();
+        filteredPersons.setPredicate(predicate);
+
+    }
+
+    @Override
+    public void updateFilteredPersonListWithClient(Predicate<Person> predicate) {
+        requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
+    public void setAllPersonNotClient() {
+        addressBook.setAllPersonNotClient();
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Wedding} backed by the internal list of
