@@ -130,4 +130,22 @@ public class EventParserUtil {
         return new Description(trimmedDescription);
     }
 
+    /**
+     * Ensures the search term matches EventName's validation and returns it after
+     * @param searchTerm
+     * @return searchTerm
+     * @throws ParseException
+     */
+    public static String parseSearchTerm(String searchTerm) throws ParseException {
+        requireNonNull(searchTerm);
+        searchTerm = searchTerm.trim();
+
+        if (!searchTerm.matches(EventName.VALIDATION_REGEX)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+
+        return searchTerm;
+
+    }
+
 }

@@ -18,7 +18,7 @@ public class FindEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds events with names containing the specified keyword (case-insensitive).\n"
-            + "Parameters: KEYWORD (must be a non-empty string)\n"
+            + "Parameters: KEYWORD (must only contain between 1 and 50 alphanumeric characters or spaces)\n"
             + "Example: " + EVENT_COMMAND_INDICATOR + " " + COMMAND_WORD + " eventSearchString";
 
     public static final String MESSAGE_EVENT_FOUND = "Found %d event(s) containing '%s':";
