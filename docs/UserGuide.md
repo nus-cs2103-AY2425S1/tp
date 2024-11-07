@@ -2,10 +2,16 @@
 layout: page
 title: User Guide
 ---
-
+## Overview
 ClinicBuddy aims to enhance the patient management process for small clinics, creating a platform to track patient
 information such as their treatment, contact information, visit records and future appointments while still having the
 benefits of a Graphical User Interface (GUI).
+
+- **Patient Records Management:** Add, update, delete, and view patient details such as name, age, contact information, and appointments.
+- **Appointment Scheduling:** Easily track patient appointments with scheduling and reminder features.
+- **Backup and Restore:** Securely save and retrieve patient records with manual and automated backup options, ensuring data recovery in case of accidental deletion.
+- **Search and Filter:** Quickly locate patient records by name, NRIC, or appointment date, making it easy to manage large numbers of patients.
+- **Custom Operating Hours:** Set and adjust clinic operating hours, with automatic verification of scheduled appointments within these hours.
 
 1. [Quick Start](#quick-start)
 2. [Features](#features)
