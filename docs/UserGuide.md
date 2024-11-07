@@ -303,7 +303,7 @@ Examples:
 
 Deletes the specified patient from the address book.
 
-Format: `delete n/NAME p/PHONE e/EMAIL`
+Format: `delete [n/NAME] [p/PHONE] [e/EMAIL]`
 
 [Parameter Constraints](#parameter-constraints).
 
@@ -434,8 +434,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
     - Format: `clear`
 
 - **Delete**: Deletes an entry at the specified index.
-    - Format: `delete INDEX`
-    - Example: `delete 3`
+    - Format: `delete [n/NAME] [p/PHONE] [e/EMAIL]`
+    - Example: `delete n/Nayana`
 
 - **Edit**: Edits an entry at the specified index with updated fields such as name, phone, email, address, or tags.
     - Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
@@ -457,7 +457,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 - **Appointment Date**: Sets an appointment date and time for an entry.
     - Format: `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE_TIME`
+    - - Example: `date n/Nayana d/26/05/2024 1230`
 
 - **Schedule**: Schedules an entry for a specific date.
     - Format: `schedule d/DATE_ONLY`
+    - - Example: `schedule d/26/05/2004`
 
