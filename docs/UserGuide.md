@@ -248,12 +248,13 @@ Examples:
 
 Finds persons whose preferred time ranges overlap with any of given time range.
 
-Format: `findtime TIME-TIME...`
+Format: `findtime TIME-TIME [TIME-TIME]...`
 
 <box type="tip" seamless>
 
 **Tips:** TIME-TIME should be in the form of "HHmm-HHmm" with no extra space 
 and `HHmm` should be a valid 4-digit number within 0000-2359, while the first time should be before the second time.
+Overnight range is not accepted, e.g. `2300-0100` is not accepted.
 
 You can enter more than one time range to search for.
 
