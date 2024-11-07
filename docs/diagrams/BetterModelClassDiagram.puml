@@ -20,7 +20,7 @@ Restaurant *--> Email
 Restaurant *--> Address
 Restaurant *--> Price
 Restaurant *--> Rating
-Restaurant : - isFavourite: Boolean
+Restaurant : isFavourite: Boolean
 show Restaurant members
 
 @enduml

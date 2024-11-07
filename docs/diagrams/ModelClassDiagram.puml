@@ -14,7 +14,7 @@ Class UserPrefs
 
 Class UniqueRestaurantList
 Class Restaurant {
-    - isFavourite: Boolean
+    isFavourite: Boolean
 }
 Class Address
 Class Email
@@ -45,7 +45,7 @@ Restaurant *--> Name
 Restaurant *--> Phone
 Restaurant *--> Email
 Restaurant *--> Address
-Restaurant *--> "0..1" Rating
+Restaurant *--> Rating
 Restaurant *--> "*" Tag
 Restaurant *--> Price
 
