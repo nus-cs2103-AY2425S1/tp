@@ -33,7 +33,6 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("(+) 93121534")); // with blank country code
         assertFalse(Phone.isValidPhone("93  121534")); // with more than 1 space
         assertFalse(Phone.isValidPhone("93121534 [Office And Others]")); // with note > 10 chars
-         // spaces within digits
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("91")); // short phone number
