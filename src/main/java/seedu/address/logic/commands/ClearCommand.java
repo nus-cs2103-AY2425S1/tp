@@ -62,8 +62,8 @@ public class ClearCommand extends Command {
             setPrompted(false);
             return new CommandResult(MESSAGE_ABORTED);
         } else {
-            setPrompted(false);
             setConfirmed(false);
+            setPrompted(false);
             model.setAddressBook(new AddressBook());
             return new CommandResult(MESSAGE_SUCCESS);
         }
