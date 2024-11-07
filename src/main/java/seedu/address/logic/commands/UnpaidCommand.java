@@ -13,6 +13,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Person;
 
 /**
@@ -70,12 +71,15 @@ public class UnpaidCommand extends Command {
     private static Person createUnpaidPerson(Person personToPay, UnpaidPersonDescriptor unpaidPersonDescriptor) {
         assert personToPay != null;
 
-        Boolean updatedHasNotPaid = false;
-        Frequency updatedFrequency = new Frequency("0");
+        Boolean updatedHasNotPaid = unpaidPersonDescriptor.getHasPaid().orElse(personToPay.getHasPaid());
+        Frequency updatedFrequency = unpaidPersonDescriptor.getFrequency().orElse(personToPay.getFrequency());
+        LastPaidDate updatedLastPaidDate = unpaidPersonDescriptor.getLastPaidDate()
+                .orElse(personToPay.getLastPaidDate());
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
                 personToPay.getAddress(), personToPay.getBirthday(),
-                personToPay.getTags(), updatedHasNotPaid, updatedFrequency, personToPay.getProfilePicFilePath());
+                personToPay.getTags(), updatedHasNotPaid, updatedLastPaidDate,
+                updatedFrequency, personToPay.getProfilePicFilePath());
     }
 
     @Override
@@ -104,6 +108,7 @@ public class UnpaidCommand extends Command {
     public static class UnpaidPersonDescriptor {
         private Boolean hasPaid;
         private Frequency frequency;
+        private LastPaidDate lastPaidDate;
 
         /**
          * Constructor for UnpaidPersonDescriptor.
@@ -111,6 +116,7 @@ public class UnpaidCommand extends Command {
         public UnpaidPersonDescriptor() {
             setHasNotPaid();
             setFrequencyToZero();
+            setLastPaidDate();
         }
 
         /**
@@ -120,6 +126,7 @@ public class UnpaidCommand extends Command {
         public UnpaidPersonDescriptor(UnpaidPersonDescriptor toCopy) {
             setHasNotPaid();
             setFrequencyToZero();
+            setLastPaidDate();
         }
 
         public void setHasNotPaid() {
@@ -134,6 +141,12 @@ public class UnpaidCommand extends Command {
         }
         public Optional<Frequency> getFrequency() {
             return Optional.ofNullable(frequency);
+        }
+        public void setLastPaidDate() {
+            this.lastPaidDate = new LastPaidDate("01 01 0000");
+        }
+        public Optional<LastPaidDate> getLastPaidDate() {
+            return Optional.ofNullable(lastPaidDate);
         }
 
 
@@ -151,7 +164,8 @@ public class UnpaidCommand extends Command {
             UnpaidCommand.UnpaidPersonDescriptor otherUnpaidPersonDescriptor =
                     (UnpaidCommand.UnpaidPersonDescriptor) other;
             return Objects.equals(hasPaid, otherUnpaidPersonDescriptor.hasPaid)
-                    && Objects.equals(frequency, otherUnpaidPersonDescriptor.frequency);
+                    && Objects.equals(frequency, otherUnpaidPersonDescriptor.frequency)
+                    && Objects.equals(lastPaidDate, otherUnpaidPersonDescriptor.lastPaidDate);
         }
 
         @Override
@@ -159,6 +173,7 @@ public class UnpaidCommand extends Command {
             return new ToStringBuilder(this)
                     .add("hasNotPaid", hasPaid)
                     .add("frequency", frequency)
+                    .add("lastPaidDate", lastPaidDate)
                     .toString();
         }
     }

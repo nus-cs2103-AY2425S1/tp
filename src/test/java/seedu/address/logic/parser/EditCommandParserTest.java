@@ -27,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -203,6 +204,54 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+    }
+    @Test
+    public void parse_frequency_failure() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_FREQUENCY + "weekly";
+        assertParseFailure(parser, userInput, "Frequency cannot be edited from the "
+                + "edit command. Please use the paid command.");
+    }
+
+    @Test
+    public void parse_singleNetWorthTag_success() {
+        // single net worth tag (highnetworth)
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + " t/highnetworth";
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND, "highnetworth").build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // single net worth tag (midnetworth)
+        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + " t/midnetworth";
+
+        descriptor = new EditPersonDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND, "midnetworth").build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_replaceExistingNetWorthTag_success() {
+        // initial net worth tag (highnetworth) replaced with midnetworth
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + " t/highnetworth";
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND, "highnetworth").build();
+        EditCommand initialCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, initialCommand);
+
+        // replace highnetworth with midnetworth
+        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + " t/midnetworth";
+        descriptor = new EditPersonDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND, "midnetworth").build();
+        EditCommand updatedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, updatedCommand);
     }
 
     @Test

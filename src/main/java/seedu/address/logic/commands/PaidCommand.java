@@ -14,6 +14,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Person;
 
 
@@ -76,10 +77,11 @@ public class PaidCommand extends Command {
 
         Boolean updatedHasPaid = true;
         Frequency updatedFrequency = paidPersonDescriptor.getFrequency().orElse(personToPay.getFrequency());
+        LastPaidDate updatedLastPaidDate = paidPersonDescriptor.getLastPaidDate().orElse(personToPay.getLastPaidDate());
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
                 personToPay.getAddress(), personToPay.getBirthday(), personToPay.getTags(),
-                updatedHasPaid, updatedFrequency, personToPay.getProfilePicFilePath());
+                updatedHasPaid, updatedLastPaidDate, updatedFrequency, personToPay.getProfilePicFilePath());
     }
 
     @Override
@@ -111,6 +113,7 @@ public class PaidCommand extends Command {
     public static class PaidPersonDescriptor {
         private Boolean hasPaid;
         private Frequency frequency;
+        private LastPaidDate lastPaidDate;
 
         public PaidPersonDescriptor() {}
 
@@ -121,6 +124,7 @@ public class PaidCommand extends Command {
         public PaidPersonDescriptor(PaidPersonDescriptor toCopy) {
             setHasPaid();
             setFrequency(toCopy.frequency);
+            setLastPaidDate(toCopy.lastPaidDate);
         }
 
         public void setHasPaid() {
@@ -137,6 +141,12 @@ public class PaidCommand extends Command {
         public Optional<Frequency> getFrequency() {
             return Optional.ofNullable(frequency);
         }
+        public void setLastPaidDate(LastPaidDate lastPaidDate) {
+            this.lastPaidDate = lastPaidDate;
+        }
+        public Optional<LastPaidDate> getLastPaidDate() {
+            return Optional.ofNullable(lastPaidDate);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -151,7 +161,8 @@ public class PaidCommand extends Command {
 
             PaidCommand.PaidPersonDescriptor otherPaidPersonDescriptor = (PaidCommand.PaidPersonDescriptor) other;
             return Objects.equals(hasPaid, otherPaidPersonDescriptor.hasPaid)
-                   && Objects.equals(frequency, otherPaidPersonDescriptor.frequency);
+                   && Objects.equals(frequency, otherPaidPersonDescriptor.frequency)
+                    && Objects.equals(lastPaidDate, otherPaidPersonDescriptor.lastPaidDate);
         }
 
         @Override
@@ -159,6 +170,7 @@ public class PaidCommand extends Command {
             return new ToStringBuilder(this)
                     .add("hasPaid", hasPaid)
                     .add("frequency", frequency)
+                    .add("lastPaidDate", lastPaidDate)
                     .toString();
         }
     }

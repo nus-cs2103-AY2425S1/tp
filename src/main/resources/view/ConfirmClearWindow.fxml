@@ -10,7 +10,7 @@
 
 <?import javafx.scene.Scene?>
 <?import javafx.scene.image.Image?>
-<fx:root title="Confirm Delete" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Confirm Clear" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/warning_icon.png" />
     </icons>
@@ -33,5 +33,6 @@
         </Scene>
     </scene>
 </fx:root>
+
 
 
