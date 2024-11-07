@@ -115,6 +115,7 @@ public class LogicManager implements Logic {
             lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
             return lastCommandResult;
         }
+
         switch (lastCommandResult.getType()) {
         case IMPORT_DATA:
             logger.info(String.format("Importing data from &1%s", file.getPath()));
@@ -170,8 +171,7 @@ public class LogicManager implements Logic {
         return model.getLastViewedClientAsObjectProperty();
     }
 
-    @Override
-    public boolean importFile(File file) {
+    private boolean importFile(File file) {
         requireNonNull(file);
 
         ReadOnlyAddressBook addressBook;
@@ -185,8 +185,7 @@ public class LogicManager implements Logic {
         return true;
     }
 
-    @Override
-    public boolean exportFile(File file) {
+    private boolean exportFile(File file) {
         requireNonNull(file);
 
         try {

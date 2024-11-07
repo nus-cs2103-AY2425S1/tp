@@ -62,16 +62,4 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     ObjectProperty<Client> getVisibleClient();
-
-    /**
-     * Imports address book data from the given file.
-     * @return true if data was successfully imported, false otherwise.
-     */
-    boolean importFile(File file);
-
-    /**
-     * Exports current address book data to the given file.
-     * @return true if data was successfully exported, false otherwise.
-     */
-    boolean exportFile(File file);
 }
