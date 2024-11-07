@@ -31,6 +31,7 @@ import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
+//@@author rollingpencil
 /**
  * Parses input arguments and creates a new transaction FilterCommand object.
  */
