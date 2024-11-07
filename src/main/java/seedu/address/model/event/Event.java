@@ -93,13 +93,29 @@ public class Event {
         if (otherEvent == this) {
             return true;
         }
+        if (otherEvent == null) {
+            return false;
+        }
 
-        return otherEvent != null
-                && otherEvent.getEventName().equals(getEventName())
+        // check if one event's attendees is subset of another
+        Set<Person> otherEventAttendees = otherEvent.getAttendees();
+        boolean otherEventAttendeesAreAttending = this.checkIfAttendeesAreAttending(otherEventAttendees);
+        boolean eventAttendeesAreAttendingOtherEvent = otherEvent.checkIfAttendeesAreAttending(this.getAttendees());
+
+        return otherEvent.getEventName().equals(getEventName())
                 && otherEvent.startDate.equals(startDate)
                 && otherEvent.endDate.equals(endDate)
-                && otherEvent.getAttendees().equals(getAttendees())
+                && (otherEventAttendeesAreAttending || eventAttendeesAreAttendingOtherEvent)
                 && location.equals(otherEvent.location);
+    }
+
+    /**
+     * Checks if a given set of attendees are all attending the event.
+     * @param attendeesToCheck the set of attendess to check.
+     * @return true if all attendees are attending thes event.
+     */
+    private boolean checkIfAttendeesAreAttending(Set<Person> attendeesToCheck) {
+        return this.getAttendees().containsAll(attendeesToCheck);
     }
 
     @Override

@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.EqualUtil.nullSafeEquals;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_EVENT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
@@ -95,6 +98,15 @@ public class UpdateCommand extends Command {
         Event oldEvent = eventList.get(indexToUpdate.getZeroBased());
         Event newEvent;
 
+        // check if updated date is valid
+        if (newStartDate == null && newEndDate != null) {
+            checkValidDates(oldEvent.getStartDate(), newEndDate);
+        } else if (newStartDate != null && newEndDate == null) {
+            checkValidDates(newStartDate, oldEvent.getEndDate());
+        } else if (newStartDate != null && newEndDate != null) {
+            checkValidDates(newStartDate, newEndDate);
+        }
+
         // Add and remove attendees
         Set<Person> changedAttendees = getChangedAttendees(oldEvent, personList);
         newEvent = new Event(
@@ -106,6 +118,10 @@ public class UpdateCommand extends Command {
 
         assert newEvent != null;
 
+        if (model.hasEvent(newEvent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+
         model.updateEvent(newEvent, indexToUpdate.getZeroBased());
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 Messages.formatEvent(newEvent)));
@@ -115,23 +131,39 @@ public class UpdateCommand extends Command {
             throws CommandException {
         Set<Person> oldAttendees = oldEvent.getAttendees();
         Set<Person> changedAttendees = new HashSet<>(oldAttendees);
-        for (Index i : addIndices) {
-            try {
-                Person p = personList.get(i.getZeroBased());
-                changedAttendees.add(p);
-            } catch (IndexOutOfBoundsException e) {
-                throw new CommandException("Attendee index out of bounds.");
+        if (addIndices != null) {
+            for (Index i : addIndices) {
+                try {
+                    Person p = personList.get(i.getZeroBased());
+                    changedAttendees.add(p);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new CommandException("Attendee index out of bounds.");
+                }
             }
         }
-        for (Index i : removeIndices) {
-            try {
-                Person p = personList.get(i.getZeroBased());
-                changedAttendees.remove(p);
-            } catch (IndexOutOfBoundsException e) {
-                throw new CommandException("Attendee index out of bounds.");
+        if (removeIndices != null) {
+            for (Index i : removeIndices) {
+                try {
+                    Person p = personList.get(i.getZeroBased());
+                    changedAttendees.remove(p);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new CommandException("Attendee index out of bounds.");
+                }
             }
         }
         return changedAttendees;
+    }
+
+    /**
+     * Checks if two dates, start date and end date, are valid.
+     * @param startDate the starting date
+     * @param endDate the ending date
+     * @throws CommandException if the end date occurs before the start date
+     */
+    private void checkValidDates(LocalDate startDate, LocalDate endDate) throws CommandException {
+        if (endDate.isBefore(startDate)) {
+            throw new CommandException(MESSAGE_INVALID_DATES);
+        }
     }
 
     @Override
@@ -146,13 +178,14 @@ public class UpdateCommand extends Command {
         }
 
         UpdateCommand otherUpdateCommand = (UpdateCommand) other;
-        return newName.equals(otherUpdateCommand.newName)
-                && (indexToUpdate == otherUpdateCommand.indexToUpdate)
-                && (newStartDate == otherUpdateCommand.newStartDate)
-                && (newEndDate == otherUpdateCommand.newEndDate)
-                && (newLocation.equals(otherUpdateCommand.newLocation))
-                && (addIndices.equals(otherUpdateCommand.addIndices))
-                && (removeIndices.equals(otherUpdateCommand.removeIndices));
+
+        return nullSafeEquals(newName, otherUpdateCommand.newName)
+                && nullSafeEquals(indexToUpdate, otherUpdateCommand.indexToUpdate)
+                && nullSafeEquals(newStartDate, otherUpdateCommand.newStartDate)
+                && nullSafeEquals(newEndDate, otherUpdateCommand.newEndDate)
+                && nullSafeEquals(newLocation, otherUpdateCommand.newLocation)
+                && nullSafeEquals(addIndices, otherUpdateCommand.addIndices)
+                && nullSafeEquals(removeIndices, otherUpdateCommand.removeIndices);
     }
 
     @Override

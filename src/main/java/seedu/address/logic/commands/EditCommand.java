@@ -80,9 +80,9 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        editPersonInEvent(model, personToEdit, editedPerson);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        editPersonInEvent(model, personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
