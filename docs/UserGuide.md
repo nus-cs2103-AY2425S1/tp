@@ -19,7 +19,7 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `TAchy.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `TAchy.jar` file from [here](https://github.com/AY2425S1-CS2103-F11-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for TAchy.
 
@@ -355,6 +355,27 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: What are the system requirements for TAchy?<br>
+**A**: TAchy requires Java 17 or above to run. It is compatible with Windows, MacOS, and Linux operating systems.
+
+**Q**: Is it necessary to back up my TAchy data?<br>
+**A**: Regularly backing up your addressbook.json data file is highly recommended. Save a copy in a secure location to ensure your data can be restored in case of unexpected software or hardware problems.
+
+**Q**: What happens if I accidentally delete a student or an assignment?<br>
+**A**: Deleted data cannot be recovered directly within TAchy. However, if you have a backup of your data file, you can restore it by replacing the current data file in the application folder with the backup.
+
+**Q**: Can multiple users use TAchy on the same computer?<br>
+**A**: Yes, but each user should maintain a separate data file to avoid overwriting each other's records.
+
+**Q**: Does TAchy automatically save my progress?<br>
+**A**: Yes, TAchy saves all changes automatically in the data file whenever you add, edit, or delete information.
+
+**Q**: Can I use TAchy offline?<br>
+**A**: Absolutely! TAchy is designed to work entirely offline, so you can manage student and assignment information without an internet connection.
+
+**Q**: What should I do if I encounter an error or bug?<br>
+**A**: Please report any issues through our [GitHub repository](https://github.com/AY2425S1-CS2103-F11-1/tp/issues), including the steps to reproduce the bug and any error messages you receive.
 
 --------------------------------------------------------------------------------------------------------------------
 
