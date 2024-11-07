@@ -29,6 +29,7 @@ public class MeetingDateTest {
         assertFalse(MeetingDate.isValidMeetingDate(" ")); // spaces only
         assertFalse(MeetingDate.isValidMeetingDate("12-34-5678")); // invalid date components
         assertFalse(MeetingDate.isValidMeetingDate("31-02-2030")); // invalid date (Feb 31st)
+        assertFalse(MeetingDate.isValidMeetingDate("01-01-1999")); // invalid date (in the past)
         assertFalse(MeetingDate.isValidMeetingDate("01/01/2030")); // wrong format (slashes)
         assertFalse(MeetingDate.isValidMeetingDate("2030-01-01")); // wrong format (year first)
         assertFalse(MeetingDate.isValidMeetingDate("1-1-2030")); // incorrect format (single digits)
