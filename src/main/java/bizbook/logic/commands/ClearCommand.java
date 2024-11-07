@@ -9,8 +9,11 @@ import bizbook.model.Model;
  * Clears the address book.
  */
 public class ClearCommand extends Command {
-
     public static final String COMMAND_WORD = "clear";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes all contacts.\n"
+            + "Parameters: None\n"
+            + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
 

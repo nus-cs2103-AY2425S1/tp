@@ -9,6 +9,10 @@ import bizbook.model.Model;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Undoes the previous command that was executed.\n"
+            + "Parameters: None\n"
+            + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_UNDO_SUCCESS = "Changes has been reverted!";
     public static final String MESSAGE_UNDO_FAILURE = "Unable revert changes because "

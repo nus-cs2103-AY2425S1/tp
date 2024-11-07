@@ -5,9 +5,22 @@ import java.util.logging.Logger;
 import bizbook.commons.core.LogsCenter;
 import bizbook.logic.commands.AddCommand;
 import bizbook.logic.commands.AddNoteCommand;
+import bizbook.logic.commands.ClearCommand;
 import bizbook.logic.commands.DeleteCommand;
+import bizbook.logic.commands.DeleteNoteCommand;
+import bizbook.logic.commands.DeleteTagCommand;
 import bizbook.logic.commands.EditCommand;
+import bizbook.logic.commands.EditNoteCommand;
+import bizbook.logic.commands.ExitCommand;
+import bizbook.logic.commands.ExportCommand;
 import bizbook.logic.commands.FindCommand;
+import bizbook.logic.commands.HelpCommand;
+import bizbook.logic.commands.ListCommand;
+import bizbook.logic.commands.PinCommand;
+import bizbook.logic.commands.RedoCommand;
+import bizbook.logic.commands.ToggleCommand;
+import bizbook.logic.commands.UndoCommand;
+import bizbook.logic.commands.UnpinCommand;
 import bizbook.logic.commands.ViewCommand;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,19 +88,30 @@ public class CommandTablePanel extends UiPart<Region> {
 
     /**
      * Fills up the table with the commands.
-     *
-     * @param commandList list of commands to print.
      */
     private void populateData() {
         logger.fine("Showing a few command format of the application.");
         ObservableList<CommandEntry> commandList = FXCollections.observableArrayList(
-            // Add more commands here as needed
-            new CommandEntry(AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE),
-            new CommandEntry(AddNoteCommand.COMMAND_WORD, AddNoteCommand.MESSAGE_USAGE),
-            new CommandEntry(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
-            new CommandEntry(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
-            new CommandEntry(FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE),
-            new CommandEntry(ViewCommand.COMMAND_WORD, ViewCommand.MESSAGE_USAGE)
+                // Add more commands here as needed
+                new CommandEntry(AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE),
+                new CommandEntry(AddNoteCommand.COMMAND_WORD, AddNoteCommand.MESSAGE_USAGE),
+                new CommandEntry(ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_USAGE),
+                new CommandEntry(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
+                new CommandEntry(DeleteNoteCommand.COMMAND_WORD, DeleteNoteCommand.MESSAGE_USAGE),
+                new CommandEntry(DeleteTagCommand.COMMAND_WORD, DeleteTagCommand.MESSAGE_USAGE),
+                new CommandEntry(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
+                new CommandEntry(EditNoteCommand.COMMAND_WORD, EditNoteCommand.MESSAGE_USAGE),
+                new CommandEntry(ExitCommand.COMMAND_WORD, ExitCommand.MESSAGE_USAGE),
+                new CommandEntry(ExportCommand.COMMAND_WORD, ExportCommand.MESSAGE_USAGE),
+                new CommandEntry(FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE),
+                new CommandEntry(HelpCommand.COMMAND_WORD, HelpCommand.MESSAGE_USAGE),
+                new CommandEntry(ListCommand.COMMAND_WORD, ListCommand.MESSAGE_USAGE),
+                new CommandEntry(PinCommand.COMMAND_WORD, PinCommand.MESSAGE_USAGE),
+                new CommandEntry(RedoCommand.COMMAND_WORD, RedoCommand.MESSAGE_USAGE),
+                new CommandEntry(ToggleCommand.COMMAND_WORD, ToggleCommand.MESSAGE_USAGE),
+                new CommandEntry(UndoCommand.COMMAND_WORD, UndoCommand.MESSAGE_USAGE),
+                new CommandEntry(UnpinCommand.COMMAND_WORD, UnpinCommand.MESSAGE_USAGE),
+                new CommandEntry(ViewCommand.COMMAND_WORD, ViewCommand.MESSAGE_USAGE)
         );
         commandTable.setItems(commandList);
     }
