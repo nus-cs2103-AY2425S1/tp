@@ -713,7 +713,7 @@ Method 2:
 
 <a id="command-word-alias"></a>
 - **Command Word Alias**: A shorter version of a command word that can be used to perform the same action.
-- 
+
 <a id="cli-command-line-interface"></a>
 - **CLI (Command Line Interface)**: An interface where users type commands to interact with the application. CLI allows for quick and precise control, often preferred by users familiar with typing commands.
 
