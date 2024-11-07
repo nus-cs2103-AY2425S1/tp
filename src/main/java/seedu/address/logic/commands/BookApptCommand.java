@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.commandresult.CommandResult;
 import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
@@ -28,6 +29,7 @@ public class BookApptCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointments under a specified health service "
             + " for registered patients\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+    private static final Logger logger = Logger.getLogger(BookApptCommand.class.getName());
 
     private final Appt appt;
     private final Nric nric;
@@ -51,6 +53,7 @@ public class BookApptCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing BookApptCommand");
         List<Patient> lastShownList = model.getFilteredPatientList();
 
         // Find the patient with the given name
@@ -59,6 +62,7 @@ public class BookApptCommand extends Command {
             .findFirst();
 
         if (optionalPatient.isEmpty()) {
+            logger.warning(MESSAGE_PATIENT_NOT_FOUND);
             throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
         }
 
@@ -69,11 +73,13 @@ public class BookApptCommand extends Command {
             .anyMatch(appt -> appt.equals(this.appt));
 
         if (hasDuplicate) {
+            logger.warning("Duplicate appointment found");
             throw new CommandException(MESSAGE_DUPLICATE_APPT);
         }
 
         // Add the appointment to the patient's list of appointments
         patient.addAppt(this.appt);
+        logger.info("Appointment added successfully for patient: " + patient.getName());
 
         return new ShowPatientInfoCommandResult(generateSuccessMessage(patient), patient, true);
     }

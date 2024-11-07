@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -29,6 +30,8 @@ public class DeleteApptCommand extends Command {
     public static final String MESSAGE_DELETE_APPT_SUCCESS = "Deleted Appointment: %1$s\n"
             + "Input \"home\" to return to home page";
 
+    private static final Logger logger = Logger.getLogger(DeleteApptCommand.class.getName());
+
     private final LocalDateTime apptDateTime;
     private final Nric nric;
 
@@ -49,6 +52,7 @@ public class DeleteApptCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeleteApptCommand");
 
         List<Patient> lastShownList = model.getFilteredPatientList();
 
@@ -57,6 +61,7 @@ public class DeleteApptCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PATIENT_NRIC));
         if (patientToDeleteAppt == null) {
+            logger.warning("Patient not found");
             throw new CommandException(Messages.MESSAGE_PATIENT_NOT_FOUND);
         }
 
@@ -65,10 +70,12 @@ public class DeleteApptCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_APPT_DATETIME));
         if (apptToDelete == null) {
+            logger.warning("Appointment not found");
             throw new CommandException(Messages.MESSAGE_INVALID_APPT_DATETIME);
         }
 
         patientToDeleteAppt.deleteAppt(apptToDelete);
+        logger.info("Appointment deleted successfully");
 
         return new ShowPatientInfoCommandResult(String.format(MESSAGE_DELETE_APPT_SUCCESS, apptToDelete),
                 patientToDeleteAppt, true);

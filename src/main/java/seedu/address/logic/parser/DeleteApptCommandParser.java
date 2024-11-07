@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.DeleteApptCommand;
@@ -16,6 +17,7 @@ import seedu.address.model.patient.Nric;
  * @throws ParseException
  */
 public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
+    private static final Logger logger = Logger.getLogger(DeleteApptCommandParser.class.getName());
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteApptCommand
@@ -24,15 +26,19 @@ public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
      */
     public DeleteApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        logger.info("Parsing DeleteApptCommand");
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME)
                 || argMultimap.getPreamble().isEmpty()) {
+            logger.warning("Invalid command format");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteApptCommand.MESSAGE_USAGE));
         }
 
         LocalDateTime apptDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        logger.info("Parsing date and time");
         Nric nric = ParserUtil.parseNric(argMultimap.getPreamble());
+        logger.info("Parsing NRIC");
 
         return new DeleteApptCommand(nric, apptDateTime);
     }
