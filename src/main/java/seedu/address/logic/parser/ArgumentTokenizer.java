@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 
 /**
@@ -40,6 +43,9 @@ public class ArgumentTokenizer {
      */
     public static void checkPrefixPresentAndValidPrefix(String argsString, String messageUsage, Prefix... prefixes)
             throws ParseException {
+        if (argsString.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
+        }
         String[] splitArgs = argsString.split("\\|");
 
         checkPrefixesPresent(splitArgs, messageUsage);
