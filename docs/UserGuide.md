@@ -285,9 +285,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **List Logs**    | Lists logs for a specific person      | `logs i/NRIC`                                      | `logs i/S8613282F`                                                                            |
 | **Help**         | Displays help message                 | `help`                                             |                                                                                               |
 
----
-
-### Additional Notes:
+ #### Additional Notes
 
 * **Parameters**:
     - `n/NAME` - Full name of the person.
@@ -305,4 +303,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
     - **List** shows all persons in the address book.
     - **List Logs** shows all logs for a specific person based on their NRIC.
     - **Help** shows a guide for using all commands.
+
+---
 
