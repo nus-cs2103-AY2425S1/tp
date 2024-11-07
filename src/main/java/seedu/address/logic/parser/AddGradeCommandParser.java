@@ -15,6 +15,8 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new AddGradeCommand object
  */
 public class AddGradeCommandParser implements Parser<AddGradeCommand> {
+    public static final String EMPTY_NAME = "Assignment name cannot be empty.";
+    public static final String EMPTY_SCORE = "Score cannot be empty.";
 
     @Override
     public AddGradeCommand parse(String args) throws ParseException {
@@ -63,11 +65,11 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
      */
     private static void checkAssignmentString(String assignmentName, String scoreString) throws ParseException {
         if (assignmentName.isEmpty()) {
-            throw new ParseException("Assignment name cannot be empty.");
+            throw new ParseException(EMPTY_NAME);
         }
 
         if (scoreString.isEmpty()) {
-            throw new ParseException("Score cannot be empty.");
+            throw new ParseException(EMPTY_SCORE);
         }
     }
     /**
