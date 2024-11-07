@@ -183,13 +183,9 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+### \[Proposed Feature\] Data export to CSV
+* In the future, we can Load and Parse the current JSON Data into structured objects representing students, attendance or assignments
+* We can then export these objects into a CSV file for easy sharing and viewing
 
 
 --------------------------------------------------------------------------------------------------------------------
