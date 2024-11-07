@@ -21,7 +21,7 @@ public class ActivityTest {
 
         Activity activity = Activity.of(date, validActivity);
 
-        assertEquals("[2024-10-12] Completed task A", activity.toString());
+        assertEquals("Completed task A", activity.toString());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ActivityTest {
         Activity activity = Activity.of(date, validMessage);
 
         // Expect the activity to still be created, with the empty message
-        assertEquals("[2024-10-12] some history", activity.toString());
+        assertEquals("some history", activity.toString());
     }
 
     @Test
