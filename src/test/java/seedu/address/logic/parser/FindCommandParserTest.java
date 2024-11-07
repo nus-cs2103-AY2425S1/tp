@@ -23,7 +23,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidPrefix_throwsParseException() {
-        assertParseFailure(parser, " a/ dave", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, " c/ dave", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE));
     }
 
