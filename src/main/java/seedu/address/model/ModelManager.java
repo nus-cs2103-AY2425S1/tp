@@ -124,13 +124,17 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPersonList(PREDICATE_SHOW_CURRENT_PERSONS);
     }
 
     @Override
     public void addPerson(Person person, int index) {
         addressBook.addPerson(person, index);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        /*
+            Since this method is currently only used for undoing delete command,
+            the filtered person list does not need to be updated to show all current persons
+         */
     }
 
     @Override
@@ -221,6 +225,18 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return sortedPersons; // sortedPersons wraps filteredPersons and sorts it, so just return sorted version
+    }
+
+    @Override
+    public Predicate<? super Person> getFilteredPersonListPredicate() {
+        Predicate<? super Person> predicate = filteredPersons.getPredicate();
+
+        // predicate may be null, which means always true
+        if (predicate == null) {
+            return unused -> true;
+        }
+
+        return predicate;
     }
 
     @Override
