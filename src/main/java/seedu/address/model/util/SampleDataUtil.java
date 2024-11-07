@@ -36,15 +36,15 @@ public class SampleDataUtil {
             new Client(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Job("Accountant"),
                     new Income(BigInteger.valueOf(1200)), new Tier("BRONZE"), new Remark(""),
-                    new Status("")),
+                    new Status("NA")),
             new Client(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), new Job("Macs Burger Flipper"),
-                    new Income(BigInteger.valueOf(20)), new Tier("REJECT"), new Remark(""),
+                    new Income(BigInteger.valueOf(20)), new Tier("NA"), new Remark(""),
                     new Status("URGENT")),
             new Client(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), new Job("PowerPoint Master"),
                     new Income(BigInteger.valueOf(30)), new Tier("REJECT"), new Remark(""),
-                    new Status(""))
+                    new Status("NA"))
         };
     }
 
