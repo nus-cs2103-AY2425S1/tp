@@ -63,10 +63,9 @@ public class LogicManager implements Logic {
             if (!commandResult.hasPrompt()) {
                 model.clearSavedCommand();
             }
-
             storage.saveAddressBook(model.getAddressBook());
-
             return commandResult;
+
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -77,14 +76,14 @@ public class LogicManager implements Logic {
                 message = "\nCancelled command: " + model.getSavedCommand().toString();
                 model.clearSavedCommand();
             }
-            throw new CommandException(ce.getMessage() + message , ce);
+            throw new CommandException(ce.getMessage() + message, ce);
         } catch (ParseException pe) {
             String message = "";
             if (model.hasSavedCommand()) {
                 message = "\nCancelled command: " + model.getSavedCommand().toString();
                 model.clearSavedCommand();
             }
-            throw new ParseException(pe.getMessage() + message , pe);
+            throw new ParseException(pe.getMessage() + message, pe);
         }
     }
 

@@ -26,8 +26,8 @@ public class ConfirmPrompt extends Command {
 
         String resultString = MESSAGE_CONFIRM_PROMPT + "\n" + savedCommand;
 
-        return new CommandResult(resultString, false,
-                false, true, false, -1);
+        return new CommandResult(resultString, false, false, true, false,
+                -1, false, null, null, null);
     }
 
     @Override

@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.address.model.log.Log;
+import seedu.address.model.log.LogEntry;
 
 /**
  * A UI component that displays detailed information of a {@code Log}.
@@ -32,7 +33,7 @@ public class SessionLogDetail extends UiPart<Region> {
      */
     public void setLogDetails(Log log) {
         detailDate.setText("Appointment Date: " + log.getAppointmentDate().toString());
-        detailSessionEntry.setText(log.getEntry());
+        detailSessionEntry.setText(LogEntry.convertToFormattedString(log.getEntry()));
     }
 }
 
