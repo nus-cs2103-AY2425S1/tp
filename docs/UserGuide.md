@@ -295,7 +295,7 @@ Visual example of correct output (Remove Remark):
 
 Adds a property listing to the client specified by `INDEX`
 
-Format: `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`
+Format: `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`
 
 - Adds a property listing to the client specified by `INDEX`
 - The `INDEX` refers to the index number shown in the displayed client list.
@@ -407,23 +407,23 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                |
-|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action             | Format, Examples                                                                                                                                                            |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/buyer` |
-| **List**           | `list`                                                                                                                                                                          |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/client_TAG] [r/REMARK]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                         |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                       |
-| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                         |
-| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
-| **Clear**          | `clear`                                                                                                                                                                         |
-| **Exit**           | `exit`                                                                                                                                                                          |
-| **Help**           | `help`                                                                                                                                                                          |
-| **Remark**         | `remark INDEX r/[REMARKS]`<br> e.g., `remark 1 r/Prefers a higher floor apartment`, `remark 1 r/` (to delete the remark)                                                        |
-| **Show**           | `show INDEX`<br> e.g., `show 2`                                                                                                                                                 |
-| **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
-| **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                            |
-| **Export**         | `export`                                                                                                                                                                        |
-| **Sort**           | `sort`                                                                                                                                                                          |
+| **List**           | `list`                                                                                                                                                                      |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/client_TAG] [r/REMARK]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                     |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                   |
+| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                     |
+| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                         |
+| **Clear**          | `clear`                                                                                                                                                                     |
+| **Exit**           | `exit`                                                                                                                                                                      |
+| **Help**           | `help`                                                                                                                                                                      |
+| **Remark**         | `remark INDEX r/[REMARKS]`<br> e.g., `remark 1 r/Prefers a higher floor apartment`, `remark 1 r/` (to delete the remark)                                                    |
+| **Show**           | `show INDEX`<br> e.g., `show 2`                                                                                                                                             |
+| **Add Listing**    | `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
+| **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                        |
+| **Export**         | `export`                                                                                                                                                                    |
+| **Sort**           | `sort`                                                                                                                                                                      |
 
 --------------------------------------------------------------------------------------------------------------------
 

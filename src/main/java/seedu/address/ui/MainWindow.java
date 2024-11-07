@@ -227,7 +227,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private Optional<String> completeCommand(String commandText) {
         return logic.getCommandNames().stream()
-                .filter(cmdName -> cmdName.startsWith(commandText) && cmdName.length() > commandText.length())
+                .filter(cmdName -> cmdName.startsWith(commandText))
                 .findFirst();
     }
 }

@@ -1,7 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
-import java.util.Set;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -25,10 +25,10 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns an immutable set of commands registered and available.
-     * @return the unmodifiable set of commands
+     * Returns an immutable sorted list of commands registered and available.
+     * @return the list set of commands, sorted alphabetically
      */
-    Set<String> getCommandNames();
+    List<String> getCommandNames();
 
     /**
      * Returns the AddressBook.
