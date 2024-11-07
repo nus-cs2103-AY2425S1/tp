@@ -73,6 +73,9 @@ public class EmailTest {
         // same values -> returns true
         assertTrue(email.equals(new Email("valid@email")));
 
+        // different casing -> returns true
+        assertTrue(email.equals(new Email("vAlId@eMAIl")));
+
         // same object -> returns true
         assertTrue(email.equals(email));
 
