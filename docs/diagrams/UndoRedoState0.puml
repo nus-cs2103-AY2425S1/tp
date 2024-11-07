@@ -6,7 +6,7 @@ skinparam ClassBackgroundColor #FFFFAA
 
 title Initial state
 
-package States {
+package UndoStateList {
     class State1 as "<u>ab0:AddressBook</u>"
     class State2 as "<u>ab1:AddressBook</u>"
     class State3 as "<u>ab2:AddressBook</u>"
