@@ -47,8 +47,7 @@
 --------------------------------------------------------------------------------------------------------------------
 ## Callouts Convention
 
-This convention outlines the use of callout boxes in documentation to enhance readability and provide important contextual information.
-Each type of callout box serves a unique purpose, helping readers quickly identify and act on relevant content.
+The callout boxes below are used in documentation to enhance readability and provide important contextual information.
 
 <box type="info" seamless>
 **Info Box:** Provides additional information or context that is relevant to the content.
