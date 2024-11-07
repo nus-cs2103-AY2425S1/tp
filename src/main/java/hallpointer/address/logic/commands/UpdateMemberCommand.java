@@ -29,7 +29,7 @@ import hallpointer.address.model.session.Session;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Updates the details of an existing member in the CCA system.
+ * Updates the details of an existing member in the Hall Pointer.
  */
 public class UpdateMemberCommand extends Command {
 

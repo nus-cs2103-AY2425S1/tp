@@ -4,7 +4,7 @@ import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Member's name in the address book (not case-sensitive).
+ * Represents a Member's name in the hall pointer (not case-sensitive).
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

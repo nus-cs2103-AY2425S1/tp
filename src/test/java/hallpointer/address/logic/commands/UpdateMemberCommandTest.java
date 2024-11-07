@@ -118,7 +118,7 @@ public class UpdateMemberCommandTest {
     public void execute_duplicateMemberFilteredList_failure() {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
-        // update member in filtered list into a duplicate in address book
+        // update member in filtered list into a duplicate in hall pointer
         Member memberInList = model.getHallPointer().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
         UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER,
                 new UpdateMemberDescriptorBuilder(memberInList).build());
@@ -137,13 +137,13 @@ public class UpdateMemberCommandTest {
 
     /**
      * Update filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of hall pointer
      */
     @Test
     public void execute_invalidMemberIndexFilteredList_failure() {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
         Index outOfBoundIndex = INDEX_SECOND_MEMBER;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of hall pointer list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getHallPointer().getMemberList().size());
 
         UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(outOfBoundIndex,

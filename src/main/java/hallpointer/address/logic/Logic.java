@@ -34,7 +34,7 @@ public interface Logic {
     ObservableList<Member> getFilteredMemberList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' hall pointer file path.
      */
     Path getHallPointerFilePath();
 

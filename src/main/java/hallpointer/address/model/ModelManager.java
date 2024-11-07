@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the hall pointer data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyHallPointer hallPointer, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(hallPointer, userPrefs);
 
-        logger.fine("Initializing with address book: " + hallPointer + " and user prefs " + userPrefs);
+        logger.fine("Initializing with hall pointer: " + hallPointer + " and user prefs " + userPrefs);
 
         this.hallPointer = new HallPointer(hallPointer);
         this.userPrefs = new UserPrefs(userPrefs);
