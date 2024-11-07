@@ -152,16 +152,6 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     @Override
-    public boolean hasPhone(Person person) {
-        return getCurrentAddressBook().hasPhone(person);
-    }
-
-    @Override
-    public boolean hasEmail(Person person) {
-        return getCurrentAddressBook().hasEmail(person);
-    }
-
-    @Override
     public void addPerson(Person p) {
         getCurrentAddressBook().addPerson(p);
         syncPersonList();
