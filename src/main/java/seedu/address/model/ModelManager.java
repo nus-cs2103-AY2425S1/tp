@@ -119,6 +119,14 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Reverses the AddressBook to the next state.
+     */
+    @Override
+    public void redoAddressBook() throws CommandException {
+        versionedAddressBook.redoAddressBook();
+    }
+
+    /**
      * Discards the unsaved changes in the current state.
      */
     public void discardUnsavedChanges() {

@@ -68,12 +68,17 @@ public interface Model {
     /**
      * Saves the current AddressBook state in the history.
      */
-    public void commitAddressBook();
+    void commitAddressBook();
 
     /**
      * Reverts the AddressBook to the previous state.
      */
-    public void undoAddressBook() throws CommandException;
+    void undoAddressBook() throws CommandException;
+
+    /**
+     * Reverts the AddressBook to the next state.
+     */
+    void redoAddressBook() throws CommandException;
 
     /**
      * Gets the AddressBook in previous state at specific index for testing purpose.

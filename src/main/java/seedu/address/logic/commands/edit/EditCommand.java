@@ -187,19 +187,13 @@ public class EditCommand extends Command {
             changesDescription.append(EditModuleRoleOperation.getModuleCodeChangesDescription(
                     personBefore.getModuleRoleMap(), personAfter.getModuleRoleMap())).append("\n");
         }
-        if (!personBefore.getDescription().equals(personAfter.getDescription())) {
+        if (!personBefore.getDescriptionString().equals(personAfter.getDescriptionString())) {
             isChanged = true;
             changesDescription.append("Description: ")
-                .append(personBefore.getDescription()
-                    .filter(value -> !value.isBlank())
-                    .map(Objects::toString)
-                    .orElse("<no description>"))
-                .append(" -> ")
-                .append(personAfter.getDescription()
-                    .filter(value -> !value.isBlank())
-                    .map(Objects::toString)
-                    .orElse("<no description>"))
-                .append("\n");
+                    .append(personBefore.getDescriptionString())
+                    .append(" -> ")
+                    .append(personAfter.getDescriptionString())
+                    .append("\n");
         }
 
         return isChanged ? changesDescription.toString() : "No changes made.";
