@@ -11,11 +11,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -26,15 +32,93 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.WeddingBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    public static AddressBook getTypicalAddressBookForVieww() {
+        Wedding aliceWedding = new WeddingBuilder()
+                .withName("Alice Adam Wedding")
+                .withVenue("Marina Bay Sands")
+                .withDate("2024-12-12")
+                .build();
+
+        Wedding georgeWedding = new WeddingBuilder()
+                .withName("George Jane Wedding")
+                .withVenue("Sentosa")
+                .withDate("2025-01-01")
+                .build();
+
+        Person alice = new PersonBuilder()
+                .withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withEmail("alice@example.com")
+                .withPhone("94351253")
+                .withRole("florist")
+                .withOwnWedding(aliceWedding)
+                .build();
+
+        Person benson = new PersonBuilder()
+                .withName("Benson Meier")
+                .withAddress("311, Clementi Ave 2, #02-25")
+                .withEmail("johnd@example.com")
+                .withPhone("98756432")
+                .withRole("caterer")
+                .addWeddingJob(georgeWedding)
+                .build();
+
+        Person carl = new PersonBuilder()
+                .withName("Carl Kurz")
+                .withPhone("95352563")
+                .withEmail("heinz@example.com")
+                .withAddress("wall street")
+                .withRole("florist")
+                .addWeddingJob(georgeWedding)
+                .build();
+
+        Person carlJr = new PersonBuilder()
+                .withName("Carl Kurz Jr")
+                .withPhone("95352564")
+                .withEmail("heinzzz@example.com")
+                .withAddress("wall street")
+                .withRole("florist")
+                .addWeddingJob(georgeWedding)
+                .build();
+
+        Person george = new PersonBuilder()
+                .withName("George Best")
+                .withPhone("94824422")
+                .withEmail("anna@example.com")
+                .withAddress("4th street")
+                .withOwnWedding(georgeWedding)
+                .build();
+
+        ArrayList<Person> persons = new ArrayList<>(Arrays.asList(alice, benson, carl, george, carlJr));
+        ArrayList<Wedding> weddings = new ArrayList<>(Arrays.asList(aliceWedding, georgeWedding));
+        AddressBook addressBook = new AddressBook();
+        for (Person person : persons) {
+            addressBook.addPerson(person);
+        }
+        for (Wedding wedding : weddings) {
+            addressBook.addWedding(wedding);
+        }
+        return addressBook;
+    }
+
+    @BeforeEach
+    public void setUpEach() {
+        model = new ModelManager(getTypicalAddressBookForVieww(), new UserPrefs());
+        model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

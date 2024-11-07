@@ -26,6 +26,7 @@ import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
+import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -53,7 +54,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_PHONE = "This number already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
-    public static final String MESSAGE_EDIT_EMPTY_LIST_ERROR = "There is nothing to edit.";
+    public static final String MESSAGE_EDIT_EMPTY_LIST_ERROR = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to edit.\n"
                     + "Find the index from the list below and type edit INDEX ...\n"
@@ -87,10 +88,6 @@ public class EditCommand extends Command {
         }
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        Wedding ownWedding = editedPerson.getOwnWedding();
-        if (ownWedding != null) {
-            ownWedding.setClient(editedPerson);
-        }
 
         if (personToEdit.isSamePerson(editedPerson)) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -113,6 +110,14 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+        Wedding ownWedding = editedPerson.getOwnWedding();
+        if (ownWedding != null) {
+            Wedding editedWedding = new Wedding(ownWedding.getName(), new Client(editedPerson), ownWedding.getDate(),
+                    ownWedding.getVenue());
+            model.setWedding(ownWedding, editedWedding);
+            model.updatePersonEditedWedding(ownWedding, editedWedding);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }

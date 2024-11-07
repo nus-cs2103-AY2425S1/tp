@@ -1,38 +1,54 @@
 {
-  "persons": [
-    {
-      "name": "Alice Pauline",
-      "phone": "94351253",
-      "email": "alice@example.com",
-      "address": "123 Main St",
-      "role": "client",
-      "ownWedding": 1972025403,
-      "weddingJobs": []
+  "persons" : [ {
+    "name" : "alice",
+    "phone" : "90000002",
+    "email" : "fajk@gmai.com",
+    "address" : "fdjka",
+    "role" : null,
+    "ownWedding" : -1388822230,
+    "weddingJobs" : [ ]
+  }, {
+    "name" : "alice",
+    "phone" : "90000001",
+    "email" : "dfjk@gmai.com",
+    "address" : "fdjka",
+    "role" : null,
+    "ownWedding" : 0,
+    "weddingJobs" : [ -1388822230 ]
+  }, {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.cmo",
+    "address" : "123 Main St",
+    "role" : "client",
+    "ownWedding" : 261534306,
+    "weddingJobs" : [ ]
+  } ],
+  "weddings" : [ {
+    "name" : "new",
+    "client" : {
+      "name" : "alice",
+      "phone" : "90000002",
+      "email" : "fajk@gmai.com",
+      "address" : "fdjka",
+      "role" : null,
+      "ownWedding" : 0,
+      "weddingJobs" : [ ]
     },
-    {
-      "name": "Bob Worker",
-      "phone": "98765432",
-      "email": "bob@example.com",
-      "address": "456 Worker St",
-      "role": "vendor",
-      "ownWedding": 0,
-      "weddingJobs": [1972025403]
-    }
-  ],
-  "weddings": [
-    {
-      "name": "Alice Wedding",
-      "client": {
-        "name": "Alice Pauline",
-        "phone": "94351253",
-        "email": "alice@example.com",
-        "address": "123 Main St",
-        "role": "client",
-        "ownWedding": 0,
-        "weddingJobs": []
-      },
-      "date": "2024-12-25",
-      "venue": "Test Venue"
-    }
-  ]
+    "date" : null,
+    "venue" : null
+  }, {
+    "name" : "Alice Wedding",
+    "client" : {
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.cmo",
+      "address" : "123 Main St",
+      "role" : "client",
+      "ownWedding" : 0,
+      "weddingJobs" : [ ]
+    },
+    "date" : "2024-12-25",
+    "venue" : "Test Venue"
+  } ]
 }
