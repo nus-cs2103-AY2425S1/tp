@@ -367,7 +367,7 @@ public class HelpKeywordWindow extends UiPart<Stage> {
      */
     public static void closeAllWindows() {
         for (HelpKeywordWindow window : openHelpKeywordWindows.values()) {
-            window.getRoot().hide();
+            window.hide();
         }
         openHelpKeywordWindows.clear();
     }
