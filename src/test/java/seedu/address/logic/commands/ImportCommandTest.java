@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FILE_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.assertFileAccessCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertFileAccessCommandSuccess;
 import static seedu.address.logic.commands.ImportCommand.FILE_DATA_LOAD_ERROR_FORMAT;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -25,12 +26,13 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.Storage;
 
 public class ImportCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     private StorageStub storage = new StorageStub();
     private StorageStub expectedStorage = new StorageStub();
 
+    @Test
     public void execute_importValidFile_success() {
         ImportCommand importCommand = new ImportCommand(VALID_FILE_PATH);
         String expectedMessage = String.format(ImportCommand.MESSAGE_SUCCESS, VALID_FILE_PATH);
@@ -110,6 +112,11 @@ public class ImportCommandTest {
         @Override
         public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj instanceof StorageStub;
         }
     }
 }

@@ -195,4 +195,10 @@ public class ModelManager implements Model {
         ConcreteCommand command = undoStack.pop();
         return command.undo(this);
     }
+
+    @Override
+    public void clearUndoStack() {
+        assert undoStack != null;
+        undoStack.clear();
+    }
 }
