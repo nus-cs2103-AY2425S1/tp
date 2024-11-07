@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user is running Windows])
+    :Open JFileChooser Dialog;
+    :User chooses a file;
+        if () then ([valid png file])
+        :Store absolute file path
+        as a ProfilePicFilePath;
+        :Create new person
+        with updated path;
+        else ([else])
+        :Notify user of error;
+        endif
+else ([else])
+:Notify user that Mac and
+Linux is not supported;
+endif
+stop
+@enduml
