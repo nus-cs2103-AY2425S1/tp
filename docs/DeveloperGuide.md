@@ -486,18 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC10 - View contacts associated with a wedding**
-
-**MSS**
-
-1. Wedding planner requests to view contacts associated with a specific client.
-2. PlanPerfect shows the list of all contacts (e.g., vendors, clients) linked to that client's wedding.
-
-   Use case ends.
-
-<br/><br/>
-
-**Use case: UC11 - Filter contacts by tag**
+**Use case: UC10 - Filter contacts by tag**
 
 **MSS**
 
@@ -516,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC12 - View contacts of a specified wedding**
+**Use case: UC11 - View contacts of a specified wedding**
 
 **MSS**
 
