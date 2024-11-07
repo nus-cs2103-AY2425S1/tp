@@ -1,16 +1,22 @@
 package seedu.address.model.person;
-import java.util.List;import java.util.function.Predicate;
+import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import seedu.address.logic.commands.util.FieldQuery;import seedu.address.logic.commands.util.SearchField;
+
+import seedu.address.logic.commands.util.FieldQuery;
+import seedu.address.logic.commands.util.SearchField;
 import seedu.address.model.tag.Tag;
 /**
- * Predicate for search function. * Tests a person for whether they meet the search conditions represented by the keywords.
- */public class PersonSearchPredicate implements Predicate<Person> {
+ * Predicate for search function.
+ * Tests a person for whether they meet the search conditions represented by the keywords.
+ */
+public class PersonSearchPredicate implements Predicate<Person> {
     private final List<FieldQuery> fieldQueries;
     public PersonSearchPredicate(List<FieldQuery> fieldQueries) {
         this.fieldQueries = fieldQueries;
     }
-    @Override    public boolean test(Person person) {
+    @Override
+    public boolean test(Person person) {
         return fieldQueries.stream().allMatch(query -> matchesQuery(person, query));
     }
     private boolean matchesQuery(Person person, FieldQuery query) {
@@ -33,7 +39,8 @@ import seedu.address.model.tag.Tag;
         case LOCATION -> List.of(person.getAddress().value);
         case REMARK -> List.of(person.getRemark().value);
         case TAG -> person.getTags().stream().map(Tag::getTagName).toList();
-    };    }
+        };
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
