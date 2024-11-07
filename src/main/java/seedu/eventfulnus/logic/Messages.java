@@ -84,6 +84,74 @@ public class Messages {
 
             Input data is automatically saved when you exit EventfulNUS, and will be loaded the next time you run it.
 
+            To use EventfulNUS faster, you may find these shortcuts useful.
+
+            WARNING: For parsing of faculties / teams, only the shortcuts are accepted, not the full faculty names.
+            Faculties (Code - Faculty Name):
+            1. BIZ - Business
+            2. CDE - Design and Engineering
+            3. COM - Computing
+            4. DEN - Dentistry
+            5. FASS - Arts and Social Sciences
+            6. LAW - Law
+            7. MED - Medicine
+            8. NUSC - NUS College
+            9. SCI - Science
+            10. YNC - Yale-NUS College
+
+            INFO: For parsing of sports, both the shortcuts and full sport names are accepted.
+            Sports (Code - Sport Name):
+            1. BMT - Badminton
+            2. BBM - Basketball Men
+            3. BBW - Basketball Women
+            4. BDM - Bouldering Men
+            5. BDW - Bouldering Women
+            6. CHE - Chess
+            7. COB - Contact Bridge
+            8. DGB - Dodgeball
+            9. FBM - Floorball Men
+            10. FBW - Floorball Women
+            11. HBM - Handball Men
+            12. HBW - Handball Women
+            13. LOL - League of Legends
+            14. NET - Netball
+            15. REV - Reversi
+            16. SCM - Soccer Men
+            17. SCW - Soccer Women
+            18. SQH - Squash
+            19. SWM - Swimming Men
+            20. SMW - Swimming Women
+            21. TBT - Table Tennis
+            22. TCB - Tchoukball
+            23. TEN - Tennis
+            24. RUG - Touch Rugby
+            25. TKM - Track Men
+            26. TKW - Track Women
+            27. ULT - Ultimate Frisbee
+            28. VAL - Valorant
+            29. VBM - Volleyball Men
+            30. VBW - Volleyball Women
+
+            Branches of Committee Members (Code - Branch Name):
+            1. SPO - Sports
+            2. MKT - Marketing
+            3. PUB - Publicity
+
+            Positions of Committee Members (Code - Branch Name)
+            1. PD - Project Director
+            2. VPD - Vice Project Director
+            3. SD - Sports Director
+            4. VSD - Vice Sports Director
+            5. MEM - Member
+
+            Volunteer Roles (Code - Role Name):
+            1. PHOTO - Photographer
+            2. MC - Emcee
+            3. USH - Usher
+            4. LOG - Logistics
+            5. FA - First Aid
+            6. BMA - Booth Manner
+
             Find out more about using EventfulNUS on our User Guide at:
             https://ay2425s1-cs2103t-w14-4.github.io/tp/UserGuide.html"
             Press the 'Copy URL' button to copy the link to your clipboard.""";

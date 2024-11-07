@@ -141,36 +141,36 @@ public class ParserUtil {
      */
     public static Sport parseSport(String sport) throws ParseException {
         return switch(sport.toUpperCase()) {
-        case "BADMINTON" -> Sport.BADMINTON;
-        case "BASKETBALL MEN" -> Sport.BASKETBALL_M;
-        case "BASKETBALL WOMEN" -> Sport.BASKETBALL_W;
-        case "BOULDERING MEN" -> Sport.BOULDERING_M;
-        case "BOULDERING WOMEN" -> Sport.BOULDERING_W;
-        case "CHESS" -> Sport.CHESS;
-        case "CONTACT BRIDGE" -> Sport.CONTACT_BRIDGE;
-        case "DODGEBALL" -> Sport.DODGEBALL;
-        case "FLOORBALL MEN" -> Sport.FLOORBALL_M;
-        case "FLOORBALL WOMEN" -> Sport.FLOORBALL_W;
-        case "HANDBALL MEN" -> Sport.HANDBALL_M;
-        case "HANDBALL WOMEN" -> Sport.HANDBALL_W;
-        case "LEAGUE OF LEGENDS" -> Sport.LEAGUE_OF_LEGENDS;
-        case "NETBALL" -> Sport.NETBALL;
-        case "REVERSI" -> Sport.REVERSI;
-        case "SOCCER MEN" -> Sport.SOCCER_M;
-        case "SOCCER WOMEN" -> Sport.SOCCER_W;
-        case "SQUASH" -> Sport.SQUASH;
-        case "SWIMMING MEN" -> Sport.SWIMMING_M;
-        case "SWIMMING WOMEN" -> Sport.SWIMMING_W;
-        case "TABLE TENNIS" -> Sport.TABLE_TENNIS;
-        case "TCHOUKBALL" -> Sport.TCHOUKBALL;
-        case "TENNIS" -> Sport.TENNIS;
-        case "TOUCH RUGBY" -> Sport.TOUCH_RUGBY;
-        case "TRACK MEN" -> Sport.TRACK_M;
-        case "TRACK WOMEN" -> Sport.TRACK_W;
-        case "ULTIMATE FRISBEE" -> Sport.ULTIMATE_FRISBEE;
-        case "VALORANT" -> Sport.VALORANT;
-        case "VOLLEYBALL MEN" -> Sport.VOLLEYBALL_M;
-        case "VOLLEYBALL WOMEN" -> Sport.VOLLEYBALL_W;
+        case "BMT", "BADMINTON" -> Sport.BADMINTON;
+        case "BBM", "BASKETBALL MEN" -> Sport.BASKETBALL_M;
+        case "BBW", "BASKETBALL WOMEN" -> Sport.BASKETBALL_W;
+        case "BDM", "BOULDERING MEN" -> Sport.BOULDERING_M;
+        case "BDW", "BOULDERING WOMEN" -> Sport.BOULDERING_W;
+        case "CHE", "CHESS" -> Sport.CHESS;
+        case "COB", "BRIDGE", "CONTACT BRIDGE" -> Sport.CONTACT_BRIDGE;
+        case "DGB", "DODGEBALL" -> Sport.DODGEBALL;
+        case "FBM", "FLOORBALL MEN" -> Sport.FLOORBALL_M;
+        case "FBW", "FLOORBALL WOMEN" -> Sport.FLOORBALL_W;
+        case "HBM", "HANDBALL MEN" -> Sport.HANDBALL_M;
+        case "HBW", "HANDBALL WOMEN" -> Sport.HANDBALL_W;
+        case "LOL", "LEAGUE", "LEAGUE OF LEGENDS" -> Sport.LEAGUE_OF_LEGENDS;
+        case "NET", "NETBALL" -> Sport.NETBALL;
+        case "REV", "REVERSI" -> Sport.REVERSI;
+        case "SCM", "SOCCER MEN" -> Sport.SOCCER_M;
+        case "SCW", "SOCCER WOMEN" -> Sport.SOCCER_W;
+        case "SQH", "SQUASH" -> Sport.SQUASH;
+        case "SWM", "SWIMMING MEN" -> Sport.SWIMMING_M;
+        case "SMW", "SWIMMING WOMEN" -> Sport.SWIMMING_W;
+        case "TBT", "TABLE TENNIS" -> Sport.TABLE_TENNIS;
+        case "TCB", "TCHOUK", "TCHOUKBALL" -> Sport.TCHOUKBALL;
+        case "TEN", "TENNIS" -> Sport.TENNIS;
+        case "RUG", "RUGBY", "TOUCH RUGBY" -> Sport.TOUCH_RUGBY;
+        case "TKM", "TRACK MEN" -> Sport.TRACK_M;
+        case "TKW", "TRACK WOMEN" -> Sport.TRACK_W;
+        case "ULT", "ULTIMATE FRISBEE" -> Sport.ULTIMATE_FRISBEE;
+        case "VAL", "VALORANT" -> Sport.VALORANT;
+        case "VBM", "VOLLEYBALL MEN" -> Sport.VOLLEYBALL_M;
+        case "VBW", "VOLLEYBALL WOMEN" -> Sport.VOLLEYBALL_W;
         default -> throw new ParseException("Invalid sport: " + sport);
         };
     }
@@ -183,9 +183,9 @@ public class ParserUtil {
      */
     public static Branch parseBranch(String branch) throws ParseException {
         return switch (branch.toUpperCase()) {
-        case "MARKETING" -> Branch.MARKETING;
-        case "PUBLICITY" -> Branch.PUBLICITY;
-        case "SPORTS" -> Branch.SPORTS;
+        case "MKT", "MARKETING" -> Branch.MARKETING;
+        case "PUB", "PUBS", "PUBLICITY" -> Branch.PUBLICITY;
+        case "SPO", "SPORTS" -> Branch.SPORTS;
         default -> throw new ParseException("Unexpected branch: " + branch);
         };
     }
@@ -198,11 +198,11 @@ public class ParserUtil {
      */
     public static Position parsePosition(String position) throws ParseException {
         return switch (position.toUpperCase()) {
-        case "PROJECT DIRECTOR" -> Position.PROJECT_DIRECTOR;
-        case "VICE PROJECT DIRECTOR" -> Position.VICE_PROJECT_DIRECTOR;
-        case "SPORTS DIRECTOR" -> Position.SPORTS_DIRECTOR;
-        case "VICE SPORTS DIRECTOR" -> Position.VICE_SPORTS_DIRECTOR;
-        case "MEMBER" -> Position.MEMBER;
+        case "PD", "PROJECT DIRECTOR" -> Position.PROJECT_DIRECTOR;
+        case "VPD", "VICE PROJECT DIRECTOR" -> Position.VICE_PROJECT_DIRECTOR;
+        case "SD", "SPORTS DIRECTOR" -> Position.SPORTS_DIRECTOR;
+        case "VSD", "VICE SPORTS DIRECTOR" -> Position.VICE_SPORTS_DIRECTOR;
+        case "MEM", "MEMBER" -> Position.MEMBER;
         default -> throw new ParseException("Unexpected position: " + position);
         };
     }
@@ -215,12 +215,12 @@ public class ParserUtil {
      */
     public static VolunteerRole parseVolunteer(String volunteer) throws ParseException {
         return switch(volunteer.toUpperCase()) {
-        case "PHOTOGRAPHER" -> VolunteerRole.PHOTOGRAPHER;
-        case "EMCEE" -> VolunteerRole.EMCEE;
-        case "USHER" -> VolunteerRole.USHER;
-        case "LOGISTICS" -> VolunteerRole.LOGISTICS;
-        case "FIRST AID" -> VolunteerRole.FIRST_AID;
-        case "BOOTH MANNER" -> VolunteerRole.BOOTH_MANNER;
+        case "PHOTO", "PHOTOG", "PHOTOGRAPHY", "PHOTOGRAPHER" -> VolunteerRole.PHOTOGRAPHER;
+        case "MC", "EMCEE" -> VolunteerRole.EMCEE;
+        case "USH", "USHER" -> VolunteerRole.USHER;
+        case "LOG", "LOGS", "LOGISTICS" -> VolunteerRole.LOGISTICS;
+        case "FA", "1A", "FIRST AID" -> VolunteerRole.FIRST_AID;
+        case "BMA", "MANNER", "BOOTH MANNER" -> VolunteerRole.BOOTH_MANNER;
         default -> throw new ParseException("Unexpected volunteer role: " + volunteer);
         };
     }
@@ -240,12 +240,12 @@ public class ParserUtil {
         String[] tagSplit = trimmedRole.split("-");
         String roleType = tagSplit[0];
         return switch (roleType.toLowerCase()) {
-        case "athlete", "referee" -> {
+        case "ath", "ref", "athlete", "referee" -> {
             Faculty faculty = parseFaculty(tagSplit[1]);
             List<Sport> sports = Arrays.stream(tagSplit[2].split(", ")).map(ParserUtil::parseSport).toList();
             yield new Athlete(faculty, sports);
         }
-        case "committee" -> {
+        case "comm", "committee" -> {
             Branch branch = parseBranch(tagSplit[1]);
             Position position = parsePosition(tagSplit[2]);
             if (branch.equals(Branch.SPORTS) && !tagSplit[3].isEmpty()) {
@@ -254,8 +254,8 @@ public class ParserUtil {
             }
             yield new CommitteeMember(branch, position);
         }
-        case "sponsor" -> new Sponsor(tagSplit[1]);
-        case "volunteer" -> {
+        case "spon", "sponsor" -> new Sponsor(tagSplit[1]);
+        case "vol", "volunteer" -> {
             VolunteerRole volunteerRole = parseVolunteer(tagSplit[1]);
             yield new Volunteer(volunteerRole);
         }
