@@ -555,7 +555,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar socialbook.jar` command to run the application. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
@@ -609,8 +609,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Existing data is not affected.
 
-1. _{ more test cases …​ }_
+   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Existing data is not affected.
+
+   3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only).
+
+   4. Delete `data/` or `data/socialbook.json`. Expected:  New `data/socialbook.json` created. App starts on clean slate (i.e. with sample data only).
+
+2. Dealing with corrupted data files
+
+   1. Add `"p"` to a `"phone"` field in data file. Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contacts still exist in the contact list.
+
+   2. Add a new field `"newField" : "newField"` to a person. Expected: The person with the new field is lost. The rest of the contacts still exist in the contact list.
+
+   3. Remove `"remark"` field from a person. Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
+
+   4. Add a `","` to the `"remark"` field of a person. Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
