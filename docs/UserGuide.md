@@ -91,9 +91,9 @@ Shows a message explaning how to access the help page.
 Format: `help [COMMAND_NAME]`
 * Displays a small window showing more information
 * Command name is optional as typing help alone will display the commands and their usages
-* Typing command name will display the usages, parameter information and examples 
+* Typing command name will display the usages, parameter information and examples
 
-Examples: 
+Examples:
 * `help`
 * `help addf`
 
@@ -124,7 +124,7 @@ For more information on each individual parameter click here
 
 Adds a new patient record into the system with additional information.
 
-Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NO [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE] 
+Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NO [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE]
 [nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]…​ [rl/RISK_LEVEL] [ec/EXISTING_CONDITIONS] [no/NOTES]`
 
 <div markdown="block" class="alert alert-info">
@@ -281,7 +281,7 @@ Filters existing patient records based on the specified parameters.
 
 Format: `filter [sd/START DATE] ed/END DATE [h/HEALTH SERVICE]`
 
-Start date and health service parameters are optional. 
+Start date and health service parameters are optional.
 End date parameter is compulsory.
 
 When all parameters are specified, it returns all appointments from start-date to end-date which matches the specified health service.
@@ -299,7 +299,7 @@ To retrieve appointments on a single date e.g. 2024/10/20, the user can input th
 </box>
 
 Examples:
-*  `filter sd/2012-10-01 ed/2012-11-01 h/blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012. 
+*  `filter sd/2012-10-01 ed/2012-11-01 h/blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012.
 *  `filter ed/2024-12-12 h/vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
 *  `filter sd/2012-10-01 ed/2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
 
@@ -346,7 +346,7 @@ Format: `delete NRIC`
 
 * Deletes the patient at the specified `NRIC`.
 * The NRIC refers to the nric of the patient shown in the displayed patient list.
-* The NRIC **must be a valid NRIC number present in the system** 
+* The NRIC **must be a valid NRIC number present in the system**
 
 ### Clearing all entries : `clear`
 

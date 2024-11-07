@@ -82,7 +82,7 @@ import seedu.address.testutil.EditPatientDescriptorBuilder;
 
 
 public class EditCommandParserTest {
-
+  
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 

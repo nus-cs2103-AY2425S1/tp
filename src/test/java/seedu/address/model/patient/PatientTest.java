@@ -16,12 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PatientBuilder;
 
 public class PatientTest {
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Patient patient = new PatientBuilder().build();
-    }
-
     @Test
     public void isSamePatient() {
         // same object -> returns true
