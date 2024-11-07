@@ -5,9 +5,13 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.image.Image?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
     <scene>
-        <Scene stylesheets="@PieChart.css">
+        <Scene stylesheets="@PieChartWindow.css">
             <HBox HBox.hgrow = "ALWAYS" style="-fx-alignment: center; -fx-padding: 10px;">
                 <PieChart fx:id="piChart" prefHeight="600.0" prefWidth="800.0" />
             </HBox>

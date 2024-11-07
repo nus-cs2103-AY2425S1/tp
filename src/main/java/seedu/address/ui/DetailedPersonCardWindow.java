@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,8 +26,16 @@ public class DetailedPersonCardWindow extends UiPart<Stage> {
     @FXML
     private FlowPane tags;
 
+    /**
+     * Creates a {@code DetailedPersonCardWindow}.
+     */
     public DetailedPersonCardWindow(Stage root) {
         super(FXML, root);
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                root.close();
+            }
+        });
     }
 
     public DetailedPersonCardWindow() {

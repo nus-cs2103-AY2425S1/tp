@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_INDEX_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -40,8 +42,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_FEES, PREFIX_CLASSID, PREFIX_MONTHPAID, PREFIX_TAG);
 
-        if (argMultimap.getPreamble().isEmpty() || !ParserUtil.isValidIndex(argMultimap.getPreamble())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(getEmptyPreambleErrorString());
         }
 
         // check index
@@ -49,7 +51,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(getInvalidIndexErrorString(), pe);
         }
 
         // check for duplicate prefixes for prefixes that should have no duplicates
@@ -84,7 +86,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // throw error if no fields are edited
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(getNoFieldsProvidedErrorString());
         }
 
         return new EditCommand(index, editPersonDescriptor);
@@ -117,6 +119,29 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Returns the error string associated with invalid index.
+     */
+    public static String getInvalidIndexErrorString() {
+        return String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
+
+    /**
+     * Returns the error string associated with no index.
+     */
+    public static String getEmptyPreambleErrorString() {
+        return String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                String.format(MESSAGE_EMPTY_INDEX_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
+
+    /**
+     * Returns the error string associated with no fields to edit provided.
+     */
+    public static String getNoFieldsProvidedErrorString() {
+        return String.format(String.format(EditCommand.MESSAGE_NOT_EDITED_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 }
 
