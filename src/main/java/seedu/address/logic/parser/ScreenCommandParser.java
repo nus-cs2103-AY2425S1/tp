@@ -31,7 +31,7 @@ public class ScreenCommandParser implements Parser<ScreenCommand> {
             return new ScreenJobCommand(index);
         default:
             String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
-                    AddCommand.COMMAND_WORD, entity);
+                    ScreenCommand.COMMAND_WORD, entity);
             throw new ParseException(exceptionMessage);
         }
     }
