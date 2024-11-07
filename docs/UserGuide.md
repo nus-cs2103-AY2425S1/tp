@@ -36,7 +36,6 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
-
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
@@ -126,7 +125,6 @@ Format: `list -a`
 Adds a supplier to the address book.
 
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
-
 <box type="tip" seamless>
 
 **Tip:** A supplier can have any number of tags and products (including 0)
@@ -137,7 +135,7 @@ Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]�
 **Warnings**:
 - At least on space between `add` and `-s` is compulsory
 - Duplicate supplier will not be added again
-    - A supplier is considered duplicate if they have the same NAME and COMPANY
+- A supplier is considered duplicate if they have the same NAME and COMPANY
 </box>
 
 Examples:
@@ -283,6 +281,7 @@ Parameters:
 
 **Warnings**:
 - A spacing between `add` and `-d` is compulsory
+- A delivery is considered duplicate if they have the same DATE, TIME, SUPPLIER, PRODUCT and COST
 - Duplicate delivery will not be added again
 - No duplicate prefix can be used
 - Units for QUANTITY is case-sensitive
@@ -318,14 +317,13 @@ Parameters:
 
 - `INDEX`: Must be a number greater than 0 and must not be blank.
 - `STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
-
 <box type="tip" seamless>
 
 **Warnings**:
 - A spacing between `mark` and `-d` is compulsory
 - Both parameters must be given
 - Parameters used are case-insensitive
-  </box>
+</box>
 
 
 Examples:
@@ -344,13 +342,12 @@ Format: `delete -d INDEX`
 Parameters:
 
 - `INDEX`: Must be a number greater than 0 and must not be blank.
-
 <box type="tip" seamless>
 
 **Warnings**:
 - A spacing between `delete` and `-d` is compulsory
 - No duplicate prefix can be used
-  </box>
+</box>
 
 Examples:
 * `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
@@ -371,7 +368,6 @@ Parameters:
 - `stat/STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
 - `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
 - `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
-
 <box type="tip" seamless>
 
 **Warnings**:
@@ -380,7 +376,7 @@ Parameters:
 - No duplicate prefix can be used
 - Find result(s) will contain/satisfy all the given parameters
 - Parameters used are case-insensitive
-  </box>
+</box>
 
 
 #### Example
@@ -402,7 +398,6 @@ Parameters:
 
 - SORT_ORDER: Must be either 'a' for ascending or 'd' for descending, and must not be blank.
 - SORT_BY_FIELD: Must be either 'c' for cost, 'd' for date or 's' for status, and must not be blank.
-
 <box type="tip" seamless>
 
 **Warnings**:
@@ -410,7 +405,6 @@ Parameters:
 - All prefixes and parameters must be given
 - No duplicate prefix can be used
 - Parameters used are **case-sensitive**
-
 </box>
 
 #### Example
@@ -434,9 +428,7 @@ Parameters:
 
 - `aft/START_DATE`: Must be in dd-mm-yyyy hh:mm format.
 - `bef/END_DATE`: Must be in dd-mm-yyyy hh:mm format.
-
 <box type="tip" seamless>
-
 **Tip:** You can provide both START_DATE and END_DATE!
 
 **Warnings**:
@@ -468,14 +460,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 ### Editing the data file
 
 AddressBook automatically saves your data as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
 <box type="warning" seamless>
 
 **Caution:**
 - **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
 - Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-
-- </box>
+</box>
 
 ---
 

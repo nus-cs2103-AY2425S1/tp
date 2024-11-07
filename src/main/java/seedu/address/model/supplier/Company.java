@@ -1,6 +1,7 @@
 package seedu.address.model.supplier;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Supplier's company in the address book.
@@ -25,6 +26,7 @@ public class Company {
      */
     public Company(String company) {
         requireNonNull(company);
+        checkArgument(isValidCompany(company), MESSAGE_CONSTRAINTS);
         company = normalizeCompanyName(company);
         this.value = company;
     }

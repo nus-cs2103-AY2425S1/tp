@@ -19,7 +19,7 @@ public class DeliveryBuilder {
     public static final String DEFAULT_QUANTITY = "200 units";
 
     private Product product;
-    private Supplier sender; // CHANGE TO SUPPLIER LATER ON
+    private Supplier sender;
     private Status status;
     private DateTime deliveryDateTime;
     private Cost cost;

@@ -21,6 +21,9 @@ public class SupplierStatus {
         this.status = status.trim();
     }
 
+    /**
+     * Returns true if a given string is a valid supplier status.
+     */
     public static boolean isValidStatus(String test) {
         return test.matches(VALIDATION_REGEX);
     }

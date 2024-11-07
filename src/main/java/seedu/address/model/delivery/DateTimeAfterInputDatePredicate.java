@@ -10,6 +10,11 @@ import seedu.address.commons.util.ToStringBuilder;
 public class DateTimeAfterInputDatePredicate implements Predicate<Delivery> {
     private final DateTime completionDateTime;
 
+    /**
+     * Constructs a {@code DateTimeAfterInputDatePredicate}.
+     *
+     * @param completionDateTime The completion date to compare against.
+     */
     public DateTimeAfterInputDatePredicate(DateTime completionDateTime) {
         this.completionDateTime = completionDateTime;
     }

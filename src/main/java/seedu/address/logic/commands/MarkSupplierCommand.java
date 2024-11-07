@@ -14,10 +14,7 @@ import seedu.address.model.supplier.SupplierStatus;
 /**
  * Marks a supplier as active or inactive in the address book.
  */
-public class MarkSupplierCommand extends Command {
-
-    public static final String COMMAND_WORD = "mark";
-
+public class MarkSupplierCommand extends MarkCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_SUPPLIER + " "
             + ": Marks the status of the supplier identified by the index number used in the displayed supplier list.\n"
             + "Parameters: INDEX (must be a positive integer) STATUS (active, inactive)\n"

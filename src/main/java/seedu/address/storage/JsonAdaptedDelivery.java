@@ -19,7 +19,7 @@ public class JsonAdaptedDelivery {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Delivery's %s field is missing!";
     private final String product;
-    private final JsonAdaptedSupplier sender; // CHANGE TO SUPPLIER LATER ON
+    private final JsonAdaptedSupplier sender;
     private final String status;
     private final String deliveryTime;
     private final String cost;
