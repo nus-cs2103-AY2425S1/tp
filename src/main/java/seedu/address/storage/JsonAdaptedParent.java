@@ -3,7 +3,6 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -30,8 +29,9 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedParent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("childrensNames") List<String> childrensNames, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArchived") boolean isArchived) {
+            @JsonProperty("childrensNames") List<String> childrensNames,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned,
+            @JsonProperty("isArchived") boolean isArchived) {
         super("Parent", name, phone, email, address, tags, isPinned, isArchived);
         this.childrensNames = childrensNames;
     }

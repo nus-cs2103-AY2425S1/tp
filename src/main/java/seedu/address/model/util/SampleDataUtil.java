@@ -33,12 +33,11 @@ public class SampleDataUtil {
                     new Address("Blk 30 Geylang Street 29, #06-40"), DEFAULT_EDUCATION, EMPTY_GRADE,
                     new Name("Bernice Yu"), getTagSet("hyperactive")),
             new Parent(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new HashSet<>(
-                    List.of(new Name("Alex Yeoh"))),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getNameSet("Alex Yeoh"),
                     getTagSet()),
             new Parent(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new HashSet<>(List.of(new Name("Charlotte Li"))), getTagSet()),
+                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getNameSet("Charlotte Li"),
+                    getTagSet()),
             new Student(new Name("Charlotte Li"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), DEFAULT_EDUCATION, EMPTY_GRADE,
                     new Name("David Li"), getTagSet("ambitious")),
@@ -64,6 +63,12 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<Name> getNameSet(String... names) {
+        return Arrays.stream(names)
+                .map(Name::new)
                 .collect(Collectors.toSet());
     }
 

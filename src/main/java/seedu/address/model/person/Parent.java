@@ -27,7 +27,7 @@ public class Parent extends Person {
     /**
      * Constructs a {@code Parent} with the given details.
      */
-    public Parent(Name name, Phone phone, Email email, Address address,  Set<Name> childrensNames, Set<Tag> tags,
+    public Parent(Name name, Phone phone, Email email, Address address, Set<Name> childrensNames, Set<Tag> tags,
             boolean isPinned, boolean isArchived) {
         super(name, phone, email, address, tags, isPinned, isArchived);
         this.childrensNames = childrensNames;

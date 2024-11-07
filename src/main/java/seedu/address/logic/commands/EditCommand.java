@@ -117,7 +117,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(parentToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(parentToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(parentToEdit.getTags());
-        Set<Name> updatedChildrensNames = parentToEdit.getChildrensNames(); // edit command does not allow editing child name
+        Set<Name> updatedChildrensNames = parentToEdit.getChildrensNames(); // command does not allow editing child name
 
         return new Parent(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedChildrensNames, updatedTags);
     }
