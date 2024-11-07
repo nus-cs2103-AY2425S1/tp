@@ -28,12 +28,12 @@ public class ListProjectsCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListProjectsCommand(), model, ListProjectsCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListProjectsCommand(), model, ListProjectsCommand.feedbackToUser, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showProjectAtIndex(model, INDEX_FIRST_PROJECT);
-        assertCommandSuccess(new ListProjectsCommand(), model, ListProjectsCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListProjectsCommand(), model, ListProjectsCommand.feedbackToUser, expectedModel);
     }
 }
