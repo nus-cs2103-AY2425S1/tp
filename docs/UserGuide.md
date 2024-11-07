@@ -198,13 +198,12 @@ Tip: Support search prefixes include:
 * `ROLE`: r/
 
 Examples: <br>
-1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role` donor `group`: blood drive<br>
+1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role`: donor `group`: blood drive<br>
 2. **Person B:** `name`: Alex Yeoh `tag`: friends `phone number`: 91234567 `role`: volunteer <br>
 3. **Person C:** `name`: David Li `tag`: friends `phone number`: 81234123 `role`: person `group`: blood drive
 * `search n/john` returns persons with the name `john` like `John Doe`
 * `search g/blood drive` returns all persons in group `blood drive` like `John Doe` and `David Li`
 * `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
-    ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
