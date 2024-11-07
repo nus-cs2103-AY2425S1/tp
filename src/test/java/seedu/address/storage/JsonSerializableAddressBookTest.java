@@ -38,18 +38,26 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidPersonFile_ignoresInvalidPerson() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+
+        AddressBook expectedAddressBook = new AddressBook();
+        expectedAddressBook.addPerson(new PersonBuilder(ALICE).build());
+        assertEquals(expectedAddressBook.getPersonList(), addressBookFromFile.getPersonList());
     }
 
     @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    public void toModelType_duplicatePersons_ignoresDuplicatePersons() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
-                dataFromFile::toModelType);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+
+        AddressBook expectedAddressBook = new AddressBook();
+        expectedAddressBook.addPerson(new PersonBuilder(ALICE).build());
+        expectedAddressBook.addPerson(new PersonBuilder(BENSON).build());
+        assertEquals(expectedAddressBook.getPersonList(), addressBookFromFile.getPersonList());
     }
 
     @Test
@@ -70,10 +78,15 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_invalidTaskFile_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidTaskFile_ignoresInvalidTask() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_TASK_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+
+        AddressBook expectedAddressBook = new AddressBook();
+        expectedAddressBook.addTask(new Task(new PersonBuilder(ALICE).build(), "Buy medication",
+                true));
+        assertEquals(expectedAddressBook.getTaskList(), addressBookFromFile.getTaskList());
     }
 
     @Test
