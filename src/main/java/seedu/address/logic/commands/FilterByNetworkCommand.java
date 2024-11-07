@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -55,24 +56,32 @@ public class FilterByNetworkCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         List<Person> personsWithSpecifiedNetwork = lastShownList.stream()
-                .filter(person -> person.getPublicAddressesComposition().getPublicAddresses()
-                        .containsKey(specifiedNetwork))
+                .map(person -> person.getPublicAddressesComposition().getPublicAddresses().containsKey(specifiedNetwork)
+                        ? person
+                        : null)
                 .toList();
 
-        if (personsWithSpecifiedNetwork.isEmpty()) {
+        int numOfPersonWithSpecifiedNetwork = personsWithSpecifiedNetwork.stream()
+                .filter(Objects::nonNull)
+                .toList()
+                .size();
+
+        if (personsWithSpecifiedNetwork.stream().allMatch(Objects::isNull)) {
             throw new CommandException(String.format(MESSAGE_FILTER_FAIL, this.specifiedNetwork));
         }
 
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < personsWithSpecifiedNetwork.size(); i++) {
             Person person = personsWithSpecifiedNetwork.get(i);
-            String newPerson = (i + 1) + ". " + person.getName() + "\n";
-            result.append(newPerson);
+            if (person != null) {
+                String newPerson = (i + 1) + ". " + person.getName() + "\n";
+                result.append(newPerson);
+            }
         }
         String personsListString = result.toString().trim();
 
         return new CommandResult(String.format(MESSAGE_FILTER_SUCCESS,
-                personsWithSpecifiedNetwork.size(),
+                numOfPersonWithSpecifiedNetwork,
                 this.specifiedNetwork,
                 personsListString));
     }
