@@ -19,8 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NOT_IN_MAIN_LIST =
-            "This command can only be used in the main client list!\n"
-            + "Use command list to navigate back to the main client list first";
+                "This command can only be used in the main client list!\n"
+                + "Use the 'list' command to navigate back to the main client list first";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
