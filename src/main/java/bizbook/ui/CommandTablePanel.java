@@ -8,6 +8,7 @@ import bizbook.logic.commands.AddNoteCommand;
 import bizbook.logic.commands.ClearCommand;
 import bizbook.logic.commands.DeleteCommand;
 import bizbook.logic.commands.DeleteNoteCommand;
+import bizbook.logic.commands.DeleteTagCommand;
 import bizbook.logic.commands.EditCommand;
 import bizbook.logic.commands.EditNoteCommand;
 import bizbook.logic.commands.ExitCommand;
@@ -17,6 +18,7 @@ import bizbook.logic.commands.HelpCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
 import bizbook.logic.commands.RedoCommand;
+import bizbook.logic.commands.ToggleCommand;
 import bizbook.logic.commands.UndoCommand;
 import bizbook.logic.commands.UnpinCommand;
 import bizbook.logic.commands.ViewCommand;
@@ -96,6 +98,7 @@ public class CommandTablePanel extends UiPart<Region> {
                 new CommandEntry(ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_USAGE),
                 new CommandEntry(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
                 new CommandEntry(DeleteNoteCommand.COMMAND_WORD, DeleteNoteCommand.MESSAGE_USAGE),
+                new CommandEntry(DeleteTagCommand.COMMAND_WORD, DeleteTagCommand.MESSAGE_USAGE),
                 new CommandEntry(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
                 new CommandEntry(EditNoteCommand.COMMAND_WORD, EditNoteCommand.MESSAGE_USAGE),
                 new CommandEntry(ExitCommand.COMMAND_WORD, ExitCommand.MESSAGE_USAGE),
@@ -105,6 +108,7 @@ public class CommandTablePanel extends UiPart<Region> {
                 new CommandEntry(ListCommand.COMMAND_WORD, ListCommand.MESSAGE_USAGE),
                 new CommandEntry(PinCommand.COMMAND_WORD, PinCommand.MESSAGE_USAGE),
                 new CommandEntry(RedoCommand.COMMAND_WORD, RedoCommand.MESSAGE_USAGE),
+                new CommandEntry(ToggleCommand.COMMAND_WORD, ToggleCommand.MESSAGE_USAGE),
                 new CommandEntry(UndoCommand.COMMAND_WORD, UndoCommand.MESSAGE_USAGE),
                 new CommandEntry(UnpinCommand.COMMAND_WORD, UnpinCommand.MESSAGE_USAGE),
                 new CommandEntry(ViewCommand.COMMAND_WORD, ViewCommand.MESSAGE_USAGE)
