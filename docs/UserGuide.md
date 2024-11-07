@@ -142,7 +142,8 @@ Examples:
 * `find John` returns `john` and `John Doe` _(search by name)_
 * `find colleague` returns `Bernice Yu` and `Roy Balakrishnan` _(search by tag)_
 * `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Filter students : `filter`
 
@@ -181,11 +182,38 @@ Examples:
 
 ### Undoing the last action: `undo`
 
-Reverts the last action performed in the application, allowing you to recover data that may have been deleted or modified unintentionally.
+The `undo` command allows you to reverse the last action performed, helping you recover any data that may have been unintentionally deleted or modified.
 
-Format: `undo`
+**Format:** `undo`
 
-* **Note:** This command does not work with the `list`, `filter`, or `find` commands. The reasoning behind this is that we consider them as view commands, not action commands that alter student data.
+#### How it works:
+- When you perform an action that modifies the address book (like adding, editing, or deleting an entry), that action is saved in memory.
+- By executing `undo`, the most recent modification is reverted, and the address book is restored to its previous state.
+
+<div markdown="block" class="alert alert-primary">
+:bulb: **Tips:** for Efficient Usage <br>
+
+1. **Use Undo After a Mistake**: If you accidentally delete or modify a contact, you can quickly use `undo` to revert the last action and restore the previous state. <br>
+2. **Undo Works Only for Modifying Commands**: Only actions that modify the address book (like `add`, `edit`, or `delete`) can be undone. Commands like `list`, `filter`, or `find` do not trigger the undo mechanism. The reasoning behind this is that we consider them as view commands, not action commands that alter student data.
+</div>
+
+<div markdown="span" class="alert alert-secondary">
+:question: **Common Question:**
+Why does `undo` not work after I run `list`, `filter`, or `find`? <br>
+`undo` only works for actions that modify the address book. Since `list`, `filter`, or `find` do not modify the data, they do not impact the undo history.
+</div>
+
+<div markdown="span" class="alert alert-primary">
+:rotating_light: **Warning:**
+Executing a command that modifies the address book (like `add`, `edit`, or `delete`) will **clear the redo stack**. This means once you undo an action and perform another modification, you cannot redo the previous undone action.
+</div>
+
+#### Example Scenario:
+1. You delete a contact.
+    - *Before Delete:* [Initial State]
+    - *After Delete:* [After Delete Command]
+2. You decide to undo the delete action.
+    - *After Undo:* [After Undo Command] – The deleted contact is restored.
 
 <img src="images/UndoRedoExample1.png" alt="Initial State" width="60%" />
 <img src="images/UndoRedoExample2.png" alt="After Delete Command" width="60%" />
@@ -194,19 +222,44 @@ Format: `undo`
 Examples:
 * `undo` will revert the last command executed, restoring the previous state of the address book.
 
-### Redoing the last undone action: `redo`
+### Redoing the Last Undone Action: `redo`
 
-Restores the last action that was undone, allowing you to recover data after an undo operation.
+The `redo` command allows you to reapply the last action that was undone, restoring the previous state of the address book. This can be useful if you change your mind after undoing an action.
 
-Format: `redo`
+**Format:** `redo`
 
-* **Note:** This command does not work with the `list`, `filter`, or `find` commands.
+- **Note:** Like `undo`, the `redo` command cannot be used with commands like `list`, `filter`, or `find`.
+
+#### How it works:
+- If you’ve used `undo` to reverse an action, the `redo` command will restore that action, essentially “re-doing” it.
+
+<div markdown="block" class="alert alert-primary">
+:bulb: **Tips:** for Efficient Usage <br>
+
+1. **Use Redo to Restore Actions**: If you’ve undone an action by mistake, `redo` lets you reapply the change quickly. It’s useful when you second-guess your decision.
+2. **Redo Works Only After Undo**: `redo` will only work if an action has been undone previously. If you haven’t undone an action, `redo` will not perform anything.
+</div>
+
+<div markdown="span" class="alert alert-secondary">
+:question: **Common Question:**
+Why does `redo` not work after I’ve made new changes to the address book? <br>
+`redo` only works if there is a previous action that was undone. If a new action is performed after an undo, the redo history is cleared, and there is nothing to redo.
+</div>
+
+<div markdown="span" class="alert alert-primary">
+:rotating_light: **Warning:**
+Executing a command that modifies the address book (like `add`, `edit`, or `delete`) will **clear the redo stack**. This means once you undo a change and then modify the address book again, you will lose the ability to redo the previous undone action.
+</div>
+
+#### Example Scenario:
+1. You undo a deletion of a contact.
+    - *After Undo:* [After Undo Command] – The deleted contact is restored.
+2. You decide to redo the action and restore the contact again.
+    - *After Redo:* [After Redo Command] – The contact is deleted once more.
 
 <img src="images/UndoRedoExample4.png" alt="After Redo Command" width="60%" />
 
-Examples:
-* `redo` will reapply the last command that was undone, restoring the previous state of the address book.
-
+---
 
 ### Grading a Module: `grade`
 
@@ -270,6 +323,12 @@ There should be only one file name provided.
 It is recommended that you avoid loading non-StoreClass .json files, as it may result in unexpected behaviors
 
 When you execute the load command, all the entries in the current StoreClass will be overwritten. So, it is recommended that you archive the current data in StoreClass before loading.
+</div>
+
+<div markdown="span" class="alert alert-secondary">
+:question: **Common Question:**
+What happens to the undo/redo stack after archiving or loading the address book? <br>
+When you call `archive` or `load`, the undo/redo history is cleared to prevent inconsistencies between the address book data and the stored history. Always ensure the current state is saved before performing these actions.
 </div>
 
 ### Clearing all entries : `clear`

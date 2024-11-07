@@ -8,10 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidModule(String)}
  */
 public class Module {
-    public static final String MESSAGE_CONSTRAINTS = "Modules should consist of alphanumeric characters only,"
-            + "and it should be between 1 and 30 characters.";
+    public static final String MESSAGE_CONSTRAINTS = "Modules should consist of alphanumeric characters and "
+            + "spaces only, and it should be between 1 and 30 characters.";
     public static final String GRADE_CONSTRAINTS = "Grade should be a number between 0 and 100.";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum} ]+$";
 
     private static final int MIN_MODULE_LENGTH = 1;
     private static final int MAX_MODULE_LENGTH = 30;
@@ -33,6 +33,20 @@ public class Module {
         this.module = module;
         this.grade = UNGRADED;
         this.isGraded = false;
+    }
+
+    /**
+     * Constructs an {@code Module}. Only used in grading.
+     *
+     * @param module a valid Module.
+     */
+    public Module(String module, String grade) {
+        requireNonNull(module);
+        checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLength(module), MESSAGE_CONSTRAINTS);
+        this.module = module;
+        this.grade = grade.equals("Ungraded") ? UNGRADED : Integer.parseInt(grade);
+        this.isGraded = this.grade >= 0;
     }
 
     /**
@@ -68,7 +82,7 @@ public class Module {
      * Returns true if a given string is a valid module.
      */
     public static boolean isValidModule(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
     /**
@@ -76,7 +90,7 @@ public class Module {
      * @param test the module value to be tested.
      * @return the result of the test.
      */
-    private boolean isValidLength(String test) {
+    public static boolean isValidLength(String test) {
         boolean isValidMinLength = test.length() >= MIN_MODULE_LENGTH;
         boolean isValidMaxLength = test.length() <= MAX_MODULE_LENGTH;
         return isValidMinLength && isValidMaxLength;
