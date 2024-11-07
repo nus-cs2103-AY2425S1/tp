@@ -17,15 +17,14 @@ public class UnassignContactFromWeddingCommandParserTest {
     public void parse_validArgs_success() throws ParseException {
         String userInput = " c/1 2";
         UnassignContactFromWeddingCommand actualCommand = parser.parse(userInput);
-        assertNotNull(actualCommand); // Check that the command object is not null
+        assertNotNull(actualCommand);
     }
 
     @Test
     public void parse_invalidWeddingIndex_failure() {
         String userInput = "1 c/1 2";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                "Wedding indexes are not required in the unassign command, "
-                        + "view a wedding to unassign contacts from it.");
+                UnassignContactFromWeddingCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
