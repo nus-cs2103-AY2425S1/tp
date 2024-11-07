@@ -243,11 +243,12 @@ Refer to the table below for more details.
 | `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
 | `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
 | `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Must be numeric<br/> • Cannot include commas and decimal points<br/> • Cannot be fractional | ❌                      |
-| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                                                    | ❌️                     |
+| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • `Gold`, `Silver`, `Bronze`, `Reject` or `NA`                                    | ❌️                     |
+| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • `Urgent`, `Non_Urgent` or `NA`                                               | ❌                      |
 | `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
 | `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
 | `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
-| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                                                           | ❌                      |
+
 
 > 💡 **Pro Tip:**
 >
