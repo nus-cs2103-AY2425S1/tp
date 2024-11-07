@@ -81,7 +81,7 @@ public class DateTest {
         assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/2/2024 1200")); // February has 28/29 days
 
         //Invalid Year
-        assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/11/0000 1200"));// Year 0000
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/11/0000 1200")); // Year 0000
 
         // Invalid format
         assertThrows(ParseException.class, () -> Date.checkDateAndTime("12-31-2024 12am"));
@@ -156,7 +156,7 @@ public class DateTest {
         assertThrows(ParseException.class, () -> Date.checkDate("2/13/2024")); // Invalid month
 
         //Invalid Year
-        assertThrows(ParseException.class, () -> Date.checkDate("31/11/0000"));// Year 0000
+        assertThrows(ParseException.class, () -> Date.checkDate("31/11/0000")); // Year 0000
 
         // Invalid leap year
         assertThrows(ParseException.class, () -> Date.checkDate("29/2/2023")); // February 29 not a leap year
