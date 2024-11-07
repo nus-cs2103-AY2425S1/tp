@@ -502,7 +502,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -511,32 +511,77 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Commands to Test
 
-### Deleting a person
+This section includes commands specific to the additional features implemented in this app, along with some example test inputs. Copy-paste these inputs to verify command functionality.
 
-1. Deleting a person while all persons are being shown
+### 1. Adding Interests: `addi`
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+This command allows you to add one or more interests to an existing contact.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+**Test case 1:** `addi in/1 i/Swimming i/Cycling`
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+***Expected:*** Adds "Swimming" and "Cycling" as interests to the contact at index 1.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+**Test case 2:** `addi in/2 i/Reading`
 
-1. _{ more test cases …​ }_
+***Expected:*** Adds "Reading" as an interest to the contact at index 2.
 
-### Saving data
+**Test case 3:** `addi in/3 i/`
 
-1. Dealing with missing/corrupted data files
+***Expected:*** Error message due to missing interest input.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### 2. Adding Work Experience: `addw`
 
-1. _{ more test cases …​ }_
+This command adds work experience to a contact, replacing any existing work experience if present.
+
+**Test case 1:** `addw in/1 w/Software Engineer,Google,2023`
+
+***Expected:*** Adds the work experience "Software Engineer at Google in 2023" to the contact at index 1.
+
+**Test case 2:** `addw in/2 w/Data Scientist,Meta,2022`
+
+***Expected:***  Adds "Data Scientist at Meta in 2022" to the contact at index 2.
+
+**Test case 3:** `addw in/3 w/`
+
+***Expected:*** Error message due to incomplete work experience details.
+
+### 3. Finding Contacts by Interest: `findi`
+
+This command finds contacts by specific interests. The command supports searching for one or more interests.
+
+**Test case 1:** `findi i/Swimming`
+
+***Expected:*** Lists all contacts with "Swimming" as their interests.
+
+**Test case 2:** `findi i/Swimming i/Cycling`
+
+***Expected:***  Lists all contacts with either "Swimming" or "Cycling" as an interest.
+
+**Test case 3:** `findi i/UnknownInterest`
+
+***Expected:*** Empty list or message indicating no matches found.
+
+### 4. Finding Contacts by Work Experience: `findw`
+
+This command finds contacts by work experience. It requires a company name and allows optional role and year fields.
+
+**Test case 1:** `findw w/Amazon`
+
+***Expected:*** Lists all contacts who have worked at Amazon.
+
+**Test case 2:** `findw w/Meta,Intern`
+
+***Expected:***   Lists contacts who interned at Meta.
+
+**Test case 3:** `findw w/Google,Intern,2023`
+
+***Expected:*** Lists contacts who interned at Google in 2023.
+
+**Test case 4:** `findw w/`
+
+***Expected:*** Error message due to missing company name.
 
 ---
 
