@@ -307,15 +307,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Extensions
 
--2a. Goods information is incomplete.
-   -2ai. System displays an error message.
+- 2a. Goods information is incomplete.
+   - 2ai. System displays an error message.
 
-   Use case ends.
+      Use case ends.
 
--2b. The provided goods information exists (i.e. duplicated goods information)
-   -2bi. System displays an error message.
+- 2b. The provided goods information exists (i.e. duplicated goods information)
+   - 2bi. System displays an error message.
 
-   Use case ends.
+      Use case ends.
 
 #### UC5: Delete goods from supplier
 
