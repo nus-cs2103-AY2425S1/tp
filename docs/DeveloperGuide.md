@@ -176,24 +176,29 @@ This section describes some noteworthy details on how certain features are imple
 `Students` are named as `Persons` due to Legacy code.
 </div>
 
-* stores the address book data i.e.,
-    * all `Person` objects (which are contained in a `UniquePersonList` object).
-    * all Tutorial objects (contained in a UniqueTutorialList object)
-    * all Participation objects (contained in a UniqueParticipationList object)
-* Participation is an association class and contains the relationship between Person and Tutorial, as well as a List\<Attendance\> object
+---
+
+### Participation Class
+
+Participation is an **association** class used to represent the relationship between a student and a tutorial, as well as his/her attendance, which is stored in a List. Below is a class diagram denoting such a relationship.
 
 <img src="images/ParticipationAsAssociationDiagram.png" width="400" />
 
+When storing data, each Participation object is stored separately from Student and Tutorial. Please refer to the [Storage Feature](#storage-feature) for more information of how the Participation objects are being stored.
+
+---
+
 ### Storage feature
 
-#### Storage format
-Eduvault stores data in JSON file using the Jackson library.
+EduVault stores data in JSON file using the Jackson library.
 
-Eduvault stores four types of objects:
-* Student (person)
+EduVault stores four types of objects:
+* Student (Person)
 * Tutorial
 * Participation
 * Attendance
+
+An overarching structure of the JSON file is as shown below:
 
 ```dtd
 {
@@ -202,6 +207,10 @@ Eduvault stores four types of objects:
     "participations" : [...]
 }
 ```
+
+<br>
+
+Within each of the different objects (Student, Tutorial, Participation), data is stored in the following format as shown below. Conditions for storage are also included.
 
 `Student`
 ```dtd
@@ -218,9 +227,8 @@ Eduvault stores four types of objects:
     ...
 ]
 ```
-There may be no duplicate `Students`.
+**Condition:** There may be no duplicate `Students`.
 Two `Students` are considered to be duplicates if they have matching `NAME` and `PHONE`.
-
 
 `Tutorial`
 ```dtd
@@ -232,7 +240,7 @@ Two `Students` are considered to be duplicates if they have matching `NAME` and 
     ...
 ]
 ```
-There may be no duplicate `Tutorials`.
+**Condition:** There may be no duplicate `Tutorials`.
 Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
 
 `Participation`
@@ -257,14 +265,13 @@ Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
     }
 ]
 ```
-Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
+**Condition:** 
+1. Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
 
-There may be no duplicate `Participations`.
+2. There may be no duplicate `Participations`.
 Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same
 
-#### Storage 
-
-
+---
 
 ### Find Command Implementation
 
@@ -281,6 +288,7 @@ predicates to create a `FindCommand` object.
 
 `Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
 
+---
 
 ### \[Proposed\] Undo/redo feature
 
