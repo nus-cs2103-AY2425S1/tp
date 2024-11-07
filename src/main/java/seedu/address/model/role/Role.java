@@ -12,6 +12,7 @@ public class Role {
             + "and should not be blank.";
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9]*$";
 
+  
     public final String roleName;
 
     /**
