@@ -4,10 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import javax.swing.JFileChooser;
 
@@ -82,27 +78,18 @@ public class UploadCommand extends Command {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
 
-            try {
-                String newFileName = personToUpload.hashCode() + ".png";
-                Path destinationPath = Paths.get("images", newFileName).toAbsolutePath();
+            ProfilePicFilePath newPath = new ProfilePicFilePath(selectedFile.toPath());
+            Person editedPerson = new Person(
+                    personToUpload.getName(), personToUpload.getPhone(), personToUpload.getEmail(),
+                    personToUpload.getAddress(), personToUpload.getBirthday(), personToUpload.getTags(),
+                    personToUpload.getHasPaid(), personToUpload.getLastPaidDate(), personToUpload.getFrequency(),
+                    newPath);
 
-                Files.createDirectories(destinationPath.getParent());
-                Files.copy(selectedFile.toPath(), destinationPath);
+            model.setPerson(personToUpload, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-                ProfilePicFilePath newPath = new ProfilePicFilePath(destinationPath);
-                Person editedPerson = new Person(
-                        personToUpload.getName(), personToUpload.getPhone(), personToUpload.getEmail(),
-                        personToUpload.getAddress(), personToUpload.getBirthday(), personToUpload.getTags(),
-                        personToUpload.getHasPaid(), personToUpload.getLastPaidDate(), personToUpload.getFrequency(),
-                        newPath);
+            return new CommandResult(String.format(MESSAGE_UPLOAD_PERSON_SUCCESS, personToUpload));
 
-                model.setPerson(personToUpload, editedPerson);
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-                return new CommandResult(String.format(MESSAGE_UPLOAD_PERSON_SUCCESS, personToUpload));
-            } catch (IOException e) {
-                throw new CommandException(MESSAGE_UPLOAD_ERROR);
-            }
         } else {
             return new CommandResult(String.format(MESSAGE_UPLOAD_CANCELLED, personToUpload));
         }

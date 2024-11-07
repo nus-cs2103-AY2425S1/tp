@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +15,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import seedu.address.model.person.Person;
 
@@ -74,10 +79,16 @@ public class PersonDetailedView extends UiPart<Region> {
     }
 
     private void initialiseView() {
-        Image profileImg = new Image(getClass()
-                .getResourceAsStream("/" + this.person.getProfilePicFilePath().toString()));
-
-        profileImage.setImage(profileImg);
+        try {
+            File profileFile = new File(this.person.getProfilePicFilePath().toString());
+            Image profileImg = new Image(new FileInputStream(profileFile));
+            profileImage.setImage(profileImg);
+        } catch (FileNotFoundException e) {
+            profileImage.setImage(new Image(getClass().getResourceAsStream("/images/profilepicture.png")));
+        }
+        Circle clip = new Circle(profileImage.getFitWidth() / 2,
+                profileImage.getFitHeight() / 2, profileImage.getFitWidth() / 2);
+        profileImage.setClip(clip);
 
         name.setText(contentManager.getName());
         phone.setText(contentManager.getPhone());
