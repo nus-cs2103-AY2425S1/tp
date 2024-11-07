@@ -39,7 +39,7 @@
                </ImageView>
             </HBox>
          </HBox>
-         <ScrollPane VBox.vgrow="NEVER" minHeight="68" fx:id="scrollPane" styleClass="tutorial-pane" fitToHeight="true" vbarPolicy="NEVER">
+         <ScrollPane VBox.vgrow="NEVER" minHeight="70" fx:id="scrollPane" styleClass="tutorial-pane" fitToHeight="true" vbarPolicy="NEVER">
             <HBox fx:id="tutorials" spacing="15" style="-fx-background-color: white; -fx-padding: 0 0 3 0"/>
          </ScrollPane>
       </VBox>
