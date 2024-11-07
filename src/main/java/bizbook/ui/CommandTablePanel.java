@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import bizbook.commons.core.LogsCenter;
 import bizbook.logic.commands.AddCommand;
-import bizbook.logic.commands.AddNotesCommand;
+import bizbook.logic.commands.AddNoteCommand;
 import bizbook.logic.commands.DeleteCommand;
 import bizbook.logic.commands.EditCommand;
 import bizbook.logic.commands.FindCommand;
@@ -25,8 +25,11 @@ import javafx.scene.text.Text;
 public class CommandTablePanel extends UiPart<Region> {
     private static final String FXML = "CommandTablePanel.fxml";
 
-    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * 0.85; // 85% of table width
-    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * 0.15; // 15% of table width
+    private static final double COMMAND_WORD_RATIO = 0.15;
+    private static final double COMMAND_USAGE_RATIO = 0.85;
+
+    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * COMMAND_WORD_RATIO;
+    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * COMMAND_USAGE_RATIO;
 
     private final Logger logger = LogsCenter.getLogger(CommandTablePanel.class);
 
@@ -57,11 +60,17 @@ public class CommandTablePanel extends UiPart<Region> {
 
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("commandWord"));
         actionColumn.setMaxWidth(COMMAND_WORD_COLUMN_SIZE);
+        actionColumn.setMinWidth(75);
 
         formatColumn.setCellValueFactory(new PropertyValueFactory<>("commandUsage"));
         formatColumn.setCellFactory(column -> new CommandTableCell());
+        formatColumn.setMinWidth(100);
         formatColumn.setMaxWidth(COMMAND_USAGE_COLUMN_SIZE);
 
+        commandTable.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            actionColumn.setPrefWidth(newWidth.doubleValue() * COMMAND_WORD_RATIO);
+            formatColumn.setPrefWidth(newWidth.doubleValue() * COMMAND_USAGE_COLUMN_SIZE);
+        });
     }
 
     /**
@@ -74,7 +83,7 @@ public class CommandTablePanel extends UiPart<Region> {
         ObservableList<CommandEntry> commandList = FXCollections.observableArrayList(
             // Add more commands here as needed
             new CommandEntry(AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE),
-            new CommandEntry(AddNotesCommand.COMMAND_WORD, AddNotesCommand.MESSAGE_USAGE),
+            new CommandEntry(AddNoteCommand.COMMAND_WORD, AddNoteCommand.MESSAGE_USAGE),
             new CommandEntry(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
             new CommandEntry(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
             new CommandEntry(FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE),
@@ -130,6 +139,7 @@ public class CommandTablePanel extends UiPart<Region> {
                 setGraphic(null);
             } else {
                 text.setText(item);
+                text.setStyle("-fx-fill: white;");
                 text.wrappingWidthProperty()
                         .bind(getTableColumn().widthProperty().subtract(10));
                 setGraphic(text);

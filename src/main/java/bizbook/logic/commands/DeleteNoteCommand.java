@@ -17,19 +17,19 @@ import javafx.beans.property.ObjectProperty;
 /**
  * Deletes note of an existing person in the address book.
  */
-public class DeleteNotesCommand extends Command {
+public class DeleteNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletenotes";
+    public static final String COMMAND_WORD = "deletenote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Delete the note of the person identified "
+            + ": Deletes the note of the person identified "
             + "by the index number used in the person listing and the index of the note.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "i/[NOTE_INDEX]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "i/1";
 
-    public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Deleted note of Person: %1$s";
+    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Deleted note of Person: %1$s";
 
     /**
      * Index of the person whose note is to be deleted
@@ -45,7 +45,7 @@ public class DeleteNotesCommand extends Command {
      * @param index of the person in the filtered person list to edit the notes
      * @param noteIndex of the note to be deleted
      */
-    public DeleteNotesCommand(Index index, Index noteIndex) {
+    public DeleteNoteCommand(Index index, Index noteIndex) {
         requireAllNonNull(index, noteIndex);
 
         this.index = index;
@@ -95,7 +95,7 @@ public class DeleteNotesCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_DELETE_NOTES_SUCCESS, Messages.format(personToEdit));
+        return String.format(MESSAGE_DELETE_NOTE_SUCCESS, Messages.format(personToEdit));
     }
 
     @Override
@@ -105,11 +105,11 @@ public class DeleteNotesCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteNotesCommand)) {
+        if (!(other instanceof DeleteNoteCommand)) {
             return false;
         }
 
-        DeleteNotesCommand otherDeleteNotesCommand = (DeleteNotesCommand) other;
-        return index.equals(otherDeleteNotesCommand.index) && noteIndex.equals(otherDeleteNotesCommand.noteIndex);
+        DeleteNoteCommand otherDeleteNoteCommand = (DeleteNoteCommand) other;
+        return index.equals(otherDeleteNoteCommand.index) && noteIndex.equals(otherDeleteNoteCommand.noteIndex);
     }
 }

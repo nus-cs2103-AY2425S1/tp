@@ -30,11 +30,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class DeleteNotesCommandTest {
+public class DeleteNoteCommandTest {
 
     @Test
     public void constructor_nullFields_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteNotesCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new DeleteNoteCommand(null, null));
     }
 
     @Test
@@ -58,10 +58,10 @@ public class DeleteNotesCommandTest {
         Index validPersonIndex = INDEX_FIRST_PERSON;
         Index validNoteIndex = INDEX_FIRST_PERSON;
 
-        DeleteNotesCommand deleteNotesCommand = new DeleteNotesCommand(validPersonIndex, validNoteIndex);
+        DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(validPersonIndex, validNoteIndex);
 
         // Execute the deleteNotesCommand
-        CommandResult commandResult = deleteNotesCommand.execute(modelMock);
+        CommandResult commandResult = deleteNoteCommand.execute(modelMock);
 
         String expected = "Deleted note of Person: " + DEFAULT_NAME + "; Phone: " + DEFAULT_PHONE + "; Email: "
                 + DEFAULT_EMAIL + "; Address: " + DEFAULT_ADDRESS + "; Tags: ; Notes: ";
@@ -90,11 +90,11 @@ public class DeleteNotesCommandTest {
         Index invalidPersonIndex = INDEX_OUTOFBOUND_PERSON;
         Index validNoteIndex = INDEX_FIRST_NOTE;
 
-        DeleteNotesCommand deleteNotesCommand = new DeleteNotesCommand(invalidPersonIndex, validNoteIndex);
+        DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(invalidPersonIndex, validNoteIndex);
 
         // Assert that the expected error is thrown
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
-                deleteNotesCommand.execute(modelMock));
+                deleteNoteCommand.execute(modelMock));
     }
 
     @Test
@@ -117,11 +117,11 @@ public class DeleteNotesCommandTest {
         Index validPersonIndex = INDEX_FIRST_PERSON;
         Index invalidNoteIndex = INDEX_OUTOFBOUND_NOTE;
 
-        DeleteNotesCommand deleteNotesCommand = new DeleteNotesCommand(validPersonIndex, invalidNoteIndex);
+        DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(validPersonIndex, invalidNoteIndex);
 
         // Assert that the expected error is thrown
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NOTE_INDEX, ()
-                -> deleteNotesCommand.execute(modelMock));
+                -> deleteNoteCommand.execute(modelMock));
     }
 
     @Test
@@ -131,14 +131,14 @@ public class DeleteNotesCommandTest {
         Index noteIndexFirst = INDEX_FIRST_PERSON;
         Index noteIndexSecond = INDEX_SECOND_PERSON;
 
-        DeleteNotesCommand deleteFirstNoteCommand = new DeleteNotesCommand(indexFirstPerson, noteIndexFirst);
-        DeleteNotesCommand deleteSecondNoteCommand = new DeleteNotesCommand(indexSecondPerson, noteIndexSecond);
+        DeleteNoteCommand deleteFirstNoteCommand = new DeleteNoteCommand(indexFirstPerson, noteIndexFirst);
+        DeleteNoteCommand deleteSecondNoteCommand = new DeleteNoteCommand(indexSecondPerson, noteIndexSecond);
 
         // same object -> returns true
         assertTrue(deleteFirstNoteCommand.equals(deleteFirstNoteCommand));
 
         // same values -> returns true
-        DeleteNotesCommand deleteFirstNoteCommandCopy = new DeleteNotesCommand(indexFirstPerson, noteIndexFirst);
+        DeleteNoteCommand deleteFirstNoteCommandCopy = new DeleteNoteCommand(indexFirstPerson, noteIndexFirst);
         assertTrue(deleteFirstNoteCommand.equals(deleteFirstNoteCommandCopy));
 
         // different types -> returns false

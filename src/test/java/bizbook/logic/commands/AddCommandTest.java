@@ -208,6 +208,16 @@ public class AddCommandTest {
         public void updateFocusPerson(Person previousPerson, Person currentPerson) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean canRedo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBookVersion() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
