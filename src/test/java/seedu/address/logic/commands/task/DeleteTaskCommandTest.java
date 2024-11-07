@@ -74,6 +74,7 @@ public class DeleteTaskCommandTest {
         model.addTask(unassignedTask);
         Index unassignedTaskIndex = Index.fromOneBased(model.getFilteredTaskList().size());
 
+
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(unassignedTaskIndex);
         deleteTaskCommand.execute(model);
 

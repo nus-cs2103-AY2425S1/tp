@@ -215,7 +215,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the date format is invalid.
      */
-    private static void validateDateFormat(String date) throws ParseException {
+    public static void validateDateFormat(String date) throws ParseException {
         try {
             LocalDate.parse(date, DATE_FORMATTER);
         } catch (DateTimeParseException e) {

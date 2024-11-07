@@ -60,7 +60,9 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
         }
         //Changes date of wedding
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editWeddingDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse("")));
+            String date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));
+            ParserUtil.validateDateFormat(date);
+            editWeddingDescriptor.setDate(date);
         }
         //if no edits, throw error
         if (!editWeddingDescriptor.isAnyFieldEdited()) {

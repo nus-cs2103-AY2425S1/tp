@@ -44,8 +44,9 @@ public class DeleteTaskCommand extends Command {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, 1,
+                    lastShownList.size()));
         }
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
 
@@ -75,11 +76,10 @@ public class DeleteTaskCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteTaskCommand)) {
+        if (!(other instanceof DeleteTaskCommand otherDeleteTaskCommand)) {
             return false;
         }
 
-        DeleteTaskCommand otherDeleteTaskCommand = (DeleteTaskCommand) other;
         return targetIndex.equals(otherDeleteTaskCommand.targetIndex);
     }
 
