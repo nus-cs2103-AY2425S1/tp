@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -114,7 +113,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person personFromName(Name name) throws IllegalValueException {
+    public Person personFromName(Name name) {
         return addressBook.personFromName(name);
     }
 

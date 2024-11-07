@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -188,7 +187,7 @@ public class AddParentCommandTest {
         }
 
         @Override
-        public Person personFromName(Name name) throws IllegalValueException {
+        public Person personFromName(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
