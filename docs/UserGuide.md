@@ -111,7 +111,7 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-- INDEX parameters have a max positive value of `2147483647` any value larger would result in an invalid command.
+- INDEX parameters have a max positive value of `2147483647` any value larger would result in an invalid command format.
 </div>
 
 ---
@@ -148,7 +148,12 @@ Shows a list of all concertContacts in the ConcertPhonebook.
 
 Format: `listcc`
 
-💡 `TAB` key can be used to toggle the concertContact view
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+`TAB` key can be used to toggle the concertContact view when search bar is in focus. <br>
+Press `TAB` twice to focus the search bar when it is out of focus.
+
+</div>
 
 ### Adding a person: `addp`
 
