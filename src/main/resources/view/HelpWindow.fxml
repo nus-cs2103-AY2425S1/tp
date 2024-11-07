@@ -26,20 +26,20 @@
                     <VBox fx:id="helpContainer" prefWidth="500.0" spacing="0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <children>
 
-                            <Label fx:id="helpMessage" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="500.0" text="Help Message" wrapText="true">
+                            <Label fx:id="helpMessage" alignment="TOP_LEFT" prefWidth="500.0" minHeight="-Infinity" text="Help Message" wrapText="true">
                                 <padding>
                                     <Insets left="10.0" right="10.0" top="10.0" />
                                 </padding>
                             </Label>
 
                             <HBox prefWidth="500.0" spacing="0">
-                                <Label fx:id="commandKeywordsHeader" alignment="CENTER" prefWidth="80.0" minHeight="-Infinity" text="Command Keywords" textAlignment="CENTER" wrapText="true">
+                                <Label fx:id="commandKeywordsHeader" alignment="CENTER" minHeight="-Infinity" prefWidth="80.0" text="Command Keywords" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="12.0" />
                            </font>
                                 </Label>
 
-                                <Label fx:id="functionsHeader" alignment="CENTER" prefWidth="420.0" minHeight="-Infinity" text="Functions" textAlignment="CENTER" wrapText="true">
+                                <Label fx:id="functionsHeader" alignment="CENTER" minHeight="-Infinity" prefWidth="420.0" text="Functions" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -50,12 +50,12 @@
                             </HBox>
                      <HBox prefWidth="500.0" spacing="0">
                         <children>
-                           <Label fx:id="commandKeywords" alignment="TOP_CENTER" lineSpacing="5.0" prefWidth="80.0" minHeight="-Infinity" text="Command Keywords" wrapText="true">
+                           <Label fx:id="commandKeywords" alignment="TOP_CENTER" lineSpacing="5.0" minHeight="-Infinity" prefWidth="80.0" text="Command Keywords" wrapText="true">
                               <padding>
                                  <Insets left="10.0" top="2.0" />
                               </padding>
                            </Label>
-                           <Label fx:id="functions" alignment="TOP_LEFT" lineSpacing="5.0" prefWidth="420.0" minHeight="-Infinity" text="Functions" wrapText="true">
+                           <Label fx:id="functions" alignment="TOP_LEFT" lineSpacing="5.0" minHeight="-Infinity" prefWidth="420.0" text="Functions" wrapText="true">
                               <padding>
                                  <Insets top="2.0" />
                               </padding>
