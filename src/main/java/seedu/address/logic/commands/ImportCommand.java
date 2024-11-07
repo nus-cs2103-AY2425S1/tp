@@ -23,7 +23,6 @@ public class ImportCommand extends Command {
             + "Parameters: ";
 
     public static final String MESSAGE_SUCCESS = "Imported all contacts from: %1$s";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "This command has not been implemented yet.";
 
     private final File toImport;
 
@@ -63,7 +62,6 @@ public class ImportCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ImportCommand)) {
             return false;
         }

@@ -48,6 +48,13 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType(boolean skipDuplicate) throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+            if (skipDuplicate && !jsonAdaptedPerson.isValidPerson()) {
+                continue;
+            }
+            if (jsonAdaptedPerson.hasEmptyContactInfo()) {
+                jsonAdaptedPerson.fillEmptyContactInfo();
+            }
+            jsonAdaptedPerson.clearInvalidContactInfo();
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person) && !skipDuplicate) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
