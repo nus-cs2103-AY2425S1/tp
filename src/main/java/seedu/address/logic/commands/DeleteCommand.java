@@ -12,12 +12,12 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.EmailPredicate;
+import seedu.address.model.person.EmailExactPredicate;
 import seedu.address.model.person.FullNameMatchesPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.PhonePredicate;
+import seedu.address.model.person.PhoneExactPredicate;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -167,7 +167,9 @@ public class DeleteCommand extends Command {
                                       ObservableList<Person> lastShownList) throws CommandException {
         assert targetIndex.isPresent() : "Target index should be present";
         assert lastShownList != null : "Last shown list should not be null";
-        if (targetIndex.get().getZeroBased() >= lastShownList.size() || targetIndex.get().getZeroBased() == 0) {
+        System.out.println(targetIndex.get());
+        System.out.println(targetIndex.get().getZeroBased());
+        if (targetIndex.get().getOneBased() > lastShownList.size() || targetIndex.get().getOneBased() == 0) {
             System.out.println("invalid or 0 index found");
             // Checks if the index is greater than list size
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -215,7 +217,7 @@ public class DeleteCommand extends Command {
     private CommandResult deleteByPhone(Optional<Phone> phone, Model model, FilteredList<Person> listForFilter)
             throws CommandException {
         String phoneString = phone.get().value;
-        PhonePredicate phonePredicate = new PhonePredicate(phoneString);
+        PhoneExactPredicate phonePredicate = new PhoneExactPredicate(phoneString);
         listForFilter.setPredicate(phonePredicate);
         if (listForFilter.isEmpty()) {
             throw new CommandException("No matching contacts found.");
@@ -236,7 +238,7 @@ public class DeleteCommand extends Command {
     private CommandResult deleteByEmail(Optional<Email> email, Model model, FilteredList<Person> listForFilter)
             throws CommandException {
         String emailString = email.get().value;
-        EmailPredicate emailPredicate = new EmailPredicate(emailString);
+        EmailExactPredicate emailPredicate = new EmailExactPredicate(emailString);
         listForFilter.setPredicate(emailPredicate);
         if (listForFilter.isEmpty()) {
             throw new CommandException("No matching contacts found");
