@@ -13,7 +13,6 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
-Class StatusBarFooter
 Class CommandBox
 Class WeddingCard
 Class WeddingListPanel
