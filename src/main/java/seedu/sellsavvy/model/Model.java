@@ -7,16 +7,16 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    static Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    static Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -57,31 +57,38 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasCustomer(Customer customer);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if there is a different customer
+     * with the similar name as given {@code Customer} exists in the address book.
      */
-    void deletePerson(Person target);
+    boolean hasSimilarCustomer(Customer customer);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Deletes the given customer.
+     * The customer must exist in the address book.
      */
-    void addPerson(Person person);
+    void deleteCustomer(Customer target);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Adds the given customer.
+     * {@code customer} must not already exist in the address book.
+     */
+    void addCustomer(Customer customer);
+
+    /**
+     * Replaces the given customer {@code target} with {@code editedCustomer}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in the
+     * address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setCustomer(Customer target, Customer editedCustomer);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered customer list */
+    ObservableList<Customer> getFilteredCustomerList();
 
     /**
      * Creates a copy of the entire {@code Model}.
@@ -89,16 +96,16 @@ public interface Model {
     Model createCopy();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredCustomerList(Predicate<Customer> predicate);
 
-    /** Returns a {@code ReadOnlyObjectProperty} of selected {@code Person} */
-    ReadOnlyObjectProperty<Person> getSelectedPersonProperty();
+    /** Returns a {@code ReadOnlyObjectProperty} of selected {@code Customer} */
+    ReadOnlyObjectProperty<Customer> getSelectedCustomerProperty();
 
-    /** Returns the selected person displayed*/
-    Person getSelectedPerson();
+    /** Returns the selected customer displayed*/
+    Customer getSelectedCustomer();
 
     /** Returns the selected OrderList displayed*/
     OrderList getSelectedOrderList();
@@ -107,14 +114,14 @@ public interface Model {
     FilteredList<Order> getFilteredOrderList();
 
     /**
-     * Updates the selected person whose orders are displayed.
+     * Updates the selected customer whose orders are displayed.
      */
-    void updateSelectedPerson(Person person);
+    void updateSelectedCustomer(Customer customer);
 
     /**
-     * Checks if the given {@code person} is the selected person whose orders are displayed.
+     * Checks if the given {@code customer} is the selected customer whose orders are displayed.
      */
-    boolean isSelectedPerson(Person person);
+    boolean isSelectedCustomer(Customer customer);
 
     /**
      * Replaces the given order {@code target} with {@code editedOrder}.
@@ -123,8 +130,8 @@ public interface Model {
     void setOrder(Order target, Order editedOrder);
 
     /**
-     * Returns a {@code Person} in the {@code UniquePersonList} equivalent to target Person given.
+     * Returns a {@code Customer} in the {@code UniqueCustomerList} equivalent to target Customer given.
      * Returns null if target is null.
      */
-    Person findEquivalentPerson(Person person);
+    Customer findEquivalentCustomer(Customer customer);
 }

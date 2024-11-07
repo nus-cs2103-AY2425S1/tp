@@ -7,12 +7,12 @@ import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 import static seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand.MESSAGE_FILTER_ORDERS_SUCCESS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 import static seedu.sellsavvy.testutil.TypicalOrders.CAMERA;
 import static seedu.sellsavvy.testutil.TypicalOrders.DAGGER;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 
@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Test;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterOrderCommand}.
@@ -59,7 +59,7 @@ public class FilterOrderCommandTest {
     }
 
     @Test
-    public void execute_noSelectedPersonInModel_throwsCommandException() {
+    public void execute_noSelectedCustomerInModel_throwsCommandException() {
         String expectedMessage = String.format(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         StatusEqualsKeywordPredicate predicate = new StatusEqualsKeywordPredicate(Status.PENDING);
         FilterOrderCommand command = new FilterOrderCommand(predicate);
@@ -74,14 +74,14 @@ public class FilterOrderCommandTest {
         FilterOrderCommand command = new FilterOrderCommand(predicate);
 
         Model expectedModel = model.createCopy();
-        Person expectedPerson = expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-        expectedPerson.updateFilteredOrderList(predicate);
-        expectedModel.updateSelectedPerson(expectedPerson);
+        Customer expectedCustomer = expectedModel.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        expectedCustomer.updateFilteredOrderList(predicate);
+        expectedModel.updateSelectedCustomer(expectedCustomer);
 
-        Person person = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-        model.updateSelectedPerson(person);
+        Customer customer = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(customer);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BLOCKS), person.getFilteredOrderList());
+        assertEquals(Arrays.asList(BLOCKS), customer.getFilteredOrderList());
     }
 
     @Test
@@ -91,14 +91,14 @@ public class FilterOrderCommandTest {
         FilterOrderCommand command = new FilterOrderCommand(predicate);
 
         Model expectedModel = model.createCopy();
-        Person expectedPerson = expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-        expectedPerson.updateFilteredOrderList(predicate);
-        expectedModel.updateSelectedPerson(expectedPerson);
+        Customer expectedCustomer = expectedModel.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        expectedCustomer.updateFilteredOrderList(predicate);
+        expectedModel.updateSelectedCustomer(expectedCustomer);
 
-        Person person = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-        model.updateSelectedPerson(person);
+        Customer customer = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(customer);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ABACUS, CAMERA, DAGGER), person.getFilteredOrderList());
+        assertEquals(Arrays.asList(ABACUS, CAMERA, DAGGER), customer.getFilteredOrderList());
     }
 
     @Test

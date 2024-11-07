@@ -10,7 +10,7 @@ import seedu.sellsavvy.logic.parser.ParserUtil;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 
 /**
- * Represents the deliver-by date of a Person's Order in the address book.
+ * Represents the deliver-by date of a Customer's Order in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateRegex(String)}
  * and {@link #isValidCalendarDate(String)}
  */
@@ -49,10 +49,7 @@ public class Date {
      * Returns if a given string is of a valid date regex.
      */
     public static boolean isValidDateRegex(String test) {
-        if (!test.matches(REGEX_DATE)) {
-            return false;
-        }
-        return true;
+        return test.matches(REGEX_DATE);
     }
 
     /**

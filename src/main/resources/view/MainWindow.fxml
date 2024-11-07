@@ -49,11 +49,11 @@
 
         <HBox spacing = "1" VBox.vgrow="ALWAYS">
 
-          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+          <VBox fx:id="customerList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" maxWidth="Infinity">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="customerListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
           <VBox fx:id="orderList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" maxWidth="Infinity">

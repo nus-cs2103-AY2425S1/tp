@@ -2,7 +2,10 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DESC_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.DESC_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
@@ -12,13 +15,12 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderByIndex;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,35 +32,35 @@ import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDe
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
 import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class EditOrderCommandTest {
     private Model model;
-    private Person selectedPerson;
+    private Customer selectedCustomer;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        selectedPerson = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-        model.updateSelectedPerson(selectedPerson);
+        selectedCustomer = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(selectedCustomer);
     }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Order editedOrder = new OrderBuilder().build();
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(editedOrder).build();
-        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST_ORDER, descriptor);
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS,
                 Messages.format(editedOrder));
 
         Model expectedModel = model.createCopy();
-        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_FIRST_ORDER), editedOrder);
+        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_FIRST), editedOrder);
 
         assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
@@ -87,10 +89,10 @@ public class EditOrderCommandTest {
 
     @Test
     public void execute_noOrderListDisplayed_failure() {
-        model.updateSelectedPerson(null);
+        model.updateSelectedCustomer(null);
         Order editedOrder = new OrderBuilder().build();
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(editedOrder).build();
-        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST_ORDER, descriptor);
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 
@@ -99,8 +101,8 @@ public class EditOrderCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST_ORDER, new EditOrderDescriptor());
-        Order editedOrder = getOrderByIndex(model, INDEX_FIRST_ORDER);
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST, new EditOrderDescriptor());
+        Order editedOrder = getOrderByIndex(model, INDEX_FIRST);
 
         String expectedMessage = String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS,
                 Messages.format(editedOrder));
@@ -112,7 +114,7 @@ public class EditOrderCommandTest {
 
     @Test
     public void execute_completedOrderUnfilteredList_success() {
-        Order completedOrder = getOrderByIndex(model, INDEX_SECOND_ORDER);
+        Order completedOrder = getOrderByIndex(model, INDEX_SECOND);
 
         // ensures that the selected order is indeed completed
         assertEquals(completedOrder.getStatus(), Status.COMPLETED);
@@ -123,40 +125,40 @@ public class EditOrderCommandTest {
 
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withQuantity(VALID_QUANTITY_ATLAS)
                 .withDate(VALID_DATE_ATLAS).build();
-        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_SECOND_ORDER, descriptor);
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_SECOND, descriptor);
 
         String expectedMessage = String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS,
                 Messages.format(editedOrder));
 
         Model expectedModel = model.createCopy();
-        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_SECOND_ORDER), editedOrder);
+        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_SECOND), editedOrder);
 
         assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_filteredList_success() {
-        selectedPerson.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        selectedCustomer.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
 
-        Order orderInFilteredList = getOrderByIndex(model, INDEX_SECOND_ORDER);
+        Order orderInFilteredList = getOrderByIndex(model, INDEX_SECOND);
         Order editedOrder = new OrderBuilder(orderInFilteredList).withItem(VALID_ITEM_ATLAS).build();
-        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_SECOND_ORDER,
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_SECOND,
                 new EditOrderDescriptorBuilder().withItem(VALID_ITEM_ATLAS).build());
 
         String expectedMessage = String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS,
                 Messages.format(editedOrder));
 
         Model expectedModel = model.createCopy();
-        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_SECOND_ORDER), editedOrder);
+        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_SECOND), editedOrder);
 
         assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateOrderUnfilteredList_warningGiven() {
-        Order firstOrder = getOrderByIndex(model, INDEX_FIRST_ORDER);
+        Order firstOrder = getOrderByIndex(model, INDEX_FIRST);
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).build();
-        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_THIRD_PERSON, descriptor);
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_THIRD, descriptor);
 
         String warningMessage = String.format(EditOrderCommand.MESSAGE_DUPLICATE_ORDER_WARNING,
                 firstOrder.getStatus().getValue());
@@ -164,18 +166,44 @@ public class EditOrderCommandTest {
                 + String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(firstOrder));
 
         Model expectedModel = model.createCopy();
-        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_THIRD_PERSON),
-                getOrderByIndex(expectedModel, INDEX_FIRST_ORDER));
+        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_THIRD),
+                getOrderByIndex(expectedModel, INDEX_FIRST));
+
+        assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_similarOrderUnfilteredList_warningGiven() {
+        Order firstOrder = getOrderByIndex(model, INDEX_FIRST);
+
+        // edits to something similar(but not identical) to the first order to the customer's order list
+        String similarItemName = normalise(firstOrder.getItem().fullDescription);
+        Order similarOrder = new OrderBuilder(firstOrder).withItem(similarItemName).build();
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).withItem(similarItemName).build();
+
+        //ensures that it is not identical
+        assertNotEquals(firstOrder, similarOrder);
+
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_THIRD, descriptor);
+
+        String warningMessage = String.format(EditOrderCommand.MESSAGE_DUPLICATE_ORDER_WARNING,
+                similarOrder.getStatus().getValue());
+        String expectedMessage = warningMessage
+                + String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(similarOrder));
+
+        Model expectedModel = model.createCopy();
+        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_THIRD),
+                similarOrder.createCopy());
 
         assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateOrderFilteredList_warningGiven() {
-        Order firstOrder = getOrderByIndex(model, INDEX_FIRST_ORDER);
-        selectedPerson.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        Order firstOrder = getOrderByIndex(model, INDEX_FIRST);
+        selectedCustomer.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).build();
-        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_SECOND_ORDER, descriptor);
+        EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_SECOND, descriptor);
 
         String warningMessage = String.format(EditOrderCommand.MESSAGE_DUPLICATE_ORDER_WARNING,
                 firstOrder.getStatus().getValue());
@@ -183,8 +211,8 @@ public class EditOrderCommandTest {
                 + String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(firstOrder));
 
         Model expectedModel = model.createCopy();
-        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_SECOND_ORDER),
-                getOrderByIndex(expectedModel, INDEX_FIRST_ORDER));
+        expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_SECOND),
+                getOrderByIndex(expectedModel, INDEX_FIRST));
 
         assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
@@ -219,15 +247,15 @@ public class EditOrderCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Edits filtered list where index is larger than size of filtered order list,
      * but smaller than size of unfiltered order list
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        // get original size before filtering
+    public void execute_invalidCustomerIndexFilteredList_failure() {
+        // gets index of last order before filtering
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
 
-        selectedPerson.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        selectedCustomer.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
 
         // ensures that outOfBoundIndex is indeed out of bounds after filtering
         assertTrue(outOfBoundIndex.getZeroBased() >= model.getFilteredOrderList().size());
@@ -240,11 +268,11 @@ public class EditOrderCommandTest {
 
     @Test
     public void equals() {
-        final EditOrderCommand standardCommand = new EditOrderCommand(INDEX_FIRST_ORDER, DESC_ATLAS);
+        final EditOrderCommand standardCommand = new EditOrderCommand(INDEX_FIRST, DESC_ATLAS);
 
         // same values -> returns true
         EditOrderDescriptor copyDescriptor = new EditOrderDescriptor(DESC_ATLAS);
-        EditOrderCommand commandWithSameValues = new EditOrderCommand(INDEX_FIRST_ORDER, copyDescriptor);
+        EditOrderCommand commandWithSameValues = new EditOrderCommand(INDEX_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -257,10 +285,10 @@ public class EditOrderCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditOrderCommand(INDEX_SECOND_ORDER, DESC_ATLAS)));
+        assertFalse(standardCommand.equals(new EditOrderCommand(INDEX_SECOND, DESC_ATLAS)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditOrderCommand(INDEX_FIRST_ORDER, DESC_BOTTLE)));
+        assertFalse(standardCommand.equals(new EditOrderCommand(INDEX_FIRST, DESC_BOTTLE)));
     }
 
     @Test

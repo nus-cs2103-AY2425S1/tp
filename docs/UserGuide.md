@@ -4,12 +4,11 @@
   pageNav: 3
 ---
 
-# Sellsavvy User Guide
+# SellSavvy User Guide
 
-Sellsavvy is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SellSavvy can get your contact management tasks done faster than traditional GUI apps.
+SellSavvy is a lightweight and convenient desktop application for **managing your customers' contacts and their orders**, aiming to streamline your online drop-shipping management. It offers a centralised platform to **organise customer contacts, track order deliveries and store the data**. 
 
-<!-- * Table of Contents -->
-<page-nav-print />
+SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SellSavvy can get your drop-shipping management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,24 +20,32 @@ Sellsavvy is a **desktop app for managing contacts, optimized for use via a Comm
 
 3. Copy the file to the folder you want to use as the _home folder_ for SellSavvy.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in.
+
+5. Use `java -jar sellsavvy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `listcustomer` : Lists all customers' contacts as a displayed customer list.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer named `John Doe` to the displayed customer list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd customer contact shown in the displayed customer list.
 
-   * `clear` : Deletes all contacts.
+   * `listorder 1` : Lists all orders under the 1st customer as a displayed order list.
+   
+   * `addorder 1 i/Lamp d/20-12-2024 q/2` : Adds an order for a `Lamp` item to the displayed order list.
+
+   * `markorder 1` : Marks the 1st order shown in the displayed order list as completed.
+
+   * `clear` : Deletes all customers' contacts.
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -85,15 +92,15 @@ Adds a customer to the address book.
 Command aliases: `addc`<br>
 Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>
 Examples:
-* `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addcustomer n/John, Doe S/O Adam-Sam Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addc n/O'Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 <box type="important">
 
 ##### Constraints
 
-* `NAME` can only contain alphanumeric characters, spaces, and one of the following symbols: hyphen, comma, and apostrophe.
-* `NAME` should have alphanumeric characters before and after the symbol, and it should not be blank. Relationship indicator preceded "S/O" or "D/O" can be included, but must be followed with the name of customer with stated relationship.
+* `NAME` can only contain alphanumeric characters, spaces, and one of the following symbols: hyphen, comma, and apostrophe, where commas should be followed with a space.
+* `NAME` should have alphanumeric characters before and after the symbol, and it should not be blank. Relationship indicator using "S/O" or "D/O" can be included but should be wrapped with spaces, and followed with the name of customer with stated relationship.
 * Duplicated `NAME` is not allowed.
 * If there is already a customer with similar `NAME` (same name excluding space and casing), a warning will be given.
 * `PHONE_NUMBER` should only contains numbers, and it should at least be 3 digits long.
@@ -365,17 +372,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SellSavvy data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SellSavvy data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, SellSavvy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the SellSavvy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -387,7 +394,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SellSavvy home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

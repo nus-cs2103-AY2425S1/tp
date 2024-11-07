@@ -2,9 +2,10 @@ package seedu.sellsavvy.model.order;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 
 /**
- * Represents the item description of a Person's Order in the address book.
+ * Represents the item description of a Customer's Order in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidItem(String)}
  */
 public class Item {
@@ -36,6 +37,14 @@ public class Item {
      */
     public static boolean isValidItem(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if this item's full description is similar to {@code otherItem}'s full description.
+     * Two item's full description are considered similar if they are same without considering space and casing.
+     */
+    public boolean isSimilarTo(Item otherItem) {
+        return normalise(this.fullDescription).equals(normalise(otherItem.fullDescription));
     }
 
     @Override

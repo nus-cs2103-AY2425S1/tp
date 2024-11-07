@@ -12,8 +12,8 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
+Class UniqueCustomerList
+Class Customer
 Class Address
 Class Email
 Class Name
@@ -48,21 +48,21 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
-Person *--> OrderList
+AddressBook *--> "1" UniqueCustomerList
+UniqueCustomerList --> "~* all" Customer
+Customer *--> Name
+Customer *--> Phone
+Customer *--> Email
+Customer *--> Address
+Customer *--> "*" Tag
+Customer *--> OrderList
 OrderList *--> "*" Order
 Order *--> Item
 Order *--> Date
 Order *--> Quantity
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Customer -[hidden]up--> I
+UniqueCustomerList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
@@ -73,6 +73,6 @@ Quantity -[hidden]right--> Status
 show Order members
 hide Order methods
 
-ModelManager --> "~* filtered" Person
-ModelManager --> "1 selected" Person
+ModelManager --> "~* filtered" Customer
+ModelManager --> "1 selected" Customer
 @enduml

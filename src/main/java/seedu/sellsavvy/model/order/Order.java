@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 
 /**
- * Represents an Order made by a Person in the address book.
+ * Represents an Order made by a Customer in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Order {
@@ -65,6 +65,16 @@ public class Order {
      */
     public boolean hasDateElapsed() {
         return date.hasDateElapsed();
+    }
+
+    /**
+     * Returns if the order has identical details and similar item.
+     */
+    public boolean isSimilarTo(Order otherOrder) {
+        return this.item.isSimilarTo(otherOrder.item)
+                && quantity.equals(otherOrder.quantity)
+                && date.equals(otherOrder.date)
+                && status.equals(otherOrder.status);
     }
 
     /**
