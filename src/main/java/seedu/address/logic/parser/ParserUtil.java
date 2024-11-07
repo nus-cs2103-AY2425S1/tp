@@ -36,6 +36,33 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+
+    /**
+     * Parses {@code input} into a String array of arguments and returns it. Leading and trailing whitespaces will be
+     * trimmed. Arguments are split by any number of whitespace.
+     *
+     * @param args A string containing arguments separated by whitespace.
+     * @param requiredNumberOfArguments The required number of arguments in input.
+     * @param usageMessage The usage message of a command to format error message.
+     * @return A String array of arguments.
+     * @throws ParseException If the input provided does not have the required number of arguments.
+     */
+    public static String[] parseRequiredNumberOfArguments(String args, int requiredNumberOfArguments,
+            String usageMessage) throws ParseException {
+        requireNonNull(args);
+        requireNonNull(usageMessage);
+
+        String trimmedArgs = args.trim();
+
+        String[] splitArguments = trimmedArgs.trim().split("\\s+");
+
+        if (trimmedArgs.isEmpty() || splitArguments.length != requiredNumberOfArguments) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, usageMessage));
+        }
+
+        return splitArguments;
+    }
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.

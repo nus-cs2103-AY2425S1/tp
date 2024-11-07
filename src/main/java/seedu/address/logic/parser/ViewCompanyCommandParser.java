@@ -1,8 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewCompanyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,21 +17,9 @@ public class ViewCompanyCommandParser implements Parser<ViewCompanyCommand> {
      */
     public ViewCompanyCommand parse(String args) throws ParseException {
 
-        String[] splitArgs = args.trim().split("\\s+");
-
-        if (args.isEmpty()) {
-            throw new ParseException(ViewCompanyCommand.MESSAGE_USAGE);
-        } else if (splitArgs.length < 2) {
-            throw new ParseException(MESSAGE_MISSING_INDEX);
-        }
-
-        // TODO: Implement an entity for view command
-        if (!splitArgs[0].equals("company")) {
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-        }
+        String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 2, ViewCompanyCommand.MESSAGE_USAGE);
 
         String indexString = splitArgs[1];
-
         Index index = ParserUtil.parseIndex(indexString);
 
         return new ViewCompanyCommand(index);
