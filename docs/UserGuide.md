@@ -17,7 +17,7 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-1/tp/releases/tag/v1.5).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
