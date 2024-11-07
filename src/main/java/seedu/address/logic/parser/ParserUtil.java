@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -49,7 +51,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = removeUnwantedPrefix(name, true);
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -64,7 +66,7 @@ public class ParserUtil {
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
-        String trimmedPhone = phone.trim();
+        String trimmedPhone = removeUnwantedPrefix(phone, false);
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
@@ -79,7 +81,7 @@ public class ParserUtil {
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
-        String trimmedAddress = address.trim();
+        String trimmedAddress = removeUnwantedPrefix(address, false);
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -94,7 +96,7 @@ public class ParserUtil {
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
-        String trimmedEmail = email.trim();
+        String trimmedEmail = removeUnwantedPrefix(email, false);
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
@@ -109,7 +111,7 @@ public class ParserUtil {
      */
     public static Job parseJob(String job) throws ParseException {
         requireNonNull(job);
-        String trimmedJob = job.trim();
+        String trimmedJob = removeUnwantedPrefix(job, false);
         if (!Job.isValidJob(trimmedJob)) {
             throw new ParseException(Job.MESSAGE_CONSTRAINTS);
         }
@@ -124,11 +126,12 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        if (!Tag.isValidTagName(tag)) {
+        String trimPrefixTag = removeUnwantedPrefix(tag, true);
+        if (!Tag.isValidTagName(trimPrefixTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-        String trimmedTag = StringUtil.capitaliseString(tag.trim());
+        String trimmedTag = StringUtil.capitaliseString(trimPrefixTag);
         return new Tag(trimmedTag);
     }
 
@@ -214,6 +217,26 @@ public class ParserUtil {
     }
 
     /**
+     * Ensures that invalid prefix is not included in argument string.
+     * @param arg user input as a String
+     * @param name boolean input of true if arg is a name and false if not
+     * @return a String of user input before invalid prefix
+     */
+    public static String removeUnwantedPrefix(String arg, boolean name) {
+        Pattern pattern;
+        if (name) {
+            pattern = Pattern.compile("^(.*) [a-zA-Z0-9]/\\s*(?:[a-zA-Z0-9]{2,}|$)");
+        } else {
+            pattern = Pattern.compile("^(.*) [a-zA-Z0-9]/[a-zA-Z0-9]{0,}");
+        }
+        Matcher matcher = pattern.matcher(arg);
+        if (matcher.find()) {
+            return matcher.group(1).trim();
+        }
+        return arg.trim();
+    }
+
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values
      * in the given
      * {@code ArgumentMultimap}.
@@ -221,5 +244,4 @@ public class ParserUtil {
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }

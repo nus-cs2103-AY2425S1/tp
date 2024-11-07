@@ -9,13 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_WEDDING1;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_WEDDING2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_TAG_UNEDITABLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -44,6 +43,15 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_tagPrefix_failure() {
+        // invalid usage of tag in input
+        assertParseFailure(parser, "edit n/Alice t/Jane & Tom", MESSAGE_TAG_UNEDITABLE);
+
+        // invalid usage of tag along with other arguments
+        assertParseFailure(parser, "edit n/Alice p/81234567 t/Jane & Tom", MESSAGE_TAG_UNEDITABLE);
+    }
+
+    @Test
     public void parse_someFieldsSpecified_success() {
         String userInput = NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
@@ -56,8 +64,8 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        String userInput = NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_WEDDING1
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_WEDDING2;
+        String userInput = NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();

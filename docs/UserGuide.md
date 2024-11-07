@@ -90,13 +90,16 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `John Loh & Jean Tan`,, `Stacy & Sam` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `John Loh & Jean Tan`, `Stacy & Sam` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Prefixes refer to the identifier before the parameter e.g. `n/` before `NAME`. Invalid prefixes (i.e. prefixes that do not exist) will be ignored.<br>
+e.g. if the command specifies `tag-add n/John Doe b/juice t/John Loh & Jean Tan`, it will be interpreted as `tag-add n/John Doe t/John Loh & Jean Tan`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
