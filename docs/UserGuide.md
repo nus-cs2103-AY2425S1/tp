@@ -165,7 +165,7 @@ Examples:
 
 Marks attendance of student for a particular date with the specified details.
 
-Format: `markat n/STUDENT_NAME dt/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
+Format: `markat n/STUDENT_NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`
 
 ### Marking Tutorial Group Attendance to Present : `markpresentall`
 
@@ -173,7 +173,7 @@ Marks all students in a tutorial group as present for a particular date
 
 Format: `markpresentall tg/TUTORIAL_GROUP dt/DATE`
 
-### Marking Tutorial Group Attendance to Absent: `markabssentall`
+### Marking Tutorial Group Attendance to Absent: `markabsentall`
 
 Marks all students in a tutorial group as absent for a particular date
 
@@ -183,7 +183,7 @@ Format: `unmarkpresentall tg/TUTORIAL_GROUP dt/DATE`
 
 Deletes attendance of student for a particular date with the specified details.
 
-Format : `deleteat n/STUDENT_NAME dt/DATE sn/STUDENT_NUMBER (Optional)`
+Format : `deleteat n/STUDENT_NAME dt/DATE [sn/STUDENT_NUMBER]`
 
 ### Deleting Tutorial Group Attendance : `deleteatall`
 
@@ -195,26 +195,24 @@ Format : `deleteatall tg/TUTORIAL_GROUP dt/DATE`
 
 Gets attendance of student for a particular date
 
-Format: `getat n/STUDENT_NAME dt/DATE sn/STUDENT_NUMBER (Optional)`
+Format: `getat n/STUDENT_NAME dt/DATE [sn/STUDENT_NUMBER]`
 
 ### Getting Tutorial Group Attendance : `getattg`
 
 Opens an attendance window for all students in a tutorial group for a particular date
 * Executing `undo` will close the last window opened by this command 
 
-Format: `getattg tg/TUTORIAL_GROUP dt/DATE`
+Format: `getattg tg/TUTORIAL_GROUP`
 
 ### Closing Attendance Window : `closeat`
 Closes all attendance windows if any is currently open.
 
 ## Assignment Commands
 
-Fields labelled `[0]` are optional.
-
 ### Adding Assignments : `adda`
 
 Adds an assignment to the specified student
-Format: `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE s/SUBMISSION_STATUS[O] g/GRADE[O] sn/STUDENT_NUMBER[O]`
+Format: `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`
   * Adds an assignment to the student with `NAME`. If student number is provided, this adds an assignment to the student
 with `STUDENT_NUMBER` and `NAME`.
   * If there is more than one student with `NAME`, a student number must be provided.
@@ -225,7 +223,7 @@ with `STUDENT_NUMBER` and `NAME`.
 ### Deleting Assignments : `deletea`
 
 Deletes an assignment for the specified student
-Format: `adda n/NAME a/ASSIGNMENT_NAME sn/STUDENT_NUMBER[O]`
+Format: `adda n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`
 * Deletes an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided, 
 this deletes the assignment for the student with `STUDENT_NUMBER` and `NAME`.
 * If there is more than one student with `NAME`, a student number must be provided.
@@ -233,7 +231,7 @@ this deletes the assignment for the student with `STUDENT_NUMBER` and `NAME`.
 ### Editing Assignments : `edita`
 
 Edits an assignment for the specified student
-Format: `edita n/NAME a/ASSIGNMENT_NAME d/DEADLINE[0] s/SUBMISSION_STATUS[0] g/GRADE[0]`
+Format: `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`
 * Edits an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided,
   this edits the assignment for the student with `STUDENT_NUMBER` and `NAME`.
 * If there is more than one student with `NAME`, a student number must be provided.
