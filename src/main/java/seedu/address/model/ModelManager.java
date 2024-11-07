@@ -138,7 +138,7 @@ public class ModelManager implements Model {
     @Override
     public void filterAppts(AppointmentDateFilter dateFilter) {
         TreeSet<FilteredAppointment> filteredAppts = filteredPatients.stream()
-                .flatMap(patient -> patient.getAppts().stream()
+                .flatMap(patient -> patient.getImmutableApptList().stream()
                         .filter(appt -> appt.isBetweenDatesAndMatchService(dateFilter))
                         .map(appt -> new FilteredAppointment(appt, patient)))
                 .collect(Collectors.toCollection(() -> new TreeSet<>(APPOINTMENT_COMPARATOR)));

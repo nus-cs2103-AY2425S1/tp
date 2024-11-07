@@ -18,6 +18,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVEALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,12 +31,15 @@ import seedu.address.model.patient.Nric;
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
+    private static final Logger logger = LogsCenter.getLogger(EditCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
+        logger.info("Attempting to parse EditCommand arguments.");
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX,
@@ -45,13 +51,23 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             nric = ParserUtil.parseNric(argMultimap.getPreamble());
         } catch (ParseException pe) {
+            logger.warning("No NRIC provided in input.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
+        logger.info("Checking for any duplicate prefixes.");
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE, PREFIX_HEALTHRISK,
                 PREFIX_EXISTINGCONDITION, PREFIX_NOTE);
 
+        EditPatientDescriptor editPatientDescriptor = createEditPatientDescriptor(argMultimap);
+        logger.info("EditPatientDescriptor object created.");
+
+        return new EditCommand(nric, editPatientDescriptor);
+    }
+
+    private static EditPatientDescriptor createEditPatientDescriptor(ArgumentMultimap argMultimap)
+            throws ParseException {
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -107,7 +123,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-        return new EditCommand(nric, editPatientDescriptor);
+        return editPatientDescriptor;
     }
 
 }

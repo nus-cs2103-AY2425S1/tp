@@ -76,8 +76,8 @@ public class FilterCommandTest {
 
         expectedModel.filterAppts(dateFilter);
         TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
-        appointments.add(new FilteredAppointment(ALICE.getAppts().get(0), ALICE));
-        appointments.add(new FilteredAppointment(CARL.getAppts().get(0), CARL));
+        appointments.add(new FilteredAppointment(ALICE.getImmutableApptList().get(0), ALICE));
+        appointments.add(new FilteredAppointment(CARL.getImmutableApptList().get(0), CARL));
 
         CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
@@ -96,8 +96,8 @@ public class FilterCommandTest {
 
         expectedModel.filterAppts(dateFilter);
         TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
-        appointments.add(new FilteredAppointment(BENSON.getAppts().get(0), BENSON));
-        appointments.add(new FilteredAppointment(CARL.getAppts().get(0), CARL));
+        appointments.add(new FilteredAppointment(BENSON.getImmutableApptList().get(0), BENSON));
+        appointments.add(new FilteredAppointment(CARL.getImmutableApptList().get(0), CARL));
 
         CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
@@ -116,7 +116,7 @@ public class FilterCommandTest {
 
         expectedModel.filterAppts(dateFilter);
         TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
-        appointments.add(new FilteredAppointment(BENSON.getAppts().get(0), BENSON));
+        appointments.add(new FilteredAppointment(BENSON.getImmutableApptList().get(0), BENSON));
 
         CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);

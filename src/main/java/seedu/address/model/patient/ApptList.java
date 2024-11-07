@@ -52,7 +52,7 @@ public class ApptList {
     /**
      * Returns an immutable list of appointments.
      */
-    public List<Appt> getAppts() {
+    public List<Appt> getImmutableApptList() {
         return Collections.unmodifiableList(appts);
     }
 

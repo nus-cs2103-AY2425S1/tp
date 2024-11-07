@@ -112,7 +112,7 @@ public class EditCommand extends Command {
         Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
         Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
         Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
-        ApptList updatedAppt = new ApptList(patientToEdit.getAppts());
+        ApptList updatedAppt = patientToEdit.getAppts();
 
         return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
                 updatedEmail, updatedAddress, updatedAllergyList, updatedBloodType, updatedHealthRisk,
@@ -130,47 +130,48 @@ public class EditCommand extends Command {
             return new AllergyList(new LinkedHashSet<>(patientToEdit.getAllergies()));
         }
         if (allergiesToRemove.isPresent()) {
-            List<Allergy> allergiesToRemoveList = allergiesToRemove.get().getAllergies();
-            checkAnyAllergiesNotPresent(patientToEdit, allergiesToRemoveList);
-            for (Allergy allergy : allergiesToRemoveList) {
-                patientToEdit.deleteAllergy(allergy);
-            }
+            removeAllergies(patientToEdit, allergiesToRemove.get().getAllergies());
         }
         if (allergiesToAdd.isPresent()) {
-            List<Allergy> allegiesToAddList = allergiesToAdd.get().getAllergies();
-            checkAnyAllergiesAlreadyPresent(patientToEdit, allegiesToAddList);
-            for (Allergy allergy : allegiesToAddList) {
-                patientToEdit.addAllergy(allergy);
-            }
+            addAllergies(patientToEdit, allergiesToAdd.get().getAllergies());
         }
         return new AllergyList(new LinkedHashSet<>(patientToEdit.getAllergies()));
     }
 
     /**
-     * Checks if all the specified allergies to be removed are present in the patient's list of allergies.
+     * Checks if all the specified allergies to be removed are present in the patient's list of allergies and
+     * removes specified allergies from patient's list of allergies.
      */
-    public static void checkAnyAllergiesNotPresent(Patient patientToEdit, List<Allergy> allergies)
+    private static void removeAllergies(Patient patientToEdit, List<Allergy> allergiesToRemove)
             throws CommandException {
-        for (Allergy allergy : allergies) {
+        assert allergiesToRemove != null;
+        for (Allergy allergy : allergiesToRemove) {
             try {
                 patientToEdit.checkAllergyPresentForRemoval(allergy);
             } catch (AllergyNotFoundException e) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_ALLERGY_TO_DELETE, allergy));
             }
         }
+        for (Allergy allergy : allergiesToRemove) {
+            patientToEdit.deleteAllergy(allergy);
+        }
     }
 
     /**
-     * Checks if any of the specified allergies to be added already exists in the patient's list of allergies.
+     * Checks if any of the specified allergies to be added already exists in the patient's list of allergies and
+     * adds specified allergies to patient's list of allergies.
      */
-    public static void checkAnyAllergiesAlreadyPresent(Patient patientToEdit, List<Allergy> allergies)
-            throws CommandException {
-        for (Allergy allergy : allergies) {
+    public static void addAllergies(Patient patientToEdit, List<Allergy> allergiesToAdd) throws CommandException {
+        assert allergiesToAdd != null;
+        for (Allergy allergy : allergiesToAdd) {
             try {
                 patientToEdit.checkAllergyAlreadyExists(allergy);
             } catch (AllergyAlreadyExistsException e) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_ALLERGY_TO_ADD, allergy));
             }
+        }
+        for (Allergy allergy : allergiesToAdd) {
+            patientToEdit.addAllergy(allergy);
         }
     }
 
@@ -223,7 +224,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of each field is used internally.
          */
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             setName(toCopy.name);

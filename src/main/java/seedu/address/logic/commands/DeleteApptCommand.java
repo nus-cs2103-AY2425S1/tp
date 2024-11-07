@@ -60,7 +60,7 @@ public class DeleteApptCommand extends Command {
             throw new CommandException(Messages.MESSAGE_PATIENT_NOT_FOUND);
         }
 
-        Appt apptToDelete = patientToDeleteAppt.getAppts().stream()
+        Appt apptToDelete = patientToDeleteAppt.getImmutableApptList().stream()
                 .filter(appt -> appt.getDateTime().equals(apptDateTime))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_APPT_DATETIME));

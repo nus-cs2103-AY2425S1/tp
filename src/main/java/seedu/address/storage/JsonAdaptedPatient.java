@@ -102,7 +102,7 @@ class JsonAdaptedPatient {
         note = Optional.ofNullable(source.getNote()).map(note -> note.value).orElse("");
         nokName = Optional.ofNullable(source.getNokName()).map(name -> name.fullName).orElse("");
         nokPhone = Optional.ofNullable(source.getNokPhone()).map(phone -> phone.value).orElse("");
-        appts.addAll(source.getAppts().stream()
+        appts.addAll(source.getImmutableApptList().stream()
                 .map(JsonAdaptedAppt::new)
                 .collect(Collectors.toList()));
     }
