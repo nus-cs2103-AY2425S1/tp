@@ -5,25 +5,25 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteClaimsCommand;
+import seedu.address.logic.commands.DeleteClaimCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Parses input arguments and creates a new {@code DeleteClaimsCommand} object.
+ * Parses input arguments and creates a new {@code DeleteClaimCommand} object.
  */
-public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
+public class DeleteClaimCommandParser implements Parser<DeleteClaimCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code DeleteClaimsCommand}
-     * and returns a {@code DeleteClaimsCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code DeleteClaimCommand}
+     * and returns a {@code DeleteClaimCommand} object for execution.
      *
      * @param args The user input string containing the arguments.
-     * @return The constructed {@code DeleteClaimsCommand}.
+     * @return The constructed {@code DeleteClaimCommand}.
      * @throws ParseException If the input does not conform to the expected format.
      */
     @Override
-    public DeleteClaimsCommand parse(String args) throws ParseException {
+    public DeleteClaimCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX);
         Index clientIndex = parseClientIndex(argMultimap);
         validatePrefixes(argMultimap);
@@ -32,7 +32,7 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
         PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
         Index claimIndex = parseClaimIndex(argMultimap);
 
-        return new DeleteClaimsCommand(clientIndex, policyType, claimIndex);
+        return new DeleteClaimCommand(clientIndex, policyType, claimIndex);
     }
 
     /**
@@ -46,7 +46,7 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
         try {
             return ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE),
                     pe);
         }
     }
@@ -60,7 +60,7 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
     private void validatePrefixes(ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_POLICY_TYPE).isEmpty()
                 || argMultimap.getValue(PREFIX_CLAIM_INDEX).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE));
         }
     }
 
@@ -75,7 +75,7 @@ public class DeleteClaimsCommandParser implements Parser<DeleteClaimsCommand> {
         try {
             return ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLAIM_INDEX).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE),
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE),
                     pe);
         }
     }
