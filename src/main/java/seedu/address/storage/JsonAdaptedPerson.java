@@ -73,52 +73,106 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<Tag> personTags = convertTagsToModelType();
+        final Name modelName = validateAndCreateName();
+        final Phone modelPhone = validateAndCreatePhone();
+        final Email modelEmail = validateAndCreateEmail();
+        final Address modelAddress = validateAndCreateAddress();
+        final Status modelStatus = validateAndCreateStatus();
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelTags, personId);
+    }
+
+    /**
+     * Converts the tags of the JsonAdaptedPerson to the model's Tag object.
+     *
+     * @return List of Tag objects.
+     */
+    private List<Tag> convertTagsToModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
+        return personTags;
+    }
+
+    /**
+     * Validates and creates the Name object.
+     *
+     * @return Name object.
+     * @throws IllegalValueException if the name is invalid.
+     */
+    private Name validateAndCreateName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        return new Name(name);
+    }
 
+    /**
+     * Validates and creates the Phone object.
+     *
+     * @return Phone object.
+     * @throws IllegalValueException if the phone is invalid
+     */
+    private Phone validateAndCreatePhone() throws IllegalValueException {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        return new Phone(phone);
+    }
 
+    /**
+     * Validates and creates the Email object.
+     *
+     * @return Email object.
+     * @throws IllegalValueException if the email is invalid
+     */
+    private Email validateAndCreateEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        return new Email(email);
+    }
 
+    /**
+     * Validates and creates the Address object.
+     *
+     * @return Address object.
+     * @throws IllegalValueException if the address is invalid
+     */
+    private Address validateAndCreateAddress() throws IllegalValueException {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        return new Address(address);
+    }
 
+    /**
+     * Validates and creates the Status object.
+     *
+     * @return Status object.
+     * @throws IllegalValueException if the status is invalid
+     */
+    private Status validateAndCreateStatus() throws IllegalValueException {
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
         if (!Status.isValidStatus(status)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
-        final Status modelStatus = new Status(status);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelTags, personId);
+        return new Status(status);
     }
-
 }

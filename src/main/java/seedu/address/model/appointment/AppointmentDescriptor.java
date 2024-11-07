@@ -60,7 +60,6 @@ public class AppointmentDescriptor {
             return true;
         }
 
-        // todo: add other checks for equality
         return otherAppointment != null
                 && otherAppointment.getAppointmentDateTime().equals(getAppointmentDateTime())
                 && otherAppointment.getAppointmentType().equals(getAppointmentType());

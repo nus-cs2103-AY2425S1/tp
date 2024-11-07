@@ -77,9 +77,28 @@ public class JsonAdaptedAppointment {
     /**
      * Converts this Jackson-friendly adapted Appointment object into the model's {@code Appointment} object.
      *
+     * @param addressBook the address book to find the person from.
+     * @return the model {@code Appointment} object.
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Appointment toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
+        final AppointmentType modelAppointmentType = validateAndConvertAppointmentType();
+        final LocalDateTime modelAppointmentDateTime = validateAndConvertAppointmentDateTime();
+        final int modelPersonId = validateAndConvertPersonId();
+        final Person modelPerson = validateAndFindPerson(addressBook, modelPersonId);
+        final Sickness modelSickness = validateAndConvertSickness();
+        final Medicine modelMedicine = validateAndConvertMedicine();
+
+        return new Appointment(modelAppointmentType, modelAppointmentDateTime, modelPerson,
+                modelSickness, modelMedicine, appointmentId);
+    }
+
+    /**
+     * Validates and converts the appointment type.
+     *
+     * @return the appointment type.
+     */
+    private AppointmentType validateAndConvertAppointmentType() throws IllegalValueException {
         if (appointmentType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AppointmentType.class.getSimpleName()));
@@ -87,14 +106,28 @@ public class JsonAdaptedAppointment {
         if (!AppointmentType.isValidAppointmentType(appointmentType)) {
             throw new IllegalValueException(AppointmentType.MESSAGE_CONSTRAINTS);
         }
-        final AppointmentType modelAppointmentType = new AppointmentType(appointmentType);
+        return new AppointmentType(appointmentType);
+    }
 
+    /**
+     * Validates and converts the appointment date-time.
+     *
+     * @return the appointment date-time.
+     */
+    private LocalDateTime validateAndConvertAppointmentDateTime() throws IllegalValueException {
         if (appointmentDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDateTime.class.getSimpleName()));
         }
-        final LocalDateTime modelAppointmentDateTime = parseDateTime(appointmentDateTime);
+        return parseDateTime(appointmentDateTime);
+    }
 
+    /**
+     * Validates and converts the personId.
+     *
+     * @return the person ID.
+     */
+    private int validateAndConvertPersonId() throws IllegalValueException {
         if (personId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Integer.class.getSimpleName()));
@@ -102,27 +135,45 @@ public class JsonAdaptedAppointment {
         if (personId < 0) {
             throw new IllegalValueException(String.format(INTEGER_CHECK_MESSAGE_FORMAT));
         }
-        final int modelPersonId = personId;
+        return personId;
+    }
 
-        final Optional<Person> modelPersonOptional = addressBook.findPerson(modelPersonId);
-        if (!modelPersonOptional.isPresent()) {
+    /**
+     * Validates and finds the person from the address book.
+     *
+     * @param addressBook the address book to find the person from.
+     * @param personId the person ID to find.
+     * @return the person.
+     */
+    private Person validateAndFindPerson(ReadOnlyAddressBook addressBook, int personId) throws IllegalValueException {
+        final Optional<Person> modelPersonOptional = addressBook.findPerson(personId);
+        if (modelPersonOptional.isEmpty()) {
             throw new IllegalValueException(String.format(PERSON_CHECK_MESSAGE_FORMAT));
         }
-        Person modelPerson = modelPersonOptional.get();
+        return modelPersonOptional.get();
+    }
 
+    /**
+     * Validates and converts the sickness.
+     *
+     * @return the sickness.
+     */
+    private Sickness validateAndConvertSickness() throws IllegalValueException {
         if (!Sickness.isValidSickness(sickness)) {
             throw new IllegalValueException(Sickness.MESSAGE_CONSTRAINTS);
         }
-        final Sickness modelSickness = new Sickness(sickness);
+        return new Sickness(sickness);
+    }
 
+    /**
+     * Validates and converts the medicine.
+     *
+     * @return the medicine.
+     */
+    private Medicine validateAndConvertMedicine() throws IllegalValueException {
         if (!Medicine.isValidMedicine(medicine)) {
             throw new IllegalValueException(Medicine.MESSAGE_CONSTRAINTS);
         }
-        final Medicine modelMedicine = new Medicine(medicine);
-
-        return new Appointment(modelAppointmentType, modelAppointmentDateTime, modelPerson,
-                modelSickness, modelMedicine, appointmentId);
+        return new Medicine(medicine);
     }
-
-
 }

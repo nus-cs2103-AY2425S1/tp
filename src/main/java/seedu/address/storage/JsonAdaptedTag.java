@@ -28,11 +28,6 @@ class JsonAdaptedTag {
         tagName = source.tagName;
     }
 
-    @JsonValue
-    public String getTagName() {
-        return tagName;
-    }
-
     /**
      * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
      *

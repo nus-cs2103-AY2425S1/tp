@@ -112,8 +112,10 @@ public class Appointment {
      * This defines a weaker notion of equality between two appointments.
      */
     public boolean isSameAppointment(Appointment otherAppointment) {
-        return appointmentDescriptor.isSameAppointment(otherAppointment.appointmentDescriptor)
-                && person.isSamePerson(otherAppointment.person);
+        boolean isSamePerson = person.isSamePerson(otherAppointment.person);
+        boolean isSameAppointmentDescriptor = appointmentDescriptor.isSameAppointment(
+                otherAppointment.appointmentDescriptor);
+        return isSamePerson && isSameAppointmentDescriptor;
     }
 
     public boolean isSameAppointment(AppointmentDescriptor otherAppointment) {
