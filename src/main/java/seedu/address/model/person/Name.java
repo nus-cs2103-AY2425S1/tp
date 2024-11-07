@@ -85,22 +85,22 @@ public class Name {
 
         // Additional validation rules for Roman numerals
         // Check for valid patterns and combinations
-        if (word.matches(".*I{4,}.*") ||      // No more than 3 consecutive I's
-                word.matches(".*V{2,}.*") ||      // No more than 1 V
-                word.matches(".*X{4,}.*") ||      // No more than 3 consecutive X's
-                word.matches(".*L{2,}.*") ||      // No more than 1 L
-                word.matches(".*C{4,}.*") ||      // No more than 3 consecutive C's
-                word.matches(".*D{2,}.*") ||      // No more than 1 D
-                word.matches(".*M{4,}.*")) {      // No more than 3 consecutive M's
+        if (word.matches(".*I{4,}.*")
+                || word.matches(".*V{2,}.*")
+                || word.matches(".*X{4,}.*")
+                || word.matches(".*L{2,}.*")
+                || word.matches(".*C{4,}.*")
+                || word.matches(".*D{2,}.*")
+                || word.matches(".*M{4,}.*")) {
             return false;
         }
 
         // Check for invalid sequences
-        if (word.matches(".*I[LCDM].*") ||    // I can only come before V or X
-                word.matches(".*V[XLCDM].*") ||   // V cannot come before any larger numeral
-                word.matches(".*X[CDM].*") ||     // X can only come before L or C
-                word.matches(".*L[CDM].*") ||     // L cannot come before any larger numeral
-                word.matches(".*D[M].*")) {       // D cannot come before M
+        if (word.matches(".*I[LCDM].*")
+                || word.matches(".*V[XLCDM].*")
+                || word.matches(".*X[CDM].*")
+                || word.matches(".*L[CDM].*")
+                || word.matches(".*D[M].*")) {
             return false;
         }
 
