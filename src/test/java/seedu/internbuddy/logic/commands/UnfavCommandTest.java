@@ -1,5 +1,6 @@
 package seedu.internbuddy.logic.commands;
 
+import static seedu.internbuddy.logic.Messages.MESSAGE_INDEX_EXCEEDS_SIZE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
@@ -8,7 +9,6 @@ import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.core.index.Index;
-import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
 import seedu.internbuddy.model.UserPrefs;
@@ -40,7 +40,9 @@ public class UnfavCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
         UnfavCommand unfavCommand = new UnfavCommand(outOfBoundIndex);
+        String expectedMessage = String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
 
-        assertCommandFailure(unfavCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        assertCommandFailure(unfavCommand, model, expectedMessage);
     }
 }

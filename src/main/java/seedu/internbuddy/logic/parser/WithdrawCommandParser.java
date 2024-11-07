@@ -29,14 +29,17 @@ public class WithdrawCommandParser implements Parser<WithdrawCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX);
         Index companyIndex;
-        Index applicationIndex;
         try {
             companyIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_COMPANY_INDEX).get());
-            applicationIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_APP_INDEX).get());
-            return new WithdrawCommand(companyIndex, applicationIndex);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, WithdrawCommand.MESSAGE_USAGE), pe);
+            throw new ParseException("Company " + ParserUtil.MESSAGE_INVALID_INDEX);
         }
+        Index applicationIndex;
+        try {
+            applicationIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_APP_INDEX).get());
+        } catch (ParseException pe) {
+            throw new ParseException("Application " + ParserUtil.MESSAGE_INVALID_INDEX);
+        }
+        return new WithdrawCommand(companyIndex, applicationIndex);
     }
 }

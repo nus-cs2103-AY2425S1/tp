@@ -50,14 +50,16 @@ public class WithdrawCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (companyIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            throw new CommandException("Company "
+                    + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
         }
 
         Company companyToEdit = lastShownList.get(companyIndex.getZeroBased());
         List<Application> applicationList = new ArrayList<>(companyToEdit.getApplications());
 
         if (applicationIndex.getZeroBased() >= applicationList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
+            throw new CommandException("Application "
+                    + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, applicationList.size()));
         }
 
         Application applicationToWithdraw = applicationList.get(applicationIndex.getZeroBased());

@@ -39,8 +39,9 @@ public class ApplyCommandTest {
     public void execute_invalidIndex_throwsCommandException() {
         Application validApplication = new ApplicationBuilder().build();
         ApplyCommand applyCommand = new ApplyCommand(Index.fromOneBased(999), validApplication);
-        assertThrows(CommandException.class, () -> applyCommand.execute(model),
-            Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        String expectedMessage = String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
+        assertThrows(CommandException.class, () -> applyCommand.execute(model), expectedMessage);
     }
 
     @Test

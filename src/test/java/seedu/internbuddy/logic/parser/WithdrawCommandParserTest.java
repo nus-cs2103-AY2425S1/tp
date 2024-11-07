@@ -71,14 +71,19 @@ public class WithdrawCommandParserTest {
 
     @Test
     public void parse_invalidValues_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, WithdrawCommand.MESSAGE_USAGE);
+        String expectedMessageCompany = String.format("Company " + ParserUtil.MESSAGE_INVALID_INDEX);
+        String expectedMessageApplication = String.format("Application " + ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // invalid company index
+        assertParseFailure(parser, INVALID_COMPANY_INDEX_DESC_1 + APPLICATION_INDEX_DESC,
+                expectedMessageCompany);
+        assertParseFailure(parser, INVALID_COMPANY_INDEX_DESC_2 + APPLICATION_INDEX_DESC,
+                expectedMessageCompany);
 
         // invalid application index
-        assertParseFailure(parser, INVALID_COMPANY_INDEX_DESC_1 + APPLICATION_INDEX_DESC, expectedMessage);
-        assertParseFailure(parser, INVALID_COMPANY_INDEX_DESC_2 + APPLICATION_INDEX_DESC, expectedMessage);
-
-        // invalid application index
-        assertParseFailure(parser, COMPANY_INDEX_DESC + INVALID_APPLICATION_INDEX_DESC_1, expectedMessage);
-        assertParseFailure(parser, COMPANY_INDEX_DESC + INVALID_APPLICATION_INDEX_DESC_2, expectedMessage);
+        assertParseFailure(parser, COMPANY_INDEX_DESC + INVALID_APPLICATION_INDEX_DESC_1,
+                expectedMessageApplication);
+        assertParseFailure(parser, COMPANY_INDEX_DESC + INVALID_APPLICATION_INDEX_DESC_2,
+                expectedMessageApplication);
     }
 }

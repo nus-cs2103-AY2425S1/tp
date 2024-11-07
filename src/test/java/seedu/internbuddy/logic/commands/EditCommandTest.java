@@ -3,6 +3,7 @@ package seedu.internbuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.internbuddy.logic.Messages.MESSAGE_INDEX_EXCEEDS_SIZE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.DESC_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.DESC_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
@@ -129,8 +130,10 @@ public class EditCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+        String expectedMessage = String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     /**
@@ -146,8 +149,10 @@ public class EditCommandTest {
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build());
+        String expectedMessage = String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test
