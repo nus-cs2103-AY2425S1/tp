@@ -18,6 +18,7 @@ import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
+import tahub.contacts.logic.commands.UnenrollCommand;
 import tahub.contacts.logic.commands.attend.AttendAbsentCommand;
 import tahub.contacts.logic.commands.attend.AttendClearCommand;
 import tahub.contacts.logic.commands.attend.AttendPresentCommand;
@@ -115,6 +116,9 @@ public class AddressBookParser {
 
         case EnrollCommand.COMMAND_WORD:
             return new EnrollCommandParser().parse(arguments);
+
+        case UnenrollCommand.COMMAND_WORD:
+            return new UnenrollCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

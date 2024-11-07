@@ -7,7 +7,7 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL_ID;
 
 import java.util.stream.Stream;
 
-import tahub.contacts.logic.commands.EnrollCommand;
+import tahub.contacts.logic.commands.UnenrollCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.person.MatriculationNumber;
@@ -16,14 +16,14 @@ import tahub.contacts.model.person.MatriculationNumber;
 /**
  * Parses input arguments and creates a new EnrollCommand object
  */
-public class EnrollCommandParser implements Parser<EnrollCommand> {
+public class UnenrollCommandParser implements Parser<UnenrollCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EnrollCommand
      * and returns an EnrollCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EnrollCommand parse(String args) throws ParseException {
+    public UnenrollCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MATRICULATION_NUMBER, PREFIX_COURSE_CODE,
                         PREFIX_TUTORIAL_ID);
@@ -31,7 +31,7 @@ public class EnrollCommandParser implements Parser<EnrollCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_MATRICULATION_NUMBER, PREFIX_COURSE_CODE,
                 PREFIX_TUTORIAL_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MATRICULATION_NUMBER, PREFIX_COURSE_CODE,
@@ -46,7 +46,7 @@ public class EnrollCommandParser implements Parser<EnrollCommand> {
         String tutorialId = ParserUtil.parseTutorialId(argMultimap
                 .getValue(PREFIX_TUTORIAL_ID).get());
 
-        return new EnrollCommand(matricNumber, courseCode, tutorialId);
+        return new UnenrollCommand(matricNumber, courseCode, tutorialId);
     }
 
     /**
