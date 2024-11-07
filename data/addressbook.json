@@ -3,60 +3,48 @@
     "name" : "David Ng",
     "phone" : "93456789",
     "email" : "davidng@example.com",
-    "availableDate" : "2023-08-12",
-    "involvedIn" : [ "Beach Cleanup", "Charity Run", "Tree Planting" ]
-  }, {
-    "name" : "Emily Lim",
-    "phone" : "94567890",
-    "email" : "emilylim@example.com",
-    "availableDate" : "2023-09-01",
-    "involvedIn" : [ "Food Donation Drive" ]
-  }, {
-    "name" : "John Doe",
-    "phone" : "98765432",
-    "email" : "johndoe@example.com",
-    "availableDate" : "2020-10-10",
-    "involvedIn" : [ ]
+    "availableDate" : "2023-10-27",
+    "involvedIn" : [ "Tree Planting" ]
   }, {
     "name" : "Alice Wong",
     "phone" : "99117846",
     "email" : "Alice@gmail.com",
-    "availableDate" : "2022-01-02",
-    "involvedIn" : [ "Charity Run" ]
+    "availableDate" : "2023-10-28",
+    "involvedIn" : [ ]
   }, {
     "name" : "Jason Wang",
     "phone" : "12341234",
     "email" : "lol@lol.com",
-    "availableDate" : "2022-10-15",
-    "involvedIn" : [ ]
+    "availableDate" : "2023-10-28",
+    "involvedIn" : [ "Charity Run" ]
   } ],
   "events" : [ {
     "eventName" : "Beach Cleanup",
-    "date" : "2023-10-15",
+    "date" : "2023-10-25",
     "startTime" : "08:00",
     "endTime" : "12:00",
     "location" : "East Coast Park",
     "description" : "Annual beach cleaning event",
-    "volunteers" : [ "David Ng" ]
+    "volunteers" : [ ]
   }, {
     "eventName" : "Charity Run",
-    "date" : "2023-11-05",
+    "date" : "2023-10-28",
     "startTime" : "06:00",
     "endTime" : "11:00",
     "location" : "Marina Bay",
     "description" : "5km run to raise funds for charity",
-    "volunteers" : [ "David Ng", "Alice Wong" ]
+    "volunteers" : [ "Jason Wang" ]
   }, {
     "eventName" : "Food Donation Drive",
-    "date" : "2023-12-12",
+    "date" : "2023-10-27",
     "startTime" : "10:00",
     "endTime" : "15:00",
     "location" : "City Hall",
     "description" : "",
-    "volunteers" : [ "Emily Lim" ]
+    "volunteers" : [ ]
   }, {
     "eventName" : "Tree Planting",
-    "date" : "2024-01-25",
+    "date" : "2023-10-27",
     "startTime" : "09:00",
     "endTime" : "13:00",
     "location" : "Bishan Park",
@@ -64,7 +52,7 @@
     "volunteers" : [ "David Ng" ]
   }, {
     "eventName" : "Blood Donation Drive",
-    "date" : "2024-02-14",
+    "date" : "2023-10-26",
     "startTime" : "08:30",
     "endTime" : "16:00",
     "location" : "Red Cross Center",

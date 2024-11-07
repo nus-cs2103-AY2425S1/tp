@@ -16,6 +16,8 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
    1. [Adding a volunteer](#adding-a-volunteer-v-new)
    1. [Finding volunteers by name](#finding-volunteers-by-name--v-find)
    1. [Deleting a volunteer](#deleting-a-volunteer--v-del)
+   1. [Adding available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)
+   1. [Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)
    1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)
    1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)
 1. [Event-related Commands](#event-related-commands)
@@ -23,6 +25,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
    1. [Finding events by name](#finding-events-by-name--e-find)
    1. [Deleting an event](#deleting-an-event--e-del-)
    1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
+   1. [Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter)
 1. [Commands Summary](#command-summary)
 
 ## Other Resources
@@ -35,14 +38,14 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 ## Quick start
 
 
-1. **Check for Java Installation**  
+1. **Check for Java Installation**
    Ensure you have Java **17** or above installed on your computer:
    - Open a terminal or command prompt and run the following command:
      - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
      - On Mac/Linux: Open the Terminal from your Applications.
        ```bash
        java -version
-       ```  
+       ```
    - If you see a version like `java version "17.x.x"` or higher, you're all set!
    - If Java is not installed or the version is lower than 17:
       - Download and install the latest Java Development Kit (JDK) **17** from [Oracle's official site](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or [OpenJDK](https://openjdk.org/).
@@ -56,7 +59,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 1. Open your computer's command terminal
 
 1. In the terminal, type `cd` followed by the path to the folder with the .jar file (e.g. `C:/Users/Your_Name/Your_Folder`), then run the following command:
-   
+
    `java -jar NAME_OF_JAR_FILE`. For example, `java -jar volunsync-v1.5.jar`.
 
 1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
@@ -67,7 +70,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 
     * `list` : Lists all volunteers and events in the VolunSync database.
 
-    * `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
+    * `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
 
     * `/v del 3` : Deletes the third volunteer on the list of volunteers.
 
@@ -159,6 +162,10 @@ Format : `export`
     - `events.csv` — Contains all event records.
     - `volunteers.csv` — Contains all volunteer records.
 
+![Export File](images/ExportCommand.png)
+
+* After running the export command, check the `/output` folder located in the same directory as your .jar file. You’ll find two CSV files: events.csv and volunteers.csv.
+
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 ### Exiting the program : `exit`
@@ -207,12 +214,12 @@ Format: `/v find KEYWORD`
 * Only the name is searched
 * The searching algorithm returns volunteers with any part of their name matching the `KEYWORD`
     * e.g. `Joe` will match `Joelle`, `Enjoeline` and `Joe`
- 
+
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
 
 Examples:
-* `/v find Anne` returns `Anne Khoo`, `Annebette Tan` and `Jonanne Tan`
+* `/v find ng` returns `David Ng`, `Alice Wong` and `Jason Wang`
 
 ![Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
 
@@ -251,13 +258,13 @@ Format: `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
 
 * The index refers to the number on the left of the volunteer's name.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Date **must be in yyyy-MM-dd** 2024-11-28
+* Date: Format YYYY-MM-DD (e.g. 2024-01-01)
 * Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
 
 Examples:
-* `/v free i/1 d/2024-11-28, 2024-11-29` adds 2024-11-28 and 2024-11-29 as available dates to the first volunteer on the volunteer list.
+* `/v free i/1 d/2023-10-28, 2023-10-29` adds 2023-10-28 and 2023-10-29 as available dates to the first volunteer on the volunteer list.
 
-![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+![Free Volunteer Demo](images/commandDemo/FreeVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -271,13 +278,13 @@ Format: `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
 
 * The index refers to the number on the left of the volunteer's name.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Date **must be in yyyy-MM-dd** 2024-11-28
+* Date: Format YYYY-MM-DD (e.g. 2024-01-01)
 * Multiple **dates must be separated by a comma** although spacing is optional 2024-11-28, 2024-11-29, 2024-11-30, ...
 
 Examples:
-* `/v unfree i/1 d/2024-11-28, 2024-11-29` removes 2024-11-28 and 2024-11-29 as available dates from the first volunteer on the volunteer list.
+* `/v unfree i/1 d/2023-10-28, 2023-10-29` removes 2024-11-28 and 2024-11-29 as available dates from the first volunteer on the volunteer list.
 
-![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+![Unfree Volunteer Demo](images/commandDemo/UnfreeVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -293,13 +300,13 @@ Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `assign v/1 e/2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
+* `assign v/3 e/2` assigns the third volunteer on the volunteer list to the list of participants of the second event on the event list.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 Volunteers who not available on the day of the event or are assigned to another event happening at the same time cannot be assigned.
 </div>
 
-![Assign Volunteer Demo](images/commandDemo/AssignDemo.png)
+![Assign Volunteer Demo](images/commandDemo/AssignVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -315,9 +322,9 @@ Format: `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unassign v/1 e/2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
+* `unassign v/2 e/2` removes the second volunteer on the volunteer list from the list of participants of the second event on the event list.
 
-![Unassign Volunteer Demo](images/commandDemo/UnassignDemo.png)
+![Unassign Volunteer Demo](images/commandDemo/UnassignVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -336,6 +343,9 @@ Format: `/v view VOLUNTEER_INDEX`
 you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
 
 Examples:
+
+![View Volunteer Demo](images/commandDemo/ViewVolunteerDemo.png)
+
 * `/v view 1` displays the events the first volunteer is participating in.
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
@@ -354,7 +364,7 @@ Input Requirements:
 - Event Name: Alphanumeric characters and spaces only, 1-50 characters.
 - Location: Alphanumeric characters and spaces only, 1-100 characters.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01),
-- Start Time: 24-hour format HH:mm (e.g., 12:00). 
+- Start Time: 24-hour format HH:mm (e.g., 12:00).
 - End Time: Format HH:mm (e.g., 15:00). Start time must be before end time.
 - Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
 
@@ -496,20 +506,24 @@ These known issues are actively being worked on, and we are continuously improvi
 
 ### General Commands
 
-| Action                                       | Format   |
-|----------------------------------------------|----------|
-| **List all Volunteers and Events**           | `list`   |
-| **Export database to csv file**              | `export` |
-| **Help**                                     | `help`   |
-| **Exit**                                     | `exit`   |
+| Action                                                                         | Format   |
+|--------------------------------------------------------------------------------|----------|
+| **[List all Volunteers and Events](#listing-all-volunteers-and-events--list)** | `list`   |
+| **[Export database to a CSV file](#export-database-to-a-csv-file--export)**    | `export` |
+| **[View help](#viewing-help--help)**                                           | `help`   |
+| **[Exit the program](#exiting-the-program--exit)**                             | `exit`   |
 
 ### Volunteer Commands
 
-| Action                                       | Format                                                       | Examples                                                          |
-|----------------------------------------------|--------------------------------------------------------------|-------------------------------------------------------------------|
-| **Add Volunteer**                            | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE`     | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02`     |
-| **Delete Volunteer**                         | `/v del VOLUNTEER_INDEX`                                     | `/v del 1`                                                        |
-| **Find Volunteer**                           | `/v find KEYWORD`                                            | `/v find Yeoh`                                                    |
+| Action                                                                                               | Format                                                   | Examples                                                      |
+|------------------------------------------------------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|
+| **[Add a volunteer](#adding-a-volunteer-v-new)**                                                     | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE` | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` |
+| **[Find volunteers by name](#finding-volunteers-by-name--v-find)**                                   | `/v find KEYWORD`                                        | `/v find Anne`                                                |
+| **[Delete a volunteer](#deleting-a-volunteer--v-del)**                                               | `/v del VOLUNTEER_INDEX`                                 | `/v del 1`                                                    |
+| **[Add available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)**              | `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`            | `/v free i/1 d/2024-11-28, 2024-11-29`                        |
+| **[Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)** | `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`          | `/v unfree i/1 d/2024-11-28, 2024-11-29`                      |
+| **[Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)**                         | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                | `assign v/1 e/2`                                              |
+| **[Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)**         | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`              | `unassign v/1 e/2`                                            |
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -517,14 +531,13 @@ These known issues are actively being worked on, and we are continuously improvi
 
 ### Event Commands
 
-| Action                                       | Format                                                                                  | Examples                                                                         |
-|----------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| **Add Event**                                | `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`       | `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`       |
-| **Delete Event**                             | `/e del EVENT_INDEX`                                                                    | `/e del 1`                                                                       |
-| **Find Event**                               | `/e find KEYWORD`                                                                       | `/e find Forest`                                                                 |
-| **Add Volunteer to Event**                   | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                                               | `assign v/1 e/2`                                                                 |
-| **Remove Volunteer from Event**              | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                                             | `unassign v/1 e/2`                                                               |
-| **View all Volunteers involved in an Event** | `/e view EVENT_INDEX`                                                                   | `/e view 1`                                                                      |
+| Action                                                                                                               | Format                                                                                  | Examples                                                                         |
+|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **[Adding an event](#adding-an-event-e-new)**                                                                        | `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`       | `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`       |
+| **[Finding events by name](#finding-events-by-name--e-find)**                                                        | `/e del EVENT_INDEX`                                                                    | `/e del 1`                                                                       |
+| **[Deleting an event](#deleting-an-event--e-del-)**                                                                  | `/e find KEYWORD`                                                                       | `/e find Forest`                                                                 |
+| **[Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)**     | `/e view EVENT_INDEX`                                                                   | `/e view 1`                                                                      |
+| **[Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter)** | `/e filter EVENT_INDEX`                                                                 | `/e filter 1`                                                                    |
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 

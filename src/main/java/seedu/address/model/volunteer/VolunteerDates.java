@@ -35,8 +35,7 @@ public class VolunteerDates {
      * @param listOfDates A valid list of dates.
      */
     public VolunteerDates(String listOfDates) throws DateTimeParseException, VolunteerDuplicateDateException {
-        String trimmedDate = listOfDates.replaceAll("\\s+", "").trim();
-        String[] dates = trimmedDate.split(",");
+        String[] dates = listOfDates.trim().split(",");
         this.addStringOfDatesToAvailList(dates);
     }
 
@@ -52,20 +51,26 @@ public class VolunteerDates {
      */
     public void addStringOfDatesToAvailList(String... dates) throws DateTimeParseException,
             VolunteerDuplicateDateException {
+
+        requireNonNull(dates);
+        // Check each date's format and uniqueness
         Set<LocalDate> uniqueDates = new HashSet<>();
-        for (String date : dates) {
-            date.replaceAll("\\s+", "");
-            requireNonNull(date);
-            date = date.replaceAll("\\s+", "");
-            checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-            LocalDate dateToBeAdded = LocalDate.parse(date);
-            if (hasAvailableDate(dateToBeAdded) || !uniqueDates.add(dateToBeAdded)) {
-                throw new VolunteerDuplicateDateException(date);
+
+        for (String s : dates) {
+            requireNonNull(s);
+            String d = s.trim(); // Only trim outer spaces
+            checkArgument(isValidDate(d), MESSAGE_CONSTRAINTS);
+            LocalDate date = LocalDate.parse(d);
+
+            if (!uniqueDates.add(date)) {
+                throw new VolunteerDuplicateDateException(d);
             }
         }
+
         for (LocalDate d: uniqueDates) {
             this.addDateToAvailList(d);
         }
+
         this.datesListAsObservableString.set(this.toString());
     }
 
@@ -78,15 +83,17 @@ public class VolunteerDates {
 
     public void removeStringOfDatesFromAvailList(String... dates) throws DateTimeParseException,
             VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
+
+        requireNonNull(dates);
+        // Check each date's format and uniqueness
         Set<LocalDate> uniqueDates = new HashSet<>();
-        for (String date : dates) {
-            date.replaceAll("\\s+", "");
-            requireNonNull(date);
-            date = date.replaceAll("\\s+", "");
-            checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-            LocalDate dateToBeAdded = LocalDate.parse(date);
-            if (!hasAvailableDate(dateToBeAdded) || !uniqueDates.add(dateToBeAdded)) {
-                throw new VolunteerDeleteMissingDateException(date);
+
+        for (String s : dates) {
+            requireNonNull(s);
+            String d = s.trim(); // Only trim outer spaces
+            LocalDate date = LocalDate.parse(d);
+            if (!hasAvailableDate(date) || !uniqueDates.add(date)) {
+                throw new VolunteerDeleteMissingDateException(d);
             }
         }
 
@@ -97,6 +104,7 @@ public class VolunteerDates {
         for (LocalDate d: uniqueDates) {
             this.removeDateFromAvailList(d);
         }
+
         this.datesListAsObservableString.set(this.toString());
     }
 
@@ -137,12 +145,22 @@ public class VolunteerDates {
      * @return
      */
     public static boolean isValidListOfDates(String test) {
-        String[] dates = test.split(",");
+        requireNonNull(test);
+        String[] dates = test.trim().split(",");
+        // Check each date's format and uniqueness
+        Set<LocalDate> uniqueDates = new HashSet<>();
         for (String s : dates) {
-            if (!isValidDate(s)) {
+            requireNonNull(s);
+            String d = s.trim(); // Only trim outer spaces
+            if (!isValidDate(d)) {
+                return false;
+            }
+            LocalDate date = LocalDate.parse(d);
+            if (!uniqueDates.add(date)) {
                 return false;
             }
         }
+
         return true;
     }
 
