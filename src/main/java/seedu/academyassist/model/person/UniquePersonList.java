@@ -193,7 +193,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the internal list of persons by their names in-place.
      */
     public void sortPersonsByName() {
-        internalList.sort(Comparator.comparing(person -> person.getName().toString()));
+        internalList.sort(Comparator.comparing(person -> person.getName().toString().toLowerCase()));
     }
 
     /**

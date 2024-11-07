@@ -30,7 +30,7 @@ public class FilterCommand extends Command {
             + COMMAND_WORD + " "
             + "s/Science";
 
-    public static final String MESSAGE_SUCCESS = "Filtered by: %1$s, %2$s\n"
+    public static final String MESSAGE_SUCCESS = "Filtered by %1$s: %2$s\n"
             + "Number of student(s) found: %3$d";
 
     private FilterParam filterParam;

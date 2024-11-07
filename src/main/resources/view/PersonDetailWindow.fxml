@@ -9,32 +9,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="true" title="Student Detail" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.ScrollPane?>
+<fx:root resizable="true" title="Student Detail" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1" minHeight="600" minWidth="500">
     <icons>
-        <Image url="@/images/info_icon.png" />
+        <Image url="@/images/info_icon.png"/>
     </icons>
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@BlueTheme.css" />
-                <URL value="@PersonDetailWindow.css" />
+                <URL value="@BlueTheme.css"/>
+                <URL value="@PersonDetailWindow.css"/>
             </stylesheets>
             <VBox alignment="TOP_LEFT" spacing="10">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-    <children>
-        <Label fx:id="studentId" styleClass="detail-label" wrapText="true" />
-        <Label fx:id="name" styleClass="detail-label" wrapText="true" />
-        <Label fx:id="ic" styleClass="detail-label" wrapText="true" />
-        <Label fx:id="yearGroup" styleClass="detail-label" wrapText="true" />
-        <Label fx:id="phone" styleClass="detail-label" wrapText="true" />
-        <Label fx:id="email" styleClass="detail-label" wrapText="true" />
-        <Label fx:id="address" styleClass="detail-label" wrapText="true" />
-        <Label fx:id="subject" styleClass="detail-label" wrapText="true" />
-        <Label fx:id="closeWindowMessage" styleClass="closeWindow-label" wrapText="true" />
-    </children>
-</VBox>
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+                <children>
+                    <Label fx:id="studentId" styleClass="detail-label" wrapText="true"/>
+                    <Label fx:id="name" styleClass="detail-label" wrapText="true"/>
+                    <Label fx:id="ic" styleClass="detail-label" wrapText="true"/>
+                    <Label fx:id="yearGroup" styleClass="detail-label" wrapText="true"/>
+                    <Label fx:id="phone" styleClass="detail-label" wrapText="true"/>
+                    <Label fx:id="email" styleClass="detail-label" wrapText="true"/>
+                    <Label fx:id="address" styleClass="detail-label" wrapText="true"/>
+                    <Label fx:id="subject" styleClass="detail-label" wrapText="true"/>
+                    <Label fx:id="closeWindowMessage" styleClass="closeWindow-label" wrapText="true"/>
+                </children>
+            </VBox>
         </Scene>
     </scene>
 </fx:root>
