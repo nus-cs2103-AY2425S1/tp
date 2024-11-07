@@ -3,6 +3,7 @@ package seedu.address.logic.commands.wedding;
 import static seedu.address.logic.Messages.MESSAGE_ADD_WEDDING_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_WEDDING_ALREADY_ASSIGNED;
 import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
@@ -81,6 +82,12 @@ public class AssignWeddingCommand extends Command {
 
         for (Map.Entry<Wedding, String> entry : weddingsToAdd.entrySet()) {
             Wedding wedding = entry.getKey();
+
+            // Check if person is already assigned to the wedding
+            if (model.getWedding(wedding).hasPerson(personToEdit)) {
+                throw new CommandException(String.format(MESSAGE_WEDDING_ALREADY_ASSIGNED, personToEdit.getName()));
+            }
+
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
                     CreateWeddingCommand newWeddingCommand = new CreateWeddingCommand(wedding);

@@ -45,6 +45,8 @@ public class Messages {
             + "the Wedlinker.";
     public static final String MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT = "Some weddings were not found in "
             + "the person's wedding list.";
+
+    public static final String MESSAGE_WEDDING_ALREADY_ASSIGNED = "Some weddings already have %1$s assigned.";
     public static final String MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT = "Use f/ to force the assignment of wedding(s)."
             + " This will automatically help you create the wedding required.";
     public static final String MESSAGE_FORCE_DELETE_WEDDING = "Use f/ to force the deletion of wedding."
