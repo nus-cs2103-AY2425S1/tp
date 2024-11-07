@@ -17,8 +17,10 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: \nKEYWORD \n[MORE_KEYWORDS]...\n"
-            + "Example: \n" + COMMAND_WORD + " alice bob charlie";
+            + "Format: " + COMMAND_WORD + " KEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameter Example:\n"
+            + "- KEYWORD: alice\n"
+            + "- [MORE_KEYWORDS: bob c]\n";
 
     private final NameContainsKeywordsPredicate predicate;
 

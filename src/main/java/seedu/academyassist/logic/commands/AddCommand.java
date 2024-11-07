@@ -24,15 +24,17 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the system.\n"
-            + "Parameters: \n"
-            + PREFIX_NAME + "NAME  e.g. John Smith\n"
-            + PREFIX_PHONE + "PHONE  e.g. 98382673\n"
-            + PREFIX_IC + "NRIC  e.g. S9238263A\n"
-            + PREFIX_YEARGROUP + "YEARGROUP  e.g. 1\n"
-            + PREFIX_EMAIL + "EMAIL  e.g. john.smith@example.com\n"
-            + PREFIX_ADDRESS + "ADDRESS  e.g. 311, Clementi Ave 2, #02-25\n"
-            + PREFIX_SUBJECT + "SUBJECT  e.g. English" + "\n"
-            + "[" + PREFIX_SUBJECT + "MORE_SUBJECTS]...  e.g. Chinese";
+            + "Format: " + COMMAND_WORD + " " + PREFIX_NAME + "NAME " + PREFIX_IC + "NRIC "
+            + PREFIX_YEARGROUP + "YEARGROUP " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS " + PREFIX_SUBJECT + "SUBJECT " + "[" + PREFIX_SUBJECT + "MORE_SUBJECTS]...\n"
+            + "Parameters Example: \n"
+            + "- NAME: Sam Tan\n"
+            + "- NRIC: S1234567A\n"
+            + "- YEARGROUP: 3\n"
+            + "- PHONE: 12345678\n"
+            + "- EMAIL: samtan@gmail.com\n"
+            + "- ADDRESS: 9 Smith Street\n"
+            + "- SUBJECT: Science";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
 

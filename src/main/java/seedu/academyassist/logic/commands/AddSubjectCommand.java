@@ -22,11 +22,12 @@ public class AddSubjectCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds subject(s) to the student with this student id. \n"
-            + "Parameters: \n"
-            + "StudentID (S followed by a 5-digit number between 00001 and 99999) \n"
-            + PREFIX_SUBJECT + "SUBJECT \n" + "[" + PREFIX_SUBJECT + "MORE_SUBJECTS]... \n"
-            + "Example: \n" + COMMAND_WORD + " S12345 "
-            + PREFIX_SUBJECT + "Math ";
+            + "Format: " + COMMAND_WORD + " STUDENT_ID "
+            + PREFIX_SUBJECT + "SUBJECT [" + PREFIX_SUBJECT + "MORE_SUBJECTS]... \n"
+            + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
+            + "Parameters Example: \n"
+            + "- STUDENT_ID: S1234567A\n"
+            + "- SUBJECT: Math";
 
 
     public static final String MESSAGE_SUCCESS = "Added %1$s : %2$s to %3$s";
@@ -64,8 +65,9 @@ public class AddSubjectCommand extends Command {
 
         model.addSubjectsToPerson(toAddSubjects, student);
 
+        String subjects = toAddSubjects.toString().replace("[", "").replace("]", "");
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentId.toString(),
-                student.getName().toString(), toAddSubjects.toString()));
+                student.getName().toString(), subjects));
     }
 
     @Override
