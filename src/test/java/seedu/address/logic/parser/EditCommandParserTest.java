@@ -95,10 +95,13 @@ public class EditCommandParserTest {
         assertParseFailure(parser, NAME_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY, MESSAGE_EMPTY_NRIC);
 
         // no field specified
-        assertParseFailure(parser, VALID_NRIC_AMY, EditCommand.MESSAGE_NOT_EDITED);
+        String expectedMessageForNoFields = "No valid prefixes found \n" + EditCommand.MESSAGE_USAGE;
+        assertParseFailure(parser, VALID_NRIC_AMY, expectedMessageForNoFields);
 
         // no NRIC and no field specified
-        assertParseFailure(parser, "", MESSAGE_EMPTY_NRIC);
+        String expectedMessageForNoNricAndNoField = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_NRIC_EMPTY);
+        assertParseFailure(parser, "", expectedMessageForNoNricAndNoField);
     }
 
     @Test

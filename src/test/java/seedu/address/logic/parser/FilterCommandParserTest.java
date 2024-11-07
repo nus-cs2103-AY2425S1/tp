@@ -32,8 +32,8 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FilterCommand.MESSAGE_USAGE));
+        String expectedMessage = "No valid prefixes found \n" + FilterCommand.MESSAGE_USAGE;
+        assertParseFailure(parser, " ", expectedMessage);
     }
 
     @Test
@@ -95,13 +95,13 @@ public class FilterCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE);
 
         // missing end date prefix with start date present
-        assertParseFailure(parser, " sd/2000-10-10", expectedMessage);
+        assertParseFailure(parser, validStartdate, expectedMessage);
 
         // missing end date prefix with health service present
-        assertParseFailure(parser, " h/Blood Test", expectedMessage);
+        assertParseFailure(parser, validHealthService, expectedMessage);
 
         // missing end date prefix with start date and health service present
-        assertParseFailure(parser, " sd/2000-10-10 h/Blood Test", expectedMessage);
+        assertParseFailure(parser, validStartdate + validHealthService, expectedMessage);
 
     }
 

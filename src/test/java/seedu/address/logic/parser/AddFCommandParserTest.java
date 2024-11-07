@@ -245,6 +245,7 @@ public class AddFCommandParserTest {
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFCommand.MESSAGE_USAGE);
+        String expectedMessageForNoPrefix = String.format("No valid prefixes found \n" + AddFCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
@@ -268,7 +269,7 @@ public class AddFCommandParserTest {
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_NRIC_BOB + VALID_SEX_BOB + VALID_BIRTHDATE_BOB
-                        + VALID_PHONE_BOB, expectedMessage);
+                        + VALID_PHONE_BOB, expectedMessageForNoPrefix);
     }
 
     @Test
