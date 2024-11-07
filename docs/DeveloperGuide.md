@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CustomerListPanel`, `OrderListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Customer` and `Order` objects residing in the `Model`.
 
 ### Logic component
 
@@ -104,7 +104,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCustomerCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCustomerCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a customer).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -124,14 +124,16 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Customer` objects (which are contained in a `UniqueCustomerList` object).
+* stores the currently 'selected' `Customer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Customer>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a particular `Customer` whose orders will be displayed in a `ReadOnlyObjectWrapper<Customer>` which is exposed to outsiders as an unmodifiable `ReadOnlyObjectProperty<Customer>` that can be 'observed' e.g. the UI can be bound to this object property so that the UI automatically updates when selected customer change.
+  * Each `Customer` stores the currently 'selected' `Order` objects (e.g., results of a filter query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Order>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Customer` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Customer` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -177,11 +179,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `deletecustomer 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `deletecustomer 5` command to delete the 5th customer in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new customer. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -191,7 +193,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the customer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -247,15 +249,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -275,29 +272,40 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* independent sellers/dropshipping business owners selling on platforms like Carousell
-* lack a central platform for dropshipping and delivery order management
+* independent sellers/drop-shipping business owners selling on platforms like Carousell
+* lack a central platform for drop-shipping and delivery order management
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: For small independent sellers, organizing customer lists can be challenging. SellSavvy offers a centralized platform to store orders and track deliveries, streamlining dropshipping management. SellSavvy is optimized for tech-savvy fast-typing users through command-line interface and efficient functionalities.
+**Value proposition**: For small independent sellers, organizing customer lists can be challenging. SellSavvy offers a centralized platform to store orders and track deliveries, streamlining drop-shipping management. SellSavvy is optimized for tech-savvy fast-typing users through command-line interface and efficient functionalities.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                                 | So that I can…​                                                       |
-|----------|---------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | user                                        | add customers' details such as name, contact number, address | remember key and essential details of customers for future deliveries |
-| `* * *`  | user                                        | add orders related to a customer                             | keep track of deliveries to be made                                   |
-| `* * *`  | user                                        | add details to orders, such as delivery date and item        | know what needs to be delivered and when                              |
-| `* * *`  | user                                        | mark orders as completed                                     | track which orders are still outstanding                              |
-| `* * *`  | user                                        | delete an order                                              | remove orders that have been canceled                                 |
-| `* * *`  | user with many contacts in the address book | delete a customer from my address book                       | remove clients who I no longer need to be in contact with             |
+| Priority | As a …​                  | I want to …​                                              | So that I can…​                                            |
+|----------|--------------------------|-----------------------------------------------------------|------------------------------------------------------------|
+| `* * *`  | user                     | add new customers with details such as name and address   | remember details of customers for order deliveries         |
+| `* * *`  | user                     | add orders made by a customer                             | keep track of orders made by each customer                 |
+| `* * *`  | user                     | add details to orders, such as delivery date and quantity | remember details of orders when making deliveries          |
+| `* * *`  | user                     | mark orders as completed                                  | keep track of orders that have been delivered              |
+| `* * *`  | user with many customers | delete a customer from my address book                    | remove clients who I no longer need to be in contact with  |
+| `* * *`  | user with many customers | view all my customer contacts                             | see an overview of all my customers' details               |
+| `* * *`  | user with many orders    | view all orders under a specific customer                 | see an overview of all orders made by a customer           |
+| `* * *`  | user with many orders    | delete an order under a customer                          | remove orders that I no longer need to track               |
+| `* * *`  | user with many orders    | revert an order's completed status                        | keep track of erroneous or failed order deliveries         |
+| `* *`    | tech-savvy user          | save data to local storage                                | keep my data even after exiting SellSavvy                  |
+| `* *`    | tech-savvy user          | load data from local storage                              | access my local data using SellSavvy                       |
+| `* *`    | experienced user         | edit a customer's details                                 | keep the customers' information up-to-date                 |
+| `* *`    | experienced user         | edit an order's details                                   | keep the orders' information up-to-date                    |
+| `*`      | experienced user         | find a customer by name                                   | search for a specific customer's details                   |
+| `*`      | experienced user         | filter orders by their status                             | see which orders are completed or have yet to be delivered |
+| `*`      | inexperienced user       | be informed a customer already made an identical order    | take note of duplicate orders made by the same customer    |
+| `*`      | inexperienced user       | be informed if a new order's delivery date has passed     | take note of erroneous creation of historical orders       |
 
 *{More to be added}*
 
@@ -474,7 +482,7 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 100 persons and/or 1000 orders without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 customers and/or 1000 orders without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be able to be used offline (i.e. without internet connection)
 5. Should provide clear error messages to indicate issues to the user.
@@ -490,7 +498,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Status**: The current fulfilment condition of an order, such as completed or pending.
+* **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -520,19 +528,30 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+1. Saving changes in data
+
+   1. Prerequisites: Has at least 1 customer listed using `listcustomer` in the GUI
+    
+   1.  Add an order under a customer using the `addorder` command.<br>
+      Example: `addorder 1 i/Lamp d/20-11-2024 q/3`
+      Expected: Order added under the first customer in the customer list and all his orders will be displayed. 
+
+   1.  Re-launch the app by double-clicking the jar file.<br>
+       Expected: The newest order added is retained.
+
 1. _{ more test cases …​ }_
+   
+### Deleting a customer
 
-### Deleting a person
+1. Deleting a customer while all customers are being shown
 
-1. Deleting a person while all persons are being shown
+   1. Prerequisites: List all customers using the `listcustomer` command. Multiple customers in the list.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `deletecustomer 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `deletecustomer 0`<br>
+      Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 
 /**
- * Represents an Order made by a Person in the address book.
+ * Represents an Order made by a Customer in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Order {

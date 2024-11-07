@@ -3,12 +3,12 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandFailure;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandFailure;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.showCustomerAtIndex;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.Customer;
 
 public class ListOrderCommandTest {
 
@@ -33,78 +33,78 @@ public class ListOrderCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer selectedCustomer = model.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased());
         ListOrderCommand listOrderCommand = new ListOrderCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(ListOrderCommand.MESSAGE_LIST_ORDER_SUCCESS,
-                selectedPerson.getName().fullName);
+                selectedCustomer.getName().fullName);
 
-        expectedModel.updateSelectedPerson(
-                expectedModel.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()));
+        expectedModel.updateSelectedCustomer(
+                expectedModel.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased()));
 
         assertCommandSuccess(listOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCustomerList().size() + 1);
         ListOrderCommand listOrderCommand = new ListOrderCommand(outOfBoundIndex);
 
-        assertCommandFailure(listOrderCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(listOrderCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
-        showPersonAtIndex(expectedModel, INDEX_FIRST);
+        showCustomerAtIndex(model, INDEX_FIRST);
+        showCustomerAtIndex(expectedModel, INDEX_FIRST);
 
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer selectedCustomer = model.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased());
         ListOrderCommand listOrderCommand = new ListOrderCommand(INDEX_FIRST);
 
-        expectedModel.updateSelectedPerson(
-                expectedModel.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()));
+        expectedModel.updateSelectedCustomer(
+                expectedModel.getFilteredCustomerList().get(INDEX_FIRST.getZeroBased()));
 
         String expectedMessage = String.format(ListOrderCommand.MESSAGE_LIST_ORDER_SUCCESS,
-                selectedPerson.getName().fullName);
+                selectedCustomer.getName().fullName);
 
         assertCommandSuccess(listOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST);
-        showPersonAtIndex(expectedModel, INDEX_FIRST);
+        showCustomerAtIndex(model, INDEX_FIRST);
+        showCustomerAtIndex(expectedModel, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        assertTrue(outOfBoundIndex.getZeroBased() < expectedModel.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCustomerList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < expectedModel.getAddressBook().getCustomerList().size());
 
         ListOrderCommand listOrderCommand = new ListOrderCommand(outOfBoundIndex);
 
-        assertCommandFailure(listOrderCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(listOrderCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        ListOrderCommand listOrderOfFirstPersonCommand = new ListOrderCommand(INDEX_FIRST);
-        ListOrderCommand listOrderOfSecondPersonCommand = new ListOrderCommand(INDEX_SECOND);
+        ListOrderCommand listOrderOfFirstCustomerCommand = new ListOrderCommand(INDEX_FIRST);
+        ListOrderCommand listOrderOfSecondCustomerCommand = new ListOrderCommand(INDEX_SECOND);
 
         // same object -> returns true
-        assertTrue(listOrderOfFirstPersonCommand.equals(listOrderOfFirstPersonCommand));
+        assertTrue(listOrderOfFirstCustomerCommand.equals(listOrderOfFirstCustomerCommand));
 
         // same values -> returns true
-        ListOrderCommand listOrderOfFirstPersonCommandCopy = new ListOrderCommand(INDEX_FIRST);
-        assertTrue(listOrderOfFirstPersonCommand.equals(listOrderOfFirstPersonCommandCopy));
+        ListOrderCommand listOrderOfFirstCustomerCommandCopy = new ListOrderCommand(INDEX_FIRST);
+        assertTrue(listOrderOfFirstCustomerCommand.equals(listOrderOfFirstCustomerCommandCopy));
 
         // different types -> returns false
-        assertFalse(listOrderOfFirstPersonCommand.equals(1));
+        assertFalse(listOrderOfFirstCustomerCommand.equals(1));
 
         // null -> returns false
-        assertFalse(listOrderOfFirstPersonCommand.equals(null));
+        assertFalse(listOrderOfFirstCustomerCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(listOrderOfFirstPersonCommand.equals(listOrderOfSecondPersonCommand));
+        // different customer -> returns false
+        assertFalse(listOrderOfFirstCustomerCommand.equals(listOrderOfSecondCustomerCommand));
     }
 
     @Test

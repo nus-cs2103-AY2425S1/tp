@@ -72,9 +72,9 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-* Command aliases are alternative words you can use to execute the same command for convenience.<br>
-  e.g. `listcustomer` has the same function as `listc`
-</box>
+* Command aliases are short forms of commands you can use to execute the commands more quickly and conveniently.<br>
+  e.g. `listc` can be used instead of `listcustomer` to list all customers.
+  </box>
 
 ### Viewing help : `help`
 
@@ -211,7 +211,7 @@ Format: `addorder CUSTOMER_INDEX i/ITEM d/DATE [q/QUANTITY]`<br>
 Examples:
 * `addorder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd customer in the address book.
 * `addo 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first customer in the address book.
-* `findcustomer Betsy` followed by `addorder 1 i/Bottles d/12-12-2002 q/1` adds an order under the 1st customer in the results of the `find` command.
+* `findcustomer Betsy` followed by `addorder 1 i/Bottles d/12-12-2002 q/1` adds an order under the 1st customer in the results of the `findcustomer` command.
 <a id="order-constraints"></a>
 
 <box type="important">
