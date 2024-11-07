@@ -8,8 +8,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
@@ -24,23 +22,10 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String QUANTITY_MESSAGE_CONSTRAINT = "Quantity must be an non-negative integer.";
-    public static final String PRICE_MESSAGE_CONSTRAINT = "Price must be a non-negative number.";
-    public static final String PROCUREMENT_DATE_MESSAGE_CONSTRAINT = "Procurement date must not be in the future.";
-
-    /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
-    }
+    public static final String MESSAGE_QUANTITY_CONSTRAINT = "Quantity must be an non-negative integer.";
+    public static final String MESSAGE_PRICE_CONSTRAINT = "Price must be a non-negative number.";
+    public static final String MESSAGE_PROCUREMENT_DATE_CONSTRAINT = "Procurement date must not be in the future.";
+    public static final String MESSAGE_ARRIVAL_DATE_CONSTRAINT = "Arrival date must be after the procurement date.";
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -184,47 +169,57 @@ public class ParserUtil {
     public static Date parseProcurementDate(String datetime) throws ParseException {
         Date d = parseDateTimeValues(datetime);
         if (d.getDateTime().isAfter(LocalDateTime.now())) {
-            throw new ParseException(PROCUREMENT_DATE_MESSAGE_CONSTRAINT);
+            throw new ParseException(MESSAGE_PROCUREMENT_DATE_CONSTRAINT);
         }
+
         return d;
     }
 
     /**
      * Parses a string of datetime to a valid arrival date.
      */
-    public static Date parseArrivalDate(String datetime) throws ParseException {
-        return parseDateTimeValues(datetime);
+    public static Date parseArrivalDate(String datetime, Date procurmentDate) throws ParseException {
+        Date d = parseDateTimeValues(datetime);
+        if (d.isBefore(procurmentDate)) {
+            throw new ParseException(MESSAGE_ARRIVAL_DATE_CONSTRAINT);
+        }
+
+        return d;
     }
 
     /**
-     * Parses a string quantity to an int.
+     * Parses a string quantity to an integer.
      */
-    public static int parseGoodsQuantity(String quantity) throws ParseException {
-        int v;
+    public static int parseGoodsQuantity(String quantityString) throws ParseException {
+        int qty;
         try {
-            v = Integer.parseInt(quantity);
+            qty = Integer.parseInt(quantityString);
         } catch (NumberFormatException e) {
-            throw new ParseException(QUANTITY_MESSAGE_CONSTRAINT);
+            throw new ParseException(MESSAGE_QUANTITY_CONSTRAINT);
         }
-        if (v < 0) {
-            throw new ParseException(QUANTITY_MESSAGE_CONSTRAINT);
+
+        if (qty <= 0) {
+            throw new ParseException(MESSAGE_QUANTITY_CONSTRAINT);
         }
-        return v;
+
+        return qty;
     }
 
     /**
      * Parses a string price to a double.
      */
-    public static double parseGoodsPrice(String price) throws ParseException {
-        double v;
+    public static double parseGoodsPrice(String priceString) throws ParseException {
+        double price;
         try {
-            v = Double.parseDouble(price);
+            price = Double.parseDouble(priceString);
         } catch (NumberFormatException e) {
-            throw new ParseException(PRICE_MESSAGE_CONSTRAINT);
+            throw new ParseException(MESSAGE_PRICE_CONSTRAINT);
         }
-        if (v < 0) {
-            throw new ParseException(PRICE_MESSAGE_CONSTRAINT);
+
+        if (price < 0) {
+            throw new ParseException(MESSAGE_PRICE_CONSTRAINT);
         }
-        return v;
+
+        return price;
     }
 }
