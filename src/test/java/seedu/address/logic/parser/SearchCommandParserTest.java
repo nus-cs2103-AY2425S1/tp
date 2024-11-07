@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,6 +20,7 @@ import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.TempPredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 public class SearchCommandParserTest {
@@ -124,5 +126,24 @@ public class SearchCommandParserTest {
     public void parse_duplicateArgsForTagField_throwsParseException() {
         assertParseFailure(parser, "search t/ t/",
                 MESSAGE_DUPLICATE_FIELDS + PREFIX_TAG);
+    }
+
+    @Test
+    public void parse_validArgsForEventField_returnsSearchCommand() {
+        SearchCommand expectedSearchCommand =
+                new SearchCommand(new TempPredicate(Arrays.asList("Orbital Workshop")));
+        assertParseSuccess(parser, "search ev/Orbital Workshop", expectedSearchCommand);
+    }
+
+    @Test
+    public void parse_invalidArgsForEventField_returnsParseException() {
+        assertParseFailure(parser, "search Events Orbital Workshop",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_duplicateArgsForEventField_throwsParseException() {
+        assertParseFailure(parser, "search ev/ ev/",
+                MESSAGE_DUPLICATE_FIELDS + PREFIX_EVENT);
     }
 }

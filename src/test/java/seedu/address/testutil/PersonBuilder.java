@@ -103,6 +103,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Add one or more EventIds to the {@code EventIds} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEventIds(int... eventIds) {
+        for (int eventId : eventIds) {
+            this.eventIds.add(eventId);
+        }
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, tags, eventIds, id);
     }

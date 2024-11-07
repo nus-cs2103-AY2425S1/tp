@@ -121,7 +121,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both event have same name.
+     * Returns true if both event have same name (case-insensitive).
      * This defines a weaker notion of equality between two events.
      */
     public boolean isSameEvent(Event otherEvent) {

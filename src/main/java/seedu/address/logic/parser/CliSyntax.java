@@ -18,5 +18,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_FIELD = new Prefix("by/");
     /* Used in Assign / Unassign Events */
     public static final Prefix PREFIX_PERSON = new Prefix("p/");
-    public static final Prefix PREFIX_EVENT = new Prefix("e/");
+    public static final Prefix PREFIX_EVENT = new Prefix("ev/");
 }
