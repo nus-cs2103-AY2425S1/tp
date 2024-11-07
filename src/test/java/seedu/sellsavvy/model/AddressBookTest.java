@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalCustomers.ALICE;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,10 +21,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.sellsavvy.model.person.Person;
-import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
-import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
-import seedu.sellsavvy.testutil.PersonBuilder;
+import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.customer.exceptions.DuplicateCustomerException;
+import seedu.sellsavvy.model.customer.exceptions.CustomerNotFoundException;
+import seedu.sellsavvy.testutil.CustomerBuilder;
 
 public class AddressBookTest {
 
@@ -49,13 +49,13 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        // Two customers with the same identity fields
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newCustomers);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateCustomerException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -96,7 +96,7 @@ public class AddressBookTest {
     @Test
     public void hasSimilarPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasSimilarPerson(editedAlice));
     }
@@ -104,7 +104,7 @@ public class AddressBookTest {
     @Test
     public void hasSimilarPerson_personWithSimilarNameInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE)
+        Customer editedAlice = new CustomerBuilder(ALICE)
                 .withName(ALICE.getName()
                         .fullName.toUpperCase())
                 .withAddress(VALID_ADDRESS_BOB)
@@ -120,7 +120,7 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{customers=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -128,18 +128,18 @@ public class AddressBookTest {
     public void findEquivalentPerson_modelContainsEquivalentPerson() {
         AddressBook addressBook1 = getTypicalAddressBook().createCopy();
         AddressBook addressBook2 = addressBook1.createCopy();
-        Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST.getZeroBased());
-        Person selectedPersonCopy = addressBook2.findEquivalentPerson(selectedPerson);
-        assertNotSame(selectedPersonCopy, selectedPerson);
-        assertEquals(selectedPersonCopy, selectedPerson);
+        Customer selectedCustomer = addressBook1.getPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer selectedCustomerCopy = addressBook2.findEquivalentPerson(selectedCustomer);
+        assertNotSame(selectedCustomerCopy, selectedCustomer);
+        assertEquals(selectedCustomerCopy, selectedCustomer);
     }
 
     @Test
     public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
         AddressBook addressBook1 = getTypicalAddressBook().createCopy();
-        Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST.getZeroBased());
-        Person differentPerson = new PersonBuilder(selectedPerson).withName(VALID_NAME_BOB).build();
-        assertThrows(PersonNotFoundException.class, () -> addressBook.findEquivalentPerson(differentPerson));
+        Customer selectedCustomer = addressBook1.getPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer differentCustomer = new CustomerBuilder(selectedCustomer).withName(VALID_NAME_BOB).build();
+        assertThrows(CustomerNotFoundException.class, () -> addressBook.findEquivalentPerson(differentCustomer));
     }
 
     @Test
@@ -149,18 +149,18 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose customers list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Customer> customers = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Customer> customers) {
+            this.customers.setAll(customers);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Customer> getPersonList() {
+            return customers;
         }
 
     }

@@ -14,22 +14,22 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.sellsavvy.commons.core.index.Index;
-import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand.EditPersonDescriptor;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditPersonDescriptor;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditPersonCommand object.
+ * Parses input arguments and creates a new EditCustomerCommand object.
  */
-public class EditPersonCommandParser implements Parser<EditPersonCommand> {
+public class EditPersonCommandParser implements Parser<EditCustomerCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditPersonCommand
-     * and returns an EditPersonCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditCustomerCommand
+     * and returns an EditCustomerCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditPersonCommand parse(String args) throws ParseException {
+    public EditCustomerCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
@@ -40,7 +40,7 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditPersonCommand.MESSAGE_USAGE), pe);
+                    EditCustomerCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
@@ -62,10 +62,10 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditPersonCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCustomerCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditPersonCommand(index, editPersonDescriptor);
+        return new EditCustomerCommand(index, editPersonDescriptor);
     }
 
     /**

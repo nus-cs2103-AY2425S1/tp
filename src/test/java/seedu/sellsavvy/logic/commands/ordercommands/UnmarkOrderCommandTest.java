@@ -10,7 +10,7 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,19 +23,19 @@ import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class UnmarkOrderCommandTest {
 
     private Model model;
-    private Person personToUnmarkOrderUnder;
+    private Customer customerToUnmarkOrderUnder;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        personToUnmarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(personToUnmarkOrderUnder);
+        customerToUnmarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedPerson(customerToUnmarkOrderUnder);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class UnmarkOrderCommandTest {
 
     @Test
     public void execute_validIndexFilteredOrderList_success() {
-        personToUnmarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+        customerToUnmarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST);
 
         Model expectedModel = model.createCopy();
@@ -85,7 +85,7 @@ public class UnmarkOrderCommandTest {
     public void execute_invalidIndexFilteredOrderList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
 
-        personToUnmarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+        customerToUnmarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
 
         assertTrue(outOfBoundIndex.getZeroBased() >= model.getFilteredOrderList().size());
 

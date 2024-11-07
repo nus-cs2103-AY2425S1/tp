@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.sellsavvy.logic.parser.Prefix;
 import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.Customer;
 
 /**
  * Container for user visible messages.
@@ -21,9 +21,9 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_ORDER_DISPLAYED_INDEX = "The order index provided is invalid!";
     public static final String MESSAGE_ORDERLIST_DOES_NOT_EXIST =
-            "No orders displayed in displayed list. Please use listOrder show a person's order list first!";
+            "No orders displayed in displayed list. Please use listOrder show a customer's order list first!";
     public static final String MESSAGE_SIMILAR_NAME_WARNING = "Note: "
-            + "A person with similar name already exists in the address book, "
+            + "A customer with similar name already exists in the address book, "
             + "verify if this is a mistake.\n";
 
     /**
@@ -39,19 +39,19 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code customer} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Customer customer) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(customer.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(customer.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(customer.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(customer.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        customer.getTags().forEach(builder::append);
         return builder.toString();
     }
 

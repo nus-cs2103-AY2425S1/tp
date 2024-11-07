@@ -36,7 +36,7 @@ import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDescriptor;
-import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Quantity;
@@ -56,7 +56,7 @@ public class EditOrderCommandParserTest {
         assertParseFailure(parser, VALID_ITEM_ATLAS, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditPersonCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", EditCustomerCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

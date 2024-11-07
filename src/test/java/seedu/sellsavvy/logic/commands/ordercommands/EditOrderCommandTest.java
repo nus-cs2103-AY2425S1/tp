@@ -14,13 +14,13 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_QUANTITY_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderByIndex;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_THIRD;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,22 +32,22 @@ import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDe
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
 import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class EditOrderCommandTest {
     private Model model;
-    private Person selectedPerson;
+    private Customer selectedCustomer;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        selectedPerson = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(selectedPerson);
+        selectedCustomer = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedPerson(selectedCustomer);
     }
 
     @Test
@@ -138,7 +138,7 @@ public class EditOrderCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        selectedPerson.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        selectedCustomer.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
 
         Order orderInFilteredList = getOrderByIndex(model, INDEX_SECOND);
         Order editedOrder = new OrderBuilder(orderInFilteredList).withItem(VALID_ITEM_ATLAS).build();
@@ -176,7 +176,7 @@ public class EditOrderCommandTest {
     public void execute_similarOrderUnfilteredList_warningGiven() {
         Order firstOrder = getOrderByIndex(model, INDEX_FIRST);
 
-        // edits to something similar(but not identical) to the first order to the person's order list
+        // edits to something similar(but not identical) to the first order to the customer's order list
         String similarItemName = normalise(firstOrder.getItem().fullDescription);
         Order similarOrder = new OrderBuilder(firstOrder).withItem(similarItemName).build();
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).withItem(similarItemName).build();
@@ -201,7 +201,7 @@ public class EditOrderCommandTest {
     @Test
     public void execute_duplicateOrderFilteredList_warningGiven() {
         Order firstOrder = getOrderByIndex(model, INDEX_FIRST);
-        selectedPerson.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        selectedCustomer.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_SECOND, descriptor);
 
@@ -255,7 +255,7 @@ public class EditOrderCommandTest {
         // gets index of last order before filtering
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
 
-        selectedPerson.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+        selectedCustomer.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
 
         // ensures that outOfBoundIndex is indeed out of bounds after filtering
         assertTrue(outOfBoundIndex.getZeroBased() >= model.getFilteredOrderList().size());

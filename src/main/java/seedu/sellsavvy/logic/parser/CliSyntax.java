@@ -5,7 +5,7 @@ package seedu.sellsavvy.logic.parser;
  */
 public class CliSyntax {
 
-    /* Person Prefix definitions */
+    /* Customer Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");

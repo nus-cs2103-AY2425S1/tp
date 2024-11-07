@@ -16,7 +16,7 @@ public class OrderUtil {
 
     /**
      * Returns an add order command string for adding {@code order}
-     * under person in index {@code index}.
+     * under customer in index {@code index}.
      */
     public static String getAddOrderCommand(Index index, Order order) {
         return AddOrderCommand.COMMAND_WORD + " "
@@ -26,7 +26,7 @@ public class OrderUtil {
 
     /**
      * Returns an add order command string for adding {@code order}
-     * under person in index {@code index} using the command alias.
+     * under customer in index {@code index} using the command alias.
      */
     public static String getAddOrderCommandAlias(Index index, Order order) {
         return AddOrderCommand.COMMAND_WORD + " "

@@ -9,7 +9,7 @@ import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.Customer;
 
 /**
  * API of the Logic component
@@ -32,10 +32,10 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Customer> getFilteredPersonList();
 
-    /** Returns a {@code ReadOnlyObjectProperty} of selected {@code Person} */
-    ReadOnlyObjectProperty<Person> getSelectedPersonProperty();
+    /** Returns a {@code ReadOnlyObjectProperty} of selected {@code Customer} */
+    ReadOnlyObjectProperty<Customer> getSelectedPersonProperty();
 
     /**
      * Returns the user prefs' address book file path.

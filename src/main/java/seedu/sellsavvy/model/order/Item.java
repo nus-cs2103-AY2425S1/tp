@@ -5,7 +5,7 @@ import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 
 /**
- * Represents the item description of a Person's Order in the address book.
+ * Represents the item description of a Customer's Order in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidItem(String)}
  */
 public class Item {

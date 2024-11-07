@@ -10,33 +10,30 @@ import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
+import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
+import seedu.sellsavvy.model.customer.*;
 import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.person.Address;
-import seedu.sellsavvy.model.person.Email;
-import seedu.sellsavvy.model.person.Name;
-import seedu.sellsavvy.model.person.Person;
-import seedu.sellsavvy.model.person.Phone;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddPersonCommand object.
+ * Parses input arguments and creates a new AddCustomerCommand object.
  */
-public class AddPersonCommandParser implements Parser<AddPersonCommand> {
+public class AddPersonCommandParser implements Parser<AddCustomerCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddPersonCommand
-     * and returns an AddPersonCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddCustomerCommand
+     * and returns an AddCustomerCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddPersonCommand parse(String args) throws ParseException {
+    public AddCustomerCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
@@ -47,9 +44,9 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         OrderList orderList = new OrderList();
 
-        Person person = new Person(name, phone, email, address, tagList, orderList);
+        Customer customer = new Customer(name, phone, email, address, tagList, orderList);
 
-        return new AddPersonCommand(person);
+        return new AddCustomerCommand(customer);
     }
 
     /**

@@ -13,11 +13,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.sellsavvy.commons.core.LogsCenter;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.person.Person;
 
 /**
- * Panel containing the list of orders of a selected person.
+ * Panel containing the list of orders of a selected customer.
  */
 public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
@@ -28,7 +28,7 @@ public class OrderListPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
     private final ListChangeListener<Order> orderChangeListener = change -> handleChangeInOrders();
-    private Person selectedPerson;
+    private Customer selectedCustomer;
 
     @FXML
     private ListView<Order> orderListView;
@@ -43,9 +43,9 @@ public class OrderListPanel extends UiPart<Region> {
     // closing bracket is separated from the rest of the label title to handle cases where name are too long
 
     /**
-     * Creates a {@code OrderListPanel} with the given {@code ReadOnlyObjectProperty} of {@code Person}.
+     * Creates a {@code OrderListPanel} with the given {@code ReadOnlyObjectProperty} of {@code Customer}.
      */
-    public OrderListPanel(ReadOnlyObjectProperty<Person> selectedPersonProperty) {
+    public OrderListPanel(ReadOnlyObjectProperty<Customer> selectedPersonProperty) {
         super(FXML);
         orderGuide.setText("Use the following command to view order(s):\n"
                 + ListOrderCommand.MESSAGE_USAGE);
@@ -58,19 +58,19 @@ public class OrderListPanel extends UiPart<Region> {
     }
 
     /**
-     * Updates the orderListView with the new selected person's orders.
-     * @param person The newly selected person whose orders will be displayed.
+     * Updates the orderListView with the new selected customer's orders.
+     * @param customer The newly selected customer whose orders will be displayed.
      */
-    private void updateOrderList(Person person) {
-        if (person == null) {
+    private void updateOrderList(Customer customer) {
+        if (customer == null) {
             clearOrderList();
             return;
         }
 
-        this.selectedPerson = person;
-        orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON, person.getName().fullName));
+        this.selectedCustomer = customer;
+        orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON, customer.getName().fullName));
         toggleClosingParenthesisDisplay(true);
-        FilteredList<Order> orderList = person.getFilteredOrderList();
+        FilteredList<Order> orderList = customer.getFilteredOrderList();
         moveOrderChangeListenerTo(orderList);
         orderListView.setItems(orderList);
         orderListView.setCellFactory(listView -> new OrderListViewCell());
@@ -139,7 +139,7 @@ public class OrderListPanel extends UiPart<Region> {
      */
     private void showNoOrdersLabel() {
         clearComponentVisibility();
-        if (selectedPerson.areOrdersFiltered()) {
+        if (selectedCustomer.areOrdersFiltered()) {
             orderListEmpty.setText(NO_RELATED_ORDERS_FOUND);
         } else {
             orderListEmpty.setText(EMPTY_ORDER_LIST_MESSAGE);

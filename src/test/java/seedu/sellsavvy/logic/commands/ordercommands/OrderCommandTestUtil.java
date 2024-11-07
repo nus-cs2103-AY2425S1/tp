@@ -19,8 +19,8 @@ import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
 
 /**
@@ -100,7 +100,7 @@ public class OrderCommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
@@ -114,8 +114,8 @@ public class OrderCommandTestUtil {
     public static void showOrderAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
+        Customer customer = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        final String[] splitName = customer.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
@@ -129,7 +129,7 @@ public class OrderCommandTestUtil {
     }
 
     /**
-     * Returns an {@code OrderList} of the model's selected person by the given {@code Index}
+     * Returns an {@code OrderList} of the model's selected customer by the given {@code Index}
      */
     public static OrderList getOrderListByIndex(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased()).getOrderList();

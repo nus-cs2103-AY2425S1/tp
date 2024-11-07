@@ -16,7 +16,7 @@ import seedu.sellsavvy.logic.parser.AddressBookParser;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.storage.Storage;
 
 /**
@@ -68,12 +68,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Customer> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 
     @Override
-    public ReadOnlyObjectProperty<Person> getSelectedPersonProperty() {
+    public ReadOnlyObjectProperty<Customer> getSelectedPersonProperty() {
         return model.getSelectedPersonProperty();
     }
 

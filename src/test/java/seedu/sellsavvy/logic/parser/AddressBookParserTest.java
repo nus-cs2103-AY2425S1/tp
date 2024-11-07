@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.sellsavvy.logic.commands.customercommands.*;
 import seedu.sellsavvy.logic.commands.generalcommands.ClearCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
@@ -24,24 +25,20 @@ import seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.UnmarkOrderCommand;
-import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.DeletePersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand.EditPersonDescriptor;
-import seedu.sellsavvy.logic.commands.personcommands.FindPersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.ListPersonCommand;
+import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditPersonDescriptor;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
-import seedu.sellsavvy.testutil.EditPersonDescriptorBuilder;
+import seedu.sellsavvy.testutil.EditCustomerDescriptorBuilder;
 import seedu.sellsavvy.testutil.OrderBuilder;
 import seedu.sellsavvy.testutil.OrderUtil;
-import seedu.sellsavvy.testutil.PersonBuilder;
-import seedu.sellsavvy.testutil.PersonUtil;
+import seedu.sellsavvy.testutil.CustomerBuilder;
+import seedu.sellsavvy.testutil.CustomerUtil;
 import seedu.sellsavvy.testutil.TypicalIndexes;
 
 public class AddressBookParserTest {
@@ -50,15 +47,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPerson() throws Exception {
-        Person person = new PersonBuilder().build();
+        Customer customer = new CustomerBuilder().build();
 
         // using command word
-        AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddPersonCommand(person));
-        assertEquals(new AddPersonCommand(person), command);
+        AddCustomerCommand command = (AddCustomerCommand) parser.parseCommand(CustomerUtil.getAddPersonCommand(customer));
+        assertEquals(new AddCustomerCommand(customer), command);
 
         // using command alias
-        command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddPersonCommandAlias(person));
-        assertEquals(new AddPersonCommand(person), command);
+        command = (AddCustomerCommand) parser.parseCommand(CustomerUtil.getAddPersonCommandAlias(customer));
+        assertEquals(new AddCustomerCommand(customer), command);
     }
 
     @Test
@@ -72,31 +69,31 @@ public class AddressBookParserTest {
         String parameters = " " + INDEX_FIRST.getOneBased();
 
         // using command word
-        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
-                DeletePersonCommand.COMMAND_WORD + parameters);
-        assertEquals(new DeletePersonCommand(INDEX_FIRST), command);
+        DeleteCustomerCommand command = (DeleteCustomerCommand) parser.parseCommand(
+                DeleteCustomerCommand.COMMAND_WORD + parameters);
+        assertEquals(new DeleteCustomerCommand(INDEX_FIRST), command);
 
         // using command alias
-        command = (DeletePersonCommand) parser.parseCommand(
-                DeletePersonCommand.COMMAND_ALIAS + parameters);
-        assertEquals(new DeletePersonCommand(INDEX_FIRST), command);
+        command = (DeleteCustomerCommand) parser.parseCommand(
+                DeleteCustomerCommand.COMMAND_ALIAS + parameters);
+        assertEquals(new DeleteCustomerCommand(INDEX_FIRST), command);
     }
 
     @Test
     public void parseCommand_editPerson() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Customer customer = new CustomerBuilder().build();
+        EditPersonDescriptor descriptor = new EditCustomerDescriptorBuilder(customer).build();
         String parameters = " " + INDEX_FIRST.getOneBased()
-                + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor);
+                + " " + CustomerUtil.getEditPersonDescriptorDetails(descriptor);
 
         // using command word
-        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD
+        EditCustomerCommand command = (EditCustomerCommand) parser.parseCommand(EditCustomerCommand.COMMAND_WORD
                 + parameters);
-        assertEquals(new EditPersonCommand(INDEX_FIRST, descriptor), command);
+        assertEquals(new EditCustomerCommand(INDEX_FIRST, descriptor), command);
 
         // using command alias
-        command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_ALIAS + parameters);
-        assertEquals(new EditPersonCommand(INDEX_FIRST, descriptor), command);
+        command = (EditCustomerCommand) parser.parseCommand(EditCustomerCommand.COMMAND_ALIAS + parameters);
+        assertEquals(new EditCustomerCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
@@ -111,14 +108,14 @@ public class AddressBookParserTest {
         String parameters = " " + keywords.stream().collect(Collectors.joining(" "));
 
         // using command word
-        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-                FindPersonCommand.COMMAND_WORD + parameters);
-        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindCustomerCommand command = (FindCustomerCommand) parser.parseCommand(
+                FindCustomerCommand.COMMAND_WORD + parameters);
+        assertEquals(new FindCustomerCommand(new NameContainsKeywordsPredicate(keywords)), command);
 
         // using command alias
-        command = (FindPersonCommand) parser.parseCommand(
-                FindPersonCommand.COMMAND_ALIAS + parameters);
-        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        command = (FindCustomerCommand) parser.parseCommand(
+                FindCustomerCommand.COMMAND_ALIAS + parameters);
+        assertEquals(new FindCustomerCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -130,12 +127,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listPerson() throws Exception {
         // using command word
-        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD) instanceof ListPersonCommand);
-        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD + " 3") instanceof ListPersonCommand);
+        assertTrue(parser.parseCommand(ListCustomerCommand.COMMAND_WORD) instanceof ListCustomerCommand);
+        assertTrue(parser.parseCommand(ListCustomerCommand.COMMAND_WORD + " 3") instanceof ListCustomerCommand);
 
         // using command alias
-        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_ALIAS) instanceof ListPersonCommand);
-        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_ALIAS + " 3") instanceof ListPersonCommand);
+        assertTrue(parser.parseCommand(ListCustomerCommand.COMMAND_ALIAS) instanceof ListCustomerCommand);
+        assertTrue(parser.parseCommand(ListCustomerCommand.COMMAND_ALIAS + " 3") instanceof ListCustomerCommand);
     }
 
     @Test

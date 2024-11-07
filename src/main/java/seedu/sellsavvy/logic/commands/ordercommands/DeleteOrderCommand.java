@@ -17,7 +17,7 @@ import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 
 /**
- * Deletes an order identified using it's displayed index from the displayed order list of a specified person.
+ * Deletes an order identified using it's displayed index from the displayed order list of a specified customer.
  */
 public class DeleteOrderCommand extends Command {
 

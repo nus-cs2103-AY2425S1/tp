@@ -10,10 +10,10 @@ import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.Customer;
 
 /**
- * Filters and lists all orders under a specified person from the displayed order list,
+ * Filters and lists all orders under a specified customer from the displayed order list,
  * with an order status that matches the argument keywords.
  * Keyword matching is case insensitive.
  */
@@ -38,14 +38,14 @@ public class FilterOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person selectedPerson = model.getSelectedPerson();
-        if (selectedPerson == null) {
+        Customer selectedCustomer = model.getSelectedPerson();
+        if (selectedCustomer == null) {
             throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         }
 
-        selectedPerson.updateFilteredOrderList(predicate);
+        selectedCustomer.updateFilteredOrderList(predicate);
         return new CommandResult(String.format(MESSAGE_FILTER_ORDERS_SUCCESS,
-                selectedPerson.getFilteredOrderList().size(), predicate.getValue()));
+                selectedCustomer.getFilteredOrderList().size(), predicate.getValue()));
     }
 
     @Override

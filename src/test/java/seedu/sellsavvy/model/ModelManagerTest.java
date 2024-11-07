@@ -6,19 +6,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.logic.commands.customercommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
-import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
-import static seedu.sellsavvy.testutil.TypicalPersons.BENSON;
-import static seedu.sellsavvy.testutil.TypicalPersons.BOB;
-import static seedu.sellsavvy.testutil.TypicalPersons.GEORGE;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalCustomers.ALICE;
+import static seedu.sellsavvy.testutil.TypicalCustomers.BENSON;
+import static seedu.sellsavvy.testutil.TypicalCustomers.BOB;
+import static seedu.sellsavvy.testutil.TypicalCustomers.GEORGE;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,14 +27,14 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.commons.core.GuiSettings;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.exceptions.OrderNotFoundException;
-import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
-import seedu.sellsavvy.model.person.Person;
-import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
+import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
+import seedu.sellsavvy.model.customer.exceptions.CustomerNotFoundException;
 import seedu.sellsavvy.testutil.AddressBookBuilder;
+import seedu.sellsavvy.testutil.CustomerBuilder;
 import seedu.sellsavvy.testutil.OrderBuilder;
-import seedu.sellsavvy.testutil.PersonBuilder;
 import seedu.sellsavvy.testutil.TypicalIndexes;
 
 public class ModelManagerTest {
@@ -116,7 +116,7 @@ public class ModelManagerTest {
     @Test
     public void hasSimilarPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(modelManager.hasSimilarPerson(editedAlice));
     }
@@ -124,7 +124,7 @@ public class ModelManagerTest {
     @Test
     public void hasSimilarPerson_personWithSimilarNameInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE)
+        Customer editedAlice = new CustomerBuilder(ALICE)
                 .withName(ALICE.getName()
                         .fullName.toUpperCase())
                 .withAddress(VALID_ADDRESS_BOB)
@@ -141,7 +141,7 @@ public class ModelManagerTest {
     @Test
     public void getSelectedPersonProperty_innerContent_isNullInitially() {
         assertNotNull(modelManager.getSelectedPersonProperty());
-        //ensures that when first initiated no person's order will be displayed
+        //ensures that when first initiated no customer's order will be displayed
         assertNull(modelManager.getSelectedPersonProperty().get());
         assertNull(modelManager.getSelectedPerson());
         assertNull(modelManager.getFilteredOrderList());
@@ -150,7 +150,7 @@ public class ModelManagerTest {
 
     @Test
     public void updateSelectedPerson_updateSuccessfully() {
-        // Update to a person
+        // Update to a customer
         modelManager.updateSelectedPerson(ALICE);
         assertEquals(modelManager.getSelectedPersonProperty().get(), ALICE);
         assertEquals(modelManager.getSelectedPerson(), ALICE);
@@ -174,18 +174,18 @@ public class ModelManagerTest {
     public void findEquivalentPerson_modelContainsEquivalentPerson() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
         Model modelCopy = model.createCopy();
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        Person selectedPersonCopy = modelCopy.findEquivalentPerson(selectedPerson);
-        assertNotSame(selectedPersonCopy, selectedPerson);
-        assertEquals(selectedPersonCopy, selectedPerson);
+        Customer selectedCustomer = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer selectedCustomerCopy = modelCopy.findEquivalentPerson(selectedCustomer);
+        assertNotSame(selectedCustomerCopy, selectedCustomer);
+        assertEquals(selectedCustomerCopy, selectedCustomer);
     }
 
     @Test
     public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        Person differentPerson = new PersonBuilder(selectedPerson).withName(VALID_NAME_BOB).build();
-        assertThrows(PersonNotFoundException.class, () -> model.findEquivalentPerson(differentPerson));
+        Customer selectedCustomer = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Customer differentCustomer = new CustomerBuilder(selectedCustomer).withName(VALID_NAME_BOB).build();
+        assertThrows(CustomerNotFoundException.class, () -> model.findEquivalentPerson(differentCustomer));
     }
 
     @Test
@@ -201,7 +201,7 @@ public class ModelManagerTest {
         assertTrue(modelManager.isSelectedPerson(ALICE));
 
         // same values -> returns true
-        assertTrue(modelManager.isSelectedPerson(new PersonBuilder(ALICE).build()));
+        assertTrue(modelManager.isSelectedPerson(new CustomerBuilder(ALICE).build()));
 
         // different values -> returns false
         assertFalse(modelManager.isSelectedPerson(BOB));
@@ -214,16 +214,16 @@ public class ModelManagerTest {
     public void setOrder() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
 
-        // Assertion error thrown when there is no selectedPerson
+        // Assertion error thrown when there is no selectedCustomer
         assertThrows(AssertionError.class, () -> model.setOrder(ABACUS, BOTTLE));
 
-        Person selectedPerson = model.findEquivalentPerson(GEORGE);
-        model.updateSelectedPerson(selectedPerson);
+        Customer selectedCustomer = model.findEquivalentPerson(GEORGE);
+        model.updateSelectedPerson(selectedCustomer);
 
-        // OrderNotFoundException are thrown when selectedPerson has no such order
+        // OrderNotFoundException are thrown when selectedCustomer has no such order
         assertThrows(OrderNotFoundException.class, () -> model.setOrder(new OrderBuilder(BOTTLE).build(), ABACUS));
 
-        // success when selectedPerson has the same order
+        // success when selectedCustomer has the same order
         Order order = model.getFilteredOrderList().get(TypicalIndexes.INDEX_FIRST.getZeroBased());
         model.setOrder(order, BOTTLE);
         assertFalse(model.getFilteredOrderList().contains(order));
