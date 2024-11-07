@@ -547,7 +547,7 @@ Success action: Details of edited contact shown in the status message, person in
 
 #### Editing by INDEX
 
-1. Editing a person while all persons are being shown
+1. Editing a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
 
