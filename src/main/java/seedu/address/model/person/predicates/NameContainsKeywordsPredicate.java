@@ -42,10 +42,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         String[] fullNameSplit = fullName.split("\\s+");
         List<String> listOfFullName = Arrays.asList(fullNameSplit);
         Stream<String> streamOfFullName = listOfFullName.stream();
-        boolean result = fullName.startsWith(this.keywords) ||
-                streamOfKeywords
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(fullName, keyword)) ||
-                streamOfFullName
+        boolean result = fullName.startsWith(this.keywords)
+                || streamOfKeywords
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(fullName, keyword))
+                || streamOfFullName
                         .anyMatch(keyword -> keyword.startsWith(this.keywords));
         return result;
     }
