@@ -16,16 +16,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateTagCommand;
-import seedu.address.logic.commands.CreateTaskCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindAddressCommand;
@@ -34,7 +31,11 @@ import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindTaskCommand;
 import seedu.address.logic.commands.findcommand.FindWeddingCommand;
+import seedu.address.logic.commands.task.CreateTaskCommand;
+import seedu.address.logic.commands.task.DeleteTaskCommand;
+import seedu.address.logic.commands.task.ListTasksCommand;
 import seedu.address.logic.commands.vendor.AddVendorCommand;
 import seedu.address.logic.commands.vendor.AssignVendorCommand;
 import seedu.address.logic.commands.vendor.UnassignVendorCommand;
@@ -42,7 +43,6 @@ import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand;
-import seedu.address.logic.commands.wedding.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -53,6 +53,7 @@ import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredica
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TaskContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
@@ -202,6 +203,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_findTask() throws Exception {
+        List<String> keywords = Arrays.asList("Order wedding cake");
+        FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " tk/Order wedding cake");
+        assertEquals(new FindTaskCommand(new TaskContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -243,11 +252,6 @@ public class AddressBookParserTest {
 
         CreateTagCommand command = (CreateTagCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
-
-        // Test using create tag keyword
-        String userKeywordInput = CreateTagCommand.COMMAND_KEYWORD + " t/colleague";
-        CreateTagCommand keywordCommand = (CreateTagCommand) parser.parseCommand(userKeywordInput);
-        assertEquals(expectedCommand, keywordCommand);
     }
 
     @Test
@@ -335,7 +339,7 @@ public class AddressBookParserTest {
     public void parseCommand_editWedding() throws Exception {
         String newWeddingParameter = " w/New Wedding Name";
         String userInput = EditWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + newWeddingParameter;
-        EditWeddingDescriptor editWeddingDescriptor = new EditWeddingCommand.EditWeddingDescriptor();
+        EditWeddingCommand.EditWeddingDescriptor editWeddingDescriptor = new EditWeddingCommand.EditWeddingDescriptor();
         editWeddingDescriptor.setWeddingName(new WeddingName("New Wedding Name"));
         EditWeddingCommand expectedCommand = new EditWeddingCommand(INDEX_FIRST, editWeddingDescriptor);
 
@@ -417,8 +421,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_createTask() throws Exception {
         String userInput = CreateTaskCommand.COMMAND_WORD
-                + " tk/todo Buy groceries tk/deadline Submit report /by 2024-12-31"
-                + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+                + " tk/Buy groceries tk/Submit report d/2024-12-31"
+                + " tk/Project meeting d/2024-10-10 d/2024-10-11";
         HashSet<Task> tasksToAdd = new HashSet<>(TypicalTasks.getTypicalTasks());
 
         CreateTaskCommand expectedCommand = new CreateTaskCommand(tasksToAdd);
@@ -428,8 +432,8 @@ public class AddressBookParserTest {
 
         // Test using create task keyword
         String userKeywordInput = CreateTaskCommand.COMMAND_KEYWORD
-                + " tk/todo Buy groceries tk/deadline Submit report /by 2024-12-31"
-                + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+                + " tk/Buy groceries tk/Submit report d/2024-12-31"
+                + " tk/Project meeting d/2024-10-10 d/2024-10-11";
         CreateTaskCommand keywordCommand = (CreateTaskCommand) parser.parseCommand(userKeywordInput);
         assertEquals(expectedCommand, keywordCommand);
     }

@@ -76,15 +76,21 @@ public class UntagCommand extends Command {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
+        if (tagsToRemove.isEmpty()) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
+        }
+
         if (!updatedTags.containsAll(tagsToRemove)) {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
-        updatedTags.removeAll(tagsToRemove);
-
-        for (Tag tag : tagsToRemove) {
-            tag.decreaseTaggedCount();
+        for (Tag tag : updatedTags) {
+            if (tagsToRemove.contains(tag)) {
+                tag.decreaseTaggedCount();
+            }
         }
+
+        updatedTags.removeAll(tagsToRemove);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -96,6 +102,8 @@ public class UntagCommand extends Command {
                 personToEdit.getTasks());
 
         model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredTagList(Model.PREDICATE_SHOW_ALL_TAGS);
 
         return new CommandResult(generateSuccessMessage(personToEdit));
     }

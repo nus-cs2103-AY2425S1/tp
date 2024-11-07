@@ -68,6 +68,14 @@ public class UniqueWeddingList implements Iterable<Wedding> {
     }
 
     /**
+     * Gets a Wedding based on the name
+     */
+    public Wedding getWedding(Wedding target) {
+        requireNonNull(target);
+        return internalList.stream().filter(target::isSameWedding).findFirst().orElse(null);
+    }
+
+    /**
      * Removes the equivalent wedding from the list.
      * The wedding must exist in the list.
      */
