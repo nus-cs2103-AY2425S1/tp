@@ -103,8 +103,8 @@ public class JsonSerializableAddressBookTest {
             for (Wedding weddingJob : person.getWeddingJobs()) {
                 boolean foundClient = false;
                 for (Person potentialClient : addressBook.getPersonList()) {
-                    if (potentialClient.getOwnWedding() != null &&
-                            potentialClient.getOwnWedding().equals(weddingJob)) {
+                    if (potentialClient.getOwnWedding() != null
+                            && potentialClient.getOwnWedding().equals(weddingJob)) {
                         foundClient = true;
                         break;
                     }
