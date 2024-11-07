@@ -6,23 +6,17 @@
     "availableDate" : "2023-10-27",
     "involvedIn" : [ "Tree Planting" ]
   }, {
-    "name" : "John Doe",
-    "phone" : "98765432",
-    "email" : "johndoe@example.com",
-    "availableDate" : "2023-10-20",
-    "involvedIn" : [ ]
-  }, {
     "name" : "Alice Wong",
     "phone" : "99117846",
     "email" : "Alice@gmail.com",
     "availableDate" : "2023-10-28",
-    "involvedIn" : [ "Charity Run" ]
+    "involvedIn" : [ ]
   }, {
     "name" : "Jason Wang",
     "phone" : "12341234",
     "email" : "lol@lol.com",
-    "availableDate" : "2022-10-28",
-    "involvedIn" : [ ]
+    "availableDate" : "2023-10-28",
+    "involvedIn" : [ "Charity Run" ]
   } ],
   "events" : [ {
     "eventName" : "Beach Cleanup",
@@ -39,7 +33,7 @@
     "endTime" : "11:00",
     "location" : "Marina Bay",
     "description" : "5km run to raise funds for charity",
-    "volunteers" : [ "Alice Wong" ]
+    "volunteers" : [ "Jason Wang" ]
   }, {
     "eventName" : "Food Donation Drive",
     "date" : "2023-10-27",

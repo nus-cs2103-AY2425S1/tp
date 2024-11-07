@@ -161,6 +161,7 @@ You can easily print out a hard copy of all volunteers and events in the databas
 
 Format : `export`
 
+![Export File](images/ExportCommand.png)
 * After running the export command, check the `/output` folder located in the same directory as your .jar file. You’ll find two CSV files: events.csv and volunteers.csv.
 
 ### Exiting the program : `exit`
@@ -209,7 +210,7 @@ If there are no volunteers whose names match the keyword in the database, the en
 </div>
 
 Examples:
-* `/v find Anne` returns `Anne Khoo`, `Annebette Tan` and `Jonanne Tan`
+* `/v find ng` returns `David Ng`, `Alice Wong` and `Jason Wang`
 
 ![Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
 
@@ -249,9 +250,9 @@ Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `assign v/1 e/2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
+* `assign v/3 e/2` assigns the third volunteer on the volunteer list to the list of participants of the second event on the event list.
 
-![Assign Volunteer Demo](images/commandDemo/AssignDemo.png)
+![Assign Volunteer Demo](images/commandDemo/AssignVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -267,9 +268,9 @@ Format: `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unassign v/1 e/2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
+* `unassign v/2 e/2` removes the second volunteer on the volunteer list from the list of participants of the second event on the event list.
 
-![Unassign Volunteer Demo](images/commandDemo/UnassignDemo.png)
+![Unassign Volunteer Demo](images/commandDemo/UnassignVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -286,7 +287,9 @@ Format: `/e view EVENT_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `/e view 1` displayes the volunteers participating in the first event in the event list.
+* `/e view 1` displays the volunteers participating in the first event in the event list.
+
+![View Volunteer Demo](images/commandDemo/ViewVolunteerDemo.png)
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
