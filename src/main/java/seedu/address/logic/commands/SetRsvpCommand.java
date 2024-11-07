@@ -18,11 +18,11 @@ public class SetRsvpCommand extends UndoableCommand {
             + ": Sets the RSVP status of a guest. "
             + "Parameters: INDEX (must be a positive integer and within number of guests in address book) "
             + "STATUS (s/1 - Coming, s/2 - Not Coming, s/3 - Pending)\n"
-            + "Ex. setrsvp 1 s/1";
+            + "Example: " + COMMAND_WORD + " 1 s/1";
 
     public static final String MESSAGE_SET_SUCCESS = "RSVP status updated for guest: ";
     public static final String MESSAGE_INVALID_INDEX = "ERROR: Please enter a valid index (from 1 to ";
-    public static final String MESSAGE_INVALID_ACTION = "ERROR: Please enter a valid action "
+    public static final String MESSAGE_INVALID_ACTION = "ERROR: Please enter a valid RSVP status "
             + "(s/1 - Coming, s/2 - Not Coming, or s/3 - Pending)";
 
     private final Index index;
