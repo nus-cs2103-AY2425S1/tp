@@ -97,13 +97,18 @@ public class UnmatchCommandTest {
 
     @Test
     public void execute_contactNotMatched_failure() {
+        // Confirm that INDEX_FIRST_PERSON is unmatched at the start
+        Person contactToUnmatch = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertFalse(contactToUnmatch.isMatchPresent(), "Expected INDEX_FIRST_PERSON"
+                + " to be unmatched at the start of the test.");
+
         UnmatchCommand unmatchCommand = new UnmatchCommand(INDEX_FIRST_PERSON, INDEX_FIRST_JOB);
 
-        Person contactToUnmatch = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String expectedMessage = String.format(UnmatchCommand.MESSAGE_CONTACT_HAS_NO_JOBS, contactToUnmatch.getName());
 
         assertCommandFailure(unmatchCommand, model, expectedMessage);
     }
+
 
 
     @Test
