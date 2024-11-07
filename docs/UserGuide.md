@@ -278,7 +278,7 @@ _Details coming soon ..._
 * Names can contain any characters at all, including spaces, hyphens, and other special characters.
 * Names will be stored in their case-sensitive form, but capitalisation will be ignored when checking for duplicate names.
   * Eg. Adding a contact as "john Doe" will save them as such, but trying to add a "John Doe" with the same phone number will be marked as a duplicate person and rejected.
-  * To avoid unexpected behaviour with this, it is recommended that users save contacts with consistent capitalisation rules.
+  * Other instances of possible duplicates such as identical names except for extra spaces are not handled.
 
 ### Phone
 * Phones are compulsory for all contacts, and are denoted with the `p/` prefix.
