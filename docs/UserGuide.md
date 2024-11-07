@@ -248,9 +248,9 @@ Example:
 
 ![meeting contacts example](images/meeting-contacts_example.png)
 
-- `meeting-contacts 8`
+- `meeting-contacts 1`
 - **Before**: contact view shows all contacts.
-- **After**: only Alex and David contacts are shown.
+- **After**: only John and Sam contacts are shown.
 
 Notes:
 - You must always specify the `INDEX` of the meeting you want to view the contacts in.
