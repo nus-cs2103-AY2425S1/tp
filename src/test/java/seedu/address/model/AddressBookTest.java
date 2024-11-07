@@ -108,19 +108,19 @@ public class AddressBookTest {
 
         @Override
         public boolean hasTelegramHandle(TelegramHandle telegramHandle) {
-            // This is a stub method for testing purposes, returning fa
+            // This is a stub method for testing purposes, returning true by default
             return true;
         }
 
         @Override
         public boolean hasPhoneNumber(Phone phone) {
-            // This is a stub method for testing purposes, returning false by default.
+            // This is a stub method for testing purposes, returning true by default
             return true;
         }
 
         @Override
         public boolean hasEmail(Email email) {
-            // This is a stub method for testing purposes, returning fa
+            // This is a stub method for testing purposes, returning true by default
             return true;
         }
     }
