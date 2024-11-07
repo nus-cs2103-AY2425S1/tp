@@ -167,7 +167,7 @@ Explanation:
 5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
 
 ### Find feature
-The `find` command searches for all guests and vendors that match the given keyword(s). The prefix specified in the command indicates the attribute to be searched
+The `find` command searches for all guests and vendors that match the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched
 
 The sequence diagram below provides an overview for the execution flow of a `find` command:
 <puml src="diagrams/FindSequenceDiagram.puml" />
