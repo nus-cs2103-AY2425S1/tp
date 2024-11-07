@@ -3,7 +3,6 @@ package seedu.address.model.student;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -11,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class StudentMatchesQueryPredicate implements Predicate<Student> {
 
+    private static final String noGroupKey = "!nogroup";
     private final List<String> keywords;
 
     public StudentMatchesQueryPredicate(List<String> keywords) {
@@ -20,15 +20,19 @@ public class StudentMatchesQueryPredicate implements Predicate<Student> {
     @Override
     public boolean test(Student student) {
         String groupName = student.getGroupName().isPresent()
-            ? student.getGroupName().get().getGroupName() : "!nogroup";
+            ? student.getGroupName().get().getGroupName().toLowerCase() : noGroupKey;
         return
-            keywords.stream().anyMatch(keyword ->
-                StringUtil.containsWordIgnoreCase(student.getStudentNumber().getStudentNumber(), keyword)
-                    || StringUtil.containsWordIgnoreCase(student.getName().getFullName(), keyword)
-                    || student.getTags().stream().anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.getTagName(),
-                    keyword))
-                    || StringUtil.containsWordIgnoreCase(student.getEmail().getEmail(), keyword)
-                    || groupName.equals(keyword));
+            keywords.stream().anyMatch(keyword -> {
+                String key = keyword.toLowerCase();
+                String studentNumber = student.getStudentNumber().getStudentNumber().toLowerCase();
+                String name = student.getName().getFullName().toLowerCase();
+                String email = student.getEmail().getEmail().toLowerCase();
+                return studentNumber.contains(key)
+                    || name.contains(key)
+                    || email.contains(key)
+                    || student.getTags().stream().anyMatch(tag -> tag.getTagName().toLowerCase().contains(key))
+                    || groupName.contains(key);
+            });
     }
 
     @Override

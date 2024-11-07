@@ -48,19 +48,19 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@-u.nus.edu")); // domain name starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack@u.nus.edu-")); // domain name ends with a hyphen
         assertFalse(Email.isValidEmail("peterjack@u.nus.ed")); // top level domain has less than two chars
-
+        assertFalse(Email.isValidEmail("peterjack-@u.nus.edu")); // local part ends with a hyphen
+        assertFalse(Email.isValidEmail("-peterjack@u.nus.edu")); // local part starts with a hyphen
+        assertFalse(Email.isValidEmail("PeterJack+1190@u.nus.edu")); // '+' symbol in local part
+        assertFalse(Email.isValidEmail("a1+be.d@u.nus.edu")); // mixture of alphanumeric and special characters
+        assertFalse(Email.isValidEmail("PeterJack-1190@u.nus.edu")); // hyphen in local part
+        assertFalse(Email.isValidEmail("peter..jack@u.nus.edu")); // local part has two consecutive periods
+        assertFalse(Email.isValidEmail("peterjack@gmail.com")); // wrong domain
         // valid email
-        assertTrue(Email.isValidEmail("peter..jack@u.nus.edu")); // local part has two consecutive periods
-        assertTrue(Email.isValidEmail("peterjack-@u.nus.edu")); // local part ends with a hyphen
-        assertTrue(Email.isValidEmail("-peterjack@u.nus.edu")); // local part starts with a hyphen
         assertTrue(Email.isValidEmail("PeterJack_1190@u.nus.edu")); // underscore in local part
         assertTrue(Email.isValidEmail("PeterJack.1190@u.nus.edu")); // period in local part
-        assertTrue(Email.isValidEmail("PeterJack+1190@u.nus.edu")); // '+' symbol in local part
-        assertTrue(Email.isValidEmail("PeterJack-1190@u.nus.edu")); // hyphen in local part
         assertTrue(Email.isValidEmail("a@u.nus.edu")); // minimal
         assertTrue(Email.isValidEmail("test@u.nus.edu")); // alphabets only
         assertTrue(Email.isValidEmail("123@u.nus.edu")); // numeric local part and domain name
-        assertTrue(Email.isValidEmail("a1+be.d@u.nus.edu")); // mixture of alphanumeric and special characters
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@u.nus.edu")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
     }

@@ -65,6 +65,8 @@ import seedu.address.logic.parser.markcommands.MarkTaskCommandParser;
 import seedu.address.logic.parser.sortcommands.SortGroupCommandParser;
 import seedu.address.logic.parser.sortcommands.SortStudentCommandParser;
 import seedu.address.logic.parser.sortcommands.SortTaskCommandParser;
+import seedu.address.logic.parser.versionhistorycommandparser.RedoCommandParser;
+import seedu.address.logic.parser.versionhistorycommandparser.UndoCommandParser;
 
 /**
  * Parses user input.

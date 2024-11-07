@@ -2,14 +2,19 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-participant ":LogicManager" as LM
-participant ":AddressBookParser" as ABP
-participant ":UndoCommandParser" as UCP
-participant "u:UndoCommand" as UC
-participant "cr:CommandResult" as CR
-participant "tempAddressBook:AddressBook" as B
-participant "currentAddressBook:AddressBook" as A
-participant ":Model" as M
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LM LOGIC_COLOR
+participant ":AddressBookParser" as ABP LOGIC_COLOR
+participant ":UndoCommandParser" as UCP LOGIC_COLOR
+participant "u:UndoCommand" as UC LOGIC_COLOR
+participant "cr:CommandResult" as CR LOGIC_COLOR
+participant "tempAddressBook:AddressBook" as B LOGIC_COLOR
+participant "currentAddressBook:AddressBook" as A LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as M MODEL_COLOR
+end box
 
 LM -> ABP: parseCommand("undo")
 activate ABP

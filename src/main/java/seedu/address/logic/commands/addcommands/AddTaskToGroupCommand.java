@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -85,18 +84,18 @@ public class AddTaskToGroupCommand extends Command {
 
         // create a stream consisting of all groups which are entered more than once by the user
         Stream<GroupName> checkForDuplicates = groups.stream().filter(x -> Collections.frequency(groups, x) > 1)
-                .filter(y -> model.hasGroup(new Group(y)))
-                .distinct();
+            .filter(y -> model.hasGroup(new Group(y)))
+            .distinct();
 
         // count the number of duplicated groups entered
         long numDuplicates = groups.stream().filter(x -> Collections.frequency(groups, x) > 1)
-                .filter(y -> model.hasGroup(new Group(y)))
-                .distinct()
-                .count();
+            .filter(y -> model.hasGroup(new Group(y)))
+            .distinct()
+            .count();
 
         // create duplicate message for duplicate groups, if none will just return an empty string
         String duplicateMessage = checkForDuplicates.map(a -> a.getGroupName()).reduce(
-                MESSAGE_DUPLICATE_GROUP, (x, y) -> x + "\n" + y);
+            MESSAGE_DUPLICATE_GROUP, (x, y) -> x + "\n" + y);
         if (numDuplicates == 0) {
             duplicateMessage = "";
         }
