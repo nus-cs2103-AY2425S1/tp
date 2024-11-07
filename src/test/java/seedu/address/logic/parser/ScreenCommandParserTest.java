@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -22,9 +21,16 @@ public class ScreenCommandParserTest {
     }
 
     @Test
-    public void parse_missingIndex_throwsParseException() {
-        assertParseFailure(parser, "job ",
-                String.format(MESSAGE_MISSING_INDEX));
+    public void parse_incorrectArgumentCount_throwsParseException() {
+
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScreenJobCommand.MESSAGE_USAGE);
+
+        // Too few arguments
+        assertParseFailure(parser, "job ", expectedMessage);
+        assertParseFailure(parser, "1", expectedMessage);
+
+        // Too many arguments
+        assertParseFailure(parser, "job 1 something", expectedMessage);
     }
 
     @Test

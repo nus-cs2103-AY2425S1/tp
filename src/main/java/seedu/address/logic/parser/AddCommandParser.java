@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.commands.AddContactCommand;
@@ -17,9 +18,10 @@ public class AddCommandParser implements Parser<AddCommand<?>> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand<?> parse(String args) throws ParseException {
+        String entityString = args.trim().split(" ")[0];
+        String addArgs = args.replace(entityString, "");
 
-        String entity = args.trim().split(" ")[0];
-        String addArgs = args.replace(entity, "");
+        String entity = ParserUtil.parseEntity(entityString);
 
         switch (entity) {
         case AddContactCommand.ENTITY_WORD:
@@ -29,7 +31,9 @@ public class AddCommandParser implements Parser<AddCommand<?>> {
         case AddCompanyCommand.ENTITY_WORD:
             return new AddCompanyCommandParser().parse(addArgs);
         default:
-            throw new ParseException(AddCommand.MESSAGE_USAGE);
+            String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
+                    AddCommand.COMMAND_WORD, entity);
+            throw new ParseException(exceptionMessage);
         }
 
     }

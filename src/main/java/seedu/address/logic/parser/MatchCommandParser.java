@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MatchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,12 +15,7 @@ public class MatchCommandParser implements Parser<MatchCommand> {
      */
     public MatchCommand parse(String args) throws ParseException {
 
-
-        String[] splitArgs = args.trim().split("\\s+");
-
-        if (splitArgs.length != 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchCommand.MESSAGE_USAGE));
-        }
+        String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 2, MatchCommand.MESSAGE_USAGE);
 
         String inputContactIndex = splitArgs[MatchCommand.CONTACT_INDEX_POS];
         String inputJobIndex = splitArgs[MatchCommand.JOB_INDEX_POS];
