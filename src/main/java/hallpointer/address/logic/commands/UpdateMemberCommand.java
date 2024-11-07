@@ -35,8 +35,8 @@ public class UpdateMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "update_member";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the member "
-            + "in the displayed member list that matches the given index number. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the displayed member "
+            + "with the given index.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "

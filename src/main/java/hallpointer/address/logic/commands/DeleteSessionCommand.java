@@ -27,16 +27,16 @@ public class DeleteSessionCommand extends Command {
     public static final String COMMAND_WORD = "delete_session";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the session from the member(s) in the displayed member list "
-            + "that matches the given index number(s).\n"
+            + ": Deletes the session from the displayed member(s) with the given index(es).\n"
             + "Parameters: "
             + PREFIX_SESSION_NAME + "NAME "
+            + PREFIX_MEMBER + "INDEX "
             + "[" + PREFIX_MEMBER + "INDEX]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SESSION_NAME + "Rehearsal "
             + PREFIX_MEMBER + "1";
 
-    public static final String MESSAGE_SUCCESS = "Deleted Session: %1$s from %2$s members";
+    public static final String MESSAGE_SUCCESS = "Deleted Session: %1$s from %2$s members.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
     public static final String MESSAGE_SESSION_NOT_IN_MEMBER = "Error: Session %1$s does not exist in member %2$s.";
 
