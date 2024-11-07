@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
-import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +12,6 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.util.Duration;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,6 +23,8 @@ public class PersonDetailedView extends UiPart<Region> {
     private boolean isVisualsEnabled;
 
     private final PersonDetailedViewContentManager contentManager;
+
+    private final ResultDisplay resultDisplay;
     @FXML
     private HBox cardPane;
     @FXML
@@ -65,10 +65,12 @@ public class PersonDetailedView extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} to display.
      */
-    public PersonDetailedView(Person person, boolean isVisualsEnabled) {
+
+    public PersonDetailedView(Person person, boolean isVisualsEnabled, ResultDisplay resultDisplay) {
         super(FXML);
         this.person = person;
         this.contentManager = new PersonDetailedViewContentManager(person);
+        this.resultDisplay = resultDisplay;
         this.isVisualsEnabled = isVisualsEnabled;
 
         initialiseView();
@@ -128,13 +130,7 @@ public class PersonDetailedView extends UiPart<Region> {
      */
     public void showCopyNotification(String message) {
         copyTemplateToClipboard(message);
-
-        notificationLabel.setText("Copied to clipboard!");
-        notificationLabel.setVisible(true);
-
-        PauseTransition pause = new PauseTransition(Duration.seconds(1.0));
-        pause.setOnFinished(e -> notificationLabel.setVisible(false));
-        pause.play();
+        resultDisplay.setFeedbackToUser("Template Message copied to clipboard!");
     }
 
     /**

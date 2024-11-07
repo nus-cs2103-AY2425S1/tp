@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    // making ResultDisplay package-private so PersonCard can access it
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -234,5 +235,9 @@ public class MainWindow extends UiPart<Stage> {
     public void updatePersonDetailedView(PersonDetailedView personDetailedView) {
         personDetailedViewPlaceholder.getChildren().clear();
         personDetailedViewPlaceholder.getChildren().add(personDetailedView.getRoot());
+    }
+
+    public ResultDisplay getResultDisplay() {
+        return resultDisplay;
     }
 }
