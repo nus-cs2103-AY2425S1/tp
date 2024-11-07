@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
@@ -105,9 +104,6 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered vendors list */
-    ObservableList<Vendor> getFilteredVendorList();
-
     /**
      * Updates the filter of the filtered person list to filter by the given {@code personPredicate}.
      * @throws NullPointerException if {@code personPredicate} is null.
@@ -160,6 +156,18 @@ public interface Model {
 
     /** Returns a target tag from the model. */
     Tag getTag(Tag tag);
+
+    /**
+     * Marks the given task as done.
+     * The task must exist in the Wedlinker.
+     */
+    void markTask(Task task);
+
+    /**
+     * Unmarks the given task to become not undone.
+     * The task must exist in the Wedlinker.
+     */
+    void unmarkTask(Task task);
 
     /**
      * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.

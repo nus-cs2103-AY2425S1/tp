@@ -113,6 +113,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasVendor_vendorInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
         modelManager.assignVendor(ALICE);
         assertTrue(modelManager.hasVendor(ALICE));
     }
@@ -124,6 +125,7 @@ public class ModelManagerTest {
 
     @Test
     public void assignVendor_validVendor_vendorAdded() {
+        modelManager.addPerson(ALICE);
         modelManager.assignVendor(ALICE);
         assertTrue(modelManager.hasVendor(ALICE));
     }
@@ -135,6 +137,7 @@ public class ModelManagerTest {
 
     @Test
     public void unassignVendor_vendorPresent_vendorRemoved() {
+        modelManager.addPerson(ALICE);
         modelManager.assignVendor(ALICE);
         modelManager.unassignVendor(ALICE);
         assertFalse(modelManager.hasVendor(ALICE));

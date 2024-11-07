@@ -156,11 +156,6 @@ public class AddVendorCommandTest {
         }
 
         @Override
-        public ObservableList<Vendor> getFilteredVendorList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -222,6 +217,16 @@ public class AddVendorCommandTest {
 
         @Override
         public void deleteTag(Tag toDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 

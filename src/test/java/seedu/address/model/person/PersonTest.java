@@ -14,9 +14,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -45,6 +48,40 @@ public class PersonTest {
         Person person = ALICE;
         Task task = new Task(VALID_TASK_TODO);
         assertFalse(person.hasTask(task));
+    }
+
+    @Test
+    public void getTask_taskNotAssigned_throwsNoSuchElementException() {
+        // Create a person without any tasks
+        Person person = new PersonBuilder().build();
+        Task nonExistentTask = new Todo("Non-existent task");
+
+        // Attempt to get a task that isn't assigned to the person
+        assertThrows(NoSuchElementException.class, () -> {
+            person.getTask(nonExistentTask);
+        });
+    }
+
+
+    @Test
+    public void getTaskAssigned_returnsSuccessfully() {
+        // Create a person with a specific task
+        String taskStr = "todo: buy groceries";
+        Person person = new PersonBuilder().withTasks(taskStr).build();
+        Task newTask = new Todo("buy groceries");
+
+        // Ensure getTask returns the task when it exists
+        Task retrievedTask = person.getTask(newTask);
+        assertEquals(newTask, retrievedTask, "Expected to retrieve the assigned task successfully.");
+    }
+
+    @Test
+    public void hasTask_taskAssigned_returnsTrue() {
+        Task assignedTask = new Todo("Buy groceries");
+        Person person = new PersonBuilder().withTasks("todo: Buy groceries").build();
+
+        // Check that hasTask returns true for the assigned task
+        assertTrue(person.hasTask(assignedTask), "Expected to return true for a task that is assigned.");
     }
     @Test
     public void removeTask_taskAssigned_taskRemovedSuccessfully() {

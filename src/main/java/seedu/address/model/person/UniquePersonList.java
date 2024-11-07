@@ -37,6 +37,15 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Checks whether the list of persons contains a vendor by matching their name and checking
+     * if they are a vendor.
+     */
+    public boolean containsVendor(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(x -> x.isSamePerson(toCheck) && x.isVendor());
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

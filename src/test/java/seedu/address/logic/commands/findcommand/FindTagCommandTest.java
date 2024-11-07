@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
 import static seedu.address.logic.commands.findcommand.FindTagCommand.MESSAGE_FIND_TAG_PERSON_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -66,12 +65,12 @@ public class FindTagCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        TagContainsKeywordsPredicate predicate = preparePredicate("friends");
+        TagContainsKeywordsPredicate predicate = preparePredicate("florist");
         String expectedMessage = String.format(MESSAGE_FIND_TAG_PERSON_SUCCESS, predicate.getDisplayString());
         FindTagCommand command = new FindTagCommand(predicate);
         expectedModel.updateFilteredPersonListByTag(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
     }
 
     /**

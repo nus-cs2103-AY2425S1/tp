@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Event;
@@ -34,6 +35,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final boolean isVendor;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
@@ -46,7 +48,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("weddings") List<JsonAdaptedWedding> weddings,
-            @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+            @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
+            @JsonProperty("isVendor") boolean isVendor) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,6 +63,7 @@ class JsonAdaptedPerson {
         if (weddings != null) {
             this.weddings.addAll(weddings);
         }
+        this.isVendor = isVendor;
 
     }
 
@@ -80,6 +84,7 @@ class JsonAdaptedPerson {
         tasks.addAll(source.getTasks().stream()
                 .map(this::mapToJsonAdaptedTask)
                 .collect(Collectors.toList()));
+        isVendor = source.isVendor();
     }
 
     protected String getName() {
@@ -108,6 +113,14 @@ class JsonAdaptedPerson {
 
     protected List<JsonAdaptedTask> getTasks() {
         return tasks;
+    }
+
+    protected boolean isVendor() {
+        return this.isVendor;
+    }
+
+    protected boolean hasTasks() {
+        return !this.tasks.isEmpty();
     }
 
     /**
@@ -184,6 +197,9 @@ class JsonAdaptedPerson {
         final Set<Wedding> modelWeddings = new HashSet<>(personWeddings);
         final Set<Task> modelTasks = new HashSet<>(personTasks);
 
+        if (isVendor) {
+            return new Vendor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
+        }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
     }
 

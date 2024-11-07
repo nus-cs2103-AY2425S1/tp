@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.SampleDataUtil;
@@ -32,8 +33,8 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Set<Wedding> weddings;
-
     private Set<Task> tasks;
+    private boolean isVendor;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -46,6 +47,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         weddings = new HashSet<>();
         tasks = new HashSet<>();
+        isVendor = false;
     }
 
     /**
@@ -59,6 +61,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         weddings = new HashSet<>(personToCopy.getWeddings());
         tasks = new HashSet<>(personToCopy.getTasks());
+        isVendor = personToCopy.isVendor();
     }
 
     /**
@@ -119,8 +122,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isVendor} status to the {@code Person} that we are building.
+     */
+    public PersonBuilder withVendorStatus(String vendorStatus) {
+        this.isVendor = Boolean.parseBoolean(vendorStatus);
+        return this;
+    }
+
+    /**
+     * Build a person from the details provided to the PersonBuilder and creates a Person or Vendor depending on if
+     * any tasks are assigned.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags, weddings, tasks);
+        if (!tasks.isEmpty()) {
+            return new Vendor(name, phone, email, address, tags, weddings, tasks);
+        } else {
+            return new Person(name, phone, email, address, tags, weddings, tasks);
+        }
     }
 
 }
