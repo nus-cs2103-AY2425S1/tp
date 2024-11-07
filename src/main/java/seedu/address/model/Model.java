@@ -94,7 +94,8 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     *
+     * @throws NullPointerException If {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
@@ -102,7 +103,7 @@ public interface Model {
      * Adds a tag to the tag list.
      *
      * @param tag The tag to be added.
-     * @return true if the tag was successfully added, false if the tag already exists.
+     * @return True if the tag was successfully added, false if the tag already exists.
      */
     boolean addTag(Tag tag);
 
@@ -110,14 +111,15 @@ public interface Model {
      * Adds a variable number of tags to the tag list.
      *
      * @param tags The tags to be added.
-     * @return the set of tags which were added successfully (could be none).
+     * @return The set of tags which were added successfully (could be none).
      */
     Set<Tag> addTags(List<Tag> tags);
 
     /**
      * Deletes a tag from the tag list.
+     *
      * @param tag The tag to be deleted.
-     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     * @return True if the tag was successfully deleted, false if the tag does not exist.
      */
     boolean deleteTag(Tag tag);
 
@@ -125,7 +127,7 @@ public interface Model {
      * Deletes a variable number of tags from the tag list.
      *
      * @param tags The tags to be deleted.
-     * @return the set of tags which were deleted successfully (could be none).
+     * @return The set of tags which were deleted successfully (could be none).
      */
     Set<Tag> deleteTags(List<Tag> tags);
 
@@ -134,7 +136,7 @@ public interface Model {
      *
      * @param existingTag The tag to be renamed.
      * @param newTagName The new name of the tag after renaming.
-     * @return true if the tag was successfully renamed.
+     * @return True if the tag was successfully renamed.
      */
     boolean renameTag(Tag existingTag, String newTagName);
 
@@ -142,12 +144,12 @@ public interface Model {
      * Checks if a tag exists in the tag list.
      *
      * @param tag The tag to check for existence.
-     * @return true if the tag exists, false otherwise.
+     * @return True if the tag exists, false otherwise.
      */
     boolean hasTag(Tag tag);
 
     /**
-     * Returns a set of tags that are in use by the persons in the address book.
+     * Returns a set of tags that are in use by any of the persons in the address book.
      */
     Set<Tag> getTagsInUse();
 
@@ -158,6 +160,7 @@ public interface Model {
 
     /**
      * Edits the specified all persons in the address book with the tag.
+     *
      * @param existingTag The existing tag to be renamed.
      * @param newTagName The new tag name after renaming.
      */
@@ -165,19 +168,14 @@ public interface Model {
 
     /**
      * Checks if the size of the tag list is below or equal
-     * to the maximum size acceptable.
+     * to the maximum size acceptable, assuming an additional number of tags
+     * are added to the existing tag list.
      *
-     * @return true if the size is acceptable, false otherwise.
+     * @param additionalSize The number of tags to be added.
+     * @return True if the size is acceptable, false otherwise.
      */
     boolean checkAcceptableTagListSize(int additionalSize);
 
-    /**
-     * Returns the String representation of the
-     * tag list managed by this model.
-     *
-     * @return The {@code TagList} instance.
-     */
-    String getTagList();
 
     /**
      * Returns the ObservableList of the tag list

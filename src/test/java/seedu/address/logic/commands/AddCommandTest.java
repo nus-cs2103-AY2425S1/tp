@@ -172,11 +172,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public String getTagList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Tag> getTagListAsObservableList() {
             return null;
         }

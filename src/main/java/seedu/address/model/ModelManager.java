@@ -207,11 +207,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String getTagList() {
-        return addressBook.tagsToString();
-    }
-
-    @Override
     public Set<Tag> getTagsInUse() {
         Set<Tag> tagsInUse = new HashSet<>();
         List<Person> persons = getFullPersonList();

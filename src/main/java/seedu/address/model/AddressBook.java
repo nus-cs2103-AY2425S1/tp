@@ -151,16 +151,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.checkAcceptableSize(additionalTags);
     }
 
-    public String tagsToString() {
-        return tags.toString();
-    }
-
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("tags", tags)
                 .toString();
     }
 
