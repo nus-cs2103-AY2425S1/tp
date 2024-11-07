@@ -24,6 +24,8 @@ import seedu.address.model.person.Person;
 public class FindEventCommand extends Command {
     public static final String COMMAND_WORD = "find-event";
 
+    public static final String COMMAND_WORD_SHORT_FORM = "fe";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT INDEX: View list of persons "
             + "in the event identified by the "
             + "index number used in the event list.\n"

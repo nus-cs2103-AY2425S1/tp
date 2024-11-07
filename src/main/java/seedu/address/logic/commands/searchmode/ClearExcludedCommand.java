@@ -13,7 +13,8 @@ import seedu.address.model.event.EventManager;
  */
 
 public class ClearExcludedCommand extends Command {
-    public static final String COMMAND_WORD = "clearexcluded";
+    public static final String COMMAND_WORD = "clear-excluded";
+    public static final String COMMAND_WORD_SHORT_FORM = "clx";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all excluded Contacts.\n"
             + "Example: " + COMMAND_WORD;
