@@ -521,7 +521,7 @@ Unmarks a student as present for a particular week.
 
 <md>**Examples:**</md>
 
-* `unmarks n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
+* `unmark n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
   ![result for unmark](images/markAlexAbsent.png)
   </box>
 
