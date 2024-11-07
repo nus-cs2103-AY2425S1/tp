@@ -116,6 +116,10 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
 - Only alphanumeric characters, spaces and the terms <code>&nbsp;s/o&nbsp;</code> and <code>&nbsp;d/o&nbsp;</code> (case insensitive) are allowed. <br>
   e.g. `n/John Doe s/o Alexis` or `n/John Doe d/O Jane Doe`
 
+- Only english characters are allowed in commands, other languages may lead to unpredictable behaviour.
+
+- `TAG` is limited to about 45 characters (when the GUI is at the minimum allowed size), any longer may lead to truncated view of the `TAG`. It is recommended to keep within these bounds for the best experience.
+
 </div>
 
 ---
@@ -165,7 +169,7 @@ Adds a person to the ConcertPhonebook.
 Format: `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​`
 
 - `ROLE` Roles that can be assigned are: STAGE_MANAGER, SOUND_TECHNICIAN, ORGANISER,
-  ARTIST, PROMOTER, VENUE, SECURITY, LOGISTICS, MEDIA. 
+  ARTIST, PROMOTER, VENUE, SECURITY, LOGISTICS, MEDIA.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
