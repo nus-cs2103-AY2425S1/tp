@@ -4,15 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Appointment;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.LogList;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -28,6 +20,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "She likes Marvel movies";
     public static final String DEFAULT_APPOINTMENT = "19-10-2021 12:34";
+    public static final String DEFAULT_TRIAGE = "1";
 
     private Name name;
     private Phone phone;
@@ -35,6 +28,7 @@ public class PersonBuilder {
     private Nric nric;
     private Address address;
     private Remark remark;
+    private Triage triage;
     private Set<Tag> tags;
     private Appointment appointment;
     private LogList logEntries;
@@ -48,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         nric = new Nric(DEFAULT_NRIC);
         address = new Address(DEFAULT_ADDRESS);
+        triage = new Triage(DEFAULT_TRIAGE);
         remark = new Remark(DEFAULT_REMARK);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
@@ -67,6 +62,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         appointment = personToCopy.getAppointment();
         logEntries = personToCopy.getLogEntries();
+        triage = personToCopy.getTriage();
     }
 
     /**
@@ -141,8 +137,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Triage} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTriage(String triage) {
+        this.triage = new Triage(triage);
+        return this;
+    }
+
+
     public Person build() {
-        return new Person(name, phone, email, nric, address, remark, tags, null, logEntries);
+        return new Person(name, phone, email, nric, address, triage, remark, tags, null, logEntries);
     }
 
 }

@@ -10,16 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Appointment;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Log;
-import seedu.address.model.person.LogList;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +27,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String appointment; // Appointment stored as String in the correct format
     private final String remark;
+    private final String triage;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<String> logEntries = new ArrayList<>();
 
@@ -49,6 +41,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email,
             @JsonProperty("nric") String nric,
             @JsonProperty("address") String address,
+            @JsonProperty("triage") String triage,
             @JsonProperty("remark") String remark,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("appointment") String appointment,
@@ -57,6 +50,7 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.nric = nric;
+        this.triage = triage;
         this.address = address;
         this.appointment = appointment; // Store appointment string in "dd-MM-yyyy HH:MM" format
         this.remark = remark;
@@ -76,6 +70,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         nric = source.getNric().value;
+        triage = source.getTriage().value;
         address = source.getAddress().value;
         appointment = (source.getAppointment() != null)
             ? source.getAppointment().toString() // Use Appointment's toString() which returns the formatted date
@@ -141,6 +136,14 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (triage == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Triage.class.getSimpleName()));
+        }
+        if (!Triage.isValidTriage(triage)) {
+            throw new IllegalValueException(Triage.MESSAGE_CONSTRAINTS);
+        }
+        final Triage modelTriage = new Triage(triage);
+
         // Restore appointment from string (if present) using the Appointment constructor
         Appointment modelAppointment = null;
         if (appointment != null) {
@@ -166,7 +169,7 @@ class JsonAdaptedPerson {
         }
         final LogList modelLogEntries = new LogList(logEntries);
 
-        return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress,
+        return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress, modelTriage,
             modelRemark, modelTags, modelAppointment, modelLogEntries);
     }
 

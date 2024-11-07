@@ -1,13 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -22,15 +16,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Appointment;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.LogList;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,12 +38,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TRIAGE + "TRIAGE] "
             + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_APPOINTMENT + "APPOINTMENT]\n"
             + "Example: " + COMMAND_WORD + " S1234567A "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_NRIC + "S1231231D";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_NRIC + "S1231231D "
+            + PREFIX_TRIAGE + "4";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -121,9 +109,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Appointment updatedAppointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
         LogList updatedLog = editPersonDescriptor.getLogEntries().orElse(personToEdit.getLogEntries());
+        Triage updatedTriage = editPersonDescriptor.getTriage().orElse(personToEdit.getTriage());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric,
-                          updatedAddress, updatedRemark, updatedTags, updatedAppointment, updatedLog);
+                          updatedAddress, updatedTriage, updatedRemark, updatedTags, updatedAppointment, updatedLog);
     }
 
     @Override
@@ -161,6 +150,7 @@ public class EditCommand extends Command {
         private Nric nric;
         private Address address;
         private Set<Tag> tags;
+        private Triage triage;
         private Appointment appointment;
         private LogList logEntries;
 
@@ -176,6 +166,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setNric(toCopy.nric);
             setAddress(toCopy.address);
+            setTriage(toCopy.triage);
             setTags(toCopy.tags);
             setAppointment(toCopy.appointment);
             setLogEntries(toCopy.logEntries);
@@ -227,7 +218,12 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
-
+        public void setTriage(Triage triage) {
+            this.triage = triage;
+        }
+        public Optional<Triage> getTriage() {
+            return Optional.ofNullable(triage);
+        }
         public void setAppointment(Appointment appointment) {
             this.appointment = appointment;
         }
@@ -278,6 +274,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(nric, otherEditPersonDescriptor.nric)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(triage, otherEditPersonDescriptor.triage)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(appointment, otherEditPersonDescriptor.appointment);
         }
@@ -290,6 +287,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("nric", nric)
                     .add("address", address)
+                    .add("triage", triage)
                     .add("tags", tags)
                     .add("appointment", appointment)
                     .toString();

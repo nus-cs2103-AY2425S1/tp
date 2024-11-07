@@ -5,6 +5,7 @@
     "email": "alice@example.com",
     "nric": "S1231231A",
     "address": "123, Jurong West Ave 6, #08-111",
+    "triage": "1",
     "remark": "",
     "tags": [ "friends" ]
   }, {
@@ -13,6 +14,7 @@
     "email": "pauline@example.com",
     "nric": "S1231231A",
     "address": "4th street",
+    "triage": "1",
     "remark": ""
   } ]
 }
