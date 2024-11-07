@@ -2,5 +2,5 @@
   "default": true,
   "MD033": false, // inline HTML
   "MD026": false, // trailing punctuation :
-  "MD013": true // line length - enable by default 
+  "MD013": true // line length - enable by default
 }

@@ -23,9 +23,6 @@ student contact details!
 </md>
 </box>
 
-While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI
-(Command Line Interface) with typed commands. A perfect fit if you’re already a wizard at the keyboard.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
@@ -60,16 +57,21 @@ While it has a GUI (Graphical User Interface), most of the user interactions hap
 ## Quick start :rocket:
 
 1. Ensure you have Java `17` or above installed in your Computer.
-
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
+   - Make sure that this folder is **empty**.
+4. Open a command terminal
+   ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) |
+   [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) |
+   [Linux](https://www.youtube.com/watch?v=dQw4w9WgXcQ)), `cd` into the folder
+   you put the jar file in, and
+   use the `java -jar addressbook.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app
+   contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g.
+   typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all contacts.
@@ -82,7 +84,7 @@ While it has a GUI (Graphical User Interface), most of the user interactions hap
 
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features :computer:) below for details of each command.
+6. Refer to the [Features](#features :computer:) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -346,9 +348,9 @@ revert the change?<br>
    off-screen. The remedy is to delete the `preferences.json` file created by
    the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use
-3. the `Help` menu, or the keyboard shortcut `F1`) again, the original Help
-4. Window will remain minimized, and no new Help Window will appear. The
-5. remedy is to manually restore the minimized Help Window.
+   the `Help` menu, or the keyboard shortcut `F1`) again, the original Help
+   Window will remain minimized, and no new Help Window will appear. The
+   remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
