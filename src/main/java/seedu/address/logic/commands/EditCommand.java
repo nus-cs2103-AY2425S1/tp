@@ -66,7 +66,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This Student already exists in the address book.";
 
-
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
 
