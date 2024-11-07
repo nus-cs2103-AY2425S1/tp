@@ -4,6 +4,8 @@ import static seedu.address.model.person.Address.EMPTY_ADDRESS;
 import static seedu.address.model.person.Student.STUDENT_TYPE;
 import static seedu.address.model.person.Teacher.TEACHER_TYPE;
 
+import java.util.Comparator;
+
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -81,7 +83,9 @@ public class PersonCard extends UiPart<Region> {
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + student.getPhone().value);
         address.setText("📍 " + student.getAddress().value);
-
+        person.getTags().stream()
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (student.getAddress().value.equals(EMPTY_ADDRESS)) {
             address.setStyle("-fx-text-fill: #BEBEBE;");
         }
@@ -126,7 +130,9 @@ public class PersonCard extends UiPart<Region> {
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + teacher.getPhone().value);
         address.setText("📍 " + teacher.getAddress().value);
-
+        person.getTags().stream()
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (teacher.getAddress().value.equals(EMPTY_ADDRESS)) {
             address.setStyle("-fx-text-fill: #BEBEBE");
         }
