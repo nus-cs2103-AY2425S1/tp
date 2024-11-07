@@ -142,7 +142,7 @@ The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the current list of tags as an `ObservableList<Tag>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. This allows `AddessBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * stores a `Command` object that represents the user's last executed command.
 
@@ -628,7 +628,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `newtag t/friends`<br>
       Expected: No tag is created. Error details shown in the status message.
 
-   1. Other incorrect newtag commands to try: `newtag`, `newtag t/`, `newtag t/x` (where x is a non-ASCII character)<br>
+   1. Other incorrect `newtag` commands to try: `newtag`, `newtag t/`, `newtag t/x` (where x is a non-ASCII character)<br>
       Expected: Similar to previous.
 
 ### Saving data
@@ -639,7 +639,7 @@ testers are expected to do more *exploratory* testing.
    1. Run the JAR file and note the error message for the corrupted data file
    2. Open the project using an IDE (recommended to use IntelliJ IDEA)
    2. Navigate to `/data` folder
-   3. Open the JSON file inside, it should be named `addressbook.json`
+   3. Open the JSON file inside, it should be named `ab3myguest.json`
    4. Edit the file to fix the corrupted data
 <div markdown="span" class="alert alert-info">:information_source: **Important:** Editing the data file directly is dangerous and could cause more issues. Do it with discretion and only as a last resort.
 </div>
@@ -647,5 +647,5 @@ testers are expected to do more *exploratory* testing.
 2. Dealing with missing data files
    1. Open the project using an IDE (recommended to use IntelliJ IDEA)
    2. Navigate to `/data` folder
-   3. Open the JSON file inside, it should be named `addressbook.json`.
+   3. Open the JSON file inside, it should be named `ab3myguest.json`.
    4. If there is none, you can copy the default data file from our [code space](https://github.com/AY2425S1-CS2103T-W11-2/tp)
