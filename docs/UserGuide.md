@@ -68,7 +68,7 @@ This section explains the different types of annotated boxes used in the user gu
     Here are some commands you can try:
     - `list`: Displays all the student and teacher details.
 
-    - `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A /attendance 0`: Adds a new student with the specified details
+    - `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321`: Adds a new student with the specified details
 
     - `delete 3`: Deletes the 3rd contact shown in the current list.
 
@@ -89,19 +89,21 @@ The table below provides a brief explanation of each parameter associated with a
 > :exclamation: **Warning:**
 > Ensure that the constraints for each parameter are met when entering the command. Failure to adhere to these constraints may result in an error.
 
-| Parameter       | Definition                                                                 | Constraints                                                                                                            | Examples                                                                   |
-|-----------------|----------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| `NAME`          | The name of the person.                                                    | - Must only contain alphanumeric characters and spaces <br/> - Compulsory field                                        | `John Doe`, `Elizabeth Chua`                                               |
-| `GENDER`        | The gender of the person.                                                  | - Must be either `male` or `female`<br/> - Compulsory field                                                            | `male`, `female`                                                           |
-| `PHONE_NUMBER`  | The contact number of the person.                                          | - Must be exactly 8 digits long as according to Singapore's phone numbers - Compulsory field                           | `98765432`, `12345678`                                                     |
-| `EMAIL`         | The email address of the person.                                           | - Must be in the format `example@domain.com`<br/> - Compulsory field                                                   | `johnd@example.com`, `elizchua@yahoo.com`                                  |
-| `ADDRESS`       | The residential address of the person.                                     | - Any value is allowed <br/> - Compulsory field                                                                        | `311, Clementi Ave 2, #02-25`, `Blk 30 Lorong 3 Serangoon Gardens, #07-18` |
-| `SUBJECT`       | The subject taught by the teacher or taken by the student.                 | - Must only contain alphanumeric characters and spaces <br/> - Compulsory field                                        | `Physics`, `English`                                                       |
-| `CLASSES`       | The classes associated with the person.                                    | - Must only contain alphanumeric characters <br/> - Multiple classes are separates by a comma <br/> - Compulsory field | `7A`, `5A, 8C`                                                             |
-| `ATTENDANCE`    | The attendance count of the student.                                       | - Must be a non-negative integer <br/> - Compulsory field                                                              | `0`, `5`                                                                   |
-| `INDEX`         | The position of the person in the displayed list.                          | - Must be a positive integer and less than or equal to the largest index displayed on the GUI                          | `1`, `2`, `3`                                                              |
-| `ATTRIBUTE`     | The attribute by which the list is to be sorted.                           | - Must be one of `name`, `subject`, or `class`.                                                                        | `name`, `subject`, `class`                                                 |
-| `TAG`           | A label assigned to a person for categorization.                           | - Must be a non-empty string.                                                                                          | `friend`, `family`                                                         |           
+| Parameter           | Definition                                                        | Constraints                                                                                                            | Examples                                                                   |
+|---------------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `NAME`              | The name of the person.                                           | - Must only contain alphanumeric characters and spaces <br/> - Compulsory field                                        | `John Doe`, `Elizabeth Chua`                                               |
+| `GENDER`            | The gender of the person.                                         | - Must be either `male` or `female`<br/> - Compulsory field                                                            | `male`, `female`                                                           |
+| `PHONE_NUMBER`      | The contact number of the person.                                 | - Must be exactly 8 digits long as according to Singapore's phone numbers - Compulsory field                           | `98765432`, `12345678`                                                     |
+| `EMAIL`             | The email address of the person.                                  | - Must be in the format `example@domain.com`<br/> - Compulsory field                                                   | `johnd@example.com`, `elizchua@yahoo.com`                                  |
+| `ADDRESS`           | The residential address of the person.                            | - Any value is allowed <br/> - Compulsory field                                                                        | `311, Clementi Ave 2, #02-25`, `Blk 30 Lorong 3 Serangoon Gardens, #07-18` |
+| `SUBJECT`           | The subject taught by the teacher or taken by the student.        | - Must only contain alphanumeric characters and spaces <br/> - Compulsory field                                        | `Physics`, `English`                                                       |
+| `CLASSES`           | The classes associated with the person.                           | - Must only contain alphanumeric characters <br/> - Multiple classes are separates by a comma <br/> - Compulsory field | `7A`, `5A, 8C`                                                             |
+| `ATTENDANCE`        | The attendance count of the student.                              | - Must be a non-negative integer <br/> - Compulsory field                                                              | `0`, `5`                                                                   |
+| `INDEX`             | The position of the person in the displayed list.                 | - Must be a positive integer and less than or equal to the largest index displayed on the GUI                          | `1`, `2`, `3`                                                              |
+| `ATTRIBUTE`         | The attribute by which the list is to be sorted.                  | - Must be one of `name`, `subject`, or `class`.                                                                        | `name`, `subject`, `class`                                                 |
+| `TAG`               | A label assigned to a person for categorization.                  | - Must be a non-empty string.                                                                                          | `friend`, `family`                                                         |
+| `NEXT_OF_KIN`       | The next of kin of the student.                                   | - Follows the same specifications as `NAME`                                                                            | `John Doe`, `Elizabeth Chua`                                               |
+| `EMERGENCY_CONTACT` | The contact to use in cases of emergencies involving the student. | - Follows the same specifications as `PHONE_NUMBER`                                                                    | `98765432`, `12345678`                                                     |
 
 {: .alert .alert-info}
 
@@ -114,7 +116,7 @@ The table below provides a brief explanation of each parameter associated with a
   e.g `edit [/name NAME] [/contact PHONE_NUMBER]` can be used as `edit /name John` or as `edit /contact 94567732` or as `edit /name John /contact 94567732`.
 >
 > * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[/tag TAG]…​` can be used as ` ` (i.e. 0 times), `/tag friend`, `/tag friend /tag family` etc.
 >
 > * Parameters can be in any order.<br>
   e.g. if the command specifies `/name NAME /contact PHONE_NUMBER`, `/contact PHONE_NUMBER /name NAME` is also acceptable.
@@ -146,7 +148,7 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 Adds a student to EduConnect.
 
 
-Format: `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] /subject SUBJECT /classes CLASSES [/attendance ATTENDANCE]`
+Format: `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] /subject SUBJECT /classes CLASSES [/attendance ATTENDANCE] /nok NEXT_OF_KIN /emergency EMERGENCY_CONTACT`
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -160,8 +162,17 @@ Format: `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 > If not specified, attendance will default to 0.
 
 Example:
-* `student /name John Doe /gender male /contact 98765432 /email johnd@gmail.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A /attendance 0`
-
+* `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321` Adds a student with:
+  * the name John Doe
+  * the gender male
+  * the contact number 9876 5432
+  * the email address johnd@example.com
+  * the address 311, Clementi Ave 2, #02-25
+  * the subject taken as Physics
+  * the classes 7A and 7B
+  * a starting attendance of 0 days
+  * the next of kin whose name is Bob Doe
+  * an emergency contact 8765 4321
 
 ### Adding a teacher: `teacher`
 
@@ -180,8 +191,14 @@ Format: `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 > The address field is optional when creating a teacher.
 
 Example:
-* `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C`
-
+* `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C` Adds a teacher with:
+    * the name Elizabeth Chua
+    * the gender female
+    * the contact number 9567 3211
+    * the email address elizchua@yahoo.com
+    * the address Blk 30 Lorong 3 Serangoon Gardens, #07-18
+    * the subject she teaches as English
+    * the classes she teaches 5A and 8C
 
 ### Listing all persons : `list`
 
