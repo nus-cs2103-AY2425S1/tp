@@ -33,7 +33,7 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
 
    * `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer named `John Doe` to the displayed customer list.
 
-   * `delete 3` : Deletes the 3rd customer contact shown in the displayed customer list.
+   * `deletecustomer 3` : Deletes the 3rd customer contact shown in the displayed customer list.
 
    * `listorder 1` : Lists all orders under the 1st customer as a displayed order list.
    
