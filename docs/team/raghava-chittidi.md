@@ -25,7 +25,7 @@ Given below are my contributions to the project.
   * Managed release `v1.4` (1 release) on GitHub
 
 * **Enhancements to existing features**:
-  * Added defensive programming through the use of assertions and exceptions. 
+  * Added defensive programming through the use of assertions and exceptions.
   * Added logging to enable better debugging in the future.
   * Ensured error messages are consistent for all commands to reduce ambiguity.
 

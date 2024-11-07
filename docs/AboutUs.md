@@ -49,7 +49,7 @@ You can reach us at the email `hireme@gmail.com`
 [[portfolio](team/woke02.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Software Engineer
 
 ### Wu XueTing
 
