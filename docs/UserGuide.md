@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Own a home-based nail salon? Or are you a private tutor? Perhaps a single-person bakery? 
+Own a home-based nail salon? Or are you a private tutor? Perhaps a single-person bakery?
 Is the amount of contacts to manage becoming overwhelming? You've come to the right place!
 
 BlitzBiz is a **desktop app for managing contacts** for micro-business owners.
@@ -17,7 +17,7 @@ BlitzBiz is capable of tracking multiple modes of contact and schedule related m
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer (the Oracle version can be accessed [here](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)). 
+1. Ensure you have Java `17` or above installed in your Computer (the Oracle version can be accessed [here](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)).
 For Mac users, please ensure you have this specific distribution, which can be installed by following this guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases/tag/v1.4).
@@ -143,7 +143,7 @@ Format: `edit INDEX <n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG…​>`
 
 * Edits the person at the specified `INDEX`.
 The index refers to the index number shown in the displayed person list.
-View our [Viewing and Searching](#viewing-and-searching) section for more information. 
+View our [Viewing and Searching](#viewing-and-searching) section for more information.
 The index **must be a positive integer** 1, 2, 3, …​.
 * **At least one** of the fields must be provided.
 * Existing values will be updated to the input values.
@@ -234,10 +234,10 @@ but no `SCHEDULE_TIME` provided will have their schedule time's treated as `00:0
 
 Examples:
 * Schedules an appointment on 2024-10-22 at 16:00 for the contact at index 1 <br>
-`schedule 1 sn/appointment sd/2024-10-22 st/16:00` <br> 
+`schedule 1 sn/appointment sd/2024-10-22 st/16:00` <br>
   ![result for making schedule](images/makeSchedule.png)
 * Clears the schedule for the contact at index 1, if any. <br>
-`schedule 1` <br> 
+`schedule 1` <br>
   ![result for clearing schedule](images/clearSchedule.png)
 
 #### Renaming a Tag : `renameTag`
@@ -414,11 +414,11 @@ Format: `search [b/START_DATETIME] [en/END_DATETIME]`
 
 Examples:
 * Search for the list of persons with schedules after 2024-11-11 12:00. <br>
-`search b/2024-11-11 12:00` 
+`search b/2024-11-11 12:00`
 * Search for the list of persons with schedules before 2024-11-12 12:00. <br>
-`search en/2024-11-12 12:00` 
+`search en/2024-11-12 12:00`
 * Search for the list of persons with schedules between 2024-11-11 12:00 and 2024-11-12 12:00. <br>
-`search b/2024-11-11 12:00 en/2024-11-12 12:00` <br> 
+`search b/2024-11-11 12:00 en/2024-11-12 12:00` <br>
   ![result for 'search b/2024-11-11 12:00 en/2024-11-12 12:00'](images/searchCommandSuccess.png)
 
 ### Utility Features
@@ -453,7 +453,7 @@ format: `restore`
 
 Examples:
 * Restore the most recently deleted person, in this case, the 2nd person Bernice Yu. <br>
-`restore` <br> 
+`restore` <br>
   ![result for 'restore'](images/restoreResult1.png)
 
 #### Backing up save file : `backup`
@@ -499,7 +499,7 @@ BlitzBiz data is saved in the hard disk automatically after any command that cha
 #### Editing the data file
 
 BlitzBiz data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data
-directly by editing that data file.  
+directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, BlitzBiz will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file using the backup command  before editing it.<br>
