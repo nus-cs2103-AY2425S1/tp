@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.Model;
@@ -17,10 +16,11 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts all persons in the address book according to the given parameter.\n"
+
+            + ": Sorts all persons in the address book according to the given parameter. "
             + "Only one parameter can be used.\n"
             + "Parameters: "
-            + "[name] [address] [priority] [income] [updated]\n"
+            + "[name] [address] [priority] [income]\n"
             + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by parameter: %s";
@@ -68,14 +68,10 @@ public class SortCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, parameter));
     }
+
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
-    }
-
-    @Override
-    public String undo(Model model, CommandHistory pastCommands) {
-        return null;
     }
 
     @Override
@@ -84,11 +80,10 @@ public class SortCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof SortCommand)) {
+        if (!(other instanceof SortCommand otherSortCommand)) {
             return false;
         }
 
-        SortCommand otherSortCommand = (SortCommand) other;
-        return this.parameter.equals(otherSortCommand.parameter);
+        return parameter.equals(otherSortCommand.parameter);
     }
 }

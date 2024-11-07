@@ -8,8 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Income {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Income is a non-negative floating point number";
+    public static final String MESSAGE_CONSTRAINTS = "Income should be a non-negative decimal number";
 
     private final double value;
 

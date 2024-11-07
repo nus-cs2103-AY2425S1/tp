@@ -1,11 +1,13 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -25,10 +27,13 @@ public class Messages {
     public static final String MESSAGE_INVALID_PARAMETERS = "One or more of the parameters provided are invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "Dates should be in yyyy-MM-dd format";
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Times should be in HH:mm format";
+    public static final String MESSAGE_INVALID_DATE_FORMAT =
+            "Dates should be in yyyy-MM-dd format and represent a valid date";
+    public static final String MESSAGE_INVALID_TIME_FORMAT =
+            "Times should be in HH:mm format and represent a valid time";
+    public static final String MESSAGE_CONFLICTING_APPOINTMENTS = "Conflicting appointments found:\n%s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -45,10 +50,9 @@ public class Messages {
     /**
      * Formats the {@code person} for display to the user.
      * <p>
-     * The updatedAt field is not included due to its nondeterministic nature.
-     * It is impossible to predict the value of the updatedAt field.
-     * This ensures that unit testing for {@link EditCommand}
-     * is not affected.
+     * The {@code updatedAt} field is not included due to its nondeterministic nature.
+     * It is impossible to predict the value of the {@code updatedAt} field.
+     * This ensures that unit testing for {@link EditCommand} is not affected.
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
@@ -80,5 +84,34 @@ public class Messages {
         }
 
         return builder.toString();
+    }
+
+    /**
+     * Formats a list of {@code appointments} for display to the user.
+     */
+    public static String format(List<Appointment> appointments) {
+        final StringBuilder builder = new StringBuilder();
+        for (Appointment appointment : appointments) {
+            builder.append("Name: ")
+                    .append(appointment.name())
+                    .append("; Date: ")
+                    .append(appointment.date())
+                    .append("; From: ")
+                    .append(appointment.startTime())
+                    .append("; To: ")
+                    .append(appointment.endTime())
+                    .append("\n");
+        }
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code appointment} for display to the user.
+     */
+    public static String format(Appointment appointment) {
+        return String.format("Date: %s\nTime: %s – %s",
+                appointment.getFormattedDate(),
+                appointment.getFormattedStartTime(),
+                appointment.getFormattedEndTime());
     }
 }
