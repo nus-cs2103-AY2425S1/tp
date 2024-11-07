@@ -13,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+VendorVault is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+
+Icons used in this project are from [UXWing](https://www.uxwing.com/). All icons on this site can be used in personal, commercial, and client projects.
 
 --------------------------------------------------------------------------------------------------------------------
 
