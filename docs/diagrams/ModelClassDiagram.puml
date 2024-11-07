@@ -12,8 +12,8 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
+Class UniqueEmployeeList
+Class Employee
 Class Address
 Class Email
 Class EmployeeId
@@ -21,6 +21,13 @@ Class Name
 Class Phone
 Class Skill
 Class Tag
+Class UniqueProjectList
+Class Project
+Class ProjectName
+Class ProjectId
+Class UniqueAssignmentList
+Class Assignment
+Class AssignmentId
 
 Class I #FFFFFF
 }
@@ -28,32 +35,51 @@ Class I #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
-
-ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+
+AddressBook .up.|> ReadOnlyAddressBook
+ModelManager .up.|> Model
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> EmployeeId
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
-Person *--> "*" Skill
+ModelManager -down-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+AddressBook *-down-> "1" UniqueEmployeeList
+AddressBook *-down-> "1" UniqueProjectList
+AddressBook *-down-> "1" UniqueAssignmentList
+
+UniqueEmployeeList --> "~* all" Employee
+Employee *--> EmployeeId
+Employee *--> Name
+Employee *--> Phone
+Employee *--> Email
+Employee *--> Address
+Employee *--> "*" Tag
+Employee *--> "*" Skill
+
+UniqueProjectList --> "~* all" Project
+Project *--> ProjectName
+Project *--> ProjectId
+Project *--> "*" Skill
+
+UniqueAssignmentList --> "~* all" Assignment
+Assignment *--> AssignmentId
+
+Employee -[hidden]up--> I
+UniqueEmployeeList -[hidden]right-> I
 
 EmployeeId -[hidden]right-> Name
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+UniqueEmployeeList -[hidden]right-> UniqueProjectList
+UniqueProjectList -[hidden]right-> UniqueAssignmentList
+Employee -[hidden]right-> Project
+Project -[hidden]right-> Assignment
+
+ModelManager -down-> "~* filtered" Employee
+ModelManager -down-> "~* filtered" Project
+ModelManager -down-> "~* filtered" Assignment
 @enduml

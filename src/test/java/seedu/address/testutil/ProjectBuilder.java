@@ -1,11 +1,16 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.ProjectName;
+import seedu.address.model.skill.Skill;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Project objects.
  */
 public class ProjectBuilder {
 
@@ -14,6 +19,7 @@ public class ProjectBuilder {
 
     private ProjectName projectName;
     private ProjectId projectId;
+    private Set<Skill> skills;
 
     /**
      * Creates a {@code ProjectBuilder} with the default details.
@@ -21,14 +27,16 @@ public class ProjectBuilder {
     public ProjectBuilder() {
         projectName = new ProjectName(DEFAULT_NAME);
         projectId = new ProjectId(DEFAULT_ID);
+        skills = new HashSet<>();
     }
 
     /**
-     * Initializes the ProjectBuilder with the data of {@code personToCopy}.
+     * Initializes the ProjectBuilder with the data of {@code employeeToCopy}.
      */
     public ProjectBuilder(Project projectToCopy) {
         projectName = projectToCopy.getName();
         projectId = projectToCopy.getId();
+        skills = new HashSet<>(projectToCopy.getSkills());
     }
 
     /**
@@ -47,8 +55,16 @@ public class ProjectBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code skills} into a {@code Set<Skill>} and set it to the {@code Project} that we are building.
+     */
+    public ProjectBuilder withSkills(String ... skills) {
+        this.skills = SampleDataUtil.getSkillSet(skills);
+        return this;
+    }
+
     public Project build() {
-        return new Project(projectName, projectId);
+        return new Project(projectName, projectId, skills);
     }
 
 }

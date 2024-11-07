@@ -22,11 +22,11 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindProjectCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListAssignmentsCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListProjectCommand;
-import seedu.address.logic.commands.ListProjectMembersCommand;
 import seedu.address.logic.commands.UnassignCommand;
+import seedu.address.logic.commands.listcommands.ListAssignmentsCommand;
+import seedu.address.logic.commands.listcommands.ListEmployeesCommand;
+import seedu.address.logic.commands.listcommands.ListProjectMembersCommand;
+import seedu.address.logic.commands.listcommands.ListProjectsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -81,8 +81,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListEmployeesCommand.COMMAND_WORD:
+            return new ListEmployeesCommand();
 
         case AddProjectCommand.COMMAND_WORD:
             return new AddProjectCommandParser().parse(arguments);
@@ -96,8 +96,8 @@ public class AddressBookParser {
         case FindProjectCommand.COMMAND_WORD:
             return new FindProjectCommandParser().parse(arguments);
 
-        case ListProjectCommand.COMMAND_WORD:
-            return new ListProjectCommand();
+        case ListProjectsCommand.COMMAND_WORD:
+            return new ListProjectsCommand();
 
         case AssignCommand.COMMAND_WORD:
             return new AssignCommandParser().parse(arguments);

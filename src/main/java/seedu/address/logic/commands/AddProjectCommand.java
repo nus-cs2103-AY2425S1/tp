@@ -3,15 +3,17 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.project.Project;
+import seedu.address.ui.DisplayType;
 
 /**
- * Adds a person to the address book.
+ * Adds an employee to the address book.
  */
 public class AddProjectCommand extends Command {
 
@@ -21,9 +23,12 @@ public class AddProjectCommand extends Command {
             + "Parameters: "
             + PREFIX_PROJECT_ID + "PROJECT ID "
             + PREFIX_PROJECT_NAME + "PROJECT NAME "
+            + PREFIX_SKILL + "PROJECT SKILL\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PROJECT_ID + "A0276123K "
-            + PREFIX_PROJECT_NAME + "Project Alpha ";
+            + PREFIX_PROJECT_NAME + "Project Alpha "
+            + PREFIX_SKILL + "Cybersecurity "
+            + PREFIX_SKILL + "Java";
 
     public static final String MESSAGE_SUCCESS = "New project added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROJECT = "This project already exists in the address book";
@@ -31,7 +36,7 @@ public class AddProjectCommand extends Command {
     private final Project toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Employee}
      */
     public AddProjectCommand(Project project) {
         requireNonNull(project);
@@ -47,7 +52,7 @@ public class AddProjectCommand extends Command {
         }
 
         model.addProject(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), DisplayType.PROJECT_LIST);
     }
 
     @Override

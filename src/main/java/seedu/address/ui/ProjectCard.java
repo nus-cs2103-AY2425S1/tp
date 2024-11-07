@@ -1,10 +1,14 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.project.Project;
+
 
 
 /**
@@ -32,6 +36,8 @@ public class ProjectCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label projectId;
+    @FXML
+    private FlowPane skills;
 
     /**
      * Creates a {@code ProjectCode} with the given {@code Project} and index to display.
@@ -42,5 +48,8 @@ public class ProjectCard extends UiPart<Region> {
         this.id.setText(displayedIndex + ". ");
         name.setText(project.getName().fullName);
         projectId.setText("id: " + project.getId().fullId);
+        project.getSkills().stream()
+                .sorted(Comparator.comparing(skill -> skill.skill))
+                .forEach(skill -> skills.getChildren().add(new Label(skill.skill)));
     }
 }

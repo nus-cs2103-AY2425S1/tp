@@ -10,11 +10,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.employee.Address;
+import seedu.address.model.employee.Email;
+import seedu.address.model.employee.EmployeeId;
+import seedu.address.model.employee.Name;
+import seedu.address.model.employee.Phone;
 import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.ProjectName;
 import seedu.address.model.skill.Skill;
@@ -208,8 +208,8 @@ public class ParserUtil {
     public static AssignmentId parseAssignmentId(String assignmentId) throws ParseException {
         requireNonNull(assignmentId);
         String trimmedAssignmentId = assignmentId.trim();
-        if (!ProjectId.isValidId(trimmedAssignmentId)) {
-            throw new ParseException(ProjectId.MESSAGE_CONSTRAINTS);
+        if (!AssignmentId.isValidAssignmentId(trimmedAssignmentId)) {
+            throw new ParseException(AssignmentId.MESSAGE_CONSTRAINTS);
         }
         return new AssignmentId(trimmedAssignmentId);
     }

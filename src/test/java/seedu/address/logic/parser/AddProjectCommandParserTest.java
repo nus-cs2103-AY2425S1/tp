@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_ID_DESC_BETA;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_NAME_DESC_ALPHA;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_NAME_DESC_BETA;
+import static seedu.address.logic.commands.CommandTestUtil.PROJECT_SKILLS_DESC_BETA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_ID_BETA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_BETA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
@@ -34,7 +35,8 @@ public class AddProjectCommandParserTest {
         Project expectedProject = new ProjectBuilder(BETA).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PROJECT_ID_DESC_BETA + PROJECT_NAME_DESC_BETA,
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PROJECT_ID_DESC_BETA
+                        + PROJECT_NAME_DESC_BETA + PROJECT_SKILLS_DESC_BETA,
                 new AddProjectCommand(expectedProject));
     }
 

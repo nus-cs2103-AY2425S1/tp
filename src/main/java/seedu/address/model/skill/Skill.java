@@ -9,7 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Skill {
 
-    public static final String MESSAGE_CONSTRAINTS = "Skills should be alphanumeric and cannot contain spaces";
+    public static final String MESSAGE_CONSTRAINTS = "Skills should be alphanumeric, cannot contain spaces,"
+            + " and have not more than 50 characters";
+
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String skill;
@@ -29,6 +31,14 @@ public class Skill {
      * Returns true if a given string is a valid skill.
      */
     public static boolean isValidSkill(String test) {
+        // Null values are illegal values that should have been handled by
+        // the command parser or the storage's json converter.
+        assert test != null;
+
+        if (test.length() > 50) {
+            return false;
+        }
+
         return test.matches(VALIDATION_REGEX);
     }
 

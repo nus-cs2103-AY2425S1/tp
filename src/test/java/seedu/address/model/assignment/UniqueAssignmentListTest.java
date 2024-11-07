@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
 import static seedu.address.testutil.TypicalAssignments.BENSON_BETA;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
@@ -90,10 +90,10 @@ public class UniqueAssignmentListTest {
     }
 
     @Test
-    public void contains_assignmentWithDifferentPersonFieldInList_returnsFalse() {
+    public void contains_assignmentWithDifferentEmployeeFieldInList_returnsFalse() {
         uniqueAssignmentList.add(ALICE_ALPHA);
         Assignment editedAssignment = new AssignmentBuilder(ALICE_ALPHA)
-                .withPerson(BENSON)
+                .withEmployee(BENSON)
                 .build();
         assertFalse(uniqueAssignmentList.contains(editedAssignment));
     }
@@ -104,7 +104,7 @@ public class UniqueAssignmentListTest {
     }
 
     @Test
-    public void add_duplicateAssignment_throwsDuplicatePersonException() {
+    public void add_duplicateAssignment_throwsDuplicateEmployeeException() {
         uniqueAssignmentList.add(ALICE_ALPHA);
         assertThrows(DuplicateAssignmentException.class, () -> uniqueAssignmentList.add(ALICE_ALPHA));
     }
@@ -203,6 +203,56 @@ public class UniqueAssignmentListTest {
     }
 
     @Test
+    public void removeAll_existingAssignmentsWithEmployeeId_removesAssignments() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        uniqueAssignmentList.add(BENSON_BETA);
+        boolean isRemoved = uniqueAssignmentList.removeAll(ALICE.getEmployeeId());
+
+        assertTrue(isRemoved);
+
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        expectedUniqueAssignmentList.add(BENSON_BETA);
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
+    public void removeAll_assignmentsWithEmployeeIdDoesNotExist_noAssignmentsRemoved() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        boolean isRemoved = uniqueAssignmentList.removeAll(BENSON.getEmployeeId());
+
+        assertFalse(isRemoved);
+
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        expectedUniqueAssignmentList.add(ALICE_ALPHA);
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
+    public void removeAll_existingAssignmentsWithProjectId_removesAssignments() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        uniqueAssignmentList.add(BENSON_BETA);
+        boolean isRemoved = uniqueAssignmentList.removeAll(ALPHA.getId());
+
+        assertTrue(isRemoved);
+
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        expectedUniqueAssignmentList.add(BENSON_BETA);
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
+    public void removeAll_assignmentsWithProjectIdDoesNotExist_noAssignmentsRemoved() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        boolean isRemoved = uniqueAssignmentList.removeAll(BETA.getId());
+
+        assertFalse(isRemoved);
+
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        expectedUniqueAssignmentList.add(ALICE_ALPHA);
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
     public void setAssignments_nullUniqueAssignmentList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAssignmentList.setAssignments(
                 (UniqueAssignmentList) null));
@@ -233,10 +283,10 @@ public class UniqueAssignmentListTest {
     }
 
     @Test
-    public void setAssignments_listWithDuplicateAssignments_throwsDuplicatePersonException() {
-        List<Assignment> listWithDuplicatePersons = Arrays.asList(ALICE_ALPHA, ALICE_ALPHA);
+    public void setAssignments_listWithDuplicateAssignments_throwsDuplicateEmployeeException() {
+        List<Assignment> listWithDuplicateEmployees = Arrays.asList(ALICE_ALPHA, ALICE_ALPHA);
         assertThrows(DuplicateAssignmentException.class, () -> uniqueAssignmentList.setAssignments(
-                listWithDuplicatePersons));
+                listWithDuplicateEmployees));
     }
 
     @Test

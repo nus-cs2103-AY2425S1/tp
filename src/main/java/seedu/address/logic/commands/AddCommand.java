@@ -9,20 +9,25 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.employee.Employee;
+import seedu.address.ui.DisplayType;
 
 /**
- * Adds a person to the address book.
+ * Adds an employee to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the address book. "
             + "Parameters: "
             + PREFIX_EMPLOYEE_ID + "EMPLOYEE ID "
             + PREFIX_NAME + "NAME "
@@ -42,29 +47,38 @@ public class AddCommand extends Command {
             + PREFIX_SKILL + "thievery "
             + PREFIX_SKILL + "moneyManagement";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book";
 
-    private final Person toAdd;
+    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
+    private final Employee toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Employee}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Employee employee) {
+        requireNonNull(employee);
+        toAdd = employee;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasEmployee(toAdd)) {
+            logger.warning("Failed to " + COMMAND_WORD + "\n" + toAdd
+                    + "\nReason:" + MESSAGE_DUPLICATE_EMPLOYEE);
+
+            throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.addEmployee(toAdd);
+
+        // Added employee successfully
+        logger.fine(COMMAND_WORD + " employee\n" + toAdd);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), DisplayType.EMPLOYEE_LIST);
     }
 
     @Override

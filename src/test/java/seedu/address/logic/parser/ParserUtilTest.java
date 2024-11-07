@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,11 +14,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.assignment.AssignmentId;
+import seedu.address.model.employee.Address;
+import seedu.address.model.employee.Email;
+import seedu.address.model.employee.EmployeeId;
+import seedu.address.model.employee.Name;
+import seedu.address.model.employee.Phone;
 import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.ProjectName;
 import seedu.address.model.skill.Skill;
@@ -49,6 +50,9 @@ public class ParserUtilTest {
     private static final String VALID_PROJECT_ID = "A0276123K";
     private static final String VALID_PROJECT_NAME = "Project Alpha";
 
+    private static final String VALID_ASSIGNMENT_ID = "1";
+    private static final String INVALID_ASSIGNMENT_ID = "A";
+
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -65,10 +69,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_EMPLOYEE, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_EMPLOYEE, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -309,5 +313,16 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_PROJECT_NAME + WHITESPACE;
         ProjectName expectedProjectName = new ProjectName(VALID_PROJECT_NAME);
         assertEquals(expectedProjectName, ParserUtil.parseProjectName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseAssignmentId_validValue_returnTrimmedAssignmentId() throws Exception {
+        AssignmentId expectedAssignmentId = new AssignmentId(VALID_ASSIGNMENT_ID);
+        assertEquals(expectedAssignmentId, ParserUtil.parseAssignmentId(VALID_ASSIGNMENT_ID));
+    }
+
+    @Test
+    public void parseAssignmentId_collectionWithInvalidSkills_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAssignmentId(INVALID_ASSIGNMENT_ID));
     }
 }

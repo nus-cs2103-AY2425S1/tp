@@ -7,27 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
-import seedu.address.model.project.ProjectId;
+import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ProjectBuilder;
 
 public class AddProjectCommandTest {
@@ -79,7 +69,7 @@ public class AddProjectCommandTest {
         // null -> returns false
         assertFalse(addAlphaCommand.equals(null));
 
-        // different person -> returns false
+        // different employee -> returns false
         assertFalse(addAlphaCommand.equals(addBetaCommand));
     }
 
@@ -91,187 +81,7 @@ public class AddProjectCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addProject(Project project) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookPerson(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookProject(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasEmployeeId(EmployeeId employeeId) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasProject(Project project) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasProjectId(ProjectId projectId) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteProject(Project target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setProject(Project target, Project editedproject) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Project> getProjectList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addAssignment(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasAssignment(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasAssignment(AssignmentId assignmentId) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteAssignment(ProjectId projectId, EmployeeId employeeId) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteAssignment(AssignmentId target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteAssignment(Assignment target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Project> getFilteredProjectList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Assignment> getFilteredAssignmentList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredProjectList(Predicate<Project> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredAssignmentList(Predicate<Assignment> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single employee.
      */
     private class ModelStubWithProject extends ModelStub {
         private final Project project;
@@ -289,7 +99,7 @@ public class AddProjectCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the employee being added.
      */
     private class ModelStubAcceptingProjectAdded extends ModelStub {
         final ArrayList<Project> projectsAdded = new ArrayList<>();
