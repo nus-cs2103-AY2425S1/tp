@@ -21,7 +21,7 @@ import seedu.address.model.person.Phone;
  */
 public class DeleteEmergencyContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "delemergency";
+    public static final String COMMAND_WORD = "deleteemergency";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the emergency contact details of the person identified "
