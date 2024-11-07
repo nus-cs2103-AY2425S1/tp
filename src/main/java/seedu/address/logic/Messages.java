@@ -20,8 +20,8 @@ public class Messages {
             Find: find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]
             Show group: show GROUP_INDEX
             Delete: delete INDEX
-            List: list INDEX
-            Clear: clear INDEX
+            List: list
+            Clear: clear
             Help: help""";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command \n%1$s";
     public static final String MESSAGE_EMPTY_COMMAND_FORMAT = "There needs to be a command and/or arguments! \n%1$s";

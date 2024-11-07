@@ -23,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "\n"
-            + "Ensure there is a space before prefixes (eg. 'n/')."
+            + "Ensure there is a space before prefixes (eg. 'n/') and you have entered all required parameters."
             + "\n"
             + "Required Parameters: "
             + PREFIX_NAME + "NAME "
