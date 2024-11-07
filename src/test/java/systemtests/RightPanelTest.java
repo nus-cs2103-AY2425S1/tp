@@ -74,12 +74,13 @@ public class RightPanelTest {
     }
 
     @Test
-    public void testFilterTransactionsByAmount_callsResetShowAllPositiveOrNegativeAndUpdatesPredicate()
+    public void testShowAllPositiveOrNegativeTransactions_callsResetShowAllPositiveOrNegativeAndUpdatesPredicate()
             throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         // Call the private method "filterTransactionsByAmount" using reflection
-        Method filterTransactionsByAmount = RightPanel.class.getDeclaredMethod("filterTransactionsByAmount");
-        filterTransactionsByAmount.setAccessible(true);
-        filterTransactionsByAmount.invoke(rightPanel);
+        Method showAllPositiveOrNegativeTransactions = RightPanel.class.getDeclaredMethod(
+                "showAllPositiveOrNegativeTransactions");
+        showAllPositiveOrNegativeTransactions.setAccessible(true);
+        showAllPositiveOrNegativeTransactions.invoke(rightPanel);
 
         verify(rightPanel, times(1)).resetFilter();
 
@@ -100,12 +101,13 @@ public class RightPanelTest {
     }
 
     @Test
-    public void testFilterTransactionsByDoneStatus_callsResetFilterAndUpdatesPredicate()
+    public void testShowAllDoneOrNotDoneTransactions_callsResetFilterAndUpdatesPredicate()
             throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         // Call the private method "filterTransactionsByDoneStatus" using reflection
-        Method filterTransactionsByDoneStatus = RightPanel.class.getDeclaredMethod("filterTransactionsByDoneStatus");
-        filterTransactionsByDoneStatus.setAccessible(true);
-        filterTransactionsByDoneStatus.invoke(rightPanel);
+        Method showAllDoneOrNotDoneTransactions = RightPanel.class.getDeclaredMethod(
+                "showAllDoneOrNotDoneTransactions");
+        showAllDoneOrNotDoneTransactions.setAccessible(true);
+        showAllDoneOrNotDoneTransactions.invoke(rightPanel);
 
         verify(rightPanel, times(1)).resetFilter();
 
