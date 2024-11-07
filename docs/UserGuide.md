@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a member: `add_member`
 
-Adds a member to the CCA system.
+Adds a member to the Hall Pointer.
 
 Format: `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
@@ -92,15 +92,15 @@ Examples:
 * `add_member n/John Doe r/4-3-301 t/johndoe123`
 * `add_member n/Betsy Crowe r/2-5-120 t/betsy_crowe tag/logistics`
 
-### Listing all members : ` list_members`
+### Listing all members : ` list`
 
-Shows a list of all members in the CCA system.
+Shows a list of all members in the Hall Pointer.
 
-Format: `list_members `
+Format: `list`
 
 ### Updating a member : `update_member`
 
-Updates an existing member in the CCA system.
+Updates an existing member in the Hall Pointer.
 
 Format: `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
 
@@ -135,7 +135,7 @@ Examples:
 
 ### Deleting a member : `delete_member`
 
-Deletes the specified member from the CCA system.
+Deletes the specified member from the Hall Pointer.
 
 Format: `delete_member INDEX`
 
@@ -144,12 +144,12 @@ Format: `delete_member INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list_members` followed by `delete_member 2` deletes the 2nd member in the CCA system.
+* `list_members` followed by `delete_member 2` deletes the 2nd member in the Hall Pointer.
 * `find_members Betsy` followed by `delete_member 1` deletes the 1st member in the results of the `find` command.
 
 ### Adding a Session: `add_session`
 
-Adds a session to the CCA system and associates it with specified members.
+Adds a session to the Hall Pointer and associates it with specified members.
 
 Format: `add_session s/NAME d/DATE p/POINTS m/INDEX...`
 
@@ -162,7 +162,7 @@ Examples:
 
 ### Deleting a Session: `delete_session`
 
-Deletes a session associated with one or more members in the CCA system.
+Deletes a session associated with one or more members in the Hall Pointer.
 
 Format: `delete_session s/NAME m/INDEX...`
 
@@ -175,7 +175,7 @@ Format: `delete_session s/NAME m/INDEX...`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the CCA system.
+Clears all entries from the Hall Pointer.
 
 Format: `clear`
 
