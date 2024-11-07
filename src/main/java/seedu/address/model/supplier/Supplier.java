@@ -27,7 +27,6 @@ public class Supplier {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Product> products = new HashSet<>();
     private final SupplierStatus status;
-
     /**
      * Every field must be present and not null.
      */
@@ -42,6 +41,7 @@ public class Supplier {
         this.products.addAll(products);
         this.status = status;
     }
+
 
     public Name getName() {
         return name;

@@ -48,7 +48,6 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Product> productList = ParserUtil.parseProducts(argMultimap.getAllValues(PREFIX_PRODUCT));
-        // SupplierStatus status = ParserUtil.parseSupplierStatus(argMultimap.getValue(PREFIX_SUPPLIER_STATUS).get());
         SupplierStatus status = new SupplierStatus("active");
         Supplier supplier = new Supplier(name, phone, email, company, tagList, productList, status);
 

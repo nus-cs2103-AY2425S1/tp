@@ -65,9 +65,6 @@ public class TypicalSuppliers {
     public static final Supplier BOB = new SupplierBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withCompany(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withProducts(VALID_PRODUCT_BREAD).withStatus(VALID_STATUS_BOB).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalSuppliers() {} // prevents instantiation
 
     /**

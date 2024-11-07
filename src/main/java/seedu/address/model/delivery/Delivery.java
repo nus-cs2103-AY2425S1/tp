@@ -15,7 +15,7 @@ import seedu.address.model.supplier.Supplier;
 public class Delivery {
 
     private final Product product;
-    private Supplier sender; // CHANGE TO SUPPLIER LATER ON
+    private Supplier sender;
     private Status status;
     private final DateTime deliveryDateTime;
     private final Cost cost;
@@ -33,7 +33,6 @@ public class Delivery {
         this.deliveryDateTime = deliveryDateTime;
         this.cost = cost;
         this.quantity = quantity;
-        //might need to change this
     }
     public Product getDeliveryProduct() {
         return this.product;

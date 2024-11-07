@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Cost {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Cost should be a positive number with up to two decimal places, and it should not be blank.";
+            "COST should be a positive number with up to two decimal places, and it should not be blank.";
 
     // Regex asserts that the decimal portion is optional but it is limited to 2 places --> so both 100 and 100.00
     // are valid
@@ -36,8 +36,6 @@ public class Cost {
         boolean isValid = isNumber && !(Double.parseDouble(test) == 0);
         return isValid;
     }
-
-    // Give user more options to custom set thier units??
     @Override
     public String toString() {
         return value;
@@ -58,7 +56,7 @@ public class Cost {
         }
 
         Cost otherCost = (Cost) other;
-        return value.equals(otherCost.value);
+        return Double.valueOf(value).equals(Double.valueOf(otherCost.value));
     }
 
     @Override

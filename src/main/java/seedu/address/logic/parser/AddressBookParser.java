@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -32,6 +33,7 @@ import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortDeliveryCommand;
+import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -71,11 +73,11 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddSupplierCommand.COMMAND_WORD:
-            if (trimmedArguments.startsWith("-s")) {
-                return new AddSupplierCommandParser().parse(trimmedArguments.substring(2));
-            } else if (trimmedArguments.startsWith("-d")) {
-                return new AddDeliveryCommandParser().parse(trimmedArguments.substring(2));
+        case AddCommand.COMMAND_WORD:
+            if (arguments.trim().startsWith("-s")) {
+                return new AddSupplierCommandParser().parse(arguments.trim().substring(2));
+            } else if (arguments.trim().startsWith("-d")) {
+                return new AddDeliveryCommandParser().parse(arguments.trim().substring(2));
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddSupplierCommand.MESSAGE_USAGE + "\nOR\n" + AddDeliveryCommand.MESSAGE_USAGE));
@@ -132,7 +134,7 @@ public class AddressBookParser {
                 return new SortSupplierCommandParser().parse(trimmedArguments);
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SortDeliveryCommand.MESSAGE_USAGE));
+                        SortSupplierCommand.MESSAGE_USAGE + "\nOR\n" + SortDeliveryCommand.MESSAGE_USAGE));
             }
 
         case UpcomingCommand.COMMAND_WORD:
@@ -144,6 +146,7 @@ public class AddressBookParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 

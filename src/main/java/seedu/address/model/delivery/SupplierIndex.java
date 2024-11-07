@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SupplierIndex {
     public static final String MESSAGE_CONSTRAINTS =
-            "SupplierIndex should be a positive number greater than 0"
+            "SUPPLIER_INDEX should be a positive number greater than 0"
                     + " and smaller than total number of suppliers";
     public final int index;
 

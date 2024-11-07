@@ -11,6 +11,11 @@ import seedu.address.model.supplier.Supplier;
 public abstract class SupplierPredicate implements Predicate<Supplier> {
     protected final String keyword;
 
+    /**
+     * Constructs a {@code SupplierPredicate}.
+     *
+     * @param keywords Keywords to test against.
+     */
     public SupplierPredicate(String keywords) {
         this.keyword = keywords;
     }

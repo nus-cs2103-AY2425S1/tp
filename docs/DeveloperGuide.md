@@ -92,7 +92,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete -s 1")` API call as an example.
 
-<puml src="diagrams/DeleteSupplierSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSupplierSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete -s 1` Command" />
 
 <box type="info" seamless>
 
@@ -112,8 +112,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `DeleteSupplierCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `DeleteSupplierCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddSupplierCommandParser`, `DeleteSupplierCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -616,12 +616,10 @@ ___
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
-
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </box>
 
 ### Launch and shutdown
@@ -639,29 +637,266 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Testing Supplier Commands 
+
+#### Adding a supplier
+
+1. Adding a supplier 
+
+   1. Prerequisites: No "John Doe" with company "companyA" and "Jane Doe" with company "companyB" in the list of suppliers.
+
+   1. Test case: `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`<br>
+     Expected: A new supplier is added to the list.
+
+   2. Test case: `add -s n/Jane Doe p/87654321 e/jane@example.com com/companyB`<br>
+     Expected: A new supplier is added to the list.
+   
+   3. Test case: `add -s n/John Doe p/98765432`<br> 
+     Expected: Error message is shown. Supplier not added.
+      
+**Tips:** Check out the User Guide (UG) for more information on what it means to have duplicate suppliers.
+
+### Finding a supplier
+
+1. Finding a supplier by name
+
+   1. Prerequisites: At least one supplier with the name "John" in the list.
+
+   2. Test case: `find -s n/John`<br>
+      Expected: The suppliers with name containing "John" is shown in the list. Other suppliers are not shown.
+
+   3. Test case: `find -s n/John com/comp`<br>
+      Expected: The suppliers with name containing "John" and company name containing "comp" is shown in the list. Other suppliers are not shown.
+
+   4. Test case: `find -s n/John com/comp pro/rice`<br>
+      Expected: The suppliers with name containing "John", company name containing "comp" and product containing "rice" is shown in the list. Other suppliers are not shown.
+   
+   6. Test case: `find -s n/John com/comp pro/rice pro/bread`<br>
+      Expected: The suppliers with name containing "John", company name containing "comp" and product containing "rice" and "bread" is shown in the list. Other suppliers are not shown.
 
 ### Deleting a supplier
 
 1. Deleting a supplier while all suppliers are being shown
 
-   1. Prerequisites: List all suppliers using the `list` command. Multiple suppliers in the list.
+   1. Prerequisites: List all suppliers using the `list -s` command. Multiple suppliers in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First supplier is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No supplier is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No supplier is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Sorting suppliers
+
+1. Sorting suppliers by name
+
+   1. Prerequisites: List all suppliers using the `list -s` command. Multiple suppliers in the list.
+
+   1. Test case: `sort -s so/a sb/n`<br>
+      Expected: Suppliers are sorted by name in ascending order.
+
+   1. Test case: `sort -s so/d sb/n`<br>
+      Expected: Suppliers are sorted by name in descending order.
+
+   1. Test case: `sort -s sb/n`<br>
+      Expected: Error message is shown. Suppliers are not sorted.
+
+### Listing suppliers
+
+1. Listing all suppliers
+
+   1. Prerequisites: At least one supplier in the list.
+
+   1. Test case: `list -s`<br>
+      Expected: All suppliers are shown in the list.
+
+### Mark supplier status
+
+1. Marking a supplier as active/inactive
+
+   1. Prerequisites: List all suppliers using the `list -s` command. Multiple suppliers in the list.
+
+   1. Test case: `mark -s 1 active`<br>
+      Expected: The status of the first supplier is changed to active.
+
+   1. Test case: `mark -s 1 inactive`<br>
+      Expected: The status of the first supplier is changed to inactive.
+
+   1. Test case: `mark -s 0 active`<br>
+      Expected: Error message is shown. Status of suppliers is not changed.
+
+### Testing Delivery Commands
+
+### Adding a delivery
+
+1. Adding a delivery with existing supplier
+
+    1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
+
+    1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/bread q/500 g c/5.50`<br>
+       Expected: A delivery paired to the first supplier is added. Details of the delivery shown in the status message.
+
+2. Adding a delivery with invalid supplier
+    1. Test case: `add -d on/18-01-2023 15:00 s/0 pro/bread q/500 g c/5.50`<br>
+       Expected: No delivery is added. Error message indicating that SUPPLIER_INDEX should be a positive number greater than 0 and smaller than total number of suppliers shown in the status message.
+
+3. Adding a delivery with invalid units for QUANTITY
+    1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
+
+    1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/bread q/500 pounds c/105.50`<br>
+       Expected: No delivery is added. Error message indicating that QUANTITY should be a positive number followed by a space and valid unit shown in the status message.
+
+4. Adding a delivery with invalid parameter values
+    1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
+
+    1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/###@@ q/500 pounds c/105.50`<br>
+       Expected: No delivery is added. Error message indicating that PRODUCT should be alphanumeric shown in the status message.
+
+### Listing all deliveries
+
+1. Listing all deliveries
+    1. Test case: `list -d`<br>
+       Expected: All added deliveries shown. Success message shown in the status message.
+
+### Marking a delivery
+
+1. Marking a delivery as CANCELLED
+
+    1. Prerequisites: Ensure that the first delivery has either PENDING or DELIVERED status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `mark -d 1 CANCELLED`<br>
+       Expected: The first delivery has status changed to CANCELLED. Details of the delivery shown in the status message.
+
+2. Marking a delivery as DELIVERED
+
+    1. Prerequisites: Ensure that the first delivery has either PENDING or CANCELLED status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `mark -d 1 DELIVERED`<br>
+       Expected: The first delivery has status changed to DELIVERED. Details of the delivery shown in the status message.
+
+3. Marking a delivery as PENDING
+
+    1. Prerequisites: Ensure that the first delivery has either CANCELLED or DELIVERED status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `mark -d 1 PENDING`<br>
+       Expected: The first delivery has status changed to PENDING. Details of the delivery shown in the status message.
+
+4. Marking a PENDING delivery as PENDING
+
+    1. Prerequisites: Ensure that the first delivery has PENDING status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `mark -d 1 PENDING`<br>
+       Expected: The first delivery remains unchanged. Error message showing that delivery already has PENDING as status.
+
+5. Other incorrect mark commands to try: mark -d, mark -d x, ... (where x is larger or smaller than the list size)
+   Expected: Delivery remains unchanged and error message is shown in the status message.
+
+### Deleting a delivery
+
+1. deleting an existing delivery
+
+    1. Prerequisites: Ensure there is at least 1 delivery by listing all deliveries using the `list -d` command.
+
+    1. Test case: `delete -d 1`<br>
+       Expected: The first delivery is deleted. Details of the deleted delivery shown in the status message.
+
+2. deleting a non-existent delivery
+
+    1. Prerequisites: Ensure there is no delivery by listing all deliveries using the `list -d` command.
+
+    1. Test case: `delete -d 1`<br>
+       Expected: No delivery is deleted. An error message that states that the delivery index provided is invalid is shown in the status message.
+
+3. Other incorrect delete commands to try: delete -d, delete -d x, ... (where x is larger than the delivery list size)
+   Expected: No delivery is deleted and error message is shown in the status message.
+
+### Finding a delivery
+
+1. Finding an existing delivery by status
+
+    1. Prerequisites: Ensure there is at least 1 delivery with status PENDING by listing all deliveries using the `list -d` command.
+
+    1. Test case: `find -d stat/PENDING`<br>
+       Expected: All deliveries with status PENDING are displayed. Success message indicating number of deliveries listed shown in the status message.
+
+2. Finding an existing delivery by PRODUCT
+
+    1. Prerequisites: Ensure there is at least 1 delivery with rice as product by listing all deliveries using the `list -d` command.
+
+    1. Test case: `find -d pro/rice`<br>
+       Expected: All deliveries with rice as product are displayed. Success message indicating number of deliveries listed shown in the status message.
+
+3. Finding a delivery that does not exist
+
+    1. Prerequisites: Ensure there is no deliveries with 20-10-1999 12:00 as DELIVERY_DATE_TIME by listing all deliveries using the `list -d` command.
+
+    1. Test case: `find -d on/20-10-1999 12:00`<br>
+       Expected: No deliveries is displayed. Message indicating 0 deliveries listed shown in the status message.
+
+4. Other incorrect find commands to try: find -d, find -d pro/@@## ...
+   Expected: No delivery is displayed and error message is shown in the status message.
+
+### Sorting deliveries
+
+1. Sorting deliveries with valid Parameter in ascending order
+
+    1. Prerequisites: Ensure there is at least 1 delivery with DELIVERED status and 1 delivery with PENDING status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `sort -d so/a sb/s`<br>
+       Expected: All deliveries with status Delivered are displayed before deliveries with status PENDING. Success message indicating number of deliveries sorted and the sorting conditions shown in the status message.
+
+2. Sorting deliveries with invalid parameters in ascending order
+
+    1. Test case: `sort -d so/a sb/q`<br>
+       Expected: No deliveries displayed. Error message indicating possible parameters for sort order shown in the status message.
+
+3. Sorting an empty list of deliveries
+
+    1. Prerequisites: Ensure there is no deliveries displayed by listing all deliveries using the `list -d` command.
+
+    1. Test case: `sort -d so/a sb/c`<br>
+       Expected: No deliveries is displayed. Message indicating 0 deliveries sorted by cost in ascending order is shown in the status message.
+
+4. Other incorrect sort -d commands to try: sort -d, sort -d so/a ...
+   Expected: No delivery is displayed and invalid command error message is shown in the status message.
+
+### Upcoming deliveries
+
+1. View upcoming deliveries that are within a specified date range.
+
+    1. Prerequisites: Ensure there is at least 1 delivery with PENDING status and between 20-10-1999 12:00 and 12-10-2024 13:00 by listing all deliveries using the `list -d` command.
+
+    1. Test case: `upcoming aft/20-10-1999 12:00 bef/12-10-2024 13:00`<br>
+       Expected: All PENDING deliveries between 20-10-1999 12:00 and 12-10-2024 13:00 are displayed. Success message indicating number of upcoming deliveries shown in the status message.
+
+2. View upcoming deliveries before a specified date.
+
+    1. Prerequisites: Ensure there is at least 1 delivery with PENDING status and before d 12-10-2024 12:00 by listing all deliveries using the `list -d` command.
+
+    1. Test case: `upcoming bef/12-10-2024 12:00`<br>
+       Expected: All Pending deliveries before 12-10-2024 12:00 are displayed. Success message indicating number of upcoming deliveries shown in the status message.
+
+3. Invalid parameter values.
+
+    1. Prerequisites: Ensure there is at least 1 delivery displayed by listing all deliveries using the `list -d` command.
+
+    1. Test case: `upcoming aft/20-10-101010`<br>
+       Expected: No deliveries is displayed. Message indicating DELIVERY_DATE_TIME should be in the format dd-MM-yyyy HH:mm is shown in the status message.
+
+4. Other incorrect upcoming commands to try: upcoming, upcoming aft/
+   Expected: No delivery is displayed and error message is shown in the status message.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+   1. Prerequisites: Delete the data file.
+   2. Test case: Launch the app<br>
+      Expected: The app should create a new data file with default data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Exiting the app
 
-1. _{ more test cases …​ }_
+1. Test case: `exit`<br>
+       Expected: The app closes.

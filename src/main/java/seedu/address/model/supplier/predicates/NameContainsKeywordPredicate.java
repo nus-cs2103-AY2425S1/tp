@@ -8,6 +8,11 @@ import seedu.address.model.supplier.Supplier;
  */
 public class NameContainsKeywordPredicate extends SupplierPredicate {
 
+    /**
+     * Constructs a {@code NameContainsKeywordPredicate}.
+     *
+     * @param keywords Keyword to test against.
+     */
     public NameContainsKeywordPredicate(String keywords) {
         super(keywords);
     }
