@@ -1,9 +1,3 @@
----
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
----
-
 # TAHub Contacts Developer Guide
 
 <!-- * Table of Contents -->
@@ -37,7 +31,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/MainApp.java)) is in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -70,13 +64,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -87,7 +81,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,13 +115,14 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the enrollment data i.e: all `StudentCourseAssociation` objects contained in a `StudentCourseAssociationList` object
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -140,21 +135,29 @@ The `Model` component,
 
 </box>
 
+### Course component
+API: [`Course.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/model/course/Course.java)
+
+<puml src="diagrams/CourseClassDiagram.puml" width="550" />
+
+The `Course` component,
+* stores the course data i.e., all `Course` objects (which are contained in a `UniqueCourseList` object).
+
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both address book data, user preference data and enrollment data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `UserPrefStorage` and `StudentCourseAssociationListStorage`, which means it can be treated as any one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `tahub.contacts.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -362,6 +365,9 @@ Priorities:
 
    Use case ends.</panel>
 
+<<<<<<< HEAD
+**Use case: Delete a contact**
+=======
 <panel header="#### Use Case: Get Warnings Before Making Major Changes" expanded>
 
 **Main Success Scenario (MSS):**
@@ -381,6 +387,7 @@ Priorities:
       Use case ends.</panel>
 
 <panel header="#### Use case: Delete a contact" expanded>
+>>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
@@ -603,7 +610,27 @@ Priorities:
   * System displays a message: "Operation cancelled."
   * **Use case ends.**</panel>
 
+<<<<<<< HEAD
+**Use Case: Get Warnings Before Making Major Changes**
+
+1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
+2. System detects the action as a major change.
+3. System prompts the tutor with a warning message describing the potential consequences (e.g., "Warning: You are about to delete [Student's name]. This action cannot be undone. Do you wish to proceed?").
+4. Tutor reviews the warning and confirms whether to proceed or cancel.
+5. If confirmed, the system proceeds with the requested changes and displays a success message.
+
+   **Use case ends.**
+
+**Extensions:**
+
+* 2a. The list is empty.
+    * 2a1. System shows a message, "No contacts available."
+      Use case ends.
+
+**Use Case: Explore App with Sample Student Data**
+=======
 <panel header="#### Use Case: Explore App with Sample Student Data" expanded>
+>>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
@@ -872,6 +899,37 @@ testers are expected to do more _exploratory_ testing.
 
 1. _{ more test cases …​ }_
 
+### Enrolling a student into a course and tutorial
+
+1. Enrolling an existing student into an existing course on TAHub
+    
+   1. Prerequisites: Ensure that both *student* and *course* objects have been created.
+      (In this case, the *student* object with matriculation number A2345678Y and the *course*
+       object with course code MA1521 must already be created.)
+    
+   2. Test case: `enroll m/A2345678Y c/MA1521 tut/T17`
+        
+       Expected: The student with matriculation number A2345678Y is enrolled into tutorial T17 of the course MA1521. A success message will be shown to the user.
+   
+   3. Test case: `enroll m/A2345678Y c/MA1521 tut/T17` (*again*)
+   
+       Expected: An error message will be displayed to the user and no new enrollment will occur.
+
+2. Enrolling an existing student into an invalid course on TAHub
+
+    1. Prerequisites: Ensure that a *student* object has been created but a course with course code *CS3233* has not been created
+    
+    2. Test case: Test case: `enroll m/A2345678Y c/CHUNITHM tut/T17`
+   
+        Expected: An error message will be displayed to the user and no enrollment will occur as the course code entered has an invalid format.
+   
+   3. Test case: Test case: `enroll m/A2345678Y c/CS3233 tut/T17`
+
+       Expected: An error message will be displayed to the user and no enrollment will occur as no such course with course code exists on TAHub.
+
+3. *{ more test cases... }*
+   
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files

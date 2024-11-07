@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "u:EditCourseCommand" as EditCourseCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "UniqueCourseList" as CourseList MODEL_COLOR
+end box
+
+[-> LogicManager : execute(edit-course)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(edit-course)
+activate AddressBookParser
+
+create EditCourseCommand
+AddressBookParser -> EditCourseCommand
+activate EditCourseCommand
+
+EditCourseCommand --> AddressBookParser
+deactivate EditCourseCommand
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> EditCourseCommand : execute()
+activate EditCourseCommand
+
+EditCourseCommand -> CourseList : validateCourseListContainsCourseCode(courseCode)
+activate CourseList
+CourseList --> EditCourseCommand
+deactivate CourseList
+
+EditCourseCommand -> CourseList : getCourseWithCourseCode(courseCode)
+activate CourseList
+CourseList --> EditCourseCommand : Course
+deactivate CourseList
+
+EditCourseCommand -> EditCourseCommand : createEditedCourse(courseToEdit, descriptor)
+activate EditCourseCommand
+EditCourseCommand --> EditCourseCommand : editedCourse
+deactivate EditCourseCommand
+
+EditCourseCommand -> Model : setCourse(courseToEdit, editedCourse)
+activate Model
+Model --> EditCourseCommand
+deactivate Model
+
+EditCourseCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+Model --> EditCourseCommand
+deactivate Model
+
+EditCourseCommand --> LogicManager : result
+deactivate EditCourseCommand
+destroy EditCourseCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

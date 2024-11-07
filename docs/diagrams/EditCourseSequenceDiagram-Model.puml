@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":UniqueCourseList" as UniqueCourseList MODEL_COLOR
+end box
+
+[-> Model : setCourse(Course original, Course edited)
+activate Model
+
+Model -> UniqueCourseList : setCourse(Course, Course)
+activate UniqueCourseList
+
+
+UniqueCourseList --> Model :
+deactivate UniqueCourseList
+
+[<-- Model
+deactivate Model
+
+@enduml

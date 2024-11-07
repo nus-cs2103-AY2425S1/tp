@@ -1,11 +1,13 @@
 {
   "persons": [ {
+    "matriculationNumber" : "A1234567X",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }, {
+    "matriculationNumber" : "A1234567X",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",

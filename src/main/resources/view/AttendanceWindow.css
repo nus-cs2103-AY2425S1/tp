@@ -1,0 +1,71 @@
+#attendanceWindowContainer {
+    -fx-background-color: #1d1d1d;
+}
+
+#courseCode,
+#courseName,
+#tutorialCode,
+#tutorialName {
+    -fx-text-fill: white;
+    -fx-background-color: #830e4a;
+    -fx-padding: 5 10;
+    -fx-background-radius: 3;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.list-view {
+    -fx-background-color: #2d2d2d;
+    -fx-control-inner-background: #2d2d2d;
+}
+
+.list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-padding: 8;
+}
+
+.list-cell:filled:selected:focused,
+.list-cell:filled:selected {
+    -fx-background-color: #830e4a;
+}
+
+.button {
+    -fx-background-color: #830e4a;
+    -fx-text-fill: white;
+    -fx-padding: 5 15;
+    -fx-background-radius: 3;
+}
+
+.button:hover {
+    -fx-background-color: derive(#830e4a, 20%);
+}
+
+#attendanceCount, #attendancePercentage {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.combo-box {
+    -fx-background-color: #2d2d2d;
+    -fx-text-fill: white;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #2d2d2d;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #830e4a;
+}
+
+.combo-box .list-view {
+    -fx-background-color: #2d2d2d;
+}
+
+.label-header {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}

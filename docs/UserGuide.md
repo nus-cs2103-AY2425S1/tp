@@ -23,8 +23,8 @@ student contact details!
 </md>
 </box>
 
-<!-- * Table of Contents -->
-<page-nav-print />
+While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI
+(Command Line Interface) with typed commands. A perfect fit if you’re already a wizard at the keyboard.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -167,6 +167,92 @@ Examples:
 
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding a course: `course-add`
+
+Adds a course to TAHub Contacts.
+
+Format: `course-add c/COURSE_CODE n/COURSE_NAME`
+
+Examples:
+
+* course-add c/CS1101S n/Programming Methodology 1
+* course-add c/MA1522 n/Linear Algebra
+
+Notes:
+
+* COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
+* COURSE_NAME must only contain alphanumeric characters or spaces
+
+### Editing a course: `course-add`
+
+Edit by changing the name of a course in TAHub Contacts.
+
+Format: `course-edit c/COURSE_CODE n/COURSE_NAME`
+
+Examples:
+
+* course-edit c/CS1101S n/Programming Methodology 2
+* course-edit c/MA1522 n/Linear Algebra 2
+
+Notes:
+
+* COURSE_CODE must be an existing course code
+* COURSE_NAME is the new course name and must only contain alphanumeric characters or spaces
+* Note that it is not possible to edit the course code
+
+### Deleting a course: `course-delete`
+
+Deletes a course in TAHub Contacts.
+
+Format: `course-delete c/COURSE_CODE`
+
+Examples:
+
+* course-delete c/CS1101S
+
+Notes:
+
+* COURSE_CODE must be an existing course code
+
+<box type="warning" seamless>
+**Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
+</box>
+
+### Enrolling a student : `enroll`
+
+Enrolls a student in a particular course and tutorial group.
+
+Format: `enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`
+
+Examples:
+
+* enroll m/A1234567Y c/CS1101S tut/T12
+* enroll m/A1262929T c/CS2030 tut/T08
+
+Notes:
+
+* MATRICULATION_NUMBER must be a valid NUS matriculation number in the form AXXXXXXXB, where A is the fixed as A, B is any uppercase character, and XXXXXXX is any 7 integers.
+* COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
+* TUTORIAL_ID should be in the form TXX, where T is fixed as T, while XX is a 2 digit integer from 01 to 99.
+* Students already enrolled in this course and tutorial cannot be enrolled again
+
+### Unenrolling a student : `unenroll`
+
+Unenrolls a student from a particular course and tutorial group that he/she is in
+
+Format: `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`
+
+Examples:
+
+* unenroll m/A1234567Y c/CS1101S tut/T12
+* unenroll m/A1262929T c/CS2030 tut/T08
+
+Notes:
+
+* MATRICULATION_NUMBER must be a valid NUS matriculation number in the form AXXXXXXXB, where A is the fixed as A, B is any uppercase character, and XXXXXXX is any 7 integers.
+* COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
+* TUTORIAL_ID should be in the form TXX, where T is fixed as T, while XX is a 2 digit integer from 01 to 99.
 
 ### Clearing all entries : `clear`
 
