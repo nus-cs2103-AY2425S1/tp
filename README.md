@@ -1,8 +1,3 @@
----
-layout: default.md
-title: "KnottyPlanners - Your Ultimate Wedding Planning Companion"
----
-
 # KnottyPlanners 💍🎀
 ## Making Wedding Planning a Breeze! 🎉
 
@@ -29,7 +24,7 @@ title: "KnottyPlanners - Your Ultimate Wedding Planning Companion"
 
 ## Get Started Today! 🎉
 * If you are interested in using KnottyPlanners, head over to the [_Quick Start_ section of the **User Guide**](https://ay2425s1-cs2103t-w13-4.github.io/tp/UserGuide.html)
-* If you are interested about developing KnottyPlanners, the [**Developer Guide**](https://ay2425s1-cs2103t-w13-4.github.io/tp/DeveloperGuide.html) is a good place to start.
+* If you are interested in contributing to the development of KnottyPlanners, the [**Developer Guide**](https://ay2425s1-cs2103t-w13-4.github.io/tp/DeveloperGuide.html) is a good place to start.
 * We value your feedback! Reach out to us with any suggestions or issues.
 
 ## Acknowledgements 🙏

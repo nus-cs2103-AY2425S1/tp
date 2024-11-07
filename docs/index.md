@@ -48,8 +48,7 @@ title: "KnottyPlanners - Your Ultimate Wedding Planning Companion"
 
 ## Contact Us 📧
 
-- **Email**: support@knottyplanners.com
-- **Twitter**: [@KnottyPlanners](https://twitter.com/KnottyPlanners)
-- **Facebook**: [KnottyPlanners](https://facebook.com/KnottyPlanners)
+- **Email**: jonus.ho@u.nus.edu
+- **GitHub**: [@KnottyPlanners](https://github.com/orgs/AY2425S1-CS2103T-W13-4/people)
 
 Let's make wedding planning fun and stress-free together! 🎊💖
