@@ -107,7 +107,7 @@ public class AggGradeCommand extends Command {
             return new SmartList(
                     gradeLists.stream().map(gradeList -> gradeList.getMap().values().stream()
                             .reduce(0F, (
-                                            total, grade) -> grade.getScore() * grade.getWeightage() / 100,
+                                            total, grade) -> total + grade.getScore() * grade.getWeightage() / 100,
                                     Float::sum)).toList());
         }
 
