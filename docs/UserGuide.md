@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Teacher's Pet is a **desktop app for managing students, tailored for Teaching Assistants (TA) in the National University of Singapore (NUS). Teacher's Pet offers a lightweight, efficient solution optimized for small (<30 students) classes and works completely offline, promising performance even with an unstable network connection. 
+Teacher's Pet is a **desktop app for managing students, tailored for Teaching Assistants (TA) in the National University of Singapore (NUS)**. Teacher's Pet offers a lightweight, efficient solution optimized for small (<30 students) classes and works completely offline, promising performance even with an unstable network connection. 
 
 To get started with Teacher's Pet, kindly refer to our [Quick Start](#quick-start) guide. 
 
@@ -17,7 +17,7 @@ Have a question? You might find the answer in our [FAQ](#faq) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 You can refer to the [FAQ](#frequently-asked-questions-quick-start) section below for more information.
 
@@ -54,16 +54,16 @@ You can refer to the [FAQ](#frequently-asked-questions-quick-start) section belo
 
 Back to [Quick Start](#quick-start)
 
-**Q:** How do I check what version of Java I have on my device? </br>
+**Q:** How do I check what version of Java I have on my device? <br> 
 **A:** You can refer to this [link](https://www.java.com/en/download/help/version_manual.html) for more information.
 
-**Q:** I clicked the link to install Java 17, now which file should I download? </br>
+**Q:** I clicked the link to install Java 17, now which file should I download? <br>
 **A:** You want to look for the file with `Installer` in its name for the Operating System of your device (eg. `macOS x64 DMG Installer` if you use an Apple device). After downloading the file, simply run it to install Java 17.
 
-**Q:** How do I open a command terminal? </br>
+**Q:** How do I open a command terminal? <br>
 **A:** If you are using a Windows device, search for `Windows PowerShell` or `Command Prompt`. If you are using a Mac/Apple device, search for `Terminal`.
 
-**Q:** After running the app, some messages appear on my terminal, should I be concerned? </br>
+**Q:** After running the app, some messages appear on my terminal, should I be concerned? <br>
 **A:** If a window similar to the one in the image above appears, then the app is working well and you can safely ignore any messages on the terminal.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -288,7 +288,7 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: 
 1. Install the app on the other computer 
-2. Run the app on the other computer (See [Quick start](#quick-start) above) 
+2. Run the app on the other computer (See [Quick Start](#quick-start) above) 
 3. Find the data file on the other computer (See above) and replace the `students.json` file with the `students.json` file from the previous computer
 
 **Q**: How do I keep a copy of my data?<br>
@@ -299,6 +299,7 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 
 **Q**: Does the application require internet connection to run?<br>
 **A**: After installation, the application does not require internet connection. Files are saved locally.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -313,7 +314,7 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/ROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/E1234567 m/Computer Science y/2 g/Group 4`
+**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/E1234567 m/Computer Science y/2 g/Group 4`
 **Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`<br> e.g.,`edit 1 n/James Lee m/4`
 **Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
 **List** | `list`
