@@ -121,21 +121,25 @@ How commands work:
 * `ListCommand` is not an abstract class.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/eventtory/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores EventTory data i.e., all `Vendor`, `Model`, and `Association` objects
+* contains observables that can be 'observed' by outsiders e.g. the UI can be bound to a `UiState` state so that the UI automatically changes the screen when the data in `UiState` changes, such as:
+    * the current displayed `UiState` as a `ObjectProperty<UiState>` object
+    * the current selected (if any) `Event`, `Vendor` objects for viewing as separate `ObjectProperty<Event>`, `ObjectProperty<Vendor>` objects
+    * the current selected `Event`, `Vendor` objects (e.g., results of a search query) as a separate _filtered_ list
+    * the current trailing index offset for assigned vendors/events in view mode as a `ObservableIntegerValue` object
+* stores a `UserPref` object that represents the user’s preferences. This is exposed as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `EventTory`, which `Vendor` and `Event` references. This allows `EventTory` to only require one `Tag` object per unique tag, instead of each `Event` and `Vendor` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -444,6 +448,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC02 - Assign a vendor to an event**
 
 Preconditions: User is viewing an item.
+
 **MSS**
 
 1. User enters command to assign a vendor to an event.
