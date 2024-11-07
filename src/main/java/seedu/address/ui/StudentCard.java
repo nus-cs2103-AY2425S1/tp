@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-//import java.util.Comparator;
-
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,6 +15,9 @@ import seedu.address.model.student.Student;
 public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
+    private static final String GRADED = "-fx-background-color: #029e1e";
+    private static final String SUBMITTED = "-fx-background-color: #c7a900";
+    private static final String PENDING = "-fx-background-color: #9e1402";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -55,18 +56,31 @@ public class StudentCard extends UiPart<Region> {
         tutorialGroup.setText(student.getTutorialGroup().value);
         studentNumber.setText(student.getStudentNumber().value);
 
-        student.getAssignments().forEach(assignment ->
-                assignments.getChildren().add(new Label(assignment.getAssignmentName().toString())));
+        student.getAssignments().forEach(assignment -> {
+            Label label = new Label(assignment.getLabelName());
+            label.setStyle(getAssignmentColor(assignment));
+            assignments.getChildren().add(label);
+        });
 
         // Updates the flow pane when the list of assignments changes
         student.getAssignments().addListener((ListChangeListener<Assignment>) change -> {
             while (change.next()) {
                 assignments.getChildren().clear();
                 student.getAssignments().forEach(
-                        assignment -> assignments.getChildren().add(
-                                new Label(assignment.getAssignmentName().toString())));
-
+                        assignment -> {
+                            Label label = new Label(assignment.getLabelName());
+                            label.setStyle(getAssignmentColor(assignment));
+                            assignments.getChildren().add(label);
+                        });
             }
         });
+    }
+
+    public String getAssignmentColor(Assignment assignment) {
+        return assignment.getState() == Assignment.State.GRADED
+                ? GRADED
+                : assignment.getState() == Assignment.State.SUBMITTED
+                ? SUBMITTED
+                : PENDING;
     }
 }

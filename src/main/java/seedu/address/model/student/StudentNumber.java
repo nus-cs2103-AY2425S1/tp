@@ -54,7 +54,7 @@ public class StudentNumber {
             return false;
         }
 
-        return value.equalsIgnoreCase(otherStudentNumber.value);
+        return value.equals(otherStudentNumber.value);
     }
 
     @Override

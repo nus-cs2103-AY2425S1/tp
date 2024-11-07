@@ -58,7 +58,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/gnoossk)]
 [[portfolio](team/gnoossk.md)]
 
-* Role: Analyst
-* Responsibilities: Analyse
+* Role: Software Developer
+* Responsibilities: Attendance and Storage Manager
 
 
