@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.listingcommands.RemoveBuyersFromListingCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -28,7 +31,7 @@ public class RemoveBuyersFromListingCommandParser implements Parser<RemoveBuyers
     public RemoveBuyersFromListingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BUYER);
 
-        // Parse listing name
+        // Parse index
         String name = argMultimap.getPreamble();
         if (name.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -36,18 +39,25 @@ public class RemoveBuyersFromListingCommandParser implements Parser<RemoveBuyers
         }
         Name listingName = ParserUtil.parseName(name);
 
-        // Parse buyer names
-        Set<Name> buyerNames = new HashSet<>();
-        for (String buyerName : argMultimap.getAllValues(PREFIX_BUYER)) {
-            buyerNames.add(ParserUtil.parseName(buyerName));
+        // Parse index
+        String indexOneBased = argMultimap.getPreamble().trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(indexOneBased)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
+        }
+        Index index = ParserUtil.parseIndex(indexOneBased);
+
+        // Parse buyer indexes
+        Set<Index> buyerIndexes = new HashSet<>();
+        for (String buyerIndex : argMultimap.getAllValues(PREFIX_BUYER)) {
+            buyerIndexes.add(ParserUtil.parseIndex(buyerIndex));
         }
 
         // Check if at least one buyer is specified
-        if (buyerNames.isEmpty()) {
+        if (buyerIndexes.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RemoveBuyersFromListingCommand.MESSAGE_USAGE));
         }
 
-        return new RemoveBuyersFromListingCommand(listingName, buyerNames);
+        return new RemoveBuyersFromListingCommand(index, buyerIndexes);
     }
 }
