@@ -1,9 +1,16 @@
---
+---
 layout: page
 title: Developer Guide
 ---
+
+Welcome to the **Developer Guide** for our project, a comprehensive resource designed to assist developers in navigating and contributing to our codebase. This guide is built upon the foundational principles of the AddressBook-Level3 project developed by the SE-EDU initiative, ensuring a robust framework for our application.
+
+In this guide, you will find detailed instructions on setting up your development environment, getting started with the codebase, and understanding the design architecture that drives our application. Whether you are an experienced developer or new to our project, this guide aims to provide you with the necessary tools and insights to effectively engage with our work.
+
 * Table of Contents
-  {:toc}
+{:toc}
+  
+We encourage you to explore each section thoroughly to maximize your understanding and contribution to the project. Feel free to modify any sections or add specific details relevant to your project!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -361,15 +368,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Doctor  | delete a patient profile                                              | get rid of patient's information that I no longer need /  no longer a patient of mine |
 | `* * *`  | Doctor  | add recurring appointments for a patient                              | manage their treatment schedule efficiently                                           |
 | `* * *`  | Doctor  | update patient details                                                | keep their medical information current                                                |
-| `* * *`  | Doctor  | add notes to a patient’s record after each session                    | track their progress over time                                                        |
+| `* * *`  | Doctor  | add remarks to a patient’s record after each session                  | track their progress over time                                                        |
 | `* * *`  | Doctor  | see which patients have upcoming appointments today                   | I can prepare in advance                                                              |
 | `* * *`  | Doctor  | view the history of treatments for a patient                          | monitor their improvement                                                             |
+| `* * *`  | Doctor  | mark a patient’s session as completed                                 | I can know which patients have been seen                                              |
 | `* * `   | Doctor  | filter patients by condition or treatment type                        | search patients of a particular condition or treatment for more follow-up actions     |
 | `* * `   | Doctor  | track my own schedule for the week                                    | I can plan my workload                                                                |
 | `* * `   | Doctor  | automatically schedule follow-up appointments for recurring patients  | I don’t have to manually book each appointment                                        |
 | `* * `   | Doctor  | set reminders for follow-up appointments                              | I don’t miss any important sessions                                                   | |
 | `* * `   | Doctor  | assign different exercises or treatments to a patient                 | their care plan is personalized                                                       |
-| `* * `   | Doctor  | mark a patient’s session as completed                                 | I can know which patients have been seen                                              |
 | `* * `   | Doctor  | add vital signs data (e.g., blood pressure, heart rate) for a patient | I can monitor their health metrics                                                    |
 | `* * `   | Doctor  | track patient feedback after each session                             | I can adjust their treatment plan if needed                                           |
 | `* * `   | Doctor  | set goals for a patient’s treatment plan                              | I can measure their progress against these goals                                      |
@@ -398,7 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a: The list of patients is empty.
 
-    * 2a1. MedDict informs the doctor that no patients are available for deletion
+    * 2a1. MedDict informs the user that no patients are available for deletion
     * Use case ends
 
 * 3a. The given index or patient selection is invalid.
@@ -413,7 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to make a new appointment
-2.  MedDict displays the list of available time slots for appointments
+2.  MedDict displays the user's schedule
 3.  User selects a specific time slot
 4.  User searches for the patient by name or the ID
 5.  User requests to assign the time slot to a patient
@@ -431,8 +438,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. The selected patient is not found in the system.
 
-    * 4a1. MedDict informs the doctor that the patient is not found
-    * 4a2. The doctor is given the option to create a new patient profile or re-enter the patient's name
+    * 4a1. MedDict informs the user that the patient is not found
+    * 4a2. The user is given the option to create a new patient profile or re-enter the patient's name
 
       Use case resumes from step 4
 
@@ -477,18 +484,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Command structures should be simple enough for physiotherapists to memorize frequently used operations
 5. The searching functionality should not be case-sensitive.
 6. The system must be able to handle unexpected errors (e.g., incorrect input, unavailable commands) gracefully by providing clear, actionable error messages
-7. The system should automatically back up patient contact data at least once per day to ensure data integrity. Backups should be encrypted and stored in a secure location
-8. All sensitive contact information, including patient names, phone numbers, and addresses, must be encrypted when stored on disk.
-9. Only authorized users (e.g., licensed physiotherapists) should be able to access or modify patient details.
-10. Authorized users will only have access to the patients under their patient-doctor bond (PDB).
-11. should also be scalable to accommodate larger clinics that may need to store 10,000+ patient records
+7. All sensitive contact information, including patient names, phone numbers, and addresses, must be encrypted when stored on disk.
+8. Only authorized users (e.g., licensed physiotherapists) should be able to access or modify patient details.
+9. should also be scalable to accommodate larger clinics that may need to store 10,000+ patient records
 
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-
-* **Patient-Doctor Bond (PDB)**: A relationship between a doctor and a patient where the doctor is assigned to the patient for physiotherapy treatment
 
 ## **Appendix: Instructions for manual testing**
 
