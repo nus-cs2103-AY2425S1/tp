@@ -778,23 +778,221 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a student
+
+1. Adding a student while all students are being shown
+
+    1. Prerequisites: List all students using the `ls` command. Start from a fresh T_Assistant model.
+
+    1. Test case: `add_s sno/A0123456X sn/John Doe e/e0000000@u.nus.edu`<br>
+       Expected: The student with the given name, email, and student number is added into the student list and updated. 
+   
+    1. Test case: `add_s sno/A0123456X sn/John Doe e/e0000000@u.nus.edu`<br>
+       Expected: Student already exists, hence an error message will be displayed.
+
+    1. Test case: `add_s sno/A0000000X`<br>
+       Expected: No student is added. The student list remains the same.
+
+    1. Other incorrect delete commands to try: `add_s sno/helloworld`, `add_s sno/helloworld sn/helloworld e/helloworld`, 
+       `...` (incorrect inputs, missing inputs, or incorrect prefixes used, or adding a student with the same student 
+              number or email as an existing student)<br>
+       Expected: Similar to previous.
+
+1. Adding a student while the application is on another panel other than the student list
+
+   1. Prerequisites: List groups using `lg` command or list tasks using `lt` command.
+
+   1. Test case: `add_s sno/A0000000X sn/Alice e/e0000001@u.nus.edu`<br>
+      Expected: The student with the given name, email, and student number is added into the student list and updated.
+      The application will automatically jump to the student list panel.
+   
+   1. Repeating the other test cases as stated above will give the same results.
+
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+    1. Prerequisites: List all students using the `ls` command. Multiple students in the list. Start from a fresh T_Assistant model.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+    1. Test case: `ds sno/A0737935G`<br>
+       Expected: The student with the corresponding student number is deleted from the student list. If you are testing
+       this using the sample data given, this student was in the group `CS2103-F12-1`. Using the `lg` command, observe 
+       that the group no longer contains this student.
 
-    1. Test case: `delete 0`<br>
-       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `ds sno/A0737935G`<br> (This test case is to be done after the above test case has been executed.)
+       Expected: After doing the above step, repeating this command again will yield an error message.
+   
+    1. Test case: `ds sno/helloworld`<br> 
+       Expected: This will yield an error message for not following the student number format.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Test case: `ds`<br> 
+       Expected: This will yield an error message for not following the command format.
+
+    1. Other incorrect delete commands to try: `ds A0000000X`, `...` (incorrect inputs, missing inputs, or incorrect prefixes used)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a student while the application is on another panel other than the student list
+
+    1. Prerequisites: List groups using `lg` command or list tasks using `lt` command. Start from a fresh T_Assistant model.
+
+    1. Test case: `ds sno/A0597991H`<br>
+       Expected: The student with the corresponding student number is deleted from the student list. The application will
+       automatically jump to the student list. If you are testing this using the sample data given, this student was in 
+       the group `CS2103-F12-1`. Using the `lg` command, observe that the group no longer contains this student.
+    
+    1. Repeating the other test cases as stated above will give the same results.
+
+### Adding a student(s) to a group
+
+1. Adding a single student into a group
+
+    1. Prerequisites: Group must have less than 5 students currently. If the group has 5 students already then executing
+       the command will yield an error message. The student must not also already be in a group, if not another error 
+       message will be displayed. Execute command `add_s sno/A0654321X sn/Jack e/e0000002@u.nus.edu` to add a new student
+       into the application. Execute command `add_s sno/A0111111X sn/John e/e0000003@u.nus.edu` to add another student 
+       into the application. Execute command `add_s sno/A0222222X sn/John e/e0000004@u.nus.edu` to add 
+       another student into the application. Lastly, execute command `add_s sno/A0333333X sn/Jill e/e0000005@u.nus.edu`
+       to add another student into the application.<br> 
+
+    1. Test case: `asg sno/A0654321X gn/cs2103-f12-1`<br>
+       Expected: The student with the corresponding student number is added into the group.
+
+    1. Test case: `asg sno/A0654321X gn/cs2103-f12-1`<br> (Add the same student into the group again)
+       Expected: After doing the above step, repeating this command again will yield an error message.
+
+    1. Test case: `asg sno/A0654321X gn/cs2103-f11-1`<br>
+       Expected: This will yield an error message as the student is already in another group.
+
+1. Adding multiple students into a single group
+
+    1. Prerequisites: Same as stated above.
+
+    1. Test case: `asg sno/A0222222X sno/A0111111X gn/cs2103-f11-1`<br>
+       Expected: Both students are added into the group list and you will see the group being updated with the new 
+       additions.
+
+    1. Test case: `asg sno/A0333333X sno/A0333333X sno/A0111111X gn/cs2103-f12-1`<br>
+       Expected: Only the first student is added into the group as the other student already belongs to a group. This 
+       will be reflected to you via a warning message. Also, observe that two instances of the first student are entered 
+       as inputs. This will be ignored by the application. Only one instance of the duplicated input is added into the 
+       group. You will see a warning message regarding duplicates here too.
+
+    1. Test case: `asg sno/A0333333X sno/A0333333X sno/A0111111X gn/cs2103-f12-1`<br>
+       Expected: An error message will be yielded because both students already belong to a group each.
+
+    1. Test case: `asg sno/A0999999X sno/A0333333X sno/A0454545X gn/cs2103-f12-1`<br>
+       Expected: An error message will be yielded because both student numbers do not exist in the application.
+   
+    1. Test case: `asg sno/A0333333X sno/A0333333X sno/A0333333X gn/cs2103-f11-1`<br>
+       Expected: An error message will be thrown as the student already belongs to a group. Here, observe that the duplicated
+       instance does not matter at all.
+
+    1. Other incorrect commands to try: Try mixing around different invalid inputs. The application will handle these via
+       warning messages, and at times, error messages.
+
+### Deleting a student from a group
+
+1. It does not matter which panel you are currently at. The previous few examples were to illustrate our application's 
+   ability to switch panels depending on which command is executed.
+
+    1. Test case: `dsg sno/A0737935G`<br>
+       Expected: The student with the corresponding student number will be deleted from the group. The application will
+       jump to the group list panel and reflect this change accordingly.
+
+    1. Test case: `dsg sno/A0737935G`<br> (This test case is to be done after the above test case has been executed.)
+       Expected: After doing the above step, repeating this command again will yield an error message as the student no
+       longer belongs to a group.
+
+    1. Other incorrect delete commands to try: `dsg A0000000X`, `dsg`, `dsg sno/`, `...` (incorrect student number format,
+       student does not exist, missing inputs, or incorrect prefixes used)<br>
+       Expected: Similar to previous.
+
+### Adding a group
+
+1. Adding a single group into the application.
+
+    1. Prerequisites: The group must not currently exist.
+
+    1. Test case: `ag gn/cs2103-f20-1`<br>
+       Expected: The group is added into the group list.
+
+    1. Test case: ag gn/cs2103-f20-1`<br> (Add the same group again)
+       Expected: After doing the above step, repeating this command again will yield an error message.
+
+    1. Test case: `ag gn/Team 1`<br>
+       Expected: This will yield an error message as the group name format is wrong.
+
+    1. Other incorrect commands to try: `ag`, `ag gn/`, `...` (incorrect command format, incorrect prefixes etc.)<br>
+       Expected: Similar to previous inputs.
+
+1. Adding multiple groups into the application.
+
+    1. Prerequisites: Same as stated above.
+
+    1. Test case: `ag gn/cs2103-f21-1 gn/cs2103-f21-2`<br>
+       Expected: Both groups are added into the group list and this change is reflected to the user.
+
+    1. Test case: `ag gn/cs2103-f21-3 gn/cs2103-f21-2`<br>
+       Expected: Only the first group will be added into the application as the second group already exists. You will see
+       this change reflected along with the warning message.
+
+    1. Test case: `ag gn/helloworld gn/cs2103-f30-2`<br>
+       Expected: An error message will be displayed because the first group name provided is invalid. Hence, no groups 
+       will be added.
+
+    1. Test case: `ag gn/cs2103-f15-1 gn/cs2103-f15-1 gn/cs2103-f15-2`<br>
+       Expected: Here, observe that the first two instances of group inputs are duplicates. In such a case, the application 
+       ignores the duplicated instance and adds one instance into its group data, displaying a warning message regarding
+       duplicated groups. The other group is also added into the application, and the result of this change is shown to you
+       in the group list.
+
+    1. Test case: `ag gn/cs2103-f16-1 gn/cs2103-f16-1 gn/cs2103-f15-2`<br> (Execute this command only after the previous one has been executed)
+       Expected: Here, observe that the first two instances of group inputs are duplicates. In such a case, the application
+       ignores the duplicated instance and adds one instance into its group data, displaying a warning message regarding
+       duplicated groups. The other group also cannot be added as it is already in the application. This will be reflected
+       as a warning message to you.
+   
+    1. Test case: `ag gn/cs2103-f16-1 gn/cs2103-f16-1 gn/cs2103-f15-2`<br> (Execute this command only after the previous one has been executed)
+       Expected: An error message will be yielded as all groups already exist in the model.
+
+    1. Other incorrect commands to try: Try mixing around different invalid inputs. The application will handle these via
+       warning messages, and at times, error messages.
+
+### Deleting a group
+
+1. Deleting a group without any student in it.
+
+    1. Prerequisites: Execute the command `ag gn/cs2103-f21-1`.
+
+    1. Test case: `dg gn/cs2103-f21-1`<br>
+       Expected: The group will be deleted from the application and this change will be reflected to you in the group list.
+       In this example, 0 students will be affected as no students have been added into the group.
+
+    1. Test case: `dg gn/cs2103-f21-1`<br> (This test case is to be done after the above test case has been executed.)
+       Expected: After doing the above step, repeating this command again will yield an error message.
+
+    1. Test case: dg gn/helloworld`<br>
+       Expected: This will yield an error message for not following the group name format.
+
+    1. Test case: `dg`<br>
+       Expected: This will yield an error message for not following the command format.
+
+    1. Other incorrect delete commands to try: `dg cs2103-f21-1`, `...` (incorrect inputs, missing inputs, or incorrect prefixes used)<br>
+       Expected: Similar to previous.<br>
+   
+1. Deleting a group with students in it.
+
+    1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do this
+       test on a freshly open T-Assistant.
+
+    1. Test case: `dg gn/cs2103-f12-1`<br>
+       Expected: The group will be deleted from the application and this change will be reflected to you in the group list.
+       In this example, 3 students will be affected as no students have been added into the group. They will no longer 
+       be part of any group and can be added to any other existing group.
+
+    1. Other incorrect delete commands to try: `dg cs2103-f12-1`, `...` (incorrect inputs, missing inputs, or incorrect prefixes used)<br>
+       Expected: Similar to previous.<br>
+
 
 ### Saving data
 
