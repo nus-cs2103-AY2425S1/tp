@@ -33,7 +33,11 @@ public class AddCompanyCommandTest {
         CommandResult commandResult = new AddCompanyCommand(validCompany).execute(modelStub);
 
         assertEquals(
-                String.format(AddCompanyCommand.MESSAGE_SUCCESS, validCompany.getName().fullName),
+                String.format(AddCompanyCommand.MESSAGE_SUCCESS,
+                        validCompany.getName().fullName,
+                        validCompany.getAddress().value,
+                        validCompany.getBillingDate().toString(),
+                        validCompany.getPhone().value),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCompany), modelStub.companiesAdded);
     }
