@@ -11,14 +11,14 @@ PawPatrol is designed to be a core tool for veterinary clinics to manage client 
 
 - **Pet Owner Contact Management**
 
-  - Profiles: Capture basic owner info—name, contact details, address. Owners are linked to one or more pets.
+  - Profiles: Capture basic owner info—name, ic number, contact details, address. Owners are linked to one or more pets.
 
 - **Animal Patient Records**
 
-  - Profile for Each Pet: Store relevant details—name, species, breed, age, weight.
+  - Profile for Each Pet: Store relevant details—name, species, breed, age, sex.
 
 - **Search Functionality**
-  - Ability to search clients or pets by name, species, or other key data points.
+  - Ability to search clients or pets by name.
 
 ## Technologies Used
 
@@ -35,25 +35,33 @@ TO BE UPDATED
 
 ## How to Use the Project
 
-1. Add a new pet owner: `owner add <n/ownerName> <hp/ownerNumber> <ad/ownerAddress> <e/ownerEmail>`
+1. Add a new pet owner: `owner i/IC_NUMBER n/NAME p/NUMBER a/ADDRESS e/EMAIL`  
    Example:
-   `owner add n/mr bobby hp/96667899 ad/3 lentil gardens e/bobby@gmail.com`
+   `owner i/S1234567D n/mr bobby p/96667899 a/3 lentil gardens e/bobby@gmail.com`
 
-2. Add a new pet: `pet add <n/AnimalName> <s/Species> <b/Breed> <a/Age> <s/Sex> <o/owner>`
+2. Add a new pet: `pet n/NAME s/SPECIES b/BREED a/AGE s/SEX`  
    Example:
-   `pet add n/Tom s/Cat b/domestic shorthair cat a/7 s/male`
+   `pet n/Tom s/Cat b/domestic shorthair cat a/7 s/male`
 
-3. Search for clients or pets: `search <dataType> <searchValue>`
+3. Search for clients or pets: `find DATA_TYPE KEYWORD [MORE_KEYWORDS]`  
    Example:
-   `search CLIENT mr bobby`
+   `find owner mr bobby`
 
-4. Delete an owner or pet: `delete <dataType> <index>`
+4. Link owners and pets: `link oOWNER_INDEX t/pPET_INDEX [t/pPET_INDEX]`  
    Example:
-   `delete PET 2`
+   `link o1 t/p1 t/p2`
 
-5. List owners or pets: `list <dataType>`
+5. Delete an owner or pet: `delete oOWNER_INDEX` / `delete pPET_INDEX`  
    Example:
-   `list CLIENT`
+   `delete p2`
+
+6. List owners or pets: `list DATA_TYPE`  
+   Example:
+   `list owners` / `list pets` / `list` (to list both)
+
+7. Sort owners or pets alphabetically: `sort DATA_TYPE`  
+   Example: 
+   `sort owners` / `sort pets`
 
 ## Contributors
 
