@@ -245,6 +245,8 @@ The name must match the full name exactly
 - Condition
 - Schedule
 
+**Note:** Pressing `Esc` closes the pop-up window and refocuses on the command input bar in the main window.
+
 **Examples:**
 * `view John Doe`
 * `view Jamie Chew`<br>

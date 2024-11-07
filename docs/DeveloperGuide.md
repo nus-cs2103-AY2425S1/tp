@@ -616,6 +616,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
+**Use case: UC11 - Viewing a person**
+
+**Preconditions**: Client’s name is correctly recorded in PhysioPal.
+
+**MSS**
+
+1. Physiotherapist requests to view details of a specific client by name.
+2. PhysioPal retrieves the client’s information based on the exact name provided.
+3. PhysioPal displays a pop-up window with the client’s details, including name, phone number, email, address, condition, and schedule.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+    * 1a1. PhysioPal displays an error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      <br>Use case resumes from step 2.<br>
+
+* 1b. PhysioPal detects that the name does not match any recorded clients.
+    * 1b1. PhysioPal displays an error message indicating no matches found.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      <br>Use case resumes from step 2.<br>
+
+---
+
+**Use case: UC11 - Locating persons**
+
+**MSS**
+
+1. Physiotherapist requests to find clients by entering one or more keywords (name or phone number).
+2. PhysioPal searches for all clients whose names contain any of the given keywords or whose phone numbers match partially.
+3. PhysioPal displays a list of matching clients.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for keywords.
+    * 1a1. PhysioPal displays an error message indicating that keywords are required.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until valid keywords are input by the Physiotherapist.
+      <br>Use case resumes from step 2.<br>
+
+* 1b. PhysioPal detects no matches for the entered keywords.
+    * 1b1. PhysioPal displays a message indicating no results found.
+
 
 
 ### Non-Functional Requirements
