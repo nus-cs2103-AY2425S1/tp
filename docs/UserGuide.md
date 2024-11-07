@@ -4,15 +4,15 @@ title: User Guide
 ---
 
 ### About us
+<img src="images/meddict_logo.png" alt="MedDict Logo" style="max-width: 200px; width: 100%;" />
 
 Welcome to the MedDict User Guide!
-![Ui](images/meddict_logo.png)
 
 MedDict is a _desktop application designed for medical staff_ who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application is designed with large databases in mind, supporting a streamlined process for tracking medical history, patient appointments, and treatment progress.
 
 Unlike most other applications who predominantly function on a Graphical User Interface (GUI) where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a Command Line Interface (CLI) -- where all features and utility can be achieved via typed-in commands -- would be far more efficeint.
 
-![Ui](images/gui_vs_cli.png)
+<img src="images/gui_vs_cli.png" alt="GUI vs CLI" style="max-width: 400px; width: 100%;" />
 
 With MedDict, we believe we can revolutionise your work and management experience! 💪
 
