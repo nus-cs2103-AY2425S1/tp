@@ -4,7 +4,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a Person's days attended in the address book.
@@ -85,10 +84,7 @@ public class DaysAttended {
      * @return A new {@code DaysAttended} instance representing the updated days attended,
      *         or 0 if the current days attended is 0.
      */
-    public DaysAttended decremented() throws CommandException {
-        if (getValue() == 0) {
-            throw new CommandException("Only students who have attended at least one day can be unmarked.");
-        }
+    public DaysAttended decremented() {
         int newDays = Math.max(getValue() - 1, 0);
         return new DaysAttended(newDays);
     }

@@ -95,4 +95,18 @@ public class StudentTest {
         student = (Student) student.withResetAttendance();
         assertEquals(0, student.daysAttendedProperty().get(), "daysAttended value should reset to 0");
     }
+
+    @Test
+    public void getDaysAttendedValue_returnsCorrectValue() {
+        // Arrange: Create a student with specific days attended
+        int initialDaysAttended = 3;
+        Student student = new StudentBuilder().withDaysAttended(initialDaysAttended).build();
+
+        // Act: Get the value using getDaysAttendedValue
+        int actualDaysAttended = student.getDaysAttendedValue();
+
+        // Assert: Check if the returned value matches the expected value
+        assertEquals(initialDaysAttended, actualDaysAttended,
+                "getDaysAttendedValue should return the correct number of days attended");
+    }
 }
