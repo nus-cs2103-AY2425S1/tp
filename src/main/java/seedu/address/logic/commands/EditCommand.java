@@ -74,13 +74,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = getPerson(model);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -90,6 +84,19 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private Person getPerson(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", COMMAND_WORD));
+        } else if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    1, lastShownList.size()));
+        }
+
+        return lastShownList.get(index.getZeroBased());
     }
 
     /**
@@ -118,11 +125,10 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCommand otherEditCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
@@ -261,11 +267,10 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditPersonDescriptor otherEditPersonDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)

@@ -82,7 +82,9 @@ public class TagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", COMMAND_WORD));
+        } else if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
             throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()));
         }
 

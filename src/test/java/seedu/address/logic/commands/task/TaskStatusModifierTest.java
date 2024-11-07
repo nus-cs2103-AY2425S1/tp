@@ -2,6 +2,7 @@ package seedu.address.logic.commands.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -139,9 +140,9 @@ public class TaskStatusModifierTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         TaskStatusModifier modifier = new TaskStatusModifier(Set.of(outOfBoundIndex), true);
 
-        assertThrows(CommandException.class, MESSAGE_INVALID_TASK_DISPLAYED_INDEX
-                        + ": " + outOfBoundIndex.getOneBased(), ()
-                -> modifier.modifyTasks(model));
+        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                outOfBoundIndex.getOneBased(),
+                1, model.getFilteredTaskList().size()), () -> modifier.modifyTasks(model));
     }
 
     @Test
@@ -181,21 +182,18 @@ public class TaskStatusModifierTest {
         TaskStatusModifier modifierDifferentFlag = new TaskStatusModifier(Set.of(INDEX_FIRST), false);
 
         // Same values -> returns true
-        assertTrue(modifier1.equals(modifier2));
+        assertEquals(modifier1, modifier2);
 
         // Same object -> returns true
-        assertTrue(modifier1.equals(modifier1));
+        assertEquals(modifier1, modifier1);
 
         // Different indexes -> returns false
-        assertFalse(modifier1.equals(modifierDifferentIndex));
+        assertNotEquals(modifier1, modifierDifferentIndex);
 
         // Different markAsDone flag -> returns false
-        assertFalse(modifier1.equals(modifierDifferentFlag));
+        assertNotEquals(modifier1, modifierDifferentFlag);
 
         // Null -> returns false
-        assertFalse(modifier1.equals(null));
-
-        // Different type -> returns false
-        assertFalse(modifier1.equals(1));
+        assertNotEquals(null, modifier1);
     }
 }
