@@ -295,9 +295,9 @@ Examples:
 
 - *Edits the 1st policy of the 3rd client to be `Health Insurance` which covers from `2024-10-19` to `2025-10-19`. The pay date changes to `2024-11-19`
   and premium amount changes to `200`*:
-  ```
-  edit 3 po/1 pon/Health Insurance pos/2024-10-19 poe/2025-10-19 paydate/2024-11-19 amt/200
-  ```
+  
+  `edit 3 po/1 pon/Health Insurance pos/2024-10-19 poe/2025-10-19 paydate/2024-11-19 amt/200`
+  
 ---
 
 ### Sorting clients : `sort`
@@ -534,9 +534,9 @@ Example:
     * Policy end date: 2023-12-12
     * Premium due date: 2023-11-01
     * Amount Due: $300.00
-    ```
-    assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00
-    ```
+    
+    `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
+    
   ![result for 'assign policy to first client'](images/assignpolicyUI.png)
 
 ---
