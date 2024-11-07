@@ -32,6 +32,7 @@ import seedu.address.logic.commands.contact.commands.FindRoleCommand;
 import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
+import seedu.address.logic.commands.event.commands.ClearEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
 import seedu.address.logic.commands.event.commands.EventAddAllCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
@@ -239,6 +240,13 @@ public class AddressBookParserTest {
         Command expected = new ClearExcludedCommand();
         assertEquals(expected, new AddressBookParser()
                 .parseSearchModeCommand(ClearExcludedCommand.COMMAND_WORD));
+    }
+
+    @Test
+    public void parseCommand_clearEventCommand() throws ParseException {
+        Command expected = new ClearEventCommand();
+        assertTrue(parser.parseCommand(ClearEventCommand.COMMAND_WORD) instanceof ClearEventCommand);
+        assertTrue(parser.parseCommand(ClearEventCommand.COMMAND_WORD + " 3") instanceof ClearEventCommand);
     }
 
 }
