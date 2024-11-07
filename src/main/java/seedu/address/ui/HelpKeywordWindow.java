@@ -363,6 +363,16 @@ public class HelpKeywordWindow extends UiPart<Stage> {
     }
 
     /**
+     * Closes all open HelpKeywordWindow instances.
+     */
+    public static void closeAllWindows() {
+        for (HelpKeywordWindow window : openHelpKeywordWindows.values()) {
+            window.getRoot().hide();
+        }
+        openHelpKeywordWindows.clear();
+    }
+
+    /**
      * Closes the help keyword window.
      */
     public void closeWindowKeyboardShortcut(String keyword) {
