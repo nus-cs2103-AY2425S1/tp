@@ -6,6 +6,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Teacher;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 
 /**
  * Container for user visible messages.
@@ -35,20 +38,67 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code Student} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Student student) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(student.getName())
+                .append("; Gender: ")
+                .append(student.getGender())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(student.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(student.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(student.getAddress())
+                .append("; Subject: ")
+                .append(student.getSubjects())
+                .append("; Classes: ")
+                .append(String.join(", ", student.getClasses()))
+                .append("; Days attended: ")
+                .append(student.getDaysAttended())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        student.getTags().forEach(builder::append);
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code Teacher} for display to the user.
+     */
+    public static String format(Teacher teacher) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(teacher.getName())
+                .append("; Gender: ")
+                .append(teacher.getGender())
+                .append("; Phone: ")
+                .append(teacher.getPhone())
+                .append("; Email: ")
+                .append(teacher.getEmail())
+                .append("; Address: ")
+                .append(teacher.getAddress())
+                .append("; Subject: ")
+                .append(teacher.getSubjects())
+                .append("; Classes: ")
+                .append(String.join(", ", teacher.getClasses()))
+                .append("; Tags: ");
+        teacher.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code Person} for display to the user.
+     *
+     * @param person The person to format.
+     * @return A formatted string representing the person.
+     * @throws InvalidPersonTypeException if the person is not a Student or Teacher.
+     */
+    public static String format(Person person) {
+        if (person instanceof Student) {
+            return format((Student) person);
+        } else if (person instanceof Teacher) {
+            return format((Teacher) person);
+        } else {
+            throw new InvalidPersonTypeException();
+        }
+    }
 }

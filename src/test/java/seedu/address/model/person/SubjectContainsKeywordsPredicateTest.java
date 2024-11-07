@@ -72,8 +72,8 @@ public class SubjectContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withSubject("English", "History").build()));
 
         // Keywords match name, phone, email, and address, but not subjects
-        predicate = new SubjectContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com", "Main"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+        predicate = new SubjectContainsKeywordsPredicate(Arrays.asList("Alice", "12345678", "alice@email.com", "Main"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
                 .withEmail("alice@email.com").withAddress("123 Main Street").withSubject("Physics").build()));
     }
 
