@@ -9,7 +9,27 @@ pageNav: 3
 HiredFiredPro is a **desktop app for managing interviews, optimized for use via a Command  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HiredFiredPro can get your interview management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
-<page-nav-print />
+* [About This Document](#about-this-document)
+  * [HiredFiredPro Layout](#hiredfiredpro-layout)
+  * [Command Format](#command-format)
+  * [Commonly Used Parameters](#commonly-used-parameters)
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [Viewing help: ](#viewing-help--help)`help`
+  * [Adding a candidate: ](#adding-a-candidate-add)`add`
+  * [Listing all candidates: ](#listing-all-candidates-list)`list`
+  * [Editing a candidate: ](#editing-a-candidate-edit)`edit`
+  * [Hiring a candidate: ](#hiring-a-candidate-hire)`hire`
+  * [Rejecting a candidate: ](#rejecting-a-candidate-reject)`reject`
+  * [View a candidate's status: ](#view-a-candidates-status-view)`view`
+  * [Locating candidates by name: ](#locating-candidates-by-name-find)`find`
+  * [Deleting a candidate: ](#deleting-a-candidate-delete)`delete`
+  * [Sorting candidates by interview score: ](#sorting-candidates-by-interview-scores-sort)`sort`
+  * [Clearing all candidates: ](#clearing-all-candidates-clear)`clear`
+  * [Exiting the program: ](#exiting-the-program-exit)`exit`
+* [FAQ](#faq)
+* [Known Issues](#known-issues)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +84,7 @@ Parameter     | Notes
 **`PHONE_NUMBER`**   | should only contain digits `0-9`, and it should be at least 3 digits long
 **`EMAIL`** | should be of the format `local-part@domain`
 **`SKILL`**   | should be alphanumeric
-**`INTERVIEW_SCORE`**   | should be a number ranging from 0.0 to 10.0 with a maximum of a single decimal place
+**`INTERVIEW_SCORE`**   | should be a number ranging from `0.0` to `10.0` with a maximum of a single decimal place, e.g. `5.5`, `8`, `10.0` are valid but `5.`, `6.55`, `11` are invalid
 **`TAG`**   | should be alphanumeric and should not contain any spaces
 **`INDEX`**   | refers to the index number shown in the displayed candidate list and **must be a positive integer**, i.e. 1, 2, 3, ...
 **`ORDER`**   | should be either `a` (ascending) or `d` (descending)
@@ -282,29 +302,27 @@ Exits the program.
 Format: `exit`
 <br><br>
 
-### Saving the data
-
-HiredFiredPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-<br><br>
-
-### Editing the data file
-
-HiredFiredPro data are saved automatically as a JSON file `[JAR file location]/data/hiredfiredpro.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<box type="warning">
-
-**Caution:**
-If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
+**Q**: How do I save the data?<br>
+**A**: HiredFiredPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<br><br>
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HiredFiredPro home folder.
+<br><br>
 
+**Q**: Can I edit the data file directly?<br>
+**A**: HiredFiredPro data are saved automatically as a JSON file `[JAR file location]/data/hiredfiredpro.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="warning">
+**Caution:**
+If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
+<br><br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
