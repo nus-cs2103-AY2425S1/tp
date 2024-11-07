@@ -16,6 +16,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -109,14 +110,26 @@ public class TagCommand extends Command {
             }
         }
 
-        Person editedPerson = new Person(
-                personToEdit.getName(),
-                personToEdit.getPhone(),
-                personToEdit.getEmail(),
-                personToEdit.getAddress(),
-                updatedTags,
-                personToEdit.getWeddings(),
-                personToEdit.getTasks());
+        Person editedPerson;
+        if (personToEdit instanceof Vendor) {
+            editedPerson = new Vendor(
+                    personToEdit.getName(),
+                    personToEdit.getPhone(),
+                    personToEdit.getEmail(),
+                    personToEdit.getAddress(),
+                    updatedTags,
+                    personToEdit.getWeddings(),
+                    personToEdit.getTasks());
+        } else {
+            editedPerson = new Person(
+                    personToEdit.getName(),
+                    personToEdit.getPhone(),
+                    personToEdit.getEmail(),
+                    personToEdit.getAddress(),
+                    updatedTags,
+                    personToEdit.getWeddings(),
+                    personToEdit.getTasks());
+        }
 
         model.setPerson(personToEdit, editedPerson);
 
