@@ -11,12 +11,11 @@ import seedu.address.logic.Messages;
  */
 public class Transaction {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            """
-            Amount should have at most 2 decimal places.
-            It should contain only digits (0-9) and one optional decimal point (.) with no other symbols.
-            There should be at least 1 digit before the decimal point.
-            """;
+    public static final String MESSAGE_CONSTRAINTS = "Amount should have at most 2 decimal places.\n"
+            + "It should contain only digits (0-9), one optional decimal point (.) and one optional minus sign (-) "
+            + "with no other symbols.\n"
+            + "There should be at least 1 digit before and 1 digit after the decimal point.";
+
     public static final String VALIDATION_REGEX = "^-?\\d+(,\\d{3})*(\\.\\d{1,2})?$";
     private final String description;
     private final double amount;
