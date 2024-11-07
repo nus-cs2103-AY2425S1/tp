@@ -6,7 +6,7 @@ import static bizbook.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static bizbook.testutil.TypicalIndexes.INDEX_OUTOFBOUND_PERSON;
 import static bizbook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static bizbook.testutil.TypicalPersons.getTypicalAddressBook;
+import static bizbook.testutil.TypicalPersons.getTypicalAddressBookWithPinned;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,7 +26,7 @@ import bizbook.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookWithPinned(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

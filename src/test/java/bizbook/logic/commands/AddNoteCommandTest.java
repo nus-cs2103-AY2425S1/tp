@@ -1,5 +1,6 @@
 package bizbook.logic.commands;
 
+import static bizbook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static bizbook.logic.commands.CommandTestUtil.VALID_NOTE_ALICE;
 import static bizbook.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static bizbook.logic.commands.CommandTestUtil.VALID_NOTE_HIGH_PROFILE_CLIENT;
@@ -9,7 +10,10 @@ import static bizbook.testutil.PersonBuilder.DEFAULT_EMAIL;
 import static bizbook.testutil.PersonBuilder.DEFAULT_NAME;
 import static bizbook.testutil.PersonBuilder.DEFAULT_PHONE;
 import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static bizbook.testutil.TypicalIndexes.INDEX_OUTOFBOUND_PERSON;
 import static bizbook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static bizbook.testutil.TypicalNotes.TYPICAL_NOTE;
+import static bizbook.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,6 +25,8 @@ import org.junit.jupiter.api.Test;
 import bizbook.commons.core.index.Index;
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.model.Model;
+import bizbook.model.ModelManager;
+import bizbook.model.UserPrefs;
 import bizbook.model.person.Note;
 import bizbook.model.person.Person;
 import bizbook.testutil.PersonBuilder;
@@ -29,11 +35,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class AddNotesCommandTest {
+public class AddNoteCommandTest {
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullFields_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddNotesCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddNoteCommand(null, null));
     }
 
     @Test
@@ -57,12 +65,12 @@ public class AddNotesCommandTest {
         Note validNote = new Note(VALID_NOTE_HIGH_PROFILE_CLIENT);
         Index validIndex = INDEX_FIRST_PERSON;
 
-        AddNotesCommand addNotesCommand = new AddNotesCommand(validIndex, validNote);
+        AddNoteCommand addNoteCommand = new AddNoteCommand(validIndex, validNote);
 
         // Execute the addNotesCommand
-        CommandResult commandResult = addNotesCommand.execute(modelMock);
+        CommandResult commandResult = addNoteCommand.execute(modelMock);
 
-        String expected = "Added notes to Person: " + DEFAULT_NAME + "; Phone: " + DEFAULT_PHONE + "; Email: "
+        String expected = "Added note to Person: " + DEFAULT_NAME + "; Phone: " + DEFAULT_PHONE + "; Email: "
                 + DEFAULT_EMAIL + "; Address: " + DEFAULT_ADDRESS + "; Tags: ; Notes: ["
                 + VALID_NOTE_HIGH_PROFILE_CLIENT + "]";
 
@@ -91,11 +99,20 @@ public class AddNotesCommandTest {
         Note validNote = new Note(VALID_NOTE_HIGH_PROFILE_CLIENT);
         Index validIndex = INDEX_FIRST_PERSON;
 
-        AddNotesCommand addNotesCommand = new AddNotesCommand(validIndex, validNote);
+        AddNoteCommand addNoteCommand = new AddNoteCommand(validIndex, validNote);
 
         // Assert that the expected error is thrown
-        assertThrows(CommandException.class, AddNotesCommand.DUPLICATE_MESSAGE_CONSTRAINTS, () ->
-                addNotesCommand.execute(modelMock));
+        assertThrows(CommandException.class, AddNoteCommand.DUPLICATE_MESSAGE_CONSTRAINTS, () ->
+                addNoteCommand.execute(modelMock));
+    }
+
+
+    @Test
+    public void execute_invalidPersonIndex_throwsCommandException() {
+        AddNoteCommand addNoteCommand = new AddNoteCommand(INDEX_OUTOFBOUND_PERSON,
+                TYPICAL_NOTE);
+        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+                addNoteCommand.execute(model));
     }
 
     @Test
@@ -105,14 +122,14 @@ public class AddNotesCommandTest {
         Index indexFirstPerson = INDEX_FIRST_PERSON;
         Index indexSecondPerson = INDEX_SECOND_PERSON;
 
-        AddNotesCommand addAliceNoteCommand = new AddNotesCommand(indexFirstPerson, noteAlice);
-        AddNotesCommand addBobNoteCommand = new AddNotesCommand(indexSecondPerson, noteBob);
+        AddNoteCommand addAliceNoteCommand = new AddNoteCommand(indexFirstPerson, noteAlice);
+        AddNoteCommand addBobNoteCommand = new AddNoteCommand(indexSecondPerson, noteBob);
 
         // same object -> returns true
         assertTrue(addAliceNoteCommand.equals(addAliceNoteCommand));
 
         // same values -> returns true
-        AddNotesCommand addAliceNoteCommandCopy = new AddNotesCommand(indexFirstPerson, noteAlice);
+        AddNoteCommand addAliceNoteCommandCopy = new AddNoteCommand(indexFirstPerson, noteAlice);
         assertTrue(addAliceNoteCommand.equals(addAliceNoteCommandCopy));
 
         // different types -> returns false

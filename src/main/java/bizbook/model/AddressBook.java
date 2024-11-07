@@ -88,6 +88,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+        if (isPinned(target)) {
+            pinnedPersons.setPerson(target, editedPerson);
+        }
     }
 
     /**

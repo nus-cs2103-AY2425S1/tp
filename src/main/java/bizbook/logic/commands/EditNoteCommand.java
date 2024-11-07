@@ -16,18 +16,18 @@ import bizbook.model.person.Person;
 /**
  * Edits a note of an existing person in the address book.
  */
-public class EditNotesCommand extends Command {
+public class EditNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "editnotes";
+    public static final String COMMAND_WORD = "editnote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edit the note of the person identified "
+            + ": Edits the note of the person identified "
             + "by the person index number used on the left display panel. "
             + "The note will replace the currently stored note at the specified index.\n"
-            + "Parameters: INDEX i/[NOTE_INDEX] n/[NOTES]\n"
+            + "Parameters: INDEX i/NOTE_INDEX n/NOTE\n"
             + "Example: " + COMMAND_WORD + " 1 i/1 n/High profile client.";
 
-    public static final String MESSAGE_EDIT_NOTES_SUCCESS = "Edit note of Person: %1$s";
+    public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edit note of Person: %1$s";
     public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
 
     private final Index personIndex;
@@ -35,11 +35,11 @@ public class EditNotesCommand extends Command {
     private final Note note;
 
     /**
-     * @param personIndex of the person in the filtered person list to edit the notes
-     * @param noteIndex   of the person in the filtered person list to edit the notes
+     * @param personIndex of the person in the filtered person list to edit the note
+     * @param noteIndex   of the person in the filtered person list to edit the note
      * @param note        of the person to be updated to
      */
-    public EditNotesCommand(Index personIndex, Index noteIndex, Note note) {
+    public EditNoteCommand(Index personIndex, Index noteIndex, Note note) {
         requireAllNonNull(personIndex, note, noteIndex);
 
         this.personIndex = personIndex;
@@ -81,11 +81,11 @@ public class EditNotesCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_EDIT_NOTES_SUCCESS, Messages.format(personToEdit));
+        return String.format(MESSAGE_EDIT_NOTE_SUCCESS, Messages.format(personToEdit));
     }
 
     /**
-     * Updates the notes of the given person with the given notes
+     * Updates the notes of the given person with the given note
      * {@code personToEdit, notesToEdit}.
      */
     private Person updateNote(Person personToEdit, ArrayList<Note> notesToEdit) {
@@ -94,9 +94,24 @@ public class EditNotesCommand extends Command {
         notesList.set(noteIndex.getZeroBased(), note);
         ArrayList<Note> editedNotes = new ArrayList<>(notesList);
 
-
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedNotes);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditNoteCommand otherEditNotesCommand)) {
+            return false;
+        }
+
+        return personIndex.equals(otherEditNotesCommand.personIndex)
+                && noteIndex.equals(otherEditNotesCommand.noteIndex)
+                && note.equals(otherEditNotesCommand.note);
     }
 
 }

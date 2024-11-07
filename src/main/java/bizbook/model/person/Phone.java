@@ -12,7 +12,7 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, be 8 digits long and start with 6, 8 or 9";
-    public static final String VALIDATION_REGEX = "^[689]\\d{7,}$";
+    public static final String VALIDATION_REGEX = "^[689]\\d{7}$";
     public final String value;
     /**
      * Constructs a {@code Phone}.
@@ -56,5 +56,4 @@ public class Phone {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

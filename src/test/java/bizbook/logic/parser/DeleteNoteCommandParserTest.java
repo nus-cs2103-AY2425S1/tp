@@ -1,15 +1,15 @@
 package bizbook.logic.parser;
 
-import static bizbook.logic.commands.DeleteNotesCommand.MESSAGE_USAGE;
+import static bizbook.logic.commands.DeleteNoteCommand.MESSAGE_USAGE;
 import static bizbook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static bizbook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import bizbook.commons.core.index.Index;
-import bizbook.logic.commands.DeleteNotesCommand;
+import bizbook.logic.commands.DeleteNoteCommand;
 
-public class DeleteNotesCommandParserTest {
+public class DeleteNoteCommandParserTest {
 
     private static final String DELETENOTE_INVALID_FORMAT = "Invalid command format! \n" + MESSAGE_USAGE;
 
@@ -20,7 +20,7 @@ public class DeleteNotesCommandParserTest {
 
         // Valid index and note index
         assertParseSuccess(parser, "1 i/1",
-                new DeleteNotesCommand(Index.fromOneBased(1), Index.fromOneBased(1)));
+                new DeleteNoteCommand(Index.fromOneBased(1), Index.fromOneBased(1)));
 
     }
 

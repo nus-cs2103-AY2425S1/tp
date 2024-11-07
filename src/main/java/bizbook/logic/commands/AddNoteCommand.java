@@ -17,20 +17,20 @@ import bizbook.model.person.Person;
 /**
  * Changes or adds the notes of an existing person in BizBook.
  */
-public class AddNotesCommand extends Command {
+public class AddNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "addnotes";
+    public static final String COMMAND_WORD = "addnote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add the note of the person identified "
+            + ": Adds the note of the person identified "
             + "by the person index number used on the left display panel. "
             + "New note(letters and numbers) will be appended to the notes currently stored.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "n/ [NOTES]\n"
+            + "n/NOTE\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "n/ High profile client.";
+            + "n/High profile client.";
 
-    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Person: %1$s";
+    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added note to Person: %1$s";
     public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
 
     private final Index index;
@@ -41,7 +41,7 @@ public class AddNotesCommand extends Command {
      * @param index of the person in the filtered person list to add a new note
      * @param note of the person to be added
      */
-    public AddNotesCommand(Index index, Note note) {
+    public AddNoteCommand(Index index, Note note) {
         requireAllNonNull(index, note);
 
         this.index = index;
@@ -85,7 +85,7 @@ public class AddNotesCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_ADD_NOTES_SUCCESS, Messages.format(personToEdit));
+        return String.format(MESSAGE_ADD_NOTE_SUCCESS, Messages.format(personToEdit));
     }
 
     @Override
@@ -95,12 +95,12 @@ public class AddNotesCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddNotesCommand)) {
+        if (!(other instanceof AddNoteCommand)) {
             return false;
         }
 
-        AddNotesCommand otherAddNotesCommand = (AddNotesCommand) other;
-        return note.equals(otherAddNotesCommand.note);
+        AddNoteCommand otherAddNoteCommand = (AddNoteCommand) other;
+        return note.equals(otherAddNoteCommand.note);
     }
 
 }

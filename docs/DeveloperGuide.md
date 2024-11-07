@@ -166,29 +166,33 @@ Classes used by multiple components are in the `bizbook.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally in an `addressBookOlderVersionList` for the undo history and `addressBookNewerVersionList` for the redo history. Additionally, it implements the following operations:
 
+- `VersionedAddressBook#canRedo()` — Checks if there is a version to redo to.
+- `VersionedAddressBook#canUndo()` — Checks if there is a version to undo to.
 - `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 - `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 - `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#canRedo()`, `Model#canUndo()`, `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` and `Model#redoAddressBookVersion()` respectively.
+
+The `addressBookOlderVersionList` will only hold up to 5 seperate unique versions of the address book, therefore BizBook will only remember up till 5 previously executed commands that in some way have modified the address book.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `addressBookOlderVersionList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state. While the `addressBookNewerVersionList` will be empty.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveAddressBookVersion()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookOlderVersionList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveAddressBookVersion()`, causing another modified address book state to be saved into the `addressBookOlderVersionList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -196,7 +200,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#revertAddressBookVersion()`, which remove the item at the `currentStatePointer` and add it into the `addressBookNewerVersionList`. In the process the `currentStatePointer` moves left, points to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -217,17 +221,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBookVersion()`, which removes the item at the `redoPointer` and adds it to the back of the `addressBookOlderVersionList`, it also shifts the `currentStatePointer` to the right as well as restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoPointer` is at index `addressBookNewerVersionList.size() - 1` or the list is empty, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` or `Model#redoAddressBookVersion()`. Thus, the `addressBookOlderVersionList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#saveAddressBookVersion()`. Since the `redoPointer` is pointing at an item in the `addressBookNewerVersionList`, all address book states in `addressBookNewerVersionList` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -235,27 +239,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-- **Alternative 1 (current choice):** Saves the entire address book.
-
-  - Pros: Easy to implement.
-  - Cons: May have performance issues in terms of memory usage.
-
-- **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  - Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
----
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -289,7 +272,7 @@ particular, this representative works with B2B sales.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| -------- |------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
@@ -300,6 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user             | search through my contacts                                                  | find a specific person                                                 |
 | `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
 | `* *`    | user             | edit contact                                                                | update contact with new information                                    |
+| `* *`    | user             | delete a tag from a person                                                  | remove tags that are invalid or are not applicable to the person       |
 | `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                         |
 | `* *`    | user             | pin a specific contact                                                      | view them on a separate list                                           |
 | `* *`    | user             | unpin a specific contact                                                    | clear the pin that is no longer needed                                 |
@@ -307,6 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                                |
 | `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident                |
 | `* *`    | user             | undo a command                                                              | fix a mistake I made                                                   |
+| `* *`    | user             | redo a command                                                              | revert back the changes I undid                                        |
 | `* *`    | new user         | import all contact details into the app                                     | start using without manual setup                                       |
 | `* *`    | sales rep        | keep track of clients I have contacted by seeing when I last contacted them | avoid wasting time calling them again about the same product           |
 | `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                                |
@@ -323,6 +308,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
 | `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
+| `*`      | user             | use my previous command quickly                                             | avoid retyping a command                                               |
+| `*`      | user             | toggle my application between light and dark mode                           | see the application in my preferred theme                              |
 
 ### Use cases
 
@@ -384,7 +371,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC4 - View person contact**
+**Use case: UC4 - Delete a person**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to delete a specific tag from a person.
+3.  System remove the tag from the person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+  - 2a1. System shows an error message.
+
+    Use case ends.
+
+- 2b. The specified tag does not exist.
+
+  - 2b1. System shows an error message.
+
+    Use case ends.
+
+**Use case: UC5 - View person contact**
 
 **MSS**
 
@@ -401,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC5 - Find people**
+**Use case: UC6 - Find people**
 
 **MSS**
 
@@ -416,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC6 - Add note to a person contact**
+**Use case: UC7 - Add note to a person contact**
 
 **MSS**
 
@@ -539,7 +550,28 @@ _Similar to UC10 except without extension 2b._
 
       Use case ends.
 
-**Use case: UC13 - Export contact list**
+**Use case: UC13 - Redo a command**
+
+**MSS**
+
+1.  Actor performs a command that updates the addressbook.
+2.  System executes the command.
+3.  Actor requests to undo the recently executed command.
+4.  System reverts changes made by the actor.
+5.  Actor requests to redo the recently executed undo command.
+6.  System reverts changes made by the actor.
+
+    Use case ends.
+
+**Extensions**
+
+- 5a. There is no version to revert to.
+
+    - 5a1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC14 - Export contact list**
 
 **MSS**
 
@@ -562,12 +594,46 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
+**Use case: UC15 - Toggle application's theme** 
+
+**MSS**
+
+1.  Actor toggle the system's theme.
+2.  System changes theme.
+
+    Use case ends.
+
+**Use case: UC16 - Command History**
+
+**MSS**
+
+1. Actor inputs a command into the System.
+2. System processes the command and confirms its success.
+3. Actor presses the "Up" arrow key to retrieve and re-populate the previous command in the input field.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. Command fails.
+
+    - 2a1. System displays an error message indicating the failure reason.
+
+      Use case resumes from step 1.
+  
+- 3a. Multiple previous commands available.
+
+    - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
+    - 3a2. System displays each previous command in sequence.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The system should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  The system should be developed in a modular way for easier updates and bug fixes.
-4.  The system should ensure data consistency accross all instances.
+4.  The system should ensure data consistency across all instances.
 5.  The system should continue functioning in the event of a missing or corrupted save file.
 6.  The system should encrypt sensitive data to follow data protection laws.
 7.  The interface should be intuitive and easy to use.

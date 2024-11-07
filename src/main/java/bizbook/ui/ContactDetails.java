@@ -8,7 +8,7 @@ import bizbook.model.person.Person;
 import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -21,7 +21,7 @@ public class ContactDetails extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ContactDetails.class);
 
     @FXML
-    private HBox contactDetailsPanel;
+    private ScrollPane contactDetailsPanel;
 
     @FXML
     private Label name;
@@ -49,13 +49,6 @@ public class ContactDetails extends UiPart<Region> {
         person.addListener((observable, oldValue, newValue) -> displayPerson(newValue));
     }
 
-    private void addNote(String note) {
-        Label label = new Label("• " + note);
-        // TODO: use classes instead
-        label.setId("notes-label");
-        notesList.getChildren().add(label);
-    }
-
     /**
      * Sets the person object as the contact to be displayed on the panel.
      *
@@ -64,7 +57,7 @@ public class ContactDetails extends UiPart<Region> {
     private void displayPerson(Person person) {
         clearPanel();
 
-        if (person.equals(null)) {
+        if (person == null || person.equals(null)) {
             return;
         }
 

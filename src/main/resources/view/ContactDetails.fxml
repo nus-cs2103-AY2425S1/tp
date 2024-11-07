@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
 
-<HBox fx:id="contactDetailsPanel" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
+<ScrollPane
+  fx:id="contactDetailsPanel"
+  xmlns="http://javafx.com/javafx/17"
+  xmlns:fx="http://javafx.com/fxml/1"
+  hbarPolicy="NEVER"
+  styleClass="pane"
+  fitToWidth="true"
+>
+  <VBox fx:id="contactDetailsBox" spacing="15">
     <padding>
-      <Insets left="10" />
+      <Insets top="10" right="10" bottom="10" left="10" />
     </padding>
-    <VBox fx:id="contactDetailsBox" spacing="15">
-      <Label fx:id="name" styleClass="label-header" />
-      <Label fx:id="phoneNo" styleClass="label-bright" />
-      <Label fx:id="email" styleClass="label-bright" />
-      <Label fx:id="address" styleClass="label-bright" />
-      <Label fx:id="notes" styleClass="label-bright" />
-      <VBox fx:id="notesList" />
-    </VBox>
-  </GridPane>
-</HBox>
+    <Label fx:id="name" styleClass="label-header" wrapText="true" />
+    <Label fx:id="phoneNo" styleClass="label-bright" wrapText="true" />
+    <Label fx:id="email" styleClass="label-bright" wrapText="true" />
+    <Label fx:id="address" styleClass="label-bright" wrapText="true" />
+    <Label fx:id="notes" styleClass="label-bright" wrapText="true" />
+    <VBox fx:id="notesList" />
+  </VBox>
+</ScrollPane>

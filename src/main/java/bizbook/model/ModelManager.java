@@ -143,6 +143,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean canRedo() {
+        return addressBook.canRedo();
+    }
+
+    @Override
     public boolean canUndo() {
         return addressBook.canUndo();
     }
@@ -155,6 +160,11 @@ public class ModelManager implements Model {
     @Override
     public void revertAddressBookVersion() {
         addressBook.undo();
+    }
+
+    @Override
+    public void redoAddressBookVersion() {
+        addressBook.redo();
     }
 
     @Override
