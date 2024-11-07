@@ -221,6 +221,28 @@ Example:
 * `logs i/S3054081F` <br>
   ![result for 'logs i/S3054081F'](images/logsAlexResult.png)
 
+### Adding a log: `addlog`
+Creates a new log entry for a specific patient. This command is typically used to keep track of sessions or important notes related to each session.
+**Format**: `addlog i/IDENTITY_NUMBER d/DATE l/LOG_ENTRY`
+* **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
+* **DATE** should be in the format `DD-MMM-YYYY`.
+* **LOG_ENTRY** is a description of the session with the patient.
+  Examples:
+* `addlog i/S1234567D d/20 May 2024 s/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
+---
+### Adding a log entry: `addentry`
+Allows users to use a separate window to add new log entry for a person. When prompted with a new window, users can input the details of the log entry.
+
+After entering the details, users can click the `Save` button to add the log entry to the person's log list, 'Cancel' to discard the log entry.
+Alternatively users can use "Ctrl + Enter" to save the log entry on windows and "Cmd + Enter" on Mac.
+**Format**: `addentry i/IDENTITY_NUMBER d/DATE`
+* **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
+* **DATE** should be in the format `DD-MMM-YYYY`.
+  Examples:
+* `addentry i/S1234567D d/20 May 2024` opens a new window to add a log entry for the contact with NRIC `S1234567D` on the date `20 May 2024`.
+* Example: ![img.png](img.png)
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -280,19 +302,21 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+| **Action**    | **Description**                       | **Format**                                                                | **Example**                                                                          |
+|---------------|---------------------------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **Add**       | Adds a person to the address book     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                  | `add n/James Ho p/999999999 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/LOW` |
+| **Clear**     | Clears all entries                    | `clear`                                                                   |                                                                                      |
+| **Delete**    | Deletes a person                      | `delete INDEX`                                                            | `delete 3`                                                                           |
+| **Edit**      | Edits an existing person              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                    |
+| **Find**      | Finds persons by keywords             | `find KEYWORD [MORE_KEYWORDS]`                                            | `find James Jake`                                                                    |
+| **Confirm**   | Confirms a deletion or clear action   | `confirm`                                                                 |                                                                                      |
+| **Cancel**    | Cancels a delete or clear action      | `cancel`                                                                  |                                                                                      |
+| **List**      | Lists all persons in the address book | `list`                                                                    |                                                                                      |
+| **List Logs** | Lists logs for a specific person      | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                   |
+| **Add Log**   | Adds a log for a person               | `addlog i/NRIC d/DATE l/LOG_ENTRY`                                        | `addlog i/S8613282F d/01 Nov 2024 l/Checked in at clinic`                            |
+| **Add Entry** | Adds a log entry via a second window  | `addentry i/NRIC d/DATE`                                                  | `addentry i/S0000001i d/01 Nov 2024`                                                 |
+| **Help**      | Displays help message                 | `help`                                                                    |                                                                                      |
 
-| **Action**       | **Description**                       | **Format**                                                                | **Example**                                                                         |
-|------------------|---------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| **Add**          | Adds a person to the address book     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                  | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/LOW` |
-| **Clear**        | Clears all entries                    | `clear`                                                                   |                                                                                     |
-| **Delete**       | Deletes a person                      | `delete INDEX`                                                            | `delete 3`                                                                          |
-| **Edit**         | Edits an existing person              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                   |
-| **Find**         | Finds persons by keywords             | `find KEYWORD [MORE_KEYWORDS]`                                            | `find James Jake`                                                                   |
-| **Confirm**      | Confirms a deletion or clear action   | `confirm`                                                                 |                                                                                     |
-| **Cancel**       | Cancels a delete or clear action      | `cancel`                                                                  |                                                                                     |
-| **List**         | Lists all persons in the address book | `list`                                                                    |                                                                                     |
-| **List Logs**    | Lists logs for a specific person      | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                  |
-| **Help**         | Displays help message                 | `help`                                                                    |                                                                                     |
 
  #### Additional Notes
 
