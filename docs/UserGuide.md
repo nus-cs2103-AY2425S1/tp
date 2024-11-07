@@ -242,7 +242,24 @@ Examples:
 
 ### Assigning an event: `assign_event`
 
-To be completed by Nicholas
+Assigns a specified event to a specified person stored in ClubConnect's contact list.
+
+Format: `assign_event p/PERSON_INDEX ev/EVENT_INDEX` / `assign_event p/PERSON_NAME ev/EVENT_INDEX` / `assign_event p/PERSON_INDEX ev/EVENT_NAME` / `assign_event p/PERSON_NAME ev/EVENT_NAME`
+
+* Assigns the event specified by `EVENT_INDEX` or `EVENT_NAME` to the person specified by `PERSON_INDEX` or `PERSON_NAME`.
+* `EVENT_INDEX` refers to the index number shown in the displayed event list.
+* `EVENT_INDEX` **must be a positive integer** 1, 2, 3, …​
+* `PERSON_INDEX` refers to the index number shown in the displayed contact list.
+* `PERSON_INDEX` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_NAME` refers to the name of the event (case-insensitive).
+* `PERSON_NAME` refers to the name of the person (case-insensitive).
+
+Examples:
+* `assign_event p/1 ev/2` will assign the 2nd event in ClubConnect's event list to the 1st person in ClubConnect's contact list.
+* `assign_event p/Alice ev/2` will assign the 2nd event in ClubConnect's event list to a person named `Alice` (case-insensitive) in ClubConnect's contact list.
+* `assign_event p/1 ev/Meeting` will assign an event named `Meeting` (case-insensitive) in ClubConnect's event list to the 1st person in ClubConnect's contact list.
+* `assign_event p/Alice ev/Meeting` will assign an event named `Meeting` (case-insensitive) in ClubConnect's event list to a person named `Alice` (case-insensitive) in ClubConnect's contact list.
+
 
 ### Unassigning an event: `unassign_event`
 
@@ -326,7 +343,7 @@ Action             | Format, Examples
 **Add Event**      | `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE` <br> e.g., `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10` 
 **List Events**    | `list_events`
 **Delete Event**   | `delete_event INDEX` or `delete_event EVENT_NAME`<br> e.g., `delete_event 1` or `delete_event meeting`
-**Assign Event**   | To be completed by Nicholas
+**Assign Event**   | `assign_event p/PERSON_INDEX ev/EVENT_INDEX` or `assign_event p/PERSON_NAME ev/EVENT_INDEX` or `assign_event p/PERSON_INDEX ev/EVENT_NAME` or `assign_event p/PERSON_NAME ev/EVENT_NAME` <br> e.g., `assign_event p/1 ev/2` or `assign_event p/Alice ev/2` or `assign_event p/1 ev/Meeting` or `assign_event p/Alice ev/Meeting`
 **Unassign Event** | `unassign_event p/PERSON_INDEX ev/EVENT_INDEX` or `unassign_event p/PERSON_NAME ev/EVENT_INDEX` or `unassign_event p/PERSON_INDEX ev/EVENT_NAME` or `unassign_event p/PERSON_NAME ev/EVENT_NAME` <br> e.g., `unassign_event p/1 ev/2` or `unassign_event p/Alice ev/2` or `unassign_event p/1 ev/Meeting` or `unassign_event p/Alice ev/Meeting`
 **Help**           | `help`
 **Export**         | `export`
