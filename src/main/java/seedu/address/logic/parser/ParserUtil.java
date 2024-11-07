@@ -3,9 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -16,7 +14,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressFactory;
-import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -121,38 +118,6 @@ public class ParserUtil {
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
-    }
-
-    /**
-     * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}.
-     */
-    public static PublicAddressesComposition parsePublicAddresses(Collection<String> publicAddresses)
-            throws ParseException {
-        requireNonNull(publicAddresses);
-        Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
-        for (String publicAddress : publicAddresses) {
-
-            // TODO: Implement tokenizer in a separate file
-            String delimiter = ">";
-            String trimmedPublicAddress = publicAddress.trim();
-            String[] addressArgs = trimmedPublicAddress.split(delimiter);
-
-            if (addressArgs.length != 2) {
-                throw new ParseException("Missing arguments for public address");
-            }
-
-            String network = addressArgs[0];
-            String address = addressArgs[1];
-
-            Network parsedNetwork = parseNetwork(network);
-            PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_LABEL, network);
-
-            if (!publicAddressesMap.containsKey(parsedNetwork)) {
-                publicAddressesMap.put(parsedNetwork, new HashSet<>());
-            }
-            publicAddressesMap.get(parsedNetwork).add(parsedPublicAddress);
-        }
-        return new PublicAddressesComposition(publicAddressesMap);
     }
 
     /**

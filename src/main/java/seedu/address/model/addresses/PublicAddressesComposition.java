@@ -320,18 +320,7 @@ public class PublicAddressesComposition {
         return publicAddresses.values().stream().mapToInt(Set::size).sum();
     }
 
-    /**
-     * Returns a string representation of the PublicAddressesComposition with indents and newlines for easy reading.
-     *
-     * @return A string representation of the PublicAddressesComposition.
-     */
-    public String toStringIndented() {
-        return publicAddresses.entrySet().stream().map(entry -> entry.getKey() + "\n" + INDENT
-                + INDENT + entry.getValue().stream().map(publicAddress -> publicAddress.getLabel() + ": "
-                    + publicAddress.getPublicAddressString())
-                .reduce((a, b) -> a + "\n" + b).orElse(""))
-            .reduce((a, b) -> a + "\n" + b).orElse("");
-    }
+  
 
     /**
      * Combines this PublicAddressesComposition with another.
@@ -427,6 +416,30 @@ public class PublicAddressesComposition {
 
     public boolean isEmpty() {
         return publicAddresses.isEmpty();
+    }
+
+
+    /**
+     * Returns a string representation of the public addresses with indentation.
+     *
+     * @return A string representation of the public addresses.
+     */
+    public String toStringIndented() {
+        StringBuilder sb = new StringBuilder();
+        publicAddresses.forEach((network, addresses) -> {
+            sb.append(INDENT)
+                    .append(network)
+                    .append(":\n");
+            addresses.forEach(address -> {
+                sb.append(INDENT + INDENT)
+                        .append(address.getLabel())
+                        .append(":\n")
+                        .append(INDENT + INDENT + INDENT)
+                        .append(address.getPublicAddressString())
+                        .append("\n");
+            });
+        });
+        return sb.toString();
     }
 
 
