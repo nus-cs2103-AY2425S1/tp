@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.tag;
+package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,9 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.TaggingCommandParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
