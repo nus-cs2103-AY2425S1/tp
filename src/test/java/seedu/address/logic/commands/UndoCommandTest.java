@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.executeDataModifyingCommand;
+import static seedu.address.logic.commands.CommandTestUtil.executeNonDataModifyingCommand;
 import static seedu.address.model.VersionedAddressBook.MESSAGE_NO_MORE_HISTORY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -39,8 +41,7 @@ public class UndoCommandTest {
         String expectedMessage = UndoCommand.MESSAGE_SUCCESS;
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
-        addCommand.execute(model);
-        model.commitAddressBook();
+        executeDataModifyingCommand(addCommand, model);
         assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
     }
 
@@ -50,8 +51,7 @@ public class UndoCommandTest {
         EditPersonDescriptor editDescriptor = new EditPersonDescriptorBuilder().build();
         EditCommand editCommand = new EditCommand(Index.fromOneBased(1),
             editDescriptor);
-        editCommand.execute(model);
-        model.commitAddressBook();
+        executeDataModifyingCommand(editCommand, model);
         assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
     }
 
@@ -59,8 +59,7 @@ public class UndoCommandTest {
     public void execute_oneDeleteCommandHistory_success() throws Exception {
         String expectedMessage = UndoCommand.MESSAGE_SUCCESS;
         DeleteCommand deleteCommand = new DeleteCommand(new Index[]{Index.fromOneBased(1)});
-        deleteCommand.execute(model);
-        model.commitAddressBook();
+        executeDataModifyingCommand(deleteCommand, model);
         assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
     }
 
@@ -68,8 +67,7 @@ public class UndoCommandTest {
     public void execute_oneClearCommandHistory_success() throws Exception {
         String expectedMessage = UndoCommand.MESSAGE_SUCCESS;
         ClearCommand clearCommand = new ClearCommand();
-        clearCommand.execute(model);
-        model.commitAddressBook();
+        executeDataModifyingCommand(clearCommand, model);
         assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
     }
 
@@ -77,7 +75,7 @@ public class UndoCommandTest {
     public void execute_oneListCommandHistory_success() throws Exception {
         String expectedMessage = MESSAGE_NO_MORE_HISTORY;
         ListCommand listCommand = new ListCommand();
-        listCommand.execute(model);
+        executeNonDataModifyingCommand(listCommand, model);
         assertCommandFailure(new UndoCommand(), model, expectedMessage);
     }
 
@@ -88,13 +86,11 @@ public class UndoCommandTest {
 
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
-        addCommand.execute(model);
-        model.commitAddressBook();
+        executeDataModifyingCommand(addCommand, model);
         Model intermediateModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         DeleteCommand deleteCommand = new DeleteCommand(new Index[]{Index.fromOneBased(1)});
-        deleteCommand.execute(model);
-        model.commitAddressBook();
+        executeDataModifyingCommand(deleteCommand, model);
 
         // One undo should revert the model back to the intermediate model
         assertCommandSuccess(new UndoCommand(), model, expectedMessage, intermediateModel);
