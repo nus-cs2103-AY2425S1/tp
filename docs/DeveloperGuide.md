@@ -276,8 +276,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | veterinarian | filter for clients with overdue vaccinations     | prioritize these clients for follow-up actions         |
 | `*`      | veterinarian | view and track payments and outstanding balances | manage clinic revenue and follow up on unpaid invoices |
 
-_{More to be added}_
-
 ### Use cases
 
 (For all use cases below, the **System** is the `PawPatrol` and the **Actor** is the `user`, unless specified otherwise)
@@ -390,8 +388,6 @@ _{More to be added}_
 
     Use case resumes at step 1.
 
-_{More to be added}_
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -441,30 +437,147 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding an owner
 
-### Deleting a person
+1. Adding a new owner
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-      Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Test case: `owner i/S0000001I n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+   2. Expected: A new owner is added to the list. The owner’s details are shown in the list.
+   3. Test case: `owner i/S0000001I n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+   4. Expected: No new owner is added. Error details shown in the status message.
+   5. Other incorrect add commands to try: `owner`, `owner x`, `...`<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a pet
 
-### Saving data
+1. Adding a new pet
 
-1. Dealing with missing/corrupted data files
+   1. Test case: `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
+   2. Expected: A new pet is added to the list. The pet’s details are shown in the list.
+   3. Test case: `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
+   4. Expected: No new pet is added. Error details shown in the status message. Status bar remains the same.
+   5. Other incorrect add commands to try: `pet`, `pet x`, `...`<br>
+      Expected: Similar to previous.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Linking
 
-1. _{ more test cases …​ }_
+1. Link owners and pets
+   1. Pre-requisite: Add owners and pets using the `owner` and `pet` commands.
+   2. Test case: `link o1 t/p1 t/p2`
+   3. Expected: Owners and pets are linked. The link details are shown in the status message.
+   4. Test case: `link o1 t/p1 t/p2`
+   5. Expected: No new links are added. Error details shown in the status message. Status bar remains the same.
+   6. Other incorrect link commands to try: `link`, `link x`, `...`<br>
+      Expected: Similar to previous.
+   7. Test case: `link o2 t/p1`
+   8. Expected: Error details shown in the status message due to missing owner.
+
+### Unlinking
+
+1. Unlinking owners and pets
+   1. Pre-requisite: Link owners and pets using the `link` command.
+   2. Test case: `unlink o1 t/p1`
+   3. Expected: Owners and pets are unlinked. The unlink details are shown in the status message.
+   4. Test case: `unlink o1 t/p1`
+   5. Expected: No links are removed. Error details shown in the status message. Status bar remains the same.
+   6. Other incorrect unlink commands to try: `unlink`, `unlink x`, `...`<br>
+      Expected: Similar to previous.
+
+### Listing
+
+1. Listing data
+
+   1. Test case: `list`<br>
+      Expected: All owners and pets are shown in the list.
+   2. Test case: `list owners`<br>
+      Expected: All owners are shown in the list. Pets are not shown.
+   3. Test case: `list pets`<br>
+      Expected: All pets are shown in the list. Owners are not shown.
+   4. Test case: `list x`<br>
+      Expected: Error details shown in the status message. Status bar remains the same.
+
+### Editing
+
+1. Editing owner details
+
+   1. Pre-requisite: Add owners using the `owner` command.
+   2. Test case: `edit o1 n/John Doe p/98765432
+   3. Expected: Owner details are updated. Updated owner details are shown in the list.
+   4. Test case: `edit o0 n/John Doe p/98765432
+   5. Expected: No owner is updated. Error details shown in the status message.
+   6. Other incorrect edit commands to try: `edit`, `edit x`, `...`<br>
+      Expected: Similar to previous.
+
+2. Editing pet details
+
+   1. Pre-requisite: Add pets using the `pet` command.
+   2. Test case: `edit p1 n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
+   3. Expected: Pet details are updated. Updated pet details are shown in the list.
+   4. Test case: `edit p0 n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
+   5. Expected: No pet is updated. Error details shown in the status message.
+   6. Other incorrect edit commands to try: `edit`, `edit x`, `...`<br>
+      Expected: Similar to previous.
+
+### Finding
+
+1. Finding owners
+   1. Test case: `find owner John`<br>
+      Expected: All persons with the name John are shown in the list.
+
+2. Finding pets
+   1. Test case: `find pet Fluffy`<br>
+      Expected: All pets with the name Fluffy are shown in the list.
+
+### Deleting an entity
+
+1. Deleting an owner while all owners are being shown
+
+   1. Prerequisites: List all owners using the `list owner` command. Multiple owners in the list.
+
+   1. Test case: `delete o1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+   1. Test case: `delete o0`<br>
+      Expected: No owner is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete`, `delete ox`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. Deleting a pet while all pets are being shown
+
+   1. Prerequisites: List all pets using the `list pet` command. Multiple pets in the list.
+
+   1. Test case: `delete p1`<br>
+      Expected: First pet is deleted from the list. Details of the deleted pet shown in the status message.
+
+   1. Test case: `delete p0`<br>
+      Expected: No pet is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete`, `delete px`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Sorting
+
+1. Sorting owners
+
+   1. Test case: `sort owner`<br>
+      Expected: All owners are shown in the list, sorted by name.
+
+2. Sorting pets
+
+    1. Test case: `sort pet`<br>
+        Expected: All pets are shown in the list, sorted by name.
+
+### Clearing data
+
+1. Clearing all entity
+
+   1. Test case: `clear`<br>
+      Expected: All entity are removed from the list.
+
+### Exiting the app
+
+1. Exiting the app
+
+   1. Test case: `exit`<br>
+      Expected: The app closes.

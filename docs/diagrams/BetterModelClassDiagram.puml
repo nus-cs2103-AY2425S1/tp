@@ -4,18 +4,19 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-PawPatrol *-right-> "1" UniqueOwnerList
+PawPatrol *-right-> "1" UniquePetList
 PawPatrol *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniqueOwnerList
-UniqueTagList -[hidden]down- UniqueOwnerList
+UniqueTagList -[hidden]down- UniquePetList
+UniqueTagList -[hidden]down- UniquePetList
 
 UniqueTagList -right-> "*" Tag
-UniqueOwnerList -right-> Owner
+UniquePetList -right-> Pet
 
-Owner -up-> "*" Tag
+Pet -up-> "*" Tag
 
-Owner *--> Name
-Owner *--> Phone
-Owner *--> Email
-Owner *--> Address
+Pet *--> Name
+Pet *--> Species
+Pet *--> Breed
+Pet *--> Age
+Pet *--> Sex
 @enduml
