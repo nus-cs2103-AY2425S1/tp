@@ -16,7 +16,7 @@ import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private static Logger logger = LogsCenter.getLogger(FindCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(FindCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

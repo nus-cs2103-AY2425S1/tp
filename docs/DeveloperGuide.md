@@ -240,6 +240,43 @@ Step 4. The changes are committed to the address book using `AddressBook#setComp
   * Pros: Cleaner separation of concerns, potentially more scalable.
   * Cons: Increased complexity in ensuring consistency between companies and applications.
 
+---
+
+### Find feature
+
+#### Implementation
+
+The `find` command is responsible for filtering companies based on specific keywords, to be typed in after the `find` keyword. The name, application and tags of every company will be searched through and the company will be displayed in a list if the keyword is present.
+
+The following methods and operations are involved:
+
+* `FindCommand#execute(Model model)` - Displays companies filtered by specific search terms.
+* `NameContainsKeywordsPredicate#test(Company company)` - Checks the company's name, application name, application details and tags for a match against the stream of keywords.
+
+##### Example usage scenario:
+
+Step 1. The user inputs several search keywords after the `find` keyword.
+
+Step 2. The model applies the predicate to the list of companies, to create a list of filtered companies.
+
+Step 3. The GUI displays the list of companies filtered by the given search terms.
+
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: How to find applications based on keywords:**
+
+* **Alternative 1 (current choice):** Expand on initial feature that filters companies by name.
+    * Pros: Simple to expand upon, and one iteration of company list is sufficient.
+    * Cons: Searching logic may increase in complexity.
+
+* **Alternative 2:** Create new predicates for each field to be searched through.
+    * Pros: Improves separation of concerns between different fields to be searched through.
+    * Cons: Multiple iterations of company list will be required, which can increase time complexity with a large list.
+
+---
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -366,31 +403,30 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                          | I want to …​                                                | So that I can…​                                                       |
-|----------|--------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | new user                                         | see usage instructions                                      | refer to instructions when I forget how to use the App                |
-| `* * *`  | user that types fast                             | utilize an easy to use CLI interface                        | be more efficient while using the app                                 |
-| `*`      | user who prefers less screen clutter             | toggle list view to be less detailed / more general         |                                                                       |
-| `* *`    | user                                             | export my data out of InternBuddy                           | have a data backup and/or share company information with fellow peers |
-| `* * *`  | STEM major planning to apply for internships     | find a specific company by name                             | retrieve info without having to go through the entire list            |
-| `* *`    | STEM major planning to apply for internships     | add additional info about the company                       |                                                                       |
-| `* *`    | STEM major planning to apply for internships     | update the information for a specific company               | ensure my information is up-to-date                                   |
-| `*`      | STEM major planning to apply for internships     | add referral contacts to companies                          | remember to include them when applying                                |
-| `*`      | STEM major planning to apply for internships     | sort companies by hiring status                             | better prioritize certain companies                                   |
-| `*`      | STEM major planning to apply for internships     | sort companies by location distance                         | better prioritize certain companies                                   |
-| `*`      | STEM major planning to apply for internships     | sort companies by remote work availability                  | better prioritize certain companies                                   |
-| `*`      | STEM major planning to apply for internships     | sort companies by working hour flexibility                  | better prioritize certain companies                                   |
-| `*`      | STEM major planning to apply for internships     | sort companies by internship role                           | better prioritize certain companies                                   |
-| `* * *`  | STEM major currently applying for internships    | update internship application status for a specific company | maintain an updated list of the companies I'm applying for            |
-| `* *`    | STEM major currently applying for internships    | sort companies applications by status                       | focus on companies that need immediate attention                      |
-| `*`      | STEM major currently applying for internships    | add notes for upcoming / completed interviews               | find a specific piece of info for that interview in the future        |
-| `*`      | STEM major currently applying for internships    | organize interview timings                                  | ensure that they do not overlap                                       |
-| `* * *`  | STEM major planning to apply for internships     | remove companies which are no longer relevant to me         | reduce clutter in my list of potential companies                      |
+| Priority | As a …​                                                   | I want to …​                                                | So that I can…​                                                       |
+|----------|-----------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | new user                                                  | see usage instructions                                      | refer to instructions when I forget how to use the App                |
+| `* * *`  | user that types fast                                      | utilize an easy to use CLI interface                        | be more efficient while using the app                                 |
+| `*`      | user who prefers less screen clutter                      | toggle list view to be less detailed / more general         |                                                                       |
+| `* *`    | user                                                      | export my data out of InternBuddy                           | have a data backup and/or share company information with fellow peers |
+| `* * *`  | STEM major planning to apply for internships              | find a specific company by name                             | retrieve info without having to go through the entire list            |
+| `* *`    | STEM major planning to apply for internships                | add additional info about the company                       |                                                                       |
+| `* *`    | STEM major planning to apply for internships                | update the information for a specific company               | ensure my information is up-to-date                                   |
+| `*`      | STEM major planning to apply for internships                | add referral contacts to companies                          | remember to include them when applying                                |
+| `*`      | STEM major planning to apply for internships                | sort companies by hiring status                             | better prioritize certain companies                                   |
+| `*`      | STEM major planning to apply for internships                | sort companies by location distance                         | better prioritize certain companies                                   |
+| `*`      | STEM major planning to apply for internships                | sort companies by remote work availability                  | better prioritize certain companies                                   |
+| `*`      | STEM major planning to apply for internships                | sort companies by working hour flexibility                  | better prioritize certain companies                                   |
+| `*`      | STEM major planning to apply for internships                | sort companies by internship role                           | better prioritize certain companies                                   |
+| `* * *`  | STEM major currently applying for internships               | update internship application status for a specific company | maintain an updated list of the companies I'm applying for            |
+| `* *`    | STEM major currently applying for internships               | sort companies applications by status                       | focus on companies that need immediate attention                      |
+| `*`      | STEM major currently applying for internships               | add notes for upcoming / completed interviews               | find a specific piece of info for that interview in the future        |
+| `*`      | STEM major currently applying for internships               | organize interview timings                                  | ensure that they do not overlap                                       |
+| `* * *`  | STEM major planning to apply or is applying for internships | remove companies which are no longer relevant to me         | reduce clutter in my list of potential companies                      |
 
 *{More to be added}*
 

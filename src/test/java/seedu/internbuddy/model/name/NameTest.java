@@ -45,6 +45,9 @@ public class NameTest {
         // same values -> returns true
         assertTrue(name.equals(new Name("Valid Name")));
 
+        // same values, different casing -> returns true
+        assertTrue(name.equals(new Name("VALID NaME")));
+
         // same object -> returns true
         assertTrue(name.equals(name));
 

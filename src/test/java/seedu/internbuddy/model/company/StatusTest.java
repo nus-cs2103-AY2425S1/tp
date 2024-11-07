@@ -10,7 +10,8 @@ public class StatusTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Status(null));
+        assertThrows(NullPointerException.class, () -> new Status((StatusType) null));
+        assertThrows(NullPointerException.class, () -> new Status((String) null));
     }
 
     @Test
@@ -39,9 +40,9 @@ public class StatusTest {
 
     @Test
     public void equals() {
-        Status status1 = new Status("INTERESTED");
-        Status status2 = new Status("INTERESTED");
-        Status status3 = new Status("APPLIED");
+        Status status1 = new Status(StatusType.INTERESTED);
+        Status status2 = new Status(StatusType.INTERESTED);
+        Status status3 = new Status(StatusType.APPLIED);
 
         // same object -> returns true
         assertTrue(status1.equals(status1));

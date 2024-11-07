@@ -16,6 +16,7 @@ import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.company.StatusType;
 
 /**
  * Adds an application to a company in the address book.
@@ -61,8 +62,8 @@ public class ApplyCommand extends Command {
         editedApplications.add(toAdd);
 
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
-                companyToEdit.getAddress(), companyToEdit.getTags(), new Status("APPLIED"),
-                editedApplications, companyToEdit.getIsFavourite(), false);
+                companyToEdit.getAddress(), companyToEdit.getTags(), new Status(StatusType.APPLIED),
+                editedApplications, companyToEdit.getIsFavourite()), false;
 
         model.setCompany(companyToEdit, editedCompany);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedCompany.getName(), Messages.format(toAdd)));

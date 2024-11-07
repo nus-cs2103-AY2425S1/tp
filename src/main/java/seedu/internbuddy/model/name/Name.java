@@ -44,6 +44,11 @@ public class Name {
         return fullName;
     }
 
+    /**
+     * Checks if the {@link Name} is equal to another object.
+     * @return {@code true} if the other object is a {@link Name} instance with the same {@code fullName}
+     *      ignoring letter casing.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -56,12 +61,12 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return fullName.toLowerCase().hashCode(); // ensures that different case have the same hash
     }
 
 }

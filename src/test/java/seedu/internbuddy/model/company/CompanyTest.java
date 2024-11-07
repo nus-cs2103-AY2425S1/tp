@@ -44,13 +44,9 @@ public class CompanyTest {
         editedAlice = new CompanyBuilder(GOOGLE).withName(VALID_NAME_MICROSOFT).build();
         assertFalse(GOOGLE.isSameCompany(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Company editedBob = new CompanyBuilder(MICROSOFT).withName(VALID_NAME_MICROSOFT.toLowerCase()).build();
-        assertFalse(MICROSOFT.isSameCompany(editedBob));
-
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_MICROSOFT + " ";
-        editedBob = new CompanyBuilder(MICROSOFT).withName(nameWithTrailingSpaces).build();
+        Company editedBob = new CompanyBuilder(MICROSOFT).withName(nameWithTrailingSpaces).build();
         assertFalse(MICROSOFT.isSameCompany(editedBob));
     }
 

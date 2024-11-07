@@ -70,23 +70,35 @@ First time using **InternBuddy**? Don't worry! We've got you covered! This tutor
 Before continuing, here are some important information you need to know about the User Guide:
 1. There are 3 different kinds of boxes that provide extra information.
     * *Tip boxes* provide tips or helpful advise on how to use a certain feature found in **InternBuddy**.
+   
       <box type="tip" seamless>
+   
       **Tip:** This is a tip box.
       </box>
+      
     * *Notice boxes* provide important information that you should take note of.
+   
       <box type="info" seamless>
+      
       **Notice:** This is a notice box.
       </box>
+   
     * *Warning boxes* provide a warning about certain errors that might occur as a precaution for incorrect usage.
+   
       <box type="warning" seamless>
+      
       **Warning:** This is a warning box.
       </box>
+
 2. Words that are in <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different
    part of the User Guide or an external link when you click on them. For instance, [this hyperlink](#internbuddy-user-guide)
    brings you back to the top of the User Guide.
+
    <box type="tip" seamless>
+   
    **Tip:** If you are viewing this guide on our website, you can hover over links to see where the hyperlink takes you!
    </box>
+
 3. Refer to [Features](#features) for detailed explanations of each feature of **InternBuddy**!
 
 [back to top](#internbuddy-user-guide)
@@ -94,13 +106,14 @@ Before continuing, here are some important information you need to know about th
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer by opening up your terminal (MacOS: Terminal, Windows: Command Prompt), followed by executing `java -version`.
+1. Ensure you have Java `17` or above installed in your Computer by opening up your terminal application (for macOS it's called `Terminal`, and for Windows: `Command Prompt`), followed by executing `java -version`.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases) (scroll down to assets to find it!).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy/move the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar internbuddy.jar` command to run the application.<br>
+1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in
+1. Use the `java -jar internbuddy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -118,6 +131,7 @@ Before continuing, here are some important information you need to know about th
     * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+1. Make sure to check out the [Glossary](#glossary) for definitions of some vocabulary used in this guide. 
 
 [back to top](#internbuddy-user-guide)
 
@@ -143,21 +157,38 @@ Before continuing, here are some important information you need to know about th
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
+Before diving into our features, do note that we set some specifications for naming and such.
+
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Important notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Optiver`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/Optiver t/financial` or as `n/Optiver`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* `NAME` would be the Company's name, InternBuddy only allows alphanumeric characters (letters and numbers) to represent it. <br>
+  e.g. `7Eleven` is allowed but not `7-Eleven` because `-` is neither a letter nor a number.
+
+* `PHONE_NUMBER` is the Company's phone number. Company phone numbers should be at least 3 digits long, does not take into account the `+` prefix and must be all numbers.
+  e.g. `85092323`, `0122345677`
+
+* InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters again (letters and numbers). The following special characters `+ - _ .` are allowed in `local-part` but note that:
+    1. `local-part` can't begin or end with any special characters.
+    2. `local-part` can't have consecutive special characters in it.
+    3. The only special characters allowed in `domain` are periods (`.`) are allowed in `domain` and follows the 2 rules for `local-part` above. <br>
+       e.g. `abc-123+spam@nus.edu.sg`
+
+* Commands are **case-sensitive**, meaning they must be typed exactly as shown. <br>
+  e.g. to use the `add` command to add a company, type `add n/Tencent e/tencent@gmail.com`. Variations like `ADD ...`, `Add ...`, or `adD ...` will not work.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -173,13 +204,26 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A company can have any number of tags (including 0)
+**Tip 1:** A company can have any number of tags (including 0) <br>
+**Tip 2:** A company requires a name and email at the minimum
+</box>
+
+<box type="info" seamless>
+
+**Note:** You cannot add two companies with the same name. (even if the letter casing is different)
+</box>
+
+<box type="warning" seamless>
+
+**Caution:** Due to the nature of prefix commands, company names are restricted to alphanumeric characters only
 </box>
 
 Examples:
 * `add n/Apple e/contact@apple.com`
 * `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
 * `add n/Google LLC t/FAANG e/contact@google.com p/1234567 t/tech`
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding application record for a company: `apply`
 
@@ -189,11 +233,11 @@ Format: `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`
 
 * Adds an application record for the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 * `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
-and will take be `APPLIED` if not specified.
+and will be `APPLIED` if not specified.
 
 <box type="tip" seamless>
 
-**tip:** applying to a company automatically changes the company's status to `applied`.
+**Tip:** applying to a company automatically changes the company's status to `applied`.
 </box>
 
 Examples:
@@ -201,11 +245,28 @@ Examples:
 * `apply 2 n/Product Management Intern d/Requires Figma as/OA`
 * `apply 3 n/Devops Engineer Intern d/Requires knowledge in networks as/OFFERED`
 
+--------------------------------------------------------------------------------------------------------------------
+
+### Listing all companies : `list`
+
+Shows a list of all companies in the address book.
+
+Format: `list`
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+<box type="warning" seamless>
+
+**Caution:** Using clear will permanently remove all data saved in the AddressBook
+</box>
+
+<span style="color:red">**Deletes all entries**</span> from the address book.
 
 Format: `clear`
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a company : `delete`
 
@@ -218,8 +279,10 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd company in the address book.
+* `list` followed by `delete 2` deletes the 2nd company in the address book (provided that there are at least 2 companies in your list).
 * `find Apple` followed by `delete 1` deletes the 1st company in the results of the `find` command.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing a company : `edit`
 
@@ -238,27 +301,39 @@ Examples:
 *  `edit 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
 *  `edit 2 n/Goggle t/` Edits the name of the 2nd company to be `Goggle` and clears all existing tags.
 
-### Exiting the program : `exit`
+[back to features](#features)
 
-Exits the program.
-
-Format: `exit`
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a company to favourites: 'fav'
 
 Labels an existing company as a favourite
 
-Format: `fav COMPANY_INDEX`
+Format: `fav INDEX`
 
-* Sets the favourite field of company at the specified `COMPANY_INDEX` as `true`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+* Sets the favourite field of company at the specified `INDEX` as `true`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
+* When a company is marked as favourite, it will be displayed on top of the list, together with other favourite companies. This makes it easier to keep track of important companies.
+
+<box type="tip" seamless>
+
+**Tip:** favourite companies have a filled star icon to the right of their name while others have a hollow star instead.
+
+</box>
+
+![FavouriteACompany](images/favCommand.png)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Removing a company from favourites: 'unfav'
 
 Labels an existing company as a favourite
 
-Format: `unfav COMPANY_INDEX`
+Format: `unfav INDEX`
 
-* Sets the favourite field of company at the specified `COMPANY_INDEX` as `false`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+* Sets the favourite field of company at the specified `INDEX` as `false`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Locating companies: `find`
 
@@ -281,20 +356,19 @@ Examples:
 * `find hardware SWE` returns `Google`, `Apple` <br>
   ![result for 'find hardware SWE'](images/findhardwareSWEResult.png)
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-### Listing all companies : `list`
+[back to features](#features)
 
-Shows a list of all companies in the address book.
-
-Format: `list`
+--------------------------------------------------------------------------------------------------------------------
 
 ### Updating an application for a company: `update`
 
@@ -302,13 +376,15 @@ Updates the application status of an application for an existing company in the 
 
 Format: `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`
 
-* Updates the application status of application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX` to `APPLICATION_STATUS`.
+* Updates the application status of application record numbered `APPLICATION_INDEX` for the company at the specified `COMPANY_INDEX` to `APPLICATION_STATUS`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
 
 **tip:** `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
 </box>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Withdrawing application for a company: `withdraw`
 
@@ -323,6 +399,18 @@ The index refers to the index number shown in the displayed company list. The in
 
 **tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
 </box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+[back to features](#features)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
@@ -362,8 +450,9 @@ _Details coming soon ..._
 **A**: Yes, you can edit any company's details using the edit command followed by the index of the company. Example: `edit 2 n/Apple Inc e/careers@apple.com p/12345678`
 
 **Q**: Can I delete all contacts at once? <br>
-**A**: Yes, use the clear command to delete all contacts in your address book. Be cautious, as this action is irreversible.
+**A**: Yes, use the `clear` command to delete all contacts in your address book. Be cautious, as this action is <span style="color:red">irreversible</span>.
 
+[back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -372,6 +461,8 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **If running `java -jar internbuddy.jar` gives error**, such as terminal displaying an error, ensure that Java 17 or higher is installed. Run `java -version` to check your version. For Mac users, check if you have followed the advisory given [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html).
+
+[back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -383,14 +474,14 @@ _Details coming soon ..._
 - <a id="address-book"/>**Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app.
 - **Application Record**: A record associated with a company indicating an internship or job application status, such as "APPLIED," "INTERVIEWED," or "REJECTED."
 - **Command**: A specific instruction typed in the CLI to perform an action within the InternBuddy application.
-- **Parameter**: Information or input that must be provided along with a command. In the guide, parameters are represented in UPPER_CASE (e.g., n/NAME).
-- **Tag**: A label that can be added to a company to classify or organize it (e.g., t/tech, t/software).
+- **Parameter**: Information or input that must be provided along with a command. In the guide, parameters are represented in UPPER_CASE (e.g., `n/NAME`).
+- **Tag**: A label that can be added to a company to classify or organize it (e.g., `t/tech`, `t/software`).
 - **JSON** (JavaScript Object Notation): A lightweight data-interchange format that is easy for humans to read and write and for machines to parse and generate. InternBuddy uses JSON to store its data files.
 - **Index**: A number used to identify the position of a company or application in a list. InternBuddy commands often require an index to reference a specific company or application.
 - **Home Folder**: The directory where InternBuddy stores its data and related files on your computer.
 - **APPLIED / OA / INTERVIEWED / OFFERED / ACCEPTED / REJECTED**: The various statuses that can describe an application’s progress in the hiring process within InternBuddy.
 - **Backup**: A copy of the data file created to prevent loss of information. The backup can be used to restore the AddressBook in case of accidental data loss.
 - **JSON File Location**: The file path where InternBuddy stores its data, which can be manually edited or transferred to another computer.
-- **Company**: Refers to an entity in the address book that represents a business or organization to which a user may apply for internships or jobs.
+- **Company**: Refers to an entity in the AddressBook. We refer to any contact in our AddressBook as Company.
 
 [back to top](#internbuddy-user-guide)

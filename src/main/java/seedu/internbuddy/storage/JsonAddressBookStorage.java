@@ -43,6 +43,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @throws DataLoadingException if loading the data from storage failed.
      */
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+        logger.info("Reading address book...");
         requireNonNull(filePath);
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
@@ -70,6 +71,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null.
      */
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        logger.info("Saving address book...");
         requireNonNull(addressBook);
         requireNonNull(filePath);
 

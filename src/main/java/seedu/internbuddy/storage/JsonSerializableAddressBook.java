@@ -2,12 +2,14 @@ package seedu.internbuddy.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.internbuddy.commons.core.LogsCenter;
 import seedu.internbuddy.commons.exceptions.IllegalValueException;
 import seedu.internbuddy.model.AddressBook;
 import seedu.internbuddy.model.ReadOnlyAddressBook;
@@ -20,6 +22,7 @@ import seedu.internbuddy.model.company.Company;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_COMPANY = "Companies list contains duplicate company(s).";
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedCompany> companies = new ArrayList<>();
 
@@ -46,10 +49,13 @@ class JsonSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public AddressBook toModelType() throws IllegalValueException {
+        logger.info("Attempting to convert " + JsonSerializableAddressBook.class + " to "
+                + AddressBook.class + "...");
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedCompany jsonAdaptedCompany : companies) {
             Company company = jsonAdaptedCompany.toModelType();
             if (addressBook.hasCompany(company)) {
+                logger.info("Duplicate companies detected.");
                 throw new IllegalValueException(MESSAGE_DUPLICATE_COMPANY);
             }
             addressBook.addCompany(company);
