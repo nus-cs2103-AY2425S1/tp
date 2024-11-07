@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -13,15 +15,22 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PAID_AMOUNT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PAID_AMOUNT_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -43,6 +52,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static seedu.address.testutil.TypicalStudents.AMY;
 
 import org.junit.jupiter.api.Test;
 
@@ -235,5 +245,19 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SCHEDULE, PREFIX_RATE, PREFIX_OWED_AMOUNT));
+    }
+
+    @Test
+    public void parse_allFieldsMixedCasePrefixes_success() {
+        Index targetIndex = INDEX_SECOND_STUDENT;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY_MIXED_CASE
+                + EMAIL_DESC_AMY_MIXED_CASE + ADDRESS_DESC_AMY_MIXED_CASE + NAME_DESC_AMY_MIXED_CASE
+                + SCHEDULE_DESC_AMY_MIXED_CASE + RATE_DESC_AMY_MIXED_CASE + OWED_AMOUNT_DESC_AMY_MIXED_CASE
+                + SUBJECT_DESC_AMY_MIXED_CASE + PAID_AMOUNT_DESC_AMY_MIXED_CASE;
+
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
