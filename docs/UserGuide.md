@@ -6,7 +6,15 @@
 
 # ClubConnect User Guide
 
-ClubConnect is a **desktop address book application used to streamline the computing club's communication and organization.** You can effortlessly manage member details, sponsor contacts, and event participants in one place. Enhance collaboration, boost engagement, and ensure seamless planning, all while saving time and reducing administrative hassle.
+Welcome to ClubConnect!
+
+ClubConnect is your go-to desktop application for keeping your contacts and events organised and connected. 
+With ClubConnect, you can quickly access and manage all your member details, sponsor contacts, 
+and event participant lists in one convenient place. 
+This guide will show you how to use ClubConnect’s features to enhance collaboration, boost member engagement, 
+and make planning a breeze — so you can focus more on what matters and spend less time on administrative work.
+
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -157,8 +165,8 @@ Deletes the specified person from ClubConnect's contact list.
 Format: `delete INDEX` / `delete CONTACT_NAME`
 
 * Deletes the person at the specified `INDEX` / with name `CONTACT_NAME`.
-* `CONTACT_NAME` refers to the name of the contact (Case-insensitive).
-* The index refers to the index number shown in the displayed person list.
+* `CONTACT_NAME` refers to the name of the contact (case-insensitive).
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -222,12 +230,12 @@ Format: `delete_event INDEX` / `delete_event EVENT_NAME`
 
 * Deletes the event at the specified `INDEX` / with event name `EVENT_NAME`.
 * `EVENT_NAME` refers to the name of the event (case-insensitive).
-* `INDEX` refers to the index number shown in the displayed event list.
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list_events` followed by `del_event 2` deletes the 2nd event in ClubConnect's event list.
-* `del_event meeting` will delete the event with name `meeting` (case-insensitive).
+* `list_events` followed by `delete_event 2` deletes the 2nd event in ClubConnect's event list.
+* `delete_event meeting` will delete the event with event name `meeting` (case-insensitive).
 
 ### Assigning an event: `assign_event`
 
@@ -314,7 +322,7 @@ Action             | Format, Examples
 **List**           | `list`
 **Add Event**      | `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE` <br> e.g., `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10` 
 **List Events**    | `list_events`
-**Delete Event**   | `del_event INDEX` or `del_event EVENT_NAME`<br> e.g., `del_event 1` or `del_event meeting`
+**Delete Event**   | `delete_event INDEX` or `delete_event EVENT_NAME`<br> e.g., `delete_event 1` or `delete_event meeting`
 **Assign Event**   | To be completed by Nicholas
 **Unassign Event** | `unassign_event p/PERSON_INDEX ev/EVENT_INDEX` or `unassign_event p/PERSON_NAME ev/EVENT_INDEX` or `unassign_event p/PERSON_INDEX ev/EVENT_NAME` or `unassign_event p/PERSON_NAME ev/EVENT_NAME` <br> e.g., `unassign_event p/1 ev/2` or `unassign_event p/Alice ev/2` or `unassign_event p/1 ev/Meeting` or `unassign_event p/Alice ev/Meeting`
 **Help**           | `help`
