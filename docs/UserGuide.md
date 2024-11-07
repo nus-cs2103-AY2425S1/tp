@@ -8,7 +8,7 @@
 
 # EduContacts User Guide
 
-<br> 
+<br>
 
 EduContacts is a **desktop app for Educators in Tertiary Institution to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. For educators who may be less experienced with command-based tools, EduContacts also includes user-friendly and intuitive features and guidance, making it accessible for all users.
 
@@ -25,6 +25,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
     - [Listing students by certain attributes : `filter`](#listing-students-by-certain-attributes-filter)
     - [Adding a module to a student: `module`](#adding-a-module-to-a-student-module)
     - [Deleting a person : `delete`](#deleting-a-person-delete)
+    - [Finding a person: `find`](#finding-a-person--find)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
 3. [FAQ](#faq)
@@ -57,7 +58,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
    ```bash
    cd ~/Desktop/EduContacts
    ```
-   
+
    and use the following command to run the application:
 
    ```bash
@@ -71,17 +72,17 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   ```bash 
-   list 
+   ```bash
+   list
       ```
    Lists all contacts.
 
-   ```bash 
+   ```bash
    add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student
-   ``` 
+   ```
    Adds a contact named `John Doe` to EduContacts.
-   
-   ```bash 
+
+   ```bash
    delete 12345678
    ```
    Deletes a student contact with StudentID `12345678`.
@@ -107,6 +108,9 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 
 **Notes about the command format:**<br>
 
+* All command words should be in lowercase.
+
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
@@ -127,7 +131,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 Shows a message explaining how to access the help page.
 
 Format:
-```bash 
+```bash
 help
 ```
 ![help message](images/helpMessage.png)
@@ -141,7 +145,7 @@ Alternatively, you can click the button on the top right hand corner as indicate
 
 Adds a person contact to the EduContacts.
 
-Format: 
+Format:
 ```bash
 add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
@@ -158,7 +162,7 @@ Examples:
 
 Shows a list of all persons in EduContacts.
 
-Format: 
+Format:
 ```bash
 list
 ```
@@ -233,7 +237,7 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 * **For filtering by Course:**
 
   * Use prefix `c/`
-  * Partial matching is supported, but the first keyword must match the beginning of the course name. 
+  * Partial matching is supported, but the first keyword must match the beginning of the course name.
     e.g `Engineer` will match courses like "Engineering" but not "Civil Engineering".
 
 <box type="tip" seamless>
@@ -243,11 +247,20 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 
 Examples:
 * ```filter n/John``` returns `john` and `John Doe`
-* `filter m/CS2103T` returns a list of all students with module CS2103T. 
+* `filter m/CS2103T` returns a list of all students with module CS2103T.
 * `filter c/Computer Science` returns a list of all students with course Computer Science.<br>
 * `filter n/alex david` returns `Alex Yeoh`, `David Li`
 
   ![result for 'find alex david'](images/filterAlexDavidResult.png)
+<br>
+
+<box type="info" seamless>
+
+**Note:**  After using `filter`, only the persons displayed in the filtered list can be edited or deleted, and persons not shown in this truncated list cannot be modified.  
+
+To return to display the full list of persons, use `list` command.
+
+</box>
 
 <div style="page-break-after: always;"></div>
 
@@ -270,7 +283,7 @@ Examples:
 
 Deletes the specified person from EduContacts.
 
-Format: 
+Format:
 ```bash
 delete ID
 ```
@@ -292,7 +305,7 @@ Format: `find ID`
 * Finds student with the specified `ID`.
 
 Examples:
-* `find 12345678` will find student contact with `ID: 12345678` and display their details.
+* `find 12345678` will find student contact with `ID: 12345678` and display their details
 
 <div style="page-break-after: always;"></div>
 
@@ -300,7 +313,7 @@ Examples:
 
 Clears all entries from EduContacts.
 
-Format: 
+Format:
 ```bash
 clear
 ```
