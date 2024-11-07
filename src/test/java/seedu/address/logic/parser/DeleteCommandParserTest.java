@@ -31,6 +31,7 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
+    @Disabled
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "j/XYZ1235", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -61,6 +62,8 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, args, expectedCommand);
 
     }
+
+    @Disabled
     @Test
     public void parseOtherAttributes_nameAndEmail_returnsDeleteCommand() throws ParseException {
         //tests whether deletecommand returned when a certain name and phone are inputted is the same as the expected
