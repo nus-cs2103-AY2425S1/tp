@@ -40,8 +40,8 @@
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
+* [Tutorials](https://se-education.org/guides/tutorials/ab3.html)
+  * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
   * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
   * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)

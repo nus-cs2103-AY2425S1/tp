@@ -55,8 +55,8 @@ If you plan to use Intellij IDEA (highly recommended):
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [AddressBook’s architecture](DeveloperGuide.md#architecture).
 
 1. **Do the tutorials**
-   These tutorials will help you get acquainted with the codebase.
+   These tutorials will help you get acquainted with the codebase. *These tutorials are curated by se-edu.*
 
-   * [Tracing code](tutorials/TracingCode.md)
-   * [Adding a new command](tutorials/AddRemark.md)
-   * [Removing fields](tutorials/RemovingFields.md)
+   * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
+   * [Adding a new command](https://se-education.org/guides/tutorials/ab3AddRemark.html)
+   * [Removing fields](https://se-education.org/guides/tutorials/ab3RemovingFields.html)

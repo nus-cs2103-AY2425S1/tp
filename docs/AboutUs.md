@@ -28,8 +28,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/LimKaiWei)]
 [[portfolio](team/limkaiwei.md)]
 
-* Role: ???
-* Responsibilities: ???
+* Role: Developer
+* Responsibilities: Backend
 
 ### Jewi Teo
 
