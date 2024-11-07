@@ -179,11 +179,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete contact 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add contact n/David …​` to add a new person. The `add contact` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -218,7 +218,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list all`. Commands that do not modify the address book, such as `list all`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -299,7 +299,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` 
+(For all use cases below, the **System** is the `TalentConnect` 
 and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete contact**
@@ -307,10 +307,10 @@ and the **Actor** is the `user`, unless specified otherwise)
 **MSS**
 
 1.  User requests to list contacts
-2.  AddressBook shows a list of contacts
+2.  TalentConnect shows a list of contacts
 3.  User requests to delete a specific contact in the list
-4.  AddressBook deletes the contacts
-5.  AddressBook returns an updated list of contacts along with success message.
+4.  TalentConnect deletes the contacts
+5.  TalentConnect returns an updated list of contacts along with success message.
 
     Use case ends.
 
@@ -322,7 +322,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TalentConnect shows an error message.
 
       Use case resumes at step 2.
 
@@ -331,9 +331,9 @@ and the **Actor** is the `user`, unless specified otherwise)
 **MSS**
 
 1.  User requests to list job listings
-2.  AddressBook shows a list of job listings
+2.  TalentConnect shows a list of job listings
 3.  User requests to screen all contact based on the requirements of a job listing
-4.  AddressBook return a list of contacts that fits the job requirements
+4.  TalentConnect return a list of contacts that fits the job requirements
 
     Use case ends.
 
@@ -345,7 +345,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TalentConnect shows an error message.
 
       Use case resumes at step 2.
 
@@ -358,14 +358,14 @@ and the **Actor** is the `user`, unless specified otherwise)
 **MSS**
 
 1. User requests to add contact.
-2. AddressBook returns an updated list of contacts with a success message.
+2. TalentConnect returns an updated list of contacts with a success message.
    Use case ends.
 
 **Extensions** 
 
 * 1a. The given parameters are invalid. 
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. TalentConnect shows an error message.
   
       Use case ends. 
 
@@ -374,14 +374,14 @@ and the **Actor** is the `user`, unless specified otherwise)
 **MSS**
 
 1. User requests to add a company.
-2. AddressBook returns an updated list of companies with a success message.
+2. TalentConnect returns an updated list of companies with a success message.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The given parameters are invalid.
-    * 1a1. AddressBook shows an error message.
+    * 1a1. TalentConnect shows an error message.
 
       Use case ends.
 
@@ -390,7 +390,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 **MSS**
 
 1. User requests to list companies.
-2. AddressBook shows the list of companies.
+2. TalentConnect shows the list of companies.
 
    Use case ends.
 
@@ -406,8 +406,8 @@ and the **Actor** is the `user`, unless specified otherwise)
 
 1. User requests to list companies.
 2. User requests to view a company.
-3. AddressBook selects the targeted company.
-4. AddressBook filters the contact and job lists to show those associated with company.
+3. TalentConnect selects the targeted company.
+4. TalentConnect filters the contact and job lists to show those associated with company.
 
     Use case ends.
 
@@ -417,7 +417,7 @@ and the **Actor** is the `user`, unless specified otherwise)
     Use case ends.
 
 * 2a. The given parameters are invalid.
-    * 2a1. AddressBook shows an error message.
+    * 2a1. TalentConnect shows an error message.
     
         Use case resumes at step 2.
 
