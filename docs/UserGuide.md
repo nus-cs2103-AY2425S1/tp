@@ -51,7 +51,7 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com o/nus` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -96,6 +96,14 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ## Contact Management
+
+<div markdown="block" class="alert alert-info">
+
+**Notes about the contact book**
+
+* Duplicate contacts are not allowed. A contact is considered duplicate if it has the same email as another contact.
+
+</div>
 
 ### Adding a person: `add` or `a`
 
