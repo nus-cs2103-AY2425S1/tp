@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG`
+Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG`
 
 <box type="tip" seamless>
 
@@ -102,22 +102,19 @@ Examples:
 
 ### Listing persons based on attribute : `list`
 
-Shows a list of all persons or selected persons with certain attributes.
+Shows a list of all persons in the address book.
 
 Format:
 
 `list`
 
-* `list` shows the list of all persons in the address book.
 
-Examples:
-* `list`
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE_APPLIED_FOR] [t/TAG]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be updated.
@@ -131,7 +128,7 @@ Examples:
 Finds persons by criteria given
 
 Format:
-`find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB CODE] [t/TAG] [r/REMARK]`
+`find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]`
 
 * The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and `Hans Bobo`, but not `Bo Hans`
 * All fields are case-insensitive
@@ -155,6 +152,7 @@ Format:
 
 
 * Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`
+
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If there are contacts with duplicate names, user must use `delete e/EMAIL` or `delete p/PHONE`
@@ -165,21 +163,7 @@ Examples:
 * `delete n/Betsy` will delete contact with the full name Betsy.
 * `delete e/betsy@gmail.com` will delete the contact with the email betsy@gmail.com
 * If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command`delete n/John Doe p/8834156` to delete the former.
-
-### Adding/Removing remark for a person : `remark`
-
-#### Add a remark for the specified person from the address book.
-
-Format:
-`remark INDEX r/REMARK`
-
-- The `INDEX` refers to the index number shown in the displayed person list.
-- Ensure that the specified `INDEX` is a positive integer (1, 2, 3, ...).
-- The remark must be between **0 and 50 characters** in length.
-- If the remark exceeds 50 characters, it will not be accepted.
-
-**Examples**:
-- `remark 2 r/Available for part-time work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
+work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
 
 
 ### Showing applicant statistics: `stats`
@@ -210,6 +194,22 @@ Examples:
 * `massreject j/SWE2024 t/TP` marks all persons with the job code `SWE2024` and the tag `TP` as rejected.
 * `massreject t/BP` marks all persons with the tag `BP` as rejected.
 * `massreject j/SWE2024` marks all persons with the job code `SWE2024` as rejected, except those already tagged as `a` (accepted).
+
+### Sorting persons by fields: `sort`
+
+Sorts the list of persons based on specified fields in a case-insensitive manner. Sorting can be done by a single field or layered across multiple fields.
+
+Format:
+`sort [n/] [p/] [e/] [j/] [t/]`
+
+* You can sort by any combination of name, phone, email, job code, and/or tag.
+* Sorting is case-insensitive.
+* Layered sorting is supported. If multiple fields are specified, the list will be sorted by the first field, then by the second within each group of the first, and so on.
+
+Examples:
+* `sort n/` and `sort` sorts all persons by name.
+* `sort t/ j/` sorts all persons by tag first, and within each tag, sorts by job code.
+* `sort j/ n/` sorts all persons by job code, and within each job code, sorts by name.
 
 ### Clearing all entries : `clear`
 
@@ -277,8 +277,15 @@ _Details coming soon ..._
 - Checking for valid email domain is not in scope.
 
 ### JOBCODE
+- Must be at most 50 characters.
+- Only alphanumeric characters (A-Z, a-z, 0-9) and single dashes (-) are allowed.
+- The first and last character must be alphanumeric.
+- Training spaces and spaces within jobcode will be removed. (e.g. " swe -201  " will become "swe-201")
+- Two consecutive dashes (--) are not allowed (e.g., "HR--2023" is invalid).
+- The input job code will be converted to uppercase (e.g., "swe2023-intern" will become "SWE2023-INTERN").
 
 ### TAG
+
 Please refer to this table
 for list of valid tags:
 
@@ -291,6 +298,10 @@ for list of valid tags:
 | BC | Behavioral Interview Confirmed |Behavioral interview has been scheduled|
 | A| Accepted|Applicant has been accepted|
 | R | Rejected |Applicant has been rejected|
+
+- Input tag code is case-insensitive. (e.g., "bp" will be treated the same as "BP").
+- Spaces within the tag will be removed (e.g., "T P" will become "TP"), and hence tags with spaces is still valid as long as it is one of the tags listed above. 
+
 
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
@@ -315,10 +326,10 @@ for list of valid tags:
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
+**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE` e.g. `delete n/Alex Yeoh p/88306733`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/FULL_NAME` `find j/JOB_CODE_APPLIED_FOR` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
+**Find**   | `find n/FULL_NAME` `find j/JOB_CODE` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
 **List**   | `list`
 **Help**   | `help`

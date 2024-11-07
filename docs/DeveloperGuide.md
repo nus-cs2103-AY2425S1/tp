@@ -440,7 +440,7 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Contact**: An entry in Talentcy address book that contains information about a particular person such as name, phone number, email address, and any other relevant details
-* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG is a command to add a contact to the address book)
+* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a contact to the address book)
 
 --------------------------------------------------------------------------------------------------------------------
 
