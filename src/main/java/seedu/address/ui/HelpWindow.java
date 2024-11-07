@@ -153,6 +153,7 @@ public class HelpWindow extends UiPart<Stage> {
                         new HelpCommand("UnFavGame", "`unfavgame INDEX g/GAME`\n"),
                         new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]`\n"),
                         new HelpCommand("FindTime", "`findtime TIME-TIME [TIME-TIME]`\n"),
+                        new HelpCommand("FindGame", "`findgame g/GAME'\n"),
                         new HelpCommand("Delete", "`delete INDEX`\n"),
                         new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("Undo", "`undo`"),
