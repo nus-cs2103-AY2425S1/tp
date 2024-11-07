@@ -555,6 +555,26 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Categorizing a tag
+
+1. Categorizing an existing tag
+   1. Prerequisites: Ensure that the tag `CS2103` exists and is under a category other than `Academics` (Gold).
+   2. Test case: `cattag t/CS2103 acads` </br>
+      Expected: Success message is shown. All occurrences of the tag `CS2103` in the person list on the bottom left and tag list on the bottom right are set to `Academics` category. Colour of tag `CS2103` set to Gold.
+2. Attempting to categorize a non-existent tag
+   1. Prerequisites: Ensure that tag `A` does not exist yet.
+   2. Test case: `cattag t/A activity` </br>
+      Expected: Error message "`Tag not found: [A]`" is shown, indicating that tag `A` does not exist.
+3. Attempting to categorize to an invalid category
+   1. Prerequisites: Ensure that tag `CS2103` is still present.
+   2. Test case: `cattag t/CS2103 foo` </br>
+      Expected: Error message "`Invalid category: foo`" is shown.
+4. Attempting to categorize an **invalid tag** to an **invalid category**
+   1. Prerequisites: Ensure that tag `A` does not exist yet.
+   2. Test case: `cattag t/A foo` </br>
+      Expected: Error message "`Invalid category: foo`" is shown. Message for invalid tag is not shown for this case.
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
