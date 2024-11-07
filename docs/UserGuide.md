@@ -232,6 +232,9 @@ Creates a new log entry for a specific patient. This command is typically used t
 ---
 ### Adding a log entry: `addentry`
 Allows users to use a separate window to add new log entry for a person. When prompted with a new window, users can input the details of the log entry.
+
+After entering the details, users can click the `Save` button to add the log entry to the person's log list, 'Cancel' to discard the log entry.
+Alternatively users can use "Ctrl + Enter" to save the log entry on windows and "Cmd + Enter" on Mac.
 **Format**: `addentry i/IDENTITY_NUMBER d/DATE`
 * **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
 * **DATE** should be in the format `DD-MMM-YYYY`.
