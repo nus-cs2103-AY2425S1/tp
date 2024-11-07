@@ -811,21 +811,21 @@ testers are expected to do more *exploratory* testing.
    Expected: An error message stating what is considered a valid Company Name.<br>
 
       1. Other Invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.
-   
+
    2. Missing/Invalid Role test case: `/add n/Google r/ e/google@gmail.com d/31/10/24` <br>
    Expected: An error message stating what is considered a valid Role.<br>
 
       1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.
-   
+
    3. Missing/Invalid Email test case: `/add n/Google r/Software Engineer Intern e/ d/31/10/24`<br>
    Expected: An error message stating what is considered a valid Email.
 
       1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.
-   
+
    4. Missing/Invalid Date test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/`<br>
    Expected: An error message stating what is considered a valid Date.
       1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.
-   
+
 5. Adding internship application with missing field(s)
    1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
    Expected: An error message stating the valid use of the `/add` command.
