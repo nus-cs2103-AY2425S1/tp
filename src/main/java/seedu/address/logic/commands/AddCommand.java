@@ -24,7 +24,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an elderly to the address book. \n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_NAME + "NAME "
@@ -43,10 +43,11 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "wheelchairUser "
             + PREFIX_TAG + "livingAlone";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_SUCCESS_WITH_WARNING = "New person added: %1$s\n"
-            + "Warning: There is an existing person with the same name, phone number or email.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person (Same NRIC) already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New elderly added: %1$s";
+    public static final String MESSAGE_SUCCESS_WITH_WARNING = "New elderly added: %1$s\n"
+            + "Warning: There is an existing elderly with the same name, phone number or email.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This elderly (Same NRIC) already exists "
+            + "in the address book";
 
     private final Person toAdd;
     /**

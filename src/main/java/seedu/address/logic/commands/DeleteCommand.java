@@ -22,11 +22,11 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the elderly identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) or NRIC (must be government issued)\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " S6253285H";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Elderly: %1$s";
 
     private final Index targetIndex;
     private final Nric targetNric;

@@ -23,10 +23,11 @@ public class HistoryCommand extends Command {
     public static final String COMMAND_WORD = "history";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": List call history of the person identified by the index number or NRIC in the displayed person list.\n"
+            + ": List call history of the elderly identified by the index number or NRIC "
+            + "in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) or NRIC (must be government issued)\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " S6253285H";
-    public static final String MESSAGE_SHOW_HISTORY_SUCCESS = "Call history of person: %1$s";
+    public static final String MESSAGE_SHOW_HISTORY_SUCCESS = "Call history of elderly: %1$s";
     private final Index targetIndex;
     private final Nric targetNric;
 
