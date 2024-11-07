@@ -1,9 +1,12 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -15,8 +18,8 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w10-3.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Refer to the user guide:";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -27,6 +30,9 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private Hyperlink ugLink;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -35,6 +41,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        ugLink.setText(USERGUIDE_URL);
     }
 
     /**
@@ -98,5 +105,29 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Opens the user guide URL in the default web browser.
+     * <p>
+     * After attempting to open the URL, the hyperlink's visited state is reset
+     * to {@code false}.
+     *
+     * @throws Exception if an error occurs while attempting to open the URL
+     */
+    @FXML
+    private void goToUrl() {
+        try {
+            URI uri = new URI(USERGUIDE_URL);
+
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(uri);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Set condition back to not visited
+        ugLink.setVisited(false);
     }
 }

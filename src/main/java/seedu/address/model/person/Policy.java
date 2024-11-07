@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 /**
  * Represents an insurance policy in the address book.
  */
@@ -21,7 +22,11 @@ public class Policy {
             + "endDate' paydate amountDue, where dates are in 'yyyy-MM-dd' format.";
 
     //private static final String FULLY_PAID = "Fully Paid";
-
+    public static final String END_DATE_BEFORE_START_DATE = "End date cannot be before start date!";
+    public static final String PREMIUM_DUE_DATE_BEFORE_START_DATE = "Premium due date cannot "
+            + "cannot be before start date!";
+    public static final String PREMIUM_DUE_DATE_AFTER_END_DATE = "Premium due date cannot be after end date!";
+    public static final String START_EQ_END = "Start date and end date cannot be the same!";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private static final String TOSTRINGFORMATTER = "([\\w\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*"
@@ -47,12 +52,15 @@ public class Policy {
      * @param startDateStr Start date of the policy.
      * @param endDateStr End date of the policy.
      */
-    public Policy(String policyName, String startDateStr, String endDateStr, String insurancePayment) {
-        checkArgument(isValidPolicy(policyName, startDateStr, endDateStr, insurancePayment), MESSAGE_CONSTRAINTS);
+    public Policy(String policyName, String startDateStr, String endDateStr,
+                  String insurancePayment) throws CommandException {
+        checkArgument(isValidPolicy(policyName, startDateStr,
+                endDateStr, insurancePayment), MESSAGE_CONSTRAINTS);
         this.policyName = policyName.trim();
         this.startDate = parseDate(startDateStr);
         this.endDate = parseDate(endDateStr);
         this.payment = new Payment(insurancePayment);
+        validatePolicy();
     }
 
     /**
@@ -63,17 +71,30 @@ public class Policy {
      * @param policyDescription A string describing the policy details, including the name, start date, end date,
      *                          payment amount, and payment date.
      */
-    public Policy(String policyDescription) {
+    public Policy(String policyDescription) throws CommandException {
         checkArgument(isValidPolicy(policyDescription), MESSAGE_CONSTRAINTS);
         Map<String, String> policyDetails = extractPolicyDetails(policyDescription);
-
         this.policyName = policyDetails.get(POLICY_NAME);
         this.startDate = parseDate(policyDetails.get(START_DATE));
         this.endDate = parseDate(policyDetails.get(END_DATE));
         String paymentAmount = policyDetails.get(PAYMENT_AMOUNT);
         String paymentDate = policyDetails.get(PAYMENT_DATE);
-
         this.payment = new Payment(paymentDate + " " + paymentAmount);
+        validatePolicy();
+    }
+
+    private void validatePolicy() throws CommandException {
+        if (this.getPolicyPaymentDueDate().isEqual(LocalDate.MAX)) {
+            ;
+        } else if (this.endDate.isEqual(this.startDate)) {
+            throw new CommandException(START_EQ_END);
+        } else if (this.endDate.isBefore(this.startDate)) {
+            throw new CommandException(END_DATE_BEFORE_START_DATE);
+        } else if (this.payment.getPaymentDueDate().isBefore(this.startDate)) {
+            throw new CommandException(PREMIUM_DUE_DATE_BEFORE_START_DATE);
+        } else if (this.payment.getPaymentDueDate().isAfter(this.endDate)) {
+            throw new CommandException(PREMIUM_DUE_DATE_AFTER_END_DATE);
+        }
     }
 
     /**
@@ -89,8 +110,8 @@ public class Policy {
     /**
      * Returns true if the given policy details are valid.
      */
-    public static boolean isValidPolicy(String policyName, String startDateStr, String endDateStr,
-                                        String payment) {
+    public static boolean isValidPolicy(String policyName, String startDateStr,
+                                        String endDateStr, String payment) {
         requireNonNull(policyName);
         requireNonNull(startDateStr);
         requireNonNull(endDateStr);
@@ -100,18 +121,10 @@ public class Policy {
         if (policyName.trim().isEmpty()) {
             return false;
         }
-
-
-        // Check dates are valid and endDate is not before startDate
         try {
-            LocalDate startDate = LocalDate.parse(startDateStr, DATE_FORMATTER);
-            LocalDate endDate = LocalDate.parse(endDateStr, DATE_FORMATTER);
-
-            if (endDate.isBefore(startDate) || !Payment.isValidInsurancePayment(payment)) {
-                return false;
-            }
+            LocalDate.parse(startDateStr, DATE_FORMATTER);
+            LocalDate.parse(endDateStr, DATE_FORMATTER);
             return true;
-
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -131,9 +144,9 @@ public class Policy {
         String endDate = policyDetails.get(END_DATE);
         String paymentAmount = policyDetails.get(PAYMENT_AMOUNT);
         String paymentDate = policyDetails.get(PAYMENT_DATE);
-        System.out.println(paymentDate + " " + paymentAmount);
         return isValidPolicy(policyName, startDate, endDate, paymentDate + " " + paymentAmount);
     }
+
 
     public String getPolicyName() {
         return policyName;
@@ -151,8 +164,16 @@ public class Policy {
         return payment.getPaymentDueDate().plusYears(1).isAfter(endDate);
     }
 
+    public boolean isFullyPaid() {
+        return payment.getPaymentDueDate().equals(LocalDate.MAX);
+    }
+
+    /**
+     * Returns a comparator that compares two policies based on their payment due dates.
+     * Policies that are fully paid will be considered last.
+     */
     public static Comparator<Policy> getPolicyPaymentDueDateComparator() {
-        return Comparator.comparing(policy -> policy.getPolicyPaymentDueDate());
+        return Comparator.comparing(Policy::getPolicyPaymentDueDate);
     }
 
     /**
@@ -216,5 +237,4 @@ public class Policy {
     public String toString() {
         return policyName + " (" + startDate + " to " + endDate + ") " + payment.toString();
     }
-
 }

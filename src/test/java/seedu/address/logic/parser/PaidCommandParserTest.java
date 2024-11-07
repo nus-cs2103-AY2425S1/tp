@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_INVESTMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -17,25 +16,25 @@ public class PaidCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsPaidCommand() {
-        assertParseSuccess(parser, "1 " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_INVESTMENT,
-                new PaidCommand(Index.fromOneBased(1), VALID_POLICY_NAME_INVESTMENT));
+        assertParseSuccess(parser, "1 " + PREFIX_POLICY + "1",
+                new PaidCommand(Index.fromOneBased(1), Index.fromOneBased(1)));
     }
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, "a " + VALID_POLICY_NAME_INVESTMENT,
+        assertParseFailure(parser, "a " + PREFIX_POLICY + "1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_missingPolicyName_throwsParseException() {
+    public void parse_missingPolicyIndex_throwsParseException() {
         assertParseFailure(parser, "1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_extraArgs_throwsParseException() {
-        assertParseFailure(parser, "1 " + VALID_POLICY_NAME_INVESTMENT + " extra",
+        assertParseFailure(parser, "1 " + PREFIX_POLICY + "1 extra",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE));
     }
 }

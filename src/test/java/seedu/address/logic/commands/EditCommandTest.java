@@ -161,7 +161,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void editPolicies_invalidOutOfBoundIndex_throwsCommandException() {
+    public void editPolicies_invalidOutOfBoundIndex_throwsCommandException() throws CommandException {
         Person personToEdit = new PersonBuilder().build();
         Index outOfBoundIndex = Index.fromOneBased(1);
         Policy validPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
@@ -173,7 +173,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void editPolicies_invalidDuplicatePolicyName_throwsCommandException() {
+    public void editPolicies_invalidDuplicatePolicyName_throwsCommandException() throws CommandException {
         Person personToEdit = new PersonBuilder().build();
         Policy oldPolicy1 = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
         Policy oldPolicy2 = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);

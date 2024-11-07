@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PaidCommand;
@@ -18,12 +18,12 @@ public class PaidCommandParser implements Parser<PaidCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public PaidCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_NAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY);
         try {
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            String policyName = argMultimap.getValue(PREFIX_POLICY_NAME).orElseThrow(() ->
-                    new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE)));
-            return new PaidCommand(index, policyName);
+            Index personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Index policyIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_POLICY).orElseThrow(() ->
+                    new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE))));
+            return new PaidCommand(personIndex, policyIndex);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE), pe);

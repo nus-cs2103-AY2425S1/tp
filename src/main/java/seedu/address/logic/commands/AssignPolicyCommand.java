@@ -17,6 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Policy;
 
 
+
 /**
  * Command that assigns a policy to a person.
  */
@@ -25,12 +26,12 @@ public class AssignPolicyCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a policy to a person"
             + " by the index number used in the displayed person list. "
-            + "Parameters: "
-            + PREFIX_POLICY_NAME + "PolicyName "
-            + PREFIX_POLICY_START_DATE + "PolicyStartDate "
-            + PREFIX_POLICY_END_DATE + "PolicyEndDate "
-            + PREFIX_NEXT_PAYMENT_DATE + "PolicyNextPaymentDate "
-            + PREFIX_PAYMENT_AMOUNT + "AmountDue "
+            + "\nParameters: " + "INDEX "
+            + PREFIX_POLICY_NAME + "POLICYNAME "
+            + PREFIX_POLICY_START_DATE + "STARTDATE "
+            + PREFIX_POLICY_END_DATE + "ENDDATE "
+            + PREFIX_NEXT_PAYMENT_DATE + "DUEDATE "
+            + PREFIX_PAYMENT_AMOUNT + "AMOUNT "
             + "\nExample: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_NAME + "PolicyOne "
             + PREFIX_POLICY_START_DATE + "2022-12-12 "
@@ -56,7 +57,6 @@ public class AssignPolicyCommand extends Command {
     public AssignPolicyCommand(Index index, Policy policy) {
         requireNonNull(index);
         requireNonNull(policy);
-
         this.index = index;
         this.policy = policy;
     }

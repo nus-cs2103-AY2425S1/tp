@@ -9,7 +9,8 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Undo successful!";
-    public static final String MESSAGE_FAILURE = "No commands to undo!";
+    public static final String MESSAGE_FAILURE = "No commands to undo!\n"
+            + "Undo command works for add, delete(Person only), edit, clear commands";
 
     /**
      * Executes the undo command.

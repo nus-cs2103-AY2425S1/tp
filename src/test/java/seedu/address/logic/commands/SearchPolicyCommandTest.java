@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_POLICY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.ArrayList;
@@ -59,15 +60,15 @@ public class SearchPolicyCommandTest {
     }
 
     @Test
-    public void execute_noPersonWithPolicy_noPersonFound() {
+    public void execute_noPersonWithPolicy_noPersonFound() throws CommandException {
         Model model = new ModelManager();
-
         // Create policy object
+
         Policy lifeInsurance = new Policy("life insurance", "2024-10-10",
                 "2030-10-10", "2024-11-10 100.00");
 
-        String nonExistentPolicyName = "non-existent insurance";
-        String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, nonExistentPolicyName);
+        String nonExistentPolicyName = "nonexistent insurance";
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_POLICY, nonExistentPolicyName);
 
         // create a person with health insurance policy
         Person alice = new PersonBuilder().withName("Alice").build();
@@ -90,7 +91,7 @@ public class SearchPolicyCommandTest {
     }
 
     @Test
-    public void execute_oneMatch_personFound() {
+    public void execute_oneMatch_personFound() throws CommandException {
         Model model = new ModelManager();
 
         // Create policy object
@@ -104,7 +105,7 @@ public class SearchPolicyCommandTest {
         model.addPerson(alice);
 
         String policyName = "health insurance";
-        String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, policyName);
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_POLICY, policyName);
 
         try {
             SearchPolicyCommand command = new SearchPolicyCommand(policyName);
@@ -124,7 +125,7 @@ public class SearchPolicyCommandTest {
     }
 
     @Test
-    public void execute_multipleMatches_multiplePersonsFound() {
+    public void execute_multipleMatches_multiplePersonsFound() throws CommandException {
 
         Model model = new ModelManager();
 
@@ -143,7 +144,7 @@ public class SearchPolicyCommandTest {
         model.addPerson(bob);
 
         String policyName = "HealthInsurance";
-        String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, policyName);
+        String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_POLICY, policyName);
 
         try {
             SearchPolicyCommand command = new SearchPolicyCommand(policyName);
