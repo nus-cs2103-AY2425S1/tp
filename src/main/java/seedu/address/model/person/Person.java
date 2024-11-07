@@ -135,6 +135,19 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same email.
+     * This checks if the address book already contains someone with the same email.
+     */
+    public boolean isSameEmail(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getEmail().equals(this.getEmail());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

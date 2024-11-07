@@ -10,9 +10,11 @@ package "Parser Classes" as ParserClasses{
 }
 Class A_Command
 Class B_Command
+Class C_Command
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 Class "{abstract}\nConcreteCommand" as ConcreteCommand
+Class "{abstract}\nFileAccessCommand" as FileAccessCommand
 
 
 Class "<<interface>>\nLogic" as Logic
@@ -33,19 +35,26 @@ LogicManager .right.|> Logic
 LogicManager -right->"1" ParserClasses
 ParserClasses ..> A_Command : <<create>>
 ParserClasses ..> B_Command : <<create>>
+ParserClasses ..> C_Command : <<create>>
 
 ConcreteCommand -up-|> Command
+FileAccessCommand -up-|> Command
 A_Command -up-|> ConcreteCommand
 B_Command -up-|> Command
+C_Command -up-|> FileAccessCommand
+A_Command .[hidden]right.> C_Command
 LogicManager .left.> Command : <<call>>
 
 LogicManager --> Model
 LogicManager --> Storage
+FileAccessCommand .up.> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
-note right of A_Command: Commands that can be undone: \nAddCommand, DeleteCommand, etc.
+note bottom of A_Command: Commands that can be undone: \nAddCommand, DeleteCommand, etc.
 note right of B_Command: Commands that cannot be undone: \nListCommand, UndoCommand, etc.
+note right of C_Command: Commands that access Storage: \nExportCommand, ImportCommand, etc.
+
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
