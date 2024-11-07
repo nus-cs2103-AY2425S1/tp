@@ -21,7 +21,7 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 
 /**
- * Parses input arguments and creates a new AddAssignmentCommand object
+ * Parses input arguments and creates a new {@code AddAssignmentCommand} object
  */
 public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
 
