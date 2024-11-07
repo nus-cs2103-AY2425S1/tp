@@ -91,15 +91,16 @@ public class SortCommand extends Command {
         Optional<Tag> p1Tag = getTagByName(p1);
         Optional<Tag> p2Tag = getTagByName(p2);
 
-        int compareResult = 0;
-
-        if (p1Tag.isEmpty() || p2Tag.isEmpty()) {
-            return compareResult;
+        if (areTagsEmpty(p1Tag, p2Tag)) {
+            return 0;
+        }
+        if (isEitherTagNull(p1Tag, p2Tag)) {
+            return compareNullTagValues(p1Tag, p2Tag);
         }
 
-        if (p1Tag.get().tagValue == null && p2Tag.get().tagValue == null) {
-            return compareResult;
-        } else if (p1Tag.get().tagValue == null) {
+        int compareResult = 0;
+
+        if (p1Tag.get().tagValue == null) {
             return 1;
         } else if (p2Tag.get().tagValue == null) {
             return -1;
@@ -127,6 +128,22 @@ public class SortCommand extends Command {
         }
 
         return determineComparisonOrder(compareResult, sortOrder.equalsIgnoreCase(ASCENDING_KEYWORD));
+    }
+
+    private boolean areTagsEmpty(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        return (p1Tag.isEmpty() || p2Tag.isEmpty());
+    }
+
+    private boolean isEitherTagNull(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        return (p1Tag.get().tagValue == null && p2Tag.get().tagValue == null);
+    }
+
+    private int compareNullTagValues(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        if (p1Tag.get().tagValue == null) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     private Optional<Tag> getTagByName(Person person) {
