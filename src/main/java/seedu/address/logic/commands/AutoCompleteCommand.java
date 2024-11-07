@@ -54,7 +54,7 @@ public class AutoCompleteCommand extends Command {
         } else if (inputType.equals(PREFIX_PRODUCT_NAME)) {
             possibleCompletions = model.getModifiedProductList().stream()
                     .map(Product::getName)
-                    .map(name -> name.fullName)
+                    .map(name -> name.getOriginalName())
                     .collect(Collectors.toList());
         } else if (inputType.equals(PREFIX_TAG)) {
             Set<String> tagSet = new HashSet<>();

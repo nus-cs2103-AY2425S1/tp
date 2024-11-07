@@ -1,7 +1,6 @@
 package seedu.address.model.product;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Product's name in the address book.
@@ -19,9 +18,10 @@ public class ProductName {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[^/][^/]*";
 
-    public final String fullName;
+    private final String originalName;
+    private final String normalizedName;
 
     /**
      * Constructs a {@code Name}.
@@ -30,8 +30,16 @@ public class ProductName {
      */
     public ProductName(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+
+        // Store the original name as provided by the user
+        originalName = name.trim().replaceAll("\\s+", " ");
+
+        // Normalize the name for internal use (lowercase)
+        normalizedName = originalName.toLowerCase();
+
+        if (!isValidName(normalizedName)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
@@ -41,30 +49,29 @@ public class ProductName {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getOriginalName() {
+        return originalName;
+    }
 
-    @Override
-    public String toString() {
-        return fullName;
+    public String getNormalizedName() {
+        return normalizedName;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.product.ProductName)) {
-            return false;
-        }
-
-        seedu.address.model.product.ProductName otherName = (seedu.address.model.product.ProductName) other;
-        return fullName.equals(otherName.fullName);
+        return other == this // short circuit if same object
+                || (other instanceof ProductName // instanceof handles nulls
+                && normalizedName.equals(((ProductName) other).normalizedName));
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return normalizedName.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return originalName;
     }
 
 }

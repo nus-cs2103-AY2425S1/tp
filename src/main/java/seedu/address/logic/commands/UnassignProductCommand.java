@@ -30,20 +30,17 @@ public class UnassignProductCommand extends Command {
             + PREFIX_PRODUCT_NAME + "apple pie "
             + PREFIX_SUPPLIER_NAME + "Amy Bee";
 
-    public static final String MESSAGE_SUCCESS = "Unassigned Product: %1$s to Supplier: %2$s";
+    public static final String MESSAGE_SUCCESS = "Successfully unassigned product %s.";
     public static final String MESSAGE_SUPPLIER_NOT_FOUND = "Supplier not found: %1$s";
     public static final String MESSAGE_PRODUCT_NOT_FOUND = "Product not found: %1$s";
     public static final String MESSAGE_PRODUCT_NOT_ASSIGNED = "Product was not assigned to the supplier initially.";
 
     private final ProductName productName;
-    private final Name supplierName;
     /**
      * @param productName of the product in the filtered product list to unassign.
-     * @param supplierName of the supplier in the filtered supplier list to unassign.
      */
-    public UnassignProductCommand(ProductName productName, Name supplierName) {
+    public UnassignProductCommand(ProductName productName) {
         this.productName = productName;
-        this.supplierName = supplierName;
     }
 
     @Override
@@ -53,22 +50,28 @@ public class UnassignProductCommand extends Command {
         List<Supplier> lastShownSupplierList = model.getModifiedSupplierList();
         List<Product> lastShownProductList = model.getModifiedProductList();
 
-        Supplier supplierToUnassign = lastShownSupplierList.stream()
-                .filter(supplier -> supplier.getName().equals(this.supplierName))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(String.format(MESSAGE_SUPPLIER_NOT_FOUND, this.supplierName)));
-
         Product productToUnassign = lastShownProductList.stream()
                 .filter(product -> product.getName().equals(this.productName))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_PRODUCT_NOT_FOUND, this.productName)));
 
-        Set<Product> updatedProductList = new HashSet<>(supplierToUnassign.getProducts());
+        // Check if product is assigned to any supplier
+        boolean isAssignedToAnySupplier = lastShownSupplierList.stream()
+                .anyMatch(supplier -> supplier.getProducts().contains(productToUnassign));
 
-        if (!updatedProductList.contains(productToUnassign)) {
+        if (!isAssignedToAnySupplier) {
             throw new CommandException(MESSAGE_PRODUCT_NOT_ASSIGNED);
         }
 
+        // Locate the specific supplier that has this product assigned
+        Name supplierName = productToUnassign.getSupplierName();
+        Supplier supplierToUnassign = lastShownSupplierList.stream()
+                .filter(supplier -> supplier.getName().equals(supplierName))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(String.format(MESSAGE_SUPPLIER_NOT_FOUND, supplierName)));
+
+        Set<Product> updatedProductList = new HashSet<>(supplierToUnassign.getProducts());
+        //Remove product from product list of supplier
         updatedProductList.remove(productToUnassign);
         Product updatedProduct = new Product(
                 productToUnassign.getName(),
@@ -94,8 +97,7 @@ public class UnassignProductCommand extends Command {
             return true;
         } else if (other instanceof UnassignProductCommand) {
             UnassignProductCommand otherCommand = (UnassignProductCommand) other;
-            return this.productName.equals(otherCommand.productName) && this.supplierName
-                    .equals(otherCommand.supplierName);
+            return this.productName.equals(otherCommand.productName);
         } else {
             return false;
         }
@@ -103,6 +105,6 @@ public class UnassignProductCommand extends Command {
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, supplierName);
+        return Objects.hash(productName);
     }
 }

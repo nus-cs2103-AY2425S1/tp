@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_STOCK_LEVEL;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_SYNTAX;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_REQUIRED_PREFIXES;
 import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
@@ -69,8 +70,8 @@ public class UpdateStockLevelCommandParserTest {
         assertParseFailure(parser, " pr/Product stk/", "Stock Level not provided!");
 
         // invalid product name
-        assertParseFailure(parser, " pr/Product#1 stk/1000",
-                "Names should only contain alphanumeric characters and spaces, and it should not be blank");
+        assertParseFailure(parser, " pr/Product/1 stk/1000",
+                String.format(MESSAGE_INVALID_SYNTAX, UpdateStockLevelCommand.MESSAGE_USAGE));
 
         // invalid stock level (non-numeric)
         assertParseFailure(parser, " pr/Product stk/abc", "Value for stock level is Invalid"

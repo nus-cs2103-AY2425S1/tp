@@ -53,8 +53,9 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new Name(name);
     }
+
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -68,7 +69,7 @@ public class ParserUtil {
         if (!ProductName.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new ProductName(trimmedName);
+        return new ProductName(name);
     }
 
     /**

@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_SUPPLIER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STOCK_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,14 +26,14 @@ public class AddProductCommand extends Command {
             + "[" + PREFIX_STOCK_LEVEL + "STOCK LEVEL] "
             + "[" + PREFIX_MIN_STOCK_LEVEL + "MIN STOCK LEVEL] "
             + "[" + PREFIX_MAX_STOCK_LEVEL + "MAX STOCK LEVEL] "
-            + "[" + PREFIX_PRODUCT_SUPPLIER_NAME + "SUPPLIER NAME] "
+            + "[" + PREFIX_SUPPLIER_NAME + "SUPPLIER NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "apple "
             + PREFIX_STOCK_LEVEL + "100 "
             + PREFIX_MIN_STOCK_LEVEL + "10 "
             + PREFIX_MAX_STOCK_LEVEL + "500 "
-            + PREFIX_PRODUCT_SUPPLIER_NAME + "FreshFarms "
+            + PREFIX_SUPPLIER_NAME + "FreshFarms "
             + PREFIX_TAG + "new "
             + PREFIX_TAG + "featured";
 
