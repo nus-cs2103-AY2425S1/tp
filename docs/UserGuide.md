@@ -6,7 +6,7 @@
 
 #  UGTeach User Guide
 
-UGTeach is a **desktop app for managing your students' contacts** that aims to empower undergraduate private tutors to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
+UGTeach is a **desktop app for managing your students' contacts** that aims to empower **Singapore-based undergraduate private tutors** to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
 
 Whether you're a Command Line Interface (CLI) pro or new to command lines, **we've got you covered**. Our app offers both a **CLI interface for advanced users** and a **GUI for those who prefer a more visual experience**.
 If you can type fast, UGTeach can get your contact management tasks done **faster than traditional GUI apps**.
