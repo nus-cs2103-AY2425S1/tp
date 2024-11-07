@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "c:ClearCommand" as ClearCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "a :AddressBook" as AddressBook MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(clear)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(clear)
+activate AddressBookParser
+
+create ClearCommand
+AddressBookParser -> ClearCommand
+activate ClearCommand
+
+ClearCommand --> AddressBookParser
+deactivate ClearCommand
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> ClearCommand : execute()
+activate ClearCommand
+
+create AddressBook
+ClearCommand -> AddressBook
+activate AddressBook
+
+AddressBook -> Model : setAddressBook(a)
+deactivate AddressBook
+activate Model
+
+ClearCommand --> LogicManager : result
+deactivate ClearCommand
+deactivate Model
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
