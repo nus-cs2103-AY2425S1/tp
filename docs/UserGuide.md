@@ -78,8 +78,9 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Person Related Features
 
-### Adding a person: `add`
+#### Adding a person: `add`
 
 Adds a person to the address book.
 
@@ -91,15 +92,15 @@ A person can have any number of roles (including 0) and Telegram username is opt
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/betsyyy r/attendee r/sponsor`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/betsyyy r/attendee r/sponsor`
 
-### Listing all persons : `list`
+#### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
@@ -122,9 +123,9 @@ Examples:
 *  `edit 2 n/Jason Brown t/` Edits the name of the 2nd person to be `Jason Brown` and clears their telegram username.
 *  `edit 3 n/Betsy Crower r/` Edits the name of the 3rd person to be `Betsy Crower` and clears all existing roles.
 
-### Locating persons, `find-name` and `find-role`
+#### Locating persons, `find-name` and `find-role`
 
-#### `find-name`
+##### Find persons by keywords in name: `find-name`
 Finds persons whose names contain any of the given keywords.
 
 Format: `find-name KEYWORD [MORE_KEYWORDS]`
@@ -141,7 +142,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-#### `find-role`
+##### Find persons by role: `find-role`
 Finds persons who have the specified role.
 
 Format: `find-role ROLE`
@@ -163,7 +164,82 @@ Examples:
 ![FindRoleDoubleRole.png](images%2FFindRoleDoubleRole.png)
 
 
-## Specialized Searching Mode: `searchmode`/`sm`
+#### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Once you delete a contact from the address book, the contact will automatically be removed from all events as well!
+</div>
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Event related Features
+
+#### Adding a new Event : `new`
+
+Adds a new Event to address book.
+
+Format: `new EVENT NAME`
+
+* Event name cannot be blank
+
+Examples:
+* `new Sumo Bot Festival`
+* `new RC Horror Night`
+
+#### Find and view all Persons in an event: `find-event`
+View the list of Persons in an Event.
+
+Format: `find-event [EVENT INDEX]`
+
+* Event name cannot be blank
+* Event must exist in PlanPal.
+
+Examples:
+* `find-event Sumo Bot Festival`
+* `find-event RC Horror Night`
+
+#### Add a person to an event: `event-add`
+Add a person with a specified role to an event.
+
+Format: `event-add ei/EVENT INDEX [a/ or s/ or ve/ or vo/] CONTACT INDEX`
+
+Guide for flag roles:
+* `a/` - attendee
+* `s/` - sponsor
+* `ve/` - vendor
+* `vo/` - volunteer
+
+Note: At least one of the following prefixes is required—`a/`, `e/`, `ve/`, or `vo/`—each followed by one or more contact index/indices
+
+Examples:
+* `event-add ei/1 a/1,2,3`
+
+#### Remove a person from an event: `remove`
+Removes a person from an event.
+
+Format: `remove ei/ [INDEX] pi/ [PERSON INDEX]`
+
+Example:
+* `remove ei/1 pi/1`
+
+#### Delete an event: `erase`
+Delete an event from the event list.
+
+Format: `erase [EVENT INDEX]`
+
+Example:
+* `erase 1`
+
+### Search and Add multiple people to an Event at once in a specialised searching mode: `searchmode`/`sm`
 Searchmode allows you to search for persons based on multiple criteria. 
 You can search for persons based on any criteria including:
 - Name
@@ -188,7 +264,7 @@ The following commands can be used in Searchmode:
 - `help` : Display the help message 
 - `exit`: Exit the program (same as the `exit` command)
 
-### Searching in Searchmode `search`
+#### Searching in Searchmode `search`
 
 Format: `search [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
@@ -225,7 +301,7 @@ Flag parameters should also not be repeated (e.g. `n/Alex n/John`).
 If looking for a specific person, try to be as specific as possible to get the best results!
 </div>
 
-### Excluding persons from Searchmode `exclude`
+#### Excluding persons from Searchmode `exclude`
 
 Format: `exclude pi/INDEX [MORE_INDEXES]`
 
@@ -241,7 +317,7 @@ Example:
   - `search p/9234512` matches previously excluded person but will not reappear in l ist
 ![ExcludedSearchExample.png](images%2FExcludedSearchExample.png)
 
-### Check excluded persons `checkexcluded`
+#### Check excluded persons `checkexcluded`
 To check the currently excluded persons in the search results, use the `checkexcluded` command.
 
 Format: `checkexcluded`
@@ -250,7 +326,7 @@ Example:
 - `checkexcluded` will display the list of persons that have been excluded from the search results
 ![CheckExcluded.png](images%2FCheckExcluded.png)
 
-### Clear Excluded persons `clearexcluded`
+#### Clear Excluded persons `clearexcluded`
 To remove all persons from the excluded list, use the `clearexcluded` command.
 Removed persons will be immediately added back to the list
 
@@ -259,7 +335,14 @@ Format: `clearexcluded`
 Example:
 ![ClearExcludedExample.png](images%2FClearExcludedExample.png)
 
-### Exiting Searchmode `exitsearch`/`es`
+#### Add all selected persons to an Event `add-all`
+To add all persons selected in searchmode to an event, use the `add-all` command.
+
+Format: `add-all EVENT-INDEX`
+
+Example: `add-all 2`
+
+#### Exiting Searchmode `exitsearch`/`es`
 To exit searchmode and return to the normal display, use the `exitsearch` or `es` command.
 
 Format: `exitsearch` or `es`
@@ -268,47 +351,7 @@ Example:
 ![ExitSearch.png](images%2FExitSearch.png)
 
 _This is the end of the Searchmode feature commands. The following commands can be used in the normal display mode._
-### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Once you delete a contact from the address book, the contact will automatically be removed from all events as well!
-</div>
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Adding a new Event : `new`
-
-Adds a new Event to address book.
-
-Format: `new EVENT NAME`
-
-* Event name cannot be blank
-
-Examples:
-* `new Sumo Bot Festival`
-* `new RC Horror Night`
-
-### Viewing an Event: `view`
-
-View the list of Persons in an Event.
-
-Format: `view EVENT NAME`
-
-* Event name cannot be blank
-* Event must exist in PlanPal.
-
-Examples:
-* `view Sumo Bot Festival`
-* `view RC Horror Night`
 
 ### Clearing all entries : `clear`
 
@@ -339,10 +382,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 The `up` and `down` arrow keys can be used to navigate through your command history. When you press the up arrow, the command box displays the previous commands you have executed, allowing you to re-run or edit past commands 
 without retyping them. Pressing the down arrow lets you move forward through the command history, returning to more recent commands.
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -363,12 +402,28 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/james_ho`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find-Name** | `find-name KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-name James Jake`
+**Find-Role** | `find-role ROLE [MORE_ROLES]`<br> e.g., `find-role sponsor`
 **New** | `new EVENT NAME` <br> e.g. `new Sumo Bot Festival`
-**View** | `view EVENT NAME` <br> e.g. `view Sumo Bot Festival`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Event-add** | `event-add ei/[EVENT INDEX] pi/[PERSON INDEX]` <br> e.g. `event-add ei/1 pi/1`
+**Find-Event** | `find-event [EVENT INDEX]` <br> e.g. `find-event 1`
+**Remove** | `remove ei/[EVENT INDEX] pi/[PERSON INDEX]` <br> e.g. `remove ei/1 pi/1`
+**Erase** | `erase [EVENT INDEX]`
 **List** | `list`
 **Help** | `help`
+
+
+### Searchmode Summary
+
+Action | Format, Examples
+--------|------------------
+**searchmode** | `searchmode` / `sm`
+**search** | `search`
+**exclude** | `exclude pi/INDEX [MORE_INDEXES]` <br> e.g. `search n/Alex`
+**checkexcluded** | `checkexcluded`
+**clearexcluded** | `clearexcluded`
+**exitsearch** | `exitsearch` / `es`
