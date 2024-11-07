@@ -31,7 +31,7 @@ public class AddEcNumberCommandParser implements Parser<AddEcNumberCommand> {
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_ECNUMBER);
 
         if (!argMultiMap.getValue(PREFIX_ECNUMBER).isPresent()) {
-            logger.log(Level.INFO, "Prefix 'ep/' not present");
+            logger.log(Level.WARNING, "Prefix 'ep/' not present.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddEcNumberCommand.MESSAGE_USAGE));
         }
@@ -45,11 +45,13 @@ public class AddEcNumberCommandParser implements Parser<AddEcNumberCommand> {
             index = ParserUtil.parseIndex(argMultiMap.getPreamble());
             ecNumber = ParserUtil.parseEcNumber(argMultiMap.getValue(PREFIX_ECNUMBER).get());
         } catch (IllegalValueException ive) {
-            logger.log(Level.INFO, "Exception caught at when parsing for AddEcNumberCommand");
+            logger.log(Level.WARNING, "Exception caught when parsing for AddEcNumberCommand.");
             throw new ParseException(ive.getMessage(), ive);
         }
 
-        logger.log(Level.INFO, "Parsed add ec number command without exception");
+        assert index != null;
+        assert ecNumber != null;
+        logger.log(Level.INFO, "Parsed add ec number command without exception.");
         return new AddEcNumberCommand(index, ecNumber);
     }
 }

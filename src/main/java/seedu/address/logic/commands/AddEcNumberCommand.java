@@ -5,7 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,6 +31,8 @@ public class AddEcNumberCommand extends Command {
             + "New Emergency Contact Number: %2$s";
     public static final String MESSAGE_DELETE_ECNUMBER_SUCCESS = "Removed emergency contact number for: %1$s\n%2$s";
 
+    private static final Logger logger = LogsCenter.getLogger(AddEcNumberCommand.class);
+
     private final Index index;
     private final EcNumber ecNumber;
 
@@ -48,10 +53,13 @@ public class AddEcNumberCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, "Index is more than size of filtered list.");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        assert personToEdit != null;
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
                 personToEdit.getStudentClass(), personToEdit.getEcName(), ecNumber, personToEdit.getExams(),
@@ -59,6 +67,7 @@ public class AddEcNumberCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.log(Level.INFO, "AddEcNumberCommand has been executed.");
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 

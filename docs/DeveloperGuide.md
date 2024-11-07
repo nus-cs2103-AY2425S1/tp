@@ -1113,7 +1113,7 @@ testers are expected to do more *exploratory* testing.
 
     5. Other incorrect addEcNumber commands to try:<br> 
        `addEcNumber`<br>
-       `addEcNumber abc ep/91234567`
+       `addEcNumber abc ep/91234567`<br>
        `addEcNumber x ep/91234567` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -1173,7 +1173,8 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect addExam commands to try:<br>
        `addExam`<br>
-       `addExam ex/`, `addExam ex/#@*`<br>
+       `addExam ex/`<br>
+       `addExam ex/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
