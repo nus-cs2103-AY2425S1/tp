@@ -20,7 +20,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all clients whose specified field "
             + "contains the given substring (case-insensitive) and displays the results in a numbered list.\n"
             + "Parameters: <FLAG>/ <SEARCH TERM>\n"
-            + "Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, r/ REMARK i/ (=/</>) INCOME s/ STATUS\n"
+            + "Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS\n"
             + "Example: '" + COMMAND_WORD + " n/ Alice" + " p/ 91112222'\n"
             + "This will find all clients whose names contain 'Alice' and whose phone number is '91112222'.";
 
