@@ -100,7 +100,7 @@ public class MainApp extends Application {
                 // If the addressbook is not present start from sample data
                 logger.info("Creating new data files " + storage.getAddressBookFilePath() + " and "
                         + storage.getTransactionBookFilePath()
-                        + " populated with a sample data.");
+                        + " populated with sample data.");
                 addressBookModel = new AddressBookModelManager(SampleDataUtil.getSampleAddressBook());
                 // Since addressbook is nonexistent, whatever state transactionbook is in should become irrelevant.
                 // We shall therefore start from sample data with transactionbook as well.
