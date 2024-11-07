@@ -191,7 +191,7 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
 * For name searches, persons matching any of the keyswords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned.
 
-Tip: Support search prefixes include:
+**Tip:** Supported search prefixes include:
 * `NAME`: n/
 * `TAG`: t/
 * `PHONE_NUMBER`: p/
