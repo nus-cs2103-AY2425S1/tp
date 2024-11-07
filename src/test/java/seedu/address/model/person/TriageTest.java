@@ -4,11 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.TriageCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class TriageTest {
@@ -90,13 +88,13 @@ public class TriageTest {
     @Test
     void isValidTriage_invalidValues_returnFalse() {
         // Test invalid triage values (out of range, non-integer, empty string, negative numbers)
-        assertFalse(Triage.isValidTriage("0"));     // below valid range
-        assertFalse(Triage.isValidTriage("6"));     // above valid range
-        assertFalse(Triage.isValidTriage("-1"));    // negative number
-        assertFalse(Triage.isValidTriage("a"));     // non-integer
-        assertFalse(Triage.isValidTriage("1.5"));   // decimal
-        assertFalse(Triage.isValidTriage(""));      // empty string
-        assertFalse(Triage.isValidTriage(" "));     // whitespace
+        assertFalse(Triage.isValidTriage("0"));
+        assertFalse(Triage.isValidTriage("6"));
+        assertFalse(Triage.isValidTriage("-1"));
+        assertFalse(Triage.isValidTriage("a"));
+        assertFalse(Triage.isValidTriage("1.5"));
+        assertFalse(Triage.isValidTriage(""));
+        assertFalse(Triage.isValidTriage(" "));
     }
 
     @Test
