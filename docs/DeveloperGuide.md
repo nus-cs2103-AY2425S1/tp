@@ -673,5 +673,10 @@ This appendix provides an overview of the effort and complexity involved in modi
 1. The Model component needed restructuring to support multiple entity types, such as patients, medications, and appointments, which added complexity:
    * **Data Relationships**: Establishing relationships between entities, such as linking patients with medications and appointments, was challenging. Designing these relationships in a way that allowed for seamless data manipulation without creating dependencies was an important aspect of the model redesign.
 ### Storage
+1. It was necessary to get a basic understanding of how Json files work. Upon creating our new Json class that adapts to appointment, a weak understanding of @JsonCreator property caused initial bugs where appointment information had issues being retrieved from the Json file format. This bug was eventually fixed with greater understanding of Json.
 
 ### UI
+1. UI Design required good understanding and identification of the relevant dependencies on the corresponding .fxml and .css files.
+2. To restructure and customise the UI, a firm understanding of UI elements such as the HBox, VBox and Stackpanes is necessary to layout the UI elements according. There was particularly a struggle understanding the effects of the growing Hbox and Vbox, as the space occupied is unexpected.
+3. Choice or colour to make the app aesthetic is also non-trivial
+4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements
