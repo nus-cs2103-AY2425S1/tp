@@ -150,7 +150,7 @@ Edits an existing Udder in the address book.
     specifying any tags after it.
 
 <box type="warning">
-**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+**IMPORTANT:** This command require indexes to be executed when the list of Udders is filtered and will follow the indexing shown on the Udders list.
 </box>
 
 **Examples:**
@@ -166,7 +166,7 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 * Automatically detects any clash in meetings with other Udders.
 
 <box type="warning">
-**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+**IMPORTANT:** This command require indexes to be executed when the list of Udders is filtered and will follow the indexing shown on the Udders list.
 </box>
 
 **Examples:**
@@ -197,7 +197,7 @@ Finds Udders by specified keywords for each field.
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
 
 <box type="warning">
-**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+**IMPORTANT:** This command require indexes to be executed when the list of Udders is filtered and will follow the indexing shown on the Udders list.
 </box>
 
 **Examples:**
@@ -228,7 +228,7 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 * The index refers to the index number shown in the displayed Udders list.
 
 <box type="warning">
-**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+**IMPORTANT:** This command require indexes to be executed when the list of Udders is filtered and will follow the indexing shown on the Udders list.
 </box>
 
 **Examples:**
