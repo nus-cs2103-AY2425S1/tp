@@ -12,11 +12,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * Represents a Person's next appointment date in the address book.
+ * Represents a Person's next appointment date and time in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Date {
-
+    public static final Date NO_DATE = new Date(LocalDateTime.MIN);
     private static final String DATE_AND_TIME_PATTERN =
           "^(0[1-9]|[1-9]|[12][0-9]|3[01])/(0[1-9]|[1-9]|1[0-2])/\\d{4} ([01][0-9]|2[0-3])[0-5][0-9]$";
     private static final String DATE_PATTERN =
@@ -55,7 +55,7 @@ public class Date {
      * <li>Month-specific day limits (e.g., April cannot exceed 30 days).</li>
      * </ul>
      *
-     * @param date the date string to validate, in the format {@code "d/M/yyyy HHmm"}
+     * @param date the date string to validate, in the format {@code "d/M/yyyy HHmm"}.
      * @throws ParseException if the date format is incorrect or if values exceed valid ranges:
      *      <ul>
      *          <li>{@code "Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'"}
@@ -63,12 +63,18 @@ public class Date {
      *          <li>{@code "Invalid date or time values! Ensure day, month, hour, and minute ranges are correct."}
      *          for incorrect values.</li>
      *          <li>Specific messages for day limits in certain months,
-     *          such as {@code "February cannot have more than 29 days."}</li>
+     *          such as {@code "February cannot have more than 29 days."} for incorrect day counts.</li>
      *      </ul>
+     * @throws NullPointerException if the provided date string is {@code null}.
      */
     public static void checkDateAndTime(String date) throws ParseException {
+        if (!date.matches("[0-9/ ]+")) {
+            throw new ParseException("Invalid date and time characters detected! "
+                    + "Only numbers, '/' and spaces are allowed.");
+        }
+
         if (!date.matches(DATE_AND_TIME_PATTERN) && !date.matches(FORMAT_PATTERN_DATE_AND_TIME)) {
-            throw new ParseException("Invalid date format! Please use 'd/M/yyyy HHmm'. "
+            throw new ParseException("Invalid date and time format! Please use 'd/M/yyyy HHmm'. "
                     + "For example, '2/12/2024 1800'.");
         }
         if (!date.matches(DATE_AND_TIME_PATTERN)) {
@@ -82,17 +88,30 @@ public class Date {
 
 
     /**
-     * Validates the format and values of a date string.
+     * Validates the format and values of a date string specifically for date in Schedule Command.
      * <p>
-     * This method checks if the input date matches the expected patterns for formatting
-     * and valid day/month ranges. If the format or values are invalid, it throws a
-     * {@link ParseException} with an appropriate message.
+     * This method checks if the input date string matches the expected format
+     * of "d/M/yyyy" (e.g., "2/12/2024") and whether the individual day,
+     * month, and year values are valid according to the Gregorian calendar.
+     * If the format or values are invalid, a {@link ParseException} is thrown
+     * with a descriptive message indicating the nature of the error.
      * </p>
      *
-     * @param date the date string to validate, expected in the format "d/M/yyyy" (e.g., "2/12/2024")
-     * @throws ParseException if the date format is invalid or the date values are out of range
+     * @param date the date string to validate, expected in the format "d/M/yyyy"
+     *             (e.g., "2/12/2024"). The string may include spaces but must
+     *             adhere to the specified format.
+     * @throws ParseException if the date format is invalid or the date values
+     *                        are out of range (e.g., day is not between 1 and 31,
+     *                        month is not between 1 and 12, or the year is
+     *                        negative).
+     * @throws NullPointerException if the provided date string is {@code null}.
      */
     public static void checkDate(String date) throws ParseException {
+        if (!date.matches("[0-9/ ]+")) {
+            throw new ParseException("Invalid date characters detected! "
+                    + "Only numbers and '/' are allowed.");
+        }
+
         if (!date.matches(DATE_PATTERN) && !date.matches(FORMAT_PATTERN_DATE)) {
             throw new ParseException("Invalid date format! Please use 'd/M/yyyy'. "
                     + "For example, '2/12/2024'.");
@@ -127,6 +146,12 @@ public class Date {
         int dayValue = Integer.parseInt(dateParts[0]);
         int monthValue = Integer.parseInt(dateParts[1]);
         int yearValue = Integer.parseInt(dateParts[2]);
+
+        // Allow year 1 but reject years before it (e.g., 0000)
+        if (yearValue < 1) {
+            throw new ParseException("Invalid year: " + yearValue
+                    + " is not supported. Year must be greater than or equal to 1.");
+        }
 
         //Check for months with only 30 days
         if (monthValue == 4 || monthValue == 6 || monthValue == 9 || monthValue == 11) {
@@ -187,7 +212,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return value != LocalDateTime.MIN ? value.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")) : "";
+        return value.equals(Date.NO_DATE.value) ? "" : value.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     @Override

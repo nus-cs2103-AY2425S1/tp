@@ -31,15 +31,15 @@ public class DateCommandParserTest {
 
         // Only Name provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " n/Nayana",
-                "A date is required. Please include a date. " + expectedMessage);
+                "A date and time is required. Please include a date and time. " + expectedMessage);
 
         // Only Phone provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " p/12345678",
-                "A date is required. Please include a date. " + expectedMessage);
+                "A date and time is required. Please include a date and time. " + expectedMessage);
 
         // Only Email provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/email@example.com",
-                "A date is required. Please include a date. " + expectedMessage);
+                "A date and time is required. Please include a date and time. " + expectedMessage);
     }
 
     @Test
@@ -50,7 +50,8 @@ public class DateCommandParserTest {
 
         // Invalid Email format
         expectedMessage = Messages.MESSAGE_INVALID_EMAIL_DETAILS;
-        assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/invalid email " + nonEmptyDate, expectedMessage);
+        assertParseFailure(parser, DateCommand.COMMAND_WORD
+                + " e/invalid email " + nonEmptyDate, expectedMessage);
     }
 
     @Test
@@ -63,6 +64,12 @@ public class DateCommandParserTest {
 
         //trailing and leading spaces
         assertParseSuccess(parser, " \n n/ Nayana p/88502457 \n d/ 18/2/2024 1800 \t", dateCommand);
+    }
+
+    @Test
+    public void parse_invalidPrefix_failure() {
+        assertParseFailure(parser, " n/ Nayana p/88502457 d/ 18/2/2024 1800 t/High Risk",
+              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
     }
 
 }

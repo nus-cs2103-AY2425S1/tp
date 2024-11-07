@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
@@ -9,23 +13,25 @@ import seedu.address.model.tag.Tag;
  * Tests that a {@code Person}'s features matches any in the list.
  */
 public class PersonHasFeaturePredicate implements Predicate<Person> {
-    private Tag tag;
-    private Phone phone;
+    private final Tag tag;
+    private final Phone phone;
 
-    private Email email;
-    private Address address;
+    private final Email email;
+    private final Address address;
+    private final List<Allergy> allergies;
 
     /**
-     * @param tag
-     * @param phone
+     * @param tag The tag to filter by (can be null).
+     * @param phone the phone number to filter by (can be null).
      * @param email   The email to filter by (can be null).
      * @param address The address to filter by (can be null).
      */
-    public PersonHasFeaturePredicate(Tag tag, Phone phone, Email email, Address address) {
+    public PersonHasFeaturePredicate(Tag tag, Phone phone, Email email, Address address, List<Allergy> allergies) {
         this.tag = tag;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.allergies = allergies;
     }
     /**
      * Tests if a {@code Person}'s tag and phone number meet specific criteria.
@@ -38,7 +44,8 @@ public class PersonHasFeaturePredicate implements Predicate<Person> {
         return isTagTrue(person.getTag())
                 && isPhoneTrue(person.getPhone())
                 && isEmailTrue(person.getEmail())
-                && isAddressTrue(person.getAddress());
+                && isAddressTrue(person.getAddress())
+                && isAllergyTrue(new ArrayList<>(person.getAllergies()));
     }
 
     /**
@@ -79,6 +86,21 @@ public class PersonHasFeaturePredicate implements Predicate<Person> {
         return address == null || address.equals(otherAddress);
     }
 
+    /**
+     * Checks if the person's allergies match any of the specified allergies.
+     *
+     * @param personAllergies The list of allergies the person has.
+     * @return {@code true} if any specified allergies are in the person's allergies; or if no allergy filter is set.
+     */
+    public boolean isAllergyTrue(List<Allergy> personAllergies) {
+
+        if (allergies == null || allergies.isEmpty()) {
+            return true;
+        }
+        Set<Allergy> allergySet = new HashSet<>(allergies);
+        return personAllergies.stream().anyMatch(allergySet::contains);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -93,6 +115,7 @@ public class PersonHasFeaturePredicate implements Predicate<Person> {
         PersonHasFeaturePredicate otherPersonHasFeaturePredicate = (PersonHasFeaturePredicate) other;
         return isTagTrue(otherPersonHasFeaturePredicate.tag) && isPhoneTrue(otherPersonHasFeaturePredicate.phone)
                 && isEmailTrue(otherPersonHasFeaturePredicate.email)
-                && isAddressTrue(otherPersonHasFeaturePredicate.address);
+                && isAddressTrue(otherPersonHasFeaturePredicate.address)
+                && isAllergyTrue(otherPersonHasFeaturePredicate.allergies);
     }
 }

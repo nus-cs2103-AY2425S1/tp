@@ -173,11 +173,13 @@ Constraints:
     - Must be a positive integer: 1, 2, 3, ...
     - Must be an index number shown in the displayed patient list
 
-* **DATE**
+* **DATE_TIME**
     - Must follow the format of dd/MM/YYYY HHmm
+    - Can only contain numbers, '/', and spaces.
 
 * **DATE_ONLY**
     - Must follow the format of dd/MM/YYYY
+    - Can only contain numbers and '/'
 
 ### Viewing help: `help`
 
@@ -197,7 +199,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY...`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin m/Penicillin`
-
   <br>
 * `add n/Betsy-Crowe p/81239873 e/betsycrowe@example.com a/01 Clementi Road #04-03 Singapore 4374538 t/Low Risk m/None`
 
@@ -265,10 +266,13 @@ Format: `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
 Additional Details:
 * The search is case-sensitive.
 * The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
-* You can filter by **tag, email, allergy, address and phone number**
+* You can filter by **tag, email, allergy, address, phone number and allergies**
 * Only full words will be matched e.g. `99999999` will not match `999`
-* Patients matching all features listed will be returned (i.e. `AND` search).
-* There can only be one of each feature as a maximum (i.e. cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not accepted.
+* Allergies is the only attribute that allows multiple parameters. For other attributes, there can only be one of each feature as a maximum (i.e. cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not accepted.
+* The filter search uses AND logic between different attributes (e.g., tag and allergies) — all specified attributes must match. If multiple allergies are specified, it uses OR logic — an entry will match allergies attribute if it has any one of the specified allergies, or all. 
+For example:
+filter t/High Risk m/Peanuts m/Dairy will return entries with the "High Risk" tag and any of the allergies "Peanuts" or "Dairy".
+filter m/Peanuts m/Dairy will return entries with either "Peanuts" or "Dairy" allergy, or both.
 * Filter requires at least one feature to filter by (e.g. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
   e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
 
@@ -281,6 +285,7 @@ Examples:
 * `filter m/Penicillin p/88451234`
   returns all patients who have an allergy to penicillin AND have the phone number `88451234`
   <br>
+
 
 ### Deleting a patient : `delete`
 
@@ -305,7 +310,7 @@ Examples:
 
 Adds or updates the next appointment date and time of the specified person in the address book.
 
-Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE`
+Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 
 [Parameter Constraints](#parameter-constraints).
 
@@ -314,6 +319,7 @@ Additional Details:
 * If the attribute provided matches more than one person, two of the attributes need to be provided to uniquely match to a person
 * To remove the date and time from a person, use `d/None`.
 * 2 patients cannot have the same date and time for the appointment
+* The date command supports the year 0001 onwards. Any years before that is not supported.
 
 
 Examples:
@@ -410,7 +416,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Delete**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
 | **Edit**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                             |
 | **Find**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                              |
-| **Filter**           | `filter n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE [atleast one parameter]`<br> e.g., `filter t/High Risk`                                                          |
+| **Filter**           | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY] [atleast one parameter]`<br> e.g., `filter t/High Risk`                                                     |
 | **View**             | `view`                                                                                                                                                                                  |
 | **Help**             | `help`                                                                                                                                                                                  |
 | **Appointment Date** | `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE`                                                                                                                                       |
