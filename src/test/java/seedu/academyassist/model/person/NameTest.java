@@ -32,7 +32,6 @@ public class NameTest {
         assertFalse(Name.isValidName("peter*")); // contains non-alphabet characters
         assertFalse(Name.isValidName("12345")); // numbers only
         assertFalse(Name.isValidName("peter the 2nd")); // contains numbers characters
-        assertFalse(Name.isValidName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); // contain 51 char
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only

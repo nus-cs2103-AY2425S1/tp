@@ -2,13 +2,6 @@ package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academyassist.logic.Messages.MESSAGE_DUPLICATE_IC;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 
 import java.util.HashSet;
 import java.util.Objects;

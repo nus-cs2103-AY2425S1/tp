@@ -18,7 +18,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts students based on name/subject/studentId/yearGroup. \n"
-            + "Format: " + COMMAND_WORD + " by/FIELD\n"
+            + "Format: " + COMMAND_WORD + " " + PREFIX_SORT_PARAM + "FIELD\n"
             + "Parameters Example: \n"
             + "- FIELD: name, subject, studentId or yearGroup\n";
 

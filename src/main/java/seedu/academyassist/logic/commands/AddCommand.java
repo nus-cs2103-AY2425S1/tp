@@ -15,8 +15,6 @@ import seedu.academyassist.logic.Messages;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.person.Person;
-import seedu.academyassist.model.person.Subject;
-import seedu.academyassist.model.person.SubjectEnum;
 
 /**
  * Adds a person to the management system.
