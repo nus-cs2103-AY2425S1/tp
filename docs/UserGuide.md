@@ -887,7 +887,7 @@ dd/MM/yyyy</code>
   </td>
 </tr>
 <tr>
-  <td><u>Format</u><br>The keyword provided should be of the format <code>dd/MM/yyyy</code>.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  <td><u>Format</u><br>The keyword provided should be a valid date of the format <code>dd/MM/yyyy</code>.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
 </tr>
 <tr>
   <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Attendance must be in date format...</i></td>
