@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "Clientell",
-  "titleSuffix": "AddressBook Level-3",
+  "titleSuffix": "Client Manager",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
