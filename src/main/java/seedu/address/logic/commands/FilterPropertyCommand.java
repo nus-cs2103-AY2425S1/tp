@@ -27,7 +27,7 @@ public class FilterPropertyCommand extends Command {
             .format("%s: Filters the properties based on PropertyType and MatchingPrice.\n"
                     + "Parameters: [%sTYPE] [%sMATCHINGPRICE] [%sMATCHINGPRICE]\n"
                     + "Restrictions:\n"
-                    + "\t%s\n\t%s\n\tAt least one optional parameter is specified in command",
+                    + "\t%s\n\t%s\n\tAt least one optional parameter is specified in command.",
                     COMMAND_WORD, PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE,
                     Type.MESSAGE_CONSTRAINTS, MatchingPrice.MESSAGE_CONSTRAINTS);
 
