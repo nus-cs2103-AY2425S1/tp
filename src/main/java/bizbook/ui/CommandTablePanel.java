@@ -28,8 +28,8 @@ public class CommandTablePanel extends UiPart<Region> {
     private static final double COMMAND_WORD_RATIO = 0.15;
     private static final double COMMAND_USAGE_RATIO = 0.85;
 
-    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * COMMAND_WORD_RATIO; // 15% of table width
-    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * COMMAND_USAGE_RATIO; // 85% of table width
+    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * COMMAND_WORD_RATIO;
+    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * COMMAND_USAGE_RATIO;
 
     private final Logger logger = LogsCenter.getLogger(CommandTablePanel.class);
 
