@@ -149,6 +149,10 @@ Edits an existing Udder in the address book.
 * You can remove all the Udder’s tags by typing `t/` without
     specifying any tags after it.
 
+<box type="warning">
+**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+</box>
+
 **Examples:**
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st Udder to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd Udder to be `Betsy Crower` and clears all existing tags.
@@ -160,6 +164,10 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 **Format:** `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
 
 * Automatically detects any clash in meetings with other Udders.
+
+<box type="warning">
+**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+</box>
 
 **Examples:**
 *  `schedule 10 st/25-12-2002 00:00 et/25-12-2002 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 00:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
@@ -218,6 +226,10 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 
 * Deletes the Udder at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Udders list.
+
+<box type="warning">
+**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+</box>
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd Udder in the address book.
