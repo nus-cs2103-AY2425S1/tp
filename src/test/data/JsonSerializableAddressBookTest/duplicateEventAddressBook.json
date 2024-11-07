@@ -10,34 +10,127 @@
   } ],
   "events": [
     {
-      "name": "IFG",
-      "sport": "Volleyball Men",
-      "venue": "Stadium",
-      "persons": []
-    },
-    {
-      "name": "IFG",
-      "sport": "Volleyball Men",
-      "venue": "Stadium",
-      "persons": []
-    },
-    {
-      "name": "AUG",
-      "sport": "Basketball Women",
-      "venue": "Arena",
-      "persons": []
-    },
-    {
-      "name": "SUNIG",
-      "sport": "Swimming Women",
-      "venue": "Pool",
-      "persons": []
-    },
-    {
-      "name": "IVP",
       "sport": "Chess",
+      "teams": ["COM", "NUSC"],
+      "venue": "UT AUD2",
+      "dateTime": "2024 09 20 1000",
+      "persons": [
+        {
+          "name" : "Alice Pauline",
+          "phone" : "94351253",
+          "email" : "alice@example.com",
+          "roles" : [
+            {
+              "name": "Athlete - COM - Volleyball Women, Floorball Women"
+            } ]
+        },
+        {
+          "name" : "Elle Meyer",
+          "phone" : "94822224",
+          "email" : "werner@example.com",
+          "roles" : [ {
+            "name": "Committee - Marketing - Project Director"
+          } ]
+        }
+      ]
+    },
+    {
+      "sport": "Squash",
+      "teams": ["FASS", "YNC"],
+      "venue": "Arena",
+      "dateTime": "2024 09 20 1400",
+      "persons": [
+        {
+          "name" : "Carl Kurz",
+          "phone" : "95352563",
+          "email" : "heinz@example.com",
+          "roles" : [
+            {
+              "name": "Referee - MED - Tchoukball, Squash"
+            } ]
+        }
+      ]
+    },
+    {
+      "sport": "Swimming Men",
+      "teams": ["MED", "DEN"],
+      "venue": "Pool",
+      "dateTime": "2024 09 20 1600",
+      "persons": [
+        {
+          "name" : "Benson Meier",
+          "phone" : "98765432",
+          "email" : "johnd@example.com",
+          "roles" : [
+            {
+              "name": "Volunteer - Emcee"
+            },
+            {
+              "name": "Athlete - DEN - Swimming Men"
+            } ]
+        },
+        {
+          "name" : "Fiona Kunz",
+          "phone" : "94822427",
+          "email" : "lydia@example.com",
+          "roles" : [
+            {
+              "name": "Committee - Publicity - Project Director"
+            } ]
+        }
+      ]
+    },
+    {
+      "sport": "Table Tennis",
+      "teams": ["LAW", "BIZ"],
       "venue": "Court",
-      "persons": []
+      "dateTime": "2024 09 21 1000",
+      "persons": [
+        {
+          "name" : "Daniel Meier",
+          "phone" : "87652533",
+          "email" : "cornelia@example.com",
+          "roles" : [
+            {
+              "name": "Sponsor - OATSIDE"
+            } ]
+        },
+        {
+          "name" : "George Best",
+          "phone" : "94822442",
+          "email" : "anna@example.com",
+          "roles" : [
+            {
+              "name": "Committee - Sports - Vice Sports Director - BIZ"
+            } ]
+        }
+      ]
+    },
+    {
+      "sport": "Table Tennis",
+      "teams": ["LAW", "BIZ"],
+      "venue": "Court",
+      "dateTime": "2024 09 21 1000",
+      "persons": [
+        {
+          "name" : "Daniel Meier",
+          "phone" : "87652533",
+          "email" : "cornelia@example.com",
+          "roles" : [
+            {
+              "name": "Sponsor - OATSIDE"
+            } ]
+        },
+        {
+          "name" : "George Best",
+          "phone" : "94822442",
+          "email" : "anna@example.com",
+          "roles" : [
+            {
+              "name": "Committee - Sports - Vice Sports Director - BIZ"
+            } ]
+        }
+      ]
     }
   ]
 }

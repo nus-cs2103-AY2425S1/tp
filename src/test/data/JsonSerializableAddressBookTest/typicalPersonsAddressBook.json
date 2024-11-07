@@ -17,7 +17,7 @@
         "name": "Volunteer - Emcee"
       },
       {
-        "name": "Athlete - FASS - Swimming Men"
+        "name": "Athlete - DEN - Swimming Men"
       } ]
   }, {
     "name" : "Carl Kurz",
@@ -61,9 +61,10 @@
   } ],
   "events": [
     {
-      "name": "IFG",
       "sport": "Chess",
-      "venue": "Stadium",
+      "teams": ["COM", "NUSC"],
+      "venue": "UT AUD2",
+      "dateTime": "2024 09 20 1000",
       "persons": [
         {
           "name" : "Alice Pauline",
@@ -85,9 +86,10 @@
       ]
     },
     {
-      "name": "AUG",
-      "sport": "Basketball Women",
+      "sport": "Squash",
+      "teams": ["FASS", "YNC"],
       "venue": "Arena",
+      "dateTime": "2024 09 20 1400",
       "persons": [
         {
           "name" : "Carl Kurz",
@@ -101,9 +103,10 @@
       ]
     },
     {
-      "name": "SUNIG",
       "sport": "Swimming Men",
+      "teams": ["MED", "DEN"],
       "venue": "Pool",
+      "dateTime": "2024 09 20 1600",
       "persons": [
         {
           "name" : "Benson Meier",
@@ -114,7 +117,7 @@
               "name": "Volunteer - Emcee"
             },
             {
-              "name": "Athlete - FASS - Swimming Men"
+              "name": "Athlete - DEN - Swimming Men"
             } ]
         },
         {
@@ -129,9 +132,10 @@
       ]
     },
     {
-      "name": "IVP",
-      "sport": "Chess",
+      "sport": "Table Tennis",
+      "teams": ["LAW", "BIZ"],
       "venue": "Court",
+      "dateTime": "2024 09 21 1000",
       "persons": [
         {
           "name" : "Daniel Meier",

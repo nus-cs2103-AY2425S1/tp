@@ -14,9 +14,10 @@
   } ],
   "events": [
     {
-      "name": "IFG",
       "sport": "Chess",
-      "venue": "Stadium",
+      "teams": ["COM", "NUSC"],
+      "venue": "UT AUD2",
+      "dateTime": "2024 09 20 1000",
       "persons": [
         {
           "name" : "Alice Pauline",
@@ -31,17 +32,17 @@
           "name" : "Elle Meyer",
           "phone" : "94822224",
           "email" : "werner@example.com",
-          "roles" : [
-            {
-              "name": "colleagues"
-            } ]
+          "roles" : [ {
+            "name": "Committee - Marketing - Project Director"
+          } ]
         }
       ]
     },
     {
-      "name": "AUG",
-      "sport": "Basketball Women",
+      "sport": "Squash",
+      "teams": ["FASS", "YNC"],
       "venue": "Arena",
+      "dateTime": "2024 09 20 1400",
       "persons": [
         {
           "name" : "Carl Kurz",
@@ -49,15 +50,16 @@
           "email" : "heinz@example.com",
           "roles" : [
             {
-              "name": "friends"
+              "name": "Referee - MED - Tchoukball, Squash"
             } ]
         }
       ]
     },
     {
-      "name": "SUNIG",
       "sport": "Swimming Men",
+      "teams": ["MED", "DEN"],
       "venue": "Pool",
+      "dateTime": "2024 09 20 1600",
       "persons": [
         {
           "name" : "Benson Meier",
@@ -68,7 +70,7 @@
               "name": "Volunteer - Emcee"
             },
             {
-              "name": "Athlete - FASS - Swimming Men"
+              "name": "Athlete - DEN - Swimming Men"
             } ]
         },
         {
@@ -83,9 +85,10 @@
       ]
     },
     {
-      "name": "IVP",
-      "sport": "Chess",
+      "sport": "Table Tennis",
+      "teams": ["LAW", "BIZ"],
       "venue": "Court",
+      "dateTime": "2024 09 21 1000",
       "persons": [
         {
           "name" : "Daniel Meier",
