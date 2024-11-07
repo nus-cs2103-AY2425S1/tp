@@ -6,7 +6,7 @@
 
 # BridalBuddy User Guide
 
-BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](#glossary).
+BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary).
 It is an app targeted at Wedding Planners to help them streamline guest and vendor management for their clients.
 
 As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
@@ -49,7 +49,6 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 5. [**FAQ**](#faq)
 6. [**Known Issues**](#known-issues)
 7. [**Command summary**](#command-summary)
-8. [**Glossary**](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -74,8 +73,7 @@ This section tells you what information you will find in each of the sections of
 3. [Features](#features) helps you understand how all our features work.
 4. [FAQ](#faq) clarifies the doubts that many of our users have.
 5. [Command Summary](#command-summary) summarises all our features for easy reference.
-6. [Glossary](#glossary) explains the more technical terms used in this guide.
-7. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
+6. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
 
 [_Back to Top_](#table-of-contents)
 
@@ -91,7 +89,7 @@ This section tells you what information you will find in each of the sections of
 3. Copy the file to the folder you want to use as the _home folder_ for your BridalBuddy application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
-   A [(GUI)](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A [(GUI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
     > If you need any help opening a command terminal, you may find the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
 
@@ -300,7 +298,7 @@ This command will help you find guests and vendors that match any of the given k
 
 **Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
-> :warning: Only one type of [prefix](#glossary) should be used for each find command.
+> :warning: Only one type of [prefix](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary) should be used for each find command.
 
 - Specifying multiple different prefixes (e.g. `find n/John p/12345`) will result in an invalid command
 - The prefix specified in the command indicates the attribute to be searched (e.g. `find n/NAME` searches for guests and vendors whose name matches the given keyword)
@@ -554,17 +552,6 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 | **Clear**         | `clear`                                                                                                                                                                                                                      |
 | **Stats**         | `stats`                                                                                                                                                                                                                      |
 | **Exit**          | `exit`                                                                                                                                                                                                                       |
-
-
-[_Back to Top_](#table-of-contents)
-
-## **Glossary**
-
-| Term/Keyword                       | Definition                                                                                                 |
-|------------------------------------|------------------------------------------------------------------------------------------------------------|
-| **Command Line Interface (CLI)**   | An interface that allows you to interact with our program by inputting lines of text called command-lines. |
-| **Graphical User Interface (GUI)** | An interface that displays information to you and allows you to interact with visual elements.             |
-| **Prefix**                         | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.              |
 
 
 [_Back to Top_](#table-of-contents)
