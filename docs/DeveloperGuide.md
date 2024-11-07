@@ -617,7 +617,6 @@ Priorities:
   * System displays a message: "Operation cancelled."
   * **Use case ends.**</panel>
 
-<<<<<<< HEAD
 **Use Case: Get Warnings Before Making Major Changes**
 
 1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
@@ -905,6 +904,12 @@ testers are expected to do more _exploratory_ testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Adding, Deleting, and Editing courses
+Similar to adding, deleting and editing persons, but with courses.
+For adding, the command is `course-add c/CS2103T n/Software Engineering`.
+For deleting, the command is `course-delete c/CS2103T`.
+For editing, the command is `course-edit c/CS2103T n/Software Engineering II`.
 
 ### Enrolling a student into a course and tutorial
 
