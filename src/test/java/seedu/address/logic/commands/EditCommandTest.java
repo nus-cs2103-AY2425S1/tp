@@ -28,6 +28,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
@@ -55,9 +56,17 @@ public class EditCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
 
+        for (Lesson l : model.getAssociatedLessons(model.getFilteredPersonList().get(0))) {
+            expectedModel.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                expectedModel.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                expectedModel.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
+
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
-
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
@@ -65,8 +74,7 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .build(); //is tutor
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).build();
@@ -77,6 +85,15 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
+
+        for (Lesson l : model.getAssociatedLessons(lastPerson)) {
+            expectedModel.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                expectedModel.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                expectedModel.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -91,6 +108,15 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
 
+        for (Lesson l : model.getAssociatedLessons(editedPerson)) {
+            expectedModel.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                expectedModel.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                expectedModel.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
+
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
@@ -100,14 +126,23 @@ public class EditCommandTest {
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
+
+        for (Lesson l : model.getAssociatedLessons(personInFilteredList)) {
+            expectedModel.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                expectedModel.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                expectedModel.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
