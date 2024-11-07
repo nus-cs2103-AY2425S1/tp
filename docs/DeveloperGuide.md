@@ -233,11 +233,35 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+## **Planned enhancements**
 
-### \[Proposed\] Data archiving
+### 1. Multi-Language Support
+**Current Issue:** Non-English text input can cause visual bugs, including reversed text display.
 
-_{Explain here how the data archiving feature will be implemented}_
+**Proposed Solution:** Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
+
+### 2. Support for Forward Slash in Names
+**Current Issue:** Names containing forward slashes (e.g., "Ramesh s/o Ravichandran") are incompatible with `add`, `edit`, and `filter` commands due to two problems:
+
+1. The parser misinterprets "s/o" as a Status flag command, resulting in an invalid status error
+2. The name validation regex explicitly blocks forward slashes to prevent parsing conflicts
+
+**Technical Impact:**
+- Allowing forward slashes would create ambiguous parsing scenarios
+- Example of resulting error message:
+  ![Confusing error message](images/PlannedEnhancementBug1.png)
+
+**Status:** Implementation deferred to a future release due to the complexity of potential solutions and risk of introducing new bugs.
+
+### 3. Data Import/Export Functionality
+**Current issue:** Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' agentassist data files, or share their data files with other users.
+
+**Proposed Enhancement:** Add UI buttons in the application menu for:
+- Importing data files
+- Exporting data files
+
+**Status:** Scheduled for future release as current manual process provides a workable solution.
+
 
 
 --------------------------------------------------------------------------------------------------------------------
