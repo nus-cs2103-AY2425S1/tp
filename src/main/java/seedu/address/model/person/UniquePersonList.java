@@ -148,7 +148,15 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
-
+    
+    /**
+     * Finds a person in the internal list by their phone number.
+     *
+     * @param phone The phone number to search for. Must not be null.
+     * @return An Optional containing the person with the matching phone number,
+     *         or an empty Optional if no match is found.
+     * @throws NullPointerException if the phone parameter is null
+     */
     public Optional<Person> findPersonByPhone(Phone phone) {
         for (Person person : internalList) {
             if (person.getPhone().equals(phone)) {

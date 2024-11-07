@@ -7,7 +7,7 @@ package seedu.address.model.product;
 public class Ingredient extends Product {
     // Default constructor for Jackson
     public Ingredient() {
-        super(0, "", 0.0);  // Default values for the fields
+        super(0, "", 0.0); // Default values for the fields
     }
 
     /**
