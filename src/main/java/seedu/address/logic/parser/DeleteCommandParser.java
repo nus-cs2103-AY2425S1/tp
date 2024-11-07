@@ -38,13 +38,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         // Check if the arguments consist of a single word
         if (trimmedArgs.length == 1) {
             try {
-                System.out.println(args);
                 // Try to parse it as an index first
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteCommand(index);
             } catch (ParseException pe) { // cannot parse as index (because index is zero or less)
                 if (this.isInteger(args)) {
-                    System.out.println("argument is an integer");
                     throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
                 } else {
                     // If it is not an index, handle using parseOtherAttributes
@@ -105,7 +103,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     private boolean isInteger(String str) {
         str = str.trim();
-        System.out.println(str);
         try {
             Integer.parseInt(str);
             return true;
