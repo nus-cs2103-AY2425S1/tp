@@ -22,11 +22,11 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_MESSAGE = "Welcome to the AcademyAssist Help Window!\n\n"
             + "Here are some useful commands to get started:\n\n"
             + "1. add: Adds a student's details\n"
-            + "   Format: add n/NAME i/NRIC yg/YEAR_GROUP p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT\n\n"
+            + "   Format: add n\\NAME i\\NRIC yg\\YEAR_GROUP p\\PHONE_NUMBER e\\EMAIL a\\ADDRESS s\\SUBJECT\n\n"
             + "2. delete: Deletes the specified student\n"
             + "   Format: delete STUDENT_ID\n\n"
             + "3. edit: Edits an existing student's details\n"
-            + "   Format: edit STUDENT_ID FIELD/VALUE [MORE_FIELDS/MORE_VALUES]\n\n"
+            + "   Format: edit STUDENT_ID FIELD\\VALUE [MORE_FIELDS\\MORE_VALUES]\n\n"
             + "4. list: Shows a list of all students\n"
             + "   Format: list\n\n"
             + "5. detail: Shows the details of a specified student\n"
@@ -34,11 +34,11 @@ public class HelpWindow extends UiPart<Stage> {
             + "6. find: Find students whose names contain any of the given keywords\n"
             + "   Format: find KEYWORD [MORE_KEYWORDS]\n\n"
             + "7. sort: Arranges the list of students based on a specified field\n"
-            + "   Format: sort by/FIELD\n\n"
+            + "   Format: sort by\\FIELD\n\n"
             + "8. filter: Filters contacts based on specified field\n"
-            + "   Format: filter FIELD/VALUE\n\n"
+            + "   Format: filter FIELD\\VALUE\n\n"
             + "9. addsubject: Adds a subject to an existing student's record\n"
-            + "   Format: addsubject STUDENT_ID s/SUBJECT [s/MORE_SUBJECTS]\n\n"
+            + "   Format: addsubject STUDENT_ID s\\SUBJECT [s\\MORE_SUBJECTS]\n\n"
             + "10. tracksubject: Displays how many students are taking each subject\n"
             + "   Format: tracksubject\n\n"
             + "11. clear: Clears all entries from the management system\n"
@@ -50,7 +50,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "   Format: exit\n\n"
             + "For more detailed information, click the buttons below to open:\n"
             + "- User Guide\n"
-            + "- Product Website";
+            + "- Product Website\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
