@@ -78,7 +78,7 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 2. Download the latest `.jar` file from [here](https://github.com/se-edu/TAHub-level3/releases).
 
     1. Visit the [GitHub releases page](https://github.com/se-edu/TAHub-level3/releases).
-    2. Download the `.jar` file (for example, `TAHub.jar`) from the latest release.
+    2. Download the `.jar` file (`TAHub.jar`) from the latest release.
     3. Save the `.jar` file to the folder where you want to store your TAHub project.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
@@ -419,7 +419,7 @@ _Details coming soon ..._
     - Copy the `TAHub.json` file to a USB drive, cloud storage, or any other method you prefer for transferring files between computers.
 
 2. **Install TAHub on the New Computer**:
-    - Download the latest `.jar` file from the [TAHub releases page](https://github.com/se-edu/TAHub-level3/releases).
+    - Download the latest `.jar` file from the [TAHub releases page](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases).
     - Place the `.jar` file in a folder on the new computer where you want to use TAHub.
 
 3. **Run TAHub Once on the New Computer**:
