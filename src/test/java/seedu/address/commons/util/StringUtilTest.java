@@ -159,7 +159,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.truncateText(longTestString).equals(longTestString));
 
         // Truncated text will truncate if there are more than 3 newline characters
-        assertTrue(StringUtil.truncateText(fourNewLineTestString).equals(threeNewLineTestString));
+        assertTrue(StringUtil.truncateText(fourNewLineTestString).equals(threeNewLineTestString + "..."));
     }
 
 }
