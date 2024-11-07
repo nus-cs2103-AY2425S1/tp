@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.logging.Logger;
 
@@ -16,17 +19,28 @@ import seedu.address.model.client.Buyer;
  */
 public class AddBuyerCommand extends AddClientCommand {
 
+    /**
+     * A string describing the expected parameters for adding a client.
+     * Includes name, phone number, and email.
+     */
+    public static final String BUYER_PARAMETERS = String.format(
+            "%sBUYER_NAME %sBUYER_PHONE_NUMBER %sBUYER_EMAIL",
+            PREFIX_NAME,
+            PREFIX_PHONE,
+            PREFIX_EMAIL
+    );
+
     /** The command word used to trigger the AddBuyerCommand. */
     public static final String COMMAND_WORD = "addbuyer";
 
     /**
      * Describes the format and usage of the addbuyer command.
-     * Includes the command word and expected parameters inherited from {@link AddClientCommand#CLIENT_PARAMETERS}.
+     * Includes the command word and expected parameters inherited from {@link AddBuyerCommand#BUYER_PARAMETERS}.
      */
     public static final String MESSAGE_USAGE = String.format(
-            "%s: Adds a buyer to the address book.\nParameters: %s\n%s",
+            "%s: Adds a buyer to the client book.\nParameters: %s\n%s",
             COMMAND_WORD,
-            AddClientCommand.CLIENT_PARAMETERS,
+            AddBuyerCommand.BUYER_PARAMETERS,
             AddClientCommand.CLIENT_RESTRICTIONS
     );
 
@@ -35,7 +49,15 @@ public class AddBuyerCommand extends AddClientCommand {
 
     /** Error message shown when attempting to add a duplicate buyer. */
     public static final String MESSAGE_DUPLICATE_BUYER = "A buyer with this phone number "
-            + "already exists in the address book";
+            + "already exists in the client book";
+
+    /** Error message shown when attempting to add a buyer with the same email as an existing buyer. */
+    public static final String MESSAGE_DUPLICATE_EMAIL = "Duplicate email detected. "
+            + "For the addbuyer command, duplicate emails are detected if:\n"
+            + "1. there is a buyer with the same email already in the client book.\n"
+            + "2. there is a seller with the same email but a different phone number in the client book. "
+            + "Having the same email address as an existing seller with a different phone number is not allowed as "
+            + "emails should be unique to a client.";
 
     /** Logger to log relevant information for debugging purposes. */
     private static final Logger logger = LogsCenter.getLogger(AddBuyerCommand.class);
@@ -72,6 +94,11 @@ public class AddBuyerCommand extends AddClientCommand {
         if (model.hasClient(toAdd) && toAdd instanceof Buyer) {
             logger.warning("Attempted to add a duplicate buyer: " + toAdd);
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
+        }
+
+        if (model.sameEmailExists(toAdd)) {
+            logger.warning("Attempted to add a buyer with the same email as an existing buyer: " + toAdd);
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.addClient(toAdd);

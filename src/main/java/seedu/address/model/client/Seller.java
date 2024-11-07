@@ -16,7 +16,7 @@ public class Seller extends Client {
      * @param phone The phone number of the seller.
      * @param email The email address of the seller.
      */
-    public Seller(Name name, Phone phone, Email email) {
+    public Seller(NameWithoutNumber name, Phone phone, Email email) {
         // null check enforced in Client constructor
         super(name, phone, email);
     }
@@ -39,6 +39,31 @@ public class Seller extends Client {
         // Check if otherClient is a Seller and compare phone numbers
         return otherClient instanceof Seller
                 && otherClient.getPhone().equals(getPhone());
+    }
+
+    /**
+     * Returns true if both clients are sellers and have the same email.
+     */
+    @Override
+    public boolean isDuplicateEmail(Client otherClient) {
+        if (otherClient == this) {
+            return true;
+        }
+
+        // Ensure that otherClient is not null before proceeding
+        if (otherClient == null) {
+            return false;
+        }
+
+        return ((otherClient instanceof Seller && otherClient.getEmail().equals(getEmail()))
+
+                || (otherClient instanceof Buyer
+                // Buyer's phone number does not match the current seller's
+                && !(otherClient.getPhone().equals(getPhone()))
+                // Verify that the Buyer's email matches the current seller's email
+                && otherClient.getEmail().equals(getEmail())
+            )
+            );
     }
 
     @Override

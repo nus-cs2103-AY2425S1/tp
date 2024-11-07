@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_POSTALCODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNIT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.POSTALCODE_DESC_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.UNIT_DESC_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
@@ -28,6 +29,14 @@ public class DeletePropertyCommandParserTest {
         DeletePropertyCommand expectedCommand = new DeletePropertyCommand(validPostalCode, validUnitNumber);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_allFieldsPresentWithExtraPrefix_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeletePropertyCommand.MESSAGE_USAGE);
+        String userInput = POSTALCODE_DESC_ADMIRALTY + " " + UNIT_DESC_ADMIRALTY + NAME_DESC_AMY;
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test

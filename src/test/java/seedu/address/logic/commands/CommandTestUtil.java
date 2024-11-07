@@ -36,6 +36,8 @@ import seedu.address.model.property.Property;
 public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
+
+    public static final String VALID_NAME_TEST = "Amy s/o Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "91111111";
     public static final String VALID_PHONE_BOB = "92222222";
@@ -52,9 +54,9 @@ public class CommandTestUtil {
     public static final String VALID_UNIT_BEDOK = "11-12";
     public static final String VALID_NOTFOUND_UNIT_CLEMENTI = "16-02";
     public static final String VALID_MEETING_TITLE_ADMIRALTY = "Admiralty HDB Client Viewing";
-    public static final String VALID_MEETING_DATE_ADMIRALTY = "31-10-2024";
+    public static final String VALID_MEETING_DATE_ADMIRALTY = "01-01-2025";
     public static final String VALID_MEETING_TITLE_BEDOK = "Bedok Villa Finalizing Purchase Agreement";
-    public static final String VALID_MEETING_DATE_BEDOK = "11-06-2024";
+    public static final String VALID_MEETING_DATE_BEDOK = "11-06-2030";
     public static final String VALID_TYPE_HDB = "HDB";
     public static final String VALID_TYPE_CONDO = "CONDO";
     public static final String VALID_TYPE_LANDED = "LANDED";
@@ -112,7 +114,7 @@ public class CommandTestUtil {
     public static final String INVALID_MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + "123456";
 
     public static final String VALID_NOTFOUND_MEETING_TITLE = "Nonexistent Meeting";
-    public static final String VALID_NOTFOUND_MEETING_DATE = "31-12-2025";
+    public static final String VALID_NOTFOUND_MEETING_DATE = "31-12-2030";
     public static final String MEETING_TITLE_DESC_ADMIRALTY = " " + PREFIX_MEETING_TITLE
             + VALID_MEETING_TITLE_ADMIRALTY;
     public static final String MEETING_DATE_DESC_ADMIRALTY = " " + PREFIX_MEETING_DATE

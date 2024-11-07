@@ -38,10 +38,24 @@ public class ListMeetingsCommand extends ListCommand {
         logger.info("Executing ListMeetingsCommand to list all meetings");
 
         // Logic to display meetings
+        model.updateFilteredMeetingList(Model.PREDICATE_SHOW_ALL_MEETINGS);
+        logger.info("Filtered meeting list updated to show all meetings");
+
         model.setDisplayMeetings();
         logger.info("Display updated to show all meetings");
 
-        return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
+        // Check if the resulting filtered list is empty and set response message accordingly
+        boolean isListEmpty = model.isFilteredMeetingListEmpty();
+        String responseMessage = String.format(
+                isListEmpty ? ListCommand.MESSAGE_SUCCESS_EMPTY_LIST : ListCommand.MESSAGE_SUCCESS,
+                KEY_WORD
+        );
+
+        // Log the state of the filtered meeting list and the response message
+        logger.info(String.format("Filtered meeting list is %s. Sending response: %s",
+                isListEmpty ? "empty" : "not empty", responseMessage));
+
+        return new CommandResult(responseMessage);
     }
 
     /**

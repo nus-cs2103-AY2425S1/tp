@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-    title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -25,7 +25,9 @@ You can reach us at our emails:
 <img src="images/apollo-tan.png" width="200px">
 
 [[github](http://github.com/apollo-tan)]
-* Role: Project Advisor. Handle the list feature and its documentation
+[[linkedin](https://www.linkedin.com/in/apollo-tan-shi-xin/)]
+* Role: UI/UX Designer and Implementer 
+* Responsibilites: Design and maintain an intuitive, user-friendly interface, with regular updates to support new features. Handle the logic and display for the list command.
 
 ### Anthony Hermanto
 
@@ -67,32 +69,3 @@ You can reach us at our emails:
 * Role: Integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of 
 * the software to create a whole. Handle delete property commands and documentation.
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI

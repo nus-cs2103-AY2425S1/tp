@@ -10,7 +10,7 @@ import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientTypes;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 
@@ -55,12 +55,13 @@ class JsonAdaptedClient {
      */
     public Client toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    NameWithoutNumber.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!NameWithoutNumber.isValidNameWithoutNumber(name)) {
+            throw new IllegalValueException(NameWithoutNumber.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final NameWithoutNumber modelName = new NameWithoutNumber(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));

@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 
 class AddBuyerCommandTest {
@@ -26,8 +26,8 @@ class AddBuyerCommandTest {
     @BeforeEach
     void setUp() {
         buyer = new Buyer(
-                new Name("John Doe"),
-                new Phone("91234567"), // Valid phone starting with '9'
+                new NameWithoutNumber("John Doe"),
+                new Phone("91234567"), // Valid phone number starting with '9'
                 new Email("john.doe@example.com") // Valid email format
         );
         model = mock(Model.class); // Mocking the Model object
@@ -35,82 +35,92 @@ class AddBuyerCommandTest {
 
     @Test
     void constructor_nullBuyer_throwsNullPointerException() {
-        // Act & Assert
+        // Test that constructor throws a NullPointerException when provided with a null Buyer
         assertThrows(NullPointerException.class, () -> new AddBuyerCommand(null));
     }
 
     @Test
     void execute_buyerAcceptedByModel_addSuccessful() throws Exception {
-        // Arrange
+        // Arrange: Prepare AddBuyerCommand and stub model behavior to allow adding a new buyer
         AddBuyerCommand addBuyerCommand = new AddBuyerCommand(buyer);
+        when(model.hasClient(buyer)).thenReturn(false); // Simulate no duplicate buyer
+        when(model.sameEmailExists(buyer)).thenReturn(false); // Simulate no duplicate email
 
-        // Stubbing the behavior of model
-        when(model.hasClient(buyer)).thenReturn(false);
-
+        // Expected success message
         String expectedMessage = String.format(AddBuyerCommand.MESSAGE_SUCCESS_BUYER, Messages.format(buyer));
 
-        // Act
+        // Act: Execute AddBuyerCommand
         CommandResult result = addBuyerCommand.execute(model);
 
-        // Assert
+        // Assert: Verify correct feedback and that model.addClient() was called
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        verify(model).addClient(buyer); // Verifying that model.addClient() is called with the correct argument
+        verify(model).addClient(buyer);
     }
 
     @Test
     void execute_duplicateBuyer_throwsCommandException() {
-        // Arrange
+        // Arrange: Prepare AddBuyerCommand and stub model to simulate a duplicate buyer
         AddBuyerCommand addBuyerCommand = new AddBuyerCommand(buyer);
+        when(model.hasClient(buyer)).thenReturn(true); // Simulate duplicate buyer by phone number
 
-        // Stubbing the behavior of model to simulate the presence of a duplicate buyer
-        when(model.hasClient(buyer)).thenReturn(true);
-
-        // Act & Assert
+        // Act & Assert: Execute and verify exception with the correct message
         assertThrows(CommandException.class, () -> addBuyerCommand.execute(model),
                 AddBuyerCommand.MESSAGE_DUPLICATE_BUYER);
     }
 
     @Test
+    void execute_duplicateEmail_throwsCommandException() {
+        // Arrange: Prepare AddBuyerCommand and stub model to simulate duplicate email detection
+        AddBuyerCommand addBuyerCommand = new AddBuyerCommand(buyer);
+        when(model.hasClient(buyer)).thenReturn(false); // Simulate no duplicate buyer by phone
+        when(model.sameEmailExists(buyer)).thenReturn(true); // Simulate duplicate email in another client
+
+        // Act & Assert: Execute and verify exception with the correct message
+        assertThrows(CommandException.class, () -> addBuyerCommand.execute(model),
+                AddBuyerCommand.MESSAGE_DUPLICATE_EMAIL);
+    }
+
+    @Test
     void equals_sameObject_returnsTrue() {
-        // Arrange
+        // Arrange: Prepare AddBuyerCommand
         AddBuyerCommand addBuyerCommand = new AddBuyerCommand(buyer);
 
-        // Act & Assert
-        assertEquals(addBuyerCommand, addBuyerCommand); // Same object should return true
+        // Act & Assert: Verify that same instance equals itself
+        assertEquals(addBuyerCommand, addBuyerCommand);
     }
 
     @Test
     void equals_sameBuyer_returnsTrue() {
-        // Arrange
+        // Arrange: Create two commands with the same buyer
         AddBuyerCommand addBuyerCommand1 = new AddBuyerCommand(buyer);
-        AddBuyerCommand addBuyerCommand2 = new AddBuyerCommand(buyer); // Same buyer
+        AddBuyerCommand addBuyerCommand2 = new AddBuyerCommand(buyer);
 
-        // Act & Assert
-        assertEquals(addBuyerCommand1, addBuyerCommand2); // Different instances, same buyer
+        // Act & Assert: Verify equality for commands with the same buyer instance
+        assertEquals(addBuyerCommand1, addBuyerCommand2);
     }
 
     @Test
     void equals_differentBuyer_returnsFalse() {
-        // Arrange
+        // Arrange: Create a different buyer and command
         Buyer differentBuyer = new Buyer(
-                new Name("Jane Smith"),
+                new NameWithoutNumber("Jane Smith"),
                 new Phone("81234567"), // Different phone number
                 new Email("jane.smith@example.com") // Different email
         );
         AddBuyerCommand addBuyerCommand1 = new AddBuyerCommand(buyer);
-        AddBuyerCommand addBuyerCommand2 = new AddBuyerCommand(differentBuyer); // Different buyer
+        AddBuyerCommand addBuyerCommand2 = new AddBuyerCommand(differentBuyer);
 
-        // Act & Assert
+        // Act & Assert: Verify inequality for commands with different buyers
         assertNotEquals(addBuyerCommand1, addBuyerCommand2);
     }
 
     @Test
     void equals_differentObject_returnsFalse() {
-        // Arrange
-        Buyer differentClient = mock(Buyer.class); // Mocking a different Client object
+        // Arrange: Prepare AddBuyerCommand and a mock of a different object type
+        Buyer differentClient = mock(Buyer.class);
         AddBuyerCommand addBuyerCommand = new AddBuyerCommand(buyer);
 
-        // Act & Assert
-        assertNotEquals(addBuyerCommand, differentClient); // Comparing with a different type of object
+        // Act & Assert: Verify inequality when compared with a different type of object
+        assertNotEquals(addBuyerCommand, differentClient);
     }
 }

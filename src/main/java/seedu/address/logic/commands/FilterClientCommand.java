@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 
 /**
  * Filters clients based on their name.
@@ -23,10 +23,10 @@ public class FilterClientCommand extends Command {
      * Provides a description of the command's purpose and the format for entering client names.
      */
     public static final String MESSAGE_USAGE = String.format(
-            "%s: Filters the clients based on their name.\nParameters: %sNAME\nRestrictions: %s",
+            "%s: Filters the clients based on their name.\nParameters: %sNAME\nRestrictions: \n\t%s",
             COMMAND_WORD,
             PREFIX_NAME,
-            Name.MESSAGE_CONSTRAINTS
+            NameWithoutNumber.MESSAGE_CONSTRAINTS
     );
 
 
@@ -40,7 +40,7 @@ public class FilterClientCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(FilterClientCommand.class);
 
     /** The client whose name is being used for filtering. */
-    private final Name name;
+    private final NameWithoutNumber name;
 
     /**
      * Constructs a FilterClientCommand to filter the specified {@code Client}.
@@ -48,7 +48,7 @@ public class FilterClientCommand extends Command {
      * @param name The client to filter by.
      * @throws NullPointerException If the provided client is null.
      */
-    public FilterClientCommand(Name name) {
+    public FilterClientCommand(NameWithoutNumber name) {
         requireAllNonNull(name);
         this.name = name;
         assert this.name != null : "Name should not be null";
