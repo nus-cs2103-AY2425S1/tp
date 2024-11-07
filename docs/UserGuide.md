@@ -112,6 +112,10 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 - INDEX parameters have a max positive value of `2147483647` any value larger would result in an invalid command format.
+
+- Only alphanumeric characters, spaces and the terms <code>&nbsp;s/o&nbsp;</code> and <code>&nbsp;d/o&nbsp;</code> (case insensitive) are allowed. <br>
+  e.g. `n/John Doe s/o Alexis` or `n/John Doe d/O Jane Doe`
+
 </div>
 
 ---
