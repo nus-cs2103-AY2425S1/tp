@@ -37,7 +37,7 @@
 4. Run the application
    * Open a command terminal.
    * Navigate (`cd`) to the folder where you placed the `.jar` file.
-     * For windows user, type:
+     * For Windows users, type:
        ```
        cd \path\to\your\folder
        ```
