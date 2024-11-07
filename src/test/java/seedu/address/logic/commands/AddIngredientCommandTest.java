@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code AddIngredientCommand}.
@@ -32,7 +33,7 @@ public class AddIngredientCommandTest {
     public void execute_newIngredient_success() {
         // Arrange
         AddIngredientCommand command = new AddIngredientCommand(INGREDIENT_NAME, INGREDIENT_COST);
-        int nextProductId = model.getIngredientCatalogue().getNextProductId();
+        int nextProductId = IngredientCatalogue.getInstance().getNextProductId();
         Ingredient expectedIngredient = new Ingredient(nextProductId, INGREDIENT_NAME, INGREDIENT_COST);
         String expectedMessage = String.format(AddIngredientCommand.MESSAGE_ADD_INGREDIENT_SUCCESS, expectedIngredient);
 
@@ -43,7 +44,7 @@ public class AddIngredientCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
         // Check that the ingredient exists in the catalogue
-        assertTrue(model.getIngredientCatalogue().getCatalogue().containsValue(expectedIngredient));
+        assertTrue(IngredientCatalogue.getInstance().getCatalogue().containsValue(expectedIngredient));
     }
 
     @Test
