@@ -157,7 +157,7 @@ public class ModelManager implements Model {
 
     @Override
     public void clearAddressBook() {
-        versionedAddressBook.clear();
+        this.setAddressBook(versionedAddressBook.clear());
         logger.info("Cleared the address book.");
     }
 
