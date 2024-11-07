@@ -45,6 +45,7 @@ The user guide contains formatting to highlight important info. The standards us
   - [List assignments : `listassignments`](#list-assignments--listassignments)
   - [Delete Assignment : `unassign`](#delete-assignment-unassign)
   - [Exiting the program : `exit`](#exiting-the-program--exit)
+- [Saving / Editing the data file](#saving-the-data)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -233,7 +234,7 @@ Examples:
 
 Expected output:
 - System message noting success
-- Persons with skills above shown in the displayed employee list
+- Employees with skills above shown in the displayed employee list
 
 [Return to Top](#table-of-contents)
 
@@ -247,7 +248,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
+- Employees matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -258,7 +259,7 @@ Examples:
 
 Expected output:
 - System message noting success
-- Persons matching criteria above shown in the displayed employee list
+- Employees matching criteria above shown in the displayed employee list
 
 [Return to Top](#table-of-contents)
 
@@ -501,6 +502,8 @@ HRConnect data are saved in the hard disk automatically after any command that c
 [Return to Top](#table-of-contents)
 
 ### Editing the data file
+
+![rootFileStructure.png](images/rootFileStructure.png)
 
 HRConnect data is saved automatically as a [*JSON*](#json) file `[JAR file location]/data/hrconnect.json`.  
 Advanced users are welcome to update data directly by editing this data file.
