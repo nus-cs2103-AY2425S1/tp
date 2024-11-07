@@ -17,16 +17,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateTagCommand;
-import seedu.address.logic.commands.CreateTaskCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindAddressCommand;
@@ -35,7 +32,11 @@ import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindTaskCommand;
 import seedu.address.logic.commands.findcommand.FindWeddingCommand;
+import seedu.address.logic.commands.task.CreateTaskCommand;
+import seedu.address.logic.commands.task.DeleteTaskCommand;
+import seedu.address.logic.commands.task.ListTasksCommand;
 import seedu.address.logic.commands.vendor.AddVendorCommand;
 import seedu.address.logic.commands.vendor.AssignVendorCommand;
 import seedu.address.logic.commands.vendor.UnassignVendorCommand;
@@ -43,7 +44,6 @@ import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand;
-import seedu.address.logic.commands.wedding.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -54,6 +54,7 @@ import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredica
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TaskContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
@@ -108,9 +109,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findName() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> keywords = Arrays.asList("foo");
         FindNameCommand command = (FindNameCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " n/" + String.join(" ", keywords));
+                FindCommand.COMMAND_WORD + " n/ foo");
+        assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleName() throws Exception {
+        List<String> keywords = Arrays.asList("Amy", "Bob", "Clarissa");
+        FindNameCommand command = (FindNameCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " n/Amy n/Bob n/Clarissa");
         assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -118,15 +127,31 @@ public class AddressBookParserTest {
     public void parseCommand_findAddress() throws Exception {
         List<String> keywords = List.of("Jurong West Street");
         FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " a/" + String.join(" ", keywords));
+                FindCommand.COMMAND_WORD + " a/Jurong West Street");
+        assertEquals(new FindAddressCommand(new AddressContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleAddress() throws Exception {
+        List<String> keywords = Arrays.asList("Jurong West Street", "Tampines East");
+        FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " a/Jurong West Street a/Tampines East");
         assertEquals(new FindAddressCommand(new AddressContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_findEmail() throws Exception {
+        List<String> keywords = Arrays.asList("sally@gmail.com");
+        FindEmailCommand command = (FindEmailCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " e/sally@gmail.com");
+        assertEquals(new FindEmailCommand(new EmailContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleEmails() throws Exception {
         List<String> keywords = Arrays.asList("sally@gmail.com", "bob@example.com");
         FindEmailCommand command = (FindEmailCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " e/" + String.join(" ", keywords));
+                FindCommand.COMMAND_WORD + " e/sally@gmail.com e/bob@example.com");
         assertEquals(new FindEmailCommand(new EmailContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -134,7 +159,15 @@ public class AddressBookParserTest {
     public void parseCommand_findPhone() throws Exception {
         List<String> keywords = List.of("99394835");
         FindPhoneCommand command = (FindPhoneCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " p/" + String.join(" ", keywords));
+                FindCommand.COMMAND_WORD + " p/99394835");
+        assertEquals(new FindPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultiplePhone() throws Exception {
+        List<String> keywords = Arrays.asList("99394835", "283384");
+        FindPhoneCommand command = (FindPhoneCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " p/99394835 p/283384");
         assertEquals(new FindPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -142,16 +175,40 @@ public class AddressBookParserTest {
     public void parseCommand_findTag() throws Exception {
         List<String> keywords = List.of("florist");
         FindTagCommand command = (FindTagCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " t/" + String.join(" ", keywords));
+                FindCommand.COMMAND_WORD + " t/florist");
+        assertEquals(new FindTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleTags() throws Exception {
+        List<String> keywords = Arrays.asList("florist", "photographer");
+        FindTagCommand command = (FindTagCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " t/florist t/photographer");
         assertEquals(new FindTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_findWedding() throws Exception {
-        List<String> keywords = Arrays.asList("Snoopy's", "wedding");
+        List<String> keywords = Arrays.asList("Snoopy's wedding");
         FindWeddingCommand command = (FindWeddingCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " w/" + String.join(" ", keywords));
+                FindCommand.COMMAND_WORD + " w/ Snoopy's wedding");
         assertEquals(new FindWeddingCommand(new WeddingContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findMultipleWeddings() throws Exception {
+        List<String> keywords = Arrays.asList("Snoopy's wedding", "Wedding 2029");
+        FindWeddingCommand command = (FindWeddingCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " w/Snoopy's wedding w/Wedding 2029");
+        assertEquals(new FindWeddingCommand(new WeddingContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findTask() throws Exception {
+        List<String> keywords = Arrays.asList("Order wedding cake");
+        FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " tk/Order wedding cake");
+        assertEquals(new FindTaskCommand(new TaskContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -196,11 +253,6 @@ public class AddressBookParserTest {
 
         CreateTagCommand command = (CreateTagCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
-
-        // Test using create tag keyword
-        String userKeywordInput = CreateTagCommand.COMMAND_KEYWORD + " t/colleague";
-        CreateTagCommand keywordCommand = (CreateTagCommand) parser.parseCommand(userKeywordInput);
-        assertEquals(expectedCommand, keywordCommand);
     }
 
     @Test
@@ -290,7 +342,7 @@ public class AddressBookParserTest {
     public void parseCommand_editWedding() throws Exception {
         String newWeddingParameter = " w/New Wedding Name";
         String userInput = EditWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + newWeddingParameter;
-        EditWeddingDescriptor editWeddingDescriptor = new EditWeddingCommand.EditWeddingDescriptor();
+        EditWeddingCommand.EditWeddingDescriptor editWeddingDescriptor = new EditWeddingCommand.EditWeddingDescriptor();
         editWeddingDescriptor.setWeddingName(new WeddingName("New Wedding Name"));
         EditWeddingCommand expectedCommand = new EditWeddingCommand(INDEX_FIRST, editWeddingDescriptor);
 
@@ -372,8 +424,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_createTask() throws Exception {
         String userInput = CreateTaskCommand.COMMAND_WORD
-                + " tk/todo Buy groceries tk/deadline Submit report /by 2024-12-31"
-                + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+                + " tk/Buy groceries tk/Submit report d/2024-12-31"
+                + " tk/Project meeting d/2024-10-10 d/2024-10-11";
         HashSet<Task> tasksToAdd = new HashSet<>(TypicalTasks.getTypicalTasks());
 
         CreateTaskCommand expectedCommand = new CreateTaskCommand(tasksToAdd);
@@ -383,8 +435,8 @@ public class AddressBookParserTest {
 
         // Test using create task keyword
         String userKeywordInput = CreateTaskCommand.COMMAND_KEYWORD
-                + " tk/todo Buy groceries tk/deadline Submit report /by 2024-12-31"
-                + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+                + " tk/Buy groceries tk/Submit report d/2024-12-31"
+                + " tk/Project meeting d/2024-10-10 d/2024-10-11";
         CreateTaskCommand keywordCommand = (CreateTaskCommand) parser.parseCommand(userKeywordInput);
         assertEquals(expectedCommand, keywordCommand);
     }

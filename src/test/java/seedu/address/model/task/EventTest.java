@@ -16,19 +16,19 @@ public class EventTest {
     @Test
     public void constructor_validStringDescriptionAndDates_success() {
         Event event = new Event(VALID_DESCRIPTION, VALID_FROM_DATE, VALID_TO_DATE);
-        assertEquals("[E][ ] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
+        assertEquals("[ ] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
     }
 
     @Test
     public void constructor_validDescriptionObject_success() {
         Event event = new Event(DESCRIPTION_OBJ.toString(), VALID_FROM_DATE, VALID_TO_DATE);
-        assertEquals("[E][ ] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
+        assertEquals("[ ] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
     }
 
     @Test
     public void constructor_withDoneStatus_success() {
         Event event = new Event(VALID_DESCRIPTION, VALID_FROM_DATE, VALID_TO_DATE, true);
-        assertEquals("[E][X] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
+        assertEquals("[X] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class EventTest {
         Event event = new Event(VALID_DESCRIPTION, VALID_FROM_DATE, VALID_TO_DATE);
         event.markAsDone();
         assertTrue(event.getIsDone());
-        assertEquals("[E][X] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
+        assertEquals("[X] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class EventTest {
         Event event = new Event(VALID_DESCRIPTION, VALID_FROM_DATE, VALID_TO_DATE, true);
         event.markAsUndone();
         assertFalse(event.getIsDone());
-        assertEquals("[E][ ] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
+        assertEquals("[ ] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
     }
 
     @Test
@@ -97,6 +97,6 @@ public class EventTest {
     @Test
     public void toString_correctlyFormatsEvent() {
         Event event = new Event(VALID_DESCRIPTION, VALID_FROM_DATE, VALID_TO_DATE);
-        assertEquals("[E][ ] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
+        assertEquals("[ ] Team meeting (from: Oct 01 2023 to: Oct 02 2023)", event.toString());
     }
 }

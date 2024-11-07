@@ -127,6 +127,12 @@ public interface Model {
     void updateFilteredPersonListByWedding(Predicate<Wedding> weddingPredicate);
 
     /**
+     * Updates the filter of the filtered person list to filter by the given {@code taskPredicate}.
+     * @throws NullPointerException if {@code taskPredicate} is null.
+     */
+    void updateFilteredPersonListByTask(Predicate<Task> taskPredicate);
+
+    /**
      * Returns true if a tag with the same name as {@code toAdd} exists in the Wedlinker.
      */
     boolean hasTag(Tag toAdd);
