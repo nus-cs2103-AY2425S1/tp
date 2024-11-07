@@ -96,6 +96,18 @@ public class AddPropertyToSellParserTest {
     }
 
     @Test
+    public void parse_invalidNonSingaporePostalCode_throwsParseException() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_HOUSING_TYPE + "Condo "
+                + PREFIX_SELLING_PRICE + "1000000 "
+                + PREFIX_POSTAL_CODE + "000000 "
+                + PREFIX_UNIT_NUMBER + "10-01 "
+                + PREFIX_TAG + "New";
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+
+    @Test
     public void parse_missingRequiredFields_throwsParseException() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
                 + PREFIX_SELLING_PRICE + "1000000 "
