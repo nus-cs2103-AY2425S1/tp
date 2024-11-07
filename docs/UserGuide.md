@@ -416,7 +416,7 @@ Examples:
 
 ### Sort all properties associated with a person: `sorti`
 
-Sorts the list of properties associated to a contact by a specified field and order
+Sorts the list of properties associated with a contact by a specified field and order. This sorted order resets every time the app closes, so the command needs to be run again each time the app re-opens.
 
 ![sorti_command](images/sortiCommand.png)
 
