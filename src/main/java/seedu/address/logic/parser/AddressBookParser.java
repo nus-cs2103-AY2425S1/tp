@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.BackCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -106,6 +107,9 @@ public class AddressBookParser {
 
         case BackCommand.COMMAND_WORD:
             return new BackCommand();
+
+        case AssignCommand.COMMAND_WORD:
+            return new AssignCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

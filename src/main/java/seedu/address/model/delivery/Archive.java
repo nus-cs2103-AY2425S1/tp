@@ -44,6 +44,20 @@ public class Archive {
         return this.value.equals("true");
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        //instance of handles nulls
+        if (!(other instanceof Archive)) {
+            return false;
+        }
+
+        Archive otherArchive = (Archive) other;
+        return value.equals(otherArchive.value);
+    }
 
     @Override
     public String toString() {

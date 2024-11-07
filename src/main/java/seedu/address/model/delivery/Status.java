@@ -62,6 +62,21 @@ public class Status {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        //instance of handles nulls
+        if (!(other instanceof Status)) {
+            return false;
+        }
+
+        Status otherStatus = (Status) other;
+        return value.equals(otherStatus.value);
+    }
+
+    @Override
     public String toString() {
         return "Status: " + getValue();
     }

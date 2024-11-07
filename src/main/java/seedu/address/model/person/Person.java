@@ -34,7 +34,7 @@ public class Person {
     private final Role role;
 
     //Temporary initialisation for worker
-    private Worker worker = new Worker(new HashSet<>(Arrays.asList(new DeliveryId(), new DeliveryId())));
+    private Worker worker = new Worker();
 
     // Data fields
     private final Address address;
@@ -218,6 +218,13 @@ public class Person {
      */
     public boolean isSameEmail(Person otherPerson) {
         return otherPerson != null && otherPerson.getEmail().equals(getEmail());
+    }
+
+    /**
+     * Returns true if this person is client, false if is an employee.
+     */
+    public boolean isClient() {
+        return Objects.equals(role.getValue(), "client");
     }
 
     /**
