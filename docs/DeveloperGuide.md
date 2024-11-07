@@ -165,27 +165,27 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
 **Treatment of clashing timings**
 
 - **Current Implementation (Alternative 1):**
-    - **Description**: Clashing lesson timings across and within students are not rejected.
-    - **Pros**: Promotes greater user flexibility, as there could be different schedules for alternate weeks,
-      and all the timings should be stored in EduManage.
-    - **Cons**: Wrong lesson timings would not be flagged out to the user.
+    - **Description**: Clashing lesson timings are permitted across all students and within each student's schedule.
+    - **Pros**: Provides greater user flexibility, allowing all specified timings to be stored in EduManage, even if they overlap.
+      Suitable for accommodating different schedules for alternate weeks or varying lesson arrangements.
+    - **Cons**: Incorrect or conflicting lesson timings are not flagged out to the user, which could lead to scheduling confusion.
 
 - **Alternative 2:**
-    - **Description**: Reject clashing lesson timings across and within students.
-    - **Pros**: Flags out wrong lesson timings input by the user.
-    - **Cons**: Reduces user flexibility in storing lesson times.
+    - **Description**: Clashing lesson timings are rejected across all students and within each student's schedule.
+    - **Pros**: Ensures that incorrect or conflicting timings are flagged, helping the user avoid scheduling errors.
+    - **Cons**: Reduces flexibility for users who need to store complex schedules with occasional overlapping times.
 
 **Association between lesson timings and subjects**
 
 - **Current Implementation (Alternative 1):**
     - **Description**: Each lesson timing is not associated with any subject.
-    - **Pros**: Promotes greater user flexibility, as users might be asked to teach different subjects within
-      a lesson timing.
+    - **Pros**: Promotes greater user flexibility, allowing users to adjust subject focus within each lesson as needed.
+      Suitable for scenarios where multiple subjects may be covered in a single lesson.
     - **Cons**: Users might prefer to have the association made clear.
 
 - **Alternative 2:**
     - **Description**: Associate each lesson timing with a specific subject.
-    - **Pros**: Users can clearly see what they are supposed to teach and when.
+    - **Pros**: Clarifies what subject is to be taught during each lesson, helping users stay organised.
     - **Cons**: Reduces user flexibility in arranging lesson times for different subjects.
 
 ### Tag Feature - Level and Subject Tagging
@@ -813,13 +813,13 @@ testers are expected to do more *exploratory* testing.
 
     2. **Valid Test Cases**
 
-        1. Add a student with only compulsory fields:`add n/alice lee p/91234567 e/91234567 a/123 Clementi`<br>
-           Expected: New student with name `Alice Lee`, phone and emergency number `91234567`,
-           and address `123 Clementi` is added. There are no notes, tasks, subjects or lesson times stated.
+        1. Add a student with only compulsory fields: `add n/alice lee p/91234567 e/91234567 a/123 Clementi`<br>
+           Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
+           and address `123 Clementi` is added. No level, subject(s) or lesson time(s) are specified.
 
         2. Add a student with compulsory fields, level, subject and lesson times:
            `add n/alice lee p/91234567 e/91234567 a/123 Clementi l/s1 na s/math s/physics lt/SUN-12:00-14:00 lt/WED-17:00-19:00`<br>
-           Expected: New student with name `Alice Lee`, phone and emergency number `91234567`,
+           Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
            address `123 Clementi`, subject tags `S1 NA MATH` and `S1 NA PHYSICS`, and lesson times `WED-17:00-19:00` and `SUN-12:00-14:00` is added.
 
         3. Other valid test cases: Change the capitalisation and spacing between words for the name, level, subject for
@@ -865,7 +865,7 @@ testers are expected to do more *exploratory* testing.
 
     2. **Valid Test Cases**
 
-        1. Find by name:`find n/Alex`<br>
+        1. Find by name: `find n/Alex`<br>
            Expected: Only students with the name `Alex` are displayed. Number of students found is reflected in the status message.
 
         2. Find by level: `find l/S1 NA`<br>
@@ -876,7 +876,7 @@ testers are expected to do more *exploratory* testing.
 
     3. **Invalid Test Cases**
 
-       1. Find by name:`find n/!@!`, `find n/1e12#>`, `...`<br>
+       1. Find by name: `find n/!@!`, `find n/1e12#>`, `...`<br>
           Expected: All students still listed. Error details shown in the status message. Status bar remains the same.
 
        2. Find by level and track: `find l/S1` (no track entered), `find l/IP` (no level entered), `...`<br>
