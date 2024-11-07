@@ -184,10 +184,10 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Search is restricted to the fields indicated by the provided prefixes.
+* The order of the prefixes provided does not affect search results. e.g. `search n/ alex t/ friends` will return the same result as `search t/ friends n/ alex`.
+* Only full words will be matched e.g. `friend` will not match `friends`.
 * For name searches, the order of keywords does not matter (e.g., Hans Bo will match Bo Hans).
-* The order of the prefixes provided does not affect search results. e.g. `search n/ alex t/ friends` will return the same result as `search t/ friends n/ alex`
-* Tag inputs must be alphanumeric
-* Only full words will be matched e.g. `friend` will not match `friends`
+* For name searches, persons matching any of the keyswords given will be returned (eg., `search n/ Alex Yeoh` returns both `Alex Yeoh` and `Alex Tan`)
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned
 
 Tip: Support search prefixes include:
@@ -195,14 +195,15 @@ Tip: Support search prefixes include:
 * `TAG`: t/
 * `PHONE_NUMBER`: p/
 * `GROUP`: g/
+* `ROLE`: r/
 
 Examples: <br>
-1. **Person A:** `name`: John Doe `tag`: colleague `group`: blood drive <br>
-2. **Person B:** `name`: Alex Yeoh `tag`: friends <br>
-3. **Person C:** `name`: David Li `tag`: friends `group`: blood drive
-* `search n/ john` returns persons with the name `john` like `John Doe`
-* `search t/ friends` returns all persons tagged as friends like `Alex Yeoh` and `David Li`
-* `search n/ david t/ friends g/ blood drive` returns all persons with name matching `david`, tag matching `friends` and in group `blood drive` like `David Li`. <br>
+1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role` donor `group`: blood drive<br>
+2. **Person B:** `name`: Alex Yeoh `tag`: friends `phone number`: 91234567 `role`: volunteer <br>
+3. **Person C:** `name`: David Li `tag`: friends `phone number`: 81234123 `role`: person `group`: blood drive
+* `search n/john` returns persons with the name `john` like `John Doe`
+* `search g/blood drive` returns all persons in group `blood drive` like `John Doe` and `David Li`
+* `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
     ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
