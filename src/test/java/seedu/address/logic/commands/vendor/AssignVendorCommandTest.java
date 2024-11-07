@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -56,11 +55,8 @@ public class AssignVendorCommandTest {
                 String.format(AssignVendorCommand.MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
     }
 
-    @Disabled // disabled, to figure out why it doesn't work
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
-
         Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
 

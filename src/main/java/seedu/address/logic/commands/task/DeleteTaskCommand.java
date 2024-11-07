@@ -1,14 +1,18 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 /**
@@ -38,12 +42,26 @@ public class DeleteTaskCommand extends Command {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, 1,
+                    lastShownList.size()));
+        }
+        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        boolean anyChanges = false;
+        List<Person> personList = model.getFilteredPersonList();
+        for (Person person: personList) {
+            if (person.hasTask(taskToDelete)) {
+                person.removeTask(taskToDelete);
+                anyChanges = true;
+            }
         }
 
-        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTask(taskToDelete);
+        if (anyChanges) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.toString()));
     }
 
@@ -54,11 +72,10 @@ public class DeleteTaskCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteTaskCommand)) {
+        if (!(other instanceof DeleteTaskCommand otherDeleteTaskCommand)) {
             return false;
         }
 
-        DeleteTaskCommand otherDeleteTaskCommand = (DeleteTaskCommand) other;
         return targetIndex.equals(otherDeleteTaskCommand.targetIndex);
     }
 

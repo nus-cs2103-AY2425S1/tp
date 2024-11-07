@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -37,6 +38,20 @@ public class PersonTest {
 
         // EP: invalid character in name with other valid characters
         assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName("Anne, Marie"));
+    }
+
+    @Test
+    public void taskNotAssigned_returnsFalse() {
+        Person person = ALICE;
+        Task task = new Task(VALID_TASK_TODO);
+        assertFalse(person.hasTask(task));
+    }
+    @Test
+    public void removeTask_taskAssigned_taskRemovedSuccessfully() {
+        Person person = new PersonBuilder().withName("assigned").withTasks(VALID_TASK_TODO).build();
+        Task task = new Task(VALID_TASK_TODO);
+        person.removeTask(task);
+        assertFalse(person.hasTask(task));
     }
 
     @Test

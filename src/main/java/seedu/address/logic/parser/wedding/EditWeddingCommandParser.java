@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT_WEDDING_PERSON_1;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT_WEDDING_PERSON_2;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import seedu.address.commons.core.index.Index;
@@ -24,8 +22,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
     private final Prefix[] weddingPrefixes = new Prefix[] {
         PREFIX_WEDDING,
-        PREFIX_EDIT_WEDDING_PERSON_1,
-        PREFIX_EDIT_WEDDING_PERSON_2,
         PREFIX_ADDRESS,
         PREFIX_DATE
     };
@@ -57,26 +53,6 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
                             argMultimap.getValue(PREFIX_WEDDING)
                                     .orElse(""))
             );
-        }
-        //Changes partner1 of wedding
-        if (argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_1).isPresent()) {
-            try {
-                editWeddingDescriptor.setPartner1Index(ParserUtil.parseIndex(requireNonNull(
-                        argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_1).orElse(null))));
-            } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditWeddingCommand.MESSAGE_USAGE), pe);
-            }
-        }
-        //Changes partner2 of wedding
-        if (argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_2).isPresent()) {
-            try {
-                editWeddingDescriptor.setPartner2Index(ParserUtil.parseIndex(requireNonNull(
-                        argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_2).orElse(null))));
-            } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditWeddingCommand.MESSAGE_USAGE), pe);
-            }
         }
         //Changes location/address of wedding
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {

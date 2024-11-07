@@ -114,11 +114,10 @@ public class UntagCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof UntagCommand)) {
+        if (!(other instanceof UntagCommand otherCommand)) {
             return false;
         }
 
-        UntagCommand otherCommand = (UntagCommand) other;
         return index.equals(otherCommand.index)
                 && tagsToRemove.equals(otherCommand.tagsToRemove);
     }
