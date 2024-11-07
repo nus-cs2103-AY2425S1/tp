@@ -18,7 +18,7 @@ import seedu.address.model.wedding.Wedding;
 public class ViewWeddingCommand extends Command {
     public static final String COMMAND_WORD = "view-wed";
     public static final String COMMAND_WORD_SHORT = "vw";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD + "OR" + COMMAND_WORD_SHORT
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + " OR " + COMMAND_WORD_SHORT
             + ": Shows all persons involved in the weddings of the specified "
             + "keywords (case-insensitive).";
 

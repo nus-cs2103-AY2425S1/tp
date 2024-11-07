@@ -24,7 +24,7 @@ public class TagDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "tag-del";
     public static final String COMMAND_WORD_SHORT = "td";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD + "OR" + COMMAND_WORD_SHORT
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + " OR " + COMMAND_WORD_SHORT
             + ": Deletes the specified tag from the person identified "
             + "by their name.\n"
             + "Also deletes them as a participant from the wedding given by the specified tag.";

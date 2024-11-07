@@ -16,7 +16,7 @@ import seedu.address.model.wedding.Wedding;
 public class DeleteWeddingCommand extends Command {
     public static final String COMMAND_WORD = "del-wed";
     public static final String COMMAND_WORD_SHORT = "dw";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD + "OR" + COMMAND_WORD_SHORT
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + " OR " + COMMAND_WORD_SHORT
             + ": Deletes the wedding identified by the wedding name used in the address book.";
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "\nParameters: w/NAME & NAME\n"

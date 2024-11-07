@@ -28,7 +28,7 @@ public class TagAddCommand extends Command {
 
     public static final String COMMAND_WORD = "tag-add";
     public static final String COMMAND_WORD_SHORT = "ta";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD + "OR" + COMMAND_WORD_SHORT
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + " OR " + COMMAND_WORD_SHORT
             + ": Adds a tag to the person identified "
             + "by their name.\n"
             + "Also adds them as a participant in wedding given by specified tag.";

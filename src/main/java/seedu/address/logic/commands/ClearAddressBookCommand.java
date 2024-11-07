@@ -12,7 +12,7 @@ public class ClearAddressBookCommand extends Command {
 
     public static final String COMMAND_WORD = "clear-ab";
     public static final String COMMAND_WORD_SHORT = "cab";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD + "OR"
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + " OR "
             + COMMAND_WORD_SHORT + ": Clears the entire address book.";
     public static final String CONFIRMATION_PROMPT = "Are you sure you want to delete entire address book?\n"
             + "Enter 'y' to confirm, or 'n' to cancel.";
