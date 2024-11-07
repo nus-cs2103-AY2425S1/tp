@@ -107,7 +107,7 @@ public class ParserUtil {
         try {
             return LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date-time format, please use yyyy-MM-dd HH:mm.");
+            throw new ParseException("Invalid date-time format, please use yyyy-MM-dd");
         }
     }
 

@@ -160,7 +160,6 @@ public class ModelManager implements Model {
         Person patient = null;
         for (Person person : allPersons) {
             if (person.getId() == id) {
-                System.out.println(person.getName());
                 patient = person;
                 break;
             }

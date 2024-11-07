@@ -32,10 +32,10 @@ public class ViewHistoryCommandParser implements Parser<ViewHistoryCommand> {
     public ViewHistoryCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        // Tokenize the arguments and look for the /d (date) and /id (patient ID) prefixes
+        // Tokenize the arguments and look for the x/ (date) and z/ (patient ID) prefixes
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_ID);
 
-        // Check if /z prefixes is present, and there is no unexpected preamble
+        // Check if z/ prefixes is present, and there is no unexpected preamble
         if (!arePrefixesPresent(argumentMultimap, PREFIX_ID)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -50,14 +50,14 @@ public class ViewHistoryCommandParser implements Parser<ViewHistoryCommand> {
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }
 
-        // Parse the date from the /d prefix, or set it to null if not provided
+        // Parse the date from the x/ prefix, or set it to null if not provided
         LocalDateTime dateTime = null;
         Optional<String> dateTimeString = argumentMultimap.getValue(PREFIX_DATE);
         if (dateTimeString.isPresent()) {
             try {
                 dateTime = ParserUtil.parseDateWithNoLimit(dateTimeString.get().trim());
             } catch (ParseException e) {
-                throw new ParseException("Invalid date-time format. Please use yyyy-MM-dd HH:mm.");
+                throw new ParseException("Invalid date-time format, please use yyyy-MM-dd HH:mm.");
             }
         }
 
