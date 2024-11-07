@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.AssignCommand.MESSAGE_ASSIGN_EMPTY_WEDDING_LIST_ERROR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -84,7 +83,8 @@ public class DeleteCommand extends Command {
             checkPersonIsAssignedWeddings(personToDelete, model);
             // delete those weddings
             removeWeddingJobs(personToDelete, model);
-            return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS, Messages.format(personToDelete)));
+            return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
+                    Messages.format(personToDelete)));
         } else {
             validatePersonIsNotClient(personToDelete, model);
             model.deletePerson(personToDelete);

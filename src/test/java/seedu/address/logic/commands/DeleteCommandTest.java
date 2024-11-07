@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -174,7 +174,8 @@ public class DeleteCommandTest {
         Model actualModel = model;
         showNoPerson(actualModel);
 
-        assertCommandFailure(deleteCommand, actualModel, String.format(DeleteCommand.MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR));
+        assertCommandFailure(deleteCommand, actualModel,
+                String.format(DeleteCommand.MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR));
     }
 
     @Test
