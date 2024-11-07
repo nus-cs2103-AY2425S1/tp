@@ -130,8 +130,12 @@ When you open up the application for the first time, you will see the interface 
 
 ![Ui](images/firstUseUi.png)
 
-At the top of the screen, there is a text box we will refer to as the *Command Line*. This is where you type in your commands to BridalBuddy, and you confirm your instruction by pressing the <kbd>Enter</kbd> key on your keyboard.
+At the top of the screen, there is a text box we will refer to as the *Command Line*. This is where you type in your commands to BridalBuddy.
+
+To confirm your instructions, simply the <kbd>Enter</kbd> key on your keyboard.
+
 Below the *Command Line* is the *Outcome Box*, which will tell you the outcome of the commands you have entered, as well as other relevant information related to that command.
+
 Finally, below the *Outcome Box* is the *Display Panel*, which will contain the guest list and the vendor list for the wedding that you are planning.
 
 
