@@ -83,6 +83,26 @@ Format: `help`
 
 Adds an owner to PawPatrol.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Important notes about owner fields:**<br>
+<ul>
+<li>IC number: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
+<li>Owner name: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
+<li>Phone number: Must contain exactly 8 digits.</li>
+<li>Email: Should follow a standard email format of local-part@domain and adhere to the following constraints:
+<ul>
+<li>The local-part should only contain alphanumeric characters and these special characters +_.-.</li>
+<li>The local-part may not start or end with any special characters.</li>
+<li>The domain name is made up of domain labels separated by periods.</li>
+<li>The domain name must end with a domain label at least 2 characters long, 
+have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li>
+</ul>
+</li>
+<li>Address: Can contain any characters, but must be at least 3 characters long.</li>
+</ul>
+</div>
+
 Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
 Examples:
@@ -91,6 +111,19 @@ Examples:
 #### <u>Adding a pet</u>
 
 Adds a pet to PawPatrol.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Important notes about pet fields:**<br>
+<ul>
+<li>Pet name: Must only contain alphanumeric characters, spaces, or hyphens, and it should not be blank.</li>
+<li>Pet species: Must only contain alphabetic characters, should be a single word, and it should not be blank.</li>
+<li>Pet breed: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
+<li>Pet age: Must only contain numbers, and it should be 1 or 2 digits long</li>
+<li>Pet sex: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female).</li>
+<li>Pet tags: Must be alphanumeric and should only contain a single word each.</li>
+</ul>
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A pet can have any number of tags (including 0)
@@ -109,12 +142,14 @@ Links an owner to one or more pets.
 <div markdown="span" class="alert alert-info">
 
 **:exclamation: Extra information:**<br>
-  
-* Links owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.<br>
-  
-* An owner can be linked to 0 or more pets.<br>
-  
-* A pet can be linked to 0 or more owners.<br>
+
+<ul>
+<li>Links owner at specified <code>OWNER_INDEX</code> to pet(s) at specified <code>PET_INDEX</code>s.</li>
+
+<li>An owner can be linked to 0 or more pets.</li>
+
+<li>A pet can be linked to 0 or more owners.</li>
+</ul>
   
 </div>
 
@@ -124,8 +159,8 @@ Examples:
 * `link o1 t/p1`
 * `link o2 t/p2 t/p3`
 
-![link between Tricia and Fluffy](images/linkTriciaFluffy.jpeg)
-<div style="text-align: center;"><em>Link between Tricia (owner) and Fluffy (pet)</em></div>
+![link between Claire and Fluffy](images/linkClaireFluffy.jpeg)
+<div style="text-align: center;"><em>Link between Claire (owner) and Fluffy (pet)</em></div>
 
 ### Unlinking entities: `unlink`
 
@@ -152,27 +187,29 @@ Shows a list of desired entities in PawPatrol.
 Format:
 * `list owners`: Shows a list of all owners.
 * `list pets`: Shows a list of all pets.
-* `list both`: Shows both owners and pets in a consolidated view.
+* `list`: Shows both owners and pets in a consolidated view.
 
 ### Editing entities: `edit`
 
-Edits an existing owner or pet in PawPatrol.
+Edits an existing owner or pet in PawPatrol. Refer to information on owner and pet fields in the [Add section](#adding-an-entity-owner--pet).
 
 <div markdown="span" class="alert alert-info">
 
 **:exclamation: Extra information:**<br>
 
-* Edits the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​<br>
+<ul>
+<li>Edits the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​</li>
 
-* At least one of the optional fields must be provided.<br>
+<li>At least one of the optional fields must be provided.</li>
 
-* IC number cannot be changed.<br>
+<li>IC number cannot be changed.</li>
 
-* Existing values will be updated to the input values.<br>
+<li>Existing values will be updated to the input values.</li>
 
-* When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.<br>
+<li>When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.</li>
 
-* You can remove all the pet’s tags by typing `t/` without specifying any tags after it.<br>
+<li>You can remove all the pet’s tags by typing <code>t/</code> without specifying any tags after it.</li>
+</ul>
 
 </div>
 
@@ -200,17 +237,20 @@ Finds owners or pets whose names contain any of the given keywords.
 
 **:exclamation: Extra information:**<br>
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`<br>
+<ul>
 
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`<br>
+<li>The search is case-insensitive. e.g. <code>hans</code> will match <code>Hans</code></li>
 
-* Only the name is searched.<br>
+<li>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></li>
 
-* Only full words will be matched e.g. `Han` will not match `Hans`<br>
+<li>Only the name is searched.</li>
 
-* Owners or pets matching at least one keyword will be returned (i.e. `OR` search).<br>
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+<li>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></li>
 
+<li>Owners or pets matching at least one keyword will be returned (i.e. <code>OR</code> search).<br>
+  e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></li>
+
+</ul>
 </div>
 
 Format: 
@@ -230,11 +270,15 @@ Deletes the specified owner or pet from PawPatrol.
 
 **:exclamation: Extra information:**<br>
 
-* Deletes the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively.<br>
+<ul>
 
-* The index refers to the index number shown in the displayed owner or pet list.<br>
+<li>Deletes the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively.</li>
 
-* The index **must be a positive integer** 1, 2, 3, …​<br>
+<li>The index refers to the index number shown in the displayed owner or pet list.</li>
+
+<li>The index **must be a positive integer** 1, 2, 3, …​</li>
+
+</ul>
 
 </div>
 
@@ -247,13 +291,13 @@ Examples:
 * `find owner Betsy` followed by `delete o1` deletes the 1st owner in the results of the `find` command.
 * `list pets` followed by `delete p2` deletes the 2nd pet in PawPatrol.
 * `find pet Fluffy` followed by `delete p1` deletes the 1st pet in the results of the `find` command, as shown below.
-  ![result for 'find Fluffy'](images/findFluffyResult.jpeg)
+  ![result for 'find pet Fluffy'](images/findFluffyResult.jpeg)
   <div style="text-align: center;">
-    <em>Result for 'find Fluffy'</em>
+    <em>Result for 'find pet Fluffy'</em>
   </div>
 
   ![result for 'delete p1'](images/deletep1Result.jpeg)
-  <div style="text-align: center;"><em>Result for 'delete p1' after 'find Fluffy'</em></div>
+  <div style="text-align: center;"><em>Result for 'delete p1' after 'find pet Fluffy'</em></div>
 
 ### Sorting : `sort`
 
@@ -293,7 +337,7 @@ It is saved automatically as a JSON file located in `[JAR file location]/data/pa
 
 ### Saving a backup data file
 
-PawPatrol does not automatically backup your data. To do so, copy the JSON file (as mentioned above) into another location on your computer or to another device.
+PawPatrol does not automatically back up your data. To do so, copy the JSON file (as mentioned above) into another location on your computer or to another device.
 
 ### Editing the data file
 
@@ -329,7 +373,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Owner** | `owner n/NAME p/PHONE e/EMAIL a/ADDRESS` <br> e.g., `owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+**Add Owner** | `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS` <br> e.g., `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
 **Add Pet** | `pet n/NAME s/SPECIES b/BREED a/AGE sex/SEX [t/TAG]…​` <br> e.g., `pet n/Megatron s/Cat b/Siamese a/3 x/M t/playful`
 **Clear** | `clear`
 **Delete Owner** | `delete oOWNER_INDEX`<br> e.g., `delete o3`
@@ -342,7 +386,7 @@ Action | Format, Examples
 **Unlink** | `unlink oOWNER_INDEX t/pPET_INDEX…​` <br> e.g., `unlink o1 t/p1 t/p2`
 **List Owners** | `list owners`
 **List Pets** | `list pets`
-**List Owners and Pets** | `list both`
+**List Owners and Pets** | `list`
 **Sort Owners** | `sort owners`
 **Sort Pets** | `sort pets`
 **Help** | `help`
