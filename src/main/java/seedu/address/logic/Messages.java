@@ -18,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_SUPPLIERS_LISTED_OVERVIEW = "%1$d suppliers listed!";
     public static final String MESSAGE_SUPPLIERS_FOUND_OVERVIEW =
             "%1$d suppliers found by matching with the given keyword(s)!";
+    public static final String MESSAGE_DELIVERIES_FOUND_OVERVIEW = "%1$d deliveries found!";
     public static final String MESSAGE_SUPPLIER_SORTED_OVERVIEW = "%1$d suppliers sorted by %2$s in %3$s order!";
     public static final String MESSAGE_DELIVERY_SORTED_OVERVIEW = "%1$d deliveries sorted by %2$s in %3$s order!";
     public static final String MESSAGE_DELIVERIES_LISTED_OVERVIEW = "%1$d deliveries listed!";
