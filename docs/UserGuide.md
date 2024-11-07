@@ -39,7 +39,7 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
    Note: A GUI similar to the image below should appear in a few seconds. The image below consist of existing sample data.<br>
    </box>
 
-   ![defaultUi](/images/uiWithDescription.png)
+   ![defaultUi](images/uiWithDescription.png)
 5. Type the command in the command box and press Enter to execute it. E.g. Typing **`help`** in the command box and pressing enter will open the help window.<br>
    
 6. Simple and Quick Tutorial:
@@ -226,7 +226,7 @@ Format: `radd CLIENT_INDEX a/ADDRESS [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [
 Displays a list of all clients within TrueRental in a table format.
 
 Format: `list`
-![list](/images/listUi.png)
+![list](images/listUi.png)
 
 <div style="text-align: right;">
   <a href="#command-summary">
