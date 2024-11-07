@@ -59,5 +59,15 @@
     "applications": [],
     "isFavourite": false,
     "isShowingDetails": false
+  }, {
+    "name": "SAP",
+    "phone": "6503407500",
+    "email": "SAP@career.com",
+    "address": "3410 Hillview Ave, Palo Alto, CA",
+    "status": "CLOSED",
+    "tags": [],
+    "applications": [],
+    "isFavourite": false,
+    "isShowingDetails": false
   } ]
 }

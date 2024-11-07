@@ -16,7 +16,13 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
+  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
+  * It comes with a **reasonable level of user and developer documentation**.
+* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
+* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
+* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -177,13 +183,13 @@ The following methods and operations are involved:
 
 ##### Example usage scenario:
 
-Step 1. The user selects a company and executes the `apply` command with relevant application details (e.g., position and status). The command fetches the selected company and creates a new `Application`.
+Step 1. The user selects a company and executes the `apply` command with relevant application details (e.g., position name and description). The command fetches the selected company and creates a new `Application`.
 
 Step 2. A copy of the company's current list of applications is made, and the new `Application` is added to the list.
 
-Step 3. The `ApplyCommand` creates an updated `Company` object containing the newly added application and calls `Model#setCompany()` to replace the old company in the model with the updated one.
+Step 3. The `ApplyCommand` creates an updated `Company` object containing the newly added application and calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company in the model with the updated one.
 
-Step 4. The changes are committed to the address book by calling `AddressBook#setCompany()`.
+Step 4. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`.
 
 <puml src="diagrams/ApplyCommandSequence.puml" alt="ApplyCommandSequence" />
 
@@ -202,7 +208,7 @@ Below displays an activity diagram that explains roughly what happens when a use
   * Pros: Improves separation of concerns and scalability for large datasets.
   * Cons: Increases complexity of application updates.
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Update feature
 
@@ -222,11 +228,14 @@ Step 1. The user selects a company and executes the `update` command to change t
 
 Step 2. A copy of the company's current list of applications is made, and the relevant application is modified by updating its `AppStatus`.
 
-Step 3. The `UpdateCommand` creates an updated `Company` object containing the modified application list and calls `Model#setCompany()` to replace the old company with the updated one.
+Step 3. The `UpdateCommand` creates an updated `Company` object containing the modified application list and calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company with the updated one.
 
-Step 4. The changes are committed to the address book using `AddressBook#setCompany()`.
+Step 4. The changes are committed to the address book using `AddressBook#setCompany(companyToEdit, editedCompany)`.
 
 <puml src="diagrams/UpdateCommandSequence.puml" alt="UpdateCommandSequence" />
+
+Below displays an activity diagram that explains roughly what happens when a user tries to add an applcation:
+<puml src="diagrams/UpdateCommandActivity.puml" alt="UpdateCommandActivity" />
 
 #### Design considerations:
 
@@ -240,7 +249,7 @@ Step 4. The changes are committed to the address book using `AddressBook#setComp
   * Pros: Cleaner separation of concerns, potentially more scalable.
   * Cons: Increased complexity in ensuring consistency between companies and applications.
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Find feature
 
@@ -275,105 +284,94 @@ Step 3. The GUI displays the list of companies filtered by the given search term
     * Pros: Improves separation of concerns between different fields to be searched through.
     * Cons: Multiple iterations of company list will be required, which can increase time complexity with a large list.
 
----
+--------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Undo/redo feature
+### View feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The `view` command allows users to see full application details of a specified `Company`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The following methods and operations are involved:
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+* `ViewCommand#execute(Model model)` &mdash; Displays the specified company along with its full details.
+* `CompanyToViewPredicate(Company companyToView)` &mdash; A predicate used to show only the specified company.
+* `Model#viewAppDetails(Company companyToView)` &mdash; Sets the specified company to show its full details in the company list.
+* `Model#updateFiledCompanyList(Predicate predicate)` &mdash; Only show the specified company and its full details.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### Example usage scenario:
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1: The user selects a company and executes the `view` command with the corresponding company list index.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+Step 2: The `ViewCommand` selected company `companyToView` and creates a predicate `p` to only show this company.
 
-Step 2. The user executes `delete 5` command to delete the 5th company in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new company. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+Step 3: The `ViewCommand` then calls `Model#viewAppDetails(companyToView)` and `Model#updateFilteredCompanyList(p)` which
+causes the UI to display only the specified company and its full application details.
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
+**Note:** `Model#hideAppDetailsForAll()` is executed at the start of `LogicManager#execute(String commandText)`
+to ensure that full application details are only shown for the `view` command.
 </box>
 
-Step 4. The user now decides that adding the company was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How to display the results of `view`:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1:** Display results in the results box.
+  * Pros: Easier and simpler to implement
+  * Cons: Users edit the viewed company after using the view command (ie: they have to manually search for it again)
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the company being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2 (current choice):** Show the singular company with full details in the company list.
+  * Pros: Users can use other commands after using `view` to manipulate the company.
+  * Cons: Harder to implement as the full application details should be hidden after running additional commands.
 
-_{more aspects and alternatives to be added}_
+--------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Data archiving
+### Favourite/unfavourite feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
 
+The `fav`/`unfav` command allows users to mark specified a `Company` as favourites or not. Companies that are favourited
+will appear at the top of the company list at all times along with other favourited companies (provided that they are not hidden by other commands like `find`).
+
+The `fav` command is facilitated by `FavCommand` and `FavCommandParser`. Similarly, `unfav` command is facilitated by
+`UnfavCommand` and `UnfavCommandParser`. For brevity, we refer to both using `XXFavCommand` and `XXFavCommanParser`
+Since they function similarly.
+
+The following methods and operations are involved:
+* `XXFavCommand#execute(Model model)` &mdash; (Un)Favourites the specified `Company`.
+* `Model#setCompany(Company targetCompany, Company updatedCompany` &mdash; Replaces the existing company in the model with
+the same `Company` but with its `IsFavourite` set to `true` or `false` depending on `XXFavCommand`
+* `AddressBook#setCompany(Company target, Company editedCompany` &mdash; Commits the changes to the address book.
+* `UniqueCompanyList#setCompany(Company target, Company editedCompany)` &mdash; Updates internal list, sorting by favourited companies.
+
+#### Example usage scenario:
+
+Step 1. The user selects a company and executes the `XXfav` command with the corresponding company list index. 
+
+Step 2. The `XXFavCommand` fetches the selected company `companyToEdit` and creates an identical company `editedCompany` but with the updated `IsFavourite` field and
+calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company in the model with the updated one.
+
+Step 3. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`; the address book replaces
+the old company in its `UniqueCompanyList` sorting by `isFavourite` in the process by calling `UniqueCompanyList#setCompany(companyToEdit, editedCompany)`.
+
+<puml src="diagrams/FavSequenceDiagram.puml" alt="FavSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: How to show favourite companies at the top of the company list:**
+
+* **Alternative 1 (current choice):** Uniformly ensure that companies are always sorted by favourites in all
+methods of `UniqueCompanyList` that manipulates its `internalList`.
+* Pros: Simple to implement and ensures that favourited companies always remain on top.
+* Cons: Some time cost is incurred for all commands that modify the company list as list is always sorted by favourites.
+
+* **Alternative 2:** Have a specific method in `AddressBook` that sorts the companies.
+* Pros: More flexible which allows different methods of sorting the future.
+* Cons: More effort by developers to ensure that the list is sorted by favourites when it should be. 
 
 [back to top](#internbuddy-developer-guide)
 

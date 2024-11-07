@@ -19,6 +19,7 @@ import seedu.internbuddy.logic.commands.FavCommand;
 import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
+import seedu.internbuddy.logic.commands.ReopenCommand;
 import seedu.internbuddy.logic.commands.UnfavCommand;
 import seedu.internbuddy.logic.commands.UpdateCommand;
 import seedu.internbuddy.logic.commands.ViewCommand;
@@ -97,6 +98,9 @@ public class AddressBookParser {
 
         case UnfavCommand.COMMAND_WORD:
             return new UnfavCommandParser().parse(arguments);
+
+        case ReopenCommand.COMMAND_WORD:
+            return new ReopenCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);

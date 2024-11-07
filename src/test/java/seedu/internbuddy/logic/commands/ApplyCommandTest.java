@@ -32,15 +32,16 @@ public class ApplyCommandTest {
         CommandResult result = applyCommand.execute(model);
 
         Name firstCompanyName = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased()).getName();
-        assertEquals(String.format(ApplyCommand.MESSAGE_SUCCESS, firstCompanyName, validApplication),
+        assertEquals(String.format(ApplyCommand.MESSAGE_SUCCESS, firstCompanyName, Messages.format(validApplication)),
                 result.getFeedbackToUser());
     }
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         Application validApplication = new ApplicationBuilder().build();
         ApplyCommand applyCommand = new ApplyCommand(Index.fromOneBased(999), validApplication);
-        assertThrows(CommandException.class, () -> applyCommand.execute(model),
-            Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        String expectedMessage = String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
+        assertThrows(CommandException.class, () -> applyCommand.execute(model), expectedMessage);
     }
 
     @Test

@@ -1,7 +1,7 @@
 package seedu.internbuddy.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX;
+import static seedu.internbuddy.logic.Messages.MESSAGE_INDEX_EXCEEDS_SIZE;
 import static seedu.internbuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.EMAIL_DESC_GOOGLE;
@@ -61,7 +61,9 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        String expectedMessage = String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
+        assertCommandException(deleteCommand, expectedMessage);
     }
 
     @Test

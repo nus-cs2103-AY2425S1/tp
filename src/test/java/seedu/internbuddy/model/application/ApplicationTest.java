@@ -69,7 +69,9 @@ public class ApplicationTest {
     @Test
     public void testToString() {
         Application sweCopy = new ApplicationBuilder(SWE_APPLICATION).build();
-        assertEquals("Software Engineering Intern; Description: Requires: ReactJS and ExpressJS;"
-                + " App Status: APPLIED", sweCopy.toString());
+        String expected = Application.class.getCanonicalName() + "{name=" + sweCopy.getName()
+                + ", description=" + sweCopy.getDescription() + ", appStatus=" + sweCopy.getAppStatus()
+                + "}";
+        assertEquals(expected, sweCopy.toString());
     }
 }
