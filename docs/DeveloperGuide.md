@@ -152,7 +152,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -790,7 +790,15 @@ otherwise)
 1. The Salesperson issues the `birthday` command with a valid `index` and birthday date.
 2. The system validates the `index` and birthday format.
 3. The system stores the birthday for the contact.
-4. The system displays a success message: `Birthday for <Name> logged as <BirthdayDate>.`
+4. The system displays a success message:
+      ```
+      Added birthday to Person: John Doe; Phone: 87431234; Email: john.doe@example.com; Address: Blk 123 Clementi Ave 3, #12-34; Remark: Looking for a 3-bedroom condo; Birthday: 1986-02-24; Remark: Looking for a 3-bedroom condo; Tags: [longTerm][buyer]; DateOfCreation: 2024-01-05; History: Date of Creation: 2024-01-05
+      [2024-02-15]:
+        [2024-02-15] Meeting about 3-bedroom condo
+      ; PropertyList: Property List:
+      Property at 123 Maple Street, Woodlands (Condo): 120.50 sqm, 3 bed, 2 bath - $850000.00
+      Property at 456 Elm Street, Bukit Timah (Landed): 250.00 sqm, 5 bed, 4 bath - $2200000.00
+      ```
 
    **Use case ends.**
 
@@ -800,14 +808,10 @@ otherwise)
 - **2a.** The `index` is of invalid format (not a positive integer).
   - **2a1.** The system displays an error message:
     ```
-    Invalid command format!
-    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-    Two usage formats are supported:
-    1. To mark a person as favourite: Specify the index of the person in the displayed list.
-       Parameters: INDEX (must be a positive integer)
-       Example: favourite 1
-    2. To sort all favourite persons to the top: Use the command without any parameters.
-       Example: favourite
+    Invalid command format! 
+    birthday: Edits the birthday of the person identified by the index number used in the last person listing. Existing birthday will be overwritten by the input.
+    Parameters: INDEX (must be a positive integer) b/[BIRTHDAY]
+    Example: birthday 1 b/2001-12-12
     ```
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
@@ -818,7 +822,7 @@ otherwise)
   - **Use case resumes from Step 2.**
 
 - **2c.** The birthday format is incorrect.
-    - **2c1.** The system displays an error message: `Invalid birthday format. Please use YYYY-MM-DD or MM-DD.`
+    - **2c1.** The system displays an error message: `Invalid date format! Please use yyyy-mm-dd.`
     - **2c2.** The Salesperson corrects the birthday format and reissues the command.
     - **Use case resumes from Step 2.**
 
@@ -827,15 +831,6 @@ otherwise)
 #### Including Related Use Cases:
 - **UC03 - Log Interaction with Contact**: This use case may be referenced when logging a reminder notification as an interaction.
 - **UC06 - View Full Contact Details**: The Salesperson can view the saved birthday in the full contact profile.
-
----
-
-#### Variations:
-- **1a.** The Salesperson logs a birthday in the format `YYYY-MM-DD` (e.g., `2024-10-15`).
-    - **Use case proceeds normally from Step 2.**
-
-- **1b.** The Salesperson logs a birthday in the format `MM-DD` (e.g., `10-15`).
-    - **Use case proceeds normally from Step 2.**
 
 ---
 
