@@ -76,9 +76,9 @@ public class CommandTextFlow extends TextFlow {
         return switch (command.toLowerCase()) {
         case "help" -> "help - Shows program help instructions and command summary";
         case "list" -> "list - Shows a list of all persons in the gamer address book";
-        case "add" -> "add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/TIME]...";
+        case "add" -> "add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/TIME-TIME]...";
         case "edit" -> "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... "
-                + "[t/TAG]... [pt/TIME]...";
+                + "[t/TAG]... [pt/TIME-TIME]...";
         case "addgame" -> "addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]";
         case "editgame" -> "editgame INDEX g/GAME [u/USERNAME] [s/SKILL_LEVEL] [r/ROLE]";
         case "deletegame" -> "deletegame INDEX g/GAME";
