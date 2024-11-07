@@ -1,6 +1,6 @@
 [![Java CI](https://github.com/AY2425S1-CS2103-F10-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103-F10-1/tp/actions/workflows/gradle.yml)
 
-![Ui](docs/images/GoodsNameColorUi.png)
+![Ui](docs/images/Readme-ui.png)
 
 ---
 
