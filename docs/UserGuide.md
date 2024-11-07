@@ -161,23 +161,24 @@ Unassigns vendors to events.
 * `view v/2` then `unassign 1` will unassign the 1st event from the current viewed vendor, which is the 2nd vendor.
 * `view e/1` then `unassign 3` will unassign the 3rd vendor from the current viewed event, which is the 1st event.
 
-### Locating persons by name: `find`
+### Searching for Vendors & Events: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds vendors or events whose attributes contain any of the space-separated keywords provided.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Format: `find v/KEYWORD [MORE_KEYWORDS]` or `find e/KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+#### Notes:
+* The search is case-insensitive. e.g. `party` will match `Party`
+* Any partial matches will still be matched e.g. `par` will match `party`
+* The order of the keywords does not matter. e.g. `party birthday` will match `birthday party`
+* All attributes of the `Vendor` or `Event` are searched, i.e. name, phone number, date, descriptions and tags.
+* Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
+  * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
+* If no matches are found, the user will be informed and the current view will remain unchanged.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+#### Examples:
+* `find v/catering` returns `catering` and `Catering Solutions`
+* `find e/party wedding` returns `Birthday Party` and `John's Wedding`<br>
 
 ### Deleting Items : `delete`
 
@@ -247,12 +248,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action     | Format, Examples                                                                                                                                                      |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                               |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**   | `find v/KEYWORD [MORE_KEYWORDS] or e/KEYWORD [MORE_KEYWORDS]` <br> e.g., `find v/Catering Band`, `find e/Party Wedding`                                               |
+| **List**   | `list`                                                                                                                                                                |
+| **Help**   | `help`                                                                                                                                                                |
