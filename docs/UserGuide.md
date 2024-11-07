@@ -6,7 +6,14 @@
 
 # SocialBook User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+SocialBook is a **desktop app specifically designed to ease the administrative process for social workers.**
+
+By providing a **comprehensive way to store the personal details** of those they are helping, as well as **functionalities 
+to make the information managing process efficient**, SocialBook streamlines the process for social workers. 
+
+SocialBook is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a 
+Graphical User Interface (GUI). If you can type fast, SocialBook can get your contact management tasks done faster 
+than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,22 +22,27 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have **Java 17 or above** installed in your Computer.
+   *  How To Install Java ([Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html) | [MacOS](https://se-education.org/guides/tutorials/javaInstallationMac.html) | [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html))
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-1/tp/releases).
+   * Under the **Assets** of the latest version of SocialBook, you should find the latest downloadable `socialbook.jar` file
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy this file into the _folder_ you want to use for SocialBook.
+   * Ensure that this _folder_ is **empty**.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Open a command terminal, `cd` into the folder you put the `.jar` file in. After which enter `java -jar socialbook.jar` in the command terminal to run the application.
+   * How To Open Command Terminal ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) | [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) | [Linux](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))
+   * How To Change Directory (`cd`) To Folder ([Windows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd) | [MacOS](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html) | [Linux](https://phoenixnap.com/kb/linux-cd-command))
+   
+If done correctly, a GUI similar to the image below should appear in a few seconds. Note that the app will contain some sample data for you to get started and familiarise with.<br><br>![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command where "Enter command here..." is seen in the command box and press the **enter / return** key on your computer to execute it. e.g. typing **`help`** and pressing enter / return will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all current (i.e. not archived) contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2 #02-25 dob/1999-03-09` : Adds a contact named `John Doe` to SocialBook with these specified details.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -38,7 +50,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+<br>6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -63,12 +75,14 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Extraneous parameters for commands that do not take in parameters (such as `listappt`, `statistics`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `statistics 123`, it will be interpreted as `statistics`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
+  e.g. if you copy `add n/John Doe p/98765432` and `p/98765432` is on a new line in the PDF, when copied over into the command box, it may be copied as `add n/John Doep/98765432` instead which is an invalid command format.
 </box>
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page or display how to use a specified command.
+Shows a message explaining how to access the help page as well as all the available commands. If the `[COMMAND]` is specified, the help message for that command
+will be displayed.
 
 ![help message](images/updatedHelpMessage.png)
 
@@ -81,18 +95,23 @@ Examples:
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to SocialBook.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [r/REMARK] [t/TAG]...​`
+* Parameters can be inputted in any order.
+* Duplicated names are not allowed to be added.
+* Blank parameters are not allowed.
+* `NAME` are case-insensitive e.g. `n/JOHN DOE` is different from `n/john doe`.
+* `PHONE` should contain at least 3 digits.
+* For optional parameters like `PRIORITY, INCOME, FAMILY SIZE`, if not specified, their values will be defaulted to `LOW, 0, 1` respectively.
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/2002-12-25 pri/MEDIUM t/criminal`
 
 ### Listing all persons: `list`
 
@@ -113,16 +132,15 @@ Format: `list [archive/] [all/]`
 
 ### Editing a person: `edit`
 
-Edits an existing person in the address book.
+Edits an existing person's details in SocialBook.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** not exceeding the largest index number e.g. 1, 2, 3,…​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, all existing tags of the person will be removed and replaced with updated values i.e editing of tags does not cumulatively add them to current tags.
+* You can remove all the person’s tags or remarks by typing `edit INDEX t/` or `edit INDEX r/` where `INDEX` is the person's index.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -172,18 +190,18 @@ Examples:
 
 ### Deleting people: `delete`
 
-Deletes the specified people from the address book.
+Deletes the specified people from SocialBook.
 
 Format: `delete INDEXES`
 
 * Deletes the people at the specified `INDEXES`.
 * The indexes refer to the index numbers shown in the displayed person list.
-* The indexes **must be positive integers** not exceeding 2^31 - 1 e.g. 1, 2, 3, …
+* The indexes **must be positive integers** not exceeding the largest index number e.g. 1, 2, 3, …
 * The indexes can be in **any order** so long as all the indexes fall within the size of the current list.
 * Duplicated valid index inputs would be treated as unique index inputs.
 
 Examples:
-* `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in the address book.
+* `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in SocialBook.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
 
@@ -206,7 +224,12 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from the address book.
+Clears all entries from SocialBook.
+
+* Both unarchived and archived entries, including those not currently shown in the list, will be deleted.
+
+Examples:
+* `find n/John` followed by `clear` will delete all persons in SocialBook and not just those with `John` in their names.
 
 Format: `clear`
 
@@ -291,20 +314,6 @@ Examples:
 
 * `listappt` followed by `deleteappt 2` deletes the second appointment from the address book.
 
-### Undo the previous command: `undo`
-
-Undoes the previous command from SocialBook.
-
-Format: `undo`
-
-* Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear
-* Undo can be called multiple times till there is no more previous command for the current execution.
-
-Examples:
-* `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
-* `clear` followed by `undo` will retrieve back the uncleared SocialBook.
-* `edit 1 n/John` followed by `undo` will change name back to what it was before.
-
 ### Displaying overall statistics: `statistics`
 
 Displays the statistics of current person list.
@@ -314,15 +323,14 @@ Statistics include:
 * Number of HIGH Priority People
 * Number of MEDIUM Priority People
 * Number of LOW Priority People
-* Number of People With Monthly Household Income <= 4000
 * Number of Appointments Scheduled Within Next 7 Days From Current Date
-* Number Of People Eligible For At Least One Scheme
+* Number of People Eligible for At Least One Scheme
 
 Format: `statistics`
 
 ### Displaying eligible schemes: `scheme`
 
-Displays the schemes that specified people from the address book are eligible for.
+Displays the schemes that specified people from SocialBook are eligible for.
 
 Format: `scheme INDEXES`
 
@@ -332,7 +340,7 @@ Format: `scheme INDEXES`
 * Only 1 index can be inputted at a time.
 
 Examples:
-* `scheme 1` shows scheme that the 1st person in the address book is eligible for.
+* `scheme 1` shows scheme that the 1st person in SocialBook is eligible for.
 
 ### Adding a scheme to a person: `addscheme`
 
@@ -414,6 +422,20 @@ Format: `unarchive INDEX`
 Examples:
 * `list archive/` followed by `unarchive 1` unarchives the 1st person in the address book.
 
+### Undo the previous command: `undo`
+
+Undoes the previous command from SocialBook.
+
+Format: `undo`
+
+* Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear, addappt, deleteappt, editappt, addscheme, deletescheme, archive, unarchive
+* Undo can be called multiple times till there is no longer a previous command to execute.
+
+Examples:
+* `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
+* `clear` followed by `undo` will retrieve back the uncleared SocialBook.
+* `edit 1 n/John` followed by `undo` will change name back to what it was before.
+
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -422,17 +444,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SocialBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SocialBook data are saved automatically as a JSON file `[JAR file location]/data/socialbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, SocialBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the SocialBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
