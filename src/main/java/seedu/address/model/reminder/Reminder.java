@@ -86,7 +86,7 @@ public class Reminder {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", personName)
-                .add("Date and time", dateTime)
+                .add("Date and time", this.getFormattedDateTime())
                 .add("description", description)
                 .toString();
     }
@@ -94,4 +94,15 @@ public class Reminder {
     public Reminder getReminderWithFullName(String fullName) {
         return new Reminder(fullName, this.dateTime, this.description);
     }
+
+    /**
+     * Returns the formatted date and time string.
+     * @return formatted date and time string
+     */
+    public String getFormattedDateTime() {
+        String dateString = this.dateTime.toLocalDate().toString();
+        String timeString = this.dateTime.toLocalTime().toString();
+        return dateString + " " + timeString;
+    }
+
 }
