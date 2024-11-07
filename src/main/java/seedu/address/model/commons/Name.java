@@ -9,11 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces and these combinations, "
-            + ", s/o and d/o (case insensitive)"
-            + " and it should not be blank\n"
-            + "eg. n/John Doe s/o Jane Doe";
+    public static final String MESSAGE_CONSTRAINTS = 
+            "Invalid name format. Names must meet the following constraints:\n" +
+            "1. Only alphanumeric characters, spaces, and the terms ' s/o ' (son of) or ' d/o ' (daughter of) are allowed.\n" +
+            "2. ' s/o ' and ' d/o ' should be used to specify parentage, and are case insensitive.\n" +
+            "3. The name cannot be blank.\n" +
+            "Example: n/John Doe s/o Jane Doe";
 
     /*
      * The first character of the address must not be a whitespace,
