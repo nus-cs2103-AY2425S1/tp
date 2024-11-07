@@ -9,6 +9,7 @@ import java.time.YearMonth;
 
 import seedu.address.logic.commands.SummaryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.TransactionDatePredicate;
 
 /**
  * Parses input arguments and creates a new SummaryCommand object.
@@ -30,6 +31,6 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
         if (start.isAfter(end)) {
             throw new ParseException(MESSAGE_INVALID_DATE_RANGE);
         }
-        return new SummaryCommand(start, end);
+        return new SummaryCommand(new TransactionDatePredicate(start, end));
     }
 }
