@@ -18,4 +18,9 @@ public class HelpCommand extends Command {
     public CommandResult executeCommand(Model model) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
+
+    @Override
+    protected boolean requiresCommit() {
+        return false;
+    }
 }

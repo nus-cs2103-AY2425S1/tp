@@ -57,6 +57,10 @@ public class Messages {
                 .append(String.join(", ", student.getClasses()))
                 .append("; Days attended: ")
                 .append(student.getDaysAttended())
+                .append("; Next of Kin: ")
+                .append(student.getNextOfKinName())
+                .append("; Emergency Contact: ")
+                .append(student.getEmergencyContact())
                 .append("; Tags: ");
         student.getTags().forEach(builder::append);
         return builder.toString();
