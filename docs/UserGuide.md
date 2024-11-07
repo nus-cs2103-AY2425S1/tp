@@ -18,45 +18,46 @@ In this guide, users will be able to learn the following details:
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 <!-- * Table of Contents -->
-1. [How to use NovaCare](#how-to-use-novacare)
-2. [Annotation Box](#annotations-box)
-3. [Quick start](#quick-start)
-4. [Overview of GUI](#overview-of-gui)
-5. [Get started with NovaCare](#get-started-with-novacare)
-6. [Features](#features)
-    - 6.1 [Parameter information](#parameter-information)
-    - 6.2 [Patient commands](#patient-commands)
-      - 6.2.1 [Adding a patient](#adding-a-patient-add)
-      - 6.2.2 [Listing all patients](#listing-all-patients--list)
-      - 6.2.3 [Editing a patient](#editing-a-patient--edit)
-      - 6.2.4 [Locating patients by name](#locating-patients-by-name-find)
-      - 6.2.5 [Deleting a patient](#deleting-a-patient--delete)
-      - 6.2.6 [Adding emergency contact](#adding-emergency-contact--emergency)
-      - 6.2.7 [Deleting emergency contact](#deleting-emergency-contact--delemergency)
-      - 6.2.8 [Adding priority level](#adding-priority-level--priority)
-      - 6.2.9 [Deleting priority level](#deleting-priority-level--deletelevel) 
-    - 6.3 [Task commands](#task-commands)
-      - 6.3.1 [Adding a task](#adding-a-task--addtask)
-      - 6.3.2 [Deleting a task](#deleting-a-task--deletetask)
-      - 6.3.3 [Marking a task](#marking-a-task--marktask)
-      - 6.3.4 [Finding a task](#finding-a-task--findtask)
-      - 6.3.5 [Listing tasks](#listing-tasks--listtask)
-      - 6.3.6 [Listing incomplete tasks](#listing-incomplete-tasks--listincomplete)
-    - 6.4 [General commands](#general-commands)
-      - 6.4.1 [Viewing help](#viewing-help--help)
-      - 6.4.2 [Clearing all entries](#clearing-all-entries--clear)
-      - 6.4.3 [Exiting the program](#exiting-the-program--exit)
-    - 6.5 [Data Management](#data-management)
-      - 6.5.1 [Saving the data](#saving-the-data)
-      - 6.5.2 [Editing the data file](#editing-the-data-file)
-      - 6.5.3 [Archiving data files](#archiving-data-files-coming-in-v20)
-7. [FAQ](#faq)
-8. [Known Issues](#known-issues)
-9. [Command Summary](#command-summary)
-   - 9.1 [Patient-Related Commands](#patient-related-commands)
-   - 9.2 [Task-Related Commands](#task-related-commands)
-   - 9.3 [Other Commands](#other-commands)
-10. [Glossary](#glossary)
+1. [How to use NovaCare](#1-how-to-use-novacare)
+2. [Annotation Box](#2-annotations-box)
+3. [Quick start](#3-quick-start)
+4. [Overview of GUI](#4-overview-of-gui)
+5. [Get started with NovaCare](#5-get-started-with-novacare)
+6. [Features](#6-features)
+    - 6.1 [Parameter information](#61-parameter-information)
+    - 6.2 [Patient commands](#62-patient-commands)
+      - 6.2.1 [Adding a patient](#621-adding-a-patient-add)
+      - 6.2.2 [Listing all patients](#622-listing-all-patients-list)
+      - 6.2.3 [Editing a patient](#623-editing-a-patient-edit)
+      - 6.2.4 [Locating patients by name](#624-locating-patients-by-name-find)
+      - 6.2.5 [Deleting a patient](#625-deleting-a-patient-delete)
+      - 6.2.6 [Adding emergency contact](#626-adding-emergency-contact-emergency)
+      - 6.2.7 [Deleting emergency contact](#627-deleting-emergency-contact-deleteemergency)
+      - 6.2.8 [Adding priority level](#628-adding-priority-level-priority)
+      - 6.2.9 [Deleting priority level](#629-deleting-priority-level-deletelevel) 
+    - 6.3 [Task commands](#63-task-commands)
+      - 6.3.1 [Adding a task](#631-adding-a-task-addtask)
+      - 6.3.2 [Deleting a task](#632-deleting-a-task-deletetask)
+      - 6.3.3 [Marking a task](#633-marking-a-task-marktask)
+      - 6.3.4 [Unmarking a task](#634-unmarking-a-task-unmarktask)
+      - 6.3.5 [Finding a task](#635-finding-a-task-findtask)
+      - 6.3.6 [Listing tasks](#636-listing-tasks-listtask)
+      - 6.3.7 [Listing incomplete tasks](#637-listing-incomplete-tasks-listincomplete)
+    - 6.4 [General commands](#64-general-commands)
+      - 6.4.1 [Viewing help](#641-viewing-help-help)
+      - 6.4.2 [Clearing all entries](#642-clearing-all-entries-clear)
+      - 6.4.3 [Exiting the program](#643-exiting-the-program-exit)
+    - 6.5 [Data Management](#65-data-management)
+      - 6.5.1 [Saving the data](#651-saving-the-data)
+      - 6.5.2 [Editing the data file](#652-editing-the-data-file)
+      - 6.5.3 [Archiving data files](#653-archiving-data-files-coming-in-v20)
+7. [FAQ](#7-faq)
+8. [Known Issues](#8-known-issues)
+9. [Command Summary](#9-command-summary)
+   - 9.1 [Patient-Related Commands](#91-patient-related-commands)
+   - 9.2 [Task-Related Commands](#92-task-related-commands)
+   - 9.3 [Other Commands](#93-other-commands)
+10. [Glossary](#10-glossary)
       
 
 --------------------------------------------------------------------------------------------------------------------
@@ -217,7 +218,7 @@ It will provide the limitations and examples of the parameter.
 **Warning:**<br>
 
 The parameters must follow the limitations as shown below.
-Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:
+Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:<br>
 ![failCommand](images/failAdd.png)
 </box>
 
@@ -366,7 +367,7 @@ Example:
 
 Deletes an emergency contact and its details from a patient in the system.
 
-:pencil: Format: `deleteemergency INDEX
+:pencil: Format: `deleteemergency INDEX`
 
 <box type="info" seamless>
 
@@ -481,7 +482,25 @@ Example:
 * `marktask 1` marks the 1st-indexed task in the task list as `Complete`.
 <br></br>
 
-#### 6.3.4 Finding a Task: `findtask`
+#### 6.3.4 Unmarking a Task: `unmarktask`
+
+Unmarks a task at a specific index.
+
+:pencil: Format: `unmarktask INDEX`
+
+<box type="info" seamless>
+
+**Note:**
+* Unmarks a task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Task list.
+* The index **must be a positive integer** 1, 2, 3, …​
+  </box>
+
+Example:
+* `unmarktask 1` marks the 1st-indexed task in the task list as `Incomplete`.
+  <br></br>
+
+#### 6.3.5 Finding a Task: `findtask`
 
 Finds all task for a particular patient specific index.
 
@@ -491,7 +510,7 @@ Example:
 * `findtask1 1` finds and displays all tasks for the 1st-indexed patient in the patient list.
 <br></br>
 
-#### 6.3.5 Listing Tasks: `listtask`
+#### 6.3.6 Listing Tasks: `listtask`
 
 List all tasks for all patients in the system.
 
@@ -501,7 +520,7 @@ Example:
 * `listtask` lists and displays all tasks in the system.
 <br></br>
 
-#### 6.3.6 Listing Incomplete Tasks: `listincomplete`
+#### 6.3.7 Listing Incomplete Tasks: `listincomplete`
 
 List all incomplete tasks for all patients in the system.
 
@@ -580,6 +599,7 @@ NovaCare data are saved automatically as a JSON file `[JAR file location]/data/a
 If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
 <br></br>
 
 #### 6.5.3 Archiving data files `[coming in v2.0]`
@@ -634,6 +654,7 @@ _Details coming soon ..._
 | **Find Task**       | `findtask INDEX`<br> e.g., `findtask 1`                                            |
 | **List Task**       | `listtask`                                                                         |
 | **Mark Task**       | `marktask INDEX`<br> e.g., `marktask 1`                                            |
+| **Unmark Task**     | `unmarktask INDEX`<br> e.g., `unmarktask 1`                                        |
 | **List Incomplete** | `listincomplete`                                                                   |
 
 
