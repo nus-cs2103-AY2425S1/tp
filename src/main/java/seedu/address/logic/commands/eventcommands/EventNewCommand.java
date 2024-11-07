@@ -69,8 +69,8 @@ public class EventNewCommand extends Command {
         }
 
         if (other instanceof EventNewCommand) {
-            EventNewCommand otherCommand = (EventNewCommand) other;
-            return otherCommand.toAdd.equals(toAdd);
+            EventNewCommand otherNewCommand = (EventNewCommand) other;
+            return otherNewCommand.toAdd.equals(toAdd);
         } else {
             return false;
         }

@@ -60,8 +60,8 @@ public class EventFilterCommand extends Command {
             return false;
         }
 
-        EventFilterCommand otherViewEventCommand = (EventFilterCommand) other;
-        return targetIndex.equals(otherViewEventCommand.targetIndex);
+        EventFilterCommand otherFilterEventCommand = (EventFilterCommand) other;
+        return targetIndex.equals(otherFilterEventCommand.targetIndex);
     }
 
     @Override
