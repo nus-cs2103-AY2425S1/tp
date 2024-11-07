@@ -141,10 +141,10 @@ Commands that extends the UndoableCommand class have a concrete implementation o
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the current list of tags as an `ObservableList<Tag>`. This allows `AddessBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
+* stores the current list of tags as an `ObservableList<Tag>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. This allows `AddessBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores a `Command` object that represents the user's last executed command.
 
 
 ### Storage Component
@@ -508,7 +508,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 **Use Case 10 (UC10)**: Filter by Tag or RSVP Status<br>
 **MSS**:
->>>>>>> upstream/master
 
 1.  User enters the command to filter guest list.
 2.  The system prompts for the desired predicate.

@@ -6,56 +6,55 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Package Commands <<Rectangle>> {
     Class "{abstract}\nCommand" as Command
-    Class "{abstract}\nUndoableCommand" as UndoableCommand
+    Class "{abstract}\nUndoableCommand" as UndoableCommand extends Command
 
-    Class AddCommand
-    Class ClearCommand
-    Class DeleteCommand
-    Class DeleteTagCommand
-    Class EditCommand
-    Class ExitCommand
-    Class FilterCommand
-    Class FindCommand
-    Class HelpCommand
-    Class ListCommand
-    Class NewtagCommand
-    Class RenameTagCommand
-    Class SetRsvpCommand
-    Class TagCommand
-    Class UntagCommand
-    Class UndoCommand
+    Class AddCommand extends UndoableCommand
+    Class ClearCommand extends Command
+    Class DeleteCommand extends UndoableCommand
+    Class DeleteTagCommand extends UndoableCommand
+    Class EditCommand extends UndoableCommand
+    Class ExitCommand extends Command
+    Class FilterCommand extends UndoableCommand
+    Class FindCommand extends UndoableCommand
+    Class HelpCommand extends Command
+    Class ListCommand extends Command
+    Class NewtagCommand extends UndoableCommand
+    Class RenameTagCommand extends UndoableCommand
+    Class SetRsvpCommand extends UndoableCommand
+    Class TagCommand extends UndoableCommand
+    Class UntagCommand extends UndoableCommand
+    Class UndoCommand extends Command
 
 
-    UndoableCommand -up-> Command
-    ClearCommand -up-> Command
-    ExitCommand -up-> Command
-    HelpCommand -up-> Command
+    UndoableCommand -[hidden]up-> Command
+    ClearCommand -[hidden]up-> Command
+    ExitCommand -[hidden]up-> Command
+    HelpCommand -[hidden]up-> Command
     HelpCommand -[hidden]right-> UndoableCommand
-    ListCommand -up-> Command
+    ListCommand -[hidden]up-> Command
     ListCommand -[hidden]right-> UndoableCommand
-    UndoCommand -up-> Command
+    UndoCommand -[hidden]up-> Command
 
     AddCommand -[hidden]up-> UndoableCommand
-    AddCommand -up-> UndoableCommand
-    DeleteCommand -up-> UndoableCommand
-    DeleteTagCommand -up-> UndoableCommand
-    EditCommand -up-> UndoableCommand
-    FilterCommand -up-> UndoableCommand
-    FindCommand -up-> UndoableCommand
-    NewtagCommand -up-> UndoableCommand
-    RenameTagCommand -up-> UndoableCommand
-    SetRsvpCommand -up-> UndoableCommand
-    TagCommand -up-> UndoableCommand
-    UntagCommand -up-> UndoableCommand
+    DeleteCommand -[hidden]up-> UndoableCommand
+    DeleteTagCommand -[hidden]up-> UndoableCommand
+    EditCommand -[hidden]up-> UndoableCommand
+    FilterCommand -[hidden]up-> UndoableCommand
+    FindCommand -[hidden]up-> UndoableCommand
+    NewtagCommand -[hidden]up-> UndoableCommand
+    RenameTagCommand -[hidden]up-> UndoableCommand
+    SetRsvpCommand -[hidden]up-> UndoableCommand
+    TagCommand -[hidden]up-> UndoableCommand
+    UntagCommand -[hidden]up-> UndoableCommand
 
     AddCommand-[hidden]-> DeleteCommand
-        FindCommand -[hidden]up-> FilterCommand
-        DeleteCommand -[hidden]down-> DeleteTagCommand
-        EditCommand -[hidden]down-> FilterCommand
-        FindCommand -[hidden]down-> NewtagCommand
-        RenameTagCommand -[hidden]-> SetRsvpCommand
-        UntagCommand -[hidden]up-> TagCommand
-        UntagCommand -[hidden]up-> DeleteTagCommand
+    FindCommand -[hidden]up-> FilterCommand
+    DeleteCommand -[hidden]down-> DeleteTagCommand
+    EditCommand -[hidden]down-> FilterCommand
+    FindCommand -[hidden]down-> NewtagCommand
+    RenameTagCommand -[hidden]-> SetRsvpCommand
+    UntagCommand -[hidden]up-> TagCommand
+    UntagCommand -[hidden]up-> DeleteTagCommand
 
 
 }
