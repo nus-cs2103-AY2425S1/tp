@@ -50,6 +50,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_NRIC_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
@@ -65,6 +67,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.patient.Nric.MESSAGE_CONSTRAINTS;
 
 import org.junit.jupiter.api.Test;
 
@@ -79,37 +82,40 @@ import seedu.address.testutil.EditPatientDescriptorBuilder;
 
 
 public class EditCommandParserTest {
+  
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
+
+    private static final String MESSAGE_EMPTY_NRIC = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NRIC_EMPTY);
 
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
         // no NRIC specified
-        assertParseFailure(parser, NAME_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, NAME_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY, MESSAGE_EMPTY_NRIC);
 
         // no field specified
         assertParseFailure(parser, VALID_NRIC_AMY, EditCommand.MESSAGE_NOT_EDITED);
 
         // no NRIC and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", MESSAGE_EMPTY_NRIC);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // Invalid NRIC with lowercase
-        assertParseFailure(parser, INVALID_NRIC_DESC + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, INVALID_NRIC_DESC + NAME_DESC_AMY, MESSAGE_CONSTRAINTS);
 
         // Invalid NRIC with wrong number of characters
-        assertParseFailure(parser, "T012345R" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "T012345R" + NAME_DESC_AMY, MESSAGE_CONSTRAINTS);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, VALID_NRIC_AMY + " some random string" + NAME_DESC_AMY,
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_CONSTRAINTS);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, VALID_NRIC_AMY + " pn/ string" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NRIC_AMY + " pn/ string" + NAME_DESC_AMY, MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -117,14 +123,14 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NAME_DESC,
                 Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NRIC_DESC,
-                Nric.MESSAGE_CONSTRAINTS); // invalid nric
+                MESSAGE_CONSTRAINTS); // invalid nric
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_SEX_DESC,
                 Sex.MESSAGE_CONSTRAINTS); // invalid sex
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_BIRTHDATE_DESC,
                 Birthdate.MESSAGE_CONSTRAINTS); // invalid birthdate
 
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NRIC_DESC + SEX_DESC_AMY,
-                Nric.MESSAGE_CONSTRAINTS); // invalid nric followed by valid sex
+                MESSAGE_CONSTRAINTS); // invalid nric followed by valid sex
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NAME_DESC + INVALID_NRIC_DESC

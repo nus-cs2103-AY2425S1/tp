@@ -97,7 +97,7 @@ public class PatientBuilder {
         nokPhone = patientToCopy.getNokPhone();
         allergies = new AllergyList();
         appts = new ApptList();
-        for (Appt appt: patientToCopy.getAppts()) {
+        for (Appt appt: patientToCopy.getImmutableApptList()) {
             appts.addAppt(new Appt(appt.getDateTime(), appt.getHealthService()));
         }
         for (Allergy allergy : patientToCopy.getAllergies()) {
