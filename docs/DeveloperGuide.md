@@ -620,7 +620,7 @@ This command finds contacts by specific interests. The command supports searchin
 
 **Test case 2:** `findi i/Swimming i/Cycling`
 
-***Expected:***  Lists all contacts with either "Swimming" or "Cycling" as an interest.
+***Expected:***  Lists all contacts with either "Swimming" and "Cycling" as an interest.
 
 **Test case 3:** `findi i/UnknownInterest`
 
@@ -645,6 +645,18 @@ This command finds contacts by work experience. It requires a company name and a
 **Test case 4:** `findw w/`
 
 ***Expected:*** Error message due to missing company name.
+
+### 5. Finding Contacts by Major: `findm`
+
+This command finds contacts by major. It requires a major. Major is case insensitive. 
+
+**Test case 1:** `findm m/Business`
+
+***Expected:*** Lists all contacts who have major as Business.
+
+**Test case 2:** `findm m/`
+
+***Expected:*** Error message due to missing major name.
 
 ---
 
