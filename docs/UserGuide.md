@@ -15,31 +15,30 @@ operate than graphical user interfaces commonly found in smartphones.
 ## Table of Contents
 * [Quick start](#quick-start)
 * [Features](#features)
-    * [Adding a person: `add`](#adding-a-person-add)
-    * [Listing all persons : `list`](#listing-all-persons--list)
-    * [Editing a person : `edit`](#editing-a-person--edit)
-    * [Locating persons by name: `find`](#locating-persons-by-name-find)
-    * [Locating persons by tag: `findtag`](#locating-persons-by-tag-findtag)
-    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Adding a client: `add`](#adding-a-client-add)
+    * [Listing all clients : `list`](#listing-all-clients--list)
+    * [Editing a client : `edit`](#editing-a-client--edit)
+    * [Locating clients by name: `find`](#locating-clients-by-name-find)
+    * [Locating clients by tag: `findtag`](#locating-clients-by-tag-findtag)
+    * [Deleting a client : `delete`](#deleting-a-client--delete)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
     * [Quick reference help: `help`](#quick-reference-help-help)
     * [Managing Remarks : `remark`](#managing-remarks--remark)
-    * [Showing property listings of a person : `show`](#showing-property-listings-of-a-person--show)
+    * [Showing property listings of a client : `show`](#showing-property-listings-of-a-client--show)
     * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
     * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
     * [Exporting your contacts : `export`](#exporting-your-contacts--export)
-    * [Sorting all persons : `sort`](#sorting-all-persons--sort)
+    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
 * [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
-* [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 * [FAQ](#faq)
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
 * [Tag Table](#tag-table)
 * [Glossary](#glossary)
     * [Property Tags](#property-tags)
-    * [Person Tags](#person-tags)
+    * [client Tags](#client-tags)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -61,13 +60,13 @@ operate than graphical user interfaces commonly found in smartphones.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
    
-   * `list` : Lists all contacts.
+   * `list` : Lists all clients in your address book.
    
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
    
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd client shown in your current list.
    
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all clients.
    
    * `exit` : Exits the app.
 
@@ -102,17 +101,17 @@ operate than graphical user interfaces commonly found in smartphones.
 </div>
 
 
-### Adding a person: `add`
+### Adding a client: `add`
 
-Adds a person to PROperty.
+Adds a client to PROperty.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [r/REMARKS]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​`
 
 - `NAME` and `PHONE_NUMBER` fields must be provided.
--  Refer to the [Tag Table](#tag-table) for a complete list of person tags.
+-  Refer to the [Tag Table](#tag-table) for a complete list of client tags.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including no tags)
+A client can have any number of tags (including no tags)
 </div>
 
 Examples:
@@ -124,53 +123,53 @@ Visual example of correct output:
 
 ![AddCommandShowcase.png](images/user-guide-images/AddCommandShowcase.png)
 
-### Editing a person : `edit`
+### Editing a client : `edit`
 
-Edits an existing person in the PROperty.
+Edits an existing client in the PROperty.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [dt/PERSON_TAG] [r/REMARK]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/client_TAG] [r/REMARK]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* `PERSON_TAG` can be `Buyer`, `Seller`, `Landlord`, `Tenant`
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* `client_TAG` can be `Buyer`, `Seller`, `Landlord`, `Tenant`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the tags specified using `t/` will be added to the contact (cumulatively).
 * Tags can also be removed using the delete tag `dt/` prefix, followed by the tag name.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 2 t/condo` Adds the tag `condo` to the 2nd person
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+* `edit 2 t/condo` Adds the tag `condo` to the 2nd client
 
 Visual example of correct output:
 
 ![EditCommandShowcase.png](images/user-guide-images/EditCommandShowcase.png)
 
-### Deleting a person : `delete`
+### Deleting a client : `delete`
 
-Deletes the specified person from the PROperty.
+Deletes the specified client from the PROperty.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-* `list` followed by `delete 2` deletes the 2nd person in PROperty.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd client in PROperty.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 Visual example of correct output:
 
 ![DeleteCommandShowcase.png](images/user-guide-images/DeleteCommandShowcase.png)
 
-### Listing all persons : `list`
+### Listing all clients : `list`
 
-Shows a list of all persons in the PROperty.
+Shows a list of all clients in the PROperty.
 
 Format: `list`
 
@@ -178,9 +177,9 @@ Visual example of correct output:
 
 ![ListCommandShowcase.png](images/user-guide-images/ListCommandShowcase.png)
 
-### Sorting all persons : `sort`
+### Sorting all clients : `sort`
 
-Sorts the list of all persons in the address book by name in alphabetical order.
+Sorts the list of all clients in the address book by name in alphabetical order.
 
 Format: `sort`
 
@@ -188,19 +187,19 @@ Visual example of correct output:
 
 ![SortCommandShowcase.png](images/user-guide-images/SortCommandShowcase.png)
 
-### Showing property listings of a person : `show`
+### Showing property listings of a client : `show`
 
-Shows the full details of the specified person, including their property listings.
+Shows the full details of the specified client, including their property listings.
 
 Format: `show INDEX`
 
-- Shows the person at the specified `INDEX`
-- The `INDEX` refers to the index number shown in the displayed person list.
+- Shows the client at the specified `INDEX`
+- The `INDEX` refers to the index number shown in the displayed client list.
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-- `show 2` shows the name, contact information, tags, and property listings of the second person in the PROperty.
+- `show 2` shows the name, client information, tags, and property listings of the second client in the PROperty.
 
 Visual example of correct output:
 
@@ -218,23 +217,23 @@ Visual example of correct output:
 ![help message](images/user-guide-images/HelpMessageShowcase.png)
 ![help message](images/user-guide-images/HelpMessageShowcase2.png)
 
-### Locating persons by name: `find`
+### Locating clients by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * By default, the find command conduct a general search for the individual. Hence, 
 the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* A person's name, phone nunmber, address, email and tag can be searched.
+* A client's name, phone nunmber, address, email and tag can be searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * If a more specific search is required, utilise the `s/`.
   * Format: `find s/KEYWORD [s/MORE_KEYWORDS]`
   * Only individuals who match the keyword(s) one-to-one will be returned. e.g. `find s/Hans Bo` will not match `Bo Hans`. `find s/Hans Bo` will only match `Hans Bo`.
-  * Especially useful if there are multiple people with the same name in PROperty and you require a more specific search.
+  * Especially useful if there are multiple clients with the same name in PROperty and you require a more specific search.
 
 Examples:
 
@@ -251,21 +250,21 @@ Visual example of correct output (Specific Find):
 
 ![SpecificFindCommandShowcase.png](images/user-guide-images/SpecificFindCommandShowcase.png)
 
-### Locating persons by tag: `findtag`
+### Locating clients by tag: `findtag`
 
-Finds persons whose tags contain any of the given words.
+Finds clients whose tags contain any of the given words.
 
 Format: `findtag TAG [MORE_TAGS]`
 
 * The search is case-insensitive. e.g., `HDB` will match `hdb`. 
 * The order of the tags does not matter. 
-* Persons with at least one matching tag will be returned (i.e., an `OR` search). 
+* clients with at least one matching tag will be returned (i.e., an `OR` search). 
 * List of possible tags you can search for are found in the [Tag Table](#tag-table)
 
 Examples:
 
-* `findtag HDB` returns persons tagged with `HDB`.
-* `findtag HDB buyer` returns persons tagged with either `HDB` or `buyer`.
+* `findtag HDB` returns clients tagged with `HDB`.
+* `findtag HDB buyer` returns clients tagged with either `HDB` or `buyer`.
 
 Visual example of correct output:
 
@@ -283,19 +282,19 @@ Visual example of correct output:
 
 ### Managing Remarks : `remark`
 
-Adds/removes a remark from a person in PROperty.
+Adds/removes a remark from a client in PROperty.
 
 Format: `remark INDEX r/[REMARKS]`
 
-* Adds a remark `REMARKS` to the person at `INDEX`
-* The index refers to the index number shown in the displayed person list.
+* Adds a remark `REMARKS` to the client at `INDEX`
+* The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * **Note:** `[REMARKS]` will **delete the remark if left blank**
 
 Examples:
 
-* `remark 1 r/Prefers a higher floor apartment` adds a remark "Prefers a higher floor apartment" to the person at index `1`
-* `remark 1 r/` deletes the remark of person at index `1`
+* `remark 1 r/Prefers a higher floor apartment` adds a remark "Prefers a higher floor apartment" to the client at index `1`
+* `remark 1 r/` deletes the remark of client at index `1`
 
 Visual example of correct output (Add Remark):
 
@@ -307,18 +306,18 @@ Visual example of correct output (Remove Remark):
 
 ### Adding a property listing : `listing add`
 
-Adds a property listing to the person specified by `INDEX`
+Adds a property listing to the client specified by `INDEX`
 
 Format: `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`
 
-- Adds a property listing to the person specified by `INDEX`
-- The `INDEX` refers to the index number shown in the displayed person list.
+- Adds a property listing to the client specified by `INDEX`
+- The `INDEX` refers to the index number shown in the displayed client list.
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 - Refer to the [Tag Table](#tag-table) for a complete list of property tags.
 
 Examples:
 
-- `listing add 1 t/condo a/NUS street 123` adds a property listing to the person at index `1` with a listing type of `condo` and address of `NUS street 123`
+- `listing add 1 t/condo a/NUS street 123` adds a property listing to the client at index `1` with a listing type of `condo` and address of `NUS street 123`
 
 Visual example of correct output:
 
@@ -326,18 +325,18 @@ Visual example of correct output:
 
 ### Deleting a property listing : `listing delete`
 
-Deletes the property listing with index `LISTING_INDEX` from the person specified by `INDEX` 
+Deletes the property listing with index `LISTING_INDEX` from the client specified by `INDEX` 
 
 Format: `listing delete INDEX LISTING_INDEX`
 
-* Adds the property listing with index `LISTING_INDEX` to the person specified by `INDEX`
-* The `INDEX` refers to the index number shown in the displayed person list.
+* Adds the property listing with index `LISTING_INDEX` to the client specified by `INDEX`
+* The `INDEX` refers to the index number shown in the displayed client list.
 * The `LISTING_INDEX` refers to the index number shown in the property listing displayed by the `show` command
 * The `INDEX`/`LISTING_INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-- `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
+- `listing delete 1 1` deletes the `1`st property listing from the client with index `1`
 
 Visual example of correct output:
 
@@ -383,20 +382,20 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: To transfer your data to another computer, follow these steps:
 
 1. **Install PROperty**: Place the `PROperty.jar` file in your preferred location on the new computer.
 2. **Set Up the Data Folder**: If you have already run the application, skip to step 3. Otherwise, manually create a `data` folder in the same directory as `PROperty.jar`.
 3. **Transfer Your Data**: If the application has been run previously, simply replace the existing `property.json` file in the `data` folder with your data-containing `property.json` file from the original computer. Otherwise, add your `property.json` file directly into the `data` folder you just created.
-4. **Launch PROperty**: Run the app to load your transferred data, giving you access to all your previous contacts and property listings.
+4. **Launch PROperty**: Run the app to load your transferred data, giving you access to all your previous clients and property listings.
 
 
-**Q**: Can I customise the tags or categories for contacts and properties?<br>
+**Q**: Can I customise the tags or categories for clients and properties?<br>
 **A**: Customising tags is not currently supported. Users can only use the predefined tags listed in the table provided in this guide.
 
-**Q**: Is there a way to restore a deleted contact?<br>
-**A**: Unfortunately, it is not possible to restore a deleted contact. We strongly recommend that users regularly save a backup of their contacts to prevent accidental data loss.
+**Q**: Is there a way to restore a deleted client?<br>
+**A**: Unfortunately, it is not possible to restore a deleted client. We strongly recommend that you regularly save a backup of your clients to prevent accidental data loss.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -411,9 +410,9 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 
 | Action             | Format, Examples                                                                                                                                                                |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/buyer` |
+| **Add**            | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/buyer` |
 | **List**           | `list`                                                                                                                                                                          |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [dt/PERSON_TAG] [r/REMARK]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                         |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/client_TAG] [r/REMARK]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                         |
 | **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                       |
 | **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                         |
 | **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
@@ -434,7 +433,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 | Tag Type | Tags                                                                                                                                                                      |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Property | HDB, CONDO, RESIDENTIAL, LANDED, EC, COMMERCIAL, RETAIL, INDUSTRIAL, OFFICE, WAREHOUSE, SHOPHOUSE, TERRACE, SEMIDET, BUNGALOW, DETACHED, GCB, PENTHOUSE, MIXED, SERVAPT, DORM |
-| Person   | BUYER, SELLER, LANDLORD, TENANT, DEVELOPER, INVESTOR, MANAGER, CONTRACTOR                                                                                                 |
+| Client   | BUYER, SELLER, LANDLORD, TENANT, DEVELOPER, INVESTOR, MANAGER, CONTRACTOR                                                                                                 |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -462,7 +461,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **SERVAPT**: Furnished serviced apartments, typically with extended-stay services.
 - **DORM**: Dormitories, often used as shared housing for students or workers.
 
-### Person Tags
+### Client Tags
 - **BUYER**: Prospective property purchasers.
 - **SELLER**: Property owners seeking to sell.
 - **LANDLORD**: Property owners leasing to tenants.
