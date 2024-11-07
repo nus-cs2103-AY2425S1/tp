@@ -183,13 +183,13 @@ Search persons whose fields match the keywords given.
 
 Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
 * Search is restricted to the fields indicated by the provided prefixes.
-* The order of the prefixes provided does not affect search results. e.g. `search n/ alex t/ friends` will return the same result as `search t/ friends n/ alex`.
+* The order of the prefixes provided does not affect search results. e.g. `search n/alex t/friends` will return the same result as `search t/friends n/alex`.
 * Only full words will be matched e.g. `friend` will not match `friends`.
 * For name searches, the order of keywords does not matter (e.g., Hans Bo will match Bo Hans).
-* For name searches, persons matching any of the keyswords given will be returned (eg., `search n/ Alex Yeoh` returns both `Alex Yeoh` and `Alex Tan`)
-* For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned
+* For name searches, persons matching any of the keyswords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
+* For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned.
 
 Tip: Support search prefixes include:
 * `NAME`: n/
@@ -199,7 +199,7 @@ Tip: Support search prefixes include:
 * `ROLE`: r/
 
 Examples: <br>
-1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role` donor `group`: blood drive<br>
+1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role`: donor `group`: blood drive<br>
 2. **Person B:** `name`: Alex Yeoh `tag`: friends `phone number`: 91234567 `role`: volunteer <br>
 3. **Person C:** `name`: David Li `tag`: friends `phone number`: 81234123 `role`: person `group`: blood drive
 * `search n/john` returns persons with the name `john` like `John Doe`
