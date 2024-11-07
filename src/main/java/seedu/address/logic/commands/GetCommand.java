@@ -20,7 +20,7 @@ public class GetCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Get the specified parameter of all the people in the filtered persons list.\n"
-            + "Parameters: PARAMETER \n"
+            + "Parameters: [name], [phone], [email], [address] \n"
             + "Example: " + COMMAND_WORD + " email phone";
 
     public static final String MESSAGE_GET_PARAMETER_SUCCESS = "Here are the %s details:\n%s";
