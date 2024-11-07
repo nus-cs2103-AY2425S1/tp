@@ -224,6 +224,19 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Exporting your contacts: `export`
+
+Exports a copy of your contact data to a specified file format.
+
+BA€ supports file exports in the CSV and TXT file formats.
+
+Format: `export [format\EXPORT_FORMAT]`
+* `format\EXPORT_FORMAT` specifies a file format for the contact data export.
+
+Examples:
+* `export format\csv` exports a copy of your contact data to `data/addressbook.csv`.
+* `export format\txt` exports a copy of your contact data to `data/addressbook.txt`.
+
 ### Exiting the program : `exit`
 
 Exits the program.
