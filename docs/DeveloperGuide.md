@@ -166,6 +166,24 @@ Explanation:
 4. `LogicManager` executes the `AddGuestCommand`, which calls the `hasPerson` method of `Model` to check if the guest already exists in the address book. If the guest is not a duplicate, the `AddGuestCommand` then calls the `addPerson` method of the `Model` to add the guest into the address book.
 5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
 
+### Edit Guest feature
+The `edit_guest` command updates the details of a guest in the address book. Users can specify the guest to be edited by providing the index number of that guest in the displayed guest list
+
+The sequence diagram below provides an overview for the execution flow of a `edit_guest` command:
+<puml src="diagrams/EditGuestSequenceDiagram.puml" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `EditGuestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+Explanation:
+1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
+2. `AddressBookParser` parses the user input (if valid) to create and return an `EditGuestCommandParser`
+3. `EditGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create an `EditGuestDescriptor`. An `EditGuestCommand` is then created with the index provided in the user input and the `EditGuestDescriptor` created.
+4. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model` before accessing the target guest. A new `Guest` is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing guest with the edited guest. Subsequently `updateFilteredPersonList` from `Model` is called to update the filtered list. 
+5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
+
 ### Find feature
 The `find` command searches for all guests and vendors that match the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that only one type of prefix should be used for each find command.
 
