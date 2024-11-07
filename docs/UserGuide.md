@@ -150,8 +150,8 @@ Format: `listcc`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-`TAB` key can be used to toggle the concertContact view when search bar is in focus. <br>
-Press `TAB` twice to focus the search bar when it is out of focus.
+`F2` key can be used to toggle the concertContact view when search bar is in focus. <br>
+Press `F2` twice to focus the search bar when it is out of focus.
 
 </div>
 
