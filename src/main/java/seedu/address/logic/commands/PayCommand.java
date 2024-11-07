@@ -35,7 +35,7 @@ public class PayCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the payment made by the student identified "
             + "by the index number used in the displayed Student list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_HOUR + "HOURS PAID\n"
+            + PREFIX_HOUR + "HOURS PAID (must be a positive multiple of 0.5)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_HOUR + "3 ";
 
