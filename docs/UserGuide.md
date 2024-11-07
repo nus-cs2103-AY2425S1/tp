@@ -1,8 +1,3 @@
-e---
-layout: page
-title: User Guide
----
-
 GRUB is a quick and efficient solution to search for local dining options, tailored to personal preferences.
 
 * Table of Contents
@@ -267,7 +262,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## Command summary
 
 Action | Format, Examples
---------|------------------
+-----------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 t/Halal`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
