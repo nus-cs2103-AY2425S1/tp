@@ -196,7 +196,7 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
      */
     public boolean hasInvalidCancelledLessons() {
         ObservableList<Student> students = this.getStudentList();
-        return students.stream()
+        return !students.stream()
                 .flatMap(student -> student.getCancelledLessons().stream() // converts each student into boolean stream
                         .map(lesson -> lesson.getLessonDate().convertToDay()) // converts cl to cl lesson day
                         .map(day -> day.equals(student.getRegularLessonOptional() // returns true if cl day matches rl
