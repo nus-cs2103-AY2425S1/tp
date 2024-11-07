@@ -73,7 +73,7 @@ public class Person {
      * @return
      */
     public Set<PublicAddress> getPublicAddressesByNetworkAndLabel(Network network, String label) {
-        return publicAddressesComposition.getByNetworkAndLabel(network, label);
+        return publicAddressesComposition.getByLabelAndNetwork(label, network);
     }
 
     /**
@@ -89,6 +89,27 @@ public class Person {
 
     public PublicAddressesComposition getPublicAddressObjectByPublicAddressMap(String publicAddressString) {
         return publicAddressesComposition.filterByPublicAddress(publicAddressString);
+    }
+
+    /**
+     * Returns a set of public addresses that matches the label.
+     *
+     * @param label The label to match against the public addresses.
+     * @return A set containing the desired public addresses.
+     */
+    public Set<PublicAddress> getPublicAddressesByLabel(String label) {
+        return publicAddressesComposition.getByLabel(label);
+    }
+
+    /**
+     * Returns a set of public addresses that matches the label for a specific network.
+     *
+     * @param label   The label to match against the public addresses.
+     * @param network The network to search in.
+     * @return A set containing the desired public addresses.
+     */
+    public Set<PublicAddress> getPublicAddressesByLabelAndNetwork(String label, Network network) {
+        return publicAddressesComposition.getByLabelAndNetwork(label, network);
     }
 
     /**
