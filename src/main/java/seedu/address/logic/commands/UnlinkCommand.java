@@ -33,7 +33,7 @@ public class UnlinkCommand extends Command {
             + "Parameters: " + PREFIX_CHILD + "CHILD_NAME\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_CHILD + "John Doe";
 
-    public static final String MESSAGE_UNLINK_CONTACT_SUCCESS = "Successfully unlinked %1$s from %2$s";
+    public static final String MESSAGE_UNLINK_CONTACT_SUCCESS = "Successfully unlinked Student: %1$s from Parent: %2$s";
     public static final String MESSAGE_CONTACT_HAS_NO_LINKS = "Student: %1$s has no links";
     public static final String MESSAGE_CHILD_NOT_FOUND = "Student: %1$s does not exist in Address Book";
     public static final String MESSAGE_PARENT_NOT_FOUND = "Student's Parent: %1$s does not exist in Address Book";
