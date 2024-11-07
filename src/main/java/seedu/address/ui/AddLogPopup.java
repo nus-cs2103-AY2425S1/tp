@@ -10,6 +10,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import seedu.address.model.log.LogEntry;
 
 /**
  * A popup window for adding log entries.
@@ -73,6 +74,6 @@ public class AddLogPopup extends UiPart<Stage> {
         window.setScene(scene);
         window.showAndWait();
 
-        return logEntry[0];
+        return LogEntry.convertToStorageString(logEntry[0]);
     }
 }

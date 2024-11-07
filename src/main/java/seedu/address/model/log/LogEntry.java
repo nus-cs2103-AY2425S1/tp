@@ -13,6 +13,7 @@ public class LogEntry {
             + "e.g. d/20 May 2024 l/First appointment with John. John shared 3 problems during the session.";
     public static final String VALIDATION_REGEX = ".+";
     private final String entry;
+    private final String formattedEntry;
 
     /**
      * Constructs a {@code LogEntry}.
@@ -20,32 +21,50 @@ public class LogEntry {
      * @param entry A valid log entry.
      */
     public LogEntry(String entry) {
+        // This MUST be safe to be added into storage
         checkArgument(isValidEntry(entry), MESSAGE_CONSTRAINTS);
+        this.formattedEntry = convertToFormattedString(entry);
         this.entry = entry;
     }
+
+    /**
+     * Constructs a {@code LogEntry}.
+     *
+     * @param formattedEntry Contains special next line that should be passed around in storageEntry form
+     */
+    public LogEntry formattedLogEntry(String formattedEntry) {
+        return new LogEntry(convertToStorageString(formattedEntry));
+    }
+
 
     /**
      * Returns the log entry.
      */
     public String getEntry() {
-        return getFormattedEntry();
+        return entry;
     }
 
     /**
      * Returns the formatted log entry.
      */
     public String getFormattedEntry() {
-        return entry.replace("\\n", "\n");
+        return formattedEntry;
     }
 
+    public static String convertToStorageString(String formattedEntry) {
+        return formattedEntry.replace("\n", "\\n");
+    }
 
+    public static String convertToFormattedString(String storageEntry) {
+        return storageEntry.replace("\\n", "\n");
+    }
     /**
-     * Returns the truncated log entry.
+     * Returns the formatted truncated log entry.
      */
     public String getTruncatedEntry() {
         return entry.length() > 100
-                ? getEntry().substring(0, 100) + "..."
-                : getEntry();
+                ? getFormattedEntry().substring(0, 100) + "..."
+                : getFormattedEntry();
     }
 
     /**
