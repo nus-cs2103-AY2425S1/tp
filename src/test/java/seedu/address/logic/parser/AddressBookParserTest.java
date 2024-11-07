@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -124,7 +125,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findAddress() throws Exception {
-        List<String> keywords = Arrays.asList("Jurong West Street");
+        List<String> keywords = List.of("Jurong West Street");
         FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " a/Jurong West Street");
         assertEquals(new FindAddressCommand(new AddressContainsKeywordsPredicate(keywords)), command);
@@ -156,7 +157,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findPhone() throws Exception {
-        List<String> keywords = Arrays.asList("99394835");
+        List<String> keywords = List.of("99394835");
         FindPhoneCommand command = (FindPhoneCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " p/99394835");
         assertEquals(new FindPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
@@ -172,7 +173,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findTag() throws Exception {
-        List<String> keywords = Arrays.asList("florist");
+        List<String> keywords = List.of("florist");
         FindTagCommand command = (FindTagCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " t/florist");
         assertEquals(new FindTagCommand(new TagContainsKeywordsPredicate(keywords)), command);
@@ -301,11 +302,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_assignWedding() throws Exception {
-        HashSet<Wedding> weddingsToAdd = new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Wedding 19")),
-                new Wedding(new WeddingName("Joe's Wedding"))));
+        HashMap<Wedding, String> weddingsToAdd = new HashMap<>() {
+            { put(new Wedding(new WeddingName("Wedding 19")), "g"); }
+            { put(new Wedding(new WeddingName("Joe's Wedding")), "g"); }
+        };
         String userInput = AssignWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                 + " w/Wedding 19 w/Joe's Wedding";
-        AssignWeddingCommand expectedCommand = new AssignWeddingCommand(INDEX_FIRST, weddingsToAdd);
+        AssignWeddingCommand expectedCommand = new AssignWeddingCommand(INDEX_FIRST, weddingsToAdd, false);
 
         AssignWeddingCommand command = (AssignWeddingCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
