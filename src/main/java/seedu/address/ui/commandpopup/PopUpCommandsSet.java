@@ -23,6 +23,7 @@ public class PopUpCommandsSet {
         commandSet.add("unfavgame");
         commandSet.add("find");
         commandSet.add("findtime");
+        commandSet.add("findgame");
         commandSet.add("delete");
         commandSet.add("clear");
         commandSet.add("undo");

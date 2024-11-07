@@ -76,7 +76,7 @@ public class CommandTextFlow extends TextFlow {
         return switch (command.toLowerCase()) {
         case "help" -> "help - Shows program help instructions and command summary";
         case "list" -> "list - Shows a list of all persons in the gamer address book";
-        case "add" -> "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... [pt/PREFERRED_TIME]...";
+        case "add" -> "add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/PREFERRED_TIME]...";
         case "edit" -> "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... "
                 + "[t/TAG]... [pt/PREFERRED_TIME]...";
         case "addgame" -> "addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]";
@@ -86,6 +86,7 @@ public class CommandTextFlow extends TextFlow {
         case "unfavgame" -> "unfavgame INDEX g/GAME";
         case "find" -> "find KEYWORD [MORE_KEYWORDS] - Finds persons whose names contain any of the keywords";
         case "findtime" -> "find HHmm-HHmm [HHmm-HHmm]";
+        case "findgame" -> "findgame g/GAME";
         case "delete" -> "delete INDEX - Deletes the specified person (e.g., delete 3)";
         case "clear" -> "clear - Clears all entries from the gamer address book";
         case "undo" -> "undo - Undoes the previous command (aside from save and load)";
