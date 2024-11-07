@@ -31,7 +31,7 @@ public class ListAbsenteesCommandParser implements Parser<ListAbsenteesCommand> 
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE);
-        if (!argMultimap.getValue(PREFIX_DATE).isPresent()) {
+        if (!argMultimap.getValue(PREFIX_DATE).isPresent() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             ListAbsenteesCommand.MESSAGE_USAGE));
         }
