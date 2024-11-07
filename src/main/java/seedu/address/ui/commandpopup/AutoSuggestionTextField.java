@@ -249,7 +249,7 @@ public class AutoSuggestionTextField extends TextField {
     private double calculateListViewHeight(ObservableList<TextFlow> items) {
         double totalHeight = 0;
         for (TextFlow item : items) {
-            totalHeight += 40; // 10 pixels padding
+            totalHeight += 50; // 10 pixels padding
         }
 
         return totalHeight;
