@@ -40,7 +40,7 @@ public class AddAttendanceTest {
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_PERSON,
                 new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         String expectedMessage = String.format(AddAttendanceCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), "10-10-2024", "Sick");
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addAttendanceCommand, model, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class AddAttendanceTest {
 
     @Test
     public void execute_deleteAttendanceUnfilteredList_success() {
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person secondPerson = model.getUnfilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         HashMap<AbsentDate, AbsentReason> attendances = secondPerson.getAttendances();
 
         List<AbsentDate> absentDateList = new ArrayList<>(attendances.keySet());
@@ -86,7 +86,7 @@ public class AddAttendanceTest {
         AddAttendanceCommand deleteAttendanceCommand = new AddAttendanceCommand(INDEX_SECOND_PERSON,
                 absentDateList.get(0), new AbsentReason(""));
         String expectedMessage = String.format(AddAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
 
@@ -111,7 +111,7 @@ public class AddAttendanceTest {
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_PERSON,
                 new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         String expectedMessage = String.format(AddAttendanceCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), "10-10-2024", "Sick");
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addAttendanceCommand, model, expectedMessage, expectedModel);
@@ -119,7 +119,7 @@ public class AddAttendanceTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getUnfilteredPersonList().size() + 1);
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(outOfBoundIndex,
                 new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's sex in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidSex(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidSex(String)}.
  */
 public class Sex implements Comparable<Sex> {
 
@@ -32,6 +32,8 @@ public class Sex implements Comparable<Sex> {
 
     /**
      * Returns true if a given string is a valid sex.
+     *
+     * @return true if sex is either "M" or "F".
      */
     public static boolean isValidSex(String test) {
         return test.matches(VALIDATION_REGEX);
