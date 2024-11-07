@@ -153,6 +153,15 @@ public class Appt {
     }
 
     /**
+     * Returns true if appointment date and time is after dateTime
+     * @param dateTime
+     * @return
+     */
+    public boolean isAfterOrOn(LocalDateTime dateTime) {
+        return this.dateTime.isAfter(dateTime) || this.dateTime.isEqual(dateTime);
+    }
+
+    /**
      * Returns true if appointment date is before date
      * @param date
      * @return
