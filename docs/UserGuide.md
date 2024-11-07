@@ -24,6 +24,8 @@ This section introduces the HiredFiredPro layout, command format and commonly us
 
 The image below shows the different components of HiredFiredPro.
 
+![HiredFiredPro_layout](images/UI-Layout.png)
+
 ### Command Format
 
 <box type="info">
