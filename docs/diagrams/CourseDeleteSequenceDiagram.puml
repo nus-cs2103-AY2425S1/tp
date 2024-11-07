@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete-course c/CS1101S")
+[-> LogicManager : execute("course-delete c/CS1101S")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete-course c/CS1101S")
+LogicManager -> AddressBookParser : parseCommand("course-delete c/CS1101S")
 activate AddressBookParser
 
 create DeleteCourseCommandParser
@@ -27,7 +27,7 @@ activate DeleteCourseCommandParser
 DeleteCourseCommandParser --> AddressBookParser
 deactivate DeleteCourseCommandParser
 
-AddressBookParser -> DeleteCourseCommandParser : parse("delete-course c/CS1101S")
+AddressBookParser -> DeleteCourseCommandParser : parse("c/CS1101S")
 activate DeleteCourseCommandParser
 
 create DeleteCourseCommand
