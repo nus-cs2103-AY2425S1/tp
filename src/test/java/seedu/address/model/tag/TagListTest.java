@@ -7,52 +7,52 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.TypicalTags;
+
 public class TagListTest {
     private TagList tagList;
-    private Tag tag1;
-    private Tag tag2;
-    private Tag tag3;
+    private Tag friendsTag;
+    private Tag colleaguesTag;
 
     @BeforeEach
     public void setUp() {
         tagList = new TagList();
-        tag1 = new Tag("friend");
-        tag2 = new Tag("colleague");
-        tag3 = new Tag("family");
+        friendsTag = TypicalTags.FRIENDS;
+        colleaguesTag = TypicalTags.COLLEAGUES;
     }
 
     @Test
     public void addTag_newTag_success() {
-        assertTrue(tagList.addTag(tag1));
-        assertTrue(tagList.contains(tag1));
+        assertTrue(tagList.addTag(friendsTag));
+        assertTrue(tagList.contains(friendsTag));
     }
 
     @Test
     public void addTag_duplicateTag_failure() {
-        tagList.addTag(tag1);
-        assertFalse(tagList.addTag(tag1));
+        tagList.addTag(friendsTag);
+        assertFalse(tagList.addTag(friendsTag));
     }
 
     @Test
     public void deleteTag_existingTag_success() {
-        tagList.addTag(tag1);
-        assertTrue(tagList.deleteTag(tag1));
+        tagList.addTag(friendsTag);
+        assertTrue(tagList.deleteTag(friendsTag));
     }
 
     @Test
     public void deleteTag_nonExistentTag_failure() {
-        assertFalse(tagList.deleteTag(tag1));
+        assertFalse(tagList.deleteTag(friendsTag));
     }
 
     @Test
     public void contains_tagInList_success() {
-        tagList.addTag(tag2);
-        assertTrue(tagList.contains(tag2));
+        tagList.addTag(friendsTag);
+        assertTrue(tagList.contains(friendsTag));
     }
 
     @Test
     public void contains_tagNotInList_failure() {
-        assertFalse(tagList.contains(tag3));
+        assertFalse(tagList.contains(friendsTag));
     }
 
     @Test
@@ -94,8 +94,8 @@ public class TagListTest {
     @Test
     public void equals_sameTagLists_success() {
         TagList otherTagList = new TagList();
-        tagList.addTag(tag1);
-        otherTagList.addTag(tag1);
+        tagList.addTag(friendsTag);
+        otherTagList.addTag(friendsTag);
 
         assertEquals(tagList, otherTagList); // Both lists contain the same tag.
     }
@@ -103,8 +103,8 @@ public class TagListTest {
     @Test
     public void equals_differentTagLists_failure() {
         TagList otherTagList = new TagList();
-        tagList.addTag(tag1);
-        otherTagList.addTag(tag2);
+        tagList.addTag(friendsTag);
+        otherTagList.addTag(colleaguesTag);
 
         assertFalse(tagList.equals(otherTagList)); // Different tags in the lists.
     }
@@ -117,14 +117,14 @@ public class TagListTest {
 
     @Test
     public void toString_singleTag_correctFormat() {
-        tagList.addTag(tag1);
-        assertEquals("friend", tagList.toString()); // Single tag should be represented correctly.
+        tagList.addTag(friendsTag);
+        assertEquals("friends", tagList.toString());
     }
 
     @Test
     public void toString_multipleTags_correctFormat() {
-        tagList.addTag(tag1);
-        tagList.addTag(tag2);
-        assertEquals("friend, colleague", tagList.toString()); // Multiple tags should be separated by a comma.
+        tagList.addTag(friendsTag);
+        tagList.addTag(colleaguesTag);
+        assertEquals("friends, colleagues", tagList.toString());
     }
 }

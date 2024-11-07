@@ -32,6 +32,7 @@ import seedu.address.model.tag.Tag;
 public class DeleteTagCommandTest {
 
     private Model model;
+
     @BeforeEach
     public void setUp() {
         model = new ModelManager();
