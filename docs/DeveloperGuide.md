@@ -520,7 +520,7 @@ testers are expected to do more *exploratory* testing.
 
     1a. Prerequisites: Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
         Add another tutor with the command `addTutor \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s math`.
-    
+
     1b. Test case: `edit 1 \n Alicia`<br>
         Expected: Contact is updated in the list. Details of the updated contact shown in the status message.
 

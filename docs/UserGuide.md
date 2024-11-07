@@ -243,7 +243,7 @@ Format: `findSubject SUBJECT [MORE_SUBJECTS]`
 * The order of the keywords does not matter. e.g., `math science` will match `science math`
 * Only the subject field is searched.
 * Only full words will be matched e.g., `mat` will not match `math`
-* Persons matching at least one keyword will be returned (i.e., `OR` search).  
+* Persons matching at least one keyword will be returned (i.e., `OR` search).
   e.g., `math science` will return persons with subjects `Math`, `Science`, `Math and Science`
 
 Examples:
