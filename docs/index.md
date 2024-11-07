@@ -14,7 +14,7 @@
 </center>
 <center>
 
-<pic src="images/quickStartResultScreenshot.png" width="800" alt="Logo" lazy>
+<pic src="images/homePage.png" width="800" alt="Logo" lazy>
 </pic>
 </center>
 
