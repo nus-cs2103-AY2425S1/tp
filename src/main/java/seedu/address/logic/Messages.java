@@ -28,6 +28,7 @@ public class Messages {
             "The delivery index provided refers to an archived delivery.\n"
             + "Unarchive the delivery to continue.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_DELIVERIES_LISTED_OVERVIEW = "%1$d deliveries listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_WINDOW = "This command could not be executed in the inspection window.\n"
