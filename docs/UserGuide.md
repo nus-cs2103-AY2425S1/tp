@@ -101,7 +101,7 @@ To install Java 17:
 * Visit the Java download page from [Oracle](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 * Download the appropriate installer for your operating system (Windows, macOS, or Linux).
 * Follow the installation instructions on the website to complete the setup.
-* Once installed, verify the installation by [opening your terminal (or command prompt)](#how-to-open-terminal) and typing:
+* Once installed, verify the installation by [opening your terminal (or command prompt)](#step-4-run-the-application) and typing:
     ```
     java -version
     ```
@@ -156,7 +156,7 @@ To learn more about how to use commands in AgentAssist, proceed to the next sect
 
 <div style="page-break-after: always;"></div>
 
-# 4. Understanding Commands in AgentAssist {#using-agentassist}
+# 4. Understanding Commands in AgentAssist
 
 The true power of **AgentAssist** lies in efficiently using commands. Before diving into specific commands, let’s break down the basic structure of a command.
 
@@ -336,7 +336,7 @@ Each client's record includes their name, contact number, email, occupation, and
 add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]
 ```
 * Mandatory Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`
-* Optional Fields: `t/`, `r/`, 's/'
+* Optional Fields: `t/`, `r/`, `s/`
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -390,12 +390,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > **The duplicate contact will not be saved** to prevent redundancy.
 >
 > If you need to update details for an existing contact, use the `edit` command instead.  
-> For more information, see Section [5.2.2 Editing a client](#edit-command).
+> For more information, see Section [5.2.2 Editing a client](#522-edit-an-existing-clients-information).
 
 
 
 
-### 5.2.2 Edit an Existing Client's Information {#edit-command}
+### 5.2.2 Edit an Existing Client's Information
 
 **Purpose:** Update the details of an existing client in the database.
 
@@ -454,7 +454,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 
 
-### 5.2.3 Delete an Existing Client {#delete-command}
+### 5.2.3 Delete an Existing Client
 
 **Purpose:** Remove records of clients who are no longer using your credit card services.
 
@@ -501,7 +501,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 
 
-### 5.2.4 Delete All Existing Clients {#clear-command}
+### 5.2.4 Delete All Existing Clients
 
 **Purpose:** Delete all clients from the database, effectively resetting the application’s contact list
 
@@ -539,7 +539,7 @@ This will permanently clear all contacts. Are you sure you want to execute this 
 
 ## 5.3 Data Filtering Commands
 
-### 5.3.1 List All Clients {#list-command}
+### 5.3.1 List All Clients
 
 **Purpose:** View a list of all clients saved in AgentAssist.
 
@@ -552,7 +552,7 @@ list
 
 
 
-### 5.2.3 Filter Clients by Details / Find a Client {#filter-command}
+### 5.2.3 Filter Clients by Details / Find a Client
 
 **Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, remarks or status.
 
@@ -564,7 +564,7 @@ filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIE
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
-    - See [Filtering By Income](#filtering-by-income) for more information.
+    - See [Filtering By Income](#523-filter-clients-by-details--find-a-client) for more information.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -744,7 +744,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
 ### How do I change the remarks or credit card tier of an existing client?
-Use the [`edit` command](#feature-4-edit-the-existing-client), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
+Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
 
 ### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
