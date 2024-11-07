@@ -35,11 +35,18 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        assert lastShownList != null : "The filtered person list should not be null.";
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_PERSON_LIST);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
+        assert personToView != null : "Person to view should not be null.";
+
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)));
     }
 
