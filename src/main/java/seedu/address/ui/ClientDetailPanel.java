@@ -128,10 +128,10 @@ public class ClientDetailPanel extends UiPart<Region> {
             setLabelText(emailLabel, client.getEmail().value);
             setLabelText(jobLabel, client.getJob().value);
             setLabelText(incomeLabel, String.valueOf(client.getIncome()));
+            tagsGroup.getChildren().clear();
             setTier(client.getTier());
             setStatus(client.getStatus());
             setRemarkText(client.getRemark().value);
-            tagsGroup.getChildren().clear();
             boolean hasTags = !tagsGroup.getChildren().isEmpty();
             setManagedAndVisible(tagsContainer, hasTags);
         } else {
@@ -168,7 +168,7 @@ public class ClientDetailPanel extends UiPart<Region> {
      */
     private void setTier(Tier tier) {
         if (tier.tierName != Tier.TierEnum.NA) {
-            Label tierLabel = new Label(tier.getValue());
+            Label tierLabel = new Label(tier.getValue().toUpperCase());
             tierLabel.getStyleClass().addAll("label", tier.getValue().toLowerCase() + "-tier");
             tagsGroup.getChildren().add(tierLabel);
         }
