@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAIL;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_APPOINTMENTS_FOUND;
 import static seedu.address.logic.commands.MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -38,7 +38,7 @@ public class MarkAppointmentCommandTest {
         modelStub.addPerson(validDoctor);
         modelStub.addPerson(validPatient);
 
-        assertThrows(CommandException.class, MESSAGE_MARK_APPOINTMENT_FAIL, () ->
+        assertThrows(CommandException.class, MESSAGE_NO_APPOINTMENTS_FOUND, () ->
                 new MarkAppointmentCommand(appointmentTime1, validPatient.getId(),
                         validDoctor.getId()).execute(modelStub));
     }
@@ -71,7 +71,7 @@ public class MarkAppointmentCommandTest {
         Person validDoctor = new PersonBuilder().buildDoctor();
         modelStub.addPerson(validDoctor);
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX, () ->
                 new MarkAppointmentCommand(appointmentTime1, validPatient.getId(),
                         validDoctor.getId()).execute(modelStub));
     }

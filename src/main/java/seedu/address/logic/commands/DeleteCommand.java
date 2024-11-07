@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Id;
@@ -28,7 +27,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully "
             + "deleted a person";
     public static final String MESSAGE_DELETE_PERSON_FAILURE = "Unable to "
-            + "delete a person, check the id entered!";
+            + "delete a person, check the ID entered!";
     private final int personId;
 
     public DeleteCommand(int personId) {
@@ -45,6 +44,7 @@ public class DeleteCommand extends Command {
         if (personToDelete == null) {
             throw new CommandException(MESSAGE_DELETE_PERSON_FAILURE);
         }
+        personToDelete.deleteAllAppointments(model);
         model.deletePerson(personToDelete);
         if (personId == Id.getCurrentPatientIdCounter() - 2) {
             Id.reduceCurrentPatientIdCounter();
@@ -52,7 +52,7 @@ public class DeleteCommand extends Command {
         if (personId == Id.getCurrentDoctorIdCounter() - 2) {
             Id.reduceCurrentDoctorIdCounter();
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(MESSAGE_DELETE_PERSON_SUCCESS);
     }
 
     @Override

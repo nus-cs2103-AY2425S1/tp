@@ -31,7 +31,7 @@ public class CreatePatientCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
-    public static final String MESSAGE_SUCCESS = "Successfully created a new patient of id: #%d : \n"
+    public static final String MESSAGE_SUCCESS = "Successfully created a new patient of ID: #%d : \n"
             + "%2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists";
     public static final String MESSAGE_OVERLAPPING_DOCTOR = "This person already exists as a doctor!\n"

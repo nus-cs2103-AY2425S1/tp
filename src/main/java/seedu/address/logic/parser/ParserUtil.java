@@ -78,6 +78,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid or not in the expected format.
+     */
+    public static LocalDateTime parseDateWithNoLimit(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim().replace("Optional[", "").replace("]", "");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            return LocalDateTime.parse(trimmedDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date-time format, please use yyyy-MM-dd HH:mm.");
+        }
+    }
+
+    /**
      * Parses a {@code String date} into a {@code LocalDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -85,20 +102,13 @@ public class ParserUtil {
      */
     public static LocalDate parseDayDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.trim();
-        LocalDate parsedDate;
-        LocalDate currentDate = LocalDate.now();
+        String trimmedDate = date.trim().replace("Optional[", "").replace("]", "");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            parsedDate = LocalDate.parse(trimmedDate, formatter);
+            return LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format, please use yyyy-MM-dd.");
+            throw new ParseException("Invalid date-time format, please use yyyy-MM-dd");
         }
-
-        if (currentDate.isAfter(parsedDate)) {
-            throw new ParseException("Invalid date entered. The date can't be in the past!");
-        }
-        return parsedDate;
     }
 
 
