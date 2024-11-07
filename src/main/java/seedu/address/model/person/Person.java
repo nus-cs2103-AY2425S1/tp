@@ -81,11 +81,6 @@ public class Person {
         return publicAddressesComposition.filterByPublicAddress(publicAddressString);
     }
 
-
-    public void addPublicAddressToNetwork(Network network, Set<PublicAddress> addresses) {
-        publicAddressesComposition.addPublicAddressesToNetwork(network, addresses);
-    }
-
     /**
      * Gets the current Public address map
      *
@@ -103,18 +98,51 @@ public class Person {
      * @return true if a public address with the specified label exists for the given network, false otherwise
      */
     public boolean hasPublicAddressWithLabelWithinNetwork(Network network, String label) {
-        return publicAddressesComposition.hasPublicAddressWithLabelWithinNetwork(network, label);
+        return publicAddressesComposition.containsPublicAddressLabel(network, label);
+    }
+
+    /**
+     * Returns a new {@code Person} object with the added public address.
+     *
+     * @param newPublicAddress The new public address to be added
+     * @return A new {@code Person} object with the added public address
+     */
+    public Person withAddedPublicAddress(PublicAddress newPublicAddress) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.add(newPublicAddress);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
     }
 
     /**
      * Returns a new {@code Person} object with the updated public address.
-     * If the public address already exists for the network, it is replaced with the new one.
      *
-     * @param newPublicAddress The new or updated public address to be added or replaced
+     * @param newPublicAddress The new public address to be replaced
      * @return A new {@code Person} object with the updated public address
      */
     public Person withUpdatedPublicAddress(PublicAddress newPublicAddress) {
-        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.copyAndAdd(newPublicAddress);
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.update(newPublicAddress);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    /**
+     * Returns a new {@code Person} object with the public addresses from the network removed.
+     *
+     * @param network The network to remove the public address
+     * @param label The label of the public address to be removed
+     * @return A new {@code Person} object with the public addresses removed
+     */
+    public Person withoutPublicAddressByNetworkAndLabel(Network network, String label) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.remove(label, network);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    /**
+     * Returns a new {@code Person} object with the public addresses from the network removed.
+     *
+     * @param network The network to remove the public address
+     * @return A new {@code Person} object with the public addresses removed
+     */
+    public Person withoutPublicAddressesByNetwork(Network network) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.remove(network);
         return new Person(name, phone, email, address, updatedPublicAddresses, tags);
     }
 
