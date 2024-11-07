@@ -27,8 +27,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all guests and vendors whose attribute match the "
-            + "specified keywords (case-insensitive) and displays them.\n"
+            + ": Finds all guests and vendors that match the "
+            + "given keyword(s) and displays them.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "

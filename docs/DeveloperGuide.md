@@ -151,32 +151,38 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Guest feature
 The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes and their corresponding values 
 
-The sequence diagram below provides an overview for the execution flow of an `add_guest` command:
+The sequence diagram below provides an overview for the execution flow of a `add_guest` command:
 <puml src="diagrams/AddGuestSequenceDiagram.puml" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddGuestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
-2. `AddressBookParser` parses the command word provided by the user input (if valid) to create and return a `AddGuestCommandParser`
+2. `AddressBookParser` parses the user input (if valid) to create and return an `AddGuestCommandParser`
 3. `AddGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create a `Guest` object with the specified attributes (`Name`, `Phone`, `Email`, `Address`). An `AddGuestCommand` is then created with the new `Guest` object and returned.
 4. `LogicManager` executes the `AddGuestCommand`, which calls the `addPerson` method of the `Model` to add the guest into the address book.
-5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI`
+5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
 
+### Find feature
+The `find` command searches for all guests and vendors that match the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched
 
-#### Design considerations:
+The sequence diagram below provides an overview for the execution flow of a `find` command:
+<puml src="diagrams/FindSequenceDiagram.puml" />
 
-**Aspect: How undo & redo executes:**
+<box type="info" seamless>
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
+Explanation:
+1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
+2. `AddressBookParser` parses the user input (if valid) to create and return a `FindCommandParser`
+3. `FindCommandParser` parses the user input (if valid) to extract the prefix and its corresponding value, before calling the corresponding parse predicate method to create the corresponding predicate to be used. In this case, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. A `FindCommand` is then created with the predicate and returned.
+4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the predicate as the argument.
+5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -219,24 +225,24 @@ A wedding planner who:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                     | So that I can…​                                                                  |
-|----------|-----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | forgetful wedding planner   | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
-| `* * *`  | organized wedding planner   | view a list of guests/vendors                                    | easily access and reference their details                                        |
-| `* * *`  | organized wedding planner   | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
+| Priority | As a …​                     | I want to …​                                                    | So that I can…​                                                                  |
+|----------|-----------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | forgetful wedding planner   | add a new guest/vendor into the contact list                    | easily track and manage guests/vendors for the wedding                           |
+| `* * *`  | organized wedding planner   | view a list of guests/vendors                                   | easily access and reference their details                                        |
+| `* * *`  | organized wedding planner   | delete a guest/vendor contact that I no longer need             | keep my contact list organised and clutter-free                                  |
 | `* * *`  | meticulous wedding planner  | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
-| `* *`    | organized wedding planner   | find guests/vendors based on specific attributes                 | efficiently retrieve guest/vendor details when required                          |
-| `* *`    | data-driven wedding planner | view wedding statistics (number of guests/vendors/total people)  | quickly assess the current status of wedding planning                            |
+| `* *`    | organized wedding planner   | find guests/vendors based on a specific attribute               | efficiently retrieve guest/vendor details when required                          |
+| `* *`    | data-driven wedding planner | view wedding statistics (number of guests/vendors/total people) | quickly assess the current status of wedding planning                            |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a Guest**
+**Use case: UC01 - Add a Guest**
 
 **MSS**
 
-1. User creates a new Guest with the required details (e.g. name, email, etc.).
+1. User requests to add a new Guest with the required details (e.g. name, email, etc.).
 2. System adds the entry.
 
    Use case ends.
@@ -258,11 +264,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Add a Vendor**
+**Use case: UC02 - Add a Vendor**
 
 **MSS**
 
-1. User creates a new Vendor with the required details (e.g. name, email, etc.).
+1. User requests to add a new Vendor with the required details (e.g. name, email, etc.).
 2. System adds the entry.
 
    Use case ends.
@@ -284,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Update Details of Person**
+**Use Case: UC03 - Update Details of Person**
 
 **MSS**
 1. User selects an entry to update together with the fields to be updated.
@@ -308,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
 
-**Use Case: Delete a Guest**
+**Use Case: UC04 - Delete a Guest**
 
 **MSS**
 1. User requests to delete a Guest entry.
@@ -327,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Delete a Vendor**
+**Use Case: UC05 - Delete a Vendor**
 
 **MSS**
 1. User requests to delete a Vendor entry.
@@ -346,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Find Guests and Vendor with a particular field**
+**Use Case: UC06 - Find Guests and Vendor with a particular field**
 
 **MSS**
 1. User requests to find Guest and Vendor entries with a specified field (e.g., by category, name, RSVP status).
@@ -365,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Get statistics**
+**Use Case: UC07 - Get statistics**
 
 **MSS**
 1. User requests to get statistics of entries.
@@ -385,7 +391,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Size: The system should support storage for up to 300 guests and 300 vendors per wedding. 
 1. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
 1. Persistency: All guest and vendor information must be saved persistently in a JSON file and remain accessible even after system shutdown or failure.
-1. Backup Frequency: Automatic backup of data should be created whenever the application is closed.
 
 **Environment Requirements**
 1. Operating System: The system must be compatible with Windows, macOS, and Linux operating systems.
@@ -415,6 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *  **RSVP Status**: The attendance response status of a guest. It can be either confirmed, pending, or declined.
 *  **Tag**: A keyword or label assigned to an entry to categorize and easily filter it within the list.
 *  **Index**: A numerical value representing the position of an entry in a list, used to reference and perform operations on the contact.
+*  **Prefix**: Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.
 
 --------------------------------------------------------------------------------------------------------------------
 
