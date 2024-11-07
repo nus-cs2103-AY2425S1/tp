@@ -58,7 +58,18 @@ management tasks done faster than traditional GUI apps.
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
 
+Term           | Explanation
+------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**CLI**   | `A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.`
+**GUI**  | `A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.`
+**Assignment**         | `An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.`
+**Index**| `The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.`
+**Score**  | `The score represents the grade a student receives for a specific assignment.`
+**Remark**          | `A remark allows the tutor to record important notes or comments about a student for reference.`
+
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
 <box type="info" seamless>
@@ -69,10 +80,10 @@ management tasks done faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Science` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Science`, `t/Math t/English` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
