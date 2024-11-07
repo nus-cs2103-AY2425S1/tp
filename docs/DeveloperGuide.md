@@ -510,6 +510,10 @@ Besides ensuring that any bugs with OpenCSV are handled correctly, we also had t
 * Consider the needs of our persona, and develop features accordingly (*e.g.* addition of statistical data when viewing the desired list of goods)
 * Adding minor GUI fixes for better display formats
 
+# Empathising with our Persona: Non-Tech Savvy Business Owner
+In efforts to cater to our persona, we have added features that would be useful for a business owner who is not tech-savvy. We have added and modified features such as:
+* Deleting based on name instead of index.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
