@@ -5,9 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_PATH;
 
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -17,6 +20,7 @@ import seedu.address.storage.Storage;
 /**
  * Imports the contacts from a file to the address book.
  */
+
 public class ImportCommand extends FileAccessCommand implements Undoable {
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_SUCCESS = "Address book from %s has been imported!";
@@ -27,7 +31,7 @@ public class ImportCommand extends FileAccessCommand implements Undoable {
             + "Example: import " + PREFIX_FILE_PATH + "./data/AY2324S1";
     public static final String FILE_DATA_LOAD_ERROR_FORMAT =
             "Could not read data from file %s due to inability to find or access the file.";
-
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Path filePath;
     private AddressBook initialAddressBook;
 
@@ -59,6 +63,7 @@ public class ImportCommand extends FileAccessCommand implements Undoable {
         }
 
         model.setAddressBook(importedData);
+        logger.info("Successful import from filePath");
         isExecuted = true;
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.filePath));
     }
