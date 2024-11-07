@@ -107,12 +107,20 @@ A **valid** `EMAIL` should:
     * For eg. Just typing `e/` without providing any `EMAIL` will throw an error.
 * Can only have one email.
     * For eg. Typing `e/abc@mail.com e/example@mail.com` will throw an error.
+* A valid email should be of the format local-part@domain and adhere to the following constraints:
+* The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+* This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+       The domain name must:
+  - end with a domain label at least 2 characters long
+  - have each domain label start and end with alphanumeric characters
+  - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
 A **valid** `ADDRESS` should:
 * Not be empty.
     * For eg. Just typing `a/` without providing any `ADDRESS` will throw an error.
 * Can only have one address.
     * For eg. Typing `a/John street, block 123, #01-01 a/John street, block 123, #01-02` will throw an error.
+* A valid address can only take in letters, numbers or the following characters: ,#-():; and it should not be blank.
 
 A **valid** `DESCRIPTION` should:
 * Not be empty.
@@ -127,6 +135,8 @@ A **valid** `CLIENT_TYPE` should:
     * `CLIENT_TYPE` will always be in alphanumeric format.
 * Not be empty.
     * For eg. Just typing `c/` without providing any `CLIENT_TYPE` will throw an error.
+* Client types names can have at most 30 characters (space inclusive).
+    * For eg. Typing `c/InvestmentPlanHealthcarePlanInsurancePlan` will throw an error.
 * Can have multiple client types.
     * For eg. Typing `c/Plan A c/Plan B` is valid.
 * Not have duplicates.
@@ -199,7 +209,7 @@ Format: `find n/NAME` or `fn NAME` or `find NAME$`
   * The search is case-insensitive. e.g `hans` will match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   * Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
-  * `$` is used to indicate specific name to find
+  * `$` is used to indicate exact name to find
   * Clients matching all keyword prefix will be returned (i.e. `AND` search).
     e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 
