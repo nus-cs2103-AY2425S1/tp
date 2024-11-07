@@ -48,6 +48,9 @@ deactivate CommandResult
 ChartCommand --> LogicManager : r
 deactivate ChartCommand
 
-[<--LogicManager
+[<--LogicManager : r
 deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ChartCommand -[hidden]-> LogicManager
+destroy ChartCommand
 @enduml

@@ -35,11 +35,11 @@ create DateComparator
 SortCommandParser -> DateComparator
 activate DateComparator
 
-DateComparator -> SortCommandParser
+DateComparator --> SortCommandParser
 deactivate DateComparator
 
 create SortCommand
-SortCommandParser -> SortCommand : new SortCommand(d)
+SortCommandParser -> SortCommand
 activate SortCommand
 
 SortCommand --> SortCommandParser :
@@ -74,6 +74,10 @@ deactivate CommandResult
 SortCommand --> LogicManager : r
 deactivate SortCommand
 
-[<--LogicManager
+[<--LogicManager : r
 deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommand -[hidden]-> LogicManager
+destroy SortCommand
+destroy DateComparator
 @enduml

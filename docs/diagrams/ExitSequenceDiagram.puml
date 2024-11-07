@@ -32,7 +32,7 @@ deactivate ExitCommand
 AddressBookParser --> LogicManager : e
 deactivate AddressBookParser
 
-LogicManager -> ExitCommand : execute(...)
+LogicManager -> ExitCommand : execute(m)
 activate ExitCommand
 
 create CommandResult
@@ -59,7 +59,6 @@ activate MainWindow
 
 deactivate MainWindow
 
-[<--MainWindow
+[<--MainWindow : r
 deactivate MainWindow
-
 @enduml
