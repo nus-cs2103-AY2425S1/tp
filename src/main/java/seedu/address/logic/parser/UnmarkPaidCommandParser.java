@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_MONTH_PAID;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 
 import java.util.Collection;
@@ -26,14 +29,14 @@ public class UnmarkPaidCommandParser implements Parser<UnmarkPaidCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MONTHPAID);
         String preamble = argMultimap.getPreamble().trim();
         Set<MonthPaid> monthsPaid = parseMonthsPaidForUnmarkPaid(argMultimap.getAllValues(PREFIX_MONTHPAID));
-        if (monthsPaid.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkPaidCommand.MESSAGE_USAGE));
-        }
-
         if (preamble.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkPaidCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_EMPTY_INDEX, UnmarkPaidCommand.MESSAGE_USAGE));
+        }
+
+        if (monthsPaid.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_EMPTY_MONTH_PAID, UnmarkPaidCommand.MESSAGE_USAGE));
         }
 
         UnmarkPaidCommand.UnmarkPaidTarget target;
@@ -43,7 +46,7 @@ public class UnmarkPaidCommandParser implements Parser<UnmarkPaidCommand> {
             break;
         default:
             if (!ParserUtil.isValidIndex(preamble)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                throw new ParseException(String.format(MESSAGE_INVALID_INDEX,
                                             UnmarkPaidCommand.MESSAGE_USAGE));
             }
             try {
