@@ -2,18 +2,41 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label fx:id="id" styleClass="person-pane-label" />
-        <Label fx:id="name" styleClass="person-pane-label" />
-        <Label fx:id="tagsLabel" text="Tags:" visible="false" managed="false" styleClass="person-pane-label" />
-        <FlowPane fx:id="tags" />
-        <Label fx:id="phone" styleClass="person-pane-label" />
-        <Label fx:id="address" styleClass="person-pane-label" />
-        <Label fx:id="email" styleClass="person-pane-label" />
-        <Label fx:id="remark" styleClass="person-pane-label" />
-        <Label fx:id="listings" styleClass="person-pane-label" />
-    </children>
-</VBox>
+<GridPane fx:id="view" xmlns:fx="http://javafx.com/fxml/1" vgap="10.0">
+    <padding>
+        <Insets top="15" right="10" bottom="10" left="5" />
+    </padding>
+    <columnConstraints>
+        <!-- Column constraints for each individual column -->
+        <ColumnConstraints hgrow="ALWAYS" minWidth="80.0" prefWidth="100.0" maxWidth="120.0" />
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="300.0" />
+    </columnConstraints>
+
+    <Label text="Name:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Label fx:id="name" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+    <Label fx:id="tagLabel" text="Tags:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <FlowPane fx:id="tags" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <Label text="Phone:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label fx:id="phone" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <Label text="Address:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label fx:id="address" styleClass="person-pane-label" wrapText="true"
+           GridPane.columnIndex="1" GridPane.rowIndex="3"  />
+
+    <Label text="Email:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Label fx:id="email" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+    <Label text="Remark:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Label fx:id="remark" styleClass="person-pane-label" wrapText="true"
+           GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+    <Label text="Listings:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Label fx:id="listings" styleClass="person-pane-label"
+           GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" />
+</GridPane>
