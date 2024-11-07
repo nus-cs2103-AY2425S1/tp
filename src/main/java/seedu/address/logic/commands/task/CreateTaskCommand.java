@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
 import java.util.HashSet;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -22,15 +23,20 @@ public class CreateTaskCommand extends Command {
 
     public static final String COMMAND_KEYWORD = "ctask";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a task in the address book. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates one or more tasks in the address book. \n"
             + "Parameters: "
-            + PREFIX_TASK + "TASK_TYPE TASK_DESCRIPTION [ADDITIONAL_FIELDS]\n"
+            + PREFIX_TASK + "TASK_DESCRIPTION [DATE_FIELDS]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK + "todo Setup venue decorations\n"
+            + PREFIX_TASK + "Setup venue decorations\n"
             + COMMAND_WORD + " "
-            + PREFIX_TASK + "deadline Submit proposal /by 2024-10-31";
+            + PREFIX_TASK + "Submit proposal d/2024-10-31\n"
+            + COMMAND_WORD + " "
+            + PREFIX_TASK + "Buy limited time items d/2024-10-31 d/2024-12-30\n"
+            + COMMAND_WORD + " "
+            + PREFIX_TASK + "Secure venue d/2024-10-31 "
+            + PREFIX_TASK + "Inform groom of itinerary";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New task(s) added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
     private final HashSet<Task> tasksToAdd;
@@ -54,7 +60,6 @@ public class CreateTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         for (Task task : tasksToAdd) {
             if (model.hasTask(task)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -62,7 +67,7 @@ public class CreateTaskCommand extends Command {
             model.addTask(task);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tasksToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd)));
     }
 
     @Override
@@ -72,11 +77,10 @@ public class CreateTaskCommand extends Command {
         }
 
         // null case handled by instanceof
-        if (!(obj instanceof CreateTaskCommand)) {
+        if (!(obj instanceof CreateTaskCommand otherCreateTaskCommand)) {
             return false;
         }
 
-        CreateTaskCommand otherCreateTaskCommand = (CreateTaskCommand) obj;
         return tasksToAdd.equals(otherCreateTaskCommand.tasksToAdd);
     }
 

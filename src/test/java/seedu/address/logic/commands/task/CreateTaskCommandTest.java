@@ -12,6 +12,7 @@ import java.util.HashSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -36,11 +37,12 @@ public class CreateTaskCommandTest {
         HashSet<Task> tasksToAdd = new HashSet<>();
         tasksToAdd.add(TODO_TASK);
         tasksToAdd.add(DEADLINE_TASK);
+        tasksToAdd.add(EVENT_TASK);
 
         // Create a CreateTaskCommand with valid tasks
         CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
 
-        String expectedMessage = String.format(CreateTaskCommand.MESSAGE_SUCCESS, tasksToAdd);
+        String expectedMessage = String.format(CreateTaskCommand.MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd));
 
         CommandResult result = command.execute(model);
 
@@ -78,7 +80,7 @@ public class CreateTaskCommandTest {
 
         CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
 
-        String expectedString = "seedu.address.logic.commands.task.CreateTaskCommand{taskToAdd=[[T][ ] Buy groceries]}";
+        String expectedString = "seedu.address.logic.commands.task.CreateTaskCommand{taskToAdd=[[ ] Buy groceries]}";
         assertEquals(expectedString, command.toString());
     }
 

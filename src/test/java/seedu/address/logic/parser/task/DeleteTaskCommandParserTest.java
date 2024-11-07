@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.task;
 
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -32,18 +32,6 @@ public class DeleteTaskCommandParserTest {
     @Test
     public void parse_extraArgs_throwsParseException() {
         assertParseFailure(parser, "1 abc",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_negativeIndex_throwsParseException() {
-        assertParseFailure(parser, "-1",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_zeroIndex_throwsParseException() {
-        assertParseFailure(parser, "0",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
     }
 }

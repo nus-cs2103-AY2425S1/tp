@@ -18,7 +18,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalTasks;
 
 public class DeleteTaskCommandTest {
@@ -32,6 +34,8 @@ public class DeleteTaskCommandTest {
         for (Task task : taskList) {
             model.addTask(task);
         }
+        Person newPerson = new PersonBuilder().withTasks("todo: buy groceries").build();
+        model.addPerson(newPerson);
     }
 
     @Test
@@ -46,19 +50,32 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
+    public void execute_taskAssignedToPerson_taskRemovedFromPerson() throws Exception {
+        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
+
+        deleteTaskCommand.execute(model);
+
+        // Verify the task is removed from each person's task list
+        for (Person person : model.getFilteredPersonList()) {
+            assertFalse(person.hasTask(taskToDelete), "Person should no longer have the deleted task.");
+        }
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(outOfBoundIndex);
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, ()
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                1, model.getFilteredTaskList().size()), ()
                 -> deleteTaskCommand.execute(model));
     }
 
     @Test
     public void toString_validIndex_returnsCorrectString() {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
-        System.out.println(deleteTaskCommand.toString());
-        String expectedString = "seedu.address.logic.commands."
+        String expectedString = "seedu.address.logic.commands.task."
                 + "DeleteTaskCommand{targetIndex=seedu.address.commons.core.index.Index{zeroBasedIndex=0}}";
         assertEquals(expectedString, deleteTaskCommand.toString());
     }
