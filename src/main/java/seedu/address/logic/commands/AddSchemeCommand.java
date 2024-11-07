@@ -39,6 +39,7 @@ public class AddSchemeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a scheme to the person identified by the "
             + "index number used in the displayed person list.\n"
+            + "Schemes available to the person can be viewed using the 'scheme' command.\n"
             + "Parameters: PERSON_INDEX i/SCHEME_INDEX (both must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 i/1";
 
