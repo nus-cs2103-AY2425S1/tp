@@ -566,21 +566,9 @@ Given below are instructions to test the app manually.
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</box>
+</box> 
+<br></br>
 
-### Launch and shutdown
-
-1. Initial launch
-
-   - Download the jar file and copy it into an empty folder. 
-   - Double-click the jar file.<br>
-       **Expected:** Shows the GUI with a set of sample contacts. The window size may not be optimum.<br>
-     <br></br>
-2. Saving window preferences
-   - Resize the window to an optimum size. Move the window to a different location. Close the window. 
-   - Re-launch the app by double-clicking the jar file.<br>
-          **Expected:** The most recent window size and location are retained.
-     <br></br>
 ### Contact Management
 
 1. Adding a contact
