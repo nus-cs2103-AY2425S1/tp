@@ -24,7 +24,8 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" alt="Ui" style="zoom: 90%;" />
+
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -77,7 +78,7 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" alt="Help" style="zoom: 90%;" />
 
 Format: `help`
 
