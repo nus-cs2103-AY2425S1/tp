@@ -6,8 +6,10 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.order.CustomerOrderList;
-import seedu.address.model.order.SupplyOrderList;
 
+/**
+ * Represents a storage for {@link seedu.address.model.order.CustomerOrderList}.
+ */
 public interface CustomerOrderListStorage {
 
     Path getCustomerOrderListFilePath();

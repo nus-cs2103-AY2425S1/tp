@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -12,8 +14,9 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.order.SupplyOrderList;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * A class to access SupplyOrderList data stored as a json file on the hard disk.
+ */
 public class JsonSupplyOrderListStorage implements SupplyOrderListStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonSupplyOrderListStorage.class);
     private Path filePath;

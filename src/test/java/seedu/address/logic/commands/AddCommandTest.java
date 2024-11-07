@@ -178,11 +178,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public int getNextProductId() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public CustomerOrderList getCustomerOrderList() {
             throw new AssertionError("This method should not be called.");
         }

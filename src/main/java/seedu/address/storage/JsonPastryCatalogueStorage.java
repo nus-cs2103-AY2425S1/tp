@@ -10,6 +10,9 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A class to access PastryCatalogue data stored as a json file on the hard disk.
+ */
 public class JsonPastryCatalogueStorage implements PastryCatalogueStorage {
 
     private final Path filePath;
