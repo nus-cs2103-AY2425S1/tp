@@ -26,14 +26,6 @@ public class ApptList {
     }
 
     /**
-     * Constructs an {@code ApptList} with the given appointments.
-     * @param appts
-     */
-    public ApptList(List<Appt> appts) {
-        this.appts = appts;
-    }
-
-    /**
      * Adds an appointment to the list.
      * Sorts the list after adding the appointment.
      * @param appt

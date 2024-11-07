@@ -25,10 +25,11 @@ public class AddCommand extends Command {
             + " usage: add n|[NAME] i|[NRIC] s|[SEX] d|[DATE OF BIRTH] p|[PHONE NO.]\n"
             + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
 
-    public static final String MESSAGE_SUCCESS = "New patient added: %1$s\n"
+    public static final String MESSAGE_SUCCESS = "New patient added.\n"
+            + "%1$s\n"
             + "Input \"home\" to return to home page";
 
-    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the ClinicConnect system";
 
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
 

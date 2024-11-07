@@ -223,10 +223,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PatientListPanel getPatientListPanel() {
-        return patientListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *

@@ -43,14 +43,14 @@ public class HealthService {
     public HealthService(String healthServiceName) {
         requireNonNull(healthServiceName);
         healthServiceName = healthServiceName.trim().toUpperCase();
-        checkArgument(isValidHealthserviceName(healthServiceName.toUpperCase()), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidHealthServiceName(healthServiceName), MESSAGE_CONSTRAINTS);
         this.healthServiceName = healthServiceName;
     }
 
     /**
      * Returns true if a given string is a valid Health Service name.
      */
-    public static boolean isValidHealthserviceName(String test) {
+    public static boolean isValidHealthServiceName(String test) {
         requireNonNull(test);
         test = test.strip().toUpperCase();
         for (HealthScreeningServices service : HealthScreeningServices.values()) {
