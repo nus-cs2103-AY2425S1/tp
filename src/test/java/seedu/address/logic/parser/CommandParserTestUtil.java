@@ -64,4 +64,18 @@ public class CommandParserTestUtil {
             assertEquals(expectedMessage, pe.getMessage());
         }
     }
+
+    /**
+     * Asserts that the parsing of {@code userInput} for neither by {@code parser} is successful and the command created
+     * equals to {@code expectedCommand}.
+     */
+    public static void assertParseSuccessNeither(Parser<? extends Command> parser, String userInput,
+                                               Command expectedCommand) {
+        try {
+            Command command = parser.parse(ModelType.fromShorthand(" "), userInput);
+            assertEquals(expectedCommand, command);
+        } catch (ParseException pe) {
+            throw new IllegalArgumentException("Invalid userInput.", pe);
+        }
+    }
 }
