@@ -320,10 +320,10 @@ Format: `aggGrade OPERATION [n/TEST_NAME]`
 - `min`: Taking **minimum**
 - `median`: Taking **median**
 
-Without the `[n/TEST_NAME]` parameter, the command performs the selected aggregation `OPERATION` on the overall grade of the current filtered list.
+Without the `[n/TEST_NAME]` parameter, the command performs the selected aggregation `OPERATION` on the **overall grade** of the current filtered list.
 
-When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command changes to perform the selected aggregation `OPERATION` only on
-`TEST_NAME` tests of the current filtered list.
+When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command changes to perform the selected aggregation `OPERATION` **only on
+`TEST_NAME` tests** of the current filtered list.
 
 Example:
 
