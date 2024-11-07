@@ -14,6 +14,11 @@ public class Assignment {
     private Deadline deadline;
     private Status submissionStatus;
     private Grade grade;
+    public enum State {
+        GRADED,
+        SUBMITTED,
+        PENDING
+    }
 
     /**
      * Constructs a {@code Assignment}
@@ -85,6 +90,14 @@ public class Assignment {
         this.deadline = assignmentQuery.queryDeadline.orElse(this.deadline);
         this.submissionStatus = assignmentQuery.querySubmissionStatus.orElse(this.submissionStatus);
         this.grade = assignmentQuery.queryGrade.orElse(this.grade);
+    }
+
+    public State getState() {
+        return grade.isGraded()
+                ? State.GRADED
+                : submissionStatus.isSubmitted()
+                    ? State.SUBMITTED
+                    : State.PENDING;
     }
 
     @Override
