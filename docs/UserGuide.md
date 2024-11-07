@@ -23,20 +23,20 @@ Let’s begin and get you up to speed with AgentAssist!
 1. [Introduction](#1-introduction)
 2. [Important Prerequisites](#2-important-prerequisites)
 3. [Getting Started](#3-getting-started)
-   - 3.1 [Installation](#31-installation)  
+   - 3.1 [Installation](#31-installation)
    - 3.2 [Graphical User Interface (GUI) Layout](#32-graphical-user-interface-gui-layout)
 4. [Understanding Commands in AgentAssist](#4-understanding-commands-in-agentassist)
-   - 4.1 [Command Structure Overview](#41-command-structure-overview)  
-   - 4.2 [Commands](#42-commands)  
+   - 4.1 [Command Structure Overview](#41-command-structure-overview)
+   - 4.2 [Commands](#42-commands)
    - 4.3 [Flags](#43-flags)  
-   - 4.4 [Arguments](#44-arguments)  
+   - 4.4 [Arguments](#44-arguments)
    - 4.5 [Using Commands](#45-using-commands)
 5. [Commands](#5-commands)
    - 5.1 [How to Read Commands](#51-how-to-read-commands)  
    - 5.2 [Data Modification Commands](#52-data-modification-commands)  
-   - 5.3 [Data Filtering Commands](#53-data-filtering-commands)  
-   - 5.4 [General Commands](#54-general-commands)  
-   - 5.5 [Saving Data](#55-saving-data)  
+   - 5.3 [Data Filtering Commands](#53-data-filtering-commands)
+   - 5.4 [General Commands](#54-general-commands)
+   - 5.5 [Saving Data](#55-saving-data)
    - 5.6 [Modifying the Data File](#56-modifying-the-data-file)
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
@@ -111,8 +111,7 @@ Download the latest version of the `.jar` file from the AgentAssist [repository]
 
 ### Step 3: Choose a Folder
 
-Find or create a folder on your computer where you want to store the AgentAssist application and its data.  
-Move the .jar file you downloaded into this folder.
+Find or create a folder on your computer where you want to store the AgentAssist application and its data. Move the .jar file you downloaded into this folder.
 
 ### Step 4: Run the Application
 
@@ -135,8 +134,7 @@ Move the .jar file you downloaded into this folder.
       <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
 
 
-4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
-   You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity.
+4. 🎉 **Congratulations! AgentAssist is now up and running!** You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity.
 
 <div style="page-break-after: always;"></div>
 
@@ -283,7 +281,7 @@ The GUI will dynamically update to show the results of your commands, making it 
 Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
 > 💡 **Pro Tip:**  
-> Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.  
+> Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
 > For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -371,7 +369,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         ```
 
 > **Note on Duplicates:**
->
+
 > AgentAssist will prevent duplicate entries if a client with t``he **same name, email and phone number** is already saved.  
 > When this happens, you will see the following message:
 >

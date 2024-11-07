@@ -332,9 +332,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list clients.
 2.  AgentAssist shows a list of clients.
-3.  User requests to delete a specific client in the list. 
+3.  User requests to delete a specific client in the list.
 4.  AgentAssist asks user for confirmation.
-5.  User confirms. 
+5.  User confirms.
 6.  AgentAssist deletes the client.
 
     Use case ends.
