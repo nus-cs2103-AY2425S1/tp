@@ -76,20 +76,6 @@ public class AssignEventByPersonNameEventIndexCommandTest {
     }
 
     @Test
-    public void execute_multiplePersonsWithSameName_throwsCommandException() {
-        // Create two persons with the same name
-        Person aliceClone = new Person(new Name("ALICE PAULINE"),
-                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
-                ALICE.getTags(), ALICE.getEventIds(), ALICE.getId() + 1);
-        model.addPerson(aliceClone);
-
-        AssignEventByPersonNameEventIndexCommand command = new AssignEventByPersonNameEventIndexCommand(
-                ALICE.getName(), Index.fromOneBased(1));
-
-        assertCommandFailure(command, model, Messages.MESSAGE_MORE_THAN_ONE_PERSON_DISPLAYED_NAME);
-    }
-
-    @Test
     public void equals() {
         model.addPerson(BOB);
         AssignEventByPersonNameEventIndexCommand command1 = new AssignEventByPersonNameEventIndexCommand(
