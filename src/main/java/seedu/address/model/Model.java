@@ -154,9 +154,9 @@ public interface Model {
     void addProject(Project project);
 
     /**
-     * Replaces the given project {@code target} with {@code project}.
-     * {@code project} must exist in the address book.
-     * The employee identity of {@code project} must not be the same as another
+     * Replaces the given project {@code target} with {@code editedProject}.
+     * {@code editedProject} must exist in the address book.
+     * The project identity of {@code editedProject} must not be the same as another
      * existing project in the address book.
      */
     void setProject(Project target, Project editedProject);
@@ -221,6 +221,14 @@ public interface Model {
      * {@code assignment} must not already exist in the address book.
      */
     void addAssignment(Assignment assignment);
+
+    /**
+     * Replaces the given assignment {@code target} with {@code edited}.
+     * {@code edited} must exist in the address book.
+     * The assignment identity of {@code edited} must not be the same as another
+     * existing assignment in the address book.
+     */
+    void setAssignment(Assignment target, Assignment edited);
 
     /** Returns an unmodifiable view of the filtered employee list */
     ObservableList<Employee> getFilteredEmployeeList();
