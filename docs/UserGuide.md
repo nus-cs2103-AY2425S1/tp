@@ -261,14 +261,14 @@ Examples:
 * `appointment-list d/2024-10-17`
 * `appointment-list d/2024-10-18 1000`
 
-### Setting a reminder: `reminder`
+### Setting a reminder note: `reminder`
 
-Sets a reminder for a client before their appointment in the address book.
+Sets a reminder note for a client before their appointment in the address book.
 
 Format: `reminder NAME r/REMINDER_TIME`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can only set a reminder for a person who already has a scheduled appointment
+You can only set a reminder note for a person who already has a scheduled appointment
 </div>
 
 * The NAME refers to the full name of the client you want to set a reminder for.
@@ -283,15 +283,15 @@ Examples:
 * `reminder Betsy Crowe r/3 hours`<br>
   ![reminder for Betsy Crowe](images/reminderBetsyCrowe.png)
 
-### Deleting a reminder: `reminder-delete`
+### Deleting a reminder note: `reminder-delete`
 
-Deletes a reminder for a client in the address book.
+Deletes a reminder note for a client in the address book.
 
 Format: `reminder-delete NAME`
 
-* You can only delete a reminder for a person who has at least one scheduled appointment.
+* You can only delete a reminder note for a person who has at least one scheduled appointment.
 * The given name must be the name of an existing client.
-* You can only delete a reminder if the reminder has been set.
+* You can only delete a reminder note if the reminder note has been set.
 
 Examples:
 * `reminder-delete Betsy Crowe`<br>
@@ -346,6 +346,7 @@ a unique name (not case-sensitive).
 strength, flexibility, or overall physical function.
 * **Tag**: A label to indicate the treatment type of the client.
 * **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
+* **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the phyisotherapist keep track of when they need to follow up with the client. 
 
 --------------------------------------------------------------------------------------------------------------------
 
