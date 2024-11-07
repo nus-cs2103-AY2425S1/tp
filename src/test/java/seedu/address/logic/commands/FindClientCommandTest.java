@@ -73,6 +73,11 @@ public class FindClientCommandTest {
     }
 
     @Test
+    public void constructor_nullPredicate_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new FindClientCommand(null));
+    }
+
+    @Test
     public void execute_zeroKeywords_noClientFound() {
         String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 0);
 
