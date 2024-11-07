@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The event name is invalid or empty.
+* 1a. The event name is invalid.
 
     * 1a1. System shows an error message.
 
@@ -404,11 +404,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
+
 * 1a. The command format entered by the user is invalid.
 
   * 1a1. System shows an error message and displays the correct command format.
 
       Use case ends.
+
 * 1b. The item does not exist.
 
   * 1b1. System shows an error message.
@@ -417,7 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-** Use case: UC04 - Delete an item**
+**Use case: UC04 - Delete an item**
 
 **MSS**
 1. User enters command to delete an item.
@@ -427,24 +429,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
+
 * 1a. The command format entered by the user is invalid.
 
   * 1a1. System shows an error message and displays the correct command format.
 
-      Use case ends.
+    Use case ends.
+
 * 1b. The item does not exist.
 
   * 1b1. System shows an error message.
 
     Use case ends.
+
 * 1c. The event has associated entities assigned to it.
 
   * 1c1. System shows an error message.
 
     Use case ends.
+
 * 2a. The item is currently being viewed.
 
-  * 2a1. Return to the main page with both list of events and vendors.
+  * 2a1. System returns to the main page.
 
      Use case ends.
 
