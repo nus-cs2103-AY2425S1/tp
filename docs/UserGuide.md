@@ -207,13 +207,19 @@ A success message will be displayed if the supplier is successfully marked as ac
 The `find -s` command is used to find a supplier in VendorVault. 
 This helps you find suppliers based on keyword search.
 
-Format: `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
+Format: `find -s n/KEYWORD_SUPPLIER_NAME com/KEYWORD_SUPPLIER_COMPANY pro/<KEYWORD_SUPPLIER_PRODUCT>`
 
-<box type="tip" seamless>
+Parameters:
+
+- `n/KEYWORD_SUPPLIER_NAME`: This will check if the Supplier's name contains the given keyword
+- `on/KEYWORD_SUPPLIER_COMPANYE`: This will check if the Supplier's company contains the given keyword
+- `pro/KEYWORD_SUPPLIER_PRODUCT`: This will check if the Supplier's product(s) contains in the given keyword
+
+<box type="warning" seamless>
 
 **Warnings**:
-- At least one prefix and parameter must be given
-- No duplicate prefix can be used
+- At least one non-empty parameter must be given
+- No duplicate parameter can be used
 - Find result(s) will contain/satisfy all the given parameters
 - Find feature is case-insensitive
 </box>
@@ -273,7 +279,7 @@ Parameters:
 **Tip:** Day and month of date must be in double digits!
 </box>
 
-<box type="tip" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - A spacing between `add` and `-d` is compulsory
