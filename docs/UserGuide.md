@@ -289,7 +289,7 @@ There must not be duplicate fields. For example, if there is a contact with the 
 
 ![example john doe](images/ExampleJohnDoe.png)
 
-The follow cases will fail / succeed if you try to enter an add command with the following fields: 
+The follow cases will fail / succeed if you try to enter an add / edit command with the following fields: 
 1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname` Nickname must be **unique**
     * **Fail:** `n/John Doe nn/Johnny ...`
     * **Fail:** `n/Jane Hoe nn/Johnny ...` there is already a Nickname Johnny
