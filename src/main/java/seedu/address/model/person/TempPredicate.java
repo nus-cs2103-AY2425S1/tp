@@ -5,6 +5,10 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+
+/**
+ * Temporary predicate used to pass on EventNames
+ */
 public class TempPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
