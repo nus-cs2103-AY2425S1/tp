@@ -1,5 +1,5 @@
 ---
-layout: default.md
+  layout: default.md
   title: "User Guide"
   pageNav: 3
 ---
@@ -43,27 +43,29 @@ If you can type fast, GOATS can get your student management tasks done faster th
 ## Command summary
 
 
-| Action            | Format, Examples                                                                                                                                                                                |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add Student**   | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS  edu/EDUCATION [t/TAG]` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                |
+| Action            | Format, Examples                                                                                                                                                                               |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**   | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS  edu/EDUCATION [t/TAG]` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                 |
 | **Add Parent**    | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/Jane Doe p/33335555 e/janedoe@example.com a/456, Pasir Ris Dr t/friend`                                              |
-| **Grade**         | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`                                                                                                                                            |
-| **Clear**         | `clear`                                                                                                                                                                                         |
-| **Delete**        | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 1 2 3 4`                                                                                                                                        |
+| **Grade**         | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`                                                                                                                                           |
+| **Clear**         | `clear`                                                                                                                                                                                        |
+| **Delete**        | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 1 2 3 4`                                                                                                                                       |
 | **Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [edu/EDUCATION] [pn/PARENT NAME] [pp/PARENT PHONE] [pe/PARENT EMAIL][t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                      |
-| **FindTag**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`                                                                                                                                    |
-| **Help**          | `help`                                                                                                                                                                                          |
-| **Pin**           | `pin INDEX [MORE_INDICES]`<br> e.g., `pin 1 2 3 4`                                                                                                                                              |
-| **Unpin**         | `unpin INDEX [MORE_INDICES]`<br> e.g., `unpin 1 2 3 4`                                                                                                                                          |
-| **Archive**       | `archive INDEX [MORE_INDICES]`<br> e.g., `archive 1 2 3 4`                                                                                                                                      |
-| **Unarchive**     | `unarchive INDEX [MORE_INDICES]`<br> e.g., `unarchive 1 2 3 4`                                                                                                                                  |
-| **List**          | `list`                                                                                                                                                                                          |
-| **List Archive**  | `listarchive`                                                                                                                                                                                   |
-| **List Students** | `liststudents`                                                                                                                                                                                  |
-| **List Parents**  | `listparents`                                                                                                                                                                                   |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
+| **FindTag**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`                                                                                                                                   |
+| **Help**          | `help`                                                                                                                                                                                         |
+| **Pin**           | `pin INDEX [MORE_INDICES]`<br> e.g., `pin 1 2 3 4`                                                                                                                                             |
+| **Unpin**         | `unpin INDEX [MORE_INDICES]`<br> e.g., `unpin 1 2 3 4`                                                                                                                                         |
+| **Archive**       | `archive INDEX [MORE_INDICES]`<br> e.g., `archive 1 2 3 4`                                                                                                                                     |
+| **Unarchive**     | `unarchive INDEX [MORE_INDICES]`<br> e.g., `unarchive 1 2 3 4`                                                                                                                                 |
+| **List**          | `list`                                                                                                                                                                                         |
+| **List Archive**  | `listarchive`                                                                                                                                                                                  |
+| **List Students** | `liststudents`                                                                                                                                                                                 |
+| **List Parents**  | `listparents`                                                                                                                                                                                  |
+| **Sort**          | `sort`                                                                                                                                                                                         |
 | **Link**          | `link ch/STUDENT_NAME pa/PARENT_NAME`e.g., `link ch/James Ho pa/Jane Doe`                                                                                                                      |
 | **Unlink**        | `unlink ch/STUDENT_NAME pa/PARENT_NAME`e.g., `unlink ch/James Ho pa/Jane Doe`                                                                                                                  |
+| **Exit**          | `exit`                                                                                                                                                                                         |
 
 ## Features
 
@@ -268,7 +270,7 @@ Examples:
 * `find Betsy` followed by `archive 1` archives the 1st person in the results of the `find` command.
 * `list` followed by `archive 2 3 4 5` archives the 2nd, 3rd, 4th and 5th people in the address book.
 
-### Unarchive a person : `Unarchive`
+### Unarchive a person : `unarchive`
 
 Unarchives the specified people in the addressbook, hiding them from the main list.
 
@@ -290,6 +292,12 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Listing all archived persons : `listarchive`
+
+Shows a list of all archived persons in the address book.
+
+Format: `listarchive`
+
 ### Listing students : `liststudents`
 
 Lists all students in the address book.
@@ -302,11 +310,11 @@ Lists all parents in the address book.
 
 Format: `liststudents`
 
-### Listing all archived persons : `listarchive`
+### Sorting all persons: `sort`
 
-Shows a list of all archived persons in the address book.
+Sorts all person in the address book, keeping pinned persons on top.
 
-Format: `listarchive`
+Format: `sort`
 
 ### Exiting the program : `exit`
 
