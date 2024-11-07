@@ -68,7 +68,7 @@ public class EditNoteCommandTest {
     @Test
     public void execute_invalidPersonIndex_throwsCommandException() {
         EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_OUTOFBOUND_PERSON, INDEX_FIRST_NOTE,
-                DUPLICATE_NOTE);
+                TYPICAL_NOTE);
         assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
                 editNoteCommand.execute(model));
     }

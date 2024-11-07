@@ -1,0 +1,50 @@
+#openButton,
+#helpMessage {
+  -fx-text-fill: white;
+}
+
+#openButton {
+  -fx-background-color: dimgray;
+}
+
+#openButton:hover {
+  -fx-background-color: gray;
+}
+
+#openButton:armed {
+  -fx-background-color: darkgray;
+}
+
+#helpMessageContainer {
+  -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.help-textbox {
+  -fx-text-fill: white;
+  -fx-fill: white;
+}
+
+#errorMessageLabel {
+  -fx-text-fill: red; /* Makes the text red */
+  -fx-padding: 0 0 0 10px; /* Adds 10px padding to the left */
+}
+
+.table-cell {
+  -fx-text-fill: white;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-wrap-text: true;
+}
+
+.table-row-cell:filled:even {
+  -fx-background-color: #3c3e3f;
+}
+
+.table-row-cell:filled:odd {
+  -fx-background-color: #515658;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+  -fx-background-color: #424d5f;
+  -fx-border-color: #3e7b91;
+  -fx-border-width: 1;
+}

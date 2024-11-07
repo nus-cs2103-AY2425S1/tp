@@ -2,6 +2,8 @@ package bizbook.logic.parser;
 
 import static bizbook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static bizbook.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static bizbook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static bizbook.logic.parser.CliSyntax.PREFIX_TAG;
 import static bizbook.testutil.Assert.assertThrows;
 import static bizbook.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import bizbook.logic.commands.AddCommand;
 import bizbook.logic.commands.ClearCommand;
 import bizbook.logic.commands.DeleteCommand;
+import bizbook.logic.commands.DeleteTagCommand;
 import bizbook.logic.commands.EditCommand;
 import bizbook.logic.commands.EditCommand.EditPersonDescriptor;
 import bizbook.logic.commands.ExitCommand;
@@ -25,12 +28,14 @@ import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
+import bizbook.logic.commands.RedoCommand;
 import bizbook.logic.commands.UndoCommand;
 import bizbook.logic.commands.UnpinCommand;
 import bizbook.logic.commands.ViewCommand;
 import bizbook.logic.parser.exceptions.ParseException;
 import bizbook.model.person.NameContainsKeywordsPredicate;
 import bizbook.model.person.Person;
+import bizbook.model.tag.Tag;
 import bizbook.testutil.EditPersonDescriptorBuilder;
 import bizbook.testutil.PersonBuilder;
 import bizbook.testutil.PersonUtil;
@@ -78,6 +83,18 @@ public class AddressBookParserTest {
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), commandUpperCase);
+    }
+
+    @Test
+    public void parseCommand_deleteTag() throws Exception {
+        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(
+                DeleteTagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + PREFIX_TAG + VALID_TAG_FRIEND);
+        DeleteTagCommand commandUpperCase = (DeleteTagCommand) parser.parseCommand(
+                DeleteTagCommand.COMMAND_WORD.toUpperCase() + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + PREFIX_TAG + VALID_TAG_FRIEND);
+        assertEquals(new DeleteTagCommand(INDEX_FIRST_PERSON, new Tag(VALID_TAG_FRIEND)), command);
+        assertEquals(new DeleteTagCommand(INDEX_FIRST_PERSON, new Tag(VALID_TAG_FRIEND)), commandUpperCase);
     }
 
     @Test
@@ -161,6 +178,16 @@ public class AddressBookParserTest {
             UndoCommand.COMMAND_WORD.toUpperCase());
         assertEquals(new UndoCommand(), command);
         assertEquals(new UndoCommand(), commandUpperCase);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        RedoCommand command = (RedoCommand) parser.parseCommand(
+            RedoCommand.COMMAND_WORD);
+        RedoCommand commandUpperCase = (RedoCommand) parser.parseCommand(
+            RedoCommand.COMMAND_WORD.toUpperCase());
+        assertEquals(new RedoCommand(), command);
+        assertEquals(new RedoCommand(), commandUpperCase);
     }
 
     @Test

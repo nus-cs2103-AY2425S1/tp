@@ -289,7 +289,7 @@ particular, this representative works with B2B sales.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| -------- |------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
@@ -300,6 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user             | search through my contacts                                                  | find a specific person                                                 |
 | `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
 | `* *`    | user             | edit contact                                                                | update contact with new information                                    |
+| `* *`    | user             | delete a tag from a person                                                  | remove tags that are invalid or are not applicable to the person       |
 | `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                         |
 | `* *`    | user             | pin a specific contact                                                      | view them on a separate list                                           |
 | `* *`    | user             | unpin a specific contact                                                    | clear the pin that is no longer needed                                 |
@@ -307,6 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                                |
 | `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident                |
 | `* *`    | user             | undo a command                                                              | fix a mistake I made                                                   |
+| `* *`    | user             | redo a command                                                              | revert back the changes I undid                                        |
 | `* *`    | new user         | import all contact details into the app                                     | start using without manual setup                                       |
 | `* *`    | sales rep        | keep track of clients I have contacted by seeing when I last contacted them | avoid wasting time calling them again about the same product           |
 | `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                                |
@@ -323,6 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
 | `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
+| `*`      | user             | toggle my application between light and dark mode                           | see the application in my preferred theme                              |
 
 ### Use cases
 
@@ -384,7 +387,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC4 - View person contact**
+**Use case: UC4 - Delete a person**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to delete a specific tag from a person.
+3.  System remove the tag from the person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+  - 2a1. System shows an error message.
+
+    Use case ends.
+
+- 2b. The specified tag does not exist.
+
+  - 2b1. System shows an error message.
+
+    Use case ends.  
+
+**Use case: UC5 - View person contact**
 
 **MSS**
 
@@ -401,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC5 - Find people**
+**Use case: UC6 - Find people**
 
 **MSS**
 
@@ -416,7 +443,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC6 - Add note to a person contact**
+**Use case: UC7 - Add note to a person contact**
 
 **MSS**
 
@@ -539,7 +566,28 @@ _Similar to UC10 except without extension 2b._
 
       Use case ends.
 
-**Use case: UC13 - Export contact list**
+**Use case: UC13 - Redo a command**
+
+**MSS**
+
+1.  Actor performs a command that updates the addressbook.
+2.  System executes the command.
+3.  Actor requests to undo the recently executed command.
+4.  System reverts changes made by the actor.
+5.  Actor requests to redo the recently executed undo command.
+6.  System reverts changes made by the actor.
+
+    Use case ends.
+
+**Extensions**
+
+- 5a. There is no version to revert to.
+
+    - 5a1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC14 - Export contact list**
 
 **MSS**
 
@@ -559,6 +607,15 @@ _Similar to UC10 except without extension 2b._
 - 1b. System detects that the file is used by another process.
 
   - 1b1. System shows an error message.
+
+    Use case ends.
+
+**Use case: UC14 - Toggle application's theme** 
+
+**MSS**
+
+1.  Actor toggle the system's theme.
+2.  System changes theme.
 
     Use case ends.
 

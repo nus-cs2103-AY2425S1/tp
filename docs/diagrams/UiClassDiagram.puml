@@ -42,7 +42,7 @@ MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" PinnedPersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow -down-> "0..1" HelpWindow
-MainWindow -down-> "0..1" ContactDetails
+MainWindow *-down-> "0..1" ContactDetails
 
 PersonListPanel -down-> "*" PersonCard
 PinnedPersonListPanel -down-> "*" PinnedPersonCard

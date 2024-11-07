@@ -4,5 +4,5 @@
 <?import javafx.scene.layout.HBox?>
 
 <HBox fx:id="placeHolder" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <TextField fx:id="searchBoxField" onAction="#handleCommandUpdate" promptText="Search" HBox.hgrow="ALWAYS" />
+  <TextField fx:id="searchBoxField" onAction="#handleCommandUpdate" promptText="Search" HBox.hgrow="ALWAYS" styleClass="search-bar" />
 </HBox>
