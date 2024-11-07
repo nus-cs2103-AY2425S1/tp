@@ -52,10 +52,14 @@ public class PersonTest {
 
     @Test
     public void getTaskAssigned_returnsSuccessfully() {
+        // Create a person with a specific task
         String taskStr = "todo: buy groceries";
         Person person = new PersonBuilder().withTasks(taskStr).build();
         Task newTask = new Todo("buy groceries");
-        assertEquals(person.getTask(newTask), newTask);
+
+        // Ensure getTask returns the task when it exists
+        Task retrievedTask = person.getTask(newTask);
+        assertEquals(newTask, retrievedTask, "Expected to retrieve the assigned task successfully.");
     }
 
     @Test

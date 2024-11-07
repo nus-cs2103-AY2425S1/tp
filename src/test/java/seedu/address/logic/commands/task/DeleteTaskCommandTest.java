@@ -138,6 +138,27 @@ public class DeleteTaskCommandTest {
         model.deletePerson(personWithoutTask);
     }
 
+    @Test
+    public void execute_taskAssignedToMultiplePersons_updatesFilteredPersonList() throws Exception {
+        // Setup model with a task and multiple persons who have this task
+        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        Person personWithTask1 = new PersonBuilder().withName("Person 1").withTasks("todo: buy groceries").build();
+        Person personWithTask2 = new PersonBuilder().withName("Person 2").withTasks("todo: buy groceries").build();
+        model.addPerson(personWithTask1);
+        model.addPerson(personWithTask2);
+
+        // Execute DeleteTaskCommand
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
+        deleteTaskCommand.execute(model);
+
+        // Verify both persons no longer have the deleted task
+        for (Person person : model.getFilteredPersonList()) {
+            assertFalse(person.hasTask(taskToDelete), "Person should no longer have the deleted task.");
+        }
+
+        // Verify that the person list was updated (anyChanges = true)
+        assertTrue(model.getFilteredPersonList().size() >= 2, "Filtered person list should have been updated.");
+    }
 
 
     @Test
