@@ -202,6 +202,7 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs(), personToDisplay);
         expectedModel.deleteModule(updatedPerson, moduleToDelete);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
