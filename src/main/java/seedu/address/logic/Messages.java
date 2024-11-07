@@ -32,7 +32,6 @@ public class Messages {
             + "\"t/YYYY-MM-DD HH:mm to YYYY-MM-DD HH:mm\"";
     public static final String MESSAGE_INVALID_CELEBRITY_FORMAT = "Celebrity name cannot be blank";
     public static final String MESSAGE_INVALID_EVENT_CONTACT_FORMAT = "Contact name cannot be blank";
-    public static final String MESSAGE_INVALID_NAME = "Names must be alphanumeric";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -81,7 +80,7 @@ public class Messages {
                 .append(event.getVenue().map(Venue::toString).orElse("[To be added]"))
                 .append("; Celebrity: ")
                 .append(event.getCelebrityName())
-                .append("; Contacts: ")
+                .append(";\nContacts: ")
                 .append(event.getContacts().isEmpty() ? "[To be added]" : event.getContactsString());
         return builder.toString();
     }

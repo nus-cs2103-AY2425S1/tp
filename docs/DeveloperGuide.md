@@ -68,32 +68,32 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TabPane` (which contains `PersonListPanel` and `EventListPanel`), `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete event 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete event 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -101,7 +101,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. The `DeleteCommandParser` parses the command and creates either a `DeletePersonCommandParser` or a `DeleteEventCommandParser` object depending on the command type, which then parses the input.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeletePersonCommand` or `DeleteEventCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -111,19 +112,19 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZEventCommand` object (e.g., `ClearCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddPersonCommandParser`, `DeletePersonCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` and `Event` objects (which are contained in `UniquePersonList` and `UniqueEventList` objects).
+* stores the currently 'selected' `Person` and `Event` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -136,7 +137,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -154,6 +155,27 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Event and Person Synchronisation
+
+#### Implementation
+The current `Event` class has a `Person` field that stores the `Person` object associated with the event. This is because the `Event` object should be aware of the `Person` object it is associated with. This ensures that when details of the `Person` object are updated, the `Event` object is aware of the changes and can update itself accordingly. This applies to the contact list in `Event` as well.
+
+Step 1: The user adds a new `Event` through the `add event` command. During execution of the command, the `Person` object associated with the `Event` is retrieved from the `Model` using the `findPerson` command.
+
+The following sequence diagram shows how the `Event` object is created and associated with a `Person` object:
+![AddEvent](images/AddEventSequenceDiagram.png)
+
+The following sequence diagram shows how `findPerson` command is executed and the `Person` object is retrieved:
+![FindPerson](images/FindPersonSequenceDiagram.png)
+
+Step 2: The user updates the details of a `Person` object through the `edit person` command. During execution of the command, is done by updating the `Person` object in the `Model`, the updated `Person` replaces all `Event` associate with the original `Person` using the `replacePerosnInEvents` method.
+
+The following sequence diagram shows how the `Person` object is edited:
+![EditPerson](images/EditPersonSequenceDiagram.png)
+
+The following sequence diagram shows how `findPerson` command is executed and the `Person` object is retrieved:
+![ReplacePerson](images/ReplacePersonInEvents.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -237,13 +259,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -282,8 +297,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Celebrity Talent Manager                                       | delete a contact                                              | remove entries that I no longer need                     |
 | `* * *`  | Celebrity Talent Manager                                       | view details of a specific contact                            | quickly access specific information when needed          |
 | `* * *`  | Celebrity Talent Manager                                       | list my contacts                                              | see an overview of my contacts                           |
-| `* * *`  | Celebrity Talent Manager                                       | add important events and deadlines                            | quickly view my important tasks                          |
-| `* * *`  | Celebrity Talent Manager                                       | add remarks and people to my events and deadlines             | view who is involved with specific tasks                 |
+| `* * *`  | Celebrity Talent Manager                                       | add important events                                          | quickly view my important tasks                          |
 | `* * *`  | Celebrity Talent Manager                                       | view the event details a client has                           | see and plan around their schedule                       |
 | `* * *`  | Celebrity Talent Manager                                       | view all my events                                            | have an overview of my timetable                         |
 | `* * *`  | Celebrity Talent Manager                                       | delete an event                                               | remove outdated entries                                  |
@@ -296,12 +310,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Celebrity Talent Manager who can be forgetful                  | be alerted when I add duplicate entries                       | avoid duplicate entries                                  |
 | `* *`    | Celebrity Talent Manager who is new to the application         | access a help guide in the application                        | find out the command I need when I forget it             |
 | `* *`    | Celebrity Talent Manager                                       | perform mass deletion of entries                              | save time when I have to delete a lot of entries         |
-| `* *`    | Celebrity Talent Manager                                       | set customisable remark fields for entries                    | save information specific to the contact                 |
-| `* *`    | Celebrity Talent Manager who works with international partners | view the calendar different timezones                         | work with clients of different timezones easily          |
 | `* *`    | Celebrity Talent Manager                                       | be alerted when events clash                                  | identify clashes and resolve them easily                 |
 | `* *`    | Celebrity Talent Manager                                       | mark events as over or ended                                  | keep track my schedule                                   |
-| `* *`    | Celebrity Talent Manager                                       | unmark events as over or ended                                | mark tasks as undone or ongoing again                    |
-| `* *`    | Celebrity Talent Manager                                       | add a photo for my contacts                                   | easily remember or recognise the contact                 |
+| `*`      | Celebrity Talent Manager                                       | add a photo for my contacts                                   | easily remember or recognise the contact                 |
 | `*`      | Celebrity Talent Manager                                       | flag priority contacts                                        | identify contacts that require immediate focus           |
 | `*`      | Celebrity Talent Manager                                       | export and import client data                                 | safely transfer information on different devices         |
 | `*`      | Celebrity Talent Manager who can be careless at times          | undo my last command                                          | quickly revert my changes when they are wrong            |
@@ -312,14 +323,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
+(For all use cases below, the **TalentHub** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
 
 **Use case: UC01 - Add Contact**
 
 **MSS**
 
 1. Talent Manager requests to add a specific contact
-2. TalentHub adds the person
+2. TalentHub adds the person to the list
 
 Use case ends.
 
@@ -331,42 +342,81 @@ Use case ends.
 
     Use case ends.
   
-* 1b. Any parameter is missing or invalid.
+* 1b. Any compulsory parameter is missing or invalid.
 
   * 1b1. TalentHub outputs an error message specifying the issue.
 
     Use case ends.
 
-* 1c. An identical phone number is detected.
+* 1c. An identical name is detected.
 
-  * 1c1. TalentHub outputs an error message specifying the issue.
+    * 1c1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1d. An identical phone number is detected.
+
+  * 1d1. TalentHub outputs an error message specifying the issue.
 
     Use case ends.
 
-**Use case: UC02 - Delete Contact after List**
+**Use case: UC02 - Edit Contact**
 
 **MSS**
 
-1. Talent Manager [list contacts (UC06)](#)
-2. Talent Manager [delete contact (UC04)](#)
+1. Talent Manager requests to edit the information a specific contact
+2. TalentHub change the information of the target person
 
-   Use case ends.
+Use case ends.
 
-**Use case: UC03 - Delete Contact after Find**
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. An identical name is detected.
+
+    * 1b1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1c. An identical phone number is detected.
+
+    * 1c1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+
+
+**Use case: UC03 - Delete Contact after List**
 
 **MSS**
 
-1. Talent Manager [find contacts (UC05)](#)
-2. Talent Manager [delete contact (UC04)](#)
+1. Talent Manager <a style="text-decoration:underline;">list contacts (UC06)</a>
+2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
+
+Use case ends.
+
+
+**Use case: UC04 - Delete Contact after Find**
+
+**MSS**
+
+1. Talent Manager <a style="text-decoration:underline;">find contact (UC07)</a>
+2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
 
    Use case ends.
 
-**Use case: UC04 - Delete Contact**
+**Use case: UC05 - Delete Contact**
 
 **MSS**
 
 1. Talent Manager requests to delete a specific person in the list
-2. TalentHub deletes the person
+2. TalentHub requests for confirmation of deletion
+3. TalentHub deletes the person and all his/her corresponding events
 
    Use case ends.
 
@@ -380,22 +430,55 @@ Use case ends.
 
 * 1b. The list is empty.
 
-  * 1b1. System shows an error message specifying the list is empty.
+  * 1b1. TalentHub shows an index error message.
 
     Use case ends.
 
 * 1c. The given index is invalid.
 
-  * 1c1. System shows an error message.
+  * 1c1. TalentHub shows an index error message.
 
     Use case ends.
 
-**Use case: UC05 - Find Contact**
+* 2a. Talent Manager confirms the deletion. 
+
+  * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the deletion.
+
+  * 2b1. TalentHub outputs an successful cancellation message.
+
+    Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+  * 2b1. TalentHub outputs an error message specifying the issue.
+
+    Use case resumes from step 2.
+
+**Use case: UC06 - List All Contacts**
 
 **MSS**
 
-1. User requests to find persons with with `keywords`
-2. System processes and list person with `keywords`
+1. Talent Manager requests to list contacts
+2. TalentHub shows a list of all contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+**Use case: UC07 - Find Contact by Name**
+
+**MSS**
+
+1. User requests to find persons whose name contains `keywords`
+2. TalentHub processes and list person(s) whose name contains `keywords`
 
    Use case ends.
 
@@ -409,17 +492,16 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-  * 1b1. System shows an error message.
+  * 1b1. TalentHub shows an error message.
 
     Use case ends.
 
-
-**Use case: UC06 - List All Contacts**
+**Use case: UC08 - Filter Contact by Tag**
 
 **MSS**
 
-1. Talent Manager requests to list contacts
-2. System shows a list of all contacts
+1. User requests to filter persons with tag `keywords`
+2. TalentHub processes and list person(s) with tag `keywords`
 
    Use case ends.
 
@@ -427,17 +509,22 @@ Use case ends.
 
 * 1a. The command format is incorrect.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case ends.
+      Use case ends.
 
+* 1b. The keyword is empty.
 
-**Use case: UC07 - Add Events**
+    * 1b1. TalentHub shows an error message.
+
+      Use case ends.
+
+**Use case: UC09 - Add Event**
 
 **MSS**
 
-1. Talent Manager requests to add a event for a specific contact
-2. System adds the event
+1. Talent Manager requests to add an event for a specific celebrity
+2. TalentHub adds the event
 
 Use case ends.
 
@@ -449,50 +536,144 @@ Use case ends.
 
     Use case ends.
 
-* 1b. A duplicate event is detected:
+* 1b. Any compulsory parameter is missing or invalid.
+
+    * 1b1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1c. A duplicate event is detected:
   
-  * 1b1. System displays a message informing the Talent Manager of the duplicate event and does not add it.
+  * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not add it.
 
     Use case ends.
 
-    
-**Use case: UC08 - List All Events**
+* 1d. Time clash is detected:
+
+  * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not add it.
+
+    Use case ends.
+
+**Use case: UC10 - Edit Event**
+
+**MSS**
+
+1. Talent Manager requests to edit the information of an event for a specific celebrity
+2. TalentHub change the information of the event
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. The input parameter is invalid.
+
+    * 1b1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1c. A duplicate event is detected:
+
+    * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not change it.
+
+      Use case ends.
+
+* 1d. Time clash is detected:
+
+    * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not change it.
+
+      Use case ends.
+
+**Use case: UC11 - Delete Event after List**
+
+**MSS**
+
+1. Talent Manager <a style="text-decoration:underline;">List Events (UC14)</a>
+2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC12)</a>
+
+   Use case ends.
+
+**Use case: UC12 - Delete Event after Find**
+
+**MSS**
+
+1. Talent Manager <a style="text-decoration:underline;">Find Event (UC15)</a>
+2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC12)</a>
+
+   Use case ends.
+
+**Use case: UC13 - Delete Event**
+
+1. Talent Manager requests to delete a specific event in the list
+2. TalentHub requests for confirmation of deletion
+3. TalentHub deletes the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. The list is empty.
+
+    * 1b1. TalentHub shows an index error message.
+
+      Use case ends.
+
+* 1c. The given index is invalid.
+
+    * 1c1. TalentHub shows an index error message.
+
+      Use case ends.
+
+* 2a. Talent Manager confirms the deletion.
+
+    * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the deletion.
+
+    * 2b1. TalentHub outputs an successful cancellation message.
+
+      Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+    * 2b1. TalentHub outputs an error message specifying the issue.
+
+      Use case resumes from step 2.
+
+**Use case: UC14 - List All Events**
 
 **MSS**
 
 1. Talent Manager requests to list all events.
-2. System retrieves and displays all events in chronological order.
-   
+2. TalentHub retrieves and displays all events in chronological order.
+
    Use case ends.
 
 **Extensions**
 
 * 1a. The command format is invalid.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case ends.
+      Use case ends.
 
-* 2a. If no events are scheduled.
-
-  * 2a1. System displays a message stating "No events.".
-
-    User case ends.
-
-
-**Use case: UC09 - Delete Event after List**
+**Use case: UC15 - Find Contact by Name**
 
 **MSS**
 
-1. Talent Manager [List Events (UC08)](#)
-2. Talent Manager [Delete Event (UC10)](#)
-
-   Use case ends.
-
-**Use case: UC10 - Delete Event**
-
-1. Talent Manager requests to delete a specific event in the list
-1. TalentHub deletes the event
+1. User requests to find event with name contains `keywords`
+2. TalentHub processes and list event with name contains `keywords`
 
    Use case ends.
 
@@ -500,22 +681,103 @@ Use case ends.
 
 * 1a. The command format is invalid.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
-
-    Use case ends.
-
-* 1b. The list is empty.
-
-    * 1b1. System shows an error message specifying the list is empty.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
       Use case ends.
-  
-* 1c. The given index is invalid.
 
-  * 1c1. TalentHub shows an error message.
+* 1b. The keyword is empty.
 
-    Use case ends.
+    * 1b1. TalentHub shows an error message.
 
+      Use case ends.
+
+    
+**Use case: UC16 - Filter Event by Celebrity**
+
+**MSS**
+
+1. User requests to filter event by celebrity's name `keywords`
+2. TalentHub processes and list celebrity named `keywords`'s events
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. The keyword is empty.
+
+    * 1b1. TalentHub shows an error message.
+
+      Use case ends.
+
+**Use case: UC17 - Clear Events**
+
+1. Talent Manager requests to clear all event in the list
+2. TalentHub requests for confirmation of clear
+3. TalentHub clears all events in the list
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 2a. Talent Manager confirms the clear.
+
+    * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the clear.
+
+    * 2b1. TalentHub outputs an successful cancellation message.
+
+      Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+    * 2b1. TalentHub outputs an error message specifying the issue.
+
+      Use case resumes from step 2.
+
+**Use case: UC17 - Clear Persons and Events**
+
+1. Talent Manager requests to clear all persons and events in the list
+2. TalentHub requests for confirmation of clear
+3. TalentHub clears all persons and events in the list
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 2a. Talent Manager confirms the clear.
+
+    * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the clear.
+
+    * 2b1. TalentHub outputs an successful cancellation message.
+
+      Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+    * 2b1. TalentHub outputs an error message specifying the issue.
+
+      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 

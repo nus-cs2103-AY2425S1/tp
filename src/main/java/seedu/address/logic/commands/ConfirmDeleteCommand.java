@@ -5,6 +5,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.PendingCommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.ui.CommandDetailChange;
@@ -38,7 +39,7 @@ public class ConfirmDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (!checkValidIndex(model)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new PendingCommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         return new CommandResult(DELETE_CONFIRMATION_MESSAGE, false, false,
                 CommandTabChange.NONE, CommandDetailChange.NONE);

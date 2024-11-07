@@ -1,0 +1,90 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "AddEventCommandParser" as AddEventCommandParser LOGIC_COLOR
+participant "a:AddEventCommand" as AddEventCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add event c/Bernice...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add event c/Bernice...")
+activate AddressBookParser
+
+create AddCommandParser
+AddressBookParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> AddressBookParser
+deactivate AddCommandParser
+
+AddressBookParser -> AddCommandParser : parse("event c/Bernice...")
+activate AddCommandParser
+
+create AddEventCommandParser
+AddCommandParser -> AddEventCommandParser : new
+activate AddEventCommandParser
+
+AddEventCommandParser --> AddCommandParser :
+deactivate AddEventCommandParser
+
+AddCommandParser -> AddEventCommandParser : parse("c/Bernice...")
+activate AddEventCommandParser
+
+create AddEventCommand
+AddEventCommandParser -> AddEventCommand : new
+activate AddEventCommand
+
+AddEventCommand --> AddEventCommandParser :
+deactivate AddEventCommand
+
+AddEventCommandParser --> AddCommandParser : a
+deactivate AddEventCommandParser
+
+AddCommandParser --> AddressBookParser : a
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddEventCommand : execute(m)
+activate AddEventCommand
+
+AddEventCommand -> Model : findPerson(Bernice)
+activate Model
+
+Model --> AddEventCommand
+deactivate Model
+
+AddEventCommand -> Model : addEvent(Event)
+activate Model
+
+Model --> AddEventCommand
+deactivate Model
+
+create CommandResult
+AddEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddEventCommand
+deactivate CommandResult
+
+AddEventCommand --> LogicManager : r
+deactivate AddEventCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -68,8 +69,9 @@ class JsonSerializableAddressBook {
             Person celebrity;
             Set<Person> contacts;
             try {
-                celebrity = addressBook.findPerson(jsonAdaptedEvent.getCelebrityName());
+                celebrity = addressBook.findPerson(new Name(jsonAdaptedEvent.getCelebrityName()));
                 contacts = jsonAdaptedEvent.getContactNames().stream()
+                        .map(Name::new)
                         .map(addressBook::findPerson)
                         .collect(Collectors.toSet());
             } catch (PersonNotFoundException e) {

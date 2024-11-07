@@ -1,0 +1,90 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "EditEventCommandParser" as EditEventCommandParser LOGIC_COLOR
+participant "e:EditEventCommand" as EditEventCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit person 1 c/Alex")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit person 1 c/Alex")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser : parse("person 1 c/Alex")
+activate EditCommandParser
+
+create EditEventCommandParser
+EditCommandParser -> EditEventCommandParser : new
+activate EditEventCommandParser
+
+EditEventCommandParser --> EditCommandParser :
+deactivate EditEventCommandParser
+
+EditCommandParser -> EditEventCommandParser : parse("1 c/Alex")
+activate EditEventCommandParser
+
+create EditEventCommand
+EditEventCommandParser -> EditEventCommand : new
+activate EditEventCommand
+
+EditEventCommand --> EditEventCommandParser :
+deactivate EditEventCommand
+
+EditEventCommandParser --> EditCommandParser : e
+deactivate EditEventCommandParser
+
+EditCommandParser --> AddressBookParser : e
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditEventCommand : execute(m)
+activate EditEventCommand
+
+EditEventCommand -> Model : setPerson(Bernice, Alex)
+activate Model
+
+Model --> EditEventCommand
+deactivate Model
+
+EditEventCommand -> Model : replacePersonInEvents(Bernice, Alex)
+activate Model
+
+Model --> EditEventCommand
+deactivate Model
+
+create CommandResult
+EditEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditEventCommand
+deactivate CommandResult
+
+EditEventCommand --> LogicManager : r
+deactivate EditEventCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
