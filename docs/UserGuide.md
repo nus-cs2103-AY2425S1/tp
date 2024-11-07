@@ -11,7 +11,7 @@ SocialBook is a **desktop app specifically designed to ease the administrative p
 By providing a **comprehensive way to store the personal details** of those they are helping, as well as **functionalities 
 to make the information managing process efficient**, SocialBook streamlines the process for social workers. 
 
-SocialBook is **optimized for use via a  Line Interface** (CLI) while still having the benefits of a 
+SocialBook is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a 
 Graphical User Interface (GUI). If you can type fast, SocialBook can get your contact management tasks done faster 
 than traditional GUI apps.
 
@@ -23,10 +23,10 @@ than traditional GUI apps.
 ## Quick start
 
 1. Ensure you have **Java 17 or above** installed in your Computer.
-   *  How To Install Java ([Windows](https://www.oracle.com/sg/java/technologies/downloads/#jdk23-windows) | [MacOS](https://www.oracle.com/sg/java/technologies/downloads/#jdk23-mac) | [Linux](https://www.oracle.com/sg/java/technologies/downloads/#jdk23-linux)
+   *  How To Install Java ([Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html) | [MacOS](https://se-education.org/guides/tutorials/javaInstallationMac.html) | [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html))
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-1/tp/releases).
-   * Under the **Assests** of the latest version of SocialBook, you should find the latest downloadable `socialbook.jar` file
+   * Under the **Assets** of the latest version of SocialBook, you should find the latest downloadable `socialbook.jar` file
 
 1. Copy this file into the _folder_ you want to use for SocialBook.
    * Ensure that this _folder_ is **empty**.
@@ -42,7 +42,7 @@ If done correctly, a GUI similar to the image below should appear in a few secon
 
    * `list` : Lists all contacts in SocialBook.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2 #02-25 dob/9 Mar 1999` : Adds a contact named `John Doe` to SocialBook with these specified details.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2 #02-25 dob/1999-03-09` : Adds a contact named `John Doe` to SocialBook with these specified details.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -59,9 +59,6 @@ If done correctly, a GUI similar to the image below should appear in a few secon
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
-
-* All words used must be alphanumeric.<br>
-e.g. Use of Chinese characters like 我 not allowed. 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -113,8 +110,8 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE OF BIRTH [pri/PRIORITY = 
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/9 Mar 1999 famsize/3 income/5000`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/25 Dec 2002 pri/MEDIUM t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/2002-12-25 pri/MEDIUM t/criminal`
 
 ### Listing all persons : `list`
 
@@ -124,11 +121,11 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person's details in the SocialBook.
+Edits an existing person's details in SocialBook.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [r/REMARK] [famsize/FAMILY SIZE] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** e.g. 1, 2, 3,…​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** not exceeding the largest index number e.g. 1, 2, 3,…​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, all existing tags of the person will be removed and replaced with updated values i.e editing of tags does not cumulatively add them to current tags.
@@ -194,7 +191,7 @@ Examples:
 
 Clears all entries from SocialBook.
 
-* All entries even those not currently shown in the list will be cleared.
+* Both unarchived and archived entries, including those not currently shown in the list, will be deleted.
 
 Examples:
 * `find n/John` followed by `clear` will delete all persons in SocialBook and not just those with `John` in their names.
@@ -206,8 +203,8 @@ Undoes the previous command from SocialBook.
 
 Format: `undo`
 
-* Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear
-* Undo can be called multiple times till there is no more previous command for the current execution.
+* Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear, addappt, deleteappt, editappt, addscheme, deletescheme, archive, unarchive
+* Undo can be called multiple times till there is no longer a previous command to execute.
 
 Examples:
 * `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
@@ -223,8 +220,8 @@ Statistics include:
 * Number of HIGH Priority People
 * Number of MEDIUM Priority People
 * Number of LOW Priority People
-* Number of People With Monthly Household Income < 2500
-* Number of Appointments Within a Week From Current Date
+* Number of Appointments Within A Week From Current Date
+* Number of People Eligible for At Least 1 Scheme
 
 Format: `statistics`
 
