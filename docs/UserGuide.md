@@ -60,8 +60,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `statistics`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `listappt`, `statistics`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `statistics 123`, it will be interpreted as `statistics`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -132,20 +132,43 @@ Examples:
 
 Finds persons that match the specified filters.
 
-Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]`
+Format: `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`
 
-* The search is case-insensitive. e.g `n/alex` will match `Alex`.
-* For names, only those that start with the given filter will be matched e.g. find n/A returns all persons whose first name starts with A only. 
-* For addresses, those that contain the given filter are returned e.g. find a/clementi returns all persons who stay at clementi only.
-* For priorities, exact priorities must be specified to filter accurately e.g. find pri/high returns all persons with high priority only.
-* At least one filter must be specified.
-* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. find n/alex n/david n/bobby
-* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. find n/A n/B pri/HIGH returns all persons whose name starts with either A or B but have high priority. 
+* The search is case-insensitive. e.g `n/alice` will match `Alice`.
+* At least one filter must be specified (i.e. no empty `find` command).
+* For names, only those that start with the given filter will be matched e.g. `find n/A` returns all persons whose first name starts with A only. 
+* For addresses, those that contain the part of the address given are returned e.g. `find a/clementi` returns all persons who stay at clementi only.
+* For priorities, exact priorities must be specified to filter accurately e.g. `find pri/high` returns all persons with high priority only.
+* For income, those with income less than or equal to the specified float value are listed e.g. `find income/2000` returns all persons with income less than or equal to 2000.00 only.
+* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. `find n/alex n/david n/bobby`
+* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but have high priority. 
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/alex n/david pri/high` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/newFindAlexDavidResult.png)
+* `find pri/high` returns `Alice Tan` and `David Wong` (from sample data)
+* `find n/a n/b n/c pri/high pri/medium` returns `Alice Tan` and `Benny Lim`<br>
+  ![sample find result](images/findResult.png)
+
+### Sorting persons: `sort`
+
+Sorts persons in the order of the specified parameter.
+
+Format: `sort PARAMETER`
+
+* The only valid parameters are: name, address, priority, income, updated.
+* Only one parameter can be specified at any time.
+* The parameter is case-insensitive. e.g `sort name` works the same as `sort NAME`.
+* Whenever SocialBook is launched, persons are automatically sorted in order of their priority from HIGH to LOW. 
+  * Therefore, if the sorting order is changed, SocialBook should be kept open for as long as the new sorting order is required, as closing it and relaunching will mean that the persons are sorted once again in the above stated priority order. 
+* For name, the sorting is in alphabetical order.
+* For address, the sorting is in lexicographical order (similar to alphabetical order but also takes the special characters and numerical digits into account). 
+  * Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` `sort address` will sort the contact list of those staying in Clementi in order of their address. 
+* For priority, the sorting is in order from HIGH to LOW.
+* For income, the sorting order is in increasing order from the lowest to highest.
+* For updated, the sorting order is from the person updated least recently to the one updated most recently.
+
+Examples:
+* `sort name`
+* `sort updated`
 
 ### Deleting people: `delete`
 
@@ -461,8 +484,9 @@ The current time marker (denoted by the red line on the right side of the calend
 | **help**         | `help [COMMAND]`                                                                                                                                                                                                |
 | **add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                           |
 | **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                                        |
-| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` | 
-| **find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                      |
+| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                             |
+| **sort**         | `sort [name] [address] [priority] [income] [updated]`<br> e.g.,`sort name`                                                                                                                                      |
 | **delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`                                                                                                              |
 | **get**          | `get PARAMETERS`<br> e.g.,`get email phone`                                                                                                                                                                     |
 | **clear**        | `clear`                                                                                                                                                                                                         |
