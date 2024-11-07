@@ -39,6 +39,7 @@ public class MakeupLessonCommand extends Command {
             + PREFIX_END_TIME + "13:00";
 
     public static final String MESSAGE_SUCCESS = "Makeup lesson created at %1$s for student: %2$s.";
+    public static final String MESSAGE_DUPLICATE_MAKEUP_LESSON = "Student already has this makeup lesson.";
     public static final String MESSAGE_CLASHING_LESSON = "Could not create lesson due to clash with lesson: %1$s.";
 
     private final Index targetIndex;
@@ -63,6 +64,9 @@ public class MakeupLessonCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
+        if (studentToUpdate.getMakeupLessons().contains(makeupLesson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MAKEUP_LESSON);
+        }
         ArrayList<Student> studentsInGroup = model.getStudentsInGroup(studentToUpdate.getGroup());
 
         // try to update everything first
