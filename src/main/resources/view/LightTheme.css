@@ -213,7 +213,14 @@
 
 .scroll-bar {
     -fx-background-color: #a3c1d9;
+}
+
+.scroll-bar:vertical {
     -fx-background-radius: 0 8 8 0;
+}
+
+.scroll-bar:horizontal {
+    -fx-background-radius: 0 0 8 8;
 }
 
 .scroll-bar .thumb {
