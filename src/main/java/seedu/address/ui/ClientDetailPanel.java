@@ -173,7 +173,7 @@ public class ClientDetailPanel extends UiPart<Region> {
      */
     private void setStatus(Status status) {
         if (status.status != Status.StatusEnum.NA) {
-            Label statusLabel = new Label(status.toString());
+            Label statusLabel = new Label(status.getValue());
             String styleClass = switch (status.status) {
             case URGENT -> "urgent-status";
             case NON_URGENT -> "nonUrgent-status";
