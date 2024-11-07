@@ -8,13 +8,13 @@ title: BizBook
 
 ![Ui](images/Ui.png)
 
-**BizBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**BizBook is a desktop application for managing your contacts.** Although it has a GUI, most user interactions happen
+through the CLI (Command Line Interface).
 
 * If you are interested in using BizBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing BizBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in helping to develop BizBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [Mockito](https://github.com/mockito/mockito)
-
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [Mockito](https://github.com/mockito/mockito), [ez-vcard](https://github.com/mangstadt/ez-vcard)
