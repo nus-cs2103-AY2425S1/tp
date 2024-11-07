@@ -46,7 +46,7 @@ public class SampleDataUtil {
                     new Address("456 Marine Parade, #08-34"), Optional.of(new Role("Photographer")), null),
             new Person(new Name("Petal Pusher Florals"), new Phone("91234852"), new Email("petalpusher@example.com"),
                     new Address("321 Holland Road, #01-12"), Optional.of(new Role("Florist")), null),
-            new Person(new Name("Blossom & Vine"), new Phone("80472642"), new Email("blossomvine@example.com"),
+            new Person(new Name("Blossom and Vine"), new Phone("80472642"), new Email("blossomvine@example.com"),
                     new Address("135 Tanjong Pagar Road, #02-58"), Optional.of(new Role("Florist")), null),
             new Person(new Name("Glam Squad"), new Phone("89373673"), new Email("glamsquad@example.com"),
                     new Address("678 Serangoon Road, #10-23"), Optional.of(new Role("MakeUp")), null)
