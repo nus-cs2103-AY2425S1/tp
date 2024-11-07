@@ -136,7 +136,7 @@ Creates a vendor or event in EventTory.
 * To create a vendor: `create v/ n/VENDOR_NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]…​`
 * To create en event: `create e/ n/EVENT_NAME on/DATE [t/TAG]…​`
 
-#### Note:
+#### Notes:
 If parameters are provided for the `v/` and `e/` flags, they will be ignored.
 <box type="tip" seamless><br>
 **Tip:** A vendor or event can have any number of tags (including 0).
@@ -146,13 +146,23 @@ If parameters are provided for the `v/` and `e/` flags, they will be ignored.
 * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew`
 * `create e/ n/Jubilee Concert on/24 Jan 2025 t/annual`
 
-### Listing all persons : `list`
+### Listing Items : `list`
 
-Shows a list of all persons in the address book.
+Displays the list of vendors and/or events in EventTory.
 
-Format: `list`
+#### Format: `list [v/] [e/]`
 
-### Editing a person : `edit`
+* The list(s) displayed depends on whether the `v/` and/or `e/` prefix(es) is specified.
+* If no prefixes are specified, both the vendor and event lists will be displayed.
+* The prefixes can be specified in any order.
+* If values are specified after the prefixes (e.g. `v/2`, `e/Party`), the value is ignored.
+
+#### Examples:
+* `list v/` will display the list of vendors.
+* `list e/` will display the list of events.
+* `list v/ e/` and `list` will display both lists.
+
+### Editing a Vendor or Event : `edit`
 
 Edits an existing vendor or event in EventTory.
 
@@ -174,6 +184,38 @@ Edits an existing vendor or event in EventTory.
 #### Examples:
 *  `edit v/1 p/58623042 ` : Edits the phone number of the 1st vendor to be `58623042`.
 *  `edit e/2 n/Baby Shower t/` : Edits the name of the 2nd event to be `Baby Shower`, and clears all existing tags.
+
+### Assigning Vendors & Events: `assign`
+
+Assigns vendors to events.
+
+#### Format: `assign INDEX`
+
+* Assigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
+  * The index refers to the index number shown in the assignable vendor/event list.
+  * The index **must be a positive integer** 1, 2, 3, ...
+* The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
+* If the specified vendor-event pair are already associated (assigned to each other), the operation will fail.
+
+#### Examples:
+* `view v/2` then `assign 1` will assign the 1st event to the current viewed vendor, which is the 2nd vendor.
+* `view e/1` then `assign 3` will assign the 3rd vendor to the current viewed event, which is the 1st event.
+
+### Unassigning Vendors & Events: `unassign`
+
+Unassigns vendors from events.
+
+#### Format: `unassign INDEX`
+
+* Unassigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
+  * The index refers to the index number shown in the assigned vendor/event list.
+  * The index **must be a positive integer** 1, 2, 3, ...
+* The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
+* If the specified vendor-event pair are not already associated (not assigned to each other), the operation will fail.
+
+#### Examples:
+* `view v/2` then `unassign 1` will unassign the 1st event from the current viewed vendor, which is the 2nd vendor.
+* `view e/1` then `unassign 3` will unassign the 3rd vendor from the current viewed event, which is the 1st event.
 
 ### Locating persons by name: `find`
 
