@@ -39,7 +39,8 @@ public class ViewPersonCommand extends ViewCommand {
         }
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, model.getFilteredPersonList().get(0).getName().toString()),
+                String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW,
+                        model.getFilteredPersonList().get(0).getName().toString()),
                 false, false, CommandTabChange.PERSON, CommandDetailChange.DETAILED);
     }
 
