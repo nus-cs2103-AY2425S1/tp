@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -204,5 +205,46 @@ public class ParserUtilTest {
     @Test
     public void parseDateTimeValues_invalidFormat_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDateTimeValues(DATETIME_INVALID_FORMAT));
+    }
+
+    @Test
+    public void parseGoodsQuantity_invalidFormat_failure() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsQuantity("#"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsQuantity("1.1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsQuantity("1 "));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsQuantity(" 1"));
+    }
+
+    @Test
+    public void parseGoodsQuantity_validFormatButNegative_failure() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsQuantity("-1"));
+    }
+
+    @Test
+    public void parseGoodsQuantity_validFormat_success() {
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1"));
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("0"));
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1234567890"));
+    }
+
+    @Test
+    public void parseGoodsPrice_invalidFormat_failure() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsPrice("#"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsPrice("$"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsPrice("$1.1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsPrice("$1"));
+    }
+
+    @Test
+    public void parseGoodsPrice_validFormatButNegative_failure() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsPrice("-1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsPrice("-1.1"));
+    }
+
+    @Test
+    public void parseGoodsPrice_validFormat_success() {
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1"));
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("0"));
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1234567890"));
     }
 }

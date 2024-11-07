@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String QUANTITY_MESSAGE_CONSTRAINT = "Quantity must be an integer.";
+    public static final String QUANTITY_MESSAGE_CONSTRAINT = "Quantity must be an non-negative integer.";
     public static final String PRICE_MESSAGE_CONSTRAINT = "Price must be a non-negative number.";
 
     /**
@@ -180,11 +180,16 @@ public class ParserUtil {
      * Parses a string quantity to an int.
      */
     public static int parseGoodsQuantity(String quantity) throws ParseException {
+        int v;
         try {
-            return Integer.parseInt(quantity);
+            v = Integer.parseInt(quantity);
         } catch (NumberFormatException e) {
             throw new ParseException(QUANTITY_MESSAGE_CONSTRAINT);
         }
+        if (v < 0) {
+            throw new ParseException(QUANTITY_MESSAGE_CONSTRAINT);
+        }
+        return v;
     }
 
     /**
@@ -195,10 +200,10 @@ public class ParserUtil {
         try {
             v = Double.parseDouble(price);
         } catch (NumberFormatException e) {
-            throw new ParseException(QUANTITY_MESSAGE_CONSTRAINT);
+            throw new ParseException(PRICE_MESSAGE_CONSTRAINT);
         }
         if (v < 0) {
-            throw new ParseException(QUANTITY_MESSAGE_CONSTRAINT);
+            throw new ParseException(PRICE_MESSAGE_CONSTRAINT);
         }
         return v;
     }
