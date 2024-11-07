@@ -22,12 +22,13 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f08-1a.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide for more details: " + USERGUIDE_URL;
     public static final ObservableList<String[]> COMMAND_SUMMARY = FXCollections.observableArrayList(
-            new String[]{"AddLesson", "addLesson TUTOR_INDEX TUTEE_INDEX \\s SUBJECT\ne.g., addLesson 1 2 \\s science"},
-            new String[]{"AddTutee", "addTutee \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
+            new String[]{"Add Lesson", "addLesson TUTOR_INDEX TUTEE_INDEX "
+                    + "\\s SUBJECT\ne.g., addLesson 1 2 \\s science"},
+            new String[]{"Add Tutor", "addTutor \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
                     + "[\\s SUBJECT]…\n e.g., addTutee \\n Evan Lee \\p 88889999 \\e evanlee@example.com \\a "
                     + "345, Ubi St, 123466 \\h 2 \\s english"},
-            new String[]{"AddTutor", "addTutee \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
-                    + "[\\s SUBJECT]…\n e.g., addTutor \\n James Ho \\p 22224444 \\e jamesho@example.com \\a "
+            new String[]{"Add Tutee", "addTutee \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
+                    + "[\\s SUBJECT]…\n e.g., addTutor \\n James Ho \\p 92224444 \\e jamesho@example.com \\a "
                     + "123, Clementi Rd, 123465 \\h 7 \\s math"},
             new String[]{"Clear", "clear"},
             new String[]{"Delete", "delete INDEX\n e.g., delete 3"},
