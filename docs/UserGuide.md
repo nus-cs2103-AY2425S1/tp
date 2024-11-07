@@ -25,6 +25,7 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 - [Features](#features)
   - [General Commands](#general-commands)
     - [Viewing help: `help`](#viewing-help--help)
+    - [Viewing list of commands: `commands`](#viewing-list-of-commands--commands)
     - [Viewing overall statistics: `stats`](#viewing-overall-statistics--stats)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Exiting the program: `exit`](#exiting-the-program--exit)
@@ -94,9 +95,10 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Extremely spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1.
+   * `addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Spacious t/Near MRT` : Adds a property to buy of type `Condo` to the Address Book for the contact at index 1.
 
-   * `addBuy 1 ht/c bp/1750000 pc/567510 un/10-65 t/spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1.
+   * `addSell 1 ht/c bp/1750000 pc/567510 un/10-65 t/Spacious t/Near MRT` : Adds a property to sell of type `Condo` to the Address Book for the contact at index 1.
+
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -120,7 +122,7 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times including zero times, but with a limit of 2 tags. Each tag can have a maximum of 9 characters. <br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -142,6 +144,14 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Viewing list of commands : `commands`
+
+Lists all the commands the address book supports.
+
+![list of_commands](images/commandsMessage.png)
+
+Format: `help`
+
 ### Viewing overall statistics : `stats`
 
 Displays a comprehensive summary of the address book, including the total number of people, properties, and other key metrics.
@@ -153,8 +163,6 @@ Format: `clear`
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
-
-![clear message](images/clearMessage.png)
 
 Format: `clear`
 
@@ -170,13 +178,11 @@ Format: `exit`
 
 Adds a person to the address book.
 
-![addName message](images/addName.png)
-
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
 </box>
 
 Examples:
@@ -193,12 +199,13 @@ Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/U
 
 <box type="tip" seamless>
 
-**Tip:** A property can have any number of tags (including 0)
+**Tip:** A property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
 </box>
 
 Examples:
 * `addBuy 1 ht/c bp/1650000 pc/189651 un/5-10`
-* `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/spacious/Near MRT`
+* `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Spacious t/Near MRT`
+
 
 ### Adding a property to sell: `addSell`
 
@@ -210,20 +217,18 @@ Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un
 
 <box type="tip" seamless>
 
-**Tip:** A property can have any number of tags (including 0)
+**Tip:** A Property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
 </box>
 
 Examples:
 * `addSell 1 ht/c sp/1650000 pc/189651 un/5-10`
-* `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/spacious t/Near MRT`
+* `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Spacious t/Near MRT`
 
 ## Editing Entries Command
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
-
-![edit message](images/editMessage.png)
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -236,15 +241,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Alexa Yeah t/` Edits the name of the 2nd person to be `Alexa Yeah` and clears all existing tags.
 
 ## Deleting Entries Commands
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
-
-![delete contact](images/deleteContact.png)
 
 Format: `delete INDEX`
 
@@ -254,13 +257,11 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `findn Alex` followed by `delete 1` deletes the 1st person in the results of the `findn` command.
 
 ### Deleting a property to be sold : `delSell`
 
 Deletes the specified property to be sold under specified person from the address book.
-
-![delete sell](images/delSell.png)
 
 Format: `delSell INDEX_PERSON INDEX_PROPERTY`
 
@@ -274,8 +275,6 @@ Examples:
 ### Deleting a property to be bought : `delBuy`
 
 Deletes the specified property to be bought under specified person from the address book.
-
-![delete buy](images/delBuy.png)
 
 Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 
@@ -292,27 +291,23 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-![find name](images/findCommand.png)
-
 Format: `findn KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `alex` will match `Alex`
+* The order of the keywords does not matter. e.g. `Alex Ro` will match `Ro Alex`
 * Only the name is searched.
-* No need for full words to be matched; For example, `Han` will match `Hans`
+* No need for full words to be matched; For example, `AL` will match `Alex`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Ro Alex` will return `Alex Yeah`, `Roy Balakrishnan`
 
 Examples:
-* `findn John` returns `john` and `John Doe`
+* `findn John` returns `John Doe`
 * `findn alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'findn alex david'](images/findAlexDavidResult.png)
 
 ### Finding persons by phone number: `findp`
 
 Finds persons whose phone number contain any of the given keywords.
-
-![find contact](images/findCommand.png)
 
 Format: `findp KEYWORD [MORE_KEYWORDS]`
 
@@ -326,13 +321,10 @@ Format: `findp KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findp 87438807` returns `Alex Yeah`
 * `findp 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu`<br>
-  ![result for 'findp 87438807 99272758'](images/find87438807_99272758Result.png)
 
 ### Finding persons by tags assigned to them: `findtc`
 
 Finds persons whose phone number contain any of the given keywords.
-
-![find tag](images/findCommand.png)
 
 Format: `findtc KEYWORD [MORE_KEYWORDS]`
 
@@ -344,14 +336,13 @@ Format: `findtc KEYWORD [MORE_KEYWORDS]`
   e.g. `friends owes` will return `Alex Yeah`, `Bo Yang`
 
 Examples:
-* `findtc friend` returns `Alex Yeah`
-* `findp friend owes` returns `Alex Yeoh`, `Bernice Yu`<br>
+* `findtc friend` returns `Alex Yeah` and `Bernice Yu`
+* `findtc friend owes` returns `Alex Yeoh`, `Bernice Yu`<br>
+  ![result for 'findtc friend owes'](images/findTag.png)
 
 ## Finding persons based on properties to buy: `findBuy`
 
 Finds properties in the buy list whose housing type, unit number, address, pin code and buying price  contain any of the given keywords.
-
-![find property_to_buy](images/findProperty.png)
 
 Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 
@@ -362,18 +353,18 @@ Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 * No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
 * Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo 02-05` will return `Alex Yeah`, `Bernice Yu`
+  e.g. ` condo 02-05` will return `Alex Yeah`.
 
 Examples:
 * `findBuy condo` returns `Alex Yeoh`
-* `findp condo 02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
+* `findBuy condo 02-05` returns `Alex Yeoh`<br>
+  ![result for findBuy condo 02-05'](images/findProperty.png)
 
 
 ## Finding persons based on properties to sell: `findSell`
 
 Finds properties in the sell list whose housing type, unit number, address, pin code and buying price  contain any of the given keywords.
 
-![find property_to_sell](images/findProperty.png)
 
 Format: `findSell KEYWORD [MORE_KEYWORDS]`
 
@@ -384,11 +375,12 @@ Format: `findSell KEYWORD [MORE_KEYWORDS]`
 * No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
 * Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo 02-05` will return `Alex Yeah`, `Bernice Yu`
+  e.g. ` condo 02-05` will return `Alex Yeah`.
 
 Examples:
 * `findSell condo` returns `Alex Yeoh`
-* `findSell condo 02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
+* `findSell condo 02-05` returns `Alex Yeoh`<br>
+  ![result for findBuy condo 02-05'](images/findProperty.png)
 
 ## Listing Entries Commands
 
@@ -402,8 +394,6 @@ Format: `list`
 
 Sorts the list of contacts by a specified field and order
 
-![sort_command](images/SortCommand.png)
-
 Format: `sort f/FIELD o/ORDER`
 
 * The parameters FIELD and ORDER are case-sensitive.
@@ -413,12 +403,11 @@ Format: `sort f/FIELD o/ORDER`
 Examples:
 * `sort f/Name o/L` returns the contact list sorted in ascending order with respect to the name associated with a contact.
 * `sort f/NumProp o/H` returns the contact list sorted in descending order with respect to the property list associated with the contact.
+  ![result for sort](images/sortCommand.png)
 
 ### Sort all properties associated with a person: `sorti`
 
 Sorts the list of properties associated to a contact by a specified field and order
-
-![sorti_command](images/sortiCommand.png)
 
 Format: `sorti INDEX f/FIELD o/ORDER`
 
@@ -435,8 +424,6 @@ Examples:
 ### To mark property as bought: `bought`
 Records the property that has been purchased using the index number of the person and the index number of the property-to-buy in the displayed persons list. This command also removes the purchased property from the property-to-buy list.
 
-![bought_command](images/boughtCommand.png)
-
 Format `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL_PRICE`
 
 * The parameters PERSON_INDEX and PROPERTY_TO_BUY_INDEX must be positive integers.
@@ -447,8 +434,6 @@ Examples:
 
 ### To mark property already sold: `sold`
 Records the property that has been sold using the index number of the person and the index number of the property-to-sell in the displayed persons list. This command also removes the purchased property from the property-to-sell list.
-
-![sold_command](images/soldCommand.png)
 
 Format `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL_PRICE`
 
@@ -583,8 +568,8 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Exit**  | `exit`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Property** | `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
-**Add Property** | `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
+**Add Property** | `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Spacious/Near MRT`
+**Add Property** | `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Spacious/Near MRT`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Property** | `delSell INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delSell 3 2`
