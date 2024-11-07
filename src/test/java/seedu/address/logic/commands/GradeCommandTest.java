@@ -211,6 +211,12 @@ public class GradeCommandTest {
         public void redoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateAddressBook(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void undoAddressBook() {
             throw new AssertionError("This method should not be called.");

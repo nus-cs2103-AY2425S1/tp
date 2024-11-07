@@ -169,6 +169,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateAddressBook(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void saveAddressBook() {
             throw new AssertionError("This method should not be called.");
         }

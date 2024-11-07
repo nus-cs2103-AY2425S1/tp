@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 
 import java.nio.file.Path;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 /**
  * Archives the address book.
@@ -33,7 +32,6 @@ public class ArchiveCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
         model.clearAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, archivePath));
     }
