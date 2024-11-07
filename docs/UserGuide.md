@@ -204,6 +204,7 @@ Format:
 
 * You can sort by any combination of name, phone, email, job code, and/or tag.
 * Sorting is case-insensitive.
+* Sorting by tag will be in the order: N, BP, BC, TP, TC, A, R
 * Layered sorting is supported. If multiple fields are specified, the list will be sorted by the first field, then by the second within each group of the first, and so on.
 
 Examples:
