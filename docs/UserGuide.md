@@ -21,7 +21,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
   - [Filtering persons by contact type](#filtering-persons-by-contact-type--filter)
   - [Deleting a person](#deleting-a-person--delete)
   - [Switching display theme](#switching-display-theme--switch)
-  - [Importing data](#)
+  - [Importing data](#importing-data--import)
   - [Exiting the program](#exiting-the-program--exit)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
