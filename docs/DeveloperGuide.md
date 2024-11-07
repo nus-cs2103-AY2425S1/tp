@@ -290,7 +290,7 @@ How an OweCommand operation goes through the `Model` component is shown below:
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, and organize schedules using CLI.
+**Value proposition**: Our CLI-based address book empowers Singapore-based undergraduate private tutors to efficiently manage payments and organize schedules. It streamlines tutoring operations and ensures you stay organized. It is optimized for users who prefer CLI.
 
 <div style="page-break-after: always;"></div>
 
