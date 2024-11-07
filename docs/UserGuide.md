@@ -48,7 +48,7 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 </div>
 
 <div class="alert alert-primary">
-  :information_source: Don't have Java 17 installed?:<br>
+  :information_source: Don't have Java 17 installed?<br>
   You can download Java 17 <a href="https://www.oracle.com/sg/java/technologies/downloads/#java17-linux"><b>here</b>.</a><br>
   Scroll down and select the correct version for your operating system.
 </div>
@@ -61,7 +61,7 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
     - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
     - On Mac/Linux: Open the Terminal from your Applications.
 1. In the terminal, type `cd` followed by the path to the folder with the .jar file (e.g. `C:/Users/Your_Name/Your_Folder`), then run the following command:
-    `java -jar NAME_OF_JAR_FILE`.
+    `java -jar NAME_OF_JAR_FILE`.<br/>
     For example, `java -jar volunsync-v1.3.jar`.
 
 1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
@@ -139,7 +139,7 @@ Format: `help`
 
 ### Listing all volunteers and events : `list`
 
-Shows a list of all volunteers and events in the database.<br/><br/>
+Shows a list of all volunteers and events in the database. This will reset the display to show all volunteers or events without any filters, so you can see the complete list again.<br/><br/>
 You should use this command to display all volunteers and events after searching for volunteers or events using any one of the following commands: <br/>
    * [`/v find`](#finding-volunteers-by-name--v-find)
    * [`/e find`](#finding-events-by-name--e-find)
@@ -181,8 +181,14 @@ Adds a volunteer to the database.
 
 Format: `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE`
 
+Input Requirements:
+- Name: Alphanumeric and spaces only, 1-100 characters.
+- Phone Number: Digits only, 3-15 characters.
+- Email: Must follow local-part@domain format.
+- Date: Format YYYY-MM-DD (e.g. 2024-01-01)
+
 Examples:
-* `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` creates a volunteer record for `John Doe` with the specified details
+* `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` <br/>creates a volunteer record for `John Doe` with the specified details
 
 Running the command successfully, you should see:
 
@@ -221,7 +227,6 @@ Deletes the volunteer at the specified __VOLUNTEER_INDEX__ from the database.
 
 Format: `/v del VOLUNTEER_INDEX`
 
-* Deletes the volunteer at the specified `VOLUNTEER_INDEX`.
 * The index refers to the number that appears before each volunteer’s name in the displayed volunteer list on the panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -245,7 +250,7 @@ Adds a volunteer with the specified `VOLUNTEER_INDEX` to the list of participant
 
 Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the event and volunteer's name in their respective displayed lists.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -263,7 +268,7 @@ Removes a volunteer with the specified `VOLUNTEER_INDEX` to the list of particip
 
 Format: `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the event and volunteer's name in their respective displayed lists.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -277,16 +282,16 @@ Examples:
 
 ### Listing all events a volunteer is participating in: `/v view`
 
-Displays all events the volunteer at the specified `INDEX` under the `Volunteers` display is participating in.<br/>
+Displays all events the volunteer at the specified **INDEX** under the **Volunteers** display is participating in.<br/>
 After using the command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all events.
 
-Format: `/e view EVENT_INDEX`
+Format: `/v view VOLUNTEER_INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the volunteer's name in the Volunteer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `/e view 1` displayes the volunteers participating in the first event in the event list.
+* `/v view 1` displays the events the first volunteer is participating in.
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -300,9 +305,17 @@ Adds an event to the database.
 
 Format: `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`
 
+Input Requirements:
+- Event Name: Alphanumeric characters and spaces only, 1-50 characters.
+- Location: Alphanumeric characters and spaces only, 1-100 characters.
+- Date: Format YYYY-MM-DD (e.g. 2024-01-01),
+- Start Time: 24-hour format HH:mm (e.g., 12:00). 
+- End Time: Format HH:mm (e.g., 15:00). Start time must be before end time.
+- Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
+
 Examples:
-* `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`
-* `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00`
+* `/e new n/Blood Donation Drive l/Red Cross Center d/2024-02-14 s/08:30 e/16:00 des/Organizing a blood donation drive` <br/>creates an event record for Blood Donation Drive with the specified details
+* `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00` <br/>creates an event record Buffet Lunch with the specified details
 
 ![New Event Demo](images/commandDemo/NewEventDemo.png)
 
@@ -365,11 +378,11 @@ After using this command, you should use the [`list`](#listing-all-volunteers-an
 
 Format: `/e view EVENT_INDEX`
 
-* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index refers to the number on the left of the event's name in the Event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `/e view 1` displayes the volunteers participating in the first event in the event list.
+* `/e view 1` displays the volunteers participating in the first event in the event list.
 
 ![View Event Demo](images/commandDemo/ViewDemo.png)
 
