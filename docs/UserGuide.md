@@ -129,6 +129,21 @@ Edits an existing vendor or event in EventTory.
 *  `edit v/1 p/58623042 ` : Edits the phone number of the 1st vendor to be `58623042`.
 *  `edit e/2 n/Baby Shower t/` : Edits the name of the 2nd event to be `Baby Shower`, and clears all existing tags.
 
+### Viewing Vendors & Events: `view`
+
+Views the details of a vendor or event.
+
+#### Format: `view v/INDEX` or `view e/INDEX`
+
+* Views the details of the vendor/event at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed vendor/event list.
+  * The index **must be a positive integer** 1, 2, 3, ...
+* The details page includes assigned events/vendors as well as a list of assignable events/vendors.
+
+#### Examples:
+* `view v/2` will show the details of the 2nd vendor.
+* `view e/1` will show the details of the 1st event.
+
 ### Assigning Vendors & Events: `assign`
 
 Assigns vendors to events.
