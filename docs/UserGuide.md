@@ -35,9 +35,9 @@ ClientGrid is an address book targeted for English-speaking real estate agents w
 
    * `deletebuyer p/81234567` : Deletes the buyer with contact number `81234567`.
    
-   * `addproperty c/124894 u/15-20 t/HDB a/600 b/500` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $600(thousand) and bid price of $500(thousand).
+   * `addproperty c/124894 u/15-20 t/HDB a/600 b/500` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $600 (thousand) and bid price of $500 (thousand).
    
-   * `filterproperty t/HDB gte/400 lte/700` : Filters and lists properties which is type HDB and matching price (average of ask and bid price) is greater than or equal to $400(thousand) and less than or equal to $700(thousand).
+   * `filterproperty t/HDB gte/400 lte/700` : Filters and lists properties which is type HDB and matching price (average of ask and bid prices) is greater than or equal to $400 (thousand) and less than or equal to $700 (thousand).
    
    * `deleteproperty c/124894 u/15-20` : Deletes the property with postal code 124894 and unit number #15-20.
 
@@ -109,17 +109,18 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
 * The `BUYER_NAME` should ignore case sensitivity/extra/leading/trailing spaces and not be empty. Each word is separated by a single space or apostrophes and has a character limit of 747 ([longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name) in the world is 747 characters). Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. All names will be converted to lower case and checked against the client book.
 * The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
-* The `BUYER_EMAIL` should be of the format `local-part@domain.top-level-domain` and adhere to the following constraints: 
-  * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
-    * The local-part may not start or end with any special characters and must not contain consecutive special characters.
-  * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-  * The domain name must:
-    * contain at least one period separating domain labels
-    * end with a top-level domain (TLD) that is at least 2 alphabetic characters long
-    * have each domain label start and end with alphanumeric characters
+* The `BUYER_EMAIL` should be of the format `local-part@domain-name.top-level-domain` and adhere to the following constraints: 
+  * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
+    * The `local-part` may not start or end with any special characters and must not contain consecutive special characters.
+  * This is followed by an `@` and then a `domain-name`. The `domain-name` is made up of domain labels separated by periods.
+  * The `domain-name` must:
+    * have each domain label start and end with alphanumeric characters.
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-
-**Special Scenario:** It's possible to have a buyer and seller with the same phone number and email but different names. This flexibility provided by ClientGrid allows users to record the same client under different names in buying and selling roles, which may be useful for clients operating under separate business names, personal vs. professional roles, or other distinct identities.
+  * The `domain-name` must be followed with a period and end with a `top-level-domain` (TLD) that is at least 2 alphabetic characters long.
+  * The `domain-name` with multiple domain labels should be a separated by a single period.
+    * e.g. `domain-name` with a single label: `example@gmail.com`.
+    * e.g. `domain-name` with multiple labels: `example@u.nus.edu`.
+  
 <box type="info" seamless>
 
 **Note:**
@@ -128,6 +129,12 @@ No duplicate buyers are allowed. Duplicate buyers are checked based on whether t
 No duplicate emails are allowed. Duplicate emails are detected if
 1. There is a buyer with the same email already in the client book.
 2. There is a seller with the same email but a different phone number in the client book. Having the same email address as an existing seller with a different phone number is not allowed as emails should be unique to a client.
+</box>
+
+<box type="warning" seamless>
+
+**Special Scenario:** It's possible to have a buyer and seller with the same phone number and email but different names. This flexibility provided by ClientGrid allows users to record the same client under different names in buying and selling roles, which may be useful for clients operating under separate business identities (e.g. personal vs. professional roles).
+
 </box>
 
 Examples:
@@ -142,17 +149,22 @@ Add a specified seller into the client book of ClientGrid.
 Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 
 * Adds a seller with the specified `SELLER_NAME`, `SELLER_PHONE_NUMBER`, and `SELLER_EMAIL`.
-* The restrictions for the `SELLER_NAME`, `SELLER_PHONE_NUMBER` and `SELLER_EMAIL` are identical to the restrictions for the `BUYER_NAME`, `BUYER_PHONE_NUMBER` and `BUYER_EMAIL` specified in the `addbuyer` feature.
+* The restrictions for the `SELLER_NAME`, `SELLER_PHONE_NUMBER` and `SELLER_EMAIL` are identical to the restrictions for the `BUYER_NAME`, `BUYER_PHONE_NUMBER` and `BUYER_EMAIL` specified in the [`addbuyer` command](#adding-a-buyer-addbuyer).
 
 <box type="info" seamless>
 
 **Note:** For seller-specific restrictions, please refer to the `addbuyer` command. The same rules apply, including:
 - **Duplicate Sellers**: No duplicate sellers are allowed. A duplicate seller is defined as one with the same phone number as an existing seller.
-- **Duplicate Emails**: No duplicate emails are allowed, following the same logic as the `addbuyer` command:
+- **Duplicate Emails**: No duplicate emails are allowed, following the same logic as the [`addbuyer` command](#adding-a-buyer-addbuyer):
     1. A seller cannot share the same email as another seller.
     2. A seller cannot have the same email as a buyer with a different phone number. Email uniqueness is enforced per client.
 
+</box>
+
+<box type="warning" seamless>
+
 The **Special Scenario** also applies here: you can have a buyer and seller with the same phone number and email but different names, allowing flexibility for clients who operate under different names in buying and selling roles.
+
 </box>
 
 Examples:
@@ -167,7 +179,7 @@ Filters the clients that starts with the prefix provided.
 Format: `filterclient n/NAME`
 
 * Filters the client with the specified prefix `NAME`.
-* The restrictions for the `NAME` is identical to the restrictions for the `BUYER_NAME` specified in the `addbuyer` feature.
+* The restrictions for the `NAME` is identical to the restrictions for the `BUYER_NAME` specified in the [`addbuyer` command](#adding-a-buyer-addbuyer).
 
 Examples:
 * `filterclient n/A` filters the clients that starts with the prefix `A`.
@@ -178,10 +190,10 @@ Examples:
 
 Deletes the specified buyer from the client book of ClientGrid.
 
-Format: `deletebuyer p/PHONE_NUMBER`
+Format: `deletebuyer p/BUYER_PHONE_NUMBER`
 
-* Deletes the buyer with the specified `PHONE_NUMBER`.
-* The restrictions for the `PHONE_NUMBER` is identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the `addbuyer` feature.
+* Deletes the buyer with the specified `BUYER_PHONE_NUMBER`.
+* The restrictions for the `BUYER_PHONE_NUMBER` is identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the [`addbuyer` command](#adding-a-buyer-addbuyer).
 
 Examples:
 * `deletebuyer p/83456789` deletes the buyer with phone number `83456789` from the client book.
@@ -191,10 +203,10 @@ Examples:
 
 Deletes the specified seller from the client book of ClientGrid.
 
-Format: `deleteseller p/PHONE_NUMBER`
+Format: `deleteseller p/SELLER_PHONE_NUMBER`
 
-* Deletes the seller with the specified `PHONE_NUMBER`.
-* The restrictions for the `PHONE_NUMBER` is identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the `addbuyer` feature.
+* Deletes the seller with the specified `SELLER_PHONE_NUMBER`.
+* The restrictions for the `SELLER_PHONE_NUMBER` is identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the [`addbuyer` command](#adding-a-buyer-addbuyer).
 
 Examples:
 * `deleteseller p/83456789` deletes the seller with phone number `83456789` from the client book.
@@ -203,14 +215,14 @@ Examples:
 
 ### Adding a property : `addproperty`
 
-Add a specified property into the property book of ClientGrid.
+Adds a specified property into the property book of ClientGrid.
 
 Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 
-* Adds a property of `TYPE` with the specified `POSTAL_CODE` and `UNIT_NUMBER` with seller's `ASK` price (in thousand) and buyers `BID` price (in thousand).
+* Adds a property of `TYPE` with the specified `POSTAL_CODE` and `UNIT_NUMBER` with seller's `ASK` price (in thousands) and buyer's `BID` price (in thousands).
 * The `POSTAL_CODE` must be a non-negative integer and contain exactly 6 numeric characters.
-* The `UNIT_NUMBER` must contain numbers delimited by a dash, and numbers on either side of the dash must be at least 2 characters long with no excess padding. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]";
-* The `TYPE` must be one of the following values (case-insensitive): HDB, CONDO, or LANDED.
+* The `UNIT_NUMBER` must contain numbers delimited by a dash, and numbers on either side of the dash must be at least 2 characters long with no excess padding. The range of numbers on the **left hand side** of the dash is [00-148] and the **right hand side** is [00-111110].
+* The `TYPE` must be one of the following values (case-insensitive): `HDB`, `CONDO`, or `LANDED`.
 * The `ASK` must be a non-negative integer smaller than 1,000,000 (thousand) with only numeric characters.
 * The `BID` must be a non-negative integer smaller than 1,000,000 (thousand) with only numeric characters.
 
@@ -219,18 +231,18 @@ Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 **Note:**
 No duplicate properties are allowed. Duplicate properties are checked based on:
 
-1. if either of two properties are of LANDED type, then the comparison is done based on postal code.
-2. if the two properties are CONDO and HDB type, then the comparison is done based on postal code.
-3. if the two properties are both CONDO or HDB type, then the comparison is done based on postal code and unit.
+1. if at least one of the two properties are `LANDED`, then the comparison is done based on postal code.
+2. if one property is a `CONDO` and one property is a `HDB`, then the comparison is done based on postal code.
+3. if the two properties are both `CONDO` or are both `HDB`, then the comparison is done based on postal code and unit.
 </box>
 <box type="warning" seamless>
 
 **Unit Defaults:**
-The Unit parameter for `LANDED` properties will default to 00-00 regardless of the unit value placed. This is because, a landed property is not segmented into multiple apartments and therefore, deemed to be a unit in itself.
+The Unit parameter for `LANDED` properties will default to `00-00` regardless of the unit value placed. This is because, a landed property is not segmented into multiple apartments and therefore, deemed to be a unit in itself.
 </box>
 
 Examples:
-* `addproperty c/124894 u/15-20 t/HDB a/600 b/500` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $600(thousand) and bid price of $500(thousand).
+* `addproperty c/124894 u/15-20 t/HDB a/600 b/500` : Adds a property with postal code `124894` and unit number `#15-20` whose type is a `HDB` with an ask price of `$600 (thousand)` and bid price of `$500 (thousand)`.
 
   ![result for 'addproperty c/124894 u/15-20 t/HDB a/600 b/500'](images/addproperty.png)
 
@@ -241,22 +253,22 @@ Filters the properties based on any combination of type, lower bound for matchin
 Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 
 * Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
-* The `TYPE` is case-insensitive HDB, CONDO or LANDED.
-* The `MATCHING_PRICE` is a non-negative integer (i.e. No non-numeric symbols such as decimal points, currency symbols, etc.).
+* The `TYPE` is case-insensitive: `HDB`, `CONDO` or `LANDED`.
+* The `MATCHING_PRICE` is a non-negative integer (i.e. no non-numeric symbols such as decimal points, currency symbols, etc.).
 
 <box type="definition" seamless>
 
-**Matching Price:** The true price of the property given by the average of the property's lowest `Ask` price and highest `Bid` price.
+**Matching Price:** The true price of the property given by the average of the property's lowest `ASK` price and highest `BID` price.
 </box>
 <box type="warning" seamless>
 
 **Important**
 1. At least one optional prefix needs to be present for any filtering to be possible.
-2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than or equal to $500 and less than or equal to $60000.
+2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than or equal to `$500 (thousand)` and less than or equal to `$60,000 (thousand)`.
 </box>
 
 Examples:
-* `filterproperty t/HDB gte/400 lte/700` : Filters and lists properties which is type HDB and matching price is greater than or equal to $400(thousand) and less than or equal to $700(thousand).
+* `filterproperty t/HDB gte/400 lte/700` : Filters and lists properties which is type `HDB` and matching price is greater than or equal to `$400 (thousand)` and less than or equal to `$700 (thousand)`.
 
   ![result for 'filterproperty t/HDB gte/400 lte/700'](images/filterproperty.png)
 
@@ -267,7 +279,7 @@ Deletes a specified property from the property book of ClientGrid.
 Format: `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
 
 * Deletes a property with the specified `POSTAL_CODE` and `UNIT_NUMBER`.
-* The restrictions for the `POSTAL_CODE` and `UNIT_NUMBER` are identical to the restrictions for the `POSTAL_CODE` and `UNIT_NUMBER` specified in the `addproperty` feature.
+* The restrictions for the `POSTAL_CODE` and `UNIT_NUMBER` are identical to the restrictions for the `POSTAL_CODE` and `UNIT_NUMBER` specified in the [`addproperty` command](#adding-a-property-addproperty).
 
 Examples:
 * `deleteproperty c/123456 u/01-01` deletes a property with postal code `123456` and unit number `01-01`.
@@ -280,11 +292,11 @@ Adds a specified meeting to the meeting book of ClientGrid.
 
 Format: `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTAL_CODE`
 
-* Adds a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
-* The `MEETING_TITLE` should only contain alphanumeric characters and spaces. It should not be blank and it should not exceed 100 characters (excluding starting and ending whitespaces).
-* The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
-* The restrictions for the `BUYER_PHONE` and `SELLER_PHONE` are identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the `addbuyer` feature.
-* The restrictions for the `POSTAL_CODE` and `TYPE` are identical to the restrictions for the `POSTAL_CODE` and `TYPE` specified in the `addproperty` feature.
+* Adds a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`, including the provided `BUYER_PHONE`, `SELLER_PHONE`, as well as the `POSTAL_CODE` and `TYPE` of the property involved.
+* The `MEETING_TITLE` should only contain alphanumeric characters and spaces. It should not be blank (or contain only whitespaces) and it should not exceed 100 characters (excluding starting and ending whitespaces).
+* The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date that is today or in the future.
+* The restrictions for the `BUYER_PHONE` and `SELLER_PHONE` are identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the [`addbuyer` command](#adding-a-buyer-addbuyer).
+* The restrictions for the `POSTAL_CODE` and `TYPE` are identical to the restrictions for the `POSTAL_CODE` and `TYPE` specified in the [`addproperty` command](#adding-a-property-addproperty).
 
 <box type="info" seamless>
 
@@ -306,7 +318,7 @@ Deletes a specified meeting from the meeting book of ClientGrid.
 Format: `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
 
 * Deletes a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
-* The restrictions for the `MEETING_TITLE` and `MEETING_DATE` are identical to the restrictions for the `MEETING_TITLE` and `MEETING_DATE` specified in the `addmeeting` feature.
+* The restrictions for the `MEETING_TITLE` and `MEETING_DATE` are identical to the restrictions for the `MEETING_TITLE` and `MEETING_DATE` specified in the [`addmeeting` command](#adding-a-meeting-addmeeting).
 
 
 Examples:
@@ -343,8 +355,9 @@ Advanced users are welcome to directly update data by editing these individual f
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, ClientGrid will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data files make its format invalid, ClientGrid will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+
+Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, user are cautioned to only edit the data files if you are confident that you can update it correctly.
 </box>
 
 
@@ -352,8 +365,6 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous ClientGrid home folder. ([See Data File Structure](#editing-the-data-file))<br>
 **Q**: Can buyers and sellers have the same phone number?<br>
 **A**: Yes. A single client can be both a buyer and a seller of properties and can use the same phone number in both roles. However, two different buyers or two different sellers cannot share the same phone number.
 
@@ -368,20 +379,20 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 
 ## Command Summary
 
-| Action                | Format, Examples                                                                                |
-|-----------------------|-------------------------------------------------------------------------------------------------|
-| **Help**              | `help`                                                                                          |
-| **List**              | `list k/KEY`                                                                                    |
-| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                                      |
-| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                                  |
-| **Filter Clients**    | `filterclient n/NAME`                                                                           |
-| **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                                    |
-| **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                                   |
-| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                                    |
-| **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                                   |
-| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                    |
+| Action                | Format, Examples                                                                                 |
+|-----------------------|--------------------------------------------------------------------------------------------------|
+| **Help**              | `help`                                                                                           |
+| **List**              | `list k/KEY`                                                                                     |
+| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                                       |
+| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                                   |
+| **Filter Clients**    | `filterclient n/NAME`                                                                            |
+| **Delete Buyer**      | `deletebuyer p/BUYER_PHONE_NUMBER`                                                               |
+| **Delete Seller**     | `deleteseller p/SELLER_PHONE_NUMBER`                                                             |
+| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                                     |
+| **Filter Properties** | `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`                                    |
+| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                     |
 | **Add Meeting**       | `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTAL_CODE` |
-| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                 |
-| **Exit**              | `exit`                                                                                          |
+| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                  |
+| **Exit**              | `exit`                                                                                           |
 
 
