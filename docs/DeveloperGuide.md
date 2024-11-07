@@ -130,14 +130,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Contact` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
-
-<img src="diagrams/BetterModelClassDiagram.svg" width="450" alt="BetterModelClassDiagram"/>
-
-</box>
-
 
 ### Storage component
 
@@ -162,7 +154,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Pagination
 
-The pagination makes use of `javafx.scene.control.Pagination` component which is inherited by `PaginationPanel`. 
+The pagination makes use of `javafx.scene.control.Pagination` component which is inherited by `PaginationPanel`.
 The `PaginationPanel.java` stores all logic and attributes related to Pagination.
 
 The `PaginationPanel` contains the following member/class variables:
