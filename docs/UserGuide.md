@@ -507,7 +507,7 @@ Adds a task to a group or multiple groups.
 ##### Usage Scenario
 
 ###### Scenario #1: Adding a task with the name of `Complete task 4` and deadline of `2024-11-15 1700` to groups `CS2103-F12-1` and `CS2103-F11-1`
-This is the default scenario where the task does not already exist and both groups exist. 
+This is the default scenario where the task does not already exist and both groups exist.
 
 1. You can begin this command on any panel.
 2. Type `add_t_g tn/Complete task 4 td/2024-11-15 1700 gn/CS2103-F12-1 gn/CS2103-F11-1`.
