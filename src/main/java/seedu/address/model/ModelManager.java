@@ -10,7 +10,9 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.SortSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonComparator;
@@ -67,6 +69,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public SortSettings getSortSettings() {
+        return userPrefs.getSortSettings();
+    }
+
+    @Override
+    public void setSortSettings(SortSettings sortSettings) {
+        requireNonNull(sortSettings);
+        userPrefs.setSortSettings(sortSettings);
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
@@ -101,15 +114,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void addPerson(Person person) throws CommandException {
         addressBook.addPerson(person);
+        resortPersonList(getSortSettings());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson) throws CommandException {
         requireAllNonNull(target, editedPerson);
-
+        resortPersonList(getSortSettings());
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -149,6 +163,13 @@ public class ModelManager implements Model {
 
     @Override
     public void sortPersonList(String parameter, boolean isAscending) throws CommandException {
+        addressBook.sort(new PersonComparator().getComparator(parameter, isAscending));
+        setSortSettings(new SortSettings(parameter, isAscending));
+    }
+
+    private void resortPersonList(SortSettings sortSettings) throws CommandException {
+        String parameter = sortSettings.getSortParameter();
+        boolean isAscending = sortSettings.isAscendingOrder();
         addressBook.sort(new PersonComparator().getComparator(parameter, isAscending));
     }
 
