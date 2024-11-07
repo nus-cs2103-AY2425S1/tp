@@ -98,20 +98,21 @@ public class MainApp extends Application {
             Optional<ReadOnlyAddressBook> addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 // If the addressbook is not present start from sample data
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
-                logger.info("Creating a new data file " + storage.getTransactionBookFilePath()
-                        + " populated with a sample TransactionBook.");
+                logger.info("Creating new data files " + storage.getAddressBookFilePath() + " and "
+                        + storage.getTransactionBookFilePath()
+                        + " populated with a sample data.");
                 addressBookModel = new AddressBookModelManager(SampleDataUtil.getSampleAddressBook());
                 // Since addressbook is nonexistent, whatever state transactionbook is in should become irrelevant.
                 // We shall therefore start from sample data with transactionbook as well.
                 transactionBookModel = new TransactionBookModelManager(SampleDataUtil.getSampleTransactionBook());
                 return;
             }
-
             // Read the address book
             addressBookModel = new AddressBookModelManager(addressBookOptional.get());
             Optional<ReadOnlyTransactionBook> txnBookOptional = storage.readTransactionBook(addressBookModel);
+            if (!txnBookOptional.isPresent()) {
+                logger.info("Transaction book was not found and will be initialised as empty.");
+            }
             // Read the transaction book
             ReadOnlyTransactionBook transactionBook = txnBookOptional.orElse(new TransactionBook());
             transactionBookModel = new TransactionBookModelManager(transactionBook);
