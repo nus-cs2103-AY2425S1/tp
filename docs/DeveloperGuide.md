@@ -108,14 +108,16 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("dg gn/CS2103-F12-2")` API
+The sequence diagram below illustrates the interactions within the `Logic` component, taking
+`execute("dg gn/CS2103-F12-2")` API
 call as an example.
 
 <puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `dg gn/CS2103-F12-2` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteGroupCommandParser`, `DeleteGroupCommand` and `CommandResult` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifeline for `DeleteGroupCommandParser`, `DeleteGroupCommand` and `CommandResult` should end at the
+destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
@@ -137,10 +139,13 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddStudentCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddStudentCommand`) which the `AddressBookParser` returns back as a
+  placeholder for the specific command name e.g., `AddStudentCommandParser`) which uses the other classes shown above to
+  parse
+  the user command and create a `XYZCommand` object (e.g., `AddStudentCommand`) which the `AddressBookParser` returns
+  back as a
   `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser`
+* All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the
+  `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -154,8 +159,10 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
-* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list
+  which
+  is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound
+  to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` objects.
@@ -165,7 +172,8 @@ The `Model` component,
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which
-`Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student`
+`Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each
+`Student`
 needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
@@ -209,7 +217,8 @@ and more detailed implementation on model changes have been omitted.
 
 ### Delete Student Feature
 
-The `Delete Student` feature allows users to delete an existing student in the address book given a student's student number `sno`.
+The `Delete Student` feature allows users to delete an existing student in the address book given a student's student
+number `sno`.
 
 The following shows the activity diagram when the user executes the `del_s` command:
 <puml src="diagrams/DeleteStudentActivityDiagram.puml" alt="DeleteGroupCommandAD" />
@@ -223,19 +232,23 @@ The following shows the activity diagram when the user executes the `del_s` comm
 #### Implementation details
 
 1. User has the application launched with at least 1 student added.
-2. User executes `ls` to view all students. For this example, the user wishes to delete a student with student number `A0234567H`.
-3. The user executes `ds sno/A0234567H` to delete the student with a student number `A0234567H`. The command is parsed in
+2. User executes `ls` to view all students. For this example, the user wishes to delete a student with student number
+   `A0234567H`.
+3. The user executes `ds sno/A0234567H` to delete the student with a student number `A0234567H`. The command is parsed
+   in
    the
    `AddressBookParser`.
-4. `DeleteStudentCommandParser` is created and gets the student number of the student to be deleted. The student number is used to
+4. `DeleteStudentCommandParser` is created and gets the student number of the student to be deleted. The student number
+   is used to
    construct a `DeleteStudentCommand` object.
-5. The `DeleteStudentCommand` object then calls `deletePerson(student)` in the `ModelManager` with the specified student to be
+5. The `DeleteStudentCommand` object then calls `deletePerson(student)` in the `ModelManager` with the specified student
+   to be
    deleted. This method deletes the specified `Student` in the model.
 7. Finally, the `DeleteStudentCommand` returns the `CommandResult`.
 
 ##### Note
 
-This feature will also check if the deleted `Student` belongs to any `Group` and remove the `Student` from that `Group`, 
+This feature will also check if the deleted `Student` belongs to any `Group` and remove the `Student` from that `Group`,
 resetting the affected `Group` affiliation.
 
 **Sequence Diagram:** The following sequence diagram shows how the above steps for delete group works:
@@ -262,6 +275,7 @@ PlantUML, the lifeline continues till the end of diagram.
 
 * Pro: Easy and quick
 * Con: Possible for user to mistype the wrong number
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Delete Group feature

@@ -330,8 +330,8 @@ Adds a group to the T_Assistant。
 
 1. `Group Name` is the unique identifier for each group, so no 2 groups can have the same group name.
 2. Group names must follow a three-part format: course type: either `CS2103` or `CS2103T`;
-tutorial group: a letter followed by a number;
-group number: any number
+   tutorial group: a letter followed by a number;
+   group number: any number
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -347,6 +347,7 @@ For example `add_g gn/CS2103-F11-3`
 ##### Usage Scenario
 
 ###### Scenario #1
+
 1. You can begin this command on any panel.
 2. Type and execute: `add_g gn/CS2103-F11-3`
 
@@ -471,9 +472,9 @@ Adds a task to a group or multiple groups.
 
 1. This command allows only the addition of a single task to one or multiple groups at the same time.
 2. The group name inputs are case-insensitive. `cs2103-f11-1` will yield the same result as `CS2103-F11-1`.
-3. This command is relatively flexible in terms of the input parameters. You can input duplicate group names. 
+3. This command is relatively flexible in terms of the input parameters. You can input duplicate group names.
    The application simply ignores the duplicates and adds the task to the desired group.
-4. The command checks for the existence of the task, hence you cannot input a task which already exists. A task is 
+4. The command checks for the existence of the task, hence you cannot input a task which already exists. A task is
    equal to another task when it has the same task name and deadline as it.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
@@ -481,60 +482,73 @@ Adds a task to a group or multiple groups.
 ##### Usage Scenario
 
 ###### Scenario #1: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-`CS2103-F12-2` and `CS2103-F11-1`. This is the default scenario where the task does not already exist and both 
-groups exist. 
+
+`CS2103-F12-2` and `CS2103-F11-1`. This is the default scenario where the task does not already exist and both
+groups exist.
 
 1. You can begin this command on any panel.
 2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
+This screenshot shows the result of executing
+`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
 
 ###### Scenario #2: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+
 `CS2103-F12-2` and `CS2103-F11-1` when `Do Homework` already exists.
 
 1. You can begin this command on any panel.
 2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
 3. This will yield an error message.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
+This screenshot shows the result of executing
+`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
 
 ###### Scenario #3: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+
 `CS2103-F13-2` and `CS2103-F11-1` when `CS2103-F13-1` does not exist.
 
 1. You can begin this command on any panel.
 2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
-3. Since `CS2103-F11-1` exists, the command will still allow you to add the task into the group. However, it will display
+3. Since `CS2103-F11-1` exists, the command will still allow you to add the task into the group. However, it will
+   display
    an additional warning message regarding the input `CS2103-F13-1` which does not exist.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
+This screenshot shows the result of executing
+`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
 
 ###### Scenario #4: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+
 `CS2103-F13-2` and `CS2103-F14-1` when both groups do not exist.
 
 1. You can begin this command on any panel.
 2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
 3. Now, the command should throw an error message because both groups are non-existent.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
+This screenshot shows the result of executing
+`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
 
 ##### Scenario #5: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+
 `CS2103-F12-1` and `CS2103-F12-1` when the group exists.
 
 1. You can begin this command on any panel.
 2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
-3. The command functionally ignores the duplicates and add the task into the group specified. It will also display a 
+3. The command functionally ignores the duplicates and add the task into the group specified. It will also display a
    warning message to you.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
+This screenshot shows the result of executing
+`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
 
 ##### Scenario #6: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+
 `CS2103-F14-1` and `CS2103-F14-1` when the group does not exist.
 
 1. You can begin this command on any panel.
 2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
 3. The command should yield an error message.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F14-1 gn/CS2103-F14-1`.
+This screenshot shows the result of executing
+`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F14-1 gn/CS2103-F14-1`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -553,9 +567,11 @@ Adds a task to all groups.
 ##### Usage Scenario
 
 ###### Scenario #1: Executing `add_t tn/Submit Postmortem td/2024-10-20 1800`
+
 1. The task will be added to all groups.
 
 ###### Scenario #2: Executing `add_t tn/Submit Postmortem td/2024-10-20`
+
 1. An error message will be shown because the task deadline has an incorrect format.
 
 This screenshot shows the result of executing `add_t tn/Submit Postmortem td/2024-10-20 1800`.
@@ -630,9 +646,12 @@ Deletes a task from a group.
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
+
 1. Type and execute: `list_t gn/CS2103-F11-1` to see the list of tasks in `CS2103-F11-1`.
-2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this example).
+2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this
+   example).
 3. Type and execute: `del_t_g i/1 gn/CS2103-S1-21`
+
 ###### Scenario #1 Delete task with index 1 from `CS2103-F11-1`
 
 This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F11-1`.
@@ -656,11 +675,12 @@ Delete a task from all groups that contain it.
 ##### Usage Scenario
 
 ###### Scenario #1 Delete task with index 2
+
 1. Type and execute: `list_t` to see the list of tasks.
 2. After finding the task you wish to add, remember its index number (task with index 2 in this example).
 3. Type and execute: `edit_t i/2 gn/CS2103-F`
-This screenshot shows the result of executing `del_t i/2`.
-![delete_t.png](images/screenshots/dt.png)
+   This screenshot shows the result of executing `del_t i/2`.
+   ![delete_t.png](images/screenshots/dt.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -681,10 +701,11 @@ Edits a task from a group.
 
 ##### Usage Scenario
 
-
 ###### Scenario #1 Edit a task with index 1 in `CS2103-F12-1`
+
 1. Type and execute: `list_t gn/CS2103-F12-1` to see the list of tasks in `CS2103-F12-1`.
-2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this example).
+2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this
+   example).
 3. Type and execute: `edit_t_g i/1 gn/CS2103-F12-1 tn/v1.4 Release`
 
 This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-3 tn/v1.4 Release`.
@@ -710,8 +731,10 @@ Edits a task from all groups that contain it.
 ##### Usage Scenario
 
 ###### Scenario #1 Edit a task with index 2
+
 1. Type and execute: `list_t` to see the task list.
-2. After finding the task you wish to delete from this group, remember its index number (task with index 2 in this example).
+2. After finding the task you wish to delete from this group, remember its index number (task with index 2 in this
+   example).
 3. Type and execute: `edit_t i/2 tn/PE`
 
 This screenshot shows the result of executing `edit_t i/2 tn/PE`.
@@ -733,18 +756,22 @@ Marks a task as done or undone.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario 
+##### Usage Scenario
 
 ###### Scenario #1: Marking an undone task
+
 1. Executing `mark_t` will mark the task as done.
 
 ###### Scenario #2: Marking a done task
+
 1. Executing `mark_t` will mark the task as undone.
 
 ###### Scenario #3: Executing the command `mark_t gn/CS2103-F15-2 i/2` when the group does not exist.
+
 1. The system will display an error message.
 
 ###### Scenario #4: Executing the command `mark_t gn/CS2103-F15-2 i/10` when there are only 5 tasks.
+
 1. The system will display an error message because the task index does not exist.
 
 This screenshot shows the result of executing `mark_t gn/CS2103-F12-2 i/2`.
@@ -785,9 +812,10 @@ Sorts the task list by deadline in ascending order.
 1. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario 
+##### Usage Scenario
 
 ###### Scenario #1: Executing command `sort_t`
+
 1. The task list will be sorted by deadline.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -804,16 +832,16 @@ Undoes the previous command ran.
 
 ##### Notes
 
-1. If you first open the application, you will be unable to undo because there is no data to undo. You can only undo 
+1. If you first open the application, you will be unable to undo because there is no data to undo. You can only undo
    after you have made changes to the application.
-2. You can only undo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands), and 
+2. You can only undo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
+   and
    not the commands which do not make any changes (find, list, help, exit commands).
 3. For every change you make to the application, it will be added to the version history of the application.
 4. The application stores up to 100 version histories. Hence you will only be able to undo up to 100 of your most recent
    versions.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
-
 
 #### Redoing change: `redo`
 
@@ -823,9 +851,10 @@ Format: `redo`
 
 ##### Notes
 
-1. If you first open the application, you will be unable to redo because there is no data to redo. You can only 
+1. If you first open the application, you will be unable to redo because there is no data to redo. You can only
    redo the application after at least one undo has been executed.
-2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands), and
+2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
+   and
    not the commands which do not make any changes (find, list, help, exit commands).
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
