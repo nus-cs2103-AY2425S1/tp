@@ -14,8 +14,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -24,6 +28,67 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    public void personName_invalidNames_throwsIllegalArgumentException() {
+        // EP: blank name
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName(""));
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName(" "));
+
+        // EP: valid characters for rest of name as first character in name
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName("[Name"));
+
+        // EP: invalid character in name with other valid characters
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().withName("Anne, Marie"));
+    }
+
+    @Test
+    public void taskNotAssigned_returnsFalse() {
+        Person person = ALICE;
+        Task task = new Task(VALID_TASK_TODO);
+        assertFalse(person.hasTask(task));
+    }
+
+    @Test
+    public void getTask_taskNotAssigned_throwsNoSuchElementException() {
+        // Create a person without any tasks
+        Person person = new PersonBuilder().build();
+        Task nonExistentTask = new Todo("Non-existent task");
+
+        // Attempt to get a task that isn't assigned to the person
+        assertThrows(NoSuchElementException.class, () -> {
+            person.getTask(nonExistentTask);
+        });
+    }
+
+
+    @Test
+    public void getTaskAssigned_returnsSuccessfully() {
+        // Create a person with a specific task
+        String taskStr = "todo: buy groceries";
+        Person person = new PersonBuilder().withTasks(taskStr).build();
+        Task newTask = new Todo("buy groceries");
+
+        // Ensure getTask returns the task when it exists
+        Task retrievedTask = person.getTask(newTask);
+        assertEquals(newTask, retrievedTask, "Expected to retrieve the assigned task successfully.");
+    }
+
+    @Test
+    public void hasTask_taskAssigned_returnsTrue() {
+        Task assignedTask = new Todo("Buy groceries");
+        Person person = new PersonBuilder().withTasks("todo: Buy groceries").build();
+
+        // Check that hasTask returns true for the assigned task
+        assertTrue(person.hasTask(assignedTask), "Expected to return true for a task that is assigned.");
+    }
+    @Test
+    public void removeTask_taskAssigned_taskRemovedSuccessfully() {
+        Person person = new PersonBuilder().withName("assigned").withTasks(VALID_TASK_TODO).build();
+        Task task = new Task(VALID_TASK_TODO);
+        person.removeTask(task);
+        assertFalse(person.hasTask(task));
     }
 
     @Test

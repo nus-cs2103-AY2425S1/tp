@@ -181,6 +181,11 @@ public class CreateTagCommandTest {
         }
 
         @Override
+        public Tag getTag(Tag targetTag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTask(Task toAdd) {
             throw new AssertionError("This method should not be called.");
         }
@@ -206,6 +211,11 @@ public class CreateTagCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonListByTask(Predicate<Task> task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -226,7 +236,12 @@ public class CreateTagCommandTest {
         }
 
         @Override
-        public void deleteWedding(Wedding tag) {
+        public void deleteWedding(Wedding targetWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Wedding getWedding(Wedding targetWedding) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -257,6 +272,16 @@ public class CreateTagCommandTest {
 
         @Override
         public void deleteTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 

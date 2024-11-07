@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private WeddingListPanel weddingListPanel;
     private TaskListPanel taskListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -125,6 +126,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
         weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
 
         personPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -224,6 +226,9 @@ public class MainWindow extends UiPart<Stage> {
         case TASK:
             changeToTaskView();
             break;
+        case TAG:
+            changeToTagView();
+            break;
         case WEDDING:
             changeToWeddingView();
             break;
@@ -245,8 +250,17 @@ public class MainWindow extends UiPart<Stage> {
      * Changes the list panel to show the {@code Task} list.
      */
     public void changeToTaskView() {
-        taskListPanel.updatePersonList(logic.getFilteredTaskList());
+        taskListPanel.updateTaskList(logic.getFilteredTaskList());
         entityList.getChildren().clear();
         entityList.getChildren().add(taskListPanel.getRoot());
+    }
+
+    /**
+     * Changes the list panel to show the {@code Task} list.
+     */
+    public void changeToTagView() {
+        tagListPanel.updateTagList(logic.getFilteredTagList());
+        entityList.getChildren().clear();
+        entityList.getChildren().add(tagListPanel.getRoot());
     }
 }

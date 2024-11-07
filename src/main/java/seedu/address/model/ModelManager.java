@@ -144,7 +144,6 @@ public class ModelManager implements Model {
         addressBook.removeVendor(person);
     }
 
-
     @Override
     public void addTag(Tag tag) {
         addressBook.addTag(tag);
@@ -169,10 +168,31 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Tag getTag(Tag target) {
+        requireNonNull(target);
+        return addressBook.getTag(target);
+    }
+
+    @Override
     public void addTask(Task task) {
         addressBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
+
+    @Override
+    public void markTask(Task task) {
+        requireNonNull(task);
+        addressBook.markTask(task);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void unmarkTask(Task task) {
+        requireNonNull(task);
+        addressBook.unmarkTask(task);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
@@ -213,6 +233,11 @@ public class ModelManager implements Model {
         addressBook.removeWedding(target);
     }
 
+    @Override
+    public Wedding getWedding(Wedding target) {
+        requireNonNull(target);
+        return addressBook.getWedding(target);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -262,6 +287,13 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
+
+    @Override
+    public void updateFilteredPersonListByTask(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> person.getTasks().stream().anyMatch(predicate));
+    }
+
     @Override
     public ObservableList<Wedding> getFilteredWeddingList() {
         return filteredWeddings;

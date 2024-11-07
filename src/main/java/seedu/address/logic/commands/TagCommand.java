@@ -82,29 +82,32 @@ public class TagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", COMMAND_WORD));
+        } else if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+            throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
 
         for (Tag tag : tagsToAdd) {
             if (!model.hasTag(tag)) {
                 if (this.force) {
                     CreateTagCommand createTagCommand = new CreateTagCommand(tag);
                     createTagCommand.execute(model);
+                    tag.increaseTaggedCount();
+                    updatedTags.add(tag);
                 } else {
                     throw new CommandException(MESSAGE_TAG_NOT_FOUND + "\n" + Messages.MESSAGE_FORCE_TAG_TO_CONTACT);
                 }
+            } else {
+                Tag tagToEdit = model.getTag(tag);
+                tagToEdit.increaseTaggedCount();
+                updatedTags.remove(tagToEdit);
+                updatedTags.add(tagToEdit);
             }
         }
-
-        for (Tag tag : tagsToAdd) {
-            tag.increaseTaggedCount();
-        }
-
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
-        updatedTags.addAll(tagsToAdd);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -124,10 +127,6 @@ public class TagCommand extends Command {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        }
-
-        if (!(other instanceof TagCommand)) {
-            return false;
         }
 
         TagCommand otherCommand = (TagCommand) other;

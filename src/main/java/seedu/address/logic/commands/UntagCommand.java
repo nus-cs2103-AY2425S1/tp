@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -65,8 +66,10 @@ public class UntagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", COMMAND_WORD));
+        } else if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+            throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -76,15 +79,21 @@ public class UntagCommand extends Command {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
+        if (tagsToRemove.isEmpty()) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
+        }
+
         if (!updatedTags.containsAll(tagsToRemove)) {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
-        updatedTags.removeAll(tagsToRemove);
-
-        for (Tag tag : tagsToRemove) {
-            tag.decreaseTaggedCount();
+        for (Tag tag : updatedTags) {
+            if (tagsToRemove.contains(tag)) {
+                tag.decreaseTaggedCount();
+            }
         }
+
+        updatedTags.removeAll(tagsToRemove);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -96,6 +105,8 @@ public class UntagCommand extends Command {
                 personToEdit.getTasks());
 
         model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredTagList(Model.PREDICATE_SHOW_ALL_TAGS);
 
         return new CommandResult(generateSuccessMessage(personToEdit));
     }
@@ -106,11 +117,10 @@ public class UntagCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof UntagCommand)) {
+        if (!(other instanceof UntagCommand otherCommand)) {
             return false;
         }
 
-        UntagCommand otherCommand = (UntagCommand) other;
         return index.equals(otherCommand.index)
                 && tagsToRemove.equals(otherCommand.tagsToRemove);
     }

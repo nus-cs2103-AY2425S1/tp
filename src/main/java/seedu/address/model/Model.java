@@ -127,6 +127,12 @@ public interface Model {
     void updateFilteredPersonListByWedding(Predicate<Wedding> weddingPredicate);
 
     /**
+     * Updates the filter of the filtered person list to filter by the given {@code taskPredicate}.
+     * @throws NullPointerException if {@code taskPredicate} is null.
+     */
+    void updateFilteredPersonListByTask(Predicate<Task> taskPredicate);
+
+    /**
      * Returns true if a tag with the same name as {@code toAdd} exists in the Wedlinker.
      */
     boolean hasTag(Tag toAdd);
@@ -151,6 +157,21 @@ public interface Model {
      * The tag must exist in the Wedlinker.
      */
     void deleteTag(Tag toDelete);
+
+    /** Returns a target tag from the model. */
+    Tag getTag(Tag tag);
+
+    /**
+     * Marks the given task as done.
+     * The task must exist in the Wedlinker.
+     */
+    void markTask(Task task);
+
+    /**
+     * Unmarks the given task to become not undone.
+     * The task must exist in the Wedlinker.
+     */
+    void unmarkTask(Task task);
 
     /**
      * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.
@@ -198,7 +219,19 @@ public interface Model {
      */
     void addWedding(Wedding toAdd);
 
+    /**
+     * Sets the target {@code Wedding} with an updated {@code Wedding}.
+     * @param target The initial {@code Wedding}.
+     * @param editedWedding The updated {@code Wedding}
+     */
     void setWedding(Wedding target, Wedding editedWedding);
+
+    /**
+     * Get the target {@code Wedding}.
+     *
+     * @return
+     */
+    Wedding getWedding(Wedding target);
 
     /**
      * Deletes the given wedding.

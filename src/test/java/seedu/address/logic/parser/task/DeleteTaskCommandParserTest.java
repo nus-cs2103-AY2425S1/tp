@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.task;
 
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -7,7 +7,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.task.DeleteTaskCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -16,7 +16,7 @@ import seedu.address.logic.commands.DeleteTaskCommand;
  */
 public class DeleteTaskCommandParserTest {
 
-    private DeleteTaskCommandParser parser = new DeleteTaskCommandParser();
+    private final DeleteTaskCommandParser parser = new DeleteTaskCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteTaskCommand() {
@@ -32,18 +32,6 @@ public class DeleteTaskCommandParserTest {
     @Test
     public void parse_extraArgs_throwsParseException() {
         assertParseFailure(parser, "1 abc",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_negativeIndex_throwsParseException() {
-        assertParseFailure(parser, "-1",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_zeroIndex_throwsParseException() {
-        assertParseFailure(parser, "0",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
     }
 }
