@@ -288,7 +288,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|--------------------------|-----------------------------------------------------------|------------------------------------------------------------|
 | `* * *`  | user                     | add new customers with details such as name and address   | remember details of customers for order deliveries         |
 | `* * *`  | user                     | add orders made by a customer                             | keep track of orders made by each customer                 |
-| `* * *`  | user                     | add details to orders, such as delivery date and quantity | remember details of orders when marking deliveries         |
+| `* * *`  | user                     | add details to orders, such as delivery date and quantity | remember details of orders when making deliveries          |
 | `* * *`  | user                     | mark orders as completed                                  | keep track of orders that have been delivered              |
 | `* * *`  | user with many customers | delete a customer from my address book                    | remove clients who I no longer need to be in contact with  |
 | `* * *`  | user with many customers | view all my customer contacts                             | see an overview of all my customers' details               |
