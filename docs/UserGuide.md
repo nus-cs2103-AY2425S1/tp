@@ -53,7 +53,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
    * `exit` : Exits the app.
 
-1. For more details on each command, refer to the [Features](#features) section below.
+2. For more details on each command, refer to the [Features](#features) section below.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,11 +103,13 @@ A tag can be added with or without a value. For example, `t\client` and `t\insur
 </box>
 
 <box type="warning" seamless>
-**Tag constraints:**<br>
+
+**Tag constraints:** <br>
 * Only alphanumeric characters (alphabets and numbers) are supported in tags<br>
 * Multiple of the same tags are not supported for a single contact<br>
 * Negative numbers are not supported in tag values<br>
 * Operations such as `+, -, *, /` are also not supported in tag values<br>
+
 </box>
 
 Command examples:
@@ -245,6 +247,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 
@@ -253,7 +256,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How can I open my contact data in another application, such as Microsoft Excel?  
-**A**:
+
 1. Create a data export in your preferred file format.
     * For CSV exports: type the command `export format\csv` or click `Export` > `Export to CSV`.
     * For TXT exports: type the command `export format\txt` or click `Export` > `Export to TXT`.
@@ -263,7 +266,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 4. Open your data export file (`addressbook.csv`/`addressbook.txt`) in your application of choice.
 
 **Q**: How can I open my data in BA€ on a different computer?  
-**A**:
+
 1. Install BA€ on your secondary computer.
 2. Copy your data file (`addressbook.json`) from BA€'s `/data/` folder on your primary computer.
 3. Paste the copied data file in BA€'s `/data/` folder on your secondary computer.
