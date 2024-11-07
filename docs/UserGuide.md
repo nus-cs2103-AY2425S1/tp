@@ -265,17 +265,18 @@ There must not be duplicate fields. For example, if there is a contact with the 
 
 ## Available Contact Fields
 
-| Field                                   | Prefix | Valid examples
-|-----------------------------------------|--------|---------------
-| [**NAME**](#name)                       | `n/`   | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)`
-| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`  | `ginatan123`<br/> `jane_smith28` 
-| [**EMAIL**](#email)                     | `e/`   | `gina_tan@example-website.com.sg`
-| [**STUDENT STATUS**](#student-status)   | `ss/`  | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/> 
-| [**ROLE**](#role)                       | `r/`   | `President`<br/> `Events (External)`
-| [**NICKNAME**](#nickname)               | `nn/`  | `genie34 ;)`
+| Field                                   | Prefix* | Valid examples
+|-----------------------------------------|---------|---------------
+| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)`
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28` 
+| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`
+| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/> 
+| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`
+| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`
+*_By default, all fields must be non-empty when prefix is specified._
 
 ### Name
-- Should contain alphabets and spaces only (with exceptions).
+- Should contain alphabets and spaces only (with only the following exceptions).
     - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
     - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
 - Should not be blank
@@ -297,13 +298,14 @@ There must not be duplicate fields. For example, if there is a contact with the 
   - Each domain label should not start or end with `-`.
 
 ### Student Status
-- Should take one of the values below:
+- Should take one of the following values:
   1. `Undergraduate x` (where x is an integer between 1 and 6 inclusive).
   2. `Masters`
   3. `PhD`
 
 ### Role
-- Should take one of the values below:
+- Each contact may take on multiple roles.
+- Each role should take one of the following values:
   1. `President`
   2. `Vice President`
   3. `Admin`
@@ -314,7 +316,6 @@ There must not be duplicate fields. For example, if there is a contact with the 
 
 ### Nickname
 - Optional field.
-- Should not be empty if prefix `nn/` is used.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
