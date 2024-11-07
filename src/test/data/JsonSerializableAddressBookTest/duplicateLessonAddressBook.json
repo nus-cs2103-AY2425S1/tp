@@ -1,0 +1,30 @@
+{
+  "persons": [ {
+    "id": 0,
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "jurong, 123456",
+    "hours" : "1",
+    "role": "Tutor",
+    "subjects": [ "math" ]
+  }, {
+    "id": 1,
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street, 123456",
+    "hours" : "4",
+    "role" : "Tutee",
+    "subjects" : [ "Math" ]
+  } ],
+  "lessons": [ {
+    "tutorId": 0,
+    "tuteeId": 1,
+    "subject": "English"
+  }, {
+    "tutorId": 0,
+    "tuteeId": 1,
+    "subject": "English"
+  } ]
+}

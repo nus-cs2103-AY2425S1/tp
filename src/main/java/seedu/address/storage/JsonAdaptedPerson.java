@@ -194,10 +194,13 @@ public class JsonAdaptedPerson {
 
         if (Objects.equals(role, "Tutor")) {
             return new Tutor(id, modelName, modelPhone, modelEmail, modelAddress, modelHours, modelSubjects);
-        } else {
+        } else if (Objects.equals(role, "Tutee")) {
             return new Tutee(id, modelName, modelPhone, modelEmail, modelAddress, modelHours, modelSubjects);
+        } else if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Role"));
+        } else {
+            throw new IllegalValueException("Role must be either Tutor or Tutee");
         }
-
     }
 
 }
