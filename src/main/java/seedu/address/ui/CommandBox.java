@@ -62,9 +62,8 @@ public class CommandBox extends UiPart<Region> {
         commandSyntaxMap.put("loadArchive", "loadArchive FILE_NAME");
         commandSyntaxMap.put("redo", "redo");
         commandSyntaxMap.put("undo", "undo");
-
     }
-
+    
     /**
      * Creates a CommandBox component that allows users to input and execute commands.
      * It also provides autocomplete suggestions for commands and parameters.
