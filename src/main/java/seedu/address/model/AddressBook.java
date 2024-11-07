@@ -258,7 +258,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return persons.hashCode(); // TODO: this needs to be changed to include all lists
+        return persons.hashCode();
     }
 
     @Override
