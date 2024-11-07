@@ -24,7 +24,7 @@ information such as their treatment, contact information, visit records and futu
 8. <b>Update</b> appointments
 9. <b>Restore</b> backup file
 
-For detailed usage instructions, please refer to the [User Guide](docs/userguide.md)
+For detailed usage instructions, please refer to the [User Guide](https://ay2425s1-cs2103t-f11-3.github.io/tp/UserGuide.html)
 
 ---
 
