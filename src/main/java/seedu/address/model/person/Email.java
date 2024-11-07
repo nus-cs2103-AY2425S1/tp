@@ -3,11 +3,16 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Comparator;
+
 /**
  * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
+
+    public static final Comparator<Email> EMAIL_COMPARATOR = Comparator
+            .comparing(email -> email.value.toLowerCase());
 
     public static final String MESSAGE_CONSTRAINTS_FIND = "Email must be between 1 and 50 characters inclusive.";
     private static final String SPECIAL_CHARACTERS = "+_.-";
@@ -32,6 +37,7 @@ public class Email {
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+
 
     public final String value;
 
