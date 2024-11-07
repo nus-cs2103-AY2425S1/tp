@@ -187,6 +187,9 @@ Shows a list of all students in the address book.
 
 Format: `list`
 
+**Output:**
+![listResult.png](images/listResult.png)
+
 <div style="page-break-after: always;"></div>
 
 ### Deleting a student : `delete`
