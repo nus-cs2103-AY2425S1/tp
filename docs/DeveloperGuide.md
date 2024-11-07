@@ -11,7 +11,6 @@ title: Developer Guide
 
 * This project is based on the AddressBook-Level3 project created by the SE-EDU initiative.
 * Libraries used: JavaFX, Jackson, JUnit5
-* The autocomplete feature was adapted and overhauled from a similar feature in [AY2223S2-CS2103T-W12-2's tp](https://github.com/AY2223S2-CS2103T-W12-2/tp). We analysed their code and made significant changes to tailor the feature to fit the needs of Medconnect.
 * The undo and redo features were inspired by the proposed implementation found in [AB3's Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -659,7 +658,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **4a2.** User enters the file name of an existing file in the archives folder and resubmits.
 
   **Use case resumes from step 4.**
-  
+
 ---
 
 ### Non-Functional Requirements (NFRs)
@@ -814,11 +813,11 @@ testers are expected to do more *exploratory* testing.
 
 
 2. Deleting a patient while a filtered list is being shown
-    
+
     <div markdown="span" class="alert alert-primary">
         **Prerequisites:** The patient list is filtered using the `find` or `finddoc` command.
     </div>
-    
+
     | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
     |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
     | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
@@ -873,7 +872,7 @@ testers are expected to do more *exploratory* testing.
      <div markdown="span" class="alert alert-primary">
            **Prerequisites:**  List all patients using the `list` command. Patients are sorted by the time they were added to MedConnect.
    </div>
-   
+
     | Test case input                                                                    | Expected behaviour                                                                                           | Expected message                                                                                               |
    |------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
     | `addec 1 ecname/Sarah Lim ecphone/91234567 ecrs/Granddaughter`                     | The name, phone and email of the first patient in the list is edited to the new values provided as arguments | Added emergency contact: [PERSON DETAILS]                                                                      |
@@ -883,7 +882,7 @@ testers are expected to do more *exploratory* testing.
     | `addec 1 ecname/Sarah Lim ecphone/91234567 ecrs/Neighbor`                          | Error message is shown                                                                                       | Relationship type should be Parent, Child, Sibling, Spouse, Grandparent or Relative or their gendered variants |
     | `addec 2 ecname/D%#P! ecphone/91234567 ecrs/Son`                                   | Error message is shown                                                                                       | Names should only contain alphanumeric characters and spaces, and it should not be blank                       |
     | `addec x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of contacts) | Error message is shown                                                                                       | The person index provided is invalid                                                                           |
- 
+
  ### Saving data
 
   1. Dealing with missing/corrupted data files
@@ -891,3 +890,15 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Appendix: Effort
+
+Developing MedConnect as a brownfield project from the upgrading of AB3 was challenging for us as a team of relatively junior software engineers who did not have much experience in a software engineering project. For some of our team members, the only prior software engineering experience we had was our Orbital project.
+
+Initially, we faced many challenges in managing the Git workflow of creating issues, creating branches, merging branches and pull requests. This was because the process was new to most of the group and we carefully took the time to learn the proper workflow and avoid merge conflicts.
+
+Another challenge we faced was implementing the autocomplete feature. Since MedConnect was directed to be used by fast typists, we brainstormed the idea of having an autocomplete feature to greatly benefit them. However, this idea was quite foreign to all of us and we took a great deal of time in figuring out how to tackle this problem. In due time, we managed to figure out a solution as a team and it is now implemented in the current version of MedConnect.
+
+Finally, for the undo and redo feature, we adapted the proposed implementation provided in the developer guide of AB3. This greatly reduced the effort required for these features as there are many ways to implement them. A more complex solution would be for each command to have its own respective undo and redo implementation. However, we followed the proposed implementation of saving the AddressBook in states and having a pointer that points to the current state. The pointer would move between states upon execution of the undo and redo commands.
+
+Overall, we faced many challenges as a team that we had to overcome over a short runway. We managed to stay afloat and tackle these challenges through constant communication and good teamwork between team members, helping each other out swiftly and decisively.
