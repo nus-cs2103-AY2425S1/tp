@@ -332,7 +332,7 @@ Action             | Format, Examples
 **Add Event**      | `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE` <br> e.g., `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10` 
 **List Events**    | `list_events`
 **Delete Event**   | `del_event INDEX` or `del_event EVENT_NAME`<br> e.g., `del_event 1` or `del_event meeting`
-**Assign Event**   | To be completed by Nicholas
+**Assign Event**   | `assign_event p/PERSON_INDEX ev/EVENT_INDEX` or `assign_event p/PERSON_NAME ev/EVENT_INDEX` or `assign_event p/PERSON_INDEX ev/EVENT_NAME` or `assign_event p/PERSON_NAME ev/EVENT_NAME` <br> e.g., `assign_event p/1 ev/2` or `assign_event p/Alice ev/2` or `assign_event p/1 ev/Meeting` or `assign_event p/Alice ev/Meeting`
 **Unassign Event** | `unassign_event p/PERSON_INDEX ev/EVENT_INDEX` or `unassign_event p/PERSON_NAME ev/EVENT_INDEX` or `unassign_event p/PERSON_INDEX ev/EVENT_NAME` or `unassign_event p/PERSON_NAME ev/EVENT_NAME` <br> e.g., `unassign_event p/1 ev/2` or `unassign_event p/Alice ev/2` or `unassign_event p/1 ev/Meeting` or `unassign_event p/Alice ev/Meeting`
 **Help**           | `help`
 **Export**         | `export`
