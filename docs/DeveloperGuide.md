@@ -297,7 +297,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                        | add details to orders, such as delivery date and item        | know what needs to be delivered and when                              |
 | `* * *`  | user                                        | mark orders as completed                                     | track which orders are still outstanding                              |
 | `* * *`  | user                                        | delete an order                                              | remove orders that have been canceled                                 |
-| `* * *`  | user                                        | filter orders by order status                                | see outstanding or completed orders at one glance                     |
 | `* * *`  | user with many contacts in the address book | delete a customer from my address book                       | remove clients who I no longer need to be in contact with             |
 
 *{More to be added}*
