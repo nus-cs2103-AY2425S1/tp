@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -134,10 +135,7 @@ public class EditCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
+        return "Editing person at index " + index.getOneBased() + " with details: " + editPersonDescriptor;
     }
 
     /**
@@ -241,14 +239,15 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("identity number", identityNumber)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("status", status)
-                    .toString();
+            return Stream.of(
+                            name != null ? "Name: " + name : null,
+                            identityNumber != null ? "NRIC: " + identityNumber : null,
+                            phone != null ? "Phone: " + phone : null,
+                            email != null ? "Email: " + email : null,
+                            address != null ? "Address: " + address : null,
+                            status != null ? "Status: " + status : null
+                    ).filter(Objects::nonNull)
+                    .collect(Collectors.joining(", "));
         }
     }
 }
