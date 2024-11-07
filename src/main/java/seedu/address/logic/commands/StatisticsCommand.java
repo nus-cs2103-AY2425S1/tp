@@ -52,7 +52,6 @@ public class StatisticsCommand extends Command {
 
             // Increment the tag count for the specific tag code
             jobStats.incrementTag(tagCode);
-
             // Update the map with the modified JobCodeStatistics object
             jobStatisticsMap.put(jobCode, jobStats);
             // Update the tagCounts for all applicants
@@ -65,6 +64,7 @@ public class StatisticsCommand extends Command {
 
         int totalApplicantsInSystem = 0;
         // Convert the jobStatisticsMap entries into a list
+        // The sorting algorithm below was written with the aid of ChatGPT.
         List<Map.Entry<JobCode, JobCodeStatistics>> sortedEntries = new ArrayList<>(jobStatisticsMap.entrySet());
         sortedEntries.sort((entry1, entry2) -> {
             int result = entry1.getKey().value.toLowerCase().compareTo(entry2.getKey().value.toLowerCase());
@@ -84,7 +84,7 @@ public class StatisticsCommand extends Command {
             // Appends breakdown of interview stages of job applicants
             appendStagesBreakdown(statisticsMessage, jobStats);
 
-            // Update the total count of applicants in the system
+            // update the total count of applicants in the system
             totalApplicantsInSystem += jobStats.getTotalApplicants();
         }
         statisticsMessage.insert(0, "Total number of applicant(s) by job code and interview Stages:\n");
@@ -125,11 +125,12 @@ public class StatisticsCommand extends Command {
         stringToInsert.append("Percentages of applicant(s) in each interview stage:\n");
 
         // Correct order of tags
+        // The code from this line onwards was written with the aid of ChatGPT
         String[] tagOrder = {"N", "TP", "TC", "BP", "BC", "A", "R"};
 
         // Iterate over the tag order and append the % of each tag
         for (String tag : tagOrder) {
-            int count = tagCounts.getOrDefault(tag, 0); // Get the count for the tag (default to 0 if not present)
+            int count = tagCounts.getOrDefault(tag, 0); // Get the count for the tag (default to 0 if not present
             double percentage = totalApplicantsInSystem == 0 ? 0.0 : (
                     (double) count / totalApplicantsInSystem) * 100;
 

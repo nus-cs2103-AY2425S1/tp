@@ -26,6 +26,7 @@ public class JobCodeStatistics {
      * Increases a specific tag in the tagCode dictionary
      * @param tagCode tagCode String
      */
+    // Attribution: The code below this line onwards was written with the aid of ChatGPT.
     // Increment the count for a specific tag
     public void incrementTag(String tagCode) {
         tagCode = tagCode.toUpperCase();
@@ -57,12 +58,6 @@ public class JobCodeStatistics {
     }
     public int getR() {
         return tagCounts.getOrDefault("R", 0);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("N: %d, TP: %d, TC: %d, BP: %d, BC: %d, A: %d, R: %d",
-                getN(), getTP(), getTC(), getBP(), getBC(), getA(), getR());
     }
 }
 
