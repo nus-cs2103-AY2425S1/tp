@@ -1,6 +1,7 @@
 package hallpointer.address.logic.parser;
 
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static hallpointer.address.logic.Messages.MESSAGE_MAX_SESSION_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
@@ -36,13 +37,16 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSessionCommand.MESSAGE_USAGE));
         }
 
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SESSION_NAME, PREFIX_DATE, PREFIX_POINTS);
         SessionName name = ParserUtil.parseSessionName(argMultimap.getValue(PREFIX_SESSION_NAME).get());
         SessionDate date = ParserUtil.parseSessionDate(argMultimap.getValue(PREFIX_DATE).get());
         Point points = ParserUtil.parsePoints(argMultimap.getValue(PREFIX_POINTS).get());
         // No indices error is already handled by the nature of parseIndices
         Set<Index> memberIndexes = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER));
-
+        if (points.getValue() > 100) {
+            throw new ParseException(String.format(MESSAGE_MAX_SESSION_POINTS));
+        }
         Session session = new Session(name, date, points);
 
         return new AddSessionCommand(session, memberIndexes);
