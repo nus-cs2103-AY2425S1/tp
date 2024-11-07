@@ -130,7 +130,7 @@ public class CommandBox extends UiPart<Region> {
         case HousingType.MESSAGE_CONSTRAINTS:
             errorIndexStart = commandText.indexOf(" ht/") + 1;
             break;
-        case Price.MESSAGE_CONSTRAINTS:
+        case Price.MESSAGE_CONSTRAINTS, Price.MESSAGE_PRICE_TOO_HIGH:
             if (commandText.contains(" sp/")) {
                 errorIndexStart = commandText.indexOf(" sp/") + 1;
             } else if (commandText.contains(" bp/")) {

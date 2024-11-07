@@ -158,7 +158,7 @@ public class ParserUtil {
                 return false;
             }
         }
-        return tags.size() <= 2;
+        return true;
     }
 
     /**
@@ -185,7 +185,15 @@ public class ParserUtil {
     public static Price parseSellingPrice(String sellingPrice) throws ParseException {
         requireNonNull(sellingPrice);
         String trimmedSellingPrice = sellingPrice.trim();
-        int sellingPriceInt = Integer.parseInt(trimmedSellingPrice);
+        int sellingPriceInt = 0;
+        try {
+            sellingPriceInt = Integer.parseInt(trimmedSellingPrice);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
+        }
+        if (!StringUtil.isNonZeroUnsignedInteger(sellingPrice)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
         if (sellingPriceInt > 2000000000) {
             throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
         }
@@ -204,7 +212,12 @@ public class ParserUtil {
     public static Price parseBuyingPrice(String buyingPrice) throws ParseException {
         requireNonNull(buyingPrice);
         String trimmedBuyingPrice = buyingPrice.trim();
-        int buyingPriceInt = Integer.parseInt(trimmedBuyingPrice);
+        int buyingPriceInt = 0;
+        try {
+            buyingPriceInt = Integer.parseInt(trimmedBuyingPrice);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
+        }
         if (buyingPriceInt > 2000000000) {
             throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
         }
