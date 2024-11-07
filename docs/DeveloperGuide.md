@@ -27,8 +27,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-- HRConnect is a brownfield project based on [AddressBook Level-3](https://github.com/nus-cs2103-AY2425S1/tp) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html))
-- Certain parts of `Project` and `Assignment` related features contain altered code from the original [AddressBook Level-3](https://github.com/nus-cs2103-AY2425S1/tp) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)) 
+- HRConnect is a brownfield project based on [AddressBook Level-3](https://github.com/nus-cs2103-AY2425S1/tp) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
+- Certain parts of `Project` and `Assignment` related features contain altered code from the original [AddressBook Level-3](https://github.com/nus-cs2103-AY2425S1/tp) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)). 
 
 ---
 
@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 5a1. HRConnect shows an error message.
 
-    HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resume at step 4.
+    HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resumes at step 4.
 
 ---
 
