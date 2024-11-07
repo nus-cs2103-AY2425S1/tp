@@ -110,11 +110,13 @@ public class Person {
             return "Unemployed";
         }
         String[] jobIdentifierComponents = match.get().split("::");
+
+        // When this method is called, assert to check if match is in a valid format.
         assert(jobIdentifierComponents.length == 2);
         String companyName = jobIdentifierComponents[0];
         String jobName = jobIdentifierComponents[1];
-        // The company and job should not be empty strings
         assert(!(companyName.isEmpty() || jobName.isEmpty()));
+
         return ("Employed @ " + companyName + " - " + jobName);
     }
 

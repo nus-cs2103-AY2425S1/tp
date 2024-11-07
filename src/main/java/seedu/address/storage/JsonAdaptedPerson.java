@@ -22,7 +22,7 @@ import seedu.address.model.skill.Skill;
  */
 class JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contact's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -108,15 +108,18 @@ class JsonAdaptedPerson {
 
         final Set<Skill> modelSkills = new HashSet<>(personSkills);
 
-        // TODO - Discuss if we should have an overloaded Person method taking in (Person person, String match)
-        //  which does a check within for an empty string. This can help us to reduce code in AddressBook, match and
-        //  unmatch command and other stuff.
         if (match == null) {
             return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills);
-        } else {
-            final String modelMatch = match;
-            return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills, modelMatch);
         }
+
+        int jobIdentifierComponentsLength = match.split("::").length;
+        if (jobIdentifierComponentsLength != 2) {
+            throw new IllegalValueException("Match field is not of the form 'CompanyName::JobName'");
+        }
+
+        final String modelMatch = match;
+
+        return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills, modelMatch);
     }
 
 }
