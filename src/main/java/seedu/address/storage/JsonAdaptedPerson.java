@@ -21,6 +21,7 @@ import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -145,7 +146,7 @@ class JsonAdaptedPerson {
 
         for (JsonAdaptedWedding wedding : weddings) {
             if (!Wedding.isValidWeddingName(wedding.getWeddingName())) {
-                throw new IllegalValueException(Wedding.MESSAGE_CONSTRAINTS);
+                throw new IllegalValueException(WeddingName.MESSAGE_CONSTRAINTS);
             }
             personWeddings.add(wedding.toModelType());
         }

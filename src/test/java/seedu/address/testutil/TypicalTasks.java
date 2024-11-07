@@ -26,16 +26,13 @@ public class TypicalTasks {
     public static final String VALID_EVENT_START_DATE = "2024-10-10";
     public static final String VALID_EVENT_END_DATE = "2024-10-11";
 
-    public static final String TASK_DESC_TODO = " tk/todo Buy groceries";
-    public static final String TASK_DESC_DEADLINE = " tk/deadline Submit report /by 2024-12-31";
-    public static final String TASK_DESC_EVENT = " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+    public static final String TASK_DESC_TODO = " tk/Buy groceries";
+    public static final String TASK_DESC_DEADLINE = " tk/Submit report d/2024-12-31";
+    public static final String TASK_DESC_EVENT = " tk/Project meeting d/2024-10-10 d/2024-10-11";
 
-    public static final String TASK_DESC_BUY_GROCERIES = " tk/todo Buy groceries";
-    public static final String TASK_DESC_SUBMIT_ASSIGNMENT = " tk/deadline Submit assignment /by 2023-12-31";
-    public static final String TASK_DESC_TEAM_MEETING = " tk/event Team meeting /from 2024-10-01 /to 2024-10-02";
 
     // Invalid Task Descriptions
-    public static final String INVALID_TASK_DESC = " tk/event "; // incomplete event details
+    public static final String INVALID_TASK_DESC = " tk/ "; // incomplete event details
 
     // Sample Tasks
     public static final Todo TODO_TASK = new Todo(VALID_TODO_DESCRIPTION);

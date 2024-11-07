@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -69,11 +70,47 @@ public class Person {
     }
 
     /**
+     * Returns a task if it exists in this person's task list.
+     */
+    public Task getTask(Task task) throws NoSuchElementException {
+        for (Task eachTask : tasks) {
+            if (eachTask.isSameTask(task)) {
+                return eachTask;
+            }
+        }
+        throw new NoSuchElementException("Task not found in this person's assigned tasks.");
+    }
+
+    /**
      * Returns an immutable task set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Task> getTasks() {
         return Collections.unmodifiableSet(tasks);
+    }
+
+    /**
+     * Checks if this person has the specified task assigned.
+     *
+     * @param task The task to check.
+     * @return true if the specified task is assigned to this person, false otherwise.
+     */
+    public boolean hasTask(Task task) {
+        for (Task eachTask : tasks) {
+            if (eachTask.isSameTask(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Removes the specified task from this person's assigned tasks.
+     *
+     * @param task The task to remove.
+     */
+    public void removeTask(Task task) {
+        tasks.remove(task);
     }
 
     /**

@@ -6,26 +6,16 @@ import java.util.ArrayList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
-
 /**
  * Represents a Wedding in the system.
  * Guarantees: immutable; name is valid as declared in {@link #isValidWeddingName(String)}
  */
 public class Wedding {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Wedding names should only contain alphanumeric characters, spaces or apostrophes, "
-                    + "and they should not be blank. Wedding names are case sensitive.";
-
-    /**
-     * Validation regex checks that first character of the wedding name must not be a whitespace,
-     * so that " " (a blank string) is not a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*";
     private final WeddingName weddingName;
     private int peopleCount;
     private Person partner1;
     private Person partner2;
-    private ArrayList<Person> guestList;
+    private ArrayList<Person> guestList = new ArrayList<>();
     private Address address;
     private String date;
 
@@ -59,7 +49,7 @@ public class Wedding {
      * Returns true if a given string is a valid wedding name.
      */
     public static boolean isValidWeddingName(String checkName) {
-        return checkName.matches(VALIDATION_REGEX);
+        return checkName.matches(WeddingName.VALIDATION_REGEX);
     }
 
     /**
@@ -87,11 +77,27 @@ public class Wedding {
     }
 
     /**
+     * Sets partner1 in this wedding
+     * @param partner1 A {@code Person} object to be set as {@code partner1}
+     */
+    public void setPartner1(Person partner1) {
+        this.partner1 = partner1;
+    }
+
+    /**
      * Returns partner2 associated with wedding
      * @return A {@code Person} object of the partner2 of the wedding
      */
     public Person getPartner2() {
         return this.partner2;
+    }
+
+    /**
+     * Sets partner2 in this wedding
+     * @param partner2 A {@code Person} object to be set as {@code partner2}
+     */
+    public void setPartner2(Person partner2) {
+        this.partner2 = partner2;
     }
 
     /**
@@ -101,6 +107,15 @@ public class Wedding {
      */
     public ArrayList<Person> getGuestList() {
         return this.guestList;
+    }
+
+    /**
+     * Adds {@code Person} to guest list in this wedding
+     *
+     * @param person An {@code Person} object of the guest list of the wedding
+     */
+    public void addToGuestList(Person person) {
+        this.guestList.add(person);
     }
 
     /**
@@ -178,5 +193,14 @@ public class Wedding {
     @Override
     public String toString() {
         return '[' + weddingName.toString() + ']';
+    }
+
+    @Override
+    public Wedding clone() {
+        try {
+            return (Wedding) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return new Wedding(weddingName, peopleCount, partner1, partner2, guestList, address, date);
+        }
     }
 }

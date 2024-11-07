@@ -216,6 +216,11 @@ public class CreateWeddingCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonListByTask(Predicate<Task> task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -242,6 +247,17 @@ public class CreateWeddingCommandTest {
         @Override
         public void deleteTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+
         }
 
 

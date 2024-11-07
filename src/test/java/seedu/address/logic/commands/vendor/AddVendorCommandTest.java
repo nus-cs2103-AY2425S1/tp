@@ -226,6 +226,16 @@ public class AddVendorCommandTest {
         }
 
         @Override
+        public void markTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTask(Task toAdd) {
             throw new AssertionError("This method should not be called.");
         }
@@ -262,6 +272,11 @@ public class AddVendorCommandTest {
 
         @Override
         public void updateFilteredPersonListByWedding(Predicate<Wedding> weddingPredicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonListByTask(Predicate<Task> task) {
             throw new AssertionError("This method should not be called.");
         }
 

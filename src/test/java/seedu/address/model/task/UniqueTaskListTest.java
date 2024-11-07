@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
@@ -187,6 +188,21 @@ public class UniqueTaskListTest {
         assertEquals(Collections.singletonList(TODO_TASK).toString(), uniqueTaskList.toString());
     }
 
+
+    @Test
+    public void getTask_taskExists_returnsTask() {
+        uniqueTaskList.add(TODO_TASK);
+        Task retrievedTask = uniqueTaskList.getTask(TODO_TASK);
+        assertEquals(TODO_TASK, retrievedTask, "The retrieved task should match the original task.");
+    }
+
+    @Test
+    public void getTask_taskDoesNotExist_throwsNoSuchElementException() {
+        Task nonExistentTask = new Todo("Non-existent task");
+        assertThrows(NoSuchElementException.class, () -> uniqueTaskList.getTask(nonExistentTask),
+                "Expected getTask to throw NoSuchElementException for a non-existent task.");
+    }
+
     @Test
     public void iterator_iterateOverList_returnsCorrectOrder() {
         uniqueTaskList.add(TODO_TASK);
@@ -198,5 +214,32 @@ public class UniqueTaskListTest {
             assertEquals(task, iterator.next());
         }
     }
+
+    @Test
+    public void equals() {
+        // Same object
+        assertTrue(uniqueTaskList.equals(uniqueTaskList), "A UniqueTaskList should equal itself.");
+
+        // Null comparison
+        assertFalse(uniqueTaskList.equals(null), "A UniqueTaskList should not equal null.");
+
+        // Different type comparison
+        assertFalse(uniqueTaskList.equals("String object"),
+                "A UniqueTaskList should not equal an object of a different type.");
+
+        // Identical tasks in both lists
+        uniqueTaskList.add(TODO_TASK);
+        UniqueTaskList identicalTaskList = new UniqueTaskList();
+        identicalTaskList.add(TODO_TASK);
+        assertTrue(uniqueTaskList.equals(identicalTaskList),
+                "UniqueTaskLists with identical tasks should be equal.");
+
+        // Different tasks in lists
+        UniqueTaskList differentTaskList = new UniqueTaskList();
+        differentTaskList.add(EVENT_TASK);
+        assertFalse(uniqueTaskList.equals(differentTaskList),
+                "UniqueTaskLists with different tasks should not be equal.");
+    }
+
 }
 

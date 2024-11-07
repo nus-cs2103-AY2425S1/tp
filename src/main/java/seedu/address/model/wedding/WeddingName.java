@@ -9,14 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class WeddingName {
     public static final String MESSAGE_CONSTRAINTS =
-            "Wedding names should only contain alphanumeric characters, spaces or apostrophes, "
-                    + "and they should not be blank. Wedding names are case sensitive.";
+            "Wedding names should only contain alphanumeric characters, spaces or the following characters: /.,'&:(). "
+                    + "\nWedding names should not be blank and are case sensitive.";
 
     /**
      * Validation regex checks that first character of the wedding name must not be a whitespace,
      * so that " " (a blank string) is not a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} /.,'&:()]*";
     private final String weddingName;
 
     /**

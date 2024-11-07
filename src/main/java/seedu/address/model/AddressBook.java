@@ -3,10 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniqueVendorList;
@@ -193,6 +195,44 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Updates the completion status of a task in the Wedlinker.
+     * The task must already exist in the Wedlinker.
+     *
+     * @param task A {@code Task} object to update.
+     * @param markAsCompleted True to mark the task as completed, false to unmark it as completed.
+     */
+    private void updateTaskCompletionStatus(Task task, boolean markAsCompleted) {
+        requireNonNull(task);
+        if (!tasks.contains(task)) {
+            throw new NoSuchElementException(Messages.MESSAGE_TASK_NOT_FOUND_IN_AB);
+        }
+        Task taskToUpdate = tasks.getTask(task);
+        if (markAsCompleted) {
+            taskToUpdate.markAsDone();
+        } else {
+            taskToUpdate.markAsUndone();
+        }
+        tasks.setTask(task, taskToUpdate);
+    }
+    /**
+     * Marks a task in the Wedlinker.
+     * The task must already exist in the Wedlinker.
+     * @param task A {@code Task} object to be marked.
+     */
+    public void markTask(Task task) {
+        updateTaskCompletionStatus(task, true);
+    }
+
+    /**
+     * Unmarks a task in the Wedlinker.
+     * The task must already exist in the Wedlinker.
+     * @param task A {@code Task} object to be Unmarked.
+     */
+    public void unmarkTask(Task task) {
+        updateTaskCompletionStatus(task, false);
     }
 
     /**

@@ -13,14 +13,13 @@ public class Index {
     private final int zeroBasedIndex;
 
     /**
-     * Index can only be created by calling {@link Index#fromZeroBased(int)} or
-     * {@link Index#fromOneBased(int)}.
+     * Index can only be created by calling {@link Index#fromZeroBased(int)},
+     * {@link Index#fromOneBased(int)}, or {@link Index#oneBasedNoConstraints(int)}
      */
     private Index(int zeroBasedIndex, boolean check) {
         if (check && zeroBasedIndex < 0) {
             throw new IndexOutOfBoundsException();
         }
-
         this.zeroBasedIndex = zeroBasedIndex;
     }
 
