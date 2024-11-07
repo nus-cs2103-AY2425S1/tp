@@ -190,28 +190,20 @@ The following activity diagram shows how the user should use some of our transac
 
 <puml src="diagrams/ListTransactionsActivityDiagram.puml" width="550" />
 
-### Find Transactions `findt INDEX KEYWORD [KEYWORDS]`
+### Find Transactions `findt KEYWORD [KEYWORDS]`
 
 #### Implementation
 
-The find transactions command allows for users to find transactions for the specified person whose descriptions match one of the keywords. 
+The find transactions command allows for users to find transactions whose descriptions match one of the keywords. 
+The search space is the current transaction list. Therefore, it can only be used in transaction view. 
 
-When the command is used, `Model#updateTransactionList()` is called to update the transaction list to the transactions of the specified person. 
-`Model#updateFilteredPersonList()` is called to update the person list to just contain that specified person. 
-
-It also implements the following operations:
+It implements the following operations:
 
 * `Model#updateTransactionListPredicate(Predicate<Transaction>)` — Updates the transaction list to contain transactions that match any of the keywords.
 
-The following sequence diagram shows an example execution of command `findt 1 ...`, where `...` represents any number of keywords.
+The following sequence diagram shows an example execution of command `findt keys`, where `keys` represents any number of keywords.
 
-<puml src="diagrams/FindTransactionsDiagram.puml" width="600" />
-
-#### Side Effects
-
-Same as `listt`, `findt` also changes the person list to preserve the setting that the only person in the person list is the specified person whose transactions are currently shown.
-
-As a result, operations on the transactions (e.g. `deletet` and `summary`) can be performed on the transactions list, without specifying the person index, regardless of the transaction list being generated from `listt` or `findt`.
+<puml src="diagrams/FindTransactionsDiagram.puml" />
 
 ### \[Proposed\] Undo/redo feature
 

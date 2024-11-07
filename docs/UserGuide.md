@@ -264,21 +264,13 @@ Format: `deletet INDEX`
 
 Examples:
 * `listt 1` followed by `deletet 1` loads the transaction list for the first client, then deletes the first transaction.
-* `findt 1 flowers` followed by `deletet 1` loads the list of transactions containing 'flowers' for the first client, then deletes the first transaction
-in the results of the `findt` command.
 
-#### Finding Transactions by description for a specified client: `findt`
+#### Finding Transactions by description: `findt`
 
-For a given client, finds all transactions with descriptions matching any of the given keywords.
+In a transaction list, finds all transactions with descriptions matching any of the given keywords.
 
-Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
+Format: `findt KEYWORD [MORE_KEYWORDS]`
 
-`INDEX`:
-* Only search for transactions of the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
-* The index must be a positive integer 1, 2, 3, …​
-
-`KEYWORD`:
 * The search is case-insensitive. e.g. `invest` will match `Invest`
 * The order of the keywords does not matter. e.g. `invest material` will match `Material Invest`
 * Only the description is searched.
@@ -288,12 +280,28 @@ Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
 
 <box type="warning" seamless>
 
-**Note:** `findt` can only be used in person list view.
+**Note:** `findt` can only be used in transaction list view.
 </box>
 
 Examples:
-* `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
-![result for 'findt 1 materials invest'](images/findt.png =600x)
+* `listt 1` followed by `findt materials invest` returns `Invest` and `Buy raw materials`, which are transactions of person 1.
+
+#### Summarising transactions within month range: `summary`
+
+In a transaction list, summarises the transactions' amount within the specified month range and displays them.
+
+Format: `summary s/START_MONTH e/END_MONTH`
+* `START_MONTH` and `END_MONTH` should be in the format `YYYY-MM` e.g. `2024-10`
+* The `START_MONTH` should be before or equal to the `END_MONTH`
+* The transactions whose date falls within the first day of `START_MONTH` and the last day of `END_MONTH` (inclusive) will be summarised.
+
+<box type="warning" seamless>
+
+**Note:** `summary` can only be used in transaction list view.
+</box>
+
+Examples:
+* `listt 1` followed by `summary s/2024-09 e/2024-10` summarises the transactions of person 1 within the month of September and October 2024.
 
 ### Data Management
 
@@ -360,11 +368,12 @@ For Person List View | Format
 --------------------|--------
 Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 List Transactions | `listt INDEX`
-Find Transactions | `findt INDEX KEYWORD [MORE_KEYWORDS]`
 
 For Transaction List View | Format
 --------------------|--------
 Delete Transaction | `deletet INDEX`
+Find Transactions | `findt KEYWORD [MORE_KEYWORDS]`
+Summarise Transactions | `summary s/START_MONTH e/END_MONTH`
 
 General Commands | Format
 ----------------|--------

@@ -13,10 +13,10 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(findt 1 ...)
+[-> LogicManager : execute(findt keys)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(findt 1 ...))
+LogicManager -> AddressBookParser : parseCommand(findt keys))
 activate AddressBookParser
 create FindTransactionCommandParser
 AddressBookParser -> FindTransactionCommandParser
@@ -25,11 +25,11 @@ activate FindTransactionCommandParser
 FindTransactionCommandParser --> AddressBookParser
 deactivate FindTransactionCommandParser
 
-AddressBookParser -> FindTransactionCommandParser : parse(1 ...)
+AddressBookParser -> FindTransactionCommandParser : parse(keys)
 activate FindTransactionCommandParser
 
 create TransactionContainsKeywordsPredicate
-FindTransactionCommandParser -> TransactionContainsKeywordsPredicate : ...
+FindTransactionCommandParser -> TransactionContainsKeywordsPredicate : keys
 activate TransactionContainsKeywordsPredicate
 
 TransactionContainsKeywordsPredicate --> FindTransactionCommandParser : predicate
@@ -48,35 +48,11 @@ deactivate FindTransactionCommandParser
 FindTransactionCommandParser -[hidden]-> AddressBookParser : f
 destroy FindTransactionCommandParser
 
-AddressBookParser --> LogicManager : t
+AddressBookParser --> LogicManager : f
 deactivate AddressBookParser
 
 LogicManager -> FindTransactionCommand : execute()
 activate FindTransactionCommand
-
-FindTransactionCommand -> Model : getFilteredPersonList()
-activate Model
-
-Model --> FindTransactionCommand : filteredPersonList
-deactivate Model
-
-FindTransactionCommand -> Model : updateFilteredPersonList()
-activate Model
-
-Model --> FindTransactionCommand
-deactivate Model
-
-FindTransactionCommand -> Model : setViewTransactions(true)
-activate Model
-
-Model --> FindTransactionCommand
-deactivate Model
-
-FindTransactionCommand -> Model : updateTransactionList()
-activate Model
-
-Model --> FindTransactionCommand
-deactivate Model
 
 FindTransactionCommand -> Model : updateTransactionListPredicate(predicate)
 activate Model
