@@ -772,7 +772,38 @@ testers are expected to do more *exploratory* testing.
    For xx/INVALID_PARAMETER, `xx` refers to any of the valid prefixes and `INVALID_PARAMETER` refers to an invalid parameter input for the respective prefix.<br>
    Expected: Same as previous test case, but error details shown are specific to the invalid parameter provided.
 
+### Editing a patient
 
+1. Editing a patient while any number of patients are being shown.
+
+    1. Prerequisites: List all patients using the `list` command. Patients are sorted by the time they were added to MedConnect.
+
+    1. Test case: `edit 1 n/Ryan p/98765432 e/ryan@hotmail.com`<br>
+       Expected: The name, phone and email of first patient in the list are edited to the provided arguments. Details shown in the status message include all the details of the edited patient.
+
+    1. Test case: `edit 1`<br>
+       Expected: Error message indicates that "At least one field to edit must be provided.".
+
+    1. Test case: `edit 1 n/`<br>
+       Expected: First patient isn't edited. An error message details valid inputs for name.
+
+   1. Test case: `edit 1 n/John p/`<br>
+      Expected: First patient isn't edited. An error message details valid inputs for phone number. 
+   
+    1. Test case: `edit p/???`<br>
+      Expected: No patient is edited. Same as previous test case.
+
+    1. Test case: `edit`<br>
+       Expected: No patient is edited. Error details are shown in the status message showing all the required and optional parameters and an example of a valid `edit` command.
+
+    1. Test case: `edit 2 n/John Doe xx/PARAMETER`<br>
+       Expected: No patient is added. Error details are shown in the status message, stating the valid parameters for the patient's name.
+   
+   1. Test case: `edit 2 n/John Doe xx/PARAMETER`<br>
+      Expected: No patient is added. Error details are shown in the status message, stating the valid parameters for the patient's name.
+
+   1. Test case: `edit 2 ecname/John Doe`<br>
+      Expected: No emergency contact index is indicated. Error message will request for emergency contact index to be inputted.
 
   ### Saving data
 
