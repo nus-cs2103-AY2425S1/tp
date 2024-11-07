@@ -47,7 +47,7 @@ public class DeleteCommandTest {
             }
         }
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -61,7 +61,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null, null);
 
         assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 model.getFilteredPersonList().size()));
@@ -75,7 +75,7 @@ public class DeleteCommandTest {
         model.addWedding(wedding);
         personToDelete.setOwnWedding(wedding);
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_IS_CLIENT);
     }
 
@@ -91,7 +91,7 @@ public class DeleteCommandTest {
             }
         }
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -112,7 +112,7 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null, null);
 
         assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 model.getFilteredPersonList().size()));
@@ -130,7 +130,7 @@ public class DeleteCommandTest {
         // unique name
         NameMatchesKeywordPredicate predicate = preparePredicate("Alice");
         Person personToDelete = ALICE;
-        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -147,7 +147,7 @@ public class DeleteCommandTest {
     public void execute_validKeywordMultipleMatches_success() {
         // keyword matches with multiple persons
         NameMatchesKeywordPredicate predicate = preparePredicate("Carl");
-        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DUPLICATE_HANDLING);
 
@@ -160,7 +160,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidKeyword_throwsCommandException() {
         NameMatchesKeywordPredicate predicate = preparePredicate("Alex");
-        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate, null);
 
         Model actualModel = model;
         showNoPerson(actualModel);
@@ -170,14 +170,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON, null);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON, null, null);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON, null);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -193,13 +193,13 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, null);
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, null, null);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
 
         String targetKeyword = VALID_NAME_AMY;
         NameMatchesKeywordPredicate predicate = preparePredicate(targetKeyword);
-        deleteCommand = new DeleteCommand(null, predicate);
+        deleteCommand = new DeleteCommand(null, predicate, null);
         expected = DeleteCommand.class.getCanonicalName() + "{targetKeywords=" + predicate.toString() + "}";
         assertEquals(expected, deleteCommand.toString());
     }

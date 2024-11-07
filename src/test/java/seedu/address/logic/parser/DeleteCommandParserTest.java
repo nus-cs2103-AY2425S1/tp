@@ -25,10 +25,10 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON, null));
+        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON, null, null));
 
         DeleteCommand expectedDeleteCommand =
-                new DeleteCommand(null, new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob")));
+                new DeleteCommand(null, new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob")), null);
         assertParseSuccess(parser, "Alice Bob", expectedDeleteCommand);
 
         assertParseSuccess(parser, " \n Alice Bob  \t", expectedDeleteCommand);

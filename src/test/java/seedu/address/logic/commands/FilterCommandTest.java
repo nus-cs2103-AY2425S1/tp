@@ -148,10 +148,7 @@ public class FilterCommandTest {
         // Execute the command
         CommandResult result = filterCommand.execute(model);
 
-        // For debugging
-        System.out.println("Expected filtered list:");
         expectedModel.getFilteredPersonList().forEach(System.out::println);
-        System.out.println("\nActual filtered list:");
         model.getFilteredPersonList().forEach(System.out::println);
 
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
