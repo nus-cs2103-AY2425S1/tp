@@ -9,13 +9,13 @@ HireMe is a **desktop application for managing internship applications, optimize
 
 Given below are my contributions to the project.
 
+* **New Feature**: Architected and implemented a robust model schema, creating foundational model classes essential for application functionality.
+  * Details: Developed critical model classes, including `Company`, `Date`, `Email`, `InternshipApplication`, `Name`, `Role`, and `Status`, which serve as the building blocks for the entire model structure.
+  * Justification: These classes establish a scalable, clear, and maintainable framework, streamlining data flow and ensuring efficient data management across the application. This structured approach optimizes performance and paves the way for future feature expansion with minimal refactoring.
+
 * **New Feature**: Added a status command to update the status of an internship application.
   * What it does: Allows users to update the status of an internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
   * Justification: This feature is crucial for tracking the current stage of each application, enabling users to keep organized records.
-
-* **New Feature**: Architected and implemented a robust model schema, creating foundational model classes essential for application functionality.
-  * Details: Developed critical model classes, including `Company`, `Date`, `Email`, `InternshipApplication`, `Name`, `Role`, and `Status`, which serve as the building blocks for the entire data management structure.
-  * Justification: These classes establish a scalable, clear, and maintainable framework, streamlining data flow and ensuring efficient data management across the application. This structured approach optimizes performance and paves the way for future feature expansion with minimal refactoring.
 
 * **Project management**:
   * Managed releases `v1.3` and `v1.5` on GitHub, overseeing feature completeness and stability.
@@ -37,4 +37,4 @@ Given below are my contributions to the project.
     * Created sequence diagrams for `status` features.
     * Added user stories for the `find` and `status` features.
     * Added use cases for the `find` and `status` features.
-    * Developed an activity diagram for the `status` feature.
+    * Created an activity diagram for the `status` feature.
