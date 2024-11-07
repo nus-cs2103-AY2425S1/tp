@@ -71,7 +71,8 @@ public class AddLogCommandTest {
     @Test
     public void toStringMethod() {
         AddLogCommand addLogCommand = new AddLogCommand(INDEX_FIRST_PERSON, log1);
-        String expected = AddLogCommand.class.getCanonicalName() + "{log=" + log1 + "}";
+        String expected = AddLogCommand.class.getCanonicalName()
+                + "{targetIndex=" + INDEX_FIRST_PERSON + ", log=" + log1 + "}";
         assertEquals(expected, addLogCommand.toString());
     }
 }

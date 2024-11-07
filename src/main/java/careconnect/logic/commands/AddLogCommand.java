@@ -114,8 +114,8 @@ public class AddLogCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
                 .add("log", log)
                 .toString();
     }
-
 }
