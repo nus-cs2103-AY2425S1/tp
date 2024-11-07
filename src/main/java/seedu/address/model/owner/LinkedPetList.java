@@ -160,8 +160,8 @@ public class LinkedPetList implements Iterable<Pet> {
 
         formattedPets.append("Pets: ");
 
-        if (internalList.size() == 0) {
-            formattedPets.append("warning! this owner is not linked to any pets");
+        if (internalList.isEmpty()) {
+            formattedPets.append("Warning! This owner is not linked to any pets");
             return formattedPets.toString();
         }
 

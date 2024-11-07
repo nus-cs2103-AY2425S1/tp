@@ -160,8 +160,8 @@ public class LinkedOwnerList implements Iterable<Owner> {
 
         formattedOwner.append("Owner: ");
 
-        if (internalList.size() == 0) {
-            formattedOwner.append("warning! this pet is not linked to any owner");
+        if (internalList.isEmpty()) {
+            formattedOwner.append("Warning! This pet is not linked to any owner");
             return formattedOwner.toString();
         } else if (internalList.size() > 1) {
             throw new InvalidOwnerNumberException();
