@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -96,6 +95,12 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * If the new tags contain a net worth status tag (either "highnetworth", "midnetworth", or "lownetworth"),
+     * any existing net worth status tags on the person will be removed to ensure that only one net worth status tag
+     * is associated with the person at a time. This logic is enforced to prevent conflicting net worth statuses
+     * (i.e., a person cannot be classified as both "highnetworth" and "lownetworth").
+     *
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -105,7 +110,19 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedTags = new HashSet<>(editPersonDescriptor.getTags().orElse(personToEdit.getTags()));
+
+        Set<String> netWorthTags = Set.of("highnetworth", "midnetworth", "lownetworth");
+
+        Optional<Tag> newNetWorthTag = updatedTags.stream()
+                .filter(tag -> netWorthTags.contains(tag.tagName.toLowerCase()))
+                .findFirst();
+
+        if (newNetWorthTag.isPresent()) {
+            updatedTags.removeIf(tag -> netWorthTags.contains(tag.tagName.toLowerCase()));
+            updatedTags.add(newNetWorthTag.get());
+        }
+
         Boolean updatedHasPaid = editPersonDescriptor.getHasPaid().orElse(personToEdit.getHasPaid());
         LastPaidDate updatedLastPaidDate = personToEdit.getLastPaidDate();
         Frequency updatedFrequency = personToEdit.getFrequency();
@@ -225,12 +242,10 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null) ? Optional.of(tags) : Optional.empty();
         }
 
         public void setHasPaid(Boolean hasPaid) { // needed for EditPersonDescriptorTest.java

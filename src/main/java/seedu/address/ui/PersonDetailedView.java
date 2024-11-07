@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,15 +13,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
-
-
 /**
  * A UI Component that displays a detailed view of a {@code Person}
  */
 public class PersonDetailedView extends UiPart<Region> {
     private static final String FXML = "PersonDetailedView.fxml";
-
     public final Person person;
+    private boolean isVisualsEnabled;
+
     private final PersonDetailedViewContentManager contentManager;
 
     private final ResultDisplay resultDisplay;
@@ -64,11 +64,13 @@ public class PersonDetailedView extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} to display.
      */
-    public PersonDetailedView(Person person, ResultDisplay resultDisplay) {
+
+    public PersonDetailedView(Person person, boolean isVisualsEnabled, ResultDisplay resultDisplay) {
         super(FXML);
         this.person = person;
         this.contentManager = new PersonDetailedViewContentManager(person);
         this.resultDisplay = resultDisplay;
+        this.isVisualsEnabled = isVisualsEnabled;
 
         initialiseView();
         setupTemplateButtons();
@@ -88,6 +90,22 @@ public class PersonDetailedView extends UiPart<Region> {
         age.setText(contentManager.getAge());
         hasPaid.setText(contentManager.getHasPaidStatus());
         frequency.setText(contentManager.getFrequency());
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+
+                    if (isVisualsEnabled) {
+                        if ("highnetworth".equalsIgnoreCase(tag.tagName)) {
+                            tagLabel.getStyleClass().add("tag-high");
+                        } else if ("midnetworth".equalsIgnoreCase(tag.tagName)) {
+                            tagLabel.getStyleClass().add("tag-mid");
+                        } else if ("lownetworth".equalsIgnoreCase(tag.tagName)) {
+                            tagLabel.getStyleClass().add("tag-low");
+                        }
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
     }
 
     /**
