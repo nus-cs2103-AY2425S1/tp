@@ -481,31 +481,23 @@ Use case ends.
     - 1a1. ClinicBuddy informs the user that there is no action to undo.
     - Use case ends.
 
-Example
-**Use case: Delete a person**
+
+**Use case: Search for bookings**
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+1. User requests for appointments on the specified date to be shown.
+2. ClinicBuddy displays a list of patients whose appointment lies on the specified date.
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The date input is invalid
+    - 1a1. ClinicBuddy displays an error message informing the user that the date is invalid.
+    - Use case ends.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
 
 ### **Non-Functional Requirements**
 
