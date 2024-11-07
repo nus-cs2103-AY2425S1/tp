@@ -244,52 +244,53 @@ providing users a one-stop solution to help manage CCA manpower related consider
 ### User stories
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …        | I want to …                                                                 | So that I can…                                                       |
-|----------|---------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | user          | add multiple contacts with one command                                      | add in multiple contacts at one time                                 |
-| `* * *`  | user          | search for a contact by querying the saved name                             | get the information of the contact when needed                       |
-| `* * *`  | user          | easily view the available commands on the app                               | quickly find the usage for a command I had forgotten                 |
-| `* * *`  | user          | quickly duplicate a contact's information                                   | add similar contacts without re-entering details                     |
-| `* * *`  | user          | add new contacts with the fewest possible keystrokes                        | add new contacts quickly                                             |
-| `* * *`  | user          | add individual contacts                                                     | save the information of the contact and retrieve it when I want it   |
-| `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current           |
-| `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation |
-| `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                   |
-| `* *`    | user          | role contacts to a group/role name                                          | group individuals into relevant sections for better clarity          |
-| `* *`    | user          | search for multiple contacts by querying its role                           | get the information of all the contacts related to the relevant role |
-| `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                |
-| `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                     |
-| `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine         |
-| `* *`    | user          | undo a recent delete                                                        | recover from a mistake                                               |
-| `* *`    | user          | add notes to any contact                                                    | remember important details about them                                |
-| `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others            |
-| `* *`    | user          | export my contacts to an external file                                      | send the contacts to another user or filter externally               |
-| `* *`    | user          | see all members in a separate view                                          | check members and mark their attendance more easily                  |
-| `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities       |
-| `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities       |
-| `*`      | user          | start a temporary session that does not persist between sessions            | experiment with and play around with the environment                 |
-| `*`      | user          | sort the contacts by popularity (how often I query the contact)             | quickly access frequently queried contacts                           |
-| `*`      | user          | switch profiles to another profile, containing a separate list of contacts  | separate contacts of individuals in different organisations          |
-| `*`      | seasoned user | leverage compound and nested queries/commands                               | get the exact results that I require, in fewer commands              |
-| `*`      | user          | customise commands to manage the contacts                                   | add, remove, modify, search contacts with greater efficiency         |
-| `*`      | user          | secure my account with authentication                                       | only authorised users can access the information                     |
-| `*`      | user          | back up my contacts regularly                                               | not lose important contact information                               |
-| `*`      | user          | log activity history with each contact                                      | keep track of my latest interactions and follow-ups                  |
-| `*`      | user          | perform advanced searches using multiple criteria (e.g. role, last contact) | find specific contacts more efficiently                              |
-| `*`      | user          | customise the appearance of my address book (e.g. colour schemes, themes…)  | match my preferences                                                 |
-| `*`      | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                      |
-| `*`      | user          | colour-code my contacts based on categories                                 | visually distinguish between different types of contacts             |
-| `*`      | user          | set up quick actions (e.g. call, message…)                                  | reach out with a single click                                        |
-| `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                            |
-| `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                   |
+| Priority | As a …        | I want to …                                                                 | So that I can…                                                          |
+|----------|---------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | user          | add multiple contacts with one command                                      | add in multiple contacts at one time                                    |
+| `* * *`  | user          | view all the information of a particular contact                            | focus on that one sole contact without distractions from other contacts |
+| `* * *`  | user          | search for a contact by querying the saved name                             | get the information of the contact when needed                          |
+| `* * *`  | user          | easily view the available commands on the app                               | quickly find the usage for a command I had forgotten                    |
+| `* * *`  | user          | quickly duplicate a contact's information                                   | add similar contacts without re-entering details                        |
+| `* * *`  | user          | add new contacts with the fewest possible keystrokes                        | add new contacts quickly                                                |
+| `* * *`  | user          | add individual contacts                                                     | save the information of the contact and retrieve it when I want it      |
+| `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current              |
+| `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation    |
+| `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                      |
+| `* *`    | user          | role contacts to a group/role name                                          | group individuals into relevant sections for better clarity             |
+| `* *`    | user          | search for multiple contacts by querying its role                           | get the information of all the contacts related to the relevant role    |
+| `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                   |
+| `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                        |
+| `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine            |
+| `* *`    | user          | add notes to any contact                                                    | remember important details about them                                   |
+| `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others               |
+| `* *`    | user          | export my contacts to an external file                                      | send the contacts to another user or filter externally                  |
+| `* *`    | user          | see all members in a separate view                                          | check members and mark their attendance more easily                     |
+| `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities          |
+| `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities          |
+| `*`      | user          | start a temporary session that does not persist between sessions            | experiment with and play around with the environment                    |
+| `*`      | user          | sort the contacts by popularity (how often I query the contact)             | quickly access frequently queried contacts                              |
+| `*`      | user          | switch profiles to another profile, containing a separate list of contacts  | separate contacts of individuals in different organisations             |
+| `*`      | seasoned user | leverage compound and nested queries/commands                               | get the exact results that I require, in fewer commands                 |
+| `*`      | user          | customise commands to manage the contacts                                   | add, remove, modify, search contacts with greater efficiency            |
+| `*`      | user          | secure my account with authentication                                       | only authorised users can access the information                        |
+| `*`      | user          | back up my contacts regularly                                               | not lose important contact information                                  |
+| `*`      | user          | log activity history with each contact                                      | keep track of my latest interactions and follow-ups                     |
+| `*`      | user          | perform advanced searches using multiple criteria (e.g. role, last contact) | find specific contacts more efficiently                                 |
+| `*`      | user          | customise the appearance of my address book (e.g. colour schemes, themes…)  | match my preferences                                                    |
+| `*`      | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                         |
+| `*`      | user          | colour-code my contacts based on categories                                 | visually distinguish between different types of contacts                |
+| `*`      | user          | set up quick actions (e.g. call, message…)                                  | reach out with a single click                                           |
+| `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                               |
+| `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is  `CCAConnect` and the **Actor** is the `user`, unless specified otherwise)
+**Notes**: _For all use cases below, the **System** is  `CCAConnect` and the **Actor** is the `user`, unless specified otherwise_
 <br>
-**Use case: UC01 - View John Doe’s Contact Information**
+
+**Use Case: UC01 - View John Doe’s Contact Information**
 **Actor: User**
 **MSS**
 
@@ -306,7 +307,8 @@ Use Case ends.
   * Use case resumes from step 2.
 
 <br>
-**Use case: UC02 - Delete a contact**
+
+**Use Case: UC02 - Delete a contact**
 **Actor: User**
 **MSS**
 
@@ -315,19 +317,20 @@ Use Case ends.
 3. User requests to delete a specific contact at the list index.
 4. CCAConnect deletes the contact.
 
-Use case ends.
+Use Case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-  * Use case ends.
+  * Use Case ends.
 
 * 3a. User inputs an invalid index.
   * 3a1. CCAConnect shows an error message.
-  * Use case resumes at step 2.
+  * Use Case resumes at step 2.
 
 <br>
-**Use case: UC03 - Add a contact**
+
+**Use Case: UC03 - Add a contact**
 **Actor: User**
 **MSS**
 
@@ -335,38 +338,40 @@ Use case ends.
 2. User provides the details of the contact, including fields like name, phone number, etc.
 3. System adds the contact to the list of contacts and displays the contact as a new entry in the list of contacts viewable by the user.
 
-Use case ends.
+Use Case ends.
 
 **Extensions**
 * 3a. System detects that user did not enter all the required fields.
     * 3a1. System shows user an error message.
-    * Use case ends.
+    * Use Case ends.
 
 * 3b. System detects that user entered an invalid field.
     * 3b1. System shows user an appropriate error message.
-    * Use case ends.
+    * Use Case ends.
 
 <br>
-**Use case: UC04 - Search for a contact**
+
+**Use Case: UC04 - Search for a contact**
 **Actor: User**
 **MSS**
 
 1. User searches the list of contacts with a query relating to a contact’s name.
 2. System displays the subset of contacts with the same name as the query
 
-Use case ends.
+Use Case ends.
 
 **Extensions**
 * 1a. User requests for a search, with no query.
     * 1a1. System displays an error to the user.
-    * Use case ends.
+    * Use Case ends.
 
 * 2a. System fails to find any contacts related to the query.
     * 2a1. System displays an empty list to the user.
-    * Use case ends.
+    * Use Case ends.
 
 <br>
-**Use case: UC05 - List all contacts**
+
+**Use Case: UC05 - List all contacts**
 **Actor: User**
 **MSS**
 
@@ -380,32 +385,34 @@ Use Case ends.
 * 1a. CCAConnect detects an error in the entered command information.
   * 1a1. CCAConnect returns an error message.
   * Steps 1a1 is repeated till the user enters a valid list command.
-  * Use case resumes from step 2.
+  * Use Case resumes from step 2.
 
 <br>
-**Use case: UC06 - View all commands**
+
+**Use Case: UC06 - View all commands**
 **Actor: User**
 **MSS**
 
 1. User requests to see all the available commands.
 2. CCAConnect displays all valid commands.
 
-Use case ends.
-<br>
+Use Case ends.
 
 <br>
-**Use case: UC07 - View all members**
+
+**Use Case: UC07 - View all members**
 **Actor: User**
 **MSS**
 
 1. User requests to see all members in the contacts.
 2. CCAConnect displays all members.
 
-Use case ends.
+Use Case ends.
 <br>
 
 <br>
-**Use case: UC08 - Mark attendance of members**
+
+**Use Case: UC08 - Mark attendance of members**
 **Actor: User**
 **MSS**
 
@@ -413,24 +420,25 @@ Use case ends.
 2. User provides the details of the session (date) to mark attendance, and list of telegrams of members to be marked.
 3. System marks the attendance of the list of members on the specified date.
 
-Use case ends.
+Use Case ends.
 
 **Extensions**
 * 1a. System detects that user did not enter all the required fields.
     * 1a1. System shows user an error message.
-    * Use case ends.
+    * Use Case ends.
 
 * 1b. System detects that user entered an invalid field.
     * 1b1. System shows user an appropriate error message.
-    * Use case ends.
+    * Use Case ends.
 
 * 1c. System detects that user tried to mark the attendance of non-member contact.
     * 1c1. System shows user an appropriate error message.
-    * Use case ends.
+    * Use Case ends.
 <br>
 
 <br>
-**Use case: UC09 - Unmark attendance of members**
+
+**Use Case: UC09 - Unmark attendance of members**
 **Actor: User**
 **MSS**
 
@@ -438,25 +446,21 @@ Use case ends.
 2. User provides the details of the session (date) to unmark attendance, and list of telegrams of members to be unmarked.
 3. System unmarks the attendance of the list of members on the specified date.
 
-Use case ends.
+Use Case ends.
 
 **Extensions**
 * 1a. System detects that user did not enter all the required fields.
     * 1a1. System shows user an error message.
-    * Use case ends.
+    * Use Case ends.
 
 * 1b. System detects that user entered an invalid field.
     * 1b1. System shows user an appropriate error message.
-    * Use case ends.
+    * Use Case ends.
 
 * 1c. System detects that user tried to unmark the attendance of non-member contact.
     * 1c1. System shows user an appropriate error message.
-    * Use case ends.
-<br>
-
-
-*{More to be added}*
-<br>
+    * Use Case ends.
+___
 
 ### Non-Functional Requirements
 
@@ -472,9 +476,6 @@ Use case ends.
 10. All code changes must be subject to peer review and approval by two separate team members (not including the owner of the change)
 11. All releases must have proper documentation
 
-
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -486,10 +487,7 @@ Use case ends.
 * **Flag**: A specifier to indicate the start of an argument after a command. E.g. `n/` represents a name flag
 * **Regex**: A regular expression, which is a sequence of characters that specifies a match pattern
 * **Member**: A member is a special type of contact that has the role `Member` in its `roles`
-
-*{More to be added}*
-
---------------------------------------------------------------------------------------------------------------------
+___
 
 ## **Appendix: Instructions for manual testing**
 
@@ -500,44 +498,115 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Add Feature
 
-1. Initial launch
+**Description**: Adds a new contact to the list of contacts.
 
-   1. Download the jar file and copy into an empty folder
+**Test Case 1**:
+1. Launch the application.
+2. Enter `add n/tester p/99999999 e/test@test.com t/test123 r/member`
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+**Expected Result**:
+- The new contact is added to the list and displayed.
 
-1. Saving window preferences
+**Test Case 2**:
+1. Repeat steps 1 & 2 from *Test Case 1*.
+2. Enter invalid data (e.g., empty name, invalid email / phone number / telegram handle).
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+**Expected Result**:
+- Relevant error message is displayed, indicating what the invalid input is, and guiding the user to enter the right input.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Edit Feature
 
-1. _{ more test cases …​ }_
+**Description**: Edits an existing item in the list.
 
-### Deleting a person
+**Test Case 1**:
+1. Identify the index of the contact you want to edit, `X`.
+2. Enter `edit X n/New Name`
 
-1. Deleting a person while all persons are being shown
+**Expected Result**:
+- Contact at index `X` has a new contact name, `New Name`.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Mark Feature
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+**Description**: Marks a (Member) contact as having attended a session.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+**Test Case 1**:
+1. Identify the telegram handle of the Member you wish to mark attendance for (e.g., `test123`).
+2. Enter `mark t/test123 d/YYYY-MM-DD`, where YYYY-MM-DD is today's date in the specified format.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+**Expected Result**:
+- Contact is marked as having attended today's session, visually indicated with a checkmark in a box.
 
-1. _{ more test cases …​ }_
+### Unmark Feature
 
-### Saving data
+**Description**: Unmarks a (Member) contact as having attended a session.
 
-1. Dealing with missing/corrupted data files
+**Test Case 1**:
+1. Identify the telegram handle of the Member you wish to mark attendance for (e.g., `test123`).
+2. Enter `unmark t/test123 d/YYYY-MM-DD`, where YYYY-MM-DD is today's date in the specified format.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+**Expected Result**:
+- Contact is marked as having attended today's session, visually indicated with an empty box.
 
-1. _{ more test cases …​ }_
+### Delete Feature
+
+**Description**: Deletes a contact from the list.
+
+**Test Case 1**:
+1. Identify the index of the contact you want to edit, `X`.
+2. Enter `delete X`.
+
+**Expected Result**:
+- Contact at index `X` is removed from the list.
+
+### Sort Feature
+
+**Description**: Sorts the items in the list based on a specified criterion (`asc`, `desc` or `og`).
+
+**Test Case 1**:
+1. Enter `sort asc`
+
+**Expected Result**:
+- The items in the list are sorted in ascending order (based on name).
+
+**Test Case 2**:
+1. Enter `sort tallest`
+
+**Expected Result**:
+- Error message `Sort order parameter can only be asc or desc or og.` displayed.
+
+### Find Feature
+
+**Description**: Finds items in the list that match a specified search query.
+
+**Test Case 1**:
+1. Identify criterion you wish to find contacts with (e.g., `r/member`)
+2. Enter `find r/member`
+
+**Expected Result**:
+- Only contacts that have `Member` in their role are displayed.
+
+### View Feature
+
+**Description**: Views the details of a selected item.
+
+**Test Case 1**:
+1. Identify the telegram handle of the contact you wish to view (e.g., `test123`).
+2. Enter `view t/test123`
+
+**Expected Result**:
+- The contact details of the specified contact are displayed.
+
+**Test Case 2**:
+1. Identify invalid telegram handle you wish to view (e.g., `test` (less than 5 characters) or `test!23` (contains invalid character))).
+2. Enter `view t/test` or `view t/test!23`
+
+**Expected Result**:
+- Error message specifying exact error in telegram input displayed.
+
+### General Testing Notes
+- Ensure to test each feature with both valid and invalid inputs.
+- Check for proper handling of edge cases, such as extremely large or small input values.
+- Verify that the UI updates correctly and reflects the changes made by each feature.
+- Confirm that error messages and prompts are displayed appropriately for invalid operations.
