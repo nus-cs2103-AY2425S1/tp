@@ -40,7 +40,7 @@ public class PublicAddressesCompositionTest {
     //------------------ Add Public Address Tests ------------------
 
     @Test
-    public void copyAndAddPublicAddress_nullAddress_throwsAssertionError() {
+    public void addPublicAddress_nullAddress_throwsAssertionError() {
         // EP: null address
         PublicAddressesComposition composition = new PublicAddressesComposition();
         assertThrows(AssertionError.class, () ->
@@ -48,7 +48,7 @@ public class PublicAddressesCompositionTest {
     }
 
     @Test
-    public void copyAndAddPublicAddress_duplicateAddresses() {
+    public void addPublicAddress_duplicateAddresses() {
         // EP: duplicate addresses
         PublicAddressesComposition composition = new PublicAddressesComposition();
         composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
@@ -58,7 +58,7 @@ public class PublicAddressesCompositionTest {
     }
 
     @Test
-    public void copyAndAddPublicAddress_caseSensitivity() {
+    public void addPublicAddress_caseSensitivity() {
         // EP: case sensitivity
         PublicAddressesComposition composition = new PublicAddressesComposition();
         PublicAddress addressLowerCase = new BtcAddress("address", "Label");
