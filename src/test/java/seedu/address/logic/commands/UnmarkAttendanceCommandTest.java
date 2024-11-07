@@ -123,7 +123,7 @@ public class UnmarkAttendanceCommandTest {
         List<String> alreadyUnmarkedList = displayMembers(membersAttendanceUnmarked);
         List<String> unmarkSuccessList = displayMembers(List.of(BENSON));
         String expectedMessage = String.format(
-                MESSAGE_UNMARK_MEMBER_SUCCESS, attendance, unmarkSuccessList) + '\n'
+                MESSAGE_UNMARK_MEMBER_SUCCESS, attendance, unmarkSuccessList)
                 + String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER, alreadyUnmarkedList);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
