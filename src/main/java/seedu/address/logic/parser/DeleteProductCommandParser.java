@@ -19,8 +19,6 @@ public class DeleteProductCommandParser implements Parser<DeleteProductCommand> 
     public DeleteProductCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-        argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_NAME);
         ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_NAME},
                 DeleteProductCommand.MESSAGE_USAGE);
         argMultimap.verifyNoDuplicatePrefixesFor(

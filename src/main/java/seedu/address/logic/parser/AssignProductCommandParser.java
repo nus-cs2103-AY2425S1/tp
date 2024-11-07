@@ -19,11 +19,11 @@ public class AssignProductCommandParser implements Parser<AssignProductCommand> 
      */
     public AssignProductCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PRODUCT_NAME, PREFIX_SUPPLIER_NAME);
+        ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_PRODUCT_NAME, PREFIX_SUPPLIER_NAME},
+                AssignProductCommand.MESSAGE_USAGE);
         argMultimap.verifyNoDuplicatePrefixesFor(
                 PREFIX_PRODUCT_NAME,
                 PREFIX_SUPPLIER_NAME);
-        ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_PRODUCT_NAME, PREFIX_SUPPLIER_NAME},
-                AssignProductCommand.MESSAGE_USAGE);
 
         argMultimap.verifyNoDuplicatePrefixesFor(
                 PREFIX_PRODUCT_NAME,

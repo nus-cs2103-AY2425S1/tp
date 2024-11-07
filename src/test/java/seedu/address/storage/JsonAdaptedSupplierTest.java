@@ -74,7 +74,7 @@ public class JsonAdaptedSupplierTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedSupplier supplier =
                 new JsonAdaptedSupplier(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS, null);
-        String expectedMessage = Email.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Email.getDetailedErrorMessage(INVALID_EMAIL);
         assertThrows(IllegalValueException.class, expectedMessage, supplier::toModelType);
     }
 
