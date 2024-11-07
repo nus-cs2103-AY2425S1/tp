@@ -118,6 +118,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 </box>
 
 * The phone number must follow the Singaporean convention: have 8 digits, start with 6, 8, or 9, and consist only of numbers.
+* Do not add duplicate contacts to the list.
+* Two contacts are considered duplicates if they share the same name, email, or phone number.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
@@ -141,6 +143,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed, i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* Do not add duplicate contacts to the list.
+  Two contacts are considered duplicates if they share the same name, email, or phone number.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
