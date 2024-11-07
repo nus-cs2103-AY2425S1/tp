@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a new event.
+1. User enters command to create a new event.
 2. System creates the event.
 3. System displays a success message.
 
@@ -431,16 +431,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+* 1a. The command format entered by the user is invalid.
+    * 1a1. System shows an error message and displays the correct command format.
+    
+      Use case ends.
+
 * 1a. The event name is invalid.
-
-    * 1a1. System shows an error message.
-
+    * 1a1. System shows an error message indicating the name format is incorrect.
+    
       Use case ends.
 
 * 1b. The date format is invalid.
+    * 1b1. System shows an error message indicating the date format is incorrect.
+    
+      Use case ends.
 
-    * 1b1. System shows an error message.
-
+* 1c. The event already exists in the system.
+    * 1c1. System shows an error message indicating a duplicate event.
+      
       Use case ends.
 
 ---
@@ -639,16 +647,50 @@ Preconditions: User is viewing an item.
 
 * 1a. The command format entered by the user is invalid.
     * 1a1. System shows an error message and displays the correct command format.
-    * Use case ends.
+    
+      Use case ends.
 
 * 2a. No items match the search keywords.
     * 2a1. System displays a message indicating no items were found.
-    * Use case ends.
+    
+      Use case ends.
+
+**Use case: UC08 - Create a vendor**
+
+**MSS**
+
+1. User enters command to create a new vendor.
+2. System creates the vendor.
+3. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+    * 1a1. System shows an error message and displays the correct command format.
+    
+      Use case ends.
+
+* 1a. The vendor name is invalid.
+    * 1a1. System shows an error message indicating the name format is incorrect.
+    
+      Use case ends.
+
+* 1b. The phone number format is invalid.
+    * 1b1. System shows an error message indicating the phone number format is incorrect.
+    
+      Use case ends.
+
+* 1c. The vendor already exists in the system.
+    * 1c1. System shows an error message indicating a duplicate vendor.
+    
+      Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 100 events and 1000 vendors without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 100 events and 100 vendors without a noticeable sluggishness in performance for typical usage.
 3.  Should be able to assign up to 100 vendors to an event without any issue.
 4.  A user with an above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Persistent data stored by the system should be in a human-readable format.
@@ -818,7 +860,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Getting Help:
 
-   1. Type `help` in the command box and press Enter.  
+   1. Type `help` in the command box and press Enter.
       Expected: A help window appears, showing instructions and command summaries.
 
 ### Editing Data File (Advanced Users)
