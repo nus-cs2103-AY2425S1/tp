@@ -152,11 +152,10 @@ This feature allows you to connect products with their current supplier. This ma
 Format: `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`
 
 Example:
-- `assign Tissue Paper Jacob Smith` assigns product named Tissue paper to supplier named Jacob Smith
+- `assign pr/Tissue Paper su/Jacob Smith` assigns product named Tissue paper to supplier named Jacob Smith
 
 > **Important**:
 > The product and supplier must already exist in the system before you can assign them.
-> Make sure the product was created using the `NEW_PRODUCT` command and the supplier was created using the `NEW_SUPPLIER` command.
 
 > **Note:**
 > If product has already been assigned to supplier, the system will notify you.
@@ -165,14 +164,13 @@ Example:
 
 This feature allows you to remove the assigned supplier from the previously connected product. Useful if the store manager decides to stop sourcing a particular product from a supplier or switch to a new one.
 
-Format: `unassign pr/PRODUCT_NAME su/SUPPLIER_NAME`
+Format: `unassign pr/PRODUCT_NAME`
 
 Example:
-- `unassign Tissue Paper Jacob Smith` Unassigns product named `Tissue paper` to supplier named `Jacob Smith`
+- `unassign pr/Tissue Paper` Unassigns product named `Tissue paper`.
 
 > **Important**:
-> The product and supplier must already exist in the system before you can assign them.
-> Make sure the product was created using the `NEW_PRODUCT` command and the supplier was created using the `NEW_SUPPLIER` command.
+> The product must already exist in the system before you can assign them.
 
 > **Note:**
 > If product was not assigned to supplier, the system will notify you.
