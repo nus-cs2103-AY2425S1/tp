@@ -12,7 +12,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":AddressBook" as AB MODEL_COLOR
+participant ":HRPlatform" as AB MODEL_COLOR
 participant ":Person" as Person MODEL_COLOR
 end box
 
@@ -27,8 +27,8 @@ return s
 return s
 destroy SCP
 LM -> SC ++ : execute(model)
-SC -> Model : getAddressBook()
-Model --> SC : AddressBook instance
+SC -> Model : getHRPlatform()
+Model --> SC : HRPlatform instance
 SC -> AB : getPersonList()
 AB --> SC : personList
 
