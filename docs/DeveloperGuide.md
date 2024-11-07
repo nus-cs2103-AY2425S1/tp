@@ -553,4 +553,20 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2._{ more test cases …​ }_
+
+### Adding a lesson
+
+1. Adding a lesson with all fields filled
+
+    1a. Prerequisites: Clear the list with the command `clear` <br>
+        Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
+        Add a tutee with the command `addTutee \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s math`.
+    
+    1b. Test case: `addLesson 1 2 math`<br>
+        Expected: New lesson is added to the list. Details of the new lesson shown in the status message.
+    
+    1c. Test case: `addLesson 1 2 math`<br>
+        Expected: No lesson is added. Error details shown in the status message for duplicate lesson.
+
+2. _{ more test cases …​ }_
