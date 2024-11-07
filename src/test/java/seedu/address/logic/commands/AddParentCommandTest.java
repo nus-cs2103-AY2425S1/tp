@@ -182,6 +182,11 @@ public class AddParentCommandTest {
         }
 
         @Override
+        public Predicate<Person> getFilteredPersonListPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void sortByPin() {
             throw new AssertionError("This method should not be called.");
         }

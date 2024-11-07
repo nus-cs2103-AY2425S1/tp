@@ -27,7 +27,7 @@ If you can type fast, GOATS can get your student management tasks done faster th
 3. Copy the file to the folder you want to use as the _home folder_ for your GOATS.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar GOATS.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/UI.png)
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -45,8 +45,8 @@ If you can type fast, GOATS can get your student management tasks done faster th
 
 | Action            | Format, Examples                                                                                                                                                                                |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add Student**   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS  edu/EDUCATION [t/TAG]` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                 |
-| **Add Parent**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/Jane Doe p/33335555 e/janedoe@example.com a/456, Pasir Ris Dr t/friend`                                               |
+| **Add Student**   | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS  edu/EDUCATION [t/TAG]` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                |
+| **Add Parent**    | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/Jane Doe p/33335555 e/janedoe@example.com a/456, Pasir Ris Dr t/friend`                                              |
 | **Grade**         | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`                                                                                                                                            |
 | **Clear**         | `clear`                                                                                                                                                                                         |
 | **Delete**        | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 1 2 3 4`                                                                                                                                        |
@@ -99,7 +99,6 @@ Examples:
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/Primary`
 * `adds n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal edu/Secondary`
 
-
 ### Adding a parent: `addp`
 
 Adds a parent to the address book.
@@ -140,7 +139,6 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
-
 
 ### Deleting a person : `delete`
 
@@ -285,7 +283,6 @@ Examples:
 * `listarchive` followed by `unarchive 2` unarchives the 2nd person in the address book archives.
 * `listarchive` followed by `find Betsy` followed by `unarchive 1` unarchives the 1st person in the results of the `find` command.
 * `listarchive` followed by `unarchive 2 3 4 5` unarchives the 2nd, 3rd, 4th and 5th people in the address book.
-
 
 ### Listing all persons : `list`
 

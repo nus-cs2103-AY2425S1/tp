@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -36,6 +37,7 @@ public class UnarchiveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        Predicate<Person> lastShownListPredicate = model.getFilteredPersonListPredicate();
 
         List<Person> peopleToUnarchive = new ArrayList<>();
         for (Index index : targetIndices) {
@@ -58,7 +60,7 @@ public class UnarchiveCommand extends Command {
         assert resultMessages.size() == targetIndices.size();
 
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ARCHIVED_PERSONS);
+        model.updateFilteredPersonList(lastShownListPredicate.and(Model.PREDICATE_SHOW_ARCHIVED_PERSONS));
 
         if (resultMessages.size() == 1) {
             return new CommandResult(String.format(MESSAGE_UNARCHIVE_PERSON_SUCCESS, resultMessages.get(0)));
