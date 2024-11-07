@@ -32,12 +32,14 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Contains one or more indices that are not non-zero unsigned "
+            + "integers.";
     public static final String MESSAGE_INVALID_INTERVAL_FORMAT = "Invalid range format. Expected format: a-b"
         + " (0 < a <= b)";
     public static final String MESSAGE_INVALID_INTERVAL = "Invalid range: start index must be less than or equal"
             + " to end index.";
-    public static final String MESSAGE_EMPTY_INDICES = "At least one index is required.";
+    public static final String MESSAGE_EMPTY_INDICES = "Indices should not be empty; at least one index or range "
+            + "must be provided.";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
