@@ -97,10 +97,7 @@ If you’re comfortable typing, MindMap can help you get contact management task
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g `n/NAME [s/STATUS]` can be used as `n/John Doe s/LOW` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -126,10 +123,6 @@ Adds a person to the address book.
 
 Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
 
 Examples:
 * `add n/John Doe i/S7783844I p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW`
@@ -145,14 +138,11 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS]​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -291,18 +281,18 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| **Action**       | **Description**                       | **Format**                                         | **Example**                                                                                   |
-|------------------|---------------------------------------|----------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **Add**          | Adds a person to the address book     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**        | Clears all entries                    | `clear`                                            |                                                                                               |
-| **Delete**       | Deletes a person                      | `delete INDEX`                                     | `delete 3`                                                                                    |
-| **Edit**         | Edits an existing person              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                   |
-| **Find**         | Finds persons by keywords             | `find KEYWORD [MORE_KEYWORDS]`                     | `find James Jake`                                                                             |
-| **Confirm**      | Confirms a deletion or clear action   | `confirm`                                          |                                                                                               |
-| **Cancel**       | Cancels a delete or clear action      | `cancel`                                           |                                                                                               |
-| **List**         | Lists all persons in the address book | `list`                                             |                                                                                               |
-| **List Logs**    | Lists logs for a specific person      | `logs i/NRIC`                                      | `logs i/S8613282F`                                                                            |
-| **Help**         | Displays help message                 | `help`                                             |                                                                                               |
+| **Action**       | **Description**                       | **Format**                                                                | **Example**                                                                         |
+|------------------|---------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| **Add**          | Adds a person to the address book     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                  | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/LOW` |
+| **Clear**        | Clears all entries                    | `clear`                                                                   |                                                                                     |
+| **Delete**       | Deletes a person                      | `delete INDEX`                                                            | `delete 3`                                                                          |
+| **Edit**         | Edits an existing person              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                   |
+| **Find**         | Finds persons by keywords             | `find KEYWORD [MORE_KEYWORDS]`                                            | `find James Jake`                                                                   |
+| **Confirm**      | Confirms a deletion or clear action   | `confirm`                                                                 |                                                                                     |
+| **Cancel**       | Cancels a delete or clear action      | `cancel`                                                                  |                                                                                     |
+| **List**         | Lists all persons in the address book | `list`                                                                    |                                                                                     |
+| **List Logs**    | Lists logs for a specific person      | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                  |
+| **Help**         | Displays help message                 | `help`                                                                    |                                                                                     |
 
  #### Additional Notes
 
@@ -311,10 +301,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
     - `p/PHONE_NUMBER` - Person's phone number.
     - `e/EMAIL` - Email address.
     - `a/ADDRESS` - Address details.
-    - `t/TAG` - Tags such as friend, colleague, etc. Can add multiple tags.
+    - `s/STATUS` - Statuses of the patients which can only be HIGH, LOW, MEDIUM, DISCHARGED AND NEW.
 
 * **Commands**:
-    - **Add** allows any number of tags (`[t/TAG]…​`), including none.
     - **Edit** and **Delete** require the `INDEX` number displayed in the list of persons.
     - **Clear** and **Delete** actions require `confirm` to complete or `cancel` to abort.
 
