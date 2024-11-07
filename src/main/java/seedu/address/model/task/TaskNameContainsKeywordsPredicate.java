@@ -3,7 +3,6 @@ package seedu.address.model.task;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -20,9 +19,10 @@ public class TaskNameContainsKeywordsPredicate implements Predicate<Task> {
     @Override
     public boolean test(Task task) {
         return keywords.stream().anyMatch(keyword -> {
+            String key = keyword.toLowerCase();
             TaskName taskName = task.getTaskName();
             String taskNameString = taskName.toString().toLowerCase();
-            return StringUtil.containsWordIgnoreCase(taskNameString, keyword);
+            return taskNameString.contains(key);
         });
     }
 
