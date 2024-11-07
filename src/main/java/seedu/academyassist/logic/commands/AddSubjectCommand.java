@@ -22,9 +22,10 @@ public class AddSubjectCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds subject(s) to the student with this student id. \n"
-            + "Parameters: StudentID (S followed by 5-digit number) "
-            + PREFIX_SUBJECT + "SUBJECT \n"
-            + "Example: " + COMMAND_WORD + " S12345 "
+            + "Parameters: \n"
+            + "StudentID (S followed by a 5-digit number between 00001 and 99999) \n"
+            + PREFIX_SUBJECT + "SUBJECT \n" + "[" + PREFIX_SUBJECT + "MORE_SUBJECTS]... \n"
+            + "Example: \n" + COMMAND_WORD + " S12345 "
             + PREFIX_SUBJECT + "Math ";
 
 

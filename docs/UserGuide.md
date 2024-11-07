@@ -98,18 +98,19 @@ Adds a new student to the tuition center management system.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT`
 
-* `NAME` should be 1-100 characters long and contain only alphabets and spaces.
+* `NAME` cannot be empty and should contain only alphabets and spaces.
 * `PHONE_NUMBER` should be an 8-digit number.
 * `EMAIL` is compulsory and should follow the format username@domain.
 * `ADDRESS` is compulsory.
-* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers. It should start with one of 
+`S, T, F, G, M` followed by a 7-digit number and another alphabet (e.g., S1234567A).
 * `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
 secondary school years 7 - 13).
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Only subjects that are available
 within the tuition centre will be allowed. Subjects are case-insensitive (i.e. science, Science, SCIENCE will be treated
 as the same).
 * A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
-message and can be used for `addc`, `edit`, and `delete`.
+message and can be used for `addsubject`, `edit`, `detail` and `delete`.
 
 Examples:
 * `add n/Sam Tan p/81003999 e/samtan@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
@@ -223,9 +224,10 @@ Sorts the list of students based on a specified field.
 
 Format: `sort s/FIELD`
 
-* `FIELD` can be either `name`, `subject` or `yearGroup`.
+* `FIELD` can be either `name`, `subject`, `studentID` or `yearGroup`.
 * Sorting by name will sort students in lexicographical ascending order of their names.
 * Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
+* Sorting by studentID will sort students based in ascending order based on their studentID.
 * Sorting by yearGroup will sort students in ascending order based on their year group.
 
 Examples:
@@ -321,7 +323,9 @@ If you ever have questions about your data, just ask - we're always happy to hel
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AcademyAssist folder.
+the data of your previous AcademyAssist folder.<br><br>
+**Q**: Why is there a gap in the studentID after I deleted a student?<br>
+**A**: This is an intentional design, kindly refer to the note under [Features](#features) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
