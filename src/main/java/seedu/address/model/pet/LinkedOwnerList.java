@@ -13,7 +13,6 @@ import seedu.address.model.link.Linkable;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.exceptions.DuplicateOwnerException;
 import seedu.address.model.owner.exceptions.OwnerNotFoundException;
-import seedu.address.model.pet.exceptions.InvalidOwnerNumberException;
 
 /**
  * A list of Owners that enforces uniqueness between its elements and does not allow nulls.
@@ -63,9 +62,6 @@ public class LinkedOwnerList implements Iterable<Owner> {
         Owner toAdd = (Owner) target;
         if (contains(toAdd)) {
             throw new DuplicateOwnerException();
-        }
-        if (internalList.size() > 0) {
-            throw new InvalidOwnerNumberException();
         }
         internalList.add(toAdd);
     }
@@ -155,21 +151,17 @@ public class LinkedOwnerList implements Iterable<Owner> {
         return internalList.equals(otherUniqueOwnerList.internalList);
     }
 
-    public String getAsField() throws InvalidOwnerNumberException {
+    public String getAsField() {
         StringBuilder formattedOwner = new StringBuilder();
 
-        formattedOwner.append("Owner: ");
+        formattedOwner.append("Owner(s): ");
 
         if (internalList.isEmpty()) {
             formattedOwner.append("Warning! This pet is not linked to any owner");
             return formattedOwner.toString();
-        } else if (internalList.size() > 1) {
-            throw new InvalidOwnerNumberException();
         }
 
-        for (Owner owner : internalList) {
-            formattedOwner.append(owner.getName());
-        }
+        formattedOwner.append(String.join(" | ", internalList.stream().map(o -> o.getName().toString()).toList()));
 
         return formattedOwner.toString();
     }

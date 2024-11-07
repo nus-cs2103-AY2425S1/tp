@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,7 +36,7 @@ public class UnlinkCommand extends Command {
                     + PREFIX_TO + "p3 "
                     + PREFIX_TO + "p2";
 
-    public static final String MESSAGE_SUCCESS = "Unlinked %1$s pet(s) from %2$s";
+    public static final String MESSAGE_SUCCESS = "Unlinked %1$s pet(s) from %2$s: %3$s";
     public static final String MESSAGE_LINK_NOT_FOUND =
             "This link does not exist in the address book";
 
@@ -71,19 +72,26 @@ public class UnlinkCommand extends Command {
         Owner owner = ownerList.get(ownerIndex.getZeroBased());
 
         // Validate all unlink requests first
-        Set<Link> validatedLinks = getValidatedLinks(model, owner, petList);
+        List<Pet> validatedPetList = new ArrayList<>();
+        Set<Link> validatedLinks = getValidatedLinks(model, owner, petList, validatedPetList);
 
         // Remove all links
         validatedLinks.forEach(model::deleteLink);
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, validatedLinks.size(), Messages.format(owner))
+                String.format(MESSAGE_SUCCESS, validatedLinks.size(), owner.getName(),
+                  String.join(", ", validatedPetList.stream().map(p -> p.getName().toString()).toList())
+                )
         );
     }
 
-    private Set<Link> getValidatedLinks(Model model, Owner owner, List<Pet> petList) throws CommandException {
+    private Set<Link> getValidatedLinks(Model model, Owner owner, List<Pet> petList, List<Pet> validatedPetList)
+            throws CommandException {
+        validatedPetList.clear();
+
         Set<Link> links = new HashSet<>();
         Iterator<Index> petIndexIterator = petIndexes.iterator();
+
         while (petIndexIterator.hasNext()) {
             Index petIndex = petIndexIterator.next();
             if (petIndex.getZeroBased() >= petList.size()) {
@@ -92,7 +100,9 @@ public class UnlinkCommand extends Command {
                 );
             }
 
-            Link link = new Link(owner, petList.get(petIndex.getZeroBased()));
+            Pet pet = petList.get(petIndex.getZeroBased());
+            Link link = new Link(owner, pet);
+            validatedPetList.add(pet);
 
             if (!model.hasLink(link)) {
                 throw new CommandException(MESSAGE_LINK_NOT_FOUND);

@@ -49,9 +49,9 @@ public class ListCommandViewManager {
         } else if (commandResult.getCommandType().equals(ViewToggler.LINK_OWNER_TO_PET_COMMAND)) {
             showLinks();
         } else if (commandResult.getCommandType().equals(ViewToggler.FIND_PET_COMMAND)) {
-            changeToPetsOnly();
+            changeToCombinedList();
         } else if (commandResult.getCommandType().equals(ViewToggler.FIND_OWNER_COMMAND)) {
-            changeToOwnersOnly();
+            changeToCombinedList();
         } else {
             // do nothing as command does not change GUI
         }
