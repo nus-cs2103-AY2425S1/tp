@@ -226,7 +226,7 @@ Parameters:
 
 - `DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
 - `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `PRODUCT`: Must not be blank.
+- `PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
 - `QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
 - `COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
 <box type="tip" seamless>
