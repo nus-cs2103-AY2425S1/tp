@@ -31,16 +31,26 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
-    /**
-     * Handles the Enter button pressed event.
-     */
     @FXML
     private void handleCommandEntered() {
+        // Get the command text from the command box
         String commandText = commandTextField.getText();
+
+        // Do nothing if the command text is empty
         if (commandText.equals("")) {
             return;
         }
+        executeCommand(commandText);
+    }
 
+    private String displayAddLogPopup() {
+        return AddLogPopup.display(); // Returns the log entry as a string
+    }
+
+    /**
+     * Executes the given command text through the command executor and handles exceptions.
+     */
+    private void executeCommand(String commandText) {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
@@ -48,6 +58,7 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
         }
     }
+
 
     /**
      * Sets the command box style to use the default style.
