@@ -45,6 +45,8 @@ public class Messages {
     public static final String MESSAGE_EMPTY_OTHER_PARTY = "Other party should not be blank!";
     public static final String MESSAGE_EMPTY_DATE = "Date should not be blank!";
 
+    public static final String MESSAGE_EMPTY_TRANSACTION_LIST =
+            "Invalid command: The current transaction list is empty.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
