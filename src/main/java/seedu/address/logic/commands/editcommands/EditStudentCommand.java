@@ -59,8 +59,8 @@ public class EditStudentCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_TAG = "This student already has the tag(s): %1$s.";
-    public static final String MESSAGE_DUPLICATE_EMAIL = "Student email %1$s is not edited.";
-    public static final String MESSAGE_DUPLICATE_NAME = "Student name  %1$s is not edited.";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "Student email [%1$s] is not edited.";
+    public static final String MESSAGE_DUPLICATE_NAME = "Student name  [%1$s] is not edited.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "The given student number is not found in the address book.";
     public static final String MESSAGE_INVALID_FIELD_GROUP_NAME =
         "Group assignment should not be changed via edit student function.";
