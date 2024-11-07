@@ -21,6 +21,7 @@ import bizbook.logic.commands.ExitCommand;
 import bizbook.logic.commands.ExportCommand;
 import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
+import bizbook.logic.commands.ImportCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
 import bizbook.logic.commands.RedoCommand;
@@ -113,6 +114,9 @@ public class AddressBookParser {
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
 
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
@@ -127,5 +131,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

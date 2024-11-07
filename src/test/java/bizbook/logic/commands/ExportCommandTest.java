@@ -2,8 +2,8 @@ package bizbook.logic.commands;
 
 import static bizbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static bizbook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static bizbook.logic.commands.ExportCommand.MESSAGE_EMPTY_ADDRESS_BOOK;
 import static bizbook.logic.commands.ExportCommand.MESSAGE_SUCCESS;
+import static bizbook.logic.commands.exporter.Exporter.MESSAGE_EMPTY_ADDRESS_BOOK;
 import static bizbook.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static bizbook.testutil.TypicalFileTypes.FILE_TYPE_VCF;
 import static bizbook.testutil.TypicalPersons.AMY;
