@@ -81,11 +81,12 @@ public class PublicAddressesComposition {
      *
      * @param publicAddress The public address to be added.
      */
-    public void addPublicAddress(PublicAddress publicAddress) {
+    public PublicAddressesComposition addPublicAddress(PublicAddress publicAddress) {
         assert publicAddress != null : "Public address cannot be null.";
         assert publicAddress.getNetwork() != null : "Network cannot be null.";
         publicAddresses.computeIfAbsent(publicAddress.getNetwork(), k -> new HashSet<>());
         publicAddresses.get(publicAddress.getNetwork()).add(publicAddress);
+        return this;
     }
 
     /**
