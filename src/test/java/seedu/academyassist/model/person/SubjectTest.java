@@ -51,6 +51,11 @@ public class SubjectTest {
         Subject englishCopy = new Subject("English");
         assertTrue(english.equals(englishCopy));
 
+        // upper case and lower case of the same subject -> returns true
+        assertTrue(english.equals(new Subject("english"))); // lower case
+        assertTrue(english.equals(new Subject("ENGLISH"))); // upper case
+        assertTrue(english.equals(new Subject("engLisH"))); // mix of lower and upper case
+
         // null -> returns false
         assertFalse(english.equals(null));
 
