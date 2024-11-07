@@ -91,8 +91,8 @@ public class DeleteLogCommandTest {
     @Test
     public void toStringMethod() {
         DeleteLogCommand deleteLogCommand = new DeleteLogCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LOG);
-        String expected = DeleteLogCommand.class.getCanonicalName() +
-                "{personIndex=" + INDEX_FIRST_PERSON + ", logIndex=" + INDEX_FIRST_LOG + "}";
+        String expected = DeleteLogCommand.class.getCanonicalName()
+                + "{personIndex=" + INDEX_FIRST_PERSON + ", logIndex=" + INDEX_FIRST_LOG + "}";
         assertEquals(expected, deleteLogCommand.toString());
     }
 }
