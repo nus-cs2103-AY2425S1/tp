@@ -4,7 +4,7 @@ import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Member's telegram in the address book.
+ * Represents a Member's telegram in the hall pointer.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
  */
 public class Telegram {
