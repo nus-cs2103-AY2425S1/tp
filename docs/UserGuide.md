@@ -39,12 +39,14 @@ This section introduces the HiredFiredPro layout, command format and commonly us
 
 * If you are interested in setting up and using HiredFiredPro, head over to the [Quick Start](#quick-start) section.
 * If you are interested in learning more about the features, you can visit the [Features](#features) section.
+<br><br>
 
 ### HiredFiredPro Layout
 
 The image below shows the different components of HiredFiredPro.
 
 ![HiredFiredPro_layout](images/UI-Layout.png)
+<br><br>
 
 ### Command Format
 
@@ -62,7 +64,8 @@ The image below shows the different components of HiredFiredPro.
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
+<br><br>
 
 ### Commonly Used Parameters
 
@@ -75,7 +78,7 @@ The image below shows the different components of HiredFiredPro.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  </box>
+</box>
 
 Parameter     | Notes
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -318,11 +321,11 @@ Format: `exit`
 **A**: HiredFiredPro data are saved automatically as a JSON file `[JAR file location]/data/hiredfiredpro.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning">
-**Caution:**
-If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+
+**Caution:** If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-<br><br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
