@@ -75,9 +75,9 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
         2. Download and install the appropriate Java Development Kit (JDK) for your operating system by following the instructions provided.
         3. After installation, repeat the `java -version` command to ensure Java is properly installed.
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/TAHub-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
 
-    1. Visit the [GitHub releases page](https://github.com/se-edu/TAHub-level3/releases).
+    1. Visit the [GitHub releases page](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
     2. Download the `.jar` file (`TAHub.jar`) from the latest release.
     3. Save the `.jar` file to the folder where you want to store your TAHub project.
 
