@@ -15,7 +15,6 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
-
 ## Quick start
 
 1. Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
@@ -42,6 +41,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for more details.
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -84,6 +84,7 @@ Underneath each suggested command is the syntax for that command and what parame
 * The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
 
 </box>
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -107,7 +108,7 @@ Underneath each suggested command is the syntax for that command and what parame
 | **Save**       | `save`                                                                                                                                                                                                                   |
 | **Load**       | `load`                                                                                                                                                                                                                   |
 | **Exit**       | `exit`                                                                                                                                                                                                                   |
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
 
