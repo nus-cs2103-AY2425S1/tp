@@ -13,8 +13,9 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+ChatGPT was used to create the TrueRental application logo. ![logo](images/true_rental.jpg)
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
