@@ -47,20 +47,6 @@ public class CondoTest {
 
         assertFalse(condo1.equals(apartment1)); // Different subclass should return false
         assertTrue(condo1.equals(condo2)); // Different object, same content should return true
-
-        /*// Test for equality with a different but identical object
-        assertTrue(condo1.equals(condo2)); // Different object, same content should return true
-
-        // Test for inequality with a different Condo object
-        assertFalse(condo1.equals(condo3)); // Different content should return false
-
-        // Test for inequality with an object that is not a Condo
-        assertFalse(condo1.equals(null)); // Null should return false
-        assertFalse(condo1.equals(new Object())); // Different type should return false
-
-        // Test for inequality with a different Property subclass (e.g., Bto)
-        Bto bto = new Bto(new PostalCode("123456"), new UnitNumber("10-01"), new Price("500000"), tags);
-        assertFalse(condo1.equals(bto)); // Different subclass should return false*/
     }
 
     @Test
@@ -99,7 +85,7 @@ public class CondoTest {
 
         Condo condo = new Condo(postalCode, unitNumber, price, tags);
 
-        String expectedString = "Condo Postal Code: 567510;  Unit Number: 10-65;  Price: 1500000;  "
+        String expectedString = "Condo Postal Code: S(567510);  Unit Number: #10-65;  Price: $1500000;  "
                 + "Actual Price: 0; Tags: [Spacious]";
         assertEquals(expectedString, condo.toString());
     }

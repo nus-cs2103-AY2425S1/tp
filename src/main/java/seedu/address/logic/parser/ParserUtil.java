@@ -173,11 +173,11 @@ public class ParserUtil {
     public static boolean isValidNumberOfPropertyTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         for (String tagName : tags) {
-            if (tagName.length() > 10) {
+            if (tagName.length() > 9) {
                 return false;
             }
         }
-        return tags.size() <= 3;
+        return tags.size() <= 2;
     }
 
     /**
@@ -204,6 +204,10 @@ public class ParserUtil {
     public static Price parseSellingPrice(String sellingPrice) throws ParseException {
         requireNonNull(sellingPrice);
         String trimmedSellingPrice = sellingPrice.trim();
+        int sellingPriceInt = Integer.parseInt(trimmedSellingPrice);
+        if (sellingPriceInt > 2000000000) {
+            throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedSellingPrice)) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
@@ -219,6 +223,10 @@ public class ParserUtil {
     public static Price parseBuyingPrice(String buyingPrice) throws ParseException {
         requireNonNull(buyingPrice);
         String trimmedBuyingPrice = buyingPrice.trim();
+        int buyingPriceInt = Integer.parseInt(trimmedBuyingPrice);
+        if (buyingPriceInt > 2000000000) {
+            throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedBuyingPrice)) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
