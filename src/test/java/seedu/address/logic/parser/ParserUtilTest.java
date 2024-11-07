@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -277,6 +278,7 @@ public class ParserUtilTest {
 
     @Test
     public void parsePublicAddresses_validInputs_returnsMap() throws Exception {
+
         Collection<String> inputs = Arrays.asList(
             VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_1,
             VALID_NETWORK + ">" + VALID_PUBLIC_ADDRESS_STRING_BTC_2
@@ -288,11 +290,13 @@ public class ParserUtilTest {
         btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_2, PublicAddress.DEFAULT_LABEL));
         expected.addPublicAddressesToNetwork(Network.BTC, btcAddresses);
 
+
         assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
     }
 
     @Test
     public void parsePublicAddresses_validInputsWithWhitespace_returnsMap() throws Exception {
+
         Collection<String> inputs = Arrays.asList(
             " " + VALID_NETWORK + " > " + VALID_PUBLIC_ADDRESS_STRING_BTC_1 + " ",
             " " + VALID_NETWORK + " > " + VALID_PUBLIC_ADDRESS_STRING_BTC_2 + " "
@@ -304,7 +308,16 @@ public class ParserUtilTest {
         btcAddresses.add(new BtcAddress(VALID_PUBLIC_ADDRESS_STRING_BTC_2, PublicAddress.DEFAULT_LABEL));
         expected.addPublicAddressesToNetwork(Network.BTC, btcAddresses);
 
+
         assertEquals(expected, ParserUtil.parsePublicAddresses(inputs));
+    }
+
+    @Test
+    public void parsePublicAddresses_invalidDuplicateLabels_throwsIllegalArgumentException() throws Exception {
+        Collection<String> inputs = List.of(VALID_NETWORK + ">" + VALID_BTC_ADDRESS_1,
+                VALID_NETWORK + ">" + VALID_BTC_ADDRESS_2);
+
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parsePublicAddresses(inputs));
     }
 
     @Test

@@ -6,61 +6,77 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+
 import static seedu.address.testutil.TypicalPersons.BTC_MAIN_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.BTC_SUB_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.JOE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressFactory;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class RetrievePublicAddressCommandTest {
-
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(new AddressBook(), new UserPrefs());
+    }
+
 
     @Test
     public void execute_validIndexValidNetwork_success() {
         model.addPerson(JOE);
+        Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
 
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
+                new RetrievePublicAddressCommand(targetIndex, Network.BTC);
+
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
             2, Network.BTC, JOE.getName(), BTC_MAIN_ADDRESS + "\n" + BTC_SUB_ADDRESS);
 
-        assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        assertCommandSuccess(retrieveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validIndexValidNetworkWithLabel_success() {
         model.addPerson(JOE);
+        Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
 
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
-                BTC_MAIN_ADDRESS.label);
+                new RetrievePublicAddressCommand(targetIndex, Network.BTC, BTC_DAILY_ADDRESS.label);
+
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
             1, Network.BTC, JOE.getName(), BTC_MAIN_ADDRESS);
 
-        assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        assertCommandSuccess(retrieveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validIndexValidNetworkEmpty_success() {
         model.addPerson(JOE);
+        Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
 
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
-                "Non-existent");
+                new RetrievePublicAddressCommand(targetIndex, Network.BTC,
+                        "Non-existent");
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
             0, Network.BTC, JOE.getName(), "-");
@@ -70,7 +86,7 @@ public class RetrievePublicAddressCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(1);
         RetrievePublicAddressCommand retrieveCommand = new RetrievePublicAddressCommand(outOfBoundIndex, Network.BTC);
 
         assertCommandFailure(retrieveCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -82,7 +98,9 @@ public class RetrievePublicAddressCommandTest {
         model.addPerson(personWithoutPublicAddresses);
 
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
+
+                new RetrievePublicAddressCommand(Index.fromOneBased(1), Network.BTC);
+
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
             0, Network.BTC, personWithoutPublicAddresses.getName(), "-");

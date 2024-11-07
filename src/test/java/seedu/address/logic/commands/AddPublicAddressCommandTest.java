@@ -95,7 +95,8 @@ public class AddPublicAddressCommandTest {
         }
 
         String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
-            personToAddAddress.getName(), duplicateAddress, Network.BTC);
+                String.format(PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL, duplicateAddress.getLabel(),
+                        Network.BTC));
 
         assertCommandFailure(duplicateCommand, model, expectedMessage);
     }
