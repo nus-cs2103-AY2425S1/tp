@@ -610,6 +610,15 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
+**Use case: UC15 - Change Theme**
+
+**MSS**
+
+1.  Actor requests to change system's theme.
+2.  System changes theme.
+
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -619,7 +628,6 @@ _Similar to UC10 except without extension 2b._
 5.  The system should continue functioning in the event of a missing or corrupted save file.
 6.  The system should encrypt sensitive data to follow data protection laws.
 7.  The interface should be intuitive and easy to use.
-8.  The system should allow the user to easily populate their previous command.
 
 _{More to be added}_
 
