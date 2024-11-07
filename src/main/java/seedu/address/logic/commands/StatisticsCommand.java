@@ -90,7 +90,7 @@ public class StatisticsCommand extends Command {
         statisticsMessage.insert(0, "Total number of applicant(s) by job code and interview stages:\n");
         // insert the total number of tags across all job codes.
         insertTagPercentages(statisticsMessage, tagCounts, totalApplicantsInSystem);
-        insertHeading(statisticsMessage, "Total number of applicant(s) in system: " + totalApplicantsInSystem);
+        insertHeading(statisticsMessage, "Total number of applicant(s) in contact book: " + totalApplicantsInSystem);
         insertHeading(statisticsMessage, "STATISTICS");
         return statisticsMessage.toString();
     }
