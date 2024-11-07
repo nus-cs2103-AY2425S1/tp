@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CLARA;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -20,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -80,6 +84,51 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasLesson(null));
+    }
+
+    @Test
+    public void hasLesson_lessonNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasLesson(new Lesson(ALICE, DANIEL, new Subject("Math"))));
+    }
+
+    @Test
+    public void hasLesson_lessonInAddressBook_returnsTrue() {
+        addressBook.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        assertTrue(addressBook.hasLesson(new Lesson(ALICE, DANIEL, new Subject("Math"))));
+    }
+
+    @Test
+    public void hasLesson_lessonWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        Lesson editedLesson = new Lesson(ALICE, DANIEL, new Subject("Math"));
+        assertTrue(addressBook.hasLesson(editedLesson));
+    }
+
+    @Test
+    public void getLessonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getLessonList().remove(0));
+    }
+
+    @Test
+    public void removeAssociatedLessons() {
+        addressBook.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        addressBook.addLesson(new Lesson(ALICE, CLARA, new Subject("English")));
+
+        addressBook.removeAssociatedLessons(ALICE);
+        assertFalse(addressBook.hasLesson(new Lesson(ALICE, DANIEL, new Subject("Math"))));
+        assertFalse(addressBook.hasLesson(new Lesson(ALICE, CLARA, new Subject("English"))));
+
+        addressBook.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        addressBook.addLesson(new Lesson(BENSON, DANIEL, new Subject("English")));
+
+        addressBook.removeAssociatedLessons(DANIEL);
+        assertFalse(addressBook.hasLesson(new Lesson(ALICE, DANIEL, new Subject("Math"))));
+        assertFalse(addressBook.hasLesson(new Lesson(BENSON, DANIEL, new Subject("English"))));
     }
 
     @Test

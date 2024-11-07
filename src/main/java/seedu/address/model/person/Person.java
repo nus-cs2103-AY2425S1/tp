@@ -37,7 +37,7 @@ public abstract class Person {
         this.address = address;
         this.hours = hours;
         this.subjects.addAll(subjects);
-        this.id = ++index;
+        this.id = index++;
     }
 
     /**
