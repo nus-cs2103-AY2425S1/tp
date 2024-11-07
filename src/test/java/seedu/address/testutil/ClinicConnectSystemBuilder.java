@@ -16,10 +16,6 @@ public class ClinicConnectSystemBuilder {
         clinicConnectSystem = new ClinicConnectSystem();
     }
 
-    public ClinicConnectSystemBuilder(ClinicConnectSystem clinicConnectSystem) {
-        this.clinicConnectSystem = clinicConnectSystem;
-    }
-
     /**
      * Adds a new {@code Patient} to the {@code ClinicConnectSystem} that we are building.
      */

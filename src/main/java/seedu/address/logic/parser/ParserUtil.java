@@ -328,7 +328,7 @@ public class ParserUtil {
     public static HealthService parseHealthService(String healthService) throws ParseException {
         requireNonNull(healthService);
         String trimmedHealthService = healthService.trim();
-        if (!HealthService.isValidHealthserviceName(trimmedHealthService)) {
+        if (!HealthService.isValidHealthServiceName(trimmedHealthService)) {
             throw new ParseException(HealthService.MESSAGE_CONSTRAINTS);
         }
         return new HealthService(trimmedHealthService);

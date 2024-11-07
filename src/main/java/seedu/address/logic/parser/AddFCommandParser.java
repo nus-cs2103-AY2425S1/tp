@@ -48,6 +48,9 @@ public class AddFCommandParser implements Parser<AddFCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddFCommand parse(String args) throws ParseException {
+
+        assert args != null : "Argument cannot be null";
+
         checkPrefixPresentAndValidPrefix(args, AddFCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
                 PREFIX_BIRTHDATE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_ALLERGY,
                 PREFIX_BLOODTYPE, PREFIX_EXISTINGCONDITION, PREFIX_NOTE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
