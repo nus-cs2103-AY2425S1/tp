@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS;
@@ -39,9 +39,9 @@ public class DeletePublicAddressCommandTest {
 
         // Create and add the public address
         Network network = Network.BTC;
-        String publicAddress = VALID_PUBLIC_ADDRESS_BTC;
-        String label = "default";
-        PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN;
+        PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network,
+            publicAddress, PublicAddress.DEFAULT_LABEL);
 
         // Update actual models with the new address
         Person personWithAddress = personToDelete.withAddedPublicAddress(publicAddressToAdd);
@@ -49,16 +49,17 @@ public class DeletePublicAddressCommandTest {
 
         // Create and execute delete command
         DeletePublicAddressCommand deletePublicAddressCommand =
-                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "");
+            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, PublicAddress.DEFAULT_LABEL);
 
         String expectedMessage = String.format(
-                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
-                personWithAddress.getPublicAddressesComposition()
+            MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
+            personWithAddress.getPublicAddressesComposition()
         );
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
         assertCommandSuccess(deletePublicAddressCommand, model, expectedCommandResult, expectedModel);
     }
+
     // EP: valid index, valid network, valid label
     @Test
     public void execute_validIndexValidNetworkValidLabel_success() {
@@ -67,7 +68,7 @@ public class DeletePublicAddressCommandTest {
 
         // Create and add the public address
         Network network = Network.BTC;
-        String publicAddress = VALID_PUBLIC_ADDRESS_BTC;
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN;
         String label = "default";
         PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
 
@@ -76,17 +77,16 @@ public class DeletePublicAddressCommandTest {
 
         // Create and execute delete command
         DeletePublicAddressCommand deletePublicAddressCommand =
-                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, label);
+            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, label);
 
         String expectedMessage = String.format(
-                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
-                personWithAddress.getPublicAddressesComposition()
+            MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
+            personWithAddress.getPublicAddressesComposition()
         );
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
         assertCommandSuccess(deletePublicAddressCommand, model, expectedCommandResult, expectedModel);
     }
-
 
 
     // EP: valid index, valid network, invalid label
@@ -95,7 +95,7 @@ public class DeletePublicAddressCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         // Create and add the public address
         Network network = Network.BTC;
-        String publicAddress = VALID_PUBLIC_ADDRESS_BTC;
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN;
         String label = "default";
         PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
 
@@ -107,7 +107,7 @@ public class DeletePublicAddressCommandTest {
 
         assertCommandFailure(deletePublicAddressCommand, model,
             String.format(DeletePublicAddressCommand.MESSAGE_NON_MATCHING_LABEL, "invalid",
-            personToDelete.getName()));
+                personToDelete.getName()));
     }
 
     // EP: valid index, invalid network

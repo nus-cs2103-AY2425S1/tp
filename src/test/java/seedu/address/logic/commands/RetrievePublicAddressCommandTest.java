@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-
 import static seedu.address.testutil.TypicalPersons.BTC_MAIN_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.BTC_SUB_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.JOE;
@@ -22,13 +21,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.addresses.Network;
-import seedu.address.model.addresses.PublicAddress;
-import seedu.address.model.addresses.PublicAddressFactory;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class RetrievePublicAddressCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
 
 
     @BeforeEach
@@ -43,7 +40,7 @@ public class RetrievePublicAddressCommandTest {
         Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
 
         RetrievePublicAddressCommand retrieveCommand =
-                new RetrievePublicAddressCommand(targetIndex, Network.BTC);
+            new RetrievePublicAddressCommand(targetIndex, Network.BTC);
 
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
@@ -59,7 +56,7 @@ public class RetrievePublicAddressCommandTest {
         Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
 
         RetrievePublicAddressCommand retrieveCommand =
-                new RetrievePublicAddressCommand(targetIndex, Network.BTC, BTC_DAILY_ADDRESS.label);
+            new RetrievePublicAddressCommand(targetIndex, Network.BTC, BTC_MAIN_ADDRESS.label);
 
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
@@ -75,8 +72,8 @@ public class RetrievePublicAddressCommandTest {
         Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
 
         RetrievePublicAddressCommand retrieveCommand =
-                new RetrievePublicAddressCommand(targetIndex, Network.BTC,
-                        "Non-existent");
+            new RetrievePublicAddressCommand(targetIndex, Network.BTC,
+                "Non-existent");
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
             0, Network.BTC, JOE.getName(), "-");
@@ -99,7 +96,7 @@ public class RetrievePublicAddressCommandTest {
 
         RetrievePublicAddressCommand retrieveCommand =
 
-                new RetrievePublicAddressCommand(Index.fromOneBased(1), Network.BTC);
+            new RetrievePublicAddressCommand(Index.fromOneBased(1), Network.BTC);
 
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
