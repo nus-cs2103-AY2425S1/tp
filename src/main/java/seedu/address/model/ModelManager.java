@@ -207,6 +207,19 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Checks if the appointment can be updated with the provided appointment.
+     *
+     * @param current The current appointment.
+     * @param updated The updated appointment.
+     * @return true if the appointment can be updated.
+     */
+    // add override
+    @Override
+    public boolean isValidAppointmentUdpate(Appointment current, Appointment updated) {
+        return calendar.isValidAppointmentUpdate(current, updated);
+    }
+
+    /**
      * Deletes a person from the address book and removes any associated appointment.
      * Triggers a backup before deletion.
      *
