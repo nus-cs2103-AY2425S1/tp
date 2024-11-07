@@ -19,7 +19,7 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `TAchy.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `TAchy.jar` file from [here](https://github.com/AY2425S1-CS2103-F11-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for TAchy.
 
@@ -58,7 +58,18 @@ management tasks done faster than traditional GUI apps.
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
 
+Term           | Explanation
+------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**CLI**   | `A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.`
+**GUI**  | `A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.`
+**Assignment**         | `An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.`
+**Index**| `The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.`
+**Score**  | `The score represents the grade a student receives for a specific assignment.`
+**Remark**          | `A remark allows the tutor to record important notes or comments about a student for reference.`
+
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
 <box type="info" seamless>
@@ -69,10 +80,10 @@ management tasks done faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Science` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Science`, `t/Math t/English` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -326,17 +337,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAchy data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAchy data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, TAchy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the TAchy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -348,7 +359,28 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAchy home folder.
+
+**Q**: What are the system requirements for TAchy?<br>
+**A**: TAchy requires Java 17 or above to run. It is compatible with Windows, MacOS, and Linux operating systems.
+
+**Q**: Is it necessary to back up my TAchy data?<br>
+**A**: Regularly backing up your addressbook.json data file is highly recommended. Save a copy in a secure location to ensure your data can be restored in case of unexpected software or hardware problems.
+
+**Q**: What happens if I accidentally delete a student or an assignment?<br>
+**A**: Deleted data cannot be recovered directly within TAchy. However, if you have a backup of your data file, you can restore it by replacing the current data file in the application folder with the backup.
+
+**Q**: Can multiple users use TAchy on the same computer?<br>
+**A**: Yes, but each user should maintain a separate data file to avoid overwriting each other's records.
+
+**Q**: Does TAchy automatically save my progress?<br>
+**A**: Yes, TAchy saves all changes automatically in the data file whenever you add, edit, or delete information.
+
+**Q**: Can I use TAchy offline?<br>
+**A**: Absolutely! TAchy is designed to work entirely offline, so you can manage student and assignment information without an internet connection.
+
+**Q**: What should I do if I encounter an error or bug?<br>
+**A**: Please report any issues through our [GitHub repository](https://github.com/AY2425S1-CS2103-F11-1/tp/issues), including the steps to reproduce the bug and any error messages you receive.
 
 --------------------------------------------------------------------------------------------------------------------
 
