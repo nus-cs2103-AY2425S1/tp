@@ -478,7 +478,7 @@ HRConnect data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-HRConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HRConnect data are saved automatically as a JSON file `[JAR file location]/data/hrconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -496,7 +496,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 **A**: Download the installer (.exe or .msi) from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows). Click on the downloaded file and follow the instructions to install.
 
 **Q**: Where is my data stored?<br>
-**A**: It is stored in `addressbook.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
+**A**: It is stored in `hrconnect.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
 ![rootFileStructure.png](images/rootFileStructure.png)
 
 **Q**: How do I transfer my data to another Computer?<br>
