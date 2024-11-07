@@ -12,8 +12,10 @@ import java.util.Comparator;
 public class JobCode {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Invalid job code: only alphanumeric characters and dash are allowed. Two consecutive dashes "
-                    + "is not allowed. \nExample: SWE2023, HR-2023-intern";
+            "Invalid job code: only alphanumeric characters and single dash (-) are allowed. \n"
+                    + "The first and last character must be alphanumeric. "
+                    + "Two consecutive dashes are not allowed. \n"
+                    + "Example: SWE2023, HR-2023-intern";
 
     public static final String MESSAGE_LENGTH_CONSTRAINTS =
             "Job code cannot have more than 50 characters.";

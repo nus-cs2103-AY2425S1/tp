@@ -282,7 +282,7 @@ _Details coming soon ..._
 - Must be at most 50 characters.
 - Only alphanumeric characters (A-Z, a-z, 0-9) and single dashes (-) are allowed.
 - The first and last character must be alphanumeric.
-- Training spaces and spaces within jobcode will be removed. (e.g. " swe -201  " will become "swe-201")
+- Trailing spaces and spaces within job code will be removed. (e.g. " swe -201  " will become "swe-201")
 - Two consecutive dashes (--) are not allowed (e.g., "HR--2023" is invalid).
 - The input job code will be converted to uppercase (e.g., "swe2023-intern" will become "SWE2023-INTERN").
 
@@ -318,8 +318,7 @@ for list of valid tags:
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the appli
-2. cation to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
