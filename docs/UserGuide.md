@@ -212,7 +212,7 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
     <div>Before</div>
   </div>
   <div style="text-align: center; width: 50%;">
-    <img src="images/deleteYMsg.png" alt="edit message after" style="width: 100%;">
+    <img src="images/editMsg2.png" alt="edit message after" style="width: 100%;">
     <div>After</div>
   </div>
 </div>
@@ -267,7 +267,10 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 <box type="important" seamless>
 
-**IMPORTANT:** `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+**IMPORTANT:** 
+
+* `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+* The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
 
 </box>
 
