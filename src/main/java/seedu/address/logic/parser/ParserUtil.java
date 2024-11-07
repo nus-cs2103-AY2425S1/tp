@@ -94,7 +94,7 @@ public class ParserUtil {
         checkIndicesNotEmpty(trimmedIndices);
         try {
             return Arrays.stream(trimmedIndices.split(" "))
-                    .flatMap(arg -> parseArgAsStream(arg))
+                    .flatMap(arg -> parseArgAsStream(arg)).distinct()
                     .collect(Collectors.toList());
         } catch (RuntimeException e) {
             String causeMessage = e.getCause().getMessage();
