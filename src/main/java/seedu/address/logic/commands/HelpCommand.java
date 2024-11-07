@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " COMMAND_KEYWORD"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " [COMMAND_KEYWORD]"
             + ": Shows usage of the given command keyword\n"
             + "Example: " + COMMAND_WORD + " add\n"
             + COMMAND_WORD + ": Shows full list of keywords and usage instructions.\n"
@@ -26,6 +26,7 @@ public class HelpCommand extends Command {
         DeleteCommand.MESSAGE_USAGE,
         EditCommand.MESSAGE_USAGE,
         UndoCommand.MESSAGE_USAGE,
+        RedoCommand.MESSAGE_USAGE,
         FindCommand.MESSAGE_USAGE,
         ListCommand.MESSAGE_USAGE,
         HelpCommand.MESSAGE_USAGE,
@@ -54,6 +55,8 @@ public class HelpCommand extends Command {
             return new CommandResult(EditCommand.MESSAGE_USAGE, false, false);
         case UndoCommand.COMMAND_WORD:
             return new CommandResult(UndoCommand.MESSAGE_USAGE, false, false);
+        case RedoCommand.COMMAND_WORD:
+            return new CommandResult(RedoCommand.MESSAGE_USAGE, false, false);
         case FindCommand.COMMAND_WORD:
             return new CommandResult(FindCommand.MESSAGE_USAGE, false, false);
         case ListCommand.COMMAND_WORD:
