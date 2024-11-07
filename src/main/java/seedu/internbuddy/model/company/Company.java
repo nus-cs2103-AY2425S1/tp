@@ -124,6 +124,16 @@ public class Company {
     }
 
     /**
+     * Returns a string of comma separated tags, or "NO TAGS" if no tags.
+     */
+    public String getTagsListString() {
+        if (tags.isEmpty()) {
+            return "NO TAGS";
+        }
+        return String.join(", ", tags.stream().map(tag -> tag.tagName).toList());
+    }
+
+    /**
      * Returns true if both companies have the same name.
      * This defines a weaker notion of equality between two companies.
      */

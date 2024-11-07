@@ -70,7 +70,7 @@ public class JsonAdaptedCompany {
         phone = source.getPhone().getTrueValue();
         email = source.getEmail().value;
         address = source.getAddress().getTrueValue();
-        status = source.getStatus().value;
+        status = source.getStatus().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
