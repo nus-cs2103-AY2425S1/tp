@@ -613,7 +613,8 @@ Use case ends.
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
-* **Similar names/item names**: Names which are identical if whitespaces and case sensitivity are ignored.
+* **Similar names**: Names which are identical if whitespaces and case sensitivity are ignored.
+* **Similar details (orders)**: Orders with identical date, quantity and status along with similar item names.
 
 --------------------------------------------------------------------------------------------------------------------
 
