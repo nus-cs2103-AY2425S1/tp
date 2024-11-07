@@ -81,18 +81,18 @@ any traditional point-and-click management app.
 
 Action     | Format, Examples
 :--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find by contact information**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
-**Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
-**Categorize tag** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
-**Undo action** | `undo`
-**Redo action** | `redo`
-**List**   | `list`
-**Help**   | `help`
+**[Add](#adding-a-person-add)**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
+**[Clear](#clearing-all-entries--clear)**  | `clear`
+**[Delete](#deleting-a-person--delete)** | `delete INDEX`<br> e.g., `delete 3`
+**[Edit](#editing-a-person--edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**[Find by contact information](#locating-persons-by-contact-information-find)**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
+**[Delete tag](#deleting-a-persons-tag--deltag)** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
+**[Add tag](#adds-tags-to-a-specific-person--addtag)** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
+**[Categorize tag](#categorizing-a-tag--cattag)** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**[Undo action](#undo-a-command--undo)** | `undo`
+**[Redo action](#redo-a-command-redo)** | `redo`
+**[List](#listing-all-persons--list)**   | `list`
+**[Help](#viewing-help--help)**   | `help` 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -118,6 +118,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 </box>
 
 * The phone number must follow the Singaporean convention: have 8 digits, start with 6, 8, or 9, and consist only of numbers.
+* Do not add duplicate contacts to the list.
+* Two contacts are considered duplicates if they share the same name, email, or phone number.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
@@ -141,6 +143,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed, i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* After editing the person, there should be no duplicate contact in the campus connect.
+* Two contacts are considered duplicates if they share the same name, email, or phone number.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -184,7 +188,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in CampusConnect.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adds tags to a specific person : `addtag`
+### Adding tags to a specific person : `addtag`
 
 Adds the specified person's tag.
 
@@ -225,24 +229,28 @@ Categorizes a tag under a defined category.
 Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 
 * Sets the tag(s) in CampusConnect with the specified name `TAG` to fall under the specified `CATEGORY`.
-* Currently available categories and their respective keywords are:
+* 
+* Currently available categories with their respective keywords and colours are:
 
-    Category      | Keyword (case sensitive)
-    --------------|-------------------------
-    **General**   | `general`
-    **Academics** | `acads`
-    **Activities**| `activity`
-    **Networking**| `network`
-    **Mentorship**| `mentor`
+    Category      | Keyword (case sensitive) | Colour
+    --------------|--------------------------|-  
+    **General**   | `general`                | <span style="color:DarkGray"> Grey </span>
+    **Academics** | `acads`                  | <span style="color:Gold"> Gold </span>
+    **Activities**| `activity`               | <span style="color:DodgerBlue"> Blue </span>
+    **Networking**| `network`                | <span style="color:LimeGreen"> Green </span>          
+    **Mentorship**| `mentor`                 | <span style="color:HotPink"> Pink </span>
+
 * Multiple tags can be categorized to the same category at a time.
 * All tags specified must be valid existing tags.
 * Attempts to set a tag to its current category will cause the whole command to be rejected.
 * Only one category is allowed to be entered per command, i.e. `cattag t/tag1 acads t/tag2 general` is not allowed.
 
 Examples:
-* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics`
-* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` 
+* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and display colour of the tag`CS2100` becomes `Gold`.
+* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with colour `Blue`. 
+* Newly created tags (by [`add`](#adding-a-person-add) or [`addtag`](#adds-tags-to-a-specific-person--addtag)) will have category `General` and colour `Grey` by default.
 
+![cattag response image](images/cattagResponse.png)
 ### Undo a command : `undo`
 
 Undoes the previous command and reverts CampusConnect.
@@ -251,6 +259,7 @@ Format: `undo`
 
 * Reverts the state of CampusConnect to the one before the most recent command, if any.
 * When the oldest version of CampusConnect is reached, `undo` command will cause an exception to be thrown
+* Only the command that modify the data of CampusConnect can be undone. Commands such as `list` and `find` will not be undone.
 
 ### Redo a command: `redo`
 
@@ -259,6 +268,7 @@ Reapplies a command that was previously undone by `undo`.
 Format: `redo`
 
 * Advances CampusConnect to the state it was in before the most recent `undo` command, if any.
+* Only the command that modify the data of CampusConnect can be redone. Commands such as `list` and `find` will not be redone.
 * Note: If a new command (excluding `redo` or `undo`) is executed after an `undo`, the redo history is cleared, and further `redo` will not be possible.
 
 ### Clearing all entries : `clear`
