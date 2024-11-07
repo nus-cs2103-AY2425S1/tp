@@ -25,6 +25,7 @@ public class CommandResult {
     public enum SwitchView {
         WEDDING,
         TASK,
+        TAG,
         NONE
     }
 
@@ -77,8 +78,8 @@ public class CommandResult {
      */
     public boolean isSwitchView() {
         return switch (switchView) {
-        case WEDDING, TASK -> true;
-        default -> false;
+        case NONE -> false;
+        default -> true;
         };
     }
 

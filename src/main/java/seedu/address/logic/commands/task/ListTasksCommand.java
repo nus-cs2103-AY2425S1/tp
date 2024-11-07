@@ -16,7 +16,7 @@ public class ListTasksCommand extends Command {
 
     public static final String COMMAND_WORD = "list-tasks";
 
-    public static final String COMMAND_KEYWORD = "lt";
+    public static final String COMMAND_KEYWORD = "ltasks";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
