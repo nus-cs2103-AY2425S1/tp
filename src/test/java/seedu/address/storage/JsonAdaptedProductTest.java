@@ -25,7 +25,7 @@ public class JsonAdaptedProductTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = List.of(new JsonAdaptedTag("fruit"),
             new JsonAdaptedTag("organic"));
     private static final Set<Tag> EXPECTED_TAGS = Set.of(new Tag("fruit"), new Tag("organic"));
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "Rachel/Geller";
 
     @Test
     public void toModelType_validProductDetails_returnsProduct() throws Exception {
