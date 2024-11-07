@@ -308,14 +308,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
+(For all use cases below, the **TalentHub** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
 
 **Use case: UC01 - Add Contact**
 
 **MSS**
 
 1. Talent Manager requests to add a specific contact
-2. TalentHub adds the person
+2. TalentHub adds the person to the list
 
 Use case ends.
 
@@ -380,8 +380,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager [list contacts (UC06)](#)
-2. Talent Manager [delete contact (UC05)](#)
+1. Talent Manager <a style="text-decoration:underline;">list contacts (UC06)</a>
+2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
 
 Use case ends.
 
@@ -390,8 +390,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager [find contacts (UC07)](#)
-2. Talent Manager [delete contact (UC05)](#)
+1. Talent Manager <a style="text-decoration:underline;">find contact (UC07)</a>
+2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
 
    Use case ends.
 
@@ -415,13 +415,13 @@ Use case ends.
 
 * 1b. The list is empty.
 
-  * 1b1. System shows an error message specifying the list is empty.
+  * 1b1. TalentHub shows an index error message.
 
     Use case ends.
 
 * 1c. The given index is invalid.
 
-  * 1c1. System shows an error message.
+  * 1c1. TalentHub shows an index error message.
 
     Use case ends.
 
@@ -446,7 +446,7 @@ Use case ends.
 **MSS**
 
 1. Talent Manager requests to list contacts
-2. System shows a list of all contacts
+2. TalentHub shows a list of all contacts
 
    Use case ends.
 
@@ -462,8 +462,8 @@ Use case ends.
 
 **MSS**
 
-1. User requests to find persons with `keywords`
-2. System processes and list person with `keywords`
+1. User requests to find persons whose name contains `keywords`
+2. TalentHub processes and list person(s) whose name contains `keywords`
 
    Use case ends.
 
@@ -477,7 +477,7 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-  * 1b1. System shows an error message.
+  * 1b1. TalentHub shows an error message.
 
     Use case ends.
 
@@ -485,8 +485,8 @@ Use case ends.
 
 **MSS**
 
-1. User requests to filter persons with `keywords`
-2. System processes and list person with `keywords`
+1. User requests to filter persons with tag `keywords`
+2. TalentHub processes and list person(s) with tag `keywords`
 
    Use case ends.
 
@@ -500,16 +500,16 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-    * 1b1. System shows an error message.
+    * 1b1. TalentHub shows an error message.
 
       Use case ends.
 
-**Use case: UC09 - Add Events**
+**Use case: UC09 - Add Event**
 
 **MSS**
 
 1. Talent Manager requests to add an event for a specific celebrity
-2. System adds the event
+2. TalentHub adds the event
 
 Use case ends.
 
@@ -529,22 +529,22 @@ Use case ends.
 
 * 1c. A duplicate event is detected:
   
-  * 1c1. System displays a message informing the Talent Manager of the duplicate event and does not add it.
+  * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not add it.
 
     Use case ends.
 
 * 1d. Time clash is detected:
 
-  * 1d1. System displays a message informing the Talent Manager of the time clash and does not add it.
+  * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not add it.
 
     Use case ends.
 
-**Use case: UC10 - Edit Events**
+**Use case: UC10 - Edit Event**
 
 **MSS**
 
 1. Talent Manager requests to edit the information of an event for a specific celebrity
-2. System change the information of the event
+2. TalentHub change the information of the event
 
 Use case ends.
 
@@ -556,15 +556,21 @@ Use case ends.
 
       Use case ends.
 
-* 1b. A duplicate event is detected:
+* 1b. The input parameter is invalid.
 
-    * 1b1. System displays a message informing the Talent Manager of the duplicate event and does not change it.
+    * 1b1. TalentHub outputs an error message specifying the issue.
 
       Use case ends.
 
-* 1c. Time clash is detected:
+* 1c. A duplicate event is detected:
 
-    * 1c1. System displays a message informing the Talent Manager of the time clash and does not change it.
+    * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not change it.
+
+      Use case ends.
+
+* 1d. Time clash is detected:
+
+    * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not change it.
 
       Use case ends.
 
@@ -572,8 +578,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager [List Events (UC14)](#)
-2. Talent Manager [Delete Event (UC12)](#)
+1. Talent Manager <a style="text-decoration:underline;">List Events (UC14)</a>
+2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC12)</a>
 
    Use case ends.
 
@@ -581,8 +587,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager [Find Events (UC15)](#)
-2. Talent Manager [Delete Event (UC12)](#)
+1. Talent Manager <a style="text-decoration:underline;">Find Event (UC15)</a>
+2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC12)</a>
 
    Use case ends.
 
@@ -604,13 +610,13 @@ Use case ends.
 
 * 1b. The list is empty.
 
-    * 1b1. System shows an index error message.
+    * 1b1. TalentHub shows an index error message.
 
       Use case ends.
 
 * 1c. The given index is invalid.
 
-    * 1c1. System shows an index error message.
+    * 1c1. TalentHub shows an index error message.
 
       Use case ends.
 
@@ -635,7 +641,7 @@ Use case ends.
 **MSS**
 
 1. Talent Manager requests to list all events.
-2. System retrieves and displays all events in chronological order.
+2. TalentHub retrieves and displays all events in chronological order.
 
    Use case ends.
 
@@ -651,14 +657,14 @@ Use case ends.
 
 **MSS**
 
-1. User requests to find event with `keywords`
-2. System processes and list event with name contains `keywords`
+1. User requests to find event with name contains `keywords`
+2. TalentHub processes and list event with name contains `keywords`
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The command format is incorrect.
+* 1a. The command format is invalid.
 
     * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
@@ -666,7 +672,7 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-    * 1b1. System shows an error message.
+    * 1b1. TalentHub shows an error message.
 
       Use case ends.
 
@@ -676,7 +682,7 @@ Use case ends.
 **MSS**
 
 1. User requests to filter event by celebrity's name `keywords`
-2. System processes and list celebrity named `keywords`'s events
+2. TalentHub processes and list celebrity named `keywords`'s events
 
    Use case ends.
 
@@ -690,7 +696,7 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-    * 1b1. System shows an error message.
+    * 1b1. TalentHub shows an error message.
 
       Use case ends.
 
