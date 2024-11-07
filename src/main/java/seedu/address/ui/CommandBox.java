@@ -52,11 +52,6 @@ public class CommandBox extends UiPart<Region> {
             setStyleToDefault();
             updateSuggestion(newValue);
         });
-
-        // This ensures suggestion updates when the text layout changes
-        commandTextField.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
-            updateSuggestionPosition();
-        });
     }
 
     private void updateSuggestion(String currentText) {
@@ -69,21 +64,7 @@ public class CommandBox extends UiPart<Region> {
 
         // Only show the remaining part of the suggestion
         String remainingSuggestion = fullSuggestion.substring(currentText.length());
-        suggestionTextField.setText(remainingSuggestion);
-
-        updateSuggestionPosition();
-    }
-
-    private void updateSuggestionPosition() {
-        String currentText = commandTextField.getText();
-
-        // Get the text width using a Text node for accurate measurement
-        Text text = new Text(currentText);
-        text.setFont(commandTextField.getFont());
-        double textWidth = text.getLayoutBounds().getWidth();
-
-        // Position the suggestion text field
-        suggestionTextField.setTranslateX(textWidth);
+        suggestionTextField.setText(currentText + remainingSuggestion);
     }
 
     /**
@@ -120,6 +101,7 @@ public class CommandBox extends UiPart<Region> {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
         if (!styleClass.contains(ERROR_STYLE_CLASS)) {
             styleClass.add(ERROR_STYLE_CLASS);
+            suggestionTextField.clear();
         }
     }
 
