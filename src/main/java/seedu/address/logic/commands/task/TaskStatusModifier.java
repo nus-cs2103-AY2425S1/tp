@@ -60,6 +60,14 @@ public class TaskStatusModifier {
                         1, lastShownList.size()));
             }
             Task taskToModify = lastShownList.get(targetIndex.getZeroBased());
+
+            // Check if tasks to be marked as completed/uncompleted are already completed/uncompleted
+            if (markAsDone && taskToModify.getIsDone()) {
+                throw new CommandException(Messages.MESSAGE_TASK_ALREADY_COMPLETED);
+            } else if (!markAsDone && !taskToModify.getIsDone()) {
+                throw new CommandException(Messages.MESSAGE_TASK_ALREADY_UNCOMPLETED);
+            }
+
             if (markAsDone) {
                 taskToModify.markAsDone();
             } else {
@@ -113,7 +121,6 @@ public class TaskStatusModifier {
         }
         return updatedTasks;
     }
-
 
     @Override
     public boolean equals(Object other) {
