@@ -5,6 +5,10 @@ title: Developer Guide
 
 ## Overview
 
+CCAConnect is a desktop application that aims to **assist NUS CCA leaders** in **managing and collating relevant CCA personnel’s contact details**, as well as help to **track attendance details for CCA sessions**.
+Equipped with features like **attendance marking**, **contact management**, **contact filtering** and **profile switching**, CCAConnect helps to reduce the headaches of personnel tracking.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
 * Table of Contents
@@ -14,7 +18,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -209,10 +214,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -288,15 +289,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                               |
 | `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
 
-*{More to be added}*
+ 
 
 ### Use cases
 
 **Notes**: _For all use cases below, the **System** is  `CCAConnect` and the **Actor** is the `user`, unless specified otherwise_
 <br>
 
-**Use Case: UC01 - View John Doe’s Contact Information**
-**Actor: User**
+**Use Case: UC01 - View John Doe’s Contact Information**<br/>
+**Actor: User**<br/>
 **MSS**
 
 1. User enters appropriate ‘view’ command to search for ‘John Doe’s contact information.
@@ -313,8 +314,8 @@ Use Case ends.
 
 <br>
 
-**Use Case: UC02 - Delete a contact**
-**Actor: User**
+**Use Case: UC02 - Delete a contact**<br/>
+**Actor: User**<br/>
 **MSS**
 
 1. User requests to list all contacts.
@@ -335,8 +336,8 @@ Use Case ends.
 
 <br>
 
-**Use Case: UC03 - Add a contact**
-**Actor: User**
+**Use Case: UC03 - Add a contact**<br/>
+**Actor: User**<br/>
 **MSS**
 
 1. User requests to add a contact.
@@ -356,8 +357,8 @@ Use Case ends.
 
 <br>
 
-**Use Case: UC04 - Search for a contact**
-**Actor: User**
+**Use Case: UC04 - Search for a contact**<br/>
+**Actor: User**<br/>
 **MSS**
 
 1. User searches the list of contacts with a query relating to a contact’s name.
@@ -376,8 +377,8 @@ Use Case ends.
 
 <br>
 
-**Use Case: UC05 - List all contacts**
-**Actor: User**
+**Use Case: UC05 - List all contacts**<br/>
+**Actor: User**<br/>
 **MSS**
 
 User enters ‘list’ command to view information of all contacts.
@@ -394,8 +395,8 @@ Use Case ends.
 
 <br>
 
-**Use Case: UC06 - View all commands**
-**Actor: User**
+**Use Case: UC06 - View all commands**<br/>
+**Actor: User**<br/>
 **MSS**
 
 1. User requests to see all the available commands.
@@ -405,8 +406,8 @@ Use Case ends.
 
 <br>
 
-**Use Case: UC07 - View all members**
-**Actor: User**
+**Use Case: UC07 - View all members**<br/>
+**Actor: User**<br/>
 **MSS**
 
 1. User requests to see all members in the contacts.
@@ -417,8 +418,8 @@ Use Case ends.
 
 <br>
 
-**Use Case: UC08 - Mark attendance of members**
-**Actor: User**
+**Use Case: UC08 - Mark attendance of members**<br/>
+**Actor: User**<br/>
 **MSS**
 
 1. User requests to mark the attendance of members.
@@ -443,8 +444,8 @@ Use Case ends.
 
 <br>
 
-**Use Case: UC09 - Unmark attendance of members**
-**Actor: User**
+**Use Case: UC09 - Unmark attendance of members**<br/>
+**Actor: User**<br/>
 **MSS**
 
 1. User requests to unmark the attendance of members.
