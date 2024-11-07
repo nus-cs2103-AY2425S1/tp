@@ -448,7 +448,9 @@ Opens a window at the side with the full details of the specified person from th
 * View the full details of the contact you specify.
 * `NAME` refers to the full name of the person shown in the displayed person list.
 * Calling `view` without any name parameter closes any windows previously opened by `view`.
+* Deleting or editing name of the current contact opened by `view` closes `view`.
   </box>
+
 
 <box type="definition" icon=":fa-solid-book:" light>
 
@@ -718,7 +720,10 @@ Adds an assignment and its grades to a contact.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* Assignments that can be added to a contact are specified in path `data/assignment.json`.
+* Assignments that can be added to a contact are specified in path `/data/assignment.json`.
+* If `assignment.json` is missing from `/data`, KonTActs will load a default assignment database.
+* `assignment.json` needs to be manually created in `/data`.
+* Each assignment must have a unique `ASSIGNMENT_NAME`.
 
   </box>
 
