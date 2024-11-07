@@ -36,7 +36,7 @@ create StatusPredicate
 FilterCommandParser -> StatusPredicate
 activate StatusPredicate
 
-StatusPredicate -> FilterCommandParser
+StatusPredicate --> FilterCommandParser
 deactivate StatusPredicate
 
 create FilterCommand
@@ -75,7 +75,7 @@ deactivate CommandResult
 FilterCommand --> LogicManager : r
 deactivate FilterCommand
 
-[<--LogicManager
+[<--LogicManager : r
 deactivate LogicManager
 destroy FilterCommand
 destroy StatusPredicate
