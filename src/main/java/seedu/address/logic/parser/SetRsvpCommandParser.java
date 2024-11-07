@@ -5,8 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetRsvpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.RsvpStatus;
-
 /**
  * Parses input arguments and creates a new SetRsvpCommand object
  */
@@ -28,9 +26,19 @@ public class SetRsvpCommandParser implements Parser<SetRsvpCommand> {
             // Parse the index (first part)
             Index index = ParserUtil.parseIndex(parts[0]);
 
+            // Ensure the second part starts with "s/"
+            if (!parts[1].startsWith("s/")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetRsvpCommand.MESSAGE_USAGE));
+            }
+
             // Parse the action (second part)
-            int action = Integer.parseInt(parts[1]);
-            RsvpStatus rsvpStatus;
+            String actionString = parts[1].substring(2);
+            int action;
+            try {
+                action = Integer.parseInt(actionString);
+            } catch (NumberFormatException e) {
+                throw new ParseException("Invalid RSVP action format: must be a number.");
+            }
 
             // Return the new command
             return new SetRsvpCommand(index, action);

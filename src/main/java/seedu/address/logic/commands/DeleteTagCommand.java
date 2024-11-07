@@ -71,9 +71,10 @@ public class DeleteTagCommand extends UndoableCommand {
     /**
      * Checks whether the tags to be deleted are currently tagged to guests (in use).
      *
-     * @throws CommandException if any of the tags are currently in use.
+     * @throws CommandException If any of the tags are currently in use.
      */
     private void checkForTagsInUse(Model model) throws CommandException {
+        requireAllNonNull(model);
         Set<Tag> tagsInUse = model.getTagsInUse();
         Set<Tag> matchingTags = tagsInUse.stream().filter(tags::contains).collect(Collectors.toSet());
 
@@ -93,13 +94,14 @@ public class DeleteTagCommand extends UndoableCommand {
         requireAllNonNull(tagsSuccessfullyDeleted);
         List<Tag> tagsNotSuccessfullyDeleted = new ArrayList<>(tags);
 
-        // Tags that were not deleted successfully
+        // Get tags that were not deleted successfully
         tagsNotSuccessfullyDeleted.removeAll(tagsSuccessfullyDeleted);
 
+        if (!tagsNotSuccessfullyDeleted.isEmpty() && tagsSuccessfullyDeleted.isEmpty()) {
+            return new CommandResult(MESSAGE_ALL_NONEXISTENT + tagsNotSuccessfullyDeleted);
+        }
+
         if (!tagsNotSuccessfullyDeleted.isEmpty()) {
-            if (tagsSuccessfullyDeleted.isEmpty()) {
-                return new CommandResult(MESSAGE_ALL_NONEXISTENT + tagsNotSuccessfullyDeleted);
-            }
             return new CommandResult(MESSAGE_SOME_NONEXISTENT + tagsNotSuccessfullyDeleted);
         }
 

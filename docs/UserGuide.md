@@ -3,11 +3,12 @@ layout: page
 title: User Guide
 ---
 
+Managing dozens of guests, AB3 My Guest is your go-to wedding planner which supports _bulk tagging_, _layer filtering_, and a dedicated RSVP field to track your wedding's attendees!
+
 AB3 My Guest is a **desktop app for managing wedding guests, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 My Guest can get your guest management tasks done faster than traditional methods of managing guest lists!
 
 * Table of Contents
 {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -25,7 +26,7 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
     * Use the `java -jar ab3myguest.jar` command to run the application.<br>
     * A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/Ui.png)
+![Ui.png](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -41,6 +42,7 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+7. Do note that users should open only one instance of AB3 My Guest at a time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,8 +74,6 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
 ### Listing all guests : `list`
@@ -81,8 +81,6 @@ Format: `help`
 Shows a list of **all** guests in the guest list.
 
 Format: `list`
-
-![listCommand](images/listCommand.png)
 
 ### Adding a guest: `add`
 
@@ -103,7 +101,8 @@ Examples:
 * `add n/Betsy Crowe p/81234567 e/betsycrowe@example.com t/bride's side`
 * `add n/Zeon p/81234567 e/zeon@example.com`
 
-![addCommand](images/addCommand.png)
+![addCommand.png](images/addCommand.png)
+
 
 ### Deleting a guest : `delete`
 
@@ -119,8 +118,6 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd guest in the address book.
 * `find yu` followed by `delete 2` deletes the 2nd guest in the results of the `find` command.
-
-![deleteCommand](images/deleteCommand.png)
 
 
 ### Editing a guest : `edit`
@@ -142,8 +139,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com`
 *  `edit 1 n/Alan Yeoh t/`
-
-![editCommand](images/editCommand.png)
 
 
 ### Creating a new tag: `newtag`
@@ -169,8 +164,6 @@ Examples:
 * `newtag t/bride's side`
 * `newtag t/bride's side t/groom's side`
 
-![newtagCommand](images/newtagCommand.png)
-
 
 ### Deleting an existing tag: `deletetag`
 
@@ -194,8 +187,6 @@ Examples:
 * `deletetag t/bride's side`
 * `deletetag t/bride's side t/groom's side`
 * `deletetag -force t/bride's side`
-
-![deleteTag](images/deleteTag.png)
 
 
 ### Renaming a tag : `renametag`
@@ -248,14 +239,12 @@ Examples:
 * `untag 1 t/bride's side t/friends`
 * `untag 1 2 3 t/bride's side t/friends`
 
-![untagCommand](images/untagCommand.png)
-
 
 ### Setting RSVP status for a guest : `setrsvp`
 
 Toggles the RSVP status for a guest between `Coming`, `Not Coming` and `Pending`.
 
-Format: `setrsvp INDEX STATUS_INDEX`
+Format: `setrsvp INDEX s/STATUS_INDEX`
 * Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list.
 * The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 * `STATUS_INDEX` accepts 3 possible values:
@@ -268,16 +257,15 @@ You may only set one guest's RSVP status in each command. i.e. Setting multiple 
 </div>
 
 Example:
-* `setrsvp 1 1`
-* `setrsvp 2 3`
-* `setrsvp 1 2`
+* `setrsvp 1 s/1`
+* `setrsvp 2 s/3`
+* `setrsvp 1 s/2`
 
 ![setRsvpCommand](images/setRsvpCommand.png)
 
-
 ### Filtering using RSVP status or tags : `filter`
 
-Filters the currently shown list based on RSVP status or tag.
+Filters the currently shown list based on RSVP status or tag. Filter predicates are displayed in the filter panel.
 
 Format: `filter [s/STATUS_INDEX] [t/TAG]…​`
 * At least one of the optional fields must be provided.
@@ -317,31 +305,31 @@ Examples:
 * `find alex`
 * `find alex yu`
 
-![findCommand](images/findCommand.png)
 
-### Undoing previous command : `undo`
+### Undoing latest command : `undo`
 
-Undoes the changes from the previous command.
+Undoes the changes from the latest command.
 
 Format: `undo`
 
-Commands that can be undone:
-* `add`
-* `delete`
-* `newtag`
-* `deletetag`
-* `renametag`
-* `tag`
-* `untag`
-* `edit`
-* `filter`
-* `find`
-* `setrsvp`
+* Commands that can be undone:
+  * `add`
+  * `delete`
+  * `newtag`
+  * `deletetag`
+  * `renametag`
+  * `tag`
+  * `untag`
+  * `edit`
+  * `filter`
+  * `find`
+  * `setrsvp`
+* Only the **latest** successfully executed command can be undone.
 
-Only the latest command can be undone. 
-
-Undo will only reverse the changes from the previous command.
-
+Examples:
+* `tag 7 t/neighbours` is the latest successfully executed
+![undoCommand1.png](images/undoCommand1.png)
+![undoCommand2.png](images/undoCommand2.png)
 
 
 ### Clearing all entries : `clear`

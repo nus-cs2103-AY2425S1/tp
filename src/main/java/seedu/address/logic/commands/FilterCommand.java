@@ -26,6 +26,7 @@ public class FilterCommand extends UndoableCommand {
             + "Parameters: [s/RSVPSTATUS] [t/TAG]...\n" + "At least one parameter must be provided.\n"
             + "Example: " + COMMAND_WORD + " s/1 t/bride's side";
     public static final String MESSAGE_TAG_NOT_CREATED = "must be created before being used to filter.";
+    public static final String MESSAGE_FILTER_ALREADY_EXISTS = "is already being filtered.";
 
     private final Set<Tag> tagSet;
     private final Set<RsvpStatus> statusSet;
@@ -55,20 +56,37 @@ public class FilterCommand extends UndoableCommand {
         previousPredicate = model.getCurrentPredicate();
 
         for (Tag tag: tagSet) {
+            if (model.checkTagFilterAlreadyExists(tag)) {
+                throw new CommandException(tag + " " + MESSAGE_FILTER_ALREADY_EXISTS);
+            }
+
+            if (!model.hasTag(tag)) {
+                throw new CommandException("Tag " + tag + " " + MESSAGE_TAG_NOT_CREATED);
+            }
+        }
+
+        for (RsvpStatus status: statusSet) {
+            if (model.checkStatusFilterAlreadyExists(status)) {
+                throw new CommandException("[" + status + "] " + MESSAGE_FILTER_ALREADY_EXISTS);
+            }
+        }
+
+        for (Tag tag: tagSet) {
             if (!model.hasTag(tag)) {
                 throw new CommandException("Tag " + tag + " " + MESSAGE_TAG_NOT_CREATED);
             }
             predicateSet.add(new TagContainsKeywordsPredicate(tag));
         }
 
-        for (RsvpStatus status: statusSet) {
-            predicateSet.add(new RsvpedPredicate(status));
-        }
+        predicateSet.addAll(tagSet.stream().map(TagContainsKeywordsPredicate::new).toList());
+        predicateSet.addAll(statusSet.stream().map(RsvpedPredicate::new).toList());
 
         for (Predicate<Person> predicateToAdd: predicateSet) {
             predicate = predicate.and(predicateToAdd);
         }
 
+        model.addTagFilters(tagSet);
+        model.addStatusFilters(statusSet);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
@@ -77,6 +95,7 @@ public class FilterCommand extends UndoableCommand {
     @Override
     public void undo(Model model) {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.removeFilters(tagSet, statusSet);
         if (previousPredicate != null) {
             model.updateFilteredPersonList(previousPredicate);
         }

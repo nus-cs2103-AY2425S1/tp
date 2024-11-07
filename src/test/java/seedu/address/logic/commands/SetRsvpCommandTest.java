@@ -110,7 +110,6 @@ public class SetRsvpCommandTest {
         // same object -> returns true
         assertTrue(setRsvpFirstCommand.equals(setRsvpFirstCommand));
 
-
         // different types -> returns false
         assertFalse(setRsvpFirstCommand.equals(1));
 

@@ -8,10 +8,11 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
+Libraries used: 
+* [JavaFX](https://openjfx.io/)
+* [Jackson](https://github.com/FasterXML/jackson)
+* [JUnit5](https://github.com/junit-team/junit5)
 * [AddressBook Level 3](https://se-education.org/addressbook-level3/) (Original Source)
-* JavaFX
-* JSON
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -119,30 +120,32 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`, `TagCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`, `TagCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+
 Diving into specific implementation of the `XYZCommand` and `XYZCommandParser` classes, the user command undergoes extensive checks for validity.
 Demonstrating with an example, the following activity diagrams summarise what happens when a user executes a `newtag` and `tag` command:
 ![NewTagActivityDiagram.png](images%2FNewTagActivityDiagram.png)
 ![TagActivityDiagram.png](images%2FTagActivityDiagram.png)
 
 These extensive input checks in the Logic classes protect against potential malicious and invalid inputs that could undermine the usage of the code.
+
+The class diagram below provides an overview of Command.
+
+<img src="images/CommandClassDiagram.png"/>
+
+Commands that extends the UndoableCommand class have a concrete implementation of `undo`, which is called during the execution of an UndoCommand. During the execution of an `UndoableCommand`, the changes to the addressbook are stored, and will be used for `undo`.
+
 ### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the current list of tags as an `ObservableList<Tag>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. This allows `AddessBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+* stores a `Command` object that represents the user's last executed command.
 
 
 ### Storage Component
@@ -170,7 +173,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-Currently, the undo feature facilitated by the class `UndoCommand` and is implemented by having an undo method under each command, which implements an `UndoableCommand` interface. It does not utilise saved states of the address book.
+Currently, the undo feature facilitated by the class `UndoCommand`. It is implemented by having an abstract class `UndoableCommand`, which the command extends, proving a concrete implementation of `UndoableCommand#undo()`. and is implemented by having an undo method under each command, which implements an `UndoableCommand` interface. It does not utilise saved states of the address book.
 
 The proposed augmented undo and new redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -506,7 +509,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 **Use Case 10 (UC10)**: Filter by Tag or RSVP Status<br>
 **MSS**:
->>>>>>> upstream/master
 
 1.  User enters the command to filter guest list.
 2.  The system prompts for the desired predicate.
@@ -572,8 +574,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Filter panel**: Shows the current filter predicates applied to the list
 * **New Tag**: Creates a new tag and adds it to the tag list
 * **Delete Tag**: Removes a tag from the tag list and all instances of it on all guests in the address book
-* **Remove Tag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
-* **Undo**: Returns the list to the previous state before the last command was run
+* **Untag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
+* **Undo**: Undoes the previous executed command
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -627,7 +629,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `newtag t/friends`<br>
       Expected: No tag is created. Error details shown in the status message.
 
-   1. Other incorrect newtag commands to try: `newtag`, `newtag t/`, `newtag t/x` (where x is a non-ASCII character)<br>
+   1. Other incorrect `newtag` commands to try: `newtag`, `newtag t/`, `newtag t/x` (where x is a non-ASCII character)<br>
       Expected: Similar to previous.
 
 ### Saving data
@@ -638,7 +640,7 @@ testers are expected to do more *exploratory* testing.
    1. Run the JAR file and note the error message for the corrupted data file
    2. Open the project using an IDE (recommended to use IntelliJ IDEA)
    2. Navigate to `/data` folder
-   3. Open the JSON file inside, it should be named `addressbook.json`
+   3. Open the JSON file inside, it should be named `ab3myguest.json`
    4. Edit the file to fix the corrupted data
 <div markdown="span" class="alert alert-info">:information_source: **Important:** Editing the data file directly is dangerous and could cause more issues. Do it with discretion and only as a last resort.
 </div>
@@ -646,5 +648,5 @@ testers are expected to do more *exploratory* testing.
 2. Dealing with missing data files
    1. Open the project using an IDE (recommended to use IntelliJ IDEA)
    2. Navigate to `/data` folder
-   3. Open the JSON file inside, it should be named `addressbook.json`.
+   3. Open the JSON file inside, it should be named `ab3myguest.json`.
    4. If there is none, you can copy the default data file from our [code space](https://github.com/AY2425S1-CS2103T-W11-2/tp)

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="AB3 My Guest" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="AB3 My Guest" minWidth="600" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -62,6 +62,12 @@
         </StackPane>
 
         <HBox fx:id="tagListPanelPlaceholder" styleClass="pane-with-border" spacing="10" minWidth="340" prefWidth="340" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+          </padding>
+        </HBox>
+
+        <HBox fx:id="filtersPanelPlaceholder" styleClass="pane-with-border" spacing="10" minWidth="340" prefWidth="340" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
