@@ -43,7 +43,7 @@ public class CreateTaskCommandTest {
         // Create a CreateTaskCommand with valid tasks
         CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
 
-        String expectedMessage = String.format(Messages.MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd));
+        String expectedMessage = String.format(Messages.MESSAGE_TASK_ADDED_SUCCESS, StringUtil.tasksString(tasksToAdd));
 
         CommandResult result = command.execute(model);
 

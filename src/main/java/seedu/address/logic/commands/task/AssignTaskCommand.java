@@ -61,7 +61,7 @@ public class AssignTaskCommand extends Command {
                 .map(task -> task.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
         return String.format(
-                Messages.MESSAGE_ADD_TASK_SUCCESS, addedTasks, personToEdit.getName().toString()
+                Messages.MESSAGE_ASSIGN_TASK_SUCCESS, addedTasks, personToEdit.getName().toString()
         );
     }
 

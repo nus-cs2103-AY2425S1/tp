@@ -31,9 +31,11 @@ public class MarkTaskCommand extends Command {
     public MarkTaskCommand(Set<Index> targetIndexes) {
         this.taskStatusModifier = new TaskStatusModifier(targetIndexes, true);
     }
+
     public Set<Index> getTargetIndexes() {
         return taskStatusModifier.getTargetIndexes();
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Set<Task> markedTasks = taskStatusModifier.modifyTasks(model);

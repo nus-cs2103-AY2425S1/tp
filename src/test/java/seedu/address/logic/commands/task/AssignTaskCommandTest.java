@@ -51,7 +51,7 @@ public class AssignTaskCommandTest {
 
         String addedTasks = taskToAssign.toString().replaceAll("[\\[\\]]", "");
         String expectedMessage = String.format(
-                Messages.MESSAGE_ADD_TASK_SUCCESS, addedTasks, validPerson.getName()
+                Messages.MESSAGE_ASSIGN_TASK_SUCCESS, addedTasks, validPerson.getName()
         );
 
         assertEquals(expectedMessage, result.getFeedbackToUser());

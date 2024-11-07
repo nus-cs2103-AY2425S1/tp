@@ -29,8 +29,10 @@ public class Messages {
     /**
      * Messages specific to People
      */
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid. \n"
             + MESSAGE_ENTER_VALID_INDEX;
+    public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s";
 
     /**
      * Messages specific to Tag
@@ -61,7 +63,7 @@ public class Messages {
     /**
      * Messages specific to Task
      */
-    public static final String MESSAGE_ADD_TASK_SUCCESS = "Added task(s) %1$s to %2$s.";
+    public static final String MESSAGE_ASSIGN_TASK_SUCCESS = "Added task(s) %1$s to %2$s.";
     public static final String MESSAGE_DUPLICATE_TASK_IN_PERSON = "Task '%s' is already assigned to %s";
     public static final String MESSAGE_DUPLICATE_TASK_IN_WEDLINKER = "This task already exists in the address book";
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
@@ -72,7 +74,7 @@ public class Messages {
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked task: %1$s";
     public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "%1$s is not a Vendor, "
             + "tasks can only be assigned to vendors.";
-    public static final String MESSAGE_SUCCESS = "New task(s) added: %1$s";
+    public static final String MESSAGE_TASK_ADDED_SUCCESS = "New task(s) added: %1$s";
     public static final String MESSAGE_TASK_ALREADY_COMPLETED = "Some tasks specified are already completed.";
     public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "Some tasks specified are already uncompleted.";
     public static final String MESSAGE_TASK_NOT_FOUND_IN_AB = "Task does not exist in the address book.";
@@ -85,8 +87,14 @@ public class Messages {
     /**
      * Messages specific to Vendor
      */
+    public static final String MESSAGE_ADD_VENDOR_SUCCESS = "%1$s has been added as a vendor.";
+    public static final String MESSAGE_DUPLICATE_VENDOR = "%1$s is already a vendor.";
     public static final String MESSAGE_FORCE_UNASSIGN_VENDOR = "Use f/ to force the unassignment of vendors."
             + " This will unassign all tasks currently with the Vendor.";
+    public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "The Vendor: %1$s still has tasks"
+            + " assigned to them";
+    public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
+    public static final String MESSAGE_UNASSIGN_VENDOR_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
 
     /**
      * Messages specific to Find

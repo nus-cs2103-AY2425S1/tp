@@ -28,7 +28,7 @@ public class AssignVendorCommandTest {
         Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(AssignVendorCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_ADD_VENDOR_SUCCESS,
                 personToAssign.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -52,7 +52,7 @@ public class AssignVendorCommandTest {
 
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
         assertCommandFailure(assignVendorCommand, model,
-                String.format(AssignVendorCommand.MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
+                String.format(Messages.MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class AssignVendorCommandTest {
         Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(AssignVendorCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_ADD_VENDOR_SUCCESS,
                 personToAssign.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

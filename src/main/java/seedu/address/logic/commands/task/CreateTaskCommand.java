@@ -66,7 +66,7 @@ public class CreateTaskCommand extends Command {
         }
 
         return new CommandResult(String.format(
-                Messages.MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd)
+                Messages.MESSAGE_TASK_ADDED_SUCCESS, StringUtil.tasksString(tasksToAdd)
         ));
     }
 
