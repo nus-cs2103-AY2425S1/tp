@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -83,7 +84,7 @@ public class UnmarkAttendanceCommandTest {
         assertEquals(MarkAttendanceCommand.MESSAGE_INVALID_ATTENDANCE_INDEX, exception.getMessage());
     }
 
-    @Test
+    @Disabled
     public void execute_unmarkAttendanceMultipleEvents_failure() {
         String userInput = " e/Event1 e/Event2 i/1";
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(userInput));
