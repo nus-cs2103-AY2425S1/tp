@@ -92,8 +92,8 @@ Adds a customer to the address book.
 Command aliases: `addc`<br>
 Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>
 Examples:
-* `addcustomer n/John, Doe S/O Adam-Sam Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addc n/O'Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 <box type="important">
 
@@ -220,7 +220,7 @@ Examples:
 
 * Add an order under the customer at the specified `CUSTOMER_INDEX`, with a default `pending` status.
 * The index refers to the index number shown in the displayed customer list.
-* The index and quantity **must be a positive integer** 1, 2, 3, …​\
+* The index and quantity **must be a positive integer** 1, 2, 3, …​
 * 'ITEM' can contain any printable characters, but it should not be blank.
 * Date must follow the following format: `DD-MM-YYYY`
 * If the quantity is not provided, the quantity will be set to a default value of **1**.
