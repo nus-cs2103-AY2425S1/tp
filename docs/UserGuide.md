@@ -7,6 +7,7 @@
 #  UGTeach User Guide
 
 UGTeach is a **desktop app for managing your students' contacts** that aims to empower undergraduate private tutors to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
+
 Whether you're a Command Line Interface (CLI) pro or new to command lines, **we've got you covered**. Our app offers both a **CLI interface for advanced users** and a **GUI for those who prefer a more visual experience**.
 If you can type fast, UGTeach can get your contact management tasks done **faster than traditional GUI apps**.
 
@@ -24,7 +25,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 3. Copy the file to the folder you want to use as the _home folder_ for your address book.
 
-4. Open a command terminal, `cd` into the folder that you put the jar file in
+4. Open a command terminal, `cd` into the folder that you put the jar file in.
 
 5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
@@ -53,18 +54,26 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
+**List**   | `list`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
-**List**   | `list`
 **Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
-**Remind**   | `remind`
-**Help**   | `help`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Income**  | `income`
+**Remind**   | `remind`
+**Clear**  | `clear`
 **Exit**   | `exit`
+
+<box type="warning" header="##### Notes">
+
+* The prefixes (e.g. `a/`, `s/` or `paid`) are case-insensitive, i.e. you can use `a/`, `s/` or `pAId/` instead.
+
+* You should not use the prefixes in any other cases, e.g. as content of **ADDRESS**.
+</box>
 
 ## Features
 
@@ -119,6 +128,7 @@ Adds a student to the address book.
 
 ##### Constraints
 
+* **NAME** must only contain alphanumeric characters and spaces.
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and **END_TIME** are represented as `HHmm`.
@@ -136,18 +146,11 @@ Adds a student to the address book.
 
 <box type="tip" header="##### Tips">
 
+* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+* UGTeach will inform you of clashing schedules. You can modify them using the [`edit` command](#editing-a-student-edit).
+  ![clashingSchedule.png](images/clashingSchedule.png)
 
-* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit).
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.   
 </box>
-
-### Listing all students: `list`
-
-Shows a list of all students in the address book.
-
-Format: `list`
-
-<div style="page-break-after: always;"></div>
 
 ### Editing a student: `edit`
 
@@ -185,21 +188,33 @@ for convenient ways to update the paid amount and owed amount.
 
 <div style="page-break-after: always;"></div>
 
-### Showing income data: `income`
+### Listing all students: `list`
 
-Shows the total amount of tuition fee that you have been paid, as well as total amount that is owed.
+Shows a list of all students in the address book.
 
-**Format:** `income`
-
-**Examples**
-* `income` when all entries are listed gives the total tuition fee paid, as well as total amount that is owed
-* `find n/Alex` followed by `income` shows total tuition fee paid, as well as owed total amount that is owed, from
-students whose name contains Alex
-
-**Output:**
-![result for `income` when all entries listed](images/incomeResult.png)
+Format: `list`
 
 <div style="page-break-after: always;"></div>
+
+### Deleting a student : `delete`
+
+Deletes the specified student from the address book.
+
+**Format:** `delete INDEX`
+
+**Examples:**
+* `list` followed by `delete 2` deletes the 2nd student stored in UGTeach.
+* `find n/Bernice` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+**Output:**
+![deleteResult.png](images/deleteResult.png)
+
+<box type="important" header="##### Constraints">
+
+* The **INDEX** refers to the index number shown in the **displayed** student list.
+* The **INDEX must be a positive integer** 1, 2, 3, …​
+
+</box>
 
 ### Finding students' information: `find`
 
@@ -263,7 +278,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 
 <box type="tip" header="##### Tips">
 
-* In case you accidentally make a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the PAID_AMOUNT as your preference.
+* In case you made a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the PAID_AMOUNT to your preference.
 
 </box>
 
@@ -291,7 +306,7 @@ Updates the amount of tuition fee owed by a specified student after a lesson.
 
 <box type="tip" header="##### Tips">
 
-* In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
+* In case you made a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the OWE_AMOUNT to your preference.
 
 </box>
 
@@ -303,11 +318,11 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 
 **Format:** `settle INDEX amount/AMOUNT`
 
-**Examples:**
+**Example:**
 * `settle 1 amount/500.00`
 
 **Output:**
-![settleResult.jpg](images%2FsettleResult.jpg)
+![settleResult.png](images/settleResult.png)
 
 <box type="important" header="##### Constraints">
 
@@ -319,25 +334,21 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 
 <div style="page-break-after: always;"></div>
 
-### Deleting a student : `delete`
+### Showing income data: `income`
 
-Deletes the specified student from the address book.
+Shows the total amount of tuition fee that you have been paid, as well as the total amount that is owed.
 
-**Format:** `delete INDEX`
+**Format:** `income`
 
-**Examples:**
-* `list` followed by `delete 2` deletes the 2nd student stored in UGTeach.
-* `find n/Bernice` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+**Examples**
+* Entering `income` when all entries are listed gives the total tuition fee paid, as well as the total amount that is owed.
+* Entering `find n/Alex` followed by `income` shows total tuition fee paid, as well as the total amount that is owed, from
+  students whose name contains Alex
 
 **Output:**
-![deleteResult.png](images/deleteResult.png)
+![result for `income` when all entries listed](images/incomeResult.png)
 
-<box type="important" header="##### Constraints">
-
-* The **INDEX** refers to the index number shown in the **displayed** student list.
-* The **INDEX must be a positive integer** 1, 2, 3, …​
-
-</box>
+<div style="page-break-after: always;"></div>
 
 ### Getting a reminder for today: `remind`
 
@@ -357,9 +368,15 @@ to find your schedule for a specific day of the week.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all data from the data file of UGTeach.
 
-Format: `clear`
+<box type="warning" header ="##### Caution">
+
+This action is not irreversible and your deleted data cannot be recovered. 
+
+</box>
+
+**Format:** `clear`
 
 <div style="page-break-after: always;"></div>
 
@@ -367,7 +384,7 @@ Format: `clear`
 
 Exits the program.
 
-Format: `exit`
+**Format:** `exit`
 
 ### Saving the data
 

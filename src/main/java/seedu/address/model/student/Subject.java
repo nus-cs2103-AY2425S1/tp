@@ -15,7 +15,7 @@ public class Subject {
             + "english / chinese / malay / tamil / "
             + "mathematics / history / geography / physics / "
             + "GP "
-            + "and it should not be blank";
+            + "\nand it should not be blank";
 
 
     public final Subjects value;

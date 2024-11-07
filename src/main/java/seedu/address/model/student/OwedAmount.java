@@ -9,7 +9,7 @@ public class OwedAmount extends Fee {
     public static final double MAX_VALUE = 9999999.99;
     public static final String MESSAGE_CONSTRAINTS = "Owed "
             + Fee.MESSAGE_CONSTRAINTS
-            + "2. is between the range of 0.00 to " + MAX_VALUE;
+            + "2. is between the range of $0.00 to $" + String.format("%.2f", MAX_VALUE);
 
     /**
      * Constructs a {@code OwedAmount}.

@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -54,25 +56,46 @@ public class CommandTestUtil {
     public static final String VALID_OWED_AMOUNT_AMY = "500.00";
     public static final String VALID_OWED_AMOUNT_BOB = "300.25";
     public static final String VALID_HOUR_DESC = " " + PREFIX_HOUR + VALID_HOUR_AMY;
+    public static final String VALID_HOUR_DESC_MIXED_CASED = " " + createMixedCase(PREFIX_HOUR.getPrefix())
+            + VALID_HOUR_AMY;
     public static final String VALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "5.00";
+    public static final String VALID_AMOUNT_DESC_MIXED_CASE = " " + createMixedCase(PREFIX_AMOUNT.getPrefix()) + "5.00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
+    public static final String NAME_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_NAME.getPrefix())
+            + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
+    public static final String PHONE_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_PHONE.getPrefix())
+            + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_EMAIL.getPrefix())
+            + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
+    public static final String ADDRESS_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_ADDRESS.getPrefix())
+            + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String SCHEDULE_DESC_AMY = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_AMY;
+    public static final String SCHEDULE_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_SCHEDULE.getPrefix())
+            + VALID_SCHEDULE_AMY;
     public static final String SCHEDULE_DESC_BOB = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_BOB;
     public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
+    public static final String SUBJECT_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_SUBJECT.getPrefix())
+            + VALID_SUBJECT_AMY;
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
     public static final String RATE_DESC_AMY = " " + PREFIX_RATE + VALID_RATE_AMY;
+    public static final String RATE_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_RATE.getPrefix())
+            + VALID_RATE_AMY;
     public static final String RATE_DESC_BOB = " " + PREFIX_RATE + VALID_RATE_BOB;
     public static final String PAID_AMOUNT_DESC_AMY = " " + PREFIX_PAID_AMOUNT + VALID_PAID_AMOUNT_AMY;
+    public static final String PAID_AMOUNT_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_PAID_AMOUNT.getPrefix())
+            + VALID_PAID_AMOUNT_AMY;
     public static final String PAID_AMOUNT_DESC_BOB = " " + PREFIX_PAID_AMOUNT + VALID_PAID_AMOUNT_BOB;
     public static final String OWED_AMOUNT_DESC_AMY = " " + PREFIX_OWED_AMOUNT + VALID_OWED_AMOUNT_AMY;
+    public static final String OWED_AMOUNT_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_OWED_AMOUNT.getPrefix())
+            + VALID_OWED_AMOUNT_AMY;
     public static final String OWED_AMOUNT_DESC_BOB = " " + PREFIX_OWED_AMOUNT + VALID_OWED_AMOUNT_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -101,6 +124,7 @@ public class CommandTestUtil {
                                                      .withRate(VALID_RATE_AMY)
                                                      .withPaidAmount(VALID_PAID_AMOUNT_AMY)
                                                      .withOwedAmount(VALID_OWED_AMOUNT_AMY).build();
+
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                                                      .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                                                      .withAddress(VALID_ADDRESS_BOB)
@@ -126,6 +150,7 @@ public class CommandTestUtil {
     }
 
     /**
+     * Converts a string {@code expectedMessage} to a {@code CommandResult} with the message {@code expectedMessage}.
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
@@ -166,4 +191,15 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredStudentList().size());
     }
 
+    /**
+     * Creates a mixed-case version of {@code s}.
+     * For example: "paidAmount/" becomes "PaIdAmOuNt/".
+     */
+    private static String createMixedCase(String s) {
+        return IntStream.range(0, s.length())
+                .mapToObj(i -> i % 2 == 0
+                        ? Character.toString(Character.toUpperCase(s.charAt(i)))
+                        : Character.toString(Character.toLowerCase(s.charAt(i))))
+                .collect(Collectors.joining());
+    }
 }

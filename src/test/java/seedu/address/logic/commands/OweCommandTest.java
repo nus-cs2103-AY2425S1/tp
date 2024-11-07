@@ -33,6 +33,7 @@ public class OweCommandTest {
 
     @Test
     public void execute_unfilteredList_success() {
+        // EP: valid command in an unfiltered list
         Student chosenStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, Double.parseDouble(VALID_HOUR_AMY));
         Student updatedOwedAmountStudent = createExpectedStudent(chosenStudent, Double.parseDouble(VALID_HOUR_AMY));
@@ -50,6 +51,7 @@ public class OweCommandTest {
 
     @Test
     public void execute_filteredList_success() {
+        // EP: valid command in a filtered list
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
@@ -71,12 +73,14 @@ public class OweCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
+        // EP: invalid index in an unfiltered list
         OweCommand oweCommand = new OweCommand(INDEX_OUT_OF_BOUNDS, Double.parseDouble(VALID_HOUR_BOB));
         assertCommandFailure(oweCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
+        // EP: invalid index in a filtered list
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         OweCommand oweCommand = new OweCommand(Index.fromOneBased(2), Double.parseDouble(VALID_HOUR_BOB));
         assertCommandFailure(oweCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -84,6 +88,7 @@ public class OweCommandTest {
 
     @Test
     public void execute_exceededLimitUnfilteredList_failure() {
+        // EP: exceeded limit in an unfiltered list
         Student chosenStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         double currentOwedAmountValue = chosenStudent.getOwedAmountValue();
         double additionalOwedAmountValue = OwedAmount.MAX_VALUE - currentOwedAmountValue + 1;
