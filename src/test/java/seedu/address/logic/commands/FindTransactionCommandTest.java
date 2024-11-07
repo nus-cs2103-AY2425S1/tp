@@ -96,7 +96,7 @@ public class FindTransactionCommandTest {
     }
 
     @Test
-    public void execute_transactionListView_throwsCommandException() {
+    public void execute_personListView_throwsCommandException() {
         TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTransactionCommand command = new FindTransactionCommand(predicate);
         model.setIsViewTransactions(false);
