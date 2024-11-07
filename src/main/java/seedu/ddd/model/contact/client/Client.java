@@ -31,23 +31,6 @@ public class Client extends Contact {
         super(name, phone, email, address, tags, contactId);
     }
 
-    /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
-     */
-    @Override
-    public boolean isSameContact(Contact otherContact) {
-        if (otherContact == this) {
-            return true;
-        }
-
-        if (!(otherContact instanceof Client)) {
-            return false;
-        }
-
-        return super.isSameContact(otherContact);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

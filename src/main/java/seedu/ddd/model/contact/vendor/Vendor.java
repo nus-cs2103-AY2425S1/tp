@@ -41,23 +41,6 @@ public class Vendor extends Contact {
         return service;
     }
 
-    /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
-     */
-    @Override
-    public boolean isSameContact(Contact otherContact) {
-        if (otherContact == this) {
-            return true;
-        }
-
-        if (!(otherContact instanceof Vendor)) {
-            return false;
-        }
-
-        return super.isSameContact(otherContact);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
