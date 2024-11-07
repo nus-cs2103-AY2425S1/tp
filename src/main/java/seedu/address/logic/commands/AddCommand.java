@@ -57,7 +57,8 @@ public class AddCommand extends Command {
     public static final String COMMAND_SUMMARY_EXAMPLES =
             ":add -n James Ho -p 98765432 -e jamesho@example.com -l 123, "
                    + "Clementi Rd, 1234665 -t friend -r My favourite colleague" + "\n"
-                    + ":a -n James Ho -p 98765432 -e jamesho@example.com -l 123, "
+                   + ":a -n James Ho -p 98765432 -e jamesho@example.com -l 123, "
+                   + "Clementi Rd, 1234665 -t friend -r My favourite colleague";
 
     public static final List<String> INVALID_VARIANTS = Arrays.asList("add", "a");
     private final Person toAdd;
