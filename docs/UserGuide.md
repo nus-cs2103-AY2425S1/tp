@@ -110,6 +110,7 @@ Shows a message explaining the various commands available.
 
 ![Help Command UI](images/helpCommandUI.png)
 
+
 #### Link to the user guide: `helpwindow`
 
 Pops up a window, where there is a link to the user guide for the user to easily access.
@@ -118,11 +119,13 @@ Pops up a window, where there is a link to the user guide for the user to easily
 
 ![](images/helpWindowUI.png)
 
+
 #### Listing all contacts: `list`
 
 Shows a list of all persons in AdmiNUS.
 
 **Format**: `list`
+
 
 #### Viewing a contact: `view`
 
@@ -181,6 +184,7 @@ A student can have any number of tags (including 0).
 
 - `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a student named John Doe to AdmiNUS
 
+
 #### Adding a company: `company`
 
 Adds a company to AdmiNUS.
@@ -214,6 +218,7 @@ A company can have any number of tags (including 0)
 Examples:
 
 - `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility` adds a company name Newgate Prison to AdmiNUS
+
 
 #### Editing a contact: `edit`
 
@@ -263,6 +268,7 @@ edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS]
 
 You can remove all the person’s tags by typing `t/` without
 specifying any tags after it. </div>
+
 
 #### Deleting contact(s): `delete`
 
@@ -353,6 +359,7 @@ Finds contacts whose tags are the same as the specified keyword.
 
 - `filtertag paidFee` finds contacts who have tags saved as `paidFee`
 
+
 #### Tracking contacts by category: `track`
 
 Tracks and lists all contacts who are in the category of the specified keyword.
@@ -379,6 +386,7 @@ Tracks and lists all contacts who are in the category of the specified keyword.
 - Only full words will be matched e.g. `student` will not match `students`.
 
 </div>
+
 
 #### Adding tag(s) to contact: `tag`
 Adds additional specified tag(s) to the specified contact or all contacts without overwriting existing tags.
@@ -424,6 +432,7 @@ Tag labelled with "paid" will have green background to indicate student has paid
 </div>
 ![View Contact UI](images/paidTag.png)
 
+
 #### Deleting tag(s) from contact: `deletetag`
 
 Deletes the specified tag(s) from the specified contact.
@@ -447,11 +456,11 @@ Deletes the specified tag(s) from the specified contact.
 
 **Format 2**: `deletetag ALL t/TAG [t/MORE_TAG]`
 
-| Parameter Name | Description                                                                                                                                                                                                       | Required   |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| Parameter Name | Description                                                               | Required   |
+|----------------|---------------------------------------------------------------------------|------------|
 | `ALL`          | Indicates that the deletion operation applies to all contacts in the list | Compulsory |
-| `t/TAG`        | Tag to be deleted from every contact in the list associated with the tag                                                                                                                                          | Compulsory |
-| `t/MORE_TAG`   | More tags to be deleted                                                                                                                                                                                           | Optional|
+| `t/TAG`        | Tag to be deleted from every contact in the list associated with the tag  | Compulsory |
+| `t/MORE_TAG`   | More tags to be deleted                                                   | Optional   |
 
 
 **Examples**:
@@ -463,7 +472,7 @@ Deletes the specified tag(s) from the specified contact.
 
 ### File Operations
 
-### Importing CSV Files: `import`
+#### Importing CSV Files: `import`
 
 **Format**: `import FILE_PATH`
 
@@ -489,7 +498,7 @@ Deletes the specified tag(s) from the specified contact.
 **Troubleshooting**:
 - For errors like "file not found," confirm the path type (absolute vs. relative) and the file's existence.
 
-### Exporting CSV Files: `export`
+#### Exporting CSV Files: `export`
 
 **Format**: `export FILE_PATH`
 
@@ -532,15 +541,16 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 ## Glossary
 
+- **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
 - **_Category_** : A label that represents the type of contact (e.g., student, company) used for filtering and sorting contacts.
 - **_CLI (Command Line Interface)_** : A text-based user interface through which users interact with the application by typing commands.
 - **_CSV (Comma-separated values)_** : A text file format that uses commas to separate values, and newlines to separate records.
 - **_GUI (Graphical User Interface)_** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
 - **_NUS Club Administrator_** : An NUS club admin user responsible for managing contacts of students, companies, etc.
-- **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z)
-- **_Tag_** : A keyword or label associated with a contact that allows for easy grouping and filtering.
 - **_Relative Path_** : A file path that is relative to the current working directory of the user or application.
-- **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
+- **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z).
+- **_Tag_** : A keyword or label associated with a contact that allows for easy grouping and filtering.
+
 ---
 
 ## FAQ
