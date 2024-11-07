@@ -281,6 +281,10 @@ Generates a random gift idea.
 
 Format: gift
 
+### Discount Links `[coming in v2.0]`
+
+*Details coming soon ...*
+
 ## Revenue
 
 * Calculates the total amount of money earned from student who has paid/not paid
