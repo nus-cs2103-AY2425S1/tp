@@ -7,7 +7,7 @@
 # ContactCS User Guide
 
 **ContactCS** is a **desktop application designed for NUS Computer Science freshmen** to help them efficiently manage and locate essential contact details. The app is designed to store and organize contacts for key individuals relevant to their academic journey, including:
-* Professors and teaching assistants for specific modules
+* Professors and teaching assistants for enrolled modules
 * Classmates for collaborative projects and study groups
 * School offices for administrative matters
 * Emergency contacts for urgent situations
