@@ -111,7 +111,7 @@ Refer to the [Features](#features) below for details of each command.
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags (including 0).
 
 </box>
 
@@ -122,13 +122,13 @@ Refer to the [Features](#features) below for details of each command.
 From an initial state of the address book as shown above, typing in the commands below will result in an output as shown below.
 
 1. To add a client you met at a wedding named "Jack Lee", key in
-   `:add -n Jack Lee`
+   `:add -n Jack Lee`.
 
 ![addJackLee.png](images/addJackLee.png){width=60%}
 
 
 2. To add a friend and client you met at a conference named "Ivy King", with a phone number of "87654320", an email of "ivyk@example.com", with location of "808 Palm St", key in
-   `:a -n Ivy King -p 87654320 -e ivyk@example.com -l 808 Palm St -t friend -t client -r Met at a conference`
+   `:a -n Ivy King -p 87654320 -e ivyk@example.com -l 808 Palm St -t friend -t client -r Met at a conference`.
 
 ![addIvyKing.png](images/addIvyKing.png){width=60%}
 
@@ -160,11 +160,11 @@ From an initial state of the address book as shown above, typing in the commands
 
 From an initial state of the address book as shown above, typing in the commands below will result in an output as shown below.
 
-1. To edit the first person's phone number and email address to be "91234567" and "johndoe@example.com" respectively, key in: `:edit 1 -p 91234567 -e johndoe@example.com`
+1. To edit the first person's phone number and email address to be "91234567" and "johndoe@example.com" respectively, key in: `:edit 1 -p 91234567 -e johndoe@example.com`.
 
 ![editJohnDoe.png](images/editJohnDoe.png){width=60%}
 
-2. To edit the second person's name to "Betsy Crower" and clear all existing tags, key in: `:edit 2 -n Betsy Crower -t `
+2. To edit the second person's name to "Betsy Crower" and clear all existing tags, key in: `:edit 2 -n Betsy Crower -t `.
 
 ![editBetsyCrower.png](images%2FeditBetsyCrower.png){width=60%}
 
@@ -176,13 +176,13 @@ From an initial state of the address book as shown above, typing in the commands
 **Shortcut:** `:f`
 
 * The search is case-insensitive. \
-  e.g. "hans" will match "Hans"
+  E.g. "hans" will match "Hans".
 * Persons with a certain name, phone number, email, address and remark can be searched through flags.\
-  e.g. to find a person with the name "david" and remark "busy", the arguments would be `-n david -r busy`
+  E.g. to find a person with the name "david" and remark "busy", the arguments would be `-n david -r busy`.
 * Each flag is optional, but there must be at least one flag in a query.
-* As long as the contact contains the query, it is considered a match, e.g. searching "Han" will bring up "Hans"
+* As long as the contact contains the query, it is considered a match, e.g. searching "Han" will bring up "Hans".
 * Only persons matching all keywords will be returned.\
-  e.g. `:find -n Hans -p 98765432` will not return "Hans" if his phone number is not "98765432".
+  E.g. `:find -n Hans -p 98765432` will not return "Hans" if his phone number is not "98765432".
 
 **Examples:**
 
@@ -190,7 +190,7 @@ From an initial state of the address book as shown above, typing in the commands
 
 From an initial state of the address book as shown above, typing in the commands below will result in an output as shown below.
 
-1. To find a person named "Alice" with location "789 Oak St", key in `:find -n alice -l oak`
+1. To find a person named "Alice" with location "789 Oak St", key in `:find -n alice -l oak`.
 
 ![findAlice.png](images/findAlice.png){width=60%}
 
@@ -310,7 +310,7 @@ There are two modes in VBook: Command Box and UI Navigation. The following keybo
 #### Command Box
 * <kbd>Ctrl + Z</kbd> - Undo the last change in the command box.
 * <kbd>F1</kbd> - Open the Help Window.
-* <kbd>ESC</kbd> - Go back to UI Navigation Mode
+* <kbd>ESC</kbd> - Go back to UI Navigation Mode.
 
 #### UI Navigation
 * <kbd>Ctrl + Z</kbd> - Undo the last change made to the address book.
@@ -341,7 +341,8 @@ Each time you open VBook, you’ll be prompted to enter your password. This ensu
 <box type="warning">
 
 **Caution:**
-If you forget your password, there is no way to retrieve your data. To re-enter the application, you can delete the `password.txt` file located in the same directory as VBook.jar. However, deleting this file will also permanently erase all your address book data. This safeguard is designed to prevent unauthorized users from bypassing the password prompt.
+If you forget your password, there is no way to retrieve your data. To re-enter the application, you can delete the `password.txt` file located in the same directory as VBook.jar. 
+However, deleting this file will also permanently erase all your address book data. This safeguard is designed to prevent unauthorized users from bypassing the password prompt.
 
 </box>
 
@@ -376,9 +377,9 @@ Encryption only happens the first time you make changes to the address book from
 
 ### Edit Data File
 
-> The encrypted VBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`
+> The encrypted VBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 
-<box type="tip" seamless>
+<box type="warning">
 
 **Caution:**
 Do not make changes to the encrypted JSON file, as it can corrupt the data and make it unreadable. If you want to manually edit the data file, follow these instructions:
@@ -403,8 +404,8 @@ Furthermore, certain edits can cause the VBook to behave in unexpected ways (e.g
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: To transfer your data over, follow these steps:
-1. Export your data from your current computer by running `:export`
-2. Install VBook in the other computer (refer to [Quick Start](#Quick-start) for more information)
+1. Export your data from your current computer by running `:export`.
+2. Install VBook in the other computer (refer to [Quick Start](#Quick-start) for more information).
 3. Overwrite the empty data file in the new computer's `data/addressbook.json` with the `addressbook.json` file from your export in Step 1.
 4. Run VBook and your data should appear in your new computer.
 
