@@ -2,9 +2,9 @@
 layout: page
 title: User Guide
 ---
+<img src="images/meddict_logo.png" alt="MedDict Logo" style="max-width: 200px; width: 100%;" />
 
 ### About us
-<img src="images/meddict_logo.png" alt="MedDict Logo" style="max-width: 200px; width: 100%;" />
 
 Welcome to the MedDict User Guide!
 
@@ -12,7 +12,7 @@ MedDict is a _desktop application designed for medical staff_ who manage a large
 
 Unlike most other applications who predominantly function on a Graphical User Interface (GUI) where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a Command Line Interface (CLI) -- where all features and utility can be achieved via typed-in commands -- would be far more efficeint.
 
-<img src="images/gui_vs_cli.png" alt="GUI vs CLI" style="max-width: 400px; width: 100%;" />
+<img src="images/gui_vs_cli.png" alt="GUI vs CLI" style="width: 100%; display: block; margin: 0 auto;" />
 
 With MedDict, we believe we can revolutionise your work and management experience! 💪
 
@@ -504,8 +504,7 @@ _Details coming soon ..._
 5. Open / run the application once.
 6. Close the application.
 7. Go to where the new MedDict `.jar` file is located in, and repeat steps 2 to 3.
-8. Replace the new addressbook.json file in the current data folder with the previous addressbook.json file that you have copied or saved. You can do this by copying the addressbook.json file from the old data folder and pasting it in the new data folder. When prompted to overwrite, click yes.
-9. Alternatively, for step 8, you can use a text editor of your choice to edit the new and old addressbook.json file, then copy and paste all the content from the old addressbook.json file to the new one.
+8. Replace the new addressbook.json file in the current data folder with the previous addressbook.json file that you have copied or saved. You can do this by copying the addressbook.json file from the old data folder and pasting it in the new data folder. When prompted to overwrite, click yes. Alternatively, you can use a text editor of your choice to edit the new and old addressbook.json file, then copy and paste all the content from the old addressbook.json file to the new one.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
