@@ -139,6 +139,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
+</div>
+
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the `1st` client to be `91234567` and `johndoe@example.com` respectively.
@@ -163,6 +167,10 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use the `list` or `find` command to determine the `INDEX` of the person you want to delete. 
+</div>
+
 Examples:
 
 * `list` followed by `delete 2` deletes the 2nd client listed in PROperty.
@@ -180,6 +188,10 @@ Shows a list of all clients in the PROperty.
 
 Format: `list`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `list` for a quick overview of all your contacts. 
+</div>
+
 Example:
 
 * `list` shows your full client listing in PROperty.
@@ -193,6 +205,10 @@ Visual example of correct output:
 Sorts the list of all clients in PROperty by name in alphabetical order.
 
 Format: `sort`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Sorting is helpful after adding or editing many contacts so that your data remains neat. 
+</div>
 
 Example:
 
@@ -211,6 +227,10 @@ Format: `show INDEX`
 - Shows the client at the specified `INDEX`
 - The `INDEX` refers to the index number shown in the displayed client list.
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `show` to view a person in-depth. 
+</div>
 
 Examples:
 
@@ -240,6 +260,10 @@ the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
   * Format: `find s/KEYWORD [s/MORE_KEYWORDS]`
   * Only individuals who match the keyword(s) one-to-one will be returned. e.g. `find s/Hans Bo` will not match `Bo Hans`. `find s/Hans Bo` will only match `Hans Bo`.
   * Especially useful if there are multiple clients with the same name in PROperty and you require a more specific search.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `find s/KEYWORD` if you have contacts with very similar names. 
+</div>
 
 Examples:
 
@@ -273,6 +297,10 @@ Format: `findtag TAG [MORE_TAGS]`
 * clients with at least one matching tag will be returned (i.e., an `OR` search). 
 * List of possible tags you can search for are found in the [Tag Table](#tag-table)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Tags make it easy for you to categorise your contacts into different groups.
+</div>
+
 Examples:
 
 * `findtag HDB` returns clients tagged with `HDB`.
@@ -289,6 +317,10 @@ Visual example of correct output:
 Clears all entries from the PROperty.
 
 Format: `clear`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+`clear` cannot be undone! 
+</div>
 
 Example:
 
@@ -308,6 +340,10 @@ Format: `remark INDEX r/[REMARKS]`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * **Note:** `[REMARKS]` will **delete the remark if left blank**
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Remarks are useful for adding free-form details to a contact.
+</div>
 
 Examples:
 
@@ -378,6 +414,9 @@ Format: `export`
 * If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
 * By default, the exported CSV file at `[JAR file location]/data/property.csv`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+`export` is useful if you want to view your contacts in Excel.
+</div>
 Example:
 
 - `export` exports your current client data in PROperty into a CSV file.
