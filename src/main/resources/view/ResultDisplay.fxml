@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.StackPane?>
-
 <?import javafx.scene.text.TextFlow?>
-<StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/17"
-           xmlns:fx="http://javafx.com/fxml/1">
-  <TextFlow fx:id="resultDisplay" styleClass="result-display" prefWidth="9999" />
+<?import javafx.scene.control.ScrollPane?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="placeHolder" styleClass="pane-with-border"
+           xmlns="http://javafx.com/javafx/17" stylesheets="DarkTheme.css">
+    <ScrollPane fitToWidth="true" styleClass="pane-with-border">
+        <TextFlow fx:id="resultDisplay" styleClass="result-display" prefWidth="9999"/>
+    </ScrollPane>
 </StackPane>
