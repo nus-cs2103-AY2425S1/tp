@@ -11,6 +11,7 @@ import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.company.StatusType;
 import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 import seedu.internbuddy.model.util.SampleDataUtil;
@@ -130,8 +131,26 @@ public class CompanyBuilder {
      * Sets the {@code Status} of the {@code company} that we are building.
      */
     public CompanyBuilder withStatus(String status) {
-        this.status = new Status(status);
+
+        switch (status) {
+
+        case "INTERESTED":
+            this.status = new Status(StatusType.INTERESTED);
+            break;
+
+        case "CLOSED":
+            this.status = new Status(StatusType.CLOSED);
+            break;
+
+        case "APPLIED":
+            this.status = new Status(StatusType.APPLIED);
+            break;
+
+        default:
+            System.out.println("Invalid status type");
+        }
         return this;
+
     }
 
     public CompanyBuilder withIsFavourite(Boolean isFavourite) {
