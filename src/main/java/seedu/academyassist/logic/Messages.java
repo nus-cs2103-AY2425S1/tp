@@ -16,7 +16,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_NO_STUDENT_FOUND = "No student found with the provided student ID";
 
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d student listed!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "Number of students: %1$d";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_STUDENTS_FOUND_MATCHES = "%1$d student(s) found that matches the keywords.";
