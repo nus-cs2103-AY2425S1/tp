@@ -60,6 +60,7 @@ public class DeleteAppointmentCommand extends Command {
         }
 
         Person personToDeleteAppointment = lastShownList.get(targetIndex.getZeroBased());
+
         /*if (!lastShownList.contains(personToDeleteAppointment)) {
             String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
 
@@ -77,7 +78,7 @@ public class DeleteAppointmentCommand extends Command {
             personWithoutAppointment = new Buyer(buyer.getName(), buyer.getPhone(),
                     buyer.getEmail(), buyer.getTags(),
                     Appointment.EMPTY_APPOINTMENT);
-        } else { // Must be a Seller
+        } else {
             Seller seller = (Seller) personToDeleteAppointment;
             personWithoutAppointment = new Seller(seller.getName(), seller.getPhone(),
                     seller.getEmail(), seller.getTags(),

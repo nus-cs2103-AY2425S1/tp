@@ -7,10 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalNames;
 
@@ -55,16 +57,15 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_validBuyerIndex_success() {
-        Person personToDeleteAppointment = CARL; // Assuming CARL is a Buyer
+        Person personToDeleteAppointment = DANIEL;
         DeleteAppointmentCommand deleteAppointmentCommand =
-                new DeleteAppointmentCommand(INDEX_THIRD_PERSON);
+                new DeleteAppointmentCommand(INDEX_FOURTH_PERSON);
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 personToDeleteAppointment.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
 
-        // Ensure the person is recreated as a Buyer with an empty appointment
         Buyer personWithoutAppointment = new Buyer(personToDeleteAppointment.getName(),
                 personToDeleteAppointment.getPhone(),
                 personToDeleteAppointment.getEmail(),
