@@ -204,7 +204,7 @@ The Emergency Contact object is also made up of attributes:
 
 We opted for Alternative 1 to make almost all parameters compulsory as the autocomplete feature we implemented will aid users in typing out the Add Command.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
 #### Proposed Implementation
 
@@ -288,7 +288,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
