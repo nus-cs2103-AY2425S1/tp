@@ -25,6 +25,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -51,6 +55,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        model.addTag(new Tag(new TagName(VALID_TAG_HUSBAND)));
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
@@ -127,6 +132,20 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_nonExistentWedding_failure() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withWeddings("New Wedding").build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_WEDDING_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_nonExistentTag_failure() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags("New Tag").build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_TAG_NOT_FOUND);
     }
 
     /**
