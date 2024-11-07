@@ -174,7 +174,7 @@ Format: `paid INDEX f/FREQUENCY`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The frequency is the number of months between policy renewals and it can only be 1, 3, 6, or 12.
-
+* The frequency will indicate which month the person will be automatically updated to unpaid.
 Examples:
 * `list` followed by `paid 2 f/ 6` marks the 2nd person in the FART book as paid and the policy renewal frequency to 6 months.
 * `find Betsy` followed by `paid 1 f/ 6` marks the 1st person in the results of the `find` command as paid.
@@ -248,5 +248,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
-**Paid** | `paid INDEX`<br> e.g., `paid 3`
+**Paid** | `paid INDEX f/FREQUENCY`<br> e.g., `paid 3 f/ 3`
 **Unpaid** | `unpaid INDEX`<br> e.g., `unpaid 3`
