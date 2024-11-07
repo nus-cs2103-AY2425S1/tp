@@ -411,6 +411,14 @@ checkPastryStock Croissant
 ```
 ![Check Pastry Stock.png](images%2FCheck%20Pastry%20Stock.png)
 
+The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
+This command requires only the pastry's name and will display whether there is sufficient stock to meet potential
+customer demand.
+
+For example, typing **checkPastryStock Croissant** checks the inventory for "Croissant" pastry and returns the quantity
+available if there are sufficient pastries. This command helps bakery owners ensure they can fulfill customer orders
+by maintaining the right stock levels for popular pastries.
+
 ### **Clear All Command**
 Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
 
