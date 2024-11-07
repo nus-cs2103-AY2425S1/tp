@@ -25,6 +25,8 @@ public class UnfavCommand extends Command {
 
     public static final String MESSAGE_UNFAV_COMPANY_SUCCESS = "Unfavourited company: %1$s";
 
+    public static final String MESSAGE_COMPANY_ALREADY_UNFAV = "%1$s is not currently favourited!";
+
     private final Index index;
 
     /**
@@ -44,6 +46,11 @@ public class UnfavCommand extends Command {
         }
 
         Company companyToUnfav = lastShownList.get(index.getZeroBased());
+
+        if (!companyToUnfav.getIsFavourite()) {
+            return new CommandResult(String.format(MESSAGE_COMPANY_ALREADY_UNFAV, companyToUnfav.getName()));
+        }
+
         Company editedCompany = new Company(companyToUnfav.getName(),
                 companyToUnfav.getPhone(), companyToUnfav.getEmail(),
                 companyToUnfav.getAddress(), companyToUnfav.getTags(),
