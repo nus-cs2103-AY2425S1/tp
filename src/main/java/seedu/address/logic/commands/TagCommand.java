@@ -57,6 +57,7 @@ public class TagCommand extends Command {
         }
 
         model.addTag(person, newTags);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person)));
     }
 

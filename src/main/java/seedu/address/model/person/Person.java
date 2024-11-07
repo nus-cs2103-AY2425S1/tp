@@ -60,8 +60,7 @@ public class Person {
      * if modification is attempted.
      */
     public Set<Tag> getTagSet() {
-        return this.tags.getTags();
-        // return Collections.unmodifiableSet(tags);
+        return Collections.unmodifiableSet(this.tags.getTags());
     }
 
     public Tags getTags() {

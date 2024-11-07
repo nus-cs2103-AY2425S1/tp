@@ -22,6 +22,7 @@ public class Tags {
      * regardless of upper or lower case.
      */
     public boolean tagExists(Tags otherTags) {
+
         Set<String> tagNamesLower = tags.stream()
                 .map(tag -> tag.tagName.toLowerCase())
                 .collect(Collectors.toSet());
@@ -50,5 +51,36 @@ public class Tags {
      */
     public void removeAllTags(Tags tags) {
         this.tags.removeAll(tags.getTags());
+    }
+
+    /**
+     * Returns true if tags are empty.
+     */
+    public boolean isEmpty() {
+        return this.tags.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Tags)) {
+            return false;
+        }
+
+        Tags otherTags = (Tags) other;
+
+        Set<String> tagNamesLower = this.tags.stream()
+                .map(tag -> tag.tagName.toLowerCase())
+                .collect(Collectors.toSet());
+
+        Set<String> otherTagNamesLower = otherTags.tags.stream()
+                .map(tag -> tag.tagName.toLowerCase())
+                .collect(Collectors.toSet());
+
+        return tagNamesLower.equals(otherTagNamesLower);
     }
 }

@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -69,7 +70,8 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        Tags tagsToSet = new Tags(tagSet);
+        descriptor.setTags(tagsToSet);
         return this;
     }
 
