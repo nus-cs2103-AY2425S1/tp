@@ -49,6 +49,13 @@ public class MeetUp {
     }
 
     /**
+     * Returns true if the relationship between To and From is valid.
+     */
+    public boolean hasValidToFrom() {
+        return to.isValidToFrom(from);
+    }
+
+    /**
      * Returns true if both meetups have the same identity and data fields.
      * This defines a stronger notion of equality between two meetUps.
      */

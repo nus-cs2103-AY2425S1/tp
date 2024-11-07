@@ -11,6 +11,8 @@ public class To extends DateTime {
 
     public static final String MESSAGE_CONSTRAINTS_DATETIME =
             "To date-time provided is invalid";
+    public static final String MESSAGE_CONSTRAINTS_TO_FROM =
+            "To date-time must occur after from date-time";
 
     /**
      * Constructs a {@code To}.
@@ -19,6 +21,17 @@ public class To extends DateTime {
      */
     public To(String to) {
         super(to);
+    }
+
+    /**
+     * Ret
+     */
+    public boolean isValidToFrom(From from) {
+        if (from == null) {
+            return false;
+        }
+
+        return this.value.isAfter(from.value);
     }
 
     @Override

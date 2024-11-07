@@ -112,6 +112,10 @@ public class JsonAdaptedMeetUp {
         }
         final To modelTo = new To(to);
 
+        if (!modelTo.isValidToFrom(modelFrom)) {
+            throw new IllegalValueException(To.MESSAGE_CONSTRAINTS_TO_FROM);
+        }
+
         final Set<AddedBuyer> modelAddedBuyers = new HashSet<>(meetUpAddedBuyers);
         return new MeetUp(modelName, modelInfo, modelFrom, modelTo, modelAddedBuyers);
     }

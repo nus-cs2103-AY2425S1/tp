@@ -52,6 +52,17 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_invalidMeetUpToFrom_throwsCommandException() {
+        ModelStub modelStub = new ModelStubAcceptingMeetUpAdded();
+        MeetUp invalidMeetUp = new MeetUpBuilder().withTo(MeetUpBuilder.DEFAULT_FROM).build();
+        AddCommand addCommand = new AddCommand(invalidMeetUp);
+
+        assertThrows(CommandException.class,
+                String.format(AddCommand.MESSAGE_INVALID_TO_FROM, invalidMeetUp.getTo(), invalidMeetUp.getFrom()), ()
+                        -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         MeetUp meetUpA = new MeetUpBuilder().withSubject("meetUpA").build();
         MeetUp meetUpB = new MeetUpBuilder().withSubject("meetUpB").build();

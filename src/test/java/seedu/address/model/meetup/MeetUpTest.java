@@ -49,6 +49,21 @@ public class MeetUpTest {
     }
 
     @Test
+    public void hasValidToFrom() {
+        // to after from returns true
+        MeetUp validMeetUp = new MeetUpBuilder(PITCH_MEETUP).build();
+        assertTrue(validMeetUp.hasValidToFrom());
+
+        // to same as from returns false
+        MeetUp invalidMeetUp1 = new MeetUpBuilder(PITCH_MEETUP).withTo(VALID_MEETUP_FROM_PITCH).build();
+        assertFalse(invalidMeetUp1.hasValidToFrom());
+
+        // to before from returns false
+        MeetUp invalidMeetUp2 = new MeetUpBuilder(PITCH_MEETUP).withFrom("2024-09-11 13:30").build();
+        assertFalse(invalidMeetUp2.hasValidToFrom());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         MeetUp pitchMeetUpCopy = new MeetUpBuilder(PITCH_MEETUP).build();
