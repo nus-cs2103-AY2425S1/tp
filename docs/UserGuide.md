@@ -140,7 +140,8 @@ The parameter `NAME` only accepts alphabetic characters and spaces. The app will
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 (e.g. 30-02-1994), will be automatically corrected.
+The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected.
+(e.g. 30-02-24 will return 29-02-24)
 </div>
 
 **Examples:**
@@ -158,7 +159,8 @@ The parameter `PATIENT_NAME` and `DOCTOR_NAME` are case-sensitive, and must be a
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 (e.g. 30-02-1994), will be automatically corrected.
+The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected.
+(e.g. 30-02-24 will return 29-02-24)
 </div>
 
 **Examples:**
