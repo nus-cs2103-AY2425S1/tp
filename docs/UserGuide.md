@@ -281,10 +281,12 @@ Format: `status INDEX as/STATUS`
 - The index refers to the index number shown in the displayed company list.
 - The index **must be a positive integer** 1, 2, 3, …​
 - The `STATUS` can be any text that describes the current application status.
+- You can remove the company's application status by typing `status INDEX as/` without specifying any text after `as/`.
 
 Examples:
 
 - `status 1 as/Applied` modifies the application status of the company at index 1 to `Applied`.
+- `status 2 as/` Removes the remark from the 2nd company.
 
 ### Clearing all entries : `clear`
 
