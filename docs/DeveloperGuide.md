@@ -811,6 +811,8 @@ testers are expected to do more *exploratory* testing.
 
 [To be updated.]
 
+### Design Choices
+
 ### Challenges Faced
 
 ### Achievements
