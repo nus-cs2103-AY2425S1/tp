@@ -18,7 +18,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.log.Log;
-import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
 
 /**
@@ -144,18 +143,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    /**
-     * Updates the filter of the logs list to filter by the given {@code identityNumber}.
-     *
-     * @param identityNumber
-     */
-    @Override
-    public void updateFilteredPersonListById(IdentityNumber identityNumber) {
-        requireNonNull(identityNumber);
-        Predicate<Person> predicate = person -> person.getIdentityNumber().equals(identityNumber);
-        updateFilteredPersonList(predicate);
     }
 
     //=========== Session Log ================================================================================

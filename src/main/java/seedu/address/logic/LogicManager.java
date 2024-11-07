@@ -18,7 +18,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
-import seedu.address.ui.UiManager;
 
 /**
  * The main LogicManager of the app.
@@ -64,10 +63,9 @@ public class LogicManager implements Logic {
             if (!commandResult.hasPrompt()) {
                 model.clearSavedCommand();
             }
-
             storage.saveAddressBook(model.getAddressBook());
-
             return commandResult;
+
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -117,15 +115,5 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
-    }
-
-    /**
-     * Prompts the user for additional input required to complete a command.
-     *
-     * @return the input received from the user.
-     */
-    @Override
-    public String promptForLogEntryInput() {
-        return null;
     }
 }

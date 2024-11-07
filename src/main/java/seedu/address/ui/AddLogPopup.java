@@ -11,6 +11,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * A popup window for adding log entries.
+ */
 public class AddLogPopup extends UiPart<Stage> {
 
     private static final String FXML = "AddLogPopup.fxml";
@@ -23,6 +26,11 @@ public class AddLogPopup extends UiPart<Stage> {
         super(FXML);
     }
 
+    /**
+     * Displays the popup window for adding log entries.
+     *
+     * @return the log entry as a string
+     */
     public static String display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -49,6 +57,9 @@ public class AddLogPopup extends UiPart<Stage> {
 
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e -> window.close());
+
+        // Ensure null is returned if the window is closed directly
+        window.setOnCloseRequest(event -> logEntry[0] = null);
 
         HBox buttonLayout = new HBox(10);
         buttonLayout.setAlignment(Pos.CENTER_RIGHT);

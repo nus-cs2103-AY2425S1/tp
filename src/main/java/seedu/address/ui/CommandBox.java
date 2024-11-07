@@ -40,7 +40,6 @@ public class CommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
-
         executeCommand(commandText);
     }
 
@@ -58,15 +57,6 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
-    }
-
-    /**
-     * Validates if the input command is an addlog command with the required format.
-     * Basic regex can be customized based on the exact expected format.
-     */
-    private boolean isAddLogCommand(String commandText) {
-        //TODO: Instead of using a hardcoded regex, change it to use actual validation of both date and NRIC
-        return commandText.trim().toLowerCase().startsWith("addlog");
     }
 
 

@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -13,10 +17,10 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -223,7 +227,22 @@ public class MainWindow extends UiPart<Stage> {
             } else {
                 centralDisplay.showPersonListPanel();
             }
+
+            // Show popup for AddLogEntry
+            if (commandResult.isPopup()) {
+                String logEntry = displayAddLogPopup();
+                if (logEntry == null || logEntry.trim().isEmpty()) {
+                    logger.info("Result: No log entry was added");
+                    resultDisplay.setFeedbackToUser("Result: No log entry was added");
+                    return new CommandResult("No log entry was added.");
+                }
+                return executeCommand(AddLogCommand.COMMAND_WORD + " "
+                        + PREFIX_IDENTITY_NUMBER + commandResult.getIdentityNumber() + " "
+                        + PREFIX_DATE + commandResult.getAppointmentDate().toString() + " "
+                        + PREFIX_LOG + logEntry);
+            }
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());

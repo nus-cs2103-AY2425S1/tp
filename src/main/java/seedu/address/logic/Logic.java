@@ -51,12 +51,4 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
-
-    /**
-     * Prompts the user for additional input required to complete a command.
-     *
-     * @param promptMessage the message indicating what input is needed.
-     * @return the input received from the user.
-     */
-    String promptForLogEntryInput();
 }

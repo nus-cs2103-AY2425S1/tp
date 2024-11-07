@@ -49,7 +49,9 @@ public class AddLogCommand extends Command {
         Person personToUpdate = getPerson(model);
         model.addLog(personToUpdate, log);
 
-        return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, personToUpdate.getName()));
+        return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, personToUpdate.getName()),
+                false, false, false, false, -1, false, identityNumber,
+                log.getAppointmentDate(), log.getEntry());
     }
 
     private Person getPerson(Model model) throws CommandException {
