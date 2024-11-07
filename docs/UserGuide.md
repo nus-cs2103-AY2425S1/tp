@@ -144,9 +144,12 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [ap
 * Appointments are made in 15 minute intervals starting from given time
 * Appointments can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
 
-**Tips to Note:** 🚨
-- A patient can have any number of tags (including 0).
-- There is a unique tag for Blood Type, Try putting a tag named 'A+'
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ A person can have any number of tags (including 0)
+ </div>
+ <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ There is a unique tag for Blood Type, Try putting a tag named 'A+'
+ </div>
 
 Examples:
 
@@ -456,7 +459,7 @@ the data of your previous AddressBook home folder.
 **A**: Yes, ClinicBuddy automatically saves all changes to the data file after every command that modifies patient records. There’s no need to manually save changes.
 
 **Q**: How can I view a history of my backups? <br>
-**A**: Use the listbackups command to see all available backups with timestamps. This feature can help you select the correct backup if you need to restore data.
+**A**: Use the `listbackups` command to see all available backups with timestamps. This feature can help you select the correct backup if you need to restore data.
 
 **Q**: What happens if I enter incorrect or missing information in a command?<br>
 **A**: ClinicBuddy will display an error message and prompt you to check the format or required fields. Double-check command formats and required parameters to avoid errors.
@@ -477,15 +480,15 @@ the data of your previous AddressBook home folder.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
    is to manually restore the minimized Help Window.
-3. ClinicBuddy has a limit of storing only the **10 most recent backups**. Once this limit is reached, older backups are **automatically overwritten**. This means that only the latest 10 backups are available for restoring data. To avoid accidental loss of older backups, users should download or move older backup files if they need to retain them long-term.
-4. ClinicBuddy requires specific formats for dates `dd/MM/yyyy` or `dd-MM-yyyy` and times `HH:mm`. If you input data in a different format, the program may **display an error**. <br>
-   **Solution:** Double-check the format of **date and time** inputs before submission.
-5. The `restore` command **overwrites** current patient records with backup data. This could lead to unintentional loss of recent changes. <br>
-   **Solution:** Always create a new **backup before performing a restore** to preserve current records.
-6. Updating operating hours will fail if there are existing appointments **outside the new hours**. <br>
+3. ClinicBuddy has a limit of storing only the 10 most recent backups. Once this limit is reached, older backups are automatically overwritten. This means that only the latest 10 backups are available for restoring data. To avoid accidental loss of older backups, users should download or move older backup files if they need to retain them long-term.
+4. ClinicBuddy requires specific formats for dates `dd/MM/yyyy` or `dd-MM-yyyy` and times `HH:mm`. If you input data in a different format, the program may display an error. <br>
+   **Solution:** Double-check the format of date and time inputs before submission.
+5. The `restore` command overwrites current patient records with backup data. This could lead to unintentional loss of recent changes. <br>
+   **Solution:** Always create a new **backup before performing a restore to preserve current records.
+6. Updating operating hours will fail if there are existing appointments outside the new hours. <br>
    **Solution:** `Reschedule` or `delete` appointments that fall outside the proposed hours before making the update.
-7. If multiple backups have **similar descriptions**, it may be challenging to distinguish between them.
-   **Solution:** Use **unique and specific** descriptions that include the patient names or specific changes to make backups more identifiable. Moreover, you can also refer to the time of the creation time.
+7. If multiple backups have similar descriptions, it may be challenging to distinguish between them.
+   **Solution:** Use unique and specific descriptions that include the patient names or specific changes to make backups more identifiable. Moreover, you can also refer to the time of the creation time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -494,17 +497,18 @@ the data of your previous AddressBook home folder.
  Action                | Format, Examples                                                                                                                                                                                                                              
 -----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  **Help**              | `help`  
- **Add**               | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`  
- **Update**            | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`                                                                 
- **Delete**            | `delete` [NRIC] <br> `delete` [index]
+ **Add**               | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`  
+ **Update**            | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                 
+ **Delete**            | `delete` [NRIC] <br> `delete` [index] <br> e.g., `delete S1234567Z`, `delete 1`
  **Clear**             | `clear`                  
  **List**              | `list` 
- **Find**              | `find` [NRIC] <br> `find NAME` [MORE_NAMES]  
- **Bookings**          | `bookings` [DATE] 
- **Hours**             | `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`                                                                                                                                                                                                     
- **Backup**            | `backup`  <br/>  `backup` [DESCRIPTION]  
+ **Find**              | `find` [NRIC] <br> `find NAME` [MORE_NAMES] <br> e.g., `find S1234567Z`, `find James Jake`  
+ **Bookings**          | `bookings` [DATE] <br> e.g., `bookings 01/02/2024`
+ **Delete Appointments** | `deleteappt` [NRIC dd-mm-yyyy HH:mm] <br> `deleteappt` [Index dd-mm-yyyy HH:mm] <br> e.g., `deleteappt s1234567z 01-01-2024 12:12`, `deleteappt 1 01-01-2024 12:12` 
+ **Hours**             | `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]` <br> e.g., `hours`, `hours o/09:30 c/18:00`, `hours o/09:30 c/18:00`                                                                                                                                                                                                     
+ **Backup**            | `backup`  <br/>  `backup` [DESCRIPTION] <br> e.g., `backup After updating John's contact info`  
  **ListBackups**       | `listbackups`
- **Restore**           | `restore` [INDEX]   
+ **Restore**           | `restore` [INDEX] <br> e.g., `restore 1`   
  **Exit**              | `exit`
 
                                                                                                                                                                                                     
