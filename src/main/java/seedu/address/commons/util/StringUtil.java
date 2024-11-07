@@ -10,6 +10,8 @@ import java.io.StringWriter;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    private static final int TRUNCATED_LINE_NUMBER = 3;
+    private static final int TRUNCATED_STRING_LENGTH = 80;
 
     /**
      * Returns true if the {@code sentence} contains the {@code substring}.
@@ -97,16 +99,34 @@ public class StringUtil {
     }
 
     /**
-     * Returns a truncated string if {@code s} exceeds than 50 characters
+     * Returns a truncated string if {@code s} exceeds the TRUNCATED_STRING_LENGTH
      * @param s cannot be null
-     * @return the string truncated at 50 characters if {@code s} exceeds 50 characters
+     * @return the truncated string if {@code s} exceeds TRUNCATED_STRING_LENGTH
      */
     public static String truncateText(String s) {
         assert s != null;
-        if (s.length() <= 80) {
+        // If text does not need to be truncated
+        if (s.length() < TRUNCATED_STRING_LENGTH && !s.contains("\n")) {
             return s;
+        } else if (s.contains("\n")) {
+            StringBuilder ans = new StringBuilder();
+            int lineCount = 1;
+
+            // Text contains newlines
+            String[] lines = s.split("\n");
+            for (String line : lines) {
+                if (lineCount > TRUNCATED_LINE_NUMBER) {
+                    break;
+                }
+                if (line.length() > TRUNCATED_STRING_LENGTH) {
+                    line = line.substring(0, TRUNCATED_STRING_LENGTH) + "...";
+                }
+                ans.append(line).append("\n");
+                lineCount++;
+            }
+            return ans.toString();
         } else {
-            return s.substring(0, 80) + "...";
+            return s.substring(0, TRUNCATED_STRING_LENGTH) + "...";
         }
     }
 }
