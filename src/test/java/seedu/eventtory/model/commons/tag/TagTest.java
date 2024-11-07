@@ -28,6 +28,8 @@ public class TagTest {
         assertFalse(() -> Tag.isValidTagName("-"));
         assertFalse(() -> Tag.isValidTagName("_"));
         assertFalse(() -> Tag.isValidTagName("-_"));
+        assertFalse(() -> Tag.isValidTagName("abcdefghijklmnopqrstuvwxyz12345")); // length 31, too long
+        assertFalse(() -> Tag.isValidTagName("abcdefghijklmnopqrstuvwxyz1234567890")); // length 36, too long
 
         // valid tags
         assertTrue(() -> Tag.isValidTagName("-tag"));
@@ -37,6 +39,7 @@ public class TagTest {
         assertTrue(() -> Tag.isValidTagName("tagname"));
         assertTrue(() -> Tag.isValidTagName("TAGNAME"));
         assertTrue(() -> Tag.isValidTagName("tagname"));
+        assertTrue(() -> Tag.isValidTagName("abcdefghijklmnopqrstuvwxyz1234")); // length 30, acceptable
     }
 
     @Test
