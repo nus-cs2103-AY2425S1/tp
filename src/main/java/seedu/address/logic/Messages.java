@@ -21,6 +21,9 @@ public class Messages {
             + " list";
     public static final String MESSAGE_INVALID_INDEX_RANGE = "The provided index is invalid. "
             + "Please enter a positive integer within the displayed list's range.";
+    public static final String MESSAGE_INVALID_ENTITY = "Invalid entity '%1$s'. Valid entities are 'company', "
+            + "'contact', 'job', or 'all'";
+    public static final String MESSAGE_OPERATION_NOT_ALLOWED = "Command '%1$s' is not allowed on entity '%2$s'.";
     public static final String MESSAGE_MISSING_INDEX = "The index is missing";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =

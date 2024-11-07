@@ -37,6 +37,54 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a String input {@code entity} into a normalized String entity.
+     * Throws ParseException if {@code entity} provided is not a valid entity in the address book.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseEntity(String entity) throws ParseException {
+        requireNonNull(entity);
+        String trimmedEntity = entity.trim();
+        String normalizedEntity = trimmedEntity.toLowerCase();
+
+        // TODO: Not sure if this is magic string?
+        switch (normalizedEntity) {
+        case "contact", "company", "job", "all":
+            return normalizedEntity;
+        default:
+            String exceptionMessage = String.format(Messages.MESSAGE_INVALID_ENTITY, normalizedEntity);
+            throw new ParseException(exceptionMessage);
+        }
+    }
+
+
+
+    /**
+     * Parses a String input {@code args} into a String array of arguments and returns it. Leading and trailing
+     * whitespaces will be trimmed. Arguments are split by any number of whitespace.
+     *
+     * @param args A string containing arguments separated by whitespace.
+     * @param requiredNumberOfArguments The required number of arguments in input.
+     * @param usageMessage The usage message of a command to format error message.
+     * @return A String array of arguments.
+     * @throws ParseException If the input provided does not have the required number of arguments.
+     */
+    public static String[] parseRequiredNumberOfArguments(String args, int requiredNumberOfArguments,
+            String usageMessage) throws ParseException {
+        requireNonNull(args);
+        requireNonNull(usageMessage);
+
+        String trimmedArgs = args.trim();
+
+        String[] splitArguments = trimmedArgs.trim().split("\\s+");
+
+        if (trimmedArgs.isEmpty() || splitArguments.length != requiredNumberOfArguments) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, usageMessage));
+        }
+
+        return splitArguments;
+    }
+
+    /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      *
