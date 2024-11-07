@@ -7,8 +7,8 @@ import static tahub.contacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tahub.contacts.logic.commands.CommandTestUtil.COURSE_NAME_DESC;
 import static tahub.contacts.logic.commands.CommandTestUtil.VALID_COURSE_CODE;
 import static tahub.contacts.logic.commands.CommandTestUtil.VALID_COURSE_NAME;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.testutil.Assert.assertThrows;
-import static tahub.contacts.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,17 +16,17 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.commands.ClearCommand;
-import tahub.contacts.logic.commands.DeleteCommand;
-import tahub.contacts.logic.commands.EditCommand;
-import tahub.contacts.logic.commands.EditCommand.EditPersonDescriptor;
 import tahub.contacts.logic.commands.ExitCommand;
-import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
 import tahub.contacts.logic.commands.course.CourseDeleteCommand;
 import tahub.contacts.logic.commands.course.CourseEditCommand;
+import tahub.contacts.logic.commands.person.PersonAddCommand;
+import tahub.contacts.logic.commands.person.PersonDeleteCommand;
+import tahub.contacts.logic.commands.person.PersonEditCommand;
+import tahub.contacts.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
+import tahub.contacts.logic.commands.person.PersonFindCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
@@ -35,6 +35,7 @@ import tahub.contacts.testutil.EditCourseDescriptorBuilder;
 import tahub.contacts.testutil.EditPersonDescriptorBuilder;
 import tahub.contacts.testutil.PersonBuilder;
 import tahub.contacts.testutil.PersonUtil;
+import tahub.contacts.testutil.TypicalPersons;
 
 public class AddressBookParserTest {
 
@@ -43,8 +44,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        PersonAddCommand command = (PersonAddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new PersonAddCommand(person), command);
     }
 
     @Test
@@ -55,18 +56,21 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        Person firstPerson = TypicalPersons.getTypicalPersons().get(0);
+        PersonDeleteCommand command = (PersonDeleteCommand) parser.parseCommand(
+                PersonDeleteCommand.COMMAND_WORD + " " + PREFIX_MATRICULATION_NUMBER + firstPerson.getMatricNumber());
+        assertEquals(new PersonDeleteCommand(firstPerson.getMatricNumber()), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
+        Person firstPerson = TypicalPersons.getTypicalPersons().get(0);
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        PersonEditCommand command = (PersonEditCommand) parser.parseCommand(PersonEditCommand.COMMAND_WORD + " "
+                + PREFIX_MATRICULATION_NUMBER + firstPerson.getMatricNumber()
+                + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new PersonEditCommand(firstPerson.getMatricNumber(), descriptor), command);
     }
 
     @Test
@@ -96,9 +100,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        PersonFindCommand command = (PersonFindCommand) parser.parseCommand(
+                PersonFindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new PersonFindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

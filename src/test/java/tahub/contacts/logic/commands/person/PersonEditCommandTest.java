@@ -1,4 +1,4 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,12 +19,14 @@ import org.junit.jupiter.api.Test;
 
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.logic.Messages;
-import tahub.contacts.logic.commands.EditCommand.EditPersonDescriptor;
+import tahub.contacts.logic.commands.ClearCommand;
+import tahub.contacts.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
 import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.testutil.EditPersonDescriptorBuilder;
@@ -33,7 +35,7 @@ import tahub.contacts.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
-public class EditCommandTest {
+public class PersonEditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueCourseList(),
             new StudentCourseAssociationList());
@@ -42,16 +44,17 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = model.getFilteredPersonList().get(0);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        PersonEditCommand personEditCommand = new PersonEditCommand(editedPerson.getMatricNumber(), descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(PersonEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList(),
                         model.getScaList());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(personEditCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -65,30 +68,33 @@ public class EditCommandTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        PersonEditCommand personEditCommand = new PersonEditCommand(lastPerson.getMatricNumber(), descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(PersonEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList(),
                         model.getScaList());
         expectedModel.setPerson(lastPerson, editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(personEditCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        PersonEditCommand personEditCommand = new PersonEditCommand(editedPerson.getMatricNumber(),
+                new EditPersonDescriptor());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(PersonEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList(),
                         model.getScaList());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(personEditCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -97,26 +103,27 @@ public class EditCommandTest {
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        PersonEditCommand personEditCommand = new PersonEditCommand(editedPerson.getMatricNumber(),
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(PersonEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getCourseList(),
                         model.getScaList());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(personEditCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+    public void execute_invalidPersonMatricNumberUnfilteredList_failure() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+        MatriculationNumber invalidMatricNumber = new MatriculationNumber("A0000000X");
+        PersonEditCommand personEditCommand = new PersonEditCommand(invalidMatricNumber, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(personEditCommand, model, Messages.MESSAGE_PERSON_NOT_FOUND);
     }
 
 
@@ -125,25 +132,27 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidPersonMatricNumberFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        EditCommand editCommand = new EditCommand(outOfBoundIndex,
+        MatriculationNumber invalidMatricNumber = new MatriculationNumber("A0000000X");
+        PersonEditCommand personEditCommand = new PersonEditCommand(invalidMatricNumber,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(personEditCommand, model, Messages.MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        final PersonEditCommand standardCommand = new PersonEditCommand(firstPerson.getMatricNumber(), DESC_AMY);
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        PersonEditCommand commandWithSameValues = new PersonEditCommand(firstPerson.getMatricNumber(), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -155,21 +164,24 @@ public class EditCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        // different matric number -> returns false
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        assertFalse(standardCommand.equals(new PersonEditCommand(secondPerson.getMatricNumber(), DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new PersonEditCommand(firstPerson.getMatricNumber(), DESC_BOB)));
     }
 
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
+        Person person = model.getFilteredPersonList().get(index.getZeroBased());
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditCommand(index, editPersonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
+        PersonEditCommand personEditCommand = new PersonEditCommand(person.getMatricNumber(), editPersonDescriptor);
+        String expected = PersonEditCommand.class.getCanonicalName()
+                + "{matriculationNumber=" + person.getMatricNumber() + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
-        assertEquals(expected, editCommand.toString());
+        assertEquals(expected, personEditCommand.toString());
     }
 
 }

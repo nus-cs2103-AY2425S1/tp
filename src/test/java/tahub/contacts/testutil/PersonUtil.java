@@ -9,8 +9,8 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import tahub.contacts.logic.commands.AddCommand;
-import tahub.contacts.logic.commands.EditCommand.EditPersonDescriptor;
+import tahub.contacts.logic.commands.person.PersonAddCommand;
+import tahub.contacts.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.tag.Tag;
 
@@ -23,7 +23,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return PersonAddCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
