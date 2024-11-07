@@ -25,6 +25,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagList;
+import seedu.address.testutil.TypicalTags;
 
 /**
  * Contains tests for DeleteTagCommand.
@@ -32,6 +34,7 @@ import seedu.address.model.tag.Tag;
 public class DeleteTagCommandTest {
 
     private Model model;
+
     @BeforeEach
     public void setUp() {
         model = new ModelManager();

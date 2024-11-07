@@ -44,8 +44,7 @@ public class NewTagCommandTest {
     public void execute_multipleNewTags_success() {
         Tag tagBridesFriend = TypicalTags.BRIDES_SIDE;
         Tag tagColleagues = TypicalTags.COLLEAGUES;
-        List<Tag> newTags = new ArrayList<>();
-        newTags.add(tagBridesFriend);
+        List<Tag> newTags = List.of(tagBridesFriend, tagColleagues);
         newTags.add(tagColleagues);
         NewTagCommand newTagCommand = new NewTagCommand(newTags);
 
