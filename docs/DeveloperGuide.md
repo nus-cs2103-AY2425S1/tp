@@ -759,7 +759,7 @@ Common prerequisite: List all elderly using the `list` command.
 1. Viewing call history of an elderly by INDEX
    1. Prerequisite: There must be at least two elderly in the list.
    2. Test case: `history 2`<br>
-      Expected: The list is updated to show the call history of the elderly at index 2.
+      Expected: The list is updated to show the call history and profile view of the elderly at index 2.
 
 2. Viewing call history of an elderly with an invalid INDEX
    1. Test case: `history 0`<br>
@@ -768,7 +768,7 @@ Common prerequisite: List all elderly using the `list` command.
 3. Viewing call history of an elderly by NRIC
    1. Prerequisite: There must be an elderly with NRIC `S1486256J` in the list.
    2. Test case: `history S1486256J`<br>
-      Expected: The list is updated to show the call history of the elderly with NRIC `S1486256J`. One of which contains the note "My test note".
+      Expected: The list is updated to show the call history and profile view of the elderly with NRIC `S1486256J`. One of the call dates contains the note "My test note".
 
 4. Viewing call history of an elderly with a non-existent NRIC
    1. Prerequisite: There must **not** be an elderly with the NRIC `S3916784J` in the list.
