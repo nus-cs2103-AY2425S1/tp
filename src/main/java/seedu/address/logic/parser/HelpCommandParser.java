@@ -4,9 +4,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSchemeCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteSchemeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -14,9 +16,11 @@ import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListAppointmentCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SchemeCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatisticsCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewPersonSchemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -93,6 +97,22 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case StatisticsCommand.COMMAND_WORD:
             message = StatisticsCommand.MESSAGE_USAGE;
+            break;
+
+        case SchemeCommand.COMMAND_WORD:
+            message = SchemeCommand.MESSAGE_USAGE;
+            break;
+
+        case AddSchemeCommand.COMMAND_WORD:
+            message = AddSchemeCommand.MESSAGE_USAGE;
+            break;
+
+        case DeleteSchemeCommand.COMMAND_WORD:
+            message = DeleteSchemeCommand.MESSAGE_USAGE;
+            break;
+
+        case ViewPersonSchemeCommand.COMMAND_WORD:
+            message = ViewPersonSchemeCommand.MESSAGE_USAGE;
             break;
 
         case SortCommand.COMMAND_WORD:

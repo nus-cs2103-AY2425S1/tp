@@ -11,11 +11,13 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSchemeCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteSchemeCommand;
 import seedu.address.logic.commands.EditAppointmentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -28,6 +30,7 @@ import seedu.address.logic.commands.SchemeCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatisticsCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewPersonSchemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -114,6 +117,15 @@ public class AddressBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case AddSchemeCommand.COMMAND_WORD:
+            return new AddSchemeCommandParser().parse(arguments);
+
+        case DeleteSchemeCommand.COMMAND_WORD:
+            return new DeleteSchemeCommandParser().parse(arguments);
+
+        case ViewPersonSchemeCommand.COMMAND_WORD:
+            return new ViewPersonSchemeCommandParser().parse(arguments);
 
         case ArchiveCommand.COMMAND_WORD_ARCHIVE:
             return new ArchiveCommandParser(true).parse(arguments);

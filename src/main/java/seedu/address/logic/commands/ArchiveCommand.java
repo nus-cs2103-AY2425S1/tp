@@ -29,13 +29,13 @@ public class ArchiveCommand extends Command {
             + "Examples: " + COMMAND_WORD_ARCHIVE + " 1, " + COMMAND_WORD_UNARCHIVE + " 1";
     public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
 
-    public static final String MESSAGE_PERSON_IS_ALREADY_ARCHIVED =
-            "This person is already archived in the address book.";
+    public static final String MESSAGE_PERSON_IS_CURRENTLY_ARCHIVED =
+            "This person is currently archived in the address book.";
 
     public static final String MESSAGE_UNARCHIVE_PERSON_SUCCESS = "Unarchived Person: %1$s";
 
-    public static final String MESSAGE_PERSON_IS_ALREADY_UNARCHIVED =
-            "This person is already unarchived in the address book.";
+    public static final String MESSAGE_PERSON_IS_CURRENTLY_NOT_ARCHIVED =
+            "This person is currently not archived in the address book.";
 
     private final Index index;
     private final boolean shouldArchive;
@@ -69,8 +69,8 @@ public class ArchiveCommand extends Command {
 
         if (shouldArchive == personToModify.isArchived()) {
             throw new CommandException(shouldArchive
-                    ? MESSAGE_PERSON_IS_ALREADY_ARCHIVED
-                    : MESSAGE_PERSON_IS_ALREADY_UNARCHIVED);
+                    ? MESSAGE_PERSON_IS_CURRENTLY_ARCHIVED
+                    : MESSAGE_PERSON_IS_CURRENTLY_NOT_ARCHIVED);
         }
 
         modifiedPerson = modifyPerson(personToModify);
@@ -105,6 +105,7 @@ public class ArchiveCommand extends Command {
                 personToModify.getIncome(),
                 personToModify.getFamilySize(),
                 personToModify.getTags(),
+                personToModify.getSchemes(),
                 personToModify.getUpdatedAt(),
                 shouldArchive
         );

@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +40,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
+import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -130,9 +132,10 @@ public class EditCommand extends Command {
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
         FamilySize updatedFamilySize = editPersonDescriptor.getFamilySize().orElse(personToEdit.getFamilySize());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ArrayList<Scheme> schemes = personToEdit.getSchemes();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(),
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, schemes, UpdatedAt.now(),
                 personToEdit.isArchived());
     }
 
