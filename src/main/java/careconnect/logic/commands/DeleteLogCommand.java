@@ -122,9 +122,7 @@ public class DeleteLogCommand extends Command {
         DeleteLogCommand otherDeleteLogCommand = (DeleteLogCommand) other;
 
         return personIndex.equals(otherDeleteLogCommand.personIndex)
-                && logIndex.equals(otherDeleteLogCommand.logIndex)
-                && (requireConfirmation // if confirmation not completed, deletedLog is null
-                || deletedLog.equals(otherDeleteLogCommand.deletedLog));
+                && logIndex.equals(otherDeleteLogCommand.logIndex);
     }
 
     @Override
@@ -132,7 +130,6 @@ public class DeleteLogCommand extends Command {
         return new ToStringBuilder(this)
                 .add("personIndex", personIndex)
                 .add("logIndex", logIndex)
-                .add("deletedLog", deletedLog)
                 .toString();
     }
 }
