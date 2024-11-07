@@ -289,11 +289,13 @@ making it easier to locate specific entries that meet multiple criteria.<br>
 
 * Start with an Initial Search:
   * Begin by using the find command with your first search criterion.
-  * Example: `find n/John` will display all entries with the name "John."
 
 * Apply Additional Filters with find chained:
   * Use the find chained command immediately after the initial search to further filter the displayed results based on new criteria.
-  * Example: After using find n/John, you can type find chained n/Doe. This will display only the entries that contain both "John" and "Doe" in their names.
+  
+**Example**
+* Step 1: type `find n/John` and hit enter. You will see all entries with "John" in their names;
+* Step 2: type `find chained n/Doe` and hit enter. This time you will see only the entries that contain both "John" and "Doe" in their names.
 
 </box>
 
