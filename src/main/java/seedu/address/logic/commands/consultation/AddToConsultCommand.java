@@ -2,6 +2,7 @@ package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONSULTATION_DISPLAYED_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.HashSet;
@@ -32,7 +33,7 @@ public class AddToConsultCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds students to the consultation identified "
             + "by the index number used in the displayed consultation list. "
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME]...\n"
+            + "[" + PREFIX_NAME + "NAME]… [" + PREFIX_INDEX + "INDEX]…\n"
             + "Example: " + COMMAND_WORD + " 1 n/John Doe n/Harry Ng";
 
     public static final String MESSAGE_ADD_TO_CONSULT_SUCCESS = "Added students to the Consultation: %1$s";

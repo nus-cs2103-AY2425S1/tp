@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class RemoveFromConsultCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes students from the consultation identified by the index.\n"
             + "Parameters: CONSULT_INDEX (must be a positive integer) "
-            + "NAME...\n"
+            + PREFIX_NAME + "NAME [" + PREFIX_NAME + "/NAME]…\n"
             + "Example: " + COMMAND_WORD + " 1 n/Alex Yeoh n/Harry Ng";
 
     public static final String MESSAGE_REMOVE_FROM_CONSULT_SUCCESS =
