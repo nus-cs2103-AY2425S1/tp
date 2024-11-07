@@ -31,7 +31,7 @@ import seedu.address.testutil.ProjectBuilder;
  */
 public class EditProjectCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -42,7 +42,7 @@ public class EditProjectCommandTest {
         String expectedMessage = String.format(EditProjectCommand.MESSAGE_EDIT_PROJECT_SUCCESS,
                 Messages.format(editedProject));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()));
         expectedModel.setProject(model.getFilteredProjectList().get(0), editedProject);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +64,7 @@ public class EditProjectCommandTest {
         String expectedMessage = String.format(EditProjectCommand.MESSAGE_EDIT_PROJECT_SUCCESS,
                 Messages.format(editedProject));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()));
         expectedModel.setProject(lastProject, editedProject);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class EditProjectCommandTest {
         String expectedMessage = String.format(EditProjectCommand.MESSAGE_EDIT_PROJECT_SUCCESS,
                 Messages.format(editedProject));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -96,7 +96,7 @@ public class EditProjectCommandTest {
         String expectedMessage = String.format(EditProjectCommand.MESSAGE_EDIT_PROJECT_SUCCESS,
                 Messages.format(editedProject));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()));
         expectedModel.setProject(model.getFilteredProjectList().get(0), editedProject);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -109,7 +109,7 @@ public class EditProjectCommandTest {
         EditProjectCommand editCommand = new EditProjectCommand(INDEX_SECOND_PROJECT, descriptor);
 
         // Create the expected model
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()));
         Project secondProject = model.getFilteredProjectList().get(INDEX_SECOND_PROJECT.getZeroBased());
         Project editedSecondProject = new ProjectBuilder(firstProject)
                 .withId(secondProject.getId().toString()).build();
@@ -131,7 +131,7 @@ public class EditProjectCommandTest {
                 new EditProjectDescriptorBuilder(projectInList).build());
 
         // Create the expected model
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()));
         Project firstProject = model.getFilteredProjectList().get(INDEX_FIRST_PROJECT.getZeroBased());
         Project editedFirstProject = new ProjectBuilder(projectInList)
                 .withId(firstProject.getId().toString()).build();
