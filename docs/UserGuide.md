@@ -13,8 +13,9 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
-   1. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java '17'
-   2. After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows)
+   1. You can check which version of Java you are currently running by entering `java -version` into a command terminal.
+   2. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java '17'
+   3. After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows)
 
 2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
@@ -22,16 +23,16 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
    1. A good home folder would be the Downloads folder as it makes the next step easier.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fart_in_a.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-   1. To open the command terminal, do open the terminal app for Linux/macOS users, and Windows Powershell for Windows users.
-   2. For most users, in the terminal window please type `cd Downloads` to change the current folder to Downloads
+   1. To open the command terminal, open the terminal app for Linux/macOS users, and Windows Powershell for Windows Users.
+   2. For most users, type `cd Downloads` in the terminal window to navigate to the Downloads folder.
+   3. Alternatively, you may navigate to the folder using File Explorer, then right click it and select `Open in Terminal`
+5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/newUi.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
-   
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a contact named `John Doe` to the FART book and automatically marks them as unpaid.
 
@@ -79,7 +80,7 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/newHelp.png)
 
 Format: `help`
 
@@ -97,6 +98,12 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/11 09 2001 t/criminal`
+
+**Note:**
+1. As of version 1.4, only valid email address (in the form local-part@domain.com) and Singapore phone numbers are accepted.
+Birthdays should be added in DD MM YYYY format.
+2. You may add duplicate contacts (i.e., contacts with the same name, case insensitive) but the AddressBook will prompt you
+to confirm that you are adding a duplicate contact.
 
 ### Listing all persons : `list`
 
@@ -156,13 +163,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the FART book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-**Note:** As a `delete` command cannot be undone, the FART Book will first prompt you to confirm that the
- contact that you want to delete is correct. If you select `Cancel`, the deletion will be aborted.
+**Note:** 
+1. As a `delete` command cannot be undone, the FART Book will first prompt you to confirm that the
+ contact that you want to delete is correct. If you select `No`, the deletion will be aborted.
 ### Clearing all entries : `clear`
 
 Clears all entries from the FART book.
 
 Format: `clear`
+
+**Note:**
+1. A `clear` command cannot be undone, the FART Book will first prompt you to confirm that the
+   you wish to clear the book. If you select `No`, the clear action will be aborted.
+2. If you do change your mind after clearing the FART book, you may retrieve the sample data again
+by deleting the `addressbook.json` file in the `data` folder, then launching FART again.
 
 ### Marking a person as paid: `paid`
 
@@ -195,8 +209,12 @@ Examples:
 * `find Betsy` followed by `unpaid 1` marks the 1st person in the results of the `find` command as unpaid.
 
 ### Viewing a Contact's Details
+* When the app starts, a placeholder on the right panel will prompt you to select a contact on the list.
 * **Double-click** on a contact in the contact list to bring up a more detailed view of the person, including information like address and birthday
-* **Note:** The displayed contact will persist and edits will not be reflected until you select another contact or close the FART book.
+* **Note:** 
+  * The displayed contact will persist and edits will not be reflected until you select another contact or close the FART book.
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
