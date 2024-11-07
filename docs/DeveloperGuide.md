@@ -321,7 +321,7 @@ For all use cases below,
 
 **MSS**
 
-1. The user <u> lists all Udders </u>.
+1. The user <u>lists all Udders</u>.
 2. The user requests to delete a specific Udder from the list.
 3. FindingbrUdders deletes the Udder and displays the new Udder list.
 
@@ -341,7 +341,7 @@ For all use cases below,
 
 **MSS**
 
-1. The user <u> lists all Udders </u>.
+1. The user <u>lists all Udders</u>.
 2. The user requests to schedule a meeting with a specific Udder from the list using the index, start and end date, and location.
 3. FindingbrUdders creates the meeting with the Udder.
 
@@ -367,7 +367,7 @@ For all use cases below,
 
 **MSS**
 
-1. FindingbrUdders shows the list of contacts either by default, by <u> list request </u> ,or after a <u> find request </u>.
+1. FindingbrUdders shows the list of contacts either by default, by <u>list request</u> ,or after a <u>find request</u>.
 2. User clicks the Udder in the Udder list panel.
 3. FindingbrUdders displays the details in the details panel.
 
@@ -420,7 +420,7 @@ For all use cases below,
 
 **MSS**
 
-1. The user requests to <u> list meetings </u>.
+1. The user requests to <u>list meetings</u>.
 2. The user requests to delete a specific meeting from the meetings list using the index.
 3. FindingbrUdders deletes the meeting.
 
@@ -441,7 +441,7 @@ For all use cases below,
 
 **MSS**
 
-1. The user requests to <u> list meetings </u>.
+1. The user requests to <u>list meetings</u>.
 2. The user requests to edit a specific meeting using the index, with various optional parameters.
 3. FindingbrUdders updates the meeting.
 
