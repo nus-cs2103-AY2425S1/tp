@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.Messages.MESSAGE_EVENT_NOT_FOUND;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -51,6 +52,28 @@ public class DeleteEventCommand extends Command {
 
         return new CommandResult(String.format("Deleted attendance events: %s",
                 String.join(", ", eventNames)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // Check for reference equality
+        if (this == other) {
+            return true;
+        }
+
+        // Check for instance type
+        if (!(other instanceof DeleteEventCommand)) {
+            return false;
+        }
+
+        // Cast and compare event names
+        DeleteEventCommand otherCommand = (DeleteEventCommand) other;
+        return Objects.equals(eventNames, otherCommand.eventNames);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventNames);
     }
 
 }

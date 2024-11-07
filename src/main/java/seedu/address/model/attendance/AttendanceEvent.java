@@ -38,7 +38,7 @@ public class AttendanceEvent {
             return true;
         }
 
-        return otherEvent != null && otherEvent.getEventName().equals(eventName);
+        return otherEvent != null && otherEvent.getEventName().equalsIgnoreCase(eventName);
     }
 
     /**
@@ -82,12 +82,12 @@ public class AttendanceEvent {
         }
 
         AttendanceEvent that = (AttendanceEvent) o;
-        return eventName.equals(that.eventName) && attendanceRecords.equals(that.attendanceRecords);
+        return eventName.equalsIgnoreCase(that.eventName) && attendanceRecords.equals(that.attendanceRecords);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventName);
+        return Objects.hash(eventName.toLowerCase());
     }
 
     @Override

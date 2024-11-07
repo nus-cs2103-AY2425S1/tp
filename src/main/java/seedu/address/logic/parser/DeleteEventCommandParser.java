@@ -35,10 +35,22 @@ public class DeleteEventCommandParser implements Parser<DeleteEventCommand> {
                     DeleteEventCommand.MESSAGE_USAGE));
         }
 
-        // Check for duplicate event names
-        Set<String> uniqueEventNames = new HashSet<>(eventNames);
-        if (uniqueEventNames.size() < eventNames.size()) {
-            throw new ParseException("Duplicate event names detected.");
+        for (String eventName : eventNames) {
+            if (eventName.isEmpty()) {
+                throw new ParseException("Event name cannot be empty.");
+            }
+            if (eventName.contains("/")) {
+                throw new ParseException("Event name cannot contain '/'.");
+            }
+        }
+
+        // Check for duplicate event names (case-insensitive)
+        Set<String> uniqueEventNames = new HashSet<>();
+        for (String eventName : eventNames) {
+            String eventNameLower = eventName.toLowerCase();
+            if (!uniqueEventNames.add(eventNameLower)) {
+                throw new ParseException("Duplicate event names detected.");
+            }
         }
 
         return new DeleteEventCommand(eventNames);

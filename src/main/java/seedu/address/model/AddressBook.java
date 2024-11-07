@@ -147,6 +147,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    /**
+     * Removes an attendance event from the address book.
+     * The event must exist in the address book.
+     */
     public void removeAttendanceEvent(AttendanceEvent event) {
         attendanceEvents.remove(event);
     }

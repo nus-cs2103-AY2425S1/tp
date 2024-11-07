@@ -37,6 +37,8 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
 
         String eventName = argMultimap.getValue(PREFIX_EVENT).get().trim();
 
+        validateEventName(eventName);
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT);
 
         if (eventName.isEmpty()) {
@@ -72,5 +74,12 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         }
         return false;
     }
+
+    private void validateEventName(String eventName) throws ParseException {
+        if (eventName.contains("/")) {
+            throw new ParseException("Event name cannot contain '/'.");
+        }
+    }
+
 
 }

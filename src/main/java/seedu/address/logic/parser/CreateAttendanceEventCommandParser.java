@@ -35,12 +35,34 @@ public class CreateAttendanceEventCommandParser implements Parser<CreateAttendan
                     CreateAttendanceEventCommand.MESSAGE_USAGE));
         }
 
-        // Check for duplicate event names
-        Set<String> uniqueEventNames = new HashSet<>(eventNames);
-        if (uniqueEventNames.size() < eventNames.size()) {
-            throw new ParseException("Duplicate event names detected.");
+        //validateEventNames(eventNames);
+
+        for (String eventName : eventNames) {
+            if (eventName.isEmpty()) {
+                throw new ParseException("Event name cannot be empty.");
+            }
+            if (eventName.contains("/")) {
+                throw new ParseException("Event name cannot contain '/'.");
+            }
+        }
+
+        // Check for duplicate event names (case-insensitive)
+        Set<String> uniqueEventNames = new HashSet<>();
+        for (String eventName : eventNames) {
+            String eventNameLower = eventName.toLowerCase();
+            if (!uniqueEventNames.add(eventNameLower)) {
+                throw new ParseException("Duplicate event names detected.");
+            }
         }
 
         return new CreateAttendanceEventCommand(eventNames);
+    }
+
+    private void validateEventNames(List<String> eventNames) throws ParseException {
+        for (String eventName : eventNames) {
+            if (eventName.contains("/")) {
+                throw new ParseException("Event name cannot contain '/'.");
+            }
+        }
     }
 }
