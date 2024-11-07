@@ -1,15 +1,13 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+span
 ---
-
 # GOATS Developer Guide
 
 <!-- * Table of Contents -->
+
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Acknowledgements**
 
@@ -20,13 +18,13 @@ Libraries used in this project:
 - [JavaFX](https://openjfx.io/)
 - [JUnit5](https://github.com/junit-team/junit5)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Design**
 
@@ -41,6 +39,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -107,24 +106,25 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
+
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="700" />
-
 
 The `Model` component,
 
@@ -141,7 +141,6 @@ The `Model` component,
 
 </box>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -149,6 +148,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
+
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -157,7 +157,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Implementation**
 
@@ -185,7 +185,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -198,7 +198,6 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
 
 <box type="info" seamless>
 
@@ -233,7 +232,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -246,11 +245,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
+
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
-
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
+
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
@@ -260,8 +260,7 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -271,7 +270,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Requirements**
 
@@ -288,17 +287,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: Tutors find it challenging to keep track of student information if they are teaching multiple students. They could be juggling additional administrative duties with their teaching duties. GOATS can enhance their efficiency by managing student and parent data, freeing up their time and allowing them to focus on other tasks.
 
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                                     | I want to …​                                                                                 | So that I can…​                                                                                                                     |
-|----------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+
+| Priority | As a …                                                                     | I want to …                                                                                 | So that I can…                                                                                                                     |
+| -------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `* * *`  | detail-oriented private tutor                                               | add my students' contact details, educational levels and subjects taught to the address book | I can keep track of all these details effectively                                                                                   |
 | `* * *`  | tutor                                                                       | view all my students                                                                         | I know who are my students                                                                                                          |
 | `* * *`  | long-time private tutor                                                     | delete contacts                                                                              | I can keep my address book concise and remove all unneeded contacts                                                                 |
-| `* *`    | concerned private tutor                                                     | add my students' parents' contact details to the address book                                | I am able to contact them regarding their child’s academic progress                                                                 |
+| `* *`    | concerned private tutor                                                     | add my students' parents' contact details to the address book                                | I am able to contact them regarding their child’s academic progress                                                                |
 | `* *`    | organised private tutor                                                     | link each student to their parents in the address book                                       | I can contact related users at once                                                                                                 |
 | `* *`    | private tutor with multiple students                                        | tag students based on characteristics                                                        | I can keep track of additional information on students if required                                                                  |
 | `* *`    | non-tech savvy private tutor                                                | have a help sheet with the provided commands                                                 | I do not have to spend too much time memorising commands in order to use the app                                                    |
@@ -326,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | private tutor offering both online and in-person sessions                   | mark the preferred mode of learning for each student                                         | I can plan my schedule and resources accordingly                                                                                    |
 | `*`      | tutor who receives payments from parents                                    | add payment statuses to each student                                                         | I can manage my finance-related tasks efficiently                                                                                   |
 | `*`      | private tutor involved in long-term academic planning                       | keep a history of each student's progress and achievements                                   | I can monitor their growth over time and adjust my teaching strategies accordingly                                                  |
-| `*`      | expert user of the addressbook                                              | set macros for filters/sort                                                                  | I would be able to quickly organise without typing long commands                                                                    |                                                                                     |
+| `*`      | expert user of the addressbook                                              | set macros for filters/sort                                                                  | I would be able to quickly organise without typing long commands                                                                    |
 
 ### Use cases
 
@@ -336,373 +335,357 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User enters name, phone number, email and address
-2.  User submits details
-3.  GOATS adds the person
-4.  GOATS outputs list of all contacts
-5.  GOATS shows success message
+1. User enters name, phone number, email and address
+2. User submits details
+3. GOATS adds the person
+4. GOATS outputs list of all contacts
+5. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. User enters a tag
 
-    * Use case resumes at step 2.
-
-
+  * Use case resumes at step 2.
 * 2a. The given command or data is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 
 **Use case: UC2 - Delete a contact**
 
 **MSS**
 
-1.  User requests to <u>list persons (UC3)</u>
-2.  User requests to delete a specific person in the list
-3.  GOATS deletes the person
-4.  GOATS outputs list of all contacts
-5.  GOATS shows success message
+1. User requests to <u>list persons (UC3)</u>
+2. User requests to delete a specific person in the list
+3. GOATS deletes the person
+4. GOATS outputs list of all contacts
+5. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-    *  Use case ends.
-
+  * Use case ends.
 * 2a. The given command or index is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC3 - List contacts**
 
 **MSS**
 
-1.  User requests to list contact list.
-2.  GOATS outputs list of all contacts
+1. User requests to list contact list.
+2. GOATS outputs list of all contacts
 
-       Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The given command is invalid.
 
-    * 1a1. GOATS shows an error message.
+  * 1a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC4 - Sort contacts**
 
 **MSS**
 
-1.  User requests to sort contact list.
-2.  GOATS sorts the list and outputs the sorted list
+1. User requests to sort contact list.
+2. GOATS sorts the list and outputs the sorted list
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The given command is invalid.
 
-    * 1a1. GOATS shows an error message.
+  * 1a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC5 - Exit application**
 
 **MSS**
 
-1.  User requests to exit application
-2.  GOATS closes
+1. User requests to exit application
+2. GOATS closes
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The given command is invalid.
 
-    * 1a1. GOATS shows an error message.
+  * 1a1. GOATS shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 
 **Use case: UC6 - Edit a contact**
 
 **MSS**
 
-1.  User requests to <u>list persons (UC3)</u>
-2.  User requests to edit a specific person in the list
-3.  GOATS edits the person
-4.  GOATS outputs list of all contacts
-5.  GOATS shows success message
+1. User requests to <u>list persons (UC3)</u>
+2. User requests to edit a specific person in the list
+3. GOATS edits the person
+4. GOATS outputs list of all contacts
+5. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-    *  Use case ends.
-
+  * Use case ends.
 * 2a. The given command or index is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC7 - Find contacts by name**
 
 **MSS**
 
-1.  User requests to find person with name
-2.  GOATS outputs list of all contacts with matching name
+1. User requests to find person with name
+2. GOATS outputs list of all contacts with matching name
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The given command is invalid.
 
-    * 1a1. GOATS shows an error message.
+  * 1a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
   1b. User does not enter a name.
 
-    * 1b1. GOATS shows an error message.
+  * 1b1. GOATS shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 * 2a. There is no matching name in list of contacts.
 
-    * 2a1. GOATS shows an empty list.
+  * 2a1. GOATS shows an empty list.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC8 - Showing all commands**
 
 **MSS**
 
-1.  User requests to show all commands
-2.  GOATS outputs a link to the user guide and the summarised list of commands supported by the application.
+1. User requests to show all commands
+2. GOATS outputs a link to the user guide and the summarised list of commands supported by the application.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. The given command is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC9 - Clearing all contacts**
 
 **MSS**
 
-1.  User requests to clear all contacts
-2.  GOATS removes all contacts
-3.  GOATS outputs an empty list
-4.  GOATS shows success message
+1. User requests to clear all contacts
+2. GOATS removes all contacts
+3. GOATS outputs an empty list
+4. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-    *  Use case ends.
-
+  * Use case ends.
 * 2a. The given command is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC10 - Find contacts by tag**
 
 **MSS**
 
-1.  User requests to find person with tag
-2.  GOATS outputs list of all contacts with matching tag
+1. User requests to find person with tag
+2. GOATS outputs list of all contacts with matching tag
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The given command is invalid.
 
-    * 1a1. GOATS shows an error message.
+  * 1a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
   1b. User does not enter a tag.
 
-    * 1b1. GOATS shows an error message.
+  * 1b1. GOATS shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 * 2a. There is no matching name in list of contacts.
 
-    * 2a1. GOATS shows an empty list.
+  * 2a1. GOATS shows an empty list.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC10 - Archive a contact**
 
 **MSS**
 
-1.  User requests to <u>list persons (UC3)</u>
-2.  User requests to archive a specific person in the list
-3.  GOATS archives the person
-4.  GOATS outputs list of all unarchived contacts
-5.  GOATS shows success message
+1. User requests to <u>list persons (UC3)</u>
+2. User requests to archive a specific person in the list
+3. GOATS archives the person
+4. GOATS outputs list of all unarchived contacts
+5. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-    *  Use case ends.
-
+  * Use case ends.
 * 2a. The given command or index is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC11 - List archived contacts**
 
 **MSS**
 
-1.  User requests to list archived contact list
-2.  GOATS outputs list of all archived contacts
+1. User requests to list archived contact list
+2. GOATS outputs list of all archived contacts
 
-    Use case ends.
+   Use case ends.
 
 **Use case: UC12 - Unarchive a contact**
 
 **MSS**
 
-1.  User requests to <u>list archived contacts (UC11)</u>
-2.  User requests to unarchive a specific person in the list
-3.  GOATS unarchives the person
-4.  GOATS outputs list of all archived contacts
-5.  GOATS shows success message
+1. User requests to <u>list archived contacts (UC11)</u>
+2. User requests to unarchive a specific person in the list
+3. GOATS unarchives the person
+4. GOATS outputs list of all archived contacts
+5. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-    *  Use case ends.
-
+  * Use case ends.
 * 2a. The given command or index is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC13 - Pin a contact**
 
 **MSS**
 
-1.  User requests to <u>list contacts (UC3)</u>
-2.  User requests to pin a specific person in the list
-3.  GOATS pins the person
-4.  GOATS outputs list of all contacts and pins the person at the top of the list
-5.  GOATS shows success message
+1. User requests to <u>list contacts (UC3)</u>
+2. User requests to pin a specific person in the list
+3. GOATS pins the person
+4. GOATS outputs list of all contacts and pins the person at the top of the list
+5. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-    *  Use case ends.
-
+  * Use case ends.
 * 2a. The given command or index is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC14 - Unpin a contact**
 
 **MSS**
 
-1.  User requests to <u>list contacts (UC3)</u>
-2.  User requests to unpin a specific person in the list
-3.  GOATS unpins the person
-4.  GOATS outputs list of all contacts
-5.  GOATS shows success message
+1. User requests to <u>list contacts (UC3)</u>
+2. User requests to unpin a specific person in the list
+3. GOATS unpins the person
+4. GOATS outputs list of all contacts
+5. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-    *  Use case ends.
-
+  * Use case ends.
 * 2a. The given command or index is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC15 - Grade a student**
 
 **MSS**
 
-1.  User requests to <u>list persons (UC3)</u>
-2.  User requests to edit a specific student in the list
-3.  GOATS edits the student
-4.  GOATS outputs list of all contacts
-5.  GOATS shows success message
+1. User requests to <u>list persons (UC3)</u>
+2. User requests to edit a specific student in the list
+3. GOATS edits the student
+4. GOATS outputs list of all contacts
+5. GOATS shows success message
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-    *  Use case ends.
-
+  * Use case ends.
 * 2a. The given command or index is invalid.
 
-    * 2a1. GOATS shows an error message.
+  * 2a1. GOATS shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 * 2b. The given index is not a student
 
-    * 2b1. GOATS shows an error message.
-  
-      Use case ends.
+  * 2b1. GOATS shows an error message.
+
+    Use case ends.
 
 *{More to be added}*
 
-
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should work without internet connection
-5.  Saved data should be kept in a single file to allow for easy transfer to a different device.
-6.  The system should respond within two seconds.
-7.  Should work without having to use an installer or compiler.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should work without internet connection
+5. Saved data should be kept in a single file to allow for easy transfer to a different device.
+6. The system should respond within two seconds.
+7. Should work without having to use an installer or compiler.
 
 ### Glossary
 
@@ -722,7 +705,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Grade**: The grade of the Student
 * **LessonTime**: The tuition lesson time of the Student.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Instructions for manual testing**
 
@@ -755,16 +738,165 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons should be displayed in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: The first contact is deleted from the list. Details of the deleted contact are shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case with multiple indices: `delete 1 2 3`<br>
+       Expected: The first, second, and third contacts are deleted from the list. Status message reflects successful deletion of multiple contacts.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Test case: `delete 0`<br>
+       Expected: No contact is deleted. Error details are shown in the status message.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous; no contact is deleted, and an error message is displayed in the status message.
+
+
+### Finding Contacts by Name, Tag, and Lesson Day
+
+1. Finding contacts by name while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list with diverse names.
+
+    1. Test case: `find John`<br>
+       Expected: All contacts with names containing "John" are displayed in the list. Number of matching contacts are shown in the status message.
+
+    1. Test case with multiple keywords: `find Alex David`<br>
+       Expected: All contacts with names containing "Alex" or "David" appear in the list. Number of matching contacts are shown in the status message.
+
+    1. Test case: `find {NON-EXISTENT NAME]`<br>
+       Expected: No contacts are shown. Status message indicates 0 matches found.
+
+2. Finding contacts by tag while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Some contacts should have tags such as "friend" or "tutor".
+
+    1. Test case: `findtag friend`<br>
+       Expected: All contacts tagged with "friend" are displayed in the list. Status message reflects the number of matching contacts.
+
+    1. Test case with multiple tags: `findtag friend colleague`<br>
+       Expected: All contacts tagged with either "friend" or "colleague" appear in the list. Status message reflects the number of matching contacts.
+
+    1. Test case: `findtag [NON-EXISTENT TAG]`<br>
+       Expected: No contacts are shown. Status message indicates 0 matches found.
+
+3. Finding students by lesson day while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Some students should have lesson days like "Tuesday" or "Wednesday".
+
+    1. Test case: `findday tuesday`<br>
+       Expected: All students with lessons on Tuesday are displayed in the list. Status message reflects the number of matching contacts.
+
+    1. Test case with multiple days: `findday tuesday wednesday`<br>
+       Expected: All students with lessons on either Tuesday or Wednesday are displayed. Status message reflects the number of matching contacts.
+
+    1. Test case: `findday [NON-EXISTENT DAY]`<br>
+       Expected: No contacts are shown. Status message indicates no matches found.
+
+### Archiving and Unarchiving Contacts
+
+1. Archiving contacts while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. All contacts should be displayed in the list.
+
+    1. Test case: `archive 1`<br>
+       Expected: The first contact is archived and removed from the main contact list. A status message confirms the archiving.
+
+    1. Test case with multiple indices: `archive 1 2 3`<br>
+       Expected: The first, second, and third contacts are archived and removed from the main contact list. Status message reflects successful archiving of multiple contacts.
+
+    1. Test case: `archive 0`<br>
+       Expected: No contact is archived. Error details are shown in the status message.
+
+    1. Other incorrect archive commands to try: `archive`, `archive x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous; no contact is archived, and an error message is displayed in the status message.
+
+2. Unarchiving contacts while viewing archived contacts
+
+    1. Prerequisites: Archive at least one contact as above. List all archived contacts using the `listarchive` command. Archived contacts should be displayed.
+
+    1. Test case: `unarchive 1`<br>
+       Expected: The first archived contact is unarchived and moved back to the main contact list. A status message confirms the unarchiving.
+
+    1. Test case with multiple indices: `unarchive 1 2 3`<br>
+       Expected: The first, second, and third archived contacts are unarchived and returned to the main contact list. Status message reflects successful unarchiving of multiple contacts.
+
+    1. Test case: `unarchive 0`<br>
+       Expected: No contact is unarchived. Error details are shown in the status message.
+
+    1. Other incorrect unarchive commands to try: `unarchive`, `unarchive x`, `...` (where x is larger than the archived list size)<br>
+       Expected: Similar to previous; no contact is unarchived, and an error message is displayed
+
+### Pinning and Unpinning Contacts
+
+1. Pinning contacts while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons should be displayed in the list.
+
+    1. Test case: `pin 1`<br>
+       Expected: The first contact is pinned and moved to the top of the contact list. A status message confirms the pinning.
+
+    1. Test case with multiple indices: `pin 1 2 3`<br>
+       Expected: The first, second, and third contacts are pinned and appear at the top of the list. Status message reflects successful pinning of multiple contacts.
+
+    1. Test case: `pin 0`<br>
+       Expected: No contact is pinned. Error details are shown in the status message.
+
+    1. Other incorrect pin commands to try: `pin`, `pin x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous; no contact is pinned, and an error message is displayed in the status message.
+
+2. Unpinning contacts while pinned contacts are at the top of the list
+
+    1. Prerequisites: Pin at least one contact using the `pin` command, then use `list` to verify the contact is pinned and at the top.
+
+    1. Test case: `unpin 1`<br>
+       Expected: The first pinned contact is unpinned and placed back in the sorted order. A status message confirms the unpinning.
+
+    1. Test case with multiple indices: `unpin 1 2 3`<br>
+       Expected: The first, second, and third pinned contacts are unpinned and returned to their original sorted order. Status message reflects successful unpinning of multiple contacts.
+
+    1. Test case: `unpin 0`<br>
+       Expected: No contact is unpinned. Error details are shown in the status message.
+
+    1. Other incorrect unpin commands to try: `unpin`, `unpin x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous; no contact is unpinned, and an error message is displayed in the status message.
+
+### Linking and Unlinking Contacts
+
+1. Linking a parent to a student
+
+    1. Prerequisites: Ensure that both a student (e.g., "John Doe") and a parent (e.g., "Jane Doe") contact exist in the contact list. Use `find` to verify both contacts are present.
+
+    1. Test case: `link ch/John Doe pa/Jane Doe`<br>
+       Expected: The specified student "John Doe" and parent "Jane Doe" are linked, establishing a parent-child relationship. A status message confirms the successful linking.
+
+    1. Test case: `link ch/[NON-EXISTENT STUDENT NAME] pa/Jane Doe`<br>
+       Expected: No link is created. Error details are shown in the status message, indicating that the student contact does not exist.
+
+    1. Test case: `link ch/John Doe pa/[NON-EXISTENT PARENT NAME]`<br>
+       Expected: No link is created. Error details are shown in the status message, indicating that the parent contact does not exist.
+
+    1. Test case: `link ch/[NON-EXISTENT STUDENT NAME] pa/[NON-EXISTENT PARENT NAME]`<br>
+       Expected: No link is created. Error details are shown in the status message.
+
+2. Unlinking a parent from a student
+
+    1. Prerequisites: Ensure a parent (e.g., "Jane Doe") is already linked to a student (e.g., "John Doe"). Use `list` to verify the linked relationship.
+
+    1. Test case: `unlink ch/John Doe`<br>
+       Expected: The parent-child relationship between "John Doe" and "Jane Doe" is removed, and "John Doe" is no longer linked to "Jane Doe". A status message confirms the successful unlinking.
+
+    1. Test case: `unlink ch/[NON-EXISTENT STUDENT NAME]`<br>
+       Expected: No unlinking occurs. Error details are shown in the status message, indicating that the student contact does not exist.
+
+    1. Test case: `unlink ch/John Doe ch/Alice Smith pa/Jane Doe`<br>
+       Expected: No unlinking occurs. Error details are shown in the status message.
+
+    1. Test case: `unlink ch/John Doe` when no parent is linked<br>
+       Expected: No change occurs. An error message indicates that "John Doe" does not have a linked parent.
+
+
 
 ### Loading data
 
