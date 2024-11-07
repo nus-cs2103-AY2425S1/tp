@@ -37,11 +37,11 @@ public class IcTest {
         assertFalse(Ic.isValidIc("F1234567")); // does not end with a valid alphabet
 
         // valid IC numbers
-        assertTrue(Ic.isValidIc("F1234567B"));
-        assertTrue(Ic.isValidIc("S9876432H"));
-        assertTrue(Ic.isValidIc("T0123780X"));
-        assertTrue(Ic.isValidIc("G0123790P"));
-        assertTrue(Ic.isValidIc("M0127890K"));
+        assertTrue(Ic.isValidIc("F1234567B")); // start with F
+        assertTrue(Ic.isValidIc("S9876432H")); // start with S
+        assertTrue(Ic.isValidIc("T0123780X")); // start with T
+        assertTrue(Ic.isValidIc("G0123790P")); // start with G
+        assertTrue(Ic.isValidIc("M0127890K")); // start with M
         assertTrue(Ic.isValidIc("G0000000K")); // same numbers in between
         assertTrue(Ic.isValidIc("f7300609K")); // starts with lower case
         assertTrue(Ic.isValidIc("M1625098k")); // ends with lower case
@@ -59,9 +59,9 @@ public class IcTest {
         assertTrue(ic.equals(ic));
 
         // upper case and lower case of the same ic -> returns true
-        assertTrue(ic.equals(new Ic("m1234567x")));
-        assertTrue(ic.equals(new Ic("M1234567x")));
-        assertTrue(ic.equals(new Ic("m1234567X")));
+        assertTrue(ic.equals(new Ic("m1234567x"))); // starts and ends with lower case letter
+        assertTrue(ic.equals(new Ic("M1234567x"))); // ends with lower case letter
+        assertTrue(ic.equals(new Ic("m1234567X"))); // start with lower case letter
 
         // null -> returns false
         assertFalse(ic.equals(null));
