@@ -48,11 +48,15 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         Nric nric;
 
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_NRIC_EMPTY));
+        }
+
         try {
             nric = ParserUtil.parseNric(argMultimap.getPreamble());
         } catch (ParseException pe) {
             logger.warning("No NRIC provided in input.");
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage()));
         }
 
         logger.info("Checking for any duplicate prefixes.");
