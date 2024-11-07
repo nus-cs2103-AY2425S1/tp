@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project is based on the [AddressBook Level 3](https://github.com/se-edu/addressbook-level3) project by SE-EDU. 
+* This project is based on the [AddressBook Level 3](https://github.com/se-edu/addressbook-level3) project by SE-EDU.
 It includes reused and adapted ideas, code, and documentation from the AddressBook Level 3 project.
 
 
@@ -507,5 +507,3 @@ testers are expected to do more *exploratory* testing.
        2. Introduce invalid JSON syntax into the file.
        3. Save the corrupted file and launch the application.<br>
        Expected: Application will display an error message to the user, indicating that the data is corrupted.
-       
-          
