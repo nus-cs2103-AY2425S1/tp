@@ -12,7 +12,7 @@ public class SeeAllScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "list-schedule";
 
-    public static final String MESSAGE_SUCCESS = "Listed meetings";
+    public static final String MESSAGE_SUCCESS = "List all meetings";
 
 
     @Override
@@ -20,5 +20,11 @@ public class SeeAllScheduleCommand extends Command {
         requireNonNull(model);
         model.changeWeeklySchedule(PREDICATE_SHOW_ALL_MEETINGS);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof SeeAllScheduleCommand; // instanceof handles
     }
 }
