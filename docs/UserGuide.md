@@ -155,7 +155,7 @@ Format:
 `delete n/NAME p/PHONE`
 `delete n/NAME e/EMAIL`
 
-* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`/NAME` and `PHONE`/`NAME` and `EMAIL`
+* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`/`NAME` and `PHONE`/`NAME` and `EMAIL`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If there are contacts with duplicate names, user must specify `NAME` and `PHONE`/`NAME` and `EMAIL`.
@@ -211,6 +211,22 @@ Examples:
 * `massreject j/SWE2024 t/TP` marks all persons with the job code `SWE2024` and the tag `TP` as rejected.
 * `massreject t/BP` marks all persons with the tag `BP` as rejected.
 * `massreject j/SWE2024` marks all persons with the job code `SWE2024` as rejected, except those already tagged as `a` (accepted).
+
+### Sorting persons by fields: `sort`
+
+Sorts the list of persons based on specified fields in a case-insensitive manner. Sorting can be done by a single field or layered across multiple fields.
+
+Format:
+`sort [n/] [p/] [e/] [j/] [t/]`
+
+* You can sort by any combination of name, phone, email, job code, and/or tag.
+* Sorting is case-insensitive.
+* Layered sorting is supported. If multiple fields are specified, the list will be sorted by the first field, then by the second within each group of the first, and so on.
+
+Examples:
+* `sort n/` and `sort` sorts all persons by name.
+* `sort t/ j/` sorts all persons by tag first, and within each tag, sorts by job code.
+* `sort j/ n/` sorts all persons by job code, and within each job code, sorts by name.
 
 ### Clearing all entries : `clear`
 
