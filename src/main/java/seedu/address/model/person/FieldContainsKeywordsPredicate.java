@@ -43,6 +43,9 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
                         keyword));
         case "patientnotes" -> keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(person.getNotes().toString(), keyword));
+        case "apptdesc" -> keywords.stream()
+                .anyMatch(keyword -> (person.getAppointmentDescription() != null)
+                        && StringUtil.containsSubstringIgnoreCase(person.getAppointmentDescription(), keyword));
         default -> false;
         };
     }
