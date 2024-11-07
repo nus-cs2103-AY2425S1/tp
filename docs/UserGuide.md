@@ -382,7 +382,7 @@ AddressBook and Transaction data are saved in the hard disk automatically after 
 If changes to the data file make its format invalid, SpleetWaise will discard corrupted data and start as usual. To avoid data loss, it’s recommended to back up the file before making edits. Person and Transactions with invalid fields will be discarded before the application starts.<br>
 Furthermore, certain edits can cause the AddressBook or TransactionBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 Notably, if SpleetWaise encounter a person/transaction with an existing person/transaction ID in the 
-address/transaction book, it will bediscarded. Similarly, if SpleetWaise encounter a transaction with the same 
+address/transaction book, it will be discarded. Similarly, if SpleetWaise encounter a transaction with the same 
 person ID, amount, date and description as an existing transaction in the transaction book, it will be discarded as 
 well.
 </div>
