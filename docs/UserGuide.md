@@ -110,7 +110,9 @@ Edits an existing person in ClubConnect's contact list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. 
+* `INDEX` refers to the index number shown in the displayed person list. 
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -166,8 +168,8 @@ Format: `delete INDEX` / `delete CONTACT_NAME`
 
 * Deletes the person at the specified `INDEX` / with name `CONTACT_NAME`.
 * `CONTACT_NAME` refers to the name of the contact (case-insensitive).
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* `INDEX` refers to the index number shown in the displayed contact list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ClubConnect's contact list.
@@ -181,7 +183,8 @@ Format: `mass_delete INDEX1 INDEX2 ... INDEXN`
 
 * Deletes the persons at the specified indices.
 * Each index refers to the index number shown in the displayed person list.
-* All indices must be positive integers 1, 2, 3, … Invalid indices will be filtered out
+* All indices must be positive integers 1, 2, 3, … 
+* Invalid indices will be filtered out.
 
 Examples:
 * `list` followed by `mass_delete 1 2` deletes the 1st and 2nd persons in ClubConnect's contact list.
@@ -230,8 +233,8 @@ Format: `delete_event INDEX` / `delete_event EVENT_NAME`
 
 * Deletes the event at the specified `INDEX` / with event name `EVENT_NAME`.
 * `EVENT_NAME` refers to the name of the event (case-insensitive).
-* The index refers to the index number shown in the displayed event list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* `INDEX` refers to the index number shown in the displayed event list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list_events` followed by `delete_event 2` deletes the 2nd event in ClubConnect's event list.
