@@ -21,29 +21,29 @@ public class ProjectIdTest {
 
     @Test
     public void isValidId() {
-        // null name
-        assertThrows(NullPointerException.class, () -> ProjectId.isValidId(null));
+        // null id
+        assertThrows(AssertionError.class, () -> ProjectId.isValidId(null));
 
-        // invalid name
+        // invalid id
         assertFalse(ProjectId.isValidId("")); // empty string
         assertFalse(ProjectId.isValidId(" ")); // spaces only
         assertFalse(ProjectId.isValidId("^")); // only non-alphanumeric characters
         assertFalse(ProjectId.isValidId("5252*")); // contains non-alphanumeric characters
+        assertFalse(ProjectId.isValidId("abac gjku")); // alphabets only
+        assertFalse(ProjectId.isValidId("kk12658j")); // alphanumeric characters
+        assertFalse(ProjectId.isValidId("A0276123J20")); // with capital letters
+        assertFalse(ProjectId.isValidId("A0276123J20 A2552 6456 R20")); // long names
 
-        // valid name
-        assertTrue(ProjectId.isValidId("abac gjku")); // alphabets only
+        // valid id
         assertTrue(ProjectId.isValidId("12345")); // numbers only
-        assertTrue(ProjectId.isValidId("kk12658j")); // alphanumeric characters
-        assertTrue(ProjectId.isValidId("A0276123J20")); // with capital letters
-        assertTrue(ProjectId.isValidId("A0276123J20 A2552 6456 R20")); // long names
     }
 
     @Test
     public void equals() {
-        ProjectId projectId = new ProjectId("Valid Id");
+        ProjectId projectId = new ProjectId("1");
 
         // same values -> returns true
-        assertTrue(projectId.equals(new ProjectId("Valid Id")));
+        assertTrue(projectId.equals(new ProjectId("1")));
 
         // same object -> returns true
         assertTrue(projectId.equals(projectId));
@@ -55,6 +55,6 @@ public class ProjectIdTest {
         assertFalse(projectId.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(projectId.equals(new ProjectId("Other Valid Name")));
+        assertFalse(projectId.equals(new ProjectId("2")));
     }
 }

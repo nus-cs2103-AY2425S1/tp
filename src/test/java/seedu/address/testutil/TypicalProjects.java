@@ -14,11 +14,11 @@ public class TypicalProjects {
 
     public static final Project ALPHA = new ProjectBuilder()
             .withName("Project Alpha")
-            .withId("A0276123J")
+            .withId("1")
             .withSkills("moneyManagement").build();
     public static final Project BETA = new ProjectBuilder()
             .withName("Project Beta")
-            .withId("A0276123K")
+            .withId("2")
             .withSkills("gambling", "thievery").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

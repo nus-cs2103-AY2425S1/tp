@@ -28,7 +28,7 @@ Class ProjectId
 Class UniqueAssignmentList
 Class Assignment
 Class AssignmentId
-
+Class Id
 Class I #FFFFFF
 }
 
@@ -65,6 +65,10 @@ Project *--> "*" Skill
 
 UniqueAssignmentList --> "~* all" Assignment
 Assignment *--> AssignmentId
+
+EmployeeId -down-|> Id
+ProjectId -down-|> Id
+AssignmentId -down-|> Id
 
 Employee -[hidden]up--> I
 UniqueEmployeeList -[hidden]right-> I

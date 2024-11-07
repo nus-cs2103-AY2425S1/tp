@@ -23,7 +23,7 @@ public class ProjectUtil {
      */
     public static String getProjectDetails(Project project) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_PROJECT_ID + project.getId().fullId + " ");
+        sb.append(PREFIX_PROJECT_ID + project.getId().value + " ");
         sb.append(PREFIX_PROJECT_NAME + project.getName().fullName + " ");
         return sb.toString();
     }

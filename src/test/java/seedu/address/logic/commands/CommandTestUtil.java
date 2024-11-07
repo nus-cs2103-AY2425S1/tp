@@ -72,8 +72,8 @@ public class CommandTestUtil {
 
     public static final String VALID_PROJECT_NAME_ALPHA = "Project Alpha";
     public static final String VALID_PROJECT_NAME_BETA = "Project Beta";
-    public static final String VALID_PROJECT_ID_ALPHA = "A0276123J";
-    public static final String VALID_PROJECT_ID_BETA = "A0276123K";
+    public static final String VALID_PROJECT_ID_ALPHA = "1";
+    public static final String VALID_PROJECT_ID_BETA = "2";
     public static final String VALID_PROJECT_SKILL_THIEVERY_BETA = "thievery";
     public static final String VALID_PROJECT_SKILL_GAMBLING_BETA = "gambling";
 

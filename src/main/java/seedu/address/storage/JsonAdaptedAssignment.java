@@ -44,7 +44,7 @@ public class JsonAdaptedAssignment {
      */
     public JsonAdaptedAssignment(Assignment source) {
         this.assignmentId = source.getAssignmentId().value;
-        this.projectId = source.getProject().getId().fullId;
+        this.projectId = source.getProject().getId().value;
         this.employeeId = source.getEmployee().getEmployeeId().value;
     }
 
@@ -72,11 +72,11 @@ public class JsonAdaptedAssignment {
             throw new IllegalValueException(ProjectId.MESSAGE_CONSTRAINTS);
         }
 
-        if (!AssignmentId.isValidAssignmentId(assignmentId)) {
+        if (!AssignmentId.isValidId(assignmentId)) {
             throw new IllegalValueException(AssignmentId.MESSAGE_CONSTRAINTS);
         }
 
-        if (!EmployeeId.isValidEmployeeId(employeeId)) {
+        if (!EmployeeId.isValidId(employeeId)) {
             throw new IllegalValueException(EmployeeId.MESSAGE_CONSTRAINTS);
         }
 

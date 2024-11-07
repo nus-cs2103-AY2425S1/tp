@@ -39,4 +39,8 @@ UniqueAssignmentList --> Assignment
 Assignment *--> AssignmentId
 Assignment *--> Employee
 Assignment *--> Project
+
+EmployeeId -up-|> Id
+ProjectId -right-|> Id
+AssignmentId -down-|> Id
 @enduml

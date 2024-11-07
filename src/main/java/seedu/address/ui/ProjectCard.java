@@ -47,7 +47,7 @@ public class ProjectCard extends UiPart<Region> {
         this.project = project;
         this.id.setText(displayedIndex + ". ");
         name.setText(project.getName().fullName);
-        projectId.setText("id: " + project.getId().fullId);
+        projectId.setText("id: " + project.getId().value);
         project.getSkills().stream()
                 .sorted(Comparator.comparing(skill -> skill.skill))
                 .forEach(skill -> skills.getChildren().add(new Label(skill.skill)));

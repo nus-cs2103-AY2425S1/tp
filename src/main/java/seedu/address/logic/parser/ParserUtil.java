@@ -49,7 +49,7 @@ public class ParserUtil {
     public static EmployeeId parseEmployeeId(String employeeId) throws ParseException {
         requireNonNull(employeeId);
         String trimmedId = employeeId.trim();
-        if (!EmployeeId.isValidEmployeeId(trimmedId)) {
+        if (!EmployeeId.isValidId(trimmedId)) {
             throw new ParseException(EmployeeId.MESSAGE_CONSTRAINTS);
         }
         return new EmployeeId(trimmedId);
@@ -208,7 +208,7 @@ public class ParserUtil {
     public static AssignmentId parseAssignmentId(String assignmentId) throws ParseException {
         requireNonNull(assignmentId);
         String trimmedAssignmentId = assignmentId.trim();
-        if (!AssignmentId.isValidAssignmentId(trimmedAssignmentId)) {
+        if (!AssignmentId.isValidId(trimmedAssignmentId)) {
             throw new ParseException(AssignmentId.MESSAGE_CONSTRAINTS);
         }
         return new AssignmentId(trimmedAssignmentId);
