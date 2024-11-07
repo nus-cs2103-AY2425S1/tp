@@ -664,85 +664,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-### Managing Attendance Events
-
-1. **Creating attendance events**
-
-    - Test case: `createattendance e/Tutorial 1 e/Lab Session`
-
-      Expected: Attendance events "Tutorial 1" and "Lab Session" are created. Confirmation message shown.
-
-    - Test case: `createattendance e/`
-
-      Expected: Error message indicating event name cannot be empty.
-
-2. **Deleting attendance events**
-
-    - Test case: `deleteevent e/Tutorial 1`
-
-      Expected: Attendance event "Tutorial 1" is deleted. Confirmation message shown.
-
-    - Test case: `deleteevent e/Nonexistent Event`
-
-      Expected: Error message indicating event does not exist.
-
-3. **Listing attendance events**
-
-    - Test case: `listevents`
-
-      Expected: Displays a list of all attendance events.
-
-    - Test case: `listevents extra`
-
-      Expected: Error message indicating invalid command format.
-
-### Marking and Unmarking Attendance
-
-1. **Marking attendance for multiple students**
-
-    - Prerequisites: At least five students listed. Event "Lab Session" exists.
-
-    - Test case: `mark e/Lab Session i/1 i/2 i/3`
-
-      Expected: Students at indices 1, 2, and 3 are marked as present for "Lab Session". Confirmation message shown.
-
-    - Test case: `mark e/Lab Session i/1 i/1`
-
-      Expected: Error message indicating duplicate indices.
-
-2. **Unmarking attendance for multiple students**
-
-    - Prerequisites: Students at indices 1 and 2 are marked as present for "Lab Session".
-
-    - Test case: `unmark e/Lab Session i/1 i/2`
-
-      Expected: Students at indices 1 and 2 are marked as absent for "Lab Session". Confirmation message shown.
-
-    - Test case: `unmark e/Lab Session i/a`
-
-      Expected: Error message indicating invalid index.
-
-### Listing Attendance
-
-1. **Listing present students for an event**
-
-    - Test case: `listattendance e/Lab Session s/present`
-
-      Expected: Displays a list of students marked as present for "Lab Session".
-
-2. **Listing absent students for an event**
-
-    - Test case: `listattendance e/Lab Session s/absent`
-
-      Expected: Displays a list of students marked as absent for "Lab Session".
-
-3. **Invalid status**
-
-    - Test case: `listattendance e/Lab Session s/late`
-
-      Expected: Error message indicating valid statuses are 'present' or 'absent'.
-
-
 
 ### Randomly selecting a student
 
@@ -770,11 +691,6 @@ testers are expected to do more *exploratory* testing.
 - Commands are made more flexible in general, requiring less strict command syntaxes as compared to AB3. This enhanced the ease of using the app.
 - There were significant challenges in adjusting validation for the various commands. What inputs to allow and reject was constantly being discussed with an end result of prioritising user freedom while ensuring inputs remain relatively reasonable.
 - There were difficulties agreeing on the UI which went through multiple iterations of tweaking before resulting in the current NUS-themed color palette and which is in line with the app's intended usage.
-- Implementing the attendance feature required significant modifications to the existing architecture, including updates to the `Model`, `Storage`, and `Logic` components.
-- Ensuring data integrity and proper synchronization between student data and attendance records was a challenge.
-- Comprehensive testing was conducted to handle various edge cases, such as duplicate events, invalid inputs, and concurrent modifications.
-- Documentation was updated extensively to reflect the new features, including user and developer guides.
-
 ---
 
 ## **Appendix: Planned Enhancements**
