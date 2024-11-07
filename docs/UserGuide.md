@@ -368,11 +368,12 @@ For Person List View | Format
 --------------------|--------
 Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 List Transactions | `listt INDEX`
-Find Transactions | `findt KEYWORD [MORE_KEYWORDS]`
 
 For Transaction List View | Format
 --------------------|--------
 Delete Transaction | `deletet INDEX`
+Find Transactions | `findt KEYWORD [MORE_KEYWORDS]`
+Summarise Transactions | `summary s/START_MONTH e/END_MONTH`
 
 General Commands | Format
 ----------------|--------
