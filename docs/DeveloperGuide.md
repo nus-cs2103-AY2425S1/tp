@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project was built on the AddressBook-3 (AB3) application
+* No additional third-party libraries were used
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -135,7 +136,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -148,7 +149,10 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+
+Note that the Person class requires at least one of Phone, Address, Email or Social Media to be present. This cannot be captured by the UML. <br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -157,7 +161,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -301,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​       | I want to …​                                                                | So that I can…​                                                             |
 |----------|---------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| `* * *`  | new user      | understand the interface easily                                             | start using my addressbook with little trouble                              |
+| `* * *`  | new user      | understand the interface easily                                             | start using the contact management app with little trouble                  |
 | `* * *`  | new user      | add a new contact                                                           | start storing my existing contacts                                          |
 | `* * *`  | new user      | find a contact by name                                                      | retrieve their contact information                                          |
 | `* * *`  | familiar user | delete/archive a contact                                                    | remove those that are no longer working with me                             |
@@ -463,8 +467,6 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -480,12 +482,69 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+### Adding a contact
 
-### Saving data
+1. Adding a contact with at least one of the contact fields (i.e. `phone`, `email`, `address`, or any of the social media handles) 
 
-1. Dealing with missing/corrupted data files
+    1. Prerequisites: N/A
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    2. Test case: `add n/testAddEmailOnly e/test@example.com`<br>
+       Expected: Contact is added with name as `testAddEmailOnly` and email as `test@example.com`. No other fields should be present. <br>
+       Note: This test case can be repeated for any of the contact fields.
 
-2. _{ more test cases …​ }_
+    3. Test case: `add n/testAddNoContactPresent`<br>
+       Expected: No person is added. An error message should be shown.
+
+    4. Other incorrect add commands to try: `add`, `add n/testName sd/2024-12-12`, `add n/testName t/friend` <br>
+       Expected: Similar to previous.
+   
+2. Add a valid contact with a schedule
+
+   1. Prerequisites: N/A
+   
+   2. Test Case: `add n/testAddWithSchedule p/91234567 sd/2024-12-12`
+      Expected: Contact is added with the given name and phone fields, and a schedule field with date `2024-12-12`. The schedule should be shown similar to a tag.
+   
+   3. Test Case: `add n/testAddWithInvalidSchedule p/91234567 st/16:00`
+      Expected: Contact is added with the provided name and phone values, but the schedule is ignored as it is missing the schedule date field.
+      Note: This test case can be repeated with only the schedule name provided, or both the schedule name and time provided, without the schedule date.
+
+### Schedule
+
+1. Clearing a schedule from a contact with a schedule
+
+   1. Prerequisites: The target contact should have an existing schedule. Suppose the target contact is at index 1.
+   
+   2. Test case: `schedule 1`
+      Expected: The schedule field is removed. The contact no longer has a schedule.
+   
+2. Editing a schedule from a contact with a schedule
+    1. Prerequisites: The target contact should have an existing schedule. Suppose the target contact is at index 1.
+   
+   2. Test case: `schedule 1 sd/2024-12-13`
+      Expected: The schedule field of contact at index 1 is now `2024-12-13`.
+      Note: If the schedule date is already `2024-12-13` (i.e. same as that provided in the command), then the command fails as the schedule is unedited.
+      Note: This test case can be repeated for other schedule fields, schedule name and schedule time.
+   
+3. Adding a schedule to a contact with no schedule
+   1. Prerequisites: The target contact should not have an existing schedule. Suppose the target contact is at index 1.
+   
+   2. Test case: `schedule 1 sd/2024-12-12`
+      Expected: The contact now has a schedule named `schedule`, scheduled on `2024-12-12`.
+      
+   3. Test case: `schedule 1 st/16:00`
+      Expected: The schedule command fails as there is no schedule date provided.
+
+## **Appendix: Effort**
+
+This section describes the difficulties and challenges faced while working on this Brownfield project.
+We detail some achievements accomplished by completing our iteration of the project.
+
+1. Our team has a smaller number of members (only 4 members, compared to the norm of 5), so more complex features could not have been implemented. <br>
+   We instead focused on features that are useful to users, and thought about our key value proposition, whilst maintaining the fact that the app is primarily for contact management.
+2. Testing was an expect that we found tedious and required a lot of effort. <br>
+   Relying on the testing code infrastructure used in AB3 greatly helped to make the testing process more modular. <br>
+   For example, when creating the tests for the `schedule` command, it was greatly inspired by the existing test infrastructure of the `edit` command.
+
+## **Appendix: Planned Enhancements**
+
