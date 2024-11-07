@@ -319,96 +319,95 @@ Object.
 #### Add Appointment feature
 
 **Aspect: Whether appointment fields should be optional**
-
 - **Alternative 1 (Current choice):** `Sickness` and `Medicine` fields are optional.
-    - **Pros**: This allows users to create an appointment without specifying all fields initially, which is more realistic and practical as some details may not be available at the time of creation.
-
+  - **Pros**: This allows users to create an appointment without specifying all fields initially, which is 
+    more realistic and practical as some details may not be available at the time of creation.
 - **Alternative 2**: Make all fields mandatory.
-    - **Pros**: Ensures complete data at the time of appointment creation, which may simplify data handling and reduce the need for future edits.
-    - **Cons**: Can be inconvenient for users who do not have all details available immediately, possibly leading to frustration or delays in creating appointments.
+  - **Pros**: Ensures complete data at the time of appointment creation, which may simplify data handling and reduce the need for future edits.
+  - **Cons**: Can be inconvenient for users who do not have all details available immediately, possibly leading to frustration or delays in creating appointments.
 
 <br>
 
-**Aspect: What Input Should Be Valid for Fields Sickness and Medicine**
-
-- **Alternative 1 (Current choice):** Require input with at least one alphanumeric character.
-    - **Pros**: Ensures these fields contain meaningful data, reducing the likelihood of accidental or erroneous inputs.
-
+**Aspect: What input should be valid for fields `Sickness` and `Medicine`**
+- **Alternative 1 (Current choice):** Require input with at least one alphabet.
+  - **Pros**: Ensures these fields contain meaningful data, reducing the likelihood of accidental or erroneous inputs.
 - **Alternative 2:** Allow any value as valid input.
-    - **Cons**: Increases the risk of erroneous inputs, such as empty fields, accidental symbols, or irrelevant characters, potentially reducing data quality.
+  - **Cons**: Increases the risk of erroneous inputs, such as empty fields, accidental symbols, or 
+    irrelevant characters, potentially reducing data quality.
 
+<br>
 
-#### Delete/Clear Person feature
+#### Delete / Clear Person feature
 
-**Aspect: Deleting person and clearing person list should:**
+**Aspect: Whether `delete person` and `clear person` should remove appointments too**
 
-- **Alternative 1 (Current choice):** remove appointments with the `personId` of that person.
+- **Alternative 1 (Current choice):** Deleting person and clearing the person list also removes appointments with the `personId` of the deleted person(s).
   - **Pros**: This prevents the case where appointments are linked to personIds that are non-existent.
-- **Alternative 2:** not remove any appointments with the `personId` of that person.
+- **Alternative 2:** Deleting person and clearing the person list will not remove any appointments with the `personId` of that person.
   - **Cons**: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
   
 <br>
 
-#### Edit Person/Appointment feature
+#### Edit Person / Appointment feature
 
 **Aspect: What value to use for indicating entity**
 
-- **Alternative 1 (Current choice):** Use the index of the person/appointment in the list.
-    - **Pros**: Enables efficient retrieval directly from the list using `List#get`, simplifying implementation.
-    - **Cons**: Entity indexes may shift after deletions, which could lead to unintended edits if the user isn’t aware of changes in ordering.
+- **Alternative 1 (Current choice):** Use the index of the person / appointment in the list.
+  - **Pros**: Enables efficient retrieval directly from the list, simplifying implementation.
+  - **Cons**: Entity indexes may shift after deletions, which could lead to unintended edits if the user is not aware of changes in ordering.
 
 - **Alternative 2:** Use a unique ID for each entity.
-    - **Pros**: IDs remain consistent regardless of list modifications, ensuring stable reference to the entity.
-    - **Cons**: Implementing ID-based retrieval requires additional logic and may be slower, especially for larger lists.
+  - **Pros**: IDs remain consistent regardless of list modifications, ensuring stable reference to the entity.
+  - **Cons**: Implementing ID-based retrieval requires additional logic and may be slower, especially for larger lists.
 
 <br>
 
-**Aspect: During Edit Appointment, check if new person ID associated with edited appointment corresponds to an existing person in the address book**
-- This is to ensure no unwanted errors occur while editing the appointment and helps to maintain data integrity.
+**Aspect: Whether to check if the `personId` associated with edited appointment corresponds to an existing person in the AddressBook**
+- **Alternative 1 (Current choice):** When executing the `edit appt` command, check if the new `personId` 
+  exists in the AddressBook.
+  - **Pros:** Ensures data integrity by preventing appointments from being linked to non-existent persons.
+  - **Cons:** Requires additional validation logic during the edit process.
+- **Alternative 2:** Execution of the `edit appt` command does not check if the new `personId` exists in the AddressBook.
+  - **Pros:** Simplifies the edit process by removing the need for additional validation.
+  - **Cons:** Increases the risk of data inconsistency, as appointments may be linked to non-existent persons.
 
 <br>
 
-#### Find Person/Appointment feature
+#### Find Person / Appointment feature
 
-**Aspect: How to show find person/appointment based on different criteria**
-
+**Aspect: How to implement the `find person` and `find appt` commands that allow finding by multiple criteria**
 - **Alternative 1 (Current choice)**: Create one find command that supports filtering by multiple criteria (name, date) using prefixes.
-  - Pros: Fast and easy to find by date and name
-  - Cons: Confusing syntax from user's perspective
-
+  - Pros: Fast and easy to find by date and name.
+  - Cons: Confusing syntax from user's perspective.
 - **Alternative 2**: Create different find commands, find by date, find by name etc.
-  - Pros: Much easy in terms of user experience
-  - Cons: More repeated code for each command
+  - Pros: Much easy in terms of user experience.
+  - Cons: More repeated code for each command.
 
 <br>
 
-**Aspect: How to combine multiple prefixes when finding results**
-
+**Aspect: How to combine multiple prefixes when executing the `find` commands**
 - **Alternative 1 (Current choice)**: Prefixes should be combined using an AND condition.
-  - Pros: Ensures more specific search results, as all conditions must be met
-  - Cons: May be too restrictive
-
+  - **Pros**: Ensures more specific search results, as all conditions must be met.
+  - **Cons**: May be too restrictive.
 - **Alternative 2**: Prefixes should be combined using an OR condition
-  - Pros: Allows for more flexible and broader search results, as any one of the conditions can yield matches.
-  - Cons: May return too many results
+  - **Pros**: Allows for more flexible and broader search results, as any one of the conditions can yield matches.
+  - **Cons**: May return too many results.
 
 <br>
 
-**Aspect: Whether to implement case sensitivity in matching**
-
+**Aspect: Whether to implement case sensitivity in matching for search terms**
 - **Alternative 1 (Current choice)**: Implement case-insensitive matching for search terms.
-    - **Pros**: Enhances user experience by allowing searches to ignore case differences
-    - **Cons**: Slightly more processing required to normalize case during search
-
+    - **Pros**: Enhances user experience by allowing searches to ignore case differences.
+    - **Cons**: Slightly more processing required to normalize case .during search
 - **Alternative 2**: Implement case-sensitive matching for search terms.
-    - **Pros**: Potentially faster searches, as no additional case normalization is required
-    - **Cons**: Reduces user-friendliness
+    - **Pros**: Potentially faster searches, as no additional case normalization is required.
+    - **Cons**: Reduces user-friendliness.
 <br>
 
 <box type="tip" theme="success" seamless>
 
 **Tip:**
-To add a new predicate, navigate the corresponding entity folder in the model package. There, you can create a new class that implements `Predicate<Entity>`. Ensure that this method has a test method which defines the specific condition for a predicate.
+To add a new predicate, navigate the corresponding entity folder in the `model` package. There, you can create a new class that implements `Predicate<Entity>`. Ensure that this method has a test method which defines the specific condition for a predicate.
 
 </box>
 
@@ -437,14 +436,11 @@ object.
 <br>
 
 ### Exit feature
-#### Implementation
 When a user types an `exit` command, the DocTrack application will exit.
   
 <br>
 
 ### Help feature
-#### Implementation
-
 When a user types a `help` command, the DocTrack application will display a `HelpWindow`.
 
 #### Design considerations
@@ -452,11 +448,11 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 **Aspect: How to display help information:**
 
 * **Alternative 1 (current choice):** Display help information in a new window.
-  * Pros: Keeps the main application window uncluttered.
-  * Cons: Requires managing an additional window.
+  * **Pros**: Keeps the main application window uncluttered.
+  * **Cons**: Requires managing an additional window.
 * **Alternative 2:** Display help information in a modal dialog.
-  * Pros: Simpler to implement.
-  * Cons: Can clutter the main application window and interrupt the user's workflow.
+  * **Pros**: Simpler to implement.
+  * **Cons**: Can clutter the main application window and interrupt the user's workflow.
 
 <br>
 
@@ -485,16 +481,11 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 **Aspect: Save patient and appointment data in:**
 <br>
 * **Alternative 1 (current choice):** two different files, patient data in `data/addressbook.json` and appointment data in `data/appointmentbook.json`.
-    * Pros: 
-        * More organised file management
-        * Quicker read and write times for each file
-    * Cons: 
-        * Higher chance of inconsistencies between patient and appointment data
+    * **Pros**: More organised file management, with a quicker read and write times for each file.
+  * **Cons**: Higher chance of inconsistencies between patient and appointment data.
 * **Alternative 2:** one single file named `data/addressbook.json`
-    * Pros:
-        * Simplicity and convenience of one file for all information
-    * Cons:
-        * Slower read and write times for file, especially if the user is only accessing one of patient or appointment data.
+    * **Pros**: Simplicity and convenience of one file for all information.
+    * **Cons**: Slower read and write times for file, especially if the user is only accessing one of patient or appointment data.
 
 <box type="warning" seamless>
 
@@ -508,11 +499,11 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 **Aspect: When the data is updated in the `.json` file:**
 <br>
 * **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
-    * Pros: Simplifies the process for the user, without needing to save manually.
-    * Cons: May be slow if there are many changes to save.
+    * **Pros**: Simplifies the process for the user, without needing to save manually.
+    * **Cons**: May be slow if there are many changes to save.
 * **Alternative 2:** Prompt the user to save changes before exiting.
-    * Pros: Gives the user more control over the saving process.
-    * Cons: May be annoying for users who do not want an additional step to save changes.
+    * **Pros**: Gives the user more control over the saving process.
+    * **Cons**: May be annoying for users who do not want an additional step to save changes.
 
 <br>
 
@@ -523,58 +514,32 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 Context: The commands (other than the general) have the command format: `COMMAND ENTITY_TYPE ENTITY_ARGS`
 <br>
 * **Alternative 1 (current choice):** Parse `ENTITY_TYPE` and `ENTITY_ARGS` separately.
-    * Pros:
-        * Easier to parse
-        * Easier to debug, as the parsing is separated into different portions
-    * Cons:
-        * More verbose, and less centralised.
+  * **Pros**: Easier to parse and debug, as the parsing is separated into different portions. 
+  * **Cons**: More verbose, and less centralised.
 * **Alternative 2**: Parse them together.
-    * Pros:
-        * Everything is parsed together, centralising the parsing logic.
-    * Cons:
-        * Harder to parse and debug
+    * **Pros**: Everything is parsed together, centralising the parsing logic.
+    * **Cons**: Harder to parse and debug.
 
 <br>
 
 **Aspect: Command format (with or without prefixes):**
 <br>
-* **Alternative 1 (current choice):** Use prefixes
-    * Pros:
-        * Easier to identify markers for each parameter
-        * Prefixes allow for free positioning of arguments
-    * Cons:
-        * Less intuitive for the user at start
-        * Need to create prefixes
-* **Alternative 2:** Use no prefixes
-    * Parsing the arguments based on position.
-    * Pros:
-        * More intuitive at start
-        * No need to create prefixes
-    * Cons:
-        * Harder to identify markers - may result in issues with arguments that have spaces in between
-        * No free positioning
-        * Might be harder to implement variable amount of arguments
+* **Alternative 1 (current choice):** Use prefixes.
+  * **Pros**: Easier to identify markers for each parameter, and prefixes allow for free positioning of arguments.
+  * **Cons**: Less intuitive for the user at start, and need to create the prefixes.
+* **Alternative 2:** Use no prefixes, parse the arguments based on position.
+  * **Pros**: More intuitive at start, no need to create prefixes.
+  * **Cons**: Harder to identify markers - may result in issues with arguments that have spaces in between, no free positioning, and might be harder to implement variable amount of arguments.
 
 <br>
 
-**Aspect: `ArgumentMultimap` use across different entities:**
-<br>
-Context: The `ArgumentMultimap` is used across different entities.
-<br>
+**Aspect: The use of `ArgumentMultimap` across different entities:**
 * **Alternative 1 (current choice):** Use the same `ArgumentMultimap` for all entities.
-    * Pros:
-        * Prefixes are shared universally, making it more consistent across entities.
-        * Less code duplication
-    * Cons:
-        * Might be more cluttered, as all the prefixes are together
-        * Inability to use same prefixes for different arguments across entities
+  * **Pros**: Prefixes are shared universally, making it more consistent across entities. There is also less code duplication.
+  * **Cons**: Might be more cluttered, as all the prefixes are together, and inability to use same prefixes for different arguments across entities.
 * **Alternative 2**: Use different `ArgumentMultimap` for each entity.
-    * Pros:
-        * Less cluttered, only prefixes for that entity will be addressed
-        * Can use prefixes used in different entities for different arguments
-    * Cons:
-        * More code duplication, as there are shared prefixes
-        * Might be harder to track shared prefixes, causing confusion to users
+  * **Pros**: Less cluttered, only prefixes for that entity will be addressed. Prefixes used in different entities can also be used for different arguments.
+  * **Cons**: More code duplication, as there are shared prefixes. Might be harder to track shared prefixes, causing confusion to users.
 
 <br>
 
@@ -582,37 +547,26 @@ Context: The `ArgumentMultimap` is used across different entities.
 
 **Aspect: How to show appointment and person lists**
 <br>
-Context: There are two entity types (appointment and person) being managed in DocTrack
+Context: There are two entity types (appointment and person) being managed in DocTrack.
 <br>
-* **Alternative 1 (current choice):** Show lists as two separate panels side by side
-    * Pros:
-        * Easier to see all information at once
-        * Easier to cross reference when doing `add appt` or `edit appt` commands, which may need information about person ID
-    * Cons:
-        * More verbose and could result in information overload
-* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command
-    * Pros:
-        * Information is simpler to digest
-    * Cons:
-        * More overhead of handling switching between lists
-        * Difficult to cross reference when typing certain commands
+* **Alternative 1 (current choice):** Show lists as two separate panels side by side.
+  * **Pros**: Easier to see all information at once, and easier to cross-reference when doing `add appt` 
+    or `edit appt` commands, which may need information about `personId`.
+  * **Cons**: More verbose and could result in information overload.
+* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command.
+  * **Pros**: Information is simpler to digest.
+  * **Cons**: More overhead of handling switching between lists, and difficult to cross-reference when typing certain commands.
 
 <br>
 
 **Aspect: Color Scheme**
 <br>
-* **Alternative 1 (current choice):** Create new red, white and gray color scheme
-    * Pros:
-        * Creates brand identity
-        * Makes the GUI more appealling to the target audience
-    * Cons:
-        * Constant oversight needed to maintain color scheme in future feature enhancements
-* **Alternative 2:** Use the original AB3 gray color schee
-    * Pros:
-        * No extra effort needed
-    * Cons:
-        * Colors are not appealing
-        * Colors are not professional and do not suit target audience
+* **Alternative 1 (current choice):** Create new red, white and gray color scheme.
+    * **Pros**: Creates brand identity, makes the GUI more appealing to the target audience.
+    * **Cons**: Constant oversight needed to maintain color scheme in future feature enhancements.
+* **Alternative 2:** Use the original AB3 gray color scheme
+    * **Pros**: No extra needed to maintain color scheme. 
+    * **Cons**: Colors are not appealing and not professional, they might not suit the target audience.
 
 <br>
 
