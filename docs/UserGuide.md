@@ -321,7 +321,7 @@ Format: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE e/EMAIL a/ADDRESS`
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Examples:
-* `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` adds a patient named `John Doe` with the respective NRIC, gender, date of birth, phone number,email and address provided into MediBase3.
+* `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` adds a patient named `John Doe` with the respective NRIC, gender, date of birth, phone number, email and address provided into MediBase3.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
