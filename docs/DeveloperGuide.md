@@ -645,7 +645,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a person with all details
    1. Prerequisites: There is at least one contact in the list.
-   2. Test case: `edit 1 p/9999000` 
+   2. Test case: `edit 1 p/9999000`
    3. Expected: The phone number of the first person is updated to 9999000.
    - The status bar shows the following:
      Edited Person: Alex Yeoh; Phone: 99990000; Email...
