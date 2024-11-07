@@ -115,6 +115,7 @@ public class CsvGoodsStorage implements GoodsStorage {
         }
 
         goodsReceiptList.ifPresent(receiptLog::setReceipts);
+
         return Optional.of(receiptLog);
     }
 

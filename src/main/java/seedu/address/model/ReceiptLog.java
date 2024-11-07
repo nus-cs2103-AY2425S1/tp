@@ -34,6 +34,7 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
     public void resetData(ReadOnlyReceiptLog toBeCopied) {
         requireNonNull(toBeCopied);
         setReceipts(toBeCopied.getReceiptList());
+        receipts.autoMarkCompletedDeliveries();
     }
 
     /**
@@ -70,6 +71,14 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
      */
     public void setReceipts(List<GoodsReceipt> receipts) {
         this.receipts.setReceipts(receipts);
+    }
+
+    /**
+     * Wrapper function for updating of delivery status
+     *     in the internal list.
+     */
+    public void updateReceiptsDeliveryStatus() {
+        this.receipts.autoMarkCompletedDeliveries();
     }
 
     /**
