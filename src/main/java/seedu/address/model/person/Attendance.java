@@ -13,8 +13,8 @@ import java.time.temporal.IsoFields;
  */
 public class Attendance {
 
-    public static final String MESSAGE_CONSTRAINTS = "Attendance must be in date format: dd/MM/yyyy "
-            + "and cannot be a future date";
+    public static final String MESSAGE_CONSTRAINTS = "Invalid date or format! \n"
+            + "Attendance must be a valid date in the format: dd/MM/yyyy and cannot be a future date";
     public static final DateTimeFormatter VALID_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public final LocalDate attendanceDate;
