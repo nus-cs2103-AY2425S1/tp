@@ -6,7 +6,12 @@
 
 <br>
 
-![](images/doctrack.png)
+<img src="images/doctrack.png" style="height: 100px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;"/>
+
 # **User Guide**
 
 <box type="info" light theme="primary">
@@ -14,8 +19,8 @@
 details, appointments, and treatment records.
 </box>
 
-With DocTrack, you can take the first step towards digitalisation of your practice!
-DocTrack aims to simplify your patient and appointment tracking process, by allowing you to
+With **DocTrack**, you can take the first step towards digitalisation of your practice!
+**DocTrack** aims to simplify your patient and appointment tracking process, by allowing you to
 - easily add and update patient and appointment records
 - delete records for regulation purposes
 - search for records based on important criteria such as dates and names
@@ -24,7 +29,12 @@ with an intuitive and user-friendly interface!
 To get started, you can read the introduction below, which shows all the different sections
 in this user guide.
 
+<!-- * Table of Contents -->
+<page-nav-print></page-nav-print>
+
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## **Introduction**
 
@@ -94,13 +104,11 @@ Having a problem? Read here to see some common issues that may arise while you a
 
 </box>
 
-
-<!-- * Table of Contents -->
-<page-nav-print></page-nav-print>
-
 <br>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 <br>
 
@@ -130,7 +138,7 @@ Having a problem? Read here to see some common issues that may arise while you a
     cd HOME_FOLDER
     java -jar DocTrack.jar
    ```
-    For example, if you copied `DocTrack.jar` into the folder `C:/Users/user/Documents`,
+    **_Example:_** if you copied `DocTrack.jar` into the folder `C:/Users/user/Documents`,
     run the commands:
     ```
    cd C:/Users/user/Documents
@@ -174,6 +182,8 @@ This would be a good time to run the `clear person` command, to start afresh wit
     <a href="#general-commands" class="badge bg-dark">General commands</a>
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ---
 
@@ -228,6 +238,8 @@ If you are using a PDF version of this document, be careful when copying and pas
 </box>
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 <br>
 
@@ -286,6 +298,8 @@ specific to those commands.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ---
 
 ### **Person Commands**
@@ -338,6 +352,16 @@ _**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 - `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal` adds a person named `Betsy Crowe` with email `betsycrowe@example.com`, address `Newgate 
   Prison`, phone number `1234567`, status `recovered`, and the tags `friend` and `criminal`.
 
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a> 
+<a href="#person-commands" class="badge bg-dark">Person commands</a> 
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
+
 <br>
 
 ##### Listing all persons : `list person`
@@ -345,6 +369,16 @@ _**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 You can view a list of all persons in the patient book.
 
 **Format**: `list person` shows the list of all patients on the screen.
+
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
 
 <br>
 
@@ -373,6 +407,16 @@ Edits an existing patient in DocTrack.
 **Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags
 </box>
 
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
+
 <br>
 
 ##### Finding persons by name: `find person`
@@ -394,6 +438,16 @@ You can find person(s) whose **names** contain any of the given keywords.
 - `find person n/John` returns `john` and `John Doe` 
 - `find person n/alex david` returns `Alex Yeoh`, `David Li`<br><br>
   ![result for 'find person alex david'](images/findAlexDavidResult.png)
+
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
 
 <br>
 
@@ -423,6 +477,16 @@ Note that deleting a person will also delete all related appointments.
 - `list` followed by `delete person 2` deletes the second person in the list.
 - `find Betsy` followed by `delete person 1` deletes the first person in the results of the `find` command.
 
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
+
 <br>
 
 ##### Clearing all persons : `clear person`
@@ -438,8 +502,19 @@ Note that this will also clear the appointment data.
 
 </box>
 
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ---
 
@@ -498,6 +573,16 @@ _**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 1
 
 <br>
 
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
+
 <br>
 
 ##### Listing all appointments : `list appt`
@@ -505,6 +590,16 @@ _**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 1
 You can view a list of all appointments in the appointment book.
 
 **Format**: `list appt`
+
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
 
 <br>
 
@@ -525,6 +620,18 @@ You can an existing appointment in appointment book.
 
 <br>
 
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
+
+<br>
+
 ##### Finding appointments by name and date: `find appt`
 
 You can find appointments whose person names and / or dates contain any of the given keywords.
@@ -539,11 +646,28 @@ You can find appointments whose person names and / or dates contain any of the g
 - `find appt n/John` returns appointments with patients named `John`.
 - `find appt d/2024-12-05` returns appointments on `2024-12-05`.
 - `find appt n/John d/2024-12-05` returns appointments with patients named `John`, and is on `2024-12-05`.
+
+<br>
+
 ![result for 'find appt John and 2024-12-05'](images/findApptExample.png)
+
+<br>
 
 <box type="tip" light>
 
 **Tip:** Use the `find appt` command to filter out appointments for a certain day or patient
+
+</box>
+
+<br>
+
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
 
 </box>
 
@@ -569,11 +693,26 @@ You can delete a specified appointment from appointment book.
 - `find appt d/2024-12-05` followed by `delete appt 1` deletes the first appointment in the results of the 
   `find` command.
 
+
+<br>
+
 <box type="tip" light>
 
 **Tip:** Use the `list appt` to check the index of the appointment before deleting one.
 
 </box>
+<br>
+
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
+
 <br>
 
 ##### Clearing all appointments : `clear appt`
@@ -590,6 +729,20 @@ This action is irreversible. Ensure you have a backup of the appointment data be
 </box>
 
 <br>
+
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
+
+<br>
+
+<div style="page-break-after: always;"></div>
 
 ---
 
@@ -616,11 +769,35 @@ You will be able to view a help window that directs you to this user guide.
 
 <br><sbr>
 
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
+
+<br>
+
 ##### Exiting the program : `exit`
 
 You will be able to exit the DocTrack application. 
 
 **Format**: `exit`
+
+<br>
+
+<box style="background: #eeeeee">
+
+**Navigate back to the subsections here:**
+<a href="#command-overview" class="badge bg-primary">Command overview</a>
+<a href="#person-commands" class="badge bg-dark">Person commands</a>
+<a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
+<a href="#general-commands" class="badge bg-dark">General commands</a>
+
+</box>
 
 <br>
 
@@ -648,6 +825,8 @@ For advanced users, feel free to update patient and appointment data directly by
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ---
 
 <br>
@@ -655,14 +834,67 @@ For advanced users, feel free to update patient and appointment data directly by
 ## **FAQ**
 
 **Q**: How is my data stored?<br>
-**A**: Your data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, while the appointments are stored in the `appointmentbook.json` file.
+**A**: Your data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, 
+while the appointments are stored in the `appointmentbook.json` file.
+
 Examples:
 
-<img src="images/json/addressbook.png" alt="Address Book JSON" width="420">
+An example of how the persons are stored:
 
+```json
+{
+  "persons": [
+    {
+      "personId": 0,
+      "name": "Alex Yeoh",
+      "phone": "87438807",
+      "email": "alexyeoh@example.com",
+      "address": "Blk 30 Geylang Street 29, #06-40",
+      "status": "Recovering",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "personId": 1,
+      "name": "Bernice Yu",
+      "phone": "99272758",
+      "email": "berniceyu@example.com",
+      "address": "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+      "status": "Stable",
+      "tags": [
+        "colleagues",
+        "friends"
+      ]
+    }
+  ]
+}
+```
 
-<img src="images/json/appointmentBook.png" alt="Appointment Book JSON" width="390">
+An example of how the appointments are stored:
 
+```json
+{
+  "appointments": [
+    {
+      "appointmentId": 0,
+      "appointmentType": "Consultation",
+      "appointmentDateTime": "2024-10-20T09:30",
+      "personId": 0,
+      "sickness": "Flu",
+      "medicine": "Antiviral"
+    },
+    {
+      "appointmentId": 1,
+      "appointmentType": "Follow-up",
+      "appointmentDateTime": "2024-10-22T14:00",
+      "personId": 1,
+      "sickness": "Diabetes",
+      "medicine": "Insulin"
+    }
+  ]
+}
+```
 <br><br>
 
 **Q**: How do I transfer my data (in the `addressbook.json` and `appointmentbook.json` files) to another 
@@ -698,5 +930,9 @@ folder, you can copy these files to another location as a backup.
 <br>
 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+<br>
+
+3. On **MacOS systems**, the bold fonts may appear slightly clipped.
 
 <br>
