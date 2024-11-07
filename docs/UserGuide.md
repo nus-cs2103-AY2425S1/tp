@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for managing contacts just for you Financial Advisors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FART can get your contact management tasks done faster than traditional GUI apps.
+Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for managing contacts just for you Financial Advisors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, F.A.R.T can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -19,7 +19,7 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-4/tp/releases/tag/v1.4).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your FART.
+3. Copy the file to the folder you want to use as the _home folder_ for your F.A.R.T.
    1. A good home folder would be the Downloads folder as it makes the next step easier.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fart_in_a.jar` command to run the application.<br>
@@ -34,7 +34,7 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a contact named `John Doe` to the FART book and automatically marks them as unpaid.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a contact named `John Doe` to the F.A.R.T book and automatically marks them as unpaid.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -78,21 +78,21 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Need help navigating F.A.R.T? This command opens a window that has all you need.
 
 ![help message](images/newHelp.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a client: `add`
 
-Adds a person to the FART book.
+Met a potential client or someone new? This command adds a client to the F.A.R.T book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] b/BIRTHDAY [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A client can have any number of tags (including 0)
 </div>
 
 Examples:
@@ -100,35 +100,34 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/11 09 2001 t/criminal`
 
 **Note:**
-1. As of version 1.4, only valid email address (in the form local-part@domain.com) and Singapore phone numbers are accepted.
+1. As of version 1.5, only valid email address (in the form name@domain.com) and **Singapore** phone numbers are accepted.
 Birthdays should be added in DD MM YYYY format.
-2. You may add duplicate contacts (i.e., contacts with the same name, case insensitive) but the AddressBook will prompt you
+2. You may add duplicate contacts (i.e., contacts with the same name, case-insensitive) but the F.A.R.T book will prompt you
 to confirm that you are adding a duplicate contact.
 
-### Listing all persons : `list`
+### Listing all clients : `list`
 
-Shows a list of all persons in the FART book.
+Need to have a quick view of everyone in your F.A.R.T book or reset it after filtering? This command displays a list of all clients in the F.A.R.T book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a client : `edit`
 
-Edits an existing person in the FART book.
+Need to update an client's details? This command edits an existing client in the F.A.R.T book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive whole number** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* Existing values will be updated to what you have currently typed in.
+* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
+* You can **remove all** the client’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by attribute: `find`
+### Locating clients by attribute: `find`
 
 Need to quickly find a client by their address or something other than their name? Use this command to find clients whose attributes contain any of the given keywords.
 
@@ -136,110 +135,134 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…�
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`.
 * At least one of the optional fields must be provided.
-* Keywords are matched against the attribute that is inputted (i.e. searching for names will match against all names).
+* Keywords are matched against the attribute that you specified (i.e. searching for names will match against all names).
 * Partial matches of a keyword will also be returned. e.g. ``9123`` will return clients
 with the phone number ``91234567``.
 
 Examples:
-* `find n/John` returns clients with names `john` and `John Doe`.
+* `find n/John` returns clients with **names** `john` and `John Doe`.
 * `find a/serangoon` returns ``Bernice Yu``, ``David Li``.
 ![result for 'find serangoon'](images/findSerangoonResult.png)
 
-### Deleting a person : `delete`
+### Deleting a client : `delete`
 
-Deletes the specified person from the FART book.
+Need to remove someone from your list? This command deletes the specified client from the F.A.R.T book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive whole number** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the FART book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd client in the F.A.R.T book.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 **Note:**
-1. As a `delete` command cannot be undone, the FART Book will first prompt you to confirm that the
- contact that you want to delete is correct. If you select `No`, the deletion will be aborted.
+1. As a `delete` command cannot be undone, the F.A.R.T Book will first prompt you to confirm if the
+ contact that you want to delete is correct. If you select `No`, the operation will be aborted and the client will not be deleted.
+![Delete confirmation window](images/deletewindow.png)
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the FART book.
+Want to get rid of all contacts or the sample data we've provided? This command clears all entries from the F.A.R.T book.
 
 Format: `clear`
 
 **Note:**
-1. A `clear` command cannot be undone, the FART Book will first prompt you to confirm that the
+1. A `clear` command cannot be undone, the F.A.R.T Book will first prompt you to confirm that the
    you wish to clear the book. If you select `No`, the clear action will be aborted.
-2. If you do change your mind after clearing the FART book, you may retrieve the sample data again
-by deleting the `addressbook.json` file in the `data` folder, then launching FART again.
+2. If you do change your mind after clearing the F.A.R.T book, you may retrieve the sample data again
+by deleting the `addressbook.json` file in the `data` folder, then launching F.A.R.T again.
 
-### Marking a person as paid: `paid`
+### Marking a client as paid: `paid`
 
-Marks the specified person from the FART book as paid.
+Need to track which clients have paid their policy premiums for the current period? This command marks the specified client from the F.A.R.T book as paid.
 
 Format: `paid INDEX f/FREQUENCY`
 
-* Marks the person at the specified `INDEX` as paid.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The frequency is the number of months between policy renewals and it can only be 1, 3, 6, or 12.
-* The frequency will indicate which month the person will be automatically updated to unpaid.
+* Marks the client at the specified `INDEX` as paid.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive whole number** 1, 2, 3, …​
+* The frequency is the number of months between policy renewals, and it can only be 1, 3, 6, or 12.
+* The frequency will indicate which month the client will be automatically updated to unpaid.
+
 Examples:
-* `list` followed by `paid 2 f/ 6` marks the 2nd person in the FART book as paid and the policy renewal frequency to 6 months.
-* `find Betsy` followed by `paid 1 f/ 6` marks the 1st person in the results of the `find` command as paid.
+* `list` followed by `paid 2 f/6` marks the 2nd client in the F.A.R.T book as paid and sets their policy renewal frequency to 6 months.
+* `find Betsy` followed by `paid 1 f/6` marks the 1st client in the results of the `find` command as paid.
 
-### Marking a person as unpaid: `unpaid`
+### Marking a client as unpaid: `unpaid`
 
-Marks the specified person from the FART book as unpaid.
+Need to manually mark a client that has yet to pay? This command marks the specified client from the F.A.R.T book as unpaid.
 
 Format: `unpaid INDEX`
 
-* Marks the person at the specified `INDEX` as unpaid.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Marks the client at the specified `INDEX` as unpaid.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive whole number** 1, 2, 3, …​
 * Changes the policy renewal frequency to 0
 
 Examples:
-* `list` followed by `unpaid 2` marks the 2nd person in the FART book as unpaid.
-* `find Betsy` followed by `unpaid 1` marks the 1st person in the results of the `find` command as unpaid.
+* `list` followed by `unpaid 2` marks the 2nd client in the F.A.R.T book as unpaid.
+* `find Betsy` followed by `unpaid 1` marks the 1st client in the results of the `find` command as unpaid.
+
+### Upload a client's profile picture \[WINDOWS ONLY\]
+
+Too many clients? Keep track of their faces by uploading a profile picture of them.
+
+Format: `upload INDEX`
+
+* This opens a file browser which you can choose **PNG images** for the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive whole number** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+* This feature is for Windows users only. Mac and Linux users may encounter errors if they use this feature. Support for the other OSes will be released in future versions!
+* The profile picture may look weird if the image chosen is extremely small, too wide or too thin. For best results, we recommend square images approximately 300px x 300px. 
+You can achieve this by cropping with your computer's image editor or an online one like this one from [Adobe](https://www.adobe.com/express/feature/image/crop).
+* Only **PNG** images are supported. Please ensure your chosen image is in **PNG** format.
+
+</div>
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Done with F.A.R.T.? This command closes the program. Your data is automatically saved.
 
 Format: `exit`
 
 ### Viewing a Client's Details
 * When the app starts, a placeholder on the right panel will prompt you to select a contact on the list.
-* **Double-click** on a contact in the contact list to bring up a more detailed view of the person, including information like address and birthday
+* **Double-click** on a contact in the contact list to bring up a more detailed view of the client, including information like address and birthday.
 
 <div markdown="block" class="alert alert-info">
   **:information_source: Note!**<br>
-The displayed contact will persist and edits will not be reflected until you select another contact or close the FART book.
+The displayed contact will persist and edits will not be reflected until you select another contact or close the F.A.R.T book.
 If you made any changes to the current contact on display, kindly double click to refresh the detailed view.
 </div>
 
 ### Visual Features
-FART has some handy visual cues that highlight certain clients.
+F.A.R.T has some handy visual cues that highlight certain clients.
 
-| Feature                   | Details                                                                                                                                                                                                                                                                                                                         | Examples |
-|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
-| **Net Worth Tagging**     | You can add tags to clients that say `"highnetworth"`, `"midnetworth"`, `"lownetworth"` <br>that will be highlighted. <br><br> Each client can only have one net worth tag at a time.<br><br>(e.g. if you add a `"highnetworth"` tag to a client who already has a "midnetworth" tag, <br>then the existing tag will be removed) |          |
-| **Birthday Highlighting** | When a client's birthday is approaching or has recently passed (**7 days** before and after <br> the current date), his name will turn orange. Take this chance to wish him a happy birthday!                                                                                                                                   |          |
+| Feature                   | Details                                                                                                                                                                                                                                                                                                                  | Examples                                                                                                                       |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| **Net Worth Tagging**     | You can add tags to clients that say `"highnetworth"`, `"midnetworth"`, `"lownetworth"` that will be highlighted. <br><br> Each client can only have one net worth tag at a time.<br><br>(e.g. if you add a `"highnetworth"` tag to a client who already has a "midnetworth" tag, then the existing tag will be removed) | ![highnetworth](images/highnetworth.png)<br/>![midnetworth](images/midnetworth.png)<br/>![lownetworth](images/lownetworth.png) |
+| **Birthday Highlighting** | When a client's birthday is approaching or has recently passed (**7 days** before and after <br> the current date), their name will turn orange. It will also remind you if you mouse over their name. <br><br>Take this chance to wish him a happy birthday!                                                            | ![birthday color](images/birthdaycolor.png)                                                                                    | 
+
+If you would like to disable these visual features, click on the `File` tab at the top  > Uncheck `Enable Visuals`.
 
 ### Saving the data
 
-FART data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+F.A.R.T data is saved in your computer automatically after any command that changes the data. There is no need to save manually.
 The location of where the data is stored is specified at the bottom status bar of the app.
 
 ### Editing the data file
 
-FART data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+F.A.R.T data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, FART will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the FART to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, F.A.R.T will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the F.A.R.T to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -247,7 +270,7 @@ Furthermore, certain edits can cause the FART to behave in unexpected ways (e.g.
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FART home folder.
+**A**: Install this app in the other computer and overwrite the empty data file it creates, with the file that contains the data of your previous F.A.R.T home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
