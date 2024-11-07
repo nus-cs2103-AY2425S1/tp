@@ -14,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Event;
@@ -108,12 +109,22 @@ class JsonSerializableAddressBook {
             addressBook.addWedding(wedding);
             if (wedding.hasPartner1()) {
                 addressBook.getPerson(wedding.getPartner1()).addWedding(wedding);
+                // Replaces the Wedding object's Person with the Person object from the Wedlinker
+                wedding.setPartner1(addressBook.getPerson(wedding.getPartner1()));
             }
             if (wedding.hasPartner2()) {
                 addressBook.getPerson(wedding.getPartner2()).addWedding(wedding);
+                // Replaces the Wedding object's Person with the Person object from the Wedlinker
+                wedding.setPartner2(addressBook.getPerson(wedding.getPartner2()));
             }
             for (Person person : wedding.getGuestList()) {
                 addressBook.getPerson(person).addWedding(wedding);
+                // Replaces the Wedding object's Person with the Person object from the Wedlinker
+                try {
+                    wedding.setGuest(person, addressBook.getPerson(person));
+                } catch (PersonNotFoundException p) {
+                    wedding.addToGuestList(addressBook.getPerson(person));
+                }
             }
         }
         // load tags and weddings from people after loading weddings and tags, because if tag or wedding already exist,
@@ -144,6 +155,12 @@ class JsonSerializableAddressBook {
             if (addressBook.hasWedding(wedding) || !Wedding.isValidWeddingName(wedding.getWeddingName().toString())) {
                 newWeddingList.add(addressBook.getWedding(wedding));
                 continue;
+            }
+            // If the wedding does not contain the person, add them to the guest list of the wedding by default
+            if (wedding.hasPerson(person)) {
+                wedding.setGuest(wedding.getPerson(person), addressBook.getPerson(person));
+            } else {
+                wedding.addToGuestList(addressBook.getPerson(person));
             }
             addressBook.addWedding(wedding);
             newWeddingList.add(addressBook.getWedding(wedding));

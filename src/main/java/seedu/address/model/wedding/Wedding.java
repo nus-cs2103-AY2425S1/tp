@@ -1,10 +1,14 @@
 package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
+import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 
 /**
  * Represents a Wedding in the system.
@@ -119,6 +123,36 @@ public class Wedding {
      */
     public void addToGuestList(Person person) {
         this.guestList.add(person);
+    }
+
+    /**
+     * Replaces a person in the guest list with a new person
+     */
+    public void setGuest(Person oldPerson, Person newPerson) {
+        int index = guestList.indexOf(oldPerson);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        guestList.set(index, newPerson);
+    }
+
+    /**
+     * Checks if the wedding has a given person as either of the partners or in the guest list.
+     */
+    public boolean hasPerson(Person person) {
+        return (person.isSamePerson(partner1)
+                || person.isSamePerson(partner2)
+                || guestList.stream().anyMatch(person::isSamePerson));
+    }
+
+    /**
+     * Returns the Wedding's copy of a person
+     */
+    public Person getPerson(Person person) {
+        return person.isSamePerson(partner1) ? partner1
+                : person.isSamePerson(partner2) ? partner2
+                : guestList.stream().filter(person::isSamePerson).findFirst().orElse(null);
     }
 
     /**
