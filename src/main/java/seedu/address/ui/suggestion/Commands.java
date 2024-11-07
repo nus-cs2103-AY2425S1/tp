@@ -24,7 +24,7 @@ public enum Commands {
             new String[]{"n/", "d/", "v/", "w/"}),
     VIEWWEDDING("vieww", "vieww INDEX/WEDDING_NAME", new String[]{}),
     DELETEWEDDING("deletew", "deletew INDEX/WEDDING_NAME", new String[]{}),
-    ASSIGN("assign", "assign INDEX/NAME [r/ROLE] [w/WEDDING_INDEX...]",
+    ASSIGN("assign", "assign INDEX [r/ROLE] [w/WEDDING_INDEX...]",
             new String[]{"r/", "w/"});
 
     private final String commandName;

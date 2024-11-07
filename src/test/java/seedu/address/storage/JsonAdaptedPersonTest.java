@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.GEORGE_WEDDING;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,8 +22,16 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.WeddingBuilder;
 
 public class JsonAdaptedPersonTest {
+    private static final Wedding GEORGE_WEDDING = new WeddingBuilder().withName("George Jane Wedding")
+            .withVenue("Sentosa").withDate("2025-01-01").build();
+    private static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com").withPhone("98756432").withRole("caterer")
+            .addWeddingJob(GEORGE_WEDDING).build();
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";

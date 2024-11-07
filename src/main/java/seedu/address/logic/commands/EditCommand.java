@@ -50,7 +50,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "There are no changes to make.";
     public static final String MESSAGE_DUPLICATE_PHONE = "This number already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
     public static final String MESSAGE_EDIT_EMPTY_LIST_ERROR = "There is nothing to edit.";
@@ -87,13 +87,6 @@ public class EditCommand extends Command {
         }
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        Wedding ownWedding = editedPerson.getOwnWedding();
-        if (ownWedding != null) {
-            Wedding editedWedding = new Wedding(ownWedding.getName(), new Client(editedPerson), ownWedding.getDate(),
-                    ownWedding.getVenue());
-            model.updatePersonEditedWedding(ownWedding, editedWedding);
-            model.setWedding(ownWedding, editedWedding);
-        }
 
         if (personToEdit.isSamePerson(editedPerson) || model.hasPerson(editedPerson)) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -111,6 +104,14 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+        Wedding ownWedding = editedPerson.getOwnWedding();
+        if (ownWedding != null) {
+            Wedding editedWedding = new Wedding(ownWedding.getName(), new Client(editedPerson), ownWedding.getDate(),
+                    ownWedding.getVenue());
+            model.setWedding(ownWedding, editedWedding);
+            model.updatePersonEditedWedding(ownWedding, editedWedding);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }

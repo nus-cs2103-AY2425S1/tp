@@ -1,12 +1,11 @@
 {
- "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "role" : "florist",
-    "ownWedding" : 536418941,
+    "ownWedding" : 1705399333,
     "weddingJobs" : [ ]
   }, {
     "name" : "Benson Meier",
@@ -15,7 +14,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "role" : "caterer",
     "ownWedding" : 0,
-    "weddingJobs" : [ 528684710 ]
+    "weddingJobs" : [ -1971726178 ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -23,17 +22,16 @@
     "address" : "wall street",
     "role" : "florist",
     "ownWedding" : 0,
-    "weddingJobs" : [ 528684710 ]
-  },
-    {
+    "weddingJobs" : [ -1971726178 ]
+  }, {
     "name" : "George Best",
     "phone" : "94824422",
     "email" : "anna@example.com",
     "address" : "4th street",
     "role" : "Client",
-    "ownWedding" : 528684710,
+    "ownWedding" : -1971726178,
     "weddingJobs" : [ ]
-  }],
+  } ],
   "weddings" : [ {
     "name" : "Alice Adam Wedding",
     "client" : {
