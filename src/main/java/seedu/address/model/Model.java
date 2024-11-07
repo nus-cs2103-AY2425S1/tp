@@ -112,7 +112,6 @@ public interface Model {
      */
     Set<Subject> getUniqueSubjectsInLessons(Person person);
 
-  
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
