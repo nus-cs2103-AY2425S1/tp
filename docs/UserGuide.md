@@ -210,7 +210,7 @@ Format: `deltag INDEX t/TAG`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Only one tag can be deleted at a time.
-
+* The list of the tag will be updated accordingly.
 Examples:
 * `deltag 1 t/friend` 
 deletes the friend tag of the first person in the list.
