@@ -362,6 +362,8 @@ Examples:
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## Event-related Commands
@@ -458,7 +460,6 @@ Examples:
 ### Filtering volunteers by availability for an event: `/e filter`
 Need to find volunteers who are free for a specific event?
 It will filter the volunteer list to only show volunteers who can be assigned to the event specified by `INDEX`.
-After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers as per normal.
 
 Format: `/e filter INDEX`
 
@@ -509,6 +510,8 @@ These known issues are actively being worked on, and we are continuously improvi
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 ### General Commands
@@ -519,6 +522,8 @@ These known issues are actively being worked on, and we are continuously improvi
 | **[Export database to a CSV file](#export-database-to-a-csv-file--export)**    | `export` |
 | **[View help](#viewing-help--help)**                                           | `help`   |
 | **[Exit the program](#exiting-the-program--exit)**                             | `exit`   |
+
+<div style="page-break-after: always;"></div>
 
 ### Volunteer Commands
 
