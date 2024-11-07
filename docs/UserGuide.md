@@ -538,34 +538,23 @@ This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12
 
 #### Adding a Task to ALL Groups: `add_t`, `at`
 
-Explanation of what command does.
+Adds a task to all groups.
 
 **Format**: `add_t tn/TASK_NAME td/TASK_DEADLINE (YYYY-MM-DD HHmm)`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. If the task specified already exists in some groups, it will be added to all other groups.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-<box type="warning" seamless>
+##### Usage Scenario
 
-**Caution:**
-The command will stop running the moment it hits an error.
+###### Scenario #1: Executing `add_t tn/Submit Postmortem td/2024-10-20 1800`
+1. The task will be added to all groups.
 
-For example `insert your own example`
-
-If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
-`CS2103-F13-1`.
-
-</box>
-
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
-
-###### Scenario #1
+###### Scenario #2: Executing `add_t tn/Submit Postmortem td/2024-10-20`
+1. An error message will be shown because the task deadline has an incorrect format.
 
 This screenshot shows the result of executing `add_t tn/Submit Postmortem td/2024-10-20 1800`.
 
@@ -728,22 +717,30 @@ This screenshot shows the result of executing `edit_t i/2 tn/PE`.
 
 #### Mark a Task for a Group: `mark_t`, `mt`
 
-Explanation of what command does.
+Marks a task as done or undone.
 
 **Format**: `mark_t gn/GROUP_NAME i/INDEX`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. You are unable to specify whether to mark a task as done or undone.
+2. If a task is done it will be marked as undone, and vice versa.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario 
 
-Add more scenarios if necessary
+###### Scenario #1: Marking an undone task
+1. Executing `mark_t` will mark the task as done.
 
-###### Scenario #1
+###### Scenario #2: Marking a done task
+1. Executing `mark_t` will mark the task as undone.
+
+###### Scenario #3: Executing the command `mark_t gn/CS2103-F15-2 i/2` when the group does not exist.
+1. The system will display an error message.
+
+###### Scenario #4: Executing the command `mark_t gn/CS2103-F15-2 i/10` when there are only 5 tasks.
+1. The system will display an error message because the task index does not exist.
 
 This screenshot shows the result of executing `mark_t gn/CS2103-F12-2 i/2`.
 
@@ -774,24 +771,19 @@ This screenshot shows the result of executing `find_t q/consulation`.
 
 #### Sorting Tasks: `sort_t`, `st`
 
-Explanation of what command does.
+Sorts the task list by deadline in ascending order.
 
 **Format**: `sort_t`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario 
 
-Add more scenarios if necessary
-
-###### Scenario #1
-
-This screenshot shows the result of executing `sort_t`.
+###### Scenario #1: Executing command `sort_t`
+1. The task list will be sorted by deadline.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -803,13 +795,35 @@ This screenshot shows the result of executing `sort_t`.
 
 Undoes the previous command ran.
 
-Format: `undo`
+**Format**: `undo`
+
+##### Notes
+
+1. If you first open the application, you will be unable to undo because there is no data to undo. You can only undo 
+   after you have made changes to the application.
+2. You can only undo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands), and 
+   not the commands which do not make any changes (find, list, help, exit commands).
+3. For every change you make to the application, it will be added to the version history of the application.
+4. The application stores up to 100 version histories. Hence you will only be able to undo up to 100 of your most recent
+   versions.
+5. For information on the constraints for each parameter used in this command, go
+   to [Command Parameters](#command-parameters).
+
 
 #### Redoing change: `redo`
 
-Redoes the previous command ran.
+Redoes the previously undone command.
 
 Format: `redo`
+
+##### Notes
+
+1. If you first open the application, you will be unable to redo because there is no data to redo. You can only 
+   redo the application after at least one undo has been executed.
+2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands), and
+   not the commands which do not make any changes (find, list, help, exit commands).
+5. For information on the constraints for each parameter used in this command, go
+   to [Command Parameters](#command-parameters).
 
 #### Viewing help : `help`
 

@@ -1,4 +1,7 @@
 @startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
 participant ":LogicManager" as LM
 participant ":AddressBookParser" as ABP
 participant ":UndoCommandParser" as UCP
