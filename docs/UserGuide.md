@@ -220,8 +220,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
@@ -241,8 +240,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 
@@ -313,19 +311,19 @@ Expected output:
 Performs aggregation operation on the current filtered list of people.
 
 Format: `aggGrade OPERATION [n/TEST_NAME]`
-
 `OPERATION` can be:
 
-- `var`: Taking variance
-- `stddev`: Taking standard deviation
-- `mean`: Taking mean
-- `max`: Taking maximum
-- `min`: Taking minimum
-- `median`: Taking median
+- `var`: Taking **variance**
+- `stddev`: Taking **standard deviation**
+- `mean`: Taking **mean**
+- `max`: Taking **maximum**
+- `min`: Taking **minimum**
+- `median`: Taking **median**
 
-Without the `[n/TEST_NAME]` parameter, the command performs the aggregation operation on the overall grade of the current filtered list.
+Without the `[n/TEST_NAME]` parameter, the command performs the selected aggregation `OPERATION` on the overall grade of the current filtered list.
 
-When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command changes to perform aggregation only on `TEST_NAME` tests of the current filtered list.
+When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command changes to perform the selected aggregation `OPERATION` only on
+`TEST_NAME` tests of the current filtered list.
 
 Example:
 
