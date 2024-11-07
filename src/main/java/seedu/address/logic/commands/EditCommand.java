@@ -71,6 +71,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> fullPersonList = model.getFullPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
@@ -79,7 +80,16 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        // Handles case where edit command changes one of the two fields which uniquely identifies a person, contact
+        // or email. The editedPerson is considered the same person as personToEdit and is counted as a duplicate.
+        // If there are 2 duplicates, it means that there is another existing contact with the same identifier.
+        // While there should not be a case where there are 3 or more duplicates, good to be defensive.
+        if (personToEdit.isSamePerson(editedPerson) && countDuplicatePerson(fullPersonList, editedPerson) >= 2) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+        // Handles case where edit command changes both fields that uniquely identify a person. In this case, there
+        // should not be any duplicates at all.
+        if (!personToEdit.isSamePerson(editedPerson) && countDuplicatePerson(fullPersonList, editedPerson) >= 1) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -102,6 +112,21 @@ public class EditCommand extends Command {
         Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedSkills);
+    }
+
+    /**
+     * Counts and returns the number of duplicate persons in the provided list based on the {@code isSamePerson} check
+     * against the specified person.
+     *
+     * @param personList The list of persons to check for duplicates.
+     * @param personToCompare The specified person to be compared against each person in {@code personList}.
+     */
+    private static long countDuplicatePerson(List<Person> personList, Person personToCompare) {
+        long count = personList.stream()
+                .filter(p -> p.isSamePerson(personToCompare))
+                .count();
+
+        return count;
     }
 
     @Override
