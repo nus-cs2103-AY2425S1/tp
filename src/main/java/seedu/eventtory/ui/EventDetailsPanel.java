@@ -79,6 +79,10 @@ public class EventDetailsPanel extends UiPart<Region> {
             updateAssignedVendors();
         });
 
+        logic.getFilteredVendorList().addListener((ListChangeListener<? super Vendor>) change -> {
+            updateAssignedVendors();
+        });
+
         VendorListPanel vendorListPanel = new VendorListPanel(assignedVendors, "Assigned Vendors",
                 startIndexOfAssignedVendors);
         detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
