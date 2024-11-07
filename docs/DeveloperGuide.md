@@ -45,6 +45,7 @@ title: Developer Guide
     10. [Saving Data](#saving-data)
 11. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 12. [Appendix: Effort](#appendix-effort)
+
 ---
 
 ## **TalentSG**
@@ -289,9 +290,10 @@ We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a
 6. The execute method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `AddCommand`.
 7. The UI reflects this new list with added `Person`.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - For step 2, if the user does not have any arguments, the `AddCommand` object will NOT be created!
+</div>
 
 #### `AddCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of adding a person into TalentSG.
@@ -332,9 +334,10 @@ We will be using the user input `delete 1` as an example.
 6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
 7. The UI reflects this new list with deleted `Person`.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
+</div>
 
 #### `Delete Command` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
@@ -376,10 +379,11 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 6. The execute method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditCommand`.
 7. The UI reflects this updated list with the edited `Person`.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), a matching error will be shown on the screen and the sequence of action is terminated.
 - At step 3, if the user provides a category to edit to, and it is found that there is no such category in FastTrack, an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `EditCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of editing a person's details in TalentSG.
@@ -418,9 +422,10 @@ We will be using the user input `list` as an example.
 5. The execute method of `ListCommand` returns a `CommandResult` object, indicating the command was successful with the message "Listed all persons".
 6. The UI reflects the updated list of persons.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `list` (e.g. `list xxxxxx`), an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `ListCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of executing the `list` command in TalentSG, which lists all persons in the address book.
@@ -461,9 +466,10 @@ We will be using the user input `find John` as an example.
 6. The execute method of `FindCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FindCommand`.
 7. The UI reflects this updated filtered `Person` list.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `list` (e.g. `list xxxxxx`), an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `FindCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
@@ -504,9 +510,10 @@ We will be using the user input `filter Interviewed` as an example.
 6. The execute method of `FilterStatusCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FilterStatusCommand`.
 7. The UI reflects this updated filtered `Person` list.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid status is detected after `filter` (e.g. `filter Helloo`), an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `FilterStatusCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
@@ -545,9 +552,10 @@ We will be using the user input `delete 2` as an example.
 5. The execute method of `ViewCommand` returns a `CommandResult` object which stores the data regarding the completion of the `ViewCommand`.
 6. The UI reflects the `OverviewPanel` with the selected `Person`.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
+</div>
 
 #### `ViewCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
@@ -588,9 +596,10 @@ We will be using the user input `summary` as an example:
 7. The execute method of `SummaryCommand` returns a `CommandResult` object, encapsulating the summary message for display to the user.
 8. The UI then reflects this summarized breakdown of application statuses.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `summary` (e.g. `summary abc`), an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `SummaryCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of executing the `summary` command in TalentSG, which lists all persons in the address book.
@@ -627,9 +636,10 @@ We will be using the user input `help` as an example:
 
 The CommandResult object is then passed to the UI, which opens a panel displaying the help content.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `help` (e.g. `help a123`), an error will be shown and the sequence of action is terminated.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
