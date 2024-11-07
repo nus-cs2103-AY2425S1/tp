@@ -81,7 +81,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
+     * Parses the {@code lessons} into a {@code List<Lesson>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withLessons(String ... lessons) {
         this.lessons = SampleDataUtil.getLessonLst(lessons);

@@ -5,7 +5,8 @@ import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_PREFIX_FOR_FIND;
 import static tuteez.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -17,9 +18,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import tuteez.logic.commands.FindCommand;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.person.predicates.AddressContainsKeywordsPredicate;
 import tuteez.model.person.predicates.CombinedPredicate;
-import tuteez.model.person.predicates.LessonContainsKeywordsPredicate;
+import tuteez.model.person.predicates.LessonDayContainsKeywordsPredicate;
+import tuteez.model.person.predicates.LessonTimeContainsKeywordsPredicate;
 import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.person.predicates.TagContainsKeywordsPredicate;
 
@@ -31,18 +34,24 @@ public class FindCommandParserTest {
             new AddressContainsKeywordsPredicate(Arrays.asList("choa", "jurong"));
     private static final TagContainsKeywordsPredicate TAG_PREDICATE =
             new TagContainsKeywordsPredicate(Arrays.asList("math", "secondary4"));
-    private static final LessonContainsKeywordsPredicate LESSON_PREDICATE =
-            new LessonContainsKeywordsPredicate(Arrays.asList("monday", "1900-2200"));
+    private static final LessonDayContainsKeywordsPredicate LESSON_DAY_PREDICATE =
+            new LessonDayContainsKeywordsPredicate(Arrays.asList("monday", "wed"));
+    private static final LessonTimeContainsKeywordsPredicate LESSON_TIME_PREDICATE =
+            new LessonTimeContainsKeywordsPredicate(Arrays.asList("1200-1330", "1900-2200"));
 
     private static final String VALID_NAME_DESC = " " + PREFIX_NAME + "alice bob";
     private static final String VALID_ADDRESS_DESC = " " + PREFIX_ADDRESS + "choa jurong";
     private static final String VALID_TAG_DESC = " " + PREFIX_TAG + "math secondary4";
-    private static final String VALID_LESSON_DESC = " " + PREFIX_LESSON + "monday 1900-2200";
+    private static final String VALID_LESSON_DAY_DESC = " " + PREFIX_LESSON_DAY + "monday wed";
+    private static final String VALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "1200-1330 1900-2200";
 
     private static final String VALID_NAME_DESC_WITH_SPACE = " " + PREFIX_NAME + "\n alice \n \t bob  \t";
     private static final String VALID_ADDRESS_DESC_WITH_SPACE = " " + PREFIX_ADDRESS + "\n choa \n \t jurong  \t";
     private static final String VALID_TAG_DESC_WITH_SPACE = " " + PREFIX_TAG + "\n math \n \t secondary4  \t";
-    private static final String VALID_LESSON_DESC_WITH_SPACE = " " + PREFIX_LESSON + "\n monday \n \t 1900-2200  \t";
+    private static final String VALID_LESSON_DAY_DESC_WITH_SPACE = " " + PREFIX_LESSON_DAY
+            + "\n monday \n \t wed  \t";
+    private static final String VALID_LESSON_TIME_DESC_WITH_SPACE = " " + PREFIX_LESSON_TIME
+            + "\n 1200-1330 \n \t 1900-2200  \t";
 
     private FindCommandParser parser = new FindCommandParser();
 
@@ -83,26 +92,37 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validLessonPrefixArg_returnsFindCommand() {
+    public void parse_validLessonDayPrefixArg_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(LESSON_PREDICATE)));
-        assertParseSuccess(parser, VALID_LESSON_DESC, expectedFindCommand);
+        FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(LESSON_DAY_PREDICATE)));
+        assertParseSuccess(parser, VALID_LESSON_DAY_DESC, expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, VALID_LESSON_DESC_WITH_SPACE, expectedFindCommand);
+        assertParseSuccess(parser, VALID_LESSON_DAY_DESC_WITH_SPACE, expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validLessonTimePrefixArg_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(LESSON_TIME_PREDICATE)));
+        assertParseSuccess(parser, VALID_LESSON_TIME_DESC, expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, VALID_LESSON_TIME_DESC_WITH_SPACE, expectedFindCommand);
     }
 
     @Test
     public void parse_validAllPrefixArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand = new FindCommand(new CombinedPredicate(List.of(NAME_PREDICATE,
-                ADDRESS_PREDICATE, TAG_PREDICATE, LESSON_PREDICATE)));
+                ADDRESS_PREDICATE, TAG_PREDICATE, LESSON_DAY_PREDICATE, LESSON_TIME_PREDICATE)));
         assertParseSuccess(parser, VALID_NAME_DESC + VALID_ADDRESS_DESC + VALID_TAG_DESC
-                + VALID_LESSON_DESC, expectedFindCommand);
+                + VALID_LESSON_DAY_DESC + VALID_LESSON_TIME_DESC, expectedFindCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, VALID_NAME_DESC_WITH_SPACE + VALID_ADDRESS_DESC_WITH_SPACE
-                + VALID_TAG_DESC_WITH_SPACE + VALID_LESSON_DESC_WITH_SPACE, expectedFindCommand);
+                + VALID_TAG_DESC_WITH_SPACE + VALID_LESSON_DAY_DESC_WITH_SPACE + VALID_LESSON_TIME_DESC_WITH_SPACE,
+                expectedFindCommand);
     }
 
     @Test
@@ -114,11 +134,41 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyKeywordAfterPrefix_throwsParseException() {
-        assertParseFailure(parser, " n/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_NAME));
-        assertParseFailure(parser, " a/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_ADDRESS));
-        assertParseFailure(parser, " t/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_TAG));
-        assertParseFailure(parser, " l/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_LESSON));
+        assertParseFailure(parser, " " + PREFIX_NAME, String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_NAME));
+        assertParseFailure(parser, " " + PREFIX_ADDRESS, String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_ADDRESS));
+        assertParseFailure(parser, " " + PREFIX_TAG, String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_TAG));
+        assertParseFailure(parser, " " + PREFIX_LESSON_DAY, String.format(MESSAGE_EMPTY_KEYWORD,
+                PREFIX_LESSON_DAY));
+        assertParseFailure(parser, " " + PREFIX_LESSON_TIME, String.format(MESSAGE_EMPTY_KEYWORD,
+                PREFIX_LESSON_TIME));
 
-        assertParseFailure(parser, " n/ a/ t/ l/ ", String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_NAME));
+        assertParseFailure(parser, " " + PREFIX_NAME + " " + PREFIX_ADDRESS,
+                String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_NAME));
+    }
+
+    @Test
+    public void parse_invalidLessonDay_throwsParseException() {
+        // One invalid keyword
+        assertParseFailure(parser, " " + PREFIX_LESSON_DAY + "INVALID",
+                "Invalid day keyword inputted after ld/: INVALID\n"
+                        + Lesson.MESSAGE_INVALID_LESSON_DAY);
+
+        // One valid keyword and one invalid keyword
+        assertParseFailure(parser, " " + PREFIX_LESSON_DAY + "MON INVALID TUE",
+                "Invalid day keyword inputted after ld/: INVALID\n"
+                        + Lesson.MESSAGE_INVALID_LESSON_DAY);
+    }
+
+    @Test
+    public void parse_invalidLessonTimeRange_throwsParseException() {
+        // One invalid keyword
+        assertParseFailure(parser, " lt/2500-2600",
+                "Invalid time keyword inputted after lt/: 2500-2600\n"
+                        + Lesson.MESSAGE_INVALID_LESSON_TIME);
+
+        // One valid keyword and one invalid keyword
+        assertParseFailure(parser, " lt/1000-1100 2500-2600",
+                "Invalid time keyword inputted after lt/: 2500-2600\n"
+                        + Lesson.MESSAGE_INVALID_LESSON_TIME);
     }
 }

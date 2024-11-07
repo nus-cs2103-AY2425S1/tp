@@ -115,7 +115,7 @@ Format: `help`
 
 Adds a student to Tuteez.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [l/LESSON]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`
 
 - Only the **name** and **phone number** are required fields. The other fields are optional.
 - The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
@@ -147,11 +147,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing **tags** or **lessons**, **all previous values will be replaced** by the new ones entered.
-    - This means you must **retype all old tags** or **lessons** you wish to keep, as editing will overwrite them completely.
+* When editing **tags**, **all previous values will be replaced** by the new ones entered.
+    - This means you must **retype all old tags** you wish to keep, as editing will overwrite them completely.
     - For example, if a student already has two lessons and you wish to add another, you need to re-enter the previous lessons along with the new one.
 * Lessons cannot clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, the app will notify the user with an error message.
-* You can remove all tags or lessons by typing `t/` or `l/` without specifying any values after them.
+* You can remove all optional fields as specified in the `add` command by typing its parameter prefix (e.g. `t/`) without specifying any values after them.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -181,6 +181,41 @@ Examples:
 * `remark 2 -a Needs improvement in English` Adds the remark "Needs improvement in English" to the second student.
 * `remark 1 -d 2` Deletes the second remark of the first student.
 
+### Adding Lessons: `addlesson` or `addlsn`
+
+Allows the tutor to add lesson(s) to a specific student in Tuteez.
+
+Format: `addlesson INDEX l/LESSON [l/LESSON]…​`
+
+* short form: `addlsn INDEX l/LESSON [l/LESSON]…​`
+* Adds new lesson(s) to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* You can add multiple lessons to a student at once.
+* Lessons have to start with the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
+* Lessons cannot clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown.
+* For more details on valid lessons, check out [lesson constraints](#lesson-constraints)
+
+Examples:
+* `addlesson 1 l/Monday 0900-1100` Adds a lesson on Monday from 9 am to 11 am to the first student.
+* `addlesson 2 l/Tuesday 1400-1600 l/Thursday 1400-1600` Adds lessons on Tuesday and Thursday from 2 pm to 4 pm to the second student.
+
+### Deleting Lessons: `deletelesson` or `dellsn`
+
+Allows the tutor to delete lesson(s) from a specific student in Tuteez.
+
+Format: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
+
+* short form: `dellsn INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
+* Deletes lesson(s) from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Lessons are indexed based on the order they were added to the student, starting from 1.
+* If the `LESSON_INDEX` is not valid, an error will be shown.
+
+Examples:
+* `deletelesson 1 li/1` Deletes the first lesson of the first student.
+* `dellsn 2 li/2 li/3` Deletes the second and third lessons of the second student.
+
+<box type="tip" seamless>
+
+**Tip:** You can delete multiple lessons at once by specifying different lesson indices.
 
 ### Locating persons by name: `find`
 
@@ -314,8 +349,10 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME`<br> e.g., `delete 3` or `delete James Ho`
 **Display**| `display INDEX` <br> e.g., `display 1`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [l/LESSON]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math l/sunday 1000-1100`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math l/sunday 1000-1100`
 **Remark** | `remark INDEX -a REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 -a Great progress in Math`<br> `remark INDEX -d REMARK_INDEX` to delete a specific remark from the student at `INDEX`<br> e.g., `remark 1 -d 2` to delete the second remark of student 1.
+**Add Lesson** | `addlesson INDEX l/LESSON [l/LESSON]`<br> e.g., `addlesson 1 l/Monday 0900-1100`
+**Delete Lesson** | `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]`<br> e.g., `deletelesson 1 li/1`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`

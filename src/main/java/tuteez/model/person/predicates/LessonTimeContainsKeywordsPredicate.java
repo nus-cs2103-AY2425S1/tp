@@ -6,17 +6,16 @@ import java.util.logging.Logger;
 
 import tuteez.commons.core.LogsCenter;
 import tuteez.model.person.Person;
-import tuteez.model.person.lesson.Day;
 import tuteez.model.person.lesson.Lesson;
 
 /**
  * Tests that a {@code Person}'s {@code Lesson} matches any of the keywords given.
  */
-public class LessonContainsKeywordsPredicate implements Predicate<Person> {
-    private static Logger logger = LogsCenter.getLogger(LessonContainsKeywordsPredicate.class);
+public class LessonTimeContainsKeywordsPredicate implements Predicate<Person> {
+    private static Logger logger = LogsCenter.getLogger(LessonTimeContainsKeywordsPredicate.class);
     private final List<String> keywords;
 
-    public LessonContainsKeywordsPredicate(List<String> keywords) {
+    public LessonTimeContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -27,7 +26,7 @@ public class LessonContainsKeywordsPredicate implements Predicate<Person> {
                 .anyMatch(lesson -> matchesAnyKeyword(lesson));
 
         if (!hasMatch) {
-            logger.info("No matches found for person: " + person.getName());
+            logger.info("No matches for lesson time found for person: " + person.getName());
         }
 
         return hasMatch;
@@ -35,8 +34,7 @@ public class LessonContainsKeywordsPredicate implements Predicate<Person> {
 
     private boolean matchesAnyKeyword(Lesson lesson) {
         return keywords.stream().anyMatch(keyword -> (
-                Day.isValidDay(keyword) && lesson.getLessonDay().toString().equalsIgnoreCase(keyword))
-                || (Lesson.isValidTimeRange(keyword) && checkOverlappingTimeRange(lesson, keyword)));
+                checkOverlappingTimeRange(lesson, keyword)));
     }
 
     private boolean checkOverlappingTimeRange(Lesson lesson, String keyword) {
@@ -50,11 +48,12 @@ public class LessonContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof LessonContainsKeywordsPredicate)) {
+        if (!(other instanceof LessonTimeContainsKeywordsPredicate)) {
             return false;
         }
 
-        LessonContainsKeywordsPredicate otherLessonContainsKeywordsPredicate = (LessonContainsKeywordsPredicate) other;
-        return keywords.equals(otherLessonContainsKeywordsPredicate.keywords);
+        LessonTimeContainsKeywordsPredicate otherLessonTimeContainsKeywordsPredicate =
+                (LessonTimeContainsKeywordsPredicate) other;
+        return keywords.equals(otherLessonTimeContainsKeywordsPredicate.keywords);
     }
 }

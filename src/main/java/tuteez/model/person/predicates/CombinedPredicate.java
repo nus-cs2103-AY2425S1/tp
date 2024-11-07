@@ -42,6 +42,7 @@ public class CombinedPredicate implements Predicate<Person> {
         CombinedPredicate otherCombinedPredicate = (CombinedPredicate) other;
         return predicates.equals(otherCombinedPredicate.predicates);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(predicates);
