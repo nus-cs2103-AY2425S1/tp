@@ -20,6 +20,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Notes;
+//import seedu.address.model.person.Person;
+//import seedu.address.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for AddNotesCommand.
  */
@@ -27,6 +29,43 @@ public class AddNotesCommandTest {
     private static final String NOTES_STUB = "Some notes";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    /*
+    @Test
+    public void execute_addNotesUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withNotes(NOTES_STUB).build();
+        AddNotesCommand notesCommand = new AddNotesCommand(INDEX_FIRST_PERSON,
+                new Notes(editedPerson.getNotes().notes));
+        String expectedMessage = String.format(AddNotesCommand.MESSAGE_ADD_NOTES_SUCCESS, editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+        assertCommandSuccess(notesCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_deleteNotesUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withNotes("").build();
+        AddNotesCommand notesCommand = new AddNotesCommand(INDEX_FIRST_PERSON,
+                new Notes(editedPerson.getNotes().toString()));
+        String expectedMessage = String.format(AddNotesCommand.MESSAGE_DELETE_NOTES_SUCCESS, editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+        assertCommandSuccess(notesCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_filteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withNotes(NOTES_STUB).build();
+        AddNotesCommand notesCommand = new AddNotesCommand(INDEX_FIRST_PERSON,
+                new Notes(editedPerson.getNotes().notes));
+        String expectedMessage = String.format(AddNotesCommand.MESSAGE_ADD_NOTES_SUCCESS, editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+        assertCommandSuccess(notesCommand, model, expectedMessage, expectedModel);
+    }
+     */
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
