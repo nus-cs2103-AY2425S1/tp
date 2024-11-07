@@ -39,6 +39,14 @@ public class FindSubjectCommandTest {
     }
 
     @Test
+    public void execute_invalidSubjectEnglish_noPersonFound() {
+        FindSubjectCommand command = new FindSubjectCommand(new PersonHaveSubjectPredicate("English1"));
+        expectedModel.updateFilteredPersonList(new PersonHaveSubjectPredicate("English1"));
+        assertCommandSuccess(command, model, commandHistory,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0), expectedModel);
+    }
+
+    @Test
     public void equals() {
         PersonHaveSubjectPredicate firstPredicate =
                 new PersonHaveSubjectPredicate("first");
@@ -72,9 +80,4 @@ public class FindSubjectCommandTest {
         String expected = FindSubjectCommand.class.getCanonicalName() + "{predicate subject=" + predicate + "}";
         assertEquals(expected, command.toString());
     }
-
-
-
-
-
 }
