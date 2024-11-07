@@ -189,7 +189,7 @@ Examples:
 
 Sorts the list of persons being viewed by name or date of last visit in ascending or descending order.
 
-Format: `sort PARAMETER PREFIX/ORDER`
+Format: `sort PARAMETER_PREFIX/ORDER`
 
 * Sorts the contacts according to the parameter, in the specified order.
 * By default, if `ORDER` is omitted, contacts will be sorted in ascending order based on the `PARAMETER`.
@@ -362,5 +362,5 @@ Action     | Format, Examples
 **View**   | `view INDEX`<br> e.g.,`view 1`
 **Help**   | `help`
 **Seed**   | `seed`
-**Sort**   | `sort PARAMETER PREFIX/ORDER` <br> e.g., `sort n/ascending`
+**Sort**   | `sort PARAMETER_PREFIX/ORDER` <br> e.g., `sort n/ascending`
 **Remark** | `remark INDEX r/REMARK`
