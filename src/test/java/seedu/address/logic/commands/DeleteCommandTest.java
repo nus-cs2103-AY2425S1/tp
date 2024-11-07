@@ -11,9 +11,10 @@ import static seedu.address.logic.commands.DeleteCommand.MESSAGE_REMOVE_WEDDING_
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY_WEDDING;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE_WEDDING;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getAdditionalAddressBook;
@@ -47,16 +48,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
 
-        // Ensure person is not a client in any wedding
-        for (Wedding wedding : model.getFilteredWeddingList()) {
-            if (wedding.getClient() != null) {
-                model.deleteWedding(wedding);
-            }
-        }
-
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_THIRD_PERSON, null, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -90,15 +84,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_THIRD_PERSON);
 
-        // Ensure person is not a client in any wedding
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        for (Wedding wedding : model.getFilteredWeddingList()) {
-            if (wedding.getClient() != null && wedding.getClient().getPerson().equals(personToDelete)) {
-                model.deleteWedding(wedding);
-            }
-        }
 
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
 
@@ -129,16 +117,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validKeyword_success() {
-        // Ensure ALICE is not a client in any wedding
-        for (Wedding wedding : model.getFilteredWeddingList()) {
-            if (wedding.getClient() != null && wedding.getClient().getPerson().equals(ALICE)) {
-                model.deleteWedding(wedding);
-            }
-        }
-
         // unique name
-        NameMatchesKeywordPredicate predicate = preparePredicate("Alice");
-        Person personToDelete = ALICE;
+        NameMatchesKeywordPredicate predicate = preparePredicate("Daniel");
+        Person personToDelete = DANIEL;
         DeleteCommand deleteCommand = new DeleteCommand(null, predicate, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
