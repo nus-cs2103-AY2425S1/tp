@@ -277,8 +277,24 @@ _Details coming soon ..._
 - Checking for valid email domain is not in scope.
 
 ### JOBCODE
+- Must be at most 50 characters.
+- Only alphanumeric characters (A-Z, a-z, 0-9) and single dashes (-) are allowed.
+- The first and last character must be alphanumeric.
+- Training spaces and spaces within jobcode will be removed. (e.g. " swe -201  " will become "swe-201")
+- Two consecutive dashes (--) are not allowed (e.g., "HR--2023" is invalid).
+- The input job code will be converted to uppercase (e.g., "swe2023-intern" will become "SWE2023-INTERN").
 
 ### TAG
+- Must be one of the following tag:
+    - **N** = New
+    - **BP** = Behavioral Interview in Progress
+    - **BC** = Behavioral Interview Confirmed
+    - **TP** = Technical Interview in Progress
+    - **TC** = Technical Interview Confirmed
+    - **A** = Accepted
+    - **R** = Rejected
+- Input tag code is case-insensitive. (e.g., "bp" will be treated the same as "BP").
+- Spaces within the tag will be removed (e.g., "T P" will become "TP"), and hence tags with spaces is still valid as long as it is one of the tags listed above. 
 
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
