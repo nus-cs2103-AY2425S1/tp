@@ -8,7 +8,6 @@ title: User Guide
 </div>
 
 CCAConnect is a desktop application that aims to **assist NUS CCA leaders** in **managing and collating relevant CCA personnel’s contact details**, as well as help to **track attendance details for CCA sessions**.
-
 Equipped with features like **attendance marking**, **contact management**, **contact filtering** and **profile switching**, CCAConnect helps to reduce the headaches of personnel tracking.
 
 <!-- Table of Content -->
@@ -31,13 +30,13 @@ Equipped with features like **attendance marking**, **contact management**, **co
     cd ~/Desktop/CCA
     ```
 
-1. Launch the CCAConnect application by typing in the following command:
-    ```dtd
-    java -jar ccaconnect.jar
-    ```
+   1. Launch the CCAConnect application by typing in the following command:
+       ```dtd
+       java -jar ccaconnect.jar
+       ```
 
-   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+      A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+      ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -74,7 +73,11 @@ Equipped with features like **attendance marking**, **contact management**, **co
   - The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
 </details>
 
-{% include note.html content="If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application." %}
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+
 ### Viewing help : `help`
 
 Opens a new window that displays a list of all available commands along with their usage instructions.
@@ -109,11 +112,11 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
 | `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                     |
 |                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact. |
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 A person is uniquely identified by his/her **telegram handle**
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 A person can have any number of roles (including 0)
 </div>
 
@@ -147,9 +150,10 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 `e` can be used in place of `edit`.
 
 #### Parameters
+
 | Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                       |
 |----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).        |        
+| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).        |
 | `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                             |
 | `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                                    |
 | `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                              |
@@ -157,11 +161,12 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 | `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative. |
 |                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                  |
 |                | `nf/`  | No          | Represents unfavouriting of a contact. <br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                          |
+
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Only one of `f/` or `nf/` should be present in the command at once, not both.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 You can remove all the person’s roles by typing `r/` without specifying any roles after it.
 </div>
 
@@ -179,10 +184,10 @@ Search for contact(s) whose contact details satisfy either of the following:
 
 #### Format
 ```
-find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/] 
+find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]
 ```
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 When using `find`, at least **one** of the optional parameters must be included.
 </div>
 
@@ -190,6 +195,7 @@ When using `find`, at least **one** of the optional parameters must be included.
 `f` can be used in place of `find`.
 
 #### Parameters
+
 | Parameter         | Prefix | Compulsory? | Remarks                                                                                                                                                                    |
 |-------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `NAMEKEYWORD`     | `n/`   | No          | Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name                                                                                 |
@@ -233,6 +239,7 @@ Sorting works together with the `find` command, meaning that if you sort after r
 `so` can be used in place of `sort`
 
 #### Parameters
+
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                    |
 |-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `ORDER`   |        | Yes         | `ORDER` can only take the form of 3 possible options:<br/> `asc` - sorts by name in ascending order. <br/> `desc` - sorts by name in descending order. <br/> `og` - sorts by name in the original order, based on the initial positioning of the contacts. |
@@ -240,7 +247,7 @@ Sorting works together with the `find` command, meaning that if you sort after r
 ### Example
 * `sort asc` sorts the current list of contacts by name, in ascending order
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 Even though `sort` orders the list of contacts in alphabetical order of their names, this action is case-insensitive. This means that the letters `A` and `a` will be treated equally, for instance.
 </div>
 
@@ -257,6 +264,7 @@ delete INDEX
 `d` can be used in place of `delete`.
 
 #### Parameters
+
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                   |
 |-----------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------|
 | `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> The index **must be a positive integer**, e.g. 1, 2, 3, …​, 2147483647. |
@@ -300,6 +308,7 @@ mark t/TELEGRAM…​ d/DATE
 `m` can be used in place of `mark`.
 
 #### Parameters
+
 | Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
@@ -312,7 +321,7 @@ mark t/TELEGRAM…​ d/DATE
 
 * Mark attendance of contact with telegram `toom` first, then input command `mark t/toom t/maary d/2024-11-02`
 
-  ![img_3.png](images/RepeatedMarkCommandResult.png)  
+  ![img_3.png](images/RepeatedMarkCommandResult.png)
 
 * Mark attendance of a non-member contact `mark t/jerry d/2024-11-02`
 
@@ -333,6 +342,7 @@ unmark t/TELEGRAM…​ d/DATE
 
 
 #### Parameters
+
 | Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
@@ -342,9 +352,9 @@ unmark t/TELEGRAM…​ d/DATE
 
 Clears all entries from the address book.
 
-<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
-    This action permanently deletes all the entries from the address book! **Use with extreme caution**.
-</div> 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
+This action permanently deletes all the entries from the address book! **Use with extreme caution**.
+</div>
 
 #### Format
 ```
@@ -397,6 +407,7 @@ switch PROFILE
 `sw` can be used in place of `switch`
 
 #### Parameters
+
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                        |
 |-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `switch` will attempt to switch to.<br/> `PROFILE` must be between 1 and 30 characters, and can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).<br/> `PROFILE` names are **case-insensitive** and treated as lowercase. |
@@ -409,7 +420,7 @@ switch PROFILE
 ### Deleting a profile: `deleteProfile`
 
 The `deleteProfile` command removes an existing profile from the system.
-  
+
 #### Format
 ```
 deleteProfile PROFILE
@@ -419,6 +430,7 @@ deleteProfile PROFILE
 `delp` can be used in place of `deleteProfile`
 
 #### Parameters
+
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                            |
 |-----------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all requirements from the `switch` command, and should be an existing profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile. |
@@ -439,10 +451,10 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-
+</div>
 
 
 --------------------------------------------------------------------------------------------------------------------
