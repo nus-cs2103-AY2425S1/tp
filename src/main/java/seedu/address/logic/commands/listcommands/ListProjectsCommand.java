@@ -14,13 +14,14 @@ public class ListProjectsCommand extends ListCommand {
 
     // Command word using the 'list' prefix + 'project'
     public static final String COMMAND_WORD = COMMAND_PREFIX + "projects";
-
     public static final String MESSAGE_SUCCESS = "Listed all projects";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
-        return new CommandResult(MESSAGE_SUCCESS, DisplayType.PROJECT_LIST);
+        int numberOfProjects = model.getFilteredProjectList().size();
+        String feedback = MESSAGE_SUCCESS + ": " + numberOfProjects + " projects listed!";
+        return new CommandResult(feedback, DisplayType.PROJECT_LIST);
     }
 }
