@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -49,18 +51,16 @@ public class AddAppointmentCommandTest {
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
         // Test null appointment
-        assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(ALICE.getName(), null));
+        assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(Index.fromOneBased(1), null));
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        // Arrange
         ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().buildBuyer());
-        Name invalidName = ALICE.getName();
+        Index invalidIndex = Index.fromZeroBased(1);
 
-        AddAppointmentCommand command = new AddAppointmentCommand(invalidName, validAppointment);
+        AddAppointmentCommand command = new AddAppointmentCommand(invalidIndex, validAppointment);
 
-        // Act & Assert
         assertThrows(CommandException.class, () -> command.execute(modelStub),
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -71,7 +71,7 @@ public class AddAppointmentCommandTest {
         Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AddAppointmentCommand command = new AddAppointmentCommand(ALICE.getName(), validAppointment);
+        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
 
         // Act
         CommandResult result = command.execute(modelStub);
@@ -90,7 +90,7 @@ public class AddAppointmentCommandTest {
         Person personToEdit = DANIEL;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AddAppointmentCommand command = new AddAppointmentCommand(DANIEL.getName(), validAppointment);
+        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
 
         // Act
         CommandResult result = command.execute(modelStub);
@@ -109,7 +109,7 @@ public class AddAppointmentCommandTest {
         Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AddAppointmentCommand command = new AddAppointmentCommand(ALICE.getName(), validAppointment);
+        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
 
         // Act
         command.execute(modelStub);
@@ -122,16 +122,16 @@ public class AddAppointmentCommandTest {
     @Test
     public void equals() {
         AddAppointmentCommand firstAddAppointmentCommand =
-                new AddAppointmentCommand(ALICE.getName(), validAppointment);
+                new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
         AddAppointmentCommand secondAddAppointmentCommand =
-                new AddAppointmentCommand(BENSON.getName(), validAppointment);
+                new AddAppointmentCommand(INDEX_SECOND_PERSON, validAppointment);
 
         // same object -> returns true
         assertTrue(firstAddAppointmentCommand.equals(firstAddAppointmentCommand));
 
         // same values -> returns true
         AddAppointmentCommand firstAddAppointmentCommandCopy =
-                new AddAppointmentCommand(ALICE.getName(), validAppointment);
+                new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
         assertTrue(firstAddAppointmentCommand.equals(firstAddAppointmentCommandCopy));
 
         // different types -> returns false
@@ -140,8 +140,14 @@ public class AddAppointmentCommandTest {
         // null -> returns false
         assertFalse(firstAddAppointmentCommand.equals(null));
 
-        // different person -> returns false
+        // different index, same appointment -> returns false
         assertFalse(firstAddAppointmentCommand.equals(secondAddAppointmentCommand));
+
+        // same index, different appointment -> returns false
+        Appointment differentAppointment = new Appointment(new Date("02-11-24"), new From("10:00"), new To("11:00"));
+        AddAppointmentCommand firstAddAppointmentCommandWithDifferentAppointment =
+                new AddAppointmentCommand(INDEX_FIRST_PERSON, differentAppointment);
+        assertFalse(firstAddAppointmentCommand.equals(firstAddAppointmentCommandWithDifferentAppointment));
     }
 
     /**

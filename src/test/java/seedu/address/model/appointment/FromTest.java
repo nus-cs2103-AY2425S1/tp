@@ -39,4 +39,10 @@ public class FromTest {
         otherDate = new From("0900");
         assertFalse(from.equals(otherDate));
     }
+    @Test
+    public void parseTime_invalidFormat_throwsIllegalArgumentException() {
+        String invalidTime = "25:00";
+
+        assertThrows(IllegalArgumentException.class, () -> new From(invalidTime));
+    }
 }
