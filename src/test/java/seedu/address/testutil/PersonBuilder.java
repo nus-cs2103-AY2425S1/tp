@@ -10,6 +10,7 @@ import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -25,13 +26,15 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_TELEHANDLE = "@amybee";
     public static final String DEFAULT_MODULENAME = "CS1101S";
+    public static final String DEFAULT_REMARK = "likes chocolate";
 
     private ContactType contactType;
     private Name name;
     private Optional<Phone> phone;
     private Optional<Email> email;
-    private TelegramHandle telegramHandle;
-    private ModuleName moduleName;
+    private Optional<TelegramHandle> telegramHandle;
+    private Optional<ModuleName> moduleName;
+    private Optional<Remark> remark;
     private Set<Tag> tags;
 
     /**
@@ -42,8 +45,9 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = Optional.of(new Phone(DEFAULT_PHONE));
         email = Optional.of(new Email(DEFAULT_EMAIL));
-        telegramHandle = new TelegramHandle(DEFAULT_TELEHANDLE);
-        moduleName = new ModuleName(DEFAULT_MODULENAME);
+        telegramHandle = Optional.of(new TelegramHandle(DEFAULT_TELEHANDLE));
+        moduleName = Optional.of(new ModuleName(DEFAULT_MODULENAME));
+        remark = Optional.of(new Remark(DEFAULT_REMARK));
         tags = new HashSet<>();
     }
 
@@ -57,6 +61,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         telegramHandle = personToCopy.getTelegramHandle();
         moduleName = personToCopy.getModuleName();
+        remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -103,7 +108,9 @@ public class PersonBuilder {
      * Sets the {@code TelegramHandle} of the {@code Person} that we are building.
      */
     public PersonBuilder withTelegramHandle(String telegramHandle) {
-        this.telegramHandle = new TelegramHandle(telegramHandle);
+        this.telegramHandle = (telegramHandle == null || telegramHandle.isEmpty())
+                ? Optional.empty()
+                : Optional.of(new TelegramHandle(telegramHandle));
         return this;
     }
 
@@ -111,12 +118,24 @@ public class PersonBuilder {
      * Sets the {@code ModuleName} of the {@code Person} that we are building.
      */
     public PersonBuilder withModuleName(String moduleName) {
-        this.moduleName = new ModuleName(moduleName);
+        this.moduleName = (moduleName == null || moduleName.isEmpty())
+                ? Optional.empty()
+                : Optional.of(new ModuleName(moduleName));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = (remark == null || remark.isEmpty())
+                ? Optional.empty()
+                : Optional.of(new Remark(remark));
         return this;
     }
 
     public Person build() {
-        return new Person(contactType, name, phone, email, telegramHandle, moduleName, tags);
+        return new Person(contactType, name, phone, email, telegramHandle, moduleName, remark, tags);
     }
 
 }

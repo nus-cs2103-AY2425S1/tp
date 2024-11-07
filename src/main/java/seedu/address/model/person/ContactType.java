@@ -11,7 +11,8 @@ import seedu.address.commons.util.StringUtil;
  */
 public class ContactType {
 
-    public static final String MESSAGE_CONSTRAINTS = "ContactType must either be \"Work\" or \"Personal\"";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Contact type must be one of the following: \"Work\", \"Personal\" or \"School\"";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -38,6 +39,9 @@ public class ContactType {
         case("PERSONAL"):
             value = ContactTypeEnum.PERSONAL;
             break;
+        case("SCHOOL"):
+            value = ContactTypeEnum.SCHOOL;
+            break;
         default:
             throw new IllegalArgumentException("Incorrect contact type given");
         }
@@ -62,7 +66,9 @@ public class ContactType {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidContactType(String test) {
-        return test.matches(VALIDATION_REGEX)
+        String trimmedTest = test.trim();
+        return trimmedTest.matches(VALIDATION_REGEX)
                 && StringUtil.isStringInEnumIgnoreCase(test, ContactTypeEnum.class);
+
     }
 }

@@ -28,15 +28,17 @@ public class Person {
     private final Optional<Email> email;
 
     // Data fields
-    private final TelegramHandle telegramHandle;
-    private final ModuleName moduleName;
+    private final Optional<TelegramHandle> telegramHandle;
+    private final Optional<ModuleName> moduleName;
+    private final Optional<Remark> remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(ContactType contactType, Name name, Optional<Phone> phone, Optional<Email> email,
-                  TelegramHandle telegramHandle, ModuleName moduleName, Set<Tag> tags) {
+                  Optional<TelegramHandle> telegramHandle, Optional<ModuleName> moduleName,
+                  Optional<Remark> remark, Set<Tag> tags) {
         requireAllNonNull(contactType, name, phone, email, telegramHandle, moduleName, tags);
         this.contactType = contactType;
         this.name = name;
@@ -44,6 +46,7 @@ public class Person {
         this.email = email;
         this.telegramHandle = telegramHandle;
         this.moduleName = moduleName;
+        this.remark = remark;
 
         this.tags.addAll(tags);
     }
@@ -64,12 +67,16 @@ public class Person {
         return email;
     }
 
-    public TelegramHandle getTelegramHandle() {
+    public Optional<TelegramHandle> getTelegramHandle() {
         return telegramHandle;
     }
 
-    public ModuleName getModuleName() {
+    public Optional<ModuleName> getModuleName() {
         return moduleName;
+    }
+
+    public Optional<Remark> getRemark() {
+        return remark;
     }
 
     /**
@@ -115,13 +122,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && telegramHandle.equals(otherPerson.telegramHandle)
                 && moduleName.equals(otherPerson.moduleName)
+                && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegramHandle, tags, moduleName);
+        return Objects.hash(name, phone, email, telegramHandle, tags, moduleName, remark);
 
     }
 
@@ -132,8 +140,9 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone.map(Phone::toString).orElse(" "))
                 .add("email", email.map(Email::toString).orElse(" "))
-                .add("telegramHandle", telegramHandle)
-                .add("moduleName", moduleName)
+                .add("telegramHandle", telegramHandle.map(TelegramHandle::toString).orElse(" "))
+                .add("moduleName", moduleName.map(ModuleName::toString).orElse(" "))
+                .add("remark", remark.map(Remark::toString).orElse(" "))
                 .add("tags", tags)
                 .toString();
     }

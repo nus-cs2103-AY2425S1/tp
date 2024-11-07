@@ -16,7 +16,7 @@ public class FilterContactTypeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Filters your contacts based on their ContactType (Work, Personal).\n"
-            + "Parameters: ContactType (must be either \"Work\" or \"Personal\")\n"
+            + "Parameters: ContactType (must one of the following: \"Work\", \"School\" or \"Personal\")\n"
             + "Example: " + COMMAND_WORD + " Work";
 
     private final ContactTypePredicate predicate;

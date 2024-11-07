@@ -17,6 +17,7 @@ import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private String email;
     private String telegramHandle;
     private final String moduleName;
+    private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String contactType;
 
@@ -45,6 +47,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("telegramHandle") String telegramHandle,
                              @JsonProperty("moduleName") String moduleName,
+                             @JsonProperty("remark") String remark,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("contactType") String contactType) {
         this.name = name;
@@ -53,6 +56,7 @@ class JsonAdaptedPerson {
         this.telegramHandle = telegramHandle;
         this.contactType = contactType;
         this.moduleName = moduleName;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -65,9 +69,10 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().map(Phone::toString).orElse(null);
         email = source.getEmail().map(Email::toString).orElse(null);
-        telegramHandle = source.getTelegramHandle().value;
+        telegramHandle = source.getTelegramHandle().map(TelegramHandle::toString).orElse(null);
         contactType = source.getContactType().value.toString();
-        moduleName = source.getModuleName().toString();
+        moduleName = source.getModuleName().map(ModuleName::toString).orElse(null);
+        remark = source.getRemark().map(Remark::toString).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -108,14 +113,12 @@ class JsonAdaptedPerson {
                 ? Optional.empty()
                 : Optional.of(new Email(email));
 
-        if (telegramHandle == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TelegramHandle.class.getSimpleName()));
-        }
-        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+        if (telegramHandle != null && !TelegramHandle.isValidTelegramHandle(telegramHandle)) {
             throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final TelegramHandle modelTelegramHandle = new TelegramHandle(telegramHandle);
+        final Optional<TelegramHandle> modelTelegramHandle = telegramHandle == null || telegramHandle.isEmpty()
+                ? Optional.empty()
+                : Optional.of(new TelegramHandle(telegramHandle));
 
         if (contactType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -126,17 +129,23 @@ class JsonAdaptedPerson {
         }
         final ContactType modelContactType = new ContactType(contactType);
 
-        if (moduleName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ModuleName.class.getSimpleName()));
-        }
-        if (!ModuleName.isValidModName(moduleName)) {
+        if (moduleName != null && !ModuleName.isValidModName(moduleName)) {
             throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
         }
-        final ModuleName modelModuleName = new ModuleName(moduleName);
+        final Optional<ModuleName> modelModuleName = moduleName == null || moduleName.isEmpty()
+                ? Optional.empty()
+                : Optional.of(new ModuleName(moduleName));
+
+        if (remark != null && !Remark.isValidRemark(remark)) {
+            throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
+        }
+        final Optional<Remark> modelRemark = remark == null || remark.isEmpty()
+                ? Optional.empty()
+                : Optional.of(new Remark(remark));
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelContactType, modelName, modelPhone, modelEmail, modelTelegramHandle,
-                modelModuleName, modelTags);
+                modelModuleName, modelRemark, modelTags);
     }
 
     public boolean isValidPerson() {

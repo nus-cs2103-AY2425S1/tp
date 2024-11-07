@@ -2,6 +2,7 @@
 skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
+skinparam ArrowThickness 2
 start
 :User executes command;
 

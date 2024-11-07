@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -18,8 +18,17 @@ public class TelegramHandleContainsKeywordsPredicate implements Predicate<Person
 
     @Override
     public boolean test(Person person) {
+        Optional<TelegramHandle> telegramHandle = person.getTelegramHandle();
+        if (telegramHandle.isEmpty()) {
+            return false;
+        }
+
+        String telegramHandleString = telegramHandle.get().value.toLowerCase();
+
+        // Compare each keyword with the telegram handle
         return keywords.stream()
-            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getTelegramHandle().value, keyword));
+            .map(String::toLowerCase)
+            .anyMatch(telegramHandleString::contains);
     }
 
     @Override
