@@ -90,7 +90,7 @@ Action     | Format, Examples
 ### General Commands
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[List](#viewing-all-deliveries-and-suppliers-list)**   | `list`
+**[List](#viewing-all-deliveries-and-suppliers-list)**   | `list -a`
 **[Help](#viewing-help-help)**   | `help`
 **[Exit](#exiting-the-program-exit)**   | `exit`
 
