@@ -10,7 +10,7 @@
 
 [1. Acknowledgements](#1-acknowledgements)
 
-[2. Setting up, getting started](#2-setting-up-getting-started)
+[2. Setting Up, Getting Started](#2-setting-up-getting-started)
 
 [3. Design](#3-design)
 * [3.1 Architecture](#3-1-architecture)
@@ -20,9 +20,40 @@
 * [3.5 Storage Component](#3-5-storage-component)
 * [3.6 Common Classes](#3-6-common-classes)
 
-[4. FAQ](#4-faq)
+[4. Implementation](#4-implementation)
+* [4.1 Lesson Time Parameter](#4-1-lesson-time-parameter)
+  * [4.1.1 Design Considerations](#4-1-1-design-considerations)
+* [4.2 Add Feature](#4-2-add-feature)
+  * [4.2.1 Implementation - Activity Diagram](#4-2-1-implementation-activity-diagram)
+  * [4.2.2 Design Considerations](#4-2-2-design-considerations)
+* [4.3 Delete Feature](#4-3-delete-feature)
+  * [4.3.1 Implementation - Sequence Diagram](#4-3-1-implementation-sequence-diagram)
+  * [4.3.2 Design Considerations](#4-3-2-design-considerations)
+* [4.4 Tag Feature](#4-4-tag-feature)
+  * [4.4.1 Implementation - Sequence Diagram](#4-4-1-implementation-sequence-diagrams)
+  * [4.4.2 Design Considerations](#4-4-2-design-considerations)
+* [4.5 View Specific Student Feature](#4-5-view-specific-student-feature)
+  * [4.5.1 Implementation - Sequence Diagram](#4-5-1-implementation-sequence-diagram)
+  * [4.5.2 Design Considerations](#4-5-2-design-considerations)
+* [4.6 Add Task Feature](#4-6-add-task-feature)
+  * [4.6.1 Implementation - Sequence Diagram](#4-6-1-implementation-sequence-diagram)
+  * [4.6.2 Design Considerations](#4-6-2-design-considerations)
 
-[5. Known Issues](#5-known-issues)
+[5. Documentation, Logging, Testing, Configuration, Dev-Ops](#5-documentation-logging-testing-configuration-dev-ops)
+
+[6. Appendix: Requirements](#6-appendix-requirements)
+* [6.1 Product Scope](#6-1-product-scope)
+* [6.2 User Stories](#6-2-user-stories)
+* [6.3 Use Cases](#6-3-use-cases)
+* [6.4 Non-Functional Requirements](#6-4-non-functional-requirements)
+* [6.5 Glossary](#6-5-glossary)
+
+[7. Appendix: Instructions for Manual Testing](#7-appendix-instructions-for-manual-testing)
+* [7.1 Launch and Shutdown](#7-1-launch-and-shutdown)
+* [7.2 Adding a Student](#7-2-adding-a-student)
+* [7.3 Deleting a Student](#7-3-deleting-a-student)
+* [7.4 Finding Specific Student(s)](#7-4-finding-specific-students)
+* [7.5 Adding a Task to a Student](#7-5-adding-a-task-to-a-student)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -32,7 +63,7 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 2. Setting up, getting started
+## 2. Setting Up, Getting Started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -56,12 +87,12 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#3-2-ui-component): The UI of the App.
+* [**`Logic`**](#3-3-logic-component): The command executor.
+* [**`Model`**](#3-4-model-component): Holds the data of the App in memory.
+* [**`Storage`**](#3-5-storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#3-6-common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -290,7 +321,7 @@ manage student profiles more efficiently.
   duplication.
 
 #### 4.4.1 Implementation - Sequence Diagrams
-The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note
+The sequence diagrams below depicts the interaction among various classes during the execution of a tag command. Note
 that while the `TagCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
 lifeline till the diagram's end.
 
@@ -326,7 +357,41 @@ lifeline till the diagram's end.
 
 ***
 
-### 4.5 Add Task Feature
+### 4.5 View Specific Student Feature
+
+This feature allows users to view the details of an existing student by specifying their name. It enables quick access
+to a student's profile for viewing key information.
+
+- **Viewing a Student's Profile**: Users can enter a student's name to view the corresponding details. The system will
+  search for the student by name and display their profile if found.
+- **Invalid Input**: If an invalid or non-existent student name is entered, the system will show an error message
+  indicating that the student was not found.
+- **Case Insensitivity**: The system treats student names case-insensitively, ensuring that variations in capitalization
+  do not affect the search result.
+
+#### 4.5.1 Implementation - Sequence Diagram
+The sequence diagram below depicts the interaction among various classes during the execution of a view command. Note
+that while the `ViewCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the
+lifeline till the diagram's end.
+
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
+
+#### 4.5.2 Design Considerations
+**Case Insensitivity and Name Matching**
+- **Current Implementation (Alternative 1)**:
+    - **Description**: Ignore cases when matching student names, ensuring that capitalization does not affect
+      the search.
+    - **Pros**: More flexible and user-friendly, as users do not have to match the exact case of the student's name.
+    - **Cons**: Slight overhead in handling case conversion for name matching.
+
+- **Alternative 2**:
+    - **Description**: Require exact capitalization of the student's name for a match.
+    - **Pros**: Ensures that no unnecessary case conversion is needed, which may slightly improve performance.
+    - **Cons**: Increases the likelihood of user errors if the name is not entered exactly as stored.
+
+***
+
+### 4.6 Add Task Feature
 
 This feature allows users to add specific tasks to a student's profile, enhancing the ability to track individual
 assignments, exams, or goals for each student. By entering the student's name, task description and due date, users
@@ -339,14 +404,14 @@ can manage and monitor students' progress more efficiently.
 - **Fixed Date Format**: Due dates must be entered in a strict `YYYY-MM-DD` format. This format avoids ambiguity and
   enforces consistency, helping users easily interpret task deadlines.
 
-#### 4.5.1 Implementation - Sequence Diagrams
-The sequence diagrams below illustrate the interactions among various classes when an add task command is executed.
+#### 4.6.1 Implementation - Sequence Diagram
+The sequence diagram below illustrate the interactions among various classes when an add task command is executed.
 Note that while the `AddTaskCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML
 extend the lifeline till the diagram’s end.
 
 <puml src="diagrams/AddTaskSequenceDiagram-Logic.puml" alt="AddTaskSequenceDiagram-Logic" />
 
-#### 4.5.2 Design Considerations
+#### 4.6.2 Design Considerations
 **Parsing Task Input**
 - **Current Implementation (Alternative 1)**:
     - **Description**: The `ParserUtil` class manages validation for task attributes, including date format checking,
@@ -374,7 +439,7 @@ extend the lifeline till the diagram’s end.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 5. Documentation, logging, testing, configuration, dev-ops
+## 5. Documentation, Logging, Testing, Configuration, Dev-Ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -386,7 +451,7 @@ extend the lifeline till the diagram’s end.
 
 ## 6. Appendix: Requirements
 
-### 6.1 Product scope
+### 6.1 Product Scope
 
 **Target user profile**: Tuition teachers
 
@@ -402,7 +467,7 @@ extend the lifeline till the diagram’s end.
 
 ***
 
-### 6.2 User stories
+### 6.2 User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -427,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-### 6.3 Use cases
+### 6.3 Use Cases
 
 (For all use cases below, the **System** is `EduManage` and the **Actor** is the `tuition teacher`, unless specified otherwise)
 
@@ -822,7 +887,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 7. Appendix: Instructions for manual testing
+## 7. Appendix: Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
 
@@ -833,7 +898,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### 7.1 Launch and shutdown
+### 7.1 Launch and Shutdown
 
 1. Initial launch
 
@@ -850,7 +915,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### 7.2 Adding a student
+### 7.2 Adding a Student
 
 1. Prerequisites: Delete any student named `Alice Lee` before and between test cases. Ensure there is a student named `Alex Yeoh` in the list of students.
 
@@ -883,7 +948,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### 7.3 Deleting a student
+### 7.3 Deleting a Student
 
 1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
@@ -898,7 +963,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### 7.4 Finding specific students
+### 7.4 Finding Specific Students
 
 1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
 
@@ -926,7 +991,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### 7.5 Adding a task for a student
+### 7.5 Adding a Task to a Student
 
 1. Prerequisites: Ensure that student `Alex Yeoh` exists.
 
