@@ -118,13 +118,17 @@ Here are some examples for you to try!
 
 ### Editing a student : `edit`
 
-Edits an existing student in Teacher's Pet.
+Made a mistake? You can edit an existing student in Teacher's Pet.
 
-Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
+Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive unsigned integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
+</div>
 
 Examples:
 *  `edit 1 m/ Science nid/e1234567` Edits the major and NUS NetID of the 1st student to be `Science` and `e1234567` respectively.
@@ -154,25 +158,30 @@ Examples:
 
 ### Listing all students : `list`
 
-Shows a list of all students in Teachers' Pet.
+You can view a list of all students stored in Teachers' Pet.
 
 Format: `list`
+
+* Note that there should be no additional arguments after `list` (eg. `list all`)
 
 ---
 
 ### Displaying students in a group : `show`
 
-Shows a list of students in the same group(s)
+You can view a list of students in the same group(s)
 
 <span style="color:#4CAF50;">Format: show KEYWORDS</span>
 
 * The KEYWORDS is the name of the group you would like to search for in your current list. For instance, use `group 1` (for group 1) …​
 * The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
 * The order of the keywords does not matter. e.g., `1 group` will match `group 1`.
-* Only full words will be matched for names. e.g., `gro` will not match `group 1`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can search for substrings within the content, but the search will only return results where the content starts with the entered text. For example, searching for "gro" will match "group 1", but will not match "1 group".
+</div>
 
 Examples:
-* `show 1` returns students with who are in group 1.
+* `show 1` returns students who are in group 1.
   ![result for 'show 1'](images/show_feature.png)
 
 ---
@@ -310,7 +319,7 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/e1234567 m/Computer Science y/2 g/Group 4`
-**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`<br> e.g.,`edit 1 n/James Lee m/4`
+**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`<br> e.g.,`edit 1 n/James Lee m/4`
 **Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
 **List** | `list`
 **Show** | `show GROUP_NAME`
