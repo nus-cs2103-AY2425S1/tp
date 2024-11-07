@@ -37,6 +37,7 @@ public class DeleteTagCommand extends Command {
     public static final String INVALID_INDEX_OR_STRING = "The person index provided is invalid. Index must either be:\n"
             + "1. Within the size of the list\n"
             + "2. 'all' if you want to delete the tag from all contacts in the list.";
+    public static final String DELETE_ALL_INVALID_TAG = "Not every contact has the tag %1$s";
     private final Index targetIndex;
     private final Set<Tag> tagsToDelete;
     private final boolean deleteFromAll;
@@ -72,6 +73,13 @@ public class DeleteTagCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (deleteFromAll) {
+            for (Person p : lastShownList) {
+                for (Tag t : tagsToDelete) {
+                    if (!p.getTags().contains(t)) {
+                        throw new CommandException(String.format(DELETE_ALL_INVALID_TAG, t));
+                    }
+                }
+            }
             for (Person p : lastShownList) {
                 Person editedPerson = deleteTagsFromPerson(p, tagsToDelete);
                 model.setPerson(p, editedPerson);
