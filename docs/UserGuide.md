@@ -17,7 +17,7 @@ KeyContacts allows you to
 
 &nbsp;
 
-KeyContacts is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+KeyContacts is optimized forBV use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, KeyContacts can get your contact management tasks done much faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
@@ -126,6 +126,8 @@ Action     | Format, Examples
 **[Assign](#assigning-piano-pieces-to-a-student-assign)** | `assign INDEX pn/PIECE_NAME...`<br> e.g.`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **[Unassign](#unassigning-piano-pieces-from-a-student-unassign)** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g. `unassign 1 pn/Moonlight Sonata pn/Canon in D`
 
+<br>
+
 ### Adding a student: `add`
 
 Adds a student to the student directory.
@@ -138,6 +140,8 @@ Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
 Examples:
 * `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1`
 
+<br>
+
 ### Deleting a student : `delete`
 
 Deletes the specified student from the student directory.
@@ -149,6 +153,8 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the student directory.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+<br>
 
 ### Editing a student : `edit`
 
@@ -165,6 +171,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [gl/GRADE_LEVEL] [g
 Examples:
 *  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st student to be `Jane Doe` and `91234567` respectively.
 
+<br>
+
 ### Assigning piano pieces to a student: `assign`
 
 Assigns piano pieces to a student in the student directory.
@@ -176,6 +184,8 @@ Format: `assign INDEX pn/PIECE_NAME...`
 
 Examples:
 *  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
+
+<br>
 
 ### Unassigning piano pieces from a student: `unassign`
 
@@ -190,6 +200,8 @@ Format: `unassign INDEX [pn/PIECE_NAME]...`
 Examples:
 *  `unassign 1 pn/Etude pn/Moonlight Sonata` Removes `Etude` and `Moonlight Sonata` from the 1st student's piano pieces.
 
+<br>
+
 ## Lesson Commands
 
 Action     | Format, Examples
@@ -197,6 +209,8 @@ Action     | Format, Examples
 **[Schedule](#scheduling-a-regular-lesson--schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
 **[Cancel](#cancelling-a-regular-lesson--cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
 **[Makeup](#scheduling-a-makeup-lesson--makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
+
+<br>
 
 ### Scheduling a regular lesson : `schedule`
 
@@ -213,6 +227,8 @@ Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
 Example:
 * `schedule 1 d/Tuesday st/16:00 et/18:00` Schedules a regular lesson on Tuesday, 4-6pm for the 1st student.
 
+<br>
+
 ### Cancelling a regular lesson : `cancel`
 
 Cancels a regular lesson at a specific date for the specified student in the student directory.
@@ -226,6 +242,8 @@ Format: `cancel INDEX dt/DATE st/START_TIME`
 
 Example:
 * `cancel 1 dt/15-10-2024 st/16:00` Cancels a regular lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
+
+<br>
 
 ### Scheduling a makeup lesson : `makeup`
 
@@ -241,6 +259,8 @@ Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 Examples:
 * `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
 
+<br>
+
 ## General Commands
 
 Action     | Format, Examples
@@ -253,6 +273,8 @@ Action     | Format, Examples
 **[Clear](#clearing-all-entries--clear)**  | `clear`
 **[Exit](#exiting-the-program--exit)**   | `exit`
 
+<br>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -261,11 +283,15 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<br>
+
 ### Listing all students : `list`
 
 Shows a list of all student in the student directory.
 
 Format: `list`
+
+<br>
 
 ### Viewing the schedule : `view`
 
@@ -279,6 +305,8 @@ Format: `view [dt/DATE]`
 Examples:
 * `view` Displays the schedule for the current week.
 * `view dt/01-11-2024` Displays the schedule for 28 Oct 2024 (Monday) to 3 Nov 2024 (Sunday).
+
+<br>
 
 ### Finding students: `find`
 
@@ -297,6 +325,8 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 *  TODO: ADD BETTER EXAMPLES
 
+<br>
+
 ### Sorting students : `sort`
 
 Sorts students based on personal details
@@ -313,17 +343,23 @@ Examples:
 * `sort n/ASC` sorts the students by name in ascending order.
 * `sort gl/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks using name in ascending order.
 
+<br>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the student directory.
 
 Format: `clear`
 
+<br>
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
