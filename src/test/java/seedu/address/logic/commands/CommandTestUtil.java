@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_COURSE_AMY = "Psychology";
     public static final String VALID_COURSE_BOB = "Physics";
-    public static final String VALID_TAG_TUTOR = "Tutor";
-    public static final String VALID_TAG_STUDENT = "Student";
+    public static final String VALID_ROLE_TUTOR = "Tutor";
+    public static final String VALID_ROLE_STUDENT = "Student";
     public static final String VALID_MODULE_AMY = "CS2103T";
     public static final String VALID_GRADE_AMY = "A";
     public static final String VALID_MODULE_BOB = "CS2100";
@@ -60,8 +60,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String COURSE_DESC_AMY = " " + PREFIX_COURSE + VALID_COURSE_AMY;
     public static final String COURSE_DESC_BOB = " " + PREFIX_COURSE + VALID_COURSE_BOB;
-    public static final String TAG_DESC_STUDENT = " " + PREFIX_TAG + VALID_TAG_STUDENT;
-    public static final String TAG_DESC_TUTOR = " " + PREFIX_TAG + VALID_TAG_TUTOR;
+    public static final String ROLE_DESC_STUDENT = " " + PREFIX_ROLE + VALID_ROLE_STUDENT;
+    public static final String ROLE_DESC_TUTOR = " " + PREFIX_ROLE + VALID_ROLE_TUTOR;
     public static final String MODULE_DESC_AMY = " " + PREFIX_MODULE + VALID_MODULE_AMY;
     public static final String MODULE_DESC_BOB = " " + PREFIX_MODULE + VALID_MODULE_BOB;
     public static final String GRADE_DESC_AMY = " " + PREFIX_GRADE + VALID_GRADE_AMY;
@@ -73,7 +73,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE + "2 Science"; // '2' not allowed in courses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "hubby*"; // '*' not allowed in roles
     public static final String INVALID_MODULE_DESC = " " + PREFIX_MODULE + "CS 2103T"; // ' ' not allowed in modules
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "E"; // 'E' not allowed in grades
 
@@ -91,7 +91,7 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY)
                 .withCourse(VALID_COURSE_AMY)
-                .withTag(VALID_TAG_STUDENT)
+                .withRole(VALID_ROLE_STUDENT)
                 .addGradedModule(VALID_MODULE_AMY, VALID_GRADE_AMY)
                 .build();
         DESC_BOB = new EditPersonDescriptorBuilder()
@@ -101,7 +101,7 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
                 .withCourse(VALID_COURSE_BOB)
-                .withTag(VALID_TAG_STUDENT)
+                .withRole(VALID_ROLE_STUDENT)
                 .addGradedModule(VALID_MODULE_BOB, VALID_GRADE_BOB)
                 .build();
     }

@@ -16,8 +16,8 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.StudentId;
-import seedu.address.model.person.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -66,6 +66,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+        trimmedName = makeCapitalise(trimmedName);
         return new Name(trimmedName);
     }
 
@@ -96,6 +97,7 @@ public class ParserUtil {
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
+        trimmedAddress = makeUppercase(trimmedAddress);
         return new Address(trimmedAddress);
     }
 
@@ -111,34 +113,36 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
+        trimmedEmail = makeLowercase(trimmedEmail);
         return new Email(trimmedEmail);
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String role} into a {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code role} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTag(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        trimmedRole = makeCapitalise(trimmedRole);
+        return new Role(trimmedRole);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<Role> roleSet = new HashSet<>();
+        for (String roleName : roles) {
+            roleSet.add(parseRole(roleName));
         }
-        return tagSet;
+        return roleSet;
     }
 
     /**
@@ -153,6 +157,7 @@ public class ParserUtil {
         if (!Course.isValidCourse(trimmedCourse)) {
             throw new ParseException(Course.MESSAGE_CONSTRAINTS);
         }
+        trimmedCourse = makeCapitalise(trimmedCourse);
         return new Course(trimmedCourse);
     }
 
@@ -168,6 +173,7 @@ public class ParserUtil {
         if (!Module.isValidModule(trimmedModule)) {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
+        trimmedModule = makeUppercase(trimmedModule);
         return new Module(trimmedModule);
     }
 
@@ -183,6 +189,43 @@ public class ParserUtil {
         if (!Grade.isValidGrade(trimmedGrade)) {
             throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
         }
+        trimmedGrade = makeUppercase(trimmedGrade);
         return new Grade(trimmedGrade);
+    }
+
+    /**
+     * Capitalizes the first letter of each word in the given input string
+     * and converts all other letters to lowercase.
+     *
+     * This method splits the input string by spaces, then processes each word
+     * to ensure that the first character is uppercase while the remaining characters
+     * are lowercase. The modified words are then joined back into a single string.
+     *
+     * @param input The input string to be capitalized. Each word's first letter will be capitalized,
+     *              and the remaining letters will be in lowercase.
+     * @return A string with the first letter of each word capitalized and the rest in lowercase.
+     *         Leading and trailing whitespace is removed.
+     */
+    public static String makeCapitalise(String input) {
+        String[] words = input.split(" ");
+        StringBuilder capitalised = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                capitalised.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1).toLowerCase())
+                        .append(" ");
+            }
+        }
+
+        return capitalised.toString().trim();
+    }
+
+    public static String makeUppercase(String input) {
+        return input.toUpperCase();
+    }
+
+    public static String makeLowercase(String input) {
+        return input.toLowerCase();
     }
 }

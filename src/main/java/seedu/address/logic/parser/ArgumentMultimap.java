@@ -90,7 +90,7 @@ public class ArgumentMultimap {
             if (!token.startsWith("m/") && !token.startsWith("g/")
                     && !token.startsWith("n/") && !token.startsWith("p/")
                     && !token.startsWith("e/") && !token.startsWith("a/")
-                    && !token.startsWith("c/") && !token.startsWith("t/")) {
+                    && !token.startsWith("c/") && !token.startsWith("r/")) {
 
                 boolean isStudentId = token.matches("^[!?&@]*\\d{7,8}$")
                         || token.matches("^[A-Za-z]\\d{7}[A-Za-z]?$");

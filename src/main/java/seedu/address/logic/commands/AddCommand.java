@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COURSE + "COURSE "
-            + PREFIX_TAG + "TAG\n"
+            + PREFIX_ROLE + "ROLE\n"
             + "Example: " + COMMAND_WORD + " "
             + "12345678 "
             + PREFIX_NAME + "John Doe "
@@ -37,11 +37,11 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_COURSE + "Computer Science "
-            + PREFIX_TAG + "Student ";
+            + PREFIX_ROLE + "Student ";
 
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in EduContacts";
+    public static final String MESSAGE_DUPLICATE_PERSON = "A person with this studentID already exists in EduContacts";
 
     private final Person toAdd;
 

@@ -71,38 +71,49 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI is managed by the `UiManager` class, which serves as the main controller for managing the UI in EduContacts. 
+The UI is managed by the `UiManager` class, which serves as the main controller for managing the UI in EduContacts.
 It serves as the interface layer between the application's backend logic and the JavaFX UI components, ensuring a smooth
 and consistent user experience.
 
-The UI consists of a `MainWindow` that is made up of the following parts: 
+The UI consists of a `MainWindow` that is made up of the following parts:
 * `CommandBox`
-  * Where the user types in his desired command
+    * Where the user types in his desired command
+    * Integrates with [`CommandHistory`](#commandhistory-integration) to provide an efficient command-tracking mechanism, allowing users to navigate
+      through previously entered commands using the `UP` and `DOWN` arrow keys.
 * `ResultDisplay`
-  * Where the resulting confirmation of the latest command sent or any corresponding error messages is shown to the user
+    * Where the resulting confirmation of the latest command sent or any corresponding error messages is shown to the user
 * `PersonListPanel`
-  * The panel which holds the list of persons in EduContacts, each person represented by a `PersonCard`
+    * The panel which holds the list of persons in EduContacts, each person represented by a `PersonCard`
 * `StatusBarFooter`
-  * Designed to show the save location of EduContacts' data
-* `PersonDetails` 
-  * A section of the UI that renders when a `FindCommand` is run, showing the resulting person's full details
+    * Designed to show the save location of EduContacts' data
+* `PersonDetails`
+    * A section of the UI that renders when a `FindCommand` is run, showing the resulting person's full details
 * `PersonCard`
-  * Shows simple and brief details about a person
+    * Shows simple and brief details about a person
 * `HelpWindow`
-  * Displayed by clicking the "Help" button at the top right hand of the screen
+    * Displayed by clicking the "Help" button at the top right hand of the screen
 
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between 
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between
 classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that 
-are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+are in the `src/main/resources/view` folder. For example, the layout of the 
+[`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) 
+is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+**The `UI` component,**
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+ 
+#### `CommandHistory` Integration
+
+The `CommandHistory` class, located in `seedu.address.ui.util`, is responsible for tracking user-entered commands.
+It enhances the `CommandBox` functionality by allowing users to navigate through their command history with the
+`UP` and `DOWN` arrow keys. This design keeps the command history encapsulated and separate from other UI components,
+promoting modularity and adhering to good OOP practices.
 
 The stylesheet used for the UI can be found in `src/main/java/resources/view/LightTheme.css`.
 ### Logic component
@@ -147,7 +158,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the contact data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-  * a `Person` object stores `StudentId`, `Name`, `Address`, `Phone`, `Email`, `Tag`, `Course` objects.
+  * a `Person` object stores `StudentId`, `Name`, `Address`, `Phone`, `Email`, `Role`, `Course` objects.
   * contains an ArrayList of `Module` objects which is optional.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -155,7 +166,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Role` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Role` object per unique tag, instead of each `Person` needing their own `Role` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Role` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Role` object per unique role, instead of each `Person` needing their own `Role` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -168,10 +179,14 @@ The `Model` component,
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component has a key role in persisting data across user sessions. Specifically, it,
+* can save both EduContacts data and user preference data in JSON format. Upon application startup, it reads the saved JSON data back into the app, reconstructing it into the corresponding objects in the `Model` component.
+
+* inherits from both `EduContactsStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+
+* depends on some classes in the `Model` component to serialize and deserialize data, because the `Storage` component's job is to save/retrieve objects that belong to the `Model`. This dependency allows it to handle domain-specific structures, like `Person` and `UserPrefs`, ensuring the saved data aligns with the current application state and structure.
+
+* uses exception handling to manage file I/O issues (e.g., missing or corrupted files) and provides feedback to the user if data loading or saving encounters an issue, ensuring that the application can gracefully handle storage-related errors.
 
 ### Common classes
 

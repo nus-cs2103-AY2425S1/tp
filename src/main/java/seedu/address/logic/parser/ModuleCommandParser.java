@@ -32,7 +32,7 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE);
         argMultimap.verifyNoDuplicateStudentId(args);
         StudentId studentId = ParserUtil.parseStudentId(preamble);
-        Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get().toUpperCase());
+        Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
 
         return new ModuleCommand(studentId, module);
     }

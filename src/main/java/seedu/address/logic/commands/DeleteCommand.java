@@ -70,6 +70,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         Person toDelete = null;
+        boolean PersonDetailsDeleted = false;
 
         for (Person person : lastShownList) {
             if (person.getStudentId().equals(studentId)) {
@@ -83,14 +84,41 @@ public class DeleteCommand extends Command {
         }
 
         if (module != null) {
-            if (!toDelete.hasModule(module)) {
+            Module moduleToDelete = null;
+            for (Module currModule : toDelete.getModules()) {
+                if (currModule.equals(module)) {
+                    moduleToDelete = currModule;
+                    break;
+                }
+            }
+
+            if (moduleToDelete == null) {
                 throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, toDelete.getStudentId()));
             }
-            model.deleteModule(toDelete, module);
-            return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, module.toString()));
+
+            model.deleteModule(toDelete, moduleToDelete);
+            if (toDelete.isSamePerson(model.getPersonToDisplay())) {
+                for (Person person : lastShownList) {
+                    if (person.getStudentId().equals(studentId)) {
+                        toDelete = person;
+                        break;
+                    }
+                }
+                model.setPersonToDisplay(toDelete);
+                return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete), true);
+            }
+            return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
+        }
+
+        if (toDelete.isSamePerson(model.getPersonToDisplay())) {
+            model.setPersonToDisplay(null);
+            PersonDetailsDeleted = true;
         }
 
         model.deletePerson(toDelete);
+        if (PersonDetailsDeleted) {
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(toDelete)), true);
+        }
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(toDelete)));
     }
 
