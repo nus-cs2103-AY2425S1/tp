@@ -327,42 +327,81 @@ Use case ends.
 
     Use case ends.
   
-* 1b. Any parameter is missing or invalid.
+* 1b. Any compulsory parameter is missing or invalid.
 
   * 1b1. TalentHub outputs an error message specifying the issue.
 
     Use case ends.
 
-* 1c. An identical phone number is detected.
+* 1c. An identical name is detected.
 
-  * 1c1. TalentHub outputs an error message specifying the issue.
+    * 1c1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1d. An identical phone number is detected.
+
+  * 1d1. TalentHub outputs an error message specifying the issue.
 
     Use case ends.
 
-**Use case: UC02 - Delete Contact after List**
+**Use case: UC02 - Edit Contact**
+
+**MSS**
+
+1. Talent Manager requests to edit the information a specific contact
+2. TalentHub change the information of the target person
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. An identical name is detected.
+
+    * 1b1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1c. An identical phone number is detected.
+
+    * 1c1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+
+
+**Use case: UC03 - Delete Contact after List**
 
 **MSS**
 
 1. Talent Manager [list contacts (UC06)](#)
-2. Talent Manager [delete contact (UC04)](#)
+2. Talent Manager [delete contact (UC05)](#)
 
-   Use case ends.
+Use case ends.
 
-**Use case: UC03 - Delete Contact after Find**
+
+**Use case: UC04 - Delete Contact after Find**
 
 **MSS**
 
-1. Talent Manager [find contacts (UC05)](#)
-2. Talent Manager [delete contact (UC04)](#)
+1. Talent Manager [find contacts (UC07)](#)
+2. Talent Manager [delete contact (UC05)](#)
 
    Use case ends.
 
-**Use case: UC04 - Delete Contact**
+**Use case: UC05 - Delete Contact**
 
 **MSS**
 
 1. Talent Manager requests to delete a specific person in the list
-2. TalentHub deletes the person
+2. TalentHub requests for confirmation of deletion
+3. TalentHub deletes the person and all his/her corresponding events
 
    Use case ends.
 
@@ -386,11 +425,44 @@ Use case ends.
 
     Use case ends.
 
-**Use case: UC05 - Find Contact**
+* 2a. Talent Manager confirms the deletion. 
+
+  * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the deletion.
+
+  * 2b1. TalentHub outputs an successful cancellation message.
+
+    Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+  * 2b1. TalentHub outputs an error message specifying the issue.
+
+    Use case resumes from step 2.
+
+**Use case: UC06 - List All Contacts**
 
 **MSS**
 
-1. User requests to find persons with with `keywords`
+1. Talent Manager requests to list contacts
+2. System shows a list of all contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+**Use case: UC07 - Find Contact by Name**
+
+**MSS**
+
+1. User requests to find persons with `keywords`
 2. System processes and list person with `keywords`
 
    Use case ends.
@@ -409,13 +481,12 @@ Use case ends.
 
     Use case ends.
 
-
-**Use case: UC06 - List All Contacts**
+**Use case: UC08 - Filter Contact by Tag**
 
 **MSS**
 
-1. Talent Manager requests to list contacts
-2. System shows a list of all contacts
+1. User requests to filter persons with `keywords`
+2. System processes and list person with `keywords`
 
    Use case ends.
 
@@ -423,16 +494,21 @@ Use case ends.
 
 * 1a. The command format is incorrect.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case ends.
+      Use case ends.
 
+* 1b. The keyword is empty.
 
-**Use case: UC07 - Add Events**
+    * 1b1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC09 - Add Events**
 
 **MSS**
 
-1. Talent Manager requests to add a event for a specific contact
+1. Talent Manager requests to add an event for a specific celebrity
 2. System adds the event
 
 Use case ends.
@@ -445,73 +521,242 @@ Use case ends.
 
     Use case ends.
 
-* 1b. A duplicate event is detected:
+* 1b. Any compulsory parameter is missing or invalid.
+
+    * 1b1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1c. A duplicate event is detected:
   
-  * 1b1. System displays a message informing the Talent Manager of the duplicate event and does not add it.
+  * 1c1. System displays a message informing the Talent Manager of the duplicate event and does not add it.
 
     Use case ends.
 
-    
-**Use case: UC08 - List All Events**
+* 1d. Time clash is detected:
+
+  * 1d1. System displays a message informing the Talent Manager of the time clash and does not add it.
+
+    Use case ends.
+
+**Use case: UC10 - Edit Events**
+
+**MSS**
+
+1. Talent Manager requests to edit the information of an event for a specific celebrity
+2. System change the information of the event
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. A duplicate event is detected:
+
+    * 1b1. System displays a message informing the Talent Manager of the duplicate event and does not change it.
+
+      Use case ends.
+
+* 1c. Time clash is detected:
+
+    * 1c1. System displays a message informing the Talent Manager of the time clash and does not change it.
+
+      Use case ends.
+
+**Use case: UC11 - Delete Event after List**
+
+**MSS**
+
+1. Talent Manager [List Events (UC14)](#)
+2. Talent Manager [Delete Event (UC12)](#)
+
+   Use case ends.
+
+**Use case: UC12 - Delete Event after Find**
+
+**MSS**
+
+1. Talent Manager [Find Events (UC15)](#)
+2. Talent Manager [Delete Event (UC12)](#)
+
+   Use case ends.
+
+**Use case: UC13 - Delete Event**
+
+1. Talent Manager requests to delete a specific event in the list
+2. TalentHub requests for confirmation of deletion
+3. TalentHub deletes the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. The list is empty.
+
+    * 1b1. System shows an index error message.
+
+      Use case ends.
+
+* 1c. The given index is invalid.
+
+    * 1c1. System shows an index error message.
+
+      Use case ends.
+
+* 2a. Talent Manager confirms the deletion.
+
+    * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the deletion.
+
+    * 2b1. TalentHub outputs an successful cancellation message.
+
+      Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+    * 2b1. TalentHub outputs an error message specifying the issue.
+
+      Use case resumes from step 2.
+
+**Use case: UC14 - List All Events**
 
 **MSS**
 
 1. Talent Manager requests to list all events.
 2. System retrieves and displays all events in chronological order.
-   
+
    Use case ends.
 
 **Extensions**
 
 * 1a. The command format is invalid.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case ends.
+      Use case ends.
 
-* 2a. If no events are scheduled.
-
-  * 2a1. System displays a message stating "No events.".
-
-    User case ends.
-
-
-**Use case: UC09 - Delete Event after List**
+**Use case: UC15 - Find Contact by Name**
 
 **MSS**
 
-1. Talent Manager [List Events (UC08)](#)
-2. Talent Manager [Delete Event (UC10)](#)
-
-   Use case ends.
-
-**Use case: UC10 - Delete Event**
-
-1. Talent Manager requests to delete a specific event in the list
-1. TalentHub deletes the event
+1. User requests to find event with `keywords`
+2. System processes and list event with name contains `keywords`
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The command format is invalid.
+* 1a. The command format is incorrect.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
-
-    Use case ends.
-
-* 1b. The list is empty.
-
-    * 1b1. System shows an error message specifying the list is empty.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
       Use case ends.
-  
-* 1c. The given index is invalid.
 
-  * 1c1. TalentHub shows an error message.
+* 1b. The keyword is empty.
 
-    Use case ends.
+    * 1b1. System shows an error message.
 
+      Use case ends.
+
+    
+**Use case: UC16 - Filter Event by Celebrity**
+
+**MSS**
+
+1. User requests to filter event by celebrity's name `keywords`
+2. System processes and list celebrity named `keywords`'s events
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. The keyword is empty.
+
+    * 1b1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC17 - Clear Events**
+
+1. Talent Manager requests to clear all event in the list
+2. TalentHub requests for confirmation of clear
+3. TalentHub clears all events in the list
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 2a. Talent Manager confirms the clear.
+
+    * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the clear.
+
+    * 2b1. TalentHub outputs an successful cancellation message.
+
+      Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+    * 2b1. TalentHub outputs an error message specifying the issue.
+
+      Use case resumes from step 2.
+
+**Use case: UC17 - Clear Persons and Events**
+
+1. Talent Manager requests to clear all persons and events in the list
+2. TalentHub requests for confirmation of clear
+3. TalentHub clears all persons and events in the list
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 2a. Talent Manager confirms the clear.
+
+    * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the clear.
+
+    * 2b1. TalentHub outputs an successful cancellation message.
+
+      Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+    * 2b1. TalentHub outputs an error message specifying the issue.
+
+      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
