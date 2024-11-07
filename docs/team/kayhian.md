@@ -9,38 +9,32 @@ ResearchRoster is a desktop address book application used for teaching Software 
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added `assign` command to (randomly) assign persons to study group(s) [\#125]()
+  * What it does: allows the user to randomly assign a list of persons into study groups.
+  * Justification: As our product is targeted at researchers, we anticipate the need to quickly and fairly assign participants to study groups. This feature allows the user to assign an entire list of participants in one command call.
+  * Highlight: a bonus feature of this command is the ability to assign all persons in the displayed list to a single study group by inputting only one study group name.
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=f08-2)
 
 * **Project management**:
   * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Added exit message to `exit` [\#52]()
+  * Expanded the `find` command to be more flexible [\#81]()
+    * What's different: allows the user to find persons using different criterias besides just the name field.
+    * Justification: This feature improves the product significantly because a user is able to make more accurate searches to filter the list of persons.
+  * Added warning message to `edit` to warn the user of adding existing tag(s) and/or removing nonexistent tag(s) [\#159]()
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Updated documentation for the features `find`, `assign` and `exit`  [\#148]()
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added use cases for requirements section. [\#36]()
+    * Added implementation details of the `find` feature. [\#110]()
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other classmates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new GitHub plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#39](), [\#65](), [\#102](), [\#139]()
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2425S1/forum/issues/216))

@@ -3,7 +3,22 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Welcome to ResearchRoster! **Your Research, Simplified.**
+
+Designed with researchers in mind. ResearchRoster simplifies participant management so you can focus on what matters most: your research. Easily add and delete participants as required, conduct random study group assignment with a simple command, and export contacts for seamless communication.
+
+This user guide will walk you through:
+- [Setting up](#quick-start) your ResearchRoster application​
+
+- Familiarising with the [Graphical User Interface (GUI)](#introduction-to-the-gui) and [Command Line Interface (CLI)​](#cli-tutorial)
+
+- Learning [different commands available](#features) on the application​
+
+- Utilizing [advanced commands](#advanced-commands) like Sample Assignment and Filtering​
+
+By the end of this guide, you'll be a ResearchRoster pro, saving time and streamlining your research process.​
+
+--------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
 {:toc}
@@ -23,7 +38,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    <br>3.2 For _Windows_: Select `Open in Terminal`.
    <br>&ensp;&ensp;&ensp;&nbsp;For _MacOS_: Select `Services` > `New Terminal at Folder`.
 
-4. Ensure that _Java 17_ is installed in your computer. 
+4. Ensure that _Java 17_ is installed in your computer.
    <br>4.1 Type in `java –version`.
    <br>4.2 Press `Enter` to run the command.
    <br>4.3 Check the installed Java version, as circled below:
@@ -70,6 +85,20 @@ _Refer to the [Features](#features) section for details of each command!_
 
 ## Features
 
+#### Basic Commands
+  * [Viewing help : `help`](#viewing-help--help)
+  * [Adding a person: `add`](#adding-a-person-add)
+  * [Listing all persons : `list`](#listing-all-persons--list)
+  * [Editing a person : `edit`](#editing-a-person--edit)
+  * [Deleting persons : `delete`](#deleting-persons--delete)
+  * [Exiting the program : `exit`](#exiting-the-program--exit)
+
+#### Advanced Commands
+  * [Locating persons by criteria: `find`](#locating-persons-by-criteria-find)
+  * [Clearing listed persons : `clear`](#clearing-listed-persons--clear)
+  * [Exporting persons' emails : `export`](#exporting-persons-emails--export)
+  * [Assigning persons to Study Groups (randomly) : `assign`](#assigning-persons-to-study-groups-randomly--assign)
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -100,7 +129,6 @@ Shows a popup window with a clickable link to the User Guide.
 
 Format: `help`
 
-
 ### Adding a person : `add`
 
 Adds a person to the address book.
@@ -126,17 +154,17 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD-TAG] [-t/DELETE-TAG]…​`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * When editing tags:
-  * Prefix:`[t/ADD-TAG]` 
+  * Prefix:`[t/ADD-TAG]`
     - the added tags will be **appended** to the list of existing tags i.e adding of tags does not overwrite existing tags.
     - if the tag name you entered to add **already exists**, the edit will be successful but you will get the warning:
       `You tried adding an already existing study group tag.`
-  * Prefix: `[-t/DELETE-TAG]` 
+  * Prefix: `[-t/DELETE-TAG]`
     - the tags specified will be **deleted** from the list of existing tags.
     - if the tag name you entered to delete **does not exist**, the edit will be successful but you will get the warning:
       `You tried removing a nonexistent study group tag.`
@@ -146,32 +174,11 @@ Examples:
 *  `edit 1 a/29 e/johndoe@example.com` Edits the age and email address of the 1st person to be `29` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/1B -t/2B` Edits the name of the 2nd person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`
 
-### Locating persons by criteria: `find`
-
-Finds persons whose fields contain the given keywords.
-
-Format: `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`
-
-* At least one of the optional criteria must be provided.
-* Each criteria can have more than one keyword. e.g. `n/alice bob hans`
-* The search is case-insensitive. e.g. `n/hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `n/Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `n/Han` will not match `Hans`
-* Persons matching at least one keyword for **every specified criteria** will be returned.
-  e.g. `n/Alice Bob g/f` will return `{Alice Wang, ..., Female, ...}` but not `{Bob Tan, ..., Male, ...}`
-
-Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/roy li alex e/example.com g/m t/1A 1B 2B` returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`<br>
-  ![result for 'find' multiple](images/findMultipleCriteria.png)
-
-* `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`
-
 ### Deleting persons : `delete`
 
 Deletes the specified persons from the address book.
 
-Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
+Format: `delete [INDEX | INDEX-INDEX]…`
 
 * Deletes the person at the specified `INDEX` or range of indices
 * The index must be within the range
@@ -179,8 +186,35 @@ Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
 
 Examples:
 * `delete 2` deletes the 2nd person in the displayed list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the [`find` command](#locating-persons-by-criteria-find).
 * `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
+
+### Exiting the program : `exit`
+
+Displays an exit message, then exits the program.
+
+Format: `exit`
+
+### Locating persons by criteria : `find`
+
+Finds persons whose fields contain the given keywords.
+
+Format: `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`
+
+* At least one of the optional criteria must be provided.
+* Each criteria can have more than one keyword. e.g. `n/alice bob hans`
+* The search is case-insensitive. e.g. `n/hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `n/Hans Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `n/Han` will not match `Hans`
+* Persons matching at least one keyword for **every specified criteria** will be returned.
+  e.g. `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person
+
+Examples:
+* `find n/John` returns `john` and `John Doe`
+* `find n/roy li alex e/example.com g/m t/1A 1B 2B` returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`<br>
+  ![result for 'find' multiple](images/findMultipleCriteria.png)
+
+* `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`
 
 ### Clearing listed persons : `clear`
 
@@ -216,7 +250,7 @@ Examples:
 
 Assigns persons in the list to given Study Groups (randomly).
 
-Format: `assign STUDY_GROUP [STUDY_GROUP ...]`
+Format: `assign STUDY_GROUP [STUDY_GROUP …]`
 
 * Randomly assigns persons in the displayed list to the given `STUDY_GROUP`s.
 * No person in the displayed list can be tagged with any of the given study group name before assigning.
@@ -228,12 +262,6 @@ Examples:
 
 * `find g/M` followed by `assign Male-Group` assigns every male in the addressbook to `Male-Group` study group.<br>
   ![result for 'assign Male-Group'](images/assignMaleGroupResult.png)
-
-### Exiting the program : `exit`
-
-Displays an exit message, then exits the program.
-
-Format: `exit`
 
 ### Saving the data
 
@@ -272,10 +300,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
-**Clear** | `clear`
-**Delete** | `delete INDEX [INDEX...] [INDEX-INDEX]...`<br> e.g., `delete 3 6 10-15 20 30-40`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`<br> e.g., `find n/James Jake`
-**List** | `list`
 **Help** | `help`
+**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
+**List** | `list`
+**Edit** | ``edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…​`​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`
+**Delete** | `delete [INDEX | INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`
+**Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`
+**Clear** | `clear` then `confirm`
+**Export** | `export FILENAME`<br> e.g., `export exported_email`
+**Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`
