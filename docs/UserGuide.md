@@ -160,6 +160,9 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `list` followed by `delete 2 3 4 5` deletes the 2nd, 3rd, 4th and 5th people in the address book.
 
+**Caution:**
+When deleting a person, people linked to that person will be unlinked.
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
