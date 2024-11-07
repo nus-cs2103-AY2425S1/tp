@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,6 +24,8 @@ public class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_WEDDING = "Weddings list contains duplicate wedding(s).";
+    public static final String MESSAGE_CORRUPTED_WEDDING_DATA =
+            "Address book data is corrupted: Found weddings without corresponding clients.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
@@ -47,13 +51,46 @@ public class JsonSerializableAddressBook {
     }
 
     /**
+     * Checks if the wedding data integrity is maintained.
+     * All wedding jobs must have corresponding clients (non-zero ownWedding hashcodes).
+     *
+     * @throws IllegalValueException if wedding data integrity is violated.
+     */
+    private void validateWeddingIntegrity() throws IllegalValueException {
+
+        // Collect all valid ownWedding hashcodes
+        Set<Integer> validWeddingHashes = new HashSet<>();
+        for (JsonAdaptedPerson person : persons) {
+            int ownWeddingHash = person.getOwnWedding();
+            if (ownWeddingHash != 0) {
+                validWeddingHashes.add(ownWeddingHash);
+            }
+        }
+
+        // Check all weddingJobs hashcodes
+        for (JsonAdaptedPerson person : persons) {
+            List<Integer> weddingJobs = person.getWeddingJobs();
+            if (weddingJobs != null && !weddingJobs.isEmpty()) {
+                for (Integer weddingJobHash : weddingJobs) {
+                    if (!validWeddingHashes.contains(weddingJobHash)) {
+                        throw new IllegalValueException(MESSAGE_CORRUPTED_WEDDING_DATA);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Converts this address book into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public AddressBook toModelType() throws IllegalValueException {
+        validateWeddingIntegrity();
+
         AddressBook addressBook = new AddressBook();
-        //Wedding has to be added first, since person has a reference to wedding
+
+        // Add weddings first
         for (JsonAdaptedWedding jsonAdaptedWedding : weddings) {
             Wedding wedding = jsonAdaptedWedding.toModelType(addressBook.getWeddingList());
             if (addressBook.hasWedding(wedding)) {
@@ -62,8 +99,8 @@ public class JsonSerializableAddressBook {
             addressBook.addWedding(wedding);
         }
 
+        // Add persons
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            //wedding list is passed to person to get the wedding reference
             Person person = jsonAdaptedPerson.toModelType(addressBook.getWeddingList());
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
@@ -71,7 +108,7 @@ public class JsonSerializableAddressBook {
             addressBook.addPerson(person);
         }
 
-        //Add wedding clients to the wedding
+        // Link clients to weddings
         for (Wedding wedding : addressBook.getWeddingList()) {
             for (Person person : addressBook.getPersonList()) {
                 if (person.getOwnWedding() != null && person.getOwnWedding().equals(wedding)) {
@@ -79,8 +116,6 @@ public class JsonSerializableAddressBook {
                 }
             }
         }
-
         return addressBook;
     }
-
 }

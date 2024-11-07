@@ -66,7 +66,7 @@ public class Person {
         }
     }
 
-    public void setClient(boolean isClient) {
+    public void setIsClient(boolean isClient) {
         this.isClient = isClient;
     }
 
@@ -250,7 +250,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("roles", role)
+                .add("roles", role.isPresent() ? role : "NA")
                 .add("wedding", ownWedding == null ? "NA" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();

@@ -136,4 +136,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredWeddingList(Predicate<Wedding> predicate);
+    void updateFilteredWeddingListWithOwnWedding(Predicate<Wedding> predicate);
+    void setAllWeddingNotOwnWedding();
 }

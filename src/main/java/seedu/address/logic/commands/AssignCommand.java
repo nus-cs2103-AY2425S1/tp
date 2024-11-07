@@ -191,7 +191,11 @@ public class AssignCommand extends Command {
         Phone updatedPhone = personWithRoleDescriptor.getPhone().orElse(personToAddRole.getPhone());
         Email updatedEmail = personWithRoleDescriptor.getEmail().orElse(personToAddRole.getEmail());
         Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
-        Optional<Role> updatedRole = personWithRoleDescriptor.getRole().or(personToAddRole::getRole);
+        // if the role is null -> r/ prefix was not specified, retain original role
+        // if role is Optional -> update role
+        Optional<Role> updatedRole = personWithRoleDescriptor.getRole() == null
+                                    ? personToAddRole.getRole()
+                                    : personWithRoleDescriptor.getRole();
         Wedding ownWedding = personToAddRole.getOwnWedding();
 
         Person person = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
