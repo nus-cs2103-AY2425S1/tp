@@ -41,10 +41,6 @@
   * [Documentation, Logging, Testing, Configuration, Dev-Ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for Manual Testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
