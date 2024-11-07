@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -100,7 +99,7 @@ public class AddBuyersToListingCommandTest {
         Listing editedListing = new ListingBuilder(VALID_LISTING).withBuyers(DANIEL, ELLE).build();
 
         expectedModel.setListing(VALID_LISTING, editedListing);
-        assertCommandSuccess(addBuyersToListingCommand, model, expectedMessage,expectedModel);
+        assertCommandSuccess(addBuyersToListingCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

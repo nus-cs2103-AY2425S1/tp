@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -104,16 +103,16 @@ public class EzstatesParserTest {
     @Test
     public void parseCommand_deleteClientProfile() throws Exception {
         DeleteClientProfileCommand command = (DeleteClientProfileCommand) parser.parseCommand(
-                DeleteClientProfileCommand.COMMAND_WORD + " " + ALICE.getName());
-        assertEquals(new DeleteClientProfileCommand(ALICE.getName()), command);
+                DeleteClientProfileCommand.COMMAND_WORD + " " + "1");
+        assertEquals(new DeleteClientProfileCommand(INDEX_FIRST_PERSON), command);
     }
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().buildBuyer();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditClientCommand command = (EditClientCommand) parser.parseCommand(EditClientCommand.COMMAND_WORD + " "
-                + ALICE.getName() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditClientCommand(ALICE.getName(), descriptor), command);
+                + "1" + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditClientCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -175,12 +174,12 @@ public class EzstatesParserTest {
     public void parseCommand_addListing() throws Exception {
         Command command =
                 parser.parseCommand("listing n/Pasir Ris Condo "
-                        + "price/700000 "
-                        + "area/75 "
-                        + "address/543 Pasir Ris Street 11 "
-                        + "p/2000000 "
-                        + "region/EAST "
-                        + "seller/ 2");
+                        + "pr/700000 "
+                        + "ar/75 "
+                        + "add/543 Pasir Ris Street 11 "
+                        + "pr/2000000 "
+                        + "reg/EAST "
+                        + "sel/ 2");
         assertEquals(AddListingCommand.class, command.getClass());
     }
 
@@ -212,14 +211,14 @@ public class EzstatesParserTest {
     @Test
     public void parseCommand_addBuyersToListing() throws Exception {
         Command command =
-                parser.parseCommand("addlistingbuyers 1 buyer/2");
+                parser.parseCommand("addlistingbuyers 1 buy/2");
         assertEquals(AddBuyersToListingCommand.class, command.getClass());
     }
 
     @Test
     public void parseCommand_removeBuyersFromListing() throws Exception {
         Command command =
-                parser.parseCommand("removelistingbuyers 1 buyer/2");
+                parser.parseCommand("removelistingbuyers 1 buy/2");
         assertEquals(RemoveBuyersFromListingCommand.class, command.getClass());
     }
 

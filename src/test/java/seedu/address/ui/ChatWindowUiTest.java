@@ -152,10 +152,10 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(10)
     public void getResponse_addAppointment_success() {
         assertEquals("This is how to add an appointment!\n"
-                        + "apt {name} d/{date} fr/{start time} to/{end time}",
+                        + "apt {index} d/{date} fr/{start time} to/{end time}",
                 chatWindow.getResponse("add appointment"));
         assertEquals("This is how to add an appointment!\n"
-                        + "apt {name} d/{date} fr/{start time} to/{end time}",
+                        + "apt {index} d/{date} fr/{start time} to/{end time}",
                 chatWindow.getResponse("adding an appointment"));
     }
 
@@ -163,7 +163,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(11)
     public void getResponse_deleteBuyer_success() {
         assertEquals("This is how to delete a buyer!\n"
-                        + "deleteclient {name}",
+                        + "deleteclient {index}",
                 chatWindow.getResponse("delete buyer"));
     }
 
@@ -171,7 +171,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(12)
     public void getResponse_deleteSeller_success() {
         assertEquals("This is how to delete a seller!\n"
-                        + "deleteclient {name}",
+                        + "deleteclient {index}",
                 chatWindow.getResponse("delete seller"));
     }
 
@@ -179,7 +179,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(13)
     public void getResponse_deleteAppointment_success() {
         assertEquals("This is how to delete an appointment!\n"
-                        + "delapt {name}",
+                        + "delapt {index}",
                 chatWindow.getResponse("delete appointment"));
     }
 
@@ -260,9 +260,9 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(20)
     public void getResponse_addBuyersToListing_success() {
         assertEquals("This is how to add buyers to a listing!\n"
-                        + "addlistingbuyers {listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
-                        + "Example: addlistingbuyers Warton House buyer/Alice buyer/Bob\n"
-                        + "Adds the specified buyers to the listing identified by its name.",
+                        + "addlistingbuyers {listing index} buy/{buyer index} [buy/{additional buyer indexes}...]\n"
+                        + "Example: addlistingbuyers 1 buy/ 2 buy/ 3\n"
+                        + "Adds the specified buyers to the listing identified by its index.",
                 chatWindow.getResponse("add listing buyers"));
     }
 
@@ -270,8 +270,8 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(21)
     public void getResponse_addListing_success() {
         assertEquals("This is how to add a listing!\n"
-                        + "listing n/{name} p/{price} a/{area} addr/{address} r/{region} seller/{seller} "
-                        + "(Optional: buyer/{buyer1} buyer/{buyer2} ...)",
+                        + "listing n/{name} pr/{price} ar/{area} add/{address} reg/{region} sel/{seller} "
+                        + "(Optional: buy/{buyer1} buy/{buyer2} ...)",
                 chatWindow.getResponse("add listing"));
     }
 
@@ -279,8 +279,8 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(22)
     public void getResponse_editListing_success() {
         assertEquals("This is how to edit a listing!\n"
-                        + "editlisting {listing name} [n/{listing name} p/{price}] [a/{area}]"
-                        + " [addr/{address}] [r/{region}]\n"
+                        + "editlisting {listing index} [n/{listing name} pr/{price}] [ar/{area}]"
+                        + " [add/{address}] [reg/{region}]\n"
                         + "Note: At least one field must be specified to edit a listing.",
                 chatWindow.getResponse("edit listing"));
     }
@@ -289,7 +289,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(23)
     public void getResponse_deleteListing_success() {
         assertEquals("This is how to delete a listing!\n"
-                        + "deletelisting {name}",
+                        + "deletelisting {index}",
                 chatWindow.getResponse("delete listing"));
     }
 
@@ -297,7 +297,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(24)
     public void getResponse_editClient_success() {
         assertEquals("This is how to edit a client!\n"
-                        + "editclient {name} [n/{name}] [p/{phone number}] [e/{email}] [t/{tag}...]\n"
+                        + "editclient {client index} [n/{name}] [p/{phone number}] [e/{email}] [t/{tag}...]\n"
                         + "Note: At least one field must be specified to edit a client.",
                 chatWindow.getResponse("edit client"));
     }
@@ -358,9 +358,9 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(30)
     public void getResponse_deleteListingBuyers_success() {
         assertEquals("This is how to remove buyers from a listing!\n"
-                        + "removelistingbuyers {listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
-                        + "Example: removelistingbuyers Warton House buyer/Alice buyer/Bob\n"
-                        + "Removes the specified buyers from the listing identified by their name.",
+                        + "removelistingbuyers {listing index} buy/{buyer index} [buy/{additional buyer indexes}...]\n"
+                        + "Example: removelistingbuyers 1 buy/ 2 buy/ 3\n"
+                        + "Removes the specified buyers from the listing identified by their index.",
                 chatWindow.getResponse("remove listing buyers"));
     }
 
@@ -368,8 +368,8 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(31)
     public void getResponse_moreInfo_success() {
         assertEquals("This is how to view more information about a client!\n"
-                        + "Command: moreinfo {name}\n"
-                        + "Example: moreinfo Amy\n"
+                        + "Command: moreinfo {index}\n"
+                        + "Example: moreinfo 1\n"
                         + "Opens a window displaying detailed information about the specified client.",
                 chatWindow.getResponse("more info about client"));
     }

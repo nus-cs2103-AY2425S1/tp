@@ -1,8 +1,10 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalListings.getTypicalListings;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
@@ -17,9 +19,6 @@ import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-
-import static seedu.address.testutil.TypicalListings.getTypicalListings;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 /**
  * A utility class to help with building EditListingDescriptor objects.

@@ -6,19 +6,19 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showListingAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LISTING;
+import static seedu.address.testutil.TypicalIndexes.LISTING_INDEX_OUT_OF_BOUNDS;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.listing.Listing;
-import seedu.address.model.person.Name;
 import seedu.address.testutil.TypicalListings;
 
 public class DeleteListingCommandTest {

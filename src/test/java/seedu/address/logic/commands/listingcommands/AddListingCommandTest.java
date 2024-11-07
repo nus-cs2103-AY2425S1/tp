@@ -138,8 +138,8 @@ public class AddListingCommandTest {
         modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
-                String.format(AddListingCommand.MESSAGE_NOT_SELLER, INDEX_FIRST_PERSON.getOneBased(), FIONA.getName()),
-                () -> addListingCommand.execute(modelStub));
+                String.format(AddListingCommand.MESSAGE_NOT_SELLER, INDEX_FIRST_PERSON.getOneBased(),
+                        FIONA.getName()), () -> addListingCommand.execute(modelStub));
     }
 
     @Test
@@ -166,8 +166,8 @@ public class AddListingCommandTest {
         modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
-                String.format(AddListingCommand.MESSAGE_INVALID_BUYER_INDEX, INDEX_THIRD_PERSON.getOneBased()),
-                () -> addListingCommand.execute(modelStub));
+                String.format(AddListingCommand.MESSAGE_INVALID_BUYER_INDEX,
+                        INDEX_THIRD_PERSON.getOneBased()), () -> addListingCommand.execute(modelStub));
     }
 
     // equals and toString methods
@@ -253,8 +253,8 @@ public class AddListingCommandTest {
         modelStub.addPerson(BENSON);
 
         assertThrows(CommandException.class,
-                String.format(AddListingCommand.MESSAGE_NOT_BUYER, INDEX_SECOND_PERSON.getOneBased(), BENSON.getName()),
-                () -> addListingCommand.execute(modelStub));
+                String.format(AddListingCommand.MESSAGE_NOT_BUYER, INDEX_SECOND_PERSON.getOneBased(),
+                        BENSON.getName()), () -> addListingCommand.execute(modelStub));
     }
 
     /**

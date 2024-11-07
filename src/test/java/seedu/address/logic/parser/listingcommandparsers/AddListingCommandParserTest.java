@@ -10,12 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.REGION_DESC_PASIR_RIS
 import static seedu.address.logic.commands.CommandTestUtil.SELLER_DESC_PASIR_RIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_PASIR_RIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AREA_PASIR_RIS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FIRST_BUYER_PASIR_RIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PASIR_RIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_PASIR_RIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REGION_PASIR_RIS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SECOND_BUYER_PASIR_RIS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SELLER_PASIR_RIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -28,7 +25,6 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.listingcommands.AddListingCommand;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.listing.Address;

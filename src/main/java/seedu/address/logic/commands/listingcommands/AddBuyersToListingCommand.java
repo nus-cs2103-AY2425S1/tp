@@ -24,8 +24,8 @@ public class AddBuyersToListingCommand extends Command {
     public static final String COMMAND_WORD = "addlistingbuyers";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds buyers to the listing identified by its index. "
-            + "Parameters: LISTING_INDEX buyer/BUYER_INDEX [buyer/MORE_BUYER_INDEXES]...\n"
-            + "Example: " + COMMAND_WORD + " 1 buyer/1 buyer/3";
+            + "Parameters: LISTING_NAME buy/BUYER_NAME [buy/MORE_BUYER_NAMES]...\n"
+            + "Example: " + COMMAND_WORD + " 1 buy/1 buy/3";
 
     public static final String MESSAGE_ADD_BUYERS_SUCCESS = "Buyers added to listing: %1$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";

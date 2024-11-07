@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -12,7 +13,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 import seedu.address.ui.ConfirmationDialog;
@@ -26,25 +26,26 @@ public class DeleteClientProfileCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the client profile corresponding to the client's name.\n"
-            + "Parameters: CLIENT_NAME (case-insensitive)\n"
-            + "Example: " + COMMAND_WORD + " Tan Wen Xuan";
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s ";
-    private final Name targetName;
+    private final Index targetIndex;
     private final boolean skipConfirmation;
 
-    public DeleteClientProfileCommand(Name targetName) {
-        this(targetName, false);
+    public DeleteClientProfileCommand(Index targetIndex) {
+        this(targetIndex, false);
     }
+
     /**
      * Creates a {@code DeleteClientProfileCommand} to delete the client profile with the specified name.
      *
-     * @param targetName The name of the client profile to delete.
+     * @param targetIndex The index of the client profile to delete.
      * @param skipConfirmation If {@code true}, the command will skip the confirmation dialog for deletion;
      *                         if {@code false}, it will prompt the user for confirmation before deletion.
      */
-    public DeleteClientProfileCommand(Name targetName, boolean skipConfirmation) {
-        this.targetName = targetName;
+    public DeleteClientProfileCommand(Index targetIndex, boolean skipConfirmation) {
+        this.targetIndex = targetIndex;
         this.skipConfirmation = skipConfirmation;
     }
 
@@ -53,8 +54,12 @@ public class DeleteClientProfileCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person personToDelete = model.getPersonByName(targetName);
-        if (!lastShownList.contains(personToDelete)) {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        /*if (!lastShownList.contains(personToDelete)) {
             String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
 
             if (closestMatch != null) {
@@ -62,7 +67,7 @@ public class DeleteClientProfileCommand extends Command {
             } else {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
             }
-        }
+        }*/
 
         if (!skipConfirmation
                 && (model.hasListingsForSeller(personToDelete)
@@ -105,13 +110,13 @@ public class DeleteClientProfileCommand extends Command {
         }
 
         DeleteClientProfileCommand otherDeleteCommand = (DeleteClientProfileCommand) other;
-        return targetName.equals(otherDeleteCommand.targetName);
+        return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetName", targetName)
+                .add("targetIndex", targetIndex)
                 .toString();
     }
 }

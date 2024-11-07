@@ -2,7 +2,6 @@ package seedu.address.logic.commands.listingcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -10,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.showListingAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showListingWithName;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LISTING;
 import static seedu.address.testutil.TypicalIndexes.LISTING_INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
