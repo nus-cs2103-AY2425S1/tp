@@ -17,8 +17,8 @@
 
 1. Ensure that Java 17 is installed on your computer. 
    * Open a command terminal. 
-     * For mac user, follow instructions [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac).
-     * For windows user, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
+     * For Mac user, follow instructions [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac).
+     * For Windows user, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
    * Type the following command to check the Java version:<br>
      ```
      java -version
