@@ -4,7 +4,11 @@ title: User Guide
 ---
 
 <div markdown="block" class="alert alert-warning">
-**Disclaimer: MedConnect is only designed to support the English language. Other languages may cause unexpected behaviour.**
+**:warning: Disclaimer**:
+<br>
+MedConnect is only designed to support the **English language** and for use in a **single timezone**. 
+<br>
+Using MedConnect with other languages or across timezones may cause unexpected behaviour.
 </div>
 <br>
 
@@ -13,7 +17,6 @@ MedConnect is a **desktop app designed for healthcare administrators in elderly 
 MedConnect combines the speed of a Command Line Interface ([CLI](#cli)) with the visual clarity of a Graphical User Interface ([GUI](#gui)), making it ideal for administrators who can type fast and need rapid access to information. MedConnect can get your contact management tasks done faster than traditional [GUI](#gui) apps.
 
 With MedConnect, connecting with on-call doctors, family members, or other essential contacts becomes seamless, helping you respond quickly when every second counts.
-
 
 
 ## Table of Contents
@@ -31,7 +34,7 @@ This User Guide is designed to help you understand and use MedConnect effectivel
 1. **[Command Summary](#command-summary)**: At the end of the guide, there is a Command Summary table that provides a quick reference for all commands. Use this table to quickly look up the format of a command.
 1. **[FAQ](#faq)**: The FAQ section addresses common questions and issues. Check this section if you encounter any problems or have questions about using MedConnect.
 1. **[Known Issues](#known-issues)**: This section lists any known issues with the application and their workarounds. Refer to this section if you experience any unexpected behavior.
-1. **[Glossary](#Glossary)**: This section explains unfamiliar terms that we use in this User Guide. Check out the glossary if you're unsure what a certain word means.
+1. **[Glossary](#glossary)**: This section explains unfamiliar terms that we use in this User Guide. Check out the glossary if you're unsure what a certain word means.
 1. **Notes and Tips**: Throughout the guide, you will find notes and tips highlighted in different styles. These provide additional information and helpful hints for using MedConnect effectively.
 
 By following these sections, you can quickly find the information you need and make the most out of MedConnect.
@@ -46,9 +49,10 @@ By following these sections, you can quickly find the information you need and m
 
 3. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
 
-4. Open the home folder and right click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
-
-<img src="images/Quickstart-new-terminal.png" alt="NewTerminal">
+4. *Windows:* Open the home folder and right click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br>
+<img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows">
+*MacOS:* Right click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br>
+   <img src="images/Quickstart-new-terminal-MacOS.png" alt="New terminal on MacOS">
 
 5. Type the command in the [command box](#command-box) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -142,16 +146,11 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE
 ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">
-
-Valid inputs for relationship: `Parent, Mother, Father, Child, Son, Daughter, Sibling, Brother, Sister, Friend, Spouse,
-Husband, Wife, Partner, Cousin, Relative, Uncle, Aunt, Grandparent, Grandmother, Grandfather, Grandchild, Grandson, Granddaughter`
-
-</div>
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
+
+* Valid inputs for `EMERGENCY_CONTACT_RELATIONSHIP` can be found in the [glossary](#glossary).
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim ecphone/94681352 ecrs/daughter dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com`<br>
@@ -174,8 +173,10 @@ Valid inputs for sort order parameter: `timeadded`, `timeadded asc`, `timeadded 
 
 </div>
 
-* `SORT_ORDER` parameter is **optional**. If parameter is not provided, the patients listed will be sorted in the order they were added. The patient who was added the most recently will be at the bottom of the list.
-* `timeadded`, `timeadded asc` and `timeadded desc` will sort the patient list according to the time they were added to MedConnect.
+* `SORT_ORDER` parameter is **optional**. <br>
+If `SORT_ORDER` is not provided, the patients listed will be sorted in the order they were added. The patient who was added the most recently will be at the bottom of the list.
+<br><br>
+* `timeadded`, `timeadded asc` and `timeadded desc` will sort the patient list according to the time they were added to Medconnect.
 * `timeadded` and `timeadded asc` will sort the patient list from least to most recently added. `timeadded desc` will sort the patient list from most to least recently added.
 <br><br>
 * `name`, `name asc` and `name desc` will sort the patient list according to their name in alphabetical order.
@@ -187,15 +188,15 @@ Valid inputs for sort order parameter: `timeadded`, `timeadded asc`, `timeadded 
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ec/ECINDEX] [ecname/EMERGENCY_CONTACT_NAME] [ecrs/EMERGENCY_CONTACT_RELATIONSHIP] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ec/ECINDEX] [ecname/EMERGENCY_CONTACT_NAME] [ecrs/EMERGENCY_CONTACT_RELATIONSHIP] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. Existing values will be updated to the input values.
+* `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer** (e.g. 1, 2, 3, …)
+* Valid inputs for `EMERGENCY_CONTACT_RELATIONSHIP` can be found in the [glossary](#glossary).
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
 * When editing an emergency contact, the index of the emergency contact to edit and at least one emergency contact field must be provided
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, all the existing tags of the person will be removed (i.e adding of tags is not cumulative.)
+* You can remove all of a person’s existing tags by typing `t/` without specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -213,11 +214,11 @@ Finds persons whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * **Only the patient's name is searched.**
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Names will match if the keyword is found in any part of the name. For example, `Ha` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. (e.g `hans` will match `Hans`)
+* The order of the keywords does not matter. (e.g. `Hans Bo` will match `Bo Hans`)
+* Names will match if the keyword is found in any part of the name. (e.g. `Ha` will match `Hans`)
+* All persons matching at least one keyword will be returned.
+  (e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`)
 
 Examples:
 * `find Alex` returns `Alex Yeoh` and `Alexis Tan`
@@ -234,11 +235,10 @@ Finds persons by checking if their doctor's names contain any of the provided ke
 Format: `finddoc KEYWORD [MORE_KEYWORDS]`
 
 * **Only the doctor's name is searched.**
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Names will match if the keyword is found in any part of the doctor's name. For example, `Ha` will match `Hans`
-* Persons matching at least one keyword in their doctor's name will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return persons whose doctors are `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. (e.g `hans` will match `Hans`)
+* The order of the keywords does not matter. (e.g. `Hans Bo` will match `Bo Hans`)
+* Names will match if the keyword is found in any part of the doctor's name. (e.g. `Ha` will match `Hans`)
+* Persons matching at least one keyword in their doctor's name will be returned. (e.g. `Hans Bo` will return persons whose doctors are `Hans Gruber`, `Bo Yang`)
 
 Examples:
 * `finddoc John` returns persons with doctors `john` and `John Doe`
@@ -269,6 +269,8 @@ Examples:
 Adds an emergency contact to a specified person in the address book.
 
 Format: `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP`
+
+* Valid inputs for `EMERGENCY_CONTACT_RELATIONSHIP` can be found in the [glossary](#glossary).
 
 Examples:
 * `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter` Adds a new emergency contact Shannon Wong to the 1st person in the address book.
@@ -304,7 +306,7 @@ Loads the data from an archived data file into the address book.
 
 Format: `loadarchive FILE_NAME`
 
-* The `FILE_NAME` must be the name of an archived data file in the archive folder.
+* `FILE_NAME` must be the name of an archived data file in the archive folder.
 * The data from the archived file will replace the current data in the address book.
 * The data in the archived file will not be deleted.
 
@@ -313,21 +315,22 @@ Did you accidentally load an archive and want your old data back? Enter the 'und
 </div>
 
 Examples:
-* `loadarchive addressbook-20241023_114324-example.json` Loads the data from the archived file named `addressbook-20241023_114324-example.json` into the address book.
+* `loadarchive addressbook-2024-11-06T20-29-05.7609475-example.json` Loads the data from the archived file named `addressbook-2024-11-06T20-29-05.7609475-example.json` into the address book.
+
 
 [↑ Back to top](#table-of-contents)
 
 ### Deleting an archived data file: `deletearchive`
 
-Deletes the data of an existing archived data file in the archives folder.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Deleting an archive file is **permanent**. The `undo` command cannot restore a deleted archive file.
+</div>
+
+Deletes the data of an existing archived data file in the archive folder.
 
 Format: `deletearchive FILE_NAME`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Deleting an archive file is permanent. The `undo` command cannot restore a deleted archive file.
-</div> <br>
-
-* The `FILE_NAME` must be the name of an archived data file in the archive folder.
+* `FILE_NAME` must be the name of an archived data file in the archive folder.
 
 Examples:
 * `deletearchive addressbook-20241023_114324-example.json` Deletes the archived file with the file name `addressbook-20241023_114324-example.json`.
@@ -377,10 +380,13 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
+<br>
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+<br><br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div><br>
+</div>
 
 [↑ Back to top](#table-of-contents)
 
@@ -409,36 +415,37 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Glossary
 
-| Term            | Details      | Example |
-|-----------------|--------------|---------|
-| **Alphanumeric**|Characters that are either numbers or letters.|1, 2, 3, A, b, c are alphanumeric characters.|
-| **Command**|Instructions that are given to MedConnect to execute.|[Features](#features) are commands that MedConnect can execute. [`add`](#adding-a-person-add) is one such command!|
-| **Command Line Interface (CLI)**<a name="cli" /> |A Command Line Interface allows users to interact with an application by typing commands to execute actions.|The command line acts as a CLI in MedConnect.|
-| **Graphical User Interface (GUI)**<a name="gui" /> |A Graphical User Interface allows users to interact with an application through graphics like buttons or icons.|MedConnect acts as a GUI.|
-| **Keyword**|The word you want to search for in a `find` or `finddoc` command.|Searching for a patient named Bernice Yu could be done by using keywords `Bern` or `Yu`.|
-| **Parameter**|Information that you are required to provide to the MedConnect command.|`NAME` and `EMAIL` are examples of parameters you have to provide in an [`add`](#adding-a-person-add) command.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters.|
+| Term                                               | Details                                                                                                                                                                                                                                                                       | Example                                                                                                                                                                                                                                              |
+|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Alphanumeric**                                   | Characters that are either numbers or letters.                                                                                                                                                                                                                                | 1, 2, 3, A, b, c are alphanumeric characters.                                                                                                                                                                                                        |
+| **Command**                                        | Instructions that are given to MedConnect to execute.                                                                                                                                                                                                                         | [Features](#features) are commands that MedConnect can execute. [`add`](#adding-a-person-add) is one such command!                                                                                                                                   |
+| **Command Line Interface (CLI)**<a name="cli" />   | A Command Line Interface allows users to interact with an application by typing commands to execute actions.                                                                                                                                                                  | The command line acts as a CLI in MedConnect.                                                                                                                                                                                                        |
+| **Graphical User Interface (GUI)**<a name="gui" /> | A Graphical User Interface allows users to interact with an application through graphics like buttons or icons.                                                                                                                                                               | MedConnect acts as a GUI.                                                                                                                                                                                                                            |
+| **Keyword**                                        | The word you want to search for in a `find` or `finddoc` command.                                                                                                                                                                                                             | Searching for a patient named Bernice Yu could be done by using keywords `Bern` or `Yu`.                                                                                                                                                             |
+| **Parameter**                                      | Information that you are required to provide to the MedConnect command.                                                                                                                                                                                                       | `NAME` and `EMAIL` are examples of parameters you have to provide in an [`add`](#adding-a-person-add) command.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters.                                     |
+| **`ecrs/` EMERGENCY_CONTACT_RELATIONSHIP**         | This field accepts the following valid inputs:<br/>`Parent, Mother, Father, Child, Son, Daughter, Sibling, Brother, Sister, Friend, Spouse,Husband, Wife, Partner, Cousin, Relative, Uncle, Aunt, Grandparent, Grandmother, Grandfather, Grandchild, Grandson, Granddaughter` | `Spouse` and `GRANDcHILD` are examples of relationships you can provide in an [`add`](#adding-a-person-add) [`edit`](#editing-a-person--edit) command `ecrs/` parameter.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters. 
 
 [↑ Back to top](#table-of-contents)
 
 ---
 ## Command summary
 
-| Action     | Format, Examples|
-|------------|-----------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP [t/TAG]…​` <br><br> e.g., `add n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123465` `ecname/Lim Jun Wei ecphone/98765678 ecrs/Brother` `dname/Sam Lim dphone/9987766 demail/samlim@hotmail.com` `t/friend t/colleague` |
-| **Add Emergency Contact** | `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP`<br> e.g., `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter`|
-| **Archive** | `archive [DESCRIPTION]` <br> e.g., `archive before major update`|
-| **Clear**  | `clear`|
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`|
-| **Delete Archive File** | `deletearchive FILE_NAME` <br> e.g., `deletearchive addressbook-20241106_014247.json`|
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`|
-| **Find Doctor** | `finddoc KEYWORD [MORE_KEYWORDS]` <br> e.g., `find Tan Sheeran`|
-| **Help**   |`help`|
-| **List**   |`list [SORT_ORDER]` <br> e.g., `list timeadded desc`|
-| **List Archive Files** | `listarchives`|
-| **Load Archive File** | `loadarchive FILE_NAME` <br> e.g., `loadarchive addressbook-20241106_010856.json`|
-| **Redo**   |`redo`|
-| **Undo**   |`undo`|
+| Action                    | Format, Examples                                                                                                                                                                                                                                                                                                                                                                         |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP [t/TAG]…​` <br><br> e.g., `add n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123465` `ecname/Lim Jun Wei ecphone/98765678 ecrs/Brother` `dname/Sam Lim dphone/9987766 demail/samlim@hotmail.com` `t/friend t/colleague` |
+| **Add Emergency Contact** | `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP`<br> e.g., `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter`                                                                                                                                                                                                   |
+| **Archive**               | `archive [DESCRIPTION]` <br> e.g., `archive before major update`                                                                                                                                                                                                                                                                                                                         |
+| **Clear**                 | `clear`                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                                                                                                      |
+| **Delete Archive File**   | `deletearchive FILE_NAME` <br> e.g., `deletearchive addressbook-2024-11-06T20-29-05.7609475-example.json`                                                                                                                                                                                                                                                                                |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                                              |
+| **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                                                                                               |
+| **Find Doctor**           | `finddoc KEYWORD [MORE_KEYWORDS]` <br> e.g., `find Tan Sheeran`                                                                                                                                                                                                                                                                                                                          |
+| **Help**                  | `help`                                                                                                                                                                                                                                                                                                                                                                                   |
+| **List**                  | `list [SORT_ORDER]` <br> e.g., `list timeadded desc`                                                                                                                                                                                                                                                                                                                                     |
+| **List Archive Files**    | `listarchives`                                                                                                                                                                                                                                                                                                                                                                           |
+| **Load Archive File**     | `loadarchive FILE_NAME` <br> e.g., `loadarchive addressbook-2024-11-06T20-29-05.7609475-example.json`                                                                                                                                                                                                                                                                                    |
+| **Redo**                  | `redo`                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Undo**                  | `undo`                                                                                                                                                                                                                                                                                                                                                                                   |
 
 [↑ Back to top](#table-of-contents)

@@ -26,7 +26,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -204,9 +204,9 @@ The Emergency Contact object is also made up of attributes:
 
 We opted for Alternative 1 to make almost all parameters compulsory as the autocomplete feature we implemented will aid users in typing out the Add Command.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -288,9 +288,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
+
+The archive functionality in MedConnect is facilitated by the `ModelManager` class. It handles the archiving, listing, loading, and deleting of archived contact data. The `ModelManager` interacts with the `Model` and `Storage` components to manage archived data.
+
+For example, the sequence diagram below illustrates the interactions within the `ModelManager` component when the `archive` command is executed.
 
 ![ArchiveSequenceDiagram.png](images%2FArchiveSequenceDiagram.png)
 
@@ -343,7 +347,8 @@ MedConnect offers a **streamlined contact management system** tailored for healt
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 ### Beginner User Stories
 
-| Priority | As a …​                  | I want to …​                                      | So that I can…​                                                             |
+
+| Priority | As a …​                  | I want to …​                                    | So that I can…​                                                            |
 |----------|--------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
 | `* * *`  | new user                 | familiarise myself with the app                 | play around with dummy data without compromising real patient data         |
 | `* * *`  | healthcare administrator | add new doctors and patients                    | easily reach out to them when needed                                       |
@@ -351,28 +356,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | healthcare administrator | search contacts by name or assigned doctor      | quickly find and connect with the right person in high-pressure situations |
 | `* * *`  | healthcare administrator | view patient emergency contact details          | notify next-of-kin during urgent medical events                            |
 | `* *`    | healthcare administrator | add multiple emergency contacts for each person | reach different emergency contacts when one is uncontactable               |
-| `* * *`    | healthcare administrator | assign doctors to patients                      | easily track which doctor is responsible for each patient                  |
+| `* * *`  | healthcare administrator | assign doctors to patients                      | easily track which doctor is responsible for each patient                  |
+| `* * *`  | healthcare administrator | delete outdated patient contacts                | ensure all information is relevant and current                             |
+
 
 ### Intermediate User Stories
 
-| Priority | As a …​                  | I want to …​                             | So that I can…​                                                              |
+| Priority | As a …                   | I want to …                              | So that I can…                                                               |
 |----------|--------------------------|------------------------------------------|------------------------------------------------------------------------------|
 | `* *`    | healthcare administrator | filter contacts by their doctor          | view a consolidated list of all the patients a doctor is responsible for     |
-| `* *`      | healthcare administrator | sort patients by their admission time    | provide appropriate care to longer-term patients                             |
+| `* *`    | healthcare administrator | sort patients by their admission time    | provide appropriate care to longer-term patients                             |
 | `* *`    | healthcare administrator | tag important notes to patients          | remember special considerations about certain patients                       |
 | `* *`    | healthcare administrator | archive outdated contacts                | maintain a clean and relevant contact list without losing historical records |
-| `* *`    | healthcare administrator | load backup archived data                | maintain a failsafe backup copy in case of data corruption or user error     |
+| `* *`    | healthcare administrator | load backup archived data                | maintain a backup copy in case of data corruption or user error              |
 
 ### Advanced User Stories
 
-| Priority | As a …​                  | I want to …​                                  | So that I can…​                                                      |
+| Priority | As a …                   | I want to …                                   | So that I can…                                                       |
 |----------|--------------------------|-----------------------------------------------|----------------------------------------------------------------------|
 | `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
 | `* *`    | healthcare administrator | import contact data in bulk                   | keep the database up-to-date without manual entry                    |
 | `* *`    | healthcare administrator | export contact information                    | provide it to others or have a backup in case of system failures     |
 | `* *`    | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
 | `*`      | healthcare administrator | secure access with user authentication        | ensure only authorized personnel can access or update sensitive data |
-| `* * *`  | healthcare administrator | delete outdated patient/staff contacts        | ensure all information is relevant and current                       |
 
 ---
 
@@ -384,6 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use Case: Add a New Contact
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 #### **Main Success Scenario (MSS):**
@@ -475,6 +482,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use Case: Delete a Contact
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 
@@ -491,7 +499,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **2a.** The contact list is empty.
 
+
 - **Use case ends.**
+
 
 **3a.** The given index is invalid (e.g., out of range).
 - **3a1.** MedConnect informs the user of the invalid index.
@@ -499,9 +509,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   **Use case resumes from step 2.**
 
 ---
+
 ### Use Case: Add Emergency Contacts
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 #### **Main Success Scenario (MSS):**
@@ -524,21 +536,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Use case ends.**
 
-**4a.** The index given is out of range.
-- **4a1.** MedConnect informs the user of the invalid index.
+**5a.** The index given is out of range.
+- **5a1.** MedConnect informs the user of the invalid index.
 
   **Use case resumes from step 3.**
 
-**4b.** The emergency contact already exists under the patient. (e.g., duplicate phone number).
-- **4b1.** MedConnect notifies the user that the emergency contact already exists.
+**5b.** The emergency contact already exists under the patient. (e.g., duplicate phone number).
+- **5b1.** MedConnect notifies the user that the emergency contact already exists.
 
   **Use case ends.**
 
-**4c.** The emergency contact relationship provided is invalid.
-- **4c1.** MedConnect informs the user of possible relationship types.
-- **4c2.** User corrects the invalid relationship type and resubmits.
+**5c.** The emergency contact relationship provided is invalid.
+- **5c1.** MedConnect informs the user of possible relationship types.
+- **5c2.** User corrects the invalid relationship type and resubmits.
 
   **Use case resumes from step 6.**
+
 ---
 
 ### Use Case: Find Contacts
@@ -781,78 +794,97 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a patient
 
-1. Deleting a patient while all patients are being shown
+1. Deleting a patient while all patients are being shown<br>
 
-   1. Prerequisites: List all patients using the `list` command. Multiple persons in the list.
+    <div markdown="span" class="alert alert-primary">
+        **Prerequisites:**<br>
+        1. List all patients using the `list` command. <br>
+        2. Multiple persons in the list.
+    </div>
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact is shown in the status message.
+    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
+    |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
+    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
+    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
+    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
+    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
+    | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
+    | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
 
-   1. Test case: `delete 1 ec/1`<br> Expected: The first emergency contact of the first contact in the list is deleted. The details of the deleted emergency contact is shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. The index of the person to delete follows the list index seen in Medconnect.<br>
-      Error details are shown in the status message. A valid `delete` command and parameters are shown in the status message.
-
-   1. Test case: `delete 2 ec/0`<br> Expected: No emergency contact is deleted. The index of the emergency contact to delete follows the list index seen in MedConnect.<br>
-   Error details are shown in the status message, stating that the index cannot be a non-zero unsigned integer.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `delete ec/1`, `delete 1 ec/x` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. Deleting a patient while a filtered list is being shown
-
-   1. Prerequisites: The patient list is filtered using the `find` or `finddoc` command.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact is shown in the status message.
-
-   1. Test case: `delete 1 ec/1`<br> Expected: The first emergency contact of the first contact in the list is deleted. The details of the deleted emergency contact is shown in the status message.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. The index of the person to delete follows the list index seen in Medconnect.<br>
-      Error details are shown in the status message. A valid `delete` command and parameters are shown in the status message.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `delete ec/1`, `delete 1 ec/x` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. Deleting a patient while a filtered list is being shown
+    
+    <div markdown="span" class="alert alert-primary">
+        **Prerequisites:** The patient list is filtered using the `find` or `finddoc` command.
+    </div>
+    
+    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
+    |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
+    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
+    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
+    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
+    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
+    | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
+    | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
 
 ### Adding a patient
 
 1. Adding a patient while any number of patients are being shown.
+    <div markdown="span" class="alert alert-primary">
+           **Note:** Due to the long length of valid `add` commands, the usage of `xx/PARAMETER...` will refer to all remaining compulsory parameters that have not been mentioned for that test case, with valid inputs for the respective parameters.<br>
+           **Prerequisites:**  List all patients using the `list` command. Patients are sorted by the time they were added to MedConnect.
+   </div>
 
-   1. Note: Due to the long length of valid `add` commands, the usage of `xx/PARAMETER...` will refer to all remaining compulsory parameters that have not been mentioned for that test case, with valid inputs for the respective parameters.
+   | Test case input                                  | Expected behaviour                                                 | Expected message                                                                                               |
+   |--------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+   | `add n/Ryan p/98765432 xx/PARAMETER...`          | A new patient John Doe is added to the bottom of the patient list. | New person added: [PERSON DETAILS]                                                                             |
+   | `add n/Ryan n/Daniel p/98765432 xx/PARAMETER...` | Error message is shown.                                            | Multiple values specified for the following single-valued field(s): n/                                         |
+   | `add n/Ryan`                                     | Error message is shown.                                            | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
+   | `add`                                            | Error message is shown.                                            | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
+   | `add n/`                                         | Error message is shown                                             | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
+   | `add p/???`                                      | Error message is shown                                             | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
+   | `add n/John+Doe xx/PARAMETER`                    | Error message is shown                                             | Names should only contain alphanumeric characters and spaces, and it should not be blank                       |
+   | `add p/98@1532 xx/PARAMETER`                     | Error message is shown                                             | Phone numbers should only contain numbers, and it should be at least 3 digits long                             |
+   | `add ecrs/knight xx/PARAMETER`                   | Error message is shown                                             | Relationship type should be Parent, Child, Sibling, Spouse, Grandparent or Relative or their gendered variants |
 
-   1. Prerequisites: List all patients using the `list` command. Patients are sorted by the time they were added to MedConnect.
+### Editing a patient
 
-   1. Test case: `add n/Ryan p/98765432 xx/PARAMETER...`<br>
-   Expected: A new patient John Doe is added to the bottom of the patient list. Details shown in the status message include all the details of John Doe.
+1. Editing a patient while any number of patients are being shown.
+     <div markdown="span" class="alert alert-primary">
+           **Prerequisites:**  List all patients using the `list` command. Patients are sorted by the time they were added to MedConnect.
+   </div>
 
-   1. Test case: `add n/Ryan n/Daniel p/98765432 xx/PARAMETER...`<br>
-   Expected: No patient is added to the bottom of the list. Duplicate parameters are provided.
-   Error details are shown in the status message, showing which parameters contain duplicates.
+   | Test case input                                                                                  | Expected behaviour                                                                                           | Expected message                                                                         |
+   |--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+   | `edit 1 n/Ryan p/98765432 e/ryan@hotmail.com`                                                    | The name, phone and email of the first patient in the list is edited to the new values provided as arguments | Edited person: [PERSON DETAILS]                                                          |
+   | `edit 1`                                                                                         | Error message is shown.                                                                                      | At least one field to edit must be provided.                                             |
+   | `edit 1 n/`                                                                                      | Error message is shown.                                                                                      | Names should only contain alphanumeric characters and spaces, and it should not be blank |
+   | `edit 1 n/John p/`                                                                               | Error message is shown.                                                                                      | Phone numbers should only contain numbers, and it should be at least 3 digits long       |
+   | `edit`                                                                                           | Error message is shown                                                                                       | Invalid command format! [CORRECT COMMAND FORMAT]                                         |
+   | `edit 2 ecname/John Doe`                                                                         | Error message is shown                                                                                       | At least one emergency contact index to edit must be provided.                           |
+   | `edit 2 ec/2`                                                                                    | Error message is shown                                                                                       | At least one emergency contact field to edit must be provided.                           |
+   | `edit 1 ec/x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of emergency contacts) | Error message is shown                                                                                       | The emergency contact index provided is invalid                                          |
+   | `edit x n/Heather` <br> (x > number of contacts)                                                 | Error message is shown                                                                                       | The person index provided is invalid                                                     |
 
-   1. Test case: `add n/Ryan`<br>
-   Expected: No patient is added. Error details are shown in the status message showing all the parameters required and an example of a valid `add` command.
-
-   1. Test case: `add`<br>
-   Expected: No patient is added. Same as previous test case.
-
-   1. Test case: `add n/`<br>
-   Expected: No patient is added. Same as previous test case.
-
-   1. Test case: `add p/???`<br>
-   Expected: No patient is added. Same as previous test case.
-
-   1. Test case: `add n/John+Doe xx/PARAMETER`<br>
-   Expected: No patient is added. Error details are shown in the status message, stating the valid parameters for the patient's name.
-
-   1. Other incorrect `add` commands to try: `add n/Ryan p/91234567 xx/INVALID_PARAMETER xx/PARAMETER`<br>
-   For xx/INVALID_PARAMETER, `xx` refers to any of the valid prefixes and `INVALID_PARAMETER` refers to an invalid parameter input for the respective prefix.<br>
-   Expected: Same as previous test case, but error details shown are specific to the invalid parameter provided.
-
-
-
-  ### Saving data
+### Adding an emergency contact to a patient
+1. Editing a patient while any number of patients are being shown.
+     <div markdown="span" class="alert alert-primary">
+           **Prerequisites:**  List all patients using the `list` command. Patients are sorted by the time they were added to MedConnect.
+   </div>
+   
+    | Test case input                                                                    | Expected behaviour                                                                                           | Expected message                                                                                               |
+   |------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+    | `addec 1 ecname/Sarah Lim ecphone/91234567 ecrs/Granddaughter`                     | The name, phone and email of the first patient in the list is edited to the new values provided as arguments | Added emergency contact: [PERSON DETAILS]                                                                      |
+    | `addec 1`                                                                          | Error message is shown.                                                                                      | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
+    | `addec ecname/Sarah Lim ecphone/91234567 ecrs/Granddaughter`                       | Error message is shown.                                                                                      | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
+    | `addec 1 ecname/Sarah Lim ecphone/91234567`                                        | Error message is shown.                                                                                      | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
+    | `addec 1 ecname/Sarah Lim ecphone/91234567 ecrs/Neighbor`                          | Error message is shown                                                                                       | Relationship type should be Parent, Child, Sibling, Spouse, Grandparent or Relative or their gendered variants |
+    | `addec 2 ecname/D%#P! ecphone/91234567 ecrs/Son`                                   | Error message is shown                                                                                       | Names should only contain alphanumeric characters and spaces, and it should not be blank                       |
+    | `addec x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of contacts) | Error message is shown                                                                                       | The person index provided is invalid                                                                           |
+ 
+ ### Saving data
 
   1. Dealing with missing/corrupted data files
 
