@@ -28,7 +28,7 @@ title: "KnottyPlanners - Your Ultimate Wedding Planning Companion"
 - **Community-Driven**: Join our community of users and developers to share tips and get support.
 
 ## Get Started Today! 🎉
-* If you are interested in using KnottyPlanners, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested in using KnottyPlanners, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start-non-technical-users).
 * If you are interested about developing KnottyPlanners, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 * We value your feedback! Reach out to us with any suggestions or issues.
 
