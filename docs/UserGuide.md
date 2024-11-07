@@ -240,13 +240,13 @@ that has empty tag value for premium.
 * `sort t\premium desc` would show all contacts that have the tag of premium, beginning with the contact that has the largest
 alphanumeric tag value for premium, then the contact with the smallest numeric-only tag value for premium, and lastly contact
 that has empty tag value for premium.
-  ![result for 'sort t/premium asc](images/sortEg.png)
+  ![result for 'sort t/premium asc](images/UG_Images/sortpremium.png)
 
 <box type="tip" seamless>
 
 **Tip:** Use the command button for Sort provided to get command template
 <div style="text-align: left;">
-    <img src="images/sortGUIEg.png" alt="Using filter button" width=545 />
+    <img src="images/UG_Images/sortUiButton.png" alt="Using filter button" width=545 />
 </div>
 
 </box>
