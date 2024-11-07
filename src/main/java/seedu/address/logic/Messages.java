@@ -17,7 +17,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_EMAIL_DETAILS = "Invalid email format. "
           + "Please ensure your email includes a valid domain "
           + "(e.g., name@example.com)";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_OUT_OF_BOUNDS = "The index provided is out of bounds."
+            + " Please enter an index within the size of the list.";
     public static final String MESSAGE_INVALID_PERSON_DELETED = "No matching person found. Please check the details.";
     public static final String MESSSAGE_INVALID_PHONE_DETAILS = "Invalid Singapore phone number input. "
           + "Enter a valid phone number that is 8 digits long and starts with 3, 6, 8 or 9.";
