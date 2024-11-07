@@ -54,7 +54,7 @@ public class PersonCard extends UiPart<Region> {
      */
     private void setStatusStyle(String statusText) {
         // Remove any previously set style classes
-        status.getStyleClass().removeAll("status-low", "status-medium", "status-high");
+        status.getStyleClass().removeAll("status-low", "status-medium", "status-high", "status-new");
 
         // Add the correct style class based on the status value
         switch (statusText) {
@@ -66,6 +66,9 @@ public class PersonCard extends UiPart<Region> {
             break;
         case "HIGH":
             status.getStyleClass().add("status-high");
+            break;
+        case "NEW":
+            status.getStyleClass().add("status-new");
             break;
         default:
             // Do nothing, field will remain grey
