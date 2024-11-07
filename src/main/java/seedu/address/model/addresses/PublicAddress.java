@@ -2,6 +2,9 @@ package seedu.address.model.addresses;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
+import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
+import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 
 import java.util.Objects;
 
@@ -13,8 +16,8 @@ public abstract class PublicAddress {
     public static final String DEFAULT_LABEL = "default"; // TODO: Remove once placeholder is no longer needed
 
     public static final String MESSAGE_LABEL_CONSTRAINTS =
-            "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
-
+        "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
+    public static final String VALIDATION_PUBLIC_ADDRESS_REGEX = "^[a-zA-Z0-9]*$"; // TODO: Update regex
     public static final String VALIDATION_LABEL_REGEX = "[^\\s].*"; // TODO: Update regex
 
     public final String publicAddress;
@@ -31,9 +34,7 @@ public abstract class PublicAddress {
         requireAllNonNull(publicAddress, label);
         checkArgument(isValidPublicAddressLabel(label), getMessageConstraints());
 
-        if (!isValidPublicAddress(publicAddress)) {
-            throw new IllegalArgumentException(getMessageConstraints());
-        }
+        validatePublicAddress(publicAddress);
 
         this.publicAddress = publicAddress;
         this.label = label;
@@ -47,9 +48,26 @@ public abstract class PublicAddress {
     }
 
     /**
+     * @param publicAddress
+     * @throws IllegalArgumentException
+     */
+    public static void validatePublicAddress(String publicAddress) throws IllegalArgumentException {
+        if (publicAddress.length() > 100) { //length of public address too long
+            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
+        } else if (!(publicAddress.matches(VALIDATION_PUBLIC_ADDRESS_REGEX))) {
+            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
+        } else if (publicAddress.isEmpty()) {
+            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND);
+        }
+    }
+
+    /**
      * Returns true if a given string is a valid public address.
      */
-    protected abstract boolean isValidPublicAddress(String publicAddress);
+    protected boolean isValidPublicAddress(String publicAddress) {
+        return publicAddress.length() < 100 && publicAddress.matches(VALIDATION_PUBLIC_ADDRESS_REGEX)
+            && !publicAddress.isEmpty();
+    }
 
     /**
      * Returns message for constraints of public address fields.

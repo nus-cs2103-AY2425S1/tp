@@ -4,6 +4,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.INDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
+import static seedu.address.model.addresses.PublicAddress.validatePublicAddress;
 
 import java.util.List;
 
@@ -56,7 +57,12 @@ public class SearchPublicAddressCommand extends Command {
      */
     public SearchPublicAddressCommand(String publicAddressString) {
         requireAllNonNull(publicAddressString);
+
+        validatePublicAddress(publicAddressString);
+
+
         this.publicAddressString = publicAddressString;
+
 
     }
 
@@ -68,15 +74,6 @@ public class SearchPublicAddressCommand extends Command {
         List<Person> personsWithPublicAddressMatch = lastShownList.stream()
             .filter(person -> person.hasPublicAddressStringAmongAllNetworks(publicAddressString))
             .toList();
-
-
-        if (publicAddressString.length() > 100) { //length of public address too long
-            throw new CommandException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
-        } else if (!(publicAddressString.matches("^[a-zA-Z0-9]*$"))) {
-            throw new CommandException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
-        } else if (publicAddressString.isEmpty()) {
-            throw new CommandException(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND);
-        }
 
 
         return new CommandResult(generateSuccessMessage(personsWithPublicAddressMatch));

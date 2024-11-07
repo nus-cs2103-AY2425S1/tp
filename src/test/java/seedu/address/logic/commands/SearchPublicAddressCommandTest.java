@@ -11,10 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_SUB;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
 import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND;
 import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -102,29 +99,24 @@ public class SearchPublicAddressCommandTest {
     //EP: invalid input with special characters
     @Test
     public void execute_searchPublicAddressInvalidChar_failure() {
-        SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand(INVALID_PUBLIC_ADDRESS_INVALID_CHAR);
-        String expectedMessage = MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
-        assertCommandFailure(searchPublicAddressCommand, model, expectedMessage);
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(INVALID_PUBLIC_ADDRESS_INVALID_CHAR));
     }
+
 
     //EP: invalid input with length > 100 characters
     @Test
     public void execute_searchPublicAddressTooLong_failure() {
-        SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand(INVALID_PUBLIC_ADDRESS_TOO_LONG);
-        String expectedMessage = MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
-        assertCommandFailure(searchPublicAddressCommand, model, expectedMessage);
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(INVALID_PUBLIC_ADDRESS_TOO_LONG));
     }
     //---------------- Tests for other equivalence partitions ----------------
 
     //EP: empty string input
     @Test
     public void execute_searchPublicAddressEmpty_failure() {
-        SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand("");
-        assertCommandFailure(searchPublicAddressCommand, model,
-            MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND);
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(""));
     }
 
     //EP: null input
@@ -137,19 +129,15 @@ public class SearchPublicAddressCommandTest {
     //EP: string with only spaces
     @Test
     public void execute_searchPublicAddressOnlySpaces_failure() {
-        SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand("   ");
-        assertCommandFailure(searchPublicAddressCommand, model,
-            MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand("   "));
     }
 
     //EP: string with leading/trailing spaces
     @Test
     public void execute_searchPublicAddressWithSpaces_failure() {
-        SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand(" abc123 ");
-        assertCommandFailure(searchPublicAddressCommand, model,
-            MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(" abc123 "));
     }
 
     //EP: border case length (exactly 100 chars)

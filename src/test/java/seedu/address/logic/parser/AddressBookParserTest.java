@@ -55,7 +55,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPublicAddress() throws Exception {
-        final String publicAddress = "Some public address.";
+        final String publicAddress = "vjyt87576";
         AddPublicAddressCommand command = (AddPublicAddressCommand) parser.parseCommand(
             AddPublicAddressCommand.COMMAND_WORD + " "
                 + "1 "
@@ -120,7 +120,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_searchPublicAddress() throws Exception {
-        final String publicAddress = "Some public address.";
+        final String publicAddress = "23423sa";
         SearchPublicAddressCommand command = (SearchPublicAddressCommand) parser.parseCommand(
             SearchPublicAddressCommand.COMMAND_WORD + " "
                 + PREFIX_PUBLIC_ADDRESS + publicAddress);
