@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.CheckBox?>
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:id="rightPanel">
     <VBox spacing="15" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" minWidth="350">
         <Label text="Transactions" styleClass="title"/>
@@ -17,7 +18,10 @@
                 <Label fx:id="ownYouLabel" text="You are owed $1550.50" styleClass="label, owes-you-text"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="filterBtn" styleClass="filter-btn"/>
+            <VBox alignment="CENTER_RIGHT" spacing="5">
+                <Button fx:id="filterBtn" styleClass="filter-btn"/>
+                <CheckBox fx:id="trackUndoneBalanceOnlyCheckBox" text="Track undone balance only" styleClass="label"/>
+            </VBox>
         </HBox>
 
         <StackPane fx:id="transactionListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
