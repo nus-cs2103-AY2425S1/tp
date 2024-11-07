@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.model.person.Birthday.EMPTY_BIRTHDAY;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -172,8 +174,13 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Birthday.class.getSimpleName()));
         }
+        try {
+            LocalDate.parse(birthday);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
+        }
         if (!Birthday.isValidBirthday(birthday)) {
-            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
         }
         final Birthday modelBirthday = birthday.isEmpty() ? EMPTY_BIRTHDAY : new Birthday(birthday);
 
