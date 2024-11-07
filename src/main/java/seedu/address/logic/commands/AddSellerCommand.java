@@ -24,7 +24,7 @@ public class AddSellerCommand extends AddClientCommand {
      * Includes the command word and expected parameters inherited from {@link AddClientCommand#CLIENT_PARAMETERS}.
      */
     public static final String MESSAGE_USAGE = String.format(
-            "%s: Adds a seller to the address book.\nParameters: %s\n%s",
+            "%s: Adds a seller to the client book.\nParameters: %s\n%s",
             COMMAND_WORD,
             AddClientCommand.CLIENT_PARAMETERS,
             AddClientCommand.CLIENT_RESTRICTIONS
@@ -34,7 +34,15 @@ public class AddSellerCommand extends AddClientCommand {
     public static final String MESSAGE_SUCCESS_SELLER = "New seller added: %1$s";
 
     /** Error message shown when attempting to add a duplicate seller. */
-    public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the client book";
+
+    /** Error message shown when attempting to add a buyer with the same email as an existing buyer. */
+    public static final String MESSAGE_DUPLICATE_EMAIL = "Duplicate email detected. "
+            + "For the addseller command, duplicate emails are detected if:\n"
+            + "1. there is a seller with the same email already in the client book.\n"
+            + "2. there is a buyer with the same email but a different phone number in the client book. "
+            + "Having the same email address as an existing buyer with a different phone number is not allowed as "
+            + "emails should be unique to a client.";
 
     /** Logger to log relevant information for debugging purposes. */
     private static final Logger logger = LogsCenter.getLogger(AddSellerCommand.class);
@@ -73,6 +81,11 @@ public class AddSellerCommand extends AddClientCommand {
                 logger.warning("Attempted to add a duplicate seller: " + toAdd);
                 throw new CommandException(MESSAGE_DUPLICATE_SELLER);
             }
+        }
+
+        if (model.sameEmailExists(toAdd)) {
+            logger.warning("Attempted to add a buyer with the same email as an existing buyer: " + toAdd);
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.addClient(toAdd);

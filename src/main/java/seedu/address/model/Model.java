@@ -49,7 +49,7 @@ public interface Model {
     /**
      * Sets the user prefs' client book file path.
      */
-    void setClientBookFilePath(Path addressBookFilePath);
+    void setClientBookFilePath(Path clientBookFilePath);
 
     /**
      * Replaces client book data with the data in {@code clientBook}.
@@ -60,9 +60,16 @@ public interface Model {
     ReadOnlyClientBook getClientBook();
 
     /**
-     * Returns true if a Client with the same identity as {@code Client} exists in the address book.
+     * Returns true if a Client with the same identity as {@code client} exists in the client book.
      */
     boolean hasClient(Client client);
+
+    /**
+     * Returns true if {@code client} is a Buyer and a Buyer with the same email as {@code client}
+     * exists in the client book or if {@code client} is a Seller and a Seller with the same email
+     * as {@code client} exists in the client book.
+     */
+    boolean sameEmailExists(Client client);
 
     /**
      * Deletes the given client.
@@ -79,7 +86,7 @@ public interface Model {
     /**
      * Replaces the given client {@code target} with {@code editedClient}.
      * {@code target} must exist in the client book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the client book.
      */
     void setClient(Client target, Client editedClient);
 
