@@ -783,7 +783,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing a patient
 
      1. Test case: `edit 1 n/Axel`<br>
-        Expected: Edited Person: Axel; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+
 
      2. Test case: `edit 1 p/88452209 e/alex@gmail.com`<br>
         Expected: Edited Person: Axel; Phone: 88452209; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
@@ -821,7 +821,7 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-  
+
     1. Delete the data file.
     2. Restart the app.
     3. Expected: The app should create a new data file with default data.

@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: #e0d7d7;
-    background-color: #e0d7d7; /* Used in the default.html file */
+    background-color: #e0d7d7;
 }
 
 .label {
@@ -357,4 +357,16 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+.top-bar {
+    -fx-background-color: #e0d7d7; /* Set background color for the top bar */
+    -fx-padding: 10px;             /* Padding for the top bar */
+    -fx-border-color: black;       /* Optional: Add a border color if desired */
+    -fx-border-width: 0 0 1 0;     /* Bottom border for the bar */
+}
+
+.top-bar-label {
+    -fx-font-size: 18pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: blue;           /* Blue text color for "Health Connect" */
 }
