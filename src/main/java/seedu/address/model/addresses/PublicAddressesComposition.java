@@ -2,6 +2,7 @@ package seedu.address.model.addresses;
 
 import static seedu.address.commons.util.StringUtil.INDENT;
 
+import java.awt.*;
 import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
@@ -97,6 +98,22 @@ public class PublicAddressesComposition {
     public Set<PublicAddress> getByNetwork(Network network) {
         assert network != null;
         return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
+    }
+
+    /**
+     * Returns the public address with the specified label in the network.
+     *
+     * @param network The network to search for.
+     * @param label The label to match against the public addresses.
+     */
+    public Set<PublicAddress> getByNetworkAndLabel(Network network, String label) {
+        assert network != null;
+        assert label != null;
+        return Collections.unmodifiableSet(
+            publicAddresses.getOrDefault(network, Collections.emptySet()).stream()
+            .filter(publicAddress -> publicAddress.getLabel().equals(label))
+            .collect(Collectors.toSet())
+        );
     }
 
     /**

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.DeletePublicAddressCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
@@ -39,20 +40,24 @@ public class DeletePublicAddressCommandParser implements Parser<DeletePublicAddr
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
+        Index index;
+
         try {
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            Network network = ParserUtil.parseNetwork(argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_NETWORK).get());
-            if (arePrefixesPresent(argMultimap, PREFIX_PUBLIC_ADDRESS_LABEL)) {
-                String label = ParserUtil.parsePublicAddressLabel(
-                        argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).get()
-                );
-                return new DeletePublicAddressCommand(index, network, label);
-            }
-            return new DeletePublicAddressCommand(index, network);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE), pe);
         }
+
+        Network network = ParserUtil.parseNetwork(argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_NETWORK).get());
+        if (arePrefixesPresent(argMultimap, PREFIX_PUBLIC_ADDRESS_LABEL)) {
+            String label = ParserUtil.parsePublicAddressLabel(
+                    argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).get()
+            );
+            return new DeletePublicAddressCommand(index, network, label);
+        }
+        return new DeletePublicAddressCommand(index, network);
+
     }
 
 }

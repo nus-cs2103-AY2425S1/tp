@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.awt.*;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -65,6 +66,16 @@ public class Person {
         return publicAddressesComposition.getByNetwork(network);
     }
 
+    /**
+     * Returns the public address with the specified label in the network.
+     *
+     * @param network
+     * @param label
+     * @return
+     */
+    public Set<PublicAddress> getPublicAddressesByNetworkAndLabel(Network network, String label) {
+        return publicAddressesComposition.getByNetworkAndLabel(network, label);
+    }
 
     /**
      * Returns true if the person has a public address in the network
