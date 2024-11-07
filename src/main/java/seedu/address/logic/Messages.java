@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
 
 /**
  * Container for user visible messages.
@@ -26,6 +27,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
     public static final String MESSAGE_GENERIC_INDEX_OUT_OF_BOUNDS =
             "Index provided is out of bounds\n%1$s";
+
+    public static final String MESSAGE_EMPTY_NAME = "The event name cannot be empty.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -57,6 +60,7 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
+
     /**
      * @param people
      * @return a String Format of all the Person Objects in the people list
@@ -78,4 +82,18 @@ public class Messages {
         }
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code meeting} for display to the user.
+     */
+    public static String formatMeetings(Meeting meeting) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(meeting.getMeetingName())
+                .append(" on ")
+                .append(meeting.getMeetingDate())
+                .append(" at ")
+                .append(meeting.getMeetingTime());
+        return builder.toString();
+    }
+
 }

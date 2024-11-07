@@ -12,7 +12,7 @@ public class SeeAllScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "list-schedule";
 
-    public static final String MESSAGE_SUCCESS = "Listed meetings";
+    public static final String MESSAGE_SUCCESS = "List all meetings";
 
 
     @Override

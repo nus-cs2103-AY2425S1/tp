@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# SeeRee 2.0 User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+SeeRee 2.0 is a **desktop app for managing contacts and meetings, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SeeRee 2.0 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,11 +17,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F13-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar see-ree-2.0.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -32,7 +32,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
+   * `add-schedule c/1 2 n/Dinner d/10-10-2024 t/1800` : Adds a meeting named `Dinner` with the relevant details to the calendar.
+
    * `delete 3` : Deletes the 3rd contact shown in the current list.
+
+   * `delete-schedule 1` : Deletes the 1st meeting shown in the current calendar.
 
    * `clear` : Deletes all contacts.
 
@@ -146,44 +150,29 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Favouriting a person : `favourite`
+
+Favourites the specified person from the address book.
+
+Format: `favourite INDEX`
+
+* Favourites the person at the specified `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### See all meetings : `list-schedule`
 
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<box type="warning" seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
-### See all meetings
-
-Views all of the user's meetings.
+Views all the user's meetings.
 
 Format: `list-schedule`
 
-### See weekly schedule
+### See weekly schedule : `see`
 
 View schedule for the week of user date input. Sunday is considered the start of the week.
 
@@ -192,7 +181,7 @@ Format: `see d/dd-MM-YYYY`
 Examples:
 - `see d/17-10-2024` shows all meetings within the week range of `13-10-2024` to `19-10-2024`
 
-### Add meetings to schedule
+### Add meetings to schedule : `add-schedule`
 
 Add meetings to user's schedule.
 
@@ -211,7 +200,7 @@ Example:
 - **Before**: no Dinner event at 10-10-2024 1800.
 - **After**: Dinner event at 10-10-2024 1800 is added.
 
-### Delete meeting from schedule
+### Delete meeting from schedule : `delete-schedule`
 
 Delete events from user's schedule.
 
@@ -221,7 +210,7 @@ Format: `delete-schedule INDEX`
 Example:
 - `delete-schedule 2` will delete the second meeting from the current schedule view.
 
-### Edit Meeting in Schedule
+### Edit Meeting in Schedule : `edit-schedule`
 
 Edit the existing meeting within the schedule.
 
@@ -259,12 +248,37 @@ Example:
 
 ![meeting contacts example](images/meeting-contacts_example.png)
 
-- `meeting-contacts 8`
+- `meeting-contacts 1`
 - **Before**: contact view shows all contacts.
-- **After**: only Alex and David contacts are shown.
+- **After**: only John and Sam contacts are shown.
 
 Notes:
 - You must always specify the `INDEX` of the meeting you want to view the contacts in.
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
 
 ## FAQ
 
@@ -282,18 +296,19 @@ Notes:
 
 ## Command summary
 
-Action              | Format, Examples
---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**           | `clear`
-**Delete**          | `delete INDEX`<br> e.g., `delete 3`
-**Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**            | `find n/NAME [n/ANOTHER_NAME] ... [t/TAG]...`<br> e.g. `find n/john t/family`
-**List**            | `list`
-**Help**            | `help`
-**add-schedule**    | `add-schedule c/CONTACT n/NAME d/DATE t/TIME`<br> e.g. `add-schedule n/meeting d/01-01-2001 t/1200 c/1 2`
-**delete-schedule** | `delete-schedule INDEX`<br> e.g. delete-schedule 2`
-**edit-schedule**   | `edit-schedule INDEX [n/NAME] [d/DATE] [t/TIME] [c/INDEX]`<br> e.g. `edit-schedule 1 c/2 3 4 n/Discussion t/1300 d/02-02-2001`
-**meeting-contacts**| `meeting-contacts INDEX`<br> e.g. `meeting-contacts 8`
-**list-schedule**   | `list-schedule`
-**see**             | `see d/dd-MM-YYYY`<br> e.g. `see d/10-10-2024`
+Action                   | Format, Examples
+-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**                | `clear`
+**Delete**               | `delete INDEX`<br> e.g., `delete 3`
+**Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**                 | `find n/NAME [n/ANOTHER_NAME] ... [t/TAG]...`<br> e.g. `find n/john t/family`
+**List**                 | `list`
+**Help**                 | `help`
+**Add Meeting**          | `add-schedule c/CONTACT n/NAME d/DATE t/TIME`<br> e.g. `add-schedule n/meeting d/01-01-2001 t/1200 c/1 2`
+**Delete Meeting**       | `delete-schedule INDEX`<br> e.g. delete-schedule 2`
+**Edit Meeting**         | `edit-schedule INDEX [n/NAME] [d/DATE] [t/TIME] [c/INDEX]`<br> e.g. `edit-schedule 1 c/2 3 4 n/Discussion t/1300 d/02-02-2001`
+**Find meeting contacts**| `meeting-contacts INDEX`<br> e.g. `meeting-contacts 8`
+**List all Meetings**    | `list-schedule`
+**Find schedule**        | `see d/dd-MM-YYYY`<br> e.g. `see d/10-10-2024`
+**Favourite contact**    | `favourite INDEX`

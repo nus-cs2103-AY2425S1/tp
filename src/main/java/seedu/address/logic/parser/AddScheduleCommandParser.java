@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.util.PrefixPresenceUtil.arePrefixesPresent;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_NAME;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -49,6 +50,9 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
 
             // Parse the schedule name
             String name = argMultimap.getValue(PREFIX_NAME).get().trim();
+            if (name.isEmpty()) {
+                throw new ParseException(MESSAGE_EMPTY_NAME);
+            }
 
             // Parse and validate the date
             LocalDate date;

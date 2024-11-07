@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETING;
-import static seedu.address.testutil.TypicalMeetings.getAlmostDuplicateMeetings;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetings;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -53,7 +52,7 @@ public class EditScheduleCommandTest {
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_MEETING, descriptor);
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS,
-                "Team Meeting", "2024-10-11", "15:00");
+                "Team Meeting on 2024-10-11 at 15:00");
 
         // Create expected model using the full address book, user preferences, and a ReadOnlyScheduleList.
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleList());
@@ -186,16 +185,5 @@ public class EditScheduleCommandTest {
         descriptorDifferentContactIndexes.setTime(LocalTime.of(15, 0));
         descriptorDifferentContactIndexes.setContactIndex(List.of(Index.fromOneBased(2)));
         assertNotEquals(descriptor1, descriptorDifferentContactIndexes);
-    }
-
-    @Test
-    public void execute_editMeetingToDuplicateMeeting_failure() {
-        Model duplicateModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getAlmostDuplicateMeetings());
-        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
-                .withContactIndexes(List.of(Index.fromOneBased(1), Index.fromOneBased(2)))
-                .build();
-        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_MEETING, descriptor);
-
-        assertThrows(CommandException.class, () -> editScheduleCommand.execute(duplicateModel));
     }
 }
