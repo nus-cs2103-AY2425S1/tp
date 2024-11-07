@@ -384,17 +384,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
-* 1a. Teacher specifies some filter criteria using valid tags
-  * 1a1. EduConnect displays a list of all contacts that fit that criteria in the address book
-    
-    Use case ends.
-  
-* 1b. Teacher uses invalid tags to filter
-  * 1b1. EduConnect displays an error message, e.g. “Invalid detail to find with! Please use one of the following options: name, gender, contact, classes, subject, email”
-    
-    Use case ends.
-
 **Use case: UC-05 Edit a contact**
 
 **Preconditions**
@@ -467,6 +456,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1e1. EduConnect displays a warning, e.g. “No contacts matching the specified filter, no changes made to address book”
 
     Use case ends.
+
+**Use case: UC-07 Find**
+
+**MSS**
+1. Teacher enters the find command with some specific criteria
+2. EduConnect displays a list of all persons that fit that criteria in the address book
+
+   Use case ends.
+
+**Extensions**
+* 1a. Teacher specifies some filter criteria using valid tags
+    * 1a1. EduConnect displays a list of all contacts that fit that criteria in the address book
+
+      Use case ends.
+
+* 1b. Teacher uses invalid tags to filter
+    * 1b1. EduConnect displays an error message, e.g. “Invalid detail to find with! Please use one of the following options: name, gender, contact, classes, subject, email”
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
