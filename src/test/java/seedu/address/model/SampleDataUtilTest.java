@@ -3,12 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
