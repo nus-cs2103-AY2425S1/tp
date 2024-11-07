@@ -6,9 +6,9 @@
 
 # Tuteez User Guide
 
-Tuteez is a **desktop address book app designed specifically for tech-savvy private tutors to manage student contacts**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student. If you can type fast, Tuteez can get your contact management tasks done faster than traditional GUI apps.
+Welcome! Tuteez is a **desktop address book app that makes managing student contacts seamless for private tutors**, allowing you to focus on what truly matters: your students.
 
-<!-- * Table of Contents -->
+Optimized to harness the strengths of both Command Line Interface (CLI) and Graphical User Interface (GUI), providing users with the flexibility and functionality of both interfaces. Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student.
 
 - [Tuteez User Guide](#tuteez-user-guide)
    * [Quick start](#quick-start)
@@ -73,8 +73,15 @@ Tuteez is a **desktop address book app designed specifically for tech-savvy priv
 
 ### Left panel
 
-* Meant to showcase only important information such as student's phone number, address, telegram and next lesson based on your computer's current time
+* Prioritizes important information such as student's phone number, address, next lesson, based on your computer's current time
 * If a lesson is currently ongoing it will show that lesson as the next lesson on the left panel
+
+<div style="width: 60%;">
+
+> 📘 **Info**  
+> If you change your computer's current time, just restart the app to sync our internal clock to your new time!!
+
+</div>
 
 ### Right panel
 
@@ -152,8 +159,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing **tags**, **all previous values will be replaced** by the new ones entered.
     - This means you must **retype all old tags** you wish to keep, as editing will overwrite them completely.
-    - For example, if a student already has two lessons and you wish to add another, you need to re-enter the previous lessons along with the new one.
-* Lessons cannot clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, the app will notify the user with an error message.
 * You can remove all optional fields as specified in the `add` command by typing its parameter prefix (e.g. `t/`) without specifying any values after them.
 
 Examples:
@@ -295,7 +300,7 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Key details
+## Things you should definitely know 🤔
 
 ### Lesson Constraints
 
@@ -312,6 +317,16 @@ This means the following constraints apply:
   1. The latest lesson end time is `2359`, `0000` is treated as the start of a new day
 
 Look forward to [future updates](#future-features) for group tuition support!!
+
+### Current Limitations
+
+As of `V1.5`, our app has a few limitations outlined below. Rest assured we, plan to resolve them in [future updates](#future-features)
+
+1. Remarks and lessons can only be added one at a time
+1. If you wish to edit a remark or lesson, first delete the incorrect one, then add the updated version.
+1. After using the find command to locate student(s), running most other commands will reset the left panel to the default view, similar to calling `list`.
+1. Tags that are too long are cut off on the left panel
+
 ### Saving the data
 
 Tuteez data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -331,9 +346,13 @@ Furthermore, certain edits can cause Tuteez to behave in unexpected ways (e.g., 
 
 ## Future Features
 
-### Archiving data files `[coming in v2.0]`
+With the ever-changing responsibilities of tutors, Tuteez evolves right alongside you, adding new features to support your journey. Here’s what’s in store for future updates!
 
-_Details coming soon ..._
+1. Group Lessons: Tuteez will soon support overlapping lessons and student grouping for group tuition! And as always, it will alert you in advance if there are any scheduling conflicts. 😉
+1. Document Management: Upload and associate PDFs or other documents directly with specific students for easy access and organization.
+1. Quick Messaging: Instantly open WhatsApp or Telegram chats with students directly from Tuteez with a single click, making it easy to reach out right away.
+1. Data Export: Enable seamless exporting of student information and lesson data into files for easy sharing, backup, or analysis outside of Tuteez.
+1. Of course, addressing all the limitations stated [above](#current-limitations)
 
 --------------------------------------------------------------------------------------------------------------------
 
