@@ -400,12 +400,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. Invalid index provided
-  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+  * 2a1. EduConnect displays an error message.
 
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
-  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to edit! Please use the following options: name, gender, contact, classes, subject, email”
+  * 2b1. EduConnect displays an error message.
   
     Use case ends.
   
@@ -466,13 +466,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
-* 1a. Teacher specifies some filter criteria using valid tags
-    * 1a1. EduConnect displays a list of all contacts that fit that criteria in the address book
+* 1a. Teacher doesn't specify any criteria
+    * 1b1. EduConnect displays an error message.
 
       Use case ends.
 
 * 1b. Teacher uses invalid tags to filter
-    * 1b1. EduConnect displays an error message, e.g. “Invalid detail to find with! Please use one of the following options: name, gender, contact, classes, subject, email”
+    * 1b1. EduConnect displays an error message.
 
       Use case ends.
 
