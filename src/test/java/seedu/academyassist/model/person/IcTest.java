@@ -59,9 +59,9 @@ public class IcTest {
         assertTrue(ic.equals(ic));
 
         // upper case and lower case of the same ic -> returns true
-        assertTrue(ic.equals(new Ic("m1234567x")));
-        assertTrue(ic.equals(new Ic("M1234567x")));
-        assertTrue(ic.equals(new Ic("m1234567X")));
+        assertTrue(ic.equals(new Ic("m1234567x"))); // starts and ends with lower case letter
+        assertTrue(ic.equals(new Ic("M1234567x"))); // ends with lower case letter
+        assertTrue(ic.equals(new Ic("m1234567X"))); // start with lower case letter
 
         // null -> returns false
         assertFalse(ic.equals(null));
