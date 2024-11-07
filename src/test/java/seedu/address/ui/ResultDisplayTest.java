@@ -1,4 +1,4 @@
-package seedu.address.ui.guitests;
+package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.ResultDisplayHandle;
-import seedu.address.ui.ResultDisplay;
 
 public class ResultDisplayTest extends GuiUnitTest {
 

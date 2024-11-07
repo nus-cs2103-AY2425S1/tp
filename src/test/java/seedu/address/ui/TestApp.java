@@ -1,4 +1,4 @@
-package seedu.address.ui.guitests;
+package seedu.address.ui;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;

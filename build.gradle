@@ -20,7 +20,7 @@ repositories {
 
 task testNoGui(type: Test) {
     useJUnitPlatform()
-    exclude '**/seedu/address/ui/guitests/**'
+    exclude '**/seedu/address/ui/**'
     finalizedBy jacocoTestReport
 }
 

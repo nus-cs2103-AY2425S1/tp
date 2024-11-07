@@ -1,4 +1,4 @@
-package seedu.address.ui.guitests;
+package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.ui.PersonCard;
 
 public class PersonCardTest extends GuiUnitTest {
 
