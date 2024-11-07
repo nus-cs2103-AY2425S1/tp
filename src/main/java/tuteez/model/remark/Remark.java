@@ -7,7 +7,7 @@ import static tuteez.commons.util.AppUtil.checkArgument;
  * Represents a Remark in the address book.
  */
 public class Remark {
-    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any remarks, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks should not be blank";
 
     private static final String VALIDATION_REGEX = ".+";
 

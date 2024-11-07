@@ -8,7 +8,7 @@
 
 Welcome! Tuteez is a **desktop address book app that makes managing student contacts seamless for private tutors**, allowing you to focus on what truly matters: your students.
 
-Optimized to harness the strengths of both Command Line Interface (CLI) and Graphical User Interface (GUI), providing users with the flexibility and functionality of both interfaces. Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student.
+<!-- * Table of Contents -->
 
 - [Tuteez User Guide](#tuteez-user-guide)
    * [Quick start](#quick-start)
@@ -27,7 +27,7 @@ Optimized to harness the strengths of both Command Line Interface (CLI) and Grap
       + [Clearing all entries : `clear`](#clearing-all-entries-clear)
       + [Exiting the program : `exit`](#exiting-the-program-exit)
    * [Key details for Users  ](#key-details-for-users)
-      + [Lesson Constraints](#lesson-constraints)
+      + [`Lesson` Constraints](#lesson-constraints)
       + [Saving the data](#saving-the-data)
       + [Editing the data file](#editing-the-data-file)
    * [Future Features](#future-features)
@@ -135,7 +135,7 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] 
 
 <box type="tip" seamless>
 
-**Tip:** A student can have any number of tags and lessons (including 0)
+**Tip:** You can add any number of tags and lessons to a student (or you could also omit them)
 </box>
 
 Examples:
@@ -164,7 +164,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 l/tuesday 0900-1100` Edits the lesson of the 3rd student to be `MONDAY 0900-1100`.
 
 ### Adding a Remark: `addremark` or `addrmk`
 
@@ -220,7 +219,7 @@ Format: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 
 * short form: `dellsn INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 * Deletes lesson(s) from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* Lessons are indexed based on the order they were added to the student, starting from 1.
+* Lessons are indexed starting from 1 and sorted in ascending order based on their day and time.
 * If the `LESSON_INDEX` is not valid, an error will be shown.
 
 Examples:
@@ -230,6 +229,7 @@ Examples:
 <box type="tip" seamless>
 
 **Tip:** You can delete multiple lessons at once by specifying different lesson indices.
+</box>
 
 ### Locating persons by name: `find`
 
@@ -248,7 +248,7 @@ Format: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON
 
 Examples:
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  <img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="800">
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
@@ -270,21 +270,22 @@ Format: `delete INDEX` or `delete NAME`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the first student in the results of the `find` command.
 * `delete John Doe` deletes the student with the full name "John Doe" from the address book, ignoring case sensitivity.
 
 ### Displaying Student Information: `display`
 
 Displays specific information of a student in Tuteez.
 
-Format: `display INDEX`
+Format: `display INDEX` or `display NAME`
 
-* Displays the details of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Displays the details of the student at the specified `INDEX` or with the specified `NAME`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * The displayed information includes the student's name, phone number, email, address, tags, lessons, and any remarks associated with the student.
 
 Examples:
 * `display 1` Shows the details of the first student in the list.
 * `display 3` Shows the details of the third student in the list.
+* `display john doe` Shows the details of student John Doe in the list, if they were to be found.
 
 ### Clearing all entries : `clear`
 
@@ -302,7 +303,7 @@ Format: `exit`
 
 ## Things you should definitely know 🤔
 
-### Lesson Constraints
+### Constraints to add a lesson
 
 Unfortunately, as of `V1.5` there are a few important constraints regarding lessons:  
 
@@ -377,7 +378,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [l/LESSON]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math t/monday 0900-1100`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME`<br> e.g., `delete 3` or `delete James Ho`
-**Display**| `display INDEX` <br> e.g., `display 1`
+**Display**| `display INDEX` or display `NAME` <br> e.g., `display 1` or display `John Doe`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math l/sunday 1000-1100`
 **Add Remark** | `remark INDEX r/REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 r/Great progress in Math`
 **Delete Remark** |  `remark INDEX ri/REMARK_INDEX` to delete the remark at `REMARK_INDEX` from the student at `INDEX`<br> e.g., `remark 1 ri/2` to delete the second remark of student 1.

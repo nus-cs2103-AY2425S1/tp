@@ -27,7 +27,7 @@ public class AddLessonCommand extends LessonCommand {
     public static final String MESSAGE_USAGE = "Add lessons by index in displayed student list: " + COMMAND_WORD_ADD
             + " (short form: " + COMMAND_WORD_ADD_ALT + ")"
             + " INDEX l/LESSON [l/LESSON]...\n"
-            + "Example: " + COMMAND_WORD_ADD + " 1 l/monday 0900-1100 l/wednesday 1400-1600\n";
+            + "Example: " + COMMAND_WORD_ADD + " 1 l/monday 0900-1100 l/wednesday 1400-1600";
 
     private final List<Lesson> lessonsToAdd;
 
@@ -141,7 +141,7 @@ public class AddLessonCommand extends LessonCommand {
     private String formatLessonList(List<Lesson> lessons) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i).toString()).append("\n");
+            sb.append("• ").append(lessons.get(i).toString()).append("\n");
         }
         return sb.toString();
     }

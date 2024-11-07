@@ -251,7 +251,7 @@ public class AddLessonCommandTest {
     private String formatLessonList(List<Lesson> lessons) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lessons.size(); i++) {
-            sb.append(i + 1).append(". ").append(lessons.get(i).toString()).append("\n");
+            sb.append("• ").append(lessons.get(i).toString()).append("\n");
         }
         return sb.toString();
     }
