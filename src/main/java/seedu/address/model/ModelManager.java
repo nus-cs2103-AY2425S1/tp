@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,7 +14,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Subject;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -132,8 +130,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Map.Entry<? extends Person, Subject>> getAssociatedPeople(Person person) {
+    public List<Person> getAssociatedPeople(Person person) {
         return versionedAddressBook.getAssociatedPeople(person);
+    }
+
+    @Override
+    public List<Lesson> getAssociatedLessons(Person person) {
+        return versionedAddressBook.getAssociatedLessons(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================

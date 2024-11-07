@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -13,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutor;
 
 /**
@@ -71,24 +69,39 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Retrieves a list of associated people and their subjects based on the specified person.
+     * Returns a list of associated people (Tutors or Tutees) for the given person.
+     * If the given person is a Tutor, it returns all associated Tutees.
+     * If the given person is a Tutee, it returns all associated Tutors.
      *
-     * @param person the person whose associated people are to be retrieved.
-     * @return a list of map entries where each entry contains a person and their associated subject.
-     *         If the person is a tutor, each entry will contain a tutee and the subject taught.
-     *         If the person is a tutee, each entry will contain a tutor and the subject studied.
+     * @param person The person for whom the associated people are to be retrieved.
+     *               Must be non-null and either a Tutor or Tutee.
+     * @return A list of associated persons.
      */
-    public List<Map.Entry<? extends Person, Subject>> getAssociatedPeople(Person person) {
+    public List<Person> getAssociatedPeople(Person person) {
         requireAllNonNull(person);
         if (person instanceof Tutor) {
-            return internalList.stream()
-                    .filter(item -> item.getTutor().equals(person))
-                    .map(item -> Map.entry(item.getTutee(), item.getSubject()))
+            return internalList.stream().filter(item -> item.getTutor().equals(person))
+                    .map(Lesson::getTutee).collect(Collectors.toList());
+        } else {
+            return internalList.stream().filter(item -> item.getTutee().equals(person))
+                    .map(Lesson::getTutor).collect(Collectors.toList());
+        }
+    }
+
+    /**
+     * Returns a list of associated lessons for the given person.
+     *
+     * @param person The person for whom the associated lessons are to be retrieved.
+     *               Must be non-null and either a Tutor or Tutee.
+     * @return A list of associated lessons.
+     */
+    public List<Lesson> getAssociatedLessons(Person person) {
+        requireAllNonNull(person);
+        if (person instanceof Tutor) {
+            return internalList.stream().filter(item -> item.getTutor().equals(person))
                     .collect(Collectors.toList());
         } else {
-            return internalList.stream()
-                    .filter(item -> item.getTutee().equals(person))
-                    .map(item -> Map.entry(item.getTutor(), item.getSubject()))
+            return internalList.stream().filter(item -> item.getTutee().equals(person))
                     .collect(Collectors.toList());
         }
     }

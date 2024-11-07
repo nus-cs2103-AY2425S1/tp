@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -9,7 +8,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Subject;
 
 /**
  * Container for user visible messages.
@@ -59,18 +57,20 @@ public class Messages {
     /**
      * Formats the {@code person} for display to the user.
      */
-    public static String format(Person person, List<Map.Entry<? extends Person, Subject>> associatedPeople) {
+    public static String format(Person person, List<Lesson> associatedLessons) {
         final StringBuilder builder = new StringBuilder();
         builder.append(format(person));
 
         if (person.isTutor()) {
             builder.append("\n Tutees:\n");
+            associatedLessons.forEach(l -> builder.append("\t").append(l.getTutee().getName()).append(" - ")
+                    .append(l.getSubject()).append("\n"));
         } else {
             builder.append("\n Tutors:\n");
+            associatedLessons.forEach(l -> builder.append("\t").append(l.getTutor().getName()).append(" - ")
+                    .append(l.getSubject()).append("\n"));
         }
 
-        associatedPeople.forEach(p -> builder.append("\t").append(p.getKey().getName()).append(" - ")
-                .append(p.getValue()).append("\n"));
         return builder.toString();
     }
 

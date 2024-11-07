@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutor;
 import seedu.address.testutil.TutorBuilder;
 
@@ -176,7 +174,12 @@ public class AddTutorCommandTest {
         };
 
         @Override
-        public List<Map.Entry<? extends Person, Subject>> getAssociatedPeople(Person person) {
+        public List<Person> getAssociatedPeople(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Lesson> getAssociatedLessons(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -78,23 +77,20 @@ public class UniqueLessonListTest {
     @Test
     public void getAssociatedPeople_singleLesson_returnsAssociatedPeople() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        Subject subject = new Subject("Math");
-        uniqueLessonList.add(new Lesson(ALICE, DANIEL, subject));
-        ArrayList<Map.Entry<Person, Subject>> expected = new ArrayList<>();
-        expected.add(Map.entry(DANIEL, subject));
+        uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        ArrayList<Person> expected = new ArrayList<>();
+        expected.add(DANIEL);
         assertEquals(uniqueLessonList.getAssociatedPeople(ALICE), expected);
     }
 
     @Test
     public void getAssociatedPeople_multipleLessons_returnsAssociatedPeople() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        Subject math = new Subject("Math");
-        Subject english = new Subject("English");
-        uniqueLessonList.add(new Lesson(ALICE, DANIEL, math));
-        uniqueLessonList.add(new Lesson(ALICE, CLARA, english));
-        ArrayList<Map.Entry<Person, Subject>> expected = new ArrayList<>();
-        expected.add(Map.entry(DANIEL, math));
-        expected.add(Map.entry(CLARA, english));
+        uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        uniqueLessonList.add(new Lesson(ALICE, CLARA, new Subject("English")));
+        ArrayList<Person> expected = new ArrayList<>();
+        expected.add(DANIEL);
+        expected.add(CLARA);
         assertEquals(uniqueLessonList.getAssociatedPeople(ALICE), expected);
     }
 

@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Map;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
@@ -12,7 +11,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.UniquePersonList;
@@ -153,15 +151,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code person} must exist in the address book.
      */
     public void removeAssociatedLessons(Person person) {
-        List<Map.Entry<? extends Person, Subject>> associations = getAssociatedPeople(person);
+        List<Lesson> associations = getAssociatedLessons(person);
 
-        for (Map.Entry<? extends Person, Subject> associate : associations) {
-            Subject subject = associate.getValue();
-
+        for (Lesson associate : associations) {
             if (person.isTutor()) {
-                removeLesson(new Lesson((Tutor) person, (Tutee) associate, subject));
+                removeLesson(new Lesson((Tutor) person, associate.getTutee(), associate.getSubject()));
             } else {
-                removeLesson(new Lesson((Tutor) associate, (Tutee) person, subject));
+                removeLesson(new Lesson(associate.getTutor(), (Tutee) person, associate.getSubject()));
             }
         }
     }
@@ -205,8 +201,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         return lessons.asUnmodifiableObservableList();
     }
 
-    public List<Map.Entry<? extends Person, Subject>> getAssociatedPeople(Person person) {
+    public List<Person> getAssociatedPeople(Person person) {
         return lessons.getAssociatedPeople(person);
+    }
+
+    public List<Lesson> getAssociatedLessons(Person person) {
+        return lessons.getAssociatedLessons(person);
     }
 
     public Person getPersonById(int personId) {

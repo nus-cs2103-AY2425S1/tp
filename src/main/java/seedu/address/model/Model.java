@@ -2,14 +2,12 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Subject;
 
 /**
  * The API of the Model component.
@@ -100,7 +98,12 @@ public interface Model {
     /**
      * Returns a list of associated people (Tutors or Tutees) and their associated Subject for the given person.
      */
-    List<Map.Entry<? extends Person, Subject>> getAssociatedPeople(Person person);
+    List<Person> getAssociatedPeople(Person person);
+
+    /**
+     * Returns a list of associated lessons for the given person.
+     */
+    List<Lesson> getAssociatedLessons(Person person);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
