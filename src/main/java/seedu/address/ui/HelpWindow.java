@@ -104,7 +104,8 @@ public class HelpWindow extends UiPart<Stage> {
                         "delete 69"),
                 new CommandSummary("Edit Existing Client",
                         "edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
-                                + "[t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>] [s/ <STATUS>]",
+                                + "[t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>] "
+                                + "[s/ <STATUS>]",
                         "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 "
                                 + "t/ bronze ra/ Specialist in eye care s/ urgent"),
                 new CommandSummary("List All Clients",
