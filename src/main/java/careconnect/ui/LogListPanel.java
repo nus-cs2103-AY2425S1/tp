@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 /**
  * Panel containing the list of logs.
  */
-public class LogListPanel extends UiPart<Region> {
+public class LogListPanel extends UiPart<Region> implements ShiftTabFocusable {
     private static final String FXML = "LogListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(LogListPanel.class);
 
@@ -27,6 +27,11 @@ public class LogListPanel extends UiPart<Region> {
         super(FXML);
         logListView.setItems(FXCollections.observableList(logs));
         logListView.setCellFactory(cell -> new LogListViewCell());
+    }
+
+    @Override
+    public void focus() {
+        this.logListView.requestFocus();
     }
 
     /**

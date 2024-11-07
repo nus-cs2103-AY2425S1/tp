@@ -92,6 +92,13 @@
     -fx-background-color: derive(#FFFFFF, 20%);
 }
 
+/* Style when the ListView is focused */
+.list-view:focused {
+    -fx-border-color: #FFCC00;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+}
+
 /* Styles the contact info cell */
 .list-cell {
     -fx-label-padding: 0 0 0 0;

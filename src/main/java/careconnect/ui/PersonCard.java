@@ -48,7 +48,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex, Consumer<Integer> showSelectedPerson) {
+    public PersonCard(Person person, int displayedIndex, Consumer<Integer> setAndShowSelectedPerson) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -63,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
 
         // Attach event listener
         cardPane.setOnMousePressed(e -> {
-            showSelectedPerson.accept(displayedIndex - 1); // Because the list is 0-indexed
+            setAndShowSelectedPerson.accept(displayedIndex - 1); // Because the list is 0-indexed
         });
     }
 }

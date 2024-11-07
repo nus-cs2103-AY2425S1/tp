@@ -15,7 +15,7 @@ import javafx.scene.layout.Region;
 /**
  * The UI component that is responsible for receiving user command inputs.
  */
-public class CommandBox extends UiPart<Region> {
+public class CommandBox extends UiPart<Region> implements ShiftTabFocusable {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
@@ -38,6 +38,11 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         this.syntaxValidator = syntaxValidator;
+    }
+
+    @Override
+    public void focus() {
+        commandTextField.requestFocus();
     }
 
     /**

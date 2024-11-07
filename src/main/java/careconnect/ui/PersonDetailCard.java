@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
  * An UI component that displays detailed information of a {@code Person} in the right pane of
  * the window.
  */
-public class PersonDetailCard extends UiPart<Region> {
+public class PersonDetailCard extends UiPart<Region> implements ShiftTabFocusable {
 
     private static final String FXML = "PersonDetailCard.fxml";
 
@@ -82,5 +82,16 @@ public class PersonDetailCard extends UiPart<Region> {
 
         logsListPanel = new LogListPanel(person.getLogs());
         logsListPanelPlaceHolder.getChildren().setAll(logsListPanel.getRoot());
+    }
+
+    /**
+     * Sets focus on the logs within the PersonDetailCard.
+     * Currently, logs are the only component in the PersonDetailCard
+     * that should be focusable with Shift + Tab navigation.
+     * This method directs the focus to logsListPanel by calling logsListPanel.focus().
+     */
+    @Override
+    public void focus() {
+        this.logsListPanel.focus();
     }
 }
