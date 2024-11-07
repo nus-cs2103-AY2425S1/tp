@@ -46,13 +46,17 @@ public class ThemePreference {
     }
 
     /**
-     * Saves the current theme preference to the JSON file.
+     * Saves the current theme preference to the JSON file after ensuring data directory exists
      *
      * @param theme The theme to save ('light' or 'dark').
      */
     public void saveThemePreference(String theme) {
         this.theme = theme;
         try {
+            // Ensure the data directory exists
+            if (!Files.exists(THEME_PREF_FILE_PATH.getParent())) {
+                Files.createDirectories(THEME_PREF_FILE_PATH.getParent());
+            }
             JsonUtil.saveJsonFile(theme, THEME_PREF_FILE_PATH);
         } catch (IOException e) {
             logger.log(Level.WARNING, "Unable to save theme preference", e);
