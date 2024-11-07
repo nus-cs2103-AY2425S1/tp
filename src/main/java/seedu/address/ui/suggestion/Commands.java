@@ -15,7 +15,7 @@ public enum Commands {
     LIST("list", "list", new String[]{}),
     EXIT("exit", "exit", new String[]{}),
     HELP("help", "help", new String[]{}),
-    EDIT("edit", "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
+    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
             new String[]{"n/", "p/", "e/", "a/"}),
     ADDWEDDING("addw", "addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]",
             new String[]{"n/", "c/", "d/", "v/"}),
