@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * Represents a Person's next appointment date in the address book.
+ * Represents a Person's next appointment date and time in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Date {
@@ -69,12 +69,12 @@ public class Date {
      */
     public static void checkDateAndTime(String date) throws ParseException {
         if (!date.matches("[0-9/ ]+")) {
-            throw new ParseException("Invalid date characters detected! "
+            throw new ParseException("Invalid date and time characters detected! "
                     + "Only numbers, '/' and spaces are allowed.");
         }
 
         if (!date.matches(DATE_AND_TIME_PATTERN) && !date.matches(FORMAT_PATTERN_DATE_AND_TIME)) {
-            throw new ParseException("Invalid date format! Please use 'd/M/yyyy HHmm'. "
+            throw new ParseException("Invalid date and time format! Please use 'd/M/yyyy HHmm'. "
                     + "For example, '2/12/2024 1800'.");
         }
         if (!date.matches(DATE_AND_TIME_PATTERN)) {
@@ -88,7 +88,7 @@ public class Date {
 
 
     /**
-     * Validates the format and values of a date string.
+     * Validates the format and values of a date string specifically for date in Schedule Command.
      * <p>
      * This method checks if the input date string matches the expected format
      * of "d/M/yyyy" (e.g., "2/12/2024") and whether the individual day,

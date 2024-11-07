@@ -132,6 +132,7 @@ public class DateTest {
                 "Invalid date characters detected! Only numbers, '/' and spaces are allowed.");
     }
 
+    //Valid date parsing test
     @Test
     public void isValidDate() {
         // Null date
@@ -167,6 +168,7 @@ public class DateTest {
         assertDoesNotThrow(() -> Date.checkDate("29/2/2024")); // Valid leap year date
 
     }
+
 
     //Ensures input date is only numbers and '/'
     @Test
@@ -253,7 +255,7 @@ public class DateTest {
     public void parseDateTime_invalidFormat_throwsParseException() {
         ParseException thrown =
                 assertThrows(ParseException.class, () -> Date.parseDateTime("12-31-2024 1200"));
-        assertEquals("Invalid date characters detected! Only numbers, '/' and spaces are allowed.",
+        assertEquals("Invalid date and time characters detected! Only numbers, '/' and spaces are allowed.",
                 thrown.getMessage());
     }
 
