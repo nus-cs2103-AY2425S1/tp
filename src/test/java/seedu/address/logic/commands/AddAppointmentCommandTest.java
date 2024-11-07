@@ -2,11 +2,16 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.DateUtil.DATE_TIME_FORMATTER;
 import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESCRIPTION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_END_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_END_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_START_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_START_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_END_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_START_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
@@ -69,4 +74,76 @@ public class AddAppointmentCommandTest {
         // Step 4: Expect failure with MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
         assertCommandFailure(addAppointmentCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
+    // overlapping dates occurring between an existing appointment
+    @Test
+    public void execute_overlappingAppointmentDateWithin_failure() {
+        //step 1: Create a invalid appointment
+        Appointment invalidAppointment = new Appointment(APPOINTMENT_DESCRIPTION_AMY,
+                LocalDateTime.parse(INVALID_APPOINTMENT_START_AMY, DATE_TIME_FORMATTER),
+                LocalDateTime.parse(INVALID_APPOINTMENT_END_AMY, DATE_TIME_FORMATTER));
+
+
+        //step 2: Set up AddAppointmentCommand with the overlapping dates with other appointments
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(invalidAppointment,
+                INDEX_SECOND_PERSON);
+
+
+        assertCommandFailure(addAppointmentCommand, model, AddAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+    }
+
+
+    // overlapping dates occurring outside an existing appointment
+    @Test
+    public void execute_overlappingAppointmentDateOutside_failure() {
+        //step 1: Create a invalid appointment
+        Appointment invalidAppointment = new Appointment(APPOINTMENT_DESCRIPTION_AMY,
+                LocalDateTime.parse(INVALID_APPOINTMENT_START_BOB, DATE_TIME_FORMATTER),
+                LocalDateTime.parse(INVALID_APPOINTMENT_END_BOB, DATE_TIME_FORMATTER));
+
+
+        //step 2: Set up AddAppointmentCommand with the overlapping dates with other appointments
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(invalidAppointment,
+                INDEX_SECOND_PERSON);
+
+
+        assertCommandFailure(addAppointmentCommand, model, AddAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+    }
+
+
+    // overlapping dates occurring outside an existing appointment
+    @Test
+    public void execute_overlappingEndingAppointmentDate_failure() {
+        //step 1: Create a invalid appointment
+        Appointment invalidAppointment = new Appointment(APPOINTMENT_DESCRIPTION_AMY,
+                LocalDateTime.parse(INVALID_APPOINTMENT_START_BOB, DATE_TIME_FORMATTER),
+                LocalDateTime.parse(INVALID_APPOINTMENT_END_AMY, DATE_TIME_FORMATTER));
+
+
+        //step 2: Set up AddAppointmentCommand with the overlapping dates with other appointments
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(invalidAppointment,
+                INDEX_SECOND_PERSON);
+
+
+        assertCommandFailure(addAppointmentCommand, model, AddAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+    }
+
+
+    // overlapping dates occurring outside an existing appointment
+    @Test
+    public void execute_overlappingStartingAppointmentDate_failure() {
+        //step 1: Create a invalid appointment
+        Appointment invalidAppointment = new Appointment(APPOINTMENT_DESCRIPTION_AMY,
+                LocalDateTime.parse(INVALID_APPOINTMENT_START_AMY, DATE_TIME_FORMATTER),
+                LocalDateTime.parse(INVALID_APPOINTMENT_END_BOB, DATE_TIME_FORMATTER));
+
+
+        //step 2: Set up AddAppointmentCommand with the overlapping dates with other appointments
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(invalidAppointment,
+                INDEX_SECOND_PERSON);
+
+
+        assertCommandFailure(addAppointmentCommand, model, AddAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+    }
+
 }
