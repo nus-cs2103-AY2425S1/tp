@@ -71,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'NomNomNotifier.jar'
 }
 
 defaultTasks 'clean', 'test'
