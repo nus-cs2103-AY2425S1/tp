@@ -157,15 +157,29 @@ Before continuing, here are some important information you need to know about th
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
+Before diving into our features, do note that we set some specifications for naming and such.
+
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Important notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* `NAME` would be the Company's name, InternBuddy only allows alphanumeric characters (letters and numbers) to represent it. <br>
+  e.g. `7Eleven` is allowed but not `7-Eleven` because `-` is neither a letter nor a number.
+
+* `PHONE_NUMBER` is the Company's phone number. Company phone numbers should be at least 3 digits long, does not take into account the `+` prefix and must be all numbers.
+ e.g. `85092323`, `0122345677`
+
+* InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters again (letters and numbers). The following special characters `+ - _ .` are allowed in `local-part` but note that:
+  1. `local-part` can't begin or end with any special characters.
+  2. `local-part` can't have consecutive special characters in it.
+  3. The only special characters allowed in `domain` are periods (`.`) are allowed in `domain` and follows the 2 rules for `local-part` above. <br>
+  e.g. `abc-123+spam@nus.edu.sg`
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
