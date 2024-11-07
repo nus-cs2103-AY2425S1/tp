@@ -23,3 +23,4 @@ src/test/data/sandbox/
 docs/_site/
 docs/_markbind/logs/
 src/main/resources/view/reference colours.css
+src/main/resources/view/DarkTheme1.css

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minWidth="900" minHeight="700" resizable="true" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minWidth="900" minHeight="690" resizable="true" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -20,7 +20,7 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-      <VBox prefWidth="900.0" minHeight="650">
+      <VBox prefWidth="900.0" minHeight="610">
       <HBox alignment="CENTER" fx:id="helpMessageContainer">
         <children>
           <Label fx:id="helpMessage" text="Label">
@@ -41,7 +41,11 @@
           <Insets bottom="0" left="5.0" right="10.0" top="5.0" />
         </padding>
       </HBox>
-      <TableView fx:id="helpTable" prefHeight="559" VBox.vgrow="ALWAYS"></TableView>
+      <TableView fx:id="helpTable" prefHeight="559" VBox.vgrow="ALWAYS">
+        <padding>
+          <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
+        </padding>
+      </TableView>
         <VBox.margin>
           <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
         </VBox.margin>
