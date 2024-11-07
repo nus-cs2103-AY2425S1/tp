@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Notes {
     public static final String MESSAGE_CONSTRAINTS =
-            "It must have at least 1 alphanumeric character and has a character limit of 80.";
+            "Notes field must have at least 1 alphanumeric character and has a character limit of 80.";
     public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z0-9]).{1,80}$";
     public final String value;
 
