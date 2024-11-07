@@ -23,7 +23,7 @@ public class ViewWeddingCommand extends Command {
             + "keywords (case-insensitive).";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: NAME & NAME\n"
+            + "\nParameters: NAME & NAME\n"
             + "Example: " + COMMAND_WORD_SHORT + " Jonus & Izzat";
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "This wedding cannot be found.\n"
             + "Please make sure that the wedding is created and is in the format 'NAME & NAME'.\n"
