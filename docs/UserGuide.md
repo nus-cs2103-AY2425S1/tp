@@ -6,20 +6,35 @@
 
 # TAHub Contacts User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+If you are a busy Computer Science student juggling Teaching Assistant roles and
+struggling to keep track of your many
+students, *TAHub Contacts* is a desktop application for you to easily manage your
+student contact details!
+
+<box type="tip" theme="light">
+<md>
+    While it has a *GUI* (Graphical User Interface), most of the user interactions
+    happen using a *CLI* (Command Line Interface) with typed commands. A perfect
+    fit if you’re already a wizard at the keyboard.
+</md>
+<br>
+<md>
+    (_Or if you've already taken/suffered/enjoyed `CS2030S`_)
+</md>
+</box>
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick start :rocket:
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -42,11 +57,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Features :computer:
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command format: :fa-solid-lightbulb:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -55,15 +70,20 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as `` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as `` (i.e. 0 times), `t/friend`, `t/friend t/family`
+  etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME`
+  is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as
+  `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and
+  pasting commands that span multiple lines as space characters surrounding
+  line-breaks may be omitted when copied over to the application.
 </box>
 
 ### Viewing help : `help`
@@ -162,47 +182,72 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAHub data is saved in the hard disk automatically after any command that changes
+the data. You don’t need to save manually!
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Data are saved automatically as a JSON file `[JAR file location]/data/TAHub.json`.
+and `[JAR file location]/data/courselist.json`
+Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, TAHub Contacts will
+discard all data and start with an empty data file at the next run. Hence, it is
+recommended to take a backup of the file before editing it.
+<br>
+<br>
+Furthermore, certain edits can cause TAHub Contacts to behave in unexpected ways
+(e.g., if a value entered is outside the acceptable range). Therefore, edit the
+data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+### Archiving data files `[Future]`
 
-_Details coming soon ..._
+*TBC :D*
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## FAQ :grey_question:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known issues :bug:
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command summary :ledger:
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+<!-- markdownlint-disable MD013 -->
+
+|           Action          |                                                                                                  Format, Examples                                                                                                   |
+|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help                      | `help`                                                                                                                                                                                                              |
+| List Students             | `list`                                                                                                                                                                                                              |
+| Clear                     | `clear`                                                                                                                                                                                                             |
+| Add Student               | `add-student m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br>e.g.`add-student m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| Find Students by Name     | `find KEYWORD [MORE_KEYWORDS]`<br>e.g.`find James Jake`                                                                                                                                                             |
+| Edit Student              | `edit-student m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`edit-student m/A0296210X n/James Lee e/jameslee@example.com`                                                        |
+| Delete Student            | `delete-student m/MATRICULATION_NUMBER`<br>e.g.`delete-student m/A0296210X`                                                                                                                                         |
+| Add Course                | `add-course c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                         |
+| Edit Course               | `edit-course c/COURSE_CODE n/NAME`<br>e.g.`edit-course c/CS1101S n/Programming Basics`                                                                                                                              |
+| Delete Course             | `delete-course c/COURSE_CODE n/NAME`<br>e.g.`delete-course c/CS3230`                                                                                                                                                |
+| Add Course Tutorial       | `add-tutorial c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`add c/CS1101S t/T23`                                                                                                                                             |
+| Delete Course Tutorial    | `delete-tutorial c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`delete-tutorial c/CS1101S t/T23`                                                                                                                              |
+| Enroll Student            | `enroll m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`enroll m/A1234567Y c/CS1101S  t/T10A`                                                                                                           |
+| Unenroll Student          | `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`unenroll m/A1234567Y c/CS1101S  t/T10A`                                                                                                       |
+| Mark Attendance           | `attend attend m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend attend m/A1234567Y c/CS1101S  t/T10A`                                                                                             |
+| Mark Absence              | `attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend-absent m/A1234567Y c/CS1101S  t/T10A`                                                                                             |
+| Remove Attendance Session | `attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend-remove m/A1234567Y c/CS1101S  t/T10A`                                                                                             |
+| Clear Attendance          | `attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend-clear m/A1234567Y c/CS1101S  t/T10A`                                                                                               |
+| Exit                      | `exit`                                                                                                                                                                                                              |
+
+<!-- markdownlint-enable MD013 -->
