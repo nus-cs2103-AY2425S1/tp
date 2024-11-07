@@ -39,6 +39,11 @@
     -fx-max-height: 0;
 }
 
+/* Solution below adapted from https://stackoverflow.com/a/40003066/4428725 */
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
 .table-view {
     -fx-base: #1d1d1d;
     -fx-control-inner-background: #1d1d1d;

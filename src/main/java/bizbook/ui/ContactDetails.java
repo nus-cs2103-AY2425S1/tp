@@ -8,7 +8,7 @@ import bizbook.model.person.Person;
 import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -21,7 +21,7 @@ public class ContactDetails extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ContactDetails.class);
 
     @FXML
-    private HBox contactDetailsPanel;
+    private ScrollPane contactDetailsPanel;
 
     @FXML
     private Label name;
