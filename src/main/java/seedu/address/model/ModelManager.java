@@ -174,6 +174,11 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    public ObservableList<Person> getOnlyEmployeeList() {
+        filteredPersons.setPredicate(PREDICATE_SHOW_ONLY_EMPLOYEES);
+        return filteredPersons;
+    }
+
     @Override
     public Index getFirstArchivedIndex() {
         return this.addressBook.getFirstArchivedIndex();
