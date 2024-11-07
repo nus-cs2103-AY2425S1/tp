@@ -68,10 +68,10 @@ Provides you with tips to use our system more effectively.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [al/ALLERGY` can be used as `n/John Doe al/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[al/ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al/Nuts`, `al/Wheat al/Penicillin` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -99,17 +99,125 @@ Examples:
 
 ### Adding a patient: `add`
 
-Adds a patient to the address book.
+Adds a new patient record into the system.
 
-Format: `add n/NAME i/NRIC d/BIRTHDATE s/SEX p/PHONE_NUMBER`
+Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NUMBER`
+
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+Each person should have a unique NRIC.
+ClinicConnect does not allow two patients with the same NRIC to exist in the system.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A patient can have any number of tags (including 0)
+Use this command to quickly add a patient with only the required information.
+</div>
+
+Example: `add n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/87596666`
+<br>
+Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone No.
+
+For more information on each individual parameter click here
+
+### Adding a patient with additional information: `addf`
+
+Adds a new patient record into the system with additional information.
+
+Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NO [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE] 
+[nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]…​ [rl/RISK_LEVEL] [ec/EXISTING_CONDITIONS] [no/NOTES]`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+Each person should have a unique NRIC.
+ClinicConnect does not allow two patients with the same NRIC to exist in the system.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use this command if you want to add a patient with additional information in addition to the required fields
+(NAME, NRIC, SEX, DATE_OF_BIRTH, PHONE_NO)
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Multiple allergies can be added using amultiple "al/" prefix
 </div>
 
 Examples:
-* `add n/John Doe i/S0123456A s/M d/1990-04-12 p/98765432`
-* `add n/Betsy Crowe i/T1234567Z s/F d/2002-09-19 p/90914567`
+<ol>
+<li>`addf n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/87596666
+e/abramhamtan@gmail.com a/Blk 123, NUS Road, S123123 b/A+ nokn/Licoln Tan nokp/91234567
+al/nuts al/shellfish rl/HIGH ec/Diabetes no/Patient needs extra care`
+<ul>
+<li>
+Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
+Next-of-Kin Name, Next-of-Kin Phone, Risk Level, Existing Conditions, Notes and his two allergies.
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li>
+`addf n/Lincoln Park i/S9751269M s/M d/1980-04-01 p/87296619
+  e/linkinpark@gmail.com a/Blk 516, Clementi Road, S661836 b/AB- al/wheat`
+</li>
+<ul>
+<li>
+Adds a patient Lincoln Park with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
+and his allergy.
+</li>
+</ul>
+</ol>
+For more information on each individual parameter click here
+
+### Editing a patient: `edit`
+
+Edit the information of an existing patient in the system.
+
+Format: `edit NRIC [n/NAME] [i/NRIC] [s/SEX] [d/DATE_OF_BIRTH] [p/PHONE_NO] [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE]
+[nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]…​ [rmal/ALLERGY_TO_BE_REMOVED]…​ [rl/RISK_LEVEL]
+[ec/EXISTING_CONDITIONS] [no/NOTES]`
+
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+<ul>
+<li>
+NRIC provided must be a valid NRIC currently in the system
+</li>
+<li>
+Input must contain at least one parameter to be edited
+</li>
+<li>
+Not all parameters are compulsory
+</li>
+</ul>
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Multiple allergies can be removed using multiple "rmal" prefixes. Ensure allergies to be removed
+are current allergies of the patient
+</div>
+
+
+Examples:
+<ol>
+<li>`edit S9758366N n/Abraham Lee d/1997-10-28
+<ul>
+<li>
+Edits the name and date-of-birth of the patient with NRIC S9758366N.
+</li>
+</ul>
+</li>
+<li>
+`edit S9758366N p/91234123 a/Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918`
+</li>
+<ul>
+<li>
+Edits the phone and address of the patient with NRIC S9758366N.
+</li>
+</ul>
+</ol>
+For more information on each individual parameter click here
 
 ### Listing all patients : `home`
 
@@ -117,22 +225,36 @@ Shows a list of all patients in the ClinicConnect System.
 
 Format: `home`
 
-### Editing a patient : `edit`
+### Booking an appointment: `bookappt`
 
-Edits an existing patient in the address book.
+Book an appointment for an existing patient in the system for a health service provided by the clinic.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `bookappt NRIC dt/APPOINTMENT_DATE_TIME h/HEALTH_SERVICE`
 
-* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
-* You can remove all the patient’s tags by typing `t/` without
-    specifying any tags after it.
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+<ul>
+<li>
+NRIC provided must be a valid NRIC in the system.
+</li>
+<li>
+All paramters are compulsory
+</li></ul>
+</div>
+
+
+Example: `bookappt S9758366N dt/2024-12-29 h/Vaccination`
+<br>
+Books a Vaccination appointment for the given patient by NRIC at the specified time.
+
+For more information on each individual parameter click here
+
+### Listing all patients : `list`
+
+Shows a list of all patients in the address book.
+
+Format: `list`
 
 
 ### Delete Appointment : `deleteappt`
