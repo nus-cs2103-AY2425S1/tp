@@ -44,8 +44,8 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
+        email = personToCopy.getEmail().orElse(null);
+        address = personToCopy.getAddress().orElse(null);
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -90,7 +90,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return Person.createPerson(name, phone, email, address, tags);
     }
 
 }

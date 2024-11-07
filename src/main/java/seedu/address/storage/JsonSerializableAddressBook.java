@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,6 +14,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -22,6 +24,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
+    public static final String MESSAGE_MISSING_PERSON = "Person %s does not exist in the address book.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -62,7 +65,17 @@ class JsonSerializableAddressBook {
             addressBook.addPerson(person);
         }
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
-            Event event = jsonAdaptedEvent.toModelType();
+            Person celebrity;
+            Set<Person> contacts;
+            try {
+                celebrity = addressBook.findPerson(jsonAdaptedEvent.getCelebrityName());
+                contacts = jsonAdaptedEvent.getContactNames().stream()
+                        .map(addressBook::findPerson)
+                        .collect(Collectors.toSet());
+            } catch (PersonNotFoundException e) {
+                throw new IllegalValueException(String.format(MESSAGE_MISSING_PERSON, e.getMessage()));
+            }
+            Event event = jsonAdaptedEvent.toModelType(celebrity, contacts);
             if (addressBook.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }

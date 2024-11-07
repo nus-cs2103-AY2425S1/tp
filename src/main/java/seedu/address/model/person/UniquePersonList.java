@@ -58,7 +58,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new PersonNotFoundException(target.getName().fullName);
         }
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
@@ -75,8 +75,23 @@ public class UniquePersonList implements Iterable<Person> {
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new PersonNotFoundException(toRemove.getName().fullName);
         }
+    }
+
+    /**
+     * Returns a Person object using the name of the person.
+     * @param toFind
+     * @return
+     */
+    public Person findPerson(String toFind) throws PersonNotFoundException {
+        Name name = new Name(toFind);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).getName().isSameName(name)) {
+                return internalList.get(i);
+            }
+        }
+        throw new PersonNotFoundException(toFind);
     }
 
     public void setPersons(UniquePersonList replacement) {

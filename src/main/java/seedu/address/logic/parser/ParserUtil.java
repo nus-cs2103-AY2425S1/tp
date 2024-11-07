@@ -2,12 +2,18 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
@@ -24,6 +30,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -134,7 +141,9 @@ public class ParserUtil {
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedEventName = name.trim();
-        //Add validation logic
+        if (!EventName.isValidName(trimmedEventName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
         return new EventName(trimmedEventName);
     }
 
@@ -146,9 +155,34 @@ public class ParserUtil {
      */
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
-        String trimmedTime = time.trim();
-        //Add validation logic
-        return new Time(trimmedTime);
+
+        Pattern pattern = Pattern.compile("(.+) to (.+)");
+        Matcher matcher = pattern.matcher(time.trim());
+
+        if (!matcher.matches()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
+        }
+
+        LocalDateTime fromDate;
+        LocalDateTime toDate;
+
+        try {
+            fromDate = LocalDateTime.parse(matcher.group(1), formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
+        }
+
+        try {
+            toDate = LocalDateTime.parse(matcher.group(2), formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
+        }
+
+        if (!Time.isValidTime(fromDate, toDate)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Time(fromDate, toDate);
     }
 
     /**
@@ -160,8 +194,53 @@ public class ParserUtil {
     public static Venue parseVenue(String venue) throws ParseException {
         requireNonNull(venue);
         String trimmedVenue = venue.trim();
-        //add validation logic
+        if (!Venue.isValidName(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
         return new Venue(trimmedVenue);
     }
 
+    /**
+     * Parses a {@code String celebrity} in Event.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code celebrity} is invalid.
+     */
+    public static String parseEventCelebrity(String celebrity) throws ParseException {
+        requireNonNull(celebrity);
+        String trimmedCelebrity = celebrity.trim();
+        if (trimmedCelebrity.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_CELEBRITY_FORMAT);
+        }
+        return trimmedCelebrity;
+    }
+    /**
+     * Parses a {@code String contact} in Event.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code contact} is invalid.
+     */
+    public static String parseEventContact(String contact) throws ParseException {
+        requireNonNull(contact);
+        String trimmedContact = contact.trim();
+        if (trimmedContact.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_EVENT_CONTACT_FORMAT);
+        }
+        return trimmedContact;
+    }
+
+    /**
+     * Parses a {@code Collection<String> contacts} into a {@code Set<String>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code contact} is invalid.
+     */
+    public static Set<String> parseEventContacts(Collection<String> contacts) throws ParseException {
+        requireNonNull(contacts);
+        final Set<String> contactsSet = new HashSet<>();
+        for (String contact : contacts) {
+            contactsSet.add(parseEventContact(contact));
+        }
+        return contactsSet;
+    }
 }

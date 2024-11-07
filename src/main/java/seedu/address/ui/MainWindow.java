@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -32,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,13 +45,12 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private TabPane tabPanePlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +68,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        tabPanePlaceholder.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
     public Stage getPrimaryStage() {
@@ -110,13 +114,16 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        tabPanePlaceholder.getTabs().add(new Tab("Persons", personListPanel.getRoot()));
+        tabPanePlaceholder.getTabs().add(new Tab("Events", eventListPanel.getRoot()));
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getTalentHubFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -167,6 +174,34 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
+    public void setPersonTab(CommandDetailChange commandDetailChange) {
+        if (commandDetailChange == CommandDetailChange.DETAILED) {
+            logger.info("Setting detailed view for Persons");
+            personListPanel.setDetailedView();
+        } else if (commandDetailChange == CommandDetailChange.SIMPLIFIED) {
+            logger.info("Setting simplified view for Persons");
+            personListPanel.setSimplifiedView();
+        }
+        logger.info("Switching to Persons tab");
+        tabPanePlaceholder.getSelectionModel().select(0);
+    }
+
+    public void setEventTab(CommandDetailChange commandDetailChange) {
+        if (commandDetailChange == CommandDetailChange.DETAILED) {
+            logger.info("Setting detailed view for Events");
+            eventListPanel.setDetailedView();
+        } else if (commandDetailChange == CommandDetailChange.SIMPLIFIED) {
+            logger.info("Setting simplified view for Events");
+            eventListPanel.setSimplifiedView();
+        }
+        logger.info("Switching to Events tab");
+        tabPanePlaceholder.getSelectionModel().select(1);
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -180,10 +215,18 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+                return commandResult;
             }
 
             if (commandResult.isExit()) {
                 handleExit();
+                return commandResult;
+            }
+
+            if (commandResult.getTabChange() == CommandTabChange.PERSON) {
+                setPersonTab(commandResult.getCommandDetailChange());
+            } else if (commandResult.getTabChange() == CommandTabChange.EVENT) {
+                setEventTab(commandResult.getCommandDetailChange());
             }
 
             return commandResult;

@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,23 +20,33 @@ import seedu.address.model.person.Person;
 class JsonAdaptedEvent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
+    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list";
 
     private final String name;
-    private final String time;
-    private final String venue;
-    private final JsonAdaptedPerson celebrity;
+    private final JsonAdaptedTime time;
+    private final String venue; // Optional, can be null
+    private final String celebrityName;
+    private final Set<String> contactNames = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") String time,
-                             @JsonProperty("venue") String venue,
-                            @JsonProperty("celebrity") JsonAdaptedPerson celebrity) {
+    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") JsonAdaptedTime time,
+            @JsonProperty("venue") String venue, @JsonProperty("celebrityName") String celebrityName,
+            @JsonProperty("contactNames") List<String> contactNames) {
         this.name = name;
         this.time = time;
         this.venue = venue;
-        this.celebrity = celebrity;
+        this.celebrityName = celebrityName;
+        this.contactNames.addAll(contactNames);
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedEvent} without a venue, with the given event details.
+     */
+    public JsonAdaptedEvent(String name, JsonAdaptedTime time, String celebrityName, List<String> contactNames) {
+        this(name, time, null, celebrityName, contactNames);
     }
 
     /**
@@ -40,9 +54,33 @@ class JsonAdaptedEvent {
      */
     public JsonAdaptedEvent(Event source) {
         name = source.getName().getEventName();
-        time = source.getTime().getTime();
-        venue = source.getVenue().getVenue();
-        celebrity = new JsonAdaptedPerson(source.getCelebrity());
+        time = new JsonAdaptedTime(source.getTime());
+        venue = source.getVenue().map(Venue::toString).orElse(null);
+        celebrityName = source.getCelebrity().getName().fullName;
+        contactNames.addAll(source.getContacts().stream()
+                .map(contact -> contact.getName().fullName)
+                .toList());
+    }
+
+    public String getCelebrityName() {
+        return celebrityName;
+    }
+
+    public Set<String> getContactNames() {
+        return contactNames;
+    }
+
+    /**
+     * Constructor for {@code JsonAdaptedEvent} in general
+     * Returns a {@code JsonAdaptedEvent} object using the different constructors given the respective fields.
+     */
+    public static JsonAdaptedEvent createJsonAdaptedEvent(String name, JsonAdaptedTime time, String venue,
+            String celebrityName, List<String> contactNames) {
+        if (venue == null) {
+            return new JsonAdaptedEvent(name, time, celebrityName, contactNames);
+        } else {
+            return new JsonAdaptedEvent(name, time, venue, celebrityName, contactNames);
+        }
     }
 
     /**
@@ -50,7 +88,7 @@ class JsonAdaptedEvent {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
-    public Event toModelType() throws IllegalValueException {
+    public Event toModelType(Person celebrity, Set<Person> eventContacts) throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName())
@@ -61,19 +99,22 @@ class JsonAdaptedEvent {
         if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        final Time eventTime = new Time(time);
+        final Time eventTime = time.toModelType();
 
-        if (venue == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));
+        Venue eventVenue = null;
+        if (venue != null) {
+            eventVenue = new Venue(venue);
         }
-        final Venue eventVenue = new Venue(venue);
 
         if (celebrity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
-        final Person eventCelebrity = celebrity.toModelType();
 
-        return new Event(eventName, eventTime, eventVenue, eventCelebrity);
+        if (eventContacts.contains(celebrity)) {
+            throw new IllegalValueException(MESSAGE_CELEBRITY_IN_CONTACT);
+        }
+
+        return Event.createEvent(eventName, eventTime, eventVenue, celebrity, eventContacts);
     }
 
 }

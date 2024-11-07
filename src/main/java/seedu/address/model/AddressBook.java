@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -81,6 +83,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a {@code person} in the address book use this phone number.
+     */
+    public boolean hasPhoneNumber(Phone phone) {
+        requireNonNull(phone);
+        for (Person p : persons) {
+            if (p.getPhone().equals(phone)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -107,6 +122,33 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Clears all events with the given person.
+     * The person must exist in the address book.
+     */
+    public void clearEventsWithPerson(Person target) {
+        events.clearEventsWithPerson(target);
+    }
+
+    /**
+     * Removes the given person from contacts of all events.
+     * The person must exist in the address book.
+     */
+    public void clearPersonFromContacts(Person target) {
+        events.clearPersonFromContacts(target);
+    }
+
+    /**
+     * Replaces the given person from all events.
+     */
+    public void replacePersonInEvents(Person personToEdit, Person editedPerson) {
+        events.replacePersonInEvents(personToEdit, editedPerson);
+    }
+
+    public Person findPerson(String personName) {
+        return persons.findPerson(personName);
+    }
+
     //// event-level operations
 
     /**
@@ -118,11 +160,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an event clashes with another event in the address book.
+     */
+    public boolean hasEventOverlap(Event event) {
+        requireNonNull(event);
+        return events.containsOverlap(event);
+    }
+
+    /**
+     * Returns true if an event clashes with another event in the address book, ignoring a specific event.
+     */
+    public boolean hasEventOverlap(Event event, Event eventToIgnore) {
+        requireAllNonNull(event, eventToIgnore);
+        return events.containsOverlap(event, eventToIgnore);
+    }
+
+    /**
      * Adds an event to the address book.
      * The event must not already exist in the address book.
      */
     public void addEvent(Event e) {
         events.add(e);
+        events.sortByStartTime();
     }
 
     /**
@@ -134,6 +193,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedEvent);
 
         events.setEvent(target, editedEvent);
+        events.sortByStartTime();
     }
 
     /**
@@ -157,6 +217,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Event> getSortedEventList() {
+        events.sortByStartTime();
+        return events.asUnmodifiableObservableList();
     }
 
     @Override
