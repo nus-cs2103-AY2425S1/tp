@@ -538,7 +538,7 @@ Use case ends.
 2. TAHub validates the inputs.
 3. TAHub updates the student with the provided details.
 4. TAHub displays the updated student's information.
-<br>~~~~
+<br>
 Use case ends.
 
 **Extensions:**
