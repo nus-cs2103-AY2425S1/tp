@@ -20,14 +20,14 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_PHONE + "PHONE] "
             + PREFIX_EMAIL + "EMAIL "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Apple "
             + PREFIX_PHONE + "4089961010 "
             + PREFIX_EMAIL + "contact@apple.com "

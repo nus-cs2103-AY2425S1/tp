@@ -26,7 +26,7 @@ public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Updates the status of an application. "
+            + ": Updates the status of an application.\n"
             + "Parameters: " + PREFIX_COMPANY_INDEX + "COMPANY_INDEX (must be a positive integer) "
             + PREFIX_APP_INDEX + "APPLICATION_INDEX (must be a positive integer) "
             + PREFIX_APP_STATUS + "APP_STATUS\n"
