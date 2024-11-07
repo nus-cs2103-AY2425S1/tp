@@ -28,7 +28,7 @@ import seedu.address.model.student.task.TaskDescription;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a positive integer.";
-
+    public static final String MESSAGE_INVALID_TASK_INDEX = "Task index is not a positive integer.";
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -46,6 +46,19 @@ public class ParserUtil {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseTaskIndex(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_TASK_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

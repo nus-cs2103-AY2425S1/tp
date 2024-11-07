@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
-import static seedu.address.logic.parser.ParserUtil.parseIndex;
 import static seedu.address.logic.parser.ParserUtil.parseName;
+import static seedu.address.logic.parser.ParserUtil.parseTaskIndex;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UpdateCommand;
@@ -39,7 +39,7 @@ public class UpdateTaskCommandParser implements Parser<UpdateTaskCommand> {
         }
 
         Name name = parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Index taskIndex = parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
+        Index taskIndex = parseTaskIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TASK_INDEX, PREFIX_TASK_DESCRIPTION,
                 PREFIX_TASK_DEADLINE);
