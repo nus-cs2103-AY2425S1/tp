@@ -150,6 +150,16 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Favouriting a person : `favourite`
+
+Favourites the specified person from the address book.
+
+Format: `favourite INDEX`
+
+* Favourites the person at the specified `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -286,18 +296,19 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action              | Format, Examples
---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**           | `clear`
-**Delete**          | `delete INDEX`<br> e.g., `delete 3`
-**Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**            | `find n/NAME [n/ANOTHER_NAME] ... [t/TAG]...`<br> e.g. `find n/john t/family`
-**List**            | `list`
-**Help**            | `help`
-**Add Meeting**    | `add-schedule c/CONTACT n/NAME d/DATE t/TIME`<br> e.g. `add-schedule n/meeting d/01-01-2001 t/1200 c/1 2`
-**Delete Meeting** | `delete-schedule INDEX`<br> e.g. delete-schedule 2`
-**Edit Meeting**   | `edit-schedule INDEX [n/NAME] [d/DATE] [t/TIME] [c/INDEX]`<br> e.g. `edit-schedule 1 c/2 3 4 n/Discussion t/1300 d/02-02-2001`
+Action                   | Format, Examples
+-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**                | `clear`
+**Delete**               | `delete INDEX`<br> e.g., `delete 3`
+**Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**                 | `find n/NAME [n/ANOTHER_NAME] ... [t/TAG]...`<br> e.g. `find n/john t/family`
+**List**                 | `list`
+**Help**                 | `help`
+**Add Meeting**          | `add-schedule c/CONTACT n/NAME d/DATE t/TIME`<br> e.g. `add-schedule n/meeting d/01-01-2001 t/1200 c/1 2`
+**Delete Meeting**       | `delete-schedule INDEX`<br> e.g. delete-schedule 2`
+**Edit Meeting**         | `edit-schedule INDEX [n/NAME] [d/DATE] [t/TIME] [c/INDEX]`<br> e.g. `edit-schedule 1 c/2 3 4 n/Discussion t/1300 d/02-02-2001`
 **Find meeting contacts**| `meeting-contacts INDEX`<br> e.g. `meeting-contacts 8`
-**List all Meetings**   | `list-schedule`
-**Find schedule**             | `see d/dd-MM-YYYY`<br> e.g. `see d/10-10-2024`
+**List all Meetings**    | `list-schedule`
+**Find schedule**        | `see d/dd-MM-YYYY`<br> e.g. `see d/10-10-2024`
+**Favourite contact**    | `favourite INDEX`
