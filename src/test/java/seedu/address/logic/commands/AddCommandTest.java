@@ -94,6 +94,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -161,6 +166,17 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public void deletePerson(Person target) {

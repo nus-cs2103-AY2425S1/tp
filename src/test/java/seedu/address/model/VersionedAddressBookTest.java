@@ -71,6 +71,31 @@ public class VersionedAddressBookTest {
     }
 
     @Test
+    void testRedoAddressBook() throws CommandException {
+        assertEquals(addressBook1, versionedAddressBook.getCurrentAddressBook());
+        assertEquals(addressBook1, versionedAddressBook.getAddressBookStateList().get(0));
+
+        versionedAddressBook.resetData(addressBook2);
+        versionedAddressBook.commitAddressBook();
+
+        ArrayList<AddressBook> expectedStateList = new ArrayList<>();
+        expectedStateList.add(new AddressBook(addressBook1));
+        expectedStateList.add(new AddressBook(addressBook2));
+        assertEquals(expectedStateList, versionedAddressBook.getAddressBookStateList());
+
+        assertEquals(addressBook2, versionedAddressBook.getCurrentAddressBook());
+        assertEquals(addressBook2, versionedAddressBook.getAddressBookStateList().get(1));
+
+        versionedAddressBook.undoAddressBook();
+        // Check if the current state is reverted to addressBook1
+        assertEquals(addressBook1, versionedAddressBook.getCurrentAddressBook());
+
+        versionedAddressBook.redoAddressBook();
+        // Check if the current state is reverted to addressBook2
+        assertEquals(addressBook2, versionedAddressBook.getCurrentAddressBook());
+    }
+
+    @Test
     public void testDiscardUnsavedChanges() {
         // discard one change
         versionedAddressBook.addPerson(GEORGE);
@@ -120,12 +145,23 @@ public class VersionedAddressBookTest {
     }
 
     @Test
-    public void commit_withUnsavedChanges_throwsCommandException() {
+    public void undoAddressBook_withUnsavedChanges_throwsCommandException() {
         versionedAddressBook.resetData(addressBook2);
         versionedAddressBook.commitAddressBook();
         versionedAddressBook.removePerson(GEORGE);
-        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_UNSAVED_CHANGES,
+        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_UNSAVED_CHANGES_UNDO,
                 versionedAddressBook::undoAddressBook);
+    }
+
+    @Test
+    public void redoAddressBook_withUnsavedChanges_throwsCommandException() throws CommandException {
+        versionedAddressBook.resetData(addressBook2);
+        versionedAddressBook.removePerson(GEORGE);
+        versionedAddressBook.commitAddressBook();
+        versionedAddressBook.undoAddressBook();
+        versionedAddressBook.addPerson(GEORGE);
+        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_UNSAVED_CHANGES_REDO,
+                versionedAddressBook::redoAddressBook);
     }
 
     @Test
@@ -133,6 +169,16 @@ public class VersionedAddressBookTest {
         AddressBook addressBook = new AddressBook();
         VersionedAddressBook versionedAddressBook = new VersionedAddressBook(addressBook);
         versionedAddressBook.addPerson(GEORGE);
-        assertThrows(CommandException.class, MESSAGE_NO_MORE_HISTORY, versionedAddressBook :: undoAddressBook);
+        assertThrows(CommandException.class, MESSAGE_NO_MORE_HISTORY, versionedAddressBook::undoAddressBook);
+    }
+
+    @Test
+    public void redoAddressBook_pointerGreaterThanSize_throwsCommandException() throws CommandException {
+        AddressBook addressBook = new AddressBook();
+        VersionedAddressBook versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedAddressBook.addPerson(GEORGE);
+        versionedAddressBook.commitAddressBook();
+        assertThrows(CommandException.class, VersionedAddressBook.MESSAGE_NO_MORE_UNDONE_STATES,
+                versionedAddressBook::redoAddressBook);
     }
 }

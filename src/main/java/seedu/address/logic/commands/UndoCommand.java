@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_SUCCESS = "Successfully undo the latest change to contact data!";
+    public static final String MESSAGE_SUCCESS = "Successfully undone the latest change to contact data!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Undoes the latest modification done by user to the address book, if any.\n"

@@ -127,6 +127,22 @@ public class PersonTest {
     }
 
     @Test
+    public void testIsPhonePresentAndSame() {
+        Person daniel = new PersonBuilder(DANIEL).build();
+
+        assertFalse(daniel.isPhonePresentAndSame(null));
+        assertTrue(daniel.isPhonePresentAndSame(daniel));
+    }
+
+    @Test
+    public void testIsEmailPresentAndSame() {
+        Person daniel = new PersonBuilder(DANIEL).build();
+
+        assertFalse(daniel.isEmailPresentAndSame(null));
+        assertTrue(daniel.isEmailPresentAndSame(daniel));
+    }
+
+    @Test
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
