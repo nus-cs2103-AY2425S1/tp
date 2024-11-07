@@ -51,8 +51,8 @@
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <Button fx:id="AbButton" text="AddressBook" />
-          <Button fx:id="WbButton" text="WeddingBook" />
+          <Button fx:id="abButton" text="AddressBook" />
+          <Button fx:id="wbButton" text="WeddingBook" />
         </HBox>
 
         <VBox fx:id="personList" styleClass="pane-without-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
