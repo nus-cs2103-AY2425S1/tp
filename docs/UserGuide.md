@@ -130,13 +130,13 @@ Shows a message explaining how to access the help page.
 
 ### Creating a Vendor or Event: `create`
 
-Creates a person or event in EventTory.
+Creates a vendor or event in EventTory.
 
 #### Format:
 * To create a vendor: `create v/ n/VENDOR_NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]…​`
 * To create en event: `create e/ n/EVENT_NAME on/DATE [t/TAG]…​`
 
-#### Notes
+#### Note:
 If parameters are provided for the `v/` and `e/` flags, they will be ignored.
 <box type="tip" seamless><br>
 **Tip:** A vendor or event can have any number of tags (including 0).
