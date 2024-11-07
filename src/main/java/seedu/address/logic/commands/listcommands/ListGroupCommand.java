@@ -10,6 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
+import seedu.address.model.group.Group;
 
 /**
  * Lists all the groups in the address book.
@@ -29,6 +30,7 @@ public class ListGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        model.setMostRecentGroupDisplay("");
         model.setStateGroups();
         return new CommandResult(MESSAGE_SUCCESS, LIST_GROUP_MARKER);
     }

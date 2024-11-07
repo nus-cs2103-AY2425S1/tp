@@ -145,6 +145,22 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public String getMostRecentGroupDisplay() {
+        return model.getMostRecentGroupDisplay();
+    }
+
+
+    @Override
+    public void setMostRecentGroupDisplay(String string) {
+        model.setMostRecentGroupDisplay(string);
+    }
+
+    @Override
+    public void setMostRecentGroupDisplay() {
+        model.setMostRecentGroupDisplay();
+    }
+
+    @Override
     public void setStateStudents() {
         this.model.setStateStudents();
     }

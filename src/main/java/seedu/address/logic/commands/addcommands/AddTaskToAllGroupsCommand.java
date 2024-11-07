@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -57,7 +58,7 @@ public class AddTaskToAllGroupsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Task task = new Task(taskName, deadline);
-        ObservableList<Group> groups = model.getFilteredGroupList();
+        List<Group> groups = model.getAddressBook().getGroupList();
         if (groups.size() == 0) {
             throw new CommandException(NO_GROUPS);
         }

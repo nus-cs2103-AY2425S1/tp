@@ -17,6 +17,8 @@ public interface ReadOnlyUserPrefs {
 
     String getMostRecentGroupTaskDisplay();
 
+    String getMostRecentGroupDisplay();
+
     Task getMostRecentTaskDisplay();
 
     State getState();

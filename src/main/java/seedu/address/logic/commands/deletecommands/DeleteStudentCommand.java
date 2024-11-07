@@ -44,7 +44,7 @@ public class DeleteStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getAddressBook().getStudentList();
 
         boolean hasFoundTarget = false;
         Student studentToBeDeleted = null;
