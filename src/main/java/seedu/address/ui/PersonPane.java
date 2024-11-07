@@ -72,10 +72,10 @@ public class PersonPane extends UiPart<VBox> {
      * Sets the name and contact details (phone, address, email) of the {@code Person}.
      */
     private void setNameAndContactDetails() {
-        name.setText("Name: " + person.getName().fullName);
-        phone.setText("Phone: " + person.getPhone().value);
-        address.setText("Address: " + person.getAddress().value);
-        email.setText("Email: " + person.getEmail().value);
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
     }
 
     /**
@@ -105,7 +105,7 @@ public class PersonPane extends UiPart<VBox> {
     private void setRemark() {
         String remarkValue = person.getRemark().value;
         if (remarkValue != null && !remarkValue.trim().isEmpty()) {
-            remark.setText("Remark: " + remarkValue);
+            remark.setText(remarkValue);
             remark.setManaged(true);
         } else {
             remark.setManaged(false);
@@ -121,7 +121,7 @@ public class PersonPane extends UiPart<VBox> {
     // Clear and display listings
     private void displayListings() {
         if (!person.getListings().isEmpty()) {
-            StringBuilder listingsText = new StringBuilder("Listings:\n");
+            StringBuilder listingsText = new StringBuilder();
             person.getListings().forEach(listing -> listingsText.append(listing.toString()).append("\n"));
             listings.setText(listingsText.toString());
             listings.setManaged(true);
