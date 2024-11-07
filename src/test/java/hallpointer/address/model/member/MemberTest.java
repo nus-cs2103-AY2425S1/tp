@@ -42,13 +42,19 @@ public class MemberTest {
         assertTrue(ALICE.isSameMember(ALICE));
 
         // same name, all other attributes different -> returns true
-        Member updatedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
+        Member updatedAliceSameName = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
                 .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameMember(updatedAlice));
+        assertTrue(ALICE.isSameMember(updatedAliceSameName));
 
-        // different name, all other attributes same -> returns false
-        updatedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameMember(updatedAlice));
+        // same telegram, all other attributes different -> returns true
+        Member updatedAliceSameTelegram = new MemberBuilder(ALICE).withName(VALID_NAME_BOB)
+                .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSameMember(updatedAliceSameTelegram));
+
+        // different name and telegram, all other attributes same -> returns false
+        updatedAliceSameTelegram = new MemberBuilder(ALICE).withName(VALID_NAME_BOB)
+                .withTelegram(VALID_TELEGRAM_BOB).build();
+        assertFalse(ALICE.isSameMember(updatedAliceSameTelegram));
 
         // name differs in case, all other attributes different -> returns true
         Member updatedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase())
@@ -59,7 +65,7 @@ public class MemberTest {
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         updatedBob = new MemberBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameMember(updatedBob));
+        assertTrue(BOB.isSameMember(updatedBob));
     }
 
     @Test
