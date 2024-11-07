@@ -149,6 +149,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting persons : `deletePC`
+* Delete all persons from the address book with the given postal code.
+
+Format: `delete POSTALCODE`
+
+* Delete all persons with the specified `POSTALCODE`.
+* The postal code **must be a 6 digits** 
+
+Examples:
+* `list` followed by `deletePC 560102` deletes all persons with postal code `560102` in the address book.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
