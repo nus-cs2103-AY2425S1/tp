@@ -301,29 +301,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 3a. Student is not found in the session list
     * 3a1. Teletutors App displays an default placeholder message: `No students found.`
-
       Use case resumes from Step 2
 
+**Use case: Add student details**
+
+**MSS**
+
+1. Tutor requests to add a new student.
+2. Teletutors App prompts for the student's details.
+3. Tutor provides the required student details.
+4. Teletutors App confirms the student has been successfully added.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Tutor enters an invalid prefix argument
+    * 3a1. Teletutors App displays an error message.
+    * 3a2. Tutor re-enters the correct prefix argument.
+
+      Use case resumes from Step 4.
 
 **Use case: Delete student details**
 
 **MSS**
 
 1.  Tutor requests to delete a student's details.
-2.  Teletutors App prompts for confirmation
-3.  Tutor confirms the deletion.
+2.  Teletutors App prompts for the compulsory name field and optionally, the student number.
+3.  Tutor provides the required student's details.
 4.  Teletutors App deletes the student and associated records.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The student does not exist in the system
-    * 1a1. Teletutors App displays an error message: `Student not found. Please check the name and try again`
+* 3a. The student name does not exist in the system.
+    * 3a1. Teletutors App displays an error message: `This student is not in your student list.`
+      Use case resumes from Step 3. 
+  
+* 3b. There are multiple students that share the same name in the system.
+    * 3b1. Teletutors App displays a list of student numbers of students with the same name.
+      Use case resumes from Step 3.
 
-      Use case resumes from Step 1.
-
-
+* 3c. The student number does not exist in the system.
+    * 3c1. Teletutors App displays an error message: `This student is not in your student list.`
+      Use case resumes from Step 3.
 
 
 ### Non-Functional Requirements
