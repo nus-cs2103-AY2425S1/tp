@@ -893,14 +893,14 @@ and does not accept duplicate names, so there will never be a case where more th
 ### Project Overview
 
 Our project aims to provide an efficient contact management system for a physiotherapist 
-with a large client base, building on AB3 (Address Book 3). Additional features include scheduling appointments,
+with a large client base, building on AddressBook Level 3 (AB3). Additional features include scheduling appointments,
 setting reminder notes, tracking treatment history, type, and payment history. These improvements are
 aimed to provide a cost-effective solution to help physiotherapists save time, money and manpower on
 repetitive tasks.
 
 ### Difficulty Level and Challenges Faced
 
-Developing PhysioPal presented unique challenges. Unlike AddressBook Level 3 (AB3), 
+Developing PhysioPal presented unique challenges. Unlike AB3,
 which handles only one entity type, PhysioPal extends heavily on the appointment feature: `Schedule`.
 The need for seamless interaction between different entities and satisfying functionality requirements
 demanded significant work to incorporate features such as reminder notes and appointment handling.
