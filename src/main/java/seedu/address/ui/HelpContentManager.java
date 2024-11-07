@@ -38,18 +38,6 @@ public class HelpContentManager {
                  Navigate to the appropriate issue via the panel on the left.
                 """);
 
-        contentMap.put("Quick Start", """
-                Quick start\n
-                 1. Ensure you have Java `17` or above installed in your
-                 Computer. (Visit the Oracle website for Java 17 installation.)\n
-                 2. Download the latest `.jar` file from the GitHub releases
-                 page.\n
-                 3. Copy the `.jar` file to your desired folder and open a
-                 terminal.\n
-                 4. Run the application using `java -jar fart_in_a.jar`.\n
-                 5. Type commands in the command box and press Enter.
-                """);
-
         contentMap.put("Command Format Guidelines", """
                 Command Format Guidelines\n
                  1. Words in UPPER_CASE are parameters to be supplied by the
@@ -201,9 +189,7 @@ public class HelpContentManager {
                 | Unpaid | `unpaid INDEX` | `unpaid 3` |
                 """);
 
-        // Ensure critical content exists
         assert contentMap.get("Introduction") != null : "Introduction content should not be null";
-        assert contentMap.get("Quick Start") != null : "Quick Start content should not be null";
         assert contentMap.get("Command Summary") != null : "Command Summary content should not be null";
     }
 
@@ -223,7 +209,7 @@ public class HelpContentManager {
      */
     public ObservableList<String> getTableOfContents() {
         ObservableList<String> tocList = FXCollections.observableArrayList(
-                "Introduction", "Quick Start", "Command Format Guidelines", "Adding a Contact",
+                "Introduction", "Command Format Guidelines", "Adding a Contact",
                 "Listing All Contacts", "Editing a Contact", "Finding Contacts", "Deleting a Contact",
                 "Clearing All Entries", "Marking a Person as Paid/Unpaid", "Saving and Editing Data",
                 "Exiting the Program", "Command Summary");
@@ -273,6 +259,6 @@ public class HelpContentManager {
 
         assert !commandSummaryData.isEmpty() : "Command summary data should not be empty";
         table.setItems(commandSummaryData);
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.setColumnResizePolicy(param -> true);
     }
 }
