@@ -152,16 +152,16 @@ class JsonSerializableAddressBook {
         Set<Wedding> weddingList = person.getWeddings();
         Set<Wedding> newWeddingList = new HashSet<>();
         for (Wedding wedding : weddingList) {
+            // If the wedding does not contain the person, add them to the guest list of the wedding by default
+            if (!addressBook.getWedding(wedding).hasPerson(person)) {
+                addressBook.getWedding(wedding).addToGuestList(addressBook.getPerson(person));
+            }
+
             if (addressBook.hasWedding(wedding) || !Wedding.isValidWeddingName(wedding.getWeddingName().toString())) {
                 newWeddingList.add(addressBook.getWedding(wedding));
                 continue;
             }
-            // If the wedding does not contain the person, add them to the guest list of the wedding by default
-            if (wedding.hasPerson(person)) {
-                wedding.setGuest(wedding.getPerson(person), addressBook.getPerson(person));
-            } else {
-                wedding.addToGuestList(addressBook.getPerson(person));
-            }
+
             addressBook.addWedding(wedding);
             newWeddingList.add(addressBook.getWedding(wedding));
         }
