@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
                 .orElse(null);
         if (patientToDelete == null) {
             logger.warning("Patient with NRIC " + targetNric + " not found");
-            throw new CommandException(String.format(Messages.MESSAGE_PATIENT_NOT_FOUND, targetNric));
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, targetNric));
         }
 
         model.deletePatient(patientToDelete);

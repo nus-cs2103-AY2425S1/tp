@@ -18,7 +18,6 @@ public class Messages {
            + " in the system";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient with the name %1$s was not found";
     public static final String MESSAGE_INVALID_PATIENT_NRIC = "The patient with the NRIC %1$s does not exist in the "
             + "system.";
     public static final String MESSAGE_INVALID_APPT_DATETIME = "The appointment with the date and time"
