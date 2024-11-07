@@ -9,6 +9,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -31,6 +32,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             && !trimmedLowercaseKeyword.equals(DeleteCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(EditCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(UndoCommand.COMMAND_WORD)
+            && !trimmedLowercaseKeyword.equals(RedoCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(FindCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(ListCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(HelpCommand.COMMAND_WORD)
