@@ -31,8 +31,10 @@ import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.commands.ScheduleCommand;
 import keycontacts.logic.commands.UnassignPiecesCommand;
+import keycontacts.logic.commands.UncancelLessonCommand;
 import keycontacts.logic.commands.ViewCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
@@ -143,6 +145,14 @@ public class KeyContactsParserTest {
                 ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + StudentUtil.getRegularLessonDetails(regularLesson));
         assertEquals(new ScheduleCommand(INDEX_FIRST_STUDENT, regularLesson), command);
+    }
+
+    @Test
+    public void parseCommand_uncancel() throws Exception {
+        CancelledLesson cancelledLesson = new CancelledLesson(new Date(VALID_DATE));
+        UncancelLessonCommand command = (UncancelLessonCommand) parser.parseCommand(
+                UncancelLessonCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + VALID_DATE_DESC);
+        assertEquals(new UncancelLessonCommand(INDEX_FIRST_STUDENT, cancelledLesson), command);
     }
 
     @Test
