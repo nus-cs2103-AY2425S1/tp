@@ -15,7 +15,7 @@ public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_SUCCESS = "Address book has redone previous command!";
-    public static final String MESSAGE_FAILURE = "There is no previous command to be redone!";
+    public static final String MESSAGE_FAILURE = "Address book failed to be redone. Please try again later.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
