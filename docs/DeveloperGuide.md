@@ -427,6 +427,8 @@ Use case ends.
    Use case ends.
 
 
+---
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -439,6 +441,8 @@ Use case ends.
 8. Sensitive information, like candidate emails and phone numbers, should be stored securely and not exposed in error logs or publicly accessible files.
 9. The application interface should be adaptable to different screen sizes and resolutions, ensuring usability on both standard and high-definition displays.
 
+
+---
 
 ### Glossary
 
@@ -568,5 +572,5 @@ testers are expected to do more *exploratory* testing.
 
        1. Test case: `view n/Adib j/Developer`<br>
           Expected: No candidate displayed on display panel. Error details shown in the result panel.
-    
+
 1. _{ more test cases …​ }_
