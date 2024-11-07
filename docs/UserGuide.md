@@ -6,44 +6,6 @@
 
 # VolunTier User Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
-
---------------------------------------------------------------------------------------------------------------------
-
-<!-- Table of Contents -->
-- [VolunTier User Guide](#voluntier-user-guide)
-- [Quick start](#quick-start)
-    - [Installation of application](#installation-of-application)
-- [Features](#features)
-    - [Viewing help](#viewing-help--help)
-    - [Adding a Tutor](#adding-a-tutor-addtutor)
-    - [Adding a Tutee](#adding-a-tutee-addtutee)
-    - [Adding a Lesson](#adding-a-lesson-addlesson)
-    - [Listing all persons](#listing-all-persons--list)
-    - [Editing a person](#editing-a-person--edit)
-    - [Locating persons by name](#locating-persons-by-name-find)
-    - [Locating persons by subject](#locating-persons-by-subject-findsubject)
-    - [Deleting a person](#deleting-a-person--delete)
-    - [Deleting a lesson](#deleting-a-lesson--deletelesson)
-    - [Viewing a person's details](#viewing-a-persons-details--view)
-    - [Undoing a command](#undoing-a-command--undo)
-    - [Redoing a command](#redoing-a-command--redo)
-    - [Viewing command history](#viewing-command-history--history)
-    - [Viewing chart of tutors’ volunteer hours](#viewing-chart-of-tutors-volunteer-hours--vtc)
-    - [Clearing all entries](#clearing-all-entries--clear)
-    - [Importing people from CSV files](#importing-people-from-csv-files--import)
-    - [Exiting the program](#exiting-the-program--exit)
-- [Saving the data](#saving-the-data)
-- [Editing the data file](#editing-the-data-file)
-- [FAQ](#faq)
-- [Known Issues](#known-issues)
-- [Command Summary](#command-summary)
-
-<page-nav-print />
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
 VolunTier is the **top _Tier_** solution for volunteer organisations that specialise in teaching students and are
@@ -78,7 +40,6 @@ Tutor and Tutees can both be referred to as Person.
 * `list` : Lists all contacts.
 
 * `addTutor \n John Doe \p 98765432 \e johndoe@example.com \a 311, Clementi Ave 2, 123456 \h 6 ` : Adds a tutor named `John Doe` with the phone number `98765432`, email `johndoe@example.com`, residing at `311, Clementi Ave 2, 123456`, and records `6` hours of tutoring.
-
 
 * `delete 3` : Deletes the 3rd contact shown in the current list.
 
