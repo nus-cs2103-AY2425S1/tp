@@ -80,6 +80,26 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        // Check that all tags that user wants to add are in the Wedlinker
+        if (editPersonDescriptor.getTags().isPresent()) {
+            Set < Tag > editedTags = editPersonDescriptor.getTags().get();
+            for (Tag tag : editedTags) {
+                if (!model.hasTag(tag)) {
+                    throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND);
+                }
+            }
+        }
+
+        // Check that all weddings that user wants to add are in the Wedlinker
+        if (editPersonDescriptor.getWeddings().isPresent()) {
+            Set < Wedding > editedWeddings = editPersonDescriptor.getWeddings().get();
+            for (Wedding wedding : editedWeddings) {
+                if (!model.hasWedding(wedding)) {
+                    throw new CommandException(Messages.MESSAGE_WEDDING_NOT_FOUND);
+                }
+            }
+        }
+
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
