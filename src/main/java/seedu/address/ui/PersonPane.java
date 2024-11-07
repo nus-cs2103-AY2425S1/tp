@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import seedu.address.model.person.Listing;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniqueListingList;
 
@@ -133,7 +134,13 @@ public class PersonPane extends UiPart<VBox> {
 
             UniqueListingList personListings = person.getListings();
             for (int i = 0; i < personListings.size(); i++) {
-                listingsText.append((i + 1) + ". " + personListings.get(i)).append("\n");
+                Listing listing = personListings.get(i);
+                listingsText.append((i + 1))
+                        .append(". ")
+                        .append(listing.propertyType)
+                        .append(" | ")
+                        .append(listing.address)
+                        .append("\n");
             }
             listings.setText(listingsText.toString());
             listings.setManaged(true);
