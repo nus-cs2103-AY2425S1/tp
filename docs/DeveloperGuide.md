@@ -42,7 +42,7 @@ title: Developer Guide
     7. [Filter People](#filtering-persons)
     8. [View a Person](#viewing-a-person)
     9. [Show Summary Details](#summary-of-application-statuses)
-    5. [Saving Data](#saving-data)
+    10. [Saving Data](#saving-data)
 11. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 12. [Appendix: Effort](#appendix-effort)
 ---
