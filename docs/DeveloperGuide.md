@@ -24,7 +24,7 @@ Parts of the codebase were developed with the assistance of ChatGPT. The contrib
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Getting started**
+## **Setting up, Getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
