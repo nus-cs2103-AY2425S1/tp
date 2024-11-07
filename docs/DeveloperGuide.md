@@ -377,9 +377,7 @@ ___
 1. Wedding planner requests to list all contacts.
 2. System displays a list of contacts.
 3. Wedding planner specifies which contact he wishes to delete.
-4. System requests for confirmation.
-5. Wedding planner confirms the deletion of contact.
-6. System displays a message for the successful deletion of contact.
+4. System displays a message for the successful deletion of contact.
 
    Use case ends.
 
@@ -395,23 +393,18 @@ ___
 
     Use case ends.
 
-* 4a. The wedding planner chooses to abort the deletion of contact.
-
-  * 4a1. System displays a message for aborting the deletion.
-
-    Use case ends.
 
 **Guarantees**
 * The contact is successfully deleted from the system, and any persistent storage.
 
-**Name: UC03 - View all Contacts**
+**Name: UC03 - List all Contacts**
 
 **Preconditions:**
 1. Contacts are saved properly.
 
 **Guarantees:**
 1. The user's previously saved contacts will be listed with their details.
-2. Contacts are sorted alphabetically.
+2. Contacts are sorted based on when it was added.
 
 **Main Success Scenario (MSS):**
 1.  User requests for previously saved contacts.
@@ -432,31 +425,6 @@ ___
   * 2b1. System informs the user that there are no saved contacts.
 
     Use case ends.
-
-**Name: UC04 - Save Contact (Client/Vendor)**
-
-**Preconditions:**
-1. The system should be operational.
-
-**Guarantees:**
-
-1. The file will be saved to the directory if the directory exists.
-2. If there is a duplicate file (file of the same name), it will be overwritten.
-3. If the directory is not valid, there will be no effect with the command.
-
-**Main Success Scenario (MSS):**
-1. The user specifies the directory to save data in.
-2. System displays a success message.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The directory does not exist.
-
-  * 1a1. System prompts the user that the target directory does not exist.
-
-  Use case ends.
 
 ### Non-Functional Requirements
 
@@ -504,7 +472,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
