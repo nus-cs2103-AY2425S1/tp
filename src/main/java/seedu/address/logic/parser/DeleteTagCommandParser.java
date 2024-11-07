@@ -48,7 +48,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     }
 
     /**
-     * Validates the length of the provided list of arguments.
+     * Validates whether a list of arguments is empty.
      *
      * @param arguments The list of arguments to validate.
      * @throws ParseException If the list of arguments is empty, indicating no tags were provided.

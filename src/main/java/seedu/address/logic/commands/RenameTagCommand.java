@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
- * Renames a predefined tag.
+ * Renames a tag in the tag list.
  */
 public class RenameTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "renametag";
@@ -24,6 +24,8 @@ public class RenameTagCommand extends UndoableCommand {
     private final String newTagName;
 
     /**
+     * Constructs a RenameTagCommand to rename the specified {@code tag}.
+     *
      * @param existingTag The tag to be renamed.
      * @param newTagName The new name of the tag, after renaming.
      */
@@ -42,17 +44,19 @@ public class RenameTagCommand extends UndoableCommand {
     private void validateInputs(Model model) throws CommandException {
         String messageNonExistent = MESSAGE_NONEXISTENT + existingTag;
         String messageDuplicate = MESSAGE_DUPLICATE + new Tag(newTagName);
+        String newLine = "\n";
 
         // Failure due to non-existent original tag and duplicate
         if (!model.hasTag(existingTag) && model.hasTag(new Tag(newTagName))) {
-            throw new CommandException(messageNonExistent + "\n" + messageDuplicate);
+            throw new CommandException(messageNonExistent + newLine + messageDuplicate);
         }
 
-        // Failure due to non-existent original tag
+        // Failure due to non-existent original tag only
         if (!model.hasTag(existingTag)) {
             throw new CommandException(messageNonExistent);
         }
-        // Failure due to duplicate
+
+        // Failure due to duplicate only
         if (model.hasTag(new Tag(newTagName))) {
             throw new CommandException(messageDuplicate);
         }

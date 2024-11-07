@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagList;
 
 /**
- * Adds a new predefined tag.
+ * Adds a new tag to the tag list.
  */
 public class NewTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "newtag";
@@ -39,7 +39,8 @@ public class NewTagCommand extends UndoableCommand {
 
 
     /**
-     * Constructs a NewtagCommand to add the specified {@code tags}.
+     * Constructs a NewTagCommand to add the specified {@code tags}.
+     *
      * @param tags The {@code List} of tags to be added.
      */
     public NewTagCommand(List<Tag> tags) {
@@ -48,8 +49,10 @@ public class NewTagCommand extends UndoableCommand {
     }
 
     /**
-     * @throws CommandException if the number of defined tags in the system will exceed the maximum
-     *      allowable number if the new tags were to be added.
+     * Checks if the number of tags in the tag list will exceed the maximum
+     * allowable number if the new tags were to be added.
+     *
+     * @throws CommandException If the specified limit will be exceeded.
      */
     private void validateTagListSize(Model model) throws CommandException {
         requireAllNonNull(model);
@@ -61,7 +64,9 @@ public class NewTagCommand extends UndoableCommand {
 
     /**
      * Adds the tags to the model and checks for duplicates.
+     *
      * @param model The model to which tags will be added.
+     * @return The set of tags which were successfully added.
      */
     private Set<Tag> addTagsToModel(Model model) {
         requireAllNonNull(model);
@@ -71,9 +76,9 @@ public class NewTagCommand extends UndoableCommand {
     }
 
     /**
-     * Creates a CommandResult based on the success of adding tags to the model.
+     * Creates a CommandResult based on the tags which were successfully added to the model.
      *
-     * @param tagsSuccessfullyAdded the tags that were successfully added.
+     * @param tagsSuccessfullyAdded The tags that were successfully added.
      * @return The corresponding CommandResult.
      */
     private CommandResult createCommandResult(Set<Tag> tagsSuccessfullyAdded) {
@@ -81,12 +86,14 @@ public class NewTagCommand extends UndoableCommand {
         List<Tag> tagsNotSuccessfullyAdded = new ArrayList<>(tags);
         tagsNotSuccessfullyAdded.removeAll(tagsSuccessfullyAdded);
 
+        if (!tagsNotSuccessfullyAdded.isEmpty() && tagsSuccessfullyAdded.isEmpty()) {
+            return new CommandResult(MESSAGE_ALL_DUPLICATE + tagsNotSuccessfullyAdded);
+        }
+
         if (!tagsNotSuccessfullyAdded.isEmpty()) {
-            if (tagsSuccessfullyAdded.isEmpty()) {
-                return new CommandResult(MESSAGE_ALL_DUPLICATE + tagsNotSuccessfullyAdded);
-            }
             return new CommandResult(MESSAGE_SOME_DUPLICATE + tagsNotSuccessfullyAdded);
         }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
