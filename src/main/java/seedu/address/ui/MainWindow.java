@@ -93,8 +93,6 @@ public class MainWindow extends UiPart<Stage> {
                 resultDisplay.setPrefHeight(Math.max(newResultHeight, 100));
             }
         });
-
-
     }
 
     public Stage getPrimaryStage() {
@@ -143,6 +141,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
+        resultDisplay.setPrefHeight(200);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
