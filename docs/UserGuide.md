@@ -138,6 +138,7 @@ Notes on Command Formats:
 
 * The `view`, `edit` and `delete` commands support off-screen operations. Even when vendors/events are not currently displayed, they can still be selected by `view`, `edit` and `delete` commands.
   * This is a feature, not a bug.
+
 <p>
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -152,10 +153,10 @@ Format:
 * To create a vendor: `create v/ n/VENDOR_NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]…​`
 * To create en event: `create e/ n/EVENT_NAME on/DATE [t/TAG]…​`
 
-Notes:
+Note:
 If parameters are provided for the `v/` and `e/` flags, they will be ignored.
 <box type="tip" seamless><br>
-**Tip:** A vendor or event can have any number of tags (including 0).
+Tip: A vendor or event can have any number of tags (including 0).
 </box>
 
 Examples:
@@ -170,7 +171,7 @@ Format:
 * To edit a vendor: `edit v/INDEX [n/NAME] [p/PHONE] [d/DESCRIPTION] [t/TAG]…​`
 * To edit an event: `edit e/INDEX [n/NAME] [on/DATE] [t/TAG]…​`
 
-Notes:
+Note:
 * Edits the vendor/event at the specified `INDEX`.
     * The index refers to the index number shown in the vendor or event list.
     * The index **must be a positive integer** 1, 2, 3, …​
@@ -193,6 +194,7 @@ Deletes a vendor or an event from EventTory.
 
 Format: `delete [v/INDEX]` or `delete [e/INDEX]`
 
+Note:
 * Deletes the event or vendor at the specified `INDEX`.
     * The index refers to the index number shown in the displayed event/vendor list respectively.
     * The index **must be a positive integer** 1, 2, 3, ...
@@ -212,7 +214,7 @@ Displays the list of vendors and/or events in EventTory.
 
 Format: `list [v/] [e/]`
 
-Notes:
+Note:
 * The list(s) displayed depends on whether the `v/` and/or `e/` prefix(es) is specified.
 * If no prefixes are specified, both the vendor and event lists will be displayed.
 * The prefixes can be specified in any order.
@@ -229,6 +231,7 @@ Views the details of a vendor or event.
 
 Format: `view v/INDEX` or `view e/INDEX`
 
+Note:
 * Views the details of the vendor/event at the specified `INDEX`.
   * The index refers to the index number shown in the displayed vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
@@ -246,7 +249,7 @@ Assigns vendors to events and vice versa.
 
 Format: `assign INDEX`
 
-Notes:
+Note:
 * Assigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
   * The index refers to the index number shown in the **assignable** vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
@@ -263,7 +266,7 @@ Unassigns vendors from events and vice versa.
 
 Format: `unassign INDEX`
 
-Notes:
+Note:
 * Unassigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
   * The index refers to the index number shown in the **assigned** vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
@@ -280,7 +283,7 @@ Finds vendors or events whose attributes contain any of the space-separated keyw
 
 Format: `find v/ KEYWORD [MORE_KEYWORDS]` or `find e/ KEYWORD [MORE_KEYWORDS]`
 
-Notes:
+Note:
 * The search is case-insensitive. e.g. `party` will match `Party`
 * Any partial matches will still be matched e.g. `par` will match `party`
 * The order of the keywords does not matter.
