@@ -26,11 +26,11 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String COMMAND_WORD_SHORT_FORM = "im";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
-            + ": Imports person data from a CSV file.\n"
-            + "Parameters: " + PREFIX_PATH + "FILE_PATH\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv\n"
-            + "Example: " + COMMAND_WORD_SHORT_FORM + " " + PREFIX_PATH.getShortPrefix() + "data/persons.csv";
+    public static final String MESSAGE_USAGE = "Imports person data from a CSV file.\n"
+        + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
+        + "Parameters: " + PREFIX_PATH + "FILE_PATH\n"
+        + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv\n"
+        + "Example: " + COMMAND_WORD_SHORT_FORM + " " + PREFIX_PATH.getShortPrefix() + "data/persons.csv";
     public static final String CORRECT_HEADER_USAGE =
         "Header of CSV file should be Name, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
             + " (Case insensitive, Order sensitive)";
