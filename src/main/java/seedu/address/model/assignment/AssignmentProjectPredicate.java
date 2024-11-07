@@ -15,6 +15,10 @@ public class AssignmentProjectPredicate implements Predicate<Assignment> {
         this.proposedProjectName = new ProjectName(projectName);
     }
 
+    public AssignmentProjectPredicate(ProjectName projectName) {
+        this.proposedProjectName = projectName;
+    }
+
     @Override
     public boolean test(Assignment assignment) {
         Project project = assignment.getProject();
