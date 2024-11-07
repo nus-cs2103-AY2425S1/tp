@@ -508,9 +508,9 @@ testers are expected to do more *exploratory* testing.
 
 * **For Mac**
 
-    1. Download the jar file and copy into an empty folder called `ClientHub` in `Desktop`. 
+    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
     2. Open Terminal 
-    3. Inside the terminal enter: `cd/Desktop/ClientHub`
+    3. Inside the terminal enter: `cd Downloads/ClientHub`
     4. Then enter:`java -jar clienthub.jar`
        * Expected: Shows the GUI with a set of sample clients. 
        * The window size may not be optimum.
@@ -520,7 +520,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
     2. Open PowerShell
-    3. Inside the Command Prompt enter: `cd Downloads\ClientHub`
+    3. Inside the Command Prompt enter: `cd Downloads/ClientHub`
     4. Then enter:`java -jar clienthub.jar` 
        * Expected: Shows the GUI with a set of sample clients. 
        * The window size may not be optimum.

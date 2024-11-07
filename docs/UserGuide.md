@@ -18,7 +18,21 @@ ClientHub is a **desktop app for managing contacts, optimized for use via a Comm
 
 1. Copy the file to the folder you want to use as the _home folder_ for your ClientHub.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clienthub.jar` command to run the application.<br>
+Example:
+
+**For Mac**
+1. If you have downloaded the jar file into a folder in your `Downloads`
+2. Open Terminal
+3. Type `cd Downloads/[FolderName]` and press Enter
+4. Type `java -jar clienthub.jar` and press Enter
+
+**For Windows**
+1. If you have downloaded the jar file into a folder in your `Downloads`
+2. Open PowerShell
+3. Type `cd Downloads/[FolderName]` and press Enter
+4. Type `java -jar clienthub.jar` and press Enter
+
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -314,11 +328,12 @@ A **valid** `NAME` for add should:
 * Be a prefix match of the client name.
   * `n/John Doe` will **add a reminder** for `John Doe` if there is `John Doe` and `John Doey` in the contact list.
   * `n/John Doe` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
-  * to add a reminder for `John Doe`, type `radd John Doe/`
+  * to add a reminder for `John Doe`, type `radd John Doe$`
 
 A **valid** `DATETIME` for add should:
 * Not be empty.
 * Be a valid date and time in the format `yyyy-MM-dd HH:mm`.
+  * Time should be in 24-hour format.
 * For eg. Typing `radd n/John Doe dt/2022-10-10 12:00 d/lunch` will add a reminder for `John Doe` for `lunch` at `2022-10-10 12:00`.
 
 A **valid** `REMINDER_DESCRIPTION` for add should:
@@ -352,6 +367,7 @@ A **valid** `INDEX` for edit should:
 
 A **valid** `DATETIME` for edit should:
 * Be a valid date and time in the format `yyyy-MM-dd HH:mm`.
+  * Time should be in 24-hour format.
 * For eg. Typing `redit 1 dt/2022-10-10 12:00` will edit the `DATETIME` of the reminder at index `1` to `2022-10-10 12:00`.
 
 A **valid** `REMINDER_DESCRIPTION` for edit should:
