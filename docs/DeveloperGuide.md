@@ -458,20 +458,23 @@ Priorities:
 - Medium (nice to have) - `**`
 - Low (unlikely to have) - `*`
 
-| Priority | As a …​                        | I want to …​                                                       | So that I can…​                                                                              |
-|----------|--------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `***`    | home-based healthcare provider | add the data of new clients                                        | register new clients in the system for tracking                                              |
-| `**`     | home-based healthcare provider | tag patients based on their urgency                                | prioritise higher-risk patients                                                              |
-| `**`     | home-based healthcare provider | tag a client's entry or information                                | keep track of special instructions, preferences, medical allergies or urgency                |
-| `***`    | home-based healthcare provider | be notified of overlapping names phone numbers and email addresses | avoid duplicate client entries                                                               |
-| `***`    | home-based healthcare provider | see my patients' records                                           | understand how my patient is doing                                                           |
-| `***`    | home-based healthcare provider | see my patients' allergies                                         | provide the correct prescription for my patients                                             |
-| `***`    | home-based healthcare provider | delete the records of patients whom I am not seeing anymore        | keep my address book concise and clutter-free                                                |
-| `***`    | home-based healthcare provider | edit the details of my clients' address                            | locate a person easily                                                                       |
-| `***`    | home-based healthcare provider | have the contact details of my patients for easy access            | update the details accordingly if there are any changes                                      |
-| `***`    | home-based healthcare provider | add new appointment details                                        | add appointments in my schedule for tracking later on                                        |
-| `***`    | home-based healthcare provider | see my schedule for the day                                        | organise my time and ensure that there are no clashes in appointments                        |
-| `*`      | home-based healthcare provider | filter patients according to address and priority                  | save travel time or focus on more urgent cases                                               |
+| Priority | As a …​                        | I want to …​                                                       | So that I can…​                                          |
+|----------|--------------------------------|--------------------------------------------------------------------|----------------------------------------------------------|
+| `***`    | home-based healthcare provider | add the data of new clients                                        | register new clients in the system for tracking          |
+| `***`    | home-based healthcare provider | add the contact details of my patients for easy access             | contact and notify them accordingly if there are any emergencies |
+| `***`    | home-based healthcare provider | add the address of my patients                                     | know where to get access to my patients                  | 
+| `**`     | home-based healthcare provider | tag patients based on their urgency                                | prioritise higher-risk patients                          |
+| `**`     | home-based healthcare provider | tag a client's important details                                   | keep track of medical allergies or urgency               |
+| `***`    | home-based healthcare provider | be notified of overlapping names phone numbers and email addresses | avoid duplicate client entries                           |
+| `***`    | home-based healthcare provider | find my patients' records                                          | understand how my patient is doing                       |
+| `***`    | home-based healthcare provider | find my patients' allergies                                        | provide the correct prescription for my patients         |
+| `*`      | home-based healthcare provider | filter patients according to address and priority                  | save travel time or focus on more urgent cases           |
+| `**`     | home-based healthcare provider | delete the records of patients whom I am not seeing anymore        | keep my address book concise and clutter-free            |
+| `***`    | home-based healthcare provider | edit my patients' contact details accordingly                      | contact them easily without having to worry about not being able to reach the due to wrong information |
+| `***`    | home-based healthcare provider | edit my patients' address if they move locations                   | get to my patients without worrying about going to the wrong location |   
+| `***`    | home-based healthcare provider | add new appointment details                                        | add appointments in my schedule for tracking later on    |
+| `***`    | home-based healthcare provider | be notified of overlapping appointments                            | reschedule my appointments as required                   |
+| `***`    | home-based healthcare provider | see my schedule for the day                                        | organise my time and ensure that there is sufficient time to travel to different locations |
 
 ### Use cases
 
