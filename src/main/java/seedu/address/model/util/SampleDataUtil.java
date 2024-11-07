@@ -87,10 +87,6 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
 
-        for (Appointment sampleAppointment : getSampleAppointments()) {
-            sampleAb.addAppointment(sampleAppointment);
-        }
-
         return sampleAb;
     }
 
