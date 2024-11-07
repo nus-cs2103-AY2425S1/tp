@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.SortPreference;
 
 /**
  * Unmodifiable view of user prefs.
@@ -26,8 +27,8 @@ public interface ReadOnlyUserPrefs {
     /**
      * Returns the user's sort preference
      *
-     * @return The sort preference as a {@code String}
+     * @return The sort preference as a {@code SortPreference}
      */
-    String getSortPreference();
+    SortPreference getSortPreference();
 
 }

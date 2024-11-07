@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.SortPreference;
 
 /**
  * Represents User's preferences.
@@ -22,7 +23,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public UserPrefs() {
+    }
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
@@ -63,10 +65,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     /**
      * Returns the sort preference
      *
-     * @return The sort preference as a {@code String}
+     * @return The sort preference as a {@code SortPreference}
      */
-    public String getSortPreference() {
-        return sortPreference;
+    public SortPreference getSortPreference() {
+        return new SortPreference(sortPreference);
     }
 
     /**
@@ -74,9 +76,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      *
      * @param sortPreference The sort preference to set.
      */
-    public void setSortPreference(String sortPreference) {
+    public void setSortPreference(SortPreference sortPreference) {
         requireNonNull(sortPreference);
-        this.sortPreference = sortPreference;
+        this.sortPreference = sortPreference.toString();
     }
 
 

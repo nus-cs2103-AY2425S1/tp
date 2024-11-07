@@ -17,6 +17,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Reminder;
+import seedu.address.model.person.SortPreference;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -199,5 +200,14 @@ public class ParserUtil {
             throw new ParseException(Reminder.MESSAGE_CONSTRAINTS_DESCRIPTION);
         }
         return trimmedDescription;
+    }
+
+    public static SortPreference parseSortPreference(String preference) throws ParseException {
+        requireNonNull(preference);
+        String trimmedPreference = preference.trim();
+        if (!SortPreference.isValidSortPreference(trimmedPreference)) {
+            throw new ParseException(SortPreference.MESSAGE_CONSTRAINTS);
+        }
+        return new SortPreference(trimmedPreference);
     }
 }
