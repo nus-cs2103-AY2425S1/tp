@@ -2,10 +2,12 @@
 layout: page
 title: User Guide
 ---
+# BakeBuddy
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Welcome to BakeBuddy
 
@@ -32,9 +34,8 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
 
 --------------------------------------------------------------------------------------------------------------------
-
+# Welcome to BakeBuddy
 ## Before You Begin ✔️
-
 ### Step 1: Check if Your Computer is Ready
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
@@ -51,7 +52,6 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 3. What you should see:
   - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
   - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
-
 ### Step 2: Install BakeBuddy
 
 1. Download BakeBuddy:
@@ -62,6 +62,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 2. Create a home for BakeBuddy:
   - Create a new folder on your computer named `BakeBuddy`
   - Move the downloaded `bakebuddy.jar` file into this folder
+<div style="page-break-after: always;"></div>
 
 3. Start BakeBuddy:
   - Open your terminal (like in Step 1)
@@ -81,11 +82,12 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
-Refer to the [Features](#features) below for details of each command.
+Refer to the [List of Commands](#list-of-commands) on the next page and [Features](#features) below for details of each command.
 ![screenshot](images/Screenshot-5.png)
 
-## List of Commands
+<div style="page-break-after: always;"></div>
 
+## List of Commands
 ### Contact Management
 #### General Contacts
 
@@ -110,6 +112,7 @@ Refer to the [Features](#features) below for details of each command.
 | Command | Format | Example |
 | --- | --- | --- |
 | [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
+<div style="page-break-after: always;"></div>
 
 ### Order Management
 #### Customer Orders
@@ -129,6 +132,7 @@ Refer to the [Features](#features) below for details of each command.
 | [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX` | `deleteSupplyOrder 1` |
 | [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX` | `markSupplyOrder 1` |
 | [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX` | `unmarkSupplyOrder 1` |
+<div style="page-break-after: always;"></div>
 
 ### Catalogue Management
 #### Ingredient Catalogue
@@ -154,6 +158,7 @@ Refer to the [Features](#features) below for details of each command.
 | [Check Ingredient Stock](#check-ingredient-stock-command) | `checkIngredientStock INGREDIENT` | `checkIngredientStock Flour` |
 | [Check Pastry Stock](#check-pastry-stock-command) | `checkPastryStock PASTRY` | `checkPastryStock Croissant` |
 | [View Inventory](#view-inventory-command) | `viewInventory` | `viewInventory` |
+<div style="page-break-after: always;"></div>
 
 ### General Commands
 
@@ -184,6 +189,8 @@ Refer to the [Features](#features) below for details of each command.
 * Parameter values are case-insensitive
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 ### Q1: Why can't I see the new order under the customer's/supplier's contact details immediately after adding it?
@@ -207,6 +214,7 @@ For Customer Orders:
    [catalogue appears showing pastries and their IDs]
    > addCustomerOrder n/John p/98765432 o/1 2 3
    ```
+<div style="page-break-after: always;"></div>
 
 For Supply Orders:
 1. First run `viewIngredientCatalogue` to see all ingredients and their IDs
@@ -239,6 +247,8 @@ addCustomerOrder n/John p/98765432 o/1 1 1
 This would add three units of product ID 1 to the order.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
