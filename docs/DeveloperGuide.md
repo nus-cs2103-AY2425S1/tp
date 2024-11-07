@@ -676,13 +676,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch:
 
    1. Download the jar file and copy into an empty folder
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-2. Saving window preferences
+2. Saving window preferences:
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -796,7 +796,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Miscellaneous Commands
 
-1. Getting Help
+1. Getting Help:
 
    1. Type `help` in the command box and press Enter.  
       Expected: A help window appears, showing instructions and command summaries.
