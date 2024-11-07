@@ -40,6 +40,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(new Person(0, BENSON));
+        // EP: Ensures object equality with valid inputs
         assertEquals(BENSON, person.toModelType().getPersonDescriptor());
     }
 
@@ -49,6 +50,7 @@ public class JsonAdaptedPersonTest {
             new JsonAdaptedPerson(INVALID_PERSON_ID, INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                     VALID_STATUS, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        // EP: Boundary test (invalid characters)
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -57,6 +59,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_PERSON_ID, null,
                 VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        // EP: Null check
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -66,6 +69,7 @@ public class JsonAdaptedPersonTest {
             new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                     VALID_STATUS, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
+        // EP: Boundary test (phone length)
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -74,6 +78,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, null, VALID_EMAIL,
                 VALID_ADDRESS, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
+        // EP: Null check for phone
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -83,6 +88,7 @@ public class JsonAdaptedPersonTest {
             new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
                     VALID_STATUS, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
+        // EP: Missing '@' symbol boundary check
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -91,6 +97,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, VALID_PHONE, null,
                 VALID_ADDRESS, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
+        // EP: Null check for email
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -100,6 +107,7 @@ public class JsonAdaptedPersonTest {
             new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
                     VALID_STATUS, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+        // EP: Address cannot be blank
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -108,6 +116,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL,
             null, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        // EP: Null check for address
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -118,6 +127,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
             new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                     VALID_STATUS, invalidTags);
+        // EP: Boundary test (tag format)
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
@@ -127,6 +137,7 @@ public class JsonAdaptedPersonTest {
             new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                     INVALID_STATUS, VALID_TAGS);
         String expectedMessage = Status.MESSAGE_CONSTRAINTS;
+        // EP: Boundary test (status format)
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -135,6 +146,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_PERSON_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
+        // EP: Null check for status
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
