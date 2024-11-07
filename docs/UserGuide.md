@@ -79,7 +79,7 @@ you want to seek help:
 
 **Shows a message explain the usage of the specified command keyword**
 
-Format: `help COMMAND_KEYWORD`
+Format: `help [COMMAND_KEYWORD]`
 
 Example: 
 - `help add` shows the help message for `add` command in the following format
@@ -98,6 +98,10 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]`
+
+<box type="important" seamless>
+This is the only place where the symbol differs from its intended use. The command accepts either one phone number, one email, or both.
+</box>
 
 * `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
 * `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
@@ -246,7 +250,7 @@ Examples:
 
 Finds persons whose names and module-role pairs contain any combination of the given keywords.
 
-Format: `find (n/KEYWORD)+ (r/KEYWORD)+`
+Format: `find (n/KEYWORD | r/KEYWORD)+`
 
 * Person matching at least one name keyword AND at least one module-role keyword will be returned (i.e. AND search).
 
@@ -281,7 +285,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Removes all contacts from the address book.
+Clears all contacts from the address book.
 
 Format: `clear`
 
@@ -370,13 +374,13 @@ This allows you to add extra annotations if you wish to.
 
 ## Command summary
 
-Action     | Format, Examples                                                                                                                                                                                            
------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Action     | Format, Examples                                                                                                                                                                                                                              
+-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME (p/PHONE_NUMBER \| e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague d/A good guy` 
-**Clear**  | `clear`                                                                                                                                                                                                     
-**Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                    
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/+(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com r/+CS2030S CS1101S-TA`                                                      
-**Find**   | `find [chained] (n/KEYWORD)+ (r/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521` 
-**Undo**   | `undo`
-**List**   | `list`                                                                                                                                                                                                      
-**Help**   | `help`                                                                                                                                                                                                      
+**Clear**  | `clear`                                                                                                                                                                                                                                       
+**Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                                                      
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/(+\|-)(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com r/+CS2030S CS1101S-TA`                                           
+**Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521`                                                                                                                                         
+**Undo**   | `undo`                                                                                                                                                                                                                                        
+**List**   | `list`                                                                                                                                                                                                                                        
+**Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                       
