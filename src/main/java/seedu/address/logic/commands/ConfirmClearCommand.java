@@ -15,8 +15,8 @@ import seedu.address.model.person.Person;
 public class ConfirmClearCommand extends Command {
 
     public static final String COMMAND_WORD = "confirm";
-    public static final String MESSAGE_SUCCESS_FULL_CLEAR = "Address book has been cleared";
-    public static final String MESSAGE_SUCCESS_FILTERED_CLEAR = "Filtered participants have been deleted";
+    public static final String MESSAGE_SUCCESS_FULL_CLEAR = "Address book has been cleared.";
+    public static final String MESSAGE_SUCCESS_FILTERED_CLEAR = "Filtered participants have been deleted.";
 
 
     @Override
