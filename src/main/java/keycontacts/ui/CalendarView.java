@@ -196,7 +196,8 @@ public class CalendarView extends UiPart<Region> {
         for (int i = 0; i < uniqueGroupStudents.size(); i++) {
             Student student = uniqueGroupStudents.get(i);
             String name = student.getGroup().isNoGroup() ? student.getName().fullName : student.getGroup().groupName;
-            String groupColor = CALENDAR_COLORS.get(Math.abs(Objects.hash(name)) % CALENDAR_COLORS.size());
+            String groupColor = CALENDAR_COLORS.get(
+                    Math.abs(Objects.hash(name.toLowerCase())) % CALENDAR_COLORS.size());
 
             RegularLesson regularLesson = student.getRegularLesson();
             if (regularLesson != null) {
