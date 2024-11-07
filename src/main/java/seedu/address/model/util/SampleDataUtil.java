@@ -26,24 +26,42 @@ import seedu.address.model.wedding.WeddingName;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Address("Blk 30 Geylang Street 29, #06-40"), new Job("Caterer"),
-                    getTagSet("Mary & John")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Job("Photographer"),
-                    getTagSet("Mary & John", "Anthony & Jane")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Job("Usher"),
-                     getTagSet("Ahmad Bin Ali & Siti Bte Rahim")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Job("Security"),
-                    getTagSet("Devesh s/o Ramesh & Priya d/o Ramesh")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"), new Job("Videographer"),
-                    getTagSet("Carol & John")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"), new Job("Audio"),
-                    getTagSet("Fiona & John"))
+                new Person(new Name("Jeremy Ng"), new Phone("91224124"), new Email("jeremyng@gmail.com"),
+                        new Address("53 Tuas South Ave 1, Singapore 637606"), new Job("Caterer(halal)"),
+                        getTagSet()),
+                new Person(new Name("Heather Teo"), new Phone("82212345"), new Email("h3ather@outlook.com"),
+                        new Address("Blk 123, #12-34, Jurong West St 12, Singapore 123456"), new Job("Photographer"),
+                        getTagSet("Ahmad & Esther", "Evan & Camillus")),
+                new Person(new Name("Zachariah Lee"), new Phone("96541294"), new Email("zaccountant@hotmail.com"),
+                        new Address("51 Changi Business Park Central 2, Singapore 486066"), new Job("Emcee"),
+                        getTagSet()),
+                new Person(new Name("Clarke Woodford"), new Phone("86321256"),
+                        new Email("clarkymate@flowerpower.com.sg"),
+                        new Address("Blk 456, #01-23, Serangoon North Ave 3, Singapore 456789"), new Job("Florist"),
+                        getTagSet("Eric & Reyna")),
+                new Person(new Name("Muhammad Amirul Bin Abdul Rahman"), new Phone("92451247"),
+                        new Email("amirules@outlook.com"),
+                        new Address("Blk 789, #11-22, Tampines St 21, Singapore 789012"), new Job("Lighting"),
+                        getTagSet()),
+                new Person(new Name("Judith Abigail Ho"), new Phone("97245670"), new Email("judithah@yahoo.com"),
+                        new Address("464A Clementi Ave 1, Singapore 121464"), new Job("Makeup Artist"),
+                        getTagSet()),
+                new Person(new Name("Crisanto Adlawan"), new Phone("87543218"), new Email("cr7@gmail.com"),
+                        new Address("151 Chin Swee Road, Singapore 169876"), new Job("Baker"),
+                        getTagSet()),
+                new Person(new Name("Chris Tan"), new Phone("97654431"), new Email("chirisshoots@gmail.com"),
+                        new Address("112 Siglap Road, Singapore 234522"), new Job("Photographer"),
+                        getTagSet("Karthigaran & Lavanya")),
+                new Person(new Name("Abigail Low"), new Phone("83347765"), new Email("abby@hotmail.com"),
+                        new Address("245 Admiralty Road, Singapore 345610"), new Job("Dj"),
+                        getTagSet()),
+                new Person(new Name("Nikhil Archrya"), new Phone("92311323"), new Email("Nik34@satsfoods.com"),
+                        new Address("234 Pandan Loop, Singapore 128422"), new Job("Caterer"),
+                        getTagSet()),
+                new Person(new Name("Neville Leong"), new Phone("92257643"), new Email("Never3ver@photog.com"),
+                        new Address("#02-04 Holland Road Shopping Centre, 211 Holland Avenue, Singapore 278967"),
+                        new Job("Videographer"),
+                        getTagSet("Terry & Soon Hian"))
         };
     }
 
@@ -74,10 +92,48 @@ public class SampleDataUtil {
 
     public static Wedding[] getSampleWeddings() {
         return new Wedding[] {
-            new Wedding(new WeddingName("Adam & Steve"), new Venue("Serangoon Nex"),
-                    new Date("22/12/2025")),
-            new Wedding(new WeddingName("Lisa & Jane"), new Venue("Hougang Void Deck"),
-                    new Date("11/11/2032"))
+                new Wedding(new WeddingName("Karthigaran & Lavanya"),
+                        new Venue("Hotel Fort Canning 11 Canning Walk, Singapore 178881"),
+                        new Date("12/04/2025"), getParticipantSet(
+                        new Person(new Name("Chris Tan"), new Phone("97654431"), new Email("chirisshoots@gmail.com"),
+                                new Address("112 Siglap Road, Singapore 234522"), new Job("Photographer"),
+                                getTagSet("Karthigaran & Lavanya"))
+                )),
+                new Wedding(new WeddingName("Terry & Soon Hian"),
+                        new Venue("The Fullerton Hotel 1 Fullerton Square, Singapore 049178"),
+                        new Date("12/02/2025"), getParticipantSet(
+                        new Person(new Name("Neville Leong"), new Phone("92257643"), new Email("Never3ver@photog.com"),
+                                new Address("#02-04 Holland Road Shopping Centre, 211 Holland Avenue, Singapore 278967"),
+                                new Job("Videographer"), getTagSet("Terry & Soon Hian"))
+                )),
+                new Wedding(new WeddingName("Evan & Camillus"),
+                        new Venue("Aloft 16 Ah Hood Road, Singapore 329982"),
+                        new Date("12/12/2024"), getParticipantSet(
+                        new Person(new Name("Heather Teo"), new Phone("82212345"), new Email("h3ather@outlook.com"),
+                                new Address("Blk 123, #12-34, Jurong West St 12, Singapore 123456"),
+                                new Job("Photographer"),
+                                getTagSet("Ahmad & Esther", "Evan & Camillus"))
+                )),
+                new Wedding(new WeddingName("Connor & Aishah"),
+                        new Venue("CHIJMES 30 Victoria St, Singapore 187996"),
+                        new Date("07/04/2025"), getParticipantSet()),
+                new Wedding(new WeddingName("Ahmad & Esther"),
+                        new Venue("Shangri-La Hotel 22 Orange Grove Rd, Singapore 258350"),
+                        new Date("13/02/2026"), getParticipantSet(
+                        new Person(new Name("Heather Teo"), new Phone("82212345"), new Email("h3ather@outlook.com"),
+                                new Address("Blk 123, #12-34, Jurong West St 12, Singapore 123456"),
+                                new Job("Photographer"),
+                                getTagSet("Ahmad & Esther", "Evan & Camillus"))
+                )),
+                new Wedding(new WeddingName("Eric & Reyna"),
+                        new Venue("CHIJMES 30 Victoria St, Singapore 187996"),
+                        new Date("11/10/2025"), getParticipantSet(
+                        new Person(new Name("Clarke Woodford"), new Phone("86321256"),
+                                new Email("clarkymate@flowerpower.com.sg"),
+                                new Address("Blk 456, #01-23, Serangoon North Ave 3, Singapore 456789"),
+                                new Job("Florist"),
+                                getTagSet("Eric & Reyna"))
+                ))
         };
     }
 
