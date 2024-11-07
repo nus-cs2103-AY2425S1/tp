@@ -159,7 +159,7 @@ Examples:
 * `find colleague` returns `Bernice Yu` and `Roy Balakrishnan` _(search by tag)_
 * `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+![result for 'find alex david'](images/findResult.png)
 
 ### Filter students : `filter`
 
@@ -294,6 +294,11 @@ You can assign a grade to a module that a student is taking.
 - Each module specified in the `grade` command must be a module that the student is taking.
 - The number of `m/MODULE` prefixes must match the number of `s/GRADE` prefixes.
 - Grades are assigned to modules based on the order of the `m/MODULE s/GRADE` pairs provided in the command.</div>
+
+<div class="alert alert-primary">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Tip:</strong>
+You can hover over each individual module to view the grades for that module.
+</div>
 
 **Examples:**
 - `grade 1 m/Physics s/85` : assigns a grade of 85 to Physics for the first student.
