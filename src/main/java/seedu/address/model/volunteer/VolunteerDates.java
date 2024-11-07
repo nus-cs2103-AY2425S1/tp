@@ -12,7 +12,6 @@ import java.util.Set;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
