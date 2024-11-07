@@ -34,15 +34,13 @@ tasks done faster than traditional GUI apps.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
+    
 4. Type the command in the command box and press Enter to execute it. e.g. typing **`:help`** and pressing Enter will
    open the help window.<br>
+    The results will be displayed in the Result Display Area.<br>
+    Contacts are shown in the Display List.<br>
+    ![Ui_annotated](images/Ui_annotated.png)
     {{ commandSummary }}
-
-Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Features
 
 <box type="info" seamless>
 
@@ -69,6 +67,12 @@ Refer to the [Features](#features) below for details of each command.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
+
 ### View Help
 
 > Shows a command cheatsheet, as well as a link to access the user guide.
@@ -80,8 +84,8 @@ Refer to the [Features](#features) below for details of each command.
 
 > Adds a person to the address book.
 
-**Short command:** `:a -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`\
-**Long command:** `:add -n NAME -p PHONE_NUMBER -e EMAIL -l ADDRESS [-t TAG]…​`
+**Short command:** `:a -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]`\
+**Long command:** `:add -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]`
 
 
 <box type="tip" seamless>
@@ -91,8 +95,17 @@ Refer to the [Features](#features) below for details of each command.
 
 **Examples:**
 
-* `:add -n John Doe -p 98765432 -e johnd@example.com -l John street, block 123, #01-01`
-* `:a -n Betsy Crowe -t friend -e betsycrowe@example.com -l Newgate Prison -p 1234567 -t criminal`
+Initial State
+
+![initialState](images/addcommandimages/initialState.png){width=700px}
+
+1. `:add -n Jack Lee -p 76543219 -e jackl@example.com -l 909 Fir St -t client -r Met at a wedding`
+
+![addJackLee](images/addcommandimages/addJackLee.png){width=700px}
+
+2. `:a -n Ivy King -p 87654320 -e ivyk@example.com -l 808 Palm St -t friend -t client -r Met at a conference`
+
+![addIvyKing](images/addcommandimages/addIvyKing.png){width=700px}
 
 ### List All
 
@@ -177,6 +190,11 @@ Refer to the [Features](#features) below for details of each command.
   using `:undo` will remove John Doe from the address book.
 * If we delete a contact with `:rm -i 3`, using `:undo` will restore the deleted contact.
 
+<box type="tip" seamless>
+
+**Tip:** Ctrl-Z can also be used to undo the last change outside the command box.
+</box>
+
 ### Redo
 
 > Reapplies the last undone change to the address book.\
@@ -189,6 +207,11 @@ Refer to the [Features](#features) below for details of each command.
 
 * After using `:undo` to revert the addition of John Doe, using `:redo` will add John Doe back to the address book.
 * After using `:undo` to revert the deletion of a contact, using `:redo` will delete the contact again.
+
+<box type="tip" seamless>
+
+**Tip:** Ctrl-Shift-Z can also be used to redo the last change outside the command box.
+</box>
 
 ### Export Data
 
@@ -210,6 +233,26 @@ Refer to the [Features](#features) below for details of each command.
 
 **Short command:** `:q`\
 **Long command:** `:quit`
+
+--------------------------------------------------------------------------------------------------------------------
+## Keyboard Shortcuts
+There are two modes in VBook: Command Box and UI Navigation. The following keyboard shortcuts are available in each mode.
+
+### Command Box
+* `Ctrl + Z` - Undo the last change in the command box.
+* `F1` - Open the Help Window.
+* `ESC` - Go back to UI Navigation Mode
+
+### UI Navigation
+* `Ctrl + Z` - Undo the last change made to the address book.
+* `Ctrl + Shift + Z` - Redo the last undone change made to the address book.
+* `F1` - Open the Help Window.
+* `Up Arrow` - Highlight the previous contact in the list.
+* `Down Arrow` - Highlight the next contact in the list.
+* `:` - Focus on the Command Box.
+
+--------------------------------------------------------------------------------------------------------------------
+## File Management
 
 ### Save Data
 
