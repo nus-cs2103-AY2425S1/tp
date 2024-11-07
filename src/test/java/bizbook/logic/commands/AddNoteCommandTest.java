@@ -108,13 +108,13 @@ public class AddNoteCommandTest {
     }
 
 
-//    @Test
-//    public void execute_invalidPersonIndex_throwsCommandException() {
-//        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_OUTOFBOUND_PERSON, INDEX_FIRST_NOTE,
-//                TYPICAL_NOTE);
-//        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
-//                editNoteCommand.execute(model));
-//    }
+    @Test
+    public void execute_invalidPersonIndex_throwsCommandException() {
+        AddNoteCommand addNoteCommand = new AddNoteCommand(INDEX_OUTOFBOUND_PERSON,
+                TYPICAL_NOTE);
+        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+                addNoteCommand.execute(model));
+    }
 
     @Test
     public void equals() {
