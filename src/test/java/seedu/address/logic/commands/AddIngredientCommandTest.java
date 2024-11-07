@@ -75,7 +75,8 @@ public class AddIngredientCommandTest {
         expectedModel.addIngredient(expectedIngredient);
 
         // Act and Assert
-        assertCommandSuccess(command, model, String.format(AddIngredientCommand.MESSAGE_ADD_INGREDIENT_SUCCESS, expectedIngredient), expectedModel);
+        assertCommandSuccess(command, model,
+                String.format(AddIngredientCommand.MESSAGE_ADD_INGREDIENT_SUCCESS, expectedIngredient), expectedModel);
 
         // Verify that ingredient with special characters was added successfully
         assertTrue(model.getIngredientCatalogue().getCatalogue().containsValue(expectedIngredient));
@@ -95,7 +96,9 @@ public class AddIngredientCommandTest {
         Model expectedHighCostModel = new ModelManager();
         expectedHighCostModel.addIngredient(highCostIngredient);
 
-        assertCommandSuccess(highCostCommand, model, String.format(AddIngredientCommand.MESSAGE_ADD_INGREDIENT_SUCCESS, highCostIngredient), expectedHighCostModel);
+        assertCommandSuccess(highCostCommand, model,
+                String.format(AddIngredientCommand.MESSAGE_ADD_INGREDIENT_SUCCESS, highCostIngredient),
+                expectedHighCostModel);
 
         // Verify that high-cost ingredient was added successfully
         assertTrue(model.getIngredientCatalogue().getCatalogue().containsValue(highCostIngredient));
@@ -107,7 +110,9 @@ public class AddIngredientCommandTest {
         Model expectedLowCostModel = new ModelManager();
         expectedLowCostModel.addIngredient(lowCostIngredient);
 
-        assertCommandSuccess(lowCostCommand, model, String.format(AddIngredientCommand.MESSAGE_ADD_INGREDIENT_SUCCESS, lowCostIngredient), expectedLowCostModel);
+        assertCommandSuccess(lowCostCommand, model,
+                String.format(AddIngredientCommand.MESSAGE_ADD_INGREDIENT_SUCCESS, lowCostIngredient),
+                expectedLowCostModel);
 
         // Verify that low-cost ingredient was added successfully
         assertTrue(model.getIngredientCatalogue().getCatalogue().containsValue(lowCostIngredient));

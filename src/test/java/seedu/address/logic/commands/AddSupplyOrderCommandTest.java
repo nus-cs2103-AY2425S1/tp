@@ -32,7 +32,6 @@ import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
-import seedu.address.model.product.Product;
 import seedu.address.model.util.Remark;
 
 public class AddSupplyOrderCommandTest {

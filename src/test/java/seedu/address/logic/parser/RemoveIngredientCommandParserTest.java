@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.RemoveIngredientCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.commands.RemoveIngredientCommand.MESSAGE_USAGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +14,11 @@ import seedu.address.logic.commands.RemoveIngredientCommand;
  */
 public class RemoveIngredientCommandParserTest {
 
-    private final RemoveIngredientCommandParser parser = new RemoveIngredientCommandParser();
-
     private static final String VALID_INGREDIENT_NAME = "Flour";
     private static final String EMPTY_INPUT = "";
     private static final String WHITESPACE_ONLY = "   ";
+
+    private final RemoveIngredientCommandParser parser = new RemoveIngredientCommandParser();
 
     @Test
     public void parse_validArgs_returnsRemoveIngredientCommand() {

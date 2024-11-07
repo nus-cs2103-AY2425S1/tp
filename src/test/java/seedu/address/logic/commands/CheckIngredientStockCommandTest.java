@@ -49,7 +49,8 @@ public class CheckIngredientStockCommandTest {
         CheckIngredientStockCommand command = new CheckIngredientStockCommand(ingredient.getName());
 
         // Prepare the expected success message
-        String expectedMessage = String.format(CheckIngredientStockCommand.MESSAGE_INGREDIENT_AVAILABLE, INGREDIENT_NAME);
+        String expectedMessage = String.format(CheckIngredientStockCommand.MESSAGE_INGREDIENT_AVAILABLE,
+                                                INGREDIENT_NAME);
 
         // Verify that the command executes successfully
         assertCommandSuccess(command, model, expectedMessage, model);

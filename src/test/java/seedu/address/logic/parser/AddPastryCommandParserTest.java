@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddPastryCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.commands.AddPastryCommand.MESSAGE_USAGE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +18,13 @@ import seedu.address.model.product.IngredientCatalogue;
  * Contains tests for {@code AddPastryCommandParser}.
  */
 public class AddPastryCommandParserTest {
-
-    private final AddPastryCommandParser parser = new AddPastryCommandParser();
-
     private static final String VALID_NAME = "Croissant";
     private static final double VALID_COST = 3.50;
     private static final String INVALID_COST = "abc";
     private static final String VALID_INGREDIENTS = "Flour Sugar";
     private static final String INVALID_INGREDIENT = "GoldDust";
+
+    private final AddPastryCommandParser parser = new AddPastryCommandParser();
 
     @Test
     public void parse_validArgs_returnsAddPastryCommand() {

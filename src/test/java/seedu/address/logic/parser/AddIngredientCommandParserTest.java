@@ -6,18 +6,20 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddIngredientCommand;
 
 /**
  * Contains tests for {@code AddIngredientCommandParser}.
  */
 public class AddIngredientCommandParserTest {
-    private final AddIngredientCommandParser parser = new AddIngredientCommandParser();
 
     private static final String VALID_NAME = "Flour";
     private static final double VALID_COST = 1.50;
     private static final String INVALID_COST = "abc"; // Non-numeric cost
     private static final String MISSING_COST = "Flour"; // Only name provided
+
+    private final AddIngredientCommandParser parser = new AddIngredientCommandParser();
 
     @Test
     public void parse_validArgs_returnsAddIngredientCommand() {

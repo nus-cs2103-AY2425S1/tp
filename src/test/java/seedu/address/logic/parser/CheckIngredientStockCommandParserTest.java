@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CheckIngredientStockCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.commands.CheckIngredientStockCommand.MESSAGE_USAGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +13,12 @@ import seedu.address.logic.commands.CheckIngredientStockCommand;
  */
 public class CheckIngredientStockCommandParserTest {
 
-    private final CheckIngredientStockCommandParser parser = new CheckIngredientStockCommandParser();
-
     private static final String VALID_INGREDIENT_NAME = "Flour";
     private static final String WHITESPACE_ONLY = "   ";
     private static final String EMPTY_INPUT = "";
     private static final String SPECIAL_CHARACTERS_INPUT = "@!$%^";
+
+    private final CheckIngredientStockCommandParser parser = new CheckIngredientStockCommandParser();
 
     @Test
     public void parse_validArgs_returnsCheckIngredientStockCommand() {
