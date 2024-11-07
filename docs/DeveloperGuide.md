@@ -134,16 +134,16 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-<puml src="diagrams/UndoState0.puml" width = "600"/>
+<puml src="diagrams/UndoRedoState0.puml" width = "600"/>
 
 How the undo works:
 * When any command that is not undo is called, the `LogicManger` pushes the command onto the `CommandStack`.
 
-<puml src="diagrams/UndoState1.puml" width = "600"/>
+<puml src="diagrams/UndoRedoState1.puml" width = "600"/>
 
 * When the `undo` command is called, the `LogicManager` pops the latest command 
 
-<puml src="diagrams/UndoState2.puml" width = "600"/>
+<puml src="diagrams/UndoRedoState2.puml" width = "600"/>
 
 
 ### Model component
