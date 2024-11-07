@@ -1,10 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.commands.TriageCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents the triage level of a person in the system.
