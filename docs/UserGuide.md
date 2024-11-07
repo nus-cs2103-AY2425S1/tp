@@ -388,16 +388,17 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.<br>
+**Q**: How do I undo a mistake?<br>
+**A**: You can edit the data using the `edit` command to revert the changes. An update to provide an undo feature is currently in progress.<br>
 
 ---
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **When adding Persons or Events**, most fields are mandatory. An update to allow for optional fields is in progress.
-3. **When adding Points of Contact to an Event**, the application does not check for duplicate entries. The remedy is to either use the Edit Event command or manually remove the duplicate Points of Contact. An update to prevent duplicate Points of Contact is in progress.
-4. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **When editing Person or Event name in View mode**, the Person or Event being viewed will be exited and a blank screen will be displayed. The remedy is to use the `view` command to view the new Person or Event name.
+3. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
 
@@ -405,33 +406,33 @@ _Details coming soon ..._
 
 ### Managing Contacts
 
-| Action     | Format, Examples                                                                                                                                                       |
-| ---------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity`|
-| **Delete** | `delete person INDEX`<br> e.g., `delete person 3`                                                                                                                      |
-| **Edit**   | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit person 1 n/James Lee e/jameslee@example.com`                              |
-| **Filter** | `filter person TAG`<br> e.g., `filter person Celebrity`                                                                                                                |
-| **Find**   | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find person James Jake`                                                                                               |
+| Action     | Format | Examples                                                                                             |
+| ---------- |--------|------------------------------------------------------------------------------------------------------|
+| **Add**    | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> | e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity` |
+| **Delete** | `delete person INDEX`<br> | e.g., `delete person 3`                                                                              |
+| **Edit**   | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | e.g.,`edit person 1 n/James Lee e/jameslee@example.com`                                              |
+| **Filter** | `filter person TAG`<br> | e.g., `filter person Celebrity`                                                                      |
+| **Find**   | `find person KEYWORD [MORE_KEYWORDS]`<br> | e.g., `find person James Jake`                                                                       |
 | **List**   | `list person`                                                                                                                                                          |
-| **View**   | `view person KEYWORD [MORE_KEYWORDS]`<br> e.g., `view person Jake Doe`                                                                                                 |
+| **View**   | `view person KEYWORD [MORE_KEYWORDS]`<br> | e.g., `view person Jake Doe`                                                                         |
 
 ### Managing Events
 
-| Action     | Format, Examples                                                                                                                                                |
-| ---------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add event n/NAME t/TIME v/VENUE c/CELEBRITY [p/POINTS OF CONTACT]…​`<br> e.g., `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
-| **Clear** | `clear event`                                                                                                                                                   |
-| **Delete** | `delete event INDEX`<br> e.g., `delete event 3`                                                                                                                 |
-| **Edit**   | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> e.g.,`edit event 1 t/2024-03-21 v/Jane's Salon`                        |
-| **Filter** | `filter event CELEBRITY_NAME`<br> e.g., `filter event Jim Bob`                                                                                                  |
-| **Find**   | `find event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find event Hair Oscars`                                                                                         |
-| **List**   | `list event`                                                                                                                                                    |
-| **View**   | `view event KEYWORD [MORE_KEYWORDS]`<br> e.g., `view event Oscars`                                                                                              |
+| Action     | Format | Examples                                                                               |
+| ---------- |-------------------|----------------------------------------------------------------------------------------|
+| **Add**    | `add event n/NAME t/TIME v/VENUE c/CELEBRITY [p/POINTS OF CONTACT]…​`<br> | e.g., `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
+| **Clear** | `clear event`                                                                                                                                                  |
+| **Delete** | `delete event INDEX`<br> | e.g., `delete event 3`                                                                 |
+| **Edit**   | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> | e.g.,`edit event 1 t/2024-03-21 v/Jane's Salon`                                        |
+| **Filter** | `filter event CELEBRITY_NAME`<br> | e.g., `filter event Jim Bob`                                                           |
+| **Find**   | `find event KEYWORD [MORE_KEYWORDS]`<br> | e.g., `find event Hair Oscars`                                                         |
+| **List**   | `list event`                                                                                                                                                   |
+| **View**   | `view event KEYWORD [MORE_KEYWORDS]`<br> | e.g., `view event Oscars`                                                              |
 
 ### Utility Commands
 
-| Action    | Format, Examples |
-| --------- |------------------|
-| **Clear** | `clear all`      |
-| **Exit**  | `exit`           |
-| **Help**  | `help`           |
+| Action    | Format |
+| --------- |----------------|
+| **Clear** | `clear all`    |
+| **Exit**  | `exit`         |
+| **Help**  | `help`         |
