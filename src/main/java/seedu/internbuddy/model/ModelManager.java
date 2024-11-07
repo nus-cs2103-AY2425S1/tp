@@ -112,6 +112,16 @@ public class ModelManager implements Model {
         addressBook.setCompany(target, editedCompany);
     }
 
+    @Override
+    public void hideAppDetailsForAll() {
+        addressBook.hideAppDetailsForAll();
+    }
+
+    @Override
+    public void viewAppDetails(Company company) {
+        addressBook.viewAppDetails(company);
+    }
+
     //=========== Filtered Company List Accessors =============================================================
 
     /**

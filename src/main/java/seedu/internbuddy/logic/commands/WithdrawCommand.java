@@ -68,7 +68,7 @@ public class WithdrawCommand extends Command {
 
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
                 companyToEdit.getAddress(), companyToEdit.getTags(),
-                newStatus, applicationList, companyToEdit.getIsFavourite());
+                newStatus, applicationList, companyToEdit.getIsFavourite(), false);
 
         model.setCompany(companyToEdit, editedCompany);
         return new CommandResult(String.format(MESSAGE_WITHDRAW_APPLICATION_SUCCESS, applicationToWithdraw));

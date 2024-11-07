@@ -38,7 +38,8 @@ public class UpdateCommandTest {
 
         Company updatedCompany = new Company(companyToUpdate.getName(), companyToUpdate.getPhone(),
                 companyToUpdate.getEmail(), companyToUpdate.getAddress(), companyToUpdate.getTags(),
-                companyToUpdate.getStatus(), updatedApplications, companyToUpdate.getIsFavourite());
+                companyToUpdate.getStatus(), updatedApplications, companyToUpdate.getIsFavourite(),
+                companyToUpdate.getIsShowingDetails());
 
         model.setCompany(companyToUpdate, updatedCompany);
 

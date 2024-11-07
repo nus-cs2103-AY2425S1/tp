@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Company companyToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCompany(companyToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_COMPANY_SUCCESS, Messages.format(companyToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_COMPANY_SUCCESS, companyToDelete.getName()));
     }
 
     @Override

@@ -85,4 +85,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCompanyList(Predicate<Company> predicate);
+
+    void hideAppDetailsForAll();
+
+    void viewAppDetails(Company company);
 }
