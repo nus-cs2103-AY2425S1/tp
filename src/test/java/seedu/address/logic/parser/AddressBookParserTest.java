@@ -19,6 +19,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AssignEventByPersonIndexEventIndexCommand;
+import seedu.address.logic.commands.AssignEventByPersonIndexEventNameCommand;
+import seedu.address.logic.commands.AssignEventByPersonNameEventIndexCommand;
+import seedu.address.logic.commands.AssignEventByPersonNameEventNameCommand;
+import seedu.address.logic.commands.AssignEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteByIndexCommand;
 import seedu.address.logic.commands.DeleteByNameCommand;
@@ -55,6 +60,7 @@ import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -187,6 +193,26 @@ public class AddressBookParserTest {
                 EventUtil.getUnassignEventDetails(ALICE.getName().toString(), MEETING.getEventName().toString()));
         assertEquals(new UnassignEventByPersonNameEventNameCommand(ALICE.getName(), MEETING.getEventName()),
                 unassignEventByPersonNameEventNameCommand);
+    }
+
+    @Test
+    public void parseCommand_assign_events() throws Exception {
+        AssignEventCommand assignEventByPersonIndexEventIndexCommand = (AssignEventCommand) parser.parseCommand(
+                EventUtil.getAssignEventDetails("1", "1"));
+        assertEquals(new AssignEventByPersonIndexEventIndexCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT),
+                assignEventByPersonIndexEventIndexCommand);
+        AssignEventCommand assignEventByPersonIndexEventNameCommand = (AssignEventCommand) parser.parseCommand(
+                EventUtil.getAssignEventDetails("1", MEETING.getEventName().toString()));
+        assertEquals(new AssignEventByPersonIndexEventNameCommand(INDEX_FIRST_PERSON, MEETING.getEventName()),
+                assignEventByPersonIndexEventNameCommand);
+        AssignEventCommand assignEventByPersonNameEventIndexCommand = (AssignEventCommand) parser.parseCommand(
+                EventUtil.getAssignEventDetails(ALICE.getName().toString(), "1"));
+        assertEquals(new AssignEventByPersonNameEventIndexCommand(ALICE.getName(), INDEX_FIRST_EVENT),
+                assignEventByPersonNameEventIndexCommand);
+        AssignEventCommand assignEventByPersonNameEventNameCommand = (AssignEventCommand) parser.parseCommand(
+                EventUtil.getAssignEventDetails(ALICE.getName().toString(), MEETING.getEventName().toString()));
+        assertEquals(new AssignEventByPersonNameEventNameCommand(ALICE.getName(), MEETING.getEventName()),
+                assignEventByPersonNameEventNameCommand);
     }
 
     @Test
