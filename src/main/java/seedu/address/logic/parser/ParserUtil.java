@@ -118,23 +118,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String dietaryPreference} into a {@code DietaryPreference}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code dietaryPreference} is invalid.
-     */
-    public static DietaryPreference parsePreference(String dietaryPreference) throws ParseException {
-        if (dietaryPreference == null) {
-            return new DietaryPreference();
-        }
-        String trimmedPreference = dietaryPreference.trim();
-        if (!DietaryPreference.isValidDietaryPreference(trimmedPreference)) {
-            throw new ParseException(DietaryPreference.MESSAGE_CONSTRAINTS);
-        }
-        return new DietaryPreference(trimmedPreference);
-    }
-
-    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -150,6 +133,7 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
     /**
      * Parses a {@code String information} into an {@code Information}.
      * Leading and trailing whitespaces will be trimmed.
