@@ -11,7 +11,7 @@ public class Address {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Addresses can only take any alphabets, numbers, or these following characters\n"
-                    + " # , - and it should not be blank";
+                    + " # , - ' and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
