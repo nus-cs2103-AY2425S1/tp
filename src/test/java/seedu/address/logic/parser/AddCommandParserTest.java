@@ -84,9 +84,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
 
-        String validExpectedPersonString = NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+        String validExpectedPersonString = NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -118,7 +117,7 @@ public class AddCommandParserTest {
                 validExpectedPersonString + SEX_DESC_AMY + PHONE_DESC_AMY + ROLE_DESC_AMY + EMAIL_DESC_AMY
                         + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_SEX + PREFIX_ROLE, PREFIX_ADDRESS,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_SEX, PREFIX_ROLE, PREFIX_ADDRESS,
                         PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
@@ -189,38 +188,32 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // missing role prefix
-        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + VALID_ROLE_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + VALID_ROLE_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + VALID_PHONE_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
-                        + ADDRESS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
+                        + VALID_EMAIL_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + VALID_ADDRESS_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + VALID_ADDRESS_BOB, expectedMessage);
       
         // missing sex prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_SEX_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_SEX_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + VALID_ROLE_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
-                        + VALID_ADDRESS_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + VALID_ROLE_BOB + VALID_PHONE_BOB
+                        + VALID_EMAIL_BOB + VALID_ADDRESS_BOB, expectedMessage);
     }
 
     @Test
