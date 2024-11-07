@@ -29,6 +29,10 @@
                 </VBox>
                 <HBox HBox.hgrow="ALWAYS">
                     <VBox>
+                        <minWidth>
+                            <!-- Ensures that the label text is never truncated -->
+                            <Region fx:constant="USE_PREF_SIZE" />
+                        </minWidth>
                         <Label fx:id="goodsName" text="\$goodsName" styleClass="cell_big_label" />
                         <FlowPane fx:id="goodsCategoryFlowPane" styleClass="goods_category" />
                         <Label fx:id="supplierName" styleClass="cell_small_label" text="\$supplierName" />
