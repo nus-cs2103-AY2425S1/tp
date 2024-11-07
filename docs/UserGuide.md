@@ -93,21 +93,21 @@ The prefixes used in EZSTATES are universal across all commands <br> _(i.e. have
 </div>
 <br>
 
-| Prefix   | Meaning | Location    | Constraints | Remarks | Example |
-|----------|---------|-------------|-------------|---------|---------|
-| n/       | name    | Client      |             |         |         |
-| p/       | phone   | Client      |             |         |         |
-| e/       | email   | Client      |             |         |         |
-| t/       | tag     | Client      |             |         |         |
-| d/       | date    | Appointment |             |         |         |
-| fr/      | from    | Appointment |             |         |         |
-| to/      | to      | Appointment |             |         |         |
-| price/   | price   | Listing     |             |         |         |
-| area/    | area    | Listing     |             |         |         |
-| address/ | address | Listing     |             |         |         |
-| region/  | region  | Listing     |             |         |         |
-| seller/  | seller  | Listing     |             |         |         |
-| buyer/   | buyer   | Listing     |             |         |         |
+| Prefix | Meaning | Location    | Constraints | Remarks | Example |
+|--------|---------|-------------|-------------|---------|---------|
+| n/     | name    | Client      |             |         |         |
+| p/     | phone   | Client      |             |         |         |
+| e/     | email   | Client      |             |         |         |
+| t/     | tag     | Client      |             |         |         |
+| d/     | date    | Appointment |             |         |         |
+| fr/    | from    | Appointment |             |         |         |
+| to/    | to      | Appointment |             |         |         |
+| pr/    | price   | Listing     |             |         |         |
+| ar/    | area    | Listing     |             |         |         |
+| add/   | address | Listing     |             |         |         |
+| reg/   | region  | Listing     |             |         |         |
+| sell/  | seller  | Listing     |             |         |         |
+| buy/   | buyer   | Listing     |             |         |         |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -497,7 +497,7 @@ Commands for managing appointments between user and clients.
       > ---
       > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob`
       >
-      > **Input**: `apt Bob d/08-10-24 fr/1900 to/2100`
+      > **Input**: `apt 1 d/08-10-24 fr/1900 to/2100`
       >
       > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 08-10-24 (From: 19:00 To: 21:00); Tags:
       >
@@ -507,7 +507,7 @@ Commands for managing appointments between user and clients.
       >
       > **Use Case #2**: Overriding an existing appointment for client `Bob` to be `9th October 2024 10am to 12pm` instead
       >
-      > **Input**: `apt Bob d/09-10-24 fr/1000 to/1200`
+      > **Input**: `apt 1 d/09-10-24 fr/1000 to/1200`
       >
       > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 09-10-24 (From: 10:00 To: 12:00); Tags:
       >
