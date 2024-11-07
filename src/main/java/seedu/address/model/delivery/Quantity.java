@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Quantity {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "QUANTITY should be a positive number followed by a space and a valid unit (e.g. 100 kg, 150 L). "
+            "QUANTITY should be a positive number followed by a space and a valid unit (e.g. 100 kg, 150 L)"
+                    + " and must not be blank.\n"
                     + "Valid units are: kg, g, L, mL, units";
 
     public static final String VALIDATION_REGEX = "^([1-9]\\d*)(\\s+)(kg|g|L|mL|units)$";

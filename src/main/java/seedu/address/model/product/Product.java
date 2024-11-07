@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Product {
 
-    public static final String MESSAGE_CONSTRAINTS = "PRODUCT should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "PRODUCT should be alphanumeric and must not be blank.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String productName;

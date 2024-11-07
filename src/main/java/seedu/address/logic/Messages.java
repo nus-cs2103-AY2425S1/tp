@@ -13,7 +13,7 @@ import seedu.address.model.supplier.Supplier;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_SUPPLIERS_FOUND_OVERVIEW =
             "%1$d suppliers found by matching with the given keyword(s)!";
@@ -23,18 +23,18 @@ public class Messages {
     public static final String MESSAGE_DELIVERIES_LISTED_OVERVIEW = "%1$d deliveries listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid";
-    public static final String MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX = "The supplier index provided is invalid";
+    public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid.";
+    public static final String MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX = "The SUPPLIER_INDEX provided is invalid.";
 
-    public static final String MESSAGE_EMPTY_KEYWORD = "The keyword provided after the %1$s prefix is empty";
+    public static final String MESSAGE_EMPTY_KEYWORD = "The keyword provided after the %1$s prefix is empty.";
 
     public static final String MESSAGE_INVALID_LIST_COMMAND_FORMAT = "Invalid list command format! \n"
             + "list -a : Lists both suppliers and deliveries "
-            + "(No parameters or spaces should be given.)\n"
+            + "(No parameters or spaces should be given)\n"
             + "list -d : Lists deliveries to the user "
-            + "(At least one space between list and -d. No other parameters should be give)\n"
+            + "(At least one space between list and -d. No other parameters should be given)\n"
             + "list -s : Lists suppliers to the user "
-            + "(At least one space between list and -d. No other parameters should be given)";
+            + "(At least one space between list and -s. No other parameters should be given)";
     public static final String MESSAGE_DUPLICATE_SUPPLIER_STATUS = "%1$s is already marked as %2$s";
 
     public static final String MESSAGE_DELIVERY_ALREADY_HAS_STATUS = "%1$s is already marked as %2$s";
@@ -125,7 +125,7 @@ public class Messages {
                 .append("; Tags: ");
         supplier.getTags().forEach(builder::append);
         builder.append("; Products ");
-        supplier.getProducts().forEach(builder::append);
+        supplier.getProducts().forEach(product -> builder.append(String.format("[%s]", product)));
         return builder.toString();
     }
 

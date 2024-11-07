@@ -19,8 +19,8 @@ public class DeliverySortBy {
         C, D, S;
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "Sort order should be 'c' for cost, 'd' for datetime "
-            + "or 's' for status, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Sort by should be 'c' for cost, 'd' for datetime "
+            + "or 's' for status, and it should not be blank.";
 
     /**
      * Field to sort by must be 'c', 'd' or 's'.
