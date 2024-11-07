@@ -17,6 +17,7 @@ import seedu.edulog.logic.commands.DeleteLessonCommand;
 import seedu.edulog.logic.commands.DisplayCalendarCommand;
 import seedu.edulog.logic.commands.EditCommand;
 import seedu.edulog.logic.commands.ExitCommand;
+import seedu.edulog.logic.commands.FilterCommand;
 import seedu.edulog.logic.commands.FindCommand;
 import seedu.edulog.logic.commands.GiftCommand;
 import seedu.edulog.logic.commands.HelpCommand;
@@ -104,14 +105,17 @@ public class EduLogParser {
         case GiftCommand.COMMAND_WORD:
             return new GiftCommand();
 
+        case RevenueCommand.COMMAND_WORD:
+            return new RevenueCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
-        case RevenueCommand.COMMAND_WORD:
-            return new RevenueCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
