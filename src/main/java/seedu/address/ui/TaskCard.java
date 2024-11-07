@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
@@ -54,6 +55,7 @@ public class TaskCard extends UiPart<Region> {
         }
 
         isDone.setText(task.getIsDone() ? "Completed" : "Incomplete");
+        isDone.setStyle(task.getIsDone() ? "-fx-text-fill: #008000" : "-fx-text-fill: #800020");
     }
 
     public Label getDescriptionLabel() {

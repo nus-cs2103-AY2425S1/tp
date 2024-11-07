@@ -36,7 +36,7 @@
             <!-- Task completion status (isDone) -->
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <Label text="Status: " />
-                <Label fx:id="isDone" styleClass="cell_small_label" />
+                <Label fx:id="isDone" styleClass="cell_small_label_no_color" />
             </HBox>
 
         </VBox>
