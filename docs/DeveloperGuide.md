@@ -477,6 +477,37 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Showing students in groups
+
+1. Showing students in groups matching the keywords
+   1. Prerequisites: There is one person in the list with the group: `group awesome`
+  
+   2. Test case: `show group`
+      Expected: The person is listed
+      
+   3. Test case: `show group awesome`
+     Expected: The person is listed
+
+2. Showing that there are no students found
+   1. Prerequisites: There is one person in the list with the group: `group awesome`
+      
+   2. Test case: `show team`
+      Expected: No student is listed
+
+### Listing students in groups
+
+1. Showing all students in the list
+   1. Prerequisites: There is at least one student in the list
+  
+   2. Test case: `list`
+      Expected: All students are listed
+
+2. Showing that there are no students found
+   1. Prerequisites: There are no students in the list
+      
+   2. Test case: `list`
+      Expected: No student is listed
+
 ### Randomly selecting a student
 
 1. Randomly displaying a student
@@ -503,6 +534,8 @@ testers are expected to do more *exploratory* testing.
 - Commands are made more flexible in general, requiring less strict command syntaxes as compared to AB3. This enhanced the ease of using the app.
 - There were significant challenges in adjusting validation for the various commands. What inputs to allow and reject was constantly being discussed with an end result of prioritising user freedom while ensuring inputs remain relatively reasonable.
 - There were difficulties agreeing on the UI which went through multiple iterations of tweaking before resulting in the current NUS-themed color palette and which is in line with the app's intended usage.
+- Fields in the application were tweaked to suit NUS students' needs (eg. refactoring variables, different input validation)
+- New functions added such as attendance taking function, comment
 
 ---
 
