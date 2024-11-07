@@ -35,7 +35,7 @@ public class TypicalVendors {
     private TypicalVendors() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical vendors.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

@@ -12,19 +12,21 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateTagCommand;
-import seedu.address.logic.commands.CreateTaskCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTagsCommand;
-import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.task.AssignTaskCommand;
+import seedu.address.logic.commands.task.CreateTaskCommand;
+import seedu.address.logic.commands.task.DeleteTaskCommand;
+import seedu.address.logic.commands.task.ListTasksCommand;
+import seedu.address.logic.commands.task.UnassignTaskCommand;
 import seedu.address.logic.commands.vendor.AddVendorCommand;
 import seedu.address.logic.commands.vendor.AssignVendorCommand;
 import seedu.address.logic.commands.vendor.UnassignVendorCommand;
@@ -35,6 +37,10 @@ import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.task.AssignTaskCommandParser;
+import seedu.address.logic.parser.task.CreateTaskCommandParser;
+import seedu.address.logic.parser.task.DeleteTaskCommandParser;
+import seedu.address.logic.parser.task.UnassignTaskCommandParser;
 import seedu.address.logic.parser.vendor.AddVendorCommandParser;
 import seedu.address.logic.parser.vendor.AssignVendorCommandParser;
 import seedu.address.logic.parser.vendor.UnassignVendorCommandParser;
@@ -108,6 +114,10 @@ public class AddressBookParser {
                 -> new ListTasksCommand();
         case ListTagsCommand.COMMAND_WORD, ListTagsCommand.COMMAND_KEYWORD
                 -> new ListTagsCommand();
+        case AssignTaskCommand.COMMAND_WORD, AssignTaskCommand.COMMAND_KEYWORD
+                -> new AssignTaskCommandParser().parse(arguments);
+        case UnassignTaskCommand.COMMAND_WORD, UnassignTaskCommand.COMMAND_KEYWORD
+                -> new UnassignTaskCommandParser().parse(arguments);
         case DeleteTaskCommand.COMMAND_WORD, DeleteTaskCommand.COMMAND_KEYWORD
                 -> new DeleteTaskCommandParser().parse(arguments);
         case AssignVendorCommand.COMMAND_WORD, AssignVendorCommand.COMMAND_KEYWORD
