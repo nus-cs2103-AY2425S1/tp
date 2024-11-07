@@ -25,14 +25,14 @@ public class Ic {
     public Ic(String ic) {
         requireNonNull(ic);
         AppUtil.checkArgument(isValidIc(ic), MESSAGE_CONSTRAINTS);
-        this.value = ic;
+        this.value = ic.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid IC number.
      */
     public static boolean isValidIc(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
     @Override
