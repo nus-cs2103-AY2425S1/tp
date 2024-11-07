@@ -138,19 +138,20 @@ Before continuing, here are some important information you need to know about th
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                                  |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software`  |
-| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
-| **Clear**    | `clear`                                                                                                                                                                           |
-| **Delete**   | `delete INDEX`                                                                                                                                                                    |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                          |
-| **Exit**     | `exit`                                                                                                                                                                            |
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
-| **Help**     | `help`                                                                                                                                                                            |
-| **List**     | `list`                                                                                                                                                                            |
-| **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                            |
-| **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
+| Action       | Format, Examples                                                                                                                                                              |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
+| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                     |
+| **Clear**    | `clear`                                                                                                                                                                       |
+| **Delete**   | `delete INDEX`                                                                                                                                                                |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                     |
+| **Exit**     | `exit`                                                                                                                                                                        |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                     |
+| **Help**     | `help`                                                                                                                                                                        |
+| **List**     | `list`                                                                                                                                                                        |
+| **View**     | `view INDEX`                                                                                                                                                                  |
+| **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                        |
+| **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                               |
 
 [back to top](#internbuddy-user-guide)
 
@@ -307,7 +308,7 @@ Examples:
 
 ### Adding a company to favourites: 'fav'
 
-Labels an existing company as a favourite
+Labels an existing company as a favourite.
 
 Format: `fav INDEX`
 
@@ -317,7 +318,9 @@ Format: `fav INDEX`
 
 <box type="tip" seamless>
 
-**Tip:** favourite companies have a filled star icon to the right of their name while others have a hollow star instead.
+**Tip:** 
+* Favourite companies have a filled star icon to the right of their name while others have a hollow star instead.
+* Favourite companies will always be visible at the top of the list (provided it is not hidden by other commands such as `find`).
 
 </box>
 
@@ -325,9 +328,9 @@ Format: `fav INDEX`
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Removing a company from favourites: 'unfav'
+### Removing a company from favourites: `unfav`
 
-Labels an existing company as a favourite
+Unlabels an existing company as a favourite.
 
 Format: `unfav INDEX`
 
@@ -355,6 +358,24 @@ Examples:
 
 * `find hardware SWE` returns `Google`, `Apple` <br>
   ![result for 'find hardware SWE'](images/findhardwareSWEResult.png)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Viewing detailed applications of a company: `view`
+
+Displays a specified company with all its application details.
+
+Format: `view INDEX`
+
+* Shows the application details of the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**Tip:**
+* By default, only partial application details are shown to the user not shown to reduce clutter. Use `view` if you want to see full details about the applications of
+a given company.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
