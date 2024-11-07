@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_SYNTAX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SUPPLIERS;
 
 import java.util.Arrays;
@@ -22,6 +23,10 @@ public class ViewSupplierCommandParser implements Parser<ViewSupplierCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             return new ViewSupplierCommand(PREDICATE_SHOW_ALL_SUPPLIERS);
+        }
+
+        if (trimmedArgs.contains("/")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_SYNTAX, ViewSupplierCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
