@@ -2,7 +2,7 @@
   "baseUrl": "",
   "titlePrefix": "StudentManagerPro",
   "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/SMPLogo.png",
   "style": {
     "codeTheme": "light"
   },
