@@ -20,7 +20,7 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-      <ScrollPane fx:id="helpMessageScrollPane">
+      <ScrollPane fx:id="helpMessageScrollPane" hbarPolicy="NEVER" fitToWidth="true">
       <HBox alignment="CENTER" fx:id="helpMessageContainer">
         <children>
           <VBox>
