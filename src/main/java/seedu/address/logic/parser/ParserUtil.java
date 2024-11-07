@@ -36,10 +36,29 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Throws ParseException if {@code entity} provided is not a valid entity in the address book.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static void requireValidEntity(String entity) throws ParseException {
+        requireNonNull(entity);
+        String trimmedEntity = entity.trim();
+
+        // TODO: Not sure if this is magic string?
+        switch (trimmedEntity) {
+        case "contact", "company", "job", "all":
+            break;
+        default:
+            String exceptionMessage = String.format(Messages.MESSAGE_INVALID_ENTITY, trimmedEntity);
+            throw new ParseException(exceptionMessage);
+        }
+    }
+
+
 
     /**
-     * Parses {@code input} into a String array of arguments and returns it. Leading and trailing whitespaces will be
-     * trimmed. Arguments are split by any number of whitespace.
+     * Parses a String input {@code args} into a String array of arguments and returns it. Leading and trailing
+     * whitespaces will be trimmed. Arguments are split by any number of whitespace.
      *
      * @param args A string containing arguments separated by whitespace.
      * @param requiredNumberOfArguments The required number of arguments in input.
