@@ -166,7 +166,7 @@ Format: `edit STUDENT_ID FIELD\NEW_VALUE`
 
 * `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
   automatically assigned when the student contact is first added and can be found by viewing the student's details.
-* `FIELD` can be one of: Name(`n\ `), Phone Number(`p\ `), Email(`e\ `), Address(`a\ `), IC Number(`i\ `) or Subject taken(`s\ `).
+* `FIELD` can be one of: Name(`n\ `), Phone Number(`p\ `), Email(`e\ `), Address(`a\ `), NRIC(`i\ `) or Subject taken(`s\ `).
 * `NEW_VALUE` should follow the format for the respective field. May refer to the constraints in the [add feature](#adding-a-student--add) section.
 * Although editing the NRIC is allowed, it must not match any other student's NRIC in the system. 
 An error message will be shown if a duplicate is detected.
@@ -379,16 +379,16 @@ the data of your previous AcademyAssist folder.<br><br>
 
 | Action            | Format, Examples                                                                                                                                                                                    |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**   | `add n/NAME i/NRIC yg/YEARGROUP p/PHONE e/EMAIL a/ADDRESS s/SUBJECT [s/MORE_SUBJECTS]...` <br><br> e.g., `add n/John Doe i/T384859A yg/3 p/81003999 e/johndoe@gmail.com a/9 Smith Street s/Science` |
+| **Add Student**   | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` <br><br> e.g., `add n\John Doe i\T384859A yg\3 p/81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
 | **Delete Student**| `delete STUDENT_ID`<br><br> e.g., `delete S00001`                                                                                                                                                   |
-| **Edit Student**  | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                              |
+| **Edit Student**  | `edit STUDENT_ID FIELD\NEW_VALUE`<br> e.g.,`edit S00001 a\New_Address`                                                                                                                              |
 | **List Students** | `list`                                                                                                                                                                                              |
 | **View Student**  | `detail STUDENT_ID`<br><br> e.g., `detail S00001`                                                                                                                                                   |
 | **Find Student**  | `find NAME [MORE_NAMES]`<br><br> e.g., `find John Jane`                                                                                                                                             |
-| **Filter Students**| `filter FIELD/VALUE`<br><br> e.g., `filter yg/2`                                                                                                                                                    |
-| **Add Subject**   | `addsubject STUDENT_ID s/SUBJECT`<br><br> e.g., `addsubject S00003 Science`                                                                                                                         |
+| **Filter Students**| `filter FIELD\VALUE`<br><br> e.g., `filter yg\2`                                                                                                                                                    |
+| **Add Subject**   | `addsubject STUDENT_ID s\SUBJECT`<br><br> e.g., `addsubject S00003 Science`                                                                                                                         |
 | **Track Subjects**| `tracksubject`                                                                                                                                                                                      |
-| **Sort Students** | `sort s/FIELD`<br><br> e.g., `sort s/name`                                                                                                                                                          |
+| **Sort Students** | `sort s\FIELD`<br><br> e.g., `sort s\name`                                                                                                                                                          |
 | **Clear Data**    | `clear`                                                                                                                                                                                             |
 | **Get Help**      | `help`                                                                                                                                                                                              |
 | **Exit**          | `exit`                                                                                                                                                                                              |
