@@ -286,6 +286,23 @@ Format: `findt KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `listt 1` followed by `findt materials invest` returns `Invest` and `Buy raw materials`, which are transactions of person 1.
 
+#### Summarising transactions within month range: `summary`
+
+In a transaction list, summarises the transactions' amount within the specified month range and displays them.
+
+Format: `summary s/START_MONTH e/END_MONTH`
+* `START_MONTH` and `END_MONTH` should be in the format `YYYY-MM` e.g. `2024-10`
+* The `START_MONTH` should be before or equal to the `END_MONTH`
+* The transactions whose date falls within the first day of `START_MONTH` and the last day of `END_MONTH` (inclusive) will be summarised.
+
+<box type="warning" seamless>
+
+**Note:** `summary` can only be used in transaction list view.
+</box>
+
+Examples:
+* `listt 1` followed by `summary s/2024-09 e/2024-10` summarises the transactions of person 1 within the month of September and October 2024.
+
 ### Data Management
 
 #### Saving the data
