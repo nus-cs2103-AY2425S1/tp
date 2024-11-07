@@ -6,15 +6,6 @@
 
 # VolunTier User Guide
 
-VolunTier is the **top _Tier_** solution for volunteer organisations that specialise in teaching students and are 
-looking to manage your growing clientele in an efficient manner.
-
-VolunTier is designed for those of you who are **familiar with the Command Line Interface (CLI)** living in Singapore, 
-simplifying the process of adding, editing and deleting your volunteers, students and the lessons that they share.
-
->[!NOTE]
->Tutor and Tutees can both be referred to as Person.
-
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -54,6 +45,18 @@ simplifying the process of adding, editing and deleting your volunteers, student
 
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+VolunTier is the **top _Tier_** solution for volunteer organisations that specialise in teaching students and are
+looking to manage your growing clientele in an efficient manner.
+
+VolunTier is designed for those of you who are **familiar with the Command Line Interface (CLI)** living in Singapore,
+simplifying the process of adding, editing and deleting your volunteers, students and the lessons that they share.
+
+<box type="info" seamless>
+
+Tutor and Tutees can both be referred to as Person.
+
+</box>
 
 ## Quick start
 
@@ -99,44 +102,45 @@ The CLI is a text-based interface where users interact with the operating system
 
 #### 2. **Opening the Terminal**
 
-#### On macOS:
+##### On macOS:
 ```shell
 Cmd + Space
 ```
 
-#### On Windows:
+##### On Windows:
 Search for command prompt or powershell in the start menu.
 
-#### On Linux:
+##### On Linux:
 ```shell
 Ctrl + Alt + T
 ```
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Features
+## Features
 
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addTutor \n NAME`, `NAME` is a parameter which can be used as `addTutor \n John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `\n NAME [\h HOURS]` can be used as `\n John Doe \h 10` or as `\n John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[\s SUBJECT]…​` can be used as ` ` (i.e. 0 times), `\s English`, `s\ English \s Math` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `\n NAME \p PHONE_NUMBER`, `\p PHONE_NUMBER \n NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
+
 
 ### Viewing help : `help`
 
