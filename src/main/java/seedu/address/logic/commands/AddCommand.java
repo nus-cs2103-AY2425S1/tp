@@ -48,7 +48,8 @@ public class AddCommand extends Command {
             + PREFIX_SKILL + "moneyManagement";
 
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book."
+            + " The employee id must be unique.";
 
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
