@@ -898,5 +898,5 @@ testers are expected to do more *exploratory* testing.
 
 ### Exiting the app
 
-    1. Test case: `exit`<br>
+1. Test case: `exit`<br>
        Expected: The app closes.
