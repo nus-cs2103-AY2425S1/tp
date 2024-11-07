@@ -100,8 +100,7 @@ public class Appt {
         }
 
         Appt e = (Appt) other;
-        return dateTime.isEqual(e.dateTime)
-                && healthService.equals(e.healthService);
+        return dateTime.isEqual(e.dateTime);
     }
 
     /**
