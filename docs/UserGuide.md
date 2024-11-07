@@ -245,6 +245,7 @@ Format: addc `d/DESCRIPTION day/DAY OF THE WEEK from/START TIME (24H FORMAT) to/
 
 Example:
 
+* `addc d/Sec 4 Science Class day/Sunday from/1000 to/1215`
 * `addc d/Sec 4 Math Class day/Monday from/2230 to/0030`
 
 Experienced users may provide a 3-letter shorthand for the day of the week for quicker typing.
@@ -253,6 +254,12 @@ This is non-case sensitive.
 Example:
 
 * `addc d/Sec 4 Math Class day/mon from/2230 to/0030`
+
+Note:
+
+- Lessons cannot share the same description - but may overlap in time together.
+- Lessons are allowed to go past midnight from day to another.
+- However, lessons are not allowed to have exactly the same start and end time.
 
 ### Listing all lessons : `dc`
 

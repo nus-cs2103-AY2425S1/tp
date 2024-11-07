@@ -182,15 +182,6 @@ public class EduLog implements ReadOnlyEduLog {
     }
 
     /**
-     * Checks if a provided lesson can be added to the existing lessons in the edulog without exceeding the
-     *    allowed number of overlaps.
-     */
-    public boolean checkTimeslot(Lesson lesson) {
-        requireNonNull(lesson);
-        return edulogCalendar.checkTimeslot(lesson);
-    }
-
-    /**
      * Adds a student to the edulog book.
      * The student must not already exist in the edulog book - callee functions should consider the use
      * of hasLesson(Lesson) before to ensure that this precondition is met.

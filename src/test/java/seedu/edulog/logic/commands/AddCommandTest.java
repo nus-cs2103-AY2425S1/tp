@@ -202,10 +202,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean checkTimeslot(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
-        }
-        @Override
         public ObservableList<Lesson> getLessonList() {
             throw new AssertionError("This method should not be called.");
         }
