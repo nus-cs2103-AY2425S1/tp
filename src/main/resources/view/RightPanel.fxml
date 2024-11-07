@@ -9,18 +9,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.CheckBox?>
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:id="rightPanel">
-    <VBox spacing="15" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" minWidth="350">
+    <VBox spacing="15" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" minWidth="400">
         <Label text="Transactions" styleClass="title"/>
 
         <HBox spacing="10" styleClass="total-balance">
             <VBox alignment="CENTER_LEFT" spacing="5">
-                <Label fx:id="youOweLabel" styleClass="label, you-owe-text"/>
-                <Label fx:id="youAreOwedLabel" styleClass="label, you-are-owed-text"/>
+                <Label fx:id="youOweLabel" styleClass="label, you-owe-text" wrapText="true"/>
+                <Label fx:id="youAreOwedLabel" styleClass="label, you-are-owed-text" wrapText="true"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER_RIGHT" spacing="5">
                 <Button fx:id="filterBtn" styleClass="filter-btn"/>
-                <CheckBox fx:id="trackUndoneBalanceOnlyCheckBox" text="Track undone balance only" styleClass="label"/>
+                <CheckBox fx:id="trackUndoneBalanceOnlyCheckBox" text="Track undone balance only" styleClass="label" wrapText="true"/>
             </VBox>
         </HBox>
 

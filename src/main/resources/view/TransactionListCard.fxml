@@ -36,7 +36,7 @@
 
         <VBox alignment="CENTER_RIGHT" spacing="10" minWidth="70" maxWidth="70" GridPane.columnIndex="2">
             <Label fx:id="status" styleClass="amount"/>
-            <Label fx:id="amount" styleClass="amount"/>
+            <Label fx:id="amount" styleClass="amount" wrapText="true"/>
         </VBox>
     </GridPane>
 </HBox>
