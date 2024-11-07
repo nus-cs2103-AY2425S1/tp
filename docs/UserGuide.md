@@ -68,6 +68,13 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Exit**   | `exit`
 
+<box type="warning" header="##### Notes">
+
+* The prefixes (e.g. `a/`, `s/` or `paid`) are case-insensitive, i.e. you can use `a/`, `s/` or `pAId/` instead.
+
+* You should not use the prefixes in any other cases, e.g. as content of **ADDRESS**.
+</box>
+
 ## Features
 
 <box type="info">
