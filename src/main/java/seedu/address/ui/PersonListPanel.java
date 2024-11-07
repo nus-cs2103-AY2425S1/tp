@@ -88,10 +88,16 @@ public class PersonListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
+        private boolean isSelectionChange = false;
 
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
+
+            // If it's a selection change, ignore updates
+            if (isSelectionChange) {
+                return;
+            }
 
             if (empty || person == null) {
                 setGraphic(null);
@@ -102,6 +108,7 @@ public class PersonListPanel extends UiPart<Region> {
         }
 
         public void handleSelectionChange(boolean selected) {
+            isSelectionChange = selected;
         }
     }
 }
