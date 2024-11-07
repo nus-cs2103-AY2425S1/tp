@@ -19,7 +19,8 @@ Teacher's pet is **an application specially tailored for NUS teaching students t
 - A minimalistic, colourful design, meant for reducing clutter and time needed to understand the interface
 - Optimised for keyboard users and fast typists
 - Intuitive commands, designed to be quick to type and easy to learn
-- Flexible command syntax to suit a variety of use cases 
+- Flexible command syntax to suit a variety of use cases
+- Auto-saves so that you don't have to worry about losing any data
 
 
 ## Getting Started
