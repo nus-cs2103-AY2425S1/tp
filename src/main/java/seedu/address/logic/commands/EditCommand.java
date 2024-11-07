@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -82,22 +81,17 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
         // Verify if person to be edited has a lesson already in the address book
         Set<Subject> subjects = editPersonDescriptor.getSubjectsOp().orElse(null);
-        ObservableList<Lesson> lessonList = model.getAddressBook().getLessonList();
-        Set<Subject> minSet = lessonList.stream()
-                .filter(lesson -> lesson.getTutor().equals(lastShownList.get(index.getZeroBased()))
-                        || lesson.getTutee().equals(lastShownList.get(index.getZeroBased())))
-                .map(Lesson::getSubject)
-                .collect(HashSet::new, Set::add, Set::addAll);
+        Set<Subject> minSet = model.getUniqueSubjectsInLessons(lastShownList.get(index.getZeroBased()));
         if (subjects != null) {
             if (!subjects.containsAll(minSet)) {
                 throw new CommandException(MESSAGE_PERSON_HAS_LESSON);
             }
-        }
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
