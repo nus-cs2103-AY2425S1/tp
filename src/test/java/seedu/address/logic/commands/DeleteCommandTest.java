@@ -30,7 +30,6 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIdUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
-        System.out.println(personToDelete.getId());
         DeleteCommand deletePatientCommand = new DeleteCommand(ID_FIRST_PERSON);
 
         String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
@@ -44,6 +43,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIdUnfilteredList_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        System.out.println(model.getFilteredPersonList().get(0).getId());
         int outOfBoundId = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1).getId() + 2;
         DeleteCommand deletePatientCommand = new DeleteCommand(outOfBoundId);
 
@@ -53,6 +53,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        System.out.println(model.getFilteredPersonList().get(0).getId());
         showPersonOfId(model, ID_FIRST_PERSON);
         Person personToDelete = model.getFilteredPersonById(model.getFilteredPersonList(), ID_FIRST_PERSON);
         DeleteCommand deletePatientCommand = new DeleteCommand(ID_FIRST_PERSON);
@@ -69,6 +70,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        System.out.println(model.getFilteredPersonList().get(0).getId());
         showPersonOfId(model, ID_FIRST_PERSON);
         int outOfBoundId = ID_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
