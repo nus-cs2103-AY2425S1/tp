@@ -104,7 +104,7 @@ This section tells you what information you will find in each of the sections of
 
     * `exit` : Exits the app.
 
-For a comprehensive tutorial on using BridalBuddy to manage your guest and vendor lists as a wedding planner, check out the [Tutorial for Beginners](#tutorial-for-beginners). 
+For a comprehensive tutorial on using BridalBuddy to manage your guest and vendor lists as a wedding planner, check out the [Tutorial for Beginners](#tutorial-for-beginners).
 Alternatively, if you’d like to explore the application independently, refer to the [Features](#features) section below for detailed information on each command.
 
 [_Back to Top_](#table-of-contents)
@@ -274,7 +274,7 @@ This command will open your web browser and redirect you to the online User Guid
 ### Listing all persons : `list`
 
 This command will show you a guest list consisting of all invited guests and a vendor list consisting of all vendors involved in the current wedding that you are planning.
-    
+
 * The guest list will be on the left of your screen while the vendor list will be on the right of your screen.
 
 **Format:** `list`

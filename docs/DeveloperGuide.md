@@ -149,7 +149,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Guest feature
-The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes and their corresponding values 
+The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes and their corresponding values
 
 The sequence diagram below provides an overview for the execution flow of a `add_guest` command:
 <puml src="diagrams/AddGuestSequenceDiagram.puml" />
@@ -181,7 +181,7 @@ Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
 2. `AddressBookParser` parses the user input (if valid) to create and return an `EditGuestCommandParser`
 3. `EditGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create an `EditGuestDescriptor`. An `EditGuestCommand` is then created with the index provided in the user input and the `EditGuestDescriptor` created.
-4. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model` before accessing the target guest to edit. An edited guest with the updated name is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing target guest with the edited guest. Subsequently, the `updateFilteredPersonList` method from `Model` is called to update the filtered list. 
+4. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model` before accessing the target guest to edit. An edited guest with the updated name is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing target guest with the edited guest. Subsequently, the `updateFilteredPersonList` method from `Model` is called to update the filtered list.
 5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
 
 ### Find feature
@@ -215,7 +215,7 @@ Explanation:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -243,14 +243,14 @@ A wedding planner who:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                    | So that I can…​                                                                  |
-|----------|-----------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | forgetful wedding planner   | add a new guest/vendor into the contact list                    | easily track and manage guests/vendors for the wedding                           |
-| `* * *`  | organized wedding planner   | view a list of guests/vendors                                   | easily access and reference their details                                        |
-| `* * *`  | organized wedding planner   | delete a guest/vendor contact that I no longer need             | keep my contact list organised and clutter-free                                  |
+| Priority | As a …​                     | I want to …​                                                     | So that I can…​                                                                  |
+|----------|-----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | forgetful wedding planner   | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
+| `* * *`  | organized wedding planner   | view a list of guests/vendors                                    | easily access and reference their details                                        |
+| `* * *`  | organized wedding planner   | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
 | `* * *`  | meticulous wedding planner  | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
-| `* *`    | organized wedding planner   | find guests/vendors based on a specific attribute               | efficiently retrieve guest/vendor details when required                          |
-| `* *`    | data-driven wedding planner | view wedding statistics (number of guests/vendors/total people) | quickly assess the current status of wedding planning                            |
+| `* *`    | organized wedding planner   | find guests/vendors based on a specific attribute                | efficiently retrieve guest/vendor details when required                          |
+| `* *`    | data-driven wedding planner | view wedding statistics (number of guests/vendors/total people)  | quickly assess the current status of wedding planning                            |
 
 ### Use cases
 
@@ -329,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1c. The new details result in a duplicate Person (i.e. same name, phone number and type)
     * 1c1. System tells the user the Person already exists
-    
+
       Use case ends.
 
 **Use Case: UC04 - Delete a Guest**
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 **Data Requirements**
-1. Size: The system should support storage for up to 300 guests and 300 vendors per wedding. 
+1. Size: The system should support storage for up to 300 guests and 300 vendors per wedding.
 1. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
 1. Persistency: All guest and vendor information must be saved persistently in a JSON file and remain accessible even after system shutdown or failure.
 
@@ -427,6 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 **Technical**
+* **Java**: Java is a programming language that BridalBuddy is written in. It is required to run the application.
 *  **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
 *  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus.
 *  **JAR**: Java Archive, A file format used to package Java applications and libraries into a single, compressed file
@@ -442,7 +443,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Planned Enhancements**
+
+In developing BridalBuddy, we've identified areas that can benefit from enhancement. We believe in transparency and keeping our users informed, so we want to acknowledge these feature limitations.
+
+### Enhance name to accept special characters
+
+**Feature Flaw in Current Implementation**
+
+Currently, names do not accept `.` and `/` and other special characters which might appear in a person's legal name.
+
+**Proposed Enhancement**
+
+We should remove strict alphanumeric checks for names to support special characters.
+
+### Make Guest/Vendor phone, email and address fields optional
+
+**Feature Flaw in Current Implementation**
+
+Currently, the phone, email and address are mandatory inputs for `add_guest` and `add_vendor` commands. However, not all contacts require full details.
+
+A planner might only have a name without contact information for certain guests, especially in cases where a plus-one or placeholder name is added.
+Similarly, a planner might also not have complete contact information of a vendor.
+
+**Proposed Enhancement**
+
+The phone, email and address fields should be updated to optional parameters in the `add_guest` and `add_vendor` commands.
+
+### Enhance Flexibility in Phone Number Parameter Input
+
+**Feature Flaw in Current Implementation**
+
+Currently, the phone number field only accepts integers as valid input.
+However, planners might encounter scenarios, such as keeping track of overseas guests, where symbols like `()`, `+`, `-` and `.` are needed.
+The current restriction prevents users from indicating country codes, and might cause confusion about the origin of the number.
+
+**Proposed Enhancement**
+
+We can relax validation on the phone number field to allow symbols such as `()`, `+`, `-` and `.`.
+
+### Enhance Find Feature to Allow for Partial and Substring Search
+
+**Feature Flaw in Current Implementation**
+
+Currently, the `find` feature requires an exact match or a specific keyword for searching guests or vendors.
+This limits the flexibility of the search functionality, as users cannot retrieve entries that partially match the search term.
+
+**Proposed Enhancement**
+
+Enhance the `find` feature to allow partial and substring searches.
+With this enhancement, a search query would return all results containing the specified character(s) or substring, regardless of its position in the name or other fields.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix C: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -482,3 +536,56 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix D: Efforts**
+
+### Adapting AB3 for Multiple Entity Types
+
+**Difficulty Level**: Very high
+
+**Challenges Faced**: AB3 was designed to manage a single entity type—contacts.
+Our project, however, required managing two distinct entities, guests and vendors, each with unique fields and functionalities
+(e.g., RSVP status for guests, company name for vendors).
+
+**Effort Required**: Modifying the data model to accommodate multiple entities required extensive refactoring of the underlying structure.
+This included updates to storage, command parsing, and validation logic, to support both entity types consistently while maintaining functionality for existing commands.
+We also spent significant time adjusting current commands to recognize and process both guests and vendors without errors.
+
+**Achievements**: We successfully integrated both entity types while maintaining a clean architecture, enabling BridalBuddy to
+manage multiple types of contacts with specific fields and functionalities, all without compromising compatibility with existing commands.
+
+### Introducing Optional and Custom Fields
+
+**Difficulty Level**: Medium
+
+**Challenges Faced**: We added new optional fields, such as budget for vendors, and relationship type for guests.
+This required additional validations and command adjustments to handle partial data inputs, ensuring user flexibility.
+
+**Effort Required**: Implementing and validating optional fields involved command parsing, updates to storage,
+and ensuring proper input validation (e.g. budgets specified to two decimal places).
+
+**Achievements**: The added flexibility in fields has made BridalBuddy adaptable to a wider variety of planning needs, while the validation ensures high data reliability.
+
+### UI Customization
+
+**Difficulty Level**: High
+
+**Challenges Faced**: Customising the UI to clearly distinguish between guests and vendors required significant modifications to AB3's existing UI structure,
+which proved more complex than backend coding. Editing the UI relied heavily on visual adjustments, involving considerable trial and error to achieve the right
+layout and style.
+
+**Effort Required**: We restructured the layout to visually separate guest and vendor lists, allowing users to easily differentiate and manage each contact type.
+
+**Achievements**: The customized UI offers a more intuitive experience, allowing users to quickly access and manage information specific to guests and vendors.
+
+### Statistics Display
+
+**Difficulty Level**: Medium
+
+**Challenges Faced**: Implementing the statistics command required adapting AB3’s structure to dynamically calculate and display counts of guests and vendors.
+
+**Effort Required**: We developed a new `stats` command that calculates and returns the total counts of guests and vendors.
+
+**Achievements**: The `stats` command offers users a quick overview of the total number of guests and vendors, providing planners with valuable insights at a glance.
