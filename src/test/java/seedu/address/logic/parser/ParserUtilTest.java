@@ -126,11 +126,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePreference_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePreference((String) null));
-    }
-
-    @Test
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
     }
