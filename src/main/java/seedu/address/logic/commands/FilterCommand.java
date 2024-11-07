@@ -10,12 +10,18 @@ import java.util.function.Predicate;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
+import seedu.address.model.role.Role;
+
 /**
  * Filters and lists all persons in address book whose fields (name, role, email, phone, address)
  * match any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
@@ -33,17 +39,17 @@ public class FilterCommand extends Command {
             + "Parameters: [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]...\n"
             + "Example: " + COMMAND_WORD + " n/John r/vendor";
 
-    private final String name;
-    private final String role;
-    private final String email;
-    private final String phone;
-    private final String address;
+    private final Name name;
+    private final Role role;
+    private final Email email;
+    private final Phone phone;
+    private final Address address;
 
     /**
      * Creates a FilterCommand to filter persons by the specified {@code name}, {@code role}, {@code email},
      * {@code phone} and {@code address}.
      */
-    public FilterCommand(String name, String role, String email, String phone, String address) {
+    public FilterCommand(Name name, Role role, Email email, Phone phone, Address address) {
         this.name = name;
         this.role = role;
         this.email = email;
@@ -57,25 +63,24 @@ public class FilterCommand extends Command {
 
         List<Predicate<Person>> predicates = new ArrayList<>();
 
-        if (!name.isEmpty()) {
-            // Check if name contains any whitespace, which would indicate multiple words
-            if (name.trim().contains(" ")) {
-                throw new CommandException(MESSAGE_NAME_CONSTRAINTS);
-            }
-            predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(name.toLowerCase())));
+        if (name != null) {
+            predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(name.toString().toLowerCase())));
         }
 
-        if (!role.isEmpty()) {
-            predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(role.toLowerCase())));
+        if (role != null) {
+            predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(role.toString().toLowerCase())));
         }
-        if (!email.isEmpty()) {
-            predicates.add(new EmailContainsKeywordsPredicate(Arrays.asList(email.toLowerCase())));
+
+        if (email != null) {
+            predicates.add(new EmailContainsKeywordsPredicate(Arrays.asList(email.toString().toLowerCase())));
         }
-        if (!phone.isEmpty()) {
-            predicates.add(new PhoneContainsKeywordsPredicate(Arrays.asList(phone)));
+
+        if (phone != null) {
+            predicates.add(new PhoneContainsKeywordsPredicate(Arrays.asList(phone.toString())));
         }
-        if (!address.isEmpty()) {
-            predicates.add(new AddressContainsKeywordsPredicate(Arrays.asList(address.toLowerCase())));
+
+        if (address != null) {
+            predicates.add(new AddressContainsKeywordsPredicate(Arrays.asList(address.toString().toLowerCase())));
         }
 
         if (predicates.isEmpty()) {
