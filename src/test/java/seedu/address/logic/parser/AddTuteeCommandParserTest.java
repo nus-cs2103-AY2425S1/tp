@@ -134,7 +134,6 @@ public class AddTuteeCommandParserTest {
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
-        System.out.println(validExpectedPersonString + INVALID_HOURS_DESC);
         // invalid hours
         assertParseFailure(parser, validExpectedPersonString + INVALID_HOURS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HOURS));
