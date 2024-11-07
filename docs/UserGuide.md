@@ -10,14 +10,14 @@ TalentHub is optimized for use via a **Command Line Interface** (CLI) while stil
 <div markdown="block" class="alert alert-info">
 
 **:information_source: CLI and GUI:**<br>
-This means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your celebrities' contacts and events efficiently, while still having the ease of viewing all of them in a graphical format.
+This means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your contacts and your celebrities' events efficiently, while still having the ease of viewing all of them in a graphical format.
 
 </div>
 
 If you can type fast, and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
 
-- Table of Contents
-  {:toc}
+* Table of Contents
+{:toc}
 
 ---
 
