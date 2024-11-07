@@ -4,6 +4,8 @@
   pageNav: 3
 ---
 
+<!-- no toc -->
+
 # TAHub Contacts User Guide
 
 If you are a busy Computer Science student juggling Teaching Assistant roles and
@@ -27,32 +29,38 @@ student contact details!
 
 ## Table of Contents
 
-- [Quick Start :rocket:](#quick-start :rocket:)
-- [Features :computer:](#features :computer:)
+- [Quick Start :rocket:](#quick-start-rocket)
+- [Features :computer:](#features-computer)
+  - [MAIN Commands](#main-commands)
+    - Viewing help : [`help`](#help)
+    - Listing all students : [`list`](#list)
+    - Clearing all entries : [`clear`](#clear)
+    - Exiting the program : [`exit`](#exit)
+  - [STUDENT](#student-commands)
+    - Adding a student : [`person-add`](#person-add)
+    - Editing a student : [`person-edit`](#person-edit)
+    - Finding a student: [`person-find`](#person-find)
+    - Deleting a student : [`person-delete`](#person-delete)
+  - [COURSE](#course-commands)
+    - Adding a course: [`course-add`](#course-add)
+    - Editing a course: [`course-edit`](#course-edit)
+    - Deleting a course : [`course-delete`](#course-edit)
+    - Enrolling a student : [`enroll`](#enroll)
+    - Unenrolling a student : [`unenroll`](#unenroll)
+  - [ATTENDANCE](#attendance-commands)
+    - Marking attendance : [`attend-present`](#attend-present)
+    - Marking absence : [`attend-absent`](#attend-absent)
+    - Clear attendance : [`attend-clear`](#attend-clear)
+  - [DATA](#data)
+    - [Saving the data](#saving-the-data-floppy_disk)
+    - [Editing data file](#editing-the-data-file-hammer_and_wrench)
+- [FAQ :grey_question:](#faq-grey_question)
+- [Known Issues :bug:](#known-issues-bug)
+- [Command Summary :ledger:](#command-summary-ledger)
 
-- Viewing help : [`help`](#help)
-- Listing all students : [`list`](#list)
-- Clearing all entries : [`clear`](#clear)
-- Adding a student : [`add-student`](#adding-a-person-add)
-- Editing a student : [`edit-student`](#editing-a-person--edit)
-- Finding a student: [`find-student`](#locating-persons-by-name-find)
-- Deleting a student : [`delete-student`](#deleting-a-person--delete)
-- Adding a course: [`add-course`](#)
-- Editing a course: [`edit-course`](#)
-- Deleting a course : [`delete-course`](#)
-- Adding a course tutorial : [`add-tutorial`](#)
-- Deleting a course tutorial : [`delete-tutorial`](#)
-- Enrolling a student : [`enroll`](#)
-- Unenrolling a student : [`unenroll`](#)
-- Marking attendance : [`attend-present`](#)
-- Marking absence : [`attend-absent`](#)
-- Clear attendance : [`attend-clear`](#)
-- Exiting the program : [`exit`](#exiting-the-program--exit)
-- [Saving the data 💾](#saving-the-data)
-- ADVANCED: Editing the data file
-- [FAQ :grey_question:](#faq :grey_question:)
-- [Known Issues :bug:](#known-issues :bug:)
-- [Command Summary :ledger:](#command-summary :ledger:)
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start :rocket:
 
@@ -65,28 +73,31 @@ student contact details!
    [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) |
    [Linux](https://www.youtube.com/watch?v=dQw4w9WgXcQ)), `cd` into the folder
    you put the jar file in, and
-   use the `java -jar addressbook.jar` command to run the application.<br>
+   run `java -jar addressbook.jar` to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g.
-   typing **`help`** and pressing Enter will open the help window.<br>
+   typing **`help`** and pressing Enter will open the help window,
+   which links you back to [this page](https://ay2425s1-cs2103t-f14b-2.github.io/tp/UserGuide.html).<br>
    Some example commands you can try:
 
-   - `list` : Lists all contacts.
-
-   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   - `delete 3` : Deletes the 3rd contact shown in the current list.
-
+   - `list` : Lists all students.
+   - `person-add m/A0296210X n/John Tan p/98765432 e/johnt@email.com a/John street, block 123, #01-01`
+      : Adds a contact named `John Tan` to TAHub Contacts.
+   - `delete  m/A0296210X` : Deletes the student with the matriculation number `A0296210X`.
+      In this case, the `John Tan` that we just added.
    - `clear` : Deletes all contacts.
-
    - `exit` : Exits the app.
 
 6. Refer to the [Features](#features :computer:) below for details of each command.
+   Alternatively check the [Command Summary](#command-summary-ledger) for a quick
+   list of the available commands. Have fun!
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features :computer:
 
@@ -134,12 +145,13 @@ student contact details!
 | `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm) |
 | `COURSE_CODE` | must be in the form `AAxxxxB` where `AA` is 2 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter. |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**. |
+| `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99. |
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-### Main
+### Main Commands
 
 The main commands for TAHub Contacts.
 
@@ -197,19 +209,26 @@ The main commands for TAHub Contacts.
   </panel>
 </a>
 
+<br>
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-### Students
+### Student Commands
 
-<a name="add-student">
-<panel header="#### Adding a student : `add-student`" expanded no-close no-switch>
+Reminder: follow the [data formats](#data-formats-fa-solid-warning)!
+</box>
+
+<a name="person-add">
+<panel header="#### Adding a student : `person-add`" expanded no-close no-switch>
 
 Shows a list of all students saved in TAHub Contacts in the GUI.
 
 <box type="definition" seamless><md>
-Format: **`add-student m/MATRICULATION_NUMBER /NAME p/PHONE_NUMBER e/EMAIL
+Format: **`person-add m/MATRICULATION_NUMBER /NAME p/PHONE_NUMBER e/EMAIL
 a/ADDRESS [t/TAG]…​`**
 </md></box>
 
@@ -219,18 +238,18 @@ a/ADDRESS [t/TAG]…​`**
 
 | **Examples** |
 | :--- |
-| `add-student m/A0296210X n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
-| `add-student m/A0315310L n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` |
+| `person-add m/A0296210X n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
+| `person-add m/A0315310L n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` |
 
 </panel></a>
 
-<a name="edit-student">
-<panel header="#### Editing a student : `edit-student`" expanded no-close no-switch>
+<a name="person-edit">
+<panel header="#### Editing a student : `person-edit`" expanded no-close no-switch>
 
 Edits an existing student in TAHub Contacts.
 
 <box type="definition" seamless><md>
-Format: **`edit-student m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL]
+Format: **`person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL]
 [a/ADDRESS] [t/TAG]…​​`**
 </md></box>
 
@@ -245,19 +264,19 @@ Format: **`edit-student m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL]
 
 | **Examples** |
 | :--- |
-| `edit-student m/A0296210X p/91234567 e/johndoe@example.com` edits the phone number and email address of the student with `MATRICULATION_NUMBER` of `A0296210X` to be `91234567` and `johndoe@example.com` respectively. |
-| `edit-student m/A0123467X n/Betsy Crower t/` edits the name of the the student with `MATRICULATION_NUMBER` of `A0123467X` to be `Betsy Crower` and *clears* all existing tags. |
+| `person-edit m/A0296210X p/91234567 e/johndoe@example.com` edits the phone number and email address of the student with `MATRICULATION_NUMBER` of `A0296210X` to be `91234567` and `johndoe@example.com` respectively. |
+| `person-edit m/A0123467X n/Betsy Crower t/` edits the name of the the student with `MATRICULATION_NUMBER` of `A0123467X` to be `Betsy Crower` and *clears* all existing tags. |
 
 </panel>
 </a>
 
-<a name="find-student">
-<panel header="#### Finding a student : `find-student`" expanded no-close no-switch>
+<a name="person-find">
+<panel header="#### Finding a student : `person-find`" expanded no-close no-switch>
 
 Finds students whose **names** contain any of the given keywords.
 
 <box type="definition" seamless><md>
-Format: **`find-student KEYWORD [MORE_KEYWORDS]​​`**
+Format: **`person-find KEYWORD [MORE_KEYWORDS]​​`**
 </md></box>
 
 - The search is **case-insensitive**.
@@ -272,19 +291,19 @@ Format: **`find-student KEYWORD [MORE_KEYWORDS]​​`**
 
 | **Examples** |
 | :--- |
-| `find-student` John returns `john` and `John Doe`. |
-| `find-student alex david` returns `Alex Yeoh`, `David Li`. <br> ![result for 'find alex david'](images/findAlexDavidResult.png)|
+| `person-find` John returns `john` and `John Doe`. |
+| `person-find alex david` returns `Alex Yeoh`, `David Li`. <br> ![result for 'find alex david'](images/findAlexDavidResult.png)|
 
 </panel>
 </a>
 
-<a name="delete-student">
-<panel header="#### Deleting a student : `delete-student`" expanded no-close no-switch>
+<a name="person-delete">
+<panel header="#### Deleting a student : `person-delete`" expanded no-close no-switch>
 
 Deletes the specified student from TAHub Contacts.
 
 <box type="definition" seamless><md>
-Format: **`delete-student m/MATRICULATION_NUMBER​​`**
+Format: **`person-delete m/MATRICULATION_NUMBER​​`**
 </md></box>
 
 - Deletes the student with the specified `MATRICULATION_NUMBER`.
@@ -292,19 +311,24 @@ Format: **`delete-student m/MATRICULATION_NUMBER​​`**
 
 | **Examples** |
 | :--- |
-| `delete-student m/A0296210X` deletes the student with `MATRICULATION_NUMBER` of `A0296210X` in TAHub Contacts. |
+| `person-delete m/A0296210X` deletes the student with `MATRICULATION_NUMBER` of `A0296210X` in TAHub Contacts. |
 
 </panel>
 </a>
+
+<br>
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-### Course
+### Course Commands
 
-<box typ="warning">
-Reminder: course **code** and **name** must follow the [data format](#data-formats-fa-solid-warning)!
+<box type="warning">
+
+Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [data format](#data-formats-fa-solid-warning)!
 </box>
 
 <a name="course-add">
@@ -333,7 +357,7 @@ Edit by changing the name of a course in TAHub Contacts.
 Format: **`course-edit c/COURSE_CODE n/COURSE_NAME`**
 </md></box>
 
-- `COURSE_CODE` must be an existing course code
+- `COURSE_CODE` must be an existing course code.
 - `COURSE_NAME` is the new course name and must only contain alphanumeric characters or spaces **and** follow the `COURSE_NAME` [format](#data-formats-fa-solid-warning).
 - Note that it is **not possible** to **edit** the course code. If you want to do so, create a **new course** with the different code.
 
@@ -354,13 +378,13 @@ Deletes a course in TAHub Contacts.
 Format: **`course-delete c/COURSE_CODE`**
 </md></box>
 
-- `COURSE_CODE` must be an existing course code
+- `COURSE_CODE` must be an existing course code.
 
 | **Examples** |
 | :--- |
 | `course-delete c/CS1101S` |
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
 </box>
@@ -368,109 +392,174 @@ Format: **`course-delete c/COURSE_CODE`**
 </panel>
 </a>
 
-<a name="course-delete">
-<panel header="#### Deleting a course: `course-delete`" expanded no-close no-switch>
-
-Deletes a course in TAHub Contacts.
-
-<box type="definition" seamless><md>
-Format: **`course-delete c/COURSE_CODE`**
-</md></box>
-
-- `COURSE_CODE` must be an existing course code
-
-| **Examples** |
-| :--- |
-| `course-delete c/CS1101S` |
-
-<box type="warning" seamless>
-**Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
-</box>
-
-</panel>
-</a>
-
-<a name="course-delete">
-<panel header="#### Deleting a course: `course-delete`" expanded no-close no-switch>
-
-Deletes a course in TAHub Contacts.
-
-<box type="definition" seamless><md>
-Format: **`course-delete c/COURSE_CODE`**
-</md></box>
-
-- `COURSE_CODE` must be an existing course code
-
-| **Examples** |
-| :--- |
-| `course-delete c/CS1101S` |
-
-<box type="warning" seamless>
-**Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
-</box>
-
-</panel>
-</a>
-
-#### Enrolling a student : `enroll`
+<a name="enroll">
+<panel header="#### Enrolling a student : `enroll`" expanded no-close no-switch>
 
 Enrolls a student in a particular course and tutorial group.
 
-Format: `enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`
+<box type="definition" seamless><md>
+Format: **`enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
+</md></box>
 
-Examples:
+- Students already **enrolled** in this course and tutorial **cannot** be enrolled again.
 
-- enroll m/A1234567Y c/CS1101S tut/T12
-- enroll m/A1262929T c/CS2030 tut/T08
+| **Examples** |
+| :--- |
+| `enroll m/A1234567Y c/CS1101S tut/T12` |
+| `enroll m/A1262929T c/CS2030 tut/T08` |
 
-Notes:
+</panel>
+</a>
 
-- MATRICULATION_NUMBER must be a valid NUS matriculation number in the form AXXXXXXXB, where A is the fixed as A, B is any uppercase character, and XXXXXXX is any 7 integers.
-- COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
-- TUTORIAL_ID should be in the form TXX, where T is fixed as T, while XX is a 2 digit integer from 01 to 99.
-- Students already enrolled in this course and tutorial cannot be enrolled again
+<a name="unenroll">
+<panel header="#### Unenrolling a student : `unenroll`" expanded no-close no-switch>
 
-#### Unenrolling a student : `unenroll`
+Unenrolls a student from a particular course and tutorial group that he/she is in.
 
-Unenrolls a student from a particular course and tutorial group that he/she is in
+<box type="definition" seamless><md>
+Format: **`course-delete c/COURSE_CODE`**
+</md></box>
 
-Format: `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`
+- `COURSE_CODE` must be an existing course code.
 
-Examples:
+| **Examples** |
+| :--- |
+| `unenroll m/A1234567Y c/CS1101S tut/T12` |
+| `unenroll m/A1262929T c/CS2030 tut/T08` |
 
-- unenroll m/A1234567Y c/CS1101S tut/T12
-- unenroll m/A1262929T c/CS2030 tut/T08
+</panel>
+</a>
 
-Notes:
+<br>
 
-- MATRICULATION_NUMBER must be a valid NUS matriculation number in the form AXXXXXXXB, where A is the fixed as A, B is any uppercase character, and XXXXXXX is any 7 integers.
-- COURSE_CODE must be in the form XXYYYYZ where XX is 2 uppercase letters, YYYY is a 4 digit number, Z is an optional uppercase letter
-- TUTORIAL_ID should be in the form TXX, where T is fixed as T, while XX is a 2 digit integer from 01 to 99.
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Attendance Commands
+
+Each student has an attendance record associated with each unique course and tutorial.
+This record is to be edited over the duration of a semester, where you can mark and unmark
+attendance for for each consecutive session.
+
+<box typ="warning">
+
+Reminder: where used, course **code** and **name**, and tutorial **code** must exist
+and follow the [data format](#data-formats-fa-solid-warning)!
+
+The particular student **must** also be enrolled in that course and corresponding tutorial.
+</box>
+
+<a name="attend-present">
+<panel header="#### Marking attendance : `attend-present`" expanded no-close no-switch>
+
+Marks a student in a particular course and tutorial group as having attended a session (**present**).
+
+<box type="definition" seamless><md>
+Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
+</md></box>
+
+| **Examples** |
+| :--- |
+| `attend-present m/A1234567Y c/CS1101S t/T10A` |
+
+</panel>
+</a>
+
+<a name="attend-absent">
+<panel header="#### Marking absence : `attend-absent`" expanded no-close no-switch>
+
+Marks a student in a particular course and tutorial group as having missed a session (was **absent**).
+
+<box type="definition" seamless><md>
+Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
+</md></box>
+
+| **Examples** |
+| :--- |
+| `attend-absent m/A1234567Y c/CS1101S t/T10A` |
+
+</panel>
+</a>
+
+<a name="attend-remove">
+<panel header="#### Marking attendance : `attend-remove`" expanded no-close no-switch>
+
+Removes the last attendance session record of a student in a particular course and tutorial group.
+
+<box type="definition" seamless><md>
+Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
+</md></box>
+
+| **Examples** |
+| :--- |
+| `attend-remove m/A1234567Y c/CS1101S t/T10A` |
+
+</panel>
+</a>
+
+<a name="attend-clear">
+<panel header="#### Marking attendance : `attend-clear`" expanded no-close no-switch>
+
+Clears the attendance of a student in a particular course and tutorial group.
+
+<box type="definition" seamless><md>
+Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
+</md></box>
+
+| **Examples** |
+| :--- |
+| `attend-clear m/A1234567Y c/CS1101S t/T10A` |
+
+</panel>
+</a>
+
+<br>
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Data
 
-#### Saving the data
+#### Saving the data :floppy_disk:
 
-TAHub data is saved in the hard disk automatically after any command that changes
-the data. You don’t need to save manually!
+Ever experience the sinking feeling of being petrified when you *forgot* to `Ctrl/Cmd-S` something important?
 
-#### Editing the data file
+Don't worry!
 
-Data are saved automatically as a JSON file `[JAR file location]/data/TAHub.json`.
-and `[JAR file location]/data/courselist.json`
-Advanced users are welcome to update data directly by editing that data file.
+*TAHub* data is saved in your drive **automatically** after any command that **changes
+the data**. You don’t need to save manually!
+
+<box type="info" seamless>
+
+*This already makes us umambiguously superior to Microsoft Office (when saving locally).*
+</box>
+
+#### Editing the data file :hammer_and_wrench:
+
+Data are saved automatically in the [JSON](https://www.json.org/json-en.html)
+files `[JAR file location]/data/addressbook.json`, storing the list of persons
+and `[JAR file location]/data/courselist.json`, storing the list of courses.
+Advanced users are *welcome* to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
-**Caution:**
+**Caution: :skull:**
+
 If your changes to the data file makes its format invalid, TAHub Contacts will
 discard all data and start with an empty data file at the next run. Hence, it is
 recommended to take a backup of the file before editing it.
-<br>
-<br>
+
 Furthermore, certain edits can cause TAHub Contacts to behave in unexpected ways
 (e.g., if a value entered is outside the acceptable range). Therefore, edit the
 data file only if you are confident that you can update it correctly.
+
+You have been duly warned.
 </box>
 
 ### Future
@@ -478,6 +567,10 @@ data file only if you are confident that you can update it correctly.
 #### Archiving data files
 
 *TBC :D*
+
+<br>
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -518,15 +611,13 @@ revert the change?<br>
 | List Students             | `list`                                                                                                                                                                                                              |
 | Clear                     | `clear`                                                                                                                                                                                                             |
 | Exit                      | `exit`                                                                                                                                                                                                              |
-| Add Student               | `add-student m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br>e.g.`add-student m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| Add Student               | `person-add m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br>e.g.`person-add m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | Find Students by Name     | `find KEYWORD [MORE_KEYWORDS]`<br>e.g.`find James Jake`                                                                                                                                                             |
-| Edit Student              | `edit-student m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`edit-student m/A0296210X n/James Lee e/jameslee@example.com`                                                        |
-| Delete Student            | `delete-student m/MATRICULATION_NUMBER`<br>e.g.`delete-student m/A0296210X`                                                                                                                                         |
-| Add Course                | `add-course c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                         |
-| Edit Course               | `edit-course c/COURSE_CODE n/NAME`<br>e.g.`edit-course c/CS1101S n/Programming Basics`                                                                                                                              |
-| Delete Course             | `delete-course c/COURSE_CODE n/NAME`<br>e.g.`delete-course c/CS3230`                                                                                                                                                |
-| Add Course Tutorial       | `add-tutorial c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`add c/CS1101S t/T23`                                                                                                                                             |
-| Delete Course Tutorial    | `delete-tutorial c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`delete-tutorial c/CS1101S t/T23`                                                                                                                              |
+| Edit Student              | `person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`person-edit m/A0296210X n/James Lee e/jameslee@example.com`                                                        |
+| Delete Student            | `person-delete m/MATRICULATION_NUMBER`<br>e.g.`person-delete m/A0296210X`                                                                                                                                         |
+| Add Course                | `course-add c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                         |
+| Edit Course               | `course-edit c/COURSE_CODE n/NAME`<br>e.g.`course-edit c/CS1101S n/Programming Basics`                                                                                                                              |
+| Delete Course             | `course-delete c/COURSE_CODE n/NAME`<br>e.g.`course-delete c/CS3230`                                                                                                                                                |
 | Enroll Student            | `enroll m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`enroll m/A1234567Y c/CS1101S  t/T10A`                                                                                                           |
 | Unenroll Student          | `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`unenroll m/A1234567Y c/CS1101S  t/T10A`                                                                                                       |
 | Mark Attendance           | `attend attend m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend attend m/A1234567Y c/CS1101S  t/T10A`                                                                                             |
@@ -535,3 +626,7 @@ revert the change?<br>
 | Clear Attendance          | `attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend-clear m/A1234567Y c/CS1101S  t/T10A`                                                                                               |
 
 <!-- markdownlint-enable MD013 -->
+
+<br>
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
