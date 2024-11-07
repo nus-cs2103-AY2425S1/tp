@@ -88,6 +88,11 @@ public class JsonAdaptedPersonTest {
         public String getType() {
             return "stub";
         }
+
+        @Override
+        public int getDaysAttendedValue() throws CommandException {
+            return 0;
+        }
     }
     private final PersonStub personStubAmy = new PersonStub(new Name(VALID_NAME_AMY),
             new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),

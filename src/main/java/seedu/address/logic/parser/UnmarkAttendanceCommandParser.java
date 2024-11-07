@@ -18,8 +18,12 @@ public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCom
      */
     public UnmarkAttendanceCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new UnmarkAttendanceCommand(index);
+            String[] parts = args.trim().split("\\s+");
+            Index[] indexes = new Index[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                indexes[i] = ParserUtil.parseIndex(parts[i]);
+            }
+            return new UnmarkAttendanceCommand(indexes);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkAttendanceCommand.MESSAGE_USAGE), pe);

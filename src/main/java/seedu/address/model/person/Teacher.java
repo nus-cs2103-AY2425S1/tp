@@ -132,4 +132,9 @@ public class Teacher extends Person {
         return TEACHER_TYPE;
 
     }
+
+    @Override
+    public int getDaysAttendedValue() {
+        return 0;
+    }
 }

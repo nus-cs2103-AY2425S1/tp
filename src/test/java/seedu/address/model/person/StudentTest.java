@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -74,7 +75,7 @@ public class StudentTest {
     }
 
     @Test
-    public void testDaysAttendedProperty() {
+    public void testDaysAttendedProperty() throws CommandException {
         // Create a student with initial attendance
         Student student = new StudentBuilder().withDaysAttended(5).build();
 
@@ -93,5 +94,19 @@ public class StudentTest {
         // Reset attendance and verify if property reflects the reset value
         student = (Student) student.withResetAttendance();
         assertEquals(0, student.daysAttendedProperty().get(), "daysAttended value should reset to 0");
+    }
+
+    @Test
+    public void getDaysAttendedValue_returnsCorrectValue() {
+        // Arrange: Create a student with specific days attended
+        int initialDaysAttended = 3;
+        Student student = new StudentBuilder().withDaysAttended(initialDaysAttended).build();
+
+        // Act: Get the value using getDaysAttendedValue
+        int actualDaysAttended = student.getDaysAttendedValue();
+
+        // Assert: Check if the returned value matches the expected value
+        assertEquals(initialDaysAttended, actualDaysAttended,
+                "getDaysAttendedValue should return the correct number of days attended");
     }
 }
