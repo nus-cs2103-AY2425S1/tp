@@ -154,7 +154,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+``This section describes some noteworthy details on how certain features are implemented.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -224,7 +224,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
-
+``
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -524,7 +524,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving sort preference
 1. **Saving valid sort preferences**
-   1. **Prerequisites**: Ensure multiple persons are listed using the `list` command.
+   1. **Prerequisites**: Ensure there are several persons in NetBook, you can check so using the `list` command.
    1. **Test case**: `save_sort high`
       **Expected**: The list of persons is sorted by priority with high_priority contacts at the top, and this preference is 
       saved. Upon restarting the application, the contact list should reflect this order.
@@ -547,7 +547,7 @@ testers are expected to do more *exploratory* testing.
       `low`, etc.)
       **Expected**: Error messages similar to the previous cases, and the saved preference remains unchanged.
 1. **Verifying persistence of saved preferences**
-   1. **Prerequisites**: Have already save a sort preference (e.g, `save_sort recent` or `svp high`).
+   1. **Prerequisites**: Have already saved a sort preference (e.g, `save_sort recent` or `svp high`).
    1. **Test case**: Close the application and re-launch it.
       **Expected**: The contacts list should automatically display according to the saved preference
 
