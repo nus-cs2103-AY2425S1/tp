@@ -127,25 +127,45 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Finding persons: `find`
+### Finding persons : `find`
 
 Finds persons that match the specified filters.
 
 Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY] [income/INCOME]`
 
 * The search is case-insensitive. e.g `n/alice` will match `Alice`.
-* For names, only those that start with the given filter will be matched e.g. find n/A returns all persons whose first name starts with A only. 
-* For addresses, those that contain the part of the address given are returned e.g. find a/clementi returns all persons who stay at clementi only.
-* For priorities, exact priorities must be specified to filter accurately e.g. find pri/high returns all persons with high priority only.
-* For income, those with income less than or equal to the specified value are listed.
+* For names, only those that start with the given filter will be matched e.g. `find n/A` returns all persons whose first name starts with A only. 
+* For addresses, those that contain the part of the address given are returned e.g. `find a/clementi` returns all persons who stay at clementi only.
+* For priorities, exact priorities must be specified to filter accurately e.g. `find pri/high` returns all persons with high priority only.
+* For income, those with income less than or equal to the specified float value are listed e.g. `find income/2000` returns all persons with income less than or equal to 2000.00 only.
 * At least one filter must be specified.
-* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. find n/alex n/david n/bobby
-* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. find n/A n/B pri/HIGH returns all persons whose name starts with either A or B but have high priority. 
+* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. `find n/alex n/david n/bobby`
+* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but have high priority. 
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex n/david pri/high` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/newFindAlexDavidResult.png)
+
+### Sorting persons : `sort`
+
+Sorts persons in the order of the specified parameter.
+
+Format: `sort [name] [address] [priority] [income] [updated]`
+
+* Whenever SocialBook is launched, the persons are auto-sorted in order of their priority from HIGH to LOW.
+* The parameter is case-insensitive. e.g `sort name` works the same as `sort NAME`.
+* For name, the sorting is in alphabetical order.
+* For address, the sorting is in lexicographical order (similar to alphabetical order but also takes the special characters and numerical digits into account). 
+  * Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` `sort address` will sort the contact list of those staying in Clementi in order of their address. 
+* For priority, the sorting is in order from HIGH to LOW.
+* For income, the sorting order is in increasing order from the lowest to highest.
+* For updated, the sorting order is from the person updated least recently to the one updated most recently.
+* Only one parameter can be specified at any time.
+
+Examples:
+* `sort name`
+* `sort updated`
 
 ### Deleting people : `delete`
 
