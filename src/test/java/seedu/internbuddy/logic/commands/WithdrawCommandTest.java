@@ -53,7 +53,7 @@ public class WithdrawCommandTest {
         CommandResult result = withdrawCommand.execute(model);
 
         assertEquals(String.format(WithdrawCommand.MESSAGE_WITHDRAW_APPLICATION_SUCCESS,
-            applicationToWithdraw), result.getFeedbackToUser());
+            applicationToWithdraw, company.getName()), result.getFeedbackToUser());
     }
 
     @Test
