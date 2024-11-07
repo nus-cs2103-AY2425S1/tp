@@ -16,10 +16,6 @@ public class AppointmentBookBuilder {
         appointmentBook = new AppointmentBook();
     }
 
-    public AppointmentBookBuilder(AppointmentBook appointmentBook) {
-        this.appointmentBook = appointmentBook;
-    }
-
     /**
      * Adds a new {@code Appointment} to the {@code Appointment} that we are building.
      */

@@ -60,6 +60,7 @@ public class JsonSerializableAppointmentBookTest {
     void toModelType_invalidAppointmentFile_throwsIllegalValueException() throws Exception {
         JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(INVALID_APPOINTMENT_FILE,
                 JsonSerializableAppointmentBook.class).get();
+        // EP: File with invalid appointment entry
         assertThrows(IllegalValueException.class, () -> dataFromFile.toModelType(addressBookStub));
     }
 
@@ -70,6 +71,7 @@ public class JsonSerializableAppointmentBookTest {
     void toModelType_duplicateAppointments_throwsIllegalValueException() throws Exception {
         JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_APPOINTMENT_FILE,
                 JsonSerializableAppointmentBook.class).get();
+        // EP: File with duplicate appointments
         assertThrows(IllegalValueException.class,
                 JsonSerializableAppointmentBook.MESSAGE_DUPLICATE_APPOINTMENT, () -> dataFromFile
                         .toModelType(addressBookStub));
@@ -80,6 +82,7 @@ public class JsonSerializableAppointmentBookTest {
         JsonSerializableAppointmentBook jsonSerializableAppointmentBook =
                 new JsonSerializableAppointmentBook(Collections.emptyList(), 0);
         AppointmentBook appointmentBook = jsonSerializableAppointmentBook.toModelType(addressBookStub);
+        // EP: Empty appointment list
         assertEquals(0, appointmentBook.getAppointmentList().size());
     }
 

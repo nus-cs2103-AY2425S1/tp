@@ -81,13 +81,23 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
+        ReadOnlyAddressBook initialPersonsData = loadAddressBookData(storage);
+        ReadOnlyAppointmentBook initialAppointmentData = loadAppointmentBookData(storage, initialPersonsData);
+
+        return new ModelManager(initialPersonsData, initialAppointmentData, userPrefs);
+    }
+
+    /**
+     * Returns a {@code ReadOnlyAddressBook} with the data from {@code storage}'s address book. <br>
+     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
+     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     */
+    private ReadOnlyAddressBook loadAddressBookData(Storage storage) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialPersonsData;
-        Optional<ReadOnlyAppointmentBook> appointmentBookOptional;
-        ReadOnlyAppointmentBook initialAppointmentData;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            if (addressBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
@@ -97,9 +107,21 @@ public class MainApp extends Application {
                     + " Will be starting with an empty AddressBook.");
             initialPersonsData = new AddressBook();
         }
+        return initialPersonsData;
+    }
+
+    /**
+     * Returns a {@code ReadOnlyAppointmentBook} with the data from {@code storage}'s appointment book. <br>
+     * Data from the sample appointment book will be used instead if {@code storage}'s appointment book is
+     * not found, or an empty appointment book will be used instead if errors occur when reading {@code
+     * storage}'s appointment book.
+     */
+    private ReadOnlyAppointmentBook loadAppointmentBookData(Storage storage, ReadOnlyAddressBook initialPersonsData) {
+        Optional<ReadOnlyAppointmentBook> appointmentBookOptional;
+        ReadOnlyAppointmentBook initialAppointmentData;
         try {
             appointmentBookOptional = storage.readAppointmentBook(initialPersonsData);
-            if (!appointmentBookOptional.isPresent()) {
+            if (appointmentBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAppointmentBookFilePath()
                         + " populated with a sample AppointmentBook.");
                 initialAppointmentData = SampleDataUtil.getSampleAppointmentBook(initialPersonsData);
@@ -111,7 +133,7 @@ public class MainApp extends Application {
                     + " Will be starting with an empty AppointmentBook.");
             initialAppointmentData = new AppointmentBook();
         }
-        return new ModelManager(initialPersonsData, initialAppointmentData, userPrefs);
+        return initialAppointmentData;
     }
 
     private void initLogging(Config config) {
@@ -138,7 +160,7 @@ public class MainApp extends Application {
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
-            if (!configOptional.isPresent()) {
+            if (configOptional.isEmpty()) {
                 logger.info("Creating new config file " + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());
@@ -169,7 +191,7 @@ public class MainApp extends Application {
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
-            if (!prefsOptional.isPresent()) {
+            if (prefsOptional.isEmpty()) {
                 logger.info("Creating new preference file " + prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());

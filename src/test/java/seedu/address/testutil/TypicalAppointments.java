@@ -1,11 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TYPE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TYPE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICINE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICINE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SICKNESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SICKNESS_BOB;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -80,37 +74,6 @@ public class TypicalAppointments {
         .withMedicine("Aspirin")
         .withDateTime(DEFAULT_DATE_TIME_7)
         .build();
-
-    // Manually added
-    public static final Appointment APPOINTMENT_8 = new AppointmentBuilder()
-        .withAppointmentType("Emergency Room").withPerson(AMY)
-        .withSickness("Injury")
-        .withMedicine("Morphine")
-        .withDateTime(DEFAULT_DATE_TIME_4)
-        .build();
-
-    public static final Appointment APPOINTMENT_9 = new AppointmentBuilder()
-        .withAppointmentType("Surgery").withPerson(BOB)
-        .withSickness("Pre-Surgery")
-        .withMedicine("Pre-Meds")
-        .withDateTime(DEFAULT_DATE_TIME_5)
-        .build();
-
-    // Manually added - Appointment's details found in {@code CommandTestUtil}
-    public static final Appointment APPOINTMENT_AMY = new AppointmentBuilder()
-        .withAppointmentType(VALID_APPOINTMENT_TYPE_AMY)
-        .withSickness(VALID_SICKNESS_AMY)
-        .withMedicine(VALID_MEDICINE_AMY)
-        .withDateTime(DEFAULT_DATE_TIME_6)
-        .build();
-    public static final Appointment APPOINTMENT_BOB = new AppointmentBuilder()
-        .withAppointmentType(VALID_APPOINTMENT_TYPE_BOB)
-        .withSickness(VALID_SICKNESS_BOB)
-        .withMedicine(VALID_MEDICINE_BOB)
-        .withDateTime(DEFAULT_DATE_TIME_7)
-        .build();
-
-    public static final String KEYWORD_MATCHING_CHECKUP = "Checkup"; // A keyword that matches Checkup
 
     private TypicalAppointments() {
     } // prevents instantiation

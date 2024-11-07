@@ -74,7 +74,6 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final String PERSON_ENTITY_STRING = "person ";
-    public static final String PERSON_APPOINTMENT_STRING = "appt ";
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
@@ -101,16 +100,11 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_DATE_TIME_STRING_BOB = "2024-10-31 10:30";
 
     public static final String APPOINTMENT_TYPE_DESC_AMY = " " + PREFIX_APPOINTMENT_TYPE + VALID_APPOINTMENT_TYPE_AMY;
-    public static final String APPOINTMENT_TYPE_DESC_BOB = " " + PREFIX_APPOINTMENT_TYPE + VALID_APPOINTMENT_TYPE_BOB;
     public static final String MEDICINE_DESC_AMY = " " + PREFIX_MEDICINE + VALID_MEDICINE_AMY;
-    public static final String MEDICINE_DESC_BOB = " " + PREFIX_MEDICINE + VALID_MEDICINE_BOB;
     public static final String SICKNESS_DESC_AMY = " " + PREFIX_SICKNESS + VALID_SICKNESS_AMY;
-    public static final String SICKNESS_DESC_BOB = " " + PREFIX_SICKNESS + VALID_SICKNESS_BOB;
     public static final String PERSON_ID_DESC = " " + PREFIX_PERSON_ID + VALID_PERSON_ID;
     public static final String APPOINTMENT_DATE_TIME_DESC_AMY =
             " " + PREFIX_DATETIME + VALID_APPOINTMENT_DATE_TIME_STRING_AMY;
-    public static final String APPOINTMENT_DATE_TIME_DESC_BOB =
-            " " + PREFIX_DATETIME + VALID_APPOINTMENT_DATE_TIME_STRING_BOB;
 
     public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_AMY_APPOINTMENT;
     public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_BOB_APPOINTMENT;
