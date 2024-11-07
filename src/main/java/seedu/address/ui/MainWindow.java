@@ -5,12 +5,14 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -207,8 +209,18 @@ public class MainWindow extends UiPart<Stage> {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Confirmation");
         dialog.setHeaderText(null);
-        dialog.setContentText(message + "\n( \"y\" to confirm or any other key to cancel)");
 
+        // Create a label with wrapping for the confirmation message
+        Label contentLabel = new Label(message + "\n(\"y\" to confirm or any other key to cancel)");
+        contentLabel.setWrapText(true); // Enable text wrapping for long messages
+        contentLabel.setMaxWidth(400);
+
+        // Get the dialog's content pane and add the label above the existing input box
+        VBox content = new VBox(contentLabel, dialog.getEditor());
+        content.setSpacing(10);
+        dialog.getDialogPane().setContent(content);
+
+        // Show the dialog and capture the result
         Optional<String> result = dialog.showAndWait();
         return result.isPresent() && result.get().trim().equalsIgnoreCase("y");
     }

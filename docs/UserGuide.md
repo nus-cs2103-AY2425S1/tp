@@ -318,18 +318,17 @@ sort <CRITERIA> <ORDER>
     - `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
         - `n/`: Sort by client's name (A-Z or Z-A).
         - `b/`: Sort by client's birthday (earliest to latest or latest to earliest).
-        - `appt/`: Sort by upcoming appointment dates (soonest to latest or latest to soonest).
-        - `paydate/`: Sort by policy payment due date (earliest to latest).
+        - `appt/`: Sort by upcoming appointment date (soonest to latest or latest to soonest).
+        - `paydate/`: Sort by policy payment due date (soonest to latest).
     - `ORDER`: The direction of sort. Available order includes:
         - `asc`: Sort in ascending order
         - `desc`: Sort in descending order
 
 - **Usage**:
-    - **Name Sorting**: Orders the client list alphabetically by name.
+    - **Name Sorting**: Orders the client list alphabetically by names.
     - **Birthday Sorting**: Orders the client list by birthday dates.
     - **Appointment Sorting**: Orders the client list by the dates of upcoming appointments.
-    - **Policy Sorting**: Orders the client list based on policy details.
-    - **Payment Sorting**: Orders the client list based on policy payment date. This sort can only be used in ascending order.
+    - **Payment Due Date Sorting**: Orders the client list by the policy payment due dates. This sort can only be used in ascending order.
 
 <div markdown="span" class="alert alert-info"> **Tip:**
 Regularly sorting your client list based on different criteria can help you manage your clients more efficiently and keep track of important information.
@@ -350,7 +349,7 @@ Examples:
   
   ![Sort by Birthday](images/sortbirthdayUI.png)
 
-- **Sort by Appointment Date in Descending Order**: Sorts the client list based on the latest to the earliest upcoming appointments.
+- **Sort by Appointment Date in Descending Order**: Sorts the client list based on the latest to the earliest upcoming appointment.
   ```
   sort appt/ desc
   ```
@@ -545,7 +544,7 @@ assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> 
 
 <div markdown="span" class="alert alert-info"> **Note:**
 Sometimes, after assigning a policy to a client, the user interface may not reflect the changes
-immediately. If this occurs, try double-clicking on the user interface or enter the "list" command.
+immediately. If this occurs, try double-clicking on the particular client profile card.
 The user interface will show the assigned policy.
 </div>
 
@@ -614,9 +613,12 @@ paid <INDEX> po/<POLICY_INDEX>
     - The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
     - The policy index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 
-<div markdown="span" class="alert alert-info"> **Note:**
-Updating Payment Due Date: The payment due date of the policy will be updated to the next scheduled date (ie. one year later).
-Setting Amount Due to 0: The amount due will be set to 0 once the final installment of the insurance payment is completed.
+<div markdown="span" class="alert alert-info"> **Note:** <br>
+1. The payment due date of the policy will be updated to the next scheduled date (ie. one year later). 
+The amount due will be set to 0 once the final installment of the insurance payment is completed. <br>
+2. Sometimes, after marking a policy payment installment of a client as paid, the user interface may not reflect the changes
+immediately. If this occurs, try double-clicking on the particular client profile card.
+The user interface will show the updated payment due date.
 </div>
 
 
