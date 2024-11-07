@@ -17,15 +17,15 @@ Welcome! Tuteez is a **desktop address book app that makes managing student cont
       + [Right panel](#right-panel)
    * [Features](#features)
       + [Viewing help : `help`](#viewing-help-help)
-      + [Adding a student: `add`](#adding-a-person-add)
-      + [Listing all students : `list`](#listing-all-persons-list)
-      + [Editing a student : `edit`](#editing-a-person-edit)
+      + [Adding a student: `add`](#adding-a-student-add)
+      + [Listing all students : `list`](#listing-all-students-list)
+      + [Editing a student : `edit`](#editing-a-student-edit)
       + [Adding a Remark: `addremark` or `addrmk`](#adding-a-remark-addremark-or-addrmk)
       + [Deleting a Remark: `deleteremark` or `delrmk`](#deleting-a-remark-deleteremark-or-delrmk)
       + [Adding Lessons: `addlesson` or `addlsn`](#adding-lessons-addlesson-or-addlsn)
       + [Deleting Lessons: `deletelesson` or `dellsn`](#deleting-lessons-deletelesson-or-dellsn)
-      + [Locating students by name: `find`](#locating-persons-by-name-find)
-      + [Deleting a student : `delete`](#deleting-a-person-delete)
+      + [Locating students by name: `find`](#locating-students-by-name-find)
+      + [Deleting a student : `delete`](#deleting-a-student-delete)
       + [Displaying Student Information: `display`](#displaying-student-information-display)
       + [Clearing all entries : `clear`](#clearing-all-entries-clear)
       + [Exiting the program : `exit`](#exiting-the-program-exit)
@@ -143,7 +143,7 @@ John's email address should now be updated to `johndoe@gmail.com` and the update
 If everything went well, you'll be greeted by this view:
 ![edit_command](images/edit_command_tutorial.png)
 
-> :information_source: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student--edit) section.
+> :information_source: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student-edit) section.
 
 ### Deleting a Student
 John Doe has decided to stop engaging your tuition services, and you wish to remove him from your list of students.
