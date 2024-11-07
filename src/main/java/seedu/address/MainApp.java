@@ -112,8 +112,9 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ReadOnlyAppointmentBook} with the data from {@code storage}'s appointment book. <br>
-     * The data from the sample appointment book will be used instead if {@code storage}'s appointment book is not found,
-     * or an empty appointment book will be used instead if errors occur when reading {@code storage}'s appointment book.
+     * Data from the sample appointment book will be used instead if {@code storage}'s appointment book is
+     * not found, or an empty appointment book will be used instead if errors occur when reading {@code
+     * storage}'s appointment book.
      */
     private ReadOnlyAppointmentBook loadAppointmentBookData(Storage storage, ReadOnlyAddressBook initialPersonsData) {
         Optional<ReadOnlyAppointmentBook> appointmentBookOptional;
