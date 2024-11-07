@@ -42,6 +42,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 import seedu.address.model.tag.Tag;
@@ -232,6 +233,10 @@ public class PersonTest {
         assertThrows(InvalidPersonTypeException.class, () -> personStubAmy.getType());
     }
 
+    @Test
+    public void message_format_throwsInvalidPersonTypeException() {
+        assertThrows(InvalidPersonTypeException.class, () -> Messages.format(personStubAmy));
+    }
     @Test
     public void getDaysAttended_returnsNull() {
         assertEquals(null, personStubAmy.getDaysAttended());
