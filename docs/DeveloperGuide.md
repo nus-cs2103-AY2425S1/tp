@@ -97,8 +97,8 @@ All these, including the `MainWindow`, inherit from the abstract `UiPart` class 
 classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
-are in the `src/main/resources/view` folder. For example, the layout of the 
-[`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) 
+are in the `src/main/resources/view` folder. For example, the layout of the
+[`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 **The `UI` component,**
@@ -107,7 +107,7 @@ is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
- 
+
 #### `CommandHistory` Integration
 
 The `CommandHistory` class, located in `seedu.address.ui.util`, is responsible for tracking user-entered commands.
@@ -158,8 +158,8 @@ How the parsing works:
 The `Model` component,
 
 * stores the contact data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-  * a `Person` object stores `StudentId`, `Name`, `Address`, `Phone`, `Email`, `Role`, `Course` objects.
-  * contains an ArrayList of `Module` objects which is optional.
+    * a `Person` object stores `StudentId`, `Name`, `Address`, `Phone`, `Email`, `Role`, `Course` objects.
+    * contains an ArrayList of `Module` objects which is optional.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * is intentionally designed to be independent of other components (e.g., UI, Logic, Storage) to maintain a clean separation of concerns. This ensures that the Model layer is solely responsible for managing data and that data structures make sense on their own. This independence enables easier maintenance, testing, and adaptability of the data structures, as changes in one component (e.g., UI) do not affect the Model.
@@ -562,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. EduContacts overwrites the old grade with the new grade.
 
       Use case ends.
-  
+
 **Use case: UC08 - Add contacts of next-of-kins of a student**
 
 **MSS**
@@ -668,7 +668,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder.
 
-    2. Double-click the jar file.<br> 
+    2. Double-click the jar file.<br>
        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -698,17 +698,17 @@ testers are expected to do more *exploratory* testing.
 2. Deleting a person while only one person is being shown
 
     1. Prerequisites: Filter persons using the `filter` command until only one person remains. Multiple persons in the list. Person that remains has Student ID `12345678`. One person in the list has Student ID `11111111`
-   
+
     2. Test case: `delete 12345678`<br>
        Expected: Person with Student ID `12345678` is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. List of persons shown is now blank.
-   
+
     3. Test case: `delete 11111111`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 3. Deleting a person while no persons are in the list
 
     1. Prerequisites: Delete all persons in the list using the `clear` command.
-   
+
     2. Test case: `delete 12345678`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
@@ -719,7 +719,7 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing data files
 
     1. To simulate a missing file, in the same folder as the jar file, navigate to the `data` folder and delete the `address.json` file in the folder.
-   
+
     2. Launch EduContacts by double-clicking the jar file.<br>
        Expected: EduContacts is populated by a set of default list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
 
@@ -744,10 +744,10 @@ _{to work on in the future}_
 
 * Description: Allow users to move inactive or irrelevant entries to an archive.
 * Benefits:
-  * Reduces clutter in the main data set, making it easier to manage and navigate active records without losing historical data.
-  * Lower the load on real-time data processing by isolating inactive records.
-  * Retain archived data for historical records or compliance requirements.
-  * Provide a safe way to store inactive data without risking deletion or loss.
+    * Reduces clutter in the main data set, making it easier to manage and navigate active records without losing historical data.
+    * Lower the load on real-time data processing by isolating inactive records.
+    * Retain archived data for historical records or compliance requirements.
+    * Provide a safe way to store inactive data without risking deletion or loss.
 
 ### Importing contact data
 
@@ -767,4 +767,3 @@ _{to work on in the future}_
     * Enable users to share their contact lists with others.
     * Allow users to organize and manipulate their contact data externally.
     * Help users comply with data export regulations or organizational policies.
-
