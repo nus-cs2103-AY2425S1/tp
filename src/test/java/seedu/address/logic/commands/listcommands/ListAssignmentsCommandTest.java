@@ -30,16 +30,18 @@ public class ListAssignmentsCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandResult expectedCommandResult = new CommandResult(ListAssignmentsCommand.MESSAGE_SUCCESS,
-                DisplayType.ASSIGNMENT_LIST, false, false);
+        int numShown = expectedModel.getFilteredAssignmentList().size();
+        CommandResult expectedCommandResult = new CommandResult(String.format(ListAssignmentsCommand.MESSAGE_SUCCESS,
+                numShown), DisplayType.ASSIGNMENT_LIST, false, false);
         assertCommandSuccess(new ListAssignmentsCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showAssignmentAtIndex(model, INDEX_FIRST_EMPLOYEE);
-        CommandResult expectedCommandResult = new CommandResult(ListAssignmentsCommand.MESSAGE_SUCCESS,
-                DisplayType.ASSIGNMENT_LIST, false, false);
+        int numShown = expectedModel.getFilteredAssignmentList().size();
+        CommandResult expectedCommandResult = new CommandResult(String.format(ListAssignmentsCommand.MESSAGE_SUCCESS,
+                numShown), DisplayType.ASSIGNMENT_LIST, false, false);
         assertCommandSuccess(new ListAssignmentsCommand(), model, expectedCommandResult, expectedModel);
     }
 }
