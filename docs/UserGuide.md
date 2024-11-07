@@ -247,14 +247,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague c/5'11 tall`
-**Clear**  | `clear`
-**Delete** | `delete INDEX` `delete NAME` <br> e.g., `delete 3` `delete Bernice`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COMMENT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com c/change comment`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list` `list vip`
-**Vip**    | `vip INDEX IS_VIP`<br> e.g., `vip 3 true`
-**searchtag**| `searchtag TAG [MORE TAGS]`<br> e.g., `searchtag friends`
-**Help**   | `help`
+Action       | Format, Examples
+-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague c/5'11 tall`
+**Clear**    | `clear`
+**Delete**   | `delete INDEX` `delete NAME` <br> e.g., `delete 3` `delete Bernice`
+**Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COMMENT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com c/change comment`
+**Search**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**     | `list` `list vip`
+**Vip**      | `vip INDEX IS_VIP`<br> e.g., `vip 3 true`
+**SearchTag**| `searchtag TAG [MORE TAGS]`<br> e.g., `searchtag friends`
+**Help**     | `help`
