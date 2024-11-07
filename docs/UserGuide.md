@@ -74,7 +74,6 @@ Shows a message explaining how to use some of the commands. Also contains a link
 
 Format: `help`
 
-
 ### Adding a person: `add`
 
 Adds a person to the database.
@@ -192,15 +191,33 @@ Examples:
 
 ### Deletes an event from the database.
 
-... _Details coming soon ..._
+Deletes the specified event from the database.
+
+Format: `deleteevent INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listevent` followed by `delete 2` deletes the 2nd event in the address book.
 
 ### Lists all events in the database.
 
-... _Details coming soon ..._
+Shows a list of all events in the address book.
 
-### Finds events by name.
+Format: `listevent`
 
-... _Details coming soon ..._
+### Finds events by keywords.
+
+Finds all events whose names or attributes contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+
+Format: `findevent KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `usc` will match `Usc`
+* The order of the keywords does not matter. e.g. `USC Chess` will match `Chess USC`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Utown Usc` will return Events containing `Utown Chess`, `Usc Table Tennis`
 
 ## More Features
 ### Clearing all entries : `clear`
