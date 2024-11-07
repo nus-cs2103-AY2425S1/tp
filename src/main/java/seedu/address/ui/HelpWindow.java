@@ -39,9 +39,6 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private VBox helpContainer;
-
-    @FXML
     private Label helpMessage;
 
     @FXML
