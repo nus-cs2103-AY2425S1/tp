@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,14 +21,13 @@ import seedu.address.testutil.TypicalListings;
 
 public class DeleteListingCommandTest {
 
-    private static final Name DO_NOT_EXIST_LISTING_NAME = new Name("DO NOT EXIST LISTING NAME");
     private Model model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
 
     @Test
     public void execute_validListingUnfilteredList_success() {
-        Listing listingToDelete = TypicalListings.PASIR_RIS;
-        DeleteListingCommand deleteListingCommand =
-                new DeleteListingCommand(TypicalListings.PASIR_RIS.getName());
+        Listing listingToDelete = model.getFilteredListingList().get(INDEX_FIRST_LISTING.getZeroBased());
+        DeleteListingCommand deleteListingCommand = new DeleteListingCommand(INDEX_FIRST_LISTING);
+
         String expectedMessage = String.format(DeleteListingCommand.MESSAGE_DELETE_LISTING_SUCCESS,
                 listingToDelete.getName());
 
@@ -39,15 +39,15 @@ public class DeleteListingCommandTest {
 
     @Test
     public void execute_invalidListingUnfilteredList_throwsCommandException() {
-        DeleteListingCommand deleteListingCommand = new DeleteListingCommand(DO_NOT_EXIST_LISTING_NAME);
+        DeleteListingCommand deleteListingCommand = new DeleteListingCommand(LISTING_INDEX_OUT_OF_BOUNDS);
 
         assertCommandFailure(deleteListingCommand, model, DeleteListingCommand.MESSAGE_LISTING_NOT_FOUND);
     }
 
     @Test
     public void execute_validListingFilteredList_success() {
-        Listing listingToDelete = TypicalListings.KENT_RIDGE;
-        DeleteListingCommand deleteListingCommand = new DeleteListingCommand(listingToDelete.getName());
+        Listing listingToDelete = model.getFilteredListingList().get(INDEX_SECOND_LISTING.getZeroBased());
+        DeleteListingCommand deleteListingCommand = new DeleteListingCommand(INDEX_SECOND_LISTING);
 
         String expectedMessage = String.format(DeleteListingCommand.MESSAGE_DELETE_LISTING_SUCCESS,
                 listingToDelete.getName());
@@ -60,37 +60,29 @@ public class DeleteListingCommandTest {
 
     @Test
     public void execute_invalidListingFilteredList_throwsCommandException() {
-        Listing listingToDelete = TypicalListings.BUONA_VISTA;
-        Listings typicalListings = TypicalListings.getTypicalListings();
-        typicalListings.removeListing(listingToDelete);
-        Model model = new ModelManager(new AddressBook(), new UserPrefs(), typicalListings);
-
         assertThrows(CommandException.class, DeleteListingCommand.MESSAGE_LISTING_NOT_FOUND, () ->
-                new DeleteListingCommand(TypicalListings.BUONA_VISTA.getName()).execute(model));
+                new DeleteListingCommand(LISTING_INDEX_OUT_OF_BOUNDS).execute(model));
     }
 
     @Test
     public void equals() {
-        DeleteListingCommand deleteListingFirstCommand =
-                new DeleteListingCommand(TypicalListings.HOUGANG.getName());
-        DeleteListingCommand deleteListingSecondCommand =
-                new DeleteListingCommand(TypicalListings.SENTOSA.getName());
+        DeleteListingCommand deleteFirstCommand = new DeleteListingCommand(INDEX_FIRST_LISTING);
+        DeleteListingCommand deleteSecondCommand = new DeleteListingCommand(INDEX_SECOND_LISTING);
 
         // same object -> returns true
-        assertTrue(deleteListingFirstCommand.equals(deleteListingFirstCommand));
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteListingCommand deleteListingFirstCommandCopy =
-                new DeleteListingCommand(TypicalListings.HOUGANG.getName());
-        assertTrue(deleteListingFirstCommand.equals(deleteListingFirstCommandCopy));
+        DeleteListingCommand deleteFirstCommandCopy = new DeleteListingCommand(INDEX_FIRST_LISTING);
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteListingFirstCommand.equals(1));
+        assertFalse(deleteFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteListingFirstCommand.equals(null));
+        assertFalse(deleteFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteListingFirstCommand.equals(deleteListingSecondCommand));
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 }
