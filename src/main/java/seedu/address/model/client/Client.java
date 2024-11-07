@@ -36,6 +36,7 @@ public abstract class Client {
     }
 
     public abstract boolean isSameClient(Client otherClient);
+    public abstract boolean isDuplicateEmail(Client otherClient);
     public abstract boolean isBuyer();
     public abstract boolean isSeller();
     public abstract String getTypeString();

@@ -177,6 +177,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean sameEmailExists(Client client) {
+        requireNonNull(client);
+        boolean exists = clientBook.sameEmailExists(client);
+        logger.fine("Checking existence of duplicate email: " + client + " - Exists: " + exists);
+        return exists;
+    }
+
+    @Override
     public void deleteClient(Client target) {
         requireNonNull(target);
         logger.info("Deleting client: " + target);

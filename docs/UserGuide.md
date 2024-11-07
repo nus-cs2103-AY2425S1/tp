@@ -70,29 +70,29 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Listing address book records: `list`
+### Listing ClientGrid records: `list`
 
-Shows a list of all existing clients (i.e. buyers and sellers), properties, and meetings in the address book.
+Shows a list of all existing buyers, sellers, clients (i.e., buyers and sellers), properties, and meetings in ClientGrid.
 
 Format: `list k/KEY`
 
 * The `list` command displays records based on the specified `KEY`.
-* The `KEY` must be one of the following: `buyers`, `sellers`, `clients`, `meetings` or `properties`.
-  * `buyers`: Lists all buyers in the database.
-  * `sellers`: Lists all sellers in the database.
-  * `clients`: Lists all buyers and sellers (i.e. clients) combined.
-  * `properties`: Lists all properties in the database.
-  * `meetings`: Lists all meetings in the database.
+* The `KEY` must be one of the following: `buyers`, `sellers`, `clients`, `meetings`, or `properties`.
+    * `buyers`: Lists all buyers in the client book.
+    * `sellers`: Lists all sellers in the client book.
+    * `clients`: Lists all clients (i.e. buyers and sellers combined) in the client book.
+    * `properties`: Lists all properties in the property book.
+    * `meetings`: Lists all meetings in the meeting book.
 
 * If an invalid `KEY` is provided, an error message will be displayed.
 
 Key Considerations:
-* Only accepts "buyers", "sellers", "clients", "properties" and "meetings" (case-insensitive) as valid inputs for k/KEY.
-* The `KEY` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `KEY` also ignores UPPER/lower case. All names will be converted to lower case and checked against the list of valid keys.
+* Only accepts "buyers", "sellers", "clients", "properties", and "meetings" (case-insensitive) as valid inputs for `k/KEY`.
+* The `KEY` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed, and the input will be converted into an array of words. The `KEY` also ignores UPPER/lower case. All names will be converted to lower case and checked against the list of valid keys.
 * If the user provides an invalid key, the system will respond with an error message indicating that only the valid keys are accepted.
 
 Examples:
-* `list k/buyers` displays a list of all existing buyers in the address book.
+* `list k/buyers` displays a list of all existing buyers in ClientGrid.
 
   ![result for 'list k/sellers'](images/list.png)
 
@@ -115,10 +115,15 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
     * have each domain label start and end with alphanumeric characters
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
+**Special Scenario:** It's possible to have a buyer and seller with the same phone number and email but different names. This flexibility provided by ClientGrid allows users to record the same client under different names in buying and selling roles, which may be useful for clients operating under separate business names, personal vs. professional roles, or other distinct identities.
 <box type="info" seamless>
 
 **Note:**
-No duplicate buyers are allowed. Duplicate buyers are checked based on whether the buyers have the same phone number.
+No duplicate buyers are allowed. Duplicate buyers are checked based on whether there is an existing buyer with the same phone number in the client book.
+
+No duplicate emails are allowed. Duplicate emails are detected if
+1. there is a buyer with the same email already in the client book.
+2. there is a seller with the same email but a different phone number in the client book. Having the same email address as an existing seller with a different phone number is not allowed as emails should be unique to a client.
 </box>
 
 Examples:
@@ -137,8 +142,13 @@ Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 
 <box type="info" seamless>
 
-**Note:**
-No duplicate sellers are allowed. Similar to the `addbuyer` command, duplicate sellers are checked based on whether the sellers have the same phone number.
+**Note:** For seller-specific restrictions, please refer to the `addbuyer` command. The same rules apply, including:
+- **Duplicate Sellers**: No duplicate sellers are allowed. A duplicate seller is defined as one with the same phone number as an existing seller.
+- **Duplicate Emails**: No duplicate emails are allowed, following the same logic as the `addbuyer` command:
+    1. A seller cannot share the same email as another seller.
+    2. A seller cannot have the same email as a buyer with a different phone number. Email uniqueness is enforced per client.
+
+The **Special Scenario** also applies here: you can have a buyer and seller with the same phone number and email but different names, allowing flexibility for clients who operate under different names in buying and selling roles.
 </box>
 
 Examples:

@@ -93,6 +93,21 @@ public class ClientBook implements ReadOnlyClientBook {
     }
 
     /**
+     * Returns true if {@code clientToCheck} is a Buyer and a Buyer with the same email as {@code client}
+     * exists in the client book or if {@code clientToCheck} is a Seller and a Seller with the same
+     * email as {@code clientToCheck} exists in the client book, false otherwise.
+     *
+     * @param clientToCheck The client to check for duplicate email.
+     * @return True if {@code clientToCheck} has the same email as an existing client of the same, false otherwise.
+     */
+    public boolean sameEmailExists(Client clientToCheck) {
+        requireNonNull(clientToCheck, "Client cannot be null.");
+        boolean exists = clients.containsEmail(clientToCheck);
+        assert exists == clients.containsEmail(clientToCheck) : "Duplicate email check failed!";
+        return exists;
+    }
+
+    /**
      * Adds a client to the client book.
      * The client must not already exist in the client book.
      *
