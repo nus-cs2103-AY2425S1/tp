@@ -358,6 +358,15 @@ Examples:
 
 </box>
 
+<box type="warning">
+
+##### Warning
+
+Filtering the order list by status and then changing an order's status will result in the order no longer appearing under the filtered list. <br>
+e.g. using `filterorder pending` followed by marking the first order in the filtered list as completed will remove that order from the current filtered list.
+
+</box>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
