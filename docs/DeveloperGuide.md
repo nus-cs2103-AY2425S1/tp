@@ -379,30 +379,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC04 - View all wedding tags for a contact**
-
-**MSS**
-
-1.  User requests to list contacts
-2.  KnottyPlanners shows a list of contacts
-3.  User requests to view all tags for a specific contact
-4.  KnottyPlanners shows all tags for that contact
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given name is invalid.
-
-    * 3a1. KnottyPlanners shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UC05 - Search for a specific contact by name**
+**Use case: UC04 - Search for a specific contact by name**
 
 **MSS**
 
@@ -413,19 +390,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given criterion is invalid.
+* 1a. The given criterion is invalid.
 
-    * 2a1. KnottyPlanners shows an error message.
+    * 1a1. KnottyPlanners shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 2b. There are no contacts that matches the name.
+* 2a. There are no contacts that matches the name.
 
-    * 2ba1. KnottyPlanners shows an empty list.
+    * 2a1. KnottyPlanners shows an empty list.
 
   Use case ends.
 
-**Use case: UC06 - Search for a specific contact by job**
+**Use case: UC05 - Search for a specific contact by job**
 
 **MSS**
 
@@ -436,19 +413,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given criterion is invalid.
+* 1a. The given criterion is invalid.
 
-    * 2a1. KnottyPlanners shows an error message.
+    * 1a1. KnottyPlanners shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 2b. There are no contacts that matches the job.
+* 2a. There are no contacts that matches the job.
 
-    * 2ba1. KnottyPlanners shows an empty list.
+    * 2a1. KnottyPlanners shows an empty list.
 
   Use case ends.
 
-**Use case: UC07 - Edit a contact's details**
+**Use case: UC06 - Edit a contact's details**
 
 **MSS**
 
@@ -477,7 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: UC08 - Adding a new wedding**
+**Use case: UC07 - Adding a new wedding**
 
 **MSS**
 
@@ -500,7 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC09 - Deleting a wedding**
+**Use case: UC08 - Deleting a wedding**
 
 **MSS**
 
@@ -524,6 +501,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: UC09 - Viewing a wedding**
+
+**MSS**
+
+1. User requests to view a specific wedding
+2. KnottyPlanners shows a list of people associated with that wedding
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 1b. The wedding is not yet created.
+
+    * 1b1. KnottyPlanners shows an error message that prompts users to create a wedding.
+
+      Use case ends.
+
+* 1c. KnottyPlanner detects other errors in the entered input.
+
+    * 1c1. KnottyPlanners shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
