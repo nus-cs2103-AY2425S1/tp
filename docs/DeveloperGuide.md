@@ -480,10 +480,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor request today's appointments
+1. Doctor request appointments for a specific date
 2. WardWatch displays Appointments for the day
 3. Doctor request to delete a specific appointment tied to a patient
-4. WardWatch deletes Appointment
+4. WardWatch deletes specified appointment
 
    Use case ends.
 
@@ -491,13 +491,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The delete appointment command format entered is invalid
 
-    * 1a1. WardWatch shows an error message.
+    * 1a1. WardWatch shows an incorrect format error message.
 
       Use case resumes at step 3.
   
 * 3b. The Appointment does not exist
 *
-    * 2a1. WardWatch shows an error message.
+    * 2a1. WardWatch shows a appointment does not exist error message.
 
       Use case resumes at step 3.
 
@@ -516,7 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The information format entered is invalid
 
-    * 3a1. WardWatch shows an error message.
+    * 3a1. WardWatch shows an incorrect appointment format error message.
 
       Use case resumes at step 1.
 
@@ -533,7 +533,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The date format is invalid
 
-    * 1a1. WardWatch shows an error message.
+    * 1a1. WardWatch shows an invalid date error message.
 
       Use case resumes at step 1.
 
@@ -567,7 +567,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Patient Notes format is invalid 
 
-    * 1a1. WardWatch shows an error message.
+    * 1a1. WardWatch shows a invalid note description error message.
 
       Use case resumes at step 1.
 
@@ -584,7 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Patient Notes field is empty
 
-    * 1a1. WardWatch shows an error message.
+    * 1a1. WardWatch shows a notes is already empty error message.
 
       Use case resumes at step 1.
 
