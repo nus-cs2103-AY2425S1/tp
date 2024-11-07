@@ -27,7 +27,17 @@ public class SortCommandTest {
 
     @Test
     public void execute_listIsAlreadySorted_showsSameList() {
-        assertCommandSuccess(new SortCommand(), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        //Note: list is sorted by latest by default
+        assertCommandSuccess(new SortCommand("latest"), model, SortCommand.MESSAGE_SUCCESS_LATEST, expectedModel);
+        assertEquals(model, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsSortedMultipleTimes_showsSameList() {
+        //Note: list is sorted by latest by default
+        //If we sort by another comparator, then sort by the initial comparator, the list should still be the same
+        assertCommandSuccess(new SortCommand("name"), model, SortCommand.MESSAGE_SUCCESS_NAME, expectedModel);
+        assertCommandSuccess(new SortCommand("latest"), model, SortCommand.MESSAGE_SUCCESS_LATEST, expectedModel);
         assertEquals(model, expectedModel);
     }
 }
