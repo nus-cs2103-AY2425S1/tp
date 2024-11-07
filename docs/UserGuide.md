@@ -17,7 +17,10 @@ Tuteez is a **desktop address book app designed specifically for tech-savvy priv
       + [Adding a person: `add`](#adding-a-person-add)
       + [Listing all persons : `list`](#listing-all-persons-list)
       + [Editing a person : `edit`](#editing-a-person-edit)
-      + [Adding or Deleting a Remark: `remark`](#adding-or-deleting-a-remark-remark)
+      + [Adding a Remark: `addremark` or `addrmk`](#adding-a-remark-addremark-or-addrmk)
+      + [Deleting a Remark: `deleteremark` or `delrmk`](#deleting-a-remark-deleteremark-or-delrmk)
+      + [Adding Lessons: `addlesson` or `addlsn`](#adding-lessons-addlesson-or-addlsn)
+      + [Deleting Lessons: `deletelesson` or `dellsn`](#deleting-lessons-deletelesson-or-dellsn)
       + [Locating persons by name: `find`](#locating-persons-by-name-find)
       + [Deleting a person : `delete`](#deleting-a-person-delete)
       + [Displaying Student Information: `display`](#displaying-student-information-display)
@@ -158,28 +161,34 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 l/tuesday 0900-1100` Edits the lesson of the 3rd student to be `MONDAY 0900-1100`.
 
-### Adding or Deleting a Remark: `remark`
+### Adding a Remark: `addremark` or `addrmk`
 
 Allows the tutor to add or delete a remark for a specific student in Tuteez.
 
-Format:
-- `remark INDEX -a REMARK` to add a remark to the student at the specified `INDEX`.
-- `remark INDEX -d REMARK_INDEX` to delete a remark at the specified `REMARK_INDEX` from the student at `INDEX`.
+Format: `addremark INDEX r/REMARK` to add a remark to the student at the specified `INDEX`.
 
 * Adds a new remark to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added.
-* When deleting, if the `REMARK_INDEX` is not valid, an error will be shown.
 * You can add any text as a remark, and remarks are displayed in the order they were added.
 
 <box type="tip" seamless>
 
-**Tip:** You can also use the abbreviated command `rmk` as a shortcut for `remark`.
+**Tip:** You can also use the abbreviated command `addrmk` as a shortcut for `addremark`.
 </box>
 
 Examples:
-* `remark 1 -a Great progress in Math` Adds the remark "Great progress in Math" to the first student.
-* `remark 2 -a Needs improvement in English` Adds the remark "Needs improvement in English" to the second student.
-* `remark 1 -d 2` Deletes the second remark of the first student.
+* `remark 1 r/Great progress in Math` Adds the remark "Great progress in Math" to the first student.
+
+### Deleting a Remark: `deleteremark` or `delrmk`
+
+Allows the tutor to delete a remark for a specific student in Tuteez.
+
+Format: `deleteremark INDEX ri/REMARK_INDEX` to add a remark to the student at the specified `INDEX`.
+
+* Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added.
+* When deleting, if the `REMARK_INDEX` is not valid, an error will be shown.
+
+Examples:
+* `deleteremark 1 ri/2` Deletes the second remark of the first student in the displayed student list.
 
 ### Adding Lessons: `addlesson` or `addlsn`
 
