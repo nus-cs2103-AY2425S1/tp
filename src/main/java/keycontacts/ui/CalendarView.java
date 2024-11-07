@@ -3,6 +3,7 @@ package keycontacts.ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -198,10 +199,9 @@ public class CalendarView extends UiPart<Region> {
         }
 
         for (int i = 0; i < uniqueGroupStudents.size(); i++) {
-            Color groupColor = CALENDAR_COLORS.get(i % CALENDAR_COLORS.size());
-
             Student student = uniqueGroupStudents.get(i);
             String name = student.getGroup().isNoGroup() ? student.getName().fullName : student.getGroup().groupName;
+            Color groupColor = CALENDAR_COLORS.get(Math.abs(Objects.hash(name)) % CALENDAR_COLORS.size());
 
             RegularLesson regularLesson = student.getRegularLesson();
             if (regularLesson != null) {
