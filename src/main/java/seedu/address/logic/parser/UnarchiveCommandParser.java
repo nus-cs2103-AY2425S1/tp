@@ -10,8 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.commands.ArchiveCommand.ArchivePersonDescriptor;
+import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
