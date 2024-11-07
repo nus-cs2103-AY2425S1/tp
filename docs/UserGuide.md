@@ -235,16 +235,18 @@ Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 | **Networking**| `network`                | Green |
 | **Mentorship**| `mentor`                 | Pink  |
 
-* All tags are categorized 'General' by default.
+* All tags are categorized `General` by default.
 * Multiple tags can be categorized to the same category at a time.
 * All tags specified must be valid existing tags.
 * Attempts to set a tag to its current category will cause the whole command to be rejected.
 * Only one category is allowed to be entered per command, i.e. `cattag t/tag1 acads t/tag2 general` is not allowed.
 
 Examples:
-* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics`
-* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` 
+* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and color of `t/CS2100` become `Gold`.
+* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with color `Blue`. 
+* Not-yet categorized tags have color `Grey` by default.
 
+![cattag response image](images/cattagResponse.png)
 ### Undo a command : `undo`
 
 Undoes the previous command and reverts CampusConnect.
