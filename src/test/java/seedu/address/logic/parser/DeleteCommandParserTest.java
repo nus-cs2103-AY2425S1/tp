@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 
 /**
@@ -69,5 +70,11 @@ public class DeleteCommandParserTest {
         String expectedMessage = "Invalid command format! \n"
                 + "Please provide at least one of the following: name, phone, or email.";
         assertParseFailure(parser, "a", expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidPrefix_failure() {
+        assertParseFailure(parser, "delete n/Alice Pauline p/94351253 e/alice@example.com m/None",
+              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }

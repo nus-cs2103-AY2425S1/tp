@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
@@ -109,6 +110,12 @@ public class ScheduleCommandParserTest {
         String multipleDates = " d/2/12/2024 1800 d/3/12/2024 1400";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(multipleDates));
         assertTrue(thrown.getMessage().contains("Invalid command format"));
+    }
+
+    @Test
+    public void parse_invalidPrefix_failure() {
+        assertParseFailure(parser, " d/ 16/2/2024 t/High Risk",
+              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
     }
 
 }
