@@ -520,7 +520,7 @@ Fields
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking
 * `ATTENDANCE`: Date to mark the attendance for
-    * Must be in format dd/MM/yyyy and cannot be a future date
+    * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -566,7 +566,7 @@ Fields
 
 * `TUTORIAL`: Name of the tutorial to mark the attendance for all students
 * `ATTENDANCE`: Date to mark the attendance for
-    * Must be in format dd/MM/yyyy and cannot be a future date
+    * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -612,7 +612,7 @@ Fields
   * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking.
 * `ATTENDANCE`: Date to unmark the attendance for.
-  * Must be in format dd/MM/yyyy and cannot be a future date
+  * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -1009,5 +1009,5 @@ dd/MM/yyyy</code>
 
 2. **If you minimize the Help Window** and then run the help command (or use the Help menu, or the keyboard shortcut F1) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-3. **If the UI does not update automatically** on modifying student's details such as attendance and enrolling in tutorial, manually click on the area containing the student's details. If the UI still does not update, try restarting the application.
+3. **If the UI does not update automatically** on modifying student's details such as attendance and enrolling in tutorial, manually click on the area containing the student's details or use command `list` to manually trigger an update. If the UI still does not update, try restarting the application.
 
