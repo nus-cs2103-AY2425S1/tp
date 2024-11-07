@@ -377,7 +377,7 @@ _Details coming soon ..._
 **Q**: I am unfamiliar with command-line interfaces. How should I begin using EduContacts?<br>
 **A**: We recommend starting with the **Quick Start** section of the user guide, which provides essential steps for setup and installation. Once you have the application running, utilize the `help` command or Help button to view a comprehensive list of available commands and their functions. Additionally, the **Features** section offers detailed instructions and examples for each command. We recommend familiarizing yourself with these resources as it will enhance your experience with EduContacts.
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduContacts home folder.
 
 **Q**: Is there a way to recover accidentally deleted contacts?<br>
