@@ -147,7 +147,7 @@ public class AddExistingTaskToGroupCommand extends Command {
         txt += "\n";
         return txt;
     }
-  
+
     @Override
     public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
         versionHistory.addVersion(model);
