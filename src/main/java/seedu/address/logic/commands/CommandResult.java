@@ -127,11 +127,7 @@ public class CommandResult {
                 && exit == otherCommandResult.exit
                 && list == otherCommandResult.list
                 && personIndex == otherCommandResult.personIndex
-                && hasPrompt == otherCommandResult.hasPrompt
-                && isPopup == otherCommandResult.isPopup
-                && identityNumber.equals(otherCommandResult.identityNumber)
-                && appointmentDate.equals(otherCommandResult.appointmentDate)
-                && logEntry.equals(otherCommandResult.logEntry);
+                && hasPrompt == otherCommandResult.hasPrompt;
     }
 
     @Override
@@ -148,10 +144,6 @@ public class CommandResult {
                 .add("prompt", hasPrompt)
                 .add("list", list)
                 .add("personIndex", personIndex)
-                .add("isPopup", isPopup)
-                .add("identityNumber", identityNumber)
-                .add("appointmentDate", appointmentDate)
-                .add("logEntry", logEntry)
                 .toString();
     }
 
