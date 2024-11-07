@@ -6,7 +6,7 @@ pageNav: 3
 
 # ClientGrid User Guide
 
-ClientGrid is an **address book** targeted for English-speaking real estate agents within Singapore to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor the buying or selling process while maintaining core address book functionality. The default language of communication of ClientGrid is English.
+ClientGrid is an address book targeted for English-speaking real estate agents within Singapore to efficiently manage client contacts, properties and meeting schedule. It provides a streamlined way to organize these data while maintaining core address book functionality. The default language of communication in ClientGrid is English.
 
 
 <!-- * Table of Contents -->
@@ -16,11 +16,11 @@ ClientGrid is an **address book** targeted for English-speaking real estate agen
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java 17 or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-2/tp/releases).
+1. Download the latest .jar file from [here](https://github.com/AY2425S1-CS2103T-T16-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for ClientGrid.
+1. Copy the file to an empty folder that you want to use as the _home folder_ for ClientGrid.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clientGrid.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -31,7 +31,7 @@ ClientGrid is an **address book** targeted for English-speaking real estate agen
 
    * `list k/clients` : Lists all clients.
 
-   * `addbuyer n/John p/12345678 e/john@gmail.com` : Adds a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
+   * `addbuyer n/John p/81234567 e/john@gmail.com` : Adds a buyer whose name is `John`, phone number is `81234567` and email is `john@gmail.com`.
 
    * `deletebuyer p/81234567` : Deletes the buyer with contact number `81234567`.
    
@@ -54,10 +54,10 @@ ClientGrid is an **address book** targeted for English-speaking real estate agen
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `addbuyer n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. In `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`, `BUYER_NAME` is a parameter which can be used as `addbuyer n/John p/81234567 e/john@gmail.com`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. If the command specifies `n/BUYER_NAME e/BUYER_EMAIL p/BUYER_PHONE_NUMBER`, `e/BUYER_EMAIL p/BUYER_PHONE_NUMBER n/BUYER_NAME` is also acceptable.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -72,12 +72,12 @@ Format: `help`
 
 ### Listing ClientGrid records: `list`
 
-Shows a list of all existing buyers, sellers, clients (i.e., buyers and sellers), properties, and meetings in ClientGrid.
+Shows a list of all existing buyers, sellers, clients (i.e. buyers and sellers), properties, or meetings in ClientGrid.
 
 Format: `list k/KEY`
 
 * The `list` command displays records based on the specified `KEY`.
-* The `KEY` must be one of the following: `buyers`, `sellers`, `clients`, `meetings`, or `properties`.
+* The `KEY` must be one of the following: `buyers`, `sellers`, `clients`, `properties`, or `meetings`.
     * `buyers`: Lists all buyers in the client book.
     * `sellers`: Lists all sellers in the client book.
     * `clients`: Lists all clients (i.e. buyers and sellers combined) in the client book.
@@ -86,10 +86,15 @@ Format: `list k/KEY`
 
 * If an invalid `KEY` is provided, an error message will be displayed.
 
-Key Considerations:
-* Only accepts "buyers", "sellers", "clients", "properties", and "meetings" (case-insensitive) as valid inputs for `k/KEY`.
-* The `KEY` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed, and the input will be converted into an array of words. The `KEY` also ignores UPPER/lower case. All names will be converted to lower case and checked against the list of valid keys.
-* If the user provides an invalid key, the system will respond with an error message indicating that only the valid keys are accepted.
+<box type="info" seamless>
+
+**Key Considerations:**
+
+1. Only accepts "buyers", "sellers", "clients", "properties", and "meetings" (case-insensitive) as valid inputs for `k/KEY`.
+2. The `KEY` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed, and the input will be converted into an array of words. The `KEY` also ignores UPPER/lower case. All keys will be converted to lower case and checked against the list of valid keys.
+3. If the user provides an invalid key, the system will respond with an error message indicating that only the valid keys are accepted.
+
+</box>
 
 Examples:
 * `list k/buyers` displays a list of all existing buyers in ClientGrid.
