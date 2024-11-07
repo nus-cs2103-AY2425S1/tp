@@ -70,6 +70,12 @@ public interface Logic {
 
     void setMostRecentTaskDisplay();
 
+    String getMostRecentGroupDisplay();
+
+    void setMostRecentGroupDisplay(String string);
+
+    void setMostRecentGroupDisplay();
+
     void setStateStudents();
 
     void setStateGroups();

@@ -145,8 +145,9 @@ public class AddStudentToGroupCommand extends Command {
             throw new CommandException(MESSAGE_EXCEED_GROUP_SIZE);
         }
 
-        model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(toAddInto));
         model.setStateGroups();
+        model.setMostRecentGroupDisplay(toAddInto.getGroupName());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAddInto), studentsAdded),
             LIST_GROUP_MARKER);
     }

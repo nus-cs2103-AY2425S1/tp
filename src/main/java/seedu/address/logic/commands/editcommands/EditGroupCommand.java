@@ -66,7 +66,7 @@ public class EditGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Group> lastShownList = model.getFilteredGroupList();
+        List<Group> lastShownList = model.getAddressBook().getGroupList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }

@@ -1276,8 +1276,10 @@ testers are expected to do more _exploratory_ testing.
        Expected: This command will yield an error message because there is nothing to undo.
 
     1. Test case: `ag cs2103-f13-1`, then `undo`<br>
-       Expected: The add command will add a group which is reflected in the group list. The undo command then restores
-       the previous data, removing this group. The removal is also reflected in the group list shown to you.
+       Expected: The add command will add a group which is reflected in the group list. The undo command then restores 
+       the previous data, removing this group. The removal is also reflected in the group list shown to you. After
+       executing the command you will be brought back to the default panel of the application, which is the panel
+       displaying the student list.
 
 ### Redo
 
@@ -1290,8 +1292,9 @@ testers are expected to do more _exploratory_ testing.
 
     1. Test case: `ag cs2103-f13-1`, `undo`, then `redo`<br>
        Expected: The add command will add a group which is reflected in the group list. The undo command then restores
-       the previous data, removing this group. Redoing this will reverse the undo command, bringing the group back into
-       the group list shown to you.
+       the previous data, removing this group. Redoing this will reverse the undo command, bringing the group back into 
+       the group list shown to you. After executing the command you will be brought back to the default panel of the 
+       application, which is the panel displaying the student list.
 
 ---
 

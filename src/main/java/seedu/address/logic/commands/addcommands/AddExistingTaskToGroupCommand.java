@@ -67,7 +67,7 @@ public class AddExistingTaskToGroupCommand extends Command {
             .map(g -> model.getGroupByName(g.getGroupName()))
             .toList();
 
-        List<Task> lastShownTaskList = model.getFilteredTaskList();
+        List<Task> lastShownTaskList = model.getAddressBook().getTaskList();
         if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
@@ -136,6 +136,8 @@ public class AddExistingTaskToGroupCommand extends Command {
         }
 
         model.updateFilteredTaskList(task -> task.equals(taskToAdd));
+        model.setMostRecentTaskDisplay(taskToAdd);
+        model.setStateTasks();
         return new CommandResult(String.format(successMessage.toString(), taskToAdd.getTaskName())
             + errorMessage, LIST_TASK_MARKER);
     }

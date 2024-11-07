@@ -133,6 +133,8 @@ public class ModelManager implements Model {
         return userPrefs.getMostRecentTaskDisplay();
     }
 
+
+
     @Override
     public void setMostRecentTaskDisplay() {
         Task taskToUpdate = userPrefs.getMostRecentTaskDisplay();
@@ -147,6 +149,28 @@ public class ModelManager implements Model {
     public void setMostRecentTaskDisplay(Task task) {
         userPrefs.setMostRecentTaskDisplay(task);
         updateFilteredTaskList(x -> x.equals(task));
+    }
+
+    @Override
+    public String getMostRecentGroupDisplay() {
+        return userPrefs.getMostRecentGroupDisplay();
+    }
+
+
+    @Override
+    public void setMostRecentGroupDisplay(String string) {
+        userPrefs.setMostRecentGroupDisplay(string);
+        updateFilteredGroupList(x -> x.getGroupName().getGroupName().equals(string));
+    }
+
+    @Override
+    public void setMostRecentGroupDisplay() {
+        String groupToUpdate = userPrefs.getMostRecentGroupDisplay();
+        if (groupToUpdate != "") {
+            updateFilteredGroupList(x -> groupToUpdate.equals(x.getGroupName().getGroupName()));
+        } else {
+            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        }
     }
 
     @Override
