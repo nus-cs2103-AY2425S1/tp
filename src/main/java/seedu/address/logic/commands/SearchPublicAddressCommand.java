@@ -8,7 +8,6 @@ import static seedu.address.model.addresses.PublicAddress.validatePublicAddress;
 
 import java.util.List;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Person;
@@ -67,7 +66,7 @@ public class SearchPublicAddressCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -76,16 +75,16 @@ public class SearchPublicAddressCommand extends Command {
             .toList();
 
 
-        return new CommandResult(generateSuccessMessage(personsWithPublicAddressMatch));
+        return generateResult(personsWithPublicAddressMatch);
     }
 
 
     /**
-     * Generates a command execution success message based on whether
-     * the remark is added to or removed from
+     * Generates a Result object success message based on whether
+     * success of searching for a public address.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(List<Person> personsWithPublicAddressMatch) {
+    private CommandResult generateResult(List<Person> personsWithPublicAddressMatch) {
         String output;
         if (!personsWithPublicAddressMatch.isEmpty()) {
             String message = MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND;
@@ -99,7 +98,7 @@ public class SearchPublicAddressCommand extends Command {
             String message = MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
             output = String.format(message, publicAddressString);
         }
-        return output;
+        return new CommandResult(output);
 
 
     }
