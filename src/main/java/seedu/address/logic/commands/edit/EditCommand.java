@@ -60,7 +60,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "%1$s\nEdited Person: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PHONE_AND_EMAIL = "This email and this phone number already exist in the address book.";
+    public static final String MESSAGE_DUPLICATE_PHONE_AND_EMAIL =
+            "This email and this phone number already exist in the address book.";
     public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number already exists in the address book";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
     public static final String MESSAGE_INVALID_VALUES = "Edit failed due to invalid values provided: %1$s";
