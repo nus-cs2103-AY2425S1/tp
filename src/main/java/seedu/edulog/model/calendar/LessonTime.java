@@ -88,29 +88,6 @@ public class LessonTime {
         return endTime.time.isBefore(startTime.time);
     }
 
-    /**
-     * Returns if the current lesson time occurs before the provided time in the argument.
-     */
-    public boolean isBefore(LessonTime otherTime) {
-        return time.isBefore(otherTime.time);
-    }
-
-    /**
-     * Returns if 2 lesson times provided contain the 3rd lesson time,
-     *     e.g. "1200" and "1400" containing "1230" or "1315" or "1400".
-     * @param lower start time.
-     * @param upper end time. Pre-condition: end time must be after (or equal to) the end time.
-     * @param between time to test if it is between the provided times.
-     */
-    public static boolean contains(LessonTime lower, LessonTime upper, LessonTime between) {
-        requireAllNonNull(lower, upper, between);
-
-        boolean boundedByLower = lower.isBefore(between) || lower.equals(between);
-        boolean boundedByUpper = between.isBefore(upper) || between.equals(upper);
-
-        return boundedByLower && boundedByUpper;
-    }
-
     // Printing and identity fns ================================================================================
 
     /**
