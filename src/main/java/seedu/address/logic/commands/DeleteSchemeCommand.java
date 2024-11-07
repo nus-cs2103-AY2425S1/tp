@@ -37,8 +37,7 @@ public class DeleteSchemeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a scheme from the person identified by the "
             + "index number used in the displayed person list.\n"
-            + "This command can only be used after Scheme command.\n"
-            + "Parameters: PERSON_INDEX SCHEME_INDEX (both must be positive integers)\n"
+            + "Parameters: PERSON_INDEX i/SCHEME_INDEXES (both must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 i/1";
     private final Index personIndex;
     private final ArrayList<Index> schemeIndex = new ArrayList<>();
@@ -79,7 +78,12 @@ public class DeleteSchemeCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        return new CommandResult(String.format(MESSAGE_DELETE_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
+        StringBuilder commandResult = new StringBuilder();
+        commandResult.append(String.format(MESSAGE_DELETE_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
+        for (int i = 0; i < schemesToBeDeleted.size(); i++) {
+            commandResult.append((i + 1 + ". ")).append(schemesToBeDeleted.get(i).getSchemeName()).append("\n");
+        }
+        return new CommandResult(commandResult.toString());
     }
 
     /**

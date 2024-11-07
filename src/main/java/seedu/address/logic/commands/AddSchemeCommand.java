@@ -39,8 +39,7 @@ public class AddSchemeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a scheme to the person identified by the "
             + "index number used in the displayed person list.\n"
-            + "This command can only be used after Scheme command.\n"
-            + "Parameters: PERSON_INDEX SCHEME_INDEX (both must be positive integers)\n"
+            + "Parameters: PERSON_INDEX i/SCHEME_INDEX (both must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 i/1";
 
     private final Index personIndex;
@@ -86,7 +85,8 @@ public class AddSchemeCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        return new CommandResult(String.format(MESSAGE_ADD_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_ADD_SCHEME_PERSON_SUCCESS, editedPerson.getName(),
+                targetScheme.getSchemeName()));
     }
 
     /**
