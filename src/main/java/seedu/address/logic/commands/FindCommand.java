@@ -26,7 +26,8 @@ public class FindCommand extends Command {
             + "12345678";
 
     public static final String MESSAGE_FIND_PERSON_SUCCESS = "Found Student: %1$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "No student is found with Student ID: %1$s";
+    public static final String MESSAGE_PERSON_NOT_FOUND =
+            "No student with Student ID: %1$s is currently being displayed";
     private final StudentId studentId;
 
     /**
