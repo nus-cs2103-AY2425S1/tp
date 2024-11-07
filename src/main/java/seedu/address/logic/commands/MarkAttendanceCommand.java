@@ -42,7 +42,7 @@ public class MarkAttendanceCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n"
             + "Their student numbers are as follows: %s" + "\n"
-            + "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
+            + "Usethe following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
             + PREFIX_DATE + "DATE "
             + PREFIX_PRESENT + "STATUS : 'p' or 'a' "
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER " + "to mark the attendance.";
