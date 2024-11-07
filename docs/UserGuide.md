@@ -215,32 +215,35 @@ The table below explains each of the parameter available in NovaCare.
 It will provide the limitations and examples of the parameter.
 <box type = "warning" seamless>
 
+**Warning:**<br>
+
 The parameters must follow the limitations as shown below.
 Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:
 ![failCommand](images/failAdd.png)
 </box>
 
-| Parameter   | Description             | Limitations                                                                                                                                                                                                                                                                                                                                                           | Example                                                                                 |
-|-------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
-| **NAME**    | Name of patient         | * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                         | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                         |
-|**EMERGENCY_CONTACT_NAME**| Name of emergency contact| * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                         | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                         |
-| **PHONE_NUMBER** | Phone number of patient | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.                                                                                                                                                                                                            | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x:`9123 4567`   |
-| **EMERGENCY_CONTACT_NUMBER** | Phone number of emergency contact | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.                                                                                                                                                                                                            | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x:`9123 4567`   |
-| **EMAIL**   | Email of patient        | *Format must be in `LOCAL-PART@DOMAIN`.<br/> *No space allowed.<br/> * `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> * `LOCAL-PART` local-part may not start or end with any special character.<br/> * `DOMAIN` must be at least 2 characters long, start and end with alphanumeric characters. | :white_check_mark: `thomasho@gmail.com`<br/>:x: `$thomas@gmail.com`(`LOCAL-PART` error) |
-| **ADDRESS** | Address of patient      | * Address should not be blank.<br/> * Address can take any values                                                                                                                                                                                                                                                                                                     | :white_check_mark: `123, Clementi Rd, 1234665`<br/>                                     |
-| **TAG**     | Tag of patient          | * Tags take alphanumeric and spaces                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `high blood pressure`<br/>:x:`low income $`                          |
-| **INDEX**   | Index of patient on GUI | * Index should be a positive integer.<br/> * Index should not be blank.]                                                                                                                                                                                                                                                                                              | :white_check_mark: `1`<br/>:x: `0`                                                      |
-| **DESCRIPTION** | Description of task | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                            | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                        |
-|**PRIORITY_LEVEL** | Priority level of patient | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `1`<br/>:x: `4`                                                      |
+| Parameter   | Description             | Limitations                                                                                                                                                                                                                                                                                                                                                             | Example                                                                                      |
+|-------------|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| **NAME**    | Name of patient         | * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                           | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
+|**EMERGENCY_CONTACT_NAME**| Name of emergency contact| * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                           | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
+| **PHONE_NUMBER** | Phone number of patient | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.                                                                                                                                                                                                              | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
+| **EMERGENCY_CONTACT_NUMBER** | Phone number of emergency contact | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.                                                                                                                                                                                                              | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
+| **EMAIL**   | Email of patient        | * Format must be in `LOCAL-PART@DOMAIN`.<br/> * No space allowed.<br/> * `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> * `LOCAL-PART` local-part may not start or end with any special character.<br/> * `DOMAIN` must be at least 2 characters long, start and end with alphanumeric characters. | :white_check_mark: `thomasho@gmail.com`<br/>:x: `$thomas@gmail.com`<br/>(`LOCAL-PART` error) |
+| **ADDRESS** | Address of patient      | * Address should not be blank.<br/> * Address can take any values                                                                                                                                                                                                                                                                                                       | :white_check_mark: `123, Clementi Rd, 1234665`<br/>                                          |
+| **TAG**     | Tag of patient          | * Tags take alphanumeric and spaces                                                                                                                                                                                                                                                                                                                                     | :white_check_mark: `high blood pressure`<br/>:x:`low income $`                               |
+| **INDEX**   | Index of patient on GUI | * Index should be a positive integer.<br/> * Index should not be blank.]                                                                                                                                                                                                                                                                                                | :white_check_mark: `1`<br/>:x: `0`                                                           |
+| **DESCRIPTION** | Description of task | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                              | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                             |
+|**PRIORITY_LEVEL** | Priority level of patient | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                     | :white_check_mark: `1`<br/>:x: `4`                                                           |
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-## Patient Commands
+### Patient Commands
 In NovaCare, these commands will allow you to modify your list of patients to suit your needs.
+<br></br>
 
-### Adding a patient: `add`
+#### Adding a patient: `add`
 
-Adds a patient details to the system.
+Adds a patient's details to the system.
 
 :pencil: Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -263,21 +266,23 @@ Adds a patient details to the system.
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into the system.
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tagges as `Diabetic` to the system.
+<br></br>
 
-### Listing all patients : `list`
+#### Listing all patients: `list`
 
 Shows a list of all patients in the system.
 
 :pencil: Format: `list`
 
 Example:
-* `list` lists all the patients in the system and displays them.
+* `list` lists and displays all the patients in the system.
+<br></br>
 
-### Editing a patient : `edit`
+#### Editing a patient: `edit`
 
-Edits an existing patient in the system.
+Edits an existing patient's details in the system.
 
 :pencil: Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -293,12 +298,13 @@ Edits an existing patient in the system.
 </box>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+<br></br>
 
-### Locating patients by name: `find`
+#### Locating patients by name: `find`
 
-Finds patients whose names contain any of the given keywords.
+Finds patients whose name contains any of the given keywords.
 
 :pencil: Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -315,10 +321,12 @@ Finds patients whose names contain any of the given keywords.
 
 Examples:
 * `find John` returns any patient that has the name John inside, for instance `john` and `John Doe`
-* `find alex david` returns any patient with names containing either "Alex" or "David". This means it will return any patient whose name includes either "Alex" or "David" as part of their name. `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns any patient with names containing either "Alex" or "David". This means it will return any patient whose name includes either "Alex" or "David" as part of their name, for instance, `Alex Yeoh` or `David Li`<br>
+<br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+    <div style="text-align: center;"><i>Screenshot of NovaCare after running the `find alex david` command.</i></div><br>
 
-### Deleting a patient : `delete`
+#### Deleting a patient: `delete`
 
 Deletes the specified patient and tasks associated to that patient from the system.
 
@@ -334,10 +342,10 @@ Deletes the specified patient and tasks associated to that patient from the syst
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the system.
-* `find john doe` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+* `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
+<br></br>
 
-
-### Adding emergency contact : `emergency`
+#### Adding emergency contact: `emergency`
 
 Adds an emergency contact and details to a patient in the system.
 
@@ -352,13 +360,14 @@ Adds an emergency contact and details to a patient in the system.
 </box>
 
 Example:
-* `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
+* `emergency 1 n/Tom Tan p/91237171` adds an emergency contact `Tom Tan` with contact number `91237171` to the 1st-indexed patient in the patient list.
+<br></br>
 
-### Deleting emergency contact : `delemergency`
+#### Deleting emergency contact: `deleteemergency`
 
 Deletes an emergency contact and its details from a patient in the system.
 
-:pencil: Format: `delemergency INDEX
+:pencil: Format: `deleteemergency INDEX
 
 <box type="info" seamless>
 
@@ -369,13 +378,14 @@ Deletes an emergency contact and its details from a patient in the system.
 </box>
 
 Example:
-* `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
+* `deleteemergency 1` deletes the emergency contact of the 1st-indexed patient in the patient list.
+<br></br>
 
-### Adding priority level : `priority`
+#### Adding priority level: `priority`
 
 Adds an priority level to a patient in the system.
 
-:pencil: Format: `priority INDEX /level PRIORITY_LEVEL`
+:pencil: Format: `priority INDEX l/PRIORITY_LEVEL`
 
 <box type="info" seamless>
 
@@ -387,9 +397,10 @@ Adds an priority level to a patient in the system.
 </box>
 
 Example:
-* `priority 1 /level 2` adds priority level `2` to 1st index in patient list.
+* `priority 1 l/2` adds priority level `2` to 1st-indexed patient in the patient list.
+<br></br>
 
-### Deleting priority level : `deletelevel`
+#### Deleting priority level: `deletelevel`
 
 Delete a priority level to a patient in the system, resetting it to the default value **3**.
 
@@ -404,15 +415,16 @@ Delete a priority level to a patient in the system, resetting it to the default 
 </box>
 
 Examples:
-* `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
-* `priority 1 l/reset` resets the priority level of the 1st indexed patient in the patient list.
+* `deletelevel 1` deletes priority level of the 1st-indexed patient in the patient list.
+* `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3S.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-## Task commands
-In NovaCare, these commands will allow you to modify your list of tasks, each task being specific to each patient to suit your needs.
+### Task commands
+In NovaCare, these commands will allow you to modify your list of tasks, with each task being specific to each patient to suit your needs.
+<br></br>
 
-### Adding a task : `addtask`
+#### Adding a task: `addtask`
 
 Adds a task to a patient in the system.
 
@@ -427,12 +439,14 @@ Adds a task to a patient in the system.
 </box>
 
 Examples:
-* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the system.
-* `find John doe` followed by `addtask 1 d/Clear diapers` deletes the 1st patient in the results of the `find` command.
-![Patient List](images/PersonListExample.png)
-![Task List](images/TaskListExample.png)
+* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd-indexed patient in the system.
+* `find John doe` followed by `addtask 1 d/Clear diapers` adds a task `Clear diapers` to the 1st-indexed patient in the resultant list produced from the `find` command.
+<br></br>
+  ![Patient List](images/PersonListExample.png)
+  ![Task List](images/TaskListExample.png)
+<br></br>
 
-### Deleting a task : `deletetask`
+#### Deleting a task: `deletetask`
 
 Deletes a task for a patient in the system.
 
@@ -447,9 +461,10 @@ Deletes a task for a patient in the system.
 </box>
 
 Example:
-* `deletetask 1` deletes the 1st task in the task list.
+* `deletetask 1` deletes the 1st-indexed task in the task list.
+<br></br>
 
-### Marking a Task : `marktask`
+#### Marking a Task: `marktask`
 
 Marks a task at a specific index.
 
@@ -464,41 +479,45 @@ Marks a task at a specific index.
 </box>
 
 Example:
-* `marktask 1` marks a task of the 1st index in task list.
+* `marktask 1` marks the 1st-indexed task in the task list as `Complete`.
+<br></br>
 
-### Finding a Task : `findtask`
+#### Finding a Task: `findtask`
 
-Finds all task for a particular Patient specific index.
+Finds all task for a particular patient specific index.
 
 :pencil: Format: `findtask INDEX`
 
 Example:
-* `marktask 1` marks a task of the 1st index in task list.
+* `findtask1 1` finds and displays all tasks for the 1st-indexed patient in the patient list.
+<br></br>
 
-### Listing Tasks : `listtask`
+#### Listing Tasks: `listtask`
 
 List all tasks for all patients in the system.
 
 :pencil: Format: `listtask`
 
 Example:
-* `listtask` lists all tasks in the system and displays them.
+* `listtask` lists and displays all tasks in the system.
+<br></br>
 
-### Listing Incomplete Tasks : `listincomplete`
+#### Listing Incomplete Tasks: `listincomplete`
 
 List all incomplete tasks for all patients in the system.
 
 :pencil: Format: `listincomplete`
 
 Example:
-* `listincomplete` lists all incomplete tasks in the system and displays them.
+* `listincomplete` lists and displays all incomplete tasks in the system.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-## General commands
+### General commands
 In NovaCare, these are the default commands for getting help, clearing and saving your patient and task data.
+<br></br>
 
-### Viewing help : `help`
+#### Viewing help: `help`
 
 Shows a message explaning how to access the help page.
 
@@ -515,8 +534,9 @@ Format: `help`
 
 Example:
 * `help` shows the help window which displays all commands available in NovaCare.
+<br></br>
 
-### Clearing all entries : `clear`
+#### Clearing all entries: `clear`
 
 Clears all patient and tasks entry from NovaCare.
 
@@ -531,8 +551,9 @@ Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.
 
 Example:
 * `clear` clears all available data in NovaCare, both patients and tasks.
+<br></br>
 
-### Exiting the program : `exit`
+#### Exiting the program: `exit`
 
 Exits the program.
 
@@ -543,13 +564,14 @@ Example:
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-## Data Management
+### Data Management
 
-### Saving the data
+#### Saving the data
 
 NovaCare data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<br></br>
 
-### Editing the data file
+#### Editing the data file
 
 NovaCare data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -559,8 +581,9 @@ NovaCare data are saved automatically as a JSON file `[JAR file location]/data/a
 If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+<br></br>
 
-### Archiving data files `[coming in v2.0]`
+#### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -597,9 +620,9 @@ _Details coming soon ..._
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ` <br> e.g., `add n/James Ho p/94391857 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/diabetes` |
 | **Edit**                  | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g., `edit 1 p/91234567 e/john13432@gmail.com`                                       |
 | **Change Priority**       | `priority INDEX l/PRIORITY_LEVEL` <br> e.g., `priority 1 l/2`                                                                                            |
-| **Delete Priority**       | `priority INDEX l/reset` <br> e.g., `priority 2 l/reset`                                                                                                      |
+| **Delete Priority**       | `priority INDEX l/reset` <br> e.g., `priority 2 l/reset`                                                                                                 |
 | **Add Emergency Contact** | `emergency INDEX n/EMERGENCY CONTACT NAME p/EMERGENCY CONTACT NUMBER` <br> e.g., `emergency 1 n/tom tan p/91237171`                                      |
-| **Delete Emergency Contact** | `delemergency INDEX` <br> e.g., `delemergency 1`                                                                                                         |
+| **Delete Emergency Contact** | `deleteemergency INDEX` <br> e.g., `deleteemergency 1`                                                                                                   |
 | **List**                  | `list`                                                                                                                                                   |
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
