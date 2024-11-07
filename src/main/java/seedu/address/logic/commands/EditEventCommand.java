@@ -48,13 +48,13 @@ public class EditEventCommand extends EditCommand {
             + " " + COMMAND_FIELD + " 1 "
             + PREFIX_EVENT_TIME + "2024-03-01 13:10 to 2024-03-01 19:30 "
             + PREFIX_EVENT_VENUE + "Broadway "
-            + PREFIX_EVENT_CELEBRITY + "John Doe "
+            + PREFIX_EVENT_CELEBRITY + "David Li "
             + PREFIX_EVENT_CONTACTS + "Alex Yeoh";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
-    public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event";
-    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in TalentHub.";
+    public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event!";
+    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list!";
     private final Index index;
     private final EditEventDescriptor editEventDescriptor;
 

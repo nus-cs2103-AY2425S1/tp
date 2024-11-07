@@ -43,9 +43,9 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_NAME + "Oscars "
             + PREFIX_EVENT_TIME + "2024-03-01 12:10 to 2024-03-01 18:30 "
             + PREFIX_EVENT_VENUE + "Hollywood "
-            + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney "
-            + PREFIX_EVENT_CONTACTS + "Jack Black "
-            + PREFIX_EVENT_CONTACTS + "Lebron James";
+            + PREFIX_EVENT_CELEBRITY + "Alex Yeoh "
+            + PREFIX_EVENT_CONTACTS + "Bernice Yu "
+            + PREFIX_EVENT_CONTACTS + "David Li";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in Talent Hub.";
