@@ -131,7 +131,7 @@ public class ClientDetailPanel extends UiPart<Region> {
             tagsGroup.getChildren().clear();
             setTier(client.getTier());
             setStatus(client.getStatus());
-            setRemarkText(client.getRemark().value);
+            setRemarkText(remarkLabel, client.getRemark().value);
             boolean hasTags = !tagsGroup.getChildren().isEmpty();
             setManagedAndVisible(tagsContainer, hasTags);
         } else {
@@ -151,8 +151,7 @@ public class ClientDetailPanel extends UiPart<Region> {
         }
     }
 
-    private void setRemarkText(String remarkText) {
-        Label remarkLabel = new Label(remarkText);
+    private void setRemarkText(Label remarkLabel, String remarkText) {
         if (remarkText.equalsIgnoreCase(CommandCommons.DEFAULT_REMARK)) {
             setLabelText(remarkLabel, "");
         } else {
