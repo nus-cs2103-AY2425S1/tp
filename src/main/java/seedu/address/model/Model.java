@@ -17,6 +17,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ARCHIVED_PERSONS = Person::isArchived;
+    Predicate<Person> PREDICATE_SHOW_CURRENT_PERSONS = PREDICATE_SHOW_ARCHIVED_PERSONS.negate();
     Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
@@ -103,6 +105,9 @@ public interface Model {
      */
     void updateSortingOrder(Comparator<Person> comparator);
 
+    /** Returns an unmodifiable view of the appointment list */
+    List<Appointment> getAppointmentList();
+
     /**
      * Adds the given appointment.
      * {@code appointment} must not conflict with any existing appointments.
@@ -110,19 +115,35 @@ public interface Model {
     void addAppointment(Appointment appointment);
 
     /**
+     * Adds the given appointment at the specified index.
+     * {@code appointment} must not conflict with any existing appointments.
+     */
+    void addAppointment(int index, Appointment appointment);
+
+    /**
+     * Replaces the appointment at the specified index with {@code appointment}.
+     */
+    void setAppointment(int index, Appointment appointment);
+
+    /**
      * Updates all appointments with {@code oldName} to {@code newName}.
      */
     void updateAppointments(Name oldName, Name newName);
 
     /**
-     * Deletes and returns the appointment at the specified index.
+     * Deletes the given appointment.
+     */
+    void deleteAppointment(Appointment appointment);
+
+    /**
+     * Deletes the appointment at the specified index and returns the deleted appointment.
      */
     Appointment deleteAppointment(int index);
 
     /**
-     * Deletes all appointments with the given name.
+     * Deletes all appointments with the given name and returns the deleted appointments.
      */
-    void deleteAppointments(Name name);
+    List<Appointment> deleteAppointments(Name name);
 
     /** Returns an unmodifiable view of the filtered appointment list */
     ObservableList<Appointment> getFilteredAppointmentList();
@@ -137,4 +158,9 @@ public interface Model {
      * Returns a list of appointments that conflict with the given appointment.
      */
     List<Appointment> getConflictingAppointments(Appointment appointment);
+
+    /**
+     * Returns a list of appointments that conflict with {@code newAppointment}, excluding {@code oldAppointment}.
+     */
+    List<Appointment> getConflictingAppointments(Appointment oldAppointment, Appointment newAppointment);
 }

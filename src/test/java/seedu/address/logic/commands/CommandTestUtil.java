@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -43,8 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_PRIORITY_BOB = "MEDIUM";
     public static final String VALID_REMARK_AMY = "Loves Taylor Swift.";
     public static final String VALID_REMARK_BOB = "Supports Manchester United.";
-    public static final String VALID_DATE_OF_BIRTH_AMY = "1 Jan 2000";
-    public static final String VALID_DATE_OF_BIRTH_BOB = "3 Jan 1989";
+    public static final LocalDate VALID_DATE_OF_BIRTH_AMY = LocalDate.of(2000, 1, 1);
+    public static final LocalDate VALID_DATE_OF_BIRTH_BOB = LocalDate.of(1989, 1, 3);
     public static final double VALID_INCOME_AMY = 1500.32;
     public static final double VALID_INCOME_BOB = 1300;
     public static final int VALID_FAMILY_SIZE_AMY = 1;
@@ -79,7 +81,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "CRITICAL"; // no such priority
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_DATE_OF_BIRTH_DESC = " " + PREFIX_DATE_OF_BIRTH + "99 Dec 0001"; // invalid date
+    public static final String INVALID_FUTURE_DATE_OF_BIRTH_DESC = " " + PREFIX_DATE_OF_BIRTH + "9999-01-01";
+    public static final String INVALID_FORMAT_DATE_OF_BIRTH_DESC = " " + PREFIX_DATE_OF_BIRTH + "99 Dec 0001";
     public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME + -323.32323;
     public static final String INVALID_FAMILY_SIZE_DESC = " " + PREFIX_FAMILY_SIZE + 0;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -103,7 +106,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -118,7 +121,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -141,8 +144,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered person list to show only the person at the given
+     * {@code targetIndex} in the {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
@@ -152,5 +155,18 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Collections.singletonList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered appointment list to show only the appointment at the given
+     * {@code targetIndex} in the {@code model}'s address book.
+     */
+    public static void showAppointmentAtIndex(Model model, Index targetindex) {
+        assertTrue(targetindex.getZeroBased() < model.getFilteredAppointmentList().size());
+
+        Appointment appointment = model.getFilteredAppointmentList().get(targetindex.getZeroBased());
+        model.updateFilteredAppointmentList(appointment::equals);
+
+        assertEquals(1, model.getFilteredAppointmentList().size());
     }
 }

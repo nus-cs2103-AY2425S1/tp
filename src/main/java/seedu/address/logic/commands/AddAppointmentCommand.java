@@ -10,6 +10,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -17,14 +19,14 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
- * Schedules an appointment with a person in SocialBook.
+ * Adds an appointment with a person in the address book.
  */
 public class AddAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "adda";
+    public static final String COMMAND_WORD = "addappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Schedules an appointment with a person in SocialBook.\n"
+            + ": Adds an appointment with a person in the address book.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "yyyy-MM-dd "
             + PREFIX_FROM + "HH:mm "
@@ -34,18 +36,17 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_FROM + "16:00 "
             + PREFIX_TO + "18:00";
 
-    public static final String MESSAGE_SUCCESS = "New appointment added:\n%s";
-    public static final String MESSAGE_INVALID_APPOINTMENT_TIME = "Appointment start time must be before end time";
-    public static final String MESSAGE_INVALID_APPOINTMENT_DATE = "Can't schedule appointments in the past";
-    public static final String MESSAGE_CONFLICTING_APPOINTMENTS = "Conflicting appointments found:\n%s";
+    public static final String MESSAGE_SUCCESS = "New appointment with %s added:\n%s";
 
     private final Index index;
     private final LocalDate date;
     private final LocalTime startTime;
     private final LocalTime endTime;
 
+    private Appointment appointment;
+
     /**
-     * Creates an AddAppointmentCommand to schedule an appointment with a family at the specified index.
+     * Creates an AddAppointmentCommand to schedule an appointment with a person at the specified index.
      */
     public AddAppointmentCommand(Index index, LocalDate date, LocalTime startTime, LocalTime endTime) {
         this.index = index;
@@ -60,46 +61,45 @@ public class AddAppointmentCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEXES);
-        }
-
-        if (!startTime.isBefore(endTime)) { // start time >= end time
-            throw new CommandException(MESSAGE_INVALID_APPOINTMENT_TIME);
-        }
-
-        if (date.isBefore(LocalDate.now()) // date < current date
-                || date.equals(LocalDate.now()) // date == current date
-                && !startTime.isAfter(LocalTime.now())) { // start time <= current time
-            throw new CommandException(MESSAGE_INVALID_APPOINTMENT_DATE);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person person = lastShownList.get(index.getZeroBased());
-        Appointment appointment = new Appointment(person.getName(), date, startTime, endTime);
+        try {
+            appointment = new Appointment(person.getName(), date, startTime, endTime);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
+        }
 
-        checkForConflictingAppointments(model, appointment);
+        checkForConflictingAppointments(model);
 
         model.addAppointment(appointment);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, appointment), true, false, false);
+
+        String feedback = String.format(MESSAGE_SUCCESS, person.getName(), Messages.format(appointment));
+        return new CommandResult(feedback, true, false, false);
     }
 
-    private void checkForConflictingAppointments(Model model, Appointment appointment) throws CommandException {
+    private void checkForConflictingAppointments(Model model) throws CommandException {
         List<Appointment> conflicts = model.getConflictingAppointments(appointment);
         if (conflicts.isEmpty()) {
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (Appointment conflict : conflicts) {
-            sb.append(String.format("Name: %s; Date: %s; From: %s; To: %s\n",
-                    conflict.name(), conflict.date(), conflict.startTime(), conflict.endTime()));
-        }
-
-        throw new CommandException(String.format(MESSAGE_CONFLICTING_APPOINTMENTS, sb));
+        throw new CommandException(
+                String.format(Messages.MESSAGE_CONFLICTING_APPOINTMENTS, Messages.format(conflicts)));
     }
 
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        model.deleteAppointment(appointment);
+        pastCommands.remove();
+        return String.format(UndoCommand.MESSAGE_UNDO_ADD_APPOINTMENT, appointment.name(),
+                Messages.format(appointment));
     }
 
     @Override
@@ -117,5 +117,15 @@ public class AddAppointmentCommand extends Command {
                 && date.equals(otherAddAppointmentCommand.date)
                 && startTime.equals(otherAddAppointmentCommand.startTime)
                 && endTime.equals(otherAddAppointmentCommand.endTime);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("date", date)
+                .add("startTime", startTime)
+                .add("endTime", endTime)
+                .toString();
     }
 }

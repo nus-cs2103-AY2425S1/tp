@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -8,6 +9,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
 import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -43,6 +45,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPriority(person.getPriority());
         descriptor.setRemark(person.getRemark());
         descriptor.setDateOfBirth(person.getDateOfBirth());
+        descriptor.setIncome(person.getIncome());
+        descriptor.setFamilySize(person.getFamilySize());
         descriptor.setTags(person.getTags());
     }
 
@@ -81,7 +85,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code DateOfBirth} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withDateOfBirth(String dateOfBirth) {
+    public EditPersonDescriptorBuilder withDateOfBirth(LocalDate dateOfBirth) {
         descriptor.setDateOfBirth(new DateOfBirth(dateOfBirth));
         return this;
     }
@@ -99,6 +103,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withIncome(double income) {
         descriptor.setIncome(new Income(income));
+        return this;
+    }
+
+    /**
+     * Sets the {@code FamilySize} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFamilySize(int familySize) {
+        descriptor.setFamilySize(new FamilySize(familySize));
         return this;
     }
 

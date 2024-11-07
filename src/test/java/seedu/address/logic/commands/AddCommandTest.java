@@ -149,7 +149,6 @@ public class AddCommandTest {
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
@@ -171,7 +170,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public List<Appointment> getAppointmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAppointment(int index, Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAppointment(int index, Appointment appointment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -181,12 +195,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Appointment deleteAppointment(int index) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteAppointments(Name name) {
+        public List<Appointment> deleteAppointments(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -202,6 +221,11 @@ public class AddCommandTest {
 
         @Override
         public List<Appointment> getConflictingAppointments(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Appointment> getConflictingAppointments(Appointment oldAppointment, Appointment newAppointment) {
             throw new AssertionError("This method should not be called.");
         }
     }

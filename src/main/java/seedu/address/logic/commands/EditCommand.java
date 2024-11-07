@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAMILY_SIZE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -12,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -36,6 +40,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
+import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -56,13 +61,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_DATE_OF_BIRTH + "DATE_OF_BIRTH] "
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "[" + PREFIX_INCOME + "INCOME] "
+            + "[" + PREFIX_FAMILY_SIZE + "FAMILY_SIZE] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -124,25 +130,28 @@ public class EditCommand extends Command {
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
-        // todo - allow edit of person's family size
-        FamilySize updatedFamilySize = personToEdit.getFamilySize();
+        FamilySize updatedFamilySize = editPersonDescriptor.getFamilySize().orElse(personToEdit.getFamilySize());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ArrayList<Scheme> schemes = personToEdit.getSchemes();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now());
-    }
-
-    public Person getUneditedPerson() {
-        return personToEdit;
-    }
-
-    public Person getEditedPerson() {
-        return editedPerson;
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, schemes, UpdatedAt.now(),
+                personToEdit.isArchived());
     }
 
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        if (!editedPerson.isSamePerson(personToEdit)) {
+            model.updateAppointments(editedPerson.getName(), personToEdit.getName());
+        }
+        model.setPerson(editedPerson, personToEdit);
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_EDIT, personToEdit.getName());
     }
 
     @Override
@@ -181,6 +190,7 @@ public class EditCommand extends Command {
         private Remark remark;
         private DateOfBirth dateOfBirth;
         private Income income;
+        private FamilySize familySize;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -198,6 +208,7 @@ public class EditCommand extends Command {
             setRemark(toCopy.remark);
             setDateOfBirth(toCopy.dateOfBirth);
             setIncome(toCopy.income);
+            setFamilySize(toCopy.familySize);
             setTags(toCopy.tags);
         }
 
@@ -206,7 +217,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    name, phone, email, address, priority, remark, dateOfBirth, income, tags);
+                    name, phone, email, address, priority, remark, dateOfBirth, income, familySize, tags);
         }
 
         public void setName(Name name) {
@@ -273,6 +284,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(income);
         }
 
+        public void setFamilySize(FamilySize familySize) {
+            this.familySize = familySize;
+        }
+
+        public Optional<FamilySize> getFamilySize() {
+            return Optional.ofNullable(familySize);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -309,6 +328,7 @@ public class EditCommand extends Command {
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
                     && Objects.equals(income, otherEditPersonDescriptor.income)
+                    && Objects.equals(familySize, otherEditPersonDescriptor.familySize)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -322,6 +342,7 @@ public class EditCommand extends Command {
                     .add("dateOfBirth", dateOfBirth)
                     .add("priority", priority)
                     .add("income", income)
+                    .add("familySize", familySize)
                     .add("remark", remark)
                     .add("tags", tags)
                     .toString();

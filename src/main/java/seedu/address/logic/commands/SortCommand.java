@@ -16,7 +16,10 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts all persons in the address book according to the given parameter.\n"
+            + ": Sorts all persons in the address book according to the given parameter. "
+            + "Only one parameter can be used.\n"
+            + "Parameters: "
+            + "[name] [address] [priority] [income]\n"
             + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by %s";
@@ -60,21 +63,22 @@ public class SortCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, parameter));
     }
+
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        if (!(other instanceof SortCommand)) {
+        if (!(other instanceof SortCommand otherSortCommand)) {
             return false;
         }
 
-        SortCommand otherSortCommand = (SortCommand) other;
-        return this.parameter.equals(otherSortCommand.parameter);
+        return parameter.equals(otherSortCommand.parameter);
     }
 }

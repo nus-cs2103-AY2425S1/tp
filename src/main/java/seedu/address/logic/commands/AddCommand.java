@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -13,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,10 +33,10 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_DATE_OF_BIRTH + "DATE OF BIRTH "
+            + PREFIX_DATE_OF_BIRTH + "DATE_OF_BIRTH "
             + "[" + PREFIX_PRIORITY + "PRIORITY = LOW] "
             + "[" + PREFIX_INCOME + "INCOME = 0] "
-            + "[" + PREFIX_FAMILY_SIZE + "FAMILY SIZE = 1] "
+            + "[" + PREFIX_FAMILY_SIZE + "FAMILY_SIZE = 1] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -42,7 +44,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_DATE_OF_BIRTH + "9 Mar 1999 "
+            + PREFIX_DATE_OF_BIRTH + "1999-03-09 "
             + PREFIX_PRIORITY + "HIGH "
             + PREFIX_INCOME + "2000 "
             + PREFIX_FAMILY_SIZE + "3 "
@@ -75,13 +77,17 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
-    public Person getToAdd() {
-        return toAdd;
-    }
-
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        Person personToRemove = this.toAdd;
+        model.deletePerson(personToRemove);
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_ADD, personToRemove.getName());
     }
 
     @Override

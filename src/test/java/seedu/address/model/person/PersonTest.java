@@ -13,6 +13,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -42,9 +44,9 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
@@ -95,7 +97,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different date of birth -> returns false
-        editedAlice = new PersonBuilder(ALICE).withDateOfBirth("28 May 1978").build();
+        editedAlice = new PersonBuilder(ALICE).withDateOfBirth(LocalDate.of(1978, 5, 28)).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different income -> returns false
@@ -108,6 +110,10 @@ public class PersonTest {
 
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different isArchived -> returns false
+        editedAlice = new PersonBuilder(ALICE).withArchived(!ALICE.isArchived()).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

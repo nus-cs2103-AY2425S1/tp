@@ -46,13 +46,13 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading, trailing, and extra whitespaces between words will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = name.trim().replaceAll("\\s+", " ");
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -102,22 +102,6 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
-    }
-
-    /**
-     * Parses a {@code String date} into a {@code Date}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code dateOfBirth} is invalid.
-     */
-    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
-        requireNonNull(dateOfBirth);
-        String trimmedDate = dateOfBirth.trim();
-
-        if (!DateOfBirth.isValidDate(trimmedDate)) {
-            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
-        }
-        return new DateOfBirth(trimmedDate);
     }
 
     /**
@@ -197,6 +181,20 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
         }
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateOfBirth} is invalid.
+     */
+    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
+        LocalDate date = parseDate(dateOfBirth);
+        if (!DateOfBirth.isValidDate(date)) {
+            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
+        }
+        return new DateOfBirth(date);
     }
 
     /**

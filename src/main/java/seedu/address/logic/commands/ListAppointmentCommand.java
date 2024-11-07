@@ -10,10 +10,10 @@ import seedu.address.model.Model;
  */
 public class ListAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "lista";
+    public static final String COMMAND_WORD = "listappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all appointments in SocialBook as a list with index numbers.\n"
+            + ": Lists all appointments in the address book as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments";

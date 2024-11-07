@@ -2,16 +2,21 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Name;
+
 
 /**
  * A utility class containing a list of past commands to be used in tests.
@@ -26,19 +31,48 @@ public class TypicalPastCommands {
     public static final EditCommand EXAMPLE_EDIT = new EditCommand(INDEX_FIRST_PERSON,
             settingName(NEW_NAME, EDIT_PERSON_DESCRIPTOR));
 
-    public static final ArrayList<Command> EMPTY_COMMAND_LAST =
-            new ArrayList<>();
-    public static final ArrayList<Command> CLEAR_COMMAND_LAST =
-            new ArrayList<>(Arrays.asList(EXAMPLE_ADD, EXAMPLE_EDIT, EXAMPLE_DELETE, EXAMPLE_CLEAR));
+    public static final AddAppointmentCommand EXAMPLE_ADDA = new AddAppointmentCommand(Index.fromZeroBased(0),
+            LocalDate.of(2024, 12, 31),
+            LocalTime.of(14, 30), LocalTime.of(16, 30));
 
-    public static final ArrayList<Command> ADD_COMMAND_LAST =
-            new ArrayList<>(Arrays.asList(EXAMPLE_DELETE, EXAMPLE_EDIT, EXAMPLE_CLEAR, EXAMPLE_ADD));
+    public static final DeleteAppointmentCommand EXAMPLE_DELETEA =
+            new DeleteAppointmentCommand(Index.fromZeroBased(0));
 
-    public static final ArrayList<Command> DELETE_COMMAND_LAST =
-            new ArrayList<>(Arrays.asList(EXAMPLE_CLEAR, EXAMPLE_EDIT, EXAMPLE_ADD, EXAMPLE_DELETE));
+    public static final CommandHistory EMPTY_COMMAND_LAST = createPastCommands();
 
-    public static final ArrayList<Command> EDIT_COMMAND_LAST =
-            new ArrayList<>(Arrays.asList(EXAMPLE_CLEAR, EXAMPLE_ADD, EXAMPLE_DELETE, EXAMPLE_EDIT));
+    public static final CommandHistory CLEAR_COMMAND_LAST =
+            createPastCommands(EXAMPLE_DELETE, EXAMPLE_EDIT, EXAMPLE_ADD, EXAMPLE_CLEAR);
+
+    public static final CommandHistory ADD_COMMAND_LAST =
+            createPastCommands(EXAMPLE_DELETE, EXAMPLE_EDIT, EXAMPLE_CLEAR, EXAMPLE_ADD);
+
+    public static final CommandHistory DELETE_COMMAND_LAST =
+            createPastCommands(EXAMPLE_CLEAR, EXAMPLE_EDIT, EXAMPLE_ADD, EXAMPLE_DELETE);
+
+    public static final CommandHistory EDIT_COMMAND_LAST =
+            createPastCommands(EXAMPLE_CLEAR, EXAMPLE_ADD, EXAMPLE_DELETE, EXAMPLE_EDIT);
+
+    public static final CommandHistory ADDA_COMMAND_LAST =
+            createPastCommands(EXAMPLE_CLEAR, EXAMPLE_ADD, EXAMPLE_DELETE, EXAMPLE_ADDA);
+
+    public static final CommandHistory DELETEA_COMMAND_LAST =
+            createPastCommands(EXAMPLE_CLEAR, EXAMPLE_ADD, EXAMPLE_DELETE, EXAMPLE_DELETEA);
+
+
+    /**
+     * Helper function to create CommandHistory with specified past commands.
+     *
+     * @param pastCommands specified past commands to have.
+     * @return CommandHistory with past commands.
+     */
+    public static CommandHistory createPastCommands(Command... pastCommands) {
+        CommandHistory currentPastCommands = new CommandHistory();
+        for (int i = 0; i < pastCommands.length; i++) {
+            currentPastCommands.add(pastCommands[i]);
+        }
+        return currentPastCommands;
+
+    }
 
     public static EditPersonDescriptor settingName(Name newName, EditPersonDescriptor editPersonDescriptor) {
         editPersonDescriptor.setName(newName);
