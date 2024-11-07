@@ -35,7 +35,6 @@ import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 import seedu.address.ui.Ui.UiState;
 
 public class TagCommandTest {
-
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -218,7 +217,7 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_doesNotClearSubjectsWhenLevelNoneNoneAndSubjectsProvided() {
+    public void execute_clearsSubjectsWhenLevelNoneNoneAndSubjectsProvided() {
         Student studentInList = model.getAddressBook()
                 .getStudentList()
                 .get(INDEX_SECOND_STUDENT
@@ -234,8 +233,11 @@ public class TagCommandTest {
                         .withSubjects("MATH")
                         .build();
         TagCommand tagCommand = new TagCommand(studentInList.getName(), descriptor);
+        Student finalStudent = new StudentBuilder(studentInList).withLevel("NONE NONE").withSubjects().build();
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_STUDENT_SUCCESS,
+                Messages.format(finalStudent));
 
-        assertCommandFailure(tagCommand, model, "Tag a student with a level first or in the same command");
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, model);
     }
 
     @Test

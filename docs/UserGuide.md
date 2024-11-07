@@ -273,7 +273,9 @@ Allows tagging a student by their level and subject. A student must have a level
 
 <box type="tip" seamless>
 
-**Tip:** To tag multiple subjects, use the format `s/FIRST_SUBJECT s/SECOND_SUBJECT ...`.
+**Tips:** 
+* To tag multiple subjects, use the format `s/FIRST_SUBJECT s/SECOND_SUBJECT ...`.
+* Use `l/NONE NONE` to clear all existing tags.
 </box>
 
 <box type="warning" seamless>

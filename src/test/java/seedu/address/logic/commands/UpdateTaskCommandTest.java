@@ -62,6 +62,7 @@ public class UpdateTaskCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(targetStudent, updatedStudent);
+        expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
 
         assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
     }
