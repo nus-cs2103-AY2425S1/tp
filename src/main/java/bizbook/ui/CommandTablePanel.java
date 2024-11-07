@@ -25,8 +25,11 @@ import javafx.scene.text.Text;
 public class CommandTablePanel extends UiPart<Region> {
     private static final String FXML = "CommandTablePanel.fxml";
 
-    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * 0.85; // 85% of table width
-    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * 0.15; // 15% of table width
+    private static final double COMMAND_WORD_RATIO = 0.15;
+    private static final double COMMAND_USAGE_RATIO = 0.85;
+
+    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * COMMAND_WORD_RATIO; // 15% of table width
+    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * COMMAND_USAGE_RATIO; // 85% of table width
 
     private final Logger logger = LogsCenter.getLogger(CommandTablePanel.class);
 
@@ -57,11 +60,17 @@ public class CommandTablePanel extends UiPart<Region> {
 
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("commandWord"));
         actionColumn.setMaxWidth(COMMAND_WORD_COLUMN_SIZE);
+        actionColumn.setMinWidth(75);
 
         formatColumn.setCellValueFactory(new PropertyValueFactory<>("commandUsage"));
         formatColumn.setCellFactory(column -> new CommandTableCell());
+        formatColumn.setMinWidth(100);
         formatColumn.setMaxWidth(COMMAND_USAGE_COLUMN_SIZE);
 
+        commandTable.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            actionColumn.setPrefWidth(newWidth.doubleValue() * COMMAND_WORD_RATIO);
+            formatColumn.setPrefWidth(newWidth.doubleValue() * COMMAND_USAGE_COLUMN_SIZE);
+        });
     }
 
     /**
