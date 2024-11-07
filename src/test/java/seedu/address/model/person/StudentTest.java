@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -74,7 +75,7 @@ public class StudentTest {
     }
 
     @Test
-    public void testDaysAttendedProperty() {
+    public void testDaysAttendedProperty() throws CommandException {
         // Create a student with initial attendance
         Student student = new StudentBuilder().withDaysAttended(5).build();
 

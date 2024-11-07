@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.beans.property.IntegerProperty;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -137,7 +138,7 @@ public class Student extends Person {
      *
      * @return A new {@code Person} instance representing the student with decremented attendance.
      */
-    public Person withDecrementedAttendance() {
+    public Person withDecrementedAttendance() throws CommandException {
         DaysAttended updatedDaysAttended = daysAttended.decremented();
 
         return Person.createPerson(STUDENT_TYPE, getName(), getGender(), getPhone(), getEmail(), getAddress(),

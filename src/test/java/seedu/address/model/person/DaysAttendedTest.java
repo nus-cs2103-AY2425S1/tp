@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 public class DaysAttendedTest {
 
@@ -49,16 +50,23 @@ public class DaysAttendedTest {
     }
 
     @Test
-    public void decremented_success() {
+    public void decremented_success() throws CommandException {
         // When days attended is greater than 0
         DaysAttended daysAttended = new DaysAttended(5);
         daysAttended = daysAttended.decremented();
         assertEquals(4, daysAttended.getValue());
 
-        // When days attended is 0 (should not decrement below 0)
-        daysAttended = new DaysAttended(0);
+        // When days attended is 1 (should decrement to 0)
+        daysAttended = new DaysAttended(1);
         daysAttended = daysAttended.decremented();
         assertEquals(0, daysAttended.getValue());
+    }
+
+    @Test
+    public void decremented_throwsCommandException() {
+        // When days attended is 0 (should throw CommandException)
+        DaysAttended daysAttended = new DaysAttended(0);
+        assertThrows(CommandException.class, daysAttended::decremented);
     }
 
     @Test
