@@ -22,8 +22,8 @@ import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.TriageCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

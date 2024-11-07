@@ -1,7 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TRIAGE;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,13 +28,13 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD_SHORT = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the database. \n"
-            + "Parameters: "
+            + "Parameters:" + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_TRIAGE  + "TRIAGE "
+            + PREFIX_TRIAGE + "TRIAGE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "

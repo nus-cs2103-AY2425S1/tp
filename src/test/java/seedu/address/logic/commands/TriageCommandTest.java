@@ -1,13 +1,11 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRIAGE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-
-import java.util.Arrays;
-import java.util.Collections;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
