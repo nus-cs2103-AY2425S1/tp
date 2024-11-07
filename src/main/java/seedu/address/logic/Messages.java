@@ -72,7 +72,8 @@ public class Messages {
      */
     public static String format(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(delivery.getDeliverySender().getName())
+        builder.append("Supplier name: ")
+                .append(delivery.getDeliverySender().getName())
                 .append("; Date & time: ")
                 .append(delivery.getDeliveryDate())
                 .append("; Product: ")

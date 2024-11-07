@@ -52,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagramMarkSupplier.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases 
+### Use cases
 
 **System**: Vendor Vault (VV)
 
@@ -512,32 +512,32 @@ ___
 
 ### Non-Functional Requirements
 
-Performance Requirements
+#### Performance Requirements
 1. The system should respond to user input within 2 seconds for all CRUD operations on contacts and deliveries (e.g., adding, deleting, searching).
 2. The application should take no longer than 5 seconds to launch and load all necessary data (e.g., contacts, deliveries) on any supported platform.
 
-Scalability Requirements
+#### Scalability Requirements
 3. The system should be able to handle at least 1,000 contacts and 1000 deliveries without noticeable degradation in performance
 
-Usability Requirements
+#### Usability Requirements
 4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 
-Compatibility / Portability Requirements
+#### Compatibility / Portability Requirements
 5. Should work on any mainstream OS as long as it has Java 17 or above installed without requiring platform-specific dependencies
 6. The product should work as a standalone JAR file, not exceeding 100MB in size without needing an installer.
 
-Data Requirements
+#### Data Requirements
 7. The system should not use any Database Management System (DBMS) for data storage. The contacts and deliveries data should be stored locally in a human-editable file.
 8. The system should ensure that the data file remains consistent and free from corruption across system crashes or improper shutdowns.
 
-Security Requirements
+#### Security Requirements
 9. The system should ensure that user data (e.g., supplier contacts, delivery information) is only accessible by the user of the local machine
 
-Maintainability Requirements
+#### Maintainability Requirements
 10. The system should follow Object-Oriented Programming (OOP) principles to facilitate future maintenance and feature additions.
 11. The project should be developed in a breadth-first incremental manner, with consistent delivery of features over the course of the development cycle.
 
-Testability Requirements
+#### Testability Requirements
 12. The system should be designed to support unit and integration testing, with testable modules and clearly defined boundaries.
 13. The application should not depend on any external remote servers for its core functionality, ensuring that the product can be tested and used offline without network dependencies.
 
