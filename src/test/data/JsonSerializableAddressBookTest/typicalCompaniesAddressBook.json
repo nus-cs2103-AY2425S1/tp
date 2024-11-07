@@ -8,8 +8,7 @@
     "status": "INTERESTED",
     "tags": [],
     "applications": [],
-    "isFavourite": true,
-    "isShowingDetails": false
+    "isFavourite": true
   }, {
     "name": "Amazon",
     "phone": "2062661000",
@@ -26,9 +25,7 @@
       "description": "Requires: Python",
       "status": "REJECTED"
     } ],
-    "isFavourite": false,
-    "isShowingDetails": false
-
+    "isFavourite": false
   }, {
     "name": "Facebook",
     "phone": "6505434800",
@@ -37,8 +34,7 @@
     "status": "INTERESTED",
     "tags": [],
     "applications": [],
-    "isFavourite": false,
-    "isShowingDetails": false
+    "isFavourite": false
   }, {
     "name": "Tesla",
     "phone": "6506815000",
@@ -47,8 +43,7 @@
     "status": "INTERESTED",
     "tags": [],
     "applications": [],
-    "isFavourite": false,
-    "isShowingDetails": false
+    "isFavourite": false
   }, {
     "name": "Netflix",
     "phone": "4085403700",
@@ -57,8 +52,7 @@
     "status": "INTERESTED",
     "tags": [],
     "applications": [],
-    "isFavourite": false,
-    "isShowingDetails": false
+    "isFavourite": false
   }, {
     "name": "SAP",
     "phone": "6503407500",
@@ -67,7 +61,6 @@
     "status": "CLOSED",
     "tags": [],
     "applications": [],
-    "isFavourite": false,
-    "isShowingDetails": false
+    "isFavourite": false
   } ]
 }

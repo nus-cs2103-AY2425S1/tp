@@ -77,6 +77,6 @@ public class TypicalCompanies {
     }
 
     public static List<Company> getTypicalCompanies() {
-        return new ArrayList<>(Arrays.asList(APPLE_FAVOURITED, AMAZON, FACEBOOK, TESLA, NETFLIX));
+        return new ArrayList<>(Arrays.asList(APPLE_FAVOURITED, AMAZON, FACEBOOK, TESLA, NETFLIX, SAP));
     }
 }
