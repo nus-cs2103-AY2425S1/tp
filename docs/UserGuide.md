@@ -37,6 +37,7 @@ The user guide contains formatting to highlight important info. The standards us
   - [Clearing all entries](#clearing-all-entries--clear)
   - [Adding a project](#adding-a-project--addproject)
   - [Listing all projects](#listing-all-projects--listproject)
+  - [Listing all members of a project](#listing-all-project-members--listprojectmembers)
   - [Finding projects by name](#finding-projects-by-name--findproject)
   - [Deleting a project](#deleting-a-project--deleteproject)
   - [Clear all project entries](#clear-all-project-entries--clearproject)
@@ -307,11 +308,25 @@ Expected output:
 
 Shows a list of **all stored projects**.
 
-Format: `listproject`
+Format: `listprojects`
 
 Expected output:
-- System message noting success
+- System message noting success, including number of projects listed
 - All projects shown in the displayed project list
+
+[Return to Top](#table-of-contents)
+
+### Listing all member of a project : `listprojectmembers`
+
+Shows a list of **all project members**.
+
+Format: `listprojectmembers pn/PROJECT_NAME`
+
+- PROJECT_NAME is case-sensitive. e.g. `Project` will not match `project`
+
+Expected output:
+- System message noting success, including number of members listed
+- All members shown in the displayed member list
 
 [Return to Top](#table-of-contents)
 
