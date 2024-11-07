@@ -12,7 +12,8 @@ public class ClearWeddingBookCommand extends Command {
 
     public static final String COMMAND_WORD = "clear-wb";
     public static final String COMMAND_WORD_SHORT = "cwb";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD + "OR" + COMMAND_WORD_SHORT + ": Clears the entire wedding book.";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + "OR"
+            + COMMAND_WORD_SHORT + ": Clears the entire wedding book.";
     public static final String CONFIRMATION_PROMPT = "Are you sure you want to delete entire wedding book?\n"
             + "Enter 'y' to confirm, or 'n' to cancel.";
 
