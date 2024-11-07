@@ -120,19 +120,20 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
 > [!Note]
 > * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
-> * A person can have up to 10 tags.
+> * A person can have up to 10 tags (including 0).
 > * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
-> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `PHONE_NUMBER` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
 > * `EMAIL` should be of the format local-part@domain
-> * Refer to (TO BE IMPLEMENTED?) for more details on accepted values for each field.
+> * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
 > [!Warning]
-> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
-> (TO BE DECIDED WHETHER TO ALLOW DUPLICATE NAMES AND EMAILS)
+> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
+
 
 
 Examples:
@@ -153,7 +154,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
