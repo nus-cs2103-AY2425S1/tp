@@ -642,6 +642,7 @@ and Personal Data Protection Act (PDPA), so that I manage client data in a compl
 * **API**: Application Programming Interface.
 * **GUI**: Graphical User Interface.
 * **MSS**: Main Success Scenario.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
