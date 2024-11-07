@@ -4,8 +4,10 @@
   pageNav: 3
 ---
 
+
 <center>
 <pic src="images/kontactsLogo.png" width="300" alt="Logo" lazy>
+
 
 # **KonTActs User Guide**
 </pic>
@@ -20,10 +22,12 @@ KonTActs streamlines contact management, helping you keep track of students, pro
 
 
 
-
+{{ newPageBetween }}
 
 <!-- * Table of Contents -->
 <page-nav-print />
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -40,6 +44,8 @@ To get started,
 4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar KonTActs.jar` to run the application and type `view name/Alex Yeoh`.<br>
    A interface similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![quick start GUI on launch](images/quickStartLaunchScreenshot.png)
+   {{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -59,6 +65,9 @@ To get started,
 
 6. Refer to the [Features](#features) below for details of each command.
    <br><br>
+
+{{ newPage }}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Summary of commands
@@ -75,8 +84,8 @@ To get started,
 | [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                                      |
 | [**View**](#viewing-a-contact-s-full-details-view)              | `view [name/NAME]` <br> e.g., `view name/John Doe`                                                                                                                                          |
 | [**Github**](#launching-github-repository-github)               | `github name/NAME`  <br> e.g., `github name/Harry`                                                                                                                                          |
-| [**Mark**](#marking-a-student-as-present-mark)                  | `mark name/NAME week/WEEK NUMBER` <br> e.g. `mark name/John Doe week/1`                                                                                                                     |
-| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark name/NAME week/WEEK NUMBER` <br> e.g. `unmark name/John Doe week/1`                                                                                                                 |
+| [**Mark**](#marking-a-student-as-present-mark)                  | `mark name/NAME week/WEEK_NUMBER` <br> e.g. `mark name/John Doe week/1`                                                                                                                     |
+| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark name/NAME week/WEEK_NUMBER` <br> e.g. `unmark name/John Doe week/1`                                                                                                                 |
 | [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                    |
 | [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV_FILE_PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                        |
 | [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED_FILE_DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                             |
@@ -84,6 +93,8 @@ To get started,
 | [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade name/NAME assignment/ASSIGNMENT_NAME score/SCORE` <br> e.g. `addGrade n/JohnDoe assignment/Ex01 score/5`                                                                          |
 | [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade name/NAME assignment/ASSIGNMENT_NAME` <br> e.g. `removeGrade name/John Doe assignment/Ex01`                                                                                    |
 
+{{ newPage }}
+                                                                           |
 --------------------------------------------------------------------------------------------------------------------
 ## <i class="fa-solid fa-bolt-lightning"></i> Parameter shortcuts
 
@@ -103,6 +114,7 @@ All parameters in KonTActs come equipped with their equivalent shortcuts.
 | `path/`       | `p/`     |
 
 --------------------------------------------------------------------------------------------------------------------
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 ## <i class="fa-solid fa-bolt-lightning"></i> Command shortcuts
@@ -123,6 +135,8 @@ All commands in KonTActs come equipped with their equivalent shortcuts.
 | `delete`      | `rm`     |
 | `edit`        | `e`      |
 | `gitHub`      | `git`    |
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -150,6 +164,8 @@ All commands in KonTActs come equipped with their equivalent shortcuts.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+{{ newPage }}
+
 --------------------------------------------------------------------------------------------------------------------
 ### <i class="fa-solid fa-circle-question"></i> Viewing help : `help`
 
@@ -167,6 +183,8 @@ A compact reference guide is also provided for quick reference.
 
 ![help message](images/helpMessage.png)<br><br>
 </box>
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 ### <i class="fa-solid fa-user-plus"></i> Adding a person: `add`
@@ -220,6 +238,9 @@ Eg. `t/friend t/family`
 * Usernames must start with an `@`, and can only contain underscores (`_`) and alphanumeric characters.
 
 </box>
+
+{{ newPage }}
+
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**GitHub username restrictions**</md>
@@ -247,6 +268,7 @@ Eg. `t/friend t/family`
 </box>
 
 
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -295,6 +317,7 @@ Edits an existing person detail in KonTActs.
 *  `edit 2 telegram/@Mary n/Mary` Edits the name of the 2nd person to `Mary` and telegram ID to `@Mary`.
 </box>
 
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -331,6 +354,8 @@ Find all persons whose names contains any of the given keywords.
   ![result for 'find alex charlotte'](images/findAlexCharlotte.png)
 </box>
 
+{{ newPage }}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-filter"></i> Filtering persons by tag: `filter`
@@ -358,12 +383,16 @@ Finds persons whose names contain any of the given tag keywords.
   e.g. `t/friends t/family` will return any contact tagged with `friend` or `family`.
 </box>
 
+{{ newPageBetween }}
+
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 * `filter t/friends` returns any contact tagged with `friends`<br>
   ![result for 'filter t/friend t/family'](images/filterFriendsTagByFilter.png)
 </box>
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -396,6 +425,8 @@ Deletes the specified person from the address book.
 * `delete n/Betsy` deletes the person named `Betsy` if it is shown on the filtered list.
 </box>
 
+{{ newPage }}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-brands fa-github"></i> Launching GitHub repository : `github`
@@ -426,6 +457,8 @@ Launches GitHub repository of the specified person on the browser from the addre
 * `github n/Harry` launches the GitHub repository of the person named `Harry`, using the GitHub username assigned to `Harry`.
   ![github use case for launching Harry's repository](images/githubUsage.png)
 </box>
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -461,6 +494,8 @@ Opens a window at the side with the full details of the specified person from th
   ![viewing John Doe's contact detail in the view window](images/quickStartLaunchScreenshot.png)
   </box>
 
+{{ newPage }}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-square-check"></i> Marking a student as present : `mark`
@@ -469,12 +504,12 @@ Marks a student as present for a particular week.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `mark name/NAME week/[WEEK_NUMBER]`**</md>
+<md>**Format: `mark name/NAME week/WEEK_NUMBER`**</md>
 </box>
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Shortcut: `m n/NAME w/[WEEK_NUMBER]`**</md>
+<md>**Shortcut: `m n/NAME w/WEEK_NUMBER`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -492,6 +527,7 @@ Marks a student as present for a particular week.
 * `mark n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as present for week 0.
   ![result for mark](images/markAlexPresent.png)  
 </box>
+  {{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -501,14 +537,13 @@ Unmarks a student as present for a particular week.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `unmark n/NAME w/[WEEK_NUMBER]`**</md>
-<md>**Format: `unmark n/NAME week/[WEEK_NUMBER]`**</md>
+<md>**Format: `unmark n/NAME w/WEEK_NUMBER`**</md>
 
 </box>
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Shortcut: `um n/NAME w/[WEEK_NUMBER]`**</md>
+<md>**Shortcut: `um n/NAME w/WEEK_NUMBER`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -526,6 +561,8 @@ Unmarks a student as present for a particular week.
 * `unmark n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
   ![result for unmark](images/markAlexAbsent.png)
   </box>
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -561,6 +598,8 @@ Order of contact details can be reset to default by calling `sort reset`.
 * `sort name order/desc` will sort the displayed list based on their name in ascending order.
   ![result_for_sorting](images/sortByNameDesc.png)
 
+{{ newPage}}
+
 * `sort reset` will reset the displayed list to its default order.
   ![result_for_sorting](images/sortReset.png)
 
@@ -576,6 +615,8 @@ Clears all entries from the KonTActs.
 
 <md>**Format: `clear`**</md>
 </box>
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -629,6 +670,9 @@ assignments are present for a person, separate them within the same entry using 
   * This field can be empty (will be treated as no weeks attended for specific person)
 </box>
 
+{{ newPage }}
+
+
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Example of acceptable CSV file:**</md>
@@ -646,6 +690,7 @@ assignments are present for a person, separate them within the same entry using 
 
 </box>
 
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -677,6 +722,8 @@ Exports contacts based on contacts and their details stored in KonTActs.
 relative path given)
   </box>
 
+{{ newPage }}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-clock-rotate-left"></i> Accessing command history : <kbd>↑</kbd> and <kbd>↓</kbd>
@@ -705,6 +752,8 @@ KonTActs automatically saves every (valid or invalid) command entered which can 
 4. Continuously pressing <kbd>↑</kbd> will scroll through all commands that have been previously input.
 5. Pressing <kbd>↓</kbd> will scroll down to the more recent commands that was last input.
   </box>
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 ### <i class="fa-solid fa-marker"></i>  Adding grades to a contact : `addGrade`
@@ -766,6 +815,8 @@ as the assignment is not specified `assignment.json`
 Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
 </box>
 
+{{ newPage }}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-square-minus"></i> Removing grades from a contact : `removeGrade`
@@ -808,6 +859,8 @@ Exits the program.
 <md>**Format: `exit`**</md>
 </box>
 
+{{ newPage }}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-floppy-disk"></i> Saving the data
@@ -838,6 +891,8 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KonTActs home folder. Alternatively, you can use the [export](#exporting-data-into-csv-file-export) command to export the data into a CSV file and [import](#importing-data-from-csv-file-import) the CSV file into your other device.
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
