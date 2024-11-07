@@ -24,6 +24,7 @@ public class FindClientCommand extends Command {
     private final Predicate<Client> predicate;
 
     public FindClientCommand(Predicate<Client> predicate) {
+        assert predicate != null : "Predicate should not be null";
         this.predicate = predicate;
     }
 
@@ -31,6 +32,8 @@ public class FindClientCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredClientList(predicate);
+        assert model.getFilteredClientList() != null : "Filtered client list should not be null";
+        assert model.getFilteredClientList().size() >= 0 : "Filtered client list size should be non-negative";
         return new CommandResult(
                 String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredClientList().size()));
     }
