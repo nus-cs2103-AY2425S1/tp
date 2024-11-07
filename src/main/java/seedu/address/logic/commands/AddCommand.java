@@ -54,7 +54,6 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert model != null : "Model should not be null when executing AddCommand";
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {

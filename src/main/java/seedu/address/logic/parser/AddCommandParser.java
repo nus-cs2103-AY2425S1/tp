@@ -54,10 +54,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // Parse VIP status; default to false if not provided
         boolean isVip = Boolean.parseBoolean(argMultimap.getValue(PREFIX_VIP).orElse(DEFAULT_VIP));
-
-        // Assert that VIP status is set to default if not provided
-        assert isVip == Boolean.parseBoolean(DEFAULT_VIP) || argMultimap.getValue(PREFIX_VIP).isPresent()
-                : "VIP status should be default false when not provided";
         Person person = new Person(name, phone, email, address, comment, tagList, isVip);
 
         return new AddCommand(person);
