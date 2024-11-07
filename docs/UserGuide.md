@@ -251,7 +251,7 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 ### Receiving payment from a student: `pay`
 
-Updates the amount of tuition fee paid by the specified student after a lesson.
+Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
 
 **Format:** `pay INDEX hr/HOURS_PAID`
 
@@ -279,7 +279,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 
 ### Recording unpaid tuition fee of a student: `owe`
 
-Updates the amount of tuition fee owed by a specified student after a lesson.
+Updates the amount of tuition fee owed by a specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
 
 **Format:** `owe INDEX hr/HOURS_OWED`
 
@@ -305,9 +305,9 @@ Updates the amount of tuition fee owed by a specified student after a lesson.
 
 <div style="page-break-after: always;"></div>
 
-### Settle payments from students: `settle`
+### Settling outstanding fees from students: `settle`
 
-Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student.
+Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student after the student pays for his/her outstanding tuition fees.
 
 **Format:** `settle INDEX amount/AMOUNT`
 
