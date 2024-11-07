@@ -24,7 +24,7 @@ public class ConfirmPrompt extends Command {
         savedCommand.validateInput(model);
         model.setSavedCommand(savedCommand);
 
-        return new CommandResult(MESSAGE_CONFIRM_PROMPT, false, false, true, false, -1);
+        return new CommandResult(MESSAGE_CONFIRM_PROMPT, false, false, true, false, -1, false, false);
     }
 
     @Override

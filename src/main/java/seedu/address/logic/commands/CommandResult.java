@@ -20,13 +20,16 @@ public class CommandResult {
     private final boolean exit;
 
     /** The application should list the logs. */
-    private final boolean list;
+    private final boolean listLogs;
 
-    // ^ NEW: might not the best as well, but there is a need to bring out more information
-    // to the GUI layer so we can update and reflect the sessionlog. please think of a better way
+    /** The application should list the person list. */
+    private final boolean isPersonList;
 
-    /** The application should use the index returned. */ // NEW: I dont think this is a good implementation.
+    /** The application should use the index returned. */
     private final int personIndex;
+
+    /** The application should refresh the session log accordingly. */
+    private final boolean isAddLog;
 
     /** The previous command prompts the user for confirmation */
     private final boolean hasPrompt;
@@ -36,13 +39,15 @@ public class CommandResult {
      */
 
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isPrompt,
-                         boolean list, int personIndex) {
+                         boolean list, int personIndex, boolean isPersonList, boolean isAddLog) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.list = list;
+        this.listLogs = list;
         this.personIndex = personIndex;
         this.hasPrompt = isPrompt;
+        this.isPersonList = isPersonList;
+        this.isAddLog = isAddLog;
     }
 
 
@@ -51,7 +56,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, -1);
+        this(feedbackToUser, false, false, false, false, -1, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value except {@code isPersonList} set to false.
+     */
+    public CommandResult(String feedbackToUser, boolean isPersonList) {
+        this(feedbackToUser, false, false, false, false, -1, isPersonList, false);
     }
 
     public String getFeedbackToUser() {
@@ -67,13 +80,20 @@ public class CommandResult {
     }
 
 
-    public boolean isList() {
-        return list;
+    public boolean isListLogs() {
+        return listLogs;
     }
 
-    // might need more validation to check if personIndex > -1 before retrieving?
     public int getPersonIndex() {
         return personIndex;
+    }
+
+    public boolean isAddLog() {
+        return isAddLog;
+    }
+
+    public boolean isPersonList() {
+        return isPersonList;
     }
 
 
@@ -96,14 +116,16 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && list == otherCommandResult.list
+                && listLogs == otherCommandResult.listLogs
                 && personIndex == otherCommandResult.personIndex
-                && hasPrompt == otherCommandResult.hasPrompt;
+                && hasPrompt == otherCommandResult.hasPrompt
+                && isPersonList == otherCommandResult.isPersonList
+                && isAddLog == otherCommandResult.isAddLog;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, list, personIndex, hasPrompt);
+        return Objects.hash(feedbackToUser, showHelp, exit, listLogs, personIndex, hasPrompt, isPersonList, isAddLog);
     }
 
     @Override
@@ -113,8 +135,10 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("prompt", hasPrompt)
-                .add("list", list)
+                .add("list", listLogs)
                 .add("personIndex", personIndex)
+                .add("isPersonList", isPersonList)
+                .add("isAddLog", isAddLog)
                 .toString();
     }
 
