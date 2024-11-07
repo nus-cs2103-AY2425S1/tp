@@ -1,9 +1,8 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-import seedu.address.model.task.Task;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.util.List;
+import seedu.address.model.Model;
 
 /**
  * Lists all incomplete tasks in the task book to the user.
@@ -15,7 +14,7 @@ public class ListIncompleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.updateFilteredTaskList(task -> !task.isCompleteProperty().get());
         return new CommandResult(MESSAGE_SUCCESS);
     }
