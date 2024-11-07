@@ -12,9 +12,9 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 <!-- * Table of Contents -->
 <page-nav-print />
-
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Quick start
 
