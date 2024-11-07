@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "SellSavvy",
-  "titleSuffix": "AddressBook Level-3",
+  "titleSuffix": "",
   "faviconPath": "images/SellSavvy.png",
   "style": {
     "codeTheme": "light"
