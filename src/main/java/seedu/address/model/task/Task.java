@@ -64,6 +64,10 @@ public class Task {
         this.isComplete.set(true);
     }
 
+    public void markTaskIncomplete() {
+        this.isComplete.set(false);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
