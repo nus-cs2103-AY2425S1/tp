@@ -170,7 +170,8 @@ public class DeleteCommand extends Command {
      */
     public void checkPersonIsAssignedWeddings(Person personToDelete, Model model) throws CommandException {
         List<Wedding> weddingList = model.getFilteredWeddingList();
-        for (Wedding wedding : weddingList) {
+        for (Index index : weddingIndices) {
+            Wedding wedding = weddingList.get(index.getZeroBased());
             if (!personToDelete.isAssignedToWedding(wedding)) {
                 throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
             }
