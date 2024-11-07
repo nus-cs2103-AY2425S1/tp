@@ -84,4 +84,22 @@ public class MarkAppointmentCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // Short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MarkAppointmentCommand)) {
+            return false;
+        }
+
+        // State check
+        MarkAppointmentCommand otherCommand = (MarkAppointmentCommand) other;
+        return appointmentTime.equals(otherCommand.appointmentTime)
+                && patientId == otherCommand.patientId
+                && doctorId == otherCommand.doctorId;
+    }
 }

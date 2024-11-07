@@ -90,6 +90,8 @@ public class ViewHistoryCommand extends Command {
         // state check
         ViewHistoryCommand e = (ViewHistoryCommand) other;
         return personId == (e.personId)
-                && dateTime.equals(e.dateTime);
+                && (dateTime == null
+                ? dateTime == e.dateTime
+                : dateTime.equals(e.dateTime));
     }
 }

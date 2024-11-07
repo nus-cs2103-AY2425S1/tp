@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
@@ -25,7 +24,7 @@ public class CheckAppointmentCommand extends Command {
             + "based on id provided "
             + COMMAND_WORD + " "
             + PREFIX_ID + "[PATIENT_ID] "
-            + PREFIX_DATE + "[LOCAL_DATE] \n"
+            + PREFIX_DAY_DATE + "[LOCAL_DATE] \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01 " + PREFIX_DAY_DATE + "2023-09-25";
 
 

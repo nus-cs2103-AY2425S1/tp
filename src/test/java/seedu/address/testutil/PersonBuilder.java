@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Beeee";
+    public static final String DEFAULT_NAME = "Amy Bee";
     public static final int DEFAULT_ID = 12;
     public static final String DEFAULT_PATIENT_ROLE = "PATIENT";
     public static final String DEFAULT_DOCTOR_ROLE = "DOCTOR";
@@ -117,15 +118,37 @@ public class PersonBuilder {
     public Person buildWithDefaultId() {
         return new Person(name, id, role, phone, email, address, remark, tags);
     }
+
+
     /**
-     * builds a patient class
+     * Builds a patient class
      */
     public Person buildPatient() {
         return new Person(name, role, phone, email, address, remark, tags);
     }
 
     /**
-     * builds a doctor class
+     * Builds a patient with a id and appointment added
+     */
+    public Person buildPatientWithChosenIdAndAppointment(int patientId, int doctorId, LocalDateTime appointmentTime,
+                                                         String remarks) {
+        Person newPerson = new Person(name, patientId, DEFAULT_PATIENT_ROLE, phone, email, address, remark, tags);
+        newPerson.addAppointment(appointmentTime, patientId, doctorId, remarks);
+        return newPerson;
+    }
+
+    /**
+     * Builds a doctor with a id and appointment added
+     */
+    public Person buildDoctorWithChosenIdAndAppointment(int patientId, int doctorId, LocalDateTime appointmentTime,
+                                                         String remarks) {
+        Person newPerson = new Person(name, doctorId, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);
+        newPerson.addAppointment(appointmentTime, patientId, doctorId, remarks);
+        return newPerson;
+    }
+
+    /**
+     * Builds a doctor class
      */
     public Person buildDoctor() {
         return new Person(name, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);

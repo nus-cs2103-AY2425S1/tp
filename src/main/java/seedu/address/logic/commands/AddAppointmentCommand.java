@@ -41,8 +41,6 @@ public class AddAppointmentCommand extends Command {
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Successfully added appointment to a patient";
     public static final String MESSAGE_UNAVAILABLE_SLOT = "The patient or doctor already has another appointment!";
-    public static final String MESSAGE_INVALID_ID = "The doctor or the patient id that you have"
-            + " entered doesn't exist. Please enter again!";
     private static final Logger logger = Logger.getLogger(AddAppointmentCommand.class.getName());
     private final int patientId;
     private final int doctorId;
@@ -102,5 +100,25 @@ public class AddAppointmentCommand extends Command {
                 patientId, doctorId, appointmentTime.toString(), remarks));
 
         return new CommandResult(MESSAGE_ADD_APPOINTMENT_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // Short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddAppointmentCommand)) {
+            return false;
+        }
+
+        // State check
+        AddAppointmentCommand otherCommand = (AddAppointmentCommand) other;
+        return appointmentTime.equals(otherCommand.appointmentTime)
+                && patientId == otherCommand.patientId
+                && doctorId == otherCommand.doctorId
+                && remarks.equals(otherCommand.remarks);
     }
 }
