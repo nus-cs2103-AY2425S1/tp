@@ -368,7 +368,13 @@ to find your schedule for a specific day of the week.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all data from the data file of UGTeach.
+
+<box type="warning" header ="##### Caution">
+
+This action is not irreversible and your deleted data cannot be recovered. 
+
+</box>
 
 **Format:** `clear`
 
