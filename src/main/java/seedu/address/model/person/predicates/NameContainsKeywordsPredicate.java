@@ -1,8 +1,13 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Name} starts with the specified keyword.
@@ -31,7 +36,18 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         String fullName = person.getName().fullName.toLowerCase();
-        return fullName.startsWith(this.keywords);
+        String[] nameKeywords = this.keywords.split("\\s+");
+        List<String> listOfKeywords = Arrays.asList(nameKeywords);
+        Stream<String> streamOfKeywords = listOfKeywords.stream();
+        String[] fullNameSplit = fullName.split("\\s+");
+        List<String> listOfFullName = Arrays.asList(fullNameSplit);
+        Stream<String> streamOfFullName = listOfFullName.stream();
+        boolean result = fullName.startsWith(this.keywords)
+                || streamOfKeywords
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(fullName, keyword))
+                || streamOfFullName
+                        .anyMatch(keyword -> keyword.startsWith(this.keywords));
+        return result;
     }
 
     /**
