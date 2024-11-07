@@ -47,7 +47,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (modules.length != 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-            editPersonDescriptor.setModuleChanges(new Module(modules[0].toUpperCase()), new Module(modules[1]));
+            editPersonDescriptor.setModuleChanges(new Module(modules[0].toUpperCase()),
+                    new Module(modules[1].toUpperCase()));
         } else {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()
