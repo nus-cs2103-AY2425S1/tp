@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -101,6 +103,18 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public boolean hasTelegramHandle(TelegramHandle telegramHandle) {
+            // This is a stub method for testing purposes, returning fa
+            return true;
+        }
+
+        @Override
+        public boolean hasPhoneNumber(Phone phone) {
+            // This is a stub method for testing purposes, returning false by default.
+            return true;
         }
     }
 
