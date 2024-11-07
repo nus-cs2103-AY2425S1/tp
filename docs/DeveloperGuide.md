@@ -730,9 +730,12 @@ Diagram for interactions inside the logic component for the `list all` command.
 
 ### Difficulty Level: 10/10
 
+The project was really challenging as we were working on an existing codebase hence to include any implementations, we
+would need to know how all the functionalities and classes are connected to one another.
+
 ### Challenges Faced:
 1. The original AB3 has many different classes that are all coupled together so making a single change would require an 
-understanding of how the different classes work together, making tracing long codes essential
+understanding of how the different classes work together, making tracing long codes essential.
 
 2. JavaFX is weirdly restrictive in the things that can be done, such as when it becomes scrollable and no animations 
 allowed, whereas AB3 seem to have done it seamlessly (except animation) for each component.
@@ -749,6 +752,33 @@ role, contract end date and update SampleDataUtil.java to have people with the r
 time consuming as just to update Person with new fields you had to update a lot of files with the updated tests.
 
 6. As someone who is inexperienced with Git, there was a very steep learning curve, especially for fixing merge conflicts.
+
+### Effort Required
+1. **Documentation**: Comprehensive documentation was required for all classes and commands to explain every component
+for developers as well as for clear standardization.
+
+2. **User Guide**: Crafting a detailed user guide was essential to ensure clear understanding of the usage and purpose of
+our application and its features for both technical and non-technical users.
+
+3. **Testing**: Extensive and efficient test cases has to be written and executed to ensure that our application is 
+bug-free.
+
+4. **Familiarizing with existing codebase**: Careful and thorough analysis of existing codebase is important to ensure
+bug-free implementation of new features as well as improving existing ones.
+
+### Achievements
+1. **Excellent Product**: Able to produce a well-working application that solves all intended problems and 
+proposed user stories
+
+2. **Smooth Performance**: Optimized our code for the application such that it is able to handle large amounts of data
+without any performance issues
+
+### Reuse and Effort Savings
+1. **Storage component**
+2. **UI components**
+2. **Command parsing component**
+3. **General feature component**
+4. **Architecture Design**
 
 --------------------------------------------------------------------------------------------------------------------
 
