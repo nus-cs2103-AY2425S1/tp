@@ -38,7 +38,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_nonNumberPhone_throwsParseException() {
-        assertParseFailure(parser, "find p/haha", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.NUM_USAGE));
+        assertParseFailure(parser, "find p/haha", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.ARG_USAGE));
     }
 
 }
