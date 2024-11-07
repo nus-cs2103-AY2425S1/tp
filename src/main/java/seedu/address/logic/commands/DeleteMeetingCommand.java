@@ -63,7 +63,7 @@ public class DeleteMeetingCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteMeetingCommand)) {
             return false;
         }
 
