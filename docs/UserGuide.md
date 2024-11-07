@@ -12,7 +12,7 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer, you can get it [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-2/tp/releases/).
 
@@ -25,13 +25,13 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `view` : Lists all buyers.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 u/buyer` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com b/120000` : Adds a buyer contact named `John Doe` to the Buyer list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd buyer shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all buyers.
 
    * `exit` : Exits the app.
 
@@ -49,18 +49,15 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items in angle brackets represent input choices.<br>
-    e.g `t/<buyer,seller>` can be used as `t/buyer` or as `t/seller` only.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/relocating` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/relocating`, `t/relocating t/upgrading` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -75,12 +72,6 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
-### Clearing all entries : `clear`
-
-Clears all entries from the buyer list.
-
-Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -99,7 +90,8 @@ All data is saved automatically as a JSON file within the storage folder. Advanc
 Note: By default, the storage folder is set to a folder named `data` in the home folder.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, the data files will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes one of the fields invalid, the data files will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If any of the data files, e.g. `buyerlist.json` is deleted, it will create a new data file with pre-populated data, e.g. it will create a new `buyerlist.json` with prepopulated data.<br>
 Furthermore, certain edits can cause the JSON files to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -137,7 +129,7 @@ Examples:
 ![BuyerModeInitialList](images/BuyerModeInitialList.png)
 <div markdown="block" class="alert alert-info">
 
-**:information_source: These commands are for when the parser is in `b` mode (Buyer mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+**:information_source: These commands are for when the parser is in `b` mode (Buyer mode) see [switching parser modes](#switching-parser-modes--switch):**<br>
 
 * Note how the list already contains sample `Buyer`s (if this is the first time using the app)
 
@@ -176,6 +168,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​`
 * Edits the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. 
 * The index refers to the index number shown in the **displayed buyer list**.
 * The index must be a positive integer: 1, 2, 3, …​
+* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the buyer will be removed i.e adding of tags is not cumulative.
 * You can remove all the buyer’s tags by typing `t/` without
@@ -223,11 +216,17 @@ Examples:
 * `view` followed by `delete 2` deletes the 2nd buyer in the displayed buyer list.
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the displayed results of the `find` command.
 
+### Clearing all buyers : `clear`
+
+Clears all entries from the buyer list.
+
+Format: `clear`
+
 ## Meet Ups
 ![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
 <div markdown="block" class="alert alert-info">
 
-**:information_source: These commands are for when the parser is in `m` mode (MeetUp mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+**:information_source: These commands are for when the parser is in `m` mode (MeetUp mode) see [switching parser modes](#switching-parser-modes--switch):**<br>
 
 * Note how the list already contains sample `Meet Up`s (if this is the first time using the app)
 
@@ -245,15 +244,18 @@ Format: `view`
 
 Adds a meet-up to the meet-up list.
 
-Format: `add n/MEETUP_SUBJECT i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_TO`
+Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_NAME]…​`
 
-<div markdown="span" class="alert alert-primary">
-MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`
-</div>
+* New meet-ups must have unique meet-up subjects and must not be duplicate subjects of existing meet-ups.
+
+* MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`.
+
+* MEETUP_TO must be a date/time that is later than MEETUP_FROM.
+
+* Buyers that exist in buyer list will be marked as green, while those that don't will be marked as red.
 
 Examples:
-* `add n/Product Pitch i/Product pitch for James at MBS from/2024-10-31 13:00 to/2024-10-31 15:30`
-* `add n/Show buyer 3 houses i/Meet with James Jimes to show him 3 houses that fit his expectations from/2024-10-30 09:30 to/2024-10-30 10:30`
+* `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li `
 
 Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
 
@@ -264,20 +266,20 @@ Meet Ups with clashing timings will be displayed in red. Otherwise, the default 
 
 Edits an existing meet-up in the meet-up list.
 
-Format: `edit INDEX i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_FROM`
+Format: `edit INDEX [s/MEETUP_SUBJECT] [i/MEETUP_INFO] [f/MEETUP_FROM] [t/MEETUP_TO] [n/BUYER_NAME]…​`
 
-<div markdown="span" class="alert alert-primary">
-MEETUP_FROM and MEETUP_TO fields should follow the format  `YYYY-MM-DD HH:MM`
-</div>
-
-* Edits the meet-up at the specified `INDEX`. The index refers to the index number shown in the displayed meet-up list. The index **must be a positive integer** 1, 2, 3, …​
-* All fields need to be provided.
+* Edits the meet-up at the specified `INDEX`.
+* The index refers to the index number shown in the **displayed meet-up list**. 
+* The index must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* When editing buyers, the existing buyers will be removed i.e adding of buyers is not cumulative
+* You can remove all the meet-up's buyers by typing `n/` without specifying any tags after it.
 
 Examples:
 *  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
 
-### Locating meet-ups by name: `find`
+### Locating meet-ups: `find`
 
 Finds meet-ups whose meet-up names contain any of the given keywords.
 
@@ -285,10 +287,10 @@ Format: `find s/KEYWORD`
 
 * The search is case-insensitive. e.g `meet` will match `Meet`
 * Only the meet-up name is searched.
-* Keyword will be matched to full words and sentences e.g. `meet` will match `meetup` and `meet with Jack`
+* Keyword will be matched to exact words, e.g. `meet` will not match `meeting`
 
 Examples:
-* `find s/Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for meeting with Jane`
+* `find s/Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for Jane's meet`
 * `find s/Sales` returns `Sales Meeting`
 
 ![FindMeetUpSequence](images/FindMeetUpSequence.png)
@@ -300,18 +302,25 @@ Deletes the specified meet-up from the buyer list.
 Format: `delete INDEX`
 
 * Deletes the meet-up at the specified `INDEX`.
-* The index refers to the index number shown in the displayed meet-up list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the **displayed meet-up list**.
+* The index must be a positive integer 1, 2, 3, …​
+* The index cannot exceed the displayed list’s range.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd meet-up in the meet-up list.
+* `view` followed by `delete 2` deletes the 2nd meet-up in the meet-up list.
 * `find meet` followed by `delete 1` deletes the 1st meet-up in the results of the `find` command.
+
+### Clearing all meet-ups : `clear`
+
+Clears all entries from the meet-up list.
+
+Format: `clear`
 
 ## Properties
 ![PropertyModeInitialList](images/PropertyModeInitialList.png)
 <div markdown="block" class="alert alert-info">
 
-**:information_source: These commands are for when the parser is in `p` mode (Property mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+**:information_source: These commands are for when the parser is in `p` mode (Property mode) see [switching parser modes](#switching-parser-modes--switch):**<br>
 
 * Note how the list already contains sample `Property`s (if this is the first time using the app)
 
@@ -329,6 +338,8 @@ Format: `view`
 
 Adds a property to the property list.
 
+* New properties must have unique addresses and must not be duplicate addresses of existing properties.
+
 Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
 
 Examples:
@@ -340,13 +351,15 @@ Edits an existing property in the property list.
 
 Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [s/ASKING_PRICE] [t/PROPERTY_TYPE]`
 
-* Edits the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed property list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the buyer at the specified `INDEX`. 
+* The index refers to the index number shown in the **displayed property list**. 
+* The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st buyer to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd buyer to be `Betsy Crower`.
+*  `edit 1 p/91234567 s/100000` Edits the seller's phone number and the property's asking price to be `91234567` and `100,000` respectively.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's seller to be `Betsy Crower`.
 
 ### Locating properties: `find`
 
@@ -382,6 +395,12 @@ Examples:
 * `view` followed by `delete 4` deletes the 4th property in the displayed property list.
 * `find n/Adam` followed by `delete 2` deletes the 2nd property in the displayed results of the find command.
 
+### Clearing all properties : `clear`
+
+Clears all entries from the property list.
+
+Format: `clear`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -393,7 +412,7 @@ Examples:
 **A**: In the same folder that contains your app `Abcli.jar`, there should be a folder called `data` which contains `buyerlist.json`, `meetuplist.json`, and `propertylist.json`.
 
 **Q**: How do I add MeetUps or Properties? I can only add buyers<br>
-**A**: You are likely in the `BuyerMode` indicated by the `Viewing: Buyers` shown at the top bar, to switch to `MeetUpMode`, use `switch m`, and to switch to `Property Mode`, use `switch p`. For more details, see [Switching parser modes](#switching-parser-modes--switch).
+**A**: You are likely in the `Buyer Mode` indicated by the `Viewing: Buyers` shown at the top bar, to switch to `MeetUp Mode`, use `switch m`, and to switch to `Property Mode`, use `switch p`. For more details, see [switching parser modes](#switching-parser-modes--switch).
 
 **Q**: Is there a separate save command/button, are all my changes auto-saved?<br>
 **A**: Any successfully inputted command will save the changes into the data files, thus there is no need to worry about manually saving your changes.
@@ -403,6 +422,8 @@ Examples:
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -413,43 +434,47 @@ Examples:
     <tr>
         <th>Action</th>
         <th>Buyer</th>
-        <th>Property</th>
         <th>Meetup</th>
+        <th>Property</th>
+    </tr>
+    <tr>
+        <td><b>View</b></td>
+        <td><code>view</code>
+        <td><code>view</code>
+        <td><code>view</code>
     </tr>
     <tr>
         <td><b>Add</b></td>
         <td><code>add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​</code><br> e.g., <code>add n/James Ho p/22224444 e/jamesho@example.com a/1200000 t/friend t/colleague</code></td>
-        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE…​</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
         <td><code>add s/SUBJECT i/INFO f/FROM t/TO [a/ADDED_BUYERS]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Eswen to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
-    </tr>
-    <tr>
-        <td><b>Delete</b></td>
-        <td><code>delete INDEX</code><br> e.g., <code>delete 3</code></td>
-        <td><code>delete INDEX</code><br> e.g., <code>delete 5</code></td>
-        <td><code>delete INDEX</code><br> e.g., <code>delete 2</code></td>
+        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE…​</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
     </tr>
     <tr>
         <td><b>Edit</b></td>
         <td><code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​</code><br> e.g., <code>edit 2 n/James Lee e/jameslee@example.com</code></td>
-        <td><code>edit INDEX [n/LANDLORD_NAME] [a/ADDRESS] [p/PHONE] [a/ASKING_PRICE] [t/TYPE]…​</code><br> e.g., <code>edit 2 n/Ben Tan a/East Coast Blk 20 #11-283 </code></td>
         <td><code>edit INDEX [s/SUBJECT] [i/INFO] [f/FROM] [t/TO] [a/ADDED_BUYERS]…​</code><br> e.g., <code>edit 3 a/Alex Yeoh a/Ben Ten</code></td>
+        <td><code>edit INDEX [n/LANDLORD_NAME] [a/ADDRESS] [p/PHONE] [a/ASKING_PRICE] [t/TYPE]…​</code><br> e.g., <code>edit 2 n/Ben Tan a/East Coast Blk 20 #11-283 </code></td>
+    </tr>
+    <tr>
+        <td><b>Delete</b></td>
+        <td><code>delete INDEX</code><br> e.g., <code>delete 3</code></td>
+        <td><code>delete INDEX</code><br> e.g., <code>delete 2</code></td>
+        <td><code>delete INDEX</code><br> e.g., <code>delete 5</code></td>
     </tr>
     <tr>
         <td><b>Find</b></td>
-        <td><code>find KEYWORD [MORE_KEYWORDS]</code><br> e.g., <code>find James Jake</code></td>
+        <td><code>find n/KEYWORD [MORE_KEYWORDS]</code><br> e.g., <code>find n/James Jake</code></td>
+        <td><code>find s/KEYWORD [MORE_KEYWORDS]</code><br> e.g., <code>find Project </code></td>
         <td><code>find [a/KEYWORD] [n/KEYWORD] [MORE_KEYWORDS]</code><br> e.g., <code>find a/Lakefront</code></td>
-        <td><code>find KEYWORD [MORE_KEYWORDS]</code><br> e.g., <code>find Project </code></td>
     </tr>
     <tr>
-        <td><b>List</b></td>
-        <td colspan="3"><code>view</code></td>
+        <td><b>Clear</b></td>
+        <td><code>clear</code>
+        <td><code>clear</code>
+        <td><code>clear</code>
     </tr>
     <tr>
         <td><b>Help</b></td>
         <td colspan="3"><code>help</code></td>
-    </tr>
-    <tr>
-        <td><b>Clear</b></td>
-        <td colspan="3"><code>clear</code></td>
     </tr>
 </table>
