@@ -83,9 +83,9 @@ Parameter     | Notes
 **`JOB`**    | should be alphanumeric
 **`PHONE_NUMBER`**   | should only contain digits `0-9`, and it should be at least 3 digits long
 **`EMAIL`** | should be a valid email of the format `local-part@domain`
-**`SKILL`**   | should be alphanumeric
+**`SKILL`**   | should be alphanumeric 
 **`INTERVIEW_SCORE`**   | should be a number ranging from `0.0` to `10.0` with a maximum of a single decimal place, e.g. `5.5`, `8`, `10.0` are valid but `5.`, `6.55`, `11`, `.5` are invalid
-**`TAG`**   | should be alphanumeric and should not contain any spaces
+**`TAG`**   | should be alphanumeric and should not contain any spaces. `Hired`, `Rejected` or `Pending` also should not be manually added as tags
 **`INDEX`**   | refers to the index number shown in the displayed candidate list and **must be a positive integer**, i.e. 1, 2, 3, ...
 **`ORDER`**   | should be either `a` (ascending) or `d` (descending)
 
@@ -171,7 +171,7 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 * Existing values will be updated to the input values.
 * When editing tags/skills, the existing tags/skills of the candidate will be removed i.e. adding of tags/skills is not cumulative.
 * You can remove all the candidate’s tags by typing `t/` without
-    specifying any tags after it.
+    specifying any tags after it. This does not change the candidate's status.
 * You can remove all the candidate’s skills by typing `s/` without
   specifying any skills after it.
 
@@ -329,6 +329,7 @@ Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways 
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When there are long parameters**, the condensed data displayed on the left side of the GUI may cut off any parameters with a large number of characters, for instance a skill with 1000 characters. However, when the `view` command is used, the full length of all parameters of that particular candidate are displayed in the view panel on the right side of the GUI.
 
 --------------------------------------------------------------------------------------------------------------------
 
