@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/ckaayy.png" width="200px">
 
-[[github](https://github.com/ckaayy)]
+[[github](https://github.com/ckaayy)][[portfolio](team/ckaayy.md)]
 
 * Role: Developer
 * Responsibilities: Expiring Policy alerts
