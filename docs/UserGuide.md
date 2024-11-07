@@ -33,7 +33,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 1. **Start the App**
    - Enter the following command: `java -jar tp.jar`
    - Within a few seconds, the BA€ Address Book interface should display and should look something like this:
-   ![Ui](images/NewUi.png)
+   ![Ui](images/UG_Images/Ui.png)
 
 ### Using BA€
 
@@ -83,7 +83,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
 Shows a window showing all commands and usage examples.
 
-![help message](images/helpMessage.png)
+![help message](images/UG_Images/HelpWindow.png)
 
 Format: `help`
 
@@ -151,7 +151,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/UG_Images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -184,13 +184,13 @@ Examples:
 * filter `t\client` filters and displays all contacts tagged as "client".
 * filter `n\John t\friend t\coworker` filters and displays contacts whose name contains "John" and who are tagged as both "friend" and "coworker".
 * filter `n\Jo n\Al t\worth` filters and displays contacts whose name contains "Jo" or "Al" and tagged as "worth"
-  ![result for 'filter n/Jo n/Al t/worth](images/filterJoAliWorth.png)
+  ![result for 'filter n/Jo n/Al t/worth](images/UG_Images/filterJoAliWorth.png)
 
 <box type="tip" seamless>
 
 **Tip:** Use the command buttons provided to get command template
 <div style="text-align: left;">
-    <img src="images/v1.4/FilterGUIButton.png" alt="Using filter button" width=545 />
+    <img src="images/UG_Images/FilterUIButton.png" alt="Using filter button" width=545 />
 </div>
 
 </box>
@@ -207,13 +207,13 @@ Examples:
 * `advfilter t\client != VIP` would show all contacts that have the tag of client, other than those with the value of VIP
 * `advfilter t\highPriority = Yes` would show all contacts that have the tag of highPriority and the value of Yes.
 * `advfilter t\neighbours >= 5` would show all contacts that have the tag of neighbours and a value of 5 or greater.
-  ![result for 'advfilter t/neighbours >= 5](images/advfilterEg.png)
+  ![result for 'advfilter t/neighbours >= 5](images/UG_Images/advfilterEg.png)
 
 <box type="tip" seamless>
 
 **Tip:** Use the command button for Advanced Filter provided to get command template
 <div style="text-align: left;">
-    <img src="images/advFilterGUIEg.png" alt="Using filter button" width=545 />
+    <img src="images/UG_Images/advfilterUIButton.png" alt="Using filter button" width=545 />
 </div>
 
 </box>
@@ -233,7 +233,7 @@ Examples:
 
 **Tip:** Use the command button for Export to export your contact data to your preferred file format in the click of a button.
 <div style="text-align: left;">
-    <img src="images/exportGUIEg.png" alt="Using filter button" width=545 />
+    <img src="images/UG_Images/exportUIButton.png" alt="Using filter button" width=545 />
 </div>
 
 ### Clearing all entries : `clear`

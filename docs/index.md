@@ -8,7 +8,7 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-W14-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-W14-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W14-2/tp/branch/master/graph/badge.svg?token=VVRYVPLWUX)](https://app.codecov.io/gh/AY2425S1-CS2103T-W14-2/tp)
 
-![Ui](images/NewUi.png)
+![Ui](images/UG_Images/Ui.png)
 
 **BA€ is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
