@@ -1,6 +1,7 @@
 package seedu.address.model.volunteer;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -58,6 +59,7 @@ public class VolunteerDates {
         for (String s : dates) {
             requireNonNull(s);
             String d = s.trim(); // Only trim outer spaces
+            checkArgument(isValidDate(d), MESSAGE_CONSTRAINTS);
             LocalDate date = LocalDate.parse(d);
 
             if (!uniqueDates.add(date)) {
@@ -90,7 +92,6 @@ public class VolunteerDates {
             requireNonNull(s);
             String d = s.trim(); // Only trim outer spaces
             LocalDate date = LocalDate.parse(d);
-
             if (!hasAvailableDate(date) || !uniqueDates.add(date)) {
                 throw new VolunteerDeleteMissingDateException(d);
             }
