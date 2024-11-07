@@ -87,7 +87,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Extraneous parameters for commands that **take in parameters**  will be recognised as *invalid* input parameters.<br>
-  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as a invalid command structure due to extra `gn/`.
+  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as an invalid command structure due to extra `gn/`.
 
 **Important**
 
