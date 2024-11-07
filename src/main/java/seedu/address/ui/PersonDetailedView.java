@@ -1,17 +1,21 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import seedu.address.model.person.Person;
 
+import java.util.Comparator;
 
 
 /**
@@ -19,8 +23,10 @@ import seedu.address.model.person.Person;
  */
 public class PersonDetailedView extends UiPart<Region> {
     private static final String FXML = "PersonDetailedView.fxml";
+    private boolean isVisualsEnabled;
 
     public final Person person;
+    private final PersonDetailedViewContentManager contentManager;
     @FXML
     private HBox cardPane;
     @FXML
@@ -47,6 +53,16 @@ public class PersonDetailedView extends UiPart<Region> {
     private Label placeholderLabel;
     @FXML
     private ImageView profileImage;
+    @FXML
+    private Button templateButton1;
+    @FXML
+    private Button templateButton2;
+    @FXML
+    private Button templateButton3;
+    @FXML
+    private HBox notificationBox;
+    @FXML
+    private Label notificationLabel;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} to display.
@@ -54,14 +70,21 @@ public class PersonDetailedView extends UiPart<Region> {
     public PersonDetailedView(Person person, boolean isVisualsEnabled) {
         super(FXML);
         this.person = person;
+        this.contentManager = new PersonDetailedViewContentManager(person);
+        this.isVisualsEnabled = isVisualsEnabled;
 
+        initialiseView();
+        setupTemplateButtons();
+    }
+
+    private void initialiseView() {
         Image profileImg = new Image(getClass()
                 .getResourceAsStream("/" + this.person.getProfilePicFilePath().toString()));
+
         profileImage.setImage(profileImg);
 
-        name.setText(person.getName().fullName);
+        name.setText(contentManager.getName());
 
-        // check for recent birthday
         if (isVisualsEnabled && person.getBirthday().hasBirthdayWithin7Days()) {
             name.setStyle("-fx-text-fill: #ffa500");
             Tooltip birthdayTooltip = new Tooltip("Birthday soon!");
@@ -69,12 +92,13 @@ public class PersonDetailedView extends UiPart<Region> {
             Tooltip.install(name, birthdayTooltip);
         }
 
-        phone.setText("+65 " + person.getPhone().value);
-        address.setText("Address: " + person.getAddress().value);
-        birthday.setText("Birthday: " + person.getBirthday().value);
-        age.setText("Age: " + person.getAge().value);
-        email.setText(person.getEmail().value);
-        hasPaid.setText("Paid status: " + (person.getHasPaid() ? "Paid" : "Not Paid"));
+        phone.setText(contentManager.getPhone());
+        address.setText(contentManager.getAddress());
+        email.setText(contentManager.getEmail());
+        birthday.setText(contentManager.getBirthday());
+        age.setText(contentManager.getAge());
+        hasPaid.setText(contentManager.getHasPaidStatus());
+        frequency.setText(contentManager.getFrequency());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
@@ -91,6 +115,45 @@ public class PersonDetailedView extends UiPart<Region> {
                     }
                     tags.getChildren().add(tagLabel);
                 });
-        frequency.setText("Policy Renewal Frequency: " + person.getFrequency().value + " month(s)");
+    }
+
+    /**
+     * Sets up the template buttons with their text labels and action handlers.
+     */
+    private void setupTemplateButtons() {
+        templateButton1.setText(contentManager.getYoungAdultButtonText());
+        templateButton2.setText(contentManager.getMidCareerButtonText());
+        templateButton3.setText(contentManager.getPreRetireeButtonText());
+
+        templateButton1.setOnAction(event -> showCopyNotification(contentManager.getYoungAdultMessage()));
+        templateButton2.setOnAction(event -> showCopyNotification(contentManager.getMidCareerMessage()));
+        templateButton3.setOnAction(event -> showCopyNotification(contentManager.getPreRetireeMessage()));
+    }
+
+    /**
+     * Displays a temporary notification indicating that the specified message
+     * has been copied to the clipboard. The notification appears as a tooltip
+     * and automatically closes after a short duration.
+     * @param message The message text to copy to the clipboard and notify the user about.
+     */
+    public void showCopyNotification(String message) {
+        copyTemplateToClipboard(message);
+
+        notificationLabel.setText("Copied to clipboard!");
+        notificationLabel.setVisible(true);
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(1.0));
+        pause.setOnFinished(e -> notificationLabel.setVisible(false));
+        pause.play();
+    }
+
+    /**
+     * Copies a given message to the system clipboard.
+     */
+    public void copyTemplateToClipboard(String message) {
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(message);
+        clipboard.setContent(content);
     }
 }
