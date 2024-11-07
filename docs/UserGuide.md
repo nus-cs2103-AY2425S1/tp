@@ -43,16 +43,16 @@ Health Connect is an application designed to **streamline client management** fo
     3. If Java `17` or higher is displayed, you are good to go! Proceed to **Step 3**.
        ![Checking Java Version on Windows - Display](./images/QuickStartWindowsCheckVersionDisplay.png)
     4. Otherwise, proceed to **Step 2**.
-       <br></br>
+       <br>
 2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
     1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
     2. Download the appropriate installer for Windows.
     3. After installation, follow the instructions in **Step 1**.
-       <br></br>
+       <br>
 3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
-   <br></br>
+   <br>
 4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-   <br></br>
+   <br>
 5. Use Command Prompt to open the JAR file.
     1. Find the file path of the file you just copied. To do so, right-click on the file in the folder and press `Properties`.
        ![Finding File Path on Windows](./images/QuickStartWindowsFindFilePath.png)
@@ -65,7 +65,7 @@ Health Connect is an application designed to **streamline client management** fo
        ![Entering JAR Command on Windows](./images/QuickStartWindowsEnteringJarCommand.png)
     5. A GUI similar to the below should appear in a few seconds.
        ![Ui](images/Ui.png)
-       <br></br>
+       <br>
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     * `view` : Displays all contacts.
@@ -74,7 +74,7 @@ Health Connect is an application designed to **streamline client management** fo
     * `filter t/High Risk` : Displays all entries which are tagged High Risk.
     * `clear` : Deletes all contacts.
     * `exit` : Exits the app.
-      <br></br>
+      <br>
 7. Refer to the [Features](#features) below for details of each command.
 
 ### For Mac Users:
@@ -86,16 +86,16 @@ Health Connect is an application designed to **streamline client management** fo
     3. If Java `17` or higher is displayed, you are good to go! Proceed to **step 3**.
        ![Checking Java Version on Mac - Display](./images/QuickStartMacCheckVersionDisplay.png)
     4. Otherwise, proceed to step 2.
-       <br></br>
+       <br>
 2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
     1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
     2. Download the appropriate installer for Mac.
     3. After installation, follow the instructions in **Step 1**.
-       <br></br>
+       <br>
 3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
-   <br></br>
+   <br>
 4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-   <br></br>
+   <br>
 5. Use Terminal to open the JAR file.
     1. Find the file path of the file you just copied. To do so, right-click on the file in Finder and press `Get Info`.
        ![Finding File Path on Mac](./images/QuickStartMacFindFilePath.png)
@@ -108,7 +108,7 @@ Health Connect is an application designed to **streamline client management** fo
        ![Entering JAR Command on Mac](./images/QuickStartMacEnterJarCommand.png)
     5. A GUI similar to the below should appear in a few seconds.
        ![Ui](images/Ui.png)
-       <br></br>
+       <br>
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     * `view` : Displays all contacts.
@@ -117,7 +117,7 @@ Health Connect is an application designed to **streamline client management** fo
     * `filter t/High Risk` : Displays all entries which are tagged High Risk.
     * `clear` : Deletes all contacts.
     * `exit` : Exits the app.
-      <br></br>
+      <br>
 7. Refer to the [Features](#features) below for details of each command.
 
 
@@ -139,7 +139,18 @@ Health Connect is an application designed to **streamline client management** fo
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. If the command specifies `help 123`, it will be interpreted as `help`.
 
+* Prefixes are case sensitive, and must be in lower case. <br>
+  e.g. `n/` is allowed but `N/` is not allowed
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* The following are considered duplicate patients:
+  * Same name AND same phone number
+  * Same name AND same email
+  * Same name, same phone number AND same email
+  * Note: same phone number AND same email are not considered as a duplicate patient since the patient might use their NOK's contact details
+
+
 
 ### Parameter Constraints
 
@@ -193,7 +204,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY...`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin m/Penicillin`
-
+  <br>
 * `add n/Betsy-Crowe p/81239873 e/betsycrowe@example.com a/01 Clementi Road #04-03 Singapore 4374538 t/Low Risk m/None`
 
 
@@ -221,7 +232,7 @@ Additional Details:
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-   <br></br>
+   <br>
 * `edit 2 n/Betsy Crower`
   Edits the name of the 2nd person to be `Betsy Crower`.
 
@@ -230,6 +241,7 @@ Examples:
 Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
+
 [Parameter Constraints](#parameter-constraints).
 
 Additional Details:
@@ -243,7 +255,7 @@ Additional Details:
 Examples:
 * `find John`
   Returns `John` and `John Doe`
-  <br></br>
+  <br>
 * `find bernice charlotte` Returns `Bernice` and `Charlotte`
   ![Example of Find Command 2](./images/FeatureFindExample.png)
   
@@ -274,7 +286,10 @@ Examples:
 * `filter t/High Risk a/John street, block 123, #01-01` 
 * returns all patients who are at high risk AND have address `John street, block 123, #01-01`
   ![Example of Filter Command ](./images/FeatureFilterExample.png)
-  <br></br>
+  <br>
+* `filter m/Penicillin p/88451234`
+  returns all patients who have an allergy to penicillin AND have the phone number `88451234`
+  <br>
 
 
 ### Deleting a patient : `delete`
@@ -292,7 +307,7 @@ Additional Details:
 Examples:
 * `delete n/john`
   Deletes `John` assuming that there is only 1 `John` in the address book.
-  <br></br>
+  <br>
 * `delete n/craig p/98761230`
   Deletes `Craig` with phone `98761230` assuming that there is only 1 patient with name `Craig` and phone `98761230` in the address book
 
@@ -321,13 +336,13 @@ Examples:
 * `date n/Jason Tan p/93823871 e/jasontan@gmail.com d/23/10/2024 1830`
   ![Example of Date Command 1](./images/FeatureDateExample.png)
   Adds appointment date and time `23/10/2024 1830` to patient with name:`Jason Tan`, phone:`93823871`, email:`jasontan@gmail.com`
-  <br></br>
+  <br>
 * `date p/92938132 d/22/10/2024 1920`
   Adds appointment date and time `22/10/2024 1920` to patient with phone:`92938132`
-  <br></br>
+  <br>
 * `date e/johndoe@gmail.com d/10/02/2023 1520`
   Adds appointment date and time `10/02/2023 1520` to patient with email `johndoe@gmail.com`
-  <br></br>
+  <br>
 * `date n/Alex Yeoh d/None`
   Removes appointment date from `Alex Yeoh`
 
@@ -386,7 +401,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **A**: Install the app in the other computer by following the instructions in [Quick Start](#quick-start) and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 1. Find the `data` folder created by the application
    ![FAQ 1 Step 1](./images/FAQ1Step1.png)
-   <br></br>
+   <br>
 2. Transfer the `.json` file in the `data folder
    ![FAQ 1 Step 2](./images/FAQ1Step2.png)
 --------------------------------------------------------------------------------------------------------------------
@@ -396,7 +411,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Issue 1:** **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. <br>
 **Remedy:** Delete the `preferences.json` file created by the application **in the same folder** before running the application again.
 ![Remedy for Known Issue 1](./images/KnownIssuesRemedy1.png)
-<br></br>
+<br>
 **Issue 2:** **If you minimize the Help Window** and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear.<br>
 **Remedy:** Manually restore the minimized Help Window.
 
