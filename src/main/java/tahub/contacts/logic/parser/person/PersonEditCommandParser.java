@@ -63,7 +63,10 @@ public class PersonEditCommandParser implements Parser<PersonEditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+
+        editPersonDescriptor.setTags(parseTagsForEdit(argMultimap
+                .getAllValues(PREFIX_TAG)).orElse(null));
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(PersonEditCommand.MESSAGE_NOT_EDITED);
