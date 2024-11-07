@@ -50,9 +50,9 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `mark -s 1 active`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagramMarkSupplier.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `SupplierListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `SupplierListPanel`, `StatusBarFooter`, `DeliveryListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Supplier` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Supplier`  and `Delivery` object(s) residing in the `Model`.
 
 ### Logic component
 
@@ -90,19 +90,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete -s 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSupplierSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete -s 1` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteSupplierCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteSupplierCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteSupplierCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a supplier).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -112,8 +112,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `DeleteSupplierCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `DeleteSupplierCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddSupplierCommandParser`, `DeleteSupplierCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -280,8 +280,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-Manage and track deliveries faster than using a typical mouse/GUI driven app. 
+**Value proposition**:
+Manage and track deliveries faster than using a typical mouse/GUI driven app.
 Plan and allocate manpower more effectively to prepare for future deliveries.
 Match with the appropriate suppliers to find products correctly.
 
@@ -289,38 +289,45 @@ Match with the appropriate suppliers to find products correctly.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​     | I want to …​                                      | So that I can…​                                                                                            |
-|----------|-------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `* * *`  | shop owner  | view all my supplier contacts                     |                                                                                                            |
-| `* * *`  | shop owner  | add supplier contact                              |                                                                                                            |
-| `* * *`  | shop owner  | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
-| `* * *`  | shop owner  | edit supplier contact                             | I can easily alter contact information in the address book when suppliers change their contact information |
-| `* *`    | shop owner  | Search for my supplier contacts by name           | I can find the contact information of the supplier I am looking for through names                            |
-| `*`      | shop owner  | Search for my supplier contacts by contact number | I can find the contact information of the supplier I am looking for through a contact number                 |
-| `*`      | shop owner  | Search for my supplier contacts by product        | I can find the contact information of the supplier I am looking for based on the product they supply       |
-| `* *`    | shop owner  | have custom tags for my suppliers                 | I can keep track of special details about my suppliers                                                     |
-| `* * *`  | shop owner  | add delivery information                          | I can track of the upcoming deliveries                                                                     |
-| `* *`    | shop owner  | edit delivery information                         | I can edit upcoming deliveries without changing other fields                                               |
-| `* * *`  | shop owner  | delete delivery information                       | I can delete deliveries that are no longer happening                                                       |
-| `* *`    | shop owner  | mark delivery with completion status              | I know if a delivery has been completed/postponed/cancelled                                                |
-| `*`      | shop owner  | Search for my deliveries by date                  | I can find the deliveries happening on a certain date                                                      |
-| `*`      | shop owner  | Search for my deliveries by supplier name         | I can find the deliveries associated with a supplier                                                       |
-| `* *`    | shop owner  | view past deliveries                              | I can keep track of deliveries that have been completed                                                    |
-| `* *`    | shop owner  | view list of products                             | I know what products I am currently selling                                                                |
+| Priority | As a …​                | I want to …​                                      | So that I can…​                                                                                            |
+|----------|------------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `* * *`  | first time shop owner  | can get help on using the application             | I can quickly get up to speed with all the commands                                                        |
+| `* * *`  | shop owner             | view all my supplier contacts                     |                                                                                                            |
+| `* * *`  | shop owner             | add supplier contact                              |                                                                                                            |
+| `* * *`  | shop owner             | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
+| `* * *`  | shop owner             | have custom tags for my suppliers                 | I can keep track of special details about my suppliers                                                     |
+| `* * *`  | shop owner             | have products linked to my suppliers              | I can keep track of products that are sold by my suppliers                                                 |
+| `* * *`  | shop owner             | mark suppliers with active status                 | I can view which suppliers are currently active/inactive                                                   |
+| `* * *`  | shop owner             | view all my deliveries                            |                                                                                                            |
+| `* * *`  | shop owner             | add delivery information                          | I can track of the upcoming deliveries                                                                     |
+| `* * *`  | shop owner             | delete delivery information                       | I can delete deliveries that are no longer happening                                                       |
+| `* * *`  | shop owner             | mark delivery with completion status              | I know if a delivery has been delivered/pending/cancelled                                                  |
+| `* *`    | shop owner             | find supplier contacts by name                    | I can find the contact information of the supplier I am looking for through names                          |
+| `* *`    | shop owner             | find supplier contacts by product                 | I can find the contact information of the supplier I am looking for based on the product they supply       |
+| `* *`    | shop owner             | find supplier contacts by company name            | I can find the contact information of the supplier I am looking for based on the company they are from     |
+| `* *`    | shop owner             | sort list of suppliers by name                    | I can view the suppliers in ascending/descending order by name                                             |
+| `* *`    | shop owner             | find deliveries by date                           | I can find the deliveries happening on a certain date                                                      |
+| `* *`    | shop owner             | find deliveries by supplier                       | I can find the deliveries associated with a supplier                                                       |
+| `* *`    | shop owner             | find deliveries by supplier status                | I can find the deliveries that are pending or have been delivered or cancelled                             |
+| `* *`    | shop owner             | sort list of deliveries by delivery cost          | I can view the deliveries in ascending/descending order sorted by delivery cost                            |
+| `* *`    | shop owner             | sort list of deliveries by delivery date and time | I can view the deliveries in ascending/descending order sorted by delivery date and time                   |
+| `* *`    | shop owner             | sort list of deliveries by delivery status        | I can view the deliveries in ascending/descending order sorted by delivery status                          |
+| `* *`    | shop owner             | view deliveries that are upcoming                 | I can view the deliveries that are within a certain time period                                            |
+| `* `     | shop owner             | edit supplier contact                             | I can easily alter contact information in the address book when suppliers change their contact information |
+| `* `     | shop owner             | edit delivery information                         | I can edit upcoming deliveries without changing other fields                                               |
+| `*`      | shop owner             | view list of products                             | I know what products I am currently selling                                                                |
 
-*{More to be added}*
-
-### Use cases 
+### Use cases
 
 **System**: Vendor Vault (VV)
 
 **Use Case**: UC01 - Add Supplier Information
 
-**Actor**: Grocer
+**Actor**: Shop Owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to add supplier information with the required supplier details (name, contact, email, company, products).
-2. VV successfully adds the supplier and displays the updated list of suppliers.  
+1. User requests to add a new supplier
+2. VV successfully adds the supplier and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
@@ -328,66 +335,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **1a1.** VV displays an appropriate error message.  
       Use case ends.
 
-
 - **1b.** User enters duplicate supplier information.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
-
-- **1c.** User omits supplier name.
-    - **1c1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1d.** User omits or provides an invalid contact number.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1e.** User omits or provides an invalid email address.
-    - **1e1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1f.** User omits the address or provides an invalid format.
-    - **1f1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1g.** User omits the company name.
-    - **1g1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1h.** User omits product information entry.
-    - **1h1.** VV displays an error message.  
-      Use case ends.
-
-      
-- **1i.** User provides duplicate supplier information (e.g., an entry with the same name and contact details already exists).
-    - **1i1.** VV displays an error message.  
-      Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
 **Use Case**: UC02 - Delete Supplier
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to delete a supplier.
-2. VV deletes the supplier and displays the updated supplier list.  
+1. User requests to delete a specific supplier.
+2. VV deletes the supplier and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the supplier index is missing or invalid.
+- **1a.** VV detects that the supplier is missing or invalid.
     - **1a1.** VV displays an error message.  
-      Use case ends.
-
-      
-- **1b.** The entered supplier index does not exist in the supplier list.
-    - **1b1.** VV displays an error message.  
       Use case ends.
 
 ___
@@ -395,75 +362,101 @@ ___
 
 **Use Case**: UC03 - Mark Supplier Status
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to mark a supplier's status as active or inactive.
-2. VV updates the supplier's status and displays the updated supplier list.  
+1. User requests to mark a specific supplier with a specific status.
+2. VV updates the supplier's status and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the supplier index is missing or invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
-
-- **1b.** VV detects that the supplier index does not exist in the list.
+- **1b.** VV detects that one or more parameters are missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
+- **1c.** VV detects that the current status of the specified supplier is the same as the requested status.
+    - **1c1.** VV displays an error message.
+      Use case ends.
 
-- **1c.** VV detects that the status (active/inactive) is missing or invalid.
-    - **1c1.** VV displays an error message.  
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC04 - Find Supplier by given parameters
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find suppliers by keyword in one or more parameters.
+2. VV updates the supplier's list and displays the updated list of all suppliers that contain given keywords in all their respective parameters .  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that the keyword is missing.
+    - **1b1.** VV displays an error message.  
       Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC04 - Add Deliveries
+**Use Case**: UC05 - Sort Suppliers
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to add a new delivery by entering the details for the new delivery (date and time, supplier index, product name, quantity, cost).
+1. User requests to sort suppliers by a specified field in a specified order.
+2. VV sorts the suppliers and displays the sorted list of suppliers.  
+   Use case ends.
+   **Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters is missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC06 - Add Deliveries
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User request to add a new delivery
 2. VV adds the delivery entry to the list and displays the updated list of deliveries.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the date or time format is invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
-
-- **1b.** VV detects that the supplier index is missing or invalid.
+- **1b.** VV detects that one or more parameters are missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
-
-- **1c.** VV detects that the product name is missing.
+- **1c.** VV detects a duplicate delivery.
     - **1c1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1d.** VV detects that the quantity or cost is missing or invalid.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1e.** VV detects a duplicate delivery (matching date, time, supplier index, and product name).
-    - **1e1.** VV displays an error message.  
       Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC05 - Delete Delivery
+**Use Case**: UC07 - Delete Delivery
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to delete a delivery entry.
-2. VV removes the delivery entry from the list and displays the updated list of deliveries.  
+1. User requests to delete a delivery.
+2. VV removes the delivery entry from the list and displays the updated list of all deliveries.
    Use case ends.
 
 **Extensions**:
@@ -475,69 +468,125 @@ ___
 - **1b.** VV detects invalid formatting.
     - **1b1.** VV displays an error message.  
       Use case ends.
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC08 - Mark the Status of Deliveries
+
+**Actor**: Shop Owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to set the status of a delivery
+2. VV displays a confirmation message and then shows an updated list of all deliveries.  
+   Use case ends.
+
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters are missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+- **1c.** VV detects that the current status of the specified delivery is the same as the requested status.
+    - **1c1.** VV displays an error message.
+      Use case ends.
+
+
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC09 - Find Deliveries by given parameters
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find deliveries by keyword in one or more parameters.
+2. VV updates the delivery list and displays the updated list of all deliveries that contain given keywords in all their respective parameters .  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that the keyword is missing.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC06 - Set the Status of Deliveries
+**Use Case**: UC10 - Sort Deliveries
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to set the status of a delivery as pending, delivered, or cancelled.
-2. VV displays a confirmation message and the updated list of deliveries.  
+1. User requests to sort deliveries by a specified field in a specified order.
+2. VV sorts the deliveries and displays the sorted list of deliveries.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the delivery index is missing or invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
+- **1b.** VV detects that one or more parameters is missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
 
-- **1b.** VV detects that the status is missing.
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC10 - UpcomingDeliveries
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find all deliveries with a certain time frame
+2. VV filters the deliveries and displays the filtered list of deliveries within the given time frame.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters is missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
 
-- **1c.** VV detects that the status is not one of the accepted values (pending, delivered, or cancelled).
-    - **1c1.** VV displays an error message.  
-      Use case ends.
 
 
-- **1d.** VV detects invalid formatting.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
-Performance Requirements
+#### Performance Requirements
 1. The system should respond to user input within 2 seconds for all CRUD operations on contacts and deliveries (e.g., adding, deleting, searching).
 2. The application should take no longer than 5 seconds to launch and load all necessary data (e.g., contacts, deliveries) on any supported platform.
 
-Scalability Requirements
+#### Scalability Requirements
 3. The system should be able to handle at least 1,000 contacts and 1000 deliveries without noticeable degradation in performance
 
-Usability Requirements
+#### Usability Requirements
 4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 
-Compatibility / Portability Requirements
+#### Compatibility / Portability Requirements
 5. Should work on any mainstream OS as long as it has Java 17 or above installed without requiring platform-specific dependencies
 6. The product should work as a standalone JAR file, not exceeding 100MB in size without needing an installer.
 
-Data Requirements
+#### Data Requirements
 7. The system should not use any Database Management System (DBMS) for data storage. The contacts and deliveries data should be stored locally in a human-editable file.
 8. The system should ensure that the data file remains consistent and free from corruption across system crashes or improper shutdowns.
 
-Security Requirements
+#### Security Requirements
 9. The system should ensure that user data (e.g., supplier contacts, delivery information) is only accessible by the user of the local machine
 
-Maintainability Requirements
+#### Maintainability Requirements
 10. The system should follow Object-Oriented Programming (OOP) principles to facilitate future maintenance and feature additions.
 11. The project should be developed in a breadth-first incremental manner, with consistent delivery of features over the course of the development cycle.
 
-Testability Requirements
+#### Testability Requirements
 12. The system should be designed to support unit and integration testing, with testable modules and clearly defined boundaries.
 13. The application should not depend on any external remote servers for its core functionality, ensuring that the product can be tested and used offline without network dependencies.
 
@@ -567,12 +616,10 @@ Testability Requirements
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
-
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </box>
 
 ### Launch and shutdown
@@ -590,29 +637,266 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Testing Supplier Commands 
+
+#### Adding a supplier
+
+1. Adding a supplier 
+
+   1. Prerequisites: No "John Doe" with company "companyA" and "Jane Doe" with company "companyB" in the list of suppliers.
+
+   1. Test case: `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`<br>
+     Expected: A new supplier is added to the list.
+
+   2. Test case: `add -s n/Jane Doe p/87654321 e/jane@example.com com/companyB`<br>
+     Expected: A new supplier is added to the list.
+   
+   3. Test case: `add -s n/John Doe p/98765432`<br> 
+     Expected: Error message is shown. Supplier not added.
+      
+**Tips:** Check out the User Guide (UG) for more information on what it means to have duplicate suppliers.
+
+### Finding a supplier
+
+1. Finding a supplier by name
+
+   1. Prerequisites: At least one supplier with the name "John" in the list.
+
+   2. Test case: `find -s n/John`<br>
+      Expected: The suppliers with name containing "John" is shown in the list. Other suppliers are not shown.
+
+   3. Test case: `find -s n/John com/comp`<br>
+      Expected: The suppliers with name containing "John" and company name containing "comp" is shown in the list. Other suppliers are not shown.
+
+   4. Test case: `find -s n/John com/comp pro/rice`<br>
+      Expected: The suppliers with name containing "John", company name containing "comp" and product containing "rice" is shown in the list. Other suppliers are not shown.
+   
+   6. Test case: `find -s n/John com/comp pro/rice pro/bread`<br>
+      Expected: The suppliers with name containing "John", company name containing "comp" and product containing "rice" and "bread" is shown in the list. Other suppliers are not shown.
 
 ### Deleting a supplier
 
 1. Deleting a supplier while all suppliers are being shown
 
-   1. Prerequisites: List all suppliers using the `list` command. Multiple suppliers in the list.
+   1. Prerequisites: List all suppliers using the `list -s` command. Multiple suppliers in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First supplier is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No supplier is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No supplier is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Sorting suppliers
+
+1. Sorting suppliers by name
+
+   1. Prerequisites: List all suppliers using the `list -s` command. Multiple suppliers in the list.
+
+   1. Test case: `sort -s so/a sb/n`<br>
+      Expected: Suppliers are sorted by name in ascending order.
+
+   1. Test case: `sort -s so/d sb/n`<br>
+      Expected: Suppliers are sorted by name in descending order.
+
+   1. Test case: `sort -s sb/n`<br>
+      Expected: Error message is shown. Suppliers are not sorted.
+
+### Listing suppliers
+
+1. Listing all suppliers
+
+   1. Prerequisites: At least one supplier in the list.
+
+   1. Test case: `list -s`<br>
+      Expected: All suppliers are shown in the list.
+
+### Mark supplier status
+
+1. Marking a supplier as active/inactive
+
+   1. Prerequisites: List all suppliers using the `list -s` command. Multiple suppliers in the list.
+
+   1. Test case: `mark -s 1 active`<br>
+      Expected: The status of the first supplier is changed to active.
+
+   1. Test case: `mark -s 1 inactive`<br>
+      Expected: The status of the first supplier is changed to inactive.
+
+   1. Test case: `mark -s 0 active`<br>
+      Expected: Error message is shown. Status of suppliers is not changed.
+
+### Testing Delivery Commands
+
+### Adding a delivery
+
+1. Adding a delivery with existing supplier
+
+    1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
+
+    1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/bread q/500 g c/5.50`<br>
+       Expected: A delivery paired to the first supplier is added. Details of the delivery shown in the status message.
+
+2. Adding a delivery with invalid supplier
+    1. Test case: `add -d on/18-01-2023 15:00 s/0 pro/bread q/500 g c/5.50`<br>
+       Expected: No delivery is added. Error message indicating that SUPPLIER_INDEX should be a positive number greater than 0 and smaller than total number of suppliers shown in the status message.
+
+3. Adding a delivery with invalid units for QUANTITY
+    1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
+
+    1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/bread q/500 pounds c/105.50`<br>
+       Expected: No delivery is added. Error message indicating that QUANTITY should be a positive number followed by a space and valid unit shown in the status message.
+
+4. Adding a delivery with invalid parameter values
+    1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
+
+    1. Test case: `add -d on/18-01-2023 15:00 s/1 pro/###@@ q/500 pounds c/105.50`<br>
+       Expected: No delivery is added. Error message indicating that PRODUCT should be alphanumeric shown in the status message.
+
+### Listing all deliveries
+
+1. Listing all deliveries
+    1. Test case: `list -d`<br>
+       Expected: All added deliveries shown. Success message shown in the status message.
+
+### Marking a delivery
+
+1. Marking a delivery as CANCELLED
+
+    1. Prerequisites: Ensure that the first delivery has either PENDING or DELIVERED status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `mark -d 1 CANCELLED`<br>
+       Expected: The first delivery has status changed to CANCELLED. Details of the delivery shown in the status message.
+
+2. Marking a delivery as DELIVERED
+
+    1. Prerequisites: Ensure that the first delivery has either PENDING or CANCELLED status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `mark -d 1 DELIVERED`<br>
+       Expected: The first delivery has status changed to DELIVERED. Details of the delivery shown in the status message.
+
+3. Marking a delivery as PENDING
+
+    1. Prerequisites: Ensure that the first delivery has either CANCELLED or DELIVERED status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `mark -d 1 PENDING`<br>
+       Expected: The first delivery has status changed to PENDING. Details of the delivery shown in the status message.
+
+4. Marking a PENDING delivery as PENDING
+
+    1. Prerequisites: Ensure that the first delivery has PENDING status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `mark -d 1 PENDING`<br>
+       Expected: The first delivery remains unchanged. Error message showing that delivery already has PENDING as status.
+
+5. Other incorrect mark commands to try: mark -d, mark -d x, ... (where x is larger or smaller than the list size)
+   Expected: Delivery remains unchanged and error message is shown in the status message.
+
+### Deleting a delivery
+
+1. deleting an existing delivery
+
+    1. Prerequisites: Ensure there is at least 1 delivery by listing all deliveries using the `list -d` command.
+
+    1. Test case: `delete -d 1`<br>
+       Expected: The first delivery is deleted. Details of the deleted delivery shown in the status message.
+
+2. deleting a non-existent delivery
+
+    1. Prerequisites: Ensure there is no delivery by listing all deliveries using the `list -d` command.
+
+    1. Test case: `delete -d 1`<br>
+       Expected: No delivery is deleted. An error message that states that the delivery index provided is invalid is shown in the status message.
+
+3. Other incorrect delete commands to try: delete -d, delete -d x, ... (where x is larger than the delivery list size)
+   Expected: No delivery is deleted and error message is shown in the status message.
+
+### Finding a delivery
+
+1. Finding an existing delivery by status
+
+    1. Prerequisites: Ensure there is at least 1 delivery with status PENDING by listing all deliveries using the `list -d` command.
+
+    1. Test case: `find -d stat/PENDING`<br>
+       Expected: All deliveries with status PENDING are displayed. Success message indicating number of deliveries listed shown in the status message.
+
+2. Finding an existing delivery by PRODUCT
+
+    1. Prerequisites: Ensure there is at least 1 delivery with rice as product by listing all deliveries using the `list -d` command.
+
+    1. Test case: `find -d pro/rice`<br>
+       Expected: All deliveries with rice as product are displayed. Success message indicating number of deliveries listed shown in the status message.
+
+3. Finding a delivery that does not exist
+
+    1. Prerequisites: Ensure there is no deliveries with 20-10-1999 12:00 as DELIVERY_DATE_TIME by listing all deliveries using the `list -d` command.
+
+    1. Test case: `find -d on/20-10-1999 12:00`<br>
+       Expected: No deliveries is displayed. Message indicating 0 deliveries listed shown in the status message.
+
+4. Other incorrect find commands to try: find -d, find -d pro/@@## ...
+   Expected: No delivery is displayed and error message is shown in the status message.
+
+### Sorting deliveries
+
+1. Sorting deliveries with valid Parameter in ascending order
+
+    1. Prerequisites: Ensure there is at least 1 delivery with DELIVERED status and 1 delivery with PENDING status by listing all deliveries using the `list -d` command.
+
+    1. Test case: `sort -d so/a sb/s`<br>
+       Expected: All deliveries with status Delivered are displayed before deliveries with status PENDING. Success message indicating number of deliveries sorted and the sorting conditions shown in the status message.
+
+2. Sorting deliveries with invalid parameters in ascending order
+
+    1. Test case: `sort -d so/a sb/q`<br>
+       Expected: No deliveries displayed. Error message indicating possible parameters for sort order shown in the status message.
+
+3. Sorting an empty list of deliveries
+
+    1. Prerequisites: Ensure there is no deliveries displayed by listing all deliveries using the `list -d` command.
+
+    1. Test case: `sort -d so/a sb/c`<br>
+       Expected: No deliveries is displayed. Message indicating 0 deliveries sorted by cost in ascending order is shown in the status message.
+
+4. Other incorrect sort -d commands to try: sort -d, sort -d so/a ...
+   Expected: No delivery is displayed and invalid command error message is shown in the status message.
+
+### Upcoming deliveries
+
+1. View upcoming deliveries that are within a specified date range.
+
+    1. Prerequisites: Ensure there is at least 1 delivery with PENDING status and between 20-10-1999 12:00 and 12-10-2024 13:00 by listing all deliveries using the `list -d` command.
+
+    1. Test case: `upcoming aft/20-10-1999 12:00 bef/12-10-2024 13:00`<br>
+       Expected: All PENDING deliveries between 20-10-1999 12:00 and 12-10-2024 13:00 are displayed. Success message indicating number of upcoming deliveries shown in the status message.
+
+2. View upcoming deliveries before a specified date.
+
+    1. Prerequisites: Ensure there is at least 1 delivery with PENDING status and before d 12-10-2024 12:00 by listing all deliveries using the `list -d` command.
+
+    1. Test case: `upcoming bef/12-10-2024 12:00`<br>
+       Expected: All Pending deliveries before 12-10-2024 12:00 are displayed. Success message indicating number of upcoming deliveries shown in the status message.
+
+3. Invalid parameter values.
+
+    1. Prerequisites: Ensure there is at least 1 delivery displayed by listing all deliveries using the `list -d` command.
+
+    1. Test case: `upcoming aft/20-10-101010`<br>
+       Expected: No deliveries is displayed. Message indicating DELIVERY_DATE_TIME should be in the format dd-MM-yyyy HH:mm is shown in the status message.
+
+4. Other incorrect upcoming commands to try: upcoming, upcoming aft/
+   Expected: No delivery is displayed and error message is shown in the status message.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+   1. Prerequisites: Delete the data file.
+   2. Test case: Launch the app<br>
+      Expected: The app should create a new data file with default data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Exiting the app
 
-1. _{ more test cases …​ }_
+1. Test case: `exit`<br>
+       Expected: The app closes.

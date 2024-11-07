@@ -36,7 +36,6 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
-
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
@@ -53,8 +52,8 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list` and `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -96,6 +95,7 @@ Action     | Format, Examples
 **[Exit](#exiting-the-program-exit)**   | `exit`
 
 
+
 ---
 ### Viewing help : `help`
 
@@ -107,11 +107,18 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 
-### Viewing all deliveries and suppliers : `list`
+### Viewing all deliveries and suppliers : `list -a`
 
 Lists all suppliers and deliveries in the VendorVault
 
-Format: `list`
+Format: `list -a`
+
+<box type="warning" seamless>
+
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -a
+</box>
 
 ---
 
@@ -122,18 +129,17 @@ Format: `list`
 Adds a supplier to the address book.
 
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
-
 <box type="tip" seamless>
 
 **Tip:** A supplier can have any number of tags and products (including 0)
 </box>
 
-<box type="tip" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least on space between `add` and `-s` is compulsory
 - Duplicate supplier will not be added again
-    - A supplier is considered duplicate if they have the same NAME and COMPANY
+- A supplier is considered duplicate if they have the same NAME and COMPANY
 </box>
 
 Examples:
@@ -152,6 +158,14 @@ Expected output:
 Shows a list of all suppliers in the VendorVault. (The delivery list will not be affected)
 
 Format: `list -s`
+
+
+<box type="warning" seamless>
+
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -s
+  </box>
 
 ### Deleting a supplier : `delete -s`
 
@@ -195,13 +209,19 @@ A success message will be displayed if the supplier is successfully marked as ac
 The `find -s` command is used to find a supplier in VendorVault. 
 This helps you find suppliers based on keyword search.
 
-Format: `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
+Format: `find -s n/KEYWORD_SUPPLIER_NAME com/KEYWORD_SUPPLIER_COMPANY pro/<KEYWORD_SUPPLIER_PRODUCT>`
 
-<box type="tip" seamless>
+Parameters:
+
+- `n/KEYWORD_SUPPLIER_NAME`: This will check if the Supplier's name contains the given keyword
+- `on/KEYWORD_SUPPLIER_COMPANYE`: This will check if the Supplier's company contains the given keyword
+- `pro/KEYWORD_SUPPLIER_PRODUCT`: This will check if the Supplier's product(s) contains in the given keyword
+
+<box type="warning" seamless>
 
 **Warnings**:
-- At least one prefix and parameter must be given
-- No duplicate prefix can be used
+- At least one non-empty parameter must be given
+- No duplicate parameter can be used
 - Find result(s) will contain/satisfy all the given parameters
 - Find feature is case-insensitive
 </box>
@@ -251,22 +271,24 @@ Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg
 
 Parameters:
 
-- `DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
-- `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
-- `QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
-- `COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
+- `on/DELIVERY_DATE_TIME`: Must be in dd-MM-yyyy hh:mm format and must not be blank.
+- `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
+- `q/QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
+- `c/COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
 <box type="tip" seamless>
 
 **Tip:** Day and month of date must be in double digits!
 </box>
 
-<box type="tip" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - A spacing between `add` and `-d` is compulsory
+- A delivery is considered duplicate if they have the same DATE, TIME, SUPPLIER, PRODUCT and COST
 - Duplicate delivery will not be added again
 - No duplicate prefix can be used
+- Units for QUANTITY is case-sensitive
 </box>
 
 #### Example
@@ -282,6 +304,13 @@ Shows a list of all supplier in the VendorVault. (The supplier list will not be 
 
 Format: `list -d`
 
+
+<box type="warning" seamless>
+**Warnings**:
+- No other parameters should be given for this command.
+- At least one space between list and -a
+</box>
+
 ### Marking a delivery : `mark -d`
 
 Marks the specified delivery from the address book with the specified `STATUS`.
@@ -292,14 +321,13 @@ Parameters:
 
 - `INDEX`: Must be a number greater than 0 and must not be blank.
 - `STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
-
 <box type="tip" seamless>
 
 **Warnings**:
 - A spacing between `mark` and `-d` is compulsory
 - Both parameters must be given
 - Parameters used are case-insensitive
-  </box>
+</box>
 
 
 Examples:
@@ -318,13 +346,12 @@ Format: `delete -d INDEX`
 Parameters:
 
 - `INDEX`: Must be a number greater than 0 and must not be blank.
-
 <box type="tip" seamless>
 
 **Warnings**:
 - A spacing between `delete` and `-d` is compulsory
 - No duplicate prefix can be used
-  </box>
+</box>
 
 Examples:
 * `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
@@ -345,7 +372,6 @@ Parameters:
 - `stat/STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
 - `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
 - `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
-
 <box type="tip" seamless>
 
 **Warnings**:
@@ -354,7 +380,7 @@ Parameters:
 - No duplicate prefix can be used
 - Find result(s) will contain/satisfy all the given parameters
 - Parameters used are case-insensitive
-  </box>
+</box>
 
 
 #### Example
@@ -376,7 +402,6 @@ Parameters:
 
 - SORT_ORDER: Must be either 'a' for ascending or 'd' for descending, and must not be blank.
 - SORT_BY_FIELD: Must be either 'c' for cost, 'd' for date or 's' for status, and must not be blank.
-
 <box type="tip" seamless>
 
 **Warnings**:
@@ -384,7 +409,6 @@ Parameters:
 - All prefixes and parameters must be given
 - No duplicate prefix can be used
 - Parameters used are **case-sensitive**
-
 </box>
 
 #### Example
@@ -403,13 +427,12 @@ You can choose to view all pending deliveries within a specified date range or
 before or after a given date.
 
 Format: `upcoming aft/START_DATE bef/END_DATE`
+
 Parameters:
 
-- `START_DATE`: Must be in dd-mm-yyyy hh:mm format.
-- `END_DATE`: Must be in dd-mm-yyyy hh:mm format.
-
+- `aft/START_DATE`: Must be in dd-mm-yyyy hh:mm format.
+- `bef/END_DATE`: Must be in dd-mm-yyyy hh:mm format.
 <box type="tip" seamless>
-
 **Tip:** You can provide both START_DATE and END_DATE!
 
 **Warnings**:
@@ -441,14 +464,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 ### Editing the data file
 
 AddressBook automatically saves your data as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
 <box type="warning" seamless>
 
 **Caution:**
 - **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
 - Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-
-- </box>
+</box>
 
 ---
 

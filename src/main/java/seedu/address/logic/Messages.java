@@ -15,9 +15,9 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_SUPPLIERS_LISTED_OVERVIEW = "%1$d suppliers listed!";
     public static final String MESSAGE_SUPPLIERS_FOUND_OVERVIEW =
             "%1$d suppliers found by matching with the given keyword(s)!";
+    public static final String MESSAGE_DELIVERIES_FOUND_OVERVIEW = "%1$d deliveries found!";
     public static final String MESSAGE_SUPPLIER_SORTED_OVERVIEW = "%1$d suppliers sorted by %2$s in %3$s order!";
     public static final String MESSAGE_DELIVERY_SORTED_OVERVIEW = "%1$d deliveries sorted by %2$s in %3$s order!";
     public static final String MESSAGE_DELIVERIES_LISTED_OVERVIEW = "%1$d deliveries listed!";
@@ -29,9 +29,12 @@ public class Messages {
     public static final String MESSAGE_EMPTY_KEYWORD = "The keyword provided after the %1$s prefix is empty";
 
     public static final String MESSAGE_INVALID_LIST_COMMAND_FORMAT = "Invalid list command format! \n"
-            + "list    : Lists both suppliers and deliveries (No parameters should be given)\n"
-            + "list -d : Lists deliveries to the user\n"
-            + "list -s : Lists suppliers to the user";
+            + "list -a : Lists both suppliers and deliveries "
+            + "(No parameters or spaces should be given.)\n"
+            + "list -d : Lists deliveries to the user "
+            + "(At least one space between list and -d. No other parameters should be give)\n"
+            + "list -s : Lists suppliers to the user "
+            + "(At least one space between list and -d. No other parameters should be given)";
     public static final String MESSAGE_DUPLICATE_SUPPLIER_STATUS = "%1$s is already marked as %2$s";
 
     public static final String MESSAGE_DELIVERY_ALREADY_HAS_STATUS = "%1$s is already marked as %2$s";
@@ -52,7 +55,8 @@ public class Messages {
      */
     public static String format(Supplier supplier) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(supplier.getName())
+        builder.append("Name: ")
+                .append(supplier.getName())
                 .append("; Phone: ")
                 .append(supplier.getPhone())
                 .append("; Email: ")
@@ -72,7 +76,8 @@ public class Messages {
      */
     public static String format(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(delivery.getDeliverySender().getName())
+        builder.append("Supplier name: ")
+                .append(delivery.getDeliverySender().getName())
                 .append("; Date & time: ")
                 .append(delivery.getDeliveryDate())
                 .append("; Product: ")
@@ -91,7 +96,8 @@ public class Messages {
      */
     public static String formatWithoutStatus(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(delivery.getDeliverySender().getName())
+        builder.append("Supplier name: ")
+                .append(delivery.getDeliverySender().getName())
                 .append("; Date & time: ")
                 .append(delivery.getDeliveryDate())
                 .append("; Product: ")
@@ -108,7 +114,8 @@ public class Messages {
      */
     public static String formatWithoutStatus(Supplier supplier) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(supplier.getName())
+        builder.append("Name: ")
+                .append(supplier.getName())
                 .append("; Phone: ")
                 .append(supplier.getPhone())
                 .append("; Email: ")

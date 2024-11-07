@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -32,6 +33,7 @@ import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortDeliveryCommand;
+import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -67,10 +69,11 @@ public class AddressBookParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+        String trimmedArguments = arguments.trim();
 
         switch (commandWord) {
 
-        case AddSupplierCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
                 return new AddSupplierCommandParser().parse(arguments.trim().substring(2));
             } else if (arguments.trim().startsWith("-d")) {
@@ -81,10 +84,10 @@ public class AddressBookParser {
             }
 
         case DeleteCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith("-s")) {
-                return new DeleteSupplierCommandParser().parse(arguments.trim());
-            } else if (arguments.trim().startsWith("-d")) {
-                return new DeleteDeliveryCommandParser().parse(arguments.trim());
+            if (trimmedArguments.startsWith("-s")) {
+                return new DeleteSupplierCommandParser().parse(trimmedArguments);
+            } else if (trimmedArguments.startsWith("-d")) {
+                return new DeleteDeliveryCommandParser().parse(trimmedArguments);
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         DeleteSupplierCommand.MESSAGE_USAGE + "\nOR\n" + DeleteDeliveryCommand.MESSAGE_USAGE));
@@ -94,44 +97,44 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith("-s")) {
-                return new FindSupplierCommandParser().parse(arguments.trim().substring(2));
-            } else if (arguments.trim().startsWith("-d")) {
-                return new FindDeliveryCommandParser().parse(arguments.trim().substring(2));
+            if (trimmedArguments.startsWith("-s")) {
+                return new FindSupplierCommandParser().parse(trimmedArguments.substring(2));
+            } else if (trimmedArguments.startsWith("-d")) {
+                return new FindDeliveryCommandParser().parse(trimmedArguments.substring(2));
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         FindSupplierCommand.MESSAGE_USAGE + "\nOR\n" + FindDeliveryCommand.MESSAGE_USAGE));
             }
 
         case ListCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith("-s")) {
+            if (trimmedArguments.equals("-s")) {
                 return new ListSupplierCommand();
-            } else if (arguments.trim().startsWith("-d")) {
+            } else if (trimmedArguments.equals("-d")) {
                 return new ListDeliveryCommand();
-            } else if (arguments.trim().isEmpty()) {
+            } else if (trimmedArguments.equals("-a")) {
                 return new ListAllCommand();
             } else {
                 throw new ParseException(MESSAGE_INVALID_LIST_COMMAND_FORMAT);
             }
 
         case MarkCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith("-s")) {
-                return new MarkSupplierCommandParser().parse(arguments.trim());
-            } else if (arguments.trim().startsWith("-d")) {
-                return new MarkDeliveryCommandParser().parse(arguments.trim());
+            if (trimmedArguments.startsWith("-s")) {
+                return new MarkSupplierCommandParser().parse(trimmedArguments);
+            } else if (trimmedArguments.startsWith("-d")) {
+                return new MarkDeliveryCommandParser().parse(trimmedArguments);
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MarkSupplierCommand.MESSAGE_USAGE + "\nOR\n" + MarkDeliveryCommand.MESSAGE_USAGE));
             }
 
         case SortCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith(PREFIX_DELIVERY.getPrefix())) {
-                return new SortDeliveryCommandParser().parse(arguments.trim());
-            } else if (arguments.trim().startsWith(PREFIX_SUPPLIER.getPrefix())) {
-                return new SortSupplierCommandParser().parse(arguments.trim());
+            if (trimmedArguments.startsWith(PREFIX_DELIVERY.getPrefix())) {
+                return new SortDeliveryCommandParser().parse(trimmedArguments);
+            } else if (trimmedArguments.startsWith(PREFIX_SUPPLIER.getPrefix())) {
+                return new SortSupplierCommandParser().parse(trimmedArguments);
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SortDeliveryCommand.MESSAGE_USAGE));
+                        SortSupplierCommand.MESSAGE_USAGE + "\nOR\n" + SortDeliveryCommand.MESSAGE_USAGE));
             }
 
         case UpcomingCommand.COMMAND_WORD:

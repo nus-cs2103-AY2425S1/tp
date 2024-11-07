@@ -22,6 +22,9 @@ public class SortSupplierCommand extends SortCommand {
             + PREFIX_SORT_ORDER + "a "
             + PREFIX_SORT_BY + "n";
     private final SupplierSortComparator comparator;
+    /**
+     * Creates a SortSupplierCommand to sort the suppliers by the specified {@code comparator}.
+     */
     public SortSupplierCommand(SupplierSortComparator comparator) {
         this.comparator = comparator;
     }

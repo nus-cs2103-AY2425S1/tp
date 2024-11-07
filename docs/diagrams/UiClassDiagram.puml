@@ -36,26 +36,26 @@ MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" SupplierListPanel
 MainWindow *-down-> "1" DeliveryListPanel
-MainWindow *-down-> "1" StatusBarFooter
+MainWindow *---> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 SupplierListPanel -down-> "*" SupplierCard
 DeliveryListPanel -down-> "*" DeliveryCard
 
-MainWindow -left-|> UiPart
+MainWindow --|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-SupplierListPanel --|> UiPart
-SupplierCard --|> UiPart
-DeliveryCard --|> UiPart
+SupplierListPanel -left-|> UiPart
+SupplierCard -up-|> UiPart
+DeliveryCard -up-|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 SupplierCard ..> Model
 DeliveryCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+UiManager -up-> Logic
+MainWindow -down-----> Logic
 
 SupplierListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox

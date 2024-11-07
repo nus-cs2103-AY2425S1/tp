@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public class DateTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should be in the format dd-MM-yyyy HH:mm and must not be blank.";
+            "DELIVERY_DATE_TIME should be in the format dd-MM-yyyy HH:mm and must not be blank.";
 
     public static final DateTimeFormatter FORMATTER_TIME =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -31,6 +31,9 @@ public class DateTime {
         this.time = parseTime(time.trim());
     }
 
+    /**
+     * Returns true if a given string is a valid time.
+     */
     public static boolean isValidTime(String test) {
         return canParse(test, FORMATTER_TIME);
     }
@@ -44,6 +47,12 @@ public class DateTime {
         }
     }
 
+    /**
+     * Parses a given string into a LocalDateTime object.
+     *
+     * @param time String to be parsed.
+     * @return LocalDateTime object parsed from the string.
+     */
     private static LocalDateTime parseTime(String time) {
         if (canParse(time, FORMATTER_TIME)) {
             return LocalDateTime.parse(time, FORMATTER_TIME);
