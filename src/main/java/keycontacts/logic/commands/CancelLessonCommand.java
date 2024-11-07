@@ -86,9 +86,11 @@ public class CancelLessonCommand extends Command {
             model.setStudent(groupStudent, groupStudent.withAddedCancelledLesson(cancelledLesson));
         }
 
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, date.toDisplay(), startTime,
                 Messages.format(studentToUpdate)));
     }
+
 
     @Override
     public boolean equals(Object other) {

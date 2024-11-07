@@ -20,6 +20,31 @@ public interface Model {
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
+     * Reverts the student directory to the state before the latest command that edits it
+     */
+    void undoStudentDirectory();
+
+    /**
+     * Reverts the latest undo command if no other command has modified the student directory
+     */
+    void redoStudentDirectory();
+
+    /**
+     * Commits the current state of the student directory
+     */
+    void commitStudentDirectory();
+
+    /**
+     * Returns true if there is a state to undo to
+     */
+    boolean canUndoStudentDirectory();
+
+    /**
+     * Returns true if there is a state to redo to
+     */
+    boolean canRedoStudentDirectory();
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);

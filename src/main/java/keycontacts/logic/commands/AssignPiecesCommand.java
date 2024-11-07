@@ -71,9 +71,11 @@ public class AssignPiecesCommand extends Command {
 
         model.setStudent(studentToUpdate, updatedStudent);
 
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 Messages.format(pianoPieces), Messages.format(updatedStudent)));
     }
+
 
     @Override
     public boolean equals(Object other) {

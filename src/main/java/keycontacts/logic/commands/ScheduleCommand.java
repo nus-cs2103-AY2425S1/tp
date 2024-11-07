@@ -88,6 +88,7 @@ public class ScheduleCommand extends Command {
                             .findFirst().get().toDisplay()));
         }
 
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_SCHEDULE_LESSON_SUCCESS, regularLesson.toDisplay(),
                 Messages.format(studentToUpdate)));
     }

@@ -70,6 +70,8 @@ public class AddCommand extends Command {
             Set<MakeupLesson> groupMakeupLessons = studentsInGroup.get(0).getMakeupLessons();
             model.addStudent(toAdd.withLessons(groupRegularLesson, groupCancelledLessons, groupMakeupLessons));
         }
+
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

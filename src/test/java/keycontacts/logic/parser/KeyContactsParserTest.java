@@ -29,9 +29,11 @@ import keycontacts.logic.commands.FindCommand;
 import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
+import keycontacts.logic.commands.RedoCommand;
 import keycontacts.logic.commands.ScheduleCommand;
 import keycontacts.logic.commands.UnassignPiecesCommand;
 import keycontacts.logic.commands.UncancelLessonCommand;
+import keycontacts.logic.commands.UndoCommand;
 import keycontacts.logic.commands.ViewCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.CancelledLesson;
@@ -159,6 +161,16 @@ public class KeyContactsParserTest {
     public void parseCommand_view() throws Exception {
         ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + VALID_DATE_DESC);
         assertEquals(new ViewCommand(new Date(VALID_DATE)), command);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
     }
 
     @Test
