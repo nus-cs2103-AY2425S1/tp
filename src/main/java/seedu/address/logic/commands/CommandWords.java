@@ -21,7 +21,6 @@ public class CommandWords {
     public static final String LIST_COMMAND = "list";
     public static final String SET_THRESHOLD_COMMAND = "set_threshold";
     public static final String UNASSIGN_PRODUCT_COMMAND = "unassign";
-    public static final String UPDATE_MAX_STOCK_LEVEL_COMMAND = "update_max_stock";
     public static final String UPDATE_STOCK_COMMAND = "update_stock";
     public static final String VIEW_PRODUCT_COMMAND = "view_product";
     public static final String VIEW_SUPPLIER_COMMAND = "view_supplier";
@@ -44,7 +43,6 @@ public class CommandWords {
             LIST_COMMAND,
             SET_THRESHOLD_COMMAND,
             UNASSIGN_PRODUCT_COMMAND,
-            UPDATE_MAX_STOCK_LEVEL_COMMAND,
             UPDATE_STOCK_COMMAND,
             VIEW_PRODUCT_COMMAND,
             VIEW_SUPPLIER_COMMAND

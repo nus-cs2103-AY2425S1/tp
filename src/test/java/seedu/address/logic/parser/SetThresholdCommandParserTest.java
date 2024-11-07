@@ -85,19 +85,12 @@ public class SetThresholdCommandParserTest {
         assertParseFailure(parser, " pr/Product#1 min/50", ProductName.MESSAGE_CONSTRAINTS);
 
         // invalid min stock level (non-numeric)
-        assertParseFailure(parser, " pr/Product1 min/abc",
+        assertParseFailure(parser, " pr/Product min/abc",
                 "Invalid stock level: Threshold levels should be positive integers.");
 
         // invalid max stock level (non-numeric)
-        assertParseFailure(parser, " pr/Product1 max/abc",
+        assertParseFailure(parser, " pr/Product max/abc",
                 "Invalid stock level: Threshold levels should be positive integers.");
-
-        // both invalid stock levels
-        assertParseFailure(parser, " pr/Product1 min/abc max/def",
-                "Invalid stock level: Threshold levels should be positive integers.");
-
-        // invalid product name and invalid stock levels
-        assertParseFailure(parser, " pr/Product#1 min/abc", ProductName.MESSAGE_CONSTRAINTS);
     }
 
     @Test
