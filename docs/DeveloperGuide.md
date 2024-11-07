@@ -616,14 +616,3 @@ The following planned enhancements address known feature flaws identified during
 
 These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **VolunSync**.
 
-
-d
-d
-d
-d
-d
-d
-d
-d
-d
-
