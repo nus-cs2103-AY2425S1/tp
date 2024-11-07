@@ -126,9 +126,9 @@ Examples:
 *  `edit 2 n/Betsy Crower t/ e/` Edits the name of the 2nd person to be `Betsy Crower`, clears all existing tags and deletes the stored email.
 
 
-### Locating persons by name: `find`
+### Locating specific persons: `find`
 
-Finds contacts whose names or/and phone numbers or/and address contain any of the given field keywords.
+Finds contacts whose names or/and phone numbers or/and address or/and tags contain any of the given field keywords.
 
 Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS] [t/TAGKEYWORDS]`
 
