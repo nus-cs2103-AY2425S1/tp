@@ -17,6 +17,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -51,13 +52,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));
         Birthday birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        LastPaidDate lastPaidDate = new LastPaidDate("01 01 0000"); // default is that customer has not paid yet
         Frequency frequency = new Frequency("0"); // default is that customer has no frequency yet
 
         ProfilePicFilePath profilePicFilePath =
                 ProfilePicFilePath.getDefaultProfilePic(); // always created with default picture
 
         Person person = new Person(name, phone, email, address, birthday, tagList,
-                false, frequency, profilePicFilePath);
+                false, lastPaidDate, frequency, profilePicFilePath);
 
         return new AddCommand(person);
     }

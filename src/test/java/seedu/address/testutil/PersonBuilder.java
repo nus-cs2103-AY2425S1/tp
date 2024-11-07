@@ -8,6 +8,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -26,6 +27,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_BIRTHDAY = "11 09 2001";
     public static final Boolean DEFAULT_HASPAID = false;
+    public static final String DEFAULT_LASTPAIDDATE = "01 01 0000";
     public static final String DEFAULT_FREQUENCY = "0";
     private Name name;
     private Phone phone;
@@ -34,6 +36,7 @@ public class PersonBuilder {
     private Birthday birthday;
     private Set<Tag> tags;
     private Boolean hasPaid;
+    private LastPaidDate lastPaidDate;
     private Frequency frequency;
     private ProfilePicFilePath profilePicFilePath;
 
@@ -48,6 +51,7 @@ public class PersonBuilder {
         birthday = new Birthday(DEFAULT_BIRTHDAY);
         tags = new HashSet<>();
         hasPaid = DEFAULT_HASPAID;
+        lastPaidDate = new LastPaidDate(DEFAULT_LASTPAIDDATE);
         frequency = new Frequency(DEFAULT_FREQUENCY);
         profilePicFilePath = ProfilePicFilePath.getDefaultProfilePic();
     }
@@ -63,6 +67,7 @@ public class PersonBuilder {
         birthday = personToCopy.getBirthday();
         tags = new HashSet<>(personToCopy.getTags());
         hasPaid = personToCopy.getHasPaid();
+        lastPaidDate = personToCopy.getLastPaidDate();
         frequency = personToCopy.getFrequency();
         profilePicFilePath = personToCopy.getProfilePicFilePath();
     }
@@ -124,6 +129,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code LastPaidDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastPaidDate(String lastPaidDate) {
+        this.lastPaidDate = new LastPaidDate(lastPaidDate);
+        return this;
+    }
+
+    /**
      * Sets the {@code Frequency} of the {@code Person} that we are building.
      */
     public PersonBuilder withFrequency(String frequency) {
@@ -139,9 +152,12 @@ public class PersonBuilder {
         return this;
     }
 
-
+    /**
+     * Builds the person object.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, birthday, tags, hasPaid, frequency, profilePicFilePath);
+        return new Person(name, phone, email, address, birthday, tags, hasPaid,
+                lastPaidDate, frequency, profilePicFilePath);
     }
 
 }

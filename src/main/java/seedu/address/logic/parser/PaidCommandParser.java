@@ -4,11 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 
+import java.time.LocalDate;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PaidCommand;
 import seedu.address.logic.commands.PaidCommand.PaidPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 
 
 /**
@@ -46,6 +49,14 @@ public class PaidCommandParser implements Parser<PaidCommand> {
 
         paidPersonDescriptor.setHasPaid();
         paidPersonDescriptor.setFrequency(ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get()));
+
+        LocalDate today = LocalDate.now();
+        String day = String.format("%02d", today.getDayOfMonth());
+        String month = String.format("%02d", today.getMonthValue());
+        String year = String.format("%04d", today.getYear());
+        String todayDate = day + " " + month + " " + year;
+        paidPersonDescriptor.setLastPaidDate(new LastPaidDate(todayDate));
+
         return new PaidCommand(index, paidPersonDescriptor);
     }
 }
