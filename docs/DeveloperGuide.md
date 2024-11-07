@@ -609,9 +609,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing files
 
-   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Exisiting data is not affected.
+   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Existing data is not affected.
 
-   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Exisiting data is not affected.
+   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Existing data is not affected.
 
    3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only).
 
