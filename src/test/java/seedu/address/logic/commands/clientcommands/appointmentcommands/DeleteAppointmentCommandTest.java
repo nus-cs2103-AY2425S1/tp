@@ -54,6 +54,28 @@ public class DeleteAppointmentCommandTest {
     }
 
     @Test
+    public void execute_validBuyerIndex_success() {
+        Person personToDeleteAppointment = CARL; // Assuming CARL is a Buyer
+        DeleteAppointmentCommand deleteAppointmentCommand =
+                new DeleteAppointmentCommand(INDEX_THIRD_PERSON);
+
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                personToDeleteAppointment.getName());
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
+
+        // Ensure the person is recreated as a Buyer with an empty appointment
+        Buyer personWithoutAppointment = new Buyer(personToDeleteAppointment.getName(),
+                personToDeleteAppointment.getPhone(),
+                personToDeleteAppointment.getEmail(),
+                personToDeleteAppointment.getTags(),
+                Appointment.EMPTY_APPOINTMENT);
+        expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);
+
+        assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_validSellerName_success() {
         Person personToDeleteAppointment = ALICE;
         DeleteAppointmentCommand deleteAppointmentCommand =
