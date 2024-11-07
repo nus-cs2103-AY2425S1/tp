@@ -364,5 +364,4 @@ TechConnect assists students in managing and organizing their internship and job
     - Use `find TAG/NAME` to search.
     - **Expected Result**: Only companies matching the search criteria are displayed.
     - **Edge Case**: Searching for non-existent terms should display a "No matches found" message.
-
 ---
