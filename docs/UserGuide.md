@@ -61,6 +61,13 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* Name arguments with extra whitespaces between words will be reduced to a single whitespace. 
+  e.g. `n/John    Doe` will be treated as `n/John Doe`.
+
+* Tutorial group and student number arguments are not case-sensitive. 
+  e.g. `tg/G17` is the same as `tg/g17` and `sn/A1234567Z` is the same as `sn/a1234567z`.
+
 </box>
 
 ### Viewing help : `help`
@@ -75,7 +82,8 @@ Format: `exit`
 
 ### Undoing the previous command : `undo`
 
-Undoes the previous data-changing command.
+Undoes the previous command. <br>
+The closeat command is currently not undoable (planned for future versions).
 
 Format: `undo`
 
@@ -139,8 +147,7 @@ Examples:
 
 Deletes the specified student from the contact list.
 
-Format: `deletes n/STUDENT_NAME`
-Format: `deletes n/STUDENT_NAME sn/STUDENT_NUMBER`
+Format: `deletes n/NAME [sn/STUDENT_NUMBER]`
 
 * Deletes the student with the specified details.
 * The student name refers to the student name shown in the displayed list of students.
@@ -165,7 +172,7 @@ Examples:
 
 Marks attendance of student for a particular date with the specified details.
 
-Format: `markat n/STUDENT_NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`
+Format: `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`
 
 ### Marking Tutorial Group Attendance to Present : `markpresentall`
 
@@ -183,7 +190,7 @@ Format: `markabsentall tg/TUTORIAL_GROUP dt/DATE`
 
 Deletes attendance of student for a particular date with the specified details.
 
-Format : `deleteat n/STUDENT_NAME dt/DATE [sn/STUDENT_NUMBER]`
+Format : `deleteat n/NAME dt/DATE [sn/STUDENT_NUMBER]`
 
 ### Deleting Tutorial Group Attendance : `deleteatall`
 
@@ -195,7 +202,7 @@ Format : `deleteatall tg/TUTORIAL_GROUP dt/DATE`
 
 Gets attendance of student for a particular date
 
-Format: `getat n/STUDENT_NAME dt/DATE [sn/STUDENT_NUMBER]`
+Format: `getat n/NAME dt/DATE [sn/STUDENT_NUMBER]`
 
 ### Getting Tutorial Group Attendance : `getattg`
 
@@ -295,4 +302,3 @@ _Details coming soon ..._
 | **Add Assignment**                              | `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`<br> e.g., `adda n/John Doe a/Assignment 1 d/2021-10-10 s/N g/100 sn/A1234567Z` |
 | **Delete Assignment**                           | `deletea n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletea n/John Doe a/Assignment 1 sn/A1234567Z`                                                           |
 | **Edit Assignment**                             | `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE]`<br> e.g., `edita n/John Doe a/Assignment 1 d/2021-10-10 s/Y g/90`                             |
-
