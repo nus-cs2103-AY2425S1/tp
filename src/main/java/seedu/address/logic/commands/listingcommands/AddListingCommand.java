@@ -26,11 +26,9 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
-import seedu.address.model.person.Seller;
 
 /**
  * Adds a listing to the address book.
@@ -116,7 +114,7 @@ public class AddListingCommand extends Command {
                 int zeroBasedBuyer = buyerIndex.getZeroBased();
                 int oneBasedBuyer = buyerIndex.getOneBased();
                 if (zeroBasedBuyer >= lastShownList.size() || zeroBasedBuyer < 0) {
-                    throw new CommandException(String.format(MESSAGE_INVALID_BUYER_INDEX,oneBasedBuyer));
+                    throw new CommandException(String.format(MESSAGE_INVALID_BUYER_INDEX, oneBasedBuyer));
                 }
 
                 Person buyer = lastShownList.get(zeroBasedBuyer);

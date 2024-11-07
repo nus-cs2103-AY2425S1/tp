@@ -27,7 +27,6 @@ import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
 
 /**
  * Edits the details of an existing listing in the system.

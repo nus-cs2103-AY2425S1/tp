@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.clientcommands.appointmentcommands.AddAppointmentCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -19,7 +20,6 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
-import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new AppointmentCommandParser object
@@ -34,9 +34,9 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
     public AddAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_FROM, PREFIX_TO);
-        Name name;
+        Index index;
         try {
-            name = ParserUtil.parseName(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
@@ -53,7 +53,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         if (!Appointment.isValidPeriod(from, to)) {
             throw new ParseException(AddAppointmentCommand.MESSAGE_INVALID_PERIOD);
         }
-        return new AddAppointmentCommand(name, new Appointment(date, from, to));
+        return new AddAppointmentCommand(index, new Appointment(date, from, to));
     }
 
     /**

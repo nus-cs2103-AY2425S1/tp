@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -16,7 +15,6 @@ import static seedu.address.testutil.TypicalListings.TAMPINES;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 
@@ -107,8 +105,8 @@ public class AddListingCommandTest {
         modelStub.addPerson(GEORGE);
 
         CommandResult commandResult = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName()))).execute(modelStub);
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON))).execute(modelStub);
         assertEquals(String.format(AddListingCommand.MESSAGE_SUCCESS, Messages.format(PASIR_RIS)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(PASIR_RIS), modelStub.listingsAdded);
@@ -243,6 +241,30 @@ public class AddListingCommandTest {
         assertEquals(expected, addListingCommand.toString());
     }
 
+    @Test
+    public void execute_buyerNotInList_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_FOURTH_PERSON)));
+        ModelStub modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_INVALID_PERSON_INPUT, () -> addListingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_buyerNotOfTypeBuyer_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_SECOND_PERSON)));
+        ModelStub modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
+        modelStub.addPerson(BENSON);
+
+        assertThrows(CommandException.class,
+                AddListingCommand.MESSAGE_NOT_BUYER, () -> addListingCommand.execute(modelStub));
+    }
+
     /**
      * A Model stub that contains a single listing.
      */
@@ -345,30 +367,6 @@ public class AddListingCommandTest {
                     .findFirst()
                     .orElse(null);
         }
-    }
-
-    @Test
-    public void execute_buyerNotInList_throwsCommandException() {
-        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(DANIEL.getName())));
-        ModelStub modelStub = new ModelStubAcceptingListingAdded();
-        modelStub.addPerson(ALICE);
-        assertThrows(CommandException.class,
-                Messages.MESSAGE_INVALID_PERSON_INPUT, () -> addListingCommand.execute(modelStub));
-    }
-
-    @Test
-    public void execute_buyerNotOfTypeBuyer_throwsCommandException() {
-        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
-                new HashSet<>(List.of(BENSON.getName())));
-        ModelStub modelStub = new ModelStubAcceptingListingAdded();
-        modelStub.addPerson(ALICE);
-        modelStub.addPerson(BENSON);
-
-        assertThrows(CommandException.class,
-                AddListingCommand.MESSAGE_NOT_BUYER, () -> addListingCommand.execute(modelStub));
     }
 
 }

@@ -79,7 +79,9 @@ public class Messages {
                 .append("; Seller: ")
                 .append(listing.getSeller());
         listing.getBuyers().forEach(builder::append);
-        return builder.toString();
+        return String.format("%1s.\nAddress: %2s",
+                listing.getName(), listing.getAddress());
+        //return builder.toString();
     }
 
 }
