@@ -31,7 +31,7 @@ public class CommandBoxUiTest extends ApplicationTest {
     private final List<String> testCommandHistory = new ArrayList<>(Arrays.asList(
             "showclients",
             "buyer n/SOMEONE THAT WILL NEVER EXIST p/99999999 e/seanisthebest@gmail.com",
-            "deleteclient SOMEONE THAT WILL NEVER EXIST",
+            "deleteclient 7",
             "showlistings"
     ));
 

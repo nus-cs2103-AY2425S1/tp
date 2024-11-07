@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalNames;
@@ -17,6 +19,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Listings;
 import seedu.address.model.Model;
@@ -42,7 +45,7 @@ public class DeleteClientProfileCommandTest {
                 new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
         Person personToDelete = DANIEL;
         DeleteClientProfileCommand deleteCommand =
-                new DeleteClientProfileCommand(personToDelete.getName(), true); // skipConfirmation = true
+                new DeleteClientProfileCommand(INDEX_FOURTH_PERSON, true);
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -61,7 +64,7 @@ public class DeleteClientProfileCommandTest {
                 new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
         Person personToDelete = ALICE;
         DeleteClientProfileCommand deleteCommand =
-                new DeleteClientProfileCommand(personToDelete.getName(), true); // skipConfirmation = true
+                new DeleteClientProfileCommand(INDEX_FIRST_PERSON, true);
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -81,19 +84,24 @@ public class DeleteClientProfileCommandTest {
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(DO_NOT_EXIST_NAME);
+        DeleteClientProfileCommand deleteCommand =
+                new DeleteClientProfileCommand(Index.fromZeroBased(model.getFilteredPersonList().size()));
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
     @Test
-    public void execute_validNameFilteredList_success() {
+    public void execute_validIndexFilteredList_success() {
         Random random = new Random();
         List<Name> typicalNames = getTypicalNames();
         int randomIndex = random.nextInt(typicalNames.size() - 1);
+
         showPersonWithName(model, typicalNames.get(randomIndex));
 
-        Person personToDelete = model.getPersonByName(typicalNames.get(randomIndex));
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
+        Person personToDelete = model.getFilteredPersonList().get(0);
+        Index indexOfPersonToDelete = Index.fromZeroBased(0);
+
+        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(indexOfPersonToDelete);
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -106,44 +114,15 @@ public class DeleteClientProfileCommandTest {
     }
 
     @Test
-    public void execute_invalidNameFilteredList_throwsCommandException() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 2);
-        showPersonWithName(model, typicalNames.get(randomIndex));
-
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(typicalNames
-                                                                            .get(randomIndex + 1));
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
-    }
-    @Test
-    public void execute_subName_throwsCommandException() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 1);
-        Person personToDelete = model.getPersonByName(typicalNames.get(randomIndex));
-        String personToDeleteNameString = personToDelete.getName().toString();
-        Name subNamePersonToDelete =
-                new Name(personToDeleteNameString
-                        .substring(0, personToDeleteNameString.length() - 1));
-        DeleteClientProfileCommand deleteClientProfileCommand =
-                new DeleteClientProfileCommand(subNamePersonToDelete);
-
-        assertCommandFailure(deleteClientProfileCommand, model,
-                String.format(Messages.MESSAGE_SUGGESTION, personToDelete.getName()));
-    }
-
-    @Test
     public void equals() {
-        DeleteClientProfileCommand deleteFirstCommand = new DeleteClientProfileCommand(ALICE.getName());
-        DeleteClientProfileCommand deleteSecondCommand = new DeleteClientProfileCommand(BENSON.getName());
+        DeleteClientProfileCommand deleteFirstCommand = new DeleteClientProfileCommand(INDEX_FIRST_PERSON);
+        DeleteClientProfileCommand deleteSecondCommand = new DeleteClientProfileCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteClientProfileCommand deleteFirstCommandCopy = new DeleteClientProfileCommand(ALICE.getName());
+        DeleteClientProfileCommand deleteFirstCommandCopy = new DeleteClientProfileCommand(INDEX_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -158,8 +137,9 @@ public class DeleteClientProfileCommandTest {
 
     @Test
     public void toStringMethod() {
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(ALICE.getName());
-        String expected = DeleteClientProfileCommand.class.getCanonicalName() + "{targetName=" + ALICE.getName() + "}";
+        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(INDEX_FIRST_PERSON);
+        String expected =
+                DeleteClientProfileCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_PERSON + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 

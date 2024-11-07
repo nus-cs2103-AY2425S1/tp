@@ -9,10 +9,12 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -39,32 +41,30 @@ public class EditClientCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by their name. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: NAME (must be an existing client) "
+            + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
               + "[" + PREFIX_EMAIL + "EMAIL] "
               + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " John Doe "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMAIL + "johndoe@example.com"
             + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Successfully edited %1$s!";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book.";
-
-    private final Name name;
+    private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param name of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditClientCommand(Name name, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(name);
+    public EditClientCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
-        this.name = name;
+        this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -72,11 +72,13 @@ public class EditClientCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPersonOfName(name)) {
-            throw new CommandException(MESSAGE_INVALID_PERSON);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = model.getPersonByName(name);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -124,14 +126,14 @@ public class EditClientCommand extends Command {
         }
 
         EditClientCommand otherEditClientCommand = (EditClientCommand) other;
-        return name.equals(otherEditClientCommand.name)
+        return index.equals(otherEditClientCommand.index)
                 && editPersonDescriptor.equals(otherEditClientCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
+                .add("name", index)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
