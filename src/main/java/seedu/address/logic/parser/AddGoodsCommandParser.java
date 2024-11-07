@@ -49,11 +49,10 @@ public class AddGoodsCommandParser implements Parser<AddGoodsCommand> {
         double price = ParserUtil.parseGoodsPrice(argMultimap.getValue(PREFIX_PRICE).get());
         GoodsCategories category = ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Date procurementDate = ParserUtil.parseProcurementDate(argMultimap.getValue(PREFIX_PROCUREMENT_DATE).get());
-        Date arrivalDate = ParserUtil.parseArrivalDate(argMultimap.getValue(PREFIX_ARRIVAL_DATE).get());
+        Date arrivalDate = ParserUtil.parseArrivalDate(argMultimap.getValue(PREFIX_ARRIVAL_DATE).get(), procurementDate);
+
         Boolean isDelivered = arrivalDate.getDateTime().isBefore(LocalDateTime.now());
-
         Goods goods = new Goods(goodsName, category);
-
         GoodsReceipt goodsReceipt = new GoodsReceipt(goods, supplierName,
                 procurementDate, arrivalDate, isDelivered, quantity, price);
 

@@ -39,6 +39,13 @@ public class Date {
     }
 
     /**
+     * Checks if this date is before another date.
+     */
+    public boolean isBefore(Date otherDate) {
+        return this.dateTime.isBefore(otherDate.dateTime);
+    }
+
+    /**
      * Returns the date time string, formatted for user display.
      */
     public String getReadableDateTimeString() {
