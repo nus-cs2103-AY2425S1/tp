@@ -406,3 +406,37 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.button-container{
+    -fx-background-color: #FFB6B9;
+}
+
+/* Wedding Book Button */
+#WeddingBookButtonToggled {
+    -fx-background-color: #6AB9FF;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-width: 0px;
+}
+
+#WeddingBookButtonNotToggled {
+    -fx-background-color: transparent;
+    -fx-text-fill: grey;
+    -fx-background-radius: 10px;
+    -fx-border-width: 0px;
+}
+
+/* Address Book Button */
+#AddressBookButtonToggled {
+    -fx-background-color: #6AB9FF;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-width: 0px;
+}
+
+#AddressBookButtonNotToggled {
+    -fx-background-color: transparent;
+    -fx-text-fill: grey;
+    -fx-background-radius: 10px;
+    -fx-border-width: 0px;
+}
