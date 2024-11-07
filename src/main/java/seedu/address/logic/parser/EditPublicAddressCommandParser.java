@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditPublicAddressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 
 /**
  * Parses input arguments and creates a new EditPublicAddressCommand object.
@@ -44,11 +44,12 @@ public class EditPublicAddressCommandParser implements Parser<EditPublicAddressC
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS_LABEL,
                 PREFIX_PUBLIC_ADDRESS);
 
-        Network network = ParserUtil.parseNetwork(argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_NETWORK).get());
-        String publicAddress = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).get();
+        String network = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_NETWORK).get();
+        String publicAddressString = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).get();
         String publicAddressLabel = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).get();
+        PublicAddress publicAddress = ParserUtil.parsePublicAddress(publicAddressString, publicAddressLabel, network);
 
-        return new EditPublicAddressCommand(index, network, publicAddress, publicAddressLabel);
+        return new EditPublicAddressCommand(index, publicAddress);
     }
 
     /**
