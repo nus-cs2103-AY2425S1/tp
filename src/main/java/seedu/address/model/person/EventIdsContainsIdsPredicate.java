@@ -6,6 +6,10 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Predicate that tests if a {@code Person} has any event IDs that match a list of specified IDs.
+ * This class is used to filter persons based on whether any of their event IDs match the given list.
+ */
 public class EventIdsContainsIdsPredicate implements Predicate<Person> {
     private final List<Integer> ids;
 
