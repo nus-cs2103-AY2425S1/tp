@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from CampusConnect.S
+ * Deletes a person identified using it's displayed index from CampusConnect.
  */
 public class DeleteCommand extends Command {
 
