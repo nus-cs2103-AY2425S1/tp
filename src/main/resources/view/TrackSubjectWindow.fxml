@@ -10,7 +10,7 @@
 <?import javafx.stage.Stage?>
 
 <fx:root resizable="true" title="Subject Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
-         xmlns:fx="http://javafx.com/fxml/1">
+         xmlns:fx="http://javafx.com/fxml/1" maxHeight="600" minHeight="450" minWidth="450">
     <icons>
         <Image url="@/images/info_icon.png" />
     </icons>
