@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Campus Connect has recovered!";
+    public static final String MESSAGE_SUCCESS = "The previous command has been undone!";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
