@@ -39,7 +39,9 @@ public class AssignCommand extends Command {
             + PREFIX_EMPLOYEE_ID + "456";
 
     public static final String MESSAGE_SUCCESS = "Project %1$s assigned to employee %1$s";
-    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book."
+            + " The assignment Id must be unique and "
+            + "the project Id and employee Id pair must not already exist in the assignment list";
 
     private final AssignmentId assignmentId;
     private final ProjectId projectId;
