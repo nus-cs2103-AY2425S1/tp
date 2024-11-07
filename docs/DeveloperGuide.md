@@ -666,10 +666,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
-   2. **Prerequisites:** BA€ is not running
-   3. **Test case:**
+1. **Dealing with missing/corrupted data files**
+   1. **Prerequisites:** BA€ is not running
+   2. **Test case:**
       1. To simulate a corrupted file, navigate to the data folder, and find addressbook.json
       2. Delete addressbook.json
       3. Launch BA€.
-   4. **Expected:** A new addressbook.json file will be created and it will be empty.
+   3. **Expected:** A new addressbook.json file will be created and it will be empty.
