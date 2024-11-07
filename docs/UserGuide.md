@@ -180,10 +180,13 @@ Examples:
 Updates the details of an existing event in the address book.
 
 Format: `update -i INDEX -n NEW_NAME -sd NEW_START_DATE -ed NEW_END_DATE -l NEW_LOCATION -a NEW_ATTENDEES_INDICES -r REMOVED_ATTENDEES_INDICES`
+**Note:** Dates are in (yyyy-mm-dd) format.
 
 **Tip:** The initial `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
 remove attendees from an event, and can be used together with the `-a` flag. If you add and remove the same index, the result
 will be adding the person first, then removing them, i.e. they will not be present in the attendee list after the command executes.
+Indexes supplied to the `NEW_ATTENDEES_INDICIES`  and `REMOVED_ATTENDEES INDICES` parameters must be based on existing contacts indexing in the Address Book.
+Note that the indexes are seperated by **spaces**.
 
 Examples:
 * `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -a 1 2 4 5 -l Marine Parade Road #12-34 -r 3 6` updates the 3rd event, reflecting all the provided details.
