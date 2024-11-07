@@ -82,7 +82,6 @@ public class CommandBox extends UiPart<Region> {
     );
 
     private final CommandExecutor commandExecutor;
-    private final CommandExecutor promptExecutor;
     @FXML
     private TextField commandTextField;
 
@@ -93,22 +92,14 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor, CommandExecutor promptExecutor) {
+    public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.promptExecutor = promptExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 
         addKeyPressedEventForCommandTextField();
         addKeyReleasedEventForCommandTextField();
-    }
-
-    /**
-     * Sets this {@code CommandBox} to wait for a confirmation from the user.
-     */
-    public void waitForPrompt() {
-        isPrompt = true;
     }
 
     /**
@@ -369,12 +360,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
-            if (isPrompt) {
-                isPrompt = false;
-                promptExecutor.execute(commandText);
-            } else {
-                commandExecutor.execute(commandText);
-            }
+            commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
