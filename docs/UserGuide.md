@@ -146,6 +146,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 <box type="warning" seamless>
 
 **TAKE NOTE:** `PHONE_NUMBER` only accepts integers between 0 and 9 as valid inputs. Allowing a broader range of characters could introduce inconsistencies and potential misuse, such as the entry of text in place of numbers.
+This is a known limitation as although multiple numbers with labels cannot be saved, one phone number can be saved, which is the intended scope so the product's use is not degraded.
 
 </box>
 
