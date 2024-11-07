@@ -24,6 +24,12 @@ public class EditPublicAddressCommandParser implements Parser<EditPublicAddressC
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditPublicAddressCommand parse(String args) throws ParseException {
+        if (ArgumentTokenizer.containsExtraPrefixes(args, PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS_LABEL,
+                PREFIX_PUBLIC_ADDRESS)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PUBLIC_ADDRESS_NETWORK,
                 PREFIX_PUBLIC_ADDRESS_LABEL, PREFIX_PUBLIC_ADDRESS);
         Index index;
