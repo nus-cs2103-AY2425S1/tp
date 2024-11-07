@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,7 @@ public class SampleDataUtil {
                     new Address("Blk 47 Tampines Street 20, #17-35"), new LessonTime("sun:13:00"), DEFAULT_EDUCATION,
                     EMPTY_GRADE, null, getTagSet("adept")),
             new Parent(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"), null, getTagSet()),
+                    new Address("Blk 45 Aljunied Street 85, #11-31"), new HashSet<>(), getTagSet()),
         };
     }
 
@@ -62,6 +63,12 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<Name> getNameSet(String... names) {
+        return Arrays.stream(names)
+                .map(Name::new)
                 .collect(Collectors.toSet());
     }
 
