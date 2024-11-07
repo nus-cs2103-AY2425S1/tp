@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -183,5 +184,42 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getAddressBook() {
+        assertEquals(model.getAddressBook(), logic.getAddressBook());
+    }
+
+    @Test
+    public void getAddressBookFilePath() {
+        assertEquals(model.getAddressBookFilePath(), logic.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getGuiSettings() {
+        assertEquals(model.getGuiSettings(), logic.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings() {
+        GuiSettings guiSettings = new GuiSettings(800, 600, 0, 0);
+        logic.setGuiSettings(guiSettings);
+        assertEquals(guiSettings, model.getGuiSettings());
+    }
+
+    @Test
+    public void getWeddingBook() {
+        assertEquals(model.getWeddingBook(), logic.getWeddingBook());
+    }
+
+    @Test
+    public void getFilteredWeddingList() {
+        assertEquals(model.getFilteredWeddingList(), logic.getFilteredWeddingList());
+    }
+
+    @Test
+    public void getWeddingBookFilePath() {
+        assertEquals(model.getWeddingBookFilePath(), logic.getWeddingBookFilePath());
     }
 }

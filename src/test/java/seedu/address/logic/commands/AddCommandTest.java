@@ -30,7 +30,10 @@ import seedu.address.model.WeddingBook;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
+import seedu.address.model.wedding.Date;
+import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
@@ -97,6 +100,29 @@ public class AddCommandTest {
                         Messages.format(validPerson)), () -> addCommand.execute(modelStub));
     }
 
+    @Test
+    public void getWeddingfromTags_weddingsExist_returnsWeddings() {
+        ModelStubWithWeddings modelStub = new ModelStubWithWeddings();
+        Set<Tag> tags = Set.of(new Tag("Jeremy & Jane"), new Tag("Antonio Olivera & Ramiya d/o Karthik"));
+        List<Wedding> weddings = new AddCommand(new PersonBuilder().build()).getWeddingfromTags(modelStub, tags);
+        assertEquals(2, weddings.size());
+    }
+
+    @Test
+    public void getWeddingfromTags_noWeddingsExist_returnsEmptyList() {
+        ModelStubWithWeddings modelStub = new ModelStubWithWeddings();
+        Set<Tag> tags = Set.of(new Tag("Non Existent & Wedding"));
+        List<Wedding> weddings = new AddCommand(new PersonBuilder().build()).getWeddingfromTags(modelStub, tags);
+        assertTrue(weddings.isEmpty());
+    }
+
+    @Test
+    public void handleWeddingDoesntExist_allWeddingsExist_returnsEmptyMessage() {
+        ModelStubWithWeddings modelStub = new ModelStubWithWeddings();
+        Set<Tag> tags = Set.of(new Tag("Jeremy & Jane"), new Tag("Antonio Olivera & Ramiya d/o Karthik"));
+        String message = new AddCommand(new PersonBuilder().build()).handleWeddingDoesntExist(modelStub, tags);
+        assertEquals("", message);
+    }
 
     @Test
     public void equals() {
@@ -364,4 +390,20 @@ public class AddCommandTest {
         }
     }
 
+    private class ModelStubWithWeddings extends ModelStub {
+        private final WeddingBook weddingBook = new WeddingBook();
+
+        ModelStubWithWeddings() {
+            weddingBook.addWedding(new Wedding(new WeddingName("Jeremy & Jane"), new Venue("Venue1"),
+                    new Date("11/12/2024")));
+            weddingBook.addWedding(new Wedding(new WeddingName("Antonio Olivera & Ramiya d/o Karthik"),
+                    new Venue("Venue2"),
+                    new Date("10/12/2025")));
+        }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            return new FilteredList<>(weddingBook.getWeddingList());
+        }
+    }
 }
