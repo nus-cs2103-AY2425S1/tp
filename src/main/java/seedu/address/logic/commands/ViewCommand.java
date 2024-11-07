@@ -65,6 +65,9 @@ public class ViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (listener != null) {
+            model.getAddressBook().getPersonList().removeListener(listener);
+        }
         if (isClose) {
             return closeViewResult;
         }
