@@ -705,7 +705,7 @@ help
 
 
 
-### 5.4.4 Exiting AgentAssist 
+### 5.4.5 Exiting AgentAssist 
 
 **Purpose:** Exit the application directly from the command line, providing a quick and easy way to close the program without using external controls.
 
