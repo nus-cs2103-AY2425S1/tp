@@ -26,7 +26,7 @@ public class PatientListPanel extends UiPart<Region> {
     public PatientListPanel(ObservableList<Patient> patientList) {
         super(FXML);
         logger.info("Initializing PatientListPanel with patient list");
-        
+
         patientListView.setItems(patientList);
         patientListView.setCellFactory(listView -> new PatientListViewCell());
 
