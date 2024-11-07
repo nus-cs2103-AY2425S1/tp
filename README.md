@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/AY2425S1-CS2103-F09-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103-F09-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103-F09-1/tp/graph/badge.svg?token=LE5D8TDMN5)](https://codecov.io/gh/AY2425S1-CS2103-F09-1/tp)
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/main_window_ui.png)
 
 * Data CoNdUctorS is a desktop application for administrative director of CCAs (Co-Curricular Activities) who has to manage and access database of the members.
 * It allows users to efficiently and easily manage and access large CCA membership database (including creation, edit, and deletion of data entries)
