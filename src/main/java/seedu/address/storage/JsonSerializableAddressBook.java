@@ -80,6 +80,9 @@ class JsonSerializableAddressBook {
             if (jsonAdaptedPerson.isVendor()) {
                 addressBook.addVendor(person);
             }
+            if (jsonAdaptedPerson.hasTasks()) {
+                addressBook.addVendor(person);
+            }
         }
         for (JsonAdaptedTag jsonAdaptedTag : tags) {
             Tag tag = jsonAdaptedTag.toModelType();

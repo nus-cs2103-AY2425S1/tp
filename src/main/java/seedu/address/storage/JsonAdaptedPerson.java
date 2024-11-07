@@ -119,6 +119,10 @@ class JsonAdaptedPerson {
         return this.isVendor;
     }
 
+    protected boolean hasTasks() {
+        return !this.tasks.isEmpty();
+    }
+
     /**
      * Helper function to map a Task to its corresponding JsonAdaptedTask subclass.
      */
