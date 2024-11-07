@@ -468,7 +468,7 @@ Format: `backup`
 
 #### Clearing all entries : `clear`
 
-Want a fresh start?
+Clears all your contacts, great for a fresh start!
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
