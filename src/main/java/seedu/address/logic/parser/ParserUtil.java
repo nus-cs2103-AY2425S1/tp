@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,11 +9,13 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.DeliverySortBy;
 import seedu.address.model.delivery.Quantity;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Company;
@@ -230,6 +233,21 @@ public class ParserUtil {
             throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        try {
+            return Status.valueOf(status.toUpperCase()); // Convert input to uppercase for case-insensitive match
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDeliveryCommand.MESSAGE_USAGE));
+        }
     }
 
     /**

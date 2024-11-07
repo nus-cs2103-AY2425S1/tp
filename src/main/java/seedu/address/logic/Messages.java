@@ -17,6 +17,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_SUPPLIERS_FOUND_OVERVIEW =
             "%1$d suppliers found by matching with the given keyword(s)!";
+    public static final String MESSAGE_DELIVERIES_FOUND_OVERVIEW = "%1$d deliveries found!";
     public static final String MESSAGE_SUPPLIER_SORTED_OVERVIEW = "%1$d suppliers sorted by %2$s in %3$s order!";
     public static final String MESSAGE_DELIVERY_SORTED_OVERVIEW = "%1$d deliveries sorted by %2$s in %3$s order!";
     public static final String MESSAGE_DELIVERIES_LISTED_OVERVIEW = "%1$d deliveries listed!";
@@ -51,7 +52,8 @@ public class Messages {
      */
     public static String format(Supplier supplier) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(supplier.getName())
+        builder.append("Name: ")
+                .append(supplier.getName())
                 .append("; Phone: ")
                 .append(supplier.getPhone())
                 .append("; Email: ")
@@ -71,7 +73,8 @@ public class Messages {
      */
     public static String format(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(delivery.getDeliverySender().getName())
+        builder.append("Supplier name: ")
+                .append(delivery.getDeliverySender().getName())
                 .append("; Date & time: ")
                 .append(delivery.getDeliveryDate())
                 .append("; Product: ")
@@ -90,7 +93,8 @@ public class Messages {
      */
     public static String formatWithoutStatus(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(delivery.getDeliverySender().getName())
+        builder.append("Supplier name: ")
+                .append(delivery.getDeliverySender().getName())
                 .append("; Date & time: ")
                 .append(delivery.getDeliveryDate())
                 .append("; Product: ")
@@ -107,7 +111,8 @@ public class Messages {
      */
     public static String formatWithoutStatus(Supplier supplier) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(supplier.getName())
+        builder.append("Name: ")
+                .append(supplier.getName())
                 .append("; Phone: ")
                 .append(supplier.getPhone())
                 .append("; Email: ")

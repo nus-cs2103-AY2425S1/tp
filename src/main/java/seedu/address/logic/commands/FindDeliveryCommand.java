@@ -70,7 +70,7 @@ public class FindDeliveryCommand extends FindCommand {
         }
 
         model.updateFilteredDeliveryList(finalPredicate);
-        return new CommandResult(String.format(Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW,
+        return new CommandResult(String.format(Messages.MESSAGE_DELIVERIES_FOUND_OVERVIEW,
                 model.getFilteredDeliveryList().size()));
     }
 

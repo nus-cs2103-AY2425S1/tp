@@ -66,21 +66,23 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-supplier-add--s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**[Delete](#deleting-a-supplier--delete--s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
-**[List](#listing-all-suppliers-list--s)**   | `list -s`
-**[Mark](#mark-a-supplier-with-a-status--mark--s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
+**[Add](#adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**[Delete](#deleting-a-supplier--delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**[List](#listing-all-suppliers-list-s)**   | `list -s`
+**[Mark](#mark-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
 **[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
-**[Sort](#sort-suppliers-sort--s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
+**[Sort](#sort-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
 
 ### Delivery Commands
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/litres/ml/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**Add**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
 **Delete** | `delete -d INDEX`<br> e.g., `delete -d 3`
 **Mark**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+**Upcoming** | `upcoming aft/START_DATE bef/END_DATE`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+
 
 
 ### General Commands
@@ -242,8 +244,15 @@ A success message will be displayed if the suppliers are successfully sorted.
 
 Adds a delivery to the address book.
 
-Format: `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/litres/ml/units c/COST`
+Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST`
 
+Parameters:
+
+- `on/DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
+- `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
+- `q/QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
+- `c/COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
 <box type="tip" seamless>
 
 **Tip:** Day and month of date must be in double digits!
@@ -254,15 +263,12 @@ Format: `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g
 **Warnings**:
 - A spacing between `add` and `-d` is compulsory
 - Duplicate delivery will not be added again
+- No duplicate prefix can be used
 </box>
 
-Examples:
-* `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-* `add -d on/19-12-2024 08:00 s/2 pro/soap q/10 units c/39.50`
+#### Example
 
-Expected output:
-* `New delivery added: John Doe; Date & time: 18-06-2024 17:00; Product: bread; Quantity: 500 g; Cost: 5.50; Status: PENDING`
-* `New delivery added: Betsy Crowe; Date & time: 19-12-2024 08:00; Product: soap; Quantity: 10 units; Cost: 39.50; Status: PENDING`
+    add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50
 
 #### Here's how it would look like in the app:
 ![add delivery command](images/addDeliveryCommand.png)
@@ -279,11 +285,18 @@ Marks the specified delivery from the address book with the specified `STATUS`.
 
 Format: `mark -d INDEX STATUS`
 
-* Marks the delivery at the specified `INDEX` with the specified `STATUS`.
-* The index refers to the index number shown in the displayed delivery list.
-* The status refers to the delivery status of a delivery shown in the displayed delivery list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The status **must be one of the following:** PENDING, DELIVERED, CANCELLED. Note that the status is not case-sensitive.
+Parameters:
+
+- `INDEX`: Must be a number greater than 0 and must not be blank.
+- `STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
+
+<box type="tip" seamless>
+
+**Warnings**:
+- A spacing between `mark` and `-d` is compulsory
+- Both parameters must be given
+- Parameters used are case-insensitive
+  </box>
 
 
 Examples:
@@ -299,9 +312,16 @@ Deletes the specified delivery from the address book.
 
 Format: `delete -d INDEX`
 
-* Deletes the delivery at the specified `INDEX`.
-* The index refers to the index number shown in the displayed delivery list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Parameters:
+
+- `INDEX`: Must be a number greater than 0 and must not be blank.
+
+<box type="tip" seamless>
+
+**Warnings**:
+- A spacing between `delete` and `-d` is compulsory
+- No duplicate prefix can be used
+  </box>
 
 Examples:
 * `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
@@ -312,21 +332,21 @@ Examples:
 
 ### Find a delivery: `find -d`
 
-The `find -d` command is used to find a delivery in VendorVault.
-This helps you find deliveries based on attributes of the delivery, like the delivery date, delivery status, supplier and product.
+Find deliveries based on attributes of the delivery, like the delivery date and time, delivery status, supplier and product.
 
-Format: `find -d on/<DELIVERY_DATE_TIME> stat/<DELIVERY_STATUS> s/<SUPPLIER_INDEX> pro/<PRODUCT_TO_BE_DELIVERED>`
+Format: `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`
 
 Parameters:
 
-- <DELIVERY_DATE_TIME> : Must be in dd-MM-yyyy HH:mm format and must not be blank.
-- <DELIVERY_STATUS> : Must be one of the following: PENDING, DELIVERED, CANCELLED
-- <SUPPLIER_INDEX> : Index of the supplier as seen in the supplier list
-- <PRODUCT_TO_BE_DELIVERED> : Name of product that will be delivered
+- `on/DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
+- `stat/STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
+- `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
 
 <box type="tip" seamless>
 
 **Warnings**:
+- A spacing between `find` and `-d` is compulsory
 - At least one prefix and parameter must be given
 - No duplicate prefix can be used
 - Find result(s) will contain/satisfy all the given parameters
@@ -373,8 +393,39 @@ To sort deliveries by cost in ascending order:
 #### Here's how it would look like in the app:
 ![sort command](images/sortDeliveryCommand.png)
 
----
+### Upcoming deliveries: `upcoming`
 
+The `upcoming` command is used to view pending deliveries in VendorVault.
+You can choose to view all pending deliveries within a specified date range or
+before or after a given date.
+
+Format: `upcoming aft/START_DATE bef/END_DATE`
+
+Parameters:
+
+- `aft/START_DATE`: Must be in dd-mm-yyyy hh:mm format.
+- `bef/END_DATE`: Must be in dd-mm-yyyy hh:mm format.
+
+<box type="tip" seamless>
+
+**Tip:** You can provide both START_DATE and END_DATE!
+
+**Warnings**:
+- A spacing between `upcoming` and the first parameter is compulsory
+- At least one parameter must be provided
+- No duplicate prefix can be used
+- The prefixes `aft/` and `bef/` are **case-sensitive**
+</box>
+
+#### Example
+
+To view pending deliveries between two dates:
+
+    upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00
+
+#### Here's how it would look like in the app:
+![upcoming command](images/upcomingCommand.png)
+---
 ### Exiting the program : `exit`
 
 Exits the program.

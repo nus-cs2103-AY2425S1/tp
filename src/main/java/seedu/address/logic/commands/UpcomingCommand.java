@@ -21,8 +21,9 @@ public class UpcomingCommand extends Command {
             + " : Lists all pending deliveries with completion date before and after the specified dates.\n"
             + "Must have at least a START_DATE or END_DATE.\n"
             + "Parameters: "
-            + PREFIX_START_DATE + "START "
-            + PREFIX_END_DATE + "END\n"
+            + PREFIX_START_DATE + "START_DATE "
+            + PREFIX_END_DATE + "END_DATE\n"
+            + "Must have at least a START_DATE or END_DATE.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_START_DATE + "19-12-2022 08:00"
             + " " + PREFIX_END_DATE + "18-06-2023 17:00";
     public static final String MESSAGE_SUCCESS = Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW;

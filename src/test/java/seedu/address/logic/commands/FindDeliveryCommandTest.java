@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_DELIVERIES_FOUND_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalSuppliers.BENSON;
@@ -42,7 +42,7 @@ public class FindDeliveryCommandTest {
         FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
         expectedModel.updateFilteredDeliveryList(predicate);
 
-        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 2), expectedModel);
+        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_FOUND_OVERVIEW, 2), expectedModel);
     }
 
     /**
@@ -56,7 +56,7 @@ public class FindDeliveryCommandTest {
         FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
         expectedModel.updateFilteredDeliveryList(predicate);
 
-        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 1), expectedModel);
+        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_FOUND_OVERVIEW, 1), expectedModel);
     }
 
     /**
@@ -70,7 +70,7 @@ public class FindDeliveryCommandTest {
         FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
         expectedModel.updateFilteredDeliveryList(predicate);
 
-        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 3), expectedModel);
+        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_FOUND_OVERVIEW, 3), expectedModel);
     }
 
     /**
@@ -83,7 +83,7 @@ public class FindDeliveryCommandTest {
         FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
         expectedModel.updateFilteredDeliveryList(predicate);
 
-        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 1), expectedModel);
+        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_FOUND_OVERVIEW, 1), expectedModel);
     }
 
     /**
@@ -110,7 +110,7 @@ public class FindDeliveryCommandTest {
         FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
         expectedModel.updateFilteredDeliveryList(predicate);
 
-        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 0), expectedModel);
+        assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_FOUND_OVERVIEW, 0), expectedModel);
     }
 
     @Test

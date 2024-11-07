@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Quantity;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Email;
@@ -305,6 +306,22 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseStatus() throws ParseException {
+        // null status
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus(null));
+
+        // invalid status values
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus("invalid"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(" "));
+
+        // valid status values - different cases
+        assertEquals(Status.PENDING, ParserUtil.parseStatus("pending"));
+        assertEquals(Status.DELIVERED, ParserUtil.parseStatus("DELIVERED"));
+        assertEquals(Status.CANCELLED, ParserUtil.parseStatus("CaNcElLeD"));
     }
 
     @Test
