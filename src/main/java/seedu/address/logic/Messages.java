@@ -78,7 +78,7 @@ public class Messages {
                 .append("; Celebrity: ")
                 .append(event.getCelebrityName())
                 .append("; Contacts: ")
-                .append(event.getContacts().isEmpty() ? "[To be added]" : event.getContactsString() );
+                .append(event.getContacts().isEmpty() ? "[To be added]" : event.getContactsString());
         return builder.toString();
     }
 
