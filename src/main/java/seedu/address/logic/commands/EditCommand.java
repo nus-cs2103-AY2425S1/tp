@@ -77,31 +77,22 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
-    public Set<Subject> getMinSet(List<Person> lastShownList, Index index, ObservableList<Lesson> lessonList) {
-        return lessonList.stream()
-                .filter(lesson -> lesson.getTutor().equals(lastShownList.get(index.getZeroBased()))
-                        || lesson.getTutee().equals(lastShownList.get(index.getZeroBased())))
-                .map(Lesson::getSubject)
-                .collect(HashSet::new, Set::add, Set::addAll);
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
         // Verify if person to be edited has a lesson already in the address book
         Set<Subject> subjects = editPersonDescriptor.getSubjectsOp().orElse(null);
-        ObservableList<Lesson> lessonList = model.getAddressBook().getLessonList();
-        Set<Subject> minSet = getMinSet(lastShownList, index, lessonList);
+        Set<Subject> minSet = model.getUniqueSubjectsInLessons(lastShownList.get(index.getZeroBased()));
         if (subjects != null) {
             if (!subjects.containsAll(minSet)) {
                 throw new CommandException(MESSAGE_PERSON_HAS_LESSON);
             }
-        }
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());

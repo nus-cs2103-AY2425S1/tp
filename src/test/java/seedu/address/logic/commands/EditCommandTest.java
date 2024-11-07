@@ -16,13 +16,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
@@ -38,8 +35,6 @@ import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TuteeBuilder;
-import seedu.address.testutil.TutorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -265,54 +260,6 @@ public class EditCommandTest {
         // redo -> edits same second person in unfiltered person list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void getMinSet_tutorHasLessons_success() {
-        Tutor tutor = new TutorBuilder().withName("Tutor").withSubjects("Math", "Science").build();
-        Tutee tutee = new TuteeBuilder().withName("Tutee").withSubjects("Math", "Science").build();
-        Lesson lesson1 = new Lesson(tutor, tutee, new Subject("Math"));
-        Lesson lesson2 = new Lesson(tutor, tutee, new Subject("Science"));
-        ObservableList<Lesson> lessonList = FXCollections.observableArrayList(lesson1, lesson2);
-        List<Person> lastShownList = List.of(tutor);
-
-        // Act
-        Set<Subject> minSet = new EditCommand(INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor())
-                .getMinSet(lastShownList, INDEX_FIRST_PERSON, lessonList);
-
-        // Assert
-        assertEquals(2, minSet.size());
-        assertTrue(minSet.contains(new Subject("Math")));
-        assertTrue(minSet.contains(new Subject("Science")));
-    }
-
-    @Test
-    public void getMinSet_tuteeHasLessons_success() {
-        Tutor tutor = new TutorBuilder().withName("Tutor").withSubjects("Math", "Science").build();
-        Tutee tutee = new TuteeBuilder().withName("Tutee").withSubjects("Math", "Science").build();
-        Lesson lesson1 = new Lesson(tutor, tutee, new Subject("Math"));
-        Lesson lesson2 = new Lesson(tutor, tutee, new Subject("Science"));
-        ObservableList<Lesson> lessonList = FXCollections.observableArrayList(lesson1, lesson2);
-        List<Person> lastShownList = List.of(tutee);
-
-        Set<Subject> minSet = new EditCommand(INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor())
-                .getMinSet(lastShownList, INDEX_FIRST_PERSON, lessonList);
-
-        assertEquals(2, minSet.size());
-        assertTrue(minSet.contains(new Subject("Math")));
-        assertTrue(minSet.contains(new Subject("Science")));
-    }
-
-    @Test
-    public void getMinSet_noLessons_emptySet() {
-        Person person = new PersonBuilder().withName("Person").build();
-        ObservableList<Lesson> lessonList = FXCollections.observableArrayList();
-        List<Person> lastShownList = List.of(person);
-
-        Set<Subject> minSet = new EditCommand(INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor())
-                .getMinSet(lastShownList, INDEX_FIRST_PERSON, lessonList);
-
-        assertTrue(minSet.isEmpty());
     }
 
     @Test

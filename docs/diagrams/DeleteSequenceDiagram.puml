@@ -8,6 +8,7 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "h:CommandHistory" as CommandHistory LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -46,10 +47,16 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
+LogicManager -> DeleteCommand : execute(m, h)
 activate DeleteCommand
 
 DeleteCommand -> Model : deletePerson(1)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+DeleteCommand -> Model : commitAddressBook()
 activate Model
 
 Model --> DeleteCommand
@@ -64,6 +71,12 @@ deactivate CommandResult
 
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
+
+LogicManager -> CommandHistory : CommandHistory.add("delete 1"))
+activate CommandHistory
+
+CommandHistory --> LogicManager
+deactivate CommandHistory
 
 [<--LogicManager
 deactivate LogicManager
