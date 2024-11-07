@@ -165,44 +165,44 @@ Examples:
 
 Marks attendance of student for a particular date with the specified details.
 
-Format: `markat n/STUDENT_NAME d/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
+Format: `markat n/STUDENT_NAME dt/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
 
-### Marking Tutorial Group Attendance : `markpresentall`
+### Marking Tutorial Group Attendance to Present : `markpresentall`
 
 Marks all students in a tutorial group as present for a particular date
 
-Format: `markpresentall tg/TUTORIAL_GROUP d/DATE`
+Format: `markpresentall tg/TUTORIAL_GROUP dt/DATE`
 
-### Unmarking Tutorial Group Attendance : `Unmarkpresentall`
+### Marking Tutorial Group Attendance to Absent: `markabssentall`
 
 Marks all students in a tutorial group as absent for a particular date
 
-Format: `unmarkpresentall tg/TUTORIAL_GROUP d/DATE`
+Format: `unmarkpresentall tg/TUTORIAL_GROUP dt/DATE`
 
 ### Deleting Attendance : `deleteat`
 
 Deletes attendance of student for a particular date with the specified details.
 
-Format : `deleteat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+Format : `deleteat n/STUDENT_NAME dt/DATE sn/STUDENT_NUMBER (Optional)`
 
 ### Deleting Tutorial Group Attendance : `deleteatall`
 
 Deletes attendance of all students in a tutorial group for a particular date
 
-Format : `deleteatall tg/TUTORIAL_GROUP d/DATE`
+Format : `deleteatall tg/TUTORIAL_GROUP dt/DATE`
 
 ### Getting Attendance : `getat`
 
 Gets attendance of student for a particular date
 
-Format: `getat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+Format: `getat n/STUDENT_NAME dt/DATE sn/STUDENT_NUMBER (Optional)`
 
 ### Getting Tutorial Group Attendance : `getattg`
 
 Opens an attendance window for all students in a tutorial group for a particular date
 * Executing `undo` will close the last window opened by this command 
 
-Format: `getattg tg/TUTORIAL_GROUP d/DATE`
+Format: `getattg tg/TUTORIAL_GROUP dt/DATE`
 
 ### Closing Attendance Window : `closeat`
 Closes all attendance windows if any is currently open.
@@ -276,21 +276,25 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                          |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------|
-| **Add**           | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`    |
-| **Clear**         | `deleteall`                                                                                                               |
-| **Delete**        | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                          |
-| **Edit**          | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678` |
-| **View**          | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                |
-| **List**          | `list`                                                                                                                    |
-| **Help**          | `help`                                                                                                                    |
-| **Undo**          | `undo`                                                                                                                    
-| **Markat**        | `markat n/NAME d/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe d/2021-10-10 pr/P sn/A1234567Z`     |
-| **Markpresentall** | `markpresentall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `markpresentall tg/G17 d/2021-10-10`                                  |
-| **Markabsentall** | `Markabsentall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `markabesentall tg/G17 d/2021-10-10`                                   |
-| **Deleteat**      | `deleteat n/NAME d/DATE [sn/STUDENT_NUMBER]`<br> e.g., `deleteat n/John Doe d/2021-10-10 sn/A1234567Z`                    |
-| **Deleteatall**   | `deleteatall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `deleteatall tg/G17 d/2021-10-10`                                        |
-| **Getat**         | `getat n/NAME d/DATE [sn/STUDENT_NUMBER]`<br> e.g., `getat n/John Doe d/2021-10-10 sn/A1234567Z`                          |
-| **Getattg**       | `getattg tg/TUTORIAL_GROUP d/DATE`<br> e.g., `getattg tg/G17 d/2021-10-10`                                                |
-| **Closeat**       | `closeat`                                                                                                                 |
+| Action                                          | Format, Examples                                                                                                                                                              |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                                         | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`                                                        |
+| **Clear**                                       | `deleteall`                                                                                                                                                                   |
+| **Delete**                                      | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                                                                              |
+| **Edit**                                        | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                     |
+| **View**                                        | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                                                                    |
+| **List**                                        | `list`                                                                                                                                                                        |
+| **Help**                                        | `help`                                                                                                                                                                        |
+| **Undo**                                        | `undo`                                                                                                                                                                        
+| **Mark Attendance**                             | `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe d/2021-10-10 pr/P sn/A1234567Z`                                                        |
+| **Mark Present for Tutorial Group**             | `markpresentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markpresentall tg/G17 d/2021-10-10`                                                                                     |
+| **Mark Absent for Tutorial Group**              | `markabsentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markabesentall tg/G17 d/2021-10-10`                                                                                      |
+| **Delete Student's Attendance**                 | `deleteat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `deleteat n/John Doe d/2021-10-10 sn/A1234567Z`                                                                       |
+| **Delete Tutorial Group Attendance**            | `deleteatall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `deleteatall tg/G17 d/2021-10-10`                                                                                           |
+| **Get Attendance**                              | `getat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `getat n/John Doe d/2021-10-10 sn/A1234567Z`                                                                             |
+| **Get Tutorial Group Attendance**               | `getattg tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `getattg tg/G17 d/2021-10-10`                                                                                                   |
+| **Close All Tutorial Group Attendance Windows** | `closeat`                                                                                                                                                                     |
+| **Add Assignment**                              | `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`<br> e.g., `adda n/John Doe a/Assignment 1 d/2021-10-10 s/N g/100 sn/A1234567Z` |
+| **Delete Assignment**                           | `deletea n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletea n/John Doe a/Assignment 1 sn/A1234567Z`                                                             |
+| **Edit Assignment**                             | `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE]`<br> e.g., `edita n/John Doe a/Assignment 1 d/2021-10-10 s/Y g/90`                               |
+
