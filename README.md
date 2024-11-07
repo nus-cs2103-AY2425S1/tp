@@ -13,8 +13,8 @@ Build as part of **a project for CS2030S TAs**.<br>
   * as a reference to get their students' details more easily
   * as a tool to help them keep track of their students.
 
-**The project simulates an ongoing software project for a desktop application (called _konTActs_) used for managing contact details.
-  * For details on how to use konTActs, please refer to the user guide for [konTActs](https://ay2425s1-cs2103t-t11-2.github.io/tp/UserGuide.html)
+**The project simulates an ongoing software project for a desktop application (called _KonTActs_) used for managing contact details.
+  * For details on how to use konTActs, please refer to the user guide for [KonTActs](https://ay2425s1-cs2103t-t11-2.github.io/tp/UserGuide.html)
 
 
 
