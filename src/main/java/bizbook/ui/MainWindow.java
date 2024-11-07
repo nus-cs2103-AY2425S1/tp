@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private CommandHistory commandHistory;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -81,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.commandHistory = new CommandHistory();
         this.scene = getRoot().getScene();
 
         // Configure the UI
@@ -147,7 +149,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, commandHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         searchBox = new SearchBox(this::executeFindCommand);
