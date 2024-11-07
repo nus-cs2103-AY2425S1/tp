@@ -4,6 +4,7 @@ import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT_SIGN;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -21,11 +22,13 @@ import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.filterpredicate.AmountFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.CategoryFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DateFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.StatusFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Status;
@@ -103,6 +106,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
     }
 
+    private static void parseCategoryFilter(
+            ArgumentMultimap argMultimap,
+            ArrayList<Predicate<Transaction>> filterSubPredicates
+    )
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
+            Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+            filterSubPredicates.add(new CategoryFilterPredicate(category));
+        }
+    }
+
     /**
      * Parses the given {@code String} argument in the context of the transaction FilterCommand and returns an
      * FilterCommand object for execution.
@@ -114,17 +128,18 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS,
-                        PREFIX_AMOUNT_SIGN
+                        PREFIX_AMOUNT_SIGN, PREFIX_CATEGORY
                 );
         if (!ParserUtil.areAnyPrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE,
                 PREFIX_STATUS,
-                PREFIX_AMOUNT_SIGN
+                PREFIX_AMOUNT_SIGN,
+                PREFIX_CATEGORY
         )
                 && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS,
-                PREFIX_AMOUNT_SIGN
+                PREFIX_AMOUNT_SIGN, PREFIX_CATEGORY
         );
 
         ArrayList<Predicate<Transaction>> filterSubPredicates = new ArrayList<>();
@@ -140,6 +155,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         parseStatusFilter(argMultimap, filterSubPredicates);
 
         parseAmountSignFilter(argMultimap, filterSubPredicates);
+
+        parseCategoryFilter(argMultimap, filterSubPredicates);
 
         assert !filterSubPredicates.isEmpty();
 

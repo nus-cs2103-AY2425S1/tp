@@ -4,6 +4,7 @@ import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static spleetwaise.transaction.testutil.TransactionBuilder.DEFAULT_CATEGORY;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
@@ -23,11 +24,13 @@ import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.filterpredicate.AmountFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.CategoryFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DateFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.StatusFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Status;
@@ -41,6 +44,7 @@ public class FilterCommandParserTest {
     private static final Description testDescription = TypicalTransactions.SEANOWESME.getDescription();
     private static final Date testDate = TypicalTransactions.SEANOWESME.getDate();
     private static final Status testStatus = TypicalTransactions.SEANOWESME.getStatus();
+    private static final Category testCategory = DEFAULT_CATEGORY;
     private static final AddressBookModel abModel = new AddressBookModelManager();
     private static final TransactionBookModel txnModel = new TransactionBookModelManager();
     private static final Predicate<Transaction> testPersonPred = new PersonFilterPredicate(testPerson);
@@ -50,6 +54,7 @@ public class FilterCommandParserTest {
     private static final Predicate<Transaction> testStatusPred = new StatusFilterPredicate(testStatus);
     private static final Predicate<Transaction> testAmountSignPred =
             new AmountSignFilterPredicate(AmountSignFilterPredicate.POSITIVE_SIGN);
+    private static final Predicate<Transaction> testCategoryPred = new CategoryFilterPredicate(testCategory);
 
     private final FilterCommandParser parser = new FilterCommandParser();
 
@@ -111,16 +116,27 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_categoryField_success() {
+        String userInput = " cat/food";
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testCategoryPred);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
+
+        assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
+    }
+
+    @Test
     public void parse_allFields_success() {
         String userInput = " 1 amt/9999999999.99  "
                 + "desc/Sean owes me a lot for a landed property in Sentosa date/10102024 status/"
-                + Status.NOT_DONE_STATUS;
+                + Status.NOT_DONE_STATUS + " cat/food";
         ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
         subPredicates.add(testPersonPred);
         subPredicates.add(testAmountPred);
         subPredicates.add(testDescriptionPred);
         subPredicates.add(testDatePred);
         subPredicates.add(testStatusPred);
+        subPredicates.add(testCategoryPred);
         FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
@@ -176,5 +192,11 @@ public class FilterCommandParserTest {
     public void parse_invalidStatusField_failure() {
         String userInput = " status/invalid";
         assertParseFailure(parser, userInput, Status.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidCategoryField_failure() {
+        String userInput = " cat/ ";
+        assertParseFailure(parser, userInput, Category.MESSAGE_CONSTRAINTS);
     }
 }

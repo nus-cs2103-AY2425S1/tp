@@ -235,8 +235,9 @@ Filter transactions with a any combination of the following parameters:
 * and/or date
 * and/or status
 * and/or positive/negative amount
+* and/or category
 
-Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]`
+Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN] [cat/CATEGORY]`
 
 * The command requires at least one of the above optional prefixes to be provided.
 * As more prefixes are provided, the filter becomes more specific.
@@ -249,6 +250,7 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
 * The `STATUS` accepts either `Done` or `Not Done` to indicate filtering for transactions that are done or not done.
 * The `AMOUNT_SIGN` accepts either `Pos` or `Neg` to indicate filtering for transactions with amount that are 
   positive or negative respectively.
+* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
 Examples:<br>
 

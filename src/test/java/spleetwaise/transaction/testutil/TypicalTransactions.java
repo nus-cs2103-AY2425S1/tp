@@ -1,5 +1,8 @@
 package spleetwaise.transaction.testutil;
 
+import static spleetwaise.transaction.testutil.TransactionBuilder.DEFAULT_CATEGORY_SET;
+import static spleetwaise.transaction.testutil.TransactionBuilder.DEFAULT_EMPTY_CATEGORY_SET;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +20,7 @@ public class TypicalTransactions {
             new TransactionBuilder().withPerson(TypicalPersons
                             .ALICE).withAmount("9999999999.99")
                     .withDescription("Sean owes me a lot for a landed property in Sentosa").withDate("10102024")
-                    .withId("a1314e60-7a23-41cd-8960-d29d4edc841b")
+                    .withId("a1314e60-7a23-41cd-8960-d29d4edc841b").withCategories(DEFAULT_CATEGORY_SET)
                     .build();
     public static final Transaction BOBOWES =
             new TransactionBuilder().withPerson(TypicalPersons.BOB).withAmount("1000000.00")
@@ -34,7 +37,7 @@ public class TypicalTransactions {
     public static final Transaction DANIELDEBT =
             new TransactionBuilder().withPerson(TypicalPersons.DANIEL).withAmount("-20000.00")
                     .withDescription("Karen having debt of $20,000 to me").withDate("01022024")
-                    .withId("a6bb3c5d-1e14-46ed-8f4b-7ddfc0dce9ff")
+                    .withId("a6bb3c5d-1e14-46ed-8f4b-7ddfc0dce9ff").withCategories(DEFAULT_EMPTY_CATEGORY_SET)
                     .build();
 
     private TypicalTransactions() {
