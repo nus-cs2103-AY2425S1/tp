@@ -740,7 +740,6 @@ Format: `help`
 > 
 > You can also access this message by clicking on the `Help` button or by pressing `F1` on your keyboard.
 
-[Back to Table of Contents](#table-of-contents)
 
 #### Clearing all entries : `clear`
 
@@ -753,7 +752,6 @@ Format: `clear`
 >
 > Using the clear command will **REMOVE** all your patient and appointment data from MediBase3. This action is irreversible.
 
-[Back to Table of Contents](#table-of-contents)
 
 #### Exiting the program : `exit`
 
@@ -761,13 +759,11 @@ Exits the program.
 
 Format: `exit`
 
-[Back to Table of Contents](#table-of-contents)
 
 #### Saving the data
 
 MediBase3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-[Back to Table of Contents](#table-of-contents)
 
 #### Editing the data file
 
