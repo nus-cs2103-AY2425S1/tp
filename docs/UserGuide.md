@@ -27,9 +27,9 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 1. [Command Summary](#command-summary)
 
 ## Other Resources
-#### [FAQ](#faq-1)
-#### [Known Issues](#known-issues-1)
-#### [Saving the data](#saving-the-data-1)
+1. [FAQ](#faq)
+1. [Known Issues](#known-issues-1)
+1. [Saving the data](#saving-the-data-1)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -48,8 +48,8 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 </div>
 
 <div class="alert alert-primary">
-  :information_source: **Don't have Java 17 installed?:**<br>
-  You can download Java 17 [**here**](https://www.oracle.com/sg/java/technologies/downloads/#java17-linux).<br>
+  :information_source: Don't have Java 17 installed?:<br>
+  You can download Java 17 <a href="https://www.oracle.com/sg/java/technologies/downloads/#java17-linux"><b>here</b>.</a><br>
   Scroll down and select the correct version for your operating system.
 </div>
 
