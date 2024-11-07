@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_MONTH_PAID;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 
 import java.util.Collection;
@@ -26,15 +29,17 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MONTHPAID);
         String preamble = argMultimap.getPreamble().trim();
         Set<MonthPaid> monthsPaid = parseMonthsPaidForMarkPaid(argMultimap.getAllValues(PREFIX_MONTHPAID));
-        if (monthsPaid.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
-        }
 
         if (preamble.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_EMPTY_INDEX, MarkPaidCommand.MESSAGE_USAGE));
         }
+
+        if (monthsPaid.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_EMPTY_MONTH_PAID, MarkPaidCommand.MESSAGE_USAGE));
+        }
+
 
         MarkPaidCommand.MarkPaidTarget target;
         switch (preamble.toLowerCase()) {
@@ -43,7 +48,7 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
             break;
         default:
             if (!ParserUtil.isValidIndex(preamble)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_INDEX, MarkPaidCommand.MESSAGE_USAGE));
             }
             try {
                 Index index = ParserUtil.parseIndex(preamble);

@@ -26,7 +26,7 @@ public class MonthPaid implements Comparable<MonthPaid> {
      * Returns true if a given string is a valid monthsPaid.
      */
     public static boolean isValidMonthPaid(String monthPaid) {
-        return monthPaid.matches(SPLIT_VALIDATION_REGEX);
+        return monthPaid.isEmpty() || monthPaid.matches(SPLIT_VALIDATION_REGEX);
     }
 
     @Override
@@ -50,6 +50,15 @@ public class MonthPaid implements Comparable<MonthPaid> {
 
     @Override
     public int compareTo(MonthPaid other) {
+
+        if (this.monthPaidValue.isEmpty() && other.monthPaidValue.isEmpty()) {
+            return 0;
+        } else if (this.monthPaidValue.isEmpty()) {
+            return -1;
+        } else if (other.monthPaidValue.isEmpty()) {
+            return 1;
+        }
+
         // Split the value into year and month
         String[] currentMonthYearParts = this.monthPaidValue.split("-");
         String[] otherMonthYearParts = other.monthPaidValue.split("-");
