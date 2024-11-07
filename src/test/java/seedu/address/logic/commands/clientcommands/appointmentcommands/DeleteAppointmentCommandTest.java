@@ -91,7 +91,22 @@ public class DeleteAppointmentCommandTest {
 
         assertCommandFailure(deleteAppointmentCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
     }
+    @Test
+    public void execute_subName_throwsCommandException() {
+        Random random = new Random();
+        List<Name> typicalNames = getTypicalNames();
+        int randomIndex = random.nextInt(typicalNames.size() - 1);
+        Person personToDelete = model.getPersonByName(typicalNames.get(randomIndex));
+        String personToDeleteNameString = personToDelete.getName().toString();
+        Name subNamePersonToDelete =
+                new Name(personToDeleteNameString
+                        .substring(0, personToDeleteNameString.length() - 1));
+        DeleteAppointmentCommand deleteAppointmentCommand =
+                new DeleteAppointmentCommand(subNamePersonToDelete);
 
+        assertCommandFailure(deleteAppointmentCommand, model,
+                String.format(Messages.MESSAGE_SUGGESTION, personToDelete.getName()));
+    }
     @Test
     public void equals() {
         DeleteAppointmentCommand deleteFirstAppointmentCommand = new DeleteAppointmentCommand(ALICE.getName());

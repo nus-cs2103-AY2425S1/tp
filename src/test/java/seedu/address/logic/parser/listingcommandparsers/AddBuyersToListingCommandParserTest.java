@@ -82,4 +82,23 @@ public class AddBuyersToListingCommandParserTest {
         AddBuyersToListingCommand result = parser.parse(userInput);
         assertEquals(expectedCommand, result);
     }
+    @Test
+    public void parse_emptyListingName_throwsParseException() {
+        String userInput = " "
+                + PREFIX_BUYER + VALID_BUYER_NAME_1;
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddBuyersToListingCommand.MESSAGE_USAGE);
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput), expectedMessage);
+    }
+
+    @Test
+    public void parse_emptyBuyerNames_throwsParseException() {
+        String userInput = VALID_LISTING_NAME;
+
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddBuyersToListingCommand.MESSAGE_USAGE);
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput), expectedMessage);
+    }
 }

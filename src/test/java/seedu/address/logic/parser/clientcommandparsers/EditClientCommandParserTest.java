@@ -16,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -164,14 +165,13 @@ public class EditClientCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL));
     }
 
-    //  @Test
-    //  public void parse_resetTags_success() {
-    //      Index targetIndex = INDEX_THIRD_PERSON;
-    //      String userInput = targetIndex.getOneBased() + TAG_EMPTY;
-    //
-    //      EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-    //      EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-    //
-    //      assertParseSuccess(parser, userInput, expectedCommand);
-    //  }
+    @Test
+    public void parse_resetTags_success() {
+        String userInput = TEST_NAME + " " + PREFIX_TAG;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditClientCommand expectedCommand = new EditClientCommand(TEST_NAME, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }
