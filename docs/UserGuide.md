@@ -166,16 +166,6 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Set a volunteer's hours
-
-Sets a volunteers hours to a certain amount.
-
-Format: `setHours INDEX h/HOURS`
-
-* The index is based on the indices in the latest list command.
-
-Example: `setHours 2 h/20`
-
 ### Searching persons by field: `search`
 
 Search persons whose fields match the keywords given.
@@ -351,7 +341,6 @@ Action     | Format, Examples
 **List**   | `list`
 **Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`
-**Set a Volunteer's Hours** | `setHours INDEX [h/HOURS]`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
 **Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
 **Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`

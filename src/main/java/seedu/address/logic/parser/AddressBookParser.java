@@ -18,7 +18,6 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
-import seedu.address.logic.commands.SetVolunteerHoursCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.group.AddToGroupCommand;
 import seedu.address.logic.commands.group.CreateGroupCommand;
@@ -88,9 +87,6 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case SetVolunteerHoursCommand.COMMAND_WORD:
-            return new SetVolunteerHoursCommandParser().parse(arguments);
 
         case CreateGroupCommand.COMMAND_WORD:
             return new CreateGroupCommandParser().parse(arguments);
