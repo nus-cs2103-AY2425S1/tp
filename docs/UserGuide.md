@@ -301,3 +301,4 @@ Action     | Format, Examples
 **Help**   | `help`
 **Filter** | `filter [n\NAME] [t\TAG]…​`<br> e.g., `filter n\John t\client t\friend`
 **Advanced Filter** | `advfilter [t\TAG] [operator] [value]…​`<br> e.g., `advfilter t\premium > 1000`
+**Export** | `export [format\EXPORT_FORMAT]`<br> e.g., `export format\csv`
