@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,8 +13,10 @@ import java.time.format.DateTimeParseException;
  */
 public class Appointment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Appointments should be in the format 'yyyy-MM-dd HH:mm', "
-            + "and must be a valid date and time";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Appointments should be in the format 'yyyy-MM-dd HH:mm', "
+                    + "must be a valid date and time, and must be scheduled after today's date.";
+
     /*
      * The appointment date and time should in the format 'yyyy-MM-dd HH:mm'.
      * Example: 2023-01-31 13:00
@@ -56,8 +59,8 @@ public class Appointment {
             return false;
         }
         try {
-            LocalDateTime.parse(test, FORMATTER);
-            return true;
+            LocalDateTime appointmentDateTime = LocalDateTime.parse(test, FORMATTER);
+            return appointmentDateTime.toLocalDate().isAfter(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
         }

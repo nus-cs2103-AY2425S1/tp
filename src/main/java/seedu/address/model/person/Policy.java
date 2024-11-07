@@ -18,10 +18,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * Represents an insurance policy in the address book.
  */
 public class Policy {
+
     public static final String MESSAGE_CONSTRAINTS = "Policy details should be in the format 'policyName startDate "
             + "endDate' paydate amountDue, where dates are in 'yyyy-MM-dd' format.";
 
-    //private static final String FULLY_PAID = "Fully Paid";
+    public static final String START_DATE_MUST_BE_AFTER_THE_NINETIES = "Insurance has been around in the 1900s! "
+            + "Please input a date after that";
     public static final String END_DATE_BEFORE_START_DATE = "End date cannot be before start date!";
     public static final String PREMIUM_DUE_DATE_BEFORE_START_DATE = "Premium due date cannot "
             + "cannot be before start date!";
@@ -39,6 +41,7 @@ public class Policy {
     private static final String PAYMENT_DATE = "paymentDate"; // Date of the payment
     private static final String PAYMENT_AMOUNT = "paymentAmount"; // Amount of the payment
 
+    private static final LocalDate FIRST_INSURANCE_DATE = LocalDate.parse("1900-01-01", DATE_FORMATTER);
     private final String policyName;
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -86,6 +89,8 @@ public class Policy {
     private void validatePolicy() throws CommandException {
         if (this.getPolicyPaymentDueDate().isEqual(LocalDate.MAX)) {
             ;
+        } else if (this.startDate.isBefore(FIRST_INSURANCE_DATE)) {
+            throw new CommandException(START_DATE_MUST_BE_AFTER_THE_NINETIES);
         } else if (this.endDate.isEqual(this.startDate)) {
             throw new CommandException(START_EQ_END);
         } else if (this.endDate.isBefore(this.startDate)) {

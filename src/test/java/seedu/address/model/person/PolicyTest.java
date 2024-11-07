@@ -64,7 +64,7 @@ public class PolicyTest {
     public void validatePolicyDetails() {
         //policy name cannot contain special characters and numbers
         assertThrows(CommandException.class, () -> new Policy("Policy!123",
-                "2024-01-01", "2023-01-01", VALID_INSURANCE_PAYMENT));
+                "2024-12-12", "2025-01-01", VALID_INSURANCE_PAYMENT));
 
         //end date cannot be before start date
         assertThrows(CommandException.class, () -> new Policy(VALID_POLICY_NAME_LIFE,
@@ -72,8 +72,15 @@ public class PolicyTest {
 
         //start date cannot be equal to end date
         assertThrows(CommandException.class, () -> new Policy(VALID_POLICY_NAME_LIFE,
-                "2023-12-12", "2023-12-12", VALID_INSURANCE_PAYMENT));
+                "2025-12-12", "2025-12-12", VALID_INSURANCE_PAYMENT));
 
+        //start date cannot be before today's date (assuming today's date is 2024-10-10)
+        assertThrows(CommandException.class, ()-> new Policy(VALID_POLICY_NAME_LIFE,
+                "2023-12-12", "2024-12-12", VALID_INSURANCE_PAYMENT));
+
+        //start date can only be 1900s and onward
+        assertThrows(CommandException.class, ()-> new Policy(VALID_POLICY_NAME_LIFE,
+                "1899-12-31", "2025-12-12", VALID_INSURANCE_PAYMENT));
     }
 
     @Test
