@@ -151,7 +151,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Guest feature
 The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes and their corresponding values 
 
-The sequence diagram below provides an overview for the execution flow of an `add_guest` command:
+The sequence diagram below provides an overview for the execution flow of a `add_guest` command:
 <puml src="diagrams/AddGuestSequenceDiagram.puml" />
 
 <box type="info" seamless>
@@ -164,6 +164,24 @@ Explanation:
 2. `AddressBookParser` parses the user input (if valid) to create and return an `AddGuestCommandParser`
 3. `AddGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create a `Guest` object with the specified attributes (`Name`, `Phone`, `Email`, `Address`). An `AddGuestCommand` is then created with the new `Guest` object and returned.
 4. `LogicManager` executes the `AddGuestCommand`, which calls the `addPerson` method of the `Model` to add the guest into the address book.
+5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
+
+### Find feature
+The `find` command searches for all guests and vendors that match the given keyword(s). The prefix specified in the command indicates the attribute to be searched
+
+The sequence diagram below provides an overview for the execution flow of a `find` command:
+<puml src="diagrams/FindSequenceDiagram.puml" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+Explanation:
+1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
+2. `AddressBookParser` parses the user input (if valid) to create and return a `FindCommandParser`
+3. `FindCommandParser` parses the user input (if valid) to extract the prefix and its corresponding value, before calling the corresponding parse predicate method to create the corresponding predicate to be used. In this case, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. A `FindCommand` is then created with the predicate and returned.
+4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the predicate as the argument.
 5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
 
 
