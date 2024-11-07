@@ -32,16 +32,16 @@ public class AddPersonCommand extends AddCommand {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
-            + PREFIX_NAME + "Sydney Sweeney "
+            + PREFIX_NAME + "Alex Yeoh "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "sydney@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "Celebrity ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in TalentHub.";
     public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number is already used by another person "
-            + "in the address book.";
+            + "in TalentHub.";
     private final Person toAdd;
 
     /**

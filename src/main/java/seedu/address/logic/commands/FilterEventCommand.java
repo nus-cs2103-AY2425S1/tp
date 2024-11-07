@@ -19,7 +19,7 @@ public class FilterEventCommand extends FilterCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the events by "
             + "the specified celebrity (case-insensitive) and displays it.\n"
             + "Parameters: NAME\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " Lebron James";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " Alex Yeoh";
 
     private final EventCelebrityMatchesKeywordPredicate predicate;
 

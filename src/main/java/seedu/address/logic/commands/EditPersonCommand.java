@@ -52,9 +52,9 @@ public class EditPersonCommand extends EditCommand {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in TalentHub.";
     public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number is already used by another person "
-            + "in the address book.";
+            + "in TalentHub.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

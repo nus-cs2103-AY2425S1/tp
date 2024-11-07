@@ -351,16 +351,25 @@ Format: `clear event`
 
 ### Clearing all entries : `clear all`
 
-Clears all entries from the address book after receiving confirmation from you.
+Clears all entries from TalentHub.
 
 Format: `clear all`
 
-![result for 'clear all confirmation'](images/clear_all_confirmation.png)
-![result for 'clear all'](images/clear_all.png)
+Users will be provided with the following prompt.
+
+![result for 'clear all'](images/clear_all_confirmation.png)
+
+Typing `N` or `n` and pressing enter would return the following message.
+
+![result for 'N'](images/clear_all_reject.png)
+
+Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
+
+![result for 'Y'](images/clear_all.png)
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits TalentHub.
 
 Format: `exit`
 
@@ -388,10 +397,6 @@ TalentHub data are saved automatically as a JSON file `[JAR file location]/data/
 If your changes to the data file makes its format invalid, TalentHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 ---
 
