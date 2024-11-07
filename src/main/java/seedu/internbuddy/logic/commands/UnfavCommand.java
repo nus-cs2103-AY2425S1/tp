@@ -55,7 +55,7 @@ public class UnfavCommand extends Command {
                 companyToUnfav.getPhone(), companyToUnfav.getEmail(),
                 companyToUnfav.getAddress(), companyToUnfav.getTags(),
                 companyToUnfav.getStatus(), companyToUnfav.getApplications(),
-                false);
+                false, false);
 
         model.setCompany(companyToUnfav, editedCompany);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);

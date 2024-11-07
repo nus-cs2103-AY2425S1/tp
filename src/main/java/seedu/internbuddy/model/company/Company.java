@@ -30,12 +30,13 @@ public class Company {
     private final List<Application> applications;
     private final Set<Tag> tags = new HashSet<>();
     private final Boolean isFavourite;
+    private final Boolean isShowingDetails;
 
     /**
      * Every field must be present and not null.
      */
     public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status,
-               List<Application> applications, Boolean isFavourite) {
+               List<Application> applications, Boolean isFavourite, Boolean isShowingDetails) {
         requireAllNonNull(name, phone, email, address, tags, status, isFavourite);
         this.name = name;
         this.phone = phone;
@@ -45,6 +46,7 @@ public class Company {
         this.status = status;
         this.applications = applications;
         this.isFavourite = isFavourite;
+        this.isShowingDetails = isShowingDetails;
     }
 
     /**
@@ -61,6 +63,7 @@ public class Company {
         this.status = status;
         this.applications = applications;
         this.isFavourite = false;
+        this.isShowingDetails = false;
     }
 
     public Name getName() {
@@ -99,6 +102,10 @@ public class Company {
         return Collections.unmodifiableList(applications);
     }
 
+    public Boolean getIsShowingDetails() {
+        return isShowingDetails;
+    }
+
     public String getAppNameString() {
         StringBuilder appNames = new StringBuilder();
         for (Application application : applications) {
@@ -121,6 +128,16 @@ public class Company {
             appDescriptions.append(application.getDescription().fullDescription).append(" ");
         }
         return appDescriptions.toString();
+    }
+
+    /**
+     * Returns a string of comma separated tags, or "NO TAGS" if no tags.
+     */
+    public String getTagsListString() {
+        if (tags.isEmpty()) {
+            return "NO TAGS";
+        }
+        return String.join(", ", tags.stream().map(tag -> tag.tagName).toList());
     }
 
     /**
@@ -159,7 +176,8 @@ public class Company {
                 && status.equals(otherCompany.status)
                 && tags.equals(otherCompany.tags)
                 && applications.equals(otherCompany.applications)
-                && isFavourite.equals(otherCompany.isFavourite);
+                && isFavourite.equals(otherCompany.isFavourite)
+                && isShowingDetails.equals(otherCompany.isShowingDetails);
     }
 
     @Override

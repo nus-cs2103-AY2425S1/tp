@@ -14,6 +14,7 @@ import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.company.StatusType;
 
 /**
  * Withdraws an application identified using it's displayed index from the address book.
@@ -67,7 +68,7 @@ public class WithdrawCommand extends Command {
 
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
                 companyToEdit.getAddress(), companyToEdit.getTags(),
-                newStatus, applicationList, companyToEdit.getIsFavourite());
+                newStatus, applicationList, companyToEdit.getIsFavourite(), false);
 
         model.setCompany(companyToEdit, editedCompany);
         return new CommandResult(String.format(MESSAGE_WITHDRAW_APPLICATION_SUCCESS, applicationToWithdraw));
@@ -75,7 +76,7 @@ public class WithdrawCommand extends Command {
 
     public static Status getNewStatus(Company companyToEdit, List<Application> applicationList) {
         if (applicationList.isEmpty()) {
-            return new Status("CLOSED");
+            return new Status(StatusType.CLOSED);
         } else {
             return companyToEdit.getStatus();
         }

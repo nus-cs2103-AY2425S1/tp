@@ -54,7 +54,7 @@ public class FavCommand extends Command {
         Company editedCompany = new Company(companyToFav.getName(), companyToFav.getPhone(), companyToFav.getEmail(),
                 companyToFav.getAddress(), companyToFav.getTags(),
                 companyToFav.getStatus(), companyToFav.getApplications(),
-                true);
+                true, false);
 
         model.setCompany(companyToFav, editedCompany);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);

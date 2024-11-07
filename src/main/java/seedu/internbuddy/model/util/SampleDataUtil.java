@@ -16,6 +16,7 @@ import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.company.StatusType;
 import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
@@ -27,30 +28,30 @@ public class SampleDataUtil {
         return new Company[] {
             new Company(new Name("Google"), new Phone("6502530000"), new Email("contact@google.com"),
                     new Address("1600 Amphitheatre Parkway, Mountain View, CA 94043"),
-                    getTagSet("tech", "search"), new Status("APPLIED"),
+                    getTagSet("tech", "search"), new Status(StatusType.APPLIED),
                     getApplicationList(createApplication("SWE Intern",
                                     "Requires ReactJS and Express JS", "APPLIED"),
                             createApplication("QA Engineer", "Requires Java",
                                     "INTERVIEWED"))),
             new Company(new Name("Microsoft"), new Phone("4258828080"), new Email("contact@microsoft.com"),
                     new Address("One Microsoft Way, Redmond, WA 98052"),
-                    getTagSet("tech", "software"), new Status("APPLIED"),
+                    getTagSet("tech", "software"), new Status(StatusType.APPLIED),
                     getApplicationList(createApplication("AI Engineer",
                             "Requires Python", "OA"))),
             new Company(new Name("Apple"), new Phone("4089961010"), new Email("contact@apple.com"),
                 new Address("One Apple Park Way, Cupertino, CA 95014"),
-                getTagSet("tech", "hardware"), new Status("APPLIED"),
+                getTagSet("tech", "hardware"), new Status(StatusType.APPLIED),
                     getApplicationList(createApplication("UI UX Developer", "Requires Figma",
                             "REJECTED"))),
             new Company(new Name("Amazon"), new Phone("2062661000"), new Email("contact@amazon.com"),
                     new Address("410 Terry Ave N, Seattle, WA 98109"),
-                    getTagSet("ecommerce", "cloud"), new Status("INTERESTED"), new ArrayList<>()),
+                    getTagSet("ecommerce", "cloud"), new Status(StatusType.INTERESTED), new ArrayList<>()),
             new Company(new Name("Facebook"), new Phone("6505434800"), new Email("contact@fb.com"),
                     new Address("1 Hacker Way, Menlo Park, CA 94025"),
-                    getTagSet("social", "tech"), new Status("CLOSED"), new ArrayList<>()),
+                    getTagSet("social", "tech"), new Status(StatusType.CLOSED), new ArrayList<>()),
             new Company(new Name("Netflix"), new Phone("4085403700"), new Email("contact@netflix.com"),
                     new Address("100 Winchester Circle, Los Gatos, CA 95032"),
-                    getTagSet("entertainment", "streaming"), new Status("INTERESTED"), new ArrayList<>())
+                    getTagSet("entertainment", "streaming"), new Status(StatusType.INTERESTED), new ArrayList<>())
         };
     }
 

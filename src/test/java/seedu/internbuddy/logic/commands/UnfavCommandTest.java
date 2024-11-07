@@ -31,7 +31,7 @@ public class UnfavCommandTest {
                 companyToUnfav.getPhone(), companyToUnfav.getEmail(),
                 companyToUnfav.getAddress(), companyToUnfav.getTags(),
                 companyToUnfav.getStatus(), companyToUnfav.getApplications(),
-                false));
+                false, companyToUnfav.getIsShowingDetails()));
 
         assertCommandSuccess(unfavCommand, model, expectedMessage, expectedModel);
     }
