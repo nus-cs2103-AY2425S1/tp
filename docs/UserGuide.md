@@ -32,7 +32,7 @@ the process of accessing and updating resident student details. What's more, Dor
     - [Finding a person : `find`](#locating-persons-by-name-phone_number-room_number-or-tag-find)
     - [Deleting a person : `delete`](#deleting-a-person--delete)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
-    - [Cleaning graduated students : `exit`](#cleaning-graduated-students--clean)
+    - [Cleaning graduated students : `clean`](#cleaning-graduated-students--clean)
     - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
     - [Manual saving : `export`](#manual-saving-export)
@@ -120,16 +120,29 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
-<box type="tip" seamless>
+> [!Note]
+> * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
+> * A person can have up to 10 tags (including 0).
+> * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
+> * `PHONE_NUMBER` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `EMAIL` should be of the format local-part@domain
+> * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
-**Tip:** A person can have up to 10 tags (including 0).
-</box>
+> [!Warning]
+> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
+
+
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/Resident Assistant e/betsycrowe@example.com a/Newgate Street p/1234567 t/Floor 1`
+
+The following screenshot shows the results of executing `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+
+![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
 
 ### Listing all persons : `list`
 
@@ -141,7 +154,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -207,6 +220,9 @@ Removes all graduated students from the address book based on the current year a
 
 Format: `clean`
 
+> [!Tip]
+> If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+
 Examples of usage:
 
 `clean`, executed in 2024.
@@ -265,9 +281,6 @@ If your changes to the data file makes its format invalid, DorManagerPro will di
 Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -306,6 +319,21 @@ Action     | Format, Examples
 ### Name
 
 ### Phone number
+
+Format: `+c a d`, where `c` is an optional country code, `a` is an optional area code, and `d` is a compulsory number.
+
+Constraints:
+* Start the phone number with `+` only if there is a country code.
+* `c` is an optional country code 1 to 3 digits long.
+* `a` is an optional area code 1 to 4 digits long. `a` can only be specified when `c` is specified.
+* `d` is a compulsory number 3 to 15 digits long.
+* Separate `c`, `a` and `d` with a single space.
+
+Duplicate handling:
+* Two resident student contacts with the same phone numbers are not allowed.
+> [!Note]
+> Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> Duplicate handling rationale: Phone numbers are unique to each individual
 
 ### Email
 
