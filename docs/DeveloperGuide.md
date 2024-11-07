@@ -256,6 +256,7 @@ The sequence diagram shows how an entity command is executed:
   - Pros: Creates a separate command, so the implementations of each command are separated and less coupled
   - Cons: Results in significant code duplication
 
+
 <br>
 
 **Aspect: What constitutes duplicate person that should not be added or edited into the address book**
@@ -280,6 +281,28 @@ The sequence diagram shows how an entity command is executed:
 
 ### Command-Specific Design Considerations
 
+### Add Appointment feature
+
+**Aspect: Whether appointment fields should be optional**
+
+- **Alternative 1 (Current choice):** Sickness and medicine fields are optional.
+    - **Pros**: This allows users to create an appointment without specifying all fields initially, which is more realistic and practical as some details may not be available at the time of creation.
+
+- **Alternative 2**: Make all fields mandatory.
+    - **Pros**: Ensures complete data at the time of appointment creation, which may simplify data handling and reduce the need for future edits.
+    - **Cons**: Can be inconvenient for users who don’t have all details available immediately, possibly leading to frustration or delays in creating appointments.
+
+<br>
+
+**Aspect: What Input Should Be Valid for Fields Sickness and Medicine**
+
+- **Alternative 1 (Current choice):** Require input with at least one alphanumeric character.
+    - **Pros**: Ensures these fields contain meaningful data, reducing the likelihood of accidental or erroneous inputs.
+
+- **Alternative 2:** Allow any value as valid input.
+    - **Cons**: Increases the risk of erroneous inputs, such as empty fields, accidental symbols, or irrelevant characters, potentially reducing data quality.
+
+
 #### Delete/Clear Person feature
 
 **Aspect: Deleting person and clearing person list should:**
@@ -292,6 +315,18 @@ The sequence diagram shows how an entity command is executed:
 <br>
 
 #### Edit Person/Appointment feature
+
+**Aspect: What value to use for indicating entity**
+
+- **Alternative 1 (Current choice):** Use the index of the person/appointment in the list.
+    - **Pros**: Enables efficient retrieval directly from the list using `List#get`, simplifying implementation.
+    - **Cons**: Entity indexes may shift after deletions, which could lead to unintended edits if the user isn’t aware of changes in ordering.
+
+- **Alternative 2:** Use a unique ID for each entity.
+    - **Pros**: IDs remain consistent regardless of list modifications, ensuring stable reference to the entity.
+    - **Cons**: Implementing ID-based retrieval requires additional logic and may be slower, especially for larger lists.
+
+<br>
 
 **Aspect: During Edit Appointment, check if new person ID associated with edited appointment corresponds to an existing person in the address book**
 - This is to ensure no unwanted errors occur while editing the appointment and helps to maintain data integrity.
@@ -322,6 +357,17 @@ The sequence diagram shows how an entity command is executed:
   - Pros: Allows for more flexible and broader search results, as any one of the conditions can yield matches.
   - Cons: May return too many results
 
+<br>
+
+**Aspect: Whether to implement case sensitivity in matching**
+
+- **Alternative 1 (Current choice)**: Implement case-insensitive matching for search terms.
+    - **Pros**: Enhances user experience by allowing searches to ignore case differences
+    - **Cons**: Slightly more processing required to normalize case during search
+
+- **Alternative 2**: Implement case-sensitive matching for search terms.
+    - **Pros**: Potentially faster searches, as no additional case normalization is required
+    - **Cons**: Reduces user-friendliness
 <br>
 
 <box type="tip" theme="success" seamless>
