@@ -74,7 +74,7 @@ public class RightPanelTest {
     }
 
     @Test
-    public void testFilterTransactionsByAmount_callsResetFilterAndUpdatesPredicate()
+    public void testFilterTransactionsByAmount_callsResetShowAllPositiveOrNegativeAndUpdatesPredicate()
             throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         // Call the private method "filterTransactionsByAmount" using reflection
         Method filterTransactionsByAmount = RightPanel.class.getDeclaredMethod("filterTransactionsByAmount");
