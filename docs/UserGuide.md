@@ -254,7 +254,7 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 
 * Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
 * The `TYPE` is case-insensitive: `HDB`, `CONDO` or `LANDED`.
-* The `MATCHING_PRICE` is a non-negative integer (i.e. no non-numeric symbols such as decimal points, currency symbols, etc.).
+* The `MATCHING_PRICE` must be a non-negative integer smaller than 1,000,000 (thousand) with only numeric characters.
 
 <box type="definition" seamless>
 
