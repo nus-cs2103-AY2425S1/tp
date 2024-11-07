@@ -8,9 +8,9 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.customer.Customer;
 
 /**
  * Filters and lists all orders under a specified customer from the displayed order list,

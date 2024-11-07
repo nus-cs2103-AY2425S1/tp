@@ -10,10 +10,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.sellsavvy.commons.exceptions.IllegalValueException;
-import seedu.sellsavvy.model.customer.*;
+import seedu.sellsavvy.model.customer.Address;
+import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.customer.Email;
+import seedu.sellsavvy.model.customer.Name;
+import seedu.sellsavvy.model.customer.Phone;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**

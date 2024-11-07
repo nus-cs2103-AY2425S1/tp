@@ -12,9 +12,12 @@ import java.util.stream.Stream;
 
 import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
-import seedu.sellsavvy.model.customer.*;
-import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.customer.Address;
 import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.customer.Email;
+import seedu.sellsavvy.model.customer.Name;
+import seedu.sellsavvy.model.customer.Phone;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**

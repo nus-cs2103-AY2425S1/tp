@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.sellsavvy.logic.parser.Prefix;
-import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.order.Order;
 
 /**
  * Container for user visible messages.

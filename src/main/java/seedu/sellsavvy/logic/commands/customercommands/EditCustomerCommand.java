@@ -24,12 +24,12 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.customer.Address;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.customer.Email;
 import seedu.sellsavvy.model.customer.Name;
-import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.customer.Phone;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**
@@ -113,7 +113,8 @@ public class EditCustomerCommand extends Command {
      * Creates and returns a {@code Customer} with the details of {@code customerToEdit}
      * edited with {@code editCustomerDescriptor}.
      */
-    private static Customer createEditedCustomer(Customer customerToEdit, EditCustomerDescriptor editCustomerDescriptor) {
+    private static Customer createEditedCustomer(
+            Customer customerToEdit, EditCustomerDescriptor editCustomerDescriptor) {
         assert customerToEdit != null;
 
         Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());

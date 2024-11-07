@@ -7,14 +7,17 @@ import java.util.stream.Collectors;
 
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
-import seedu.sellsavvy.model.customer.*;
+import seedu.sellsavvy.model.customer.Address;
+import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.customer.Email;
+import seedu.sellsavvy.model.customer.Name;
+import seedu.sellsavvy.model.customer.Phone;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.order.Status;
-import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**

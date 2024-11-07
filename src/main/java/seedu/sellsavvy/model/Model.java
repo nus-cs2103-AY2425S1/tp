@@ -82,7 +82,8 @@ public interface Model {
     /**
      * Replaces the given customer {@code target} with {@code editedCustomer}.
      * {@code target} must exist in the address book.
-     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in the address book.
+     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in the
+     * address book.
      */
     void setCustomer(Customer target, Customer editedCustomer);
 

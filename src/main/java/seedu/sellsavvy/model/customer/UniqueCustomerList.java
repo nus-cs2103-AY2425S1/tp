@@ -9,16 +9,16 @@ import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.customer.exceptions.DuplicateCustomerException;
 import seedu.sellsavvy.model.customer.exceptions.CustomerNotFoundException;
+import seedu.sellsavvy.model.customer.exceptions.DuplicateCustomerException;
+import seedu.sellsavvy.model.order.Order;
 
 /**
  * A list of customers that enforces uniqueness between its elements and does not allow nulls.
- * A customer is considered unique by comparing using {@code Customer#isSameCustomer(Customer)}. As such, adding and updating of
- * customers uses Customer#isSameCustomer(Customer) for equality so as to ensure that the customer being added or updated is
- * unique in terms of identity in the UniqueCustomerList. However, the removal of a customer uses Customer#equals(Object) so
- * as to ensure that the customer with exactly the same fields will be removed.
+ * A customer is considered unique by comparing using {@code Customer#isSameCustomer(Customer)}. As such, adding and
+ * updating of customers uses Customer#isSameCustomer(Customer) for equality so as to ensure that the customer being
+ * added or updated is unique in terms of identity in the UniqueCustomerList. However, the removal of a customer uses
+ * Customer#equals(Object) to ensure that the customer with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *

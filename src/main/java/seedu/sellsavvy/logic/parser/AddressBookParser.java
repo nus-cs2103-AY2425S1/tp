@@ -9,7 +9,11 @@ import java.util.regex.Pattern;
 
 import seedu.sellsavvy.commons.core.LogsCenter;
 import seedu.sellsavvy.logic.commands.Command;
-import seedu.sellsavvy.logic.commands.customercommands.*;
+import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.DeleteCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.FindCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.ListCustomerCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ClearCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
@@ -20,7 +24,6 @@ import seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.UnmarkOrderCommand;
-import seedu.sellsavvy.logic.commands.customercommands.DeleteCustomerCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 
 /**
