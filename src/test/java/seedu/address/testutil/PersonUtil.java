@@ -53,6 +53,10 @@ public class PersonUtil {
 
         person.getRoles().stream().forEach(
                 s -> sb.append(PREFIX_ROLE + s.name() + " "));
+        person.getCaregivers().stream().forEach(
+                s -> sb.append(PREFIX_CAREGIVER + s.value + " "));
+        person.getPatients().stream().forEach(
+                s -> sb.append(PREFIX_PATIENT + s.value + " "));
         return sb.toString();
     }
 
@@ -82,6 +86,22 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        // if (descriptor.getCaregivers().isPresent()) {
+        //     Set<Nric> caregivers = descriptor.getCaregivers().get();
+        //     if (caregivers.isEmpty()) {
+        //         sb.append(PREFIX_CAREGIVER);
+        //     } else {
+        //         caregivers.forEach(s -> sb.append(PREFIX_CAREGIVER).append(s.value).append(" "));
+        //     }
+        // }
+        // if (descriptor.getPatients().isPresent()) {
+        //     Set<Nric> patients = descriptor.getPatients().get();
+        //     if (patients.isEmpty()) {
+        //         sb.append(PREFIX_PATIENT);
+        //     } else {
+        //         patients.forEach(s -> sb.append(PREFIX_PATIENT).append(s.value).append(" "));
+        //     }
+        // }
         return sb.toString();
     }
 
@@ -99,11 +119,11 @@ public class PersonUtil {
 
     public static String getDeleteAppointmentCommand(Nric testperson, String date, String time) {
         return DeleteAppointmentCommand.COMMAND_WORD + " " + PREFIX_NRIC + testperson.value
-            + " " + PREFIX_DATE + date + " " + PREFIX_START_TIME + time;
+                + " " + PREFIX_DATE + date + " " + PREFIX_START_TIME + time;
     }
 
     public static String getUpdateAppointmentStatusCommand(Nric testperson, String date, String time, String status) {
         return UpdateAppointmentStatusCommand.COMMAND_WORD + " " + PREFIX_NRIC + testperson.value
-            + " " + PREFIX_DATE + date + " " + PREFIX_START_TIME + time + " " + PREFIX_STATUS + status;
+                + " " + PREFIX_DATE + date + " " + PREFIX_START_TIME + time + " " + PREFIX_STATUS + status;
     }
 }

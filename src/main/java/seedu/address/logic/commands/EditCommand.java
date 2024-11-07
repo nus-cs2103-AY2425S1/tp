@@ -90,7 +90,6 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -157,7 +156,12 @@ public class EditCommand extends Command {
         private Set<Nric> caregivers;
         private Set<Nric> patients;
 
+        /**
+         * Creates an {@code EditPersonDescriptor} with empty fields.
+         */
         public EditPersonDescriptor() {
+            caregivers = new HashSet<>();
+            patients = new HashSet<>();
         }
 
         /**

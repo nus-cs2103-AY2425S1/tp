@@ -121,10 +121,9 @@ public class AddressBookParserTest {
         String validDate = "22/10/2025";
         String validStartTime = "10:00";
         DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
-                PersonUtil.getDeleteAppointmentCommand(validNric, validDate, validStartTime)
-        );
+                PersonUtil.getDeleteAppointmentCommand(validNric, validDate, validStartTime));
         assertEquals(new DeleteAppointmentCommand(validNric, LocalDate.parse(validDate, dateFormatter),
-            LocalTime.parse(validStartTime, timeFormatter)), command);
+                LocalTime.parse(validStartTime, timeFormatter)), command);
     }
 
     @Test
@@ -136,10 +135,9 @@ public class AddressBookParserTest {
         String validStartTime = "10:00";
         String validStatus = "COMPLETED";
         UpdateAppointmentStatusCommand command = (UpdateAppointmentStatusCommand) parser.parseCommand(
-                PersonUtil.getUpdateAppointmentStatusCommand(validNric, validDate, validStartTime, validStatus)
-        );
+                PersonUtil.getUpdateAppointmentStatusCommand(validNric, validDate, validStartTime, validStatus));
         assertEquals(new UpdateAppointmentStatusCommand(validNric, LocalDate.parse(validDate, dateFormatter),
-            LocalTime.parse(validStartTime, timeFormatter), Status.COMPLETED), command);
+                LocalTime.parse(validStartTime, timeFormatter), Status.COMPLETED), command);
     }
 
     @Test
