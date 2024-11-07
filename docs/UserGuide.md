@@ -104,25 +104,25 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 
 <d-table searchable>
 
-| Commands                                                   | Description                             | Format                                                                                                                                                         | Examples                                                                     | 
-|------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| [**help**](#viewing-help-help)                             | Show manual                             | `help`                                                                                                                                                         | -                                                                            |
-| [**cadd**](#adding-a-client-cadd)                          | Add a client                            | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL]`                                                                                                                       | `cadd n/Steven Tan e/steventan@abc.com p/98765432`                           |
-| [**radd**](#adding-a-rental-information-for-a-client-radd) | Add rental information to a client      | `radd c/CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {cl/CUSTOMER_LIST}`                   | `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 c/Steven Lim dd/20 m/2750` |
-| [**list**](#listing-all-clients-list)                      | List all clients                        | `list`                                                                                                                                                         | -                                                                            |
-| [**rview**](#listing-rental-information-of-a-client-rview) | View rental information of a client     | `rview CLIENT_INDEX`                                                                                                                                           | `rview 1`                                                                    |
-| [**cedit**](#editing-a-client-cedit)                       | Edit a client                           | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`                                                                                                       | `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`                        |
-| [**redit**](#editing-a-client-s-rental-information-redit)  | Edit rental information for a client    | `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]` | `redit c/1 r/1 a/65 Anderson Road m/3000 d/0`                                |
-| [**find**](#locating-clients-find)                         | Find information                        | `find [k/KEYWORDS...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG]...`                                                                                 | `find k/Tan n/Steven Tan p/98765432`                                         |
-| [**cdelete**](#deleting-a-client-cdelete)                  | Delete a client                         | `cdelete CLIENT_INDEX`                                                                                                                                         | `cdelete 3`                                                                  |
-| [**rdelete**](#deleting-a-rental-information-rdelete)      | Delete rental information from a client | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`                                                                                                                        | `rdelete c/1 r/2`                                                            |
-| [**sort**](#sorting-all-entries-sort)                      | Sort clients by name                    | `sort`                                                                                                                                                         | -                                                                            |
-| [**↑up ↓down arrow key**](#sorting-all-entries-sort)       | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                        | -                                                                            |
-| [**import**](#importing-data-import)                       | Import data from an external file       | `import`                                                                                                                                                       | -                                                                            |
-| [**export**](#exporting-data-export)                       | Export address book data                | `export`                                                                                                                                                       | -                                                                            |
-| [**clear**](#clearing-all-entries-clear)                   | Clear all client's details'             | `clear`                                                                                                                                                        | -                                                                            |
-| [**exit**](#exiting-the-application-exit)                  | Exit the application                    | `exit`                                                                                                                                                         | -                                                                            |
-
+| Commands                                                                    | Description                             | Format                                                                                                                                                         | Examples                                                                     | 
+|-----------------------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| [**help**](#viewing-help-help)                                              | Show manual                             | `help`                                                                                                                                                         | -                                                                            |
+| [**cadd**](#adding-a-client-cadd)                                           | Add a client                            | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL]`                                                                                                                       | `cadd n/Steven Tan e/steventan@abc.com p/98765432`                           |
+| [**radd**](#adding-a-rental-information-for-a-client-radd)                  | Add rental information to a client      | `radd c/CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {cl/CUSTOMER_LIST}`                   | `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 c/Steven Lim dd/20 m/2750` |
+| [**list**](#listing-all-clients-list)                                       | List all clients                        | `list`                                                                                                                                                         | -                                                                            |
+| [**rview**](#listing-rental-information-of-a-client-rview)                  | View rental information of a client     | `rview CLIENT_INDEX`                                                                                                                                           | `rview 1`                                                                    |
+| [**cedit**](#editing-a-client-cedit)                                        | Edit a client                           | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`                                                                                                       | `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`                        |
+| [**redit**](#editing-a-client-s-rental-information-redit)                   | Edit rental information for a client    | `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]` | `redit c/1 r/1 a/65 Anderson Road m/3000 d/0`                                |
+| [**find**](#locating-clients-find)                                          | Find information                        | `find [k/KEYWORDS...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG]...`                                                                                 | `find k/Tan n/Steven Tan p/98765432`                                         |
+| [**cdelete**](#deleting-a-client-cdelete)                                   | Delete a client                         | `cdelete CLIENT_INDEX`                                                                                                                                         | `cdelete 3`                                                                  |
+| [**rdelete**](#deleting-a-rental-information-rdelete)                       | Delete rental information from a client | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`                                                                                                                        | `rdelete c/1 r/2`                                                            |
+| [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                         | -                                                                            |
+| [**↑up ↓down arrow key**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                        | -                                                                            |
+| [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                    | -                                                                            |
+| [**import**](#importing-data-import)                                        | Import data from an external file       | `import`                                                                                                                                                       | -                                                                            |
+| [**export**](#exporting-data-export)                                        | Export address book data                | `export`                                                                                                                                                       | -                                                                            |
+| [**clear**](#clearing-all-entries-clear)                                    | Clear all client's details'             | `clear`                                                                                                                                                        | -                                                                            |
+| [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                         | -                                                                            |
 </d-table>
 
 ## Parameter Constraints
@@ -222,6 +222,8 @@ Format: `radd CLIENT_INDEX a/ADDRESS [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [
 3. `New rental information is added to the client: Address: 25 Jalan Sempadan #02-06; Rental Start Date: 01 Sep 2024; Rental End Date: 31 Aug 2025; Rent Due Date: 20; Monthly Rent: $2750.00; Deposit: $8250.00; Customer List: Steven Lim`
 
 </box>
+
+![raddUi](images/raddUi.png)
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -373,6 +375,8 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 3. `Edited Client's Rental Information: Address: Blk 8 Hougang Ave 10, #11-2411; Rental Start Date: 01 Jan 2025; Rental End Date: —; Rent Due Date: 15; Monthly Rent: $1500.00; Deposit: $12000.00; Customer List: Tan Eng Heng`
 
 </box>
+
+![reditUi](images/reditUi.png)
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -568,6 +572,70 @@ Navigates through all previously entered commands.
 11. Expected: `list` is shown in the command box.
 12. Expected: `cdelete 3` is shown in the command box.
 13. Expected: : Nothing is shown in the command box.
+
+</box>
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+### Autofill: `Tab key`
+
+Autofills command name, prefix and value of prefix.
+
+Entering the `↹ Tab key` will help to fill or append to the command input with appropriate value.
+
+<box type="important" seamless>
+
+**Constraints:**
+* The value being autofilled depends on the available helping words specified by TrueRental.
+* Autofill is not customized for every single prefix, all prefixes will have same set of value for autofill.
+
+</box>
+
+<box type="info" seamless>
+
+**Note:**
+* You should not rely on autofill too much as this feature is meant to provide some simple helps only.
+* Autofill for prefix may not be working for some commands which does not require extra parameters.
+
+</box>
+
+<box type="info" light>
+
+**Example Inputs:** (Steps 1 to 12 are performed sequentially)
+1. Enter `r` as the input command.
+2. Press `↹ Tab key` on the keyboard.
+3. Press `↹ Tab key` on the keyboard.
+4. Press `↹ Tab key` on the keyboard.
+5. Clear input command and enter `radd ` as the input command (take note of the white space at the end of the command input).
+6. Press `↹ Tab key` on the keyboard.
+7. Press `↹ Tab key` on the keyboard.
+8. Press `↹ Tab key` on the keyboard.
+9. Clear input command and enter `radd cl/J` as the input command.
+10. Press `↹ Tab key` on the keyboard.
+11. Press `↹ Tab key` on the keyboard.
+12. Press `↹ Tab key` on the keyboard.
+
+</box>
+
+<box type="success" light>
+
+**Example Outputs:** (Steps 1 to 12 are performed sequentially)
+1. Value of the input command is now "r".
+2. Value of the input command is now "radd".
+3. Value of the input command is now "redit".
+4. Value of the input command is now "rdelete".
+5. Value of the input command is now "radd ".
+6. Value of the input command is now "radd a/".
+7. Value of the input command is now "radd cl/".
+8. Value of the input command is now "radd d/".
+9. Value of the input command is now "radd cl/J".
+10. Value of the input command is now "radd cl/Josh".
+11. Value of the input command is now "radd cl/Joshua".
+12. Value of the input command is now "radd cl/Jayden".
 
 </box>
 
