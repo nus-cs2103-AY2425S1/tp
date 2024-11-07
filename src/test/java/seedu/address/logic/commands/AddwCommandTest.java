@@ -6,13 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookFilterWithWeddings;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -30,6 +31,12 @@ import seedu.address.testutil.WeddingBuilder;
 
 public class AddwCommandTest {
 
+    private AddwCommandTest.ModelStubAcceptingWeddingAdded modelStub;
+    @BeforeEach
+    public void setUp() {
+        modelStub = new AddwCommandTest.ModelStubAcceptingWeddingAdded(getTypicalAddressBookFilterWithWeddings());
+    }
+
     @Test
     public void constructor_nullWedding_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddwCommand(null, null, null));
@@ -38,8 +45,6 @@ public class AddwCommandTest {
     @Test
     public void execute_indexBasedWeddingAcceptedByModel_addSuccessful() throws Exception {
         // given date and given venue
-        AddwCommandTest.ModelStubAcceptingWeddingAdded modelStub =
-                new AddwCommandTest.ModelStubAcceptingWeddingAdded();
         Wedding weddingToAdd = new WeddingBuilder().build();
         Person tobeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         tobeClient.resetOwnWedding(tobeClient.getOwnWedding());
@@ -54,15 +59,18 @@ public class AddwCommandTest {
         assertEquals(String.format(AddwCommand.MESSAGE_SUCCESS, Messages.format(weddingToAdd)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
-
+    }
+    @Test
+    public void execute_indexBasedWeddingWithNullDateAcceptedByModel_addSuccessful() throws Exception {
         // null date and null venue
+        Person tobeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         tobeClient.resetOwnWedding(tobeClient.getOwnWedding());
-        modelStub =
-                new AddwCommandTest.ModelStubAcceptingWeddingAdded();
-        weddingToAdd = new WeddingBuilder().withDate(null).withVenue(null).build();
+        tobeClient.resetOwnWedding(tobeClient.getOwnWedding());
+        modelStub = new AddwCommandTest.ModelStubAcceptingWeddingAdded(getTypicalAddressBookFilterWithWeddings());
+        Wedding weddingToAdd = new WeddingBuilder().withDate(null).withVenue(null).build();
 
-        addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
-        commandResult = addwCommand.execute(modelStub);
+        AddwCommand addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
+        CommandResult commandResult = addwCommand.execute(modelStub);
 
         tobeClient.setOwnWedding(weddingToAdd);
         weddingToAdd.setClient(tobeClient);
@@ -72,39 +80,14 @@ public class AddwCommandTest {
         assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
     }
 
-    //    @Test
-    //    public void execute_nameBasedWeddingAcceptedByModel_addSuccessful() throws Exception {
-    //        AddwCommandTest.ModelStubAcceptingWeddingAdded modelStub =
-    //        new AddwCommandTest.ModelStubAcceptingWeddingAdded();
-    //        Wedding weddingToAdd = new WeddingBuilder().build();
-    //
-    //        // single word keyword
-    //        String keyword = "Alice";
-    //        NameMatchesKeywordPredicate predicate =
-    //                new NameMatchesKeywordPredicate(Arrays.asList(keyword.split("\\s+")));
-    //
-    //        Person tobeClient = modelStub.getFilteredPersonList()
-    //        .filtered(predicate).get(INDEX_FIRST_PERSON.getZeroBased());
-    //
-    //        AddwCommand addwCommand = new AddwCommand(null, predicate, weddingToAdd);
-    //        CommandResult commandResult = addwCommand.execute(modelStub);
-    //
-    //        weddingToAdd.setClient(tobeClient);
-    //
-    //        assertEquals(String.format(AddwCommand.MESSAGE_SUCCESS, Messages.format(weddingToAdd)),
-    //                commandResult.getFeedbackToUser());
-    //        assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
-    //    }
-
-
     //duplicate wedding check name, client, date and venue
     @Test
     public void execute_duplicateWedding_throwsCommandException() {
-        Person tobeClient = getTypicalAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person tobeClient = modelStub.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Wedding weddingToAdd = new WeddingBuilder().build();
+        modelStub.addWedding(weddingToAdd);
         tobeClient.setOwnWedding(weddingToAdd);
         weddingToAdd.setClient(tobeClient);
-        AddwCommandTest.ModelStub modelStub = new AddwCommandTest.ModelStubWithWedding(weddingToAdd);
 
         tobeClient.resetOwnWedding(tobeClient.getOwnWedding()); //turns ownWedding to null
 
@@ -118,7 +101,6 @@ public class AddwCommandTest {
     public void execute_alreadyClient_throwsCommandException() {
         Wedding createdWedding = new WeddingBuilder().build();
         Wedding weddingToAdd = new WeddingBuilder().build();
-        AddwCommandTest.ModelStub modelStub = new AddwCommandTest.ModelStubWithWedding(weddingToAdd);
         Person toBeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         toBeClient.resetOwnWedding(null);
 
@@ -204,6 +186,16 @@ public class AddwCommandTest {
 
         @Override
         public void updatePersonEditedWedding(Wedding target, Wedding editedWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAllPersonNotClient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonListWithClient(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -320,9 +312,12 @@ public class AddwCommandTest {
     private class ModelStubWithWedding extends AddwCommandTest.ModelStub {
         private final Wedding wedding;
 
-        ModelStubWithWedding(Wedding wedding) {
+        private final AddressBook addressBook;
+
+        ModelStubWithWedding(Wedding wedding, AddressBook addressBook) {
             requireNonNull(wedding);
             this.wedding = wedding;
+            this.addressBook = addressBook;
         }
 
         @Override
@@ -332,7 +327,7 @@ public class AddwCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            return getTypicalAddressBook().getPersonList();
+            return addressBook.getPersonList();
         }
     }
 
@@ -341,6 +336,11 @@ public class AddwCommandTest {
      */
     private class ModelStubAcceptingWeddingAdded extends AddwCommandTest.ModelStub {
         final ArrayList<Wedding> weddingsAdded = new ArrayList<>();
+        final AddressBook addressBook;
+
+        public ModelStubAcceptingWeddingAdded(AddressBook addressBook) {
+            this.addressBook = addressBook;
+        }
 
         @Override
         public boolean hasWedding(Wedding wedding) {
@@ -356,12 +356,12 @@ public class AddwCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return addressBook;
         }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            return getTypicalAddressBook().getPersonList();
+            return addressBook.getPersonList();
         }
     }
 }

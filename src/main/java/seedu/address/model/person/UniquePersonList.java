@@ -130,6 +130,12 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public void setAllPersonNotClient() {
+        for (Person person : internalList) {
+            person.setClient(false);
+        }
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
