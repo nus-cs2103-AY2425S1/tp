@@ -26,7 +26,7 @@ public class SampleDataUtil {
                            getTagSet("struggling"), new GradeList(), new AttendanceList()),
                 new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                            new Course("CS2105"),
-                           getTagSet("colleagues", "friends"), new GradeList(), new AttendanceList()),
+                           getTagSet("active", "excellent"), new GradeList(), new AttendanceList()),
                 new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                            new Course("CS2101"),
                            getTagSet("passive"), new GradeList(), new AttendanceList()),
@@ -35,7 +35,7 @@ public class SampleDataUtil {
                            getTagSet("active"), new GradeList(), new AttendanceList()),
                 new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                            new Course("CS2103/T LG17"),
-                           getTagSet("top-scorer"), new GradeList(), new AttendanceList()),
+                           getTagSet("excellent"), new GradeList(), new AttendanceList()),
                 new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                            new Course("CS1231S"),
                            getTagSet("average"), new GradeList(), new AttendanceList())
