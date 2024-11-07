@@ -92,6 +92,9 @@ Each command consists of a **command word**, and zero or more **parameters**.<br
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   **Example:** In `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* The parameter `INDEX` (e.g. in the command format `delete INDEX`) is used to specify the student to perform the operation on. 
+`INDEX` refers to the index number shown in the displayed student list (at the top left of each student card). `INDEX` **must be a positive integer**, i.e. 1, 2, 3...
+
 * Parameters in square brackets are optional.<br>
   **Example:** `[n/NAME]` can be omitted or used as `n/John Doe`.
 
@@ -142,8 +145,6 @@ Deletes the specified student from the student directory.
 Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the student directory.
@@ -155,7 +156,7 @@ Edits an existing student in the student directory.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`.
 * If the group is left blank (`g/`), the student will be removed from any existing group.
 * Removing a student from a group also removes all the student's lessons.
 * At least one of the optional fields must be provided.
@@ -170,8 +171,8 @@ Assigns piano pieces to a student in the student directory.
 
 Format: `assign INDEX pn/PIECE_NAME...`
 
-* Assigns piano pieces to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* Existing values will remain unchanged
+* Assigns piano pieces to the student at the specified `INDEX`.
+* Existing values will remain unchanged.
 
 Examples:
 *  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
@@ -182,9 +183,9 @@ Unassigns piano pieces from a student in the student directory.
 
 Format: `unassign INDEX [pn/PIECE_NAME]...`
 
-* Unassigns piano pieces from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Unassigns piano pieces from the student at the specified `INDEX`.
 * All piano pieces provided must be already assigned to the student
-* If no piano pieces are provided, all piano pieces will be unassigned from the student
+* If no piano pieces are provided, all piano pieces will be unassigned from the student.
 
 Examples:
 *  `unassign 1 pn/Etude pn/Moonlight Sonata` Removes `Etude` and `Moonlight Sonata` from the 1st student's piano pieces.
@@ -203,11 +204,11 @@ Schedules a regular lesson for the specified student in the student directory.
 
 Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
 
-* Schedules the regular lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Schedules the regular lesson for the student at the specified `INDEX`. 
 * Regular lessons are shared across students in the same group.
 * If the student already has an existing regular lesson, it will be overwritten by the new regular lesson given.
 * `DAY` must be a day of the week (e.g. Monday, Tuesday etc.) or its 3-letter abbreviation (e.g. Mon, Tue etc.). This parameter is case-insensitive.
-* `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
+* `START_TIME` and `END_TIME` must be in 24-hour format (`HH:MM`), and `START_TIME` must be before `END_TIME`.
 
 Example:
 * `schedule 1 d/Tuesday st/16:00 et/18:00` Schedules a regular lesson on Tuesday, 4-6pm for the 1st student.
@@ -218,7 +219,7 @@ Cancels a regular lesson at a specific date for the specified student in the stu
 
 Format: `cancel INDEX dt/DATE st/START_TIME`
 
-* Cancels a regular lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Cancels a regular lesson for the student at the specified `INDEX`.
 * Cancelled lessons are shared across students in the same group.
 * `DATE` must be written in the format `DD-MM-YYYY` for the command to parse the input properly.
 * `DATE` must fall on the student's regular lesson `DAY`, and `START_TIME` must match the student's lesson `START_TIME`.
@@ -232,10 +233,10 @@ Schedules a makeup lesson for the specified student in the student directory.
 
 Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 
-* Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Schedules the makeup lesson for the student at the specified `INDEX`.
 * Makeup lessons are shared across students in the same group.
 * `DATE` must be in the format `DD-MM-YYYY`.
-* `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
+* `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`.
 
 Examples:
 * `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
@@ -281,17 +282,15 @@ Examples:
 
 ### Finding students: `find`
 
-Finds students whose personal details match inputs
+Finds students whose personal details match inputs.
 
 Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `n/Hans p/88197184` will fetch same list as `p/88197184 n/Hans`
-* Prefixes other than `n/`, `p/`, `a/`, `gl/` will be ignored.
-* Any keyword before the first valid prefix will be ignored
 * Only the name, phone number, address, grade level and group is searched.
 * Partial inclusion of keyword will be considered a match
-* Students matching all field will be returned (i.e. `AND` search).
+* Students matching all fields will be returned (i.e. `AND` search).
   e.g. `n/Hans p/88191784` will return `Hans Gruber; 88197184`, but not`Hans Goretzka; 88197188`
 
 Examples:
@@ -300,19 +299,19 @@ Examples:
 
 ### Sorting students : `sort`
 
-Sorts students with personal details
+Sorts students based on personal details
 
 Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`
 
-* The order of prefixes DOES matter. If there are ties in the first field, it will use later fields to tie-break.
+* The order of prefixes DOES matter. If there are ties in the first field, later fields will be used to tie-break.
 * Only name, phone number, address, grade level and group are valid fields to sort by.
 * The sorting order must be `ASC` or  `DESC`, and is case-insensitive.
 
-To clear the sorting conditions, use command `sort clear`
+To clear the sorting conditions, use the command `sort clear`.
 
 Examples:
 * `sort n/ASC` sorts the students by name in ascending order.
-* `sort gl/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks with name in ascending order
+* `sort gl/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks using name in ascending order.
 
 ### Clearing all entries : `clear`
 
@@ -326,31 +325,29 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+--------------------------------------------------------------------------------------------------------------------
 
-Student directory data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+## FAQ
+**Q**: How do I save my data?<br>
+**A**: Student directory data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
-
-Student directory data is saved automatically as a JSON file `[JAR file location]/data/studentdirectory.json`. Advanced users are welcome to update data directly by editing that data file.
+**Q**: Can I edit the saved data file manually?<br>
+**A**: Student directory data is saved automatically as a JSON file at <br>`[JAR file location]/data/studentdirectory.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-
-**Caution:**
+<b>Caution:</b><br>
 If your changes to the data file makes its format invalid, KeyContacts will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause KeyContacts to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KeyContacts home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: 
+<br>
+1. Make a copy of the `studentdirectory.json` file in the data folder.
+2. Install KeyContacts in the other computer.
+3. Run KeyContacts in the other computer. This will generate a `data` folder containing a sample `studentdirectory.json` file.
+4. Replace this sample data file with the data file you copied from your previous computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
