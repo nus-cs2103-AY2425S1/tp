@@ -44,7 +44,7 @@ public class UnmarkAttendanceByStudentCommand extends Command {
             "The student does not take %1$s tutorial";
 
     public static final String MESSAGE_ATTENDANCE_NOT_MARKED =
-            "%1$s's attendance for the corresponding week of date %2$s for %3$s tutorial has not been marked before.";
+            "%1$s's attendance for date %2$s for %3$s tutorial has not been marked before.";
 
     private final Logger logger = LogsCenter.getLogger(UnmarkAttendanceByStudentCommand.class);
     private final Index targetIndex;
