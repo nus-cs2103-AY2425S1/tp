@@ -15,7 +15,7 @@ import tutorease.address.commons.util.JsonUtil;
 import tutorease.address.model.ReadOnlyTutorEase;
 
 /**
- * A class to access TutorEase data stored as a json file on the hard disk.
+ * Accesses TutorEase data stored as a json file on the hard disk.
  */
 public class JsonTutorEaseStorage implements TutorEaseStorage {
 
@@ -37,7 +37,7 @@ public class JsonTutorEaseStorage implements TutorEaseStorage {
     }
 
     /**
-     * Similar to {@link #readTutorEase()}.
+     * Serves functions similar to {@link #readTutorEase()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
@@ -65,7 +65,7 @@ public class JsonTutorEaseStorage implements TutorEaseStorage {
     }
 
     /**
-     * Similar to {@link #saveTutorEase(ReadOnlyTutorEase)}.
+     * Serves functions similar to {@link #saveTutorEase(ReadOnlyTutorEase)}.
      *
      * @param filePath location of the data. Cannot be null.
      */

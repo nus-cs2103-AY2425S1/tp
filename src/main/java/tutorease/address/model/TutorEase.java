@@ -10,8 +10,8 @@ import tutorease.address.model.person.Person;
 import tutorease.address.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the address-book level.
+ * Duplicates are not allowed (by .isSamePerson comparison).
  */
 public class TutorEase implements ReadOnlyTutorEase {
 
@@ -31,14 +31,14 @@ public class TutorEase implements ReadOnlyTutorEase {
     public TutorEase() {}
 
     /**
-     * Creates an TutorEase using the Persons in the {@code toBeCopied}
+     * Creates an TutorEase using the Persons in the {@code toBeCopied}.
      */
     public TutorEase(ReadOnlyTutorEase toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    // list overwrite operations
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -57,7 +57,7 @@ public class TutorEase implements ReadOnlyTutorEase {
         setPersons(newData.getPersonList());
     }
 
-    //// person-level operations
+    // person-level operations
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
