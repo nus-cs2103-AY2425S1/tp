@@ -78,7 +78,7 @@ public class ParserUtil {
         requireNonNull(postalCode);
         String trimmedPostalCode = postalCode.trim();
         if (!PostalCode.isValidPostalCode(trimmedPostalCode)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            throw new ParseException(PostalCode.MESSAGE_CONSTRAINTS);
         }
         return new PostalCode(trimmedPostalCode);
     }
