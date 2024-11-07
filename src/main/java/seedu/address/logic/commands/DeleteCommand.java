@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -14,21 +16,21 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+
 /**
  * Deletes a person identified using its displayed index from the address book.
  */
 public class DeleteCommand extends ConcreteCommand {
 
     public static final String COMMAND_WORD = "delete";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_FAILURE = "Deletion canceled";
     public static final String MESSAGE_UNDO_SUCCESS = "Reverted deletion of person: %1$s";
-
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
     private final Index targetIndex;
     private boolean isConfirmed;
     private Person deletedPerson;
@@ -55,22 +57,21 @@ public class DeleteCommand extends ConcreteCommand {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         if (!isConfirmed) {
-            assert isConfirmed == true;
+            logger.info("delete is canceled");
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Confirmation");
             alert.setHeaderText("Are you sure you want to delete this person?");
             alert.setContentText(String.format("Name: %s", personToDelete.getName()));
-
             ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
             if (result != ButtonType.OK) {
-                return new CommandResult("Deletion cancelled.");
+                throw new CommandException(String.format(MESSAGE_DELETE_PERSON_FAILURE));
             }
         }
-
+        logger.info("delete successful");
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
         isExecuted = true;
-
+        assert personToDelete != null;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
