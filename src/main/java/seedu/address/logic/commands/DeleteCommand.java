@@ -136,11 +136,8 @@ public class DeleteCommand extends Command {
      * @throws CommandException if the person is a client in a wedding
      */
     private void validatePersonIsNotClient(Person person, Model model) throws CommandException {
-        List<Wedding> weddings = model.getFilteredWeddingList();
-        for (Wedding wedding : weddings) {
-            if (person.getOwnWedding() != null) {
-                throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
-            }
+        if (person.getOwnWedding() != null) {
+            throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
         }
     }
 
