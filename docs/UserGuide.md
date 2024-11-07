@@ -288,6 +288,10 @@ Generates a random gift idea.
 
 Format: gift
 
+### Discount Links `[coming in v2.0]`
+
+*Details coming soon ...*
+
 ## Revenue
 
 * Calculates the total amount of money earned from student who has paid/not paid
@@ -313,7 +317,6 @@ EduLog data are saved in the hard disk automatically after any command that chan
 ### Editing the data file
 
 EduLog data are saved automatically as a JSON file `[JAR file location]/data/edulog.json`. Advanced users are welcome to update data directly by editing that data file.
-Gift suggestion data is saved automatically as a JSON file `[JAR file location]/src/main/gifts.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 **Caution:**
