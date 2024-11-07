@@ -11,6 +11,15 @@ ResearchRoster is a desktop application designed for researchers managing large 
 - [ ] View a list of all participant contacts
 - [ ] Save participant contacts
 - [ ] Exit the application
+- [X] Add participant contact with relevant details (name, email, gender, age, details, research group)
+- [X] Delete participant contact
+- [X] View a list of all participant contacts
+- [X] Edit a participant's contact
+- [X] Locate participants by criteria
+- [X] Clear listed participants' contacts
+- [X] Export participants' emails
+- [X] Randomly assign participants to study groups
+- [X] Exit the application
 
 ## Additional Information
 * The project simulates an ongoing software project for a desktop application used for managing contact details.
