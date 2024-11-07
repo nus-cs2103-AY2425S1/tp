@@ -86,6 +86,7 @@ public class DeleteCommand extends Command {
             checkPersonIsAssignedWeddings(personToDelete, model);
             // delete those weddings
             removeWeddingJobs(personToDelete, model);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Reset filter
             return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
                     Messages.format(personToDelete)));
         } else {
