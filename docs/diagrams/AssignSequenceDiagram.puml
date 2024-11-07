@@ -53,22 +53,20 @@ alt viewing Vendor Details
     AssignCommand -> Model : getViewedVendor()
     AssignCommand -> Model : resolveEvent(selectedIndex)
 
-    alt vendor already assigned to event
-        AssignCommand -> AssignCommand : throw CommandException
-    else
-        AssignCommand -> Model : assignVendorToEvent(vendor, event)
+    opt vendor already assigned to event
+        AssignCommand --> LogicManager : CommandException()
     end
+    AssignCommand -> Model : assignVendorToEvent(vendor, event)
 else viewing Event Details
     AssignCommand -> Model : getViewedEvent()
     AssignCommand -> Model : resolveVendor(selectedIndex)
 
-    alt event already contains vendor
-        AssignCommand -> AssignCommand : throw CommandException
-    else
-        AssignCommand -> Model : assignVendorToEvent(vendor, event)
+    opt event already contains vendor
+        AssignCommand --> LogicManager : CommandException()
     end
+    AssignCommand -> Model : assignVendorToEvent(vendor, event)
 else invalid view
-    AssignCommand -> LogicManager : CommandResult(MESSAGE_ASSIGN_FAILURE_INVALID_VIEW)
+    AssignCommand -> LogicManager : CommandResult()
 end
 
 create CommandResult
