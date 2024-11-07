@@ -643,11 +643,13 @@ Preconditions: User is viewing an item.
 
 * 1a. The command format entered by the user is invalid.
     * 1a1. System shows an error message and displays the correct command format.
-    * Use case ends.
+    
+      Use case ends.
 
 * 2a. No items match the search keywords.
     * 2a1. System displays a message indicating no items were found.
-    * Use case ends.
+    
+      Use case ends.
 
 **Use case: UC08 - Create a vendor**
 
@@ -663,24 +665,28 @@ Preconditions: User is viewing an item.
 
 * 1a. The command format entered by the user is invalid.
     * 1a1. System shows an error message and displays the correct command format.
-    * Use case ends.
+    
+      Use case ends.
 
 * 1a. The vendor name is invalid.
     * 1a1. System shows an error message indicating the name format is incorrect.
-    * Use case ends.
+    
+      Use case ends.
 
 * 1b. The phone number format is invalid.
     * 1b1. System shows an error message indicating the phone number format is incorrect.
-    * Use case ends.
+    
+      Use case ends.
 
 * 1c. The vendor already exists in the system.
     * 1c1. System shows an error message indicating a duplicate vendor.
-    * Use case ends.
+    
+      Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 100 events and 1000 vendors without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 100 events and 100 vendors without a noticeable sluggishness in performance for typical usage.
 3.  Should be able to assign up to 100 vendors to an event without any issue.
 4.  A user with an above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Persistent data stored by the system should be in a human-readable format.
