@@ -24,10 +24,9 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        logger.log(Level.INFO, "trimming argument");
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            logger.log(Level.WARNING, "string is empty!");
+            logger.log(Level.WARNING, "Empty search query");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }

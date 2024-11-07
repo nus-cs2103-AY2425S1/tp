@@ -44,8 +44,10 @@ public class ViewCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
+        String expectedMessage = String.format(
+                Messages.MESSAGE_INDEX_EXCEEDS_SIZE, model.getFilteredCompanyList().size());
 
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        assertCommandFailure(viewCommand, model, expectedMessage);
     }
 
     @Test
