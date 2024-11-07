@@ -32,10 +32,10 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
-    private GroupsWindow groupsWindow;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -44,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane groupListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -67,7 +70,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        groupsWindow = new GroupsWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -114,6 +116,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,27 +168,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
-        groupsWindow.hide();
         primaryStage.hide();
-    }
-
-    /**
-     * Opens the group window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleGroups() {
-
-        groupsWindow.fillInnerParts();
-        if (!groupsWindow.isShowing()) {
-            groupsWindow.show();
-        } else {
-            groupsWindow.focus();
-        }
-    }
-
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**
@@ -205,9 +190,6 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isShowGroups()) {
-                handleGroups();
-            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {

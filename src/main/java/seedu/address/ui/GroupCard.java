@@ -43,7 +43,7 @@ public class GroupCard extends UiPart<Region> {
         this.group = group;
         id.setText(displayedIndex + ". ");
         name.setText(group.getGroupName().toString());
-        studentName.setText("Students: ");
+        studentName.setText("Students:");
         group.getMembers().stream()
                 .forEach(member -> members.getChildren().add(new Label(member.getName().fullName)));
     }

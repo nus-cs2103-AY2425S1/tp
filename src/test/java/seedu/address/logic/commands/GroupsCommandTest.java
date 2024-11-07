@@ -31,14 +31,14 @@ public class GroupsCommandTest {
 
     @Test
     public void execute_groupsWhileEmpty_showsEmptyGroups() {
-        CommandResult expectedResult = new CommandResult(GroupsCommand.MESSAGE_NOGROUPS, false, false, false);
+        CommandResult expectedResult = new CommandResult(GroupsCommand.MESSAGE_NOGROUPS, false, false);
         assertCommandSuccess(new GroupsCommand(), model, expectedResult, expectedModel);
     }
     // TODO MORE TESTS
 
     @Test
     public void execute_groupsWhileNotEmpty_showsNotEmptyGroups() {
-        CommandResult expectedResult = new CommandResult(GroupsCommand.MESSAGE_SUCCESS, false, true, false);
+        CommandResult expectedResult = new CommandResult(GroupsCommand.MESSAGE_SUCCESS, false, false);
         List<Person> people = model.getFilteredPersonList();
         model.addGroup(new Group("abc", people));
         assertCommandSuccess(new GroupsCommand(), model, expectedResult, expectedModel);

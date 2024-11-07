@@ -93,6 +93,20 @@
     -fx-background-color: derive(#4A628A, 20%);
 }
 
+#groupList .list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+}
+
+#groupList .list-cell:filled:even {
+    -fx-background-color: #E8F6F8;
+}
+
+#groupList .list-cell:filled:odd {
+    -fx-background-color: #D8F1F2;
+}
+
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
@@ -328,7 +342,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #personListPanel, #groupListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -352,5 +366,33 @@
     -fx-font-size: 11;
 }
 
+#members {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
 
+#members .label {
+    -fx-text-fill: white;
+    -fx-background-color: #2E3A47;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 14;
+}
+
+#groupListTitle {
+    -fx-font-family: 'Segoe UI', sans-serif; /* Font family similar to UI design */
+    -fx-font-size: 18px; /* Font size matching the design */
+    -fx-text-fill: white; /* White text color */
+    -fx-padding: 5px 10px; /* Padding for better spacing */
+    -fx-font-weight: 200;
+}
+
+#personListTitle {
+    -fx-font-family: 'Segoe UI', sans-serif; /* Font family similar to UI design */
+    -fx-font-size: 18px; /* Font size matching the design */
+    -fx-text-fill: white; /* White text color */
+    -fx-padding: 5px 10px; /* Padding for better spacing */
+    -fx-font-weight: 200;
+}
 

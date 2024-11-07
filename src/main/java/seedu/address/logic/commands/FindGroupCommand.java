@@ -49,7 +49,6 @@ public class FindGroupCommand extends Command {
         return new CommandResult(
             String.format(Messages.getMessageGroupsListedOverview(numOfGroup)),
                 false,
-                true,
                 false);
     }
 

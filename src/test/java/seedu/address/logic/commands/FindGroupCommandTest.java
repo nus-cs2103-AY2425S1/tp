@@ -54,7 +54,7 @@ public class FindGroupCommandTest {
         GroupContainsKeywordsPredicate predicate = prepareGroupPredicate(" ");
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredGroupList());
     }
@@ -76,7 +76,7 @@ public class FindGroupCommandTest {
         String expectedMessage = String.format(
                 Messages.getMessageGroupsListedOverview(numOfGroup));
 
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
 
     }
@@ -106,7 +106,7 @@ public class FindGroupCommandTest {
         int numOfGroup = expectedModel.getFilteredGroupList().size();
         String expectedMessage = String.format(
                 Messages.getMessageGroupsListedOverview(numOfGroup));
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(expectedModel.getFilteredGroupList(), model.getFilteredGroupList());
@@ -133,7 +133,7 @@ public class FindGroupCommandTest {
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
         String expectedMessage = String.format(Messages.getMessageGroupsListedOverview(0));
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredGroupList());
     }
@@ -148,7 +148,7 @@ public class FindGroupCommandTest {
         int numOfGroup = expectedModel.getFilteredGroupList().size();
         String expectedMessage = String.format(
                 Messages.getMessageGroupsListedOverview(numOfGroup));
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(expectedModel.getFilteredGroupList(), model.getFilteredGroupList());
     }
