@@ -11,7 +11,8 @@ import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A class to access PastryCatalogue data stored as a json file on the hard disk.
+ * A class to manage the storage of PastryCatalogue data in JSON format.
+ * Provides functionality to read from and write to a JSON file.
  */
 public class JsonPastryCatalogueStorage implements PastryCatalogueStorage {
 
