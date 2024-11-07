@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_MISSING_REQUIRED_PREFIXES;
 import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.commands.CommandTestUtil.PRODUCT_DESC_APPLE_PIE;
 import static seedu.address.logic.commands.CommandTestUtil.SUPPLIER_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_APPLE_PIE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UnassignProductCommand;
 import seedu.address.model.product.ProductName;
-import seedu.address.model.supplier.Name;
 
 public class UnassignProductCommandParserTest {
     private UnassignProductCommandParser parser = new UnassignProductCommandParser();
